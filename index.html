@@ -802,7 +802,8 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
     <p>考核星级 ｜ 总星星 ⭐ <span id="certTotal">0</span>/15</p>
     <p style="margin-top:8px">📅 <span id="certDate"></span>　🔪 肉店老板（盖章）</p>
     <div class="cert-btns">
-      <button class="btn btn-mini btn-red" id="certPrint">🖨️ 打印证书</button>
+      <button class="btn btn-mini btn-red" id="certSave">📷 保存图片</button>
+      <button class="btn btn-mini btn-green" id="certPrint">🖨️ 打印</button>
       <button class="btn btn-mini btn-yellow" id="certClose">关闭</button>
     </div>
   </div>
@@ -1654,9 +1655,199 @@ $('#certBtn').addEventListener('click',()=>{
   $('#certTotal').textContent=totalStars();
   $('#certModal').classList.remove('hidden');
   fanfare();confetti(90);
+  warmCertFonts(); // 弹窗显示时即预热卡通字体，保证稍后 canvas 绘制时已加载
 });
+
+/* ---- 证书 PNG：Canvas 2D 原生绘制（离线可用，无外部库） ---- */
+function warmCertFonts(){
+  try{
+    if(document.fonts&&document.fonts.load){
+      document.fonts.load('32px "ZCOOL KuaiLe"');
+      document.fonts.load('bold 64px "ZCOOL KuaiLe"');
+      document.fonts.load('700 27px "Baloo 2"');
+    }
+  }catch(e){}
+}
+function certRoundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+function certStarPath(ctx,cx,cy,r){
+  ctx.beginPath();
+  for(let i=0;i<10;i++){
+    const a=-Math.PI/2+i*Math.PI/5;
+    const rr=(i%2)?r*0.45:r;
+    const px=cx+rr*Math.cos(a),py=cy+rr*Math.sin(a);
+    if(i)ctx.lineTo(px,py);else ctx.moveTo(px,py);
+  }
+  ctx.closePath();
+}
+function certDrawStars(ctx,cx,cy,filled,total,r,fill,stroke){
+  const gap=24,w=total*r*2+(total-1)*gap;
+  let x=cx-w/2+r;
+  for(let i=0;i<total;i++){
+    ctx.save();
+    certStarPath(ctx,x,cy,r);
+    if(i<filled){
+      ctx.fillStyle=fill;
+      ctx.shadowColor='rgba(74,50,38,.5)';ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;ctx.shadowBlur=0;
+      ctx.fill();
+      ctx.shadowColor='transparent';ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+      ctx.lineWidth=5;ctx.strokeStyle=stroke;ctx.stroke();
+    }else{
+      ctx.globalAlpha=.35;ctx.lineWidth=5;ctx.strokeStyle=stroke;ctx.stroke();
+    }
+    ctx.restore();
+    x+=r*2+gap;
+  }
+}
+function certDrawSeal(ctx,cx,cy,r,FCN){
+  ctx.save();
+  ctx.translate(cx,cy);
+  ctx.rotate(-0.16);      // 微微旋转，像个真章
+  ctx.globalAlpha=.8;     // 半透明红色印泥效果
+  const INK='#D93626';
+  ctx.strokeStyle=INK;ctx.fillStyle=INK;
+  ctx.lineWidth=7;
+  ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.stroke();
+  ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.arc(0,0,r-11,0,Math.PI*2);ctx.stroke();
+  // 「肉店老板」四字沿上半圆环绕
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.font='bold 30px '+FCN;
+  const chars=['肉','店','老','板'],R2=r-30;
+  for(let i=0;i<chars.length;i++){
+    const a=-Math.PI/2+(i-(chars.length-1)/2)*0.66;
+    ctx.save();
+    ctx.rotate(a);
+    ctx.translate(0,-R2);
+    ctx.fillText(chars[i],0,0);
+    ctx.restore();
+  }
+  // 中心「印」字
+  ctx.font='bold 46px '+FCN;
+  ctx.fillText('印',0,14);
+  ctx.restore();
+}
+function renderCertCanvas(){
+  const W=1400,H=1000;
+  const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');
+  const BROWN='#4A3226',RED='#E8503A',YELLOW='#F4A72C',PAPER='#FFFDF6';
+  const FCN='"ZCOOL KuaiLe",sans-serif';      // 中文卡通字体，离线回退 sans-serif
+  const FEN='"Baloo 2","ZCOOL KuaiLe",sans-serif';
+  // 奶油纸底色
+  ctx.fillStyle=PAPER;ctx.fillRect(0,0,W,H);
+  // 深棕粗圆角外框
+  ctx.lineWidth=12;ctx.strokeStyle=BROWN;
+  certRoundRect(ctx,16,16,W-32,H-32,42);ctx.stroke();
+  // 红色虚线内框
+  ctx.save();
+  ctx.lineWidth=5;ctx.strokeStyle=RED;ctx.setLineDash([18,12]);
+  certRoundRect(ctx,46,46,W-92,H-92,28);ctx.stroke();
+  ctx.restore();
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  const cx=W/2;
+  // 顶部图标行
+  ctx.font='92px '+FCN;
+  ctx.fillText('🎖️🥩🎖️',cx,132);
+  // 红色大标题
+  ctx.fillStyle=RED;
+  ctx.font='bold 64px '+FCN;
+  ctx.fillText('肉店小学徒 · 结业证书',cx,232);
+  // 英文副标题
+  ctx.fillStyle=BROWN;
+  ctx.font='700 27px '+FEN;
+  ctx.fillText('Certificate of Butcher Shop Apprentice',cx,292);
+  // 兹证明小学徒
+  ctx.font='32px '+FCN;
+  ctx.fillText('兹证明小学徒',cx,362);
+  // 名字（加粗 + 底部黄色下划线，取自 #certNameOut）
+  const name=($('#certNameOut').textContent||'').trim()||'小学徒';
+  ctx.font='bold 58px '+FCN;
+  const nw=ctx.measureText(name).width;
+  ctx.fillText(name,cx,432);
+  const uw=nw+56;
+  ctx.fillStyle=YELLOW;
+  certRoundRect(ctx,cx-uw/2,466,uw,10,5);ctx.fill();
+  // 通关文案两行
+  ctx.fillStyle=BROWN;
+  ctx.font='30px '+FCN;
+  ctx.fillText('已通关《新概念英语 Lesson 49 · At the Butcher\'s》',cx,532);
+  ctx.fillText('全部五大关卡，表现优秀，特发此证！',cx,578);
+  // 大星星（按 #certStars 实际星数，黄色 + 深棕描边/阴影）
+  const starTxt=$('#certStars').textContent||'';
+  const filled=(starTxt.match(/★/g)||[]).length;
+  certDrawStars(ctx,cx,668,filled,3,50,YELLOW,BROWN);
+  // 统计行（含 #certTotal 数值）
+  ctx.font='30px '+FCN;
+  ctx.fillText('考核星级 ｜ 总星星 ⭐ '+($('#certTotal').textContent||'0')+'/15',cx,758);
+  // 日期行
+  ctx.fillText('📅 '+($('#certDate').textContent||'')+'　🔪 肉店老板（盖章）',cx,812);
+  // 右下角红色圆形印章
+  certDrawSeal(ctx,W-206,H-196,88,FCN);
+  return cv;
+}
+
+/* ---- 保存流程：触发下载 + 长按保存遮罩（互相独立，各自 try/catch） ---- */
+async function saveCertImage(){
+  // 绘制前再次确认字体就绪，避免 canvas 回退字体
+  try{
+    if(document.fonts&&document.fonts.load){
+      await Promise.all([
+        document.fonts.load('32px "ZCOOL KuaiLe"'),
+        document.fonts.load('bold 64px "ZCOOL KuaiLe"'),
+        document.fonts.load('700 27px "Baloo 2"')
+      ]);
+    }
+  }catch(e){}
+  let dataUrl='';
+  try{
+    dataUrl=renderCertCanvas().toDataURL('image/png');
+  }catch(err){console.error('证书绘制失败：',err);}
+  // 1) 尝试触发下载
+  try{
+    if(dataUrl){
+      const name=($('#certNameOut').textContent||'').trim()||'小学徒';
+      const a=document.createElement('a');
+      a.href=dataUrl;
+      a.download='肉店小学徒结业证书-'+name+'.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+  }catch(err){console.error('证书下载失败：',err);}
+  // 2) 弹出长按保存遮罩（iOS 关键路径），下载失败不影响本步
+  try{
+    if(dataUrl)showCertOverlay(dataUrl);
+  }catch(err){console.error('证书遮罩失败：',err);}
+}
+function showCertOverlay(src){
+  const ov=document.createElement('div');
+  ov.id='certSaveOverlay';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;';
+  const tip=document.createElement('p');
+  tip.textContent='📱 长按图片 → 保存到相册 / 添加到照片';
+  tip.style.cssText='margin:0;color:#fff;font-size:18px;font-weight:700;text-align:center;line-height:1.6;text-shadow:0 2px 8px rgba(0,0,0,.6);';
+  const img=document.createElement('img');
+  img.src=src;img.alt='结业证书';
+  img.style.cssText='max-width:92vw;max-height:66vh;display:block;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.6);background:#FFFDF6;';
+  const close=document.createElement('button');
+  close.className='btn btn-mini btn-yellow';
+  close.textContent='关闭';
+  close.addEventListener('click',e=>{e.stopPropagation();ov.remove();sndClick();});
+  ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();}); // 点遮罩空白处也能关闭
+  document.body.appendChild(ov);
+}
 $('#certClose').addEventListener('click',()=>{$('#certModal').classList.add('hidden');sndClick();});
 $('#certModal').addEventListener('click',e=>{if(e.target.id==='certModal')$('#certModal').classList.add('hidden');});
+$('#certSave').addEventListener('click',()=>{sndClick();saveCertImage();});
 $('#certPrint').addEventListener('click',()=>window.print());
 
 /* ================= 初始化 ================= */
