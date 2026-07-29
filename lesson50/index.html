@@ -1783,6 +1783,14 @@ $('#certPrint').addEventListener('click',()=>window.print());
 
 $('#feedIntro').addEventListener('click',()=>speak("Let's learn about likes and dislikes!"));
 
+function initializeLiveRegions(){
+  $$('.fb').forEach(element=>{
+    element.setAttribute('role','status');
+    element.setAttribute('aria-live','polite');
+    element.setAttribute('aria-atomic','true');
+  });
+}
+
 /* ================= 初始化 ================= */
 buildCards();
 buildReads();
@@ -1791,6 +1799,7 @@ renderMorph();
 resetFeed();
 resetPot();
 buildMirror();
+initializeLiveRegions();
 renderStars();
 /* ===== 底部 Tab 栏：禁用按钮提示（DOMContentLoaded：tabbar HTML 在本脚本之后） ===== */
 document.addEventListener('DOMContentLoaded',function(){

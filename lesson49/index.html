@@ -142,7 +142,7 @@ section.lvl{scroll-margin-top:96px;padding:56px 0}
 
 /* ===== 第一关 单词卡 ===== */
 #cardGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:18px}
-.fcard{perspective:900px;height:248px}
+.fcard{perspective:900px;height:248px;position:relative}
 .fcard-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.34,1.4,.64,1);cursor:pointer}
 .fcard.flipped .fcard-in{transform:rotateY(180deg)}
 .fface{
@@ -1077,7 +1077,6 @@ function buildCards(){
     c.innerHTML=
       '<div class="fcard-in">'+
         '<div class="fface ffront">'+
-          '<button class="spk" title="听发音">🔊</button>'+
           '<div class="ficon">'+w.icon+'</div>'+
           '<div class="fen">'+w.en+'</div>'+
           (w.ph?'<div class="fph">'+w.ph+'</div>':'')+
@@ -1088,10 +1087,39 @@ function buildCards(){
           '<div class="fcn">'+w.cn+'</div>'+
           '<div class="fpos">'+w.pos+' '+(POSMAP[w.pos]||'')+'</div>'+
         '</div>'+
-      '</div>';
-    c.querySelector('.fcard-in').addEventListener('click',e=>{
-      if(e.target.closest('.spk'))return;
-      c.classList.toggle('flipped');sndClick();
+      '</div>'+
+      '<button class="spk" title="听发音">🔊</button>';
+    const cardIn=c.querySelector('.fcard-in');
+    const front=cardIn.querySelector('.ffront');
+    const back=cardIn.querySelector('.fback');
+    const labelId='l49-card-label-'+i;
+    c.querySelector('.fen').id=labelId;
+    cardIn.tabIndex=0;
+    cardIn.setAttribute('role','button');
+    cardIn.setAttribute('aria-labelledby',labelId);
+    cardIn.setAttribute('aria-expanded','false');
+    front.setAttribute('aria-hidden','false');
+    back.setAttribute('aria-hidden','true');
+    function isSpeakerTarget(target){
+      const element=target&&target.nodeType===1?target:target&&target.parentElement;
+      return Boolean(element&&typeof element.closest==='function'&&element.closest('.spk'));
+    }
+    function toggleCard(){
+      const flipped=c.classList.toggle('flipped');
+      cardIn.setAttribute('aria-expanded',String(flipped));
+      front.setAttribute('aria-hidden',String(flipped));
+      back.setAttribute('aria-hidden',String(!flipped));
+      sndClick();
+    }
+    cardIn.addEventListener('click',event=>{
+      if(isSpeakerTarget(event.target))return;
+      toggleCard();
+    });
+    cardIn.addEventListener('keydown',event=>{
+      if(event.repeat||isSpeakerTarget(event.target))return;
+      if(event.key!=='Enter'&&event.key!==' ')return;
+      event.preventDefault();
+      toggleCard();
     });
     c.querySelector('.spk').addEventListener('click',e=>{e.stopPropagation();speak(w.en);});
     g.appendChild(c);
@@ -1984,6 +2012,14 @@ $('#certModal').addEventListener('click',e=>{if(e.target.id==='certModal')$('#ce
 $('#certSave').addEventListener('click',()=>{sndClick();saveCertImage();});
 $('#certPrint').addEventListener('click',()=>window.print());
 
+function initializeLiveRegions(){
+  $$('.fb').forEach(element=>{
+    element.setAttribute('role','status');
+    element.setAttribute('aria-live','polite');
+    element.setAttribute('aria-atomic','true');
+  });
+}
+
 /* ================= 初始化 ================= */
 buildCards();
 buildPouch();
@@ -1994,6 +2030,7 @@ startTP();
 buildFill();
 buildChoice();
 buildTrans();
+initializeLiveRegions();
 renderStars();
 /* ===== 底部 Tab 栏：禁用按钮提示（DOMContentLoaded：tabbar HTML 在本脚本之后） ===== */
 document.addEventListener('DOMContentLoaded',function(){

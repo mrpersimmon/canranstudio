@@ -661,6 +661,7 @@ document.getElementById('certDate').textContent = '日期：' + new Date().toLoc
 let toastTimer;
 function toast(msg){
   const t = document.getElementById('toast');
+  if(!t)return;
   t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
@@ -1131,6 +1132,20 @@ addEventListener('scroll', ()=>{
   });
   document.querySelectorAll('nav#map a').forEach(a=> a.classList.toggle('on', a.dataset.sec===cur));
 }, {passive:true});
+
+function initializeLiveRegions(){
+  document.querySelectorAll('.fb').forEach(element=>{
+    element.setAttribute('role','status');
+    element.setAttribute('aria-live','polite');
+    element.setAttribute('aria-atomic','true');
+  });
+  const toastElement=document.getElementById('toast');
+  if(!toastElement)return;
+  toastElement.setAttribute('role','status');
+  toastElement.setAttribute('aria-live','polite');
+  toastElement.setAttribute('aria-atomic','true');
+}
+initializeLiveRegions();
 </script>
 <!-- ===== 底部 Tab 栏：上一课 / 乐园 / 下一课 ===== -->
 <nav id="coursenav" aria-label="课程导航">
