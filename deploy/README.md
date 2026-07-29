@@ -113,9 +113,11 @@ It cannot start with a dash and cannot include whitespace, a colon, or shell met
 
 ~~~bash
 set -euo pipefail
+require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }
+test -n "${CANRAN_DEPLOY_TARGET:-}"
 require_target "$CANRAN_DEPLOY_TARGET"
-ssh "$CANRAN_DEPLOY_TARGET" 'command -v python3; command -v sha256sum; command -v tar; command -v nginx; command -v systemctl'
-ssh "$CANRAN_DEPLOY_TARGET" 'sudo nginx -T 2>&1'
+ssh "$CANRAN_DEPLOY_TARGET" 'set -eu; command -v python3; command -v sha256sum; command -v tar; command -v nginx; command -v systemctl'
+ssh "$CANRAN_DEPLOY_TARGET" 'set -eu; snapshot="$(sudo nginx -T 2>&1)"; printf "%s\n" "$snapshot"; printf "%s\n" "$snapshot" | awk "! /^[[:space:]]*#/ && \$1 == \"open_file_cache\" && \$2 != \"off;\" { bad=1 } END { exit bad }"'
 ssh "$CANRAN_DEPLOY_TARGET" 'readlink -f /var/www/canranstudio/current || true'
 ssh "$CANRAN_DEPLOY_TARGET" 'sudo sha256sum /etc/nginx/conf.d/canranstudio-http.conf 2>/dev/null || true'
 ~~~
@@ -125,6 +127,10 @@ listeners. Stop for an unaccounted rewrite, alias, root, or default block affect
 /lesson50/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
 site file before disabling only it; its path is never inferred by this repository.
 
+The open_file_cache check is fail-closed: any active value other than off stops the release. This
+is the prerequisite for content-only activation without a reload, because Nginx must resolve the
+current path for each request rather than retain an old file descriptor cache.
+
 ## 3. Transfer no-reuse, SHA-named inputs
 
 This private upload directory, archive, configuration candidate, and every transfer name include
@@ -132,7 +138,11 @@ the applicable SHA values. Reuse fails; no fixed /tmp configuration filename is 
 
 ~~~bash
 set -euo pipefail
-require_target "$CANRAN_DEPLOY_TARGET"
+require_sha() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{40}$'; }; require_sha256() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{64}$'; }; require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }; sha256_file() { shasum -a 256 "$1" | awk '{print $1}'; }
+for tool in git shasum ssh scp; do command -v "$tool" >/dev/null; done
+test -n "${CANRAN_DEPLOY_TARGET:-}"; require_target "$CANRAN_DEPLOY_TARGET"
+RELEASE_SHA="$(git rev-parse --verify HEAD)"; RELEASE_ARCHIVE="/tmp/canranstudio-$RELEASE_SHA.tar.gz"; test -f "$RELEASE_ARCHIVE"
+ARCHIVE_SHA="$(sha256_file "$RELEASE_ARCHIVE")"; CONFIG_SHA="$(sha256_file deploy/nginx/canranstudio-http.conf)"
 require_sha "$RELEASE_SHA"; require_sha256 "$ARCHIVE_SHA"; require_sha256 "$CONFIG_SHA"
 
 ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $RELEASE_SHA $ARCHIVE_SHA $CONFIG_SHA" <<'REMOTE'
@@ -163,7 +173,12 @@ the restored state.
 
 ~~~bash
 set -euo pipefail
-require_target "$CANRAN_DEPLOY_TARGET"
+require_sha() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{40}$'; }; require_sha256() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{64}$'; }; require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }; sha256_file() { shasum -a 256 "$1" | awk '{print $1}'; }
+for tool in git shasum ssh; do command -v "$tool" >/dev/null; done
+test -n "${CANRAN_DEPLOY_TARGET:-}"; require_target "$CANRAN_DEPLOY_TARGET"
+RELEASE_SHA="$(git rev-parse --verify HEAD)"; RELEASE_ARCHIVE="/tmp/canranstudio-$RELEASE_SHA.tar.gz"; test -f "$RELEASE_ARCHIVE"
+ARCHIVE_SHA="$(sha256_file "$RELEASE_ARCHIVE")"; CONFIG_SHA="$(sha256_file deploy/nginx/canranstudio-http.conf)"
+require_sha "$RELEASE_SHA"; require_sha256 "$ARCHIVE_SHA"; require_sha256 "$CONFIG_SHA"
 
 ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $RELEASE_SHA $ARCHIVE_SHA $CONFIG_SHA" <<'REMOTE'
 set -euo pipefail
@@ -173,6 +188,7 @@ printf '%s' "$archive_sha" | grep -Eq '^[0-9a-f]{64}$'
 printf '%s' "$config_sha" | grep -Eq '^[0-9a-f]{64}$'
 upload_dir="/var/tmp/canranstudio-upload-$release_sha-$archive_sha-$config_sha"
 candidate="$upload_dir/nginx-$release_sha-$config_sha.conf"
+state="$upload_dir/config-state-$release_sha-$config_sha"
 active=/etc/nginx/conf.d/canranstudio-http.conf
 had_active=0
 old_sha=''
@@ -180,7 +196,7 @@ if sudo test -e "$active" || sudo test -L "$active"; then
   had_active=1
   old_sha="$(sudo sha256sum "$active" | awk '{print $1}')"
   printf '%s' "$old_sha" | grep -Eq '^[0-9a-f]{64}$'
-  if test "$old_sha" = "$config_sha"; then echo 'approved configuration already active'; exit 0; fi
+  if test "$old_sha" = "$config_sha"; then printf 'unchanged\n\n\n' > "$state"; echo 'approved configuration already active'; exit 0; fi
 fi
 test "$(sha256sum "$candidate" | awk '{print $1}')" = "$config_sha"
 if test "$had_active" -eq 1; then
@@ -197,7 +213,8 @@ sudo install -m 0644 -- "$candidate" "$active"
 if ! sudo nginx -t; then restore_config; echo 'candidate syntax failed; configuration restored' >&2; exit 1; fi
 if ! sudo systemctl reload nginx; then restore_config; echo 'candidate reload failed; configuration restored' >&2; exit 1; fi
 echo "active configuration SHA-256: $config_sha"
-if test "$had_active" -eq 1; then echo "backup retained: $backup"; fi
+if test "$had_active" -eq 1; then printf 'present\n%s\n%s\n' "$backup" "$old_sha" > "$state"; else printf 'absent\n\n\n' > "$state"; fi
+echo "configuration rollback state: $state"
 REMOTE
 ~~~
 
@@ -217,7 +234,12 @@ intentionally neither needed nor attempted.
 
 ~~~bash
 set -euo pipefail
-require_target "$CANRAN_DEPLOY_TARGET"
+require_sha() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{40}$'; }; require_sha256() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{64}$'; }; require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }; sha256_file() { shasum -a 256 "$1" | awk '{print $1}'; }
+for tool in git shasum ssh; do command -v "$tool" >/dev/null; done
+test -n "${CANRAN_DEPLOY_TARGET:-}"; require_target "$CANRAN_DEPLOY_TARGET"
+RELEASE_SHA="$(git rev-parse --verify HEAD)"; RELEASE_ARCHIVE="/tmp/canranstudio-$RELEASE_SHA.tar.gz"; test -f "$RELEASE_ARCHIVE"
+ARCHIVE_SHA="$(sha256_file "$RELEASE_ARCHIVE")"; CONFIG_SHA="$(sha256_file deploy/nginx/canranstudio-http.conf)"
+require_sha "$RELEASE_SHA"; require_sha256 "$ARCHIVE_SHA"; require_sha256 "$CONFIG_SHA"
 
 ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $RELEASE_SHA $ARCHIVE_SHA $CONFIG_SHA" <<'REMOTE'
 set -euo pipefail
@@ -336,28 +358,40 @@ Use the verifier only from the same local checkout whose exact artifact was uplo
 200 responses, exact bytes, headers, and release-manifest.json. Local success is not live evidence.
 
 ~~~bash
-test "$(git rev-parse --verify HEAD)" = "$RELEASE_SHA"
+set -euo pipefail
+require_sha() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{40}$'; }; require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }
+for tool in git node npm ssh; do command -v "$tool" >/dev/null; done
+test -n "${CANRAN_DEPLOY_TARGET:-}"; require_target "$CANRAN_DEPLOY_TARGET"
+RELEASE_SHA="$(git rev-parse --verify HEAD)"; require_sha "$RELEASE_SHA"
 test "$(node -p 'require("./dist/release-manifest.json").commit')" = "$RELEASE_SHA"
-npm run verify:live:http
-ssh "$CANRAN_DEPLOY_TARGET" 'cat /var/www/canranstudio/current/release-manifest.json'
+if ! npm run verify:live:http; then echo 'live verification failed; run the full rollback block below' >&2; exit 1; fi
+remote_manifest="$(ssh "$CANRAN_DEPLOY_TARGET" 'cat /var/www/canranstudio/current/release-manifest.json')"
+RELEASE_SHA="$RELEASE_SHA" REMOTE_MANIFEST="$remote_manifest" node -e 'if (JSON.parse(process.env.REMOTE_MANIFEST).commit !== process.env.RELEASE_SHA) process.exit(1)'
 ~~~
 
-On a live-verification failure, roll back content only. The active configuration remains unchanged,
-so no nginx -t/reload is required or attempted; this command locks, fully validates the prior
-release, then atomically replaces current.
+On a live-verification failure, run the full rollback below. It restores prior content and the
+recorded configuration state, then runs nginx -t and reload. Any restoration failure is non-zero
+and requires operator escalation.
 
 ~~~bash
 set -euo pipefail
-require_target "$CANRAN_DEPLOY_TARGET"
-require_sha "$CANRAN_PREVIOUS_RELEASE"
+require_sha() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{40}$'; }; require_sha256() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{64}$'; }; require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }; sha256_file() { shasum -a 256 "$1" | awk '{print $1}'; }
+for tool in git shasum ssh; do command -v "$tool" >/dev/null; done
+test -n "${CANRAN_DEPLOY_TARGET:-}"; test -n "${CANRAN_PREVIOUS_RELEASE:-}"; require_target "$CANRAN_DEPLOY_TARGET"; require_sha "$CANRAN_PREVIOUS_RELEASE"
+RELEASE_SHA="$(git rev-parse --verify HEAD)"; RELEASE_ARCHIVE="/tmp/canranstudio-$RELEASE_SHA.tar.gz"; test -f "$RELEASE_ARCHIVE"
+ARCHIVE_SHA="$(sha256_file "$RELEASE_ARCHIVE")"; CONFIG_SHA="$(sha256_file deploy/nginx/canranstudio-http.conf)"
+require_sha "$RELEASE_SHA"; require_sha256 "$ARCHIVE_SHA"; require_sha256 "$CONFIG_SHA"
 
-ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $CANRAN_PREVIOUS_RELEASE" <<'REMOTE'
+ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $CANRAN_PREVIOUS_RELEASE $RELEASE_SHA $ARCHIVE_SHA $CONFIG_SHA" <<'REMOTE'
 set -euo pipefail
 previous_sha=$1
+release_sha=$2; archive_sha=$3; config_sha=$4
 printf '%s' "$previous_sha" | grep -Eq '^[0-9a-f]{40}$'
+printf '%s' "$release_sha" | grep -Eq '^[0-9a-f]{40}$'; printf '%s' "$archive_sha" | grep -Eq '^[0-9a-f]{64}$'; printf '%s' "$config_sha" | grep -Eq '^[0-9a-f]{64}$'
 site_root=/var/www/canranstudio; releases="$site_root/releases"; current="$site_root/current"
 previous="$releases/$previous_sha"; lock="$releases/.deploy.lock"
 next_link="$site_root/.current.rollback.$previous_sha.$$.new"; lock_owned=0
+upload="/var/tmp/canranstudio-upload-$release_sha-$archive_sha-$config_sha"; state="$upload/config-state-$release_sha-$config_sha"; active=/etc/nginx/conf.d/canranstudio-http.conf
 verify_tree() {
  sudo python3 - "$1" "$2" <<'PYTREE'
 import hashlib,json,os,posixpath,re,stat,sys
@@ -410,9 +444,53 @@ lock_owned=1
 sudo test -d "$previous"; verify_tree "$previous" "$previous_sha"
 if sudo test -e "$next_link" || sudo test -L "$next_link"; then echo 'temporary link exists' >&2; exit 1; fi
 sudo ln -s -- "$previous" "$next_link"; sudo mv -Tf -- "$next_link" "$current"; next_link=''
-echo "rolled back content to: $previous"
+test -f "$state"; IFS= read -r mode < "$state"; backup="$(sed -n '2p' "$state")"; backup_sha="$(sed -n '3p' "$state")"
+case "$mode" in
+ unchanged) ;;
+ present) test "$backup" = "/etc/nginx/conf.d/.canranstudio-http.conf-$config_sha-$backup_sha.predeploy"; printf '%s' "$backup_sha" | grep -Eq '^[0-9a-f]{64}$'; test "$(sudo sha256sum "$backup" | awk '{print $1}')" = "$backup_sha"; sudo cp -p -- "$backup" "$active" ;;
+ absent) sudo rm -f -- "$active" ;;
+ *) echo 'invalid configuration rollback state' >&2; exit 1 ;;
+esac
+sudo nginx -t; sudo systemctl reload nginx
+echo "full rollback completed: $previous / $mode"
 REMOTE
 ~~~
 
 Rebuild dist at CANRAN_PREVIOUS_RELEASE, verify its manifest commit, then run npm run
 verify:live:http. A dist artifact from the failed release is expected to hash-mismatch.
+
+
+## 7. Successful-upload cleanup or safe retry cleanup
+
+After a successful live gate, or before retrying a failed transfer, run this self-contained cleanup.
+It constructs only the fixed private SHA path, requires current-user ownership and no symlink, and
+allows only the expected regular archive/config/state names (a partial upload is allowed). Any
+unexpected entry stops for manual inspection rather than widening deletion scope.
+
+~~~bash
+set -euo pipefail
+require_sha() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{40}$'; }
+require_sha256() { printf '%s' "$1" | grep -Eq '^[0-9a-f]{64}$'; }
+require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }
+sha256_file() { shasum -a 256 "$1" | awk '{print $1}'; }
+for tool in git shasum ssh; do command -v "$tool" >/dev/null; done
+test -n "$CANRAN_DEPLOY_TARGET"; require_target "$CANRAN_DEPLOY_TARGET"
+RELEASE_SHA="$(git rev-parse --verify HEAD)"; RELEASE_ARCHIVE="/tmp/canranstudio-$RELEASE_SHA.tar.gz"; test -f "$RELEASE_ARCHIVE"
+ARCHIVE_SHA="$(sha256_file "$RELEASE_ARCHIVE")"; CONFIG_SHA="$(sha256_file deploy/nginx/canranstudio-http.conf)"
+require_sha "$RELEASE_SHA"; require_sha256 "$ARCHIVE_SHA"; require_sha256 "$CONFIG_SHA"
+ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $RELEASE_SHA $ARCHIVE_SHA $CONFIG_SHA" <<'REMOTE'
+set -euo pipefail
+release_sha=$1; archive_sha=$2; config_sha=$3
+upload="/var/tmp/canranstudio-upload-$release_sha-$archive_sha-$config_sha"
+test -d "$upload"; test ! -L "$upload"; test -O "$upload"
+for entry in "$upload"/*; do
+ test -e "$entry" || continue
+ test -f "$entry"; test ! -L "$entry"
+ case "$(basename "$entry")" in
+  "release-$release_sha-$archive_sha.tar.gz"|"nginx-$release_sha-$config_sha.conf"|"config-state-$release_sha-$config_sha") ;;
+  *) echo "unexpected upload entry: $entry" >&2; exit 1 ;;
+ esac
+done
+rm -rf -- "$upload"
+REMOTE
+~~~
