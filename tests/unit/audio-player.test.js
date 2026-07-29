@@ -315,6 +315,42 @@ test('explicit stop and later handle cancellation clean audio exactly once', () 
   assert.equal(player.isActive(), false);
 });
 
+test('an active audio handle cancels and ignores captured late handlers', () => {
+  class CapturingAudio extends FakeAudio {
+    constructor(src) {
+      super(src);
+      this.handlers = new Map();
+    }
+
+    addEventListener(type, listener, options) {
+      this.handlers.set(type, listener);
+      return super.addEventListener(type, listener, options);
+    }
+  }
+  const { player, clock } = makePlayer({ AudioCtor: CapturingAudio });
+  const results = [];
+  const handle = player.play({
+    text: 'apple',
+    src: 'audio/apple.mp3',
+    onFinish: result => results.push(result)
+  });
+  const audio = FakeAudio.instances[0];
+  const lateEnded = audio.handlers.get('ended');
+  const lateError = audio.handlers.get('error');
+
+  handle.cancel();
+  handle.cancel();
+  player.stop();
+  lateEnded();
+  lateError();
+
+  assert.deepEqual(results, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.equal(audio.paused, true);
+  assert.equal(audio.currentTime, 0);
+  assert.equal(clock.pending(), 0);
+  assert.equal(player.isActive(), false);
+});
+
 test('audio timeout falls back with source failure and ignores late audio events', () => {
   const { player, speechSynthesis, clock } = makePlayer();
   const results = [];
