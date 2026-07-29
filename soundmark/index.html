@@ -759,10 +759,12 @@ function faceSVG(kind){
 (function(){
   const target=document.getElementById('vsTarget'),fb=document.getElementById('vsFb');
   const picks=document.querySelectorAll('.vs-pick');
-  let start=0,index=0,score=0,attempt=CanranCore.assessment.createAttempt(),finished=false;
+  let start=0,index=0,score=0,attempt=CanranCore.assessment.createAttempt(),
+      finished=false,transitioning=false;
   function begin(){
     start=Math.floor(Math.random()*VS_QUIZ.length);
-    index=0;score=0;finished=false;attempt=CanranCore.assessment.createAttempt();
+    index=0;score=0;finished=false;transitioning=true;
+    attempt=CanranCore.assessment.createAttempt();
     next();
   }
   function next(){
@@ -771,9 +773,11 @@ function faceSVG(kind){
     fb.textContent='第 '+(index+1)+' / '+VS_QUIZ.length+' 题';
     fb.className='fb';
     picks.forEach(p=>p.classList.remove('right','wrong'));
+    transitioning=false;
   }
   function finish(){
     finished=true;
+    transitioning=false;
     const rating=CanranCore.progress.ratingFor(score,[
       {min:9,rating:3},{min:7,rating:2},{min:5,rating:1}
     ]);
@@ -784,12 +788,14 @@ function faceSVG(kind){
   picks.forEach(p=>{
     p.onclick=()=>{
       if(finished){begin();return;}
+      if(transitioning)return;
       const correct=p.dataset.a===VS_QUIZ[(start+index)%VS_QUIZ.length][1];
       const outcome=CanranCore.assessment.submitAttempt(attempt,correct);
       attempt=outcome.state;
       if(!outcome.solved){
         p.classList.add('wrong');fb.textContent='再想想～';fb.className='fb bad';return;
       }
+      transitioning=true;
       if(outcome.scored)score++;
       p.classList.add('right');celebrate(p);
       index++;attempt=CanranCore.assessment.createAttempt();
@@ -952,8 +958,18 @@ function gameDone(scoreId,rating){
     if(rounds>=5){
       rounds=0;score=0;
       scoreEl.textContent='本关：0 / 5';
+      attempt=CanranCore.assessment.createAttempt();
+      round();
+      return;
     }
+    if(locked||!cur)return;
+    rounds++;
+    scoreEl.textContent=`本关：${rounds} / 5`;
     attempt=CanranCore.assessment.createAttempt();
+    if(rounds===5){
+      const rating=CanranCore.progress.ratingFor(score,[{min:5,rating:3},{min:4,rating:2},{min:3,rating:1}]);
+      awardSoundmark('g1',rating);gameDone('g1Score',rating);return;
+    }
     round();
   };
   round();
@@ -1006,8 +1022,23 @@ function gameDone(scoreId,rating){
     if(rounds>=5){
       rounds=0;score=0;
       scoreEl.textContent='本关：0 / 5';
+      attempt=CanranCore.assessment.createAttempt();
+      round();
+      return;
     }
+    if(!cur){
+      attempt=CanranCore.assessment.createAttempt();
+      round();
+      return;
+    }
+    if(locked)return;
+    rounds++;
+    scoreEl.textContent=`本关：${rounds} / 5`;
     attempt=CanranCore.assessment.createAttempt();
+    if(rounds===5){
+      const rating=CanranCore.progress.ratingFor(score,[{min:5,rating:3},{min:4,rating:2},{min:3,rating:1}]);
+      awardSoundmark('g2',rating);gameDone('g2Score',rating);return;
+    }
     round();
   };
 })();
@@ -1050,8 +1081,18 @@ function gameDone(scoreId,rating){
     if(rounds>=5){
       rounds=0;score=0;
       scoreEl.textContent='本关：0 / 5';
+      attempt=CanranCore.assessment.createAttempt();
+      round();
+      return;
     }
+    if(locked||!cur)return;
+    rounds++;
+    scoreEl.textContent=`本关：${rounds} / 5`;
     attempt=CanranCore.assessment.createAttempt();
+    if(rounds===5){
+      const rating=CanranCore.progress.ratingFor(score,[{min:5,rating:3},{min:4,rating:2},{min:3,rating:1}]);
+      awardSoundmark('g3',rating);gameDone('g3Score',rating);return;
+    }
     round();
   };
   round();

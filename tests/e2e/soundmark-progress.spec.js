@@ -2,6 +2,38 @@
 
 const { test, expect } = require('@playwright/test');
 
+async function openDeterministicSoundmark(page) {
+  await page.addInitScript(() => {
+    const nativeSetTimeout = window.setTimeout.bind(window);
+    window.setTimeout = (callback, delay = 0, ...args) =>
+      nativeSetTimeout(callback, Math.min(delay, 20), ...args);
+    Math.random = () => 0;
+  });
+  await page.goto('/soundmark/');
+}
+
+const domClick = locator => locator.evaluate(element => element.click());
+
+async function readSoundmarkRatings(page) {
+  return page.evaluate(() =>
+    JSON.parse(localStorage.getItem('canran:soundmark:progress:v2')).ratings
+  );
+}
+
+async function completeG1Round(page, firstTryCorrect) {
+  for (let round = 0; round < firstTryCorrect.length; round += 1) {
+    if (!firstTryCorrect[round]) {
+      await domClick(page.locator('#g1Opts [data-sym="i:"]'));
+      await expect(page.locator('#g1Opts [data-sym="i:"]')).toHaveClass(/wrong/);
+    }
+    await domClick(page.locator('#g1Opts [data-sym="ɪ"]'));
+    if (round < firstTryCorrect.length - 1) {
+      await expect(page.locator('#g1Fb')).toHaveText('');
+    }
+  }
+  await expect(page.locator('#g1Score')).toContainText('本轮完成');
+}
+
 test('legacy integer stars reset once and cannot crash rendering', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('phonics-magic-stars-v1', '-1');
@@ -20,7 +52,7 @@ test('legacy integer stars reset once and cannot crash rendering', async ({ page
   expect(await page.evaluate(() => localStorage.getItem('phonics-magic-stars-v1'))).toBeNull();
 });
 
-test('soundmark certificate requires twelve finite stars and prints', async ({ page }) => {
+test('soundmark certificate requires twelve finite stars and a non-empty name', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('canran:soundmark:progress:v2', JSON.stringify({
       version: 2,
@@ -31,10 +63,13 @@ test('soundmark certificate requires twelve finite stars and prints', async ({ p
   });
 
   await page.goto('/soundmark/');
-  await page.locator('#certName').fill('小明');
   await expect(page.locator('#btnPrint')).toBeEnabled();
   await page.locator('#btnPrint').click();
+  expect(await page.evaluate(() => window.__printed)).toBe(false);
+  await expect(page.locator('#certName')).toBeFocused();
 
+  await page.locator('#certName').fill('小明');
+  await page.locator('#btnPrint').click();
   expect(await page.evaluate(() => window.__printed)).toBe(true);
 });
 
@@ -59,19 +94,100 @@ test('eleven stars cannot issue the soundmark certificate', async ({ page }) => 
   expect(await page.evaluate(() => window.__printed)).toBe(false);
 });
 
-test('soundmark ratings keep only the finite historical best', async ({ page }) => {
-  await page.goto('/soundmark/');
+test('real g1 replays raise but never lower the historical rating', async ({ page }) => {
+  await openDeterministicSoundmark(page);
 
-  const saved = await page.evaluate(() => {
-    awardSoundmark('g1', 2);
-    awardSoundmark('g1', 1);
-    awardSoundmark('g1', 3);
-    awardSoundmark('g1', 3);
-    return JSON.parse(localStorage.getItem('canran:soundmark:progress:v2'));
-  });
+  await completeG1Round(page, [true, true, true, false, false]);
+  expect((await readSoundmarkRatings(page)).g1).toBe(1);
 
-  expect(saved.ratings).toEqual({ vs: 0, g1: 3, g2: 0, g3: 0 });
+  await domClick(page.locator('#g1Next'));
+  await completeG1Round(page, [true, true, true, true, true]);
+  expect((await readSoundmarkRatings(page)).g1).toBe(3);
+
+  await domClick(page.locator('#g1Next'));
+  await completeG1Round(page, [false, false, false, false, false]);
+  expect((await readSoundmarkRatings(page)).g1).toBe(3);
   await expect(page.locator('#starCount')).toHaveText('3');
+});
+
+test('next consumes an active failed question in all three games', async ({ page }) => {
+  await openDeterministicSoundmark(page);
+
+  await domClick(page.locator('#g1Opts [data-sym="i:"]'));
+  await domClick(page.locator('#g1Next'));
+  await expect(page.locator('#g1Score')).toHaveText('本关：1 / 5');
+  for (let round = 0; round < 4; round += 1) {
+    await domClick(page.locator('#g1Opts [data-sym="ɪ"]'));
+    if (round < 3) await expect(page.locator('#g1Fb')).toHaveText('');
+  }
+  await expect(page.locator('#g1Score')).toHaveText('本轮完成 · 获得 2 星');
+
+  await domClick(page.locator('.gtab[data-g="g2"]'));
+  await domClick(page.locator('#g2Next'));
+  await domClick(page.locator('#g2Opts [data-w="sheep"]'));
+  await domClick(page.locator('#g2Next'));
+  await expect(page.locator('#g2Score')).toHaveText('本关：1 / 5');
+  for (let round = 0; round < 4; round += 1) {
+    await domClick(page.locator('#g2Opts [data-w="ship"]'));
+    if (round < 3) await expect(page.locator('#g2Fb')).toHaveText('');
+  }
+  await expect(page.locator('#g2Score')).toHaveText('本轮完成 · 获得 2 星');
+
+  await domClick(page.locator('.gtab[data-g="g3"]'));
+  await domClick(page.locator('#g3Opts .g-opt', { hasText: 'feet' }));
+  await domClick(page.locator('#g3Next'));
+  await expect(page.locator('#g3Score')).toHaveText('本关：1 / 5');
+  for (let round = 0; round < 4; round += 1) {
+    await domClick(page.locator('#g3Opts .g-opt', { hasText: 'fish' }));
+    if (round < 3) await expect(page.locator('#g3Fb')).toHaveText('');
+  }
+  await expect(page.locator('#g3Score')).toHaveText('本轮完成 · 获得 2 星');
+
+  expect(await readSoundmarkRatings(page)).toEqual({ vs: 0, g1: 2, g2: 2, g3: 2 });
+});
+
+test('next cannot duplicate a solved question transition', async ({ page }) => {
+  await openDeterministicSoundmark(page);
+
+  const transitionFeedback = await page.evaluate(() => {
+    document.querySelector('#g1Opts [data-sym="ɪ"]').click();
+    document.getElementById('g1Next').click();
+    return document.getElementById('g1Fb').textContent;
+  });
+  expect(transitionFeedback).toContain('答对啦');
+  await expect(page.locator('#g1Score')).toHaveText('本关：1 / 5');
+  await expect(page.locator('#g1Fb')).toHaveText('');
+  await expect(page.locator('#g1Score')).toHaveText('本关：1 / 5');
+
+  await completeG1Round(page, [true, true, true, true]);
+  expect((await readSoundmarkRatings(page)).g1).toBe(3);
+
+  await domClick(page.locator('#g1Next'));
+  await expect(page.locator('#g1Score')).toHaveText('本关：0 / 5');
+});
+
+test('vowel challenge ignores rapid input until the next question is visible', async ({ page }) => {
+  await openDeterministicSoundmark(page);
+
+  await page.evaluate(() => {
+    document.querySelector('.vs-pick[data-a="v"]').click();
+    document.querySelector('.vs-pick[data-a="c"]').click();
+  });
+  await expect(page.locator('#vsTarget')).toHaveText('/p/');
+  await expect(page.locator('#vsFb')).toContainText('第 2 / 10 题');
+
+  const vowels = new Set(['/e/', '/æ/', '/ʊ/', '/ɑ:/', '/u:/']);
+  for (let index = 1; index < 10; index += 1) {
+    const target = await page.locator('#vsTarget').textContent();
+    const correct = vowels.has(target) ? 'v' : 'c';
+    await domClick(page.locator(`.vs-pick[data-a="${correct}"]`));
+    if (index < 9) {
+      await expect(page.locator('#vsFb')).toContainText(`第 ${index + 2} / 10 题`);
+    }
+  }
+
+  await expect(page.locator('#vsFb')).toContainText('本轮首次答对 10 / 10，获得 3 星');
+  expect((await readSoundmarkRatings(page)).vs).toBe(3);
 });
 
 test('soundmark rounds score only first attempts and finish at fixed lengths', async ({ page }) => {
@@ -83,7 +199,6 @@ test('soundmark rounds score only first attempts and finish at fixed lengths', a
   });
   await page.goto('/soundmark/');
 
-  const domClick = locator => locator.evaluate(element => element.click());
   const vowels = new Set(['/e/', '/æ/', '/ʊ/', '/ɑ:/', '/u:/']);
   for (let index = 0; index < 10; index += 1) {
     const target = await page.locator('#vsTarget').textContent();
