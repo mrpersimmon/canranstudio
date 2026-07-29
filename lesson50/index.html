@@ -744,6 +744,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/assessment.js"></script>
+<script src="/core/audio-player.js"></script>
 <script>
 /* ================= 工具 ================= */
 const $=s=>document.querySelector(s);
@@ -891,7 +892,9 @@ if(!speechOK){document.documentElement.classList.add('no-speech');}
 const UK_VOICE_KEYS=['google uk english','united kingdom','daniel','kate','serena','stephanie','arthur','martha','libby','sonja','ryan'];
 let ukVoice=null;
 function pickBritishVoice(){
-  const vs=(window.speechSynthesis.getVoices()||[]);
+  const synthesis=window.speechSynthesis;
+  if(!synthesis||typeof synthesis.getVoices!=='function')return null;
+  const vs=(synthesis.getVoices()||[]);
   if(!vs.length)return null;
   const isGB=v=>(v.lang||'').replace(/_/g,'-').toLowerCase().indexOf('en-gb')===0;
   return vs.find(v=>isGB(v)&&UK_VOICE_KEYS.some(k=>(v.name||'').toLowerCase().includes(k)))
@@ -903,77 +906,77 @@ if(speechOK){
   ukVoice=pickBritishVoice();
   window.speechSynthesis.addEventListener('voiceschanged',()=>{ukVoice=pickBritishVoice();});
 }
-/* 预录音频：文件名 slug 规则与生成端严格一致 */
-function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');}
-const audioFailCache=new Set();
-let curAudio=null;
+const lesson50Audio=CanranCore.audio.createAudioPlayer();
 let speechBusy=false;   /* 是否有朗读进行中 */
 let speechQ=[];         /* 排队等待的自动朗读 */
-let playToken=0;        /* 播放令牌：打断后令旧回调失效，防竞态卡死 */
-function stopCurAudio(){
-  if(curAudio){try{curAudio.pause();curAudio.currentTime=0;}catch(e){}curAudio=null;}
+let playToken=0;        /* 请求代次：只允许最新请求控制 active 和队列 */
+
+function audioRequest(text,onFinish){
+  const value=String(text);
+  const source=CanranCore.audio.slugify(value);
+  return {
+    text:value,
+    src:source?'audio/'+source+'.mp3':'',
+    rate:0.85,
+    voice:ukVoice||pickBritishVoice(),
+    onFinish
+  };
 }
-/* 播放一条文本：预录 mp3 优先，失败回退合成语音；done 在真正播完后调用 */
-function playT(t,done){
-  const s=slug(t);
-  if(!s||audioFailCache.has(s)){speakSynthEnd(t,done);return;}
-  let a;
-  try{a=new Audio('audio/'+s+'.mp3');}catch(e){audioFailCache.add(s);speakSynthEnd(t,done);return;}
-  curAudio=a;
-  let settled=false;
-  const okEnd=()=>{if(settled)return;settled=true;if(curAudio===a)curAudio=null;if(done)done();};
-  const fail=()=>{if(settled)return;settled=true;if(curAudio===a)curAudio=null;audioFailCache.add(s);speakSynthEnd(t,done);};
-  a.addEventListener('ended',okEnd,{once:true});
-  a.addEventListener('error',fail,{once:true});
-  let p;
-  try{p=a.play();}catch(e){fail();return;}
-  if(p&&typeof p.catch==='function'){p.catch(()=>fail());}
+
+function finishSpeech(request,result){
+  if(request.finished)return;
+  request.finished=true;
+  if(request.onDone)request.onDone(result);
 }
-/* 合成语音兜底；onend 未触发时用超时兜底，防队列卡死 */
-function speakSynthEnd(t,done){
-  if(!speechOK){
-    if(!speechWarned){speechWarned=true;alert('当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～');}
-    if(done)done();return;
-  }
-  try{
-    const u=new SpeechSynthesisUtterance(t);
-    u.lang='en-GB';u.rate=0.85;u.pitch=1.05;
-    if(!ukVoice)ukVoice=pickBritishVoice();
-    if(ukVoice){u.voice=ukVoice;}
-    let called=false;
-    const finish=()=>{if(!called){called=true;if(done)done();}};
-    u.onend=finish;u.onerror=finish;
-    setTimeout(finish,Math.max(1800,t.length*150));
-    window.speechSynthesis.speak(u);
-  }catch(e){if(done)done();}
+
+function startSpeech(request){
+  speechBusy=true;
+  lesson50Audio.play(audioRequest(request.text,result=>{
+    speechBusy=lesson50Audio.isActive();
+    if(result.reason==='unsupported'&&!speechWarned){
+      speechWarned=true;
+      alert('当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～');
+    }
+    finishSpeech(request,result);
+    if(result.reason!=='cancelled'&&request.token===playToken)pumpSpeech();
+  }));
 }
+
 /* 泵出语音队列 */
 function pumpSpeech(){
-  if(speechBusy||!speechQ.length)return;
-  speechBusy=true;
-  const my=++playToken;
-  const t=speechQ.shift();
-  playT(t,()=>{if(my===playToken){speechBusy=false;pumpSpeech();}});
+  if(speechBusy||speechQ.length===0)return;
+  const item=speechQ.shift();
+  startSpeech({
+    text:item.text,
+    onDone:item.onDone,
+    token:++playToken,
+    finished:false
+  });
 }
-/* 打断式朗读（🔊 按钮、答题即时反馈）：清空队列，立即播放；onDone 在完整播完后回调 */
-function speak(t,onDone){
-  speechQ.length=0;
-  stopCurAudio();
-  if(speechOK){try{window.speechSynthesis.cancel();}catch(e){}}
-  speechBusy=true;
-  const my=++playToken;
-  let called=false;
-  const done=()=>{
-    if(called)return;called=true;
-    if(my===playToken){speechBusy=false;pumpSpeech();}
-    if(onDone)onDone();
+
+/* 打断式朗读（🔊 按钮、答题即时反馈）：清空队列，立即播放；onDone 在所有终结路径回调 */
+function speak(text,onDone){
+  const request={
+    text,
+    onDone,
+    token:++playToken,
+    finished:false
   };
-  playT(t,done);
+  speechQ.length=0;
+  lesson50Audio.stop('cancelled');
+  if(request.token!==playToken){
+    finishSpeech(request,{reason:'cancelled',sourceFailed:false});
+    return;
+  }
+  speechQ.length=0;
+  startSpeech(request);
 }
+
 /* 排队式朗读（自动场景：菜盘单词、下题题面）：等当前句子读完再播，不打断 */
-function speakLater(t){
+function speakLater(text){
   if(!userInteracted)return;
-  speechQ.push(t);pumpSpeech();
+  speechQ.push({text,onDone:null});
+  pumpSpeech();
 }
 
 /* ================= 星星系统（localStorage） ================= */
