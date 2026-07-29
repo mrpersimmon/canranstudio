@@ -8,6 +8,7 @@
   "scripts": {
     "test:unit": "node --test tests/unit/*.test.js",
     "test:e2e": "playwright test",
+    "test:state": "playwright test tests/e2e/l49-progress.spec.js tests/e2e/home-progress.spec.js tests/e2e/l50-assessment.spec.js tests/e2e/soundmark-progress.spec.js",
     "test": "npm run test:unit && npm run test:e2e"
   },
   "devDependencies": {
