@@ -1808,27 +1808,37 @@ function renderCertCanvas(){
 
 function sanitizeFilenamePart(value,fallback){
   const clean=value=>String(value==null?'':value)
-    .replace(/[\\/:*?"<>|\u0000-\u001F]/g,'')
+    .replace(/[\\/:*?"<>|\u0000-\u001F\u007F-\u009F]/g,'')
     .replace(/\s+/g,' ')
     .trim()
-    .slice(0,40);
-  return clean(value)||clean(fallback)||'小学徒';
+  const truncate=value=>Array.from(value).slice(0,40).join('');
+  return truncate(clean(value))||truncate(clean(fallback))||'小学徒';
 }
 function dataUrlToBlob(dataUrl){
-  const comma=String(dataUrl).indexOf(',');
-  if(comma<0)throw new Error('无效的图片数据');
-  const header=dataUrl.slice(0,comma);
-  const mime=(header.match(/^data:([^;,]+)/)||[])[1]||'image/png';
-  const payload=dataUrl.slice(comma+1);
-  let binary;
-  if(/;base64(?:;|$)/i.test(header)){
-    binary=atob(payload);
-  }else{
-    binary=decodeURIComponent(payload);
-  }
+  const match=String(dataUrl).match(/^data:image\/png;base64,([A-Za-z0-9+/]+={0,2})$/i);
+  if(!match)throw new Error('无效的 PNG 图片数据');
+  const binary=atob(match[1]);
   const bytes=new Uint8Array(binary.length);
   for(let index=0;index<binary.length;index++)bytes[index]=binary.charCodeAt(index);
-  return new Blob([bytes],{type:mime});
+  return new Blob([bytes],{type:'image/png'});
+}
+function safeLog(){
+  try{console.error.apply(console,arguments);}catch{}
+}
+function safeAlert(message){
+  try{alert(message);}catch{}
+}
+function safeRevoke(url){
+  if(!url)return;
+  try{URL.revokeObjectURL(url);}catch{}
+}
+function safeRemoveNode(node){
+  if(!node)return true;
+  try{node.remove();}catch{}
+  if(node.isConnected){
+    try{node.parentNode&&node.parentNode.removeChild(node);}catch{}
+  }
+  return !node.isConnected;
 }
 function renderCertBlob(){
   return new Promise(resolve=>{
@@ -1836,7 +1846,7 @@ function renderCertBlob(){
     try{
       canvas=renderCertCanvas();
     }catch(error){
-      console.error('证书绘制失败：',error);
+      safeLog('证书绘制失败：',error);
       resolve(null);
       return;
     }
@@ -1847,7 +1857,7 @@ function renderCertBlob(){
       }
       resolve(dataUrlToBlob(canvas.toDataURL('image/png')));
     }catch(error){
-      console.error('证书转码失败：',error);
+      safeLog('证书转码失败：',error);
       resolve(null);
     }
   });
@@ -1866,19 +1876,20 @@ async function saveCertImage(){
     }
   }catch(e){}
 
-  const blob=await renderCertBlob();
+  let blob=null;
+  try{blob=await renderCertBlob();}catch(error){safeLog('证书转码失败：',error);}
   if(!blob){
-    alert('😢 证书生成失败，请再点一次试试');
+    safeAlert('😢 证书生成失败，请再点一次试试');
     return;
   }
   let url='';
   try{
     url=URL.createObjectURL(blob);
   }catch(error){
-    console.error('证书图片创建失败：',error);
+    safeLog('证书图片创建失败：',error);
   }
   if(!url){
-    alert('😢 当前浏览器无法生成图片，直接截图保存吧');
+    safeAlert('😢 当前浏览器无法生成图片，直接截图保存吧');
     return;
   }
 
@@ -1891,52 +1902,65 @@ async function saveCertImage(){
     document.body.appendChild(anchor);
     anchor.click();
   }catch(error){
-    console.error('证书下载失败：',error);
+    safeLog('证书下载失败：',error);
   }finally{
-    if(anchor)anchor.remove();
+    safeRemoveNode(anchor);
   }
 
+  let transferred=false;
   try{
     showCertOverlay(url);
+    transferred=true;
   }catch(error){
-    try{URL.revokeObjectURL(url);}catch{}
-    console.error('证书遮罩失败：',error);
-    alert('😢 图片已生成，但无法显示保存预览');
+    safeLog('证书遮罩失败：',error);
+    safeAlert('😢 图片已生成，但无法显示保存预览');
+  }finally{
+    if(!transferred)safeRevoke(url);
   }
 }
 function showCertOverlay(src){
-  const previous=document.getElementById('certSaveOverlay');
-  if(previous&&typeof previous.__certCleanup==='function')previous.__certCleanup();
-  const ov=document.createElement('div');
-  ov.id='certSaveOverlay';
-  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;';
-  const tip=document.createElement('p');
-  tip.textContent='📱 长按图片 → 保存到相册 / 添加到照片';
-  tip.style.cssText='margin:0;color:#fff;font-size:18px;font-weight:700;text-align:center;line-height:1.6;text-shadow:0 2px 8px rgba(0,0,0,.6);';
-  const img=document.createElement('img');
-  img.src=src;img.alt='结业证书';
-  img.style.cssText='max-width:92vw;max-height:66vh;display:block;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.6);background:#FFFDF6;';
-  const close=document.createElement('button');
-  close.className='btn btn-mini btn-yellow';
-  close.textContent='关闭';
-  close.id='certSaveClose';
-  let closed=false;
+  const existing=Array.from(document.querySelectorAll('#certSaveOverlay'));
+  for(const node of existing){
+    try{
+      if(typeof node.__certCleanup==='function')node.__certCleanup();
+    }catch{}
+    safeRemoveNode(node);
+  }
+  if(document.querySelector('#certSaveOverlay'))throw new Error('无法替换现有保存预览');
+
+  let ov=null,closed=false;
   const closeOverlay=event=>{
-    if(event)event.stopPropagation();
+    try{if(event)event.stopPropagation();}catch{}
     if(closed)return;
     closed=true;
-    try{URL.revokeObjectURL(src);}catch{}
-    ov.remove();
-    sndClick();
+    safeRevoke(src);
+    safeRemoveNode(ov);
+    try{sndClick();}catch{}
   };
-  ov.__certCleanup=closeOverlay;
-  close.addEventListener('click',closeOverlay);
-  ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
-  ov.addEventListener('click',event=>{
-    if(event.target===ov)closeOverlay(event);
-  });
-  document.body.appendChild(ov);
-  return ov;
+  try{
+    ov=document.createElement('div');
+    ov.id='certSaveOverlay';
+    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;';
+    const tip=document.createElement('p');
+    tip.textContent='📱 长按图片 → 保存到相册 / 添加到照片';
+    tip.style.cssText='margin:0;color:#fff;font-size:18px;font-weight:700;text-align:center;line-height:1.6;text-shadow:0 2px 8px rgba(0,0,0,.6);';
+    const img=document.createElement('img');
+    img.src=src;img.alt='结业证书';
+    img.style.cssText='max-width:92vw;max-height:66vh;display:block;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.6);background:#FFFDF6;';
+    const close=document.createElement('button');
+    close.className='btn btn-mini btn-yellow';
+    close.textContent='关闭';close.id='certSaveClose';
+    ov.__certCleanup=closeOverlay;
+    close.addEventListener('click',closeOverlay);
+    ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
+    ov.addEventListener('click',event=>{if(event.target===ov)closeOverlay(event);});
+    document.body.appendChild(ov);
+    return ov;
+  }catch(error){
+    closed=true;
+    safeRemoveNode(ov);
+    throw error;
+  }
 }
 $('#certClose').addEventListener('click',()=>{$('#certModal').classList.add('hidden');sndClick();});
 $('#certModal').addEventListener('click',e=>{if(e.target.id==='certModal')$('#certModal').classList.add('hidden');});

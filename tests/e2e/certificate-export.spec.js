@@ -137,3 +137,117 @@ test('Lesson 49 replaces an active overlay without leaking either URL', async ({
     'blob:canran-2'
   ]);
 });
+
+test('Lesson 49 transfers a URL despite download and logger cleanup failures', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    const removeChild = document.body.removeChild.bind(document.body);
+    HTMLAnchorElement.prototype.click = () => { throw new Error('download failed'); };
+    HTMLAnchorElement.prototype.remove = () => { throw new Error('remove failed'); };
+    console.error = () => { throw new Error('logger failed'); };
+    window.__anchorCount = () => document.querySelectorAll('a[download]').length;
+    window.__restoreAnchorRemoval = () => removeChild;
+  });
+  await page.locator('#certSave').click();
+
+  await expect(page.locator('#certSaveOverlay')).toBeVisible();
+  expect(await page.evaluate(() => window.__anchorCount())).toBe(0);
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual([]);
+  await page.locator('#certSaveClose').click();
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
+
+test('Lesson 49 rolls back an overlay appended before its constructor throws', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    const appendChild = document.body.appendChild.bind(document.body);
+    document.body.appendChild = node => {
+      if (node.id === 'certSaveOverlay') {
+        appendChild(node);
+        throw new Error('append after insert failed');
+      }
+      return appendChild(node);
+    };
+  });
+  await page.locator('#certSave').click();
+
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
+
+test('Lesson 49 removes foreign duplicate overlay IDs before committing a new owner', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    const foreign = document.createElement('div');
+    foreign.id = 'certSaveOverlay';
+    document.body.appendChild(foreign);
+  });
+  await page.locator('#certSave').click();
+
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  await page.locator('#certSaveClose').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
+
+test('Lesson 49 sanitizes DEL controls and truncates by Unicode code point', async ({ page }) => {
+  await openCertificate(page, '小明');
+  const value = await page.evaluate(() => sanitizeFilenamePart(
+    `\u007f\u0080${'x'.repeat(39)}😀suffix`,
+    'fallback'
+  ));
+
+  expect(value).not.toMatch(/[\u0000-\u001F\u007F-\u009F\\/:*?"<>|]/);
+  expect(Array.from(value)).toHaveLength(40);
+  expect(value.endsWith('😀')).toBe(true);
+  expect(value.isWellFormed()).toBe(true);
+  expect(await page.evaluate(() => sanitizeFilenamePart('\u007f\u0080', ' fallback '))).toBe('fallback');
+});
+
+test('Lesson 49 rejects malformed fallback data URLs without creating a URL', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    HTMLCanvasElement.prototype.toBlob = undefined;
+    HTMLCanvasElement.prototype.toDataURL = () => 'not-data,cG5n';
+  });
+  await page.locator('#certSave').click();
+
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate)).toMatchObject({
+    createdUrls: [],
+    revokedUrls: [],
+    alerts: ['😢 证书生成失败，请再点一次试试']
+  });
+});
+
+test('Lesson 49 resolves a synchronous toBlob failure to user feedback', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    HTMLCanvasElement.prototype.toBlob = () => { throw new Error('encode failed'); };
+  });
+  await page.locator('#certSave').click();
+
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate)).toMatchObject({
+    createdUrls: [],
+    alerts: ['😢 证书生成失败，请再点一次试试']
+  });
+});
+
+test('Lesson 49 keeps the first toBlob callback result', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      callback(new Blob(['first'], { type: 'image/png' }));
+      callback(null);
+    };
+  });
+  await page.locator('#certSave').click();
+
+  await expect(page.locator('#certSaveOverlay')).toBeVisible();
+  expect(await page.evaluate(() => window.__certificate.createdUrls)).toEqual([
+    { value: 'blob:canran-1', type: 'image/png' }
+  ]);
+  await page.locator('#certSaveClose').click();
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
