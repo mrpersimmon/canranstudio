@@ -515,6 +515,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/assessment.js"></script>
+<script src="/core/audio-player.js"></script>
 <script>
 /* ==================== 数据 ==================== */
 const VOWELS = [
@@ -596,56 +597,23 @@ if(speechOK){
   window.speechSynthesis.addEventListener('voiceschanged', ()=>{ ukVoice = pickBritishVoice(); });
 }
 
-/* 预录音频优先：文件名 slug 规则与生成端严格一致 */
-function slug(t){ return t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
-const audioFailCache = new Set(); /* 播放失败过的 slug：下次直接走 speechSynthesis，不再重复请求 */
-let curAudio = null;              /* 当前正在播放的预录音频引用 */
-function stopCurAudio(){
-  if(curAudio){ try{ curAudio.pause(); curAudio.currentTime = 0; }catch(e){} curAudio = null; }
-}
-/* 尝试播放 audio/<slug>.mp3；resolve(true)=已接管播放，resolve(false)=需回退 speechSynthesis */
-function tryAudio(t, onend){
-  return new Promise(resolve=>{
-    const s = slug(t);
-    if(!s || audioFailCache.has(s)){ resolve(false); return; }
-    let a;
-    try{ a = new Audio('audio/' + s + '.mp3'); }catch(e){ audioFailCache.add(s); resolve(false); return; }
-    curAudio = a;
-    let settled = false;
-    const ok = ()=>{ if(!settled){ settled = true; resolve(true); } };
-    const fail = ()=>{
-      if(settled) return; settled = true;
-      if(curAudio === a){ curAudio = null; audioFailCache.add(s); resolve(false); } /* 真实失败：记入缓存并回退 */
-      else{ resolve(true); } /* 已被更新的 speak 取代（AbortError），无需回退 */
-    };
-    a.addEventListener('error', fail, {once:true});
-    a.addEventListener('ended', ()=>{ if(curAudio===a) curAudio=null; if(onend) onend(); }, {once:true});
-    let p;
-    try{ p = a.play(); }catch(e){ fail(); return; }
-    if(p && typeof p.then === 'function'){ p.then(ok, fail); } else { ok(); }
-  });
-}
-/* speechSynthesis 兜底（en-GB 语音挑选） */
-function speakSynth(t, rate, onend){
-  if(!speechOK){
-    if(!speechWarned){ speechWarned = true; toast('当前浏览器不支持语音朗读，可以用 Chrome / Edge 打开试试～'); }
-    if(onend) onend();
-    return;
-  }
-  try{
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(t);
-    u.lang = 'en-GB'; u.rate = rate; u.pitch = 1.05;
-    if(!ukVoice) ukVoice = pickBritishVoice();
-    if(ukVoice) u.voice = ukVoice;
-    if(onend) u.onend = onend;
-    window.speechSynthesis.speak(u);
-  }catch(e){ if(onend) onend(); }
-}
+const soundmarkAudio=CanranCore.audio.createAudioPlayer();
 function speak(text, rate=0.85, onend){
-  stopCurAudio(); /* 停止上一个正在播放的 Audio，避免叠音 */
-  if(speechOK){ try{ window.speechSynthesis.cancel(); }catch(e){} }
-  tryAudio(text, onend).then(ok2=>{ if(!ok2) speakSynth(text, rate, onend); });
+  const value=String(text);
+  const source=CanranCore.audio.slugify(value);
+  return soundmarkAudio.play({
+    text:value,
+    src:source?'audio/'+source+'.mp3':'',
+    rate,
+    voice:ukVoice||pickBritishVoice(),
+    onFinish:result=>{
+      if(result.reason==='unsupported'&&!speechWarned){
+        speechWarned=true;
+        toast('当前浏览器不支持语音朗读，可以用 Chrome / Edge 打开试试～');
+      }
+      if(onend)onend(result);
+    }
+  });
 }
 
 /* ==================== 星星 & 提示 ==================== */
@@ -822,6 +790,7 @@ function faceSVG(kind){
     v.words.forEach(([w,p])=>{
       const c = document.createElement('button');
       c.className = 'wchip';
+      c.dataset.audioWord = w;
       c.innerHTML = `${w} <small class="ipa">/${p}/</small>`;
       c.onclick = ()=>{
         chips.querySelectorAll('.wchip').forEach(x=>x.classList.remove('playing'));
@@ -894,6 +863,7 @@ function faceSVG(kind){
         <button class="half" data-w="${w1}"><span class="ear">▶</span><div class="w">${w1}</div><div class="p ipa">/${p1}/</div></button>
         <button class="half" data-w="${w2}"><span class="ear">▶</span><div class="w">${w2}</div><div class="p ipa">/${p2}/</div></button>`;
       card.querySelectorAll('.half').forEach(h=>{
+        h.dataset.audioWord = h.dataset.w;
         h.onclick = ()=>{
           card.querySelectorAll('.half').forEach(x=>x.classList.remove('playing'));
           h.classList.add('playing');
@@ -1119,6 +1089,7 @@ document.querySelectorAll('.gtab').forEach(t=>{
     g.cells.forEach(([s,e])=>{
       const c = document.createElement('button');
       c.className = 'ph-cell';
+      c.dataset.audioWord = e;
       c.innerHTML = `<div class="s ipa">/${s}/</div><div class="e">${e}</div>`;
       c.onclick = ()=>{
         row.querySelectorAll('.ph-cell').forEach(x=>x.classList.remove('playing'));
