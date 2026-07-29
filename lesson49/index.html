@@ -1843,7 +1843,15 @@ function safeRemoveNode(node){
     let connected=true;
     try{connected=node.isConnected;}catch{}
     if(connected){
-      try{node.href='';node.download='';node.hidden=true;node.setAttribute('aria-hidden','true');}catch{}
+      try{node.removeAttribute('href');}catch{}
+      try{node.removeAttribute('download');}catch{}
+      let hasHref=false,hasDownload=false;
+      try{hasHref=node.hasAttribute('href');}catch{}
+      try{hasDownload=node.hasAttribute('download');}catch{}
+      if(hasHref)try{node.href='';}catch{}
+      if(hasDownload)try{node.download='';}catch{}
+      try{node.hidden=true;}catch{}
+      try{node.setAttribute('aria-hidden','true');}catch{}
       return false;
     }
     return true;

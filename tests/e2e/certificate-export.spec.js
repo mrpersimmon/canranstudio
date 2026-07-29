@@ -285,3 +285,28 @@ test('Lesson 49 uses replaceWith when anchor removal APIs throw', async ({ page 
   await expect(page.locator('#certSaveOverlay')).toBeVisible();
   expect(await page.locator('a[download]').count()).toBe(0);
 });
+
+test('Lesson 49 removes residual download references when every anchor removal API fails', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    console.error = () => { throw new Error('logger failed'); };
+    HTMLAnchorElement.prototype.remove = () => { throw new Error('remove failed'); };
+    const original = document.createElement.bind(document);
+    document.createElement = tag => {
+      const node = original(tag);
+      if (tag === 'a') {
+        node.replaceWith = () => { throw new Error('replace failed'); };
+        Object.defineProperty(node, 'parentNode', { get() { throw new Error('parent failed'); } });
+      }
+      return node;
+    };
+  });
+  await page.locator('#certSave').click();
+  await expect(page.locator('#certSaveOverlay')).toBeVisible();
+  expect(await page.evaluate(() => {
+    const anchor = document.querySelector('a[aria-hidden="true"]');
+    return [anchor.hasAttribute('href'), anchor.hasAttribute('download'), anchor.hidden, anchor.getAttribute('aria-hidden')];
+  })).toEqual([false, false, true, 'true']);
+  await page.locator('#certSaveClose').click();
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
