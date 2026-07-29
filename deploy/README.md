@@ -116,7 +116,7 @@ set -euo pipefail
 require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }
 test -n "${CANRAN_DEPLOY_TARGET:-}"
 require_target "$CANRAN_DEPLOY_TARGET"
-ssh "$CANRAN_DEPLOY_TARGET" 'set -eu; command -v python3; command -v sha256sum; command -v tar; command -v nginx; command -v systemctl'
+ssh "$CANRAN_DEPLOY_TARGET" 'set -eu; command -v python3; command -v sha256sum; command -v tar; command -v find; command -v nginx; command -v systemctl'
 ssh "$CANRAN_DEPLOY_TARGET" 'sudo nginx -T 2>&1'
 ssh "$CANRAN_DEPLOY_TARGET" 'readlink -f /var/www/canranstudio/current || true'
 ssh "$CANRAN_DEPLOY_TARGET" 'sudo sha256sum /etc/nginx/conf.d/canranstudio-http.conf 2>/dev/null || true'
@@ -294,7 +294,7 @@ for base,dirs,names in os.walk(root,topdown=True,followlinks=False):
 expected_files=set(files)|{'release-manifest.json'}; expected_dirs=set()
 for name in files:
  parent=posixpath.dirname(name)
- while parent!='.': expected_dirs.add(parent); parent=posixpath.dirname(parent)
+ while parent not in ('','.'): expected_dirs.add(parent); parent=posixpath.dirname(parent)
 if actual_files!=expected_files or actual_dirs!=expected_dirs: bad('tree mismatch')
 for name,digest in files.items():
  with open(os.path.join(root,name),'rb') as handle:
@@ -393,8 +393,12 @@ printf '%s' "$previous_sha" | grep -Eq '^[0-9a-f]{40}$'
 printf '%s' "$release_sha" | grep -Eq '^[0-9a-f]{40}$'; printf '%s' "$archive_sha" | grep -Eq '^[0-9a-f]{64}$'; printf '%s' "$config_sha" | grep -Eq '^[0-9a-f]{64}$'
 site_root=/var/www/canranstudio; releases="$site_root/releases"; current="$site_root/current"
 previous="$releases/$previous_sha"; lock="$releases/.deploy.lock"
-next_link="$site_root/.current.rollback.$previous_sha.$$.new"; lock_owned=0
+next_link="$site_root/.current.rollback.$previous_sha.$$.new"
+compensation_link="$site_root/.current.compensate.$release_sha.$$.new"
+lock_owned=0; next_link_owned=0; compensation_link_owned=0
 upload="/var/tmp/canranstudio-upload-$release_sha-$archive_sha-$config_sha"; state="$upload/config-state-$release_sha-$config_sha"; active=/etc/nginx/conf.d/canranstudio-http.conf
+candidate_config="$upload/nginx-$release_sha-$config_sha.conf"
+mutated=0; success=0; compensating=0
 verify_tree() {
  sudo python3 - "$1" "$2" <<'PYTREE'
 import hashlib,json,os,posixpath,re,stat,sys
@@ -427,34 +431,105 @@ for base,dirs,names in os.walk(root,topdown=True,followlinks=False):
 expected_files=set(files)|{'release-manifest.json'}; expected_dirs=set()
 for name in files:
  parent=posixpath.dirname(name)
- while parent!='.': expected_dirs.add(parent); parent=posixpath.dirname(parent)
+ while parent not in ('','.'): expected_dirs.add(parent); parent=posixpath.dirname(parent)
 if actual_files!=expected_files or actual_dirs!=expected_dirs: bad('tree mismatch')
 for name,digest in files.items():
  with open(os.path.join(root,name),'rb') as handle:
   if hashlib.sha256(handle.read()).hexdigest()!=digest: bad('hash mismatch')
 PYTREE
 }
+validate_inputs() {
+ sudo test -d "$releases"; sudo test ! -L "$releases"
+ test "$previous_sha" != "$release_sha"
+ sudo test -d "$previous"; sudo test ! -L "$previous"; verify_tree "$previous" "$previous_sha"
+ sudo test -L "$current"
+ failed_target="$(sudo readlink -f "$current")"
+ test "$failed_target" = "$releases/$release_sha"
+ sudo test -d "$failed_target"; sudo test ! -L "$failed_target"; verify_tree "$failed_target" "$release_sha"
+ test -d "$upload"; test ! -L "$upload"; test -O "$upload"
+ test -f "$state"; test ! -L "$state"; test -O "$state"
+ {
+  IFS= read -r mode || return 1
+  IFS= read -r backup || return 1
+  IFS= read -r backup_sha || return 1
+  extra=''
+  if IFS= read -r extra || test -n "$extra"; then return 1; fi
+ } < "$state"
+ sudo test -f "$active"; sudo test ! -L "$active"
+ test "$(sudo sha256sum "$active" | awk '{print $1}')" = "$config_sha"
+ candidate_count=0; only_candidate=''
+ while IFS= read -r -d '' found_candidate; do candidate_count=$((candidate_count + 1)); only_candidate="$found_candidate"; done < <(find "$upload" -mindepth 1 -maxdepth 1 -type f -name 'nginx-*.conf' -print0)
+ test "$candidate_count" -eq 1
+ test "$only_candidate" = "$candidate_config"
+ test -f "$candidate_config"; test ! -L "$candidate_config"; test -O "$candidate_config"
+ test "$(sha256sum "$candidate_config" | awk '{print $1}')" = "$config_sha"
+ case "$mode" in
+  unchanged) test -z "$backup$backup_sha" ;;
+  present)
+   printf '%s' "$backup_sha" | grep -Eq '^[0-9a-f]{64}$'
+   test "$backup" = "/etc/nginx/conf.d/.canranstudio-http.conf-$config_sha-$backup_sha.predeploy"
+   sudo test -f "$backup"; sudo test ! -L "$backup"
+   test "$(sudo sha256sum "$backup" | awk '{print $1}')" = "$backup_sha"
+   ;;
+  absent) test -z "$backup$backup_sha" ;;
+  *) echo 'invalid configuration rollback state' >&2; return 1 ;;
+ esac
+ if sudo test -e "$lock" || sudo test -L "$lock"; then echo 'lock already owned' >&2; return 1; fi
+ if sudo test -e "$next_link" || sudo test -L "$next_link"; then echo 'rollback temporary link exists' >&2; return 1; fi
+ if sudo test -e "$compensation_link" || sudo test -L "$compensation_link"; then echo 'compensation temporary link exists' >&2; return 1; fi
+}
 cleanup() {
  status=$?
- if test -n "$next_link" && { sudo test -e "$next_link" || sudo test -L "$next_link"; }; then sudo rm -f -- "$next_link"; fi
+ trap - EXIT
+ set +e
+ if test "$mutated" -eq 1 && test "$success" -eq 0 && test "$compensating" -eq 0; then
+  compensating=1
+  compensation_failed=0
+  if ! test -f "$candidate_config" || test -L "$candidate_config" ||
+     ! test "$(sha256sum "$candidate_config" | awk '{print $1}')" = "$config_sha" ||
+     ! sudo cp -p -- "$candidate_config" "$active" ||
+     ! sudo test -f "$active" || sudo test -L "$active" ||
+     ! test "$(sudo sha256sum "$active" | awk '{print $1}')" = "$config_sha"; then
+   compensation_failed=1
+  fi
+  if sudo ln -s -- "$failed_target" "$compensation_link"; then
+   compensation_link_owned=1
+   if sudo mv -Tf -- "$compensation_link" "$current"; then compensation_link_owned=0; else compensation_failed=1; fi
+  else
+   compensation_failed=1
+  fi
+  if ! sudo test -L "$current" || ! test "$(sudo readlink -f "$current")" = "$failed_target"; then compensation_failed=1; fi
+  if sudo nginx -t; then
+   if ! sudo systemctl reload nginx; then compensation_failed=1; fi
+  else
+   compensation_failed=1
+  fi
+  if test "$compensation_failed" -eq 0; then
+   echo 'rollback failed; candidate state restored' >&2
+  else
+   echo 'ROLLBACK AND COMPENSATION FAILED; operator escalation required' >&2
+  fi
+ fi
+ if test "$next_link_owned" -eq 1; then sudo rm -f -- "$next_link"; fi
+ if test "$compensation_link_owned" -eq 1; then sudo rm -f -- "$compensation_link"; fi
  if test "$lock_owned" -eq 1; then sudo rmdir -- "$lock" 2>/dev/null || true; fi
  exit "$status"
 }
 trap cleanup EXIT
-sudo install -d -m 0755 "$releases"
+validate_inputs
 if ! sudo mkdir -- "$lock"; then echo 'lock already owned' >&2; exit 1; fi
 lock_owned=1
-sudo test -d "$previous"; verify_tree "$previous" "$previous_sha"
-if sudo test -e "$next_link" || sudo test -L "$next_link"; then echo 'temporary link exists' >&2; exit 1; fi
-sudo ln -s -- "$previous" "$next_link"; sudo mv -Tf -- "$next_link" "$current"; next_link=''
-test -f "$state"; IFS= read -r mode < "$state"; backup="$(sed -n '2p' "$state")"; backup_sha="$(sed -n '3p' "$state")"
+mutated=1
 case "$mode" in
  unchanged) ;;
- present) test "$backup" = "/etc/nginx/conf.d/.canranstudio-http.conf-$config_sha-$backup_sha.predeploy"; printf '%s' "$backup_sha" | grep -Eq '^[0-9a-f]{64}$'; test "$(sudo sha256sum "$backup" | awk '{print $1}')" = "$backup_sha"; sudo cp -p -- "$backup" "$active" ;;
+ present) sudo cp -p -- "$backup" "$active" ;;
  absent) sudo rm -f -- "$active" ;;
- *) echo 'invalid configuration rollback state' >&2; exit 1 ;;
 esac
-sudo nginx -t; sudo systemctl reload nginx
+sudo nginx -t
+sudo ln -s -- "$previous" "$next_link"; next_link_owned=1
+sudo mv -Tf -- "$next_link" "$current"; next_link_owned=0
+sudo systemctl reload nginx
+success=1
 echo "full rollback completed: $previous / $mode"
 REMOTE
 ~~~
@@ -467,8 +542,10 @@ verify:live:http. A dist artifact from the failed release is expected to hash-mi
 
 After a successful live gate, or before retrying a failed transfer, run this self-contained cleanup.
 It constructs only the fixed private SHA path, requires current-user ownership and no symlink, and
-allows only the expected regular archive/config/state names (a partial upload is allowed). Any
-unexpected entry stops for manual inspection rather than widening deletion scope.
+allows only the expected regular archive/config/state names (a partial upload is allowed). It first
+records and validates the complete NUL-delimited directory snapshot, including hidden entries, and
+only then removes the validated regular files. Any unexpected entry stops before the upload
+directory or any of its contents changes.
 
 ~~~bash
 set -euo pipefail
@@ -484,16 +561,22 @@ require_sha "$RELEASE_SHA"; require_sha256 "$ARCHIVE_SHA"; require_sha256 "$CONF
 ssh "$CANRAN_DEPLOY_TARGET" "bash -s -- $RELEASE_SHA $ARCHIVE_SHA $CONFIG_SHA" <<'REMOTE'
 set -euo pipefail
 release_sha=$1; archive_sha=$2; config_sha=$3
+command -v find >/dev/null; command -v mktemp >/dev/null
 upload="/var/tmp/canranstudio-upload-$release_sha-$archive_sha-$config_sha"
 test -d "$upload"; test ! -L "$upload"; test -O "$upload"
-for entry in "$upload"/*; do
- test -e "$entry" || continue
+entry_list="$(mktemp /var/tmp/canranstudio-cleanup.XXXXXX)"
+cleanup_list() { status=$?; trap - EXIT; rm -f -- "$entry_list"; exit "$status"; }
+trap cleanup_list EXIT
+find "$upload" -mindepth 1 -maxdepth 1 -print0 > "$entry_list"
+while IFS= read -r -d '' entry; do
+ test -e "$entry" || test -L "$entry"
  test -f "$entry"; test ! -L "$entry"
  case "$(basename "$entry")" in
   "release-$release_sha-$archive_sha.tar.gz"|"nginx-$release_sha-$config_sha.conf"|"config-state-$release_sha-$config_sha") ;;
   *) echo "unexpected upload entry: $entry" >&2; exit 1 ;;
  esac
-done
-rm -rf -- "$upload"
+done < "$entry_list"
+while IFS= read -r -d '' entry; do rm -f -- "$entry"; done < "$entry_list"
+rmdir -- "$upload"
 REMOTE
 ~~~
