@@ -476,3 +476,23 @@ test('buildStatic rejects outputs overlapping absent optional inputs', async t =
   await assert.rejects(buildStatic({ root, out: path.join(alias, 'assets', 'dist') }), /overlaps public input/);
   await assert.rejects(fs.stat(assets), { code: 'ENOENT' });
 });
+
+test('buildStatic recognizes a valid artifact regardless of directory traversal order', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-ownership-order-'));
+  const root = path.join(sandbox, 'repo');
+  const out = path.join(sandbox, 'out');
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+  await fs.mkdir(path.join(root, 'core', 'a'), { recursive: true });
+  await fs.writeFile(path.join(root, 'core', 'a', 'z.js'), 'nested public file');
+  await fs.writeFile(path.join(root, 'core', 'a-foo.js'), 'sibling public file');
+  execFileSync('git', ['add', 'core'], { cwd: root });
+  execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+    'commit', '--quiet', '-m', 'add traversal-order public files'], { cwd: root });
+
+  await buildStatic({ root, out });
+  const firstManifest = await fs.readFile(path.join(out, 'release-manifest.json'));
+  await buildStatic({ root, out });
+  assert.deepEqual(await fs.readFile(path.join(out, 'release-manifest.json')), firstManifest);
+});

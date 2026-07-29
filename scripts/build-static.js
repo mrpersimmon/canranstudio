@@ -279,10 +279,13 @@ async function assertOwnedOutput(out) {
     throw new Error('refusing to replace an unowned build output');
   }
   const expected = [...files, 'release-manifest.json'].sort(comparePaths);
+  const actualFiles = [...actual.files].sort(comparePaths);
+  const actualDirectories = [...actual.directories].sort(comparePaths);
+  const expectedDirectories = artifactAncestors(files);
   if (
-    actual.files.length !== expected.length || actual.files.some((file, index) => file !== expected[index]) ||
-    actual.directories.length !== artifactAncestors(files).length ||
-    actual.directories.some((directory, index) => directory !== artifactAncestors(files)[index])
+    actualFiles.length !== expected.length || actualFiles.some((file, index) => file !== expected[index]) ||
+    actualDirectories.length !== expectedDirectories.length ||
+    actualDirectories.some((directory, index) => directory !== expectedDirectories[index])
   ) {
     throw new Error('refusing to replace an unowned build output');
   }
