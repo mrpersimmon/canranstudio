@@ -571,8 +571,8 @@ find "$upload" -mindepth 1 -maxdepth 1 -print0 > "$entry_list"
 while IFS= read -r -d '' entry; do
  test -e "$entry" || test -L "$entry"
  test -f "$entry"; test ! -L "$entry"
- case "$(basename "$entry")" in
-  "release-$release_sha-$archive_sha.tar.gz"|"nginx-$release_sha-$config_sha.conf"|"config-state-$release_sha-$config_sha") ;;
+ case "$entry" in
+  "$upload/release-$release_sha-$archive_sha.tar.gz"|"$upload/nginx-$release_sha-$config_sha.conf"|"$upload/config-state-$release_sha-$config_sha") ;;
   *) echo "unexpected upload entry: $entry" >&2; exit 1 ;;
  esac
 done < "$entry_list"
