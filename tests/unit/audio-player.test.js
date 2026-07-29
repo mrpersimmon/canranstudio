@@ -206,3 +206,180 @@ test('unsupported playback still completes exactly once', () => {
   assert.deepEqual(results, [{ reason: 'unsupported', sourceFailed: false }]);
   assert.equal(player.isActive(), false);
 });
+
+test('a reentrant latest play supersedes its outer request without orphaning media', () => {
+  const { player, clock } = makePlayer();
+  const results = { a: [], b: [], c: [] };
+  let cHandle;
+
+  player.play({
+    text: 'apple',
+    src: 'audio/apple.mp3',
+    onFinish: result => {
+      results.a.push(result);
+      if (result.reason === 'cancelled') {
+        cHandle = player.play({
+          text: 'cherry',
+          src: 'audio/cherry.mp3',
+          onFinish: value => results.c.push(value)
+        });
+      }
+    }
+  });
+  const bHandle = player.play({
+    text: 'banana',
+    src: 'audio/banana.mp3',
+    onFinish: result => results.b.push(result)
+  });
+
+  assert.equal(FakeAudio.instances.length, 2);
+  assert.deepEqual(results.a, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.deepEqual(results.b, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.deepEqual(results.c, []);
+  assert.equal(player.isActive(), true);
+
+  bHandle.cancel();
+  assert.deepEqual(results.b, [{ reason: 'cancelled', sourceFailed: false }]);
+  player.stop();
+  cHandle.cancel();
+  assert.deepEqual(results.c, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.equal(FakeAudio.instances[1].paused, true);
+  assert.equal(clock.pending(), 0);
+  assert.equal(player.isActive(), false);
+});
+
+test('a superseded request can reenter from its own finish callback safely', () => {
+  const { player, clock } = makePlayer();
+  const results = { a: [], b: [], c: [], d: [] };
+
+  player.play({
+    text: 'apple',
+    src: 'audio/apple.mp3',
+    onFinish: result => {
+      results.a.push(result);
+      if (result.reason === 'cancelled') {
+        player.play({
+          text: 'cherry',
+          src: 'audio/cherry.mp3',
+          onFinish: value => results.c.push(value)
+        });
+      }
+    }
+  });
+  const bHandle = player.play({
+    text: 'banana',
+    src: 'audio/banana.mp3',
+    onFinish: result => {
+      results.b.push(result);
+      if (result.reason === 'cancelled') {
+        player.play({
+          text: 'date',
+          src: 'audio/date.mp3',
+          onFinish: value => results.d.push(value)
+        });
+      }
+    }
+  });
+
+  assert.equal(FakeAudio.instances.length, 3);
+  assert.deepEqual(results.a, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.deepEqual(results.b, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.deepEqual(results.c, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.deepEqual(results.d, []);
+  bHandle.cancel();
+  player.stop();
+  assert.deepEqual(results.b, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.deepEqual(results.d, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.equal(clock.pending(), 0);
+  assert.equal(player.isActive(), false);
+});
+
+test('explicit stop and later handle cancellation clean audio exactly once', () => {
+  const { player, clock } = makePlayer();
+  const results = [];
+  const handle = player.play({
+    text: 'apple',
+    src: 'audio/apple.mp3',
+    onFinish: result => results.push(result)
+  });
+  const audio = FakeAudio.instances[0];
+
+  player.stop();
+  handle.cancel();
+  audio.dispatchEvent(new Event('ended'));
+
+  assert.deepEqual(results, [{ reason: 'cancelled', sourceFailed: false }]);
+  assert.equal(audio.paused, true);
+  assert.equal(audio.currentTime, 0);
+  assert.equal(clock.pending(), 0);
+  assert.equal(player.isActive(), false);
+});
+
+test('audio timeout falls back with source failure and ignores late audio events', () => {
+  const { player, speechSynthesis, clock } = makePlayer();
+  const results = [];
+
+  player.play({
+    text: 'apple',
+    src: 'audio/apple.mp3',
+    onFinish: result => results.push(result)
+  });
+  const audio = FakeAudio.instances[0];
+  clock.runNext();
+  audio.dispatchEvent(new Event('error'));
+  audio.dispatchEvent(new Event('ended'));
+  speechSynthesis.spoken[0].onend();
+
+  assert.deepEqual(results, [{ reason: 'ended', sourceFailed: true }]);
+  assert.equal(clock.pending(), 0);
+});
+
+test('audio construction and synchronous play failures cache the source before fallback', () => {
+  let constructionAttempts = 0;
+  class ThrowingConstructorAudio {
+    constructor() {
+      constructionAttempts += 1;
+      throw new Error('bad source');
+    }
+  }
+  const first = makePlayer({ AudioCtor: ThrowingConstructorAudio });
+
+  first.player.play({ text: 'apple', src: 'audio/apple.mp3' });
+  first.speechSynthesis.spoken[0].onend();
+  first.player.play({ text: 'apple', src: 'audio/apple.mp3' });
+  assert.equal(constructionAttempts, 1);
+
+  let playAttempts = 0;
+  class ThrowingPlayAudio extends FakeAudio {
+    play() {
+      playAttempts += 1;
+      throw new Error('blocked');
+    }
+  }
+  const second = makePlayer({ AudioCtor: ThrowingPlayAudio });
+  second.player.play({ text: 'pear', src: 'audio/pear.mp3' });
+  second.speechSynthesis.spoken[0].onend();
+  second.player.play({ text: 'pear', src: 'audio/pear.mp3' });
+  assert.equal(playAttempts, 1);
+});
+
+test('synchronous speech failure and late captured utterance handlers are terminal once', () => {
+  const throwingSpeech = fakeSpeech();
+  throwingSpeech.speak = () => {
+    throw new Error('speech unavailable');
+  };
+  const failed = makePlayer({ AudioCtor: null, speechSynthesis: throwingSpeech });
+  const failures = [];
+  failed.player.play({ text: 'apple', onFinish: result => failures.push(result) });
+  assert.deepEqual(failures, [{ reason: 'error', sourceFailed: false }]);
+
+  const { player, speechSynthesis } = makePlayer({ AudioCtor: null });
+  const results = [];
+  player.play({ text: 'banana', onFinish: result => results.push(result) });
+  const utterance = speechSynthesis.spoken[0];
+  const lateEnd = utterance.onend;
+  const lateError = utterance.onerror;
+  lateEnd();
+  lateError();
+  assert.deepEqual(results, [{ reason: 'ended', sourceFailed: false }]);
+});

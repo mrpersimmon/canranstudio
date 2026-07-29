@@ -33,6 +33,7 @@
     );
     const failedSources = new Set();
     let active = null;
+    let generation = 0;
 
     function clearTimer(session) {
       if (session.timer !== null) {
@@ -177,7 +178,7 @@
     }
 
     function play(request) {
-      stop('cancelled');
+      const requestGeneration = ++generation;
       const session = {
         text: String(request.text ?? ''),
         src: request.src || '',
@@ -195,6 +196,15 @@
         timer: null,
         finished: false
       };
+      stop('cancelled');
+      if (generation !== requestGeneration) {
+        finish(session, 'cancelled');
+        return {
+          cancel() {
+            finish(session, 'cancelled');
+          }
+        };
+      }
       active = session;
       startAudio(session);
       return {
