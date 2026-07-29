@@ -197,14 +197,10 @@ footer .tip{background:var(--paper);border:3px solid var(--brown);border-radius:
   </div>
 </footer>
 
+<script src="/core/storage.js"></script>
+<script src="/core/progress.js"></script>
 <script>
 /* 读取两课星星进度并渲染 */
-function readStars(key){
-  try{
-    const s=JSON.parse(localStorage.getItem(key)||'{}')||{};
-    return ['l1','l2','l3','l4','l5'].reduce((t,l)=>t+(+s[l]||0),0);
-  }catch(e){return 0;}
-}
 function renderProg(n,fillId,txtId,btnId,max){
   max=max||15;
   const t=Math.max(0,Math.min(max,n));
@@ -214,11 +210,17 @@ function renderProg(n,fillId,txtId,btnId,max){
   if(t>=max){btn.textContent='🏆 已通关 · 再玩一次';}
   else if(t>0){btn.textContent='▶️ 继续冒险（⭐ '+t+'）';}
 }
-/* 音标课星星是整数存储（满分 12），与 NCE 课的 {l1..l5} 结构不同 */
-function readIntStars(key){try{return parseInt(localStorage.getItem(key)||'0')||0;}catch(e){return 0;}}
-renderProg(readStars('l49-stars-v1'),'pf49','pt49','btn49');
-renderProg(readStars('l50-stars-v1'),'pf50','pt50','btn50');
-renderProg(readIntStars('phonics-magic-stars-v1'),'pfSM','ptSM','btnSM',12);
+const COURSE_LEVELS=['l1','l2','l3','l4','l5'];
+const SOUND_LEVELS=['vs','g1','g2','g3'];
+function loadTotal(key,legacyKey,ids,legacyMode){
+  const result=CanranCore.storage.loadProgress({
+    storage:localStorage,key,legacyKey,ids,legacyMode
+  });
+  return CanranCore.progress.totalRatings(result.progress.ratings,ids);
+}
+renderProg(loadTotal('canran:l49:progress:v2','l49-stars-v1',COURSE_LEVELS,'ratings'),'pf49','pt49','btn49');
+renderProg(loadTotal('canran:l50:progress:v2','l50-stars-v1',COURSE_LEVELS,'ratings'),'pf50','pt50','btn50');
+renderProg(loadTotal('canran:soundmark:progress:v2','phonics-magic-stars-v1',SOUND_LEVELS,'reset'),'pfSM','ptSM','btnSM',12);
 </script>
 </body>
 </html>

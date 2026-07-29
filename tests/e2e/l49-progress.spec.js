@@ -1,0 +1,47 @@
+'use strict';
+
+const { test, expect } = require('@playwright/test');
+
+test('Lesson 49 repairs legacy ratings and does not crash on negative values', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('l49-stars-v1', JSON.stringify({
+      l1: -1,
+      l2: '2.9',
+      l3: 999,
+      l4: null,
+      l5: 1
+    }));
+  });
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  await page.goto('/');
+
+  expect(errors).toEqual([]);
+  await expect(page.locator('#st-l1')).toHaveText('☆☆☆');
+  await expect(page.locator('#st-l2')).toHaveText('★★☆');
+  const saved = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem('canran:l49:progress:v2'))
+  );
+  expect(saved.ratings).toEqual({ l1: 0, l2: 2, l3: 3, l4: 0, l5: 1 });
+  await expect(page.locator('#certBtn')).toBeDisabled();
+  await page.locator('#certBtn').evaluate(button => { button.disabled = false; });
+  await page.locator('#certBtn').click();
+  await expect(page.locator('#certModal')).not.toBeVisible();
+});
+
+test('Lesson 49 certificate requires all five levels', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
+      version: 2,
+      ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 }
+    }));
+  });
+
+  await page.goto('/');
+
+  await expect(page.locator('#certArea')).toBeVisible();
+  await expect(page.locator('#certBtn')).toBeEnabled();
+  await page.locator('#certBtn').click();
+  await expect(page.locator('#certModal')).toBeVisible();
+});

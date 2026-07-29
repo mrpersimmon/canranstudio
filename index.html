@@ -790,10 +790,11 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
         <p style="font-size:24px;font-weight:800">得分：<span id="quizScore" style="color:var(--red)">0 / 8</span></p>
         <p style="font-size:34px" id="quizStars">☆☆☆</p>
         <button class="btn btn-mini btn-yellow" id="quizAgain">🔄 再考一次</button>
-        <div id="certArea" class="hidden">
-          <input id="certName" maxlength="12" placeholder="写上你的大名 ✍️">
-          <button class="btn btn-green" id="certBtn">📜 生成结业证书</button>
-        </div>
+      </div>
+      <div id="certArea" class="hidden">
+        <input id="certName" maxlength="12" placeholder="写上你的大名 ✍️">
+        <button class="btn btn-green" id="certBtn">📜 生成结业证书</button>
+        <span id="certGateMsg" role="status" aria-live="polite"></span>
       </div>
     </div>
   </div>
@@ -822,6 +823,8 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 <footer>
   🥩 肉店大冒险 · 新概念英语第一册 Lesson 49 互动课件 ｜ 给爱英语的你 ❤️
 </footer>
+<script src="/core/storage.js"></script>
+<script src="/core/progress.js"></script>
 <script>
 'use strict';
 /* ================= 工具 ================= */
@@ -1031,26 +1034,49 @@ function speak(t){
 }
 
 /* ================= 星星系统（localStorage） ================= */
-const STAR_KEY='l49-stars-v1';
+const STAR_KEY='canran:l49:progress:v2';
 const LVLS=['l1','l2','l3','l4','l5'];
-let stars={};
-try{stars=JSON.parse(localStorage.getItem(STAR_KEY)||'{}')||{};}catch(e){stars={};}
-function getStar(l){return stars[l]||0;}
+const l49Loaded=CanranCore.storage.loadProgress({
+  storage:localStorage,
+  key:STAR_KEY,
+  legacyKey:'l49-stars-v1',
+  ids:LVLS,
+  legacyMode:'ratings'
+});
+let stars=l49Loaded.progress.ratings;
+function getStar(l){return stars[l];}
 function starStr(n){return '★'.repeat(n)+'☆'.repeat(3-n);}
-function totalStars(){return LVLS.reduce((s,l)=>s+getStar(l),0);}
+function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
+function canIssueL49Certificate(){return CanranCore.progress.allAtLeast(stars,LVLS,1);}
+function renderL49CertificateGate(){
+  const area=$('#certArea'),button=$('#certBtn'),message=$('#certGateMsg');
+  const attemptedFinal=getStar('l5')>0;
+  area.classList.toggle('hidden',!attemptedFinal);
+  button.disabled=!canIssueL49Certificate();
+  const missing=LVLS.filter(level=>getStar(level)<1).length;
+  message.textContent=missing===0?'五关已完成，可以生成证书。':'还需完成 '+missing+' 个关卡。';
+}
+function persistStars(){
+  const saved=CanranCore.storage.saveProgress({
+    storage:localStorage,
+    key:STAR_KEY,
+    progress:{version:2,ratings:stars},
+    ids:LVLS
+  });
+  stars=saved.progress.ratings;
+}
 function renderStars(){
   LVLS.forEach(l=>{const el=document.getElementById('st-'+l);if(el)el.textContent=starStr(getStar(l));});
   const t=totalStars();
   $('#starCount').textContent=t;
   $('#starFill').style.width=(t/15*100)+'%';
+  renderL49CertificateGate();
 }
 function award(l,n){
-  n=Math.max(1,Math.min(3,n));
-  if(n>getStar(l)){
-    stars[l]=n;
-    try{localStorage.setItem(STAR_KEY,JSON.stringify(stars));}catch(e){}
-    renderStars();sndStar();
-  }
+  const awarded=CanranCore.progress.awardRating(stars,l,n);
+  if(!awarded.changed)return;
+  stars=awarded.ratings;
+  persistStars();renderStars();sndStar();
 }
 
 /* ================= 撒花 ================= */
@@ -1643,14 +1669,18 @@ function showEX(){
 }
 function finishEX(){
   const s=EX.ok;
-  const st=s>=7?3:(s>=5?2:1);
-  award('l5',st);
+  const st=CanranCore.progress.ratingFor(s,[
+    {min:7,rating:3},
+    {min:5,rating:2},
+    {min:1,rating:1}
+  ]);
+  if(st>0)award('l5',st);
+  renderStars();
   $('#quizBox').classList.add('hidden');
   $('#quizResult').classList.remove('hidden');
   $('#quizEmoji').textContent=s>=7?'🏆':(s>=5?'🎉':'💪');
   $('#quizScore').textContent=s+' / '+EXAM.length;
   $('#quizStars').textContent=starStr(st);
-  $('#certArea').classList.remove('hidden');
   if(st>=2){confetti(130);fanfare();}else{sndCorrect();}
 }
 $('#quizStartBtn').addEventListener('click',()=>{sndClick();startExam();});
@@ -1658,6 +1688,10 @@ $('#quizAgain').addEventListener('click',()=>{sndClick();startExam();});
 
 /* ================= 结业证书 ================= */
 $('#certBtn').addEventListener('click',()=>{
+  if(!canIssueL49Certificate()){
+    renderL49CertificateGate();
+    return;
+  }
   const n=$('#certName').value.trim()||'小学徒';
   $('#certNameOut').textContent=n;
   $('#certDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
