@@ -114,6 +114,53 @@ test('Lesson 49 flip cards expose independent keyboard state and isolate speaker
   expect(errors).toEqual([]);
 });
 
+test('Lesson 49 card initialization is idempotent without replacing accessible state', async ({ page }) => {
+  await page.goto('/lesson49/');
+
+  const cards = page.locator('#cardGrid .fcard-in');
+  await expect(cards).toHaveCount(17);
+  await cards.first().evaluate(element => {
+    window.__eh2InitialCard = element;
+  });
+
+  await page.evaluate(() => {
+    buildCards();
+    buildCards();
+  });
+
+  await expect(cards).toHaveCount(17);
+  const evidence = await cards.evaluateAll(elements => {
+    const labelIds = elements.map(element => element.getAttribute('aria-labelledby'));
+    return {
+      sameFirstCard: elements[0] === window.__eh2InitialCard,
+      uniqueLabelIds: new Set(labelIds).size,
+      exactLabelTargets: labelIds.every(labelId =>
+        [...document.querySelectorAll('[id]')]
+          .filter(candidate => candidate.id === labelId).length === 1
+      )
+    };
+  });
+  expect(evidence.sameFirstCard).toBe(true);
+  expect(evidence.uniqueLabelIds).toBe(17);
+  expect(evidence.exactLabelTargets).toBe(true);
+
+  const firstCard = cards.first();
+  await firstCard.focus();
+  await page.keyboard.press('Enter');
+  await expect(firstCard).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Space');
+  await expect(firstCard).toHaveAttribute('aria-expanded', 'false');
+
+  const liveRegionsRemainInitialized = await page.locator('.fb').evaluateAll(elements =>
+    elements.length > 0 && elements.every(element =>
+      element.getAttribute('role') === 'status' &&
+      element.getAttribute('aria-live') === 'polite' &&
+      element.getAttribute('aria-atomic') === 'true'
+    )
+  );
+  expect(liveRegionsRemainInitialized).toBe(true);
+});
+
 test('Lesson 49 retains live feedback semantics after a feedback update', async ({ page }) => {
   await page.goto('/lesson49/');
   await expectFeedbackRegions(page);

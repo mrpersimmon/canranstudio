@@ -1070,6 +1070,8 @@ $('#startBtn').addEventListener('click',()=>{sndClick();document.getElementById(
 /* ================= 第一关：单词卡 ================= */
 function buildCards(){
   const g=$('#cardGrid');
+  if(g.dataset.cardsInitialized==='true')return;
+  const fragment=document.createDocumentFragment();
   WORDS.concat(PHRASES).forEach((w,i)=>{
     const c=document.createElement('div');
     c.className='fcard bounce-in';
@@ -1122,8 +1124,10 @@ function buildCards(){
       toggleCard();
     });
     c.querySelector('.spk').addEventListener('click',e=>{e.stopPropagation();speak(w.en);});
-    g.appendChild(c);
+    fragment.appendChild(c);
   });
+  g.appendChild(fragment);
+  g.dataset.cardsInitialized='true';
 }
 
 /* ================= 第一关：听音挑肉 ================= */
