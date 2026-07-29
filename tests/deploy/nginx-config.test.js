@@ -116,6 +116,26 @@ function one(nodes, name, args) {
   return matches[0];
 }
 
+function leaf(name, args) {
+  return { name, args, children: null };
+}
+
+function block(name, args) {
+  return { name, args, children: [] };
+}
+
+function nodeSignature(node) {
+  return JSON.stringify([node.children === null ? 'leaf' : 'block', node.name, node.args]);
+}
+
+function assertExactChildren(nodes, expected, label) {
+  assert.deepEqual(
+    nodes.map(nodeSignature).sort(),
+    expected.map(nodeSignature).sort(),
+    `${label} direct children must match the exact whitelist`
+  );
+}
+
 function assertNoTransportUpgrade(nodes) {
   for (const node of nodes) {
     assert.notEqual(node.name, 'ssl');
@@ -132,9 +152,37 @@ function assertNoTransportUpgrade(nodes) {
 
 function assertHttpContract(text) {
   const root = parseNginx(text);
+  assertExactChildren(root, [block('server', [])], 'root');
   const server = one(root, 'server', []);
-  assert.equal(root.length, 1, 'only one server block is allowed');
   const children = server.children;
+
+  const redirects = [
+    ['/home', '/'],
+    ['/home/', '/'],
+    ['/home/index.html', '/'],
+    ['/lesson49', '/lesson49/'],
+    ['/lesson50', '/lesson50/'],
+    ['/soundmark', '/soundmark/']
+  ];
+  assertExactChildren(children, [
+    leaf('listen', ['80']),
+    leaf('listen', ['[::]:80']),
+    leaf('server_name', ['59.110.217.36']),
+    leaf('root', ['/var/www/canranstudio/current']),
+    leaf('index', ['index.html']),
+    leaf('charset', ['utf-8']),
+    leaf('server_tokens', ['off']),
+    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
+    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
+    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
+    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
+    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
+    leaf('add_header', ['Cache-Control', 'no-cache', 'always']),
+    block('if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']),
+    ...redirects.map(([source]) => block('location', ['=', source])),
+    block('location', ['/']),
+    block('location', ['~', '/\\.'])
+  ], 'server');
 
   assert.deepEqual(direct(children, 'listen').map(node => node.args), [['80'], ['[::]:80']]);
   for (const [name, args] of [
@@ -157,35 +205,28 @@ function assertHttpContract(text) {
   ]);
 
   const guard = one(children, 'if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']);
-  assert.equal(direct(children, 'if').length, 1, 'only the method guard is allowed');
+  assertExactChildren(guard.children, [leaf('return', ['405'])], 'method guard');
   one(guard.children, 'return', ['405']);
-  assert.equal(guard.children.length, 1, 'method guard must only return 405');
 
-  for (const [source, destination] of [
-    ['/home', '/'],
-    ['/home/', '/'],
-    ['/home/index.html', '/'],
-    ['/lesson49', '/lesson49/'],
-    ['/lesson50', '/lesson50/'],
-    ['/soundmark', '/soundmark/']
-  ]) {
+  for (const [source, destination] of redirects) {
     const location = one(children, 'location', ['=', source]);
+    assertExactChildren(location.children, [leaf('return', ['308', destination])], `redirect ${source}`);
     one(location.children, 'return', ['308', destination]);
-    assert.equal(location.children.length, 1, `redirect ${source} must only return 308`);
   }
-  assert.equal(direct(children, 'location').length, 8, 'expected six redirects and two content locations');
 
   const staticLocation = one(children, 'location', ['/']);
-  assert.equal(direct(staticLocation.children, 'try_files').length, 1, 'expected one static fallback');
-  assert.equal(direct(staticLocation.children, 'limit_except').length, 1, 'expected one method depth guard');
+  assertExactChildren(staticLocation.children, [
+    leaf('try_files', ['$uri', '$uri/', '=404']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'static location');
   one(staticLocation.children, 'try_files', ['$uri', '$uri/', '=404']);
   const limitExcept = one(staticLocation.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(limitExcept.children, [leaf('deny', ['all'])], 'limit_except');
   one(limitExcept.children, 'deny', ['all']);
-  assert.equal(limitExcept.children.length, 1, 'limit_except must only deny');
 
   const dotfiles = one(children, 'location', ['~', '/\\.']);
+  assertExactChildren(dotfiles.children, [leaf('deny', ['all'])], 'dotfile location');
   one(dotfiles.children, 'deny', ['all']);
-  assert.equal(dotfiles.children.length, 1, 'dotfile rule must only deny');
   assertNoTransportUpgrade(root);
 }
 
@@ -238,10 +279,24 @@ test('Nginx tokenizer keeps comment markers and delimiters inside quoted argumen
 test('Nginx contract does not accept directives forged only in comments', () => {
   assert.throws(
     () => assertHttpContract('server { # listen 80;\n # if ($request_method !~ ^(GET|HEAD)$) { return 405; }\n }'),
-    /Expected values to be strictly deep-equal/
+    /exact whitelist/
   );
 });
 
 test('Nginx contract does not accept active directive text hidden in set strings', () => {
-  assert.throws(() => assertHttpContract(ACTIVE_STRING_FORGERY), /Expected values to be strictly deep-equal/);
+  assert.throws(() => assertHttpContract(ACTIVE_STRING_FORGERY), /exact whitelist/);
+});
+
+test('Nginx contract rejects legal directives that alter error or header semantics', () => {
+  const altered = config
+    .replace(
+      '    server_tokens off;\n',
+      '    server_tokens off;\n    error_page 404 405 =200 /index.html;\n'
+    )
+    .replace(
+      '        try_files $uri $uri/ =404;\n',
+      '        try_files $uri $uri/ =404;\n        add_header X-Debug forged;\n'
+    );
+
+  assert.throws(() => assertHttpContract(altered), /exact whitelist/);
 });
