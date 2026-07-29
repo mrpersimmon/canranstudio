@@ -3,6 +3,11 @@
 const { test, expect } = require('@playwright/test');
 
 test.beforeEach(async ({ page }) => {
+  await page.route('**/*', route => {
+    const url = new URL(route.request().url());
+    if (url.origin === 'http://127.0.0.1:4173') return route.continue();
+    return route.abort();
+  });
   await page.addInitScript(() => {
     localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
       version: 2,
@@ -138,6 +143,70 @@ test('Lesson 49 replaces an active overlay without leaking either URL', async ({
   ]);
 });
 
+test('Lesson 49 keeps exactly one URL owner when two asynchronous saves complete in reverse order', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    window.__pendingCertificateBlobs = [];
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      window.__certificate.toBlobCalls += 1;
+      window.__pendingCertificateBlobs.push(callback);
+    };
+    window.__saveResults = [
+      saveCertImage().then(() => 'fulfilled', () => 'rejected'),
+      saveCertImage().then(() => 'fulfilled', () => 'rejected')
+    ];
+  });
+  await expect.poll(() => page.evaluate(() => window.__pendingCertificateBlobs.length)).toBe(2);
+
+  expect(await page.evaluate(() => ({
+    overlays: document.querySelectorAll('#certSaveOverlay').length,
+    created: window.__certificate.createdUrls,
+    revoked: window.__certificate.revokedUrls
+  }))).toEqual({ overlays: 0, created: [], revoked: [] });
+
+  await page.evaluate(() => {
+    window.__pendingCertificateBlobs[1](new Blob(['newer'], { type: 'image/png' }));
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  await expect.poll(() => page.evaluate(() => window.__certificate.createdUrls.length)).toBe(1);
+  expect(await page.evaluate(() => ({
+    overlays: document.querySelectorAll('#certSaveOverlay').length,
+    owner: document.querySelector('#certSaveOverlay img').getAttribute('src'),
+    created: window.__certificate.createdUrls.map(item => item.value),
+    revoked: window.__certificate.revokedUrls
+  }))).toEqual({
+    overlays: 1,
+    owner: 'blob:canran-1',
+    created: ['blob:canran-1'],
+    revoked: []
+  });
+
+  await page.evaluate(() => {
+    window.__pendingCertificateBlobs[0](new Blob(['older'], { type: 'image/png' }));
+  });
+  await expect.poll(() => page.evaluate(() => window.__certificate.createdUrls.length)).toBe(2);
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  expect(await page.evaluate(() => ({
+    overlays: document.querySelectorAll('#certSaveOverlay').length,
+    owner: document.querySelector('#certSaveOverlay img').getAttribute('src'),
+    created: window.__certificate.createdUrls.map(item => item.value),
+    revoked: window.__certificate.revokedUrls
+  }))).toEqual({
+    overlays: 1,
+    owner: 'blob:canran-2',
+    created: ['blob:canran-1', 'blob:canran-2'],
+    revoked: ['blob:canran-1']
+  });
+  expect(await page.evaluate(() => Promise.all(window.__saveResults))).toEqual(['fulfilled', 'fulfilled']);
+
+  await page.locator('#certSaveClose').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual([
+    'blob:canran-1',
+    'blob:canran-2'
+  ]);
+});
+
 test('Lesson 49 transfers a URL despite download and logger cleanup failures', async ({ page }) => {
   await openCertificate(page, '小明');
   await page.evaluate(() => {
@@ -190,6 +259,43 @@ test('Lesson 49 removes foreign duplicate overlay IDs before committing a new ow
   expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
 });
 
+test('Lesson 49 removes every mixed duplicate overlay and calls available foreign cleanup', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    window.__foreignCleanupCalls = [];
+    const makeDuplicate = cleanup => {
+      const node = document.createElement('div');
+      node.id = 'certSaveOverlay';
+      if (cleanup) node.__certCleanup = cleanup;
+      document.body.appendChild(node);
+    };
+    makeDuplicate(null);
+    makeDuplicate(() => window.__foreignCleanupCalls.push('cleanup-2'));
+    makeDuplicate(() => {
+      window.__foreignCleanupCalls.push('cleanup-3');
+      throw new Error('foreign cleanup failed');
+    });
+  });
+  expect(await page.locator('#certSaveOverlay').count()).toBe(3);
+
+  await page.locator('#certSave').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  await expect(page.locator('#certSaveClose')).toHaveCount(1);
+  expect(await page.evaluate(() => ({
+    cleanupCalls: window.__foreignCleanupCalls,
+    created: window.__certificate.createdUrls.map(item => item.value),
+    revoked: window.__certificate.revokedUrls
+  }))).toEqual({
+    cleanupCalls: ['cleanup-2', 'cleanup-3'],
+    created: ['blob:canran-1'],
+    revoked: []
+  });
+
+  await page.locator('#certSaveClose').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
+
 test('Lesson 49 sanitizes DEL controls and truncates by Unicode code point', async ({ page }) => {
   await openCertificate(page, '小明');
   const value = await page.evaluate(() => sanitizeFilenamePart(
@@ -218,6 +324,45 @@ test('Lesson 49 rejects malformed fallback data URLs without creating a URL', as
     revokedUrls: [],
     alerts: ['😢 证书生成失败，请再点一次试试']
   });
+});
+
+test('Lesson 49 reports fallback atob failure without creating a URL or overlay', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    HTMLCanvasElement.prototype.toBlob = undefined;
+    HTMLCanvasElement.prototype.toDataURL = () => 'data:image/png;base64,cG5n';
+    window.atob = () => { throw new Error('decode failed'); };
+  });
+  await page.locator('#certSave').click();
+
+  await expect.poll(() => page.evaluate(() => window.__certificate.alerts.length)).toBe(1);
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate)).toMatchObject({
+    createdUrls: [],
+    revokedUrls: [],
+    alerts: ['😢 证书生成失败，请再点一次试试']
+  });
+});
+
+test('Lesson 49 reports fallback Blob construction failure without leaking browser state', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    HTMLCanvasElement.prototype.toBlob = undefined;
+    HTMLCanvasElement.prototype.toDataURL = () => 'data:image/png;base64,cG5n';
+    const NativeBlob = window.Blob;
+    window.__restoreCertificateBlob = () => { window.Blob = NativeBlob; };
+    window.Blob = function ThrowingBlob() { throw new Error('Blob unavailable'); };
+  });
+  await page.locator('#certSave').click();
+
+  await expect.poll(() => page.evaluate(() => window.__certificate.alerts.length)).toBe(1);
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__certificate)).toMatchObject({
+    createdUrls: [],
+    revokedUrls: [],
+    alerts: ['😢 证书生成失败，请再点一次试试']
+  });
+  await page.evaluate(() => window.__restoreCertificateBlob());
 });
 
 test('Lesson 49 resolves a synchronous toBlob failure to user feedback', async ({ page }) => {
@@ -295,18 +440,39 @@ test('Lesson 49 removes residual download references when every anchor removal A
     document.createElement = tag => {
       const node = original(tag);
       if (tag === 'a') {
+        window.__failedRemovalAnchor = node;
+        node.click = () => { throw new Error('download failed'); };
         node.replaceWith = () => { throw new Error('replace failed'); };
         Object.defineProperty(node, 'parentNode', { get() { throw new Error('parent failed'); } });
       }
       return node;
     };
   });
-  await page.locator('#certSave').click();
+  const settled = await page.evaluate(() => saveCertImage().then(
+    () => 'fulfilled',
+    error => `rejected: ${error && error.message}`
+  ));
+  expect(settled).toBe('fulfilled');
   await expect(page.locator('#certSaveOverlay')).toBeVisible();
   expect(await page.evaluate(() => {
-    const anchor = document.querySelector('a[aria-hidden="true"]');
-    return [anchor.hasAttribute('href'), anchor.hasAttribute('download'), anchor.hidden, anchor.getAttribute('aria-hidden')];
-  })).toEqual([false, false, true, 'true']);
+    const anchor = window.__failedRemovalAnchor;
+    return {
+      href: anchor.hasAttribute('href'),
+      download: anchor.hasAttribute('download'),
+      hidden: anchor.hidden,
+      ariaHidden: anchor.getAttribute('aria-hidden'),
+      overlays: document.querySelectorAll('#certSaveOverlay').length,
+      revoked: window.__certificate.revokedUrls
+    };
+  })).toEqual({
+    href: false,
+    download: false,
+    hidden: true,
+    ariaHidden: 'true',
+    overlays: 1,
+    revoked: []
+  });
   await page.locator('#certSaveClose').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
   expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
 });
