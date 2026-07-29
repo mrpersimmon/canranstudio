@@ -10,7 +10,7 @@ const config = fs.readFileSync(
   'utf8'
 );
 
-const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 
 function tokenizeNginx(text) {
   const tokens = [];
@@ -267,6 +267,8 @@ ${FORGED_DIRECTIVES.map((directive, index) => `  set $fake_${index} "${fakeStrin
 
 test('Nginx contract defines the complete structural HTTP policy', () => {
   assertHttpContract(config);
+  assert.doesNotMatch(config, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
+  assert.match(config, /font-src 'self' data:/);
 });
 
 test('Nginx tokenizer keeps comment markers and delimiters inside quoted arguments', () => {

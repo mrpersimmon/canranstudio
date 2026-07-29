@@ -12,9 +12,13 @@
     "test:unit": "node --test tests/unit/*.test.js",
     "test:e2e": "playwright test",
     "test:state": "playwright test tests/e2e/l49-progress.spec.js tests/e2e/home-progress.spec.js tests/e2e/l50-assessment.spec.js tests/e2e/soundmark-progress.spec.js",
-    "test": "npm run test:unit && npm run test:e2e"
+    "test": "npm run test:unit && npm run test:e2e",
+    "vendor:fonts": "node scripts/vendor-fonts.js"
   },
   "devDependencies": {
+    "@fontsource/baloo-2": "5.3.0",
+    "@fontsource/fredoka": "5.3.0",
+    "@fontsource/zcool-kuaile": "5.3.0",
     "@playwright/test": "1.62.0"
   }
 }
