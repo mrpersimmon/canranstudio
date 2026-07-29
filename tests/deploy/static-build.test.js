@@ -366,12 +366,12 @@ test('buildStatic binds a manifest to a clean public Git tree only', async t => 
   await writeSyntheticPublicRoot(root);
 
   await fs.writeFile(path.join(root, 'index.html'), 'dirty tracked public file');
-  await assert.rejects(buildStatic({ root, out }), /public inputs are dirty/);
+  await assert.rejects(buildStatic({ root, out }), /public inputs differ from HEAD/);
   await assert.rejects(fs.stat(out), { code: 'ENOENT' });
 
   execFileSync('git', ['checkout', '--', 'index.html'], { cwd: root });
   await fs.writeFile(path.join(root, 'core', 'untracked.js'), 'dirty untracked public file');
-  await assert.rejects(buildStatic({ root, out }), /public inputs are dirty/);
+  await assert.rejects(buildStatic({ root, out }), /public inputs differ from HEAD/);
   await assert.rejects(fs.stat(out), { code: 'ENOENT' });
 
   await fs.rm(path.join(root, 'core', 'untracked.js'));
@@ -390,5 +390,89 @@ test('buildStatic binds a manifest to a clean public Git tree only', async t => 
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
     'commit', '--quiet', '-m', 'add optional assets'], { cwd: root });
   await fs.rm(path.join(root, 'assets'), { recursive: true });
-  await assert.rejects(buildStatic({ root, out }), /public inputs are dirty/);
+  await assert.rejects(buildStatic({ root, out }), /public inputs differ from HEAD/);
+});
+
+test('buildStatic rejects incomplete or expanded old artifact ownership claims', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-old-artifact-'));
+  const root = path.join(sandbox, 'repo');
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+
+  const makeClaim = async (name, manifest, files = []) => {
+    const out = path.join(sandbox, name);
+    await fs.mkdir(out, { recursive: true });
+    for (const [relative, bytes] of files) {
+      const file = path.join(out, relative);
+      await fs.mkdir(path.dirname(file), { recursive: true });
+      await fs.writeFile(file, bytes);
+    }
+    await fs.writeFile(path.join(out, 'release-manifest.json'), JSON.stringify(manifest));
+    return out;
+  };
+
+  const emptyClaim = await makeClaim('empty-claim', { schema: 1, commit: 'a'.repeat(40), files: {} });
+  await assert.rejects(buildStatic({ root, out: emptyClaim }), /unowned build output/);
+  assert.equal((await fs.stat(path.join(emptyClaim, 'release-manifest.json'))).isFile(), true);
+
+  const onlyIndex = 'index.html';
+  const incompleteClaim = await makeClaim('incomplete-claim', {
+    schema: 1,
+    commit: 'a'.repeat(40),
+    files: { [onlyIndex]: sha256(Buffer.from('index only')) }
+  }, [[onlyIndex, 'index only']]);
+  await assert.rejects(buildStatic({ root, out: incompleteClaim }), /unowned build output/);
+
+  const illegalKey = 'README.md';
+  const illegalClaim = await makeClaim('illegal-claim', {
+    schema: 1,
+    commit: 'a'.repeat(40),
+    files: { [illegalKey]: sha256(Buffer.from('not public')) }
+  }, [[illegalKey, 'not public']]);
+  await assert.rejects(buildStatic({ root, out: illegalClaim }), /unowned build output/);
+
+  const extraFile = path.join(sandbox, 'extra-file');
+  await buildStatic({ root, out: extraFile });
+  await fs.writeFile(path.join(extraFile, 'sidecar.txt'), 'must survive');
+  await assert.rejects(buildStatic({ root, out: extraFile }), /unowned build output/);
+  assert.equal(await fs.readFile(path.join(extraFile, 'sidecar.txt'), 'utf8'), 'must survive');
+
+  const extraDirectory = path.join(sandbox, 'extra-directory');
+  await buildStatic({ root, out: extraDirectory });
+  await fs.mkdir(path.join(extraDirectory, 'empty-sidecar'));
+  await assert.rejects(buildStatic({ root, out: extraDirectory }), /unowned build output/);
+  assert.equal((await fs.stat(path.join(extraDirectory, 'empty-sidecar'))).isDirectory(), true);
+});
+
+test('buildStatic rejects ignored public files absent from HEAD', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-ignored-public-'));
+  const root = path.join(sandbox, 'repo');
+  const out = path.join(sandbox, 'out');
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+  await fs.writeFile(path.join(root, '.gitignore'), 'core/ignored.js\n');
+  await fs.writeFile(path.join(root, 'core', 'ignored.js'), 'ignored but public');
+
+  await assert.rejects(buildStatic({ root, out }), /public inputs differ from HEAD/);
+  await assert.rejects(fs.stat(out), { code: 'ENOENT' });
+});
+
+test('buildStatic rejects outputs overlapping absent optional inputs', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-absent-assets-'));
+  const root = path.join(sandbox, 'repo');
+  const assets = path.join(root, 'assets');
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+
+  for (const out of [assets, path.join(assets, 'dist')]) {
+    await assert.rejects(buildStatic({ root, out }), /overlaps public input/);
+    await assert.rejects(fs.stat(assets), { code: 'ENOENT' });
+  }
+  const alias = path.join(sandbox, 'root-alias');
+  await fs.symlink(root, alias);
+  await assert.rejects(buildStatic({ root, out: path.join(alias, 'assets', 'dist') }), /overlaps public input/);
+  await assert.rejects(fs.stat(assets), { code: 'ENOENT' });
 });

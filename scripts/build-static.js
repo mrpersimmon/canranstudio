@@ -79,10 +79,11 @@ async function assertOutputDoesNotOverlapPublicInputs(root, out) {
   const physicalOut = await resolvePhysicalPath(out);
   for (const relative of PUBLIC_INPUTS) {
     const source = path.join(root, relative);
-    const stat = await lstatIfExists(source);
-    if (!stat) continue;
-    const physicalSource = await fs.realpath(source);
-    if (isSameOrAncestor(physicalOut, physicalSource) || isSameOrAncestor(physicalSource, physicalOut)) {
+    const physicalSource = await resolvePhysicalPath(source);
+    if (
+      isSameOrAncestor(out, source) || isSameOrAncestor(source, out) ||
+      isSameOrAncestor(physicalOut, physicalSource) || isSameOrAncestor(physicalSource, physicalOut)
+    ) {
       throw new Error(`build output overlaps public input: ${relative}`);
     }
   }
@@ -193,20 +194,27 @@ async function copyDirectory(root, out, relative) {
   }
 }
 
-async function listOutputFiles(directory, prefix = '') {
+async function listOutputTree(directory, prefix = '') {
   const entries = await fs.readdir(directory, { withFileTypes: true });
-  const files = [];
+  const tree = { files: [], directories: [] };
   for (const entry of entries.sort((left, right) => comparePaths(left.name, right.name))) {
     const relative = path.posix.join(prefix, entry.name);
     if (entry.isDirectory()) {
-      files.push(...await listOutputFiles(path.join(directory, entry.name), relative));
+      tree.directories.push(relative);
+      const child = await listOutputTree(path.join(directory, entry.name), relative);
+      tree.files.push(...child.files);
+      tree.directories.push(...child.directories);
     } else if (entry.isFile()) {
-      files.push(relative);
+      tree.files.push(relative);
     } else {
       throw new Error(`unexpected non-regular output entry: ${relative}`);
     }
   }
-  return files;
+  return tree;
+}
+
+async function listOutputFiles(directory, prefix = '') {
+  return (await listOutputTree(directory, prefix)).files;
 }
 
 function hash(bytes) {
@@ -215,6 +223,33 @@ function hash(bytes) {
 
 function isManifestPath(relative) {
   return relative && relative === path.posix.normalize(relative) && !relative.startsWith('../') && !path.posix.isAbsolute(relative);
+}
+
+function isAllowedArtifactFile(relative) {
+  return REQUIRED_FILES.includes(relative) || [...REQUIRED_DIRECTORIES, ...OPTIONAL_DIRECTORIES]
+    .some(directory => relative.startsWith(`${directory}/`));
+}
+
+function hasRequiredArtifactEntries(files) {
+  return REQUIRED_FILES.every(file => files.includes(file)) && REQUIRED_DIRECTORIES
+    .every(directory => files.some(file => file.startsWith(`${directory}/`)));
+}
+
+function artifactAncestors(files) {
+  const directories = new Set();
+  for (const file of files) {
+    for (let current = path.posix.dirname(file); current !== '.'; current = path.posix.dirname(current)) {
+      directories.add(current);
+    }
+  }
+  return [...directories].sort(comparePaths);
+}
+
+function ownsArtifactManifest(manifest, files) {
+  return manifest && manifest.schema === 1 && /^[a-f0-9]{40}$/.test(manifest.commit) &&
+    manifest.files && !Array.isArray(manifest.files) && files.length > 0 &&
+    files.every(relative => isManifestPath(relative) && isAllowedArtifactFile(relative) && /^[a-f0-9]{64}$/.test(manifest.files[relative])) &&
+    hasRequiredArtifactEntries(files);
 }
 
 async function assertOwnedOutput(out) {
@@ -233,21 +268,22 @@ async function assertOwnedOutput(out) {
   } catch {
     throw new Error('refusing to replace an unowned build output');
   }
-  if (!manifest || manifest.schema !== 1 || !manifest.files || Array.isArray(manifest.files)) {
-    throw new Error('refusing to replace an unowned build output');
-  }
   const files = Object.keys(manifest.files);
-  if (!files.every(relative => isManifestPath(relative) && /^[a-f0-9]{64}$/.test(manifest.files[relative]))) {
+  if (!ownsArtifactManifest(manifest, files)) {
     throw new Error('refusing to replace an unowned build output');
   }
   let actual;
   try {
-    actual = await listOutputFiles(out);
+    actual = await listOutputTree(out);
   } catch {
     throw new Error('refusing to replace an unowned build output');
   }
   const expected = [...files, 'release-manifest.json'].sort(comparePaths);
-  if (actual.length !== expected.length || actual.some((file, index) => file !== expected[index])) {
+  if (
+    actual.files.length !== expected.length || actual.files.some((file, index) => file !== expected[index]) ||
+    actual.directories.length !== artifactAncestors(files).length ||
+    actual.directories.some((directory, index) => directory !== artifactAncestors(files)[index])
+  ) {
     throw new Error('refusing to replace an unowned build output');
   }
   for (const relative of files) {
@@ -266,25 +302,71 @@ function gitOutput(root, args) {
   }
 }
 
-async function assertCleanPublicTree(root) {
+function gitBytes(root, args) {
+  try {
+    return execFileSync('git', args, { cwd: root });
+  } catch {
+    throw new Error('static build requires a Git repository with HEAD');
+  }
+}
+
+async function publicWorkingFiles(root) {
+  const files = [...REQUIRED_FILES];
+  for (const relative of [...REQUIRED_DIRECTORIES, ...OPTIONAL_DIRECTORIES]) {
+    if (await lstatIfExists(path.join(root, relative))) {
+      files.push(...await listOutputFiles(path.join(root, relative), relative));
+    }
+  }
+  return files.sort(comparePaths);
+}
+
+function headPublicBlobs(root, commit) {
+  const records = gitBytes(root, ['ls-tree', '-r', '-z', commit, '--', ...PUBLIC_INPUTS])
+    .toString('utf8').split('\0').filter(Boolean);
+  const blobs = new Map();
+  for (const record of records) {
+    const match = record.match(/^\d+ blob ([a-f0-9]+)\t(.+)$/);
+    if (!match) throw new Error('static build requires a Git repository with HEAD');
+    blobs.set(match[2], match[1]);
+  }
+  return blobs;
+}
+
+function gitBlobOid(bytes, objectFormat) {
+  return crypto.createHash(objectFormat)
+    .update(`blob ${bytes.length}\0`)
+    .update(bytes)
+    .digest('hex');
+}
+
+async function assertPublicSnapshot(root) {
   const [gitRoot, physicalRoot] = await Promise.all([
     fs.realpath(gitOutput(root, ['rev-parse', '--show-toplevel'])),
     fs.realpath(root)
   ]);
   if (gitRoot !== physicalRoot) throw new Error('static build root must be the Git repository root');
   const commit = gitOutput(root, ['rev-parse', '--verify', 'HEAD']);
-  const optionalPaths = [];
-  for (const relative of OPTIONAL_DIRECTORIES) {
-    const existsNow = await lstatIfExists(path.join(root, relative));
-    const existsAtHead = gitOutput(root, ['ls-tree', '-r', '--name-only', 'HEAD', '--', relative]);
-    if (existsNow || existsAtHead) optionalPaths.push(relative);
+  const [workingFiles, blobs] = await Promise.all([publicWorkingFiles(root), headPublicBlobs(root, commit)]);
+  const objectFormat = gitOutput(root, ['rev-parse', '--show-object-format']);
+  const headFiles = [...blobs.keys()].sort(comparePaths);
+  if (workingFiles.length !== headFiles.length || workingFiles.some((file, index) => file !== headFiles[index])) {
+    throw new Error('public inputs differ from HEAD; refusing to create a HEAD manifest');
   }
-  const status = gitOutput(root, [
-    'status', '--porcelain=v1', '--untracked-files=all', '--',
-    ...REQUIRED_FILES, ...REQUIRED_DIRECTORIES, ...optionalPaths
-  ]);
-  if (status) throw new Error('public inputs are dirty; refusing to create a HEAD manifest');
+  for (const relative of workingFiles) {
+    const bytes = await fs.readFile(path.join(root, relative));
+    if (gitBlobOid(bytes, objectFormat) !== blobs.get(relative)) {
+      throw new Error('public inputs differ from HEAD; refusing to create a HEAD manifest');
+    }
+  }
   return commit;
+}
+
+async function removeEmptyDirectories(directory) {
+  const entries = await fs.readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory()) await removeEmptyDirectories(path.join(directory, entry.name));
+  }
+  if ((await fs.readdir(directory)).length === 0) await fs.rmdir(directory);
 }
 
 async function buildStatic({
@@ -303,7 +385,7 @@ async function buildStatic({
     if (await validateDirectory(resolvedRoot, relative, true)) optionalDirectories.push(relative);
   }
 
-  const commit = await assertCleanPublicTree(resolvedRoot);
+  const commit = await assertPublicSnapshot(resolvedRoot);
   await assertOwnedOutput(resolvedOut);
   await fs.rm(resolvedOut, { recursive: true, force: true });
   await fs.mkdir(resolvedOut, { recursive: true });
@@ -312,12 +394,19 @@ async function buildStatic({
     await copyDirectory(resolvedRoot, resolvedOut, relative);
   }
 
+  for (const entry of await fs.readdir(resolvedOut, { withFileTypes: true })) {
+    if (entry.isDirectory()) await removeEmptyDirectories(path.join(resolvedOut, entry.name));
+  }
+
   const files = {};
   for (const relative of await listOutputFiles(resolvedOut)) {
     const bytes = await fs.readFile(path.join(resolvedOut, relative));
     files[relative] = hash(bytes);
   }
-  if (await assertCleanPublicTree(resolvedRoot) !== commit) {
+  if (!hasRequiredArtifactEntries(Object.keys(files))) {
+    throw new Error('public inputs are missing required artifact files');
+  }
+  if (await assertPublicSnapshot(resolvedRoot) !== commit) {
     throw new Error('public inputs changed during static build');
   }
   const manifest = {
