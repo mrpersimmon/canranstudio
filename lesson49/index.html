@@ -1833,12 +1833,21 @@ function safeRevoke(url){
   try{URL.revokeObjectURL(url);}catch{}
 }
 function safeRemoveNode(node){
-  if(!node)return true;
-  try{node.remove();}catch{}
-  if(node.isConnected){
-    try{node.parentNode&&node.parentNode.removeChild(node);}catch{}
-  }
-  return !node.isConnected;
+  try{
+    if(!node)return true;
+    try{node.remove();}catch{}
+    try{node.replaceWith();}catch{}
+    let parent=null;
+    try{parent=node.parentNode;}catch{}
+    try{if(parent)parent.removeChild(node);}catch{}
+    let connected=true;
+    try{connected=node.isConnected;}catch{}
+    if(connected){
+      try{node.href='';node.download='';node.hidden=true;node.setAttribute('aria-hidden','true');}catch{}
+      return false;
+    }
+    return true;
+  }catch{return false;}
 }
 function renderCertBlob(){
   return new Promise(resolve=>{
@@ -1904,7 +1913,7 @@ async function saveCertImage(){
   }catch(error){
     safeLog('证书下载失败：',error);
   }finally{
-    safeRemoveNode(anchor);
+    if(!safeRemoveNode(anchor))safeLog('证书下载链接未能完全移除');
   }
 
   let transferred=false;

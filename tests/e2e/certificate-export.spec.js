@@ -251,3 +251,37 @@ test('Lesson 49 keeps the first toBlob callback result', async ({ page }) => {
   await page.locator('#certSaveClose').click();
   expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
 });
+
+test('Lesson 49 keeps URL ownership when an anchor isConnected getter throws', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    const original = document.createElement.bind(document);
+    document.createElement = tag => {
+      const node = original(tag);
+      if (tag === 'a') Object.defineProperty(node, 'isConnected', { get() { throw new Error('getter failed'); } });
+      return node;
+    };
+  });
+  await page.locator('#certSave').click();
+  await expect(page.locator('#certSaveOverlay')).toBeVisible();
+  await page.locator('#certSaveClose').click();
+  expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
+});
+
+test('Lesson 49 uses replaceWith when anchor removal APIs throw', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    HTMLAnchorElement.prototype.remove = () => { throw new Error('remove failed'); };
+    const original = document.createElement.bind(document);
+    document.createElement = tag => {
+      const node = original(tag);
+      if (tag === 'a') {
+        Object.defineProperty(node, 'parentNode', { get() { return { removeChild() { throw new Error('remove child failed'); } }; } });
+      }
+      return node;
+    };
+  });
+  await page.locator('#certSave').click();
+  await expect(page.locator('#certSaveOverlay')).toBeVisible();
+  expect(await page.locator('a[download]').count()).toBe(0);
+});
