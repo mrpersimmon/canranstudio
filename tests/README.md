@@ -15,6 +15,9 @@ npm test
 `npm test` is the complete pre-commit gate.
 `npm run test:e2e -- tests/e2e/audio-lifecycle.spec.js` verifies terminal playback,
 interruption cleanup, and the Lesson 50 queue.
+`npm run test:deploy` checks the public artifact and HTTP-only Nginx policy.
+`npm run build:static` creates the exact `dist/` release and hash manifest.
+`npm run verify:live:http` is a post-deploy gate and must use that exact local artifact.
 
 The soundmark v1 integer cannot identify completed challenges. Its one-time v2 migration therefore
 resets soundmark progress to zero. Lesson 49 and Lesson 50 preserve and clamp legacy level ratings.
