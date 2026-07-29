@@ -18,7 +18,7 @@ test('welcome page reads normalized v2 totals', async ({ page }) => {
     }));
   });
 
-  await page.goto('/home/');
+  await page.goto('/');
 
   await expect(page.locator('#pt49')).toHaveText('15');
   await expect(page.locator('#pt50')).toHaveText('5');

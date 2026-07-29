@@ -222,7 +222,7 @@ test('unsupported Lesson 50 speech completes without voice lookup errors', async
 
 test('Lesson 49 replaces an active recording without leaving two players', async ({ page }) => {
   await installManualAudio(page);
-  await page.goto('/');
+  await page.goto('/lesson49/');
 
   await page.evaluate(() => {
     speak('apple');
@@ -260,7 +260,7 @@ test('Lesson 49 falls back to speech when active recording playback errors', asy
       }
     });
   });
-  await page.goto('/');
+  await page.goto('/lesson49/');
 
   await page.evaluate(() => speak('apple'));
   await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
@@ -277,7 +277,7 @@ test('unsupported Lesson 49 speech completes without voice lookup errors and war
     Reflect.deleteProperty(window, 'speechSynthesis');
     Reflect.deleteProperty(window, 'SpeechSynthesisUtterance');
   });
-  await page.goto('/');
+  await page.goto('/lesson49/');
   await page.evaluate(() => {
     window.__speechWarnings = [];
     window.alert = message => window.__speechWarnings.push(message);

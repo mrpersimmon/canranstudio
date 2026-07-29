@@ -15,7 +15,7 @@ test('Lesson 49 repairs legacy ratings and does not crash on negative values', a
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
 
-  await page.goto('/');
+  await page.goto('/lesson49/');
 
   expect(errors).toEqual([]);
   await expect(page.locator('#st-l1')).toHaveText('☆☆☆');
@@ -38,7 +38,7 @@ test('Lesson 49 certificate requires all five levels', async ({ page }) => {
     }));
   });
 
-  await page.goto('/');
+  await page.goto('/lesson49/');
 
   await expect(page.locator('#certArea')).toBeVisible();
   await expect(page.locator('#certBtn')).toBeEnabled();
