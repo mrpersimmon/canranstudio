@@ -477,3 +477,203 @@ for (const lesson of [
     ]);
   });
 }
+
+test('Lesson 50 rapid saves keep one preview owner across reverse completion', async ({ page }) => {
+  await seedProgress(page, 'canran:l50:progress:v2',
+    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+  await page.addInitScript(() => {
+    window.__l50Preview = {
+      blobCallbacks: [],
+      createdUrls: [],
+      revokedUrls: [],
+      samples: []
+    };
+    const sampleOwners = () => {
+      window.__l50Preview.samples.push({
+        overlays: document.querySelectorAll('#certSaveOverlay').length,
+        closes: document.querySelectorAll('#certSaveClose').length
+      });
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+      new MutationObserver(sampleOwners).observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+      sampleOwners();
+    });
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      window.__l50Preview.blobCallbacks.push(callback);
+    };
+    URL.createObjectURL = () => {
+      const url = `blob:l50-preview-${window.__l50Preview.createdUrls.length + 1}`;
+      window.__l50Preview.createdUrls.push(url);
+      return url;
+    };
+    URL.revokeObjectURL = url => window.__l50Preview.revokedUrls.push(url);
+    HTMLAnchorElement.prototype.click = () => {};
+  });
+  await page.goto('/lesson50/');
+  await page.locator('#certBtn').click();
+  await page.evaluate(() => {
+    document.getElementById('certSave').click();
+    document.getElementById('certSave').click();
+  });
+  await expect.poll(() =>
+    page.evaluate(() => window.__l50Preview.blobCallbacks.length)
+  ).toBe(2);
+
+  await page.evaluate(() => {
+    window.__l50Preview.blobCallbacks[1](
+      new Blob(['newer-request'], { type: 'image/png' })
+    );
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  await expect(page.locator('#certSaveClose')).toHaveCount(1);
+  expect(await page.evaluate(() => ({
+    created: window.__l50Preview.createdUrls,
+    revoked: window.__l50Preview.revokedUrls,
+    owner: document.querySelector('#certSaveOverlay img').getAttribute('src')
+  }))).toEqual({
+    created: ['blob:l50-preview-1'],
+    revoked: [],
+    owner: 'blob:l50-preview-1'
+  });
+
+  await page.evaluate(() => {
+    window.__l50Preview.blobCallbacks[0](
+      new Blob(['older-request'], { type: 'image/png' })
+    );
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  await expect(page.locator('#certSaveClose')).toHaveCount(1);
+  expect(await page.evaluate(() => ({
+    created: window.__l50Preview.createdUrls,
+    revoked: window.__l50Preview.revokedUrls,
+    owner: document.querySelector('#certSaveOverlay img').getAttribute('src'),
+    maxOverlays: Math.max(...window.__l50Preview.samples.map(sample => sample.overlays)),
+    maxCloses: Math.max(...window.__l50Preview.samples.map(sample => sample.closes))
+  }))).toEqual({
+    created: ['blob:l50-preview-1', 'blob:l50-preview-2'],
+    revoked: ['blob:l50-preview-1'],
+    owner: 'blob:l50-preview-2',
+    maxOverlays: 1,
+    maxCloses: 1
+  });
+
+  await page.locator('#certSaveClose').evaluate(close => {
+    const overlay = close.closest('#certSaveOverlay');
+    close.click();
+    close.click();
+    overlay.click();
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  await expect(page.locator('#certSaveClose')).toHaveCount(0);
+  await expect(page.locator('#certBtn')).toBeFocused();
+  expect(await page.evaluate(() => window.__l50Preview.revokedUrls)).toEqual([
+    'blob:l50-preview-1',
+    'blob:l50-preview-2'
+  ]);
+});
+
+test('Lesson 50 replaces mixed foreign preview IDs before committing its owner', async ({ page }) => {
+  await seedProgress(page, 'canran:l50:progress:v2',
+    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+  await page.addInitScript(() => {
+    window.__l50ForeignPreview = {
+      cleanupCalls: [],
+      createdUrls: [],
+      revokedUrls: []
+    };
+    HTMLCanvasElement.prototype.toBlob = callback =>
+      callback(new Blob(['png'], { type: 'image/png' }));
+    URL.createObjectURL = () => {
+      const url = `blob:l50-foreign-${window.__l50ForeignPreview.createdUrls.length + 1}`;
+      window.__l50ForeignPreview.createdUrls.push(url);
+      return url;
+    };
+    URL.revokeObjectURL = url => window.__l50ForeignPreview.revokedUrls.push(url);
+    HTMLAnchorElement.prototype.click = () => {};
+  });
+  await page.goto('/lesson50/');
+  await page.locator('#certBtn').click();
+  await page.evaluate(() => {
+    const addDuplicate = cleanup => {
+      const node = document.createElement('div');
+      node.id = 'certSaveOverlay';
+      if (cleanup) node.__certCleanup = cleanup;
+      document.body.appendChild(node);
+    };
+    addDuplicate(null);
+    addDuplicate(() => window.__l50ForeignPreview.cleanupCalls.push('cleanup-2'));
+    addDuplicate(() => {
+      window.__l50ForeignPreview.cleanupCalls.push('cleanup-3');
+      throw new Error('foreign cleanup failed');
+    });
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(3);
+
+  await page.locator('#certSave').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(1);
+  await expect(page.locator('#certSaveClose')).toHaveCount(1);
+  expect(await page.evaluate(() => window.__l50ForeignPreview)).toEqual({
+    cleanupCalls: ['cleanup-2', 'cleanup-3'],
+    createdUrls: ['blob:l50-foreign-1'],
+    revokedUrls: []
+  });
+
+  await page.locator('#certSaveClose').click();
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  expect(await page.evaluate(() => window.__l50ForeignPreview.revokedUrls)).toEqual([
+    'blob:l50-foreign-1'
+  ]);
+});
+
+test('Lesson 50 rolls back a partially appended preview and revokes once', async ({ page }) => {
+  await seedProgress(page, 'canran:l50:progress:v2',
+    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+  await page.addInitScript(() => {
+    window.__l50FailedPreview = {
+      createdUrls: [],
+      revokedUrls: [],
+      outcome: 'pending'
+    };
+    HTMLCanvasElement.prototype.toBlob = callback =>
+      callback(new Blob(['png'], { type: 'image/png' }));
+    URL.createObjectURL = () => {
+      const url = `blob:l50-failed-${window.__l50FailedPreview.createdUrls.length + 1}`;
+      window.__l50FailedPreview.createdUrls.push(url);
+      return url;
+    };
+    URL.revokeObjectURL = url => window.__l50FailedPreview.revokedUrls.push(url);
+    HTMLAnchorElement.prototype.click = () => {};
+  });
+  await page.goto('/lesson50/');
+  await page.locator('#certBtn').click();
+  await page.evaluate(() => {
+    const nativeAppend = document.body.appendChild.bind(document.body);
+    document.body.appendChild = node => {
+      if (node.id === 'certSaveOverlay') {
+        nativeAppend(node);
+        throw new Error('append after insert failed');
+      }
+      return nativeAppend(node);
+    };
+    window.__l50FailedPreview.promise = saveCertImage().then(
+      () => { window.__l50FailedPreview.outcome = 'fulfilled'; },
+      error => { window.__l50FailedPreview.outcome = `rejected:${error.message}`; }
+    );
+  });
+
+  await expect.poll(() =>
+    page.evaluate(() => window.__l50FailedPreview.outcome)
+  ).toBe('fulfilled');
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+  await expect(page.locator('#certBtn')).toBeFocused();
+  expect(await page.evaluate(() => ({
+    createdUrls: window.__l50FailedPreview.createdUrls,
+    revokedUrls: window.__l50FailedPreview.revokedUrls
+  }))).toEqual({
+    createdUrls: ['blob:l50-failed-1'],
+    revokedUrls: ['blob:l50-failed-1']
+  });
+});

@@ -1711,6 +1711,34 @@ function renderCertBlob(){
     }catch(e){console.error('证书转码失败：',e);resolve(null);}
   });
 }
+function safeL50Log(){
+  try{console.error.apply(console,arguments);}catch{}
+}
+function safeL50Alert(message){
+  try{alert(message);}catch{}
+}
+function safeL50Revoke(url){
+  if(!url)return;
+  try{URL.revokeObjectURL(url);}catch{}
+}
+function safeRemoveL50Node(node){
+  try{
+    if(!node)return true;
+    try{node.remove();}catch{}
+    try{node.replaceWith();}catch{}
+    let parent=null;
+    try{parent=node.parentNode;}catch{}
+    try{if(parent)parent.removeChild(node);}catch{}
+    let connected=true;
+    try{connected=node.isConnected;}catch{}
+    if(connected){
+      try{node.hidden=true;}catch{}
+      try{node.setAttribute('aria-hidden','true');}catch{}
+      return false;
+    }
+    return true;
+  }catch{return false;}
+}
 async function saveCertImage(){
   try{
     if(document.fonts&&document.fonts.load){
@@ -1737,43 +1765,70 @@ async function saveCertImage(){
     a.remove();
   }catch(err){console.error('证书下载失败：',err);}
   /* 2) 长按保存遮罩（主路径） */
-  showCertOverlay(url);
+  let transferred=false;
+  try{
+    showCertOverlay(url);
+    transferred=true;
+  }catch(error){
+    safeL50Log('证书遮罩失败：',error);
+    safeL50Alert('😢 图片已生成，但无法显示保存预览');
+  }finally{
+    if(!transferred)safeL50Revoke(url);
+  }
 }
 function showCertOverlay(src){
   if(l50CertDialog.open)closeL50CertificateDialog();
-  const overlayReturnFocus=document.activeElement;
-  const ov=document.createElement('div');
-  ov.id='certSaveOverlay';
-  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;overflow-y:auto;';
-  const ua=navigator.userAgent||'';
-  const isWx=/MicroMessenger/i.test(ua);
-  const isIOS=/iPad|iPhone|iPod/.test(ua);
-  const tip=document.createElement('p');
-  tip.innerHTML=isWx
-    ?'💡 <b>微信里这样保存</b>：<br>① 先试试<b>长按下方图片</b> →「保存图片」<br>② 若没反应：点右上角「···」→「在浏览器打开」再长按<br>③ 也可以直接截图保存哦！'
-    :(isIOS?'📱 <b>长按图片</b> → 存储到“照片”<br><span style="font-size:15px;opacity:.85">没弹菜单？也可以直接截图</span>':'📱 <b>长按图片</b> → 保存图片<br><span style="font-size:15px;opacity:.85">没弹菜单？也可以直接截图</span>');
-  tip.style.cssText='margin:0;color:#fff;font-size:18px;font-weight:700;text-align:center;line-height:1.7;text-shadow:0 2px 8px rgba(0,0,0,.6);max-width:92vw;';
-  const img=document.createElement('img');
-  img.src=src;img.alt='结业证书';
-  img.style.cssText='max-width:92vw;max-height:60vh;display:block;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.6);background:#FFFDF6;';
-  const close=document.createElement('button');
-  close.className='btn btn-mini btn-yellow';
-  close.textContent='关闭';close.id='certSaveClose';
-  let closed=false;
-  const closeOv=e=>{
-    if(e)e.stopPropagation();
+  const existing=Array.from(document.querySelectorAll('#certSaveOverlay'));
+  for(const node of existing){
+    try{
+      if(typeof node.__certCleanup==='function')node.__certCleanup();
+    }catch{}
+    safeRemoveL50Node(node);
+  }
+  if(document.querySelector('#certSaveOverlay'))throw new Error('无法替换现有保存预览');
+
+  const active=document.activeElement;
+  const overlayReturnFocus=canReceiveL50Focus(active)?active:$('#certBtn');
+  let ov=null,closed=false;
+  const closeOverlay=event=>{
+    try{if(event)event.stopPropagation();}catch{}
     if(closed)return;
     closed=true;
-    if(/^blob:/.test(src)){try{URL.revokeObjectURL(src);}catch(err){}}
-    ov.remove();
+    safeL50Revoke(src);
+    safeRemoveL50Node(ov);
     focusAfterL50Certificate(overlayReturnFocus);
-    sndClick();
+    try{sndClick();}catch{}
   };
-  close.addEventListener('click',closeOv);
-  ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
-  ov.addEventListener('click',e=>{if(e.target===ov)closeOv(e);});
-  document.body.appendChild(ov);
-  try{close.focus();}catch{}
+  try{
+    ov=document.createElement('div');
+    ov.id='certSaveOverlay';
+    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;overflow-y:auto;';
+    const ua=navigator.userAgent||'';
+    const isWx=/MicroMessenger/i.test(ua);
+    const isIOS=/iPad|iPhone|iPod/.test(ua);
+    const tip=document.createElement('p');
+    tip.innerHTML=isWx
+      ?'💡 <b>微信里这样保存</b>：<br>① 先试试<b>长按下方图片</b> →「保存图片」<br>② 若没反应：点右上角「···」→「在浏览器打开」再长按<br>③ 也可以直接截图保存哦！'
+      :(isIOS?'📱 <b>长按图片</b> → 存储到“照片”<br><span style="font-size:15px;opacity:.85">没弹菜单？也可以直接截图</span>':'📱 <b>长按图片</b> → 保存图片<br><span style="font-size:15px;opacity:.85">没弹菜单？也可以直接截图</span>');
+    tip.style.cssText='margin:0;color:#fff;font-size:18px;font-weight:700;text-align:center;line-height:1.7;text-shadow:0 2px 8px rgba(0,0,0,.6);max-width:92vw;';
+    const img=document.createElement('img');
+    img.src=src;img.alt='结业证书';
+    img.style.cssText='max-width:92vw;max-height:60vh;display:block;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.6);background:#FFFDF6;';
+    const close=document.createElement('button');
+    close.className='btn btn-mini btn-yellow';
+    close.textContent='关闭';close.id='certSaveClose';
+    ov.__certCleanup=closeOverlay;
+    close.addEventListener('click',closeOverlay);
+    ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
+    ov.addEventListener('click',event=>{if(event.target===ov)closeOverlay(event);});
+    document.body.appendChild(ov);
+    try{close.focus();}catch{}
+    return ov;
+  }catch(error){
+    closed=true;
+    safeRemoveL50Node(ov);
+    throw error;
+  }
 }
 const l50CertDialog=$('#certModal');
 let l50CertReturnFocus=$('#certBtn');
