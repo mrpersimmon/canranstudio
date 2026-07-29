@@ -20,6 +20,7 @@ const REQUIRED_DIRECTORIES = [
   'core'
 ];
 const OPTIONAL_DIRECTORIES = ['assets'];
+const PUBLIC_INPUTS = [...REQUIRED_FILES, ...REQUIRED_DIRECTORIES, ...OPTIONAL_DIRECTORIES];
 
 function comparePaths(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
@@ -72,6 +73,19 @@ async function assertSafeOutput(root, out) {
   const physicalRoot = await fs.realpath(root);
   const physicalOut = await resolvePhysicalPath(out);
   assertSafeOutputPath(physicalRoot, physicalOut);
+}
+
+async function assertOutputDoesNotOverlapPublicInputs(root, out) {
+  const physicalOut = await resolvePhysicalPath(out);
+  for (const relative of PUBLIC_INPUTS) {
+    const source = path.join(root, relative);
+    const stat = await lstatIfExists(source);
+    if (!stat) continue;
+    const physicalSource = await fs.realpath(source);
+    if (isSameOrAncestor(physicalOut, physicalSource) || isSameOrAncestor(physicalSource, physicalOut)) {
+      throw new Error(`build output overlaps public input: ${relative}`);
+    }
+  }
 }
 
 async function assertWithinRepository(root, source, relative) {
@@ -195,6 +209,84 @@ async function listOutputFiles(directory, prefix = '') {
   return files;
 }
 
+function hash(bytes) {
+  return crypto.createHash('sha256').update(bytes).digest('hex');
+}
+
+function isManifestPath(relative) {
+  return relative && relative === path.posix.normalize(relative) && !relative.startsWith('../') && !path.posix.isAbsolute(relative);
+}
+
+async function assertOwnedOutput(out) {
+  const stat = await lstatIfExists(out);
+  if (!stat) return;
+  if (stat.isSymbolicLink() || !stat.isDirectory()) {
+    throw new Error('refusing to replace an unowned build output');
+  }
+  const entries = await fs.readdir(out);
+  if (entries.length === 0) return;
+
+  const manifestFile = path.join(out, 'release-manifest.json');
+  let manifest;
+  try {
+    manifest = JSON.parse(await fs.readFile(manifestFile, 'utf8'));
+  } catch {
+    throw new Error('refusing to replace an unowned build output');
+  }
+  if (!manifest || manifest.schema !== 1 || !manifest.files || Array.isArray(manifest.files)) {
+    throw new Error('refusing to replace an unowned build output');
+  }
+  const files = Object.keys(manifest.files);
+  if (!files.every(relative => isManifestPath(relative) && /^[a-f0-9]{64}$/.test(manifest.files[relative]))) {
+    throw new Error('refusing to replace an unowned build output');
+  }
+  let actual;
+  try {
+    actual = await listOutputFiles(out);
+  } catch {
+    throw new Error('refusing to replace an unowned build output');
+  }
+  const expected = [...files, 'release-manifest.json'].sort(comparePaths);
+  if (actual.length !== expected.length || actual.some((file, index) => file !== expected[index])) {
+    throw new Error('refusing to replace an unowned build output');
+  }
+  for (const relative of files) {
+    const bytes = await fs.readFile(path.join(out, relative));
+    if (hash(bytes) !== manifest.files[relative]) {
+      throw new Error('refusing to replace an unowned build output');
+    }
+  }
+}
+
+function gitOutput(root, args) {
+  try {
+    return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
+  } catch {
+    throw new Error('static build requires a Git repository with HEAD');
+  }
+}
+
+async function assertCleanPublicTree(root) {
+  const [gitRoot, physicalRoot] = await Promise.all([
+    fs.realpath(gitOutput(root, ['rev-parse', '--show-toplevel'])),
+    fs.realpath(root)
+  ]);
+  if (gitRoot !== physicalRoot) throw new Error('static build root must be the Git repository root');
+  const commit = gitOutput(root, ['rev-parse', '--verify', 'HEAD']);
+  const optionalPaths = [];
+  for (const relative of OPTIONAL_DIRECTORIES) {
+    const existsNow = await lstatIfExists(path.join(root, relative));
+    const existsAtHead = gitOutput(root, ['ls-tree', '-r', '--name-only', 'HEAD', '--', relative]);
+    if (existsNow || existsAtHead) optionalPaths.push(relative);
+  }
+  const status = gitOutput(root, [
+    'status', '--porcelain=v1', '--untracked-files=all', '--',
+    ...REQUIRED_FILES, ...REQUIRED_DIRECTORIES, ...optionalPaths
+  ]);
+  if (status) throw new Error('public inputs are dirty; refusing to create a HEAD manifest');
+  return commit;
+}
+
 async function buildStatic({
   root = path.resolve(__dirname, '..'),
   out = path.resolve(root, 'dist')
@@ -202,6 +294,7 @@ async function buildStatic({
   const resolvedRoot = path.resolve(root);
   const resolvedOut = path.resolve(out);
   await assertSafeOutput(resolvedRoot, resolvedOut);
+  await assertOutputDoesNotOverlapPublicInputs(resolvedRoot, resolvedOut);
 
   for (const relative of REQUIRED_FILES) await validateFile(resolvedRoot, relative);
   for (const relative of REQUIRED_DIRECTORIES) await validateDirectory(resolvedRoot, relative);
@@ -210,6 +303,8 @@ async function buildStatic({
     if (await validateDirectory(resolvedRoot, relative, true)) optionalDirectories.push(relative);
   }
 
+  const commit = await assertCleanPublicTree(resolvedRoot);
+  await assertOwnedOutput(resolvedOut);
   await fs.rm(resolvedOut, { recursive: true, force: true });
   await fs.mkdir(resolvedOut, { recursive: true });
   for (const relative of REQUIRED_FILES) await copyFile(resolvedRoot, resolvedOut, relative);
@@ -220,14 +315,14 @@ async function buildStatic({
   const files = {};
   for (const relative of await listOutputFiles(resolvedOut)) {
     const bytes = await fs.readFile(path.join(resolvedOut, relative));
-    files[relative] = crypto.createHash('sha256').update(bytes).digest('hex');
+    files[relative] = hash(bytes);
+  }
+  if (await assertCleanPublicTree(resolvedRoot) !== commit) {
+    throw new Error('public inputs changed during static build');
   }
   const manifest = {
     schema: 1,
-    commit: execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: resolvedRoot,
-      encoding: 'utf8'
-    }).trim(),
+    commit,
     files
   };
   await fs.writeFile(

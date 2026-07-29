@@ -82,7 +82,9 @@ async function writeSyntheticPublicRoot(root) {
   }
   execFileSync('git', ['init', '--quiet'], { cwd: root });
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
-    'commit', '--allow-empty', '--quiet', '-m', 'test root'], { cwd: root });
+    'add', '.'], { cwd: root });
+  execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+    'commit', '--quiet', '-m', 'test root'], { cwd: root });
 }
 
 test('buildStatic emits only the public route tree plus a hash manifest', async t => {
@@ -309,4 +311,84 @@ test('buildStatic rejects non-regular files in allowlisted input directories', a
 
   await assert.rejects(buildStatic({ root, out }), /not a regular file/);
   await assert.rejects(fs.stat(path.join(out, 'core', 'unsafe.fifo')), { code: 'ENOENT' });
+});
+
+test('buildStatic only clears empty or previously verified build outputs', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-output-ownership-'));
+  const root = path.join(sandbox, 'repo');
+  const out = path.join(sandbox, 'out');
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+  await fs.mkdir(out);
+  await fs.writeFile(path.join(out, 'keep-me.txt'), 'must survive');
+
+  await assert.rejects(buildStatic({ root, out }), /unowned build output/);
+  assert.equal(await fs.readFile(path.join(out, 'keep-me.txt'), 'utf8'), 'must survive');
+
+  await fs.rm(out, { recursive: true });
+  await fs.mkdir(out);
+  await buildStatic({ root, out });
+  const firstManifest = await fs.readFile(path.join(out, 'release-manifest.json'));
+  await buildStatic({ root, out });
+  assert.deepEqual(await fs.readFile(path.join(out, 'release-manifest.json')), firstManifest);
+});
+
+test('buildStatic refuses outputs that overlap public inputs before cleanup', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-output-overlap-'));
+  const root = path.join(sandbox, 'repo');
+  const index = path.join(root, 'index.html');
+  const core = path.join(root, 'core');
+  const indexBefore = 'index.html';
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+
+  for (const out of [index, core, path.join(core, 'dist'), path.join(root, 'lesson49')]) {
+    await assert.rejects(buildStatic({ root, out }), /overlaps public input/);
+  }
+  const alias = path.join(sandbox, 'root-alias');
+  await fs.symlink(root, alias);
+  await assert.rejects(buildStatic({ root, out: path.join(alias, 'core', 'dist') }), /overlaps public input/);
+  assert.equal(await fs.readFile(index, 'utf8'), indexBefore);
+  assert.equal(await fs.readFile(path.join(core, 'audio-player.js'), 'utf8'), 'core/audio-player.js');
+
+  await buildStatic({ root });
+  assert.equal((await fs.stat(path.join(root, 'dist', 'release-manifest.json'))).isFile(), true);
+});
+
+test('buildStatic binds a manifest to a clean public Git tree only', async t => {
+  const sandbox = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-public-git-'));
+  const root = path.join(sandbox, 'repo');
+  const out = path.join(sandbox, 'out');
+  t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
+  await fs.mkdir(root);
+  await writeSyntheticPublicRoot(root);
+
+  await fs.writeFile(path.join(root, 'index.html'), 'dirty tracked public file');
+  await assert.rejects(buildStatic({ root, out }), /public inputs are dirty/);
+  await assert.rejects(fs.stat(out), { code: 'ENOENT' });
+
+  execFileSync('git', ['checkout', '--', 'index.html'], { cwd: root });
+  await fs.writeFile(path.join(root, 'core', 'untracked.js'), 'dirty untracked public file');
+  await assert.rejects(buildStatic({ root, out }), /public inputs are dirty/);
+  await assert.rejects(fs.stat(out), { code: 'ENOENT' });
+
+  await fs.rm(path.join(root, 'core', 'untracked.js'));
+  await fs.mkdir(path.join(root, 'scripts'), { recursive: true });
+  await fs.writeFile(path.join(root, 'scripts', 'local-dev.js'), 'non-public dirty file');
+  await buildStatic({ root, out });
+  const manifest = JSON.parse(await fs.readFile(path.join(out, 'release-manifest.json')));
+  assert.equal(manifest.commit, execFileSync('git', ['rev-parse', 'HEAD'], {
+    cwd: root,
+    encoding: 'utf8'
+  }).trim());
+
+  await fs.mkdir(path.join(root, 'assets'));
+  await fs.writeFile(path.join(root, 'assets', 'tracked.js'), 'tracked optional public file');
+  execFileSync('git', ['add', 'assets'], { cwd: root });
+  execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+    'commit', '--quiet', '-m', 'add optional assets'], { cwd: root });
+  await fs.rm(path.join(root, 'assets'), { recursive: true });
+  await assert.rejects(buildStatic({ root, out }), /public inputs are dirty/);
 });
