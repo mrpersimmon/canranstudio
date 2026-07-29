@@ -1,6 +1,6 @@
 # 🥩 肉店大冒险 · At the Butcher's
 
-新概念英语第一册 **Lesson 49** 儿童互动闯关课件（单文件 HTML，零构建、零外部图片依赖）。
+新概念英语第一册 **Lesson 49** 儿童互动闯关课件（单文件 HTML，静态且运行时零依赖、零外部图片依赖）。
 
 线上地址：http://59.110.217.36/lesson49/
 
@@ -28,3 +28,12 @@
 - 单文件 `index.html`（HTML + CSS + 原生 JS，约 84KB）
 - Web Speech API（兜底）、Web Audio 合成音效、Canvas 撒花、localStorage 星星进度（`canran:l49:progress:v2`）
 - 移动端自适应（含吸顶导航压缩、`prefers-reduced-motion` 支持）
+
+## 加固与无障碍合同
+
+- 页面运行时保持静态、无 package；固定为 Fontsource 5.3.0 的构建期包通过
+  `npm run vendor:fonts` 重新生成已提交的 `assets/fonts/`。该目录包含 WOFF2、`fonts.css`
+  和 OFL 许可证副本，页面从同源 `/assets/fonts/` 加载字体。
+- 证书的领取、打印和保存处理都会重新检查五关资格。领取界面是原生模态 `<dialog>`；反馈
+  状态区使用 `polite`、`atomic` live region。
+- 保存证书先生成 Blob，并为每个创建的 object URL 保留一次关闭或创建失败时的 revoke 路径。

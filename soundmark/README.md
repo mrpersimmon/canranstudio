@@ -1,6 +1,6 @@
 # 🔊 音标魔法乐园 · 英语音标第一课
 
-儿童互动音标课件（单文件 HTML，零构建、零外部图片依赖）。
+儿童互动音标课件（单文件 HTML，静态且运行时零依赖、零外部图片依赖）。
 
 线上地址：http://59.110.217.36/soundmark
 
@@ -27,5 +27,13 @@
 ## 技术
 
 - 单文件 `index.html`（HTML + CSS + 原生 JS，约 52KB）
-- Web Audio 无需；`<audio>` 预录播放、Web Speech API（兜底）、Canvas 撒花、localStorage 星星进度
+- Web Audio 无需；`<audio>` 预录播放、Web Speech API（兜底）、Canvas 撒花、localStorage 星星进度（键 `canran:soundmark:progress:v2`）
 - 移动端自适应
+
+## 加固与无障碍合同
+
+- 页面运行时保持静态、无 package；固定 Fontsource 5.3.0 构建期包通过
+  `npm run vendor:fonts` 重建已提交的 `assets/fonts/`。其下保存 WOFF2、`fonts.css` 和
+  OFL 许可证副本，字体只从同源路径请求。
+- 证书领取和打印处理都会重新检查资格。证书界面使用原生模态 `<dialog>`，课程反馈与提示
+  使用 `polite`、`atomic` live region。

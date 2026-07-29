@@ -1,6 +1,6 @@
 # 🤴 挑食小王子大冒险 · The Picky Prince
 
-新概念英语第一册 **Lesson 50** 儿童互动闯关课件（单文件 HTML，零构建、零外部图片依赖）。
+新概念英语第一册 **Lesson 50** 儿童互动闯关课件（单文件 HTML，静态且运行时零依赖、零外部图片依赖）。
 与《🥩 肉店大冒险 · Lesson 49》同系列姊妹篇。
 
 ## 课程内容
@@ -32,5 +32,13 @@
 ## 技术
 
 - 单文件 `index.html`（HTML + CSS + 原生 JS，约 88KB）
-- Web Speech API（兜底）、Web Audio 合成音效、Canvas 撒花与证书绘制、localStorage 星星进度（键 `l50-stars-v1`）
+- Web Speech API（兜底）、Web Audio 合成音效、Canvas 撒花与证书绘制、localStorage 星星进度（键 `canran:l50:progress:v2`）
 - 移动端自适应（390px 无横向溢出、吸顶导航压缩、`prefers-reduced-motion` 支持、翻卡键盘可达）
+
+## 加固与无障碍合同
+
+- 页面运行时保持静态、无 package；固定 Fontsource 5.3.0 构建期包的已提交输出由
+  `npm run vendor:fonts` 重建。WOFF2、`fonts.css` 与 OFL 许可证副本位于
+  `assets/fonts/`，字体只从同源路径请求。
+- 证书领取、打印和保存处理各自重新检查资格。证书界面是原生模态 `<dialog>`，反馈状态区
+  使用 `polite`、`atomic` live region。
