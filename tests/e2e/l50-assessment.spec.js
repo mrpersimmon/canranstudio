@@ -45,10 +45,16 @@ test('listen challenge solves a retry without adding first-try score', async ({ 
     buttons.find(button => button.dataset.en !== answer).click();
   }, correct);
   await expect.poll(() => globalValue(page, 'LG.lock')).toBe(false);
-  await page.locator(`#lgOpts [data-en="${correct}"]`).dblclick();
+  await page.locator(`#lgOpts [data-en="${correct}"]`).click();
 
   await expect.poll(() => globalValue(page, 'LG.round')).toBe(1);
   expect(await globalValue(page, 'LG.score')).toBe(0);
+  await expect.poll(() => globalValue(page, 'LG.lock')).toBe(false);
+  const nextCorrect = await globalValue(page, 'LG.cur.en');
+  await page.locator(`#lgOpts [data-en="${nextCorrect}"]`).click();
+
+  await expect.poll(() => globalValue(page, 'LG.round')).toBe(2);
+  expect(await globalValue(page, 'LG.score')).toBe(1);
 });
 
 test('feeding challenge solves a retry without adding first-try score', async ({ page }) => {
@@ -59,10 +65,15 @@ test('feeding challenge solves a retry without adding first-try score', async ({
 
   await page.locator(correct ? '#feedNo' : '#feedYes').click();
   await expect.poll(() => globalValue(page, 'FD.lock')).toBe(false);
-  await page.locator(correct ? '#feedYes' : '#feedNo').dblclick();
+  await page.locator(correct ? '#feedYes' : '#feedNo').click();
 
   await expect.poll(() => globalValue(page, 'FD.idx')).toBe(1);
   expect(await globalValue(page, 'FD.score')).toBe(0);
+  const nextCorrect = await globalValue(page, 'TABLE[FD.idx].like');
+  await page.locator(nextCorrect ? '#feedYes' : '#feedNo').click();
+
+  await expect.poll(() => globalValue(page, 'FD.idx')).toBe(2);
+  expect(await globalValue(page, 'FD.score')).toBe(1);
 });
 
 test('sorting-pot challenge solves a retry without adding first-try score', async ({ page }) => {
@@ -76,10 +87,15 @@ test('sorting-pot challenge solves a retry without adding first-try score', asyn
     buttons.find(button => button.dataset.pot !== answer).click();
   }, correct);
   await expect.poll(() => globalValue(page, 'POT.lock')).toBe(false);
-  await page.locator(`.pot[data-pot="${correct}"]`).dblclick();
+  await page.locator(`.pot[data-pot="${correct}"]`).click();
 
   await expect.poll(() => globalValue(page, 'POT.idx')).toBe(1);
   expect(await globalValue(page, 'POT.score')).toBe(0);
+  const nextCorrect = await globalValue(page, 'POT.order[POT.idx].pot');
+  await page.locator(`.pot[data-pot="${nextCorrect}"]`).click();
+
+  await expect.poll(() => globalValue(page, 'POT.idx')).toBe(2);
+  expect(await globalValue(page, 'POT.score')).toBe(1);
 });
 
 test('do-does challenge solves a retry without adding first-try score', async ({ page }) => {
@@ -90,10 +106,15 @@ test('do-does challenge solves a retry without adding first-try score', async ({
 
   await page.locator(correct ? '#ddDo' : '#ddDoes').click();
   await expect.poll(() => globalValue(page, 'DD.lock')).toBe(false);
-  await page.locator(correct ? '#ddDoes' : '#ddDo').dblclick();
+  await page.locator(correct ? '#ddDoes' : '#ddDo').click();
 
   await expect.poll(() => globalValue(page, 'DD.idx')).toBe(1);
   expect(await globalValue(page, 'DD.score')).toBe(0);
+  const nextCorrect = await globalValue(page, 'DD.order[DD.idx].does');
+  await page.locator(nextCorrect ? '#ddDoes' : '#ddDo').click();
+
+  await expect.poll(() => globalValue(page, 'DD.idx')).toBe(2);
+  expect(await globalValue(page, 'DD.score')).toBe(1);
 });
 
 test('legacy Lesson 50 ratings migrate and clamp without a page error', async ({ page }) => {
