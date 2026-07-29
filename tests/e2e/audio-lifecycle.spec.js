@@ -28,11 +28,30 @@ function installManualAudio(page) {
   });
 }
 
+async function finishLesson50InitializationAudio(page) {
+  await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
+  await page.evaluate(() => window.__audios[0].dispatchEvent(new Event('ended')));
+  await expect.poll(() => page.evaluate(() => speechBusy)).toBe(false);
+  await page.evaluate(() => {
+    window.__audios.length = 0;
+    speechQ.length = 0;
+  });
+}
+
 test('starting a second soundmark word clears the first playing state', async ({ page }) => {
   await installManualAudio(page);
   await page.goto('/soundmark/');
+  const initialGameAudio = page.locator('#g1Hear');
   const bit = page.locator('.wchip[data-audio-word="bit"]');
   const fit = page.locator('.wchip[data-audio-word="fit"]');
+
+  await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
+  await expect(initialGameAudio).toHaveClass(/playing/);
+  await page.evaluate(() => {
+    window.__audios[0].dispatchEvent(new Event('ended'));
+    window.__audios.length = 0;
+  });
+  await expect(initialGameAudio).not.toHaveClass(/playing/);
 
   await bit.click();
   await expect(bit).toHaveClass(/playing/);
@@ -103,6 +122,7 @@ test('Lesson 50 queued speech advances only after the active item finishes', asy
   await installManualAudio(page);
   await page.goto('/lesson50/');
   await page.locator('body').dispatchEvent('pointerdown');
+  await finishLesson50InitializationAudio(page);
 
   await page.evaluate(() => {
     speakLater('apple');
@@ -143,6 +163,7 @@ test('Lesson 50 synchronous cancellation reentry keeps the newest request and qu
   await installManualAudio(page);
   await page.goto('/lesson50/');
   await page.locator('body').dispatchEvent('pointerdown');
+  await finishLesson50InitializationAudio(page);
 
   await page.evaluate(() => {
     window.__speechResults = [];
