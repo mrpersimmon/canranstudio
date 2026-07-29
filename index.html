@@ -21,6 +21,7 @@ body{
   font-size:19px; line-height:1.6;
   background-image:radial-gradient(#f7e8d2 1.5px, transparent 1.5px);
   background-size:28px 28px;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom)); /* 给底部 Tab 栏留位，防内容遮挡 */
 }
 h1,h2,h3{font-weight:800;line-height:1.25}
 button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none}
@@ -42,6 +43,15 @@ button:focus-visible,a:focus-visible{outline:4px solid var(--yellow);outline-off
   padding:8px 12px;border-radius:999px;border:2px solid transparent;min-height:44px;display:inline-flex;align-items:center;
 }
 .nav-links a:hover{border-color:var(--brown);background:var(--cream)}
+/* ===== 底部 Tab 栏（移动端优先：上一课/乐园/下一课） ===== */
+#coursenav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);z-index:60;display:flex;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--paper);border-top:4px solid var(--brown);box-shadow:0 -4px 0 rgba(74,50,38,.12)}
+#coursenav .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:54px;border-radius:14px;border:2px solid var(--brown);background:var(--cream);color:var(--brown);text-decoration:none;font-weight:800;font-size:13px;line-height:1.25;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+#coursenav .tab .ti{font-size:20px}
+#coursenav .tab small{font-size:11px;font-weight:400;opacity:.7}
+#coursenav .tab:active{transform:scale(.95)}
+#coursenav .tab.disabled{opacity:.45;border-style:dashed}
+#cnToast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);background:var(--brown);color:var(--cream);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:61;white-space:nowrap}
+#cnToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #starBox{margin-left:auto;display:flex;align-items:center;gap:10px;font-weight:800}
 #starTrack{width:150px;height:20px;border:3px solid var(--brown);border-radius:999px;background:#fff;overflow:hidden}
 #starFill{height:100%;width:0%;background:var(--yellow);border-radius:999px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
@@ -1861,6 +1871,24 @@ buildFill();
 buildChoice();
 buildTrans();
 renderStars();
+/* ===== 底部 Tab 栏：禁用按钮提示（DOMContentLoaded：tabbar HTML 在本脚本之后） ===== */
+document.addEventListener('DOMContentLoaded',function(){
+document.querySelectorAll('#coursenav .tab.disabled').forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=document.getElementById('cnToast');if(!t)return;
+    t.classList.add('show');clearTimeout(t._tm);
+    t._tm=setTimeout(function(){t.classList.remove('show');},1800);
+    if(navigator.vibrate)navigator.vibrate(15);
+  });
+});
+});
 </script>
+<!-- ===== 底部 Tab 栏：上一课 / 乐园 / 下一课 ===== -->
+<nav id="coursenav" aria-label="课程导航">
+  <span class="tab disabled" aria-disabled="true"><span class="ti">🔒</span><span>◀ 上一课</span><small>敬请期待</small></span>
+  <a class="tab" href="/"><span class="ti">🎪</span><span>乐园</span><small>选课程</small></a>
+  <a class="tab" href="/lesson50/"><span class="ti">🤴</span><span>下一课 ▶</span><small>L50 小王子</small></a>
+</nav>
+<div id="cnToast" role="status">🔒 新课程正在建造中，敬请期待！</div>
 </body>
 </html>

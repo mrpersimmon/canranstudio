@@ -21,6 +21,15 @@
   --shadow:6px 6px 0 var(--ink);
   --shadow-sm:4px 4px 0 var(--ink);
 }
+/* ===== 底部 Tab 栏（上一课/乐园/下一课，z-index 避开原生 topbar 的 60） ===== */
+#coursenav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);z-index:56;display:flex;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--paper);border-top:4px solid var(--ink);box-shadow:0 -4px 0 rgba(43,33,24,.12)}
+#coursenav .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:54px;border-radius:14px;border:2px solid var(--ink);background:var(--paper2);color:var(--ink);text-decoration:none;font-weight:800;font-size:13px;line-height:1.25;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+#coursenav .tab .ti{font-size:20px}
+#coursenav .tab small{font-size:11px;font-weight:400;opacity:.7}
+#coursenav .tab:active{transform:scale(.95)}
+#coursenav .tab.disabled{opacity:.45;border-style:dashed}
+#cnToast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:57;white-space:nowrap}
+#cnToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{
@@ -289,7 +298,7 @@ section{padding:90px 20px 70px;max-width:1060px;margin:0 auto;position:relative}
   font-family:'ZCOOL KuaiLe';font-size:30px;border:none;border-bottom:3px dashed var(--ink);
   background:transparent;text-align:center;width:min(320px,80%);outline:none;color:var(--berry);margin:8px 0;
 }
-#certStars{font-size:34px;letter-spacing:4px;margin:8px 0;min-height:44px}
+#certStars{font-size:clamp(22px,6.4vw,34px);letter-spacing:clamp(1px,0.8vw,4px);margin:8px 0;min-height:44px;max-width:100%;overflow-wrap:anywhere} /* 响应式：防12颗星撑爆390px视口导致整页 shrink-to-fit */
 #certCard .stamp{
   position:absolute;right:26px;bottom:24px;width:96px;height:96px;border:4px solid var(--berry);
   border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--berry);
@@ -1025,6 +1034,23 @@ addEventListener('scroll', ()=>{
   });
   document.querySelectorAll('nav#map a').forEach(a=> a.classList.toggle('on', a.dataset.sec===cur));
 }, {passive:true});
+</script>
+<!-- ===== 底部 Tab 栏：上一课 / 乐园 / 下一课 ===== -->
+<nav id="coursenav" aria-label="课程导航">
+  <span class="tab disabled" aria-disabled="true"><span class="ti">🔒</span><span>◀ 上一课</span><small>敬请期待</small></span>
+  <a class="tab" href="/"><span class="ti">🎪</span><span>乐园</span><small>选课程</small></a>
+  <span class="tab disabled" aria-disabled="true"><span class="ti">🔒</span><span>下一课 ▶</span><small>敬请期待</small></span>
+</nav>
+<div id="cnToast" role="status">🔒 音标第二课正在建造中，敬请期待！</div>
+<script>
+document.querySelectorAll('#coursenav .tab.disabled').forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=document.getElementById('cnToast');if(!t)return;
+    t.classList.add('show');clearTimeout(t._tm);
+    t._tm=setTimeout(function(){t.classList.remove('show');},1800);
+    if(navigator.vibrate)navigator.vibrate(15);
+  });
+});
 </script>
 </body>
 </html>
