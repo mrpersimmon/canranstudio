@@ -825,6 +825,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 </footer>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/audio-player.js"></script>
 <script>
 'use strict';
 /* ================= 工具 ================= */
@@ -966,9 +967,11 @@ let speechWarned=false;
 if(!speechOK){document.documentElement.classList.add('no-speech');}
 /* 英式语音包挑选（语音列表可能异步加载，需监听 voiceschanged） */
 const UK_VOICE_KEYS=['google uk english','united kingdom','daniel','kate','serena','stephanie','arthur','martha','libby','sonja','ryan'];
-let ukVoice=null,ukVoiceAnnounced=false;
+let ukVoice=null;
 function pickBritishVoice(){
-  const vs=(window.speechSynthesis.getVoices()||[]);
+  const synthesis=window.speechSynthesis;
+  if(!synthesis||typeof synthesis.getVoices!=='function')return null;
+  const vs=(synthesis.getVoices()||[]);
   if(!vs.length)return null;
   const isGB=v=>(v.lang||'').replace(/_/g,'-').toLowerCase().indexOf('en-gb')===0;
   return vs.find(v=>isGB(v)&&UK_VOICE_KEYS.some(k=>(v.name||'').toLowerCase().includes(k))) /* a. en-GB 且名字含知名英式语音关键词 */
@@ -980,57 +983,22 @@ if(speechOK){
   ukVoice=pickBritishVoice();
   window.speechSynthesis.addEventListener('voiceschanged',()=>{ukVoice=pickBritishVoice();});
 }
-/* 预录音频优先：文件名 slug 规则与生成端严格一致 */
-function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');}
-const audioFailCache=new Set(); /* 播放失败过的 slug：下次直接走 speechSynthesis，不再重复请求 */
-let curAudio=null;              /* 当前正在播放的预录音频引用 */
-function stopCurAudio(){
-  if(curAudio){try{curAudio.pause();curAudio.currentTime=0;}catch(e){}curAudio=null;}
-}
-/* 尝试播放 audio/<slug>.mp3；resolve(true)=已接管播放，resolve(false)=需回退 speechSynthesis */
-function tryAudio(t){
-  return new Promise(resolve=>{
-    const s=slug(t);
-    if(!s||audioFailCache.has(s)){resolve(false);return;}
-    let a;
-    try{a=new Audio('audio/'+s+'.mp3');}catch(e){audioFailCache.add(s);resolve(false);return;}
-    curAudio=a;
-    let settled=false;
-    const ok=()=>{if(!settled){settled=true;resolve(true);}};
-    const fail=()=>{
-      if(settled)return;settled=true;
-      if(curAudio===a){curAudio=null;audioFailCache.add(s);resolve(false);} /* 真实失败：记入缓存并回退 */
-      else{resolve(true);} /* 已被更新的 speak 取代（AbortError），无需回退 */
-    };
-    a.addEventListener('error',fail,{once:true});
-    a.addEventListener('ended',()=>{if(curAudio===a)curAudio=null;},{once:true});
-    let p;
-    try{p=a.play();}catch(e){fail();return;}
-    if(p&&typeof p.then==='function'){p.then(ok,fail);}else{ok();}
-  });
-}
-/* speechSynthesis 兜底（原逻辑整体保留，含 en-GB 语音挑选） */
-function speakSynth(t){
-  if(!speechOK){
-    if(!speechWarned){speechWarned=true;alert('当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～');}
-    return;
-  }
-  try{
-    window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t);
-    u.lang='en-GB';u.rate=0.85;u.pitch=1.05;
-    if(!ukVoice)ukVoice=pickBritishVoice();
-    if(ukVoice){
-      u.voice=ukVoice;
-      if(!ukVoiceAnnounced){ukVoiceAnnounced=true;console.info('🔊 已选用英式语音：'+ukVoice.name+' ('+ukVoice.lang+')');}
+const lesson49Audio=CanranCore.audio.createAudioPlayer();
+function speak(text){
+  const value=String(text);
+  const source=CanranCore.audio.slugify(value);
+  return lesson49Audio.play({
+    text:value,
+    src:source?'audio/'+source+'.mp3':'',
+    rate:0.85,
+    voice:ukVoice||pickBritishVoice(),
+    onFinish:result=>{
+      if(result.reason==='unsupported'&&!speechWarned){
+        speechWarned=true;
+        alert('当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～');
+      }
     }
-    window.speechSynthesis.speak(u);
-  }catch(e){}
-}
-function speak(t){
-  stopCurAudio(); /* 停止上一个正在播放的 Audio，避免叠音 */
-  if(speechOK){try{window.speechSynthesis.cancel();}catch(e){}}
-  tryAudio(t).then(ok2=>{if(!ok2)speakSynth(t);});
+  });
 }
 
 /* ================= 星星系统（localStorage） ================= */

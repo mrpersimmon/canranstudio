@@ -219,3 +219,75 @@ test('unsupported Lesson 50 speech completes without voice lookup errors', async
   ]);
   expect(await page.evaluate(() => speechBusy)).toBe(false);
 });
+
+test('Lesson 49 replaces an active recording without leaving two players', async ({ page }) => {
+  await installManualAudio(page);
+  await page.goto('/');
+
+  await page.evaluate(() => {
+    speak('apple');
+    speak('banana');
+  });
+
+  expect(await page.evaluate(() => window.__audios.length)).toBe(2);
+  expect(await page.evaluate(() => window.__audios[0].paused)).toBe(true);
+  expect(await page.evaluate(() => window.__audios[1].paused)).toBe(false);
+});
+
+test('Lesson 49 falls back to speech when active recording playback errors', async ({ page }) => {
+  await installManualAudio(page);
+  await page.addInitScript(() => {
+    window.__spoken = [];
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      value: {
+        addEventListener() {},
+        cancel() {},
+        getVoices() {
+          return [];
+        },
+        speak(utterance) {
+          window.__spoken.push(utterance.text);
+        }
+      }
+    });
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', {
+      configurable: true,
+      value: class {
+        constructor(text) {
+          this.text = text;
+        }
+      }
+    });
+  });
+  await page.goto('/');
+
+  await page.evaluate(() => speak('apple'));
+  await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
+  await page.evaluate(() => window.__audios[0].dispatchEvent(new Event('error')));
+
+  await expect.poll(() => page.evaluate(() => window.__spoken)).toEqual(['apple']);
+});
+
+test('unsupported Lesson 49 speech completes without voice lookup errors and warns once', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  await page.addInitScript(() => {
+    window.Audio = undefined;
+    Reflect.deleteProperty(window, 'speechSynthesis');
+    Reflect.deleteProperty(window, 'SpeechSynthesisUtterance');
+  });
+  await page.goto('/');
+  await page.evaluate(() => {
+    window.__speechWarnings = [];
+    window.alert = message => window.__speechWarnings.push(message);
+    speechWarned = false;
+    speak('apple');
+    speak('banana');
+  });
+
+  await expect.poll(() => page.evaluate(() => window.__speechWarnings)).toEqual([
+    '当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～'
+  ]);
+  expect(pageErrors).toEqual([]);
+});
