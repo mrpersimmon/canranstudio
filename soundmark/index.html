@@ -584,7 +584,9 @@ let speechWarned = false;
 const UK_VOICE_KEYS = ['google uk english','united kingdom','daniel','kate','serena','stephanie','arthur','martha','libby','sonja','ryan'];
 let ukVoice = null;
 function pickBritishVoice(){
-  const vs = (window.speechSynthesis.getVoices() || []);
+  const synth = window.speechSynthesis;
+  if(!synth || typeof synth.getVoices !== 'function') return null;
+  const vs = (synth.getVoices() || []);
   if(!vs.length) return null;
   const isGB = v => (v.lang||'').replace(/_/g,'-').toLowerCase().indexOf('en-gb') === 0;
   return vs.find(v=>isGB(v) && UK_VOICE_KEYS.some(k=>(v.name||'').toLowerCase().includes(k)))
