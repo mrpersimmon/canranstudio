@@ -63,13 +63,16 @@ test('soundmark certificate requires twelve finite stars and a non-empty name', 
   });
 
   await page.goto('/soundmark/');
-  await expect(page.locator('#btnPrint')).toBeEnabled();
-  await page.locator('#btnPrint').click();
+  await expect(page.locator('#btnOpenCert')).toBeEnabled();
+  await page.locator('#btnOpenCert').click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
   expect(await page.evaluate(() => window.__printed)).toBe(false);
   await expect(page.locator('#certName')).toBeFocused();
 
   await page.locator('#certName').fill('小明');
-  await page.locator('#btnPrint').click();
+  await page.locator('#btnOpenCert').click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.locator('#certPrintAction').click();
   expect(await page.evaluate(() => window.__printed)).toBe(true);
 });
 
@@ -86,11 +89,37 @@ test('eleven stars cannot issue the soundmark certificate', async ({ page }) => 
   await page.goto('/soundmark/');
 
   await expect(page.locator('#starCount')).toHaveText('11');
-  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await expect(page.locator('#btnOpenCert')).toBeDisabled();
   await expect(page.locator('#certNeed')).toContainText('还差 1 颗星');
-  await page.locator('#btnPrint').evaluate(button => { button.disabled = false; });
+  await page.locator('#btnOpenCert').evaluate(button => { button.disabled = false; });
   await page.locator('#certName').fill('小明');
-  await page.locator('#btnPrint').click();
+  await page.locator('#btnOpenCert').click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  expect(await page.evaluate(() => window.__printed)).toBe(false);
+});
+
+test('soundmark print re-checks eligibility after its certificate dialog opens', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('canran:soundmark:progress:v2', JSON.stringify({
+      version: 2,
+      ratings: { vs: 3, g1: 3, g2: 3, g3: 3 }
+    }));
+    window.__printed = false;
+    window.print = () => { window.__printed = true; };
+  });
+
+  await page.goto('/soundmark/');
+  await page.locator('#certName').fill('小明');
+  await page.locator('#btnOpenCert').click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.evaluate(() => {
+    window.eval('soundRatings={vs:3,g1:3,g2:3,g3:2}');
+  });
+  await page.locator('#certPrintAction').click();
+
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(page.locator('#btnOpenCert')).toBeDisabled();
+  await expect(page.locator('#certNeed')).toContainText('还差 1 颗星');
   expect(await page.evaluate(() => window.__printed)).toBe(false);
 });
 

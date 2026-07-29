@@ -308,7 +308,13 @@ section.lvl{scroll-margin-top:96px;padding:56px 0}
   border-radius:14px;padding:8px 16px;background:#fff;color:var(--brown);width:min(260px,80vw);text-align:center;
 }
 /* 证书 */
-#certModal{position:fixed;inset:0;background:rgba(74,50,38,.6);z-index:99;display:flex;align-items:center;justify-content:center;padding:16px}
+#certModal{
+  border:0;background:transparent;padding:16px;width:100%;max-width:none;height:100%;max-height:none;
+  overflow-y:auto;
+}
+#certModal::backdrop{background:rgba(74,50,38,.6)}
+#certModal:not([open]){display:none}
+#certModal[open]{display:flex;align-items:center;justify-content:center}
 #certCard{
   background:var(--paper);border:6px solid var(--brown);border-radius:26px;max-width:640px;width:100%;
   padding:30px 26px;text-align:center;position:relative;box-shadow:10px 10px 0 rgba(0,0,0,.25);
@@ -365,7 +371,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 @media print{
   body *{visibility:hidden}
   #certModal,#certModal *{visibility:visible}
-  #certModal{position:absolute;inset:0;background:#fff}
+  #certModal{display:block;position:absolute;inset:0;background:#fff}
   .cert-btns{display:none}
 }
 @media (prefers-reduced-motion: reduce){
@@ -801,10 +807,10 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 </section>
 
 <!-- ===== 证书弹窗 ===== -->
-<div id="certModal" class="hidden">
+<dialog id="certModal" aria-modal="true" aria-labelledby="l49CertTitle">
   <div id="certCard">
     <div class="cert-ribbon">🎖️🥩🎖️</div>
-    <h3>肉店小学徒 · 结业证书</h3>
+    <h3 id="l49CertTitle">肉店小学徒 · 结业证书</h3>
     <p>Certificate of Butcher Shop Apprentice</p>
     <p style="margin-top:10px">兹证明小学徒</p>
     <div id="certNameOut">小学徒</div>
@@ -818,7 +824,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       <button class="btn btn-mini btn-yellow" id="certClose">关闭</button>
     </div>
   </div>
-</div>
+</dialog>
 
 <footer>
   🥩 肉店大冒险 · 新概念英语第一册 Lesson 49 互动课件 ｜ 给爱英语的你 ❤️
@@ -1687,6 +1693,58 @@ $('#quizStartBtn').addEventListener('click',()=>{sndClick();startExam();});
 $('#quizAgain').addEventListener('click',()=>{sndClick();startExam();});
 
 /* ================= 结业证书 ================= */
+const l49CertDialog=$('#certModal');
+let l49CertReturnFocus=$('#certBtn');
+function canReceiveL49Focus(element){
+  return Boolean(element&&element.isConnected&&!element.disabled&&!element.hidden);
+}
+function focusAfterL49Certificate(target){
+  const fallback=canReceiveL49Focus($('#certBtn'))?$('#certBtn'):$('#certName');
+  const focusTarget=canReceiveL49Focus(target)?target:fallback;
+  try{if(focusTarget)focusTarget.focus();}catch{}
+}
+function openL49CertificateDialog(){
+  if(!canIssueL49Certificate()){
+    renderL49CertificateGate();
+    return false;
+  }
+  if(l49CertDialog.open)return true;
+  const active=document.activeElement;
+  l49CertReturnFocus=canReceiveL49Focus(active)&&!l49CertDialog.contains(active)
+    ?active
+    :$('#certBtn');
+  try{l49CertDialog.showModal();}catch(error){
+    if(!l49CertDialog.open)return false;
+  }
+  requestAnimationFrame(()=>{
+    if(l49CertDialog.open)focusAfterL49Certificate($('#certSave'));
+  });
+  return true;
+}
+function closeL49CertificateDialog(){
+  if(l49CertDialog.open)l49CertDialog.close();
+  focusAfterL49Certificate(l49CertReturnFocus);
+}
+l49CertDialog.addEventListener('cancel',event=>{
+  event.preventDefault();
+  closeL49CertificateDialog();
+});
+l49CertDialog.addEventListener('click',event=>{
+  if(event.target===l49CertDialog)closeL49CertificateDialog();
+});
+l49CertDialog.addEventListener('keydown',event=>{
+  if(event.key!=='Tab')return;
+  const actions=Array.from(l49CertDialog.querySelectorAll('button:not([disabled])'));
+  if(!actions.length)return;
+  const first=actions[0],last=actions[actions.length-1];
+  if(event.shiftKey&&document.activeElement===first){
+    event.preventDefault();
+    last.focus();
+  }else if(!event.shiftKey&&document.activeElement===last){
+    event.preventDefault();
+    first.focus();
+  }
+});
 $('#certBtn').addEventListener('click',()=>{
   if(!canIssueL49Certificate()){
     renderL49CertificateGate();
@@ -1697,7 +1755,7 @@ $('#certBtn').addEventListener('click',()=>{
   $('#certDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
   $('#certStars').textContent=starStr(getStar('l5'));
   $('#certTotal').textContent=totalStars();
-  $('#certModal').classList.remove('hidden');
+  openL49CertificateDialog();
   fanfare();confetti(90);
   warmCertFonts(); // 弹窗显示时即预热卡通字体，保证稍后 canvas 绘制时已加载
 });
@@ -1968,6 +2026,7 @@ async function saveCertImage(){
   }
 }
 function showCertOverlay(src){
+  if(l49CertDialog.open)closeL49CertificateDialog();
   const existing=Array.from(document.querySelectorAll('#certSaveOverlay'));
   for(const node of existing){
     try{
@@ -1977,6 +2036,7 @@ function showCertOverlay(src){
   }
   if(document.querySelector('#certSaveOverlay'))throw new Error('无法替换现有保存预览');
 
+  const overlayReturnFocus=document.activeElement;
   let ov=null,closed=false;
   const closeOverlay=event=>{
     try{if(event)event.stopPropagation();}catch{}
@@ -1984,6 +2044,7 @@ function showCertOverlay(src){
     closed=true;
     safeRevoke(src);
     safeRemoveNode(ov);
+    focusAfterL49Certificate(overlayReturnFocus);
     try{sndClick();}catch{}
   };
   try{
@@ -2004,6 +2065,7 @@ function showCertOverlay(src){
     ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
     ov.addEventListener('click',event=>{if(event.target===ov)closeOverlay(event);});
     document.body.appendChild(ov);
+    try{close.focus();}catch{}
     return ov;
   }catch(error){
     closed=true;
@@ -2011,10 +2073,27 @@ function showCertOverlay(src){
     throw error;
   }
 }
-$('#certClose').addEventListener('click',()=>{$('#certModal').classList.add('hidden');sndClick();});
-$('#certModal').addEventListener('click',e=>{if(e.target.id==='certModal')$('#certModal').classList.add('hidden');});
-$('#certSave').addEventListener('click',()=>{sndClick();saveCertImage();});
-$('#certPrint').addEventListener('click',()=>window.print());
+$('#certClose').addEventListener('click',()=>{
+  closeL49CertificateDialog();
+  sndClick();
+});
+$('#certSave').addEventListener('click',()=>{
+  if(!canIssueL49Certificate()){
+    closeL49CertificateDialog();
+    renderL49CertificateGate();
+    return;
+  }
+  sndClick();
+  saveCertImage();
+});
+$('#certPrint').addEventListener('click',()=>{
+  if(!canIssueL49Certificate()){
+    closeL49CertificateDialog();
+    renderL49CertificateGate();
+    return;
+  }
+  window.print();
+});
 
 function initializeLiveRegions(){
   $$('.fb').forEach(element=>{

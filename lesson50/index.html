@@ -242,7 +242,13 @@ section.lvl{scroll-margin-top:96px;padding:56px 0}
 #certArea{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
 #certName{min-height:52px;font-size:20px;font-family:inherit;font-weight:700;border:3px solid var(--brown);border-radius:14px;padding:8px 16px;background:#fff;color:var(--brown);width:min(260px,80vw);text-align:center}
 /* 证书 */
-#certModal{position:fixed;inset:0;background:rgba(74,50,38,.6);z-index:99;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+#certModal{
+  border:0;background:transparent;padding:16px;width:100%;max-width:none;height:100%;max-height:none;
+  overflow-y:auto;
+}
+#certModal::backdrop{background:rgba(74,50,38,.6)}
+#certModal:not([open]){display:none}
+#certModal[open]{display:flex;align-items:center;justify-content:center}
 #certCard{background:var(--paper);border:6px solid var(--brown);border-radius:26px;max-width:640px;width:100%;padding:30px 26px;text-align:center;position:relative;box-shadow:10px 10px 0 rgba(0,0,0,.25);animation:bounceIn .5s}
 #certCard::before{content:'';position:absolute;inset:10px;border:3px dashed var(--purple);border-radius:18px;pointer-events:none}
 #certCard h3{font-size:32px;color:var(--purple);margin:6px 0}
@@ -321,7 +327,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
 @media print{
   body *{visibility:hidden}
   #certModal,#certModal *{visibility:visible}
-  #certModal{position:absolute;inset:0;background:#fff}
+  #certModal{display:block;position:absolute;inset:0;background:#fff}
   .cert-btns{display:none}
 }
 @media (prefers-reduced-motion: reduce){
@@ -717,10 +723,10 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
 </section>
 
 <!-- ===== 证书弹窗 ===== -->
-<div id="certModal" class="hidden">
+<dialog id="certModal" aria-modal="true" aria-labelledby="l50CertTitle">
   <div id="certCard">
     <div class="cert-ribbon">🎖️👑🎖️</div>
-    <h3>皇家营养小顾问 · 结业证书</h3>
+    <h3 id="l50CertTitle">皇家营养小顾问 · 结业证书</h3>
     <p style="font-size:15px;opacity:.7">Certificate of Royal Nutrition Advisor</p>
     <p>兹证明小顾问</p>
     <div id="certNameOut">小学者</div>
@@ -734,7 +740,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
       <button class="btn btn-red btn-mini" id="certClose">关闭</button>
     </div>
   </div>
-</div>
+</dialog>
 
 <footer>
   🤴 挑食小王子大冒险 · The Picky Prince ｜ 新概念英语第一册 Lesson 50 互动课件<br>
@@ -1734,6 +1740,8 @@ async function saveCertImage(){
   showCertOverlay(url);
 }
 function showCertOverlay(src){
+  if(l50CertDialog.open)closeL50CertificateDialog();
+  const overlayReturnFocus=document.activeElement;
   const ov=document.createElement('div');
   ov.id='certSaveOverlay';
   ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;overflow-y:auto;';
@@ -1750,17 +1758,75 @@ function showCertOverlay(src){
   img.style.cssText='max-width:92vw;max-height:60vh;display:block;border-radius:14px;box-shadow:0 12px 44px rgba(0,0,0,.6);background:#FFFDF6;';
   const close=document.createElement('button');
   close.className='btn btn-mini btn-yellow';
-  close.textContent='关闭';
+  close.textContent='关闭';close.id='certSaveClose';
+  let closed=false;
   const closeOv=e=>{
     if(e)e.stopPropagation();
+    if(closed)return;
+    closed=true;
     if(/^blob:/.test(src)){try{URL.revokeObjectURL(src);}catch(err){}}
-    ov.remove();sndClick();
+    ov.remove();
+    focusAfterL50Certificate(overlayReturnFocus);
+    sndClick();
   };
   close.addEventListener('click',closeOv);
   ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
   ov.addEventListener('click',e=>{if(e.target===ov)closeOv(e);});
   document.body.appendChild(ov);
+  try{close.focus();}catch{}
 }
+const l50CertDialog=$('#certModal');
+let l50CertReturnFocus=$('#certBtn');
+function canReceiveL50Focus(element){
+  return Boolean(element&&element.isConnected&&!element.disabled&&!element.hidden);
+}
+function focusAfterL50Certificate(target){
+  const fallback=canReceiveL50Focus($('#certBtn'))?$('#certBtn'):$('#certName');
+  const focusTarget=canReceiveL50Focus(target)?target:fallback;
+  try{if(focusTarget)focusTarget.focus();}catch{}
+}
+function openL50CertificateDialog(){
+  if(!canIssueL50Certificate()){
+    renderL50CertificateGate();
+    return false;
+  }
+  if(l50CertDialog.open)return true;
+  const active=document.activeElement;
+  l50CertReturnFocus=canReceiveL50Focus(active)&&!l50CertDialog.contains(active)
+    ?active
+    :$('#certBtn');
+  try{l50CertDialog.showModal();}catch(error){
+    if(!l50CertDialog.open)return false;
+  }
+  requestAnimationFrame(()=>{
+    if(l50CertDialog.open)focusAfterL50Certificate($('#certSave'));
+  });
+  return true;
+}
+function closeL50CertificateDialog(){
+  if(l50CertDialog.open)l50CertDialog.close();
+  focusAfterL50Certificate(l50CertReturnFocus);
+}
+l50CertDialog.addEventListener('cancel',event=>{
+  event.preventDefault();
+  closeL50CertificateDialog();
+});
+l50CertDialog.addEventListener('click',event=>{
+  if(event.target===l50CertDialog)closeL50CertificateDialog();
+});
+l50CertDialog.addEventListener('keydown',event=>{
+  if(event.key!=='Tab')return;
+  const actions=Array.from(l50CertDialog.querySelectorAll('button:not([disabled])'));
+  if(!actions.length)return;
+  const first=actions[0],last=actions[actions.length-1];
+  if(event.shiftKey&&document.activeElement===first){
+    event.preventDefault();
+    last.focus();
+  }else if(!event.shiftKey&&document.activeElement===last){
+    event.preventDefault();
+    first.focus();
+  }
+});
 $('#certBtn').addEventListener('click',()=>{
   if(!canIssueL50Certificate()){
     renderL50CertificateGate();
@@ -1773,13 +1839,30 @@ $('#certBtn').addEventListener('click',()=>{
   $('#certTotal').textContent=totalStars();
   const d=new Date();
   $('#certDate').textContent=d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月 '+d.getDate()+' 日';
-  $('#certModal').classList.remove('hidden');
+  openL50CertificateDialog();
   fanfare();confetti(80);
 });
-$('#certClose').addEventListener('click',()=>{$('#certModal').classList.add('hidden');sndClick();});
-$('#certModal').addEventListener('click',e=>{if(e.target.id==='certModal')$('#certModal').classList.add('hidden');});
-$('#certSave').addEventListener('click',()=>{sndClick();saveCertImage();});
-$('#certPrint').addEventListener('click',()=>window.print());
+$('#certClose').addEventListener('click',()=>{
+  closeL50CertificateDialog();
+  sndClick();
+});
+$('#certSave').addEventListener('click',()=>{
+  if(!canIssueL50Certificate()){
+    closeL50CertificateDialog();
+    renderL50CertificateGate();
+    return;
+  }
+  sndClick();
+  saveCertImage();
+});
+$('#certPrint').addEventListener('click',()=>{
+  if(!canIssueL50Certificate()){
+    closeL50CertificateDialog();
+    renderL50CertificateGate();
+    return;
+  }
+  window.print();
+});
 
 $('#feedIntro').addEventListener('click',()=>speak("Let's learn about likes and dislikes!"));
 

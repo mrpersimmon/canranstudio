@@ -210,3 +210,270 @@ test('soundmark retains feedback and toast live semantics after updates', async 
     }
   })).toBe(true);
 });
+
+async function seedProgress(page, key, ratings) {
+  await page.addInitScript(({ storageKey, values }) => {
+    localStorage.setItem(storageKey, JSON.stringify({
+      version: 2,
+      ratings: values
+    }));
+  }, { storageKey: key, values: ratings });
+}
+
+async function expectModalFocusRoundTrip(page, opener, initialFocus) {
+  await page.locator(opener).click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(page.locator(initialFocus)).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  expect(await page.evaluate(() => {
+    const dialogElement = document.querySelector('dialog[open]');
+    return dialogElement && dialogElement.contains(document.activeElement);
+  })).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(page.locator(opener)).toBeFocused();
+}
+
+test('Lesson 49 certificate dialog contains focus and returns it', async ({ page }) => {
+  await seedProgress(page, 'canran:l49:progress:v2',
+    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+  await page.goto('/lesson49/');
+  await expectModalFocusRoundTrip(page, '#certBtn', '#certSave');
+});
+
+test('Lesson 50 certificate dialog contains focus and returns it', async ({ page }) => {
+  await seedProgress(page, 'canran:l50:progress:v2',
+    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+  await page.goto('/lesson50/');
+  await expectModalFocusRoundTrip(page, '#certBtn', '#certSave');
+});
+
+test('soundmark certificate dialog contains focus and returns it', async ({ page }) => {
+  await seedProgress(page, 'canran:soundmark:progress:v2',
+    { vs: 3, g1: 3, g2: 3, g3: 3 });
+  await page.goto('/soundmark/');
+  await page.locator('#certName').fill('小明');
+  await expectModalFocusRoundTrip(page, '#btnOpenCert', '#certPrintAction');
+});
+
+const certificatePages = [
+  {
+    label: 'Lesson 49',
+    path: '/lesson49/',
+    key: 'canran:l49:progress:v2',
+    ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 },
+    opener: '#certBtn',
+    primary: '#certSave',
+    close: '#certClose',
+    title: '肉店小学徒 · 结业证书'
+  },
+  {
+    label: 'Lesson 50',
+    path: '/lesson50/',
+    key: 'canran:l50:progress:v2',
+    ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 },
+    opener: '#certBtn',
+    primary: '#certSave',
+    close: '#certClose',
+    title: '皇家营养小顾问 · 结业证书'
+  },
+  {
+    label: 'soundmark',
+    path: '/soundmark/',
+    key: 'canran:soundmark:progress:v2',
+    ratings: { vs: 3, g1: 3, g2: 3, g3: 3 },
+    opener: '#btnOpenCert',
+    primary: '#certPrintAction',
+    close: '#certClose',
+    title: '毕业证书',
+    name: '小明'
+  }
+];
+
+async function prepareCertificatePage(page, config) {
+  await seedProgress(page, config.key, config.ratings);
+  await page.goto(config.path);
+  if (config.name) await page.locator('#certName').fill(config.name);
+}
+
+for (const config of certificatePages) {
+  test(`${config.label} certificate dialog has one name and three reliable close paths`, async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await prepareCertificatePage(page, config);
+
+    const opener = page.locator(config.opener);
+    const dialog = page.getByRole('dialog', { name: config.title, exact: true });
+    await opener.focus();
+    await opener.click();
+    await expect(dialog).toHaveCount(1);
+    await expect(page.locator(config.primary)).toBeFocused();
+    await page.locator('#certCard').click({ position: { x: 30, y: 30 } });
+    await expect(dialog).toBeVisible();
+    await page.locator(config.close).click();
+    await expect(dialog).not.toBeVisible();
+    await expect(opener).toBeFocused();
+
+    await opener.click();
+    await page.keyboard.press('Escape');
+    await expect(dialog).not.toBeVisible();
+    await expect(opener).toBeFocused();
+
+    await opener.click();
+    await page.locator('#certModal').click({ position: { x: 2, y: 2 } });
+    await expect(dialog).not.toBeVisible();
+    await expect(opener).toBeFocused();
+
+    await opener.click();
+    await expect(dialog).toBeVisible();
+    await page.locator(config.close).click();
+    expect(errors).toEqual([]);
+  });
+
+  test(`${config.label} rapid Escape beats deferred primary focus and duplicate lifecycle is safe`, async ({ page }) => {
+    await seedProgress(page, config.key, config.ratings);
+    await page.addInitScript(() => {
+      window.__certificateRafQueue = [];
+      window.requestAnimationFrame = callback => {
+        window.__certificateRafQueue.push(callback);
+        return window.__certificateRafQueue.length;
+      };
+    });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(config.path);
+    if (config.name) await page.locator('#certName').fill(config.name);
+
+    const opener = page.locator(config.opener);
+    const dialog = page.locator('#certModal');
+    await opener.focus();
+    await opener.click();
+    await page.keyboard.press('Escape');
+    await expect(dialog).not.toBeVisible();
+    await page.evaluate(() => {
+      const callbacks = window.__certificateRafQueue.splice(0);
+      callbacks.forEach(callback => callback(performance.now()));
+    });
+    await expect(opener).toBeFocused();
+
+    await page.evaluate(openFunctionName => {
+      window[openFunctionName]();
+      window[openFunctionName]();
+    }, config.label === 'Lesson 49'
+      ? 'openL49CertificateDialog'
+      : config.label === 'Lesson 50'
+        ? 'openL50CertificateDialog'
+        : 'openSoundmarkCertificateDialog');
+    await expect(dialog).toBeVisible();
+    await page.evaluate(closeFunctionName => {
+      window[closeFunctionName]();
+      window[closeFunctionName]();
+    }, config.label === 'Lesson 49'
+      ? 'closeL49CertificateDialog'
+      : config.label === 'Lesson 50'
+        ? 'closeL50CertificateDialog'
+        : 'closeSoundmarkCertificateDialog');
+    await expect(dialog).not.toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test(`${config.label} safely falls back when its remembered opener is disabled or removed`, async ({ page }) => {
+    await prepareCertificatePage(page, config);
+    const opener = page.locator(config.opener);
+    const dialog = page.locator('#certModal');
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+
+    await opener.focus();
+    await opener.click();
+    await opener.evaluate(element => {
+      element.disabled = true;
+      element.remove();
+    });
+    await page.keyboard.press('Escape');
+
+    await expect(dialog).not.toBeVisible();
+    await expect(page.locator('#certName')).toBeFocused();
+    expect(errors).toEqual([]);
+  });
+}
+
+for (const lesson of [
+  {
+    label: 'Lesson 49',
+    path: '/lesson49/',
+    key: 'canran:l49:progress:v2',
+    stateName: 'stars',
+    gate: 'renderL49CertificateGate',
+    save: 'saveCertImage'
+  },
+  {
+    label: 'Lesson 50',
+    path: '/lesson50/',
+    key: 'canran:l50:progress:v2',
+    stateName: 'stars',
+    gate: 'renderL50CertificateGate',
+    save: 'saveCertImage'
+  }
+]) {
+  test(`${lesson.label} save and print reject eligibility lost after opening`, async ({ page }) => {
+    await seedProgress(page, lesson.key, { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    await page.addInitScript(() => {
+      window.__certificateSaved = false;
+      window.__certificatePrinted = false;
+      window.print = () => { window.__certificatePrinted = true; };
+    });
+    await page.goto(lesson.path);
+    await page.evaluate(saveName => {
+      window[saveName] = () => { window.__certificateSaved = true; };
+    }, lesson.save);
+
+    await page.locator('#certBtn').click();
+    await page.evaluate(stateName => {
+      window.eval(`${stateName}={l1:1,l2:1,l3:1,l4:0,l5:1}`);
+    }, lesson.stateName);
+    await page.locator('#certSave').click();
+    await expect(page.locator('#certModal')).not.toBeVisible();
+    await expect(page.locator('#certBtn')).toBeDisabled();
+    expect(await page.evaluate(() => window.__certificateSaved)).toBe(false);
+
+    await page.evaluate(({ stateName, gate }) => {
+      window.eval(`${stateName}={l1:1,l2:1,l3:1,l4:1,l5:1}`);
+      window[gate]();
+    }, { stateName: lesson.stateName, gate: lesson.gate });
+    await page.locator('#certBtn').click();
+    await page.evaluate(stateName => {
+      window.eval(`${stateName}={l1:1,l2:1,l3:1,l4:0,l5:1}`);
+    }, lesson.stateName);
+    await page.locator('#certPrint').click();
+    await expect(page.locator('#certModal')).not.toBeVisible();
+    await expect(page.locator('#certBtn')).toBeDisabled();
+    expect(await page.evaluate(() => window.__certificatePrinted)).toBe(false);
+  });
+
+  test(`${lesson.label} saved preview remains operable after the modal closes`, async ({ page }) => {
+    await seedProgress(page, lesson.key, { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    await page.addInitScript(() => {
+      window.__previewRevoked = [];
+      HTMLCanvasElement.prototype.toBlob = callback =>
+        callback(new Blob(['png'], { type: 'image/png' }));
+      URL.createObjectURL = () => 'blob:certificate-preview';
+      URL.revokeObjectURL = url => window.__previewRevoked.push(url);
+      HTMLAnchorElement.prototype.click = () => {};
+    });
+    await page.goto(lesson.path);
+    await page.locator('#certBtn').click();
+    await page.locator('#certSave').click();
+
+    await expect(page.locator('#certModal')).not.toBeVisible();
+    await expect(page.locator('#certSaveOverlay')).toBeVisible();
+    await expect(page.locator('#certSaveClose')).toBeFocused();
+    await page.locator('#certSaveClose').click();
+    await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+    await expect(page.locator('#certBtn')).toBeFocused();
+    expect(await page.evaluate(() => window.__previewRevoked)).toEqual([
+      'blob:certificate-preview'
+    ]);
+  });
+}
