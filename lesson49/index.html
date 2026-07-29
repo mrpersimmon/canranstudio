@@ -1806,6 +1806,53 @@ function renderCertCanvas(){
   return cv;
 }
 
+function sanitizeFilenamePart(value,fallback){
+  const clean=value=>String(value==null?'':value)
+    .replace(/[\\/:*?"<>|\u0000-\u001F]/g,'')
+    .replace(/\s+/g,' ')
+    .trim()
+    .slice(0,40);
+  return clean(value)||clean(fallback)||'小学徒';
+}
+function dataUrlToBlob(dataUrl){
+  const comma=String(dataUrl).indexOf(',');
+  if(comma<0)throw new Error('无效的图片数据');
+  const header=dataUrl.slice(0,comma);
+  const mime=(header.match(/^data:([^;,]+)/)||[])[1]||'image/png';
+  const payload=dataUrl.slice(comma+1);
+  let binary;
+  if(/;base64(?:;|$)/i.test(header)){
+    binary=atob(payload);
+  }else{
+    binary=decodeURIComponent(payload);
+  }
+  const bytes=new Uint8Array(binary.length);
+  for(let index=0;index<binary.length;index++)bytes[index]=binary.charCodeAt(index);
+  return new Blob([bytes],{type:mime});
+}
+function renderCertBlob(){
+  return new Promise(resolve=>{
+    let canvas;
+    try{
+      canvas=renderCertCanvas();
+    }catch(error){
+      console.error('证书绘制失败：',error);
+      resolve(null);
+      return;
+    }
+    try{
+      if(typeof canvas.toBlob==='function'){
+        canvas.toBlob(blob=>resolve(blob||null),'image/png');
+        return;
+      }
+      resolve(dataUrlToBlob(canvas.toDataURL('image/png')));
+    }catch(error){
+      console.error('证书转码失败：',error);
+      resolve(null);
+    }
+  });
+}
+
 /* ---- 保存流程：触发下载 + 长按保存遮罩（互相独立，各自 try/catch） ---- */
 async function saveCertImage(){
   // 绘制前再次确认字体就绪，避免 canvas 回退字体
@@ -1818,28 +1865,48 @@ async function saveCertImage(){
       ]);
     }
   }catch(e){}
-  let dataUrl='';
+
+  const blob=await renderCertBlob();
+  if(!blob){
+    alert('😢 证书生成失败，请再点一次试试');
+    return;
+  }
+  let url='';
   try{
-    dataUrl=renderCertCanvas().toDataURL('image/png');
-  }catch(err){console.error('证书绘制失败：',err);}
-  // 1) 尝试触发下载
+    url=URL.createObjectURL(blob);
+  }catch(error){
+    console.error('证书图片创建失败：',error);
+  }
+  if(!url){
+    alert('😢 当前浏览器无法生成图片，直接截图保存吧');
+    return;
+  }
+
+  const name=sanitizeFilenamePart($('#certNameOut').textContent,'小学徒');
+  let anchor;
   try{
-    if(dataUrl){
-      const name=($('#certNameOut').textContent||'').trim()||'小学徒';
-      const a=document.createElement('a');
-      a.href=dataUrl;
-      a.download='肉店小学徒结业证书-'+name+'.png';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-  }catch(err){console.error('证书下载失败：',err);}
-  // 2) 弹出长按保存遮罩（iOS 关键路径），下载失败不影响本步
+    anchor=document.createElement('a');
+    anchor.href=url;
+    anchor.download='肉店小学徒结业证书-'+name+'.png';
+    document.body.appendChild(anchor);
+    anchor.click();
+  }catch(error){
+    console.error('证书下载失败：',error);
+  }finally{
+    if(anchor)anchor.remove();
+  }
+
   try{
-    if(dataUrl)showCertOverlay(dataUrl);
-  }catch(err){console.error('证书遮罩失败：',err);}
+    showCertOverlay(url);
+  }catch(error){
+    try{URL.revokeObjectURL(url);}catch{}
+    console.error('证书遮罩失败：',error);
+    alert('😢 图片已生成，但无法显示保存预览');
+  }
 }
 function showCertOverlay(src){
+  const previous=document.getElementById('certSaveOverlay');
+  if(previous&&typeof previous.__certCleanup==='function')previous.__certCleanup();
   const ov=document.createElement('div');
   ov.id='certSaveOverlay';
   ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px;';
@@ -1852,10 +1919,24 @@ function showCertOverlay(src){
   const close=document.createElement('button');
   close.className='btn btn-mini btn-yellow';
   close.textContent='关闭';
-  close.addEventListener('click',e=>{e.stopPropagation();ov.remove();sndClick();});
+  close.id='certSaveClose';
+  let closed=false;
+  const closeOverlay=event=>{
+    if(event)event.stopPropagation();
+    if(closed)return;
+    closed=true;
+    try{URL.revokeObjectURL(src);}catch{}
+    ov.remove();
+    sndClick();
+  };
+  ov.__certCleanup=closeOverlay;
+  close.addEventListener('click',closeOverlay);
   ov.appendChild(tip);ov.appendChild(img);ov.appendChild(close);
-  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();}); // 点遮罩空白处也能关闭
+  ov.addEventListener('click',event=>{
+    if(event.target===ov)closeOverlay(event);
+  });
   document.body.appendChild(ov);
+  return ov;
 }
 $('#certClose').addEventListener('click',()=>{$('#certModal').classList.add('hidden');sndClick();});
 $('#certModal').addEventListener('click',e=>{if(e.target.id==='certModal')$('#certModal').classList.add('hidden');});
