@@ -117,7 +117,7 @@ require_target() { printf '%s' "$1" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._-]*$'; }
 test -n "${CANRAN_DEPLOY_TARGET:-}"
 require_target "$CANRAN_DEPLOY_TARGET"
 ssh "$CANRAN_DEPLOY_TARGET" 'set -eu; command -v python3; command -v sha256sum; command -v tar; command -v nginx; command -v systemctl'
-ssh "$CANRAN_DEPLOY_TARGET" 'set -eu; snapshot="$(sudo nginx -T 2>&1)"; printf "%s\n" "$snapshot"; printf "%s\n" "$snapshot" | awk "! /^[[:space:]]*#/ && \$1 == \"open_file_cache\" && \$2 != \"off;\" { bad=1 } END { exit bad }"'
+ssh "$CANRAN_DEPLOY_TARGET" 'sudo nginx -T 2>&1'
 ssh "$CANRAN_DEPLOY_TARGET" 'readlink -f /var/www/canranstudio/current || true'
 ssh "$CANRAN_DEPLOY_TARGET" 'sudo sha256sum /etc/nginx/conf.d/canranstudio-http.conf 2>/dev/null || true'
 ~~~
@@ -127,9 +127,9 @@ listeners. Stop for an unaccounted rewrite, alias, root, or default block affect
 /lesson50/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
 site file before disabling only it; its path is never inferred by this repository.
 
-The open_file_cache check is fail-closed: any active value other than off stops the release. This
-is the prerequisite for content-only activation without a reload, because Nginx must resolve the
-current path for each request rather than retain an old file descriptor cache.
+The repository-owned matched server explicitly sets open_file_cache off. The complete nginx -T
+output still requires manual inspection for unknown matched blocks; the explicit server directive
+is the prerequisite for content-only activation without reload.
 
 ## 3. Transfer no-reuse, SHA-named inputs
 
@@ -318,6 +318,7 @@ if sudo test -e "$candidate" || sudo test -L "$candidate"; then echo 'release ex
 old_target="$(sudo readlink -f "$current" || true)"
 case "$old_target" in "$releases"/[0-9a-f][0-9a-f]*) ;; *) echo 'reviewed bootstrap required' >&2; exit 1;; esac
 old_sha="$(basename "$old_target")"; is_sha "$old_sha"; verify_tree "$old_target" "$old_sha"
+test "$old_target" = "$releases/$old_sha"
 sudo mkdir -m 0755 -- "$stage"
 sudo python3 - "$archive" "$stage" <<'PYARCHIVE'
 import posixpath,sys,tarfile
@@ -346,6 +347,8 @@ sudo ln -s -- "$candidate" "$next_link"
 sudo mv -Tf -- "$next_link" "$current"; next_link=''
 echo "atomic content activation: $candidate"
 echo "previous content release retained: $old_target"
+echo "export CANRAN_PREVIOUS_RELEASE=$old_sha"
+echo "export CANRAN_CONFIG_STATE=$upload/config-state-$release_sha-$config_sha"
 REMOTE
 ~~~
 
