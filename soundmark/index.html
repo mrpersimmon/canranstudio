@@ -504,6 +504,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
   </div>
   <div style="margin-top:26px">
     <button class="btn" id="btnPrint">打印我的证书</button>
+    <div id="certNeed" role="status" aria-live="polite"></div>
   </div>
 </section>
 
@@ -511,6 +512,9 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
   音标魔法乐园 · 英语音标第一课 ｜ 星星进度只保存在你自己的浏览器里 ｜ 大声读出来，效果最好！
 </footer>
 
+<script src="/core/storage.js"></script>
+<script src="/core/progress.js"></script>
+<script src="/core/assessment.js"></script>
 <script>
 /* ==================== 数据 ==================== */
 const VOWELS = [
@@ -645,17 +649,43 @@ function speak(text, rate=0.85, onend){
 }
 
 /* ==================== 星星 & 提示 ==================== */
-const SKEY = 'phonics-magic-stars-v1';
-let stars = parseInt(localStorage.getItem(SKEY)||'0');
+const SKEY='canran:soundmark:progress:v2';
+const SOUND_IDS=['vs','g1','g2','g3'];
+const soundLoaded=CanranCore.storage.loadProgress({
+  storage:localStorage,
+  key:SKEY,
+  legacyKey:'phonics-magic-stars-v1',
+  ids:SOUND_IDS,
+  legacyMode:'reset'
+});
+let soundRatings=soundLoaded.progress.ratings;
+function soundTotal(){return CanranCore.progress.totalRatings(soundRatings,SOUND_IDS);}
+function canIssueSoundmarkCertificate(){
+  return CanranCore.progress.allAtLeast(soundRatings,SOUND_IDS,3);
+}
 function renderStars(){
-  document.getElementById('starCount').textContent = stars;
-  const n = Math.min(stars, 12);
-  document.getElementById('certStars').textContent = '★'.repeat(n) + '☆'.repeat(12-n);
+  const total=soundTotal();
+  document.getElementById('starCount').textContent=total;
+  document.getElementById('certStars').textContent='★'.repeat(total)+'☆'.repeat(12-total);
+  const missing=12-total;
+  document.getElementById('btnPrint').disabled=!canIssueSoundmarkCertificate();
+  document.getElementById('certNeed').textContent=missing===0
+    ?'四项挑战满星，可以打印证书。'
+    :'还差 '+missing+' 颗星。';
 }
-function addStar(){
-  stars++; localStorage.setItem(SKEY, stars); renderStars();
+function awardSoundmark(id,rating){
+  const awarded=CanranCore.progress.awardRating(soundRatings,id,rating);
+  if(!awarded.changed)return;
+  soundRatings=awarded.ratings;
+  const saved=CanranCore.storage.saveProgress({
+    storage:localStorage,
+    key:SKEY,
+    progress:{version:2,ratings:soundRatings},
+    ids:SOUND_IDS
+  });
+  soundRatings=saved.progress.ratings;
+  renderStars();
 }
-renderStars();
 document.getElementById('certDate').textContent = '日期：' + new Date().toLocaleDateString('zh-CN');
 
 let toastTimer;
@@ -665,6 +695,8 @@ function toast(msg){
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
 }
+if(soundLoaded.resetLegacy)toast('进度规则已升级，请重新挑战');
+renderStars();
 
 /* ==================== 彩带 ==================== */
 const cvs = document.getElementById('confetti'), ctx = cvs.getContext('2d');
@@ -725,30 +757,46 @@ function faceSVG(kind){
 
 /* ==================== 元音 vs 辅音 小测 ==================== */
 (function(){
-  let idx = Math.floor(Math.random()*VS_QUIZ.length);
-  const target = document.getElementById('vsTarget'), fb = document.getElementById('vsFb');
-  const picks = document.querySelectorAll('.vs-pick');
+  const target=document.getElementById('vsTarget'),fb=document.getElementById('vsFb');
+  const picks=document.querySelectorAll('.vs-pick');
+  let start=0,index=0,score=0,attempt=CanranCore.assessment.createAttempt(),finished=false;
+  function begin(){
+    start=Math.floor(Math.random()*VS_QUIZ.length);
+    index=0;score=0;finished=false;attempt=CanranCore.assessment.createAttempt();
+    next();
+  }
   function next(){
-    idx = (idx+1) % VS_QUIZ.length;
-    target.textContent = VS_QUIZ[idx][0];
-    fb.textContent = ''; fb.className = 'fb';
+    const item=VS_QUIZ[(start+index)%VS_QUIZ.length];
+    target.textContent=item[0];
+    fb.textContent='第 '+(index+1)+' / '+VS_QUIZ.length+' 题';
+    fb.className='fb';
     picks.forEach(p=>p.classList.remove('right','wrong'));
   }
+  function finish(){
+    finished=true;
+    const rating=CanranCore.progress.ratingFor(score,[
+      {min:9,rating:3},{min:7,rating:2},{min:5,rating:1}
+    ]);
+    awardSoundmark('vs',rating);
+    fb.textContent='本轮首次答对 '+score+' / 10，获得 '+rating+' 星。点击任意选项开始新一轮。';
+    fb.className='fb good';
+  }
   picks.forEach(p=>{
-    p.onclick = ()=>{
-      picks.forEach(x=>x.classList.remove('right','wrong'));
-      if(p.dataset.a === VS_QUIZ[idx][1]){
-        p.classList.add('right');
-        fb.textContent = '答对啦！+'+'1 颗星'; fb.className = 'fb good';
-        addStar(); celebrate(p);
-        setTimeout(next, 1300);
-      }else{
-        p.classList.add('wrong');
-        fb.textContent = '再想想～提示：' + (VS_QUIZ[idx][1]==='v' ? '它长得像元音字母吗？' : '气流被挡住了吗？');
-        fb.className = 'fb bad';
+    p.onclick=()=>{
+      if(finished){begin();return;}
+      const correct=p.dataset.a===VS_QUIZ[(start+index)%VS_QUIZ.length][1];
+      const outcome=CanranCore.assessment.submitAttempt(attempt,correct);
+      attempt=outcome.state;
+      if(!outcome.solved){
+        p.classList.add('wrong');fb.textContent='再想想～';fb.className='fb bad';return;
       }
+      if(outcome.scored)score++;
+      p.classList.add('right');celebrate(p);
+      index++;attempt=CanranCore.assessment.createAttempt();
+      if(index===VS_QUIZ.length)setTimeout(finish,500);else setTimeout(next,500);
     };
   });
+  begin();
 })();
 
 /* ==================== 六个元音精灵 ==================== */
@@ -855,16 +903,16 @@ function faceSVG(kind){
 
 /* ==================== 游戏公共 ==================== */
 function shuffle(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]); }
-function gameDone(scoreId, n){
-  document.getElementById(scoreId).textContent = `本关：${n} / 5 · 过关啦！`;
-  toast('恭喜过关！去别的游戏看看');
+function gameDone(scoreId,rating){
+  document.getElementById(scoreId).textContent=`本轮完成 · 获得 ${rating} 星`;
+  toast('本轮完成，可以切换游戏或点击换一题重新开始');
 }
 
 /* ---- 游戏 1：听音小侦探 ---- */
 (function(){
   const opts = document.getElementById('g1Opts'), fb = document.getElementById('g1Fb'),
         hear = document.getElementById('g1Hear'), scoreEl = document.getElementById('g1Score');
-  let cur = null, score = 0, locked = false;
+  let cur=null,rounds=0,score=0,locked=false,attempt=CanranCore.assessment.createAttempt();
   // 建立题库：每个元音的所有例词
   const bank = [];
   VOWELS.forEach(v=> v.words.forEach(([w])=> bank.push({w, sym:v.sym})));
@@ -883,22 +931,31 @@ function gameDone(scoreId, n){
   function play(){ if(cur){ hear.classList.add('playing'); speak(cur.w, 0.75, ()=>hear.classList.remove('playing')); } }
   hear.onclick = play;
   function pick(b){
-    if(locked || !cur) return;
-    if(b.dataset.sym === cur.sym){
-      locked = true;
-      b.classList.add('right');
-      score++; addStar();
-      scoreEl.textContent = `本关：${Math.min(score,5)} / 5`;
-      fb.textContent = `答对啦！${cur.w} 里藏着 /${cur.sym}/`;
-      fb.className = 'fb good'; celebrate(b);
-      if(score===5) gameDone('g1Score',5);
-      setTimeout(round, 1400);
-    }else{
-      b.classList.add('wrong');
-      fb.textContent = '不对哦，再听一次试试！'; fb.className = 'fb bad';
+    if(locked||!cur||rounds>=5)return;
+    const outcome=CanranCore.assessment.submitAttempt(attempt,b.dataset.sym===cur.sym);
+    attempt=outcome.state;
+    if(!outcome.solved){
+      b.classList.add('wrong');fb.textContent='不对哦，再听一次试试！';fb.className='fb bad';return;
     }
+    locked=true;b.classList.add('right');
+    if(outcome.scored)score++;
+    rounds++;scoreEl.textContent=`本关：${rounds} / 5`;
+    fb.textContent=`答对啦！${cur.w} 里藏着 /${cur.sym}/`;fb.className='fb good';celebrate(b);
+    attempt=CanranCore.assessment.createAttempt();
+    if(rounds===5){
+      const rating=CanranCore.progress.ratingFor(score,[{min:5,rating:3},{min:4,rating:2},{min:3,rating:1}]);
+      awardSoundmark('g1',rating);gameDone('g1Score',rating);return;
+    }
+    setTimeout(round,1400);
   }
-  document.getElementById('g1Next').onclick = round;
+  document.getElementById('g1Next').onclick=()=>{
+    if(rounds>=5){
+      rounds=0;score=0;
+      scoreEl.textContent='本关：0 / 5';
+    }
+    attempt=CanranCore.assessment.createAttempt();
+    round();
+  };
   round();
 })();
 
@@ -906,7 +963,7 @@ function gameDone(scoreId, n){
 (function(){
   const opts = document.getElementById('g2Opts'), fb = document.getElementById('g2Fb'),
         hear = document.getElementById('g2Hear'), scoreEl = document.getElementById('g2Score');
-  let cur = null, score = 0, locked = false;
+  let cur=null,rounds=0,score=0,locked=false,attempt=CanranCore.assessment.createAttempt();
   const flat = [];
   PAIRS.forEach(g=> g.pairs.forEach(p=> flat.push(p)));
   function round(){
@@ -928,27 +985,38 @@ function gameDone(scoreId, n){
   function play(){ if(cur){ hear.classList.add('playing'); speak(cur.w, 0.75, ()=>hear.classList.remove('playing')); } }
   hear.onclick = play;
   function pick(b){
-    if(locked || !cur) return;
-    if(b.dataset.w === cur.w){
-      locked = true; b.classList.add('right');
-      score++; addStar();
-      scoreEl.textContent = `本关：${Math.min(score,5)} / 5`;
-      fb.textContent = '耳朵真灵！'; fb.className = 'fb good'; celebrate(b);
-      if(score===5) gameDone('g2Score',5);
-      setTimeout(round, 1300);
-    }else{
-      b.classList.add('wrong');
-      fb.textContent = '再仔细听听，差别就在那个小音里！'; fb.className = 'fb bad';
+    if(locked||!cur||rounds>=5)return;
+    const outcome=CanranCore.assessment.submitAttempt(attempt,b.dataset.w===cur.w);
+    attempt=outcome.state;
+    if(!outcome.solved){
+      b.classList.add('wrong');fb.textContent='再仔细听听，差别就在那个小音里！';fb.className='fb bad';return;
     }
+    locked=true;b.classList.add('right');
+    if(outcome.scored)score++;
+    rounds++;scoreEl.textContent=`本关：${rounds} / 5`;
+    fb.textContent='耳朵真灵！';fb.className='fb good';celebrate(b);
+    attempt=CanranCore.assessment.createAttempt();
+    if(rounds===5){
+      const rating=CanranCore.progress.ratingFor(score,[{min:5,rating:3},{min:4,rating:2},{min:3,rating:1}]);
+      awardSoundmark('g2',rating);gameDone('g2Score',rating);return;
+    }
+    setTimeout(round,1300);
   }
-  document.getElementById('g2Next').onclick = round;
+  document.getElementById('g2Next').onclick=()=>{
+    if(rounds>=5){
+      rounds=0;score=0;
+      scoreEl.textContent='本关：0 / 5';
+    }
+    attempt=CanranCore.assessment.createAttempt();
+    round();
+  };
 })();
 
 /* ---- 游戏 3：拼读小达人 ---- */
 (function(){
   const ipaEl = document.getElementById('g3Ipa'), opts = document.getElementById('g3Opts'),
         fb = document.getElementById('g3Fb'), scoreEl = document.getElementById('g3Score');
-  let cur = null, score = 0, locked = false;
+  let cur=null,rounds=0,score=0,locked=false,attempt=CanranCore.assessment.createAttempt();
   function round(){
     locked = false; fb.textContent=''; fb.className='fb'; opts.innerHTML='';
     cur = G3_BANK[Math.floor(Math.random()*G3_BANK.length)];
@@ -961,21 +1029,31 @@ function gameDone(scoreId, n){
     });
   }
   function pick(b, w){
-    if(locked || !cur) return;
-    if(w === cur[1]){
-      locked = true; b.classList.add('right');
-      score++; addStar();
-      scoreEl.textContent = `本关：${Math.min(score,5)} / 5`;
-      fb.textContent = `拼读成功！${cur[0]} 就是 ${w}`;
-      fb.className = 'fb good'; celebrate(b); speak(w);
-      if(score===5) gameDone('g3Score',5);
-      setTimeout(round, 1400);
-    }else{
-      b.classList.add('wrong');
-      fb.textContent = '差一点点～把音标一个一个拼起来再试试！'; fb.className = 'fb bad';
+    if(locked||!cur||rounds>=5)return;
+    const outcome=CanranCore.assessment.submitAttempt(attempt,w===cur[1]);
+    attempt=outcome.state;
+    if(!outcome.solved){
+      b.classList.add('wrong');fb.textContent='差一点点～把音标一个一个拼起来再试试！';fb.className='fb bad';return;
     }
+    locked=true;b.classList.add('right');
+    if(outcome.scored)score++;
+    rounds++;scoreEl.textContent=`本关：${rounds} / 5`;
+    fb.textContent=`拼读成功！${cur[0]} 就是 ${w}`;fb.className='fb good';celebrate(b);speak(w);
+    attempt=CanranCore.assessment.createAttempt();
+    if(rounds===5){
+      const rating=CanranCore.progress.ratingFor(score,[{min:5,rating:3},{min:4,rating:2},{min:3,rating:1}]);
+      awardSoundmark('g3',rating);gameDone('g3Score',rating);return;
+    }
+    setTimeout(round,1400);
   }
-  document.getElementById('g3Next').onclick = round;
+  document.getElementById('g3Next').onclick=()=>{
+    if(rounds>=5){
+      rounds=0;score=0;
+      scoreEl.textContent='本关：0 / 5';
+    }
+    attempt=CanranCore.assessment.createAttempt();
+    round();
+  };
   round();
 })();
 
@@ -1014,11 +1092,16 @@ document.querySelectorAll('.gtab').forEach(t=>{
 })();
 
 /* ==================== 证书 ==================== */
-document.getElementById('btnPrint').onclick = ()=>{
-  const name = document.getElementById('certName').value.trim();
-  if(!name){ toast('先写上你的名字哦'); document.getElementById('certName').focus(); return; }
+document.getElementById('btnPrint').onclick=()=>{
+  const name=document.getElementById('certName').value.trim();
+  if(!canIssueSoundmarkCertificate()){
+    renderStars();toast('集满 12 颗星后才能打印证书');return;
+  }
+  if(!name){
+    toast('先写上你的名字哦');document.getElementById('certName').focus();return;
+  }
   celebrate(document.getElementById('certCard'));
-  toast('太棒了，' + name + '！');
+  window.print();
 };
 
 /* ==================== 滚动进度 & 导航高亮 ==================== */
