@@ -34,6 +34,15 @@ async function completeG1Round(page, firstTryCorrect) {
   await expect(page.locator('#g1Score')).toContainText('本轮完成');
 }
 
+test('syllable station labels the stressed syllable as 重音', async ({ page }) => {
+  await page.goto('/soundmark/');
+
+  await expect(page.locator('#syll .rule small')).toContainText('红色徽章是「重音」');
+  await domClick(page.locator('#btnSlice'));
+  await expect(page.locator('#syllDisplay .stress')).toHaveCount(1);
+  await expect(page.locator('#syllDisplay .stress')).toHaveText('重音');
+});
+
 test('legacy integer stars reset once and cannot crash rendering', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('phonics-magic-stars-v1', '-1');

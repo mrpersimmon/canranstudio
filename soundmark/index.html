@@ -422,7 +422,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
   <p class="sec-sub">再长的单词也不用怕！先按音节切开，一块一块读，最后拼起来。</p>
   <div class="rule">
     <span class="big-num" id="ruleVowelCount">?</span>
-    <span>魔法口诀：<b>有几个元音，就有几个音节。</b><br><small style="font-size:15px;opacity:.75">先数元音，再下刀！红色徽章是「重读音节」，要读得最大声。</small></span>
+    <span>魔法口诀：<b>有几个元音，就有几个音节。</b><br><small style="font-size:15px;opacity:.75">先数元音，再下刀！红色徽章是「重音」，这个音节要读得最大声。</small></span>
   </div>
   <div id="syllWord" class="sticker tape" style="margin-top:40px">
     <div id="syllControls">
@@ -855,7 +855,7 @@ function faceSVG(kind){
       d.className = 'chunk vowel-hl';
       d.textContent = c;
       if(i === w.stress){
-        const s = document.createElement('span'); s.className = 'stress'; s.textContent = '重读';
+        const s = document.createElement('span'); s.className = 'stress'; s.textContent = '重音';
         d.appendChild(s);
       }
       disp.appendChild(d);
