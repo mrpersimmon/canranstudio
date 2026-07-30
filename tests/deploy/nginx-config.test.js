@@ -4,6 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const verifier = require('../../scripts/verify-live');
 
 const config = fs.readFileSync(
   path.resolve(__dirname, '../../deploy/nginx/canranstudio-http.conf'),
@@ -104,6 +105,19 @@ function parseNginx(text) {
 
 function direct(nodes, name) {
   return nodes.filter(node => node.name === name);
+}
+
+function effectiveHeaderValues(node, headerName, inherited = new Map()) {
+  if (!node.children) return [];
+  const localHeaders = direct(node.children, 'add_header');
+  const effective = localHeaders.length
+    ? new Map(localHeaders.map(header => [header.args[0].toLowerCase(), header.args[1]]))
+    : inherited;
+  const values = [effective.get(headerName.toLowerCase())];
+  for (const child of node.children) {
+    if (child.children) values.push(...effectiveHeaderValues(child, headerName, effective));
+  }
+  return values;
 }
 
 function sameArgs(left, right) {
@@ -269,6 +283,14 @@ test('Nginx contract defines the complete structural HTTP policy', () => {
   assertHttpContract(config);
   assert.doesNotMatch(config, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
   assert.match(config, /font-src 'self' data:/);
+});
+
+test('every effective Nginx CSP equals the independent live verifier contract byte-for-byte', () => {
+  const root = parseNginx(config);
+  const server = one(root, 'server', []);
+  const values = [...new Set(effectiveHeaderValues(server, 'Content-Security-Policy'))];
+
+  assert.deepEqual(values, [verifier.HTTP_HEADER_CONTRACT['content-security-policy']]);
 });
 
 test('Nginx tokenizer keeps comment markers and delimiters inside quoted arguments', () => {

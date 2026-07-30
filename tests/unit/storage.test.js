@@ -30,15 +30,53 @@ function memoryStorage(seed = {}, failure = {}) {
   };
 }
 
-test('normalizeProgress accepts only finite integer ratings in range', () => {
+test('normalizeProgress accepts only primitive finite number ratings in range', () => {
   assert.deepEqual(
     normalizeProgress({
       version: 2,
-      ratings: { l1: -1, l2: '2.9', l3: 999, l4: null, l5: [] }
+      ratings: { l1: -1, l2: 2.9, l3: 999, l4: 3, l5: 0 }
     }, IDS),
     {
       version: VERSION,
-      ratings: { l1: 0, l2: 2, l3: 3, l4: 0, l5: 0 }
+      ratings: { l1: 0, l2: 2, l3: 3, l4: 3, l5: 0 }
+    }
+  );
+});
+
+test('normalizeProgress rejects every non-number and non-finite v2 rating', () => {
+  const corruptValues = [
+    true,
+    false,
+    [3],
+    ['2'],
+    '2',
+    'arbitrary',
+    { value: 3 },
+    null,
+    NaN,
+    Infinity,
+    -Infinity
+  ];
+  const ids = corruptValues.map((_, index) => `r${index}`);
+  const ratings = Object.fromEntries(
+    ids.map((id, index) => [id, corruptValues[index]])
+  );
+
+  assert.deepEqual(
+    normalizeProgress({ version: VERSION, ratings }, ids),
+    {
+      version: VERSION,
+      ratings: Object.fromEntries(ids.map(id => [id, 0]))
+    }
+  );
+});
+
+test('normalizeProgress does not treat an unversioned v2 payload as legacy ratings', () => {
+  assert.deepEqual(
+    normalizeProgress({ l1: 3, l2: 2, l3: 1 }, IDS),
+    {
+      version: VERSION,
+      ratings: { l1: 0, l2: 0, l3: 0, l4: 0, l5: 0 }
     }
   );
 });
@@ -60,6 +98,54 @@ test('loadProgress migrates and removes legacy level ratings only after v2 write
   assert.equal(result.persisted, true);
   assert.deepEqual(result.progress.ratings, { l1: 1, l2: 0, l3: 2, l4: 3, l5: 3 });
   assert.equal(storage.getItem('l49-stars-v1'), null);
+});
+
+test('legacy migration accepts numeric strings without coercing other legacy types', () => {
+  const storage = memoryStorage({
+    'l49-stars-v1': JSON.stringify({
+      l1: '2.9',
+      l2: '3',
+      l3: true,
+      l4: [3],
+      l5: { value: 3 }
+    })
+  });
+
+  const result = loadProgress({
+    storage,
+    key: 'canran:l49:progress:v2',
+    legacyKey: 'l49-stars-v1',
+    ids: IDS,
+    legacyMode: 'ratings'
+  });
+
+  assert.deepEqual(result.progress.ratings, { l1: 2, l2: 3, l3: 0, l4: 0, l5: 0 });
+  assert.deepEqual(
+    JSON.parse(storage.getItem('canran:l49:progress:v2')).ratings,
+    { l1: 2, l2: 3, l3: 0, l4: 0, l5: 0 }
+  );
+});
+
+test('loadProgress repairs corrupt v2 types and persists the strict result', () => {
+  const storage = memoryStorage({
+    'canran:l49:progress:v2': JSON.stringify({
+      version: VERSION,
+      ratings: { l1: true, l2: [3], l3: ['2'], l4: '3', l5: [1] }
+    })
+  });
+
+  const result = loadProgress({
+    storage,
+    key: 'canran:l49:progress:v2',
+    ids: IDS
+  });
+
+  assert.equal(result.repaired, true);
+  assert.deepEqual(result.progress.ratings, { l1: 0, l2: 0, l3: 0, l4: 0, l5: 0 });
+  assert.deepEqual(
+    JSON.parse(storage.getItem('canran:l49:progress:v2')).ratings,
+    { l1: 0, l2: 0, l3: 0, l4: 0, l5: 0 }
+  );
 });
 
 test('loadProgress resets soundmark legacy totals without inferring achievements', () => {

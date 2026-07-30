@@ -52,6 +52,28 @@ test('legacy integer stars reset once and cannot crash rendering', async ({ page
   expect(await page.evaluate(() => localStorage.getItem('phonics-magic-stars-v1'))).toBeNull();
 });
 
+test('all-corrupt v2 soundmark ratings cannot unlock its certificate', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('canran:soundmark:progress:v2', JSON.stringify({
+      version: 2,
+      ratings: { vs: [3], g1: ['3'], g2: '3', g3: [3] }
+    }));
+  });
+
+  await page.goto('/soundmark/');
+
+  const repaired = await readSoundmarkRatings(page);
+  expect(repaired).toEqual({ vs: 0, g1: 0, g2: 0, g3: 0 });
+  await expect(page.locator('#starCount')).toHaveText('0');
+  await expect(page.locator('#btnOpenCert')).toBeDisabled();
+  expect(await page.evaluate(() => window.eval('canIssueSoundmarkCertificate()'))).toBe(false);
+
+  await page.locator('#btnOpenCert').evaluate(button => { button.disabled = false; });
+  await page.locator('#certName').fill('小明');
+  await page.locator('#btnOpenCert').click();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+});
+
 test('soundmark certificate requires twelve finite stars and a non-empty name', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('canran:soundmark:progress:v2', JSON.stringify({

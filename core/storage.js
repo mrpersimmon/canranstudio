@@ -12,9 +12,15 @@
   const VERSION = 2;
 
   function clampRating(value) {
+    if (typeof value !== 'number' || !Number.isFinite(value)) return 0;
+    return Math.max(0, Math.min(3, Math.trunc(value)));
+  }
+
+  function clampLegacyRating(value) {
+    if (typeof value === 'number') return clampRating(value);
+    if (typeof value !== 'string' || value.trim() === '') return 0;
     const number = Number(value);
-    if (!Number.isFinite(number)) return 0;
-    return Math.max(0, Math.min(3, Math.trunc(number)));
+    return clampRating(number);
   }
 
   function emptyProgress(ids) {
@@ -24,6 +30,12 @@
     };
   }
 
+  function normalizeRatings(source, ids, normalizeRating) {
+    const progress = emptyProgress(ids);
+    for (const id of ids) progress.ratings[id] = normalizeRating(source[id]);
+    return progress;
+  }
+
   function normalizeProgress(raw, ids) {
     const object = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
     const source = object.version === VERSION &&
@@ -31,10 +43,13 @@
       typeof object.ratings === 'object' &&
       !Array.isArray(object.ratings)
       ? object.ratings
-      : object;
-    const progress = emptyProgress(ids);
-    for (const id of ids) progress.ratings[id] = clampRating(source[id]);
-    return progress;
+      : {};
+    return normalizeRatings(source, ids, clampRating);
+  }
+
+  function normalizeLegacyProgress(raw, ids) {
+    const source = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+    return normalizeRatings(source, ids, clampLegacyRating);
   }
 
   function parseJson(text) {
@@ -58,6 +73,7 @@
     let repaired = false;
     let resetLegacy = false;
     let readable = true;
+    let legacyRatings = false;
 
     try {
       encodedV2 = storage.getItem(key);
@@ -75,6 +91,7 @@
             const parsed = parseJson(encodedLegacy);
             raw = parsed.value;
             repaired = !parsed.ok;
+            legacyRatings = true;
           }
         }
       }
@@ -82,7 +99,9 @@
       readable = false;
     }
 
-    const progress = normalizeProgress(raw, ids);
+    const progress = legacyRatings
+      ? normalizeLegacyProgress(raw, ids)
+      : normalizeProgress(raw, ids);
     const normalizedText = JSON.stringify(progress);
     let persisted = false;
 

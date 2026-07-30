@@ -3,6 +3,7 @@
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { HTTP_HEADER_CONTRACT } = require('./http-header-contract');
 
 const ROUTES = Object.freeze([
   { path: '/', file: 'index.html' },
@@ -11,14 +12,6 @@ const ROUTES = Object.freeze([
   { path: '/soundmark/', file: 'soundmark/index.html' },
   { path: '/release-manifest.json', file: 'release-manifest.json' }
 ].map(route => Object.freeze(route)));
-
-const REQUIRED_HEADERS = Object.freeze({
-  'content-security-policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'",
-  'x-content-type-options': 'nosniff',
-  'x-frame-options': 'DENY',
-  'referrer-policy': 'strict-origin-when-cross-origin',
-  'permissions-policy': 'camera=(), microphone=(), geolocation=()'
-});
 
 function sha256(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
@@ -130,7 +123,7 @@ async function verifyBase({
       failures.push(`${route.path}: invalid response headers interface`);
     } else {
       try {
-        for (const [header, expectedValue] of Object.entries(REQUIRED_HEADERS)) {
+        for (const [header, expectedValue] of Object.entries(HTTP_HEADER_CONTRACT)) {
           const actualValue = response.headers.get(header);
           if (!actualValue) {
             failures.push(`${route.path}: missing header ${header}`);
@@ -190,4 +183,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { ROUTES, REQUIRED_HEADERS, verifyBase };
+module.exports = { ROUTES, HTTP_HEADER_CONTRACT, verifyBase };

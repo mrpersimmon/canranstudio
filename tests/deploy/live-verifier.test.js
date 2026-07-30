@@ -5,7 +5,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
-const { verifyBase, ROUTES } = require('../../scripts/verify-live');
+const verifier = require('../../scripts/verify-live');
+const { verifyBase, ROUTES } = verifier;
 
 const EXPECTED_ROUTES = [
   { path: '/', file: 'index.html' },
@@ -16,12 +17,17 @@ const EXPECTED_ROUTES = [
 ];
 
 const SECURITY_HEADERS = {
-  'content-security-policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'",
+  'content-security-policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'",
   'x-content-type-options': 'nosniff',
   'x-frame-options': 'DENY',
   'referrer-policy': 'strict-origin-when-cross-origin',
   'permissions-policy': 'camera=(), microphone=(), geolocation=()'
 };
+
+test('live verifier exposes the named exact HTTP header contract used by fixtures', () => {
+  assert.equal(Object.hasOwn(verifier, 'HTTP_HEADER_CONTRACT'), true);
+  assert.deepEqual(verifier.HTTP_HEADER_CONTRACT, SECURITY_HEADERS);
+});
 
 async function fixture() {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-live-'));
@@ -156,6 +162,27 @@ test('verifyBase rejects every weakened required security header value', async t
       header
     );
   }
+});
+
+test('verifyBase rejects a byte-modified CSP even when it only adds a directive', async t => {
+  const root = await fixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      fetchImpl: fakeFetch(root, {
+        headerOverrides: {
+          '/': {
+            'content-security-policy':
+              `${SECURITY_HEADERS['content-security-policy']}; worker-src 'none'`
+          }
+        }
+      })
+    }),
+    /unexpected header content-security-policy/
+  );
 });
 
 test('verifyBase aggregates status, request, and local artifact failures', async t => {
