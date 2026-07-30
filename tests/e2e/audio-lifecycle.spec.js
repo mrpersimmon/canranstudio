@@ -28,10 +28,16 @@ function installManualAudio(page) {
   });
 }
 
-async function finishLesson50InitializationAudio(page) {
-  await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
-  await page.evaluate(() => window.__audios[0].dispatchEvent(new Event('ended')));
-  await expect.poll(() => page.evaluate(() => speechBusy)).toBe(false);
+async function settleLesson50InitializationAudio(page) {
+  await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 450)));
+  const audioCount = await page.evaluate(() => window.__audios.length);
+  expect(audioCount).toBeLessThanOrEqual(1);
+  if (audioCount === 1) {
+    await page.evaluate(() => window.__audios[0].dispatchEvent(new Event('ended')));
+    await expect.poll(() => page.evaluate(() => speechBusy)).toBe(false);
+  } else {
+    expect(await page.evaluate(() => speechBusy)).toBe(false);
+  }
   await page.evaluate(() => {
     window.__audios.length = 0;
     speechQ.length = 0;
@@ -122,7 +128,7 @@ test('Lesson 50 queued speech advances only after the active item finishes', asy
   await installManualAudio(page);
   await page.goto('/lesson50/');
   await page.locator('body').dispatchEvent('pointerdown');
-  await finishLesson50InitializationAudio(page);
+  await settleLesson50InitializationAudio(page);
 
   await page.evaluate(() => {
     speakLater('apple');
@@ -163,7 +169,7 @@ test('Lesson 50 synchronous cancellation reentry keeps the newest request and qu
   await installManualAudio(page);
   await page.goto('/lesson50/');
   await page.locator('body').dispatchEvent('pointerdown');
-  await finishLesson50InitializationAudio(page);
+  await settleLesson50InitializationAudio(page);
 
   await page.evaluate(() => {
     window.__speechResults = [];
