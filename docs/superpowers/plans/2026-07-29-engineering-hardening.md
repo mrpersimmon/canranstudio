@@ -1196,7 +1196,7 @@ Expected:
 - the worktree is clean;
 - `dist/release-manifest.json` names the printed commit SHA;
 - all four pages load fonts from `/assets/fonts/`;
-- H-01 is still recorded as accepted/deferred until the transport decision changes.
+- RISK-HTTP-01 is still recorded as accepted/deferred until the transport decision changes.
 
 Only after this gate may the exact `dist/` artifact proceed through
 `deploy/README.md` and `npm run verify:live:http`.

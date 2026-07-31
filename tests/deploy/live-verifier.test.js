@@ -92,6 +92,7 @@ function manifestFetch(root, options = {}) {
     activity = { active: 0, maximum: 0, calls: [] },
     bodyOverrides = {},
     streamOverrides = {},
+    manualStreamOverrides = {},
     headerOverrides = {},
     statusOverrides = {},
     finalUrlOverrides = {},
@@ -121,7 +122,10 @@ function manifestFetch(root, options = {}) {
     activity.active -= 1;
 
     if (HOME_ALIASES.includes(requestedPath) && requestOptions.redirect === 'manual') {
-      const response = new Response('', {
+      const manualBody = Object.hasOwn(manualStreamOverrides, requestedPath)
+        ? manualStreamOverrides[requestedPath]()
+        : '';
+      const response = new Response(manualBody, {
         status: 308,
         headers: {
           ...HTTP_HEADER_CONTRACT,
@@ -162,6 +166,44 @@ function manifestFetch(root, options = {}) {
       arrayBuffer: () => response.arrayBuffer()
     };
   };
+}
+
+function bodyLifecycle() {
+  return { active: 0, maximum: 0, cancelled: [], bodies: [] };
+}
+
+function trackedPendingBody(activity, label, { cancelError } = {}) {
+  let controller;
+  let settled = false;
+  const settle = () => {
+    if (settled) return;
+    settled = true;
+    activity.active -= 1;
+  };
+  const body = new ReadableStream({
+    start(streamController) {
+      controller = streamController;
+      activity.active += 1;
+      activity.maximum = Math.max(activity.maximum, activity.active);
+    },
+    cancel() {
+      if (cancelError) throw cancelError;
+      activity.cancelled.push(label);
+      settle();
+    }
+  });
+  activity.bodies.push({
+    close() {
+      if (settled) return;
+      controller.close();
+      settle();
+    }
+  });
+  return body;
+}
+
+function cleanUpTrackedBodies(activity) {
+  for (const body of activity.bodies) body.close();
 }
 
 test('verifyBase fetches and hashes every runtime artifact with bounded concurrency', async t => {
@@ -283,6 +325,132 @@ test('verifyBase rejects malformed manifest paths before asset requests', async 
     /release-manifest\.json: malformed entry \.\.\/escape\.js/
   );
   assert.deepEqual(activity.calls.map(call => call.path), ['/release-manifest.json']);
+});
+
+test('verifyBase rejects dot and directory manifest paths before asset requests', async t => {
+  for (const malformedPath of ['.', 'directory/']) {
+    await t.test(malformedPath, async t => {
+      const root = await manifestFixture();
+      t.after(() => fs.rm(root, { recursive: true, force: true }));
+      await updateManifest(root, manifest => {
+        manifest.files[malformedPath] = manifest.files['core/storage.js'];
+        delete manifest.files['core/storage.js'];
+      });
+      const activity = { active: 0, maximum: 0, calls: [] };
+
+      await assert.rejects(
+        verifyBase({
+          baseUrl: 'http://59.110.217.36',
+          root,
+          fetchImpl: manifestFetch(root, { activity })
+        }),
+        new RegExp(`release-manifest\\.json: malformed entry ${
+          malformedPath === '.' ? '\\.' : 'directory/'
+        }`)
+      );
+      assert.deepEqual(
+        activity.calls.map(call => call.path),
+        ['/release-manifest.json'],
+        malformedPath
+      );
+    });
+  }
+});
+
+test('declared oversized bodies stay within concurrency and are all cancelled', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const lifecycle = bodyLifecycle();
+  t.after(() => cleanUpTrackedBodies(lifecycle));
+  const oversizedPaths = ['/', '/lesson49/', '/lesson50/', '/soundmark/'];
+  const streamOverrides = Object.fromEntries(oversizedPaths.map(urlPath => [
+    urlPath,
+    () => trackedPendingBody(lifecycle, urlPath)
+  ]));
+  const headerOverrides = Object.fromEntries(oversizedPaths.map(urlPath => [
+    urlPath,
+    { 'content-length': String(8 * 1024 * 1024 + 1) }
+  ]));
+
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      concurrency: 2,
+      fetchImpl: manifestFetch(root, { streamOverrides, headerOverrides })
+    }),
+    /index\.html: response exceeds 8388608 bytes/
+  );
+
+  assert.equal(lifecycle.maximum <= 2, true, `maximum active bodies: ${lifecycle.maximum}`);
+  assert.equal(lifecycle.active, 0);
+  assert.deepEqual(lifecycle.cancelled, oversizedPaths);
+});
+
+test('invalid declared length cancels its body and cancellation failure is reported', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const closedLifecycle = bodyLifecycle();
+  t.after(() => cleanUpTrackedBodies(closedLifecycle));
+
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      fetchImpl: manifestFetch(root, {
+        streamOverrides: {
+          '/core/storage.js': () => trackedPendingBody(closedLifecycle, '/core/storage.js')
+        },
+        headerOverrides: {
+          '/core/storage.js': { 'content-length': 'not-a-length' }
+        }
+      })
+    }),
+    /core\/storage\.js: invalid content-length/
+  );
+  assert.equal(closedLifecycle.active, 0);
+  assert.deepEqual(closedLifecycle.cancelled, ['/core/storage.js']);
+
+  const failedLifecycle = bodyLifecycle();
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      fetchImpl: manifestFetch(root, {
+        streamOverrides: {
+          '/core/storage.js': () => trackedPendingBody(
+            failedLifecycle,
+            '/core/storage.js',
+            { cancelError: new Error('refused cleanup') }
+          )
+        },
+        headerOverrides: {
+          '/core/storage.js': { 'content-length': String(8 * 1024 * 1024 + 1) }
+        }
+      })
+    }),
+    /core\/storage\.js: response body cancellation failed: refused cleanup/
+  );
+});
+
+test('manual home redirect bodies are all cancelled before verifyBase resolves', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const lifecycle = bodyLifecycle();
+  t.after(() => cleanUpTrackedBodies(lifecycle));
+  const manualStreamOverrides = Object.fromEntries(HOME_ALIASES.map(alias => [
+    alias,
+    () => trackedPendingBody(lifecycle, alias)
+  ]));
+
+  await verifyBase({
+    baseUrl: 'http://59.110.217.36',
+    root,
+    fetchImpl: manifestFetch(root, { manualStreamOverrides })
+  });
+
+  assert.equal(lifecycle.active, 0);
+  assert.deepEqual(lifecycle.cancelled, HOME_ALIASES);
 });
 
 test('verifyBase rejects declared and streamed oversized responses', async t => {

@@ -101,6 +101,8 @@ function validatePositiveInteger(value, label, maximum = Number.MAX_SAFE_INTEGER
 function isManifestPath(file) {
   return typeof file === 'string' &&
     file.length > 0 &&
+    file !== '.' &&
+    !file.endsWith('/') &&
     file === path.posix.normalize(file) &&
     !file.startsWith('../') &&
     !path.posix.isAbsolute(file) &&
@@ -176,39 +178,54 @@ function labelledError(label, error) {
   return message.startsWith(`${label}:`) ? message : `${label}: ${message}`;
 }
 
+async function cancelResponseBody(response, label, reader) {
+  const cancellable = reader || response?.body;
+  if (!cancellable || typeof cancellable.cancel !== 'function') return;
+  try {
+    await cancellable.cancel();
+  } catch (error) {
+    throw new Error(`${label}: response body cancellation failed: ${errorMessage(error)}`);
+  }
+}
+
 async function readBoundedBody(response, maximum, label) {
-  const lengthText = response.headers?.get?.('content-length');
-  if (lengthText !== null && lengthText !== undefined && lengthText !== '') {
-    const length = Number(lengthText);
-    if (!Number.isSafeInteger(length) || length < 0) {
-      throw new Error(`${label}: invalid content-length`);
+  let reader;
+  try {
+    const lengthText = response.headers?.get?.('content-length');
+    if (lengthText !== null && lengthText !== undefined && lengthText !== '') {
+      const length = Number(lengthText);
+      if (!Number.isSafeInteger(length) || length < 0) {
+        throw new Error(`${label}: invalid content-length`);
+      }
+      if (length > maximum) throw new Error(`${label}: response exceeds ${maximum} bytes`);
     }
-    if (length > maximum) throw new Error(`${label}: response exceeds ${maximum} bytes`);
-  }
 
-  if (!response.body || typeof response.body.getReader !== 'function') {
-    if (typeof response.arrayBuffer !== 'function') {
-      throw new Error(`${label}: invalid response body interface`);
+    if (!response.body || typeof response.body.getReader !== 'function') {
+      if (typeof response.arrayBuffer !== 'function') {
+        throw new Error(`${label}: invalid response body interface`);
+      }
+      const bytes = Buffer.from(await response.arrayBuffer());
+      if (bytes.length > maximum) throw new Error(`${label}: response exceeds ${maximum} bytes`);
+      return bytes;
     }
-    const bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length > maximum) throw new Error(`${label}: response exceeds ${maximum} bytes`);
-    return bytes;
-  }
 
-  const reader = response.body.getReader();
-  const chunks = [];
-  let total = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    total += value.byteLength;
-    if (total > maximum) {
-      try { await reader.cancel(); } catch {}
-      throw new Error(`${label}: response exceeds ${maximum} bytes`);
+    reader = response.body.getReader();
+    const chunks = [];
+    let total = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > maximum) {
+        throw new Error(`${label}: response exceeds ${maximum} bytes`);
+      }
+      chunks.push(Buffer.from(value));
     }
-    chunks.push(Buffer.from(value));
+    return Buffer.concat(chunks, total);
+  } catch (error) {
+    await cancelResponseBody(response, label, reader);
+    throw error;
   }
-  return Buffer.concat(chunks, total);
 }
 
 async function mapLimit(items, limit, worker) {
@@ -407,6 +424,12 @@ async function verifyBase({
     const manualHeadersValid = verifyHeaders(manual, alias, failures);
     if (manualHeadersValid && manual.headers.get('location') !== '/') {
       failures.push(`${alias}: expected Location: /`);
+    }
+    try {
+      await cancelResponseBody(manual, alias);
+    } catch (error) {
+      failures.push(labelledError(alias, error));
+      continue;
     }
 
     let followed;

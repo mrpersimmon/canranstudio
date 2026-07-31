@@ -2837,8 +2837,8 @@ rg -n "l51-stars-v1|localStorage|getItem|setItem|addStar|window\.print|btnPrint|
   lesson51/index.html tests/e2e/l51-*.spec.js
 rg -n "lesson51|PUBLISHED_COURSES|RISK-HTTP-01" \
   scripts index.html README.md deploy tests
-rg -n "actions/(checkout|setup-node)@v|nginx:1\.28\.0-alpine( |$)|registry\.npmmirror\.com|H-01" \
-  .github package-lock.json README.md deploy tests || true
+rg -n "actions/(checkout|setup-node)@v|nginx:1\.28\.0-alpine( |$)|registry\.npmmirror\.com|H-0[1]" \
+  .github package-lock.json README.md deploy tests docs || true
 ```
 
 Expected:

@@ -20,7 +20,7 @@
 - Keep CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, and
   `Permissions-Policy` on HTTP responses.
 - Public HTTP is an explicitly accepted temporary transport risk; completing this plan does not
-  close audit finding H-01.
+  close audit finding RISK-HTTP-01.
 - ICP and other regulatory compliance are external gates. A successful HTTP deployment is not a
   compliance approval.
 - Do not overwrite an unknown live Nginx configuration. Capture `nginx -T`, identify the loaded
@@ -1068,4 +1068,4 @@ Expected:
 - `dist/release-manifest.json` names the current commit;
 - a plain static server serves all four main routes without rewrites;
 - Nginx configuration is repository-owned and HTTP-only;
-- H-01 remains explicitly accepted/deferred.
+- RISK-HTTP-01 remains explicitly accepted/deferred.
