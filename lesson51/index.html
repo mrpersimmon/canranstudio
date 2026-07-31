@@ -610,8 +610,8 @@ function celebrate(el){
         e.stopPropagation();
         const b = e.currentTarget;
         document.querySelectorAll('.spk').forEach(x=>x.classList.remove('playing'));
-        b.classList.add('playing');
         manualSpeak(en, 0.8, ()=>b.classList.remove('playing'));
+        if(lesson51Audio.isActive()) b.classList.add('playing');
       };
       d.onclick = ()=> manualSpeak(en, 0.8);
       box.appendChild(d);
@@ -667,7 +667,11 @@ function celebrate(el){
       opts.appendChild(button);
     });
   }
-  function play(){ if(cur){ hear.classList.add('playing'); manualSpeak(cur[0], 0.8, ()=>hear.classList.remove('playing')); } }
+  function play(){
+    if(!cur) return;
+    manualSpeak(cur[0], 0.8, ()=>hear.classList.remove('playing'));
+    if(lesson51Audio.isActive()) hear.classList.add('playing');
+  }
   function pick(button,word){
     if(!attempt || attempt.solved || runComplete || !cur) return;
     const correct = word[0] === cur[0];
