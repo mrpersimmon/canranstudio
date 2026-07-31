@@ -4,7 +4,7 @@
 
 **Goal:** Make the locked Lesson 51 certificate print control explain the remaining work and offer a manual jump to the first unfinished level.
 
-**Architecture:** Keep the existing rating source of truth and certificate authorization check. Replace native button disabling with an ARIA-locked state, render one inline ticket panel under the print button, and map the first missing rating ID to its existing lesson section anchor.
+**Architecture:** Keep the existing rating source of truth and certificate authorization check. Replace native disabling with an actionable locked state described by visible status text and expansion semantics, render one inline ticket panel under the print button, and map the first missing rating ID to its existing lesson section anchor.
 
 **Tech Stack:** Static HTML/CSS/JavaScript, repository progress helpers, Playwright.
 
@@ -42,7 +42,7 @@ test('Lesson 51 locked print reveals manual recovery choices', async ({ page }) 
   await page.goto('/lesson51/#cert');
   const print = page.locator('#btnPrint');
   await expect(print).toBeEnabled();
-  await expect(print).toHaveAttribute('aria-disabled', 'true');
+  await expect(print).toHaveAttribute('data-certificate-state', 'locked');
   await print.click();
   await expect(page.locator('#certGateActions')).toBeVisible();
   await expect(page.locator('#certGateCount')).toHaveText('还需完成 3 个关卡。');
@@ -65,7 +65,7 @@ test('Lesson 51 gate choices jump to the first missing level or dismiss', async 
 });
 ```
 
-Update existing certificate assertions so an incomplete print control is enabled but has `aria-disabled="true"`, and a completed control has `aria-disabled="false"`.
+Update existing certificate assertions so an incomplete print control is enabled with `data-certificate-state="locked"`, and a completed control has `data-certificate-state="ready"`.
 
 - [ ] **Step 2: Run the focused tests and verify RED**
 
@@ -83,7 +83,7 @@ In `lesson51/index.html`:
 
 - Add the hidden `#certGateActions` region below `#certGateMsg` with `#certGateCount`, `#certGoFirstMissing`, and `#certGateDismiss`.
 - Style it as the selected cream ticket with the repository's existing ink border, offset shadow, Aegean blue primary action, outlined secondary action, responsive stacking, focus-visible treatment, and print hiding.
-- Keep `#btnPrint` enabled; set `aria-disabled` and an `is-locked` class from current eligibility.
+- Keep `#btnPrint` enabled; set `data-certificate-state`, `aria-describedby`, `aria-expanded`, and an `is-locked` class from current eligibility. Do not apply disabled semantics to a control that still opens guidance.
 - Implement the fixed mapping `{l1:'w1',l2:'w2',l3:'w3',l4:'w4',l5:'w5'}`.
 - On locked print, open the panel and focus its primary action without printing.
 - On primary action, close the panel and set `location.hash` to the first missing section.
@@ -122,4 +122,3 @@ Open `/lesson51/#cert` with incomplete ratings, click the locked print control, 
 git add lesson51/index.html tests/e2e/l51-progress.spec.js design-qa.md
 git commit -m "fix: explain locked lesson 51 certificates"
 ```
-

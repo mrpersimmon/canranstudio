@@ -85,7 +85,8 @@ test('Lesson 51 resets a negative legacy scalar without crashing', async ({ page
   expect(await storedRatings(page)).toEqual(Object.fromEntries(IDS.map(id => [id, 0])));
   expect(await page.evaluate(() => localStorage.getItem('l51-stars-v1'))).toBeNull();
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await expect(page.locator('#btnPrint')).toBeEnabled();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'locked');
 });
 
 test('Lesson 51 repairs corrupt v2 progress', async ({ page }) => {
@@ -121,7 +122,44 @@ test('Lesson 51 survives blocked storage', async ({ page }) => {
   await page.goto('/lesson51/');
   expect(errors).toEqual([]);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await expect(page.locator('#btnPrint')).toBeEnabled();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'locked');
+});
+
+test('Lesson 51 locked print reveals manual recovery choices', async ({ page }) => {
+  await page.addInitScript(key => {
+    localStorage.setItem(key, JSON.stringify({
+      version: 2,
+      ratings: { l1: 1, l2: 0, l3: 1, l4: 0, l5: 0 }
+    }));
+    window.__printCalls = 0;
+    window.print = () => { window.__printCalls += 1; };
+  }, KEY);
+  await page.goto('/lesson51/#cert');
+  const print = page.locator('#btnPrint');
+  await expect(print).toBeEnabled();
+  await expect(print).toHaveAttribute('data-certificate-state', 'locked');
+  await print.click();
+  await expect(page.locator('#certGateActions')).toBeVisible();
+  await expect(page.locator('#certGateCount')).toHaveText('还需完成 3 个关卡。');
+  await expect(page.locator('#certGoFirstMissing')).toBeFocused();
+  expect(await page.evaluate(() => window.__printCalls)).toBe(0);
+});
+
+test('Lesson 51 gate choices jump to the first missing level or dismiss', async ({ page }) => {
+  await page.addInitScript(key => localStorage.setItem(key, JSON.stringify({
+    version: 2,
+    ratings: { l1: 1, l2: 0, l3: 1, l4: 0, l5: 0 }
+  })), KEY);
+  await page.goto('/lesson51/#cert');
+  await page.locator('#btnPrint').click();
+  await page.locator('#certGateDismiss').click();
+  await expect(page.locator('#certGateActions')).toBeHidden();
+  await expect(page.locator('#btnPrint')).toBeFocused();
+  await page.locator('#btnPrint').click();
+  await page.locator('#certGoFirstMissing').click();
+  await expect(page).toHaveURL(/#w2$/);
+  await expect(page.locator('#certGateActions')).toBeHidden();
 });
 
 test('Lesson 51 certificate cannot be forged and eligible printing is real', async ({ page }) => {
@@ -134,7 +172,6 @@ test('Lesson 51 certificate cannot be forged and eligible printing is real', asy
   }, KEY);
   await page.goto('/lesson51/');
   await page.locator('#certName').fill('测试学生');
-  await page.evaluate(() => { document.getElementById('btnPrint').disabled = false; });
   await page.locator('#btnPrint').click();
   expect(await page.evaluate(() => window.__printCalls)).toBe(0);
   await page.evaluate(key => localStorage.setItem(key, JSON.stringify({
@@ -216,10 +253,12 @@ test('Lesson 51 full theater playback awards level 2 and unlocks the certificate
     };
   }, KEY);
   await page.goto('/lesson51/');
-  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await expect(page.locator('#btnPrint')).toBeEnabled();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'locked');
   await page.locator('#playAll').click();
   await expect.poll(async () => (await storedRatings(page)).l2).toBe(3);
   await expect(page.locator('#btnPrint')).toBeEnabled();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'ready');
 });
 
 test('Lesson 51 ordinary speech and Stop cannot complete an interrupted theater run', async ({ page }) => {
@@ -253,14 +292,16 @@ test('Lesson 51 ordinary speech and Stop cannot complete an interrupted theater 
   await page.locator('#heroQ').click();
   await page.waitForTimeout(100);
   expect((await storedRatings(page)).l2).toBe(0);
-  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await expect(page.locator('#btnPrint')).toBeEnabled();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'locked');
 
   await page.reload();
   await page.locator('#playAll').click();
   await page.locator('#stopAll').click();
   await page.waitForTimeout(100);
   expect((await storedRatings(page)).l2).toBe(0);
-  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await expect(page.locator('#btnPrint')).toBeEnabled();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'locked');
 });
 
 test('Lesson 51 preserves six frequency sources while rendering one card per category', async ({ page }) => {
