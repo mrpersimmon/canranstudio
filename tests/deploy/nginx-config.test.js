@@ -188,6 +188,7 @@ function assertHttpContract(text) {
     leaf('index', ['index.html']),
     leaf('charset', ['utf-8']),
     leaf('server_tokens', ['off']),
+    leaf('absolute_redirect', ['off']),
     leaf('open_file_cache', ['off']),
     leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
     leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
@@ -208,6 +209,7 @@ function assertHttpContract(text) {
     ['index', ['index.html']],
     ['charset', ['utf-8']],
     ['server_tokens', ['off']],
+    ['absolute_redirect', ['off']],
     ['open_file_cache', ['off']]
   ]) {
     assert.equal(direct(children, name).length, 1, `expected one ${name} directive`);
@@ -260,6 +262,7 @@ const FORGED_DIRECTIVES = [
   'index index.html;',
   'charset utf-8;',
   'server_tokens off;',
+  'absolute_redirect off;',
   `add_header Content-Security-Policy "${CSP}" always;`,
   'add_header X-Content-Type-Options "nosniff" always;',
   'add_header X-Frame-Options "DENY" always;',
