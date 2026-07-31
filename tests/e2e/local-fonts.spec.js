@@ -73,7 +73,8 @@ for (const route of fontRoutes) {
     await page.goto(route);
     const requiredFaces = [
       ...ZCOOL_FACES,
-      ...(['/soundmark/', '/lesson51/'].includes(route) ? FREDOKA_FACES : BALOO_FACES)
+      ...(['/soundmark/', '/lesson51/'].includes(route) ? FREDOKA_FACES : BALOO_FACES),
+      ...(route === '/lesson54/' ? FREDOKA_FACES : [])
     ];
     const loadedFaces = await page.evaluate(async faces => Promise.all(
       faces.map(async face => {
