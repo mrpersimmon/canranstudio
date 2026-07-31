@@ -357,12 +357,9 @@ use this routine or claim rollback-capable atomic activation.
 
 ## 6. Exact live verification and content rollback
 
-Use the verifier only from the same local checkout whose exact artifact was uploaded. It compares
-release-manifest.json first, then checks every runtime-retrievable manifest file plus all three /home aliases.
-Local success is not live evidence.
-
-- `/lesson51/` returns the exact `lesson51/index.html` bytes;
-- every manifest-declared Lesson 51 MP3 under `/lesson51/audio/` returns exact bytes;
+Use the verifier only from the same local checkout whose exact artifact was uploaded. It currently
+checks five hard-coded responses, exact bytes, headers, and release-manifest.json. It does not yet
+cover Lesson 51 or the three /home aliases. Local success is not live evidence.
 
 ~~~bash
 set -euo pipefail

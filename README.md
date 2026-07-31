@@ -28,10 +28,11 @@ packages are build-time inputs only: run `npm run vendor:fonts` after `npm ci` t
 committed local font assets. The generated WOFF2 files, `fonts.css`, and copied OFL licenses all
 live under `assets/fonts/`, and every public page loads its fonts from that same-origin path.
 
-Certificate issue, print, and save entry points re-check their own course eligibility before they
-act. The four course certificate experiences provide accessible, polite, atomic feedback. Lesson
-51 requires at least one star in every level and prints only its certificate; Lesson 49 continues
-to export through a Blob and revoke every object URL after preview closure or creation failure.
+The three existing course certificate experiences re-check their own course eligibility before they
+act and provide accessible, polite, atomic feedback. Lesson 51 currently checks only that the name
+is non-empty before printing; per-level eligibility enforcement remains pending in this unreleased
+remediation branch. Lesson 49 continues to export through a Blob and revoke every object URL after
+preview closure or creation failure.
 
 ## Production transport
 
