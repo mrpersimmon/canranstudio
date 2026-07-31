@@ -686,16 +686,11 @@ function celebrate(el){
   let solved = 0;
   let firstTryScore = 0;
   let attempt = null;
-  let nextTimer = null;
   let runComplete = false;
 
   function shuffle(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]); }
-  function clearNextTimer(){
-    if(nextTimer !== null){ clearTimeout(nextTimer); nextTimer = null; }
-  }
   function finishRun(){
     runComplete = true;
-    clearNextTimer();
     awardLevel('l1',CanranCore.progress.ratingFor(firstTryScore,[
       {min:5,rating:3},{min:3,rating:2},{min:0,rating:1}
     ]));
@@ -705,7 +700,6 @@ function celebrate(el){
     toast('单词关通过！去看课文剧场吧');
   }
   function round(){
-    clearNextTimer();
     attempt = CanranCore.assessment.createAttempt();
     nextButton.disabled = true;
     nextButton.textContent = '下一题';
@@ -745,7 +739,6 @@ function celebrate(el){
     fb.className = 'fb good'; celebrate(button);
     if(solved === 5){ finishRun(); return; }
     nextButton.disabled = false;
-    nextTimer = setTimeout(round,1400);
   }
   hear.onclick = play;
   nextButton.onclick = ()=>{
@@ -753,7 +746,7 @@ function celebrate(el){
       solved = 0; firstTryScore = 0; runComplete = false; round(); return;
     }
     if(!attempt || !attempt.solved) return;
-    clearNextTimer(); round();
+    round();
   };
   round();
 })();
