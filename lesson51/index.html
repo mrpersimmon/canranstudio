@@ -467,7 +467,14 @@ function speakSynth(t, rate, onend){
     window.speechSynthesis.speak(u);
   }catch(e){ if(onend) onend(); }
 }
-function speak(text, rate, onend){
+function invalidateTheaterAutoplay(){
+  playAllRun += 1;
+  playingAll = false;
+  if(playAllTimer){ clearTimeout(playAllTimer); playAllTimer = null; }
+  document.querySelectorAll('.line').forEach(x=>x.classList.remove('playing'));
+}
+function speak(text, rate, onend, theaterRun = null){
+  if(theaterRun !== playAllRun) invalidateTheaterAutoplay();
   stopCurAudio();
   if(speechOK){ try{ window.speechSynthesis.cancel(); }catch(e){} }
   tryAudio(text, onend).then(ok2=>{ if(!ok2) speakSynth(text, rate, onend); });
@@ -702,12 +709,9 @@ const SCENE_SVGS = {
 /* 自动播放全场 */
 let playAllTimer = null, playingAll = false, playAllRun = 0;
 function stopPlayAll(){
-  playAllRun += 1;
-  playingAll = false;
-  if(playAllTimer){ clearTimeout(playAllTimer); playAllTimer = null; }
+  invalidateTheaterAutoplay();
   stopCurAudio();
   if(speechOK){ try{ speechSynthesis.cancel(); }catch(e){} }
-  document.querySelectorAll('.line').forEach(x=>x.classList.remove('playing'));
 }
 document.getElementById('stopAll').onclick = stopPlayAll;
 document.getElementById('playAll').onclick = ()=>{
@@ -732,7 +736,7 @@ document.getElementById('playAll').onclick = ()=>{
       if(run !== playAllRun) return;
       b.classList.remove('playing');
       playAllTimer = setTimeout(next, 500);
-    });
+    }, run);
   }
   next();
 };

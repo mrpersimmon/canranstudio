@@ -219,6 +219,44 @@ test('Lesson 51 full theater playback awards level 2 and unlocks the certificate
   await expect(page.locator('#btnPrint')).toBeEnabled();
 });
 
+test('Lesson 51 ordinary speech and Stop cannot complete an interrupted theater run', async ({ page }) => {
+  await page.addInitScript(key => {
+    localStorage.setItem(key, JSON.stringify({
+      version: 2,
+      ratings: { l1: 1, l2: 0, l3: 1, l4: 1, l5: 1 }
+    }));
+    const nativeSetTimeout = window.setTimeout.bind(window);
+    window.setTimeout = (callback, _delay, ...args) => nativeSetTimeout(callback, 0, ...args);
+    let audioCount = 0;
+    window.Audio = class {
+      constructor() { this.id = audioCount += 1; }
+      addEventListener(type, callback) {
+        if (type === 'ended') this.onended = callback;
+      }
+      play() {
+        if (this.id > 2) queueMicrotask(() => this.onended && this.onended());
+        return Promise.resolve();
+      }
+      pause() {
+        if (this.id === 1) this.onended && this.onended();
+      }
+    };
+  }, KEY);
+  await page.goto('/lesson51/');
+  await page.locator('#playAll').click();
+  await page.locator('#heroQ').click();
+  await page.waitForTimeout(100);
+  expect((await storedRatings(page)).l2).toBe(0);
+  await expect(page.locator('#btnPrint')).toBeDisabled();
+
+  await page.reload();
+  await page.locator('#playAll').click();
+  await page.locator('#stopAll').click();
+  await page.waitForTimeout(100);
+  expect((await storedRatings(page)).l2).toBe(0);
+  await expect(page.locator('#btnPrint')).toBeDisabled();
+});
+
 test('Lesson 51 preserves six frequency sources while rendering one card per category', async ({ page }) => {
   await page.goto('/lesson51/');
   expect(await page.evaluate(() => FREQ)).toEqual([
