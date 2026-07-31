@@ -32,6 +32,7 @@ const FIXTURE_FILES = {
   'lesson51/index.html': Buffer.from('lesson51'),
   'core/storage.js': Buffer.from('storage'),
   'assets/fonts/fonts.css': Buffer.from('fonts'),
+  'assets/lesson notes/#1.txt': Buffer.from('encoded path'),
   'lesson51/audio/climate.mp3': Buffer.from('mp3'),
   'home/index.html': Buffer.from('compatibility redirect')
 };
@@ -176,8 +177,24 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
 
   assert.equal(activity.maximum <= 2, true);
   assert.deepEqual(
-    results.filter(result => result.kind === 'asset').map(result => result.file).sort(),
-    Object.keys(FIXTURE_FILES).filter(file => file !== 'home/index.html').sort()
+    results
+      .filter(result => result.kind === 'asset')
+      .map(({ file, path: resultPath }) => ({ file, path: resultPath })),
+    [
+      { file: 'index.html', path: '/' },
+      { file: 'lesson49/index.html', path: '/lesson49/' },
+      { file: 'lesson50/index.html', path: '/lesson50/' },
+      { file: 'soundmark/index.html', path: '/soundmark/' },
+      { file: 'lesson51/index.html', path: '/lesson51/' },
+      { file: 'core/storage.js', path: '/core/storage.js' },
+      { file: 'assets/fonts/fonts.css', path: '/assets/fonts/fonts.css' },
+      { file: 'assets/lesson notes/#1.txt', path: '/assets/lesson%20notes/%231.txt' },
+      { file: 'lesson51/audio/climate.mp3', path: '/lesson51/audio/climate.mp3' }
+    ]
+  );
+  assert.equal(
+    activity.calls.some(call => call.path === '/assets/lesson%20notes/%231.txt'),
+    true
   );
   assert.deepEqual(
     activity.calls
@@ -309,6 +326,7 @@ test('verifyBase rejects declared and streamed oversized responses', async t => 
 test('verifyBase passes an aborting timeout signal to requests', async t => {
   const root = await manifestFixture();
   t.after(() => fs.rm(root, { recursive: true, force: true }));
+  let abortReason;
   await assert.rejects(
     verifyBase({
       baseUrl: 'http://59.110.217.36',
@@ -323,6 +341,7 @@ test('verifyBase passes an aborting timeout signal to requests', async t => {
           );
           signal.addEventListener('abort', () => {
             clearTimeout(keepAlive);
+            abortReason = signal.reason;
             reject(signal.reason);
           }, { once: true });
         });
@@ -330,6 +349,7 @@ test('verifyBase passes an aborting timeout signal to requests', async t => {
     }),
     /release-manifest\.json: request failed: The operation was aborted due to timeout/
   );
+  assert.equal(abortReason?.name, 'TimeoutError');
 });
 
 test('verifyBase validates resource bounds before requests', async () => {
@@ -425,19 +445,15 @@ test('verifyBase enforces all three home redirect locations', async t => {
   );
 });
 
-test('verifyBase rejects HTTPS and malformed base URLs before requests', async () => {
-  for (const baseUrl of [
-    'https://59.110.217.36',
-    'http://',
-    'http:/59.110.217.36',
-    'http:59.110.217.36',
-    '59.110.217.36',
-    'http://59.110.217.36@evil.example/base?q=1#frag'
-  ]) {
+async function assertBaseUrlsRejectedWithoutRequest(t, baseUrls) {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  for (const baseUrl of baseUrls) {
     let calls = 0;
     await assert.rejects(
       verifyBase({
         baseUrl,
+        root,
         fetchImpl: async () => {
           calls += 1;
           throw new Error('must not request');
@@ -447,4 +463,34 @@ test('verifyBase rejects HTTPS and malformed base URLs before requests', async (
     );
     assert.equal(calls, 0, baseUrl);
   }
+}
+
+test('verifyBase rejects HTTPS and malformed base URLs before requests', async t => {
+  await assertBaseUrlsRejectedWithoutRequest(t, [
+    'https://59.110.217.36',
+    'http://',
+    'http:/59.110.217.36',
+    'http:59.110.217.36',
+    '59.110.217.36'
+  ]);
+});
+
+test('verifyBase rejects empty and non-empty userinfo before requests', async t => {
+  await assertBaseUrlsRejectedWithoutRequest(t, [
+    'http://@59.110.217.36',
+    'http://:@59.110.217.36',
+    'http://user:pass@59.110.217.36'
+  ]);
+});
+
+test('verifyBase rejects a path-only base URL before requests', async t => {
+  await assertBaseUrlsRejectedWithoutRequest(t, ['http://59.110.217.36/base']);
+});
+
+test('verifyBase rejects a query-only base URL before requests', async t => {
+  await assertBaseUrlsRejectedWithoutRequest(t, ['http://59.110.217.36?q=1']);
+});
+
+test('verifyBase rejects a fragment-only base URL before requests', async t => {
+  await assertBaseUrlsRejectedWithoutRequest(t, ['http://59.110.217.36#frag']);
 });

@@ -39,7 +39,10 @@ function errorMessage(error) {
 }
 
 function parseHttpBaseUrl(baseUrl) {
-  if (typeof baseUrl !== 'string' || !/^http:\/\/[^/?#\s]+\/?$/.test(baseUrl)) {
+  const authorityMatch = typeof baseUrl === 'string'
+    ? /^http:\/\/([^/?#\s]+)\/?$/.exec(baseUrl)
+    : null;
+  if (!authorityMatch || authorityMatch[1].includes('@')) {
     throw new Error(`HTTP-only verifier rejected base URL: ${baseUrl}`);
   }
 
