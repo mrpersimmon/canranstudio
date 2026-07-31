@@ -54,11 +54,13 @@ h1,h2{font-weight:800;line-height:1.25}
 .a49 .card-art{background:#FBE3DC}
 .a50 .card-art{background:#EAE3F6}
 .asm .card-art{background:#FFE8D2}
+.a51 .card-art{background:#DFF0FF}
 .card-body{padding:22px 22px 20px;border-left:4px solid var(--brown)}
 .card-tag{display:inline-block;color:#fff;border-radius:999px;padding:3px 16px;font-weight:800;font-size:14px;margin-bottom:8px}
 .a49 .card-tag{background:var(--red)}
 .a50 .card-tag{background:var(--purple)}
 .asm .card-tag{background:#FF7A1A}
+.a51 .card-tag{background:#1D6FB8}
 .card-body h2{font-size:clamp(22px,5vw,30px)}
 .card-body .en-sub{font-weight:800;opacity:.7;font-size:16px;margin-bottom:8px}
 .card-body .desc{font-weight:700;font-size:15.5px;opacity:.9;margin-bottom:12px}
@@ -77,6 +79,7 @@ h1,h2{font-weight:800;line-height:1.25}
 .a49 .go-btn{background:var(--red)}
 .a50 .go-btn{background:var(--purple)}
 .asm .go-btn{background:#FF7A1A}
+.a51 .go-btn{background:#1D6FB8}
 
 /* 占位卡 */
 .soon{
@@ -172,26 +175,31 @@ footer .tip{background:var(--paper);border:3px solid var(--brown);border-radius:
     </div>
   </a>
 
-  <!-- 敬请期待 -->
-  <div class="card soon">
+  <!-- Lesson 51 -->
+  <a class="card a51" href="/lesson51/" id="card51">
     <div class="card-inner">
-      <div class="card-art"><span class="emoji-big" style="animation:none">🚧</span></div>
+      <div class="card-art"><span class="emoji-big">🏛️</span></div>
       <div class="card-body">
-        <span class="card-tag" style="background:#B9AFA3">Coming Soon</span>
-        <h2>Lesson 51 · 神秘新冒险</h2>
-        <div class="en-sub">正在建造中…</div>
-        <div class="desc">新的关卡正在紧锣密鼓地打造，先把前两关的星星集满吧！</div>
-        <span class="go-btn">🔒 敬请期待</span>
+        <span class="card-tag">Lesson 51 · 第一册</span>
+        <h2>希腊四季之旅</h2>
+        <div class="en-sub">A Pleasant Climate</div>
+        <div class="desc">跟着 Dimitri 学天气、季节、月份和频率词，完成五关成为希腊小导游！</div>
+        <div class="feat"><span>🎧 听音挑词</span><span>🎭 课文剧场</span><span>🗓️ 月份归队</span><span>🪜 频率阶梯</span><span>🏆 导游证书</span></div>
+        <div class="prog">
+          <div class="prog-track"><div class="prog-fill" id="pf51"></div></div>
+          <span class="prog-txt">⭐ <span id="pt51">0</span>/15</span>
+        </div>
+        <span class="go-btn" id="btn51">🚀 开始冒险</span>
       </div>
     </div>
-  </div>
+  </a>
 
 </main>
 
 <footer>
   <div class="wrap">
     <div class="tip">💡 小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
-    <div>🎪 英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49 & 50 · 音标第一课</div>
+    <div>🎪 英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51 · 音标第一课</div>
   </div>
 </footer>
 
@@ -219,6 +227,12 @@ function loadTotal(key,legacyKey,ids,legacyMode){
 renderProg(loadTotal('canran:l49:progress:v2','l49-stars-v1',COURSE_LEVELS,'ratings'),'pf49','pt49','btn49');
 renderProg(loadTotal('canran:l50:progress:v2','l50-stars-v1',COURSE_LEVELS,'ratings'),'pf50','pt50','btn50');
 renderProg(loadTotal('canran:soundmark:progress:v2','phonics-magic-stars-v1',SOUND_LEVELS,'reset'),'pfSM','ptSM','btnSM',12);
+renderProg(
+  loadTotal('canran:l51:progress:v2', 'l51-stars-v1', COURSE_LEVELS, 'reset'),
+  'pf51',
+  'pt51',
+  'btn51'
+);
 </script>
 </body>
 </html>

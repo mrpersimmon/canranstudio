@@ -1,6 +1,7 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
+const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
 const ZCOOL_FACES = [
   {
@@ -29,7 +30,8 @@ const FREDOKA_FACES = [400, 500, 600, 700].map(weight => ({
   file: `fredoka-latin-${weight}.woff2`
 }));
 
-for (const route of ['/', '/lesson49/', '/lesson50/', '/soundmark/']) {
+const fontRoutes = ['/', ...PUBLISHED_COURSES.map(course => course.route)];
+for (const route of fontRoutes) {
   test(`${route} loads its selected fonts without Google requests`, async ({ page }) => {
     const externalFonts = [];
     const localRequests = [];
@@ -71,7 +73,7 @@ for (const route of ['/', '/lesson49/', '/lesson50/', '/soundmark/']) {
     await page.goto(route);
     const requiredFaces = [
       ...ZCOOL_FACES,
-      ...(route === '/soundmark/' ? FREDOKA_FACES : BALOO_FACES)
+      ...(['/soundmark/', '/lesson51/'].includes(route) ? FREDOKA_FACES : BALOO_FACES)
     ];
     const loadedFaces = await page.evaluate(async faces => Promise.all(
       faces.map(async face => {

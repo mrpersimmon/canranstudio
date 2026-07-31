@@ -1,8 +1,10 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
+const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
-for (const path of ['/', '/home/', '/lesson49/', '/lesson50/', '/soundmark/']) {
+const smokeRoutes = ['/', '/home/', ...PUBLISHED_COURSES.map(course => course.route)];
+for (const path of smokeRoutes) {
   test(`${path} loads without an uncaught page error`, async ({ page }) => {
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));

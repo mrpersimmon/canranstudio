@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>希腊四季之旅 · 新概念一 Lesson 51</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 <style>
 :root{
   --paper:#FFF9EC; --ink:#2B2118;
@@ -31,6 +29,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   border-bottom:3px solid var(--ink);display:flex;align-items:center;gap:14px;padding:8px 18px}
 #topbar .logo{font-family:'ZCOOL KuaiLe';font-size:20px;white-space:nowrap}
 #topbar .logo b{color:var(--aegean)}
+.logo-home{color:inherit;text-decoration:none}
 #starbox{margin-left:auto;display:flex;align-items:center;gap:8px;background:#fff;
   border:3px solid var(--ink);border-radius:999px;padding:4px 14px;box-shadow:3px 3px 0 var(--ink);font-weight:600;font-size:15px}
 #starbox svg{width:20px;height:20px}
@@ -180,7 +179,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 <div class="toast" id="toast"></div>
 
 <header id="topbar">
-  <div class="logo">希腊<b>四季之旅</b></div>
+  <a class="logo logo-home" href="/" aria-label="返回课程首页">希腊<b>四季之旅</b></a>
   <div id="starbox">
     <svg viewBox="0 0 24 24" fill="#FFC93C" stroke="#2B2118" stroke-width="1.6"><path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8z"/></svg>
     <span id="starCount">0</span> 颗星

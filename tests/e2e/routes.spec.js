@@ -1,12 +1,15 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
+const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
+const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const routes = [
   { path: '/', title: /英语闯关乐园/ },
-  { path: '/lesson49/', title: /肉店大冒险/ },
-  { path: '/lesson50/', title: /挑食小王子大冒险/ },
-  { path: '/soundmark/', title: /音标魔法乐园/ }
+  ...PUBLISHED_COURSES.map(course => ({
+    path: course.route,
+    title: new RegExp(escapeRegExp(course.title))
+  }))
 ];
 
 for (const route of routes) {
@@ -31,15 +34,14 @@ test('/home/ preserves query and hash through the compatibility redirect', async
   await expect(page).toHaveTitle(/英语闯关乐园/);
 });
 
-test('welcome page and course tabs form a closed navigation loop', async ({ page }) => {
+test('welcome page and course pages form a closed navigation loop', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('a[href="/lesson49/"]')).toHaveCount(1);
-  await expect(page.locator('a[href="/lesson50/"]')).toHaveCount(1);
-  await expect(page.locator('a[href="/soundmark/"]')).toHaveCount(1);
-
-  for (const path of ['/lesson49/', '/lesson50/', '/soundmark/']) {
-    await page.goto(path);
-    await expect(page.locator('#coursenav a[href="/"]')).toHaveCount(1);
+  for (const course of PUBLISHED_COURSES) {
+    await expect(page.locator(`a[href="${course.route}"]`)).toHaveCount(1);
+  }
+  for (const course of PUBLISHED_COURSES) {
+    await page.goto(course.route);
+    await expect(page.locator('a[href="/"]')).toHaveCount(1);
   }
 });
 

@@ -3,7 +3,7 @@
 ## Scope and transaction boundary
 
 Production intentionally remains on http://59.110.217.36. This procedure does not configure TLS,
-HTTPS, redirects to HTTPS, HSTS, or ICP compliance. H-01 remains accepted and deferred.
+HTTPS, redirects to HTTPS, HSTS, or ICP compliance. RISK-HTTP-01 remains accepted and deferred.
 
 The Nginx configuration gate and content release are intentionally separate. The first changes and
 reloads a repository-owned configuration after an operator observed-file gate; it is not described
@@ -14,7 +14,7 @@ activation. Never automatically alter an unknown site file or delete a prior rel
 
 Run this from the release commit. The verifier rejects symbolic links, special files, missing or
 extra files, non-derived directories, malformed manifests, and mismatched hashes. It binds every
-regular artifact file to the manifest, not just the five live routes.
+regular artifact file to the manifest, including Lesson 51 HTML, its lesson51/audio/ tree, and all other manifest files.
 
 ~~~bash
 set -euo pipefail
@@ -124,7 +124,7 @@ ssh "$CANRAN_DEPLOY_TARGET" 'sudo sha256sum /etc/nginx/conf.d/canranstudio-http.
 
 Inspect every server block able to answer 59.110.217.36:80, including wildcard/default and IPv4/IPv6
 listeners. Stop for an unaccounted rewrite, alias, root, or default block affecting /, /lesson49/,
-/lesson50/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
+/lesson50/, /lesson51/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
 site file before disabling only it; its path is never inferred by this repository.
 
 The repository-owned matched server explicitly sets open_file_cache off. The complete nginx -T
@@ -357,8 +357,12 @@ use this routine or claim rollback-capable atomic activation.
 
 ## 6. Exact live verification and content rollback
 
-Use the verifier only from the same local checkout whose exact artifact was uploaded. It checks five
-200 responses, exact bytes, headers, and release-manifest.json. Local success is not live evidence.
+Use the verifier only from the same local checkout whose exact artifact was uploaded. It compares
+release-manifest.json first, then checks every runtime-retrievable manifest file plus all three /home aliases.
+Local success is not live evidence.
+
+- `/lesson51/` returns the exact `lesson51/index.html` bytes;
+- every manifest-declared Lesson 51 MP3 under `/lesson51/audio/` returns exact bytes;
 
 ~~~bash
 set -euo pipefail

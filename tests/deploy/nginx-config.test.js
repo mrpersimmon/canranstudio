@@ -176,6 +176,7 @@ function assertHttpContract(text) {
     ['/home/index.html', '/'],
     ['/lesson49', '/lesson49/'],
     ['/lesson50', '/lesson50/'],
+    ['/lesson51', '/lesson51/'],
     ['/soundmark', '/soundmark/']
   ];
   assertExactChildren(children, [
