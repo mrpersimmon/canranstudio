@@ -8,17 +8,16 @@ const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const { buildStatic } = require('../../scripts/build-static');
+const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
 const ROOT = path.resolve(__dirname, '../..');
 const PUBLIC_INPUTS = [
   'index.html',
   'home/index.html',
-  'lesson49/index.html',
-  'lesson49/audio',
-  'lesson50/index.html',
-  'lesson50/audio',
-  'soundmark/index.html',
-  'soundmark/audio',
+  ...PUBLISHED_COURSES.flatMap(course => [
+    course.entry,
+    ...course.assetDirectories
+  ]),
   'core',
   'assets'
 ];
@@ -74,6 +73,8 @@ async function writeSyntheticPublicRoot(root) {
     'lesson50/audio/clip.mp3',
     'soundmark/index.html',
     'soundmark/audio/clip.mp3',
+    'lesson51/index.html',
+    'lesson51/audio/clip.mp3',
     'core/audio-player.js'
   ]) {
     const file = path.join(root, relative);
@@ -100,6 +101,8 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'lesson49/audio/beef.mp3',
     'lesson50/index.html',
     'soundmark/index.html',
+    'lesson51/index.html',
+    'lesson51/audio/climate.mp3',
     'core/audio-player.js',
     'release-manifest.json'
   ]) {
@@ -138,6 +141,28 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     await fs.readFile(path.join(secondOut, 'release-manifest.json')),
     await fs.readFile(path.join(out, 'release-manifest.json'))
   );
+});
+
+test('buildStatic rejects an unregistered lesson entry before creating output', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-unregistered-course-'));
+  const out = path.join(root, 'dist');
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  await writeSyntheticPublicRoot(root);
+  await fs.mkdir(path.join(root, 'lesson-draft'), { recursive: true });
+  await fs.writeFile(path.join(root, 'lesson-draft', 'index.html'), 'draft');
+  execFileSync('git', ['add', 'lesson-draft/index.html'], { cwd: root });
+  execFileSync(
+    'git',
+    ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+      'commit', '--quiet', '-m', 'add unregistered lesson'],
+    { cwd: root }
+  );
+
+  await assert.rejects(
+    buildStatic({ root, out }),
+    /unregistered lesson entry: lesson-draft\/index\.html/
+  );
+  await assert.rejects(fs.stat(out), { code: 'ENOENT' });
 });
 
 test('buildStatic refuses output paths that could erase its repository', async t => {

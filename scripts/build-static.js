@@ -5,22 +5,23 @@ const { execFileSync } = require('node:child_process');
 const { constants } = require('node:fs');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { PUBLISHED_COURSES } = require('./course-registry');
 
-const REQUIRED_FILES = [
+const REQUIRED_FILES = Object.freeze([
   'index.html',
   'home/index.html',
-  'lesson49/index.html',
-  'lesson50/index.html',
-  'soundmark/index.html'
-];
-const REQUIRED_DIRECTORIES = [
-  'lesson49/audio',
-  'lesson50/audio',
-  'soundmark/audio',
+  ...PUBLISHED_COURSES.map(course => course.entry)
+]);
+const REQUIRED_DIRECTORIES = Object.freeze([
+  ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),
   'core'
-];
-const OPTIONAL_DIRECTORIES = ['assets'];
-const PUBLIC_INPUTS = [...REQUIRED_FILES, ...REQUIRED_DIRECTORIES, ...OPTIONAL_DIRECTORIES];
+]);
+const OPTIONAL_DIRECTORIES = Object.freeze(['assets']);
+const PUBLIC_INPUTS = Object.freeze([
+  ...REQUIRED_FILES,
+  ...REQUIRED_DIRECTORIES,
+  ...OPTIONAL_DIRECTORIES
+]);
 
 function comparePaths(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
@@ -37,6 +38,19 @@ async function lstatIfExists(file) {
   } catch (error) {
     if (error.code === 'ENOENT') return undefined;
     throw error;
+  }
+}
+
+async function assertRegisteredLessonEntries(root) {
+  const registered = new Set(PUBLISHED_COURSES.map(course => course.entry));
+  const entries = await fs.readdir(root, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isDirectory() || !entry.name.startsWith('lesson')) continue;
+    const relative = `${entry.name}/index.html`;
+    const stat = await lstatIfExists(path.join(root, relative));
+    if (stat && !registered.has(relative)) {
+      throw new Error(`unregistered lesson entry: ${relative}`);
+    }
   }
 }
 
@@ -380,6 +394,7 @@ async function buildStatic({
   const resolvedOut = path.resolve(out);
   await assertSafeOutput(resolvedRoot, resolvedOut);
   await assertOutputDoesNotOverlapPublicInputs(resolvedRoot, resolvedOut);
+  await assertRegisteredLessonEntries(resolvedRoot);
 
   for (const relative of REQUIRED_FILES) await validateFile(resolvedRoot, relative);
   for (const relative of REQUIRED_DIRECTORIES) await validateDirectory(resolvedRoot, relative);
