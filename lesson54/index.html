@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2E6F8E">
+<title>环球护照之旅 · 新概念英语 Lesson 54</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛂</text></svg>">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<style>
+:root{
+  --cream:#FFF6E9; --paper:#FFFDF6; --ink:#2B2118;
+  --ocean:#2E6F8E; --ocean-d:#1F526C; --sky:#BEE3F0;
+  --sun:#F4A72C; --sun-d:#D98E16; --coral:#E8503A; --coral-d:#C93A28;
+  --leaf:#7FB069; --leaf-d:#5E9150; --grape:#9B7EBD; --grape-d:#7B5FA6;
+  --pink:#FF8FA3;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:'Baloo 2','ZCOOL KuaiLe','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  background:var(--cream); color:var(--ink); font-size:19px; line-height:1.6;
+  background-image:radial-gradient(#f2e6cf 1.5px, transparent 1.5px); background-size:28px 28px;
+  touch-action:manipulation;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom));
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+h1,h2,h3{font-family:'ZCOOL KuaiLe','Baloo 2',sans-serif;font-weight:400}
+.en{font-family:'Fredoka','Baloo 2',sans-serif}
+
+/* ===== 顶栏 ===== */
+header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:3px solid var(--ink);
+  display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+header .brand{font-family:'ZCOOL KuaiLe';font-size:20px;color:var(--ocean)}
+#starBadge{background:var(--paper);border:3px solid var(--ink);border-radius:999px;
+  padding:5px 16px;font-family:'ZCOOL KuaiLe';font-size:17px;box-shadow:3px 3px 0 var(--ink)}
+
+/* ===== 右侧导航圆点 ===== */
+#dots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:10px}
+#dots a{width:13px;height:13px;border-radius:50%;border:2.5px solid var(--ink);background:var(--paper);display:block;transition:transform .2s,background .2s}
+#dots a.on{background:var(--ocean);transform:scale(1.35)}
+@media(max-width:560px){#dots{display:none}}
+
+section{min-height:100vh;padding:74px 20px 40px;max-width:980px;margin:0 auto}
+.sec-tag{display:inline-block;background:var(--ink);color:var(--cream);font-family:'ZCOOL KuaiLe';
+  font-size:15px;padding:4px 16px;border-radius:999px;margin-bottom:10px}
+h2{font-size:clamp(28px,5vw,40px);margin-bottom:8px}
+.sec-sub{opacity:.78;margin-bottom:24px;max-width:640px}
+
+/* ===== 通用贴纸按钮 ===== */
+.btn{display:inline-block;background:var(--paper);border:3.5px solid var(--ink);border-radius:16px;
+  padding:12px 28px;font-family:'ZCOOL KuaiLe';font-size:20px;box-shadow:5px 5px 0 var(--ink);
+  transition:transform .12s,box-shadow .12s;user-select:none}
+.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.btn.primary{background:var(--ocean);color:#fff}
+.btn.sunny{background:var(--sun)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:5px 5px 0 var(--ink)}
+
+.spk{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;
+  background:var(--paper);border:3px solid var(--ink);box-shadow:2.5px 2.5px 0 var(--ink);
+  display:flex;align-items:center;justify-content:center;transition:transform .12s}
+.spk:active{transform:scale(.9)}
+.spk svg{width:19px;height:19px}
+.spk.playing{background:var(--sun)}
+
+.toast{position:fixed;left:50%;bottom:120px;transform:translateX(-50%) translateY(90px);
+  background:var(--ink);color:var(--cream);font-family:'ZCOOL KuaiLe';font-size:18px;
+  padding:12px 28px;border-radius:999px;z-index:99;transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  border:3px solid var(--sun);white-space:nowrap;max-width:92vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.hidden{display:none!important}
+
+/* ===== HERO ===== */
+#hero{text-align:center;padding-top:56px}
+#hero .lesson-pill{display:inline-block;background:var(--ocean);color:#fff;font-family:'Fredoka';
+  font-weight:600;font-size:15px;letter-spacing:1px;padding:6px 20px;border-radius:999px;margin-bottom:18px;
+  border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+#hero h1{font-size:clamp(40px,8vw,64px);line-height:1.15}
+#hero h1 .hl{background:var(--sun);border:3.5px solid var(--ink);border-radius:14px;
+  padding:0 16px;display:inline-block;box-shadow:5px 5px 0 var(--ink);transform:rotate(-1.5deg)}
+#hero .sub-en{font-family:'Fredoka';font-size:19px;margin-top:14px;opacity:.8}
+#hero .sub-cn{margin-top:6px;font-size:18px}
+#hero .think{margin-top:8px;font-size:18px}
+#hero .think b{color:var(--ocean)}
+#hero .cta{margin:26px 0 34px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.sticker-note{display:inline-block;background:var(--paper);border:3px solid var(--ink);border-radius:12px;
+  padding:6px 14px;font-size:15px;box-shadow:3px 3px 0 var(--ink);transform:rotate(-3deg)}
+.sticker-note.r{transform:rotate(2.5deg)}
+#heroScene{max-width:660px;margin:0 auto;border:4px solid var(--ink);border-radius:22px;
+  box-shadow:8px 8px 0 var(--ink);background:var(--sky);overflow:hidden}
+#heroScene svg{display:block;width:100%;height:auto}
+
+/* ===== W1 单词对卡 ===== */
+.pair-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.pair{background:var(--paper);border:3.5px solid var(--ink);border-radius:18px;
+  box-shadow:6px 6px 0 var(--ink);overflow:hidden}
+.pair .p-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:3px dashed var(--ink);position:relative}
+.pair .flagchip{width:44px;height:44px;border-radius:12px;border:3px solid var(--ink);flex:none;
+  display:flex;align-items:center;justify-content:center;font-family:'Fredoka';font-weight:700;font-size:15px;color:#fff}
+.pair .country{font-family:'Fredoka';font-weight:700;font-size:21px;padding-right:40px}
+.pair .ipa{font-size:13.5px;opacity:.65;font-family:'Fredoka'}
+.pair .nat{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.pair .nat .arrow{font-family:'Fredoka';font-weight:700;color:var(--coral);font-size:18px;flex:none}
+.pair .nat .natword{font-family:'Fredoka';font-weight:600;font-size:19px;padding-right:34px;position:relative}
+.pair .nat .cn{font-size:15px;opacity:.75}
+.pair .nat .spk{width:32px;height:32px;top:50%;right:0;transform:translateY(-50%);position:absolute}
+.pair .nat .spk:active{transform:translateY(-50%) scale(.9)}
+.pair .nat{position:relative}
+.pair .stamp-ok{position:absolute;left:14px;bottom:10px;font-size:13px;font-family:'ZCOOL KuaiLe';color:var(--leaf-d)}
+.pair.learned{border-color:var(--leaf-d)}
+/* 听音挑词 */
+#w1game{background:var(--paper);border:3.5px solid var(--ink);border-radius:20px;
+  box-shadow:7px 7px 0 var(--ink);padding:26px 22px;margin-top:34px;text-align:center}
+#w1game .opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.opt-card{background:var(--cream);border:3px solid var(--ink);border-radius:14px;padding:14px 22px;
+  font-family:'Fredoka';font-weight:700;font-size:20px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s}
+.opt-card:active{transform:scale(.94)}
+.opt-card.right{background:var(--leaf);color:#fff}
+.opt-card.wrong{background:var(--coral);color:#fff;animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+/* ===== W2 机场广播剧 ===== */
+.scene{margin-bottom:34px;background:var(--paper);border:3.5px solid var(--ink);border-radius:20px;
+  box-shadow:7px 7px 0 var(--ink);padding:20px 20px 24px}
+.scene .s-title{font-family:'ZCOOL KuaiLe';font-size:19px;margin-bottom:14px}
+.scene .s-title .no{background:var(--ink);color:var(--cream);border-radius:8px;padding:2px 10px;margin-right:8px;font-size:15px}
+.scene .s-body{display:flex;gap:18px;align-items:center}
+.scene .s-svg{flex:none;width:150px;border:3px solid var(--ink);border-radius:14px;background:var(--sky);overflow:hidden}
+.scene .s-svg svg{display:block;width:100%;height:auto}
+.bubbles{flex:1;display:flex;flex-direction:column;gap:12px}
+.bubble{position:relative;background:var(--cream);border:3px solid var(--ink);border-radius:14px;
+  padding:10px 52px 10px 16px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .12s;text-align:left}
+.bubble:active{transform:scale(.98)}
+.bubble.playing{background:#FFF0D2;outline:3px solid var(--sun)}
+.bubble .b-en{font-family:'Fredoka';font-weight:600;font-size:19px}
+.bubble .b-cn{font-size:15px;opacity:.72}
+.bubble .spk{top:50%;right:10px;transform:translateY(-50%);width:34px;height:34px}
+.bubble .spk:active{transform:translateY(-50%) scale(.9)}
+.scene .who{font-family:'ZCOOL KuaiLe';font-size:14px;background:var(--paper);border:2.5px solid var(--ink);
+  border-radius:999px;padding:2px 12px;display:inline-block;margin-bottom:8px;align-self:flex-start}
+@media(max-width:640px){.scene .s-body{flex-direction:column}.scene .s-svg{width:100%}}
+
+/* ===== W3 盖章配对 ===== */
+#matchWrap{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:640px){#matchWrap{grid-template-columns:1fr}}
+.mcol h3{font-size:20px;margin-bottom:12px;text-align:center}
+.mlist{display:flex;flex-direction:column;gap:12px}
+.mitem{background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:12px 16px;
+  font-family:'Fredoka';font-weight:700;font-size:19px;box-shadow:4px 4px 0 var(--ink);
+  display:flex;align-items:center;justify-content:space-between;transition:transform .12s,background .15s;user-select:none}
+.mitem .cn{font-size:14px;font-weight:400;opacity:.65;font-family:'ZCOOL KuaiLe'}
+.mitem.picked{background:var(--sun);transform:scale(1.03)}
+.mitem.done{background:var(--leaf);color:#fff;opacity:.85;pointer-events:none;transform:scale(.98)}
+.mitem.done .cn{color:#fff;opacity:.9}
+.mitem.no{background:var(--coral);color:#fff;animation:shake .35s}
+
+/* ===== W4 句型魔法 ===== */
+.magic{background:var(--paper);border:3.5px solid var(--ink);border-radius:20px;
+  box-shadow:7px 7px 0 var(--ink);padding:22px;margin-bottom:26px}
+.magic .m-stat{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.magic .m-sentence{font-family:'Fredoka';font-weight:700;font-size:20px;background:var(--cream);
+  border:3px solid var(--ink);border-radius:12px;padding:10px 16px;box-shadow:3px 3px 0 var(--ink);position:relative;padding-right:52px;cursor:pointer;text-align:left}
+.magic .m-sentence .spk{top:50%;transform:translateY(-50%);width:32px;height:32px}
+.m-steps{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+.m-step{flex:1;min-width:220px;border:3px dashed var(--ink);border-radius:14px;padding:14px;position:relative}
+.m-step .s-label{font-family:'ZCOOL KuaiLe';font-size:15px;margin-bottom:8px}
+.m-step .s-label .tagq{background:var(--ocean);color:#fff;border-radius:6px;padding:1px 8px;font-size:13px;margin-right:6px}
+.m-step .s-label .tagn{background:var(--coral);color:#fff;border-radius:6px;padding:1px 8px;font-size:13px;margin-right:6px}
+.m-step .cloze{font-family:'Fredoka';font-weight:600;font-size:18.5px;line-height:2}
+.m-step .cloze .gap{display:inline-block;min-width:86px;border-bottom:3px dashed var(--coral);color:var(--coral-d);
+  text-align:center;font-weight:700;cursor:pointer;padding:0 4px}
+.m-step .cloze .gap.empty{color:transparent;text-shadow:0 0 8px rgba(0,0,0,.15)}
+.m-step .choices{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.m-chip{background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;padding:5px 16px;
+  font-family:'Fredoka';font-weight:700;font-size:16px;box-shadow:3px 3px 0 var(--ink)}
+.m-chip:active{transform:scale(.93)}
+.m-chip.off{opacity:.35;pointer-events:none}
+.pattern-note{background:#FFF3D6;border:3px solid var(--ink);border-radius:16px;padding:16px 20px;
+  box-shadow:5px 5px 0 var(--ink);margin-top:8px;font-size:16.5px}
+.pattern-note b{color:var(--coral-d)}
+
+/* ===== W5 考核 ===== */
+#quizBox{background:var(--paper);border:3.5px solid var(--ink);border-radius:20px;
+  box-shadow:7px 7px 0 var(--ink);padding:26px 24px;max-width:680px;margin:0 auto}
+#qText{font-family:'ZCOOL KuaiLe';font-size:21px;margin-bottom:6px}
+#qEn{font-family:'Fredoka';font-weight:600;font-size:19px;margin-bottom:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#qEn .spk{position:static;flex:none}
+.q-opt{display:block;width:100%;text-align:left;background:var(--cream);border:3px solid var(--ink);
+  border-radius:14px;padding:13px 18px;font-family:'Fredoka';font-weight:600;font-size:18.5px;
+  margin-bottom:12px;box-shadow:4px 4px 0 var(--ink);transition:transform .12s}
+.q-opt:active{transform:scale(.98)}
+.q-opt.right{background:var(--leaf);color:#fff}
+.q-opt.wrong{background:var(--coral);color:#fff;animation:shake .35s}
+#qFoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+
+/* ===== 证书 ===== */
+#cert{text-align:center}
+#certCard{background:#fff;border:4px solid var(--ink);border-radius:24px;box-shadow:10px 10px 0 var(--ink);
+  padding:44px 30px;max-width:640px;margin:34px auto 0;position:relative}
+#certCard::before{content:"";position:absolute;inset:10px;border:2.5px dashed var(--ink);border-radius:16px;pointer-events:none}
+#certCard h3{font-size:34px;margin-bottom:6px}
+#certName{font-family:'ZCOOL KuaiLe';font-size:30px;border:none;border-bottom:3px dashed var(--ink);
+  background:transparent;text-align:center;width:min(320px,80%);outline:none;color:var(--ocean);margin:8px 0}
+#certStars{font-size:30px;letter-spacing:3px;margin:10px auto 4px;min-height:44px;width:min(400px,86%);
+  line-height:1.55;word-break:break-all;color:var(--sun);text-shadow:1.5px 1.5px 0 var(--ink)}
+#certCard .stamp{position:absolute;right:26px;bottom:24px;width:96px;height:96px;border:4px solid var(--ocean);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ocean);
+  font-family:'ZCOOL KuaiLe';font-size:18px;transform:rotate(12deg);opacity:.85;background:rgba(46,111,142,.06)}
+#certGate{font-family:'ZCOOL KuaiLe';font-size:16px;color:var(--coral-d);margin-top:10px;min-height:24px}
+footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:100}
+@media print{body *{visibility:hidden}#certCard,#certCard *{visibility:visible}
+  #certCard{position:absolute;inset:0;margin:0;box-shadow:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🛂 环球护照之旅</div>
+  <div id="starBadge">⭐ <span id="starNum">0</span> 颗星</div>
+</header>
+<nav id="dots"></nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="lesson-pill">新概念英语第一册 · Lesson 54</div>
+  <h1>环球<span class="hl">护照之旅</span></h1>
+  <div class="sub-en en">What nationality are they? · Where do they come from?</div>
+  <div class="sub-cn">他们是哪国人？他们来自哪个国家？</div>
+  <div class="think">拿好你的护照，走遍 <b>12 个国家</b>，学会说「我是哪国人、我来自哪里」！</div>
+  <div class="cta">
+    <button class="btn primary" id="btnStart">✈️ 出发环游世界</button>
+    <button class="btn" id="btnQuestion">🔊 先听问题</button>
+  </div>
+  <div id="heroScene">
+    <svg viewBox="0 0 660 260">
+      <rect width="660" height="260" fill="#BEE3F0"/>
+      <circle cx="560" cy="52" r="34" fill="#F4A72C" stroke="#2B2118" stroke-width="5"/>
+      <g stroke="#2B2118" stroke-width="4" stroke-linecap="round">
+        <line x1="560" y1="4" x2="560" y2="12"/><line x1="612" y1="52" x2="604" y2="52"/>
+        <line x1="596" y1="16" x2="590" y2="22"/><line x1="596" y1="88" x2="590" y2="82"/>
+      </g>
+      <ellipse cx="330" cy="252" rx="330" ry="60" fill="#2E6F8E"/>
+      <path d="M0 236 q40 -14 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" fill="none" stroke="#FFFDF6" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <!-- 地球 -->
+      <g transform="translate(300,128)">
+        <circle r="86" fill="#7FB069" stroke="#2B2118" stroke-width="6"/>
+        <path d="M-70 -30 q30 -26 70 -18 q44 8 62 34 q-30 10 -64 4 q-40 -6 -68 -20z" fill="#2E6F8E" stroke="#2B2118" stroke-width="4"/>
+        <path d="M-78 26 q26 30 66 36 q34 5 62 -8 q-20 26 -58 30 q-46 4 -70 -58z" fill="#2E6F8E" stroke="#2B2118" stroke-width="4"/>
+        <circle cx="18" cy="-40" r="7" fill="#E8503A" stroke="#2B2118" stroke-width="3.5"/>
+      </g>
+      <!-- 小飞机 -->
+      <g transform="translate(96,66) rotate(-8)">
+        <path d="M0 0 L74 -14 L60 0 L74 14 Z" fill="#FFFDF6" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M22 0 L-8 -22 L8 0 L-8 22 Z" fill="#E8503A" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+      </g>
+      <path d="M120 96 q60 40 150 48" fill="none" stroke="#2B2118" stroke-width="3.5" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <!-- 护照 -->
+      <g transform="translate(470,140) rotate(6)">
+        <rect width="96" height="128" rx="10" fill="#1F526C" stroke="#2B2118" stroke-width="5"/>
+        <rect x="14" y="16" width="68" height="52" rx="6" fill="#F4A72C" stroke="#2B2118" stroke-width="4"/>
+        <text x="48" y="52" text-anchor="middle" font-size="26" font-family="Fredoka,sans-serif" font-weight="700" fill="#2B2118">GO!</text>
+        <line x1="18" y1="86" x2="78" y2="86" stroke="#FFFDF6" stroke-width="5" stroke-linecap="round"/>
+        <line x1="18" y1="102" x2="66" y2="102" stroke="#FFFDF6" stroke-width="5" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+  <div style="margin-top:22px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <span class="sticker-note">🌍 12 个国家 + 12 种国籍</span>
+    <span class="sticker-note r">🗣️ 点一句，读一句</span>
+  </div>
+</section>
+
+<!-- ================= W1 单词签证官 ================= -->
+<section id="w1">
+  <span class="sec-tag">第 1 关</span>
+  <h2>单词签证官：国家 → 国籍</h2>
+  <p class="sec-sub">每个国家都住着一群「哪国人」。点喇叭听读音，看看国家名是怎么变成国籍的。读完去玩下面的「听音挑国」！</p>
+  <div class="pair-grid" id="pairGrid"></div>
+  <div id="w1game">
+    <h3>🎧 听音挑国</h3>
+    <p style="opacity:.75;font-size:16px">仔细听，是哪个国家或哪国人？点一点正确的卡片。</p>
+    <button class="btn sunny" id="w1Play" style="margin-top:8px">🔊 播放单词</button>
+    <div class="opts" id="w1Opts"></div>
+    <div id="w1Msg" style="margin-top:14px;font-family:'ZCOOL KuaiLe';font-size:17px;min-height:26px"></div>
+  </div>
+</section>
+
+<!-- ================= W2 机场广播剧 ================= -->
+<section id="w2">
+  <span class="sec-tag">第 2 关</span>
+  <h2>到达大厅：听听他们怎么说</h2>
+  <p class="sec-sub">12 位旅客走出机场，每人说两句话：「我是哪国人」+「我来自哪里」。点气泡听，也可以一键听完全部广播！</p>
+  <div style="margin-bottom:24px">
+    <button class="btn primary" id="playAll">▶️ 自动播放全部旅客</button>
+    <button class="btn hidden" id="stopAll">⏹ 停止</button>
+  </div>
+  <div id="scenes"></div>
+  <div class="pattern-note">
+    💡 <b>句型小宝箱</b>：介绍国籍用 <b>主语 + be 动词 + 国籍</b>（I'm Chinese.）；介绍来自哪里用 <b>主语 + come from + 国家</b>（I come from China.）。he/she 后面别忘了 <b>comes</b> 的小尾巴 s！
+  </div>
+</section>
+
+<!-- ================= W3 盖章配对 ================= -->
+<section id="w3">
+  <span class="sec-tag">第 3 关</span>
+  <h2>护照盖章：国家配国籍</h2>
+  <p class="sec-sub">海关官员把护照和印章打乱了！先点左边的「国家」，再点右边正确的「国籍人」，配成一对就能盖章。全部盖满就能过关！</p>
+  <div id="matchWrap">
+    <div class="mcol"><h3>🌏 国家（护照）</h3><div class="mlist" id="colCountry"></div></div>
+    <div class="mcol"><h3>🧑 国籍（印章）</h3><div class="mlist" id="colNat"></div></div>
+  </div>
+  <div id="w3Msg" style="margin-top:18px;font-family:'ZCOOL KuaiLe';font-size:18px;min-height:28px;text-align:center"></div>
+</section>
+
+<!-- ================= W4 句型魔法屋 ================= -->
+<section id="w4">
+  <span class="sec-tag">第 4 关</span>
+  <h2>句型魔法屋：does 来帮忙</h2>
+  <p class="sec-sub">he / she / 太阳 这样的「第三人称」句子，变疑问句和否定句时要请小助手 <b>does</b> 出马——动词的小尾巴 s 要脱掉哦！点句子和填空都能听。</p>
+  <div id="magics"></div>
+  <div class="pattern-note">
+    🪄 <b>魔法口诀</b>：疑问句 <b>Does + 主语 + 动词原形</b>？（Does he like…?）否定句 <b>主语 + doesn't + 动词原形</b>（He doesn't like…）。问「来自哪里」：<b>Where does he come from?</b> 问「是不是某国人」：<b>Is he Brazilian?</b>
+  </div>
+</section>
+
+<!-- ================= W5 海关考核 ================= -->
+<section id="w5">
+  <span class="sec-tag">第 5 关</span>
+  <h2>海关终极考核</h2>
+  <p class="sec-sub">8 道题，答对 6 道以上就能拿到 3 颗星！遇到 🔊 记得先听再选。</p>
+  <div id="quizBox">
+    <div id="qText"></div>
+    <div id="qEn"></div>
+    <div id="qOpts"></div>
+    <div id="qFoot">
+      <span id="qProg" style="font-family:'ZCOOL KuaiLe';font-size:16px;opacity:.7"></span>
+      <button class="btn hidden" id="qNext">下一题 ➜</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 证书 ================= -->
+<section id="cert">
+  <span class="sec-tag">终点</span>
+  <h2>环球小使者证书</h2>
+  <p class="sec-sub" style="margin:0 auto">闯过 5 关，写下名字，打印你的专属证书！</p>
+  <div id="certCard">
+    <h3>毕业证书</h3>
+    <div style="font-size:15px;opacity:.7">CERTIFICATE OF GLOBAL TRAVELER</div>
+    <div style="margin-top:16px;font-size:17px">兹证明</div>
+    <input id="certName" placeholder="写下你的名字" maxlength="12">
+    <div style="font-size:17px">学完 Lesson 54《What nationality are they?》，<br>会用英语说国籍和家乡，荣获 <b style="color:var(--ocean)">环球小使者</b> 称号！</div>
+    <div id="certStars"></div>
+    <div style="font-size:14px;opacity:.6" id="certDate"></div>
+    <div class="stamp">环球<br>小使者</div>
+  </div>
+  <div id="certGate"></div>
+  <div style="margin-top:26px">
+    <button class="btn primary" id="btnPrint">🖨️ 打印我的证书</button>
+  </div>
+</section>
+
+<footer>
+  环球护照之旅 · 新概念英语第一册 Lesson 54 ｜ 星星进度只保存在你自己的浏览器里 ｜ 开口跟读，效果最好！
+</footer>
+
+<canvas id="confetti"></canvas>
+<div class="toast" id="toast"></div>
+
+<script src="/core/storage.js"></script>
+<script src="/core/progress.js"></script>
+<script src="/core/assessment.js"></script>
+<script src="/core/audio-player.js"></script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+function vib(p){try{if(navigator.vibrate)navigator.vibrate(p);}catch(e){}}
+
+/* ================= 数据 ================= */
+/* 12 个国家 × 国籍：c 国家 / ci 中文 / n 国籍人 / ni 国籍中文 / col 主题色 / code 护照章缩写 */
+const COUNTRIES=[
+ {c:'Australia',ci:'澳大利亚',ipa:"/ɒ'streɪliə/",n:'Australian',ni:'澳大利亚人',nipa:"/ɒ'streɪliən/",col:'#E8503A',code:'AU'},
+ {c:'Austria',ci:'奥地利',ipa:"/'ɒstriə/",n:'Austrian',ni:'奥地利人',nipa:"/'ɒstriən/",col:'#9B7EBD',code:'AT'},
+ {c:'Canada',ci:'加拿大',ipa:"/'kænədə/",n:'Canadian',ni:'加拿大人',nipa:"/kə'neɪdiən/",col:'#E8503A',code:'CA'},
+ {c:'China',ci:'中国',ipa:"/'tʃaɪnə/",n:'Chinese',ni:'中国人',nipa:"/ˌtʃaɪ'niːz/",col:'#E8503A',code:'CN'},
+ {c:'Finland',ci:'芬兰',ipa:"/'fɪnlənd/",n:'Finnish',ni:'芬兰人',nipa:"/'fɪnɪʃ/",col:'#2E6F8E',code:'FI'},
+ {c:'India',ci:'印度',ipa:"/'ɪndiə/",n:'Indian',ni:'印度人',nipa:"/'ɪndiən/",col:'#F4A72C',code:'IN'},
+ {c:'Japan',ci:'日本',ipa:"/dʒə'pæn/",n:'Japanese',ni:'日本人',nipa:"/ˌdʒæpə'niːz/",col:'#E8503A',code:'JP'},
+ {c:'Nigeria',ci:'尼日利亚',ipa:"/naɪ'dʒɪəriə/",n:'Nigerian',ni:'尼日利亚人',nipa:"/naɪ'dʒɪəriən/",col:'#7FB069',code:'NG'},
+ {c:'South Korea',ci:'韩国',ipa:"/ˌsaʊθ kə'riə/",n:'South Korean',ni:'韩国人',nipa:"/ˌsaʊθ kə'riən/",col:'#2E6F8E',code:'KR'},
+ {c:'Poland',ci:'波兰',ipa:"/'pəʊlənd/",n:'Polish',ni:'波兰人',nipa:"/'pəʊlɪʃ/",col:'#E8503A',code:'PL'},
+ {c:'Thailand',ci:'泰国',ipa:"/'taɪlænd/",n:'Thai',ni:'泰国人',nipa:"/taɪ/",col:'#9B7EBD',code:'TH'},
+ {c:'Turkey',ci:'土耳其',ipa:"/'tɜːki/",n:'Turkish',ni:'土耳其人',nipa:"/'tɜːkɪʃ/",col:'#E8503A',code:'TR'},
+];
+/* 12 位旅客：pron 标签 / who 中文身份 / lines 两句 / two 是否双人 */
+const SCENES=[
+ {i:0,pron:'I',who:'一位澳大利亚旅客',two:false},
+ {i:1,pron:'He',who:'一位奥地利叔叔',two:false},
+ {i:2,pron:'He',who:'一位加拿大哥哥',two:false},
+ {i:3,pron:'We',who:'两位中国旅客',two:true},
+ {i:4,pron:'You',who:'就是你（芬兰）',two:false},
+ {i:5,pron:'She',who:'一位印度阿姨',two:false},
+ {i:6,pron:'You',who:'就是你们（日本）',two:true},
+ {i:8,pron:'I',who:'一位韩国小姐姐',two:false},
+ {i:7,pron:'We',who:'两位尼日利亚旅客',two:true},
+ {i:9,pron:'They',who:'两位波兰旅客',two:true},
+ {i:10,pron:'She',who:'一位泰国姑娘',two:false},
+ {i:11,pron:'She',who:'一位土耳其女士',two:false},
+].map(s=>{
+ const c=COUNTRIES[s.i];
+ const be={I:"I'm",He:"He's",She:"She's",We:"We're",You:"You're",They:"They're"}[s.pron];
+ const come=s.pron==='He'||s.pron==='She'?'comes':'come';
+ const subj=s.pron==='I'?'I':s.pron.toLowerCase()===s.pron?s.pron:s.pron;
+ const l1=s.i===10?('She is '+c.n+'.'):(be+' '+c.n+'.');
+ const l2=(s.pron==='You'?'You':subj)+' '+come+' from '+c.c+'.';
+ const cn1={I:'我是',He:'他是',She:'她是',We:'我们是',You:'你是',They:'他们是'}[s.pron]+c.ni+'。';
+ const cn2={I:'我',He:'他',She:'她',We:'我们',You:'你',They:'他们'}[s.pron]+'来自'+c.ci+'。';
+ return {...s,l1,l2,cn1,cn2,country:c};
+});
+/* 句型魔法：does/doesn't 变身 */
+const MAGICS=[
+ {stat:'The sun sets late.',cn:'太阳很晚才下山。',
+  q:['Does the sun','set','late?'],qa:'Does the sun set late?',
+  n:['The sun','doesn’t set','late.'],na:'The sun doesn’t set late.',gap:'doesn’t set'},
+ {stat:'He likes ice cream.',cn:'他喜欢冰淇淋。',
+  q:['Does he','like','ice cream?'],qa:'Does he like ice cream?',
+  n:['He','doesn’t like','ice cream.'],na:'He doesn’t like ice cream.',gap:'doesn’t like'},
+ {stat:'Mrs. Jones wants a biscuit.',cn:'琼斯太太想要一块饼干。',
+  q:['Does Mrs. Jones','want','a biscuit?'],qa:'Does Mrs. Jones want a biscuit?',
+  n:['Mrs. Jones','doesn’t want','a biscuit.'],na:'Mrs. Jones doesn’t want a biscuit.',gap:'doesn’t want'},
+ {stat:'Jim comes from England.',cn:'吉姆来自英格兰。',
+  q:['Does Jim','come','from England?'],qa:'Does Jim come from England?',
+  n:['Jim','doesn’t come','from England.'],na:'Jim doesn’t come from England.',gap:'doesn’t come'},
+];
+/* 考核 8 题 */
+const QUIZ=[
+ {t:'「Australian」来自哪个国家？',en:'Australian',audio:'Australian',opts:['Australia','Austria','Canada'],a:0},
+ {t:'「Finnish」是哪国人？',en:'Finnish',audio:'Finnish',opts:['芬兰人','法国人','菲律宾人'],a:0},
+ {t:'听一听，她是哪国人？',en:'（点喇叭听句子）',audio:"She's Turkish.",opts:['Turkish','Thai','Polish'],a:0},
+ {t:'选出正确的句子：',en:'（加拿大 / 他）',audio:null,opts:["He's Canadian.","He Canadian.","He comes Canadian."],a:0},
+ {t:'The sun sets late. 变疑问句，哪句对？',en:'The sun sets late.',audio:'The sun sets late.',opts:['Does the sun set late?','Does the sun sets late?','Do the sun set late?'],a:0},
+ {t:'He likes ice cream. 变否定句，哪句对？',en:'He likes ice cream.',audio:'He likes ice cream.',opts:["He doesn't like ice cream.","He doesn't likes ice cream.","He don't like ice cream."],a:0},
+ {t:'Where ___ they come from?',en:'Where ___ they come from?',audio:'Where do they come from?',opts:['do','does','are'],a:0},
+ {t:'「Polish」的人来自哪里？',en:'Polish',audio:'Polish',opts:['Poland','Portugal','Thailand'],a:0},
+];
+
+/* ================= 语音朗读（core 音频模块） ================= */
+const speechOK=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+let speechWarned=false;
+const UK_VOICE_KEYS=['google uk english','united kingdom','daniel','kate','serena','stephanie','arthur','martha','libby','sonja','ryan'];
+let ukVoice=null;
+function pickBritishVoice(){
+  const s=window.speechSynthesis;
+  if(!s||typeof s.getVoices!=='function')return null;
+  const vs=(s.getVoices()||[]);
+  if(!vs.length)return null;
+  const isGB=v=>(v.lang||'').replace(/_/g,'-').toLowerCase().indexOf('en-gb')===0;
+  return vs.find(v=>isGB(v)&&UK_VOICE_KEYS.some(k=>(v.name||'').toLowerCase().includes(k)))||vs.find(isGB)||null;
+}
+if(speechOK){
+  ukVoice=pickBritishVoice();
+  window.speechSynthesis.addEventListener('voiceschanged',()=>{ukVoice=pickBritishVoice();});
+}
+const l54Audio=CanranCore.audio.createAudioPlayer();
+function speak(text,onDone){
+  const value=String(text);
+  const source=CanranCore.audio.slugify(value);
+  l54Audio.stop('cancelled');
+  l54Audio.play({
+    text:value,
+    src:source?'audio/'+source+'.mp3':'',
+    rate:0.85,
+    voice:ukVoice||pickBritishVoice(),
+    onFinish:result=>{
+      if(result.reason==='unsupported'&&!speechWarned){
+        speechWarned=true;
+        toast('当前浏览器不支持语音朗读，可以用 Chrome / Edge 打开试试～');
+      }
+      if(onDone)onDone(result);
+    }
+  });
+}
+
+/* ================= 小工具 ================= */
+let toastTimer=null;
+function toast(msg){
+  const t=$('#toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+function spkBtn(text,cls){
+  const b=document.createElement('button');
+  b.className='spk'+(cls?' '+cls:'');b.innerHTML=SPK;b.setAttribute('aria-label','朗读');
+  b.addEventListener('click',e=>{
+    e.stopPropagation();vib(10);
+    document.querySelectorAll('.spk.playing').forEach(x=>x.classList.remove('playing'));
+    b.classList.add('playing');
+    speak(text,()=>b.classList.remove('playing'));
+  });
+  return b;
+}
+/* 音效（WebAudio 小合成器） */
+let actx=null;
+function ac(){try{if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}return actx;}
+function tone(f,t,d,type,g){
+  const ctx=ac();if(!ctx)return;
+  try{
+    const o=ctx.createOscillator(),gn=ctx.createGain();
+    o.type=type||'sine';o.frequency.value=f;
+    gn.gain.setValueAtTime(0,ctx.currentTime+t);
+    gn.gain.linearRampToValueAtTime(g||0.2,ctx.currentTime+t+0.02);
+    gn.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+t+d);
+    o.connect(gn).connect(ctx.destination);o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+d+0.05);
+  }catch(e){}
+}
+function sndCorrect(){tone(523,0,.12,'sine',.25);tone(659,.1,.12,'sine',.25);tone(784,.2,.22,'sine',.25);vib(30);}
+function sndWrong(){tone(196,0,.18,'sawtooth',.1);tone(147,.12,.24,'sawtooth',.1);vib([45,40,45]);}
+function sndStar(){tone(880,0,.1,'triangle',.2);tone(1175,.09,.18,'triangle',.2);vib([30,50,30,50,60]);}
+let userInteracted=false;
+document.addEventListener('pointerdown',()=>{userInteracted=true;ac();},{once:true});
+
+/* ================= 星星系统 ================= */
+const STAR_KEY='canran:l54:progress:v2';
+const LVLS=['l1','l2','l3','l4','l5'];
+const loaded=CanranCore.storage.loadProgress({storage:localStorage,key:STAR_KEY,ids:LVLS});
+let stars=loaded.progress.ratings;
+function saveStars(){CanranCore.storage.saveProgress({storage:localStorage,key:STAR_KEY,progress:{version:CanranCore.storage.VERSION,ratings:stars},ids:LVLS});}
+function getStar(l){return CanranCore.storage.clampRating(stars[l]);}
+function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
+function renderStars(){
+  $('#starNum').textContent=totalStars();
+  $('#certStars').textContent='★'.repeat(totalStars())+'☆'.repeat(15-totalStars());
+  renderCertGate();
+}
+function award(level,rating){
+  const res=CanranCore.progress.awardRating(stars,level,rating);
+  if(res.changed){
+    stars=res.ratings;
+    saveStars();renderStars();sndStar();
+    toast('🎉 第 '+level.slice(1)+' 关获得 '+CanranCore.storage.clampRating(rating)+' 颗星！');
+  }
+}
+function canIssue(){return CanranCore.progress.allAtLeast(stars,LVLS,1);}
+function renderCertGate(){
+  const g=$('#certGate');
+  if(canIssue()){g.textContent='五关全部完成，证书已解锁，快去打印吧！';g.style.color='var(--leaf-d)';}
+  else{
+    const missing=LVLS.filter(l=>getStar(l)<1).length;
+    g.textContent='还差 '+missing+' 关没有拿到星星，全部闯过即可打印证书～';g.style.color='var(--coral-d)';
+  }
+}
+
+/* ================= W1 单词对卡 ================= */
+function renderPairs(){
+  const grid=$('#pairGrid');
+  COUNTRIES.forEach((c,idx)=>{
+    const card=document.createElement('div');card.className='pair';
+    const head=document.createElement('div');head.className='p-head';
+    const chip=document.createElement('div');chip.className='flagchip';chip.style.background=c.col;chip.textContent=c.code;
+    const cw=document.createElement('div');
+    cw.innerHTML='<div class="country">'+c.c+'</div><div class="ipa">'+c.ipa+' · '+c.ci+'</div>';
+    head.appendChild(chip);head.appendChild(cw);head.appendChild(spkBtn(c.c));
+    const nat=document.createElement('div');nat.className='nat';
+    nat.innerHTML='<span class="arrow">➜</span><span class="natword">'+c.n+'</span><span class="ipa">'+c.nipa+'</span><span class="cn">'+c.ni+'</span>';
+    nat.appendChild(spkBtn(c.n));
+    card.appendChild(head);card.appendChild(nat);
+    card.addEventListener('click',()=>{card.classList.add('learned');checkW1Done();});
+    grid.appendChild(card);
+  });
+}
+let w1Listened=new Set();
+function checkW1Done(){ /* 听过 8 对以上即过关 */
+}
+/* W1 听音挑词 */
+const w1State={cur:null,score:0,round:0,pool:[]};
+function w1Next(){
+  w1State.round++;
+  const all=COUNTRIES.flatMap(c=>[c.c,c.n]);
+  const pick=all[Math.floor(Math.random()*all.length)];
+  w1State.cur=pick;
+  const wrongs=new Set();
+  while(wrongs.size<2){
+    const w=all[Math.floor(Math.random()*all.length)];
+    if(w!==pick)wrongs.add(w);
+  }
+  const opts=CanranCore.assessment.shuffleOptions([...wrongs,pick],2).map(e=>e.text);
+  const box=$('#w1Opts');box.innerHTML='';
+  opts.forEach(o=>{
+    const b=document.createElement('button');b.className='opt-card';b.textContent=o;
+    b.onclick=()=>{
+      if(o===pick){b.classList.add('right');sndCorrect();w1State.score++;
+        $('#w1Msg').textContent='✅ 答对啦！继续～';
+        setTimeout(w1Next,900);
+        if(w1State.score>=5)award('l1',3);else if(w1State.score>=3)award('l1',2);else award('l1',1);
+      }else{b.classList.add('wrong');sndWrong();$('#w1Msg').textContent='❌ 再听一次试试！';}
+    };
+    box.appendChild(b);
+  });
+}
+$('#w1Play').addEventListener('click',()=>{
+  if(!w1State.cur||w1State.round===0){w1Next();}
+  if(w1State.cur)speak(w1State.cur);
+});
+
+/* ================= W2 广播剧 ================= */
+function personSVG(two,col){
+  function person(x,shirt){
+    return '<g transform="translate('+x+',0)">'
+      +'<circle cx="0" cy="42" r="20" fill="#FFD9B8" stroke="#2B2118" stroke-width="4.5"/>'
+      +'<path d="M-19 32 q19 -24 38 0 q-8 -14 -19 -14 q-11 0 -19 14z" fill="#2B2118"/>'
+      +'<circle cx="-7" cy="42" r="2.6" fill="#2B2118"/><circle cx="7" cy="42" r="2.6" fill="#2B2118"/>'
+      +'<path d="M-7 51 q7 6 14 0" fill="none" stroke="#2B2118" stroke-width="3" stroke-linecap="round"/>'
+      +'<rect x="-22" y="64" width="44" height="46" rx="12" fill="'+shirt+'" stroke="#2B2118" stroke-width="4.5"/>'
+      +'<rect x="-16" y="108" width="12" height="26" rx="5" fill="#4A6FA5" stroke="#2B2118" stroke-width="4"/>'
+      +'<rect x="4" y="108" width="12" height="26" rx="5" fill="#4A6FA5" stroke="#2B2118" stroke-width="4"/>'
+      +'</g>';
+  }
+  return '<svg viewBox="0 0 150 150">'
+    +'<rect width="150" height="150" fill="#BEE3F0"/>'
+    +'<ellipse cx="75" cy="146" rx="72" ry="14" fill="#7FB069" stroke="#2B2118" stroke-width="3"/>'
+    +(two?person(48,col)+person(102,col):person(75,col))
+    +'</svg>';
+}
+function renderScenes(){
+  const box=$('#scenes');
+  SCENES.forEach((s,idx)=>{
+    const el=document.createElement('div');el.className='scene';
+    el.innerHTML='<div class="s-title"><span class="no">第 '+(idx+1)+' 位</span>'+s.who+' · '+s.country.ci+' '+s.country.c+'</div>';
+    const body=document.createElement('div');body.className='s-body';
+    const svg=document.createElement('div');svg.className='s-svg';svg.innerHTML=personSVG(s.two,s.country.col);
+    const bubs=document.createElement('div');bubs.className='bubbles';
+    const who=document.createElement('span');who.className='who';who.textContent=s.pron+' 说：';
+    bubs.appendChild(who);
+    [[s.l1,s.cn1],[s.l2,s.cn2]].forEach(([en,cn])=>{
+      const b=document.createElement('button');b.className='bubble';
+      b.innerHTML='<div class="b-en">'+en+'</div><div class="b-cn">'+cn+'</div>';
+      b.appendChild(spkBtn(en));
+      b.addEventListener('click',()=>{
+        document.querySelectorAll('.bubble.playing').forEach(x=>x.classList.remove('playing'));
+        b.classList.add('playing');
+        speak(en,()=>{b.classList.remove('playing');b.dataset.heard='1';checkW2();});
+      });
+      bubs.appendChild(b);
+    });
+    body.appendChild(svg);body.appendChild(bubs);el.appendChild(body);box.appendChild(el);
+  });
+}
+let w2Heard=new Set();
+function checkW2(){
+  document.querySelectorAll('.bubble[data-heard]').forEach(b=>w2Heard.add(b.querySelector('.b-en').textContent));
+  const n=w2Heard.size;
+  if(n>=24)award('l2',3);else if(n>=12)award('l2',2);else if(n>=6)award('l2',1);
+}
+/* 自动播放全部 */
+let playAllTimer=null,playAllIdx=0;
+$('#playAll').addEventListener('click',()=>{
+  const allBubbles=[...document.querySelectorAll('.bubble')];
+  playAllIdx=0;$('#playAll').classList.add('hidden');$('#stopAll').classList.remove('hidden');
+  function step(){
+    if(playAllIdx>=allBubbles.length){stopPlayAll();award('l2',3);return;}
+    const b=allBubbles[playAllIdx++];
+    document.querySelectorAll('.bubble.playing').forEach(x=>x.classList.remove('playing'));
+    b.classList.add('playing');b.scrollIntoView({behavior:'smooth',block:'center'});
+    b.dataset.heard='1';w2Heard.add(b.querySelector('.b-en').textContent);
+    speak(b.querySelector('.b-en').textContent,()=>{b.classList.remove('playing');playAllTimer=setTimeout(step,450);});
+  }
+  step();
+});
+function stopPlayAll(){
+  clearTimeout(playAllTimer);l54Audio.stop('cancelled');
+  document.querySelectorAll('.bubble.playing').forEach(x=>x.classList.remove('playing'));
+  $('#playAll').classList.remove('hidden');$('#stopAll').classList.add('hidden');
+}
+$('#stopAll').addEventListener('click',stopPlayAll);
+
+/* ================= W3 盖章配对 ================= */
+const w3={pickedC:null,pickedN:null,done:0};
+function renderMatch(){
+  const cc=$('#colCountry'),cn=$('#colNat');
+  const orderC=[...COUNTRIES].sort(()=>Math.random()-.5);
+  const orderN=[...COUNTRIES].sort(()=>Math.random()-.5);
+  orderC.forEach(c=>{
+    const d=document.createElement('div');d.className='mitem';d.dataset.k=c.c;
+    d.innerHTML='<span>'+c.c+'</span><span class="cn">'+c.ci+'</span>';
+    d.onclick=()=>pickMatch(d,'c',c);cc.appendChild(d);
+  });
+  orderN.forEach(c=>{
+    const d=document.createElement('div');d.className='mitem';d.dataset.k=c.n;
+    d.innerHTML='<span>'+c.n+'</span><span class="cn">'+c.ni+'</span>';
+    d.onclick=()=>pickMatch(d,'n',c);cn.appendChild(d);
+  });
+}
+function pickMatch(el,side,country){
+  if(el.classList.contains('done'))return;
+  vib(12);
+  if(side==='c'){
+    if(w3.pickedC)w3.pickedC.el.classList.remove('picked');
+    w3.pickedC={el,country};el.classList.add('picked');speak(country.c);
+  }else{
+    if(w3.pickedN)w3.pickedN.el.classList.remove('picked');
+    w3.pickedN={el,country};el.classList.add('picked');speak(country.n);
+  }
+  if(w3.pickedC&&w3.pickedN){
+    if(w3.pickedC.country.c===w3.pickedN.country.c){
+      sndCorrect();
+      w3.pickedC.el.classList.add('done');w3.pickedN.el.classList.add('done');
+      w3.pickedC.el.classList.remove('picked');w3.pickedN.el.classList.remove('picked');
+      w3.done++;
+      $('#w3Msg').textContent='✅ '+w3.pickedC.country.c+' → '+w3.pickedC.country.n+'（'+w3.done+' / 12）';
+      w3.pickedC=null;w3.pickedN=null;
+      if(w3.done>=12)award('l3',3);else if(w3.done>=8)award('l3',2);else if(w3.done>=4)award('l3',1);
+    }else{
+      sndWrong();
+      const a=w3.pickedC.el,b=w3.pickedN.el;
+      a.classList.add('no');b.classList.add('no');
+      $('#w3Msg').textContent='❌ 这对不对哦，再想想！';
+      setTimeout(()=>{a.classList.remove('no','picked');b.classList.remove('no','picked');},500);
+      w3.pickedC=null;w3.pickedN=null;
+    }
+  }
+}
+
+/* ================= W4 句型魔法 ================= */
+const w4={solved:0};
+function renderMagics(){
+  const box=$('#magics');
+  MAGICS.forEach((m,idx)=>{
+    const el=document.createElement('div');el.className='magic';
+    const row=document.createElement('div');row.className='m-stat';
+    const st=document.createElement('button');st.className='m-sentence';
+    st.innerHTML='<span>'+m.stat+'</span> <span style="font-size:14.5px;opacity:.65;font-family:\'ZCOOL KuaiLe\'">'+m.cn+'</span>';
+    st.appendChild(spkBtn(m.stat));
+    st.addEventListener('click',()=>speak(m.stat));
+    row.appendChild(st);
+    el.appendChild(row);
+    const steps=document.createElement('div');steps.className='m-steps';
+    /* 疑问句 */
+    const qStep=document.createElement('div');qStep.className='m-step';
+    qStep.innerHTML='<div class="s-label"><span class="tagq">疑问句</span>请 does 出马</div>';
+    const qCloze=document.createElement('div');qCloze.className='cloze';
+    qCloze.innerHTML=m.q[0]+' <span class="gap empty" data-full="'+m.q[1]+'">'+m.q[1]+'</span> '+m.q[2];
+    const qCh=document.createElement('div');qCh.className='choices';
+    CanranCore.assessment.shuffleOptions([m.q[1],'likes','sets','wants','comes'].filter((v,i,a)=>a.indexOf(v)===i).slice(0,3),0).map(e=>e.text).forEach(o=>{
+      const chip=document.createElement('button');chip.className='m-chip';chip.textContent=o;
+      chip.onclick=()=>fillGap(qCloze.querySelector('.gap'),chip,o,m.qa,qStep);
+      qCh.appendChild(chip);
+    });
+    qStep.appendChild(qCloze);qStep.appendChild(qCh);
+    /* 否定句 */
+    const nStep=document.createElement('div');nStep.className='m-step';
+    nStep.innerHTML='<div class="s-label"><span class="tagn">否定句</span>doesn\'t 来帮忙</div>';
+    const nCloze=document.createElement('div');nCloze.className='cloze';
+    nCloze.innerHTML=m.n[0]+' <span class="gap empty" data-full="'+m.gap+'">'+m.gap+'</span> '+m.n[2];
+    const nCh=document.createElement('div');nCh.className='choices';
+    const wrongN='dont '+m.gap.split(' ')[1];
+    CanranCore.assessment.shuffleOptions([m.gap,wrongN,"doesn't "+m.gap.split(' ')[1]+'s'].filter((v,i,a)=>a.indexOf(v)===i).slice(0,3),0).map(e=>e.text).forEach(o=>{
+      const chip=document.createElement('button');chip.className='m-chip';chip.textContent=o;
+      chip.onclick=()=>fillGap(nCloze.querySelector('.gap'),chip,o,m.na,nStep);
+      nCh.appendChild(chip);
+    });
+    nStep.appendChild(nCloze);nStep.appendChild(nCh);
+    steps.appendChild(qStep);steps.appendChild(nStep);
+    el.appendChild(steps);
+    box.appendChild(el);
+  });
+}
+function fillGap(gap,chip,val,fullSentence,stepEl){
+  if(gap.dataset.full===val){
+    gap.textContent=val;gap.classList.remove('empty');
+    chip.classList.add('off');sndCorrect();
+    speak(fullSentence);
+    stepEl.style.borderStyle='solid';stepEl.style.borderColor='var(--leaf-d)';
+    if(!stepEl.dataset.done){stepEl.dataset.done='1';w4.solved++;
+      if(w4.solved>=8)award('l4',3);else if(w4.solved>=5)award('l4',2);else if(w4.solved>=2)award('l4',1);}
+  }else{sndWrong();chip.classList.add('off');toast('❌ 动词的小尾巴 s 要脱掉哦');}
+}
+
+/* ================= W5 考核 ================= */
+const qState={i:0,correct:0,answered:false};
+function renderQuiz(){
+  const q=QUIZ[qState.i];
+  $('#qText').textContent='第 '+(qState.i+1)+' 题 · '+q.t;
+  const en=$('#qEn');en.innerHTML='';
+  if(q.audio){en.appendChild(spkBtn(q.audio));}
+  const span=document.createElement('span');span.textContent=q.en;en.appendChild(span);
+  const box=$('#qOpts');box.innerHTML='';qState.answered=false;
+  const shuffled=CanranCore.assessment.shuffleOptions(q.opts,q.a);
+  shuffled.forEach(entry=>{
+    const o=entry.text;
+    const b=document.createElement('button');b.className='q-opt';b.textContent=o;
+    b.onclick=()=>{
+      if(qState.answered)return;qState.answered=true;
+      if(entry.correct){
+        b.classList.add('right');sndCorrect();qState.correct++;
+        $('#qNext').classList.remove('hidden');
+      }else{b.classList.add('wrong');sndWrong();qState.answered=false;}
+    };
+    box.appendChild(b);
+  });
+  $('#qProg').textContent='第 '+(qState.i+1)+' / '+QUIZ.length+' 题 · 已答对 '+qState.correct+' 题';
+  $('#qNext').classList.add('hidden');
+}
+$('#qNext').addEventListener('click',()=>{
+  qState.i++;
+  if(qState.i>=QUIZ.length){
+    const r=CanranCore.progress.ratingFor?CanranCore.progress.ratingFor(qState.correct,[{min:8,rating:3},{min:6,rating:2},{min:3,rating:1}]):3;
+    award('l5',qState.correct>=7?3:qState.correct>=5?2:1);
+    $('#quizBox').innerHTML='<div style="text-align:center;font-family:\'ZCOOL KuaiLe\';font-size:24px">🏁 考核结束！答对 '+qState.correct+' / '+QUIZ.length+' 题<br><span style="font-size:18px;opacity:.75">'+(qState.correct>=6?'太棒了，去领证书吧！':'再闯一次，冲击 6 题！')+'</span></div><div style="text-align:center;margin-top:18px"><button class="btn sunny" onclick="location.reload()">🔄 再考一次</button></div>';
+    if(qState.correct>=6)celebrate();
+    return;
+  }
+  renderQuiz();
+});
+
+/* ================= 证书 & 庆祝 ================= */
+$('#certDate').textContent='日期：'+new Date().toLocaleDateString('zh-CN');
+$('#btnPrint').addEventListener('click',()=>{
+  const name=$('#certName').value.trim();
+  if(!canIssue()){toast('先闯过全部 5 关，每关至少 1 颗星哦');return;}
+  if(!name){toast('先写上你的名字哦');$('#certName').focus();return;}
+  celebrate();setTimeout(()=>window.print(),600);
+});
+function celebrate(){
+  const cv=$('#confetti'),ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const cols=['#E8503A','#F4A72C','#7FB069','#2E6F8E','#9B7EBD','#FF8FA3'];
+  const ps=Array.from({length:140},()=>({x:Math.random()*cv.width,y:-20-Math.random()*cv.height*0.5,
+    w:8+Math.random()*8,h:6+Math.random()*6,c:cols[Math.floor(Math.random()*cols.length)],
+    vy:2+Math.random()*3,vx:-1.5+Math.random()*3,r:Math.random()*Math.PI,vr:-.1+Math.random()*.2}));
+  let t=0;
+  (function loop(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});
+    if(++t<260)requestAnimationFrame(loop);else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+/* ================= 导航圆点 & 入口 ================= */
+const SECS=[['hero','出发'],['w1','单词'],['w2','广播剧'],['w3','配对'],['w4','魔法'],['w5','考核'],['cert','证书']];
+(function(){
+  const nav=$('#dots');
+  SECS.forEach(([id])=>{
+    const a=document.createElement('a');a.href='#'+id;a.dataset.sec=id;nav.appendChild(a);
+  });
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.sec===e.target.id));
+    }});
+  },{threshold:.4});
+  SECS.forEach(([id])=>obs.observe(document.getElementById(id)));
+})();
+$('#btnStart').addEventListener('click',()=>document.getElementById('w1').scrollIntoView({behavior:'smooth'}));
+$('#btnQuestion').addEventListener('click',()=>speak('What nationality are they?'));
+
+/* ================= 初始化 ================= */
+renderPairs();renderScenes();renderMatch();renderMagics();renderQuiz();renderStars();
+</script>
+</body>
+</html>

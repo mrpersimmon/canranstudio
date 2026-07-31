@@ -2,7 +2,7 @@
 
 const { test, expect } = require('@playwright/test');
 
-for (const path of ['/', '/home/', '/lesson49/', '/lesson50/', '/soundmark/']) {
+for (const path of ['/', '/home/', '/lesson49/', '/lesson50/', '/lesson51/', '/lesson54/', '/soundmark/']) {
   test(`${path} loads without an uncaught page error`, async ({ page }) => {
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));

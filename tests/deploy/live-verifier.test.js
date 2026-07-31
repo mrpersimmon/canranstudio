@@ -12,6 +12,8 @@ const EXPECTED_ROUTES = [
   { path: '/', file: 'index.html' },
   { path: '/lesson49/', file: 'lesson49/index.html' },
   { path: '/lesson50/', file: 'lesson50/index.html' },
+  { path: '/lesson51/', file: 'lesson51/index.html' },
+  { path: '/lesson54/', file: 'lesson54/index.html' },
   { path: '/soundmark/', file: 'soundmark/index.html' },
   { path: '/release-manifest.json', file: 'release-manifest.json' }
 ];

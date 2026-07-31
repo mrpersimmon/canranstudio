@@ -6,6 +6,8 @@ const routes = [
   { path: '/', title: /英语闯关乐园/ },
   { path: '/lesson49/', title: /肉店大冒险/ },
   { path: '/lesson50/', title: /挑食小王子大冒险/ },
+  { path: '/lesson51/', title: /希腊四季之旅/ },
+  { path: '/lesson54/', title: /环球护照之旅/ },
   { path: '/soundmark/', title: /音标魔法乐园/ }
 ];
 
@@ -35,9 +37,11 @@ test('welcome page and course tabs form a closed navigation loop', async ({ page
   await page.goto('/');
   await expect(page.locator('a[href="/lesson49/"]')).toHaveCount(1);
   await expect(page.locator('a[href="/lesson50/"]')).toHaveCount(1);
+  await expect(page.locator('a[href="/lesson51/"]')).toHaveCount(1);
+  await expect(page.locator('a[href="/lesson54/"]')).toHaveCount(1);
   await expect(page.locator('a[href="/soundmark/"]')).toHaveCount(1);
 
-  for (const path of ['/lesson49/', '/lesson50/', '/soundmark/']) {
+  for (const path of ['/lesson49/', '/lesson50/', '/lesson51/', '/lesson54/', '/soundmark/']) {
     await page.goto(path);
     await expect(page.locator('#coursenav a[href="/"]')).toHaveCount(1);
   }

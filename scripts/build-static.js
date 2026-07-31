@@ -11,11 +11,15 @@ const REQUIRED_FILES = [
   'home/index.html',
   'lesson49/index.html',
   'lesson50/index.html',
+  'lesson51/index.html',
+  'lesson54/index.html',
   'soundmark/index.html'
 ];
 const REQUIRED_DIRECTORIES = [
   'lesson49/audio',
   'lesson50/audio',
+  'lesson51/audio',
+  'lesson54/audio',
   'soundmark/audio',
   'core'
 ];
