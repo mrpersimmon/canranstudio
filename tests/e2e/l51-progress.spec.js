@@ -205,6 +205,9 @@ test('Lesson 51 full theater playback awards level 2 and unlocks the certificate
       addEventListener(type, callback) {
         if (type === 'ended') this.onended = callback;
       }
+      removeEventListener(type, callback) {
+        if (type === 'ended' && this.onended === callback) this.onended = null;
+      }
       play() {
         queueMicrotask(() => this.onended && this.onended());
         return Promise.resolve();
@@ -232,6 +235,9 @@ test('Lesson 51 ordinary speech and Stop cannot complete an interrupted theater 
       constructor() { this.id = audioCount += 1; }
       addEventListener(type, callback) {
         if (type === 'ended') this.onended = callback;
+      }
+      removeEventListener(type, callback) {
+        if (type === 'ended' && this.onended === callback) this.onended = null;
       }
       play() {
         if (this.id > 2) queueMicrotask(() => this.onended && this.onended());

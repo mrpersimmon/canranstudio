@@ -350,6 +350,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/assessment.js"></script>
+<script src="/core/audio-player.js"></script>
 <script>
 /* ==================== 数据 ==================== */
 const WORDS_A = [
@@ -410,74 +411,100 @@ const QUIZ = [
 ];
 
 /* ==================== 语音（预录 MP3 优先，浏览器合成兜底） ==================== */
-const speechOK = ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
-let speechWarned = false;
 const UK_VOICE_KEYS = ['google uk english','united kingdom','daniel','kate','serena','stephanie','arthur','martha','libby','sonja','ryan'];
 let ukVoice = null;
-function pickBritishVoice(){
-  const vs = (window.speechSynthesis.getVoices() || []);
-  if(!vs.length) return null;
-  const isGB = v => (v.lang||'').replace(/_/g,'-').toLowerCase().indexOf('en-gb') === 0;
-  return vs.find(v=>isGB(v) && UK_VOICE_KEYS.some(k=>(v.name||'').toLowerCase().includes(k)))
-      || vs.find(isGB) || vs.find(v=>v.lang==='en-GB' && v.default) || null;
+function pickBritishVoice() {
+  const synthesis = window.speechSynthesis;
+  if(!synthesis || typeof synthesis.getVoices !== 'function') return null;
+  const voices = synthesis.getVoices() || [];
+  const isGB = voice =>
+    (voice.lang || '').replace(/_/g,'-').toLowerCase().startsWith('en-gb');
+  return voices.find(voice =>
+    isGB(voice) &&
+    UK_VOICE_KEYS.some(key=>(voice.name || '').toLowerCase().includes(key))
+  ) || voices.find(isGB) || null;
 }
-if(speechOK){
+if(window.speechSynthesis &&
+   typeof window.speechSynthesis.addEventListener === 'function'){
   ukVoice = pickBritishVoice();
-  window.speechSynthesis.addEventListener('voiceschanged', ()=>{ ukVoice = pickBritishVoice(); });
-}
-function slug(t){ return t.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
-const audioFailCache = new Set();
-let curAudio = null;
-function stopCurAudio(){
-  if(curAudio){ try{ curAudio.pause(); curAudio.currentTime = 0; }catch(e){} curAudio = null; }
-}
-function tryAudio(t, onend){
-  return new Promise(resolve=>{
-    const s = slug(t);
-    if(!s || audioFailCache.has(s)){ resolve(false); return; }
-    let a;
-    try{ a = new Audio('audio/' + s + '.mp3'); }catch(e){ audioFailCache.add(s); resolve(false); return; }
-    curAudio = a;
-    let settled = false;
-    const ok = ()=>{ if(!settled){ settled = true; resolve(true); } };
-    const fail = ()=>{
-      if(settled) return; settled = true;
-      if(curAudio === a){ curAudio = null; audioFailCache.add(s); resolve(false); }
-      else{ resolve(true); }
-    };
-    a.addEventListener('error', fail, {once:true});
-    a.addEventListener('ended', ()=>{ if(curAudio===a) curAudio=null; if(onend) onend(); }, {once:true});
-    let p;
-    try{ p = a.play(); }catch(e){ fail(); return; }
-    if(p && typeof p.then === 'function'){ p.then(ok, fail); } else { ok(); }
+  window.speechSynthesis.addEventListener('voiceschanged',()=>{
+    ukVoice = pickBritishVoice();
   });
 }
-function speakSynth(t, rate, onend){
-  if(!speechOK){
-    if(!speechWarned){ speechWarned = true; toast('当前浏览器不支持语音朗读，可以用 Chrome / Edge 打开试试～'); }
-    if(onend) onend(); return;
-  }
-  try{
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(t);
-    u.lang = 'en-GB'; u.rate = rate || 0.85; u.pitch = 1.05;
-    if(!ukVoice) ukVoice = pickBritishVoice();
-    if(ukVoice) u.voice = ukVoice;
-    if(onend) u.onend = onend;
-    window.speechSynthesis.speak(u);
-  }catch(e){ if(onend) onend(); }
+const lesson51Audio = CanranCore.audio.createAudioPlayer();
+
+function audioRequest(text, rate, onFinish) {
+  const value = String(text);
+  const source = CanranCore.audio.slugify(value);
+  return {
+    text: value,
+    src: source ? `/lesson51/audio/${source}.mp3` : '',
+    rate: Number.isFinite(rate) ? rate : 0.85,
+    voice: ukVoice || pickBritishVoice(),
+    onFinish
+  };
 }
-function invalidateTheaterAutoplay(){
-  playAllRun += 1;
+
+let playAllGeneration = 0;
+let playAllTimer = null;
+let playingAll = false;
+
+function clearPlayingLines() {
+  document.querySelectorAll('.line').forEach(line => line.classList.remove('playing'));
+}
+
+function stopPlayAll() {
+  playAllGeneration += 1;
   playingAll = false;
-  if(playAllTimer){ clearTimeout(playAllTimer); playAllTimer = null; }
-  document.querySelectorAll('.line').forEach(x=>x.classList.remove('playing'));
+  if (playAllTimer !== null) {
+    clearTimeout(playAllTimer);
+    playAllTimer = null;
+  }
+  clearPlayingLines();
+  lesson51Audio.stop('cancelled');
 }
-function speak(text, rate, onend, theaterRun = null){
-  if(theaterRun !== playAllRun) invalidateTheaterAutoplay();
-  stopCurAudio();
-  if(speechOK){ try{ window.speechSynthesis.cancel(); }catch(e){} }
-  tryAudio(text, onend).then(ok2=>{ if(!ok2) speakSynth(text, rate, onend); });
+
+function manualSpeak(text, rate, onFinish) {
+  stopPlayAll();
+  return lesson51Audio.play(audioRequest(text, rate, result => {
+    if (result.reason === 'unsupported') toast('当前浏览器不支持语音朗读');
+    if (onFinish) onFinish(result);
+  }));
+}
+
+function startPlayAll() {
+  stopPlayAll();
+  const generation = ++playAllGeneration;
+  const lines = Array.from(document.querySelectorAll('#scenes .line'));
+  if(lines.length === 0) return;
+  playingAll = true;
+
+  function playLine(index) {
+    if (!playingAll || generation !== playAllGeneration) return;
+    const line = lines[index];
+    clearPlayingLines();
+    line.classList.add('playing');
+    line.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    lesson51Audio.play(audioRequest(line.dataset.en, 0.85, result => {
+      if (generation !== playAllGeneration) return;
+      line.classList.remove('playing');
+      if (result.reason !== 'ended') {
+        playingAll = false;
+        return;
+      }
+      if (index === lines.length - 1) {
+        playingAll = false;
+        awardLevel('l2', 3);
+        return;
+      }
+      playAllTimer = setTimeout(() => {
+        playAllTimer = null;
+        playLine(index + 1);
+      }, 500);
+    }));
+  }
+
+  playLine(0);
 }
 
 /* ==================== 星星 & 提示 ==================== */
@@ -584,9 +611,9 @@ function celebrate(el){
         const b = e.currentTarget;
         document.querySelectorAll('.spk').forEach(x=>x.classList.remove('playing'));
         b.classList.add('playing');
-        speak(en, 0.8, ()=>b.classList.remove('playing'));
+        manualSpeak(en, 0.8, ()=>b.classList.remove('playing'));
       };
-      d.onclick = ()=> speak(en, 0.8);
+      d.onclick = ()=> manualSpeak(en, 0.8);
       box.appendChild(d);
     });
   }
@@ -640,7 +667,7 @@ function celebrate(el){
       opts.appendChild(button);
     });
   }
-  function play(){ if(cur){ hear.classList.add('playing'); speak(cur[0], 0.8, ()=>hear.classList.remove('playing')); } }
+  function play(){ if(cur){ hear.classList.add('playing'); manualSpeak(cur[0], 0.8, ()=>hear.classList.remove('playing')); } }
   function pick(button,word){
     if(!attempt || attempt.solved || runComplete || !cur) return;
     const correct = word[0] === cur[0];
@@ -695,10 +722,8 @@ const SCENE_SVGS = {
       b.dataset.en = en;
       b.innerHTML = `<span class="who">${name}</span><span><span class="txt">${en}</span><span class="cn-t" style="display:block">${cn}</span></span><span class="play-ic">▶</span>`;
       b.onclick = ()=>{
-        stopPlayAll();
-        wrap.querySelectorAll('.line').forEach(x=>x.classList.remove('playing'));
-        b.classList.add('playing');
-        speak(en, 0.85, ()=>b.classList.remove('playing'));
+        manualSpeak(en,0.85,()=>b.classList.remove('playing'));
+        if(lesson51Audio.isActive()) b.classList.add('playing');
       };
       box.appendChild(b);
     });
@@ -707,42 +732,11 @@ const SCENE_SVGS = {
 })();
 
 /* 自动播放全场 */
-let playAllTimer = null, playingAll = false, playAllRun = 0;
-function stopPlayAll(){
-  invalidateTheaterAutoplay();
-  stopCurAudio();
-  if(speechOK){ try{ speechSynthesis.cancel(); }catch(e){} }
-}
+document.getElementById('playAll').onclick = startPlayAll;
 document.getElementById('stopAll').onclick = stopPlayAll;
-document.getElementById('playAll').onclick = ()=>{
-  stopPlayAll();
-  const run = ++playAllRun;
-  playingAll = true;
-  const lines = Array.from(document.querySelectorAll('#scenes .line'));
-  let i = 0;
-  function next(){
-    if(!playingAll || run !== playAllRun) return;
-    if(i >= lines.length){
-      playingAll = false;
-      awardLevel('l2',3);
-      toast('课文剧场完整播放完成！');
-      return;
-    }
-    const b = lines[i++];
-    lines.forEach(x=>x.classList.remove('playing'));
-    b.classList.add('playing');
-    b.scrollIntoView({block:'center', behavior:'smooth'});
-    speak(b.dataset.en, 0.85, ()=>{
-      if(run !== playAllRun) return;
-      b.classList.remove('playing');
-      playAllTimer = setTimeout(next, 500);
-    }, run);
-  }
-  next();
-};
 
 /* 首屏问题按钮 */
-document.getElementById('heroQ').onclick = ()=> speak('Does it ever snow in Greece?', 0.85);
+document.getElementById('heroQ').onclick = ()=> manualSpeak('Does it ever snow in Greece?', 0.85);
 
 /* ==================== 第3关 月份归队 ==================== */
 (function(){
@@ -758,7 +752,7 @@ document.getElementById('heroQ').onclick = ()=> speak('Does it ever snow in Gree
     chip.className = 'mchip'; chip.textContent = m[0].toUpperCase()+m.slice(1); chip.dataset.m = m;
     chip.onclick = ()=>{
       if(chip.classList.contains('in')) return;
-      speak(m, 0.8);
+      manualSpeak(m, 0.8);
       pool.querySelectorAll('.mchip').forEach(x=>x.classList.remove('sel'));
       sel = m; chip.classList.add('sel');
       fb.textContent = `要把 ${chip.textContent} 放到哪个季节？`;
@@ -817,7 +811,7 @@ document.getElementById('heroQ').onclick = ()=> speak('Does it ever snow in Gree
     attempts.set(card,CanranCore.assessment.createAttempt());
     card.onclick = ()=>{
       if(card.classList.contains('done')) return;
-      speak(en, 0.85);
+      manualSpeak(en, 0.85);
       box.querySelectorAll('.fcard').forEach(x=>x.classList.remove('sel'));
       sel = card; card.classList.add('sel');
     };
