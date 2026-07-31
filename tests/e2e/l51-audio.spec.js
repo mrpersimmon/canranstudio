@@ -10,7 +10,7 @@ async function installMockAudio(page, { speech = 'unsupported' } = {}) {
       constructor(src) {
         this.src = src;
         this.currentTime = 0;
-        this.paused = false;
+        this.paused = true;
         this.listeners = new Map();
         window.__mockAudios.push(this);
       }
