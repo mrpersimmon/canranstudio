@@ -38,6 +38,13 @@ const PUBLISHED_COURSES = Object.freeze([
     entry: 'lesson51/index.html',
     assetDirectories: ['lesson51/audio'],
     title: '希腊四季之旅'
+  }),
+  course({
+    id: 'lesson54',
+    route: '/lesson54/',
+    entry: 'lesson54/index.html',
+    assetDirectories: ['lesson54/audio'],
+    title: '环球护照之旅'
   })
 ]);
 

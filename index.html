@@ -151,6 +151,7 @@ main{display:grid;gap:38px;padding-bottom:30px}
 .station[data-tone="red"] .station-band{background:var(--red)}
 .station[data-tone="purple"] .station-band{background:var(--purple)}
 .station[data-tone="blue"] .station-band{background:var(--blue)}
+.station[data-tone="green"] .station-band{background:var(--green)}
 .station-art{display:flex;align-items:center;justify-content:center;height:96px;padding:10px 16px 3px}
 .station-art img{width:88px;height:82px;object-fit:contain;filter:drop-shadow(3px 4px 0 rgba(56,40,31,.10))}
 .station h3{margin:4px 8px 0;font-size:17px;line-height:1.2}
@@ -160,6 +161,7 @@ main{display:grid;gap:38px;padding-bottom:30px}
 .station[data-tone="red"] .station-action{background:var(--red)}
 .station[data-tone="purple"] .station-action{background:var(--purple)}
 .station[data-tone="blue"] .station-action{background:var(--blue)}
+.station[data-tone="green"] .station-action{background:var(--green)}
 .station.soon{min-height:205px;align-self:center;color:#777;background:rgba(255,254,250,.94)}
 .station.soon .station-band{background:#8E8B86}
 .station.soon:nth-child(6){grid-column:1;transform:translateX(50%)}
@@ -299,6 +301,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
     <a href="/lesson49/">Lesson 49 · 肉店大冒险</a>
     <a href="/lesson50/">Lesson 50 · 挑食小王子大冒险</a>
     <a href="/lesson51/">Lesson 51 · 希腊四季之旅</a>
+    <a href="/lesson54/">Lesson 54 · 环球护照之旅</a>
     <a href="/soundmark/">番外篇 · 音标魔法乐园</a>
   </nav>
 </noscript>
@@ -306,7 +309,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
 <footer>
   <div class="wrap">
     <div class="tip">小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
-    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51 · 音标第一课</div>
+    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51、54 · 音标第一课</div>
   </div>
 </footer>
 
@@ -338,7 +341,15 @@ const HOME_COURSES = [
     art:'/assets/home/lesson51-temple.png', tone:'blue',
     progress:{key:'canran:l51:progress:v2',legacyKey:'l51-stars-v1',ids:COURSE_LEVELS,legacyMode:'reset',max:15}
   },
-  ...[52,53,54,55,56].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
+  ...[52,53].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
+  {
+    kind:'lesson', lesson:54, route:'/lesson54/', title:'环球护照之旅', subtitle:'What Nationality Are They?',
+    description:'拿好护照走遍 12 个国家，学会国家、国籍和来自哪里，完成五关成为小小环球旅行家。',
+    features:['国家国籍','机场广播','盖章配对','does 魔法','海关考核'],
+    art:'/assets/home/lesson54-passport.svg', tone:'green',
+    progress:{key:'canran:l54:progress:v2',ids:COURSE_LEVELS,max:15}
+  },
+  ...[55,56].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
   {
     kind:'special', lesson:null, route:'/soundmark/', title:'音标魔法乐园', subtitle:'Phonics Magic · 音标第一课',
     description:'音标是单词的“拼音”！跟着元音精灵学发音、玩音节魔法、上对比擂台，看到生词也能自己试着读。',
@@ -429,7 +440,7 @@ function stationMarkup(course){
       <div class="soon-message"><div><span class="soon-number">${course.lesson}</span><strong>即将开放</strong></div></div>
     </article>`;
   }
-  const progressId=course.lesson===49?'pt49':course.lesson===50?'pt50':'pt51';
+  const progressId=`pt${course.lesson}`;
   return `<a class="station" data-tone="${course.tone}" data-lesson="${course.lesson}" href="${course.route}">
     <span class="station-band">Lesson ${course.lesson}</span>
     <span class="station-art"><img src="${course.art}" alt="" width="108" height="100"></span>

@@ -71,6 +71,10 @@ async function writeSyntheticPublicRoot(root) {
     'lesson49/audio/clip.mp3',
     'lesson50/index.html',
     'lesson50/audio/clip.mp3',
+    'lesson51/index.html',
+    'lesson51/audio/clip.mp3',
+    'lesson54/index.html',
+    'lesson54/audio/clip.mp3',
     'soundmark/index.html',
     'soundmark/audio/clip.mp3',
     'lesson51/index.html',
@@ -103,6 +107,8 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'soundmark/index.html',
     'lesson51/index.html',
     'lesson51/audio/climate.mp3',
+    'lesson54/index.html',
+    'lesson54/audio/australia.mp3',
     'core/audio-player.js',
     'release-manifest.json'
   ]) {
@@ -122,6 +128,8 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim()
   );
   assert.match(manifest.files['lesson49/index.html'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['lesson54/index.html'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['lesson54/audio/australia.mp3'], /^[a-f0-9]{64}$/);
 
   const expected = await expectedPublicFiles(ROOT);
   const actual = await listRegularFiles(out);

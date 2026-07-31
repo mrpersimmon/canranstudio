@@ -177,6 +177,7 @@ function assertHttpContract(text) {
     ['/lesson49', '/lesson49/'],
     ['/lesson50', '/lesson50/'],
     ['/lesson51', '/lesson51/'],
+    ['/lesson54', '/lesson54/'],
     ['/soundmark', '/soundmark/']
   ];
   assertExactChildren(children, [
@@ -271,6 +272,8 @@ const FORGED_DIRECTIVES = [
   'location = /home/index.html { return 308 /; }',
   'location = /lesson49 { return 308 /lesson49/; }',
   'location = /lesson50 { return 308 /lesson50/; }',
+  'location = /lesson51 { return 308 /lesson51/; }',
+  'location = /lesson54 { return 308 /lesson54/; }',
   'location = /soundmark { return 308 /soundmark/; }',
   'location / { try_files $uri $uri/ =404; limit_except GET HEAD { deny all; } }',
   'location ~ /\\. { deny all; }'
