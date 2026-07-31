@@ -88,10 +88,31 @@ test "$(node -p 'require("./dist/release-manifest.json").commit')" = "$RELEASE_S
 verify_artifact dist
 
 RELEASE_ARCHIVE="/tmp/canranstudio-$RELEASE_SHA.tar.gz"
-tar -C dist -czf "$RELEASE_ARCHIVE" .
+COPYFILE_DISABLE=1 tar -C dist -czf "$RELEASE_ARCHIVE" .
 check_dir="$(mktemp -d /tmp/canranstudio-archive-check.XXXXXX)"
 trap 'rm -rf -- "$check_dir"' EXIT
-tar -xzf "$RELEASE_ARCHIVE" -C "$check_dir"
+python3 - "$RELEASE_ARCHIVE" "$check_dir" <<'PYARCHIVE'
+import posixpath,sys,tarfile
+archive,check_dir=sys.argv[1:]
+def bad(message): raise SystemExit(message)
+with tarfile.open(archive,'r:gz') as tar:
+ members=tar.getmembers()
+ if not members: bad('empty archive')
+ seen=set()
+ for member in members:
+  raw=member.name
+  while raw.startswith('./'): raw=raw[2:]
+  name=posixpath.normpath(raw) if raw else '.'
+  parts=name.split('/')
+  if name.startswith('/') or name=='..' or name.startswith('../') or '..' in parts: bad('unsafe tar path')
+  if name in seen: bad('duplicate tar member')
+  seen.add(name)
+  if any(part.startswith('._') for part in parts): bad('AppleDouble tar member')
+  if name=='.':
+   if not member.isdir(): bad('invalid tar root')
+  elif not (member.isfile() or member.isdir()): bad('link or special tar member')
+ tar.extractall(check_dir,members)
+PYARCHIVE
 verify_artifact "$check_dir"
 rm -rf -- "$check_dir"
 trap - EXIT
