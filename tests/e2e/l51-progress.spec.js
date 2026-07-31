@@ -193,6 +193,32 @@ test('Lesson 51 month ratings improve without accumulating', async ({ page }) =>
   await expect(page.locator('#starCount')).toHaveText('3');
 });
 
+test('Lesson 51 full theater playback awards level 2 and unlocks the certificate gate', async ({ page }) => {
+  await page.addInitScript(key => {
+    localStorage.setItem(key, JSON.stringify({
+      version: 2,
+      ratings: { l1: 1, l2: 0, l3: 1, l4: 1, l5: 1 }
+    }));
+    const nativeSetTimeout = window.setTimeout.bind(window);
+    window.setTimeout = (callback, _delay, ...args) => nativeSetTimeout(callback, 0, ...args);
+    window.Audio = class {
+      addEventListener(type, callback) {
+        if (type === 'ended') this.onended = callback;
+      }
+      play() {
+        queueMicrotask(() => this.onended && this.onended());
+        return Promise.resolve();
+      }
+      pause() {}
+    };
+  }, KEY);
+  await page.goto('/lesson51/');
+  await expect(page.locator('#btnPrint')).toBeDisabled();
+  await page.locator('#playAll').click();
+  await expect.poll(async () => (await storedRatings(page)).l2).toBe(3);
+  await expect(page.locator('#btnPrint')).toBeEnabled();
+});
+
 test('Lesson 51 preserves six frequency sources while rendering one card per category', async ({ page }) => {
   await page.goto('/lesson51/');
   expect(await page.evaluate(() => FREQ)).toEqual([
@@ -201,6 +227,31 @@ test('Lesson 51 preserves six frequency sources while rendering one card per cat
     ['It rains sometimes.', 'sometimes'], ['It snows sometimes.', 'sometimes']
   ]);
   await expect(page.locator('#freqCards .fcard')).toHaveCount(3);
+  await expect(page.locator('#freqCards .fcard[data-lv="always"]')).toHaveCount(1);
+  await expect(page.locator('#freqCards .fcard[data-lv="often"]')).toHaveCount(1);
+  await expect(page.locator('#freqCards .fcard[data-lv="sometimes"]')).toHaveCount(1);
+});
+
+test('Lesson 51 selects either frequency representative while rendering one card per category', async ({ page }) => {
+  const cards = async () => page.locator('#freqCards .fcard').evaluateAll(items =>
+    items.map(item => [item.dataset.lv, item.textContent.trim()])
+  );
+  await page.addInitScript(() => { Math.random = () => 0; });
+  await page.goto('/lesson51/');
+  await expect(page.locator('#freqCards .fcard')).toHaveCount(3);
+  expect(await cards()).toEqual([
+    ['always', '「The sun shines every day.」→ 送到哪个台阶？'],
+    ['often', '「It\'s often windy in March.」→ 送到哪个台阶？'],
+    ['sometimes', '「It rains sometimes.」→ 送到哪个台阶？']
+  ]);
+  await page.addInitScript(() => { Math.random = () => 0.999999; });
+  await page.reload();
+  await expect(page.locator('#freqCards .fcard')).toHaveCount(3);
+  expect(await cards()).toEqual([
+    ['always', '「It\'s always hot in July.」→ 送到哪个台阶？'],
+    ['often', '「It\'s often cold in November.」→ 送到哪个台阶？'],
+    ['sometimes', '「It snows sometimes.」→ 送到哪个台阶？']
+  ]);
   await expect(page.locator('#freqCards .fcard[data-lv="always"]')).toHaveCount(1);
   await expect(page.locator('#freqCards .fcard[data-lv="often"]')).toHaveCount(1);
   await expect(page.locator('#freqCards .fcard[data-lv="sometimes"]')).toHaveCount(1);

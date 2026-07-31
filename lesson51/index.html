@@ -700,8 +700,9 @@ const SCENE_SVGS = {
 })();
 
 /* 自动播放全场 */
-let playAllTimer = null, playingAll = false;
+let playAllTimer = null, playingAll = false, playAllRun = 0;
 function stopPlayAll(){
+  playAllRun += 1;
   playingAll = false;
   if(playAllTimer){ clearTimeout(playAllTimer); playAllTimer = null; }
   stopCurAudio();
@@ -711,16 +712,24 @@ function stopPlayAll(){
 document.getElementById('stopAll').onclick = stopPlayAll;
 document.getElementById('playAll').onclick = ()=>{
   stopPlayAll();
+  const run = ++playAllRun;
   playingAll = true;
   const lines = Array.from(document.querySelectorAll('#scenes .line'));
   let i = 0;
   function next(){
-    if(!playingAll || i >= lines.length){ playingAll = false; return; }
+    if(!playingAll || run !== playAllRun) return;
+    if(i >= lines.length){
+      playingAll = false;
+      awardLevel('l2',3);
+      toast('课文剧场完整播放完成！');
+      return;
+    }
     const b = lines[i++];
     lines.forEach(x=>x.classList.remove('playing'));
     b.classList.add('playing');
     b.scrollIntoView({block:'center', behavior:'smooth'});
     speak(b.dataset.en, 0.85, ()=>{
+      if(run !== playAllRun) return;
       b.classList.remove('playing');
       playAllTimer = setTimeout(next, 500);
     });
@@ -789,7 +798,10 @@ document.getElementById('heroQ').onclick = ()=> speak('Does it ever snow in Gree
 (function(){
   const box = document.getElementById('freqCards');
   const fb = document.getElementById('fqFb');
-  const runCards = ['always','often','sometimes'].map(level=>FREQ.find(([,category])=>category===level));
+  const runCards = ['always','often','sometimes'].map(level=>{
+    const candidates = FREQ.filter(([,category])=>category===level);
+    return candidates[Math.floor(Math.random()*candidates.length)];
+  });
   const attempts = new Map();
   let sel = null;
   let done = 0;
