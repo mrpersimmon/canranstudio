@@ -176,7 +176,16 @@ loading invariant.
 ## 7. Live Artifact Verification
 
 The live verifier first compares the online `release-manifest.json` bytes with
-the local release artifact. It then verifies every file named by the manifest.
+the local release artifact. It then verifies every runtime-retrievable file
+named by the manifest.
+
+`home/index.html` is the single byte-verification exception. The production
+Nginx contract intentionally redirects `/home`, `/home/`, and
+`/home/index.html` to `/`, so the compatibility file's bytes are not reachable
+through the live HTTP boundary. Its bytes remain covered by the complete
+pre-deployment artifact verification, while the live verifier checks all three
+redirects and their final URL. No audio, font, JavaScript, course HTML, or other
+runtime-served asset is exempt.
 
 Asset verification uses:
 
@@ -235,6 +244,9 @@ header, or HTTP-to-HTTPS redirect is introduced by this remediation.
 - successful eligible certificate action invokes printing;
 - public HTML loads no third-party runtime assets;
 - the live verifier detects modified JS, font, and MP3 responses;
+- the live verifier checks `/home`, `/home/`, and `/home/index.html` redirect
+  semantics while the pre-deployment verifier checks the compatibility file's
+  bytes;
 - timeout, oversized body, final-URL, header, and hash failures are bounded and
   reported.
 
