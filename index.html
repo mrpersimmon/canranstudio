@@ -3,236 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#F4A72C">
+<meta name="theme-color" content="#FFF8EC">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="英语闯关乐园">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎪</text></svg>">
+<link rel="icon" type="image/png" href="/assets/home/park-tent.png">
 <title>英语闯关乐园 · 新概念英语互动课件</title>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <style>
 :root{
-  --cream:#FFF6E9; --paper:#FFFDF6; --brown:#4A3226;
-  --red:#E8503A; --yellow:#F4A72C; --green:#7FB069; --purple:#9B7EBD;
+  --cream:#FFF8EC;
+  --paper:#FFFEFA;
+  --paper-warm:#FFF4E5;
+  --brown:#38281F;
+  --brown-soft:#765E4A;
+  --red:#EF5141;
+  --red-soft:#FDE2DC;
+  --yellow:#F6B83E;
+  --orange:#FF7A19;
+  --orange-soft:#FFF0DB;
+  --green:#69B66D;
+  --purple:#8A67B8;
+  --blue:#278BC4;
+  --grey:#A39E96;
+  --shadow:6px 7px 0 rgba(56,40,31,.16);
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
-  font-family:'Baloo 2','ZCOOL KuaiLe','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
-  background:var(--cream); color:var(--brown); font-size:18px; line-height:1.6;
-  background-image:radial-gradient(#f2e6cf 1.5px, transparent 1.5px); background-size:28px 28px;
-  touch-action:manipulation;
+  margin:0;
+  color:var(--brown);
+  background-color:var(--cream);
+  background-image:radial-gradient(rgba(118,94,74,.13) 1.3px,transparent 1.3px);
+  background-size:27px 27px;
+  font:500 17px/1.55 'Baloo 2','ZCOOL KuaiLe','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
   padding-bottom:env(safe-area-inset-bottom);
 }
-h1,h2{font-weight:800;line-height:1.25}
-.wrap{max-width:880px;margin:0 auto;padding:0 18px}
+button,input{font:inherit;color:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1080px,calc(100% - 36px));margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.no-script-nav{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 36px;padding:18px;width:min(1080px,calc(100% - 36px));border:3px solid var(--brown);border-radius:18px;background:var(--paper)}
+.no-script-nav a{padding:8px 14px;border:2px solid var(--brown);border-radius:999px;background:#fff;font-weight:800}
 
-/* ===== 页头 ===== */
-#hero{text-align:center;padding:52px 0 26px}
-#hero .kicker{display:inline-block;background:var(--brown);color:#fff;border-radius:999px;padding:6px 22px;font-weight:800;font-size:15px;letter-spacing:2px;margin-bottom:16px}
-#hero h1{font-size:clamp(34px,8vw,56px);color:var(--red);text-shadow:3px 3px 0 #fff,5px 5px 0 var(--brown);margin-bottom:8px}
-#hero .en{font-size:clamp(17px,3.5vw,24px);font-weight:800;opacity:.72}
-#hero p{max-width:620px;margin:16px auto 0;font-weight:700;font-size:17.5px}
-@keyframes bounceIn{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.bounce-in{animation:bounceIn .6s both}
+:focus-visible{outline:5px solid #176DA0;outline-offset:5px}
 
-/* ===== 课程卡 ===== */
-#courses{display:flex;flex-direction:column;gap:26px;padding:14px 0 30px}
-.card{
-  display:block;text-decoration:none;color:inherit;background:var(--paper);
-  border:5px solid var(--brown);border-radius:26px;overflow:hidden;
-  box-shadow:7px 7px 0 rgba(74,50,38,.18);transition:transform .15s;
-  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+/* Header */
+#hero{text-align:center;padding:44px 0 32px}
+.kicker{
+  display:inline-flex;align-items:center;min-height:36px;padding:6px 22px;margin-bottom:14px;
+  border-radius:999px;background:var(--brown);color:#fff;font-weight:800;letter-spacing:2px;font-size:15px;
 }
-.card:active{transform:scale(.985)}
+.hero-title{display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-title img{width:70px;height:70px;object-fit:contain;filter:drop-shadow(3px 4px 0 rgba(56,40,31,.14))}
+#hero h1{
+  margin:0;color:var(--red);font-size:clamp(38px,6.2vw,64px);line-height:1.05;font-weight:800;
+  letter-spacing:2px;text-shadow:2px 2px 0 #fff,4px 4px 0 var(--brown);
+}
+#hero .en{margin-top:9px;font-size:clamp(17px,2.6vw,24px);font-weight:800;color:var(--brown-soft);letter-spacing:.4px}
+#hero p{max-width:720px;margin:14px auto 0;font-weight:700;font-size:17px}
+
+main{display:grid;gap:38px;padding-bottom:30px}
+
+/* Continue */
+.continue-card{
+  display:grid;grid-template-columns:245px 1fr;min-height:294px;overflow:hidden;
+  background:var(--paper);border:4px solid var(--brown);border-radius:25px;text-decoration:none;
+  box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease;
+}
+.continue-art{
+  display:flex;align-items:center;justify-content:center;padding:26px;
+  background:linear-gradient(150deg,#FFF1ED 0%,#FAD4CC 100%);border-right:3px solid var(--brown);
+}
+.continue-art img{width:190px;height:190px;object-fit:contain;filter:drop-shadow(5px 7px 0 rgba(56,40,31,.11))}
+.continue-copy{padding:26px 30px 24px}
+.ribbon{
+  display:inline-block;position:relative;margin-bottom:8px;padding:6px 18px 6px 14px;
+  border-radius:4px 0 0 4px;background:var(--red);color:#fff;font-size:15px;font-weight:800;letter-spacing:.3px;
+}
+.ribbon::after{content:"";position:absolute;right:-12px;top:0;border-top:17px solid var(--red);border-bottom:17px solid var(--red);border-right:12px solid transparent}
+.eyebrow{margin:0 0 2px;font-size:16px;font-weight:800;color:var(--brown-soft)}
+.continue-copy h2{margin:0;font-size:clamp(27px,4vw,38px);line-height:1.15}
+.subtitle{margin:2px 0 8px;font-weight:800;color:var(--brown-soft)}
+.summary{margin:0 0 12px;font-size:15px;font-weight:700}
+.feature-list{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;padding:0;list-style:none}
+.feature-list li{padding:3px 11px;border:2px solid var(--brown);border-radius:999px;background:#fff;font-size:13px;font-weight:800}
+.progress-row{display:grid;grid-template-columns:minmax(160px,1fr) auto auto;gap:12px;align-items:center}
+.progress-track{height:18px;overflow:hidden;border:3px solid var(--brown);border-radius:999px;background:#fff}
+.progress-fill{display:block;height:100%;width:0;background:var(--yellow);border-radius:999px;transition:width .65s cubic-bezier(.2,.8,.2,1)}
+.progress-label{font-weight:800;white-space:nowrap}
+.primary-action{
+  display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:9px 19px;
+  border:3px solid var(--brown);border-radius:999px;background:var(--red);color:#fff;font-size:16px;font-weight:800;
+  box-shadow:0 4px 0 var(--brown);white-space:nowrap;
+}
 @media (hover:hover) and (pointer:fine){
-  .card:hover{transform:translateY(-4px)}
+  .continue-card:hover{transform:translateY(-4px);box-shadow:7px 11px 0 rgba(56,40,31,.14)}
 }
-.card-inner{display:grid;grid-template-columns:200px 1fr}
-.card-art{padding:20px;display:flex;align-items:center;justify-content:center}
-.card-art .emoji-big{font-size:88px;line-height:1;animation:floaty 3s ease-in-out infinite;filter:drop-shadow(4px 4px 0 rgba(74,50,38,.2))}
-.a49 .card-art{background:#FBE3DC}
-.a50 .card-art{background:#EAE3F6}
-.asm .card-art{background:#FFE8D2}
-.a51 .card-art{background:#DFF0FF}
-.card-body{padding:22px 22px 20px;border-left:4px solid var(--brown)}
-.card-tag{display:inline-block;color:#fff;border-radius:999px;padding:3px 16px;font-weight:800;font-size:14px;margin-bottom:8px}
-.a49 .card-tag{background:var(--red)}
-.a50 .card-tag{background:var(--purple)}
-.asm .card-tag{background:#FF7A1A}
-.a51 .card-tag{background:#1D6FB8}
-.card-body h2{font-size:clamp(22px,5vw,30px)}
-.card-body .en-sub{font-weight:800;opacity:.7;font-size:16px;margin-bottom:8px}
-.card-body .desc{font-weight:700;font-size:15.5px;opacity:.9;margin-bottom:12px}
-.feat{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.feat span{background:#fff;border:2px solid var(--brown);border-radius:999px;padding:2px 11px;font-size:13px;font-weight:800}
-/* 进度区 */
-.prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.prog-track{flex:1;min-width:120px;height:20px;border:3px solid var(--brown);border-radius:999px;background:#fff;overflow:hidden}
-.prog-fill{height:100%;width:0%;background:var(--yellow);border-radius:999px;transition:width .8s cubic-bezier(.34,1.56,.64,1)}
-.prog-txt{font-weight:800;font-size:16px;white-space:nowrap}
-.go-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  min-height:52px;padding:12px 26px;font-size:19px;font-weight:800;border-radius:999px;
-  border:4px solid var(--brown);color:#fff;box-shadow:0 4px 0 var(--brown);margin-top:14px;
-}
-.a49 .go-btn{background:var(--red)}
-.a50 .go-btn{background:var(--purple)}
-.asm .go-btn{background:#FF7A1A}
-.a51 .go-btn{background:#1D6FB8}
 
-/* 占位卡 */
-.soon{
-  border-style:dashed;opacity:.72;background:transparent;box-shadow:none;
+/* Route */
+.section-heading{display:flex;align-items:center;justify-content:center;gap:15px;margin:0 0 22px;text-align:center;font-size:clamp(27px,4vw,38px);line-height:1.2}
+.section-heading::before,.section-heading::after{content:"";width:60px;height:3px;background:var(--brown-soft);border-radius:999px}
+.heading-mark{color:var(--yellow);font-size:.75em}
+.range-shell{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;align-items:center;gap:10px}
+.range-arrow{
+  width:46px;height:46px;border:3px solid var(--brown);border-radius:50%;background:var(--paper);
+  box-shadow:0 3px 0 var(--brown);font-size:24px;font-weight:800;line-height:1;
 }
-.soon .card-art{background:transparent}
-.soon .card-body{border-left-style:dashed}
-.soon .go-btn{background:#B9AFA3;box-shadow:0 4px 0 var(--brown)}
-
-/* ===== 页尾 ===== */
-footer{text-align:center;padding:20px 14px 40px;font-weight:700;opacity:.75;font-size:15px}
-footer .tip{background:var(--paper);border:3px solid var(--brown);border-radius:16px;padding:10px 16px;display:inline-block;margin-bottom:12px;box-shadow:3px 3px 0 rgba(74,50,38,.15)}
-
-@media (max-width:640px){
-  .card-inner{grid-template-columns:1fr}
-  .card-art{padding:18px 16px 6px}
-  .card-art .emoji-big{font-size:64px}
-  .card-body{border-left:none;border-top:4px solid var(--brown);padding:14px 16px 18px}
-  .soon .card-body{border-top-style:dashed}
-  .go-btn{width:100%}
+.range-arrow:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+#rangeTickets{display:grid;grid-template-columns:repeat(6,minmax(105px,1fr));gap:10px;min-width:0}
+.range-ticket{
+  min-height:64px;padding:10px 7px;border:3px solid var(--brown);border-radius:7px;background:var(--paper);
+  box-shadow:0 4px 0 rgba(56,40,31,.16);font-size:17px;font-weight:800;white-space:nowrap;
 }
-@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+.range-ticket[aria-pressed="true"]{background:var(--red);color:#fff;box-shadow:0 4px 0 var(--brown);transform:translateY(-2px)}
+.route-toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px;padding:12px 16px;
+  border:2px solid #E7CEAD;border-radius:18px;background:rgba(255,254,250,.86);
+}
+#lessonSearchForm{display:flex;align-items:center;gap:8px;min-width:0}
+#lessonSearchForm label{font-size:14px;font-weight:800;white-space:nowrap}
+#lessonSearch{
+  width:170px;min-height:39px;padding:6px 12px;border:2px solid var(--brown);border-radius:999px;background:#fff;
+}
+#lessonSearchForm button{min-height:39px;padding:5px 14px;border:2px solid var(--brown);border-radius:999px;background:var(--yellow);font-weight:800}
+.legend{display:flex;align-items:center;justify-content:flex-end;gap:13px;font-size:13px;font-weight:800;white-space:nowrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:15px;height:15px;border:2px solid var(--brown);border-radius:50%;background:var(--grey)}
+.legend .done i{background:var(--green)}
+.legend .doing i{background:var(--orange)}
+#lessonSearchStatus{min-height:28px;margin:8px 4px 0;text-align:center;font-size:14px;font-weight:800;color:#8E462F}
+#lessonStations{
+  position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:38px 18px;
+  padding:24px 28px;margin-top:2px;
+}
+#lessonStations::before{
+  content:"";position:absolute;inset:78px 4px 70px;border:4px dashed #836B4E;border-radius:80px;opacity:.85;pointer-events:none;
+}
+.station{
+  position:relative;z-index:1;display:flex;flex-direction:column;min-height:240px;overflow:hidden;
+  border:3px solid var(--brown);border-radius:18px;background:var(--paper);text-align:center;text-decoration:none;
+  box-shadow:5px 6px 0 rgba(56,40,31,.18);transition:transform .16s ease;
+}
+.station-band{display:block;padding:7px 8px;background:var(--grey);color:#fff;font-size:16px;font-weight:800}
+.station[data-tone="red"] .station-band{background:var(--red)}
+.station[data-tone="purple"] .station-band{background:var(--purple)}
+.station[data-tone="blue"] .station-band{background:var(--blue)}
+.station-art{display:flex;align-items:center;justify-content:center;height:96px;padding:10px 16px 3px}
+.station-art img{width:88px;height:82px;object-fit:contain;filter:drop-shadow(3px 4px 0 rgba(56,40,31,.10))}
+.station h3{margin:4px 8px 0;font-size:17px;line-height:1.2}
+.station-subtitle{margin:2px 10px 6px;color:var(--brown-soft);font-size:12px;font-weight:800}
+.station-progress{margin:auto 10px 8px;font-size:16px;font-weight:800}
+.station-action{display:block;margin:0 10px 12px;padding:7px 10px;border:2px solid var(--brown);border-radius:999px;background:var(--grey);color:#fff;font-size:14px;font-weight:800;box-shadow:0 3px 0 var(--brown)}
+.station[data-tone="red"] .station-action{background:var(--red)}
+.station[data-tone="purple"] .station-action{background:var(--purple)}
+.station[data-tone="blue"] .station-action{background:var(--blue)}
+.station.soon{min-height:205px;align-self:center;color:#777;background:rgba(255,254,250,.94)}
+.station.soon .station-band{background:#8E8B86}
+.station.soon:nth-child(6){grid-column:1;transform:translateX(50%)}
+.station.soon:nth-child(7){grid-column:3}
+.station.soon:nth-child(8){grid-column:4}
+.soon-message{display:grid;place-items:center;flex:1;padding:22px 10px}
+.soon-number{display:block;font-size:34px;font-weight:800;color:#A09A91}
+.soon-message strong{display:block;margin-top:8px;font-size:18px}
+@media (hover:hover) and (pointer:fine){.station[href]:hover{transform:translateY(-4px)}}
+#routeEmpty{margin:34px auto 6px;padding:20px 24px;width:min(540px,100%);border:3px dashed var(--brown-soft);border-radius:18px;background:rgba(255,254,250,.8);text-align:center;font-weight:800}
+
+/* Special station */
+#specialStation{padding:20px;border:3px solid #B65317;border-radius:24px;background:rgba(255,254,250,.72)}
+#specialTitle{color:var(--orange);margin-bottom:18px}
+#specialTitle .tent-mark{width:48px;height:48px;object-fit:contain}
+.special-card{
+  display:grid;grid-template-columns:235px 1fr;overflow:hidden;border:4px solid var(--brown);border-radius:21px;
+  background:var(--paper);text-decoration:none;box-shadow:var(--shadow);transition:transform .18s ease;
+}
+.special-art{display:flex;align-items:center;justify-content:center;padding:24px;background:var(--orange-soft);border-right:3px solid var(--brown)}
+.special-art img{width:190px;height:150px;object-fit:contain;filter:drop-shadow(4px 5px 0 rgba(56,40,31,.12))}
+.special-copy{padding:23px 28px 22px}
+.special-copy h3{margin:0;font-size:30px;line-height:1.2}
+.special-copy .feature-list{margin-top:12px}
+.special-copy .primary-action{background:var(--orange)}
+@media (hover:hover) and (pointer:fine){.special-card:hover{transform:translateY(-4px)}}
+
+footer{text-align:center;padding:6px 18px 38px;font-size:14px;font-weight:700;color:var(--brown-soft)}
+footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px solid var(--brown);border-radius:12px;background:var(--paper);box-shadow:3px 3px 0 rgba(56,40,31,.12)}
+
+@media (min-width:761px) and (max-width:940px){
+  #lessonStations{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 24px;padding-inline:30px}
+  .station.soon:nth-child(6),.station.soon:nth-child(7),.station.soon:nth-child(8){grid-column:auto;transform:none}
+}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap{width:min(100% - 28px,1080px)}
+  #hero{padding:28px 0 24px}
+  .hero-title{gap:7px}
+  .hero-title img{width:48px;height:48px}
+  #hero h1{font-size:clamp(31px,10vw,44px);letter-spacing:0;text-shadow:2px 2px 0 #fff,3px 3px 0 var(--brown)}
+  #hero p{font-size:15px}
+  main{gap:32px}
+  .continue-card,.special-card{grid-template-columns:1fr}
+  .continue-art{min-height:190px;border-right:0;border-bottom:3px solid var(--brown);padding:18px}
+  .continue-art img{width:160px;height:160px}
+  .continue-copy,.special-copy{padding:21px 18px 22px}
+  .progress-row{grid-template-columns:1fr auto}
+  .progress-row .primary-action{grid-column:1/-1;width:100%}
+  .section-heading{gap:8px;font-size:27px}
+  .section-heading::before,.section-heading::after{width:24px}
+  .range-shell{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px}
+  .range-arrow{width:40px;height:40px;font-size:20px}
+  #rangeTickets{display:flex;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:4px 2px 10px;scrollbar-width:thin}
+  .range-ticket{flex:0 0 104px;min-height:57px;scroll-snap-align:start}
+  .route-toolbar{align-items:stretch;flex-direction:column;padding:13px}
+  #lessonSearchForm{display:grid;grid-template-columns:auto minmax(0,1fr) auto}
+  #lessonSearch{width:100%;min-width:0}
+  .legend{justify-content:center;flex-wrap:wrap}
+  #lessonStations{grid-template-columns:1fr;gap:20px;padding:14px 18px}
+  #lessonStations::before{display:none}
+  .station{min-height:282px}
+  .station.soon{min-height:210px}
+  .station.soon:nth-child(6),.station.soon:nth-child(7),.station.soon:nth-child(8){grid-column:auto;transform:none}
+  #specialStation{padding:14px}
+  #specialTitle{gap:5px;font-size:23px;white-space:nowrap}
+  #specialTitle::before,#specialTitle::after{width:16px}
+  #specialTitle .tent-mark{width:36px;height:36px}
+  .special-art{border-right:0;border-bottom:3px solid var(--brown);padding:17px}
+  .special-art img{height:132px}
+}
+@media (max-width:420px){
+  .wrap{width:calc(100% - 22px)}
+  .kicker{font-size:13px;letter-spacing:1px}
+  #hero .en{font-size:16px}
+  .continue-copy h2{font-size:29px}
+  #lessonSearchForm label{grid-column:1/-1}
+  #lessonSearchForm{grid-template-columns:minmax(0,1fr) auto}
+  .special-copy h3{font-size:27px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 
 <header id="hero">
   <div class="wrap">
-    <div class="kicker bounce-in">新概念英语 · 互动课件</div>
-    <h1>🎪 英语闯关乐园</h1>
+    <div class="kicker">新概念英语 · 互动课件</div>
+    <div class="hero-title">
+      <img src="/assets/home/park-tent.png" alt="" width="70" height="70">
+      <h1>英语闯关乐园</h1>
+    </div>
     <div class="en">NCE Interactive Adventure Park</div>
-    <p>欢迎回来，小勇士！每一课都是一场大冒险：闯关、集星星、领证书。
-       选一个乐园，继续你的英语之旅吧！🌟</p>
+    <p>欢迎回来，小勇士！每一课都是一场大冒险：闯关、摘星、发证书。选一个乐园，坐稳你的英语之旅吧！</p>
   </div>
 </header>
 
-<main class="wrap" id="courses">
+<main class="wrap">
+  <section id="continuePanel" aria-labelledby="continueTitle"></section>
 
-  <!-- Lesson 49 -->
-  <a class="card a49" href="/lesson49/" id="card49">
-    <div class="card-inner">
-      <div class="card-art"><span class="emoji-big">🥩</span></div>
-      <div class="card-body">
-        <span class="card-tag">Lesson 49 · 第一册</span>
-        <h2>肉店大冒险</h2>
-        <div class="en-sub">At the Butcher's</div>
-        <div class="desc">跟着伯德夫人去肉店买肉！17 张单词卡、课文小剧场、句型魔法屋，还有三单训练营等你来闯。</div>
-        <div class="feat"><span>🃏 单词卡</span><span>🎭 课文剧场</span><span>✨ 句型魔法</span><span>💪 三单特训</span><span>🏆 结业证书</span></div>
-        <div class="prog">
-          <div class="prog-track"><div class="prog-fill" id="pf49"></div></div>
-          <span class="prog-txt">⭐ <span id="pt49">0</span>/15</span>
-        </div>
-        <span class="go-btn" id="btn49">🚀 开始冒险</span>
+  <section id="lessonRoute" aria-labelledby="routeTitle">
+    <h2 class="section-heading" id="routeTitle"><span class="heading-mark" aria-hidden="true">◆</span>第一册 · 学习路线<span class="heading-mark" aria-hidden="true">◆</span></h2>
+    <div class="range-shell">
+      <button class="range-arrow" id="previousRange" type="button" aria-label="上一分段">‹</button>
+      <nav id="rangeTickets" aria-label="Lesson 分段"></nav>
+      <button class="range-arrow" id="nextRange" type="button" aria-label="下一分段">›</button>
+    </div>
+    <div class="route-toolbar">
+      <form id="lessonSearchForm" role="search">
+        <label for="lessonSearch">按编号查找</label>
+        <input id="lessonSearch" name="lesson" inputmode="numeric" autocomplete="off" placeholder="输入课号（如 49）" aria-describedby="lessonSearchStatus">
+        <button type="submit">跳转</button>
+      </form>
+      <div class="legend" aria-label="课程状态说明">
+        <span class="done"><i aria-hidden="true"></i>已完成</span>
+        <span class="doing"><i aria-hidden="true"></i>进行中</span>
+        <span><i aria-hidden="true"></i>即将开放</span>
       </div>
     </div>
-  </a>
+    <p id="lessonSearchStatus" aria-live="polite"></p>
+    <div id="lessonStations"></div>
+    <p id="routeEmpty" hidden>这个分段还没有开放课程。</p>
+  </section>
 
-  <!-- Lesson 50 -->
-  <a class="card a50" href="/lesson50/" id="card50">
-    <div class="card-inner">
-      <div class="card-art"><span class="emoji-big">🤴</span></div>
-      <div class="card-body">
-        <span class="card-tag">Lesson 50 · 第一册</span>
-        <h2>挑食小王子大冒险</h2>
-        <div class="en-sub">The Picky Prince</div>
-        <div class="desc">小王子太挑食啦！认识 9 种皇家蔬果、投喂王子公主、学动词变身术、挑战神奇照妖镜，帮他学会好好吃饭！</div>
-        <div class="feat"><span>🥕 蔬果图鉴</span><span>🍽️ 餐桌大作战</span><span>🪄 动词变身</span><span>🪞 照妖镜</span><span>🏆 结业证书</span></div>
-        <div class="prog">
-          <div class="prog-track"><div class="prog-fill" id="pf50"></div></div>
-          <span class="prog-txt">⭐ <span id="pt50">0</span>/15</span>
-        </div>
-        <span class="go-btn" id="btn50">🚀 开始冒险</span>
-      </div>
-    </div>
-  </a>
-
-  <!-- 音标第一课（番外篇） -->
-  <a class="card asm" href="/soundmark/" id="cardSM">
-    <div class="card-inner">
-      <div class="card-art"><span class="emoji-big">🔤</span></div>
-      <div class="card-body">
-        <span class="card-tag">番外篇 · 音标系列</span>
-        <h2>音标魔法乐园</h2>
-        <div class="en-sub">Phonics Magic · 音标第一课</div>
-        <div class="desc">音标是单词的「拼音」！跟着元音精灵学发音、玩音节魔法、上对比擂台，学会它，看到任何生词都能自己读出来！</div>
-        <div class="feat"><span>🧚 元音精灵</span><span>🪄 音节魔法</span><span>🥊 对比擂台</span><span>🎮 游戏乐园</span><span>🏆 结业证书</span></div>
-        <div class="prog">
-          <div class="prog-track"><div class="prog-fill" id="pfSM"></div></div>
-          <span class="prog-txt">⭐ <span id="ptSM">0</span>/12</span>
-        </div>
-        <span class="go-btn" id="btnSM">🚀 开始冒险</span>
-      </div>
-    </div>
-  </a>
-
-  <!-- Lesson 51 -->
-  <a class="card a51" href="/lesson51/" id="card51">
-    <div class="card-inner">
-      <div class="card-art"><span class="emoji-big">🏛️</span></div>
-      <div class="card-body">
-        <span class="card-tag">Lesson 51 · 第一册</span>
-        <h2>希腊四季之旅</h2>
-        <div class="en-sub">A Pleasant Climate</div>
-        <div class="desc">跟着 Dimitri 学天气、季节、月份和频率词，完成五关成为希腊小导游！</div>
-        <div class="feat"><span>🎧 听音挑词</span><span>🎭 课文剧场</span><span>🗓️ 月份归队</span><span>🪜 频率阶梯</span><span>🏆 导游证书</span></div>
-        <div class="prog">
-          <div class="prog-track"><div class="prog-fill" id="pf51"></div></div>
-          <span class="prog-txt">⭐ <span id="pt51">0</span>/15</span>
-        </div>
-        <span class="go-btn" id="btn51">🚀 开始冒险</span>
-      </div>
-    </div>
-  </a>
-
+  <section id="specialStation" aria-labelledby="specialTitle">
+    <h2 class="section-heading" id="specialTitle"><img class="tent-mark" src="/assets/home/park-tent.png" alt="" width="48" height="48">番外站 · 专项技能<span class="heading-mark" aria-hidden="true">◆</span></h2>
+    <div id="specialCourses"></div>
+  </section>
 </main>
+
+<noscript>
+  <nav class="no-script-nav" aria-label="课程入口">
+    <a href="/lesson49/">Lesson 49 · 肉店大冒险</a>
+    <a href="/lesson50/">Lesson 50 · 挑食小王子大冒险</a>
+    <a href="/lesson51/">Lesson 51 · 希腊四季之旅</a>
+    <a href="/soundmark/">番外篇 · 音标魔法乐园</a>
+  </nav>
+</noscript>
 
 <footer>
   <div class="wrap">
-    <div class="tip">💡 小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
-    <div>🎪 英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51 · 音标第一课</div>
+    <div class="tip">小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
+    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51 · 音标第一课</div>
   </div>
 </footer>
 
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/home-catalog.js"></script>
 <script>
-/* 读取两课星星进度并渲染 */
-function renderProg(n,fillId,txtId,btnId,max){
-  max=max||15;
-  const t=Math.max(0,Math.min(max,n));
-  document.getElementById(fillId).style.width=(t/max*100)+'%';
-  document.getElementById(txtId).textContent=t;
-  const btn=document.getElementById(btnId);
-  if(t>=max){btn.textContent='🏆 已通关 · 再玩一次';}
-  else if(t>0){btn.textContent='▶️ 继续冒险（⭐ '+t+'）';}
-}
-const COURSE_LEVELS=['l1','l2','l3','l4','l5'];
-const SOUND_LEVELS=['vs','g1','g2','g3'];
-function loadTotal(key,legacyKey,ids,legacyMode){
+const COURSE_LEVELS = ['l1','l2','l3','l4','l5'];
+const SOUND_LEVELS = ['vs','g1','g2','g3'];
+const HOME_COURSES = [
+  {
+    kind:'lesson', lesson:49, route:'/lesson49/', title:'肉店大冒险', subtitle:"At the Butcher's",
+    description:'跟着伯德夫人去肉店买肉！17 张单词卡、课文小剧场、句型魔法屋，还有三单训练营等你来闯。',
+    features:['单词卡','课文剧场','句型魔法','三单特训','结业证书'],
+    art:'/assets/home/lesson49-steak.png', tone:'red',
+    progress:{key:'canran:l49:progress:v2',legacyKey:'l49-stars-v1',ids:COURSE_LEVELS,legacyMode:'ratings',max:15}
+  },
+  {
+    kind:'lesson', lesson:50, route:'/lesson50/', title:'挑食小王子大冒险', subtitle:'The Picky Prince',
+    description:'认识皇家蔬果、投喂王子公主、学动词变身术，帮挑食小王子学会好好吃饭。',
+    features:['蔬果图鉴','餐桌作战','动词变身','照妖镜','结业证书'],
+    art:'/assets/home/lesson50-crown.png', tone:'purple',
+    progress:{key:'canran:l50:progress:v2',legacyKey:'l50-stars-v1',ids:COURSE_LEVELS,legacyMode:'ratings',max:15}
+  },
+  {
+    kind:'lesson', lesson:51, route:'/lesson51/', title:'希腊四季之旅', subtitle:'A Pleasant Climate',
+    description:'跟着 Dimitri 学天气、季节、月份和频率词，完成五关成为希腊小导游。',
+    features:['听音挑词','课文剧场','月份归队','频率阶梯','导游证书'],
+    art:'/assets/home/lesson51-temple.png', tone:'blue',
+    progress:{key:'canran:l51:progress:v2',legacyKey:'l51-stars-v1',ids:COURSE_LEVELS,legacyMode:'reset',max:15}
+  },
+  ...[52,53,54,55,56].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
+  {
+    kind:'special', lesson:null, route:'/soundmark/', title:'音标魔法乐园', subtitle:'Phonics Magic · 音标第一课',
+    description:'音标是单词的“拼音”！跟着元音精灵学发音、玩音节魔法、上对比擂台，看到生词也能自己试着读。',
+    features:['元音精灵','音节魔法','对比擂台','游戏乐园','结业证书'],
+    art:'/assets/home/soundmark-phonics.png', tone:'orange',
+    progress:{key:'canran:soundmark:progress:v2',legacyKey:'phonics-magic-stars-v1',ids:SOUND_LEVELS,legacyMode:'reset',max:12}
+  }
+];
+
+function loadCourseProgress(course){
+  if(!course.progress) return {...course,stars:0,max:0};
   const result=CanranCore.storage.loadProgress({
-    storage:localStorage,key,legacyKey,ids,legacyMode
+    storage:localStorage,
+    key:course.progress.key,
+    legacyKey:course.progress.legacyKey,
+    ids:course.progress.ids,
+    legacyMode:course.progress.legacyMode
   });
-  return CanranCore.progress.totalRatings(result.progress.ratings,ids);
+  const stars=CanranCore.progress.totalRatings(result.progress.ratings,course.progress.ids);
+  return {...course,stars,max:course.progress.max};
 }
-renderProg(loadTotal('canran:l49:progress:v2','l49-stars-v1',COURSE_LEVELS,'ratings'),'pf49','pt49','btn49');
-renderProg(loadTotal('canran:l50:progress:v2','l50-stars-v1',COURSE_LEVELS,'ratings'),'pf50','pt50','btn50');
-renderProg(loadTotal('canran:soundmark:progress:v2','phonics-magic-stars-v1',SOUND_LEVELS,'reset'),'pfSM','ptSM','btnSM',12);
-renderProg(
-  loadTotal('canran:l51:progress:v2', 'l51-stars-v1', COURSE_LEVELS, 'reset'),
-  'pf51',
-  'pt51',
-  'btn51'
-);
+
+const hydratedCourses=HOME_COURSES.map(loadCourseProgress);
+const continuePanel=document.getElementById('continuePanel');
+const lessonStations=document.getElementById('lessonStations');
+const routeEmpty=document.getElementById('routeEmpty');
+const rangeTickets=document.getElementById('rangeTickets');
+const previousRange=document.getElementById('previousRange');
+const nextRange=document.getElementById('nextRange');
+const lessonSearch=document.getElementById('lessonSearch');
+const lessonSearchStatus=document.getElementById('lessonSearchStatus');
+const recommendation=CanranCore.homeCatalog.pickContinueCourse(hydratedCourses);
+let selectedRangeStart=(CanranCore.homeCatalog.rangeForLesson(recommendation?.lesson)||CanranCore.homeCatalog.RANGES[2]).start;
+
+function progressAction(course){
+  if(course.max > 0 && course.stars >= course.max) return '再次挑战';
+  if(course.stars > 0) return '继续冒险';
+  return '开始冒险';
+}
+
+function progressPercent(course){
+  return course.max > 0 ? Math.max(0,Math.min(100,course.stars/course.max*100)) : 0;
+}
+
+function featureMarkup(features){
+  return features.map(feature=>`<li>${feature}</li>`).join('');
+}
+
+function renderContinue(){
+  if(!recommendation){continuePanel.hidden=true;return;}
+  continuePanel.innerHTML=`
+    <h2 class="sr-only" id="continueTitle">继续学习</h2>
+    <form class="continue-card" id="continueCourse" action="${recommendation.route}" method="get" data-route="${recommendation.route}">
+      <div class="continue-art"><img src="${recommendation.art}" alt="${recommendation.title}课程插画" width="190" height="190"></div>
+      <div class="continue-copy">
+        <span class="ribbon">${recommendation.stars >= recommendation.max ? '再次挑战' : '继续学习'}</span>
+        <p class="eyebrow">Lesson ${recommendation.lesson} · 第一册</p>
+        <h2>${recommendation.title}</h2>
+        <p class="subtitle">${recommendation.subtitle}</p>
+        <p class="summary">${recommendation.description}</p>
+        <ul class="feature-list">${featureMarkup(recommendation.features)}</ul>
+        <div class="progress-row">
+          <div class="progress-track" role="progressbar" aria-label="Lesson ${recommendation.lesson} 学习进度" aria-valuemin="0" aria-valuemax="${recommendation.max}" aria-valuenow="${recommendation.stars}"><span class="progress-fill" style="width:${progressPercent(recommendation)}%"></span></div>
+          <span class="progress-label">星 ${recommendation.stars}/${recommendation.max}</span>
+          <button class="primary-action" type="submit">${progressAction(recommendation)}</button>
+        </div>
+      </div>
+    </form>`;
+}
+
+function renderRanges(start){
+  rangeTickets.innerHTML=CanranCore.homeCatalog.RANGES.map(range=>`
+    <button class="range-ticket" type="button" data-range-start="${range.start}" aria-pressed="${range.start===start}">${range.start}–${range.end}</button>
+  `).join('');
+  const index=CanranCore.homeCatalog.RANGES.findIndex(range=>range.start===start);
+  previousRange.disabled=index<=0;
+  nextRange.disabled=index<0||index>=CanranCore.homeCatalog.RANGES.length-1;
+  rangeTickets.querySelectorAll('[data-range-start]').forEach(button=>{
+    button.addEventListener('click',()=>selectRange(Number(button.dataset.rangeStart)));
+  });
+  rangeTickets.querySelector('[aria-pressed="true"]')?.scrollIntoView({block:'nearest',inline:'center'});
+}
+
+function stationMarkup(course){
+  if(!course.route){
+    return `<article class="station soon" data-lesson="${course.lesson}" tabindex="-1">
+      <span class="station-band">Lesson ${course.lesson}</span>
+      <div class="soon-message"><div><span class="soon-number">${course.lesson}</span><strong>即将开放</strong></div></div>
+    </article>`;
+  }
+  const progressId=course.lesson===49?'pt49':course.lesson===50?'pt50':'pt51';
+  return `<a class="station" data-tone="${course.tone}" data-lesson="${course.lesson}" href="${course.route}">
+    <span class="station-band">Lesson ${course.lesson}</span>
+    <span class="station-art"><img src="${course.art}" alt="" width="108" height="100"></span>
+    <h3>${course.title}</h3>
+    <span class="station-subtitle">${course.subtitle}</span>
+    <span class="station-progress">星 <span id="${progressId}">${course.stars}</span>/${course.max}</span>
+    <span class="station-action">${progressAction(course)}</span>
+  </a>`;
+}
+
+function renderLessonRange(start){
+  const range=CanranCore.homeCatalog.RANGES.find(candidate=>candidate.start===start);
+  const courses=hydratedCourses.filter(course=>course.kind==='lesson'&&course.lesson>=range.start&&course.lesson<=range.end);
+  lessonStations.innerHTML=courses.map(stationMarkup).join('');
+  routeEmpty.hidden=courses.length>0;
+  lessonStations.hidden=courses.length===0;
+}
+
+function selectRange(start,focusLesson=null){
+  if(!CanranCore.homeCatalog.RANGES.some(range=>range.start===start)) return;
+  selectedRangeStart=start;
+  renderRanges(start);
+  renderLessonRange(start);
+  if(focusLesson!==null){
+    requestAnimationFrame(()=>{
+      const station=document.querySelector(`[data-lesson="${focusLesson}"]`);
+      if(station) station.focus();
+    });
+  }
+}
+
+function handleLessonSearch(event){
+  event.preventDefault();
+  const result=CanranCore.homeCatalog.resolveLessonSearch(lessonSearch.value,hydratedCourses);
+  if(result.status==='invalid'){
+    lessonSearchStatus.textContent='请输入 1–144 的 Lesson 编号。';
+    return;
+  }
+  selectRange(result.range.start,result.status==='available'||result.status==='placeholder'?result.lesson:null);
+  lessonSearchStatus.textContent=result.status==='missing'
+    ?`Lesson ${result.lesson} 还未加入目录。`
+    :`已定位到 Lesson ${result.lesson}。`;
+}
+
+function renderSpecials(){
+  const special=hydratedCourses.find(course=>course.kind==='special');
+  if(!special) return;
+  document.getElementById('specialCourses').innerHTML=`
+    <a class="special-card" href="${special.route}">
+      <div class="special-art"><img src="${special.art}" alt="${special.title}课程插画" width="190" height="150"></div>
+      <div class="special-copy">
+        <p class="eyebrow">番外篇 · 音标系列</p>
+        <h3>${special.title}</h3>
+        <p class="subtitle">${special.subtitle}</p>
+        <p class="summary">${special.description}</p>
+        <ul class="feature-list">${featureMarkup(special.features)}</ul>
+        <div class="progress-row">
+          <div class="progress-track" role="progressbar" aria-label="音标魔法乐园学习进度" aria-valuemin="0" aria-valuemax="${special.max}" aria-valuenow="${special.stars}"><span class="progress-fill" style="width:${progressPercent(special)}%"></span></div>
+          <span class="progress-label">星 <span id="ptSM">${special.stars}</span>/${special.max}</span>
+          <span class="primary-action">${progressAction(special)}</span>
+        </div>
+      </div>
+    </a>`;
+}
+
+previousRange.addEventListener('click',()=>{
+  const index=CanranCore.homeCatalog.RANGES.findIndex(range=>range.start===selectedRangeStart);
+  if(index>0) selectRange(CanranCore.homeCatalog.RANGES[index-1].start);
+});
+nextRange.addEventListener('click',()=>{
+  const index=CanranCore.homeCatalog.RANGES.findIndex(range=>range.start===selectedRangeStart);
+  if(index<CanranCore.homeCatalog.RANGES.length-1) selectRange(CanranCore.homeCatalog.RANGES[index+1].start);
+});
+document.getElementById('lessonSearchForm').addEventListener('submit',handleLessonSearch);
+
+renderContinue();
+selectRange(selectedRangeStart);
+renderSpecials();
 </script>
 </body>
 </html>

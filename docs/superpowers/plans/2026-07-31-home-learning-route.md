@@ -284,7 +284,7 @@ git commit -m "feat: organize lessons into a scalable home route"
 
 **Interfaces:**
 - Consumes: the selected image and local transparent PNG artwork.
-- Produces: a desktop three-column route, separated orange special station, keyboard states, and a 390 px single-column layout without horizontal page overflow.
+- Produces: a wide-desktop five-column route, a medium-width three-column route, separated orange special station, keyboard states, and a 390 px single-column layout without horizontal page overflow.
 
 - [ ] **Step 1: Add a failing mobile-layout test**
 
@@ -324,7 +324,7 @@ Match the source hierarchy and proportions:
 - left-art/right-copy continue panel;
 - centered “第一册 · 学习路线” heading;
 - ticket-like range controls;
-- three-column station grid with a lightweight dashed route behind it;
+- five-column station grid on wide desktops, three columns at medium width, with a lightweight dashed route behind it;
 - red, purple and blue course tones;
 - orange “番外站 · 专项技能” pavilion;
 - deep-brown borders, offset shadows and consistent focus rings.
