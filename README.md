@@ -29,10 +29,11 @@ committed local font assets. The generated WOFF2 files, `fonts.css`, and copied 
 live under `assets/fonts/`, and every public page loads its fonts from that same-origin path.
 
 The three existing course certificate experiences re-check their own course eligibility before they
-act and provide accessible, polite, atomic feedback. Lesson 51 currently checks only that the name
-is non-empty before printing; per-level eligibility enforcement remains pending in this unreleased
-remediation branch. Lesson 49 continues to export through a Blob and revoke every object URL after
-preview closure or creation failure.
+act and provide accessible, polite, atomic feedback. Lesson 51's certificate button currently
+checks only that the name is non-empty, then shows celebration and feedback; per-level eligibility
+enforcement and actual printing remain pending in this unreleased remediation branch. Lesson 49
+continues to export through a Blob and revoke every object URL after preview closure or creation
+failure.
 
 ## Production transport
 
