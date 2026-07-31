@@ -1,6 +1,6 @@
 # Lesson 51 Release Remediation Design
 
-**Status:** Approved in conversation on 2026-07-31  
+**Status:** Approved in conversation on 2026-07-31
 **Baseline:** `main@8690d7dadbef2bfdc60e08dfd512d4f662374c42`
 
 ## Goal
