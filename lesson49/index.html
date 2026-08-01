@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>肉店大冒险 · At the Butcher's | 新概念英语 Lesson 49</title>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/core/certificate-gate.css">
 <style>
 :root{
   --cream:#FFF6E9; --red:#E8503A; --yellow:#F4A72C; --green:#7FB069; --brown:#4A3226;
@@ -775,7 +776,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       <h2>老板考核 <span class="en-sub">Final Challenge</span></h2>
       <div class="lvl-stars" id="st-l5">☆☆☆</div>
     </div>
-    <div class="lvl-desc">🎓 老板亲自出题！<b>3 道单词 + 2 道 Do/Are + 3 道三单</b>，共 8 题。答完就能拿到「肉店小学徒」结业证书！</div>
+    <div class="lvl-desc">🎓 老板亲自出题！<b>3 道单词 + 2 道 Do/Are + 3 道三单</b>，共 8 题。答完后继续补满五关 15 颗星，就能领取结业证书。</div>
 
     <div class="panel">
       <div id="quizStartBox" style="text-align:center">
@@ -795,11 +796,12 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
         <p style="font-size:34px" id="quizStars">☆☆☆</p>
         <button class="btn btn-mini btn-yellow" id="quizAgain">🔄 再考一次</button>
       </div>
-      <div id="certArea" class="hidden">
+      <div id="certArea">
         <input id="certName" maxlength="12" placeholder="写上你的大名 ✍️">
         <button class="btn btn-green" id="certBtn">📜 生成结业证书</button>
-        <span id="certGateMsg" role="status" aria-live="polite"></span>
+        <span id="certGateMsg"></span>
       </div>
+      <div id="l49CertificateGate"></div>
     </div>
   </div>
 </section>
@@ -829,6 +831,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 </footer>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/certificate-gate.js"></script>
 <script src="/core/audio-player.js"></script>
 <script>
 'use strict';
@@ -1019,14 +1022,19 @@ let stars=l49Loaded.progress.ratings;
 function getStar(l){return stars[l];}
 function starStr(n){return '★'.repeat(n)+'☆'.repeat(3-n);}
 function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
-function canIssueL49Certificate(){return CanranCore.progress.allAtLeast(stars,LVLS,1);}
+const L49_CERTIFICATE_TARGETS=[
+  {id:'l1',selector:'#l1',label:'单词'},
+  {id:'l2',selector:'#l2',label:'课文剧场'},
+  {id:'l3',selector:'#l3',label:'句型魔法屋'},
+  {id:'l4',selector:'#l4',label:'三单训练营'},
+  {id:'l5',selector:'#l5',label:'老板考核'}
+];
+function canIssueL49Certificate(){
+  return CanranCore.certificateGate
+    .completionState(stars,L49_CERTIFICATE_TARGETS).eligible;
+}
 function renderL49CertificateGate(){
-  const area=$('#certArea'),button=$('#certBtn'),message=$('#certGateMsg');
-  const attemptedFinal=getStar('l5')>0;
-  area.classList.toggle('hidden',!attemptedFinal);
-  button.disabled=!canIssueL49Certificate();
-  const missing=LVLS.filter(level=>getStar(level)<1).length;
-  message.textContent=missing===0?'五关已完成，可以生成证书。':'还需完成 '+missing+' 个关卡。';
+  if(l49CertificateGate)l49CertificateGate.refresh();
 }
 function persistStars(){
   const saved=CanranCore.storage.saveProgress({
@@ -1703,7 +1711,8 @@ function focusAfterL49Certificate(target){
 }
 function openL49CertificateDialog(){
   if(!canIssueL49Certificate()){
-    renderL49CertificateGate();
+    closeL49CertificateDialog();
+    l49CertificateGate.open();
     return false;
   }
   if(l49CertDialog.open)return true;
@@ -1723,6 +1732,25 @@ function closeL49CertificateDialog(){
   if(l49CertDialog.open)l49CertDialog.close();
   focusAfterL49Certificate(l49CertReturnFocus);
 }
+function issueL49Certificate(){
+  const n=$('#certName').value.trim()||'小学徒';
+  $('#certNameOut').textContent=n;
+  $('#certDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
+  $('#certStars').textContent=starStr(getStar('l5'));
+  $('#certTotal').textContent=totalStars();
+  openL49CertificateDialog();
+  fanfare();confetti(90);
+  warmCertFonts(); // 弹窗显示时即预热卡通字体，保证稍后 canvas 绘制时已加载
+  return true;
+}
+const l49CertificateGate=CanranCore.certificateGate.create({
+  trigger:$('#certBtn'),mount:$('#l49CertificateGate'),status:$('#certGateMsg'),
+  getRatings:()=>stars,targets:L49_CERTIFICATE_TARGETS,
+  courseName:'Lesson 49 · 肉店大冒险',icon:'🥩',accent:'#c43f36',
+  pageColor:'var(--cream)',itemLabel:'关',
+  readyMessage:'15/15 颗星已集齐，可以生成证书。',
+  onEligible:issueL49Certificate
+});
 l49CertDialog.addEventListener('cancel',event=>{
   event.preventDefault();
   closeL49CertificateDialog();
@@ -1743,21 +1771,6 @@ l49CertDialog.addEventListener('keydown',event=>{
     first.focus();
   }
 });
-$('#certBtn').addEventListener('click',()=>{
-  if(!canIssueL49Certificate()){
-    renderL49CertificateGate();
-    return;
-  }
-  const n=$('#certName').value.trim()||'小学徒';
-  $('#certNameOut').textContent=n;
-  $('#certDate').textContent=new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
-  $('#certStars').textContent=starStr(getStar('l5'));
-  $('#certTotal').textContent=totalStars();
-  openL49CertificateDialog();
-  fanfare();confetti(90);
-  warmCertFonts(); // 弹窗显示时即预热卡通字体，保证稍后 canvas 绘制时已加载
-});
-
 /* ---- 证书 PNG：Canvas 2D 原生绘制（离线可用，无外部库） ---- */
 function warmCertFonts(){
   try{
@@ -2078,7 +2091,7 @@ $('#certClose').addEventListener('click',()=>{
 $('#certSave').addEventListener('click',()=>{
   if(!canIssueL49Certificate()){
     closeL49CertificateDialog();
-    renderL49CertificateGate();
+    l49CertificateGate.open();
     return;
   }
   sndClick();
@@ -2087,7 +2100,7 @@ $('#certSave').addEventListener('click',()=>{
 $('#certPrint').addEventListener('click',()=>{
   if(!canIssueL49Certificate()){
     closeL49CertificateDialog();
-    renderL49CertificateGate();
+    l49CertificateGate.open();
     return;
   }
   window.print();
