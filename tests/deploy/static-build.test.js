@@ -274,7 +274,8 @@ test('buildStatic rejects a published course without prerecorded audio', async t
   const out = path.join(root, 'dist');
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await writeSyntheticPublicRoot(root);
-  await fs.rm(path.join(root, 'lesson49/audio/clip.mp3'));
+  await fs.rm(path.join(root, 'lesson49/audio'), { recursive: true });
+  await fs.mkdir(path.join(root, 'lesson49/audio'));
   await fs.writeFile(path.join(root, 'lesson49/audio/readme.txt'), 'speech synthesis is not publication audio');
   execFileSync('git', ['add', '-A'], { cwd: root });
   execFileSync(
