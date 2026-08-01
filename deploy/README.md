@@ -145,7 +145,7 @@ ssh "$CANRAN_DEPLOY_TARGET" 'sudo sha256sum /etc/nginx/conf.d/canranstudio-http.
 
 Inspect every server block able to answer 59.110.217.36:80, including wildcard/default and IPv4/IPv6
 listeners. Stop for an unaccounted rewrite, alias, root, or default block affecting /, /lesson49/,
-/lesson50/, /lesson51/, /lesson54/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
+/lesson50/, /lesson51/, /lesson52/, /lesson54/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
 site file before disabling only it; its path is never inferred by this repository.
 
 The repository-owned matched server explicitly sets open_file_cache off. The complete nginx -T

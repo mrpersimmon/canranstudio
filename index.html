@@ -301,7 +301,8 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
     <a href="/lesson49/">Lesson 49 · 肉店大冒险</a>
     <a href="/lesson50/">Lesson 50 · 挑食小王子大冒险</a>
     <a href="/lesson51/">Lesson 51 · 希腊四季之旅</a>
-    <a href="/lesson54/">Lesson 54 · 环球护照之旅</a>
+    <a href="/lesson52/">Lesson 52 · 环球护照之旅 Ⅰ</a>
+    <a href="/lesson54/">Lesson 54 · 环球护照之旅 Ⅱ</a>
     <a href="/soundmark/">番外篇 · 音标魔法乐园</a>
   </nav>
 </noscript>
@@ -309,7 +310,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
 <footer>
   <div class="wrap">
     <div class="tip">小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
-    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51、54 · 音标第一课</div>
+    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51、52、54 · 音标第一课</div>
   </div>
 </footer>
 
@@ -341,10 +342,17 @@ const HOME_COURSES = [
     art:'/assets/home/lesson51-temple.png', tone:'blue',
     progress:{key:'canran:l51:progress:v2',legacyKey:'l51-stars-v1',ids:COURSE_LEVELS,legacyMode:'reset',max:15}
   },
-  ...[52,53].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
   {
-    kind:'lesson', lesson:54, route:'/lesson54/', title:'环球护照之旅', subtitle:'What Nationality Are They?',
-    description:'拿好护照走遍 12 个国家，学会国家、国籍和来自哪里，完成五关成为小小环球旅行家。',
+    kind:'lesson', lesson:52, route:'/lesson52/', title:'环球护照之旅 Ⅰ', subtitle:'What Nationality Are They?',
+    description:'第一卷·欧美篇：走遍 12 个欧美国家，跟签证官学国家和国籍、听机场广播、玩盖章配对，成为环球小使者！',
+    features:['国家国籍','机场广播','盖章配对','动词小尾巴','海关考核'],
+    art:'/assets/home/lesson52-passport.svg', tone:'blue',
+    progress:{key:'canran:l52:progress:v2',ids:COURSE_LEVELS,max:15}
+  },
+  ...[53].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
+  {
+    kind:'lesson', lesson:54, route:'/lesson54/', title:'环球护照之旅 Ⅱ', subtitle:'What Nationality Are They?',
+    description:'第二卷·亚非大洋洲篇：再走 12 个国家，练习国籍句型，还有 does 疑问否定小魔法。',
     features:['国家国籍','机场广播','盖章配对','does 魔法','海关考核'],
     art:'/assets/home/lesson54-passport.svg', tone:'green',
     progress:{key:'canran:l54:progress:v2',ids:COURSE_LEVELS,max:15}

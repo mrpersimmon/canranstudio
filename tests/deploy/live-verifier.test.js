@@ -30,11 +30,13 @@ const FIXTURE_FILES = {
   'lesson50/index.html': Buffer.from('lesson50'),
   'soundmark/index.html': Buffer.from('soundmark'),
   'lesson51/index.html': Buffer.from('lesson51'),
+  'lesson52/index.html': Buffer.from('lesson52'),
   'lesson54/index.html': Buffer.from('lesson54'),
   'core/storage.js': Buffer.from('storage'),
   'assets/fonts/fonts.css': Buffer.from('fonts'),
   'assets/lesson notes/#1.txt': Buffer.from('encoded path'),
   'lesson51/audio/climate.mp3': Buffer.from('mp3'),
+  'lesson52/audio/american.mp3': Buffer.from('lesson52 mp3'),
   'lesson54/audio/australia.mp3': Buffer.from('lesson54 mp3'),
   'home/index.html': Buffer.from('compatibility redirect')
 };
@@ -230,11 +232,13 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
       { file: 'lesson50/index.html', path: '/lesson50/' },
       { file: 'soundmark/index.html', path: '/soundmark/' },
       { file: 'lesson51/index.html', path: '/lesson51/' },
+      { file: 'lesson52/index.html', path: '/lesson52/' },
       { file: 'lesson54/index.html', path: '/lesson54/' },
       { file: 'core/storage.js', path: '/core/storage.js' },
       { file: 'assets/fonts/fonts.css', path: '/assets/fonts/fonts.css' },
       { file: 'assets/lesson notes/#1.txt', path: '/assets/lesson%20notes/%231.txt' },
       { file: 'lesson51/audio/climate.mp3', path: '/lesson51/audio/climate.mp3' },
+      { file: 'lesson52/audio/american.mp3', path: '/lesson52/audio/american.mp3' },
       { file: 'lesson54/audio/australia.mp3', path: '/lesson54/audio/australia.mp3' }
     ]
   );

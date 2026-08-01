@@ -177,6 +177,7 @@ function assertHttpContract(text) {
     ['/lesson49', '/lesson49/'],
     ['/lesson50', '/lesson50/'],
     ['/lesson51', '/lesson51/'],
+    ['/lesson52', '/lesson52/'],
     ['/lesson54', '/lesson54/'],
     ['/soundmark', '/soundmark/']
   ];
@@ -276,6 +277,7 @@ const FORGED_DIRECTIVES = [
   'location = /lesson49 { return 308 /lesson49/; }',
   'location = /lesson50 { return 308 /lesson50/; }',
   'location = /lesson51 { return 308 /lesson51/; }',
+  'location = /lesson52 { return 308 /lesson52/; }',
   'location = /lesson54 { return 308 /lesson54/; }',
   'location = /soundmark { return 308 /soundmark/; }',
   'location / { try_files $uri $uri/ =404; limit_except GET HEAD { deny all; } }',

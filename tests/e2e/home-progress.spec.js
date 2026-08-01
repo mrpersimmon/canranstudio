@@ -30,6 +30,7 @@ test('welcome page separates numbered lessons from the special station', async (
   await expect(page.locator('#lessonRoute a[href="/lesson49/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/lesson50/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/lesson51/"]')).toHaveCount(1);
+  await expect(page.locator('#lessonRoute a[href="/lesson52/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/lesson54/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/soundmark/"]')).toHaveCount(0);
   await expect(page.locator('#specialStation a[href="/soundmark/"]')).toHaveCount(1);
