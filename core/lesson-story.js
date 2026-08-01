@@ -1,15 +1,22 @@
 (function attachLessonStory(root, factory) {
   'use strict';
-  const api = factory();
+  const catalogApi = typeof module === 'object' && module.exports
+    ? require('./course-catalog')
+    : root?.CanranCore?.courseCatalog;
+  const deviceProfileApi = typeof module === 'object' && module.exports
+    ? require('./device-profile')
+    : root?.CanranCore?.deviceProfile;
+  const api = factory(catalogApi, deviceProfileApi);
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (root) {
     root.CanranCore = root.CanranCore || {};
     root.CanranCore.lessonStory = api;
   }
-})(typeof globalThis !== 'undefined' ? globalThis : this, function lessonStoryFactory() {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function lessonStoryFactory(
+  catalogApi,
+  deviceProfileApi
+) {
   'use strict';
-
-  const FOOD_BASKET_ID = 'food-basket';
 
   function deepFreeze(value) {
     if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
@@ -27,25 +34,33 @@
     souvenir: null
   });
 
-  const BASKET_OPENING = deepFreeze({
-    variant: 'basket',
-    eyebrow: '从暖灯集市来到城堡',
-    title: '篮子里的香味，飘进了城堡',
-    body: '你带着在肉店冒险中获得的食物篮子来到城堡。挑食小王子探出头来：这次，我们一起看看他喜欢什么吧！',
-    startLabel: '🧺 带着篮子开始',
-    skipLabel: '跳过小故事，直接开始',
-    souvenir: {
-      id: FOOD_BASKET_ID,
-      title: '食物篮子',
-      asset: '/assets/adventure-map/lesson49/food-basket.png'
+  function lesson49Souvenir() {
+    try {
+      return catalogApi?.requirePublishedCourse('lesson49')?.map?.souvenir || null;
+    } catch {
+      return null;
     }
-  });
-
-  function lesson50Opening(profile) {
-    const ownsBasket = Array.isArray(profile?.souvenirs) &&
-      profile.souvenirs.includes(FOOD_BASKET_ID);
-    return ownsBasket ? BASKET_OPENING : STANDALONE_OPENING;
   }
 
-  return Object.freeze({ FOOD_BASKET_ID, lesson50Opening });
+  function lesson50Opening(profile) {
+    const souvenir = lesson49Souvenir();
+    if (!souvenir || !deviceProfileApi?.hasSouvenir(profile, souvenir.id)) {
+      return STANDALONE_OPENING;
+    }
+    return deepFreeze({
+      variant: 'basket',
+      eyebrow: '从暖灯集市来到城堡',
+      title: '篮子里的香味，飘进了城堡',
+      body: `你带着在肉店冒险中获得的${souvenir.title}来到城堡。挑食小王子探出头来：这次，我们一起看看他喜欢什么吧！`,
+      startLabel: '🧺 带着篮子开始',
+      skipLabel: '跳过小故事，直接开始',
+      souvenir: {
+        id: souvenir.id,
+        title: souvenir.title,
+        asset: `/${souvenir.asset}`
+      }
+    });
+  }
+
+  return Object.freeze({ lesson50Opening });
 });

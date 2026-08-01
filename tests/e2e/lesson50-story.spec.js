@@ -4,6 +4,17 @@ const { test, expect } = require('@playwright/test');
 
 const PROFILE_KEY = 'canran:adventure-profile:v1';
 
+async function expectPrimaryActionAboveCourseNav(page) {
+  const boxes = await page.evaluate(() => ({
+    action: document.getElementById('startBtn').getBoundingClientRect().toJSON(),
+    navigation: document.getElementById('coursenav').getBoundingClientRect().toJSON(),
+    viewportHeight: window.innerHeight
+  }));
+  expect(boxes.action.top).toBeGreaterThanOrEqual(0);
+  expect(boxes.action.bottom).toBeLessThanOrEqual(boxes.navigation.top);
+  expect(boxes.action.bottom).toBeLessThanOrEqual(boxes.viewportHeight);
+}
+
 test('direct Lesson 50 entry has a complete standalone opening without a basket', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/lesson50/');
@@ -18,6 +29,7 @@ test('direct Lesson 50 entry has a complete standalone opening without a basket'
   await expect(page.locator('#l1')).toBeAttached();
   await expect(page.getByRole('button', { name: '🎖️ 领取结业证书' })).toBeAttached();
   await expect(page.locator('#coursenav a[href="/lesson49/"]')).toBeVisible();
+  await expectPrimaryActionAboveCourseNav(page);
 });
 
 test('the food basket adds a skippable story but never gates Lesson 50', async ({ page }) => {
@@ -42,10 +54,12 @@ test('the food basket adds a skippable story but never gates Lesson 50', async (
   await expect(page.getByRole('button', { name: '🧺 带着篮子开始' })).toBeVisible();
   await expect(page.locator('#l1')).toBeAttached();
   await expect(page.getByRole('button', { name: '🎖️ 领取结业证书' })).toBeAttached();
+  await expectPrimaryActionAboveCourseNav(page);
 
   await page.getByRole('button', { name: '跳过小故事，直接开始' }).click();
   await expect(story).toBeHidden();
   await expect(page.locator('#l1')).toBeInViewport();
+  await expect(page.locator('#l1Title')).toBeFocused();
 
   await page.reload();
   await expect(story).toBeVisible();

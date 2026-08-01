@@ -2,10 +2,8 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const {
-  FOOD_BASKET_ID,
-  lesson50Opening
-} = require('../../core/lesson-story');
+const catalog = require('../../core/course-catalog');
+const { lesson50Opening } = require('../../core/lesson-story');
 
 test('Lesson 50 has a complete standalone opening without any souvenir', () => {
   const opening = lesson50Opening({ version: 1, souvenirs: [] });
@@ -19,9 +17,10 @@ test('Lesson 50 has a complete standalone opening without any souvenir', () => {
 });
 
 test('the food basket adds a brief optional Lesson 49 bridge without changing the lesson', () => {
+  const foodBasket = catalog.requirePublishedCourse('lesson49').map.souvenir;
   const opening = lesson50Opening({
     version: 1,
-    souvenirs: [FOOD_BASKET_ID]
+    souvenirs: [foodBasket.id]
   });
 
   assert.deepEqual(opening, {
@@ -32,9 +31,9 @@ test('the food basket adds a brief optional Lesson 49 bridge without changing th
     startLabel: '🧺 带着篮子开始',
     skipLabel: '跳过小故事，直接开始',
     souvenir: {
-      id: 'food-basket',
-      title: '食物篮子',
-      asset: '/assets/adventure-map/lesson49/food-basket.png'
+      id: foodBasket.id,
+      title: foodBasket.title,
+      asset: `/${foodBasket.asset}`
     }
   });
   assert.equal(Object.isFrozen(opening), true);
@@ -42,7 +41,8 @@ test('the food basket adds a brief optional Lesson 49 bridge without changing th
 });
 
 test('unknown or malformed souvenir data never invents the connected opening', () => {
+  const foodBasketId = catalog.requirePublishedCourse('lesson49').map.souvenir.id;
   assert.equal(lesson50Opening({ souvenirs: ['unknown-token'] }).variant, 'standalone');
-  assert.equal(lesson50Opening({ souvenirs: FOOD_BASKET_ID }).variant, 'standalone');
+  assert.equal(lesson50Opening({ souvenirs: foodBasketId }).variant, 'standalone');
   assert.equal(lesson50Opening(null).variant, 'standalone');
 });

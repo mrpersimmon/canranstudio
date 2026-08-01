@@ -122,9 +122,10 @@ section.lvl{scroll-margin-top:96px;padding:56px 0}
 .story-skip:active{transform:translateY(2px);box-shadow:0 1px 0 var(--brown)}
 .cover-mission{font-weight:700;font-size:19px;margin-bottom:20px}
 #startBtn{font-size:26px;padding:16px 44px}
-.startBtn-wrap{display:inline-block;animation:floaty 2.4s ease-in-out infinite}
+.startBtn-wrap{display:inline-block;margin-bottom:18px;animation:floaty 2.4s ease-in-out infinite}
 .cover-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .cover-badges span{background:#fff;border:3px solid var(--brown);border-radius:14px;padding:6px 14px;font-weight:700;font-size:16px;box-shadow:3px 3px 0 rgba(74,50,38,.18)}
+.lvl-head h2:focus-visible{outline:4px solid var(--yellow);outline-offset:4px;border-radius:8px}
 
 /* ===== 第一关 蔬果图鉴 ===== */
 #cardGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:18px}
@@ -298,6 +299,9 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
 }
 @media (max-width:640px){
   body{font-size:17px}
+  .cover-grid{gap:14px}
+  .cover-art{max-width:290px}
+  .cover-txt .sub{margin:10px 0 14px;padding:6px 14px;font-size:17px}
   section.lvl{padding:40px 0}
   .panel{padding:16px 14px;border-radius:20px;margin-bottom:20px}
   .lvl-desc{padding:10px 14px;font-size:16px}
@@ -492,12 +496,12 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
           <button class="story-skip" id="storySkip" type="button" hidden>跳过小故事，直接开始</button>
         </div>
       </div>
+      <div class="startBtn-wrap"><button class="btn btn-purple" id="startBtn">🚀 开始冒险！</button></div>
       <p class="cover-mission">
         闯过 <b style="color:var(--purple)">5 大关卡</b>，集齐
         <b style="color:var(--yellow-d)">15 颗星星</b>，帮小王子学会好好吃饭，
         当上「皇家营养小顾问」吧！🌟
       </p>
-      <div class="startBtn-wrap"><button class="btn btn-purple" id="startBtn">🚀 开始冒险！</button></div>
       <div class="cover-badges">
         <span>🥕 9 张蔬果卡</span><span>🍽️ 餐桌大作战</span><span>🪄 动词变身术</span><span>🪞 神奇照妖镜</span>
       </div>
@@ -510,7 +514,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
   <div class="wrap">
     <div class="lvl-head">
       <div class="lvl-num c-green">1</div>
-      <h2>蔬果图鉴 <span class="en-sub">Royal Veggie Garden</span></h2>
+      <h2 id="l1Title" tabindex="-1">蔬果图鉴 <span class="en-sub">Royal Veggie Garden</span></h2>
       <div class="lvl-stars" id="st-l1">☆☆☆</div>
     </div>
     <div class="lvl-desc">🥕 要帮小王子吃饭，先得认识皇家菜园里的 <b>9 种蔬果</b>！点卡片翻面看中文，点 🔊 听英式发音。全部混个脸熟后，去挑战「听音摘果」吧！</div>
@@ -816,6 +820,9 @@ function renderLesson50Opening(){
     story.hidden=true;
     $('#startBtn').textContent='🚀 开始冒险！';
     $('#startBtn').click();
+    requestAnimationFrame(()=>{
+      try{$('#l1Title').focus({preventScroll:true});}catch{$('#l1Title').focus();}
+    });
   });
 }
 

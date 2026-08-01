@@ -154,7 +154,7 @@ test('a completed map course awards its known souvenir once and never regresses'
     [PROFILE_KEY]: JSON.stringify({
       version: 1,
       souvenirs: ['unknown-token'],
-      completedStages: { lesson49: ['l1', 'l2', 'l3', 'l4', 'l5'] }
+      completedStages: { lesson49: [] }
     }),
     'canran:l49:progress:v2': JSON.stringify({
       version: 2,
@@ -175,6 +175,20 @@ test('a completed map course awards its known souvenir once and never regresses'
 
   assert.deepEqual(returned.profile.souvenirs, ['food-basket']);
   assert.equal(hasSouvenir(returned.profile, 'food-basket'), true);
+});
+
+test('an older completed profile backfills a missing souvenir field', () => {
+  const storage = memoryStorage({
+    [PROFILE_KEY]: JSON.stringify({
+      version: 1,
+      completedStages: { lesson49: ['l1', 'l2', 'l3', 'l4', 'l5'] }
+    })
+  });
+
+  const result = initializeDeviceProfile({ storage, courses: catalog.COURSES });
+
+  assert.deepEqual(result.profile.souvenirs, ['food-basket']);
+  assert.equal(hasSouvenir(result.profile, 'food-basket'), true);
 });
 
 test('visiting the launch district becomes the device return view without changing progress', () => {
