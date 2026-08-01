@@ -73,6 +73,21 @@ test('course catalog is the complete immutable contract for lessons and special 
   assertDeepFrozen(catalog.COURSES);
 });
 
+test('published course pages resolve their progress contract from the shared catalog', () => {
+  const lesson49 = catalog.requirePublishedCourse('lesson49');
+
+  assert.equal(lesson49, catalog.COURSES.find(course => course.id === 'lesson49'));
+  assert.equal(lesson49.progress.key, 'canran:l49:progress:v2');
+  assert.throws(
+    () => catalog.requirePublishedCourse('lesson52'),
+    /published course not found: lesson52/
+  );
+  assert.throws(
+    () => catalog.requirePublishedCourse('missing'),
+    /published course not found: missing/
+  );
+});
+
 test('learning locations stay drawing and non-navigable until the full publication contract is met', () => {
   const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
   const drawing = catalog.assessLearningLocation(lesson49);

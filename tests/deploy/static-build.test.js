@@ -21,6 +21,8 @@ const PUBLIC_INPUTS = [
   'core',
   'assets'
 ];
+const VALID_MP3_BYTES = Buffer.alloc(144);
+VALID_MP3_BYTES.set([0xff, 0xf3, 0x64, 0xc4]);
 
 function sha256(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
@@ -85,15 +87,29 @@ async function writeSyntheticPublicRoot(root) {
   ]) {
     const file = path.join(root, relative);
     await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.writeFile(file, relative);
+    await fs.writeFile(file, relative.endsWith('.mp3') ? VALID_MP3_BYTES : relative);
   }
   for (const course of PUBLISHED_COURSES) {
-    await fs.writeFile(path.join(root, course.entry), `<script>const catalogContract = ${JSON.stringify([
-      course.progress.key,
-      course.progress.legacyKey,
-      course.progress.legacyMode,
-      ...course.progress.ids
-    ].filter(Boolean))};</script>`);
+    await fs.writeFile(path.join(root, course.entry), `
+      <script src="/core/course-catalog.js"></script>
+      <script>
+        const COURSE_PROGRESS = CanranCore.courseCatalog.requirePublishedCourse('${course.id}').progress;
+        const loaded = CanranCore.storage.loadProgress({
+          storage: localStorage,
+          key: COURSE_PROGRESS.key,
+          legacyKey: COURSE_PROGRESS.legacyKey,
+          ids: COURSE_PROGRESS.ids,
+          legacyMode: COURSE_PROGRESS.legacyMode
+        });
+        const saved = CanranCore.storage.saveProgress({
+          storage: localStorage,
+          key: COURSE_PROGRESS.key,
+          progress: loaded.progress,
+          ids: COURSE_PROGRESS.ids
+        });
+        const recording = 'audio/clip.mp3';
+      </script>
+    `);
   }
   execFileSync('git', ['init', '--quiet'], { cwd: root });
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
@@ -206,7 +222,7 @@ test('buildStatic rejects a published course without prerecorded audio', async t
 
   await assert.rejects(
     buildStatic({ root, out }),
-    /lesson49: prerecorded audio directory contains no non-empty \.mp3 file/
+    /lesson49: prerecorded audio directory contains no \.mp3 file/
   );
   await assert.rejects(fs.stat(out), { code: 'ENOENT' });
 });

@@ -817,6 +817,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 <footer>
   🥩 肉店大冒险 · 新概念英语第一册 Lesson 49 互动课件 ｜ 给爱英语的你 ❤️
 </footer>
+<script src="/core/course-catalog.js"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/certificate-gate.js"></script>
@@ -997,14 +998,15 @@ function speak(text){
 }
 
 /* ================= 星星系统（localStorage） ================= */
-const STAR_KEY='canran:l49:progress:v2';
-const LVLS=['l1','l2','l3','l4','l5'];
+const COURSE_PROGRESS=CanranCore.courseCatalog.requirePublishedCourse('lesson49').progress;
+const STAR_KEY=COURSE_PROGRESS.key;
+const LVLS=COURSE_PROGRESS.ids;
 const l49Loaded=CanranCore.storage.loadProgress({
   storage:localStorage,
   key:STAR_KEY,
-  legacyKey:'l49-stars-v1',
+  legacyKey:COURSE_PROGRESS.legacyKey,
   ids:LVLS,
-  legacyMode:'ratings'
+  legacyMode:COURSE_PROGRESS.legacyMode
 });
 let stars=l49Loaded.progress.ratings;
 function getStar(l){return stars[l];}

@@ -535,6 +535,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
   音标魔法乐园 · 英语音标第一课 ｜ 星星进度只保存在你自己的浏览器里 ｜ 大声读出来，效果最好！
 </footer>
 
+<script src="/core/course-catalog.js"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/certificate-gate.js"></script>
@@ -643,8 +644,9 @@ function speak(text, rate=0.85, onend){
 }
 
 /* ==================== 星星 & 提示 ==================== */
-const SKEY='canran:soundmark:progress:v2';
-const SOUND_IDS=['vs','g1','g2','g3'];
+const COURSE_PROGRESS=CanranCore.courseCatalog.requirePublishedCourse('soundmark').progress;
+const SKEY=COURSE_PROGRESS.key;
+const SOUND_IDS=COURSE_PROGRESS.ids;
 const SOUNDMARK_CERTIFICATE_TARGETS=[
   {id:'vs',selector:'#vs',label:'元音 vs 辅音'},
   {id:'g1',selector:'#g1',label:'听音小侦探',focusSelector:'.g-card'},
@@ -654,9 +656,9 @@ const SOUNDMARK_CERTIFICATE_TARGETS=[
 const soundLoaded=CanranCore.storage.loadProgress({
   storage:localStorage,
   key:SKEY,
-  legacyKey:'phonics-magic-stars-v1',
+  legacyKey:COURSE_PROGRESS.legacyKey,
   ids:SOUND_IDS,
-  legacyMode:'reset'
+  legacyMode:COURSE_PROGRESS.legacyMode
 });
 let soundRatings=soundLoaded.progress.ratings;
 function soundTotal(){return CanranCore.progress.totalRatings(soundRatings,SOUND_IDS);}

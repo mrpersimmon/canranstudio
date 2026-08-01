@@ -369,6 +369,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 <canvas id="confetti"></canvas>
 <div class="toast" id="toast"></div>
 
+<script src="/core/course-catalog.js"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/certificate-gate.js"></script>
@@ -523,8 +524,9 @@ let userInteracted=false;
 document.addEventListener('pointerdown',()=>{userInteracted=true;ac();},{once:true});
 
 /* ================= 星星系统 ================= */
-const STAR_KEY='canran:l54:progress:v2';
-const LVLS=['l1','l2','l3','l4','l5'];
+const COURSE_PROGRESS=CanranCore.courseCatalog.requirePublishedCourse('lesson54').progress;
+const STAR_KEY=COURSE_PROGRESS.key;
+const LVLS=COURSE_PROGRESS.ids;
 const loaded=CanranCore.storage.loadProgress({storage:localStorage,key:STAR_KEY,ids:LVLS});
 let stars=loaded.progress.ratings;
 const L54_CERTIFICATE_TARGETS=[

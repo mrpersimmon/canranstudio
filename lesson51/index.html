@@ -349,6 +349,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
   希腊四季之旅 · 新概念英语第一册 Lesson 51 ｜ 星星进度只保存在你自己的浏览器里 ｜ 开口跟读，效果最好！
 </footer>
 
+<script src="/core/course-catalog.js"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/certificate-gate.js"></script>
@@ -511,14 +512,15 @@ function startPlayAll() {
 }
 
 /* ==================== 星星 & 提示 ==================== */
-const L51_KEY = 'canran:l51:progress:v2';
-const L51_IDS = ['l1', 'l2', 'l3', 'l4', 'l5'];
+const COURSE_PROGRESS = CanranCore.courseCatalog.requirePublishedCourse('lesson51').progress;
+const L51_KEY = COURSE_PROGRESS.key;
+const L51_IDS = COURSE_PROGRESS.ids;
 const l51Loaded = CanranCore.storage.loadProgress({
   storage: localStorage,
   key: L51_KEY,
-  legacyKey: 'l51-stars-v1',
+  legacyKey: COURSE_PROGRESS.legacyKey,
   ids: L51_IDS,
-  legacyMode: 'reset'
+  legacyMode: COURSE_PROGRESS.legacyMode
 });
 let ratings = l51Loaded.progress.ratings;
 

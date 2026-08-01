@@ -227,6 +227,12 @@
     COURSES.filter(course => course.kind === 'lesson' && course.map.v1Visible)
   );
 
+  function requirePublishedCourse(id) {
+    const course = PUBLISHED_COURSES.find(candidate => candidate.id === id);
+    if (!course) throw new Error(`published course not found: ${id}`);
+    return course;
+  }
+
   function assessLearningLocation(course) {
     if (!course || course.kind !== 'lesson' || course.map?.v1Visible !== true) {
       return deepFreeze({
@@ -422,6 +428,7 @@
     PUBLISHED_COURSES,
     HOME_COURSES,
     MAP_COURSES,
+    requirePublishedCourse,
     assessLearningLocation,
     validateCatalog,
     assertValidCatalog
