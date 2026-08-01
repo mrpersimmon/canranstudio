@@ -5,13 +5,14 @@ const { execFileSync } = require('node:child_process');
 const { constants } = require('node:fs');
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { PUBLISHED_COURSES } = require('./course-registry');
+const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry');
 const { assertCourseCatalogContract } = require('./course-catalog-contract');
 
 const REQUIRED_FILES = Object.freeze([
   'index.html',
   'home/index.html',
-  ...PUBLISHED_COURSES.map(course => course.entry)
+  ...PUBLISHED_COURSES.map(course => course.entry),
+  ...PRESENTATION_COURSES.map(course => course.presentation.entry)
 ]);
 const REQUIRED_DIRECTORIES = Object.freeze([
   ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),

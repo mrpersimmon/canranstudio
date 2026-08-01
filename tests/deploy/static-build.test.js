@@ -8,7 +8,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const { buildStatic } = require('../../scripts/build-static');
-const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
+const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
 
 const ROOT = path.resolve(__dirname, '../..');
 const PUBLIC_INPUTS = [
@@ -18,6 +18,7 @@ const PUBLIC_INPUTS = [
     course.entry,
     ...course.assetDirectories
   ]),
+  ...PRESENTATION_COURSES.map(course => course.presentation.entry),
   'core',
   'assets'
 ];
@@ -74,6 +75,7 @@ async function writeSyntheticPublicRoot(root) {
     'index.html',
     'home/index.html',
     'lesson49/index.html',
+    'lesson49/present/index.html',
     'lesson49/audio/clip.mp3',
     'lesson50/index.html',
     'lesson50/audio/clip.mp3',
@@ -87,7 +89,8 @@ async function writeSyntheticPublicRoot(root) {
     'soundmark/audio/clip.mp3',
     'lesson51/index.html',
     'lesson51/audio/clip.mp3',
-    'core/audio-player.js'
+    'core/audio-player.js',
+    'core/classroom-presentation.js'
   ]) {
     const file = path.join(root, relative);
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -95,6 +98,9 @@ async function writeSyntheticPublicRoot(root) {
   }
   for (const course of PUBLISHED_COURSES) {
     await fs.writeFile(path.join(root, course.entry), `
+      ${course.presentation.declaredStatus === 'published'
+        ? `<a href="${course.presentation.route}">课堂投屏</a>`
+        : ''}
       <script src="/core/course-catalog.js"></script>
       <script>
         const COURSE_PROGRESS = CanranCore.courseCatalog.requirePublishedCourse('${course.id}').progress;
@@ -135,6 +141,37 @@ async function writeSyntheticPublicRoot(root) {
       `);
     }
   }
+  for (const course of PRESENTATION_COURSES) {
+    const entry = path.join(root, course.presentation.entry);
+    await fs.mkdir(path.dirname(entry), { recursive: true });
+    const controls = course.presentation.controls.map(control => (
+      control === 'exit'
+        ? `<a href="${course.route}" data-presentation-control="exit">exit</a>`
+        : `<button data-presentation-control="${control}">${control}</button>`
+    )).join('\n');
+    await fs.writeFile(entry, `
+      ${controls}
+      <script src="/core/course-catalog.js"></script>
+      <script src="/core/audio-player.js"></script>
+      <script src="/core/classroom-presentation.js"></script>
+      <script>
+        const CLASSROOM_COURSE = CanranCore.courseCatalog.requirePublishedCourse('${course.id}');
+        CanranCore.classroomPresentation.mount({ course: CLASSROOM_COURSE, audioPlayer: CanranCore.audio.createAudioPlayer() });
+      </script>
+    `);
+    for (const step of course.presentation.steps) {
+      const audio = path.join(root, step.audioAsset);
+      await fs.mkdir(path.dirname(audio), { recursive: true });
+      await fs.writeFile(audio, VALID_MP3_BYTES);
+    }
+    const regression = path.join(root, course.presentation.regressionTest);
+    await fs.mkdir(path.dirname(regression), { recursive: true });
+    await fs.writeFile(regression, `
+      'use strict';
+      const { test, expect } = require('@playwright/test');
+      test('classroom presentation journey', async () => { expect(true).toBe(true); });
+    `);
+  }
   execFileSync('git', ['init', '--quiet'], { cwd: root });
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
     'add', '.'], { cwd: root });
@@ -152,6 +189,7 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'index.html',
     'home/index.html',
     'lesson49/index.html',
+    'lesson49/present/index.html',
     'lesson49/audio/beef.mp3',
     'lesson50/index.html',
     'soundmark/index.html',
@@ -162,6 +200,7 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'lesson54/index.html',
     'lesson54/audio/australia.mp3',
     'core/audio-player.js',
+    'core/classroom-presentation.js',
     'core/certificate-gate.js',
     'core/certificate-gate.css',
     'release-manifest.json'
@@ -182,6 +221,7 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim()
   );
   assert.match(manifest.files['lesson49/index.html'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['lesson49/present/index.html'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['lesson54/index.html'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['lesson54/audio/australia.mp3'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['core/certificate-gate.js'], /^[a-f0-9]{64}$/);

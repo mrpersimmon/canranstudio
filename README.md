@@ -6,6 +6,7 @@
 
 - `/` — 课程欢迎页
 - `/lesson49/` — 新概念英语 Lesson 49
+- `/lesson49/present/` — Lesson 49 公开课堂投屏
 - `/lesson50/` — 新概念英语 Lesson 50
 - `/lesson51/` — 新概念英语 Lesson 51《A Pleasant Climate》
 - `/lesson52/` — 新概念英语 Lesson 52《What Nationality Are They?》环球护照之旅 Ⅰ
@@ -42,3 +43,8 @@ See `deploy/README.md` for the release and verification contract.
 
 See `docs/course-authoring.md` for the single-catalog workflow used when adding another numbered
 Lesson while the V1 map remains limited to Lesson 49–60.
+
+See `docs/classroom-presentation.md` for the public, device-data-free classroom presentation contract.
+
+Lesson 49 is the first catalog-declared classroom presentation. Its standalone public route uses
+the existing same-origin recordings and deliberately omits device progress and profile runtimes.

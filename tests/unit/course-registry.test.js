@@ -9,6 +9,7 @@ test('published course registry is a compatibility view of the shared catalog', 
   const registry = require('../../scripts/course-registry');
 
   assert.equal(registry.PUBLISHED_COURSES, catalog.PUBLISHED_COURSES);
+  assert.equal(registry.PRESENTATION_COURSES, catalog.PRESENTATION_COURSES);
   assert.deepEqual(
     registry.PUBLISHED_COURSES.map(course => course.id),
     ['lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson54', 'soundmark']
@@ -24,4 +25,6 @@ test('published course registry is a compatibility view of the shared catalog', 
     course.route.endsWith('/') &&
     !path.posix.isAbsolute(course.entry)
   ), true);
+  assert.deepEqual(registry.PRESENTATION_COURSES.map(course => course.id), ['lesson49']);
+  assert.equal(Object.isFrozen(registry.PRESENTATION_COURSES), true);
 });

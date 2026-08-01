@@ -3,13 +3,16 @@
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { PUBLISHED_COURSES } = require('./course-registry');
+const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry');
 const { HTTP_HEADER_CONTRACT } = require('./http-header-contract');
 
 const ROUTES = Object.freeze([
   Object.freeze({ path: '/', file: 'index.html' }),
   ...PUBLISHED_COURSES.map(course =>
     Object.freeze({ path: course.route, file: course.entry })
+  ),
+  ...PRESENTATION_COURSES.map(course =>
+    Object.freeze({ path: course.presentation.route, file: course.presentation.entry })
   ),
   Object.freeze({ path: '/release-manifest.json', file: 'release-manifest.json' })
 ]);
@@ -18,7 +21,8 @@ const HOME_REDIRECTS = Object.freeze(['/home', '/home/', '/home/index.html']);
 const LIVE_BYTE_EXCEPTIONS = Object.freeze(['home/index.html']);
 const ENTRY_ROUTE_BY_FILE = Object.freeze(Object.fromEntries([
   ['index.html', '/'],
-  ...PUBLISHED_COURSES.map(course => [course.entry, course.route])
+  ...PUBLISHED_COURSES.map(course => [course.entry, course.route]),
+  ...PRESENTATION_COURSES.map(course => [course.presentation.entry, course.presentation.route])
 ]));
 
 const DEFAULT_CONCURRENCY = 8;

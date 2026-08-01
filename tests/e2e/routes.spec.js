@@ -1,7 +1,7 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
-const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
+const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
 
 const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const routes = [
@@ -9,6 +9,10 @@ const routes = [
   ...PUBLISHED_COURSES.map(course => ({
     path: course.route,
     title: new RegExp(escapeRegExp(course.title))
+  })),
+  ...PRESENTATION_COURSES.map(course => ({
+    path: course.presentation.route,
+    title: /课堂投屏/
   }))
 ];
 

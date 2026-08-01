@@ -88,7 +88,8 @@ test('authored fallback guard recognizes spaced, multiline, unquoted, and encode
 
 test('public HTML contains no third-party runtime asset URL', async () => {
   const entries = ['index.html', 'home/index.html',
-    ...PUBLISHED_COURSES.map(course => course.entry)];
+    ...PUBLISHED_COURSES.map(course => course.entry),
+    ...courseCatalog.PRESENTATION_COURSES.map(course => course.presentation.entry)];
   const runtimeTag = /<(script|link|img|audio|video|source)\b[^>]*(?:src|href)=["']([^"']+)["'][^>]*>/gi;
   const external = [];
 

@@ -15,7 +15,11 @@ const ONE_PIXEL_PNG = Buffer.from(
 );
 
 function validCoursePageSource(course) {
+  const presentationLink = course.presentation?.declaredStatus === 'published'
+    ? `<a href="${course.presentation.route}">课堂投屏</a>`
+    : '';
   return `
+    ${presentationLink}
     <script src="/core/course-catalog.js"></script>
     <script>
       const COURSE_PROGRESS = CanranCore.courseCatalog.requirePublishedCourse('${course.id}').progress;
@@ -35,6 +39,31 @@ function validCoursePageSource(course) {
       const recording = 'audio/clip.mp3';
     </script>
   `;
+}
+
+function validPresentationPageSource(course) {
+  const controls = course.presentation.controls.map(control => (
+    control === 'exit'
+      ? `<a href="${course.route}" data-presentation-control="${control}">退出投屏</a>`
+      : `<button data-presentation-control="${control}">${control}</button>`
+  )).join('\n');
+  return `
+    ${controls}
+    <script src="/core/course-catalog.js"></script>
+    <script src="/core/audio-player.js"></script>
+    <script src="/core/classroom-presentation.js"></script>
+    <script>
+      const CLASSROOM_COURSE = CanranCore.courseCatalog.requirePublishedCourse('${course.id}');
+      CanranCore.classroomPresentation.mount({ course: CLASSROOM_COURSE, audioPlayer: CanranCore.audio.createAudioPlayer() });
+    </script>
+  `;
+}
+
+function withoutPresentation(course) {
+  course.presentation = structuredClone(
+    catalog.COURSES.find(item => item.id === 'lesson50').presentation
+  );
+  return course;
 }
 
 async function writePublishedMapContract(root, course) {
@@ -62,7 +91,9 @@ async function writePublishedMapContract(root, course) {
 test('static course contract requires real same-origin prerecorded audio', async t => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-course-contract-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
-  const course = structuredClone(catalog.COURSES.find(item => item.id === 'lesson49'));
+  const course = withoutPresentation(structuredClone(
+    catalog.COURSES.find(item => item.id === 'lesson49')
+  ));
 
   await fs.mkdir(path.join(root, 'lesson49/audio'), { recursive: true });
   await fs.writeFile(path.join(root, 'lesson49/index.html'), validCoursePageSource(course));
@@ -105,7 +136,9 @@ test('static course contract requires real same-origin prerecorded audio', async
 test('published course page must consume progress metadata from the shared catalog', async t => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-progress-contract-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
-  const course = structuredClone(catalog.COURSES.find(item => item.id === 'lesson49'));
+  const course = withoutPresentation(structuredClone(
+    catalog.COURSES.find(item => item.id === 'lesson49')
+  ));
   const entry = path.join(root, course.entry);
 
   await fs.mkdir(path.join(root, 'lesson49/audio'), { recursive: true });
@@ -207,10 +240,79 @@ test('a published lesson outside V1 requires a visible V2 map notice on its dire
   await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
 });
 
+test('published classroom presentation requires controls, same-origin recordings, regression, and no device data', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-presentation-contract-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const course = structuredClone(catalog.COURSES.find(item => item.id === 'lesson49'));
+  course.map = structuredClone(catalog.COURSES.find(item => item.id === 'lesson50').map);
+
+  await fs.mkdir(path.join(root, 'lesson49/audio'), { recursive: true });
+  await fs.mkdir(path.join(root, 'core'), { recursive: true });
+  await fs.writeFile(path.join(root, 'lesson49/index.html'), validCoursePageSource(course));
+  await fs.writeFile(path.join(root, 'core/classroom-presentation.js'), 'const runtime = "device-data free";');
+  await fs.copyFile(
+    path.join(ROOT, course.presentation.steps[0].audioAsset),
+    path.join(root, course.presentation.steps[0].audioAsset)
+  );
+
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson49: missing file lesson49\/present\/index\.html/
+  );
+
+  await fs.mkdir(path.join(root, 'lesson49/present'), { recursive: true });
+  await fs.writeFile(
+    path.join(root, course.presentation.entry),
+    validPresentationPageSource(course).replace(`href="${course.route}"`, 'href="/"')
+  );
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson49: classroom presentation exit must return to its course/
+  );
+
+  await fs.writeFile(path.join(root, course.presentation.entry), `
+    <p>localStorage.getItem('private')</p>
+    ${validPresentationPageSource(course)}
+  `);
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson49: classroom presentation must not read device data or request services/
+  );
+
+  await fs.writeFile(path.join(root, course.presentation.entry), validPresentationPageSource(course));
+  for (const step of course.presentation.steps.slice(0, -1)) {
+    const target = path.join(root, step.audioAsset);
+    await fs.mkdir(path.dirname(target), { recursive: true });
+    await fs.copyFile(path.join(ROOT, step.audioAsset), target);
+  }
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson49: missing file lesson49\/audio\/to_tell_you_the_truth_mrs_bird_i_don_t_like_chicken_either\.mp3/
+  );
+
+  const lastStep = course.presentation.steps.at(-1);
+  await fs.copyFile(path.join(ROOT, lastStep.audioAsset), path.join(root, lastStep.audioAsset));
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson49: missing file tests\/e2e\/classroom-presentation\.spec\.js/
+  );
+
+  const regression = path.join(root, course.presentation.regressionTest);
+  await fs.mkdir(path.dirname(regression), { recursive: true });
+  await fs.writeFile(regression, `
+    'use strict';
+    const { test, expect } = require('@playwright/test');
+    test('classroom presentation journey', async () => { expect(true).toBe(true); });
+  `);
+  await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
+});
+
 test('published learning location contract requires every declared asset and regression file', async t => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-map-contract-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
-  const course = structuredClone(catalog.COURSES.find(item => item.id === 'lesson49'));
+  const course = withoutPresentation(structuredClone(
+    catalog.COURSES.find(item => item.id === 'lesson49')
+  ));
 
   await fs.mkdir(path.join(root, 'lesson49/audio'), { recursive: true });
   await fs.writeFile(path.join(root, 'lesson49/index.html'), validCoursePageSource(course));

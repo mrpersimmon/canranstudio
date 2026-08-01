@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>课堂投屏 · 肉店大冒险 | Lesson 49</title>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<style>
+:root{
+  --ink:#3C2922;
+  --paper:#FFFDF6;
+  --cream:#FFF3DF;
+  --red:#D94C3D;
+  --red-dark:#A52F26;
+  --mustard:#F2B84B;
+  --green:#6E9A68;
+  --blue:#315D76;
+  --shadow:rgba(60,41,34,.16);
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--cream)}
+body{
+  min-height:100svh;margin:0;padding:0 0 calc(116px + env(safe-area-inset-bottom));
+  color:var(--ink);font-family:'Baloo 2','ZCOOL KuaiLe','PingFang SC','Microsoft YaHei',sans-serif;
+  background:
+    radial-gradient(circle at 14% 17%,rgba(242,184,75,.22) 0 7%,transparent 7.2%),
+    radial-gradient(circle at 90% 70%,rgba(110,154,104,.18) 0 9%,transparent 9.2%),
+    linear-gradient(135deg,#FFF8EA 0%,#F9E8D1 100%);
+}
+button,a{font:inherit}
+button{color:inherit}
+button:focus-visible,a:focus-visible{outline:5px solid #1673A1;outline-offset:4px}
+button:disabled{cursor:not-allowed;opacity:.46}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.presentation-header{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 28px;align-items:center;
+  padding:18px clamp(18px,4vw,54px);border-bottom:4px solid var(--ink);background:rgba(255,253,246,.94);
+  box-shadow:0 5px 0 var(--shadow);
+}
+.brand-line{margin:0;color:var(--red-dark);font-size:15px;font-weight:900;letter-spacing:.12em}
+.presentation-header h1{margin:2px 0 0;font-size:clamp(24px,3.2vw,42px);line-height:1.06}
+.header-actions{grid-row:1 / span 2;grid-column:2;display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.header-control{
+  min-width:116px;min-height:48px;padding:9px 16px;border:3px solid var(--ink);border-radius:14px;
+  background:var(--paper);color:var(--ink);font-weight:900;text-decoration:none;text-align:center;
+  box-shadow:0 4px 0 var(--ink);cursor:pointer;
+}
+.header-control.exit{background:var(--ink);color:#fff}
+.header-control:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+
+.presentation-shell{width:min(1240px,calc(100% - 36px));margin:clamp(18px,3.5vh,38px) auto}
+.presentation-stage{
+  position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,.7fr);gap:clamp(18px,3vw,34px);
+  min-height:min(600px,calc(100svh - 230px));padding:clamp(24px,4vw,54px);overflow:hidden;
+  border:5px solid var(--ink);border-radius:34px;background:var(--paper);box-shadow:10px 12px 0 var(--shadow);
+  transition:opacity .18s ease,transform .18s ease;
+}
+.presentation-stage::before{
+  content:"";position:absolute;inset:0 0 auto;height:22px;border-bottom:4px solid var(--ink);
+  background:repeating-linear-gradient(90deg,var(--red) 0 54px,#FFF1D3 54px 108px);
+}
+.lesson-panel{align-self:center;min-width:0;padding-top:16px}
+.step-meta{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.step-progress{
+  display:inline-flex;align-items:center;min-height:44px;padding:6px 16px;border:3px solid var(--ink);border-radius:999px;
+  background:var(--mustard);font-size:18px;font-weight:900;white-space:nowrap;
+}
+.step-eyebrow{margin:0;color:var(--red-dark);font-size:clamp(17px,2vw,24px);font-weight:900;letter-spacing:.05em}
+.step-title{
+  max-width:18ch;margin:0;font-size:clamp(42px,6.2vw,80px);line-height:1.08;overflow-wrap:anywhere;
+  color:var(--ink);text-wrap:balance;
+}
+.step-prompt{max-width:34em;margin:24px 0 0;font-size:clamp(22px,2.7vw,34px);font-weight:750;line-height:1.45;text-wrap:pretty}
+.teacher-hint{
+  margin:26px 0 0;padding:18px 22px;border:3px dashed var(--blue);border-radius:18px;
+  background:#EEF8FC;color:#244A60;font-size:clamp(18px,2vw,25px);font-weight:800;
+}
+.teacher-hint strong{display:block;margin-bottom:3px;color:var(--blue);font-size:15px;letter-spacing:.12em}
+
+.teacher-board{
+  align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:26px;
+  border:4px solid var(--ink);border-radius:24px;background:linear-gradient(155deg,#325E50,#24483F);color:#FFFDF6;
+  box-shadow:inset 0 0 0 7px rgba(255,255,255,.08),6px 7px 0 var(--ink);
+}
+.board-kicker{margin:0 0 12px;color:#FFE2A1;font-size:15px;font-weight:900;letter-spacing:.14em}
+.teacher-board h2{margin:0;font-size:clamp(28px,3.1vw,42px);line-height:1.12}
+.teacher-board ol{display:grid;gap:14px;margin:22px 0 0;padding:0;list-style:none;counter-reset:cue}
+.teacher-board li{display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:center;font-size:clamp(18px,2vw,24px);font-weight:800}
+.teacher-board li::before{
+  counter-increment:cue;content:counter(cue);display:grid;place-items:center;width:36px;height:36px;
+  border:2px solid #FFFDF6;border-radius:50%;color:#FFE2A1;
+}
+.shortcut-card{padding-top:18px;border-top:2px dashed rgba(255,255,255,.55)}
+.shortcut-card p{margin:0 0 8px;font-size:15px;font-weight:800}
+.shortcut-row{display:flex;gap:7px;flex-wrap:wrap}
+kbd{min-width:32px;padding:3px 8px;border:2px solid #FFFDF6;border-radius:7px;background:rgba(0,0,0,.16);font:800 14px/1.5 inherit;text-align:center}
+
+.status-strip{display:flex;justify-content:space-between;gap:16px;min-height:32px;margin:14px 8px 0;color:#5C4439;font-size:16px;font-weight:800}
+.status-strip p{margin:0}
+
+.control-dock{
+  position:fixed;z-index:20;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);
+  display:grid;grid-template-columns:repeat(4,minmax(124px,1fr));gap:10px;width:min(760px,calc(100% - 24px));
+  padding:11px;border:4px solid var(--ink);border-radius:22px;background:rgba(255,253,246,.97);box-shadow:0 8px 24px rgba(60,41,34,.24);
+}
+.dock-control{
+  min-height:58px;padding:9px 14px;border:3px solid var(--ink);border-radius:14px;background:var(--paper);
+  color:var(--ink);font-size:18px;font-weight:900;box-shadow:0 4px 0 var(--ink);cursor:pointer;
+}
+.dock-control.audio{background:var(--mustard)}
+.dock-control.hint{background:#DCEEF5}
+.dock-control.next{background:var(--red);color:#fff}
+.dock-control:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+
+noscript{display:block;margin:24px auto;width:min(760px,calc(100% - 36px));padding:16px;border:3px solid var(--ink);border-radius:16px;background:var(--paper);font-weight:800;text-align:center}
+noscript a{color:var(--red-dark)}
+
+@media (max-width:820px){
+  body{padding-bottom:calc(176px + env(safe-area-inset-bottom))}
+  .presentation-header{grid-template-columns:1fr}
+  .header-actions{grid-row:auto;grid-column:auto;justify-content:flex-start}
+  .presentation-stage{grid-template-columns:1fr;min-height:auto}
+  .teacher-board{display:grid;grid-template-columns:1fr auto;align-items:end}
+  .shortcut-card{padding:0 0 0 18px;border-top:0;border-left:2px dashed rgba(255,255,255,.55)}
+  .control-dock{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  body{padding-bottom:calc(192px + env(safe-area-inset-bottom))}
+  .presentation-header{padding:14px 16px}
+  .header-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .header-control{min-width:0;min-height:48px}
+  .presentation-shell{width:calc(100% - 24px);margin:16px auto}
+  .presentation-stage{padding:30px 20px 24px;border-width:4px;border-radius:24px;box-shadow:6px 7px 0 var(--shadow)}
+  .step-title{font-size:clamp(36px,12vw,56px)}
+  .step-prompt{font-size:21px}
+  .teacher-board{display:block;padding:22px}
+  .shortcut-card{margin-top:20px;padding:16px 0 0;border-left:0;border-top:2px dashed rgba(255,255,255,.55)}
+  .status-strip{display:block;margin-inline:2px}.status-strip p{min-height:24px}
+  .control-dock{bottom:max(8px,env(safe-area-inset-bottom));gap:8px;width:calc(100% - 16px);padding:8px;border-radius:18px}
+  .dock-control{min-height:54px;padding:7px 8px;font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:0s!important}
+  #presentationStage{transition:none}
+}
+</style>
+</head>
+<body data-classroom-presentation>
+<header class="presentation-header">
+  <div>
+    <p class="brand-line">灿然英语 · 公开课堂投屏</p>
+    <h1>Lesson 49 · 肉店大冒险</h1>
+  </div>
+  <div class="header-actions" aria-label="投屏模式">
+    <button class="header-control" id="fullscreenControl" type="button" data-presentation-control="fullscreen" aria-pressed="false">进入全屏</button>
+    <a class="header-control exit" id="exitPresentation" href="/lesson49/" data-presentation-control="exit">退出投屏</a>
+  </div>
+</header>
+
+<main class="presentation-shell">
+  <section class="presentation-stage" id="presentationStage" aria-labelledby="stepTitle">
+    <div class="lesson-panel">
+      <div class="step-meta">
+        <span class="step-progress" id="presentationProgress" aria-live="polite">第 1 / 5 步</span>
+        <p class="step-eyebrow" id="stepEyebrow"></p>
+      </div>
+      <h2 class="step-title" id="stepTitle" tabindex="-1"></h2>
+      <p class="step-prompt" id="stepPrompt"></p>
+      <aside class="teacher-hint" id="teacherHint" hidden>
+        <strong>教师提示</strong>
+        <span id="teacherHintCopy"></span>
+      </aside>
+    </div>
+
+    <aside class="teacher-board" aria-label="课堂节奏">
+      <div>
+        <p class="board-kicker">CLASS RHYTHM</p>
+        <h2>一听 · 二说 · 三回应</h2>
+        <ol>
+          <li>点击播放</li>
+          <li>全班跟读</li>
+          <li>完成小回应</li>
+        </ol>
+      </div>
+      <div class="shortcut-card" aria-label="键盘快捷键">
+        <p>键盘快捷键</p>
+        <div class="shortcut-row"><kbd>←</kbd><kbd>→</kbd><kbd>H</kbd><kbd>F</kbd><kbd>空格</kbd></div>
+      </div>
+    </aside>
+  </section>
+  <div class="status-strip" aria-live="polite">
+    <p id="audioStatus"></p>
+    <p id="modeStatus"></p>
+  </div>
+</main>
+
+<nav class="control-dock" aria-label="课堂投屏控制">
+  <button class="dock-control" id="previousControl" type="button" data-presentation-control="previous">上一步</button>
+  <button class="dock-control audio" id="audioControl" type="button" data-presentation-control="audio">播放录音</button>
+  <button class="dock-control hint" id="hintControl" type="button" data-presentation-control="hint" aria-expanded="false" aria-controls="teacherHint">显示提示</button>
+  <button class="dock-control next" id="nextControl" type="button" data-presentation-control="next">下一步</button>
+</nav>
+
+<noscript>投屏控制需要开启浏览器脚本。你仍可以<a href="/lesson49/">返回 Lesson 49</a>。</noscript>
+
+<script src="/core/course-catalog.js"></script>
+<script src="/core/audio-player.js"></script>
+<script src="/core/classroom-presentation.js"></script>
+<script>
+const CLASSROOM_COURSE=CanranCore.courseCatalog.requirePublishedCourse('lesson49');
+CanranCore.classroomPresentation.mount({
+  course:CLASSROOM_COURSE,
+  audioPlayer:CanranCore.audio.createAudioPlayer()
+});
+</script>
+</body>
+</html>

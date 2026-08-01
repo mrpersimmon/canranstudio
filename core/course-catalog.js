@@ -43,6 +43,7 @@
 
   const LESSON_STAGE_IDS = ['l1', 'l2', 'l3', 'l4', 'l5'];
   const SOUND_STAGE_IDS = ['vs', 'g1', 'g2', 'g3'];
+  const PRESENTATION_CONTROLS = ['fullscreen', 'audio', 'hint', 'previous', 'next', 'exit'];
   const DISTRICTS = deepFreeze([
     { id: 'first-book-1-12', order: 1, title: '晨光原野', lessonStart: 1, lessonEnd: 12, v1Accessible: false },
     { id: 'first-book-13-24', order: 2, title: '回声溪谷', lessonStart: 13, lessonEnd: 24, v1Accessible: false },
@@ -98,6 +99,31 @@
     });
   }
 
+  function createClassroomPresentation(id, {
+    declaredStatus = 'not-ready',
+    steps = [],
+    regressionTest = null
+  } = {}) {
+    if (declaredStatus !== 'published') {
+      return deepFreeze({
+        declaredStatus: 'not-ready',
+        route: null,
+        entry: null,
+        controls: [],
+        steps: [],
+        regressionTest: null
+      });
+    }
+    return deepFreeze({
+      declaredStatus,
+      route: `/${id}/present/`,
+      entry: `${id}/present/index.html`,
+      controls: [...PRESENTATION_CONTROLS],
+      steps: steps.map(step => ({ ...step })),
+      regressionTest
+    });
+  }
+
   function publishedLesson({
     lesson,
     title,
@@ -109,7 +135,8 @@
     legacyKey,
     legacyMode,
     souvenir = null,
-    mapPublication = {}
+    mapPublication = {},
+    presentationPublication = {}
   }) {
     const id = `lesson${lesson}`;
     const progress = {
@@ -135,7 +162,8 @@
       art,
       tone,
       progress,
-      map: createLessonMap(lesson, { souvenir, ...mapPublication })
+      map: createLessonMap(lesson, { souvenir, ...mapPublication }),
+      presentation: createClassroomPresentation(id, presentationPublication)
     };
   }
 
@@ -156,7 +184,8 @@
       art: null,
       tone: 'soon',
       progress: null,
-      map: createLessonMap(lesson)
+      map: createLessonMap(lesson),
+      presentation: createClassroomPresentation(`lesson${lesson}`)
     };
   }
 
@@ -184,6 +213,57 @@
         )),
         mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
         regressionTest: 'tests/e2e/lesson49-map.spec.js'
+      },
+      presentationPublication: {
+        declaredStatus: 'published',
+        regressionTest: 'tests/e2e/classroom-presentation.spec.js',
+        steps: [
+          {
+            id: 'welcome',
+            eyebrow: '开场 · 进入肉店',
+            title: "Welcome to the butcher's!",
+            prompt: '今天我们一起当肉店小帮手。先听一听店里的主人是谁。',
+            hint: '邀请全班看着屏幕，一起指向肉店老板，再跟读两遍。',
+            audioText: 'butcher',
+            audioAsset: 'lesson49/audio/butcher.mp3'
+          },
+          {
+            id: 'vocabulary',
+            eyebrow: '词汇 · 看图跟读',
+            title: 'beef',
+            prompt: '听清长音 /iː/，再请全班用响亮声音跟读。',
+            hint: '可以让孩子用手比出一块牛肉的大小，再一起说 beef。',
+            audioText: 'beef',
+            audioAsset: 'lesson49/audio/beef.mp3'
+          },
+          {
+            id: 'dialogue',
+            eyebrow: '对话 · 老板开口',
+            title: 'Do you want any meat today, Mrs. Bird?',
+            prompt: '先完整听一句，再分成 Do you want / any meat / today 三段跟读。',
+            hint: '老师扮演老板，全班扮演 Mrs. Bird；听完后用 Yes, please 回答。',
+            audioText: 'Do you want any meat today, Mrs. Bird?',
+            audioAsset: 'lesson49/audio/do_you_want_any_meat_today_mrs_bird.mp3'
+          },
+          {
+            id: 'grammar',
+            eyebrow: '句型 · Do 还是 Are',
+            title: 'Are you a teacher?',
+            prompt: '观察 teacher 是身份，不是动作，所以句首要用 Are。',
+            hint: '把 teacher 换成 student，让全班两人一组互相问答。',
+            audioText: 'Are you a teacher?',
+            audioAsset: 'lesson49/audio/are_you_a_teacher.mp3'
+          },
+          {
+            id: 'recap',
+            eyebrow: '收尾 · 真心话挑战',
+            title: "To tell you the truth, Mrs. Bird, I don't like chicken either.",
+            prompt: '听出老板的真心话，再一起找出表示“也不”的单词。',
+            hint: '答案是 either。请全班用 I don\'t like … either 说一个自己的例句。',
+            audioText: "To tell you the truth, Mrs. Bird, I don't like chicken either.",
+            audioAsset: 'lesson49/audio/to_tell_you_the_truth_mrs_bird_i_don_t_like_chicken_either.mp3'
+          }
+        ]
       }
     }),
     publishedLesson({
@@ -264,7 +344,8 @@
         souvenir: null,
         mobilePreview: null,
         regressionTest: null
-      }
+      },
+      presentation: createClassroomPresentation('soundmark')
     }
   ]);
 
@@ -276,6 +357,9 @@
   );
   const MAP_COURSES = deepFreeze(
     COURSES.filter(course => course.kind === 'lesson' && course.map.v1Visible)
+  );
+  const PRESENTATION_COURSES = deepFreeze(
+    COURSES.filter(course => course.presentation.declaredStatus === 'published')
   );
 
   function requirePublishedCourse(id) {
@@ -354,6 +438,63 @@
       map.souvenir === null &&
       map.mobilePreview === null &&
       map.regressionTest === null;
+  }
+
+  function assessClassroomPresentation(course) {
+    if (!course?.presentation || course.presentation.declaredStatus !== 'published') {
+      return deepFreeze({
+        status: 'not-ready',
+        route: null,
+        checklist: null,
+        missing: []
+      });
+    }
+    const presentation = course.presentation;
+    const steps = Array.isArray(presentation.steps) ? presentation.steps : [];
+    const stepIds = steps.map(step => step?.id);
+    const checklist = {
+      publicPage: course.courseStatus === 'published' &&
+        presentation.route === `${course.route}present/` &&
+        presentation.entry === `${course.id}/present/index.html` &&
+        isRelativePublicPath(presentation.entry),
+      completeControls: Array.isArray(presentation.controls) &&
+        presentation.controls.length === PRESENTATION_CONTROLS.length &&
+        presentation.controls.every((control, index) => control === PRESENTATION_CONTROLS[index]),
+      teachingSteps: steps.length === 5 &&
+        new Set(stepIds).size === steps.length &&
+        steps.every(step => (
+          typeof step?.id === 'string' && /^[a-z0-9-]+$/.test(step.id) &&
+          ['eyebrow', 'title', 'prompt', 'hint', 'audioText']
+            .every(field => typeof step[field] === 'string' && step[field].trim())
+        )),
+      prerecordedAudio: course.courseStatus === 'published' &&
+        Array.isArray(course.assetDirectories) &&
+        course.assetDirectories.includes(`${course.id}/audio`) &&
+        steps.length > 0 && steps.every(step => (
+          isRelativePublicPath(step?.audioAsset) &&
+          step.audioAsset.startsWith(`${course.id}/audio/`) &&
+          step.audioAsset.toLowerCase().endsWith('.mp3')
+        )),
+      regressionVerification: isRegressionTestPath(presentation.regressionTest)
+    };
+    const missing = Object.entries(checklist)
+      .filter(([, complete]) => !complete)
+      .map(([item]) => item);
+    return deepFreeze({
+      status: missing.length === 0 ? 'published' : 'not-ready',
+      route: missing.length === 0 ? presentation.route : null,
+      checklist,
+      missing
+    });
+  }
+
+  function hasNotReadyPresentationContract(presentation) {
+    return presentation?.declaredStatus === 'not-ready' &&
+      presentation.route === null &&
+      presentation.entry === null &&
+      Array.isArray(presentation.controls) && presentation.controls.length === 0 &&
+      Array.isArray(presentation.steps) && presentation.steps.length === 0 &&
+      presentation.regressionTest === null;
   }
 
   function validateCatalog(courses) {
@@ -477,6 +618,17 @@
       } else if (!hasNotApplicableMapContract(course.map)) {
         errors.push(`${id}: special course map must be not-applicable`);
       }
+
+      if (!course.presentation || typeof course.presentation !== 'object') {
+        errors.push(`${id}: classroom presentation contract is required`);
+      } else if (course.presentation.declaredStatus === 'published') {
+        const assessment = assessClassroomPresentation(course);
+        if (assessment.status !== 'published') {
+          errors.push(`${id}: published presentation contract missing ${assessment.missing.join(', ')}`);
+        }
+      } else if (!hasNotReadyPresentationContract(course.presentation)) {
+        errors.push(`${id}: classroom presentation must be published or not-ready`);
+      }
     });
 
     return Object.freeze(errors);
@@ -499,9 +651,11 @@
     PUBLISHED_COURSES,
     HOME_COURSES,
     MAP_COURSES,
+    PRESENTATION_COURSES,
     createLessonMap,
     requirePublishedCourse,
     assessLearningLocation,
+    assessClassroomPresentation,
     directoryMapStatus,
     validateCatalog,
     assertValidCatalog

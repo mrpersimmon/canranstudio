@@ -450,6 +450,67 @@ async function assertCoursePageContract(root, course) {
   if (catalog.directoryMapStatus(course) === 'v2' && !hasDeclaredV2MapNotice(source)) {
     throw new Error(`${course.id}: direct course page must say its map will arrive in V2`);
   }
+  if (course.presentation?.declaredStatus === 'published' &&
+    !new RegExp(`href\\s*=\\s*["']${escapeRegExp(course.presentation.route)}["']`).test(source)) {
+    throw new Error(`${course.id}: course page must link its classroom presentation`);
+  }
+}
+
+function hasRequiredPresentationControl(markup, control) {
+  const pattern = new RegExp(
+    `<(?:a|button)\\b[^>]*\\bdata-presentation-control\\s*=\\s*["']${escapeRegExp(control)}["'][^>]*>`,
+    'gi'
+  );
+  return [...markup.matchAll(pattern)].length === 1;
+}
+
+async function assertClassroomPresentationContract(root, course) {
+  const presentation = course.presentation;
+  const source = await fs.readFile(resolvePublicPath(root, presentation.entry), 'utf8');
+  const requiredScripts = [
+    '/core/course-catalog.js',
+    '/core/audio-player.js',
+    '/core/classroom-presentation.js'
+  ];
+  for (const script of requiredScripts) {
+    if (!new RegExp(`<script\\b[^>]*\\bsrc\\s*=\\s*["']${escapeRegExp(script)}["'][^>]*>`, 'i').test(source)) {
+      throw new Error(`${course.id}: classroom presentation must load ${script}`);
+    }
+  }
+  if (!new RegExp(
+    `CanranCore\\.courseCatalog\\.requirePublishedCourse\\(\\s*["']${escapeRegExp(course.id)}["']\\s*\\)`
+  ).test(source) || !source.includes('CanranCore.classroomPresentation.mount')) {
+    throw new Error(`${course.id}: classroom presentation must resolve its shared catalog contract`);
+  }
+  if (/\b(?:localStorage|sessionStorage|indexedDB)\b|\/core\/(?:storage|device-profile)\.js|\b(?:fetch|XMLHttpRequest|sendBeacon)\s*\(/.test(source)) {
+    throw new Error(`${course.id}: classroom presentation must not read device data or request services`);
+  }
+  const markup = source
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ');
+  for (const control of presentation.controls) {
+    if (!hasRequiredPresentationControl(markup, control)) {
+      throw new Error(`${course.id}: classroom presentation missing ${control} control`);
+    }
+  }
+  const exitTag = markup.match(/<a\b[^>]*\bdata-presentation-control\s*=\s*["']exit["'][^>]*>/i)?.[0] || '';
+  const exitHref = exitTag.match(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+  if ((exitHref?.[1] ?? exitHref?.[2]) !== course.route) {
+    throw new Error(`${course.id}: classroom presentation exit must return to its course`);
+  }
+  for (const step of presentation.steps) {
+    const { file, stat } = await requireRegularFile(root, step.audioAsset, course.id);
+    if (!await hasCompleteMp3Frame(file, stat)) {
+      throw new Error(`${course.id}: invalid presentation MP3 file ${step.audioAsset}`);
+    }
+  }
+  await assertRegressionSpec(root, presentation.regressionTest, course.id);
+
+  const runtime = await fs.readFile(resolvePublicPath(root, 'core/classroom-presentation.js'), 'utf8');
+  if (/\b(?:localStorage|sessionStorage|indexedDB)\b|\b(?:fetch|XMLHttpRequest|sendBeacon)\s*\(/.test(runtime)) {
+    throw new Error(`${course.id}: classroom presentation runtime must remain device-data free`);
+  }
 }
 
 function publishedMapImages(course) {
@@ -486,6 +547,11 @@ async function assertCourseCatalogContract({
         course.map.regressionTest,
         course.id
       );
+    }
+    if (course.presentation.declaredStatus === 'published') {
+      await requireRegularFile(resolvedRoot, course.presentation.entry, course.id);
+      await requireRegularFile(resolvedRoot, 'core/classroom-presentation.js', course.id);
+      await assertClassroomPresentationContract(resolvedRoot, course);
     }
   }
 
