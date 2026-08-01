@@ -47,6 +47,12 @@ test('presentation controls advance, reveal hints, manage focus, and support key
   await expect(page.locator('#presentationProgress')).toHaveText('第 3 / 5 步');
   await page.locator('#previousControl').click();
   await expect(page.locator('#presentationProgress')).toHaveText('第 2 / 5 步');
+
+  await page.locator('#hintControl').click();
+  await expect(page.locator('#hintControl')).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('#presentationProgress')).toHaveText('第 3 / 5 步');
+  await expect(page.locator('#stepTitle')).toBeFocused();
 });
 
 test('presentation audio waits for a user gesture, replays same-origin recording, and never blocks next', async ({ page }) => {
@@ -119,14 +125,17 @@ test('fullscreen toggles through its public control', async ({ page }) => {
       fullscreenElement = null;
       document.dispatchEvent(new Event('fullscreenchange'));
     };
+    window.__leavePresentationFullscreen = document.exitFullscreen;
   });
   await page.goto('/lesson49/present/');
 
   const fullscreen = page.locator('#fullscreenControl');
   await fullscreen.click();
   await expect(fullscreen).toHaveText(/退出全屏/);
-  await fullscreen.click();
+  await expect(page.locator('#modeStatus')).toHaveText('已进入全屏投屏。');
+  await page.evaluate(() => window.__leavePresentationFullscreen());
   await expect(fullscreen).toHaveText(/进入全屏/);
+  await expect(page.locator('#modeStatus')).toHaveText('已退出全屏，页面仍可继续投屏。');
 });
 
 test('presentation never reads device storage or renders personal learning data', async ({ page }) => {

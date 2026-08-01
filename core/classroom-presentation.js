@@ -120,9 +120,11 @@
 
     function renderFullscreenState() {
       const active = Boolean(fullscreenElement());
+      const wasActive = fullscreen.getAttribute('aria-pressed') === 'true';
       fullscreen.textContent = active ? '退出全屏' : '进入全屏';
       fullscreen.setAttribute('aria-pressed', String(active));
       if (active) modeStatus.textContent = '已进入全屏投屏。';
+      else if (wasActive) modeStatus.textContent = '已退出全屏，页面仍可继续投屏。';
     }
 
     async function toggleFullscreen() {
@@ -156,7 +158,7 @@
     view.addEventListener('pagehide', stopAudio, { once: true });
     documentRef.addEventListener('keydown', event => {
       if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-      if (event.target.closest?.('button, a, input, textarea, select')) return;
+      if (event.target.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return;
       if (event.key === 'ArrowRight') {
         event.preventDefault();
         move(1);
@@ -169,7 +171,7 @@
       } else if (event.key.toLowerCase() === 'f') {
         event.preventDefault();
         toggleFullscreen();
-      } else if (event.key === ' ') {
+      } else if (event.key === ' ' && !event.target.closest?.('button, a')) {
         event.preventDefault();
         playAudio();
       }

@@ -80,6 +80,7 @@ test('authored fallback guard recognizes browser-parsed course href variants', (
     '<a href = "/lesson61/">future</a>',
     '<a\n href=/lesson61/>future</a>',
     '<a href="&#47;lesson61&#47;">future</a>',
+    '<a href="&#47lesson61&#47">future</a>',
     '<a href="&sol;lesson61&sol;">future</a>',
     '<a title="x>y" href="/lesson61/">future</a>'
   ];

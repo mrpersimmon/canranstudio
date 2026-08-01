@@ -59,7 +59,31 @@ async function isPerceivableInViewport(locator) {
     for (const entry of pointerEvents) {
       entry.candidate.style.setProperty('pointer-events', 'auto', 'important');
     }
+
+    const pseudoPointerRules = [];
+    function exposePseudoElements(rules) {
+      for (const rule of rules) {
+        if (rule.cssRules) exposePseudoElements(rule.cssRules);
+        if (typeof rule.selectorText !== 'string' || !/::(?:before|after)\b/i.test(rule.selectorText)) continue;
+        pseudoPointerRules.push({
+          rule,
+          value: rule.style.getPropertyValue('pointer-events'),
+          priority: rule.style.getPropertyPriority('pointer-events')
+        });
+        rule.style.setProperty('pointer-events', 'auto', 'important');
+      }
+    }
+    let inaccessibleStyleSheet = false;
+    for (const sheet of document.styleSheets) {
+      try {
+        exposePseudoElements(sheet.cssRules);
+      } catch {
+        inaccessibleStyleSheet = true;
+      }
+    }
     try {
+      // Public pages use same-origin styles; an inaccessible sheet cannot prove visibility.
+      if (inaccessibleStyleSheet) return false;
       return points.some(([x, y]) => {
         const hit = document.elementFromPoint(x, y);
         return hit === element || element.contains(hit);
@@ -70,6 +94,13 @@ async function isPerceivableInViewport(locator) {
           entry.candidate.style.setProperty('pointer-events', entry.value, entry.priority);
         } else {
           entry.candidate.style.removeProperty('pointer-events');
+        }
+      }
+      for (const entry of pseudoPointerRules) {
+        if (entry.value) {
+          entry.rule.style.setProperty('pointer-events', entry.value, entry.priority);
+        } else {
+          entry.rule.style.removeProperty('pointer-events');
         }
       }
     }
@@ -240,6 +271,7 @@ test('browser visibility rejects V2 notices hidden by their context or computed 
     '<p data-course-map-status="v2" style="position:absolute;clip:rect(0,0,0,0)">地图将在 V2 到来</p>',
     '<p data-course-map-status="v2" style="clip-path:inset(50%)">地图将在 V2 到来</p>',
     '<p data-course-map-status="v2">地图将在 V2 到来</p><div style="position:fixed;inset:0;background:#111;z-index:999;pointer-events:none"></div>',
+    '<style>body::before{content:"";position:fixed;inset:0;background:#111;z-index:999;pointer-events:none}</style><p data-course-map-status="v2">地图将在 V2 到来</p>',
     '<style>@media(max-width:420px){[data-course-map-status="v2"]{display:none}}</style><p data-course-map-status="v2">地图将在 V2 到来</p>'
   ];
   for (const markup of hiddenFixtures) {

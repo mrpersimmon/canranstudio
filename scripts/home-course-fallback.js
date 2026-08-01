@@ -51,20 +51,19 @@ function withoutGeneratedFallback(source) {
 }
 
 function decodeHtmlAttribute(value) {
-  return value.replace(/&(?:#(\d+)|#x([a-f0-9]+)|(amp|quot|apos|lt|gt|sol));/gi, entity => {
-    const decimal = /^&#(\d+);$/i.exec(entity);
-    if (decimal) return String.fromCodePoint(Number(decimal[1]));
-    const hexadecimal = /^&#x([a-f0-9]+);$/i.exec(entity);
-    if (hexadecimal) return String.fromCodePoint(Number.parseInt(hexadecimal[1], 16));
-    return {
-      '&amp;': '&',
-      '&quot;': '"',
-      '&apos;': "'",
-      '&lt;': '<',
-      '&gt;': '>',
-      '&sol;': '/'
-    }[entity.toLowerCase()] || entity;
-  });
+  return value.replace(/&#(\d+);?|&#x([a-f0-9]+);?|&(amp|quot|apos|lt|gt|sol);/gi,
+    (entity, decimal, hexadecimal) => {
+      if (decimal) return String.fromCodePoint(Number(decimal));
+      if (hexadecimal) return String.fromCodePoint(Number.parseInt(hexadecimal, 16));
+      return {
+        '&amp;': '&',
+        '&quot;': '"',
+        '&apos;': "'",
+        '&lt;': '<',
+        '&gt;': '>',
+        '&sol;': '/'
+      }[entity.toLowerCase()] || entity;
+    });
 }
 
 function tagEnd(source, start) {
