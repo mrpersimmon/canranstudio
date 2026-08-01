@@ -22,7 +22,7 @@ test('home exposes one shared device profile without identity controls', async (
   const profile = await page.evaluate(() =>
     JSON.parse(localStorage.getItem('canran:adventure-profile:v1'))
   );
-  expect(profile.completedStages.lesson49).toEqual(['l1']);
+  expect(profile.completedStages.lesson49).toEqual(['l1', 'l2']);
 });
 
 test('restart requires two confirmations, cancellation is safe, and old progress cannot return', async ({ page }) => {
@@ -89,5 +89,41 @@ test('blocked browser storage keeps the public course experience usable', async 
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
     '这次进度只能暂时显示，关闭页面后可能不会保留。'
   );
+  expect(pageErrors).toEqual([]);
+});
+
+test('readable but unwritable browser storage stays usable with neutral feedback', async ({ page }) => {
+  await page.addInitScript(() => {
+    const rejectWrite = () => {
+      throw new DOMException('Storage writes are blocked', 'QuotaExceededError');
+    };
+    Object.defineProperty(Storage.prototype, 'setItem', {
+      configurable: true,
+      value: rejectWrite
+    });
+    Object.defineProperty(Storage.prototype, 'removeItem', {
+      configurable: true,
+      value: rejectWrite
+    });
+  });
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+
+  await page.goto('/');
+  await expect(page.locator('#lessonStations')).toBeVisible();
+  await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
+  await expect(page.locator('#deviceStorageStatus')).toHaveText(
+    '这次进度只能暂时显示，关闭页面后可能不会保留。'
+  );
+
+  await page.getByRole('button', { name: '重开冒险', exact: true }).click();
+  await page.getByRole('button', { name: '继续确认', exact: true }).click();
+  await page.getByRole('button', { name: '确认重开', exact: true }).click();
+
+  await expect(page.locator('#deviceStorageStatus')).toHaveText(
+    '这次进度只能暂时显示，关闭页面后可能不会保留。'
+  );
+  await expect(page.getByRole('button', { name: '重开冒险', exact: true })).toBeFocused();
+  await expect(page.locator('#lessonStations')).toBeVisible();
   expect(pageErrors).toEqual([]);
 });

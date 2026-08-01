@@ -9,6 +9,27 @@ const {
   restartAdventure
 } = require('../../core/device-profile');
 
+const EMPTY_COMPLETED_STAGES = Object.freeze({
+  lesson49: [],
+  lesson50: [],
+  lesson51: [],
+  lesson52: [],
+  lesson53: [],
+  lesson54: [],
+  lesson55: [],
+  lesson56: [],
+  lesson57: [],
+  lesson58: [],
+  lesson59: [],
+  lesson60: []
+});
+
+function emptyCompletedStages() {
+  return Object.fromEntries(
+    Object.entries(EMPTY_COMPLETED_STAGES).map(([courseId, stages]) => [courseId, [...stages]])
+  );
+}
+
 function memoryStorage(seed = {}) {
   const data = new Map(Object.entries(seed));
   return {
@@ -29,7 +50,7 @@ test('first device profile initialization inherits only proven stages and is ide
   const storage = memoryStorage({
     'canran:l49:progress:v2': JSON.stringify({
       version: 2,
-      ratings: { l1: 3, l2: 2, l3: 3, l4: 0, l5: 3 }
+      ratings: { l1: 3, l2: 2, l3: 1, l4: 0, l5: 3 }
     })
   });
 
@@ -41,18 +62,8 @@ test('first device profile initialization inherits only proven stages and is ide
   assert.deepEqual(first.profile, {
     version: 1,
     completedStages: {
-      lesson49: ['l1', 'l3', 'l5'],
-      lesson50: [],
-      lesson51: [],
-      lesson52: [],
-      lesson53: [],
-      lesson54: [],
-      lesson55: [],
-      lesson56: [],
-      lesson57: [],
-      lesson58: [],
-      lesson59: [],
-      lesson60: []
+      ...emptyCompletedStages(),
+      lesson49: ['l1', 'l2', 'l3', 'l5']
     }
   });
   assert.equal(storage.getItem(PROFILE_KEY), firstStored);
@@ -85,18 +96,7 @@ test('restart clears every catalog-owned record and preserves unrelated storage'
   assert.deepEqual(JSON.parse(storage.getItem(PROFILE_KEY)), {
     version: 1,
     completedStages: {
-      lesson49: [],
-      lesson50: [],
-      lesson51: [],
-      lesson52: [],
-      lesson53: [],
-      lesson54: [],
-      lesson55: [],
-      lesson56: [],
-      lesson57: [],
-      lesson58: [],
-      lesson59: [],
-      lesson60: []
+      ...emptyCompletedStages()
     }
   });
   assert.equal(storage.getItem('canran:l49:progress:v2'), null);
@@ -115,7 +115,7 @@ test('legacy and corrupt course records initialize without inventing completed s
 
   const result = initializeDeviceProfile({ storage, courses: catalog.COURSES });
 
-  assert.deepEqual(result.profile.completedStages.lesson49, ['l1']);
+  assert.deepEqual(result.profile.completedStages.lesson49, ['l1', 'l3']);
   assert.deepEqual(result.profile.completedStages.lesson50, []);
   assert.equal(storage.getItem('l49-stars-v1'), null);
   assert.deepEqual(

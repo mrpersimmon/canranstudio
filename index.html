@@ -595,7 +595,7 @@ confirmRestart.addEventListener('click',()=>{
     window.location.reload();
     return;
   }
-  document.getElementById('deviceStorageStatus').textContent='这次无法清除设备进度，请检查浏览器存储设置后再试。';
+  document.getElementById('deviceStorageStatus').textContent='这次进度只能暂时显示，关闭页面后可能不会保留。';
   resetRestartFlow();
   beginRestart.focus();
 });

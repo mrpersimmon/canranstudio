@@ -68,7 +68,7 @@
   function mergeProvenStages(profile, course, progress) {
     const completed = new Set(profile.completedStages[course.id] || []);
     for (const id of stageIds(course)) {
-      if (progress?.ratings?.[id] === 3) completed.add(id);
+      if (progress?.ratings?.[id] > 0) completed.add(id);
     }
     profile.completedStages[course.id] = stageIds(course)
       .filter(id => completed.has(id));
@@ -146,10 +146,7 @@
   return Object.freeze({
     PROFILE_VERSION,
     PROFILE_KEY,
-    emptyDeviceProfile,
-    normalizeDeviceProfile,
     initializeDeviceProfile,
-    ownedStorageKeys,
     restartAdventure
   });
 });
