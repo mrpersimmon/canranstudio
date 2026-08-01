@@ -46,5 +46,9 @@ Lesson while the V1 map remains limited to Lesson 49–60.
 
 See `docs/classroom-presentation.md` for the public, device-data-free classroom presentation contract.
 
+See `docs/mobile-release-smoke-checklist.md` for the required real-device WeChat, iPhone Safari,
+and Android Chromium evidence. Those checks remain manual and must not be replaced by desktop
+browser simulation.
+
 Lesson 49 is the first catalog-declared classroom presentation. Its standalone public route uses
 the existing same-origin recordings and deliberately omits device progress and profile runtimes.

@@ -35,20 +35,24 @@ h1,h2,h3{font-weight:800;line-height:1.25}
 button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none}
 button:focus-visible,a:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
 .hidden{display:none !important}
-.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+.wrap{
+  max-width:1080px;margin:0 auto;
+  padding-left:max(18px,env(safe-area-inset-left));
+  padding-right:max(18px,env(safe-area-inset-right));
+}
 
 /* ===== 顶部导航 ===== */
 #topbar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:4px solid var(--brown);box-shadow:0 4px 0 rgba(74,50,38,.12)}
 #topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
 #logo{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:20px;font-weight:800;white-space:nowrap;color:var(--purple-d);text-decoration:none}
 /* ===== 右侧关卡圆点 ===== */
-#sectionDots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:10px}
+#sectionDots{position:fixed;right:max(12px,env(safe-area-inset-right));top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:10px}
 #sectionDots a{width:14px;height:14px;border-radius:50%;border:3px solid var(--brown);background:var(--paper);display:block;transition:transform .2s,background .2s;position:relative}
 #sectionDots a.on{background:var(--purple);transform:scale(1.3)}
 #sectionDots a span{position:absolute;right:24px;top:50%;transform:translateY(-50%);background:var(--brown);color:#fff;font-size:12px;padding:2px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
 #sectionDots a:focus-visible span{opacity:1}
 /* ===== 底部 Tab 栏（移动端优先：上一课/世界地图/下一课） ===== */
-#coursenav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);z-index:60;display:flex;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--paper);border-top:4px solid var(--brown);box-shadow:0 -4px 0 rgba(74,50,38,.12)}
+#coursenav{position:fixed;bottom:0;left:env(safe-area-inset-left);right:env(safe-area-inset-right);width:auto;max-width:560px;margin-inline:auto;z-index:60;display:flex;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--paper);border-top:4px solid var(--brown);box-shadow:0 -4px 0 rgba(74,50,38,.12)}
 #coursenav .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:54px;border-radius:14px;border:2px solid var(--brown);background:var(--cream);color:var(--brown);text-decoration:none;font-weight:800;font-size:13px;line-height:1.25;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 #coursenav .tab .ti{font-size:20px}
 #coursenav .tab small{font-size:11px;font-weight:400;opacity:.7}
@@ -276,7 +280,7 @@ section.lvl{scroll-margin-top:96px;padding:56px 0}
 .cfp{position:absolute;top:-20px;width:14px;height:14px;animation:cfall linear forwards}
 
 footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-bottom));font-weight:700;opacity:.75}
-#topbar{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+#topbar{padding-top:env(safe-area-inset-top)}
 
 /* ===== hover 效果仅对鼠标/触控板生效（根治移动端粘性 hover） ===== */
 @media (hover:hover) and (pointer:fine){

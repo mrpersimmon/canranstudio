@@ -36,7 +36,7 @@ body{
   background-image:radial-gradient(rgba(118,94,74,.13) 1.3px,transparent 1.3px);
   background-size:27px 27px;
   font:500 17px/1.55 'Baloo 2','ZCOOL KuaiLe','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
-  padding-bottom:env(safe-area-inset-bottom);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 button,input{font:inherit;color:inherit}
 button,a{-webkit-tap-highlight-color:transparent}
@@ -265,9 +265,9 @@ button.world-district-card{appearance:none}
 #lessonSearchForm{display:flex;align-items:center;gap:8px;min-width:0}
 #lessonSearchForm label{font-size:14px;font-weight:800;white-space:nowrap}
 #lessonSearch{
-  width:170px;min-height:39px;padding:6px 12px;border:2px solid var(--brown);border-radius:999px;background:#fff;
+  width:170px;min-height:44px;padding:6px 12px;border:2px solid var(--brown);border-radius:999px;background:#fff;
 }
-#lessonSearchForm button{min-height:39px;padding:5px 14px;border:2px solid var(--brown);border-radius:999px;background:var(--yellow);font-weight:800}
+#lessonSearchForm button{min-height:44px;padding:5px 14px;border:2px solid var(--brown);border-radius:999px;background:var(--yellow);font-weight:800}
 .legend{display:flex;align-items:center;justify-content:flex-end;gap:13px;font-size:13px;font-weight:800;white-space:nowrap}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:15px;height:15px;border:2px solid var(--brown);border-radius:50%;background:var(--grey)}
@@ -337,7 +337,11 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
   display:flex;align-items:center;justify-content:center;min-height:46px;margin:2px auto 14px;padding:8px 17px;
   border:3px solid var(--brown);border-radius:999px;background:var(--yellow);font-weight:800;box-shadow:0 4px 0 var(--brown);
 }
-.device-dialog{width:min(520px,calc(100% - 28px));padding:0;border:0;background:transparent;color:var(--brown)}
+.device-dialog{
+  width:min(520px,calc(100% - 28px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  max-height:calc(100dvh - 28px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  padding:0;border:0;background:transparent;color:var(--brown);overflow:auto;
+}
 .device-dialog::backdrop{background:rgba(56,40,31,.62);backdrop-filter:blur(2px)}
 .device-ledger{
   position:relative;padding:34px 30px 30px;border:4px solid var(--brown);border-radius:24px;
@@ -405,13 +409,13 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
   .recommendation-art{width:80px;height:84px;border-radius:14px}
   .recommendation-title{font-size:18px}
   .recommendation-progress{font-size:12px}
-  .recommendation-action{grid-column:1/-1;min-height:42px;width:100%;margin-top:1px}
+  .recommendation-action{grid-column:1/-1;min-height:44px;width:100%;margin-top:1px}
   .district-map{padding:22px 10px 33px}
   .district-locations{grid-template-columns:repeat(2,minmax(0,1fr));gap:21px 8px}
   .map-location{min-height:145px}
   .map-location:nth-child(even){transform:translateY(25px)}
   .drawing-marker{width:70px;height:70px;font-size:21px}
-  .published-marker{width:128px;height:128px}
+  .published-marker{width:146px;height:146px}
   .location-title{max-width:135px;font-size:14px}
   .continue-card,.special-card{grid-template-columns:1fr}
   .continue-art{min-height:190px;border-right:0;border-bottom:3px solid var(--brown);padding:18px}
@@ -421,8 +425,8 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
   .progress-row .primary-action{grid-column:1/-1;width:100%}
   .section-heading{gap:8px;font-size:27px}
   .section-heading::before,.section-heading::after{width:24px}
-  .range-shell{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px}
-  .range-arrow{width:40px;height:40px;font-size:20px}
+  .range-shell{grid-template-columns:44px minmax(0,1fr) 44px;gap:6px}
+  .range-arrow{width:44px;height:44px;font-size:20px}
   #rangeTickets{display:flex;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:4px 2px 10px;scrollbar-width:thin}
   .range-ticket{flex:0 0 104px;min-height:57px;scroll-snap-align:start}
   .route-toolbar{align-items:stretch;flex-direction:column;padding:13px}
@@ -617,6 +621,7 @@ const deviceProfileState=CanranCore.deviceProfile.initializeDeviceProfile({
 const worldOverview=document.getElementById('worldOverview');
 const currentDistrict=document.getElementById('currentDistrict');
 const launchDistrict=CanranCore.courseCatalog.LAUNCH_DISTRICT;
+let districtRendered=false;
 
 function worldDistrictMarkup(district){
   const number=String(district.order).padStart(2,'0');
@@ -703,6 +708,10 @@ function renderAtlas(){
   document.getElementById('districtLocations').setAttribute('aria-label',`${launchDistrict.title}学习地点`);
   document.getElementById('worldDistricts').innerHTML=CanranCore.courseCatalog.DISTRICTS
     .map(worldDistrictMarkup).join('');
+}
+
+function renderCurrentDistrict(){
+  if(districtRendered) return;
   const locations=CanranCore.adventureAtlas.buildLocationModels(
     CanranCore.courseCatalog.MAP_COURSES,
     deviceProfileState.profile
@@ -712,6 +721,7 @@ function renderAtlas(){
   const recommendationHost=document.getElementById('districtRecommendation');
   recommendationHost.hidden=!recommendation;
   recommendationHost.innerHTML=recommendation?recommendationMarkup(recommendation):'';
+  districtRendered=true;
 }
 
 function showWorldOverview({focusEntrance=false}={}){
@@ -721,6 +731,7 @@ function showWorldOverview({focusEntrance=false}={}){
 }
 
 function showCurrentDistrict({focusHeading=false}={}){
+  renderCurrentDistrict();
   worldOverview.hidden=true;
   currentDistrict.hidden=false;
   if(focusHeading) document.getElementById('currentDistrictTitle').focus();

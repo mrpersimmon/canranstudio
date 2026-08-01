@@ -26,6 +26,7 @@ npm run test:e2e -- tests/e2e/certificate-export.spec.js
 npm run test:e2e -- tests/e2e/accessibility.spec.js
 npm run test:e2e -- tests/e2e/local-fonts.spec.js
 npm run test:e2e -- tests/e2e/lesson49-map.spec.js tests/e2e/lesson50-story.spec.js
+npm run test:e2e -- tests/e2e/mobile-release.spec.js
 ```
 
 The browser runtime remains static and package-free. `npm run vendor:fonts` rebuilds the committed
@@ -33,6 +34,11 @@ WOFF2, `fonts.css`, and OFL license copies under `assets/fonts/` from the pinned
 packages; CI rejects a regenerated font directory that differs from the committed assets. The
 focused suites cover certificate eligibility re-checks, Lesson 49 Blob URL cleanup, native modal
 certificate dialogs, polite atomic live feedback, and same-origin font loading.
+
+The mobile release suite covers 390×844 phone, both 768/1024 tablet orientations, desktop,
+44px targets, safe areas, reduced motion, current-district asset loading, the Lesson 50 story,
+and six cumulative Lesson 49 landmark screenshots. Real WeChat, iPhone Safari, and Android
+Chromium evidence remains manual and is recorded in `docs/mobile-release-smoke-checklist.md`.
 
 The soundmark v1 integer cannot identify completed challenges. Its one-time v2 migration therefore
 resets soundmark progress to zero. Lesson 49 and Lesson 50 preserve and clamp legacy level ratings.
