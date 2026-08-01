@@ -191,6 +191,40 @@ main{display:grid;gap:38px;padding-bottom:30px}
 
 footer{text-align:center;padding:6px 18px 38px;font-size:14px;font-weight:700;color:var(--brown-soft)}
 footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px solid var(--brown);border-radius:12px;background:var(--paper);box-shadow:3px 3px 0 rgba(56,40,31,.12)}
+.device-settings-trigger{
+  display:flex;align-items:center;justify-content:center;min-height:46px;margin:2px auto 14px;padding:8px 17px;
+  border:3px solid var(--brown);border-radius:999px;background:var(--yellow);font-weight:800;box-shadow:0 4px 0 var(--brown);
+}
+.device-dialog{width:min(520px,calc(100% - 28px));padding:0;border:0;background:transparent;color:var(--brown)}
+.device-dialog::backdrop{background:rgba(56,40,31,.62);backdrop-filter:blur(2px)}
+.device-ledger{
+  position:relative;padding:34px 30px 30px;border:4px solid var(--brown);border-radius:24px;
+  background:var(--paper);box-shadow:9px 11px 0 rgba(56,40,31,.28);text-align:left;
+}
+.device-ledger::before{
+  content:"";position:absolute;inset:13px;border:2px dashed #DEC39D;border-radius:14px;pointer-events:none;
+}
+.device-stamp{
+  position:relative;display:inline-block;padding:4px 12px;border:3px double var(--red);border-radius:7px;
+  color:#B93C30;font-size:13px;font-weight:800;letter-spacing:2px;transform:rotate(-2deg);
+}
+.device-ledger h2{position:relative;margin:12px 44px 8px 0;font-size:30px;line-height:1.15}
+.device-ledger p{position:relative;margin:8px 0;font-weight:700}
+.device-dialog-close{
+  position:absolute;z-index:1;top:20px;right:20px;width:44px;height:44px;border:3px solid var(--brown);
+  border-radius:50%;background:#fff;font-size:24px;font-weight:800;line-height:1;
+}
+.device-storage-status{padding:9px 12px;border-radius:12px;background:var(--paper-warm);color:var(--brown-soft)}
+.device-restart-step{position:relative;margin-top:18px;padding-top:17px;border-top:3px dotted #DEC39D}
+.device-restart-step[hidden]{display:none!important}
+.device-restart-step h3{margin:0 0 5px;font-size:21px}
+.device-restart-step p{margin:5px 0 13px;font-size:15px}
+.device-dialog-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.device-dialog-actions button{
+  min-height:44px;padding:7px 15px;border:3px solid var(--brown);border-radius:999px;background:#fff;font-weight:800;
+}
+.device-dialog-actions .restart-primary{background:var(--yellow)}
+.device-dialog-actions .restart-danger{background:var(--red);color:#fff}
 
 @media (min-width:761px) and (max-width:940px){
   #lessonStations{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 24px;padding-inline:30px}
@@ -242,6 +276,8 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
   #lessonSearchForm label{grid-column:1/-1}
   #lessonSearchForm{grid-template-columns:minmax(0,1fr) auto}
   .special-copy h3{font-size:27px}
+  .device-ledger{padding:30px 22px 24px}
+  .device-ledger h2{font-size:26px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -310,19 +346,61 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
 <footer>
   <div class="wrap">
     <div class="tip">小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
+    <button class="device-settings-trigger" id="openDeviceSettings" type="button">设备冒险设置</button>
     <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51、52、54 · 音标第一课</div>
   </div>
 </footer>
 
+<dialog class="device-dialog" id="deviceSettingsDialog" aria-labelledby="deviceSettingsTitle">
+  <div class="device-ledger">
+    <button class="device-dialog-close" id="closeDeviceSettings" type="button" aria-label="关闭设备设置">×</button>
+    <span class="device-stamp">本机一份</span>
+    <h2 id="deviceSettingsTitle">这台设备上的冒险</h2>
+    <p>这里只保存一份共同进度，不是个人账号；换设备不会跟过去。</p>
+    <p class="device-storage-status" id="deviceStorageStatus" role="status"></p>
+    <section class="device-restart-step" id="restartOverview" aria-labelledby="restartOverviewTitle">
+      <h3 id="restartOverviewTitle">想从头再来？</h3>
+      <p>重开会清除这台设备上的课程星星、地图成长和故事纪念物。</p>
+      <div class="device-dialog-actions"><button class="restart-primary" id="beginRestart" type="button">重开冒险</button></div>
+    </section>
+    <section class="device-restart-step" id="restartFirst" aria-labelledby="restartFirstTitle" hidden>
+      <h3 id="restartFirstTitle">先确认这台设备</h3>
+      <p>这台设备上的共同进度会被重置，但其他设备不会受到影响。</p>
+      <div class="device-dialog-actions">
+        <button class="restart-cancel" type="button">取消重开</button>
+        <button class="restart-primary" id="continueRestart" type="button">继续确认</button>
+      </div>
+    </section>
+    <section class="device-restart-step" id="restartFinal" aria-labelledby="restartFinalTitle" hidden>
+      <h3 id="restartFinalTitle">最后一次确认</h3>
+      <p>清除后无法恢复。确认后，这台设备会从零开始新的冒险。</p>
+      <div class="device-dialog-actions">
+        <button class="restart-cancel" type="button">取消重开</button>
+        <button class="restart-danger" id="confirmRestart" type="button">确认重开</button>
+      </div>
+    </section>
+  </div>
+</dialog>
+
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/course-catalog.js"></script>
+<script src="/core/device-profile.js"></script>
 <script src="/core/home-catalog.js"></script>
 <script>
+function browserStorageOrNull(){
+  try{return window.localStorage;}catch{return null;}
+}
+const deviceStorage=browserStorageOrNull();
+const deviceProfileState=CanranCore.deviceProfile.initializeDeviceProfile({
+  storage:deviceStorage,
+  courses:CanranCore.courseCatalog.COURSES
+});
+
 function loadCourseProgress(course){
   if(!course.progress) return {...course,stars:0,max:0};
   const result=CanranCore.storage.loadProgress({
-    storage:localStorage,
+    storage:deviceStorage,
     key:course.progress.key,
     legacyKey:course.progress.legacyKey,
     ids:course.progress.ids,
@@ -475,6 +553,52 @@ nextRange.addEventListener('click',()=>{
   if(index<CanranCore.homeCatalog.RANGES.length-1) selectRange(CanranCore.homeCatalog.RANGES[index+1].start);
 });
 document.getElementById('lessonSearchForm').addEventListener('submit',handleLessonSearch);
+
+const deviceSettingsDialog=document.getElementById('deviceSettingsDialog');
+const restartOverview=document.getElementById('restartOverview');
+const restartFirst=document.getElementById('restartFirst');
+const restartFinal=document.getElementById('restartFinal');
+const beginRestart=document.getElementById('beginRestart');
+const continueRestart=document.getElementById('continueRestart');
+const confirmRestart=document.getElementById('confirmRestart');
+function resetRestartFlow(){
+  restartOverview.hidden=false;
+  restartFirst.hidden=true;
+  restartFinal.hidden=true;
+}
+document.getElementById('deviceStorageStatus').textContent=deviceProfileState.persisted
+  ?'进度保存在这台设备上。'
+  :'这次进度只能暂时显示，关闭页面后可能不会保留。';
+document.getElementById('openDeviceSettings').addEventListener('click',()=>deviceSettingsDialog.showModal());
+document.getElementById('closeDeviceSettings').addEventListener('click',()=>deviceSettingsDialog.close());
+deviceSettingsDialog.addEventListener('close',resetRestartFlow);
+beginRestart.addEventListener('click',()=>{
+  restartOverview.hidden=true;
+  restartFirst.hidden=false;
+  continueRestart.focus();
+});
+continueRestart.addEventListener('click',()=>{
+  restartFirst.hidden=true;
+  restartFinal.hidden=false;
+  confirmRestart.focus();
+});
+document.querySelectorAll('.restart-cancel').forEach(button=>button.addEventListener('click',()=>{
+  resetRestartFlow();
+  beginRestart.focus();
+}));
+confirmRestart.addEventListener('click',()=>{
+  const result=CanranCore.deviceProfile.restartAdventure({
+    storage:deviceStorage,
+    courses:CanranCore.courseCatalog.COURSES
+  });
+  if(result.cleared){
+    window.location.reload();
+    return;
+  }
+  document.getElementById('deviceStorageStatus').textContent='这次无法清除设备进度，请检查浏览器存储设置后再试。';
+  resetRestartFlow();
+  beginRestart.focus();
+});
 
 renderContinue();
 selectRange(selectedRangeStart);
