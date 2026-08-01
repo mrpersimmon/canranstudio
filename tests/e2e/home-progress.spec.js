@@ -41,6 +41,40 @@ test('welcome page separates numbered lessons from the special station', async (
   expect(columns).toBe(5);
 });
 
+test('welcome page exposes and renders the shared course catalog', async ({ page }) => {
+  await page.goto('/');
+
+  const contract = await page.evaluate(() => {
+    const catalog = window.CanranCore.courseCatalog;
+    return {
+      ids: catalog.HOME_COURSES.map(course => course.id),
+      deeplyFrozen: Object.isFrozen(catalog.COURSES) &&
+        catalog.COURSES.every(course => Object.isFrozen(course)),
+      lesson49Location: catalog.assessLearningLocation(
+        catalog.COURSES.find(course => course.id === 'lesson49')
+      ),
+      renderedLessons: [...document.querySelectorAll('#lessonStations [data-lesson]')]
+        .map(element => Number(element.dataset.lesson)),
+      specialRoute: document.querySelector('#specialStation a')?.getAttribute('href')
+    };
+  });
+
+  assertCatalogContract(contract);
+});
+
+function assertCatalogContract(contract) {
+  expect(contract.ids).toEqual([
+    'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53',
+    'lesson54', 'lesson55', 'lesson56', 'soundmark'
+  ]);
+  expect(contract.deeplyFrozen).toBe(true);
+  expect(contract.lesson49Location.status).toBe('drawing');
+  expect(contract.lesson49Location.route).toBeNull();
+  expect(contract.lesson49Location.recommendable).toBe(false);
+  expect(contract.renderedLessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56]);
+  expect(contract.specialRoute).toBe('/soundmark/');
+}
+
 test('range tickets and numbered search expose one bounded catalogue segment', async ({ page }) => {
   await page.goto('/');
   await page.locator('[data-range-start="1"]').click();

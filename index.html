@@ -316,57 +316,9 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
 
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/course-catalog.js"></script>
 <script src="/core/home-catalog.js"></script>
 <script>
-const COURSE_LEVELS = ['l1','l2','l3','l4','l5'];
-const SOUND_LEVELS = ['vs','g1','g2','g3'];
-const HOME_COURSES = [
-  {
-    kind:'lesson', lesson:49, route:'/lesson49/', title:'肉店大冒险', subtitle:"At the Butcher's",
-    description:'跟着伯德夫人去肉店买肉！17 张单词卡、课文小剧场、句型魔法屋，还有三单训练营等你来闯。',
-    features:['单词卡','课文剧场','句型魔法','三单特训','结业证书'],
-    art:'/assets/home/lesson49-steak.png', tone:'red',
-    progress:{key:'canran:l49:progress:v2',legacyKey:'l49-stars-v1',ids:COURSE_LEVELS,legacyMode:'ratings',max:15}
-  },
-  {
-    kind:'lesson', lesson:50, route:'/lesson50/', title:'挑食小王子大冒险', subtitle:'The Picky Prince',
-    description:'认识皇家蔬果、投喂王子公主、学动词变身术，帮挑食小王子学会好好吃饭。',
-    features:['蔬果图鉴','餐桌作战','动词变身','照妖镜','结业证书'],
-    art:'/assets/home/lesson50-crown.png', tone:'purple',
-    progress:{key:'canran:l50:progress:v2',legacyKey:'l50-stars-v1',ids:COURSE_LEVELS,legacyMode:'ratings',max:15}
-  },
-  {
-    kind:'lesson', lesson:51, route:'/lesson51/', title:'希腊四季之旅', subtitle:'A Pleasant Climate',
-    description:'跟着 Dimitri 学天气、季节、月份和频率词，完成五关成为希腊小导游。',
-    features:['听音挑词','课文剧场','月份归队','频率阶梯','导游证书'],
-    art:'/assets/home/lesson51-temple.png', tone:'blue',
-    progress:{key:'canran:l51:progress:v2',legacyKey:'l51-stars-v1',ids:COURSE_LEVELS,legacyMode:'reset',max:15}
-  },
-  {
-    kind:'lesson', lesson:52, route:'/lesson52/', title:'环球护照之旅 Ⅰ', subtitle:'What Nationality Are They?',
-    description:'第一卷·欧美篇：走遍 12 个欧美国家，跟签证官学国家和国籍、听机场广播、玩盖章配对，成为环球小使者！',
-    features:['国家国籍','机场广播','盖章配对','动词小尾巴','海关考核'],
-    art:'/assets/home/lesson52-passport.svg', tone:'blue',
-    progress:{key:'canran:l52:progress:v2',ids:COURSE_LEVELS,max:15}
-  },
-  ...[53].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
-  {
-    kind:'lesson', lesson:54, route:'/lesson54/', title:'环球护照之旅 Ⅱ', subtitle:'What Nationality Are They?',
-    description:'第二卷·亚非大洋洲篇：再走 12 个国家，练习国籍句型，还有 does 疑问否定小魔法。',
-    features:['国家国籍','机场广播','盖章配对','does 魔法','海关考核'],
-    art:'/assets/home/lesson54-passport.svg', tone:'green',
-    progress:{key:'canran:l54:progress:v2',ids:COURSE_LEVELS,max:15}
-  },
-  ...[55,56].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
-  {
-    kind:'special', lesson:null, route:'/soundmark/', title:'音标魔法乐园', subtitle:'Phonics Magic · 音标第一课',
-    description:'音标是单词的“拼音”！跟着元音精灵学发音、玩音节魔法、上对比擂台，看到生词也能自己试着读。',
-    features:['元音精灵','音节魔法','对比擂台','游戏乐园','结业证书'],
-    art:'/assets/home/soundmark-phonics.png', tone:'orange',
-    progress:{key:'canran:soundmark:progress:v2',legacyKey:'phonics-magic-stars-v1',ids:SOUND_LEVELS,legacyMode:'reset',max:12}
-  }
-];
-
 function loadCourseProgress(course){
   if(!course.progress) return {...course,stars:0,max:0};
   const result=CanranCore.storage.loadProgress({
@@ -380,7 +332,7 @@ function loadCourseProgress(course){
   return {...course,stars,max:course.progress.max};
 }
 
-const hydratedCourses=HOME_COURSES.map(loadCourseProgress);
+const hydratedCourses=CanranCore.courseCatalog.HOME_COURSES.map(loadCourseProgress);
 const continuePanel=document.getElementById('continuePanel');
 const lessonStations=document.getElementById('lessonStations');
 const routeEmpty=document.getElementById('routeEmpty');

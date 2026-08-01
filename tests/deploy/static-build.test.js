@@ -87,6 +87,14 @@ async function writeSyntheticPublicRoot(root) {
     await fs.mkdir(path.dirname(file), { recursive: true });
     await fs.writeFile(file, relative);
   }
+  for (const course of PUBLISHED_COURSES) {
+    await fs.writeFile(path.join(root, course.entry), `<script>const catalogContract = ${JSON.stringify([
+      course.progress.key,
+      course.progress.legacyKey,
+      course.progress.legacyMode,
+      ...course.progress.ids
+    ].filter(Boolean))};</script>`);
+  }
   execFileSync('git', ['init', '--quiet'], { cwd: root });
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
     'add', '.'], { cwd: root });
@@ -177,6 +185,28 @@ test('buildStatic rejects an unregistered lesson entry before creating output', 
   await assert.rejects(
     buildStatic({ root, out }),
     /unregistered lesson entry: lesson-draft\/index\.html/
+  );
+  await assert.rejects(fs.stat(out), { code: 'ENOENT' });
+});
+
+test('buildStatic rejects a published course without prerecorded audio', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-missing-audio-'));
+  const out = path.join(root, 'dist');
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  await writeSyntheticPublicRoot(root);
+  await fs.rm(path.join(root, 'lesson49/audio/clip.mp3'));
+  await fs.writeFile(path.join(root, 'lesson49/audio/readme.txt'), 'speech synthesis is not publication audio');
+  execFileSync('git', ['add', '-A'], { cwd: root });
+  execFileSync(
+    'git',
+    ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+      'commit', '--quiet', '-m', 'remove lesson 49 recording'],
+    { cwd: root }
+  );
+
+  await assert.rejects(
+    buildStatic({ root, out }),
+    /lesson49: prerecorded audio directory contains no non-empty \.mp3 file/
   );
   await assert.rejects(fs.stat(out), { code: 'ENOENT' });
 });

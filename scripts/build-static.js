@@ -6,6 +6,7 @@ const { constants } = require('node:fs');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { PUBLISHED_COURSES } = require('./course-registry');
+const { assertCourseCatalogContract } = require('./course-catalog-contract');
 
 const REQUIRED_FILES = Object.freeze([
   'index.html',
@@ -395,6 +396,7 @@ async function buildStatic({
   await assertSafeOutput(resolvedRoot, resolvedOut);
   await assertOutputDoesNotOverlapPublicInputs(resolvedRoot, resolvedOut);
   await assertRegisteredLessonEntries(resolvedRoot);
+  await assertCourseCatalogContract({ root: resolvedRoot });
 
   for (const relative of REQUIRED_FILES) await validateFile(resolvedRoot, relative);
   for (const relative of REQUIRED_DIRECTORIES) await validateDirectory(resolvedRoot, relative);
