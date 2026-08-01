@@ -75,13 +75,12 @@ test('course catalog is the complete immutable contract for lessons and special 
 
 test('published course pages resolve their progress contract from the shared catalog', () => {
   const lesson49 = catalog.requirePublishedCourse('lesson49');
+  const lesson52 = catalog.requirePublishedCourse('lesson52');
 
   assert.equal(lesson49, catalog.COURSES.find(course => course.id === 'lesson49'));
   assert.equal(lesson49.progress.key, 'canran:l49:progress:v2');
-  assert.throws(
-    () => catalog.requirePublishedCourse('lesson52'),
-    /published course not found: lesson52/
-  );
+  assert.equal(lesson52, catalog.COURSES.find(course => course.id === 'lesson52'));
+  assert.equal(lesson52.progress.key, 'canran:l52:progress:v2');
   assert.throws(
     () => catalog.requirePublishedCourse('missing'),
     /published course not found: missing/
