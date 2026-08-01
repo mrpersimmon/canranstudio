@@ -75,11 +75,13 @@ test('generated no-script fallback follows a future shared-catalog course', asyn
   assert.equal((synchronized.match(/href="\/lesson61\/"/g) || []).length, 1);
 });
 
-test('authored fallback guard recognizes spaced, multiline, unquoted, and encoded course hrefs', () => {
+test('authored fallback guard recognizes browser-parsed course href variants', () => {
   const variants = [
     '<a href = "/lesson61/">future</a>',
     '<a\n href=/lesson61/>future</a>',
-    '<a href="&#47;lesson61&#47;">future</a>'
+    '<a href="&#47;lesson61&#47;">future</a>',
+    '<a href="&sol;lesson61&sol;">future</a>',
+    '<a title="x>y" href="/lesson61/">future</a>'
   ];
   for (const source of variants) {
     assert.deepEqual(homeFallback.anchorHrefs(source), ['/lesson61/']);

@@ -28,21 +28,51 @@ async function isPerceivableInViewport(locator) {
       box.left < document.documentElement.clientWidth &&
       box.top < document.documentElement.clientHeight;
     if (!intersects) return false;
-    const left = Math.max(0, box.left);
-    const right = Math.min(document.documentElement.clientWidth, box.right);
-    const top = Math.max(0, box.top);
-    const bottom = Math.min(document.documentElement.clientHeight, box.bottom);
-    const points = [
-      [(left + right) / 2, (top + bottom) / 2],
-      [left + 1, top + 1],
-      [right - 1, top + 1],
-      [left + 1, bottom - 1],
-      [right - 1, bottom - 1]
-    ];
-    return points.some(([x, y]) => {
-      const hit = document.elementFromPoint(x, y);
-      return hit === element || element.contains(hit);
-    });
+
+    const textRects = [];
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.textContent.trim()) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      textRects.push(...range.getClientRects());
+    }
+    const visibleRects = (textRects.length ? textRects : [box])
+      .map(rect => ({
+        left: Math.max(0, rect.left),
+        right: Math.min(document.documentElement.clientWidth, rect.right),
+        top: Math.max(0, rect.top),
+        bottom: Math.min(document.documentElement.clientHeight, rect.bottom)
+      }))
+      .filter(rect => rect.right > rect.left && rect.bottom > rect.top);
+    const points = visibleRects.flatMap(rect => [0.25, 0.5, 0.75].map(horizontal => [
+      rect.left + ((rect.right - rect.left) * horizontal),
+      (rect.top + rect.bottom) / 2
+    ]));
+
+    const hitTestElements = [...document.querySelectorAll('*')];
+    const pointerEvents = hitTestElements.map(candidate => ({
+      candidate,
+      value: candidate.style.getPropertyValue('pointer-events'),
+      priority: candidate.style.getPropertyPriority('pointer-events')
+    }));
+    for (const entry of pointerEvents) {
+      entry.candidate.style.setProperty('pointer-events', 'auto', 'important');
+    }
+    try {
+      return points.some(([x, y]) => {
+        const hit = document.elementFromPoint(x, y);
+        return hit === element || element.contains(hit);
+      });
+    } finally {
+      for (const entry of pointerEvents) {
+        if (entry.value) {
+          entry.candidate.style.setProperty('pointer-events', entry.value, entry.priority);
+        } else {
+          entry.candidate.style.removeProperty('pointer-events');
+        }
+      }
+    }
   });
 }
 
@@ -205,8 +235,11 @@ test('browser visibility rejects V2 notices hidden by their context or computed 
     '<style>.concealed{visibility:hidden}</style><p class="concealed" data-course-map-status="v2">地图将在 V2 到来</p>',
     '<p data-course-map-status="v2" style="display:none">地图将在 V2 到来</p>',
     '<div style="opacity:0"><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
+    '<div style="content-visibility:hidden"><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
     '<p data-course-map-status="v2" style="position:absolute;left:-10000px">地图将在 V2 到来</p>',
     '<p data-course-map-status="v2" style="position:absolute;clip:rect(0,0,0,0)">地图将在 V2 到来</p>',
+    '<p data-course-map-status="v2" style="clip-path:inset(50%)">地图将在 V2 到来</p>',
+    '<p data-course-map-status="v2">地图将在 V2 到来</p><div style="position:fixed;inset:0;background:#111;z-index:999;pointer-events:none"></div>',
     '<style>@media(max-width:420px){[data-course-map-status="v2"]{display:none}}</style><p data-course-map-status="v2">地图将在 V2 到来</p>'
   ];
   for (const markup of hiddenFixtures) {
