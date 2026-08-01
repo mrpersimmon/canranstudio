@@ -59,7 +59,11 @@
   ]);
   const LAUNCH_DISTRICT = DISTRICTS.find(district => district.v1Accessible);
 
-  function lessonMap({
+  function isV1MapLesson(lesson) {
+    return Number.isInteger(lesson) && lesson >= 49 && lesson <= 60;
+  }
+
+  function createLessonMap(lesson, {
     souvenir = null,
     declaredStatus = 'drawing',
     baseAsset = null,
@@ -67,7 +71,19 @@
     mobilePreview = null,
     regressionTest = null
   } = {}) {
-    return {
+    if (!isV1MapLesson(lesson)) {
+      return deepFreeze({
+        districtId: null,
+        v1Visible: false,
+        declaredStatus: 'not-applicable',
+        baseAsset: null,
+        stages: [],
+        souvenir: null,
+        mobilePreview: null,
+        regressionTest: null
+      });
+    }
+    return deepFreeze({
       districtId: LAUNCH_DISTRICT.id,
       v1Visible: true,
       declaredStatus,
@@ -79,7 +95,7 @@
       souvenir,
       mobilePreview,
       regressionTest
-    };
+    });
   }
 
   function publishedLesson({
@@ -119,7 +135,7 @@
       art,
       tone,
       progress,
-      map: lessonMap({ souvenir, ...mapPublication })
+      map: createLessonMap(lesson, { souvenir, ...mapPublication })
     };
   }
 
@@ -140,7 +156,7 @@
       art: null,
       tone: 'soon',
       progress: null,
-      map: lessonMap()
+      map: createLessonMap(lesson)
     };
   }
 
@@ -319,6 +335,27 @@
     });
   }
 
+  function directoryMapStatus(course) {
+    if (!course || course.kind !== 'lesson' || !Number.isInteger(course.lesson)) {
+      return 'not-applicable';
+    }
+    if (!isV1MapLesson(course.lesson)) return 'v2';
+    return assessLearningLocation(course).status === 'published'
+      ? 'published'
+      : 'drawing';
+  }
+
+  function hasNotApplicableMapContract(map) {
+    return map?.districtId === null &&
+      map.v1Visible === false &&
+      map.declaredStatus === 'not-applicable' &&
+      map.baseAsset === null &&
+      Array.isArray(map.stages) && map.stages.length === 0 &&
+      map.souvenir === null &&
+      map.mobilePreview === null &&
+      map.regressionTest === null;
+  }
+
   function validateCatalog(courses) {
     if (!Array.isArray(courses)) return Object.freeze(['catalog must be an array']);
 
@@ -415,7 +452,7 @@
         return;
       }
       if (course.kind === 'lesson') {
-        const belongsToV1Map = Number.isInteger(course.lesson) && course.lesson >= 49 && course.lesson <= 60;
+        const belongsToV1Map = isV1MapLesson(course.lesson);
         if (belongsToV1Map) {
           if (typeof course.map.districtId !== 'string' || !course.map.districtId) {
             errors.push(`${id}: V1 map lesson districtId is required`);
@@ -434,18 +471,10 @@
               errors.push(`${id}: published map contract missing ${assessment.missing.join(', ')}`);
             }
           }
-        } else if (
-          course.map.districtId !== null ||
-          course.map.v1Visible !== false ||
-          course.map.declaredStatus !== 'not-applicable'
-        ) {
-          errors.push(`${id}: lessons outside 49-60 must be excluded from the V1 map`);
+        } else if (!hasNotApplicableMapContract(course.map)) {
+          errors.push(`${id}: lessons outside 49-60 must use a not-applicable map contract`);
         }
-      } else if (
-        course.map.districtId !== null ||
-        course.map.v1Visible !== false ||
-        course.map.declaredStatus !== 'not-applicable'
-      ) {
+      } else if (!hasNotApplicableMapContract(course.map)) {
         errors.push(`${id}: special course map must be not-applicable`);
       }
     });
@@ -470,8 +499,10 @@
     PUBLISHED_COURSES,
     HOME_COURSES,
     MAP_COURSES,
+    createLessonMap,
     requirePublishedCourse,
     assessLearningLocation,
+    directoryMapStatus,
     validateCatalog,
     assertValidCatalog
   });

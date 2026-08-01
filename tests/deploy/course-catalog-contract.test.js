@@ -164,6 +164,49 @@ test('published course page must consume progress metadata from the shared catal
   await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
 });
 
+test('a published lesson outside V1 requires a visible V2 map notice on its direct page', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-future-course-contract-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const course = structuredClone(catalog.COURSES.find(item => item.id === 'lesson50'));
+  course.id = 'lesson61';
+  course.lesson = 61;
+  course.route = '/lesson61/';
+  course.entry = 'lesson61/index.html';
+  course.assetDirectories = ['lesson61/audio'];
+  course.progress.key = 'canran:l61:progress:v2';
+  delete course.progress.legacyKey;
+  delete course.progress.legacyMode;
+  course.map = catalog.createLessonMap(61);
+
+  await fs.mkdir(path.join(root, 'lesson61/audio'), { recursive: true });
+  await fs.copyFile(
+    path.join(ROOT, 'lesson50/audio/bean.mp3'),
+    path.join(root, 'lesson61/audio/clip.mp3')
+  );
+  await fs.writeFile(path.join(root, course.entry), validCoursePageSource(course));
+
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson61: direct course page must say its map will arrive in V2/
+  );
+
+  await fs.writeFile(path.join(root, course.entry), `
+    <!-- <p data-course-map-status="v2">地图将在 V2 到来</p> -->
+    <p data-course-map-status="v2" hidden>地图将在 V2 到来</p>
+    ${validCoursePageSource(course)}
+  `);
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson61: direct course page must say its map will arrive in V2/
+  );
+
+  await fs.writeFile(path.join(root, course.entry), `
+    <p data-course-map-status="v2">课程现在可以直接学习，对应地图将在 V2 到来。</p>
+    ${validCoursePageSource(course)}
+  `);
+  await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
+});
+
 test('published learning location contract requires every declared asset and regression file', async t => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-map-contract-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));

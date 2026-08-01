@@ -36,12 +36,16 @@ test('pickContinueCourse falls back to first unfinished then latest completed le
 test('resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons', () => {
   const courses = [
     { kind: 'lesson', lesson: 51, route: '/lesson51/' },
-    { kind: 'lesson', lesson: 52, route: null }
+    { kind: 'lesson', lesson: 52, route: null },
+    { kind: 'lesson', lesson: 61, route: '/lesson61/' }
   ];
   assert.deepEqual(catalog.resolveLessonSearch('51', courses), {
     status: 'available', lesson: 51, range: { start: 49, end: 72 }
   });
   assert.equal(catalog.resolveLessonSearch('52', courses).status, 'placeholder');
+  assert.deepEqual(catalog.resolveLessonSearch('61', courses), {
+    status: 'available', lesson: 61, range: { start: 49, end: 72 }
+  });
   assert.equal(catalog.resolveLessonSearch('100', courses).status, 'missing');
   assert.equal(catalog.resolveLessonSearch('145', courses).status, 'invalid');
 });

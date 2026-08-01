@@ -402,6 +402,27 @@ function hasSameOriginAudioReference(source, course) {
   return tokens.some(token => source.includes(token)) && source.includes('.mp3');
 }
 
+function hasDeclaredV2MapNotice(source) {
+  const markup = source
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ');
+  const notices = markup.matchAll(
+    /<([a-z][a-z0-9-]*)\b([^>]*\bdata-course-map-status\s*=\s*['"]v2['"][^>]*)>([\s\S]*?)<\/\1>/gi
+  );
+  for (const notice of notices) {
+    const attributes = notice[2];
+    if (/\bhidden(?:\s|=|>|$)/i.test(attributes) ||
+      /\baria-hidden\s*=\s*['"]true['"]/i.test(attributes) ||
+      /\bstyle\s*=\s*['"][^'"]*display\s*:\s*none/i.test(attributes)) {
+      continue;
+    }
+    const text = notice[3].replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
+    if (/地图将在\s*V2\s*到来/.test(text)) return true;
+  }
+  return false;
+}
+
 async function assertCoursePageContract(root, course) {
   const source = await fs.readFile(resolvePublicPath(root, course.entry), 'utf8');
   const scriptIndex = catalogScriptIndex(source);
@@ -425,6 +446,9 @@ async function assertCoursePageContract(root, course) {
   }
   if (!hasSameOriginAudioReference(source, course)) {
     throw new Error(`${course.id}: course page must reference same-origin prerecorded audio`);
+  }
+  if (catalog.directoryMapStatus(course) === 'v2' && !hasDeclaredV2MapNotice(source)) {
+    throw new Error(`${course.id}: direct course page must say its map will arrive in V2`);
   }
 }
 

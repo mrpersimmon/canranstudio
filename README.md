@@ -39,3 +39,6 @@ HTTP-to-HTTPS redirect are intentionally out of scope until the external filing 
 decision changes. RISK-HTTP-01 remains accepted and deferred.
 
 See `deploy/README.md` for the release and verification contract.
+
+See `docs/course-authoring.md` for the single-catalog workflow used when adding another numbered
+Lesson while the V1 map remains limited to Lesson 49–60.

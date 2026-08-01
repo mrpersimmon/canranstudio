@@ -5,6 +5,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
+const courseCatalog = require('../../core/course-catalog');
+const homeFallback = require('../../scripts/home-course-fallback');
 
 const ROOT = path.resolve(__dirname, '../..');
 
@@ -22,16 +24,19 @@ async function markdownFilesUnder(directory) {
   return nested.flat();
 }
 
-test('every published course appears in authored release surfaces', async () => {
-  const [home, readme, runbook, nginx] = await Promise.all([
-    fs.readFile(path.join(ROOT, 'index.html'), 'utf8'),
+test('every published course appears in the shared home catalog and authored release surfaces', async () => {
+  const [readme, runbook, nginx] = await Promise.all([
     fs.readFile(path.join(ROOT, 'README.md'), 'utf8'),
     fs.readFile(path.join(ROOT, 'deploy/README.md'), 'utf8'),
     fs.readFile(path.join(ROOT, 'deploy/nginx/canranstudio-http.conf'), 'utf8')
   ]);
 
   for (const course of PUBLISHED_COURSES) {
-    assert.match(home, new RegExp(`href=["']${escapeRegExp(course.route)}["']`), course.id);
+    assert.equal(
+      courseCatalog.HOME_COURSES.some(homeCourse => homeCourse.id === course.id),
+      true,
+      course.id
+    );
     assert.match(readme, new RegExp(escapeRegExp(course.route)), course.id);
     assert.match(runbook, new RegExp(escapeRegExp(course.route)), course.id);
     const slashless = course.route.slice(0, -1);
@@ -40,6 +45,44 @@ test('every published course appears in authored release surfaces', async () => 
       new RegExp(`location\\s*=\\s*${escapeRegExp(slashless)}\\s*\\{[\\s\\S]*?return\\s+308\\s+${escapeRegExp(course.route)};`),
       course.id
     );
+  }
+});
+
+test('home renders course routes from the shared catalog with only a generated no-script fallback', async () => {
+  const home = await fs.readFile(path.join(ROOT, 'index.html'), 'utf8');
+
+  assert.match(home, /courseCatalog\.HOME_COURSES/);
+  assert.match(home, /href="\$\{course\.route\}"/);
+  assert.equal(homeFallback.synchronizeFallback(home), home);
+  const authoredHome = homeFallback.withoutGeneratedFallback(home);
+  assert.deepEqual(
+    homeFallback.anchorHrefs(authoredHome).filter(href => /^\/(?:lesson\d+|soundmark)\/$/.test(href)),
+    []
+  );
+  assert.doesNotMatch(home, /Lesson 49、50、51、52、54/);
+});
+
+test('generated no-script fallback follows a future shared-catalog course', async () => {
+  const home = await fs.readFile(path.join(ROOT, 'index.html'), 'utf8');
+  const future = structuredClone(PUBLISHED_COURSES.find(course => course.id === 'lesson50'));
+  future.id = 'lesson61';
+  future.lesson = 61;
+  future.route = '/lesson61/';
+  future.title = '未来课程示例';
+
+  const synchronized = homeFallback.synchronizeFallback(home, [...PUBLISHED_COURSES, future]);
+  assert.match(synchronized, /href="\/lesson61\/">Lesson 61 · 未来课程示例<\/a>/);
+  assert.equal((synchronized.match(/href="\/lesson61\/"/g) || []).length, 1);
+});
+
+test('authored fallback guard recognizes spaced, multiline, unquoted, and encoded course hrefs', () => {
+  const variants = [
+    '<a href = "/lesson61/">future</a>',
+    '<a\n href=/lesson61/>future</a>',
+    '<a href="&#47;lesson61&#47;">future</a>'
+  ];
+  for (const source of variants) {
+    assert.deepEqual(homeFallback.anchorHrefs(source), ['/lesson61/']);
   }
 });
 

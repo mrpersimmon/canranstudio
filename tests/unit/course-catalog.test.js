@@ -230,10 +230,29 @@ test('map consumers receive only V1 learning locations from the shared catalog',
     ['published', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing']
   );
 
-  const outsideV1 = structuredClone(catalog.COURSES.find(course => course.id === 'lesson56'));
+  const outsideV1 = structuredClone(catalog.COURSES.find(course => course.id === 'lesson50'));
   outsideV1.id = 'lesson61';
   outsideV1.lesson = 61;
-  outsideV1.map = {
+  outsideV1.route = '/lesson61/';
+  outsideV1.entry = 'lesson61/index.html';
+  outsideV1.assetDirectories = ['lesson61/audio'];
+  outsideV1.progress.key = 'canran:l61:progress:v2';
+  delete outsideV1.progress.legacyKey;
+  delete outsideV1.progress.legacyMode;
+  outsideV1.map = catalog.createLessonMap(61);
+  assert.deepEqual(catalog.validateCatalog([outsideV1]), []);
+  assert.equal(catalog.assessLearningLocation(outsideV1).status, 'not-applicable');
+  assert.equal(catalog.directoryMapStatus(outsideV1), 'v2');
+
+  const polluted = structuredClone(outsideV1);
+  polluted.map.baseAsset = 'assets/adventure-map/lesson61/base.png';
+  assert.deepEqual(catalog.validateCatalog([polluted]), [
+    'lesson61: lessons outside 49-60 must use a not-applicable map contract'
+  ]);
+});
+
+test('lesson map creation and directory status keep future courses outside V1', () => {
+  assert.deepEqual(catalog.createLessonMap(61), {
     districtId: null,
     v1Visible: false,
     declaredStatus: 'not-applicable',
@@ -242,7 +261,13 @@ test('map consumers receive only V1 learning locations from the shared catalog',
     souvenir: null,
     mobilePreview: null,
     regressionTest: null
-  };
-  assert.deepEqual(catalog.validateCatalog([outsideV1]), []);
-  assert.equal(catalog.assessLearningLocation(outsideV1).status, 'not-applicable');
+  });
+  assert.equal(Object.isFrozen(catalog.createLessonMap(61)), true);
+
+  const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
+  const lesson50 = catalog.COURSES.find(course => course.id === 'lesson50');
+  const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
+  assert.equal(catalog.directoryMapStatus(lesson49), 'published');
+  assert.equal(catalog.directoryMapStatus(lesson50), 'drawing');
+  assert.equal(catalog.directoryMapStatus(soundmark), 'not-applicable');
 });
