@@ -37,7 +37,8 @@ certificate dialogs, polite atomic live feedback, and same-origin font loading.
 
 The mobile release suite covers 390×844 phone, both 768/1024 tablet orientations, desktop,
 44px targets, safe areas, reduced motion, current-district asset loading, the Lesson 50 story,
-and six cumulative Lesson 49 landmark screenshots. Real WeChat, iPhone Safari, and Android
+and six persistent Lesson 49 landmark screenshot baselines under `tests/e2e/snapshots/`.
+Real WeChat, iPhone Safari, and Android
 Chromium evidence remains manual and is recorded in `docs/mobile-release-smoke-checklist.md`.
 
 The soundmark v1 integer cannot identify completed challenges. Its one-time v2 migration therefore

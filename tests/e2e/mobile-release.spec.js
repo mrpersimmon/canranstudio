@@ -154,7 +154,12 @@ test('Lesson 49 growth layers retain one fixed canvas and anchor through all six
       [image.naturalWidth, image.naturalHeight]
     )))).toEqual(Array.from({ length: completed + 1 }, () => [1024, 1024]));
     const evidencePath = testInfo.outputPath(`lesson49-landmark-stage-${completed}.png`);
-    await landmark.locator('.published-marker').screenshot({
+    const marker = landmark.locator('.published-marker');
+    await expect(marker).toHaveScreenshot(`lesson49-landmark-stage-${completed}.png`, {
+      animations: 'disabled',
+      maxDiffPixelRatio: 0.001
+    });
+    await marker.screenshot({
       animations: 'disabled',
       path: evidencePath
     });
@@ -234,12 +239,37 @@ test('safe areas and reduced motion keep atlas, story, and presentation tasks co
   expect(await page.locator('.published-location').evaluate(element => (
     getComputedStyle(element).transitionDuration
   ))).toBe('0s');
+  await page.evaluate(profileKey => {
+    localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
+      version: 2,
+      ratings: { l1: 1, l2: 0, l3: 0, l4: 0, l5: 0 }
+    }));
+    localStorage.setItem(profileKey, JSON.stringify({
+      version: 1,
+      currentDistrictId: 'first-book-49-60',
+      completedStages: { lesson49: ['l1'] }
+    }));
+  }, PROFILE_KEY);
+  await page.reload();
+  await expect(page.locator('[data-map-lesson="49"] [data-growth-stage="l1"]')).toBeVisible();
+  expect(await page.locator('[data-growth-stage="l1"]').evaluate(element => (
+    getComputedStyle(element).animationDuration
+  ))).toBe('0s');
+  await page.getByRole('button', { name: '返回世界总览', exact: true }).click();
+  await expect(page.getByRole('button', { name: '进入暖灯集市', exact: true })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#currentDistrictTitle')).toBeFocused();
 
   await page.goto('/lesson50/');
   await page.locator('#startBtn').click();
   await expect(page.locator('#l1')).toBeInViewport();
 
   await page.goto('/lesson49/present/');
+  for (let step = 2; step <= 5; step += 1) {
+    await page.locator('#nextControl').click();
+    await expect(page.locator('#presentationProgress')).toHaveText(`第 ${step} / 5 步`);
+  }
+  await expect(page.locator('#nextControl')).toHaveText('回到开场');
   await page.locator('#nextControl').click();
-  await expect(page.locator('#presentationProgress')).toHaveText('第 2 / 5 步');
+  await expect(page.locator('#presentationProgress')).toHaveText('第 1 / 5 步');
 });
