@@ -61,8 +61,15 @@ async function isPerceivableInViewport(locator) {
     }
 
     const pseudoPointerRules = [];
+    const visitedStyleSheets = new Set();
+    function exposeStyleSheet(sheet) {
+      if (!sheet || visitedStyleSheets.has(sheet)) return;
+      visitedStyleSheets.add(sheet);
+      exposePseudoElements(sheet.cssRules);
+    }
     function exposePseudoElements(rules) {
       for (const rule of rules) {
+        if (rule.styleSheet) exposeStyleSheet(rule.styleSheet);
         if (rule.cssRules) exposePseudoElements(rule.cssRules);
         if (typeof rule.selectorText !== 'string' || !/::(?:before|after)\b/i.test(rule.selectorText)) continue;
         pseudoPointerRules.push({
@@ -76,7 +83,7 @@ async function isPerceivableInViewport(locator) {
     let inaccessibleStyleSheet = false;
     for (const sheet of document.styleSheets) {
       try {
-        exposePseudoElements(sheet.cssRules);
+        exposeStyleSheet(sheet);
       } catch {
         inaccessibleStyleSheet = true;
       }
@@ -258,6 +265,11 @@ test('every future direct course shows its V2 map notice in the rendered page', 
 
 test('browser visibility rejects V2 notices hidden by their context or computed style', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.route('**/visibility-cover.css', route => route.fulfill({
+    contentType: 'text/css',
+    body: 'body::before{content:"";position:fixed;inset:0;background:#111;z-index:999;pointer-events:none}'
+  }));
+  await page.goto('/');
   const hiddenFixtures = [
     '<div hidden><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
     '<div aria-hidden="true"><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
@@ -272,6 +284,7 @@ test('browser visibility rejects V2 notices hidden by their context or computed 
     '<p data-course-map-status="v2" style="clip-path:inset(50%)">地图将在 V2 到来</p>',
     '<p data-course-map-status="v2">地图将在 V2 到来</p><div style="position:fixed;inset:0;background:#111;z-index:999;pointer-events:none"></div>',
     '<style>body::before{content:"";position:fixed;inset:0;background:#111;z-index:999;pointer-events:none}</style><p data-course-map-status="v2">地图将在 V2 到来</p>',
+    '<style>@import url("/visibility-cover.css");</style><p data-course-map-status="v2">地图将在 V2 到来</p>',
     '<style>@media(max-width:420px){[data-course-map-status="v2"]{display:none}}</style><p data-course-map-status="v2">地图将在 V2 到来</p>'
   ];
   for (const markup of hiddenFixtures) {
