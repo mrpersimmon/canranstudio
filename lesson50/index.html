@@ -11,6 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤴</text></svg>">
 <title>挑食小王子大冒险 · The Picky Prince | 新概念英语 Lesson 50</title>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/core/certificate-gate.css">
 <style>
 :root{
   --cream:#FFF6E9; --paper:#FFFDF6; --brown:#4A3226;
@@ -695,7 +696,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
       <h2>皇家大考核 <span class="en-sub">Royal Final Test</span></h2>
       <div class="lvl-stars" id="st-l5">☆☆☆</div>
     </div>
-    <div class="lvl-desc">🏆 最后一关！8 道综合考题：单词、听力、三单、照妖镜全都有。答完就能领取「皇家营养小顾问」结业证书！</div>
+    <div class="lvl-desc">完成考核后继续补满五关 15 颗星，就能领取结业证书。</div>
 
     <div class="panel">
       <div id="quizStartBox" style="text-align:center">
@@ -712,11 +713,12 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
       <div id="quizResult" class="hidden"></div>
     </div>
 
-    <div id="certArea" class="hidden">
+    <div id="certArea">
       <input id="certName" maxlength="12" placeholder="✏️ 输入你的名字">
       <button class="btn btn-yellow" id="certBtn">🎖️ 领取结业证书</button>
       <span id="certGateMsg" role="status" aria-live="polite"></span>
     </div>
+    <div id="l50CertificateGate"></div>
   </div>
 </section>
 
@@ -747,6 +749,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
 
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/certificate-gate.js"></script>
 <script src="/core/assessment.js"></script>
 <script src="/core/audio-player.js"></script>
 <script>
@@ -997,18 +1000,19 @@ let stars=l50Loaded.progress.ratings;
 function getStar(l){return stars[l];}
 function starStr(n){return '★'.repeat(n)+'☆'.repeat(3-n);}
 function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
+const L50_CERTIFICATE_TARGETS=[
+  {id:'l1',selector:'#l1',label:'蔬果图鉴'},
+  {id:'l2',selector:'#l2',label:'餐桌'},
+  {id:'l3',selector:'#l3',label:'动词变身魔法屋'},
+  {id:'l4',selector:'#l4',label:'照妖镜挑战'},
+  {id:'l5',selector:'#l5',label:'皇家大考核'}
+];
 function canIssueL50Certificate(){
-  return CanranCore.progress.allAtLeast(stars,LVLS,1);
+  return CanranCore.certificateGate
+    .completionState(stars,L50_CERTIFICATE_TARGETS).eligible;
 }
 function renderL50CertificateGate(){
-  const area=$('#certArea'),button=$('#certBtn'),message=$('#certGateMsg');
-  const attemptedFinal=getStar('l5')>0;
-  area.classList.toggle('hidden',!attemptedFinal);
-  button.disabled=!canIssueL50Certificate();
-  const missing=LVLS.filter(level=>getStar(level)<1).length;
-  message.textContent=missing===0
-    ?'五关已完成，可以领取证书。'
-    :'还需完成 '+missing+' 个关卡。';
+  if(l50CertificateGate)l50CertificateGate.refresh();
 }
 function persistStars(){
   const saved=CanranCore.storage.saveProgress({
@@ -1840,7 +1844,8 @@ function focusAfterL50Certificate(target){
 }
 function openL50CertificateDialog(){
   if(!canIssueL50Certificate()){
-    renderL50CertificateGate();
+    closeL50CertificateDialog();
+    l50CertificateGate.open();
     return false;
   }
   if(l50CertDialog.open)return true;
@@ -1860,6 +1865,26 @@ function closeL50CertificateDialog(){
   if(l50CertDialog.open)l50CertDialog.close();
   focusAfterL50Certificate(l50CertReturnFocus);
 }
+function issueL50Certificate(){
+  sndClick();
+  const name=($('#certName').value||'').trim()||'小学者';
+  $('#certNameOut').textContent=name;
+  $('#certStars').textContent=starStr(getStar('l5'));
+  $('#certTotal').textContent=totalStars();
+  const d=new Date();
+  $('#certDate').textContent=d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月 '+d.getDate()+' 日';
+  openL50CertificateDialog();
+  fanfare();confetti(80);
+  return true;
+}
+const l50CertificateGate=CanranCore.certificateGate.create({
+  trigger:$('#certBtn'),mount:$('#l50CertificateGate'),status:$('#certGateMsg'),
+  getRatings:()=>stars,targets:L50_CERTIFICATE_TARGETS,
+  courseName:'Lesson 50 · 挑食小王子',icon:'👑',accent:'#7250b5',
+  pageColor:'var(--cream)',itemLabel:'关',
+  readyMessage:'15/15 颗星已集齐，可以领取证书。',
+  onEligible:issueL50Certificate
+});
 l50CertDialog.addEventListener('cancel',event=>{
   event.preventDefault();
   closeL50CertificateDialog();
@@ -1880,21 +1905,6 @@ l50CertDialog.addEventListener('keydown',event=>{
     first.focus();
   }
 });
-$('#certBtn').addEventListener('click',()=>{
-  if(!canIssueL50Certificate()){
-    renderL50CertificateGate();
-    return;
-  }
-  sndClick();
-  const name=($('#certName').value||'').trim()||'小学者';
-  $('#certNameOut').textContent=name;
-  $('#certStars').textContent=starStr(getStar('l5'));
-  $('#certTotal').textContent=totalStars();
-  const d=new Date();
-  $('#certDate').textContent=d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月 '+d.getDate()+' 日';
-  openL50CertificateDialog();
-  fanfare();confetti(80);
-});
 $('#certClose').addEventListener('click',()=>{
   closeL50CertificateDialog();
   sndClick();
@@ -1902,7 +1912,7 @@ $('#certClose').addEventListener('click',()=>{
 $('#certSave').addEventListener('click',()=>{
   if(!canIssueL50Certificate()){
     closeL50CertificateDialog();
-    renderL50CertificateGate();
+    l50CertificateGate.open();
     return;
   }
   sndClick();
@@ -1911,7 +1921,7 @@ $('#certSave').addEventListener('click',()=>{
 $('#certPrint').addEventListener('click',()=>{
   if(!canIssueL50Certificate()){
     closeL50CertificateDialog();
-    renderL50CertificateGate();
+    l50CertificateGate.open();
     return;
   }
   window.print();
