@@ -10,6 +10,37 @@ async function seed(page,ratings){
   },{key:KEY,values:ratings});
 }
 
+async function controlCertificatePrintTimer(page){
+  await page.addInitScript(()=>{
+    const nativeSetTimeout=window.setTimeout.bind(window);
+    const nativeClearTimeout=window.clearTimeout.bind(window);
+    let nextTimerId=100000;
+    const pending=new Map();
+    window.__printCalls=0;
+    window.__clearedCertificatePrintTimers=[];
+    window.print=()=>{window.__printCalls+=1;};
+    window.setTimeout=(callback,delay,...args)=>{
+      if(delay!==600)return nativeSetTimeout(callback,delay,...args);
+      const timerId=nextTimerId++;
+      pending.set(timerId,()=>callback(...args));
+      return timerId;
+    };
+    window.clearTimeout=timerId=>{
+      if(pending.delete(timerId)){
+        window.__clearedCertificatePrintTimers.push(timerId);
+        return;
+      }
+      nativeClearTimeout(timerId);
+    };
+    window.__pendingCertificatePrintTimers=()=>pending.size;
+    window.__runCertificatePrintTimers=()=>{
+      const callbacks=Array.from(pending.values());
+      pending.clear();
+      callbacks.forEach(callback=>callback());
+    };
+  });
+}
+
 test('Lesson 54 exposes an actionable locked certificate from zero stars',async({page})=>{
   await page.goto('/lesson54/#cert');
   await expect(page.locator('#btnPrint')).toBeEnabled();
@@ -44,4 +75,40 @@ test('Lesson 54 blocks fourteen stars and prints at fifteen',async({page})=>{
   await page.locator('#certName').fill('小明');
   await page.locator('#btnPrint').click();
   await expect.poll(()=>page.evaluate(()=>window.__printCalls),{timeout:1500}).toBe(1);
+});
+
+test('Lesson 54 rechecks eligibility at the delayed print boundary',async({page})=>{
+  await seed(page,{l1:3,l2:3,l3:3,l4:3,l5:3});
+  await controlCertificatePrintTimer(page);
+  await page.goto('/lesson54/#cert');
+  await page.locator('#certName').fill('小明');
+  await page.locator('#btnPrint').click();
+  expect(await page.evaluate(()=>window.__pendingCertificatePrintTimers())).toBe(1);
+
+  await page.evaluate(()=>{
+    window.eval('stars={l1:3,l2:3,l3:3,l4:3,l5:2}');
+    window.__runCertificatePrintTimers();
+  });
+
+  expect(await page.evaluate(()=>window.__printCalls)).toBe(0);
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state','locked');
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
+});
+
+test('Lesson 54 keeps only one pending delayed print',async({page})=>{
+  await seed(page,{l1:3,l2:3,l3:3,l4:3,l5:3});
+  await controlCertificatePrintTimer(page);
+  await page.goto('/lesson54/#cert');
+  await page.locator('#certName').fill('小明');
+
+  await page.locator('#btnPrint').evaluate(button=>{
+    button.click();
+    button.click();
+  });
+
+  expect(await page.evaluate(()=>window.__pendingCertificatePrintTimers())).toBe(1);
+  expect(await page.evaluate(()=>window.__clearedCertificatePrintTimers)).toHaveLength(1);
+  await page.evaluate(()=>window.__runCertificatePrintTimers());
+  expect(await page.evaluate(()=>window.__printCalls)).toBe(1);
 });

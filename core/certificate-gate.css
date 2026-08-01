@@ -25,6 +25,7 @@
   .certificate-gate-buttons{grid-template-columns:1fr;gap:10px}
 }
 @media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
   .certificate-gate-button{transition:none}
 }
 @media print{

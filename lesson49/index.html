@@ -1996,6 +1996,11 @@ async function saveCertImage(){
 
   let blob=null;
   try{blob=await renderCertBlob();}catch(error){safeLog('证书转码失败：',error);}
+  if(!canIssueL49Certificate()){
+    closeL49CertificateDialog();
+    l49CertificateGate.open();
+    return;
+  }
   if(!blob){
     safeAlert('😢 证书生成失败，请再点一次试试');
     return;
@@ -2005,6 +2010,12 @@ async function saveCertImage(){
     url=URL.createObjectURL(blob);
   }catch(error){
     safeLog('证书图片创建失败：',error);
+  }
+  if(!canIssueL49Certificate()){
+    safeRevoke(url);
+    closeL49CertificateDialog();
+    l49CertificateGate.open();
+    return;
   }
   if(!url){
     safeAlert('😢 当前浏览器无法生成图片，直接截图保存吧');

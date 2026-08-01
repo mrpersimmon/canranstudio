@@ -29,7 +29,7 @@ packages are build-time inputs only: run `npm run vendor:fonts` after `npm ci` t
 committed local font assets. The generated WOFF2 files, `fonts.css`, and copied OFL licenses all
 live under `assets/fonts/`, and every public page loads its fonts from that same-origin path.
 
-Certificate issue, print, and save entry points re-check their own course eligibility before they act. The five course certificate experiences provide accessible, polite, atomic feedback. Lesson 51 requires at least one star in every level and prints only its certificate; Lesson 49 continues to export through a Blob and revoke every object URL after preview closure or creation failure.
+Certificate issue, print, and save entry points re-check their own course eligibility before they act. The five course certificate experiences provide accessible, polite, atomic feedback. Lessons 49, 50, 51, and 54 require exactly 15/15 stars; soundmark requires exactly 12/12 stars. Lesson 49 continues to export through a Blob and revoke every object URL after preview closure, authorization loss, or creation failure.
 
 ## Production transport
 

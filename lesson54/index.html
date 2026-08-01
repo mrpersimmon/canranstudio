@@ -557,11 +557,23 @@ function canIssue(){
 function renderCertGate(){
   if(l54CertificateGate)l54CertificateGate.refresh();
 }
+let l54PrintTimer=null;
 function issueL54Certificate(){
+  if(l54PrintTimer!==null){
+    clearTimeout(l54PrintTimer);
+    l54PrintTimer=null;
+  }
   const name=$('#certName').value.trim();
   if(!name){toast('先写上你的名字哦');$('#certName').focus();return false;}
   celebrate();
-  setTimeout(()=>window.print(),600);
+  l54PrintTimer=setTimeout(()=>{
+    l54PrintTimer=null;
+    if(!canIssue()){
+      l54CertificateGate.open();
+      return;
+    }
+    window.print();
+  },600);
   return true;
 }
 const l54CertificateGate=CanranCore.certificateGate.create({

@@ -153,7 +153,9 @@
         targetName.textContent = `「${state.firstIncomplete.label}」`;
         go.textContent = `前往「${state.firstIncomplete.label}」补满星`;
       }
-      if (state.eligible) close();
+      if (state.eligible) {
+        close({ restoreFocus: mount.contains(documentRef.activeElement) });
+      }
       return state;
     }
 

@@ -197,16 +197,28 @@ test('Lesson 51 certificate cannot be forged and eligible printing is real', asy
   await expect(page.locator('#btnPrint')).toBeHidden();
 });
 
-test('Lesson 51 closes an open gate when refreshed ratings reach fifteen stars', async ({ page }) => {
+test('Lesson 51 restores trigger focus when an asynchronous refresh reaches fifteen stars', async ({ page }) => {
   await page.goto('/lesson51/#cert');
   await page.locator('#btnPrint').click();
   await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
   await page.evaluate(() => {
-    window.eval('ratings={l1:3,l2:3,l3:3,l4:3,l5:3}');
-    window.renderStars();
+    let releaseRefresh;
+    window.__fullRatingRefresh = new Promise(resolve => {
+      releaseRefresh = resolve;
+    }).then(() => {
+      window.eval('ratings={l1:3,l2:3,l3:3,l4:3,l5:3}');
+      window.renderStars();
+    });
+    window.__releaseFullRatingRefresh = releaseRefresh;
+  });
+  await page.evaluate(async () => {
+    window.__releaseFullRatingRefresh();
+    await window.__fullRatingRefresh;
   });
   await expect(page.locator('[data-certificate-gate]')).toBeHidden();
   await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'ready');
+  await expect(page.locator('#btnPrint')).toBeFocused();
 });
 
 test('Lesson 51 quiz stores one historical rating instead of additive stars', async ({ page }) => {

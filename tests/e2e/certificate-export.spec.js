@@ -68,6 +68,66 @@ test('Lesson 49 exports through Blob, sanitizes the name, and revokes on close',
   expect(await page.evaluate(() => window.__certificate.revokedUrls)).toEqual(['blob:canran-1']);
 });
 
+test('Lesson 49 aborts save when eligibility is lost during Blob encoding', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    window.__pendingEligibilityBlob = null;
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      window.__certificate.toBlobCalls += 1;
+      window.__pendingEligibilityBlob = callback;
+    };
+  });
+  await page.locator('#certSave').click();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__pendingEligibilityBlob))).toBe(true);
+
+  await page.evaluate(() => {
+    window.eval('stars={l1:3,l2:3,l3:3,l4:3,l5:2}');
+    window.__pendingEligibilityBlob(new Blob(['png'], { type: 'image/png' }));
+  });
+
+  await expect(page.locator('#certModal')).not.toBeVisible();
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
+  expect(await page.evaluate(() => window.__certificate)).toMatchObject({
+    createdUrls: [],
+    downloads: [],
+    revokedUrls: []
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+});
+
+test('Lesson 49 revokes a created URL when eligibility is lost before exposure', async ({ page }) => {
+  await openCertificate(page, '小明');
+  await page.evaluate(() => {
+    window.__pendingExposureBlob = null;
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      window.__certificate.toBlobCalls += 1;
+      window.__pendingExposureBlob = callback;
+    };
+    const createObjectURL = URL.createObjectURL;
+    URL.createObjectURL = blob => {
+      const url = createObjectURL(blob);
+      window.eval('stars={l1:3,l2:3,l3:3,l4:3,l5:2}');
+      return url;
+    };
+  });
+  await page.locator('#certSave').click();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__pendingExposureBlob))).toBe(true);
+  await page.evaluate(() => {
+    window.__pendingExposureBlob(new Blob(['png'], { type: 'image/png' }));
+  });
+
+  await expect(page.locator('#certModal')).not.toBeVisible();
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
+  expect(await page.evaluate(() => window.__certificate)).toMatchObject({
+    createdUrls: [{ value: 'blob:canran-1', type: 'image/png' }],
+    downloads: [],
+    revokedUrls: ['blob:canran-1']
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+});
+
 test('Lesson 49 backdrop close revokes exactly once', async ({ page }) => {
   await openCertificate(page, '小明');
   await page.locator('#certSave').click();

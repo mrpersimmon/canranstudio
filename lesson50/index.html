@@ -1752,9 +1752,20 @@ async function saveCertImage(){
     }
   }catch(e){}
   const blob=await renderCertBlob();
+  if(!canIssueL50Certificate()){
+    closeL50CertificateDialog();
+    l50CertificateGate.open();
+    return;
+  }
   if(!blob){alert('😢 证书生成失败，请再点一次试试');return;}
   let url='';
   try{url=URL.createObjectURL(blob);}catch(e){}
+  if(!canIssueL50Certificate()){
+    safeL50Revoke(url);
+    closeL50CertificateDialog();
+    l50CertificateGate.open();
+    return;
+  }
   if(!url){alert('😢 当前浏览器无法生成图片，直接截图保存吧');return;}
   /* 1) 尝试直接下载（iOS 15+ Safari / 安卓 Chrome 支持） */
   try{

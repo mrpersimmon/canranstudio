@@ -484,6 +484,97 @@ for (const lesson of [
   });
 }
 
+test('Lesson 50 aborts save when eligibility is lost during Blob encoding', async ({ page }) => {
+  await seedProgress(page, 'canran:l50:progress:v2',
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
+  await page.addInitScript(() => {
+    window.__l50EligibilitySave = {
+      blobCallback: null,
+      createdUrls: [],
+      downloads: [],
+      revokedUrls: []
+    };
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      window.__l50EligibilitySave.blobCallback = callback;
+    };
+    URL.createObjectURL = () => {
+      const url = `blob:l50-eligibility-${window.__l50EligibilitySave.createdUrls.length + 1}`;
+      window.__l50EligibilitySave.createdUrls.push(url);
+      return url;
+    };
+    URL.revokeObjectURL = url => window.__l50EligibilitySave.revokedUrls.push(url);
+    HTMLAnchorElement.prototype.click = function click() {
+      window.__l50EligibilitySave.downloads.push(this.href);
+    };
+  });
+  await page.goto('/lesson50/');
+  await page.locator('#certBtn').click();
+  await page.locator('#certSave').click();
+  await expect.poll(() =>
+    page.evaluate(() => Boolean(window.__l50EligibilitySave.blobCallback))
+  ).toBe(true);
+
+  await page.evaluate(() => {
+    window.eval('stars={l1:3,l2:3,l3:3,l4:3,l5:2}');
+    window.__l50EligibilitySave.blobCallback(new Blob(['png'], { type: 'image/png' }));
+  });
+
+  await expect(page.locator('#certModal')).not.toBeVisible();
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
+  expect(await page.evaluate(() => window.__l50EligibilitySave)).toMatchObject({
+    createdUrls: [],
+    downloads: [],
+    revokedUrls: []
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+});
+
+test('Lesson 50 revokes a created URL when eligibility is lost before exposure', async ({ page }) => {
+  await seedProgress(page, 'canran:l50:progress:v2',
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
+  await page.addInitScript(() => {
+    window.__l50ExposureSave = {
+      blobCallback: null,
+      createdUrls: [],
+      downloads: [],
+      revokedUrls: []
+    };
+    HTMLCanvasElement.prototype.toBlob = callback => {
+      window.__l50ExposureSave.blobCallback = callback;
+    };
+    URL.createObjectURL = () => {
+      const url = `blob:l50-exposure-${window.__l50ExposureSave.createdUrls.length + 1}`;
+      window.__l50ExposureSave.createdUrls.push(url);
+      window.eval('stars={l1:3,l2:3,l3:3,l4:3,l5:2}');
+      return url;
+    };
+    URL.revokeObjectURL = url => window.__l50ExposureSave.revokedUrls.push(url);
+    HTMLAnchorElement.prototype.click = function click() {
+      window.__l50ExposureSave.downloads.push(this.href);
+    };
+  });
+  await page.goto('/lesson50/');
+  await page.locator('#certBtn').click();
+  await page.locator('#certSave').click();
+  await expect.poll(() =>
+    page.evaluate(() => Boolean(window.__l50ExposureSave.blobCallback))
+  ).toBe(true);
+  await page.evaluate(() => {
+    window.__l50ExposureSave.blobCallback(new Blob(['png'], { type: 'image/png' }));
+  });
+
+  await expect(page.locator('#certModal')).not.toBeVisible();
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
+  expect(await page.evaluate(() => window.__l50ExposureSave)).toMatchObject({
+    createdUrls: ['blob:l50-exposure-1'],
+    downloads: [],
+    revokedUrls: ['blob:l50-exposure-1']
+  });
+  await expect(page.locator('#certSaveOverlay')).toHaveCount(0);
+});
+
 test('Lesson 50 rapid saves keep one preview owner across reverse completion', async ({ page }) => {
   await seedProgress(page, 'canran:l50:progress:v2',
     { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });

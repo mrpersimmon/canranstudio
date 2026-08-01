@@ -11,7 +11,7 @@ npm test
 ```
 
 `test:unit` verifies storage, finite ratings, first-attempt scoring, and stable option identity.
-`test:state` verifies the four pages against the repository-local static server.
+`test:state` verifies the home page, Lessons 49, 50, 51, and 54, and soundmark against the repository-local static server.
 `npm test` is the complete pre-commit gate.
 `npm run test:e2e -- tests/e2e/audio-lifecycle.spec.js` verifies terminal playback,
 interruption cleanup, and the Lesson 50 queue.

@@ -95,3 +95,31 @@ test('missing target keeps the gate open and never prints',async({page})=>{
   expect(page.url()).toBe(before);
   expect(await page.evaluate(()=>window.__printCalls)).toBe(0);
 });
+
+test('certificate navigation is instant when reduced motion is requested',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.addInitScript(()=>{
+    localStorage.setItem('canran:l51:progress:v2',JSON.stringify({
+      version:2,ratings:{l1:3,l2:2,l3:3,l4:3,l5:3}
+    }));
+  });
+  await page.goto('/lesson51/#cert');
+  await page.locator('#btnPrint').click();
+  await page.locator('[data-certificate-go]').click();
+  await expect(page).toHaveURL(/#w2$/);
+  await expect(page.locator('#w2 h2')).toBeFocused();
+
+  const result=await page.evaluate(async()=>{
+    const positions=[window.scrollY];
+    await new Promise(resolve=>requestAnimationFrame(resolve));
+    positions.push(window.scrollY);
+    await new Promise(resolve=>requestAnimationFrame(resolve));
+    positions.push(window.scrollY);
+    return {
+      rootBehavior:getComputedStyle(document.documentElement).scrollBehavior,
+      positions
+    };
+  });
+  expect(result.rootBehavior).toBe('auto');
+  expect(new Set(result.positions).size).toBe(1);
+});
