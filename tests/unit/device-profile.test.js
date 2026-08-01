@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 const catalog = require('../../core/course-catalog');
 const {
   PROFILE_KEY,
+  hasSouvenir,
   initializeDeviceProfile,
   visitDistrict,
   restartAdventure
@@ -63,6 +64,7 @@ test('first device profile initialization inherits only proven stages and is ide
   assert.deepEqual(first.profile, {
     version: 1,
     currentDistrictId: null,
+    souvenirs: [],
     completedStages: {
       ...emptyCompletedStages(),
       lesson49: ['l1', 'l2', 'l3', 'l5']
@@ -77,6 +79,7 @@ test('restart clears every catalog-owned record and preserves unrelated storage'
     [PROFILE_KEY]: JSON.stringify({
       version: 1,
       currentDistrictId: catalog.LAUNCH_DISTRICT.id,
+      souvenirs: ['food-basket'],
       completedStages: { lesson49: ['l1', 'l2'] }
     }),
     'canran:l49:progress:v2': JSON.stringify({
@@ -99,6 +102,7 @@ test('restart clears every catalog-owned record and preserves unrelated storage'
   assert.deepEqual(JSON.parse(storage.getItem(PROFILE_KEY)), {
     version: 1,
     currentDistrictId: null,
+    souvenirs: [],
     completedStages: {
       ...emptyCompletedStages()
     }
@@ -143,6 +147,34 @@ test('a proven device stage never regresses when a later course rating is lower'
   const result = initializeDeviceProfile({ storage, courses: catalog.COURSES });
 
   assert.deepEqual(result.profile.completedStages.lesson49, ['l1', 'l2', 'l3']);
+});
+
+test('a completed map course awards its known souvenir once and never regresses', () => {
+  const storage = memoryStorage({
+    [PROFILE_KEY]: JSON.stringify({
+      version: 1,
+      souvenirs: ['unknown-token'],
+      completedStages: { lesson49: ['l1', 'l2', 'l3', 'l4', 'l5'] }
+    }),
+    'canran:l49:progress:v2': JSON.stringify({
+      version: 2,
+      ratings: { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 }
+    })
+  });
+
+  const awarded = initializeDeviceProfile({ storage, courses: catalog.COURSES });
+  assert.deepEqual(awarded.profile.souvenirs, ['food-basket']);
+  assert.equal(hasSouvenir(awarded.profile, 'food-basket'), true);
+  assert.equal(hasSouvenir(awarded.profile, 'unknown-token'), false);
+
+  storage.setItem('canran:l49:progress:v2', JSON.stringify({
+    version: 2,
+    ratings: { l1: 0, l2: 0, l3: 0, l4: 0, l5: 0 }
+  }));
+  const returned = initializeDeviceProfile({ storage, courses: catalog.COURSES });
+
+  assert.deepEqual(returned.profile.souvenirs, ['food-basket']);
+  assert.equal(hasSouvenir(returned.profile, 'food-basket'), true);
 });
 
 test('visiting the launch district becomes the device return view without changing progress', () => {

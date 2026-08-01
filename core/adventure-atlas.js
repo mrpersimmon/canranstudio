@@ -29,6 +29,13 @@
       .filter(id => completed.has(id));
   }
 
+  function ownedSouvenir(course, profile) {
+    const id = course?.map?.souvenir?.id;
+    return typeof id === 'string' &&
+      Array.isArray(profile?.souvenirs) &&
+      profile.souvenirs.includes(id);
+  }
+
   function buildLocationModels(courses, profile = null) {
     if (!catalogApi || !Array.isArray(courses)) return Object.freeze([]);
     return deepFreeze(courses.map((course, index) => {
@@ -67,7 +74,9 @@
         completedStageCount,
         totalStageCount,
         progressState,
-        souvenir: progressState === 'complete' ? course.map.souvenir : null
+        souvenir: published && ownedSouvenir(course, profile)
+          ? course.map.souvenir
+          : null
       };
     }));
   }

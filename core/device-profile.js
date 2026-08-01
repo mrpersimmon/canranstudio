@@ -35,10 +35,47 @@
     )];
   }
 
+  function souvenirId(course) {
+    return typeof course?.map?.souvenir?.id === 'string'
+      ? course.map.souvenir.id
+      : null;
+  }
+
+  function knownSouvenirIds(courses) {
+    return [...new Set(mapCourses(courses).map(souvenirId).filter(Boolean))];
+  }
+
+  function hasSouvenir(profile, id) {
+    return typeof id === 'string' &&
+      Array.isArray(profile?.souvenirs) &&
+      profile.souvenirs.includes(id);
+  }
+
+  function courseIsComplete(profile, course) {
+    const required = stageIds(course);
+    if (required.length === 0) return false;
+    const completed = new Set(profile.completedStages[course.id] || []);
+    return required.every(id => completed.has(id));
+  }
+
+  function refreshSouvenirs(profile, courses, sourceSouvenirs = profile.souvenirs) {
+    const owned = new Set(
+      Array.isArray(sourceSouvenirs)
+        ? sourceSouvenirs.filter(id => typeof id === 'string')
+        : []
+    );
+    for (const course of mapCourses(courses)) {
+      const id = souvenirId(course);
+      if (id && courseIsComplete(profile, course)) owned.add(id);
+    }
+    profile.souvenirs = knownSouvenirIds(courses).filter(id => owned.has(id));
+  }
+
   function emptyDeviceProfile(courses) {
     return {
       version: PROFILE_VERSION,
       currentDistrictId: null,
+      souvenirs: [],
       completedStages: Object.fromEntries(
         mapCourses(courses).map(course => [course.id, []])
       )
@@ -63,6 +100,7 @@
       profile.completedStages[course.id] = stageIds(course)
         .filter(id => completedSet.has(id));
     }
+    refreshSouvenirs(profile, courses, validProfile ? raw.souvenirs : []);
     return profile;
   }
 
@@ -109,6 +147,7 @@
       persisted = persisted && loaded.persisted;
       mergeProvenStages(profile, course, loaded.progress);
     }
+    refreshSouvenirs(profile, courses);
 
     const normalized = JSON.stringify(profile);
     if (encoded !== normalized) {
@@ -171,6 +210,7 @@
   return Object.freeze({
     PROFILE_VERSION,
     PROFILE_KEY,
+    hasSouvenir,
     initializeDeviceProfile,
     visitDistrict,
     restartAdventure

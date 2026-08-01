@@ -25,6 +25,7 @@ Run these focused hardening checks when changing the corresponding behavior:
 npm run test:e2e -- tests/e2e/certificate-export.spec.js
 npm run test:e2e -- tests/e2e/accessibility.spec.js
 npm run test:e2e -- tests/e2e/local-fonts.spec.js
+npm run test:e2e -- tests/e2e/lesson49-map.spec.js tests/e2e/lesson50-story.spec.js
 ```
 
 The browser runtime remains static and package-free. `npm run vendor:fonts` rebuilds the committed

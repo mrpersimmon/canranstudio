@@ -9,7 +9,15 @@ function profileWithLesson49(...completedStageIds) {
   return {
     version: 1,
     currentDistrictId: 'first-book-49-60',
+    souvenirs: [],
     completedStages: { lesson49: completedStageIds }
+  };
+}
+
+function profileWithFoodBasket(...completedStageIds) {
+  return {
+    ...profileWithLesson49(...completedStageIds),
+    souvenirs: ['food-basket']
   };
 }
 
@@ -82,9 +90,24 @@ test('Lesson 49 renders base plus exactly the cumulative layers for stages zero 
     );
     assert.deepEqual(
       model.souvenir,
-      completed === 5 ? lesson49.map.souvenir : null
+      null
     );
   }
+});
+
+test('atlas renders a souvenir only from explicit permanent device ownership', () => {
+  const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
+  const completeWithoutSouvenir = atlas.buildLocationModels(
+    [lesson49],
+    profileWithLesson49('l1', 'l2', 'l3', 'l4', 'l5')
+  )[0];
+  const ownedAfterCompletion = atlas.buildLocationModels(
+    [lesson49],
+    profileWithFoodBasket('l1', 'l2', 'l3', 'l4', 'l5')
+  )[0];
+
+  assert.equal(completeWithoutSouvenir.souvenir, null);
+  assert.deepEqual(ownedAfterCompletion.souvenir, lesson49.map.souvenir);
 });
 
 test('recommendation prefers an unfinished published location and stays deterministic', () => {
