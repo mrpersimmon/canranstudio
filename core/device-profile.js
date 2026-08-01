@@ -29,9 +29,16 @@
       : [];
   }
 
+  function districtIds(courses) {
+    return [...new Set(
+      mapCourses(courses).map(course => course.map.districtId).filter(Boolean)
+    )];
+  }
+
   function emptyDeviceProfile(courses) {
     return {
       version: PROFILE_VERSION,
+      currentDistrictId: null,
       completedStages: Object.fromEntries(
         mapCourses(courses).map(course => [course.id, []])
       )
@@ -40,12 +47,15 @@
 
   function normalizeDeviceProfile(raw, courses) {
     const profile = emptyDeviceProfile(courses);
-    const source = raw && typeof raw === 'object' && !Array.isArray(raw) &&
+    const validProfile = raw && typeof raw === 'object' && !Array.isArray(raw) &&
       raw.version === PROFILE_VERSION &&
       raw.completedStages && typeof raw.completedStages === 'object' &&
-      !Array.isArray(raw.completedStages)
-      ? raw.completedStages
-      : {};
+      !Array.isArray(raw.completedStages);
+    const source = validProfile ? raw.completedStages : {};
+    const knownDistricts = new Set(districtIds(courses));
+    if (validProfile && knownDistricts.has(raw.currentDistrictId)) {
+      profile.currentDistrictId = raw.currentDistrictId;
+    }
 
     for (const course of mapCourses(courses)) {
       const completed = Array.isArray(source[course.id]) ? source[course.id] : [];
@@ -111,6 +121,21 @@
     return { profile, persisted };
   }
 
+  function visitDistrict({ storage, courses, profile, districtId }) {
+    const normalized = normalizeDeviceProfile(profile, courses);
+    if (!districtIds(courses).includes(districtId)) {
+      return { profile: normalized, persisted: false };
+    }
+    normalized.currentDistrictId = districtId;
+    if (!storage) return { profile: normalized, persisted: false };
+    try {
+      storage.setItem(PROFILE_KEY, JSON.stringify(normalized));
+      return { profile: normalized, persisted: true };
+    } catch {
+      return { profile: normalized, persisted: false };
+    }
+  }
+
   function ownedStorageKeys(courses) {
     const keys = new Set([PROFILE_KEY]);
     for (const course of Array.isArray(courses) ? courses : []) {
@@ -147,6 +172,7 @@
     PROFILE_VERSION,
     PROFILE_KEY,
     initializeDeviceProfile,
+    visitDistrict,
     restartAdventure
   });
 });

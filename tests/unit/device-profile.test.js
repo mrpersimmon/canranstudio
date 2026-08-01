@@ -6,6 +6,7 @@ const catalog = require('../../core/course-catalog');
 const {
   PROFILE_KEY,
   initializeDeviceProfile,
+  visitDistrict,
   restartAdventure
 } = require('../../core/device-profile');
 
@@ -61,6 +62,7 @@ test('first device profile initialization inherits only proven stages and is ide
   assert.equal(first.persisted, true);
   assert.deepEqual(first.profile, {
     version: 1,
+    currentDistrictId: null,
     completedStages: {
       ...emptyCompletedStages(),
       lesson49: ['l1', 'l2', 'l3', 'l5']
@@ -74,6 +76,7 @@ test('restart clears every catalog-owned record and preserves unrelated storage'
   const storage = memoryStorage({
     [PROFILE_KEY]: JSON.stringify({
       version: 1,
+      currentDistrictId: catalog.LAUNCH_DISTRICT.id,
       completedStages: { lesson49: ['l1', 'l2'] }
     }),
     'canran:l49:progress:v2': JSON.stringify({
@@ -95,6 +98,7 @@ test('restart clears every catalog-owned record and preserves unrelated storage'
   assert.equal(result.persisted, true);
   assert.deepEqual(JSON.parse(storage.getItem(PROFILE_KEY)), {
     version: 1,
+    currentDistrictId: null,
     completedStages: {
       ...emptyCompletedStages()
     }
@@ -139,4 +143,22 @@ test('a proven device stage never regresses when a later course rating is lower'
   const result = initializeDeviceProfile({ storage, courses: catalog.COURSES });
 
   assert.deepEqual(result.profile.completedStages.lesson49, ['l1', 'l2', 'l3']);
+});
+
+test('visiting the launch district becomes the device return view without changing progress', () => {
+  const storage = memoryStorage();
+  const initialized = initializeDeviceProfile({ storage, courses: catalog.COURSES });
+
+  const visited = visitDistrict({
+    storage,
+    courses: catalog.COURSES,
+    profile: initialized.profile,
+    districtId: catalog.LAUNCH_DISTRICT.id
+  });
+  const returned = initializeDeviceProfile({ storage, courses: catalog.COURSES });
+
+  assert.equal(visited.persisted, true);
+  assert.equal(visited.profile.currentDistrictId, 'first-book-49-60');
+  assert.deepEqual(visited.profile.completedStages, initialized.profile.completedStages);
+  assert.equal(returned.profile.currentDistrictId, 'first-book-49-60');
 });

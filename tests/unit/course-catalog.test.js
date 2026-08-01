@@ -73,6 +73,34 @@ test('course catalog is the complete immutable contract for lessons and special 
   assertDeepFrozen(catalog.COURSES);
 });
 
+test('world atlas declares twelve immutable districts with one V1 entrance', () => {
+  assert.deepEqual(
+    catalog.DISTRICTS.map(district => [
+      district.id,
+      district.lessonStart,
+      district.lessonEnd,
+      district.v1Accessible
+    ]),
+    [
+      ['first-book-1-12', 1, 12, false],
+      ['first-book-13-24', 13, 24, false],
+      ['first-book-25-36', 25, 36, false],
+      ['first-book-37-48', 37, 48, false],
+      ['first-book-49-60', 49, 60, true],
+      ['first-book-61-72', 61, 72, false],
+      ['first-book-73-84', 73, 84, false],
+      ['first-book-85-96', 85, 96, false],
+      ['first-book-97-108', 97, 108, false],
+      ['first-book-109-120', 109, 120, false],
+      ['first-book-121-132', 121, 132, false],
+      ['first-book-133-144', 133, 144, false]
+    ]
+  );
+  assert.equal(catalog.LAUNCH_DISTRICT.id, 'first-book-49-60');
+  assert.equal(catalog.LAUNCH_DISTRICT.title, '暖灯集市');
+  assertDeepFrozen(catalog.DISTRICTS);
+});
+
 test('published course pages resolve their progress contract from the shared catalog', () => {
   const lesson49 = catalog.requirePublishedCourse('lesson49');
   const lesson52 = catalog.requirePublishedCourse('lesson52');

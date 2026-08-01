@@ -43,10 +43,25 @@
 
   const LESSON_STAGE_IDS = ['l1', 'l2', 'l3', 'l4', 'l5'];
   const SOUND_STAGE_IDS = ['vs', 'g1', 'g2', 'g3'];
+  const DISTRICTS = deepFreeze([
+    { id: 'first-book-1-12', order: 1, title: '晨光原野', lessonStart: 1, lessonEnd: 12, v1Accessible: false },
+    { id: 'first-book-13-24', order: 2, title: '回声溪谷', lessonStart: 13, lessonEnd: 24, v1Accessible: false },
+    { id: 'first-book-25-36', order: 3, title: '单词花园', lessonStart: 25, lessonEnd: 36, v1Accessible: false },
+    { id: 'first-book-37-48', order: 4, title: '故事港湾', lessonStart: 37, lessonEnd: 48, v1Accessible: false },
+    { id: 'first-book-49-60', order: 5, title: '暖灯集市', lessonStart: 49, lessonEnd: 60, v1Accessible: true },
+    { id: 'first-book-61-72', order: 6, title: '四季丘陵', lessonStart: 61, lessonEnd: 72, v1Accessible: false },
+    { id: 'first-book-73-84', order: 7, title: '环球车站', lessonStart: 73, lessonEnd: 84, v1Accessible: false },
+    { id: 'first-book-85-96', order: 8, title: '句型山城', lessonStart: 85, lessonEnd: 96, v1Accessible: false },
+    { id: 'first-book-97-108', order: 9, title: '阅读森林', lessonStart: 97, lessonEnd: 108, v1Accessible: false },
+    { id: 'first-book-109-120', order: 10, title: '表达海湾', lessonStart: 109, lessonEnd: 120, v1Accessible: false },
+    { id: 'first-book-121-132', order: 11, title: '写作星原', lessonStart: 121, lessonEnd: 132, v1Accessible: false },
+    { id: 'first-book-133-144', order: 12, title: '冠军广场', lessonStart: 133, lessonEnd: 144, v1Accessible: false }
+  ]);
+  const LAUNCH_DISTRICT = DISTRICTS.find(district => district.v1Accessible);
 
   function lessonMap({ souvenir = null } = {}) {
     return {
-      districtId: 'first-book-49-60',
+      districtId: LAUNCH_DISTRICT.id,
       v1Visible: true,
       declaredStatus: 'drawing',
       baseAsset: null,
@@ -288,6 +303,7 @@
     if (!Array.isArray(courses)) return Object.freeze(['catalog must be an array']);
 
     const errors = [];
+    const districtIds = new Set(DISTRICTS.map(district => district.id));
     const seen = {
       id: new Map(),
       lesson: new Map(),
@@ -383,6 +399,10 @@
         if (belongsToV1Map) {
           if (typeof course.map.districtId !== 'string' || !course.map.districtId) {
             errors.push(`${id}: V1 map lesson districtId is required`);
+          } else if (!districtIds.has(course.map.districtId)) {
+            errors.push(`${id}: unknown V1 map districtId ${course.map.districtId}`);
+          } else if (course.map.districtId !== LAUNCH_DISTRICT.id) {
+            errors.push(`${id}: Lesson 49-60 must belong to ${LAUNCH_DISTRICT.id}`);
           }
           if (course.map.v1Visible !== true) errors.push(`${id}: Lesson 49-60 must be V1-visible`);
           if (!['drawing', 'published'].includes(course.map.declaredStatus)) {
@@ -424,6 +444,8 @@
   assertValidCatalog(COURSES);
 
   return Object.freeze({
+    DISTRICTS,
+    LAUNCH_DISTRICT,
     COURSES,
     PUBLISHED_COURSES,
     HOME_COURSES,
