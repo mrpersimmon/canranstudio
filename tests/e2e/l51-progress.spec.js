@@ -130,7 +130,7 @@ test('Lesson 51 locked print reveals manual recovery choices', async ({ page }) 
   await page.addInitScript(key => {
     localStorage.setItem(key, JSON.stringify({
       version: 2,
-      ratings: { l1: 1, l2: 0, l3: 1, l4: 0, l5: 0 }
+      ratings: { l1: 3, l2: 2, l3: 3, l4: 0, l5: 3 }
     }));
     window.__printCalls = 0;
     window.print = () => { window.__printCalls += 1; };
@@ -140,26 +140,28 @@ test('Lesson 51 locked print reveals manual recovery choices', async ({ page }) 
   await expect(print).toBeEnabled();
   await expect(print).toHaveAttribute('data-certificate-state', 'locked');
   await print.click();
-  await expect(page.locator('#certGateActions')).toBeVisible();
-  await expect(page.locator('#certGateCount')).toHaveText('还需完成 3 个关卡。');
-  await expect(page.locator('#certGoFirstMissing')).toBeFocused();
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-count]')).toHaveText('还差 4 颗星，还有 2 关未满星。');
+  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「课文剧场」补满星');
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
   expect(await page.evaluate(() => window.__printCalls)).toBe(0);
 });
 
 test('Lesson 51 gate choices jump to the first missing level or dismiss', async ({ page }) => {
   await page.addInitScript(key => localStorage.setItem(key, JSON.stringify({
     version: 2,
-    ratings: { l1: 1, l2: 0, l3: 1, l4: 0, l5: 0 }
+    ratings: { l1: 3, l2: 2, l3: 3, l4: 0, l5: 3 }
   })), KEY);
   await page.goto('/lesson51/#cert');
   await page.locator('#btnPrint').click();
-  await page.locator('#certGateDismiss').click();
-  await expect(page.locator('#certGateActions')).toBeHidden();
+  await page.locator('[data-certificate-dismiss]').click();
+  await expect(page.locator('[data-certificate-gate]')).toBeHidden();
   await expect(page.locator('#btnPrint')).toBeFocused();
   await page.locator('#btnPrint').click();
-  await page.locator('#certGoFirstMissing').click();
+  await page.locator('[data-certificate-go]').click();
   await expect(page).toHaveURL(/#w2$/);
-  await expect(page.locator('#certGateActions')).toBeHidden();
+  await expect(page.locator('#w2 h2')).toBeFocused();
+  await expect(page.locator('[data-certificate-gate]')).toBeHidden();
 });
 
 test('Lesson 51 certificate cannot be forged and eligible printing is real', async ({ page }) => {
@@ -175,19 +177,36 @@ test('Lesson 51 certificate cannot be forged and eligible printing is real', asy
   await page.locator('#btnPrint').click();
   expect(await page.evaluate(() => window.__printCalls)).toBe(0);
   await page.evaluate(key => localStorage.setItem(key, JSON.stringify({
-    version: 2, ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 }
+    version: 2, ratings: { l1: 3, l2: 3, l3: 3, l4: 3, l5: 2 }
   })), KEY);
   await page.reload();
+  await page.locator('#certName').fill('测试学生');
   await page.locator('#btnPrint').click();
   expect(await page.evaluate(() => window.__printCalls)).toBe(0);
+  await page.evaluate(key => localStorage.setItem(key, JSON.stringify({
+    version: 2, ratings: { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 }
+  })), KEY);
+  await page.reload();
   await page.locator('#certName').fill('测试学生');
   await page.locator('#btnPrint').click();
   expect(await page.evaluate(() => window.__printCalls)).toBe(1);
-  await expect(page.locator('#certStars')).toHaveText(/^★{5}☆{10}$/);
+  await expect(page.locator('#certStars')).toHaveText(/^★{15}$/);
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('#cert')).toBeVisible();
   await expect(page.locator('#coursenav')).toBeHidden();
   await expect(page.locator('#btnPrint')).toBeHidden();
+});
+
+test('Lesson 51 closes an open gate when refreshed ratings reach fifteen stars', async ({ page }) => {
+  await page.goto('/lesson51/#cert');
+  await page.locator('#btnPrint').click();
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await page.evaluate(() => {
+    window.eval('ratings={l1:3,l2:3,l3:3,l4:3,l5:3}');
+    window.renderStars();
+  });
+  await expect(page.locator('[data-certificate-gate]')).toBeHidden();
+  await expect(page.locator('#btnPrint')).toHaveAttribute('data-certificate-state', 'ready');
 });
 
 test('Lesson 51 quiz stores one historical rating instead of additive stars', async ({ page }) => {
@@ -234,7 +253,7 @@ test('Lesson 51 full theater playback awards level 2 and unlocks the certificate
   await page.addInitScript(key => {
     localStorage.setItem(key, JSON.stringify({
       version: 2,
-      ratings: { l1: 1, l2: 0, l3: 1, l4: 1, l5: 1 }
+      ratings: { l1: 3, l2: 0, l3: 3, l4: 3, l5: 3 }
     }));
     const nativeSetTimeout = window.setTimeout.bind(window);
     window.setTimeout = (callback, _delay, ...args) => nativeSetTimeout(callback, 0, ...args);
