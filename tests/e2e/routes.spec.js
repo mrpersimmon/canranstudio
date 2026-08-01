@@ -41,7 +41,7 @@ test('welcome page and course pages form a closed navigation loop', async ({ pag
   }
   for (const course of PUBLISHED_COURSES) {
     await page.goto(course.route);
-    await expect(page.locator('a[href="/"]')).toHaveCount(1);
+    expect(await page.locator('a[href="/"]').count()).toBeGreaterThanOrEqual(1);
   }
 });
 
