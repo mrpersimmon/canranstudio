@@ -12,12 +12,47 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function adventureAtlasFactory(catalogApi) {
   'use strict';
 
-  function buildLocationModels(courses) {
+  function deepFreeze(value) {
+    if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
+    for (const nested of Object.values(value)) deepFreeze(nested);
+    return Object.freeze(value);
+  }
+
+  function completedStageIds(course, profile) {
+    const completed = new Set(
+      Array.isArray(profile?.completedStages?.[course.id])
+        ? profile.completedStages[course.id]
+        : []
+    );
+    return course.map.stages
+      .map(stage => stage.progressId)
+      .filter(id => completed.has(id));
+  }
+
+  function buildLocationModels(courses, profile = null) {
     if (!catalogApi || !Array.isArray(courses)) return Object.freeze([]);
-    return Object.freeze(courses.map((course, index) => {
+    return deepFreeze(courses.map((course, index) => {
       const publication = catalogApi.assessLearningLocation(course);
       const published = publication.status === 'published';
-      return Object.freeze({
+      const completedIds = published ? completedStageIds(course, profile) : [];
+      const completedSet = new Set(completedIds);
+      const visibleGrowthAssets = published
+        ? course.map.stages
+          .filter(stage => completedSet.has(stage.progressId))
+          .map(stage => stage.growthAsset)
+        : [];
+      const completedStageCount = completedIds.length;
+      const totalStageCount = Array.isArray(course.map?.stages)
+        ? course.map.stages.length
+        : 0;
+      const progressState = !published
+        ? 'drawing'
+        : completedStageCount === 0
+          ? 'ready'
+          : completedStageCount === totalStageCount
+            ? 'complete'
+            : 'growing';
+      return {
         id: course.id,
         lesson: course.lesson,
         title: course.courseStatus === 'published' ? course.title : '新地点',
@@ -25,10 +60,24 @@
         status: publication.status,
         route: publication.route,
         recommendable: publication.recommendable,
-        baseAsset: published ? course.map.baseAsset : null
-      });
+        baseAsset: published ? course.map.baseAsset : null,
+        mobilePreview: published ? course.map.mobilePreview : null,
+        completedStageIds: completedIds,
+        visibleGrowthAssets,
+        completedStageCount,
+        totalStageCount,
+        progressState,
+        souvenir: progressState === 'complete' ? course.map.souvenir : null
+      };
     }));
   }
 
-  return Object.freeze({ buildLocationModels });
+  function selectRecommendedLocation(locations) {
+    if (!Array.isArray(locations)) return null;
+    return locations.find(location => (
+      location.recommendable && location.progressState !== 'complete'
+    )) || locations.find(location => location.recommendable) || null;
+  }
+
+  return Object.freeze({ buildLocationModels, selectRecommendedLocation });
 });

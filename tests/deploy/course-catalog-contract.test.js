@@ -37,6 +37,28 @@ function validCoursePageSource(course) {
   `;
 }
 
+async function writePublishedMapContract(root, course) {
+  if (course.map.declaredStatus !== 'published') return;
+  const imageFiles = [
+    course.map.baseAsset,
+    ...course.map.stages.map(stage => stage.growthAsset),
+    course.map.souvenir.asset,
+    course.map.mobilePreview
+  ];
+  for (const relative of imageFiles) {
+    const file = path.join(root, relative);
+    await fs.mkdir(path.dirname(file), { recursive: true });
+    await fs.writeFile(file, ONE_PIXEL_PNG);
+  }
+  const regression = path.join(root, course.map.regressionTest);
+  await fs.mkdir(path.dirname(regression), { recursive: true });
+  await fs.writeFile(regression, `
+    'use strict';
+    const { test, expect } = require('@playwright/test');
+    test('published location journey', async () => { expect(true).toBe(true); });
+  `);
+}
+
 test('static course contract requires real same-origin prerecorded audio', async t => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-course-contract-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
@@ -45,6 +67,7 @@ test('static course contract requires real same-origin prerecorded audio', async
   await fs.mkdir(path.join(root, 'lesson49/audio'), { recursive: true });
   await fs.writeFile(path.join(root, 'lesson49/index.html'), validCoursePageSource(course));
   await fs.writeFile(path.join(root, 'lesson49/audio/readme.txt'), 'not a recording');
+  await writePublishedMapContract(root, course);
 
   await assert.rejects(
     assertCourseCatalogContract({ root, courses: [course] }),
@@ -86,6 +109,7 @@ test('published course page must consume progress metadata from the shared catal
   const entry = path.join(root, course.entry);
 
   await fs.mkdir(path.join(root, 'lesson49/audio'), { recursive: true });
+  await writePublishedMapContract(root, course);
   await fs.copyFile(
     path.join(ROOT, 'lesson49/audio/beef.mp3'),
     path.join(root, 'lesson49/audio/clip.mp3')
@@ -244,4 +268,25 @@ test('published learning location contract requires every declared asset and reg
   `);
 
   await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
+});
+
+test('Lesson 49 landmark layers and souvenir are fixed 1024px transparent PNG assets', async () => {
+  const course = catalog.COURSES.find(item => item.id === 'lesson49');
+  const transparentAssets = [
+    course.map.baseAsset,
+    ...course.map.stages.map(stage => stage.growthAsset),
+    course.map.souvenir.asset
+  ];
+
+  for (const relative of transparentAssets) {
+    const bytes = await fs.readFile(path.join(ROOT, relative));
+    assert.equal(bytes.subarray(12, 16).toString('ascii'), 'IHDR', relative);
+    assert.equal(bytes.readUInt32BE(16), 1024, `${relative} width`);
+    assert.equal(bytes.readUInt32BE(20), 1024, `${relative} height`);
+    assert.ok([4, 6].includes(bytes[25]), `${relative} must carry an alpha channel`);
+  }
+
+  const preview = await fs.readFile(path.join(ROOT, course.map.mobilePreview));
+  assert.equal(preview.readUInt32BE(16), 1024, 'mobile preview width');
+  assert.equal(preview.readUInt32BE(20), 1024, 'mobile preview height');
 });

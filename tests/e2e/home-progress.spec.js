@@ -68,9 +68,10 @@ function assertCatalogContract(contract) {
     'lesson54', 'lesson55', 'lesson56', 'soundmark'
   ]);
   expect(contract.deeplyFrozen).toBe(true);
-  expect(contract.lesson49Location.status).toBe('drawing');
-  expect(contract.lesson49Location.route).toBeNull();
-  expect(contract.lesson49Location.recommendable).toBe(false);
+  expect(contract.lesson49Location.status).toBe('published');
+  expect(contract.lesson49Location.route).toBe('/lesson49/');
+  expect(contract.lesson49Location.recommendable).toBe(true);
+  expect(contract.lesson49Location.missing).toEqual([]);
   expect(contract.renderedLessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56]);
   expect(contract.specialRoute).toBe('/soundmark/');
 }

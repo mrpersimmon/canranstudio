@@ -22,7 +22,7 @@ test('first visit presents twelve districts with only the launch district action
   expect(distantInteractivity).toBe(0);
 });
 
-test('launch district is a stable twelve-location map and drawings are truly inert', async ({ page }) => {
+test('launch district is a stable twelve-location map and unfinished drawings are truly inert', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
 
@@ -30,7 +30,8 @@ test('launch district is a stable twelve-location map and drawings are truly ine
   await expect(district).toBeVisible();
   await expect(page.locator('#worldOverview')).toBeHidden();
   await expect(page.locator('#districtLocations [data-map-slot]')).toHaveCount(12);
-  await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(12);
+  await expect(page.locator('#districtLocations [data-location-status="published"]')).toHaveCount(1);
+  await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(11);
   await expect(page.locator('#districtLocations')).toContainText('正在绘制');
 
   const contract = await page.evaluate(() => ({
@@ -43,7 +44,7 @@ test('launch district is a stable twelve-location map and drawings are truly ine
       '#districtLocations [data-location-status="drawing"] button, ' +
       '#districtLocations [data-location-status="drawing"] [tabindex]'
     ).length,
-    recommendableDrawings: CanranCore.courseCatalog.MAP_COURSES
+    recommendableLocations: CanranCore.courseCatalog.MAP_COURSES
       .filter(course => CanranCore.courseCatalog.assessLearningLocation(course).recommendable)
       .length,
     currentDistrictId: JSON.parse(
@@ -54,46 +55,26 @@ test('launch district is a stable twelve-location map and drawings are truly ine
   expect(contract.lessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]);
   expect(contract.slots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
   expect(contract.drawingInteractivity).toBe(0);
-  expect(contract.recommendableDrawings).toBe(0);
+  expect(contract.recommendableLocations).toBe(1);
   expect(contract.currentDistrictId).toBe('first-book-49-60');
 });
 
-test('a location becomes a real link when the shared publication contract is complete', async ({ page }) => {
+test('Lesson 49 is a real link because its shared publication contract is complete', async ({ page }) => {
   await page.goto('/');
-
-  const rendered = await page.evaluate(() => {
-    const course = structuredClone(
-      CanranCore.courseCatalog.COURSES.find(candidate => candidate.id === 'lesson49')
-    );
-    course.map.declaredStatus = 'published';
-    course.map.baseAsset = 'assets/adventure-map/lesson49/base.png';
-    course.map.stages = course.map.stages.map((stage, index) => ({
-      ...stage,
-      growthAsset: `assets/adventure-map/lesson49/growth-${index + 1}.png`
-    }));
-    course.map.souvenir.asset = 'assets/adventure-map/lesson49/food-basket.png';
-    course.map.mobilePreview = 'assets/adventure-map/lesson49/mobile-preview.png';
-    course.map.regressionTest = 'tests/e2e/lesson49-map.spec.js';
-
-    const model = CanranCore.adventureAtlas.buildLocationModels([course])[0];
-    const host = document.createElement('ol');
-    host.innerHTML = locationMarkup(model);
-    const location = host.querySelector('[data-location-status]');
-    const link = location.querySelector('a');
-    return {
-      status: location.dataset.locationStatus,
-      linkCount: location.querySelectorAll('a').length,
-      route: link?.getAttribute('href'),
-      label: link?.getAttribute('aria-label')
-    };
-  });
-
+  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  const location = page.locator('[data-map-lesson="49"]');
+  const link = location.getByRole('link');
+  const rendered = {
+    status: await location.getAttribute('data-location-status'),
+    linkCount: await location.getByRole('link').count(),
+    route: await link.getAttribute('href')
+  };
   expect(rendered).toEqual({
     status: 'published',
     linkCount: 1,
-    route: '/lesson49/',
-    label: '进入 Lesson 49 · 肉店大冒险'
+    route: '/lesson49/'
   });
+  await expect(link).toHaveAccessibleName(/LESSON 49.*肉店大冒险.*可以出发.*0 \/ 5/);
 });
 
 test('return visits open the current district and keep an explicit world overview route', async ({ page }) => {

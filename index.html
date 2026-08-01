@@ -131,6 +131,26 @@ button.world-district-card{appearance:none}
   background:var(--paper);font-weight:800;box-shadow:0 3px 0 var(--brown);
 }
 .district-heading-copy{flex:1;text-align:right}
+.map-recommendation{
+  display:grid;grid-template-columns:116px minmax(0,1fr) auto;gap:16px;align-items:center;
+  min-height:132px;margin:0 0 18px;padding:10px 14px 10px 10px;border:3px solid var(--brown);border-radius:24px;
+  background:linear-gradient(135deg,#FFFDF7,#FFF0CE);color:var(--brown);text-decoration:none;
+  box-shadow:0 5px 0 rgba(56,40,31,.22);
+}
+.map-recommendation[hidden]{display:none!important}
+.recommendation-art{
+  display:grid;place-items:center;width:112px;height:108px;overflow:hidden;border:2px solid rgba(56,40,31,.58);border-radius:18px;
+  background:radial-gradient(circle at 50% 56%,#FFF8E7 0 46%,#F2D39B 47% 100%);
+}
+.recommendation-art img{width:100%;height:100%;object-fit:contain}
+.recommendation-kicker{display:block;color:#A34B30;font-size:12px;font-weight:800;letter-spacing:1.1px}
+.recommendation-title{display:block;margin:2px 0 4px;font-size:21px;line-height:1.12}
+.recommendation-progress{display:block;color:var(--brown-soft);font-size:14px;font-weight:800}
+.recommendation-action{
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:8px 15px;border:3px solid var(--brown);
+  border-radius:999px;background:var(--red);color:#fff;font-size:14px;font-weight:800;box-shadow:0 3px 0 var(--brown);white-space:nowrap;
+}
+@media (hover:hover) and (pointer:fine){.map-recommendation:hover{transform:translateY(-2px)}}
 .district-map{
   position:relative;overflow:hidden;padding:28px 24px 36px;border:3px solid rgba(95,70,45,.72);border-radius:26px;
   background:
@@ -151,10 +171,18 @@ button.world-district-card{appearance:none}
 .drawing-location{display:flex;flex-direction:column;align-items:center;max-width:150px;color:#5E5145}
 .published-location{display:flex;flex-direction:column;align-items:center;max-width:160px;color:var(--brown);text-decoration:none}
 .published-marker{
-  display:grid;place-items:center;width:92px;height:92px;margin-bottom:7px;border:3px solid var(--brown);border-radius:24px;
+  display:grid;place-items:center;width:146px;height:146px;margin-bottom:7px;border:3px solid var(--brown);border-radius:28px;
   background:rgba(255,254,250,.88);box-shadow:0 4px 0 var(--brown);overflow:hidden;
 }
-.published-marker img{width:100%;height:100%;object-fit:contain}
+.landmark-stack{position:relative;isolation:isolate}
+.landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.landmark-stack img[data-landmark-layer="base"]{z-index:0}
+.landmark-stack img[data-landmark-layer="growth"]{z-index:1}
+.landmark-stack img[data-growth-stage="l1"]{transform:translate(0,6%) scale(.96)}
+.landmark-stack img[data-growth-stage="l2"]{transform:translate(-15%,15%) scale(.65)}
+.landmark-stack img[data-growth-stage="l3"]{transform:translate(28%,-8%) scale(.55)}
+.landmark-stack img[data-growth-stage="l4"]{transform:translate(24%,17%) scale(.55)}
+.landmark-stack img[data-growth-stage="l5"]{transform:translate(0,-9%) scale(.68)}
 .published-location .location-status{border-style:solid;background:#fff}
 @media (hover:hover) and (pointer:fine){.published-location:hover{transform:translateY(-3px)}}
 .drawing-marker{
@@ -169,6 +197,11 @@ button.world-district-card{appearance:none}
 .location-lesson{font-size:12px;font-weight:800;letter-spacing:.6px}
 .location-title{display:block;overflow:hidden;max-width:100%;margin-top:1px;font-size:15px;font-weight:800;line-height:1.15;text-overflow:ellipsis;white-space:nowrap}
 .location-status{margin-top:6px;padding:3px 8px;border:2px dashed currentColor;border-radius:999px;font-size:12px;font-weight:800;line-height:1.15}
+.location-souvenir{
+  display:grid;grid-template-columns:34px auto;gap:5px;align-items:center;margin-top:8px;padding:4px 9px 4px 5px;
+  border:2px solid #8B5D26;border-radius:999px;background:#FFF6D5;color:#70431E;font-size:10px;font-weight:800;line-height:1.05;
+}
+.location-souvenir img{width:32px;height:32px;object-fit:contain}
 .district-note{margin:24px 4px 0;text-align:center;color:var(--brown-soft);font-size:14px;font-weight:800}
 
 /* Continue */
@@ -363,12 +396,17 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
   .world-districts::before{inset:8% 2% 9%;border-width:3px}
   .world-return{min-height:44px;padding:7px 12px;font-size:14px}
   .district-heading-copy{text-align:right}
+  .map-recommendation{grid-template-columns:82px minmax(0,1fr);gap:10px;min-height:104px;padding:8px;margin-inline:2px;border-radius:19px}
+  .recommendation-art{width:80px;height:84px;border-radius:14px}
+  .recommendation-title{font-size:18px}
+  .recommendation-progress{font-size:12px}
+  .recommendation-action{grid-column:1/-1;min-height:42px;width:100%;margin-top:1px}
   .district-map{padding:22px 10px 33px}
   .district-locations{grid-template-columns:repeat(2,minmax(0,1fr));gap:21px 8px}
   .map-location{min-height:145px}
   .map-location:nth-child(even){transform:translateY(25px)}
   .drawing-marker{width:70px;height:70px;font-size:21px}
-  .published-marker{width:78px;height:78px}
+  .published-marker{width:128px;height:128px}
   .location-title{max-width:135px;font-size:14px}
   .continue-card,.special-card{grid-template-columns:1fr}
   .continue-art{min-height:190px;border-right:0;border-bottom:3px solid var(--brown);padding:18px}
@@ -461,6 +499,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
           <h3 id="currentDistrictTitle" tabindex="-1"></h3>
         </div>
       </div>
+      <div id="districtRecommendation" hidden></div>
       <div class="district-map">
         <ol class="district-locations" id="districtLocations"></ol>
       </div>
@@ -592,12 +631,29 @@ function worldDistrictMarkup(district){
 
 function locationMarkup(location){
   if(location.status==='published'){
+    const progressLabel=location.progressState==='complete'
+      ?`地点完成 · ${location.completedStageCount} / ${location.totalStageCount}`
+      :location.progressState==='growing'
+        ?`成长中 · ${location.completedStageCount} / ${location.totalStageCount}`
+        :`可以出发 · 0 / ${location.totalStageCount}`;
+    const growthLayers=location.visibleGrowthAssets.map((asset,index)=>
+      `<img src="/${asset}" alt="" width="146" height="146" data-landmark-layer="growth" data-growth-stage="${location.completedStageIds[index]}">`
+    ).join('');
+    const souvenir=location.souvenir
+      ?`<span class="location-souvenir" data-souvenir-id="${location.souvenir.id}">
+          <img src="/${location.souvenir.asset}" alt="" width="32" height="32">
+          <span>永久纪念<br>${location.souvenir.title}</span>
+        </span>`
+      :'';
     return `<li class="map-location" data-map-slot="${location.slot}" data-map-lesson="${location.lesson}" data-location-status="published">
-      <a class="published-location" href="${location.route}" aria-label="进入 Lesson ${location.lesson} · ${location.title}">
-        <span class="published-marker"><img src="/${location.baseAsset}" alt="" width="92" height="92"></span>
+      <a class="published-location" href="${location.route}">
+        <span class="published-marker landmark-stack" aria-hidden="true">
+          <img src="/${location.baseAsset}" alt="" width="146" height="146" data-landmark-layer="base">${growthLayers}
+        </span>
         <span class="location-lesson">LESSON ${location.lesson}</span>
         <strong class="location-title">${location.title}</strong>
-        <span class="location-status">可进入</span>
+        <span class="location-status">${progressLabel}</span>
+        ${souvenir}
       </a>
     </li>`;
   }
@@ -611,6 +667,23 @@ function locationMarkup(location){
   </li>`;
 }
 
+function recommendationMarkup(location){
+  const copy=location.progressState==='complete'
+    ?{kicker:'再次探访',progress:'五个学习阶段都已完成，食物篮子会一直留在地图上。',action:'回到肉店'}
+    :location.progressState==='growing'
+      ?{kicker:'推荐继续',progress:`已完成 ${location.completedStageCount} / ${location.totalStageCount} 个学习阶段，今天让肉铺再长大一点。`,action:'继续成长'}
+      :{kicker:'推荐出发',progress:`从 Lesson ${location.lesson} 开始，完成五个真实阶段，亲手建起第一间肉铺。`,action:'开始冒险'};
+  return `<a class="map-recommendation" href="${location.route}">
+    <span class="recommendation-art"><img src="/${location.mobilePreview}" alt="" width="112" height="108"></span>
+    <span>
+      <span class="recommendation-kicker">${copy.kicker} · LESSON ${location.lesson}</span>
+      <strong class="recommendation-title">${location.title}</strong>
+      <span class="recommendation-progress">${copy.progress}</span>
+    </span>
+    <span class="recommendation-action">${copy.action} →</span>
+  </a>`;
+}
+
 function renderAtlas(){
   const districts=CanranCore.courseCatalog.DISTRICTS;
   document.getElementById('atlasDistrictCount').textContent=
@@ -621,8 +694,15 @@ function renderAtlas(){
   document.getElementById('districtLocations').setAttribute('aria-label',`${launchDistrict.title}学习地点`);
   document.getElementById('worldDistricts').innerHTML=CanranCore.courseCatalog.DISTRICTS
     .map(worldDistrictMarkup).join('');
-  document.getElementById('districtLocations').innerHTML=CanranCore.adventureAtlas
-    .buildLocationModels(CanranCore.courseCatalog.MAP_COURSES).map(locationMarkup).join('');
+  const locations=CanranCore.adventureAtlas.buildLocationModels(
+    CanranCore.courseCatalog.MAP_COURSES,
+    deviceProfileState.profile
+  );
+  document.getElementById('districtLocations').innerHTML=locations.map(locationMarkup).join('');
+  const recommendation=CanranCore.adventureAtlas.selectRecommendedLocation(locations);
+  const recommendationHost=document.getElementById('districtRecommendation');
+  recommendationHost.hidden=!recommendation;
+  recommendationHost.innerHTML=recommendation?recommendationMarkup(recommendation):'';
 }
 
 function showWorldOverview({focusEntrance=false}={}){

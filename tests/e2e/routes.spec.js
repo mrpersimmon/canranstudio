@@ -37,7 +37,11 @@ test('/home/ preserves query and hash through the compatibility redirect', async
 test('welcome page and course pages form a closed navigation loop', async ({ page }) => {
   await page.goto('/');
   for (const course of PUBLISHED_COURSES) {
-    await expect(page.locator(`a[href="${course.route}"]`)).toHaveCount(1);
+    const directory = course.kind === 'special'
+      ? page.locator('#specialCourses')
+      : page.locator('#lessonStations');
+    await expect(directory.locator(`a[href="${course.route}"]`)).toHaveCount(1);
+    expect(await page.locator(`a[href="${course.route}"]`).count()).toBeGreaterThanOrEqual(1);
   }
   for (const course of PUBLISHED_COURSES) {
     await page.goto(course.route);

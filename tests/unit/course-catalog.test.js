@@ -40,7 +40,8 @@ test('course catalog is the complete immutable contract for lessons and special 
       progress: lesson49.progress,
       districtId: lesson49.map.districtId,
       declaredStatus: lesson49.map.declaredStatus,
-      stages: lesson49.map.stages.map(stage => stage.progressId),
+      baseAsset: lesson49.map.baseAsset,
+      stages: lesson49.map.stages,
       souvenir: lesson49.map.souvenir
     },
     {
@@ -55,12 +56,19 @@ test('course catalog is the complete immutable contract for lessons and special 
         max: 15
       },
       districtId: 'first-book-49-60',
-      declaredStatus: 'drawing',
-      stages: ['l1', 'l2', 'l3', 'l4', 'l5'],
+      declaredStatus: 'published',
+      baseAsset: 'assets/adventure-map/lesson49/base.png',
+      stages: [
+        { progressId: 'l1', growthAsset: 'assets/adventure-map/lesson49/growth-1.png' },
+        { progressId: 'l2', growthAsset: 'assets/adventure-map/lesson49/growth-2.png' },
+        { progressId: 'l3', growthAsset: 'assets/adventure-map/lesson49/growth-3.png' },
+        { progressId: 'l4', growthAsset: 'assets/adventure-map/lesson49/growth-4.png' },
+        { progressId: 'l5', growthAsset: 'assets/adventure-map/lesson49/growth-5.png' }
+      ],
       souvenir: {
         id: 'food-basket',
         title: '食物篮子',
-        asset: null
+        asset: 'assets/adventure-map/lesson49/food-basket.png'
       }
     }
   );
@@ -117,40 +125,8 @@ test('published course pages resolve their progress contract from the shared cat
 
 test('learning locations stay drawing and non-navigable until the full publication contract is met', () => {
   const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
-  const drawing = catalog.assessLearningLocation(lesson49);
-  assert.deepEqual(
-    {
-      status: drawing.status,
-      route: drawing.route,
-      recommendable: drawing.recommendable,
-      missing: drawing.missing
-    },
-    {
-      status: 'drawing',
-      route: null,
-      recommendable: false,
-      missing: [
-        'baseLandmark',
-        'growthLayers',
-        'souvenir',
-        'mobilePreview',
-        'regressionVerification'
-      ]
-    }
-  );
-
-  const complete = structuredClone(lesson49);
-  complete.map.declaredStatus = 'published';
-  complete.map.baseAsset = 'assets/adventure-map/lesson49/base.png';
-  complete.map.stages = complete.map.stages.map((stage, index) => ({
-    ...stage,
-    growthAsset: `assets/adventure-map/lesson49/growth-${index + 1}.png`
-  }));
-  complete.map.souvenir.asset = 'assets/adventure-map/lesson49/food-basket.png';
-  complete.map.mobilePreview = 'assets/adventure-map/lesson49/mobile-preview.png';
-  complete.map.regressionTest = 'tests/e2e/lesson49-map.spec.js';
-
-  assert.deepEqual(catalog.assessLearningLocation(complete), {
+  const published = catalog.assessLearningLocation(lesson49);
+  assert.deepEqual(published, {
     status: 'published',
     route: '/lesson49/',
     recommendable: true,
@@ -167,7 +143,25 @@ test('learning locations stay drawing and non-navigable until the full publicati
     missing: []
   });
 
-  const forged = structuredClone(complete);
+  const incomplete = structuredClone(lesson49);
+  incomplete.map.mobilePreview = null;
+  const drawing = catalog.assessLearningLocation(incomplete);
+  assert.deepEqual(
+    {
+      status: drawing.status,
+      route: drawing.route,
+      recommendable: drawing.recommendable,
+      missing: drawing.missing
+    },
+    {
+      status: 'drawing',
+      route: null,
+      recommendable: false,
+      missing: ['mobilePreview']
+    }
+  );
+
+  const forged = structuredClone(lesson49);
   forged.map.baseAsset = 'README.md';
   forged.map.stages = forged.map.stages.map(stage => ({
     ...stage,
@@ -185,9 +179,6 @@ test('learning locations stay drawing and non-navigable until the full publicati
   ]);
   assert.equal(catalog.assessLearningLocation(forged).status, 'drawing');
 
-  complete.map.mobilePreview = null;
-  assert.equal(catalog.assessLearningLocation(complete).status, 'drawing');
-
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
   assert.deepEqual(catalog.assessLearningLocation(soundmark), {
     status: 'not-applicable',
@@ -202,11 +193,11 @@ test('catalog validation rejects duplicate routes and incomplete published locat
   assert.deepEqual(catalog.validateCatalog(catalog.COURSES), []);
 
   const invalid = structuredClone(catalog.COURSES);
-  invalid.find(course => course.id === 'lesson49').map.declaredStatus = 'published';
+  invalid.find(course => course.id === 'lesson49').map.mobilePreview = null;
   invalid.find(course => course.id === 'lesson50').route = '/lesson49/';
 
   assert.deepEqual(catalog.validateCatalog(invalid), [
-    'lesson49: published map contract missing baseLandmark, growthLayers, souvenir, mobilePreview, regressionVerification',
+    'lesson49: published map contract missing mobilePreview',
     'lesson50: duplicate route /lesson49/ (already used by lesson49)'
   ]);
   assert.throws(
@@ -234,11 +225,10 @@ test('map consumers receive only V1 learning locations from the shared catalog',
     ]
   );
   assert.equal(Object.isFrozen(catalog.MAP_COURSES), true);
-  assert.equal(catalog.MAP_COURSES.every(course => (
-    catalog.assessLearningLocation(course).status === 'drawing' &&
-    catalog.assessLearningLocation(course).route === null &&
-    catalog.assessLearningLocation(course).recommendable === false
-  )), true);
+  assert.deepEqual(
+    catalog.MAP_COURSES.map(course => catalog.assessLearningLocation(course).status),
+    ['published', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing']
+  );
 
   const outsideV1 = structuredClone(catalog.COURSES.find(course => course.id === 'lesson56'));
   outsideV1.id = 'lesson61';

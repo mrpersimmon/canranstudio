@@ -59,16 +59,26 @@
   ]);
   const LAUNCH_DISTRICT = DISTRICTS.find(district => district.v1Accessible);
 
-  function lessonMap({ souvenir = null } = {}) {
+  function lessonMap({
+    souvenir = null,
+    declaredStatus = 'drawing',
+    baseAsset = null,
+    growthAssets = [],
+    mobilePreview = null,
+    regressionTest = null
+  } = {}) {
     return {
       districtId: LAUNCH_DISTRICT.id,
       v1Visible: true,
-      declaredStatus: 'drawing',
-      baseAsset: null,
-      stages: LESSON_STAGE_IDS.map(progressId => ({ progressId, growthAsset: null })),
+      declaredStatus,
+      baseAsset,
+      stages: LESSON_STAGE_IDS.map((progressId, index) => ({
+        progressId,
+        growthAsset: growthAssets[index] || null
+      })),
       souvenir,
-      mobilePreview: null,
-      regressionTest: null
+      mobilePreview,
+      regressionTest
     };
   }
 
@@ -82,7 +92,8 @@
     tone,
     legacyKey,
     legacyMode,
-    souvenir = null
+    souvenir = null,
+    mapPublication = {}
   }) {
     const id = `lesson${lesson}`;
     const progress = {
@@ -108,7 +119,7 @@
       art,
       tone,
       progress,
-      map: lessonMap({ souvenir })
+      map: lessonMap({ souvenir, ...mapPublication })
     };
   }
 
@@ -147,7 +158,16 @@
       souvenir: {
         id: 'food-basket',
         title: '食物篮子',
-        asset: null
+        asset: 'assets/adventure-map/lesson49/food-basket.png'
+      },
+      mapPublication: {
+        declaredStatus: 'published',
+        baseAsset: 'assets/adventure-map/lesson49/base.png',
+        growthAssets: LESSON_STAGE_IDS.map((_, index) => (
+          `assets/adventure-map/lesson49/growth-${index + 1}.png`
+        )),
+        mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
+        regressionTest: 'tests/e2e/lesson49-map.spec.js'
       }
     }),
     publishedLesson({

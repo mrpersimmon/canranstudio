@@ -23,6 +23,10 @@ const PUBLIC_INPUTS = [
 ];
 const VALID_MP3_BYTES = Buffer.alloc(144);
 VALID_MP3_BYTES.set([0xff, 0xf3, 0x64, 0xc4]);
+const ONE_PIXEL_PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
+  'base64'
+);
 
 function sha256(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
@@ -110,6 +114,26 @@ async function writeSyntheticPublicRoot(root) {
         const recording = 'audio/clip.mp3';
       </script>
     `);
+    if (course.map.declaredStatus === 'published') {
+      const imageFiles = [
+        course.map.baseAsset,
+        ...course.map.stages.map(stage => stage.growthAsset),
+        course.map.souvenir.asset,
+        course.map.mobilePreview
+      ];
+      for (const relative of imageFiles) {
+        const file = path.join(root, relative);
+        await fs.mkdir(path.dirname(file), { recursive: true });
+        await fs.writeFile(file, ONE_PIXEL_PNG);
+      }
+      const regression = path.join(root, course.map.regressionTest);
+      await fs.mkdir(path.dirname(regression), { recursive: true });
+      await fs.writeFile(regression, `
+        'use strict';
+        const { test, expect } = require('@playwright/test');
+        test('published location journey', async () => { expect(true).toBe(true); });
+      `);
+    }
   }
   execFileSync('git', ['init', '--quiet'], { cwd: root });
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
@@ -471,12 +495,12 @@ test('buildStatic binds a manifest to a clean public Git tree only', async t => 
     encoding: 'utf8'
   }).trim());
 
-  await fs.mkdir(path.join(root, 'assets'));
+  await fs.mkdir(path.join(root, 'assets'), { recursive: true });
   await fs.writeFile(path.join(root, 'assets', 'tracked.js'), 'tracked optional public file');
   execFileSync('git', ['add', 'assets'], { cwd: root });
   execFileSync('git', ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
     'commit', '--quiet', '-m', 'add optional assets'], { cwd: root });
-  await fs.rm(path.join(root, 'assets'), { recursive: true });
+  await fs.rm(path.join(root, 'assets', 'tracked.js'));
   await assert.rejects(buildStatic({ root, out }), /public inputs differ from HEAD/);
 });
 
@@ -553,6 +577,7 @@ test('buildStatic rejects outputs overlapping absent optional inputs', async t =
   t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
   await fs.mkdir(root);
   await writeSyntheticPublicRoot(root);
+  await fs.rm(assets, { recursive: true });
 
   for (const out of [assets, path.join(assets, 'dist')]) {
     await assert.rejects(buildStatic({ root, out }), /overlaps public input/);
