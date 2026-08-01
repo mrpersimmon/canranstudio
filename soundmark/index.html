@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>音标魔法乐园 · 英语音标第一课</title>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/core/certificate-gate.css">
 <style>
 :root{
   --paper:#FFF6E3;
@@ -511,13 +512,14 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
     <button class="btn" id="btnOpenCert">查看我的证书</button>
     <div id="certNeed" role="status" aria-live="polite"></div>
   </div>
+  <div id="soundmarkCertificateGate"></div>
   <dialog id="certModal" aria-modal="true" aria-labelledby="soundmarkCertTitle">
     <div id="certCard">
       <h3 id="soundmarkCertTitle">毕业证书</h3>
       <div style="font-size:15px;opacity:.7">CERTIFICATE OF PHONICS EXPLORER</div>
       <div style="margin-top:16px;font-size:17px">兹证明</div>
       <div id="certNameOut">音标小达人</div>
-      <div style="font-size:17px">在音标魔法乐园闯过所有关卡，学会 6 个元音，<br>荣获 <b style="color:var(--tangerine)">音标小达人</b> 称号！</div>
+      <div style="font-size:17px">在音标魔法乐园完成四项满星挑战，学会 6 个元音，<br>荣获 <b style="color:var(--tangerine)">音标小达人</b> 称号！</div>
       <div id="certStars"></div>
       <div style="font-size:14px;opacity:.6" id="certDate"></div>
       <div class="stamp">音标<br>小达人</div>
@@ -535,6 +537,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/certificate-gate.js"></script>
 <script src="/core/assessment.js"></script>
 <script src="/core/audio-player.js"></script>
 <script>
@@ -642,6 +645,12 @@ function speak(text, rate=0.85, onend){
 /* ==================== 星星 & 提示 ==================== */
 const SKEY='canran:soundmark:progress:v2';
 const SOUND_IDS=['vs','g1','g2','g3'];
+const SOUNDMARK_CERTIFICATE_TARGETS=[
+  {id:'vs',selector:'#vs',label:'元音 vs 辅音'},
+  {id:'g1',selector:'#g1',label:'听音小侦探',focusSelector:'.g-card'},
+  {id:'g2',selector:'#g2',label:'左耳右耳',focusSelector:'.g-card'},
+  {id:'g3',selector:'#g3',label:'拼读小达人',focusSelector:'.g-card'}
+];
 const soundLoaded=CanranCore.storage.loadProgress({
   storage:localStorage,
   key:SKEY,
@@ -652,17 +661,14 @@ const soundLoaded=CanranCore.storage.loadProgress({
 let soundRatings=soundLoaded.progress.ratings;
 function soundTotal(){return CanranCore.progress.totalRatings(soundRatings,SOUND_IDS);}
 function canIssueSoundmarkCertificate(){
-  return CanranCore.progress.allAtLeast(soundRatings,SOUND_IDS,3);
+  return CanranCore.certificateGate
+    .completionState(soundRatings,SOUNDMARK_CERTIFICATE_TARGETS).eligible;
 }
 function renderStars(){
   const total=soundTotal();
   document.getElementById('starCount').textContent=total;
   document.getElementById('certStars').textContent='★'.repeat(total)+'☆'.repeat(12-total);
-  const missing=12-total;
-  document.getElementById('btnOpenCert').disabled=!canIssueSoundmarkCertificate();
-  document.getElementById('certNeed').textContent=missing===0
-    ?'四项挑战满星，可以打印证书。'
-    :'还差 '+missing+' 颗星。';
+  soundmarkCertificateGate.refresh();
 }
 function awardSoundmark(id,rating){
   const awarded=CanranCore.progress.awardRating(soundRatings,id,rating);
@@ -688,7 +694,6 @@ function toast(msg){
   toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
 }
 if(soundLoaded.resetLegacy)toast('进度规则已升级，请重新挑战');
-renderStars();
 
 /* ==================== 彩带 ==================== */
 const cvs = document.getElementById('confetti'), ctx = cvs.getContext('2d');
@@ -1093,13 +1098,18 @@ function gameDone(scoreId,rating){
 })();
 
 /* ---- 游戏标签切换 ---- */
-document.querySelectorAll('.gtab').forEach(t=>{
-  t.onclick = ()=>{
-    document.querySelectorAll('.gtab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.game-panel').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    document.getElementById(t.dataset.g).classList.add('on');
-  };
+function activateSoundmarkGame(id){
+  const tab=document.querySelector(`.gtab[data-g="${id}"]`);
+  const panel=document.getElementById(id);
+  if(!tab||!panel)return false;
+  document.querySelectorAll('.gtab').forEach(item=>item.classList.remove('on'));
+  document.querySelectorAll('.game-panel').forEach(item=>item.classList.remove('on'));
+  tab.classList.add('on');
+  panel.classList.add('on');
+  return true;
+}
+document.querySelectorAll('.gtab').forEach(tab=>{
+  tab.onclick=()=>activateSoundmarkGame(tab.dataset.g);
 });
 
 /* ==================== 48 音标总表 ==================== */
@@ -1192,22 +1202,27 @@ soundmarkCertDialog.addEventListener('keydown',event=>{
 });
 document.getElementById('certClose').onclick=closeSoundmarkCertificateDialog;
 
-document.getElementById('btnOpenCert').onclick=()=>{
+function issueSoundmarkCertificate(){
   const name=document.getElementById('certName').value.trim();
-  if(!canIssueSoundmarkCertificate()){
-    renderStars();
-    toast('集满 12 颗星后才能领取证书');
-    return;
-  }
-  if(!name){
-    toast('先写上你的名字哦');
-    document.getElementById('certName').focus();
-    return;
-  }
+  if(!name){toast('先写上你的名字哦');document.getElementById('certName').focus();return false;}
   document.getElementById('certNameOut').textContent=name;
   document.getElementById('certDate').textContent='日期：'+new Date().toLocaleDateString('zh-CN');
-  openSoundmarkCertificateDialog();
-};
+  return openSoundmarkCertificateDialog();
+}
+const soundmarkCertificateGate=CanranCore.certificateGate.create({
+  trigger:document.getElementById('btnOpenCert'),
+  mount:document.getElementById('soundmarkCertificateGate'),
+  status:document.getElementById('certNeed'),
+  getRatings:()=>soundRatings,targets:SOUNDMARK_CERTIFICATE_TARGETS,
+  courseName:'音标番外篇 · 魔法乐园',icon:'🪄',accent:'#ef7047',
+  pageColor:'var(--paper)',itemLabel:'项挑战',
+  readyMessage:'12/12 颗星已集齐，可以查看证书。',
+  onEligible:issueSoundmarkCertificate,
+  beforeNavigate:target=>{
+    if(target.id.startsWith('g'))activateSoundmarkGame(target.id);
+  }
+});
+renderStars();
 
 document.getElementById('certPrintAction').onclick=()=>{
   const name=document.getElementById('certName').value.trim();
@@ -1219,6 +1234,7 @@ document.getElementById('certPrintAction').onclick=()=>{
       document.getElementById('certName').focus();
     }else{
       toast('集满 12 颗星后才能打印证书');
+      soundmarkCertificateGate.open();
     }
     return;
   }

@@ -74,12 +74,12 @@ test('all-corrupt v2 soundmark ratings cannot unlock its certificate', async ({ 
   const repaired = await readSoundmarkRatings(page);
   expect(repaired).toEqual({ vs: 0, g1: 0, g2: 0, g3: 0 });
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(page.locator('#btnOpenCert')).toBeDisabled();
+  await expect(page.locator('#btnOpenCert')).toBeEnabled();
+  await expect(page.locator('#btnOpenCert')).toHaveAttribute('data-certificate-state', 'locked');
   expect(await page.evaluate(() => window.eval('canIssueSoundmarkCertificate()'))).toBe(false);
 
-  await page.locator('#btnOpenCert').evaluate(button => { button.disabled = false; });
-  await page.locator('#certName').fill('小明');
   await page.locator('#btnOpenCert').click();
+  await expect(page.locator('[data-certificate-count]')).toHaveText('还差 12 颗星，还有 4 项挑战未满星。');
   await expect(page.getByRole('dialog')).not.toBeVisible();
 });
 
@@ -120,13 +120,33 @@ test('eleven stars cannot issue the soundmark certificate', async ({ page }) => 
   await page.goto('/soundmark/');
 
   await expect(page.locator('#starCount')).toHaveText('11');
-  await expect(page.locator('#btnOpenCert')).toBeDisabled();
-  await expect(page.locator('#certNeed')).toContainText('还差 1 颗星');
-  await page.locator('#btnOpenCert').evaluate(button => { button.disabled = false; });
-  await page.locator('#certName').fill('小明');
+  await expect(page.locator('#btnOpenCert')).toBeEnabled();
+  await expect(page.locator('#btnOpenCert')).toHaveAttribute('data-certificate-state','locked');
   await page.locator('#btnOpenCert').click();
+  await expect(page.locator('[data-certificate-count]')).toHaveText('还差 1 颗星，还有 1 项挑战未满星。');
+  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「拼读小达人」补满星');
   await expect(page.getByRole('dialog')).not.toBeVisible();
   expect(await page.evaluate(() => window.__printed)).toBe(false);
+});
+
+test('soundmark certificate guide activates and focuses the incomplete game tab', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('canran:soundmark:progress:v2', JSON.stringify({
+      version: 2,
+      ratings: { vs: 3, g1: 3, g2: 2, g3: 3 }
+    }));
+  });
+
+  await page.goto('/soundmark/');
+  await page.locator('#btnOpenCert').click();
+  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「左耳右耳」补满星');
+  await page.locator('[data-certificate-go]').click();
+
+  await expect(page.locator('.gtab[data-g="g2"]')).toHaveClass(/\bon\b/);
+  await expect(page.locator('#g2')).toHaveClass(/\bon\b/);
+  await expect(page.locator('#g2')).toBeVisible();
+  await expect(page.locator('#g2 .g-card')).toBeFocused();
+  await expect(page).toHaveURL(/#g2$/);
 });
 
 test('soundmark print re-checks eligibility after its certificate dialog opens', async ({ page }) => {
@@ -149,8 +169,12 @@ test('soundmark print re-checks eligibility after its certificate dialog opens',
   await page.locator('#certPrintAction').click();
 
   await expect(page.getByRole('dialog')).not.toBeVisible();
-  await expect(page.locator('#btnOpenCert')).toBeDisabled();
-  await expect(page.locator('#certNeed')).toContainText('还差 1 颗星');
+  await expect(page.locator('#btnOpenCert')).toBeEnabled();
+  await expect(page.locator('#btnOpenCert')).toHaveAttribute('data-certificate-state', 'locked');
+  await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+  await expect(page.locator('[data-certificate-count]')).toHaveText('还差 1 颗星，还有 1 项挑战未满星。');
+  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「拼读小达人」补满星');
+  await expect(page.locator('[data-certificate-go]')).toBeFocused();
   expect(await page.evaluate(() => window.__printed)).toBe(false);
 });
 
