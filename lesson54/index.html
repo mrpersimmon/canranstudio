@@ -7,6 +7,7 @@
 <title>环球护照之旅 · 新概念英语 Lesson 54</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛂</text></svg>">
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/core/certificate-gate.css">
 <style>
 :root{
   --cream:#FFF6E9; --paper:#FFFDF6; --ink:#2B2118;
@@ -343,7 +344,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 <section id="cert">
   <span class="sec-tag">终点</span>
   <h2>环球小使者证书</h2>
-  <p class="sec-sub" style="margin:0 auto">闯过 5 关，写下名字，打印你的专属证书！</p>
+  <p class="sec-sub" style="margin:0 auto">五关全部三星（15/15），写下名字后打印专属证书！</p>
   <div id="certCard">
     <h3>毕业证书</h3>
     <div style="font-size:15px;opacity:.7">CERTIFICATE OF GLOBAL TRAVELER</div>
@@ -354,9 +355,10 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
     <div style="font-size:14px;opacity:.6" id="certDate"></div>
     <div class="stamp">环球<br>小使者</div>
   </div>
-  <div id="certGate"></div>
   <div style="margin-top:26px">
     <button class="btn primary" id="btnPrint">🖨️ 打印我的证书</button>
+    <div id="certGate"></div>
+    <div id="l54CertificateGate"></div>
   </div>
 </section>
 
@@ -369,6 +371,7 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/certificate-gate.js"></script>
 <script src="/core/assessment.js"></script>
 <script src="/core/audio-player.js"></script>
 <script>
@@ -524,6 +527,13 @@ const STAR_KEY='canran:l54:progress:v2';
 const LVLS=['l1','l2','l3','l4','l5'];
 const loaded=CanranCore.storage.loadProgress({storage:localStorage,key:STAR_KEY,ids:LVLS});
 let stars=loaded.progress.ratings;
+const L54_CERTIFICATE_TARGETS=[
+  {id:'l1',selector:'#w1',label:'单词签证官'},
+  {id:'l2',selector:'#w2',label:'机场广播剧'},
+  {id:'l3',selector:'#w3',label:'护照盖章'},
+  {id:'l4',selector:'#w4',label:'句型魔法屋'},
+  {id:'l5',selector:'#w5',label:'海关终极考核'}
+];
 function saveStars(){CanranCore.storage.saveProgress({storage:localStorage,key:STAR_KEY,progress:{version:CanranCore.storage.VERSION,ratings:stars},ids:LVLS});}
 function getStar(l){return CanranCore.storage.clampRating(stars[l]);}
 function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
@@ -540,15 +550,28 @@ function award(level,rating){
     toast('🎉 第 '+level.slice(1)+' 关获得 '+CanranCore.storage.clampRating(rating)+' 颗星！');
   }
 }
-function canIssue(){return CanranCore.progress.allAtLeast(stars,LVLS,1);}
-function renderCertGate(){
-  const g=$('#certGate');
-  if(canIssue()){g.textContent='五关全部完成，证书已解锁，快去打印吧！';g.style.color='var(--leaf-d)';}
-  else{
-    const missing=LVLS.filter(l=>getStar(l)<1).length;
-    g.textContent='还差 '+missing+' 关没有拿到星星，全部闯过即可打印证书～';g.style.color='var(--coral-d)';
-  }
+function canIssue(){
+  return CanranCore.certificateGate
+    .completionState(stars,L54_CERTIFICATE_TARGETS).eligible;
 }
+function renderCertGate(){
+  if(l54CertificateGate)l54CertificateGate.refresh();
+}
+function issueL54Certificate(){
+  const name=$('#certName').value.trim();
+  if(!name){toast('先写上你的名字哦');$('#certName').focus();return false;}
+  celebrate();
+  setTimeout(()=>window.print(),600);
+  return true;
+}
+const l54CertificateGate=CanranCore.certificateGate.create({
+  trigger:$('#btnPrint'),mount:$('#l54CertificateGate'),status:$('#certGate'),
+  getRatings:()=>stars,targets:L54_CERTIFICATE_TARGETS,
+  courseName:'Lesson 54 · 环球小使者',icon:'🛂',accent:'#167d92',
+  pageColor:'var(--cream)',itemLabel:'关',
+  readyMessage:'15/15 颗星已集齐，可以打印证书。',
+  onEligible:issueL54Certificate
+});
 
 /* ================= W1 单词对卡 ================= */
 function renderPairs(){
@@ -805,7 +828,10 @@ $('#qNext').addEventListener('click',()=>{
   if(qState.i>=QUIZ.length){
     const r=CanranCore.progress.ratingFor?CanranCore.progress.ratingFor(qState.correct,[{min:8,rating:3},{min:6,rating:2},{min:3,rating:1}]):3;
     award('l5',qState.correct>=7?3:qState.correct>=5?2:1);
-    $('#quizBox').innerHTML='<div style="text-align:center;font-family:\'ZCOOL KuaiLe\';font-size:24px">🏁 考核结束！答对 '+qState.correct+' / '+QUIZ.length+' 题<br><span style="font-size:18px;opacity:.75">'+(qState.correct>=6?'太棒了，去领证书吧！':'再闯一次，冲击 6 题！')+'</span></div><div style="text-align:center;margin-top:18px"><button class="btn sunny" onclick="location.reload()">🔄 再考一次</button></div>';
+    const certificateHint=canIssue()
+      ?'15 颗星集齐，去领证书吧！'
+      :'继续把五关都补到三星吧！';
+    $('#quizBox').innerHTML='<div style="text-align:center;font-family:\'ZCOOL KuaiLe\';font-size:24px">🏁 考核结束！答对 '+qState.correct+' / '+QUIZ.length+' 题<br><span style="font-size:18px;opacity:.75">'+certificateHint+'</span></div><div style="text-align:center;margin-top:18px"><button class="btn sunny" onclick="location.reload()">🔄 再考一次</button></div>';
     if(qState.correct>=6)celebrate();
     return;
   }
@@ -814,12 +840,6 @@ $('#qNext').addEventListener('click',()=>{
 
 /* ================= 证书 & 庆祝 ================= */
 $('#certDate').textContent='日期：'+new Date().toLocaleDateString('zh-CN');
-$('#btnPrint').addEventListener('click',()=>{
-  const name=$('#certName').value.trim();
-  if(!canIssue()){toast('先闯过全部 5 关，每关至少 1 颗星哦');return;}
-  if(!name){toast('先写上你的名字哦');$('#certName').focus();return;}
-  celebrate();setTimeout(()=>window.print(),600);
-});
 function celebrate(){
   const cv=$('#confetti'),ctx=cv.getContext('2d');
   cv.width=innerWidth;cv.height=innerHeight;
