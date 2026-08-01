@@ -110,6 +110,8 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'lesson54/index.html',
     'lesson54/audio/australia.mp3',
     'core/audio-player.js',
+    'core/certificate-gate.js',
+    'core/certificate-gate.css',
     'release-manifest.json'
   ]) {
     assert.equal((await fs.stat(path.join(out, file))).isFile(), true, file);
@@ -130,6 +132,8 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
   assert.match(manifest.files['lesson49/index.html'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['lesson54/index.html'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['lesson54/audio/australia.mp3'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['core/certificate-gate.js'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['core/certificate-gate.css'], /^[a-f0-9]{64}$/);
 
   const expected = await expectedPublicFiles(ROOT);
   const actual = await listRegularFiles(out);

@@ -237,14 +237,14 @@ async function expectModalFocusRoundTrip(page, opener, initialFocus) {
 
 test('Lesson 49 certificate dialog contains focus and returns it', async ({ page }) => {
   await seedProgress(page, 'canran:l49:progress:v2',
-    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
   await page.goto('/lesson49/');
   await expectModalFocusRoundTrip(page, '#certBtn', '#certSave');
 });
 
 test('Lesson 50 certificate dialog contains focus and returns it', async ({ page }) => {
   await seedProgress(page, 'canran:l50:progress:v2',
-    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
   await page.goto('/lesson50/');
   await expectModalFocusRoundTrip(page, '#certBtn', '#certSave');
 });
@@ -262,7 +262,7 @@ const certificatePages = [
     label: 'Lesson 49',
     path: '/lesson49/',
     key: 'canran:l49:progress:v2',
-    ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 },
+    ratings: { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 },
     opener: '#certBtn',
     primary: '#certSave',
     close: '#certClose',
@@ -272,7 +272,7 @@ const certificatePages = [
     label: 'Lesson 50',
     path: '/lesson50/',
     key: 'canran:l50:progress:v2',
-    ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 },
+    ratings: { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 },
     opener: '#certBtn',
     primary: '#certSave',
     close: '#certClose',
@@ -418,7 +418,7 @@ for (const lesson of [
   }
 ]) {
   test(`${lesson.label} save and print reject eligibility lost after opening`, async ({ page }) => {
-    await seedProgress(page, lesson.key, { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    await seedProgress(page, lesson.key, { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
     await page.addInitScript(() => {
       window.__certificateSaved = false;
       window.__certificatePrinted = false;
@@ -431,29 +431,35 @@ for (const lesson of [
 
     await page.locator('#certBtn').click();
     await page.evaluate(stateName => {
-      window.eval(`${stateName}={l1:1,l2:1,l3:1,l4:0,l5:1}`);
+      window.eval(`${stateName}={l1:3,l2:3,l3:3,l4:2,l5:3}`);
     }, lesson.stateName);
     await page.locator('#certSave').click();
     await expect(page.locator('#certModal')).not.toBeVisible();
-    await expect(page.locator('#certBtn')).toBeDisabled();
+    await expect(page.locator('#certBtn')).toBeEnabled();
+    await expect(page.locator('#certBtn')).toHaveAttribute('data-certificate-state','locked');
+    await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+    await expect(page.locator('[data-certificate-go]')).toBeFocused();
     expect(await page.evaluate(() => window.__certificateSaved)).toBe(false);
 
     await page.evaluate(({ stateName, gate }) => {
-      window.eval(`${stateName}={l1:1,l2:1,l3:1,l4:1,l5:1}`);
+      window.eval(`${stateName}={l1:3,l2:3,l3:3,l4:3,l5:3}`);
       window[gate]();
     }, { stateName: lesson.stateName, gate: lesson.gate });
     await page.locator('#certBtn').click();
     await page.evaluate(stateName => {
-      window.eval(`${stateName}={l1:1,l2:1,l3:1,l4:0,l5:1}`);
+      window.eval(`${stateName}={l1:3,l2:3,l3:3,l4:2,l5:3}`);
     }, lesson.stateName);
     await page.locator('#certPrint').click();
     await expect(page.locator('#certModal')).not.toBeVisible();
-    await expect(page.locator('#certBtn')).toBeDisabled();
+    await expect(page.locator('#certBtn')).toBeEnabled();
+    await expect(page.locator('#certBtn')).toHaveAttribute('data-certificate-state','locked');
+    await expect(page.locator('[data-certificate-gate]')).toBeVisible();
+    await expect(page.locator('[data-certificate-go]')).toBeFocused();
     expect(await page.evaluate(() => window.__certificatePrinted)).toBe(false);
   });
 
   test(`${lesson.label} saved preview remains operable after the modal closes`, async ({ page }) => {
-    await seedProgress(page, lesson.key, { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    await seedProgress(page, lesson.key, { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
     await page.addInitScript(() => {
       window.__previewRevoked = [];
       HTMLCanvasElement.prototype.toBlob = callback =>
@@ -480,7 +486,7 @@ for (const lesson of [
 
 test('Lesson 50 rapid saves keep one preview owner across reverse completion', async ({ page }) => {
   await seedProgress(page, 'canran:l50:progress:v2',
-    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
   await page.addInitScript(() => {
     window.__l50Preview = {
       blobCallbacks: [],
@@ -577,7 +583,7 @@ test('Lesson 50 rapid saves keep one preview owner across reverse completion', a
 
 test('Lesson 50 replaces mixed foreign preview IDs before committing its owner', async ({ page }) => {
   await seedProgress(page, 'canran:l50:progress:v2',
-    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
   await page.addInitScript(() => {
     window.__l50ForeignPreview = {
       cleanupCalls: [],
@@ -630,7 +636,7 @@ test('Lesson 50 replaces mixed foreign preview IDs before committing its owner',
 
 test('Lesson 50 rolls back a partially appended preview and revokes once', async ({ page }) => {
   await seedProgress(page, 'canran:l50:progress:v2',
-    { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 });
+    { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 });
   await page.addInitScript(() => {
     window.__l50FailedPreview = {
       createdUrls: [],
