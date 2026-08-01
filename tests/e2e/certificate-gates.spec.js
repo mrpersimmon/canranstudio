@@ -21,9 +21,15 @@ const CASES=[
     expectedCount:'还差 4 颗星，还有 2 关未满星。',accent:'#1d6fb8'
   },
   {
+    label:'Lesson 52',path:'/lesson52/',hash:'#cert',key:'canran:l52:progress:v2',
+    ratings:{l1:3,l2:2,l3:3,l4:0,l5:3},trigger:'#btnPrint',status:'#certGate',
+    course:'Lesson 52 · 环球小使者 Ⅰ',icon:'🛂',
+    expectedCount:'还差 4 颗星，还有 2 关未满星。',accent:'#4A5BAE'
+  },
+  {
     label:'Lesson 54',path:'/lesson54/',hash:'#cert',key:'canran:l54:progress:v2',
     ratings:{l1:3,l2:2,l3:3,l4:0,l5:3},trigger:'#btnPrint',status:'#certGate',
-    course:'Lesson 54 · 环球小使者',icon:'🛂',
+    course:'Lesson 54 · 环球小使者 Ⅱ',icon:'🛂',
     expectedCount:'还差 4 颗星，还有 2 关未满星。',accent:'#167d92'
   },
   {
