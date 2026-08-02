@@ -162,7 +162,7 @@ section.lvl{scroll-margin-top:96px;padding:56px 0}
 .fcard:hover .fcard-in{transform:translateY(-6px) rotate(-1deg)}
 .fcard.flipped:hover .fcard-in{transform:rotateY(180deg) translateY(-6px)}
 
-/* 听音挑肉 */
+/* 听音选词 */
 #listenGame{text-align:center}
 #lgPlay .big-ear{font-size:56px;animation:wiggle 1.2s infinite}
 #lgOpts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
@@ -514,12 +514,12 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       <h2>单词肉铺 <span class="en-sub">Word Shop</span></h2>
       <div class="lvl-stars" id="st-l1">☆☆☆</div>
     </div>
-    <div class="lvl-desc">🛒 货架上有 <b>14 个单词 + 3 个短语</b>！点卡片翻面看中文，点 🔊 听发音。全部混个脸熟后，去挑战下面的「听音挑肉」小游戏吧！</div>
+    <div class="lvl-desc">🛒 货架上有 <b>14 个单词 + 3 个短语</b>！点卡片翻面看中文，点 🔊 听发音。全部混个脸熟后，去挑战下面的「听音选词」小游戏吧！</div>
     <div id="cardGrid"></div>
 
     <div class="panel" id="listenGame">
-      <h3>🎧 小游戏：听音挑肉</h3>
-      <p style="font-weight:700;margin-bottom:12px">仔细听发音，从 4 块「肉」里挑出正确的那块！共 8 轮，答对越多星星越多～</p>
+      <h3>🎧 小游戏：听音选词</h3>
+      <p style="font-weight:700;margin-bottom:12px">仔细听发音，从 4 个选项中选出你听到的单词！共 8 轮，答对越多星星越多～</p>
       <div id="lgStartBox">
         <button class="btn btn-green" id="lgStartBtn">▶️ 开始挑战（8 轮）</button>
       </div>
@@ -1136,7 +1136,7 @@ function buildCards(){
   g.dataset.cardsInitialized='true';
 }
 
-/* ================= 第一关：听音挑肉 ================= */
+/* ================= 第一关：听音选词 ================= */
 let LG={round:0,score:0,order:[],cur:null,lock:false};
 function startListen(){
   LG={round:0,score:0,order:shuffle(WORDS).slice(0,8),cur:null,lock:false};

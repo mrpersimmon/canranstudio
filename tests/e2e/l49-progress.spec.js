@@ -8,6 +8,32 @@ async function setLiveRatings(page, ratings) {
   }, ratings);
 }
 
+test('Lesson 49 describes its mixed listening options as words, never meat', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      value: {
+        getVoices: () => [],
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        speak: utterance => queueMicrotask(() => utterance.onend?.()),
+        cancel: () => {}
+      }
+    });
+  });
+  await page.goto('/lesson49/#l1');
+
+  const level = page.locator('#l1');
+  await expect(page.locator('#cardGrid')).toContainText('husband');
+  await expect(level.locator('.lvl-desc')).toContainText('听音选词');
+  await expect(level.locator('#listenGame h3')).toHaveText('🎧 小游戏：听音选词');
+  await expect(level.locator('#listenGame p').first()).toHaveText(
+    '仔细听发音，从 4 个选项中选出你听到的单词！共 8 轮，答对越多星星越多～'
+  );
+  await expect(level).not.toContainText('听音挑肉');
+  await expect(level).not.toContainText('4 块「肉」');
+});
+
 test('Lesson 49 repairs legacy ratings and does not crash on negative values', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('l49-stars-v1', JSON.stringify({
