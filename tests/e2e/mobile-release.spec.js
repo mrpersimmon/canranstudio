@@ -186,7 +186,39 @@ test('phone, tablet rotations, and desktop preserve one atlas order and operable
   }
 });
 
-test('Lesson 49 growth layers retain one fixed canvas and anchor through all six states', async ({ page }, testInfo) => {
+test('Lesson 49 presents one coherent landmark snapshot at every growth state', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const stages = ['l1', 'l2', 'l3', 'l4', 'l5'];
+
+  for (let completed = 0; completed <= stages.length; completed += 1) {
+    await page.evaluate(({ profileKey, completedStages }) => {
+      localStorage.setItem(profileKey, JSON.stringify({
+        version: 1,
+        currentDistrictId: 'first-book-49-60',
+        completedStages: { lesson49: completedStages }
+      }));
+    }, { profileKey: PROFILE_KEY, completedStages: stages.slice(0, completed) });
+    await page.reload();
+
+    const markerImages = page.locator('[data-map-lesson="49"] .published-marker img');
+    await expect(markerImages).toHaveCount(1);
+    await expect(markerImages).toHaveAttribute(
+      'src',
+      completed === 0
+        ? '/assets/adventure-map/lesson49/base.png'
+        : `/assets/adventure-map/lesson49/growth-${completed}.png`
+    );
+    await expect(markerImages).toHaveAttribute(
+      'data-landmark-state',
+      completed === 0 ? 'base' : `growth-${completed}`
+    );
+  }
+});
+
+test('Lesson 49 landmark snapshots retain one fixed canvas through all six states', async ({ page }, testInfo) => {
+  test.setTimeout(120_000);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   const stages = ['l1', 'l2', 'l3', 'l4', 'l5'];
@@ -204,11 +236,11 @@ test('Lesson 49 growth layers retain one fixed canvas and anchor through all six
     await page.reload();
 
     const landmark = page.locator('[data-map-lesson="49"]');
-    const layers = landmark.locator('[data-landmark-layer]');
-    await expect(layers).toHaveCount(completed + 1);
-    await expect.poll(() => layers.evaluateAll(images => images.map(image => (
+    const snapshots = landmark.locator('[data-landmark-layer="snapshot"]');
+    await expect(snapshots).toHaveCount(1);
+    await expect.poll(() => snapshots.evaluateAll(images => images.map(image => (
       [image.naturalWidth, image.naturalHeight]
-    )))).toEqual(Array.from({ length: completed + 1 }, () => [1024, 1024]));
+    )))).toEqual([[1024, 1024]]);
     const evidencePath = testInfo.outputPath(`lesson49-landmark-stage-${completed}.png`);
     const marker = landmark.locator('.published-marker');
     const actualPng = await marker.screenshot({
@@ -232,17 +264,17 @@ test('Lesson 49 growth layers retain one fixed canvas and anchor through all six
     states.push(await landmark.evaluate(element => {
       const slot = element.getBoundingClientRect();
       const marker = element.querySelector('.landmark-stack').getBoundingClientRect();
-      const base = element.querySelector('[data-landmark-layer="base"]').getBoundingClientRect();
+      const snapshot = element.querySelector('[data-landmark-layer="snapshot"]').getBoundingClientRect();
       return {
         marker: [marker.x - slot.x, marker.y - slot.y, marker.width, marker.height],
-        base: [base.x - marker.x, base.y - marker.y, base.width, base.height]
+        snapshot: [snapshot.x - marker.x, snapshot.y - marker.y, snapshot.width, snapshot.height]
       };
     }));
   }
 
   for (const state of states.slice(1)) {
     state.marker.forEach((value, index) => expect(value).toBeCloseTo(states[0].marker[index], 4));
-    state.base.forEach((value, index) => expect(value).toBeCloseTo(states[0].base[index], 4));
+    state.snapshot.forEach((value, index) => expect(value).toBeCloseTo(states[0].snapshot[index], 4));
   }
   expect(states[0].marker[2]).toBeGreaterThanOrEqual(146);
 
@@ -305,7 +337,7 @@ test('safe areas and reduced motion keep atlas, story, and presentation tasks co
   await page.goto('/');
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
   await expect(page.locator('#currentDistrictTitle')).toBeFocused();
-  await expect(page.locator('[data-map-lesson="49"] [data-landmark-layer="base"]')).toBeVisible();
+  await expect(page.locator('[data-map-lesson="49"] [data-landmark-state="base"]')).toBeVisible();
   expect(await page.locator('.published-location').evaluate(element => (
     getComputedStyle(element).transitionDuration
   ))).toBe('0s');
@@ -321,8 +353,8 @@ test('safe areas and reduced motion keep atlas, story, and presentation tasks co
     }));
   }, PROFILE_KEY);
   await page.reload();
-  await expect(page.locator('[data-map-lesson="49"] [data-growth-stage="l1"]')).toBeVisible();
-  expect(await page.locator('[data-growth-stage="l1"]').evaluate(element => (
+  await expect(page.locator('[data-map-lesson="49"] [data-landmark-state="growth-1"]')).toBeVisible();
+  expect(await page.locator('[data-landmark-state="growth-1"]').evaluate(element => (
     getComputedStyle(element).animationDuration
   ))).toBe('0s');
   await page.getByRole('button', { name: '返回世界总览', exact: true }).click();

@@ -429,7 +429,7 @@ test('published learning location contract requires every declared asset and reg
   await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
 });
 
-test('Lesson 49 landmark layers and souvenir are fixed 1024px transparent PNG assets', async () => {
+test('Lesson 49 landmark snapshots and souvenir are fixed 1024px transparent PNG assets', async () => {
   const course = catalog.COURSES.find(item => item.id === 'lesson49');
   const transparentAssets = [
     course.map.baseAsset,

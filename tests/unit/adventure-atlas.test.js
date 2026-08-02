@@ -38,6 +38,7 @@ test('atlas location models follow the shared publication contract and device st
     route: null,
     recommendable: false,
     baseAsset: null,
+    landmarkAsset: null,
     mobilePreview: null,
     completedStageIds: [],
     visibleGrowthAssets: [],
@@ -55,6 +56,7 @@ test('atlas location models follow the shared publication contract and device st
     route: '/lesson49/',
     recommendable: true,
     baseAsset: 'assets/adventure-map/lesson49/base.png',
+    landmarkAsset: 'assets/adventure-map/lesson49/growth-2.png',
     mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
     completedStageIds: ['l2', 'l4'],
     visibleGrowthAssets: [
@@ -70,7 +72,7 @@ test('atlas location models follow the shared publication contract and device st
   assert.equal(Object.isFrozen(published), true);
 });
 
-test('Lesson 49 renders base plus exactly the cumulative layers for stages zero through five', () => {
+test('Lesson 49 exposes stage assets and a count-based snapshot for states zero through five', () => {
   const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
   const stageIds = lesson49.map.stages.map(stage => stage.progressId);
 
@@ -80,6 +82,12 @@ test('Lesson 49 renders base plus exactly the cumulative layers for stages zero 
       profileWithLesson49(...stageIds.slice(0, completed))
     )[0];
     assert.equal(model.completedStageCount, completed);
+    assert.equal(
+      model.landmarkAsset,
+      completed === 0
+        ? lesson49.map.baseAsset
+        : lesson49.map.stages[completed - 1].growthAsset
+    );
     assert.deepEqual(
       model.visibleGrowthAssets,
       lesson49.map.stages.slice(0, completed).map(stage => stage.growthAsset)

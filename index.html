@@ -176,13 +176,7 @@ button.world-district-card{appearance:none}
 }
 .landmark-stack{position:relative;isolation:isolate}
 .landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.landmark-stack img[data-landmark-layer="base"]{z-index:0}
-.landmark-stack img[data-landmark-layer="growth"]{z-index:1}
-.landmark-stack img[data-growth-stage="l1"]{transform:translate(0,6%) scale(.96)}
-.landmark-stack img[data-growth-stage="l2"]{transform:translate(-15%,15%) scale(.65)}
-.landmark-stack img[data-growth-stage="l3"]{transform:translate(28%,-8%) scale(.55)}
-.landmark-stack img[data-growth-stage="l4"]{transform:translate(24%,17%) scale(.55)}
-.landmark-stack img[data-growth-stage="l5"]{transform:translate(0,-9%) scale(.68)}
+.landmark-stack img[data-landmark-layer="snapshot"]{z-index:0}
 .published-location .location-status{border-style:solid;background:#fff}
 @media (hover:hover) and (pointer:fine){.published-location:hover{transform:translateY(-3px)}}
 .drawing-marker{
@@ -650,9 +644,9 @@ function locationMarkup(location){
       :location.progressState==='growing'
         ?`成长中 · ${location.completedStageCount} / ${location.totalStageCount}`
         :`可以出发 · 0 / ${location.totalStageCount}`;
-    const growthLayers=location.visibleGrowthAssets.map((asset,index)=>
-      `<img src="/${asset}" alt="" width="146" height="146" data-landmark-layer="growth" data-growth-stage="${location.completedStageIds[index]}">`
-    ).join('');
+    const landmarkState=location.completedStageCount===0
+      ?'base'
+      :`growth-${location.completedStageCount}`;
     const souvenir=location.souvenir
       ?`<span class="location-souvenir" data-souvenir-id="${location.souvenir.id}">
           <img src="/${location.souvenir.asset}" alt="" width="32" height="32">
@@ -662,7 +656,7 @@ function locationMarkup(location){
     return `<li class="map-location" data-map-slot="${location.slot}" data-map-lesson="${location.lesson}" data-location-status="published">
       <a class="published-location" href="${location.route}">
         <span class="published-marker landmark-stack" aria-hidden="true">
-          <img src="/${location.baseAsset}" alt="" width="146" height="146" data-landmark-layer="base">${growthLayers}
+          <img src="/${location.landmarkAsset}" alt="" width="146" height="146" data-landmark-layer="snapshot" data-landmark-state="${landmarkState}">
         </span>
         <span class="location-lesson">LESSON ${location.lesson}</span>
         <strong class="location-title">${location.title}</strong>

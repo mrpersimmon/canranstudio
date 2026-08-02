@@ -52,6 +52,11 @@
       const totalStageCount = Array.isArray(course.map?.stages)
         ? course.map.stages.length
         : 0;
+      const landmarkAsset = !published
+        ? null
+        : completedStageCount === 0
+          ? course.map.baseAsset
+          : course.map.stages[completedStageCount - 1].growthAsset;
       const progressState = !published
         ? 'drawing'
         : completedStageCount === 0
@@ -68,6 +73,7 @@
         route: publication.route,
         recommendable: publication.recommendable,
         baseAsset: published ? course.map.baseAsset : null,
+        landmarkAsset,
         mobilePreview: published ? course.map.mobilePreview : null,
         completedStageIds: completedIds,
         visibleGrowthAssets,
