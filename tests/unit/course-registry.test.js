@@ -47,6 +47,13 @@ test('published course registry is complete, unique, and deeply frozen', () => {
       title: '环球护照之旅 Ⅰ'
     },
     {
+      id: 'lesson53',
+      route: '/lesson53/',
+      entry: 'lesson53/index.html',
+      assetDirectories: ['lesson53/audio'],
+      title: '英伦气候小主播'
+    },
+    {
       id: 'lesson54',
       route: '/lesson54/',
       entry: 'lesson54/index.html',

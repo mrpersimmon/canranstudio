@@ -302,6 +302,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
     <a href="/lesson50/">Lesson 50 · 挑食小王子大冒险</a>
     <a href="/lesson51/">Lesson 51 · 希腊四季之旅</a>
     <a href="/lesson52/">Lesson 52 · 环球护照之旅 Ⅰ</a>
+    <a href="/lesson53/">Lesson 53 · 英伦气候小主播</a>
     <a href="/lesson54/">Lesson 54 · 环球护照之旅 Ⅱ</a>
     <a href="/soundmark/">番外篇 · 音标魔法乐园</a>
   </nav>
@@ -310,7 +311,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
 <footer>
   <div class="wrap">
     <div class="tip">小提示：星星进度保存在这台设备上，换设备会重新开始哦～</div>
-    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51、52、54 · 音标第一课</div>
+    <div>英语闯关乐园 ｜ 新概念英语第一册互动课件 ｜ Lesson 49、50、51、52、53、54 · 音标第一课</div>
   </div>
 </footer>
 
@@ -349,7 +350,13 @@ const HOME_COURSES = [
     art:'/assets/home/lesson52-passport.svg', tone:'blue',
     progress:{key:'canran:l52:progress:v2',ids:COURSE_LEVELS,max:15}
   },
-  ...[53].map(lesson => ({kind:'lesson',lesson,route:null,title:'即将开放',subtitle:'',tone:'soon'})),
+  {
+    kind:'lesson', lesson:53, route:'/lesson53/', title:'英伦气候小主播', subtitle:'An Interesting Climate',
+    description:'跟着汉斯和吉姆聊英国天气：东南西北四种天、春夏秋冬昼夜长短，15 句对白学会用英语聊气候！',
+    features:['气候单词','对白剧场','罗盘配对','缺词魔法','主播证书'],
+    art:'/assets/home/lesson53-climate.svg', tone:'green',
+    progress:{key:'canran:l53:progress:v2',ids:COURSE_LEVELS,max:15}
+  },
   {
     kind:'lesson', lesson:54, route:'/lesson54/', title:'环球护照之旅 Ⅱ', subtitle:'What Nationality Are They?',
     description:'第二卷·亚非大洋洲篇：再走 12 个国家，练习国籍句型，还有 does 疑问否定小魔法。',
