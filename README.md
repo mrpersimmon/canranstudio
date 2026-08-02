@@ -10,6 +10,7 @@
 - `/lesson50/` — 新概念英语 Lesson 50
 - `/lesson51/` — 新概念英语 Lesson 51《A Pleasant Climate》
 - `/lesson52/` — 新概念英语 Lesson 52《What Nationality Are They?》环球护照之旅 Ⅰ
+- `/lesson53/` — 新概念英语 Lesson 53《An Interesting Climate》英伦气候小主播
 - `/lesson54/` — 新概念英语 Lesson 54《Where Do They Come From?》环球护照之旅 Ⅱ
 - `/soundmark/` — 音标魔法乐园
 - `/home/` — 兼容入口，跳转到 `/`
@@ -41,7 +42,7 @@ packages are build-time inputs only: run `npm run vendor:fonts` after `npm ci` t
 committed local font assets. The generated WOFF2 files, `fonts.css`, and copied OFL licenses all
 live under `assets/fonts/`, and every public page loads its fonts from that same-origin path.
 
-Certificate issue, print, and save entry points re-check their own course eligibility before they act. The five course certificate experiences provide accessible, polite, atomic feedback. Lessons 49, 50, 51, 52, and 54 require exactly 15/15 stars; soundmark requires exactly 12/12 stars. Lesson 49 continues to export through a Blob and revoke every object URL after preview closure, authorization loss, or creation failure.
+Certificate issue, print, and save entry points re-check their own course eligibility before they act. The six course certificate experiences provide accessible, polite, atomic feedback. Lessons 49, 50, 51, 52, 53, and 54 require exactly 15/15 stars; soundmark requires exactly 12/12 stars. Lesson 49 continues to export through a Blob and revoke every object URL after preview closure, authorization loss, or creation failure.
 
 ## Production transport
 

@@ -145,12 +145,13 @@ test('welcome page separates numbered lessons from the special station', async (
   await expect(page.locator('#lessonRoute a[href="/lesson50/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/lesson51/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/lesson52/"]')).toHaveCount(1);
+  await expect(page.locator('#lessonRoute a[href="/lesson53/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/lesson54/"]')).toHaveCount(1);
   await expect(page.locator('#lessonRoute a[href="/soundmark/"]')).toHaveCount(0);
   await expect(page.locator('#specialStation a[href="/soundmark/"]')).toHaveCount(1);
   await expect(page.locator('[data-lesson="49"] [data-map-status="published"]')).toHaveText('地图地点已开放');
   await expect(page.locator('[data-lesson="50"] [data-map-status="drawing"]')).toHaveText('课程可进入 · 地图正在绘制');
-  await expect(page.locator('[data-lesson="53"] [data-map-status="drawing"]')).toHaveText('课程尚未开放 · 地图正在绘制');
+  await expect(page.locator('[data-lesson="53"] [data-map-status="drawing"]')).toHaveText('课程可进入 · 地图正在绘制');
   await expect(page.locator('[data-range-start="49"]')).toHaveAttribute('aria-pressed', 'true');
   const columns = await page.locator('#lessonStations').evaluate(element =>
     getComputedStyle(element).gridTemplateColumns.split(' ').length

@@ -19,7 +19,7 @@ test('course catalog is the complete immutable contract for lessons and special 
       ['lesson50', 'lesson', 50, 'published'],
       ['lesson51', 'lesson', 51, 'published'],
       ['lesson52', 'lesson', 52, 'published'],
-      ['lesson53', 'lesson', 53, 'planned'],
+      ['lesson53', 'lesson', 53, 'published'],
       ['lesson54', 'lesson', 54, 'published'],
       ['lesson55', 'lesson', 55, 'planned'],
       ['lesson56', 'lesson', 56, 'planned'],

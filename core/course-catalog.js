@@ -297,7 +297,15 @@
       art: '/assets/home/lesson52-passport.svg',
       tone: 'blue'
     }),
-    plannedLesson(53),
+    publishedLesson({
+      lesson: 53,
+      title: '英伦气候小主播',
+      subtitle: 'An Interesting Climate',
+      description: '跟着汉斯和吉姆聊英国天气：东南西北四种天、春夏秋冬昼夜长短，15 句对白学会用英语聊气候！',
+      features: ['气候单词', '对白剧场', '罗盘配对', '缺词魔法', '主播证书'],
+      art: '/assets/home/lesson53-climate.svg',
+      tone: 'green'
+    }),
     publishedLesson({
       lesson: 54,
       title: '环球护照之旅 Ⅱ',

@@ -12,7 +12,7 @@ test('published course registry is a compatibility view of the shared catalog', 
   assert.equal(registry.PRESENTATION_COURSES, catalog.PRESENTATION_COURSES);
   assert.deepEqual(
     registry.PUBLISHED_COURSES.map(course => course.id),
-    ['lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson54', 'soundmark']
+    ['lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark']
   );
   assert.equal(Object.isFrozen(registry.PUBLISHED_COURSES), true);
   assert.equal(registry.PUBLISHED_COURSES.every(course =>
