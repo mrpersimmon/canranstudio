@@ -933,7 +933,6 @@ function gameDone(scoreId,rating){
     locked = false; fb.textContent=''; fb.className='fb';
     opts.querySelectorAll('.g-opt').forEach(x=>x.classList.remove('right','wrong'));
     cur = bank[Math.floor(Math.random()*bank.length)];
-    setTimeout(()=>play(), 350);
   }
   function play(){ if(cur){ hear.classList.add('playing'); speak(cur.w, 0.75, ()=>hear.classList.remove('playing')); } }
   hear.onclick = play;
@@ -997,7 +996,6 @@ function gameDone(scoreId,rating){
       b.onclick = ()=>pick(b);
       opts.appendChild(b);
     });
-    setTimeout(play, 350);
   }
   function play(){ if(cur){ hear.classList.add('playing'); speak(cur.w, 0.75, ()=>hear.classList.remove('playing')); } }
   hear.onclick = play;

@@ -7,6 +7,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry');
 const { assertCourseCatalogContract } = require('./course-catalog-contract');
+const { assertPublicV1Boundary } = require('./public-v1-boundary');
 
 const REQUIRED_FILES = Object.freeze([
   'index.html',
@@ -407,6 +408,7 @@ async function buildStatic({
   }
 
   const commit = await assertPublicSnapshot(resolvedRoot);
+  await assertPublicV1Boundary({ root: resolvedRoot });
   await assertOwnedOutput(resolvedOut);
   await fs.rm(resolvedOut, { recursive: true, force: true });
   await fs.mkdir(resolvedOut, { recursive: true });

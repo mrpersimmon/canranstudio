@@ -29,6 +29,18 @@ const ONE_PIXEL_PNG = Buffer.from(
   'base64'
 );
 
+function publicHtml(title, body = '') {
+  return `<!DOCTYPE html>
+    <html lang="zh-CN">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${title}</title>
+      </head>
+      <body>${body}</body>
+    </html>`;
+}
+
 function sha256(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
 }
@@ -94,10 +106,15 @@ async function writeSyntheticPublicRoot(root) {
   ]) {
     const file = path.join(root, relative);
     await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.writeFile(file, relative.endsWith('.mp3') ? VALID_MP3_BYTES : relative);
+    const contents = relative.endsWith('.mp3')
+      ? VALID_MP3_BYTES
+      : relative === 'index.html'
+        ? publicHtml('灿然英语公开课程')
+        : relative;
+    await fs.writeFile(file, contents);
   }
   for (const course of PUBLISHED_COURSES) {
-    await fs.writeFile(path.join(root, course.entry), `
+    await fs.writeFile(path.join(root, course.entry), publicHtml(`${course.id} 公开课程`, `
       ${course.presentation.declaredStatus === 'published'
         ? `<a href="${course.presentation.route}">课堂投屏</a>`
         : ''}
@@ -119,7 +136,7 @@ async function writeSyntheticPublicRoot(root) {
         });
         const recording = 'audio/clip.mp3';
       </script>
-    `);
+    `));
     if (course.map.declaredStatus === 'published') {
       const imageFiles = [
         course.map.baseAsset,
@@ -149,7 +166,7 @@ async function writeSyntheticPublicRoot(root) {
         ? `<a href="${course.route}" data-presentation-control="exit">exit</a>`
         : `<button data-presentation-control="${control}">${control}</button>`
     )).join('\n');
-    await fs.writeFile(entry, `
+    await fs.writeFile(entry, publicHtml(`${course.id} 课堂投屏`, `
       ${controls}
       <script src="/core/course-catalog.js"></script>
       <script src="/core/audio-player.js"></script>
@@ -158,7 +175,7 @@ async function writeSyntheticPublicRoot(root) {
         const CLASSROOM_COURSE = CanranCore.courseCatalog.requirePublishedCourse('${course.id}');
         CanranCore.classroomPresentation.mount({ course: CLASSROOM_COURSE, audioPlayer: CanranCore.audio.createAudioPlayer() });
       </script>
-    `);
+    `));
     for (const step of course.presentation.steps) {
       const audio = path.join(root, step.audioAsset);
       await fs.mkdir(path.dirname(audio), { recursive: true });
@@ -288,6 +305,27 @@ test('buildStatic rejects a published course without prerecorded audio', async t
   await assert.rejects(
     buildStatic({ root, out }),
     /lesson49: prerecorded audio directory contains no \.mp3 file/
+  );
+  await assert.rejects(fs.stat(out), { code: 'ENOENT' });
+});
+
+test('buildStatic rejects application services in the public V1 runtime', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-public-service-'));
+  const out = path.join(root, 'dist');
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  await writeSyntheticPublicRoot(root);
+  await fs.appendFile(path.join(root, 'core', 'audio-player.js'), '\nfetch("/api/progress");\n');
+  execFileSync('git', ['add', 'core/audio-player.js'], { cwd: root });
+  execFileSync(
+    'git',
+    ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+      'commit', '--quiet', '-m', 'add forbidden runtime service'],
+    { cwd: root }
+  );
+
+  await assert.rejects(
+    buildStatic({ root, out }),
+    /core\/audio-player\.js: forbidden application service request/
   );
   await assert.rejects(fs.stat(out), { code: 'ENOENT' });
 });
@@ -491,10 +529,11 @@ test('buildStatic refuses outputs that overlap public inputs before cleanup', as
   const root = path.join(sandbox, 'repo');
   const index = path.join(root, 'index.html');
   const core = path.join(root, 'core');
-  const indexBefore = 'index.html';
+  let indexBefore;
   t.after(() => fs.rm(sandbox, { recursive: true, force: true }));
   await fs.mkdir(root);
   await writeSyntheticPublicRoot(root);
+  indexBefore = await fs.readFile(index, 'utf8');
 
   for (const out of [index, core, path.join(core, 'dist'), path.join(root, 'lesson49')]) {
     await assert.rejects(buildStatic({ root, out }), /overlaps public input/);

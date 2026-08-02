@@ -51,6 +51,8 @@ test('starting a second soundmark word clears the first playing state', async ({
   const bit = page.locator('.wchip[data-audio-word="bit"]');
   const fit = page.locator('.wchip[data-audio-word="fit"]');
 
+  expect(await page.evaluate(() => window.__audios.length)).toBe(0);
+  await initialGameAudio.click();
   await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
   await expect(initialGameAudio).toHaveClass(/playing/);
   await page.evaluate(() => {

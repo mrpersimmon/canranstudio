@@ -24,6 +24,16 @@ npx playwright install chromium
 npm test
 ```
 
+For a clean V1 release candidate, run the complete local boundary gate:
+
+```bash
+npm run verify:v1:release
+```
+
+This command runs unit, browser, deployment-contract, and exact static-build verification. It
+does not commit, push, deploy, or change ICP, DNS, TLS, or the accepted HTTP origin. The final
+build step deliberately refuses public files that differ from `HEAD`.
+
 ## Runtime and font assets
 
 The published site remains static and package-free at runtime. The pinned Fontsource 5.3.0
@@ -49,6 +59,9 @@ See `docs/classroom-presentation.md` for the public, device-data-free classroom 
 See `docs/mobile-release-smoke-checklist.md` for the required real-device WeChat, iPhone Safari,
 and Android Chromium evidence. Those checks remain manual and must not be replaced by desktop
 browser simulation.
+
+See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the public, indexable,
+credential-free static V1 release boundary and its automated/manual evidence split.
 
 Lesson 49 is the first catalog-declared classroom presentation. Its standalone public route uses
 the existing same-origin recordings and deliberately omits device progress and profile runtimes.

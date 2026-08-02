@@ -130,6 +130,20 @@ test('static course contract requires real same-origin prerecorded audio', async
     path.join(ROOT, 'lesson49/audio/beef.mp3'),
     path.join(root, 'lesson49/audio/clip.mp3')
   );
+
+  await fs.writeFile(
+    path.join(root, 'lesson49/index.html'),
+    validCoursePageSource(course).replace(
+      "const recording = 'audio/clip.mp3';",
+      "speechSynthesis.speak(new SpeechSynthesisUtterance('beef'));"
+    )
+  );
+  await assert.rejects(
+    assertCourseCatalogContract({ root, courses: [course] }),
+    /lesson49: course page must reference same-origin prerecorded audio/
+  );
+
+  await fs.writeFile(path.join(root, 'lesson49/index.html'), validCoursePageSource(course));
   await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
 });
 
