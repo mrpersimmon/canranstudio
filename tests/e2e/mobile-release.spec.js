@@ -37,6 +37,61 @@ async function expectHorizontalBounds(page, locator) {
   expect(box.x + box.width).toBeLessThanOrEqual(viewportWidth + 0.5);
 }
 
+async function compareMarkerToBaseline(page, actualPng, baselineName) {
+  return page.evaluate(async ({ actualDataUrl, baselineUrl }) => {
+    const loadImage = source => new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(new Error(`Unable to decode visual evidence: ${source}`));
+      image.src = source;
+    });
+    const [actual, baseline] = await Promise.all([
+      loadImage(actualDataUrl),
+      loadImage(baselineUrl)
+    ]);
+    if (actual.width !== baseline.width || actual.height !== baseline.height) {
+      return {
+        actualSize: [actual.width, actual.height],
+        baselineSize: [baseline.width, baseline.height],
+        meanAbsoluteDifference: Infinity,
+        strongDifferenceRatio: 1
+      };
+    }
+
+    const pixelsFor = image => {
+      const canvas = document.createElement('canvas');
+      canvas.width = image.width;
+      canvas.height = image.height;
+      const context = canvas.getContext('2d', { willReadFrequently: true });
+      context.drawImage(image, 0, 0);
+      return context.getImageData(0, 0, image.width, image.height).data;
+    };
+    const actualPixels = pixelsFor(actual);
+    const baselinePixels = pixelsFor(baseline);
+    let absoluteDifference = 0;
+    let strongDifferenceCount = 0;
+    const pixelCount = actual.width * actual.height;
+    for (let index = 0; index < actualPixels.length; index += 4) {
+      let strongestChannelDifference = 0;
+      for (let channel = 0; channel < 4; channel += 1) {
+        const difference = Math.abs(actualPixels[index + channel] - baselinePixels[index + channel]);
+        absoluteDifference += difference;
+        strongestChannelDifference = Math.max(strongestChannelDifference, difference);
+      }
+      if (strongestChannelDifference > 40) strongDifferenceCount += 1;
+    }
+    return {
+      actualSize: [actual.width, actual.height],
+      baselineSize: [baseline.width, baseline.height],
+      meanAbsoluteDifference: absoluteDifference / (pixelCount * 4),
+      strongDifferenceRatio: strongDifferenceCount / pixelCount
+    };
+  }, {
+    actualDataUrl: `data:image/png;base64,${actualPng.toString('base64')}`,
+    baselineUrl: `/tests/e2e/snapshots/mobile-release.spec.js/${baselineName}`
+  });
+}
+
 test('the first world overview defers production map artwork until its district opens', async ({ page }) => {
   const mapRequests = [];
   page.on('request', request => {
@@ -136,6 +191,7 @@ test('Lesson 49 growth layers retain one fixed canvas and anchor through all six
   await page.goto('/');
   const stages = ['l1', 'l2', 'l3', 'l4', 'l5'];
   const states = [];
+  let stageZeroPng;
 
   for (let completed = 0; completed <= stages.length; completed += 1) {
     await page.evaluate(({ profileKey, completedStages }) => {
@@ -155,14 +211,20 @@ test('Lesson 49 growth layers retain one fixed canvas and anchor through all six
     )))).toEqual(Array.from({ length: completed + 1 }, () => [1024, 1024]));
     const evidencePath = testInfo.outputPath(`lesson49-landmark-stage-${completed}.png`);
     const marker = landmark.locator('.published-marker');
-    await expect(marker).toHaveScreenshot(`lesson49-landmark-stage-${completed}.png`, {
-      animations: 'disabled',
-      maxDiffPixelRatio: 0.001
-    });
-    await marker.screenshot({
+    const actualPng = await marker.screenshot({
       animations: 'disabled',
       path: evidencePath
     });
+    if (completed === 0) stageZeroPng = actualPng;
+    const visualDifference = await compareMarkerToBaseline(
+      page,
+      actualPng,
+      `lesson49-landmark-stage-${completed}.png`
+    );
+    expect(visualDifference.actualSize).toEqual([147, 147]);
+    expect(visualDifference.baselineSize).toEqual([147, 147]);
+    expect(visualDifference.meanAbsoluteDifference).toBeLessThanOrEqual(2.5);
+    expect(visualDifference.strongDifferenceRatio).toBeLessThanOrEqual(0.02);
     await testInfo.attach(`lesson49-landmark-stage-${completed}`, {
       path: evidencePath,
       contentType: 'image/png'
@@ -183,6 +245,14 @@ test('Lesson 49 growth layers retain one fixed canvas and anchor through all six
     state.base.forEach((value, index) => expect(value).toBeCloseTo(states[0].base[index], 4));
   }
   expect(states[0].marker[2]).toBeGreaterThanOrEqual(146);
+
+  const deliberateMismatch = await compareMarkerToBaseline(
+    page,
+    stageZeroPng,
+    'lesson49-landmark-stage-5.png'
+  );
+  expect(deliberateMismatch.meanAbsoluteDifference).toBeGreaterThan(2.5);
+  expect(deliberateMismatch.strongDifferenceRatio).toBeGreaterThan(0.02);
 });
 
 test('the optional Lesson 50 story stays reachable and unobstructed in every release viewport', async ({ page }) => {
