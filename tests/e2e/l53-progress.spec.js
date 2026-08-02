@@ -53,7 +53,7 @@ test('Lesson 53 jumps to its first not-full-star passport stop',async({page})=>{
   await seed(page,{l1:3,l2:2,l3:3,l4:0,l5:3});
   await page.goto('/lesson53/#cert');
   await page.locator('#btnPrint').click();
-  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「机场广播剧」补满星');
+  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「伦敦小剧场」补满星');
   await page.locator('[data-certificate-go]').click();
   await expect(page).toHaveURL(/#w2$/);
   await expect(page.locator('#w2 h2')).toBeFocused();
