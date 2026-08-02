@@ -63,5 +63,9 @@ browser simulation.
 See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the public, indexable,
 credential-free static V1 release boundary and its automated/manual evidence split.
 
+See `docs/v1-map-usability-pilot-toolkit.md` and its linked workbook for the blank, privacy-safe
+two-round child usability and teacher-presentation trial kit. Actual trial results remain an
+institution-run manual requirement.
+
 Lesson 49 is the first catalog-declared classroom presentation. Its standalone public route uses
 the existing same-origin recordings and deliberately omits device progress and profile runtimes.
