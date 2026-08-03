@@ -108,8 +108,8 @@ test('the first world overview defers production map artwork until its district 
   await page.waitForLoadState('networkidle');
   await expect(page.locator('#currentDistrict')).toBeVisible();
   expect(new Set(mapRequests)).toEqual(new Set([
+    '/assets/adventure-map/atlas/warm-lantern-parchment.jpg',
     '/assets/adventure-map/lesson49/base.png',
-    '/assets/adventure-map/lesson49/mobile-preview.png',
     '/assets/adventure-map/lesson51/landmark-base.png'
   ]));
 });
@@ -355,7 +355,7 @@ test('safe areas and reduced motion keep atlas, story, and presentation tasks co
   }, PROFILE_KEY);
   await page.reload();
   await expect(page.locator('[data-map-lesson="49"] [data-landmark-state="growth-1"]')).toBeVisible();
-  expect(await page.locator('[data-landmark-state="growth-1"]').evaluate(element => (
+  expect(await page.locator('[data-map-lesson="49"] [data-landmark-state="growth-1"]').evaluate(element => (
     getComputedStyle(element).animationDuration
   ))).toBe('0s');
   await page.getByRole('button', { name: '返回世界总览', exact: true }).click();
