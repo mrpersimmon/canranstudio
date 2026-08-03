@@ -157,39 +157,23 @@ body[data-atlas-view="district"] #hero{display:none}
 }
 .district-heading-copy p{margin:0;font-size:12px;font-weight:800;letter-spacing:.4px}
 .district-heading-copy strong{display:block;margin-top:1px;font-size:15px;line-height:1.1}
-.map-recommendation{
-  display:flex;flex-direction:column;align-items:center;width:100%;color:var(--brown);text-align:center;text-decoration:none;
-  filter:drop-shadow(0 7px 3px rgba(62,38,25,.2));
-}
-.map-recommendation[hidden]{display:none!important}
-.recommendation-art{
-  display:grid;place-items:center;width:min(78%,330px);aspect-ratio:1;margin-bottom:-7%;
-}
-.recommendation-art img{width:100%;height:100%;object-fit:contain}
-.recommendation-copy{
-  position:relative;z-index:1;width:min(92%,430px);padding:9px 14px 11px;border:3px solid #513629;border-radius:14px;
-  background:#F9E9C6;box-shadow:inset 0 0 0 3px rgba(255,255,255,.48),0 5px 0 rgba(68,42,29,.3);
-}
-.recommendation-kicker{display:block;color:#A34B30;font-size:12px;font-weight:800;letter-spacing:1.1px}
-.recommendation-title{display:block;margin:2px 0 4px;font-size:clamp(20px,3.4vw,32px);line-height:1.08}
-.recommendation-progress{display:block;color:#6B503D;font-size:13px;font-weight:800;line-height:1.25}
-.recommendation-action{
-  display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:8px;padding:8px 22px;border:3px solid #493126;
-  border-radius:999px;background:#7653A5;color:#fff;font-size:15px;font-weight:800;box-shadow:0 4px 0 #493126;white-space:nowrap;
-}
-@media (hover:hover) and (pointer:fine){.map-recommendation:hover{transform:translateY(-2px)}}
 .district-map{
   position:relative;overflow:hidden;width:min(914px,100%);aspect-ratio:914 / 1880;margin-inline:auto;padding:0;border:0;
   border-radius:24px;background-color:#2E1D15;background-image:url('/assets/adventure-map/atlas/warm-lantern-parchment.jpg');
   background-position:center;background-repeat:no-repeat;background-size:100% 100%;box-shadow:0 16px 34px rgba(45,27,18,.3);touch-action:pan-y;
 }
 .district-map::before{display:none}
-#districtRecommendation{position:absolute;z-index:12;top:27%;left:50%;width:min(58%,520px);transform:translateX(-50%)}
-#districtRecommendation[hidden]{display:none!important}
 .district-locations{
   position:absolute;z-index:8;inset:0;margin:0;padding:0;list-style:none;pointer-events:none;
 }
 .map-location{position:absolute;display:flex;min-width:0;align-items:center;justify-content:center;text-align:center;pointer-events:auto}
+.map-location[data-map-guidance]{z-index:2}
+.map-location[data-location-status="published"]{
+  --location-accent:#A54332;--location-accent-dark:#713326;--location-plaque-angle:-.8deg;
+}
+.map-location[data-map-lesson="51"]{
+  --location-accent:#276D9D;--location-accent-dark:#1D506F;--location-plaque-angle:.7deg;
+}
 .map-location[data-map-slot="1"]{top:15%;left:7%;width:36%}
 .map-location[data-map-slot="2"]{top:44%;left:6%;width:20%}
 .map-location[data-map-slot="3"]{top:58%;right:6%;width:38%}
@@ -207,18 +191,53 @@ body[data-atlas-view="district"] #hero{display:none}
 .drawing-location .location-title{display:none}
 .published-location{position:relative;display:flex;flex-direction:column;align-items:center;width:100%;color:var(--brown);text-decoration:none}
 .published-marker{
-  display:grid;place-items:center;width:min(100%,260px);aspect-ratio:1;margin-bottom:2px;border:0;background:transparent;
+  position:relative;z-index:1;display:grid;place-items:center;width:min(100%,260px);aspect-ratio:1;margin-bottom:2px;border:0;background:transparent;
   filter:drop-shadow(0 6px 2px rgba(68,42,28,.24));overflow:visible;
 }
 .landmark-stack{position:relative;isolation:isolate}
 .landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .landmark-stack img[data-landmark-layer="snapshot"],.landmark-stack img[data-landmark-layer="base"]{z-index:0}
-.published-location .location-lesson,.published-location .location-title{
-  position:relative;z-index:2;max-width:96%;padding-inline:9px;background:#A54332;color:#fff;text-shadow:0 1px 0 rgba(58,35,24,.5);
+.map-location[data-map-guidance="active"] .published-location::before{
+  content:"";position:absolute;z-index:0;top:-5px;left:50%;width:min(calc(100% + 10px),270px);aspect-ratio:1;
+  border:3px solid rgba(247,191,61,.96);border-radius:48% 52% 46% 54%;
+  background:radial-gradient(circle,rgba(255,235,157,.42) 0 52%,rgba(129,88,164,.13) 69%,transparent 70%);
+  box-shadow:0 0 0 7px rgba(129,88,164,.16),0 0 22px rgba(247,191,61,.62);
+  animation:map-guidance-breathe 2.8s ease-in-out infinite;
 }
-.published-location .location-lesson{padding-top:4px;border-radius:10px 10px 0 0;font-size:11px}
-.published-location .location-title{padding-bottom:5px;border-radius:0 0 10px 10px;font-size:clamp(13px,2.2vw,20px);white-space:normal}
-.map-location[data-map-lesson="51"] .location-lesson,.map-location[data-map-lesson="51"] .location-title{background:#276D9D}
+.location-guide{
+  position:relative;z-index:4;display:inline-flex;align-items:center;gap:6px;min-height:28px;margin:-22px 0 3px;padding:3px 10px;
+  border:2px solid #513629;border-radius:999px;background:#F4C44F;color:#513629;box-shadow:0 3px 0 rgba(73,49,38,.82);
+  font-size:11px;font-weight:800;line-height:1;letter-spacing:.5px;white-space:nowrap;pointer-events:none;
+}
+.location-guide::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:#A54332;box-shadow:0 0 0 3px rgba(255,248,219,.65);
+}
+.map-location[data-map-guidance="review"] .location-guide{
+  border-style:dashed;background:rgba(249,233,198,.92);color:#6B503D;box-shadow:0 2px 0 rgba(73,49,38,.32);
+}
+.map-location[data-map-guidance="review"] .location-guide::before{background:#8B755E;box-shadow:none}
+@keyframes map-guidance-breathe{
+  0%,100%{opacity:.72;transform:translateX(-50%) scale(.96) rotate(-2deg)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.04) rotate(-2deg)}
+}
+.location-plaque{
+  position:relative;z-index:3;display:grid;justify-items:center;width:max-content;max-width:calc(100% + 24px);margin-top:2px;
+  padding:7px 18px 9px;border:3px solid #5E3B28;border-radius:9px 9px 14px 14px;
+  background:
+    radial-gradient(circle at 11px 10px,#F5C85A 0 2px,#6D4327 2.5px 4px,transparent 4.5px),
+    radial-gradient(circle at calc(100% - 11px) 10px,#F5C85A 0 2px,#6D4327 2.5px 4px,transparent 4.5px),
+    linear-gradient(180deg,rgba(255,250,229,.86),rgba(232,199,137,.34)),#F3DEB1;
+  box-shadow:inset 0 0 0 2px var(--location-accent),0 4px 0 rgba(73,49,38,.62),0 8px 12px rgba(65,40,25,.18);
+  transform:rotate(var(--location-plaque-angle));
+}
+.location-plaque .location-lesson{
+  position:relative;z-index:1;margin:0 0 2px;padding:0;background:transparent;color:var(--location-accent-dark);
+  font-size:10px;line-height:1;font-weight:800;letter-spacing:1.15px;text-shadow:none;
+}
+.location-plaque .location-title{
+  position:relative;z-index:1;overflow:visible;max-width:100%;margin:0;padding:0;background:transparent;color:#493126;
+  font-size:clamp(14px,2.1vw,19px);line-height:1.05;font-weight:800;text-shadow:0 1px 0 rgba(255,255,255,.7);white-space:normal;
+}
 .published-location .location-status{margin-top:5px;border-style:solid;background:#FBEDCC;color:#513629}
 @media (hover:hover) and (pointer:fine){.published-location:hover{transform:translateY(-3px)}}
 .drawing-marker{
@@ -461,13 +480,10 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
   .district-heading-copy p{font-size:9px;white-space:nowrap}
   .district-heading-copy strong{font-size:12px}
   .published-marker{width:146px;height:146px;aspect-ratio:auto}
-  #districtRecommendation{top:28%;width:68%}
-  .recommendation-art{width:75%}
-  .recommendation-copy{padding:7px 9px 8px;border-width:2px}
-  .recommendation-kicker{font-size:9px}
-  .recommendation-title{font-size:18px}
-  .recommendation-progress{font-size:9px;line-height:1.2}
-  .recommendation-action{min-height:44px;margin-top:5px;padding:6px 18px;border-width:2px;font-size:13px;box-shadow:0 3px 0 #493126}
+  .location-guide{min-height:25px;margin-top:-19px;padding:3px 8px;font-size:9px}
+  .location-plaque{max-width:calc(100% + 20px);padding:6px 13px 8px;border-width:2px}
+  .location-plaque .location-lesson{font-size:8px}
+  .location-plaque .location-title{font-size:13px}
   .drawing-marker{border-width:2px}
   .drawing-location .location-title{max-width:108px;font-size:11px}
   .drawing-location .location-lesson{font-size:9px}
@@ -576,9 +592,7 @@ footer .tip{display:inline-block;margin-bottom:12px;padding:9px 17px;border:2px 
             <strong>探索中的城区</strong>
           </div>
         </div>
-        <div id="districtRecommendation" hidden></div>
         <ol class="district-locations" id="districtLocations"></ol>
-        <p class="district-note">铅笔远景正在绘制；彩色地标已经可以进入。</p>
       </div>
     </section>
   </section>
@@ -726,8 +740,15 @@ function landmarkMarkup(location){
   return `<img src="/${location.landmarkAsset}" alt="" width="146" height="146" data-landmark-layer="snapshot" data-landmark-state="${landmarkState}">`;
 }
 
-function locationMarkup(location){
-  if(location.status==='published'){
+function locationMarkup(location,recommendation){
+  if(location.status!=='published') return '';
+    const guidance=location.id===recommendation?.id
+      ?location.progressState==='complete'?'review':'active'
+      :null;
+    const guidanceAttribute=guidance?` data-map-guidance="${guidance}"`:'';
+    const guidanceLabel=guidance
+      ?`<span class="location-guide">${guidance==='active'?'正在闯关':'推荐复习'}</span>`
+      :'';
     const progressLabel=location.progressState==='complete'
       ?`地点完成 · ${location.completedStageCount} / ${location.totalStageCount}`
       :location.progressState==='growing'
@@ -739,43 +760,20 @@ function locationMarkup(location){
           <span>永久纪念<br>${location.souvenir.title}</span>
         </span>`
       :'';
-    return `<li class="map-location" data-map-slot="${location.slot}" data-map-lesson="${location.lesson}" data-location-status="published">
+  return `<li class="map-location" data-map-slot="${location.slot}" data-map-lesson="${location.lesson}" data-location-status="published"${guidanceAttribute}>
       <a class="published-location" href="${location.route}">
         <span class="published-marker landmark-stack" aria-hidden="true">
           ${landmarkMarkup(location)}
         </span>
-        <span class="location-lesson">LESSON ${location.lesson}</span>
-        <strong class="location-title">${location.title}</strong>
+        ${guidanceLabel}
+        <span class="location-plaque">
+          <span class="location-lesson">LESSON ${location.lesson}</span>
+          <strong class="location-title">${location.title}</strong>
+        </span>
         <span class="location-status">${progressLabel}</span>
         ${souvenir}
       </a>
     </li>`;
-  }
-  return `<li class="map-location" data-map-slot="${location.slot}" data-map-lesson="${location.lesson}" data-location-status="drawing">
-    <div class="drawing-location">
-      <span class="drawing-marker" aria-hidden="true">${location.lesson}</span>
-      <span class="location-lesson">LESSON ${location.lesson}</span>
-      <strong class="location-title">${location.title}</strong>
-      <span class="location-status">正在绘制</span>
-    </div>
-  </li>`;
-}
-
-function recommendationMarkup(location){
-  const copy=location.progressState==='complete'
-    ?{kicker:'再次探访',progress:`五个学习阶段都已完成，${location.souvenir?`${location.souvenir.title}会一直留在地图上。`:'这个地点会一直保留完整模样。'}`,action:'再次探访'}
-    :location.progressState==='growing'
-      ?{kicker:'推荐继续',progress:`已完成 ${location.completedStageCount} / ${location.totalStageCount} 个学习阶段，今天让这个地点再成长一点。`,action:'继续成长'}
-      :{kicker:'推荐出发',progress:`从 Lesson ${location.lesson} 开始，完成五个真实阶段，让学习地点一步步长成自己的模样。`,action:'开始冒险'};
-  return `<a class="map-recommendation" href="${location.route}">
-    <span class="recommendation-art landmark-stack" aria-hidden="true">${landmarkMarkup(location)}</span>
-    <span class="recommendation-copy">
-      <span class="recommendation-kicker">${copy.kicker} · LESSON ${location.lesson}</span>
-      <strong class="recommendation-title">${location.title}</strong>
-      <span class="recommendation-progress">${copy.progress}</span>
-    </span>
-    <span class="recommendation-action">${copy.action} →</span>
-  </a>`;
 }
 
 function renderAtlas(){
@@ -796,11 +794,9 @@ function renderCurrentDistrict(){
     CanranCore.courseCatalog.MAP_COURSES,
     deviceProfileState.profile
   );
-  document.getElementById('districtLocations').innerHTML=locations.map(locationMarkup).join('');
   const recommendation=CanranCore.adventureAtlas.selectRecommendedLocation(locations);
-  const recommendationHost=document.getElementById('districtRecommendation');
-  recommendationHost.hidden=!recommendation;
-  recommendationHost.innerHTML=recommendation?recommendationMarkup(recommendation):'';
+  document.getElementById('districtLocations').innerHTML=locations
+    .map(location=>locationMarkup(location,recommendation)).join('');
   districtRendered=true;
 }
 

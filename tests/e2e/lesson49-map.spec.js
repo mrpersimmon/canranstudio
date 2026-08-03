@@ -47,11 +47,11 @@ test('Lesson 49 recommendation, real-stage growth, souvenir persistence, and res
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
 
-  const recommendation = page.locator('#districtRecommendation');
-  await expect(recommendation).toBeVisible();
-  await expect(recommendation).toContainText('推荐继续');
-  await expect(recommendation).toContainText('1 / 5');
-  await expect(recommendation.getByRole('link', { name: /推荐继续.*LESSON 49.*肉店大冒险.*1 \/ 5/ })).toBeVisible();
+  const guidedLocation = page.locator('[data-map-guidance="active"]');
+  await expect(guidedLocation).toHaveAttribute('data-map-lesson', '49');
+  await expect(guidedLocation).toContainText('正在闯关');
+  await expect(guidedLocation.getByRole('link', { name: /正在闯关.*LESSON 49.*肉店大冒险.*1 \/ 5/ })).toBeVisible();
+  await expect(page.locator('#districtRecommendation')).toHaveCount(0);
 
   const landmark = page.locator('[data-map-lesson="49"]');
   await expect(landmark.locator('[data-landmark-layer]')).toHaveCount(1);
@@ -60,7 +60,7 @@ test('Lesson 49 recommendation, real-stage growth, souvenir persistence, and res
   const initialMarkerBox = await landmark.locator('.landmark-stack').boundingBox();
   expect(initialMarkerBox).not.toBeNull();
 
-  await recommendation.getByRole('link', { name: /推荐继续.*LESSON 49.*肉店大冒险/ }).click();
+  await guidedLocation.getByRole('link', { name: /正在闯关.*LESSON 49.*肉店大冒险/ }).click();
   expect(await page.evaluate(() => location.pathname)).toBe('/lesson49/');
   await finishRealListeningStage(page);
   await page.getByRole('link', { name: '返回世界地图' }).first().click();
@@ -90,8 +90,8 @@ test('Lesson 49 recommendation, real-stage growth, souvenir persistence, and res
   await expect(landmark.locator('[data-landmark-layer]')).toHaveCount(1);
   await expect(landmark.locator('[data-landmark-state="growth-5"]')).toBeVisible();
   await expect(landmark.locator('[data-souvenir-id="food-basket"]')).toBeVisible();
-  await expect(page.locator('#districtRecommendation')).toContainText('推荐出发');
-  await expect(page.locator('#districtRecommendation')).toContainText('LESSON 51');
+  await expect(guidedLocation).toHaveAttribute('data-map-lesson', '51');
+  await expect(guidedLocation).toContainText('正在闯关');
   await expect(landmark.getByRole('link')).toHaveAccessibleName(/地点完成.*5 \/ 5.*永久纪念.*食物篮子/);
   const finalMarkerBox = await landmark.locator('.landmark-stack').boundingBox();
   expect(finalMarkerBox.width).toBe(initialMarkerBox.width);
@@ -102,7 +102,7 @@ test('Lesson 49 recommendation, real-stage growth, souvenir persistence, and res
   await expect.poll(() => landmark.locator('[data-souvenir-id] img').evaluate(image => (
     [image.naturalWidth, image.naturalHeight]
   ))).toEqual([1024, 1024]);
-  await expect.poll(() => recommendation.locator('img').evaluate(image => (
+  await expect.poll(() => guidedLocation.locator('img').first().evaluate(image => (
     [image.naturalWidth, image.naturalHeight]
   ))).toEqual([1024, 1024]);
   await page.reload();
@@ -118,5 +118,33 @@ test('Lesson 49 recommendation, real-stage growth, souvenir persistence, and res
   await expect(landmark.locator('[data-landmark-layer]')).toHaveCount(1);
   await expect(landmark.locator('[data-landmark-state="base"]')).toBeVisible();
   await expect(landmark.locator('[data-souvenir-id]')).toHaveCount(0);
-  await expect(page.locator('#districtRecommendation')).toContainText('推荐出发');
+  await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-map-lesson', '49');
+  await expect(page.locator('[data-map-guidance="active"]')).toContainText('正在闯关');
+});
+
+test('a fully completed district marks one original landmark for review without duplicating it', async ({ page }) => {
+  await page.addInitScript(profileKey => {
+    localStorage.setItem(profileKey, JSON.stringify({
+      version: 1,
+      currentDistrictId: 'first-book-49-60',
+      completedStages: {
+        lesson49: ['l1', 'l2', 'l3', 'l4', 'l5'],
+        lesson51: ['l1', 'l2', 'l3', 'l4', 'l5']
+      }
+    }));
+  }, PROFILE_KEY);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+
+  const reviewLocation = page.locator('[data-map-guidance="review"]');
+  await expect(reviewLocation).toHaveCount(1);
+  await expect(reviewLocation).toHaveAttribute('data-map-lesson', '49');
+  await expect(reviewLocation).toContainText('推荐复习');
+  await expect(reviewLocation.getByRole('link')).toHaveAccessibleName(
+    /推荐复习.*LESSON 49.*肉店大冒险.*地点完成.*5 \/ 5/
+  );
+  await expect(page.locator('#districtRecommendation')).toHaveCount(0);
+  await expect(page.locator('#districtLocations a[href="/lesson49/"]')).toHaveCount(1);
+  await expect(page.locator('[data-map-lesson="49"] .landmark-stack')).toHaveCount(1);
 });

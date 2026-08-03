@@ -9,7 +9,7 @@ const VIEWPORTS = [
   { label: 'tablet landscape', width: 1024, height: 768 },
   { label: 'desktop', width: 1280, height: 900 }
 ];
-const DISTRICT_LESSONS = [49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
+const PUBLISHED_MAP_LESSONS = [49, 51];
 
 async function expectNoHorizontalOverflow(page) {
   await expect.poll(() => page.evaluate(() => ({
@@ -137,28 +137,27 @@ test('phone, tablet rotations, and desktop preserve one atlas order and operable
       await page.keyboard.press('Enter');
 
       await expect(page.locator('#currentDistrictTitle')).toBeFocused();
-      await expect(page.locator('#districtLocations [data-map-slot]')).toHaveCount(12);
+      await expect(page.locator('#districtLocations [data-map-slot]')).toHaveCount(2);
       expect(await page.locator('#districtLocations [data-map-slot]').evaluateAll(locations => (
         locations.map(location => Number(location.dataset.mapLesson))
-      ))).toEqual(DISTRICT_LESSONS);
+      ))).toEqual(PUBLISHED_MAP_LESSONS);
       const drawingLocations = page.locator('#districtLocations [data-location-status="drawing"]');
-      await expect(drawingLocations).toHaveCount(10);
-      expect((await drawingLocations.allTextContents()).every(text => text.includes('正在绘制')))
-        .toBe(true);
+      await expect(drawingLocations).toHaveCount(0);
+      await expect(page.locator('#districtLocations')).not.toContainText('正在绘制');
       await expect(page.locator('[data-map-lesson="49"] a')).toHaveAccessibleName(
         /LESSON 49.*肉店大冒险.*可以出发.*0 \/ 5/
       );
-      const recommendation = page.locator('#districtRecommendation a');
-      await expect(recommendation).toHaveAccessibleName(
-        /推荐出发.*LESSON 49.*肉店大冒险.*开始冒险/
+      const guidedLocation = page.locator('[data-map-guidance="active"] a');
+      await expect(guidedLocation).toHaveAccessibleName(
+        /正在闯关.*LESSON 49.*肉店大冒险.*可以出发.*0 \/ 5/
       );
+      await expect(page.locator('#districtRecommendation')).toHaveCount(0);
 
       await page.keyboard.press('Tab');
-      await expect(recommendation).toBeFocused();
+      await expect(guidedLocation).toBeFocused();
       for (const selector of [
         '#backToWorld',
-        '#districtRecommendation a',
-        '[data-map-lesson="49"] a',
+        '[data-map-guidance="active"] a',
         '#previousRange',
         '#nextRange',
         '#lessonSearch',
@@ -246,6 +245,8 @@ test('Lesson 49 landmark snapshots retain one fixed canvas through all six state
     const marker = landmark.locator('.published-marker');
     const actualPng = await marker.screenshot({
       animations: 'disabled',
+      // The canvas contract covers the generated landmark, not the map-level route guidance behind it.
+      style: '[data-map-guidance="active"] .published-location::before, [data-map-guidance] .location-guide { display: none !important; }',
       path: evidencePath
     });
     if (completed === 0) stageZeroPng = actualPng;

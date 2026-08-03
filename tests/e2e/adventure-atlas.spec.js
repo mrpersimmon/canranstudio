@@ -22,28 +22,23 @@ test('first visit presents twelve districts with only the launch district action
   expect(distantInteractivity).toBe(0);
 });
 
-test('launch district is a stable twelve-location map and unfinished drawings are truly inert', async ({ page }) => {
+test('launch district renders only published landmarks while keeping future locations in the catalog', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
 
   const district = page.locator('#currentDistrict');
   await expect(district).toBeVisible();
   await expect(page.locator('#worldOverview')).toBeHidden();
-  await expect(page.locator('#districtLocations [data-map-slot]')).toHaveCount(12);
+  await expect(page.locator('#districtLocations [data-map-slot]')).toHaveCount(2);
   await expect(page.locator('#districtLocations [data-location-status="published"]')).toHaveCount(2);
-  await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(10);
-  await expect(page.locator('#districtLocations')).toContainText('正在绘制');
+  await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(0);
+  await expect(page.locator('#districtLocations')).not.toContainText('正在绘制');
+  await expect(page.locator('.district-note')).toHaveCount(0);
 
   const contract = await page.evaluate(() => ({
-    lessons: [...document.querySelectorAll('#districtLocations [data-map-slot]')]
+    renderedLessons: [...document.querySelectorAll('#districtLocations [data-map-slot]')]
       .map(location => Number(location.dataset.mapLesson)),
-    slots: [...document.querySelectorAll('#districtLocations [data-map-slot]')]
-      .map(location => Number(location.dataset.mapSlot)),
-    drawingInteractivity: document.querySelectorAll(
-      '#districtLocations [data-location-status="drawing"] a, ' +
-      '#districtLocations [data-location-status="drawing"] button, ' +
-      '#districtLocations [data-location-status="drawing"] [tabindex]'
-    ).length,
+    catalogLessons: CanranCore.courseCatalog.MAP_COURSES.map(course => course.lesson),
     recommendableLocations: CanranCore.courseCatalog.MAP_COURSES
       .filter(course => CanranCore.courseCatalog.assessLearningLocation(course).recommendable)
       .length,
@@ -52,9 +47,8 @@ test('launch district is a stable twelve-location map and unfinished drawings ar
     ).currentDistrictId
   }));
 
-  expect(contract.lessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]);
-  expect(contract.slots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-  expect(contract.drawingInteractivity).toBe(0);
+  expect(contract.renderedLessons).toEqual([49, 51]);
+  expect(contract.catalogLessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]);
   expect(contract.recommendableLocations).toBe(2);
   expect(contract.currentDistrictId).toBe('first-book-49-60');
 });
@@ -86,6 +80,30 @@ test('Lesson 51 is a real link because its layered publication contract is compl
   await expect(location.getByRole('link')).toHaveAccessibleName(
     /LESSON 51.*希腊四季之旅.*可以出发.*0 \/ 5/
   );
+});
+
+test('published landmarks use one map plaque instead of two stacked button labels', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+
+  for (const lesson of [49, 51]) {
+    const location = page.locator(`[data-map-lesson="${lesson}"]`);
+    const plaque = location.locator('.location-plaque');
+    await expect(plaque).toHaveCount(1);
+    await expect(plaque.locator('.location-lesson')).toHaveCount(1);
+    await expect(plaque.locator('.location-title')).toHaveCount(1);
+
+    const presentation = await plaque.evaluate(element => ({
+      plaqueBackground: getComputedStyle(element).backgroundColor,
+      plaqueBorder: getComputedStyle(element).borderTopWidth,
+      lessonBackground: getComputedStyle(element.querySelector('.location-lesson')).backgroundColor,
+      titleBackground: getComputedStyle(element.querySelector('.location-title')).backgroundColor
+    }));
+    expect(presentation.plaqueBackground).not.toBe('rgba(0, 0, 0, 0)');
+    expect(presentation.plaqueBorder).not.toBe('0px');
+    expect(presentation.lessonBackground).toBe('rgba(0, 0, 0, 0)');
+    expect(presentation.titleBackground).toBe('rgba(0, 0, 0, 0)');
+  }
 });
 
 test('return visits open the current district and keep an explicit world overview route', async ({ page }) => {
