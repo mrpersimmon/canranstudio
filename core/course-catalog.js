@@ -67,6 +67,7 @@
   function createLessonMap(lesson, {
     souvenir = null,
     declaredStatus = 'drawing',
+    landmarkMode = 'snapshot',
     baseAsset = null,
     growthAssets = [],
     mobilePreview = null,
@@ -77,6 +78,7 @@
         districtId: null,
         v1Visible: false,
         declaredStatus: 'not-applicable',
+        landmarkMode: null,
         baseAsset: null,
         stages: [],
         souvenir: null,
@@ -88,6 +90,7 @@
       districtId: LAUNCH_DISTRICT.id,
       v1Visible: true,
       declaredStatus,
+      landmarkMode,
       baseAsset,
       stages: LESSON_STAGE_IDS.map((progressId, index) => ({
         progressId,
@@ -286,7 +289,26 @@
       art: '/assets/home/lesson51-temple.png',
       tone: 'blue',
       legacyKey: 'l51-stars-v1',
-      legacyMode: 'reset'
+      legacyMode: 'reset',
+      souvenir: {
+        id: 'four-seasons-guide-compass',
+        title: '四季导游罗盘',
+        asset: 'assets/adventure-map/lesson51/four-seasons-guide-compass.png'
+      },
+      mapPublication: {
+        declaredStatus: 'published',
+        landmarkMode: 'layers',
+        baseAsset: 'assets/adventure-map/lesson51/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/lesson51/growth-01-weather.png',
+          'assets/adventure-map/lesson51/growth-02-theatre.png',
+          'assets/adventure-map/lesson51/growth-03-seasons.png',
+          'assets/adventure-map/lesson51/growth-04-sundial.png',
+          'assets/adventure-map/lesson51/growth-05-celebration.png'
+        ],
+        mobilePreview: 'assets/adventure-map/lesson51/mobile-preview.png',
+        regressionTest: 'tests/e2e/lesson51-map.spec.js'
+      }
     }),
     publishedLesson({
       lesson: 52,
@@ -347,6 +369,7 @@
         districtId: null,
         v1Visible: false,
         declaredStatus: 'not-applicable',
+        landmarkMode: null,
         baseAsset: null,
         stages: [],
         souvenir: null,
@@ -400,6 +423,7 @@
         )),
       stageMapping: stages.length === 5 && progressIds.length === 5 &&
         stages.every((stage, index) => stage?.progressId === progressIds[index]),
+      renderingMode: ['snapshot', 'layers'].includes(course.map.landmarkMode),
       baseLandmark: isMapImagePath(course.map.baseAsset),
       growthLayers: stages.length === 5 &&
         growthAssets.every(isMapImagePath) &&
@@ -441,6 +465,7 @@
     return map?.districtId === null &&
       map.v1Visible === false &&
       map.declaredStatus === 'not-applicable' &&
+      map.landmarkMode === null &&
       map.baseAsset === null &&
       Array.isArray(map.stages) && map.stages.length === 0 &&
       map.souvenir === null &&

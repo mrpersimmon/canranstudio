@@ -30,8 +30,8 @@ test('launch district is a stable twelve-location map and unfinished drawings ar
   await expect(district).toBeVisible();
   await expect(page.locator('#worldOverview')).toBeHidden();
   await expect(page.locator('#districtLocations [data-map-slot]')).toHaveCount(12);
-  await expect(page.locator('#districtLocations [data-location-status="published"]')).toHaveCount(1);
-  await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(11);
+  await expect(page.locator('#districtLocations [data-location-status="published"]')).toHaveCount(2);
+  await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(10);
   await expect(page.locator('#districtLocations')).toContainText('正在绘制');
 
   const contract = await page.evaluate(() => ({
@@ -55,7 +55,7 @@ test('launch district is a stable twelve-location map and unfinished drawings ar
   expect(contract.lessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]);
   expect(contract.slots).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
   expect(contract.drawingInteractivity).toBe(0);
-  expect(contract.recommendableLocations).toBe(1);
+  expect(contract.recommendableLocations).toBe(2);
   expect(contract.currentDistrictId).toBe('first-book-49-60');
 });
 
@@ -75,6 +75,17 @@ test('Lesson 49 is a real link because its shared publication contract is comple
     route: '/lesson49/'
   });
   await expect(link).toHaveAccessibleName(/LESSON 49.*肉店大冒险.*可以出发.*0 \/ 5/);
+});
+
+test('Lesson 51 is a real link because its layered publication contract is complete', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  const location = page.locator('[data-map-lesson="51"]');
+  await expect(location).toHaveAttribute('data-location-status', 'published');
+  await expect(location.getByRole('link')).toHaveAttribute('href', '/lesson51/');
+  await expect(location.getByRole('link')).toHaveAccessibleName(
+    /LESSON 51.*希腊四季之旅.*可以出发.*0 \/ 5/
+  );
 });
 
 test('return visits open the current district and keep an explicit world overview route', async ({ page }) => {

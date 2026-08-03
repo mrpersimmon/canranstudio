@@ -150,6 +150,7 @@ test('welcome page separates numbered lessons from the special station', async (
   await expect(page.locator('#lessonRoute a[href="/soundmark/"]')).toHaveCount(0);
   await expect(page.locator('#specialStation a[href="/soundmark/"]')).toHaveCount(1);
   await expect(page.locator('[data-lesson="49"] [data-map-status="published"]')).toHaveText('地图地点已开放');
+  await expect(page.locator('[data-lesson="51"] [data-map-status="published"]')).toHaveText('地图地点已开放');
   await expect(page.locator('[data-lesson="50"] [data-map-status="drawing"]')).toHaveText('课程可进入 · 地图正在绘制');
   await expect(page.locator('[data-lesson="53"] [data-map-status="drawing"]')).toHaveText('课程可进入 · 地图正在绘制');
   await expect(page.locator('[data-range-start="49"]')).toHaveAttribute('aria-pressed', 'true');
@@ -204,7 +205,7 @@ test('range tickets and numbered search expose one bounded catalogue segment', a
   await page.locator('#lessonSearchForm').press('Enter');
   await expect(page.locator('[data-lesson="51"]')).toBeFocused();
   await expect(page.locator('#lessonSearchStatus')).toHaveText(
-    '已定位到 Lesson 51。课程可直接进入，地图正在绘制。'
+    '已定位到 Lesson 51。课程可直接进入，地图地点已开放。'
   );
 
   await page.locator('#lessonSearch').fill('100');

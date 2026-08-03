@@ -64,6 +64,10 @@ browser simulation.
 See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the public, indexable,
 credential-free static V1 release boundary and its automated/manual evidence split.
 
+Lesson 49 and Lesson 51 are the current published learning locations in “暖灯集市”. Lesson 49 uses
+one cumulative landmark snapshot per state; Lesson 51 keeps one fixed base and reveals independent
+completed-stage layers. Both retain a separate permanent souvenir after all five stages.
+
 See `docs/v1-map-usability-pilot-toolkit.md` and its linked workbook for the blank, privacy-safe
 two-round child usability and teacher-presentation trial kit. Actual trial results remain an
 institution-run manual requirement.

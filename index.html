@@ -176,7 +176,7 @@ button.world-district-card{appearance:none}
 }
 .landmark-stack{position:relative;isolation:isolate}
 .landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.landmark-stack img[data-landmark-layer="snapshot"]{z-index:0}
+.landmark-stack img[data-landmark-layer="snapshot"],.landmark-stack img[data-landmark-layer="base"]{z-index:0}
 .published-location .location-status{border-style:solid;background:#fff}
 @media (hover:hover) and (pointer:fine){.published-location:hover{transform:translateY(-3px)}}
 .drawing-marker{
@@ -638,6 +638,20 @@ function worldDistrictMarkup(district){
   </li>`;
 }
 
+function landmarkMarkup(location){
+  if(location.landmarkMode==='layers'){
+    const growthLayers=location.visibleGrowthAssets.map((asset,index)=>{
+      const progressId=location.completedStageIds[index];
+      return `<img src="/${asset}" alt="" width="146" height="146" data-landmark-layer="growth" data-progress-id="${progressId}" style="z-index:${index+1}">`;
+    }).join('');
+    return `<img src="/${location.baseAsset}" alt="" width="146" height="146" data-landmark-layer="base" data-landmark-state="base">${growthLayers}`;
+  }
+  const landmarkState=location.completedStageCount===0
+    ?'base'
+    :`growth-${location.completedStageCount}`;
+  return `<img src="/${location.landmarkAsset}" alt="" width="146" height="146" data-landmark-layer="snapshot" data-landmark-state="${landmarkState}">`;
+}
+
 function locationMarkup(location){
   if(location.status==='published'){
     const progressLabel=location.progressState==='complete'
@@ -645,9 +659,6 @@ function locationMarkup(location){
       :location.progressState==='growing'
         ?`成长中 · ${location.completedStageCount} / ${location.totalStageCount}`
         :`可以出发 · 0 / ${location.totalStageCount}`;
-    const landmarkState=location.completedStageCount===0
-      ?'base'
-      :`growth-${location.completedStageCount}`;
     const souvenir=location.souvenir
       ?`<span class="location-souvenir" data-souvenir-id="${location.souvenir.id}">
           <img src="/${location.souvenir.asset}" alt="" width="32" height="32">
@@ -657,7 +668,7 @@ function locationMarkup(location){
     return `<li class="map-location" data-map-slot="${location.slot}" data-map-lesson="${location.lesson}" data-location-status="published">
       <a class="published-location" href="${location.route}">
         <span class="published-marker landmark-stack" aria-hidden="true">
-          <img src="/${location.landmarkAsset}" alt="" width="146" height="146" data-landmark-layer="snapshot" data-landmark-state="${landmarkState}">
+          ${landmarkMarkup(location)}
         </span>
         <span class="location-lesson">LESSON ${location.lesson}</span>
         <strong class="location-title">${location.title}</strong>
@@ -678,10 +689,10 @@ function locationMarkup(location){
 
 function recommendationMarkup(location){
   const copy=location.progressState==='complete'
-    ?{kicker:'再次探访',progress:'五个学习阶段都已完成，食物篮子会一直留在地图上。',action:'回到肉店'}
+    ?{kicker:'再次探访',progress:`五个学习阶段都已完成，${location.souvenir?`${location.souvenir.title}会一直留在地图上。`:'这个地点会一直保留完整模样。'}`,action:'再次探访'}
     :location.progressState==='growing'
-      ?{kicker:'推荐继续',progress:`已完成 ${location.completedStageCount} / ${location.totalStageCount} 个学习阶段，今天让肉铺再长大一点。`,action:'继续成长'}
-      :{kicker:'推荐出发',progress:`从 Lesson ${location.lesson} 开始，完成五个真实阶段，亲手建起第一间肉铺。`,action:'开始冒险'};
+      ?{kicker:'推荐继续',progress:`已完成 ${location.completedStageCount} / ${location.totalStageCount} 个学习阶段，今天让这个地点再成长一点。`,action:'继续成长'}
+      :{kicker:'推荐出发',progress:`从 Lesson ${location.lesson} 开始，完成五个真实阶段，让学习地点一步步长成自己的模样。`,action:'开始冒险'};
   return `<a class="map-recommendation" href="${location.route}">
     <span class="recommendation-art"><img src="/${location.mobilePreview}" alt="" width="112" height="108"></span>
     <span>

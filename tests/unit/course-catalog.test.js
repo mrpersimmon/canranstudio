@@ -40,6 +40,7 @@ test('course catalog is the complete immutable contract for lessons and special 
       progress: lesson49.progress,
       districtId: lesson49.map.districtId,
       declaredStatus: lesson49.map.declaredStatus,
+      landmarkMode: lesson49.map.landmarkMode,
       baseAsset: lesson49.map.baseAsset,
       stages: lesson49.map.stages,
       souvenir: lesson49.map.souvenir
@@ -57,6 +58,7 @@ test('course catalog is the complete immutable contract for lessons and special 
       },
       districtId: 'first-book-49-60',
       declaredStatus: 'published',
+      landmarkMode: 'snapshot',
       baseAsset: 'assets/adventure-map/lesson49/base.png',
       stages: [
         { progressId: 'l1', growthAsset: 'assets/adventure-map/lesson49/growth-1.png' },
@@ -70,6 +72,36 @@ test('course catalog is the complete immutable contract for lessons and special 
         title: '食物篮子',
         asset: 'assets/adventure-map/lesson49/food-basket.png'
       }
+    }
+  );
+
+  const lesson51 = catalog.COURSES.find(course => course.id === 'lesson51');
+  assert.deepEqual(
+    {
+      landmarkMode: lesson51.map.landmarkMode,
+      baseAsset: lesson51.map.baseAsset,
+      growthAssets: lesson51.map.stages.map(stage => stage.growthAsset),
+      souvenir: lesson51.map.souvenir,
+      mobilePreview: lesson51.map.mobilePreview,
+      regressionTest: lesson51.map.regressionTest
+    },
+    {
+      landmarkMode: 'layers',
+      baseAsset: 'assets/adventure-map/lesson51/landmark-base.png',
+      growthAssets: [
+        'assets/adventure-map/lesson51/growth-01-weather.png',
+        'assets/adventure-map/lesson51/growth-02-theatre.png',
+        'assets/adventure-map/lesson51/growth-03-seasons.png',
+        'assets/adventure-map/lesson51/growth-04-sundial.png',
+        'assets/adventure-map/lesson51/growth-05-celebration.png'
+      ],
+      souvenir: {
+        id: 'four-seasons-guide-compass',
+        title: '四季导游罗盘',
+        asset: 'assets/adventure-map/lesson51/four-seasons-guide-compass.png'
+      },
+      mobilePreview: 'assets/adventure-map/lesson51/mobile-preview.png',
+      regressionTest: 'tests/e2e/lesson51-map.spec.js'
     }
   );
 
@@ -134,6 +166,7 @@ test('learning locations stay drawing and non-navigable until the full publicati
       coursePage: true,
       prerecordedAudio: true,
       stageMapping: true,
+      renderingMode: true,
       baseLandmark: true,
       growthLayers: true,
       souvenir: true,
@@ -178,6 +211,13 @@ test('learning locations stay drawing and non-navigable until the full publicati
     'regressionVerification'
   ]);
   assert.equal(catalog.assessLearningLocation(forged).status, 'drawing');
+
+  const unsupportedRendering = structuredClone(lesson49);
+  unsupportedRendering.map.landmarkMode = 'mixed';
+  assert.deepEqual(catalog.assessLearningLocation(unsupportedRendering).missing, [
+    'renderingMode'
+  ]);
+  assert.equal(catalog.assessLearningLocation(unsupportedRendering).status, 'drawing');
 
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
   assert.deepEqual(catalog.assessLearningLocation(soundmark), {
@@ -227,7 +267,7 @@ test('map consumers receive only V1 learning locations from the shared catalog',
   assert.equal(Object.isFrozen(catalog.MAP_COURSES), true);
   assert.deepEqual(
     catalog.MAP_COURSES.map(course => catalog.assessLearningLocation(course).status),
-    ['published', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing']
+    ['published', 'drawing', 'published', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing']
   );
 
   const outsideV1 = structuredClone(catalog.COURSES.find(course => course.id === 'lesson50'));
@@ -256,6 +296,7 @@ test('lesson map creation and directory status keep future courses outside V1', 
     districtId: null,
     v1Visible: false,
     declaredStatus: 'not-applicable',
+    landmarkMode: null,
     baseAsset: null,
     stages: [],
     souvenir: null,
@@ -269,6 +310,9 @@ test('lesson map creation and directory status keep future courses outside V1', 
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
   assert.equal(catalog.directoryMapStatus(lesson49), 'published');
   assert.equal(catalog.directoryMapStatus(lesson50), 'drawing');
+  assert.equal(catalog.directoryMapStatus(
+    catalog.COURSES.find(course => course.id === 'lesson51')
+  ), 'published');
   assert.equal(catalog.directoryMapStatus(soundmark), 'not-applicable');
 });
 

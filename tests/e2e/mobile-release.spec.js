@@ -109,7 +109,8 @@ test('the first world overview defers production map artwork until its district 
   await expect(page.locator('#currentDistrict')).toBeVisible();
   expect(new Set(mapRequests)).toEqual(new Set([
     '/assets/adventure-map/lesson49/base.png',
-    '/assets/adventure-map/lesson49/mobile-preview.png'
+    '/assets/adventure-map/lesson49/mobile-preview.png',
+    '/assets/adventure-map/lesson51/landmark-base.png'
   ]));
 });
 
@@ -141,7 +142,7 @@ test('phone, tablet rotations, and desktop preserve one atlas order and operable
         locations.map(location => Number(location.dataset.mapLesson))
       ))).toEqual(DISTRICT_LESSONS);
       const drawingLocations = page.locator('#districtLocations [data-location-status="drawing"]');
-      await expect(drawingLocations).toHaveCount(11);
+      await expect(drawingLocations).toHaveCount(10);
       expect((await drawingLocations.allTextContents()).every(text => text.includes('正在绘制')))
         .toBe(true);
       await expect(page.locator('[data-map-lesson="49"] a')).toHaveAccessibleName(
@@ -338,7 +339,7 @@ test('safe areas and reduced motion keep atlas, story, and presentation tasks co
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
   await expect(page.locator('#currentDistrictTitle')).toBeFocused();
   await expect(page.locator('[data-map-lesson="49"] [data-landmark-state="base"]')).toBeVisible();
-  expect(await page.locator('.published-location').evaluate(element => (
+  expect(await page.locator('[data-map-lesson="49"] .published-location').evaluate(element => (
     getComputedStyle(element).transitionDuration
   ))).toBe('0s');
   await page.evaluate(profileKey => {

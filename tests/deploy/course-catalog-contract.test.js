@@ -429,23 +429,25 @@ test('published learning location contract requires every declared asset and reg
   await assert.doesNotReject(assertCourseCatalogContract({ root, courses: [course] }));
 });
 
-test('Lesson 49 landmark snapshots and souvenir are fixed 1024px transparent PNG assets', async () => {
-  const course = catalog.COURSES.find(item => item.id === 'lesson49');
-  const transparentAssets = [
-    course.map.baseAsset,
-    ...course.map.stages.map(stage => stage.growthAsset),
-    course.map.souvenir.asset
-  ];
+test('published landmark assets are fixed 1024px transparent PNG canvases', async () => {
+  for (const courseId of ['lesson49', 'lesson51']) {
+    const course = catalog.COURSES.find(item => item.id === courseId);
+    const transparentAssets = [
+      course.map.baseAsset,
+      ...course.map.stages.map(stage => stage.growthAsset),
+      course.map.souvenir.asset
+    ];
 
-  for (const relative of transparentAssets) {
-    const bytes = await fs.readFile(path.join(ROOT, relative));
-    assert.equal(bytes.subarray(12, 16).toString('ascii'), 'IHDR', relative);
-    assert.equal(bytes.readUInt32BE(16), 1024, `${relative} width`);
-    assert.equal(bytes.readUInt32BE(20), 1024, `${relative} height`);
-    assert.ok([4, 6].includes(bytes[25]), `${relative} must carry an alpha channel`);
+    for (const relative of transparentAssets) {
+      const bytes = await fs.readFile(path.join(ROOT, relative));
+      assert.equal(bytes.subarray(12, 16).toString('ascii'), 'IHDR', relative);
+      assert.equal(bytes.readUInt32BE(16), 1024, `${relative} width`);
+      assert.equal(bytes.readUInt32BE(20), 1024, `${relative} height`);
+      assert.ok([4, 6].includes(bytes[25]), `${relative} must carry an alpha channel`);
+    }
+
+    const preview = await fs.readFile(path.join(ROOT, course.map.mobilePreview));
+    assert.equal(preview.readUInt32BE(16), 1024, `${courseId} mobile preview width`);
+    assert.equal(preview.readUInt32BE(20), 1024, `${courseId} mobile preview height`);
   }
-
-  const preview = await fs.readFile(path.join(ROOT, course.map.mobilePreview));
-  assert.equal(preview.readUInt32BE(16), 1024, 'mobile preview width');
-  assert.equal(preview.readUInt32BE(20), 1024, 'mobile preview height');
 });

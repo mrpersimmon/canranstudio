@@ -90,7 +90,8 @@ test('Lesson 49 recommendation, real-stage growth, souvenir persistence, and res
   await expect(landmark.locator('[data-landmark-layer]')).toHaveCount(1);
   await expect(landmark.locator('[data-landmark-state="growth-5"]')).toBeVisible();
   await expect(landmark.locator('[data-souvenir-id="food-basket"]')).toBeVisible();
-  await expect(page.locator('#districtRecommendation')).toContainText('再次探访');
+  await expect(page.locator('#districtRecommendation')).toContainText('推荐出发');
+  await expect(page.locator('#districtRecommendation')).toContainText('LESSON 51');
   await expect(landmark.getByRole('link')).toHaveAccessibleName(/地点完成.*5 \/ 5.*永久纪念.*食物篮子/);
   const finalMarkerBox = await landmark.locator('.landmark-stack').boundingBox();
   expect(finalMarkerBox.width).toBe(initialMarkerBox.width);

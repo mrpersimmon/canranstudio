@@ -52,7 +52,8 @@
       const totalStageCount = Array.isArray(course.map?.stages)
         ? course.map.stages.length
         : 0;
-      const landmarkAsset = !published
+      const landmarkMode = published ? course.map.landmarkMode : null;
+      const landmarkAsset = !published || landmarkMode === 'layers'
         ? null
         : completedStageCount === 0
           ? course.map.baseAsset
@@ -72,6 +73,7 @@
         status: publication.status,
         route: publication.route,
         recommendable: publication.recommendable,
+        landmarkMode,
         baseAsset: published ? course.map.baseAsset : null,
         landmarkAsset,
         mobilePreview: published ? course.map.mobilePreview : null,

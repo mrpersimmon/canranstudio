@@ -37,6 +37,7 @@ test('atlas location models follow the shared publication contract and device st
     status: 'drawing',
     route: null,
     recommendable: false,
+    landmarkMode: null,
     baseAsset: null,
     landmarkAsset: null,
     mobilePreview: null,
@@ -55,6 +56,7 @@ test('atlas location models follow the shared publication contract and device st
     status: 'published',
     route: '/lesson49/',
     recommendable: true,
+    landmarkMode: 'snapshot',
     baseAsset: 'assets/adventure-map/lesson49/base.png',
     landmarkAsset: 'assets/adventure-map/lesson49/growth-2.png',
     mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
@@ -70,6 +72,31 @@ test('atlas location models follow the shared publication contract and device st
   });
   assert.equal(Object.isFrozen(drawing), true);
   assert.equal(Object.isFrozen(published), true);
+});
+
+test('Lesson 51 exposes one fixed base plus only the independently completed growth layers', () => {
+  const lesson51 = catalog.COURSES.find(course => course.id === 'lesson51');
+  const profile = {
+    version: 1,
+    currentDistrictId: 'first-book-49-60',
+    souvenirs: [],
+    completedStages: { lesson51: ['l1', 'l3', 'l5'] }
+  };
+
+  const model = atlas.buildLocationModels([lesson51], profile)[0];
+
+  assert.equal(model.landmarkMode, 'layers');
+  assert.equal(model.baseAsset, 'assets/adventure-map/lesson51/landmark-base.png');
+  assert.equal(model.landmarkAsset, null);
+  assert.deepEqual(model.completedStageIds, ['l1', 'l3', 'l5']);
+  assert.deepEqual(model.visibleGrowthAssets, [
+    'assets/adventure-map/lesson51/growth-01-weather.png',
+    'assets/adventure-map/lesson51/growth-03-seasons.png',
+    'assets/adventure-map/lesson51/growth-05-celebration.png'
+  ]);
+  assert.equal(model.completedStageCount, 3);
+  assert.equal(model.progressState, 'growing');
+  assert.equal(model.souvenir, null);
 });
 
 test('Lesson 49 exposes stage assets and a count-based snapshot for states zero through five', () => {
