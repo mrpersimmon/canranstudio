@@ -724,7 +724,7 @@ function celebrate(el){
     fb.textContent = `答对啦！${cur[0]} 就是「${cur[3]}」`;
     fb.className = 'fb good'; celebrate(button);
     if(solved === 5){ finishRun(); return; }
-    nextButton.disabled = false;
+    setTimeout(round,900);
   }
   hear.onclick = play;
   nextButton.onclick = ()=>{

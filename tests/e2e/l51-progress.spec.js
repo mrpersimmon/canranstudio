@@ -22,8 +22,7 @@ async function completeListeningRun(page, wrongFirstCount) {
     if (item < wrongFirstCount) await options.nth(1).click();
     await options.nth(0).click();
     if (item < 4) {
-      await expect(page.locator('#lgNext')).toBeEnabled();
-      await page.locator('#lgNext').click();
+      await expect.poll(() => page.locator('#lgOpts .lg-opt:enabled').count()).toBe(4);
     }
   }
 }
@@ -246,6 +245,22 @@ test('Lesson 51 listening ratings improve without accumulating', async ({ page }
   await completeListeningRun(page, 5);
   expect((await storedRatings(page)).l1).toBe(3);
   await expect(page.locator('#starCount')).toHaveText('3');
+});
+
+test('Lesson 51 listening automatically advances after a correct answer', async ({ page }) => {
+  await page.addInitScript(() => { Math.random = () => 0; });
+  await page.goto('/lesson51/');
+
+  const options = page.locator('#lgOpts .lg-opt');
+  await expect(options).toHaveCount(4);
+  await options.nth(0).click();
+  await expect(page.locator('#lgScore')).toHaveText('本关：1 / 5');
+
+  await expect.poll(() => page.locator('#lgOpts .lg-opt:enabled').count(), {
+    timeout: 2000
+  }).toBe(4);
+  await expect(page.locator('#lgFb')).toBeEmpty();
+  await expect(page.locator('#lgNext')).toBeDisabled();
 });
 
 test('Lesson 51 month ratings improve without accumulating', async ({ page }) => {
