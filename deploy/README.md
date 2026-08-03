@@ -384,6 +384,8 @@ Use the verifier only from the same local checkout whose exact artifact was uplo
 
 - `/lesson51/` returns the exact `lesson51/index.html` bytes;
 - every manifest-declared Lesson 51 MP3 under `/lesson51/audio/` returns exact bytes;
+- the CLI uses two concurrent downloads with a 60-second per-resource timeout, calibrated against
+  the accepted server while retaining exact hashes, headers, URL, size, and redirect checks.
 
 ~~~bash
 set -euo pipefail

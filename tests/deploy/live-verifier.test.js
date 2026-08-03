@@ -8,7 +8,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
 const verifier = require('../../scripts/verify-live');
-const { verifyBase, ROUTES, HTTP_HEADER_CONTRACT } = verifier;
+const { verifyBase, ROUTES, HTTP_HEADER_CONTRACT, DEFAULT_LIVE_PROFILE } = verifier;
 
 const EXPECTED_ROUTES = [
   { path: '/', file: 'index.html' },
@@ -54,6 +54,15 @@ const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 test('live verifier exposes the named exact HTTP header contract used by fixtures', () => {
   assert.equal(Object.hasOwn(verifier, 'HTTP_HEADER_CONTRACT'), true);
   assert.deepEqual(HTTP_HEADER_CONTRACT, SECURITY_HEADERS);
+});
+
+test('live verifier uses the production bandwidth profile by default', () => {
+  assert.deepEqual(DEFAULT_LIVE_PROFILE, {
+    concurrency: 2,
+    timeoutMs: 60_000,
+    maxBytes: 8 * 1024 * 1024
+  });
+  assert.equal(Object.isFrozen(DEFAULT_LIVE_PROFILE), true);
 });
 
 test('ROUTES is an immutable, registry-derived copy of the route contract', () => {

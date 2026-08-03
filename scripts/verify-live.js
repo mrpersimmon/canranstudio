@@ -25,9 +25,11 @@ const ENTRY_ROUTE_BY_FILE = Object.freeze(Object.fromEntries([
   ...PRESENTATION_COURSES.map(course => [course.presentation.entry, course.presentation.route])
 ]));
 
-const DEFAULT_CONCURRENCY = 8;
-const DEFAULT_TIMEOUT_MS = 10_000;
-const DEFAULT_MAX_BYTES = 8 * 1024 * 1024;
+const DEFAULT_LIVE_PROFILE = Object.freeze({
+  concurrency: 2,
+  timeoutMs: 60_000,
+  maxBytes: 8 * 1024 * 1024
+});
 
 function manifestPathFor(file) {
   if (Object.hasOwn(ENTRY_ROUTE_BY_FILE, file)) return ENTRY_ROUTE_BY_FILE[file];
@@ -249,9 +251,9 @@ async function verifyBase({
   baseUrl,
   root = path.resolve(__dirname, '../dist'),
   fetchImpl = globalThis.fetch,
-  concurrency = DEFAULT_CONCURRENCY,
-  timeoutMs = DEFAULT_TIMEOUT_MS,
-  maxBytes = DEFAULT_MAX_BYTES
+  concurrency = DEFAULT_LIVE_PROFILE.concurrency,
+  timeoutMs = DEFAULT_LIVE_PROFILE.timeoutMs,
+  maxBytes = DEFAULT_LIVE_PROFILE.maxBytes
 }) {
   const parsedBaseUrl = parseHttpBaseUrl(baseUrl);
   if (typeof fetchImpl !== 'function') {
@@ -500,4 +502,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { ROUTES, HTTP_HEADER_CONTRACT, verifyBase };
+module.exports = { ROUTES, HTTP_HEADER_CONTRACT, DEFAULT_LIVE_PROFILE, verifyBase };
