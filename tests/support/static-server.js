@@ -13,6 +13,10 @@ const TYPES = {
   '.woff2': 'font/woff2',
   '.json': 'application/json; charset=utf-8',
   '.mp3': 'audio/mpeg',
+  '.avif': 'image/avif',
+  '.webp': 'image/webp',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
   '.png': 'image/png',
   '.svg': 'image/svg+xml'
 };

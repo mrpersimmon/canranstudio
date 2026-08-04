@@ -1,5 +1,7 @@
 # Lesson 51 分层地图发布 QA
 
+> 历史记录：本方案已被 2026-08-05 的完整累计状态图合同取代，不得作为当前生产实现依据。当前权威证据见 `lesson51-state-snapshots-contact-sheet.png`、`assets/adventure-map/lesson51/states/manifest.json` 与 `tests/unit/landmark-state-assets.test.js`。
+
 ## 发布范围
 
 Lesson 51「希腊四季之旅」成为“暖灯集市”的第二个正式学习地点。Lesson 49 保留完整累计快照模式；Lesson 51 使用固定底图和五张独立成长图层，两种模式由共享课程目录显式声明，页面不再根据文件名或课程编号猜测。

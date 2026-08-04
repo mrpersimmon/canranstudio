@@ -1,9 +1,9 @@
 # Soundmark landmark assets
 
-「音标魔法乐园」是暖灯集市中的四关专项支线，使用固定 `1024 × 1024` 透明画布。
+「音标魔法乐园」是暖灯集市中的四关专项支线，运行时只使用 `states/state-0.png` 至 `state-4.png` 五张完整累计状态图。魔法塔的主体、透视和镜头固定，每关只增加与元音、发音、听辨和魔法学习有关的内容。
 
-渲染顺序为 `landmark-base.png`、`growth-01-vowel-crystals.png`、`growth-02-magic-book.png`、`growth-03-listening-horns.png`、`growth-04-star-balcony.png`。四关完成后独立展示永久纪念物 `vowel-star-badge.png`；`mobile-preview.png` 只用于完整状态预览。
+`states/manifest.json` 登记 512/768/1024 三档 AVIF、WebP 与 PNG 回退；地图只加载当前状态，成长揭晓只显示相邻两张完整图。`vowel-star-badge.png` 是独立永久纪念物，不得烘焙进 `state-4`。
 
 原始 ImageGen 资产表保存在 `docs/designs/adventure-map/generated-sheets/soundmark-magenta-sheet.png`。视觉方向为儿童绘本水彩音标塔、紫蓝和金色魔法光效；禁止文字、字符、人物、UI、水印以及无关阶段元素。
 
-资产由 `scripts/split-adventure-asset-sheet.py` 去除统一洋红背景并置入共同锚点。发布检查确认全部运行时 PNG 为 RGBA、四角透明、无可见洋红残留，纪念物没有烘焙进最后一层。
+`landmark-base.png`、`growth-*.png`、`mobile-preview.png` 与原始洋红素材表只保留为历史美术过程文件，运行时不得引用。联系表为 `docs/designs/adventure-map/soundmark-state-snapshots-contact-sheet.png`。

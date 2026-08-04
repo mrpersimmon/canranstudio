@@ -30,7 +30,7 @@ async function expectMinimumTarget(locator, minimum = 44) {
   expect(box.height).toBeGreaterThanOrEqual(minimum);
 }
 
-test('world overview loads one entrance preview and defers full district artwork', async ({ page }) => {
+test('world overview loads one responsive entrance preview and defers full district artwork', async ({ page }) => {
   const mapRequests = [];
   page.on('request', request => {
     const path = new URL(request.url()).pathname;
@@ -41,15 +41,83 @@ test('world overview loads one entrance preview and defers full district artwork
   await page.waitForLoadState('networkidle');
   await expect(page.locator('#worldOverview')).toBeVisible();
   expect(new Set(mapRequests)).toEqual(new Set([
-    '/assets/adventure-map/lesson49/mobile-preview.png'
+    '/assets/adventure-map/lesson49/states/state-5-512.avif'
   ]));
 
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
   await page.waitForLoadState('networkidle');
   await expect(page.locator('#currentDistrict')).toBeVisible();
-  expect(mapRequests).toContain('/assets/adventure-map/atlas/warm-lantern-parchment.jpg');
+  expect(mapRequests).toContain('/assets/adventure-map/atlas/warm-lantern-parchment-atlas-20260804-01-914.avif');
   expect(mapRequests.some(path => /\/(?:landmark-base|growth-)/.test(path))).toBe(false);
   expect(mapRequests.some(path => /\/states\/state-0-(?:512|768|1024)\.(?:avif|webp)$/.test(path))).toBe(true);
+});
+
+test('a direct district entry never downloads the hidden world entrance preview', async ({ page }) => {
+  const mapRequests = [];
+  const avifResponseTypes = [];
+  page.on('request', request => {
+    const path = new URL(request.url()).pathname;
+    if (path.startsWith('/assets/adventure-map/')) mapRequests.push(path);
+  });
+  page.on('response', response => {
+    const path = new URL(response.url()).pathname;
+    if (path.startsWith('/assets/adventure-map/') && path.endsWith('.avif')) {
+      avifResponseTypes.push(response.headers()['content-type']);
+    }
+  });
+
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
+  await page.waitForLoadState('networkidle');
+
+  await expect(page.locator('#currentDistrict')).toBeVisible();
+  expect(mapRequests).not.toContain('/assets/adventure-map/lesson49/mobile-preview.png');
+  expect(mapRequests).not.toContain('/assets/adventure-map/lesson49/states/state-5-512.avif');
+  expect(mapRequests).toContain('/assets/adventure-map/atlas/warm-lantern-parchment-atlas-20260804-01-512.avif');
+  expect(avifResponseTypes.length).toBeGreaterThan(0);
+  expect(new Set(avifResponseTypes)).toEqual(new Set(['image/avif']));
+});
+
+test('Huawei high-density rendering selects detailed responsive sources without PNG fallback', async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 466, height: 980 },
+    deviceScaleFactor: 3
+  });
+  const page = await context.newPage();
+  const mapRequests = [];
+  page.on('request', request => {
+    const path = new URL(request.url()).pathname;
+    if (path.startsWith('/assets/adventure-map/')) mapRequests.push(path);
+  });
+
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
+  await page.waitForLoadState('networkidle');
+
+  expect(mapRequests).toContain(
+    '/assets/adventure-map/atlas/warm-lantern-parchment-atlas-20260804-01-914.avif'
+  );
+  expect(mapRequests.filter(path => /\/states\/state-0-768\.avif$/.test(path))).toHaveLength(7);
+  expect(mapRequests.some(path => /\/states\/.*\.png$/.test(path))).toBe(false);
+  await expect.poll(() => page.locator('[data-landmark-snapshot]').evaluateAll((images, expectedCount) => (
+    images.length === expectedCount &&
+    images.every(image => image.complete && image.naturalWidth > 0)
+  ), PUBLISHED_IDS.length)).toBe(true);
+
+  mapRequests.length = 0;
+  await page.goto('/lesson49/');
+  await expect.poll(() => mapRequests).toContain(
+    '/assets/adventure-map/lesson49/states/state-1-1024.avif'
+  );
+  await page.evaluate(() => window.eval('award("l1", 1)'));
+  const reveal = page.locator('.growth-reveal');
+  await expect(reveal).toBeVisible();
+  await expect.poll(() => reveal.locator('.growth-reveal__snapshot-image').evaluateAll(images => (
+    images.length === 2 && images.every(image => image.complete && image.naturalWidth > 0)
+  ))).toBe(true);
+  expect(mapRequests).toContain('/assets/adventure-map/lesson49/states/state-0-1024.avif');
+  expect(mapRequests).toContain('/assets/adventure-map/lesson49/states/state-1-1024.avif');
+
+  await context.close();
 });
 
 test('phone, tablet rotations, and desktop preserve one atlas order and touch-safe controls', async ({ page }) => {

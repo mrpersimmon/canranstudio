@@ -199,6 +199,7 @@ function assertHttpContract(text) {
     leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
     block('if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']),
     ...redirects.map(([source]) => block('location', ['=', source])),
+    block('location', ['~*', '^/assets/adventure-map/atlas/.*-atlas-[a-z0-9-]+-[0-9]+[.](avif|webp)$']),
     block('location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']),
     block('location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']),
     block('location', ['/']),
@@ -235,6 +236,23 @@ function assertHttpContract(text) {
     assertExactChildren(location.children, [leaf('return', ['308', destination])], `redirect ${source}`);
     one(location.children, 'return', ['308', destination]);
   }
+
+  const atlasBackgrounds = one(children, 'location', [
+    '~*',
+    '^/assets/adventure-map/atlas/.*-atlas-[a-z0-9-]+-[0-9]+[.](avif|webp)$'
+  ]);
+  assertExactChildren(atlasBackgrounds.children, [
+    leaf('try_files', ['$uri', '=404']),
+    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
+    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
+    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
+    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
+    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
+    leaf('add_header', ['Cache-Control', 'public, max-age=31536000, immutable', 'always']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'versioned atlas backgrounds');
+  const atlasBackgroundLimit = one(atlasBackgrounds.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(atlasBackgroundLimit.children, [leaf('deny', ['all'])], 'atlas background limit_except');
 
   const stateImages = one(children, 'location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']);
   assertExactChildren(stateImages.children, [

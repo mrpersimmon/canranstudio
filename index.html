@@ -79,7 +79,8 @@ img{display:block;max-width:100%}
   border:0;background:transparent;transform:translateX(-50%);filter:drop-shadow(0 12px 5px rgba(70,42,26,.25));
 }
 .launch-district::before{content:"";position:absolute;top:3%;width:80%;aspect-ratio:1;border:4px solid rgba(244,196,79,.9);border-radius:50%;background:radial-gradient(circle,rgba(255,240,147,.48),transparent 67%);animation:world-beacon 2.8s ease-in-out infinite}
-.launch-district img{position:relative;width:78%;height:auto;aspect-ratio:1;object-fit:contain}
+.launch-district picture{position:relative;width:78%;aspect-ratio:1}
+.launch-district img{width:100%;height:100%;object-fit:contain}
 .launch-plaque{position:relative;margin-top:-9%;padding:9px 25px 11px;border:4px solid var(--ink);border-radius:13px;background:#f5dfae;box-shadow:var(--shadow);transform:rotate(-1deg)}
 .launch-plaque small{display:block;color:#9a4633;font-size:11px;letter-spacing:1.4px}
 .launch-plaque strong{display:block;font-size:clamp(24px,5vw,38px);line-height:1}
@@ -88,7 +89,9 @@ img{display:block;max-width:100%}
 
 /* District map */
 .district-view{position:relative;min-height:100dvh;background:#1f140f;padding:0}
-.district-map{position:relative;overflow:hidden;width:min(914px,100%);height:auto;aspect-ratio:914/1721;margin:auto;background:#2e1d15 url('/assets/adventure-map/atlas/warm-lantern-parchment.jpg') center/100% 100% no-repeat;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:pan-y}
+.district-map{position:relative;overflow:hidden;width:min(914px,100%);height:auto;aspect-ratio:914/1721;margin:auto;background:#2e1d15;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:pan-y}
+.district-map__paper{position:absolute;z-index:0;inset:0;width:100%;height:100%}
+.district-map__paper img{width:100%;height:100%;object-fit:fill}
 .district-chrome{position:absolute;z-index:35;inset:2.5% 4.5% auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start}
 .back-world{display:inline-flex;align-items:center;min-height:48px;padding:8px 14px;border:3px solid var(--ink);border-radius:999px;background:#fae9be;box-shadow:0 4px 0 var(--ink);font-size:13px;white-space:nowrap}
 .district-brand{justify-self:center;min-width:0;max-width:100%;padding:8px 18px;border:3px solid #6d4327;border-radius:12px;background:#f4dfb4;box-shadow:0 5px 0 rgba(70,42,26,.35);text-align:center;transform:rotate(-1deg)}
@@ -182,7 +185,11 @@ img{display:block;max-width:100%}
         <div class="distant-region" aria-hidden="true"><span>表达海湾</span></div>
         <div class="distant-region" aria-hidden="true"><span>星原与广场</span></div>
         <button class="launch-district" type="button" id="enterLaunchDistrict" aria-label="进入暖灯集市">
-          <img src="/assets/adventure-map/lesson49/mobile-preview.png" width="640" height="640" alt="">
+          <picture id="launchDistrictPreview" aria-hidden="true">
+            <source type="image/avif" data-launch-preview-source="avif" sizes="(max-width:640px) 60vw, 305px">
+            <source type="image/webp" data-launch-preview-source="webp" sizes="(max-width:640px) 60vw, 305px">
+            <img data-launch-preview-image width="1024" height="1024" alt="" decoding="async" fetchpriority="high">
+          </picture>
           <span class="launch-plaque">
             <small>第 5 城区 · Lesson 49–60</small>
             <strong>暖灯集市</strong>
@@ -195,6 +202,11 @@ img{display:block;max-width:100%}
 
   <section class="district-view" id="currentDistrict" aria-labelledby="currentDistrictTitle" hidden>
     <div class="district-map" id="districtMap">
+      <picture class="district-map__paper" id="districtMapPaper" aria-hidden="true">
+        <source type="image/avif" data-atlas-paper-source="avif" sizes="(max-width:914px) 100vw, 914px">
+        <source type="image/webp" data-atlas-paper-source="webp" sizes="(max-width:914px) 100vw, 914px">
+        <img data-atlas-paper-image width="914" height="1721" alt="" decoding="async" fetchpriority="high">
+      </picture>
       <header class="district-chrome">
         <button class="back-world" id="backToWorld" type="button" aria-label="返回世界总览">← 世界图鉴</button>
         <div class="district-brand">
@@ -253,6 +265,37 @@ const worldOverview=document.getElementById('worldOverview');
 const currentDistrict=document.getElementById('currentDistrict');
 const districtLocations=document.getElementById('districtLocations');
 let districtRendered=false;
+let launchPreviewLoaded=false;
+let districtPaperLoaded=false;
+
+function loadLaunchPreview(){
+  if(launchPreviewLoaded)return;
+  const course=CanranCore.courseCatalog.requirePublishedCourse('lesson49');
+  const asset=course.map.stateAssets.at(-1);
+  const picture=document.getElementById('launchDistrictPreview');
+  if(!asset||!picture)return;
+  const stateUrl=(path)=>CanranCore.courseCatalog.mapStateAssetUrl(path,asset);
+  picture.querySelectorAll('[data-launch-preview-source]').forEach(source=>{
+    const type=source.dataset.launchPreviewSource;
+    source.srcset=asset.variants.map(variant=>`${stateUrl(variant[type])} ${variant.width}w`).join(', ');
+  });
+  const image=picture.querySelector('[data-launch-preview-image]');
+  image.src=stateUrl(asset.png);
+  launchPreviewLoaded=true;
+}
+
+function loadDistrictPaper(){
+  if(districtPaperLoaded)return;
+  const version=CanranCore.courseCatalog.MAP_STATE_VERSION;
+  const base='/assets/adventure-map/atlas/warm-lantern-parchment';
+  const picture=document.getElementById('districtMapPaper');
+  picture.querySelectorAll('[data-atlas-paper-source]').forEach(source=>{
+    const type=source.dataset.atlasPaperSource;
+    source.srcset=`${base}-${version}-512.${type} 512w, ${base}-${version}-914.${type} 914w`;
+  });
+  picture.querySelector('[data-atlas-paper-image]').src=`${base}.jpg`;
+  districtPaperLoaded=true;
+}
 
 function landmarkMarkup(location,{priority=false}={}){
   const asset=location.landmarkAsset;
@@ -313,12 +356,14 @@ function renderDistrict(focusedId=null){
 }
 
 function showWorld({focusEntrance=false}={}){
+  loadLaunchPreview();
   currentDistrict.hidden=true;worldOverview.hidden=false;document.body.dataset.atlasView='world';
   renderWorldProgress();
   if(focusEntrance) document.getElementById('enterLaunchDistrict').focus();
 }
 
 function showDistrict({focusedId=null,focusHeading=false}={}){
+  loadDistrictPaper();
   const locations=renderDistrict(focusedId);
   worldOverview.hidden=true;currentDistrict.hidden=false;document.body.dataset.atlasView='district';
   if(focusHeading) document.getElementById('currentDistrictTitle').focus();

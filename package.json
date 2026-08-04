@@ -15,6 +15,7 @@
     "test:state": "playwright test tests/e2e/l49-progress.spec.js tests/e2e/home-progress.spec.js tests/e2e/l50-assessment.spec.js tests/e2e/soundmark-progress.spec.js tests/e2e/l51-progress.spec.js tests/e2e/l52-progress.spec.js tests/e2e/l53-progress.spec.js tests/e2e/l54-progress.spec.js",
     "test": "npm run test:unit && npm run test:e2e",
     "verify:v1:release": "npm run test:unit && npm run test:e2e && npm run test:deploy && npm run build:static",
+    "art:build-atlas-background": "node scripts/build-atlas-background.js",
     "art:build-states": "node scripts/build-landmark-states.js",
     "vendor:fonts": "node scripts/vendor-fonts.js"
   },

@@ -1,9 +1,9 @@
 # Lesson 50 landmark assets
 
-Lesson 50「挑食小王子」使用固定 `1024 × 1024` 透明画布的城堡成长组。
+Lesson 50「挑食小王子」运行时只使用 `states/state-0.png` 至 `state-5.png` 六张完整累计状态图。城堡、菜园基线、透视和镜头固定，每关只增加与挑食、蔬菜、宴会和王子故事有关的内容。
 
-渲染顺序为 `landmark-base.png`、`growth-01-garden.png`、`growth-02-banquet.png`、`growth-03-weather-vane.png`、`growth-04-delivery.png`、`growth-05-celebration.png`。第五关完成后独立展示永久纪念物 `royal-vegetable-crest.png`；`mobile-preview.png` 仅为完整状态预览。
+`states/manifest.json` 登记 512/768/1024 三档 AVIF、WebP 与 PNG 回退；地图只加载当前状态，成长揭晓只显示相邻两张完整图。`royal-vegetable-crest.png` 是独立永久纪念物，不得烘焙进 `state-5`。
 
 原始 ImageGen 资产表保存在 `docs/designs/adventure-map/generated-sheets/lesson50-magenta-sheet.png`。目标风格为儿童绘本水彩与水粉、暖色石砌小城堡、红紫色屋顶和金色点缀；禁止文字、人物、UI、水印以及与本阶段无关的装饰。
 
-`scripts/split-adventure-asset-sheet.py` 对统一洋红背景做软边去色、分离部件、等比定位并输出相同画布。发布检查确认所有运行时 PNG 均为 RGBA、四角透明、无可见洋红残留，纪念物没有烘焙进成长层。
+`landmark-base.png`、`growth-*.png`、`mobile-preview.png` 与原始洋红素材表只保留为历史美术过程文件，运行时不得引用。联系表为 `docs/designs/adventure-map/lesson50-state-snapshots-contact-sheet.png`。

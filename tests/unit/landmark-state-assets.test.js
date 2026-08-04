@@ -29,6 +29,7 @@ const EXPECTED_STATE_COUNTS = {
   lesson54: 6,
   soundmark: 5
 };
+const ATLAS_BACKGROUND_WIDTHS = [512, 914];
 
 async function normalizedAnchor(stageCount, anchor = TEMPLE_ANCHOR, courseId = 'lesson51') {
   const { data } = await sharp(path.join(
@@ -90,6 +91,26 @@ test('Lesson 51 publishes six complete responsive snapshots from one fixed compo
         fs.access(path.join(ROOT, variant.avif)),
         fs.access(path.join(ROOT, variant.webp))
       ]);
+    }
+  }
+});
+
+test('the authored atlas background has responsive high-quality AVIF and WebP derivatives', async () => {
+  const source = path.join(ROOT, 'assets/adventure-map/atlas/warm-lantern-parchment.jpg');
+  const sourceStat = await fs.stat(source);
+  for (const width of ATLAS_BACKGROUND_WIDTHS) {
+    const height = Math.round(width * 1721 / 914);
+    for (const format of ['avif', 'webp']) {
+      const target = path.join(
+        ROOT,
+        `assets/adventure-map/atlas/warm-lantern-parchment-${MAP_STATE_VERSION}-${width}.${format}`
+      );
+      const [metadata, stat] = await Promise.all([sharp(target).metadata(), fs.stat(target)]);
+      assert.deepEqual(
+        { format: metadata.format, width: metadata.width, height: metadata.height },
+        { format: format === 'avif' ? 'heif' : format, width, height }
+      );
+      assert.ok(stat.size < sourceStat.size, `${path.basename(target)} did not reduce transfer size`);
     }
   }
 });

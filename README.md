@@ -65,8 +65,9 @@ See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the
 credential-free static V1 release boundary and its automated/manual evidence split.
 
 “暖灯集市”当前发布 Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线。每个地点
-都使用一张固定底图和独立的阶段成长图层：编号课程各有五层，音标专项有四层；完成全部
-阶段后会永久保留该地点的纪念物。
+都使用同一高清母版逐步编辑的完整累计状态图：编号课程为 `state-0` 至 `state-5`，音标
+专项为 `state-0` 至 `state-4`。运行时只加载当前状态的一张图，完成阶段时切换成长前后
+两张完整图；完成全部阶段后会永久保留独立纪念物。
 
 See `docs/v1-map-usability-pilot-toolkit.md` and its linked workbook for the blank, privacy-safe
 two-round child usability and teacher-presentation trial kit. Actual trial results remain an

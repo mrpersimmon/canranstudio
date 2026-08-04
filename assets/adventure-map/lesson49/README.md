@@ -1,18 +1,7 @@
 # Lesson 49 landmark assets
 
-Lesson 49「肉店大冒险」使用固定 `1024 × 1024` 透明画布的“底图 + 独立成长层”合同。
+Lesson 49「肉店大冒险」运行时只使用 `states/state-0.png` 至 `state-5.png` 六张完整累计状态图。六张图固定在同一 `1024 × 1024` RGBA 母版上，建筑、透视、外轮廓与镜头不动；每关只增加与食物、店铺经营和配送有关的内容。
 
-运行时顺序：
+`states/manifest.json` 同时登记 512/768/1024 三档 AVIF、WebP 与 PNG 回退。地图只加载当前进度的一张，成长揭晓只切换相邻两张完整状态图。`food-basket.png` 是独立永久纪念物，不得烘焙进 `state-5`。
 
-1. `landmark-base.png` — 未开始的暖灯肉店；
-2. `growth-01-awning.png` — 红白遮阳棚；
-3. `growth-02-display.png` — 户外食材陈列；
-4. `growth-03-sign.png` — 肉店招牌；
-5. `growth-04-delivery.png` — 配送木车；
-6. `growth-05-celebration.png` — 暖灯庆祝装饰。
-
-`food-basket.png` 是五关完成后获得的永久纪念物，未烘焙进第五层。`mobile-preview.png` 仅为完整状态预览，不参与阶段渲染。
-
-`base.png` 与 `growth-1.png` 至 `growth-5.png` 是旧版累计快照，保留用于历史对照；共享课程目录不再引用它们。
-
-这组六张分层图来自用户已经认可的原始候选素材。发布审计确认：文件均为 RGBA、四角透明、主体锚点一致，且在地图手机缩略尺寸下仍能辨认；课程目录、地图和成长揭晓共用同一组文件，避免完成后出现两套不同地标。
+`landmark-base.png`、`growth-*.png`、`base.png`、旧累计图及 `mobile-preview.png` 只保留作历史美术参考，运行时和课程目录不得引用。联系表为 `docs/designs/adventure-map/lesson49-state-snapshots-contact-sheet.png`。

@@ -48,12 +48,15 @@ test('every published course appears in the shared home catalog and authored rel
   }
 });
 
-test('README describes the current atlas-only layered publication contract', async () => {
+test('README describes the current atlas-only cumulative-state publication contract', async () => {
   const readme = await fs.readFile(path.join(ROOT, 'README.md'), 'utf8');
 
   assert.match(readme, /`\/` — 十二城区冒险图鉴世界总览/);
   assert.match(readme, /Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线/);
-  assert.match(readme, /一张固定底图和独立的阶段成长图层/);
+  assert.match(readme, /同一高清母版逐步编辑的完整累计状态图/);
+  assert.match(readme, /运行时只加载当前状态的一张图/);
+  assert.match(readme, /完成阶段时切换成长前后\s*两张完整图/);
+  assert.doesNotMatch(readme, /一张固定底图和独立的阶段成长图层/);
   assert.doesNotMatch(readme, /Lesson 49 and Lesson 51 are the current published learning locations/);
   assert.doesNotMatch(readme, /Lesson 49 uses\s+one cumulative landmark snapshot/);
 });
