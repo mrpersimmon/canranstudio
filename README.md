@@ -4,7 +4,7 @@
 
 ## Public routes
 
-- `/` — 课程欢迎页
+- `/` — 十二城区冒险图鉴世界总览
 - `/lesson49/` — 新概念英语 Lesson 49
 - `/lesson49/present/` — Lesson 49 公开课堂投屏
 - `/lesson50/` — 新概念英语 Lesson 50
@@ -64,9 +64,9 @@ browser simulation.
 See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the public, indexable,
 credential-free static V1 release boundary and its automated/manual evidence split.
 
-Lesson 49 and Lesson 51 are the current published learning locations in “暖灯集市”. Lesson 49 uses
-one cumulative landmark snapshot per state; Lesson 51 keeps one fixed base and reveals independent
-completed-stage layers. Both retain a separate permanent souvenir after all five stages.
+“暖灯集市”当前发布 Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线。每个地点
+都使用一张固定底图和独立的阶段成长图层：编号课程各有五层，音标专项有四层；完成全部
+阶段后会永久保留该地点的纪念物。
 
 See `docs/v1-map-usability-pilot-toolkit.md` and its linked workbook for the blank, privacy-safe
 two-round child usability and teacher-presentation trial kit. Actual trial results remain an

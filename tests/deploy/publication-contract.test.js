@@ -48,6 +48,16 @@ test('every published course appears in the shared home catalog and authored rel
   }
 });
 
+test('README describes the current atlas-only layered publication contract', async () => {
+  const readme = await fs.readFile(path.join(ROOT, 'README.md'), 'utf8');
+
+  assert.match(readme, /`\/` — 十二城区冒险图鉴世界总览/);
+  assert.match(readme, /Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线/);
+  assert.match(readme, /一张固定底图和独立的阶段成长图层/);
+  assert.doesNotMatch(readme, /Lesson 49 and Lesson 51 are the current published learning locations/);
+  assert.doesNotMatch(readme, /Lesson 49 uses\s+one cumulative landmark snapshot/);
+});
+
 test('home renders only published map locations and contains no course-directory fallback', async () => {
   const home = await fs.readFile(path.join(ROOT, 'index.html'), 'utf8');
 
