@@ -104,7 +104,9 @@ async function writeSyntheticPublicRoot(root) {
     'lesson51/index.html',
     'lesson51/audio/clip.mp3',
     'core/audio-player.js',
-    'core/classroom-presentation.js'
+    'core/classroom-presentation.js',
+    'core/growth-reveal.js',
+    'core/growth-reveal.css'
   ]) {
     const file = path.join(root, relative);
     await fs.mkdir(path.dirname(file), { recursive: true });
