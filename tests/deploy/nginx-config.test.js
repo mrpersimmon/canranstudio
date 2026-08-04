@@ -197,9 +197,10 @@ function assertHttpContract(text) {
     leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
     leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
     leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
-    leaf('add_header', ['Cache-Control', 'no-cache', 'always']),
     block('if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']),
     ...redirects.map(([source]) => block('location', ['=', source])),
+    block('location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']),
+    block('location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']),
     block('location', ['/']),
     block('location', ['~', '/\\.'])
   ], 'server');
@@ -222,8 +223,7 @@ function assertHttpContract(text) {
     ['X-Content-Type-Options', 'nosniff', 'always'],
     ['X-Frame-Options', 'DENY', 'always'],
     ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always'],
-    ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always'],
-    ['Cache-Control', 'no-cache', 'always']
+    ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']
   ]);
 
   const guard = one(children, 'if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']);
@@ -236,9 +236,33 @@ function assertHttpContract(text) {
     one(location.children, 'return', ['308', destination]);
   }
 
+  const stateImages = one(children, 'location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']);
+  assertExactChildren(stateImages.children, [
+    leaf('try_files', ['$uri', '=404']),
+    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
+    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
+    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
+    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
+    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
+    leaf('add_header', ['Cache-Control', 'public, max-age=31536000, immutable', 'always']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'versioned state images');
+  const stateLimit = one(stateImages.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(stateLimit.children, [leaf('deny', ['all'])], 'state image limit_except');
+
+  const images = one(children, 'location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']);
+  assertExactChildren(images.children, [
+    leaf('try_files', ['$uri', '=404']),
+    leaf('expires', ['7d']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'other public images');
+  const imageLimit = one(images.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(imageLimit.children, [leaf('deny', ['all'])], 'image limit_except');
+
   const staticLocation = one(children, 'location', ['/']);
   assertExactChildren(staticLocation.children, [
     leaf('try_files', ['$uri', '$uri/', '=404']),
+    leaf('expires', ['epoch']),
     block('limit_except', ['GET', 'HEAD'])
   ], 'static location');
   one(staticLocation.children, 'try_files', ['$uri', '$uri/', '=404']);
@@ -270,7 +294,6 @@ const FORGED_DIRECTIVES = [
   'add_header X-Frame-Options "DENY" always;',
   'add_header Referrer-Policy "strict-origin-when-cross-origin" always;',
   'add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;',
-  'add_header Cache-Control "no-cache" always;',
   'if ($request_method !~ ^(GET|HEAD)$) { return 405; }',
   'location = /home { return 308 /; }',
   'location = /home/ { return 308 /; }',
@@ -282,7 +305,9 @@ const FORGED_DIRECTIVES = [
   'location = /lesson53 { return 308 /lesson53/; }',
   'location = /lesson54 { return 308 /lesson54/; }',
   'location = /soundmark { return 308 /soundmark/; }',
-  'location / { try_files $uri $uri/ =404; limit_except GET HEAD { deny all; } }',
+  'location ~* "^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$" { try_files $uri =404; }',
+  'location ~* "[.](avif|webp|png|jpe?g|svg)$" { try_files $uri =404; expires 7d; }',
+  'location / { try_files $uri $uri/ =404; expires epoch; limit_except GET HEAD { deny all; } }',
   'location ~ /\\. { deny all; }'
 ];
 

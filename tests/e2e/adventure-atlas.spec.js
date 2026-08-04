@@ -158,6 +158,35 @@ test('both atlas levels fit phone and tablet viewports without horizontal overfl
   }
 });
 
+test('the district parchment keeps its authored proportion on the Huawei viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto('/');
+  await enterLaunchDistrict(page);
+
+  const ratio = await page.locator('#districtMap').evaluate(map => {
+    const box = map.getBoundingClientRect();
+    return box.width / box.height;
+  });
+  expect(ratio).toBeCloseTo(914 / 1721, 2);
+});
+
+test('every published landmark stays fully inside the Huawei district parchment', async ({ page }) => {
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto('/');
+  await enterLaunchDistrict(page);
+
+  const clipped = await page.locator('#districtLocations .map-location').evaluateAll(locations => {
+    const map = document.getElementById('districtMap').getBoundingClientRect();
+    return locations.flatMap(location => {
+      const box = location.getBoundingClientRect();
+      const inside = box.left >= map.left && box.top >= map.top &&
+        box.right <= map.right && box.bottom <= map.bottom;
+      return inside ? [] : [location.dataset.locationId];
+    });
+  });
+  expect(clipped).toEqual([]);
+});
+
 test('existing course URLs remain public direct entries', async ({ page }) => {
   await page.goto('/lesson49/');
   await expect(page).toHaveURL(/\/lesson49\/$/);

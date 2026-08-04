@@ -18,7 +18,7 @@ async function finishRealListeningStage(page) {
   await expect(page.locator('#lgResult')).toBeVisible({ timeout: 2_500 });
 }
 
-test('Lesson 49 real completion reveals one layer, returns to the same landmark, and persists the souvenir', async ({ page }) => {
+test('Lesson 49 real completion advances one complete snapshot, returns to the landmark, and persists the souvenir', async ({ page }) => {
   test.setTimeout(90_000);
   await page.addInitScript(({ profileKey, progressKey }) => {
     Object.defineProperty(HTMLMediaElement.prototype, 'play', {
@@ -61,11 +61,7 @@ test('Lesson 49 real completion reveals one layer, returns to the same landmark,
 
   const landmark = page.locator('[data-location-id="lesson49"]');
   await expect(landmark).toHaveAttribute('data-map-guidance', 'active');
-  await expect(landmark.locator('[data-landmark-layer="base"]')).toHaveCount(1);
-  await expect(landmark.locator('[data-landmark-layer="growth"]')).toHaveCount(1);
-  await expect(landmark.locator('[data-landmark-layer="growth"]')).toHaveAttribute(
-    'src', '/assets/adventure-map/lesson49/growth-02-display.png'
-  );
+  await expect(landmark.locator('[data-landmark-snapshot="1"]')).toHaveCount(1);
   await expect(landmark.locator('[data-souvenir-id]')).toHaveCount(0);
   const initialMarkerBox = await landmark.locator('.landmark-stack').boundingBox();
 
@@ -73,20 +69,14 @@ test('Lesson 49 real completion reveals one layer, returns to the same landmark,
   await finishRealListeningStage(page);
   const reveal = page.locator('.growth-reveal');
   await expect(reveal).toBeVisible();
-  await expect(reveal).toContainText('红白遮阳棚');
+  await expect(reveal).toContainText('新鲜展示台');
   await page.waitForTimeout(750);
   await reveal.click({ position: { x: 8, y: 8 } });
   await expect(reveal).toBeHidden();
 
   await page.locator(`a[href="${MAP_RETURN}"]`).first().click();
   await expect(page.locator('#currentDistrict')).toBeVisible();
-  await expect(landmark.locator('[data-landmark-layer="growth"]')).toHaveCount(2);
-  expect(await landmark.locator('[data-landmark-layer="growth"]').evaluateAll(images => (
-    images.map(image => image.getAttribute('src'))
-  ))).toEqual([
-    '/assets/adventure-map/lesson49/growth-01-awning.png',
-    '/assets/adventure-map/lesson49/growth-02-display.png'
-  ]);
+  await expect(landmark.locator('[data-landmark-snapshot="2"]')).toHaveCount(1);
   expect((await landmark.locator('.landmark-stack').boundingBox()).width)
     .toBeCloseTo(initialMarkerBox.width, 4);
   const profileAfterStage = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), PROFILE_KEY);
@@ -105,14 +95,11 @@ test('Lesson 49 real completion reveals one layer, returns to the same landmark,
   }, { profileKey: PROFILE_KEY, progressKey: L49_PROGRESS_KEY });
   await page.reload();
 
-  await expect(landmark.locator('[data-landmark-layer="base"]')).toHaveCount(1);
-  await expect(landmark.locator('[data-landmark-layer="growth"]')).toHaveCount(5);
+  await expect(landmark.locator('[data-landmark-snapshot="5"]')).toHaveCount(1);
   await expect(landmark.locator('[data-souvenir-id="food-basket"]')).toBeVisible();
   await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson50');
   await expect(landmark.getByRole('link')).toHaveAccessibleName(/学习进度 5\/5/);
-  await expect.poll(() => landmark.locator('.landmark-stack img').evaluateAll(images => (
-    images.map(image => [image.naturalWidth, image.naturalHeight])
-  ))).toEqual(Array.from({ length: 6 }, () => [1024, 1024]));
+  await expect(landmark.locator('.landmark-stack img')).toHaveCount(1);
 
   await page.getByRole('button', { name: '设备冒险设置' }).click();
   await page.getByRole('button', { name: '重开冒险', exact: true }).click();
@@ -120,8 +107,7 @@ test('Lesson 49 real completion reveals one layer, returns to the same landmark,
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
   await expect(page.locator('#worldOverview')).toBeVisible();
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
-  await expect(landmark.locator('[data-landmark-layer="base"]')).toHaveCount(1);
-  await expect(landmark.locator('[data-landmark-layer="growth"]')).toHaveCount(0);
+  await expect(landmark.locator('[data-landmark-snapshot="0"]')).toHaveCount(1);
   await expect(landmark.locator('[data-souvenir-id]')).toHaveCount(0);
   await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson49');
 });

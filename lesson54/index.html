@@ -534,7 +534,7 @@ const loaded=CanranCore.storage.loadProgress({storage:localStorage,key:STAR_KEY,
 let stars=loaded.progress.ratings;
 CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
 const l54GrowthReveal=CanranCore.growthReveal.create({
-  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,courseId:'lesson54',
   onStopAudio:()=>{l54Audio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 const L54_CERTIFICATE_TARGETS=[
@@ -567,7 +567,7 @@ function award(level,rating){
       storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
       courseId:'lesson54',stageId:level,previousRating,nextRating:stars[level],progressPersisted:saved.persisted
     });
-    if(growth.shouldReveal)l54GrowthReveal.open(growth.reveal);
+    if(growth.shouldReveal)void l54GrowthReveal.openWhenReady(growth.reveal);
   }
 }
 function canIssue(){

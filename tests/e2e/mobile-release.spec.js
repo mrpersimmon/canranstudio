@@ -4,7 +4,9 @@ const { test, expect } = require('@playwright/test');
 
 const PROFILE_KEY = 'canran:adventure-profile:v1';
 const VIEWPORTS = [
+  { label: 'narrow phone', width: 360, height: 800 },
   { label: 'phone', width: 390, height: 844 },
+  { label: 'Huawei Mate 60 Pro+', width: 466, height: 980 },
   { label: 'tablet portrait', width: 768, height: 1024 },
   { label: 'tablet landscape', width: 1024, height: 768 },
   { label: 'desktop', width: 1280, height: 900 }
@@ -45,17 +47,9 @@ test('world overview loads one entrance preview and defers full district artwork
   await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
   await page.waitForLoadState('networkidle');
   await expect(page.locator('#currentDistrict')).toBeVisible();
-  for (const required of [
-    '/assets/adventure-map/atlas/warm-lantern-parchment.jpg',
-    '/assets/adventure-map/lesson49/landmark-base.png',
-    '/assets/adventure-map/lesson50/landmark-base.png',
-    '/assets/adventure-map/lesson51/landmark-base.png',
-    '/assets/adventure-map/lesson52/landmark-base.png',
-    '/assets/adventure-map/lesson53/landmark-base.png',
-    '/assets/adventure-map/lesson54/landmark-base.png',
-    '/assets/adventure-map/soundmark/landmark-base.png'
-  ]) expect(mapRequests).toContain(required);
-  expect(mapRequests.some(path => path.includes('/growth-'))).toBe(false);
+  expect(mapRequests).toContain('/assets/adventure-map/atlas/warm-lantern-parchment.jpg');
+  expect(mapRequests.some(path => /\/(?:landmark-base|growth-)/.test(path))).toBe(false);
+  expect(mapRequests.some(path => /\/states\/state-0-(?:512|768|1024)\.(?:avif|webp)$/.test(path))).toBe(true);
 });
 
 test('phone, tablet rotations, and desktop preserve one atlas order and touch-safe controls', async ({ page }) => {
@@ -87,17 +81,53 @@ test('phone, tablet rotations, and desktop preserve one atlas order and touch-sa
       await expectMinimumTarget(page.locator('#currentDistrict [data-open-settings]'));
       await expectNoHorizontalOverflow(page);
 
-      const scrolling = await page.evaluate(() => ({
-        pageTallerThanViewport: document.documentElement.scrollHeight > innerHeight,
-        mapTouchAction: getComputedStyle(document.querySelector('.district-map')).touchAction
-      }));
-      expect(scrolling.pageTallerThanViewport).toBe(true);
-      expect(scrolling.mapTouchAction).not.toBe('none');
+      const mapBehavior = await page.evaluate(() => {
+        const map = document.querySelector('.district-map');
+        const box = map.getBoundingClientRect();
+        return {
+          ratio: box.width / box.height,
+          mapTouchAction: getComputedStyle(map).touchAction
+        };
+      });
+      expect(mapBehavior.ratio).toBeCloseTo(914 / 1721, 2);
+      expect(mapBehavior.mapTouchAction).not.toBe('none');
+
+      for (const id of PUBLISHED_IDS) {
+        const snapshot = page.locator(`[data-location-id="${id}"] [data-landmark-snapshot]`);
+        await snapshot.scrollIntoViewIfNeeded();
+        await expect.poll(() => snapshot.evaluate(image => (
+          image.complete && image.naturalWidth > 0 && image.naturalWidth === image.naturalHeight
+        ))).toBe(true);
+      }
+
+      const containment = await page.locator('#districtMap').evaluate((map, publishedIds) => {
+        const mapBox = map.getBoundingClientRect();
+        return publishedIds.map(id => {
+          const location = map.querySelector(`[data-location-id="${id}"]`);
+          const locationBox = location.getBoundingClientRect();
+          const image = location.querySelector('[data-landmark-snapshot]');
+          return {
+            id,
+            inside: locationBox.left >= mapBox.left - 1 &&
+              locationBox.right <= mapBox.right + 1 &&
+              locationBox.top >= mapBox.top - 1 &&
+              locationBox.bottom <= mapBox.bottom + 1,
+            imageReady: image.complete && image.naturalWidth > 0 && image.naturalWidth === image.naturalHeight,
+            edges: {
+              left: Math.round(locationBox.left - mapBox.left),
+              right: Math.round(mapBox.right - locationBox.right),
+              top: Math.round(locationBox.top - mapBox.top),
+              bottom: Math.round(mapBox.bottom - locationBox.bottom)
+            }
+          };
+        });
+      }, PUBLISHED_IDS);
+      expect(containment.filter(item => !item.inside || !item.imageReady)).toEqual([]);
     });
   }
 });
 
-test('all published landmarks use one fixed transparent canvas per base and incremental layer', async ({ page }) => {
+test('all published landmarks load one complete responsive snapshot and no loose layers', async ({ page }) => {
   await page.addInitScript(profileKey => {
     const complete = ['l1', 'l2', 'l3', 'l4', 'l5'];
     localStorage.setItem(profileKey, JSON.stringify({
@@ -120,12 +150,11 @@ test('all published landmarks use one fixed transparent canvas per base and incr
 
   for (const id of PUBLISHED_IDS) {
     const stack = page.locator(`[data-location-id="${id}"] .landmark-stack`);
-    const expectedGrowth = id === 'soundmark' ? 4 : 5;
-    await expect(stack.locator('[data-landmark-layer="base"]')).toHaveCount(1);
-    await expect(stack.locator('[data-landmark-layer="growth"]')).toHaveCount(expectedGrowth);
-    await expect.poll(() => stack.locator('img').evaluateAll(images => images.map(image => (
-      [image.naturalWidth, image.naturalHeight]
-    )))).toEqual(Array.from({ length: expectedGrowth + 1 }, () => [1024, 1024]));
+    const expectedState = id === 'soundmark' ? 4 : 5;
+    await expect(stack.locator(`[data-landmark-snapshot="${expectedState}"]`)).toHaveCount(1);
+    await expect(stack.locator('img')).toHaveCount(1);
+    await expect(stack.locator('source')).toHaveCount(2);
+    await expect(stack.locator('[data-landmark-layer]')).toHaveCount(0);
   }
 });
 
@@ -148,6 +177,14 @@ test('the optional Lesson 50 story stays reachable and unobstructed in every rel
       await expectMinimumTarget(page.locator('#startBtn'));
       await expectMinimumTarget(page.locator('#storySkip'));
       await expectNoHorizontalOverflow(page);
+      await page.locator('#startBtn').evaluate(element => {
+        element.scrollIntoView({ block: 'center', inline: 'nearest' });
+      });
+      await page.waitForFunction(() => {
+        const action = document.getElementById('startBtn').getBoundingClientRect();
+        const navigation = document.getElementById('coursenav').getBoundingClientRect();
+        return action.bottom <= navigation.top;
+      });
       const unobstructed = await page.evaluate(() => {
         const action = document.getElementById('startBtn').getBoundingClientRect();
         const navigation = document.getElementById('coursenav').getBoundingClientRect();
@@ -176,7 +213,7 @@ test('safe areas and reduced motion keep atlas and full-screen growth reveal usa
   await page.evaluate(() => window.eval('award("l1", 1)'));
   const reveal = page.locator('.growth-reveal');
   await expect(reveal).toBeVisible();
-  expect(await reveal.locator('.growth-reveal__layer--new').evaluate(element => (
+  expect(await reveal.locator('.growth-reveal__snapshot--after').evaluate(element => (
     getComputedStyle(element).animationDuration
   ))).toBe('0s');
   await expectNoHorizontalOverflow(page);

@@ -1021,6 +1021,7 @@ CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:C
 const l49GrowthReveal=CanranCore.growthReveal.create({
   storage:localStorage,
   courses:CanranCore.courseCatalog.COURSES,
+  courseId:'lesson49',
   onStopAudio:()=>{lesson49Audio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 function getStar(l){return stars[l];}
@@ -1066,7 +1067,7 @@ function award(l,n){
     storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
     courseId:'lesson49',stageId:l,previousRating,nextRating:stars[l],progressPersisted:saved.persisted
   });
-  if(growth.shouldReveal)l49GrowthReveal.open(growth.reveal);
+  if(growth.shouldReveal)void l49GrowthReveal.openWhenReady(growth.reveal);
 }
 
 /* ================= 撒花 ================= */

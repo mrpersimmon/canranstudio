@@ -560,7 +560,7 @@ const loaded=CanranCore.storage.loadProgress({
 let stars=loaded.progress.ratings;
 CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
 const l53GrowthReveal=CanranCore.growthReveal.create({
-  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,courseId:'lesson53',
   onStopAudio:()=>{l53Audio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 const L53_CERTIFICATE_TARGETS=[
@@ -593,7 +593,7 @@ function award(level,rating){
       storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
       courseId:'lesson53',stageId:level,previousRating,nextRating:stars[level],progressPersisted:saved.persisted
     });
-    if(growth.shouldReveal)l53GrowthReveal.open(growth.reveal);
+    if(growth.shouldReveal)void l53GrowthReveal.openWhenReady(growth.reveal);
   }
 }
 function canIssue(){

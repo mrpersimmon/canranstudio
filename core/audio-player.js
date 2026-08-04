@@ -32,8 +32,50 @@
         : Math.max(1800, String(text).length * 180)
     );
     const failedSources = new Set();
+    const preparedSources = new Map();
     let active = null;
     let generation = 0;
+
+    function takePreparedAudio(src) {
+      const prepared = preparedSources.get(src);
+      if (!prepared) return null;
+      preparedSources.delete(src);
+      prepared.audio.removeEventListener('error', prepared.onError);
+      return prepared.audio;
+    }
+
+    function preload(request = {}) {
+      const src = String(request.src || '');
+      if (!src || !AudioCtor || failedSources.has(src) || preparedSources.has(src)) return false;
+
+      let audio;
+      try {
+        audio = new AudioCtor(src);
+      } catch {
+        failedSources.add(src);
+        return false;
+      }
+
+      const onError = () => {
+        const prepared = preparedSources.get(src);
+        if (prepared?.audio !== audio) return;
+        preparedSources.delete(src);
+        failedSources.add(src);
+        audio.removeEventListener('error', onError);
+      };
+      preparedSources.set(src, { audio, onError });
+      audio.addEventListener('error', onError, { once: true });
+      try {
+        audio.preload = 'auto';
+        audio.load?.();
+      } catch {
+        preparedSources.delete(src);
+        audio.removeEventListener('error', onError);
+        failedSources.add(src);
+        return false;
+      }
+      return true;
+    }
 
     function clearTimer(session) {
       if (session.timer !== null) {
@@ -142,7 +184,7 @@
 
       let audio;
       try {
-        audio = new AudioCtor(session.src);
+        audio = takePreparedAudio(session.src) || new AudioCtor(session.src);
       } catch {
         failAudio(session);
         return;
@@ -217,6 +259,7 @@
 
     return Object.freeze({
       play,
+      preload,
       stop,
       isActive: () => active !== null
     });

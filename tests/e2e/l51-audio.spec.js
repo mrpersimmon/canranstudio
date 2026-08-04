@@ -5,12 +5,15 @@ const { test, expect } = require('@playwright/test');
 async function installMockAudio(page, { speech = 'unsupported' } = {}) {
   await page.addInitScript(({ speechMode }) => {
     window.__mockAudios = [];
+    window.__playedAudios = [];
 
     class MockAudio {
       constructor(src) {
         this.src = src;
         this.currentTime = 0;
         this.paused = true;
+        this.preload = '';
+        this.loadCalls = 0;
         this.listeners = new Map();
         window.__mockAudios.push(this);
       }
@@ -27,10 +30,14 @@ async function installMockAudio(page, { speech = 'unsupported' } = {}) {
       }
       play() {
         this.paused = false;
+        window.__playedAudios.push(this);
         return Promise.resolve();
       }
       pause() {
         this.paused = true;
+      }
+      load() {
+        this.loadCalls += 1;
       }
       emit(type) {
         for (const entry of [...(this.listeners.get(type) || [])]) {
@@ -91,16 +98,16 @@ test('manual speech cancels play-all and clears stale line state', async ({ page
   await page.clock.install();
   await page.goto('/lesson51/');
   await page.locator('#playAll').click();
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(1);
   await expect(page.locator('.line.playing')).toHaveCount(1);
 
   await page.evaluate(() => document.getElementById('heroQ').click());
   await page.clock.fastForward(501);
 
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(2);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(2);
   await expect(page.locator('.line.playing')).toHaveCount(0);
   expect(await storyRating(page)).toBe(0);
-  expect(await page.evaluate(() => window.__mockAudios[0].paused)).toBe(true);
+  expect(await page.evaluate(() => window.__playedAudios[0].paused)).toBe(true);
 });
 
 test('repeated word and listening playback keep only the newest control active', async ({ page }) => {
@@ -110,11 +117,11 @@ test('repeated word and listening playback keep only the newest control active',
   const wordSpeaker = page.locator('.spk').first();
   await wordSpeaker.click();
   await wordSpeaker.click();
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(2);
-  expect(await page.evaluate(() => window.__mockAudios[0].paused)).toBe(true);
-  expect(await page.evaluate(() => window.__mockAudios[1].paused)).toBe(false);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(2);
+  expect(await page.evaluate(() => window.__playedAudios[0].paused)).toBe(true);
+  expect(await page.evaluate(() => window.__playedAudios[1].paused)).toBe(false);
   await expect(wordSpeaker).toHaveClass(/playing/);
-  await page.evaluate(() => window.__mockAudios[1].emit('ended'));
+  await page.evaluate(() => window.__playedAudios[1].emit('ended'));
   await expect(wordSpeaker).not.toHaveClass(/playing/);
 
   const listeningReplay = page.locator('#lgHear');
@@ -123,12 +130,36 @@ test('repeated word and listening playback keep only the newest control active',
     button.click();
     button.click();
   });
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(4);
-  expect(await page.evaluate(() => window.__mockAudios[2].paused)).toBe(true);
-  expect(await page.evaluate(() => window.__mockAudios[3].paused)).toBe(false);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(4);
+  expect(await page.evaluate(() => window.__playedAudios[2].paused)).toBe(true);
+  expect(await page.evaluate(() => window.__playedAudios[3].paused)).toBe(false);
   await expect(listeningReplay).toHaveClass(/playing/);
-  await page.evaluate(() => window.__mockAudios[3].emit('ended'));
+  await page.evaluate(() => window.__playedAudios[3].emit('ended'));
   await expect(listeningReplay).not.toHaveClass(/playing/);
+});
+
+test('the next listening prompt is prepared during feedback and starts from the warmed recording', async ({ page }) => {
+  await installMockAudio(page);
+  await page.addInitScript(() => { Math.random = () => 0; });
+  await page.clock.install();
+  await page.goto('/lesson51/');
+
+  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(0);
+
+  await page.locator('#lgHear').click();
+  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
+  await page.evaluate(() => window.__mockAudios[0].emit('ended'));
+
+  await page.locator('#lgOpts .lg-opt').first().click();
+  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(2);
+  expect(await page.evaluate(() => window.__mockAudios[1].loadCalls)).toBe(1);
+
+  await page.clock.fastForward(600);
+  await expect(page.locator('#lgOpts .lg-opt:enabled')).toHaveCount(4);
+  await page.locator('#lgHear').click();
+
+  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(2);
+  expect(await page.evaluate(() => window.__mockAudios[1].paused)).toBe(false);
 });
 
 test('only uninterrupted final-line completion awards story theatre', async ({ page }) => {
@@ -138,8 +169,8 @@ test('only uninterrupted final-line completion awards story theatre', async ({ p
   await page.locator('#playAll').click();
 
   for (let index = 0; index < lineCount; index += 1) {
-    expect(await page.evaluate(() => window.__mockAudios.length)).toBe(index + 1);
-    await page.evaluate(i => window.__mockAudios[i].emit('ended'), index);
+    expect(await page.evaluate(() => window.__playedAudios.length)).toBe(index + 1);
+    await page.evaluate(i => window.__playedAudios[i].emit('ended'), index);
     if (index === lineCount - 2) expect(await storyRating(page)).toBe(0);
     if (index < lineCount - 1) await page.waitForTimeout(550);
   }
@@ -153,15 +184,15 @@ test('audio error with unsupported fallback never awards story theatre', async (
   await page.clock.install();
   await page.goto('/lesson51/');
   await page.locator('#playAll').click();
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(1);
   await page.evaluate(async () => {
-    window.__mockAudios[0].emit('error');
+    window.__playedAudios[0].emit('error');
     await Promise.resolve();
     await Promise.resolve();
   });
   await page.clock.fastForward(501);
 
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(1);
   expect(await storyRating(page)).toBe(0);
   await expect(page.locator('.line.playing')).toHaveCount(0);
 });
@@ -171,14 +202,14 @@ test('manual stop never awards story theatre', async ({ page }) => {
   await page.clock.install();
   await page.goto('/lesson51/');
   await page.locator('#playAll').click();
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(1);
   await page.locator('#stopAll').click();
   await page.clock.fastForward(501);
 
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(1);
   expect(await storyRating(page)).toBe(0);
   await expect(page.locator('.line.playing')).toHaveCount(0);
-  expect(await page.evaluate(() => window.__mockAudios[0].paused)).toBe(true);
+  expect(await page.evaluate(() => window.__playedAudios[0].paused)).toBe(true);
 });
 
 test('speech timeout never awards story theatre', async ({ page }) => {
@@ -186,8 +217,8 @@ test('speech timeout never awards story theatre', async ({ page }) => {
   await page.clock.install();
   await page.goto('/lesson51/');
   await page.locator('#playAll').click();
-  expect(await page.evaluate(() => window.__mockAudios.length)).toBe(1);
-  await page.evaluate(() => window.__mockAudios[0].emit('error'));
+  expect(await page.evaluate(() => window.__playedAudios.length)).toBe(1);
+  await page.evaluate(() => window.__playedAudios[0].emit('error'));
   await page.clock.fastForward(60_000);
 
   expect(await storyRating(page)).toBe(0);

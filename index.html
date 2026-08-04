@@ -88,7 +88,7 @@ img{display:block;max-width:100%}
 
 /* District map */
 .district-view{position:relative;min-height:100dvh;background:#1f140f;padding:0}
-.district-map{position:relative;overflow:hidden;width:min(914px,100%);height:1880px;margin:auto;background:#2e1d15 url('/assets/adventure-map/atlas/warm-lantern-parchment.jpg') center/100% 100% no-repeat;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:pan-y}
+.district-map{position:relative;overflow:hidden;width:min(914px,100%);height:auto;aspect-ratio:914/1721;margin:auto;background:#2e1d15 url('/assets/adventure-map/atlas/warm-lantern-parchment.jpg') center/100% 100% no-repeat;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:pan-y}
 .district-chrome{position:absolute;z-index:35;inset:2.5% 4.5% auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start}
 .back-world{display:inline-flex;align-items:center;min-height:48px;padding:8px 14px;border:3px solid var(--ink);border-radius:999px;background:#fae9be;box-shadow:0 4px 0 var(--ink);font-size:13px;white-space:nowrap}
 .district-brand{justify-self:center;min-width:0;max-width:100%;padding:8px 18px;border:3px solid #6d4327;border-radius:12px;background:#f4dfb4;box-shadow:0 5px 0 rgba(70,42,26,.35);text-align:center;transform:rotate(-1deg)}
@@ -97,19 +97,20 @@ img{display:block;max-width:100%}
 .district-chrome .settings-bookmark{position:relative;top:auto;right:auto;width:46px;height:52px}
 .district-locations{position:absolute;z-index:8;inset:0;margin:0;padding:0;list-style:none}
 .map-location{position:absolute;display:grid;place-items:center;text-align:center}
-.map-location[data-location-id="lesson49"]{top:10%;left:4%;width:39%}
-.map-location[data-location-id="soundmark"]{top:28%;right:5%;width:33%}
-.map-location[data-location-id="lesson50"]{top:39%;left:6%;width:38%}
-.map-location[data-location-id="lesson51"]{top:53%;right:5%;width:40%}
-.map-location[data-location-id="lesson52"]{top:65%;left:4%;width:38%}
-.map-location[data-location-id="lesson53"]{top:76%;right:5%;width:36%}
-.map-location[data-location-id="lesson54"]{top:86%;left:8%;width:40%}
+.map-location[data-location-id="lesson49"]{top:10%;left:4%;width:36%}
+.map-location[data-location-id="soundmark"]{top:25%;right:5%;width:29%}
+.map-location[data-location-id="lesson50"]{top:36%;left:6%;width:34%}
+.map-location[data-location-id="lesson51"]{top:46%;right:5%;width:34%}
+.map-location[data-location-id="lesson52"]{top:57%;left:4%;width:32%}
+.map-location[data-location-id="lesson53"]{top:69%;right:5%;width:30%}
+.map-location[data-location-id="lesson54"]{top:73%;left:8%;width:30%}
 .published-location{position:relative;display:flex;flex-direction:column;align-items:center;width:100%;color:inherit;text-decoration:none;transition:transform .2s ease}
 .published-marker{position:relative;z-index:2;width:min(100%,300px);aspect-ratio:1;filter:drop-shadow(0 7px 3px rgba(66,41,26,.25))}
 .landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .location-guide{position:relative;z-index:6;margin:-18% 0 5px;padding:4px 11px;border:3px solid var(--ink);border-radius:999px;background:var(--gold);box-shadow:0 3px 0 var(--ink);font-size:11px}
 .location-guide::before{content:"●";margin-right:5px;color:var(--red)}
 .location-plaque{position:relative;z-index:5;width:max-content;max-width:112%;margin-top:-3%;padding:7px 16px 8px;border:3px solid #5e3b28;border-radius:10px 10px 15px 15px;background:#f3deb1;box-shadow:inset 0 0 0 2px var(--accent,#a54332),0 4px 0 rgba(73,49,38,.7);transform:rotate(var(--angle,-1deg))}
+.map-location[data-location-id="lesson54"] .location-plaque{margin-top:-15%}
 .map-location[data-location-id="lesson50"]{--accent:#7450a8;--angle:1deg}.map-location[data-location-id="lesson51"],.map-location[data-location-id="lesson52"]{--accent:#276d9d;--angle:.6deg}
 .map-location[data-location-id="lesson53"],.map-location[data-location-id="lesson54"]{--accent:#4c855f;--angle:-.4deg}.map-location[data-location-id="soundmark"]{--accent:#c66b24;--angle:1.2deg}
 .location-kind{display:block;color:var(--accent);font-size:10px;line-height:1;font-weight:800;letter-spacing:1.1px}
@@ -253,9 +254,16 @@ const currentDistrict=document.getElementById('currentDistrict');
 const districtLocations=document.getElementById('districtLocations');
 let districtRendered=false;
 
-function landmarkMarkup(location){
-  const growth=location.visibleGrowthAssets.map((asset,index)=>`<img src="/${asset}" alt="" width="1024" height="1024" data-landmark-layer="growth" data-growth-index="${index+1}" style="z-index:${index+1}">`).join('');
-  return `<img src="/${location.baseAsset}" alt="" width="1024" height="1024" data-landmark-layer="base" style="z-index:0">${growth}`;
+function landmarkMarkup(location,{priority=false}={}){
+  const asset=location.landmarkAsset;
+  if(!asset)return '';
+  const stateUrl=(path)=>CanranCore.courseCatalog.mapStateAssetUrl(path,asset);
+  const source=(type)=>asset.variants.map(variant=>`${stateUrl(variant[type])} ${variant.width}w`).join(', ');
+  return `<picture data-landmark-state="${asset.stageCount}">
+    <source type="image/avif" srcset="${source('avif')}" sizes="(max-width:520px) 46vw, 320px">
+    <source type="image/webp" srcset="${source('webp')}" sizes="(max-width:520px) 46vw, 320px">
+    <img src="${stateUrl(asset.png)}" alt="" width="1024" height="1024" data-landmark-snapshot="${asset.stageCount}" loading="${priority?'eager':'lazy'}" decoding="async"${priority?' fetchpriority="high"':''}>
+  </picture>`;
 }
 
 function progressMarkup(location){
@@ -276,7 +284,7 @@ function locationMarkup(location,recommended,focusedId){
   const accessible=`${active?'继续冒险，':''}${completionCopy}${kind}，${location.title}，学习进度 ${location.completedStageCount}/${location.totalStageCount}${souvenirCopy}`;
   return `<li class="map-location" data-location-id="${location.id}" data-map-lesson="${location.lesson??''}" data-location-status="published"${active?' data-map-guidance="active"':''}${pending?' data-map-change="true"':''}>
     <a class="published-location" href="${location.route}" data-course-id="${location.id}" aria-label="${accessible}">
-      <span class="published-marker landmark-stack" aria-hidden="true">${landmarkMarkup(location)}</span>
+      <span class="published-marker landmark-stack" aria-hidden="true">${landmarkMarkup(location,{priority:active||pending})}</span>
       ${activeCopy}${changeCopy}
       <span class="location-plaque"><span class="location-kind">${kind}</span><strong class="location-title">${location.title}</strong>${progressMarkup(location)}</span>
       ${souvenir}

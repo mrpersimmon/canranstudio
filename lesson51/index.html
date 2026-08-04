@@ -528,7 +528,7 @@ const l51Loaded = CanranCore.storage.loadProgress({
 let ratings = l51Loaded.progress.ratings;
 CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
 const l51GrowthReveal=CanranCore.growthReveal.create({
-  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,courseId:'lesson51',
   onStopAudio:()=>{lesson51Audio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 
@@ -571,7 +571,7 @@ function awardLevel(level,rating){
     storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
     courseId:'lesson51',stageId:level,previousRating,nextRating:ratings[level],progressPersisted:saved.persisted
   });
-  if(growth.shouldReveal)l51GrowthReveal.open(growth.reveal);
+  if(growth.shouldReveal)void l51GrowthReveal.openWhenReady(growth.reveal);
   return true;
 }
 
@@ -690,6 +690,13 @@ function celebrate(el){
   let runComplete = false;
 
   function shuffle(a){ return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]); }
+  function prepareRound({preload=false}={}){
+    const word = ALLW[Math.floor(Math.random()*ALLW.length)];
+    const distract = shuffle(ALLW.filter(item=>item[0]!==word[0])).slice(0,3);
+    const choices = shuffle([word].concat(distract));
+    if(preload) lesson51Audio.preload(audioRequest(word[0],0.8));
+    return {word,choices};
+  }
   function finishRun(){
     runComplete = true;
     awardLevel('l1',CanranCore.progress.ratingFor(firstTryScore,[
@@ -700,14 +707,13 @@ function celebrate(el){
     scoreEl.textContent = `本关：5 / 5 · 首次答对 ${firstTryScore}`;
     toast('单词关通过！去看课文剧场吧');
   }
-  function round(){
+  function round(prepared=prepareRound()){
     attempt = CanranCore.assessment.createAttempt();
     nextButton.disabled = true;
     nextButton.textContent = '下一题';
     fb.textContent=''; fb.className='fb'; opts.innerHTML='';
-    cur = ALLW[Math.floor(Math.random()*ALLW.length)];
-    const distract = shuffle(ALLW.filter(w=>w[0]!==cur[0])).slice(0,3);
-    shuffle([cur].concat(distract)).forEach(word=>{
+    cur = prepared.word;
+    prepared.choices.forEach(word=>{
       const button = document.createElement('button');
       button.className = 'lg-opt';
       button.innerHTML = `${word[0]}<br><small style="font-size:13px;opacity:.6">${word[3]}</small>`;
@@ -739,7 +745,8 @@ function celebrate(el){
     fb.textContent = `答对啦！${cur[0]} 就是「${cur[3]}」`;
     fb.className = 'fb good'; celebrate(button);
     if(solved === 5){ finishRun(); return; }
-    setTimeout(round,900);
+    const prepared = prepareRound({preload:true});
+    setTimeout(()=>round(prepared),500);
   }
   hear.onclick = play;
   nextButton.onclick = ()=>{

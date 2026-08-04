@@ -19,27 +19,73 @@
     return typeof path === 'string' && path.startsWith('/') ? path : `/${path || ''}`;
   }
 
+  function stateAssetUrl(path, stateAsset) {
+    return catalogApi?.mapStateAssetUrl
+      ? catalogApi.mapStateAssetUrl(path, stateAsset)
+      : publicAsset(path);
+  }
+
+  function nearestVariant(stateAsset, targetWidth) {
+    const variants = Array.isArray(stateAsset?.variants)
+      ? [...stateAsset.variants].sort((left, right) => left.width - right.width)
+      : [];
+    return variants.find(variant => variant.width >= targetWidth) || variants.at(-1) || null;
+  }
+
+  async function preloadStateAsset(stateAsset, {
+    ImageCtor = typeof Image !== 'undefined' ? Image : null,
+    targetWidth = 1024
+  } = {}) {
+    if (!stateAsset?.png || typeof ImageCtor !== 'function') return false;
+    const variant = nearestVariant(stateAsset, Math.max(1, Number(targetWidth) || 1024));
+    const candidates = [variant?.avif, variant?.webp, stateAsset.png].filter(Boolean);
+    for (const path of candidates) {
+      try {
+        const image = new ImageCtor();
+        image.decoding = 'async';
+        image.fetchPriority = 'low';
+        image.src = stateAssetUrl(path, stateAsset);
+        if (typeof image.decode === 'function') {
+          await image.decode();
+        } else {
+          await new Promise((resolve, reject) => {
+            image.onload = resolve;
+            image.onerror = reject;
+          });
+        }
+        return true;
+      } catch {
+        // Try the next supported format. PNG remains the final compatibility path.
+      }
+    }
+    return false;
+  }
+
   function findCourse(courses, courseId) {
     return Array.isArray(courses) ? courses.find(course => course.id === courseId) || null : null;
   }
 
-  function buildRevealModel({ courses, courseId, stageId }) {
+  function buildRevealModel({ courses, courseId, stageId, completedStageCount = null }) {
     const course = findCourse(courses, courseId);
     const stages = Array.isArray(course?.map?.stages) ? course.map.stages : [];
     const index = stages.findIndex(stage => stage.progressId === stageId);
-    if (!course || index < 0 || !course.map?.baseAsset) return null;
-    const stage = stages[index];
-    const isFinalStage = index === stages.length - 1;
+    if (!course || index < 0) return null;
+    const earnedCount = Number.isInteger(completedStageCount)
+      ? Math.max(1, Math.min(completedStageCount, stages.length))
+      : index + 1;
+    const stage = stages[earnedCount - 1];
+    const beforeStateAsset = course.map?.stateAssets?.[earnedCount - 1] || null;
+    const afterStateAsset = course.map?.stateAssets?.[earnedCount] || null;
+    if (!beforeStateAsset || !afterStateAsset) return null;
+    const isFinalStage = earnedCount === stages.length;
     return Object.freeze({
       courseId,
       stageId,
-      stageNumber: index + 1,
+      stageNumber: earnedCount,
       stageCount: stages.length,
       courseTitle: course.title,
-      baseAsset: course.map.baseAsset,
-      beforeLayers: Object.freeze(stages.slice(0, index).map(item => item.growthAsset)),
-      newLayer: stage.growthAsset,
-      afterLayers: Object.freeze(stages.slice(0, index + 1).map(item => item.growthAsset)),
+      beforeStateAsset,
+      afterStateAsset,
       title: stage.revealTitle,
       copy: stage.revealCopy,
       soundAsset: stage.soundAsset || null,
@@ -53,13 +99,21 @@
     const result = profileApi.recordStageCompletion(options);
     return {
       ...result,
-      reveal: result.shouldReveal ? buildRevealModel(options) : null
+      reveal: result.shouldReveal
+        ? buildRevealModel({
+          ...options,
+          completedStageCount: result.profile?.completedStages?.[options.courseId]?.length
+        })
+        : null
     };
   }
 
   function createInertController() {
     return Object.freeze({
       open: () => false,
+      openWhenReady: async () => false,
+      prepare: async () => false,
+      preloadNext: async () => false,
       close: () => false,
       destroy: () => false,
       isOpen: () => false
@@ -71,6 +125,7 @@
     window: win = typeof window !== 'undefined' ? window : null,
     storage = null,
     courses = catalogApi?.COURSES || [],
+    courseId = null,
     gateMs = 700,
     onStopAudio = null
   } = {}) {
@@ -90,7 +145,7 @@
         <p class="growth-reveal__eyebrow">✦ 图鉴更新 ✦</p>
         <div class="growth-reveal__scene" aria-hidden="true">
           <div class="growth-reveal__halo"></div>
-          <div class="growth-reveal__layers"></div>
+          <div class="growth-reveal__snapshots"></div>
           <span class="growth-reveal__stamp">地点完成</span>
         </div>
         <div class="growth-reveal__copy">
@@ -103,7 +158,7 @@
       </div>`;
     doc.body.appendChild(overlay);
 
-    const layers = overlay.querySelector('.growth-reveal__layers');
+    const snapshots = overlay.querySelector('.growth-reveal__snapshots');
     const title = overlay.querySelector('#growthRevealTitle');
     const copy = overlay.querySelector('#growthRevealCopy');
     const stage = overlay.querySelector('.growth-reveal__stage');
@@ -113,15 +168,65 @@
     let currentModel = null;
     let restoreFocus = null;
     let restoreOverflow = '';
+    const preparedAssets = new Map();
 
-    function makeImage(asset, className) {
+    function targetDecodeWidth() {
+      const viewportWidth = Number(win?.innerWidth) || 1024;
+      const devicePixelRatio = Math.max(1, Number(win?.devicePixelRatio) || 1);
+      return Math.min(1024, Math.ceil(Math.min(520, viewportWidth * 0.82) * devicePixelRatio));
+    }
+
+    function prepare(asset) {
+      if (!asset?.png) return Promise.resolve(false);
+      const key = `${asset.version || ''}:${asset.png}`;
+      if (!preparedAssets.has(key)) {
+        preparedAssets.set(key, preloadStateAsset(asset, {
+          ImageCtor: win?.Image,
+          targetWidth: targetDecodeWidth()
+        }));
+      }
+      return preparedAssets.get(key);
+    }
+
+    function preloadNext(selectedCourseId = courseId) {
+      const course = findCourse(courses, selectedCourseId);
+      if (!course || !profileApi || !storage) return Promise.resolve(false);
+      const initialized = profileApi.initializeDeviceProfile({ storage, courses });
+      const completed = initialized.profile?.completedStages?.[selectedCourseId]?.length || 0;
+      const next = course.map?.stateAssets?.[Math.min(completed + 1, course.map.stages.length)] || null;
+      if (!next || completed >= course.map.stages.length) return Promise.resolve(false);
+      return prepare(next);
+    }
+
+    function makeImage(asset, className, stateAsset = null) {
       const img = doc.createElement('img');
-      img.src = publicAsset(asset);
+      img.src = stateAsset ? stateAssetUrl(asset, stateAsset) : publicAsset(asset);
       img.alt = '';
       img.decoding = 'async';
       img.className = className;
       img.addEventListener('error', () => { img.hidden = true; }, { once: true });
       return img;
+    }
+
+    function makeSnapshot(asset, className) {
+      const picture = doc.createElement('picture');
+      picture.className = className;
+      for (const type of ['avif', 'webp']) {
+        const source = doc.createElement('source');
+        source.type = `image/${type}`;
+        source.sizes = '(max-width: 520px) 82vw, 520px';
+        source.srcset = asset.variants
+          .map(variant => `${stateAssetUrl(variant[type], asset)} ${variant.width}w`)
+          .join(', ');
+        picture.appendChild(source);
+      }
+      const image = makeImage(asset.png, 'growth-reveal__snapshot-image', asset);
+      image.width = 1024;
+      image.height = 1024;
+      image.loading = 'eager';
+      image.fetchPriority = 'high';
+      picture.appendChild(image);
+      return picture;
     }
 
     function playFeedback(model) {
@@ -156,14 +261,10 @@
     }
 
     function render(model) {
-      layers.replaceChildren();
-      layers.appendChild(makeImage(model.baseAsset, 'growth-reveal__layer growth-reveal__layer--base'));
-      model.afterLayers.forEach(asset => {
-        const className = asset === model.newLayer
-          ? 'growth-reveal__layer growth-reveal__layer--new'
-          : 'growth-reveal__layer growth-reveal__layer--earned';
-        layers.appendChild(makeImage(asset, className));
-      });
+      snapshots.replaceChildren(
+        makeSnapshot(model.beforeStateAsset, 'growth-reveal__snapshot growth-reveal__snapshot--before'),
+        makeSnapshot(model.afterStateAsset, 'growth-reveal__snapshot growth-reveal__snapshot--after')
+      );
       stage.textContent = `第 ${model.stageNumber} / ${model.stageCount} 处成长`;
       title.textContent = model.title || '图鉴已经更新';
       copy.textContent = model.copy || '你为这处地点带来了新的变化！';
@@ -197,6 +298,15 @@
       overlay.focus({ preventScroll: true });
       playFeedback(model);
       return true;
+    }
+
+    async function openWhenReady(model) {
+      if (!model || opened) return false;
+      await Promise.allSettled([
+        prepare(model.beforeStateAsset),
+        prepare(model.afterStateAsset)
+      ]);
+      return open(model);
     }
 
     function close(force = false) {
@@ -244,8 +354,18 @@
       return true;
     }
 
-    return Object.freeze({ open, close, destroy, isOpen: () => opened });
+    if (courseId) Promise.resolve().then(() => preloadNext(courseId));
+
+    return Object.freeze({
+      open,
+      openWhenReady,
+      prepare,
+      preloadNext,
+      close,
+      destroy,
+      isOpen: () => opened
+    });
   }
 
-  return Object.freeze({ buildRevealModel, recordStageResult, create });
+  return Object.freeze({ buildRevealModel, recordStageResult, preloadStateAsset, create });
 });

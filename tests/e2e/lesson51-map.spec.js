@@ -1,17 +1,10 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
+const { MAP_STATE_VERSION } = require('../../core/course-catalog');
 
 const PROFILE_KEY = 'canran:adventure-profile:v1';
 const STAGES = ['l1', 'l2', 'l3', 'l4', 'l5'];
-const BASE_ASSET = '/assets/adventure-map/lesson51/landmark-base.png';
-const GROWTH_ASSETS = [
-  '/assets/adventure-map/lesson51/growth-01-weather.png',
-  '/assets/adventure-map/lesson51/growth-02-theatre.png',
-  '/assets/adventure-map/lesson51/growth-03-seasons.png',
-  '/assets/adventure-map/lesson51/growth-04-sundial.png',
-  '/assets/adventure-map/lesson51/growth-05-celebration.png'
-];
 
 async function seedCompletedStages(page, completedStages) {
   await page.evaluate(({ profileKey, stages }) => {
@@ -24,7 +17,7 @@ async function seedCompletedStages(page, completedStages) {
   }, { profileKey: PROFILE_KEY, stages: completedStages });
 }
 
-test('Lesson 51 keeps one fixed base and cumulatively reveals five independent growth layers', async ({ page }) => {
+test('Lesson 51 loads exactly one complete responsive snapshot for each cumulative state', async ({ page }) => {
   test.setTimeout(90_000);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/?district=first-book-49-60&focus=lesson51');
@@ -36,17 +29,17 @@ test('Lesson 51 keeps one fixed base and cumulatively reveals five independent g
     await page.reload();
 
     const stack = location.locator('.landmark-stack');
-    const base = stack.locator('[data-landmark-layer="base"]');
-    const growth = stack.locator('[data-landmark-layer="growth"]');
-    await expect(base).toHaveCount(1);
-    await expect(base).toHaveAttribute('src', BASE_ASSET);
-    await expect(growth).toHaveCount(completed);
-    await expect(stack.locator('[data-landmark-layer="snapshot"]')).toHaveCount(0);
-    expect(await growth.evaluateAll(images => images.map(image => image.getAttribute('src'))))
-      .toEqual(GROWTH_ASSETS.slice(0, completed));
-    await expect.poll(() => stack.locator('img').evaluateAll(images => images.map(image => (
-      [image.naturalWidth, image.naturalHeight]
-    )))).toEqual(Array.from({ length: completed + 1 }, () => [1024, 1024]));
+    const snapshot = stack.locator('[data-landmark-snapshot]');
+    await expect(snapshot).toHaveCount(1);
+    await expect(snapshot).toHaveAttribute('data-landmark-snapshot', String(completed));
+    await expect(snapshot).toHaveAttribute(
+      'src', `/assets/adventure-map/lesson51/states/state-${completed}.png?v=${MAP_STATE_VERSION}`
+    );
+    await expect(stack.locator('source')).toHaveCount(2);
+    await expect.poll(() => snapshot.evaluate(image => image.currentSrc)).toContain(
+      `/assets/adventure-map/lesson51/states/state-${completed}-`
+    );
+    expect(await stack.locator('img').count()).toBe(1);
 
     const stackBox = await stack.boundingBox();
     expect(stackBox).not.toBeNull();
@@ -65,7 +58,7 @@ test('Lesson 51 keeps one fixed base and cumulatively reveals five independent g
   }
 });
 
-test('Lesson 51 layered landmark stays usable on phone and tablet and opens the real course', async ({ page }) => {
+test('Lesson 51 complete snapshot stays usable on phone and tablet and opens the real course', async ({ page }) => {
   await page.goto('/?district=first-book-49-60&focus=lesson51');
   await seedCompletedStages(page, STAGES.slice(0, 3));
 
@@ -77,7 +70,7 @@ test('Lesson 51 layered landmark stays usable on phone and tablet and opens the 
     await page.setViewportSize(viewport);
     await page.reload();
     const location = page.locator('[data-map-lesson="51"]');
-    await expect(location.locator('[data-landmark-layer="growth"]')).toHaveCount(3);
+    await expect(location.locator('[data-landmark-snapshot="3"]')).toHaveCount(1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth))
       .toBe(await page.evaluate(() => document.documentElement.clientWidth));
   }

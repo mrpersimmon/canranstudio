@@ -32,6 +32,57 @@
       /\.(?:avif|png|webp)$/i.test(value);
   }
 
+  const MAP_STATE_WIDTHS = [512, 768, 1024];
+  const MAP_STATE_VERSION = 'atlas-20260804-01';
+
+  function createLandmarkStateAsset(courseId, stageCount) {
+    const directory = `assets/adventure-map/${courseId}/states`;
+    return {
+      stageCount,
+      version: MAP_STATE_VERSION,
+      png: `${directory}/state-${stageCount}.png`,
+      variants: MAP_STATE_WIDTHS.map(width => ({
+        width,
+        avif: `${directory}/state-${stageCount}-${width}.avif`,
+        webp: `${directory}/state-${stageCount}-${width}.webp`
+      }))
+    };
+  }
+
+  function createLandmarkStateAssets(courseId, stageCount) {
+    return Array.from(
+      { length: stageCount + 1 },
+      (_, index) => createLandmarkStateAsset(courseId, index)
+    );
+  }
+
+  function landmarkStatePaths(state) {
+    return [
+      state?.png,
+      ...(Array.isArray(state?.variants)
+        ? state.variants.flatMap(variant => [variant?.avif, variant?.webp])
+        : [])
+    ];
+  }
+
+  function isLandmarkStateAsset(value, stageCount) {
+    if (!value || value.stageCount !== stageCount || value.version !== MAP_STATE_VERSION ||
+      !isMapImagePath(value.png)) return false;
+    if (!Array.isArray(value.variants) || value.variants.length !== MAP_STATE_WIDTHS.length) return false;
+    return value.variants.every((variant, index) => (
+      variant?.width === MAP_STATE_WIDTHS[index] &&
+      isMapImagePath(variant.avif) &&
+      isMapImagePath(variant.webp)
+    ));
+  }
+
+  function mapStateAssetUrl(path, state) {
+    if (!isMapImagePath(path)) throw new Error(`invalid map state path: ${path}`);
+    const version = state?.version;
+    if (version !== MAP_STATE_VERSION) throw new Error(`invalid map state version: ${version}`);
+    return `/${path}?v=${encodeURIComponent(version)}`;
+  }
+
   function isRegressionTestPath(value) {
     return isRelativePublicPath(value) &&
       /^tests\/e2e\/[a-z0-9][a-z0-9/_-]*\.spec\.js$/.test(value);
@@ -67,7 +118,7 @@
   function createLessonMap(lesson, {
     souvenir = null,
     declaredStatus = 'drawing',
-    landmarkMode = 'snapshot',
+    landmarkMode = 'states',
     baseAsset = null,
     growthAssets = [],
     stageReveals = [],
@@ -81,25 +132,30 @@
         declaredStatus: 'not-applicable',
         landmarkMode: null,
         baseAsset: null,
+        stateAssets: [],
         stages: [],
         souvenir: null,
         mobilePreview: null,
         regressionTest: null
       });
     }
+    const stages = LESSON_STAGE_IDS.map((progressId, index) => ({
+      progressId,
+      growthAsset: growthAssets[index] || null,
+      revealTitle: stageReveals[index]?.title || null,
+      revealCopy: stageReveals[index]?.copy || null,
+      soundAsset: stageReveals[index]?.soundAsset || null
+    }));
     return deepFreeze({
       districtId: LAUNCH_DISTRICT.id,
       v1Visible: true,
       declaredStatus,
       landmarkMode,
       baseAsset,
-      stages: LESSON_STAGE_IDS.map((progressId, index) => ({
-        progressId,
-        growthAsset: growthAssets[index] || null,
-        revealTitle: stageReveals[index]?.title || null,
-        revealCopy: stageReveals[index]?.copy || null,
-        soundAsset: stageReveals[index]?.soundAsset || null
-      })),
+      stateAssets: declaredStatus === 'published' && landmarkMode === 'states'
+        ? createLandmarkStateAssets(`lesson${lesson}`, stages.length)
+        : [],
+      stages,
       souvenir,
       mobilePreview,
       regressionTest
@@ -109,26 +165,30 @@
   function createSpecialMap({
     souvenir = null,
     declaredStatus = 'drawing',
-    landmarkMode = 'layers',
+    landmarkMode = 'states',
     baseAsset = null,
     growthAssets = [],
     stageReveals = [],
     mobilePreview = null,
     regressionTest = null
   } = {}) {
+    const stages = SOUND_STAGE_IDS.map((progressId, index) => ({
+      progressId,
+      growthAsset: growthAssets[index] || null,
+      revealTitle: stageReveals[index]?.title || null,
+      revealCopy: stageReveals[index]?.copy || null,
+      soundAsset: stageReveals[index]?.soundAsset || null
+    }));
     return deepFreeze({
       districtId: LAUNCH_DISTRICT.id,
       v1Visible: true,
       declaredStatus,
       landmarkMode,
       baseAsset,
-      stages: SOUND_STAGE_IDS.map((progressId, index) => ({
-        progressId,
-        growthAsset: growthAssets[index] || null,
-        revealTitle: stageReveals[index]?.title || null,
-        revealCopy: stageReveals[index]?.copy || null,
-        soundAsset: stageReveals[index]?.soundAsset || null
-      })),
+      stateAssets: declaredStatus === 'published' && landmarkMode === 'states'
+        ? createLandmarkStateAssets('soundmark', stages.length)
+        : [],
+      stages,
       souvenir,
       mobilePreview,
       regressionTest
@@ -243,7 +303,7 @@
       },
       mapPublication: {
         declaredStatus: 'published',
-        landmarkMode: 'layers',
+        landmarkMode: 'states',
         baseAsset: 'assets/adventure-map/lesson49/landmark-base.png',
         growthAssets: [
           'assets/adventure-map/lesson49/growth-01-awning.png',
@@ -331,7 +391,7 @@
       },
       mapPublication: {
         declaredStatus: 'published',
-        landmarkMode: 'layers',
+        landmarkMode: 'states',
         baseAsset: 'assets/adventure-map/lesson50/landmark-base.png',
         growthAssets: [
           'assets/adventure-map/lesson50/growth-01-garden.png',
@@ -368,7 +428,7 @@
       },
       mapPublication: {
         declaredStatus: 'published',
-        landmarkMode: 'layers',
+        landmarkMode: 'states',
         baseAsset: 'assets/adventure-map/lesson51/landmark-base.png',
         growthAssets: [
           'assets/adventure-map/lesson51/growth-01-weather.png',
@@ -402,7 +462,7 @@
         asset: 'assets/adventure-map/lesson52/globe-compass.png'
       },
       mapPublication: {
-        declaredStatus: 'published', landmarkMode: 'layers',
+        declaredStatus: 'published', landmarkMode: 'states',
         baseAsset: 'assets/adventure-map/lesson52/landmark-base.png',
         growthAssets: [
           'assets/adventure-map/lesson52/growth-01-departures.png',
@@ -436,7 +496,7 @@
         asset: 'assets/adventure-map/lesson53/weather-broadcaster-crest.png'
       },
       mapPublication: {
-        declaredStatus: 'published', landmarkMode: 'layers',
+        declaredStatus: 'published', landmarkMode: 'states',
         baseAsset: 'assets/adventure-map/lesson53/landmark-base.png',
         growthAssets: [
           'assets/adventure-map/lesson53/growth-01-weather-vane.png',
@@ -470,7 +530,7 @@
         asset: 'assets/adventure-map/lesson54/compass-wave-crest.png'
       },
       mapPublication: {
-        declaredStatus: 'published', landmarkMode: 'layers',
+        declaredStatus: 'published', landmarkMode: 'states',
         baseAsset: 'assets/adventure-map/lesson54/landmark-base.png',
         growthAssets: [
           'assets/adventure-map/lesson54/growth-01-globe.png',
@@ -578,6 +638,8 @@
     const progressIds = Array.isArray(course.progress?.ids) ? course.progress.ids : [];
     const stages = Array.isArray(course.map.stages) ? course.map.stages : [];
     const growthAssets = stages.map(stage => stage?.growthAsset);
+    const stateAssets = Array.isArray(course.map.stateAssets) ? course.map.stateAssets : [];
+    const statePaths = stateAssets.flatMap(landmarkStatePaths);
     const checklist = {
       coursePage: course.courseStatus === 'published' &&
         isPublicRoute(course.route) && isRelativePublicPath(course.entry),
@@ -588,23 +650,28 @@
         )),
       stageMapping: stages.length === progressIds.length && stages.length > 0 &&
         stages.every((stage, index) => stage?.progressId === progressIds[index]),
-      renderingMode: course.map.landmarkMode === 'layers',
-      baseLandmark: isMapImagePath(course.map.baseAsset),
-      growthLayers: stages.length === progressIds.length &&
+      renderingMode: course.map.landmarkMode === 'states',
+      authoringSources: isMapImagePath(course.map.baseAsset) &&
+        stages.length === progressIds.length &&
         growthAssets.every(isMapImagePath) &&
         new Set(growthAssets).size === growthAssets.length &&
         !growthAssets.includes(course.map.baseAsset),
+      stateSnapshots: stateAssets.length === stages.length + 1 &&
+        stateAssets.every((state, index) => isLandmarkStateAsset(state, index)) &&
+        new Set(statePaths).size === statePaths.length,
       revealCopy: stages.every(stage => (
         typeof stage?.revealTitle === 'string' && stage.revealTitle.trim() &&
         typeof stage?.revealCopy === 'string' && stage.revealCopy.trim()
       )),
       souvenir: isMapImagePath(course.map.souvenir?.asset) &&
         course.map.souvenir.asset !== course.map.baseAsset &&
-        !growthAssets.includes(course.map.souvenir.asset),
+        !growthAssets.includes(course.map.souvenir.asset) &&
+        !statePaths.includes(course.map.souvenir.asset),
       mobilePreview: isMapImagePath(course.map.mobilePreview) &&
         course.map.mobilePreview !== course.map.baseAsset &&
         course.map.mobilePreview !== course.map.souvenir?.asset &&
-        !growthAssets.includes(course.map.mobilePreview),
+        !growthAssets.includes(course.map.mobilePreview) &&
+        !statePaths.includes(course.map.mobilePreview),
       regressionVerification: isRegressionTestPath(course.map.regressionTest)
     };
     const missing = Object.entries(checklist)
@@ -636,6 +703,7 @@
       map.declaredStatus === 'not-applicable' &&
       map.landmarkMode === null &&
       map.baseAsset === null &&
+      Array.isArray(map.stateAssets) && map.stateAssets.length === 0 &&
       Array.isArray(map.stages) && map.stages.length === 0 &&
       map.souvenir === null &&
       map.mobilePreview === null &&
@@ -857,6 +925,7 @@
   assertValidCatalog(COURSES);
 
   return Object.freeze({
+    MAP_STATE_VERSION,
     DISTRICTS,
     LAUNCH_DISTRICT,
     COURSES,
@@ -866,6 +935,7 @@
     PRESENTATION_COURSES,
     createLessonMap,
     createSpecialMap,
+    mapStateAssetUrl,
     requirePublishedCourse,
     assessLearningLocation,
     assessClassroomPresentation,

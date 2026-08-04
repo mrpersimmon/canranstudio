@@ -1,56 +1,35 @@
 # Lesson 51 landmark assets
 
-This folder contains the approved layered landmark set for Lesson 51「希腊四季之旅」. The catalog, map renderer, and shared growth reveal use the same base plus independent completed-stage layers. Lesson 49 now follows the same layered contract.
+Lesson 51「希腊四季之旅」是冒险地图的正式美术品质母版。运行时只使用 `states/` 中的完整累计快照，不再把 `landmark-base.png` 与 `growth-*.png` 叠加。
 
-## Rendering order
+## 正式状态
 
-Render every file on the same fixed `1024 × 1024` canvas without per-file cropping or automatic fitting:
+所有正式状态均为固定 `1024 × 1024` RGBA 画布：
 
-1. `landmark-base.png` — quiet Greek coastal climate garden with an ivory temple and blue-domed pavilion;
-2. `growth-01-weather.png` — weather instrument for「单词行囊」;
-3. `growth-02-theatre.png` — semicircular dialogue theatre for「课文剧场」;
-4. `growth-03-seasons.png` — four Mediterranean seasonal planting clusters for「月份归队」;
-5. `growth-04-sundial.png` — twelve-part month sundial and three-step frequency marker for「频率阶梯」;
-6. `growth-05-celebration.png` — blue-and-white bunting, fountain, and warm lanterns for「导游考核」.
+1. `states/state-0.png`：初始希腊花园；
+2. `states/state-1.png`：蓝顶观测亭安装天气仪；
+3. `states/state-2.png`：花园右侧建成蓝白露天剧场；
+4. `states/state-3.png`：四季花园开花；
+5. `states/state-4.png`：中央石路嵌入月份日晷；
+6. `states/state-5.png`：喷泉、暖灯与蓝白庆典布置完成。
 
-`four-seasons-guide-compass.png` is the permanent story souvenir. It appears only after all five stages are complete and is intentionally absent from `growth-05-celebration.png`.
+每张都是可单独加载的完整成图，但六张绝不是分别生成：它们来自同一张锁定母版的连续局部编辑。建筑、道路、围墙、镜头、比例与画布不依赖 CSS 或 JavaScript 合成。地图只加载当前一张；成就提示只在相邻两张完整状态之间切换。
 
-`mobile-preview.png` is the fixed-size cumulative preview used by the map recommendation card. It is composited from the base and all five approved layers, and is not used as a growth state.
+`states/manifest.json` 记录无损 PNG 与 512/768/1024 三档 AVIF、WebP 派生图。运行 `npm run art:build-states -- --course lesson51` 只验证现有完整母图并生成派生格式，禁止重新组合旧图层。
 
-## ImageGen prompt set
+## 美术来源与弃用资产
 
-All images were generated with the built-in ImageGen path. The approved visual anchor is `docs/designs/adventure-map/lesson51-dual-state-anchor.png`; its complete prompt is recorded in `docs/designs/adventure-map/lesson51-dual-state-anchor-prompt-v1.md`. The Lesson 49 production set supplied the shared asset contract and watercolor treatment.
+- 正式视觉锚点：`docs/designs/adventure-map/lesson51-dual-state-anchor.png`；
+- 正式审查表：`docs/designs/adventure-map/lesson51-state-snapshots-contact-sheet.png`；
+- 历史路径 `docs/designs/adventure-map/lesson51-growth-contact-sheet.png` 现在由同一构建步骤同步为正式审查表，旧错位拼图不得回流；
+- 永久纪念：`four-seasons-guide-compass.png`，始终独立于地标状态；
+- `landmark-base.png`、`growth-*.png` 与旧 `mobile-preview.png` 仅保留为历史美术过程文件，不得由地图或成就提示加载。
 
-Shared prompt contract:
+## 验收门
 
-- children's storybook watercolor and gouache with restrained brown ink contours;
-- Aegean blue, sun-warmed ivory limestone, olive green, muted terracotta, and antique gold;
-- slightly elevated three-quarter view with consistent warm Mediterranean daylight;
-- one requested asset group only on a perfectly uniform `#ff00ff` background;
-- no text, letters, numbers, people, characters, UI, logos, watermarks, cast shadows, or unrelated growth milestones;
-- the base keeps the cream die-cut outer silhouette; incremental layers do not keep independent cream sticker borders.
-
-Asset-specific requests:
-
-- Base: recreate only the unstarted left climate garden from the approved anchor.
-- Layer 1: isolate an antique-brass sun, wind, cloud, and moon weather instrument above the blue dome.
-- Layer 2: isolate one low semicircular limestone theatre with restrained blue tile accents.
-- Layer 3: isolate four separated spring, summer, autumn, and mild-winter Mediterranean planting clusters.
-- Layer 4: isolate a twelve-part blue-and-ivory sundial mosaic with a compact three-step frequency marker.
-- Layer 5: isolate blue-and-white bunting, a modest fountain, and four warm lantern posts; do not include the souvenir.
-- Souvenir: isolate one gold and Aegean-blue guide compass with four seasonal emblems, olive branches, and a blue-and-white ribbon.
-
-## Post-processing and checks
-
-The generated chroma-key sources were converted with the installed ImageGen `remove_chroma_key.py` helper using border auto-key sampling, soft matte, and despill. The isolated components were proportionally scaled and positioned on identical canvases. Independent cream component borders were removed locally so the layers integrate with the base instead of appearing as separate stickers.
-
-Validation confirmed:
-
-- every runtime file is `1024 × 1024` RGBA;
-- all four corners are fully transparent;
-- no visible magenta-like pixels remain;
-- every visible bounding box remains inside the fixed canvas;
-- the six cumulative states stay coherent and readable at contact-sheet/mobile-thumbnail scale;
-- the guide compass remains a separate asset and is not baked into any growth layer.
-
-The visual QA sheet is `docs/designs/adventure-map/lesson51-growth-contact-sheet.png`, ordered left-to-right as states 0–2 on the first row and states 3–5 on the second row.
+- 六张图的神庙、蓝顶、入口台阶与外围石墙锚点稳定；
+- 天气仪必须从 `state-1` 起与蓝顶物理连接，不得悬浮；
+- 每一步只出现本阶段内容，不能误删剧场蓝色坐席等既有结构；
+- 四角透明、无可见色键残留、无裁切；
+- 手机优先加载 AVIF/WebP，PNG 只作兼容回退；
+- `tests/unit/landmark-state-assets.test.js` 必须通过几何锚点与资源契约检查。

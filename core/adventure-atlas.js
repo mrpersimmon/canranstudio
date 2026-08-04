@@ -48,11 +48,11 @@
       const pendingMapChanges = published
         ? orderedProfileStages(course, 'pendingMapChanges', profile).filter(id => completedSet.has(id))
         : [];
-      const visibleGrowthAssets = published
-        ? course.map.stages.filter(stage => completedSet.has(stage.progressId)).map(stage => stage.growthAsset)
-        : [];
       const completedStageCount = completedIds.length;
       const totalStageCount = Array.isArray(course.map?.stages) ? course.map.stages.length : 0;
+      const landmarkAsset = published
+        ? course.map.stateAssets?.[Math.min(completedStageCount, totalStageCount)] || null
+        : null;
       const progressState = !published
         ? 'drawing'
         : completedStageCount === 0
@@ -70,11 +70,10 @@
         route: publication.route,
         recommendable: publication.recommendable,
         landmarkMode: published ? course.map.landmarkMode : null,
-        baseAsset: published ? course.map.baseAsset : null,
-        landmarkAsset: null,
+        baseAsset: null,
+        landmarkAsset,
         mobilePreview: published ? course.map.mobilePreview : null,
         completedStageIds: completedIds,
-        visibleGrowthAssets,
         completedStageCount,
         totalStageCount,
         progressState,

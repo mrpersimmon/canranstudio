@@ -10,7 +10,7 @@ A pleasant climate 宜人的气候 · 互动闯关课件
 5. 导游考核：8 题小测验，过关领星星证书
 
 ## 语音方案（任意浏览器可听）
-- 优先播放 `audio/<slug>.mp3` 预录音频（edge-tts 英音：Hans=RyanNeural 男声，Dimitri=SoniaNeural 女声）
+- 优先播放 `audio/<slug>.mp3` 预录音频（edge-tts 英音：Hans=RyanNeural 男声，Dimitri=SoniaNeural 女声；课文剧场 16 句使用 `-25%` 儿童友好语速）
 - 失败时静默回退到浏览器 speechSynthesis（优先 en-GB 语音）
 - slug 规则：`text.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'')`
 

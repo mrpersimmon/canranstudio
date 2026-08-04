@@ -5,8 +5,15 @@ const { test, expect } = require('@playwright/test');
 const PROFILE_KEY = 'canran:adventure-profile:v1';
 
 test('first persisted stage completion reveals once, blocks event-through, and closes anywhere after the gate', async ({ page }) => {
+  const stateRequests = [];
+  page.on('request', request => {
+    if (/\/lesson49\/states\/state-1-(?:512|768|1024)\.avif\?v=atlas-/.test(request.url())) {
+      stateRequests.push(request.url());
+    }
+  });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/lesson49/');
+  await expect.poll(() => stateRequests.length).toBe(1);
 
   await page.evaluate(() => window.eval('award("l1", 1)'));
   const reveal = page.locator('.growth-reveal');
@@ -15,9 +22,15 @@ test('first persisted stage completion reveals once, blocks event-through, and c
   await expect(reveal).toContainText('红白遮阳棚');
   await expect(reveal).toContainText('肉店挂上了红白遮阳棚');
   await expect(reveal.locator('button')).toHaveCount(0);
-  await expect(reveal.locator('.growth-reveal__layer')).toHaveCount(2);
-  await expect(reveal.locator('.growth-reveal__layer--new')).toHaveAttribute(
-    'src', '/assets/adventure-map/lesson49/growth-01-awning.png'
+  await expect(reveal.locator('.growth-reveal__snapshot')).toHaveCount(2);
+  await expect.poll(() => reveal.locator('.growth-reveal__snapshot-image').evaluateAll(images => (
+    images.every(image => image.complete && image.naturalWidth > 0)
+  ))).toBe(true);
+  await expect(reveal.locator('.growth-reveal__snapshot--before img')).toHaveAttribute(
+    'src', /\/assets\/adventure-map\/lesson49\/states\/state-0\.png\?v=atlas-/
+  );
+  await expect(reveal.locator('.growth-reveal__snapshot--after img')).toHaveAttribute(
+    'src', /\/assets\/adventure-map\/lesson49\/states\/state-1\.png\?v=atlas-/
   );
   expect(await page.evaluate(() => document.body.style.overflow)).toBe('hidden');
 
@@ -58,7 +71,10 @@ test('fifth stage adds the completion stamp and souvenir, then the map shows one
   await expect(reveal).toHaveClass(/growth-reveal--final/);
   await expect(reveal.locator('.growth-reveal__stamp')).toHaveText('地点完成');
   await expect(reveal.locator('.growth-reveal__souvenir')).toContainText('永久纪念 · 食物篮子');
-  await expect(reveal.locator('.growth-reveal__layer')).toHaveCount(6);
+  await expect(reveal.locator('.growth-reveal__snapshot')).toHaveCount(2);
+  await expect(reveal.locator('.growth-reveal__snapshot--after img')).toHaveAttribute(
+    'src', /\/assets\/adventure-map\/lesson49\/states\/state-5\.png\?v=atlas-/
+  );
 
   await page.waitForTimeout(720);
   await page.keyboard.press('Escape');
@@ -68,7 +84,7 @@ test('fifth stage adds the completion stamp and souvenir, then the map shows one
   await expect(page.locator('#currentDistrict')).toBeVisible();
   await expect(page.locator('#mapUpdateToast')).toContainText('地点完成');
   await expect(page.locator('[data-location-id="lesson49"] [data-souvenir-id="food-basket"]')).toBeVisible();
-  await expect(page.locator('[data-location-id="lesson49"] [data-landmark-layer="growth"]')).toHaveCount(5);
+  await expect(page.locator('[data-location-id="lesson49"] [data-landmark-snapshot="5"]')).toHaveCount(1);
   await expect(page.locator('#mapUpdateToast')).toBeHidden({ timeout: 4_000 });
   await page.reload();
   await expect(page.locator('#mapUpdateToast')).toBeHidden();

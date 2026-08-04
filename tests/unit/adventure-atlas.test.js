@@ -17,7 +17,7 @@ function profile(overrides = {}) {
   };
 }
 
-test('only complete publication contracts become visible layered landmarks', () => {
+test('only complete publication contracts become visible single-state landmarks', () => {
   const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
   const lesson55 = catalog.COURSES.find(course => course.id === 'lesson55');
   const [published, drawing] = atlas.buildLocationModels(
@@ -26,14 +26,16 @@ test('only complete publication contracts become visible layered landmarks', () 
   );
 
   assert.equal(published.status, 'published');
-  assert.equal(published.landmarkMode, 'layers');
-  assert.equal(published.baseAsset, 'assets/adventure-map/lesson49/landmark-base.png');
-  assert.equal(published.landmarkAsset, null);
+  assert.equal(published.landmarkMode, 'states');
+  assert.equal(published.baseAsset, null);
+  assert.equal(published.landmarkAsset.stageCount, 2);
+  assert.equal(published.landmarkAsset.png, 'assets/adventure-map/lesson49/states/state-2.png');
+  assert.equal(
+    published.landmarkAsset.variants[0].avif,
+    'assets/adventure-map/lesson49/states/state-2-512.avif'
+  );
   assert.deepEqual(published.completedStageIds, ['l2', 'l4']);
-  assert.deepEqual(published.visibleGrowthAssets, [
-    'assets/adventure-map/lesson49/growth-02-display.png',
-    'assets/adventure-map/lesson49/growth-04-delivery.png'
-  ]);
+  assert.equal('visibleGrowthAssets' in published, false);
   assert.deepEqual(published.progressStamps.map(stamp => stamp.earned), [false, true, false, true, false]);
   assert.equal(drawing.status, 'drawing');
   assert.equal(drawing.route, null);

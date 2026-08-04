@@ -666,7 +666,7 @@ const soundLoaded=CanranCore.storage.loadProgress({
 let soundRatings=soundLoaded.progress.ratings;
 CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
 const soundmarkGrowthReveal=CanranCore.growthReveal.create({
-  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,courseId:'soundmark',
   onStopAudio:()=>{soundmarkAudio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 function soundTotal(){return CanranCore.progress.totalRatings(soundRatings,SOUND_IDS);}
@@ -697,7 +697,7 @@ function awardSoundmark(id,rating){
     storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
     courseId:'soundmark',stageId:id,previousRating,nextRating:soundRatings[id],progressPersisted:saved.persisted
   });
-  if(growth.shouldReveal)soundmarkGrowthReveal.open(growth.reveal);
+  if(growth.shouldReveal)void soundmarkGrowthReveal.openWhenReady(growth.reveal);
 }
 document.getElementById('certDate').textContent = '日期：' + new Date().toLocaleDateString('zh-CN');
 

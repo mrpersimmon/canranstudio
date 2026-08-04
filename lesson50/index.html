@@ -333,6 +333,7 @@ footer{text-align:center;padding:30px 10px calc(50px + env(safe-area-inset-botto
   .story-souvenir{width:78px;height:78px}
   .story-body{font-size:15px}
   .cover-mission{font-size:17px}
+  .startBtn-wrap{animation:none}
   #certCard{padding:22px 14px}
   #certCard h3{font-size:25px}
   #certNameOut{font-size:27px}
@@ -1077,7 +1078,7 @@ const l50Loaded=CanranCore.storage.loadProgress({
 let stars=l50Loaded.progress.ratings;
 CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
 const l50GrowthReveal=CanranCore.growthReveal.create({
-  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,courseId:'lesson50',
   onStopAudio:()=>{lesson50Audio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 function getStar(l){return stars[l];}
@@ -1126,7 +1127,7 @@ function award(level,rating){
     storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
     courseId:'lesson50',stageId:level,previousRating,nextRating:stars[level],progressPersisted:saved.persisted
   });
-  if(growth.shouldReveal)l50GrowthReveal.open(growth.reveal);
+  if(growth.shouldReveal)void l50GrowthReveal.openWhenReady(growth.reveal);
 }
 
 /* ================= 撒花 ================= */

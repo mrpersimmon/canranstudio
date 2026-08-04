@@ -58,7 +58,7 @@ test('course catalog is the complete immutable contract for lessons and special 
       },
       districtId: 'first-book-49-60',
       declaredStatus: 'published',
-      landmarkMode: 'layers',
+      landmarkMode: 'states',
       baseAsset: 'assets/adventure-map/lesson49/landmark-base.png',
       stages: [
         {
@@ -116,7 +116,7 @@ test('course catalog is the complete immutable contract for lessons and special 
       regressionTest: lesson51.map.regressionTest
     },
     {
-      landmarkMode: 'layers',
+      landmarkMode: 'states',
       baseAsset: 'assets/adventure-map/lesson51/landmark-base.png',
       growthAssets: [
         'assets/adventure-map/lesson51/growth-01-weather.png',
@@ -134,6 +134,17 @@ test('course catalog is the complete immutable contract for lessons and special 
       regressionTest: 'tests/e2e/lesson51-map.spec.js'
     }
   );
+  assert.equal(lesson51.map.stateAssets.length, 6);
+  assert.deepEqual(lesson51.map.stateAssets[5], {
+    stageCount: 5,
+    version: catalog.MAP_STATE_VERSION,
+    png: 'assets/adventure-map/lesson51/states/state-5.png',
+    variants: [512, 768, 1024].map(width => ({
+      width,
+      avif: `assets/adventure-map/lesson51/states/state-5-${width}.avif`,
+      webp: `assets/adventure-map/lesson51/states/state-5-${width}.webp`
+    }))
+  });
 
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
   assert.deepEqual(soundmark.progress.ids, ['vs', 'g1', 'g2', 'g3']);
@@ -142,6 +153,20 @@ test('course catalog is the complete immutable contract for lessons and special 
   assert.equal(soundmark.map.stages.length, 4);
 
   assertDeepFrozen(catalog.COURSES);
+});
+
+test('landmark state URLs carry one immutable content version', () => {
+  const state = catalog.requirePublishedCourse('lesson51').map.stateAssets[5];
+  assert.match(catalog.MAP_STATE_VERSION, /^[a-z0-9][a-z0-9-]+$/);
+  assert.equal(
+    catalog.mapStateAssetUrl(state.png, state),
+    `/assets/adventure-map/lesson51/states/state-5.png?v=${catalog.MAP_STATE_VERSION}`
+  );
+  assert.equal(
+    catalog.mapStateAssetUrl(state.variants[2].avif, state),
+    `/assets/adventure-map/lesson51/states/state-5-1024.avif?v=${catalog.MAP_STATE_VERSION}`
+  );
+  assert.throws(() => catalog.mapStateAssetUrl('../private.png', state), /invalid map state path/);
 });
 
 test('world atlas declares twelve immutable districts with one V1 entrance', () => {
@@ -198,8 +223,8 @@ test('learning locations stay drawing and non-navigable until the full publicati
       prerecordedAudio: true,
       stageMapping: true,
       renderingMode: true,
-      baseLandmark: true,
-      growthLayers: true,
+      authoringSources: true,
+      stateSnapshots: true,
       revealCopy: true,
       souvenir: true,
       mobilePreview: true,
@@ -236,13 +261,16 @@ test('learning locations stay drawing and non-navigable until the full publicati
   forged.map.mobilePreview = 'README.md';
   forged.map.regressionTest = 'README.md';
   assert.deepEqual(catalog.assessLearningLocation(forged).missing, [
-    'baseLandmark',
-    'growthLayers',
+    'authoringSources',
     'souvenir',
     'mobilePreview',
     'regressionVerification'
   ]);
   assert.equal(catalog.assessLearningLocation(forged).status, 'drawing');
+
+  const missingSnapshot = structuredClone(lesson49);
+  missingSnapshot.map.stateAssets.pop();
+  assert.deepEqual(catalog.assessLearningLocation(missingSnapshot).missing, ['stateSnapshots']);
 
   const unsupportedRendering = structuredClone(lesson49);
   unsupportedRendering.map.landmarkMode = 'mixed';
@@ -329,6 +357,7 @@ test('lesson map creation and directory status keep future courses outside V1', 
     declaredStatus: 'not-applicable',
     landmarkMode: null,
     baseAsset: null,
+    stateAssets: [],
     stages: [],
     souvenir: null,
     mobilePreview: null,
