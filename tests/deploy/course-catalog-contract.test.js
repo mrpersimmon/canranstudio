@@ -268,6 +268,7 @@ test('published classroom presentation requires controls, same-origin recordings
     path.join(ROOT, course.presentation.steps[0].audioAsset),
     path.join(root, course.presentation.steps[0].audioAsset)
   );
+  await writePublishedMapContract(root, course);
 
   await assert.rejects(
     assertCourseCatalogContract({ root, courses: [course] }),

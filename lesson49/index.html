@@ -368,6 +368,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
   *{animation:none!important;transition:none!important}
 }
 </style>
+<link rel="stylesheet" href="/core/growth-reveal.css">
 </head>
 <body>
 <div id="confetti"></div>
@@ -375,7 +376,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 <!-- ===== 顶部导航 ===== -->
 <header id="topbar">
   <div class="wrap">
-    <a id="logo" href="/" aria-label="返回世界地图">🥩 肉店大冒险</a>
+    <a id="logo" href="/?district=first-book-49-60&amp;focus=lesson49" aria-label="返回肉店在世界地图的位置">🥩 肉店大冒险</a>
     <div id="starBox" title="已获星星">
       <span id="starCountWrap">⭐ <span id="starCount">0</span>/15</span>
     </div>
@@ -825,6 +826,8 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 <script src="/core/course-catalog.js"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/device-profile.js"></script>
+<script src="/core/growth-reveal.js"></script>
 <script src="/core/certificate-gate.js"></script>
 <script src="/core/audio-player.js"></script>
 <script>
@@ -1014,6 +1017,12 @@ const l49Loaded=CanranCore.storage.loadProgress({
   legacyMode:COURSE_PROGRESS.legacyMode
 });
 let stars=l49Loaded.progress.ratings;
+CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
+const l49GrowthReveal=CanranCore.growthReveal.create({
+  storage:localStorage,
+  courses:CanranCore.courseCatalog.COURSES,
+  onStopAudio:()=>{lesson49Audio.stop();try{speechSynthesis.cancel()}catch{}}
+});
 function getStar(l){return stars[l];}
 function starStr(n){return '★'.repeat(n)+'☆'.repeat(3-n);}
 function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
@@ -1039,6 +1048,7 @@ function persistStars(){
     ids:LVLS
   });
   stars=saved.progress.ratings;
+  return saved;
 }
 function renderStars(){
   LVLS.forEach(l=>{const el=document.getElementById('st-'+l);if(el)el.textContent=starStr(getStar(l));});
@@ -1047,10 +1057,16 @@ function renderStars(){
   renderL49CertificateGate();
 }
 function award(l,n){
+  const previousRating=CanranCore.storage.clampRating(stars[l]);
   const awarded=CanranCore.progress.awardRating(stars,l,n);
   if(!awarded.changed)return;
   stars=awarded.ratings;
-  persistStars();renderStars();sndStar();
+  const saved=persistStars();renderStars();sndStar();
+  const growth=CanranCore.growthReveal.recordStageResult({
+    storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+    courseId:'lesson49',stageId:l,previousRating,nextRating:stars[l],progressPersisted:saved.persisted
+  });
+  if(growth.shouldReveal)l49GrowthReveal.open(growth.reveal);
 }
 
 /* ================= 撒花 ================= */
@@ -2164,7 +2180,7 @@ document.querySelectorAll('#coursenav .tab.disabled').forEach(function(el){
 <!-- ===== 底部 Tab 栏：上一课 / 世界地图 / 下一课 ===== -->
 <nav id="coursenav" aria-label="课程导航">
   <span class="tab disabled" aria-disabled="true"><span class="ti">🔒</span><span>◀ 上一课</span><small>敬请期待</small></span>
-  <a class="tab" href="/"><span class="ti">🗺️</span><span>世界地图</span><small>选课程</small></a>
+  <a class="tab" href="/?district=first-book-49-60&amp;focus=lesson49"><span class="ti">🗺️</span><span>世界地图</span><small>看肉店</small></a>
   <a class="tab" href="/lesson50/"><span class="ti">🤴</span><span>下一课 ▶</span><small>L50 小王子</small></a>
 </nav>
 <div id="cnToast" role="status">🔒 新课程正在建造中，敬请期待！</div>

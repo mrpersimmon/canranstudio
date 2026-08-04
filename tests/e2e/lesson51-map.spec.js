@@ -27,7 +27,7 @@ async function seedCompletedStages(page, completedStages) {
 test('Lesson 51 keeps one fixed base and cumulatively reveals five independent growth layers', async ({ page }) => {
   test.setTimeout(90_000);
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
   const location = page.locator('[data-map-lesson="51"]');
   let firstStackBox;
 
@@ -59,14 +59,14 @@ test('Lesson 51 keeps one fixed base and cumulatively reveals five independent g
     } else {
       await expect(location.locator('[data-souvenir-id="four-seasons-guide-compass"]')).toBeVisible();
       await expect(location.getByRole('link')).toHaveAccessibleName(
-        /地点完成.*5 \/ 5.*永久纪念.*四季导游罗盘/
+        /地点完成.*5\/5.*永久纪念.*四季导游罗盘/
       );
     }
   }
 });
 
 test('Lesson 51 layered landmark stays usable on phone and tablet and opens the real course', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
   await seedCompletedStages(page, STAGES.slice(0, 3));
 
   for (const viewport of [

@@ -774,3 +774,52 @@ test('Lesson 50 rolls back a partially appended preview and revokes once', async
     revokedUrls: ['blob:l50-failed-1']
   });
 });
+
+test('atlas keeps one keyboard path through world, district, settings, and back', async ({ page }) => {
+  await page.goto('/');
+
+  await expect(page.locator('.distant-region')).toHaveCount(11);
+  expect(await page.locator('.distant-region').evaluateAll(regions =>
+    regions.every(region => region.getAttribute('aria-hidden') === 'true')
+  )).toBe(true);
+  const entrance = page.getByRole('button', { name: '进入暖灯集市', exact: true });
+  await entrance.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#currentDistrictTitle')).toBeFocused();
+
+  const locations = page.locator('#districtLocations .published-location');
+  await expect(locations).toHaveCount(7);
+  for (const link of await locations.all()) {
+    await expect(link).toHaveAttribute('aria-label', /学习进度 \d\/\d/);
+  }
+
+  const settings = page.getByRole('button', { name: '设备冒险设置', exact: true });
+  await settings.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog', { name: '设备冒险设置', exact: true })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog', { name: '设备冒险设置', exact: true })).toBeHidden();
+
+  const back = page.getByRole('button', { name: '返回世界总览', exact: true });
+  await back.focus();
+  await page.keyboard.press('Enter');
+  await expect(entrance).toBeFocused();
+});
+
+test('growth reveal is a button-free keyboard-dismissible dialog and restores focus', async ({ page }) => {
+  await page.goto('/lesson49/');
+  const returnTarget = page.locator('#daDo');
+  await returnTarget.focus();
+  await page.evaluate(() => window.eval('award("l1", 1)'));
+
+  const reveal = page.locator('.growth-reveal');
+  await expect(reveal).toBeVisible();
+  await expect(reveal).toHaveAttribute('role', 'dialog');
+  await expect(reveal).toHaveAttribute('aria-modal', 'true');
+  await expect(reveal.locator('button')).toHaveCount(0);
+  await expect(reveal).toBeFocused();
+  await page.waitForTimeout(720);
+  await page.keyboard.press('Space');
+  await expect(reveal).toBeHidden();
+  await expect(returnTarget).toBeFocused();
+});

@@ -4,9 +4,14 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const catalog = require('../../core/course-catalog');
 const {
+  PROFILE_VERSION,
   PROFILE_KEY,
   hasSouvenir,
   initializeDeviceProfile,
+  recordStageCompletion,
+  markCourseRevealSeen,
+  recordLocationVisit,
+  consumeMapChanges,
   visitDistrict,
   restartAdventure
 } = require('../../core/device-profile');
@@ -23,13 +28,29 @@ const EMPTY_COMPLETED_STAGES = Object.freeze({
   lesson57: [],
   lesson58: [],
   lesson59: [],
-  lesson60: []
+  lesson60: [],
+  soundmark: []
 });
 
 function emptyCompletedStages() {
   return Object.fromEntries(
     Object.entries(EMPTY_COMPLETED_STAGES).map(([courseId, stages]) => [courseId, [...stages]])
   );
+}
+
+function emptyProfile(overrides = {}) {
+  const completedStages = emptyCompletedStages();
+  return {
+    version: 2,
+    currentDistrictId: null,
+    lastVisitedLocationId: null,
+    souvenirs: [],
+    completedStages,
+    courseRevealSeen: emptyCompletedStages(),
+    pendingMapChanges: emptyCompletedStages(),
+    mapChangeSeen: emptyCompletedStages(),
+    ...overrides
+  };
 }
 
 function memoryStorage(seed = {}) {
@@ -61,15 +82,20 @@ test('first device profile initialization inherits only proven stages and is ide
   const second = initializeDeviceProfile({ storage, courses: catalog.COURSES });
 
   assert.equal(first.persisted, true);
-  assert.deepEqual(first.profile, {
-    version: 1,
-    currentDistrictId: null,
-    souvenirs: [],
+  assert.deepEqual(first.profile, emptyProfile({
     completedStages: {
       ...emptyCompletedStages(),
       lesson49: ['l1', 'l2', 'l3', 'l5']
+    },
+    courseRevealSeen: {
+      ...emptyCompletedStages(),
+      lesson49: ['l1', 'l2', 'l3', 'l5']
+    },
+    mapChangeSeen: {
+      ...emptyCompletedStages(),
+      lesson49: ['l1', 'l2', 'l3', 'l5']
     }
-  });
+  }));
   assert.equal(storage.getItem(PROFILE_KEY), firstStored);
   assert.deepEqual(second.profile, first.profile);
 });
@@ -99,14 +125,7 @@ test('restart clears every catalog-owned record and preserves unrelated storage'
 
   assert.equal(result.cleared, true);
   assert.equal(result.persisted, true);
-  assert.deepEqual(JSON.parse(storage.getItem(PROFILE_KEY)), {
-    version: 1,
-    currentDistrictId: null,
-    souvenirs: [],
-    completedStages: {
-      ...emptyCompletedStages()
-    }
-  });
+  assert.deepEqual(JSON.parse(storage.getItem(PROFILE_KEY)), emptyProfile());
   assert.equal(storage.getItem('canran:l49:progress:v2'), null);
   assert.equal(storage.getItem('l49-stars-v1'), null);
   assert.equal(storage.getItem('canran:soundmark:progress:v2'), null);
@@ -207,4 +226,116 @@ test('visiting the launch district becomes the device return view without changi
   assert.equal(visited.profile.currentDistrictId, 'first-book-49-60');
   assert.deepEqual(visited.profile.completedStages, initialized.profile.completedStages);
   assert.equal(returned.profile.currentDistrictId, 'first-book-49-60');
+});
+
+test('v1 profile migrates to v2 without replaying historical growth reveals', () => {
+  const storage = memoryStorage({
+    [PROFILE_KEY]: JSON.stringify({
+      version: 1,
+      currentDistrictId: catalog.LAUNCH_DISTRICT.id,
+      souvenirs: ['food-basket'],
+      completedStages: { lesson49: ['l1', 'l2'] }
+    })
+  });
+
+  const result = initializeDeviceProfile({ storage, courses: catalog.COURSES });
+
+  assert.equal(PROFILE_VERSION, 2);
+  assert.equal(result.profile.version, 2);
+  assert.deepEqual(result.profile.completedStages.lesson49, ['l1', 'l2']);
+  assert.deepEqual(result.profile.courseRevealSeen.lesson49, ['l1', 'l2']);
+  assert.deepEqual(result.profile.mapChangeSeen.lesson49, ['l1', 'l2']);
+  assert.deepEqual(result.profile.pendingMapChanges.lesson49, []);
+  assert.equal(result.profile.lastVisitedLocationId, null);
+});
+
+test('only a persisted zero-to-positive stage transition creates one pending reveal', () => {
+  const storage = memoryStorage();
+  initializeDeviceProfile({ storage, courses: catalog.COURSES });
+
+  const first = recordStageCompletion({
+    storage,
+    courses: catalog.COURSES,
+    courseId: 'lesson49',
+    stageId: 'l1',
+    previousRating: 0,
+    nextRating: 2,
+    progressPersisted: true
+  });
+  const improved = recordStageCompletion({
+    storage,
+    courses: catalog.COURSES,
+    courseId: 'lesson49',
+    stageId: 'l1',
+    previousRating: 2,
+    nextRating: 3,
+    progressPersisted: true
+  });
+
+  assert.equal(first.shouldReveal, true);
+  assert.equal(first.firstCompletion, true);
+  assert.deepEqual(first.profile.pendingMapChanges.lesson49, ['l1']);
+  assert.equal(improved.shouldReveal, false);
+  assert.deepEqual(improved.profile.pendingMapChanges.lesson49, ['l1']);
+
+  const seen = markCourseRevealSeen({
+    storage,
+    courses: catalog.COURSES,
+    courseId: 'lesson49',
+    stageId: 'l1'
+  });
+  assert.deepEqual(seen.profile.courseRevealSeen.lesson49, ['l1']);
+});
+
+test('map changes merge in course order and are consumed once without losing progress', () => {
+  const storage = memoryStorage();
+  initializeDeviceProfile({ storage, courses: catalog.COURSES });
+  for (const stageId of ['l3', 'l1', 'l2']) {
+    recordStageCompletion({
+      storage,
+      courses: catalog.COURSES,
+      courseId: 'lesson49',
+      stageId,
+      previousRating: 0,
+      nextRating: 1,
+      progressPersisted: true
+    });
+  }
+  recordLocationVisit({ storage, courses: catalog.COURSES, courseId: 'lesson49' });
+
+  const first = consumeMapChanges({
+    storage,
+    courses: catalog.COURSES,
+    courseId: 'lesson49'
+  });
+  const second = consumeMapChanges({
+    storage,
+    courses: catalog.COURSES,
+    courseId: 'lesson49'
+  });
+
+  assert.deepEqual(first.consumedStageIds, ['l1', 'l2', 'l3']);
+  assert.equal(first.profile.lastVisitedLocationId, 'lesson49');
+  assert.deepEqual(first.profile.completedStages.lesson49, ['l1', 'l2', 'l3']);
+  assert.deepEqual(second.consumedStageIds, []);
+});
+
+test('unwritable storage never claims permanent landmark growth', () => {
+  const storage = memoryStorage();
+  initializeDeviceProfile({ storage, courses: catalog.COURSES });
+  storage.setItem = () => { throw new Error('quota'); };
+
+  const result = recordStageCompletion({
+    storage,
+    courses: catalog.COURSES,
+    courseId: 'lesson49',
+    stageId: 'l1',
+    previousRating: 0,
+    nextRating: 3,
+    progressPersisted: true
+  });
+
+  assert.equal(result.persisted, false);
+  assert.equal(result.shouldReveal, false);
+  assert.equal(result.firstCompletion, false);
 });

@@ -18,46 +18,41 @@
     return Object.freeze(value);
   }
 
-  function completedStageIds(course, profile) {
-    const completed = new Set(
-      Array.isArray(profile?.completedStages?.[course.id])
-        ? profile.completedStages[course.id]
-        : []
-    );
-    return course.map.stages
-      .map(stage => stage.progressId)
-      .filter(id => completed.has(id));
+  function stageIds(course) {
+    return Array.isArray(course?.map?.stages)
+      ? course.map.stages.map(stage => stage.progressId)
+      : [];
+  }
+
+  function orderedProfileStages(course, field, profile) {
+    const selected = new Set(Array.isArray(profile?.[field]?.[course.id])
+      ? profile[field][course.id]
+      : []);
+    return stageIds(course).filter(id => selected.has(id));
   }
 
   function ownedSouvenir(course, profile) {
     const id = course?.map?.souvenir?.id;
-    return typeof id === 'string' &&
-      Array.isArray(profile?.souvenirs) &&
-      profile.souvenirs.includes(id);
+    return typeof id === 'string' && Array.isArray(profile?.souvenirs) && profile.souvenirs.includes(id);
   }
 
   function buildLocationModels(courses, profile = null) {
     if (!catalogApi || !Array.isArray(courses)) return Object.freeze([]);
+    let publishedSlot = 0;
     return deepFreeze(courses.map((course, index) => {
       const publication = catalogApi.assessLearningLocation(course);
       const published = publication.status === 'published';
-      const completedIds = published ? completedStageIds(course, profile) : [];
+      if (published) publishedSlot += 1;
+      const completedIds = published ? orderedProfileStages(course, 'completedStages', profile) : [];
       const completedSet = new Set(completedIds);
+      const pendingMapChanges = published
+        ? orderedProfileStages(course, 'pendingMapChanges', profile).filter(id => completedSet.has(id))
+        : [];
       const visibleGrowthAssets = published
-        ? course.map.stages
-          .filter(stage => completedSet.has(stage.progressId))
-          .map(stage => stage.growthAsset)
+        ? course.map.stages.filter(stage => completedSet.has(stage.progressId)).map(stage => stage.growthAsset)
         : [];
       const completedStageCount = completedIds.length;
-      const totalStageCount = Array.isArray(course.map?.stages)
-        ? course.map.stages.length
-        : 0;
-      const landmarkMode = published ? course.map.landmarkMode : null;
-      const landmarkAsset = !published || landmarkMode === 'layers'
-        ? null
-        : completedStageCount === 0
-          ? course.map.baseAsset
-          : course.map.stages[completedStageCount - 1].growthAsset;
+      const totalStageCount = Array.isArray(course.map?.stages) ? course.map.stages.length : 0;
       const progressState = !published
         ? 'drawing'
         : completedStageCount === 0
@@ -67,34 +62,57 @@
             : 'growing';
       return {
         id: course.id,
+        kind: course.kind,
         lesson: course.lesson,
         title: course.courseStatus === 'published' ? course.title : '新地点',
-        slot: index + 1,
+        slot: published ? publishedSlot : index + 1,
         status: publication.status,
         route: publication.route,
         recommendable: publication.recommendable,
-        landmarkMode,
+        landmarkMode: published ? course.map.landmarkMode : null,
         baseAsset: published ? course.map.baseAsset : null,
-        landmarkAsset,
+        landmarkAsset: null,
         mobilePreview: published ? course.map.mobilePreview : null,
         completedStageIds: completedIds,
         visibleGrowthAssets,
         completedStageCount,
         totalStageCount,
         progressState,
-        souvenir: published && ownedSouvenir(course, profile)
-          ? course.map.souvenir
-          : null
+        progressStamps: published
+          ? course.map.stages.map(stage => ({ id: stage.progressId, earned: completedSet.has(stage.progressId) }))
+          : [],
+        pendingMapChanges,
+        pendingChangeCount: pendingMapChanges.length,
+        souvenir: published && ownedSouvenir(course, profile) ? course.map.souvenir : null
       };
     }));
   }
 
-  function selectRecommendedLocation(locations) {
+  function selectRecommendedLocation(locations, profile = null) {
     if (!Array.isArray(locations)) return null;
-    return locations.find(location => (
-      location.recommendable && location.progressState !== 'complete'
-    )) || locations.find(location => location.recommendable) || null;
+    const unfinished = locations.filter(location => (
+      location.kind === 'lesson' && location.recommendable && location.progressState !== 'complete'
+    ));
+    if (unfinished.length === 0) return null;
+    const recentId = profile?.lastVisitedLocationId;
+    const recent = unfinished.find(location => location.id === recentId);
+    if (recent) return recent;
+    return unfinished.find(location => location.progressState === 'ready') || unfinished[0] || null;
   }
 
-  return Object.freeze({ buildLocationModels, selectRecommendedLocation });
+  function buildMapChangeSummary(location) {
+    const stageIds = Array.isArray(location?.pendingMapChanges) ? location.pendingMapChanges : [];
+    if (!location?.id || stageIds.length === 0) return null;
+    const complete = location.progressState === 'complete' &&
+      location.progressStamps?.at(-1)?.earned === true;
+    return deepFreeze({
+      courseId: location.id,
+      stageIds: [...stageIds],
+      count: stageIds.length,
+      complete,
+      copy: complete ? '地点完成' : `这里新增了 ${stageIds.length} 处变化`
+    });
+  }
+
+  return Object.freeze({ buildLocationModels, selectRecommendedLocation, buildMapChangeSummary });
 });

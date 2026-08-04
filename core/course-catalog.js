@@ -70,6 +70,7 @@
     landmarkMode = 'snapshot',
     baseAsset = null,
     growthAssets = [],
+    stageReveals = [],
     mobilePreview = null,
     regressionTest = null
   } = {}) {
@@ -94,7 +95,39 @@
       baseAsset,
       stages: LESSON_STAGE_IDS.map((progressId, index) => ({
         progressId,
-        growthAsset: growthAssets[index] || null
+        growthAsset: growthAssets[index] || null,
+        revealTitle: stageReveals[index]?.title || null,
+        revealCopy: stageReveals[index]?.copy || null,
+        soundAsset: stageReveals[index]?.soundAsset || null
+      })),
+      souvenir,
+      mobilePreview,
+      regressionTest
+    });
+  }
+
+  function createSpecialMap({
+    souvenir = null,
+    declaredStatus = 'drawing',
+    landmarkMode = 'layers',
+    baseAsset = null,
+    growthAssets = [],
+    stageReveals = [],
+    mobilePreview = null,
+    regressionTest = null
+  } = {}) {
+    return deepFreeze({
+      districtId: LAUNCH_DISTRICT.id,
+      v1Visible: true,
+      declaredStatus,
+      landmarkMode,
+      baseAsset,
+      stages: SOUND_STAGE_IDS.map((progressId, index) => ({
+        progressId,
+        growthAsset: growthAssets[index] || null,
+        revealTitle: stageReveals[index]?.title || null,
+        revealCopy: stageReveals[index]?.copy || null,
+        soundAsset: stageReveals[index]?.soundAsset || null
       })),
       souvenir,
       mobilePreview,
@@ -210,10 +243,22 @@
       },
       mapPublication: {
         declaredStatus: 'published',
-        baseAsset: 'assets/adventure-map/lesson49/base.png',
-        growthAssets: LESSON_STAGE_IDS.map((_, index) => (
-          `assets/adventure-map/lesson49/growth-${index + 1}.png`
-        )),
+        landmarkMode: 'layers',
+        baseAsset: 'assets/adventure-map/lesson49/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/lesson49/growth-01-awning.png',
+          'assets/adventure-map/lesson49/growth-02-display.png',
+          'assets/adventure-map/lesson49/growth-03-sign.png',
+          'assets/adventure-map/lesson49/growth-04-delivery.png',
+          'assets/adventure-map/lesson49/growth-05-celebration.png'
+        ],
+        stageReveals: [
+          { title: '红白遮阳棚', copy: '肉店挂上了红白遮阳棚！' },
+          { title: '新鲜展示台', copy: '木台上摆好了新鲜肉品！' },
+          { title: '牛排招牌', copy: '门前挂上了会摇摆的牛排招牌！' },
+          { title: '送货小车', copy: '送货小车把木箱稳稳送到了门口！' },
+          { title: '暖灯庆典开张', copy: '彩旗和暖灯点亮了肉店，食物篮子也收藏进图鉴！' }
+        ],
         mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
         regressionTest: 'tests/e2e/lesson49-map.spec.js'
       },
@@ -278,7 +323,33 @@
       art: '/assets/home/lesson50-crown.png',
       tone: 'purple',
       legacyKey: 'l50-stars-v1',
-      legacyMode: 'ratings'
+      legacyMode: 'ratings',
+      souvenir: {
+        id: 'royal-vegetable-crest',
+        title: '皇家蔬菜徽章',
+        asset: 'assets/adventure-map/lesson50/royal-vegetable-crest.png'
+      },
+      mapPublication: {
+        declaredStatus: 'published',
+        landmarkMode: 'layers',
+        baseAsset: 'assets/adventure-map/lesson50/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/lesson50/growth-01-garden.png',
+          'assets/adventure-map/lesson50/growth-02-banquet.png',
+          'assets/adventure-map/lesson50/growth-03-weather-vane.png',
+          'assets/adventure-map/lesson50/growth-04-delivery.png',
+          'assets/adventure-map/lesson50/growth-05-celebration.png'
+        ],
+        stageReveals: [
+          { title: '皇家蔬菜园', copy: '城堡旁长出了豌豆、卷心菜和番茄！' },
+          { title: '健康长餐桌', copy: '宴会桌摆满了彩色蔬菜！' },
+          { title: '皇冠风向标', copy: '塔顶装上了闪亮的皇冠风向标！' },
+          { title: '蔬菜送货车', copy: '小车把新鲜蔬菜送到了城堡门口！' },
+          { title: '王国健康庆典', copy: '紫金彩旗和暖灯点亮城堡，皇家蔬菜徽章也收藏进图鉴！' }
+        ],
+        mobilePreview: 'assets/adventure-map/lesson50/mobile-preview.png',
+        regressionTest: 'tests/e2e/l50-assessment.spec.js'
+      }
     }),
     publishedLesson({
       lesson: 51,
@@ -306,6 +377,13 @@
           'assets/adventure-map/lesson51/growth-04-sundial.png',
           'assets/adventure-map/lesson51/growth-05-celebration.png'
         ],
+        stageReveals: [
+          { title: '天气观测台', copy: '蓝顶观测台装好了天气仪器！' },
+          { title: '露天小剧场', copy: '石阶中央变成了四季小剧场！' },
+          { title: '四季花园', copy: '花园里长出了代表四季的植物！' },
+          { title: '太阳时钟', copy: '广场中央亮起了一座太阳时钟！' },
+          { title: '希腊庆典', copy: '蓝白彩旗和灯火点亮了海湾，四季导游罗盘也收藏进图鉴！' }
+        ],
         mobilePreview: 'assets/adventure-map/lesson51/mobile-preview.png',
         regressionTest: 'tests/e2e/lesson51-map.spec.js'
       }
@@ -317,7 +395,32 @@
       description: '第一卷·欧美篇：走遍 12 个欧美国家，跟签证官学国家和国籍、听机场广播、玩盖章配对，成为环球小使者！',
       features: ['国家国籍', '机场广播', '盖章配对', '动词小尾巴', '海关考核'],
       art: '/assets/home/lesson52-passport.svg',
-      tone: 'blue'
+      tone: 'blue',
+      souvenir: {
+        id: 'globe-compass',
+        title: '环球罗盘',
+        asset: 'assets/adventure-map/lesson52/globe-compass.png'
+      },
+      mapPublication: {
+        declaredStatus: 'published', landmarkMode: 'layers',
+        baseAsset: 'assets/adventure-map/lesson52/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/lesson52/growth-01-departures.png',
+          'assets/adventure-map/lesson52/growth-02-airplane.png',
+          'assets/adventure-map/lesson52/growth-03-passport-stamps.png',
+          'assets/adventure-map/lesson52/growth-04-luggage.png',
+          'assets/adventure-map/lesson52/growth-05-celebration.png'
+        ],
+        stageReveals: [
+          { title: '彩色出发牌', copy: '车站亮起了彩色出发牌！' },
+          { title: '蓝翼小飞机', copy: '蓝色小飞机停靠在环球站旁！' },
+          { title: '护照盖章台', copy: '护照盖章台摆好了罗盘和印章！' },
+          { title: '旅行行李车', copy: '五彩行李已经整齐装上小车！' },
+          { title: '环球出发庆典', copy: '三色旗和暖灯照亮车站，环球罗盘也收藏进图鉴！' }
+        ],
+        mobilePreview: 'assets/adventure-map/lesson52/mobile-preview.png',
+        regressionTest: 'tests/e2e/l52-progress.spec.js'
+      }
     }),
     publishedLesson({
       lesson: 53,
@@ -326,7 +429,32 @@
       description: '跟着汉斯和吉姆聊英国天气：东南西北四种天、春夏秋冬昼夜长短，15 句对白学会用英语聊气候！',
       features: ['气候单词', '对白剧场', '罗盘配对', '缺词魔法', '主播证书'],
       art: '/assets/home/lesson53-climate.svg',
-      tone: 'green'
+      tone: 'green',
+      souvenir: {
+        id: 'weather-broadcaster-crest',
+        title: '气候主播徽章',
+        asset: 'assets/adventure-map/lesson53/weather-broadcaster-crest.png'
+      },
+      mapPublication: {
+        declaredStatus: 'published', landmarkMode: 'layers',
+        baseAsset: 'assets/adventure-map/lesson53/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/lesson53/growth-01-weather-vane.png',
+          'assets/adventure-map/lesson53/growth-02-broadcast.png',
+          'assets/adventure-map/lesson53/growth-03-weather-jars.png',
+          'assets/adventure-map/lesson53/growth-04-rain-gauge.png',
+          'assets/adventure-map/lesson53/growth-05-celebration.png'
+        ],
+        stageReveals: [
+          { title: '四象天气标', copy: '小屋装上了太阳、雨滴、云和风的天气标！' },
+          { title: '气候播音台', copy: '老式麦克风准备好播报天气了！' },
+          { title: '四季天气瓶', copy: '晴、雨、雪、风被收藏进四只天气瓶！' },
+          { title: '雨量观测角', copy: '门边装好了雨量筒和雨伞架！' },
+          { title: '气候播报庆典', copy: '绿金彩旗和暖灯点亮小屋，气候主播徽章也收藏进图鉴！' }
+        ],
+        mobilePreview: 'assets/adventure-map/lesson53/mobile-preview.png',
+        regressionTest: 'tests/e2e/l53-progress.spec.js'
+      }
     }),
     publishedLesson({
       lesson: 54,
@@ -335,7 +463,32 @@
       description: '第二卷·亚非大洋洲篇：再走 12 个国家，练习国籍句型，还有 does 疑问否定小魔法。',
       features: ['国家国籍', '机场广播', '盖章配对', 'does 魔法', '海关考核'],
       art: '/assets/home/lesson54-passport.svg',
-      tone: 'green'
+      tone: 'green',
+      souvenir: {
+        id: 'compass-wave-crest',
+        title: '远航罗盘徽章',
+        asset: 'assets/adventure-map/lesson54/compass-wave-crest.png'
+      },
+      mapPublication: {
+        declaredStatus: 'published', landmarkMode: 'layers',
+        baseAsset: 'assets/adventure-map/lesson54/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/lesson54/growth-01-globe.png',
+          'assets/adventure-map/lesson54/growth-02-boat.png',
+          'assets/adventure-map/lesson54/growth-03-passport-stamps.png',
+          'assets/adventure-map/lesson54/growth-04-supplies.png',
+          'assets/adventure-map/lesson54/growth-05-celebration.png'
+        ],
+        stageReveals: [
+          { title: '东方环球仪', copy: '港站前立起了新的环球仪！' },
+          { title: '远航小帆船', copy: '蓝绿色小帆船驶到了拱门旁！' },
+          { title: '三色盖章台', copy: '旅行印章、罗盘和印台都准备好了！' },
+          { title: '远航补给车', copy: '篮子、行李和地图装满了补给车！' },
+          { title: '环球远航庆典', copy: '翠绿彩旗和暖灯照亮港站，远航罗盘徽章也收藏进图鉴！' }
+        ],
+        mobilePreview: 'assets/adventure-map/lesson54/mobile-preview.png',
+        regressionTest: 'tests/e2e/l54-progress.spec.js'
+      }
     }),
     plannedLesson(55),
     plannedLesson(56),
@@ -365,17 +518,29 @@
         legacyMode: 'reset',
         max: 12
       },
-      map: {
-        districtId: null,
-        v1Visible: false,
-        declaredStatus: 'not-applicable',
-        landmarkMode: null,
-        baseAsset: null,
-        stages: [],
-        souvenir: null,
-        mobilePreview: null,
-        regressionTest: null
-      },
+      map: createSpecialMap({
+        declaredStatus: 'published',
+        baseAsset: 'assets/adventure-map/soundmark/landmark-base.png',
+        growthAssets: [
+          'assets/adventure-map/soundmark/growth-01-vowel-crystals.png',
+          'assets/adventure-map/soundmark/growth-02-magic-book.png',
+          'assets/adventure-map/soundmark/growth-03-listening-horns.png',
+          'assets/adventure-map/soundmark/growth-04-star-balcony.png'
+        ],
+        stageReveals: [
+          { title: '元音水晶环', copy: '五彩发音水晶围着塔门亮起来了！' },
+          { title: '音节魔法书', copy: '空白魔法书学会了记录声音波纹！' },
+          { title: '双耳听音号', copy: '两只听音号用金色声波连在一起！' },
+          { title: '星光旋梯', copy: '塔边长出了星光旋梯，元音星徽也收藏进图鉴！' }
+        ],
+        souvenir: {
+          id: 'vowel-star-badge',
+          title: '元音星徽',
+          asset: 'assets/adventure-map/soundmark/vowel-star-badge.png'
+        },
+        mobilePreview: 'assets/adventure-map/soundmark/mobile-preview.png',
+        regressionTest: 'tests/e2e/soundmark-progress.spec.js'
+      }),
       presentation: createClassroomPresentation('soundmark')
     }
   ]);
@@ -387,7 +552,7 @@
     COURSES.filter(course => course.directoryVisible)
   );
   const MAP_COURSES = deepFreeze(
-    COURSES.filter(course => course.kind === 'lesson' && course.map.v1Visible)
+    COURSES.filter(course => course.map.v1Visible)
   );
   const PRESENTATION_COURSES = deepFreeze(
     COURSES.filter(course => course.presentation.declaredStatus === 'published')
@@ -400,7 +565,7 @@
   }
 
   function assessLearningLocation(course) {
-    if (!course || course.kind !== 'lesson' || course.map?.v1Visible !== true) {
+    if (!course || course.map?.v1Visible !== true) {
       return deepFreeze({
         status: 'not-applicable',
         route: null,
@@ -421,14 +586,18 @@
         course.assetDirectories.some(directory => (
           isRelativePublicPath(directory) && directory.endsWith('/audio')
         )),
-      stageMapping: stages.length === 5 && progressIds.length === 5 &&
+      stageMapping: stages.length === progressIds.length && stages.length > 0 &&
         stages.every((stage, index) => stage?.progressId === progressIds[index]),
-      renderingMode: ['snapshot', 'layers'].includes(course.map.landmarkMode),
+      renderingMode: course.map.landmarkMode === 'layers',
       baseLandmark: isMapImagePath(course.map.baseAsset),
-      growthLayers: stages.length === 5 &&
+      growthLayers: stages.length === progressIds.length &&
         growthAssets.every(isMapImagePath) &&
         new Set(growthAssets).size === growthAssets.length &&
         !growthAssets.includes(course.map.baseAsset),
+      revealCopy: stages.every(stage => (
+        typeof stage?.revealTitle === 'string' && stage.revealTitle.trim() &&
+        typeof stage?.revealCopy === 'string' && stage.revealCopy.trim()
+      )),
       souvenir: isMapImagePath(course.map.souvenir?.asset) &&
         course.map.souvenir.asset !== course.map.baseAsset &&
         !growthAssets.includes(course.map.souvenir.asset),
@@ -648,8 +817,18 @@
         } else if (!hasNotApplicableMapContract(course.map)) {
           errors.push(`${id}: lessons outside 49-60 must use a not-applicable map contract`);
         }
+      } else if (course.map.v1Visible === true) {
+        if (course.map.districtId !== LAUNCH_DISTRICT.id) {
+          errors.push(`${id}: special course must belong to ${LAUNCH_DISTRICT.id}`);
+        }
+        if (course.map.declaredStatus === 'published') {
+          const assessment = assessLearningLocation(course);
+          if (assessment.status !== 'published') {
+            errors.push(`${id}: published map contract missing ${assessment.missing.join(', ')}`);
+          }
+        }
       } else if (!hasNotApplicableMapContract(course.map)) {
-        errors.push(`${id}: special course map must be not-applicable`);
+        errors.push(`${id}: special course map must be published or not-applicable`);
       }
 
       if (!course.presentation || typeof course.presentation !== 'object') {
@@ -686,6 +865,7 @@
     MAP_COURSES,
     PRESENTATION_COURSES,
     createLessonMap,
+    createSpecialMap,
     requirePublishedCourse,
     assessLearningLocation,
     assessClassroomPresentation,

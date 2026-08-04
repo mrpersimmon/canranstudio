@@ -58,14 +58,44 @@ test('course catalog is the complete immutable contract for lessons and special 
       },
       districtId: 'first-book-49-60',
       declaredStatus: 'published',
-      landmarkMode: 'snapshot',
-      baseAsset: 'assets/adventure-map/lesson49/base.png',
+      landmarkMode: 'layers',
+      baseAsset: 'assets/adventure-map/lesson49/landmark-base.png',
       stages: [
-        { progressId: 'l1', growthAsset: 'assets/adventure-map/lesson49/growth-1.png' },
-        { progressId: 'l2', growthAsset: 'assets/adventure-map/lesson49/growth-2.png' },
-        { progressId: 'l3', growthAsset: 'assets/adventure-map/lesson49/growth-3.png' },
-        { progressId: 'l4', growthAsset: 'assets/adventure-map/lesson49/growth-4.png' },
-        { progressId: 'l5', growthAsset: 'assets/adventure-map/lesson49/growth-5.png' }
+        {
+          progressId: 'l1',
+          growthAsset: 'assets/adventure-map/lesson49/growth-01-awning.png',
+          revealTitle: '红白遮阳棚',
+          revealCopy: '肉店挂上了红白遮阳棚！',
+          soundAsset: null
+        },
+        {
+          progressId: 'l2',
+          growthAsset: 'assets/adventure-map/lesson49/growth-02-display.png',
+          revealTitle: '新鲜展示台',
+          revealCopy: '木台上摆好了新鲜肉品！',
+          soundAsset: null
+        },
+        {
+          progressId: 'l3',
+          growthAsset: 'assets/adventure-map/lesson49/growth-03-sign.png',
+          revealTitle: '牛排招牌',
+          revealCopy: '门前挂上了会摇摆的牛排招牌！',
+          soundAsset: null
+        },
+        {
+          progressId: 'l4',
+          growthAsset: 'assets/adventure-map/lesson49/growth-04-delivery.png',
+          revealTitle: '送货小车',
+          revealCopy: '送货小车把木箱稳稳送到了门口！',
+          soundAsset: null
+        },
+        {
+          progressId: 'l5',
+          growthAsset: 'assets/adventure-map/lesson49/growth-05-celebration.png',
+          revealTitle: '暖灯庆典开张',
+          revealCopy: '彩旗和暖灯点亮了肉店，食物篮子也收藏进图鉴！',
+          soundAsset: null
+        }
       ],
       souvenir: {
         id: 'food-basket',
@@ -107,8 +137,9 @@ test('course catalog is the complete immutable contract for lessons and special 
 
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
   assert.deepEqual(soundmark.progress.ids, ['vs', 'g1', 'g2', 'g3']);
-  assert.equal(soundmark.map.declaredStatus, 'not-applicable');
-  assert.equal(soundmark.map.districtId, null);
+  assert.equal(soundmark.map.declaredStatus, 'published');
+  assert.equal(soundmark.map.districtId, 'first-book-49-60');
+  assert.equal(soundmark.map.stages.length, 4);
 
   assertDeepFrozen(catalog.COURSES);
 });
@@ -169,6 +200,7 @@ test('learning locations stay drawing and non-navigable until the full publicati
       renderingMode: true,
       baseLandmark: true,
       growthLayers: true,
+      revealCopy: true,
       souvenir: true,
       mobilePreview: true,
       regressionVerification: true
@@ -220,13 +252,11 @@ test('learning locations stay drawing and non-navigable until the full publicati
   assert.equal(catalog.assessLearningLocation(unsupportedRendering).status, 'drawing');
 
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
-  assert.deepEqual(catalog.assessLearningLocation(soundmark), {
-    status: 'not-applicable',
-    route: null,
-    recommendable: false,
-    checklist: null,
-    missing: []
-  });
+  const soundmarkAssessment = catalog.assessLearningLocation(soundmark);
+  assert.equal(soundmarkAssessment.status, 'published');
+  assert.equal(soundmarkAssessment.route, '/soundmark/');
+  assert.equal(soundmarkAssessment.recommendable, true);
+  assert.deepEqual(soundmarkAssessment.missing, []);
 });
 
 test('catalog validation rejects duplicate routes and incomplete published locations', () => {
@@ -261,13 +291,14 @@ test('map consumers receive only V1 learning locations from the shared catalog',
       ['lesson57', 57, 'first-book-49-60'],
       ['lesson58', 58, 'first-book-49-60'],
       ['lesson59', 59, 'first-book-49-60'],
-      ['lesson60', 60, 'first-book-49-60']
+      ['lesson60', 60, 'first-book-49-60'],
+      ['soundmark', null, 'first-book-49-60']
     ]
   );
   assert.equal(Object.isFrozen(catalog.MAP_COURSES), true);
   assert.deepEqual(
     catalog.MAP_COURSES.map(course => catalog.assessLearningLocation(course).status),
-    ['published', 'drawing', 'published', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing']
+    ['published', 'published', 'published', 'published', 'published', 'published', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'drawing', 'published']
   );
 
   const outsideV1 = structuredClone(catalog.COURSES.find(course => course.id === 'lesson50'));
@@ -309,7 +340,7 @@ test('lesson map creation and directory status keep future courses outside V1', 
   const lesson50 = catalog.COURSES.find(course => course.id === 'lesson50');
   const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
   assert.equal(catalog.directoryMapStatus(lesson49), 'published');
-  assert.equal(catalog.directoryMapStatus(lesson50), 'drawing');
+  assert.equal(catalog.directoryMapStatus(lesson50), 'published');
   assert.equal(catalog.directoryMapStatus(
     catalog.COURSES.find(course => course.id === 'lesson51')
   ), 'published');
@@ -372,4 +403,18 @@ test('catalog publishes one complete classroom presentation without making other
   assert.deepEqual(catalog.validateCatalog(invalid), [
     'lesson49: published presentation contract missing completeControls'
   ]);
+});
+
+test('every published map stage declares a child-readable growth reveal', () => {
+  const publishedLocations = catalog.MAP_COURSES
+    .filter(course => catalog.assessLearningLocation(course).status === 'published');
+
+  assert.ok(publishedLocations.length >= 2);
+  for (const course of publishedLocations) {
+    for (const stage of course.map.stages) {
+      assert.match(stage.revealTitle, /\S/);
+      assert.match(stage.revealCopy, /\S/);
+      assert.notEqual(stage.growthAsset, course.map.baseAsset);
+    }
+  }
 });

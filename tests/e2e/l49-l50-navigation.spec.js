@@ -5,6 +5,9 @@ const { test, expect } = require('@playwright/test');
 const lessons = [
   {
     path: '/lesson49/',
+    mapReturn: '/?district=first-book-49-60&focus=lesson49',
+    mapLabel: '返回肉店在世界地图的位置',
+    mapSmall: '看肉店',
     brand: '🥩 肉店大冒险',
     brandColor: 'rgb(201, 58, 40)',
     activeColor: 'rgb(232, 80, 58)',
@@ -12,6 +15,9 @@ const lessons = [
   },
   {
     path: '/lesson50/',
+    mapReturn: '/?district=first-book-49-60&focus=lesson50',
+    mapLabel: '返回王子城堡在世界地图的位置',
+    mapSmall: '看城堡',
     brand: '🤴 挑食小王子大冒险',
     brandColor: 'rgb(123, 95, 166)',
     activeColor: 'rgb(155, 126, 189)',
@@ -28,8 +34,8 @@ for (const lesson of lessons) {
 
     const brand = page.locator('#logo');
     await expect(brand).toHaveText(lesson.brand);
-    await expect(brand).toHaveAttribute('href', '/');
-    await expect(brand).toHaveAttribute('aria-label', '返回世界地图');
+    await expect(brand).toHaveAttribute('href', lesson.mapReturn);
+    await expect(brand).toHaveAttribute('aria-label', lesson.mapLabel);
     await expect(brand).toHaveCSS('color', lesson.brandColor);
 
     await expect(page.locator('#starBox')).toContainText('⭐ 0/15');
@@ -44,11 +50,11 @@ for (const lesson of lessons) {
     await expect(page).toHaveURL(new RegExp(`${lesson.path.replaceAll('/', '\\/')}#l2$`));
     await expect(page.locator('#sectionDots a[href="#l2"]')).toHaveAttribute('aria-current', 'location');
 
-    const map = page.locator('#coursenav a[href="/"]');
+    const map = page.locator(`#coursenav a[href="${lesson.mapReturn}"]`);
     await expect(map).toHaveCount(1);
     await expect(map).toContainText('🗺️');
     await expect(map).toContainText('世界地图');
-    await expect(map).toContainText('选课程');
+    await expect(map).toContainText(lesson.mapSmall);
   });
 
   test(`${lesson.path} keeps the compact header usable at 320px`, async ({ page }) => {

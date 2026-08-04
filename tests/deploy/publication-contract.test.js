@@ -48,21 +48,22 @@ test('every published course appears in the shared home catalog and authored rel
   }
 });
 
-test('home renders course routes from the shared catalog with only a generated no-script fallback', async () => {
+test('home renders only published map locations and contains no course-directory fallback', async () => {
   const home = await fs.readFile(path.join(ROOT, 'index.html'), 'utf8');
 
-  assert.match(home, /courseCatalog\.HOME_COURSES/);
-  assert.match(home, /href="\$\{course\.route\}"/);
+  assert.match(home, /courseCatalog\.MAP_COURSES/);
+  assert.match(home, /href="\$\{location\.route\}"/);
   assert.equal(homeFallback.synchronizeFallback(home), home);
   const authoredHome = homeFallback.withoutGeneratedFallback(home);
   assert.deepEqual(
     homeFallback.anchorHrefs(authoredHome).filter(href => /^\/(?:lesson\d+|soundmark)\/$/.test(href)),
     []
   );
-  assert.doesNotMatch(home, /Lesson 49、50、51、52、54/);
+  assert.doesNotMatch(home, /course-catalog-fallback:(?:start|end)/);
+  assert.doesNotMatch(home, /找指定课号|番外站 · 专项技能|继续学习/);
 });
 
-test('generated no-script fallback follows a future shared-catalog course', async () => {
+test('a future shared-catalog course does not create a second homepage entrance', async () => {
   const home = await fs.readFile(path.join(ROOT, 'index.html'), 'utf8');
   const future = structuredClone(PUBLISHED_COURSES.find(course => course.id === 'lesson50'));
   future.id = 'lesson61';
@@ -71,8 +72,8 @@ test('generated no-script fallback follows a future shared-catalog course', asyn
   future.title = '未来课程示例';
 
   const synchronized = homeFallback.synchronizeFallback(home, [...PUBLISHED_COURSES, future]);
-  assert.match(synchronized, /href="\/lesson61\/">Lesson 61 · 未来课程示例<\/a>/);
-  assert.equal((synchronized.match(/href="\/lesson61\/"/g) || []).length, 1);
+  assert.equal(synchronized, home);
+  assert.doesNotMatch(synchronized, /href="\/lesson61\/"/);
 });
 
 test('authored fallback guard recognizes browser-parsed course href variants', () => {

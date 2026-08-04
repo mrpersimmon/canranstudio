@@ -224,6 +224,15 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'core/classroom-presentation.js',
     'core/certificate-gate.js',
     'core/certificate-gate.css',
+    'core/growth-reveal.js',
+    'core/growth-reveal.css',
+    'assets/adventure-map/lesson49/growth-01-awning.png',
+    'assets/adventure-map/lesson50/growth-05-celebration.png',
+    'assets/adventure-map/lesson51/growth-05-celebration.png',
+    'assets/adventure-map/lesson52/growth-05-celebration.png',
+    'assets/adventure-map/lesson53/growth-05-celebration.png',
+    'assets/adventure-map/lesson54/growth-05-celebration.png',
+    'assets/adventure-map/soundmark/growth-04-star-balcony.png',
     'release-manifest.json'
   ]) {
     assert.equal((await fs.stat(path.join(out, file))).isFile(), true, file);
@@ -247,6 +256,12 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
   assert.match(manifest.files['lesson54/audio/australia.mp3'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['core/certificate-gate.js'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['core/certificate-gate.css'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['core/growth-reveal.js'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['core/growth-reveal.css'], /^[a-f0-9]{64}$/);
+  assert.match(
+    manifest.files['assets/adventure-map/soundmark/growth-04-star-balcony.png'],
+    /^[a-f0-9]{64}$/
+  );
 
   const expected = await expectedPublicFiles(ROOT);
   const actual = await listRegularFiles(out);

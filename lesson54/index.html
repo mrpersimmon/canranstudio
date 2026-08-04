@@ -213,10 +213,11 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 @media print{body *{visibility:hidden}#certCard,#certCard *{visibility:visible}
   #certCard{position:absolute;inset:0;margin:0;box-shadow:none}}
 </style>
+<link rel="stylesheet" href="/core/growth-reveal.css">
 </head>
 <body>
 <header>
-  <a class="brand" href="/" aria-label="返回英语闯关乐园首页">🛂 环球护照之旅 Ⅱ</a>
+  <a class="brand" href="/?district=first-book-49-60&amp;focus=lesson54" aria-label="返回远航港站在世界地图的位置">🛂 环球护照之旅 Ⅱ</a>
   <div id="starBadge">⭐ <span id="starNum">0</span> 颗星</div>
 </header>
 <nav id="dots"></nav>
@@ -372,6 +373,8 @@ footer{text-align:center;padding:44px 20px 60px;font-size:14.5px;opacity:.7}
 <script src="/core/course-catalog.js"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
+<script src="/core/device-profile.js"></script>
+<script src="/core/growth-reveal.js"></script>
 <script src="/core/certificate-gate.js"></script>
 <script src="/core/assessment.js"></script>
 <script src="/core/audio-player.js"></script>
@@ -529,6 +532,11 @@ const STAR_KEY=COURSE_PROGRESS.key;
 const LVLS=COURSE_PROGRESS.ids;
 const loaded=CanranCore.storage.loadProgress({storage:localStorage,key:STAR_KEY,ids:LVLS});
 let stars=loaded.progress.ratings;
+CanranCore.deviceProfile.initializeDeviceProfile({storage:localStorage,courses:CanranCore.courseCatalog.COURSES});
+const l54GrowthReveal=CanranCore.growthReveal.create({
+  storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+  onStopAudio:()=>{l54Audio.stop();try{speechSynthesis.cancel()}catch{}}
+});
 const L54_CERTIFICATE_TARGETS=[
   {id:'l1',selector:'#w1',label:'单词签证官'},
   {id:'l2',selector:'#w2',label:'机场广播剧'},
@@ -536,7 +544,11 @@ const L54_CERTIFICATE_TARGETS=[
   {id:'l4',selector:'#w4',label:'句型魔法屋'},
   {id:'l5',selector:'#w5',label:'海关终极考核'}
 ];
-function saveStars(){CanranCore.storage.saveProgress({storage:localStorage,key:STAR_KEY,progress:{version:CanranCore.storage.VERSION,ratings:stars},ids:LVLS});}
+function saveStars(){
+  const saved=CanranCore.storage.saveProgress({storage:localStorage,key:STAR_KEY,progress:{version:CanranCore.storage.VERSION,ratings:stars},ids:LVLS});
+  stars=saved.progress.ratings;
+  return saved;
+}
 function getStar(l){return CanranCore.storage.clampRating(stars[l]);}
 function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
 function renderStars(){
@@ -545,11 +557,17 @@ function renderStars(){
   renderCertGate();
 }
 function award(level,rating){
+  const previousRating=CanranCore.storage.clampRating(stars[level]);
   const res=CanranCore.progress.awardRating(stars,level,rating);
   if(res.changed){
     stars=res.ratings;
-    saveStars();renderStars();sndStar();
+    const saved=saveStars();renderStars();sndStar();
     toast('🎉 第 '+level.slice(1)+' 关获得 '+CanranCore.storage.clampRating(rating)+' 颗星！');
+    const growth=CanranCore.growthReveal.recordStageResult({
+      storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
+      courseId:'lesson54',stageId:level,previousRating,nextRating:stars[level],progressPersisted:saved.persisted
+    });
+    if(growth.shouldReveal)l54GrowthReveal.open(growth.reveal);
   }
 }
 function canIssue(){

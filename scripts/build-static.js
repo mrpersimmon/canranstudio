@@ -19,6 +19,10 @@ const REQUIRED_DIRECTORIES = Object.freeze([
   ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),
   'core'
 ]);
+const REQUIRED_RUNTIME_FILES = Object.freeze([
+  'core/growth-reveal.js',
+  'core/growth-reveal.css'
+]);
 const OPTIONAL_DIRECTORIES = Object.freeze(['assets']);
 const PUBLIC_INPUTS = Object.freeze([
   ...REQUIRED_FILES,
@@ -401,6 +405,7 @@ async function buildStatic({
   await assertCourseCatalogContract({ root: resolvedRoot });
 
   for (const relative of REQUIRED_FILES) await validateFile(resolvedRoot, relative);
+  for (const relative of REQUIRED_RUNTIME_FILES) await validateFile(resolvedRoot, relative);
   for (const relative of REQUIRED_DIRECTORIES) await validateDirectory(resolvedRoot, relative);
   const optionalDirectories = [];
   for (const relative of OPTIONAL_DIRECTORIES) {

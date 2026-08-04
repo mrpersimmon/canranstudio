@@ -5,7 +5,7 @@ const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/cours
 
 const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const routes = [
-  { path: '/', title: /英语闯关乐园/ },
+  { path: '/', title: /十二城区冒险图鉴/ },
   ...PUBLISHED_COURSES.map(course => ({
     path: course.route,
     title: new RegExp(escapeRegExp(course.title))
@@ -28,28 +28,26 @@ test('/home/ remains a compatibility entry for plain static hosting', async ({ p
   const response = await page.goto('/home/');
   expect(response.status()).toBe(200);
   await expect(page).toHaveURL('http://127.0.0.1:4173/');
-  await expect(page).toHaveTitle(/英语闯关乐园/);
+  await expect(page).toHaveTitle(/十二城区冒险图鉴/);
 });
 
 test('/home/ preserves query and hash through the compatibility redirect', async ({ page }) => {
   const response = await page.goto('/home/?course=49#progress');
   expect(response.status()).toBe(200);
   await expect(page).toHaveURL('http://127.0.0.1:4173/?course=49#progress');
-  await expect(page).toHaveTitle(/英语闯关乐园/);
+  await expect(page).toHaveTitle(/十二城区冒险图鉴/);
 });
 
-test('welcome page and course pages form a closed navigation loop', async ({ page }) => {
+test('atlas landmarks and course return links form a closed navigation loop', async ({ page }) => {
   await page.goto('/');
+  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
   for (const course of PUBLISHED_COURSES) {
-    const directory = course.kind === 'special'
-      ? page.locator('#specialCourses')
-      : page.locator('#lessonStations');
-    await expect(directory.locator(`a[href="${course.route}"]`)).toHaveCount(1);
-    expect(await page.locator(`a[href="${course.route}"]`).count()).toBeGreaterThanOrEqual(1);
+    await expect(page.locator(`#districtLocations a[href="${course.route}"]`)).toHaveCount(1);
   }
   for (const course of PUBLISHED_COURSES) {
     await page.goto(course.route);
-    expect(await page.locator('a[href="/"]').count()).toBeGreaterThanOrEqual(1);
+    const returnRoute = `/?district=first-book-49-60&focus=${course.id}`;
+    expect(await page.locator(`a[href="${returnRoute}"]`).count()).toBeGreaterThanOrEqual(1);
   }
 });
 

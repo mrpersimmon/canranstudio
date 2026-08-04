@@ -230,6 +230,27 @@ test('public V1 runtime stays static, same-origin, cookieless, and identity-free
   }
 });
 
+test('a growth reveal remains same-origin, cookieless, and identity-free', async ({ page, context }) => {
+  await installBoundaryInstrumentation(page);
+  const requests = [];
+  page.on('request', request => requests.push(request.url()));
+  await page.goto('/lesson49/');
+  await page.evaluate(() => window.eval('award("l1", 1)'));
+  await expect(page.locator('.growth-reveal')).toBeVisible();
+  await page.waitForTimeout(720);
+  await page.keyboard.press('Escape');
+
+  const events = await page.evaluate(() => window.__v1BoundaryEvents);
+  expect(events.serviceCalls).toEqual([]);
+  expect(events.cookieWrites).toEqual([]);
+  expect(await context.cookies(BASE_ORIGIN)).toEqual([]);
+  requests.forEach(request => expect(new URL(request).origin).toBe(BASE_ORIGIN));
+  for (const [key, encoded] of events.storageWrites) {
+    expect(ALLOWED_STORAGE_KEYS.has(key), key).toBe(true);
+    expect(privateFields(JSON.parse(encoded)), key).toEqual([]);
+  }
+});
+
 for (const probe of AUDIO_PROBES) {
   test(`${probe.id} waits for a user gesture and then uses a same-origin recording`, async ({ page }) => {
     await installAudioProbe(page);

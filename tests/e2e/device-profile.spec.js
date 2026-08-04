@@ -13,10 +13,9 @@ test('home exposes one shared device profile without identity controls', async (
   await page.goto('/');
   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
 
-  const dialog = page.getByRole('dialog', { name: '这台设备上的冒险', exact: true });
+  const dialog = page.getByRole('dialog', { name: '设备冒险设置', exact: true });
   await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText('本机一份');
-  await expect(dialog).toContainText('这里只保存一份共同进度，不是个人账号');
+  await expect(dialog).toContainText('进度会保存在这台设备上');
   await expect(dialog.locator('input')).toHaveCount(0);
 
   const profile = await page.evaluate(() =>
@@ -58,7 +57,8 @@ test('restart requires two confirmations, cancellation is safe, and old progress
   await page.getByRole('button', { name: '继续确认', exact: true }).click();
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
 
-  await expect(page.locator('#pt49')).toHaveText('0');
+  await expect(page.locator('#worldOverview')).toBeVisible();
+  await expect(page.locator('#worldCompletedCount')).toHaveText('0');
   const after = await page.evaluate(() => ({
     profile: JSON.parse(localStorage.getItem('canran:adventure-profile:v1')),
     progress: JSON.parse(localStorage.getItem('canran:l49:progress:v2')),
@@ -84,10 +84,10 @@ test('blocked browser storage keeps the public course experience usable', async 
   page.on('pageerror', error => pageErrors.push(error.message));
 
   await page.goto('/');
-  await expect(page.locator('#lessonStations')).toBeVisible();
+  await expect(page.locator('#worldOverview')).toBeVisible();
   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
-    '这次进度只能暂时显示，关闭页面后可能不会保留。'
+    '当前浏览器无法永久保存进度。'
   );
   expect(pageErrors).toEqual([]);
 });
@@ -110,10 +110,10 @@ test('readable but unwritable browser storage stays usable with neutral feedback
   page.on('pageerror', error => pageErrors.push(error.message));
 
   await page.goto('/');
-  await expect(page.locator('#lessonStations')).toBeVisible();
+  await expect(page.locator('#worldOverview')).toBeVisible();
   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
-    '这次进度只能暂时显示，关闭页面后可能不会保留。'
+    '当前浏览器无法永久保存进度。'
   );
 
   await page.getByRole('button', { name: '重开冒险', exact: true }).click();
@@ -121,9 +121,10 @@ test('readable but unwritable browser storage stays usable with neutral feedback
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
 
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
-    '这次进度只能暂时显示，关闭页面后可能不会保留。'
+    '当前浏览器无法永久保存进度。'
   );
-  await expect(page.getByRole('button', { name: '重开冒险', exact: true })).toBeFocused();
-  await expect(page.locator('#lessonStations')).toBeVisible();
+  await expect(page.locator('#worldOverview')).toBeVisible();
+  await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
+  await expect(page.getByRole('button', { name: '重开冒险', exact: true })).toBeVisible();
   expect(pageErrors).toEqual([]);
 });

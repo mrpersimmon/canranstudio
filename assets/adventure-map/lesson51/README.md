@@ -1,6 +1,6 @@
 # Lesson 51 landmark assets
 
-This folder contains the approved layered landmark set for Lesson 51「希腊四季之旅」. The catalog and map renderer use the base plus independent completed-stage layers; Lesson 49 continues to use its cumulative snapshot contract.
+This folder contains the approved layered landmark set for Lesson 51「希腊四季之旅」. The catalog, map renderer, and shared growth reveal use the same base plus independent completed-stage layers. Lesson 49 now follows the same layered contract.
 
 ## Rendering order
 

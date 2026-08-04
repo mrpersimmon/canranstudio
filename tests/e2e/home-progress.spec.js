@@ -1,120 +1,15 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
-const catalog = require('../../core/course-catalog');
 
-const futurePublishedCourses = catalog.PUBLISHED_COURSES.filter(
-  course => catalog.directoryMapStatus(course) === 'v2'
-);
+const PROFILE_KEY = 'canran:adventure-profile:v1';
 
-async function isPerceivableInViewport(locator) {
-  if (await locator.count() !== 1 || !await locator.isVisible()) return false;
-  return locator.evaluate(element => {
-    for (let current = element; current; current = current.parentElement) {
-      const style = getComputedStyle(current);
-      if (current.getAttribute('aria-hidden') === 'true' ||
-        Number.parseFloat(style.opacity) <= 0 ||
-        style.visibility !== 'visible' ||
-        style.display === 'none' ||
-        style.contentVisibility === 'hidden') return false;
-      if (style.clipPath && style.clipPath !== 'none') return false;
-      if (style.clip && style.clip !== 'auto' && /rect\(0(?:px)?[, ]+0(?:px)?[, ]+0(?:px)?[, ]+0(?:px)?\)/.test(style.clip)) {
-        return false;
-      }
-    }
-    const box = element.getBoundingClientRect();
-    const intersects = box.width > 0 && box.height > 0 &&
-      box.right > 0 && box.bottom > 0 &&
-      box.left < document.documentElement.clientWidth &&
-      box.top < document.documentElement.clientHeight;
-    if (!intersects) return false;
-
-    const textRects = [];
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-      if (!node.textContent.trim()) continue;
-      const range = document.createRange();
-      range.selectNodeContents(node);
-      textRects.push(...range.getClientRects());
-    }
-    const visibleRects = (textRects.length ? textRects : [box])
-      .map(rect => ({
-        left: Math.max(0, rect.left),
-        right: Math.min(document.documentElement.clientWidth, rect.right),
-        top: Math.max(0, rect.top),
-        bottom: Math.min(document.documentElement.clientHeight, rect.bottom)
-      }))
-      .filter(rect => rect.right > rect.left && rect.bottom > rect.top);
-    const points = visibleRects.flatMap(rect => [0.25, 0.5, 0.75].map(horizontal => [
-      rect.left + ((rect.right - rect.left) * horizontal),
-      (rect.top + rect.bottom) / 2
-    ]));
-
-    const hitTestElements = [...document.querySelectorAll('*')];
-    const pointerEvents = hitTestElements.map(candidate => ({
-      candidate,
-      value: candidate.style.getPropertyValue('pointer-events'),
-      priority: candidate.style.getPropertyPriority('pointer-events')
-    }));
-    for (const entry of pointerEvents) {
-      entry.candidate.style.setProperty('pointer-events', 'auto', 'important');
-    }
-
-    const pseudoPointerRules = [];
-    const visitedStyleSheets = new Set();
-    function exposeStyleSheet(sheet) {
-      if (!sheet || visitedStyleSheets.has(sheet)) return;
-      visitedStyleSheets.add(sheet);
-      exposePseudoElements(sheet.cssRules);
-    }
-    function exposePseudoElements(rules) {
-      for (const rule of rules) {
-        if (rule.styleSheet) exposeStyleSheet(rule.styleSheet);
-        if (rule.cssRules) exposePseudoElements(rule.cssRules);
-        if (typeof rule.selectorText !== 'string' || !/::(?:before|after)\b/i.test(rule.selectorText)) continue;
-        pseudoPointerRules.push({
-          rule,
-          value: rule.style.getPropertyValue('pointer-events'),
-          priority: rule.style.getPropertyPriority('pointer-events')
-        });
-        rule.style.setProperty('pointer-events', 'auto', 'important');
-      }
-    }
-    let inaccessibleStyleSheet = false;
-    for (const sheet of document.styleSheets) {
-      try {
-        exposeStyleSheet(sheet);
-      } catch {
-        inaccessibleStyleSheet = true;
-      }
-    }
-    try {
-      // Public pages use same-origin styles; an inaccessible sheet cannot prove visibility.
-      if (inaccessibleStyleSheet) return false;
-      return points.some(([x, y]) => {
-        const hit = document.elementFromPoint(x, y);
-        return hit === element || element.contains(hit);
-      });
-    } finally {
-      for (const entry of pointerEvents) {
-        if (entry.value) {
-          entry.candidate.style.setProperty('pointer-events', entry.value, entry.priority);
-        } else {
-          entry.candidate.style.removeProperty('pointer-events');
-        }
-      }
-      for (const entry of pseudoPointerRules) {
-        if (entry.value) {
-          entry.rule.style.setProperty('pointer-events', entry.value, entry.priority);
-        } else {
-          entry.rule.style.removeProperty('pointer-events');
-        }
-      }
-    }
-  });
+async function enterDistrict(page) {
+  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  await expect(page.locator('#currentDistrict')).toBeVisible();
 }
 
-test('welcome page reads normalized v2 totals', async ({ page }) => {
+test('normalized course progress becomes plaque stamps and numbered-location completion', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
       version: 2,
@@ -131,227 +26,136 @@ test('welcome page reads normalized v2 totals', async ({ page }) => {
   });
 
   await page.goto('/');
+  await expect(page.locator('#worldCompletedCount')).toHaveText('2');
+  await enterDistrict(page);
 
-  await expect(page.locator('#pt49')).toHaveText('15');
-  await expect(page.locator('#pt50')).toHaveText('5');
-  await expect(page.locator('#ptSM')).toHaveText('12');
+  await expect(page.locator('[data-location-id="lesson49"] [data-earned="true"]')).toHaveCount(5);
+  await expect(page.locator('[data-location-id="lesson50"] [data-earned="true"]')).toHaveCount(5);
+  await expect(page.locator('[data-location-id="soundmark"] [data-earned="true"]')).toHaveCount(4);
 });
 
-test('welcome page separates numbered lessons from the special station', async ({ page }) => {
+test('the atlas is the only visible student navigation surface', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('#routeIntro')).toContainText('找指定课号');
-  await expect(page.locator('#routeIntro')).toContainText('地图将在 V2 到来');
-  await expect(page.locator('#lessonRoute a[href="/lesson49/"]')).toHaveCount(1);
-  await expect(page.locator('#lessonRoute a[href="/lesson50/"]')).toHaveCount(1);
-  await expect(page.locator('#lessonRoute a[href="/lesson51/"]')).toHaveCount(1);
-  await expect(page.locator('#lessonRoute a[href="/lesson52/"]')).toHaveCount(1);
-  await expect(page.locator('#lessonRoute a[href="/lesson53/"]')).toHaveCount(1);
-  await expect(page.locator('#lessonRoute a[href="/lesson54/"]')).toHaveCount(1);
-  await expect(page.locator('#lessonRoute a[href="/soundmark/"]')).toHaveCount(0);
-  await expect(page.locator('#specialStation a[href="/soundmark/"]')).toHaveCount(1);
-  await expect(page.locator('[data-lesson="49"] [data-map-status="published"]')).toHaveText('地图地点已开放');
-  await expect(page.locator('[data-lesson="51"] [data-map-status="published"]')).toHaveText('地图地点已开放');
-  await expect(page.locator('[data-lesson="50"] [data-map-status="drawing"]')).toHaveText('课程可进入 · 地图正在绘制');
-  await expect(page.locator('[data-lesson="53"] [data-map-status="drawing"]')).toHaveText('课程可进入 · 地图正在绘制');
-  await expect(page.locator('[data-range-start="49"]')).toHaveAttribute('aria-pressed', 'true');
-  const columns = await page.locator('#lessonStations').evaluate(element =>
-    getComputedStyle(element).gridTemplateColumns.split(' ').length
-  );
-  expect(columns).toBe(5);
+
+  await expect(page.locator('#worldOverview')).toBeVisible();
+  await expect(page.locator('main')).not.toContainText('找指定课号');
+  await expect(page.locator('main')).not.toContainText('番外站');
+  await expect(page.locator('main')).not.toContainText('继续学习');
+  await expect(page.locator('input, select')).toHaveCount(0);
+  await expect(page.locator('main a')).toHaveCount(0);
+
+  const focusable = await page.locator('#worldOverview button:not([disabled]), #worldOverview [tabindex="0"]')
+    .evaluateAll(elements => elements.map(element => element.getAttribute('aria-label')));
+  expect(focusable).toEqual(['设备冒险设置', '进入暖灯集市']);
+  await expect(page.locator('#currentDistrict button')).toHaveCount(2);
+  for (const button of await page.locator('#currentDistrict button').all()) {
+    await expect(button).toBeHidden();
+  }
 });
 
-test('welcome page exposes and renders the shared course catalog', async ({ page }) => {
+test('home exposes the immutable catalog but renders only complete map locations', async ({ page }) => {
   await page.goto('/');
+  await enterDistrict(page);
 
   const contract = await page.evaluate(() => {
     const catalog = window.CanranCore.courseCatalog;
     return {
-      ids: catalog.HOME_COURSES.map(course => course.id),
       deeplyFrozen: Object.isFrozen(catalog.COURSES) &&
         catalog.COURSES.every(course => Object.isFrozen(course)),
-      lesson49Location: catalog.assessLearningLocation(
-        catalog.COURSES.find(course => course.id === 'lesson49')
-      ),
-      renderedLessons: [...document.querySelectorAll('#lessonStations [data-lesson]')]
-        .map(element => Number(element.dataset.lesson)),
-      specialRoute: document.querySelector('#specialStation a')?.getAttribute('href')
+      publishedMapIds: catalog.MAP_COURSES
+        .filter(course => catalog.assessLearningLocation(course).status === 'published')
+        .map(course => course.id),
+      renderedIds: [...document.querySelectorAll('[data-location-id]')]
+        .map(element => element.dataset.locationId)
     };
   });
 
-  assertCatalogContract(contract);
-});
-
-function assertCatalogContract(contract) {
-  expect(contract.ids).toEqual([
-    'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53',
-    'lesson54', 'lesson55', 'lesson56', 'soundmark'
-  ]);
   expect(contract.deeplyFrozen).toBe(true);
-  expect(contract.lesson49Location.status).toBe('published');
-  expect(contract.lesson49Location.route).toBe('/lesson49/');
-  expect(contract.lesson49Location.recommendable).toBe(true);
-  expect(contract.lesson49Location.missing).toEqual([]);
-  expect(contract.renderedLessons).toEqual([49, 50, 51, 52, 53, 54, 55, 56]);
-  expect(contract.specialRoute).toBe('/soundmark/');
-}
+  expect(contract.publishedMapIds).toEqual([
+    'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark'
+  ]);
+  expect(contract.renderedIds).toEqual(contract.publishedMapIds);
+});
 
-test('range tickets and numbered search expose one bounded catalogue segment', async ({ page }) => {
-  await page.goto('/');
-  await page.locator('[data-range-start="1"]').click();
-  await expect(page.locator('#routeEmpty')).toBeVisible();
-  await expect(page.locator('#specialStation')).toBeVisible();
+test('recent unfinished location is highlighted and no separate recommendation card exists', async ({ page }) => {
+  await page.addInitScript(profileKey => {
+    localStorage.setItem(profileKey, JSON.stringify({
+      version: 2,
+      currentDistrictId: 'first-book-49-60',
+      lastVisitedLocationId: 'lesson53',
+      souvenirs: [],
+      completedStages: { lesson49: ['l1'], lesson53: ['l1', 'l2'] },
+      courseRevealSeen: { lesson49: ['l1'], lesson53: ['l1', 'l2'] },
+      pendingMapChanges: {},
+      mapChangeSeen: { lesson49: ['l1'], lesson53: ['l1', 'l2'] }
+    }));
+  }, PROFILE_KEY);
 
-  await page.locator('#lessonSearch').fill('51');
-  await page.locator('#lessonSearchForm').press('Enter');
-  await expect(page.locator('[data-lesson="51"]')).toBeFocused();
-  await expect(page.locator('#lessonSearchStatus')).toHaveText(
-    '已定位到 Lesson 51。课程可直接进入，地图地点已开放。'
+  await page.goto('/?district=first-book-49-60&focus=lesson53');
+  await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute(
+    'data-location-id', 'lesson53'
   );
-
-  await page.locator('#lessonSearch').fill('100');
-  await page.locator('#lessonSearchForm').press('Enter');
-  await expect(page.locator('[data-range-start="97"]')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('#lessonSearchStatus')).toHaveText('Lesson 100 还未加入目录。');
-
-  await page.locator('#lessonSearch').fill('145');
-  await page.locator('#lessonSearchForm').press('Enter');
-  await expect(page.locator('#lessonSearchStatus')).toHaveText('请输入 1–144 的 Lesson 编号。');
+  await expect(page.locator('[data-map-guidance="active"] .location-guide')).toHaveText('继续冒险');
+  await expect(page.locator('#districtRecommendation')).toHaveCount(0);
 });
 
-test('a future published lesson renders as a direct directory route without entering the V1 map', async ({ page }) => {
-  await page.goto('/');
-  const result = await page.evaluate(() => {
-    const catalog = window.CanranCore.courseCatalog;
-    const source = catalog.requirePublishedCourse('lesson50');
-    const future = {
-      ...source,
-      id: 'lesson61',
-      lesson: 61,
-      route: '/lesson61/',
-      title: '未来课程示例',
-      subtitle: 'Future Lesson',
-      map: catalog.createLessonMap(61),
-      stars: 0,
-      max: 15
-    };
-    future.mapStatus = catalog.directoryMapStatus(future);
-    const host = document.createElement('div');
-    host.id = 'futureCourseFixture';
-    host.innerHTML = window.stationMarkup(future);
-    document.body.appendChild(host);
-    return {
-      mapStatus: future.mapStatus,
-      appearsInV1Map: catalog.MAP_COURSES.some(course => course.lesson === 61)
-    };
-  });
+test('all numbered locations complete leaves no forced recommendation', async ({ page }) => {
+  await page.addInitScript(profileKey => {
+    const complete = ['l1', 'l2', 'l3', 'l4', 'l5'];
+    localStorage.setItem(profileKey, JSON.stringify({
+      version: 2,
+      currentDistrictId: 'first-book-49-60',
+      lastVisitedLocationId: 'lesson54',
+      souvenirs: [],
+      completedStages: {
+        lesson49: complete,
+        lesson50: complete,
+        lesson51: complete,
+        lesson52: complete,
+        lesson53: complete,
+        lesson54: complete
+      },
+      courseRevealSeen: {},
+      pendingMapChanges: {},
+      mapChangeSeen: {}
+    }));
+  }, PROFILE_KEY);
 
-  expect(result).toEqual({ mapStatus: 'v2', appearsInV1Map: false });
-  const future = page.locator('#futureCourseFixture [data-lesson="61"]');
-  await expect(future).toHaveAttribute('href', '/lesson61/');
-  await expect(future.locator('[data-map-status="v2"]')).toHaveText('课程可进入 · 地图将在 V2 到来');
+  await page.goto('/?district=first-book-49-60&focus=lesson54');
+  await expect(page.locator('[data-map-guidance="active"]')).toHaveCount(0);
+  await page.getByRole('button', { name: '返回世界总览', exact: true }).click();
+  await expect(page.locator('#worldCompletedCount')).toHaveText('6');
 });
 
-test('every future direct course shows its V2 map notice in the rendered page', async ({ page }) => {
-  for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
-    await page.setViewportSize(viewport);
-    for (const course of futurePublishedCourses) {
-      await page.goto(course.route);
-      const notice = page.locator('[data-course-map-status="v2"]');
-      await expect(notice).toHaveCount(1);
-      await notice.scrollIntoViewIfNeeded();
-      expect(await isPerceivableInViewport(notice)).toBe(true);
-      await expect(notice).toContainText(/地图将在\s*V2\s*到来/);
-    }
-  }
-});
-
-test('browser visibility rejects V2 notices hidden by their context or computed style', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.route('**/visibility-cover.css', route => route.fulfill({
-    contentType: 'text/css',
-    body: 'body::before{content:"";position:fixed;inset:0;background:#111;z-index:999;pointer-events:none}'
-  }));
-  await page.goto('/');
-  const hiddenFixtures = [
-    '<div hidden><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
-    '<div aria-hidden="true"><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
-    '<template><p data-course-map-status="v2">地图将在 V2 到来</p></template>',
-    '<noscript><p data-course-map-status="v2">地图将在 V2 到来</p></noscript>',
-    '<style>.concealed{visibility:hidden}</style><p class="concealed" data-course-map-status="v2">地图将在 V2 到来</p>',
-    '<p data-course-map-status="v2" style="display:none">地图将在 V2 到来</p>',
-    '<div style="opacity:0"><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
-    '<div style="content-visibility:hidden"><p data-course-map-status="v2">地图将在 V2 到来</p></div>',
-    '<p data-course-map-status="v2" style="position:absolute;left:-10000px">地图将在 V2 到来</p>',
-    '<p data-course-map-status="v2" style="position:absolute;clip:rect(0,0,0,0)">地图将在 V2 到来</p>',
-    '<p data-course-map-status="v2" style="clip-path:inset(50%)">地图将在 V2 到来</p>',
-    '<p data-course-map-status="v2">地图将在 V2 到来</p><div style="position:fixed;inset:0;background:#111;z-index:999;pointer-events:none"></div>',
-    '<style>body::before{content:"";position:fixed;inset:0;background:#111;z-index:999;pointer-events:none}</style><p data-course-map-status="v2">地图将在 V2 到来</p>',
-    '<style>@import url("/visibility-cover.css");</style><p data-course-map-status="v2">地图将在 V2 到来</p>',
-    '<style>@media(max-width:420px){[data-course-map-status="v2"]{display:none}}</style><p data-course-map-status="v2">地图将在 V2 到来</p>'
-  ];
-  for (const markup of hiddenFixtures) {
-    await page.setContent(markup);
-    expect(await isPerceivableInViewport(page.locator('[data-course-map-status="v2"]'))).toBe(false);
-  }
-  await page.setContent('<p data-course-map-status="v2">课程可进入，地图将在 V2 到来。</p>');
-  expect(await isPerceivableInViewport(page.locator('[data-course-map-status="v2"]'))).toBe(true);
-});
-
-test('generated course fallback keeps direct routes usable without JavaScript', async ({ browser }, testInfo) => {
-  const context = await browser.newContext({
-    javaScriptEnabled: false,
-    baseURL: testInfo.project.use.baseURL
-  });
-  const page = await context.newPage();
-  await page.goto('/');
-  const fallback = page.locator('[data-course-catalog-fallback]');
-  await expect(fallback).toBeVisible();
-  for (const course of catalog.PUBLISHED_COURSES.filter(item => item.directoryVisible)) {
-    await expect(fallback.locator(`a[href="${course.route}"]`)).toHaveCount(1);
-  }
-  await context.close();
-});
-
-test('continue learning chooses the highest-progress unfinished numbered lesson', async ({ page }) => {
-  await page.addInitScript(() => {
+test('returning from a course shows one merged map update and consumes it only after display', async ({ page }) => {
+  await page.addInitScript(profileKey => {
     localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
-      version: 2, ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 }
+      version: 2,
+      ratings: { l1: 2, l2: 1, l3: 0, l4: 0, l5: 0 }
     }));
-    localStorage.setItem('canran:l50:progress:v2', JSON.stringify({
-      version: 2, ratings: { l1: 2, l2: 2, l3: 2, l4: 2, l5: 2 }
+    localStorage.setItem(profileKey, JSON.stringify({
+      version: 2,
+      currentDistrictId: 'first-book-49-60',
+      lastVisitedLocationId: 'lesson49',
+      souvenirs: [],
+      completedStages: { lesson49: ['l1', 'l2'] },
+      courseRevealSeen: { lesson49: ['l1', 'l2'] },
+      pendingMapChanges: { lesson49: ['l2', 'l1'] },
+      mapChangeSeen: { lesson49: [] }
     }));
-    localStorage.setItem('canran:l51:progress:v2', JSON.stringify({
-      version: 2, ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 }
-    }));
-  });
-  await page.goto('/');
-  await expect(page.locator('#continueCourse')).toHaveAttribute('data-route', '/lesson50/');
-  await expect(page.locator('#continueCourse')).toContainText('挑食小王子大冒险');
-});
+  }, PROFILE_KEY);
 
-test('home route stays within a 390px viewport while range tickets remain usable', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
-  const sizes = await page.evaluate(() => ({
-    viewport: document.documentElement.clientWidth,
-    page: document.documentElement.scrollWidth,
-    range: document.getElementById('rangeTickets').scrollWidth
-  }));
-  expect(sizes.page).toBe(sizes.viewport);
-  expect(sizes.range).toBeGreaterThanOrEqual(sizes.viewport - 36);
-  const columns = await page.locator('#lessonStations').evaluate(element =>
-    getComputedStyle(element).gridTemplateColumns.split(' ').length
-  );
-  expect(columns).toBe(1);
-});
+  await page.goto('/?district=first-book-49-60&focus=lesson49');
+  await expect(page.locator('[data-location-id="lesson49"] .new-change-sticker')).toHaveText('新变化');
+  await expect(page.locator('#mapUpdateToast')).toContainText('这里新增了 2 处变化');
+  await expect(page.locator('#mapUpdateToast')).toBeHidden({ timeout: 4_000 });
 
-test('home route loads without browser console or page errors', async ({ page }) => {
-  const errors = [];
-  page.on('pageerror', error => errors.push(`pageerror: ${error.message}`));
-  page.on('console', message => {
-    if (message.type() === 'error') errors.push(`console: ${message.text()}`);
-  });
-  await page.goto('/');
-  await expect(page.locator('#lessonStations')).toBeVisible();
-  expect(errors).toEqual([]);
+  const after = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), PROFILE_KEY);
+  expect(after.pendingMapChanges.lesson49).toEqual([]);
+  expect(after.mapChangeSeen.lesson49).toEqual(['l1', 'l2']);
+  expect(after.completedStages.lesson49).toEqual(['l1', 'l2']);
+
+  await page.reload();
+  await expect(page.locator('#mapUpdateToast')).toBeHidden();
+  await expect(page.locator('[data-location-id="lesson49"] .new-change-sticker')).toHaveCount(0);
 });

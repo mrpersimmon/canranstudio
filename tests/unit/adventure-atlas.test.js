@@ -5,155 +5,97 @@ const assert = require('node:assert/strict');
 const catalog = require('../../core/course-catalog');
 const atlas = require('../../core/adventure-atlas');
 
-function profileWithLesson49(...completedStageIds) {
+function profile(overrides = {}) {
   return {
-    version: 1,
-    currentDistrictId: 'first-book-49-60',
+    version: 2,
+    currentDistrictId: catalog.LAUNCH_DISTRICT.id,
+    lastVisitedLocationId: null,
     souvenirs: [],
-    completedStages: { lesson49: completedStageIds }
+    completedStages: {},
+    pendingMapChanges: {},
+    ...overrides
   };
 }
 
-function profileWithFoodBasket(...completedStageIds) {
-  return {
-    ...profileWithLesson49(...completedStageIds),
-    souvenirs: ['food-basket']
-  };
-}
+test('only complete publication contracts become visible layered landmarks', () => {
+  const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
+  const lesson55 = catalog.COURSES.find(course => course.id === 'lesson55');
+  const [published, drawing] = atlas.buildLocationModels(
+    [lesson49, lesson55],
+    profile({ completedStages: { lesson49: ['l2', 'l4'] } })
+  );
 
-test('atlas location models follow the shared publication contract and device stages', () => {
-  const drawing = atlas.buildLocationModels([
-    catalog.COURSES.find(course => course.id === 'lesson50')
-  ])[0];
-  const published = atlas.buildLocationModels([
-    catalog.COURSES.find(course => course.id === 'lesson49')
-  ], profileWithLesson49('l2', 'l4'))[0];
-
-  assert.deepEqual(drawing, {
-    id: 'lesson50',
-    lesson: 50,
-    title: '挑食小王子大冒险',
-    slot: 1,
-    status: 'drawing',
-    route: null,
-    recommendable: false,
-    landmarkMode: null,
-    baseAsset: null,
-    landmarkAsset: null,
-    mobilePreview: null,
-    completedStageIds: [],
-    visibleGrowthAssets: [],
-    completedStageCount: 0,
-    totalStageCount: 5,
-    progressState: 'drawing',
-    souvenir: null
-  });
-  assert.deepEqual(published, {
-    id: 'lesson49',
-    lesson: 49,
-    title: '肉店大冒险',
-    slot: 1,
-    status: 'published',
-    route: '/lesson49/',
-    recommendable: true,
-    landmarkMode: 'snapshot',
-    baseAsset: 'assets/adventure-map/lesson49/base.png',
-    landmarkAsset: 'assets/adventure-map/lesson49/growth-2.png',
-    mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
-    completedStageIds: ['l2', 'l4'],
-    visibleGrowthAssets: [
-      'assets/adventure-map/lesson49/growth-2.png',
-      'assets/adventure-map/lesson49/growth-4.png'
-    ],
-    completedStageCount: 2,
-    totalStageCount: 5,
-    progressState: 'growing',
-    souvenir: null
-  });
-  assert.equal(Object.isFrozen(drawing), true);
+  assert.equal(published.status, 'published');
+  assert.equal(published.landmarkMode, 'layers');
+  assert.equal(published.baseAsset, 'assets/adventure-map/lesson49/landmark-base.png');
+  assert.equal(published.landmarkAsset, null);
+  assert.deepEqual(published.completedStageIds, ['l2', 'l4']);
+  assert.deepEqual(published.visibleGrowthAssets, [
+    'assets/adventure-map/lesson49/growth-02-display.png',
+    'assets/adventure-map/lesson49/growth-04-delivery.png'
+  ]);
+  assert.deepEqual(published.progressStamps.map(stamp => stamp.earned), [false, true, false, true, false]);
+  assert.equal(drawing.status, 'drawing');
+  assert.equal(drawing.route, null);
+  assert.equal(drawing.baseAsset, null);
   assert.equal(Object.isFrozen(published), true);
 });
 
-test('Lesson 51 exposes one fixed base plus only the independently completed growth layers', () => {
-  const lesson51 = catalog.COURSES.find(course => course.id === 'lesson51');
-  const profile = {
-    version: 1,
-    currentDistrictId: 'first-book-49-60',
-    souvenirs: [],
-    completedStages: { lesson51: ['l1', 'l3', 'l5'] }
-  };
+test('soundmark remains a four-stage side quest without a fabricated fifth stamp', () => {
+  const soundmark = catalog.COURSES.find(course => course.id === 'soundmark');
+  const model = atlas.buildLocationModels([soundmark], profile({
+    completedStages: { soundmark: ['vs', 'g2'] }
+  }))[0];
 
-  const model = atlas.buildLocationModels([lesson51], profile)[0];
-
-  assert.equal(model.landmarkMode, 'layers');
-  assert.equal(model.baseAsset, 'assets/adventure-map/lesson51/landmark-base.png');
-  assert.equal(model.landmarkAsset, null);
-  assert.deepEqual(model.completedStageIds, ['l1', 'l3', 'l5']);
-  assert.deepEqual(model.visibleGrowthAssets, [
-    'assets/adventure-map/lesson51/growth-01-weather.png',
-    'assets/adventure-map/lesson51/growth-03-seasons.png',
-    'assets/adventure-map/lesson51/growth-05-celebration.png'
-  ]);
-  assert.equal(model.completedStageCount, 3);
-  assert.equal(model.progressState, 'growing');
-  assert.equal(model.souvenir, null);
+  assert.equal(model.kind, 'special');
+  assert.equal(model.lesson, null);
+  assert.equal(model.totalStageCount, 4);
+  assert.deepEqual(model.progressStamps.map(stamp => stamp.id), ['vs', 'g1', 'g2', 'g3']);
+  assert.deepEqual(model.progressStamps.map(stamp => stamp.earned), [true, false, true, false]);
 });
 
-test('Lesson 49 exposes stage assets and a count-based snapshot for states zero through five', () => {
-  const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
-  const stageIds = lesson49.map.stages.map(stage => stage.progressId);
+test('recommendation uses last unfinished visit, then earliest unstarted, and none after completion', () => {
+  const courses = ['lesson49', 'lesson50'].map(id => catalog.COURSES.find(course => course.id === id));
+  const models = atlas.buildLocationModels(courses, profile({
+    lastVisitedLocationId: 'lesson50',
+    completedStages: { lesson49: [], lesson50: ['l1'] }
+  }));
+  assert.equal(atlas.selectRecommendedLocation(models, { lastVisitedLocationId: 'lesson50' }).id, 'lesson50');
 
-  for (let completed = 0; completed <= stageIds.length; completed += 1) {
-    const model = atlas.buildLocationModels(
-      [lesson49],
-      profileWithLesson49(...stageIds.slice(0, completed))
-    )[0];
-    assert.equal(model.completedStageCount, completed);
-    assert.equal(
-      model.landmarkAsset,
-      completed === 0
-        ? lesson49.map.baseAsset
-        : lesson49.map.stages[completed - 1].growthAsset
-    );
-    assert.deepEqual(
-      model.visibleGrowthAssets,
-      lesson49.map.stages.slice(0, completed).map(stage => stage.growthAsset)
-    );
-    assert.equal(
-      model.progressState,
-      completed === 0 ? 'ready' : completed === 5 ? 'complete' : 'growing'
-    );
-    assert.deepEqual(
-      model.souvenir,
-      null
-    );
-  }
+  const withoutRecent = atlas.buildLocationModels(courses, profile({
+    completedStages: { lesson49: [], lesson50: ['l1'] }
+  }));
+  assert.equal(atlas.selectRecommendedLocation(withoutRecent, {}).id, 'lesson49');
+
+  const complete = atlas.buildLocationModels(courses, profile({
+    completedStages: {
+      lesson49: ['l1', 'l2', 'l3', 'l4', 'l5'],
+      lesson50: ['l1', 'l2', 'l3', 'l4', 'l5']
+    }
+  }));
+  assert.equal(atlas.selectRecommendedLocation(complete, {}), null);
+  assert.equal(atlas.selectRecommendedLocation([], {}), null);
 });
 
-test('atlas renders a souvenir only from explicit permanent device ownership', () => {
+test('pending map changes collapse into one child-readable summary', () => {
   const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
-  const completeWithoutSouvenir = atlas.buildLocationModels(
-    [lesson49],
-    profileWithLesson49('l1', 'l2', 'l3', 'l4', 'l5')
-  )[0];
-  const ownedAfterCompletion = atlas.buildLocationModels(
-    [lesson49],
-    profileWithFoodBasket('l1', 'l2', 'l3', 'l4', 'l5')
-  )[0];
+  const growing = atlas.buildLocationModels([lesson49], profile({
+    completedStages: { lesson49: ['l1', 'l2', 'l3'] },
+    pendingMapChanges: { lesson49: ['l1', 'l3'] }
+  }))[0];
+  assert.deepEqual(atlas.buildMapChangeSummary(growing), {
+    courseId: 'lesson49',
+    stageIds: ['l1', 'l3'],
+    count: 2,
+    complete: false,
+    copy: '这里新增了 2 处变化'
+  });
 
-  assert.equal(completeWithoutSouvenir.souvenir, null);
-  assert.deepEqual(ownedAfterCompletion.souvenir, lesson49.map.souvenir);
-});
-
-test('recommendation prefers an unfinished published location and stays deterministic', () => {
-  const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
-  const ready = atlas.buildLocationModels([lesson49], profileWithLesson49());
-  const complete = atlas.buildLocationModels(
-    [lesson49],
-    profileWithLesson49('l1', 'l2', 'l3', 'l4', 'l5')
-  );
-
-  assert.equal(atlas.selectRecommendedLocation(ready).id, 'lesson49');
-  assert.equal(atlas.selectRecommendedLocation(complete).id, 'lesson49');
-  assert.equal(atlas.selectRecommendedLocation([]), null);
+  const complete = atlas.buildLocationModels([lesson49], profile({
+    completedStages: { lesson49: ['l1', 'l2', 'l3', 'l4', 'l5'] },
+    pendingMapChanges: { lesson49: ['l4', 'l5'] },
+    souvenirs: ['food-basket']
+  }))[0];
+  assert.equal(atlas.buildMapChangeSummary(complete).copy, '地点完成');
+  assert.deepEqual(complete.souvenir, lesson49.map.souvenir);
 });
