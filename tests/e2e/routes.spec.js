@@ -39,12 +39,15 @@ test('/home/ preserves query and hash through the compatibility redirect', async
 });
 
 test('atlas landmarks and course return links form a closed navigation loop', async ({ page }) => {
+  const routePageCourses = PUBLISHED_COURSES.filter(course => (
+    ['lesson49', 'lesson50', 'lesson51', 'lesson52'].includes(course.id)
+  ));
   await page.goto('/');
-  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
-  for (const course of PUBLISHED_COURSES) {
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
+  for (const course of routePageCourses) {
     await expect(page.locator(`#districtLocations a[href="${course.route}"]`)).toHaveCount(1);
   }
-  for (const course of PUBLISHED_COURSES) {
+  for (const course of routePageCourses) {
     await page.goto(course.route);
     const returnRoute = `/?district=first-book-49-60&focus=${course.id}`;
     expect(await page.locator(`a[href="${returnRoute}"]`).count()).toBeGreaterThanOrEqual(1);

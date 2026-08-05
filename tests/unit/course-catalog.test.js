@@ -193,7 +193,7 @@ test('world atlas declares twelve immutable districts with one V1 entrance', () 
     ]
   );
   assert.equal(catalog.LAUNCH_DISTRICT.id, 'first-book-49-60');
-  assert.equal(catalog.LAUNCH_DISTRICT.title, '暖灯集市');
+  assert.equal(catalog.LAUNCH_DISTRICT.title, '四季生活城');
   assertDeepFrozen(catalog.DISTRICTS);
 });
 

@@ -2,12 +2,10 @@
 
 const { test, expect } = require('@playwright/test');
 
-const PUBLISHED_LOCATION_IDS = [
-  'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark'
-];
+const ROUTE_PAGE_LOCATION_IDS = ['lesson49', 'lesson50', 'lesson51', 'lesson52'];
 
 async function enterLaunchDistrict(page) {
-  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
   await expect(page.locator('#currentDistrict')).toBeVisible();
 }
 
@@ -20,7 +18,7 @@ test('plain home is the atlas overview with one real district entrance and eleve
   await expect(page.locator('#worldDistricts [data-district-id]')).toHaveCount(0);
   await expect(page.locator('#worldDistricts button')).toHaveCount(1);
   await expect(page.locator('#worldDistricts a')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: '进入暖灯集市', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '进入四季生活城', exact: true })).toBeVisible();
 
   const scenicInteractivity = await page.locator('#worldDistricts .distant-region')
     .evaluateAll(regions => regions.reduce((count, region) => (
@@ -36,13 +34,13 @@ test('plain home is the atlas overview with one real district entrance and eleve
   }
 });
 
-test('launch district renders only the seven complete publication contracts', async ({ page }) => {
+test('the first route page renders only the four approved Lessons 49–52', async ({ page }) => {
   await page.goto('/');
   await enterLaunchDistrict(page);
 
   await expect(page.locator('#worldOverview')).toBeHidden();
-  await expect(page.locator('#districtLocations .map-location')).toHaveCount(7);
-  await expect(page.locator('#districtLocations [data-location-status="published"]')).toHaveCount(7);
+  await expect(page.locator('#districtLocations .map-location')).toHaveCount(4);
+  await expect(page.locator('#districtLocations [data-location-status="published"]')).toHaveCount(4);
   await expect(page.locator('#districtLocations [data-location-status="drawing"]')).toHaveCount(0);
   await expect(page.locator('#districtLocations')).not.toContainText('正在绘制');
 
@@ -58,16 +56,18 @@ test('launch district renders only the seven complete publication contracts', as
     ).currentDistrictId
   }));
 
-  expect(contract.renderedIds).toEqual(PUBLISHED_LOCATION_IDS);
+  expect(contract.renderedIds).toEqual(ROUTE_PAGE_LOCATION_IDS);
   expect(contract.catalogIds).toEqual([
     'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54',
     'lesson55', 'lesson56', 'lesson57', 'lesson58', 'lesson59', 'lesson60', 'soundmark'
   ]);
-  expect(contract.recommendableIds).toEqual(PUBLISHED_LOCATION_IDS);
+  expect(contract.recommendableIds).toEqual([
+    'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark'
+  ]);
   expect(contract.currentDistrictId).toBe('first-book-49-60');
 });
 
-test('every published landmark is a one-click course link', async ({ page }) => {
+test('every route-page landmark is a one-click course link', async ({ page }) => {
   await page.goto('/');
   await enterLaunchDistrict(page);
 
@@ -75,10 +75,7 @@ test('every published landmark is a one-click course link', async ({ page }) => 
     lesson49: '/lesson49/',
     lesson50: '/lesson50/',
     lesson51: '/lesson51/',
-    lesson52: '/lesson52/',
-    lesson53: '/lesson53/',
-    lesson54: '/lesson54/',
-    soundmark: '/soundmark/'
+    lesson52: '/lesson52/'
   };
   for (const [id, route] of Object.entries(expectedRoutes)) {
     const location = page.locator(`[data-location-id="${id}"]`);
@@ -86,24 +83,21 @@ test('every published landmark is a one-click course link', async ({ page }) => 
     await expect(location.getByRole('link')).toHaveAttribute('href', route);
   }
   await expect(page.locator('[data-location-id="lesson49"] a')).toHaveAccessibleName(
-    /继续冒险.*LESSON 49.*肉店大冒险.*学习进度 0\/5/
-  );
-  await expect(page.locator('[data-location-id="soundmark"] a')).toHaveAccessibleName(
-    /专项支线.*音标魔法乐园.*学习进度 0\/4/
+    /当前冒险位置.*LESSON 49.*肉店大冒险.*学习进度 0\/5/
   );
 });
 
-test('progress is embedded in each plaque and the special branch keeps four real stamps', async ({ page }) => {
+test('progress is embedded in each of the four lesson plaques', async ({ page }) => {
   await page.goto('/');
   await enterLaunchDistrict(page);
 
-  for (const id of PUBLISHED_LOCATION_IDS) {
+  for (const id of ROUTE_PAGE_LOCATION_IDS) {
     const location = page.locator(`[data-location-id="${id}"]`);
     const plaque = location.locator('.location-plaque');
     await expect(plaque).toHaveCount(1);
     await expect(plaque.locator('.location-kind')).toHaveCount(1);
     await expect(plaque.locator('.location-title')).toHaveCount(1);
-    await expect(plaque.locator('.progress-stamp')).toHaveCount(id === 'soundmark' ? 4 : 5);
+    await expect(plaque.locator('.progress-stamp')).toHaveCount(5);
     await expect(location.locator('.location-status')).toHaveCount(0);
   }
 });
@@ -122,13 +116,13 @@ test('plain reload always returns to world while an explicit course-return query
 
   await page.getByRole('button', { name: '返回世界总览', exact: true }).click();
   await expect(page.locator('#worldOverview')).toBeVisible();
-  await expect(page.getByRole('button', { name: '进入暖灯集市', exact: true })).toBeFocused();
+  await expect(page.getByRole('button', { name: '进入四季生活城', exact: true })).toBeFocused();
 });
 
 test('invalid atlas query parameters fail safely to the world overview', async ({ page }) => {
   for (const query of [
     '?district=unknown&focus=lesson49',
-    '?district=first-book-49-60&focus=lesson60',
+    '?district=first-book-49-60&focus=lesson53',
     '?focus=lesson49'
   ]) {
     await page.goto(`/${query}`);
@@ -167,10 +161,10 @@ test('the district parchment keeps its authored proportion on the Huawei viewpor
     const box = map.getBoundingClientRect();
     return box.width / box.height;
   });
-  expect(ratio).toBeCloseTo(914 / 1721, 2);
+  expect(ratio).toBeCloseTo(940 / 1672, 2);
 });
 
-test('every published landmark stays fully inside the Huawei district parchment', async ({ page }) => {
+test('every route-page landmark stays fully inside the Huawei district parchment', async ({ page }) => {
   await page.setViewportSize({ width: 466, height: 980 });
   await page.goto('/');
   await enterLaunchDistrict(page);
@@ -185,6 +179,34 @@ test('every published landmark stays fully inside the Huawei district parchment'
     });
   });
   expect(clipped).toEqual([]);
+});
+
+test('the explorer cat marks one current route position without covering landmark links', async ({ page }) => {
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
+
+  const mascot = page.locator('#routeMascot');
+  await expect(mascot).toHaveAttribute('data-route-avatar-target', 'lesson51');
+  await expect(mascot.locator('[data-route-cat-image]')).toHaveCount(1);
+  await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson51');
+  await expect(page.locator('[data-location-id="lesson51"] a')).toHaveAttribute('aria-current', 'step');
+  expect(await mascot.evaluate(element => getComputedStyle(element).pointerEvents)).toBe('none');
+});
+
+test('the four whole-pose loader frames appear only while key route artwork is pending', async ({ page }) => {
+  await page.route(/background-route-page-.*\.avif/, async route => {
+    await new Promise(resolve => setTimeout(resolve, 650));
+    await route.continue();
+  });
+  await page.goto('/?district=first-book-49-60&focus=lesson51', {
+    waitUntil: 'domcontentloaded'
+  });
+
+  const loader = page.locator('#mapLoader');
+  await expect(loader).toHaveAttribute('data-visible', 'true');
+  await expect(loader.locator('.map-loader__frame')).toHaveCount(4);
+  await expect(loader.locator('[data-route-loader-image]')).toHaveCount(4);
+  await expect(loader).toBeHidden({ timeout: 5_000 });
 });
 
 test('existing course URLs remain public direct entries', async ({ page }) => {

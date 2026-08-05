@@ -56,7 +56,7 @@ test('first persisted stage completion reveals once, blocks event-through, and c
   await expect(page.locator('.growth-reveal')).toBeHidden();
 });
 
-test('fifth stage adds the completion stamp and souvenir, then the map shows one final summary', async ({ page }) => {
+test('fifth stage awards the souvenir, then the uncluttered map shows one final summary', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
       version: 2,
@@ -83,8 +83,10 @@ test('fifth stage adds the completion stamp and souvenir, then the map shows one
 
   await expect(page.locator('#currentDistrict')).toBeVisible();
   await expect(page.locator('#mapUpdateToast')).toContainText('地点完成');
-  await expect(page.locator('[data-location-id="lesson49"] [data-souvenir-id="food-basket"]')).toBeVisible();
+  await expect(page.locator('[data-location-id="lesson49"] [data-souvenir-id]')).toHaveCount(0);
   await expect(page.locator('[data-location-id="lesson49"] [data-landmark-snapshot="5"]')).toHaveCount(1);
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).souvenirs, PROFILE_KEY))
+    .toContain('food-basket');
   await expect(page.locator('#mapUpdateToast')).toBeHidden({ timeout: 4_000 });
   await page.reload();
   await expect(page.locator('#mapUpdateToast')).toBeHidden();

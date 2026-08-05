@@ -12,7 +12,7 @@ const VIEWPORTS = [
   { label: 'desktop', width: 1280, height: 900 }
 ];
 const PUBLISHED_IDS = [
-  'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark'
+  'lesson49', 'lesson50', 'lesson51', 'lesson52'
 ];
 
 async function expectNoHorizontalOverflow(page) {
@@ -44,10 +44,11 @@ test('world overview loads one responsive entrance preview and defers full distr
     '/assets/adventure-map/lesson49/states/state-5-512.avif'
   ]));
 
-  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
   await page.waitForLoadState('networkidle');
   await expect(page.locator('#currentDistrict')).toBeVisible();
-  expect(mapRequests).toContain('/assets/adventure-map/atlas/warm-lantern-parchment-atlas-20260804-01-914.avif');
+  expect(mapRequests).toContain('/assets/adventure-map/route-pages/district5-page1/background-route-page-20260806-01-940.avif');
+  expect(mapRequests).toContain('/assets/adventure-map/mascot/explorer-cat-walking-route-page-20260806-01-128.avif');
   expect(mapRequests.some(path => /\/(?:landmark-base|growth-)/.test(path))).toBe(false);
   expect(mapRequests.some(path => /\/states\/state-0-(?:512|768|1024)\.(?:avif|webp)$/.test(path))).toBe(true);
 });
@@ -73,7 +74,7 @@ test('a direct district entry never downloads the hidden world entrance preview'
   await expect(page.locator('#currentDistrict')).toBeVisible();
   expect(mapRequests).not.toContain('/assets/adventure-map/lesson49/mobile-preview.png');
   expect(mapRequests).not.toContain('/assets/adventure-map/lesson49/states/state-5-512.avif');
-  expect(mapRequests).toContain('/assets/adventure-map/atlas/warm-lantern-parchment-atlas-20260804-01-512.avif');
+  expect(mapRequests).toContain('/assets/adventure-map/route-pages/district5-page1/background-route-page-20260806-01-512.avif');
   expect(avifResponseTypes.length).toBeGreaterThan(0);
   expect(new Set(avifResponseTypes)).toEqual(new Set(['image/avif']));
 });
@@ -94,9 +95,9 @@ test('Huawei high-density rendering selects detailed responsive sources without 
   await page.waitForLoadState('networkidle');
 
   expect(mapRequests).toContain(
-    '/assets/adventure-map/atlas/warm-lantern-parchment-atlas-20260804-01-914.avif'
+    '/assets/adventure-map/route-pages/district5-page1/background-route-page-20260806-01-940.avif'
   );
-  expect(mapRequests.filter(path => /\/states\/state-0-768\.avif$/.test(path))).toHaveLength(7);
+  expect(mapRequests.filter(path => /\/states\/state-0-768\.avif$/.test(path))).toHaveLength(4);
   expect(mapRequests.some(path => /\/states\/.*\.png$/.test(path))).toBe(false);
   await expect.poll(() => page.locator('[data-landmark-snapshot]').evaluateAll((images, expectedCount) => (
     images.length === expectedCount &&
@@ -133,7 +134,7 @@ test('phone, tablet rotations, and desktop preserve one atlas order and touch-sa
       expect(viewportMeta).toContain('viewport-fit=cover');
       expect(viewportMeta).not.toMatch(/user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i);
 
-      const entrance = page.getByRole('button', { name: '进入暖灯集市', exact: true });
+      const entrance = page.getByRole('button', { name: '进入四季生活城', exact: true });
       await expectMinimumTarget(entrance);
       await entrance.focus();
       await expect(entrance).toBeFocused();
@@ -157,7 +158,7 @@ test('phone, tablet rotations, and desktop preserve one atlas order and touch-sa
           mapTouchAction: getComputedStyle(map).touchAction
         };
       });
-      expect(mapBehavior.ratio).toBeCloseTo(914 / 1721, 2);
+      expect(mapBehavior.ratio).toBeCloseTo(940 / 1672, 2);
       expect(mapBehavior.mapTouchAction).not.toBe('none');
 
       for (const id of PUBLISHED_IDS) {
@@ -272,7 +273,7 @@ test('safe areas and reduced motion keep atlas and full-screen growth reveal usa
     expect(atlasCss).toContain(`safe-area-inset-${inset}`);
   }
   await expectNoHorizontalOverflow(page);
-  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
   expect(await page.locator('[data-map-guidance="active"] .published-location').evaluate(element => (
     getComputedStyle(element).transitionDuration
   ))).toBe('0s');

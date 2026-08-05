@@ -5,7 +5,7 @@ const { test, expect } = require('@playwright/test');
 const PROFILE_KEY = 'canran:adventure-profile:v1';
 
 async function enterDistrict(page) {
-  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
   await expect(page.locator('#currentDistrict')).toBeVisible();
 }
 
@@ -31,7 +31,7 @@ test('normalized course progress becomes plaque stamps and numbered-location com
 
   await expect(page.locator('[data-location-id="lesson49"] [data-earned="true"]')).toHaveCount(5);
   await expect(page.locator('[data-location-id="lesson50"] [data-earned="true"]')).toHaveCount(5);
-  await expect(page.locator('[data-location-id="soundmark"] [data-earned="true"]')).toHaveCount(4);
+  await expect(page.locator('[data-location-id="soundmark"]')).toHaveCount(0);
 });
 
 test('the atlas is the only visible student navigation surface', async ({ page }) => {
@@ -46,7 +46,7 @@ test('the atlas is the only visible student navigation surface', async ({ page }
 
   const focusable = await page.locator('#worldOverview button:not([disabled]), #worldOverview [tabindex="0"]')
     .evaluateAll(elements => elements.map(element => element.getAttribute('aria-label')));
-  expect(focusable).toEqual(['设备冒险设置', '进入暖灯集市']);
+  expect(focusable).toEqual(['设备冒险设置', '进入四季生活城']);
   await expect(page.locator('#currentDistrict button')).toHaveCount(2);
   for (const button of await page.locator('#currentDistrict button').all()) {
     await expect(button).toBeHidden();
@@ -74,28 +74,29 @@ test('home exposes the immutable catalog but renders only complete map locations
   expect(contract.publishedMapIds).toEqual([
     'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark'
   ]);
-  expect(contract.renderedIds).toEqual(contract.publishedMapIds);
+  expect(contract.renderedIds).toEqual(['lesson49', 'lesson50', 'lesson51', 'lesson52']);
 });
 
-test('recent unfinished location is highlighted and no separate recommendation card exists', async ({ page }) => {
+test('recent unfinished route location is marked by the explorer cat without a recommendation card', async ({ page }) => {
   await page.addInitScript(profileKey => {
     localStorage.setItem(profileKey, JSON.stringify({
       version: 2,
       currentDistrictId: 'first-book-49-60',
-      lastVisitedLocationId: 'lesson53',
+      lastVisitedLocationId: 'lesson51',
       souvenirs: [],
-      completedStages: { lesson49: ['l1'], lesson53: ['l1', 'l2'] },
-      courseRevealSeen: { lesson49: ['l1'], lesson53: ['l1', 'l2'] },
+      completedStages: { lesson49: ['l1'], lesson51: ['l1', 'l2'] },
+      courseRevealSeen: { lesson49: ['l1'], lesson51: ['l1', 'l2'] },
       pendingMapChanges: {},
-      mapChangeSeen: { lesson49: ['l1'], lesson53: ['l1', 'l2'] }
+      mapChangeSeen: { lesson49: ['l1'], lesson51: ['l1', 'l2'] }
     }));
   }, PROFILE_KEY);
 
-  await page.goto('/?district=first-book-49-60&focus=lesson53');
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
   await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute(
-    'data-location-id', 'lesson53'
+    'data-location-id', 'lesson51'
   );
-  await expect(page.locator('[data-map-guidance="active"] .location-guide')).toHaveText('继续冒险');
+  await expect(page.locator('#routeMascot')).toHaveAttribute('data-route-avatar-target', 'lesson51');
+  await expect(page.locator('.location-guide')).toHaveCount(0);
   await expect(page.locator('#districtRecommendation')).toHaveCount(0);
 });
 
@@ -121,8 +122,10 @@ test('all numbered locations complete leaves no forced recommendation', async ({
     }));
   }, PROFILE_KEY);
 
-  await page.goto('/?district=first-book-49-60&focus=lesson54');
+  await page.goto('/');
+  await enterDistrict(page);
   await expect(page.locator('[data-map-guidance="active"]')).toHaveCount(0);
+  await expect(page.locator('#routeMascot')).toHaveAttribute('data-route-avatar-target', 'route-exit');
   await page.getByRole('button', { name: '返回世界总览', exact: true }).click();
   await expect(page.locator('#worldCompletedCount')).toHaveText('6');
 });

@@ -18,7 +18,7 @@ async function finishRealListeningStage(page) {
   await expect(page.locator('#lgResult')).toBeVisible({ timeout: 2_500 });
 }
 
-test('Lesson 49 real completion advances one complete snapshot, returns to the landmark, and persists the souvenir', async ({ page }) => {
+test('Lesson 49 real completion advances one complete snapshot and preserves the current route position', async ({ page }) => {
   test.setTimeout(90_000);
   await page.addInitScript(({ profileKey, progressKey }) => {
     Object.defineProperty(HTMLMediaElement.prototype, 'play', {
@@ -96,17 +96,20 @@ test('Lesson 49 real completion advances one complete snapshot, returns to the l
   await page.reload();
 
   await expect(landmark.locator('[data-landmark-snapshot="5"]')).toHaveCount(1);
-  await expect(landmark.locator('[data-souvenir-id="food-basket"]')).toBeVisible();
-  await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson50');
+  await expect(landmark.locator('[data-souvenir-id]')).toHaveCount(0);
+  await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson49');
+  await expect(page.locator('#routeMascot')).toHaveAttribute('data-route-avatar-target', 'lesson49');
   await expect(landmark.getByRole('link')).toHaveAccessibleName(/学习进度 5\/5/);
   await expect(landmark.locator('.landmark-stack img')).toHaveCount(1);
+  expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).souvenirs, PROFILE_KEY))
+    .toContain('food-basket');
 
   await page.getByRole('button', { name: '设备冒险设置' }).click();
   await page.getByRole('button', { name: '重开冒险', exact: true }).click();
   await page.getByRole('button', { name: '继续确认', exact: true }).click();
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
   await expect(page.locator('#worldOverview')).toBeVisible();
-  await page.getByRole('button', { name: '进入暖灯集市', exact: true }).click();
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
   await expect(landmark.locator('[data-landmark-snapshot="0"]')).toHaveCount(1);
   await expect(landmark.locator('[data-souvenir-id]')).toHaveCount(0);
   await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson49');
@@ -129,8 +132,10 @@ test('a completed numbered district has no review recommendation and never dupli
     }));
   }, PROFILE_KEY);
 
-  await page.goto(MAP_RETURN);
+  await page.goto('/');
+  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
   await expect(page.locator('[data-map-guidance]')).toHaveCount(0);
+  await expect(page.locator('#routeMascot')).toHaveAttribute('data-route-avatar-target', 'route-exit');
   await expect(page.locator('#districtRecommendation')).toHaveCount(0);
   await expect(page.locator('#districtLocations a[href="/lesson49/"]')).toHaveCount(1);
   await expect(page.locator('[data-location-id="lesson49"] .landmark-stack')).toHaveCount(1);

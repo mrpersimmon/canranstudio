@@ -100,7 +100,7 @@
     { id: 'first-book-13-24', order: 2, title: '回声溪谷', lessonStart: 13, lessonEnd: 24, v1Accessible: false },
     { id: 'first-book-25-36', order: 3, title: '单词花园', lessonStart: 25, lessonEnd: 36, v1Accessible: false },
     { id: 'first-book-37-48', order: 4, title: '故事港湾', lessonStart: 37, lessonEnd: 48, v1Accessible: false },
-    { id: 'first-book-49-60', order: 5, title: '暖灯集市', lessonStart: 49, lessonEnd: 60, v1Accessible: true },
+    { id: 'first-book-49-60', order: 5, title: '四季生活城', lessonStart: 49, lessonEnd: 60, v1Accessible: true },
     { id: 'first-book-61-72', order: 6, title: '四季丘陵', lessonStart: 61, lessonEnd: 72, v1Accessible: false },
     { id: 'first-book-73-84', order: 7, title: '环球车站', lessonStart: 73, lessonEnd: 84, v1Accessible: false },
     { id: 'first-book-85-96', order: 8, title: '句型山城', lessonStart: 85, lessonEnd: 96, v1Accessible: false },

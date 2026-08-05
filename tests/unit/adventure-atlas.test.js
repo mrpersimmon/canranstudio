@@ -79,6 +79,44 @@ test('recommendation uses last unfinished visit, then earliest unstarted, and no
   assert.equal(atlas.selectRecommendedLocation([], {}), null);
 });
 
+test('the approved golden route page contains exactly Lessons 49–52 in curriculum order', () => {
+  const models = atlas.buildRoutePageLocationModels(catalog.MAP_COURSES, profile());
+
+  assert.deepEqual(models.map(model => model.id), [
+    'lesson49', 'lesson50', 'lesson51', 'lesson52'
+  ]);
+  assert.equal(atlas.GOLDEN_ROUTE_PAGE.canvas.width, 940);
+  assert.equal(atlas.GOLDEN_ROUTE_PAGE.canvas.height, 1672);
+  assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE), true);
+  assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE.backgroundAsset), true);
+});
+
+test('the explorer cat follows a focused course, then the next adventure, then the route exit', () => {
+  const focusedModels = atlas.buildRoutePageLocationModels(catalog.MAP_COURSES, profile({
+    lastVisitedLocationId: 'lesson50'
+  }));
+  assert.equal(
+    atlas.selectRouteAvatarTarget(focusedModels, 'lesson51', { lastVisitedLocationId: 'lesson50' }),
+    'lesson51'
+  );
+  assert.equal(
+    atlas.selectRouteAvatarTarget(focusedModels, null, { lastVisitedLocationId: 'lesson50' }),
+    'lesson50'
+  );
+
+  const complete = ['l1', 'l2', 'l3', 'l4', 'l5'];
+  const completedModels = atlas.buildRoutePageLocationModels(catalog.MAP_COURSES, profile({
+    completedStages: {
+      lesson49: complete,
+      lesson50: complete,
+      lesson51: complete,
+      lesson52: complete
+    }
+  }));
+  assert.equal(atlas.selectRouteAvatarTarget(completedModels, null, {}), 'route-exit');
+  assert.equal(atlas.selectRouteAvatarTarget([], null, {}), null);
+});
+
 test('pending map changes collapse into one child-readable summary', () => {
   const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
   const growing = atlas.buildLocationModels([lesson49], profile({

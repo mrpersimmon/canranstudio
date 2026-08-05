@@ -18,6 +18,53 @@
     return Object.freeze(value);
   }
 
+  const ROUTE_PAGE_ART_VERSION = 'route-page-20260806-01';
+  const GOLDEN_ROUTE_PAGE = deepFreeze({
+    id: 'district5-page1',
+    districtId: 'first-book-49-60',
+    title: '风味四季路',
+    subtitle: 'Lesson 49–52 · 食物口味与各地气候',
+    locationIds: ['lesson49', 'lesson50', 'lesson51', 'lesson52'],
+    canvas: { width: 940, height: 1672 },
+    backgroundAsset: {
+      version: ROUTE_PAGE_ART_VERSION,
+      png: 'assets/adventure-map/route-pages/district5-page1/background-master.png',
+      variants: [512, 768, 940].map(width => ({
+        width,
+        avif: `assets/adventure-map/route-pages/district5-page1/background-${ROUTE_PAGE_ART_VERSION}-${width}.avif`,
+        webp: `assets/adventure-map/route-pages/district5-page1/background-${ROUTE_PAGE_ART_VERSION}-${width}.webp`
+      }))
+    },
+    mascotAsset: {
+      version: ROUTE_PAGE_ART_VERSION,
+      png: 'assets/adventure-map/mascot/explorer-cat-walking.png',
+      variants: [128, 192, 256].map(width => ({
+        width,
+        avif: `assets/adventure-map/mascot/explorer-cat-walking-${ROUTE_PAGE_ART_VERSION}-${width}.avif`,
+        webp: `assets/adventure-map/mascot/explorer-cat-walking-${ROUTE_PAGE_ART_VERSION}-${width}.webp`
+      }))
+    },
+    markerAsset: {
+      version: ROUTE_PAGE_ART_VERSION,
+      png: 'assets/adventure-map/mascot/current-route-marker.png',
+      variants: [64, 96, 128].map(width => ({
+        width,
+        avif: `assets/adventure-map/mascot/current-route-marker-${ROUTE_PAGE_ART_VERSION}-${width}.avif`,
+        webp: `assets/adventure-map/mascot/current-route-marker-${ROUTE_PAGE_ART_VERSION}-${width}.webp`
+      }))
+    },
+    loaderFrames: [1, 2, 3, 4].map(frame => ({
+      frame,
+      version: ROUTE_PAGE_ART_VERSION,
+      png: `assets/adventure-map/mascot/loader/frame-${frame}.png`,
+      variants: [128, 192, 256].map(width => ({
+        width,
+        avif: `assets/adventure-map/mascot/loader/frame-${frame}-${ROUTE_PAGE_ART_VERSION}-${width}.avif`,
+        webp: `assets/adventure-map/mascot/loader/frame-${frame}-${ROUTE_PAGE_ART_VERSION}-${width}.webp`
+      }))
+    }))
+  });
+
   function stageIds(course) {
     return Array.isArray(course?.map?.stages)
       ? course.map.stages.map(stage => stage.progressId)
@@ -99,6 +146,22 @@
     return unfinished.find(location => location.progressState === 'ready') || unfinished[0] || null;
   }
 
+  function buildRoutePageLocationModels(courses, profile = null, routePage = GOLDEN_ROUTE_PAGE) {
+    if (!Array.isArray(courses) || !Array.isArray(routePage?.locationIds)) return Object.freeze([]);
+    const byId = new Map(courses.map(course => [course?.id, course]));
+    const pageCourses = routePage.locationIds.map(id => byId.get(id)).filter(Boolean);
+    return buildLocationModels(pageCourses, profile);
+  }
+
+  function selectRouteAvatarTarget(locations, focusedId = null, profile = null) {
+    if (!Array.isArray(locations) || locations.length === 0) return null;
+    const focused = locations.find(location => (
+      location.id === focusedId && location.status === 'published'
+    ));
+    if (focused) return focused.id;
+    return selectRecommendedLocation(locations, profile)?.id || 'route-exit';
+  }
+
   function buildMapChangeSummary(location) {
     const stageIds = Array.isArray(location?.pendingMapChanges) ? location.pendingMapChanges : [];
     if (!location?.id || stageIds.length === 0) return null;
@@ -113,5 +176,13 @@
     });
   }
 
-  return Object.freeze({ buildLocationModels, selectRecommendedLocation, buildMapChangeSummary });
+  return Object.freeze({
+    ROUTE_PAGE_ART_VERSION,
+    GOLDEN_ROUTE_PAGE,
+    buildLocationModels,
+    buildRoutePageLocationModels,
+    selectRecommendedLocation,
+    selectRouteAvatarTarget,
+    buildMapChangeSummary
+  });
 });

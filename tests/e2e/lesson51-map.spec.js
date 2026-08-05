@@ -50,10 +50,12 @@ test('Lesson 51 loads exactly one complete responsive snapshot for each cumulati
     if (completed < STAGES.length) {
       await expect(location.locator('[data-souvenir-id]')).toHaveCount(0);
     } else {
-      await expect(location.locator('[data-souvenir-id="four-seasons-guide-compass"]')).toBeVisible();
+      await expect(location.locator('[data-souvenir-id]')).toHaveCount(0);
       await expect(location.getByRole('link')).toHaveAccessibleName(
-        /地点完成.*5\/5.*永久纪念.*四季导游罗盘/
+        /地点完成.*5\/5/
       );
+      expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).souvenirs, PROFILE_KEY))
+        .toContain('four-seasons-guide-compass');
     }
   }
 });

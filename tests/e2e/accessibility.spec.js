@@ -782,13 +782,13 @@ test('atlas keeps one keyboard path through world, district, settings, and back'
   expect(await page.locator('.distant-region').evaluateAll(regions =>
     regions.every(region => region.getAttribute('aria-hidden') === 'true')
   )).toBe(true);
-  const entrance = page.getByRole('button', { name: '进入暖灯集市', exact: true });
+  const entrance = page.getByRole('button', { name: '进入四季生活城', exact: true });
   await entrance.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#currentDistrictTitle')).toBeFocused();
 
   const locations = page.locator('#districtLocations .published-location');
-  await expect(locations).toHaveCount(7);
+  await expect(locations).toHaveCount(4);
   for (const link of await locations.all()) {
     await expect(link).toHaveAttribute('aria-label', /学习进度 \d\/\d/);
   }
