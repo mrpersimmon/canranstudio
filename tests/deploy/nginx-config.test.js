@@ -12,6 +12,7 @@ const config = fs.readFileSync(
 );
 
 const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
+const REVIEW_CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 
 function tokenizeNginx(text) {
   const tokens = [];
@@ -243,7 +244,7 @@ function assertHttpContract(text) {
   assertExactChildren(landmarkReview.children, [
     leaf('try_files', ['$uri', '$uri/', '=404']),
     leaf('expires', ['epoch']),
-    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
+    leaf('add_header', ['Content-Security-Policy', REVIEW_CSP, 'always']),
     leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
     leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
     leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
@@ -356,12 +357,15 @@ test('Nginx contract defines the complete structural HTTP policy', () => {
   assert.match(config, /font-src 'self' data:/);
 });
 
-test('every effective Nginx CSP equals the independent live verifier contract byte-for-byte', () => {
+test('effective Nginx CSPs preserve the public contract with one review-only fetch exception', () => {
   const root = parseNginx(config);
   const server = one(root, 'server', []);
   const values = [...new Set(effectiveHeaderValues(server, 'Content-Security-Policy'))];
 
-  assert.deepEqual(values, [verifier.HTTP_HEADER_CONTRACT['content-security-policy']]);
+  assert.deepEqual(values.sort(), [
+    verifier.HTTP_HEADER_CONTRACT['content-security-policy'],
+    REVIEW_CSP
+  ].sort());
 });
 
 test('Nginx tokenizer keeps comment markers and delimiters inside quoted arguments', () => {

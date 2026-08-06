@@ -18,6 +18,9 @@
   const VIEWPORTS = Object.freeze(['huawei', 'tablet', 'master']);
   const REVIEWS = Object.freeze(['art', 'placement']);
   const VIEWPORT_WIDTHS = Object.freeze({ huawei: 466, tablet: 768, master: 1024 });
+  const REVIEW_ASSET_WIDTHS = Object.freeze([512, 768, 1024]);
+  const REVIEW_CACHE_NAME = 'canran-landmark-review-assets-v1';
+  const PRELOAD_CONCURRENCY = 2;
 
   function freezeList(items) {
     items.forEach(Object.freeze);
@@ -110,6 +113,332 @@
     return `/${path}?v=${encodeURIComponent(version)}`;
   }
 
+  function buildReviewAssetPlan(location) {
+    if (!location || !Array.isArray(location.stateAssets)) return Object.freeze([]);
+    return freezeList(location.stateAssets.flatMap((asset, stage) => REVIEW_ASSET_WIDTHS.map(width => {
+      const variants = Array.isArray(asset.variants) ? asset.variants : [];
+      const variant = variants.find(candidate => candidate.width === width) || variants
+        .slice()
+        .sort((left, right) => Math.abs(left.width - width) - Math.abs(right.width - width))[0];
+      const candidates = [variant?.avif, variant?.webp, asset.png]
+        .filter((path, index, list) => path && list.indexOf(path) === index)
+        .map(path => ({
+          path,
+          format: path.split('.').pop().toLowerCase(),
+          relativeUrl: versionedUrl(path, asset.version)
+        }));
+      return {
+        key: `${location.id}:${stage}:${width}`,
+        locationId: location.id,
+        stage,
+        width,
+        candidates
+      };
+    })));
+  }
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes) || bytes <= 0) return '0 KB';
+    if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
+
+  function createReviewAssetPool({ windowRef, onStatus }) {
+    let session = null;
+    let generation = 0;
+    const objectUrls = new Set();
+    const cachePromise = windowRef.caches?.open
+      ? windowRef.caches.open(REVIEW_CACHE_NAME).catch(() => null)
+      : Promise.resolve(null);
+
+    function snapshot(activeSession = session) {
+      if (!activeSession) {
+        return Object.freeze({
+          state: 'idle', ready: 0, total: 0, failed: 0,
+          transferredBytes: 0, cacheHits: 0, fallbacks: 0, current: null
+        });
+      }
+      const complete = activeSession.ready + activeSession.failed === activeSession.total;
+      return Object.freeze({
+        state: complete
+          ? (activeSession.failed > 0 ? 'failed' : 'ready')
+          : 'loading',
+        ready: activeSession.ready,
+        total: activeSession.total,
+        failed: activeSession.failed,
+        transferredBytes: activeSession.transferredBytes,
+        cacheHits: activeSession.cacheHits,
+        fallbacks: activeSession.fallbacks,
+        current: activeSession.current,
+        locationId: activeSession.locationId,
+        failedJobs: [...activeSession.errors.keys()].map(key => activeSession.allJobs.get(key))
+          .filter(Boolean)
+      });
+    }
+
+    function emit(activeSession = session) {
+      if (activeSession !== session) return;
+      onStatus(snapshot(activeSession));
+    }
+
+    function releaseObjectUrl(url) {
+      if (!url || !objectUrls.has(url)) return;
+      objectUrls.delete(url);
+      windowRef.URL.revokeObjectURL(url);
+    }
+
+    function cancelSession() {
+      if (!session) return;
+      session.cancelled = true;
+      session.controller.abort();
+      session.queue.length = 0;
+      for (const listeners of session.waiters.values()) {
+        for (const resolve of listeners) resolve(null);
+      }
+      session.waiters.clear();
+      for (const record of session.records.values()) releaseObjectUrl(record.objectUrl);
+      session.records.clear();
+      session = null;
+    }
+
+    async function decodedRecord(response, candidate) {
+      const blob = await response.blob();
+      const objectUrl = windowRef.URL.createObjectURL(blob);
+      objectUrls.add(objectUrl);
+      const image = new windowRef.Image();
+      image.decoding = 'async';
+      image.src = objectUrl;
+      try {
+        if (typeof image.decode === 'function') await image.decode();
+        else await new Promise((resolve, reject) => {
+          image.addEventListener('load', resolve, { once: true });
+          image.addEventListener('error', reject, { once: true });
+        });
+      } catch (error) {
+        releaseObjectUrl(objectUrl);
+        throw error;
+      }
+      return { objectUrl, candidate, byteSize: blob.size };
+    }
+
+    async function fetchCandidate(activeSession, candidate) {
+      const absoluteUrl = new URL(candidate.relativeUrl, windowRef.location.href).href;
+      const cache = await cachePromise;
+      if (!activeSession.forceReload && cache) {
+        const cached = await cache.match(absoluteUrl);
+        if (cached) {
+          const record = await decodedRecord(cached, { ...candidate, absoluteUrl });
+          return { ...record, cacheHit: true, transferredBytes: 0 };
+        }
+      }
+
+      let lastError = null;
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        try {
+          const response = await windowRef.fetch(absoluteUrl, {
+            cache: activeSession.forceReload ? 'reload' : 'force-cache',
+            credentials: 'same-origin',
+            signal: activeSession.controller.signal
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const cacheCopy = response.clone();
+          const record = await decodedRecord(response, { ...candidate, absoluteUrl });
+          if (cache) await cache.put(absoluteUrl, cacheCopy).catch(() => {});
+          return {
+            ...record,
+            cacheHit: false,
+            transferredBytes: record.byteSize
+          };
+        } catch (error) {
+          if (activeSession.controller.signal.aborted) throw error;
+          lastError = error;
+          if (cache) await cache.delete(absoluteUrl).catch(() => {});
+        }
+      }
+      throw lastError || new Error(`unable to prepare ${absoluteUrl}`);
+    }
+
+    async function prepareJob(activeSession, job) {
+      let lastError = null;
+      for (let index = 0; index < job.candidates.length; index += 1) {
+        const candidate = job.candidates[index];
+        try {
+          return {
+            ...(await fetchCandidate(activeSession, candidate)),
+            fallback: index > 0
+          };
+        } catch (error) {
+          if (activeSession.controller.signal.aborted) throw error;
+          lastError = error;
+        }
+      }
+      throw lastError || new Error(`no usable asset for ${job.key}`);
+    }
+
+    function resolveWaiters(activeSession, key, record) {
+      const listeners = activeSession.waiters.get(key) || [];
+      activeSession.waiters.delete(key);
+      for (const resolve of listeners) resolve(record);
+    }
+
+    function settle(activeSession) {
+      if (activeSession !== session || activeSession.cancelled) return;
+      if (activeSession.active > 0 || activeSession.queue.length > 0) return;
+      activeSession.current = null;
+      emit(activeSession);
+      activeSession.resolve(snapshot(activeSession));
+    }
+
+    function pump(activeSession) {
+      if (activeSession !== session || activeSession.cancelled) return;
+      while (activeSession.active < PRELOAD_CONCURRENCY && activeSession.queue.length > 0) {
+        const job = activeSession.queue.shift();
+        activeSession.active += 1;
+        activeSession.current = job;
+        emit(activeSession);
+        prepareJob(activeSession, job)
+          .then(record => {
+            if (activeSession !== session || activeSession.cancelled) {
+              releaseObjectUrl(record.objectUrl);
+              return;
+            }
+            activeSession.records.set(job.key, {
+              ...record,
+              key: job.key,
+              stage: job.stage,
+              width: job.width
+            });
+            resolveWaiters(activeSession, job.key, activeSession.records.get(job.key));
+            activeSession.ready += 1;
+            activeSession.transferredBytes += record.transferredBytes;
+            if (record.cacheHit) activeSession.cacheHits += 1;
+            if (record.fallback) activeSession.fallbacks += 1;
+          })
+          .catch(error => {
+            if (activeSession !== session || activeSession.cancelled) return;
+            activeSession.failed += 1;
+            activeSession.errors.set(job.key, error);
+            resolveWaiters(activeSession, job.key, null);
+          })
+          .finally(() => {
+            activeSession.active -= 1;
+            emit(activeSession);
+            pump(activeSession);
+            settle(activeSession);
+          });
+      }
+      settle(activeSession);
+    }
+
+    function prioritize(queue, stage, width) {
+      return queue.slice().sort((left, right) => {
+        const leftRank = [
+          left.stage === stage ? 0 : 1,
+          left.width === width ? 0 : 1,
+          Math.abs(left.stage - stage),
+          REVIEW_ASSET_WIDTHS.indexOf(left.width)
+        ];
+        const rightRank = [
+          right.stage === stage ? 0 : 1,
+          right.width === width ? 0 : 1,
+          Math.abs(right.stage - stage),
+          REVIEW_ASSET_WIDTHS.indexOf(right.width)
+        ];
+        for (let index = 0; index < leftRank.length; index += 1) {
+          if (leftRank[index] !== rightRank[index]) return leftRank[index] - rightRank[index];
+        }
+        return 0;
+      });
+    }
+
+    function start(location, { stage = 0, viewport = 'huawei', forceReload = false } = {}) {
+      const targetWidth = REVIEW_ASSET_WIDTHS.find(width => width >= VIEWPORT_WIDTHS[viewport]) || 1024;
+      if (session && session.locationId === location.id && !forceReload) {
+        session.queue = prioritize(session.queue, stage, targetWidth);
+        emit(session);
+        return session.done;
+      }
+      cancelSession();
+      generation += 1;
+      let resolveDone;
+      const done = new Promise(resolve => { resolveDone = resolve; });
+      const plan = buildReviewAssetPlan(location);
+      session = {
+        generation,
+        locationId: location.id,
+        forceReload,
+        queue: prioritize(plan, stage, targetWidth),
+        allJobs: new Map(plan.map(job => [job.key, job])),
+        active: 0,
+        ready: 0,
+        total: plan.length,
+        failed: 0,
+        transferredBytes: 0,
+        cacheHits: 0,
+        fallbacks: 0,
+        current: null,
+        records: new Map(),
+        errors: new Map(),
+        waiters: new Map(),
+        cancelled: false,
+        controller: new windowRef.AbortController(),
+        done,
+        resolve: resolveDone
+      };
+      emit(session);
+      pump(session);
+      return done;
+    }
+
+    function getRecord(locationId, stage, viewport) {
+      if (!session || session.locationId !== locationId) return null;
+      const width = REVIEW_ASSET_WIDTHS.find(candidate => candidate >= VIEWPORT_WIDTHS[viewport]) || 1024;
+      return session.records.get(`${locationId}:${stage}:${width}`) || null;
+    }
+
+    function ensure(location, stage, viewport) {
+      const width = REVIEW_ASSET_WIDTHS.find(candidate => candidate >= VIEWPORT_WIDTHS[viewport]) || 1024;
+      if (!session || session.locationId !== location.id) {
+        start(location, { stage, viewport });
+      }
+      const key = `${location.id}:${stage}:${width}`;
+      const record = session.records.get(key);
+      if (record) return Promise.resolve(record);
+      if (session.errors.has(key)) return Promise.resolve(null);
+      session.queue = prioritize(session.queue, stage, width);
+      pump(session);
+      return new Promise(resolve => {
+        const listeners = session.waiters.get(key) || [];
+        listeners.push(resolve);
+        session.waiters.set(key, listeners);
+      });
+    }
+
+    function retryFailed() {
+      if (!session || session.errors.size === 0) return;
+      const jobs = [...session.errors.keys()]
+        .map(key => session.allJobs.get(key))
+        .filter(Boolean);
+      for (const job of jobs) session.errors.delete(job.key);
+      session.failed = Math.max(0, session.failed - jobs.length);
+      session.queue.unshift(...jobs);
+      emit(session);
+      pump(session);
+    }
+
+    return Object.freeze({
+      start,
+      ensure,
+      retryFailed,
+      getRecord,
+      getSnapshot: () => snapshot(),
+      destroy() {
+        cancelSession();
+        for (const url of [...objectUrls]) releaseObjectUrl(url);
+      }
+    });
+  }
+
   function pictureElement(documentRef, asset, {
     alt = '',
     sizes = '100vw',
@@ -157,15 +486,74 @@
     const locations = getReviewLocations(catalog);
     const routePage = atlas.GOLDEN_ROUTE_PAGE;
     let state = normalizeReviewState(windowRef.location.search, locations, routePage);
-    let idleHandle = null;
-    let idleHandleType = null;
-    let preloadImages = [];
-    let preloadGeneration = 0;
+    let renderGeneration = 0;
+    let warmupHandle = null;
+    let warmupHandleType = null;
     const picker = rootElement.querySelector('[data-location-picker]');
     const stageStrip = rootElement.querySelector('[data-stage-strip]');
     const reviewTabs = rootElement.querySelector('[data-review-tabs]');
     const viewportTabs = rootElement.querySelector('[data-viewport-tabs]');
     const frame = rootElement.querySelector('[data-review-frame]');
+    const preloadStatus = rootElement.querySelector('[data-review-preload-status]');
+    const preloadCount = rootElement.querySelector('[data-review-preload-count]');
+    const preloadDetail = rootElement.querySelector('[data-review-preload-detail]');
+    const preloadProgress = rootElement.querySelector('[data-review-preload-progress]');
+
+    function renderPreloadStatus(status) {
+      preloadStatus.dataset.state = status.state;
+      if (status.locationId) preloadStatus.dataset.locationId = status.locationId;
+      else delete preloadStatus.dataset.locationId;
+      preloadCount.textContent = `${status.ready}/${status.total}`;
+      preloadProgress.max = Math.max(1, status.total);
+      preloadProgress.value = status.ready;
+      const transfer = formatBytes(status.transferredBytes);
+      if (status.state === 'ready') {
+        const fallback = status.fallbacks > 0 ? ` · 兼容格式 ${status.fallbacks}` : '';
+        preloadDetail.textContent = `${transfer} · 缓存命中 ${status.cacheHits}${fallback} · 三档已解码`;
+      } else if (status.state === 'failed') {
+        const first = status.failedJobs?.[0];
+        const formats = first?.candidates?.map(candidate => candidate.format.toUpperCase()).join('/') || '';
+        const resource = first
+          ? ` · Stage ${first.stage} · ${first.width}px${formats ? ` · ${formats}` : ''}`
+          : '';
+        preloadDetail.textContent = `${status.failed} 项失败${resource} · ${transfer} · 可重试`;
+      } else if (status.current) {
+        const format = status.current.candidates?.[0]?.format?.toUpperCase() || '图片';
+        preloadDetail.textContent = `Stage ${status.current.stage} · ${status.current.width}px · ${format} · ${transfer}`;
+      } else {
+        preloadDetail.textContent = '等待当前图片';
+      }
+      const retry = rootElement.querySelector('[data-review-retry]');
+      if (retry) retry.hidden = status.failed === 0;
+    }
+
+    const assetPool = createReviewAssetPool({ windowRef, onStatus: renderPreloadStatus });
+
+    function reviewAssetElement(location, stage, {
+      alt = '',
+      sizes = '100vw',
+      marker = null,
+      className = ''
+    } = {}) {
+      const asset = location.stateAssets[stage];
+      const record = assetPool.getRecord(location.id, stage, state.viewport);
+      if (!record) {
+        const fallback = pictureElement(documentRef, asset, { alt, sizes, marker, className });
+        fallback.image.dataset.sourcePath = asset.png;
+        return { element: fallback.picture, image: fallback.image };
+      }
+      const image = documentRef.createElement('img');
+      image.src = record.objectUrl;
+      image.alt = alt;
+      image.sizes = sizes;
+      image.className = className;
+      image.decoding = 'async';
+      image.draggable = false;
+      image.dataset.sourcePath = asset.png;
+      image.dataset.preparedWidth = String(record.candidate?.width || record.width || '');
+      if (marker) image.setAttribute(marker, '');
+      return { element: image, image };
+    }
 
     picker.replaceChildren(...locations.map(location => {
       const option = documentRef.createElement('option');
@@ -185,64 +573,55 @@
       windowRef.history.replaceState(null, '', next);
     }
 
-    function cancelPreload() {
-      preloadGeneration += 1;
-      if (idleHandle !== null) {
-        if (idleHandleType === 'idle' && typeof windowRef.cancelIdleCallback === 'function') {
-          windowRef.cancelIdleCallback(idleHandle);
-        } else if (idleHandleType === 'timeout') {
-          windowRef.clearTimeout(idleHandle);
+    function cancelWarmupSchedule() {
+      if (warmupHandle !== null) {
+        if (warmupHandleType === 'idle' && typeof windowRef.cancelIdleCallback === 'function') {
+          windowRef.cancelIdleCallback(warmupHandle);
+        } else if (warmupHandleType === 'timeout') {
+          windowRef.clearTimeout(warmupHandle);
         }
       }
-      idleHandle = null;
-      idleHandleType = null;
-      for (const image of preloadImages) image.src = '';
-      preloadImages = [];
+      warmupHandle = null;
+      warmupHandleType = null;
     }
 
-    function preloadAdjacent(location, stage, image) {
-      cancelPreload();
-      const generation = preloadGeneration;
-      const run = () => {
-        if (generation !== preloadGeneration) return;
-        for (const adjacent of [stage - 1, stage + 1]) {
-          const asset = location.stateAssets[adjacent];
-          if (!asset) continue;
-          const preloader = new windowRef.Image();
-          const targetWidth = VIEWPORT_WIDTHS[state.viewport];
-          const preferred = [...asset.variants].reverse()
-            .find(variant => variant.width <= targetWidth) || asset.variants[0];
-          preloader.src = versionedUrl(preferred.webp, asset.version);
-          preloadImages.push(preloader);
-        }
-      };
+    function warmAllStages(location, stage, image) {
+      cancelWarmupSchedule();
       const schedule = () => {
+        const run = () => {
+          warmupHandle = null;
+          warmupHandleType = null;
+          assetPool.start(location, { stage, viewport: state.viewport });
+        };
         if (typeof windowRef.requestIdleCallback === 'function') {
-          idleHandle = windowRef.requestIdleCallback(run, { timeout: 1200 });
-          idleHandleType = 'idle';
+          warmupHandle = windowRef.requestIdleCallback(run, { timeout: 250 });
+          warmupHandleType = 'idle';
         } else {
-          idleHandle = windowRef.setTimeout(run, 80);
-          idleHandleType = 'timeout';
+          warmupHandle = windowRef.setTimeout(run, 40);
+          warmupHandleType = 'timeout';
         }
       };
-      if (image.complete) schedule();
-      else image.addEventListener('load', schedule, { once: true });
+      const afterDecode = async () => {
+        if (typeof image.decode === 'function') await image.decode().catch(() => {});
+        schedule();
+      };
+      if (image.complete) afterDecode();
+      else image.addEventListener('load', afterDecode, { once: true });
     }
 
     function renderArtAsset(location, stage, previewing = false) {
       const artboard = frame.querySelector('[data-artboard]');
       if (!artboard) return;
-      const asset = location.stateAssets[stage];
       const targetWidth = VIEWPORT_WIDTHS[state.viewport];
-      const { picture, image } = pictureElement(documentRef, asset, {
+      const { element, image } = reviewAssetElement(location, stage, {
         alt: `${location.title} · ${stageLabels(location)[stage]}`,
         sizes: `${targetWidth}px`,
         marker: 'data-current-art'
       });
-      artboard.replaceChildren(picture);
+      artboard.replaceChildren(element);
       artboard.dataset.previewingPrevious = String(previewing);
       artboard.dataset.displayedStage = String(stage);
-      if (!previewing) preloadAdjacent(location, stage, image);
+      if (!previewing) warmAllStages(location, stage, image);
     }
 
     function restoreCurrentArt() {
@@ -274,7 +653,6 @@
     }
 
     function renderPlacement(location) {
-      cancelPreload();
       const map = documentRef.createElement('div');
       map.className = 'placement-map';
       map.dataset.placementMap = '';
@@ -291,6 +669,7 @@
 
       const list = documentRef.createElement('ol');
       list.className = 'placement-locations';
+      let selectedImage = null;
       for (const model of buildPlacementModels(locations, state, routePage)) {
         const item = documentRef.createElement('li');
         item.className = 'placement-location';
@@ -302,10 +681,20 @@
         const art = documentRef.createElement('div');
         art.className = 'placement-location__art';
         const artWidth = Math.round(targetWidth * model.placement.width / 100);
-        art.append(pictureElement(documentRef, model.stateAssets[model.stage], {
-          alt: '',
-          sizes: `${artWidth}px`
-        }).picture);
+        if (model.id === state.location) {
+          const prepared = reviewAssetElement(model, model.stage, {
+            alt: '',
+            sizes: `${artWidth}px`,
+            marker: 'data-current-art'
+          });
+          selectedImage = prepared.image;
+          art.append(prepared.element);
+        } else {
+          art.append(pictureElement(documentRef, model.stateAssets[model.stage], {
+            alt: '',
+            sizes: `${artWidth}px`
+          }).picture);
+        }
 
         const plaque = documentRef.createElement('div');
         plaque.className = 'placement-plaque';
@@ -329,6 +718,7 @@
       }
       map.append(list);
       frame.replaceChildren(map);
+      if (selectedImage) warmAllStages(location, state.stage, selectedImage);
     }
 
     function renderControls(location) {
@@ -364,8 +754,12 @@
     }
 
     function render({ updateUrl = false } = {}) {
+      renderGeneration += 1;
       const location = currentLocation();
       state = normalizeReviewState(serializeReviewState(state), locations, routePage);
+      delete frame.dataset.pendingStage;
+      delete frame.dataset.pendingReview;
+      delete frame.dataset.pendingViewport;
       frame.dataset.viewport = state.viewport;
       frame.dataset.review = state.review;
       renderControls(location);
@@ -374,27 +768,69 @@
       if (updateUrl) syncUrl();
     }
 
+    function transitionWithinLocation(nextState, { updateUrl = false } = {}) {
+      state = normalizeReviewState(serializeReviewState(nextState), locations, routePage);
+      const location = currentLocation();
+      const generation = ++renderGeneration;
+      frame.dataset.pendingStage = String(state.stage);
+      frame.dataset.pendingReview = state.review;
+      frame.dataset.pendingViewport = state.viewport;
+      renderControls(location);
+      if (updateUrl) syncUrl();
+      assetPool.ensure(location, state.stage, state.viewport).then(record => {
+        if (generation !== renderGeneration || !record) return;
+        delete frame.dataset.pendingStage;
+        delete frame.dataset.pendingReview;
+        delete frame.dataset.pendingViewport;
+        frame.dataset.viewport = state.viewport;
+        frame.dataset.review = state.review;
+        if (state.review === 'placement') renderPlacement(location);
+        else renderArt(location);
+      });
+    }
+
     picker.addEventListener('change', () => {
       state = { ...state, location: picker.value };
       render({ updateUrl: true });
     });
     rootElement.addEventListener('click', event => {
+      const recheckButton = event.target.closest('[data-review-recheck]');
+      if (recheckButton) {
+        cancelWarmupSchedule();
+        assetPool.start(currentLocation(), {
+          stage: state.stage,
+          viewport: state.viewport,
+          forceReload: true
+        });
+        return;
+      }
+      const retryButton = event.target.closest('[data-review-retry]');
+      if (retryButton) {
+        assetPool.retryFailed();
+        return;
+      }
       const stageButton = event.target.closest('[data-stage-button]');
       if (stageButton) {
-        state = { ...state, stage: Number(stageButton.dataset.stageButton) };
-        render({ updateUrl: true });
+        transitionWithinLocation({
+          ...state,
+          stage: Number(stageButton.dataset.stageButton)
+        }, { updateUrl: true });
         return;
       }
       const reviewButton = event.target.closest('[data-review-button]');
       if (reviewButton) {
-        state = { ...state, review: reviewButton.dataset.reviewButton };
-        render({ updateUrl: true });
+        transitionWithinLocation({
+          ...state,
+          review: reviewButton.dataset.reviewButton
+        }, { updateUrl: true });
         return;
       }
       const viewportButton = event.target.closest('[data-viewport-button]');
       if (viewportButton) {
-        state = { ...state, viewport: viewportButton.dataset.viewportButton };
-        render({ updateUrl: true });
+        transitionWithinLocation({
+          ...state,
+          viewport: viewportButton.dataset.viewportButton
+        }, { updateUrl: true });
         return;
       }
       const stepButton = event.target.closest('[data-location-step]');
@@ -419,7 +855,8 @@
     return Object.freeze({
       getState: () => ({ ...state }),
       destroy() {
-        cancelPreload();
+        cancelWarmupSchedule();
+        assetPool.destroy();
         windowRef.removeEventListener('pointerup', restoreCurrentArt);
         windowRef.removeEventListener('pointercancel', restoreCurrentArt);
         windowRef.removeEventListener('blur', restoreCurrentArt);

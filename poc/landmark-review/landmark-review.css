@@ -112,6 +112,37 @@ button{color:inherit}
   white-space:nowrap;
 }
 .segmented button[aria-pressed="true"]{background:var(--ink);color:var(--paper-light);box-shadow:0 2px 0 rgba(73,49,38,.28)}
+.preload-status{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(120px,1fr) auto;
+  gap:8px 12px;
+  align-items:center;
+  padding:8px 10px;
+  border:2px solid rgba(73,49,38,.42);
+  border-radius:14px;
+  background:rgba(255,255,255,.42);
+  color:var(--ink-soft);
+  font-size:13px;
+  line-height:1.2;
+}
+.preload-status[data-state="ready"]{border-color:var(--green);background:rgba(76,133,95,.12)}
+.preload-status[data-state="failed"]{border-color:var(--red);background:rgba(165,67,50,.12)}
+.preload-summary{display:flex;min-width:0;gap:8px;align-items:baseline;flex-wrap:wrap}
+.preload-summary strong{color:var(--ink);white-space:nowrap}
+.preload-summary span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preload-status progress{width:100%;height:9px;accent-color:var(--green)}
+.preload-actions{display:flex;gap:6px}
+.preload-actions button{
+  min-height:32px;
+  padding:4px 9px;
+  border:1px solid var(--ink);
+  border-radius:9px;
+  background:var(--paper-light);
+  color:var(--ink);
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
 .review-workspace{display:grid;place-items:start center;padding:26px 0 18px}
 .review-frame{
   width:min(100%,var(--target-width));
@@ -222,6 +253,10 @@ button:focus-visible,select:focus-visible{outline:4px solid #5eaaf0;outline-offs
   .review-shell{padding-inline:8px}
   .review-controls{gap:8px;padding:8px;border-radius:17px}
   .control-ledger{grid-template-columns:1fr}
+  .preload-status{grid-template-columns:1fr auto}
+  .preload-status progress{grid-column:1/-1;grid-row:2}
+  .preload-actions{grid-column:2;grid-row:1}
+  .preload-actions button{max-width:104px;line-height:1.05}
   .review-workspace{padding-top:20px}
   .stage-strip{gap:4px;padding:6px}
   .stage-button{min-width:40px;min-height:42px;padding-inline:7px;font-size:15px}
