@@ -362,6 +362,10 @@ test('effective Nginx CSPs preserve the public contract with one review-only fet
   const server = one(root, 'server', []);
   const values = [...new Set(effectiveHeaderValues(server, 'Content-Security-Policy'))];
 
+  assert.equal(
+    REVIEW_CSP,
+    verifier.LANDMARK_REVIEW_HEADER_CONTRACT['content-security-policy']
+  );
   assert.deepEqual(values.sort(), [
     verifier.HTTP_HEADER_CONTRACT['content-security-policy'],
     REVIEW_CSP

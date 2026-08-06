@@ -4,7 +4,10 @@ const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry');
-const { HTTP_HEADER_CONTRACT } = require('./http-header-contract');
+const {
+  HTTP_HEADER_CONTRACT,
+  LANDMARK_REVIEW_HEADER_CONTRACT
+} = require('./http-header-contract');
 
 const ROUTES = Object.freeze([
   Object.freeze({ path: '/', file: 'index.html' }),
@@ -30,6 +33,7 @@ const ENTRY_ROUTE_BY_FILE = Object.freeze(Object.fromEntries([
   ['poc/landmark-review/index.html', '/poc/landmark-review/']
 ]));
 const NOINDEX_FILES = Object.freeze(new Set(['poc/landmark-review/index.html']));
+const LANDMARK_REVIEW_PREFIX = 'poc/landmark-review/';
 
 const DEFAULT_LIVE_PROFILE = Object.freeze({
   concurrency: 2,
@@ -160,7 +164,12 @@ function parseManifest(bytes) {
   return manifest;
 }
 
-function verifyHeaders(response, label, failures, { noindex = false } = {}) {
+function verifyHeaders(
+  response,
+  label,
+  failures,
+  { noindex = false, headerContract = HTTP_HEADER_CONTRACT } = {}
+) {
   if (
     !response.headers ||
     typeof response.headers.get !== 'function' ||
@@ -170,7 +179,7 @@ function verifyHeaders(response, label, failures, { noindex = false } = {}) {
     return false;
   }
   try {
-    for (const [header, expected] of Object.entries(HTTP_HEADER_CONTRACT)) {
+    for (const [header, expected] of Object.entries(headerContract)) {
       const actual = response.headers.get(header);
       if (!actual) failures.push(`${label}: missing header ${header}`);
       else if (actual !== expected) failures.push(`${label}: unexpected header ${header}`);
@@ -385,7 +394,12 @@ async function verifyBase({
       localFailures.push(`${file}: expected 200, received ${response.status}`);
     }
     verifyFinalUrl(response.url, parsedBaseUrl, expectedUrl, file, localFailures);
-    verifyHeaders(response, file, localFailures, { noindex: NOINDEX_FILES.has(file) });
+    verifyHeaders(response, file, localFailures, {
+      noindex: NOINDEX_FILES.has(file),
+      headerContract: file.startsWith(LANDMARK_REVIEW_PREFIX)
+        ? LANDMARK_REVIEW_HEADER_CONTRACT
+        : HTTP_HEADER_CONTRACT
+    });
     let bytes;
     try {
       bytes = await readBoundedBody(response, maxBytes, file);
@@ -514,4 +528,10 @@ if (require.main === module) {
     });
 }
 
-module.exports = { ROUTES, HTTP_HEADER_CONTRACT, DEFAULT_LIVE_PROFILE, verifyBase };
+module.exports = {
+  ROUTES,
+  HTTP_HEADER_CONTRACT,
+  LANDMARK_REVIEW_HEADER_CONTRACT,
+  DEFAULT_LIVE_PROFILE,
+  verifyBase
+};

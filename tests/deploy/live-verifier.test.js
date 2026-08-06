@@ -8,7 +8,13 @@ const os = require('node:os');
 const path = require('node:path');
 const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
 const verifier = require('../../scripts/verify-live');
-const { verifyBase, ROUTES, HTTP_HEADER_CONTRACT, DEFAULT_LIVE_PROFILE } = verifier;
+const {
+  verifyBase,
+  ROUTES,
+  HTTP_HEADER_CONTRACT,
+  LANDMARK_REVIEW_HEADER_CONTRACT,
+  DEFAULT_LIVE_PROFILE
+} = verifier;
 
 const EXPECTED_ROUTES = [
   { path: '/', file: 'index.html' },
@@ -27,6 +33,11 @@ const SECURITY_HEADERS = {
   'x-frame-options': 'DENY',
   'referrer-policy': 'strict-origin-when-cross-origin',
   'permissions-policy': 'camera=(), microphone=(), geolocation=()'
+};
+
+const REVIEW_SECURITY_HEADERS = {
+  ...SECURITY_HEADERS,
+  'content-security-policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
 };
 
 const FIXTURE_FILES = {
@@ -58,6 +69,12 @@ const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 test('live verifier exposes the named exact HTTP header contract used by fixtures', () => {
   assert.equal(Object.hasOwn(verifier, 'HTTP_HEADER_CONTRACT'), true);
   assert.deepEqual(HTTP_HEADER_CONTRACT, SECURITY_HEADERS);
+});
+
+test('live verifier exposes the review-only same-origin fetch contract', () => {
+  assert.equal(Object.hasOwn(verifier, 'LANDMARK_REVIEW_HEADER_CONTRACT'), true);
+  assert.deepEqual(LANDMARK_REVIEW_HEADER_CONTRACT, REVIEW_SECURITY_HEADERS);
+  assert.equal(Object.isFrozen(LANDMARK_REVIEW_HEADER_CONTRACT), true);
 });
 
 test('live verifier uses the production bandwidth profile by default', () => {
@@ -179,7 +196,9 @@ function manifestFetch(root, options = {}) {
     const response = new Response(body, {
       status: statusOverrides[requestedPath] || 200,
       headers: {
-        ...HTTP_HEADER_CONTRACT,
+        ...(requestedPath.startsWith('/poc/landmark-review/')
+          ? REVIEW_SECURITY_HEADERS
+          : HTTP_HEADER_CONTRACT),
         ...(requestedPath === '/poc/landmark-review/'
           ? { 'x-robots-tag': 'noindex, nofollow, noarchive' }
           : {}),
@@ -303,6 +322,26 @@ test('verifyBase requires the noindex response header on the landmark review rou
       })
     }),
     /poc\/landmark-review\/index\.html: unexpected x-robots-tag/
+  );
+});
+
+test('verifyBase requires the review CSP on every landmark review resource', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      fetchImpl: manifestFetch(root, {
+        headerOverrides: {
+          '/poc/landmark-review/landmark-review.js': {
+            'content-security-policy': SECURITY_HEADERS['content-security-policy']
+          }
+        }
+      })
+    }),
+    /poc\/landmark-review\/landmark-review\.js: unexpected header content-security-policy/
   );
 });
 
