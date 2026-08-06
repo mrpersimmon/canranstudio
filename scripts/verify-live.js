@@ -14,6 +14,10 @@ const ROUTES = Object.freeze([
   ...PRESENTATION_COURSES.map(course =>
     Object.freeze({ path: course.presentation.route, file: course.presentation.entry })
   ),
+  Object.freeze({
+    path: '/poc/landmark-review/',
+    file: 'poc/landmark-review/index.html'
+  }),
   Object.freeze({ path: '/release-manifest.json', file: 'release-manifest.json' })
 ]);
 
@@ -22,8 +26,10 @@ const LIVE_BYTE_EXCEPTIONS = Object.freeze(['home/index.html']);
 const ENTRY_ROUTE_BY_FILE = Object.freeze(Object.fromEntries([
   ['index.html', '/'],
   ...PUBLISHED_COURSES.map(course => [course.entry, course.route]),
-  ...PRESENTATION_COURSES.map(course => [course.presentation.entry, course.presentation.route])
+  ...PRESENTATION_COURSES.map(course => [course.presentation.entry, course.presentation.route]),
+  ['poc/landmark-review/index.html', '/poc/landmark-review/']
 ]));
+const NOINDEX_FILES = Object.freeze(new Set(['poc/landmark-review/index.html']));
 
 const DEFAULT_LIVE_PROFILE = Object.freeze({
   concurrency: 2,
@@ -154,7 +160,7 @@ function parseManifest(bytes) {
   return manifest;
 }
 
-function verifyHeaders(response, label, failures) {
+function verifyHeaders(response, label, failures, { noindex = false } = {}) {
   if (
     !response.headers ||
     typeof response.headers.get !== 'function' ||
@@ -171,6 +177,12 @@ function verifyHeaders(response, label, failures) {
     }
     if (response.headers.has('strict-transport-security')) {
       failures.push(`${label}: unexpected strict-transport-security`);
+    }
+    if (
+      noindex &&
+      response.headers.get('x-robots-tag') !== 'noindex, nofollow, noarchive'
+    ) {
+      failures.push(`${label}: unexpected x-robots-tag`);
     }
     return true;
   } catch (error) {
@@ -373,7 +385,7 @@ async function verifyBase({
       localFailures.push(`${file}: expected 200, received ${response.status}`);
     }
     verifyFinalUrl(response.url, parsedBaseUrl, expectedUrl, file, localFailures);
-    verifyHeaders(response, file, localFailures);
+    verifyHeaders(response, file, localFailures, { noindex: NOINDEX_FILES.has(file) });
     let bytes;
     try {
       bytes = await readBoundedBody(response, maxBytes, file);

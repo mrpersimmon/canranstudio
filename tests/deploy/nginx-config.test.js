@@ -180,7 +180,8 @@ function assertHttpContract(text) {
     ['/lesson52', '/lesson52/'],
     ['/lesson53', '/lesson53/'],
     ['/lesson54', '/lesson54/'],
-    ['/soundmark', '/soundmark/']
+    ['/soundmark', '/soundmark/'],
+    ['/poc/landmark-review', '/poc/landmark-review/']
   ];
   assertExactChildren(children, [
     leaf('listen', ['80']),
@@ -199,6 +200,7 @@ function assertHttpContract(text) {
     leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
     block('if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']),
     ...redirects.map(([source]) => block('location', ['=', source])),
+    block('location', ['^~', '/poc/landmark-review/']),
     block('location', ['~*', '^/assets/adventure-map/atlas/.*-atlas-[a-z0-9-]+-[0-9]+[.](avif|webp)$']),
     block('location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']),
     block('location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']),
@@ -236,6 +238,21 @@ function assertHttpContract(text) {
     assertExactChildren(location.children, [leaf('return', ['308', destination])], `redirect ${source}`);
     one(location.children, 'return', ['308', destination]);
   }
+
+  const landmarkReview = one(children, 'location', ['^~', '/poc/landmark-review/']);
+  assertExactChildren(landmarkReview.children, [
+    leaf('try_files', ['$uri', '$uri/', '=404']),
+    leaf('expires', ['epoch']),
+    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
+    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
+    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
+    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
+    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
+    leaf('add_header', ['X-Robots-Tag', 'noindex, nofollow, noarchive', 'always']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'landmark review');
+  const landmarkReviewLimit = one(landmarkReview.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(landmarkReviewLimit.children, [leaf('deny', ['all'])], 'landmark review limit_except');
 
   const atlasBackgrounds = one(children, 'location', [
     '~*',

@@ -26,6 +26,12 @@
     subtitle: 'Lesson 49–52 · 食物口味与各地气候',
     locationIds: ['lesson49', 'lesson50', 'lesson51', 'lesson52'],
     canvas: { width: 940, height: 1672 },
+    placements: {
+      lesson49: { top: 3.4, left: 3.4, width: 49 },
+      lesson50: { top: 18.8, right: 3.4, width: 47 },
+      lesson51: { top: 40.1, left: 4.8, width: 50 },
+      lesson52: { top: 67.1, right: 4.6, width: 47 }
+    },
     backgroundAsset: {
       version: ROUTE_PAGE_ART_VERSION,
       png: 'assets/adventure-map/route-pages/district5-page1/background-master.png',

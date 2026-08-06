@@ -20,7 +20,8 @@ const PUBLIC_INPUTS = [
   ]),
   ...PRESENTATION_COURSES.map(course => course.presentation.entry),
   'core',
-  'assets'
+  'assets',
+  'poc'
 ];
 const VALID_MP3_BYTES = Buffer.alloc(144);
 VALID_MP3_BYTES.set([0xff, 0xf3, 0x64, 0xc4]);
@@ -106,7 +107,10 @@ async function writeSyntheticPublicRoot(root) {
     'core/audio-player.js',
     'core/classroom-presentation.js',
     'core/growth-reveal.js',
-    'core/growth-reveal.css'
+    'core/growth-reveal.css',
+    'poc/landmark-review/index.html',
+    'poc/landmark-review/landmark-review.css',
+    'poc/landmark-review/landmark-review.js'
   ]) {
     const file = path.join(root, relative);
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -228,6 +232,9 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'core/certificate-gate.css',
     'core/growth-reveal.js',
     'core/growth-reveal.css',
+    'poc/landmark-review/index.html',
+    'poc/landmark-review/landmark-review.css',
+    'poc/landmark-review/landmark-review.js',
     'assets/adventure-map/lesson49/growth-01-awning.png',
     'assets/adventure-map/lesson50/growth-05-celebration.png',
     'assets/adventure-map/lesson51/growth-05-celebration.png',

@@ -17,7 +17,8 @@ const REQUIRED_FILES = Object.freeze([
 ]);
 const REQUIRED_DIRECTORIES = Object.freeze([
   ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),
-  'core'
+  'core',
+  'poc'
 ]);
 const REQUIRED_RUNTIME_FILES = Object.freeze([
   'core/growth-reveal.js',

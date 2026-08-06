@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>地标验收台 · 灿然英语小镇</title>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <link rel="stylesheet" href="/poc/landmark-review/landmark-review.css">
+</head>
+<body>
+  <div class="review-shell" data-review-root>
+    <header class="review-controls" aria-label="地标验收控制台">
+      <div class="location-row">
+        <button class="round-step" type="button" data-location-step="previous" aria-label="上一个地标">←</button>
+        <label class="location-picker-wrap">
+          <span class="visually-hidden">选择地图地点</span>
+          <select class="location-picker" data-location-picker aria-label="选择地图地点"></select>
+        </label>
+        <button class="round-step" type="button" data-location-step="next" aria-label="下一个地标">→</button>
+      </div>
+      <div class="control-ledger">
+        <div class="segmented" data-review-tabs aria-label="审查类型"></div>
+        <div class="segmented" data-viewport-tabs aria-label="观察尺寸">
+          <button type="button" data-viewport-button="huawei">华为窄屏</button>
+          <button type="button" data-viewport-button="tablet">常用平板</button>
+          <button type="button" data-viewport-button="master">1024 原图</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="review-workspace">
+      <div class="review-frame" data-review-frame></div>
+    </main>
+
+    <nav class="stage-strip" data-stage-strip aria-label="地标阶段"></nav>
+  </div>
+  <noscript>此验收台需要启用 JavaScript。</noscript>
+  <script src="/core/course-catalog.js"></script>
+  <script src="/core/adventure-atlas.js"></script>
+  <script src="/poc/landmark-review/landmark-review.js"></script>
+  <script>CanranPoc.landmarkReview.mount(document.querySelector('[data-review-root]'));</script>
+</body>
+</html>

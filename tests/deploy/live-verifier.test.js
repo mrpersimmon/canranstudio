@@ -17,6 +17,7 @@ const EXPECTED_ROUTES = [
     path: course.presentation.route,
     file: course.presentation.entry
   })),
+  { path: '/poc/landmark-review/', file: 'poc/landmark-review/index.html' },
   { path: '/release-manifest.json', file: 'release-manifest.json' }
 ];
 
@@ -45,6 +46,9 @@ const FIXTURE_FILES = {
   'lesson52/audio/american.mp3': Buffer.from('lesson52 mp3'),
   'lesson53/audio/mild.mp3': Buffer.from('lesson53 mp3'),
   'lesson54/audio/australia.mp3': Buffer.from('lesson54 mp3'),
+  'poc/landmark-review/index.html': Buffer.from('landmark review'),
+  'poc/landmark-review/landmark-review.css': Buffer.from('review styles'),
+  'poc/landmark-review/landmark-review.js': Buffer.from('review runtime'),
   'home/index.html': Buffer.from('compatibility redirect')
 };
 
@@ -122,6 +126,7 @@ function manifestFetch(root, options = {}) {
     ['/', 'index.html'],
     ...PUBLISHED_COURSES.map(course => [course.route, course.entry]),
     ...PRESENTATION_COURSES.map(course => [course.presentation.route, course.presentation.entry]),
+    ['/poc/landmark-review/', 'poc/landmark-review/index.html'],
     ['/release-manifest.json', 'release-manifest.json']
   ]);
 
@@ -175,6 +180,9 @@ function manifestFetch(root, options = {}) {
       status: statusOverrides[requestedPath] || 200,
       headers: {
         ...HTTP_HEADER_CONTRACT,
+        ...(requestedPath === '/poc/landmark-review/'
+          ? { 'x-robots-tag': 'noindex, nofollow, noarchive' }
+          : {}),
         ...headerOverrides[requestedPath]
       }
     });
@@ -259,7 +267,10 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
       { file: 'lesson51/audio/climate.mp3', path: '/lesson51/audio/climate.mp3' },
       { file: 'lesson52/audio/american.mp3', path: '/lesson52/audio/american.mp3' },
       { file: 'lesson53/audio/mild.mp3', path: '/lesson53/audio/mild.mp3' },
-      { file: 'lesson54/audio/australia.mp3', path: '/lesson54/audio/australia.mp3' }
+      { file: 'lesson54/audio/australia.mp3', path: '/lesson54/audio/australia.mp3' },
+      { file: 'poc/landmark-review/index.html', path: '/poc/landmark-review/' },
+      { file: 'poc/landmark-review/landmark-review.css', path: '/poc/landmark-review/landmark-review.css' },
+      { file: 'poc/landmark-review/landmark-review.js', path: '/poc/landmark-review/landmark-review.js' }
     ]
   );
   assert.equal(
@@ -274,6 +285,24 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
       { path: alias, redirect: 'manual' },
       { path: alias, redirect: 'follow' }
     ])
+  );
+});
+
+test('verifyBase requires the noindex response header on the landmark review route', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      fetchImpl: manifestFetch(root, {
+        headerOverrides: {
+          '/poc/landmark-review/': { 'x-robots-tag': 'index, follow' }
+        }
+      })
+    }),
+    /poc\/landmark-review\/index\.html: unexpected x-robots-tag/
   );
 });
 

@@ -87,6 +87,12 @@ test('the approved golden route page contains exactly Lessons 49–52 in curricu
   ]);
   assert.equal(atlas.GOLDEN_ROUTE_PAGE.canvas.width, 940);
   assert.equal(atlas.GOLDEN_ROUTE_PAGE.canvas.height, 1672);
+  assert.deepEqual(atlas.GOLDEN_ROUTE_PAGE.placements, {
+    lesson49: { top: 3.4, left: 3.4, width: 49 },
+    lesson50: { top: 18.8, right: 3.4, width: 47 },
+    lesson51: { top: 40.1, left: 4.8, width: 50 },
+    lesson52: { top: 67.1, right: 4.6, width: 47 }
+  });
   assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE), true);
   assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE.backgroundAsset), true);
 });

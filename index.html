@@ -102,10 +102,6 @@ img{display:block;max-width:100%}
 .district-map__paper img{width:100%;height:100%;object-fit:contain}
 .district-locations{position:absolute;z-index:8;inset:0;margin:0;padding:0;list-style:none}
 .map-location{position:absolute;display:grid;place-items:center;text-align:center}
-.map-location[data-location-id="lesson49"]{top:3.4%;left:3.4%;width:49%}
-.map-location[data-location-id="lesson50"]{top:18.8%;right:3.4%;width:47%}
-.map-location[data-location-id="lesson51"]{top:40.1%;left:4.8%;width:50%}
-.map-location[data-location-id="lesson52"]{top:67.1%;right:4.6%;width:47%}
 .published-location{position:relative;display:flex;flex-direction:column;align-items:center;width:100%;color:inherit;text-decoration:none;transition:transform .2s ease}
 .published-marker{position:relative;z-index:2;width:100%;aspect-ratio:1;filter:drop-shadow(0 7px 3px rgba(66,41,26,.25))}
 .landmark-stack picture{position:absolute;inset:0}
@@ -436,6 +432,15 @@ function progressMarkup(location){
   return `<span class="progress-stamps">${stamps}</span><span class="sr-only">学习进度 ${location.completedStageCount}/${location.totalStageCount}</span>`;
 }
 
+function routePlacementStyle(locationId){
+  const placement=CanranCore.adventureAtlas.GOLDEN_ROUTE_PAGE.placements[locationId];
+  if(!placement)return '';
+  return ['top','right','bottom','left','width']
+    .filter(property=>Number.isFinite(placement[property]))
+    .map(property=>`${property}:${placement[property]}%`)
+    .join(';');
+}
+
 function locationMarkup(location,recommended,focusedId){
   if(location.status!=='published') return '';
   const active=focusedId?location.id===focusedId:location.id===recommended?.id;
@@ -444,7 +449,7 @@ function locationMarkup(location,recommended,focusedId){
   const changeCopy=pending?'<span class="new-change-sticker">新变化</span>':'';
   const completionCopy=location.progressState==='complete'?'地点完成，':'';
   const accessible=`${active?'当前冒险位置，':''}${completionCopy}${kind}，${location.title}，学习进度 ${location.completedStageCount}/${location.totalStageCount}`;
-  return `<li class="map-location" data-location-id="${location.id}" data-map-lesson="${location.lesson??''}" data-location-status="published"${active?' data-map-guidance="active"':''}${pending?' data-map-change="true"':''}>
+  return `<li class="map-location" style="${routePlacementStyle(location.id)}" data-location-id="${location.id}" data-map-lesson="${location.lesson??''}" data-location-status="published"${active?' data-map-guidance="active"':''}${pending?' data-map-change="true"':''}>
     <a class="published-location" href="${location.route}" data-course-id="${location.id}" aria-label="${accessible}"${active?' aria-current="step"':''}>
       <span class="published-marker landmark-stack" aria-hidden="true">${landmarkMarkup(location,{priority:active||pending})}</span>
       ${changeCopy}
