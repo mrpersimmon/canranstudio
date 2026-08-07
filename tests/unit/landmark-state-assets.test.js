@@ -6,7 +6,10 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const sharp = require('sharp');
 const { MAP_STATE_VERSION } = require('../../core/course-catalog');
-const { GOLDEN_ROUTE_PAGE } = require('../../core/adventure-atlas');
+const {
+  GOLDEN_ROUTE_PAGE,
+  DISTRICT5_PAGE2_REVIEW
+} = require('../../core/adventure-atlas');
 
 const ROOT = path.resolve(__dirname, '../..');
 const STATE_DIR = path.join(ROOT, 'assets/adventure-map/lesson51/states');
@@ -163,6 +166,32 @@ test('the approved V4 route page ships a fixed-ratio background and transparent 
     }
   }
   assert.deepEqual(GOLDEN_ROUTE_PAGE.loaderFrames.map(frame => frame.frame), [1, 2, 3, 4]);
+});
+
+test('the review-only Lesson 53–56 page ships a fixed-ratio responsive background', async () => {
+  const background = DISTRICT5_PAGE2_REVIEW.backgroundAsset;
+  const source = path.join(ROOT, background.png);
+  const [sourceMetadata, sourceStat] = await Promise.all([
+    sharp(source).metadata(),
+    fs.stat(source)
+  ]);
+  assert.deepEqual(
+    { width: sourceMetadata.width, height: sourceMetadata.height, hasAlpha: sourceMetadata.hasAlpha },
+    { width: 940, height: 1672, hasAlpha: false }
+  );
+
+  for (const variant of background.variants) {
+    const expectedHeight = Math.round(variant.width * 1672 / 940);
+    for (const format of ['avif', 'webp']) {
+      const target = path.join(ROOT, variant[format]);
+      const [metadata, stat] = await Promise.all([sharp(target).metadata(), fs.stat(target)]);
+      assert.deepEqual(
+        { width: metadata.width, height: metadata.height },
+        { width: variant.width, height: expectedHeight }
+      );
+      assert.ok(stat.size < sourceStat.size, path.basename(target));
+    }
+  }
 });
 
 test('adjacent Lesson 51 snapshots keep the temple anchor aligned instead of moving loose layers', async () => {

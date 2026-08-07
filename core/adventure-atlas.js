@@ -71,6 +71,68 @@
     }))
   });
 
+  const REVIEW_ROUTE_PAGE_ART_VERSION = 'route-page-review-20260806-01';
+  const DISTRICT5_PAGE2_REVIEW = deepFreeze({
+    id: 'district5-page2-review',
+    districtId: 'first-book-49-60',
+    reviewOnly: true,
+    title: '气候家庭街',
+    subtitle: 'Lesson 53–56 · 各地气候与家庭作息',
+    locationIds: ['lesson53', 'lesson54', 'lesson55', 'lesson56'],
+    canvas: { width: 940, height: 1672 },
+    placements: {
+      lesson53: { top: 4.8, left: 3.8, width: 48 },
+      lesson54: { top: 24.2, right: 3.5, width: 49 },
+      lesson55: { top: 49.6, left: 4.8, width: 47 },
+      lesson56: { top: 71.8, right: 4.6, width: 47 }
+    },
+    backgroundAsset: {
+      version: REVIEW_ROUTE_PAGE_ART_VERSION,
+      png: 'assets/adventure-map/route-pages/district5-page2/background-review-v1.png',
+      variants: [512, 768, 940].map(width => ({
+        width,
+        avif: `assets/adventure-map/route-pages/district5-page2/background-${REVIEW_ROUTE_PAGE_ART_VERSION}-${width}.avif`,
+        webp: `assets/adventure-map/route-pages/district5-page2/background-${REVIEW_ROUTE_PAGE_ART_VERSION}-${width}.webp`
+      }))
+    }
+  });
+  const LANDMARK_REVIEW_ROUTE_PAGES = deepFreeze([
+    GOLDEN_ROUTE_PAGE,
+    DISTRICT5_PAGE2_REVIEW
+  ]);
+
+  function routePageForLocation(locationId, routePages = LANDMARK_REVIEW_ROUTE_PAGES) {
+    if (typeof locationId !== 'string' || !Array.isArray(routePages)) return null;
+    return routePages.find(page => (
+      Array.isArray(page?.locationIds) && page.locationIds.includes(locationId)
+    )) || null;
+  }
+
+  function routePageNeighbors(pageId, routePages = LANDMARK_REVIEW_ROUTE_PAGES) {
+    if (!Array.isArray(routePages)) return deepFreeze({ previous: null, next: null });
+    const index = routePages.findIndex(page => page?.id === pageId);
+    if (index < 0) return deepFreeze({ previous: null, next: null });
+    return deepFreeze({
+      previous: routePages[index - 1] || null,
+      next: routePages[index + 1] || null
+    });
+  }
+
+  function buildRoutePageSpread(pageId, routePages = LANDMARK_REVIEW_ROUTE_PAGES) {
+    if (!Array.isArray(routePages) || routePages.length === 0) return Object.freeze([]);
+    const selectedIndex = routePages.findIndex(page => page?.id === pageId);
+    if (selectedIndex < 0) return Object.freeze([]);
+    const leftIndex = Math.floor(selectedIndex / 2) * 2;
+    const leftPage = routePages[leftIndex];
+    const rightPage = routePages[leftIndex + 1] || deepFreeze({
+      id: `${leftPage?.districtId || 'district'}-endpaper-${Math.floor(leftIndex / 2) + 1}`,
+      districtId: leftPage?.districtId || null,
+      kind: 'endpaper',
+      title: '冒险仍在继续'
+    });
+    return Object.freeze([leftPage, rightPage]);
+  }
+
   function stageIds(course) {
     return Array.isArray(course?.map?.stages)
       ? course.map.stages.map(stage => stage.progressId)
@@ -152,6 +214,44 @@
     return unfinished.find(location => location.progressState === 'ready') || unfinished[0] || null;
   }
 
+  function selectCurrentRoutePage(
+    courses,
+    profile = null,
+    focusedId = null,
+    routePages = LANDMARK_REVIEW_ROUTE_PAGES
+  ) {
+    if (!Array.isArray(courses) || !Array.isArray(routePages) || routePages.length === 0) return null;
+    const published = buildLocationModels(courses, profile).filter(location => (
+      location.kind === 'lesson' && location.status === 'published'
+    ));
+    const publishedById = new Map(published.map(location => [location.id, location]));
+    const pageForPublished = locationId => (
+      publishedById.has(locationId) ? routePageForLocation(locationId, routePages) : null
+    );
+
+    const focusedPage = pageForPublished(focusedId);
+    if (focusedPage) return focusedPage;
+
+    const recentId = profile?.lastVisitedLocationId;
+    const recent = publishedById.get(recentId);
+    if (recent && recent.progressState !== 'complete') {
+      const recentPage = routePageForLocation(recent.id, routePages);
+      if (recentPage) return recentPage;
+    }
+
+    const earliestUnfinished = published.find(location => location.progressState !== 'complete');
+    if (earliestUnfinished) {
+      const unfinishedPage = routePageForLocation(earliestUnfinished.id, routePages);
+      if (unfinishedPage) return unfinishedPage;
+    }
+
+    const completedRecentPage = pageForPublished(recentId);
+    if (completedRecentPage) return completedRecentPage;
+    return routePages.find(page => (
+      page?.locationIds?.some(id => publishedById.has(id))
+    )) || null;
+  }
+
   function buildRoutePageLocationModels(courses, profile = null, routePage = GOLDEN_ROUTE_PAGE) {
     if (!Array.isArray(courses) || !Array.isArray(routePage?.locationIds)) return Object.freeze([]);
     const byId = new Map(courses.map(course => [course?.id, course]));
@@ -184,10 +284,17 @@
 
   return Object.freeze({
     ROUTE_PAGE_ART_VERSION,
+    REVIEW_ROUTE_PAGE_ART_VERSION,
     GOLDEN_ROUTE_PAGE,
+    DISTRICT5_PAGE2_REVIEW,
+    LANDMARK_REVIEW_ROUTE_PAGES,
+    routePageForLocation,
+    routePageNeighbors,
+    buildRoutePageSpread,
     buildLocationModels,
     buildRoutePageLocationModels,
     selectRecommendedLocation,
+    selectCurrentRoutePage,
     selectRouteAvatarTarget,
     buildMapChangeSummary
   });

@@ -2,7 +2,10 @@
 
 const path = require('node:path');
 const sharp = require('sharp');
-const { GOLDEN_ROUTE_PAGE } = require('../core/adventure-atlas');
+const {
+  GOLDEN_ROUTE_PAGE,
+  LANDMARK_REVIEW_ROUTE_PAGES
+} = require('../core/adventure-atlas');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -47,15 +50,17 @@ async function writeVariants(source, asset, { heightForWidth, fit = 'inside' }) 
 }
 
 async function main() {
-  const background = GOLDEN_ROUTE_PAGE.backgroundAsset;
   const mascot = GOLDEN_ROUTE_PAGE.mascotAsset;
   const marker = GOLDEN_ROUTE_PAGE.markerAsset;
   const loaderFrames = GOLDEN_ROUTE_PAGE.loaderFrames;
-  const backgroundSource = await assertSource(background, {
-    width: GOLDEN_ROUTE_PAGE.canvas.width,
-    height: GOLDEN_ROUTE_PAGE.canvas.height,
-    hasAlpha: false
-  });
+  const backgroundSources = await Promise.all(LANDMARK_REVIEW_ROUTE_PAGES.map(async routePage => ({
+    routePage,
+    source: await assertSource(routePage.backgroundAsset, {
+      width: routePage.canvas.width,
+      height: routePage.canvas.height,
+      hasAlpha: false
+    })
+  })));
   const mascotSource = await assertSource(mascot, {
     width: 1254,
     height: 1254,
@@ -72,11 +77,13 @@ async function main() {
     hasAlpha: true
   })));
 
-  await writeVariants(backgroundSource, background, {
-    fit: 'fill',
-    heightForWidth: width => Math.round(width * GOLDEN_ROUTE_PAGE.canvas.height /
-      GOLDEN_ROUTE_PAGE.canvas.width)
-  });
+  for (const { routePage, source } of backgroundSources) {
+    await writeVariants(source, routePage.backgroundAsset, {
+      fit: 'fill',
+      heightForWidth: width => Math.round(width * routePage.canvas.height /
+        routePage.canvas.width)
+    });
+  }
   await writeVariants(mascotSource, mascot, {
     fit: 'inside',
     heightForWidth: width => width

@@ -23,9 +23,19 @@
       <div class="control-ledger">
         <div class="segmented" data-review-tabs aria-label="审查类型"></div>
         <div class="segmented" data-viewport-tabs aria-label="观察尺寸">
+          <button type="button" data-viewport-button="iphone">iPhone 12</button>
           <button type="button" data-viewport-button="huawei">华为窄屏</button>
           <button type="button" data-viewport-button="tablet">常用平板</button>
-          <button type="button" data-viewport-button="master">1024 原图</button>
+          <button type="button" data-viewport-button="desktop">电脑摊页</button>
+          <button type="button" data-viewport-button="master">美术原图</button>
+        </div>
+      </div>
+      <div class="scenario-panel" data-scenario-panel hidden>
+        <span>验收进度</span>
+        <div class="segmented" data-scenario-tabs aria-label="孩子端进度场景">
+          <button type="button" data-scenario-button="journey">闯关中</button>
+          <button type="button" data-scenario-button="initial">全部初始</button>
+          <button type="button" data-scenario-button="complete">全部完成</button>
         </div>
       </div>
       <section class="preload-status" data-review-preload-status data-state="idle" aria-live="polite">

@@ -97,6 +97,89 @@ test('the approved golden route page contains exactly Lessons 49–52 in curricu
   assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE.backgroundAsset), true);
 });
 
+test('the internal review contract adds one isolated Lesson 53–56 route page', () => {
+  assert.deepEqual(atlas.LANDMARK_REVIEW_ROUTE_PAGES.map(page => page.id), [
+    'district5-page1', 'district5-page2-review'
+  ]);
+  assert.equal(atlas.LANDMARK_REVIEW_ROUTE_PAGES[0], atlas.GOLDEN_ROUTE_PAGE);
+  const page = atlas.LANDMARK_REVIEW_ROUTE_PAGES[1];
+  assert.equal(page.reviewOnly, true);
+  assert.deepEqual(page.locationIds, ['lesson53', 'lesson54', 'lesson55', 'lesson56']);
+  assert.deepEqual(Object.keys(page.placements), page.locationIds);
+  assert.equal(page.canvas.width, 940);
+  assert.equal(page.canvas.height, 1672);
+  assert.equal(Object.isFrozen(page), true);
+});
+
+test('route pages resolve locations, fixed spreads, and non-looping neighbours', () => {
+  const pages = atlas.LANDMARK_REVIEW_ROUTE_PAGES;
+
+  assert.equal(atlas.routePageForLocation('lesson49', pages).id, 'district5-page1');
+  assert.equal(atlas.routePageForLocation('lesson54', pages).id, 'district5-page2-review');
+  assert.equal(atlas.routePageForLocation('soundmark', pages), null);
+
+  const firstNeighbours = atlas.routePageNeighbors('district5-page1', pages);
+  assert.equal(firstNeighbours.previous, null);
+  assert.equal(firstNeighbours.next.id, 'district5-page2-review');
+  const lastNeighbours = atlas.routePageNeighbors('district5-page2-review', pages);
+  assert.equal(lastNeighbours.previous.id, 'district5-page1');
+  assert.equal(lastNeighbours.next, null);
+
+  assert.deepEqual(
+    atlas.buildRoutePageSpread('district5-page2-review', pages).map(page => page.id),
+    ['district5-page1', 'district5-page2-review']
+  );
+
+  const page3 = Object.freeze({
+    id: 'district5-page3-review',
+    districtId: 'first-book-49-60',
+    locationIds: ['lesson57']
+  });
+  const laterSpread = atlas.buildRoutePageSpread(page3.id, [...pages, page3]);
+  assert.equal(laterSpread[0], page3);
+  assert.equal(laterSpread[1].kind, 'endpaper');
+  assert.equal(Object.isFrozen(laterSpread), true);
+});
+
+test('current route-page selection follows focus, recent work, curriculum, and completed fallback', () => {
+  const pages = atlas.LANDMARK_REVIEW_ROUTE_PAGES;
+  const courses = catalog.MAP_COURSES;
+  assert.equal(
+    atlas.selectCurrentRoutePage(courses, profile(), 'lesson53', pages).id,
+    'district5-page2-review'
+  );
+  assert.equal(
+    atlas.selectCurrentRoutePage(courses, profile({
+      lastVisitedLocationId: 'lesson54',
+      completedStages: { lesson54: ['l1'] }
+    }), null, pages).id,
+    'district5-page2-review'
+  );
+  assert.equal(
+    atlas.selectCurrentRoutePage(courses, profile({
+      completedStages: { lesson49: ['l1'] }
+    }), null, pages).id,
+    'district5-page1'
+  );
+
+  const allStages = ['l1', 'l2', 'l3', 'l4', 'l5'];
+  const completedStages = Object.fromEntries(
+    ['lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54']
+      .map(id => [id, allStages])
+  );
+  assert.equal(
+    atlas.selectCurrentRoutePage(courses, profile({
+      lastVisitedLocationId: 'lesson54',
+      completedStages
+    }), null, pages).id,
+    'district5-page2-review'
+  );
+  assert.equal(
+    atlas.selectCurrentRoutePage(courses, profile({ completedStages }), null, pages).id,
+    'district5-page1'
+  );
+});
+
 test('the explorer cat follows a focused course, then the next adventure, then the route exit', () => {
   const focusedModels = atlas.buildRoutePageLocationModels(catalog.MAP_COURSES, profile({
     lastVisitedLocationId: 'lesson50'

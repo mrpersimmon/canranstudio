@@ -15,12 +15,41 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function landmarkReviewFactory(catalogApi, atlasApi) {
   'use strict';
 
-  const VIEWPORTS = Object.freeze(['huawei', 'tablet', 'master']);
-  const REVIEWS = Object.freeze(['art', 'placement']);
-  const VIEWPORT_WIDTHS = Object.freeze({ huawei: 466, tablet: 768, master: 1024 });
+  const VIEWPORTS = Object.freeze(['iphone', 'huawei', 'tablet', 'desktop', 'master']);
+  const REVIEWS = Object.freeze(['art', 'placement', 'student']);
+  const SCENARIOS = Object.freeze(['journey', 'initial', 'complete']);
+  const VIEWPORT_WIDTHS = Object.freeze({
+    iphone: 390,
+    huawei: 466,
+    tablet: 768,
+    desktop: 1024,
+    master: 1024
+  });
   const REVIEW_ASSET_WIDTHS = Object.freeze([512, 768, 1024]);
   const REVIEW_CACHE_NAME = 'canran-landmark-review-assets-v1';
   const PRELOAD_CONCURRENCY = 2;
+  const STUDENT_VIEWPORTS = Object.freeze({
+    iphone: Object.freeze({ width: 390, height: 844, label: 'iPhone 12' }),
+    huawei: Object.freeze({ width: 466, height: 980, label: '华为大屏手机' }),
+    tablet: Object.freeze({ width: 768, height: 1024, label: '常用平板' }),
+    desktop: Object.freeze({ width: 1366, height: 768, label: '电脑双页摊开' }),
+    master: Object.freeze({ width: 940, height: 1672, label: '美术母版' })
+  });
+  const STUDENT_TOOLBAR_HEIGHT = 56;
+  const STUDENT_CAT_POSITIONS = Object.freeze({
+    'district5-page1': Object.freeze({
+      lesson49: Object.freeze({ left: 43, top: 27.6 }),
+      lesson50: Object.freeze({ left: 45, top: 39.5, flip: true }),
+      lesson51: Object.freeze({ left: 39.8, top: 64.6 }),
+      lesson52: Object.freeze({ left: 42, top: 84.7, flip: true }),
+      'route-exit': Object.freeze({ left: 43, top: 91.2 })
+    }),
+    'district5-page2-review': Object.freeze({
+      lesson53: Object.freeze({ left: 45, top: 18.2 }),
+      lesson54: Object.freeze({ left: 42, top: 45.5, flip: true }),
+      'route-exit': Object.freeze({ left: 43, top: 91.2 })
+    })
+  });
 
   function freezeList(items) {
     items.forEach(Object.freeze);
@@ -49,17 +78,36 @@
       })));
   }
 
-  function canReviewPlacement(locationId, routePage) {
-    return Array.isArray(routePage?.locationIds) &&
-      routePage.locationIds.includes(locationId) &&
-      Boolean(routePage?.placements?.[locationId]);
+  function reviewRoutePages(routePages) {
+    if (Array.isArray(routePages)) return routePages;
+    return routePages ? [routePages] : [];
   }
 
-  function normalizeReviewState(search, locations, routePage) {
+  function resolveReviewRoutePage(locationId, routePages) {
+    return reviewRoutePages(routePages).find(routePage => (
+      Array.isArray(routePage?.locationIds) &&
+      routePage.locationIds.includes(locationId) &&
+      Boolean(routePage?.placements?.[locationId])
+    )) || null;
+  }
+
+  function canReviewPlacement(locationId, routePages) {
+    return Boolean(resolveReviewRoutePage(locationId, routePages));
+  }
+
+  function normalizeReviewState(search, locations, routePages) {
     const params = new URLSearchParams(search || '');
     const requestedLocation = params.get('location');
     const location = locations.find(candidate => candidate.id === requestedLocation) || locations[0];
-    if (!location) return Object.freeze({ location: null, stage: 0, review: 'art', viewport: 'huawei' });
+    if (!location) {
+      return Object.freeze({
+        location: null,
+        stage: 0,
+        review: 'art',
+        viewport: 'huawei',
+        scenario: 'journey'
+      });
+    }
 
     const parsedStage = Number.parseInt(params.get('stage'), 10);
     const stage = Math.min(
@@ -68,12 +116,15 @@
     );
     const requestedReview = params.get('review');
     const supportedReview = REVIEWS.includes(requestedReview) ? requestedReview : 'art';
-    const review = supportedReview === 'placement' && !canReviewPlacement(location.id, routePage)
+    const review = ['placement', 'student'].includes(supportedReview) &&
+      !canReviewPlacement(location.id, routePages)
       ? 'art'
       : supportedReview;
     const requestedViewport = params.get('viewport');
     const viewport = VIEWPORTS.includes(requestedViewport) ? requestedViewport : 'huawei';
-    return Object.freeze({ location: location.id, stage, review, viewport });
+    const requestedScenario = params.get('scenario');
+    const scenario = SCENARIOS.includes(requestedScenario) ? requestedScenario : 'journey';
+    return Object.freeze({ location: location.id, stage, review, viewport, scenario });
   }
 
   function serializeReviewState(state) {
@@ -82,7 +133,35 @@
     params.set('stage', String(state.stage));
     params.set('review', state.review);
     params.set('viewport', state.viewport);
+    if (state.review === 'student') params.set('scenario', state.scenario || 'journey');
     return `?${params.toString()}`;
+  }
+
+  function previewLayoutForSize(width, height) {
+    if (!Number.isFinite(width) || !Number.isFinite(height)) return 'single';
+    const pageWidthFromCanvas = Math.max(0, (width - 18) / 2);
+    const pageWidthFromHeight = Math.max(0, height - 56) * (940 / 1672);
+    return Math.min(pageWidthFromCanvas, pageWidthFromHeight) >= 390 ? 'spread' : 'single';
+  }
+
+  function studentPreviewGeometry(viewportName) {
+    const viewport = STUDENT_VIEWPORTS[viewportName] || STUDENT_VIEWPORTS.huawei;
+    const layout = viewportName === 'master'
+      ? 'single'
+      : previewLayoutForSize(viewport.width, viewport.height);
+    const contentHeight = viewport.height - STUDENT_TOOLBAR_HEIGHT;
+    const pageRatio = 940 / 1672;
+    const pageCount = layout === 'spread' ? 2 : 1;
+    const spine = layout === 'spread' ? 18 : 0;
+    const widthLimit = (viewport.width - spine) / pageCount;
+    const pageWidth = Math.min(widthLimit, contentHeight * pageRatio);
+    return Object.freeze({
+      ...viewport,
+      layout,
+      pageWidth,
+      pageHeight: pageWidth / pageRatio,
+      toolbarHeight: STUDENT_TOOLBAR_HEIGHT
+    });
   }
 
   function stageLabels(location) {
@@ -106,6 +185,35 @@
           ? Math.min(state.stage, location.stateAssets.length - 1)
           : 0
       }];
+    }));
+  }
+
+  function buildStudentPreviewModels(locations, state, routePages) {
+    const byId = new Map(locations.map(location => [location.id, location]));
+    const ordered = reviewRoutePages(routePages).flatMap(routePage => (
+      (routePage?.locationIds || []).flatMap(id => {
+        const location = byId.get(id);
+        const placement = routePage?.placements?.[id];
+        if (!location || !placement) return [];
+        return [{ ...location, routePageId: routePage.id, placement }];
+      })
+    ));
+    const selectedIndex = ordered.findIndex(location => location.id === state.location);
+    return freezeList(ordered.map((location, index) => {
+      let stage = 0;
+      if (state.scenario === 'complete') {
+        stage = location.stateAssets.length - 1;
+      } else if (state.scenario === 'journey') {
+        if (index < selectedIndex) stage = location.stateAssets.length - 1;
+        else if (index === selectedIndex) {
+          stage = Math.min(Math.max(0, state.stage || 0), location.stateAssets.length - 1);
+        }
+      }
+      return {
+        ...location,
+        stage,
+        current: index === selectedIndex
+      };
     }));
   }
 
@@ -484,15 +592,18 @@
       throw new Error('landmark review dependencies are unavailable');
     }
     const locations = getReviewLocations(catalog);
-    const routePage = atlas.GOLDEN_ROUTE_PAGE;
-    let state = normalizeReviewState(windowRef.location.search, locations, routePage);
+    const routePages = atlas.LANDMARK_REVIEW_ROUTE_PAGES || [atlas.GOLDEN_ROUTE_PAGE];
+    let state = normalizeReviewState(windowRef.location.search, locations, routePages);
     let renderGeneration = 0;
     let warmupHandle = null;
     let warmupHandleType = null;
+    let studentTurnTimer = null;
     const picker = rootElement.querySelector('[data-location-picker]');
     const stageStrip = rootElement.querySelector('[data-stage-strip]');
     const reviewTabs = rootElement.querySelector('[data-review-tabs]');
     const viewportTabs = rootElement.querySelector('[data-viewport-tabs]');
+    const scenarioPanel = rootElement.querySelector('[data-scenario-panel]');
+    const scenarioTabs = rootElement.querySelector('[data-scenario-tabs]');
     const frame = rootElement.querySelector('[data-review-frame]');
     const preloadStatus = rootElement.querySelector('[data-review-preload-status]');
     const preloadCount = rootElement.querySelector('[data-review-preload-count]');
@@ -566,6 +677,10 @@
 
     function currentLocation() {
       return locations.find(location => location.id === state.location) || locations[0];
+    }
+
+    function currentRoutePage() {
+      return resolveReviewRoutePage(state.location, routePages);
     }
 
     function syncUrl() {
@@ -653,9 +768,15 @@
     }
 
     function renderPlacement(location) {
+      const routePage = currentRoutePage();
+      if (!routePage) {
+        renderArt(location);
+        return;
+      }
       const map = documentRef.createElement('div');
       map.className = 'placement-map';
       map.dataset.placementMap = '';
+      map.dataset.routePageId = routePage.id;
       map.setAttribute('aria-label', `${routePage.title}地图落位`);
       const targetWidth = Math.min(VIEWPORT_WIDTHS[state.viewport], routePage.canvas.width);
       const background = pictureElement(documentRef, routePage.backgroundAsset, {
@@ -721,6 +842,382 @@
       if (selectedImage) warmAllStages(location, state.stage, selectedImage);
     }
 
+    function studentPageTarget(routePage, direction) {
+      if (!routePage || typeof atlas.routePageNeighbors !== 'function') return null;
+      const neighbor = atlas.routePageNeighbors(routePage.id, routePages)?.[direction] || null;
+      if (!neighbor) return null;
+      const locationId = (neighbor.locationIds || []).find(id => (
+        locations.some(location => location.id === id)
+      ));
+      return locationId ? { routePage: neighbor, locationId } : null;
+    }
+
+    function createStudentMascot(routePage) {
+      const position = STUDENT_CAT_POSITIONS[routePage.id]?.[state.location];
+      const mascotAsset = routePage.mascotAsset || atlas.GOLDEN_ROUTE_PAGE?.mascotAsset;
+      const markerAsset = routePage.markerAsset || atlas.GOLDEN_ROUTE_PAGE?.markerAsset;
+      if (!position || !mascotAsset || !markerAsset) return null;
+      const mascot = documentRef.createElement('div');
+      mascot.className = 'student-mascot';
+      mascot.dataset.studentMascot = '';
+      mascot.dataset.locationId = state.location;
+      mascot.dataset.flip = String(Boolean(position.flip));
+      mascot.style.left = `${position.left}%`;
+      mascot.style.top = `${position.top}%`;
+      const marker = pictureElement(documentRef, markerAsset, {
+        alt: '',
+        sizes: '96px',
+        className: 'student-mascot__marker'
+      }).picture;
+      marker.setAttribute('aria-hidden', 'true');
+      const cat = pictureElement(documentRef, mascotAsset, {
+        alt: '',
+        sizes: '112px',
+        className: 'student-mascot__cat'
+      }).picture;
+      cat.setAttribute('aria-hidden', 'true');
+      mascot.append(marker, cat);
+      return mascot;
+    }
+
+    function createStudentLocation(model, targetWidth) {
+      const item = documentRef.createElement('button');
+      item.type = 'button';
+      item.className = 'student-location';
+      item.dataset.studentLocation = '';
+      item.dataset.locationId = model.id;
+      item.dataset.stage = String(model.stage);
+      item.dataset.current = String(model.current);
+      item.setAttribute('aria-label', `预览 Lesson ${model.lesson} ${model.title}`);
+      placementStyle(item, model.placement);
+
+      const art = documentRef.createElement('span');
+      art.className = 'student-location__art';
+      const artWidth = Math.round(targetWidth * model.placement.width / 100);
+      const prepared = model.current
+        ? reviewAssetElement(model, model.stage, {
+          alt: '',
+          sizes: `${artWidth}px`,
+          marker: 'data-current-art'
+        })
+        : pictureElement(documentRef, model.stateAssets[model.stage], {
+          alt: '',
+          sizes: `${artWidth}px`
+        });
+      art.append(prepared.element || prepared.picture);
+
+      const plaque = documentRef.createElement('span');
+      plaque.className = 'student-location__plaque';
+      const kind = documentRef.createElement('span');
+      kind.className = 'student-location__kind';
+      kind.textContent = `LESSON ${model.lesson}`;
+      const title = documentRef.createElement('strong');
+      title.className = 'student-location__title';
+      title.textContent = model.title;
+      const stamps = documentRef.createElement('span');
+      stamps.className = 'student-location__stamps';
+      for (let index = 0; index < model.stageIds.length; index += 1) {
+        const stamp = documentRef.createElement('i');
+        stamp.dataset.earned = String(index < model.stage);
+        stamps.append(stamp);
+      }
+      plaque.append(kind, title, stamps);
+      item.append(art, plaque);
+      return { item, image: prepared.image || null };
+    }
+
+    function createStudentRoutePage(routePage, models, geometry, currentPage) {
+      if (routePage?.kind === 'endpaper') {
+        const endpaper = documentRef.createElement('section');
+        endpaper.className = 'student-route-page student-endpaper';
+        endpaper.dataset.studentRoutePage = '';
+        endpaper.dataset.routePageId = routePage.id;
+        const flourish = documentRef.createElement('div');
+        flourish.innerHTML = '<span aria-hidden="true">✦</span><strong>冒险仍在继续</strong><small>新的路线正在绘制</small>';
+        endpaper.append(flourish);
+        return { page: endpaper, selectedImage: null };
+      }
+
+      const page = documentRef.createElement('section');
+      page.className = 'student-route-page';
+      page.dataset.studentRoutePage = '';
+      page.dataset.routePageId = routePage.id;
+      page.dataset.current = String(routePage.id === currentPage.id);
+      page.setAttribute('aria-label', routePage.title);
+
+      const background = pictureElement(documentRef, routePage.backgroundAsset, {
+        alt: '',
+        sizes: `${Math.round(geometry.pageWidth)}px`,
+        className: 'student-route-page__background'
+      }).picture;
+      background.className = 'student-route-page__paper';
+      background.setAttribute('aria-hidden', 'true');
+      page.append(background);
+
+      const name = documentRef.createElement('span');
+      name.className = 'student-page-name';
+      name.dataset.pageName = routePage.id;
+      name.dataset.current = String(routePage.id === currentPage.id);
+      name.textContent = routePage.title;
+      page.append(name);
+
+      const list = documentRef.createElement('div');
+      list.className = 'student-locations';
+      let selectedImage = null;
+      for (const model of models.filter(candidate => candidate.routePageId === routePage.id)) {
+        const created = createStudentLocation(model, geometry.pageWidth);
+        if (model.current) selectedImage = created.image;
+        list.append(created.item);
+      }
+      page.append(list);
+
+      if (routePage.id === currentPage.id) {
+        const mascot = createStudentMascot(routePage);
+        if (mascot) page.append(mascot);
+      }
+
+      return { page, selectedImage };
+    }
+
+    function appendStudentPageTurns(book, routePage) {
+      for (const direction of ['previous', 'next']) {
+        const target = studentPageTarget(routePage, direction);
+        if (!target) continue;
+        const turn = documentRef.createElement('button');
+        turn.type = 'button';
+        turn.className = `student-page-turn student-page-turn--${direction}`;
+        turn.dataset.pageTurn = direction;
+        turn.dataset.targetLocation = target.locationId;
+        turn.textContent = `前往 · ${target.routePage.title}`;
+        book.append(turn);
+      }
+    }
+
+    function waitForStudentImage(image) {
+      if (!image) return Promise.resolve();
+      const decode = () => (
+        typeof image.decode === 'function' ? image.decode().catch(() => {}) : Promise.resolve()
+      );
+      if (image.complete) return decode();
+      return new Promise(resolve => {
+        const settle = () => decode().finally(resolve);
+        image.addEventListener('load', settle, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+      });
+    }
+
+    function createStudentLoader() {
+      const loader = documentRef.createElement('div');
+      loader.className = 'student-loader';
+      loader.dataset.studentLoader = '';
+      loader.hidden = true;
+      loader.setAttribute('aria-label', '小猫正在整理地图');
+      const frames = atlas.GOLDEN_ROUTE_PAGE?.loaderFrames || [];
+      for (const frameAsset of frames) {
+        const frame = pictureElement(documentRef, frameAsset, {
+          alt: '',
+          sizes: '220px',
+          className: 'student-loader__image'
+        }).picture;
+        frame.className = 'student-loader__frame';
+        frame.setAttribute('aria-hidden', 'true');
+        loader.append(frame);
+      }
+      const copy = documentRef.createElement('strong');
+      copy.textContent = '小猫正在整理地图…';
+      loader.append(copy);
+      return loader;
+    }
+
+    function adjacentStudentAssets(routePage, models, geometry) {
+      if (!routePage || typeof atlas.routePageNeighbors !== 'function') return [];
+      const neighbors = atlas.routePageNeighbors(routePage.id, routePages);
+      const nextPage = neighbors.next || neighbors.previous;
+      if (!nextPage) return [];
+      const assets = [nextPage.backgroundAsset];
+      for (const model of models.filter(candidate => candidate.routePageId === nextPage.id)) {
+        assets.push(model.stateAssets[model.stage]);
+      }
+      const targetWidth = Math.round(geometry.pageWidth);
+      return assets.flatMap(asset => {
+        if (!asset) return [];
+        const variants = Array.isArray(asset.variants) ? asset.variants : [];
+        const variant = variants.find(candidate => candidate.width >= targetWidth) || variants.at(-1);
+        return variant?.avif ? [versionedUrl(variant.avif, asset.version)] : [];
+      });
+    }
+
+    function warmAdjacentStudentPage(routePage, models, geometry) {
+      const run = () => {
+        for (const url of adjacentStudentAssets(routePage, models, geometry)) {
+          const image = new windowRef.Image();
+          image.decoding = 'async';
+          image.src = url;
+        }
+      };
+      if (typeof windowRef.requestIdleCallback === 'function') {
+        windowRef.requestIdleCallback(run, { timeout: 1200 });
+      } else {
+        windowRef.setTimeout(run, 120);
+      }
+    }
+
+    function prepareStudentPreview(preview, routePage, models, geometry, generation) {
+      const loader = preview.querySelector('[data-student-loader]');
+      const images = [...preview.querySelectorAll('.student-book img')];
+      preview.dataset.ready = 'false';
+      const feedbackTimer = windowRef.setTimeout(() => {
+        if (generation === renderGeneration && preview.dataset.ready !== 'true') loader.hidden = false;
+      }, 180);
+      const safeTimer = windowRef.setTimeout(() => {
+        if (generation !== renderGeneration || preview.dataset.ready === 'true') return;
+        preview.dataset.fallback = 'true';
+        preview.dataset.ready = 'true';
+        loader.hidden = true;
+      }, 4500);
+      Promise.all(images.map(waitForStudentImage)).then(() => {
+        if (generation !== renderGeneration) return;
+        windowRef.clearTimeout(feedbackTimer);
+        windowRef.clearTimeout(safeTimer);
+        preview.dataset.ready = 'true';
+        loader.hidden = true;
+        warmAdjacentStudentPage(routePage, models, geometry);
+      });
+    }
+
+    function turnStudentPage(direction, targetLocation) {
+      if (!targetLocation || studentTurnTimer !== null) return;
+      const preview = frame.querySelector('[data-student-preview]');
+      if (!preview) return;
+      preview.dataset.turning = direction;
+      const reducedMotion = windowRef.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      const delay = reducedMotion ? 0 : 280;
+      studentTurnTimer = windowRef.setTimeout(() => {
+        studentTurnTimer = null;
+        state = { ...state, location: targetLocation };
+        render({ updateUrl: true });
+      }, delay);
+    }
+
+    function bindStudentSwipe(book, routePage) {
+      let gesture = null;
+      book.addEventListener('pointerdown', event => {
+        if (!event.isPrimary) return;
+        if (event.target.closest('button,.student-page-name,.student-toolbar')) return;
+        const bounds = book.getBoundingClientRect();
+        const localX = event.clientX - bounds.left;
+        if (localX < 24 || localX > bounds.width - 24) return;
+        gesture = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+      });
+      book.addEventListener('pointerup', event => {
+        if (!gesture || gesture.pointerId !== event.pointerId) return;
+        const deltaX = event.clientX - gesture.x;
+        const deltaY = event.clientY - gesture.y;
+        gesture = null;
+        if (Math.abs(deltaX) < 54 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.35) return;
+        const direction = deltaX < 0 ? 'next' : 'previous';
+        const target = studentPageTarget(routePage, direction);
+        if (target) turnStudentPage(direction, target.locationId);
+        else {
+          book.dataset.boundaryBounce = direction;
+          windowRef.setTimeout(() => delete book.dataset.boundaryBounce, 240);
+        }
+      });
+      book.addEventListener('pointercancel', () => { gesture = null; });
+    }
+
+    function fitStudentPreview() {
+      const fit = frame.querySelector('[data-student-preview-fit]');
+      const preview = frame.querySelector('[data-student-preview]');
+      if (!fit || !preview) return;
+      const simulatedWidth = Number(preview.dataset.simulatedWidth);
+      const simulatedHeight = Number(preview.dataset.simulatedHeight);
+      if (!simulatedWidth || !simulatedHeight) return;
+      const scale = Math.min(1, frame.clientWidth / simulatedWidth);
+      fit.style.width = `${simulatedWidth * scale}px`;
+      fit.style.height = `${simulatedHeight * scale}px`;
+      fit.dataset.scale = scale.toFixed(4);
+      preview.style.transform = `scale(${scale})`;
+    }
+
+    function renderStudent(location) {
+      const currentPage = currentRoutePage();
+      if (!currentPage) {
+        renderArt(location);
+        return;
+      }
+      const geometry = studentPreviewGeometry(state.viewport);
+      const models = buildStudentPreviewModels(locations, state, routePages);
+      const visiblePages = geometry.layout === 'spread' && typeof atlas.buildRoutePageSpread === 'function'
+        ? atlas.buildRoutePageSpread(currentPage.id, routePages)
+        : [currentPage];
+
+      const fit = documentRef.createElement('div');
+      fit.className = 'student-preview-fit';
+      fit.dataset.studentPreviewFit = '';
+      const preview = documentRef.createElement('section');
+      preview.className = 'student-preview';
+      preview.dataset.studentPreview = '';
+      preview.dataset.layout = geometry.layout;
+      preview.dataset.viewport = state.viewport;
+      preview.dataset.simulatedWidth = String(geometry.width);
+      preview.dataset.simulatedHeight = String(geometry.height);
+      const verticalGap = (geometry.height - geometry.toolbarHeight - geometry.pageHeight) / 2;
+      const horizontalGap = (geometry.width - geometry.pageWidth) / 2;
+      preview.dataset.navAxis = verticalGap >= 44
+        ? 'bottom'
+        : horizontalGap >= 58
+          ? 'side'
+          : 'corner';
+      preview.style.width = `${geometry.width}px`;
+      preview.style.height = `${geometry.height}px`;
+      preview.style.setProperty('--student-page-width', `${geometry.pageWidth}px`);
+      preview.style.setProperty('--student-page-height', `${geometry.pageHeight}px`);
+
+      const toolbar = documentRef.createElement('header');
+      toolbar.className = 'student-toolbar';
+      const toolbarTitle = geometry.layout === 'spread' ? '四季生活城' : currentPage.title;
+      toolbar.innerHTML = `
+        <button type="button" data-student-chrome="back" aria-label="返回世界图鉴">←</button>
+        <div><strong>${toolbarTitle}</strong></div>
+        <button type="button" data-student-chrome="settings" aria-label="设备设置">⚙</button>
+      `;
+
+      const book = documentRef.createElement('div');
+      book.className = 'student-book';
+      book.dataset.studentBook = '';
+      let selectedImage = null;
+      visiblePages.forEach((routePage, index) => {
+        if (index === 1 && geometry.layout === 'spread') {
+          const spine = documentRef.createElement('span');
+          spine.className = 'student-book__spine';
+          spine.setAttribute('aria-hidden', 'true');
+          book.append(spine);
+        }
+        const created = createStudentRoutePage(routePage, models, geometry, currentPage);
+        if (created.selectedImage) selectedImage = created.selectedImage;
+        book.append(created.page);
+      });
+      if (geometry.layout === 'single' && state.viewport !== 'master') {
+        appendStudentPageTurns(book, currentPage);
+      }
+
+      const message = documentRef.createElement('p');
+      message.className = 'student-message';
+      message.dataset.studentMessage = '';
+      message.setAttribute('role', 'status');
+      message.setAttribute('aria-live', 'polite');
+      message.hidden = true;
+      const loader = createStudentLoader();
+      preview.append(toolbar, book, loader, message);
+      fit.append(preview);
+      frame.replaceChildren(fit);
+      windowRef.requestAnimationFrame(fitStudentPreview);
+      if (geometry.layout === 'single') bindStudentSwipe(book, currentPage);
+      prepareStudentPreview(preview, currentPage, models, geometry, renderGeneration);
+      if (selectedImage) warmAllStages(location, state.stage, selectedImage);
+    }
+
     function renderControls(location) {
       picker.value = location.id;
       stageStrip.replaceChildren(...stageLabels(location).map((label, index) => {
@@ -736,8 +1233,11 @@
 
       const reviewChoices = [
         { id: 'art', label: '状态美术' },
-        ...(canReviewPlacement(location.id, routePage)
-          ? [{ id: 'placement', label: '地图落位' }]
+        ...(canReviewPlacement(location.id, routePages)
+          ? [
+            { id: 'placement', label: '地图落位' },
+            { id: 'student', label: '孩子端成品预览' }
+          ]
           : [])
       ];
       reviewTabs.replaceChildren(...reviewChoices.map(choice => {
@@ -751,12 +1251,20 @@
       for (const button of viewportTabs.querySelectorAll('[data-viewport-button]')) {
         button.setAttribute('aria-pressed', String(button.dataset.viewportButton === state.viewport));
       }
+      scenarioPanel.hidden = state.review !== 'student';
+      for (const button of scenarioTabs.querySelectorAll('[data-scenario-button]')) {
+        button.setAttribute('aria-pressed', String(button.dataset.scenarioButton === state.scenario));
+      }
     }
 
     function render({ updateUrl = false } = {}) {
+      if (studentTurnTimer !== null) {
+        windowRef.clearTimeout(studentTurnTimer);
+        studentTurnTimer = null;
+      }
       renderGeneration += 1;
       const location = currentLocation();
-      state = normalizeReviewState(serializeReviewState(state), locations, routePage);
+      state = normalizeReviewState(serializeReviewState(state), locations, routePages);
       delete frame.dataset.pendingStage;
       delete frame.dataset.pendingReview;
       delete frame.dataset.pendingViewport;
@@ -764,12 +1272,13 @@
       frame.dataset.review = state.review;
       renderControls(location);
       if (state.review === 'placement') renderPlacement(location);
+      else if (state.review === 'student') renderStudent(location);
       else renderArt(location);
       if (updateUrl) syncUrl();
     }
 
     function transitionWithinLocation(nextState, { updateUrl = false } = {}) {
-      state = normalizeReviewState(serializeReviewState(nextState), locations, routePage);
+      state = normalizeReviewState(serializeReviewState(nextState), locations, routePages);
       const location = currentLocation();
       const generation = ++renderGeneration;
       frame.dataset.pendingStage = String(state.stage);
@@ -785,6 +1294,7 @@
         frame.dataset.viewport = state.viewport;
         frame.dataset.review = state.review;
         if (state.review === 'placement') renderPlacement(location);
+        else if (state.review === 'student') renderStudent(location);
         else renderArt(location);
       });
     }
@@ -794,6 +1304,30 @@
       render({ updateUrl: true });
     });
     rootElement.addEventListener('click', event => {
+      const pageTurn = event.target.closest('[data-page-turn]');
+      if (pageTurn) {
+        turnStudentPage(pageTurn.dataset.pageTurn, pageTurn.dataset.targetLocation);
+        return;
+      }
+      const studentLocation = event.target.closest('[data-student-location]');
+      if (studentLocation) {
+        const selected = locations.find(location => location.id === studentLocation.dataset.locationId);
+        const message = frame.querySelector('[data-student-message]');
+        if (message && selected) {
+          message.textContent = `将进入 Lesson ${selected.lesson} · ${selected.title}（内部预览不跳转）`;
+          message.hidden = false;
+        }
+        return;
+      }
+      const studentChrome = event.target.closest('[data-student-chrome]');
+      if (studentChrome) {
+        const message = frame.querySelector('[data-student-message]');
+        if (message) {
+          message.textContent = '内部成品预览：不执行真实跳转';
+          message.hidden = false;
+        }
+        return;
+      }
       const recheckButton = event.target.closest('[data-review-recheck]');
       if (recheckButton) {
         cancelWarmupSchedule();
@@ -833,6 +1367,14 @@
         }, { updateUrl: true });
         return;
       }
+      const scenarioButton = event.target.closest('[data-scenario-button]');
+      if (scenarioButton) {
+        transitionWithinLocation({
+          ...state,
+          scenario: scenarioButton.dataset.scenarioButton
+        }, { updateUrl: true });
+        return;
+      }
       const stepButton = event.target.closest('[data-location-step]');
       if (stepButton) {
         const index = locations.findIndex(location => location.id === state.location);
@@ -845,8 +1387,9 @@
     windowRef.addEventListener('pointerup', restoreCurrentArt);
     windowRef.addEventListener('pointercancel', restoreCurrentArt);
     windowRef.addEventListener('blur', restoreCurrentArt);
+    windowRef.addEventListener('resize', fitStudentPreview);
     function handlePopState() {
-      state = normalizeReviewState(windowRef.location.search, locations, routePage);
+      state = normalizeReviewState(windowRef.location.search, locations, routePages);
       render();
     }
     windowRef.addEventListener('popstate', handlePopState);
@@ -856,10 +1399,12 @@
       getState: () => ({ ...state }),
       destroy() {
         cancelWarmupSchedule();
+        if (studentTurnTimer !== null) windowRef.clearTimeout(studentTurnTimer);
         assetPool.destroy();
         windowRef.removeEventListener('pointerup', restoreCurrentArt);
         windowRef.removeEventListener('pointercancel', restoreCurrentArt);
         windowRef.removeEventListener('blur', restoreCurrentArt);
+        windowRef.removeEventListener('resize', fitStudentPreview);
         windowRef.removeEventListener('popstate', handlePopState);
       }
     });
@@ -867,11 +1412,15 @@
 
   return Object.freeze({
     VIEWPORTS,
+    SCENARIOS,
     getReviewLocations,
+    resolveReviewRoutePage,
     normalizeReviewState,
     serializeReviewState,
+    previewLayoutForSize,
     stageLabels,
     buildPlacementModels,
+    buildStudentPreviewModels,
     mount
   });
 });
