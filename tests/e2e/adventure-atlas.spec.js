@@ -132,7 +132,7 @@ test('plain reload always returns to world while an explicit course-return query
 test('invalid atlas query parameters fail safely to the world overview', async ({ page }) => {
   for (const query of [
     '?district=unknown&focus=lesson49',
-    '?district=first-book-49-60&focus=lesson53',
+    '?district=first-book-49-60&focus=lesson55',
     '?focus=lesson49'
   ]) {
     await page.goto(`/${query}`);
@@ -174,6 +174,90 @@ test('the district parchment keeps its authored proportion on the Huawei viewpor
   expect(ratio).toBeCloseTo(940 / 1672, 2);
 });
 
+test('wide desktop uses the approved double-page spread and keeps the explorer legible', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 });
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
+
+  const book = page.locator('#districtBook');
+  await expect(book).toHaveAttribute('data-layout', 'spread');
+  await expect(book.locator('.district-map:visible')).toHaveCount(2);
+  await expect(book.locator('[data-route-page-id="district5-page1"]')).toBeVisible();
+  await expect(book.locator('[data-route-page-id="district5-page2-review"]')).toBeVisible();
+
+  const geometry = await page.evaluate(() => {
+    const book = document.getElementById('districtBook').getBoundingClientRect();
+    const pages = [...document.querySelectorAll('#districtBook .district-map')]
+      .filter(page => page.getClientRects().length > 0)
+      .map(page => page.getBoundingClientRect());
+    const mascot = document.getElementById('routeMascot').getBoundingClientRect();
+    return {
+      bookWidth: book.width,
+      viewportWidth: window.innerWidth,
+      pageRatios: pages.map(page => page.width / page.height),
+      mascotToPage: mascot.width / pages[0].width
+    };
+  });
+
+  expect(geometry.bookWidth).toBeGreaterThan(geometry.viewportWidth * 0.55);
+  expect(geometry.pageRatios).toHaveLength(2);
+  for (const ratio of geometry.pageRatios) expect(ratio).toBeCloseTo(940 / 1672, 2);
+  expect(geometry.mascotToPage).toBeGreaterThanOrEqual(0.16);
+});
+
+test('a phone course return opens the single route page that owns the focused lesson', async ({ page }) => {
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto('/?district=first-book-49-60&focus=lesson53');
+
+  const book = page.locator('#districtBook');
+  await expect(book).toHaveAttribute('data-layout', 'single');
+  await expect(book.locator('[data-route-page-id="district5-page1"]')).toBeHidden();
+  await expect(book.locator('[data-route-page-id="district5-page2-review"]')).toBeVisible();
+  await expect(book.locator('[data-location-id="lesson53"]')).toHaveAttribute('data-map-guidance', 'active');
+  await expect(book.locator('[data-route-page-id="district5-page2-review"] #routeMascot'))
+    .toHaveAttribute('data-route-avatar-target', 'lesson53');
+});
+
+test('phone single-page mode turns route pages with edge arrows and a horizontal swipe', async ({ page }) => {
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto('/?district=first-book-49-60&focus=lesson51');
+
+  const book = page.locator('#districtBook');
+  const back = page.getByRole('button', { name: '返回世界总览', exact: true });
+  const previous = page.getByRole('button', { name: /上一页/ });
+  const next = page.getByRole('button', { name: /下一页/ });
+
+  await expect(back).toHaveText('←');
+  await expect(previous).toBeHidden();
+  await expect(next).toBeVisible();
+  await expect(next).toHaveAttribute('aria-label', '下一页：气候家庭街');
+
+  await next.click();
+  await expect(book).toHaveAttribute('data-active-page-id', 'district5-page2-review');
+  await expect(book.locator('[data-route-page-id="district5-page1"]')).toBeHidden();
+  await expect(book.locator('[data-route-page-id="district5-page2-review"]')).toBeVisible();
+  await expect(book.locator('[data-route-page-id="district5-page2-review"] [data-location-id]')).toHaveCount(2);
+  await expect(previous).toHaveAttribute('aria-label', '上一页：风味四季路');
+  await expect(next).toBeHidden();
+
+  await previous.click();
+  await expect(book).toHaveAttribute('data-active-page-id', 'district5-page1');
+
+  await book.evaluate(element => {
+    const emitTouch = (type, x, y) => {
+      const event = new Event(type, { bubbles: true, cancelable: true });
+      Object.defineProperty(event, 'changedTouches', { value: [{ clientX: x, clientY: y }] });
+      Object.defineProperty(event, 'touches', {
+        value: type === 'touchend' ? [] : [{ clientX: x, clientY: y }]
+      });
+      element.dispatchEvent(event);
+    };
+    emitTouch('touchstart', 390, 500);
+    emitTouch('touchend', 90, 505);
+  });
+  await expect(book).toHaveAttribute('data-active-page-id', 'district5-page2-review');
+  await expect(page.locator('#routePageStatus')).toHaveText('第 2 页，共 2 页：气候家庭街');
+});
+
 test('the complete district route fits short phone viewports without vertical scrolling', async ({ page }) => {
   for (const viewport of [
     { width: 390, height: 667 },
@@ -204,7 +288,7 @@ test('the complete district route fits short phone viewports without vertical sc
     expect(fit.mapBottom).toBeLessThanOrEqual(fit.viewportHeight + 1);
     expect(fit.mapRatio).toBeCloseTo(940 / 1672, 2);
     expect(fit.bodyOverflow).toBe('hidden');
-    expect(fit.mapTouchAction).toBe('manipulation');
+    expect(fit.mapTouchAction).toBe('pan-y');
   }
 });
 
@@ -283,7 +367,7 @@ test('the explorer stands at the current entrance without touching another landm
           visibleRect(document.querySelector('.route-mascot__flag'), mascotBounds.flag)
         ]);
 
-        return [...document.querySelectorAll('.map-location')].map(location => {
+        return [...document.querySelectorAll('#districtLocations .map-location')].map(location => {
           const locationId = location.dataset.locationId;
           const art = visibleRect(
             location.querySelector('.published-marker picture'),

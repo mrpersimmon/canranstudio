@@ -48,7 +48,7 @@ test('world overview loads one responsive entrance preview and defers full distr
   await page.waitForLoadState('networkidle');
   await expect(page.locator('#currentDistrict')).toBeVisible();
   expect(mapRequests).toContain('/assets/adventure-map/route-pages/district5-page1/background-route-page-20260806-01-940.avif');
-  expect(mapRequests).toContain('/assets/adventure-map/mascot/explorer-cat-walking-route-page-20260806-01-128.avif');
+  expect(mapRequests).toContain('/assets/adventure-map/mascot/explorer-cat-walking-route-page-20260806-01-192.avif');
   expect(mapRequests.some(path => /\/(?:landmark-base|growth-)/.test(path))).toBe(false);
   expect(mapRequests.some(path => /\/states\/state-0-(?:512|768|1024)\.(?:avif|webp)$/.test(path))).toBe(true);
 });

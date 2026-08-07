@@ -47,8 +47,12 @@ test('the atlas is the only visible student navigation surface', async ({ page }
   const focusable = await page.locator('#worldOverview button:not([disabled]), #worldOverview [tabindex="0"]')
     .evaluateAll(elements => elements.map(element => element.getAttribute('aria-label')));
   expect(focusable).toEqual(['设备冒险设置', '进入四季生活城']);
-  await expect(page.locator('#currentDistrict button')).toHaveCount(2);
-  for (const button of await page.locator('#currentDistrict button').all()) {
+  const hiddenDistrictButtons = page.locator('#currentDistrict button');
+  await expect(hiddenDistrictButtons).toHaveCount(4);
+  expect(await hiddenDistrictButtons.evaluateAll(buttons =>
+    buttons.map(button => button.getAttribute('aria-label'))
+  )).toEqual(['返回世界总览', '设备冒险设置', '上一页', '下一页']);
+  for (const button of await hiddenDistrictButtons.all()) {
     await expect(button).toBeHidden();
   }
 });
@@ -74,7 +78,9 @@ test('home exposes the immutable catalog but renders only complete map locations
   expect(contract.publishedMapIds).toEqual([
     'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark'
   ]);
-  expect(contract.renderedIds).toEqual(['lesson49', 'lesson50', 'lesson51', 'lesson52']);
+  expect(contract.renderedIds).toEqual([
+    'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54'
+  ]);
 });
 
 test('recent unfinished route location is marked by the explorer cat without a recommendation card', async ({ page }) => {

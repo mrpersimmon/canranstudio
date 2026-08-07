@@ -89,17 +89,28 @@ img{display:block;max-width:100%}
 .launch-plaque span{display:block;margin-top:4px;color:#735540;font-size:12px}
 @keyframes world-beacon{0%,100%{opacity:.7;transform:scale(.94)}50%{opacity:1;transform:scale(1.03)}}
 
-/* District route page: four lessons on one authored, fixed-ratio map. */
+/* District route book: one authored page on touch screens, an open spread on wide screens. */
 .district-view{position:relative;display:grid;grid-template-rows:auto minmax(0,1fr);height:100%;min-height:0;overflow:hidden;background:#1f140f}
 .district-toolbar{position:relative;z-index:40;width:min(940px,100%);margin:auto;padding:9px clamp(10px,2.5vw,22px);border-bottom:4px solid #5c3c2b;background:#f3dfb3;box-shadow:0 8px 20px rgba(0,0,0,.35)}
 .district-toolbar__inner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px}
-.back-world{display:inline-flex;align-items:center;justify-content:center;min-width:92px;min-height:48px;padding:8px 14px;border:3px solid var(--ink);border-radius:999px;background:#fff0c8;box-shadow:0 3px 0 var(--ink);font-size:13px;white-space:nowrap}
+.back-world{display:inline-flex;align-items:center;justify-content:center;width:48px;min-width:48px;min-height:48px;padding:0;border:3px solid var(--ink);border-radius:50%;background:#fff0c8;box-shadow:0 3px 0 var(--ink);font-size:27px;line-height:1}
 .district-brand{min-width:0;text-align:center}
 .district-brand h2{margin:0;overflow:hidden;color:#8d3c29;font-size:clamp(20px,4.4vw,32px);line-height:1.02;text-overflow:ellipsis;white-space:nowrap}
 .district-brand p{margin:3px 0 0;color:#6b4a36;font-size:clamp(9px,1.7vw,12px);letter-spacing:.5px}
 .district-toolbar .settings-bookmark{position:relative;top:auto;right:auto;width:50px;height:48px;border-radius:12px;font-size:12px}
 .district-toolbar .settings-bookmark::after{display:none}
-.district-map{position:relative;align-self:start;justify-self:center;overflow:hidden;width:min(940px,100%);height:auto;aspect-ratio:940/1672;margin:0;background:#2e1d15;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:manipulation;isolation:isolate;container-type:inline-size}
+.district-book{position:relative;align-self:start;justify-self:center;display:flex;align-items:stretch;justify-content:center;overflow:visible;margin:0;isolation:isolate}
+.district-map{position:relative;flex:0 0 auto;overflow:hidden;width:min(940px,100%);height:auto;aspect-ratio:940/1672;margin:0;background:#2e1d15;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:pan-y;isolation:isolate;container-type:inline-size}
+.district-book[data-layout="single"] .district-map{border-radius:0 14px 14px 0}
+.district-book[data-layout="single"] .district-map:not([data-active-page="true"]),.district-book[data-layout="single"] .district-spine{display:none}
+.district-book[data-layout="spread"] .district-map:first-of-type{border-radius:14px 0 0 14px;box-shadow:-18px 0 42px rgba(0,0,0,.48)}
+.district-book[data-layout="spread"] .district-map--companion{border-radius:0 14px 14px 0;box-shadow:18px 0 42px rgba(0,0,0,.48)}
+.district-spine{position:relative;z-index:34;flex:0 0 18px;width:18px;background:linear-gradient(90deg,#2c170f,#9b6740 45%,#2c170f);box-shadow:0 0 12px rgba(0,0,0,.7),inset 0 0 5px #d09b66;pointer-events:none}
+.route-page-turn{position:absolute;z-index:55;top:55%;display:grid;place-items:center;width:46px;height:68px;padding:0;border:3px solid #5b3927;background:rgba(255,239,194,.94);color:#5b3927;box-shadow:0 5px 0 rgba(57,32,21,.56),0 8px 18px rgba(37,21,13,.28);font-size:39px;line-height:1;transform:translateY(-50%);backdrop-filter:blur(2px)}
+.route-page-turn--previous{left:0;border-left:0;border-radius:0 19px 19px 0}
+.route-page-turn--next{right:0;border-right:0;border-radius:19px 0 0 19px}
+.route-page-turn:active{translate:0 3px;box-shadow:0 2px 0 rgba(57,32,21,.56)}
+.district-book[data-layout="spread"] .route-page-turn{display:none!important}
 .district-map__paper{position:absolute;z-index:0;inset:0;width:100%;height:100%}
 .district-map__paper img{width:100%;height:100%;object-fit:contain}
 .district-locations{position:absolute;z-index:8;inset:0;margin:0;padding:0;list-style:none}
@@ -115,6 +126,9 @@ img{display:block;max-width:100%}
 .map-location[data-location-id="lesson51"]{--accent:#276d9d;--angle:.6deg}
 .map-location[data-location-id="lesson52"]{--accent:#4c855f;--angle:-.4deg}
 .map-location[data-location-id="lesson52"] .location-plaque{margin-top:-13%}
+.map-location[data-location-id="lesson53"]{--accent:#4c855f;--angle:-.5deg}
+.map-location[data-location-id="lesson54"]{--accent:#2c7c74;--angle:.5deg}
+.map-location[data-location-id="lesson54"] .location-plaque{margin-top:-13%}
 .location-kind{display:block;color:var(--accent);font-size:clamp(9px,1.5vw,12px);font-size:clamp(9px,1.5cqw,12px);line-height:1;font-weight:800;letter-spacing:1.1px}
 .location-title{display:block;margin-top:3px;font-size:clamp(13px,2.7vw,22px);font-size:clamp(13px,2.7cqw,22px);line-height:1.05;white-space:nowrap}
 .progress-stamps{display:flex;justify-content:center;gap:4px;margin-top:6px}
@@ -122,7 +136,7 @@ img{display:block;max-width:100%}
 .progress-stamp[data-earned="true"]{border-color:#8d4a25;background:var(--gold);box-shadow:inset 0 0 0 2px #fff0a9}
 .map-location[data-map-change="true"] .published-marker{animation:map-new-change 1.2s ease-in-out 2}
 .new-change-sticker{position:absolute;z-index:12;top:11%;right:2%;padding:5px 9px;border:3px solid #763f2c;border-radius:7px;background:#f8cc53;box-shadow:0 3px 0 #763f2c;transform:rotate(8deg);font-size:10px}
-.route-mascot{position:absolute;z-index:22;left:36%;top:94%;width:11%;aspect-ratio:1.2;pointer-events:none;transition:left .45s ease,top .45s ease}
+.route-mascot{position:absolute;z-index:22;left:36%;top:94%;width:17%;aspect-ratio:1.2;pointer-events:none;transition:left .45s ease,top .45s ease}
 .route-mascot picture{position:absolute;display:block;filter:drop-shadow(0 3px 2px rgba(83,49,22,.3))}
 .route-mascot picture img{display:block;width:100%;height:100%;object-fit:contain}
 .route-mascot__flag{z-index:0;right:-2%;bottom:7%;width:72%;height:94%}
@@ -156,7 +170,8 @@ img{display:block;max-width:100%}
   .launch-district{top:26%;width:76vw;min-width:245px}.distant-region{opacity:.42}
   .district-map{width:100%;border-radius:0}
   .district-toolbar{padding:8px 9px}.district-toolbar__inner{gap:7px}
-  .back-world{min-width:82px;padding-inline:10px;font-size:12px}
+  .back-world{width:44px;min-width:44px;min-height:44px;font-size:25px}
+  .route-page-turn{width:44px;height:62px;font-size:35px}
   .district-brand h2{font-size:clamp(18px,5.5vw,24px)}.district-brand p{font-size:9px}
   .district-toolbar .settings-bookmark{width:46px;height:46px}
   .location-plaque{max-width:94%;padding-inline:10px}
@@ -217,32 +232,45 @@ img{display:block;max-width:100%}
   <section class="district-view" id="currentDistrict" aria-labelledby="currentDistrictTitle" hidden>
     <header class="district-toolbar">
       <div class="district-toolbar__inner">
-        <button class="back-world" id="backToWorld" type="button" aria-label="返回世界总览">← 世界图鉴</button>
+        <button class="back-world" id="backToWorld" type="button" aria-label="返回世界总览">←</button>
         <div class="district-brand">
           <h2 id="currentDistrictTitle" tabindex="-1">四季生活城</h2>
-          <p>风味四季路 · Lesson 49–52</p>
+          <p>风味四季路与气候家庭街 · Lesson 49–56</p>
         </div>
         <button class="settings-bookmark" type="button" data-open-settings aria-label="设备冒险设置">设置</button>
       </div>
     </header>
-    <div class="district-map" id="districtMap">
-      <picture class="district-map__paper" id="districtMapPaper" aria-hidden="true">
-        <source type="image/avif" data-atlas-paper-source="avif" sizes="(max-width:940px) 100vw, 940px">
-        <source type="image/webp" data-atlas-paper-source="webp" sizes="(max-width:940px) 100vw, 940px">
-        <img data-atlas-paper-image width="940" height="1672" alt="" decoding="async" fetchpriority="high">
-      </picture>
-      <ol class="district-locations" id="districtLocations" aria-label="风味四季路学习地点"></ol>
-      <div class="route-mascot" id="routeMascot" data-route-avatar-target="lesson49" aria-hidden="true">
-        <picture class="route-mascot__flag">
-          <source type="image/avif" data-route-flag-source="avif" sizes="(max-width:520px) 16vw, 142px">
-          <source type="image/webp" data-route-flag-source="webp" sizes="(max-width:520px) 16vw, 142px">
-          <img data-route-flag-image width="1254" height="1254" alt="" decoding="async">
+    <div class="district-book" id="districtBook" data-layout="single">
+      <button class="route-page-turn route-page-turn--previous" id="previousRoutePage" type="button" aria-label="上一页" hidden><span aria-hidden="true">‹</span></button>
+      <button class="route-page-turn route-page-turn--next" id="nextRoutePage" type="button" aria-label="下一页" hidden><span aria-hidden="true">›</span></button>
+      <div class="district-map" id="districtMap" data-route-page-id="district5-page1">
+        <picture class="district-map__paper" id="districtMapPaper" data-route-page-paper="district5-page1" aria-hidden="true">
+          <source type="image/avif" data-atlas-paper-source="avif" sizes="(max-width:940px) 100vw, 940px">
+          <source type="image/webp" data-atlas-paper-source="webp" sizes="(max-width:940px) 100vw, 940px">
+          <img data-atlas-paper-image width="940" height="1672" alt="" decoding="async" fetchpriority="high">
         </picture>
-        <picture class="route-mascot__cat">
-          <source type="image/avif" data-route-cat-source="avif" sizes="(max-width:520px) 13vw, 118px">
-          <source type="image/webp" data-route-cat-source="webp" sizes="(max-width:520px) 13vw, 118px">
-          <img data-route-cat-image width="1254" height="1254" alt="" decoding="async">
+        <ol class="district-locations" id="districtLocations" data-route-page-locations="district5-page1" aria-label="风味四季路学习地点"></ol>
+        <div class="route-mascot" id="routeMascot" data-route-avatar-target="lesson49" aria-hidden="true">
+          <picture class="route-mascot__flag">
+            <source type="image/avif" data-route-flag-source="avif" sizes="(max-width:520px) 24vw, 160px">
+            <source type="image/webp" data-route-flag-source="webp" sizes="(max-width:520px) 24vw, 160px">
+            <img data-route-flag-image width="1254" height="1254" alt="" decoding="async">
+          </picture>
+          <picture class="route-mascot__cat">
+            <source type="image/avif" data-route-cat-source="avif" sizes="(max-width:520px) 20vw, 136px">
+            <source type="image/webp" data-route-cat-source="webp" sizes="(max-width:520px) 20vw, 136px">
+            <img data-route-cat-image width="1254" height="1254" alt="" decoding="async">
+          </picture>
+        </div>
+      </div>
+      <span class="district-spine" aria-hidden="true"></span>
+      <div class="district-map district-map--companion" id="districtMapPage2" data-route-page-id="district5-page2-review" aria-label="气候家庭街">
+        <picture class="district-map__paper" data-route-page-paper="district5-page2-review" aria-hidden="true">
+          <source type="image/avif" data-atlas-paper-source="avif" sizes="(max-width:940px) 100vw, 940px">
+          <source type="image/webp" data-atlas-paper-source="webp" sizes="(max-width:940px) 100vw, 940px">
+          <img data-atlas-paper-image width="940" height="1672" alt="" decoding="async">
         </picture>
+        <ol class="district-locations" id="districtLocationsPage2" data-route-page-locations="district5-page2-review" aria-label="气候家庭街学习地点"></ol>
       </div>
       <div class="map-loader" id="mapLoader" aria-hidden="true" hidden>
         <div class="map-loader__stage">
@@ -268,6 +296,7 @@ img{display:block;max-width:100%}
           </picture>
         </div>
       </div>
+      <p class="sr-only" id="routePageStatus" role="status" aria-live="polite"></p>
     </div>
     <p class="map-update-toast" id="mapUpdateToast" role="status" aria-live="polite" hidden></p>
   </section>
@@ -313,18 +342,27 @@ const deviceStorage=browserStorageOrNull();
 const courses=CanranCore.courseCatalog.COURSES;
 const launchDistrict=CanranCore.courseCatalog.LAUNCH_DISTRICT;
 const routePage=CanranCore.adventureAtlas.GOLDEN_ROUTE_PAGE;
+const routePages=CanranCore.adventureAtlas.LANDMARK_REVIEW_ROUTE_PAGES;
 let profileState=CanranCore.deviceProfile.initializeDeviceProfile({storage:deviceStorage,courses});
 const worldOverview=document.getElementById('worldOverview');
 const currentDistrict=document.getElementById('currentDistrict');
 const districtLocations=document.getElementById('districtLocations');
 const districtToolbar=currentDistrict.querySelector('.district-toolbar');
+const districtBook=document.getElementById('districtBook');
 const districtMap=document.getElementById('districtMap');
+const previousRoutePage=document.getElementById('previousRoutePage');
+const nextRoutePage=document.getElementById('nextRoutePage');
+const routePageStatus=document.getElementById('routePageStatus');
 let districtRendered=false;
 let launchPreviewLoaded=false;
-let districtPaperLoaded=false;
+const districtPaperLoadedPages=new Set();
 let routeMascotLoaded=false;
 let districtAssetsReady=false;
+let districtRevealRequest=0;
 let districtFitFrame=0;
+let districtFocusedId=null;
+let districtActivePageId=null;
+let routePageTouchStart=null;
 
 function fitDistrictMap(){
   districtFitFrame=0;
@@ -332,9 +370,28 @@ function fitDistrictMap(){
   const availableWidth=currentDistrict.clientWidth;
   const availableHeight=Math.max(0,currentDistrict.clientHeight-districtToolbar.offsetHeight);
   if(!availableWidth||!availableHeight)return;
-  const width=Math.min(940,availableWidth,availableHeight*(940/1672));
-  districtMap.style.width=`${width}px`;
-  districtMap.style.height=`${width*(1672/940)}px`;
+  const pageRatio=routePage.canvas.width/routePage.canvas.height;
+  const spineWidth=18;
+  const spreadPageWidth=Math.min((availableWidth-spineWidth)/2,availableHeight*pageRatio);
+  const wideScreen=availableWidth>=900&&availableWidth>availableHeight*1.15;
+  const layout=wideScreen&&spreadPageWidth>=360?'spread':'single';
+  const pageCount=layout==='spread'?2:1;
+  const usedSpine=layout==='spread'?spineWidth:0;
+  const width=Math.min(routePage.canvas.width,(availableWidth-usedSpine)/pageCount,availableHeight*pageRatio);
+  const height=width/pageRatio;
+  const layoutChanged=districtBook.dataset.layout!==layout;
+  districtBook.dataset.layout=layout;
+  districtBook.style.width=`${width*pageCount+usedSpine}px`;
+  districtBook.style.height=`${height}px`;
+  districtBook.querySelectorAll('.district-map').forEach(map=>{
+    map.style.width=`${width}px`;
+    map.style.height=`${height}px`;
+  });
+  districtToolbar.style.width=`${width*pageCount+usedSpine}px`;
+  if(layoutChanged&&districtRendered){
+    renderDistrict(districtFocusedId,{activePageId:districtActivePageId});
+    loadDistrictPaper();
+  }
 }
 
 function scheduleDistrictMapFit(){
@@ -369,15 +426,19 @@ function loadLaunchPreview(){
 }
 
 function loadDistrictPaper(){
-  if(districtPaperLoaded)return;
-  const asset=routePage.backgroundAsset;
-  const picture=document.getElementById('districtMapPaper');
-  picture.querySelectorAll('[data-atlas-paper-source]').forEach(source=>{
-    const type=source.dataset.atlasPaperSource;
-    source.srcset=asset.variants.map(variant=>`${routeAssetUrl(variant[type],asset)} ${variant.width}w`).join(', ');
+  routePages.forEach(page=>{
+    const map=districtBook.querySelector(`[data-route-page-id="${page.id}"]`);
+    if(!map||map.getClientRects().length===0||districtPaperLoadedPages.has(page.id))return;
+    const asset=page.backgroundAsset;
+    const picture=document.querySelector(`[data-route-page-paper="${page.id}"]`);
+    if(!asset||!picture)return;
+    picture.querySelectorAll('[data-atlas-paper-source]').forEach(source=>{
+      const type=source.dataset.atlasPaperSource;
+      source.srcset=asset.variants.map(variant=>`${routeAssetUrl(variant[type],asset)} ${variant.width}w`).join(', ');
+    });
+    picture.querySelector('[data-atlas-paper-image]').src=routeAssetUrl(asset.png,asset);
+    districtPaperLoadedPages.add(page.id);
   });
-  picture.querySelector('[data-atlas-paper-image]').src=routeAssetUrl(asset.png,asset);
-  districtPaperLoaded=true;
 }
 
 function loadRouteMascot(){
@@ -424,17 +485,19 @@ function waitForImage(image){
 async function revealDistrictWhenReady(){
   const loader=document.getElementById('mapLoader');
   if(districtAssetsReady){loader.hidden=true;return}
+  const request=++districtRevealRequest;
   loader.hidden=false;
   const revealTimer=window.setTimeout(()=>{loader.dataset.visible='true'},180);
-  const activeImage=districtLocations.querySelector('[data-map-guidance="active"] [data-landmark-snapshot]');
+  const activeImage=districtBook.querySelector('[data-map-guidance="active"] [data-landmark-snapshot]');
   await Promise.all([
-    waitForImage(document.querySelector('[data-atlas-paper-image]')),
+    ...[...districtBook.querySelectorAll('[data-atlas-paper-image][src]')].map(waitForImage),
     waitForImage(document.querySelector('#routeMascot [data-route-cat-image]')),
     waitForImage(document.querySelector('[data-route-flag-image]')),
     waitForImage(document.querySelector('[data-route-loader-image]')),
     waitForImage(activeImage)
   ]);
   window.clearTimeout(revealTimer);
+  if(request!==districtRevealRequest)return;
   districtAssetsReady=true;
   if(loader.dataset.visible==='true'){
     delete loader.dataset.visible;
@@ -459,8 +522,8 @@ function progressMarkup(location){
   return `<span class="progress-stamps">${stamps}</span><span class="sr-only">学习进度 ${location.completedStageCount}/${location.totalStageCount}</span>`;
 }
 
-function routePlacementStyle(locationId){
-  const placement=CanranCore.adventureAtlas.GOLDEN_ROUTE_PAGE.placements[locationId];
+function routePlacementStyle(locationId,page=routePage){
+  const placement=page?.placements?.[locationId];
   if(!placement)return '';
   return ['top','right','bottom','left','width']
     .filter(property=>Number.isFinite(placement[property]))
@@ -468,7 +531,7 @@ function routePlacementStyle(locationId){
     .join(';');
 }
 
-function locationMarkup(location,recommended,focusedId){
+function locationMarkup(location,recommended,focusedId,page=routePage){
   if(location.status!=='published') return '';
   const active=focusedId?location.id===focusedId:location.id===recommended?.id;
   const pending=location.id===focusedId&&location.pendingChangeCount>0;
@@ -476,7 +539,7 @@ function locationMarkup(location,recommended,focusedId){
   const changeCopy=pending?'<span class="new-change-sticker">新变化</span>':'';
   const completionCopy=location.progressState==='complete'?'地点完成，':'';
   const accessible=`${active?'当前冒险位置，':''}${completionCopy}${kind}，${location.title}，学习进度 ${location.completedStageCount}/${location.totalStageCount}`;
-  return `<li class="map-location" style="${routePlacementStyle(location.id)}" data-location-id="${location.id}" data-map-lesson="${location.lesson??''}" data-location-status="published"${active?' data-map-guidance="active"':''}${pending?' data-map-change="true"':''}>
+  return `<li class="map-location" style="${routePlacementStyle(location.id,page)}" data-location-id="${location.id}" data-map-lesson="${location.lesson??''}" data-location-status="published"${active?' data-map-guidance="active"':''}${pending?' data-map-change="true"':''}>
     <a class="published-location" href="${location.route}" data-course-id="${location.id}" aria-label="${accessible}"${active?' aria-current="step"':''}>
       <span class="published-marker landmark-stack" aria-hidden="true">${landmarkMarkup(location,{priority:active||pending})}</span>
       ${changeCopy}
@@ -489,33 +552,87 @@ function getPublishedLocations(){
   return CanranCore.adventureAtlas.buildLocationModels(CanranCore.courseCatalog.MAP_COURSES,profileState.profile).filter(location=>location.status==='published');
 }
 
-function getRoutePageLocations(){
-  return CanranCore.adventureAtlas.buildRoutePageLocationModels(CanranCore.courseCatalog.MAP_COURSES,profileState.profile).filter(location=>location.status==='published');
+function getRoutePageLocations(page=routePage){
+  return CanranCore.adventureAtlas.buildRoutePageLocationModels(CanranCore.courseCatalog.MAP_COURSES,profileState.profile,page).filter(location=>location.status==='published');
+}
+
+function getDistrictRouteLocations(){
+  return routePages.flatMap(page=>getRoutePageLocations(page));
 }
 
 function renderWorldProgress(){
   document.getElementById('worldCompletedCount').textContent=String(getPublishedLocations().filter(location=>location.kind==='lesson'&&location.progressState==='complete').length);
 }
 
-function renderDistrict(focusedId=null){
-  const locations=getRoutePageLocations();
+function updateRoutePageControls(activePage){
+  const pageIndex=routePages.findIndex(page=>page.id===activePage?.id);
+  const neighbours=CanranCore.adventureAtlas.routePageNeighbors(activePage?.id,routePages);
+  const singlePage=districtBook.dataset.layout==='single';
+  previousRoutePage.hidden=!singlePage||!neighbours.previous;
+  nextRoutePage.hidden=!singlePage||!neighbours.next;
+  previousRoutePage.dataset.turnTargetPage=neighbours.previous?.id||'';
+  nextRoutePage.dataset.turnTargetPage=neighbours.next?.id||'';
+  previousRoutePage.setAttribute('aria-label',neighbours.previous?`上一页：${neighbours.previous.title}`:'上一页');
+  nextRoutePage.setAttribute('aria-label',neighbours.next?`下一页：${neighbours.next.title}`:'下一页');
+  districtBook.dataset.activePageId=activePage?.id||'';
+  routePageStatus.textContent=pageIndex<0?'':`第 ${pageIndex+1} 页，共 ${routePages.length} 页：${activePage.title}`;
+}
+
+function renderDistrict(focusedId=null,{activePageId=null}={}){
+  districtFocusedId=focusedId;
+  const locations=getDistrictRouteLocations();
   const recommended=CanranCore.adventureAtlas.selectRecommendedLocation(locations,profileState.profile);
-  districtLocations.innerHTML=locations.map(location=>locationMarkup(location,recommended,focusedId)).join('');
-  const mascot=document.getElementById('routeMascot');
   const target=CanranCore.adventureAtlas.selectRouteAvatarTarget(locations,focusedId,profileState.profile)||'route-exit';
-  const placement=routePage.mascotPlacement;
+  const targetPage=CanranCore.adventureAtlas.routePageForLocation(target,routePages)||
+    CanranCore.adventureAtlas.routePageForLocation(focusedId,routePages)||routePage;
+  const requestedPage=routePages.find(page=>page.id===activePageId);
+  const activePage=requestedPage||targetPage;
+  districtActivePageId=activePage.id;
+  const targetMap=districtBook.querySelector(`[data-route-page-id="${targetPage.id}"]`);
+  districtBook.querySelectorAll('.district-map').forEach(map=>{
+    map.dataset.activePage=String(map.dataset.routePageId===activePage.id);
+  });
+  const renderSpread=districtBook.dataset.layout==='spread';
+  routePages.forEach(page=>{
+    const list=districtBook.querySelector(`[data-route-page-locations="${page.id}"]`);
+    if(!list)return;
+    list.innerHTML=renderSpread||page.id===activePage.id
+      ?getRoutePageLocations(page).map(location=>locationMarkup(location,recommended,focusedId,page)).join('')
+      :'';
+  });
+  const mascot=document.getElementById('routeMascot');
+  const placement=targetPage.mascotPlacement||routePage.mascotPlacement;
   const anchor=placement?.entranceAnchors?.[target]||placement?.entranceAnchors?.['route-exit'];
+  if(targetMap&&mascot.parentElement!==targetMap)targetMap.append(mascot);
   mascot.dataset.routeAvatarTarget=target;
   if(anchor){
     mascot.style.left=`${anchor.left}%`;mascot.style.top=`${anchor.top}%`;
     mascot.style.width=`${placement.width}%`;mascot.dataset.flip=String(Boolean(anchor.flip));
   }
-  districtLocations.querySelectorAll('[data-course-id]').forEach(link=>link.addEventListener('click',()=>{
+  districtBook.querySelectorAll('[data-course-id]').forEach(link=>link.addEventListener('click',()=>{
     const result=CanranCore.deviceProfile.recordLocationVisit({storage:deviceStorage,courses,courseId:link.dataset.courseId});
     if(result.persisted) profileState={profile:result.profile,persisted:true};
   }));
+  updateRoutePageControls(activePage);
   districtRendered=true;
   return locations;
+}
+
+function turnRoutePage(pageId,{moveFocus=false}={}){
+  if(districtBook.dataset.layout!=='single')return false;
+  const nextPage=routePages.find(page=>page.id===pageId);
+  if(!nextPage||nextPage.id===districtActivePageId)return false;
+  const previousIndex=routePages.findIndex(page=>page.id===districtActivePageId);
+  const nextIndex=routePages.findIndex(page=>page.id===nextPage.id);
+  districtAssetsReady=false;
+  renderDistrict(districtFocusedId,{activePageId:nextPage.id});
+  loadDistrictPaper();
+  revealDistrictWhenReady();
+  if(moveFocus){
+    const focusTarget=nextIndex>previousIndex?previousRoutePage:nextRoutePage;
+    requestAnimationFrame(()=>focusTarget.hidden||focusTarget.focus());
+  }
+  return true;
 }
 
 function showWorld({focusEntrance=false}={}){
@@ -526,16 +643,17 @@ function showWorld({focusEntrance=false}={}){
 }
 
 function showDistrict({focusedId=null,focusHeading=false}={}){
+  worldOverview.hidden=true;currentDistrict.hidden=false;document.body.dataset.atlasView='district';
+  window.scrollTo(0,0);fitDistrictMap();
+  const locations=renderDistrict(focusedId);
   loadDistrictPaper();
   loadRouteMascot();
-  const locations=renderDistrict(focusedId);
-  worldOverview.hidden=true;currentDistrict.hidden=false;document.body.dataset.atlasView='district';
-  window.scrollTo(0,0);fitDistrictMap();scheduleDistrictMapFit();
+  scheduleDistrictMapFit();
   revealDistrictWhenReady();
   if(focusHeading) document.getElementById('currentDistrictTitle').focus();
   if(focusedId){
     const location=locations.find(item=>item.id===focusedId);
-    const element=districtLocations.querySelector(`[data-location-id="${focusedId}"]`);
+    const element=districtBook.querySelector(`[data-location-id="${focusedId}"]`);
     const summary=CanranCore.adventureAtlas.buildMapChangeSummary(location);
     if(summary&&element){
       const toast=document.getElementById('mapUpdateToast');
@@ -555,12 +673,34 @@ document.getElementById('enterLaunchDistrict').addEventListener('click',()=>{
   showDistrict({focusHeading:true});
 });
 document.getElementById('backToWorld').addEventListener('click',()=>showWorld({focusEntrance:true}));
+previousRoutePage.addEventListener('click',event=>turnRoutePage(previousRoutePage.dataset.turnTargetPage,{moveFocus:event.detail===0}));
+nextRoutePage.addEventListener('click',event=>turnRoutePage(nextRoutePage.dataset.turnTargetPage,{moveFocus:event.detail===0}));
+districtBook.addEventListener('touchstart',event=>{
+  if(districtBook.dataset.layout!=='single'||event.touches.length!==1||event.target.closest('a,button')){
+    routePageTouchStart=null;
+    return;
+  }
+  const touch=event.touches[0];
+  routePageTouchStart={x:touch.clientX,y:touch.clientY};
+},{passive:true});
+districtBook.addEventListener('touchend',event=>{
+  const start=routePageTouchStart;
+  routePageTouchStart=null;
+  if(!start||districtBook.dataset.layout!=='single'||event.changedTouches.length!==1)return;
+  const touch=event.changedTouches[0];
+  const deltaX=touch.clientX-start.x;
+  const deltaY=touch.clientY-start.y;
+  if(Math.abs(deltaX)<55||Math.abs(deltaX)<=Math.abs(deltaY)*1.25)return;
+  const control=deltaX<0?nextRoutePage:previousRoutePage;
+  if(!control.hidden)turnRoutePage(control.dataset.turnTargetPage);
+},{passive:true});
+districtBook.addEventListener('touchcancel',()=>{routePageTouchStart=null},{passive:true});
 
 function initializeView(){
   const params=new URLSearchParams(location.search);
   const districtId=params.get('district');
   const focusId=params.get('focus');
-  const validFocus=getRoutePageLocations().some(location=>location.id===focusId);
+  const validFocus=getDistrictRouteLocations().some(location=>location.id===focusId);
   if(districtId===launchDistrict.id&&validFocus) showDistrict({focusedId:focusId});
   else showWorld();
 }

@@ -33,13 +33,13 @@
       lesson52: { top: 67.1, right: 4.6, width: 47 }
     },
     mascotPlacement: {
-      width: 11,
+      width: 17,
       entranceAnchors: {
-        lesson49: { left: 38, top: 24, flip: false },
-        lesson50: { left: 47, top: 36, flip: true },
-        lesson51: { left: 43, top: 60.5, flip: false },
-        lesson52: { left: 45.5, top: 87, flip: true },
-        'route-exit': { left: 36, top: 94, flip: false }
+        lesson49: { left: 35, top: 22.4, flip: false },
+        lesson50: { left: 45, top: 33.5, flip: true },
+        lesson51: { left: 40.5, top: 58.9, flip: false },
+        lesson52: { left: 40, top: 85.3, flip: true },
+        'route-exit': { left: 34, top: 92.2, flip: false }
       }
     },
     backgroundAsset: {
@@ -104,6 +104,14 @@
       lesson54: { top: 24.2, right: 3.5, width: 49 },
       lesson55: { top: 49.6, left: 4.8, width: 47 },
       lesson56: { top: 71.8, right: 4.6, width: 47 }
+    },
+    mascotPlacement: {
+      width: 17,
+      entranceAnchors: {
+        lesson53: { left: 42, top: 16.6, flip: false },
+        lesson54: { left: 39, top: 43.9, flip: true },
+        'route-exit': { left: 40, top: 89.5, flip: false }
+      }
     },
     backgroundAsset: {
       version: REVIEW_ROUTE_PAGE_ART_VERSION,
