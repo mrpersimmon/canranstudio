@@ -22,6 +22,8 @@ body{
   font:700 16px/1.45 'Baloo 2','ZCOOL KuaiLe','PingFang SC','Microsoft YaHei',sans-serif;
   padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
+body[data-atlas-view="district"]{height:100vh;height:100dvh;overflow:hidden;overscroll-behavior:none}
+body[data-atlas-view="district"] .atlas-app{height:100%;min-height:0}
 button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 button,a{-webkit-tap-highlight-color:transparent}
 img{display:block;max-width:100%}
@@ -88,7 +90,7 @@ img{display:block;max-width:100%}
 @keyframes world-beacon{0%,100%{opacity:.7;transform:scale(.94)}50%{opacity:1;transform:scale(1.03)}}
 
 /* District route page: four lessons on one authored, fixed-ratio map. */
-.district-view{position:relative;min-height:100dvh;padding:0 0 env(safe-area-inset-bottom);background:#1f140f}
+.district-view{position:relative;display:grid;grid-template-rows:auto minmax(0,1fr);height:100%;min-height:0;overflow:hidden;background:#1f140f}
 .district-toolbar{position:relative;z-index:40;width:min(940px,100%);margin:auto;padding:9px clamp(10px,2.5vw,22px);border-bottom:4px solid #5c3c2b;background:#f3dfb3;box-shadow:0 8px 20px rgba(0,0,0,.35)}
 .district-toolbar__inner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px}
 .back-world{display:inline-flex;align-items:center;justify-content:center;min-width:92px;min-height:48px;padding:8px 14px;border:3px solid var(--ink);border-radius:999px;background:#fff0c8;box-shadow:0 3px 0 var(--ink);font-size:13px;white-space:nowrap}
@@ -97,7 +99,7 @@ img{display:block;max-width:100%}
 .district-brand p{margin:3px 0 0;color:#6b4a36;font-size:clamp(9px,1.7vw,12px);letter-spacing:.5px}
 .district-toolbar .settings-bookmark{position:relative;top:auto;right:auto;width:50px;height:48px;border-radius:12px;font-size:12px}
 .district-toolbar .settings-bookmark::after{display:none}
-.district-map{position:relative;overflow:hidden;width:min(940px,100%);height:auto;aspect-ratio:940/1672;margin:auto;background:#2e1d15;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:pan-y;isolation:isolate}
+.district-map{position:relative;align-self:start;justify-self:center;overflow:hidden;width:min(940px,100%);height:auto;aspect-ratio:940/1672;margin:0;background:#2e1d15;box-shadow:0 0 48px rgba(0,0,0,.55);touch-action:manipulation;isolation:isolate;container-type:inline-size}
 .district-map__paper{position:absolute;z-index:0;inset:0;width:100%;height:100%}
 .district-map__paper img{width:100%;height:100%;object-fit:contain}
 .district-locations{position:absolute;z-index:8;inset:0;margin:0;padding:0;list-style:none}
@@ -106,31 +108,26 @@ img{display:block;max-width:100%}
 .published-marker{position:relative;z-index:2;width:100%;aspect-ratio:1;filter:drop-shadow(0 7px 3px rgba(66,41,26,.25))}
 .landmark-stack picture{position:absolute;inset:0}
 .landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.location-plaque{position:relative;z-index:5;width:max-content;max-width:90%;margin-top:-3%;padding:7px clamp(12px,3vw,22px) 8px;border:3px solid #5e3b28;border-radius:11px 11px 16px 16px;background:#f3deb1;box-shadow:inset 0 0 0 2px var(--accent,#a54332),0 4px 0 rgba(73,49,38,.7);transform:rotate(var(--angle,-1deg))}
+.location-plaque{position:relative;z-index:5;width:max-content;max-width:90%;margin-top:-3%;padding:7px clamp(12px,3vw,22px) 8px;padding:7px clamp(12px,3cqw,22px) 8px;border:3px solid #5e3b28;border-radius:11px 11px 16px 16px;background:#f3deb1;box-shadow:inset 0 0 0 2px var(--accent,#a54332),0 4px 0 rgba(73,49,38,.7);transform:rotate(var(--angle,-1deg))}
 .map-location[data-map-guidance="active"] .location-plaque{border-color:#5f3b21;box-shadow:inset 0 0 0 3px #f5c64c,inset 0 0 9px rgba(255,248,190,.86),0 4px 0 rgba(73,49,38,.7),0 0 9px 3px rgba(255,216,87,.86),0 0 20px 8px rgba(255,196,49,.34);animation:route-plaque-glow 2.2s ease-in-out infinite}
 .map-location[data-location-id="lesson50"]{--accent:#7450a8;--angle:1deg}
 .map-location[data-location-id="lesson50"] .location-plaque{margin-top:-13%}
 .map-location[data-location-id="lesson51"]{--accent:#276d9d;--angle:.6deg}
 .map-location[data-location-id="lesson52"]{--accent:#4c855f;--angle:-.4deg}
 .map-location[data-location-id="lesson52"] .location-plaque{margin-top:-13%}
-.location-kind{display:block;color:var(--accent);font-size:clamp(9px,1.5vw,12px);line-height:1;font-weight:800;letter-spacing:1.1px}
-.location-title{display:block;margin-top:3px;font-size:clamp(13px,2.7vw,22px);line-height:1.05;white-space:nowrap}
+.location-kind{display:block;color:var(--accent);font-size:clamp(9px,1.5vw,12px);font-size:clamp(9px,1.5cqw,12px);line-height:1;font-weight:800;letter-spacing:1.1px}
+.location-title{display:block;margin-top:3px;font-size:clamp(13px,2.7vw,22px);font-size:clamp(13px,2.7cqw,22px);line-height:1.05;white-space:nowrap}
 .progress-stamps{display:flex;justify-content:center;gap:4px;margin-top:6px}
-.progress-stamp{width:clamp(10px,1.7vw,14px);height:clamp(10px,1.7vw,14px);border:2px solid #856b4e;border-radius:50%;background:rgba(255,255,255,.52)}
+.progress-stamp{width:clamp(10px,1.7vw,14px);width:clamp(10px,1.7cqw,14px);height:clamp(10px,1.7vw,14px);height:clamp(10px,1.7cqw,14px);border:2px solid #856b4e;border-radius:50%;background:rgba(255,255,255,.52)}
 .progress-stamp[data-earned="true"]{border-color:#8d4a25;background:var(--gold);box-shadow:inset 0 0 0 2px #fff0a9}
 .map-location[data-map-change="true"] .published-marker{animation:map-new-change 1.2s ease-in-out 2}
 .new-change-sticker{position:absolute;z-index:12;top:11%;right:2%;padding:5px 9px;border:3px solid #763f2c;border-radius:7px;background:#f8cc53;box-shadow:0 3px 0 #763f2c;transform:rotate(8deg);font-size:10px}
-.route-mascot{position:absolute;z-index:22;left:39.8%;top:64.6%;width:21%;aspect-ratio:1.2;pointer-events:none;transition:left .45s ease,top .45s ease}
-.route-mascot[data-route-avatar-target="lesson49"]{left:43%;top:27.6%}
-.route-mascot[data-route-avatar-target="lesson50"]{left:45%;top:39.5%}
-.route-mascot[data-route-avatar-target="lesson51"]{left:39.8%;top:64.6%}
-.route-mascot[data-route-avatar-target="lesson52"]{left:42%;top:84.7%}
-.route-mascot[data-route-avatar-target="route-exit"]{left:43%;top:91.2%}
+.route-mascot{position:absolute;z-index:22;left:36%;top:94%;width:11%;aspect-ratio:1.2;pointer-events:none;transition:left .45s ease,top .45s ease}
 .route-mascot picture{position:absolute;display:block;filter:drop-shadow(0 3px 2px rgba(83,49,22,.3))}
 .route-mascot picture img{display:block;width:100%;height:100%;object-fit:contain}
 .route-mascot__flag{z-index:0;right:-2%;bottom:7%;width:72%;height:94%}
 .route-mascot__cat{z-index:1;left:-3%;bottom:-1%;width:76%;height:76%;animation:cat-walk-rest 2.4s ease-in-out infinite;transform-origin:50% 88%}
-.route-mascot[data-route-avatar-target="lesson50"] .route-mascot__cat,.route-mascot[data-route-avatar-target="lesson52"] .route-mascot__cat{transform:scaleX(-1)}
+.route-mascot[data-flip="true"] .route-mascot__cat{transform:scaleX(-1)}
 .map-loader{position:absolute;z-index:60;inset:0;display:grid;place-items:center;background:#cbb78e;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility 0s linear .24s}
 .map-loader[data-visible="true"]{opacity:1;visibility:visible;transition-delay:0s}
 .map-loader[hidden]{display:none}
@@ -320,11 +317,38 @@ let profileState=CanranCore.deviceProfile.initializeDeviceProfile({storage:devic
 const worldOverview=document.getElementById('worldOverview');
 const currentDistrict=document.getElementById('currentDistrict');
 const districtLocations=document.getElementById('districtLocations');
+const districtToolbar=currentDistrict.querySelector('.district-toolbar');
+const districtMap=document.getElementById('districtMap');
 let districtRendered=false;
 let launchPreviewLoaded=false;
 let districtPaperLoaded=false;
 let routeMascotLoaded=false;
 let districtAssetsReady=false;
+let districtFitFrame=0;
+
+function fitDistrictMap(){
+  districtFitFrame=0;
+  if(currentDistrict.hidden)return;
+  const availableWidth=currentDistrict.clientWidth;
+  const availableHeight=Math.max(0,currentDistrict.clientHeight-districtToolbar.offsetHeight);
+  if(!availableWidth||!availableHeight)return;
+  const width=Math.min(940,availableWidth,availableHeight*(940/1672));
+  districtMap.style.width=`${width}px`;
+  districtMap.style.height=`${width*(1672/940)}px`;
+}
+
+function scheduleDistrictMapFit(){
+  if(districtFitFrame)cancelAnimationFrame(districtFitFrame);
+  districtFitFrame=requestAnimationFrame(fitDistrictMap);
+}
+
+if(typeof ResizeObserver==='function'){
+  const districtResizeObserver=new ResizeObserver(scheduleDistrictMapFit);
+  districtResizeObserver.observe(currentDistrict);
+  districtResizeObserver.observe(districtToolbar);
+}
+window.addEventListener('resize',scheduleDistrictMapFit);
+window.visualViewport?.addEventListener('resize',scheduleDistrictMapFit);
 
 function routeAssetUrl(path,asset){return `/${path}?v=${encodeURIComponent(asset.version)}`}
 
@@ -477,7 +501,15 @@ function renderDistrict(focusedId=null){
   const locations=getRoutePageLocations();
   const recommended=CanranCore.adventureAtlas.selectRecommendedLocation(locations,profileState.profile);
   districtLocations.innerHTML=locations.map(location=>locationMarkup(location,recommended,focusedId)).join('');
-  document.getElementById('routeMascot').dataset.routeAvatarTarget=CanranCore.adventureAtlas.selectRouteAvatarTarget(locations,focusedId,profileState.profile)||'route-exit';
+  const mascot=document.getElementById('routeMascot');
+  const target=CanranCore.adventureAtlas.selectRouteAvatarTarget(locations,focusedId,profileState.profile)||'route-exit';
+  const placement=routePage.mascotPlacement;
+  const anchor=placement?.entranceAnchors?.[target]||placement?.entranceAnchors?.['route-exit'];
+  mascot.dataset.routeAvatarTarget=target;
+  if(anchor){
+    mascot.style.left=`${anchor.left}%`;mascot.style.top=`${anchor.top}%`;
+    mascot.style.width=`${placement.width}%`;mascot.dataset.flip=String(Boolean(anchor.flip));
+  }
   districtLocations.querySelectorAll('[data-course-id]').forEach(link=>link.addEventListener('click',()=>{
     const result=CanranCore.deviceProfile.recordLocationVisit({storage:deviceStorage,courses,courseId:link.dataset.courseId});
     if(result.persisted) profileState={profile:result.profile,persisted:true};
@@ -498,12 +530,12 @@ function showDistrict({focusedId=null,focusHeading=false}={}){
   loadRouteMascot();
   const locations=renderDistrict(focusedId);
   worldOverview.hidden=true;currentDistrict.hidden=false;document.body.dataset.atlasView='district';
+  window.scrollTo(0,0);fitDistrictMap();scheduleDistrictMapFit();
   revealDistrictWhenReady();
   if(focusHeading) document.getElementById('currentDistrictTitle').focus();
   if(focusedId){
     const location=locations.find(item=>item.id===focusedId);
     const element=districtLocations.querySelector(`[data-location-id="${focusedId}"]`);
-    requestAnimationFrame(()=>element?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
     const summary=CanranCore.adventureAtlas.buildMapChangeSummary(location);
     if(summary&&element){
       const toast=document.getElementById('mapUpdateToast');

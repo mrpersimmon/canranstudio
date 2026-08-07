@@ -3,6 +3,16 @@
 const { test, expect } = require('@playwright/test');
 
 const ROUTE_PAGE_LOCATION_IDS = ['lesson49', 'lesson50', 'lesson51', 'lesson52'];
+const ROUTE_ART_VISIBLE_BOUNDS = Object.freeze({
+  lesson49: { width: 1024, height: 1024, left: 18, top: 54, right: 1005, bottom: 977 },
+  lesson50: { width: 1024, height: 1024, left: 6, top: 4, right: 1023, bottom: 997 },
+  lesson51: { width: 1024, height: 1024, left: 10, top: 63, right: 1013, bottom: 905 },
+  lesson52: { width: 1024, height: 1024, left: 4, top: 57, right: 1019, bottom: 969 }
+});
+const ROUTE_MASCOT_VISIBLE_BOUNDS = Object.freeze({
+  cat: { width: 1254, height: 1254, left: 268, top: 111, right: 987, bottom: 1143 },
+  flag: { width: 1254, height: 1254, left: 357, top: 36, right: 920, bottom: 1196 }
+});
 
 async function enterLaunchDistrict(page) {
   await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
@@ -164,6 +174,40 @@ test('the district parchment keeps its authored proportion on the Huawei viewpor
   expect(ratio).toBeCloseTo(940 / 1672, 2);
 });
 
+test('the complete district route fits short phone viewports without vertical scrolling', async ({ page }) => {
+  for (const viewport of [
+    { width: 390, height: 667 },
+    { width: 466, height: 760 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/?district=first-book-49-60&focus=lesson50');
+
+    const fit = await page.evaluate(() => {
+      const map = document.getElementById('districtMap').getBoundingClientRect();
+      const toolbar = document.querySelector('.district-toolbar').getBoundingClientRect();
+      return {
+        scrollY: window.scrollY,
+        scrollHeight: document.documentElement.scrollHeight,
+        viewportHeight: window.innerHeight,
+        mapTop: map.top,
+        mapBottom: map.bottom,
+        mapRatio: map.width / map.height,
+        toolbarBottom: toolbar.bottom,
+        bodyOverflow: getComputedStyle(document.body).overflowY,
+        mapTouchAction: getComputedStyle(document.getElementById('districtMap')).touchAction
+      };
+    });
+
+    expect(fit.scrollY).toBe(0);
+    expect(fit.scrollHeight).toBeLessThanOrEqual(fit.viewportHeight);
+    expect(fit.mapTop).toBeGreaterThanOrEqual(fit.toolbarBottom - 1);
+    expect(fit.mapBottom).toBeLessThanOrEqual(fit.viewportHeight + 1);
+    expect(fit.mapRatio).toBeCloseTo(940 / 1672, 2);
+    expect(fit.bodyOverflow).toBe('hidden');
+    expect(fit.mapTouchAction).toBe('manipulation');
+  }
+});
+
 test('every route-page landmark stays fully inside the Huawei district parchment', async ({ page }) => {
   await page.setViewportSize({ width: 466, height: 980 });
   await page.goto('/');
@@ -198,6 +242,78 @@ test('the explorer cat and purple-gold flag mark one glowing route plaque withou
     'animation-name', 'route-plaque-glow'
   );
   expect(await mascot.evaluate(element => getComputedStyle(element).pointerEvents)).toBe('none');
+});
+
+test('the explorer stands at the current entrance without touching another landmark or plaque', async ({ page }) => {
+  for (const viewport of [
+    { width: 390, height: 667 },
+    { width: 655, height: 1280 }
+  ]) {
+    await page.setViewportSize(viewport);
+
+    for (const id of ROUTE_PAGE_LOCATION_IDS) {
+      await page.goto(`/?district=first-book-49-60&focus=${id}`);
+      const collisions = await page.evaluate(({ artBounds, mascotBounds, currentId }) => {
+        const visibleRect = (element, bounds) => {
+          const box = element.getBoundingClientRect();
+          const scale = Math.min(box.width / bounds.width, box.height / bounds.height);
+          const renderedWidth = bounds.width * scale;
+          const renderedHeight = bounds.height * scale;
+          const originX = box.left + (box.width - renderedWidth) / 2;
+          const originY = box.top + (box.height - renderedHeight) / 2;
+          return {
+            left: originX + bounds.left * scale,
+            top: originY + bounds.top * scale,
+            right: originX + bounds.right * scale,
+            bottom: originY + bounds.bottom * scale
+          };
+        };
+        const union = rectangles => ({
+          left: Math.min(...rectangles.map(rectangle => rectangle.left)),
+          top: Math.min(...rectangles.map(rectangle => rectangle.top)),
+          right: Math.max(...rectangles.map(rectangle => rectangle.right)),
+          bottom: Math.max(...rectangles.map(rectangle => rectangle.bottom))
+        });
+        const overlapArea = (left, right) => (
+          Math.max(0, Math.min(left.right, right.right) - Math.max(left.left, right.left)) *
+          Math.max(0, Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top))
+        );
+        const mascot = union([
+          visibleRect(document.querySelector('.route-mascot__cat'), mascotBounds.cat),
+          visibleRect(document.querySelector('.route-mascot__flag'), mascotBounds.flag)
+        ]);
+
+        return [...document.querySelectorAll('.map-location')].map(location => {
+          const locationId = location.dataset.locationId;
+          const art = visibleRect(
+            location.querySelector('.published-marker picture'),
+            artBounds[locationId]
+          );
+          return {
+            id: locationId,
+            current: locationId === currentId,
+            art: overlapArea(mascot, art),
+            plaque: overlapArea(mascot, location.querySelector('.location-plaque').getBoundingClientRect())
+          };
+        });
+      }, {
+        artBounds: ROUTE_ART_VISIBLE_BOUNDS,
+        mascotBounds: ROUTE_MASCOT_VISIBLE_BOUNDS,
+        currentId: id
+      });
+
+      expect(collisions.find(collision => collision.current).art, `${id} entrance contact`)
+        .toBeGreaterThan(0);
+      expect(
+        collisions.filter(collision => !collision.current && collision.art > 0),
+        `${id} adjacent landmark collisions`
+      ).toEqual([]);
+      expect(
+        collisions.filter(collision => collision.plaque > 0),
+        `${id} plaque collisions`
+      ).toEqual([]);
+    }
+  }
 });
 
 test('the four whole-pose loader frames appear only while key route artwork is pending', async ({ page }) => {

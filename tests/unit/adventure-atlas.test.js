@@ -93,6 +93,16 @@ test('the approved golden route page contains exactly Lessons 49–52 in curricu
     lesson51: { top: 40.1, left: 4.8, width: 50 },
     lesson52: { top: 67.1, right: 4.6, width: 47 }
   });
+  assert.deepEqual(atlas.GOLDEN_ROUTE_PAGE.mascotPlacement, {
+    width: 11,
+    entranceAnchors: {
+      lesson49: { left: 38, top: 24, flip: false },
+      lesson50: { left: 47, top: 36, flip: true },
+      lesson51: { left: 43, top: 60.5, flip: false },
+      lesson52: { left: 45.5, top: 87, flip: true },
+      'route-exit': { left: 36, top: 94, flip: false }
+    }
+  });
   assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE), true);
   assert.equal(Object.isFrozen(atlas.GOLDEN_ROUTE_PAGE.backgroundAsset), true);
 });

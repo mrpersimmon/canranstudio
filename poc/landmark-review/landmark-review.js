@@ -37,13 +37,6 @@
   });
   const STUDENT_TOOLBAR_HEIGHT = 56;
   const STUDENT_CAT_POSITIONS = Object.freeze({
-    'district5-page1': Object.freeze({
-      lesson49: Object.freeze({ left: 43, top: 27.6 }),
-      lesson50: Object.freeze({ left: 45, top: 39.5, flip: true }),
-      lesson51: Object.freeze({ left: 39.8, top: 64.6 }),
-      lesson52: Object.freeze({ left: 42, top: 84.7, flip: true }),
-      'route-exit': Object.freeze({ left: 43, top: 91.2 })
-    }),
     'district5-page2-review': Object.freeze({
       lesson53: Object.freeze({ left: 45, top: 18.2 }),
       lesson54: Object.freeze({ left: 42, top: 45.5, flip: true }),
@@ -858,7 +851,9 @@
     }
 
     function createStudentMascot(routePage) {
-      const position = STUDENT_CAT_POSITIONS[routePage.id]?.[state.location];
+      const placement = routePage.mascotPlacement;
+      const position = placement?.entranceAnchors?.[state.location] ||
+        STUDENT_CAT_POSITIONS[routePage.id]?.[state.location];
       const mascotAsset = routePage.mascotAsset || atlas.GOLDEN_ROUTE_PAGE?.mascotAsset;
       const flagAsset = routePage.flagAsset || atlas.GOLDEN_ROUTE_PAGE?.flagAsset;
       if (!position || !mascotAsset || !flagAsset) return null;
@@ -869,6 +864,7 @@
       mascot.dataset.flip = String(Boolean(position.flip));
       mascot.style.left = `${position.left}%`;
       mascot.style.top = `${position.top}%`;
+      if (Number.isFinite(placement?.width)) mascot.style.width = `${placement.width}%`;
       const flag = pictureElement(documentRef, flagAsset, {
         alt: '',
         sizes: '96px'
