@@ -322,13 +322,27 @@
       return { objectUrl, candidate, byteSize: blob.size };
     }
 
+    function throwIfCancelled(activeSession) {
+      if (!activeSession.cancelled && !activeSession.controller.signal.aborted) return;
+      const error = new Error('review preload session cancelled');
+      error.name = 'AbortError';
+      throw error;
+    }
+
     async function fetchCandidate(activeSession, candidate) {
+      throwIfCancelled(activeSession);
       const absoluteUrl = new URL(candidate.relativeUrl, windowRef.location.href).href;
       const cache = await cachePromise;
+      throwIfCancelled(activeSession);
       if (!activeSession.forceReload && cache) {
         const cached = await cache.match(absoluteUrl);
+        throwIfCancelled(activeSession);
         if (cached) {
           const record = await decodedRecord(cached, { ...candidate, absoluteUrl });
+          if (activeSession.cancelled || activeSession.controller.signal.aborted) {
+            releaseObjectUrl(record.objectUrl);
+            throwIfCancelled(activeSession);
+          }
           return { ...record, cacheHit: true, transferredBytes: 0 };
         }
       }
@@ -336,6 +350,7 @@
       let lastError = null;
       for (let attempt = 0; attempt < 3; attempt += 1) {
         try {
+          throwIfCancelled(activeSession);
           const response = await windowRef.fetch(absoluteUrl, {
             cache: activeSession.forceReload ? 'reload' : 'force-cache',
             credentials: 'same-origin',
