@@ -107,6 +107,7 @@ img{display:block;max-width:100%}
 .landmark-stack picture{position:absolute;inset:0}
 .landmark-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .location-plaque{position:relative;z-index:5;width:max-content;max-width:90%;margin-top:-3%;padding:7px clamp(12px,3vw,22px) 8px;border:3px solid #5e3b28;border-radius:11px 11px 16px 16px;background:#f3deb1;box-shadow:inset 0 0 0 2px var(--accent,#a54332),0 4px 0 rgba(73,49,38,.7);transform:rotate(var(--angle,-1deg))}
+.map-location[data-map-guidance="active"] .location-plaque{border-color:#5f3b21;box-shadow:inset 0 0 0 3px #f5c64c,inset 0 0 9px rgba(255,248,190,.86),0 4px 0 rgba(73,49,38,.7),0 0 9px 3px rgba(255,216,87,.86),0 0 20px 8px rgba(255,196,49,.34);animation:route-plaque-glow 2.2s ease-in-out infinite}
 .map-location[data-location-id="lesson50"]{--accent:#7450a8;--angle:1deg}
 .map-location[data-location-id="lesson50"] .location-plaque{margin-top:-13%}
 .map-location[data-location-id="lesson51"]{--accent:#276d9d;--angle:.6deg}
@@ -119,15 +120,16 @@ img{display:block;max-width:100%}
 .progress-stamp[data-earned="true"]{border-color:#8d4a25;background:var(--gold);box-shadow:inset 0 0 0 2px #fff0a9}
 .map-location[data-map-change="true"] .published-marker{animation:map-new-change 1.2s ease-in-out 2}
 .new-change-sticker{position:absolute;z-index:12;top:11%;right:2%;padding:5px 9px;border:3px solid #763f2c;border-radius:7px;background:#f8cc53;box-shadow:0 3px 0 #763f2c;transform:rotate(8deg);font-size:10px}
-.route-mascot{position:absolute;z-index:22;left:39.8%;top:64.6%;width:12.5%;aspect-ratio:1;pointer-events:none;transition:left .45s ease,top .45s ease}
+.route-mascot{position:absolute;z-index:22;left:39.8%;top:64.6%;width:21%;aspect-ratio:1.2;pointer-events:none;transition:left .45s ease,top .45s ease}
 .route-mascot[data-route-avatar-target="lesson49"]{left:43%;top:27.6%}
 .route-mascot[data-route-avatar-target="lesson50"]{left:45%;top:39.5%}
 .route-mascot[data-route-avatar-target="lesson51"]{left:39.8%;top:64.6%}
 .route-mascot[data-route-avatar-target="lesson52"]{left:42%;top:84.7%}
 .route-mascot[data-route-avatar-target="route-exit"]{left:43%;top:91.2%}
-.route-mascot__marker{position:absolute;z-index:0;left:9%;right:9%;bottom:-2%;height:auto;filter:drop-shadow(0 2px 2px rgba(83,49,22,.28))}
-.route-mascot__marker img,.route-mascot__cat img{width:100%;height:100%;object-fit:contain}
-.route-mascot__cat{position:absolute;z-index:1;inset:0;animation:cat-walk-rest 2.4s ease-in-out infinite;transform-origin:50% 88%}
+.route-mascot picture{position:absolute;display:block;filter:drop-shadow(0 3px 2px rgba(83,49,22,.3))}
+.route-mascot picture img{display:block;width:100%;height:100%;object-fit:contain}
+.route-mascot__flag{z-index:0;right:-2%;bottom:7%;width:72%;height:94%}
+.route-mascot__cat{z-index:1;left:-3%;bottom:-1%;width:76%;height:76%;animation:cat-walk-rest 2.4s ease-in-out infinite;transform-origin:50% 88%}
 .route-mascot[data-route-avatar-target="lesson50"] .route-mascot__cat,.route-mascot[data-route-avatar-target="lesson52"] .route-mascot__cat{transform:scaleX(-1)}
 .map-loader{position:absolute;z-index:60;inset:0;display:grid;place-items:center;background:#cbb78e;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility 0s linear .24s}
 .map-loader[data-visible="true"]{opacity:1;visibility:visible;transition-delay:0s}
@@ -137,6 +139,7 @@ img{display:block;max-width:100%}
 .map-loader__frame:nth-child(2){animation-delay:.8s}.map-loader__frame:nth-child(3){animation-delay:1.6s}.map-loader__frame:nth-child(4){animation-delay:2.4s}
 .map-loader__frame img{width:100%;height:100%;object-fit:contain}
 @keyframes cat-walk-rest{0%,100%{translate:0 0}50%{translate:0 -3%}}
+@keyframes route-plaque-glow{0%,100%{filter:brightness(1);translate:0 0}50%{filter:brightness(1.08);translate:0 -2px}}
 @keyframes loader-frame-cycle{0%,24.99%{opacity:1}25%,100%{opacity:0}}
 @keyframes map-new-change{0%,100%{filter:drop-shadow(0 7px 3px rgba(66,41,26,.25))}50%{filter:drop-shadow(0 0 18px #ffd954) drop-shadow(0 7px 3px rgba(66,41,26,.25))}}
 .map-update-toast{position:fixed;z-index:65;left:50%;top:max(74px,calc(env(safe-area-inset-top) + 66px));transform:translateX(-50%) rotate(-1deg);width:max-content;max-width:calc(100vw - 30px);padding:9px 18px;border:3px solid var(--ink);border-radius:999px;background:#fff0c8;box-shadow:var(--shadow);font-size:13px;text-align:center}
@@ -166,7 +169,7 @@ img{display:block;max-width:100%}
   .world-brand h1{font-size:clamp(44px,6vw,67px)}
 }
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}.launch-district::before,.map-location[data-map-change="true"] .published-marker,.route-mascot__cat,.map-loader__frame{animation:none!important}
+  html{scroll-behavior:auto}.launch-district::before,.map-location[data-map-change="true"] .published-marker,.map-location[data-map-guidance="active"] .location-plaque,.route-mascot__cat,.map-loader__frame{animation:none!important}
   .published-location,.settings-bookmark,.route-mascot,.map-loader{transition:none!important}
   .map-loader__frame{opacity:0}.map-loader__frame:nth-child(2){opacity:1}
 }
@@ -233,10 +236,10 @@ img{display:block;max-width:100%}
       </picture>
       <ol class="district-locations" id="districtLocations" aria-label="风味四季路学习地点"></ol>
       <div class="route-mascot" id="routeMascot" data-route-avatar-target="lesson49" aria-hidden="true">
-        <picture class="route-mascot__marker">
-          <source type="image/avif" data-route-marker-source="avif" sizes="(max-width:520px) 12vw, 112px">
-          <source type="image/webp" data-route-marker-source="webp" sizes="(max-width:520px) 12vw, 112px">
-          <img data-route-marker-image width="1448" height="1086" alt="" decoding="async">
+        <picture class="route-mascot__flag">
+          <source type="image/avif" data-route-flag-source="avif" sizes="(max-width:520px) 16vw, 142px">
+          <source type="image/webp" data-route-flag-source="webp" sizes="(max-width:520px) 16vw, 142px">
+          <img data-route-flag-image width="1254" height="1254" alt="" decoding="async">
         </picture>
         <picture class="route-mascot__cat">
           <source type="image/avif" data-route-cat-source="avif" sizes="(max-width:520px) 13vw, 118px">
@@ -356,7 +359,7 @@ function loadDistrictPaper(){
 function loadRouteMascot(){
   if(routeMascotLoaded)return;
   const cat=routePage.mascotAsset;
-  const marker=routePage.markerAsset;
+  const flag=routePage.flagAsset;
   document.querySelectorAll('[data-route-cat-source]').forEach(source=>{
     const type=source.dataset.routeCatSource;
     source.srcset=cat.variants.map(variant=>`${routeAssetUrl(variant[type],cat)} ${variant.width}w`).join(', ');
@@ -364,12 +367,12 @@ function loadRouteMascot(){
   document.querySelectorAll('[data-route-cat-image]').forEach(image=>{
     image.src=routeAssetUrl(cat.png,cat);
   });
-  document.querySelectorAll('[data-route-marker-source]').forEach(source=>{
-    const type=source.dataset.routeMarkerSource;
-    source.srcset=marker.variants.map(variant=>`${routeAssetUrl(variant[type],marker)} ${variant.width}w`).join(', ');
+  document.querySelectorAll('[data-route-flag-source]').forEach(source=>{
+    const type=source.dataset.routeFlagSource;
+    source.srcset=flag.variants.map(variant=>`${routeAssetUrl(variant[type],flag)} ${variant.width}w`).join(', ');
   });
-  document.querySelectorAll('[data-route-marker-image]').forEach(image=>{
-    image.src=routeAssetUrl(marker.png,marker);
+  document.querySelectorAll('[data-route-flag-image]').forEach(image=>{
+    image.src=routeAssetUrl(flag.png,flag);
   });
   routePage.loaderFrames.forEach(frame=>{
     const picture=document.querySelector(`[data-loader-frame="${frame.frame}"]`);
@@ -403,7 +406,7 @@ async function revealDistrictWhenReady(){
   await Promise.all([
     waitForImage(document.querySelector('[data-atlas-paper-image]')),
     waitForImage(document.querySelector('#routeMascot [data-route-cat-image]')),
-    waitForImage(document.querySelector('[data-route-marker-image]')),
+    waitForImage(document.querySelector('[data-route-flag-image]')),
     waitForImage(document.querySelector('[data-route-loader-image]')),
     waitForImage(activeImage)
   ]);

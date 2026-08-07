@@ -598,6 +598,10 @@
     let warmupHandle = null;
     let warmupHandleType = null;
     let studentTurnTimer = null;
+    let immersiveControlsTimer = null;
+    let immersiveNativeActive = false;
+    let immersiveNativeEnteredAt = 0;
+    let immersiveReturnFocus = null;
     const picker = rootElement.querySelector('[data-location-picker]');
     const stageStrip = rootElement.querySelector('[data-stage-strip]');
     const reviewTabs = rootElement.querySelector('[data-review-tabs]');
@@ -609,6 +613,7 @@
     const preloadCount = rootElement.querySelector('[data-review-preload-count]');
     const preloadDetail = rootElement.querySelector('[data-review-preload-detail]');
     const preloadProgress = rootElement.querySelector('[data-review-preload-progress]');
+    const immersiveStatus = rootElement.querySelector('[data-immersive-status]');
 
     function renderPreloadStatus(status) {
       preloadStatus.dataset.state = status.state;
@@ -855,8 +860,8 @@
     function createStudentMascot(routePage) {
       const position = STUDENT_CAT_POSITIONS[routePage.id]?.[state.location];
       const mascotAsset = routePage.mascotAsset || atlas.GOLDEN_ROUTE_PAGE?.mascotAsset;
-      const markerAsset = routePage.markerAsset || atlas.GOLDEN_ROUTE_PAGE?.markerAsset;
-      if (!position || !mascotAsset || !markerAsset) return null;
+      const flagAsset = routePage.flagAsset || atlas.GOLDEN_ROUTE_PAGE?.flagAsset;
+      if (!position || !mascotAsset || !flagAsset) return null;
       const mascot = documentRef.createElement('div');
       mascot.className = 'student-mascot';
       mascot.dataset.studentMascot = '';
@@ -864,19 +869,20 @@
       mascot.dataset.flip = String(Boolean(position.flip));
       mascot.style.left = `${position.left}%`;
       mascot.style.top = `${position.top}%`;
-      const marker = pictureElement(documentRef, markerAsset, {
+      const flag = pictureElement(documentRef, flagAsset, {
         alt: '',
-        sizes: '96px',
-        className: 'student-mascot__marker'
+        sizes: '96px'
       }).picture;
-      marker.setAttribute('aria-hidden', 'true');
+      flag.className = 'student-mascot__flag';
+      flag.dataset.studentFlag = '';
+      flag.setAttribute('aria-hidden', 'true');
       const cat = pictureElement(documentRef, mascotAsset, {
         alt: '',
-        sizes: '112px',
-        className: 'student-mascot__cat'
+        sizes: '112px'
       }).picture;
+      cat.className = 'student-mascot__cat';
       cat.setAttribute('aria-hidden', 'true');
-      mascot.append(marker, cat);
+      mascot.append(flag, cat);
       return mascot;
     }
 
@@ -1133,7 +1139,12 @@
       const simulatedWidth = Number(preview.dataset.simulatedWidth);
       const simulatedHeight = Number(preview.dataset.simulatedHeight);
       if (!simulatedWidth || !simulatedHeight) return;
-      const scale = Math.min(1, frame.clientWidth / simulatedWidth);
+      const immersive = rootElement.dataset.immersive === 'true';
+      const widthScale = frame.clientWidth / simulatedWidth;
+      const heightScale = immersive && frame.clientHeight > 0
+        ? frame.clientHeight / simulatedHeight
+        : Number.POSITIVE_INFINITY;
+      const scale = Math.min(immersive ? 1.5 : 1, widthScale, heightScale);
       fit.style.width = `${simulatedWidth * scale}px`;
       fit.style.height = `${simulatedHeight * scale}px`;
       fit.dataset.scale = scale.toFixed(4);
@@ -1299,11 +1310,157 @@
       });
     }
 
+    function syncImmersiveControls() {
+      const immersive = rootElement.dataset.immersive === 'true';
+      for (const button of rootElement.querySelectorAll('[data-immersive-toggle]')) {
+        button.setAttribute('aria-pressed', String(immersive));
+      }
+      if (immersiveStatus) {
+        immersiveStatus.textContent = immersive
+          ? '已进入全屏审图。左右方向键切换阶段，Esc 退出。'
+          : '已退出全屏审图。';
+      }
+    }
+
+    function clearImmersiveControlsTimer() {
+      if (immersiveControlsTimer === null) return;
+      windowRef.clearTimeout(immersiveControlsTimer);
+      immersiveControlsTimer = null;
+    }
+
+    function revealImmersiveControls() {
+      if (rootElement.dataset.immersive !== 'true') return;
+      clearImmersiveControlsTimer();
+      rootElement.dataset.controlsVisible = 'true';
+      immersiveControlsTimer = windowRef.setTimeout(() => {
+        immersiveControlsTimer = null;
+        rootElement.dataset.controlsVisible = 'false';
+      }, 2200);
+    }
+
+    function applyImmersiveState(enabled, { restoreFocus = true } = {}) {
+      clearImmersiveControlsTimer();
+      rootElement.dataset.immersive = String(enabled);
+      if (documentRef.body) documentRef.body.dataset.reviewImmersive = String(enabled);
+      if (enabled) {
+        immersiveReturnFocus = documentRef.activeElement;
+        revealImmersiveControls();
+      } else {
+        rootElement.dataset.controlsVisible = 'false';
+        if (restoreFocus && immersiveReturnFocus?.isConnected &&
+          typeof immersiveReturnFocus.focus === 'function') {
+          try {
+            immersiveReturnFocus.focus({ preventScroll: true });
+          } catch (error) {
+            immersiveReturnFocus.focus();
+          }
+        }
+        immersiveReturnFocus = null;
+      }
+      syncImmersiveControls();
+      windowRef.requestAnimationFrame(fitStudentPreview);
+    }
+
+    function enterImmersive() {
+      if (rootElement.dataset.immersive === 'true') return;
+      applyImmersiveState(true);
+      const requestFullscreen = rootElement.requestFullscreen || rootElement.webkitRequestFullscreen;
+      if (typeof requestFullscreen !== 'function') return;
+      try {
+        Promise.resolve(requestFullscreen.call(rootElement))
+          .catch(() => {
+            if (immersiveStatus && rootElement.dataset.immersive === 'true') {
+              immersiveStatus.textContent = '浏览器未开放系统全屏，已使用铺满窗口审图。';
+            }
+          });
+      } catch (error) {
+        if (immersiveStatus) immersiveStatus.textContent = '已使用铺满窗口审图。';
+      }
+    }
+
+    function exitImmersive({ restoreFocus = true } = {}) {
+      if (rootElement.dataset.immersive !== 'true') return;
+      applyImmersiveState(false, { restoreFocus });
+      const nativeElement = documentRef.fullscreenElement || documentRef.webkitFullscreenElement;
+      if (nativeElement !== rootElement) return;
+      const exitFullscreen = documentRef.exitFullscreen || documentRef.webkitExitFullscreen;
+      if (typeof exitFullscreen === 'function') {
+        try {
+          Promise.resolve(exitFullscreen.call(documentRef)).catch(() => {});
+        } catch (error) {
+          // CSS immersive mode is already closed; native exit is best effort.
+        }
+      }
+    }
+
+    function toggleImmersive() {
+      if (rootElement.dataset.immersive === 'true') exitImmersive();
+      else enterImmersive();
+    }
+
+    function handleFullscreenChange() {
+      const nativeElement = documentRef.fullscreenElement || documentRef.webkitFullscreenElement;
+      if (nativeElement === rootElement) {
+        immersiveNativeActive = true;
+        immersiveNativeEnteredAt = windowRef.performance?.now?.() || Date.now();
+        return;
+      }
+      const wasNativeActive = immersiveNativeActive;
+      immersiveNativeActive = false;
+      if (wasNativeActive && rootElement.dataset.immersive === 'true') {
+        const now = windowRef.performance?.now?.() || Date.now();
+        if (now - immersiveNativeEnteredAt < 1000) {
+          if (immersiveStatus) {
+            immersiveStatus.textContent = '系统全屏被浏览器中止，已继续使用铺满窗口审图。';
+          }
+          revealImmersiveControls();
+          windowRef.requestAnimationFrame(fitStudentPreview);
+        } else {
+          applyImmersiveState(false);
+        }
+      }
+    }
+
+    function isEditableTarget(target) {
+      return Boolean(target?.closest?.('input,select,textarea,[contenteditable="true"]'));
+    }
+
+    function handleImmersiveKeydown(event) {
+      if (isEditableTarget(event.target) || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (!event.repeat && event.key.toLowerCase() === 'f') {
+        event.preventDefault();
+        toggleImmersive();
+        return;
+      }
+      if (rootElement.dataset.immersive !== 'true') return;
+      revealImmersiveControls();
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        exitImmersive();
+        return;
+      }
+      if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      const location = currentLocation();
+      const direction = event.key === 'ArrowLeft' ? -1 : 1;
+      const nextStage = Math.min(
+        location.stateAssets.length - 1,
+        Math.max(0, state.stage + direction)
+      );
+      if (nextStage === state.stage) return;
+      event.preventDefault();
+      transitionWithinLocation({ ...state, stage: nextStage }, { updateUrl: true });
+    }
+
     picker.addEventListener('change', () => {
       state = { ...state, location: picker.value };
       render({ updateUrl: true });
     });
     rootElement.addEventListener('click', event => {
+      const immersiveToggle = event.target.closest('[data-immersive-toggle]');
+      if (immersiveToggle) {
+        toggleImmersive();
+        return;
+      }
       const pageTurn = event.target.closest('[data-page-turn]');
       if (pageTurn) {
         turnStudentPage(pageTurn.dataset.pageTurn, pageTurn.dataset.targetLocation);
@@ -1388,23 +1545,38 @@
     windowRef.addEventListener('pointercancel', restoreCurrentArt);
     windowRef.addEventListener('blur', restoreCurrentArt);
     windowRef.addEventListener('resize', fitStudentPreview);
+    windowRef.addEventListener('keydown', handleImmersiveKeydown);
+    documentRef.addEventListener('fullscreenchange', handleFullscreenChange);
+    documentRef.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    rootElement.addEventListener('pointermove', revealImmersiveControls, { passive: true });
+    rootElement.addEventListener('pointerdown', revealImmersiveControls, { passive: true });
+    rootElement.addEventListener('focusin', revealImmersiveControls);
     function handlePopState() {
       state = normalizeReviewState(windowRef.location.search, locations, routePages);
       render();
     }
     windowRef.addEventListener('popstate', handlePopState);
+    applyImmersiveState(false, { restoreFocus: false });
     render({ updateUrl: true });
 
     return Object.freeze({
       getState: () => ({ ...state }),
       destroy() {
         cancelWarmupSchedule();
+        clearImmersiveControlsTimer();
         if (studentTurnTimer !== null) windowRef.clearTimeout(studentTurnTimer);
+        if (rootElement.dataset.immersive === 'true') exitImmersive({ restoreFocus: false });
         assetPool.destroy();
         windowRef.removeEventListener('pointerup', restoreCurrentArt);
         windowRef.removeEventListener('pointercancel', restoreCurrentArt);
         windowRef.removeEventListener('blur', restoreCurrentArt);
         windowRef.removeEventListener('resize', fitStudentPreview);
+        windowRef.removeEventListener('keydown', handleImmersiveKeydown);
+        documentRef.removeEventListener('fullscreenchange', handleFullscreenChange);
+        documentRef.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+        rootElement.removeEventListener('pointermove', revealImmersiveControls);
+        rootElement.removeEventListener('pointerdown', revealImmersiveControls);
+        rootElement.removeEventListener('focusin', revealImmersiveControls);
         windowRef.removeEventListener('popstate', handlePopState);
       }
     });

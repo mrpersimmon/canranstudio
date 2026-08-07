@@ -51,6 +51,7 @@ async function writeVariants(source, asset, { heightForWidth, fit = 'inside' }) 
 
 async function main() {
   const mascot = GOLDEN_ROUTE_PAGE.mascotAsset;
+  const flag = GOLDEN_ROUTE_PAGE.flagAsset;
   const marker = GOLDEN_ROUTE_PAGE.markerAsset;
   const loaderFrames = GOLDEN_ROUTE_PAGE.loaderFrames;
   const backgroundSources = await Promise.all(LANDMARK_REVIEW_ROUTE_PAGES.map(async routePage => ({
@@ -62,6 +63,11 @@ async function main() {
     })
   })));
   const mascotSource = await assertSource(mascot, {
+    width: 1254,
+    height: 1254,
+    hasAlpha: true
+  });
+  const flagSource = await assertSource(flag, {
     width: 1254,
     height: 1254,
     hasAlpha: true
@@ -85,6 +91,10 @@ async function main() {
     });
   }
   await writeVariants(mascotSource, mascot, {
+    fit: 'inside',
+    heightForWidth: width => width
+  });
+  await writeVariants(flagSource, flag, {
     fit: 'inside',
     heightForWidth: width => width
   });

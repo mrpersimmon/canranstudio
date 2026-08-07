@@ -150,6 +150,7 @@ test('the approved V4 route page ships a fixed-ratio background and transparent 
 
   for (const [asset, expected] of [
     [GOLDEN_ROUTE_PAGE.mascotAsset, { width: 1254, height: 1254 }],
+    [GOLDEN_ROUTE_PAGE.flagAsset, { width: 1254, height: 1254 }],
     [GOLDEN_ROUTE_PAGE.markerAsset, { width: 1448, height: 1086 }],
     ...GOLDEN_ROUTE_PAGE.loaderFrames.map(frame => [frame, { width: 1254, height: 1254 }])
   ]) {

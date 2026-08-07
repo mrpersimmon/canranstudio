@@ -19,6 +19,7 @@
           <select class="location-picker" data-location-picker aria-label="选择地图地点"></select>
         </label>
         <button class="round-step" type="button" data-location-step="next" aria-label="下一个地标">→</button>
+        <button class="immersive-trigger" type="button" data-immersive-toggle aria-pressed="false">全屏审图</button>
       </div>
       <div class="control-ledger">
         <div class="segmented" data-review-tabs aria-label="审查类型"></div>
@@ -56,6 +57,8 @@
     </main>
 
     <nav class="stage-strip" data-stage-strip aria-label="地标阶段"></nav>
+    <button class="immersive-exit" type="button" data-immersive-toggle aria-pressed="false">退出审图</button>
+    <p class="visually-hidden" data-immersive-status role="status" aria-live="polite"></p>
   </div>
   <noscript>此验收台需要启用 JavaScript。</noscript>
   <script src="/core/course-catalog.js"></script>

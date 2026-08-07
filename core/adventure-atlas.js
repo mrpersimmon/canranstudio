@@ -50,6 +50,15 @@
         webp: `assets/adventure-map/mascot/explorer-cat-walking-${ROUTE_PAGE_ART_VERSION}-${width}.webp`
       }))
     },
+    flagAsset: {
+      version: ROUTE_PAGE_ART_VERSION,
+      png: 'assets/adventure-map/mascot/explorer-flag-purple-gold.png',
+      variants: [64, 96, 128].map(width => ({
+        width,
+        avif: `assets/adventure-map/mascot/explorer-flag-purple-gold-${ROUTE_PAGE_ART_VERSION}-${width}.avif`,
+        webp: `assets/adventure-map/mascot/explorer-flag-purple-gold-${ROUTE_PAGE_ART_VERSION}-${width}.webp`
+      }))
+    },
     markerAsset: {
       version: ROUTE_PAGE_ART_VERSION,
       png: 'assets/adventure-map/mascot/current-route-marker.png',

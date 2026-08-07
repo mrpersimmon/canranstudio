@@ -181,15 +181,22 @@ test('every route-page landmark stays fully inside the Huawei district parchment
   expect(clipped).toEqual([]);
 });
 
-test('the explorer cat marks one current route position without covering landmark links', async ({ page }) => {
+test('the explorer cat and purple-gold flag mark one glowing route plaque without covering links', async ({ page }) => {
   await page.setViewportSize({ width: 466, height: 980 });
   await page.goto('/?district=first-book-49-60&focus=lesson51');
 
   const mascot = page.locator('#routeMascot');
   await expect(mascot).toHaveAttribute('data-route-avatar-target', 'lesson51');
   await expect(mascot.locator('[data-route-cat-image]')).toHaveCount(1);
+  await expect(mascot.locator('[data-route-flag-image]')).toHaveAttribute(
+    'src', /explorer-flag-purple-gold\.png/
+  );
+  await expect(mascot.locator('[data-route-marker-image]')).toHaveCount(0);
   await expect(page.locator('[data-map-guidance="active"]')).toHaveAttribute('data-location-id', 'lesson51');
   await expect(page.locator('[data-location-id="lesson51"] a')).toHaveAttribute('aria-current', 'step');
+  await expect(page.locator('[data-map-guidance="active"] .location-plaque')).toHaveCSS(
+    'animation-name', 'route-plaque-glow'
+  );
   expect(await mascot.evaluate(element => getComputedStyle(element).pointerEvents)).toBe('none');
 });
 

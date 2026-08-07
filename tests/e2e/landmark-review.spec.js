@@ -129,6 +129,109 @@ test('desktop student preview uses the fixed two-page spread and scenario contro
   await expect(page.locator('[data-student-location][data-stage="5"]')).toHaveCount(6);
 });
 
+test('the current lesson uses a glowing plaque and the cat carries a purple-gold explorer flag', async ({ page }) => {
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto(
+    `${REVIEW_PATH}?location=lesson51&stage=3&review=student&viewport=huawei&scenario=journey`
+  );
+
+  const current = page.locator('[data-student-location][data-current="true"]');
+  await expect(current).toHaveAttribute('data-location-id', 'lesson51');
+  await expect(page.locator('[data-student-flag]')).toHaveCount(1);
+  await expect(page.locator('[data-student-flag] img')).toHaveAttribute(
+    'src', /explorer-flag-purple-gold\.png/
+  );
+  await expect(page.locator('.student-mascot__marker')).toHaveCount(0);
+
+  const emphasis = await current.evaluate(element => ({
+    halo: getComputedStyle(element, '::before').content,
+    plaqueAnimation: getComputedStyle(element.querySelector('.student-location__plaque')).animationName,
+    plaqueShadow: getComputedStyle(element.querySelector('.student-location__plaque')).boxShadow
+  }));
+  expect(emphasis.halo).toBe('none');
+  expect(emphasis.plaqueAnimation).toBe('student-plaque-glow');
+  expect(emphasis.plaqueShadow).not.toBe('none');
+});
+
+test('full-screen review keeps working when the native Fullscreen API is unavailable', async ({ page }) => {
+  await page.addInitScript(() => {
+    Element.prototype.requestFullscreen = () => Promise.reject(new Error('fullscreen unavailable'));
+  });
+  await page.setViewportSize({ width: 466, height: 980 });
+  await page.goto(
+    `${REVIEW_PATH}?location=lesson51&stage=3&review=student&viewport=huawei&scenario=journey`
+  );
+
+  await page.locator('[data-immersive-toggle]').first().click();
+  const root = page.locator('[data-review-root]');
+  await expect(root).toHaveAttribute('data-immersive', 'true');
+  await expect(root).toHaveAttribute('data-controls-visible', 'true');
+  await expect(page.locator('.review-controls')).toBeHidden();
+  await expect(page.locator('.immersive-exit')).toBeVisible();
+  await expect(page.locator('[data-immersive-status]')).toContainText('铺满窗口');
+
+  await page.keyboard.press('ArrowRight');
+  await expect(page).toHaveURL(/stage=4/);
+  await expect(page.locator('[data-stage-button="4"]')).toHaveAttribute('aria-pressed', 'true');
+
+  await page.keyboard.press('Escape');
+  await expect(root).toHaveAttribute('data-immersive', 'false');
+  await expect(page.locator('.review-controls')).toBeVisible();
+  await expect(page).toHaveURL(/stage=4/);
+
+  await page.keyboard.press('f');
+  await expect(root).toHaveAttribute('data-immersive', 'true');
+  await page.keyboard.press('Escape');
+  await expect(root).toHaveAttribute('data-immersive', 'false');
+});
+
+test('immersive student previews maximize phone and desktop canvases without distortion or clipping', async ({ page }) => {
+  await page.addInitScript(() => {
+    Element.prototype.requestFullscreen = () => Promise.reject(new Error('fullscreen unavailable'));
+  });
+  const cases = [
+    { viewport: { width: 390, height: 844 }, mode: 'huawei', location: 'lesson51' },
+    { viewport: { width: 1440, height: 1000 }, mode: 'desktop', location: 'lesson54' }
+  ];
+
+  for (const item of cases) {
+    await page.setViewportSize(item.viewport);
+    await page.goto(
+      `${REVIEW_PATH}?location=${item.location}&stage=3&review=student&viewport=${item.mode}&scenario=journey`
+    );
+    const preview = page.locator('[data-student-preview]');
+    const before = await preview.boundingBox();
+    await page.locator('[data-immersive-toggle]').first().click();
+    await expect(page.locator('[data-review-root]')).toHaveAttribute('data-immersive', 'true');
+
+    const geometry = await preview.evaluate(element => {
+      const box = element.getBoundingClientRect();
+      return {
+        left: box.left,
+        top: box.top,
+        right: box.right,
+        bottom: box.bottom,
+        width: box.width,
+        height: box.height,
+        simulatedWidth: Number(element.dataset.simulatedWidth),
+        simulatedHeight: Number(element.dataset.simulatedHeight),
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight
+      };
+    });
+    expect(geometry.left).toBeGreaterThanOrEqual(-1);
+    expect(geometry.top).toBeGreaterThanOrEqual(-1);
+    expect(geometry.right).toBeLessThanOrEqual(geometry.viewportWidth + 1);
+    expect(geometry.bottom).toBeLessThanOrEqual(geometry.viewportHeight + 1);
+    expect(geometry.width / geometry.height)
+      .toBeCloseTo(geometry.simulatedWidth / geometry.simulatedHeight, 2);
+    expect(geometry.width * geometry.height).toBeGreaterThanOrEqual(before.width * before.height);
+
+    await page.keyboard.press('Escape');
+    await expect(page.locator('[data-review-root]')).toHaveAttribute('data-immersive', 'false');
+  }
+});
+
 test('student preview page turns and landmark probes never navigate or write learner storage', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('review-sentinel', 'untouched'));
   await page.setViewportSize({ width: 466, height: 980 });
