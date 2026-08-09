@@ -21,6 +21,10 @@ const ROUTES = Object.freeze([
     path: '/poc/landmark-review/',
     file: 'poc/landmark-review/index.html'
   }),
+  Object.freeze({
+    path: '/poc/keepsake-review/',
+    file: 'poc/keepsake-review/index.html'
+  }),
   Object.freeze({ path: '/release-manifest.json', file: 'release-manifest.json' })
 ]);
 
@@ -30,9 +34,13 @@ const ENTRY_ROUTE_BY_FILE = Object.freeze(Object.fromEntries([
   ['index.html', '/'],
   ...PUBLISHED_COURSES.map(course => [course.entry, course.route]),
   ...PRESENTATION_COURSES.map(course => [course.presentation.entry, course.presentation.route]),
-  ['poc/landmark-review/index.html', '/poc/landmark-review/']
+  ['poc/landmark-review/index.html', '/poc/landmark-review/'],
+  ['poc/keepsake-review/index.html', '/poc/keepsake-review/']
 ]));
-const NOINDEX_FILES = Object.freeze(new Set(['poc/landmark-review/index.html']));
+const NOINDEX_FILES = Object.freeze(new Set([
+  'poc/landmark-review/index.html',
+  'poc/keepsake-review/index.html'
+]));
 const LANDMARK_REVIEW_PREFIX = 'poc/landmark-review/';
 
 const DEFAULT_LIVE_PROFILE = Object.freeze({

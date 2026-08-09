@@ -24,6 +24,7 @@ const EXPECTED_ROUTES = [
     file: course.presentation.entry
   })),
   { path: '/poc/landmark-review/', file: 'poc/landmark-review/index.html' },
+  { path: '/poc/keepsake-review/', file: 'poc/keepsake-review/index.html' },
   { path: '/release-manifest.json', file: 'release-manifest.json' }
 ];
 
@@ -60,6 +61,10 @@ const FIXTURE_FILES = {
   'poc/landmark-review/index.html': Buffer.from('landmark review'),
   'poc/landmark-review/landmark-review.css': Buffer.from('review styles'),
   'poc/landmark-review/landmark-review.js': Buffer.from('review runtime'),
+  'poc/keepsake-review/index.html': Buffer.from('keepsake review'),
+  'poc/keepsake-review/keepsake-review.css': Buffer.from('keepsake styles'),
+  'poc/keepsake-review/keepsake-review.js': Buffer.from('keepsake runtime'),
+  'poc/keepsake-review/assets/earned-badge-frame-v2-768.webp': Buffer.from('earned ribbon art'),
   'home/index.html': Buffer.from('compatibility redirect')
 };
 
@@ -144,6 +149,7 @@ function manifestFetch(root, options = {}) {
     ...PUBLISHED_COURSES.map(course => [course.route, course.entry]),
     ...PRESENTATION_COURSES.map(course => [course.presentation.route, course.presentation.entry]),
     ['/poc/landmark-review/', 'poc/landmark-review/index.html'],
+    ['/poc/keepsake-review/', 'poc/keepsake-review/index.html'],
     ['/release-manifest.json', 'release-manifest.json']
   ]);
 
@@ -199,7 +205,7 @@ function manifestFetch(root, options = {}) {
         ...(requestedPath.startsWith('/poc/landmark-review/')
           ? REVIEW_SECURITY_HEADERS
           : HTTP_HEADER_CONTRACT),
-        ...(requestedPath === '/poc/landmark-review/'
+        ...(['/poc/landmark-review/', '/poc/keepsake-review/'].includes(requestedPath)
           ? { 'x-robots-tag': 'noindex, nofollow, noarchive' }
           : {}),
         ...headerOverrides[requestedPath]
@@ -289,7 +295,14 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
       { file: 'lesson54/audio/australia.mp3', path: '/lesson54/audio/australia.mp3' },
       { file: 'poc/landmark-review/index.html', path: '/poc/landmark-review/' },
       { file: 'poc/landmark-review/landmark-review.css', path: '/poc/landmark-review/landmark-review.css' },
-      { file: 'poc/landmark-review/landmark-review.js', path: '/poc/landmark-review/landmark-review.js' }
+      { file: 'poc/landmark-review/landmark-review.js', path: '/poc/landmark-review/landmark-review.js' },
+      { file: 'poc/keepsake-review/index.html', path: '/poc/keepsake-review/' },
+      { file: 'poc/keepsake-review/keepsake-review.css', path: '/poc/keepsake-review/keepsake-review.css' },
+      { file: 'poc/keepsake-review/keepsake-review.js', path: '/poc/keepsake-review/keepsake-review.js' },
+      {
+        file: 'poc/keepsake-review/assets/earned-badge-frame-v2-768.webp',
+        path: '/poc/keepsake-review/assets/earned-badge-frame-v2-768.webp'
+      }
     ]
   );
   assert.equal(
@@ -322,6 +335,24 @@ test('verifyBase requires the noindex response header on the landmark review rou
       })
     }),
     /poc\/landmark-review\/index\.html: unexpected x-robots-tag/
+  );
+});
+
+test('verifyBase requires the noindex response header on the keepsake review route', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  await assert.rejects(
+    verifyBase({
+      baseUrl: 'http://59.110.217.36',
+      root,
+      fetchImpl: manifestFetch(root, {
+        headerOverrides: {
+          '/poc/keepsake-review/': { 'x-robots-tag': 'index, follow' }
+        }
+      })
+    }),
+    /poc\/keepsake-review\/index\.html: unexpected x-robots-tag/
   );
 });
 

@@ -110,7 +110,11 @@ async function writeSyntheticPublicRoot(root) {
     'core/growth-reveal.css',
     'poc/landmark-review/index.html',
     'poc/landmark-review/landmark-review.css',
-    'poc/landmark-review/landmark-review.js'
+    'poc/landmark-review/landmark-review.js',
+    'poc/keepsake-review/index.html',
+    'poc/keepsake-review/keepsake-review.css',
+    'poc/keepsake-review/keepsake-review.js',
+    'poc/keepsake-review/assets/earned-badge-frame-v2-768.webp'
   ]) {
     const file = path.join(root, relative);
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -235,6 +239,10 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     'poc/landmark-review/index.html',
     'poc/landmark-review/landmark-review.css',
     'poc/landmark-review/landmark-review.js',
+    'poc/keepsake-review/index.html',
+    'poc/keepsake-review/keepsake-review.css',
+    'poc/keepsake-review/keepsake-review.js',
+    'poc/keepsake-review/assets/earned-badge-frame-v2-768.webp',
     'assets/adventure-map/lesson49/growth-01-awning.png',
     'assets/adventure-map/lesson50/growth-05-celebration.png',
     'assets/adventure-map/lesson51/growth-05-celebration.png',
