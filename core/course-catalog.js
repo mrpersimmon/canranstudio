@@ -115,6 +115,12 @@
     return Number.isInteger(lesson) && lesson >= 49 && lesson <= 60;
   }
 
+  function teachingUnitIdForLesson(lesson) {
+    if (!isV1MapLesson(lesson)) return null;
+    const unitNumber = Math.floor((lesson - 49) / 2) + 1;
+    return `FLC-U${String(unitNumber).padStart(2, '0')}`;
+  }
+
   function createLessonMap(lesson, {
     souvenir = null,
     declaredStatus = 'drawing',
@@ -246,6 +252,7 @@
       id,
       kind: 'lesson',
       lesson,
+      teachingUnitId: teachingUnitIdForLesson(lesson),
       courseStatus: 'published',
       directoryVisible: true,
       route: `/${id}/`,
@@ -268,6 +275,7 @@
       id: `lesson${lesson}`,
       kind: 'lesson',
       lesson,
+      teachingUnitId: teachingUnitIdForLesson(lesson),
       courseStatus: 'planned',
       directoryVisible,
       route: null,
@@ -935,6 +943,7 @@
     PRESENTATION_COURSES,
     createLessonMap,
     createSpecialMap,
+    teachingUnitIdForLesson,
     mapStateAssetUrl,
     requirePublishedCourse,
     assessLearningLocation,

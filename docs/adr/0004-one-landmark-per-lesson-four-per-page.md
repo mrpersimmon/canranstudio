@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0023
 ---
 
 # 一课一地标，每张册页承载四课
