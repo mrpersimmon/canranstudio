@@ -715,10 +715,17 @@
 
     function warmAllStages(location, stage, image) {
       cancelWarmupSchedule();
+      const expectedGeneration = renderGeneration;
+      const expectedLocationId = location.id;
+      const isCurrentRender = () => (
+        expectedGeneration === renderGeneration &&
+        state.location === expectedLocationId
+      );
       const schedule = () => {
         const run = () => {
           warmupHandle = null;
           warmupHandleType = null;
+          if (!isCurrentRender()) return;
           assetPool.start(location, { stage, viewport: state.viewport });
         };
         if (typeof windowRef.requestIdleCallback === 'function') {
@@ -731,6 +738,7 @@
       };
       const afterDecode = async () => {
         if (typeof image.decode === 'function') await image.decode().catch(() => {});
+        if (!isCurrentRender()) return;
         schedule();
       };
       if (image.complete) afterDecode();
@@ -1285,8 +1293,13 @@
         studentTurnTimer = null;
       }
       renderGeneration += 1;
-      const location = currentLocation();
       state = normalizeReviewState(serializeReviewState(state), locations, routePages);
+      const location = currentLocation();
+      const activeLocationId = assetPool.getSnapshot().locationId;
+      if (activeLocationId && activeLocationId !== location.id) {
+        cancelWarmupSchedule();
+        assetPool.start(location, { stage: state.stage, viewport: state.viewport });
+      }
       delete frame.dataset.pendingStage;
       delete frame.dataset.pendingReview;
       delete frame.dataset.pendingViewport;

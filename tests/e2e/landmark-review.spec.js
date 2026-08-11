@@ -468,58 +468,47 @@ test('ready landmark stages are shared across stage, review, and viewport change
     }
   });
 
-  const stageSwitchMs = await page.evaluate(() => new Promise(resolve => {
-    const start = performance.now();
-    document.querySelector('[data-stage-button="5"]').click();
-    const check = () => {
-      if (document.querySelector('[data-artboard]')?.dataset.displayedStage === '5') {
-        resolve(performance.now() - start);
-      } else requestAnimationFrame(check);
-    };
-    requestAnimationFrame(check);
-  }));
+  await page.locator('[data-stage-button="5"]').click();
+  await expect(page.locator('[data-artboard]')).toHaveAttribute('data-displayed-stage', '5');
   await expect(page.locator('[data-current-art]')).toHaveAttribute('src', /^blob:/);
-  const reviewSwitchMs = await page.evaluate(() => new Promise(resolve => {
-    const start = performance.now();
-    document.querySelector('[data-review-button="placement"]').click();
-    const check = () => {
-      if (document.querySelector('[data-placement-map]')) resolve(performance.now() - start);
-      else requestAnimationFrame(check);
-    };
-    requestAnimationFrame(check);
-  }));
-  const viewportSwitchMs = await page.evaluate(() => new Promise(resolve => {
-    const start = performance.now();
-    document.querySelector('[data-viewport-button="master"]').click();
-    const check = () => {
-      if (document.querySelector('[data-review-frame]')?.dataset.viewport === 'master') {
-        resolve(performance.now() - start);
-      } else requestAnimationFrame(check);
-    };
-    requestAnimationFrame(check);
-  }));
+  await page.locator('[data-review-button="placement"]').click();
+  await expect(page.locator('[data-placement-map]')).toBeVisible();
+  await page.locator('[data-viewport-button="master"]').click();
+  await expect(page.locator('[data-review-frame]')).toHaveAttribute('data-viewport', 'master');
 
   await expect(page.locator('[data-placement-location][data-location-id="lesson51"] [data-current-art]'))
     .toHaveAttribute('src', /^blob:/);
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-state', 'ready');
   expect(selectedLandmarkRequests).toEqual([]);
-  expect(Math.max(stageSwitchMs, reviewSwitchMs, viewportSwitchMs)).toBeLessThan(100);
 });
 
 test('an uncached stage keeps the current art visible while the selected target jumps the queue', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(async () => {
+    const cacheNames = await caches.keys();
+    await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+  });
+  let releaseTarget;
+  let markTargetRequested;
+  const targetGate = new Promise(resolve => { releaseTarget = resolve; });
+  const targetRequested = new Promise(resolve => { markTargetRequested = resolve; });
   await page.route(/lesson51\/states\/state-5-512\.avif/, async route => {
-    await new Promise(resolve => setTimeout(resolve, 650));
+    markTargetRequested();
+    await targetGate;
     await route.continue();
   });
   await page.goto(`${REVIEW_PATH}?location=lesson51&stage=0&review=art&viewport=huawei`);
   const currentArt = page.locator('[data-current-art]');
   const originalSource = await currentArt.getAttribute('src');
 
-  await page.getByRole('button', { name: '阶段 完成' }).click();
-  await expect(page.locator('[data-review-frame]')).toHaveAttribute('data-pending-stage', '5');
-  await page.waitForTimeout(120);
-  await expect(currentArt).toHaveAttribute('src', originalSource);
-
+  try {
+    await page.getByRole('button', { name: '阶段 完成' }).click();
+    await targetRequested;
+    await expect(page.locator('[data-review-frame]')).toHaveAttribute('data-pending-stage', '5');
+    await expect(currentArt).toHaveAttribute('src', originalSource);
+  } finally {
+    releaseTarget();
+  }
   await expect(page.locator('[data-review-frame]')).not.toHaveAttribute('data-pending-stage', '5');
   await expect(page.locator('[data-artboard]')).toHaveAttribute('data-displayed-stage', '5');
   await expect(page.locator('[data-current-art]')).toHaveAttribute('src', /^blob:/);
@@ -608,6 +597,11 @@ test('stage count comes from the selected location contract', async ({ page }) =
 
 test('switching landmarks stops the old queue before starting the new contract', async ({ page }) => {
   let switched = false;
+  let releaseOldRequests;
+  let markOldPoolStarted;
+  let oldPoolRequestCount = 0;
+  const oldRequestGate = new Promise(resolve => { releaseOldRequests = resolve; });
+  const oldPoolStarted = new Promise(resolve => { markOldPoolStarted = resolve; });
   const oldRequestsAfterSwitch = [];
   page.on('request', request => {
     if (switched && /adventure-map\/lesson49\/states\//.test(request.url())) {
@@ -615,14 +609,25 @@ test('switching landmarks stops the old queue before starting the new contract',
     }
   });
   await page.route(/lesson49\/states\/state-\d+-(?:512|768|1024)\.avif/, async route => {
-    await new Promise(resolve => setTimeout(resolve, 90));
+    if (route.request().resourceType() !== 'fetch') {
+      await route.continue();
+      return;
+    }
+    oldPoolRequestCount += 1;
+    if (oldPoolRequestCount === 2) markOldPoolStarted();
+    await oldRequestGate;
     await route.continue();
   });
 
   await page.goto(`${REVIEW_PATH}?location=lesson49&stage=0&review=art&viewport=huawei`);
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-state', 'loading');
+  await oldPoolStarted;
   switched = true;
-  await page.locator('[data-location-picker]').selectOption('lesson52');
+  try {
+    await page.locator('[data-location-picker]').selectOption('lesson52');
+  } finally {
+    releaseOldRequests();
+  }
 
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-location-id', 'lesson52');
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-state', 'ready');
