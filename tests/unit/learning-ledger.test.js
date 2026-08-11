@@ -301,6 +301,51 @@ test('checkpoint-completed accepts an explicit validated buildStage for runtime 
   assert.equal(result.snapshot.units['FLC-U01'].checkpoint.checkpointId, 'bridge-understand:complete');
 });
 
+test('microtask checkpoints advance recovery without implicitly growing the current beat', () => {
+  const ledger = open({ store: recordingStore(), key: 'learner', catalog, clock: fixedClock() });
+
+  ledger.apply({
+    eventId: 'lesson49-m01',
+    type: 'checkpoint-completed',
+    unitId: 'FLC-U01',
+    beatId: 'discover',
+    microtaskId: 'L49-M01',
+    checkpointId: 'L49-M01:complete',
+    buildStage: 1,
+    completionStatus: 'completed-independent'
+  });
+  const middle = ledger.apply({
+    eventId: 'lesson49-m05',
+    type: 'checkpoint-completed',
+    unitId: 'FLC-U01',
+    beatId: 'understand',
+    microtaskId: 'L49-M05',
+    checkpointId: 'L49-M05:complete',
+    completionStatus: 'completed-supported'
+  });
+
+  assert.equal(middle.snapshot.units['FLC-U01'].buildStage, 1);
+  assert.deepEqual(middle.snapshot.units['FLC-U01'].checkpoint, {
+    checkpointId: 'L49-M05:complete',
+    beatId: 'understand',
+    microtaskId: 'L49-M05',
+    completionStatus: 'completed-supported',
+    learningDay: '2026-08-10'
+  });
+
+  const stale = ledger.apply({
+    eventId: 'lesson49-m04-late',
+    type: 'checkpoint-completed',
+    unitId: 'FLC-U01',
+    beatId: 'understand',
+    microtaskId: 'L49-M04',
+    checkpointId: 'L49-M04:complete',
+    completionStatus: 'completed-independent'
+  });
+  assert.equal(stale.snapshot.units['FLC-U01'].buildStage, 1);
+  assert.equal(stale.snapshot.units['FLC-U01'].checkpoint.microtaskId, 'L49-M05');
+});
+
 test('the real Lesson 50 bridge writes state-2 through practice-only ledger events', () => {
   const store = createMemoryAdapter();
   const ledger = open({ store, key: 'learner', catalog, clock: fixedClock() });

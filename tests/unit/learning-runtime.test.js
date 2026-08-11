@@ -57,6 +57,454 @@ test('Lesson 49 with no progress enters the first beat', () => {
   }]);
 });
 
+test('Lesson 49 exposes the first authored microtask and stable response phase', () => {
+  const runtime = create({ unit, ledger: fakeLedger(), seed: 7 });
+
+  const result = runtime.enter({ entryLesson: 'lesson49' });
+
+  assert.equal(result.snapshot.microtaskId, 'L49-M01');
+  assert.equal(result.snapshot.phase, 'response');
+  assert.equal(result.snapshot.baseContextId, 'breakfast-stall');
+  assert.equal(result.snapshot.activeContextId, 'breakfast-stall');
+  assert.equal(result.snapshot.contextId, 'breakfast-stall');
+});
+
+test('Lesson 49 resumes at the microtask after its last durable checkpoint', () => {
+  const checkpoint = {
+    checkpointId: 'L49-M05:complete',
+    beatId: 'understand',
+    microtaskId: 'L49-M05',
+    completionStatus: 'completed-supported',
+    learningDay: '2026-08-10'
+  };
+  const runtime = create({
+    unit,
+    ledger: fakeLedger({ checkpoint, buildStage: 1 }),
+    seed: 7
+  });
+
+  const result = runtime.enter({ entryLesson: 'lesson49' });
+
+  assert.equal(result.snapshot.status, 'active');
+  assert.equal(result.snapshot.beatId, 'understand');
+  assert.equal(result.snapshot.microtaskId, 'L49-M06');
+  assert.equal(result.snapshot.phase, 'stimulus');
+  assert.equal(result.snapshot.buildStage, 1);
+});
+
+test('a declarative composite response completes only the current Lesson 49 microtask', () => {
+  const ledger = fakeLedger();
+  const runtime = create({ unit, ledger, seed: 7 });
+  runtime.enter({ entryLesson: 'lesson49' });
+
+  const result = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      missingInformation: ['quantity', 'wanted', 'unwanted'],
+      firstClue: 'preference'
+    },
+    correct: false,
+    targetId: 'FLC-U01-T99'
+  });
+
+  assert.equal(result.snapshot.status, 'active');
+  assert.equal(result.snapshot.microtaskId, 'L49-M02');
+  assert.equal(result.snapshot.beatId, 'understand');
+  assert.equal(result.snapshot.phase, 'stimulus');
+  assert.equal(result.snapshot.buildStage, 1);
+  assert.deepEqual(ledger.events.map(event => ({
+    type: event.type,
+    microtaskId: event.microtaskId,
+    checkpointId: event.checkpointId,
+    buildStage: event.buildStage,
+    completionStatus: event.completionStatus,
+    targetId: event.targetId
+  })), [{
+    type: 'checkpoint-completed',
+    microtaskId: 'L49-M01',
+    checkpointId: 'L49-M01:complete',
+    buildStage: 1,
+    completionStatus: 'completed-independent',
+    targetId: undefined
+  }]);
+  assert.ok(result.effects.some(effect => (
+    effect.type === 'landmark/build-stage' && effect.buildStage === 1
+  )));
+  assert.ok(!result.effects.some(effect => effect.type === 'navigation/handoff'));
+});
+
+test('an authored audio sequence opens its response only after the final real ended action', () => {
+  const checkpoint = {
+    checkpointId: 'L49-M01:complete',
+    beatId: 'discover',
+    microtaskId: 'L49-M01',
+    completionStatus: 'completed-independent',
+    learningDay: '2026-08-10'
+  };
+  const ledger = fakeLedger({ checkpoint, buildStage: 1 });
+  const runtime = create({ unit, ledger, seed: 11 });
+  runtime.enter({ entryLesson: 'lesson49' });
+
+  const premature = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      worker: 'butcher', category: 'meat', beefTray: 'beef', lambTray: 'lamb',
+      steakTray: 'steak', minceTray: 'mince', chickenTray: 'chicken'
+    }
+  });
+  assert.equal(premature.snapshot.phase, 'stimulus');
+  assert.deepEqual(ledger.events, []);
+
+  let result = runtime.dispatch({ type: 'audio/play' });
+  const requestId = result.snapshot.audio.requestId;
+  assert.equal(result.snapshot.audio.activeAudioSequenceId, 'L49-A-WAKE-SHELF');
+  assert.equal(result.effects.find(effect => effect.type === 'audio/play').line.sourceRef, 'L49-W01');
+
+  for (let segmentIndex = 0; segmentIndex < 7; segmentIndex += 1) {
+    result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex });
+    if (segmentIndex < 6) {
+      assert.equal(result.snapshot.phase, 'stimulus');
+      assert.equal(result.effects.find(effect => effect.type === 'audio/play').segmentIndex, segmentIndex + 1);
+    }
+  }
+
+  assert.equal(result.snapshot.phase, 'response');
+  assert.equal(result.snapshot.microtaskId, 'L49-M02');
+  assert.equal(result.snapshot.audio.status, 'completed');
+  assert.deepEqual(ledger.events, []);
+});
+
+test('restarting an authored audio sequence cancels the old request and ignores its stale callbacks', () => {
+  const checkpoint = {
+    checkpointId: 'L49-M01:complete',
+    beatId: 'discover',
+    microtaskId: 'L49-M01',
+    completionStatus: 'completed-independent',
+    learningDay: '2026-08-10'
+  };
+  const runtime = create({
+    unit,
+    ledger: fakeLedger({ checkpoint, buildStage: 1 }),
+    seed: 12
+  });
+  runtime.enter({ entryLesson: 'lesson49' });
+
+  const first = runtime.dispatch({ type: 'audio/play' });
+  const firstRequestId = first.snapshot.audio.requestId;
+  const restarted = runtime.dispatch({ type: 'audio/play' });
+  const activeRequestId = restarted.snapshot.audio.requestId;
+
+  assert.notEqual(activeRequestId, firstRequestId);
+  assert.equal(restarted.effects[0].type, 'audio/cancel');
+  assert.equal(restarted.effects[0].requestId, firstRequestId);
+  const staleEnded = runtime.dispatch({
+    type: 'audio/ended',
+    requestId: firstRequestId,
+    segmentIndex: 0
+  });
+  const staleFailed = runtime.dispatch({
+    type: 'audio/failed',
+    requestId: firstRequestId,
+    reason: 'late-error'
+  });
+  const wrongSegment = runtime.dispatch({
+    type: 'audio/ended',
+    requestId: activeRequestId,
+    segmentIndex: 1
+  });
+
+  assert.deepEqual(staleEnded.effects, []);
+  assert.deepEqual(staleFailed.effects, []);
+  assert.deepEqual(wrongSegment.effects, []);
+  assert.equal(runtime.snapshot().phase, 'stimulus');
+  assert.equal(runtime.snapshot().audio.requestId, activeRequestId);
+  assert.equal(runtime.snapshot().audio.segmentIndex, 0);
+});
+
+test('the first declarative response error adds non-revealing field support without persistence', () => {
+  const ledger = fakeLedger();
+  const runtime = create({ unit, ledger, seed: 13 });
+  runtime.enter({ entryLesson: 'lesson49' });
+
+  const result = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      missingInformation: ['wanted', 'quantity'],
+      firstClue: 'preference'
+    }
+  });
+
+  assert.equal(result.snapshot.microtaskId, 'L49-M01');
+  assert.equal(result.snapshot.supportLevel, 1);
+  assert.equal(result.snapshot.activeContextId, 'breakfast-stall');
+  assert.deepEqual(result.effects, [{
+    type: 'feedback/support',
+    microtaskId: 'L49-M01',
+    level: 1,
+    supportKind: 'reobserve',
+    mismatchPath: ['missingInformation'],
+    revealsAnswer: false
+  }]);
+  assert.doesNotMatch(JSON.stringify(result.effects), /unwanted/);
+  assert.deepEqual(ledger.events, []);
+});
+
+test('the third declarative error moves only the active task into its authored near transfer', () => {
+  const runtime = create({ unit, ledger: fakeLedger(), seed: 17 });
+  runtime.enter({ entryLesson: 'lesson49' });
+  const wrong = {
+    type: 'response/submit',
+    response: {
+      missingInformation: ['wanted'],
+      firstClue: 'preference'
+    }
+  };
+
+  runtime.dispatch(wrong);
+  runtime.dispatch(wrong);
+  const result = runtime.dispatch(wrong);
+
+  assert.equal(result.snapshot.microtaskId, 'L49-M01');
+  assert.equal(result.snapshot.supportLevel, 3);
+  assert.equal(result.snapshot.baseContextId, 'breakfast-stall');
+  assert.equal(result.snapshot.activeContextId, 'picnic-supply');
+  assert.equal(result.snapshot.contextId, 'picnic-supply');
+  assert.deepEqual(result.effects, [
+    {
+      type: 'feedback/support',
+      microtaskId: 'L49-M01',
+      level: 3,
+      supportKind: 'model',
+      mismatchPath: ['missingInformation'],
+      revealsAnswer: false
+    },
+    {
+      type: 'scene/near-transfer',
+      microtaskId: 'L49-M01',
+      fromContextId: 'breakfast-stall',
+      contextId: 'picnic-supply'
+    }
+  ]);
+  assert.doesNotMatch(JSON.stringify(result.effects), /unwanted/);
+});
+
+test('a bounded failed near transfer requires a child-completed assisted correction', () => {
+  const checkpoint = {
+    checkpointId: 'L49-M05:complete',
+    beatId: 'understand',
+    microtaskId: 'L49-M05',
+    completionStatus: 'completed-supported',
+    learningDay: '2026-08-10'
+  };
+  const ledger = fakeLedger({ checkpoint, buildStage: 1 });
+  const runtime = create({ unit, ledger, seed: 19 });
+  runtime.enter({ entryLesson: 'lesson49' });
+  let result = runtime.dispatch({ type: 'audio/play' });
+  const requestId = result.snapshot.audio.requestId;
+  result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex: 0 });
+  result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex: 1 });
+  assert.equal(result.snapshot.phase, 'response');
+
+  const wrong = {
+    type: 'response/submit',
+    response: {
+      suggestedItem: 'beef',
+      referencedPiece: 'plain-piece',
+      quantityItem: 'two-pounds-mince'
+    }
+  };
+  runtime.dispatch(wrong);
+  runtime.dispatch(wrong);
+  runtime.dispatch(wrong);
+  const assisted = runtime.dispatch(wrong);
+
+  assert.equal(assisted.snapshot.microtaskId, 'L49-M06');
+  assert.equal(assisted.snapshot.activeContextId, 'picnic-supply');
+  assert.equal(assisted.snapshot.assistanceMode, true);
+  assert.equal(assisted.snapshot.phase, 'response');
+  assert.deepEqual(ledger.events.map(event => ({
+    type: event.type,
+    outcome: event.outcome,
+    targetId: event.targetId,
+    contextId: event.contextId
+  })), [{
+    type: 'formative-attempt',
+    outcome: 'failed',
+    targetId: 'FLC-U01-T01',
+    contextId: 'picnic-supply'
+  }]);
+  assert.ok(assisted.effects.some(effect => effect.type === 'feedback/assisted'));
+  assert.ok(!assisted.effects.some(effect => effect.type === 'landmark/build-stage'));
+
+  const completed = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      suggestedItem: 'sandwich',
+      referencedPiece: 'round-sandwich',
+      quantityItem: 'two-bottles-water'
+    }
+  });
+
+  assert.equal(completed.snapshot.microtaskId, 'L49-M07');
+  assert.equal(completed.snapshot.activeContextId, 'breakfast-stall');
+  assert.equal(completed.snapshot.assistanceMode, false);
+  assert.equal(completed.snapshot.buildStage, 1);
+  assert.deepEqual(ledger.events.map(event => ({
+    type: event.type,
+    microtaskId: event.microtaskId,
+    completionStatus: event.completionStatus,
+    outcome: event.outcome
+  })), [
+    {
+      type: 'formative-attempt',
+      microtaskId: undefined,
+      completionStatus: undefined,
+      outcome: 'failed'
+    },
+    {
+      type: 'checkpoint-completed',
+      microtaskId: 'L49-M06',
+      completionStatus: 'completed-assisted',
+      outcome: undefined
+    }
+  ]);
+});
+
+test('Lesson 49 completes nine durable microtasks but grows only after each whole beat', () => {
+  const ledger = fakeLedger();
+  const runtime = create({ unit, ledger, seed: 23 });
+  runtime.enter({ entryLesson: 'lesson49' });
+  const responses = {
+    'L49-M01': {
+      missingInformation: ['wanted', 'unwanted', 'quantity'],
+      firstClue: 'preference'
+    },
+    'L49-M02': {
+      worker: 'butcher', category: 'meat', beefTray: 'beef', lambTray: 'lamb',
+      steakTray: 'steak', minceTray: 'mince', chickenTray: 'chicken'
+    },
+    'L49-M03': 'steak',
+    'L49-M04': {
+      acceptsMeat: 'yes-please',
+      selectedItem: 'beef',
+      pitchPath: ['beef-rise', 'lamb-fall']
+    },
+    'L49-M05': {
+      'mrs-bird': 'likes-lamb',
+      'mr-bird': 'does-not-like-lamb'
+    },
+    'L49-M06': {
+      suggestedItem: 'steak',
+      referencedPiece: 'striped-piece',
+      quantityItem: 'one-pound-mince'
+    },
+    'L49-M07': {
+      orderAction: 'remove-chicken',
+      birdPreference: { likes: 'steak', dislikes: 'chicken' },
+      butcherPreference: 'does-not-like-chicken-either',
+      truthPhrase: 'speaking-honestly',
+      negativeAlso: 'either'
+    },
+    'L49-M08': {
+      finalOrder: ['beef', 'steak', 'mince'],
+      evidence: {
+        replaceLamb: 'beef-please',
+        removeChicken: 'no-thank-you',
+        addMince: 'pound-of-mince'
+      },
+      transaction: [
+        'ask-meat', 'choose-beef-or-lamb', 'compare-lamb-preference',
+        'choose-steak', 'add-mince', 'refuse-chicken'
+      ]
+    },
+    'L49-M09': {
+      textbookAnswer: 'steak',
+      preferenceSentence: ['he', 'likes', 'steak', 'but', 'he', 'does-not', 'like', 'chicken'],
+      purchasedItems: ['beef', 'steak', 'mince']
+    }
+  };
+  const growthStages = [];
+
+  for (let index = 1; index <= 9; index += 1) {
+    const microtaskId = `L49-M${String(index).padStart(2, '0')}`;
+    assert.equal(runtime.snapshot().microtaskId, microtaskId);
+    if (runtime.snapshot().phase === 'stimulus') {
+      let audio = runtime.dispatch({ type: 'audio/play' });
+      const requestId = audio.snapshot.audio.requestId;
+      const task = unit.beats.flatMap(beat => beat.microtasks || [])
+        .find(candidate => candidate.microtaskId === microtaskId);
+      const lineCount = unit.lessonContent.lesson49.audioSequences[task.audioSequenceId].lines.length;
+      for (let segmentIndex = 0; segmentIndex < lineCount; segmentIndex += 1) {
+        audio = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex });
+      }
+      assert.equal(audio.snapshot.phase, 'response');
+    }
+    const result = runtime.dispatch({ type: 'response/submit', response: responses[microtaskId] });
+    growthStages.push(...result.effects
+      .filter(effect => effect.type === 'landmark/build-stage')
+      .map(effect => effect.buildStage));
+  }
+
+  assert.equal(runtime.snapshot().status, 'handoff');
+  assert.equal(runtime.snapshot().buildStage, 2);
+  assert.deepEqual(growthStages, [1, 2]);
+  const checkpoints = ledger.events.filter(event => event.type === 'checkpoint-completed');
+  assert.deepEqual(
+    checkpoints.map(event => event.microtaskId),
+    Array.from({ length: 9 }, (_, index) => `L49-M${String(index + 1).padStart(2, '0')}`)
+  );
+  assert.deepEqual(checkpoints.map(event => event.buildStage), [1, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 2]);
+  const formative = ledger.events.filter(event => event.type === 'formative-attempt');
+  assert.deepEqual(formative.map(event => ({
+    targetId: event.targetId,
+    outcome: event.outcome,
+    evidenceMode: event.evidenceMode
+  })), [{
+    targetId: 'FLC-U01-T01',
+    outcome: 'independent',
+    evidenceMode: 'audio-image-quantity-match'
+  }]);
+  assert.doesNotMatch(JSON.stringify(ledger.events), /challenge-star|mastered/);
+});
+
+test('a failed M09 checkpoint cannot grow state two or emit the Lesson 50 handoff', () => {
+  const checkpoint = {
+    checkpointId: 'L49-M08:complete',
+    beatId: 'understand',
+    microtaskId: 'L49-M08',
+    completionStatus: 'completed-independent',
+    learningDay: '2026-08-10'
+  };
+  const runtime = create({
+    unit,
+    ledger: fakeLedger({ checkpoint, buildStage: 1, failOnType: 'checkpoint-completed' }),
+    seed: 24
+  });
+  const entered = runtime.enter({ entryLesson: 'lesson49' });
+  assert.equal(entered.snapshot.microtaskId, 'L49-M09');
+
+  const failed = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      textbookAnswer: 'steak',
+      preferenceSentence: ['he', 'likes', 'steak', 'but', 'he', 'does-not', 'like', 'chicken'],
+      purchasedItems: ['beef', 'steak', 'mince']
+    }
+  });
+
+  assert.equal(failed.snapshot.status, 'active');
+  assert.equal(failed.snapshot.microtaskId, 'L49-M09');
+  assert.equal(failed.snapshot.buildStage, 1);
+  assert.deepEqual(failed.effects, [{
+    type: 'runtime/persistence-failed',
+    operation: 'checkpoint-completed',
+    reason: 'unavailable',
+    retryable: true
+  }]);
+  assert.ok(!failed.effects.some(effect => effect.type === 'landmark/build-stage'));
+  assert.ok(!failed.effects.some(effect => effect.type === 'navigation/handoff'));
+});
+
 test('Lesson 50 resumes at beat three after the first two checkpoints', () => {
   const ledger = fakeLedger({ checkpoint: 'understand:complete', buildStage: 2 });
   const runtime = create({ unit, ledger, seed: 7 });

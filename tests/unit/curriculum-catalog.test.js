@@ -74,6 +74,197 @@ test('Lesson 49 authored presentation keeps both child scenes inside the curricu
   assert.equal(Object.isFrozen(unit.beats[0].task.presentation), true);
 });
 
+test('Lesson 49 freezes every required textbook source with stable semantic identity', () => {
+  const unit = catalog.getTeachingUnit('FLC-U01');
+  const lesson49 = unit.lessonContent.lesson49;
+  const expectedIds = [
+    'L49-Q01',
+    ...Array.from({ length: 11 }, (_, index) => `L49-D${String(index + 1).padStart(2, '0')}`),
+    ...Array.from({ length: 11 }, (_, index) => `L49-W${String(index + 1).padStart(2, '0')}`),
+    ...Array.from({ length: 4 }, (_, index) => `L49-P${String(index + 1).padStart(2, '0')}`),
+    ...Array.from({ length: 4 }, (_, index) => `L49-N${String(index + 1).padStart(2, '0')}`)
+  ];
+
+  assert.deepEqual(lesson49.requiredSourceIds, expectedIds);
+  assert.deepEqual(Object.keys(lesson49.sources), [...expectedIds, 'L49-X01']);
+  assert.equal(lesson49.sources['L49-W05'].text, 'husband');
+  assert.equal(lesson49.sources['L49-W05'].semanticType, 'human-relationship');
+  assert.equal(lesson49.sources['L49-X01'].required, false);
+  assert.equal(lesson49.sources['L49-X01'].sourceKind, 'derived-expression');
+  assert.equal(Object.isFrozen(lesson49), true);
+});
+
+test('Lesson 49 authors nine ordered required microtasks across its first two beats', () => {
+  const unit = catalog.getTeachingUnit('FLC-U01');
+  const [discover, understand] = unit.beats;
+  const microtasks = [...discover.microtasks, ...understand.microtasks];
+
+  assert.equal(discover.completionRule, 'all-required');
+  assert.equal(understand.completionRule, 'all-required');
+  assert.deepEqual(
+    microtasks.map(task => task.microtaskId),
+    Array.from({ length: 9 }, (_, index) => `L49-M${String(index + 1).padStart(2, '0')}`)
+  );
+  assert.deepEqual(discover.microtasks.map(task => task.microtaskId), ['L49-M01']);
+  assert.deepEqual(
+    understand.microtasks.map(task => task.microtaskId),
+    ['L49-M02', 'L49-M03', 'L49-M04', 'L49-M05', 'L49-M06', 'L49-M07', 'L49-M08', 'L49-M09']
+  );
+
+  for (const task of microtasks) {
+    assert.equal(task.lessonId, 'lesson49');
+    assert.equal(task.required, true);
+    assert.ok(task.kind);
+    assert.ok(task.exposureRefs.length > 0);
+    assert.ok(task.evidenceRefs.length > 0);
+    assert.ok(task.contextVariants['breakfast-stall']);
+    assert.ok(task.contextVariants['picnic-supply']);
+    for (const responseKey of Object.values(task.responseKeyByContext)) {
+      assert.match(responseKey.type, /^(single|set|ordered|mapping|composition)$/);
+    }
+  }
+
+  assert.equal(discover.microtasks[0].checkpointAfterSuccess.buildStage, 1);
+  assert.equal(understand.microtasks.at(-1).checkpointAfterSuccess.buildStage, 2);
+  assert.ok(understand.microtasks.slice(0, -1).every(task => (
+    task.checkpointAfterSuccess.buildStage === undefined
+  )));
+  assert.deepEqual(understand.microtasks[4].formativeBinding, {
+    targetId: 'FLC-U01-T01',
+    evidenceMode: 'audio-image-quantity-match'
+  });
+  assert.equal(understand.microtasks[2].formativeBinding, undefined);
+});
+
+test('catalog validation distinguishes required source exposure from verified action coverage', () => {
+  const u01 = structuredClone(catalog.getTeachingUnit('FLC-U01'));
+  assert.deepEqual(catalog.validate([u01]), []);
+
+  const missingExposure = structuredClone(u01);
+  for (const beat of missingExposure.beats) {
+    for (const task of beat.microtasks || []) {
+      task.exposureRefs = task.exposureRefs.filter(sourceId => sourceId !== 'L49-W01');
+    }
+  }
+  assert.match(
+    catalog.validate([missingExposure]).join('\n'),
+    /L49-W01.*exposure/i
+  );
+
+  const missingEvidence = structuredClone(u01);
+  for (const beat of missingEvidence.beats) {
+    for (const task of beat.microtasks || []) {
+      task.evidenceRefs = task.evidenceRefs.filter(sourceId => sourceId !== 'L49-N04');
+    }
+  }
+  assert.match(
+    catalog.validate([missingEvidence]).join('\n'),
+    /L49-N04.*evidence/i
+  );
+});
+
+test('husband remains dialogue vocabulary and is rejected from child classification tasks', () => {
+  const u01 = structuredClone(catalog.getTeachingUnit('FLC-U01'));
+  const lesson49Tasks = u01.beats.flatMap(beat => beat.microtasks || []);
+
+  assert.ok(lesson49Tasks.some(task => task.exposureRefs.includes('L49-W05')));
+  assert.ok(lesson49Tasks.every(task => task.kind !== 'classification'));
+
+  const unsafe = structuredClone(u01);
+  unsafe.beats[1].microtasks[0].kind = 'classification';
+  unsafe.beats[1].microtasks[0].classificationValues = ['husband', 'meat'];
+  assert.match(
+    catalog.validate([unsafe]).join('\n'),
+    /husband.*classification/i
+  );
+});
+
+test('Lesson 49 audio sequences resolve only catalog sources and keep the full dialogue order', () => {
+  const lesson49 = catalog.getTeachingUnit('FLC-U01').lessonContent.lesson49;
+  const full = lesson49.audioSequences['L49-A-FULL-DIALOGUE'];
+
+  assert.deepEqual(
+    full.lines.map(line => line.sourceRef),
+    Array.from({ length: 11 }, (_, index) => `L49-D${String(index + 1).padStart(2, '0')}`)
+  );
+  assert.deepEqual(
+    full.lines.map(line => line.src),
+    full.lines.map(line => lesson49.sources[line.sourceRef].audioSrc)
+  );
+  assert.ok(Object.values(lesson49.audioSequences).every(sequence => (
+    sequence.lines.length > 0
+    && sequence.lines.every(line => line.src.startsWith('/lesson49/audio/'))
+  )));
+  assert.doesNotMatch(JSON.stringify(lesson49.audioSequences), /出版社原声|教材原声/);
+});
+
+test('every Lesson 49 microtask owns its complete child presentation in the catalog', () => {
+  const unit = catalog.getTeachingUnit('FLC-U01');
+  const microtasks = unit.beats.slice(0, 2).flatMap(beat => beat.microtasks);
+
+  assert.deepEqual(microtasks.map(task => task.presentation.title), [
+    '标出订单缺口',
+    '唤醒肉铺货架',
+    '带着问题听完整对话',
+    '第一张订单：要什么肉',
+    '喜欢不等于这次购买',
+    '数量备货台',
+    '接受还是拒绝',
+    '还原订单证据链',
+    '教材问题延迟回收'
+  ]);
+
+  for (const task of microtasks) {
+    assert.equal(typeof task.presentation.stepLabel, 'string');
+    assert.equal(typeof task.presentation.completedFeedback, 'string');
+    for (const [contextId, responseKey] of Object.entries(task.responseKeyByContext)) {
+      const context = task.contextVariants[contextId];
+      assert.equal(typeof context.eyebrow, 'string');
+      assert.equal(typeof context.title, 'string');
+      assert.equal(typeof context.copy, 'string');
+      assert.equal(typeof context.submitLabel, 'string');
+      assert.equal(context.support.length, 3);
+      assert.equal(typeof context.assistedPrompt, 'string');
+      const expectedFields = responseKey.type === 'composition'
+        ? Object.keys(responseKey.fields)
+        : (responseKey.type === 'mapping' ? Object.keys(responseKey.entries) : ['response']);
+      assert.deepEqual(context.responseFields.map(field => field.fieldId), expectedFields);
+      assert.ok(context.responseFields.every(field => (
+        field.options?.length >= 2
+        || field.rows?.every(row => row.options.length >= 2)
+      )));
+    }
+  }
+
+  assert.ok(microtasks[0].presentation.growth);
+  assert.ok(microtasks[8].presentation.growth);
+  assert.ok(microtasks.slice(1, 8).every(task => task.presentation.growth === undefined));
+});
+
+test('catalog validation rejects broken microtask sequencing, responses, audio, and growth boundaries', () => {
+  function message(change) {
+    const candidate = structuredClone(catalog.getTeachingUnit('FLC-U01'));
+    change(candidate);
+    return catalog.validate([candidate]).join('\n');
+  }
+
+  assert.match(message(unit => {
+    unit.beats[1].microtasks[1].microtaskId = 'L49-M02';
+  }), /L49-M02.*duplicated/i);
+  assert.match(message(unit => {
+    delete unit.beats[1].microtasks[0].responseKeyByContext['picnic-supply'];
+  }), /L49-M02.*response.*picnic-supply/i);
+  assert.match(message(unit => {
+    unit.beats[1].microtasks[0].audioSequenceId = 'L49-A-MISSING';
+  }), /L49-M02.*audio sequence/i);
+  assert.match(message(unit => {
+    unit.beats[1].microtasks[3].checkpointAfterSuccess.buildStage = 2;
+  }), /L49-M05.*buildStage.*whole beat/i);
+  assert.match(message(unit => {
+    unit.beats[1].microtasks[4].formativeBinding.targetId = 'FLC-U01-T99';
+  }), /L49-M06.*formative binding/i);
+});
+
 test('the district catalog reserves six unique two-lesson units and thirty targets', () => {
   const units = catalog.listTeachingUnitsForDistrict('first-book-49-60');
 

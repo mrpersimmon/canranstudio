@@ -13,6 +13,59 @@
     return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
   }
 
+  function evaluateResponse(responseKey, response, path = []) {
+    if (!responseKey || typeof responseKey !== 'object') {
+      return { correct: false, mismatchPath: path };
+    }
+    if (responseKey.type === 'single') {
+      const accepted = Array.isArray(responseKey.acceptedValues)
+        ? responseKey.acceptedValues
+        : [responseKey.value];
+      return accepted.includes(response)
+        ? { correct: true, mismatchPath: null }
+        : { correct: false, mismatchPath: path };
+    }
+    if (responseKey.type === 'set') {
+      if (!Array.isArray(response)) return { correct: false, mismatchPath: path };
+      const expected = [...new Set(responseKey.values || [])].sort();
+      const actual = [...new Set(response)].sort();
+      const correct = expected.length === actual.length
+        && expected.every((value, index) => value === actual[index]);
+      return { correct, mismatchPath: correct ? null : path };
+    }
+    if (responseKey.type === 'ordered') {
+      if (!Array.isArray(response)) return { correct: false, mismatchPath: path };
+      const expected = responseKey.values || [];
+      const correct = expected.length === response.length
+        && expected.every((value, index) => value === response[index]);
+      return { correct, mismatchPath: correct ? null : path };
+    }
+    if (responseKey.type === 'mapping') {
+      if (!response || typeof response !== 'object' || Array.isArray(response)) {
+        return { correct: false, mismatchPath: path };
+      }
+      for (const [fieldId, expected] of Object.entries(responseKey.entries || {})) {
+        if (response[fieldId] !== expected) {
+          return { correct: false, mismatchPath: [...path, fieldId] };
+        }
+      }
+      const correct = Object.keys(response).length === Object.keys(responseKey.entries || {}).length;
+      return { correct, mismatchPath: correct ? null : path };
+    }
+    if (responseKey.type === 'composition') {
+      if (!response || typeof response !== 'object' || Array.isArray(response)) {
+        return { correct: false, mismatchPath: path };
+      }
+      for (const [fieldId, nestedKey] of Object.entries(responseKey.fields || {})) {
+        const evaluated = evaluateResponse(nestedKey, response[fieldId], [...path, fieldId]);
+        if (!evaluated.correct) return evaluated;
+      }
+      const correct = Object.keys(response).length === Object.keys(responseKey.fields || {}).length;
+      return { correct, mismatchPath: correct ? null : path };
+    }
+    return { correct: false, mismatchPath: path };
+  }
+
   function create({ unit, ledger, effectSink = () => {}, seed = 1 } = {}) {
     if (!unit?.unitId || !Array.isArray(unit.beats) || unit.beats.length !== 5) {
       throw new TypeError('learning runtime requires a five-beat teaching unit');
@@ -33,9 +86,14 @@
       entryLesson: null,
       beatId: null,
       microstepId: null,
+      microtaskId: null,
+      phase: null,
+      baseContextId: null,
+      activeContextId: null,
       contextId: null,
       buildStage: 0,
       supportLevel: 0,
+      assistanceMode: false,
       audio: null
     };
 
@@ -52,7 +110,8 @@
       const beatId = event.beatId || 'unit';
       const subjectId = event.targetId || event.checkpointId || 'unit';
       const microstepId = state.microstepId || 'complete';
-      return `runtime:${unit.unitId}:${Number(seed)}:${beatId}:${microstepId}:${event.type}:${subjectId}`;
+      const resultId = event.outcome || event.completionStatus || 'complete';
+      return `runtime:${unit.unitId}:${Number(seed)}:${beatId}:${microstepId}:${event.type}:${subjectId}:${resultId}`;
     }
 
     function applyEvent(event) {
@@ -104,6 +163,67 @@
       };
     }
 
+    function currentMicrotask() {
+      return unit.beats
+        .flatMap(beat => beat.microtasks || [])
+        .find(task => task.microtaskId === state.microtaskId) || null;
+    }
+
+    function audioSequenceFor(microtask) {
+      if (!microtask?.audioSequenceId) return null;
+      return unit.lessonContent?.[microtask.lessonId]
+        ?.audioSequences?.[microtask.audioSequenceId] || null;
+    }
+
+    function authoredAudioEffects(sequence, requestId, segmentIndex) {
+      const effects = [];
+      const nextLine = sequence.lines[segmentIndex + 1];
+      if (nextLine) {
+        effects.push({
+          type: 'audio/preload',
+          requestId,
+          activeAudioSequenceId: sequence.audioSequenceId,
+          segmentIndex: segmentIndex + 1,
+          line: clone(nextLine)
+        });
+      }
+      effects.push({
+        type: 'audio/play',
+        requestId,
+        activeAudioSequenceId: sequence.audioSequenceId,
+        segmentIndex,
+        line: clone(sequence.lines[segmentIndex])
+      });
+      return effects;
+    }
+
+    function moveToMicrotask(microtask) {
+      const beat = unit.beats.find(candidate => candidate.microtasks?.includes(microtask));
+      if (!beat) return false;
+      const baseContextId = microtask.contextVariants?.[state.baseContextId]
+        ? state.baseContextId
+        : (Object.keys(microtask.contextVariants || {})[0] || state.baseContextId);
+      state.beatId = beat.beatId;
+      state.microtaskId = microtask.microtaskId;
+      state.phase = microtask.audioSequenceId ? 'stimulus' : 'response';
+      state.microstepId = microtask.audioSequenceId
+        ? `${beat.beatId}-audio`
+        : `${beat.beatId}-check`;
+      state.baseContextId = baseContextId;
+      state.activeContextId = baseContextId;
+      state.contextId = baseContextId;
+      state.supportLevel = 0;
+      state.assistanceMode = false;
+      state.audio = null;
+      return true;
+    }
+
+    function nextMicrotaskAfter(microtask) {
+      const sequence = unit.beats.flatMap(beat => beat.microtasks || []);
+      const index = sequence.findIndex(candidate => candidate.microtaskId === microtask.microtaskId);
+      return index >= 0 ? sequence[index + 1] || null : null;
+    }
+
     function enter({ entryLesson } = {}) {
       if (!unit.lessonIds.includes(entryLesson)) throw new RangeError(`${entryLesson} is not part of ${unit.unitId}`);
       const projection = ledger.read()?.units?.[unit.unitId] || {};
@@ -116,9 +236,14 @@
           entryLesson,
           beatId: null,
           microstepId: null,
+          microtaskId: null,
+          phase: null,
+          baseContextId: unit.targets?.[0]?.contextIds?.[0] || null,
+          activeContextId: unit.targets?.[0]?.contextIds?.[0] || null,
           contextId: unit.targets?.[0]?.contextIds?.[0] || null,
           buildStage: 5,
           supportLevel: 0,
+          assistanceMode: false,
           audio: null
         };
         return publish([{ type: 'runtime/unit-built', unitId: unit.unitId }]);
@@ -131,18 +256,41 @@
           entryLesson,
           beatId: null,
           microstepId: null,
+          microtaskId: null,
+          phase: 'transition',
+          baseContextId: unit.targets?.[0]?.contextIds?.[0] || null,
+          activeContextId: unit.targets?.[0]?.contextIds?.[0] || null,
           contextId: unit.targets?.[0]?.contextIds?.[0] || null,
           buildStage,
           supportLevel: 0,
+          assistanceMode: false,
           audio: null
         };
         return publish([{ type: 'navigation/handoff', entryLesson: unit.lessonIds[1] }]);
       }
       const needsBridge = entryLesson === unit.lessonIds[1] && buildStage < 2;
       const beatIndex = Math.min(buildStage, 4);
-      const beat = unit.beats[beatIndex];
-      const initialMicrostepId = !needsBridge && beat.beatId === 'understand'
-        ? 'understand-audio'
+      let beat = unit.beats[beatIndex];
+      let microtask = beat.microtasks?.[0] || null;
+      if (!needsBridge && projection.checkpoint?.microtaskId) {
+        const authoredSequence = unit.beats.flatMap(candidateBeat => (
+          (candidateBeat.microtasks || []).map(candidateTask => ({
+            beat: candidateBeat,
+            microtask: candidateTask
+          }))
+        ));
+        const completedIndex = authoredSequence.findIndex(candidate => (
+          candidate.microtask.microtaskId === projection.checkpoint.microtaskId
+        ));
+        const resumed = authoredSequence[completedIndex + 1];
+        if (completedIndex >= 0 && resumed?.microtask?.lessonId === entryLesson) {
+          beat = resumed.beat;
+          microtask = resumed.microtask;
+        }
+      }
+      const baseContextId = unit.targets?.[0]?.contextIds?.[0] || null;
+      const initialMicrostepId = !needsBridge && microtask?.audioSequenceId
+        ? `${beat.beatId}-audio`
         : (needsBridge ? `bridge-${beat.beatId}-check` : `${beat.beatId}-check`);
       state = {
         ...state,
@@ -151,7 +299,11 @@
         entryLesson,
         beatId: beat.beatId,
         microstepId: initialMicrostepId,
-        contextId: unit.targets?.[0]?.contextIds?.[0] || null,
+        microtaskId: microtask?.microtaskId || null,
+        phase: microtask?.audioSequenceId ? 'stimulus' : 'response',
+        baseContextId,
+        activeContextId: baseContextId,
+        contextId: baseContextId,
         buildStage
       };
       return publish([{
@@ -164,6 +316,171 @@
 
     function dispatch(action = {}) {
       if (state.status !== 'active') return publish([]);
+      if (action.type === 'response/submit') {
+        const microtask = currentMicrotask();
+        if (!microtask || state.phase !== 'response') {
+          return publish([{ type: 'runtime/invalid-action', actionType: action.type }]);
+        }
+        const responseKey = microtask.responseKeyByContext?.[state.activeContextId];
+        const evaluation = evaluateResponse(responseKey, action.response);
+        if (!evaluation.correct) {
+          if (
+            !state.assistanceMode
+            && state.supportLevel >= 3
+            && state.activeContextId !== state.baseContextId
+          ) {
+            const effects = [];
+            if (microtask.formativeBinding) {
+              const failed = applyEvent({
+                type: 'formative-attempt',
+                beatId: state.beatId,
+                targetId: microtask.formativeBinding.targetId,
+                outcome: 'failed',
+                contextId: state.activeContextId,
+                evidenceMode: microtask.formativeBinding.evidenceMode,
+                source: state.mode === 'bridge' ? 'compressed-bridge' : 'new-learning'
+              });
+              effects.push(...failed.effects);
+              if (!failed.ok) return publish(effects);
+            }
+            state.assistanceMode = true;
+            effects.push({
+              type: 'feedback/assisted',
+              microtaskId: microtask.microtaskId,
+              mismatchPath: evaluation.mismatchPath,
+              requiresChildAction: true
+            });
+            return publish(effects);
+          }
+          if (state.assistanceMode) {
+            return publish([{
+              type: 'feedback/assisted',
+              microtaskId: microtask.microtaskId,
+              mismatchPath: evaluation.mismatchPath,
+              requiresChildAction: true
+            }]);
+          }
+          const nextLevel = Math.min(state.supportLevel + 1, 3);
+          state.supportLevel = nextLevel;
+          const effects = [{
+            type: 'feedback/support',
+            microtaskId: microtask.microtaskId,
+            level: nextLevel,
+            supportKind: microtask.support?.ladder?.[nextLevel - 1] || 'reobserve',
+            mismatchPath: evaluation.mismatchPath,
+            revealsAnswer: false
+          }];
+          if (nextLevel === 3 && state.activeContextId === state.baseContextId) {
+            const fromContextId = state.activeContextId;
+            const nearTransferContextId = microtask.support?.nearTransferContextId;
+            if (
+              nearTransferContextId
+              && nearTransferContextId !== fromContextId
+              && microtask.contextVariants?.[nearTransferContextId]
+            ) {
+              state.activeContextId = nearTransferContextId;
+              state.contextId = nearTransferContextId;
+              effects.push({
+                type: 'scene/near-transfer',
+                microtaskId: microtask.microtaskId,
+                fromContextId,
+                contextId: nearTransferContextId
+              });
+            }
+          }
+          return publish(effects);
+        }
+
+        const completionStatus = state.assistanceMode
+          ? 'completed-assisted'
+          : (state.supportLevel > 0 ? 'completed-supported' : 'completed-independent');
+        const checkpoint = microtask.checkpointAfterSuccess || {};
+        const effects = [];
+        if (microtask.formativeBinding && !state.assistanceMode) {
+          const formative = applyEvent({
+            type: 'formative-attempt',
+            beatId: state.beatId,
+            targetId: microtask.formativeBinding.targetId,
+            outcome: state.supportLevel > 0 ? 'supported' : 'independent',
+            contextId: state.activeContextId,
+            evidenceMode: microtask.formativeBinding.evidenceMode,
+            source: state.mode === 'bridge' ? 'compressed-bridge' : 'new-learning'
+          });
+          effects.push(...formative.effects);
+          if (!formative.ok) return publish(effects);
+        }
+        const applied = applyEvent({
+          type: 'checkpoint-completed',
+          beatId: state.beatId,
+          microtaskId: microtask.microtaskId,
+          checkpointId: checkpoint.checkpointId || `${microtask.microtaskId}:complete`,
+          ...(checkpoint.buildStage === undefined ? {} : { buildStage: checkpoint.buildStage }),
+          completionStatus,
+          source: state.mode === 'bridge' ? 'compressed-bridge' : 'new-learning'
+        });
+        effects.push(...applied.effects);
+        if (!applied.ok) return publish(effects);
+
+        effects.push({
+          type: 'feedback/completed',
+          microtaskId: microtask.microtaskId,
+          completionStatus
+        });
+        if (Number.isInteger(checkpoint.buildStage) && checkpoint.buildStage > state.buildStage) {
+          state.buildStage = checkpoint.buildStage;
+          effects.push({ type: 'landmark/build-stage', buildStage: state.buildStage });
+        }
+
+        const nextMicrotask = nextMicrotaskAfter(microtask);
+        if (nextMicrotask?.lessonId === state.entryLesson) {
+          moveToMicrotask(nextMicrotask);
+          effects.push({
+            type: 'scene/show',
+            beatId: state.beatId,
+            microtaskId: state.microtaskId,
+            microstepId: state.microstepId,
+            contextId: state.activeContextId
+          });
+          return publish(effects);
+        }
+
+        if (state.entryLesson === unit.lessonIds[0] && state.buildStage >= 2) {
+          state = {
+            ...state,
+            status: 'handoff',
+            beatId: null,
+            microstepId: null,
+            microtaskId: null,
+            phase: 'transition',
+            supportLevel: 0,
+            assistanceMode: false,
+            audio: null
+          };
+          effects.push({ type: 'navigation/handoff', entryLesson: unit.lessonIds[1] });
+          return publish(effects);
+        }
+        return publish(effects);
+      }
+      if (action.type === 'audio/play') {
+        const microtask = currentMicrotask();
+        const sequence = audioSequenceFor(microtask);
+        if (sequence && state.phase === 'stimulus' && action.audioId === undefined) {
+          const effects = [];
+          if (state.audio?.status === 'playing') {
+            effects.push({ type: 'audio/cancel', requestId: state.audio.requestId });
+          }
+          audioSequence += 1;
+          const requestId = `audio:${unit.unitId}:${Number(seed)}:${audioSequence}`;
+          state.audio = {
+            requestId,
+            activeAudioSequenceId: sequence.audioSequenceId,
+            segmentIndex: 0,
+            status: 'playing'
+          };
+          effects.push(...authoredAudioEffects(sequence, requestId, 0));
+          return publish(effects);
+        }
+      }
       if (action.type === 'audio/play' && state.microstepId === 'understand-audio') {
         const effects = [];
         if (state.audio?.status === 'playing') {
@@ -175,11 +492,42 @@
         effects.push({ type: 'audio/play', requestId, audioId: action.audioId });
         return publish(effects);
       }
+      if (action.type === 'audio/ended') {
+        if (
+          state.audio?.status !== 'playing'
+          || action.requestId !== state.audio.requestId
+          || action.segmentIndex !== state.audio.segmentIndex
+          || !state.audio.activeAudioSequenceId
+        ) {
+          return publish([]);
+        }
+        const microtask = currentMicrotask();
+        const sequence = audioSequenceFor(microtask);
+        if (!sequence || sequence.audioSequenceId !== state.audio.activeAudioSequenceId) {
+          return publish([]);
+        }
+        const nextSegmentIndex = state.audio.segmentIndex + 1;
+        if (nextSegmentIndex < sequence.lines.length) {
+          state.audio = { ...state.audio, segmentIndex: nextSegmentIndex };
+          return publish(authoredAudioEffects(sequence, state.audio.requestId, nextSegmentIndex));
+        }
+        state.audio = { ...state.audio, status: 'completed' };
+        state.phase = 'response';
+        state.microstepId = `${state.beatId}-check`;
+        return publish([{
+          type: 'scene/show',
+          beatId: state.beatId,
+          microtaskId: state.microtaskId,
+          microstepId: state.microstepId,
+          contextId: state.activeContextId
+        }]);
+      }
       if (action.type === 'audio/completed') {
         if (state.audio?.status !== 'playing' || action.requestId !== state.audio.requestId) {
           return publish([]);
         }
         state.audio = { ...state.audio, status: 'completed' };
+        state.phase = 'response';
         state.microstepId = 'understand-check';
         return publish([{
           type: 'scene/show',
@@ -193,6 +541,7 @@
           return publish([]);
         }
         state.audio = { ...state.audio, status: 'failed' };
+        state.phase = 'response';
         state.microstepId = 'understand-check';
         return publish([
           {

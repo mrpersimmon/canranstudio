@@ -14,6 +14,11 @@
   const REVIEW_OUTCOMES = new Set(['independent', 'supported', 'failed']);
   const FORMATIVE_OUTCOMES = new Set(['practice-only', 'independent', 'supported', 'failed']);
   const ALL_OUTCOMES = new Set([...REVIEW_OUTCOMES, ...FORMATIVE_OUTCOMES]);
+  const COMPLETION_STATUSES = new Set([
+    'completed-independent',
+    'completed-supported',
+    'completed-assisted'
+  ]);
   const EVENT_TYPES = new Set([
     'checkpoint-completed',
     'unit-built',
@@ -97,6 +102,12 @@
             ? stored.checkpoint.checkpointId
             : null,
           beatId: typeof stored.checkpoint.beatId === 'string' ? stored.checkpoint.beatId : null,
+          ...(typeof stored.checkpoint.microtaskId === 'string'
+            ? { microtaskId: stored.checkpoint.microtaskId }
+            : {}),
+          ...(COMPLETION_STATUSES.has(stored.checkpoint.completionStatus)
+            ? { completionStatus: stored.checkpoint.completionStatus }
+            : {}),
           learningDay: validLearningDay(stored.checkpoint.learningDay)
             ? stored.checkpoint.learningDay
             : null
@@ -216,6 +227,15 @@
       }
       const beat = event.beatId ? unit.beats.find(candidate => candidate.beatId === event.beatId) : null;
       if (event.beatId && !beat) return 'beat-invalid';
+      if (event.microtaskId !== undefined) {
+        if (typeof event.microtaskId !== 'string' || !event.microtaskId) return 'microtaskId-invalid';
+        if (!beat?.microtasks?.some(task => task.microtaskId === event.microtaskId)) {
+          return 'microtask-invalid';
+        }
+      }
+      if (event.completionStatus !== undefined && !COMPLETION_STATUSES.has(event.completionStatus)) {
+        return 'completionStatus-invalid';
+      }
       if (event.buildStage !== undefined && (!Number.isInteger(event.buildStage)
         || event.buildStage < 0 || event.buildStage > 5)) return 'buildStage-invalid';
       if (beat && event.buildStage !== undefined && beat.buildStage !== event.buildStage) {
@@ -249,12 +269,23 @@
     const unit = catalog.getTeachingUnit(event.unitId);
     const beat = event.beatId ? unit.beats.find(candidate => candidate.beatId === event.beatId) : null;
     const stored = state.units[event.unitId];
-    const buildStage = event.buildStage ?? beat?.buildStage;
+    const buildStage = event.microtaskId ? event.buildStage : (event.buildStage ?? beat?.buildStage);
     if (Number.isInteger(buildStage) && buildStage < stored.buildStage) return [];
     if (Number.isInteger(buildStage)) stored.buildStage = Math.max(stored.buildStage, buildStage);
+
+    if (event.microtaskId && stored.checkpoint?.microtaskId) {
+      const microtaskIds = unit.beats.flatMap(currentBeat => (
+        currentBeat.microtasks || []
+      )).map(task => task.microtaskId);
+      const incomingIndex = microtaskIds.indexOf(event.microtaskId);
+      const storedIndex = microtaskIds.indexOf(stored.checkpoint.microtaskId);
+      if (incomingIndex >= 0 && storedIndex >= 0 && incomingIndex < storedIndex) return [];
+    }
     stored.checkpoint = {
       checkpointId: event.checkpointId,
       beatId: beat?.beatId || null,
+      ...(event.microtaskId ? { microtaskId: event.microtaskId } : {}),
+      ...(event.completionStatus ? { completionStatus: event.completionStatus } : {}),
       learningDay
     };
     return [];
