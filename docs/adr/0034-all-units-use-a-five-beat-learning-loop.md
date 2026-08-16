@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0075
 ---
 
 # 所有教学单元采用五幕学习骨架
