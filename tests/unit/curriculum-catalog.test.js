@@ -6,6 +6,157 @@ const assert = require('node:assert/strict');
 const catalog = require('../../core/curriculum-catalog');
 const courseCatalog = require('../../core/course-catalog');
 
+test('Lesson 1 and Lesson 2 resolve to one elementary teaching unit', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+
+  assert.equal(unit.unitId, 'NCE-U01');
+  assert.deepEqual(unit.lessonIds, ['lesson1', 'lesson2']);
+  assert.equal(catalog.getTeachingUnitForLesson('lesson1'), unit);
+  assert.equal(catalog.getTeachingUnitForLesson('lesson2'), unit);
+  assert.equal(unit.publicationScope, 'local-poc');
+  assert.deepEqual(
+    unit.targets.map(target => target.targetId),
+    ['NCE-U01-T01', 'NCE-U01-T02', 'NCE-U01-T03', 'NCE-U01-T04', 'NCE-U01-T05']
+  );
+});
+
+test('Lesson 1 and Lesson 2 preserve the complete textbook source ledger', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const lesson1 = unit.lessonContent.lesson1;
+  const lesson2 = unit.lessonContent.lesson2;
+
+  assert.deepEqual(
+    Array.from({ length: 7 }, (_, index) => lesson1.sources[`L01-D0${index + 1}`].text),
+    [
+      'Excuse me!',
+      'Yes?',
+      'Is this your handbag?',
+      'Pardon?',
+      'Is this your handbag?',
+      'Yes, it is.',
+      'Thank you very much.'
+    ]
+  );
+  assert.notEqual(lesson1.sources['L01-D03'], lesson1.sources['L01-D05']);
+  assert.deepEqual(
+    Array.from({ length: 11 }, (_, index) => lesson1.sources[`L01-W${String(index + 1).padStart(2, '0')}`].text),
+    ['excuse', 'me', 'yes', 'is', 'this', 'your', 'handbag', 'pardon', 'it', 'thank you', 'very much']
+  );
+  assert.deepEqual(
+    Array.from({ length: 10 }, (_, index) => lesson2.sources[`L02-W${String(index + 1).padStart(2, '0')}`].text),
+    ['pen', 'pencil', 'book', 'watch', 'coat', 'dress', 'skirt', 'shirt', 'car', 'house']
+  );
+
+  assert.equal(lesson1.sources['L01-Q01'].sourceRole, 'context');
+  assert.equal(lesson1.sources['L01-N01'].sourceRole, 'support');
+  assert.equal(lesson1.sources['L01-N02'].coveragePolicy, 'exposure');
+  assert.ok(Array.from({ length: 7 }, (_, index) => (
+    lesson1.sources[`L01-Z0${index + 1}`].coveragePolicy === 'optional'
+  )).every(Boolean));
+  assert.ok(Object.values(lesson2.sources).filter(item => item.sourceKind === 'substitution-item')
+    .every(item => item.sourceRole === 'target' && item.coveragePolicy === 'evidence'));
+
+  assert.deepEqual(lesson2.sources['L02-E01'], {
+    sourceId: 'L02-E01',
+    sourceKind: 'exercise-mechanism',
+    text: 'Copy these sentences.',
+    sourceRole: 'context',
+    coveragePolicy: 'omitted',
+    reusedSourceRefs: Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`),
+    omissionReason: 'Independent mobile course omits handwriting as accepted by ADR-0082.'
+  });
+  assert.equal(Object.isFrozen(lesson1), true);
+  assert.equal(Object.isFrozen(lesson2), true);
+});
+
+test('Lesson 1 and Lesson 2 author twelve atomic microtasks and all twenty-two T1 channel cells', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const microtasks = unit.beats.flatMap(beat => beat.microtasks || []);
+
+  assert.equal(unit.status, 'candidate');
+  assert.equal(unit.runtimeProfile, 'microtask-v2');
+  assert.deepEqual(
+    microtasks.map(task => task.microtaskId),
+    [
+      ...Array.from({ length: 5 }, (_, index) => `L01-M0${index + 1}`),
+      ...Array.from({ length: 7 }, (_, index) => `L02-M0${index + 1}`)
+    ]
+  );
+  assert.ok(microtasks.every(task => (
+    task.required === true
+    && task.persistence?.atomic === true
+    && task.persistence?.resumePolicy === 'restart-microtask'
+    && task.checkpointAfterSuccess?.checkpointId === `${task.microtaskId}:complete`
+  )));
+  assert.equal(microtasks.find(task => task.microtaskId === 'L01-M05').growthBoundary, 'chapter-interior');
+  assert.equal(microtasks.find(task => task.microtaskId === 'L02-M07').growthBoundary, 'unit-built');
+  assert.ok(microtasks.filter(task => !['L01-M05', 'L02-M07'].includes(task.microtaskId))
+    .every(task => task.growthBoundary === 'none'));
+
+  const t1Cells = microtasks.flatMap(task => (
+    (task.targetResults || [])
+      .filter(result => result.targetId === 'NCE-U01-T01')
+      .map(result => [result.sourceRef, result.channel, task.microtaskId])
+  ));
+  assert.deepEqual(t1Cells, [
+    ['L01-W07', 'audio', 'L01-M01'],
+    ['L02-W03', 'audio', 'L02-M01'],
+    ['L02-W01', 'audio', 'L02-M01'],
+    ['L02-W04', 'audio', 'L02-M01'],
+    ['L02-W02', 'audio', 'L02-M01'],
+    ['L01-W07', 'word-form', 'L02-M02'],
+    ['L02-W04', 'word-form', 'L02-M02'],
+    ['L02-W02', 'word-form', 'L02-M02'],
+    ['L02-W03', 'word-form', 'L02-M02'],
+    ['L02-W01', 'word-form', 'L02-M02'],
+    ['L02-W08', 'audio', 'L02-M03'],
+    ['L02-W05', 'audio', 'L02-M03'],
+    ['L02-W06', 'audio', 'L02-M03'],
+    ['L02-W07', 'audio', 'L02-M03'],
+    ['L02-W07', 'word-form', 'L02-M04'],
+    ['L02-W05', 'word-form', 'L02-M04'],
+    ['L02-W06', 'word-form', 'L02-M04'],
+    ['L02-W08', 'word-form', 'L02-M04'],
+    ['L02-W10', 'audio', 'L02-M05'],
+    ['L02-W09', 'audio', 'L02-M05'],
+    ['L02-W09', 'word-form', 'L02-M06'],
+    ['L02-W10', 'word-form', 'L02-M06']
+  ]);
+  assert.deepEqual(catalog.validate([structuredClone(unit)]), []);
+});
+
+test('microtask v2 catalog validation rejects imperative answers and forged result identities', () => {
+  function message(change) {
+    const candidate = structuredClone(catalog.getTeachingUnit('NCE-U01'));
+    change(candidate);
+    return catalog.validate([candidate]).join('\n');
+  }
+
+  assert.match(message(unit => {
+    unit.beats[0].microtasks[0].steps[1].answerRule.type = 'button-index';
+  }), /L01-M01:S02.*declarative answer rule/i);
+  assert.match(message(unit => {
+    unit.beats[1].microtasks[0].steps[1].challengeSourceRefs[0] = 'L02-W99';
+  }), /L02-M01:S02.*unknown source L02-W99/i);
+  assert.match(message(unit => {
+    unit.beats[0].microtasks[0].steps[1].targetEntityIds[1] = 'unknown-recipient';
+  }), /L01-M01:S02.*unknown entity unknown-recipient/i);
+  assert.match(message(unit => {
+    unit.beats[3].microtasks[1].steps[4].selectedEntityFactId = 'page-supplied-branch';
+  }), /L02-M06:S05.*stored child choice/i);
+  assert.match(message(unit => {
+    unit.beats[0].microtasks[0].targetResults[0].targetId = 'NCE-U01-T99';
+  }), /L01-M01.*target result.*NCE-U01-T99/i);
+  assert.match(message(unit => {
+    const duplicate = structuredClone(unit.beats[0].microtasks[0].targetResults[1]);
+    unit.beats[1].microtasks[1].targetResults.push(duplicate);
+  }), /L01-W07:audio.*duplicated/i);
+  assert.match(message(unit => {
+    unit.beats[0].microtasks[4].growthBoundary = 'unit-built';
+    unit.beats[0].microtasks[4].checkpointAfterSuccess.buildStage = 5;
+  }), /L01-M05.*unit growth.*final microtask/i);
+});
+
 test('Lesson 49 and Lesson 50 resolve to the same first teaching unit', () => {
   const unit = catalog.getTeachingUnit('FLC-U01');
 
@@ -327,6 +478,10 @@ test('the legacy lesson catalog exposes teaching-unit membership as a compatibil
   for (const unit of catalog.TEACHING_UNITS) {
     for (const lessonId of unit.lessonIds) {
       const course = courseCatalog.COURSES.find(candidate => candidate.id === lessonId);
+      if (unit.publicationScope === 'local-poc') {
+        assert.equal(course, undefined);
+        continue;
+      }
       assert.equal(course.teachingUnitId, unit.unitId);
     }
   }

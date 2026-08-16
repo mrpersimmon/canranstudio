@@ -28,6 +28,956 @@
     return { sourceId, sourceKind, text, required: true, ...details };
   }
 
+  function nceSource(sourceId, sourceKind, text, sourceRole, coveragePolicy, details = {}) {
+    return { sourceId, sourceKind, text, sourceRole, coveragePolicy, ...details };
+  }
+
+  const LESSON1_DIALOGUE_TEXT = [
+    'Excuse me!',
+    'Yes?',
+    'Is this your handbag?',
+    'Pardon?',
+    'Is this your handbag?',
+    'Yes, it is.',
+    'Thank you very much.'
+  ];
+  const LESSON1_DIALOGUE_SPEAKERS = ['man', 'woman', 'man', 'woman', 'man', 'woman', 'man'];
+  const LESSON1_DIALOGUE_POLICIES = ['evidence', 'exposure', 'evidence', 'evidence', 'evidence', 'evidence', 'evidence'];
+  const LESSON1_TRANSLATIONS = [
+    '对不起！',
+    '什么事？',
+    '这是您的手提包吗？',
+    '对不起，请再说一遍。',
+    '这是您的手提包吗？',
+    '是的，是我的。',
+    '非常感谢！'
+  ];
+  const LESSON1_VOCABULARY = [
+    ['excuse', '原谅'],
+    ['me', '我（宾格）'],
+    ['yes', '是的'],
+    ['is', 'be 动词现在时第三人称单数'],
+    ['this', '这'],
+    ['your', '你的，你们的'],
+    ['handbag', '（女用）手提包'],
+    ['pardon', '原谅，请再说一遍'],
+    ['it', '它'],
+    ['thank you', '感谢你（们）'],
+    ['very much', '非常地']
+  ];
+  const LESSON2_VOCABULARY = [
+    ['pen', '钢笔'],
+    ['pencil', '铅笔'],
+    ['book', '书'],
+    ['watch', '手表'],
+    ['coat', '上衣，外衣'],
+    ['dress', '连衣裙'],
+    ['skirt', '裙子'],
+    ['shirt', '衬衣'],
+    ['car', '小汽车'],
+    ['house', '房子']
+  ];
+
+  const LESSON1_SOURCES = {
+    'L01-I01': nceSource(
+      'L01-I01',
+      'textbook-instruction',
+      'Listen then answer this question.',
+      'context',
+      'exposure',
+      { translation: '听录音，然后回答问题。' }
+    ),
+    'L01-Q01': nceSource(
+      'L01-Q01',
+      'textbook-question',
+      'Whose handbag is it?',
+      'context',
+      'exposure',
+      { translation: '这是谁的手袋？' }
+    ),
+    ...Object.fromEntries(LESSON1_DIALOGUE_TEXT.map((text, index) => {
+      const sourceId = `L01-D${String(index + 1).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'dialogue',
+        text,
+        LESSON1_DIALOGUE_POLICIES[index] === 'evidence' ? 'target' : 'support',
+        LESSON1_DIALOGUE_POLICIES[index],
+        {
+          speaker: LESSON1_DIALOGUE_SPEAKERS[index],
+          audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`
+        }
+      )];
+    })),
+    ...Object.fromEntries(LESSON1_VOCABULARY.map(([text, translation], index) => {
+      const sourceId = `L01-W${String(index + 1).padStart(2, '0')}`;
+      const isHandbag = text === 'handbag';
+      return [sourceId, nceSource(
+        sourceId,
+        'vocabulary',
+        text,
+        isHandbag ? 'target' : 'support',
+        isHandbag ? 'evidence' : 'exposure',
+        {
+          translation,
+          audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`
+        }
+      )];
+    })),
+    'L01-N01': nceSource(
+      'L01-N01',
+      'textbook-note',
+      'Excuse me. 用于与陌生人搭话、打断说话或从别人身边挤过。',
+      'support',
+      'exposure',
+      { linkedSourceRefs: ['L01-D01'] }
+    ),
+    'L01-N02': nceSource(
+      'L01-N02',
+      'textbook-note',
+      'Pardon? 是 I beg your pardon? 的省略，请对方把刚才的话重复一遍。',
+      'support',
+      'exposure',
+      { linkedSourceRefs: ['L01-D04', 'L01-D05'] }
+    ),
+    ...Object.fromEntries(LESSON1_TRANSLATIONS.map((text, index) => {
+      const sourceId = `L01-Z${String(index + 1).padStart(2, '0')}`;
+      const linkedSourceId = `L01-D${String(index + 1).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'reference-translation',
+        text,
+        'context',
+        'optional',
+        { linkedSourceId }
+      )];
+    }))
+  };
+
+  const LESSON2_SOURCES = {
+    'L02-I01': nceSource(
+      'L02-I01',
+      'textbook-instruction',
+      'Look, listen and repeat.',
+      'context',
+      'exposure',
+      { translation: '看图听录音，然后练习。' }
+    ),
+    ...Object.fromEntries(LESSON2_VOCABULARY.map(([text, translation], index) => {
+      const sourceId = `L02-W${String(index + 1).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'substitution-item',
+        text,
+        'target',
+        'evidence',
+        {
+          translation,
+          audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`,
+          illustrationOrder: index + 1
+        }
+      )];
+    })),
+    'L02-E01': {
+      sourceId: 'L02-E01',
+      sourceKind: 'exercise-mechanism',
+      text: 'Copy these sentences.',
+      sourceRole: 'context',
+      coveragePolicy: 'omitted',
+      reusedSourceRefs: Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`),
+      omissionReason: 'Independent mobile course omits handwriting as accepted by ADR-0082.'
+    }
+  };
+
+  const LESSON1_CONTENT = {
+    lessonId: 'lesson1',
+    textbookTitle: 'Excuse me!',
+    textbookSource: '外研社《新概念英语智慧版 1》物理页 35–36，书本页 2–3',
+    requiredSourceIds: Object.keys(LESSON1_SOURCES).filter(sourceId => (
+      ['exposure', 'evidence'].includes(LESSON1_SOURCES[sourceId].coveragePolicy)
+    )),
+    sources: LESSON1_SOURCES,
+    audioSequences: {}
+  };
+
+  const LESSON2_CONTENT = {
+    lessonId: 'lesson2',
+    textbookTitle: 'Is this your ...?',
+    textbookSource: '外研社《新概念英语智慧版 1》物理页 37–38，书本页 4–5',
+    requiredSourceIds: Object.keys(LESSON2_SOURCES).filter(sourceId => (
+      ['exposure', 'evidence'].includes(LESSON2_SOURCES[sourceId].coveragePolicy)
+    )),
+    sources: LESSON2_SOURCES,
+    audioSequences: {}
+  };
+
+  const NCE_AUTHORED_CONTENT = {
+    'NCE-U01-C-Q-WATCH': {
+      contentId: 'NCE-U01-C-Q-WATCH',
+      kind: 'derived-expression',
+      text: 'Is this your watch?',
+      sourceRefs: ['L01-D03', 'L02-W04'],
+      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-watch.mp3'
+    },
+    'NCE-U01-C-Q-COAT': {
+      contentId: 'NCE-U01-C-Q-COAT',
+      kind: 'derived-expression',
+      text: 'Is this your coat?',
+      sourceRefs: ['L01-D03', 'L02-W05'],
+      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-coat.mp3'
+    },
+    'NCE-U01-C-Q-CAR': {
+      contentId: 'NCE-U01-C-Q-CAR',
+      kind: 'derived-expression',
+      text: 'Is this your car?',
+      sourceRefs: ['L01-D03', 'L02-W09'],
+      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-car.mp3'
+    },
+    'NCE-U01-C-Q-HOUSE': {
+      contentId: 'NCE-U01-C-Q-HOUSE',
+      kind: 'derived-expression',
+      text: 'Is this your house?',
+      sourceRefs: ['L01-D03', 'L02-W10'],
+      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-house.mp3'
+    },
+    'NCE-U01-C-BLOCK-IS-THIS-YOUR': {
+      contentId: 'NCE-U01-C-BLOCK-IS-THIS-YOUR',
+      kind: 'language-block',
+      text: 'Is this your',
+      sourceRefs: ['L01-D03']
+    }
+  };
+
+  const NCE_ENTITIES = {
+    'station-keeper': { entityId: 'station-keeper', title: '招领员', visualType: 'keeper', symbol: '🧑‍💼' },
+    'handbag-owner': { entityId: 'handbag-owner', title: '手提包主人', visualType: 'visitor', symbol: '👩' },
+    'first-claimant': { entityId: 'first-claimant', title: '第一位认领者', visualType: 'visitor-one', symbol: '🧑' },
+    'second-returner': { entityId: 'second-returner', title: '第二位归还者', visualType: 'visitor-two', symbol: '👩‍🦱' },
+    'third-claimant': { entityId: 'third-claimant', title: '第三位认领者', visualType: 'visitor-three', symbol: '👨‍🦰' },
+    child: { entityId: 'child', title: '小探险家', visualType: 'child', symbol: '🧒' },
+    'cat-guide': {
+      entityId: 'cat-guide', title: '探险小猫', visualType: 'cat',
+      assetSrc: '/assets/adventure-map/mascot/explorer-cat-walking-route-page-20260806-01-256.webp'
+    },
+    handbag: { entityId: 'handbag', title: '手提包', visualType: 'handbag', symbol: '👜', sourceRef: 'L01-W07' },
+    pen: { entityId: 'pen', title: '钢笔', visualType: 'pen', symbol: '🖋️', sourceRef: 'L02-W01' },
+    pencil: { entityId: 'pencil', title: '铅笔', visualType: 'pencil', symbol: '✏️', sourceRef: 'L02-W02' },
+    book: { entityId: 'book', title: '书', visualType: 'book', symbol: '📘', sourceRef: 'L02-W03' },
+    watch: { entityId: 'watch', title: '手表', visualType: 'watch', symbol: '⌚', sourceRef: 'L02-W04' },
+    coat: { entityId: 'coat', title: '外套', visualType: 'coat', symbol: '🧥', sourceRef: 'L02-W05' },
+    dress: { entityId: 'dress', title: '连衣裙', visualType: 'dress', symbol: '👗', sourceRef: 'L02-W06' },
+    skirt: { entityId: 'skirt', title: '短裙', visualType: 'skirt', symbol: '🩰', sourceRef: 'L02-W07' },
+    shirt: { entityId: 'shirt', title: '衬衫', visualType: 'shirt', symbol: '👕', sourceRef: 'L02-W08' },
+    'car-key': { entityId: 'car-key', title: '车钥匙', visualType: 'car-key', symbol: '🚗', sourceRef: 'L02-W09' },
+    'house-key': { entityId: 'house-key', title: '房屋钥匙', visualType: 'house-key', symbol: '🏠', sourceRef: 'L02-W10' },
+    'star-badge': { entityId: 'star-badge', title: '星灯探险徽章', visualType: 'badge', symbol: '🌟' },
+    'case-stamp': { entityId: 'case-stamp', title: '结案章', visualType: 'stamp', symbol: '🔖' },
+    'case-file': { entityId: 'case-file', title: '案件档案', visualType: 'case-file', symbol: '🗂️' },
+    'station-power': { entityId: 'station-power', title: '星灯总闸', visualType: 'station-power', symbol: '🌠' },
+    'opening-lever': { entityId: 'opening-lever', title: '开张拉杆', visualType: 'lever', symbol: '⚙️' }
+  };
+
+  function nceTargetResult({ resultId, targetNumber, stepId, sourceRef, channel, evidenceMode, variantId }) {
+    return {
+      resultId,
+      targetId: `NCE-U01-T${String(targetNumber).padStart(2, '0')}`,
+      stepId,
+      sourceRef,
+      channel,
+      evidenceMode,
+      variantId: variantId || sourceRef || stepId,
+      resultKind: 'formative'
+    };
+  }
+
+  function t1Result(microtaskId, stepId, sourceRef, channel) {
+    return nceTargetResult({
+      resultId: `NCE-U01-T01:${sourceRef}:${channel}`,
+      targetNumber: 1,
+      stepId,
+      sourceRef,
+      channel,
+      evidenceMode: channel === 'audio' ? 'audio-object-match' : 'word-form-object-match'
+    });
+  }
+
+  function nceMicrotask({
+    microtaskId,
+    lessonId,
+    title,
+    stepLabel,
+    sceneMode,
+    prompt,
+    completedFeedback,
+    nextCue,
+    exposureRefs,
+    evidenceRefs,
+    targetResults = [],
+    steps,
+    growthBoundary = 'none',
+    requiredFactIds = [],
+    checkpointFacts = []
+  }) {
+    return {
+      microtaskId,
+      lessonId,
+      kind: 'authored-story-task',
+      required: true,
+      exposureRefs,
+      evidenceRefs,
+      targetResults,
+      steps,
+      presentation: {
+        title,
+        stepLabel,
+        sceneMode,
+        prompt,
+        completedFeedback,
+        nextCue
+      },
+      persistence: {
+        atomic: true,
+        resumePolicy: 'restart-microtask',
+        requiredFactIds,
+        checkpointFacts
+      },
+      checkpointAfterSuccess: {
+        checkpointId: `${microtaskId}:complete`,
+        ...(growthBoundary === 'unit-built' ? { buildStage: 5 } : {})
+      },
+      growthBoundary
+    };
+  }
+
+  const AUDIO_ENDED_GATE = 'active-request-ended';
+  const AUDIO_SUPPORT = [
+    '再听一次，先不着急选。',
+    '看一看每件物品刚才做了什么。',
+    '小猫先用另一件同类物品示范，你再亲手完成。'
+  ];
+  const MEANING_SUPPORT = [
+    '回看人物的动作和事情发生的顺序。',
+    '只保留最符合现在需要的完整表达。',
+    '小猫换一个物品示范，最后一步仍由你完成。'
+  ];
+
+  const LESSON1_MICROTASKS = [
+    nceMicrotask({
+      microtaskId: 'L01-M01',
+      lessonId: 'lesson1',
+      title: '谁的手提包',
+      stepLabel: '第一案 · 1 / 5',
+      sceneMode: 'handbag-arrival',
+      prompt: '先听完，再帮忙',
+      completedFeedback: '你找到了手提包的主人，也把声音和物品连起来了。',
+      nextCue: { entityId: 'case-stamp', label: '回看线索' },
+      exposureRefs: [
+        'L01-I01', 'L01-Q01',
+        ...Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`),
+        ...Array.from({ length: 11 }, (_, index) => `L01-W${String(index + 1).padStart(2, '0')}`)
+      ],
+      evidenceRefs: ['L01-D03', 'L01-D05', 'L01-D06', 'L01-W07'],
+      targetResults: [
+        nceTargetResult({
+          resultId: 'NCE-U01-T04:L01-M01:owner',
+          targetNumber: 4,
+          stepId: 'L01-M01:S02',
+          sourceRef: 'L01-D06',
+          channel: 'meaning',
+          evidenceMode: 'ownership-exchange',
+          variantId: 'handbag-owner'
+        }),
+        t1Result('L01-M01', 'L01-M01:S03', 'L01-W07', 'audio')
+      ],
+      steps: [
+        {
+          stepId: 'L01-M01:S01',
+          kind: 'audio-sequence',
+          prompt: '完整听七句',
+          audioSourceRefs: Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`),
+          gate: AUDIO_ENDED_GATE,
+          textVisibility: 'hidden-until-complete'
+        },
+        {
+          stepId: 'L01-M01:S02',
+          kind: 'perform-action',
+          prompt: '把包交给主人',
+          entityIds: ['handbag'],
+          targetEntityIds: ['station-keeper', 'handbag-owner'],
+          answerRule: {
+            type: 'perform-action',
+            action: 'give',
+            entityId: 'handbag',
+            targetEntityId: 'handbag-owner'
+          },
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L01-M01:S03',
+          kind: 'match-entity',
+          prompt: '听声音，找物品',
+          challengeSourceRefs: ['L01-W07'],
+          optionEntityIds: ['handbag', 'book', 'pen'],
+          answerRule: { type: 'match-entity', pairs: { 'L01-W07': 'handbag' } },
+          gate: AUDIO_ENDED_GATE,
+          support: [...AUDIO_SUPPORT]
+        },
+        {
+          stepId: 'L01-M01:S04',
+          kind: 'source-reveal',
+          prompt: '收好黄铜标签',
+          sourceRef: 'L01-W07',
+          audioSourceRefs: ['L01-W07'],
+          gate: AUDIO_ENDED_GATE
+        }
+      ],
+      requiredFactIds: ['owner-chosen', 'handbag-audio-matched', 'handbag-label-heard'],
+      checkpointFacts: ['handbag-returned', 'case-clue-owner']
+    }),
+    nceMicrotask({
+      microtaskId: 'L01-M02',
+      lessonId: 'lesson1',
+      title: '礼貌问一问',
+      stepLabel: '第一案 · 2 / 5',
+      sceneMode: 'attention-replay',
+      prompt: '先叫住她，再询问',
+      completedFeedback: '你礼貌地叫住了她，也问清了手提包。',
+      nextCue: { entityId: 'case-stamp', label: '回声线索' },
+      exposureRefs: ['L01-D01', 'L01-D02', 'L01-D03', 'L01-N01'],
+      evidenceRefs: ['L01-D01', 'L01-D03'],
+      targetResults: [
+        nceTargetResult({
+          resultId: 'NCE-U01-T02:L01-M02:attention', targetNumber: 2,
+          stepId: 'L01-M02:S01', sourceRef: 'L01-D01', channel: 'meaning',
+          evidenceMode: 'polite-attention-choice', variantId: 'station-keeper'
+        }),
+        nceTargetResult({
+          resultId: 'NCE-U01-T04:L01-M02:question', targetNumber: 4,
+          stepId: 'L01-M02:S03', sourceRef: 'L01-D03', channel: 'meaning',
+          evidenceMode: 'ownership-exchange', variantId: 'handbag-question'
+        })
+      ],
+      steps: [
+        {
+          stepId: 'L01-M02:S01', kind: 'select-one', prompt: '礼貌叫住她',
+          optionSourceRefs: ['L01-D01', 'L01-D07'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
+          feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L01-M02:S02', kind: 'audio-sequence', prompt: '听她回应',
+          audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L01-M02:S03', kind: 'select-one', prompt: '完整问归属',
+          optionSourceRefs: ['L01-D03', 'L01-D01'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D03' },
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L01-M02:S04', kind: 'audio-sequence', prompt: '听完这句询问',
+          audioSourceRefs: ['L01-D03'], gate: AUDIO_ENDED_GATE
+        }
+      ],
+      requiredFactIds: ['attention-expression', 'yes-response-heard', 'ownership-question', 'question-audio-ended'],
+      checkpointFacts: ['case-clue-attention', 'note-excuse-me-enacted']
+    }),
+    nceMicrotask({
+      microtaskId: 'L01-M03',
+      lessonId: 'lesson1',
+      title: '没懂就请再说',
+      stepLabel: '第一案 · 3 / 5',
+      sceneMode: 'repair-and-return',
+      prompt: '替她请求再说一遍',
+      completedFeedback: '你帮她修好了对话，手提包终于回到主人手里。',
+      nextCue: { entityId: 'case-stamp', label: '感谢线索' },
+      exposureRefs: ['L01-D04', 'L01-D05', 'L01-D06', 'L01-N02'],
+      evidenceRefs: ['L01-D04', 'L01-D05', 'L01-D06'],
+      targetResults: [
+        nceTargetResult({
+          resultId: 'NCE-U01-T03:L01-M03:repair', targetNumber: 3,
+          stepId: 'L01-M03:S01', sourceRef: 'L01-D04', channel: 'meaning',
+          evidenceMode: 'communication-repair-choice', variantId: 'handbag-owner'
+        })
+      ],
+      steps: [
+        {
+          stepId: 'L01-M03:S01', kind: 'select-one', prompt: '她没有听清',
+          optionSourceRefs: ['L01-D04', 'L01-D07'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D04' },
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L01-M03:S02', kind: 'audio-sequence', prompt: '听完重说和确认',
+          audioSourceRefs: ['L01-D04', 'L01-D05', 'L01-D06'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L01-M03:S03', kind: 'perform-action', prompt: '亲手归还手提包',
+          entityIds: ['handbag'], targetEntityIds: ['handbag-owner'],
+          answerRule: { type: 'perform-action', action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+        }
+      ],
+      requiredFactIds: ['repair-expression', 'repair-dialogue-ended', 'handbag-return-action'],
+      checkpointFacts: ['case-clue-repair', 'handbag-with-owner', 'note-pardon-enacted']
+    }),
+    nceMicrotask({
+      microtaskId: 'L01-M04',
+      lessonId: 'lesson1',
+      title: '换个角色说谢谢',
+      stepLabel: '第一案 · 4 / 5',
+      sceneMode: 'badge-return',
+      prompt: '收到徽章后说谢谢',
+      completedFeedback: '这一次你是收到物品的人，也礼貌地说了谢谢。',
+      nextCue: { entityId: 'case-stamp', label: '归档线索' },
+      exposureRefs: ['L01-D07'],
+      evidenceRefs: ['L01-D07'],
+      targetResults: [
+        nceTargetResult({
+          resultId: 'NCE-U01-T05:L01-M04:thanks', targetNumber: 5,
+          stepId: 'L01-M04:S03', sourceRef: 'L01-D07', channel: 'meaning',
+          evidenceMode: 'thanks-in-context', variantId: 'badge-return'
+        })
+      ],
+      steps: [
+        {
+          stepId: 'L01-M04:S01', kind: 'audio-sequence', prompt: '听完教材最后一句',
+          audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L01-M04:S02', kind: 'perform-action', prompt: '接回你的徽章',
+          entityIds: ['star-badge'], targetEntityIds: ['child'],
+          answerRule: { type: 'perform-action', action: 'receive', entityId: 'star-badge', targetEntityId: 'child' }
+        },
+        {
+          stepId: 'L01-M04:S03', kind: 'select-one', prompt: '把感谢送进说话槽',
+          optionSourceRefs: ['L01-D07', 'L01-D04'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
+          feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        }
+      ],
+      requiredFactIds: ['textbook-thanks-ended', 'badge-received', 'thanks-expression'],
+      checkpointFacts: ['case-clue-thanks', 'star-badge-with-child']
+    }),
+    nceMicrotask({
+      microtaskId: 'L01-M05',
+      lessonId: 'lesson1',
+      title: '案件归档',
+      stepLabel: '第一案 · 5 / 5',
+      sceneMode: 'chapter-archive',
+      prompt: '点亮线索，盖下印章',
+      completedFeedback: '手提包案件归档了，工作灯和第二间整理室已经打开。',
+      nextCue: { entityId: 'opening-lever', label: '继续整理室' },
+      exposureRefs: ['L01-Q01'],
+      evidenceRefs: [],
+      steps: [
+        {
+          stepId: 'L01-M05:S01', kind: 'all-of', prompt: '点亮四张案件线索',
+          factIds: ['case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'],
+          answerRule: {
+            type: 'all-of',
+            requiredFactIds: ['case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks']
+          }
+        },
+        {
+          stepId: 'L01-M05:S02', kind: 'perform-action', prompt: '亲手盖下结案章',
+          entityIds: ['case-stamp'], targetEntityIds: ['case-file'],
+          answerRule: { type: 'perform-action', action: 'stamp', entityId: 'case-stamp', targetEntityId: 'case-file' }
+        }
+      ],
+      growthBoundary: 'chapter-interior',
+      requiredFactIds: ['four-case-clues', 'case-stamped'],
+      checkpointFacts: ['lesson1-complete', 'work-lamp-on', 'sorting-room-open']
+    })
+  ];
+
+  const LESSON2_MICROTASKS = [
+    nceMicrotask({
+      microtaskId: 'L02-M01',
+      lessonId: 'lesson2',
+      title: '随身物品上架',
+      stepLabel: '整理室 · 1 / 7',
+      sceneMode: 'pocket-shelf',
+      prompt: '打开布袋，听音上架',
+      completedFeedback: '四件随身物品都听清了，也一起上架了。',
+      nextCue: { entityId: 'case-stamp', label: '打开旧标签柜' },
+      exposureRefs: ['L02-I01', 'L02-W01', 'L02-W02', 'L02-W03', 'L02-W04'],
+      evidenceRefs: ['L02-W03', 'L02-W01', 'L02-W04', 'L02-W02'],
+      targetResults: [
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W03', 'audio'),
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W01', 'audio'),
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W04', 'audio'),
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W02', 'audio')
+      ],
+      steps: [
+        {
+          stepId: 'L02-M01:S01', kind: 'explore-batch', prompt: '按顺序打开四只布袋',
+          sourceRefs: ['L02-W01', 'L02-W02', 'L02-W03', 'L02-W04'],
+          entityIds: ['pen', 'pencil', 'book', 'watch'],
+          gate: AUDIO_ENDED_GATE,
+          revealPolicy: 'word-form-after-ended'
+        },
+        {
+          stepId: 'L02-M01:S02', kind: 'match-entity-batch', prompt: '听声音，找物品',
+          challengeSourceRefs: ['L02-W03', 'L02-W01', 'L02-W04', 'L02-W02'],
+          optionEntityIds: ['pen', 'pencil', 'book', 'watch'],
+          answerRule: {
+            type: 'match-entity',
+            pairs: { 'L02-W01': 'pen', 'L02-W02': 'pencil', 'L02-W03': 'book', 'L02-W04': 'watch' }
+          },
+          gate: AUDIO_ENDED_GATE,
+          support: [...AUDIO_SUPPORT]
+        }
+      ],
+      requiredFactIds: ['pocket-items-explored', 'four-audio-cells-complete', 'pocket-items-shelved'],
+      checkpointFacts: ['pocket-shelf-ready']
+    }),
+    nceMicrotask({
+      microtaskId: 'L02-M02',
+      lessonId: 'lesson2',
+      title: '标签认领',
+      stepLabel: '整理室 · 2 / 7',
+      sceneMode: 'pocket-labels-and-watch',
+      prompt: '认标签，再归还手表',
+      completedFeedback: '五张标签登记好了，第一位认领者拿回了手表。',
+      nextCue: { entityId: 'case-stamp', label: '查看衣架线索' },
+      exposureRefs: ['L01-W07', 'L02-W01', 'L02-W02', 'L02-W03', 'L02-W04', 'L01-D01', 'L01-D02', 'L01-D03', 'L01-D06', 'L01-D07'],
+      evidenceRefs: ['L01-W07', 'L02-W04', 'L02-W02', 'L02-W03', 'L02-W01', 'L01-D01', 'L01-D03', 'L01-D06'],
+      targetResults: [
+        t1Result('L02-M02', 'L02-M02:S01', 'L01-W07', 'word-form'),
+        t1Result('L02-M02', 'L02-M02:S01', 'L02-W04', 'word-form'),
+        t1Result('L02-M02', 'L02-M02:S01', 'L02-W02', 'word-form'),
+        t1Result('L02-M02', 'L02-M02:S01', 'L02-W03', 'word-form'),
+        t1Result('L02-M02', 'L02-M02:S01', 'L02-W01', 'word-form'),
+        nceTargetResult({
+          resultId: 'NCE-U01-T02:L02-M02:attention', targetNumber: 2,
+          stepId: 'L02-M02:S02', sourceRef: 'L01-D01', channel: 'meaning',
+          evidenceMode: 'polite-attention-choice', variantId: 'first-claimant'
+        }),
+        nceTargetResult({
+          resultId: 'NCE-U01-T04:L02-M02:watch', targetNumber: 4,
+          stepId: 'L02-M02:S04', sourceRef: 'L02-W04', channel: 'meaning',
+          evidenceMode: 'ownership-exchange', variantId: 'watch'
+        })
+      ],
+      steps: [
+        {
+          stepId: 'L02-M02:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
+          prompt: '看标签，找物品',
+          challengeSourceRefs: ['L01-W07', 'L02-W04', 'L02-W02', 'L02-W03', 'L02-W01'],
+          optionEntityIds: ['handbag', 'watch', 'pencil', 'book', 'pen'],
+          answerRule: {
+            type: 'match-entity',
+            pairs: {
+              'L01-W07': 'handbag', 'L02-W01': 'pen', 'L02-W02': 'pencil',
+              'L02-W03': 'book', 'L02-W04': 'watch'
+            }
+          },
+          feedbackGate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M02:S02', kind: 'select-one', prompt: '先礼貌叫住他',
+          optionSourceRefs: ['L01-D01', 'L01-D07'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
+          feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M02:S03', kind: 'audio-sequence', prompt: '听对方回应',
+          audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L02-M02:S04', kind: 'place-in-slot', prompt: '把手表放进问句',
+          slotId: 'ownership-item', optionEntityIds: ['watch', 'book', 'pen', 'pencil'],
+          expressionContentRef: 'NCE-U01-C-Q-WATCH',
+          answerRule: { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
+          feedbackAudioContentRef: 'NCE-U01-C-Q-WATCH', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M02:S05', kind: 'audio-sequence', prompt: '听完肯定回答',
+          audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L02-M02:S06', kind: 'perform-action', prompt: '亲手归还手表',
+          entityIds: ['watch'], targetEntityIds: ['first-claimant'],
+          answerRule: { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'first-claimant' }
+        },
+        {
+          stepId: 'L02-M02:S07', kind: 'audio-sequence', prompt: '听完最后的感谢',
+          audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
+        }
+      ],
+      requiredFactIds: ['five-word-form-cells', 'watch-attention', 'watch-question-ended', 'watch-confirmed', 'watch-returned', 'watch-thanks-ended'],
+      checkpointFacts: ['claim-record-1', 'watch-with-first-claimant']
+    }),
+    nceMicrotask({
+      microtaskId: 'L02-M03',
+      lessonId: 'lesson2',
+      title: '衣帽架归位',
+      stepLabel: '整理室 · 3 / 7',
+      sceneMode: 'moving-wardrobe',
+      prompt: '拉开衣罩，听音归位',
+      completedFeedback: '四件衣物都听清了，衣帽架恢复了秩序。',
+      nextCue: { entityId: 'case-stamp', label: '打开衣签登记册' },
+      exposureRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08'],
+      evidenceRefs: ['L02-W08', 'L02-W05', 'L02-W06', 'L02-W07'],
+      targetResults: [
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W08', 'audio'),
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W05', 'audio'),
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W06', 'audio'),
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W07', 'audio')
+      ],
+      steps: [
+        {
+          stepId: 'L02-M03:S01', kind: 'explore-batch', prompt: '按顺序拉开四只衣罩',
+          sourceRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08'],
+          entityIds: ['coat', 'dress', 'skirt', 'shirt'], gate: AUDIO_ENDED_GATE,
+          revealPolicy: 'word-form-after-ended'
+        },
+        {
+          stepId: 'L02-M03:S02', kind: 'match-entity-batch', prompt: '听声音，找衣物',
+          challengeSourceRefs: ['L02-W08', 'L02-W05', 'L02-W06', 'L02-W07'],
+          optionEntityIds: ['coat', 'dress', 'skirt', 'shirt'],
+          answerRule: {
+            type: 'match-entity',
+            pairs: { 'L02-W05': 'coat', 'L02-W06': 'dress', 'L02-W07': 'skirt', 'L02-W08': 'shirt' }
+          },
+          gate: AUDIO_ENDED_GATE,
+          support: [...AUDIO_SUPPORT]
+        }
+      ],
+      requiredFactIds: ['clothes-explored', 'four-clothes-audio-cells', 'wardrobe-ordered'],
+      checkpointFacts: ['wardrobe-ready']
+    }),
+    nceMicrotask({
+      microtaskId: 'L02-M04',
+      lessonId: 'lesson2',
+      title: '衣签归位',
+      stepLabel: '整理室 · 4 / 7',
+      sceneMode: 'clothing-labels-and-coat',
+      prompt: '认衣签，接回外套',
+      completedFeedback: '衣签都登记好了，你也认领回自己的外套。',
+      nextCue: { entityId: 'case-stamp', label: '查看钥匙线索' },
+      exposureRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08', 'L01-D06', 'L01-D07'],
+      evidenceRefs: ['L02-W07', 'L02-W05', 'L02-W06', 'L02-W08', 'L01-D06', 'L01-D07'],
+      targetResults: [
+        t1Result('L02-M04', 'L02-M04:S01', 'L02-W07', 'word-form'),
+        t1Result('L02-M04', 'L02-M04:S01', 'L02-W05', 'word-form'),
+        t1Result('L02-M04', 'L02-M04:S01', 'L02-W06', 'word-form'),
+        t1Result('L02-M04', 'L02-M04:S01', 'L02-W08', 'word-form'),
+        nceTargetResult({
+          resultId: 'NCE-U01-T04:L02-M04:coat', targetNumber: 4,
+          stepId: 'L02-M04:S03', sourceRef: 'L01-D06', channel: 'meaning',
+          evidenceMode: 'ownership-exchange', variantId: 'coat'
+        }),
+        nceTargetResult({
+          resultId: 'NCE-U01-T05:L02-M04:thanks', targetNumber: 5,
+          stepId: 'L02-M04:S05', sourceRef: 'L01-D07', channel: 'meaning',
+          evidenceMode: 'thanks-in-context', variantId: 'coat-return'
+        })
+      ],
+      steps: [
+        {
+          stepId: 'L02-M04:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
+          prompt: '看衣签，找衣物',
+          challengeSourceRefs: ['L02-W07', 'L02-W05', 'L02-W06', 'L02-W08'],
+          optionEntityIds: ['coat', 'dress', 'skirt', 'shirt'],
+          answerRule: {
+            type: 'match-entity',
+            pairs: { 'L02-W05': 'coat', 'L02-W06': 'dress', 'L02-W07': 'skirt', 'L02-W08': 'shirt' }
+          },
+          feedbackGate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M04:S02', kind: 'audio-sequence', prompt: '听归还者询问',
+          audioContentRefs: ['NCE-U01-C-Q-COAT'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L02-M04:S03', kind: 'select-one', prompt: '确认这是你的外套',
+          optionSourceRefs: ['L01-D06', 'L01-D02'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D06' },
+          feedbackAudioSourceRef: 'L01-D06', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M04:S04', kind: 'perform-action', prompt: '亲手接回外套',
+          entityIds: ['coat'], targetEntityIds: ['child'],
+          answerRule: { type: 'perform-action', action: 'receive', entityId: 'coat', targetEntityId: 'child' }
+        },
+        {
+          stepId: 'L02-M04:S05', kind: 'select-one', prompt: '收到后礼貌致谢',
+          optionSourceRefs: ['L01-D07', 'L01-D04'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
+          feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        }
+      ],
+      requiredFactIds: ['four-clothes-word-form-cells', 'coat-question-ended', 'coat-confirmed', 'coat-received', 'coat-thanks'],
+      checkpointFacts: ['claim-record-2', 'coat-with-child']
+    }),
+    nceMicrotask({
+      microtaskId: 'L02-M05',
+      lessonId: 'lesson2',
+      title: '钥匙唤醒影像',
+      stepLabel: '整理室 · 5 / 7',
+      sceneMode: 'key-projections',
+      prompt: '看钥匙，听音入盒',
+      completedFeedback: '车钥匙和房屋钥匙都找到了自己的影像。',
+      nextCue: { entityId: 'case-stamp', label: '打开挂牌窗' },
+      exposureRefs: ['L02-W09', 'L02-W10'],
+      evidenceRefs: ['L02-W10', 'L02-W09'],
+      targetResults: [
+        t1Result('L02-M05', 'L02-M05:S02', 'L02-W10', 'audio'),
+        t1Result('L02-M05', 'L02-M05:S02', 'L02-W09', 'audio')
+      ],
+      steps: [
+        {
+          stepId: 'L02-M05:S01', kind: 'explore-batch', prompt: '依次唤醒两幅影像',
+          sourceRefs: ['L02-W09', 'L02-W10'], entityIds: ['car-key', 'house-key'],
+          gate: AUDIO_ENDED_GATE, revealPolicy: 'projection-after-ended'
+        },
+        {
+          stepId: 'L02-M05:S02', kind: 'match-entity-batch', prompt: '听声音，找钥匙',
+          challengeSourceRefs: ['L02-W10', 'L02-W09'], optionEntityIds: ['car-key', 'house-key'],
+          answerRule: { type: 'match-entity', pairs: { 'L02-W09': 'car-key', 'L02-W10': 'house-key' } },
+          gate: AUDIO_ENDED_GATE,
+          support: [...AUDIO_SUPPORT]
+        }
+      ],
+      requiredFactIds: ['keys-explored', 'two-key-audio-cells', 'keys-in-safe-box'],
+      checkpointFacts: ['key-box-ready']
+    }),
+    nceMicrotask({
+      microtaskId: 'L02-M06',
+      lessonId: 'lesson2',
+      title: '钥匙档案挂牌',
+      stepLabel: '整理室 · 6 / 7',
+      sceneMode: 'key-labels-and-claim',
+      prompt: '认钥匙，再完成认领',
+      completedFeedback: '两把钥匙都有档案，第三份认领记录也完成了。',
+      nextCue: { entityId: 'opening-lever', label: '启动开张总闸' },
+      exposureRefs: ['L02-W09', 'L02-W10', 'L01-D01', 'L01-D02', 'L01-D03', 'L01-D06', 'L01-D07'],
+      evidenceRefs: ['L02-W09', 'L02-W10', 'L01-D01', 'L01-D03', 'L01-D06'],
+      targetResults: [
+        t1Result('L02-M06', 'L02-M06:S01', 'L02-W09', 'word-form'),
+        t1Result('L02-M06', 'L02-M06:S01', 'L02-W10', 'word-form'),
+        nceTargetResult({
+          resultId: 'NCE-U01-T02:L02-M06:attention', targetNumber: 2,
+          stepId: 'L02-M06:S03', sourceRef: 'L01-D01', channel: 'meaning',
+          evidenceMode: 'polite-attention-choice', variantId: 'third-claimant'
+        }),
+        nceTargetResult({
+          resultId: 'NCE-U01-T04:L02-M06:key-question', targetNumber: 4,
+          stepId: 'L02-M06:S05', sourceRef: 'L01-D03', channel: 'meaning',
+          evidenceMode: 'ownership-exchange', variantId: 'selected-key'
+        })
+      ],
+      steps: [
+        {
+          stepId: 'L02-M06:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
+          prompt: '看档案牌，找钥匙', challengeSourceRefs: ['L02-W09', 'L02-W10'],
+          optionEntityIds: ['car-key', 'house-key'],
+          answerRule: { type: 'match-entity', pairs: { 'L02-W09': 'car-key', 'L02-W10': 'house-key' } },
+          feedbackGate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M06:S02', kind: 'select-case', prompt: '选择一份钥匙案件',
+          optionEntityIds: ['car-key', 'house-key'],
+          answerRule: { type: 'select-one', acceptedEntityIds: ['car-key', 'house-key'] },
+          storesFactId: 'selected-key-case'
+        },
+        {
+          stepId: 'L02-M06:S03', kind: 'select-one', prompt: '先礼貌叫住他',
+          optionSourceRefs: ['L01-D01', 'L01-D07'],
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
+          feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M06:S04', kind: 'audio-sequence', prompt: '听对方回应',
+          audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L02-M06:S05', kind: 'ordered-blocks', prompt: '铺好两块问句轨',
+          blockContentRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR'],
+          branchEntityIds: ['car-key', 'house-key'],
+          selectedEntityFactId: 'selected-key-case',
+          answerRule: {
+            type: 'ordered-blocks',
+            acceptedByEntityId: {
+              'car-key': ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W09'],
+              'house-key': ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W10']
+            }
+          },
+          feedbackAudioContentByEntityId: {
+            'car-key': 'NCE-U01-C-Q-CAR',
+            'house-key': 'NCE-U01-C-Q-HOUSE'
+          },
+          gate: AUDIO_ENDED_GATE,
+          support: [...MEANING_SUPPORT]
+        },
+        {
+          stepId: 'L02-M06:S06', kind: 'audio-sequence', prompt: '听完肯定回答',
+          audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
+        },
+        {
+          stepId: 'L02-M06:S07', kind: 'perform-action', prompt: '把钥匙交给认领者',
+          entityIds: ['car-key', 'house-key'], targetEntityIds: ['third-claimant'],
+          answerRule: {
+            type: 'perform-action', action: 'give-selected',
+            entityFactId: 'selected-key-case', targetEntityId: 'third-claimant'
+          }
+        },
+        {
+          stepId: 'L02-M06:S08', kind: 'audio-sequence', prompt: '听完最后的感谢',
+          audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
+        }
+      ],
+      requiredFactIds: ['two-key-word-form-cells', 'selected-key-case', 'key-attention', 'key-question-ended', 'key-confirmed', 'key-handed-over', 'key-thanks-ended'],
+      checkpointFacts: ['claim-record-3', 'three-claim-records-ready']
+    }),
+    nceMicrotask({
+      microtaskId: 'L02-M07',
+      lessonId: 'lesson2',
+      title: '三案合闸',
+      stepLabel: '整理室 · 7 / 7',
+      sceneMode: 'station-opening',
+      prompt: '点亮三案，亲手开张',
+      completedFeedback: '星灯失物招领站正式开张！今天的建筑已经保存。',
+      nextCue: { entityId: 'opening-lever', label: '查看今日建设' },
+      exposureRefs: [],
+      evidenceRefs: [],
+      steps: [
+        {
+          stepId: 'L02-M07:S01', kind: 'all-of', prompt: '任意顺序点亮三枚案件章',
+          factIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'],
+          answerRule: { type: 'all-of', requiredFactIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'] }
+        },
+        {
+          stepId: 'L02-M07:S02', kind: 'perform-action', prompt: '亲手拉下开张总闸',
+          entityIds: ['opening-lever'], targetEntityIds: ['station-power'],
+          answerRule: { type: 'perform-action', action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
+        }
+      ],
+      growthBoundary: 'unit-built',
+      requiredFactIds: ['three-claim-records-read', 'three-case-stamps-lit', 'opening-lever-pulled'],
+      checkpointFacts: ['lesson2-complete', 'unit-built-same-day', 'landmark-state-5', 'reviews-scheduled']
+    })
+  ];
+
+  const LESSON1_2_MICROTASKS_BY_BEAT = {
+    discover: LESSON1_MICROTASKS,
+    understand: LESSON2_MICROTASKS.slice(0, 2),
+    teach: LESSON2_MICROTASKS.slice(2, 4),
+    transfer: LESSON2_MICROTASKS.slice(4, 6),
+    build: LESSON2_MICROTASKS.slice(6)
+  };
+
   const LESSON49_SOURCES = {
     'L49-Q01': source('L49-Q01', 'textbook-question', 'What does Mr. Bird like?'),
     'L49-D01': source('L49-D01', 'dialogue', 'Do you want any meat today, Mrs. Bird?', {
@@ -852,18 +1802,25 @@
 
   function unit({
     number,
+    unitId: authoredUnitId,
+    districtId = 'first-book-49-60',
     lessons,
     landmarkId,
     title,
     status = 'planned',
+    publicationScope = 'course-catalog',
+    runtimeProfile = 'five-beat-v1',
     contexts,
     targets,
     tasks = [],
     vocabulary = [],
     lessonContent = {},
-    microtasksByBeat = {}
+    microtasksByBeat = {},
+    authoredContent = {},
+    entities = {},
+    experience = null
   }) {
-    const unitId = `FLC-U${String(number).padStart(2, '0')}`;
+    const unitId = authoredUnitId || `FLC-U${String(number).padStart(2, '0')}`;
     const unitTargets = targets.map((definition, index) => target(
       `${unitId}-T${String(index + 1).padStart(2, '0')}`,
       definition.title,
@@ -872,11 +1829,13 @@
     ));
     return {
       unitId,
-      districtId: 'first-book-49-60',
+      districtId,
       lessonIds: lessons.map(lesson => `lesson${lesson}`),
       landmarkId,
       title,
       status,
+      publicationScope,
+      runtimeProfile,
       beats: BEATS.map((beat, beatIndex) => {
         const authored = tasks[beatIndex];
         const authoredMicrotasks = microtasksByBeat[beat.beatId] || [];
@@ -908,11 +1867,64 @@
       }),
       targets: unitTargets,
       vocabulary,
-      lessonContent
+      lessonContent,
+      authoredContent,
+      entities,
+      ...(experience ? { experience } : {})
     };
   }
 
   const TEACHING_UNITS = deepFreeze([
+    unit({
+      unitId: 'NCE-U01',
+      districtId: 'first-book-1-12',
+      lessons: [1, 2],
+      landmarkId: 'starlight-lost-and-found',
+      title: '星灯失物招领站',
+      status: 'candidate',
+      publicationScope: 'local-poc',
+      runtimeProfile: 'microtask-v2',
+      contexts: ['lost-and-found-station', 'neighbourhood-return-desk'],
+      targets: [
+        { title: '把物品声音和英文词形连到正确物品', evidenceModes: ['audio-object-match', 'word-form-object-match'] },
+        { title: '在需要引起注意时使用 Excuse me.', evidenceModes: ['polite-attention-choice'] },
+        { title: '在没有听清时使用 Pardon?', evidenceModes: ['communication-repair-choice'] },
+        { title: '询问并确认物品归属', evidenceModes: ['ownership-exchange'] },
+        { title: '在收到物品后礼貌致谢', evidenceModes: ['thanks-in-context'] }
+      ],
+      lessonContent: {
+        lesson1: LESSON1_CONTENT,
+        lesson2: LESSON2_CONTENT
+      },
+      authoredContent: NCE_AUTHORED_CONTENT,
+      entities: NCE_ENTITIES,
+      experience: {
+        documentTitle: 'Lesson 1–2 · 星灯失物招领站',
+        lessonLabel: 'NEW CONCEPT ENGLISH · LESSON 1–2',
+        ambientAudioSrc: '/poc/lesson1-2-experience/audio/starlight-station-ambience.mp3',
+        voiceNotice: '本地试听语音由 AI 生成，待老师审核',
+        arrival: {
+          kicker: '晨光原野 · 第一座小站',
+          title: '一只手提包在等主人',
+          copy: '和探险小猫一起听、找、归还，把失物招领站慢慢点亮。',
+          actionLabel: '推开小站的门'
+        },
+        chapterStop: {
+          kicker: 'Lesson 1 完成',
+          title: '第一份案件归档了',
+          copy: '工作灯亮起，第二间整理室已经开放。地图建筑还没有增长。',
+          continueLabel: '继续整理室',
+          restLabel: '先休息'
+        },
+        completion: {
+          kicker: 'Lesson 1–2 当日学习完成',
+          title: '星灯失物招领站开张',
+          copy: '三份认领记录已经保存。之后还会在新的日子和情境中回来练习。',
+          replayLabel: '重新体验'
+        }
+      },
+      microtasksByBeat: LESSON1_2_MICROTASKS_BY_BEAT
+    }),
     unit({
       number: 1,
       lessons: [49, 50],
@@ -1176,6 +2188,9 @@
     const targetIds = new Set();
     const taskIds = new Set();
     const microtaskIds = new Set();
+    const microtaskStepIds = new Set();
+    const targetResultIds = new Set();
+    const variantCellIds = new Set();
 
     for (const current of units) {
       if (unitIds.has(current.unitId)) errors.push(`${current.unitId} belongs to multiple units`);
@@ -1203,7 +2218,10 @@
       for (const beat of current.beats || []) {
         const task = beat.task;
         if (!task) {
-          if (current.status === 'candidate') {
+          const ownsMicrotaskFlow = current.runtimeProfile === 'microtask-v2'
+            && Array.isArray(beat.microtasks)
+            && beat.microtasks.length > 0;
+          if (current.status === 'candidate' && !ownsMicrotaskFlow) {
             errors.push(`${beat.beatId} must declare an authored task for candidate unit ${current.unitId}`);
           }
           continue;
@@ -1243,6 +2261,14 @@
 
       const authoredMicrotasks = (current.beats || [])
         .flatMap(beat => beat.microtasks || []);
+      const knownSourceIds = new Set(Object.values(current.lessonContent || {})
+        .flatMap(lesson => Object.keys(lesson.sources || {})));
+      const knownContentIds = new Set(Object.keys(current.authoredContent || {}));
+      const knownEntityIds = new Set(Object.keys(current.entities || {}));
+      const declarativeRuleTypes = new Set([
+        'select-one', 'match-entity', 'place-in-slot',
+        'ordered-blocks', 'perform-action', 'all-of'
+      ]);
       for (const beat of current.beats || []) {
         const beatMicrotasks = beat.microtasks || [];
         if (beatMicrotasks.length > 0 && beat.completionRule !== 'all-required') {
@@ -1287,31 +2313,187 @@
               errors.push(`${microtask.microtaskId} formative binding is outside its target contract`);
             }
           }
+          if (current.runtimeProfile === 'microtask-v2') {
+            if (
+              microtask.persistence?.atomic !== true
+              || microtask.persistence?.resumePolicy !== 'restart-microtask'
+            ) {
+              errors.push(`${microtask.microtaskId} must declare one atomic restartable persistence boundary`);
+            }
+            if (!Array.isArray(microtask.steps) || microtask.steps.length === 0) {
+              errors.push(`${microtask.microtaskId} must author at least one runtime step`);
+            }
+            if (
+              microtask.growthBoundary === 'unit-built'
+              && microtask !== authoredMicrotasks[authoredMicrotasks.length - 1]
+            ) {
+              errors.push(`${microtask.microtaskId} unit growth is reserved for the final microtask`);
+            }
+            if (
+              microtask.growthBoundary !== 'unit-built'
+              && microtask.checkpointAfterSuccess?.buildStage !== undefined
+            ) {
+              errors.push(`${microtask.microtaskId} cannot grow a landmark before the unit boundary`);
+            }
+
+            const localStepIds = new Set((microtask.steps || []).map(step => step.stepId));
+            const localStoredFactIds = new Set((microtask.steps || [])
+              .map(step => step.storesFactId)
+              .filter(Boolean));
+            for (const step of microtask.steps || []) {
+              if (typeof step.stepId !== 'string' || step.stepId.length === 0) {
+                errors.push(`${microtask.microtaskId} runtime step must declare stepId`);
+              } else if (microtaskStepIds.has(step.stepId)) {
+                errors.push(`${step.stepId} is duplicated`);
+              } else {
+                microtaskStepIds.add(step.stepId);
+              }
+              if (step.answerRule && !declarativeRuleTypes.has(step.answerRule.type)) {
+                errors.push(`${step.stepId} must use a declarative answer rule`);
+              }
+              if (
+                step.answerRule?.type === 'ordered-blocks'
+                && !localStoredFactIds.has(step.selectedEntityFactId)
+              ) {
+                errors.push(`${step.stepId} must bind its branch to a stored child choice`);
+              }
+              const stepSourceRefs = [
+                ...(step.audioSourceRefs || []),
+                ...(step.challengeSourceRefs || []),
+                ...(step.sourceRefs || []),
+                ...(step.optionSourceRefs || []),
+                ...(step.feedbackAudioSourceRef ? [step.feedbackAudioSourceRef] : [])
+              ];
+              for (const sourceRef of stepSourceRefs) {
+                if (!knownSourceIds.has(sourceRef)) {
+                  errors.push(`${step.stepId} references unknown source ${sourceRef}`);
+                }
+              }
+              const stepContentRefs = [
+                ...(step.audioContentRefs || []),
+                ...(step.blockContentRefs || []),
+                ...(step.expressionContentRef ? [step.expressionContentRef] : []),
+                ...(step.feedbackAudioContentRef ? [step.feedbackAudioContentRef] : []),
+                ...Object.values(step.feedbackAudioContentByEntityId || {})
+              ];
+              for (const contentRef of stepContentRefs) {
+                if (!knownContentIds.has(contentRef)) {
+                  errors.push(`${step.stepId} references unknown authored content ${contentRef}`);
+                }
+              }
+              const stepEntityRefs = [
+                ...(step.entityIds || []),
+                ...(step.optionEntityIds || []),
+                ...(step.branchEntityIds || []),
+                ...(step.targetEntityIds || [])
+              ];
+              for (const entityId of stepEntityRefs) {
+                if (!knownEntityIds.has(entityId)) {
+                  errors.push(`${step.stepId} references unknown entity ${entityId}`);
+                }
+              }
+            }
+
+            for (const result of microtask.targetResults || []) {
+              if (targetResultIds.has(result.resultId)) {
+                errors.push(`${result.resultId} is duplicated`);
+              } else {
+                targetResultIds.add(result.resultId);
+              }
+              const cellId = `${result.targetId}:${result.variantId}:${result.channel}`;
+              if (variantCellIds.has(cellId)) {
+                errors.push(`${result.variantId}:${result.channel} is duplicated`);
+              } else {
+                variantCellIds.add(cellId);
+              }
+              const boundTarget = (current.targets || []).find(target => target.targetId === result.targetId);
+              if (!boundTarget) {
+                errors.push(`${microtask.microtaskId} target result references unknown target ${result.targetId}`);
+                continue;
+              }
+              if (!knownSourceIds.has(result.sourceRef)) {
+                errors.push(`${microtask.microtaskId} target result references unknown source ${result.sourceRef}`);
+              }
+              if (!localStepIds.has(result.stepId)) {
+                errors.push(`${microtask.microtaskId} target result references unknown step ${result.stepId}`);
+              }
+              if (!boundTarget.evidenceModes.includes(result.evidenceMode)) {
+                errors.push(`${microtask.microtaskId} target result evidence mode is outside ${result.targetId}`);
+              }
+            }
+          }
         }
       }
+      const unitSourceEntries = Object.entries(current.lessonContent || {})
+        .flatMap(([lessonId, lesson]) => Object.entries(lesson.sources || {})
+          .map(([sourceId, item]) => [sourceId, { lessonId, item }]));
+      const unitSourceIds = new Set(unitSourceEntries.map(([sourceId]) => sourceId));
+      const sourceOwners = unitSourceEntries.reduce((groups, entry) => {
+        const sourceId = entry[0];
+        groups[sourceId] = groups[sourceId] || [];
+        groups[sourceId].push(entry);
+        return groups;
+      }, {});
+      for (const [sourceId, owners] of Object.entries(sourceOwners)) {
+        if (owners.length > 1) errors.push(`${sourceId} is duplicated inside ${current.unitId}`);
+      }
+
       for (const [lessonId, lesson] of Object.entries(current.lessonContent || {})) {
         const sourceIds = new Set(Object.keys(lesson.sources || {}));
         const requiredSourceIds = new Set(lesson.requiredSourceIds || []);
         const lessonTasks = authoredMicrotasks.filter(task => task.lessonId === lessonId);
-        const exposed = new Set(lessonTasks.flatMap(task => task.exposureRefs || []));
-        const evidenced = new Set(lessonTasks.flatMap(task => task.evidenceRefs || []));
+        const exposed = new Set(authoredMicrotasks.flatMap(task => task.exposureRefs || []));
+        const evidenced = new Set(authoredMicrotasks.flatMap(task => task.evidenceRefs || []));
 
         for (const sourceId of requiredSourceIds) {
           if (!sourceIds.has(sourceId)) {
             errors.push(`${sourceId} required source is missing from ${lessonId}`);
             continue;
           }
-          if (!exposed.has(sourceId)) {
-            errors.push(`${sourceId} requires exposure coverage in ${lessonId}`);
+          const item = lesson.sources[sourceId];
+          if (!item.coveragePolicy) {
+            if (!exposed.has(sourceId)) {
+              errors.push(`${sourceId} requires exposure coverage in ${lessonId}`);
+            }
+            if (!evidenced.has(sourceId)) {
+              errors.push(`${sourceId} requires evidence coverage in ${lessonId}`);
+            }
           }
-          if (!evidenced.has(sourceId)) {
+        }
+
+        for (const [sourceId, item] of Object.entries(lesson.sources || {})) {
+          if (!item.coveragePolicy) continue;
+          if (!['target', 'support', 'context'].includes(item.sourceRole)) {
+            errors.push(`${sourceId} must declare target, support, or context source role`);
+          }
+          if (!['evidence', 'exposure', 'optional', 'omitted'].includes(item.coveragePolicy)) {
+            errors.push(`${sourceId} has an invalid coverage policy`);
+            continue;
+          }
+          if (item.coveragePolicy === 'evidence' || item.coveragePolicy === 'exposure') {
+            if (!requiredSourceIds.has(sourceId)) {
+              errors.push(`${sourceId} must be listed as required in ${lessonId}`);
+            }
+            if (!exposed.has(sourceId)) {
+              errors.push(`${sourceId} requires exposure coverage in ${lessonId}`);
+            }
+          }
+          if (item.coveragePolicy === 'evidence' && !evidenced.has(sourceId)) {
             errors.push(`${sourceId} requires evidence coverage in ${lessonId}`);
+          }
+          if (item.coveragePolicy === 'omitted') {
+            if (typeof item.omissionReason !== 'string' || item.omissionReason.length === 0) {
+              errors.push(`${sourceId} omitted source must declare a reason`);
+            }
+            if (exposed.has(sourceId) || evidenced.has(sourceId)) {
+              errors.push(`${sourceId} omitted source cannot appear in runtime coverage`);
+            }
           }
         }
 
         for (const task of lessonTasks) {
           for (const sourceId of [...(task.exposureRefs || []), ...(task.evidenceRefs || [])]) {
-            if (!sourceIds.has(sourceId)) {
+            if (!unitSourceIds.has(sourceId)) {
               errors.push(`${task.microtaskId} references unknown source ${sourceId}`);
             }
           }

@@ -66,6 +66,671 @@
     return { correct: false, mismatchPath: path };
   }
 
+  function evaluateRule(rule, response, path = []) {
+    if (!rule || typeof rule !== 'object' || !response || typeof response !== 'object') {
+      return { correct: false, mismatchPath: path };
+    }
+    if (rule.type === 'select-one') {
+      const checks = [
+        ['sourceRef', rule.acceptedSourceRef],
+        ['contentRef', rule.acceptedContentRef]
+      ].filter(([, expected]) => typeof expected === 'string');
+      if (Array.isArray(rule.acceptedEntityIds)) {
+        const correct = rule.acceptedEntityIds.includes(response.entityId);
+        return { correct, mismatchPath: correct ? null : [...path, 'entityId'] };
+      }
+      if (checks.length !== 1) return { correct: false, mismatchPath: path };
+      const [field, expected] = checks[0];
+      const correct = response[field] === expected;
+      return { correct, mismatchPath: correct ? null : [...path, field] };
+    }
+    if (rule.type === 'match-entity') {
+      const expected = rule.pairs?.[response.sourceRef];
+      const correct = typeof expected === 'string' && response.entityId === expected;
+      return { correct, mismatchPath: correct ? null : [...path, 'entityId'] };
+    }
+    if (rule.type === 'place-in-slot') {
+      const correct = response.slotId === rule.slotId && response.entityId === rule.entityId;
+      return { correct, mismatchPath: correct ? null : [...path, 'slotId'] };
+    }
+    if (rule.type === 'ordered-blocks') {
+      const expected = rule.acceptedByEntityId?.[response.selectedEntityId];
+      const actual = response.blockRefs;
+      const correct = Array.isArray(expected)
+        && Array.isArray(actual)
+        && expected.length === actual.length
+        && expected.every((blockRef, index) => blockRef === actual[index]);
+      return { correct, mismatchPath: correct ? null : [...path, 'blockRefs'] };
+    }
+    if (rule.type === 'perform-action') {
+      const expectedEntityId = rule.entityFactId
+        ? response.factValues?.[rule.entityFactId]
+        : rule.entityId;
+      const correct = response.action === rule.action
+        && response.entityId === expectedEntityId
+        && response.targetEntityId === rule.targetEntityId;
+      return { correct, mismatchPath: correct ? null : [...path, 'action'] };
+    }
+    if (rule.type === 'all-of') {
+      const expected = [...new Set(rule.requiredFactIds || [])].sort();
+      const actual = [...new Set(response.factIds || [])].sort();
+      const correct = expected.length === actual.length
+        && expected.every((factId, index) => factId === actual[index]);
+      return { correct, mismatchPath: correct ? null : [...path, 'factIds'] };
+    }
+    return { correct: false, mismatchPath: path };
+  }
+
+  function createMicrotaskV2({ unit, ledger, effectSink, seed }) {
+    const authoredTasks = unit.beats.flatMap(beat => (
+      (beat.microtasks || []).map(task => ({ beatId: beat.beatId, task }))
+    ));
+    let activeTaskIndex = -1;
+    let audioSequence = 0;
+    let pendingTask = null;
+    let pendingPersistence = null;
+    let durableFacts = new Set();
+    let state = {
+      status: 'idle',
+      mode: 'microtask-v2',
+      unitId: unit.unitId,
+      entryLesson: null,
+      beatId: null,
+      microtaskId: null,
+      stepId: null,
+      stepIndex: null,
+      phase: null,
+      batchIndex: 0,
+      challengeRef: null,
+      supportLevel: 0,
+      heartsRemaining: 3,
+      assistanceMode: false,
+      buildStage: 0,
+      audio: null
+    };
+
+    function snapshot() {
+      return clone(state);
+    }
+
+    function publish(effects) {
+      for (const effect of effects) effectSink(clone(effect));
+      return { snapshot: snapshot(), effects: clone(effects) };
+    }
+
+    function phaseForStep(step) {
+      if (['audio-sequence', 'source-reveal'].includes(step?.kind)) return 'audio-ready';
+      if (
+        ['match-entity', 'match-entity-batch'].includes(step?.kind)
+        && step.challengeMode !== 'word-form'
+      ) return 'audio-ready';
+      return 'response';
+    }
+
+    function currentTask() {
+      return authoredTasks[activeTaskIndex]?.task || null;
+    }
+
+    function currentStep() {
+      return currentTask()?.steps?.[state.stepIndex] || null;
+    }
+
+    function activateStep(stepIndex) {
+      const step = currentTask()?.steps?.[stepIndex];
+      if (!step) return false;
+      const challengeRefs = step.challengeSourceRefs || step.sourceRefs || [];
+      state = {
+        ...state,
+        stepId: step.stepId,
+        stepIndex,
+        phase: phaseForStep(step),
+        batchIndex: 0,
+        challengeRef: challengeRefs[0] || null,
+        supportLevel: 0,
+        heartsRemaining: 3,
+        assistanceMode: false
+      };
+      return true;
+    }
+
+    function advanceBatchOrStep() {
+      const step = currentStep();
+      const challengeRefs = step?.challengeSourceRefs || step?.sourceRefs || [];
+      const nextBatchIndex = state.batchIndex + 1;
+      if (nextBatchIndex < challengeRefs.length) {
+        state = {
+          ...state,
+          batchIndex: nextBatchIndex,
+          challengeRef: challengeRefs[nextBatchIndex],
+          phase: step.kind === 'explore-batch'
+            ? 'response'
+            : (step.challengeMode === 'word-form' ? 'response' : 'audio-ready'),
+          supportLevel: 0,
+          heartsRemaining: 3,
+          assistanceMode: false
+        };
+        return [];
+      }
+      return advanceAfterStep();
+    }
+
+    function findSource(sourceRef) {
+      for (const lesson of Object.values(unit.lessonContent || {})) {
+        if (lesson.sources?.[sourceRef]) return lesson.sources[sourceRef];
+      }
+      return null;
+    }
+
+    function resolveAudioRef(refId, kind = 'source') {
+      const item = kind === 'content'
+        ? unit.authoredContent?.[refId]
+        : findSource(refId);
+      if (!item?.audioSrc) return null;
+      return { kind, refId, src: item.audioSrc, text: item.text };
+    }
+
+    function audioRefsForStep(step) {
+      if (!step) return [];
+      if (Array.isArray(step.audioSourceRefs)) {
+        return step.audioSourceRefs.map(refId => resolveAudioRef(refId)).filter(Boolean);
+      }
+      if (Array.isArray(step.audioContentRefs)) {
+        return step.audioContentRefs.map(refId => resolveAudioRef(refId, 'content')).filter(Boolean);
+      }
+      if (['match-entity', 'match-entity-batch'].includes(step.kind)) {
+        const refId = step.challengeSourceRefs?.[state.batchIndex];
+        const resolved = resolveAudioRef(refId);
+        return resolved ? [resolved] : [];
+      }
+      return [];
+    }
+
+    function audioEffect(audio, segmentIndex) {
+      return {
+        type: 'audio/play',
+        requestId: audio.requestId,
+        segmentIndex,
+        audioRef: clone(audio.refs[segmentIndex])
+      };
+    }
+
+    function targetResultsForStep(stepId) {
+      return (currentTask()?.targetResults || []).filter(result => result.stepId === stepId);
+    }
+
+    function recordStepResults(step, outcome) {
+      for (const result of targetResultsForStep(step.stepId)) {
+        if (pendingTask.results.some(candidate => candidate.resultId === result.resultId)) continue;
+        pendingTask.results.push({
+          ...clone(result),
+          outcome,
+          supportLevel: state.supportLevel,
+          heartsRemaining: state.heartsRemaining
+        });
+      }
+    }
+
+    function feedbackAudioForStep(step, response) {
+      if (step.feedbackAudioSourceRef) {
+        return resolveAudioRef(step.feedbackAudioSourceRef);
+      }
+      if (step.feedbackAudioContentRef) {
+        return resolveAudioRef(step.feedbackAudioContentRef, 'content');
+      }
+      if (step.feedbackAudioContentByEntityId) {
+        const refId = step.feedbackAudioContentByEntityId[response.selectedEntityId];
+        return refId ? resolveAudioRef(refId, 'content') : null;
+      }
+      if (
+        ['match-entity', 'match-entity-batch'].includes(step.kind)
+        && step.challengeMode === 'word-form'
+        && step.feedbackGate
+      ) {
+        return resolveAudioRef(step.challengeSourceRefs?.[state.batchIndex]);
+      }
+      return null;
+    }
+
+    function queueFeedbackAudio(audioRef, after) {
+      if (!audioRef) return false;
+      state = {
+        ...state,
+        phase: 'audio-ready',
+        audio: {
+          status: 'ready',
+          requestId: null,
+          segmentIndex: 0,
+          refs: [clone(audioRef)],
+          stepId: state.stepId,
+          batchIndex: state.batchIndex,
+          after,
+          purpose: 'feedback'
+        }
+      };
+      return true;
+    }
+
+    function taskCompletionStatus() {
+      const outcomes = pendingTask.results.map(result => result.outcome);
+      if (outcomes.includes('assisted') || outcomes.includes('audio-unavailable')) {
+        return 'completed-assisted';
+      }
+      if (outcomes.includes('supported')) return 'completed-supported';
+      return 'completed-independent';
+    }
+
+    function completionEvent() {
+      const task = currentTask();
+      return {
+        eventId: `runtime:${unit.unitId}:${seed}:${task.microtaskId}:microtask-completed`,
+        type: 'microtask-completed',
+        unitId: unit.unitId,
+        beatId: authoredTasks[activeTaskIndex].beatId,
+        microtaskId: task.microtaskId,
+        checkpointId: task.checkpointAfterSuccess.checkpointId,
+        completionStatus: taskCompletionStatus(),
+        targetResults: clone(pendingTask.results),
+        sourceContacts: (task.exposureRefs || []).map(sourceRef => ({
+          sourceRef,
+          contactModes: [
+            'experienced',
+            ...(pendingTask.audioContactRefs.includes(sourceRef) ? ['audio-ended'] : []),
+            ...(pendingTask.missingAudioRefs.includes(sourceRef) ? ['audio-unavailable'] : [])
+          ]
+        })),
+        audioContactRefs: clone(pendingTask.audioContactRefs),
+        missingAudioRefs: clone(pendingTask.missingAudioRefs),
+        storyFacts: clone(task.persistence?.checkpointFacts || []),
+        ...(task.checkpointAfterSuccess.buildStage === undefined
+          ? {}
+          : { buildStage: task.checkpointAfterSuccess.buildStage }),
+        source: 'new-learning'
+      };
+    }
+
+    function persistCompletedTask(event) {
+      const task = currentTask();
+      const result = ledger.apply(event);
+      if (result?.persisted !== true) {
+        pendingPersistence = clone(event);
+        state = { ...state, phase: 'persistence-retry' };
+        return [{
+          type: 'runtime/persistence-failed',
+          operation: event.type,
+          reason: result?.reason || result?.status || 'unavailable',
+          retryable: true
+        }];
+      }
+      pendingPersistence = null;
+      for (const factId of event.storyFacts) durableFacts.add(factId);
+      const effects = [{
+        type: 'runtime/microtask-completed',
+        microtaskId: task.microtaskId,
+        checkpointId: event.checkpointId,
+        completionStatus: event.completionStatus
+      }];
+      if (task.growthBoundary === 'chapter-interior') {
+        state = {
+          ...state,
+          status: 'chapter-stop',
+          phase: 'completed',
+          audio: null
+        };
+        effects.push({
+          type: 'chapter/interior-complete',
+          lessonId: task.lessonId,
+          storyFacts: clone(event.storyFacts)
+        });
+        return effects;
+      }
+      if (task.growthBoundary === 'unit-built') {
+        state = {
+          ...state,
+          status: 'unit-built',
+          phase: 'completed',
+          buildStage: 5,
+          audio: null
+        };
+        effects.push({ type: 'landmark/build-stage', buildStage: 5 });
+        effects.push({ type: 'runtime/unit-built', unitId: unit.unitId });
+        return effects;
+      }
+      const next = enterTask(activeTaskIndex + 1);
+      if (next) {
+        effects.push({
+          type: 'scene/show',
+          beatId: next.beatId,
+          microtaskId: next.task.microtaskId,
+          stepId: next.task.steps[0].stepId
+        });
+      }
+      return effects;
+    }
+
+    function completeCurrentTask() {
+      return persistCompletedTask(completionEvent());
+    }
+
+    function advanceAfterStep() {
+      if (activateStep(state.stepIndex + 1)) return [];
+      return completeCurrentTask();
+    }
+
+    function enterTask(taskIndex) {
+      const authored = authoredTasks[taskIndex];
+      const step = authored?.task.steps?.[0];
+      if (!authored || !step) return null;
+      activeTaskIndex = taskIndex;
+      pendingTask = {
+        results: [],
+        audioContactRefs: [],
+        missingAudioRefs: [],
+        audioUnavailableSteps: [],
+        factValues: {}
+      };
+      state = {
+        ...state,
+        status: 'active',
+        beatId: authored.beatId,
+        microtaskId: authored.task.microtaskId,
+        stepId: step.stepId,
+        stepIndex: 0,
+        phase: phaseForStep(step),
+        batchIndex: 0,
+        challengeRef: step.challengeSourceRefs?.[0] || step.sourceRefs?.[0] || null,
+        supportLevel: 0,
+        heartsRemaining: 3,
+        assistanceMode: false,
+        audio: null
+      };
+      return authored;
+    }
+
+    function enter({ entryLesson } = {}) {
+      if (!unit.lessonIds.includes(entryLesson)) {
+        throw new TypeError(`entryLesson must belong to ${unit.unitId}`);
+      }
+      const projection = ledger.read();
+      const durable = projection?.units?.[unit.unitId] || {};
+      durableFacts = new Set(Array.isArray(durable.storyFacts) ? durable.storyFacts : []);
+      state.entryLesson = entryLesson;
+      state.buildStage = Number.isInteger(durable.buildStage) ? durable.buildStage : 0;
+      const completedId = typeof durable.checkpoint === 'object'
+        ? durable.checkpoint?.microtaskId
+        : null;
+      const completedIndex = authoredTasks.findIndex(item => item.task.microtaskId === completedId);
+      const completedTask = authoredTasks[completedIndex]?.task;
+      if (
+        completedTask?.growthBoundary === 'chapter-interior'
+        && entryLesson === completedTask.lessonId
+      ) {
+        activeTaskIndex = completedIndex;
+        state = {
+          ...state,
+          status: 'chapter-stop',
+          beatId: authoredTasks[completedIndex].beatId,
+          microtaskId: completedTask.microtaskId,
+          stepId: null,
+          stepIndex: null,
+          phase: 'completed',
+          audio: null
+        };
+        return publish([{ type: 'chapter/interior-restored', lessonId: completedTask.lessonId }]);
+      }
+      let nextIndex = completedIndex >= 0 ? completedIndex + 1 : 0;
+      if (completedIndex < 0 && entryLesson === unit.lessonIds[1]) {
+        nextIndex = authoredTasks.findIndex(item => item.task.lessonId === entryLesson);
+      }
+      const authored = enterTask(nextIndex);
+      if (!authored) {
+        state = { ...state, status: 'unit-built', beatId: null, microtaskId: null, stepId: null, phase: null };
+        return publish([]);
+      }
+      return publish([{
+        type: 'scene/show',
+        beatId: authored.beatId,
+        microtaskId: authored.task.microtaskId,
+        stepId: authored.task.steps[0].stepId
+      }]);
+    }
+
+    function dispatch(action = {}) {
+      if (state.status === 'chapter-stop' && action.type === 'chapter/continue') {
+        const next = enterTask(activeTaskIndex + 1);
+        return next
+          ? publish([{
+              type: 'scene/show',
+              beatId: next.beatId,
+              microtaskId: next.task.microtaskId,
+              stepId: next.task.steps[0].stepId
+            }])
+          : publish([]);
+      }
+      if (
+        state.status === 'active'
+        && state.phase === 'persistence-retry'
+        && action.type === 'persistence/retry'
+        && pendingPersistence
+      ) {
+        return publish(persistCompletedTask(clone(pendingPersistence)));
+      }
+      if (state.status !== 'active') return publish([]);
+      if (action.type === 'audio/play' && ['audio-ready', 'audio-playing'].includes(state.phase)) {
+        const refs = state.audio?.stepId === state.stepId
+          && state.audio?.batchIndex === state.batchIndex
+          && state.audio?.refs?.length
+          ? state.audio.refs
+          : audioRefsForStep(currentStep());
+        if (refs.length === 0) return publish([]);
+        const effects = [];
+        if (state.audio?.status === 'playing') {
+          effects.push({ type: 'audio/cancel', requestId: state.audio.requestId });
+        }
+        const audio = {
+          status: 'playing',
+          requestId: `audio:${unit.unitId}:${seed}:${++audioSequence}`,
+          segmentIndex: 0,
+          refs: clone(refs),
+          stepId: state.stepId,
+          batchIndex: state.batchIndex,
+          after: state.audio?.status === 'ready' && state.audio?.after
+            ? state.audio.after
+            : (['match-entity', 'match-entity-batch'].includes(currentStep()?.kind)
+                ? 'open-response'
+                : 'advance-step'),
+          purpose: state.audio?.status === 'ready' && state.audio?.purpose
+            ? state.audio.purpose
+            : 'instruction'
+        };
+        state = { ...state, phase: 'audio-playing', audio };
+        effects.push(audioEffect(audio, 0));
+        return publish(effects);
+      }
+      if (action.type === 'audio/ended' && state.phase === 'audio-playing') {
+        if (
+          action.requestId !== state.audio?.requestId
+          || action.segmentIndex !== state.audio?.segmentIndex
+        ) return publish([]);
+        const completedAudioRef = state.audio.refs[state.audio.segmentIndex];
+        const completedRef = completedAudioRef?.kind === 'source' ? completedAudioRef.refId : null;
+        if (completedRef && !pendingTask.audioContactRefs.includes(completedRef)) {
+          pendingTask.audioContactRefs.push(completedRef);
+        }
+        const nextSegmentIndex = state.audio.segmentIndex + 1;
+        if (nextSegmentIndex < state.audio.refs.length) {
+          state = {
+            ...state,
+            audio: { ...state.audio, segmentIndex: nextSegmentIndex }
+          };
+          return publish([audioEffect(state.audio, nextSegmentIndex)]);
+        }
+        state = {
+          ...state,
+          audio: { ...state.audio, status: 'completed' }
+        };
+        if (state.audio.after === 'open-response') {
+          state = { ...state, phase: 'response' };
+        } else if (state.audio.after === 'advance-batch') {
+          const effects = advanceBatchOrStep();
+          return publish(effects);
+        } else {
+          const effects = advanceAfterStep();
+          return publish(effects);
+        }
+        return publish([]);
+      }
+      if (action.type === 'audio/failed' && state.phase === 'audio-playing') {
+        if (action.requestId !== state.audio?.requestId) return publish([]);
+        const unresolvedRefs = state.audio.refs
+          .slice(state.audio.segmentIndex)
+          .map(ref => ref.refId);
+        const unresolvedSourceRefs = state.audio.refs
+          .slice(state.audio.segmentIndex)
+          .filter(ref => ref.kind === 'source')
+          .map(ref => ref.refId);
+        state = {
+          ...state,
+          phase: 'audio-fallback',
+          audio: {
+            ...state.audio,
+            status: 'failed',
+            reason: typeof action.reason === 'string' ? action.reason : 'unavailable',
+            unresolvedRefs,
+            unresolvedSourceRefs
+          }
+        };
+        return publish([{
+          type: 'audio/fallback',
+          requestId: state.audio.requestId,
+          reason: state.audio.reason,
+          fallback: 'text-image',
+          audioRefs: clone(unresolvedRefs),
+          requiresExplicitContinue: true
+        }]);
+      }
+      if (action.type === 'audio/continue-without-sound' && state.phase === 'audio-fallback') {
+        for (const sourceRef of state.audio.unresolvedSourceRefs || []) {
+          if (!pendingTask.missingAudioRefs.includes(sourceRef)) {
+            pendingTask.missingAudioRefs.push(sourceRef);
+          }
+        }
+        if (
+          state.audio.after === 'open-response'
+          && !pendingTask.audioUnavailableSteps.includes(state.stepId)
+        ) {
+          pendingTask.audioUnavailableSteps.push(state.stepId);
+        }
+        state = { ...state, audio: { ...state.audio, status: 'skipped' } };
+        if (state.audio.after === 'open-response') {
+          state = { ...state, phase: 'response' };
+          return publish([{
+            type: 'audio/fallback-continued',
+            stepId: state.stepId,
+            soundContactRecorded: false
+          }]);
+        }
+        if (state.audio.after === 'advance-batch') {
+          return publish(advanceBatchOrStep());
+        }
+        return publish(advanceAfterStep());
+      }
+      if (action.type === 'explore/activate' && state.phase === 'response') {
+        const step = currentStep();
+        if (step?.kind !== 'explore-batch') return publish([]);
+        const expectedSourceRef = step.sourceRefs?.[state.batchIndex];
+        const expectedEntityId = step.entityIds?.[state.batchIndex];
+        if (action.sourceRef !== expectedSourceRef || action.entityId !== expectedEntityId) {
+          return publish([]);
+        }
+        const audioRef = resolveAudioRef(expectedSourceRef);
+        if (!audioRef) return publish([]);
+        const audio = {
+          status: 'playing',
+          requestId: `audio:${unit.unitId}:${seed}:${++audioSequence}`,
+          segmentIndex: 0,
+          refs: [audioRef],
+          stepId: state.stepId,
+          batchIndex: state.batchIndex,
+          after: 'advance-batch'
+        };
+        state = { ...state, phase: 'audio-playing', audio };
+        return publish([audioEffect(audio, 0)]);
+      }
+      if (action.type === 'response/submit' && state.phase === 'response') {
+        const step = currentStep();
+        if (!step?.answerRule) return publish([]);
+        const response = {
+          ...(action.response && typeof action.response === 'object' ? action.response : {}),
+          factValues: clone(pendingTask.factValues)
+        };
+        if (step.answerRule.type === 'ordered-blocks' && step.selectedEntityFactId) {
+          response.selectedEntityId = pendingTask.factValues[step.selectedEntityFactId];
+        }
+        const durablePreconditionsMet = step.answerRule.type !== 'all-of'
+          || (step.answerRule.requiredFactIds || []).every(factId => durableFacts.has(factId));
+        const evaluated = durablePreconditionsMet
+          ? evaluateRule(step.answerRule, response)
+          : { correct: false, mismatchPath: ['factIds'] };
+        if (!evaluated.correct) {
+          const nextLevel = Math.min(3, state.supportLevel + 1);
+          state = {
+            ...state,
+            supportLevel: nextLevel,
+            heartsRemaining: Math.max(0, 3 - nextLevel),
+            assistanceMode: nextLevel >= 3
+          };
+          const partnerDemo = nextLevel >= 3;
+          return publish([{
+            type: partnerDemo ? 'feedback/partner-demo' : 'feedback/support',
+            microtaskId: state.microtaskId,
+            stepId: state.stepId,
+            level: nextLevel,
+            supportKind: ['reobserve', 'partial-cue', 'model'][nextLevel - 1],
+            message: step.support?.[nextLevel - 1] || null,
+            revealsAnswer: false
+          }]);
+        }
+        const outcome = pendingTask.audioUnavailableSteps.includes(step.stepId)
+          ? 'audio-unavailable'
+          : (state.assistanceMode
+              ? 'assisted'
+              : (state.supportLevel > 0 ? 'supported' : 'independent'));
+        recordStepResults(step, outcome);
+        if (step.storesFactId && typeof response.entityId === 'string') {
+          pendingTask.factValues[step.storesFactId] = response.entityId;
+        }
+        const effects = [{
+          type: 'feedback/correct',
+          microtaskId: state.microtaskId,
+          stepId: step.stepId,
+          outcome
+        }];
+        const isBatch = ['match-entity', 'match-entity-batch'].includes(step.kind);
+        const feedbackAudio = feedbackAudioForStep(step, response);
+        if (queueFeedbackAudio(feedbackAudio, isBatch ? 'advance-batch' : 'advance-step')) {
+          return publish(effects);
+        }
+        const advanceEffects = isBatch ? advanceBatchOrStep() : advanceAfterStep();
+        if (advanceEffects.some(effect => effect.type === 'runtime/persistence-failed')) {
+          return publish(advanceEffects);
+        }
+        effects.push(...advanceEffects);
+        return publish(effects);
+      }
+      return publish([]);
+    }
+
+    function destroy() {
+      const effects = state.audio?.status === 'playing'
+        ? [{ type: 'audio/cancel', requestId: state.audio.requestId }]
+        : [];
+      state = { ...state, status: 'destroyed', audio: null };
+      return publish(effects);
+    }
+
+    return Object.freeze({ enter, dispatch, snapshot, destroy });
+  }
+
   function create({ unit, ledger, effectSink = () => {}, seed = 1 } = {}) {
     if (!unit?.unitId || !Array.isArray(unit.beats) || unit.beats.length !== 5) {
       throw new TypeError('learning runtime requires a five-beat teaching unit');
@@ -75,6 +740,9 @@
     }
     if (typeof effectSink !== 'function') throw new TypeError('effectSink must be a function');
     if (!Number.isFinite(Number(seed))) throw new TypeError('seed must be numeric');
+    if (unit.runtimeProfile === 'microtask-v2') {
+      return createMicrotaskV2({ unit, ledger, effectSink, seed: Number(seed) });
+    }
 
     let audioSequence = 0;
     let randomState = (Number(seed) >>> 0) || 1;
@@ -773,5 +1441,5 @@
     return Object.freeze({ enter, dispatch, snapshot, destroy });
   }
 
-  return Object.freeze({ create });
+  return Object.freeze({ create, evaluateRule });
 });

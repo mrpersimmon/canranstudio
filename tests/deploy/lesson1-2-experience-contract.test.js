@@ -1,0 +1,84 @@
+'use strict';
+
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const catalog = require('../../core/curriculum-catalog');
+
+const ROOT = path.resolve(__dirname, '../..');
+
+test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally runnable', async () => {
+  const [home, page, scene, runtime, background] = await Promise.all([
+    fs.readFile(path.join(ROOT, 'index.html'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/index.html'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'core/learning-microtask-scene.js'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/experience.js'), 'utf8'),
+    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/starlight-station-bg.png'))
+  ]);
+
+  assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
+  const sources = [
+    '/core/curriculum-catalog.js',
+    '/core/learning-store.js',
+    '/core/learning-ledger.js',
+    '/core/learning-runtime.js',
+    '/core/learning-microtask-scene.js',
+    '/poc/lesson1-2-experience/experience.js'
+  ];
+  const scriptOrder = sources.map(source => page.indexOf(`src="${source}"`));
+  assert.ok(scriptOrder.every(index => index >= 0));
+  assert.deepEqual(scriptOrder, [...scriptOrder].sort((left, right) => left - right));
+  assert.ok(background.size > 100_000);
+
+  assert.doesNotMatch(home, /lesson1-2-experience/);
+  assert.match(runtime, /NCE-U01/);
+  assert.match(runtime, /poc:lesson1-2-experience:v1/);
+  assert.match(runtime, /learningMicrotaskScene\.mount/);
+  assert.doesNotMatch(
+    `${page}\n${runtime}\n${scene}`,
+    /Excuse me!|Is this your handbag\?|Thank you very much\.|\bhandbag\b|\bpencil\b/i
+  );
+  assert.match(scene, /type:\s*['"]response\/submit['"]/);
+  assert.match(scene, /type:\s*['"]audio\/ended['"]/);
+  assert.match(scene, /type:\s*['"]audio\/failed['"]/);
+  assert.match(scene, /toggle-music/);
+  assert.doesNotMatch(scene, /setTimeout\([^)]*audio\/ended|time\/elapsed[\s\S]{0,100}audio\/ended/);
+  assert.doesNotMatch(runtime, /\b(?:fetch|XMLHttpRequest|sendBeacon)\s*\(|\/api\//);
+});
+
+test('the local candidate voice pack covers every catalog audio identity and stays replaceable', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const audioDir = path.join(ROOT, 'poc/lesson1-2-experience/audio');
+  const manifest = JSON.parse(await fs.readFile(path.join(audioDir, 'manifest.json'), 'utf8'));
+  const expected = [
+    ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
+    ...Object.values(unit.authoredContent)
+  ].filter(item => item.audioSrc).map(item => ({
+    sourceId: item.sourceId || item.contentId,
+    path: item.audioSrc
+  }));
+
+  assert.equal(manifest.status, 'local-poc-candidate-unreviewed');
+  assert.equal(manifest.replacementContract.scope, 'whole-unit-pack');
+  assert.equal(manifest.files.length, expected.length);
+  assert.equal(new Set(manifest.files.map(file => file.sourceId)).size, expected.length);
+  assert.ok(manifest.files.every(file => !Object.hasOwn(file, 'text')));
+  assert.deepEqual(
+    manifest.files.map(file => [file.sourceId, file.path]).sort(),
+    expected.map(file => [file.sourceId, file.path]).sort()
+  );
+
+  for (const file of manifest.files) {
+    assert.match(file.catalogTextSha256, /^[a-f0-9]{64}$/);
+    assert.match(file.sha256, /^[a-f0-9]{64}$/);
+    assert.equal(file.reviewStatus, 'unreviewed-candidate');
+    assert.ok(file.durationMs > 500);
+    const stat = await fs.stat(path.join(ROOT, file.path.replace(/^\//, '')));
+    assert.equal(stat.size, file.bytes);
+    assert.ok(stat.size > 10_000);
+  }
+
+  const ambience = await fs.stat(path.join(audioDir, 'starlight-station-ambience.mp3'));
+  assert.ok(ambience.size > 100_000);
+});

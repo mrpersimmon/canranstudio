@@ -4,9 +4,549 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const catalog = require('../../core/curriculum-catalog');
-const { create } = require('../../core/learning-runtime');
+const { create, evaluateRule } = require('../../core/learning-runtime');
 
 const unit = catalog.getTeachingUnit('FLC-U01');
+const nceUnit = catalog.getTeachingUnit('NCE-U01');
+
+function fakeNceLedger({
+  checkpoint = null,
+  buildStage = 0,
+  storyFacts = [],
+  failOnType = null,
+  failures = 0
+} = {}) {
+  const events = [];
+  let failuresRemaining = failures;
+  return {
+    events,
+    read() {
+      return {
+        units: {
+          [nceUnit.unitId]: { checkpoint, buildStage, storyFacts }
+        }
+      };
+    },
+    apply(event) {
+      events.push(structuredClone(event));
+      if (event.type === failOnType && failuresRemaining > 0) {
+        failuresRemaining -= 1;
+        return { status: 'not-persisted', persisted: false, reason: 'unavailable', effects: [] };
+      }
+      return { status: 'applied', persisted: true, effects: [] };
+    }
+  };
+}
+
+function finishActiveNceAudio(runtime) {
+  let result = runtime.dispatch({ type: 'audio/play' });
+  const requestId = result.snapshot.audio.requestId;
+  const segmentCount = result.snapshot.audio.refs.length;
+  for (let segmentIndex = 0; segmentIndex < segmentCount; segmentIndex += 1) {
+    result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex });
+  }
+  return result;
+}
+
+test('microtask v2 answer rules judge stable semantic identities rather than presentation order', () => {
+  assert.deepEqual(
+    evaluateRule(
+      { type: 'select-one', acceptedSourceRef: 'L01-D01' },
+      { sourceRef: 'L01-D01', presentationIndex: 99 }
+    ),
+    { correct: true, mismatchPath: null }
+  );
+  assert.equal(evaluateRule(
+    { type: 'match-entity', pairs: { 'L02-W01': 'pen' } },
+    { sourceRef: 'L02-W01', entityId: 'pencil' }
+  ).correct, false);
+  assert.equal(evaluateRule(
+    { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
+    { slotId: 'ownership-item', entityId: 'watch' }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    {
+      type: 'ordered-blocks',
+      acceptedByEntityId: { 'car-key': ['block-question', 'L02-W09'] }
+    },
+    { selectedEntityId: 'car-key', blockRefs: ['block-question', 'L02-W09'] }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'visitor' },
+    { action: 'give', entityId: 'watch', targetEntityId: 'visitor' }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'all-of', requiredFactIds: ['one', 'two', 'three'] },
+    { factIds: ['three', 'one', 'two'] }
+  ).correct, true);
+});
+
+test('Lesson 1 enters the first authored step of the first durable microtask', () => {
+  const runtime = create({ unit: nceUnit, ledger: fakeNceLedger(), seed: 101 });
+
+  const entered = runtime.enter({ entryLesson: 'lesson1' });
+
+  assert.equal(entered.snapshot.status, 'active');
+  assert.equal(entered.snapshot.mode, 'microtask-v2');
+  assert.equal(entered.snapshot.microtaskId, 'L01-M01');
+  assert.equal(entered.snapshot.stepId, 'L01-M01:S01');
+  assert.equal(entered.snapshot.phase, 'audio-ready');
+  assert.deepEqual(entered.effects, [{
+    type: 'scene/show',
+    beatId: 'discover',
+    microtaskId: 'L01-M01',
+    stepId: 'L01-M01:S01'
+  }]);
+});
+
+test('Lesson 1 full listening advances only after every active real audio ended callback', () => {
+  const ledger = fakeNceLedger();
+  const runtime = create({ unit: nceUnit, ledger, seed: 103 });
+  runtime.enter({ entryLesson: 'lesson1' });
+
+  assert.deepEqual(runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  }).effects, []);
+  const playing = runtime.dispatch({ type: 'audio/play' });
+  const requestId = playing.snapshot.audio.requestId;
+  assert.equal(playing.snapshot.phase, 'audio-playing');
+  assert.equal(playing.effects[0].audioRef.refId, 'L01-D01');
+  assert.equal(playing.effects[0].audioRef.src, nceUnit.lessonContent.lesson1.sources['L01-D01'].audioSrc);
+
+  assert.deepEqual(runtime.dispatch({ type: 'time/elapsed', milliseconds: 120_000 }).effects, []);
+  assert.deepEqual(runtime.dispatch({
+    type: 'audio/ended', requestId: 'stale-request', segmentIndex: 0
+  }).effects, []);
+
+  let result;
+  for (let segmentIndex = 0; segmentIndex < 7; segmentIndex += 1) {
+    result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex });
+    if (segmentIndex < 6) {
+      assert.equal(result.snapshot.stepId, 'L01-M01:S01');
+      assert.equal(result.effects[0].audioRef.refId, `L01-D0${segmentIndex + 2}`);
+    }
+  }
+
+  assert.equal(result.snapshot.stepId, 'L01-M01:S02');
+  assert.equal(result.snapshot.phase, 'response');
+  assert.equal(result.snapshot.audio.status, 'completed');
+  assert.deepEqual(ledger.events, []);
+});
+
+test('Lesson 1 turns three wrong actions into teaching support and still requires the child correction', () => {
+  const ledger = fakeNceLedger();
+  const runtime = create({ unit: nceUnit, ledger, seed: 107 });
+  runtime.enter({ entryLesson: 'lesson1' });
+  finishActiveNceAudio(runtime);
+  const wrong = {
+    type: 'response/submit',
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'station-keeper' },
+    correct: true
+  };
+
+  const first = runtime.dispatch(wrong);
+  const second = runtime.dispatch(wrong);
+  const third = runtime.dispatch(wrong);
+
+  assert.equal(first.snapshot.supportLevel, 1);
+  assert.equal(first.snapshot.heartsRemaining, 2);
+  assert.equal(second.snapshot.supportLevel, 2);
+  assert.equal(second.snapshot.heartsRemaining, 1);
+  assert.equal(third.snapshot.supportLevel, 3);
+  assert.equal(third.snapshot.heartsRemaining, 0);
+  assert.equal(third.snapshot.assistanceMode, true);
+  assert.deepEqual(
+    [first, second, third].map(result => result.effects[0].type),
+    ['feedback/support', 'feedback/support', 'feedback/partner-demo']
+  );
+  assert.equal(third.snapshot.stepId, 'L01-M01:S02');
+  assert.deepEqual(ledger.events, []);
+
+  const corrected = runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  });
+  assert.equal(corrected.snapshot.stepId, 'L01-M01:S03');
+  assert.equal(corrected.snapshot.phase, 'audio-ready');
+  assert.equal(corrected.snapshot.supportLevel, 0);
+  assert.equal(corrected.snapshot.heartsRemaining, 3);
+  assert.deepEqual(ledger.events, []);
+});
+
+test('Lesson 1 M01 persists both target results and contacts once, after its final label audio ended', () => {
+  const ledger = fakeNceLedger();
+  const runtime = create({ unit: nceUnit, ledger, seed: 109 });
+  runtime.enter({ entryLesson: 'lesson1' });
+  finishActiveNceAudio(runtime);
+  runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  });
+  finishActiveNceAudio(runtime);
+  const matched = runtime.dispatch({
+    type: 'response/submit',
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+
+  assert.equal(matched.snapshot.stepId, 'L01-M01:S04');
+  assert.equal(matched.snapshot.phase, 'audio-ready');
+  assert.deepEqual(ledger.events, []);
+
+  const labelPlaying = runtime.dispatch({ type: 'audio/play' });
+  assert.deepEqual(ledger.events, []);
+  const completed = runtime.dispatch({
+    type: 'audio/ended',
+    requestId: labelPlaying.snapshot.audio.requestId,
+    segmentIndex: 0
+  });
+
+  assert.equal(completed.snapshot.microtaskId, 'L01-M02');
+  assert.equal(completed.snapshot.stepId, 'L01-M02:S01');
+  assert.equal(completed.snapshot.phase, 'response');
+  assert.equal(ledger.events.length, 1);
+  assert.deepEqual({
+    type: ledger.events[0].type,
+    microtaskId: ledger.events[0].microtaskId,
+    checkpointId: ledger.events[0].checkpointId,
+    completionStatus: ledger.events[0].completionStatus,
+    buildStage: ledger.events[0].buildStage
+  }, {
+    type: 'microtask-completed',
+    microtaskId: 'L01-M01',
+    checkpointId: 'L01-M01:complete',
+    completionStatus: 'completed-independent',
+    buildStage: undefined
+  });
+  assert.deepEqual(
+    ledger.events[0].targetResults.map(result => [result.resultId, result.outcome]),
+    [
+      ['NCE-U01-T04:L01-M01:owner', 'independent'],
+      ['NCE-U01-T01:L01-W07:audio', 'independent']
+    ]
+  );
+  assert.deepEqual(ledger.events[0].audioContactRefs, [
+    'L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07', 'L01-W07'
+  ]);
+  assert.deepEqual(ledger.events[0].storyFacts, ['handbag-returned', 'case-clue-owner']);
+  assert.ok(!completed.effects.some(effect => effect.type === 'landmark/build-stage'));
+});
+
+test('Lesson 2 M01 keeps each four-way choice and saves the four audio cells as one microtask', () => {
+  const ledger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L01-M05:complete',
+      beatId: 'discover',
+      microtaskId: 'L01-M05',
+      completionStatus: 'completed-independent'
+    },
+    storyFacts: ['lesson1-complete', 'work-lamp-on', 'sorting-room-open']
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 113 });
+  const entered = runtime.enter({ entryLesson: 'lesson2' });
+  assert.equal(entered.snapshot.microtaskId, 'L02-M01');
+  assert.equal(entered.snapshot.stepId, 'L02-M01:S01');
+
+  const explorations = [
+    ['L02-W01', 'pen'],
+    ['L02-W02', 'pencil'],
+    ['L02-W03', 'book'],
+    ['L02-W04', 'watch']
+  ];
+  for (const [sourceRef, entityId] of explorations) {
+    const playing = runtime.dispatch({ type: 'explore/activate', sourceRef, entityId });
+    assert.equal(playing.snapshot.phase, 'audio-playing');
+    assert.equal(playing.effects[0].audioRef.refId, sourceRef);
+    runtime.dispatch({
+      type: 'audio/ended',
+      requestId: playing.snapshot.audio.requestId,
+      segmentIndex: 0
+    });
+  }
+  assert.equal(runtime.snapshot().stepId, 'L02-M01:S02');
+
+  const challenges = [
+    ['L02-W03', 'book'],
+    ['L02-W01', 'pen'],
+    ['L02-W04', 'watch'],
+    ['L02-W02', 'pencil']
+  ];
+  for (const [sourceRef, entityId] of challenges) {
+    const heard = finishActiveNceAudio(runtime);
+    assert.equal(heard.snapshot.phase, 'response');
+    assert.equal(heard.snapshot.challengeRef, sourceRef);
+    assert.equal(
+      nceUnit.beats.flatMap(beat => beat.microtasks || [])
+        .find(task => task.microtaskId === 'L02-M01').steps[1].optionEntityIds.length,
+      4
+    );
+    runtime.dispatch({
+      type: 'response/submit',
+      response: { sourceRef, entityId }
+    });
+  }
+
+  assert.equal(runtime.snapshot().microtaskId, 'L02-M02');
+  assert.equal(runtime.snapshot().stepId, 'L02-M02:S01');
+  assert.equal(runtime.snapshot().phase, 'response');
+  assert.equal(ledger.events.length, 1);
+  assert.deepEqual(
+    ledger.events[0].targetResults.map(result => [result.sourceRef, result.channel]),
+    [
+      ['L02-W03', 'audio'],
+      ['L02-W01', 'audio'],
+      ['L02-W04', 'audio'],
+      ['L02-W02', 'audio']
+    ]
+  );
+});
+
+test('Lesson 2 word-form cells wait for their own feedback audio ended before advancing', () => {
+  const ledger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L02-M01:complete', beatId: 'understand',
+      microtaskId: 'L02-M01', completionStatus: 'completed-independent'
+    },
+    storyFacts: ['pocket-shelf-ready']
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 127 });
+  runtime.enter({ entryLesson: 'lesson2' });
+  assert.equal(runtime.snapshot().stepId, 'L02-M02:S01');
+  assert.equal(runtime.snapshot().challengeRef, 'L01-W07');
+
+  const submitted = runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(submitted.snapshot.phase, 'audio-ready');
+  assert.equal(submitted.snapshot.batchIndex, 0);
+  assert.equal(submitted.snapshot.audio.purpose, 'feedback');
+  assert.deepEqual(runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L02-W04', entityId: 'watch' }
+  }).effects, []);
+
+  const feedback = finishActiveNceAudio(runtime);
+  assert.equal(feedback.snapshot.batchIndex, 1);
+  assert.equal(feedback.snapshot.challengeRef, 'L02-W04');
+  assert.equal(feedback.snapshot.phase, 'response');
+  assert.deepEqual(ledger.events, []);
+});
+
+test('Lesson 2 sentence building is bound to the case the child actually selected', () => {
+  const ledger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L02-M05:complete', beatId: 'transfer',
+      microtaskId: 'L02-M05', completionStatus: 'completed-independent'
+    },
+    storyFacts: ['key-box-ready']
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 129 });
+  runtime.enter({ entryLesson: 'lesson2' });
+
+  runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L02-W09', entityId: 'car-key' }
+  });
+  finishActiveNceAudio(runtime);
+  runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L02-W10', entityId: 'house-key' }
+  });
+  finishActiveNceAudio(runtime);
+  assert.equal(runtime.snapshot().stepId, 'L02-M06:S02');
+
+  runtime.dispatch({ type: 'response/submit', response: { entityId: 'car-key' } });
+  runtime.dispatch({ type: 'response/submit', response: { sourceRef: 'L01-D01' } });
+  finishActiveNceAudio(runtime);
+  finishActiveNceAudio(runtime);
+  assert.equal(runtime.snapshot().stepId, 'L02-M06:S05');
+
+  const forgedBranch = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      selectedEntityId: 'house-key',
+      blockRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W10']
+    }
+  });
+  assert.equal(forgedBranch.snapshot.stepId, 'L02-M06:S05');
+  assert.equal(forgedBranch.snapshot.supportLevel, 1);
+
+  const selectedBranch = runtime.dispatch({
+    type: 'response/submit',
+    response: {
+      selectedEntityId: 'house-key',
+      blockRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W09']
+    }
+  });
+  assert.equal(selectedBranch.snapshot.phase, 'audio-ready');
+  assert.equal(selectedBranch.snapshot.audio.refs[0].refId, 'NCE-U01-C-Q-CAR');
+});
+
+test('microtask v2 audio failure needs explicit fallback and never forges an audio contact', () => {
+  const ledger = fakeNceLedger();
+  const runtime = create({ unit: nceUnit, ledger, seed: 131 });
+  runtime.enter({ entryLesson: 'lesson1' });
+
+  let playing = runtime.dispatch({ type: 'audio/play' });
+  const failedDialogue = runtime.dispatch({
+    type: 'audio/failed', requestId: playing.snapshot.audio.requestId, reason: 'decode-error'
+  });
+  assert.equal(failedDialogue.snapshot.phase, 'audio-fallback');
+  assert.equal(failedDialogue.effects[0].type, 'audio/fallback');
+  assert.deepEqual(runtime.dispatch({ type: 'time/elapsed', milliseconds: 999_999 }).effects, []);
+  runtime.dispatch({ type: 'audio/continue-without-sound' });
+  runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  });
+
+  playing = runtime.dispatch({ type: 'audio/play' });
+  runtime.dispatch({
+    type: 'audio/failed', requestId: playing.snapshot.audio.requestId, reason: 'offline'
+  });
+  runtime.dispatch({ type: 'audio/continue-without-sound' });
+  runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  playing = runtime.dispatch({ type: 'audio/play' });
+  runtime.dispatch({
+    type: 'audio/failed', requestId: playing.snapshot.audio.requestId, reason: 'offline'
+  });
+  const completed = runtime.dispatch({ type: 'audio/continue-without-sound' });
+
+  assert.equal(completed.snapshot.microtaskId, 'L01-M02');
+  assert.equal(ledger.events.length, 1);
+  assert.deepEqual(ledger.events[0].audioContactRefs, []);
+  assert.deepEqual(ledger.events[0].missingAudioRefs, [
+    'L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07', 'L01-W07'
+  ]);
+  assert.deepEqual(
+    ledger.events[0].targetResults.map(result => [result.resultId, result.outcome]),
+    [
+      ['NCE-U01-T04:L01-M01:owner', 'independent'],
+      ['NCE-U01-T01:L01-W07:audio', 'audio-unavailable']
+    ]
+  );
+  assert.equal(ledger.events[0].completionStatus, 'completed-assisted');
+});
+
+test('Lesson 1 archive stops inside the station and resumes Lesson 2 only after the child chooses it', () => {
+  const storyFacts = [
+    'case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'
+  ];
+  const ledger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L01-M04:complete', beatId: 'discover',
+      microtaskId: 'L01-M04', completionStatus: 'completed-independent'
+    },
+    storyFacts
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 137 });
+  runtime.enter({ entryLesson: 'lesson1' });
+  assert.equal(runtime.snapshot().microtaskId, 'L01-M05');
+
+  runtime.dispatch({ type: 'response/submit', response: { factIds: storyFacts } });
+  const archived = runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'stamp', entityId: 'case-stamp', targetEntityId: 'case-file' }
+  });
+  assert.equal(archived.snapshot.status, 'chapter-stop');
+  assert.equal(archived.snapshot.buildStage, 0);
+  assert.ok(archived.effects.some(effect => effect.type === 'chapter/interior-complete'));
+  assert.ok(!archived.effects.some(effect => effect.type === 'landmark/build-stage'));
+
+  const continued = runtime.dispatch({ type: 'chapter/continue' });
+  assert.equal(continued.snapshot.status, 'active');
+  assert.equal(continued.snapshot.microtaskId, 'L02-M01');
+  assert.equal(continued.snapshot.stepId, 'L02-M01:S01');
+
+  const restored = create({
+    unit: nceUnit,
+    ledger: fakeNceLedger({
+      checkpoint: {
+        checkpointId: 'L01-M05:complete', beatId: 'discover',
+        microtaskId: 'L01-M05', completionStatus: 'completed-independent'
+      },
+      storyFacts: [...storyFacts, 'lesson1-complete', 'work-lamp-on', 'sorting-room-open']
+    }),
+    seed: 139
+  }).enter({ entryLesson: 'lesson1' });
+  assert.equal(restored.snapshot.status, 'chapter-stop');
+  assert.equal(restored.snapshot.microtaskId, 'L01-M05');
+  assert.deepEqual(restored.effects, [{ type: 'chapter/interior-restored', lessonId: 'lesson1' }]);
+});
+
+test('the station grows only after Lesson 2 M07 is atomically persisted and read as complete', () => {
+  const claimFacts = ['claim-record-1', 'claim-record-2', 'claim-record-3'];
+  const ledger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L02-M06:complete', beatId: 'transfer',
+      microtaskId: 'L02-M06', completionStatus: 'completed-independent'
+    },
+    storyFacts: claimFacts
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 149 });
+  runtime.enter({ entryLesson: 'lesson2' });
+  assert.equal(runtime.snapshot().microtaskId, 'L02-M07');
+
+  const stamps = runtime.dispatch({
+    type: 'response/submit', response: { factIds: ['claim-record-3', 'claim-record-1', 'claim-record-2'] }
+  });
+  assert.equal(stamps.snapshot.stepId, 'L02-M07:S02');
+  assert.ok(!stamps.effects.some(effect => effect.type === 'landmark/build-stage'));
+  assert.deepEqual(ledger.events, []);
+
+  const opened = runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
+  });
+  assert.equal(opened.snapshot.status, 'unit-built');
+  assert.equal(opened.snapshot.buildStage, 5);
+  assert.equal(ledger.events.length, 1);
+  assert.equal(ledger.events[0].type, 'microtask-completed');
+  assert.equal(ledger.events[0].microtaskId, 'L02-M07');
+  assert.equal(ledger.events[0].buildStage, 5);
+  assert.deepEqual(
+    opened.effects.filter(effect => effect.type === 'landmark/build-stage'),
+    [{ type: 'landmark/build-stage', buildStage: 5 }]
+  );
+  assert.ok(!JSON.stringify(ledger.events).includes('mastered'));
+});
+
+test('a failed Lesson 2 M07 write cannot reveal growth and can retry the same atomic event', () => {
+  const claimFacts = ['claim-record-1', 'claim-record-2', 'claim-record-3'];
+  const ledger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L02-M06:complete', beatId: 'transfer',
+      microtaskId: 'L02-M06', completionStatus: 'completed-independent'
+    },
+    storyFacts: claimFacts,
+    failOnType: 'microtask-completed',
+    failures: 1
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 151 });
+  runtime.enter({ entryLesson: 'lesson2' });
+  runtime.dispatch({ type: 'response/submit', response: { factIds: claimFacts } });
+  const failed = runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
+  });
+
+  assert.equal(failed.snapshot.status, 'active');
+  assert.equal(failed.snapshot.phase, 'persistence-retry');
+  assert.equal(failed.snapshot.buildStage, 0);
+  assert.deepEqual(failed.effects, [{
+    type: 'runtime/persistence-failed',
+    operation: 'microtask-completed',
+    reason: 'unavailable',
+    retryable: true
+  }]);
+  assert.ok(!failed.effects.some(effect => effect.type === 'landmark/build-stage'));
+
+  const retried = runtime.dispatch({ type: 'persistence/retry' });
+  assert.equal(retried.snapshot.status, 'unit-built');
+  assert.equal(retried.snapshot.buildStage, 5);
+  assert.equal(ledger.events.length, 2);
+  assert.deepEqual(ledger.events[1], ledger.events[0]);
+  assert.ok(retried.effects.some(effect => effect.type === 'landmark/build-stage'));
+});
 
 function fakeLedger({ checkpoint = null, buildStage = 0, failOnType = null } = {}) {
   const events = [];

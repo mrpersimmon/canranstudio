@@ -13,7 +13,8 @@
   const PROCESSED_EVENT_LIMIT = 256;
   const REVIEW_OUTCOMES = new Set(['independent', 'supported', 'failed']);
   const FORMATIVE_OUTCOMES = new Set(['practice-only', 'independent', 'supported', 'failed']);
-  const ALL_OUTCOMES = new Set([...REVIEW_OUTCOMES, ...FORMATIVE_OUTCOMES]);
+  const MICROTASK_OUTCOMES = new Set(['independent', 'supported', 'assisted', 'audio-unavailable']);
+  const ALL_OUTCOMES = new Set([...REVIEW_OUTCOMES, ...FORMATIVE_OUTCOMES, ...MICROTASK_OUTCOMES]);
   const COMPLETION_STATUSES = new Set([
     'completed-independent',
     'completed-supported',
@@ -21,6 +22,7 @@
   ]);
   const EVENT_TYPES = new Set([
     'checkpoint-completed',
+    'microtask-completed',
     'unit-built',
     'formative-attempt',
     'review-attempt'
@@ -52,7 +54,13 @@
     const districts = {};
 
     for (const unit of catalogUnits(catalog)) {
-      units[unit.unitId] = { checkpoint: null, buildStage: 0 };
+      units[unit.unitId] = {
+        checkpoint: null,
+        buildStage: 0,
+        completedMicrotaskIds: [],
+        storyFacts: [],
+        sourceContacts: {}
+      };
       districts[unit.districtId] = districts[unit.districtId] || {
         challengeStars: 0,
         starredUnitIds: []
@@ -65,7 +73,8 @@
           lastEvidenceDay: null,
           lastStarDay: null,
           intervalStage: 0,
-          nextDueDay: null
+          nextDueDay: null,
+          variantCells: {}
         };
       }
     }
@@ -78,6 +87,37 @@
       districts,
       learningClock: { maxObservedDay: null, dailyChallengeStars: 0 }
     };
+  }
+
+  function unitMicrotasks(unit) {
+    return (unit?.beats || []).flatMap(beat => beat.microtasks || []);
+  }
+
+  function unitSourceIds(unit) {
+    return new Set(Object.values(unit?.lessonContent || {})
+      .flatMap(lesson => Object.keys(lesson.sources || {})));
+  }
+
+  function authoredStoryFacts(unit) {
+    return new Set(unitMicrotasks(unit)
+      .flatMap(task => task.persistence?.checkpointFacts || []));
+  }
+
+  function targetResultContracts(unit, targetId) {
+    return unitMicrotasks(unit)
+      .flatMap(task => task.targetResults || [])
+      .filter(result => result.targetId === targetId);
+  }
+
+  function orderedUnique(values, allowed) {
+    return [...new Set((Array.isArray(values) ? values : [])
+      .filter(value => typeof value === 'string' && (!allowed || allowed.has(value))))];
+  }
+
+  function normalizeContactModes(value) {
+    const allowed = new Set(['experienced', 'audio-ended', 'audio-unavailable']);
+    return ['experienced', 'audio-ended', 'audio-unavailable']
+      .filter(mode => Array.isArray(value) && value.includes(mode) && allowed.has(mode));
   }
 
   function normalizeState(loadResult, catalog) {
@@ -110,6 +150,30 @@
             : {}),
           learningDay: validLearningDay(stored.checkpoint.learningDay)
             ? stored.checkpoint.learningDay
+            : null
+        };
+      }
+      const microtaskOrder = unitMicrotasks(unit).map(task => task.microtaskId);
+      const allowedMicrotaskIds = new Set(microtaskOrder);
+      defaults.units[unit.unitId].completedMicrotaskIds = orderedUnique(
+        stored.completedMicrotaskIds,
+        allowedMicrotaskIds
+      ).sort((left, right) => microtaskOrder.indexOf(left) - microtaskOrder.indexOf(right));
+      const storyFactOrder = unitMicrotasks(unit)
+        .flatMap(task => task.persistence?.checkpointFacts || []);
+      defaults.units[unit.unitId].storyFacts = orderedUnique(
+        stored.storyFacts,
+        authoredStoryFacts(unit)
+      ).sort((left, right) => storyFactOrder.indexOf(left) - storyFactOrder.indexOf(right));
+      const allowedSourceIds = unitSourceIds(unit);
+      for (const [sourceRef, contact] of Object.entries(stored.sourceContacts || {})) {
+        if (!allowedSourceIds.has(sourceRef) || !contact || typeof contact !== 'object') continue;
+        const contactModes = normalizeContactModes(contact.contactModes);
+        if (contactModes.length === 0) continue;
+        defaults.units[unit.unitId].sourceContacts[sourceRef] = {
+          contactModes,
+          lastLearningDay: validLearningDay(contact.lastLearningDay)
+            ? contact.lastLearningDay
             : null
         };
       }
@@ -152,6 +216,29 @@
           : lastEvidenceDay;
         normalized.intervalStage = Math.min(5, nonNegativeInteger(source.intervalStage));
         normalized.nextDueDay = validLearningDay(source.nextDueDay) ? source.nextDueDay : null;
+        const contracts = targetResultContracts(unit, target.targetId);
+        for (const contract of contracts) {
+          const cellId = `${contract.variantId}:${contract.channel}`;
+          const storedCell = source.variantCells?.[cellId];
+          if (!storedCell || typeof storedCell !== 'object') continue;
+          normalized.variantCells[cellId] = {
+            resultId: contract.resultId,
+            variantId: contract.variantId,
+            sourceRef: contract.sourceRef,
+            channel: contract.channel,
+            attemptCount: nonNegativeInteger(storedCell.attemptCount),
+            lastOutcome: MICROTASK_OUTCOMES.has(storedCell.lastOutcome)
+              ? storedCell.lastOutcome
+              : null,
+            lastSupportLevel: Math.min(3, nonNegativeInteger(storedCell.lastSupportLevel)),
+            lastLearningDay: validLearningDay(storedCell.lastLearningDay)
+              ? storedCell.lastLearningDay
+              : null,
+            nextDueDay: validLearningDay(storedCell.nextDueDay)
+              ? storedCell.nextDueDay
+              : null
+          };
+        }
       }
     }
 
@@ -214,6 +301,101 @@
     return unit?.targets.find(target => target.targetId === targetId) || null;
   }
 
+  function sameStringSet(actual, expected) {
+    if (!Array.isArray(actual) || !Array.isArray(expected)) return false;
+    const actualValues = [...new Set(actual)];
+    const expectedValues = [...new Set(expected)];
+    return actualValues.length === actual.length
+      && expectedValues.length === expected.length
+      && actualValues.length === expectedValues.length
+      && actualValues.every(value => expectedValues.includes(value));
+  }
+
+  function microtaskAudioSourceRefs(task) {
+    const refs = [];
+    for (const step of task.steps || []) {
+      refs.push(...(step.audioSourceRefs || []));
+      refs.push(...(step.challengeSourceRefs || []));
+      if (step.kind === 'explore-batch') refs.push(...(step.sourceRefs || []));
+      if (step.feedbackAudioSourceRef) refs.push(step.feedbackAudioSourceRef);
+    }
+    return [...new Set(refs)];
+  }
+
+  function validateMicrotaskCompletion(event, unit) {
+    if (unit.runtimeProfile !== 'microtask-v2') return 'runtime-profile-invalid';
+    const beat = unit.beats.find(candidate => candidate.beatId === event.beatId);
+    const task = beat?.microtasks?.find(candidate => candidate.microtaskId === event.microtaskId);
+    if (!task) return 'microtask-invalid';
+    if (event.checkpointId !== task.checkpointAfterSuccess?.checkpointId) {
+      return 'checkpointId-invalid';
+    }
+    if (!COMPLETION_STATUSES.has(event.completionStatus)) return 'completionStatus-invalid';
+    const expectedBuildStage = task.checkpointAfterSuccess?.buildStage;
+    if (event.buildStage !== expectedBuildStage) return 'buildStage-mismatch';
+
+    const expectedResults = task.targetResults || [];
+    if (!Array.isArray(event.targetResults) || event.targetResults.length !== expectedResults.length) {
+      return 'target-results-incomplete';
+    }
+    const seenResults = new Set();
+    for (const submitted of event.targetResults) {
+      if (!submitted || typeof submitted !== 'object' || seenResults.has(submitted.resultId)) {
+        return 'target-results-invalid';
+      }
+      seenResults.add(submitted.resultId);
+      const authored = expectedResults.find(result => result.resultId === submitted.resultId);
+      if (!authored) return 'target-result-invalid';
+      for (const field of [
+        'targetId', 'stepId', 'sourceRef', 'channel', 'evidenceMode', 'variantId', 'resultKind'
+      ]) {
+        if (submitted[field] !== authored[field]) return 'target-result-forged';
+      }
+      if (!MICROTASK_OUTCOMES.has(submitted.outcome)) return 'target-result-outcome-invalid';
+      if (!Number.isInteger(submitted.supportLevel) || submitted.supportLevel < 0 || submitted.supportLevel > 3) {
+        return 'target-result-support-invalid';
+      }
+      if (!Number.isInteger(submitted.heartsRemaining)
+        || submitted.heartsRemaining < 0 || submitted.heartsRemaining > 3) {
+        return 'target-result-hearts-invalid';
+      }
+    }
+
+    if (!Array.isArray(event.sourceContacts) || event.sourceContacts.length !== task.exposureRefs.length) {
+      return 'source-contacts-incomplete';
+    }
+    const submittedSourceRefs = event.sourceContacts.map(contact => contact?.sourceRef);
+    if (!sameStringSet(submittedSourceRefs, task.exposureRefs)) return 'source-contacts-invalid';
+    const allowedAudioRefs = microtaskAudioSourceRefs(task);
+    if (!Array.isArray(event.audioContactRefs)
+      || !sameStringSet(event.audioContactRefs, event.audioContactRefs)
+      || !event.audioContactRefs.every(sourceRef => allowedAudioRefs.includes(sourceRef))) {
+      return 'audio-contacts-invalid';
+    }
+    if (!Array.isArray(event.missingAudioRefs)
+      || !sameStringSet(event.missingAudioRefs, event.missingAudioRefs)
+      || !event.missingAudioRefs.every(sourceRef => allowedAudioRefs.includes(sourceRef))) {
+      return 'missing-audio-invalid';
+    }
+    if (event.audioContactRefs.some(sourceRef => event.missingAudioRefs.includes(sourceRef))) {
+      return 'audio-contact-conflict';
+    }
+    for (const contact of event.sourceContacts) {
+      const modes = normalizeContactModes(contact.contactModes);
+      if (!sameStringSet(modes, contact.contactModes)) return 'source-contact-mode-invalid';
+      if (modes.includes('audio-ended') && !event.audioContactRefs.includes(contact.sourceRef)) {
+        return 'source-contact-audio-invalid';
+      }
+      if (modes.includes('audio-unavailable') && !event.missingAudioRefs.includes(contact.sourceRef)) {
+        return 'source-contact-audio-invalid';
+      }
+    }
+    if (!sameStringSet(event.storyFacts, task.persistence?.checkpointFacts || [])) {
+      return 'story-facts-invalid';
+    }
+    return null;
+  }
+
   function validateEvent(event, catalog) {
     if (!event || typeof event !== 'object') return 'event-required';
     if (typeof event.eventId !== 'string' || event.eventId.trim() === '') return 'eventId-required';
@@ -221,6 +403,9 @@
     const unit = catalog.getTeachingUnit(event.unitId);
     if (!unit) return 'unit-invalid';
 
+    if (event.type === 'microtask-completed') {
+      return validateMicrotaskCompletion(event, unit);
+    }
     if (event.type === 'checkpoint-completed') {
       if (typeof event.checkpointId !== 'string' || event.checkpointId.trim() === '') {
         return 'checkpointId-required';
@@ -289,6 +474,62 @@
       learningDay
     };
     return [];
+  }
+
+  function applyMicrotaskCompletion(state, event, learningDay, catalog) {
+    const unit = catalog.getTeachingUnit(event.unitId);
+    const stored = state.units[event.unitId];
+    const microtaskIds = unitMicrotasks(unit).map(task => task.microtaskId);
+    const incomingIndex = microtaskIds.indexOf(event.microtaskId);
+    const storedIndex = microtaskIds.indexOf(stored.checkpoint?.microtaskId);
+    if (storedIndex >= 0 && incomingIndex < storedIndex) return [];
+
+    const previousBuildStage = stored.buildStage;
+    applyCheckpoint(state, event, learningDay, catalog);
+    if (!stored.completedMicrotaskIds.includes(event.microtaskId)) {
+      stored.completedMicrotaskIds.push(event.microtaskId);
+      stored.completedMicrotaskIds.sort((left, right) => (
+        microtaskIds.indexOf(left) - microtaskIds.indexOf(right)
+      ));
+    }
+    for (const factId of event.storyFacts) {
+      if (!stored.storyFacts.includes(factId)) stored.storyFacts.push(factId);
+    }
+    for (const contact of event.sourceContacts) {
+      const existing = stored.sourceContacts[contact.sourceRef] || {
+        contactModes: [],
+        lastLearningDay: null
+      };
+      stored.sourceContacts[contact.sourceRef] = {
+        contactModes: normalizeContactModes([
+          ...existing.contactModes,
+          ...contact.contactModes
+        ]),
+        lastLearningDay: learningDay
+      };
+    }
+    for (const result of event.targetResults) {
+      const target = state.targets[result.targetId];
+      const cellId = `${result.variantId}:${result.channel}`;
+      const existing = target.variantCells[cellId];
+      target.variantCells[cellId] = {
+        resultId: result.resultId,
+        variantId: result.variantId,
+        sourceRef: result.sourceRef,
+        channel: result.channel,
+        attemptCount: (existing?.attemptCount || 0) + 1,
+        lastOutcome: result.outcome,
+        lastSupportLevel: result.supportLevel,
+        lastLearningDay: learningDay,
+        nextDueDay: addDays(learningDay, 1)
+      };
+      target.lastOutcome = result.outcome;
+      target.lastLearningDay = learningDay;
+      target.nextDueDay = addDays(learningDay, 1);
+    }
+    return previousBuildStage < 5 && stored.buildStage === 5
+      ? [{ type: 'landmark-built', unitId: event.unitId }]
+      : [];
   }
 
   function applyUnitBuilt(state, event) {
@@ -429,7 +670,18 @@
           lastLearningDay: targetState.lastLearningDay,
           intervalStage: targetState.intervalStage,
           nextDueDay: targetState.nextDueDay,
-          nextDue
+          nextDue,
+          variantCells: Object.fromEntries(Object.entries(targetState.variantCells || {})
+            .map(([cellId, cell]) => [cellId, {
+              variantId: cell.variantId,
+              sourceRef: cell.sourceRef,
+              channel: cell.channel,
+              attemptCount: cell.attemptCount,
+              lastOutcome: cell.lastOutcome,
+              lastSupportLevel: cell.lastSupportLevel,
+              lastLearningDay: cell.lastLearningDay,
+              nextDueDay: cell.nextDueDay
+            }]))
         };
       }
       const mastered = stored.buildStage === 5
@@ -440,6 +692,9 @@
         landmarkId: unit.landmarkId,
         lessonIds: [...unit.lessonIds],
         checkpoint: clone(stored.checkpoint),
+        completedMicrotaskIds: clone(stored.completedMicrotaskIds),
+        storyFacts: clone(stored.storyFacts),
+        sourceContacts: clone(stored.sourceContacts),
         buildStage: stored.buildStage,
         mastered,
         visualState: mastered ? 'state-mastered' : `state-${stored.buildStage}`,
@@ -494,6 +749,9 @@
     let effects = [];
     if (event.type === 'checkpoint-completed') {
       effects = applyCheckpoint(candidate, event, learningDay, catalog);
+    }
+    if (event.type === 'microtask-completed') {
+      effects = applyMicrotaskCompletion(candidate, event, learningDay, catalog);
     }
     if (event.type === 'unit-built') effects = applyUnitBuilt(candidate, event);
     if (event.type === 'formative-attempt') effects = applyFormative(candidate, event, learningDay);
