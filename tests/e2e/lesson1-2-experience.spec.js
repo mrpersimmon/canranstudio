@@ -314,3 +314,47 @@ test('a child can cancel or confirm restarting mid-unit without changing the mus
   expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
   expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('true');
 });
+
+test('the local stage navigator previews any microtask without changing durable progress', async ({ page }) => {
+  await installInstantAudio(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFresh(page);
+  await page.locator('[data-action="start"]').click();
+  await page.locator('[data-action="audio-play"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
+  await clickValue(page, 'select-entity', 'handbag');
+  await clickValue(page, 'select-target', 'handbag-owner');
+  await page.locator('[data-action="response-submit"]').click();
+  await page.locator('[data-action="audio-play"]').click();
+  await clickValue(page, 'select-entity', 'handbag');
+  await page.locator('[data-action="response-submit"]').click();
+  await page.locator('[data-action="audio-play"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
+  const durableBefore = await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY);
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  for (const [index, task] of tasks.entries()) {
+    await expect(page.getByRole('button', { name: `阶段 ${index + 1}：${task.presentation.title}` }))
+      .toBeVisible();
+  }
+  await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L02-M07');
+  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBe(durableBefore);
+
+  for (const factId of ['claim-record-1', 'claim-record-2', 'claim-record-3']) {
+    await clickValue(page, 'toggle-fact', factId);
+  }
+  await page.locator('[data-action="response-submit"]').click();
+  await clickValue(page, 'select-entity', 'opening-lever');
+  await clickValue(page, 'select-target', 'station-power');
+  await page.locator('[data-action="response-submit"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-status', 'unit-built');
+  await expect(page.locator('.case-progress')).toContainText('12 / 12');
+  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBe(durableBefore);
+
+  await page.getByRole('button', { name: '退出阶段预览' }).click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'false');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
+  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBe(durableBefore);
+});

@@ -141,6 +141,86 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   background: linear-gradient(145deg, #fffdf6, #f2deb5);
   box-shadow: 0 9px 0 rgba(62, 36, 28, .82), 0 18px 36px rgba(3, 12, 24, .42);
 }
+.settings-tray--stages {
+  width: min(420px, calc(100vw - 20px));
+  max-height: calc(100vh - 94px);
+  overflow: auto;
+}
+
+.settings-tray__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 5px 9px;
+  border-bottom: 1px solid rgba(107, 63, 42, .22);
+}
+.settings-tray__heading strong { font: 400 1.08rem/1.2 'ZCOOL KuaiLe', sans-serif; }
+.settings-tray__heading small { color: #755c4d; font-size: .72rem; font-weight: 800; }
+
+.stage-jump-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 9px 0;
+}
+.stage-jump-button {
+  min-width: 0;
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  padding: 6px 8px;
+  border: 2px solid rgba(107, 63, 42, .32);
+  border-radius: 11px;
+  color: var(--walnut-dark);
+  background: rgba(255, 250, 240, .78);
+  cursor: pointer;
+  text-align: left;
+}
+.stage-jump-button b {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--brass);
+  border-radius: 50%;
+  color: #75482b;
+  background: #ffe2a0;
+  font: 800 .78rem/1 'Baloo 2', sans-serif;
+}
+.stage-jump-button span {
+  min-width: 0;
+  overflow: hidden;
+  font: 400 .88rem/1.15 'ZCOOL KuaiLe', sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stage-jump-button.is-current {
+  border-color: var(--teal-dark);
+  background: #dcf8f1;
+  box-shadow: inset 0 0 0 2px rgba(36, 127, 121, .15);
+}
+.stage-jump-button.is-current b { color: #fff; border-color: var(--teal-dark); background: var(--teal-dark); }
+
+.preview-mode-badge {
+  position: absolute;
+  z-index: 36;
+  left: 50%;
+  bottom: -14px;
+  padding: 5px 12px;
+  border: 2px solid var(--amber-light);
+  border-radius: 999px;
+  color: var(--night-deep);
+  background: var(--amber-light);
+  box-shadow: 0 4px 0 rgba(62, 36, 28, .72);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
 
 .restart-control {
   width: 100%;
@@ -157,11 +237,13 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   cursor: pointer;
   text-align: left;
 }
+.settings-tray .restart-control { margin-top: 8px; border-top: 1px solid rgba(107, 63, 42, .12); }
 .restart-control > span:first-child { color: #9a4b45; font-size: 1.9rem; text-align: center; }
 .restart-control strong,
 .restart-control small { display: block; }
 .restart-control strong { font: 400 1.05rem/1.2 'ZCOOL KuaiLe', sans-serif; }
 .restart-control small { margin-top: 3px; color: #755c4d; font-size: .78rem; font-weight: 700; }
+.preview-exit-control > span:first-child { color: var(--teal-dark); }
 
 .restart-backdrop {
   position: absolute;

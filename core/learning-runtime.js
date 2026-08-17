@@ -130,6 +130,7 @@
     let pendingTask = null;
     let pendingPersistence = null;
     let durableFacts = new Set();
+    let previewMode = false;
     let state = {
       status: 'idle',
       mode: 'microtask-v2',
@@ -350,7 +351,7 @@
 
     function persistCompletedTask(event) {
       const task = currentTask();
-      const result = ledger.apply(event);
+      const result = previewMode ? { persisted: true } : ledger.apply(event);
       if (result?.persisted !== true) {
         pendingPersistence = clone(event);
         state = { ...state, phase: 'persistence-retry' };
@@ -364,7 +365,7 @@
       pendingPersistence = null;
       for (const factId of event.storyFacts) durableFacts.add(factId);
       const effects = [{
-        type: 'runtime/microtask-completed',
+        type: previewMode ? 'runtime/microtask-preview-completed' : 'runtime/microtask-completed',
         microtaskId: task.microtaskId,
         checkpointId: event.checkpointId,
         completionStatus: event.completionStatus
@@ -376,11 +377,13 @@
           phase: 'completed',
           audio: null
         };
-        effects.push({
-          type: 'chapter/interior-complete',
-          lessonId: task.lessonId,
-          storyFacts: clone(event.storyFacts)
-        });
+        effects.push(previewMode
+          ? { type: 'chapter/preview-stop', lessonId: task.lessonId }
+          : {
+              type: 'chapter/interior-complete',
+              lessonId: task.lessonId,
+              storyFacts: clone(event.storyFacts)
+            });
         return effects;
       }
       if (task.growthBoundary === 'unit-built') {
@@ -388,11 +391,15 @@
           ...state,
           status: 'unit-built',
           phase: 'completed',
-          buildStage: 5,
+          buildStage: previewMode ? state.buildStage : 5,
           audio: null
         };
-        effects.push({ type: 'landmark/build-stage', buildStage: 5 });
-        effects.push({ type: 'runtime/unit-built', unitId: unit.unitId });
+        if (previewMode) {
+          effects.push({ type: 'runtime/preview-complete', unitId: unit.unitId });
+        } else {
+          effects.push({ type: 'landmark/build-stage', buildStage: 5 });
+          effects.push({ type: 'runtime/unit-built', unitId: unit.unitId });
+        }
         return effects;
       }
       const next = enterTask(activeTaskIndex + 1);
@@ -450,10 +457,12 @@
       if (!unit.lessonIds.includes(entryLesson)) {
         throw new TypeError(`entryLesson must belong to ${unit.unitId}`);
       }
+      previewMode = false;
       const projection = ledger.read();
       const durable = projection?.units?.[unit.unitId] || {};
       durableFacts = new Set(Array.isArray(durable.storyFacts) ? durable.storyFacts : []);
       state.entryLesson = entryLesson;
+      state.mode = 'microtask-v2';
       state.buildStage = Number.isInteger(durable.buildStage) ? durable.buildStage : 0;
       const completedId = typeof durable.checkpoint === 'object'
         ? durable.checkpoint?.microtaskId
@@ -491,6 +500,34 @@
         beatId: authored.beatId,
         microtaskId: authored.task.microtaskId,
         stepId: authored.task.steps[0].stepId
+      }]);
+    }
+
+    function preview({ microtaskId } = {}) {
+      if (state.status !== 'idle') {
+        throw new TypeError('microtask preview requires a fresh runtime');
+      }
+      const targetIndex = authoredTasks.findIndex(item => item.task.microtaskId === microtaskId);
+      if (targetIndex < 0) throw new TypeError(`unknown preview microtask ${microtaskId}`);
+      previewMode = true;
+      pendingPersistence = null;
+      durableFacts = new Set(authoredTasks
+        .slice(0, targetIndex)
+        .flatMap(item => item.task.persistence?.checkpointFacts || []));
+      state = {
+        ...state,
+        mode: 'microtask-v2-preview',
+        entryLesson: authoredTasks[targetIndex].task.lessonId,
+        buildStage: 0,
+        audio: null
+      };
+      const authored = enterTask(targetIndex);
+      return publish([{
+        type: 'scene/show',
+        beatId: authored.beatId,
+        microtaskId: authored.task.microtaskId,
+        stepId: authored.task.steps[0].stepId,
+        preview: true
       }]);
     }
 
@@ -728,7 +765,7 @@
       return publish(effects);
     }
 
-    return Object.freeze({ enter, dispatch, snapshot, destroy });
+    return Object.freeze({ enter, preview, dispatch, snapshot, destroy });
   }
 
   function create({ unit, ledger, effectSink = () => {}, seed = 1 } = {}) {

@@ -1901,6 +1901,7 @@
       experience: {
         documentTitle: 'Lesson 1–2 · 星灯失物招领站',
         lessonLabel: 'NEW CONCEPT ENGLISH · LESSON 1–2',
+        stagePreviewEnabled: true,
         ambientAudioSrc: '/poc/lesson1-2-experience/audio/starlight-station-ambience.mp3',
         arrival: {
           kicker: '晨光原野 · 第一座小站',

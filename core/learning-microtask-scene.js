@@ -38,17 +38,19 @@
     }
 
     const tasks = unit.beats.flatMap(beat => (beat.microtasks || []).map(task => ({ beat, task })));
+    const stagePreviewEnabled = unit.experience?.stagePreviewEnabled === true;
     const sourceIndex = Object.values(unit.lessonContent || {}).reduce((index, lesson) => {
       for (const [sourceId, source] of Object.entries(lesson.sources || {})) index[sourceId] = source;
       return index;
     }, {});
-    const store = storeFactory.createLocalStorageAdapter(global.localStorage);
-    const ledger = ledgerFactory.open({
-      store,
+    const durableStore = storeFactory.createLocalStorageAdapter(global.localStorage);
+    const durableLedger = ledgerFactory.open({
+      store: durableStore,
       key: storageKey,
       catalog,
       clock: { learningDay }
     });
+    let ledger = durableLedger;
 
     const ui = {
       view: 'arrival',
@@ -64,6 +66,9 @@
       resting: false,
       settingsOpen: false,
       restartConfirmOpen: false,
+      previewMode: false,
+      previewTargetId: null,
+      previewReturnStarted: false,
       voice: null,
       music: null,
       musicMuted: false
@@ -75,15 +80,18 @@
       ui.musicMuted = false;
     }
 
-    let runtime;
-    runtime = runtimeFactory.create({
-      unit,
-      ledger,
-      seed: 1201,
-      effectSink(effect) {
-        ui.pendingEffects.push(effect);
-      }
-    });
+    let runtimeSequence = 1200;
+    function createRuntime(activeLedger) {
+      return runtimeFactory.create({
+        unit,
+        ledger: activeLedger,
+        seed: ++runtimeSequence,
+        effectSink(effect) {
+          ui.pendingEffects.push(effect);
+        }
+      });
+    }
+    let runtime = createRuntime(ledger);
 
     function source(sourceRef) {
       return sourceIndex[sourceRef] || null;
@@ -108,6 +116,74 @@
 
     function currentStep(snapshot = runtime.snapshot()) {
       return currentTask(snapshot)?.task.steps.find(step => step.stepId === snapshot.stepId) || null;
+    }
+
+    function createPreviewLedger(targetMicrotaskId) {
+      const target = tasks.find(item => item.task.microtaskId === targetMicrotaskId);
+      if (!target) return null;
+      const previewStore = storeFactory.createMemoryAdapter();
+      const previewLedger = ledgerFactory.open({
+        store: previewStore,
+        key: `${storageKey}:preview`,
+        catalog,
+        clock: { learningDay }
+      });
+      return { ledger: previewLedger, target };
+    }
+
+    function resetSessionUi() {
+      ui.pendingEffects.length = 0;
+      ui.lastStepKey = null;
+      ui.selectedEntityId = null;
+      ui.selectedTargetId = null;
+      ui.selectedSourceRef = null;
+      ui.selectedFactIds = new Set();
+      ui.selectedBlockRefs = [];
+      ui.selectedCaseByTask = {};
+      ui.feedback = null;
+      ui.resting = false;
+      ui.settingsOpen = false;
+      ui.restartConfirmOpen = false;
+    }
+
+    function replaceRuntime(nextLedger) {
+      pauseVoice();
+      runtime.destroy();
+      resetSessionUi();
+      ledger = nextLedger;
+      runtime = createRuntime(ledger);
+    }
+
+    function startPreview(targetMicrotaskId) {
+      if (!stagePreviewEnabled) return;
+      const prepared = createPreviewLedger(targetMicrotaskId);
+      if (!prepared) return;
+      const returnStarted = ui.previewMode
+        ? ui.previewReturnStarted
+        : runtime.snapshot().status !== 'idle';
+      replaceRuntime(prepared.ledger);
+      ui.previewMode = true;
+      ui.previewTargetId = targetMicrotaskId;
+      ui.previewReturnStarted = returnStarted;
+      ui.view = 'mission';
+      runtime.preview({ microtaskId: prepared.target.task.microtaskId });
+      processEffects();
+      render();
+    }
+
+    function exitPreview() {
+      if (!ui.previewMode) return;
+      const returnStarted = ui.previewReturnStarted;
+      replaceRuntime(durableLedger);
+      ui.previewMode = false;
+      ui.previewTargetId = null;
+      ui.previewReturnStarted = false;
+      ui.view = returnStarted ? 'mission' : 'arrival';
+      if (returnStarted) {
+        runtime.enter({ entryLesson });
+        processEffects();
+      }
+      render();
     }
 
     function pauseVoice() {
@@ -432,12 +508,33 @@
     function commonShell(body, snapshot) {
       const taskIndex = Math.max(0, tasks.findIndex(item => item.task.microtaskId === snapshot.microtaskId));
       const completed = ledger.read().units?.[unit.unitId]?.completedMicrotaskIds?.length || 0;
-      const progress = snapshot.status === 'unit-built' ? 100 : Math.round((completed / tasks.length) * 100);
+      const progress = snapshot.status === 'unit-built'
+        ? 100
+        : Math.round(((ui.previewMode ? taskIndex + 1 : completed) / tasks.length) * 100);
+      const shownPosition = snapshot.status === 'unit-built'
+        ? tasks.length
+        : (snapshot.microtaskId ? taskIndex + 1 : completed);
       const backgroundInactive = ui.restartConfirmOpen ? ' inert aria-hidden="true"' : '';
-      const settings = ui.settingsOpen ? `<aside class="settings-tray" id="course-settings-panel" aria-label="课程设置">
-          <button class="restart-control" type="button" data-action="restart-request">
-            <span aria-hidden="true">↺</span><span><strong>重新开始本单元</strong><small>回到学习起点</small></span>
-          </button>
+      const highlightedPreviewId = ui.previewMode
+        ? (snapshot.microtaskId || ui.previewTargetId)
+        : null;
+      const stageButtons = tasks.map(({ task }, index) => (
+        `<button class="stage-jump-button${task.microtaskId === highlightedPreviewId ? ' is-current' : ''}" type="button" data-action="preview-jump" data-value="${escapeHtml(task.microtaskId)}" aria-label="阶段 ${index + 1}：${escapeHtml(task.presentation.title)}" ${task.microtaskId === highlightedPreviewId ? 'aria-current="true"' : ''}>
+          <b>${index + 1}</b><span>${escapeHtml(task.presentation.title)}</span>
+        </button>`
+      )).join('');
+      const settings = ui.settingsOpen ? `<aside class="settings-tray${stagePreviewEnabled ? ' settings-tray--stages' : ''}" id="course-settings-panel" aria-label="课程设置">
+          ${stagePreviewEnabled
+            ? `<div class="settings-tray__heading"><strong>阶段导航</strong><small>预览不会保存学习进度</small></div>
+               <div class="stage-jump-grid" role="group" aria-label="跳转到阶段">${stageButtons}</div>`
+            : ''}
+          ${ui.previewMode
+            ? `<button class="restart-control preview-exit-control" type="button" data-action="preview-exit">
+                <span aria-hidden="true">↩</span><span><strong>退出阶段预览</strong><small>回到原来的学习位置</small></span>
+              </button>`
+            : `<button class="restart-control" type="button" data-action="restart-request">
+                <span aria-hidden="true">↺</span><span><strong>重新开始本单元</strong><small>回到学习起点</small></span>
+              </button>`}
         </aside>` : '';
       const restartConfirm = ui.restartConfirmOpen ? `<div class="restart-backdrop">
           <section class="restart-dialog" role="dialog" aria-modal="true" aria-labelledby="restart-dialog-title" aria-describedby="restart-dialog-copy">
@@ -451,14 +548,15 @@
             </div>
           </section>
         </div>` : '';
-      return `<div class="station-app" data-view="${escapeHtml(ui.view)}" data-runtime-status="${escapeHtml(snapshot.status)}" data-runtime-phase="${escapeHtml(snapshot.phase || 'none')}" data-runtime-microtask="${escapeHtml(snapshot.microtaskId || 'none')}" data-runtime-step="${escapeHtml(snapshot.stepId || 'none')}" data-runtime-challenge="${escapeHtml(snapshot.challengeRef || 'none')}" data-build-stage="${snapshot.buildStage || 0}">
+      return `<div class="station-app" data-view="${escapeHtml(ui.view)}" data-preview-mode="${ui.previewMode ? 'true' : 'false'}" data-runtime-status="${escapeHtml(snapshot.status)}" data-runtime-phase="${escapeHtml(snapshot.phase || 'none')}" data-runtime-microtask="${escapeHtml(snapshot.microtaskId || 'none')}" data-runtime-step="${escapeHtml(snapshot.stepId || 'none')}" data-runtime-challenge="${escapeHtml(snapshot.challengeRef || 'none')}" data-build-stage="${snapshot.buildStage || 0}">
         <header class="station-header"${backgroundInactive}>
           <div class="station-brand"><span>${escapeHtml(unit.experience?.lessonLabel || '')}</span><strong>${escapeHtml(unit.title)}</strong></div>
-          <div class="case-progress" aria-label="当日学习进度"><span style="--progress:${progress}%"></span><b>${snapshot.microtaskId ? taskIndex + 1 : completed} / ${tasks.length}</b></div>
+          <div class="case-progress" aria-label="${ui.previewMode ? '预览阶段位置' : '当日学习进度'}"><span style="--progress:${progress}%"></span><b>${shownPosition} / ${tasks.length}</b></div>
           <div class="header-actions">
             <button class="music-toggle" type="button" data-action="toggle-music" aria-pressed="${ui.musicMuted ? 'true' : 'false'}" aria-label="${ui.musicMuted ? '打开背景音乐' : '关闭背景音乐'}"><span aria-hidden="true">${ui.musicMuted ? '🔇' : '🎵'}</span></button>
             <button class="settings-toggle" type="button" data-action="toggle-settings" aria-expanded="${ui.settingsOpen ? 'true' : 'false'}" aria-controls="course-settings-panel" aria-label="课程设置"><span aria-hidden="true">⚙</span></button>
           </div>
+          ${ui.previewMode ? '<span class="preview-mode-badge" role="status">阶段预览 · 不保存</span>' : ''}
           ${settings}
         </header>
         <section class="station-world"${backgroundInactive}>${body}</section>
@@ -511,12 +609,16 @@
       const chapter = unit.experience?.chapterStop || {};
       return commonShell(`<div class="milestone-card chapter-card">
         <div class="milestone-lamp" aria-hidden="true"><span>★</span></div>
-        <p class="kicker">${escapeHtml(chapter.kicker)}</p>
+        <p class="kicker">${escapeHtml(ui.previewMode ? '阶段预览' : chapter.kicker)}</p>
         <h1>${escapeHtml(chapter.title)}</h1>
-        <p>${escapeHtml(ui.resting ? '进度已经保存。可以关掉页面，下次会从整理室继续。' : chapter.copy)}</p>
+        <p>${escapeHtml(ui.previewMode
+          ? '这是章节停靠点预览，没有写入真实学习进度。'
+          : (ui.resting ? '进度已经保存。可以关掉页面，下次会从整理室继续。' : chapter.copy))}</p>
         <div class="chapter-actions">
           <button class="door-handle" type="button" data-action="chapter-continue">${escapeHtml(chapter.continueLabel)}</button>
-          <button class="quiet-action" type="button" data-action="rest">${escapeHtml(chapter.restLabel)}</button>
+          ${ui.previewMode
+            ? '<button class="quiet-action" type="button" data-action="preview-exit">退出阶段预览</button>'
+            : `<button class="quiet-action" type="button" data-action="rest">${escapeHtml(chapter.restLabel)}</button>`}
         </div>
       </div>`, snapshot);
     }
@@ -525,11 +627,15 @@
       const complete = unit.experience?.completion || {};
       return commonShell(`<div class="milestone-card completion-card">
         <div class="opening-stars" aria-hidden="true"><i>✦</i><i>★</i><i>✦</i></div>
-        <p class="kicker">${escapeHtml(complete.kicker)}</p>
+        <p class="kicker">${escapeHtml(ui.previewMode ? '阶段预览完成' : complete.kicker)}</p>
         <h1>${escapeHtml(complete.title)}</h1>
-        <p>${escapeHtml(complete.copy)}</p>
-        <div class="saved-landmark"><span>当日建设</span><strong>已安全保存</strong><small>长期掌握会在之后的回访中点亮</small></div>
-        <button class="quiet-action" type="button" data-action="replay">${escapeHtml(complete.replayLabel)}</button>
+        <p>${escapeHtml(ui.previewMode ? '这段体验已经走完，可以换一个阶段继续查看。' : complete.copy)}</p>
+        ${ui.previewMode
+          ? '<div class="saved-landmark"><span>隔离预览</span><strong>没有写入学习进度</strong><small>退出后回到原来的稳定位置</small></div>'
+          : '<div class="saved-landmark"><span>当日建设</span><strong>已安全保存</strong><small>长期掌握会在之后的回访中点亮</small></div>'}
+        ${ui.previewMode
+          ? '<button class="quiet-action" type="button" data-action="preview-exit">退出阶段预览</button>'
+          : `<button class="quiet-action" type="button" data-action="replay">${escapeHtml(complete.replayLabel)}</button>`}
       </div>`, snapshot);
     }
 
@@ -600,6 +706,14 @@
       if (action === 'toggle-settings') {
         ui.settingsOpen = !ui.settingsOpen;
         render();
+        return;
+      }
+      if (action === 'preview-jump') {
+        startPreview(value);
+        return;
+      }
+      if (action === 'preview-exit') {
+        exitPreview();
         return;
       }
       if (action === 'restart-request') {
@@ -684,7 +798,11 @@
 
     global.addEventListener('pagehide', pauseVoice);
     render();
-    return Object.freeze({ destroy: () => runtime.destroy(), runtime, ledger });
+    return Object.freeze({
+      destroy: () => runtime.destroy(),
+      get runtime() { return runtime; },
+      get ledger() { return ledger; }
+    });
   }
 
   return Object.freeze({ mount });

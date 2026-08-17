@@ -5,6 +5,8 @@ const assert = require('node:assert/strict');
 
 const catalog = require('../../core/curriculum-catalog');
 const { create, evaluateRule } = require('../../core/learning-runtime');
+const learningLedger = require('../../core/learning-ledger');
+const { createMemoryAdapter } = require('../../core/learning-store');
 
 const unit = catalog.getTeachingUnit('FLC-U01');
 const nceUnit = catalog.getTeachingUnit('NCE-U01');
@@ -97,6 +99,53 @@ test('Lesson 1 enters the first authored step of the first durable microtask', (
     microtaskId: 'L01-M01',
     stepId: 'L01-M01:S01'
   }]);
+});
+
+test('microtask preview enters any authored stage and never writes learning progress', () => {
+  const ledger = learningLedger.open({
+    store: createMemoryAdapter(),
+    key: 'preview-runtime',
+    catalog,
+    clock: { learningDay: () => '2026-08-17' }
+  });
+  const effects = [];
+  const authoredTasks = nceUnit.beats.flatMap(beat => beat.microtasks || []);
+  const before = ledger.read();
+  for (const [index, task] of authoredTasks.entries()) {
+    const candidate = create({ unit: nceUnit, ledger, seed: 102 + index });
+    const entered = candidate.preview({ microtaskId: task.microtaskId });
+    assert.equal(entered.snapshot.microtaskId, task.microtaskId);
+    assert.equal(entered.snapshot.stepId, task.steps[0].stepId);
+    assert.equal(entered.snapshot.mode, 'microtask-v2-preview');
+    assert.deepEqual(ledger.read(), before);
+    candidate.destroy();
+  }
+
+  const runtime = create({
+    unit: nceUnit,
+    ledger,
+    seed: 202,
+    effectSink: effect => effects.push(effect)
+  });
+
+  const entered = runtime.preview({ microtaskId: 'L02-M07' });
+  assert.equal(entered.snapshot.microtaskId, 'L02-M07');
+  assert.equal(entered.snapshot.stepId, 'L02-M07:S01');
+  assert.equal(entered.snapshot.mode, 'microtask-v2-preview');
+
+  runtime.dispatch({
+    type: 'response/submit',
+    response: { factIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'] }
+  });
+  const completed = runtime.dispatch({
+    type: 'response/submit',
+    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
+  });
+
+  assert.equal(completed.snapshot.status, 'unit-built');
+  assert.equal(completed.snapshot.buildStage, 0);
+  assert.deepEqual(ledger.read(), before);
+  assert.ok(!effects.some(effect => effect.type === 'landmark/build-stage'));
 });
 
 test('Lesson 1 full listening advances only after every active real audio ended callback', () => {
