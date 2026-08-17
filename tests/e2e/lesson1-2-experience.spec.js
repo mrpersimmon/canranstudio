@@ -130,6 +130,14 @@ test('the guide uses the approved front-facing pose in the first story scene', a
   await expect(guide).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
 });
 
+test('the polite-attention choice asks the child what to say', async ({ page }) => {
+  await openFresh(page);
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 2：礼貌问一问' }).click();
+  await expect(page.locator('.mission-prompt')).toHaveText('礼貌叫住她，应该怎么说？');
+  await expect(page.getByText('礼貌叫住她', { exact: true })).toHaveCount(0);
+});
+
 test('finding the handbag uses one required word sound before a visual label reveal', async ({ page }) => {
   await installManualAudio(page);
   await openFresh(page);

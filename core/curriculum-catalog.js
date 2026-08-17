@@ -459,7 +459,7 @@
       ],
       steps: [
         {
-          stepId: 'L01-M02:S01', kind: 'select-one', prompt: '礼貌叫住她',
+          stepId: 'L01-M02:S01', kind: 'select-one', prompt: '礼貌叫住她，应该怎么说？',
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
