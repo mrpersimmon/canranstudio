@@ -160,7 +160,12 @@
     }
 
     function phaseForStep(step) {
-      if (['audio-sequence', 'source-reveal'].includes(step?.kind)) return 'audio-ready';
+      if (step?.kind === 'audio-sequence') return 'audio-ready';
+      if (step?.kind === 'source-reveal') {
+        return Array.isArray(step.audioSourceRefs) && step.audioSourceRefs.length > 0
+          ? 'audio-ready'
+          : 'response';
+      }
       if (
         ['match-entity', 'match-entity-batch'].includes(step?.kind)
         && step.challengeMode !== 'word-form'

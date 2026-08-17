@@ -427,11 +427,11 @@
           kind: 'source-reveal',
           prompt: '收好黄铜标签',
           sourceRef: 'L01-W07',
-          audioSourceRefs: ['L01-W07'],
-          gate: AUDIO_ENDED_GATE
+          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-W07' },
+          revealMode: 'visual-only'
         }
       ],
-      requiredFactIds: ['owner-chosen', 'handbag-audio-matched', 'handbag-label-heard'],
+      requiredFactIds: ['owner-chosen', 'handbag-audio-matched', 'handbag-label-seen'],
       checkpointFacts: ['handbag-returned', 'case-clue-owner']
     }),
     nceMicrotask({

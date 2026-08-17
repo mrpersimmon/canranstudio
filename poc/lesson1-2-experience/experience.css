@@ -678,6 +678,25 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   letter-spacing: .02em;
 }
 
+.source-label-reveal {
+  width: min(390px, 88vw);
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 20px 18px 17px;
+  border: 4px double var(--brass);
+  border-radius: 18px 18px 8px 8px;
+  color: var(--walnut-dark);
+  background:
+    linear-gradient(90deg, transparent 13%, rgba(107, 63, 42, .09) 13% 14%, transparent 14% 86%, rgba(107, 63, 42, .09) 86% 87%, transparent 87%),
+    linear-gradient(180deg, #fffaf0, #f0d79f);
+  box-shadow: 0 8px 0 #8c623e, 0 14px 24px rgba(79, 48, 28, .18);
+}
+.source-label-reveal > span { color: var(--brass); font-size: 1.4rem; }
+.source-label-reveal > small { color: #7a5c48; font-weight: 800; letter-spacing: .08em; }
+.source-label-reveal > strong { font: 700 clamp(2rem, 7vw, 3rem)/1.05 'Fredoka', sans-serif; }
+.source-label-reveal .commit-action { margin-top: 7px; }
+
 .speech-choice-grid .choice-token { min-height: 78px; grid-template-columns: auto 1fr; text-align: left; }
 .speech-choice-grid .choice-token strong { font-family: 'Fredoka', sans-serif; font-size: clamp(1rem, 2.4vw, 1.35rem); }
 .speech-mark { color: var(--brass); font: 700 2.2rem/1 Georgia, serif; }

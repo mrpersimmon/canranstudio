@@ -223,7 +223,7 @@ test('Lesson 1 turns three wrong actions into teaching support and still require
   assert.deepEqual(ledger.events, []);
 });
 
-test('Lesson 1 M01 persists both target results and contacts once, after its final label audio ended', () => {
+test('Lesson 1 M01 persists after one word sound and a visual label filing', () => {
   const ledger = fakeNceLedger();
   const runtime = create({ unit: nceUnit, ledger, seed: 109 });
   runtime.enter({ entryLesson: 'lesson1' });
@@ -239,15 +239,12 @@ test('Lesson 1 M01 persists both target results and contacts once, after its fin
   });
 
   assert.equal(matched.snapshot.stepId, 'L01-M01:S04');
-  assert.equal(matched.snapshot.phase, 'audio-ready');
+  assert.equal(matched.snapshot.phase, 'response');
   assert.deepEqual(ledger.events, []);
 
-  const labelPlaying = runtime.dispatch({ type: 'audio/play' });
-  assert.deepEqual(ledger.events, []);
   const completed = runtime.dispatch({
-    type: 'audio/ended',
-    requestId: labelPlaying.snapshot.audio.requestId,
-    segmentIndex: 0
+    type: 'response/submit',
+    response: { sourceRef: 'L01-W07' }
   });
 
   assert.equal(completed.snapshot.microtaskId, 'L01-M02');
@@ -454,11 +451,9 @@ test('microtask v2 audio failure needs explicit fallback and never forges an aud
   runtime.dispatch({
     type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
   });
-  playing = runtime.dispatch({ type: 'audio/play' });
-  runtime.dispatch({
-    type: 'audio/failed', requestId: playing.snapshot.audio.requestId, reason: 'offline'
+  const completed = runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L01-W07' }
   });
-  const completed = runtime.dispatch({ type: 'audio/continue-without-sound' });
 
   assert.equal(completed.snapshot.microtaskId, 'L01-M02');
   assert.equal(ledger.events.length, 1);

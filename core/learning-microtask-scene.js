@@ -480,6 +480,16 @@
       </div>${submitButton(ui.selectedFactIds.size === step.factIds.length, '让线索一起发光')}`;
     }
 
+    function sourceRevealResponse(step) {
+      const item = source(step.sourceRef) || {};
+      return `<div class="source-label-reveal" data-response-kind="source-reveal">
+        <span aria-hidden="true">✦</span>
+        <small>黄铜物品签</small>
+        <strong>${escapeHtml(item.text || '')}</strong>
+        <button class="commit-action" type="button" data-action="response-submit">收好标签<span aria-hidden="true">➜</span></button>
+      </div>`;
+    }
+
     function submitButton(enabled, label = '确认这条线索') {
       return `<button class="commit-action" type="button" data-action="response-submit" ${enabled ? '' : 'disabled'}>${escapeHtml(label)}<span aria-hidden="true">✦</span></button>`;
     }
@@ -493,6 +503,7 @@
       if (step.kind === 'select-case') return caseResponse(step);
       if (step.kind === 'ordered-blocks') return orderedBlocksResponse(snapshot, step);
       if (step.kind === 'all-of') return allOfResponse(step);
+      if (step.kind === 'source-reveal') return sourceRevealResponse(step);
       return '';
     }
 
@@ -684,6 +695,7 @@
         };
       }
       if (step.kind === 'all-of') return { factIds: [...ui.selectedFactIds] };
+      if (step.kind === 'source-reveal') return { sourceRef: step.sourceRef };
       return {};
     }
 

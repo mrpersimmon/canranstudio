@@ -43,6 +43,7 @@ async function installInstantAudio(page, { failVoice = false } = {}) {
 
 async function installManualAudio(page) {
   await page.addInitScript(ambienceSuffix => {
+    window.__courseAudioStarts = [];
     class ManualAudio extends EventTarget {
       constructor(src) {
         super();
@@ -54,7 +55,10 @@ async function installManualAudio(page) {
       pause() {}
       play() {
         const isCourseAudio = !String(this.src).endsWith(ambienceSuffix);
-        if (isCourseAudio) window.__pendingCourseAudio = this;
+        if (isCourseAudio) {
+          window.__courseAudioStarts.push(String(this.src));
+          window.__pendingCourseAudio = this;
+        }
         return Promise.resolve();
       }
     }
@@ -126,6 +130,36 @@ test('the guide uses the approved front-facing pose in the first story scene', a
   await expect(guide).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
 });
 
+test('finding the handbag uses one required word sound before a visual label reveal', async ({ page }) => {
+  await installManualAudio(page);
+  await openFresh(page);
+  await page.locator('[data-action="start"]').click();
+  await page.locator('[data-action="audio-play"]').click();
+  for (let index = 0; index < 7; index += 1) {
+    await page.evaluate(() => window.__finishCourseAudio());
+  }
+  await clickValue(page, 'select-entity', 'handbag');
+  await clickValue(page, 'select-target', 'handbag-owner');
+  await page.locator('[data-action="response-submit"]').click();
+  await page.locator('[data-action="audio-play"]').click();
+  await page.evaluate(() => window.__finishCourseAudio());
+  await clickValue(page, 'select-entity', 'handbag');
+  await page.locator('[data-action="response-submit"]').click();
+
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S04');
+  await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
+  await expect(page.locator('.source-label-reveal')).toContainText('handbag');
+  expect(await page.evaluate(() => (
+    window.__courseAudioStarts.filter(src => src.endsWith('/l01-w07.mp3')).length
+  ))).toBe(1);
+
+  await page.getByRole('button', { name: '收好标签' }).click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
+  expect(await page.evaluate(() => (
+    window.__courseAudioStarts.filter(src => src.endsWith('/l01-w07.mp3')).length
+  ))).toBe(1);
+});
+
 test('the whole child UI completes twelve catalog tasks and grows only at the final boundary', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.stack || error.message));
@@ -171,6 +205,11 @@ test('the whole child UI completes twelve catalog tasks and grows only at the fi
     if (step.kind === 'explore-batch') {
       const selected = page.locator('button[data-action="explore"].is-selected');
       await selected.click();
+      await settle(page);
+      continue;
+    }
+    if (step.kind === 'source-reveal') {
+      await page.locator('[data-action="response-submit"]').click();
       await settle(page);
       continue;
     }
@@ -239,8 +278,7 @@ test('real ended callbacks gate progress and the next microtask is restored afte
   await page.evaluate(() => window.__finishCourseAudio());
   await clickValue(page, 'select-entity', 'handbag');
   await page.locator('[data-action="response-submit"]').click();
-  await page.locator('[data-action="audio-play"]').click();
-  await page.evaluate(() => window.__finishCourseAudio());
+  await page.getByRole('button', { name: '收好标签' }).click();
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
 
   const stored = JSON.parse(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY));
@@ -292,7 +330,7 @@ test('a child can cancel or confirm restarting mid-unit without changing the mus
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S03');
   await clickValue(page, 'select-entity', 'handbag');
   await page.locator('[data-action="response-submit"]').click();
-  await page.locator('[data-action="audio-play"]').click();
+  await page.getByRole('button', { name: '收好标签' }).click();
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
   expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
 
@@ -328,7 +366,7 @@ test('the local stage navigator previews any microtask without changing durable 
   await page.locator('[data-action="audio-play"]').click();
   await clickValue(page, 'select-entity', 'handbag');
   await page.locator('[data-action="response-submit"]').click();
-  await page.locator('[data-action="audio-play"]').click();
+  await page.getByRole('button', { name: '收好标签' }).click();
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
   const durableBefore = await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY);
 
