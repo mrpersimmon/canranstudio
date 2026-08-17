@@ -62,6 +62,8 @@
       selectedCaseByTask: {},
       feedback: null,
       resting: false,
+      settingsOpen: false,
+      restartConfirmOpen: false,
       voice: null,
       music: null,
       musicMuted: false
@@ -402,13 +404,36 @@
       const taskIndex = Math.max(0, tasks.findIndex(item => item.task.microtaskId === snapshot.microtaskId));
       const completed = ledger.read().units?.[unit.unitId]?.completedMicrotaskIds?.length || 0;
       const progress = snapshot.status === 'unit-built' ? 100 : Math.round((completed / tasks.length) * 100);
+      const backgroundInactive = ui.restartConfirmOpen ? ' inert aria-hidden="true"' : '';
+      const settings = ui.settingsOpen ? `<aside class="settings-tray" id="course-settings-panel" aria-label="课程设置">
+          <button class="restart-control" type="button" data-action="restart-request">
+            <span aria-hidden="true">↺</span><span><strong>重新开始本单元</strong><small>回到学习起点</small></span>
+          </button>
+        </aside>` : '';
+      const restartConfirm = ui.restartConfirmOpen ? `<div class="restart-backdrop">
+          <section class="restart-dialog" role="dialog" aria-modal="true" aria-labelledby="restart-dialog-title" aria-describedby="restart-dialog-copy">
+            <span class="restart-seal" aria-hidden="true">↺</span>
+            <p class="kicker">课程设置</p>
+            <h2 id="restart-dialog-title">要重新开始吗？</h2>
+            <p id="restart-dialog-copy">已经保存的学习进度会清除，并回到本单元起点。背景音乐设置会保留。</p>
+            <div class="restart-dialog__actions">
+              <button class="restart-cancel" type="button" data-action="restart-cancel">继续学习</button>
+              <button class="restart-confirm" type="button" data-action="restart-confirm">确认重新开始</button>
+            </div>
+          </section>
+        </div>` : '';
       return `<div class="station-app" data-view="${escapeHtml(ui.view)}" data-runtime-status="${escapeHtml(snapshot.status)}" data-runtime-phase="${escapeHtml(snapshot.phase || 'none')}" data-runtime-microtask="${escapeHtml(snapshot.microtaskId || 'none')}" data-runtime-step="${escapeHtml(snapshot.stepId || 'none')}" data-runtime-challenge="${escapeHtml(snapshot.challengeRef || 'none')}" data-build-stage="${snapshot.buildStage || 0}">
-        <header class="station-header">
+        <header class="station-header"${backgroundInactive}>
           <div class="station-brand"><span>${escapeHtml(unit.experience?.lessonLabel || '')}</span><strong>${escapeHtml(unit.title)}</strong></div>
           <div class="case-progress" aria-label="当日学习进度"><span style="--progress:${progress}%"></span><b>${snapshot.microtaskId ? taskIndex + 1 : completed} / ${tasks.length}</b></div>
-          <button class="music-toggle" type="button" data-action="toggle-music" aria-pressed="${ui.musicMuted ? 'true' : 'false'}" aria-label="${ui.musicMuted ? '打开背景音乐' : '关闭背景音乐'}"><span aria-hidden="true">${ui.musicMuted ? '🔇' : '🎵'}</span></button>
+          <div class="header-actions">
+            <button class="music-toggle" type="button" data-action="toggle-music" aria-pressed="${ui.musicMuted ? 'true' : 'false'}" aria-label="${ui.musicMuted ? '打开背景音乐' : '关闭背景音乐'}"><span aria-hidden="true">${ui.musicMuted ? '🔇' : '🎵'}</span></button>
+            <button class="settings-toggle" type="button" data-action="toggle-settings" aria-expanded="${ui.settingsOpen ? 'true' : 'false'}" aria-controls="course-settings-panel" aria-label="课程设置"><span aria-hidden="true">⚙</span></button>
+          </div>
+          ${settings}
         </header>
-        <section class="station-world">${body}</section>
+        <section class="station-world"${backgroundInactive}>${body}</section>
+        ${restartConfirm}
       </div>`;
     }
 
@@ -543,6 +568,31 @@
         if (!ui.musicMuted) ensureMusic();
         if (ui.music) ui.music.volume = ui.musicMuted ? 0 : (ui.voice ? 0.045 : 0.16);
         render();
+        return;
+      }
+      if (action === 'toggle-settings') {
+        ui.settingsOpen = !ui.settingsOpen;
+        render();
+        return;
+      }
+      if (action === 'restart-request') {
+        ui.settingsOpen = false;
+        ui.restartConfirmOpen = true;
+        render();
+        global.queueMicrotask(() => root.querySelector('[data-action="restart-cancel"]')?.focus());
+        return;
+      }
+      if (action === 'restart-cancel') {
+        ui.restartConfirmOpen = false;
+        render();
+        global.queueMicrotask(() => root.querySelector('[data-action="toggle-settings"]')?.focus());
+        return;
+      }
+      if (action === 'restart-confirm') {
+        pauseVoice();
+        try { ui.music?.pause(); } catch { /* no-op */ }
+        try { global.localStorage.removeItem(storageKey); } catch { /* no-op */ }
+        global.location.reload();
         return;
       }
       if (action === 'start') {
