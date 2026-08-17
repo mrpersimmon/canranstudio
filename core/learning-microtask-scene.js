@@ -249,7 +249,36 @@
       </div>`;
     }
 
-    function audioPanel(snapshot) {
+    function dialogueAudioPanel(snapshot, step) {
+      const refs = step.audioSourceRefs || [];
+      const isPlaying = snapshot.phase === 'audio-playing';
+      const currentIndex = isPlaying ? (snapshot.audio?.segmentIndex || 0) : -1;
+      const lines = refs.map((refId, index) => {
+        const item = source(refId) || {};
+        const stateClass = index === currentIndex
+          ? ' is-current'
+          : (index < currentIndex ? ' is-heard' : '');
+        return `<li class="dialogue-line${stateClass}" data-speaker="${escapeHtml(item.speaker || 'speaker')}" ${index === currentIndex ? 'aria-current="true"' : ''}>
+          <span class="dialogue-line__speaker" aria-hidden="true"></span>
+          <span class="dialogue-line__text">${escapeHtml(item.text || '')}</span>
+        </li>`;
+      }).join('');
+      return `<section class="dialogue-listen" aria-label="课文听读">
+        <ol class="dialogue-script">${lines}</ol>
+        <div class="dialogue-player">
+          <button class="story-listen-button" type="button" data-action="audio-play" ${isPlaying ? 'aria-label="从第一句重新听课文"' : ''}>
+            <span aria-hidden="true">${isPlaying ? '↺' : '▶'}</span>
+            <strong>${isPlaying ? '从头重听' : '播放课文'}</strong>
+          </button>
+          <small role="status">${isPlaying ? `正在听 ${currentIndex + 1} / ${refs.length}` : '看着课文听一遍'}</small>
+        </div>
+      </section>`;
+    }
+
+    function audioPanel(snapshot, step) {
+      if (step?.kind === 'audio-sequence' && step.textVisibility === 'visible-during-listen') {
+        return dialogueAudioPanel(snapshot, step);
+      }
       const isPlaying = snapshot.phase === 'audio-playing';
       const clipNumber = isPlaying ? (snapshot.audio?.segmentIndex || 0) + 1 : 0;
       const total = snapshot.audio?.refs?.length || 0;
@@ -446,8 +475,6 @@
         <h1>${escapeHtml(arrival.title)}</h1>
         <p>${escapeHtml(arrival.copy)}</p>
         <div class="arrival-seal" aria-hidden="true"><i></i><span>✦</span><i></i></div>
-        ${resumed ? '<small>上次的案件已经安全保存</small>' : '<small>不打字 · 不开麦 · 听完再动手</small>'}
-        ${unit.experience?.voiceNotice ? `<span class="voice-notice">🎧 ${escapeHtml(unit.experience.voiceNotice)}</span>` : ''}
         <button class="door-handle" type="button" data-action="start">${escapeHtml(resumed ? '继续今天的案件' : arrival.actionLabel)}<span aria-hidden="true">➜</span></button>
       </div>`, snapshot);
     }
@@ -459,7 +486,7 @@
       const body = snapshot.phase === 'audio-fallback'
         ? fallbackPanel(snapshot)
         : (['audio-ready', 'audio-playing'].includes(snapshot.phase)
-            ? audioPanel(snapshot)
+            ? audioPanel(snapshot, step)
             : responsePanel(snapshot, step));
       const personIds = [...new Set([
         ...(step?.targetEntityIds || []),

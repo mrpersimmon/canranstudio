@@ -257,7 +257,7 @@
     child: { entityId: 'child', title: '小探险家', visualType: 'child', symbol: '🧒' },
     'cat-guide': {
       entityId: 'cat-guide', title: '探险小猫', visualType: 'cat',
-      assetSrc: '/assets/adventure-map/mascot/explorer-cat-walking-route-page-20260806-01-256.webp'
+      assetSrc: '/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-256.webp'
     },
     handbag: { entityId: 'handbag', title: '手提包', visualType: 'handbag', symbol: '👜', sourceRef: 'L01-W07' },
     pen: { entityId: 'pen', title: '钢笔', visualType: 'pen', symbol: '🖋️', sourceRef: 'L02-W01' },
@@ -365,10 +365,10 @@
     nceMicrotask({
       microtaskId: 'L01-M01',
       lessonId: 'lesson1',
-      title: '谁的手提包',
+      title: '门铃响了',
       stepLabel: '第一案 · 1 / 5',
       sceneMode: 'handbag-arrival',
-      prompt: '先听完，再帮忙',
+      prompt: '听听这只手提包是谁的',
       completedFeedback: '你找到了手提包的主人，也把声音和物品连起来了。',
       nextCue: { entityId: 'case-stamp', label: '回看线索' },
       exposureRefs: [
@@ -393,10 +393,10 @@
         {
           stepId: 'L01-M01:S01',
           kind: 'audio-sequence',
-          prompt: '完整听七句',
+          prompt: '客人进门了，听听他们说什么',
           audioSourceRefs: Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`),
           gate: AUDIO_ENDED_GATE,
-          textVisibility: 'hidden-until-complete'
+          textVisibility: 'visible-during-listen'
         },
         {
           stepId: 'L01-M01:S02',
@@ -1902,7 +1902,6 @@
         documentTitle: 'Lesson 1–2 · 星灯失物招领站',
         lessonLabel: 'NEW CONCEPT ENGLISH · LESSON 1–2',
         ambientAudioSrc: '/poc/lesson1-2-experience/audio/starlight-station-ambience.mp3',
-        voiceNotice: '本地试听语音由 AI 生成，待老师审核',
         arrival: {
           kicker: '晨光原野 · 第一座小站',
           title: '一只手提包在等主人',

@@ -81,6 +81,51 @@ async function settle(page) {
   await page.waitForTimeout(12);
 }
 
+test('the arrival card keeps only the child-facing story and action', async ({ page }) => {
+  await openFresh(page);
+  const arrival = page.locator('.arrival-card');
+  await expect(arrival).toBeVisible();
+  await expect(arrival.getByText('不打字 · 不开麦 · 听完再动手')).toHaveCount(0);
+  await expect(arrival.getByText(/AI 生成|老师审核/)).toHaveCount(0);
+});
+
+test('Lesson 1 opens as a seven-line story listen and follows the active line', async ({ page }) => {
+  await installManualAudio(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFresh(page);
+  await page.locator('[data-action="start"]').click();
+
+  const firstStep = tasks.find(task => task.microtaskId === 'L01-M01').steps[0];
+  const expectedLines = firstStep.audioSourceRefs.map(refId => unit.lessonContent.lesson1.sources[refId].text);
+  await expect(page.getByRole('heading', { name: '门铃响了' })).toBeVisible();
+  await expect(page.getByText('客人进门了，听听他们说什么')).toBeVisible();
+  await expect(page.getByText('完整听七句')).toHaveCount(0);
+  await expect(page.locator('.dialogue-line')).toHaveCount(7);
+  expect(await page.locator('.dialogue-line__text').allTextContents()).toEqual(expectedLines);
+  const geometry = await page.locator('.mission-console').evaluate(element => ({
+    clientHeight: element.clientHeight,
+    scrollHeight: element.scrollHeight,
+    bottom: element.getBoundingClientRect().bottom,
+    viewportHeight: window.innerHeight
+  }));
+  expect(geometry.scrollHeight).toBeLessThanOrEqual(geometry.clientHeight + 1);
+  expect(geometry.bottom).toBeLessThanOrEqual(geometry.viewportHeight);
+
+  await page.locator('[data-action="audio-play"]').click();
+  await expect(page.locator('.dialogue-line').nth(0)).toHaveClass(/is-current/);
+  await page.evaluate(() => window.__finishCourseAudio());
+  await expect(page.locator('.dialogue-line').nth(0)).toHaveClass(/is-heard/);
+  await expect(page.locator('.dialogue-line').nth(1)).toHaveClass(/is-current/);
+});
+
+test('the guide uses the approved front-facing pose in the first story scene', async ({ page }) => {
+  await openFresh(page);
+  await page.locator('[data-action="start"]').click();
+  const guide = page.locator('.scene-people [data-visual-type="cat"] img');
+  await expect(guide).toBeVisible();
+  await expect(guide).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
+});
+
 test('the whole child UI completes twelve catalog tasks and grows only at the final boundary', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.stack || error.message));

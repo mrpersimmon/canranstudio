@@ -308,27 +308,6 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   line-height: 1.55;
 }
 
-.arrival-card small {
-  position: relative;
-  display: block;
-  margin: 6px 0 20px;
-  color: #80614d;
-  font-weight: 700;
-}
-
-.voice-notice {
-  position: relative;
-  display: table;
-  margin: -9px auto 17px;
-  padding: 5px 10px;
-  border: 1px solid rgba(36, 127, 121, .34);
-  border-radius: 999px;
-  color: #54716c;
-  background: rgba(115, 215, 199, .12);
-  font-size: .73rem;
-  font-weight: 700;
-}
-
 .arrival-seal {
   position: relative;
   display: flex;
@@ -439,6 +418,83 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
 }
 
 .interaction-space { min-height: 180px; display: grid; align-content: center; justify-items: center; gap: 18px; }
+
+.dialogue-listen {
+  width: min(720px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  align-items: center;
+  gap: clamp(14px, 3vw, 28px);
+}
+.dialogue-script {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dialogue-line {
+  min-height: 34px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-right: 9%;
+  padding: 5px 10px;
+  border: 2px solid rgba(107, 63, 42, .16);
+  border-radius: 13px 13px 13px 5px;
+  color: #493227;
+  background: rgba(255, 255, 255, .66);
+  font: 700 clamp(.88rem, 2.2vw, 1.06rem)/1.2 'Fredoka', sans-serif;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+.dialogue-line[data-speaker='woman'] {
+  margin-right: 0;
+  margin-left: 9%;
+  border-radius: 13px 13px 5px 13px;
+}
+.dialogue-line__speaker {
+  width: 14px;
+  height: 14px;
+  border: 3px solid rgba(255, 255, 255, .84);
+  border-radius: 50%;
+  background: var(--teal-dark);
+  box-shadow: 0 0 0 2px rgba(36, 127, 121, .22);
+}
+.dialogue-line[data-speaker='woman'] .dialogue-line__speaker {
+  background: var(--rose);
+  box-shadow: 0 0 0 2px rgba(228, 109, 105, .2);
+}
+.dialogue-line.is-heard { border-color: rgba(36, 127, 121, .42); background: rgba(223, 253, 245, .68); }
+.dialogue-line.is-current {
+  border-color: var(--brass);
+  background: #fff0bd;
+  box-shadow: 0 3px 0 rgba(128, 84, 33, .3), 0 0 22px rgba(244, 185, 66, .2);
+  transform: translateX(4px);
+}
+.dialogue-line[data-speaker='woman'].is-current { transform: translateX(-4px); }
+.dialogue-line__text { min-width: 0; }
+
+.dialogue-player { display: grid; justify-items: center; gap: 9px; }
+.story-listen-button {
+  width: 124px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 12px;
+  border: 3px solid var(--walnut-dark);
+  border-radius: 17px;
+  color: #143d46;
+  background: linear-gradient(180deg, #dffdf5, var(--teal));
+  box-shadow: 0 6px 0 #2c7772, 0 10px 20px rgba(21, 74, 70, .2);
+  cursor: pointer;
+}
+.story-listen-button span { font-size: 1.2rem; }
+.story-listen-button strong { font: 700 1rem/1 'ZCOOL KuaiLe', sans-serif; }
+.dialogue-player small { color: #755744; font-size: .76rem; font-weight: 800; text-align: center; }
 
 .listening-orb {
   position: relative;
@@ -714,6 +770,11 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   .mission-console { width: 100%; max-height: 68vh; margin-top: 104px; padding: 17px 12px; overflow: auto; border-radius: 24px 24px 14px 14px; }
   .mission-prompt { position: sticky; top: -17px; z-index: 2; margin: -17px -12px 14px; padding: 14px 12px 10px; background: linear-gradient(#fff9e8 76%, transparent); }
   .interaction-space { min-height: 155px; gap: 14px; }
+  .dialogue-listen { grid-template-columns: 1fr; gap: 12px; }
+  .dialogue-line { margin-right: 5%; padding-block: 4px; }
+  .dialogue-line[data-speaker='woman'] { margin-right: 0; margin-left: 5%; }
+  .dialogue-player { grid-template-columns: auto auto; align-items: center; justify-content: center; }
+  .story-listen-button { min-height: 50px; }
   .choice-token { min-width: 128px; min-height: 82px; padding: 8px; }
   .entity-visual { width: 49px; height: 46px; }
   .entity-visual span { font-size: 2.25rem; }
