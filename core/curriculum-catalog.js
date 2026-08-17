@@ -352,13 +352,28 @@
   const AUDIO_ENDED_GATE = 'active-request-ended';
   const AUDIO_SUPPORT = [
     '再听一次，先不着急选。',
-    '看一看每件物品刚才做了什么。',
-    '小猫先用另一件同类物品示范，你再亲手完成。'
+    '看看每件物品的样子，再仔细想一想。',
+    '小猫陪你再看一遍，最后由你自己选。'
   ];
-  const MEANING_SUPPORT = [
-    '回看人物的动作和事情发生的顺序。',
-    '只保留最符合现在需要的完整表达。',
-    '小猫换一个物品示范，最后一步仍由你完成。'
+  const ACTION_SUPPORT = [
+    '看看物品和人物，想想应该交给谁。',
+    '跟着刚才的对话，再找一次正确的人。',
+    '小猫陪你再看一遍，然后由你自己完成。'
+  ];
+  const EXPRESSION_SUPPORT = [
+    '看看现在发生了什么，再想想该说哪句。',
+    '想一想：现在是叫住别人、请人再说，还是表示感谢？',
+    '小猫陪你换个情境想一想，然后由你自己选。'
+  ];
+  const WORD_FORM_SUPPORT = [
+    '再看一遍这个英文单词的样子。',
+    '慢慢看开头、中间和结尾，再选一次。',
+    '小猫陪你再看一次，然后由你自己选。'
+  ];
+  const SENTENCE_SUPPORT = [
+    '先想想这句话要问什么。',
+    '先放问句开头，再放钥匙的单词。',
+    '小猫陪你再排一次，然后由你自己完成。'
   ];
 
   const LESSON1_MICROTASKS = [
@@ -410,7 +425,7 @@
             entityId: 'handbag',
             targetEntityId: 'handbag-owner'
           },
-          support: [...MEANING_SUPPORT]
+          support: [...ACTION_SUPPORT]
         },
         {
           stepId: 'L01-M01:S03',
@@ -463,20 +478,20 @@
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         },
         {
           stepId: 'L01-M02:S02', kind: 'audio-sequence', prompt: '听她回应',
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L01-M02:S03', kind: 'select-one', prompt: '完整问归属',
+          stepId: 'L01-M02:S03', kind: 'select-one', prompt: '想问手提包是不是她的，应该怎么说？',
           optionSourceRefs: ['L01-D03', 'L01-D01'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D03' },
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         },
         {
-          stepId: 'L01-M02:S04', kind: 'audio-sequence', prompt: '听完这句询问',
+          stepId: 'L01-M02:S04', kind: 'audio-sequence', prompt: '听听他怎么问',
           audioSourceRefs: ['L01-D03'], gate: AUDIO_ENDED_GATE
         }
       ],
@@ -503,17 +518,17 @@
       ],
       steps: [
         {
-          stepId: 'L01-M03:S01', kind: 'select-one', prompt: '她没有听清',
+          stepId: 'L01-M03:S01', kind: 'select-one', prompt: '她没听清，应该怎么说？',
           optionSourceRefs: ['L01-D04', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D04' },
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         },
         {
-          stepId: 'L01-M03:S02', kind: 'audio-sequence', prompt: '听完重说和确认',
+          stepId: 'L01-M03:S02', kind: 'audio-sequence', prompt: '听听他们怎么继续说',
           audioSourceRefs: ['L01-D04', 'L01-D05', 'L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L01-M03:S03', kind: 'perform-action', prompt: '亲手归还手提包',
+          stepId: 'L01-M03:S03', kind: 'perform-action', prompt: '把手提包交给她',
           entityIds: ['handbag'], targetEntityIds: ['handbag-owner'],
           answerRule: { type: 'perform-action', action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
         }
@@ -541,7 +556,7 @@
       ],
       steps: [
         {
-          stepId: 'L01-M04:S01', kind: 'audio-sequence', prompt: '听完教材最后一句',
+          stepId: 'L01-M04:S01', kind: 'audio-sequence', prompt: '听听她拿回手提包后怎么说',
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         },
         {
@@ -550,11 +565,11 @@
           answerRule: { type: 'perform-action', action: 'receive', entityId: 'star-badge', targetEntityId: 'child' }
         },
         {
-          stepId: 'L01-M04:S03', kind: 'select-one', prompt: '把感谢送进说话槽',
+          stepId: 'L01-M04:S03', kind: 'select-one', prompt: '收到徽章，应该怎么说？',
           optionSourceRefs: ['L01-D07', 'L01-D04'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
           feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         }
       ],
       requiredFactIds: ['textbook-thanks-ended', 'badge-received', 'thanks-expression'],
@@ -612,7 +627,7 @@
       ],
       steps: [
         {
-          stepId: 'L02-M01:S01', kind: 'explore-batch', prompt: '按顺序打开四只布袋',
+          stepId: 'L02-M01:S01', kind: 'explore-batch', prompt: '布袋里是什么？打开看看',
           sourceRefs: ['L02-W01', 'L02-W02', 'L02-W03', 'L02-W04'],
           entityIds: ['pen', 'pencil', 'book', 'watch'],
           gate: AUDIO_ENDED_GATE,
@@ -664,7 +679,7 @@
       steps: [
         {
           stepId: 'L02-M02:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
-          prompt: '看标签，找物品',
+          prompt: '看单词，找到对应的物品',
           challengeSourceRefs: ['L01-W07', 'L02-W04', 'L02-W02', 'L02-W03', 'L02-W01'],
           optionEntityIds: ['handbag', 'watch', 'pencil', 'book', 'pen'],
           answerRule: {
@@ -675,38 +690,38 @@
             }
           },
           feedbackGate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...WORD_FORM_SUPPORT]
         },
         {
-          stepId: 'L02-M02:S02', kind: 'select-one', prompt: '先礼貌叫住他',
+          stepId: 'L02-M02:S02', kind: 'select-one', prompt: '想礼貌叫住他，应该怎么说？',
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         },
         {
           stepId: 'L02-M02:S03', kind: 'audio-sequence', prompt: '听对方回应',
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M02:S04', kind: 'place-in-slot', prompt: '把手表放进问句',
+          stepId: 'L02-M02:S04', kind: 'place-in-slot', prompt: '想问手表是不是他的，把 watch 放进问句',
           slotId: 'ownership-item', optionEntityIds: ['watch', 'book', 'pen', 'pencil'],
           expressionContentRef: 'NCE-U01-C-Q-WATCH',
           answerRule: { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
           feedbackAudioContentRef: 'NCE-U01-C-Q-WATCH', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...SENTENCE_SUPPORT]
         },
         {
-          stepId: 'L02-M02:S05', kind: 'audio-sequence', prompt: '听完肯定回答',
+          stepId: 'L02-M02:S05', kind: 'audio-sequence', prompt: '听听他怎么回答',
           audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M02:S06', kind: 'perform-action', prompt: '亲手归还手表',
+          stepId: 'L02-M02:S06', kind: 'perform-action', prompt: '把手表交给他',
           entityIds: ['watch'], targetEntityIds: ['first-claimant'],
           answerRule: { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'first-claimant' }
         },
         {
-          stepId: 'L02-M02:S07', kind: 'audio-sequence', prompt: '听完最后的感谢',
+          stepId: 'L02-M02:S07', kind: 'audio-sequence', prompt: '听听他拿回手表后怎么说',
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
@@ -732,7 +747,7 @@
       ],
       steps: [
         {
-          stepId: 'L02-M03:S01', kind: 'explore-batch', prompt: '按顺序拉开四只衣罩',
+          stepId: 'L02-M03:S01', kind: 'explore-batch', prompt: '衣罩里是什么？拉开看看',
           sourceRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08'],
           entityIds: ['coat', 'dress', 'skirt', 'shirt'], gate: AUDIO_ENDED_GATE,
           revealPolicy: 'word-form-after-ended'
@@ -782,7 +797,7 @@
       steps: [
         {
           stepId: 'L02-M04:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
-          prompt: '看衣签，找衣物',
+          prompt: '看单词，找到对应的衣物',
           challengeSourceRefs: ['L02-W07', 'L02-W05', 'L02-W06', 'L02-W08'],
           optionEntityIds: ['coat', 'dress', 'skirt', 'shirt'],
           answerRule: {
@@ -790,30 +805,30 @@
             pairs: { 'L02-W05': 'coat', 'L02-W06': 'dress', 'L02-W07': 'skirt', 'L02-W08': 'shirt' }
           },
           feedbackGate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...WORD_FORM_SUPPORT]
         },
         {
           stepId: 'L02-M04:S02', kind: 'audio-sequence', prompt: '听归还者询问',
           audioContentRefs: ['NCE-U01-C-Q-COAT'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M04:S03', kind: 'select-one', prompt: '确认这是你的外套',
+          stepId: 'L02-M04:S03', kind: 'select-one', prompt: '这是你的外套，应该怎么回答？',
           optionSourceRefs: ['L01-D06', 'L01-D02'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D06' },
           feedbackAudioSourceRef: 'L01-D06', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         },
         {
-          stepId: 'L02-M04:S04', kind: 'perform-action', prompt: '亲手接回外套',
+          stepId: 'L02-M04:S04', kind: 'perform-action', prompt: '把外套接过来',
           entityIds: ['coat'], targetEntityIds: ['child'],
           answerRule: { type: 'perform-action', action: 'receive', entityId: 'coat', targetEntityId: 'child' }
         },
         {
-          stepId: 'L02-M04:S05', kind: 'select-one', prompt: '收到后礼貌致谢',
+          stepId: 'L02-M04:S05', kind: 'select-one', prompt: '收到外套，应该怎么说？',
           optionSourceRefs: ['L01-D07', 'L01-D04'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
           feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         }
       ],
       requiredFactIds: ['four-clothes-word-form-cells', 'coat-question-ended', 'coat-confirmed', 'coat-received', 'coat-thanks'],
@@ -836,7 +851,7 @@
       ],
       steps: [
         {
-          stepId: 'L02-M05:S01', kind: 'explore-batch', prompt: '依次唤醒两幅影像',
+          stepId: 'L02-M05:S01', kind: 'explore-batch', prompt: '这两把钥匙会打开什么？',
           sourceRefs: ['L02-W09', 'L02-W10'], entityIds: ['car-key', 'house-key'],
           gate: AUDIO_ENDED_GATE, revealPolicy: 'projection-after-ended'
         },
@@ -879,31 +894,31 @@
       steps: [
         {
           stepId: 'L02-M06:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
-          prompt: '看档案牌，找钥匙', challengeSourceRefs: ['L02-W09', 'L02-W10'],
+          prompt: '看单词，找到对应的钥匙', challengeSourceRefs: ['L02-W09', 'L02-W10'],
           optionEntityIds: ['car-key', 'house-key'],
           answerRule: { type: 'match-entity', pairs: { 'L02-W09': 'car-key', 'L02-W10': 'house-key' } },
           feedbackGate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...WORD_FORM_SUPPORT]
         },
         {
-          stepId: 'L02-M06:S02', kind: 'select-case', prompt: '选择一份钥匙案件',
+          stepId: 'L02-M06:S02', kind: 'select-case', prompt: '你想先帮哪把钥匙找主人？',
           optionEntityIds: ['car-key', 'house-key'],
           answerRule: { type: 'select-one', acceptedEntityIds: ['car-key', 'house-key'] },
           storesFactId: 'selected-key-case'
         },
         {
-          stepId: 'L02-M06:S03', kind: 'select-one', prompt: '先礼貌叫住他',
+          stepId: 'L02-M06:S03', kind: 'select-one', prompt: '想礼貌叫住他，应该怎么说？',
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...EXPRESSION_SUPPORT]
         },
         {
           stepId: 'L02-M06:S04', kind: 'audio-sequence', prompt: '听对方回应',
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M06:S05', kind: 'ordered-blocks', prompt: '铺好两块问句轨',
+          stepId: 'L02-M06:S05', kind: 'ordered-blocks', prompt: '把两块词语排成一句问话',
           blockContentRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR'],
           branchEntityIds: ['car-key', 'house-key'],
           selectedEntityFactId: 'selected-key-case',
@@ -919,14 +934,14 @@
             'house-key': 'NCE-U01-C-Q-HOUSE'
           },
           gate: AUDIO_ENDED_GATE,
-          support: [...MEANING_SUPPORT]
+          support: [...SENTENCE_SUPPORT]
         },
         {
-          stepId: 'L02-M06:S06', kind: 'audio-sequence', prompt: '听完肯定回答',
+          stepId: 'L02-M06:S06', kind: 'audio-sequence', prompt: '听听他怎么回答',
           audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M06:S07', kind: 'perform-action', prompt: '把钥匙交给认领者',
+          stepId: 'L02-M06:S07', kind: 'perform-action', prompt: '把钥匙交给他',
           entityIds: ['car-key', 'house-key'], targetEntityIds: ['third-claimant'],
           answerRule: {
             type: 'perform-action', action: 'give-selected',
@@ -934,7 +949,7 @@
           }
         },
         {
-          stepId: 'L02-M06:S08', kind: 'audio-sequence', prompt: '听完最后的感谢',
+          stepId: 'L02-M06:S08', kind: 'audio-sequence', prompt: '听听他拿回钥匙后怎么说',
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
@@ -954,12 +969,12 @@
       evidenceRefs: [],
       steps: [
         {
-          stepId: 'L02-M07:S01', kind: 'all-of', prompt: '任意顺序点亮三枚案件章',
+          stepId: 'L02-M07:S01', kind: 'all-of', prompt: '把三份认领记录都点亮',
           factIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'],
           answerRule: { type: 'all-of', requiredFactIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'] }
         },
         {
-          stepId: 'L02-M07:S02', kind: 'perform-action', prompt: '亲手拉下开张总闸',
+          stepId: 'L02-M07:S02', kind: 'perform-action', prompt: '拉下开张拉杆',
           entityIds: ['opening-lever'], targetEntityIds: ['station-power'],
           answerRule: { type: 'perform-action', action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
         }

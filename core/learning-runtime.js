@@ -297,23 +297,24 @@
       return null;
     }
 
-    function queueFeedbackAudio(audioRef, after) {
-      if (!audioRef) return false;
+    function startFeedbackAudio(audioRef, after) {
+      if (!audioRef) return null;
+      const audio = {
+        status: 'playing',
+        requestId: `audio:${unit.unitId}:${seed}:${++audioSequence}`,
+        segmentIndex: 0,
+        refs: [clone(audioRef)],
+        stepId: state.stepId,
+        batchIndex: state.batchIndex,
+        after,
+        purpose: 'feedback'
+      };
       state = {
         ...state,
-        phase: 'audio-ready',
-        audio: {
-          status: 'ready',
-          requestId: null,
-          segmentIndex: 0,
-          refs: [clone(audioRef)],
-          stepId: state.stepId,
-          batchIndex: state.batchIndex,
-          after,
-          purpose: 'feedback'
-        }
+        phase: 'audio-playing',
+        audio
       };
-      return true;
+      return audioEffect(audio, 0);
     }
 
     function taskCompletionStatus() {
@@ -749,7 +750,12 @@
         }];
         const isBatch = ['match-entity', 'match-entity-batch'].includes(step.kind);
         const feedbackAudio = feedbackAudioForStep(step, response);
-        if (queueFeedbackAudio(feedbackAudio, isBatch ? 'advance-batch' : 'advance-step')) {
+        const feedbackEffect = startFeedbackAudio(
+          feedbackAudio,
+          isBatch ? 'advance-batch' : 'advance-step'
+        );
+        if (feedbackEffect) {
+          effects.push(feedbackEffect);
           return publish(effects);
         }
         const advanceEffects = isBatch ? advanceBatchOrStep() : advanceAfterStep();

@@ -118,6 +118,24 @@
       return currentTask(snapshot)?.task.steps.find(step => step.stepId === snapshot.stepId) || null;
     }
 
+    function stepById(stepId) {
+      for (const { task } of tasks) {
+        const step = task.steps.find(candidate => candidate.stepId === stepId);
+        if (step) return step;
+      }
+      return null;
+    }
+
+    function correctFeedbackCopy(stepId) {
+      const kind = stepById(stepId)?.kind;
+      if (['match-entity', 'match-entity-batch'].includes(kind)) return '找对了！';
+      if (kind === 'select-one') return '这句话正合适！';
+      if (['place-in-slot', 'ordered-blocks'].includes(kind)) return '问句排好了！';
+      if (kind === 'all-of') return '都点亮了！';
+      if (kind === 'source-reveal') return '标签收好了！';
+      return '完成啦！';
+    }
+
     function createPreviewLedger(targetMicrotaskId) {
       const target = tasks.find(item => item.task.microtaskId === targetMicrotaskId);
       if (!target) return null;
@@ -280,7 +298,9 @@
       if (effect.type === 'feedback/correct') {
         ui.feedback = {
           tone: 'correct',
-          message: effect.outcome === 'independent' ? '线索对上了！' : '你用上了好办法，继续前进。'
+          message: effect.outcome === 'independent'
+            ? correctFeedbackCopy(effect.stepId)
+            : '你用上了好办法，继续前进。'
         };
         return;
       }
@@ -364,7 +384,9 @@
           <span aria-hidden="true">${isPlaying ? '♫' : '▶'}</span>
           <strong>${isPlaying ? '正在听' : '听一听'}</strong>
         </button>
-        ${isPlaying && total > 1 ? `<small>${clipNumber} / ${total}</small>` : '<small>听完才会开启下一步</small>'}
+        ${isPlaying && total > 1
+          ? `<small>${clipNumber} / ${total}</small>`
+          : `<small>${snapshot.audio?.purpose === 'feedback' ? '听听这个词' : '听完就继续'}</small>`}
       </div>`;
     }
 
@@ -397,14 +419,14 @@
     function matchResponse(snapshot, step) {
       const challengeRef = step.challengeSourceRefs[snapshot.batchIndex];
       const showForm = step.challengeMode === 'word-form';
-      return `${showForm ? `<div class="word-plaque">${escapeHtml(source(challengeRef)?.text || '')}</div>` : '<div class="sound-clue"><span aria-hidden="true">♫</span><strong>刚才的声音是谁？</strong></div>'}
+      return `${showForm ? `<div class="word-plaque">${escapeHtml(source(challengeRef)?.text || '')}</div>` : '<div class="sound-clue"><span aria-hidden="true">♫</span><strong>刚才听到的是哪个物品？</strong></div>'}
         <div class="prop-shelf" data-response-kind="match">
           ${step.optionEntityIds.map(entityId => choiceButton({
             action: 'select-entity', value: entityId, label: entity(entityId).title,
             selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId)
           })).join('')}
         </div>
-        ${submitButton(Boolean(ui.selectedEntityId))}`;
+        ${submitButton(Boolean(ui.selectedEntityId), '就是它')}`;
     }
 
     function selectOneResponse(step) {
@@ -414,7 +436,16 @@
           selected: ui.selectedSourceRef === sourceRef,
           visual: '<span class="speech-mark" aria-hidden="true">“</span>'
         })).join('')}
-      </div>${submitButton(Boolean(ui.selectedSourceRef))}`;
+      </div>${submitButton(Boolean(ui.selectedSourceRef), '就说这句')}`;
+    }
+
+    function actionSubmitLabel(step) {
+      const action = step.answerRule?.action;
+      if (['give', 'give-selected'].includes(action)) return '交给对方';
+      if (action === 'receive') return '接过来';
+      if (action === 'stamp') return '盖下印章';
+      if (action === 'pull') return '拉下拉杆';
+      return '完成';
     }
 
     function actionResponse(snapshot, step) {
@@ -433,7 +464,10 @@
           action: 'select-target', value: entityId, label: entity(entityId).title,
           selected: ui.selectedTargetId === entityId, visual: entityVisual(entityId, { compact: true })
         })).join('')}</div>
-      </div>${submitButton(Boolean(ui.selectedEntityId && ui.selectedTargetId), '亲手完成')}`;
+      </div>${submitButton(
+        Boolean(ui.selectedEntityId && ui.selectedTargetId),
+        actionSubmitLabel(step)
+      )}`;
     }
 
     function slotResponse(step) {
@@ -443,8 +477,8 @@
           action: 'select-entity', value: entityId, label: entity(entityId).title,
           selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId)
         })).join('')}</div>
-        <div class="sentence-slot"><span>问句轨道</span><strong>${ui.selectedEntityId ? escapeHtml(entity(ui.selectedEntityId).title) : '把物品放进来'}</strong></div>
-      </div>${submitButton(Boolean(ui.selectedEntityId), '放进轨道')}`;
+        <div class="sentence-slot"><span>完整问句</span><strong>${ui.selectedEntityId ? escapeHtml(entity(ui.selectedEntityId).title) : '点一个物品放进来'}</strong></div>
+      </div>${submitButton(Boolean(ui.selectedEntityId), '放进问句')}`;
     }
 
     function caseResponse(step) {
@@ -453,7 +487,7 @@
           action: 'select-entity', value: entityId, label: entity(entityId).title,
           selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId)
         })).join('')}
-      </div>${submitButton(Boolean(ui.selectedEntityId), '接下这份案件')}`;
+      </div>${submitButton(Boolean(ui.selectedEntityId), '就选这份')}`;
     }
 
     function orderedBlocksResponse(snapshot, step) {
@@ -463,21 +497,22 @@
       return `<div class="block-builder" data-response-kind="ordered-blocks">
         <div class="block-builder__track">${ui.selectedBlockRefs.length
           ? ui.selectedBlockRefs.map(refId => `<button type="button" data-action="remove-block" data-value="${escapeHtml(refId)}">${escapeHtml(content(refId)?.text || source(refId)?.text || '')}</button>`).join('')
-          : '<span>按顺序铺两块问句轨</span>'}</div>
+          : '<span>按顺序点两块词语</span>'}</div>
         <div class="block-builder__bank">${available.map(refId => choiceButton({
           action: 'add-block', value: refId, label: content(refId)?.text || source(refId)?.text || '',
           selected: ui.selectedBlockRefs.includes(refId), visual: '<span class="block-pin" aria-hidden="true">●</span>'
         })).join('')}</div>
-      </div>${submitButton(ui.selectedBlockRefs.length === available.length, '读一读这条问句轨')}`;
+      </div>${submitButton(ui.selectedBlockRefs.length === available.length, '排好问句')}`;
     }
 
     function allOfResponse(step) {
+      const itemLabel = step.stepId === 'L02-M07:S01' ? '认领记录' : '案件线索';
       return `<div class="fact-console" data-response-kind="all-of">
         ${step.factIds.map((factId, index) => choiceButton({
-          action: 'toggle-fact', value: factId, label: `案件线索 ${index + 1}`,
+          action: 'toggle-fact', value: factId, label: `${itemLabel} ${index + 1}`,
           selected: ui.selectedFactIds.has(factId), visual: '<span class="case-light" aria-hidden="true">✦</span>'
         })).join('')}
-      </div>${submitButton(ui.selectedFactIds.size === step.factIds.length, '让线索一起发光')}`;
+      </div>${submitButton(ui.selectedFactIds.size === step.factIds.length, '全部点亮')}`;
     }
 
     function sourceRevealResponse(step) {
@@ -490,7 +525,7 @@
       </div>`;
     }
 
-    function submitButton(enabled, label = '确认这条线索') {
+    function submitButton(enabled, label = '确认') {
       return `<button class="commit-action" type="button" data-action="response-submit" ${enabled ? '' : 'disabled'}>${escapeHtml(label)}<span aria-hidden="true">✦</span></button>`;
     }
 

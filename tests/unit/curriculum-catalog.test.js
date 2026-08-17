@@ -125,6 +125,74 @@ test('Lesson 1 and Lesson 2 author twelve atomic microtasks and all twenty-two T
   assert.deepEqual(catalog.validate([structuredClone(unit)]), []);
 });
 
+test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actions', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const steps = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
+    .flatMap(task => task.steps)
+    .map(step => [step.stepId, step.prompt]));
+  const expected = {
+    'L01-M02:S03': '想问手提包是不是她的，应该怎么说？',
+    'L01-M02:S04': '听听他怎么问',
+    'L01-M03:S01': '她没听清，应该怎么说？',
+    'L01-M03:S02': '听听他们怎么继续说',
+    'L01-M03:S03': '把手提包交给她',
+    'L01-M04:S01': '听听她拿回手提包后怎么说',
+    'L01-M04:S03': '收到徽章，应该怎么说？',
+    'L02-M01:S01': '布袋里是什么？打开看看',
+    'L02-M02:S01': '看单词，找到对应的物品',
+    'L02-M02:S02': '想礼貌叫住他，应该怎么说？',
+    'L02-M02:S04': '想问手表是不是他的，把 watch 放进问句',
+    'L02-M02:S05': '听听他怎么回答',
+    'L02-M02:S06': '把手表交给他',
+    'L02-M02:S07': '听听他拿回手表后怎么说',
+    'L02-M03:S01': '衣罩里是什么？拉开看看',
+    'L02-M04:S01': '看单词，找到对应的衣物',
+    'L02-M04:S03': '这是你的外套，应该怎么回答？',
+    'L02-M04:S04': '把外套接过来',
+    'L02-M04:S05': '收到外套，应该怎么说？',
+    'L02-M05:S01': '这两把钥匙会打开什么？',
+    'L02-M06:S01': '看单词，找到对应的钥匙',
+    'L02-M06:S02': '你想先帮哪把钥匙找主人？',
+    'L02-M06:S03': '想礼貌叫住他，应该怎么说？',
+    'L02-M06:S05': '把两块词语排成一句问话',
+    'L02-M06:S06': '听听他怎么回答',
+    'L02-M06:S07': '把钥匙交给他',
+    'L02-M06:S08': '听听他拿回钥匙后怎么说',
+    'L02-M07:S01': '把三份认领记录都点亮',
+    'L02-M07:S02': '拉下开张拉杆'
+  };
+
+  for (const [stepId, prompt] of Object.entries(expected)) assert.equal(steps.get(stepId), prompt);
+});
+
+test('Lesson 1 and Lesson 2 correction copy matches the action the child is taking', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const steps = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
+    .flatMap(task => task.steps)
+    .map(step => [step.stepId, step]));
+
+  assert.deepEqual(steps.get('L01-M01:S02').support, [
+    '看看物品和人物，想想应该交给谁。',
+    '跟着刚才的对话，再找一次正确的人。',
+    '小猫陪你再看一遍，然后由你自己完成。'
+  ]);
+  assert.deepEqual(steps.get('L01-M02:S01').support, [
+    '看看现在发生了什么，再想想该说哪句。',
+    '想一想：现在是叫住别人、请人再说，还是表示感谢？',
+    '小猫陪你换个情境想一想，然后由你自己选。'
+  ]);
+  assert.deepEqual(steps.get('L02-M02:S01').support, [
+    '再看一遍这个英文单词的样子。',
+    '慢慢看开头、中间和结尾，再选一次。',
+    '小猫陪你再看一次，然后由你自己选。'
+  ]);
+  assert.deepEqual(steps.get('L02-M06:S05').support, [
+    '先想想这句话要问什么。',
+    '先放问句开头，再放钥匙的单词。',
+    '小猫陪你再排一次，然后由你自己完成。'
+  ]);
+});
+
 test('microtask v2 catalog validation rejects imperative answers and forged result identities', () => {
   function message(change) {
     const candidate = structuredClone(catalog.getTeachingUnit('NCE-U01'));

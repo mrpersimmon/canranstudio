@@ -136,6 +136,42 @@ test('the polite-attention choice asks the child what to say', async ({ page }) 
   await page.getByRole('button', { name: '阶段 2：礼貌问一问' }).click();
   await expect(page.locator('.mission-prompt')).toHaveText('礼貌叫住她，应该怎么说？');
   await expect(page.getByText('礼貌叫住她', { exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Excuse me!' }).click();
+  await expect(page.getByRole('button', { name: '就说这句' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '确认这条线索' })).toHaveCount(0);
+});
+
+test('a correct word-form choice plays its feedback automatically without another play click', async ({ page }) => {
+  await installManualAudio(page);
+  await openFresh(page);
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 7：标签认领' }).click();
+  await page.getByRole('button', { name: '手提包' }).click();
+  await page.getByRole('button', { name: '就是它' }).click();
+
+  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-playing');
+  await expect(page.getByRole('button', { name: '听一听' })).toHaveCount(0);
+  expect(await page.evaluate(() => window.__courseAudioStarts.filter(
+    src => src.endsWith('/l01-w07.mp3')
+  ).length)).toBe(1);
+
+  await page.evaluate(() => window.__finishCourseAudio());
+  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'response');
+  await expect(app(page)).toHaveAttribute('data-runtime-challenge', 'L02-W04');
+});
+
+test('physical actions use a concrete verb instead of a system-style confirmation', async ({ page }) => {
+  await installManualAudio(page);
+  await openFresh(page);
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
+  await page.getByRole('button', { name: '听一听' }).click();
+  await page.evaluate(() => window.__finishCourseAudio());
+  await page.getByRole('button', { name: '星灯探险徽章' }).click();
+  await page.getByRole('button', { name: '小探险家' }).click();
+
+  await expect(page.getByRole('button', { name: '接过来' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '完成动作' })).toHaveCount(0);
 });
 
 test('finding the handbag uses one required word sound before a visual label reveal', async ({ page }) => {

@@ -41,7 +41,11 @@ function fakeNceLedger({
 }
 
 function finishActiveNceAudio(runtime) {
-  let result = runtime.dispatch({ type: 'audio/play' });
+  let result = { snapshot: runtime.snapshot() };
+  if (result.snapshot.phase === 'audio-ready') {
+    result = runtime.dispatch({ type: 'audio/play' });
+  }
+  assert.equal(result.snapshot.phase, 'audio-playing');
   const requestId = result.snapshot.audio.requestId;
   const segmentCount = result.snapshot.audio.refs.length;
   for (let segmentIndex = 0; segmentIndex < segmentCount; segmentIndex += 1) {
@@ -363,9 +367,10 @@ test('Lesson 2 word-form cells wait for their own feedback audio ended before ad
   const submitted = runtime.dispatch({
     type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
   });
-  assert.equal(submitted.snapshot.phase, 'audio-ready');
+  assert.equal(submitted.snapshot.phase, 'audio-playing');
   assert.equal(submitted.snapshot.batchIndex, 0);
   assert.equal(submitted.snapshot.audio.purpose, 'feedback');
+  assert.equal(submitted.effects.at(-1).type, 'audio/play');
   assert.deepEqual(runtime.dispatch({
     type: 'response/submit', response: { sourceRef: 'L02-W04', entityId: 'watch' }
   }).effects, []);
@@ -421,7 +426,8 @@ test('Lesson 2 sentence building is bound to the case the child actually selecte
       blockRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W09']
     }
   });
-  assert.equal(selectedBranch.snapshot.phase, 'audio-ready');
+  assert.equal(selectedBranch.snapshot.phase, 'audio-playing');
+  assert.equal(selectedBranch.effects.at(-1).type, 'audio/play');
   assert.equal(selectedBranch.snapshot.audio.refs[0].refId, 'NCE-U01-C-Q-CAR');
 });
 
