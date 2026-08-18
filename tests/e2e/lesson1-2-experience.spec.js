@@ -5,21 +5,19 @@ const catalog = require('../../core/curriculum-catalog');
 
 const EXPERIENCE_PATH = '/poc/lesson1-2-experience/';
 const STORAGE_KEY = 'poc:lesson1-2-experience:v1';
-const MUSIC_KEY = `${STORAGE_KEY}:music-muted`;
 const unit = catalog.getTeachingUnit('NCE-U01');
 const tasks = unit.beats.flatMap(beat => beat.microtasks || []);
 
 async function openFresh(page) {
   await page.goto(EXPERIENCE_PATH);
-  await page.evaluate(({ progress, music }) => {
+  await page.evaluate(progress => {
     localStorage.removeItem(progress);
-    localStorage.removeItem(music);
-  }, { progress: STORAGE_KEY, music: MUSIC_KEY });
+  }, STORAGE_KEY);
   return page.reload();
 }
 
 async function installInstantAudio(page, { failVoice = false } = {}) {
-  await page.addInitScript(({ shouldFailVoice, ambienceSuffix }) => {
+  await page.addInitScript(shouldFailVoice => {
     class FakeAudio extends EventTarget {
       constructor(src) {
         super();
@@ -30,21 +28,19 @@ async function installInstantAudio(page, { failVoice = false } = {}) {
       }
       pause() {}
       play() {
-        const isAmbience = String(this.src).endsWith(ambienceSuffix);
         queueMicrotask(() => this.dispatchEvent(new Event(
-          shouldFailVoice && !isAmbience ? 'error' : 'ended'
+          shouldFailVoice ? 'error' : 'ended'
         )));
         return Promise.resolve();
       }
     }
     Object.defineProperty(window, 'Audio', { configurable: true, value: FakeAudio });
-  }, { shouldFailVoice: failVoice, ambienceSuffix: 'starlight-station-ambience.mp3' });
+  }, failVoice);
 }
 
 async function installManualAudio(page) {
-  await page.addInitScript(ambienceSuffix => {
+  await page.addInitScript(() => {
     window.__courseAudioStarts = [];
-    window.__ambientAudioStarts = 0;
     class ManualAudio extends EventTarget {
       constructor(src) {
         super();
@@ -55,13 +51,8 @@ async function installManualAudio(page) {
       }
       pause() {}
       play() {
-        const isCourseAudio = !String(this.src).endsWith(ambienceSuffix);
-        if (isCourseAudio) {
-          window.__courseAudioStarts.push(String(this.src));
-          window.__pendingCourseAudio = this;
-        } else {
-          window.__ambientAudioStarts += 1;
-        }
+        window.__courseAudioStarts.push(String(this.src));
+        window.__pendingCourseAudio = this;
         return Promise.resolve();
       }
     }
@@ -73,7 +64,7 @@ async function installManualAudio(page) {
       return pending.src;
     };
     Object.defineProperty(window, 'Audio', { configurable: true, value: ManualAudio });
-  }, 'starlight-station-ambience.mp3');
+  });
 }
 
 function app(page) {
@@ -88,6 +79,11 @@ async function settle(page) {
   await page.waitForTimeout(12);
 }
 
+async function enterFirstMission(page) {
+  await page.locator('[data-action="start"]').click();
+  await page.getByRole('button', { name: '去听他们说话' }).click();
+}
+
 test('the arrival card keeps only the child-facing story and action', async ({ page }) => {
   await openFresh(page);
   const arrival = page.locator('.arrival-card');
@@ -96,11 +92,47 @@ test('the arrival card keeps only the child-facing story and action', async ({ p
   await expect(arrival.getByText(/AI 生成|老师审核/)).toHaveCount(0);
 });
 
-test('Lesson 1 opens as a seven-line story listen and follows the active line', async ({ page }) => {
+test('a first-time child sees the lost-handbag premise before any dialogue', async ({ page }) => {
   await installManualAudio(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await openFresh(page);
   await page.locator('[data-action="start"]').click();
+
+  await expect(app(page)).toHaveAttribute('data-view', 'briefing');
+  await expect(page.getByRole('heading', {
+    name: '小站收到一只没人认领的手提包'
+  })).toBeVisible();
+  await expect(page.getByRole('img', {
+    name: '探险小猫指着柜台上的手提包，一位先生和一位女士正准备交谈。'
+  })).toBeVisible();
+  await expect(page.getByText('一位先生和一位女士来到窗口。先听他们怎么说，再帮手提包找到主人。')).toBeVisible();
+  await expect(page.locator('.dialogue-line')).toHaveCount(0);
+  await expect(app(page)).toHaveAttribute('data-runtime-status', 'idle');
+  expect(await page.evaluate(() => window.__courseAudioStarts)).toEqual([]);
+  const briefingGeometry = await page.locator('.briefing-card').evaluate(element => ({
+    bottom: element.getBoundingClientRect().bottom,
+    clientHeight: element.clientHeight,
+    scrollHeight: element.scrollHeight,
+    viewportHeight: window.innerHeight,
+    imageWidth: element.querySelector('img')?.naturalWidth || 0
+  }));
+  expect(briefingGeometry.bottom).toBeLessThanOrEqual(briefingGeometry.viewportHeight);
+  expect(briefingGeometry.scrollHeight).toBeLessThanOrEqual(briefingGeometry.clientHeight + 1);
+  expect(briefingGeometry.imageWidth).toBeGreaterThan(1000);
+
+  await page.getByRole('button', { name: '去听他们说话' }).click();
+  await expect(app(page)).toHaveAttribute('data-view', 'mission');
+  await expect(page.getByRole('heading', { name: '门铃响了' })).toBeVisible();
+  await expect(page.locator('.dialogue-line')).toHaveCount(7);
+  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-ready');
+  expect(await page.evaluate(() => window.__courseAudioStarts)).toEqual([]);
+});
+
+test('Lesson 1 opens as a seven-line story listen and follows the active line', async ({ page }) => {
+  await installManualAudio(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFresh(page);
+  await enterFirstMission(page);
 
   const firstStep = tasks.find(task => task.microtaskId === 'L01-M01').steps[0];
   const expectedLines = firstStep.audioSourceRefs.map(refId => unit.lessonContent.lesson1.sources[refId].text);
@@ -127,7 +159,7 @@ test('Lesson 1 opens as a seven-line story listen and follows the active line', 
 
 test('the guide uses the approved front-facing pose in the first story scene', async ({ page }) => {
   await openFresh(page);
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   const guide = page.locator('.scene-people [data-visual-type="cat"] img');
   await expect(guide).toBeVisible();
   await expect(guide).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
@@ -180,7 +212,7 @@ test('physical actions use a concrete verb instead of a system-style confirmatio
 test('finding the handbag uses one required word sound before a visual label reveal', async ({ page }) => {
   await installManualAudio(page);
   await openFresh(page);
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
   for (let index = 0; index < 7; index += 1) {
     await page.evaluate(() => window.__finishCourseAudio());
@@ -216,7 +248,7 @@ test('the whole child UI completes twelve catalog tasks and grows only at the fi
   expect(response.status()).toBe(200);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
   await expect(page.locator('[data-action="start"]')).toBeVisible();
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
 
   const selectedCaseByTask = {};
   for (let guard = 0; guard < 320; guard += 1) {
@@ -307,7 +339,7 @@ test('real ended callbacks gate progress and the next microtask is restored afte
   await installManualAudio(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await openFresh(page);
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
 
   for (let segment = 0; segment < 6; segment += 1) {
@@ -339,7 +371,7 @@ test('real ended callbacks gate progress and the next microtask is restored afte
 test('audio failure requires an explicit visual fallback and never advances on elapsed time', async ({ page }) => {
   await installInstantAudio(page, { failVoice: true });
   await openFresh(page);
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-fallback');
   await page.waitForTimeout(80);
@@ -348,40 +380,29 @@ test('audio failure requires an explicit visual fallback and never advances on e
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
 });
 
-test('one-tap background music opt-in persists independently of course progress', async ({ page }) => {
+test('the course exposes no background-music control without a reviewed track', async ({ page }) => {
   await installInstantAudio(page);
   await openFresh(page);
-  const music = page.locator('[data-action="toggle-music"]');
-  await expect(music).toHaveAttribute('aria-pressed', 'true');
-  await music.click();
-  await expect(music).toHaveAttribute('aria-pressed', 'false');
-  expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('false');
+  await expect(page.locator('[data-action="toggle-music"]')).toHaveCount(0);
   expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
-  await page.reload();
-  await expect(page.locator('[data-action="toggle-music"]')).toHaveAttribute('aria-pressed', 'false');
 });
 
-test('a fresh child session keeps the provisional tone bed off until explicit music opt-in', async ({ page }) => {
+test('playing English creates no ambient track', async ({ page }) => {
   await installManualAudio(page);
   await openFresh(page);
-  const music = page.locator('[data-action="toggle-music"]');
-
-  await expect(music).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
-  expect(await page.evaluate(() => window.__ambientAudioStarts)).toBe(0);
-
-  await music.click();
-  await expect(music).toHaveAttribute('aria-pressed', 'false');
-  expect(await page.evaluate(() => window.__ambientAudioStarts)).toBe(1);
+  expect(await page.evaluate(() => window.__courseAudioStarts)).toHaveLength(1);
+  expect(await page.evaluate(() => window.__courseAudioStarts.some(
+    src => /ambience|background/i.test(src)
+  ))).toBe(false);
 });
 
-test('a child can cancel or confirm restarting mid-unit without changing the music preference', async ({ page }) => {
+test('a child can cancel or confirm restarting mid-unit without resurrecting background audio', async ({ page }) => {
   await installInstantAudio(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await openFresh(page);
-  await page.locator('[data-action="toggle-music"]').click();
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
 
@@ -410,16 +431,15 @@ test('a child can cancel or confirm restarting mid-unit without changing the mus
   await page.getByRole('dialog', { name: '要重新开始吗？' })
     .getByRole('button', { name: '确认重新开始' }).click();
   await expect(page.locator('[data-action="start"]')).toBeVisible();
-  await expect(page.locator('[data-action="toggle-music"]')).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator('[data-action="toggle-music"]')).toHaveCount(0);
   expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
-  expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('false');
 });
 
 test('the local stage navigator previews any microtask without changing durable progress', async ({ page }) => {
   await installInstantAudio(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await openFresh(page);
-  await page.locator('[data-action="start"]').click();
+  await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
   await clickValue(page, 'select-entity', 'handbag');

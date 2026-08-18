@@ -9,12 +9,14 @@ const catalog = require('../../core/curriculum-catalog');
 const ROOT = path.resolve(__dirname, '../..');
 
 test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally runnable', async () => {
-  const [home, page, scene, runtime, background] = await Promise.all([
+  const [home, page, scene, runtime, background, premiseAvif, premiseJpeg] = await Promise.all([
     fs.readFile(path.join(ROOT, 'index.html'), 'utf8'),
     fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/index.html'), 'utf8'),
     fs.readFile(path.join(ROOT, 'core/learning-microtask-scene.js'), 'utf8'),
     fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/experience.js'), 'utf8'),
-    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/starlight-station-bg.png'))
+    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/starlight-station-bg.png')),
+    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.avif')),
+    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.jpg'))
   ]);
 
   assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
@@ -30,6 +32,8 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
   assert.ok(scriptOrder.every(index => index >= 0));
   assert.deepEqual(scriptOrder, [...scriptOrder].sort((left, right) => left - right));
   assert.ok(background.size > 100_000);
+  assert.ok(premiseAvif.size > 100_000);
+  assert.ok(premiseJpeg.size > 100_000);
 
   assert.doesNotMatch(home, /lesson1-2-experience/);
   assert.match(runtime, /NCE-U01/);
@@ -42,7 +46,7 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
   assert.match(scene, /type:\s*['"]response\/submit['"]/);
   assert.match(scene, /type:\s*['"]audio\/ended['"]/);
   assert.match(scene, /type:\s*['"]audio\/failed['"]/);
-  assert.match(scene, /toggle-music/);
+  assert.doesNotMatch(scene, /toggle-music|ambientAudioSrc/);
   assert.doesNotMatch(scene, /setTimeout\([^)]*audio\/ended|time\/elapsed[\s\S]{0,100}audio\/ended/);
   assert.doesNotMatch(runtime, /\b(?:fetch|XMLHttpRequest|sendBeacon)\s*\(|\/api\//);
 });
@@ -79,8 +83,11 @@ test('the local candidate voice pack covers every catalog audio identity and sta
     assert.ok(stat.size > 10_000);
   }
 
-  const ambience = await fs.stat(path.join(audioDir, 'starlight-station-ambience.mp3'));
-  assert.ok(ambience.size > 100_000);
+  assert.equal(unit.experience.ambientAudioSrc, undefined);
+  await assert.rejects(
+    fs.stat(path.join(audioDir, 'starlight-station-ambience.mp3')),
+    error => error?.code === 'ENOENT'
+  );
 });
 
 test('the Lesson 1 dialogue voice pack follows the textbook speakers through the final thanks', async () => {

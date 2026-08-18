@@ -1917,12 +1917,20 @@
         documentTitle: 'Lesson 1–2 · 星灯失物招领站',
         lessonLabel: 'NEW CONCEPT ENGLISH · LESSON 1–2',
         stagePreviewEnabled: true,
-        ambientAudioSrc: '/poc/lesson1-2-experience/audio/starlight-station-ambience.mp3',
         arrival: {
           kicker: '晨光原野 · 第一座小站',
           title: '一只手提包在等主人',
           copy: '和探险小猫一起听、找、归还，把失物招领站慢慢点亮。',
           actionLabel: '推开小站的门'
+        },
+        briefing: {
+          kicker: '开门前 · 先看看发生了什么',
+          title: '小站收到一只没人认领的手提包',
+          copy: '一位先生和一位女士来到窗口。先听他们怎么说，再帮手提包找到主人。',
+          imageSrc: '/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.avif',
+          imageFallbackSrc: '/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.jpg',
+          imageAlt: '探险小猫指着柜台上的手提包，一位先生和一位女士正准备交谈。',
+          actionLabel: '去听他们说话'
         },
         chapterStop: {
           kicker: 'Lesson 1 完成',

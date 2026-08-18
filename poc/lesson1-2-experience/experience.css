@@ -108,7 +108,6 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
 
 .header-actions { display: flex; align-items: center; gap: 8px; }
 
-.music-toggle,
 .settings-toggle {
   min-width: 48px;
   min-height: 48px;
@@ -121,7 +120,6 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   cursor: pointer;
   font-size: 1.25rem;
 }
-.music-toggle[aria-pressed='true'] { opacity: .7; }
 .settings-toggle[aria-expanded='true'] {
   color: var(--night-deep);
   border-color: var(--amber-light);
@@ -401,6 +399,75 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   font-size: 1.8rem;
 }
 .arrival-seal i { width: 58px; height: 2px; background: currentColor; }
+
+.briefing-card {
+  position: relative;
+  width: min(1080px, 94vw);
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(290px, .8fr);
+  align-items: stretch;
+  overflow: hidden;
+  padding: 12px;
+  border: 3px solid var(--brass);
+  border-radius: 30px;
+  color: var(--ink);
+  background: var(--cream);
+  box-shadow: var(--shadow), inset 0 0 0 6px rgba(107, 63, 42, .08);
+  animation: card-arrive .65s cubic-bezier(.2, .9, .2, 1) both;
+}
+
+.briefing-visual {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid rgba(107, 63, 42, .62);
+  border-radius: 20px;
+  background: var(--night-deep);
+  box-shadow: inset 0 0 0 5px rgba(255, 217, 120, .12);
+}
+
+.briefing-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 42px rgba(4, 14, 27, .46);
+}
+
+.briefing-visual picture,
+.briefing-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.briefing-visual img {
+  object-fit: cover;
+  object-position: center;
+  animation: briefing-focus 5s ease-out both;
+}
+
+.briefing-copy {
+  align-self: center;
+  padding: clamp(24px, 4vw, 48px) clamp(20px, 3vw, 38px);
+  text-align: left;
+}
+
+.briefing-copy h1 {
+  margin: 0;
+  color: var(--walnut-dark);
+  font: 400 clamp(2rem, 4vw, 3.25rem)/1.06 'ZCOOL KuaiLe', sans-serif;
+}
+
+.briefing-copy > p:not(.kicker) {
+  margin: 18px 0 24px;
+  color: #654635;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.6;
+}
 
 .door-handle,
 .commit-action {
@@ -853,6 +920,7 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
 
 @keyframes twinkle { to { opacity: .35; transform: scale(.65); } }
 @keyframes card-arrive { from { opacity: 0; transform: translateY(28px) scale(.96); } }
+@keyframes briefing-focus { from { opacity: .72; transform: scale(1.035); filter: saturate(.78); } }
 @keyframes console-rise { from { opacity: 0; } }
 @keyframes cat-bob { 50% { transform: translateY(-7px) rotate(1deg); } }
 @keyframes sound-ring { 70%, 100% { opacity: 0; transform: scale(1.12); } }
@@ -884,6 +952,19 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   .sound-fallback { grid-template-columns: auto 1fr; }
   .sound-fallback button { grid-column: 1 / -1; }
   .feedback-bubble { right: 10px; bottom: 10px; }
+  .station-app[data-view='briefing'] .station-world { align-content: center; padding: 10px; }
+  .briefing-card {
+    width: 100%;
+    max-height: calc(100vh - 88px);
+    grid-template-columns: 1fr;
+    overflow: auto;
+    padding: 8px;
+    border-radius: 24px;
+  }
+  .briefing-visual { aspect-ratio: 3 / 2; border-radius: 16px; }
+  .briefing-copy { padding: 16px 12px 18px; text-align: center; }
+  .briefing-copy h1 { font-size: clamp(1.65rem, 7vw, 2.25rem); }
+  .briefing-copy > p:not(.kicker) { margin: 10px auto 15px; max-width: 34ch; line-height: 1.45; }
 }
 
 @media (max-width: 410px), (max-height: 690px) {
@@ -892,7 +973,6 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   .case-progress { height: 29px; }
   .case-progress b { font-size: .72rem; }
   .header-actions { gap: 5px; }
-  .music-toggle,
   .settings-toggle { min-width: 42px; min-height: 42px; }
   .settings-tray { right: 8px; }
   .restart-dialog__actions { grid-template-columns: 1fr; }
@@ -902,6 +982,10 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   .choice-token { min-width: 112px; }
   .arrival-card,
   .milestone-card { padding: 24px 18px; }
+  .briefing-card { max-height: calc(100vh - 70px); }
+  .briefing-copy { padding: 12px 9px 15px; }
+  .briefing-copy > p:not(.kicker) { font-size: .94rem; }
+  .briefing-copy .door-handle { min-height: 52px; padding-block: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

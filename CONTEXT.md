@@ -230,7 +230,7 @@ _Avoid_: 常规课程创作、可从教材查明的事实、已确认规则的�
 为一个教学单元集中呈现一句话故事、教材来源与目标覆盖、微任务路线、真实例外、可玩儿童体验和自动检查结果的审阅材料；它让产品负责人验收结果与例外，而不是逐按钮参与制作。
 _Avoid_: 百题访谈、只有文档没有体验、把运行时实施或发布授权混入设计验收
 
-Lesson 1–2 是首个已接受的课程生产母版；其冻结设计与实施合同分别见 `docs/designs/lesson1-2-unit-design-v0.md` 和 `docs/designs/lesson1-2-implementation-acceptance-pack-v1.md`。
+全课程的高度总结原则见 `docs/designs/elementary-english-game-course-doctrine-v1.md`。Lesson 1–2 是首个已接受的课程生产母版；其冻结设计与实施合同分别见 `docs/designs/lesson1-2-unit-design-v0.md` 和 `docs/designs/lesson1-2-implementation-acceptance-pack-v1.md`。
 
 ## 地图结构
 

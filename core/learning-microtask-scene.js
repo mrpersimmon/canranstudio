@@ -9,10 +9,6 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function learningMicrotaskSceneFactory(global) {
   'use strict';
 
-  const MUSIC_STORAGE_SUFFIX = ':music-muted';
-  const MUSIC_VOLUME = 0.06;
-  const MUSIC_DUCKED_VOLUME = 0.012;
-
   function escapeHtml(value) {
     return String(value ?? '')
       .replaceAll('&', '&amp;')
@@ -71,17 +67,8 @@
       previewMode: false,
       previewTargetId: null,
       previewReturnStarted: false,
-      voice: null,
-      music: null,
-      musicMuted: true
+      voice: null
     };
-
-    try {
-      const savedMusicPreference = global.localStorage.getItem(`${storageKey}${MUSIC_STORAGE_SUFFIX}`);
-      ui.musicMuted = savedMusicPreference === null ? true : savedMusicPreference === 'true';
-    } catch {
-      ui.musicMuted = true;
-    }
 
     let runtimeSequence = 1200;
     function createRuntime(activeLedger) {
@@ -212,19 +199,6 @@
       ui.voice.finished = true;
       try { ui.voice.audio.pause(); } catch { /* no-op */ }
       ui.voice = null;
-      if (ui.music) ui.music.volume = ui.musicMuted ? 0 : MUSIC_VOLUME;
-    }
-
-    function ensureMusic() {
-      const src = unit.experience?.ambientAudioSrc;
-      if (!src || ui.music || ui.musicMuted) return;
-      const music = new global.Audio(src);
-      music.loop = true;
-      music.preload = 'auto';
-      music.volume = MUSIC_VOLUME;
-      ui.music = music;
-      const started = music.play();
-      if (started && typeof started.catch === 'function') started.catch(() => {});
     }
 
     function dispatch(action) {
@@ -245,13 +219,11 @@
         finished: false
       };
       ui.voice = session;
-      if (ui.music) ui.music.volume = ui.musicMuted ? 0 : MUSIC_DUCKED_VOLUME;
 
       function finish(type, reason) {
         if (session.finished) return;
         session.finished = true;
         if (ui.voice === session) ui.voice = null;
-        if (ui.music) ui.music.volume = ui.musicMuted ? 0 : MUSIC_VOLUME;
         if (type === 'ended') {
           dispatch({
             type: 'audio/ended',
@@ -590,7 +562,7 @@
             <span class="restart-seal" aria-hidden="true">↺</span>
             <p class="kicker">课程设置</p>
             <h2 id="restart-dialog-title">要重新开始吗？</h2>
-            <p id="restart-dialog-copy">已经保存的学习进度会清除，并回到本单元起点。背景音乐设置会保留。</p>
+            <p id="restart-dialog-copy">已经保存的学习进度会清除，并回到本单元起点。</p>
             <div class="restart-dialog__actions">
               <button class="restart-cancel" type="button" data-action="restart-cancel">继续学习</button>
               <button class="restart-confirm" type="button" data-action="restart-confirm">确认重新开始</button>
@@ -602,7 +574,6 @@
           <div class="station-brand"><span>${escapeHtml(unit.experience?.lessonLabel || '')}</span><strong>${escapeHtml(unit.title)}</strong></div>
           <div class="case-progress" aria-label="${ui.previewMode ? '预览阶段位置' : '当日学习进度'}"><span style="--progress:${progress}%"></span><b>${shownPosition} / ${tasks.length}</b></div>
           <div class="header-actions">
-            <button class="music-toggle" type="button" data-action="toggle-music" aria-pressed="${ui.musicMuted ? 'true' : 'false'}" aria-label="${ui.musicMuted ? '打开背景音乐' : '关闭背景音乐'}"><span aria-hidden="true">${ui.musicMuted ? '🔇' : '🎵'}</span></button>
             <button class="settings-toggle" type="button" data-action="toggle-settings" aria-expanded="${ui.settingsOpen ? 'true' : 'false'}" aria-controls="course-settings-panel" aria-label="课程设置"><span aria-hidden="true">⚙</span></button>
           </div>
           ${ui.previewMode ? '<span class="preview-mode-badge" role="status">阶段预览 · 不保存</span>' : ''}
@@ -624,6 +595,24 @@
         <div class="arrival-seal" aria-hidden="true"><i></i><span>✦</span><i></i></div>
         <button class="door-handle" type="button" data-action="start">${escapeHtml(resumed ? '继续今天的案件' : arrival.actionLabel)}<span aria-hidden="true">➜</span></button>
       </div>`, snapshot);
+    }
+
+    function briefingMarkup(snapshot) {
+      const briefing = unit.experience?.briefing || {};
+      return commonShell(`<article class="briefing-card" aria-labelledby="briefing-title">
+        <figure class="briefing-visual">
+          <picture>
+            <source srcset="${escapeHtml(briefing.imageSrc || '')}" type="image/avif">
+            <img src="${escapeHtml(briefing.imageFallbackSrc || briefing.imageSrc || '')}" alt="${escapeHtml(briefing.imageAlt || '')}">
+          </picture>
+        </figure>
+        <div class="briefing-copy">
+          <p class="kicker">${escapeHtml(briefing.kicker)}</p>
+          <h1 id="briefing-title">${escapeHtml(briefing.title)}</h1>
+          <p>${escapeHtml(briefing.copy)}</p>
+          <button class="door-handle" type="button" data-action="start">${escapeHtml(briefing.actionLabel)}<span aria-hidden="true">➜</span></button>
+        </div>
+      </article>`, snapshot);
     }
 
     function missionMarkup(snapshot, authored) {
@@ -695,6 +684,10 @@
         root.innerHTML = arrivalMarkup(snapshot);
         return;
       }
+      if (ui.view === 'briefing' && snapshot.status === 'idle') {
+        root.innerHTML = briefingMarkup(snapshot);
+        return;
+      }
       if (snapshot.status === 'chapter-stop') {
         ui.view = 'chapter';
         root.innerHTML = chapterMarkup(snapshot);
@@ -745,18 +738,6 @@
       const snapshot = runtime.snapshot();
       const step = currentStep(snapshot);
 
-      if (action === 'toggle-music') {
-        ui.musicMuted = !ui.musicMuted;
-        try { global.localStorage.setItem(`${storageKey}${MUSIC_STORAGE_SUFFIX}`, String(ui.musicMuted)); } catch { /* no-op */ }
-        if (!ui.musicMuted) ensureMusic();
-        if (ui.music) {
-          ui.music.volume = ui.musicMuted
-            ? 0
-            : (ui.voice ? MUSIC_DUCKED_VOLUME : MUSIC_VOLUME);
-        }
-        render();
-        return;
-      }
       if (action === 'toggle-settings') {
         ui.settingsOpen = !ui.settingsOpen;
         render();
@@ -785,13 +766,21 @@
       }
       if (action === 'restart-confirm') {
         pauseVoice();
-        try { ui.music?.pause(); } catch { /* no-op */ }
         try { global.localStorage.removeItem(storageKey); } catch { /* no-op */ }
         global.location.reload();
         return;
       }
       if (action === 'start') {
-        ensureMusic();
+        const durable = ledger.read().units?.[unit.unitId];
+        if (
+          ui.view === 'arrival'
+          && !durable?.checkpoint
+          && unit.experience?.briefing
+        ) {
+          ui.view = 'briefing';
+          render();
+          return;
+        }
         ui.view = 'mission';
         runtime.enter({ entryLesson });
         processEffects();
@@ -799,7 +788,6 @@
         return;
       }
       if (action === 'audio-play') {
-        ensureMusic();
         dispatch({ type: 'audio/play' });
         return;
       }
