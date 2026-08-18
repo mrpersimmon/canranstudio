@@ -34,6 +34,19 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
   assert.ok(background.size > 100_000);
   assert.ok(premiseAvif.size > 100_000);
   assert.ok(premiseJpeg.size > 100_000);
+  const characterStats = await Promise.all([
+    'character-adult-man-v1.avif',
+    'character-adult-man-v1.jpg',
+    'character-adult-woman-v1.avif',
+    'character-adult-woman-v1.jpg',
+    'character-child-explorer-v1.avif',
+    'character-child-explorer-v1.jpg'
+  ].map(filename => fs.stat(path.join(
+    ROOT,
+    'poc/lesson1-2-experience/assets',
+    filename
+  ))));
+  assert.ok(characterStats.every(stat => stat.size > 50_000));
 
   assert.doesNotMatch(home, /lesson1-2-experience/);
   assert.match(runtime, /NCE-U01/);

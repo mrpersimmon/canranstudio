@@ -248,13 +248,42 @@
     }
   };
 
+  const NCE_MAN_CHARACTER = {
+    entityKind: 'character',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.jpg'
+  };
+  const NCE_WOMAN_CHARACTER = {
+    entityKind: 'character',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.jpg'
+  };
+  const NCE_CHILD_CHARACTER = {
+    entityKind: 'character',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.jpg'
+  };
+  const LOST_HANDBAG_CAST = ['station-keeper', 'handbag-owner'];
+
   const NCE_ENTITIES = {
-    'station-keeper': { entityId: 'station-keeper', title: '招领员', visualType: 'keeper', symbol: '🧑‍💼' },
-    'handbag-owner': { entityId: 'handbag-owner', title: '手提包主人', visualType: 'visitor', symbol: '👩' },
-    'first-claimant': { entityId: 'first-claimant', title: '第一位认领者', visualType: 'visitor-one', symbol: '🧑' },
-    'second-returner': { entityId: 'second-returner', title: '第二位归还者', visualType: 'visitor-two', symbol: '👩‍🦱' },
-    'third-claimant': { entityId: 'third-claimant', title: '第三位认领者', visualType: 'visitor-three', symbol: '👨‍🦰' },
-    child: { entityId: 'child', title: '小探险家', visualType: 'child', symbol: '🧒' },
+    'station-keeper': {
+      entityId: 'station-keeper', title: '招领员', visualType: 'keeper', ...NCE_MAN_CHARACTER
+    },
+    'handbag-owner': {
+      entityId: 'handbag-owner', title: '手提包主人', visualType: 'visitor', ...NCE_WOMAN_CHARACTER
+    },
+    'first-claimant': {
+      entityId: 'first-claimant', title: '第一位认领者', visualType: 'visitor-one', ...NCE_WOMAN_CHARACTER
+    },
+    'second-returner': {
+      entityId: 'second-returner', title: '第二位归还者', visualType: 'visitor-two', ...NCE_MAN_CHARACTER
+    },
+    'third-claimant': {
+      entityId: 'third-claimant', title: '第三位认领者', visualType: 'visitor-three', ...NCE_WOMAN_CHARACTER
+    },
+    child: {
+      entityId: 'child', title: '小探险家', visualType: 'child', ...NCE_CHILD_CHARACTER
+    },
     'cat-guide': {
       entityId: 'cat-guide', title: '探险小猫', visualType: 'cat',
       assetSrc: '/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-256.webp'
@@ -316,7 +345,8 @@
     steps,
     growthBoundary = 'none',
     requiredFactIds = [],
-    checkpointFacts = []
+    checkpointFacts = [],
+    characterEntityIds = []
   }) {
     return {
       microtaskId,
@@ -333,7 +363,8 @@
         sceneMode,
         prompt,
         completedFeedback,
-        nextCue
+        nextCue,
+        ...(characterEntityIds.length ? { characterEntityIds } : {})
       },
       persistence: {
         atomic: true,
@@ -383,6 +414,7 @@
       title: '门铃响了',
       stepLabel: '第一案 · 1 / 5',
       sceneMode: 'handbag-arrival',
+      characterEntityIds: [...LOST_HANDBAG_CAST],
       prompt: '听听这只手提包是谁的',
       completedFeedback: '你找到了手提包的主人，也把声音和物品连起来了。',
       nextCue: { entityId: 'case-stamp', label: '回看线索' },
@@ -455,6 +487,7 @@
       title: '礼貌问一问',
       stepLabel: '第一案 · 2 / 5',
       sceneMode: 'attention-replay',
+      characterEntityIds: [...LOST_HANDBAG_CAST],
       prompt: '先叫住她，再询问',
       completedFeedback: '你礼貌地叫住了她，也问清了手提包。',
       nextCue: { entityId: 'case-stamp', label: '回声线索' },
@@ -504,6 +537,7 @@
       title: '没懂就请再说',
       stepLabel: '第一案 · 3 / 5',
       sceneMode: 'repair-and-return',
+      characterEntityIds: [...LOST_HANDBAG_CAST],
       prompt: '替她请求再说一遍',
       completedFeedback: '你帮她修好了对话，手提包终于回到主人手里。',
       nextCue: { entityId: 'case-stamp', label: '感谢线索' },
@@ -557,15 +591,18 @@
       steps: [
         {
           stepId: 'L01-M04:S01', kind: 'audio-sequence', prompt: '听听她拿回手提包后怎么说',
+          characterEntityIds: [...LOST_HANDBAG_CAST],
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L01-M04:S02', kind: 'perform-action', prompt: '接回你的徽章',
+          characterEntityIds: ['station-keeper', 'child'],
           entityIds: ['star-badge'], targetEntityIds: ['child'],
           answerRule: { type: 'perform-action', action: 'receive', entityId: 'star-badge', targetEntityId: 'child' }
         },
         {
           stepId: 'L01-M04:S03', kind: 'select-one', prompt: '收到徽章，应该怎么说？',
+          characterEntityIds: ['station-keeper', 'child'],
           optionSourceRefs: ['L01-D07', 'L01-D04'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
           feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
@@ -693,7 +730,8 @@
           support: [...WORD_FORM_SUPPORT]
         },
         {
-          stepId: 'L02-M02:S02', kind: 'select-one', prompt: '想礼貌叫住他，应该怎么说？',
+          stepId: 'L02-M02:S02', kind: 'select-one', prompt: '想礼貌叫住她，应该怎么说？',
+          characterEntityIds: ['first-claimant'],
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
@@ -701,10 +739,12 @@
         },
         {
           stepId: 'L02-M02:S03', kind: 'audio-sequence', prompt: '听对方回应',
+          characterEntityIds: ['first-claimant'],
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M02:S04', kind: 'place-in-slot', prompt: '想问手表是不是他的，把 watch 放进问句',
+          stepId: 'L02-M02:S04', kind: 'place-in-slot', prompt: '想问手表是不是她的，把 watch 放进问句',
+          characterEntityIds: ['first-claimant'],
           slotId: 'ownership-item', optionEntityIds: ['watch', 'book', 'pen', 'pencil'],
           expressionContentRef: 'NCE-U01-C-Q-WATCH',
           answerRule: { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
@@ -712,16 +752,19 @@
           support: [...SENTENCE_SUPPORT]
         },
         {
-          stepId: 'L02-M02:S05', kind: 'audio-sequence', prompt: '听听他怎么回答',
+          stepId: 'L02-M02:S05', kind: 'audio-sequence', prompt: '听听她怎么回答',
+          characterEntityIds: ['first-claimant'],
           audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M02:S06', kind: 'perform-action', prompt: '把手表交给他',
+          stepId: 'L02-M02:S06', kind: 'perform-action', prompt: '把手表交给她',
+          characterEntityIds: ['first-claimant'],
           entityIds: ['watch'], targetEntityIds: ['first-claimant'],
           answerRule: { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'first-claimant' }
         },
         {
-          stepId: 'L02-M02:S07', kind: 'audio-sequence', prompt: '听听他拿回手表后怎么说',
+          stepId: 'L02-M02:S07', kind: 'audio-sequence', prompt: '听听她拿回手表后怎么说',
+          characterEntityIds: ['first-claimant'],
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
@@ -809,10 +852,12 @@
         },
         {
           stepId: 'L02-M04:S02', kind: 'audio-sequence', prompt: '听归还者询问',
+          characterEntityIds: ['second-returner', 'child'],
           audioContentRefs: ['NCE-U01-C-Q-COAT'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L02-M04:S03', kind: 'select-one', prompt: '这是你的外套，应该怎么回答？',
+          characterEntityIds: ['second-returner', 'child'],
           optionSourceRefs: ['L01-D06', 'L01-D02'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D06' },
           feedbackAudioSourceRef: 'L01-D06', gate: AUDIO_ENDED_GATE,
@@ -820,11 +865,13 @@
         },
         {
           stepId: 'L02-M04:S04', kind: 'perform-action', prompt: '把外套接过来',
+          characterEntityIds: ['second-returner', 'child'],
           entityIds: ['coat'], targetEntityIds: ['child'],
           answerRule: { type: 'perform-action', action: 'receive', entityId: 'coat', targetEntityId: 'child' }
         },
         {
           stepId: 'L02-M04:S05', kind: 'select-one', prompt: '收到外套，应该怎么说？',
+          characterEntityIds: ['second-returner', 'child'],
           optionSourceRefs: ['L01-D07', 'L01-D04'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
           feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
@@ -902,12 +949,14 @@
         },
         {
           stepId: 'L02-M06:S02', kind: 'select-case', prompt: '你想先帮哪把钥匙找主人？',
+          characterEntityIds: ['third-claimant'],
           optionEntityIds: ['car-key', 'house-key'],
           answerRule: { type: 'select-one', acceptedEntityIds: ['car-key', 'house-key'] },
           storesFactId: 'selected-key-case'
         },
         {
-          stepId: 'L02-M06:S03', kind: 'select-one', prompt: '想礼貌叫住他，应该怎么说？',
+          stepId: 'L02-M06:S03', kind: 'select-one', prompt: '想礼貌叫住她，应该怎么说？',
+          characterEntityIds: ['third-claimant'],
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
@@ -915,10 +964,12 @@
         },
         {
           stepId: 'L02-M06:S04', kind: 'audio-sequence', prompt: '听对方回应',
+          characterEntityIds: ['third-claimant'],
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L02-M06:S05', kind: 'ordered-blocks', prompt: '把两块词语排成一句问话',
+          characterEntityIds: ['third-claimant'],
           blockContentRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR'],
           branchEntityIds: ['car-key', 'house-key'],
           selectedEntityFactId: 'selected-key-case',
@@ -937,11 +988,13 @@
           support: [...SENTENCE_SUPPORT]
         },
         {
-          stepId: 'L02-M06:S06', kind: 'audio-sequence', prompt: '听听他怎么回答',
+          stepId: 'L02-M06:S06', kind: 'audio-sequence', prompt: '听听她怎么回答',
+          characterEntityIds: ['third-claimant'],
           audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M06:S07', kind: 'perform-action', prompt: '把钥匙交给他',
+          stepId: 'L02-M06:S07', kind: 'perform-action', prompt: '把钥匙交给她',
+          characterEntityIds: ['third-claimant'],
           entityIds: ['car-key', 'house-key'], targetEntityIds: ['third-claimant'],
           answerRule: {
             type: 'perform-action', action: 'give-selected',
@@ -949,7 +1002,8 @@
           }
         },
         {
-          stepId: 'L02-M06:S08', kind: 'audio-sequence', prompt: '听听他拿回钥匙后怎么说',
+          stepId: 'L02-M06:S08', kind: 'audio-sequence', prompt: '听听她拿回钥匙后怎么说',
+          characterEntityIds: ['third-claimant'],
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
@@ -962,6 +1016,7 @@
       title: '三案合闸',
       stepLabel: '整理室 · 7 / 7',
       sceneMode: 'station-opening',
+      characterEntityIds: ['first-claimant', 'second-returner', 'third-claimant'],
       prompt: '点亮三案，亲手开张',
       completedFeedback: '星灯失物招领站正式开张！今天的建筑已经保存。',
       nextCue: { entityId: 'opening-lever', label: '查看今日建设' },
@@ -2306,6 +2361,11 @@
           if (!current.lessonIds.includes(microtask.lessonId)) {
             errors.push(`${microtask.microtaskId} lesson is outside ${current.unitId}`);
           }
+          for (const entityId of microtask.presentation?.characterEntityIds || []) {
+            if (!knownEntityIds.has(entityId)) {
+              errors.push(`${microtask.microtaskId} references unknown character ${entityId}`);
+            }
+          }
           for (const contextId of Object.keys(microtask.contextVariants || {})) {
             const responseKey = microtask.responseKeyByContext?.[contextId];
             if (!responseKey || !['single', 'set', 'ordered', 'mapping', 'composition'].includes(responseKey.type)) {
@@ -2413,6 +2473,11 @@
               for (const entityId of stepEntityRefs) {
                 if (!knownEntityIds.has(entityId)) {
                   errors.push(`${step.stepId} references unknown entity ${entityId}`);
+                }
+              }
+              for (const entityId of step.characterEntityIds || []) {
+                if (!knownEntityIds.has(entityId)) {
+                  errors.push(`${step.stepId} references unknown character ${entityId}`);
                 }
               }
             }

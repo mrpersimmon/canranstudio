@@ -304,9 +304,11 @@
     function entityVisual(entityId, { compact = false } = {}) {
       const item = entity(entityId);
       const visual = item.assetSrc
-        ? `<img src="${escapeHtml(item.assetSrc)}" alt="">`
+        ? (item.assetFallbackSrc
+            ? `<picture><source srcset="${escapeHtml(item.assetSrc)}" type="image/avif"><img src="${escapeHtml(item.assetFallbackSrc)}" alt=""></picture>`
+            : `<img src="${escapeHtml(item.assetSrc)}" alt="">`)
         : `<span aria-hidden="true">${escapeHtml(item.symbol || '✦')}</span>`;
-      return `<span class="entity-visual${compact ? ' entity-visual--compact' : ''}" data-visual-type="${escapeHtml(item.visualType)}">${visual}</span>`;
+      return `<span class="entity-visual${compact ? ' entity-visual--compact' : ''}" data-entity-id="${escapeHtml(entityId)}" data-entity-kind="${escapeHtml(item.entityKind || 'prop')}" data-visual-type="${escapeHtml(item.visualType)}">${visual}</span>`;
     }
 
     function choiceButton({ action, value, label, selected, visual = '', extra = '' }) {
@@ -625,16 +627,17 @@
             ? audioPanel(snapshot, step)
             : responsePanel(snapshot, step));
       const personIds = [...new Set([
+        ...(task.presentation?.characterEntityIds || []),
+        ...(step?.characterEntityIds || []),
         ...(step?.targetEntityIds || []),
         ...((step?.kind === 'select-case') ? (step.optionEntityIds || []) : [])
-      ])].filter(entityId => unit.entities?.[entityId]?.visualType?.includes('visitor')
-        || ['keeper', 'child'].includes(unit.entities?.[entityId]?.visualType));
+      ])].filter(entityId => unit.entities?.[entityId]?.entityKind === 'character');
       return commonShell(`<div class="scene-heading">
           <div><p>${escapeHtml(task.presentation.stepLabel)}</p><h1>${escapeHtml(task.presentation.title)}</h1></div>
           ${hearts(snapshot, step)}
         </div>
         <div class="scene-people" aria-hidden="true">
-          ${personIds.length ? personIds.map(id => entityVisual(id)).join('') : entityVisual('cat-guide')}
+          ${['cat-guide', ...personIds].map(id => entityVisual(id)).join('')}
         </div>
         <section class="mission-console">
           <p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>

@@ -165,6 +165,47 @@ test('the guide uses the approved front-facing pose in the first story scene', a
   await expect(guide).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
 });
 
+test('illustrated characters stay present across dialogue, role switch, and station opening', async ({ page }) => {
+  await installManualAudio(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFresh(page);
+  await enterFirstMission(page);
+
+  const sceneCast = page.locator('.scene-people [data-entity-kind="character"]');
+  await expect(sceneCast).toHaveCount(2);
+  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
+  await expect(page.locator('.scene-people [data-entity-id="handbag-owner"] img')).toBeVisible();
+  await expect(sceneCast.locator('span')).toHaveCount(0);
+  const castLayout = await page.evaluate(() => ({
+    cast: [...document.querySelectorAll('.scene-people [data-entity-kind="character"]')]
+      .map(element => {
+        const box = element.getBoundingClientRect();
+        return { top: box.top, right: box.right, bottom: box.bottom, left: box.left };
+      }),
+    consoleTop: document.querySelector('.mission-console').getBoundingClientRect().top,
+    headerBottom: document.querySelector('.station-header').getBoundingClientRect().bottom,
+    viewportWidth: window.innerWidth
+  }));
+  for (const box of castLayout.cast) {
+    expect(box.top).toBeGreaterThanOrEqual(castLayout.headerBottom);
+    expect(box.left).toBeGreaterThanOrEqual(0);
+    expect(box.right).toBeLessThanOrEqual(castLayout.viewportWidth);
+    expect(box.bottom).toBeLessThanOrEqual(castLayout.consoleTop + 8);
+  }
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
+  await page.getByRole('button', { name: '听一听' }).click();
+  await page.evaluate(() => window.__finishCourseAudio());
+  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
+  await expect(page.locator('.scene-people [data-entity-id="child"] img')).toBeVisible();
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
+  await expect(page.locator('.scene-people [data-entity-kind="character"]')).toHaveCount(3);
+  await expect(page.locator('.scene-people [data-entity-kind="character"] img')).toHaveCount(3);
+});
+
 test('the polite-attention choice asks the child what to say', async ({ page }) => {
   await openFresh(page);
   await page.locator('[data-action="toggle-settings"]').click();
@@ -202,6 +243,7 @@ test('physical actions use a concrete verb instead of a system-style confirmatio
   await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
   await page.getByRole('button', { name: '听一听' }).click();
   await page.evaluate(() => window.__finishCourseAudio());
+  await expect(page.getByRole('button', { name: '小探险家' }).locator('img')).toBeVisible();
   await page.getByRole('button', { name: '星灯探险徽章' }).click();
   await page.getByRole('button', { name: '小探险家' }).click();
 

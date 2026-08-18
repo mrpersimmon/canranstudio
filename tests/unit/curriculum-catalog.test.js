@@ -140,11 +140,11 @@ test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actio
     'L01-M04:S03': '收到徽章，应该怎么说？',
     'L02-M01:S01': '布袋里是什么？打开看看',
     'L02-M02:S01': '看单词，找到对应的物品',
-    'L02-M02:S02': '想礼貌叫住他，应该怎么说？',
-    'L02-M02:S04': '想问手表是不是他的，把 watch 放进问句',
-    'L02-M02:S05': '听听他怎么回答',
-    'L02-M02:S06': '把手表交给他',
-    'L02-M02:S07': '听听他拿回手表后怎么说',
+    'L02-M02:S02': '想礼貌叫住她，应该怎么说？',
+    'L02-M02:S04': '想问手表是不是她的，把 watch 放进问句',
+    'L02-M02:S05': '听听她怎么回答',
+    'L02-M02:S06': '把手表交给她',
+    'L02-M02:S07': '听听她拿回手表后怎么说',
     'L02-M03:S01': '衣罩里是什么？拉开看看',
     'L02-M04:S01': '看单词，找到对应的衣物',
     'L02-M04:S03': '这是你的外套，应该怎么回答？',
@@ -153,11 +153,11 @@ test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actio
     'L02-M05:S01': '这两把钥匙会打开什么？',
     'L02-M06:S01': '看单词，找到对应的钥匙',
     'L02-M06:S02': '你想先帮哪把钥匙找主人？',
-    'L02-M06:S03': '想礼貌叫住他，应该怎么说？',
+    'L02-M06:S03': '想礼貌叫住她，应该怎么说？',
     'L02-M06:S05': '把两块词语排成一句问话',
-    'L02-M06:S06': '听听他怎么回答',
-    'L02-M06:S07': '把钥匙交给他',
-    'L02-M06:S08': '听听他拿回钥匙后怎么说',
+    'L02-M06:S06': '听听她怎么回答',
+    'L02-M06:S07': '把钥匙交给她',
+    'L02-M06:S08': '听听她拿回钥匙后怎么说',
     'L02-M07:S01': '把三份认领记录都点亮',
     'L02-M07:S02': '拉下开张拉杆'
   };
@@ -207,6 +207,66 @@ test('Lesson 1 and Lesson 2 introduce the lost-handbag premise before the dialog
   });
 });
 
+test('Lesson 1 and Lesson 2 use one illustrated human cast wherever a person is present', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const tasks = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
+    .map(task => [task.microtaskId, task]));
+  const entities = unit.entities;
+
+  const manAsset = {
+    entityKind: 'character',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.jpg'
+  };
+  const womanAsset = {
+    entityKind: 'character',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.jpg'
+  };
+  const childAsset = {
+    entityKind: 'character',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.jpg'
+  };
+
+  for (const entityId of ['station-keeper', 'second-returner']) {
+    assert.deepEqual({
+      entityKind: entities[entityId].entityKind,
+      assetSrc: entities[entityId].assetSrc,
+      assetFallbackSrc: entities[entityId].assetFallbackSrc
+    }, manAsset, entityId);
+  }
+  for (const entityId of ['handbag-owner', 'first-claimant', 'third-claimant']) {
+    assert.deepEqual({
+      entityKind: entities[entityId].entityKind,
+      assetSrc: entities[entityId].assetSrc,
+      assetFallbackSrc: entities[entityId].assetFallbackSrc
+    }, womanAsset, entityId);
+  }
+  assert.deepEqual({
+    entityKind: entities.child.entityKind,
+    assetSrc: entities.child.assetSrc,
+    assetFallbackSrc: entities.child.assetFallbackSrc
+  }, childAsset);
+
+  assert.deepEqual(tasks.get('L01-M01').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
+  assert.deepEqual(tasks.get('L01-M02').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
+  assert.deepEqual(tasks.get('L01-M03').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
+  assert.deepEqual(tasks.get('L01-M04').steps.map(step => step.characterEntityIds), [
+    ['station-keeper', 'handbag-owner'],
+    ['station-keeper', 'child'],
+    ['station-keeper', 'child']
+  ]);
+  assert.deepEqual(tasks.get('L02-M02').steps.slice(1).map(step => step.characterEntityIds),
+    Array.from({ length: 6 }, () => ['first-claimant']));
+  assert.deepEqual(tasks.get('L02-M04').steps.slice(1).map(step => step.characterEntityIds),
+    Array.from({ length: 4 }, () => ['second-returner', 'child']));
+  assert.deepEqual(tasks.get('L02-M06').steps.slice(1).map(step => step.characterEntityIds),
+    Array.from({ length: 7 }, () => ['third-claimant']));
+  assert.deepEqual(tasks.get('L02-M07').presentation.characterEntityIds,
+    ['first-claimant', 'second-returner', 'third-claimant']);
+});
+
 test('microtask v2 catalog validation rejects imperative answers and forged result identities', () => {
   function message(change) {
     const candidate = structuredClone(catalog.getTeachingUnit('NCE-U01'));
@@ -223,6 +283,12 @@ test('microtask v2 catalog validation rejects imperative answers and forged resu
   assert.match(message(unit => {
     unit.beats[0].microtasks[0].steps[1].targetEntityIds[1] = 'unknown-recipient';
   }), /L01-M01:S02.*unknown entity unknown-recipient/i);
+  assert.match(message(unit => {
+    unit.beats[0].microtasks[0].presentation.characterEntityIds[0] = 'unknown-character';
+  }), /L01-M01.*unknown character unknown-character/i);
+  assert.match(message(unit => {
+    unit.beats[0].microtasks[3].steps[0].characterEntityIds[0] = 'unknown-character';
+  }), /L01-M04:S01.*unknown character unknown-character/i);
   assert.match(message(unit => {
     unit.beats[3].microtasks[1].steps[4].selectedEntityFactId = 'page-supplied-branch';
   }), /L02-M06:S05.*stored child choice/i);
