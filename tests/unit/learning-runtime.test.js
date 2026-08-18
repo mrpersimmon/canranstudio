@@ -134,13 +134,9 @@ test('microtask preview enters any authored stage and never writes learning prog
 
   const entered = runtime.preview({ microtaskId: 'L02-M07' });
   assert.equal(entered.snapshot.microtaskId, 'L02-M07');
-  assert.equal(entered.snapshot.stepId, 'L02-M07:S01');
+  assert.equal(entered.snapshot.stepId, 'L02-M07:S02');
   assert.equal(entered.snapshot.mode, 'microtask-v2-preview');
 
-  runtime.dispatch({
-    type: 'response/submit',
-    response: { factIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'] }
-  });
   const completed = runtime.dispatch({
     type: 'response/submit',
     response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
@@ -229,7 +225,7 @@ test('Lesson 1 turns three wrong actions into teaching support and still require
   assert.deepEqual(ledger.events, []);
 });
 
-test('Lesson 1 M01 persists after one word sound and a visual label filing', () => {
+test('Lesson 1 M01 persists after one word sound while the visible label files automatically', () => {
   const ledger = fakeNceLedger();
   const runtime = create({ unit: nceUnit, ledger, seed: 109 });
   runtime.enter({ entryLesson: 'lesson1' });
@@ -239,18 +235,9 @@ test('Lesson 1 M01 persists after one word sound and a visual label filing', () 
     response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
   });
   finishActiveNceAudio(runtime);
-  const matched = runtime.dispatch({
-    type: 'response/submit',
-    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
-  });
-
-  assert.equal(matched.snapshot.stepId, 'L01-M01:S04');
-  assert.equal(matched.snapshot.phase, 'response');
-  assert.deepEqual(ledger.events, []);
-
   const completed = runtime.dispatch({
     type: 'response/submit',
-    response: { sourceRef: 'L01-W07' }
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
   });
 
   assert.equal(completed.snapshot.microtaskId, 'L01-M02');
@@ -274,7 +261,7 @@ test('Lesson 1 M01 persists after one word sound and a visual label filing', () 
     ledger.events[0].targetResults.map(result => [result.resultId, result.outcome]),
     [
       ['NCE-U01-T04:L01-M01:owner', 'independent'],
-      ['NCE-U01-T01:L01-W07:audio', 'independent']
+      ['NCE-U01-T01:L01-W07:audio-form-supported', 'independent']
     ]
   );
   assert.deepEqual(ledger.events[0].audioContactRefs, [
@@ -345,10 +332,10 @@ test('Lesson 2 M01 keeps each four-way choice and saves the four audio cells as 
   assert.deepEqual(
     ledger.events[0].targetResults.map(result => [result.sourceRef, result.channel]),
     [
-      ['L02-W03', 'audio'],
-      ['L02-W01', 'audio'],
-      ['L02-W04', 'audio'],
-      ['L02-W02', 'audio']
+      ['L02-W03', 'audio-form-supported'],
+      ['L02-W01', 'audio-form-supported'],
+      ['L02-W04', 'audio-form-supported'],
+      ['L02-W02', 'audio-form-supported']
     ]
   );
 });
@@ -473,7 +460,7 @@ test('microtask v2 audio failure needs explicit fallback and never forges an aud
     ledger.events[0].targetResults.map(result => [result.resultId, result.outcome]),
     [
       ['NCE-U01-T04:L01-M01:owner', 'independent'],
-      ['NCE-U01-T01:L01-W07:audio', 'audio-unavailable']
+      ['NCE-U01-T01:L01-W07:audio-form-supported', 'audio-unavailable']
     ]
   );
   assert.equal(ledger.events[0].completionStatus, 'completed-assisted');
@@ -527,6 +514,24 @@ test('Lesson 1 archive stops inside the station and resumes Lesson 2 only after 
 
 test('the station grows only after Lesson 2 M07 is atomically persisted and read as complete', () => {
   const claimFacts = ['claim-record-1', 'claim-record-2', 'claim-record-3'];
+  const blockedLedger = fakeNceLedger({
+    checkpoint: {
+      checkpointId: 'L02-M06:complete', beatId: 'transfer',
+      microtaskId: 'L02-M06', completionStatus: 'completed-independent'
+    },
+    storyFacts: claimFacts.slice(0, 2)
+  });
+  const blockedRuntime = create({ unit: nceUnit, ledger: blockedLedger, seed: 148 });
+  blockedRuntime.enter({ entryLesson: 'lesson2' });
+  const blocked = blockedRuntime.dispatch({
+    type: 'response/submit',
+    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
+  });
+  assert.equal(blocked.snapshot.status, 'active');
+  assert.equal(blocked.snapshot.stepId, 'L02-M07:S02');
+  assert.equal(blocked.snapshot.supportLevel, 1);
+  assert.deepEqual(blockedLedger.events, []);
+
   const ledger = fakeNceLedger({
     checkpoint: {
       checkpointId: 'L02-M06:complete', beatId: 'transfer',
@@ -537,13 +542,7 @@ test('the station grows only after Lesson 2 M07 is atomically persisted and read
   const runtime = create({ unit: nceUnit, ledger, seed: 149 });
   runtime.enter({ entryLesson: 'lesson2' });
   assert.equal(runtime.snapshot().microtaskId, 'L02-M07');
-
-  const stamps = runtime.dispatch({
-    type: 'response/submit', response: { factIds: ['claim-record-3', 'claim-record-1', 'claim-record-2'] }
-  });
-  assert.equal(stamps.snapshot.stepId, 'L02-M07:S02');
-  assert.ok(!stamps.effects.some(effect => effect.type === 'landmark/build-stage'));
-  assert.deepEqual(ledger.events, []);
+  assert.equal(runtime.snapshot().stepId, 'L02-M07:S02');
 
   const opened = runtime.dispatch({
     type: 'response/submit',

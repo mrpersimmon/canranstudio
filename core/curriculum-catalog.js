@@ -250,13 +250,17 @@
 
   const NCE_MAN_CHARACTER = {
     entityKind: 'character',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.jpg'
+    voiceRole: 'man',
+    dialogueSide: 'left',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.webp'
   };
   const NCE_WOMAN_CHARACTER = {
     entityKind: 'character',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.jpg'
+    voiceRole: 'woman',
+    dialogueSide: 'right',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.webp'
   };
   const NCE_EXPLORER_CAT_CHARACTER = {
     entityKind: 'character',
@@ -287,7 +291,11 @@
     'cat-guide': {
       entityId: 'cat-guide', title: '探险小猫', visualType: 'cat-guide', ...NCE_EXPLORER_CAT_CHARACTER
     },
-    handbag: { entityId: 'handbag', title: '手提包', visualType: 'handbag', symbol: '👜', sourceRef: 'L01-W07' },
+    handbag: {
+      entityId: 'handbag', title: '手提包', visualType: 'handbag', sourceRef: 'L01-W07',
+      assetSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.avif',
+      assetFallbackSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.webp'
+    },
     pen: { entityId: 'pen', title: '钢笔', visualType: 'pen', symbol: '🖋️', sourceRef: 'L02-W01' },
     pencil: { entityId: 'pencil', title: '铅笔', visualType: 'pencil', symbol: '✏️', sourceRef: 'L02-W02' },
     book: { entityId: 'book', title: '书', visualType: 'book', symbol: '📘', sourceRef: 'L02-W03' },
@@ -325,7 +333,9 @@
       stepId,
       sourceRef,
       channel,
-      evidenceMode: channel === 'audio' ? 'audio-object-match' : 'word-form-object-match'
+      evidenceMode: channel === 'audio-form-supported'
+        ? 'audio-form-object-match'
+        : 'word-form-object-match'
     });
   }
 
@@ -345,7 +355,8 @@
     growthBoundary = 'none',
     requiredFactIds = [],
     checkpointFacts = [],
-    characterEntityIds = []
+    characterEntityIds = [],
+    sceneEntityIds = []
   }) {
     return {
       microtaskId,
@@ -363,7 +374,8 @@
         prompt,
         completedFeedback,
         nextCue,
-        ...(characterEntityIds.length ? { characterEntityIds } : {})
+        ...(characterEntityIds.length ? { characterEntityIds } : {}),
+        ...(sceneEntityIds.length ? { sceneEntityIds } : {})
       },
       persistence: {
         atomic: true,
@@ -414,6 +426,7 @@
       stepLabel: '第一案 · 1 / 5',
       sceneMode: 'handbag-arrival',
       characterEntityIds: [...LOST_HANDBAG_CAST],
+      sceneEntityIds: ['handbag'],
       prompt: '听听这只手提包是谁的',
       completedFeedback: '你找到了手提包的主人，也把声音和物品连起来了。',
       nextCue: { entityId: 'case-stamp', label: '回看线索' },
@@ -433,7 +446,7 @@
           evidenceMode: 'ownership-exchange',
           variantId: 'handbag-owner'
         }),
-        t1Result('L01-M01', 'L01-M01:S03', 'L01-W07', 'audio')
+        t1Result('L01-M01', 'L01-M01:S03', 'L01-W07', 'audio-form-supported')
       ],
       steps: [
         {
@@ -467,17 +480,9 @@
           answerRule: { type: 'match-entity', pairs: { 'L01-W07': 'handbag' } },
           gate: AUDIO_ENDED_GATE,
           support: [...AUDIO_SUPPORT]
-        },
-        {
-          stepId: 'L01-M01:S04',
-          kind: 'source-reveal',
-          prompt: '收好黄铜标签',
-          sourceRef: 'L01-W07',
-          answerRule: { type: 'select-one', acceptedSourceRef: 'L01-W07' },
-          revealMode: 'visual-only'
         }
       ],
-      requiredFactIds: ['owner-chosen', 'handbag-audio-matched', 'handbag-label-seen'],
+      requiredFactIds: ['owner-chosen', 'handbag-audio-matched'],
       checkpointFacts: ['handbag-returned', 'case-clue-owner']
     }),
     nceMicrotask({
@@ -487,6 +492,7 @@
       stepLabel: '第一案 · 2 / 5',
       sceneMode: 'attention-replay',
       characterEntityIds: [...LOST_HANDBAG_CAST],
+      sceneEntityIds: ['handbag'],
       prompt: '先叫住她，再询问',
       completedFeedback: '你礼貌地叫住了她，也问清了手提包。',
       nextCue: { entityId: 'case-stamp', label: '回声线索' },
@@ -537,6 +543,7 @@
       stepLabel: '第一案 · 3 / 5',
       sceneMode: 'repair-and-return',
       characterEntityIds: [...LOST_HANDBAG_CAST],
+      sceneEntityIds: ['handbag'],
       prompt: '替她请求再说一遍',
       completedFeedback: '你帮她修好了对话，手提包终于回到主人手里。',
       nextCue: { entityId: 'case-stamp', label: '感谢线索' },
@@ -617,28 +624,21 @@
       title: '案件归档',
       stepLabel: '第一案 · 5 / 5',
       sceneMode: 'chapter-archive',
-      prompt: '点亮线索，盖下印章',
+      prompt: '四张线索已经归位，盖下印章',
       completedFeedback: '手提包案件归档了，工作灯和第二间整理室已经打开。',
       nextCue: { entityId: 'opening-lever', label: '继续整理室' },
       exposureRefs: ['L01-Q01'],
       evidenceRefs: [],
       steps: [
         {
-          stepId: 'L01-M05:S01', kind: 'all-of', prompt: '点亮四张案件线索',
-          factIds: ['case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'],
-          answerRule: {
-            type: 'all-of',
-            requiredFactIds: ['case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks']
-          }
-        },
-        {
           stepId: 'L01-M05:S02', kind: 'perform-action', prompt: '亲手盖下结案章',
+          preconditionFactIds: ['case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'],
           entityIds: ['case-stamp'], targetEntityIds: ['case-file'],
           answerRule: { type: 'perform-action', action: 'stamp', entityId: 'case-stamp', targetEntityId: 'case-file' }
         }
       ],
       growthBoundary: 'chapter-interior',
-      requiredFactIds: ['four-case-clues', 'case-stamped'],
+      requiredFactIds: ['case-stamped'],
       checkpointFacts: ['lesson1-complete', 'work-lamp-on', 'sorting-room-open']
     })
   ];
@@ -656,10 +656,10 @@
       exposureRefs: ['L02-I01', 'L02-W01', 'L02-W02', 'L02-W03', 'L02-W04'],
       evidenceRefs: ['L02-W03', 'L02-W01', 'L02-W04', 'L02-W02'],
       targetResults: [
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W03', 'audio'),
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W01', 'audio'),
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W04', 'audio'),
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W02', 'audio')
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W03', 'audio-form-supported'),
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W01', 'audio-form-supported'),
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W04', 'audio-form-supported'),
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W02', 'audio-form-supported')
       ],
       steps: [
         {
@@ -782,10 +782,10 @@
       exposureRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08'],
       evidenceRefs: ['L02-W08', 'L02-W05', 'L02-W06', 'L02-W07'],
       targetResults: [
-        t1Result('L02-M03', 'L02-M03:S02', 'L02-W08', 'audio'),
-        t1Result('L02-M03', 'L02-M03:S02', 'L02-W05', 'audio'),
-        t1Result('L02-M03', 'L02-M03:S02', 'L02-W06', 'audio'),
-        t1Result('L02-M03', 'L02-M03:S02', 'L02-W07', 'audio')
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W08', 'audio-form-supported'),
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W05', 'audio-form-supported'),
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W06', 'audio-form-supported'),
+        t1Result('L02-M03', 'L02-M03:S02', 'L02-W07', 'audio-form-supported')
       ],
       steps: [
         {
@@ -892,8 +892,8 @@
       exposureRefs: ['L02-W09', 'L02-W10'],
       evidenceRefs: ['L02-W10', 'L02-W09'],
       targetResults: [
-        t1Result('L02-M05', 'L02-M05:S02', 'L02-W10', 'audio'),
-        t1Result('L02-M05', 'L02-M05:S02', 'L02-W09', 'audio')
+        t1Result('L02-M05', 'L02-M05:S02', 'L02-W10', 'audio-form-supported'),
+        t1Result('L02-M05', 'L02-M05:S02', 'L02-W09', 'audio-form-supported')
       ],
       steps: [
         {
@@ -1016,25 +1016,21 @@
       stepLabel: '整理室 · 7 / 7',
       sceneMode: 'station-opening',
       characterEntityIds: ['first-claimant', 'second-returner', 'third-claimant'],
-      prompt: '点亮三案，亲手开张',
+      prompt: '三份记录已经就位，亲手开张',
       completedFeedback: '星灯失物招领站正式开张！今天的建筑已经保存。',
       nextCue: { entityId: 'opening-lever', label: '查看今日建设' },
       exposureRefs: [],
       evidenceRefs: [],
       steps: [
         {
-          stepId: 'L02-M07:S01', kind: 'all-of', prompt: '把三份认领记录都点亮',
-          factIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'],
-          answerRule: { type: 'all-of', requiredFactIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'] }
-        },
-        {
           stepId: 'L02-M07:S02', kind: 'perform-action', prompt: '拉下开张拉杆',
+          preconditionFactIds: ['claim-record-1', 'claim-record-2', 'claim-record-3'],
           entityIds: ['opening-lever'], targetEntityIds: ['station-power'],
           answerRule: { type: 'perform-action', action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
         }
       ],
       growthBoundary: 'unit-built',
-      requiredFactIds: ['three-claim-records-read', 'three-case-stamps-lit', 'opening-lever-pulled'],
+      requiredFactIds: ['opening-lever-pulled'],
       checkpointFacts: ['lesson2-complete', 'unit-built-same-day', 'landmark-state-5', 'reviews-scheduled']
     })
   ];
@@ -1955,7 +1951,7 @@
       runtimeProfile: 'microtask-v2',
       contexts: ['lost-and-found-station', 'neighbourhood-return-desk'],
       targets: [
-        { title: '把物品声音和英文词形连到正确物品', evidenceModes: ['audio-object-match', 'word-form-object-match'] },
+        { title: '把物品声音和英文词形连到正确物品', evidenceModes: ['audio-form-object-match', 'word-form-object-match'] },
         { title: '在需要引起注意时使用 Excuse me.', evidenceModes: ['polite-attention-choice'] },
         { title: '在没有听清时使用 Pardon?', evidenceModes: ['communication-repair-choice'] },
         { title: '询问并确认物品归属', evidenceModes: ['ownership-exchange'] },
@@ -2339,6 +2335,14 @@
 
       const authoredMicrotasks = (current.beats || [])
         .flatMap(beat => beat.microtasks || []);
+      const microtaskOrder = new Map(authoredMicrotasks
+        .map((microtask, index) => [microtask.microtaskId, index]));
+      const checkpointFactOwner = new Map();
+      authoredMicrotasks.forEach((microtask, index) => {
+        for (const factId of microtask.persistence?.checkpointFacts || []) {
+          if (!checkpointFactOwner.has(factId)) checkpointFactOwner.set(factId, index);
+        }
+      });
       const knownSourceIds = new Set(Object.values(current.lessonContent || {})
         .flatMap(lesson => Object.keys(lesson.sources || {})));
       const knownContentIds = new Set(Object.keys(current.authoredContent || {}));
@@ -2439,6 +2443,13 @@
                 && !localStoredFactIds.has(step.selectedEntityFactId)
               ) {
                 errors.push(`${step.stepId} must bind its branch to a stored child choice`);
+              }
+              for (const factId of step.preconditionFactIds || []) {
+                const ownerIndex = checkpointFactOwner.get(factId);
+                const currentIndex = microtaskOrder.get(microtask.microtaskId);
+                if (ownerIndex === undefined || ownerIndex >= currentIndex) {
+                  errors.push(`${step.stepId} references unknown earlier checkpoint fact ${factId}`);
+                }
               }
               const stepSourceRefs = [
                 ...(step.audioSourceRefs || []),

@@ -18,6 +18,10 @@
       .replaceAll("'", '&#039;');
   }
 
+  function uiIcon(name, className = '') {
+    return `<img class="ui-icon${className ? ` ${escapeHtml(className)}` : ''}" src="/poc/lesson1-2-experience/assets/icons/${escapeHtml(name)}.svg" alt="" aria-hidden="true">`;
+  }
+
   function learningDay() {
     try {
       return new Intl.DateTimeFormat('en-CA', {
@@ -57,7 +61,6 @@
       selectedEntityId: null,
       selectedTargetId: null,
       selectedSourceRef: null,
-      selectedFactIds: new Set(),
       selectedBlockRefs: [],
       selectedCaseByTask: {},
       feedback: null,
@@ -121,8 +124,6 @@
       if (['match-entity', 'match-entity-batch'].includes(kind)) return '找对了！';
       if (kind === 'select-one') return '这句话正合适！';
       if (['place-in-slot', 'ordered-blocks'].includes(kind)) return '问句排好了！';
-      if (kind === 'all-of') return '都点亮了！';
-      if (kind === 'source-reveal') return '标签收好了！';
       return '完成啦！';
     }
 
@@ -145,7 +146,6 @@
       ui.selectedEntityId = null;
       ui.selectedTargetId = null;
       ui.selectedSourceRef = null;
-      ui.selectedFactIds = new Set();
       ui.selectedBlockRefs = [];
       ui.selectedCaseByTask = {};
       ui.feedback = null;
@@ -331,19 +331,76 @@
       ui.selectedEntityId = null;
       ui.selectedTargetId = null;
       ui.selectedSourceRef = null;
-      ui.selectedFactIds = new Set();
       ui.selectedBlockRefs = [];
       if (snapshot.phase !== 'completed') ui.feedback = null;
     }
 
-    function entityVisual(entityId, { compact = false } = {}) {
-      const item = entity(entityId);
-      const visual = item.assetSrc
+    function entityPicture(item) {
+      return item.assetSrc
         ? (item.assetFallbackSrc
             ? `<picture><source srcset="${escapeHtml(item.assetSrc)}" type="image/avif"><img src="${escapeHtml(item.assetFallbackSrc)}" alt=""></picture>`
             : `<img src="${escapeHtml(item.assetSrc)}" alt="">`)
         : `<span aria-hidden="true">${escapeHtml(item.symbol || '✦')}</span>`;
+    }
+
+    function entityVisual(entityId, { compact = false } = {}) {
+      const item = entity(entityId);
+      const visual = entityPicture(item);
       return `<span class="entity-visual${compact ? ' entity-visual--compact' : ''}" data-entity-id="${escapeHtml(entityId)}" data-entity-kind="${escapeHtml(item.entityKind || 'prop')}" ${item.characterIdentityId ? `data-character-identity="${escapeHtml(item.characterIdentityId)}"` : ''} data-visual-type="${escapeHtml(item.visualType)}">${visual}</span>`;
+    }
+
+    function activeSpeakerRole(snapshot) {
+      if (snapshot.phase !== 'audio-playing') return null;
+      return snapshot.audio?.refs?.[snapshot.audio.segmentIndex || 0]?.speaker || null;
+    }
+
+    function speakerEntityId(personIds, speakerRole) {
+      return personIds.find(entityId => entity(entityId).voiceRole === speakerRole) || null;
+    }
+
+    function sceneCharacter(entityId, snapshot, step) {
+      const item = entity(entityId);
+      const targetable = step?.kind === 'perform-action'
+        && (step.targetEntityIds || []).includes(entityId);
+      const tag = targetable ? 'button' : 'div';
+      const action = targetable
+        ? ` type="button" data-action="select-target" data-value="${escapeHtml(entityId)}"`
+        : '';
+      const active = item.voiceRole && item.voiceRole === activeSpeakerRole(snapshot);
+      return `<${tag} class="scene-character scene-character--${escapeHtml(item.dialogueSide || 'center')}${active ? ' is-active-speaker' : ''}"${action} data-entity-id="${escapeHtml(entityId)}" data-entity-kind="character" data-dialogue-side="${escapeHtml(item.dialogueSide || 'center')}" data-speaker-role="${escapeHtml(item.voiceRole || '')}">
+        ${entityPicture(item)}
+        <span class="scene-character__name">${escapeHtml(item.title)}</span>
+      </${tag}>`;
+    }
+
+    function sceneCompanion(snapshot, step) {
+      const item = entity('cat-guide');
+      const childIsTarget = step?.kind === 'perform-action'
+        && (step.targetEntityIds || []).some(entityId => entity(entityId).characterIdentityId === 'explorer-cat');
+      const tag = childIsTarget ? 'button' : 'div';
+      const childTargetId = (step?.targetEntityIds || [])
+        .find(entityId => entity(entityId).characterIdentityId === 'explorer-cat');
+      const action = childIsTarget
+        ? ` type="button" data-action="select-target" data-value="${escapeHtml(childTargetId)}"`
+        : '';
+      return `<${tag} class="scene-companion"${action} data-entity-id="cat-guide" data-entity-kind="character" data-character-identity="explorer-cat">
+        ${entityPicture(item)}
+        <span class="scene-companion__name">${escapeHtml(item.title)}</span>
+      </${tag}>`;
+    }
+
+    function sceneProp(entityId, step) {
+      const item = entity(entityId);
+      const targetable = step?.kind === 'perform-action'
+        && (step.entityIds || []).includes(entityId);
+      const tag = targetable ? 'button' : 'div';
+      const action = targetable
+        ? ` type="button" data-action="select-entity" data-value="${escapeHtml(entityId)}"`
+        : '';
+      return `<${tag} class="scene-prop"${action} data-entity-id="${escapeHtml(entityId)}" data-entity-kind="prop" data-visual-type="${escapeHtml(item.visualType || '')}">
+        ${entityPicture(item)}
+        <span class="scene-prop__name">${escapeHtml(item.title)}</span>
+      </${tag}>`;
     }
 
     function choiceButton({ action, value, label, selected, visual = '', extra = '' }) {
@@ -353,11 +410,11 @@
     function hearts(snapshot, step) {
       if (!Array.isArray(step?.support) || step.support.length === 0) return '';
       return `<div class="heart-row" aria-label="还有 ${snapshot.heartsRemaining} 颗尝试心">
-        ${[0, 1, 2].map(index => `<span class="${index < snapshot.heartsRemaining ? 'is-full' : ''}" aria-hidden="true">♥</span>`).join('')}
+        ${[0, 1, 2].map(index => `<span class="${index < snapshot.heartsRemaining ? 'is-full' : ''}" aria-hidden="true">${uiIcon('heart-fill')}</span>`).join('')}
       </div>`;
     }
 
-    function dialogueAudioPanel(snapshot, step) {
+    function dialogueAudioPanel(snapshot, step, personIds) {
       const refs = step.audioSourceRefs || [];
       const isPlaying = snapshot.phase === 'audio-playing';
       const currentIndex = isPlaying ? (snapshot.audio?.segmentIndex || 0) : -1;
@@ -366,8 +423,10 @@
         const stateClass = index === currentIndex
           ? ' is-current'
           : (index < currentIndex ? ' is-heard' : '');
-        return `<li class="dialogue-line${stateClass}" data-speaker="${escapeHtml(item.speaker || 'speaker')}" ${index === currentIndex ? 'aria-current="true"' : ''}>
-          <span class="dialogue-line__speaker" aria-hidden="true"></span>
+        const speakingEntityId = speakerEntityId(personIds, item.speaker);
+        const speakerName = speakingEntityId ? entity(speakingEntityId).title : (item.speaker || '说话人');
+        return `<li class="dialogue-line${stateClass}" data-speaker="${escapeHtml(item.speaker || 'speaker')}" data-speaker-entity="${escapeHtml(speakingEntityId || '')}" ${index === currentIndex ? 'aria-current="true"' : ''}>
+          <span class="dialogue-line__speaker-name">${escapeHtml(speakerName)}</span>
           <span class="dialogue-line__text">${escapeHtml(item.text || '')}</span>
         </li>`;
       }).join('');
@@ -375,7 +434,7 @@
         <ol class="dialogue-script">${lines}</ol>
         <div class="dialogue-player">
           <button class="story-listen-button" type="button" data-action="audio-play" ${isPlaying ? 'aria-label="从第一句重新听课文"' : ''}>
-            <span aria-hidden="true">${isPlaying ? '↺' : '▶'}</span>
+            ${uiIcon(isPlaying ? 'arrow-counterclockwise' : 'play-fill')}
             <strong>${isPlaying ? '从头重听' : '播放课文'}</strong>
           </button>
           <small role="status">${isPlaying ? `正在听 ${currentIndex + 1} / ${refs.length}` : '看着课文听一遍'}</small>
@@ -400,15 +459,43 @@
     }
 
     function feedbackAudioPanel(snapshot, step) {
+      const activeAudio = snapshot.audio?.refs?.[snapshot.audio?.segmentIndex || 0];
       return `<div class="feedback-audio-state" role="status" aria-live="polite">
         <div class="feedback-audio-state__copy">
-          <strong>${escapeHtml(feedbackAudioCopy(snapshot, step))}</strong>
+          <strong class="feedback-audio-state__english" lang="en">${escapeHtml(activeAudio?.text || '')}</strong>
+          <span>${escapeHtml(feedbackAudioCopy(snapshot, step))}</span>
           <small>读完会自动继续</small>
         </div>
       </div>`;
     }
 
-    function audioPanel(snapshot, step) {
+    function audioItemsForStep(snapshot, step) {
+      if (snapshot.audio?.refs?.length) return snapshot.audio.refs;
+      if (step?.audioSourceRefs?.length) {
+        return step.audioSourceRefs.map(refId => ({ refId, ...(source(refId) || {}) }));
+      }
+      if (step?.audioContentRefs?.length) {
+        return step.audioContentRefs.map(refId => ({ refId, ...(content(refId) || {}) }));
+      }
+      const challengeRef = step?.challengeSourceRefs?.[snapshot.batchIndex]
+        || step?.sourceRefs?.[snapshot.batchIndex];
+      return challengeRef ? [{ refId: challengeRef, ...(source(challengeRef) || {}) }] : [];
+    }
+
+    function languageAudioPanel(snapshot, step) {
+      const isPlaying = snapshot.phase === 'audio-playing';
+      const currentIndex = isPlaying ? (snapshot.audio?.segmentIndex || 0) : -1;
+      const lines = audioItemsForStep(snapshot, step).map((item, index) => (
+        `<p class="language-audio-line${index === currentIndex ? ' is-current' : ''}" lang="en" ${index === currentIndex ? 'aria-current="true"' : ''}>${escapeHtml(item.text || '')}</p>`
+      )).join('');
+      return `<section class="language-audio-panel" aria-label="英文听读">
+        <div class="language-audio-panel__text">${lines}</div>
+        <button class="language-audio-play" type="button" data-action="audio-play">${isPlaying ? '重新播放英文' : '播放英文'}</button>
+        <small role="status">${isPlaying ? '正在播放，英文会一直留在这里' : '看着英文听一遍'}</small>
+      </section>`;
+    }
+
+    function audioPanel(snapshot, step, personIds = []) {
       if (
         snapshot.phase === 'audio-playing'
         && ['feedback', 'followup'].includes(snapshot.audio?.purpose)
@@ -416,21 +503,9 @@
         return feedbackAudioPanel(snapshot, step);
       }
       if (step?.kind === 'audio-sequence' && step.textVisibility === 'visible-during-listen') {
-        return dialogueAudioPanel(snapshot, step);
+        return dialogueAudioPanel(snapshot, step, personIds);
       }
-      const isPlaying = snapshot.phase === 'audio-playing';
-      const clipNumber = isPlaying ? (snapshot.audio?.segmentIndex || 0) + 1 : 0;
-      const total = snapshot.audio?.refs?.length || 0;
-      return `<div class="listening-orb ${isPlaying ? 'is-playing' : ''}">
-        <div class="listening-orb__rings" aria-hidden="true"><i></i><i></i><i></i></div>
-        <button class="listen-button" type="button" data-action="audio-play" ${isPlaying ? 'aria-label="重新从这段开始听"' : ''}>
-          <span aria-hidden="true">${isPlaying ? '♫' : '▶'}</span>
-          <strong>${isPlaying ? '正在听' : '听一听'}</strong>
-        </button>
-        ${isPlaying && total > 1
-          ? `<small>${clipNumber} / ${total}</small>`
-          : `<small>${snapshot.audio?.purpose === 'feedback' ? '听听这个词' : '听完就继续'}</small>`}
-      </div>`;
+      return languageAudioPanel(snapshot, step);
     }
 
     function fallbackPanel(snapshot) {
@@ -462,14 +537,14 @@
     function matchResponse(snapshot, step) {
       const challengeRef = step.challengeSourceRefs[snapshot.batchIndex];
       const showForm = step.challengeMode === 'word-form';
-      return `${showForm ? `<div class="word-plaque">${escapeHtml(source(challengeRef)?.text || '')}</div>` : '<div class="sound-clue"><span aria-hidden="true">♫</span><strong>刚才听到的是哪个物品？</strong></div>'}
+      return `<div class="word-plaque" lang="en">${escapeHtml(source(challengeRef)?.text || '')}</div>
+        ${showForm ? '' : '<p class="sound-clue"><strong>刚才听到的是哪个物品？</strong></p>'}
         <div class="prop-shelf" data-response-kind="match">
           ${step.optionEntityIds.map(entityId => choiceButton({
             action: 'select-entity', value: entityId, label: entity(entityId).title,
             selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId)
           })).join('')}
-        </div>
-        ${submitButton(Boolean(ui.selectedEntityId), '就是它')}`;
+        </div>`;
     }
 
     function selectOneResponse(step) {
@@ -479,7 +554,7 @@
           selected: ui.selectedSourceRef === sourceRef,
           visual: '<span class="speech-mark" aria-hidden="true">“</span>'
         })).join('')}
-      </div>${submitButton(Boolean(ui.selectedSourceRef), '就说这句')}`;
+      </div>`;
     }
 
     function actionSubmitLabel(step) {
@@ -491,26 +566,27 @@
       return '完成';
     }
 
-    function actionResponse(snapshot, step) {
+    function actionResponse(snapshot, step, sceneEntityIds = []) {
       const storedCase = ui.selectedCaseByTask[snapshot.microtaskId];
       const itemIds = step.answerRule.entityFactId && storedCase
         ? [storedCase]
-        : (step.entityIds || []);
-      const targetIds = step.targetEntityIds || [];
+        : (step.entityIds || []).filter(entityId => !sceneEntityIds.includes(entityId));
+      if (['stamp', 'pull'].includes(step.answerRule.action)) {
+        return `<button class="milestone-action" type="button" data-action="perform-direct">${escapeHtml(actionSubmitLabel(step))}</button>`;
+      }
+      const targetIds = (step.targetEntityIds || [])
+        .filter(entityId => entity(entityId).entityKind !== 'character');
       return `<div class="action-stage" data-response-kind="perform-action">
-        <div class="action-stage__rail"><span>选物品</span>${itemIds.map(entityId => choiceButton({
+        ${itemIds.length ? `<div class="action-stage__rail"><span>选物品</span>${itemIds.map(entityId => choiceButton({
           action: 'select-entity', value: entityId, label: entity(entityId).title,
           selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId, { compact: true })
-        })).join('')}</div>
-        <span class="action-arrow" aria-hidden="true">➜</span>
-        <div class="action-stage__rail"><span>选位置</span>${targetIds.map(entityId => choiceButton({
+        })).join('')}</div>` : '<p class="action-stage__hint">点柜台上的物品，再点场景中的人物</p>'}
+        ${targetIds.length ? `<span class="action-arrow" aria-hidden="true">${uiIcon('arrow-right')}</span>` : ''}
+        ${targetIds.length ? `<div class="action-stage__rail"><span>选位置</span>${targetIds.map(entityId => choiceButton({
           action: 'select-target', value: entityId, label: entity(entityId).title,
           selected: ui.selectedTargetId === entityId, visual: entityVisual(entityId, { compact: true })
-        })).join('')}</div>
-      </div>${submitButton(
-        Boolean(ui.selectedEntityId && ui.selectedTargetId),
-        actionSubmitLabel(step)
-      )}`;
+        })).join('')}</div>` : (itemIds.length ? '<p class="action-stage__hint">再点场景中的人物</p>' : '')}
+      </div>`;
     }
 
     function slotResponse(step) {
@@ -521,7 +597,7 @@
           selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId)
         })).join('')}</div>
         <div class="sentence-slot"><span>完整问句</span><strong>${ui.selectedEntityId ? escapeHtml(entity(ui.selectedEntityId).title) : '点一个物品放进来'}</strong></div>
-      </div>${submitButton(Boolean(ui.selectedEntityId), '放进问句')}`;
+      </div>`;
     }
 
     function caseResponse(step) {
@@ -530,7 +606,7 @@
           action: 'select-entity', value: entityId, label: entity(entityId).title,
           selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId)
         })).join('')}
-      </div>${submitButton(Boolean(ui.selectedEntityId), '就选这份')}`;
+      </div>`;
     }
 
     function orderedBlocksResponse(snapshot, step) {
@@ -543,45 +619,19 @@
           : '<span>按顺序点两块词语</span>'}</div>
         <div class="block-builder__bank">${available.map(refId => choiceButton({
           action: 'add-block', value: refId, label: content(refId)?.text || source(refId)?.text || '',
-          selected: ui.selectedBlockRefs.includes(refId), visual: '<span class="block-pin" aria-hidden="true">●</span>'
+          selected: ui.selectedBlockRefs.includes(refId)
         })).join('')}</div>
-      </div>${submitButton(ui.selectedBlockRefs.length === available.length, '排好问句')}`;
-    }
-
-    function allOfResponse(step) {
-      const itemLabel = step.stepId === 'L02-M07:S01' ? '认领记录' : '案件线索';
-      return `<div class="fact-console" data-response-kind="all-of">
-        ${step.factIds.map((factId, index) => choiceButton({
-          action: 'toggle-fact', value: factId, label: `${itemLabel} ${index + 1}`,
-          selected: ui.selectedFactIds.has(factId), visual: '<span class="case-light" aria-hidden="true">✦</span>'
-        })).join('')}
-      </div>${submitButton(ui.selectedFactIds.size === step.factIds.length, '全部点亮')}`;
-    }
-
-    function sourceRevealResponse(step) {
-      const item = source(step.sourceRef) || {};
-      return `<div class="source-label-reveal" data-response-kind="source-reveal">
-        <span aria-hidden="true">✦</span>
-        <small>黄铜物品签</small>
-        <strong>${escapeHtml(item.text || '')}</strong>
-        <button class="commit-action" type="button" data-action="response-submit">收好标签<span aria-hidden="true">➜</span></button>
       </div>`;
     }
 
-    function submitButton(enabled, label = '确认') {
-      return `<button class="commit-action" type="button" data-action="response-submit" ${enabled ? '' : 'disabled'}>${escapeHtml(label)}<span aria-hidden="true">✦</span></button>`;
-    }
-
-    function responsePanel(snapshot, step) {
+    function responsePanel(snapshot, step, sceneEntityIds = []) {
       if (step.kind === 'explore-batch') return exploreResponse(snapshot, step);
       if (['match-entity', 'match-entity-batch'].includes(step.kind)) return matchResponse(snapshot, step);
       if (step.kind === 'select-one') return selectOneResponse(step);
-      if (step.kind === 'perform-action') return actionResponse(snapshot, step);
+      if (step.kind === 'perform-action') return actionResponse(snapshot, step, sceneEntityIds);
       if (step.kind === 'place-in-slot') return slotResponse(step);
       if (step.kind === 'select-case') return caseResponse(step);
       if (step.kind === 'ordered-blocks') return orderedBlocksResponse(snapshot, step);
-      if (step.kind === 'all-of') return allOfResponse(step);
-      if (step.kind === 'source-reveal') return sourceRevealResponse(step);
       return '';
     }
 
@@ -590,7 +640,7 @@
       const cat = unit.entities?.['cat-guide'];
       const image = ui.feedback.tone === 'partner' && cat?.assetSrc
         ? `<img src="${escapeHtml(cat.assetSrc)}" alt="">`
-        : `<span aria-hidden="true">${ui.feedback.tone === 'correct' ? '★' : '✦'}</span>`;
+        : `<span aria-hidden="true">${uiIcon('star-fill')}</span>`;
       return `<aside class="feedback-bubble" data-tone="${escapeHtml(ui.feedback.tone)}" role="status" aria-live="polite">${image}<p>${escapeHtml(ui.feedback.message)}</p></aside>`;
     }
 
@@ -619,15 +669,15 @@
             : ''}
           ${ui.previewMode
             ? `<button class="restart-control preview-exit-control" type="button" data-action="preview-exit">
-                <span aria-hidden="true">↩</span><span><strong>退出阶段预览</strong><small>回到原来的学习位置</small></span>
+                <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>退出阶段预览</strong><small>回到原来的学习位置</small></span>
               </button>`
             : `<button class="restart-control" type="button" data-action="restart-request">
-                <span aria-hidden="true">↺</span><span><strong>重新开始本单元</strong><small>回到学习起点</small></span>
+                <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>重新开始本单元</strong><small>回到学习起点</small></span>
               </button>`}
         </aside>` : '';
       const restartConfirm = ui.restartConfirmOpen ? `<div class="restart-backdrop">
           <section class="restart-dialog" role="dialog" aria-modal="true" aria-labelledby="restart-dialog-title" aria-describedby="restart-dialog-copy">
-            <span class="restart-seal" aria-hidden="true">↺</span>
+            <span class="restart-seal" aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span>
             <p class="kicker">课程设置</p>
             <h2 id="restart-dialog-title">要重新开始吗？</h2>
             <p id="restart-dialog-copy">已经保存的学习进度会清除，并回到本单元起点。</p>
@@ -642,7 +692,7 @@
           <div class="station-brand"><span>${escapeHtml(unit.experience?.lessonLabel || '')}</span><strong>${escapeHtml(unit.title)}</strong></div>
           <div class="case-progress" aria-label="${ui.previewMode ? '预览阶段位置' : '当日学习进度'}"><span style="--progress:${progress}%"></span><b>${shownPosition} / ${tasks.length}</b></div>
           <div class="header-actions">
-            <button class="settings-toggle" type="button" data-action="toggle-settings" aria-expanded="${ui.settingsOpen ? 'true' : 'false'}" aria-controls="course-settings-panel" aria-label="课程设置"><span aria-hidden="true">⚙</span></button>
+            <button class="settings-toggle" type="button" data-action="toggle-settings" aria-expanded="${ui.settingsOpen ? 'true' : 'false'}" aria-controls="course-settings-panel" aria-label="课程设置">${uiIcon('gear-fill')}</button>
           </div>
           ${ui.previewMode ? '<span class="preview-mode-badge" role="status">阶段预览 · 不保存</span>' : ''}
           ${settings}
@@ -661,7 +711,7 @@
         <h1>${escapeHtml(arrival.title)}</h1>
         <p>${escapeHtml(arrival.copy)}</p>
         <div class="arrival-seal" aria-hidden="true"><i></i><span>✦</span><i></i></div>
-        <button class="door-handle" type="button" data-action="start">${escapeHtml(resumed ? '继续今天的案件' : arrival.actionLabel)}<span aria-hidden="true">➜</span></button>
+        <button class="door-handle" type="button" data-action="start">${escapeHtml(resumed ? '继续今天的案件' : arrival.actionLabel)}${uiIcon('arrow-right')}</button>
       </div>`, snapshot);
     }
 
@@ -678,7 +728,7 @@
           <p class="kicker">${escapeHtml(briefing.kicker)}</p>
           <h1 id="briefing-title">${escapeHtml(briefing.title)}</h1>
           <p>${escapeHtml(briefing.copy)}</p>
-          <button class="door-handle" type="button" data-action="start">${escapeHtml(briefing.actionLabel)}<span aria-hidden="true">➜</span></button>
+          <button class="door-handle" type="button" data-action="start">${escapeHtml(briefing.actionLabel)}${uiIcon('arrow-right')}</button>
         </div>
       </article>`, snapshot);
     }
@@ -687,32 +737,36 @@
       const { task } = authored;
       const step = currentStep(snapshot);
       resetStepSelections(snapshot);
-      const body = snapshot.phase === 'audio-fallback'
-        ? fallbackPanel(snapshot)
-        : (['audio-ready', 'audio-playing'].includes(snapshot.phase)
-            ? audioPanel(snapshot, step)
-            : responsePanel(snapshot, step));
       const personIds = [...new Set([
         ...(task.presentation?.characterEntityIds || []),
         ...(step?.characterEntityIds || []),
         ...(step?.targetEntityIds || []),
         ...((step?.kind === 'select-case') ? (step.optionEntityIds || []) : [])
       ])].filter(entityId => unit.entities?.[entityId]?.entityKind === 'character');
-      const seenCharacterIdentities = new Set();
-      const sceneEntityIds = ['cat-guide', ...personIds].filter(entityId => {
+      const seenCharacterIdentities = new Set(['explorer-cat']);
+      const adultEntityIds = personIds.filter(entityId => {
         const identityId = entity(entityId).characterIdentityId || entityId;
         if (seenCharacterIdentities.has(identityId)) return false;
         seenCharacterIdentities.add(identityId);
         return true;
       });
+      const sceneEntityIds = task.presentation?.sceneEntityIds || [];
+      const body = snapshot.phase === 'audio-fallback'
+        ? fallbackPanel(snapshot)
+        : (['audio-ready', 'audio-playing'].includes(snapshot.phase)
+            ? audioPanel(snapshot, step, adultEntityIds)
+            : responsePanel(snapshot, step, sceneEntityIds));
       return commonShell(`<div class="scene-heading">
           <div><p>${escapeHtml(task.presentation.stepLabel)}</p><h1>${escapeHtml(task.presentation.title)}</h1></div>
           ${hearts(snapshot, step)}
         </div>
-        <div class="scene-people" aria-hidden="true">
-          ${sceneEntityIds.map(id => entityVisual(id)).join('')}
+        ${adultEntityIds.length ? `<p class="stage-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>` : ''}
+        <div class="scene-people scene-cast${adultEntityIds.length ? ' scene-cast--with-adults' : ''}" data-scene-mode="${escapeHtml(task.presentation.sceneMode || '')}" aria-label="故事人物">
+          ${adultEntityIds.map(id => sceneCharacter(id, snapshot, step)).join('')}
+          ${sceneCompanion(snapshot, step)}
         </div>
-        <section class="mission-console">
+        ${sceneEntityIds.length ? `<div class="scene-props" aria-label="故事物品">${sceneEntityIds.map(id => sceneProp(id, step)).join('')}</div>` : ''}
+        <section class="mission-console${adultEntityIds.length ? ' mission-console--with-cast' : ''}">
           <p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>
           <div class="interaction-space" data-response-fields>${body}</div>
         </section>
@@ -801,8 +855,6 @@
           blockRefs: [...ui.selectedBlockRefs]
         };
       }
-      if (step.kind === 'all-of') return { factIds: [...ui.selectedFactIds] };
-      if (step.kind === 'source-reveal') return { sourceRef: step.sourceRef };
       return {};
     }
 
@@ -871,6 +923,12 @@
         dispatch({ type: 'audio/continue-without-sound' });
         return;
       }
+      if (action === 'perform-direct' && step?.kind === 'perform-action') {
+        ui.selectedEntityId = step.answerRule.entityId;
+        ui.selectedTargetId = step.answerRule.targetEntityId;
+        dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+        return;
+      }
       if (action === 'explore') {
         dispatch({
           type: 'explore/activate',
@@ -879,22 +937,52 @@
         });
         return;
       }
-      if (action === 'select-entity') ui.selectedEntityId = value;
-      if (action === 'select-target') ui.selectedTargetId = value;
-      if (action === 'select-source') ui.selectedSourceRef = value;
-      if (action === 'toggle-fact') {
-        if (ui.selectedFactIds.has(value)) ui.selectedFactIds.delete(value);
-        else ui.selectedFactIds.add(value);
+      if (action === 'select-entity') {
+        ui.selectedEntityId = value;
+        if (['match-entity', 'match-entity-batch'].includes(step?.kind)) {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+        if (step?.kind === 'perform-action' && ui.selectedTargetId) {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+        if (step?.kind === 'place-in-slot') {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+        if (step?.kind === 'select-case') {
+          ui.selectedCaseByTask[snapshot.microtaskId] = value;
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
       }
-      if (action === 'add-block' && !ui.selectedBlockRefs.includes(value)) ui.selectedBlockRefs.push(value);
+      if (action === 'select-target') {
+        ui.selectedTargetId = value;
+        if (step?.kind === 'perform-action' && ui.selectedEntityId) {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+      }
+      if (action === 'select-source') {
+        ui.selectedSourceRef = value;
+        if (step?.kind === 'select-one') {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+      }
+      if (action === 'add-block' && !ui.selectedBlockRefs.includes(value)) {
+        ui.selectedBlockRefs.push(value);
+        const selectedCase = ui.selectedCaseByTask[snapshot.microtaskId];
+        const requiredBlockCount = step?.answerRule?.acceptedByEntityId?.[selectedCase]?.length || 0;
+        if (step?.kind === 'ordered-blocks' && ui.selectedBlockRefs.length === requiredBlockCount) {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+      }
       if (action === 'remove-block') ui.selectedBlockRefs = ui.selectedBlockRefs.filter(refId => refId !== value);
-      if (['select-entity', 'select-target', 'select-source', 'toggle-fact', 'add-block', 'remove-block'].includes(action)) {
+      if (['select-entity', 'select-target', 'select-source', 'add-block', 'remove-block'].includes(action)) {
         render();
-        return;
-      }
-      if (action === 'response-submit' && step) {
-        if (step.kind === 'select-case') ui.selectedCaseByTask[snapshot.microtaskId] = ui.selectedEntityId;
-        dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
         return;
       }
       if (action === 'chapter-continue') {

@@ -4,19 +4,21 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const sharp = require('sharp');
 const catalog = require('../../core/curriculum-catalog');
 
 const ROOT = path.resolve(__dirname, '../..');
 
 test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally runnable', async () => {
-  const [home, page, scene, runtime, background, premiseAvif, premiseJpeg] = await Promise.all([
+  const [home, page, scene, runtime, background, premiseAvif, premiseJpeg, selectedDesign] = await Promise.all([
     fs.readFile(path.join(ROOT, 'index.html'), 'utf8'),
     fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/index.html'), 'utf8'),
     fs.readFile(path.join(ROOT, 'core/learning-microtask-scene.js'), 'utf8'),
     fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/experience.js'), 'utf8'),
     fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/starlight-station-bg.png')),
     fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.avif')),
-    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.jpg'))
+    fs.stat(path.join(ROOT, 'poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.jpg')),
+    fs.stat(path.join(ROOT, 'docs/designs/lesson1-2-dialogue-stage-option-1.png'))
   ]);
 
   assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
@@ -34,17 +36,52 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
   assert.ok(background.size > 100_000);
   assert.ok(premiseAvif.size > 100_000);
   assert.ok(premiseJpeg.size > 100_000);
-  const characterStats = await Promise.all([
-    'character-adult-man-v1.avif',
-    'character-adult-man-v1.jpg',
-    'character-adult-woman-v1.avif',
-    'character-adult-woman-v1.jpg'
-  ].map(filename => fs.stat(path.join(
+  assert.ok(selectedDesign.size > 1_000_000);
+  const stageAssetNames = [
+    ...['character-adult-man-cutout-v1', 'character-adult-woman-cutout-v1']
+      .flatMap(base => [`${base}.png`, `${base}.webp`, `${base}.avif`]),
+    ...['png', 'webp', 'avif'].map(extension => `handbag-prop-v1.${extension}`)
+  ];
+  const stageBackgroundNames = ['png', 'webp', 'avif']
+    .map(extension => `starlight-station-stage-bg-v1.${extension}`);
+  const stageAssetStats = await Promise.all(stageAssetNames.map(filename => fs.stat(path.join(
     ROOT,
     'poc/lesson1-2-experience/assets',
     filename
   ))));
-  assert.ok(characterStats.every(stat => stat.size > 50_000));
+  assert.ok(stageAssetStats.every(stat => stat.size > 50_000));
+  const stageBackgroundStats = await Promise.all(stageBackgroundNames.map(filename => fs.stat(path.join(
+    ROOT,
+    'poc/lesson1-2-experience/assets',
+    filename
+  ))));
+  assert.ok(stageBackgroundStats.every(stat => stat.size > 100_000));
+  for (const filename of stageBackgroundNames) {
+    const metadata = await sharp(path.join(ROOT, 'poc/lesson1-2-experience/assets', filename)).metadata();
+    assert.equal(metadata.width, 1440, filename);
+    assert.equal(metadata.height, 1024, filename);
+  }
+  for (const filename of stageAssetNames.filter(name => name.endsWith('.png'))) {
+    const image = sharp(path.join(ROOT, 'poc/lesson1-2-experience/assets', filename));
+    const metadata = await image.metadata();
+    const stats = await image.stats();
+    assert.equal(metadata.hasAlpha, true, filename);
+    assert.equal(stats.channels[3].min, 0, filename);
+    assert.equal(stats.channels[3].max, 255, filename);
+  }
+  const iconDir = path.join(ROOT, 'poc/lesson1-2-experience/assets/icons');
+  for (const filename of [
+    'gear-fill.svg', 'play-fill.svg', 'arrow-counterclockwise.svg',
+    'arrow-right.svg', 'heart-fill.svg', 'star-fill.svg'
+  ]) {
+    const svg = await fs.readFile(path.join(iconDir, filename), 'utf8');
+    assert.match(svg, /<svg[\s>]/, filename);
+    assert.doesNotMatch(svg, /<script|javascript:/i, filename);
+  }
+  assert.match(
+    await fs.readFile(path.join(iconDir, 'BOOTSTRAP-ICONS-LICENSE.txt'), 'utf8'),
+    /MIT License/
+  );
   for (const removedHumanChildAsset of [
     'character-child-explorer-v1.avif',
     'character-child-explorer-v1.jpg'

@@ -232,7 +232,13 @@
         ? unit.authoredContent?.[refId]
         : findSource(refId);
       if (!item?.audioSrc) return null;
-      return { kind, refId, src: item.audioSrc, text: item.text };
+      return {
+        kind,
+        refId,
+        src: item.audioSrc,
+        text: item.text,
+        ...(item.speaker ? { speaker: item.speaker } : {})
+      };
     }
 
     function audioRefsForStep(step) {
@@ -752,8 +758,12 @@
         if (step.answerRule.type === 'ordered-blocks' && step.selectedEntityFactId) {
           response.selectedEntityId = pendingTask.factValues[step.selectedEntityFactId];
         }
-        const durablePreconditionsMet = step.answerRule.type !== 'all-of'
-          || (step.answerRule.requiredFactIds || []).every(factId => durableFacts.has(factId));
+        const stepPreconditionsMet = previewMode
+          || (step.preconditionFactIds || []).every(factId => durableFacts.has(factId));
+        const durablePreconditionsMet = stepPreconditionsMet && (
+          step.answerRule.type !== 'all-of'
+          || (step.answerRule.requiredFactIds || []).every(factId => durableFacts.has(factId))
+        );
         const evaluated = durablePreconditionsMet
           ? evaluateRule(step.answerRule, response)
           : { correct: false, mismatchPath: ['factIds'] };

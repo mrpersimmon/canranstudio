@@ -99,30 +99,51 @@ test('Lesson 1 and Lesson 2 author twelve atomic microtasks and all twenty-two T
       .map(result => [result.sourceRef, result.channel, task.microtaskId])
   ));
   assert.deepEqual(t1Cells, [
-    ['L01-W07', 'audio', 'L01-M01'],
-    ['L02-W03', 'audio', 'L02-M01'],
-    ['L02-W01', 'audio', 'L02-M01'],
-    ['L02-W04', 'audio', 'L02-M01'],
-    ['L02-W02', 'audio', 'L02-M01'],
+    ['L01-W07', 'audio-form-supported', 'L01-M01'],
+    ['L02-W03', 'audio-form-supported', 'L02-M01'],
+    ['L02-W01', 'audio-form-supported', 'L02-M01'],
+    ['L02-W04', 'audio-form-supported', 'L02-M01'],
+    ['L02-W02', 'audio-form-supported', 'L02-M01'],
     ['L01-W07', 'word-form', 'L02-M02'],
     ['L02-W04', 'word-form', 'L02-M02'],
     ['L02-W02', 'word-form', 'L02-M02'],
     ['L02-W03', 'word-form', 'L02-M02'],
     ['L02-W01', 'word-form', 'L02-M02'],
-    ['L02-W08', 'audio', 'L02-M03'],
-    ['L02-W05', 'audio', 'L02-M03'],
-    ['L02-W06', 'audio', 'L02-M03'],
-    ['L02-W07', 'audio', 'L02-M03'],
+    ['L02-W08', 'audio-form-supported', 'L02-M03'],
+    ['L02-W05', 'audio-form-supported', 'L02-M03'],
+    ['L02-W06', 'audio-form-supported', 'L02-M03'],
+    ['L02-W07', 'audio-form-supported', 'L02-M03'],
     ['L02-W07', 'word-form', 'L02-M04'],
     ['L02-W05', 'word-form', 'L02-M04'],
     ['L02-W06', 'word-form', 'L02-M04'],
     ['L02-W08', 'word-form', 'L02-M04'],
-    ['L02-W10', 'audio', 'L02-M05'],
-    ['L02-W09', 'audio', 'L02-M05'],
+    ['L02-W10', 'audio-form-supported', 'L02-M05'],
+    ['L02-W09', 'audio-form-supported', 'L02-M05'],
     ['L02-W09', 'word-form', 'L02-M06'],
     ['L02-W10', 'word-form', 'L02-M06']
   ]);
   assert.deepEqual(catalog.validate([structuredClone(unit)]), []);
+});
+
+test('earned case facts appear automatically and each milestone keeps one child action', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const tasks = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
+    .map(task => [task.microtaskId, task]));
+
+  assert.deepEqual(tasks.get('L01-M01').steps.map(step => step.stepId), [
+    'L01-M01:S01', 'L01-M01:S02', 'L01-M01:S03'
+  ]);
+  assert.deepEqual(tasks.get('L01-M05').steps.map(step => step.stepId), ['L01-M05:S02']);
+  assert.deepEqual(tasks.get('L01-M05').steps[0].preconditionFactIds, [
+    'case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'
+  ]);
+  assert.deepEqual(tasks.get('L02-M07').steps.map(step => step.stepId), ['L02-M07:S02']);
+  assert.deepEqual(tasks.get('L02-M07').steps[0].preconditionFactIds, [
+    'claim-record-1', 'claim-record-2', 'claim-record-3'
+  ]);
+  assert.ok(unit.beats.flatMap(beat => beat.microtasks || [])
+    .flatMap(task => task.steps)
+    .every(step => !['all-of', 'source-reveal'].includes(step.kind)));
 });
 
 test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actions', () => {
@@ -158,7 +179,6 @@ test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actio
     'L02-M06:S06': '听听她怎么回答',
     'L02-M06:S07': '把钥匙交给她',
     'L02-M06:S08': '听听她拿回钥匙后怎么说',
-    'L02-M07:S01': '把三份认领记录都点亮',
     'L02-M07:S02': '拉下开张拉杆'
   };
 
@@ -219,13 +239,17 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
 
   const manAsset = {
     entityKind: 'character',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-v1.jpg'
+    voiceRole: 'man',
+    dialogueSide: 'left',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.webp'
   };
   const womanAsset = {
     entityKind: 'character',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.jpg'
+    voiceRole: 'woman',
+    dialogueSide: 'right',
+    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.webp'
   };
   const explorerCatAsset = {
     entityKind: 'character',
@@ -237,6 +261,8 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
   for (const entityId of ['station-keeper', 'second-returner']) {
     assert.deepEqual({
       entityKind: entities[entityId].entityKind,
+      voiceRole: entities[entityId].voiceRole,
+      dialogueSide: entities[entityId].dialogueSide,
       assetSrc: entities[entityId].assetSrc,
       assetFallbackSrc: entities[entityId].assetFallbackSrc
     }, manAsset, entityId);
@@ -244,6 +270,8 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
   for (const entityId of ['handbag-owner', 'first-claimant', 'third-claimant']) {
     assert.deepEqual({
       entityKind: entities[entityId].entityKind,
+      voiceRole: entities[entityId].voiceRole,
+      dialogueSide: entities[entityId].dialogueSide,
       assetSrc: entities[entityId].assetSrc,
       assetFallbackSrc: entities[entityId].assetFallbackSrc
     }, womanAsset, entityId);
@@ -255,6 +283,13 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
     assetFallbackSrc: entities.child.assetFallbackSrc
   }, explorerCatAsset);
   assert.deepEqual({
+    assetSrc: entities.handbag.assetSrc,
+    assetFallbackSrc: entities.handbag.assetFallbackSrc
+  }, {
+    assetSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.avif',
+    assetFallbackSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.webp'
+  });
+  assert.deepEqual({
     entityKind: entities['cat-guide'].entityKind,
     characterIdentityId: entities['cat-guide'].characterIdentityId,
     assetSrc: entities['cat-guide'].assetSrc,
@@ -262,8 +297,11 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
   }, explorerCatAsset);
 
   assert.deepEqual(tasks.get('L01-M01').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
+  assert.deepEqual(tasks.get('L01-M01').presentation.sceneEntityIds, ['handbag']);
   assert.deepEqual(tasks.get('L01-M02').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
+  assert.deepEqual(tasks.get('L01-M02').presentation.sceneEntityIds, ['handbag']);
   assert.deepEqual(tasks.get('L01-M03').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
+  assert.deepEqual(tasks.get('L01-M03').presentation.sceneEntityIds, ['handbag']);
   assert.deepEqual(tasks.get('L01-M04').steps.map(step => step.characterEntityIds), [
     ['station-keeper', 'handbag-owner'],
     ['station-keeper', 'child'],
@@ -302,6 +340,9 @@ test('microtask v2 catalog validation rejects imperative answers and forged resu
     unit.beats[0].microtasks[3].steps[0].characterEntityIds[0] = 'unknown-character';
   }), /L01-M04:S01.*unknown character unknown-character/i);
   assert.match(message(unit => {
+    unit.beats[0].microtasks[4].steps[0].preconditionFactIds[0] = 'page-forged-fact';
+  }), /L01-M05:S02.*unknown earlier checkpoint fact page-forged-fact/i);
+  assert.match(message(unit => {
     unit.beats[3].microtasks[1].steps[4].selectedEntityFactId = 'page-supplied-branch';
   }), /L02-M06:S05.*stored child choice/i);
   assert.match(message(unit => {
@@ -310,7 +351,7 @@ test('microtask v2 catalog validation rejects imperative answers and forged resu
   assert.match(message(unit => {
     const duplicate = structuredClone(unit.beats[0].microtasks[0].targetResults[1]);
     unit.beats[1].microtasks[1].targetResults.push(duplicate);
-  }), /L01-W07:audio.*duplicated/i);
+  }), /L01-W07:audio-form-supported.*duplicated/i);
   assert.match(message(unit => {
     unit.beats[0].microtasks[4].growthBoundary = 'unit-built';
     unit.beats[0].microtasks[4].checkpointAfterSuccess.buildStage = 5;
