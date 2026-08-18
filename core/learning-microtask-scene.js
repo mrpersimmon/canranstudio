@@ -197,6 +197,7 @@
     function pauseVoice() {
       if (!ui.voice) return;
       ui.voice.finished = true;
+      try { ui.voice.cueAudio?.pause(); } catch { /* no-op */ }
       try { ui.voice.audio.pause(); } catch { /* no-op */ }
       ui.voice = null;
     }
@@ -214,8 +215,10 @@
       audio.preload = 'auto';
       const session = {
         audio,
+        cueAudio: null,
         requestId: effect.requestId,
         segmentIndex: effect.segmentIndex,
+        languageStarted: false,
         finished: false
       };
       ui.voice = session;
@@ -239,18 +242,50 @@
         }
       }
 
-      audio.addEventListener('ended', () => finish('ended'), { once: true });
-      audio.addEventListener('error', () => finish('failed', 'media-error'), { once: true });
-      let playResult;
-      try {
-        playResult = audio.play();
-      } catch {
-        finish('failed', 'play-threw');
+      function playLanguageAudio() {
+        if (session.finished || session.languageStarted) return;
+        session.languageStarted = true;
+        audio.addEventListener('ended', () => finish('ended'), { once: true });
+        audio.addEventListener('error', () => finish('failed', 'media-error'), { once: true });
+        let playResult;
+        try {
+          playResult = audio.play();
+        } catch {
+          finish('failed', 'play-threw');
+          return;
+        }
+        if (playResult && typeof playResult.catch === 'function') {
+          playResult.catch(() => finish('failed', 'play-rejected'));
+        }
+      }
+
+      const cueSrc = effect.purpose === 'feedback'
+        ? unit.experience?.correctCueAudioSrc
+        : null;
+      if (!cueSrc) {
+        playLanguageAudio();
         return;
       }
-      if (playResult && typeof playResult.catch === 'function') {
-        playResult.catch(() => finish('failed', 'play-rejected'));
+
+      const cueAudio = new global.Audio(cueSrc);
+      cueAudio.preload = 'auto';
+      session.cueAudio = cueAudio;
+      let cueFinished = false;
+      function finishCue() {
+        if (cueFinished || session.finished) return;
+        cueFinished = true;
+        playLanguageAudio();
       }
+      cueAudio.addEventListener('ended', finishCue, { once: true });
+      cueAudio.addEventListener('error', finishCue, { once: true });
+      let cueResult;
+      try {
+        cueResult = cueAudio.play();
+      } catch {
+        finishCue();
+        return;
+      }
+      if (cueResult && typeof cueResult.catch === 'function') cueResult.catch(finishCue);
     }
 
     function processEffect(effect) {
@@ -308,7 +343,7 @@
             ? `<picture><source srcset="${escapeHtml(item.assetSrc)}" type="image/avif"><img src="${escapeHtml(item.assetFallbackSrc)}" alt=""></picture>`
             : `<img src="${escapeHtml(item.assetSrc)}" alt="">`)
         : `<span aria-hidden="true">${escapeHtml(item.symbol || '✦')}</span>`;
-      return `<span class="entity-visual${compact ? ' entity-visual--compact' : ''}" data-entity-id="${escapeHtml(entityId)}" data-entity-kind="${escapeHtml(item.entityKind || 'prop')}" data-visual-type="${escapeHtml(item.visualType)}">${visual}</span>`;
+      return `<span class="entity-visual${compact ? ' entity-visual--compact' : ''}" data-entity-id="${escapeHtml(entityId)}" data-entity-kind="${escapeHtml(item.entityKind || 'prop')}" ${item.characterIdentityId ? `data-character-identity="${escapeHtml(item.characterIdentityId)}"` : ''} data-visual-type="${escapeHtml(item.visualType)}">${visual}</span>`;
     }
 
     function choiceButton({ action, value, label, selected, visual = '', extra = '' }) {
@@ -348,7 +383,38 @@
       </section>`;
     }
 
+    function feedbackAudioCopy(snapshot, step) {
+      if (snapshot.audio?.purpose === 'followup') {
+        return step?.prompt || '接着听他们怎么说';
+      }
+      if (['match-entity', 'match-entity-batch'].includes(step?.kind)) {
+        return step.challengeMode === 'word-form'
+          ? '找对了，听听这个词'
+          : '找对了，听下一个声音';
+      }
+      if (step?.kind === 'select-one') return '这句话正合适，听听它';
+      if (['place-in-slot', 'ordered-blocks'].includes(step?.kind)) {
+        return '问句排好了，听听整句';
+      }
+      return '答对了，接着听';
+    }
+
+    function feedbackAudioPanel(snapshot, step) {
+      return `<div class="feedback-audio-state" role="status" aria-live="polite">
+        <div class="feedback-audio-state__copy">
+          <strong>${escapeHtml(feedbackAudioCopy(snapshot, step))}</strong>
+          <small>读完会自动继续</small>
+        </div>
+      </div>`;
+    }
+
     function audioPanel(snapshot, step) {
+      if (
+        snapshot.phase === 'audio-playing'
+        && ['feedback', 'followup'].includes(snapshot.audio?.purpose)
+      ) {
+        return feedbackAudioPanel(snapshot, step);
+      }
       if (step?.kind === 'audio-sequence' && step.textVisibility === 'visible-during-listen') {
         return dialogueAudioPanel(snapshot, step);
       }
@@ -632,12 +698,19 @@
         ...(step?.targetEntityIds || []),
         ...((step?.kind === 'select-case') ? (step.optionEntityIds || []) : [])
       ])].filter(entityId => unit.entities?.[entityId]?.entityKind === 'character');
+      const seenCharacterIdentities = new Set();
+      const sceneEntityIds = ['cat-guide', ...personIds].filter(entityId => {
+        const identityId = entity(entityId).characterIdentityId || entityId;
+        if (seenCharacterIdentities.has(identityId)) return false;
+        seenCharacterIdentities.add(identityId);
+        return true;
+      });
       return commonShell(`<div class="scene-heading">
           <div><p>${escapeHtml(task.presentation.stepLabel)}</p><h1>${escapeHtml(task.presentation.title)}</h1></div>
           ${hearts(snapshot, step)}
         </div>
         <div class="scene-people" aria-hidden="true">
-          ${['cat-guide', ...personIds].map(id => entityVisual(id)).join('')}
+          ${sceneEntityIds.map(id => entityVisual(id)).join('')}
         </div>
         <section class="mission-console">
           <p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>

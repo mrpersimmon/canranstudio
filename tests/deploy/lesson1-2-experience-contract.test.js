@@ -38,15 +38,26 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
     'character-adult-man-v1.avif',
     'character-adult-man-v1.jpg',
     'character-adult-woman-v1.avif',
-    'character-adult-woman-v1.jpg',
-    'character-child-explorer-v1.avif',
-    'character-child-explorer-v1.jpg'
+    'character-adult-woman-v1.jpg'
   ].map(filename => fs.stat(path.join(
     ROOT,
     'poc/lesson1-2-experience/assets',
     filename
   ))));
   assert.ok(characterStats.every(stat => stat.size > 50_000));
+  for (const removedHumanChildAsset of [
+    'character-child-explorer-v1.avif',
+    'character-child-explorer-v1.jpg'
+  ]) {
+    await assert.rejects(
+      fs.stat(path.join(
+        ROOT,
+        'poc/lesson1-2-experience/assets',
+        removedHumanChildAsset
+      )),
+      error => error?.code === 'ENOENT'
+    );
+  }
 
   assert.doesNotMatch(home, /lesson1-2-experience/);
   assert.match(runtime, /NCE-U01/);
@@ -67,6 +78,7 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
 test('the local candidate voice pack covers every catalog audio identity and stays replaceable', async () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const audioDir = path.join(ROOT, 'poc/lesson1-2-experience/audio');
+  const correctCue = await fs.stat(path.join(audioDir, 'correct-chime.mp3'));
   const manifest = JSON.parse(await fs.readFile(path.join(audioDir, 'manifest.json'), 'utf8'));
   const expected = [
     ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
@@ -77,6 +89,8 @@ test('the local candidate voice pack covers every catalog audio identity and sta
   }));
 
   assert.equal(manifest.status, 'local-poc-candidate-unreviewed');
+  assert.equal(unit.experience.correctCueAudioSrc, '/poc/lesson1-2-experience/audio/correct-chime.mp3');
+  assert.ok(correctCue.size > 1_000);
   assert.equal(manifest.replacementContract.scope, 'whole-unit-pack');
   assert.equal(manifest.files.length, expected.length);
   assert.equal(new Set(manifest.files.map(file => file.sourceId)).size, expected.length);

@@ -256,6 +256,7 @@
         type: 'audio/play',
         requestId: audio.requestId,
         segmentIndex,
+        purpose: audio.purpose,
         audioRef: clone(audio.refs[segmentIndex])
       };
     }
@@ -315,6 +316,30 @@
         audio
       };
       return audioEffect(audio, 0);
+    }
+
+    function startCurrentStepAudio(purpose) {
+      const refs = audioRefsForStep(currentStep());
+      if (refs.length === 0) return null;
+      const audio = {
+        status: 'playing',
+        requestId: `audio:${unit.unitId}:${seed}:${++audioSequence}`,
+        segmentIndex: 0,
+        refs: clone(refs),
+        stepId: state.stepId,
+        batchIndex: state.batchIndex,
+        after: ['match-entity', 'match-entity-batch'].includes(currentStep()?.kind)
+          ? 'open-response'
+          : 'advance-step',
+        purpose
+      };
+      state = { ...state, phase: 'audio-playing', audio };
+      return audioEffect(audio, 0);
+    }
+
+    function autoStartReadyAudio({ purpose, withinMicrotaskId }) {
+      if (state.microtaskId !== withinMicrotaskId || state.phase !== 'audio-ready') return null;
+      return startCurrentStepAudio(purpose);
     }
 
     function taskCompletionStatus() {
@@ -616,6 +641,24 @@
         } else if (state.audio.after === 'advance-batch') {
           const effects = advanceBatchOrStep();
           return publish(effects);
+        } else if (state.audio.after === 'advance-batch-auto-audio') {
+          const withinMicrotaskId = state.microtaskId;
+          const effects = advanceBatchOrStep();
+          const followupEffect = autoStartReadyAudio({
+            purpose: 'followup',
+            withinMicrotaskId
+          });
+          if (followupEffect) effects.push(followupEffect);
+          return publish(effects);
+        } else if (state.audio.after === 'advance-step-auto-audio') {
+          const withinMicrotaskId = state.microtaskId;
+          const effects = advanceAfterStep();
+          const followupEffect = autoStartReadyAudio({
+            purpose: 'followup',
+            withinMicrotaskId
+          });
+          if (followupEffect) effects.push(followupEffect);
+          return publish(effects);
         } else {
           const effects = advanceAfterStep();
           return publish(effects);
@@ -752,17 +795,23 @@
         const feedbackAudio = feedbackAudioForStep(step, response);
         const feedbackEffect = startFeedbackAudio(
           feedbackAudio,
-          isBatch ? 'advance-batch' : 'advance-step'
+          isBatch ? 'advance-batch-auto-audio' : 'advance-step-auto-audio'
         );
         if (feedbackEffect) {
           effects.push(feedbackEffect);
           return publish(effects);
         }
+        const withinMicrotaskId = state.microtaskId;
         const advanceEffects = isBatch ? advanceBatchOrStep() : advanceAfterStep();
         if (advanceEffects.some(effect => effect.type === 'runtime/persistence-failed')) {
           return publish(advanceEffects);
         }
         effects.push(...advanceEffects);
+        const autoAudioEffect = autoStartReadyAudio({
+          purpose: 'feedback',
+          withinMicrotaskId
+        });
+        if (autoAudioEffect) effects.push(autoAudioEffect);
         return publish(effects);
       }
       return publish([]);

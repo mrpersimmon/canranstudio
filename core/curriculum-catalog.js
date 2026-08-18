@@ -258,10 +258,10 @@
     assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.avif',
     assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.jpg'
   };
-  const NCE_CHILD_CHARACTER = {
+  const NCE_EXPLORER_CAT_CHARACTER = {
     entityKind: 'character',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.jpg'
+    characterIdentityId: 'explorer-cat',
+    assetSrc: '/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-256.webp'
   };
   const LOST_HANDBAG_CAST = ['station-keeper', 'handbag-owner'];
 
@@ -282,11 +282,10 @@
       entityId: 'third-claimant', title: '第三位认领者', visualType: 'visitor-three', ...NCE_WOMAN_CHARACTER
     },
     child: {
-      entityId: 'child', title: '小探险家', visualType: 'child', ...NCE_CHILD_CHARACTER
+      entityId: 'child', title: '探险小猫', visualType: 'cat-child', ...NCE_EXPLORER_CAT_CHARACTER
     },
     'cat-guide': {
-      entityId: 'cat-guide', title: '探险小猫', visualType: 'cat',
-      assetSrc: '/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-256.webp'
+      entityId: 'cat-guide', title: '探险小猫', visualType: 'cat-guide', ...NCE_EXPLORER_CAT_CHARACTER
     },
     handbag: { entityId: 'handbag', title: '手提包', visualType: 'handbag', symbol: '👜', sourceRef: 'L01-W07' },
     pen: { entityId: 'pen', title: '钢笔', visualType: 'pen', symbol: '🖋️', sourceRef: 'L02-W01' },
@@ -1972,6 +1971,7 @@
         documentTitle: 'Lesson 1–2 · 星灯失物招领站',
         lessonLabel: 'NEW CONCEPT ENGLISH · LESSON 1–2',
         stagePreviewEnabled: true,
+        correctCueAudioSrc: '/poc/lesson1-2-experience/audio/correct-chime.mp3',
         arrival: {
           kicker: '晨光原野 · 第一座小站',
           title: '一只手提包在等主人',

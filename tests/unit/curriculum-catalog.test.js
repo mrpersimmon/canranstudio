@@ -196,6 +196,10 @@ test('Lesson 1 and Lesson 2 correction copy matches the action the child is taki
 test('Lesson 1 and Lesson 2 introduce the lost-handbag premise before the dialogue', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
 
+  assert.equal(
+    unit.experience.correctCueAudioSrc,
+    '/poc/lesson1-2-experience/audio/correct-chime.mp3'
+  );
   assert.deepEqual(unit.experience.briefing, {
     kicker: '开门前 · 先看看发生了什么',
     title: '小站收到一只没人认领的手提包',
@@ -207,7 +211,7 @@ test('Lesson 1 and Lesson 2 introduce the lost-handbag premise before the dialog
   });
 });
 
-test('Lesson 1 and Lesson 2 use one illustrated human cast wherever a person is present', () => {
+test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat identity', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const tasks = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
     .map(task => [task.microtaskId, task]));
@@ -223,10 +227,11 @@ test('Lesson 1 and Lesson 2 use one illustrated human cast wherever a person is 
     assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.avif',
     assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-v1.jpg'
   };
-  const childAsset = {
+  const explorerCatAsset = {
     entityKind: 'character',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-child-explorer-v1.jpg'
+    characterIdentityId: 'explorer-cat',
+    assetSrc: '/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-256.webp',
+    assetFallbackSrc: undefined
   };
 
   for (const entityId of ['station-keeper', 'second-returner']) {
@@ -245,9 +250,16 @@ test('Lesson 1 and Lesson 2 use one illustrated human cast wherever a person is 
   }
   assert.deepEqual({
     entityKind: entities.child.entityKind,
+    characterIdentityId: entities.child.characterIdentityId,
     assetSrc: entities.child.assetSrc,
     assetFallbackSrc: entities.child.assetFallbackSrc
-  }, childAsset);
+  }, explorerCatAsset);
+  assert.deepEqual({
+    entityKind: entities['cat-guide'].entityKind,
+    characterIdentityId: entities['cat-guide'].characterIdentityId,
+    assetSrc: entities['cat-guide'].assetSrc,
+    assetFallbackSrc: entities['cat-guide'].assetFallbackSrc
+  }, explorerCatAsset);
 
   assert.deepEqual(tasks.get('L01-M01').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);
   assert.deepEqual(tasks.get('L01-M02').presentation.characterEntityIds, ['station-keeper', 'handbag-owner']);

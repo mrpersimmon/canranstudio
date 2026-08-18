@@ -221,7 +221,9 @@ test('Lesson 1 turns three wrong actions into teaching support and still require
     response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
   });
   assert.equal(corrected.snapshot.stepId, 'L01-M01:S03');
-  assert.equal(corrected.snapshot.phase, 'audio-ready');
+  assert.equal(corrected.snapshot.phase, 'audio-playing');
+  assert.equal(corrected.snapshot.audio.purpose, 'feedback');
+  assert.equal(corrected.effects.at(-1).audioRef.refId, 'L01-W07');
   assert.equal(corrected.snapshot.supportLevel, 0);
   assert.equal(corrected.snapshot.heartsRemaining, 3);
   assert.deepEqual(ledger.events, []);

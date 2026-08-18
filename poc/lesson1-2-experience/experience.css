@@ -703,6 +703,30 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
 .listen-button strong { font: 700 1.05rem/1 'ZCOOL KuaiLe', sans-serif; }
 .listening-orb small { position: absolute; bottom: 0; color: #755744; font-weight: 700; }
 
+.feedback-audio-state {
+  width: min(430px, 88vw);
+  min-height: 112px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 18px 26px;
+  border: 3px solid var(--teal-dark);
+  border-radius: 24px;
+  color: #153f42;
+  background: linear-gradient(145deg, rgba(235, 255, 247, .98), rgba(255, 247, 214, .98));
+  box-shadow: 0 7px 0 #2b736e, 0 14px 28px rgba(18, 68, 64, .18);
+  animation: bubble-pop .28s ease-out both;
+}
+.feedback-audio-state__copy { display: grid; justify-items: center; gap: 7px; text-align: center; }
+.feedback-audio-state strong {
+  font: 700 clamp(1.08rem, 3.8vw, 1.35rem)/1.18 'ZCOOL KuaiLe', sans-serif;
+}
+.feedback-audio-state small {
+  color: #715644;
+  font-size: .82rem;
+  font-weight: 800;
+}
+
 .prop-shelf,
 .speech-choice-grid,
 .case-window,
