@@ -41,7 +41,7 @@
     'Yes, it is.',
     'Thank you very much.'
   ];
-  const LESSON1_DIALOGUE_SPEAKERS = ['man', 'woman', 'man', 'woman', 'man', 'woman', 'man'];
+  const LESSON1_DIALOGUE_SPEAKERS = ['man', 'woman', 'man', 'woman', 'man', 'woman', 'woman'];
   const LESSON1_DIALOGUE_POLICIES = ['evidence', 'exposure', 'evidence', 'evidence', 'evidence', 'evidence', 'evidence'];
   const LESSON1_TRANSLATIONS = [
     '对不起！',

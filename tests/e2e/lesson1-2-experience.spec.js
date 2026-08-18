@@ -44,6 +44,7 @@ async function installInstantAudio(page, { failVoice = false } = {}) {
 async function installManualAudio(page) {
   await page.addInitScript(ambienceSuffix => {
     window.__courseAudioStarts = [];
+    window.__ambientAudioStarts = 0;
     class ManualAudio extends EventTarget {
       constructor(src) {
         super();
@@ -58,6 +59,8 @@ async function installManualAudio(page) {
         if (isCourseAudio) {
           window.__courseAudioStarts.push(String(this.src));
           window.__pendingCourseAudio = this;
+        } else {
+          window.__ambientAudioStarts += 1;
         }
         return Promise.resolve();
       }
@@ -345,17 +348,32 @@ test('audio failure requires an explicit visual fallback and never advances on e
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
 });
 
-test('one-tap background music mute persists independently of course progress', async ({ page }) => {
+test('one-tap background music opt-in persists independently of course progress', async ({ page }) => {
   await installInstantAudio(page);
   await openFresh(page);
   const music = page.locator('[data-action="toggle-music"]');
-  await expect(music).toHaveAttribute('aria-pressed', 'false');
-  await music.click();
   await expect(music).toHaveAttribute('aria-pressed', 'true');
-  expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('true');
+  await music.click();
+  await expect(music).toHaveAttribute('aria-pressed', 'false');
+  expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('false');
   expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
   await page.reload();
-  await expect(page.locator('[data-action="toggle-music"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-action="toggle-music"]')).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('a fresh child session keeps the provisional tone bed off until explicit music opt-in', async ({ page }) => {
+  await installManualAudio(page);
+  await openFresh(page);
+  const music = page.locator('[data-action="toggle-music"]');
+
+  await expect(music).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-action="start"]').click();
+  await page.locator('[data-action="audio-play"]').click();
+  expect(await page.evaluate(() => window.__ambientAudioStarts)).toBe(0);
+
+  await music.click();
+  await expect(music).toHaveAttribute('aria-pressed', 'false');
+  expect(await page.evaluate(() => window.__ambientAudioStarts)).toBe(1);
 });
 
 test('a child can cancel or confirm restarting mid-unit without changing the music preference', async ({ page }) => {
@@ -392,9 +410,9 @@ test('a child can cancel or confirm restarting mid-unit without changing the mus
   await page.getByRole('dialog', { name: '要重新开始吗？' })
     .getByRole('button', { name: '确认重新开始' }).click();
   await expect(page.locator('[data-action="start"]')).toBeVisible();
-  await expect(page.locator('[data-action="toggle-music"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-action="toggle-music"]')).toHaveAttribute('aria-pressed', 'false');
   expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
-  expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('true');
+  expect(await page.evaluate(key => localStorage.getItem(key), MUSIC_KEY)).toBe('false');
 });
 
 test('the local stage navigator previews any microtask without changing durable progress', async ({ page }) => {

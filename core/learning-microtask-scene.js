@@ -10,6 +10,8 @@
   'use strict';
 
   const MUSIC_STORAGE_SUFFIX = ':music-muted';
+  const MUSIC_VOLUME = 0.06;
+  const MUSIC_DUCKED_VOLUME = 0.012;
 
   function escapeHtml(value) {
     return String(value ?? '')
@@ -71,13 +73,14 @@
       previewReturnStarted: false,
       voice: null,
       music: null,
-      musicMuted: false
+      musicMuted: true
     };
 
     try {
-      ui.musicMuted = global.localStorage.getItem(`${storageKey}${MUSIC_STORAGE_SUFFIX}`) === 'true';
+      const savedMusicPreference = global.localStorage.getItem(`${storageKey}${MUSIC_STORAGE_SUFFIX}`);
+      ui.musicMuted = savedMusicPreference === null ? true : savedMusicPreference === 'true';
     } catch {
-      ui.musicMuted = false;
+      ui.musicMuted = true;
     }
 
     let runtimeSequence = 1200;
@@ -209,16 +212,16 @@
       ui.voice.finished = true;
       try { ui.voice.audio.pause(); } catch { /* no-op */ }
       ui.voice = null;
-      if (ui.music) ui.music.volume = ui.musicMuted ? 0 : 0.16;
+      if (ui.music) ui.music.volume = ui.musicMuted ? 0 : MUSIC_VOLUME;
     }
 
     function ensureMusic() {
       const src = unit.experience?.ambientAudioSrc;
-      if (!src || ui.music) return;
+      if (!src || ui.music || ui.musicMuted) return;
       const music = new global.Audio(src);
       music.loop = true;
       music.preload = 'auto';
-      music.volume = ui.musicMuted ? 0 : 0.16;
+      music.volume = MUSIC_VOLUME;
       ui.music = music;
       const started = music.play();
       if (started && typeof started.catch === 'function') started.catch(() => {});
@@ -242,13 +245,13 @@
         finished: false
       };
       ui.voice = session;
-      if (ui.music) ui.music.volume = ui.musicMuted ? 0 : 0.045;
+      if (ui.music) ui.music.volume = ui.musicMuted ? 0 : MUSIC_DUCKED_VOLUME;
 
       function finish(type, reason) {
         if (session.finished) return;
         session.finished = true;
         if (ui.voice === session) ui.voice = null;
-        if (ui.music) ui.music.volume = ui.musicMuted ? 0 : 0.16;
+        if (ui.music) ui.music.volume = ui.musicMuted ? 0 : MUSIC_VOLUME;
         if (type === 'ended') {
           dispatch({
             type: 'audio/ended',
@@ -746,7 +749,11 @@
         ui.musicMuted = !ui.musicMuted;
         try { global.localStorage.setItem(`${storageKey}${MUSIC_STORAGE_SUFFIX}`, String(ui.musicMuted)); } catch { /* no-op */ }
         if (!ui.musicMuted) ensureMusic();
-        if (ui.music) ui.music.volume = ui.musicMuted ? 0 : (ui.voice ? 0.045 : 0.16);
+        if (ui.music) {
+          ui.music.volume = ui.musicMuted
+            ? 0
+            : (ui.voice ? MUSIC_DUCKED_VOLUME : MUSIC_VOLUME);
+        }
         render();
         return;
       }

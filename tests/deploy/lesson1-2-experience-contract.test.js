@@ -82,3 +82,27 @@ test('the local candidate voice pack covers every catalog audio identity and sta
   const ambience = await fs.stat(path.join(audioDir, 'starlight-station-ambience.mp3'));
   assert.ok(ambience.size > 100_000);
 });
+
+test('the Lesson 1 dialogue voice pack follows the textbook speakers through the final thanks', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const sources = unit.lessonContent.lesson1.sources;
+  const manifest = JSON.parse(await fs.readFile(
+    path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
+    'utf8'
+  ));
+  const voiceBySource = new Map(manifest.files.map(file => [file.sourceId, file.voiceId]));
+
+  assert.deepEqual(
+    ['L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07']
+      .map(sourceId => [sourceId, sources[sourceId].speaker, voiceBySource.get(sourceId)]),
+    [
+      ['L01-D01', 'man', 'am_michael'],
+      ['L01-D02', 'woman', 'af_heart'],
+      ['L01-D03', 'man', 'am_michael'],
+      ['L01-D04', 'woman', 'af_heart'],
+      ['L01-D05', 'man', 'am_michael'],
+      ['L01-D06', 'woman', 'af_heart'],
+      ['L01-D07', 'woman', 'af_heart']
+    ]
+  );
+});
