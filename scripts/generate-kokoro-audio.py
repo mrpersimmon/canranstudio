@@ -12,12 +12,40 @@ import kokoro.pipeline as kokoro_pipeline
 from kokoro import KPipeline
 
 
+SAMPLE_RATE = 24000
+
+
 def audio_from_result(result):
     if hasattr(result, "audio"):
         return result.audio
     if isinstance(result, tuple) and len(result) >= 3:
         return result[2]
     raise TypeError("Unexpected Kokoro result shape")
+
+
+def last_activity_segment(waveform):
+    window = round(SAMPLE_RATE * 0.01)
+    threshold = 10 ** (-45 / 20)
+    frame_count = (len(waveform) + window - 1) // window
+    active_frames = []
+    for frame in range(frame_count):
+        samples = waveform[frame * window:min((frame + 1) * window, len(waveform))]
+        if len(samples) and float(np.sqrt(np.mean(samples ** 2))) >= threshold:
+            active_frames.append(frame)
+    if not active_frames:
+        raise RuntimeError("Context rendering produced no audible target segment")
+
+    split_gap_frames = 12
+    groups = [[active_frames[0]]]
+    for frame in active_frames[1:]:
+        if frame - groups[-1][-1] >= split_gap_frames:
+            groups.append([frame])
+        else:
+            groups[-1].append(frame)
+    final = groups[-1]
+    start = max(0, final[0] * window - round(SAMPLE_RATE * 0.08))
+    end = min(len(waveform), (final[-1] + 1) * window + round(SAMPLE_RATE * 0.18))
+    return waveform[start:end]
 
 
 def main():
@@ -43,10 +71,16 @@ def main():
         source_id = item["sourceId"]
         output_path = item["outputPath"]
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        render_mode = item.get("renderMode", "natural-utterance")
+        text = item["text"]
+        synthesis_text = text
+        if render_mode == "context-cropped-lexeme-v1":
+            label = "phrase" if " " in text.strip() else "word"
+            synthesis_text = f"Here is the {label} {text}. {text}."
         chunks = [
             np.asarray(audio_from_result(result), dtype=np.float32)
             for result in pipeline(
-                item["text"],
+                synthesis_text,
                 voice=item["voice"],
                 speed=float(item["speed"]),
                 split_pattern=r"\n+",
@@ -55,10 +89,12 @@ def main():
         if not chunks:
             raise RuntimeError(f"Kokoro produced no audio for {source_id}")
         waveform = np.concatenate(chunks)
+        if render_mode == "context-cropped-lexeme-v1":
+            waveform = last_activity_segment(waveform)
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temporary:
             wav_path = temporary.name
         try:
-            sf.write(wav_path, waveform, 24000)
+            sf.write(wav_path, waveform, SAMPLE_RATE)
             subprocess.run(
                 [
                     "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
@@ -73,7 +109,7 @@ def main():
                         "start_threshold=-45dB:start_silence=0.24,"
                         "areverse"
                     ),
-                    "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "96k",
+                    "-ar", str(SAMPLE_RATE), "-codec:a", "libmp3lame", "-b:a", "96k",
                     output_path,
                 ],
                 check=True,

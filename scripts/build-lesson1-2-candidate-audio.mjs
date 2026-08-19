@@ -12,9 +12,13 @@ const UNIT_ID = 'NCE-U01';
 const OUTPUT_DIR = join(ROOT, 'poc/lesson1-2-experience/audio');
 const PYTHON = process.env.KOKORO_PYTHON;
 const REFRESH_EXISTING = process.argv.includes('--refresh-manifest');
+const REGENERATE_STANDALONE_WORDS = process.argv.includes('--regenerate-standalone-words');
 
 if (!REFRESH_EXISTING && (!PYTHON || !existsSync(PYTHON))) {
   throw new Error('Set KOKORO_PYTHON to a Kokoro-capable Python executable.');
+}
+if (REFRESH_EXISTING && REGENERATE_STANDALONE_WORDS) {
+  throw new Error('Choose either --refresh-manifest or --regenerate-standalone-words.');
 }
 
 const catalog = require(join(ROOT, 'core/curriculum-catalog.js'));
@@ -35,6 +39,12 @@ function voiceFor(item) {
     : voiceBaseline.standaloneWordVoiceId;
 }
 
+function renderModeFor(item) {
+  return ['vocabulary', 'substitution-item'].includes(item.sourceKind)
+    ? 'context-cropped-lexeme-v1'
+    : 'natural-utterance';
+}
+
 const catalogItems = [
   ...Object.values(unit.lessonContent || {}).flatMap(lesson => Object.values(lesson.sources || {})),
   ...Object.values(unit.authoredContent || {})
@@ -51,17 +61,21 @@ const items = catalogItems.map(item => {
     text: item.text,
     textSha256: sha256(item.text),
     voice: voiceFor(item),
-    speed: 0.9,
+    renderMode: renderModeFor(item),
+    speed: renderModeFor(item) === 'context-cropped-lexeme-v1' ? 1 : 0.9,
     outputPath
   };
 });
 
 mkdirSync(OUTPUT_DIR, { recursive: true });
 if (!REFRESH_EXISTING) {
+  const generationItems = REGENERATE_STANDALONE_WORDS
+    ? items.filter(item => item.renderMode === 'context-cropped-lexeme-v1')
+    : items;
   const worker = spawnSync(PYTHON, [join(ROOT, 'scripts/generate-kokoro-audio.py')], {
     cwd: ROOT,
     encoding: 'utf8',
-    input: JSON.stringify({ items }),
+    input: JSON.stringify({ items: generationItems }),
     maxBuffer: 8 * 1024 * 1024,
     stdio: ['pipe', 'inherit', 'inherit']
   });
@@ -78,6 +92,7 @@ const files = items.map(item => {
     catalogTextSha256: item.textSha256,
     path: `/${relative(ROOT, item.outputPath)}`,
     voiceId: item.voice,
+    renderMode: item.renderMode,
     speed: item.speed,
     sha256: sha256(bytes),
     bytes: bytes.length,
@@ -88,7 +103,7 @@ const files = items.map(item => {
 
 const manifest = {
   schemaVersion: 1,
-  packId: 'nce-u01-kokoro-candidate-v2',
+  packId: 'nce-u01-kokoro-candidate-v3',
   unitId: UNIT_ID,
   voiceBaselineId: unit.voiceBaselineId,
   status: 'local-poc-candidate-unreviewed',
@@ -107,7 +122,8 @@ const manifest = {
     silenceThresholdDb: -45,
     decodedOnsetLimitMs: 150,
     leadingSilenceKeptMs: 100,
-    trailingSilenceKeptMs: 240
+    trailingSilenceKeptMs: 240,
+    standaloneWordRenderMode: 'context-cropped-lexeme-v1'
   },
   replacementContract: {
     scope: 'whole-unit-pack',

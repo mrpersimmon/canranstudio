@@ -74,6 +74,12 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - A red browser-decoding regression measured all twenty-one standalone word recordings at 380–430 ms before first English energy. Pack `nce-u01-kokoro-candidate-v2` removes this non-language padding across the complete 32-file unit; the current assets copy the selected MP3 speech frames without re-encoding or changing `am_michael` / `af_heart`.
 - The same browser-decoding regression now requires every standalone word to begin English within 150 ms, while per-file hashes, Source IDs, voice mapping, full-unit replacement, visible English, and real `ended` remain enforced. If human retest still rejects the sound, the next diagnosis is the voice's synthesized onset/prosody itself, not another UI cue.
 
+### Pass 10 — human-selected context-cropped standalone words
+
+- Human retest still rejected the onset after cue removal and padding cleanup, confirming the problem was isolated-word synthesis rather than runtime playback. A same-volume anonymous A/B/C page compared the existing file, direct `af_heart` at normal speed, and `af_heart` generated in a carrier then cropped to its final complete target.
+- The user selected C as the only version without a special onset. Pack `nce-u01-kokoro-candidate-v3` now assigns `context-cropped-lexeme-v1` at speed 1.0 to all twenty-one standalone words while retaining `natural-utterance` for dialogue and complete questions.
+- Kokoro regeneration was observed to vary bytes even under the same recipe. The exact four C files the user heard for `coat`, `dress`, `skirt`, and `shirt` therefore remain the human-acceptance anchors and are pinned individually by SHA-256; the other seventeen context-rendered files remain unreviewed candidates.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.

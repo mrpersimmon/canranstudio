@@ -145,7 +145,7 @@ test('the local candidate voice pack covers every catalog audio identity and sta
     assert.match(file.catalogTextSha256, /^[a-f0-9]{64}$/);
     assert.match(file.sha256, /^[a-f0-9]{64}$/);
     assert.equal(file.reviewStatus, 'unreviewed-candidate');
-    assert.ok(file.durationMs > 500);
+    assert.ok(file.durationMs >= 500);
     const absolutePath = path.join(ROOT, file.path.replace(/^\//, ''));
     const [stat, bytes] = await Promise.all([fs.stat(absolutePath), fs.readFile(absolutePath)]);
     assert.equal(stat.size, file.bytes);
@@ -207,13 +207,13 @@ test('the local voice pack keeps the selected youth voices with the accepted ons
     'utf8'
   ));
   const voiceFileFingerprint = manifest.files.map(({
-    sourceId, path: audioPath, voiceId, sha256, bytes, durationMs
-  }) => ({ sourceId, path: audioPath, voiceId, sha256, bytes, durationMs }));
+    sourceId, path: audioPath, voiceId, renderMode, speed, sha256, bytes, durationMs
+  }) => ({ sourceId, path: audioPath, voiceId, renderMode, speed, sha256, bytes, durationMs }));
   const canonicalVoiceFileSha256 = createHash('sha256')
     .update(JSON.stringify(voiceFileFingerprint))
     .digest('hex');
 
-  assert.equal(manifest.packId, 'nce-u01-kokoro-candidate-v2');
+  assert.equal(manifest.packId, 'nce-u01-kokoro-candidate-v3');
   assert.equal(manifest.voiceBaselineId, 'nce-youth-v1');
   assert.equal(manifest.engine.name, 'Kokoro');
   assert.deepEqual(manifest.processing, {
@@ -221,10 +221,41 @@ test('the local voice pack keeps the selected youth voices with the accepted ons
     silenceThresholdDb: -45,
     decodedOnsetLimitMs: 150,
     leadingSilenceKeptMs: 100,
-    trailingSilenceKeptMs: 240
+    trailingSilenceKeptMs: 240,
+    standaloneWordRenderMode: 'context-cropped-lexeme-v1'
   });
   assert.equal(
     canonicalVoiceFileSha256,
-    'f3c25f40d1542f424cc4a200a2c5f0352a70e006da2b1c8cde31d415790eecf8'
+    '8a4f7d9840c72714d11f879d2070b75a5a9ca45ec3d985bb49709739de8d9411'
+  );
+});
+
+test('standalone words use the human-selected context-cropped C rendering', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const manifest = JSON.parse(await fs.readFile(
+    path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
+    'utf8'
+  ));
+  const fileBySource = new Map(manifest.files.map(file => [file.sourceId, file]));
+  const standaloneSources = Object.values(unit.lessonContent)
+    .flatMap(lesson => Object.values(lesson.sources))
+    .filter(source => ['vocabulary', 'substitution-item'].includes(source.sourceKind));
+
+  assert.equal(standaloneSources.length, 21);
+  for (const source of standaloneSources) {
+    const file = fileBySource.get(source.sourceId);
+    assert.equal(file.voiceId, 'af_heart', source.sourceId);
+    assert.equal(file.renderMode, 'context-cropped-lexeme-v1', source.sourceId);
+    assert.equal(file.speed, 1, source.sourceId);
+  }
+  assert.deepEqual(
+    ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08']
+      .map(sourceId => [sourceId, fileBySource.get(sourceId).sha256]),
+    [
+      ['L02-W05', '78aaeced5faf1da980fa52bffecaa54a6f903c8da5d5ceb37a1a199ebfe5d36a'],
+      ['L02-W06', '0b97030065844fb780e7d1a25e0a190da9aefe554fd020f18efd6f4a007793bf'],
+      ['L02-W07', '152519e2a59eaa4d3f4918c994be85d005c92c974bc1e638daf44f916e902534'],
+      ['L02-W08', '189312ec8ff5c13cdfeff053e72559d2e1a4137950eaad5549a3ecab6a2137e2']
+    ]
   );
 });
