@@ -56,6 +56,12 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - The deployment contract rejects the retired composite pack shape and keeps the original four child-rejected hashes banned. The new pack remains `local-poc-candidate-unreviewed`; visual and technical acceptance cannot substitute for final American-English review or recording rights.
 - Browser verification completed the external coat-owner exchange and the complete selected car-key path (`car`, `house`, `Excuse me!`, `Yes?`, `Is this your car?`, `Yes, it is.`) through real `ended` events with no console warnings or errors. Evidence: `docs/designs/lesson1-2-design-qa/coat-owner-return-scene-20260819.png` and `key-voice-pack-stage-20260819.png`.
 
+### Pass 7 — original voice pack restored by direct user choice
+
+- The user rejected the unified macOS candidate after listening and explicitly selected the very first audio version. Audio assets, manifest, builder, and ADR were restored exactly from `c0219b3`; all later role, story, layout, and interaction improvements remain intact.
+- The active local pack is again `nce-u01-kokoro-candidate-v1` with the original `am_michael` male and `af_heart` female/word mapping. This is a user-selected local acceptance baseline, not evidence that the candidate is teacher-reviewed or publishable.
+- A deployment regression pins the canonical original manifest SHA-256 `27520c7d318a0d6f939441b6a2279786544de8bfa286e9a73111a83e27e9486c`, while the existing per-file hash checks bind all 32 manifest entries to their actual bytes. Any future partial or whole-pack replacement must be an explicit new user decision.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.

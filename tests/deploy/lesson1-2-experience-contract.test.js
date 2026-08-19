@@ -10,13 +10,6 @@ const catalog = require('../../core/curriculum-catalog');
 
 const ROOT = path.resolve(__dirname, '../..');
 
-const REJECTED_CLOTHING_AUDIO = Object.freeze({
-  'L02-W05': ['coat', '30adb68433c9bc977115c1ac92de3999e5b82ccb0751d51dbd660558d7587605'],
-  'L02-W06': ['dress', 'ba0e499a7f68db4fa709e59e66650ad8d8d18578b4e72cad0f4736c1891d6d44'],
-  'L02-W07': ['skirt', '9e5244efc4942471318fd127f524231bd6a90f4b44d3cb8647ccd128912839e8'],
-  'L02-W08': ['shirt', '1cb8833562d8af5a01952de030c2219b97cc507a71557d0a32421c2ea2c8308a']
-});
-
 test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally runnable', async () => {
   const [home, page, scene, runtime, background, premiseAvif, premiseJpeg, selectedDesign] = await Promise.all([
     fs.readFile(path.join(ROOT, 'index.html'), 'utf8'),
@@ -177,74 +170,30 @@ test('the Lesson 1 dialogue voice pack follows the textbook speakers through the
     ['L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07']
       .map(sourceId => [sourceId, sources[sourceId].speaker, voiceBySource.get(sourceId)]),
     [
-      ['L01-D01', 'man', 'Reed'],
-      ['L01-D02', 'woman', 'Samantha'],
-      ['L01-D03', 'man', 'Reed'],
-      ['L01-D04', 'woman', 'Samantha'],
-      ['L01-D05', 'man', 'Reed'],
-      ['L01-D06', 'woman', 'Samantha'],
-      ['L01-D07', 'woman', 'Samantha']
+      ['L01-D01', 'man', 'am_michael'],
+      ['L01-D02', 'woman', 'af_heart'],
+      ['L01-D03', 'man', 'am_michael'],
+      ['L01-D04', 'woman', 'af_heart'],
+      ['L01-D05', 'man', 'am_michael'],
+      ['L01-D06', 'woman', 'af_heart'],
+      ['L01-D07', 'woman', 'af_heart']
     ]
   );
 });
 
-test('child-rejected clothing pronunciations cannot return to the local voice pack', async () => {
-  const unit = catalog.getTeachingUnit('NCE-U01');
+test('the local voice pack stays on the exact original candidate selected by the user', async () => {
   const manifest = JSON.parse(await fs.readFile(
     path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
     'utf8'
   ));
+  const canonicalManifestSha256 = createHash('sha256')
+    .update(JSON.stringify(manifest))
+    .digest('hex');
 
-  for (const [sourceId, [expectedText, rejectedSha256]] of Object.entries(REJECTED_CLOTHING_AUDIO)) {
-    const source = unit.lessonContent.lesson2.sources[sourceId];
-    const entry = manifest.files.find(file => file.sourceId === sourceId);
-    const bytes = await fs.readFile(path.join(ROOT, source.audioSrc.replace(/^\//, '')));
-    const actualSha256 = createHash('sha256').update(bytes).digest('hex');
-
-    assert.equal(source.text, expectedText);
-    assert.notEqual(actualSha256, rejectedSha256, `${sourceId} restored child-rejected audio`);
-    assert.equal(entry.sha256, actualSha256);
-    assert.equal(entry.voiceId, 'Samantha');
-    assert.equal(entry.engineId, 'macOS-say');
-    assert.deepEqual(entry.pronunciationCorrection, {
-      locale: 'en-US',
-      reason: 'child-playtest-pronunciation-rejection',
-      rejectedSha256
-    });
-  }
-});
-
-test('the complete local candidate uses one declared en-US voice system after repeated Kokoro rejection', async () => {
-  const unit = catalog.getTeachingUnit('NCE-U01');
-  const manifest = JSON.parse(await fs.readFile(
-    path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
-    'utf8'
-  ));
-  const authoredItems = [
-    ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
-    ...Object.values(unit.authoredContent)
-  ].filter(item => item.audioSrc);
-  const itemById = new Map(authoredItems.map(item => [item.sourceId || item.contentId, item]));
-
-  assert.equal(manifest.packId, 'nce-u01-macos-say-candidate-v3');
-  assert.deepEqual(manifest.engine, {
-    name: 'macOS say',
-    locale: 'en-US',
-    maleVoice: 'Reed',
-    femaleAndWordVoice: 'Samantha',
-    outputUseStatus: 'local-poc-only-requires-review'
-  });
-  assert.equal(manifest.replacesRejectedPackId, 'nce-u01-local-candidate-v2');
-
-  for (const file of manifest.files) {
-    const item = itemById.get(file.sourceId);
-    const expectedVoice = item.speaker === 'man' || item.kind === 'derived-expression'
-      ? 'Reed'
-      : 'Samantha';
-    assert.equal(file.engineId, 'macOS-say', file.sourceId);
-    assert.equal(file.locale, 'en-US', file.sourceId);
-    assert.equal(file.voiceId, expectedVoice, file.sourceId);
-    assert.ok(Number.isInteger(file.rateWpm), file.sourceId);
-    assert.equal(Object.hasOwn(file, 'speed'), false, file.sourceId);
-  }
+  assert.equal(manifest.packId, 'nce-u01-kokoro-candidate-v1');
+  assert.equal(manifest.engine.name, 'Kokoro');
+  assert.equal(
+    canonicalManifestSha256,
+    '27520c7d318a0d6f939441b6a2279786544de8bfa286e9a73111a83e27e9486c'
+  );
 });
