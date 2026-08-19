@@ -23,6 +23,21 @@
     { beatId: 'transfer', title: '换个情境使用', buildStage: 4 },
     { beatId: 'build', title: '建造地标', buildStage: 5 }
   ];
+  const COURSE_VOICE_BASELINES = deepFreeze({
+    'nce-youth-v1': {
+      baselineId: 'nce-youth-v1',
+      locale: 'en-US',
+      accentTarget: 'General American English',
+      youthMaleVoiceId: 'am_michael',
+      youthFemaleVoiceId: 'af_heart',
+      standaloneWordVoiceId: 'af_heart',
+      deviationPolicy: 'explicit-course-exception'
+    }
+  });
+
+  function getCourseVoiceBaseline(baselineId) {
+    return COURSE_VOICE_BASELINES[baselineId] || null;
+  }
 
   function source(sourceId, sourceKind, text, details = {}) {
     return { sourceId, sourceKind, text, required: true, ...details };
@@ -1877,6 +1892,7 @@
     status = 'planned',
     publicationScope = 'course-catalog',
     runtimeProfile = 'five-beat-v1',
+    voiceBaselineId = 'nce-youth-v1',
     contexts,
     targets,
     tasks = [],
@@ -1903,6 +1919,7 @@
       status,
       publicationScope,
       runtimeProfile,
+      voiceBaselineId,
       beats: BEATS.map((beat, beatIndex) => {
         const authored = tasks[beatIndex];
         const authoredMicrotasks = microtasksByBeat[beat.beatId] || [];
@@ -1969,7 +1986,6 @@
         documentTitle: 'Lesson 1–2 · 星灯失物招领站',
         lessonLabel: 'NEW CONCEPT ENGLISH · LESSON 1–2',
         stagePreviewEnabled: true,
-        correctCueAudioSrc: '/poc/lesson1-2-experience/audio/correct-chime.mp3',
         arrival: {
           kicker: '晨光原野 · 第一座小站',
           title: '一只手提包在等主人',
@@ -2271,6 +2287,10 @@
     for (const current of units) {
       if (unitIds.has(current.unitId)) errors.push(`${current.unitId} belongs to multiple units`);
       unitIds.add(current.unitId);
+
+      if (!getCourseVoiceBaseline(current.voiceBaselineId)) {
+        errors.push(`${current.unitId} references unknown voice baseline ${current.voiceBaselineId}`);
+      }
 
       for (const lessonId of current.lessonIds || []) {
         if (lessonOwners.has(lessonId)) {
@@ -2622,6 +2642,8 @@
 
   return deepFreeze({
     TEACHING_UNITS,
+    COURSE_VOICE_BASELINES,
+    getCourseVoiceBaseline,
     getTeachingUnit,
     getTeachingUnitForLesson,
     listTeachingUnitsForDistrict,

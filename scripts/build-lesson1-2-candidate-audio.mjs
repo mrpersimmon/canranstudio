@@ -19,15 +19,19 @@ if (!PYTHON || !existsSync(PYTHON)) {
 const catalog = require(join(ROOT, 'core/curriculum-catalog.js'));
 const unit = catalog.getTeachingUnit(UNIT_ID);
 if (!unit) throw new Error(`${UNIT_ID} is missing from the curriculum catalog.`);
+const voiceBaseline = catalog.getCourseVoiceBaseline(unit.voiceBaselineId);
+if (!voiceBaseline) throw new Error(`${UNIT_ID} has no valid course voice baseline.`);
 
 function sha256(value) {
   return createHash('sha256').update(value).digest('hex');
 }
 
 function voiceFor(item) {
-  if (item.speaker === 'man') return 'am_michael';
-  if (item.speaker === 'woman') return 'af_heart';
-  return item.kind === 'derived-expression' ? 'am_michael' : 'af_heart';
+  if (item.speaker === 'man') return voiceBaseline.youthMaleVoiceId;
+  if (item.speaker === 'woman') return voiceBaseline.youthFemaleVoiceId;
+  return item.kind === 'derived-expression'
+    ? voiceBaseline.youthMaleVoiceId
+    : voiceBaseline.standaloneWordVoiceId;
 }
 
 const catalogItems = [
@@ -83,6 +87,7 @@ const manifest = {
   schemaVersion: 1,
   packId: 'nce-u01-kokoro-candidate-v1',
   unitId: UNIT_ID,
+  voiceBaselineId: unit.voiceBaselineId,
   status: 'local-poc-candidate-unreviewed',
   disclosure: '英文语音由 AI 生成，当前仅供本地验收，不是真人老师正式语音包。',
   accentTarget: 'General American English',

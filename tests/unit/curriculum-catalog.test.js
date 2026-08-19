@@ -20,6 +20,25 @@ test('Lesson 1 and Lesson 2 resolve to one elementary teaching unit', () => {
   );
 });
 
+test('the course owns one youth voice baseline for future teaching units', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+
+  assert.deepEqual(catalog.getCourseVoiceBaseline('nce-youth-v1'), {
+    baselineId: 'nce-youth-v1',
+    locale: 'en-US',
+    accentTarget: 'General American English',
+    youthMaleVoiceId: 'am_michael',
+    youthFemaleVoiceId: 'af_heart',
+    standaloneWordVoiceId: 'af_heart',
+    deviationPolicy: 'explicit-course-exception'
+  });
+  assert.equal(unit.voiceBaselineId, 'nce-youth-v1');
+
+  const invalid = structuredClone(unit);
+  invalid.voiceBaselineId = 'unknown-youth-baseline';
+  assert.match(catalog.validate([invalid]).join('\n'), /unknown voice baseline unknown-youth-baseline/i);
+});
+
 test('Lesson 1 and Lesson 2 preserve the complete textbook source ledger', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const lesson1 = unit.lessonContent.lesson1;
@@ -220,10 +239,7 @@ test('Lesson 1 and Lesson 2 correction copy matches the action the child is taki
 test('Lesson 1 and Lesson 2 introduce the lost-handbag premise before the dialogue', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
 
-  assert.equal(
-    unit.experience.correctCueAudioSrc,
-    '/poc/lesson1-2-experience/audio/correct-chime.mp3'
-  );
+  assert.equal(unit.experience.correctCueAudioSrc, undefined);
   assert.deepEqual(unit.experience.briefing, {
     kicker: '开门前 · 先看看发生了什么',
     title: '小站收到一只没人认领的手提包',

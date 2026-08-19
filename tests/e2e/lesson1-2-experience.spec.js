@@ -305,7 +305,7 @@ test('a phrase tap speaks immediately and keeps the sentence visible', async ({ 
   await expect(page.locator('.feedback-audio-state')).toBeVisible();
   await expect(page.locator('.feedback-audio-state')).toContainText('Excuse me!');
   await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(1);
+  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
   expect(await page.evaluate(() => window.__courseAudioStarts.filter(
     src => src.endsWith('/l01-d01.mp3')
   ).length)).toBe(1);
@@ -331,7 +331,7 @@ test('a word-form object tap submits immediately and keeps the spoken word visib
   await expect(page.locator('.feedback-audio-state button')).toHaveCount(0);
   await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
   await expect(page.locator('.feedback-audio-state')).toContainText('找对了，听听这个词');
-  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(1);
+  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
   expect(await page.evaluate(() => window.__courseAudioStarts.filter(
     src => src.endsWith('/l01-w07.mp3')
   ).length)).toBe(1);
@@ -474,7 +474,7 @@ test('the first listen identifies the owner without handing over the handbag', a
   await clickValue(page, 'select-entity', 'handbag-owner');
   await expect(page.locator('.feedback-audio-state')).toBeVisible();
   await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(1);
+  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
   await page.evaluate(() => window.__finishCourseAudio());
   await expect(page.locator('.word-plaque')).toHaveText('handbag');
   await clickValue(page, 'select-entity', 'handbag');

@@ -198,7 +198,6 @@
     function pauseVoice() {
       if (!ui.voice) return;
       ui.voice.finished = true;
-      try { ui.voice.cueAudio?.pause(); } catch { /* no-op */ }
       try { ui.voice.audio.pause(); } catch { /* no-op */ }
       ui.voice = null;
     }
@@ -216,7 +215,6 @@
       audio.preload = 'auto';
       const session = {
         audio,
-        cueAudio: null,
         requestId: effect.requestId,
         segmentIndex: effect.segmentIndex,
         languageStarted: false,
@@ -260,33 +258,7 @@
         }
       }
 
-      const cueSrc = effect.purpose === 'feedback'
-        ? unit.experience?.correctCueAudioSrc
-        : null;
-      if (!cueSrc) {
-        playLanguageAudio();
-        return;
-      }
-
-      const cueAudio = new global.Audio(cueSrc);
-      cueAudio.preload = 'auto';
-      session.cueAudio = cueAudio;
-      let cueFinished = false;
-      function finishCue() {
-        if (cueFinished || session.finished) return;
-        cueFinished = true;
-        playLanguageAudio();
-      }
-      cueAudio.addEventListener('ended', finishCue, { once: true });
-      cueAudio.addEventListener('error', finishCue, { once: true });
-      let cueResult;
-      try {
-        cueResult = cueAudio.play();
-      } catch {
-        finishCue();
-        return;
-      }
-      if (cueResult && typeof cueResult.catch === 'function') cueResult.catch(finishCue);
+      playLanguageAudio();
     }
 
     function processEffect(effect) {

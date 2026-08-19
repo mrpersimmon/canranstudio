@@ -60,7 +60,13 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 
 - The user rejected the unified macOS candidate after listening and explicitly selected the very first audio version. Audio assets, manifest, builder, and ADR were restored exactly from `c0219b3`; all later role, story, layout, and interaction improvements remain intact.
 - The active local pack is again `nce-u01-kokoro-candidate-v1` with the original `am_michael` male and `af_heart` female/word mapping. This is a user-selected local acceptance baseline, not evidence that the candidate is teacher-reviewed or publishable.
-- A deployment regression pins the canonical original manifest SHA-256 `27520c7d318a0d6f939441b6a2279786544de8bfa286e9a73111a83e27e9486c`, while the existing per-file hash checks bind all 32 manifest entries to their actual bytes. Any future partial or whole-pack replacement must be an explicit new user decision.
+- A deployment regression pins the selected 32-file identity-and-byte fingerprint `0b1fabede0790a7b98a53335515f7cd295bfc305008788370564df1e2e082980`, while the existing per-file hash checks bind all manifest entries to their actual bytes. Manifest metadata can now name the course baseline without changing any selected recording. Any future partial or whole-pack replacement must be an explicit new user decision.
+
+### Pass 8 — course voice baseline and language-first feedback
+
+- Direct diagnosis separated the selected voice files from the audible “pre-tone”: the runtime was deliberately playing `correct-chime.mp3` before feedback language, then waiting through the original word recording's short leading silence. The tonal cue, not the female voice, created the perceived vocal prelude.
+- The original `am_michael` and `af_heart` recording bytes remain unchanged. Catalog now owns `nce-youth-v1` as the course-wide youth male/female baseline, standalone words default to `af_heart`, each teaching unit names the baseline, and the builder plus deployment contract enforce the mapping.
+- Correct answers now show visual confirmation and start the target English directly. The prefatory cue asset and runtime branch were removed; the target recording's genuine `ended` remains the sole progression gate, and browser tests assert that no cue request occurs across phrase, word-form, and owner-identification feedback.
 
 ## Required fidelity surfaces
 

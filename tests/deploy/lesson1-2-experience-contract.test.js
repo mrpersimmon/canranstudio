@@ -116,7 +116,6 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
 test('the local candidate voice pack covers every catalog audio identity and stays replaceable', async () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const audioDir = path.join(ROOT, 'poc/lesson1-2-experience/audio');
-  const correctCue = await fs.stat(path.join(audioDir, 'correct-chime.mp3'));
   const manifest = JSON.parse(await fs.readFile(path.join(audioDir, 'manifest.json'), 'utf8'));
   const expected = [
     ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
@@ -127,8 +126,12 @@ test('the local candidate voice pack covers every catalog audio identity and sta
   }));
 
   assert.equal(manifest.status, 'local-poc-candidate-unreviewed');
-  assert.equal(unit.experience.correctCueAudioSrc, '/poc/lesson1-2-experience/audio/correct-chime.mp3');
-  assert.ok(correctCue.size > 1_000);
+  assert.equal(manifest.voiceBaselineId, unit.voiceBaselineId);
+  assert.equal(unit.experience.correctCueAudioSrc, undefined);
+  await assert.rejects(
+    fs.stat(path.join(audioDir, 'correct-chime.mp3')),
+    error => error?.code === 'ENOENT'
+  );
   assert.equal(manifest.replacementContract.scope, 'whole-unit-pack');
   assert.equal(manifest.files.length, expected.length);
   assert.equal(new Set(manifest.files.map(file => file.sourceId)).size, expected.length);
@@ -159,6 +162,7 @@ test('the local candidate voice pack covers every catalog audio identity and sta
 
 test('the Lesson 1 dialogue voice pack follows the textbook speakers through the final thanks', async () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
+  const baseline = catalog.getCourseVoiceBaseline(unit.voiceBaselineId);
   const sources = unit.lessonContent.lesson1.sources;
   const manifest = JSON.parse(await fs.readFile(
     path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
@@ -179,6 +183,22 @@ test('the Lesson 1 dialogue voice pack follows the textbook speakers through the
       ['L01-D07', 'woman', 'af_heart']
     ]
   );
+
+  const audioItems = [
+    ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
+    ...Object.values(unit.authoredContent)
+  ].filter(item => item.audioSrc);
+  for (const item of audioItems) {
+    const sourceId = item.sourceId || item.contentId;
+    const expectedVoiceId = item.speaker === 'man'
+      ? baseline.youthMaleVoiceId
+      : item.speaker === 'woman'
+        ? baseline.youthFemaleVoiceId
+        : item.kind === 'derived-expression'
+          ? baseline.youthMaleVoiceId
+          : baseline.standaloneWordVoiceId;
+    assert.equal(voiceBySource.get(sourceId), expectedVoiceId, sourceId);
+  }
 });
 
 test('the local voice pack stays on the exact original candidate selected by the user', async () => {
@@ -186,14 +206,18 @@ test('the local voice pack stays on the exact original candidate selected by the
     path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
     'utf8'
   ));
-  const canonicalManifestSha256 = createHash('sha256')
-    .update(JSON.stringify(manifest))
+  const voiceFileFingerprint = manifest.files.map(({
+    sourceId, path: audioPath, voiceId, sha256, bytes, durationMs
+  }) => ({ sourceId, path: audioPath, voiceId, sha256, bytes, durationMs }));
+  const canonicalVoiceFileSha256 = createHash('sha256')
+    .update(JSON.stringify(voiceFileFingerprint))
     .digest('hex');
 
   assert.equal(manifest.packId, 'nce-u01-kokoro-candidate-v1');
+  assert.equal(manifest.voiceBaselineId, 'nce-youth-v1');
   assert.equal(manifest.engine.name, 'Kokoro');
   assert.equal(
-    canonicalManifestSha256,
-    '27520c7d318a0d6f939441b6a2279786544de8bfa286e9a73111a83e27e9486c'
+    canonicalVoiceFileSha256,
+    '0b1fabede0790a7b98a53335515f7cd295bfc305008788370564df1e2e082980'
   );
 });
