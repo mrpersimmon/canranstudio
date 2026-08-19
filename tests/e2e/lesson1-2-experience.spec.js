@@ -366,6 +366,31 @@ test('a physical action completes from the item and character taps without confi
   await expect(page.getByRole('button', { name: '完成动作' })).toHaveCount(0);
 });
 
+test('the coat return shows a distinct returner and coat owner instead of making the cat the owner', async ({ page }) => {
+  await installInstantAudio(page);
+  await openFresh(page);
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 9：衣签归位' }).click();
+
+  for (const label of ['短裙', '外套', '连衣裙', '衬衫']) {
+    await page.getByRole('button', { name: label, exact: true }).click();
+    await settle(page);
+  }
+
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M04:S03');
+  await expect(page.locator('.scene-people [data-entity-id="second-returner"] img')).toBeVisible();
+  await expect(page.locator('.scene-people [data-entity-id="coat-owner"] img')).toBeVisible();
+  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
+
+  await page.getByRole('button', { name: 'Yes, it is.' }).click();
+  await settle(page);
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M04:S04');
+  await clickValue(page, 'select-entity', 'coat');
+  await clickValue(page, 'select-target', 'coat-owner');
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M04:S05');
+  await expect(page.locator('.scene-people [data-entity-id="coat-owner"] img')).toBeVisible();
+});
+
 test('slot, case, and block choices continue on the last meaningful tap', async ({ page }) => {
   await installInstantAudio(page);
   await openFresh(page);

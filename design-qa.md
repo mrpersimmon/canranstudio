@@ -49,6 +49,13 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - Browser verification played all four replacement files in the authored clothing order and each real `ended` advanced to the next item. This verifies delivery, mapping, text visibility, and audio lifecycle; the composite pack remains explicitly unreviewed and cannot be treated as teacher/publication-approved without the existing human language gate.
 - Accepted evidence: `docs/designs/lesson1-2-design-qa/station-keeper-watch-dialogue-20260819.png` and `clothing-audio-replacement-20260819.png`.
 
+### Pass 6 — systemic role and whole-pack audio correction
+
+- P1 coat-owner causality: the coat-return scene had treated the explorer cat as the lost owner, leaving no explicit human owner in the exchange. Catalog now owns a distinct `coat-owner` role using the established woman image. The second returner and coat owner remain together through question, confirmation, handoff, and thanks; the cat returns to its guide identity.
+- P1 repeated pronunciation rejection: after the key-file chapter exposed the same class of problem, the four-file correction was superseded by a complete 32-file local pack rebuild. Every male turn and product ownership question uses Reed; every female turn and standalone word uses Samantha; all entries declare `en-US`, `macOS-say`, stable catalog identity, and the existing 24 kHz mono MP3 contract.
+- The deployment contract rejects the retired composite pack shape and keeps the original four child-rejected hashes banned. The new pack remains `local-poc-candidate-unreviewed`; visual and technical acceptance cannot substitute for final American-English review or recording rights.
+- Browser verification completed the external coat-owner exchange and the complete selected car-key path (`car`, `house`, `Excuse me!`, `Yes?`, `Is this your car?`, `Yes, it is.`) through real `ended` events with no console warnings or errors. Evidence: `docs/designs/lesson1-2-design-qa/coat-owner-return-scene-20260819.png` and `key-voice-pack-stage-20260819.png`.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.

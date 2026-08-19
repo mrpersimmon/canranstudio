@@ -282,6 +282,9 @@
     'second-returner': {
       entityId: 'second-returner', title: '第二位归还者', visualType: 'visitor-two', ...NCE_MAN_CHARACTER
     },
+    'coat-owner': {
+      entityId: 'coat-owner', title: '外套主人', visualType: 'coat-owner', ...NCE_WOMAN_CHARACTER
+    },
     'third-claimant': {
       entityId: 'third-claimant', title: '第三位认领者', visualType: 'visitor-three', ...NCE_WOMAN_CHARACTER
     },
@@ -814,8 +817,8 @@
       title: '衣签归位',
       stepLabel: '整理室 · 4 / 7',
       sceneMode: 'clothing-labels-and-coat',
-      prompt: '认衣签，接回外套',
-      completedFeedback: '衣签都登记好了，你也认领回自己的外套。',
+      prompt: '认衣签，再归还外套',
+      completedFeedback: '衣签都登记好了，外套主人也拿回了自己的外套。',
       nextCue: { entityId: 'case-stamp', label: '查看钥匙线索' },
       exposureRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08', 'L01-D06', 'L01-D07'],
       evidenceRefs: ['L02-W07', 'L02-W05', 'L02-W06', 'L02-W08', 'L01-D06', 'L01-D07'],
@@ -832,7 +835,7 @@
         nceTargetResult({
           resultId: 'NCE-U01-T05:L02-M04:thanks', targetNumber: 5,
           stepId: 'L02-M04:S05', sourceRef: 'L01-D07', channel: 'meaning',
-          evidenceMode: 'thanks-in-context', variantId: 'coat-return'
+          evidenceMode: 'thanks-in-context', variantId: 'coat-owner'
         })
       ],
       steps: [
@@ -850,34 +853,34 @@
         },
         {
           stepId: 'L02-M04:S02', kind: 'audio-sequence', prompt: '听归还者询问',
-          characterEntityIds: ['second-returner', 'child'],
+          characterEntityIds: ['second-returner', 'coat-owner'],
           audioContentRefs: ['NCE-U01-C-Q-COAT'], gate: AUDIO_ENDED_GATE
         },
         {
-          stepId: 'L02-M04:S03', kind: 'select-one', prompt: '这是你的外套，应该怎么回答？',
-          characterEntityIds: ['second-returner', 'child'],
+          stepId: 'L02-M04:S03', kind: 'select-one', prompt: '她认出了自己的外套，应该怎么回答？',
+          characterEntityIds: ['second-returner', 'coat-owner'],
           optionSourceRefs: ['L01-D06', 'L01-D02'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D06' },
           feedbackAudioSourceRef: 'L01-D06', gate: AUDIO_ENDED_GATE,
           support: [...EXPRESSION_SUPPORT]
         },
         {
-          stepId: 'L02-M04:S04', kind: 'perform-action', prompt: '把外套接过来',
-          characterEntityIds: ['second-returner', 'child'],
-          entityIds: ['coat'], targetEntityIds: ['child'],
-          answerRule: { type: 'perform-action', action: 'receive', entityId: 'coat', targetEntityId: 'child' }
+          stepId: 'L02-M04:S04', kind: 'perform-action', prompt: '把外套交给她',
+          characterEntityIds: ['second-returner', 'coat-owner'],
+          entityIds: ['coat'], targetEntityIds: ['coat-owner'],
+          answerRule: { type: 'perform-action', action: 'give', entityId: 'coat', targetEntityId: 'coat-owner' }
         },
         {
-          stepId: 'L02-M04:S05', kind: 'select-one', prompt: '收到外套，应该怎么说？',
-          characterEntityIds: ['second-returner', 'child'],
+          stepId: 'L02-M04:S05', kind: 'select-one', prompt: '她收到外套，应该怎么说？',
+          characterEntityIds: ['second-returner', 'coat-owner'],
           optionSourceRefs: ['L01-D07', 'L01-D04'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D07' },
           feedbackAudioSourceRef: 'L01-D07', gate: AUDIO_ENDED_GATE,
           support: [...EXPRESSION_SUPPORT]
         }
       ],
-      requiredFactIds: ['four-clothes-word-form-cells', 'coat-question-ended', 'coat-confirmed', 'coat-received', 'coat-thanks'],
-      checkpointFacts: ['claim-record-2', 'coat-with-child']
+      requiredFactIds: ['four-clothes-word-form-cells', 'coat-question-ended', 'coat-confirmed', 'coat-returned', 'coat-thanks'],
+      checkpointFacts: ['claim-record-2', 'coat-with-owner']
     }),
     nceMicrotask({
       microtaskId: 'L02-M05',
@@ -1014,7 +1017,7 @@
       title: '三案合闸',
       stepLabel: '整理室 · 7 / 7',
       sceneMode: 'station-opening',
-      characterEntityIds: ['first-claimant', 'second-returner', 'third-claimant'],
+      characterEntityIds: ['first-claimant', 'coat-owner', 'third-claimant'],
       prompt: '三份记录已经就位，亲手开张',
       completedFeedback: '星灯失物招领站正式开张！今天的建筑已经保存。',
       nextCue: { entityId: 'opening-lever', label: '查看今日建设' },

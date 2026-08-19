@@ -172,9 +172,9 @@ test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actio
     'L02-M02:S07': '听听她拿回手表后怎么说',
     'L02-M03:S01': '衣罩里是什么？拉开看看',
     'L02-M04:S01': '看单词，找到对应的衣物',
-    'L02-M04:S03': '这是你的外套，应该怎么回答？',
-    'L02-M04:S04': '把外套接过来',
-    'L02-M04:S05': '收到外套，应该怎么说？',
+    'L02-M04:S03': '她认出了自己的外套，应该怎么回答？',
+    'L02-M04:S04': '把外套交给她',
+    'L02-M04:S05': '她收到外套，应该怎么说？',
     'L02-M05:S01': '这两把钥匙会打开什么？',
     'L02-M06:S01': '看单词，找到对应的钥匙',
     'L02-M06:S02': '你想先帮哪把钥匙找主人？',
@@ -271,7 +271,7 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
       assetFallbackSrc: entities[entityId].assetFallbackSrc
     }, manAsset, entityId);
   }
-  for (const entityId of ['handbag-owner', 'first-claimant', 'third-claimant']) {
+  for (const entityId of ['handbag-owner', 'first-claimant', 'coat-owner', 'third-claimant']) {
     assert.deepEqual({
       entityKind: entities[entityId].entityKind,
       voiceRole: entities[entityId].voiceRole,
@@ -314,11 +314,11 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
   assert.deepEqual(tasks.get('L02-M02').steps.slice(1).map(step => step.characterEntityIds),
     Array.from({ length: 6 }, () => ['station-keeper', 'first-claimant']));
   assert.deepEqual(tasks.get('L02-M04').steps.slice(1).map(step => step.characterEntityIds),
-    Array.from({ length: 4 }, () => ['second-returner', 'child']));
+    Array.from({ length: 4 }, () => ['second-returner', 'coat-owner']));
   assert.deepEqual(tasks.get('L02-M06').steps.slice(1).map(step => step.characterEntityIds),
     Array.from({ length: 7 }, () => ['station-keeper', 'third-claimant']));
   assert.deepEqual(tasks.get('L02-M07').presentation.characterEntityIds,
-    ['first-claimant', 'second-returner', 'third-claimant']);
+    ['first-claimant', 'coat-owner', 'third-claimant']);
 });
 
 test('microtask v2 catalog validation rejects imperative answers and forged result identities', () => {

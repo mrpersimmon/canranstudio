@@ -150,9 +150,11 @@ test('the local candidate voice pack covers every catalog audio identity and sta
     assert.match(file.sha256, /^[a-f0-9]{64}$/);
     assert.equal(file.reviewStatus, 'unreviewed-candidate');
     assert.ok(file.durationMs > 500);
-    const stat = await fs.stat(path.join(ROOT, file.path.replace(/^\//, '')));
+    const absolutePath = path.join(ROOT, file.path.replace(/^\//, ''));
+    const [stat, bytes] = await Promise.all([fs.stat(absolutePath), fs.readFile(absolutePath)]);
     assert.equal(stat.size, file.bytes);
     assert.ok(stat.size > 10_000);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256);
   }
 
   assert.equal(unit.experience.ambientAudioSrc, undefined);
@@ -175,13 +177,13 @@ test('the Lesson 1 dialogue voice pack follows the textbook speakers through the
     ['L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07']
       .map(sourceId => [sourceId, sources[sourceId].speaker, voiceBySource.get(sourceId)]),
     [
-      ['L01-D01', 'man', 'am_michael'],
-      ['L01-D02', 'woman', 'af_heart'],
-      ['L01-D03', 'man', 'am_michael'],
-      ['L01-D04', 'woman', 'af_heart'],
-      ['L01-D05', 'man', 'am_michael'],
-      ['L01-D06', 'woman', 'af_heart'],
-      ['L01-D07', 'woman', 'af_heart']
+      ['L01-D01', 'man', 'Reed'],
+      ['L01-D02', 'woman', 'Samantha'],
+      ['L01-D03', 'man', 'Reed'],
+      ['L01-D04', 'woman', 'Samantha'],
+      ['L01-D05', 'man', 'Reed'],
+      ['L01-D06', 'woman', 'Samantha'],
+      ['L01-D07', 'woman', 'Samantha']
     ]
   );
 });
@@ -209,5 +211,40 @@ test('child-rejected clothing pronunciations cannot return to the local voice pa
       reason: 'child-playtest-pronunciation-rejection',
       rejectedSha256
     });
+  }
+});
+
+test('the complete local candidate uses one declared en-US voice system after repeated Kokoro rejection', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const manifest = JSON.parse(await fs.readFile(
+    path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
+    'utf8'
+  ));
+  const authoredItems = [
+    ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
+    ...Object.values(unit.authoredContent)
+  ].filter(item => item.audioSrc);
+  const itemById = new Map(authoredItems.map(item => [item.sourceId || item.contentId, item]));
+
+  assert.equal(manifest.packId, 'nce-u01-macos-say-candidate-v3');
+  assert.deepEqual(manifest.engine, {
+    name: 'macOS say',
+    locale: 'en-US',
+    maleVoice: 'Reed',
+    femaleAndWordVoice: 'Samantha',
+    outputUseStatus: 'local-poc-only-requires-review'
+  });
+  assert.equal(manifest.replacesRejectedPackId, 'nce-u01-local-candidate-v2');
+
+  for (const file of manifest.files) {
+    const item = itemById.get(file.sourceId);
+    const expectedVoice = item.speaker === 'man' || item.kind === 'derived-expression'
+      ? 'Reed'
+      : 'Samantha';
+    assert.equal(file.engineId, 'macOS-say', file.sourceId);
+    assert.equal(file.locale, 'en-US', file.sourceId);
+    assert.equal(file.voiceId, expectedVoice, file.sourceId);
+    assert.ok(Number.isInteger(file.rateWpm), file.sourceId);
+    assert.equal(Object.hasOwn(file, 'speed'), false, file.sourceId);
   }
 });
