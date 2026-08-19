@@ -133,6 +133,9 @@ test('earned case facts appear automatically and each milestone keeps one child 
   assert.deepEqual(tasks.get('L01-M01').steps.map(step => step.stepId), [
     'L01-M01:S01', 'L01-M01:S02', 'L01-M01:S03'
   ]);
+  assert.deepEqual(tasks.get('L01-M01').persistence.checkpointFacts, [
+    'handbag-owner-identified', 'case-clue-owner'
+  ]);
   assert.deepEqual(tasks.get('L01-M05').steps.map(step => step.stepId), ['L01-M05:S02']);
   assert.deepEqual(tasks.get('L01-M05').steps[0].preconditionFactIds, [
     'case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'
@@ -152,6 +155,7 @@ test('Lesson 1 and Lesson 2 prompts use child questions and concrete story actio
     .flatMap(task => task.steps)
     .map(step => [step.stepId, step.prompt]));
   const expected = {
+    'L01-M01:S02': '这是谁的手提包？找到它的主人',
     'L01-M02:S03': '想问手提包是不是她的，应该怎么说？',
     'L01-M02:S04': '听听他怎么问',
     'L01-M03:S01': '她没听清，应该怎么说？',
@@ -192,9 +196,9 @@ test('Lesson 1 and Lesson 2 correction copy matches the action the child is taki
     .map(step => [step.stepId, step]));
 
   assert.deepEqual(steps.get('L01-M01:S02').support, [
-    '看看物品和人物，想想应该交给谁。',
-    '跟着刚才的对话，再找一次正确的人。',
-    '小猫陪你再看一遍，然后由你自己完成。'
+    '回想一下，最后是谁说“对，是我的”。',
+    '看看两个人，谁确认了这是自己的手提包？',
+    '小猫陪你再看一遍对话，最后由你自己找到主人。'
   ]);
   assert.deepEqual(steps.get('L01-M02:S01').support, [
     '看看现在发生了什么，再想想该说哪句。',
@@ -331,7 +335,7 @@ test('microtask v2 catalog validation rejects imperative answers and forged resu
     unit.beats[1].microtasks[0].steps[1].challengeSourceRefs[0] = 'L02-W99';
   }), /L02-M01:S02.*unknown source L02-W99/i);
   assert.match(message(unit => {
-    unit.beats[0].microtasks[0].steps[1].targetEntityIds[1] = 'unknown-recipient';
+    unit.beats[0].microtasks[0].steps[1].optionEntityIds[1] = 'unknown-recipient';
   }), /L01-M01:S02.*unknown entity unknown-recipient/i);
   assert.match(message(unit => {
     unit.beats[0].microtasks[0].presentation.characterEntityIds[0] = 'unknown-character';

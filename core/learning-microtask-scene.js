@@ -122,6 +122,7 @@
     function correctFeedbackCopy(stepId) {
       const kind = stepById(stepId)?.kind;
       if (['match-entity', 'match-entity-batch'].includes(kind)) return '找对了！';
+      if (kind === 'select-entity') return '找到主人了！';
       if (kind === 'select-one') return '这句话正合适！';
       if (['place-in-slot', 'ordered-blocks'].includes(kind)) return '问句排好了！';
       return '完成啦！';
@@ -360,11 +361,14 @@
 
     function sceneCharacter(entityId, snapshot, step) {
       const item = entity(entityId);
-      const targetable = step?.kind === 'perform-action'
-        && (step.targetEntityIds || []).includes(entityId);
-      const tag = targetable ? 'button' : 'div';
-      const action = targetable
-        ? ` type="button" data-action="select-target" data-value="${escapeHtml(entityId)}"`
+      const targetable = (step?.kind === 'perform-action'
+        && (step.targetEntityIds || []).includes(entityId));
+      const selectable = step?.kind === 'select-entity'
+        && (step.optionEntityIds || []).includes(entityId);
+      const interactive = targetable || selectable;
+      const tag = interactive ? 'button' : 'div';
+      const action = interactive
+        ? ` type="button" data-action="${selectable ? 'select-entity' : 'select-target'}" data-value="${escapeHtml(entityId)}"`
         : '';
       const active = item.voiceRole && item.voiceRole === activeSpeakerRole(snapshot);
       return `<${tag} class="scene-character scene-character--${escapeHtml(item.dialogueSide || 'center')}${active ? ' is-active-speaker' : ''}"${action} data-entity-id="${escapeHtml(entityId)}" data-entity-kind="character" data-dialogue-side="${escapeHtml(item.dialogueSide || 'center')}" data-speaker-role="${escapeHtml(item.voiceRole || '')}">
@@ -383,7 +387,7 @@
       const action = childIsTarget
         ? ` type="button" data-action="select-target" data-value="${escapeHtml(childTargetId)}"`
         : '';
-      return `<${tag} class="scene-companion"${action} data-entity-id="cat-guide" data-entity-kind="character" data-character-identity="explorer-cat">
+      return `<${tag} class="scene-companion scene-companion--featured"${action} data-entity-id="cat-guide" data-entity-kind="character" data-character-identity="explorer-cat">
         ${entityPicture(item)}
         <span class="scene-companion__name">${escapeHtml(item.title)}</span>
       </${tag}>`;
@@ -609,6 +613,10 @@
       </div>`;
     }
 
+    function entityChoiceResponse() {
+      return '<div class="action-stage"><p class="action-stage__hint">点场景中的人物</p></div>';
+    }
+
     function orderedBlocksResponse(snapshot, step) {
       const selectedCase = ui.selectedCaseByTask[snapshot.microtaskId];
       const nounRef = entity(selectedCase).sourceRef;
@@ -628,6 +636,7 @@
       if (step.kind === 'explore-batch') return exploreResponse(snapshot, step);
       if (['match-entity', 'match-entity-batch'].includes(step.kind)) return matchResponse(snapshot, step);
       if (step.kind === 'select-one') return selectOneResponse(step);
+      if (step.kind === 'select-entity') return entityChoiceResponse();
       if (step.kind === 'perform-action') return actionResponse(snapshot, step, sceneEntityIds);
       if (step.kind === 'place-in-slot') return slotResponse(step);
       if (step.kind === 'select-case') return caseResponse(step);
@@ -642,6 +651,13 @@
         ? `<img src="${escapeHtml(cat.assetSrc)}" alt="">`
         : `<span aria-hidden="true">${uiIcon('star-fill')}</span>`;
       return `<aside class="feedback-bubble" data-tone="${escapeHtml(ui.feedback.tone)}" role="status" aria-live="polite">${image}<p>${escapeHtml(ui.feedback.message)}</p></aside>`;
+    }
+
+    function milestoneCompanion(label) {
+      const item = entity('cat-guide');
+      return `<div class="milestone-companion" data-character-identity="explorer-cat" role="img" aria-label="${escapeHtml(label)}">
+        ${entityPicture(item)}
+      </div>`;
     }
 
     function commonShell(body, snapshot) {
@@ -741,8 +757,11 @@
         ...(task.presentation?.characterEntityIds || []),
         ...(step?.characterEntityIds || []),
         ...(step?.targetEntityIds || []),
-        ...((step?.kind === 'select-case') ? (step.optionEntityIds || []) : [])
+        ...((['select-case', 'select-entity'].includes(step?.kind)) ? (step.optionEntityIds || []) : [])
       ])].filter(entityId => unit.entities?.[entityId]?.entityKind === 'character');
+      const showSceneCompanion = personIds.some(entityId => (
+        entity(entityId).characterIdentityId === 'explorer-cat'
+      ));
       const seenCharacterIdentities = new Set(['explorer-cat']);
       const adultEntityIds = personIds.filter(entityId => {
         const identityId = entity(entityId).characterIdentityId || entityId;
@@ -758,15 +777,15 @@
             : responsePanel(snapshot, step, sceneEntityIds));
       return commonShell(`<div class="scene-heading">
           <div><p>${escapeHtml(task.presentation.stepLabel)}</p><h1>${escapeHtml(task.presentation.title)}</h1></div>
-          ${hearts(snapshot, step)}
         </div>
         ${adultEntityIds.length ? `<p class="stage-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>` : ''}
         <div class="scene-people scene-cast${adultEntityIds.length ? ' scene-cast--with-adults' : ''}" data-scene-mode="${escapeHtml(task.presentation.sceneMode || '')}" aria-label="故事人物">
           ${adultEntityIds.map(id => sceneCharacter(id, snapshot, step)).join('')}
-          ${sceneCompanion(snapshot, step)}
+          ${showSceneCompanion ? sceneCompanion(snapshot, step) : ''}
         </div>
         ${sceneEntityIds.length ? `<div class="scene-props" aria-label="故事物品">${sceneEntityIds.map(id => sceneProp(id, step)).join('')}</div>` : ''}
         <section class="mission-console${adultEntityIds.length ? ' mission-console--with-cast' : ''}">
+          ${hearts(snapshot, step)}
           <p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>
           <div class="interaction-space" data-response-fields>${body}</div>
         </section>
@@ -776,6 +795,7 @@
     function chapterMarkup(snapshot) {
       const chapter = unit.experience?.chapterStop || {};
       return commonShell(`<div class="milestone-card chapter-card">
+        ${milestoneCompanion('探险小猫和你一起庆祝案件归档')}
         <div class="milestone-lamp" aria-hidden="true"><span>★</span></div>
         <p class="kicker">${escapeHtml(ui.previewMode ? '阶段预览' : chapter.kicker)}</p>
         <h1>${escapeHtml(chapter.title)}</h1>
@@ -794,6 +814,7 @@
     function completionMarkup(snapshot) {
       const complete = unit.experience?.completion || {};
       return commonShell(`<div class="milestone-card completion-card">
+        ${milestoneCompanion('探险小猫和你一起庆祝小站开张')}
         <div class="opening-stars" aria-hidden="true"><i>✦</i><i>★</i><i>✦</i></div>
         <p class="kicker">${escapeHtml(ui.previewMode ? '阶段预览完成' : complete.kicker)}</p>
         <h1>${escapeHtml(complete.title)}</h1>
@@ -838,6 +859,7 @@
         return { sourceRef: snapshot.challengeRef, entityId: ui.selectedEntityId };
       }
       if (step.kind === 'select-one') return { sourceRef: ui.selectedSourceRef };
+      if (step.kind === 'select-entity') return { entityId: ui.selectedEntityId };
       if (step.kind === 'select-case') return { entityId: ui.selectedEntityId };
       if (step.kind === 'place-in-slot') {
         return { entityId: ui.selectedEntityId, slotId: step.answerRule.slotId };
@@ -948,6 +970,10 @@
           return;
         }
         if (step?.kind === 'place-in-slot') {
+          dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
+          return;
+        }
+        if (step?.kind === 'select-entity') {
           dispatch({ type: 'response/submit', response: responseFor(snapshot, step) });
           return;
         }

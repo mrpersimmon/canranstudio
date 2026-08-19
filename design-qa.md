@@ -12,11 +12,11 @@
 
 ## Full-view comparison evidence
 
-The final desktop comparison places the normalized selected ImageGen design and browser implementation in one image. Both use the same wide walnut-and-brass lost-and-found stage, large adult characters framing a centered cream transcript, a visible counter handbag, one explorer cat, midnight-blue ambience, teal accents, and a restrained course header. The implementation intentionally keeps the textbook's real seven-turn order instead of reproducing the generated mock's reordered sample lines.
+The final desktop comparison places the normalized selected ImageGen design and browser implementation in one image. Both use the same wide walnut-and-brass lost-and-found stage, large adult characters framing a centered cream transcript, a visible counter handbag, midnight-blue ambience, teal accents, and a restrained course header. A later child playtest intentionally overrides the mock's always-present explorer cat: ordinary dialogue and word tasks now keep the adult story focus, while the same cat returns at a much larger scale only for partner rescue, child-role actions, and milestone celebrations. The implementation also keeps the textbook's real seven-turn order instead of reproducing the generated mock's reordered sample lines.
 
 ## Focused-region evidence
 
-A separate crop was not required: at `1440 × 1024`, the full-view comparison keeps adult faces, transparent asset edges, speaker labels, English line typography, the play control, handbag, counter, and cat readable at inspection scale. Active-speaker highlighting was checked in the browser and the first line plus left adult changed state together. The mobile screenshot separately verifies the responsive cast, transcript, tap targets, and no document scrolling.
+A separate crop was not required: at `1440 × 1024`, the full-view comparison keeps adult faces, transparent asset edges, speaker labels, English line typography, the play control, handbag, and counter readable at inspection scale. Active-speaker highlighting was checked in the browser and the first line plus left adult changed state together. The playtest follow-up evidence separately verifies the no-cat dialogue state, the enlarged functional cat on mobile, and desktop/mobile milestone placement without clipping or document scrolling.
 
 ## Comparison history
 
@@ -35,10 +35,17 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - P2 icon fidelity: settings, play, replay, arrow, and heart controls still used character glyphs. Fixed with local Bootstrap Icons SVG assets and a committed license; no external runtime dependency was introduced.
 - Post-fix browser evidence shows no remaining P0, P1, or P2 difference. The implementation preserves the selected composition while respecting catalog truth, responsive constraints, and real course interactions.
 
+### Pass 4 — passed after child playtest fixes
+
+- P1 story causality: `L01-M01` reused the same item-to-person handoff later needed by `L01-M03`, so children experienced one handbag being returned twice. The first-listen comprehension action now asks only for the owner; the handbag stays passive until the single real return in `L01-M03`.
+- P1 companion hierarchy: the explorer cat had been injected into every mission and became a tiny sticker beside adult feet. Ordinary dialogue and word scenes now omit it. Catalog-authored child-role scenes, partner rescue, and chapter/unit rewards show the same approved cat at a featured scale.
+- P2 responsive polish: the owner-choice paper was mostly empty, attempt hearts crossed an adult face, and mobile adult-scene headings extended beyond the viewport. The choice paper is compact, hearts live inside the task console, and mobile headings are centered with bounded geometry.
+- Accepted evidence: `docs/designs/lesson1-2-design-qa/no-decorative-cat-desktop-20260819.png`, `featured-cat-mobile-20260819.png`, `chapter-reward-desktop-20260819.png`, and `chapter-reward-mobile-20260819.png`. Browser console errors and warnings were empty.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.
-- Spacing and layout rhythm: adults frame rather than sit beneath the transcript; the panel, prompt, handbag, counter, and cat have separate readable zones; desktop and mobile screenshots show no viewport overflow.
+- Spacing and layout rhythm: adults frame rather than sit beneath the transcript; the panel, prompt, handbag, and counter have separate readable zones. When the cat has a real role it receives its own featured zone; desktop and mobile screenshots show no viewport overflow.
 - Colors and tokens: midnight navy, warm walnut, brass, cream paper, teal interaction, and rose/teal speaker accents map to the selected visual and existing product tokens.
 - Image quality and asset fidelity: adult identities match the supplied cast, handbag and wide background are real raster assets, transparent PNG masters retain alpha, and AVIF/WebP derivatives show no visible green halo at rendered scale.
 - Copy and content: all English remains catalog-derived; visible speaker names clarify who speaks; the real textbook order is preserved rather than copying incorrect generated sample ordering.

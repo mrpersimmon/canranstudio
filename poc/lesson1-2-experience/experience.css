@@ -519,6 +519,7 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
 .heart-row span { opacity: .18; font-size: 1.15rem; transition: opacity .3s ease, transform .3s ease; }
 .heart-row span .ui-icon { filter: invert(55%) sepia(44%) saturate(1331%) hue-rotate(314deg) brightness(101%) contrast(90%); }
 .heart-row .is-full { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 117, 112, .75)); }
+.mission-console > .heart-row { width: max-content; margin: 0 auto 10px; }
 
 .scene-people {
   position: absolute;
@@ -590,6 +591,12 @@ button.scene-character:focus-visible { filter: brightness(1.1) saturate(1.05) dr
   border: 0;
   background: transparent;
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, .45));
+}
+.scene-companion--featured {
+  left: auto;
+  right: clamp(24px, 8vw, 130px);
+  width: clamp(170px, 17vw, 230px);
+  height: clamp(195px, 20vw, 270px);
 }
 .scene-companion img { width: 100%; height: 100%; object-fit: contain; animation: cat-bob 2.4s ease-in-out infinite; }
 .scene-companion__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -1123,6 +1130,19 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
 .feedback-bubble[data-tone='danger'] { border-color: #8a3939; background: #fff0ed; }
 
 .milestone-card { width: min(720px, 92vw); }
+.milestone-companion {
+  position: absolute;
+  z-index: 2;
+  left: clamp(-156px, -11vw, -112px);
+  bottom: -22px;
+  width: clamp(150px, 15vw, 214px);
+  height: clamp(180px, 18vw, 250px);
+  pointer-events: none;
+  filter: drop-shadow(0 13px 10px rgba(42, 24, 19, .34));
+  animation: milestone-cat-cheer 1.35s ease-in-out infinite alternate;
+}
+.milestone-companion picture,
+.milestone-companion img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .milestone-lamp {
   position: relative;
   width: 102px;
@@ -1170,6 +1190,7 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
 @keyframes bubble-pop { from { opacity: 0; transform: translateY(12px) scale(.9); } }
 @keyframes lamp-on { to { box-shadow: 0 0 62px 24px rgba(255, 211, 103, .72), 0 7px 0 #70471e; } }
 @keyframes star-rise { to { transform: translateY(-9px) rotate(8deg); } }
+@keyframes milestone-cat-cheer { to { transform: translateY(-9px) rotate(-1.5deg); } }
 
 @media (max-width: 680px) {
   .station-header { grid-template-columns: minmax(0, 1fr) 104px auto; gap: 8px; }
@@ -1185,6 +1206,8 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
     width: calc(100vw - 130px);
     max-width: calc(100vw - 130px);
     justify-content: center;
+    text-align: center;
+    transform: translateX(-50%);
   }
   .stage-prompt { display: none; }
   .scene-character {
@@ -1198,6 +1221,7 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
   .scene-character--right { right: 0; }
   .scene-character__name { bottom: 3%; min-width: 76px; padding: 4px 8px; font-size: .68rem; }
   .scene-companion { left: calc(50% - 92px); bottom: auto; top: 184px; width: 68px; height: 76px; }
+  .scene-companion--featured { left: auto; right: 8px; top: 150px; width: 108px; height: 124px; }
   .mission-console { width: 100%; max-height: 68vh; margin-top: 104px; padding: 17px 12px; overflow: auto; border-radius: 24px 24px 14px 14px; }
   .mission-console.mission-console--with-cast { width: 100%; max-height: calc(100vh - 360px); margin-top: 280px; }
   .mission-prompt { position: sticky; top: -17px; z-index: 2; margin: -17px -12px 14px; padding: 14px 12px 10px; background: linear-gradient(#fff9e8 76%, transparent); }
@@ -1215,6 +1239,14 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
   }
   .scene-props { top: 184px; bottom: auto; }
   .scene-prop { width: 78px; height: 78px; }
+  .milestone-companion {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 120px;
+    height: 136px;
+    margin: -28px auto 4px;
+  }
   .mission-console.mission-console--with-cast:has(.action-stage) {
     width: min(350px, calc(100vw - 28px));
     max-height: none;
@@ -1274,6 +1306,7 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
 @media (max-height: 690px) {
   .scene-character { top: 42px; width: 104px; height: 158px; }
   .scene-companion { left: calc(50% - 82px); top: 136px; width: 56px; height: 64px; }
+  .scene-companion--featured { left: auto; right: 6px; top: 112px; width: 92px; height: 104px; }
   .mission-console.mission-console--with-cast { max-height: calc(100vh - 270px); margin-top: 202px; }
   .scene-props { top: 132px; }
   .scene-prop { width: 66px; height: 66px; }

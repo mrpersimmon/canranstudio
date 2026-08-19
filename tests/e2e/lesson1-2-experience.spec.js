@@ -163,12 +163,31 @@ test('Lesson 1 opens as a seven-line story listen and follows the active line', 
   await expect(page.locator('.dialogue-line').nth(1)).toHaveClass(/is-current/);
 });
 
-test('the guide uses the approved front-facing pose in the first story scene', async ({ page }) => {
+test('ordinary story scenes do not park a decorative cat beside the adult cast', async ({ page }) => {
   await openFresh(page);
   await enterFirstMission(page);
-  const guide = page.locator('.scene-people [data-character-identity="explorer-cat"] img');
-  await expect(guide).toBeVisible();
-  await expect(guide).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
+  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 6：随身物品上架' }).click();
+  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
+});
+
+test('the explorer cat returns visibly when partner rescue has a real job', async ({ page }) => {
+  await installInstantAudio(page);
+  await openFresh(page);
+  await page.locator('[data-action="toggle-settings"]').click();
+  await page.getByRole('button', { name: '阶段 2：礼貌问一问' }).click();
+
+  const wrongChoice = page.getByRole('button', { name: 'Thank you very much.' });
+  await wrongChoice.click();
+  await wrongChoice.click();
+  await wrongChoice.click();
+
+  const rescue = page.locator('.feedback-bubble[data-tone="partner"]');
+  await expect(rescue).toBeVisible();
+  await expect(rescue.locator('img')).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
+  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
 });
 
 test('every standalone English audio prompt keeps its catalog text visible', async ({ page }) => {
@@ -243,6 +262,10 @@ test('illustrated characters stay present across dialogue, role switch, and stat
         return { top: box.top, right: box.right, bottom: box.bottom, left: box.left };
       }),
     consoleTop: document.querySelector('.mission-console').getBoundingClientRect().top,
+    heading: (() => {
+      const box = document.querySelector('.scene-heading').getBoundingClientRect();
+      return { left: box.left, right: box.right };
+    })(),
     headerBottom: document.querySelector('.station-header').getBoundingClientRect().bottom,
     viewportWidth: window.innerWidth
   }));
@@ -252,6 +275,8 @@ test('illustrated characters stay present across dialogue, role switch, and stat
     expect(box.right).toBeLessThanOrEqual(castLayout.viewportWidth);
     expect(box.bottom).toBeLessThanOrEqual(castLayout.consoleTop + 8);
   }
+  expect(castLayout.heading.left).toBeGreaterThanOrEqual(0);
+  expect(castLayout.heading.right).toBeLessThanOrEqual(castLayout.viewportWidth);
 
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
@@ -264,7 +289,7 @@ test('illustrated characters stay present across dialogue, role switch, and stat
   await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
   await expect(page.locator('.scene-people [data-entity-kind="character"]:not([data-character-identity="explorer-cat"])')).toHaveCount(3);
   await expect(page.locator('.scene-people [data-entity-kind="character"]:not([data-character-identity="explorer-cat"]) img')).toHaveCount(3);
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(1);
+  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
 });
 
 test('a phrase tap speaks immediately and keeps the sentence visible', async ({ page }) => {
@@ -318,12 +343,21 @@ test('a word-form object tap submits immediately and keeps the spoken word visib
 
 test('a physical action completes from the item and character taps without confirmation', async ({ page }) => {
   await installManualAudio(page);
+  await page.setViewportSize({ width: 390, height: 844 });
   await openFresh(page);
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
   await page.getByRole('button', { name: '播放英文' }).click();
   await page.evaluate(() => window.__finishCourseAudio());
-  await expect(page.getByRole('button', { name: '探险小猫' }).locator('img')).toBeVisible();
+  const explorer = page.getByRole('button', { name: '探险小猫' });
+  await expect(explorer.locator('img')).toBeVisible();
+  await expect(explorer).toHaveClass(/scene-companion--featured/);
+  const explorerSize = await explorer.evaluate(element => {
+    const box = element.getBoundingClientRect();
+    return { width: box.width, height: box.height };
+  });
+  expect(explorerSize.width).toBeGreaterThanOrEqual(100);
+  expect(explorerSize.height).toBeGreaterThanOrEqual(112);
   await page.getByRole('button', { name: '星灯探险徽章' }).click();
   await page.getByRole('button', { name: '探险小猫' }).click();
 
@@ -377,6 +411,10 @@ test('earned milestone facts appear automatically and one action finishes each s
   await expect(page.locator('[data-action="perform-direct"]')).toHaveAccessibleName('盖下印章');
   await page.locator('[data-action="perform-direct"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-status', 'chapter-stop');
+  const chapterCompanion = page.locator('.milestone-companion[data-character-identity="explorer-cat"]');
+  await expect(chapterCompanion).toBeVisible();
+  expect(await chapterCompanion.evaluate(element => element.getBoundingClientRect().width))
+    .toBeGreaterThanOrEqual(120);
 
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
@@ -385,9 +423,11 @@ test('earned milestone facts appear automatically and one action finishes each s
   await expect(page.locator('[data-action="perform-direct"]')).toHaveAccessibleName('拉下拉杆');
   await page.locator('[data-action="perform-direct"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-status', 'unit-built');
+  await expect(page.locator('.milestone-companion[data-character-identity="explorer-cat"]'))
+    .toBeVisible();
 });
 
-test('finding the handbag keeps its word visible and files it without another click', async ({ page }) => {
+test('the first listen identifies the owner without handing over the handbag', async ({ page }) => {
   await installManualAudio(page);
   await openFresh(page);
   await enterFirstMission(page);
@@ -395,8 +435,14 @@ test('finding the handbag keeps its word visible and files it without another cl
   for (let index = 0; index < 7; index += 1) {
     await page.evaluate(() => window.__finishCourseAudio());
   }
-  await clickValue(page, 'select-entity', 'handbag');
-  await clickValue(page, 'select-target', 'handbag-owner');
+  await expect(page.locator('.mission-prompt')).toHaveText('这是谁的手提包？找到它的主人');
+  await expect(page.locator('button[data-action="select-entity"][data-value="handbag"]')).toHaveCount(0);
+  await expect(page.locator('button[data-action="select-target"]')).toHaveCount(0);
+  await expect(page.locator('.mission-console > .heart-row')).toBeVisible();
+  await expect(page.locator('.scene-heading .heart-row')).toHaveCount(0);
+  expect(await page.locator('.mission-console').evaluate(element => element.getBoundingClientRect().height))
+    .toBeLessThanOrEqual(180);
+  await clickValue(page, 'select-entity', 'handbag-owner');
   await expect(page.locator('.feedback-audio-state')).toBeVisible();
   await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
   expect(await page.evaluate(() => window.__correctCueStarts)).toBe(1);
@@ -533,8 +579,7 @@ test('real ended callbacks gate progress and the next microtask is restored afte
   await page.evaluate(() => window.__finishCourseAudio());
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
 
-  await clickValue(page, 'select-entity', 'handbag');
-  await clickValue(page, 'select-target', 'handbag-owner');
+  await clickValue(page, 'select-entity', 'handbag-owner');
   await page.evaluate(() => window.__finishCourseAudio());
   await clickValue(page, 'select-entity', 'handbag');
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
@@ -585,8 +630,7 @@ test('a child can cancel or confirm restarting mid-unit without resurrecting bac
   await page.locator('[data-action="audio-play"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
 
-  await clickValue(page, 'select-entity', 'handbag');
-  await clickValue(page, 'select-target', 'handbag-owner');
+  await clickValue(page, 'select-entity', 'handbag-owner');
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S03');
   await clickValue(page, 'select-entity', 'handbag');
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
@@ -617,8 +661,7 @@ test('the local stage navigator previews any microtask without changing durable 
   await enterFirstMission(page);
   await page.locator('[data-action="audio-play"]').click();
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
-  await clickValue(page, 'select-entity', 'handbag');
-  await clickValue(page, 'select-target', 'handbag-owner');
+  await clickValue(page, 'select-entity', 'handbag-owner');
   await clickValue(page, 'select-entity', 'handbag');
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
   const durableBefore = await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY);

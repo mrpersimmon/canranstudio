@@ -155,7 +155,7 @@ test('Lesson 1 full listening advances only after every active real audio ended 
 
   assert.deepEqual(runtime.dispatch({
     type: 'response/submit',
-    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+    response: { entityId: 'handbag-owner' }
   }).effects, []);
   const playing = runtime.dispatch({ type: 'audio/play' });
   const requestId = playing.snapshot.audio.requestId;
@@ -190,7 +190,7 @@ test('Lesson 1 turns three wrong actions into teaching support and still require
   finishActiveNceAudio(runtime);
   const wrong = {
     type: 'response/submit',
-    response: { action: 'give', entityId: 'handbag', targetEntityId: 'station-keeper' },
+    response: { entityId: 'station-keeper' },
     correct: true
   };
 
@@ -214,7 +214,7 @@ test('Lesson 1 turns three wrong actions into teaching support and still require
 
   const corrected = runtime.dispatch({
     type: 'response/submit',
-    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+    response: { entityId: 'handbag-owner' }
   });
   assert.equal(corrected.snapshot.stepId, 'L01-M01:S03');
   assert.equal(corrected.snapshot.phase, 'audio-playing');
@@ -232,7 +232,7 @@ test('Lesson 1 M01 persists after one word sound while the visible label files a
   finishActiveNceAudio(runtime);
   runtime.dispatch({
     type: 'response/submit',
-    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+    response: { entityId: 'handbag-owner' }
   });
   finishActiveNceAudio(runtime);
   const completed = runtime.dispatch({
@@ -267,7 +267,7 @@ test('Lesson 1 M01 persists after one word sound while the visible label files a
   assert.deepEqual(ledger.events[0].audioContactRefs, [
     'L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07', 'L01-W07'
   ]);
-  assert.deepEqual(ledger.events[0].storyFacts, ['handbag-returned', 'case-clue-owner']);
+  assert.deepEqual(ledger.events[0].storyFacts, ['handbag-owner-identified', 'case-clue-owner']);
   assert.ok(!completed.effects.some(effect => effect.type === 'landmark/build-stage'));
 });
 
@@ -435,7 +435,7 @@ test('microtask v2 audio failure needs explicit fallback and never forges an aud
   runtime.dispatch({ type: 'audio/continue-without-sound' });
   runtime.dispatch({
     type: 'response/submit',
-    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+    response: { entityId: 'handbag-owner' }
   });
 
   playing = runtime.dispatch({ type: 'audio/play' });

@@ -402,6 +402,11 @@
     '跟着刚才的对话，再找一次正确的人。',
     '小猫陪你再看一遍，然后由你自己完成。'
   ];
+  const OWNER_SUPPORT = [
+    '回想一下，最后是谁说“对，是我的”。',
+    '看看两个人，谁确认了这是自己的手提包？',
+    '小猫陪你再看一遍对话，最后由你自己找到主人。'
+  ];
   const EXPRESSION_SUPPORT = [
     '看看现在发生了什么，再想想该说哪句。',
     '想一想：现在是叫住别人、请人再说，还是表示感谢？',
@@ -443,7 +448,7 @@
           stepId: 'L01-M01:S02',
           sourceRef: 'L01-D06',
           channel: 'meaning',
-          evidenceMode: 'ownership-exchange',
+          evidenceMode: 'owner-identification',
           variantId: 'handbag-owner'
         }),
         t1Result('L01-M01', 'L01-M01:S03', 'L01-W07', 'audio-form-supported')
@@ -459,17 +464,11 @@
         },
         {
           stepId: 'L01-M01:S02',
-          kind: 'perform-action',
-          prompt: '把包交给主人',
-          entityIds: ['handbag'],
-          targetEntityIds: ['station-keeper', 'handbag-owner'],
-          answerRule: {
-            type: 'perform-action',
-            action: 'give',
-            entityId: 'handbag',
-            targetEntityId: 'handbag-owner'
-          },
-          support: [...ACTION_SUPPORT]
+          kind: 'select-entity',
+          prompt: '这是谁的手提包？找到它的主人',
+          optionEntityIds: ['station-keeper', 'handbag-owner'],
+          answerRule: { type: 'select-one', acceptedEntityIds: ['handbag-owner'] },
+          support: [...OWNER_SUPPORT]
         },
         {
           stepId: 'L01-M01:S03',
@@ -483,7 +482,7 @@
         }
       ],
       requiredFactIds: ['owner-chosen', 'handbag-audio-matched'],
-      checkpointFacts: ['handbag-returned', 'case-clue-owner']
+      checkpointFacts: ['handbag-owner-identified', 'case-clue-owner']
     }),
     nceMicrotask({
       microtaskId: 'L01-M02',
@@ -1954,7 +1953,7 @@
         { title: '把物品声音和英文词形连到正确物品', evidenceModes: ['audio-form-object-match', 'word-form-object-match'] },
         { title: '在需要引起注意时使用 Excuse me.', evidenceModes: ['polite-attention-choice'] },
         { title: '在没有听清时使用 Pardon?', evidenceModes: ['communication-repair-choice'] },
-        { title: '询问并确认物品归属', evidenceModes: ['ownership-exchange'] },
+        { title: '询问并确认物品归属', evidenceModes: ['ownership-exchange', 'owner-identification'] },
         { title: '在收到物品后礼貌致谢', evidenceModes: ['thanks-in-context'] }
       ],
       lessonContent: {

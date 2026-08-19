@@ -386,7 +386,7 @@ test('microtask v2 completion atomically stores checkpoint, contacts, story fact
   assert.equal(result.snapshot.revision, 1);
   assert.equal(projection.checkpoint.microtaskId, 'L01-M01');
   assert.deepEqual(projection.completedMicrotaskIds, ['L01-M01']);
-  assert.deepEqual(projection.storyFacts, ['handbag-returned', 'case-clue-owner']);
+  assert.deepEqual(projection.storyFacts, ['handbag-owner-identified', 'case-clue-owner']);
   assert.deepEqual(projection.sourceContacts['L01-D01'].contactModes, ['experienced', 'audio-ended']);
   assert.deepEqual(projection.sourceContacts['L01-W01'].contactModes, ['experienced']);
   assert.deepEqual(projection.targets['NCE-U01-T01'].variantCells['L01-W07:audio-form-supported'], {
