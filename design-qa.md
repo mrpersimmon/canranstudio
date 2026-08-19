@@ -80,12 +80,18 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - The user selected C as the only version without a special onset. Pack `nce-u01-kokoro-candidate-v3` now assigns `context-cropped-lexeme-v1` at speed 1.0 to all twenty-one standalone words while retaining `natural-utterance` for dialogue and complete questions.
 - Kokoro regeneration was observed to vary bytes even under the same recipe. The exact four C files the user heard for `coat`, `dress`, `skirt`, and `shirt` therefore remain the human-acceptance anchors and are pinned individually by SHA-256; the other seventeen context-rendered files remain unreviewed candidates.
 
+### Pass 11 — sampled first-session retrieval and illustrated object system
+
+- Direct playtest found that eleven words × two first-session channels produced twenty-two standalone checks and two thirds of all formative results. Catalog now keeps all eleven words exposed but freezes only eight first-session T1 results: audio-form `handbag / watch / shirt / skirt / house` and word-form `pencil / coat / car`; the other fourteen long-term cells move into adaptive review.
+- Ten emoji objects were replaced with separate built-in ImageGen transparent cutouts using the accepted stage background, handbag material quality, and first pen asset as style references. The existing handbag remains the eleventh item. Catalog owns all AVIF/WebP addresses; the runtime has no item-specific image mapping and no child-facing emoji fallback.
+- Desktop and 390×844 browser checks increased the old icon slot to preserve object detail while retaining one-viewport task geometry. Evidence: `docs/designs/lesson1-2-design-qa/item-art-stage8-desktop-20260820.png` and `item-art-stage8-mobile-20260820.png`. Automated checks cover all ten masters and twenty derivatives, eight sampled T1 cells, all eleven exposure refs, full twelve-task completion, and zero object emoji nodes.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.
 - Spacing and layout rhythm: adults frame rather than sit beneath the transcript; the panel, prompt, handbag, and counter have separate readable zones. When the cat has a real role it receives its own featured zone; desktop and mobile screenshots show no viewport overflow.
 - Colors and tokens: midnight navy, warm walnut, brass, cream paper, teal interaction, and rose/teal speaker accents map to the selected visual and existing product tokens.
-- Image quality and asset fidelity: adult identities match the supplied cast, handbag and wide background are real raster assets, transparent PNG masters retain alpha, and AVIF/WebP derivatives show no visible green halo at rendered scale.
+- Image quality and asset fidelity: adult identities match the supplied cast; handbag, ten generated textbook objects, and wide background are real raster assets; transparent PNG masters retain alpha, and AVIF/WebP derivatives show no visible halo at rendered scale.
 - Copy and content: all English remains catalog-derived; visible speaker names clarify who speaks; the real textbook order is preserved rather than copying incorrect generated sample ordering.
 - Icons: visible control icons use one local Bootstrap Icons family; the runtime makes no third-party request.
 - Accessibility: characters have visible names, current dialogue uses `aria-current`, controls keep semantic names and focus outlines, minimum tap targets are maintained, mobile has no document scroll, and reduced-motion behavior remains covered by the existing style contract.

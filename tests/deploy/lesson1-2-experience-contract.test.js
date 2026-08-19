@@ -70,6 +70,33 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
     assert.equal(stats.channels[3].min, 0, filename);
     assert.equal(stats.channels[3].max, 255, filename);
   }
+  const itemAssetBases = [
+    'item-pen-v1', 'item-pencil-v1', 'item-book-v1', 'item-watch-v1',
+    'item-coat-v1', 'item-dress-v1', 'item-skirt-v1', 'item-shirt-v1',
+    'item-car-key-v1', 'item-house-key-v1'
+  ];
+  for (const base of itemAssetBases) {
+    const masterPath = path.join(ROOT, 'poc/lesson1-2-experience/assets', `${base}.png`);
+    const master = sharp(masterPath);
+    const [masterMetadata, masterStats] = await Promise.all([master.metadata(), master.stats()]);
+    assert.deepEqual(
+      { width: masterMetadata.width, height: masterMetadata.height, hasAlpha: masterMetadata.hasAlpha },
+      { width: 1254, height: 1254, hasAlpha: true },
+      base
+    );
+    assert.equal(masterStats.channels[3].min, 0, base);
+    assert.equal(masterStats.channels[3].max, 255, base);
+    for (const extension of ['avif', 'webp']) {
+      const target = path.join(ROOT, 'poc/lesson1-2-experience/assets', `${base}.${extension}`);
+      const [metadata, stat] = await Promise.all([sharp(target).metadata(), fs.stat(target)]);
+      assert.deepEqual(
+        { width: metadata.width, height: metadata.height, hasAlpha: metadata.hasAlpha },
+        { width: 640, height: 640, hasAlpha: true },
+        `${base}.${extension}`
+      );
+      assert.ok(stat.size > 20_000, `${base}.${extension}`);
+    }
+  }
   const iconDir = path.join(ROOT, 'poc/lesson1-2-experience/assets/icons');
   for (const filename of [
     'gear-fill.svg', 'play-fill.svg', 'arrow-counterclockwise.svg',

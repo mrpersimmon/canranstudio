@@ -72,8 +72,17 @@ test('Lesson 1 and Lesson 2 preserve the complete textbook source ledger', () =>
   assert.ok(Array.from({ length: 7 }, (_, index) => (
     lesson1.sources[`L01-Z0${index + 1}`].coveragePolicy === 'optional'
   )).every(Boolean));
-  assert.ok(Object.values(lesson2.sources).filter(item => item.sourceKind === 'substitution-item')
-    .every(item => item.sourceRole === 'target' && item.coveragePolicy === 'evidence'));
+  const substitutionItems = Object.values(lesson2.sources)
+    .filter(item => item.sourceKind === 'substitution-item');
+  assert.ok(substitutionItems.every(item => item.sourceRole === 'target'));
+  assert.deepEqual(
+    substitutionItems.map(item => [item.text, item.coveragePolicy]),
+    [
+      ['pen', 'exposure'], ['pencil', 'evidence'], ['book', 'exposure'], ['watch', 'evidence'],
+      ['coat', 'evidence'], ['dress', 'exposure'], ['skirt', 'evidence'], ['shirt', 'evidence'],
+      ['car', 'evidence'], ['house', 'evidence']
+    ]
+  );
 
   assert.deepEqual(lesson2.sources['L02-E01'], {
     sourceId: 'L02-E01',
@@ -88,7 +97,7 @@ test('Lesson 1 and Lesson 2 preserve the complete textbook source ledger', () =>
   assert.equal(Object.isFrozen(lesson2), true);
 });
 
-test('Lesson 1 and Lesson 2 author twelve atomic microtasks and all twenty-two T1 channel cells', () => {
+test('Lesson 1 and Lesson 2 sample eight first-session word checks while exposing all eleven words', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const microtasks = unit.beats.flatMap(beat => beat.microtasks || []);
 
@@ -119,28 +128,21 @@ test('Lesson 1 and Lesson 2 author twelve atomic microtasks and all twenty-two T
   ));
   assert.deepEqual(t1Cells, [
     ['L01-W07', 'audio-form-supported', 'L01-M01'],
-    ['L02-W03', 'audio-form-supported', 'L02-M01'],
-    ['L02-W01', 'audio-form-supported', 'L02-M01'],
     ['L02-W04', 'audio-form-supported', 'L02-M01'],
-    ['L02-W02', 'audio-form-supported', 'L02-M01'],
-    ['L01-W07', 'word-form', 'L02-M02'],
-    ['L02-W04', 'word-form', 'L02-M02'],
     ['L02-W02', 'word-form', 'L02-M02'],
-    ['L02-W03', 'word-form', 'L02-M02'],
-    ['L02-W01', 'word-form', 'L02-M02'],
     ['L02-W08', 'audio-form-supported', 'L02-M03'],
-    ['L02-W05', 'audio-form-supported', 'L02-M03'],
-    ['L02-W06', 'audio-form-supported', 'L02-M03'],
     ['L02-W07', 'audio-form-supported', 'L02-M03'],
-    ['L02-W07', 'word-form', 'L02-M04'],
     ['L02-W05', 'word-form', 'L02-M04'],
-    ['L02-W06', 'word-form', 'L02-M04'],
-    ['L02-W08', 'word-form', 'L02-M04'],
     ['L02-W10', 'audio-form-supported', 'L02-M05'],
-    ['L02-W09', 'audio-form-supported', 'L02-M05'],
-    ['L02-W09', 'word-form', 'L02-M06'],
-    ['L02-W10', 'word-form', 'L02-M06']
+    ['L02-W09', 'word-form', 'L02-M06']
   ]);
+  assert.equal(new Set(t1Cells.map(([sourceRef]) => sourceRef)).size, t1Cells.length);
+  const exposedWords = new Set(microtasks.flatMap(task => task.exposureRefs || []));
+  assert.deepEqual(
+    ['L01-W07', ...Array.from({ length: 10 }, (_, index) => `L02-W${String(index + 1).padStart(2, '0')}`)]
+      .filter(sourceRef => !exposedWords.has(sourceRef)),
+    []
+  );
   assert.deepEqual(catalog.validate([structuredClone(unit)]), []);
 });
 
@@ -335,6 +337,30 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
     Array.from({ length: 7 }, () => ['station-keeper', 'third-claimant']));
   assert.deepEqual(tasks.get('L02-M07').presentation.characterEntityIds,
     ['first-claimant', 'coat-owner', 'third-claimant']);
+});
+
+test('all eleven textbook objects use illustrated project assets instead of emoji', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const expectedAssets = {
+    handbag: 'handbag-prop-v1',
+    pen: 'item-pen-v1',
+    pencil: 'item-pencil-v1',
+    book: 'item-book-v1',
+    watch: 'item-watch-v1',
+    coat: 'item-coat-v1',
+    dress: 'item-dress-v1',
+    skirt: 'item-skirt-v1',
+    shirt: 'item-shirt-v1',
+    'car-key': 'item-car-key-v1',
+    'house-key': 'item-house-key-v1'
+  };
+
+  for (const [entityId, basename] of Object.entries(expectedAssets)) {
+    const entity = unit.entities[entityId];
+    assert.equal(entity.symbol, undefined, entityId);
+    assert.equal(entity.assetSrc, `/poc/lesson1-2-experience/assets/${basename}.avif`, entityId);
+    assert.equal(entity.assetFallbackSrc, `/poc/lesson1-2-experience/assets/${basename}.webp`, entityId);
+  }
 });
 
 test('microtask v2 catalog validation rejects imperative answers and forged result identities', () => {

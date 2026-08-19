@@ -271,7 +271,7 @@ test('Lesson 1 M01 persists after one word sound while the visible label files a
   assert.ok(!completed.effects.some(effect => effect.type === 'landmark/build-stage'));
 });
 
-test('Lesson 2 M01 keeps each four-way choice and saves the four audio cells as one microtask', () => {
+test('Lesson 2 M01 explores four objects but checks only watch against all four choices', () => {
   const ledger = fakeNceLedger({
     checkpoint: {
       checkpointId: 'L01-M05:complete',
@@ -304,12 +304,7 @@ test('Lesson 2 M01 keeps each four-way choice and saves the four audio cells as 
   }
   assert.equal(runtime.snapshot().stepId, 'L02-M01:S02');
 
-  const challenges = [
-    ['L02-W03', 'book'],
-    ['L02-W01', 'pen'],
-    ['L02-W04', 'watch'],
-    ['L02-W02', 'pencil']
-  ];
+  const challenges = [['L02-W04', 'watch']];
   for (const [sourceRef, entityId] of challenges) {
     const heard = finishActiveNceAudio(runtime);
     assert.equal(heard.snapshot.phase, 'response');
@@ -331,16 +326,11 @@ test('Lesson 2 M01 keeps each four-way choice and saves the four audio cells as 
   assert.equal(ledger.events.length, 1);
   assert.deepEqual(
     ledger.events[0].targetResults.map(result => [result.sourceRef, result.channel]),
-    [
-      ['L02-W03', 'audio-form-supported'],
-      ['L02-W01', 'audio-form-supported'],
-      ['L02-W04', 'audio-form-supported'],
-      ['L02-W02', 'audio-form-supported']
-    ]
+    [['L02-W04', 'audio-form-supported']]
   );
 });
 
-test('Lesson 2 word-form cells wait for their own feedback audio ended before advancing', () => {
+test('Lesson 2 checks one pencil word form and waits for feedback audio before the story continues', () => {
   const ledger = fakeNceLedger({
     checkpoint: {
       checkpointId: 'L02-M01:complete', beatId: 'understand',
@@ -351,22 +341,21 @@ test('Lesson 2 word-form cells wait for their own feedback audio ended before ad
   const runtime = create({ unit: nceUnit, ledger, seed: 127 });
   runtime.enter({ entryLesson: 'lesson2' });
   assert.equal(runtime.snapshot().stepId, 'L02-M02:S01');
-  assert.equal(runtime.snapshot().challengeRef, 'L01-W07');
+  assert.equal(runtime.snapshot().challengeRef, 'L02-W02');
 
   const submitted = runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+    type: 'response/submit', response: { sourceRef: 'L02-W02', entityId: 'pencil' }
   });
   assert.equal(submitted.snapshot.phase, 'audio-playing');
   assert.equal(submitted.snapshot.batchIndex, 0);
   assert.equal(submitted.snapshot.audio.purpose, 'feedback');
   assert.equal(submitted.effects.at(-1).type, 'audio/play');
   assert.deepEqual(runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L02-W04', entityId: 'watch' }
+    type: 'response/submit', response: { sourceRef: 'L02-W02', entityId: 'pencil' }
   }).effects, []);
 
   const feedback = finishActiveNceAudio(runtime);
-  assert.equal(feedback.snapshot.batchIndex, 1);
-  assert.equal(feedback.snapshot.challengeRef, 'L02-W04');
+  assert.equal(feedback.snapshot.stepId, 'L02-M02:S02');
   assert.equal(feedback.snapshot.phase, 'response');
   assert.deepEqual(ledger.events, []);
 });
@@ -384,10 +373,6 @@ test('Lesson 2 sentence building is bound to the case the child actually selecte
 
   runtime.dispatch({
     type: 'response/submit', response: { sourceRef: 'L02-W09', entityId: 'car-key' }
-  });
-  finishActiveNceAudio(runtime);
-  runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L02-W10', entityId: 'house-key' }
   });
   finishActiveNceAudio(runtime);
   assert.equal(runtime.snapshot().stepId, 'L02-M06:S02');

@@ -173,6 +173,28 @@ test('ordinary story scenes do not park a decorative cat beside the adult cast',
   await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
 });
 
+test('all word-object choices use the illustrated asset system instead of emoji', async ({ page }) => {
+  await openFresh(page);
+  const stages = [
+    ['阶段 6：随身物品上架', ['pen', 'pencil', 'book', 'watch']],
+    ['阶段 8：衣帽架归位', ['coat', 'dress', 'skirt', 'shirt']],
+    ['阶段 10：钥匙唤醒影像', ['car-key', 'house-key']]
+  ];
+
+  for (const [stageName, entityIds] of stages) {
+    await page.locator('[data-action="toggle-settings"]').click();
+    await page.getByRole('button', { name: stageName }).click();
+    const shelf = page.locator('.prop-shelf');
+    await expect(shelf.locator('.entity-visual > span')).toHaveCount(0);
+    await expect(shelf.locator('.entity-visual img')).toHaveCount(entityIds.length);
+    for (const entityId of entityIds) {
+      const visual = shelf.locator(`.entity-visual[data-entity-id="${entityId}"]`);
+      await expect(visual.locator('source')).toHaveAttribute('srcset', new RegExp(`item-${entityId}-v1\\.avif$`));
+      await expect(visual.locator('img')).toHaveAttribute('src', new RegExp(`item-${entityId}-v1\\.webp$`));
+    }
+  }
+});
+
 test('the explorer cat returns visibly when partner rescue has a real job', async ({ page }) => {
   await installInstantAudio(page);
   await openFresh(page);
@@ -365,22 +387,22 @@ test('a word-form object tap submits immediately and keeps the spoken word visib
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 7：标签认领' }).click();
   await expect(page.getByRole('button', { name: '就是它' })).toHaveCount(0);
-  await page.getByRole('button', { name: '手提包' }).click();
+  await page.getByRole('button', { name: '铅笔' }).click();
 
   await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-playing');
   await expect(page.locator('.feedback-audio-state')).toBeVisible();
-  await expect(page.locator('.feedback-audio-state')).toContainText('handbag');
+  await expect(page.locator('.feedback-audio-state')).toContainText('pencil');
   await expect(page.locator('.feedback-audio-state button')).toHaveCount(0);
   await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
   await expect(page.locator('.feedback-audio-state')).toContainText('找对了，听听这个词');
   expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
   expect(await page.evaluate(() => window.__courseAudioStarts.filter(
-    src => src.endsWith('/l01-w07.mp3')
+    src => src.endsWith('/l02-w02.mp3')
   ).length)).toBe(1);
 
   await page.evaluate(() => window.__finishCourseAudio());
   await expect(app(page)).toHaveAttribute('data-runtime-phase', 'response');
-  await expect(app(page)).toHaveAttribute('data-runtime-challenge', 'L02-W04');
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M02:S02');
 });
 
 test('a physical action completes from the item and character taps without confirmation', async ({ page }) => {
@@ -414,7 +436,7 @@ test('the coat return shows a distinct returner and coat owner instead of making
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 9：衣签归位' }).click();
 
-  for (const label of ['短裙', '外套', '连衣裙', '衬衫']) {
+  for (const label of ['外套']) {
     await page.getByRole('button', { name: label, exact: true }).click();
     await settle(page);
   }
@@ -438,7 +460,7 @@ test('slot, case, and block choices continue on the last meaningful tap', async 
   await openFresh(page);
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 7：标签认领' }).click();
-  for (const label of ['手提包', '手表', '铅笔', '书', '钢笔']) {
+  for (const label of ['铅笔']) {
     await page.getByRole('button', { name: label, exact: true }).click();
     await settle(page);
   }
@@ -454,7 +476,7 @@ test('slot, case, and block choices continue on the last meaningful tap', async 
 
   await page.locator('[data-action="toggle-settings"]').click();
   await page.getByRole('button', { name: '阶段 11：钥匙档案挂牌' }).click();
-  for (const label of ['车钥匙', '房屋钥匙']) {
+  for (const label of ['车钥匙']) {
     await page.getByRole('button', { name: label, exact: true }).click();
     await settle(page);
   }
@@ -630,7 +652,7 @@ test('the whole child UI completes twelve catalog tasks and grows only at the fi
   const projection = stored.value.units['NCE-U01'];
   expect(projection.completedMicrotaskIds).toHaveLength(12);
   expect(projection.buildStage).toBe(5);
-  expect(Object.keys(stored.value.targets['NCE-U01-T01'].variantCells)).toHaveLength(22);
+  expect(Object.keys(stored.value.targets['NCE-U01-T01'].variantCells)).toHaveLength(8);
   expect(stored.value.districts['first-book-1-12'].challengeStars).toBe(0);
   expect(pageErrors).toEqual([]);
 });

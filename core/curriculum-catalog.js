@@ -180,12 +180,13 @@
     ),
     ...Object.fromEntries(LESSON2_VOCABULARY.map(([text, translation], index) => {
       const sourceId = `L02-W${String(index + 1).padStart(2, '0')}`;
+      const firstSessionExposureOnly = ['pen', 'book', 'dress'].includes(text);
       return [sourceId, nceSource(
         sourceId,
         'substitution-item',
         text,
         'target',
-        'evidence',
+        firstSessionExposureOnly ? 'exposure' : 'evidence',
         {
           translation,
           audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`,
@@ -284,6 +285,17 @@
   };
   const LOST_HANDBAG_CAST = ['station-keeper', 'handbag-owner'];
 
+  function nceIllustratedItem(entityId, title, visualType, sourceRef, assetBasename) {
+    return {
+      entityId,
+      title,
+      visualType,
+      sourceRef,
+      assetSrc: `/poc/lesson1-2-experience/assets/${assetBasename}.avif`,
+      assetFallbackSrc: `/poc/lesson1-2-experience/assets/${assetBasename}.webp`
+    };
+  }
+
   const NCE_ENTITIES = {
     'station-keeper': {
       entityId: 'station-keeper', title: '招领员', visualType: 'keeper', ...NCE_MAN_CHARACTER
@@ -309,21 +321,17 @@
     'cat-guide': {
       entityId: 'cat-guide', title: '探险小猫', visualType: 'cat-guide', ...NCE_EXPLORER_CAT_CHARACTER
     },
-    handbag: {
-      entityId: 'handbag', title: '手提包', visualType: 'handbag', sourceRef: 'L01-W07',
-      assetSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.avif',
-      assetFallbackSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.webp'
-    },
-    pen: { entityId: 'pen', title: '钢笔', visualType: 'pen', symbol: '🖋️', sourceRef: 'L02-W01' },
-    pencil: { entityId: 'pencil', title: '铅笔', visualType: 'pencil', symbol: '✏️', sourceRef: 'L02-W02' },
-    book: { entityId: 'book', title: '书', visualType: 'book', symbol: '📘', sourceRef: 'L02-W03' },
-    watch: { entityId: 'watch', title: '手表', visualType: 'watch', symbol: '⌚', sourceRef: 'L02-W04' },
-    coat: { entityId: 'coat', title: '外套', visualType: 'coat', symbol: '🧥', sourceRef: 'L02-W05' },
-    dress: { entityId: 'dress', title: '连衣裙', visualType: 'dress', symbol: '👗', sourceRef: 'L02-W06' },
-    skirt: { entityId: 'skirt', title: '短裙', visualType: 'skirt', symbol: '🩰', sourceRef: 'L02-W07' },
-    shirt: { entityId: 'shirt', title: '衬衫', visualType: 'shirt', symbol: '👕', sourceRef: 'L02-W08' },
-    'car-key': { entityId: 'car-key', title: '车钥匙', visualType: 'car-key', symbol: '🚗', sourceRef: 'L02-W09' },
-    'house-key': { entityId: 'house-key', title: '房屋钥匙', visualType: 'house-key', symbol: '🏠', sourceRef: 'L02-W10' },
+    handbag: nceIllustratedItem('handbag', '手提包', 'handbag', 'L01-W07', 'handbag-prop-v1'),
+    pen: nceIllustratedItem('pen', '钢笔', 'pen', 'L02-W01', 'item-pen-v1'),
+    pencil: nceIllustratedItem('pencil', '铅笔', 'pencil', 'L02-W02', 'item-pencil-v1'),
+    book: nceIllustratedItem('book', '书', 'book', 'L02-W03', 'item-book-v1'),
+    watch: nceIllustratedItem('watch', '手表', 'watch', 'L02-W04', 'item-watch-v1'),
+    coat: nceIllustratedItem('coat', '外套', 'coat', 'L02-W05', 'item-coat-v1'),
+    dress: nceIllustratedItem('dress', '连衣裙', 'dress', 'L02-W06', 'item-dress-v1'),
+    skirt: nceIllustratedItem('skirt', '短裙', 'skirt', 'L02-W07', 'item-skirt-v1'),
+    shirt: nceIllustratedItem('shirt', '衬衫', 'shirt', 'L02-W08', 'item-shirt-v1'),
+    'car-key': nceIllustratedItem('car-key', '车钥匙', 'car-key', 'L02-W09', 'item-car-key-v1'),
+    'house-key': nceIllustratedItem('house-key', '房屋钥匙', 'house-key', 'L02-W10', 'item-house-key-v1'),
     'star-badge': { entityId: 'star-badge', title: '星灯探险徽章', visualType: 'badge', symbol: '🌟' },
     'case-stamp': { entityId: 'case-stamp', title: '结案章', visualType: 'stamp', symbol: '🔖' },
     'case-file': { entityId: 'case-file', title: '案件档案', visualType: 'case-file', symbol: '🗂️' },
@@ -668,15 +676,12 @@
       stepLabel: '整理室 · 1 / 7',
       sceneMode: 'pocket-shelf',
       prompt: '打开布袋，听音上架',
-      completedFeedback: '四件随身物品都听清了，也一起上架了。',
+      completedFeedback: '四件随身物品都认识了，手表也听音找对了。',
       nextCue: { entityId: 'case-stamp', label: '打开旧标签柜' },
       exposureRefs: ['L02-I01', 'L02-W01', 'L02-W02', 'L02-W03', 'L02-W04'],
-      evidenceRefs: ['L02-W03', 'L02-W01', 'L02-W04', 'L02-W02'],
+      evidenceRefs: ['L02-W04'],
       targetResults: [
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W03', 'audio-form-supported'),
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W01', 'audio-form-supported'),
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W04', 'audio-form-supported'),
-        t1Result('L02-M01', 'L02-M01:S02', 'L02-W02', 'audio-form-supported')
+        t1Result('L02-M01', 'L02-M01:S02', 'L02-W04', 'audio-form-supported')
       ],
       steps: [
         {
@@ -688,7 +693,7 @@
         },
         {
           stepId: 'L02-M01:S02', kind: 'match-entity-batch', prompt: '听声音，找物品',
-          challengeSourceRefs: ['L02-W03', 'L02-W01', 'L02-W04', 'L02-W02'],
+          challengeSourceRefs: ['L02-W04'],
           optionEntityIds: ['pen', 'pencil', 'book', 'watch'],
           answerRule: {
             type: 'match-entity',
@@ -698,7 +703,7 @@
           support: [...AUDIO_SUPPORT]
         }
       ],
-      requiredFactIds: ['pocket-items-explored', 'four-audio-cells-complete', 'pocket-items-shelved'],
+      requiredFactIds: ['pocket-items-explored', 'watch-audio-cell-complete', 'pocket-items-shelved'],
       checkpointFacts: ['pocket-shelf-ready']
     }),
     nceMicrotask({
@@ -707,17 +712,13 @@
       title: '标签认领',
       stepLabel: '整理室 · 2 / 7',
       sceneMode: 'pocket-labels-and-watch',
-      prompt: '认标签，再归还手表',
-      completedFeedback: '五张标签登记好了，第一位认领者拿回了手表。',
+      prompt: '认一张标签，再归还手表',
+      completedFeedback: '铅笔标签登记好了，第一位认领者拿回了手表。',
       nextCue: { entityId: 'case-stamp', label: '查看衣架线索' },
       exposureRefs: ['L01-W07', 'L02-W01', 'L02-W02', 'L02-W03', 'L02-W04', 'L01-D01', 'L01-D02', 'L01-D03', 'L01-D06', 'L01-D07'],
-      evidenceRefs: ['L01-W07', 'L02-W04', 'L02-W02', 'L02-W03', 'L02-W01', 'L01-D01', 'L01-D03', 'L01-D06'],
+      evidenceRefs: ['L02-W02', 'L01-D01', 'L01-D03', 'L01-D06'],
       targetResults: [
-        t1Result('L02-M02', 'L02-M02:S01', 'L01-W07', 'word-form'),
-        t1Result('L02-M02', 'L02-M02:S01', 'L02-W04', 'word-form'),
         t1Result('L02-M02', 'L02-M02:S01', 'L02-W02', 'word-form'),
-        t1Result('L02-M02', 'L02-M02:S01', 'L02-W03', 'word-form'),
-        t1Result('L02-M02', 'L02-M02:S01', 'L02-W01', 'word-form'),
         nceTargetResult({
           resultId: 'NCE-U01-T02:L02-M02:attention', targetNumber: 2,
           stepId: 'L02-M02:S02', sourceRef: 'L01-D01', channel: 'meaning',
@@ -733,7 +734,7 @@
         {
           stepId: 'L02-M02:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
           prompt: '看单词，找到对应的物品',
-          challengeSourceRefs: ['L01-W07', 'L02-W04', 'L02-W02', 'L02-W03', 'L02-W01'],
+          challengeSourceRefs: ['L02-W02'],
           optionEntityIds: ['handbag', 'watch', 'pencil', 'book', 'pen'],
           answerRule: {
             type: 'match-entity',
@@ -784,7 +785,7 @@
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
-      requiredFactIds: ['five-word-form-cells', 'watch-attention', 'watch-question-ended', 'watch-confirmed', 'watch-returned', 'watch-thanks-ended'],
+      requiredFactIds: ['pencil-word-form-cell', 'watch-attention', 'watch-question-ended', 'watch-confirmed', 'watch-returned', 'watch-thanks-ended'],
       checkpointFacts: ['claim-record-1', 'watch-with-first-claimant']
     }),
     nceMicrotask({
@@ -794,14 +795,12 @@
       stepLabel: '整理室 · 3 / 7',
       sceneMode: 'moving-wardrobe',
       prompt: '拉开衣罩，听音归位',
-      completedFeedback: '四件衣物都听清了，衣帽架恢复了秩序。',
+      completedFeedback: '四件衣物都认识了，也分清了 shirt 和 skirt。',
       nextCue: { entityId: 'case-stamp', label: '打开衣签登记册' },
       exposureRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08'],
-      evidenceRefs: ['L02-W08', 'L02-W05', 'L02-W06', 'L02-W07'],
+      evidenceRefs: ['L02-W08', 'L02-W07'],
       targetResults: [
         t1Result('L02-M03', 'L02-M03:S02', 'L02-W08', 'audio-form-supported'),
-        t1Result('L02-M03', 'L02-M03:S02', 'L02-W05', 'audio-form-supported'),
-        t1Result('L02-M03', 'L02-M03:S02', 'L02-W06', 'audio-form-supported'),
         t1Result('L02-M03', 'L02-M03:S02', 'L02-W07', 'audio-form-supported')
       ],
       steps: [
@@ -813,7 +812,7 @@
         },
         {
           stepId: 'L02-M03:S02', kind: 'match-entity-batch', prompt: '听声音，找衣物',
-          challengeSourceRefs: ['L02-W08', 'L02-W05', 'L02-W06', 'L02-W07'],
+          challengeSourceRefs: ['L02-W08', 'L02-W07'],
           optionEntityIds: ['coat', 'dress', 'skirt', 'shirt'],
           answerRule: {
             type: 'match-entity',
@@ -823,7 +822,7 @@
           support: [...AUDIO_SUPPORT]
         }
       ],
-      requiredFactIds: ['clothes-explored', 'four-clothes-audio-cells', 'wardrobe-ordered'],
+      requiredFactIds: ['clothes-explored', 'shirt-skirt-audio-cells', 'wardrobe-ordered'],
       checkpointFacts: ['wardrobe-ready']
     }),
     nceMicrotask({
@@ -832,16 +831,13 @@
       title: '衣签归位',
       stepLabel: '整理室 · 4 / 7',
       sceneMode: 'clothing-labels-and-coat',
-      prompt: '认衣签，再归还外套',
-      completedFeedback: '衣签都登记好了，外套主人也拿回了自己的外套。',
+      prompt: '认一张衣签，再归还外套',
+      completedFeedback: '外套衣签登记好了，主人也拿回了自己的外套。',
       nextCue: { entityId: 'case-stamp', label: '查看钥匙线索' },
       exposureRefs: ['L02-W05', 'L02-W06', 'L02-W07', 'L02-W08', 'L01-D06', 'L01-D07'],
-      evidenceRefs: ['L02-W07', 'L02-W05', 'L02-W06', 'L02-W08', 'L01-D06', 'L01-D07'],
+      evidenceRefs: ['L02-W05', 'L01-D06', 'L01-D07'],
       targetResults: [
-        t1Result('L02-M04', 'L02-M04:S01', 'L02-W07', 'word-form'),
         t1Result('L02-M04', 'L02-M04:S01', 'L02-W05', 'word-form'),
-        t1Result('L02-M04', 'L02-M04:S01', 'L02-W06', 'word-form'),
-        t1Result('L02-M04', 'L02-M04:S01', 'L02-W08', 'word-form'),
         nceTargetResult({
           resultId: 'NCE-U01-T04:L02-M04:coat', targetNumber: 4,
           stepId: 'L02-M04:S03', sourceRef: 'L01-D06', channel: 'meaning',
@@ -857,7 +853,7 @@
         {
           stepId: 'L02-M04:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
           prompt: '看单词，找到对应的衣物',
-          challengeSourceRefs: ['L02-W07', 'L02-W05', 'L02-W06', 'L02-W08'],
+          challengeSourceRefs: ['L02-W05'],
           optionEntityIds: ['coat', 'dress', 'skirt', 'shirt'],
           answerRule: {
             type: 'match-entity',
@@ -894,7 +890,7 @@
           support: [...EXPRESSION_SUPPORT]
         }
       ],
-      requiredFactIds: ['four-clothes-word-form-cells', 'coat-question-ended', 'coat-confirmed', 'coat-returned', 'coat-thanks'],
+      requiredFactIds: ['coat-word-form-cell', 'coat-question-ended', 'coat-confirmed', 'coat-returned', 'coat-thanks'],
       checkpointFacts: ['claim-record-2', 'coat-with-owner']
     }),
     nceMicrotask({
@@ -904,13 +900,12 @@
       stepLabel: '整理室 · 5 / 7',
       sceneMode: 'key-projections',
       prompt: '看钥匙，听音入盒',
-      completedFeedback: '车钥匙和房屋钥匙都找到了自己的影像。',
+      completedFeedback: '两把钥匙都认识了，house 也听音找对了。',
       nextCue: { entityId: 'case-stamp', label: '打开挂牌窗' },
       exposureRefs: ['L02-W09', 'L02-W10'],
-      evidenceRefs: ['L02-W10', 'L02-W09'],
+      evidenceRefs: ['L02-W10'],
       targetResults: [
-        t1Result('L02-M05', 'L02-M05:S02', 'L02-W10', 'audio-form-supported'),
-        t1Result('L02-M05', 'L02-M05:S02', 'L02-W09', 'audio-form-supported')
+        t1Result('L02-M05', 'L02-M05:S02', 'L02-W10', 'audio-form-supported')
       ],
       steps: [
         {
@@ -920,13 +915,13 @@
         },
         {
           stepId: 'L02-M05:S02', kind: 'match-entity-batch', prompt: '听声音，找钥匙',
-          challengeSourceRefs: ['L02-W10', 'L02-W09'], optionEntityIds: ['car-key', 'house-key'],
+          challengeSourceRefs: ['L02-W10'], optionEntityIds: ['car-key', 'house-key'],
           answerRule: { type: 'match-entity', pairs: { 'L02-W09': 'car-key', 'L02-W10': 'house-key' } },
           gate: AUDIO_ENDED_GATE,
           support: [...AUDIO_SUPPORT]
         }
       ],
-      requiredFactIds: ['keys-explored', 'two-key-audio-cells', 'keys-in-safe-box'],
+      requiredFactIds: ['keys-explored', 'house-audio-cell', 'keys-in-safe-box'],
       checkpointFacts: ['key-box-ready']
     }),
     nceMicrotask({
@@ -935,14 +930,13 @@
       title: '钥匙档案挂牌',
       stepLabel: '整理室 · 6 / 7',
       sceneMode: 'key-labels-and-claim',
-      prompt: '认钥匙，再完成认领',
-      completedFeedback: '两把钥匙都有档案，第三份认领记录也完成了。',
+      prompt: '认一张钥匙标签，再完成认领',
+      completedFeedback: '车钥匙档案登记好了，第三份认领记录也完成了。',
       nextCue: { entityId: 'opening-lever', label: '启动开张总闸' },
       exposureRefs: ['L02-W09', 'L02-W10', 'L01-D01', 'L01-D02', 'L01-D03', 'L01-D06', 'L01-D07'],
-      evidenceRefs: ['L02-W09', 'L02-W10', 'L01-D01', 'L01-D03', 'L01-D06'],
+      evidenceRefs: ['L02-W09', 'L01-D01', 'L01-D03', 'L01-D06'],
       targetResults: [
         t1Result('L02-M06', 'L02-M06:S01', 'L02-W09', 'word-form'),
-        t1Result('L02-M06', 'L02-M06:S01', 'L02-W10', 'word-form'),
         nceTargetResult({
           resultId: 'NCE-U01-T02:L02-M06:attention', targetNumber: 2,
           stepId: 'L02-M06:S03', sourceRef: 'L01-D01', channel: 'meaning',
@@ -957,7 +951,7 @@
       steps: [
         {
           stepId: 'L02-M06:S01', kind: 'match-entity-batch', challengeMode: 'word-form',
-          prompt: '看单词，找到对应的钥匙', challengeSourceRefs: ['L02-W09', 'L02-W10'],
+          prompt: '看单词，找到对应的钥匙', challengeSourceRefs: ['L02-W09'],
           optionEntityIds: ['car-key', 'house-key'],
           answerRule: { type: 'match-entity', pairs: { 'L02-W09': 'car-key', 'L02-W10': 'house-key' } },
           feedbackGate: AUDIO_ENDED_GATE,
@@ -1023,7 +1017,7 @@
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
-      requiredFactIds: ['two-key-word-form-cells', 'selected-key-case', 'key-attention', 'key-question-ended', 'key-confirmed', 'key-handed-over', 'key-thanks-ended'],
+      requiredFactIds: ['car-word-form-cell', 'selected-key-case', 'key-attention', 'key-question-ended', 'key-confirmed', 'key-handed-over', 'key-thanks-ended'],
       checkpointFacts: ['claim-record-3', 'three-claim-records-ready']
     }),
     nceMicrotask({

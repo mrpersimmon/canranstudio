@@ -436,7 +436,7 @@ test('a malformed microtask audio claim is rejected without throwing from the le
   assert.equal(result.reason, 'audio-contacts-invalid');
 });
 
-test('the real runtime and ledger complete all twelve microtasks with twenty-two distinct T1 cells', () => {
+test('the real runtime and ledger complete all twelve microtasks with eight sampled T1 cells', () => {
   const store = createMemoryAdapter();
   const clock = fixedClock();
   const ledger = open({ store, key: 'nce-learner', catalog, clock });
@@ -519,7 +519,7 @@ test('the real runtime and ledger complete all twelve microtasks with twenty-two
   assert.equal(runtime.snapshot().status, 'unit-built');
   assert.equal(projection.buildStage, 5);
   assert.equal(projection.completedMicrotaskIds.length, 12);
-  assert.equal(Object.keys(projection.targets['NCE-U01-T01'].variantCells).length, 22);
+  assert.equal(Object.keys(projection.targets['NCE-U01-T01'].variantCells).length, 8);
   assert.ok(Object.values(projection.targets).every(target => (
     target.evidenceCount === 0 && target.mastered === false
   )));
