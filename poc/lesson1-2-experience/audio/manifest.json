@@ -1,15 +1,24 @@
 {
   "schemaVersion": 1,
-  "packId": "nce-u01-kokoro-candidate-v1",
+  "packId": "nce-u01-local-candidate-v2",
   "unitId": "NCE-U01",
   "status": "local-poc-candidate-unreviewed",
   "disclosure": "英文语音由 AI 生成，当前仅供本地验收，不是真人老师正式语音包。",
   "accentTarget": "General American English",
   "engine": {
-    "name": "Kokoro",
-    "packageVersion": "0.9.4",
-    "model": "hexgrad/Kokoro-82M",
-    "modelLicense": "Apache-2.0",
+    "name": "Composite local candidate",
+    "primary": {
+      "name": "Kokoro",
+      "packageVersion": "0.9.4",
+      "model": "hexgrad/Kokoro-82M",
+      "modelLicense": "Apache-2.0"
+    },
+    "pronunciationCorrection": {
+      "name": "macOS say",
+      "voice": "Samantha",
+      "locale": "en-US",
+      "scope": ["L02-W05", "L02-W06", "L02-W07", "L02-W08"]
+    },
     "outputUseStatus": "requires-review-before-publication"
   },
   "encoding": {
@@ -270,44 +279,68 @@
       "sourceId": "L02-W05",
       "catalogTextSha256": "8218f3d6780abf45a5a43657f5ae015c164c53d463dc85ebe302ef6c4fd517ed",
       "path": "/poc/lesson1-2-experience/audio/l02-w05.mp3",
-      "voiceId": "af_heart",
-      "speed": 0.9,
-      "sha256": "30adb68433c9bc977115c1ac92de3999e5b82ccb0751d51dbd660558d7587605",
-      "bytes": 20205,
-      "durationMs": 1595,
+      "voiceId": "Samantha",
+      "engineId": "macOS-say",
+      "rateWpm": 145,
+      "sha256": "9639ef0d6e7491dbe403963f2e3525bc95ab227d4d738a0b654c146fface0c6b",
+      "bytes": 13581,
+      "durationMs": 1046,
+      "pronunciationCorrection": {
+        "locale": "en-US",
+        "reason": "child-playtest-pronunciation-rejection",
+        "rejectedSha256": "30adb68433c9bc977115c1ac92de3999e5b82ccb0751d51dbd660558d7587605"
+      },
       "reviewStatus": "unreviewed-candidate"
     },
     {
       "sourceId": "L02-W06",
       "catalogTextSha256": "5b612edb571c479d1a33c2355b8933ef943bd5715b25116aaf91dbf3a842c2bd",
       "path": "/poc/lesson1-2-experience/audio/l02-w06.mp3",
-      "voiceId": "af_heart",
-      "speed": 0.9,
-      "sha256": "ba0e499a7f68db4fa709e59e66650ad8d8d18578b4e72cad0f4736c1891d6d44",
-      "bytes": 21357,
-      "durationMs": 1695,
+      "voiceId": "Samantha",
+      "engineId": "macOS-say",
+      "rateWpm": 145,
+      "sha256": "f54aa2cb75ff045720dc206b1f1bf919b297da7e912151d626e97c592b62b833",
+      "bytes": 13869,
+      "durationMs": 1074,
+      "pronunciationCorrection": {
+        "locale": "en-US",
+        "reason": "child-playtest-pronunciation-rejection",
+        "rejectedSha256": "ba0e499a7f68db4fa709e59e66650ad8d8d18578b4e72cad0f4736c1891d6d44"
+      },
       "reviewStatus": "unreviewed-candidate"
     },
     {
       "sourceId": "L02-W07",
       "catalogTextSha256": "3abafce5bc548613ff47ae39983fff685a2db66ba1a4fa6f93a1d57286e034ef",
       "path": "/poc/lesson1-2-experience/audio/l02-w07.mp3",
-      "voiceId": "af_heart",
-      "speed": 0.9,
-      "sha256": "9e5244efc4942471318fd127f524231bd6a90f4b44d3cb8647ccd128912839e8",
-      "bytes": 21069,
-      "durationMs": 1670,
+      "voiceId": "Samantha",
+      "engineId": "macOS-say",
+      "rateWpm": 145,
+      "sha256": "41d6c34131d5a7b5501ce9a2dc89e2f0e309b77cd88ce96ceec1e3b6dc638ff7",
+      "bytes": 14733,
+      "durationMs": 1139,
+      "pronunciationCorrection": {
+        "locale": "en-US",
+        "reason": "child-playtest-pronunciation-rejection",
+        "rejectedSha256": "9e5244efc4942471318fd127f524231bd6a90f4b44d3cb8647ccd128912839e8"
+      },
       "reviewStatus": "unreviewed-candidate"
     },
     {
       "sourceId": "L02-W08",
       "catalogTextSha256": "a52514252adf86066966790e947f72ef6ea6690a6852d5bb5480ee2eeb663395",
       "path": "/poc/lesson1-2-experience/audio/l02-w08.mp3",
-      "voiceId": "af_heart",
-      "speed": 0.9,
-      "sha256": "1cb8833562d8af5a01952de030c2219b97cc507a71557d0a32421c2ea2c8308a",
-      "bytes": 20493,
-      "durationMs": 1620,
+      "voiceId": "Samantha",
+      "engineId": "macOS-say",
+      "rateWpm": 145,
+      "sha256": "fa4b8d056865ab97460eca15955bb079a9427b8b5629ea44ea7aebc29551886f",
+      "bytes": 13581,
+      "durationMs": 1055,
+      "pronunciationCorrection": {
+        "locale": "en-US",
+        "reason": "child-playtest-pronunciation-rejection",
+        "rejectedSha256": "1cb8833562d8af5a01952de030c2219b97cc507a71557d0a32421c2ea2c8308a"
+      },
       "reviewStatus": "unreviewed-candidate"
     },
     {

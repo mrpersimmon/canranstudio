@@ -2,12 +2,20 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { createHash } = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const sharp = require('sharp');
 const catalog = require('../../core/curriculum-catalog');
 
 const ROOT = path.resolve(__dirname, '../..');
+
+const REJECTED_CLOTHING_AUDIO = Object.freeze({
+  'L02-W05': ['coat', '30adb68433c9bc977115c1ac92de3999e5b82ccb0751d51dbd660558d7587605'],
+  'L02-W06': ['dress', 'ba0e499a7f68db4fa709e59e66650ad8d8d18578b4e72cad0f4736c1891d6d44'],
+  'L02-W07': ['skirt', '9e5244efc4942471318fd127f524231bd6a90f4b44d3cb8647ccd128912839e8'],
+  'L02-W08': ['shirt', '1cb8833562d8af5a01952de030c2219b97cc507a71557d0a32421c2ea2c8308a']
+});
 
 test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally runnable', async () => {
   const [home, page, scene, runtime, background, premiseAvif, premiseJpeg, selectedDesign] = await Promise.all([
@@ -176,4 +184,30 @@ test('the Lesson 1 dialogue voice pack follows the textbook speakers through the
       ['L01-D07', 'woman', 'af_heart']
     ]
   );
+});
+
+test('child-rejected clothing pronunciations cannot return to the local voice pack', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const manifest = JSON.parse(await fs.readFile(
+    path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
+    'utf8'
+  ));
+
+  for (const [sourceId, [expectedText, rejectedSha256]] of Object.entries(REJECTED_CLOTHING_AUDIO)) {
+    const source = unit.lessonContent.lesson2.sources[sourceId];
+    const entry = manifest.files.find(file => file.sourceId === sourceId);
+    const bytes = await fs.readFile(path.join(ROOT, source.audioSrc.replace(/^\//, '')));
+    const actualSha256 = createHash('sha256').update(bytes).digest('hex');
+
+    assert.equal(source.text, expectedText);
+    assert.notEqual(actualSha256, rejectedSha256, `${sourceId} restored child-rejected audio`);
+    assert.equal(entry.sha256, actualSha256);
+    assert.equal(entry.voiceId, 'Samantha');
+    assert.equal(entry.engineId, 'macOS-say');
+    assert.deepEqual(entry.pronunciationCorrection, {
+      locale: 'en-US',
+      reason: 'child-playtest-pronunciation-rejection',
+      rejectedSha256
+    });
+  }
 });

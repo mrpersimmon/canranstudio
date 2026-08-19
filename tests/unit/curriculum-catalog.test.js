@@ -312,11 +312,11 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
     ['station-keeper', 'child']
   ]);
   assert.deepEqual(tasks.get('L02-M02').steps.slice(1).map(step => step.characterEntityIds),
-    Array.from({ length: 6 }, () => ['first-claimant']));
+    Array.from({ length: 6 }, () => ['station-keeper', 'first-claimant']));
   assert.deepEqual(tasks.get('L02-M04').steps.slice(1).map(step => step.characterEntityIds),
     Array.from({ length: 4 }, () => ['second-returner', 'child']));
   assert.deepEqual(tasks.get('L02-M06').steps.slice(1).map(step => step.characterEntityIds),
-    Array.from({ length: 7 }, () => ['third-claimant']));
+    Array.from({ length: 7 }, () => ['station-keeper', 'third-claimant']));
   assert.deepEqual(tasks.get('L02-M07').presentation.characterEntityIds,
     ['first-claimant', 'second-returner', 'third-claimant']);
 });

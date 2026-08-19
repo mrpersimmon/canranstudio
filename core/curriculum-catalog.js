@@ -729,7 +729,7 @@
         },
         {
           stepId: 'L02-M02:S02', kind: 'select-one', prompt: '想礼貌叫住她，应该怎么说？',
-          characterEntityIds: ['first-claimant'],
+          characterEntityIds: ['station-keeper', 'first-claimant'],
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
@@ -737,12 +737,12 @@
         },
         {
           stepId: 'L02-M02:S03', kind: 'audio-sequence', prompt: '听对方回应',
-          characterEntityIds: ['first-claimant'],
+          characterEntityIds: ['station-keeper', 'first-claimant'],
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L02-M02:S04', kind: 'place-in-slot', prompt: '想问手表是不是她的，把 watch 放进问句',
-          characterEntityIds: ['first-claimant'],
+          characterEntityIds: ['station-keeper', 'first-claimant'],
           slotId: 'ownership-item', optionEntityIds: ['watch', 'book', 'pen', 'pencil'],
           expressionContentRef: 'NCE-U01-C-Q-WATCH',
           answerRule: { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
@@ -751,18 +751,18 @@
         },
         {
           stepId: 'L02-M02:S05', kind: 'audio-sequence', prompt: '听听她怎么回答',
-          characterEntityIds: ['first-claimant'],
+          characterEntityIds: ['station-keeper', 'first-claimant'],
           audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L02-M02:S06', kind: 'perform-action', prompt: '把手表交给她',
-          characterEntityIds: ['first-claimant'],
+          characterEntityIds: ['station-keeper', 'first-claimant'],
           entityIds: ['watch'], targetEntityIds: ['first-claimant'],
           answerRule: { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'first-claimant' }
         },
         {
           stepId: 'L02-M02:S07', kind: 'audio-sequence', prompt: '听听她拿回手表后怎么说',
-          characterEntityIds: ['first-claimant'],
+          characterEntityIds: ['station-keeper', 'first-claimant'],
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],
@@ -947,14 +947,14 @@
         },
         {
           stepId: 'L02-M06:S02', kind: 'select-case', prompt: '你想先帮哪把钥匙找主人？',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           optionEntityIds: ['car-key', 'house-key'],
           answerRule: { type: 'select-one', acceptedEntityIds: ['car-key', 'house-key'] },
           storesFactId: 'selected-key-case'
         },
         {
           stepId: 'L02-M06:S03', kind: 'select-one', prompt: '想礼貌叫住她，应该怎么说？',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           optionSourceRefs: ['L01-D01', 'L01-D07'],
           answerRule: { type: 'select-one', acceptedSourceRef: 'L01-D01' },
           feedbackAudioSourceRef: 'L01-D01', gate: AUDIO_ENDED_GATE,
@@ -962,12 +962,12 @@
         },
         {
           stepId: 'L02-M06:S04', kind: 'audio-sequence', prompt: '听对方回应',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           audioSourceRefs: ['L01-D02'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L02-M06:S05', kind: 'ordered-blocks', prompt: '把两块词语排成一句问话',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           blockContentRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR'],
           branchEntityIds: ['car-key', 'house-key'],
           selectedEntityFactId: 'selected-key-case',
@@ -987,12 +987,12 @@
         },
         {
           stepId: 'L02-M06:S06', kind: 'audio-sequence', prompt: '听听她怎么回答',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           audioSourceRefs: ['L01-D06'], gate: AUDIO_ENDED_GATE
         },
         {
           stepId: 'L02-M06:S07', kind: 'perform-action', prompt: '把钥匙交给她',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           entityIds: ['car-key', 'house-key'], targetEntityIds: ['third-claimant'],
           answerRule: {
             type: 'perform-action', action: 'give-selected',
@@ -1001,7 +1001,7 @@
         },
         {
           stepId: 'L02-M06:S08', kind: 'audio-sequence', prompt: '听听她拿回钥匙后怎么说',
-          characterEntityIds: ['third-claimant'],
+          characterEntityIds: ['station-keeper', 'third-claimant'],
           audioSourceRefs: ['L01-D07'], gate: AUDIO_ENDED_GATE
         }
       ],

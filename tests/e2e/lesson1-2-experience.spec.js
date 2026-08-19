@@ -378,6 +378,8 @@ test('slot, case, and block choices continue on the last meaningful tap', async 
   await page.getByRole('button', { name: 'Excuse me!' }).click();
   await settle(page);
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M02:S04');
+  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
+  await expect(page.locator('.scene-people [data-entity-id="first-claimant"] img')).toBeVisible();
   await expect(page.getByRole('button', { name: '放进问句' })).toHaveCount(0);
   await page.getByRole('button', { name: '手表', exact: true }).click();
   await settle(page);
@@ -394,6 +396,8 @@ test('slot, case, and block choices continue on the last meaningful tap', async 
   await page.getByRole('button', { name: 'Excuse me!' }).click();
   await settle(page);
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M06:S05');
+  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
+  await expect(page.locator('.scene-people [data-entity-id="third-claimant"] img')).toBeVisible();
   await expect(page.getByRole('button', { name: '排好问句' })).toHaveCount(0);
   await page.getByRole('button', { name: 'Is this your', exact: true }).click();
   await page.getByRole('button', { name: 'car', exact: true }).click();

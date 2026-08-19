@@ -42,6 +42,13 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - P2 responsive polish: the owner-choice paper was mostly empty, attempt hearts crossed an adult face, and mobile adult-scene headings extended beyond the viewport. The choice paper is compact, hearts live inside the task console, and mobile headings are centered with bounded geometry.
 - Accepted evidence: `docs/designs/lesson1-2-design-qa/no-decorative-cat-desktop-20260819.png`, `featured-cat-mobile-20260819.png`, `chapter-reward-desktop-20260819.png`, and `chapter-reward-mobile-20260819.png`. Browser console errors and warnings were empty.
 
+### Pass 5 — passed after role and pronunciation playtest fixes
+
+- P1 speaker completeness: Lesson 2 ownership exchanges displayed only the claimant even when the station keeper was asking, listening, or handing over the object. `L02-M02:S02–S07` and `L02-M06:S02–S08` now declare both the station keeper and claimant in catalog; the shared renderer shows the established man on the left and claimant on the right without page-specific content.
+- P1 pronunciation candidate: child playtest rejected the former `coat`, `dress`, `skirt`, and `shirt` bytes even though Source ID mapping and decoding were correct. The four local-only candidates now use macOS `en-US` Samantha at 145 words per minute, normalized to the existing 24 kHz mono MP3 contract. Their rejected SHA-256 values are permanently pinned by a deployment regression.
+- Browser verification played all four replacement files in the authored clothing order and each real `ended` advanced to the next item. This verifies delivery, mapping, text visibility, and audio lifecycle; the composite pack remains explicitly unreviewed and cannot be treated as teacher/publication-approved without the existing human language gate.
+- Accepted evidence: `docs/designs/lesson1-2-design-qa/station-keeper-watch-dialogue-20260819.png` and `clothing-audio-replacement-20260819.png`.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.
