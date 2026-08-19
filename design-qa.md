@@ -68,6 +68,12 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - The original `am_michael` and `af_heart` recording bytes remain unchanged. Catalog now owns `nce-youth-v1` as the course-wide youth male/female baseline, standalone words default to `af_heart`, each teaching unit names the baseline, and the builder plus deployment contract enforce the mapping.
 - Correct answers now show visual confirmation and start the target English directly. The prefatory cue asset and runtime branch were removed; the target recording's genuine `ended` remains the sole progression gate, and browser tests assert that no cue request occurs across phrase, word-form, and owner-identification feedback.
 
+### Pass 9 — incomplete cue diagnosis corrected by decoded-audio evidence
+
+- Direct user retest proved Pass 8's causal conclusion incomplete: removing `correct-chime.mp3` did not remove the perceived prelude. Live browser inspection then showed only the four target clothing MP3 resources and no secondary cue or overlapping sound request.
+- A red browser-decoding regression measured all twenty-one standalone word recordings at 380–430 ms before first English energy. Pack `nce-u01-kokoro-candidate-v2` removes this non-language padding across the complete 32-file unit; the current assets copy the selected MP3 speech frames without re-encoding or changing `am_michael` / `af_heart`.
+- The same browser-decoding regression now requires every standalone word to begin English within 150 ms, while per-file hashes, Source IDs, voice mapping, full-unit replacement, visible English, and real `ended` remain enforced. If human retest still rejects the sound, the next diagnosis is the voice's synthesized onset/prosody itself, not another UI cue.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.

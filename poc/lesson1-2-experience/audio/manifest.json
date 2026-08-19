@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "packId": "nce-u01-kokoro-candidate-v1",
+  "packId": "nce-u01-kokoro-candidate-v2",
   "unitId": "NCE-U01",
   "voiceBaselineId": "nce-youth-v1",
   "status": "local-poc-candidate-unreviewed",
@@ -19,6 +19,13 @@
     "bitrateKbps": 96,
     "loudnessTargetLufs": -18
   },
+  "processing": {
+    "profileId": "instructional-onset-v1",
+    "silenceThresholdDb": -45,
+    "decodedOnsetLimitMs": 150,
+    "leadingSilenceKeptMs": 100,
+    "trailingSilenceKeptMs": 240
+  },
   "replacementContract": {
     "scope": "whole-unit-pack",
     "identity": "catalog Source ID or authored Content ID",
@@ -31,9 +38,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d01.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "640b12dfa257f79726fc163b79e534d1ffa7cded13bef30ae70f4fb2eeda4d53",
-      "bytes": 26829,
-      "durationMs": 2145,
+      "sha256": "d118425d4d360f2e0bdede4ab0a0552466efb99ce992a8940936618606b04c64",
+      "bytes": 16749,
+      "durationMs": 1368,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -42,9 +49,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d02.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "37d01e7e0701873b7b0a4cf62256870f75a02d926bae73fd98c46b7f6943951a",
-      "bytes": 21357,
-      "durationMs": 1695,
+      "sha256": "77772244a1df3f087c0c8bb7e8a14acdcd2cd6a2fb7a37d7d0b53513a64acb74",
+      "bytes": 11277,
+      "durationMs": 912,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -53,9 +60,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d03.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "f8d47882eb26a63e4cc11312021a80addb72cf0b58fe5b762d47b05d5028dc7d",
-      "bytes": 33453,
-      "durationMs": 2695,
+      "sha256": "67d9519af7c9ccc673b73a93e73205eaba70c0a59767158709383ae6c55b420b",
+      "bytes": 23373,
+      "durationMs": 1920,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -64,9 +71,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d04.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "e08902d4e7d721d5e55388bb5ba33c5ebd03b0ea0f4c7b24ca18eace7cf1dcce",
-      "bytes": 21933,
-      "durationMs": 1745,
+      "sha256": "741033811d6f3a49586ba91605913aad43e50be1f88bb0c5da275c15d153fd1a",
+      "bytes": 11853,
+      "durationMs": 960,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -75,9 +82,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d05.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "f0067ca2cabb6134943436ef1f32d39381181a8cadb26949908efd12319044a4",
-      "bytes": 33453,
-      "durationMs": 2695,
+      "sha256": "c57997a99e2744bcd88d567f6abd0b1af46fa836616cf717fa94bc4533573dc5",
+      "bytes": 23373,
+      "durationMs": 1920,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -86,9 +93,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d06.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "ac1b021b62f8862b8c95b8298356729f915268cf562394a0bcca00896d54715c",
-      "bytes": 25965,
-      "durationMs": 2070,
+      "sha256": "34b03316a2b5e0c2880cd90622e69ad21b08d4bb4153197b072727e24f237394",
+      "bytes": 15885,
+      "durationMs": 1296,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -97,9 +104,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-d07.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "4a86573ad3bdfa3782983e72080de0676397411aa18d911f011221bf8032fcdd",
-      "bytes": 27405,
-      "durationMs": 2195,
+      "sha256": "182644288c0ddc4ed5fafe099a1ecb4ea0a17f020672b0015b50a7c28f9a7855",
+      "bytes": 17325,
+      "durationMs": 1416,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -108,9 +115,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w01.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "3c40e8d092c96e24e49ce3101cf272ba6f115902763f3a475593d7d095a63bb0",
-      "bytes": 25677,
-      "durationMs": 2045,
+      "sha256": "946fefdab125f716cfff11cc678da523ce0a3b8d47649ef4a24d8181fd6af6f5",
+      "bytes": 15597,
+      "durationMs": 1272,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -119,9 +126,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w02.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "9e68efcf5fe3bdcf3480a5bbcfe87f97738e10e6879ca78ada0d415bedc8fd3a",
-      "bytes": 20493,
-      "durationMs": 1620,
+      "sha256": "6f73cf77a4fa9f73819ad734657ac1a06782ada57cfd82168ced0728ba00d3e4",
+      "bytes": 10413,
+      "durationMs": 840,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -130,9 +137,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w03.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "f9647597431ca8a26e264d633e4fd32f5635210e458d34fc77ab0f135e0811b5",
-      "bytes": 21069,
-      "durationMs": 1670,
+      "sha256": "2cffd656498c19f24c28e9772309c0cfdcc75b1c102fbaebadfd83b872c9da58",
+      "bytes": 10989,
+      "durationMs": 888,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -141,9 +148,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w04.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "60d23ef5038b880e990583bf94322b4f9108529ef4d7b11e11fd1c5ed486d48a",
-      "bytes": 19341,
-      "durationMs": 1520,
+      "sha256": "d794d1e509be6b4979b64621037e732ed34c3638b9afbcccb27b921b3719b2f8",
+      "bytes": 9261,
+      "durationMs": 744,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -152,9 +159,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w05.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "82d915c390cd894b02ec144ec8d7f3b90d5dd49760c567d173f037c7b83af8a2",
-      "bytes": 19917,
-      "durationMs": 1570,
+      "sha256": "93be58f500a589745c668c199f1c4a0c831f5fa2340100d09e7d3dc1b5a78097",
+      "bytes": 9837,
+      "durationMs": 792,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -163,9 +170,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w06.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "95368c2b0f2bc74f75cf6a8cc59842b0c4c43da53c70fb7f9c97695ea61b6170",
-      "bytes": 20205,
-      "durationMs": 1595,
+      "sha256": "da9fa86b1fda64053f891b0afaa2a727ff16e087a316373e878d821a5e695b0a",
+      "bytes": 10125,
+      "durationMs": 816,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -174,9 +181,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w07.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "a976412eebad0b0cef0144d3e1d3545c3eab3a94854d64d5144d9a67452ca5bf",
-      "bytes": 23373,
-      "durationMs": 1870,
+      "sha256": "976ee3717b7e530303f9bb33b805c80013a737cd416cfae76414dba587eb1137",
+      "bytes": 13581,
+      "durationMs": 1104,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -185,9 +192,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w08.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "e1b9c150f3ddb247e1f45bb5cd09bd8804836cf970ace60c450db1a236677823",
-      "bytes": 21645,
-      "durationMs": 1720,
+      "sha256": "51a3afb3c403fb7ecb559175872fe3312cbfeb735feea7a430bcf2c288928f44",
+      "bytes": 11565,
+      "durationMs": 936,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -196,9 +203,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w09.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "3366f3ac31f0abce7dbc30fa1ed873664c32c65c0e611cee0f34d9c4cf9127c1",
-      "bytes": 16461,
-      "durationMs": 1295,
+      "sha256": "b37955335cfb636d423cac4d53c01ba634f88be57daf4a16b67c2e43780e0e86",
+      "bytes": 6669,
+      "durationMs": 528,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -207,9 +214,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w10.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "0adcfe86e00a0914ace4aa996858f9b02ee241f3335790dc22288ee97ff9d6a7",
-      "bytes": 23373,
-      "durationMs": 1870,
+      "sha256": "2f99ab7ac3f28716c2a89a22d6dd3fc6320c9e620cc6a0505e9ae7de2b1c3d09",
+      "bytes": 13581,
+      "durationMs": 1104,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -218,9 +225,9 @@
       "path": "/poc/lesson1-2-experience/audio/l01-w11.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "4ca14b8a98786b5937a9f9f91d25bde0d900b95010bc757524affa2090492730",
-      "bytes": 23661,
-      "durationMs": 1895,
+      "sha256": "84b78b329b5e65da276ac103d9c579908928e2efbe83c580bb9d15bb8730e671",
+      "bytes": 13869,
+      "durationMs": 1128,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -229,9 +236,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w01.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "2ebb5809a3373fef83d8b72b182d8e7ec2083064a7f462b9de438a687fa23ca6",
-      "bytes": 21357,
-      "durationMs": 1695,
+      "sha256": "ba7aae60bd404b53c6e1a02ee9d43141cda3141edc87802a1fc850be6365a972",
+      "bytes": 11277,
+      "durationMs": 912,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -240,9 +247,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w02.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "09a629a3eed225578fd225ecb31e5217dbb67601c129d453a930ef5a545b60b9",
-      "bytes": 21933,
-      "durationMs": 1745,
+      "sha256": "4c98e3c1bd340420b84f1931df76f375919b2b9de45ccf0761ab3ea26c87c033",
+      "bytes": 11853,
+      "durationMs": 960,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -251,9 +258,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w03.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "8980fd340913856a993ccc70de5eaf42f528b077fcb718015ac43f8263e9cecd",
-      "bytes": 19629,
-      "durationMs": 1545,
+      "sha256": "cb46c2be0b58efcc5b1100109d0e147930e60290b26d04549b068d8e9be7411b",
+      "bytes": 9549,
+      "durationMs": 768,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -262,9 +269,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w04.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "504fc4fb9fde3d9e691bfb2368fa1b5ddb3a1b88797e3ec64411043cd7db8ed5",
-      "bytes": 21645,
-      "durationMs": 1720,
+      "sha256": "c9b20d295e25449bf52110d4c159e0a972a2e0ae86e24f957653353b89203894",
+      "bytes": 11565,
+      "durationMs": 936,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -273,9 +280,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w05.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "30adb68433c9bc977115c1ac92de3999e5b82ccb0751d51dbd660558d7587605",
-      "bytes": 20205,
-      "durationMs": 1595,
+      "sha256": "acad1509e735c8f521cc3660ceb55bbc4bead2ba959a5e25525f08c5c2eea855",
+      "bytes": 10125,
+      "durationMs": 816,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -284,9 +291,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w06.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "ba0e499a7f68db4fa709e59e66650ad8d8d18578b4e72cad0f4736c1891d6d44",
-      "bytes": 21357,
-      "durationMs": 1695,
+      "sha256": "b6fbe54c3a708a5bea328bb6f5e4b460ca27cc984c7ffb0adc587ace8a8fab26",
+      "bytes": 11277,
+      "durationMs": 912,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -295,9 +302,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w07.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "9e5244efc4942471318fd127f524231bd6a90f4b44d3cb8647ccd128912839e8",
-      "bytes": 21069,
-      "durationMs": 1670,
+      "sha256": "891db3c1d13204578670ff399fea62c1a559aca8bd6c0da01e0d450d146ff900",
+      "bytes": 10989,
+      "durationMs": 888,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -306,9 +313,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w08.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "1cb8833562d8af5a01952de030c2219b97cc507a71557d0a32421c2ea2c8308a",
-      "bytes": 20493,
-      "durationMs": 1620,
+      "sha256": "3cd1ed881b88be924674e3bd4ea8d5bfda72593ce8c5cb28256f02fc3b8cde54",
+      "bytes": 10413,
+      "durationMs": 840,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -317,9 +324,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w09.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "0ba5c058aa7faf3e7ea49a381e55f138e4b0737b2f1bff4856864553a9dce928",
-      "bytes": 20205,
-      "durationMs": 1595,
+      "sha256": "604ee10dad23985ac9f62df058494cee0caed4d7e5c7864afa8f1f9bbd6a6c4d",
+      "bytes": 10125,
+      "durationMs": 816,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -328,9 +335,9 @@
       "path": "/poc/lesson1-2-experience/audio/l02-w10.mp3",
       "voiceId": "af_heart",
       "speed": 0.9,
-      "sha256": "4fdd7a50e8a37e495533c45300a01147f7971d83c587d147dcf4e47eb64b1956",
-      "bytes": 21357,
-      "durationMs": 1695,
+      "sha256": "84588bdf0928cd477cf6d13731c5136846645f7bb7de133f20ccfad7ec95f6c1",
+      "bytes": 11277,
+      "durationMs": 912,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -339,9 +346,9 @@
       "path": "/poc/lesson1-2-experience/audio/nce-u01-c-q-watch.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "4d270e0c552e5efd104c340033919966cc4a72e9353e38850359c6015df7bc78",
-      "bytes": 29133,
-      "durationMs": 2345,
+      "sha256": "93214bab4ac2341b435414685681edc4940833d3713c61d3f08d35ed49fb0703",
+      "bytes": 19053,
+      "durationMs": 1560,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -350,9 +357,9 @@
       "path": "/poc/lesson1-2-experience/audio/nce-u01-c-q-coat.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "092cabea69ee984d6553f524114d5cba6ee1e1536d49cc4783badf9ac5bde2cf",
-      "bytes": 28845,
-      "durationMs": 2320,
+      "sha256": "df21029b3c8290d10d34a488f41a5315c607393956de9630db103d32c696d1f4",
+      "bytes": 18765,
+      "durationMs": 1536,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -361,9 +368,9 @@
       "path": "/poc/lesson1-2-experience/audio/nce-u01-c-q-car.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "c510155785e858db59e9c55b8da47b096a6d382e21d4a2cc236383eaa8dfe8ce",
-      "bytes": 29133,
-      "durationMs": 2345,
+      "sha256": "cb3fadcdbdbca5162aff32c8f5ac218d3ae14d52e30883ebb17614f4c547dd03",
+      "bytes": 19053,
+      "durationMs": 1560,
       "reviewStatus": "unreviewed-candidate"
     },
     {
@@ -372,9 +379,9 @@
       "path": "/poc/lesson1-2-experience/audio/nce-u01-c-q-house.mp3",
       "voiceId": "am_michael",
       "speed": 0.9,
-      "sha256": "466202eb70e05b062df1b05fa0a8930e6329e1beded6d5128966b7d548cc0e51",
-      "bytes": 28269,
-      "durationMs": 2270,
+      "sha256": "60a6b8511e1c42bea017c391d34e3e0538cce11004bd1ba5aa23ebdaa61f75b8",
+      "bytes": 18189,
+      "durationMs": 1488,
       "reviewStatus": "unreviewed-candidate"
     }
   ]

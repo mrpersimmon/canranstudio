@@ -203,6 +203,48 @@ test('every standalone English audio prompt keeps its catalog text visible', asy
   await expect(audioPanel.getByText('Thank you very much.', { exact: true })).toBeVisible();
 });
 
+test('standalone word recordings begin with English instead of a long audio prelude', async ({ page }) => {
+  const standaloneWordSources = Object.values(unit.lessonContent)
+    .flatMap(lesson => Object.values(lesson.sources))
+    .filter(source => source.audioSrc && ['vocabulary', 'substitution-item'].includes(source.sourceKind))
+    .map(source => ({ sourceId: source.sourceId, audioSrc: source.audioSrc }));
+
+  await page.goto(EXPERIENCE_PATH);
+  const decodedOnsets = await page.evaluate(async sources => {
+    const context = new AudioContext();
+    const threshold = 10 ** (-45 / 20);
+    const results = [];
+    try {
+      for (const source of sources) {
+        const response = await fetch(source.audioSrc);
+        const buffer = await context.decodeAudioData(await response.arrayBuffer());
+        const samples = buffer.getChannelData(0);
+        const windowSamples = Math.max(1, Math.round(buffer.sampleRate * 0.01));
+        let onsetSample = samples.length;
+        for (let offset = 0; offset < samples.length; offset += windowSamples) {
+          let energy = 0;
+          const end = Math.min(offset + windowSamples, samples.length);
+          for (let index = offset; index < end; index += 1) energy += samples[index] ** 2;
+          if (Math.sqrt(energy / (end - offset)) >= threshold) {
+            onsetSample = offset;
+            break;
+          }
+        }
+        results.push({
+          sourceId: source.sourceId,
+          onsetMs: Math.round((onsetSample / buffer.sampleRate) * 1000)
+        });
+      }
+    } finally {
+      await context.close();
+    }
+    return results;
+  }, standaloneWordSources);
+
+  expect(decodedOnsets).toHaveLength(21);
+  expect(decodedOnsets.filter(result => result.onsetMs > 150)).toEqual([]);
+});
+
 test('the selected split-stage design frames the transcript with large speaking characters', async ({ page }) => {
   await installManualAudio(page);
   await page.setViewportSize({ width: 1440, height: 1024 });

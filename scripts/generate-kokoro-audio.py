@@ -63,7 +63,16 @@ def main():
                 [
                     "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                     "-i", wav_path,
-                    "-af", "loudnorm=I=-18:TP=-2:LRA=7,apad=pad_dur=0.22",
+                    "-af",
+                    (
+                        "loudnorm=I=-18:TP=-2:LRA=7,"
+                        "silenceremove=start_periods=1:start_duration=0.02:"
+                        "start_threshold=-45dB:start_silence=0.10,"
+                        "areverse,"
+                        "silenceremove=start_periods=1:start_duration=0.05:"
+                        "start_threshold=-45dB:start_silence=0.24,"
+                        "areverse"
+                    ),
                     "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "96k",
                     output_path,
                 ],

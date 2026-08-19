@@ -149,7 +149,7 @@ test('the local candidate voice pack covers every catalog audio identity and sta
     const absolutePath = path.join(ROOT, file.path.replace(/^\//, ''));
     const [stat, bytes] = await Promise.all([fs.stat(absolutePath), fs.readFile(absolutePath)]);
     assert.equal(stat.size, file.bytes);
-    assert.ok(stat.size > 10_000);
+    assert.ok(stat.size > 6_000);
     assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256);
   }
 
@@ -201,7 +201,7 @@ test('the Lesson 1 dialogue voice pack follows the textbook speakers through the
   }
 });
 
-test('the local voice pack stays on the exact original candidate selected by the user', async () => {
+test('the local voice pack keeps the selected youth voices with the accepted onset cleanup', async () => {
   const manifest = JSON.parse(await fs.readFile(
     path.join(ROOT, 'poc/lesson1-2-experience/audio/manifest.json'),
     'utf8'
@@ -213,11 +213,18 @@ test('the local voice pack stays on the exact original candidate selected by the
     .update(JSON.stringify(voiceFileFingerprint))
     .digest('hex');
 
-  assert.equal(manifest.packId, 'nce-u01-kokoro-candidate-v1');
+  assert.equal(manifest.packId, 'nce-u01-kokoro-candidate-v2');
   assert.equal(manifest.voiceBaselineId, 'nce-youth-v1');
   assert.equal(manifest.engine.name, 'Kokoro');
+  assert.deepEqual(manifest.processing, {
+    profileId: 'instructional-onset-v1',
+    silenceThresholdDb: -45,
+    decodedOnsetLimitMs: 150,
+    leadingSilenceKeptMs: 100,
+    trailingSilenceKeptMs: 240
+  });
   assert.equal(
     canonicalVoiceFileSha256,
-    '0b1fabede0790a7b98a53335515f7cd295bfc305008788370564df1e2e082980'
+    'f3c25f40d1542f424cc4a200a2c5f0352a70e006da2b1c8cde31d415790eecf8'
   );
 });

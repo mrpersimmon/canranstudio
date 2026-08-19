@@ -11,8 +11,9 @@ const ROOT = resolve(import.meta.dirname, '..');
 const UNIT_ID = 'NCE-U01';
 const OUTPUT_DIR = join(ROOT, 'poc/lesson1-2-experience/audio');
 const PYTHON = process.env.KOKORO_PYTHON;
+const REFRESH_EXISTING = process.argv.includes('--refresh-manifest');
 
-if (!PYTHON || !existsSync(PYTHON)) {
+if (!REFRESH_EXISTING && (!PYTHON || !existsSync(PYTHON))) {
   throw new Error('Set KOKORO_PYTHON to a Kokoro-capable Python executable.');
 }
 
@@ -56,14 +57,16 @@ const items = catalogItems.map(item => {
 });
 
 mkdirSync(OUTPUT_DIR, { recursive: true });
-const worker = spawnSync(PYTHON, [join(ROOT, 'scripts/generate-kokoro-audio.py')], {
-  cwd: ROOT,
-  encoding: 'utf8',
-  input: JSON.stringify({ items }),
-  maxBuffer: 8 * 1024 * 1024,
-  stdio: ['pipe', 'inherit', 'inherit']
-});
-if (worker.status !== 0) throw new Error(`Kokoro worker failed with exit code ${worker.status}.`);
+if (!REFRESH_EXISTING) {
+  const worker = spawnSync(PYTHON, [join(ROOT, 'scripts/generate-kokoro-audio.py')], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    input: JSON.stringify({ items }),
+    maxBuffer: 8 * 1024 * 1024,
+    stdio: ['pipe', 'inherit', 'inherit']
+  });
+  if (worker.status !== 0) throw new Error(`Kokoro worker failed with exit code ${worker.status}.`);
+}
 
 const files = items.map(item => {
   const bytes = readFileSync(item.outputPath);
@@ -85,7 +88,7 @@ const files = items.map(item => {
 
 const manifest = {
   schemaVersion: 1,
-  packId: 'nce-u01-kokoro-candidate-v1',
+  packId: 'nce-u01-kokoro-candidate-v2',
   unitId: UNIT_ID,
   voiceBaselineId: unit.voiceBaselineId,
   status: 'local-poc-candidate-unreviewed',
@@ -99,6 +102,13 @@ const manifest = {
     outputUseStatus: 'requires-review-before-publication'
   },
   encoding: { format: 'mp3', sampleRateHz: 24000, bitrateKbps: 96, loudnessTargetLufs: -18 },
+  processing: {
+    profileId: 'instructional-onset-v1',
+    silenceThresholdDb: -45,
+    decodedOnsetLimitMs: 150,
+    leadingSilenceKeptMs: 100,
+    trailingSilenceKeptMs: 240
+  },
   replacementContract: {
     scope: 'whole-unit-pack',
     identity: 'catalog Source ID or authored Content ID',
