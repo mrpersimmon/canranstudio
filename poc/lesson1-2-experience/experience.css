@@ -1177,6 +1177,50 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
 .feedback-bubble[data-tone='danger'] .feedback-bubble__seal { background: radial-gradient(circle at 35% 30%, #ffe7d9, #d67a67 62%, #8a3939); }
 .feedback-bubble[data-tone='danger'] .feedback-bubble__copy > strong { color: #8a3939; }
 
+.feedback-mission-bar {
+  width: 100%;
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  padding: 10px 22px;
+  border: 3px solid #bd8534;
+  border-radius: 16px;
+  color: #fff7dc;
+  background: linear-gradient(180deg, #70451f, #4b2b18);
+  box-shadow: 0 6px 0 rgba(37, 20, 14, .72), inset 0 0 0 2px rgba(255, 217, 120, .12);
+  animation: bubble-pop .24s ease-out both;
+}
+.feedback-mission-bar .heart-row {
+  margin: 0;
+  padding: 1px 18px 1px 0;
+  border: 0;
+  border-right: 1px solid rgba(255, 217, 120, .38);
+  border-radius: 0;
+  background: transparent;
+}
+.feedback-mission-bar .heart-row span { font-size: 1.35rem; }
+.feedback-mission-bar p {
+  margin: 0;
+  color: #fff7dc;
+  font: 700 clamp(1rem, 2vw, 1.3rem)/1.35 'Baloo 2', 'ZCOOL KuaiLe', sans-serif;
+  letter-spacing: .01em;
+}
+.mission-console.mission-console--support-scene {
+  width: clamp(560px, 56vw, 760px);
+  max-height: none;
+  margin-top: 100px;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: none;
+}
+.mission-console--support-scene::before,
+.mission-console--support-scene::after { display: none; }
+
 .milestone-card { width: min(720px, 92vw); }
 .milestone-companion {
   position: absolute;
@@ -1258,6 +1302,14 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
     transform: translateX(-50%);
   }
   .stage-prompt { display: none; }
+  .station-world:has(.mission-console--support-scene) .scene-heading { display: none; }
+  .station-world:has(.mission-console--support-scene) .stage-prompt {
+    display: block;
+    top: 12px;
+    width: calc(100vw - 28px);
+    font-size: clamp(1.18rem, 5.7vw, 1.45rem);
+    line-height: 1.15;
+  }
   .scene-character {
     top: 52px;
     bottom: auto;
@@ -1315,6 +1367,30 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
   .sound-fallback { grid-template-columns: auto 1fr; }
   .sound-fallback button { grid-column: 1 / -1; }
   .feedback-bubble { width: 100%; margin-top: 10px; }
+  .mission-console.mission-console--with-cast.mission-console--support-scene {
+    width: calc(100vw - 24px);
+    max-height: none;
+    margin-top: 274px;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .feedback-mission-bar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 7px;
+    min-height: 78px;
+    padding: 9px 14px 11px;
+    text-align: center;
+  }
+  .feedback-mission-bar .heart-row {
+    padding: 0 0 6px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 217, 120, .32);
+  }
+  .feedback-mission-bar p { font-size: .95rem; }
   .station-app[data-view='briefing'] .station-world { align-content: center; padding: 10px; }
   .briefing-card {
     width: 100%;
@@ -1351,7 +1427,7 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
   .briefing-copy .door-handle { min-height: 52px; padding-block: 10px; }
 }
 
-@media (max-height: 690px) {
+@media (max-height: 690px) and (max-width: 680px) {
   .scene-character { top: 42px; width: 104px; height: 158px; }
   .scene-companion { left: calc(50% - 82px); top: 136px; width: 56px; height: 64px; }
   .scene-companion--featured { left: auto; right: 6px; top: 112px; width: 92px; height: 104px; }

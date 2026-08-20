@@ -92,6 +92,13 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - Support, correct, partner, and persistence feedback now share one in-console luggage-tag treatment with cream paper, walnut shadow, brass punch hole, a masked star seal, and a small semantic heading. Partner rescue retains the approved cat image; teal and rose remain restrained state accents rather than separate component styles.
 - A browser regression creates the exact first owner-identification error, requires the support tag inside `.mission-console`, verifies the `星灯提示` heading and brass seal, rejects the old `img.ui-icon`, and checks that the tag remains geometrically inside the console. The complete 25-test Lesson 1–2 flow remains green.
 
+### Pass 13 — selected option 1 becomes the correction state
+
+- The user rejected the cream luggage-tag correction treatment and selected the high-fidelity option 1 image as the visual source of truth. The first owner-identification error now removes the paper response console and replaces it with one compact walnut-and-brass mission bar. The remaining attempt hearts are integrated at the left, followed by the exact scaffold `回想一下，最后是谁说“对，是我的”。`; the two adult characters and handbag remain the dominant scene actors.
+- P2 desktop proportion: the first implementation used `68vw`, making the bar materially wider than the selected source. The final implementation uses a bounded `56vw` rhythm, enlarges the integrated hearts, and keeps the bar centered directly beneath the question. The course header, progress meter, mission title, character labels, and real catalog text intentionally remain because they are established product and learning constraints rather than decorative differences.
+- P2 mobile context: the existing small-screen rule hid the stage question during correction, leaving only the scaffold. The selected correction state now swaps the chapter heading for the original question on small screens, keeping both the question and scaffold visible without covering the characters or handbag.
+- Same-input QA evidence: `docs/designs/lesson1-2-design-qa/feedback-option1-source-normalized-20260820.png` and `feedback-option1-implementation-20260820.png` are placed together in `feedback-option1-comparison-20260820.png` at `1068 × 526`; `feedback-option1-mobile-20260820.png` verifies the `390 × 844` layout. The exact wrong-answer state was exercised in the in-app browser; console errors were empty. No P0, P1, or P2 mismatch remains.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.

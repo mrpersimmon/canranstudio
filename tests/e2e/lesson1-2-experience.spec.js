@@ -212,7 +212,7 @@ test('the explorer cat returns visibly when partner rescue has a real job', asyn
   await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
 });
 
-test('correction feedback is an in-console brass clue tag instead of a floating black star toast', async ({ page }) => {
+test('the first owner error collapses the paper console into the selected mission prompt bar', async ({ page }) => {
   await installInstantAudio(page);
   await openFresh(page);
   await enterFirstMission(page);
@@ -220,18 +220,31 @@ test('correction feedback is an in-console brass clue tag instead of a floating 
   await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
   await clickValue(page, 'select-entity', 'station-keeper');
 
-  const feedback = page.locator('.mission-console .feedback-bubble[data-tone="support"]');
+  const console = page.locator('.mission-console--support-scene');
+  const feedback = console.locator('.feedback-mission-bar[data-tone="support"]');
+  await expect(console).toBeVisible();
   await expect(feedback).toBeVisible();
-  await expect(feedback.locator('.feedback-bubble__seal')).toBeVisible();
-  await expect(feedback.locator('.feedback-bubble__copy > strong')).toHaveText('星灯提示');
-  await expect(feedback.locator('img.ui-icon')).toHaveCount(0);
+  await expect(feedback.locator('.heart-row')).toBeVisible();
+  await expect(feedback.locator('p')).toHaveText('回想一下，最后是谁说“对，是我的”。');
+  await expect(console.locator(':scope > .mission-prompt')).toHaveCount(0);
+  await expect(console.locator('[data-response-fields]')).toHaveCount(0);
+  await expect(console.locator('.feedback-bubble')).toHaveCount(0);
+  await page.waitForTimeout(300);
   const geometry = await feedback.evaluate(element => {
     const box = element.getBoundingClientRect();
     const consoleBox = element.closest('.mission-console').getBoundingClientRect();
-    return { top: box.top, bottom: box.bottom, consoleTop: consoleBox.top, consoleBottom: consoleBox.bottom };
+    return {
+      top: box.top, bottom: box.bottom, width: box.width,
+      consoleTop: consoleBox.top, consoleBottom: consoleBox.bottom, consoleWidth: consoleBox.width
+    };
   });
   expect(geometry.top).toBeGreaterThanOrEqual(geometry.consoleTop);
-  expect(geometry.bottom).toBeLessThanOrEqual(geometry.consoleBottom + 1);
+  expect(geometry.bottom).toBeLessThanOrEqual(geometry.consoleBottom + 8);
+  expect(Math.abs(geometry.width - geometry.consoleWidth)).toBeLessThanOrEqual(2);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.stage-prompt')).toBeVisible();
+  await expect(page.locator('.stage-prompt')).toHaveText('这是谁的手提包？找到它的主人');
 });
 
 test('every standalone English audio prompt keeps its catalog text visible', async ({ page }) => {

@@ -616,8 +616,14 @@
       return '';
     }
 
-    function feedbackMarkup() {
+    function feedbackMarkup(snapshot, step) {
       if (!ui.feedback) return '';
+      if (ui.feedback.tone === 'support') {
+        return `<aside class="feedback-mission-bar" data-tone="support" role="status" aria-live="polite">
+          ${hearts(snapshot, step)}
+          <p>${escapeHtml(ui.feedback.message)}</p>
+        </aside>`;
+      }
       const cat = unit.entities?.['cat-guide'];
       const labels = {
         support: '星灯提示',
@@ -756,6 +762,10 @@
         : (['audio-ready', 'audio-playing'].includes(snapshot.phase)
             ? audioPanel(snapshot, step, adultEntityIds)
             : responsePanel(snapshot, step, sceneEntityIds));
+      const supportFeedback = ui.feedback?.tone === 'support';
+      const sceneOnlySupport = supportFeedback
+        && step?.kind === 'select-entity'
+        && sceneEntityIds.length > 0;
       return commonShell(`<div class="scene-heading">
           <div><p>${escapeHtml(task.presentation.stepLabel)}</p><h1>${escapeHtml(task.presentation.title)}</h1></div>
         </div>
@@ -765,11 +775,11 @@
           ${showSceneCompanion ? sceneCompanion(snapshot, step) : ''}
         </div>
         ${sceneEntityIds.length ? `<div class="scene-props" aria-label="故事物品">${sceneEntityIds.map(id => sceneProp(id, step)).join('')}</div>` : ''}
-        <section class="mission-console${adultEntityIds.length ? ' mission-console--with-cast' : ''}">
-          ${hearts(snapshot, step)}
-          <p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>
-          <div class="interaction-space" data-response-fields>${body}</div>
-          ${feedbackMarkup()}
+        <section class="mission-console${adultEntityIds.length ? ' mission-console--with-cast' : ''}${supportFeedback ? ' mission-console--support' : ''}${sceneOnlySupport ? ' mission-console--support-scene' : ''}">
+          ${supportFeedback ? feedbackMarkup(snapshot, step) : hearts(snapshot, step)}
+          ${supportFeedback ? '' : `<p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>`}
+          ${sceneOnlySupport ? '' : `<div class="interaction-space" data-response-fields>${body}</div>`}
+          ${supportFeedback ? '' : feedbackMarkup(snapshot, step)}
         </section>`, snapshot);
     }
 
