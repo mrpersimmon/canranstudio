@@ -1106,28 +1106,76 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
 }
 
 .feedback-bubble {
-  position: absolute;
-  z-index: 7;
-  right: clamp(14px, 4vw, 54px);
-  bottom: clamp(14px, 3vh, 36px);
-  max-width: min(380px, 78vw);
-  min-height: 62px;
-  display: flex;
+  position: relative;
+  z-index: 2;
+  width: min(560px, 100%);
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border: 3px solid var(--walnut-dark);
-  border-radius: 22px 22px 6px 22px;
+  gap: 12px;
+  margin: 12px auto 1px;
+  padding: 9px 15px 9px 11px;
+  border: 2px solid #a86f29;
+  border-left-width: 5px;
+  border-radius: 10px 18px 18px 10px;
   color: var(--walnut-dark);
-  background: var(--cream);
-  box-shadow: 0 7px 0 rgba(45, 26, 20, .7);
-  animation: bubble-pop .36s cubic-bezier(.2, 1.2, .3, 1) both;
+  background:
+    linear-gradient(90deg, rgba(201, 139, 50, .1), transparent 24%),
+    linear-gradient(180deg, #fffaf0, #f4e1b3);
+  box-shadow: 0 4px 0 rgba(107, 63, 42, .42), inset 0 0 0 1px rgba(255, 255, 255, .72);
+  animation: bubble-pop .24s ease-out both;
 }
-.feedback-bubble span { color: var(--brass); font-size: 1.8rem; }
-.feedback-bubble img { width: 58px; height: 58px; object-fit: contain; }
-.feedback-bubble p { margin: 0; font-weight: 700; line-height: 1.32; }
-.feedback-bubble[data-tone='correct'] { border-color: var(--teal-dark); background: #eafff9; }
-.feedback-bubble[data-tone='danger'] { border-color: #8a3939; background: #fff0ed; }
+.feedback-bubble::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #6f431f;
+  border-radius: 50%;
+  background: #f8e6b8;
+  box-shadow: inset 0 1px 2px rgba(62, 36, 28, .45);
+  transform: translateY(-50%);
+}
+.feedback-bubble__seal,
+.feedback-bubble__guide {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #85531f;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe5a0, #d99a35 58%, #8b551e 100%);
+  box-shadow: 0 3px 0 rgba(91, 50, 25, .35), inset 0 1px 0 rgba(255, 255, 255, .58);
+}
+.feedback-bubble__seal::before {
+  content: '';
+  width: 21px;
+  height: 21px;
+  background: #fff6da;
+  -webkit-mask: url('/poc/lesson1-2-experience/assets/icons/star-fill.svg') center / contain no-repeat;
+  mask: url('/poc/lesson1-2-experience/assets/icons/star-fill.svg') center / contain no-repeat;
+}
+.feedback-bubble__guide { overflow: hidden; background: var(--night-deep); }
+.feedback-bubble__guide img { width: 100%; height: 100%; object-fit: contain; }
+.feedback-bubble__copy { min-width: 0; }
+.feedback-bubble__copy > strong {
+  display: block;
+  margin-bottom: 1px;
+  color: #9b6426;
+  font: 800 .7rem/1 'Fredoka', 'ZCOOL KuaiLe', sans-serif;
+  letter-spacing: .12em;
+}
+.feedback-bubble p { margin: 0; font-weight: 700; line-height: 1.34; }
+.feedback-bubble[data-tone='correct'] { border-color: var(--teal-dark); background: linear-gradient(180deg, #f4fffb, #cceee5); }
+.feedback-bubble[data-tone='correct'] .feedback-bubble__seal { background: radial-gradient(circle at 35% 30%, #d8fff6, #52b7ac 62%, #247f79); }
+.feedback-bubble[data-tone='correct'] .feedback-bubble__copy > strong { color: var(--teal-dark); }
+.feedback-bubble[data-tone='partner'] { border-color: #6d537e; background: linear-gradient(180deg, #fff9f1, #ecd9e8); }
+.feedback-bubble[data-tone='danger'] { border-color: #8a3939; background: linear-gradient(180deg, #fff8f2, #f4d6cf); }
+.feedback-bubble[data-tone='danger'] .feedback-bubble__seal { background: radial-gradient(circle at 35% 30%, #ffe7d9, #d67a67 62%, #8a3939); }
+.feedback-bubble[data-tone='danger'] .feedback-bubble__copy > strong { color: #8a3939; }
 
 .milestone-card { width: min(720px, 92vw); }
 .milestone-companion {
@@ -1266,7 +1314,7 @@ button.scene-prop:focus-visible { filter: drop-shadow(0 0 24px rgba(115, 215, 19
   .action-arrow { transform: rotate(90deg); font-size: 1.5rem; }
   .sound-fallback { grid-template-columns: auto 1fr; }
   .sound-fallback button { grid-column: 1 / -1; }
-  .feedback-bubble { right: 10px; bottom: 10px; }
+  .feedback-bubble { width: 100%; margin-top: 10px; }
   .station-app[data-view='briefing'] .station-world { align-content: center; padding: 10px; }
   .briefing-card {
     width: 100%;

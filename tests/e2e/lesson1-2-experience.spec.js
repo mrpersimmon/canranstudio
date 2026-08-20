@@ -212,6 +212,28 @@ test('the explorer cat returns visibly when partner rescue has a real job', asyn
   await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
 });
 
+test('correction feedback is an in-console brass clue tag instead of a floating black star toast', async ({ page }) => {
+  await installInstantAudio(page);
+  await openFresh(page);
+  await enterFirstMission(page);
+  await page.locator('[data-action="audio-play"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
+  await clickValue(page, 'select-entity', 'station-keeper');
+
+  const feedback = page.locator('.mission-console .feedback-bubble[data-tone="support"]');
+  await expect(feedback).toBeVisible();
+  await expect(feedback.locator('.feedback-bubble__seal')).toBeVisible();
+  await expect(feedback.locator('.feedback-bubble__copy > strong')).toHaveText('星灯提示');
+  await expect(feedback.locator('img.ui-icon')).toHaveCount(0);
+  const geometry = await feedback.evaluate(element => {
+    const box = element.getBoundingClientRect();
+    const consoleBox = element.closest('.mission-console').getBoundingClientRect();
+    return { top: box.top, bottom: box.bottom, consoleTop: consoleBox.top, consoleBottom: consoleBox.bottom };
+  });
+  expect(geometry.top).toBeGreaterThanOrEqual(geometry.consoleTop);
+  expect(geometry.bottom).toBeLessThanOrEqual(geometry.consoleBottom + 1);
+});
+
 test('every standalone English audio prompt keeps its catalog text visible', async ({ page }) => {
   await installManualAudio(page);
   await openFresh(page);

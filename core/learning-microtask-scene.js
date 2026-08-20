@@ -619,10 +619,19 @@
     function feedbackMarkup() {
       if (!ui.feedback) return '';
       const cat = unit.entities?.['cat-guide'];
-      const image = ui.feedback.tone === 'partner' && cat?.assetSrc
-        ? `<img src="${escapeHtml(cat.assetSrc)}" alt="">`
-        : `<span aria-hidden="true">${uiIcon('star-fill')}</span>`;
-      return `<aside class="feedback-bubble" data-tone="${escapeHtml(ui.feedback.tone)}" role="status" aria-live="polite">${image}<p>${escapeHtml(ui.feedback.message)}</p></aside>`;
+      const labels = {
+        support: '星灯提示',
+        partner: '小猫来帮忙',
+        correct: '线索找到了',
+        danger: '保存提醒'
+      };
+      const emblem = ui.feedback.tone === 'partner' && cat?.assetSrc
+        ? `<span class="feedback-bubble__guide" aria-hidden="true"><img src="${escapeHtml(cat.assetSrc)}" alt=""></span>`
+        : '<span class="feedback-bubble__seal" aria-hidden="true"></span>';
+      return `<aside class="feedback-bubble" data-tone="${escapeHtml(ui.feedback.tone)}" role="status" aria-live="polite">
+        ${emblem}
+        <div class="feedback-bubble__copy"><strong>${escapeHtml(labels[ui.feedback.tone] || '星灯提示')}</strong><p>${escapeHtml(ui.feedback.message)}</p></div>
+      </aside>`;
     }
 
     function milestoneCompanion(label) {
@@ -760,8 +769,8 @@
           ${hearts(snapshot, step)}
           <p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>
           <div class="interaction-space" data-response-fields>${body}</div>
-        </section>
-        ${feedbackMarkup()}`, snapshot);
+          ${feedbackMarkup()}
+        </section>`, snapshot);
     }
 
     function chapterMarkup(snapshot) {

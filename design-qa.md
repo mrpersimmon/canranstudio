@@ -86,6 +86,12 @@ A separate crop was not required: at `1440 × 1024`, the full-view comparison ke
 - Ten emoji objects were replaced with separate built-in ImageGen transparent cutouts using the accepted stage background, handbag material quality, and first pen asset as style references. The existing handbag remains the eleventh item. Catalog owns all AVIF/WebP addresses; the runtime has no item-specific image mapping and no child-facing emoji fallback.
 - Desktop and 390×844 browser checks increased the old icon slot to preserve object detail while retaining one-viewport task geometry. Evidence: `docs/designs/lesson1-2-design-qa/item-art-stage8-desktop-20260820.png` and `item-art-stage8-mobile-20260820.png`. Automated checks cover all ten masters and twenty derivatives, eight sampled T1 cells, all eleven exposure refs, full twelve-task completion, and zero object emoji nodes.
 
+### Pass 12 — correction feedback belongs to the task console
+
+- Screenshot-backed user review rejected the bottom-right white correction Toast and oversized black star as visually detached from the station. The black star was also a real rendering mismatch: an external SVG loaded through `<img>` cannot inherit the surrounding `currentColor`.
+- Support, correct, partner, and persistence feedback now share one in-console luggage-tag treatment with cream paper, walnut shadow, brass punch hole, a masked star seal, and a small semantic heading. Partner rescue retains the approved cat image; teal and rose remain restrained state accents rather than separate component styles.
+- A browser regression creates the exact first owner-identification error, requires the support tag inside `.mission-console`, verifies the `星灯提示` heading and brass seal, rejects the old `img.ui-icon`, and checks that the tag remains geometrically inside the console. The complete 25-test Lesson 1–2 flow remains green.
+
 ## Required fidelity surfaces
 
 - Fonts and typography: existing local `ZCOOL KuaiLe`, `Fredoka`, and `Baloo 2` roles are retained; display Chinese, English transcript, speaker labels, and utility text have distinct readable weights and no clipping in the captured viewports.
