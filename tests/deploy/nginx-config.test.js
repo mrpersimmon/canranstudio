@@ -4,15 +4,11 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const verifier = require('../../scripts/verify-live');
 
 const config = fs.readFileSync(
   path.resolve(__dirname, '../../deploy/nginx/canranstudio-http.conf'),
   'utf8'
 );
-
-const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
-const REVIEW_CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 
 function tokenizeNginx(text) {
   const tokens = [];
@@ -151,17 +147,13 @@ function assertExactChildren(nodes, expected, label) {
   );
 }
 
-function assertNoTransportUpgrade(nodes) {
+function assertNoTlsOnRedirect(nodes) {
   for (const node of nodes) {
     assert.notEqual(node.name, 'ssl');
     assert.equal(node.name.startsWith('ssl_'), false);
     if (node.name === 'listen') assert.equal(node.args.includes('443'), false);
     if (node.name === 'add_header') assert.notEqual(node.args[0], 'Strict-Transport-Security');
-    if (node.name === 'return' || node.name === 'rewrite') {
-      assert.equal(node.args.some(argument => argument.startsWith('https://')), false);
-    }
-    assert.equal(node.args.some(argument => argument.toLowerCase().includes('upgrade-insecure-requests')), false);
-    if (node.children) assertNoTransportUpgrade(node.children);
+    if (node.children) assertNoTlsOnRedirect(node.children);
   }
 }
 
@@ -171,145 +163,22 @@ function assertHttpContract(text) {
   const server = one(root, 'server', []);
   const children = server.children;
 
-  const redirects = [
-    ['/home', '/'],
-    ['/home/', '/'],
-    ['/home/index.html', '/'],
-    ['/lesson49', '/lesson49/'],
-    ['/lesson50', '/lesson50/'],
-    ['/lesson51', '/lesson51/'],
-    ['/lesson52', '/lesson52/'],
-    ['/lesson53', '/lesson53/'],
-    ['/lesson54', '/lesson54/'],
-    ['/soundmark', '/soundmark/'],
-    ['/poc/landmark-review', '/poc/landmark-review/']
-  ];
   assertExactChildren(children, [
     leaf('listen', ['80']),
     leaf('listen', ['[::]:80']),
     leaf('server_name', ['59.110.217.36']),
-    leaf('root', ['/var/www/canranstudio/current']),
-    leaf('index', ['index.html']),
-    leaf('charset', ['utf-8']),
     leaf('server_tokens', ['off']),
-    leaf('absolute_redirect', ['off']),
-    leaf('open_file_cache', ['off']),
-    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
-    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
-    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
-    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
-    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
-    block('if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']),
-    ...redirects.map(([source]) => block('location', ['=', source])),
-    block('location', ['^~', '/poc/landmark-review/']),
-    block('location', ['~*', '^/assets/adventure-map/atlas/.*-atlas-[a-z0-9-]+-[0-9]+[.](avif|webp)$']),
-    block('location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']),
-    block('location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']),
-    block('location', ['/']),
-    block('location', ['~', '/\\.'])
+    leaf('return', ['301', 'https://www.canranstudio.cn$request_uri'])
   ], 'server');
 
   assert.deepEqual(direct(children, 'listen').map(node => node.args), [['80'], ['[::]:80']]);
-  for (const [name, args] of [
-    ['server_name', ['59.110.217.36']],
-    ['root', ['/var/www/canranstudio/current']],
-    ['index', ['index.html']],
-    ['charset', ['utf-8']],
-    ['server_tokens', ['off']],
-    ['absolute_redirect', ['off']],
-    ['open_file_cache', ['off']]
-  ]) {
-    assert.equal(direct(children, name).length, 1, `expected one ${name} directive`);
-    one(children, name, args);
-  }
-  assert.deepEqual(direct(children, 'add_header').map(node => node.args), [
-    ['Content-Security-Policy', CSP, 'always'],
-    ['X-Content-Type-Options', 'nosniff', 'always'],
-    ['X-Frame-Options', 'DENY', 'always'],
-    ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always'],
-    ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']
-  ]);
-
-  const guard = one(children, 'if', ['(', '$request_method', '!~', '^', '(', 'GET|HEAD', ')', '$', ')']);
-  assertExactChildren(guard.children, [leaf('return', ['405'])], 'method guard');
-  one(guard.children, 'return', ['405']);
-
-  for (const [source, destination] of redirects) {
-    const location = one(children, 'location', ['=', source]);
-    assertExactChildren(location.children, [leaf('return', ['308', destination])], `redirect ${source}`);
-    one(location.children, 'return', ['308', destination]);
-  }
-
-  const landmarkReview = one(children, 'location', ['^~', '/poc/landmark-review/']);
-  assertExactChildren(landmarkReview.children, [
-    leaf('try_files', ['$uri', '$uri/', '=404']),
-    leaf('expires', ['epoch']),
-    leaf('add_header', ['Content-Security-Policy', REVIEW_CSP, 'always']),
-    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
-    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
-    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
-    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
-    leaf('add_header', ['X-Robots-Tag', 'noindex, nofollow, noarchive', 'always']),
-    block('limit_except', ['GET', 'HEAD'])
-  ], 'landmark review');
-  const landmarkReviewLimit = one(landmarkReview.children, 'limit_except', ['GET', 'HEAD']);
-  assertExactChildren(landmarkReviewLimit.children, [leaf('deny', ['all'])], 'landmark review limit_except');
-
-  const atlasBackgrounds = one(children, 'location', [
-    '~*',
-    '^/assets/adventure-map/atlas/.*-atlas-[a-z0-9-]+-[0-9]+[.](avif|webp)$'
-  ]);
-  assertExactChildren(atlasBackgrounds.children, [
-    leaf('try_files', ['$uri', '=404']),
-    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
-    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
-    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
-    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
-    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
-    leaf('add_header', ['Cache-Control', 'public, max-age=31536000, immutable', 'always']),
-    block('limit_except', ['GET', 'HEAD'])
-  ], 'versioned atlas backgrounds');
-  const atlasBackgroundLimit = one(atlasBackgrounds.children, 'limit_except', ['GET', 'HEAD']);
-  assertExactChildren(atlasBackgroundLimit.children, [leaf('deny', ['all'])], 'atlas background limit_except');
-
-  const stateImages = one(children, 'location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']);
-  assertExactChildren(stateImages.children, [
-    leaf('try_files', ['$uri', '=404']),
-    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
-    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
-    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
-    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
-    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
-    leaf('add_header', ['Cache-Control', 'public, max-age=31536000, immutable', 'always']),
-    block('limit_except', ['GET', 'HEAD'])
-  ], 'versioned state images');
-  const stateLimit = one(stateImages.children, 'limit_except', ['GET', 'HEAD']);
-  assertExactChildren(stateLimit.children, [leaf('deny', ['all'])], 'state image limit_except');
-
-  const images = one(children, 'location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']);
-  assertExactChildren(images.children, [
-    leaf('try_files', ['$uri', '=404']),
-    leaf('expires', ['7d']),
-    block('limit_except', ['GET', 'HEAD'])
-  ], 'other public images');
-  const imageLimit = one(images.children, 'limit_except', ['GET', 'HEAD']);
-  assertExactChildren(imageLimit.children, [leaf('deny', ['all'])], 'image limit_except');
-
-  const staticLocation = one(children, 'location', ['/']);
-  assertExactChildren(staticLocation.children, [
-    leaf('try_files', ['$uri', '$uri/', '=404']),
-    leaf('expires', ['epoch']),
-    block('limit_except', ['GET', 'HEAD'])
-  ], 'static location');
-  one(staticLocation.children, 'try_files', ['$uri', '$uri/', '=404']);
-  const limitExcept = one(staticLocation.children, 'limit_except', ['GET', 'HEAD']);
-  assertExactChildren(limitExcept.children, [leaf('deny', ['all'])], 'limit_except');
-  one(limitExcept.children, 'deny', ['all']);
-
-  const dotfiles = one(children, 'location', ['~', '/\\.']);
-  assertExactChildren(dotfiles.children, [leaf('deny', ['all'])], 'dotfile location');
-  one(dotfiles.children, 'deny', ['all']);
-  assertNoTransportUpgrade(root);
+  one(children, 'server_name', ['59.110.217.36']);
+  one(children, 'server_tokens', ['off']);
+  one(children, 'return', ['301', 'https://www.canranstudio.cn$request_uri']);
+  assert.equal(direct(children, 'add_header').length, 0, 'redirect server must not set headers');
+  assert.equal(direct(children, 'root').length, 0, 'redirect server must not declare a root');
+  assert.equal(direct(children, 'location').length, 0, 'redirect server must not declare locations');
+  assertNoTlsOnRedirect(root);
 }
 
 function fakeString(value) {
@@ -320,56 +189,16 @@ const FORGED_DIRECTIVES = [
   'listen 80;',
   'listen [::]:80;',
   'server_name 59.110.217.36;',
-  'root /var/www/canranstudio/current;',
-  'index index.html;',
-  'charset utf-8;',
   'server_tokens off;',
-  'absolute_redirect off;',
-  `add_header Content-Security-Policy "${CSP}" always;`,
-  'add_header X-Content-Type-Options "nosniff" always;',
-  'add_header X-Frame-Options "DENY" always;',
-  'add_header Referrer-Policy "strict-origin-when-cross-origin" always;',
-  'add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;',
-  'if ($request_method !~ ^(GET|HEAD)$) { return 405; }',
-  'location = /home { return 308 /; }',
-  'location = /home/ { return 308 /; }',
-  'location = /home/index.html { return 308 /; }',
-  'location = /lesson49 { return 308 /lesson49/; }',
-  'location = /lesson50 { return 308 /lesson50/; }',
-  'location = /lesson51 { return 308 /lesson51/; }',
-  'location = /lesson52 { return 308 /lesson52/; }',
-  'location = /lesson53 { return 308 /lesson53/; }',
-  'location = /lesson54 { return 308 /lesson54/; }',
-  'location = /soundmark { return 308 /soundmark/; }',
-  'location ~* "^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$" { try_files $uri =404; }',
-  'location ~* "[.](avif|webp|png|jpe?g|svg)$" { try_files $uri =404; expires 7d; }',
-  'location / { try_files $uri $uri/ =404; expires epoch; limit_except GET HEAD { deny all; } }',
-  'location ~ /\\. { deny all; }'
+  'return 301 https://www.canranstudio.cn$request_uri;'
 ];
 
 const ACTIVE_STRING_FORGERY = `server {
 ${FORGED_DIRECTIVES.map((directive, index) => `  set $fake_${index} "${fakeString(directive)}";`).join('\n')}
 }`;
 
-test('Nginx contract defines the complete structural HTTP policy', () => {
+test('Nginx contract defines the complete redirect-to-HTTPS policy', () => {
   assertHttpContract(config);
-  assert.doesNotMatch(config, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
-  assert.match(config, /font-src 'self' data:/);
-});
-
-test('effective Nginx CSPs preserve the public contract with one review-only fetch exception', () => {
-  const root = parseNginx(config);
-  const server = one(root, 'server', []);
-  const values = [...new Set(effectiveHeaderValues(server, 'Content-Security-Policy'))];
-
-  assert.equal(
-    REVIEW_CSP,
-    verifier.LANDMARK_REVIEW_HEADER_CONTRACT['content-security-policy']
-  );
-  assert.deepEqual(values.sort(), [
-    verifier.HTTP_HEADER_CONTRACT['content-security-policy'],
-    REVIEW_CSP
-  ].sort());
 });
 
 test('Nginx tokenizer keeps comment markers and delimiters inside quoted arguments', () => {
@@ -392,16 +221,11 @@ test('Nginx contract does not accept active directive text hidden in set strings
   assert.throws(() => assertHttpContract(ACTIVE_STRING_FORGERY), /exact whitelist/);
 });
 
-test('Nginx contract rejects legal directives that alter error or header semantics', () => {
-  const altered = config
-    .replace(
-      '    server_tokens off;\n',
-      '    server_tokens off;\n    error_page 404 405 =200 /index.html;\n'
-    )
-    .replace(
-      '        try_files $uri $uri/ =404;\n',
-      '        try_files $uri $uri/ =404;\n        add_header X-Debug forged;\n'
-    );
+test('Nginx contract rejects legal directives that alter redirect semantics', () => {
+  const altered = config.replace(
+    '    server_tokens off;\n',
+    '    server_tokens off;\n    add_header X-Debug forged;\n'
+  );
 
   assert.throws(() => assertHttpContract(altered), /exact whitelist/);
 });

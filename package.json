@@ -8,7 +8,7 @@
   "scripts": {
     "build:static": "node scripts/build-static.js",
     "sync:home-fallback": "node scripts/home-course-fallback.js",
-    "verify:live:http": "node scripts/verify-live.js http://59.110.217.36",
+    "verify:live": "node scripts/verify-live.js https://www.canranstudio.cn",
     "test:deploy": "node --test tests/deploy/*.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:e2e": "playwright test",

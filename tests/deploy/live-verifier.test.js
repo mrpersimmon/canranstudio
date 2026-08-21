@@ -35,6 +35,8 @@ const SECURITY_HEADERS = {
   'permissions-policy': 'camera=(), microphone=(), geolocation=()'
 };
 
+const STS = 'max-age=31536000; includeSubDomains';
+
 const REVIEW_SECURITY_HEADERS = {
   ...SECURITY_HEADERS,
   'content-security-policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
@@ -172,6 +174,7 @@ function manifestFetch(root, options = {}) {
         status: 308,
         headers: {
           ...HTTP_HEADER_CONTRACT,
+          'strict-transport-security': STS,
           location: '/',
           ...headerOverrides[requestedPath]
         }
@@ -199,6 +202,7 @@ function manifestFetch(root, options = {}) {
         ...(requestedPath.startsWith('/poc/landmark-review/')
           ? REVIEW_SECURITY_HEADERS
           : HTTP_HEADER_CONTRACT),
+        'strict-transport-security': STS,
         ...(requestedPath === '/poc/landmark-review/'
           ? { 'x-robots-tag': 'noindex, nofollow, noarchive' }
           : {}),
@@ -259,7 +263,7 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const activity = { active: 0, maximum: 0, calls: [] };
   const results = await verifyBase({
-    baseUrl: 'http://59.110.217.36',
+    baseUrl: 'https://www.canranstudio.cn',
     root,
     fetchImpl: manifestFetch(root, { activity }),
     concurrency: 2
@@ -313,7 +317,7 @@ test('verifyBase requires the noindex response header on the landmark review rou
 
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         headerOverrides: {
@@ -331,7 +335,7 @@ test('verifyBase requires the review CSP on every landmark review resource', asy
 
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         headerOverrides: {
@@ -350,7 +354,7 @@ test('verifyBase reports changed JavaScript, font, and MP3 bytes in manifest ord
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       concurrency: 3,
       fetchImpl: manifestFetch(root, {
@@ -391,7 +395,7 @@ test('verifyBase rejects a manifest mismatch before trusting asset paths', async
   const activity = { active: 0, maximum: 0, calls: [] };
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         activity,
@@ -414,7 +418,7 @@ test('verifyBase rejects malformed manifest paths before asset requests', async 
 
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, { activity })
     }),
@@ -436,7 +440,7 @@ test('verifyBase rejects dot and directory manifest paths before asset requests'
 
       await assert.rejects(
         verifyBase({
-          baseUrl: 'http://59.110.217.36',
+          baseUrl: 'https://www.canranstudio.cn',
           root,
           fetchImpl: manifestFetch(root, { activity })
         }),
@@ -470,7 +474,7 @@ test('declared oversized bodies stay within concurrency and are all cancelled', 
 
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       concurrency: 2,
       fetchImpl: manifestFetch(root, { streamOverrides, headerOverrides })
@@ -491,7 +495,7 @@ test('invalid declared length cancels its body and cancellation failure is repor
 
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         streamOverrides: {
@@ -510,7 +514,7 @@ test('invalid declared length cancels its body and cancellation failure is repor
   const failedLifecycle = bodyLifecycle();
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         streamOverrides: {
@@ -540,7 +544,7 @@ test('manual home redirect bodies are all cancelled before verifyBase resolves',
   ]));
 
   await verifyBase({
-    baseUrl: 'http://59.110.217.36',
+    baseUrl: 'https://www.canranstudio.cn',
     root,
     fetchImpl: manifestFetch(root, { manualStreamOverrides })
   });
@@ -554,7 +558,7 @@ test('verifyBase rejects declared and streamed oversized responses', async t => 
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         headerOverrides: {
@@ -569,7 +573,7 @@ test('verifyBase rejects declared and streamed oversized responses', async t => 
 
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         streamOverrides: {
@@ -593,7 +597,7 @@ test('verifyBase passes an aborting timeout signal to requests', async t => {
   let abortReason;
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       timeoutMs: 5,
       fetchImpl: async (_url, { signal }) => {
@@ -626,7 +630,7 @@ test('verifyBase validates resource bounds before requests', async () => {
     let calls = 0;
     await assert.rejects(
       verifyBase({
-        baseUrl: 'http://59.110.217.36',
+        baseUrl: 'https://www.canranstudio.cn',
         ...options,
         fetchImpl: async () => {
           calls += 1;
@@ -644,7 +648,7 @@ test('verifyBase enforces exact headers and same-origin URLs for MP3 files', asy
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         headerOverrides: {
@@ -654,7 +658,7 @@ test('verifyBase enforces exact headers and same-origin URLs for MP3 files', asy
         },
         finalUrlOverrides: {
           '/lesson51/audio/climate.mp3':
-            'http://other.example/lesson51/audio/climate.mp3'
+            'https://other.example/lesson51/audio/climate.mp3'
         }
       })
     }),
@@ -666,7 +670,7 @@ test('verifyBase enforces exact headers and same-origin URLs for MP3 files', asy
   );
 });
 
-test('verifyBase rejects every weakened header value and live HSTS', async t => {
+test('verifyBase rejects weakened security header values', async t => {
   const root = await manifestFixture();
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   for (const [header, value] of [
@@ -674,22 +678,38 @@ test('verifyBase rejects every weakened header value and live HSTS', async t => 
     ['x-content-type-options', 'allow-all'],
     ['x-frame-options', 'ALLOWALL'],
     ['referrer-policy', 'unsafe-url'],
-    ['permissions-policy', '*'],
-    ['strict-transport-security', 'max-age=31536000']
+    ['permissions-policy', '*']
   ]) {
     await assert.rejects(
       verifyBase({
-        baseUrl: 'http://59.110.217.36',
+        baseUrl: 'https://www.canranstudio.cn',
         root,
         fetchImpl: manifestFetch(root, {
           headerOverrides: { '/': { [header]: value } }
         })
       }),
-      new RegExp(
-        header === 'strict-transport-security'
-          ? 'index.html: unexpected strict-transport-security'
-          : `index.html: unexpected header ${header}`
-      )
+      new RegExp(`index.html: unexpected header ${header}`)
+    );
+  }
+});
+
+test('verifyBase requires HSTS with max-age>=31536000 and includeSubDomains', async t => {
+  const root = await manifestFixture();
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  for (const [value, pattern] of [
+    ['', /index\.html: missing strict-transport-security/],
+    ['max-age=86400', /index\.html: strict-transport-security max-age below 31536000/],
+    ['max-age=31536000', /index\.html: strict-transport-security missing includeSubDomains/]
+  ]) {
+    await assert.rejects(
+      verifyBase({
+        baseUrl: 'https://www.canranstudio.cn',
+        root,
+        fetchImpl: manifestFetch(root, {
+          headerOverrides: { '/': { 'strict-transport-security': value } }
+        })
+      }),
+      pattern
     );
   }
 });
@@ -699,7 +719,7 @@ test('verifyBase enforces all three home redirect locations', async t => {
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await assert.rejects(
     verifyBase({
-      baseUrl: 'http://59.110.217.36',
+      baseUrl: 'https://www.canranstudio.cn',
       root,
       fetchImpl: manifestFetch(root, {
         headerOverrides: { '/home/index.html': { location: '/wrong' } }
@@ -723,38 +743,38 @@ async function assertBaseUrlsRejectedWithoutRequest(t, baseUrls) {
           throw new Error('must not request');
         }
       }),
-      /HTTP-only verifier rejected base URL/
+      /live verifier rejected base URL/
     );
     assert.equal(calls, 0, baseUrl);
   }
 }
 
-test('verifyBase rejects HTTPS and malformed base URLs before requests', async t => {
+test('verifyBase rejects HTTP and malformed base URLs before requests', async t => {
   await assertBaseUrlsRejectedWithoutRequest(t, [
-    'https://59.110.217.36',
-    'http://',
-    'http:/59.110.217.36',
-    'http:59.110.217.36',
-    '59.110.217.36'
+    'http://www.canranstudio.cn',
+    'https://',
+    'https:/www.canranstudio.cn',
+    'https:www.canranstudio.cn',
+    'www.canranstudio.cn'
   ]);
 });
 
 test('verifyBase rejects empty and non-empty userinfo before requests', async t => {
   await assertBaseUrlsRejectedWithoutRequest(t, [
-    'http://@59.110.217.36',
-    'http://:@59.110.217.36',
-    'http://user:pass@59.110.217.36'
+    'https://@www.canranstudio.cn',
+    'https://:@www.canranstudio.cn',
+    'https://user:pass@www.canranstudio.cn'
   ]);
 });
 
 test('verifyBase rejects a path-only base URL before requests', async t => {
-  await assertBaseUrlsRejectedWithoutRequest(t, ['http://59.110.217.36/base']);
+  await assertBaseUrlsRejectedWithoutRequest(t, ['https://www.canranstudio.cn/base']);
 });
 
 test('verifyBase rejects a query-only base URL before requests', async t => {
-  await assertBaseUrlsRejectedWithoutRequest(t, ['http://59.110.217.36?q=1']);
+  await assertBaseUrlsRejectedWithoutRequest(t, ['https://www.canranstudio.cn?q=1']);
 });
 
 test('verifyBase rejects a fragment-only base URL before requests', async t => {
-  await assertBaseUrlsRejectedWithoutRequest(t, ['http://59.110.217.36#frag']);
+  await assertBaseUrlsRejectedWithoutRequest(t, ['https://www.canranstudio.cn#frag']);
 });

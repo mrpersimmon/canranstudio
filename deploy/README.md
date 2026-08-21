@@ -1,9 +1,11 @@
-# HTTP deployment runbook
+# Deployment runbook
 
 ## Scope and transaction boundary
 
-Production intentionally remains on http://59.110.217.36. This procedure does not configure TLS,
-HTTPS, redirects to HTTPS, HSTS, or ICP compliance. RISK-HTTP-01 remains accepted and deferred.
+Production is served at https://www.canranstudio.cn with HSTS. The repository-owned `:80` server
+for 59.110.217.36 now redirects every request to the canonical HTTPS origin; it serves no content.
+TLS/HSTS live on the canonical HTTPS server block, managed outside this repository.
+RISK-HTTP-01 is resolved/retired.
 
 The Nginx configuration gate and content release are intentionally separate. The first changes and
 reloads a repository-owned configuration after an operator observed-file gate; it is not described
@@ -385,7 +387,7 @@ Use the verifier only from the same local checkout whose exact artifact was uplo
 - `/lesson51/` returns the exact `lesson51/index.html` bytes;
 - every manifest-declared Lesson 51 MP3 under `/lesson51/audio/` returns exact bytes;
 - the CLI uses two concurrent downloads with a 60-second per-resource timeout, calibrated against
-  the accepted server while retaining exact hashes, headers, URL, size, and redirect checks.
+  the canonical HTTPS origin while retaining exact hashes, headers, URL, size, and redirect checks.
 
 ~~~bash
 set -euo pipefail
@@ -394,7 +396,7 @@ for tool in git node npm ssh; do command -v "$tool" >/dev/null; done
 test -n "${CANRAN_DEPLOY_TARGET:-}"; require_target "$CANRAN_DEPLOY_TARGET"
 RELEASE_SHA="$(git rev-parse --verify HEAD)"; require_sha "$RELEASE_SHA"
 test "$(node -p 'require("./dist/release-manifest.json").commit')" = "$RELEASE_SHA"
-if ! npm run verify:live:http; then echo 'live verification failed; run the full rollback block below' >&2; exit 1; fi
+if ! npm run verify:live; then echo 'live verification failed; run the full rollback block below' >&2; exit 1; fi
 remote_manifest="$(ssh "$CANRAN_DEPLOY_TARGET" 'cat /var/www/canranstudio/current/release-manifest.json')"
 RELEASE_SHA="$RELEASE_SHA" REMOTE_MANIFEST="$remote_manifest" node -e 'if (JSON.parse(process.env.REMOTE_MANIFEST).commit !== process.env.RELEASE_SHA) process.exit(1)'
 ~~~
@@ -562,7 +564,7 @@ REMOTE
 ~~~
 
 Rebuild dist at CANRAN_PREVIOUS_RELEASE, verify its manifest commit, then run npm run
-verify:live:http. A dist artifact from the failed release is expected to hash-mismatch.
+verify:live. A dist artifact from the failed release is expected to hash-mismatch.
 
 
 ## 7. Successful-upload cleanup or safe retry cleanup

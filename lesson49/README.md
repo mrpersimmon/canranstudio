@@ -2,7 +2,7 @@
 
 新概念英语第一册 **Lesson 49** 儿童互动闯关课件（单文件 HTML，静态且运行时零依赖、零外部图片依赖）。
 
-线上地址：http://59.110.217.36/lesson49/
+线上地址：https://www.canranstudio.cn/lesson49/
 
 ## 内容结构
 

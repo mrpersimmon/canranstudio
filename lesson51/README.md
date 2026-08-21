@@ -15,4 +15,4 @@ A pleasant climate 宜人的气候 · 互动闯关课件
 - slug 规则：`text.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'')`
 
 ## 部署
-静态文件，nginx 指向本目录即可；线上地址：http://59.110.217.36/lesson51/
+静态文件，nginx 指向本目录即可；线上地址：https://www.canranstudio.cn/lesson51/

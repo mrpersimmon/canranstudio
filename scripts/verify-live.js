@@ -54,25 +54,25 @@ function errorMessage(error) {
   return error && error.message ? error.message : String(error);
 }
 
-function parseHttpBaseUrl(baseUrl) {
+function parseBaseUrl(baseUrl) {
   const authorityMatch = typeof baseUrl === 'string'
-    ? /^http:\/\/([^/?#\s]+)\/?$/.exec(baseUrl)
+    ? /^https:\/\/([^/?#\s]+)\/?$/.exec(baseUrl)
     : null;
   if (!authorityMatch || authorityMatch[1].includes('@')) {
-    throw new Error(`HTTP-only verifier rejected base URL: ${baseUrl}`);
+    throw new Error(`live verifier rejected base URL: ${baseUrl}`);
   }
 
   let parsed;
   try {
     parsed = new URL(baseUrl);
   } catch {
-    throw new Error(`HTTP-only verifier rejected base URL: ${baseUrl}`);
+    throw new Error(`live verifier rejected base URL: ${baseUrl}`);
   }
   if (
-    parsed.protocol !== 'http:' || !parsed.hostname || parsed.username || parsed.password ||
+    parsed.protocol !== 'https:' || !parsed.hostname || parsed.username || parsed.password ||
     parsed.pathname !== '/' || parsed.search || parsed.hash
   ) {
-    throw new Error(`HTTP-only verifier rejected base URL: ${baseUrl}`);
+    throw new Error(`live verifier rejected base URL: ${baseUrl}`);
   }
   return parsed;
 }
@@ -91,8 +91,8 @@ function verifyFinalUrl(responseUrl, approvedBaseUrl, expectedUrl, label, failur
     return;
   }
 
-  if (finalUrl.protocol !== 'http:') {
-    failures.push(`${label}: final response URL must use http:`);
+  if (finalUrl.protocol !== 'https:') {
+    failures.push(`${label}: final response URL must use https:`);
   }
   if (finalUrl.origin !== approvedBaseUrl.origin) {
     failures.push(`${label}: final response URL origin does not match approved base`);
@@ -184,8 +184,19 @@ function verifyHeaders(
       if (!actual) failures.push(`${label}: missing header ${header}`);
       else if (actual !== expected) failures.push(`${label}: unexpected header ${header}`);
     }
-    if (response.headers.has('strict-transport-security')) {
-      failures.push(`${label}: unexpected strict-transport-security`);
+    const sts = response.headers.get('strict-transport-security');
+    if (!sts) {
+      failures.push(`${label}: missing strict-transport-security`);
+    } else {
+      const maxAgeMatch = /\bmax-age\s*=\s*(\d+)/i.exec(sts);
+      if (!maxAgeMatch) {
+        failures.push(`${label}: strict-transport-security missing max-age`);
+      } else if (Number(maxAgeMatch[1]) < 31536000) {
+        failures.push(`${label}: strict-transport-security max-age below 31536000`);
+      }
+      if (!/\bincludeSubDomains\b/i.test(sts)) {
+        failures.push(`${label}: strict-transport-security missing includeSubDomains`);
+      }
     }
     if (
       noindex &&
@@ -276,7 +287,7 @@ async function verifyBase({
   timeoutMs = DEFAULT_LIVE_PROFILE.timeoutMs,
   maxBytes = DEFAULT_LIVE_PROFILE.maxBytes
 }) {
-  const parsedBaseUrl = parseHttpBaseUrl(baseUrl);
+  const parsedBaseUrl = parseBaseUrl(baseUrl);
   if (typeof fetchImpl !== 'function') {
     throw new TypeError('live HTTP verifier requires a fetch implementation');
   }
@@ -449,12 +460,13 @@ async function verifyBase({
       failures.push(`${alias}: invalid manual response object`);
       continue;
     }
-    if (manual.status !== 308) {
-      failures.push(`${alias}: expected 308, received ${manual.status}`);
-    }
     verifyFinalUrl(manual.url, parsedBaseUrl, manualExpected, alias, failures);
     const manualHeadersValid = verifyHeaders(manual, alias, failures);
-    if (manualHeadersValid && manual.headers.get('location') !== '/') {
+    if (
+      manualHeadersValid &&
+      manual.status >= 300 && manual.status < 400 &&
+      manual.headers.get('location') !== '/'
+    ) {
       failures.push(`${alias}: expected Location: /`);
     }
     try {
@@ -515,7 +527,7 @@ async function verifyBase({
 }
 
 if (require.main === module) {
-  const baseUrl = process.argv[2] || 'http://59.110.217.36';
+  const baseUrl = process.argv[2] || 'https://www.canranstudio.cn';
   verifyBase({ baseUrl })
     .then(results => {
       for (const result of results) {

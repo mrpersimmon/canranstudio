@@ -2,7 +2,7 @@
 
 儿童互动音标课件（单文件 HTML，静态且运行时零依赖、零外部图片依赖）。
 
-线上地址：http://59.110.217.36/soundmark
+线上地址：https://www.canranstudio.cn/soundmark
 
 ## 内容结构（闯关路线）
 

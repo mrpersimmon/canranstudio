@@ -16,8 +16,9 @@
 - Lesson 49、Lesson 50 和音标课的证书条件均未完整验证其证书文案所声明的完成状态；
 - Lesson 49 的证书图片和无障碍能力落后于 Lesson 50 的同类实现。
 
-线上站点当前必须继续通过 `http://59.110.217.36` 公网访问。由于域名尚未完成
-ICP 备案，本轮明确不实施 HTTPS、HTTP 到 HTTPS 跳转或 HSTS。
+线上站点当前通过 `https://www.canranstudio.cn` 公网访问，启用 HTTPS 与 HSTS。
+明文 IP 端点 `http://59.110.217.36` 已退役：80 端口不再提供内容，全部 301 跳转到
+canonical HTTPS 源。（2026-08-21 更新：ICP 备案已完成，传输改为 HTTPS+HSTS。）
 
 ## 2. 目标
 
@@ -46,7 +47,7 @@ ICP 备案，本轮明确不实施 HTTPS、HTTP 到 HTTPS 跳转或 HSTS。
 
 继续使用公网 HTTP 是经确认的暂存风险。即使保留 CSP、`nosniff`、
 `Referrer-Policy` 和 `Permissions-Policy`，网络中间人仍可篡改页面脚本并读取儿童姓名或
-本地进度。因此审查项 RISK-HTTP-01 在本轮结束时保持为“已接受、延期处理”，不能标记为已修复。
+本地进度。（2026-08-21 更新：RISK-HTTP-01 已退役 resolved/retired——ICP 备案完成后，80 端口 301 跳转到 https://www.canranstudio.cn，传输改为 HTTPS+HSTS。）
 
 ## 4. 总体方案
 
@@ -349,8 +350,8 @@ CI 顺序：
 2. 三个课程的 Playwright 回归；
 3. Nginx 配置与静态路由检查。
 
-线上 `http://59.110.217.36` 作为手动发布门槛，验证首页、三个课程、响应头和仓库文件
-哈希。线上 HTTP 验收通过不等于 RISK-HTTP-01 已修复。
+线上 `https://www.canranstudio.cn` 作为手动发布门槛，验证首页、课程、响应头（含 HSTS）和仓库文件
+哈希。RISK-HTTP-01 已退役（2026-08-21）。
 
 ## 13. 分期交付
 
@@ -381,7 +382,7 @@ CI 顺序：
 
 | 审查项 | 设计处理 |
 | --- | --- |
-| RISK-HTTP-01 HTTP 传输 | 明确接受并延期；保留 HTTP 风险说明，不宣称修复 |
+| RISK-HTTP-01 HTTP 传输 | 已退役 resolved/retired（2026-08-21）：80 端口 301 跳转到 HTTPS 源，传输 HTTPS+HSTS |
 | M-01 存储崩溃 | 版本化 schema、归一化、修复回写和内存降级 |
 | M-02 Lesson 50 满分状态机 | 允许纠错、仅首次正确计分 |
 | M-03 洗牌高亮 | 原始选项 ID 与 DOM 顺序解耦 |

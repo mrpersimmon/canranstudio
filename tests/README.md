@@ -15,9 +15,9 @@ npm test
 `npm test` is the complete pre-commit gate.
 `npm run test:e2e -- tests/e2e/audio-lifecycle.spec.js` verifies terminal playback,
 interruption cleanup, and the Lesson 50 queue.
-`npm run test:deploy` checks the public artifact and HTTP-only Nginx policy.
+`npm run test:deploy` checks the public artifact and the redirect-to-HTTPS Nginx policy.
 `npm run build:static` creates the exact `dist/` release and hash manifest.
-`npm run verify:live:http` is a post-deploy gate and must use that exact local artifact.
+`npm run verify:live` is a post-deploy gate against the canonical HTTPS origin and must use that exact local artifact.
 
 Run these focused hardening checks when changing the corresponding behavior:
 

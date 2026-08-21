@@ -39,13 +39,14 @@ test('every published course appears in the shared home catalog and authored rel
     );
     assert.match(readme, new RegExp(escapeRegExp(course.route)), course.id);
     assert.match(runbook, new RegExp(escapeRegExp(course.route)), course.id);
-    const slashless = course.route.slice(0, -1);
-    assert.match(
-      nginx,
-      new RegExp(`location\\s*=\\s*${escapeRegExp(slashless)}\\s*\\{[\\s\\S]*?return\\s+308\\s+${escapeRegExp(course.route)};`),
-      course.id
-    );
   }
+
+  // The bare-IP :80 endpoint redirects every request to the canonical HTTPS
+  // origin, which owns per-course routing. Only assert the redirect target here.
+  assert.match(
+    nginx,
+    /return\s+301\s+https:\/\/www\.canranstudio\.cn\$request_uri/
+  );
 });
 
 test('README describes the current atlas-only cumulative-state publication contract', async () => {

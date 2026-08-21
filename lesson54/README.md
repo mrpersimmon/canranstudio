@@ -19,4 +19,4 @@ What nationality are they? / Where do they come from? 互动闯关课件
 
 ## 部署
 静态文件，需与 `/core`、`/assets` 同根部署；路由见 `deploy/nginx/canranstudio-http.conf`。
-线上地址：http://59.110.217.36/lesson54/
+线上地址：https://www.canranstudio.cn/lesson54/

@@ -32,7 +32,7 @@ npm run verify:v1:release
 ```
 
 This command runs unit, browser, deployment-contract, and exact static-build verification. It
-does not commit, push, deploy, or change ICP, DNS, TLS, or the accepted HTTP origin. The final
+does not commit, push, deploy, or change ICP, DNS, TLS, or the canonical HTTPS origin. The final
 build step deliberately refuses public files that differ from `HEAD`.
 
 ## Runtime and font assets
@@ -46,9 +46,10 @@ Certificate issue, print, and save entry points re-check their own course eligib
 
 ## Production transport
 
-The current accepted deployment target is `http://59.110.217.36`. HTTPS, HSTS, and an
-HTTP-to-HTTPS redirect are intentionally out of scope until the external filing and deployment
-decision changes. RISK-HTTP-01 remains accepted and deferred.
+The production site is served at `https://www.canranstudio.cn` with HSTS
+(`max-age=31536000; includeSubDomains`). The bare-IP `http://59.110.217.36` endpoint is retired:
+port 80 no longer serves content and redirects every request (301) to the canonical HTTPS origin.
+RISK-HTTP-01 is resolved/retired.
 
 See `deploy/README.md` for the release and verification contract.
 
