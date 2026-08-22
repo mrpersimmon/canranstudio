@@ -10,6 +10,26 @@ const catalog = require('../../core/curriculum-catalog');
 
 const ROOT = path.resolve(__dirname, '../..');
 
+test('the Lesson 1–2 review route is isolated from the production release root', async () => {
+  const config = await fs.readFile(path.join(
+    ROOT,
+    'deploy/nginx/canranstudio-lesson-1-2-location.conf'
+  ), 'utf8');
+
+  assert.match(config, /location\s*=\s*\/poc\/lesson-1-2\s*\{[\s\S]*return\s+308\s+\/poc\/lesson-1-2\/;/);
+  assert.match(config, /alias\s+\/var\/www\/canranstudio-lesson-1-2\/current\/poc\/lesson1-2-experience\/index\.html;/);
+  for (const prefix of ['assets', 'core', 'poc/lesson1-2-experience']) {
+    assert.match(config, new RegExp(
+      `location\\s+\\^~\\s+\\/poc\\/lesson-1-2\\/${prefix.replaceAll('/', '\\/')}\\/`
+    ));
+  }
+  assert.match(config, /X-Robots-Tag\s+"noindex, nofollow, noarchive"\s+always;/);
+  assert.match(config, /sub_filter\s+'"\/core\/'\s+'"\/poc\/lesson-1-2\/core\/'/);
+  assert.match(config, /sub_filter\s+'"\/assets\/'\s+'"\/poc\/lesson-1-2\/assets\/'/);
+  assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-experience\/'\s+'"\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
+  assert.doesNotMatch(config, /\/var\/www\/canranstudio\/current/);
+});
+
 test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally runnable', async () => {
   const [home, page, scene, runtime, background, premiseAvif, premiseJpeg, selectedDesign] = await Promise.all([
     fs.readFile(path.join(ROOT, 'index.html'), 'utf8'),
