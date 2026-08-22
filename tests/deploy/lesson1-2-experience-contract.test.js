@@ -34,6 +34,7 @@ test('the Lesson 1–2 review route is isolated from the production release root
   assert.match(config, /sub_filter\s+'"\/core\/'\s+'"\/poc\/lesson-1-2\/core\/'/);
   assert.match(config, /sub_filter\s+'"\/assets\/'\s+'"\/poc\/lesson-1-2\/assets\/'/);
   assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-experience\/'\s+'"\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
+  assert.match(config, /sub_filter\s+'`\/poc\/lesson1-2-experience\/'\s+'`\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
   assert.doesNotMatch(config, /\/var\/www\/canranstudio\/current/);
 });
 
