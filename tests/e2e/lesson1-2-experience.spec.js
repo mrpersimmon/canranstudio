@@ -401,8 +401,13 @@ test('a phrase tap speaks immediately and keeps the sentence visible', async ({ 
   await expect(page.getByRole('button', { name: '就说这句' })).toHaveCount(0);
   await page.getByRole('button', { name: 'Excuse me!' }).click();
   await expect(page.getByRole('button', { name: '确认这条线索' })).toHaveCount(0);
-  await expect(page.locator('.feedback-audio-state')).toBeVisible();
-  await expect(page.locator('.feedback-audio-state')).toContainText('Excuse me!');
+  const feedback = page.locator('.feedback-audio-state[data-tone="correct"]');
+  await expect(feedback).toBeVisible();
+  await expect(feedback).toContainText('Excuse me!');
+  await expect(feedback).toContainText('答对啦，听听这句话');
+  await expect(feedback.locator('.feedback-audio-state__star img')).toHaveAttribute('src', /star-fill\.svg$/);
+  await expect(page.locator('.mission-console [role="status"]')).toHaveCount(1);
+  await expect(page.locator('.feedback-bubble[data-tone="correct"]')).toHaveCount(0);
   await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
   expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
   expect(await page.evaluate(() => window.__courseAudioStarts.filter(

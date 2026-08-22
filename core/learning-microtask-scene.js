@@ -427,7 +427,7 @@
           ? '找对了，听听这个词'
           : '找对了，听下一个声音';
       }
-      if (step?.kind === 'select-one') return '这句话正合适，听听它';
+      if (step?.kind === 'select-one') return '答对啦，听听这句话';
       if (['place-in-slot', 'ordered-blocks'].includes(step?.kind)) {
         return '问句排好了，听听整句';
       }
@@ -436,7 +436,11 @@
 
     function feedbackAudioPanel(snapshot, step) {
       const activeAudio = snapshot.audio?.refs?.[snapshot.audio?.segmentIndex || 0];
-      return `<div class="feedback-audio-state" role="status" aria-live="polite">
+      const tone = ui.feedback?.tone === 'correct' ? 'correct' : 'listen';
+      return `<div class="feedback-audio-state" data-tone="${tone}" role="status" aria-live="polite">
+        ${tone === 'correct'
+          ? `<span class="feedback-audio-state__star" aria-hidden="true">${uiIcon('star-fill')}</span>`
+          : ''}
         <div class="feedback-audio-state__copy">
           <strong class="feedback-audio-state__english" lang="en">${escapeHtml(activeAudio?.text || '')}</strong>
           <span>${escapeHtml(feedbackAudioCopy(snapshot, step))}</span>
@@ -766,6 +770,8 @@
       const sceneOnlySupport = supportFeedback
         && step?.kind === 'select-entity'
         && sceneEntityIds.length > 0;
+      const integratedCorrectFeedback = ui.feedback?.tone === 'correct'
+        && ['audio-ready', 'audio-playing'].includes(snapshot.phase);
       return commonShell(`<div class="scene-heading">
           <div><p>${escapeHtml(task.presentation.stepLabel)}</p><h1>${escapeHtml(task.presentation.title)}</h1></div>
         </div>
@@ -779,7 +785,7 @@
           ${supportFeedback ? feedbackMarkup(snapshot, step) : hearts(snapshot, step)}
           ${supportFeedback ? '' : `<p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>`}
           ${sceneOnlySupport ? '' : `<div class="interaction-space" data-response-fields>${body}</div>`}
-          ${supportFeedback ? '' : feedbackMarkup(snapshot, step)}
+          ${supportFeedback || integratedCorrectFeedback ? '' : feedbackMarkup(snapshot, step)}
         </section>`, snapshot);
     }
 
