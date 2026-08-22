@@ -17,7 +17,14 @@ test('the Lesson 1–2 review route is isolated from the production release root
   ), 'utf8');
 
   assert.match(config, /location\s*=\s*\/poc\/lesson-1-2\s*\{[\s\S]*return\s+308\s+\/poc\/lesson-1-2\/;/);
-  assert.match(config, /alias\s+\/var\/www\/canranstudio-lesson-1-2\/current\/poc\/lesson1-2-experience\/index\.html;/);
+  assert.match(
+    config,
+    /location\s*=\s*\/poc\/lesson-1-2\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/index\.html\s+last;/
+  );
+  assert.doesNotMatch(
+    config,
+    /alias\s+\/var\/www\/canranstudio-lesson-1-2\/current\/poc\/lesson1-2-experience\/index\.html;/
+  );
   for (const prefix of ['assets', 'core', 'poc/lesson1-2-experience']) {
     assert.match(config, new RegExp(
       `location\\s+\\^~\\s+\\/poc\\/lesson-1-2\\/${prefix.replaceAll('/', '\\/')}\\/`
