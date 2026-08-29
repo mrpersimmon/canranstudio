@@ -21,11 +21,24 @@ test('the Lesson 1–2 review route is isolated from the production release root
     config,
     /location\s*=\s*\/poc\/lesson-1-2\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/index\.html\s+last;/
   );
+  assert.match(
+    config,
+    /location\s*=\s*\/poc\/lesson-1-2\/review\s*\{[^}]*return\s+308\s+\/poc\/lesson-1-2\/review\/;/
+  );
+  assert.match(
+    config,
+    /location\s*=\s*\/poc\/lesson-1-2\/review\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/poc\/lesson1-2-review\/index\.html\s+last;/
+  );
   assert.doesNotMatch(
     config,
     /alias\s+\/var\/www\/canranstudio-lesson-1-2\/current\/poc\/lesson1-2-experience\/index\.html;/
   );
-  for (const prefix of ['assets', 'core', 'poc/lesson1-2-experience']) {
+  for (const prefix of [
+    'assets',
+    'core',
+    'poc/lesson1-2-experience',
+    'poc/lesson1-2-review'
+  ]) {
     assert.match(config, new RegExp(
       `location\\s+\\^~\\s+\\/poc\\/lesson-1-2\\/${prefix.replaceAll('/', '\\/')}\\/`
     ));
@@ -35,6 +48,9 @@ test('the Lesson 1–2 review route is isolated from the production release root
   assert.match(config, /sub_filter\s+'"\/assets\/'\s+'"\/poc\/lesson-1-2\/assets\/'/);
   assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-experience\/'\s+'"\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
   assert.match(config, /sub_filter\s+'`\/poc\/lesson1-2-experience\/'\s+'`\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
+  assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-review\/'\s+'"\/poc\/lesson-1-2\/review\/'/);
+  assert.match(config, /sub_filter\s+"'\/poc\/lesson1-2-review\/"\s+"'\/poc\/lesson-1-2\/review\/"/);
+  assert.match(config, /sub_filter\s+'`\/poc\/lesson1-2-review\/'\s+'`\/poc\/lesson-1-2\/review\/'/);
   assert.doesNotMatch(config, /\/var\/www\/canranstudio\/current/);
 });
 
