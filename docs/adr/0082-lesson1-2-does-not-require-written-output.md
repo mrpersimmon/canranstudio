@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0098
 ---
 
 # Lesson 1–2 不要求纸笔或键盘书写

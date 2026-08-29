@@ -4,7 +4,7 @@
 
 - 工具：Codex 内置 ImageGen；每个不同物品单独生成一次。
 - 风格参照：`starlight-station-stage-bg-v1.png` 只提供胡桃木、黄铜、深夜蓝与暖光环境；`handbag-prop-v1.png` 只提供材质细节与完成度；首张 `pen` 输出成为其余物品的视觉系统锚点。
-- 交付：十张 1254×1254 真透明 PNG 母版；每张生成 640×640 AVIF/WebP。既有 `handbag` 不重制。
+- 交付：八张独立物品的 1254×1254 真透明 PNG 母版，以及 car/house 两张 1254×1254 完整小镇场景 PNG；每张生成 640×640 AVIF/WebP。既有 `handbag` 不重制。
 
 ## 共享最终提示
 
@@ -32,11 +32,13 @@ Avoid: photorealistic product photography, plastic toy look, black outline, exce
 | `item-dress-v1` | 酒红一件式连衣裙、奶油领、深青腰带 |
 | `item-skirt-v1` | 仅一条及膝 A 字短裙；不得出现鞋、腿或上衣 |
 | `item-shirt-v1` | 奶油长袖翻领衬衫、深蓝滚边；不得变成 T 恤 |
-| `item-car-key-v1` | 黄铜钥匙与深蓝皮革挂牌；挂牌是清楚汽车浮雕 |
-| `item-house-key-v1` | 黄铜钥匙与房屋形深青挂牌；门窗清楚、无文字 |
+| `scene-car-v1` | 暖灯小镇街道中的完整汽车，轮廓清楚、主体突出，无钥匙、文字、人物或水印 |
+| `scene-house-v1` | 暖灯小镇中的完整房屋，门窗和屋顶清楚、主体突出，无钥匙、文字、人物或水印 |
+
+car/house 不套用透明物品提示。两张场景图使用同一套胡桃木、黄铜、深夜蓝与暖琥珀光世界观，以精致手绘 2.5D 儿童冒险游戏场景呈现实际汽车和实际房屋；构图、镜头尺度和照明保持成对一致，使孩子直接建立英文词与真实对象的关系。
 
 ## 验收证据
 
 - 桌面：`docs/designs/lesson1-2-design-qa/item-art-stage8-desktop-20260820.png`
 - 手机：`docs/designs/lesson1-2-design-qa/item-art-stage8-mobile-20260820.png`
-- 自动合同：十张 PNG 均为 1254×1254 且 alpha 覆盖 0–255；二十张浏览器衍生图均为 640×640 真透明资产；儿童 DOM 不出现物品 emoji 回退。
+- 自动合同：八张独立物品 PNG 均为 1254×1254 且 alpha 覆盖 0–255，十六张浏览器衍生图均为 640×640 真透明资产；两张 car/house 场景 PNG 均为 1254×1254 不透明 RGB，四张场景衍生图均为 640×640；儿童 DOM 不出现物品 emoji 回退或钥匙代称。

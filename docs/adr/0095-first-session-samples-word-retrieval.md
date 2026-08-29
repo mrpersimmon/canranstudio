@@ -1,5 +1,7 @@
 ---
 status: accepted
+partially_superseded_by:
+  - ADR-0103
 ---
 
 # 首次主线抽样单词检索并把完整双通道覆盖留给回访

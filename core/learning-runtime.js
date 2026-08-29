@@ -75,8 +75,11 @@
         ['sourceRef', rule.acceptedSourceRef],
         ['contentRef', rule.acceptedContentRef]
       ].filter(([, expected]) => typeof expected === 'string');
-      if (Array.isArray(rule.acceptedEntityIds)) {
-        const correct = rule.acceptedEntityIds.includes(response.entityId);
+      if (typeof rule.acceptedEntityId === 'string' || Array.isArray(rule.acceptedEntityIds)) {
+        const acceptedEntityIds = Array.isArray(rule.acceptedEntityIds)
+          ? rule.acceptedEntityIds
+          : [rule.acceptedEntityId];
+        const correct = acceptedEntityIds.includes(response.entityId);
         return { correct, mismatchPath: correct ? null : [...path, 'entityId'] };
       }
       if (checks.length !== 1) return { correct: false, mismatchPath: path };
@@ -85,6 +88,19 @@
       return { correct, mismatchPath: correct ? null : [...path, field] };
     }
     if (rule.type === 'match-entity') {
+      if (
+        typeof rule.acceptedSourceRef === 'string'
+        && typeof rule.acceptedEntityId === 'string'
+      ) {
+        const sourceMatches = response.sourceRef === rule.acceptedSourceRef;
+        const entityMatches = response.entityId === rule.acceptedEntityId;
+        return {
+          correct: sourceMatches && entityMatches,
+          mismatchPath: sourceMatches && entityMatches
+            ? null
+            : [...path, sourceMatches ? 'entityId' : 'sourceRef']
+        };
+      }
       const expected = rule.pairs?.[response.sourceRef];
       const correct = typeof expected === 'string' && response.entityId === expected;
       return { correct, mismatchPath: correct ? null : [...path, 'entityId'] };
@@ -94,13 +110,38 @@
       return { correct, mismatchPath: correct ? null : [...path, 'slotId'] };
     }
     if (rule.type === 'ordered-blocks') {
-      const expected = rule.acceptedByEntityId?.[response.selectedEntityId];
+      const expected = Array.isArray(rule.acceptedOrder)
+        ? rule.acceptedOrder
+        : rule.acceptedByEntityId?.[response.selectedEntityId];
       const actual = response.blockRefs;
       const correct = Array.isArray(expected)
         && Array.isArray(actual)
         && expected.length === actual.length
         && expected.every((blockRef, index) => blockRef === actual[index]);
       return { correct, mismatchPath: correct ? null : [...path, 'blockRefs'] };
+    }
+    if (rule.type === 'ordered-sequence') {
+      const expected = rule.acceptedOrder;
+      const actual = response.sequenceIds;
+      const correct = Array.isArray(expected)
+        && Array.isArray(actual)
+        && expected.length === actual.length
+        && expected.every((panelId, index) => panelId === actual[index]);
+      return { correct, mismatchPath: correct ? null : [...path, 'sequenceIds'] };
+    }
+    if (rule.type === 'connect-reference') {
+      const correct = response.sourceRef === rule.sourceRef && response.entityId === rule.entityId;
+      return { correct, mismatchPath: correct ? null : [...path, 'entityId'] };
+    }
+    if (rule.type === 'detect-error') {
+      const checks = [
+        ['sourceRef', rule.acceptedSourceRef],
+        ['contentRef', rule.acceptedContentRef]
+      ].filter(([, expected]) => typeof expected === 'string');
+      if (checks.length !== 1) return { correct: false, mismatchPath: path };
+      const [field, expected] = checks[0];
+      const correct = response[field] === expected;
+      return { correct, mismatchPath: correct ? null : [...path, field] };
     }
     if (rule.type === 'perform-action') {
       const expectedEntityId = rule.entityFactId
@@ -112,6 +153,13 @@
       return { correct, mismatchPath: correct ? null : [...path, 'action'] };
     }
     if (rule.type === 'all-of') {
+      if (Array.isArray(rule.rules)) {
+        for (const [index, nestedRule] of rule.rules.entries()) {
+          const evaluated = evaluateRule(nestedRule, response, [...path, 'rules', index]);
+          if (!evaluated.correct) return evaluated;
+        }
+        return { correct: true, mismatchPath: null };
+      }
       const expected = [...new Set(rule.requiredFactIds || [])].sort();
       const actual = [...new Set(response.factIds || [])].sort();
       const correct = expected.length === actual.length
@@ -119,6 +167,1756 @@
       return { correct, mismatchPath: correct ? null : [...path, 'factIds'] };
     }
     return { correct: false, mismatchPath: path };
+  }
+
+  function fnv1a32(value) {
+    let hash = 0x811c9dc5;
+    for (let index = 0; index < value.length; index += 1) {
+      hash ^= value.charCodeAt(index);
+      hash = Math.imul(hash, 0x01000193) >>> 0;
+    }
+    return hash >>> 0;
+  }
+
+  function mulberry32(seed) {
+    let state = seed >>> 0;
+    return function nextRandom() {
+      let value = state += 0x6d2b79f5;
+      value = Math.imul(value ^ (value >>> 15), value | 1);
+      value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+      return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function shuffledIds(ids, seed) {
+    const shuffled = [...ids];
+    const random = mulberry32(seed);
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+    }
+    return shuffled;
+  }
+
+  let audioRequestNamespaceSequence = 0;
+
+  function createLesson12V2({ unit, ledger, effectSink, seed, outbox }) {
+    const authoredTasks = unit.beats.flatMap(beat => (
+      (beat.microtasks || []).map(task => ({ beatId: beat.beatId, task }))
+    ));
+    const shuffleAlgorithmVersion = 'fnv1a32-v1+mulberry32-v1+fisher-yates-v1';
+    let activeTaskIndex = -1;
+    let audioRequestSequence = 0;
+    const audioRequestNamespace = ++audioRequestNamespaceSequence;
+    let sandboxActive = false;
+    let sandboxOrigin = null;
+    let endedPresentationMomentIds = new Set();
+    let pendingPresentationContinuation = null;
+    let durableRolePracticeProgress = {};
+    let volatileOutbox = { revision: 0, value: null };
+    const pendingCommitKey = `learning-runtime:${unit.unitId}:${unit.experienceRevision}:pending-commit`;
+    let state = {
+      stateVersion: 0,
+      status: 'idle',
+      mode: 'microtask-v2',
+      unitId: unit.unitId,
+      experienceRevision: unit.experienceRevision,
+      unitAttemptId: null,
+      entryLesson: null,
+      beatId: null,
+      microtaskId: null,
+      microtaskStatus: null,
+      stepId: null,
+      stepIndex: null,
+      phase: null,
+      currentPresentationMomentId: null,
+      presentationAwaitingEnd: false,
+      attemptRevision: 0,
+      challengeRef: null,
+      challengeSourceRef: null,
+      challengeIndex: 0,
+      completedStepIds: [],
+      adventureHearts: 3,
+      adventureHeartsRemaining: 3,
+      supportLevel: 'none',
+      supportDepth: 0,
+      rescueUsed: false,
+      shuffleAlgorithmVersion,
+      shuffleSeed: null,
+      optionIds: [],
+      temporaryResults: [],
+      temporaryAudioContactRefs: [],
+      temporaryMissingAudioRefs: [],
+      pendingCommit: null,
+      pendingUiContinuation: null,
+      rolePracticeProgress: null,
+      committedFacts: [],
+      completedMicrotaskIds: [],
+      reachedMicrotaskIds: [],
+      stageNavigation: [],
+      nextRestStop: null,
+      buildStage: 0,
+      diagnosticArchive: null,
+      audio: null
+    };
+
+    function snapshot() {
+      return clone(state);
+    }
+
+    function publish(effects = []) {
+      for (const effect of effects) effectSink(clone(effect));
+      return { snapshot: snapshot(), effects: clone(effects) };
+    }
+
+    function currentTask() {
+      return authoredTasks[activeTaskIndex]?.task || null;
+    }
+
+    function currentStep() {
+      return currentTask()?.steps?.[state.stepIndex] || null;
+    }
+
+    function currentChallenge() {
+      const step = currentStep();
+      if (!step) return null;
+      return Array.isArray(step.challenges)
+        ? step.challenges[state.challengeIndex] || null
+        : step;
+    }
+
+    function candidateIds(challenge) {
+      return clone(
+        challenge?.candidateEntityIds
+        || challenge?.candidateSourceRefs
+        || challenge?.candidateContentRefs
+        || challenge?.optionEntityIds
+        || challenge?.optionSourceRefs
+        || challenge?.optionContentRefs
+        || []
+      );
+    }
+
+    function semanticRef(challenge) {
+      return challenge?.sourceRef || challenge?.contentRef || null;
+    }
+
+    function presentationConditionIsMet(condition, candidateState) {
+      if (!condition || typeof condition !== 'object') return false;
+      if (condition.kind === 'microtask-start') return true;
+      if (condition.kind === 'step-active') return candidateState.stepId === condition.stepId;
+      if (condition.kind === 'step-completed') {
+        return candidateState.completedStepIds.includes(condition.stepId);
+      }
+      if (condition.kind === 'challenge-active') {
+        return candidateState.challengeRef === condition.challengeRef;
+      }
+      if (condition.kind === 'phase') return candidateState.phase === condition.phase;
+      if (condition.kind === 'challenge-completed') {
+        return candidateState.temporaryResults.some(result => (
+          result.challengeRef === condition.challengeRef
+        ));
+      }
+      if (condition.kind === 'microtask-complete') {
+        return ['completed', 'practice-complete'].includes(candidateState.microtaskStatus);
+      }
+      return false;
+    }
+
+    function resolvePresentationMoment(candidateState, reset = false) {
+      const moments = currentTask()?.presentation?.moments || [];
+      if (moments.length === 0) return null;
+      const currentIndex = reset
+        ? -1
+        : moments.findIndex(moment => moment.momentId === candidateState.currentPresentationMomentId);
+      if (currentIndex >= 0 && !endedPresentationMomentIds.has(moments[currentIndex].momentId)) {
+        return moments[currentIndex].momentId;
+      }
+      for (let index = currentIndex + 1; index < moments.length; index += 1) {
+        if (presentationConditionIsMet(moments[index].enterWhen, candidateState)) {
+          return moments[index].momentId;
+        }
+      }
+      return currentIndex >= 0 ? moments[currentIndex].momentId : null;
+    }
+
+    function transition(patch) {
+      const resetPresentation = Object.prototype.hasOwnProperty.call(
+        patch,
+        'currentPresentationMomentId'
+      ) && patch.currentPresentationMomentId === null;
+      const nextState = { ...state, ...patch, stateVersion: state.stateVersion + 1 };
+      nextState.currentPresentationMomentId = resolvePresentationMoment(
+        nextState,
+        resetPresentation
+      );
+      nextState.presentationAwaitingEnd = Boolean(nextState.currentPresentationMomentId)
+        && !endedPresentationMomentIds.has(nextState.currentPresentationMomentId);
+      state = nextState;
+    }
+
+    function restorePresentationMoment() {
+      const moments = currentTask()?.presentation?.moments || [];
+      let restoredIndex = -1;
+      for (let index = 0; index < moments.length; index += 1) {
+        if (presentationConditionIsMet(moments[index].enterWhen, state)) restoredIndex = index;
+      }
+      endedPresentationMomentIds = new Set(
+        moments.slice(0, Math.max(0, restoredIndex)).map(moment => moment.momentId)
+      );
+      const restoredMomentId = restoredIndex >= 0 ? moments[restoredIndex].momentId : null;
+      state = {
+        ...state,
+        currentPresentationMomentId: restoredMomentId,
+        presentationAwaitingEnd: Boolean(restoredMomentId)
+      };
+    }
+
+    function refreshNavigation(currentMicrotaskId = state.microtaskId) {
+      const reached = new Set([
+        ...state.completedMicrotaskIds,
+        ...(currentMicrotaskId ? [currentMicrotaskId] : [])
+      ]);
+      state = {
+        ...state,
+        reachedMicrotaskIds: authoredTasks
+          .map(({ task }) => task.microtaskId)
+          .filter(microtaskId => reached.has(microtaskId)),
+        stageNavigation: authoredTasks.map(({ task }) => ({
+          microtaskId: task.microtaskId,
+          title: task.navigationTitle || task.presentation?.title || task.microtaskId,
+          status: state.completedMicrotaskIds.includes(task.microtaskId)
+            ? 'completed'
+            : (task.microtaskId === currentMicrotaskId ? 'current' : 'locked')
+        }))
+      };
+    }
+
+    function challengePhase(step, challenge) {
+      if (step?.kind === 'role-enactment') return 'role-practice-ready';
+      if (challenge?.audioSequence || (!challenge?.challengeRef && step?.audioSequence)) {
+        return 'audio-ready';
+      }
+      return challenge?.answerRule || step?.answerRule ? 'awaiting-response' : 'presenting';
+    }
+
+    function activateChallenge(challengeIndex) {
+      const task = currentTask();
+      const step = currentStep();
+      const challenge = Array.isArray(step?.challenges)
+        ? step.challenges[challengeIndex]
+        : step;
+      if (!task || !step || !challenge) return false;
+      const attemptRevision = Number.isInteger(state.attemptRevision) ? state.attemptRevision : 0;
+      const challengeRef = challenge.challengeRef || null;
+      const channel = challenge.channel || step.channel || 'story';
+      const seedDomain = JSON.stringify([
+        unit.experienceRevision,
+        state.unitAttemptId,
+        task.microtaskId,
+        attemptRevision,
+        channel,
+        challengeRef
+      ]);
+      const shuffleSeed = challengeRef ? fnv1a32(seedDomain) : null;
+      transition({
+        phase: challengePhase(step, challenge),
+        challengeRef,
+        challengeSourceRef: semanticRef(challenge),
+        challengeIndex,
+        shuffleSeed,
+        optionIds: shuffleSeed === null
+          ? candidateIds(challenge)
+          : shuffledIds(candidateIds(challenge), shuffleSeed),
+        supportLevel: 'none',
+        supportDepth: 0,
+        audio: null
+      });
+      return true;
+    }
+
+    function activateStep(stepIndex) {
+      const task = currentTask();
+      const step = task?.steps?.[stepIndex];
+      if (!step) return false;
+      state = {
+        ...state,
+        stepId: step.stepId,
+        stepIndex,
+        challengeIndex: 0,
+        rolePracticeProgress: step.kind === 'role-enactment'
+          ? {
+              practiceId: step.practice.practiceId,
+              completedRoundIds: sandboxActive
+                ? []
+                : clone(
+                    durableRolePracticeProgress[step.practice.practiceId]?.completedRoundIds || []
+                  )
+            }
+          : null
+      };
+      return activateChallenge(0);
+    }
+
+    function findSource(sourceRef) {
+      for (const lesson of Object.values(unit.lessonContent || {})) {
+        if (lesson.sources?.[sourceRef]) return lesson.sources[sourceRef];
+      }
+      return null;
+    }
+
+    function findContent(contentRef) {
+      return unit.authoredContent?.[contentRef] || null;
+    }
+
+    function normalizeAudioSegments(sequence, challenge, purpose) {
+      const raw = Array.isArray(sequence)
+        ? sequence
+        : (Array.isArray(sequence?.segments) ? sequence.segments : []);
+      const segments = raw.map((audioPart, index) => {
+        const item = audioPart.sourceRef
+          ? findSource(audioPart.sourceRef)
+          : (audioPart.contentRef ? findContent(audioPart.contentRef) : null);
+        return {
+          segmentId: audioPart.segmentId
+            || `${challenge.challengeRef || state.stepId}:${purpose}:${String(index + 1).padStart(2, '0')}`,
+          sourceRef: audioPart.sourceRef || null,
+          contentRef: audioPart.contentRef || null,
+          src: audioPart.src || audioPart.audioSrc || item?.audioSrc || null,
+          text: audioPart.text || item?.text || '',
+          speaker: audioPart.speaker || item?.speaker || null
+        };
+      });
+      if (segments.length > 0) return segments;
+      const sourceRef = challenge.sourceRef || null;
+      const contentRef = challenge.contentRef || null;
+      const item = sourceRef ? findSource(sourceRef) : findContent(contentRef);
+      return item?.audioSrc ? [{
+        segmentId: `${challenge.challengeRef || state.stepId}:${purpose}:01`,
+        sourceRef,
+        contentRef,
+        src: item.audioSrc,
+        text: item.text || '',
+        speaker: item.speaker || null
+      }] : [];
+    }
+
+    function audioEffect(audio, delayMs = 0) {
+      const audioPart = audio.segments[audio.segmentIndex];
+      return {
+        type: 'audio/play',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: state.microtaskId,
+        attemptRevision: state.attemptRevision,
+        requestId: audio.requestId,
+        segmentId: audioPart.segmentId,
+        src: audioPart.src,
+        visibleText: audioPart.text,
+        speaker: audioPart.speaker,
+        sourceRef: audioPart.sourceRef,
+        contentRef: audioPart.contentRef,
+        purpose: audio.purpose,
+        retryAttempt: audio.retryAttempt,
+        delayMs
+      };
+    }
+
+    function audioCancelEffect(audio) {
+      return {
+        type: 'audio/cancel',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: state.microtaskId,
+        attemptRevision: state.attemptRevision,
+        requestId: audio.requestId
+      };
+    }
+
+    function startAudio({
+      sequence,
+      challenge,
+      purpose,
+      after,
+      retryAttempt = 0,
+      delayMs = 0,
+      startSegmentIndex = 0
+    }) {
+      const segments = normalizeAudioSegments(sequence, challenge, purpose);
+      if (segments.length === 0) return null;
+      const segmentIndex = Math.max(0, Math.min(startSegmentIndex, segments.length - 1));
+      const requestId = `audio:${unit.experienceRevision}:${state.unitAttemptId}:${state.microtaskId}:${state.attemptRevision}:${Date.now()}:${audioRequestNamespace}:${++audioRequestSequence}`;
+      const audio = {
+        status: 'playing', requestId, segments, segmentIndex,
+        segmentId: segments[segmentIndex].segmentId, purpose, after, retryAttempt,
+        manualRetryRequired: false
+      };
+      audio.refs = segments.map(audioPart => ({
+        refId: audioPart.sourceRef || audioPart.contentRef || audioPart.segmentId,
+        text: audioPart.text,
+        speaker: audioPart.speaker,
+        sourceRef: audioPart.sourceRef,
+        contentRef: audioPart.contentRef
+      }));
+      audio.currentSegment = clone(segments[segmentIndex]);
+      audio.visibleText = segments[segmentIndex].text;
+      audio.unresolvedRefs = audio.refs.slice(segmentIndex).map(ref => ref.refId);
+      transition({ phase: delayMs > 0 ? 'audio-retry' : 'audio-playing', audio });
+      return audioEffect(audio, delayMs);
+    }
+
+    function startReadyAudio() {
+      if (state.phase !== 'audio-ready') return null;
+      const challenge = currentChallenge();
+      const step = currentStep();
+      return startAudio({
+        sequence: challenge?.audioSequence || step?.audioSequence,
+        challenge,
+        purpose: 'instruction',
+        after: challenge?.answerRule || step?.answerRule ? 'open-response' : 'advance-challenge'
+      });
+    }
+
+    function resultForChallenge(challenge) {
+      return (currentTask()?.targetResults || []).find(result => (
+        result.challengeRef === challenge.challengeRef
+        || (challenge.resultId && result.resultId === challenge.resultId)
+      )) || null;
+    }
+
+    function loadPendingCommit() {
+      if (outbox && typeof outbox.load === 'function') return outbox.load(pendingCommitKey);
+      return { status: 'ok', revision: volatileOutbox.revision, value: clone(volatileOutbox.value) };
+    }
+
+    function restorablePendingCommit(pendingRecord) {
+      if (pendingRecord?.status !== 'ok') return null;
+      const value = pendingRecord.value;
+      if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+      if (
+        value.experienceRevision !== unit.experienceRevision
+        || value.unitAttemptId !== state.unitAttemptId
+        || typeof value.microtaskId !== 'string'
+      ) return null;
+      const pendingIndex = authoredTasks.findIndex(({ task }) => (
+        task.microtaskId === value.microtaskId
+      ));
+      if (pendingIndex < 0) return null;
+      const authored = authoredTasks[pendingIndex];
+      const payload = value.payload;
+      if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return null;
+      const expectedCheckpointId = authored.task.checkpointAfterSuccess?.checkpointId
+        || `${authored.task.microtaskId}:complete`;
+      if (
+        payload.type !== 'microtask-completed'
+        || payload.unitId !== unit.unitId
+        || payload.experienceRevision !== unit.experienceRevision
+        || payload.unitAttemptId !== state.unitAttemptId
+        || payload.microtaskId !== value.microtaskId
+        || payload.beatId !== authored.beatId
+        || payload.checkpointId !== expectedCheckpointId
+        || !Number.isInteger(payload.attemptRevision)
+        || payload.attemptRevision < 0
+        || typeof payload.eventId !== 'string'
+        || !['completed-independent', 'completed-supported', 'completed-partner-rescue']
+          .includes(payload.completionStatus)
+      ) return null;
+      if (
+        !Array.isArray(payload.targetResults)
+        || !payload.targetResults.every(result => (
+          result && typeof result === 'object' && !Array.isArray(result)
+          && typeof result.challengeRef === 'string'
+        ))
+        || !Array.isArray(payload.sourceContacts)
+        || !payload.sourceContacts.every(contact => (
+          contact && typeof contact === 'object' && !Array.isArray(contact)
+          && typeof contact.sourceRef === 'string'
+          && Array.isArray(contact.contactModes)
+          && contact.contactModes.every(mode => typeof mode === 'string')
+        ))
+        || !Array.isArray(payload.audioContactRefs)
+        || !payload.audioContactRefs.every(ref => typeof ref === 'string')
+        || !Array.isArray(payload.missingAudioRefs)
+        || !payload.missingAudioRefs.every(ref => typeof ref === 'string')
+        || !Array.isArray(payload.storyFacts)
+        || !payload.storyFacts.every(factId => typeof factId === 'string')
+      ) return null;
+      return { pendingIndex, payload, outboxRevision: pendingRecord.revision };
+    }
+
+    function commitPendingValue(expectedRevision, value) {
+      if (outbox && typeof outbox.commit === 'function') {
+        return outbox.commit(pendingCommitKey, { expectedRevision, value: clone(value) });
+      }
+      if (volatileOutbox.revision !== expectedRevision) {
+        return {
+          status: 'conflict', persisted: false,
+          revision: volatileOutbox.revision, value: clone(volatileOutbox.value)
+        };
+      }
+      volatileOutbox = { revision: expectedRevision + 1, value: clone(value) };
+      return {
+        status: 'committed', persisted: true,
+        revision: volatileOutbox.revision, value: clone(volatileOutbox.value),
+        volatile: true
+      };
+    }
+
+    function completionPayload() {
+      const task = currentTask();
+      const sourceRefs = Array.isArray(task.exposureRefs)
+        ? [...new Set(task.exposureRefs)]
+        : [...new Set((task.sourceContacts || []).map(contact => contact.sourceRef))];
+      return {
+        eventId: `runtime:${unit.unitId}:${unit.experienceRevision}:${state.unitAttemptId}:${task.microtaskId}:${state.attemptRevision}:microtask-completed`,
+        type: 'microtask-completed',
+        unitId: unit.unitId,
+        experienceRevision: unit.experienceRevision,
+        unitAttemptId: state.unitAttemptId,
+        attemptRevision: state.attemptRevision,
+        beatId: authoredTasks[activeTaskIndex].beatId,
+        microtaskId: task.microtaskId,
+        checkpointId: task.checkpointAfterSuccess?.checkpointId || `${task.microtaskId}:complete`,
+        completionStatus: state.rescueUsed
+          ? 'completed-partner-rescue'
+          : (state.temporaryResults.some(result => result.outcome === 'supported')
+              ? 'completed-supported'
+              : 'completed-independent'),
+        targetResults: clone(state.temporaryResults),
+        sourceContacts: sourceRefs.map(sourceRef => ({
+          sourceRef,
+          contactModes: [
+            'experienced',
+            ...(state.temporaryAudioContactRefs.includes(sourceRef) ? ['audio-ended'] : [])
+          ]
+        })),
+        audioContactRefs: clone(state.temporaryAudioContactRefs),
+        missingAudioRefs: clone(state.temporaryMissingAudioRefs),
+        storyFacts: clone(task.persistence?.checkpointFacts || []),
+        adventureHeartsRemaining: state.adventureHearts,
+        source: 'new-learning'
+      };
+    }
+
+    function clearPendingCommit(outboxRevision) {
+      return commitPendingValue(outboxRevision, null);
+    }
+
+    function durableContinuation() {
+      return clone(ledger.read()?.units?.[unit.unitId]?.pendingUiContinuation || null);
+    }
+
+    function acknowledgeDurableContinuation(acknowledgement, identity = {}) {
+      const pending = state.pendingUiContinuation;
+      if (!pending) return { persisted: true, effects: [] };
+      const event = {
+        eventId: [
+          'runtime', unit.unitId, unit.experienceRevision, pending.unitAttemptId || state.unitAttemptId,
+          pending.microtaskId, pending.attemptRevision, acknowledgement
+        ].join(':'),
+        type: 'ui-continuation-acknowledged',
+        unitId: unit.unitId,
+        experienceRevision: unit.experienceRevision,
+        unitAttemptId: pending.unitAttemptId,
+        attemptRevision: pending.attemptRevision,
+        microtaskId: pending.microtaskId,
+        acknowledgement,
+        ...identity
+      };
+      const applied = ledger.apply(event);
+      if (applied?.persisted !== true) {
+        return {
+          persisted: false,
+          effects: [{
+            type: 'runtime/persistence-failed',
+            operation: 'ui-continuation-acknowledged',
+            reason: applied?.reason || applied?.status || 'unavailable',
+            retryable: true
+          }]
+        };
+      }
+      transition({ pendingUiContinuation: durableContinuation() });
+      return {
+        persisted: true,
+        effects: [{
+          type: 'runtime/ui-continuation-acknowledged',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: pending.microtaskId,
+          acknowledgement
+        }]
+      };
+    }
+
+    function verifyUnitAndBuild() {
+      transition({ status: 'active', phase: 'unit-verifying' });
+      const firstReadback = ledger.read();
+      const firstUnit = firstReadback?.units?.[unit.unitId] || {};
+      if (
+        firstUnit.experienceRevision !== unit.experienceRevision
+        || firstUnit.completionReadback?.readyForBuild !== true
+      ) {
+        return [{
+          type: 'runtime/unit-readback-incomplete',
+          experienceRevision: unit.experienceRevision,
+          unitId: unit.unitId,
+          retryable: true
+        }];
+      }
+      const effects = [{
+        type: 'runtime/unit-readback-complete',
+        experienceRevision: unit.experienceRevision,
+        unitId: unit.unitId
+      }];
+      const builtEvent = {
+        eventId: `runtime:${unit.unitId}:${unit.experienceRevision}:unit-built`,
+        type: 'unit-built',
+        unitId: unit.unitId,
+        experienceRevision: unit.experienceRevision
+      };
+      const built = ledger.apply(builtEvent);
+      if (built?.persisted !== true) {
+        return [...effects, {
+          type: 'runtime/persistence-failed',
+          operation: 'unit-built',
+          reason: built?.reason || built?.status || 'unavailable',
+          retryable: true
+        }];
+      }
+      effects.push({
+        type: 'runtime/unit-built-committed',
+        experienceRevision: unit.experienceRevision,
+        unitId: unit.unitId
+      });
+      const finalReadback = ledger.read();
+      const finalUnit = finalReadback?.units?.[unit.unitId] || {};
+      if (
+        finalUnit.experienceRevision !== unit.experienceRevision
+        || finalUnit.buildStage !== 5
+      ) {
+        return [...effects, {
+          type: 'runtime/build-stage-readback-incomplete',
+          experienceRevision: unit.experienceRevision,
+          unitId: unit.unitId,
+          retryable: true
+        }];
+      }
+      transition({
+        status: 'unit-built',
+        phase: 'completed',
+        microtaskStatus: 'completed',
+        stepId: null,
+        stepIndex: null,
+        challengeRef: null,
+        challengeSourceRef: null,
+        buildStage: 5,
+        nextRestStop: clone(currentTask()?.restStop || null),
+        audio: null
+      });
+      refreshNavigation(null);
+      return [...effects, {
+        type: 'landmark/build-stage',
+        experienceRevision: unit.experienceRevision,
+        unitId: unit.unitId,
+        buildStage: 5
+      }, {
+        type: 'runtime/unit-built',
+        experienceRevision: unit.experienceRevision,
+        unitId: unit.unitId
+      }];
+    }
+
+    function presentationGateIsOpen() {
+      return !state.currentPresentationMomentId
+        || endedPresentationMomentIds.has(state.currentPresentationMomentId);
+    }
+
+    function runPendingPresentationContinuation() {
+      if (!pendingPresentationContinuation || !presentationGateIsOpen()) return [];
+      const continuation = pendingPresentationContinuation;
+      pendingPresentationContinuation = null;
+      if (continuation.kind === 'activate-first-step') {
+        activateStep(0);
+        const audio = startReadyAudio();
+        return audio ? [audio] : [];
+      }
+      if (continuation.kind === 'advance-challenge-or-step') {
+        return advanceChallengeOrStep({ presentationGateEnded: true });
+      }
+      if (continuation.kind === 'next-task') {
+        const next = enterTask(continuation.taskIndex);
+        if (!next) return [];
+        const effects = [{
+          type: 'scene/show', experienceRevision: unit.experienceRevision,
+          beatId: next.beatId, microtaskId: next.task.microtaskId,
+          stepId: next.task.steps[0].stepId
+        }];
+        const audio = startReadyAudio();
+        if (audio) effects.push(audio);
+        return effects;
+      }
+      if (continuation.kind === 'rest-stop') {
+        const task = currentTask();
+        const nextMicrotaskId = task.restStop.nextMicrotaskId || null;
+        transition({
+          status: 'rest-stop',
+          phase: 'completed',
+          stepId: null,
+          stepIndex: null,
+          challengeRef: null,
+          challengeSourceRef: null,
+          nextRestStop: clone(task.restStop),
+          reachedMicrotaskIds: [...new Set([
+            ...state.completedMicrotaskIds,
+            ...(nextMicrotaskId ? [nextMicrotaskId] : [])
+          ])],
+          audio: null
+        });
+        refreshNavigation(nextMicrotaskId);
+        return [{
+          type: 'runtime/rest-stop',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: task.microtaskId,
+          restStopId: task.restStop.restStopId,
+          restStopType: task.restStop.type,
+          nextMicrotaskId
+        }];
+      }
+      if (continuation.kind === 'enter-unit-verifying') {
+        transition({
+          status: 'active',
+          phase: 'unit-verifying',
+          nextRestStop: clone(currentTask()?.restStop || null)
+        });
+        refreshNavigation(null);
+        pendingPresentationContinuation = { kind: 'verify-unit' };
+        return runPendingPresentationContinuation();
+      }
+      if (continuation.kind === 'verify-unit') return verifyUnitAndBuild();
+      return [];
+    }
+
+    function armPresentationContinuation(continuation) {
+      pendingPresentationContinuation = continuation;
+      return runPendingPresentationContinuation();
+    }
+
+    function activateFirstStepOrWaitForIntro() {
+      const firstMoment = currentTask()?.presentation?.moments?.[0];
+      if (
+        firstMoment?.enterWhen?.kind === 'microtask-start'
+        && state.currentPresentationMomentId === firstMoment.momentId
+        && state.presentationAwaitingEnd
+      ) {
+        pendingPresentationContinuation = { kind: 'activate-first-step' };
+        return false;
+      }
+      return activateStep(0);
+    }
+
+    function finishPersistedTask(payload, outboxRevision) {
+      const cleared = Number.isInteger(outboxRevision)
+        ? clearPendingCommit(outboxRevision)
+        : { persisted: true };
+      if (cleared.persisted !== true) {
+        transition({ phase: 'persistence-retry' });
+        return [{
+          type: 'runtime/persistence-failed', operation: 'pending-commit-clear',
+          reason: cleared.reason || cleared.status || 'unavailable', retryable: true
+        }];
+      }
+      const task = currentTask();
+      const completedMicrotaskIds = [...new Set([...state.completedMicrotaskIds, task.microtaskId])];
+      const committedFacts = [...new Set([...state.committedFacts, ...(payload.storyFacts || [])])];
+      const pendingUiContinuation = durableContinuation();
+      transition({
+        pendingCommit: null,
+        pendingUiContinuation,
+        completedMicrotaskIds,
+        committedFacts,
+        temporaryResults: [],
+        temporaryAudioContactRefs: [],
+        temporaryMissingAudioRefs: [],
+        microtaskStatus: 'completed'
+      });
+      const effects = [{
+        type: 'runtime/microtask-completed',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: task.microtaskId,
+        checkpointId: payload.checkpointId,
+        completionStatus: payload.completionStatus
+      }];
+      if (task.growthBoundary === 'unit-verifying') {
+        effects.push(...armPresentationContinuation({ kind: 'enter-unit-verifying' }));
+        return effects;
+      }
+      if (task.restStop && task.growthBoundary !== 'unit-verifying') {
+        effects.push(...armPresentationContinuation({ kind: 'rest-stop' }));
+        return effects;
+      }
+      effects.push(...armPresentationContinuation({
+        kind: 'next-task',
+        taskIndex: activeTaskIndex + 1
+      }));
+      return effects;
+    }
+
+    function persistPendingCommit() {
+      const pending = state.pendingCommit;
+      if (!pending?.payload) return [{ type: 'runtime/persistence-failed', reason: 'pending-commit-missing' }];
+      const applied = ledger.apply(clone(pending.payload));
+      if (applied?.persisted !== true) {
+        transition({ phase: 'persistence-retry' });
+        return [{
+          type: 'runtime/persistence-failed',
+          operation: pending.payload.type,
+          reason: applied?.reason || applied?.status || 'unavailable',
+          retryable: true
+        }];
+      }
+      return finishPersistedTask(pending.payload, pending.outboxRevision);
+    }
+
+    function beginPendingCommit() {
+      transition({ phase: 'answered-awaiting-save', microtaskStatus: 'answered' });
+      if (sandboxActive) {
+        transition({ status: 'sandbox-complete', phase: 'completed', microtaskStatus: 'practice-complete' });
+        return [{
+          type: 'runtime/sandbox-completed',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: state.microtaskId,
+          persistence: 'none'
+        }];
+      }
+      const payload = completionPayload();
+      const loaded = loadPendingCommit();
+      if (loaded.status !== 'ok') {
+        transition({
+          phase: 'persistence-retry',
+          pendingCommit: { status: 'memory-only', payload, outboxRevision: null }
+        });
+        return [{
+          type: 'runtime/pending-commit-unprotected',
+          microtaskId: state.microtaskId,
+          leavingRepeatsMicrotask: true
+        }];
+      }
+      const storedValue = {
+        experienceRevision: unit.experienceRevision,
+        unitAttemptId: state.unitAttemptId,
+        microtaskId: state.microtaskId,
+        payload
+      };
+      const stored = commitPendingValue(loaded.revision, storedValue);
+      if (stored.persisted !== true) {
+        transition({
+          phase: 'persistence-retry',
+          pendingCommit: { status: 'memory-only', payload, outboxRevision: null }
+        });
+        return [{
+          type: 'runtime/pending-commit-unprotected',
+          microtaskId: state.microtaskId,
+          leavingRepeatsMicrotask: true
+        }];
+      }
+      transition({
+        pendingCommit: { status: 'stored', payload, outboxRevision: stored.revision }
+      });
+      return [{
+        type: 'runtime/pending-commit-stored',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: state.microtaskId
+      }, ...persistPendingCommit()];
+    }
+
+    function advanceChallengeOrStep({ presentationGateEnded = false } = {}) {
+      const step = currentStep();
+      const completesStep = !Array.isArray(step?.challenges)
+        || state.challengeIndex + 1 >= step.challenges.length;
+      if (completesStep && step?.stepId && !state.completedStepIds.includes(step.stepId)) {
+        transition({
+          completedStepIds: [...state.completedStepIds, step.stepId]
+        });
+      }
+      if (!presentationGateEnded && !presentationGateIsOpen()) {
+        pendingPresentationContinuation = { kind: 'advance-challenge-or-step' };
+        transition({ phase: 'presentation-settling', audio: null });
+        return [];
+      }
+      if (Array.isArray(step?.challenges) && state.challengeIndex + 1 < step.challenges.length) {
+        activateChallenge(state.challengeIndex + 1);
+        const audio = startReadyAudio();
+        return audio ? [audio] : [];
+      }
+      if (currentTask()?.steps?.[state.stepIndex + 1]) {
+        activateStep(state.stepIndex + 1);
+        const audio = startReadyAudio();
+        return audio ? [audio] : [];
+      }
+      return beginPendingCommit();
+    }
+
+    function reject(reason) {
+      return publish([{
+        type: 'runtime/command-rejected', reason,
+        experienceRevision: unit.experienceRevision,
+        stateVersion: state.stateVersion,
+        challengeRef: state.challengeRef
+      }]);
+    }
+
+    function validateCommand(action, { challenge = false, media = false } = {}) {
+      if (action.experienceRevision !== unit.experienceRevision) return 'experience-revision-mismatch';
+      if (action.stateVersion !== state.stateVersion) return 'state-version-mismatch';
+      if (challenge && action.challengeRef !== state.challengeRef) return 'challenge-ref-mismatch';
+      if (media) {
+        if (action.microtaskId !== state.microtaskId) return 'microtask-mismatch';
+        if (action.attemptRevision !== state.attemptRevision) return 'attempt-revision-mismatch';
+        if (action.requestId !== state.audio?.requestId) return 'audio-request-mismatch';
+        if (action.segmentId !== state.audio?.segmentId) return 'audio-part-mismatch';
+      }
+      return null;
+    }
+
+    function activeRolePractice() {
+      const step = currentStep();
+      return step?.kind === 'role-enactment' && step.practice?.kind === 'role-enactment'
+        ? step.practice
+        : null;
+    }
+
+    function completeRolePracticeRound(action) {
+      const invalid = validateCommand(action);
+      if (invalid) return reject(invalid);
+      const practice = activeRolePractice();
+      if (!practice || state.phase !== 'role-practice-ready') {
+        return reject('role-practice-not-active');
+      }
+      if (action.practiceId !== practice.practiceId) return reject('practice-id-mismatch');
+      if (!(practice.rounds || []).some(round => round.roundId === action.roundId)) {
+        return reject('role-round-invalid');
+      }
+      if (state.rolePracticeProgress?.completedRoundIds.includes(action.roundId)) {
+        return reject('role-round-already-complete');
+      }
+      if (sandboxActive) {
+        const completedRoundIds = [
+          ...state.rolePracticeProgress.completedRoundIds,
+          action.roundId
+        ];
+        transition({
+          rolePracticeProgress: { practiceId: practice.practiceId, completedRoundIds }
+        });
+        return publish([{
+          type: 'runtime/role-practice-round-saved',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: state.microtaskId,
+          practiceId: practice.practiceId,
+          roundId: action.roundId,
+          persistence: 'none'
+        }]);
+      }
+      const event = {
+        eventId: [
+          'runtime', unit.unitId, unit.experienceRevision, state.unitAttemptId,
+          state.microtaskId, practice.practiceId, action.roundId, 'completed'
+        ].join(':'),
+        type: 'role-practice-round-completed',
+        unitId: unit.unitId,
+        experienceRevision: unit.experienceRevision,
+        unitAttemptId: state.unitAttemptId,
+        microtaskId: state.microtaskId,
+        practiceId: practice.practiceId,
+        roundId: action.roundId
+      };
+      const applied = ledger.apply(event);
+      if (applied?.persisted !== true) {
+        return publish([{
+          type: 'runtime/persistence-failed',
+          operation: event.type,
+          reason: applied?.reason || applied?.status || 'unavailable',
+          retryable: true
+        }]);
+      }
+      const projected = clone(
+        ledger.read()?.units?.[unit.unitId]?.rolePracticeProgress?.[practice.practiceId]
+      );
+      if (!projected?.completedRoundIds?.includes(action.roundId)) {
+        return publish([{
+          type: 'runtime/role-practice-readback-incomplete',
+          practiceId: practice.practiceId,
+          roundId: action.roundId,
+          retryable: true
+        }]);
+      }
+      durableRolePracticeProgress[practice.practiceId] = projected;
+      transition({
+        rolePracticeProgress: {
+          practiceId: practice.practiceId,
+          completedRoundIds: clone(projected.completedRoundIds)
+        }
+      });
+      return publish([{
+        type: 'runtime/role-practice-round-saved',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: state.microtaskId,
+        practiceId: practice.practiceId,
+        roundId: action.roundId,
+        persistence: 'durable'
+      }]);
+    }
+
+    function completeRolePractice(action) {
+      const invalid = validateCommand(action);
+      if (invalid) return reject(invalid);
+      const practice = activeRolePractice();
+      if (!practice || state.phase !== 'role-practice-ready') {
+        return reject('role-practice-not-active');
+      }
+      if (action.practiceId !== practice.practiceId) return reject('practice-id-mismatch');
+      const completed = new Set(state.rolePracticeProgress?.completedRoundIds || []);
+      if (!(practice.rounds || []).every(round => completed.has(round.roundId))) {
+        return reject('role-practice-incomplete');
+      }
+      const activeMoment = currentTask()?.presentation?.moments?.find(moment => (
+        moment.momentId === state.currentPresentationMomentId
+      ));
+      if (activeMoment?.enterWhen?.kind === 'step-active') {
+        endedPresentationMomentIds.add(activeMoment.momentId);
+      }
+      transition({ completedStepIds: [...new Set([...state.completedStepIds, state.stepId])] });
+      return publish(beginPendingCommit());
+    }
+
+    function enterTask(taskIndex) {
+      const authored = authoredTasks[taskIndex];
+      if (!authored) return null;
+      activeTaskIndex = taskIndex;
+      endedPresentationMomentIds = new Set();
+      pendingPresentationContinuation = null;
+      transition({
+        status: 'active',
+        beatId: authored.beatId,
+        microtaskId: authored.task.microtaskId,
+        microtaskStatus: 'in-progress',
+        stepId: null,
+        stepIndex: null,
+        phase: null,
+        currentPresentationMomentId: null,
+        challengeRef: null,
+        challengeSourceRef: null,
+        challengeIndex: 0,
+        completedStepIds: [],
+        attemptRevision: 0,
+        temporaryResults: [],
+        temporaryAudioContactRefs: [],
+        temporaryMissingAudioRefs: [],
+        pendingCommit: null,
+        pendingUiContinuation: null,
+        rolePracticeProgress: null,
+        supportLevel: 'none',
+        supportDepth: 0,
+        rescueUsed: false,
+        audio: null
+      });
+      activateFirstStepOrWaitForIntro();
+      refreshNavigation(state.microtaskId);
+      return authored;
+    }
+
+    function restoreDurableUiContinuation(pending) {
+      if (!pending || pending.unitAttemptId !== state.unitAttemptId) return null;
+      const taskIndex = authoredTasks.findIndex(({ task }) => task.microtaskId === pending.microtaskId);
+      if (taskIndex < 0 || !state.completedMicrotaskIds.includes(pending.microtaskId)) return null;
+      const authored = enterTask(taskIndex);
+      transition({
+        microtaskStatus: 'completed',
+        phase: 'completed',
+        stepId: null,
+        stepIndex: null,
+        challengeRef: null,
+        challengeSourceRef: null,
+        completedStepIds: [],
+        temporaryResults: [],
+        pendingUiContinuation: clone(pending),
+        audio: null
+      });
+      if (pending.kind === 'terminal-presentation') {
+        restorePresentationMoment();
+        if (state.currentPresentationMomentId !== pending.momentId) return null;
+        pendingPresentationContinuation = authored.task.restStop
+          ? { kind: 'rest-stop' }
+          : (authored.task.growthBoundary === 'unit-verifying'
+              ? { kind: 'enter-unit-verifying' }
+              : { kind: 'next-task', taskIndex: taskIndex + 1 });
+        refreshNavigation(pending.microtaskId);
+        return publish([{
+          type: 'runtime/terminal-presentation-restored',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: pending.microtaskId,
+          momentId: pending.momentId
+        }]);
+      }
+      if (pending.kind === 'rest-stop' && authored.task.restStop) {
+        endedPresentationMomentIds = new Set(
+          (authored.task.presentation?.moments || []).map(moment => moment.momentId)
+        );
+        state = {
+          ...state,
+          status: 'rest-stop',
+          currentPresentationMomentId: null,
+          presentationAwaitingEnd: false,
+          nextRestStop: clone(authored.task.restStop)
+        };
+        refreshNavigation(authored.task.restStop.nextMicrotaskId || null);
+        return publish([{
+          type: 'runtime/rest-stop-restored',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: pending.microtaskId,
+          restStopId: authored.task.restStop.restStopId,
+          restStopType: authored.task.restStop.type,
+          nextMicrotaskId: authored.task.restStop.nextMicrotaskId || null
+        }]);
+      }
+      return null;
+    }
+
+    function enter({ entryLesson, unitAttemptId } = {}) {
+      if (!unit.lessonIds.includes(entryLesson)) {
+        throw new TypeError(`entryLesson must belong to ${unit.unitId}`);
+      }
+      const projection = ledger.read();
+      const stored = projection?.units?.[unit.unitId] || {};
+      const compatible = stored.experienceRevision === unit.experienceRevision ? stored : {};
+      durableRolePracticeProgress = clone(compatible.rolePracticeProgress || {});
+      const compatibleHearts = Number.isInteger(compatible.adventureHeartsRemaining)
+        ? compatible.adventureHeartsRemaining
+        : (Number.isInteger(compatible.adventureHearts) ? compatible.adventureHearts : 3);
+      transition({
+        entryLesson,
+        unitAttemptId: unitAttemptId || compatible.unitAttemptId || `unit-attempt:${seed}`,
+        adventureHearts: compatibleHearts,
+        adventureHeartsRemaining: compatibleHearts,
+        completedMicrotaskIds: clone(compatible.completedMicrotaskIds || []),
+        committedFacts: clone(compatible.storyFacts || []),
+        buildStage: Number.isInteger(compatible.buildStage) ? compatible.buildStage : 0,
+        diagnosticArchive: stored.experienceRevision
+          && stored.experienceRevision !== unit.experienceRevision
+          ? {
+              ignoredExperienceRevision: stored.experienceRevision,
+              reason: 'experience-revision-mismatch'
+            }
+          : null
+      });
+      const restoredContinuation = restoreDurableUiContinuation(
+        clone(compatible.pendingUiContinuation || null)
+      );
+      if (restoredContinuation) return restoredContinuation;
+      const firstForLesson = authoredTasks.findIndex(({ task }) => task.lessonId === entryLesson);
+      const pending = restorablePendingCommit(loadPendingCommit());
+      if (pending) {
+        enterTask(pending.pendingIndex);
+        transition({
+          phase: 'persistence-retry',
+          microtaskStatus: 'answered',
+          temporaryResults: clone(pending.payload.targetResults),
+          pendingCommit: {
+            status: 'stored', payload: clone(pending.payload),
+            outboxRevision: pending.outboxRevision
+          }
+        });
+        restorePresentationMoment();
+        return publish([{
+          type: 'runtime/pending-commit-restored',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: pending.payload.microtaskId
+        }]);
+      }
+      const allAuthoredTasksCompleted = authoredTasks.every(({ task }) => (
+        state.completedMicrotaskIds.includes(task.microtaskId)
+      ));
+      if (allAuthoredTasksCompleted) {
+        enterTask(authoredTasks.length - 1);
+        if (state.buildStage === 5) {
+          transition({
+            status: 'unit-built',
+            phase: 'completed',
+            microtaskStatus: 'completed',
+            audio: null
+          });
+          endedPresentationMomentIds = new Set();
+          state = {
+            ...state,
+            currentPresentationMomentId: null,
+            presentationAwaitingEnd: false
+          };
+          refreshNavigation(null);
+          return publish([{
+            type: 'runtime/unit-built-restored',
+            experienceRevision: unit.experienceRevision,
+            unitId: unit.unitId,
+            buildStage: 5
+          }]);
+        }
+        transition({
+          status: 'active',
+          phase: 'unit-verifying',
+          microtaskStatus: 'completed',
+          audio: null
+        });
+        restorePresentationMoment();
+        pendingPresentationContinuation = { kind: 'verify-unit' };
+        refreshNavigation(null);
+        return publish([{
+          type: 'runtime/unit-verification-restored',
+          experienceRevision: unit.experienceRevision,
+          unitId: unit.unitId,
+          retryable: true
+        }]);
+      }
+      const nextIndex = authoredTasks.findIndex(({ task }, index) => (
+        index >= Math.max(0, firstForLesson)
+        && !state.completedMicrotaskIds.includes(task.microtaskId)
+      ));
+      const authored = enterTask(nextIndex < 0 ? firstForLesson : nextIndex);
+      if (!authored) return publish([]);
+      const effects = [{
+        type: 'scene/show',
+        experienceRevision: unit.experienceRevision,
+        beatId: authored.beatId,
+        microtaskId: authored.task.microtaskId,
+        stepId: authored.task.steps[0].stepId
+      }];
+      const audio = startReadyAudio();
+      if (audio) effects.push(audio);
+      return publish(effects);
+    }
+
+    function preview({ microtaskId, unitAttemptId = `preview:${seed}` } = {}) {
+      const targetIndex = authoredTasks.findIndex(({ task }) => task.microtaskId === microtaskId);
+      if (targetIndex < 0) throw new TypeError(`unknown preview microtask ${microtaskId}`);
+      sandboxActive = true;
+      sandboxOrigin = null;
+      state = { ...state, mode: 'microtask-v2-sandbox', unitAttemptId };
+      const authored = enterTask(targetIndex);
+      const effects = [{
+        type: 'scene/show', experienceRevision: unit.experienceRevision,
+        beatId: authored.beatId, microtaskId, stepId: authored.task.steps[0].stepId,
+        sandbox: true
+      }];
+      const audio = startReadyAudio();
+      if (audio) effects.push(audio);
+      return publish(effects);
+    }
+
+    function dispatch(action = {}) {
+      if (action.type === 'navigation/exit-sandbox') {
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        if (!sandboxActive || !sandboxOrigin) return reject('sandbox-not-active');
+        const cancelEffect = state.audio && ['playing', 'scheduled'].includes(state.audio.status)
+          ? audioCancelEffect(state.audio)
+          : null;
+        const origin = sandboxOrigin;
+        const nextVersion = state.stateVersion + 1;
+        const originAudio = clone(origin.state.audio);
+        const restartOriginAudio = originAudio
+          && ['audio-playing', 'audio-retry', 'audio-suspended'].includes(origin.state.phase);
+        sandboxActive = false;
+        sandboxOrigin = null;
+        activeTaskIndex = origin.activeTaskIndex;
+        endedPresentationMomentIds = new Set(origin.endedPresentationMomentIds || []);
+        pendingPresentationContinuation = clone(origin.pendingPresentationContinuation || null);
+        state = {
+          ...clone(origin.state),
+          stateVersion: nextVersion,
+          mode: 'microtask-v2',
+          ...(restartOriginAudio ? { phase: 'audio-ready', audio: null } : {})
+        };
+        const effects = [
+          ...(cancelEffect ? [cancelEffect] : []),
+          {
+            type: 'scene/show', experienceRevision: unit.experienceRevision,
+            beatId: state.beatId, microtaskId: state.microtaskId,
+            stepId: state.stepId, resumedFromSandbox: true
+          }
+        ];
+        if (restartOriginAudio) {
+          const segmentIndex = Math.max(0, Math.min(
+            originAudio.segmentIndex || 0,
+            originAudio.segments.length - 1
+          ));
+          const restartedAudio = {
+            ...originAudio,
+            status: 'playing',
+            requestId: `audio:${unit.experienceRevision}:${state.unitAttemptId}:${state.microtaskId}:${state.attemptRevision}:${Date.now()}:${audioRequestNamespace}:${++audioRequestSequence}`,
+            segmentIndex,
+            segmentId: originAudio.segments[segmentIndex].segmentId,
+            retryAttempt: 0,
+            manualRetryRequired: false,
+            currentSegment: clone(originAudio.segments[segmentIndex]),
+            visibleText: originAudio.segments[segmentIndex].text,
+            unresolvedRefs: originAudio.refs.slice(segmentIndex).map(ref => ref.refId)
+          };
+          transition({ phase: 'audio-playing', audio: restartedAudio });
+          effects.push(audioEffect(restartedAudio));
+        } else if (state.phase === 'audio-ready') {
+          const audio = startReadyAudio();
+          if (audio) effects.push(audio);
+        }
+        return publish(effects);
+      }
+      if (action.type === 'presentation/ended') {
+        if (!['active', 'sandbox-complete', 'rest-stop'].includes(state.status)) {
+          return reject('runtime-not-active');
+        }
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        if (action.microtaskId !== state.microtaskId) return reject('microtask-mismatch');
+        if (action.attemptRevision !== state.attemptRevision) {
+          return reject('attempt-revision-mismatch');
+        }
+        if (action.momentId !== state.currentPresentationMomentId) {
+          return reject('presentation-moment-mismatch');
+        }
+        if (!action.momentId) return reject('presentation-moment-missing');
+        if (endedPresentationMomentIds.has(action.momentId)) {
+          return reject('presentation-moment-already-ended');
+        }
+        let acknowledgementEffects = [];
+        if (
+          state.pendingUiContinuation?.kind === 'terminal-presentation'
+          && state.pendingUiContinuation.momentId === action.momentId
+        ) {
+          const acknowledged = acknowledgeDurableContinuation('presentation-ended', {
+            momentId: action.momentId
+          });
+          if (!acknowledged.persisted) return publish(acknowledged.effects);
+          acknowledgementEffects = acknowledged.effects;
+        }
+        const previousMomentId = state.currentPresentationMomentId;
+        endedPresentationMomentIds.add(previousMomentId);
+        transition({});
+        const effects = [{
+          type: 'runtime/presentation-moment-ended',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: state.microtaskId,
+          attemptRevision: state.attemptRevision,
+          momentId: previousMomentId,
+          nextMomentId: state.currentPresentationMomentId
+        }, ...acknowledgementEffects];
+        effects.push(...runPendingPresentationContinuation());
+        return publish(effects);
+      }
+      if (action.type === 'navigation/open-stage') {
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        if (sandboxActive && state.status !== 'sandbox-complete') {
+          return reject('sandbox-already-active');
+        }
+        if (!state.reachedMicrotaskIds.includes(action.microtaskId)) return reject('stage-not-reached');
+        if (!state.completedMicrotaskIds.includes(action.microtaskId)) {
+          return reject('current-stage-already-open');
+        }
+        const targetIndex = authoredTasks.findIndex(({ task }) => task.microtaskId === action.microtaskId);
+        if (targetIndex < 0) return reject('unknown-stage');
+        const cancelEffect = state.audio && ['playing', 'scheduled'].includes(state.audio.status)
+          ? audioCancelEffect(state.audio)
+          : null;
+        if (!sandboxActive) {
+          sandboxOrigin = {
+            activeTaskIndex,
+            state: clone(state),
+            endedPresentationMomentIds: [...endedPresentationMomentIds],
+            pendingPresentationContinuation: clone(pendingPresentationContinuation)
+          };
+          sandboxActive = true;
+        }
+        transition({
+          mode: 'microtask-v2-sandbox',
+          adventureHearts: 3,
+          adventureHeartsRemaining: 3,
+          rescueUsed: false
+        });
+        const mainReached = clone(state.reachedMicrotaskIds);
+        const mainNavigation = clone(state.stageNavigation);
+        const authored = enterTask(targetIndex);
+        state = {
+          ...state,
+          mode: 'microtask-v2-sandbox',
+          reachedMicrotaskIds: mainReached,
+          stageNavigation: mainNavigation
+        };
+        const effects = [
+          ...(cancelEffect ? [cancelEffect] : []),
+          {
+            type: 'scene/show', experienceRevision: unit.experienceRevision,
+            beatId: authored.beatId, microtaskId: authored.task.microtaskId,
+            stepId: authored.task.steps[0].stepId, sandbox: true
+          }
+        ];
+        const audio = startReadyAudio();
+        if (audio) effects.push(audio);
+        return publish(effects);
+      }
+      if (
+        state.status === 'rest-stop'
+        && ['rest-stop/continue', 'chapter/continue'].includes(action.type)
+      ) {
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        const acknowledged = acknowledgeDurableContinuation('rest-stop-continue', {
+          restStopId: state.nextRestStop?.restStopId || null
+        });
+        if (!acknowledged.persisted) return publish(acknowledged.effects);
+        const nextMicrotaskId = state.nextRestStop?.nextMicrotaskId;
+        const nextIndex = authoredTasks.findIndex(({ task }) => task.microtaskId === nextMicrotaskId);
+        const next = enterTask(nextIndex);
+        if (!next) return reject('rest-stop-next-microtask-missing');
+        transition({ nextRestStop: null });
+        const effects = [...acknowledged.effects, {
+          type: 'scene/show', experienceRevision: unit.experienceRevision,
+          beatId: next.beatId, microtaskId: next.task.microtaskId,
+          stepId: next.task.steps[0].stepId
+        }];
+        const audio = startReadyAudio();
+        if (audio) effects.push(audio);
+        return publish(effects);
+      }
+      if (state.status !== 'active') return reject('runtime-not-active');
+      if (action.type === 'role-practice/round-complete') {
+        return completeRolePracticeRound(action);
+      }
+      if (action.type === 'role-practice/complete') {
+        return completeRolePractice(action);
+      }
+      if (action.type === 'unit/verify-retry') {
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        if (state.phase !== 'unit-verifying') return reject('unit-verification-not-active');
+        if (
+          pendingPresentationContinuation?.kind === 'verify-unit'
+          && state.presentationAwaitingEnd
+        ) {
+          return reject('presentation-moment-not-ended');
+        }
+        return publish(verifyUnitAndBuild());
+      }
+      if (action.type === 'audio/play') {
+        const invalid = validateCommand(action, { challenge: Boolean(state.challengeRef) });
+        if (invalid) return reject(invalid);
+        if (!['audio-ready', 'audio-playing', 'audio-failed'].includes(state.phase)) {
+          return reject('audio-not-ready');
+        }
+        const challenge = currentChallenge();
+        const step = currentStep();
+        const previousPhase = state.phase;
+        const previousAudio = state.audio;
+        const restarting = ['audio-playing', 'audio-failed'].includes(previousPhase)
+          && previousAudio?.segments?.length > 0;
+        const audio = startAudio({
+          sequence: restarting
+            ? { segments: previousAudio.segments }
+            : (challenge?.audioSequence || step?.audioSequence),
+          challenge,
+          purpose: restarting ? previousAudio.purpose : 'instruction',
+          after: restarting
+            ? previousAudio.after
+            : (challenge?.answerRule || step?.answerRule ? 'open-response' : 'advance-challenge')
+        });
+        if (!audio) return reject('required-audio-missing');
+        return publish([
+          ...(previousPhase === 'audio-playing' ? [audioCancelEffect(previousAudio)] : []),
+          audio
+        ]);
+      }
+      if (action.type === 'audio/retry') {
+        const invalid = validateCommand(action, { challenge: Boolean(state.challengeRef) });
+        if (invalid) return reject(invalid);
+        if (state.phase !== 'audio-failed' || state.audio?.manualRetryRequired !== true) {
+          return reject('audio-retry-not-required');
+        }
+        const failedAudio = state.audio;
+        const audio = startAudio({
+          sequence: { segments: failedAudio.segments },
+          challenge: currentChallenge(),
+          purpose: failedAudio.purpose,
+          after: failedAudio.after,
+          startSegmentIndex: failedAudio.segmentIndex
+        });
+        return audio ? publish([audio]) : reject('required-audio-missing');
+      }
+      if (action.type === 'audio/suspend') {
+        const invalid = validateCommand(action, { media: true });
+        if (invalid) return reject(invalid);
+        if (!['audio-playing', 'audio-retry'].includes(state.phase)) {
+          return reject('audio-not-playing');
+        }
+        const suspendedAudio = state.audio;
+        transition({
+          phase: 'audio-suspended',
+          audio: { ...suspendedAudio, status: 'suspended' }
+        });
+        return publish([audioCancelEffect(suspendedAudio)]);
+      }
+      if (action.type === 'audio/resume') {
+        const invalid = validateCommand(action, { challenge: Boolean(state.challengeRef) });
+        if (invalid) return reject(invalid);
+        if (state.phase !== 'audio-suspended' || state.audio?.status !== 'suspended') {
+          return reject('audio-not-suspended');
+        }
+        const suspendedAudio = state.audio;
+        const audio = startAudio({
+          sequence: { segments: suspendedAudio.segments },
+          challenge: currentChallenge(),
+          purpose: suspendedAudio.purpose,
+          after: suspendedAudio.after,
+          retryAttempt: suspendedAudio.retryAttempt,
+          startSegmentIndex: suspendedAudio.segmentIndex
+        });
+        return audio ? publish([audio]) : reject('required-audio-missing');
+      }
+      if (action.type === 'response/submit') {
+        const invalid = validateCommand(action, { challenge: Boolean(state.challengeRef) });
+        if (invalid) return reject(invalid);
+        if (!presentationGateIsOpen()) return reject('presentation-moment-not-ended');
+        if (state.phase !== 'awaiting-response') return reject('response-not-open');
+        const step = currentStep();
+        const challenge = currentChallenge();
+        const answerRule = challenge?.answerRule || step?.answerRule;
+        const evaluated = evaluateRule(answerRule, action.response);
+        if (!evaluated.correct) {
+          const formal = (challenge?.submissionMode || step?.submissionMode) === 'formal';
+          const supportLayers = challenge?.supportLayers || step?.supportLayers || [];
+          const nextSupportDepth = Math.min(3, state.supportDepth + 1);
+          const nextHearts = formal ? Math.max(0, state.adventureHearts - 1) : state.adventureHearts;
+          const depleted = formal && nextHearts === 0;
+          const supportDepth = depleted ? 3 : nextSupportDepth;
+          const layer = supportLayers[supportDepth - 1] || {
+            level: ['reobserve', 'partial-cue', 'model'][supportDepth - 1]
+          };
+          transition({
+            supportDepth,
+            supportLevel: layer.level,
+            adventureHearts: nextHearts,
+            adventureHeartsRemaining: nextHearts,
+            ...(depleted ? { phase: 'rescue-model', rescueUsed: true } : {})
+          });
+          if (depleted) {
+            return publish([{
+              type: 'feedback/partner-demo',
+              experienceRevision: unit.experienceRevision,
+              microtaskId: state.microtaskId,
+              challengeRef: state.challengeRef,
+              supportKind: 'changed-example-model',
+              message: layer.copy || layer.message || null,
+              changedExample: true,
+              revealsAnswer: false
+            }]);
+          }
+          return publish([{
+            type: 'feedback/support',
+            experienceRevision: unit.experienceRevision,
+            microtaskId: state.microtaskId,
+            challengeRef: state.challengeRef,
+            supportKind: layer.level,
+            supportDepth,
+            message: layer.copy || layer.message || null,
+            revealsAnswer: false,
+            mismatchPath: clone(evaluated.mismatchPath)
+          }]);
+        }
+        const result = resultForChallenge(challenge);
+        const supportLevel = state.supportLevel;
+        const outcome = state.rescueUsed
+          ? 'partner-rescue'
+          : (state.supportDepth > 0 ? 'supported' : 'independent');
+        const formal = (challenge?.submissionMode || step?.submissionMode) === 'formal';
+        const heartsAfter = formal
+          ? Math.min(3, state.adventureHearts + 1)
+          : state.adventureHearts;
+        const temporaryResults = result && !state.temporaryResults.some(item => item.resultId === result.resultId)
+          ? [...state.temporaryResults, {
+              ...clone(result), challengeRef: challenge.challengeRef,
+              outcome, supportLevel: state.rescueUsed ? 'model' : supportLevel,
+              rescueUsed: state.rescueUsed,
+              heartsRemaining: heartsAfter,
+              adventureHeartsRemaining: heartsAfter
+            }]
+          : state.temporaryResults;
+        transition({
+          temporaryResults,
+          adventureHearts: heartsAfter,
+          adventureHeartsRemaining: heartsAfter
+        });
+        const effects = [{
+          type: 'feedback/correct', experienceRevision: unit.experienceRevision,
+          microtaskId: state.microtaskId, stepId: state.stepId,
+          challengeRef: state.challengeRef, outcome,
+          message: challenge?.correctFeedback?.copy || step?.correctFeedback || null
+        }];
+        const stepOwnsFeedbackAudio = !Array.isArray(step?.challenges)
+          && Boolean(step?.feedbackAudioSequence);
+        if (stepOwnsFeedbackAudio && step?.stepId && !state.completedStepIds.includes(step.stepId)) {
+          transition({ completedStepIds: [...state.completedStepIds, step.stepId] });
+        }
+        if (challenge?.feedbackAudioSequence || challenge?.channel === 'word-form') {
+          const audio = startAudio({
+            sequence: challenge.feedbackAudioSequence,
+            challenge,
+            purpose: stepOwnsFeedbackAudio ? 'story-response' : 'word-form-answer',
+            after: 'advance-challenge'
+          });
+          if (!audio) return reject('required-audio-missing');
+          effects.push(audio);
+          return publish(effects);
+        }
+        effects.push(...advanceChallengeOrStep());
+        return publish(effects);
+      }
+      if (action.type === 'audio/ended') {
+        const invalid = validateCommand(action, { media: true });
+        if (invalid) return reject(invalid);
+        if (!['audio-playing', 'audio-retry'].includes(state.phase)) return reject('audio-not-playing');
+        const audio = state.audio;
+        const completedSegment = audio.segments[audio.segmentIndex];
+        if (
+          completedSegment.sourceRef
+          && !state.temporaryAudioContactRefs.includes(completedSegment.sourceRef)
+        ) {
+          state = {
+            ...state,
+            temporaryAudioContactRefs: [
+              ...state.temporaryAudioContactRefs,
+              completedSegment.sourceRef
+            ]
+          };
+        }
+        const nextSegmentIndex = audio.segmentIndex + 1;
+        if (nextSegmentIndex < audio.segments.length) {
+          const nextAudio = {
+            ...audio,
+            segmentIndex: nextSegmentIndex,
+            segmentId: audio.segments[nextSegmentIndex].segmentId,
+            retryAttempt: 0,
+            currentSegment: clone(audio.segments[nextSegmentIndex]),
+            visibleText: audio.segments[nextSegmentIndex].text,
+            unresolvedRefs: audio.refs.slice(nextSegmentIndex).map(ref => ref.refId)
+          };
+          transition({ audio: nextAudio });
+          return publish([audioEffect(nextAudio)]);
+        }
+        transition({ audio: { ...audio, status: 'completed' } });
+        if (audio.after === 'open-response') {
+          transition({ phase: 'awaiting-response' });
+          return publish([]);
+        }
+        return publish(advanceChallengeOrStep());
+      }
+      if (action.type === 'audio/failed') {
+        const invalid = validateCommand(action, { media: true });
+        if (invalid) return reject(invalid);
+        if (!['audio-playing', 'audio-retry'].includes(state.phase)) return reject('audio-not-playing');
+        const failedAudio = state.audio;
+        const failedSegment = failedAudio.segments[failedAudio.segmentIndex];
+        const transient = action.failureKind === 'transient';
+        if (transient && failedAudio.retryAttempt < 2) {
+          const retryAttempt = failedAudio.retryAttempt + 1;
+          const retryEffect = startAudio({
+            sequence: { segments: failedAudio.segments },
+            challenge: currentChallenge(),
+            purpose: failedAudio.purpose,
+            after: failedAudio.after,
+            retryAttempt,
+            delayMs: retryAttempt === 1 ? 250 : 750,
+            startSegmentIndex: failedAudio.segmentIndex
+          });
+          return publish([retryEffect]);
+        }
+        transition({
+          phase: 'audio-failed',
+          audio: {
+            ...failedAudio,
+            status: 'failed',
+            reason: typeof action.reason === 'string' ? action.reason : 'unavailable',
+            manualRetryRequired: true,
+            unresolvedRefs: failedAudio.refs
+              .slice(failedAudio.segmentIndex)
+              .map(ref => ref.refId)
+          }
+        });
+        return publish([{
+          type: 'audio/failure',
+          experienceRevision: unit.experienceRevision,
+          microtaskId: state.microtaskId,
+          attemptRevision: state.attemptRevision,
+          requestId: failedAudio.requestId,
+          segmentId: failedSegment.segmentId,
+          reason: state.audio.reason,
+          failClosed: true,
+          visibleText: failedSegment.text,
+          canRetry: true
+        }]);
+      }
+      if (action.type === 'rescue/model-ended') {
+        const invalid = validateCommand(action, { challenge: true });
+        if (invalid) return reject(invalid);
+        if (action.microtaskId !== state.microtaskId) return reject('microtask-mismatch');
+        if (action.attemptRevision !== state.attemptRevision) return reject('attempt-revision-mismatch');
+        if (state.phase !== 'rescue-model') return reject('rescue-model-not-active');
+        const previousAttemptRevision = state.attemptRevision;
+        endedPresentationMomentIds = new Set();
+        pendingPresentationContinuation = null;
+        state = {
+          ...state,
+          temporaryResults: [],
+          completedStepIds: [],
+          attemptRevision: previousAttemptRevision + 1,
+          adventureHearts: 3,
+          adventureHeartsRemaining: 3,
+          supportLevel: 'model',
+          supportDepth: 3,
+          rescueUsed: true,
+          audio: null,
+          phase: 'restarting',
+          currentPresentationMomentId: null,
+          stateVersion: state.stateVersion + 1
+        };
+        transition({ phase: null });
+        activateFirstStepOrWaitForIntro();
+        const effects = [
+          { type: 'runtime/temporary-cleared', microtaskId: state.microtaskId },
+          {
+            type: 'runtime/attempt-revision-incremented',
+            microtaskId: state.microtaskId,
+            from: previousAttemptRevision,
+            to: state.attemptRevision
+          },
+          { type: 'adventure-hearts/refilled', microtaskId: state.microtaskId, hearts: 3 },
+          {
+            type: 'scene/restart-microtask', microtaskId: state.microtaskId,
+            stepId: state.stepId, attemptRevision: state.attemptRevision
+          }
+        ];
+        const audio = startReadyAudio();
+        if (audio) effects.push(audio);
+        return publish(effects);
+      }
+      if (action.type === 'persistence/retry') {
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        if (state.phase !== 'persistence-retry') return reject('persistence-retry-not-active');
+        return publish(persistPendingCommit());
+      }
+      return reject('command-not-allowed');
+    }
+
+    function destroy() {
+      const effects = state.audio && ['playing', 'scheduled'].includes(state.audio.status)
+        ? [audioCancelEffect(state.audio)]
+        : [];
+      transition({ status: 'destroyed', phase: 'destroyed', audio: null });
+      return publish(effects);
+    }
+
+    return Object.freeze({ enter, preview, dispatch, snapshot, destroy });
   }
 
   function createMicrotaskV2({ unit, ledger, effectSink, seed }) {
@@ -145,7 +1943,10 @@
       challengeRef: null,
       supportLevel: 0,
       heartsRemaining: 3,
+      adventureHeartsRemaining: 3,
       assistanceMode: false,
+      partnerRescueActive: false,
+      optionRevision: 0,
       buildStage: 0,
       audio: null
     };
@@ -157,6 +1958,20 @@
     function publish(effects) {
       for (const effect of effects) effectSink(clone(effect));
       return { snapshot: snapshot(), effects: clone(effects) };
+    }
+
+    function adventureHearts() {
+      return Number.isInteger(state.adventureHeartsRemaining)
+        ? state.adventureHeartsRemaining
+        : 3;
+    }
+
+    function withAdventureHearts(nextValue) {
+      const normalized = Math.max(0, Math.min(3, Number(nextValue) || 0));
+      return {
+        adventureHeartsRemaining: normalized,
+        heartsRemaining: normalized
+      };
     }
 
     function phaseForStep(step) {
@@ -193,8 +2008,7 @@
         batchIndex: 0,
         challengeRef: challengeRefs[0] || null,
         supportLevel: 0,
-        heartsRemaining: 3,
-        assistanceMode: false
+        assistanceMode: state.partnerRescueActive
       };
       return true;
     }
@@ -212,8 +2026,7 @@
             ? 'response'
             : (step.challengeMode === 'word-form' ? 'response' : 'audio-ready'),
           supportLevel: 0,
-          heartsRemaining: 3,
-          assistanceMode: false
+          assistanceMode: state.partnerRescueActive
         };
         return [];
       }
@@ -243,11 +2056,11 @@
 
     function audioRefsForStep(step) {
       if (!step) return [];
-      if (Array.isArray(step.audioSourceRefs)) {
-        return step.audioSourceRefs.map(refId => resolveAudioRef(refId)).filter(Boolean);
-      }
-      if (Array.isArray(step.audioContentRefs)) {
-        return step.audioContentRefs.map(refId => resolveAudioRef(refId, 'content')).filter(Boolean);
+      if (Array.isArray(step.audioSourceRefs) || Array.isArray(step.audioContentRefs)) {
+        return [
+          ...(step.audioContentRefs || []).map(refId => resolveAudioRef(refId, 'content')),
+          ...(step.audioSourceRefs || []).map(refId => resolveAudioRef(refId))
+        ].filter(Boolean);
       }
       if (['match-entity', 'match-entity-batch'].includes(step.kind)) {
         const refId = step.challengeSourceRefs?.[state.batchIndex];
@@ -278,7 +2091,8 @@
           ...clone(result),
           outcome,
           supportLevel: state.supportLevel,
-          heartsRemaining: state.heartsRemaining
+          heartsRemaining: adventureHearts(),
+          adventureHeartsRemaining: adventureHearts()
         });
       }
     }
@@ -349,6 +2163,7 @@
     }
 
     function taskCompletionStatus() {
+      if (state.partnerRescueActive) return 'completed-partner-rescue';
       const outcomes = pendingTask.results.map(result => result.outcome);
       if (outcomes.includes('assisted') || outcomes.includes('audio-unavailable')) {
         return 'completed-assisted';
@@ -379,6 +2194,7 @@
         audioContactRefs: clone(pendingTask.audioContactRefs),
         missingAudioRefs: clone(pendingTask.missingAudioRefs),
         storyFacts: clone(task.persistence?.checkpointFacts || []),
+        adventureHeartsRemaining: adventureHearts(),
         ...(task.checkpointAfterSuccess.buildStage === undefined
           ? {}
           : { buildStage: task.checkpointAfterSuccess.buildStage }),
@@ -460,7 +2276,11 @@
       return completeCurrentTask();
     }
 
-    function enterTask(taskIndex) {
+    function enterTask(taskIndex, {
+      refillAdventureHearts = false,
+      partnerRescueActive = false,
+      optionRevision = 0
+    } = {}) {
       const authored = authoredTasks[taskIndex];
       const step = authored?.task.steps?.[0];
       if (!authored || !step) return null;
@@ -483,8 +2303,10 @@
         batchIndex: 0,
         challengeRef: step.challengeSourceRefs?.[0] || step.sourceRefs?.[0] || null,
         supportLevel: 0,
-        heartsRemaining: 3,
-        assistanceMode: false,
+        ...withAdventureHearts(refillAdventureHearts ? 3 : adventureHearts()),
+        assistanceMode: partnerRescueActive,
+        partnerRescueActive,
+        optionRevision,
         audio: null
       };
       return authored;
@@ -501,10 +2323,23 @@
       state.entryLesson = entryLesson;
       state.mode = 'microtask-v2';
       state.buildStage = Number.isInteger(durable.buildStage) ? durable.buildStage : 0;
+      state = {
+        ...state,
+        ...withAdventureHearts(Number.isInteger(durable.adventureHeartsRemaining)
+          ? durable.adventureHeartsRemaining
+          : 3),
+        partnerRescueActive: false,
+        optionRevision: 0
+      };
       const completedId = typeof durable.checkpoint === 'object'
         ? durable.checkpoint?.microtaskId
         : null;
       const completedIndex = authoredTasks.findIndex(item => item.task.microtaskId === completedId);
+      const retiredResumeTargetId = unit.retiredMicrotaskResumeTargets?.[completedId];
+      const retiredResumeIndex = authoredTasks.findIndex(item => (
+        item.task.microtaskId === retiredResumeTargetId
+        && item.task.lessonId === entryLesson
+      ));
       const completedTask = authoredTasks[completedIndex]?.task;
       if (
         completedTask?.growthBoundary === 'chapter-interior'
@@ -523,7 +2358,9 @@
         };
         return publish([{ type: 'chapter/interior-restored', lessonId: completedTask.lessonId }]);
       }
-      let nextIndex = completedIndex >= 0 ? completedIndex + 1 : 0;
+      let nextIndex = completedIndex >= 0
+        ? completedIndex + 1
+        : (retiredResumeIndex >= 0 ? retiredResumeIndex : 0);
       if (completedIndex < 0 && entryLesson === unit.lessonIds[1]) {
         nextIndex = authoredTasks.findIndex(item => item.task.lessonId === entryLesson);
       }
@@ -556,6 +2393,9 @@
         mode: 'microtask-v2-preview',
         entryLesson: authoredTasks[targetIndex].task.lessonId,
         buildStage: 0,
+        ...withAdventureHearts(3),
+        partnerRescueActive: false,
+        optionRevision: 0,
         audio: null
       };
       const authored = enterTask(targetIndex);
@@ -582,6 +2422,24 @@
       }
       if (
         state.status === 'active'
+        && state.phase === 'partner-rescue'
+        && action.type === 'partner-rescue/continue'
+      ) {
+        const restarted = enterTask(activeTaskIndex, {
+          refillAdventureHearts: true,
+          partnerRescueActive: true,
+          optionRevision: state.optionRevision + 1
+        });
+        return publish(restarted ? [{
+          type: 'scene/restart-microtask',
+          microtaskId: restarted.task.microtaskId,
+          stepId: restarted.task.steps[0].stepId,
+          reshuffle: true,
+          optionRevision: state.optionRevision
+        }] : []);
+      }
+      if (
+        state.status === 'active'
         && state.phase === 'persistence-retry'
         && action.type === 'persistence/retry'
         && pendingPersistence
@@ -589,6 +2447,15 @@
         return publish(persistCompletedTask(clone(pendingPersistence)));
       }
       if (state.status !== 'active') return publish([]);
+      if (action.type === 'step/continue' && state.phase === 'response') {
+        const step = currentStep();
+        if (!step || step.answerRule || step.submissionMode === 'formal') return publish([]);
+        const withinMicrotaskId = state.microtaskId;
+        const effects = advanceAfterStep();
+        const autoAudioEffect = autoStartReadyAudio({ purpose: 'followup', withinMicrotaskId });
+        if (autoAudioEffect) effects.push(autoAudioEffect);
+        return publish(effects);
+      }
       if (action.type === 'audio/play' && ['audio-ready', 'audio-playing'].includes(state.phase)) {
         const refs = state.audio?.stepId === state.stepId
           && state.audio?.batchIndex === state.batchIndex
@@ -767,17 +2634,42 @@
         const evaluated = durablePreconditionsMet
           ? evaluateRule(step.answerRule, response)
           : { correct: false, mismatchPath: ['factIds'] };
+        const changesAdventureHearts = step.submissionMode === 'formal'
+          && step.affectsAdventureHearts !== false;
         if (!evaluated.correct) {
           const nextLevel = Math.min(3, state.supportLevel + 1);
+          const nextHearts = changesAdventureHearts
+            ? Math.max(0, adventureHearts() - 1)
+            : adventureHearts();
+          const depleted = changesAdventureHearts && nextHearts === 0;
           state = {
             ...state,
             supportLevel: nextLevel,
-            heartsRemaining: Math.max(0, 3 - nextLevel),
-            assistanceMode: nextLevel >= 3
+            ...withAdventureHearts(nextHearts),
+            assistanceMode: depleted || state.partnerRescueActive,
+            partnerRescueActive: depleted || state.partnerRescueActive,
+            ...(depleted ? { phase: 'partner-rescue' } : {})
           };
-          const partnerDemo = nextLevel >= 3;
+          if (depleted) {
+            return publish([{
+              type: 'feedback/partner-demo',
+              microtaskId: state.microtaskId,
+              stepId: state.stepId,
+              level: 3,
+              supportKind: 'changed-example-model',
+              message: step.support?.[2] || null,
+              changedExample: true,
+              revealsAnswer: false,
+              requiresChildAction: true
+            }, {
+              type: 'adventure-hearts/star-rewind',
+              microtaskId: state.microtaskId,
+              delayMs: 1400,
+              restartScope: 'current-microtask'
+            }]);
+          }
           return publish([{
-            type: partnerDemo ? 'feedback/partner-demo' : 'feedback/support',
+            type: 'feedback/support',
             microtaskId: state.microtaskId,
             stepId: state.stepId,
             level: nextLevel,
@@ -786,10 +2678,16 @@
             revealsAnswer: false
           }]);
         }
+        if (changesAdventureHearts) {
+          state = {
+            ...state,
+            ...withAdventureHearts(Math.min(3, adventureHearts() + 1))
+          };
+        }
         const outcome = pendingTask.audioUnavailableSteps.includes(step.stepId)
           ? 'audio-unavailable'
-          : (state.assistanceMode
-              ? 'assisted'
+          : (state.partnerRescueActive
+              ? 'partner-rescue'
               : (state.supportLevel > 0 ? 'supported' : 'independent'));
         recordStepResults(step, outcome);
         if (step.storesFactId && typeof response.entityId === 'string') {
@@ -838,7 +2736,7 @@
     return Object.freeze({ enter, preview, dispatch, snapshot, destroy });
   }
 
-  function create({ unit, ledger, effectSink = () => {}, seed = 1 } = {}) {
+  function create({ unit, ledger, effectSink = () => {}, seed = 1, outbox = null } = {}) {
     if (!unit?.unitId || !Array.isArray(unit.beats) || unit.beats.length !== 5) {
       throw new TypeError('learning runtime requires a five-beat teaching unit');
     }
@@ -847,6 +2745,9 @@
     }
     if (typeof effectSink !== 'function') throw new TypeError('effectSink must be a function');
     if (!Number.isFinite(Number(seed))) throw new TypeError('seed must be numeric');
+    if (/^lesson1-2-v2(?:\.\d+)?$/.test(unit.experienceRevision || '')) {
+      return createLesson12V2({ unit, ledger, effectSink, seed: Number(seed), outbox });
+    }
     if (unit.runtimeProfile === 'microtask-v2') {
       return createMicrotaskV2({ unit, ledger, effectSink, seed: Number(seed) });
     }

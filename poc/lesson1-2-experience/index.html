@@ -6,16 +6,44 @@
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="theme-color" content="#10243e">
   <title>学习冒险</title>
-  <link rel="stylesheet" href="/assets/fonts/fonts.css">
-  <link rel="stylesheet" href="/poc/lesson1-2-experience/experience.css">
+  <link rel="icon" href="/poc/lesson1-2-experience/assets/icons/star-fill.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=lesson1-2-v2-20260830-r6">
+  <link rel="stylesheet" href="/poc/lesson1-2-experience/experience.css?v=lesson1-2-v2-20260830-r6">
 </head>
 <body>
-  <main data-learning-microtask-experience></main>
-  <script src="/core/curriculum-catalog.js"></script>
-  <script src="/core/learning-store.js"></script>
-  <script src="/core/learning-ledger.js"></script>
-  <script src="/core/learning-runtime.js"></script>
-  <script src="/core/learning-microtask-scene.js"></script>
-  <script src="/poc/lesson1-2-experience/experience.js"></script>
+  <main data-learning-microtask-experience>
+    <section class="experience-startup" data-experience-startup data-startup-state="loading" role="status" aria-live="polite">
+      <div class="experience-startup__beacon" aria-hidden="true"><span>★</span><i></i></div>
+      <p class="experience-startup__kicker">LEARNING ADVENTURE</p>
+      <h1>学习冒险正在准备</h1>
+      <p>正在整理人物、声音和任务，很快就好。</p>
+      <a class="experience-startup__reload" data-startup-reload href="?v=lesson1-2-v2-20260830-r6">长时间没有出现？重新加载</a>
+    </section>
+  </main>
+  <script data-entry-rescue>
+    (function lessonOneTwoEntryRescue() {
+      'use strict';
+      const root = document.querySelector('[data-learning-microtask-experience]');
+      if (!root) return;
+      let recoveryRequested = false;
+      root.addEventListener('click', event => {
+        const startButton = event.target.closest?.('button[data-action="start"]');
+        if (!startButton || !root.contains(startButton)) return;
+        const beforeClick = root.innerHTML;
+        globalThis.setTimeout(() => {
+          if (recoveryRequested || root.innerHTML !== beforeClick) return;
+          recoveryRequested = true;
+          globalThis.location?.replace?.('?v=lesson1-2-v2-20260830-r6&recover=entry-noop');
+        }, 0);
+      }, true);
+    })();
+  </script>
+  <script src="/core/curriculum-catalog.js?v=lesson1-2-v2-20260830-r6"></script>
+  <script src="/core/learning-store.js?v=lesson1-2-v2-20260830-r6"></script>
+  <script src="/core/learning-ledger.js?v=lesson1-2-v2-20260830-r6"></script>
+  <script src="/core/learning-runtime.js?v=lesson1-2-v2-20260830-r6"></script>
+  <script src="/core/learning-outcome-practice.js?v=lesson1-2-v2-20260830-r6"></script>
+  <script src="/core/learning-microtask-scene.js?v=lesson1-2-v2-20260830-r6"></script>
+  <script src="/poc/lesson1-2-experience/experience.js?v=lesson1-2-v2-20260830-r6"></script>
 </body>
 </html>

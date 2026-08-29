@@ -4,818 +4,3393 @@ const { test, expect } = require('@playwright/test');
 const catalog = require('../../core/curriculum-catalog');
 
 const EXPERIENCE_PATH = '/poc/lesson1-2-experience/';
-const STORAGE_KEY = 'poc:lesson1-2-experience:v1';
 const unit = catalog.getTeachingUnit('NCE-U01');
 const tasks = unit.beats.flatMap(beat => beat.microtasks || []);
-
-async function openFresh(page) {
-  await page.goto(EXPERIENCE_PATH);
-  await page.evaluate(progress => {
-    localStorage.removeItem(progress);
-  }, STORAGE_KEY);
-  return page.reload();
-}
-
-async function installInstantAudio(page, { failVoice = false } = {}) {
-  await page.addInitScript(shouldFailVoice => {
-    class FakeAudio extends EventTarget {
-      constructor(src) {
-        super();
-        this.src = src;
-        this.preload = '';
-        this.loop = false;
-        this.volume = 1;
-      }
-      pause() {}
-      play() {
-        queueMicrotask(() => this.dispatchEvent(new Event(
-          shouldFailVoice ? 'error' : 'ended'
-        )));
-        return Promise.resolve();
-      }
-    }
-    Object.defineProperty(window, 'Audio', { configurable: true, value: FakeAudio });
-  }, failVoice);
-}
-
-async function installManualAudio(page) {
-  await page.addInitScript(() => {
-    window.__courseAudioStarts = [];
-    window.__correctCueStarts = 0;
-    class ManualAudio extends EventTarget {
-      constructor(src) {
-        super();
-        this.src = src;
-        this.preload = '';
-        this.loop = false;
-        this.volume = 1;
-      }
-      pause() {}
-      play() {
-        if (String(this.src).endsWith('/correct-chime.mp3')) {
-          window.__correctCueStarts += 1;
-          queueMicrotask(() => this.dispatchEvent(new Event('ended')));
-          return Promise.resolve();
-        }
-        window.__courseAudioStarts.push(String(this.src));
-        window.__pendingCourseAudio = this;
-        return Promise.resolve();
-      }
-    }
-    window.__finishCourseAudio = () => {
-      const pending = window.__pendingCourseAudio;
-      window.__pendingCourseAudio = null;
-      if (!pending) return null;
-      pending.dispatchEvent(new Event('ended'));
-      return pending.src;
-    };
-    Object.defineProperty(window, 'Audio', { configurable: true, value: ManualAudio });
-  });
-}
+const taskById = new Map(tasks.map(task => [task.microtaskId, task]));
+const STORAGE_KEY = `poc:learning-experience:${unit.unitId}:${unit.experienceRevision}`;
+const PENDING_COMMIT_KEY = `learning-runtime:${unit.unitId}:${unit.experienceRevision}:pending-commit`;
+const ACTIVE_SCENE_MODES = new Set([
+  'dialogue-stage',
+  'object-workbench',
+  'grammar-lab',
+  'story-journey'
+]);
+const OUTCOME_REST_VARIANTS = new Set([
+  'lesson1-chapter-stop',
+  'lesson2-midpoint-rest-stop',
+  'unit-built'
+]);
+const outcomePracticeById = new Map((unit.experience.outcomePractices || []).map(practice => (
+  [practice.practiceId, practice]
+)));
+const sourceByRef = new Map(Object.values(unit.lessonContent).flatMap(lesson => (
+  Object.entries(lesson.sources || {})
+)));
 
 function app(page) {
   return page.locator('.station-app');
 }
 
-async function clickValue(page, action, value) {
-  await page.locator(`button[data-action="${action}"][data-value="${value}"]`).click();
-}
-
-async function settle(page) {
-  await page.waitForTimeout(12);
-}
-
-async function enterFirstMission(page) {
-  await page.locator('[data-action="start"]').click();
-  await page.getByRole('button', { name: '去听他们说话' }).click();
-}
-
-test('the arrival card keeps only the child-facing story and action', async ({ page }) => {
-  await openFresh(page);
-  const arrival = page.locator('.arrival-card');
-  await expect(arrival).toBeVisible();
-  await expect(arrival.getByText('不打字 · 不开麦 · 听完再动手')).toHaveCount(0);
-  await expect(arrival.getByText(/AI 生成|老师审核/)).toHaveCount(0);
-});
-
-test('a first-time child sees the lost-handbag premise before any dialogue', async ({ page }) => {
-  await installManualAudio(page);
-  await page.setViewportSize({ width: 390, height: 844 });
-  await openFresh(page);
-  await page.locator('[data-action="start"]').click();
-
-  await expect(app(page)).toHaveAttribute('data-view', 'briefing');
-  await expect(page.getByRole('heading', {
-    name: '小站收到一只没人认领的手提包'
-  })).toBeVisible();
-  await expect(page.getByRole('img', {
-    name: '探险小猫指着柜台上的手提包，一位先生和一位女士正准备交谈。'
-  })).toBeVisible();
-  await expect(page.getByText('一位先生和一位女士来到窗口。先听他们怎么说，再帮手提包找到主人。')).toBeVisible();
-  await expect(page.locator('.dialogue-line')).toHaveCount(0);
-  await expect(app(page)).toHaveAttribute('data-runtime-status', 'idle');
-  expect(await page.evaluate(() => window.__courseAudioStarts)).toEqual([]);
-  const briefingGeometry = await page.locator('.briefing-card').evaluate(element => ({
-    bottom: element.getBoundingClientRect().bottom,
-    clientHeight: element.clientHeight,
-    scrollHeight: element.scrollHeight,
-    viewportHeight: window.innerHeight,
-    imageWidth: element.querySelector('img')?.naturalWidth || 0
-  }));
-  expect(briefingGeometry.bottom).toBeLessThanOrEqual(briefingGeometry.viewportHeight);
-  expect(briefingGeometry.scrollHeight).toBeLessThanOrEqual(briefingGeometry.clientHeight + 1);
-  expect(briefingGeometry.imageWidth).toBeGreaterThan(1000);
-
-  await page.getByRole('button', { name: '去听他们说话' }).click();
-  await expect(app(page)).toHaveAttribute('data-view', 'mission');
-  await expect(page.getByRole('heading', { name: '门铃响了' })).toBeVisible();
-  await expect(page.locator('.dialogue-line')).toHaveCount(7);
-  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-ready');
-  expect(await page.evaluate(() => window.__courseAudioStarts)).toEqual([]);
-});
-
-test('Lesson 1 opens as a seven-line story listen and follows the active line', async ({ page }) => {
-  await installManualAudio(page);
-  await page.setViewportSize({ width: 390, height: 844 });
-  await openFresh(page);
-  await enterFirstMission(page);
-
-  const firstStep = tasks.find(task => task.microtaskId === 'L01-M01').steps[0];
-  const expectedLines = firstStep.audioSourceRefs.map(refId => unit.lessonContent.lesson1.sources[refId].text);
-  await expect(page.getByRole('heading', { name: '门铃响了' })).toBeVisible();
-  await expect(page.locator('.mission-prompt')).toHaveText('客人进门了，听听他们说什么');
-  await expect(page.getByText('完整听七句')).toHaveCount(0);
-  await expect(page.locator('.dialogue-line')).toHaveCount(7);
-  expect(await page.locator('.dialogue-line__text').allTextContents()).toEqual(expectedLines);
-  const geometry = await page.locator('.mission-console').evaluate(element => ({
-    clientHeight: element.clientHeight,
-    scrollHeight: element.scrollHeight,
-    bottom: element.getBoundingClientRect().bottom,
-    viewportHeight: window.innerHeight
-  }));
-  expect(geometry.scrollHeight).toBeLessThanOrEqual(geometry.clientHeight + 1);
-  expect(geometry.bottom).toBeLessThanOrEqual(geometry.viewportHeight);
-
-  await page.locator('[data-action="audio-play"]').click();
-  await expect(page.locator('.dialogue-line').nth(0)).toHaveClass(/is-current/);
-  await page.evaluate(() => window.__finishCourseAudio());
-  await expect(page.locator('.dialogue-line').nth(0)).toHaveClass(/is-heard/);
-  await expect(page.locator('.dialogue-line').nth(1)).toHaveClass(/is-current/);
-});
-
-test('ordinary story scenes do not park a decorative cat beside the adult cast', async ({ page }) => {
-  await openFresh(page);
-  await enterFirstMission(page);
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
-
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 6：随身物品上架' }).click();
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
-});
-
-test('all word-object choices use the illustrated asset system instead of emoji', async ({ page }) => {
-  await openFresh(page);
-  const stages = [
-    ['阶段 6：随身物品上架', ['pen', 'pencil', 'book', 'watch']],
-    ['阶段 8：衣帽架归位', ['coat', 'dress', 'skirt', 'shirt']],
-    ['阶段 10：钥匙唤醒影像', ['car-key', 'house-key']]
-  ];
-
-  for (const [stageName, entityIds] of stages) {
-    await page.locator('[data-action="toggle-settings"]').click();
-    await page.getByRole('button', { name: stageName }).click();
-    const shelf = page.locator('.prop-shelf');
-    await expect(shelf.locator('.entity-visual > span')).toHaveCount(0);
-    await expect(shelf.locator('.entity-visual img')).toHaveCount(entityIds.length);
-    for (const entityId of entityIds) {
-      const visual = shelf.locator(`.entity-visual[data-entity-id="${entityId}"]`);
-      await expect(visual.locator('source')).toHaveAttribute('srcset', new RegExp(`item-${entityId}-v1\\.avif$`));
-      await expect(visual.locator('img')).toHaveAttribute('src', new RegExp(`item-${entityId}-v1\\.webp$`));
-    }
-  }
-});
-
-test('the explorer cat returns visibly when partner rescue has a real job', async ({ page }) => {
-  await installInstantAudio(page);
-  await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 2：礼貌问一问' }).click();
-
-  const wrongChoice = page.getByRole('button', { name: 'Thank you very much.' });
-  await wrongChoice.click();
-  await wrongChoice.click();
-  await wrongChoice.click();
-
-  const rescue = page.locator('.feedback-bubble[data-tone="partner"]');
-  await expect(rescue).toBeVisible();
-  await expect(rescue.locator('img')).toHaveAttribute('src', /\/mascot\/loader\/frame-1-route-page-20260806-01-256\.webp$/);
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
-});
-
-test('the first owner error collapses the paper console into the selected mission prompt bar', async ({ page }) => {
-  await installInstantAudio(page);
-  await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
-  await clickValue(page, 'select-entity', 'station-keeper');
-
-  const console = page.locator('.mission-console--support-scene');
-  const feedback = console.locator('.feedback-mission-bar[data-tone="support"]');
-  await expect(console).toBeVisible();
-  await expect(feedback).toBeVisible();
-  await expect(feedback.locator('.heart-row')).toBeVisible();
-  await expect(feedback.locator('p')).toHaveText('回想一下，最后是谁说“对，是我的”。');
-  await expect(console.locator(':scope > .mission-prompt')).toHaveCount(0);
-  await expect(console.locator('[data-response-fields]')).toHaveCount(0);
-  await expect(console.locator('.feedback-bubble')).toHaveCount(0);
-  await page.waitForTimeout(300);
-  const geometry = await feedback.evaluate(element => {
-    const box = element.getBoundingClientRect();
-    const consoleBox = element.closest('.mission-console').getBoundingClientRect();
-    return {
-      top: box.top, bottom: box.bottom, width: box.width,
-      consoleTop: consoleBox.top, consoleBottom: consoleBox.bottom, consoleWidth: consoleBox.width
+async function installHarness(page, { audioMode = 'manual' } = {}) {
+  await page.addInitScript(({ mode, ledgerKey }) => {
+    const core = {};
+    const wrappedValues = new Map();
+    const wrapCoreApi = (name, wrap) => {
+      Object.defineProperty(core, name, {
+        configurable: true,
+        enumerable: true,
+        get: () => wrappedValues.get(name),
+        set: value => wrappedValues.set(name, wrap(value))
+      });
     };
-  });
-  expect(geometry.top).toBeGreaterThanOrEqual(geometry.consoleTop);
-  expect(geometry.bottom).toBeLessThanOrEqual(geometry.consoleBottom + 8);
-  expect(Math.abs(geometry.width - geometry.consoleWidth)).toBeLessThanOrEqual(2);
 
-  await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.locator('.stage-prompt')).toBeVisible();
-  await expect(page.locator('.stage-prompt')).toHaveText('这是谁的手提包？找到它的主人');
-});
-
-test('every standalone English audio prompt keeps its catalog text visible', async ({ page }) => {
-  await installManualAudio(page);
-  await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
-
-  const audioPanel = page.locator('.language-audio-panel');
-  await expect(audioPanel).toBeVisible();
-  await expect(audioPanel.getByText('Thank you very much.', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: '播放英文' }).click();
-  await expect(audioPanel.getByText('Thank you very much.', { exact: true })).toBeVisible();
-});
-
-test('standalone word recordings begin with English instead of a long audio prelude', async ({ page }) => {
-  const standaloneWordSources = Object.values(unit.lessonContent)
-    .flatMap(lesson => Object.values(lesson.sources))
-    .filter(source => source.audioSrc && ['vocabulary', 'substitution-item'].includes(source.sourceKind))
-    .map(source => ({ sourceId: source.sourceId, audioSrc: source.audioSrc }));
-
-  await page.goto(EXPERIENCE_PATH);
-  const decodedOnsets = await page.evaluate(async sources => {
-    const context = new AudioContext();
-    const threshold = 10 ** (-45 / 20);
-    const results = [];
-    try {
-      for (const source of sources) {
-        const response = await fetch(source.audioSrc);
-        const buffer = await context.decodeAudioData(await response.arrayBuffer());
-        const samples = buffer.getChannelData(0);
-        const windowSamples = Math.max(1, Math.round(buffer.sampleRate * 0.01));
-        let onsetSample = samples.length;
-        for (let offset = 0; offset < samples.length; offset += windowSamples) {
-          let energy = 0;
-          const end = Math.min(offset + windowSamples, samples.length);
-          for (let index = offset; index < end; index += 1) energy += samples[index] ** 2;
-          if (Math.sqrt(energy / (end - offset)) >= threshold) {
-            onsetSample = offset;
-            break;
+    window.__runtimeEffects = [];
+    window.__lessonMotionStarts = [];
+    addEventListener('animationstart', event => {
+      const snapshot = window.__lessonScene?.runtime?.snapshot?.() || null;
+      window.__lessonMotionStarts.push({
+        animationName: event.animationName,
+        segmentId: snapshot?.audio?.segmentId || null,
+        speakerRole: event.target?.dataset?.speakerRole || null,
+        targetClass: event.target?.className || ''
+      });
+    }, true);
+    wrapCoreApi('learningRuntime', api => ({
+      ...api,
+      create(options) {
+        const originalSink = options.effectSink;
+        return api.create({
+          ...options,
+          effectSink(effect) {
+            window.__runtimeEffects.push(structuredClone(effect));
+            originalSink(effect);
           }
-        }
-        results.push({
-          sourceId: source.sourceId,
-          onsetMs: Math.round((onsetSample / buffer.sampleRate) * 1000)
         });
       }
-    } finally {
-      await context.close();
+    }));
+    wrapCoreApi('learningMicrotaskScene', api => ({
+      ...api,
+      mount(options) {
+        const mounted = api.mount(options);
+        window.__lessonScene = mounted;
+        return mounted;
+      }
+    }));
+    Object.defineProperty(window, 'CanranCore', {
+      configurable: true,
+      get: () => core,
+      set: value => {
+        if (value && value !== core) Object.assign(core, value);
+      }
+    });
+
+    window.__audioStarts = [];
+    window.__pendingCourseAudio = [];
+    let audioSequence = 0;
+    class ControlledAudio extends EventTarget {
+      constructor(src) {
+        super();
+        this.src = String(src || '');
+        this.preload = '';
+        this.loop = false;
+        this.volume = 1;
+        this.sequence = ++audioSequence;
+        this.paused = false;
+        this.finished = false;
+      }
+      pause() {
+        this.paused = true;
+      }
+      play() {
+        this.paused = false;
+        const runtimeSnapshot = window.__lessonScene?.runtime?.snapshot?.() || null;
+        const renderedApp = document.querySelector('.station-app');
+        const renderedWorld = document.querySelector('.station-world');
+        window.__audioStarts.push({
+          src: this.src,
+          runtimeMicrotaskId: runtimeSnapshot?.microtaskId || null,
+          runtimeMomentId: runtimeSnapshot?.currentPresentationMomentId || null,
+          renderedMicrotaskId: renderedApp?.dataset.runtimeMicrotask || null,
+          renderedMomentId: renderedWorld?.dataset.presentationMoment || null
+        });
+        window.__pendingCourseAudio.push(this);
+        if (mode === 'instant') queueMicrotask(() => this.finish());
+        return Promise.resolve();
+      }
+      finish() {
+        if (this.finished || this.paused) return false;
+        this.finished = true;
+        this.dispatchEvent(new Event('ended'));
+        return true;
+      }
     }
-    return results;
-  }, standaloneWordSources);
+    window.__finishNextCourseAudio = () => {
+      const pending = window.__pendingCourseAudio.find(audio => !audio.finished && !audio.paused);
+      if (!pending) return null;
+      const src = pending.src;
+      pending.finish();
+      return src;
+    };
+    window.__pendingCourseAudioCount = () => (
+      window.__pendingCourseAudio.filter(audio => !audio.finished && !audio.paused).length
+    );
+    Object.defineProperty(window, 'Audio', { configurable: true, value: ControlledAudio });
 
-  expect(decodedOnsets).toHaveLength(21);
-  expect(decodedOnsets.filter(result => result.onsetMs > 150)).toEqual([]);
-});
+    const originalSetItem = Storage.prototype.setItem;
+    window.__failLedgerWrites = false;
+    Storage.prototype.setItem = function guardedSetItem(key, value) {
+      if (window.__failLedgerWrites && String(key) === ledgerKey) {
+        throw new DOMException('injected ledger write failure', 'QuotaExceededError');
+      }
+      return originalSetItem.call(this, key, value);
+    };
+  }, { mode: audioMode, ledgerKey: STORAGE_KEY });
+}
 
-test('the selected split-stage design frames the transcript with large speaking characters', async ({ page }) => {
-  await installManualAudio(page);
-  await page.setViewportSize({ width: 1440, height: 1024 });
-  await openFresh(page);
-  await enterFirstMission(page);
+async function openFresh(page, options = {}) {
+  await page.emulateMedia({ reducedMotion: options.reducedMotion || 'reduce' });
+  await installHarness(page, options);
+  await page.goto(EXPERIENCE_PATH);
+  await page.evaluate(([progressKey, pendingKey]) => {
+    localStorage.removeItem(progressKey);
+    localStorage.removeItem(pendingKey);
+  }, [STORAGE_KEY, PENDING_COMMIT_KEY]);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__lessonScene))).toBe(true);
+}
 
-  const left = page.locator('.scene-character[data-dialogue-side="left"]');
-  const right = page.locator('.scene-character[data-dialogue-side="right"]');
-  const console = page.locator('.mission-console');
-  await expect(left.getByText('招领员', { exact: true })).toBeVisible();
-  await expect(right.getByText('手提包主人', { exact: true })).toBeVisible();
-  await expect(left.locator('img')).toHaveAttribute('src', /character-adult-man-cutout-v1\.webp$/);
-  await expect(right.locator('img')).toHaveAttribute('src', /character-adult-woman-cutout-v1\.webp$/);
-  await expect(page.locator('.scene-prop[data-entity-id="handbag"] img'))
-    .toHaveAttribute('src', /handbag-prop-v1\.webp$/);
-  await expect(page.locator('.dialogue-line__speaker-name')).toHaveCount(7);
+async function startOrResume(page) {
+  if (await app(page).getAttribute('data-runtime-status') !== 'idle') return;
+  await page.locator('[data-action="start"]').click();
+  if (await app(page).getAttribute('data-view') === 'briefing') {
+    await page.locator('[data-action="start"]').click();
+  }
+  await expect(app(page)).toHaveAttribute('data-view', 'mission');
+}
 
-  const layout = await page.evaluate(() => {
-    function box(selector) {
-      const rect = document.querySelector(selector).getBoundingClientRect();
-      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width };
+async function reloadAndResume(page) {
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__lessonScene))).toBe(true);
+  await startOrResume(page);
+}
+
+async function runtimeSnapshot(page) {
+  return page.evaluate(() => window.__lessonScene.runtime.snapshot());
+}
+
+async function ledgerProjection(page) {
+  return page.evaluate(() => window.__lessonScene.ledger.read());
+}
+
+async function durableLedgerRecord(page) {
+  return page.evaluate(storageKey => localStorage.getItem(storageKey), STORAGE_KEY);
+}
+
+async function mainlineIsolationRecord(page) {
+  return page.evaluate(storageKey => ({
+    snapshot: window.__lessonScene.runtime.snapshot(),
+    ledger: window.__lessonScene.ledger.read(),
+    rawStorage: localStorage.getItem(storageKey)
+  }), STORAGE_KEY);
+}
+
+async function expectMainlineUnchanged(page, baseline) {
+  expect(await mainlineIsolationRecord(page)).toEqual(baseline);
+}
+
+async function expectOptionalPracticeHasNoGamification(page) {
+  const practice = page.locator('.outcome-practice-card');
+  await expect(practice).toBeVisible();
+  await expect(page.locator('.adventure-heart-gauge, [aria-label*="冒险心"]')).toHaveCount(0);
+  await expect(practice.locator([
+    '.practice-score', '[data-practice-score]', 'meter', 'progress',
+    '.practice-microphone', '[data-microphone]', '[data-action*="record"]',
+    '[data-action*="microphone"]', '.certificate', '[data-certificate]'
+  ].join(','))).toHaveCount(0);
+  await expect(practice.getByRole('button', {
+    name: /录音|麦克风|开始说话|领取证书|查看证书/
+  })).toHaveCount(0);
+}
+
+async function courseAudioStartCount(page) {
+  return page.evaluate(() => window.__audioStarts.length);
+}
+
+async function expectPracticeAudioStarted(page, sourceRef, startsBefore) {
+  const authored = sourceByRef.get(sourceRef);
+  expect(authored?.audioSrc, `${sourceRef} must own a catalog audio asset`).toBeTruthy();
+  await expect.poll(() => courseAudioStartCount(page)).toBe(startsBefore + 1);
+  const latest = await page.evaluate(() => window.__audioStarts.at(-1));
+  expect(latest.src.endsWith(authored.audioSrc)).toBe(true);
+  await expect.poll(() => page.evaluate(() => window.__pendingCourseAudioCount())).toBe(1);
+  return startsBefore + 1;
+}
+
+async function finishRoleSwapTurn(page, sourceRef, { hidden, startsBefore }) {
+  const line = page.locator(`.practice-dialogue-line[data-source-ref="${sourceRef}"]`);
+  if (hidden) {
+    await expect(line).toHaveClass(/is-hidden-turn/);
+    await page.locator('[data-action="practice-reveal"]').click();
+    await expect(line).not.toHaveClass(/is-hidden-turn/);
+  }
+  await expect(line).toContainText(sourceByRef.get(sourceRef).text);
+  const startsAfter = await expectPracticeAudioStarted(page, sourceRef, startsBefore);
+  await expect(page.locator(
+    '[data-action="practice-next"], [data-action="practice-finish"]'
+  )).toHaveCount(0);
+  await finishOneAudio(page);
+  return startsAfter;
+}
+
+async function finishFormalRoleRound(page, practice, round, startsBefore) {
+  await page.locator(
+    `[data-action="practice-role-select"][data-value="${round.roundId}"]`
+  ).click();
+  await expect(page.locator('.outcome-practice-card--role-enactment'))
+    .toHaveAttribute('data-practice-phase', /awaiting-reveal|audio-playing/);
+  for (const sourceRef of round.dialogueTurnRefs) {
+    const line = page.locator(`.role-practice-line[data-source-ref="${sourceRef}"]`);
+    if (round.hiddenTurnRefs.includes(sourceRef)) {
+      await expect(line).toHaveClass(/is-hidden/);
+      await page.locator('[data-action="practice-reveal"]').click();
+      await expect(line).not.toHaveClass(/is-hidden/);
     }
+    await expect(line).toContainText(sourceByRef.get(sourceRef).text);
+    startsBefore = await expectPracticeAudioStarted(page, sourceRef, startsBefore);
+    await expect(page.locator('[data-action="practice-role-select"]')).toHaveCount(0);
+    await finishOneAudio(page);
+  }
+  return startsBefore;
+}
+
+async function completeFormalRoleStage(page, tracking = {}) {
+  const task = taskById.get('L01-M12');
+  const practice = task.steps[0].practice;
+  await expect(page.locator('.outcome-practice-card--role-enactment')).toBeVisible();
+  let startsBefore = await courseAudioStartCount(page);
+  for (const round of practice.rounds) {
+    startsBefore = await finishFormalRoleRound(page, practice, round, startsBefore);
+  }
+  await expect(page.locator('.outcome-practice-card--role-enactment'))
+    .toHaveAttribute('data-practice-phase', 'all-roles-complete');
+  tracking.activeTaskIds?.add(task.microtaskId);
+  tracking.sceneModes?.add(task.presentation.sceneMode);
+  tracking.presentationMoments?.add(`${task.microtaskId}:${task.presentation.moments[0].momentId}`);
+  await page.locator('[data-action="practice-continue-course"]').click();
+}
+
+function recapOptionMatchesRule(option, rule) {
+  if (rule.acceptedEntityId) return option.entityId === rule.acceptedEntityId;
+  if (rule.acceptedSourceRef) return option.sourceRef === rule.acceptedSourceRef;
+  if (rule.acceptedContentRef) return option.contentRef === rule.acceptedContentRef;
+  return Array.isArray(rule.acceptedEntityIds) && rule.acceptedEntityIds.includes(option.entityId);
+}
+
+async function answerRecapCorrectly(page, item, finalItem) {
+  const correctOption = item.options.find(option => recapOptionMatchesRule(option, item.answerRule));
+  expect(correctOption, `${item.itemId} must declare one accepted option`).toBeTruthy();
+  const startsBefore = await courseAudioStartCount(page);
+  await page.locator(
+    `[data-action="practice-submit"][data-value="${correctOption.optionId}"]`
+  ).click();
+  await expectPracticeAudioStarted(page, item.correctAudioRef, startsBefore);
+  await expect(page.locator(
+    '[data-action="practice-next"], [data-action="practice-finish"]'
+  )).toHaveCount(0);
+  await finishOneAudio(page);
+  await expect(page.locator(
+    `[data-action="practice-${finalItem ? 'finish' : 'next'}"]`
+  )).toBeVisible();
+}
+
+function activeContract(snapshot) {
+  const task = taskById.get(snapshot.microtaskId);
+  const step = task?.steps.find(candidate => candidate.stepId === snapshot.stepId);
+  const challenge = step?.challenges?.find(candidate => (
+    candidate.challengeRef === snapshot.challengeRef
+  )) || null;
+  return { task, step, challenge };
+}
+
+function languageText(refId) {
+  const item = sourceByRef.get(refId) || unit.authoredContent?.[refId];
+  return item?.text || item?.title || null;
+}
+
+function sorted(values) {
+  return [...values].sort((left, right) => left.localeCompare(right));
+}
+
+async function presentationObservation(page) {
+  return page.evaluate(() => {
+    const snapshot = window.__lessonScene.runtime.snapshot();
+    const station = document.querySelector('.station-app');
+    const world = document.querySelector('.station-world');
+    const directIds = selector => [...document.querySelectorAll(selector)]
+      .map(element => element.dataset.entityId)
+      .filter(Boolean)
+      .sort((left, right) => left.localeCompare(right));
     return {
-      left: box('.scene-character[data-dialogue-side="left"]'),
-      right: box('.scene-character[data-dialogue-side="right"]'),
-      console: box('.mission-console'),
-      viewportHeight: window.innerHeight
+      snapshot,
+      station: station ? {
+        sceneMode: station.dataset.sceneMode || '',
+        sceneVariant: station.dataset.sceneVariant || '',
+        presentationMoment: station.dataset.presentationMoment || '',
+        primaryMotion: station.dataset.primaryMotion || '',
+        endState: station.dataset.endState || ''
+      } : null,
+      world: world ? {
+        sceneMode: world.dataset.sceneMode || '',
+        sceneVariant: world.dataset.sceneVariant || '',
+        presentationMoment: world.dataset.presentationMoment || '',
+        primaryMotion: world.dataset.primaryMotion || '',
+        endState: world.dataset.endState || '',
+        visibleLanguageRefs: (world.dataset.visibleLanguageRefs || '').split(/\s+/).filter(Boolean)
+      } : null,
+      participantEntityIds: directIds([
+        '.scene-people > [data-entity-id]',
+        '.role-practice-world > .role-practice-character[data-entity-id]'
+      ].join(',')),
+      focusEntityIds: directIds([
+        '.scene-people > [data-entity-id].is-moment-focus',
+        '.scene-props > [data-entity-id].is-moment-focus',
+        '.role-practice-world > .role-practice-character[data-entity-id]',
+        '.role-practice-counter-surface > .role-practice-counter-prop[data-entity-id]'
+      ].join(',')),
+      manualPresentation: Boolean(world?.querySelector('[data-presentation-manual="true"]'))
     };
   });
-  expect(layout.left.width).toBeGreaterThanOrEqual(230);
-  expect(layout.right.width).toBeGreaterThanOrEqual(230);
-  expect(layout.left.left).toBeLessThan(layout.console.left);
-  expect(layout.right.right).toBeGreaterThan(layout.console.right);
-  expect(layout.left.bottom).toBeLessThanOrEqual(layout.viewportHeight);
-  expect(layout.right.bottom).toBeLessThanOrEqual(layout.viewportHeight);
+}
 
-  await page.locator('[data-action="audio-play"]').click();
-  await expect(left).toHaveClass(/is-active-speaker/);
-  await expect(right).not.toHaveClass(/is-active-speaker/);
-});
+async function expectExactVisibleText(page, text, refId) {
+  expect(text, `${refId} must resolve to catalog-owned visible language`).toBeTruthy();
+  await expect.poll(() => page.evaluate(expectedText => (
+    [...document.querySelectorAll('.station-world *')].some(element => {
+      const rendered = (element.innerText || '').trim();
+      if (rendered !== expectedText) return false;
+      const style = getComputedStyle(element);
+      return style.display !== 'none'
+        && style.visibility !== 'hidden'
+        && Number(style.opacity || 1) > 0
+        && element.getClientRects().length > 0;
+    })
+  ), text), { message: `${refId} must be visibly rendered as ${JSON.stringify(text)}` }).toBe(true);
+}
 
-test('illustrated characters stay present across dialogue, role switch, and station opening', async ({ page }) => {
-  await installManualAudio(page);
-  await page.setViewportSize({ width: 390, height: 844 });
-  await openFresh(page);
-  await enterFirstMission(page);
-
-  const sceneCast = page.locator('.scene-people [data-entity-kind="character"]:not([data-character-identity="explorer-cat"])');
-  await expect(sceneCast).toHaveCount(2);
-  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
-  await expect(page.locator('.scene-people [data-entity-id="handbag-owner"] img')).toBeVisible();
-  await expect(sceneCast.locator('.scene-character__name')).toHaveCount(2);
-  const castLayout = await page.evaluate(() => ({
-    cast: [...document.querySelectorAll('.scene-people [data-entity-kind="character"]')]
-      .map(element => {
-        const box = element.getBoundingClientRect();
-        return { top: box.top, right: box.right, bottom: box.bottom, left: box.left };
-      }),
-    consoleTop: document.querySelector('.mission-console').getBoundingClientRect().top,
-    heading: (() => {
-      const box = document.querySelector('.scene-heading').getBoundingClientRect();
-      return { left: box.left, right: box.right };
-    })(),
-    headerBottom: document.querySelector('.station-header').getBoundingClientRect().bottom,
-    viewportWidth: window.innerWidth
+async function settleSceneViewport(page, viewport) {
+  const portraitMaster = viewport.width <= 680 || viewport.width * 5 <= viewport.height * 4;
+  const expectedMinHeight = portraitMaster ? 1140 : 650;
+  await expect.poll(() => page.locator('.station-world').evaluate((world, expected) => ({
+    width: innerWidth,
+    height: innerHeight,
+    minHeightReady: Number.parseFloat(getComputedStyle(world).minHeight) >= expected.minHeight
+  }), { minHeight: expectedMinHeight })).toEqual({
+    width: viewport.width,
+    height: viewport.height,
+    minHeightReady: true
+  });
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
   }));
-  for (const box of castLayout.cast) {
-    expect(box.top).toBeGreaterThanOrEqual(castLayout.headerBottom);
-    expect(box.left).toBeGreaterThanOrEqual(0);
-    expect(box.right).toBeLessThanOrEqual(castLayout.viewportWidth);
-    expect(box.bottom).toBeLessThanOrEqual(castLayout.consoleTop + 8);
+}
+
+async function expectNoProtectedRegionCollision(page) {
+  const report = await page.locator('.station-world').evaluate(world => {
+    const visibleBox = element => {
+      if (!element) return null;
+      const style = getComputedStyle(element);
+      if (
+        style.display === 'none'
+        || style.visibility === 'hidden'
+        || Number(style.opacity || 1) === 0
+        || element.getClientRects().length === 0
+      ) return null;
+      const box = element.getBoundingClientRect();
+      return {
+        label: element.matches('.scene-prop')
+          ? `prop:${element.dataset.entityId}`
+          : element.className,
+        left: box.left, top: box.top, right: box.right, bottom: box.bottom
+      };
+    };
+    const overlapArea = (left, right) => (
+      Math.max(0, Math.min(left.right, right.right) - Math.max(left.left, right.left))
+      * Math.max(0, Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top))
+    );
+    const props = [...world.querySelectorAll('.scene-props > .scene-prop')]
+      .map(visibleBox).filter(Boolean);
+    const protectedRegions = [
+      world.querySelector('.mission-console'),
+      world.querySelector('.stage-prompt'),
+      world.querySelector('.scene-heading')
+    ].map(visibleBox).filter(Boolean);
+    return {
+      world: {
+        box: visibleBox(world),
+        minHeight: getComputedStyle(world).minHeight,
+        desktopCounterMedia: matchMedia('(min-width: 681px) and (min-height: 601px)').matches
+      },
+      propSurface: world.dataset.propSurface || '',
+      propContainerSurface: world.querySelector('.scene-props')?.dataset.propSurface || '',
+      props,
+      protectedRegions,
+      collisions: props.flatMap(prop => protectedRegions.flatMap(region => {
+        const area = overlapArea(prop, region);
+        return area > 1 ? [{ prop: prop.label, region: region.label, area }] : [];
+      }))
+    };
+  });
+  if (await page.locator('.scene-props > .scene-prop').count()) {
+    expect(report.propSurface, JSON.stringify(report)).toBeTruthy();
+    expect(report.propContainerSurface, JSON.stringify(report)).toBe(report.propSurface);
   }
-  expect(castLayout.heading.left).toBeGreaterThanOrEqual(0);
-  expect(castLayout.heading.right).toBeLessThanOrEqual(castLayout.viewportWidth);
+  expect(
+    report.protectedRegions.every(region => (
+      region.left >= report.world.box.left - 1
+      && region.right <= report.world.box.right + 1
+    )),
+    JSON.stringify(report)
+  ).toBe(true);
+  expect(report.collisions, JSON.stringify(report)).toEqual([]);
+}
 
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
-  await page.getByRole('button', { name: '播放英文' }).click();
-  await page.evaluate(() => window.__finishCourseAudio());
-  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(1);
+async function expectPresentationContract(page, tracking = {}) {
+  await expect.poll(async () => {
+    const observation = await presentationObservation(page);
+    return observation.snapshot.status !== 'active'
+      || (
+        observation.station?.presentationMoment === observation.snapshot.currentPresentationMomentId
+        && observation.world?.presentationMoment === observation.snapshot.currentPresentationMomentId
+      );
+  }, { message: 'runtime moment and rendered scene must stay coherent' }).toBe(true);
 
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
-  await expect(page.locator('.scene-people [data-entity-kind="character"]:not([data-character-identity="explorer-cat"])')).toHaveCount(3);
-  await expect(page.locator('.scene-people [data-entity-kind="character"]:not([data-character-identity="explorer-cat"]) img')).toHaveCount(3);
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
-});
+  const observation = await presentationObservation(page);
+  const { snapshot } = observation;
+  if (snapshot.status !== 'active') return observation;
+  const task = taskById.get(snapshot.microtaskId);
+  expect(task, `${snapshot.microtaskId} must be catalog-authored`).toBeTruthy();
+  expect(ACTIVE_SCENE_MODES.has(task.presentation.sceneMode)).toBe(true);
+  const moment = task.presentation.moments.find(candidate => (
+    candidate.momentId === snapshot.currentPresentationMomentId
+  ));
+  expect(moment, `${snapshot.currentPresentationMomentId} must belong to ${snapshot.microtaskId}`).toBeTruthy();
 
-test('a phrase tap speaks immediately and keeps the sentence visible', async ({ page }) => {
-  await installManualAudio(page);
+  const exactAttributes = {
+    sceneMode: task.presentation.sceneMode,
+    sceneVariant: task.presentation.sceneVariant,
+    presentationMoment: moment.momentId,
+    primaryMotion: moment.primaryMotion.kind,
+    endState: moment.endState.stateId
+  };
+  expect(observation.station).toEqual(exactAttributes);
+  expect(observation.world).toEqual({
+    ...exactAttributes,
+    visibleLanguageRefs: moment.visibleLanguageRefs
+  });
+  expect(observation.participantEntityIds).toEqual(sorted(moment.participantEntityIds));
+  expect(observation.focusEntityIds).toEqual(sorted(moment.focusEntityIds));
+
+  if (['audio-playing', 'audio-retry'].includes(snapshot.phase)) {
+    const audioRef = snapshot.audio?.currentSegment?.sourceRef
+      || snapshot.audio?.currentSegment?.contentRef;
+    expect(audioRef, `${snapshot.microtaskId} playing audio must retain its semantic ref`).toBeTruthy();
+    if (snapshot.audio?.purpose === 'instruction') {
+      expect(
+        moment.visibleLanguageRefs,
+        `${audioRef} instruction must not start while ${moment.momentId} is still focused on an earlier ref`
+      ).toContain(audioRef);
+    }
+    const starts = await page.evaluate(() => window.__audioStarts);
+    expect(starts.length).toBeGreaterThan(0);
+    const latestStart = starts.at(-1);
+    expect(latestStart, 'audio may start only after the matching moment DOM is rendered').toMatchObject({
+      runtimeMicrotaskId: snapshot.microtaskId,
+      runtimeMomentId: moment.momentId,
+      renderedMicrotaskId: snapshot.microtaskId,
+      renderedMomentId: moment.momentId
+    });
+  }
+
+  const knowledgeExpand = page.locator('[data-action="knowledge-expand"]');
+  if (
+    observation.manualPresentation
+    && await knowledgeExpand.count()
+    && await knowledgeExpand.getAttribute('aria-expanded') === 'false'
+  ) {
+    await knowledgeExpand.click();
+    await expect(knowledgeExpand).toHaveAttribute('aria-expanded', 'true');
+  }
+
+  if (snapshot.phase !== 'role-practice-ready') {
+    for (const refId of moment.visibleLanguageRefs) {
+      await expectExactVisibleText(page, languageText(refId), refId);
+    }
+  }
+  await expectNoProtectedRegionCollision(page);
+  tracking.activeTaskIds?.add(task.microtaskId);
+  tracking.sceneModes?.add(task.presentation.sceneMode);
+  tracking.presentationMoments?.add(`${task.microtaskId}:${moment.momentId}`);
+  return observation;
+}
+
+async function settlePresentation(page, tracking = {}) {
+  for (let guard = 0; guard < 30; guard += 1) {
+    const observation = await expectPresentationContract(page, tracking);
+    if (observation.snapshot.status !== 'active') return observation.snapshot;
+    if (observation.snapshot.phase === 'role-practice-ready') return observation.snapshot;
+    if (!observation.snapshot.presentationAwaitingEnd || observation.manualPresentation) {
+      return observation.snapshot;
+    }
+    const before = {
+      momentId: observation.snapshot.currentPresentationMomentId,
+      awaiting: observation.snapshot.presentationAwaitingEnd,
+      stateVersion: observation.snapshot.stateVersion
+    };
+    await expect.poll(async () => {
+      const next = await runtimeSnapshot(page);
+      return {
+        momentId: next.currentPresentationMomentId,
+        awaiting: next.presentationAwaitingEnd,
+        stateVersion: next.stateVersion
+      };
+    }, { message: `${before.momentId} must end through the rendered motion gate` }).not.toEqual(before);
+  }
+  throw new Error('presentation moments did not settle after thirty rendered transitions');
+}
+
+async function expectOutcomeRest(page, expectedVariant, tracking = {}) {
+  expect(OUTCOME_REST_VARIANTS.has(expectedVariant)).toBe(true);
+  await expect(app(page)).toHaveAttribute('data-scene-mode', 'outcome-rest');
+  await expect(app(page)).toHaveAttribute('data-scene-variant', expectedVariant);
+  await expect(page.locator('.station-world')).toHaveAttribute('data-scene-mode', 'outcome-rest');
+  await expect(page.locator('.station-world')).toHaveAttribute('data-scene-variant', expectedVariant);
+  await expect(page.locator('.adventure-heart-gauge')).toHaveCount(0);
+  await expect(app(page)).toHaveAttribute('data-runtime-challenge', 'none');
+  await expect(page.locator('[data-response-fields], .knowledge-layer')).toHaveCount(0);
+  tracking.outcomeRestVariants?.add(expectedVariant);
+}
+
+async function expectActiveAudioText(page, snapshot) {
+  const text = snapshot.audio?.currentSegment?.text || snapshot.audio?.visibleText;
+  expect(text, `${snapshot.microtaskId}/${snapshot.stepId} must expose its English audio text`).toBeTruthy();
+  const visibleEnglish = page.locator([
+    '.dialogue-line__text',
+    '.language-audio-line',
+    '.feedback-audio-state__english',
+    '.word-plaque',
+    '.reference-answer',
+    '.moment-language__item'
+  ].join(',')).filter({ hasText: text });
+  await expect(visibleEnglish.first()).toBeVisible();
+}
+
+async function expectActiveSpeakerVisual(page, snapshot) {
+  const expectedRole = snapshot.audio?.currentSegment?.speaker;
+  expect(expectedRole, `${snapshot.microtaskId}/${snapshot.stepId} must identify the current speaker`).toBeTruthy();
+  const speakerState = await page.locator('.scene-character[data-speaker-role]')
+    .evaluateAll(characters => characters.map(character => {
+      const style = getComputedStyle(character);
+      return {
+        role: character.dataset.speakerRole,
+        active: character.classList.contains('is-active-speaker'),
+        opacity: style.opacity,
+        transform: style.transform,
+        filter: style.filter,
+        animationName: style.animationName
+      };
+    }));
+  const active = speakerState.filter(character => character.active);
+  const inactive = speakerState.filter(character => !character.active);
+  expect(active).toHaveLength(1);
+  expect(active[0].role).toBe(expectedRole);
+  expect(inactive.length).toBeGreaterThan(0);
+  expect(active[0].animationName).toContain('moment-active-speaker-turn');
+  expect(inactive.every(character => !character.animationName.includes('moment-active-speaker-turn'))).toBe(true);
+  expect([active[0].opacity, active[0].transform, active[0].filter])
+    .not.toEqual([inactive[0].opacity, inactive[0].transform, inactive[0].filter]);
+  await expect.poll(() => page.evaluate(segmentId => {
+    const starts = window.__lessonMotionStarts.filter(event => event.segmentId === segmentId);
+    return starts.findLast(event => event.animationName === 'moment-active-speaker-turn')
+      ?.speakerRole || null;
+  }, snapshot.audio.segmentId)).toBe(expectedRole);
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+  const consoleRestarts = await page.evaluate(segmentId => (
+    window.__lessonMotionStarts.filter(event => (
+      event.segmentId === segmentId
+      && event.animationName === 'console-rise'
+      && String(event.targetClass).includes('mission-console')
+    )).length
+  ), snapshot.audio.segmentId);
+  expect(consoleRestarts).toBe(0);
+}
+
+async function armSameConsoleRiseGuard(page) {
+  await page.locator('.mission-console').evaluate(async consoleElement => {
+    const characterElements = [...document.querySelectorAll('.scene-character[data-entity-id]')];
+    const activeEntryAnimations = [consoleElement, ...characterElements]
+      .flatMap(element => element.getAnimations())
+      .filter(animation => (
+        ['console-rise', 'character-card-arrive'].includes(animation.animationName)
+      ));
+    await Promise.allSettled(activeEntryAnimations.map(animation => animation.finished));
+
+    if (window.__sameConsoleRiseGuardListener) {
+      removeEventListener('animationstart', window.__sameConsoleRiseGuardListener, true);
+    }
+    window.__sameConsoleRiseGuardElement = consoleElement;
+    window.__sameCharacterEntryGuardElements = characterElements.map(element => ({
+      entityId: element.dataset.entityId,
+      element
+    }));
+    window.__sameConsoleRiseGuardStarts = [];
+    window.__sameCharacterEntryGuardStarts = [];
+    window.__sameConsoleRiseGuardListener = event => {
+      if (
+        event.target === window.__sameConsoleRiseGuardElement
+        && event.animationName === 'console-rise'
+      ) {
+        const snapshot = window.__lessonScene.runtime.snapshot();
+        window.__sameConsoleRiseGuardStarts.push({
+          microtaskId: snapshot.microtaskId,
+          phase: snapshot.phase,
+          challengeRef: snapshot.challengeRef || null
+        });
+      }
+      if (
+        event.animationName === 'character-card-arrive'
+        && window.__sameCharacterEntryGuardElements.some(({ element }) => element === event.target)
+      ) {
+        const snapshot = window.__lessonScene.runtime.snapshot();
+        window.__sameCharacterEntryGuardStarts.push({
+          entityId: event.target.dataset.entityId,
+          microtaskId: snapshot.microtaskId,
+          phase: snapshot.phase,
+          challengeRef: snapshot.challengeRef || null
+        });
+      }
+    };
+    addEventListener('animationstart', window.__sameConsoleRiseGuardListener, true);
+  });
+}
+
+async function sameConsoleRiseGuardReport(page) {
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+  return page.evaluate(() => ({
+    sameConsole: window.__sameConsoleRiseGuardElement === document.querySelector('.mission-console'),
+    sameCharacters: window.__sameCharacterEntryGuardElements.every(({ entityId, element }) => (
+      element === document.querySelector(`.scene-character[data-entity-id="${entityId}"]`)
+    )),
+    consoleRiseStarts: [...window.__sameConsoleRiseGuardStarts],
+    characterEntryStarts: [...window.__sameCharacterEntryGuardStarts]
+  }));
+}
+
+async function finishOneAudio(page) {
+  await expect.poll(() => page.evaluate(() => window.__pendingCourseAudioCount())).toBeGreaterThan(0);
+  const finished = await page.evaluate(() => window.__finishNextCourseAudio());
+  expect(finished).toBeTruthy();
+}
+
+async function drainAudio(page, seenAudioTexts = [], tracking = {}) {
+  for (let guard = 0; guard < 40; guard += 1) {
+    const snapshot = await settlePresentation(page, tracking);
+    if (['audio-playing', 'audio-retry'].includes(snapshot.phase)) {
+      await expectActiveAudioText(page, snapshot);
+      seenAudioTexts.push(snapshot.audio.currentSegment.text);
+      await finishOneAudio(page);
+      continue;
+    }
+    if (['audio-ready', 'audio-failed'].includes(snapshot.phase)) {
+      const action = snapshot.phase === 'audio-failed' ? 'audio-retry' : 'audio-play';
+      await page.locator(`[data-action="${action}"]`).click();
+      continue;
+    }
+    return snapshot;
+  }
+  throw new Error('audio did not settle after forty segments');
+}
+
+function acceptedValue(rule, challenge, correct) {
+  if (rule.type === 'select-one') {
+    if (rule.acceptedEntityId || rule.acceptedEntityIds) {
+      const accepted = rule.acceptedEntityId || rule.acceptedEntityIds[0];
+      if (correct) return { action: 'select-entity', value: accepted };
+      return {
+        action: 'select-entity',
+        value: challenge.candidateEntityIds.find(candidate => candidate !== accepted)
+      };
+    }
+    if (rule.acceptedSourceRef) {
+      if (correct) return { action: 'select-source', value: rule.acceptedSourceRef };
+      return {
+        action: 'select-source',
+        value: challenge.candidateSourceRefs.find(candidate => candidate !== rule.acceptedSourceRef)
+      };
+    }
+    if (rule.acceptedContentRef) {
+      if (correct) return { action: 'select-diagnostic', value: rule.acceptedContentRef };
+      return {
+        action: 'select-diagnostic',
+        value: challenge.candidateContentRefs.find(candidate => candidate !== rule.acceptedContentRef)
+      };
+    }
+  }
+  if (rule.type === 'match-entity') {
+    const accepted = rule.acceptedEntityId || rule.pairs?.[rule.acceptedSourceRef];
+    return {
+      action: 'select-entity',
+      value: correct
+        ? accepted
+        : challenge.candidateEntityIds.find(candidate => candidate !== accepted)
+    };
+  }
+  if (rule.type === 'connect-reference') {
+    return {
+      action: 'connect-reference',
+      value: correct
+        ? rule.entityId
+        : challenge.candidateEntityIds.find(candidate => candidate !== rule.entityId)
+    };
+  }
+  return null;
+}
+
+async function submitRule(page, rule, challenge, { correct = true } = {}) {
+  const single = acceptedValue(rule, challenge || {}, correct);
+  if (single) {
+    await page.locator(`button[data-action="${single.action}"][data-value="${single.value}"]`).first().click();
+    return;
+  }
+  if (rule.type === 'ordered-blocks') {
+    const accepted = rule.acceptedOrder || [];
+    const values = correct ? accepted : [accepted[1], accepted[0], ...accepted.slice(2)];
+    for (const value of values) {
+      await page.locator(`button[data-action="add-block"][data-value="${value}"]`).click();
+    }
+    return;
+  }
+  if (rule.type === 'perform-action') {
+    const targetValue = correct
+      ? rule.targetEntityId
+      : await page.locator('button[data-action="perform-direct"]')
+        .evaluateAll((buttons, accepted) => (
+          buttons.map(button => button.dataset.value).find(value => value !== accepted) || accepted
+        ), rule.targetEntityId);
+    const target = page.locator(
+      `button[data-action="perform-direct"][data-value="${targetValue}"]`
+    ).first();
+    await target.scrollIntoViewIfNeeded();
+    await target.click();
+    return;
+  }
+  throw new Error(`E2E helper does not support ${rule.type}`);
+}
+
+async function answerCurrent(page, {
+  correct = true,
+  observedChallenges,
+  storyActions,
+  seenAudioTexts,
+  ...presentationTracking
+} = {}) {
+  const snapshot = await drainAudio(page, seenAudioTexts, presentationTracking);
+  expect(snapshot.phase).toBe('awaiting-response');
+  const { step, challenge } = activeContract(snapshot);
+  expect(step).toBeTruthy();
+  if (challenge) {
+    expect(challenge.challengeRef).toBe(snapshot.challengeRef);
+    const diagnosticCandidates = challenge.candidateEntityIds
+      || challenge.candidateSourceRefs
+      || challenge.candidateContentRefs;
+    expect(snapshot.optionIds).toHaveLength(diagnosticCandidates.length);
+    expect(new Set(snapshot.optionIds)).toEqual(new Set(diagnosticCandidates));
+    expect(Number.isInteger(snapshot.shuffleSeed)).toBe(true);
+    expect(snapshot.shuffleAlgorithmVersion).toContain('fisher-yates');
+    observedChallenges?.add(challenge.challengeRef);
+  }
+  const rule = challenge?.answerRule || step.answerRule;
+  let handoffMoment = null;
+  if (!challenge && rule.type === 'perform-action') {
+    if (step.actionInstruction) {
+      await expect(page.locator('.action-stage__hint, .direct-action-instruction strong'))
+        .toHaveText(step.actionInstruction);
+    }
+    storyActions?.push(`${rule.entityId}->${rule.targetEntityId}`);
+    await expect(page.locator('.adventure-heart-gauge')).toHaveCount(0);
+    if (presentationTracking.handoffMomentIds) {
+      handoffMoment = activeContract(snapshot).task.presentation.moments.find(moment => (
+        moment.enterWhen?.kind === 'step-completed'
+        && moment.enterWhen.stepId === snapshot.stepId
+      ));
+      expect(handoffMoment, `${snapshot.microtaskId}/${snapshot.stepId} needs an after-action handoff moment`)
+        .toBeTruthy();
+      await page.emulateMedia({ reducedMotion: 'no-preference' });
+      expect(snapshot.currentPresentationMomentId).not.toBe(handoffMoment.momentId);
+      const beforeStates = await page.locator([
+        '.scene-people > [data-moment-state]',
+        '.scene-props > [data-moment-state]'
+      ].join(',')).evaluateAll(elements => elements.flatMap(element => (
+        (element.dataset.momentState || '').split(/\s+/).filter(Boolean)
+      )));
+      for (const { state } of handoffMoment.endState.entityStates) {
+        expect(beforeStates, `${state} must not be shown before the child completes the handoff`)
+          .not.toContain(state);
+      }
+    }
+  }
+  const startsBefore = await page.evaluate(() => window.__audioStarts.length);
+  await submitRule(page, rule, challenge, { correct });
+  if (correct && handoffMoment) {
+    if (step.feedbackAudioSequence) {
+      await expect.poll(() => runtimeSnapshot(page).then(current => current.phase))
+        .toBe('audio-playing');
+      for (let guard = 0; guard < 10; guard += 1) {
+        const playing = await runtimeSnapshot(page);
+        if (!['audio-playing', 'audio-retry'].includes(playing.phase)) break;
+        await expectActiveAudioText(page, playing);
+        seenAudioTexts?.push(playing.audio.currentSegment.text);
+        await finishOneAudio(page);
+      }
+    }
+    await expect.poll(() => runtimeSnapshot(page).then(current => (
+      current.currentPresentationMomentId
+    )), { message: `${handoffMoment.momentId} must begin only after the real story action` })
+      .toBe(handoffMoment.momentId);
+    const handoffSnapshot = await runtimeSnapshot(page);
+    expect(handoffSnapshot.presentationAwaitingEnd).toBe(true);
+    await expectPresentationContract(page, presentationTracking);
+    for (const { entityId, state } of handoffMoment.endState.entityStates) {
+      await expect(page.locator(
+        `[data-entity-id="${entityId}"][data-moment-state~="${state}"]`
+      ).first()).toBeVisible();
+    }
+    presentationTracking.handoffMomentIds.add(
+      `${snapshot.microtaskId}:${handoffMoment.momentId}`
+    );
+    if (handoffMoment.advancePolicy === 'explicit-child-continue') {
+      await expect(page.locator('[data-presentation-manual="true"] [data-action="presentation-end"]'))
+        .toBeVisible();
+    } else {
+      await expect.poll(() => runtimeSnapshot(page).then(current => (
+        current.currentPresentationMomentId !== handoffMoment.momentId
+        || current.presentationAwaitingEnd === false
+      )), { message: `${handoffMoment.momentId} must finish through its rendered motion` }).toBe(true);
+      await settlePresentation(page, presentationTracking);
+    }
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+  }
+  if (correct && challenge?.feedbackAudioSequence) {
+    await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+    await expect.poll(() => page.evaluate(() => window.__audioStarts.length)).toBeGreaterThan(startsBefore);
+    await expectActiveAudioText(page, await runtimeSnapshot(page));
+  }
+}
+
+async function completeCurrentMicrotask(page, tracking = {}) {
+  const initial = await runtimeSnapshot(page);
+  const microtaskId = initial.microtaskId;
+  for (let guard = 0; guard < 40; guard += 1) {
+    const current = await runtimeSnapshot(page);
+    if (
+      current.microtaskId !== microtaskId
+      || ['rest-stop', 'unit-built', 'sandbox-complete'].includes(current.status)
+    ) return current;
+    if (current.phase === 'role-practice-ready') {
+      await completeFormalRoleStage(page, tracking);
+      continue;
+    }
+    const settled = await drainAudio(page, tracking.seenAudioTexts, tracking);
+    if (
+      settled.microtaskId !== microtaskId
+      || ['rest-stop', 'unit-built', 'sandbox-complete'].includes(settled.status)
+    ) return settled;
+    const manualPresentation = page.locator('[data-presentation-manual="true"]');
+    if (settled.presentationAwaitingEnd && await manualPresentation.count()) {
+      if (tracking.pauseAtManualPresentation) return settled;
+      await page.locator('[data-action="presentation-end"]').click();
+      continue;
+    }
+    if (settled.phase === 'awaiting-response') {
+      await answerCurrent(page, tracking);
+      continue;
+    }
+    if (settled.phase === 'presenting') {
+      await page.locator('[data-action="step-continue"]').click();
+      continue;
+    }
+    if (['answered-awaiting-save', 'unit-verifying'].includes(settled.phase)) {
+      const before = {
+        stateVersion: settled.stateVersion,
+        phase: settled.phase,
+        status: settled.status,
+        momentId: settled.currentPresentationMomentId,
+        awaiting: settled.presentationAwaitingEnd
+      };
+      await expect.poll(async () => {
+        const next = await runtimeSnapshot(page);
+        return {
+          stateVersion: next.stateVersion,
+          phase: next.phase,
+          status: next.status,
+          momentId: next.currentPresentationMomentId,
+          awaiting: next.presentationAwaitingEnd
+        };
+      }, { message: `${microtaskId} save/readback must advance without a timer bypass` }).not.toEqual(before);
+      continue;
+    }
+    throw new Error(`cannot complete ${microtaskId} from ${settled.status}/${settled.phase}`);
+  }
+  throw new Error(`${microtaskId} did not complete`);
+}
+
+async function continueRestStop(page, expectedRestStopId, tracking = {}) {
+  const snapshot = await runtimeSnapshot(page);
+  expect(snapshot.status).toBe('rest-stop');
+  expect(snapshot.nextRestStop.restStopId).toBe(expectedRestStopId);
+  await expectOutcomeRest(page, expectedRestStopId, tracking);
+  const authored = unit.experience.restStops[expectedRestStopId];
+  await expect(page.getByRole('heading', { name: authored.title })).toBeVisible();
+  await page.locator('[data-action="rest"]').click();
+  await expect(page.getByText(authored.restingCopy, { exact: true })).toBeVisible();
+  await page.locator('[data-action="chapter-continue"]').click();
+}
+
+async function advanceTo(page, targetMicrotaskId, tracking = {}) {
+  const visited = [];
+  for (let guard = 0; guard < tasks.length + 2; guard += 1) {
+    const snapshot = await runtimeSnapshot(page);
+    visited.push(`${snapshot.microtaskId}:${snapshot.status}/${snapshot.phase}`);
+    if (snapshot.microtaskId === targetMicrotaskId && snapshot.status === 'active') {
+      return drainAudio(page, tracking.seenAudioTexts, tracking);
+    }
+    if (snapshot.status === 'rest-stop') {
+      await continueRestStop(page, snapshot.nextRestStop.restStopId, tracking);
+      continue;
+    }
+    if (snapshot.status === 'unit-built') {
+      throw new Error(`passed ${targetMicrotaskId}; visited ${visited.join(' -> ')}`);
+    }
+    await completeCurrentMicrotask(page, tracking);
+  }
+  throw new Error(`could not reach ${targetMicrotaskId}; visited ${visited.join(' -> ')}`);
+}
+
+async function noForbiddenScroll(page) {
+  const failures = await page.evaluate(() => {
+    const failures = [];
+    const app = document.querySelector('[data-runtime-microtask]');
+    const context = [
+      app?.getAttribute('data-runtime-microtask') || 'no-task',
+      app?.getAttribute('data-runtime-phase') || 'no-phase',
+      document.querySelector('.station-world')?.getAttribute('data-scene-mode') || 'no-scene'
+    ].join('/');
+    if (document.documentElement.scrollWidth > window.innerWidth + 1) {
+      failures.push(`document:${document.documentElement.scrollWidth}>${window.innerWidth}`);
+    }
+    const selector = [
+      '.mission-console', '.interaction-space', '.dialogue-script',
+      '.language-audio-panel', '.prop-shelf', '.speech-choice-grid',
+      '.block-builder', '.reference-lab', '.knowledge-layer', '.moment-language',
+      '.milestone-card'
+    ].join(',');
+    document.querySelectorAll(selector).forEach(element => {
+      const style = getComputedStyle(element);
+      if (element.scrollWidth > element.clientWidth + 1) {
+        const bounds = element.getBoundingClientRect();
+        const offenders = [...element.querySelectorAll('*')].flatMap(child => {
+          const childBounds = child.getBoundingClientRect();
+          if (childBounds.left >= bounds.left - 1 && childBounds.right <= bounds.right + 1) return [];
+          const childStyle = getComputedStyle(child);
+          return [`${child.className || child.tagName}[${Math.round(childBounds.left - bounds.left)},${Math.round(childBounds.right - bounds.right)};${childStyle.transform};${childStyle.filter}]`];
+        }).slice(0, 4).join('|');
+        const replayGeometry = [...element.querySelectorAll('.inline-language-replay, .word-plaque, .shared-listen-replay, .shared-listen-replay__button')]
+          .map(child => {
+            const childBounds = child.getBoundingClientRect();
+            const childStyle = getComputedStyle(child);
+            return `${child.className}[${Math.round(childBounds.left - bounds.left)},${Math.round(childBounds.width)};w=${childStyle.width};min=${childStyle.minWidth};flex=${childStyle.flex};m=${childStyle.marginInline}]`;
+          }).join('|');
+        failures.push(
+          `${window.innerWidth}x${window.innerHeight}:${context}:${element.className}:horizontal:${element.scrollWidth}>${element.clientWidth}:${offenders}:${replayGeometry}`
+        );
+      }
+      if (
+        element.scrollHeight > element.clientHeight + 1
+        && ['auto', 'scroll'].includes(style.overflowY)
+      ) failures.push(`${window.innerWidth}x${window.innerHeight}:${element.className}:nested-vertical`);
+    });
+    return failures;
+  });
+  expect(failures).toEqual([]);
+}
+
+test('uses the revision-scoped storage key and shows the story premise before V2 begins', async ({ page }) => {
+  const entryRecoveryNavigations = [];
+  page.on('framenavigated', frame => {
+    if (
+      frame === page.mainFrame()
+      && new URL(frame.url()).searchParams.get('recover') === 'entry-noop'
+    ) entryRecoveryNavigations.push(frame.url());
+  });
   await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 2：礼貌问一问' }).click();
-  await expect(page.locator('.mission-prompt')).toHaveText('礼貌叫住她，应该怎么说？');
-  await expect(page.getByText('礼貌叫住她', { exact: true })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: '就说这句' })).toHaveCount(0);
-  await page.getByRole('button', { name: 'Excuse me!' }).click();
-  await expect(page.getByRole('button', { name: '确认这条线索' })).toHaveCount(0);
-  const feedback = page.locator('.feedback-audio-state[data-tone="correct"]');
-  await expect(feedback).toBeVisible();
-  await expect(feedback).toContainText('Excuse me!');
-  await expect(feedback).toContainText('答对啦，听听这句话');
-  await expect(feedback.locator('.feedback-audio-state__star img')).toHaveAttribute('src', /star-fill\.svg$/);
-  await expect(page.locator('.mission-console [role="status"]')).toHaveCount(1);
-  await expect(page.locator('.feedback-bubble[data-tone="correct"]')).toHaveCount(0);
-  await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
-  expect(await page.evaluate(() => window.__courseAudioStarts.filter(
-    src => src.endsWith('/l01-d01.mp3')
-  ).length)).toBe(1);
-  await page.evaluate(() => window.__finishCourseAudio());
-  await expect(page.locator('.feedback-audio-state')).toContainText('听她回应');
-  await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  expect(await page.evaluate(() => window.__courseAudioStarts.filter(
-    src => src.endsWith('/l01-d02.mp3')
-  ).length)).toBe(1);
+  expect(STORAGE_KEY).toBe(`poc:learning-experience:NCE-U01:${unit.experienceRevision}`);
+  expect(STORAGE_KEY).not.toContain(':v1');
+  await expect(page.locator('.arrival-card')).toBeVisible();
+  await expect(page.getByText(/AI 生成|老师审核|不打字/)).toHaveCount(0);
+
+  await page.locator('[data-action="start"]').click();
+  await expect(app(page)).toHaveAttribute('data-view', 'briefing');
+  await expect(page.getByRole('heading', { name: unit.experience.briefing.title })).toBeVisible();
+  await expect(page.getByText(unit.experience.briefing.copy, { exact: true })).toBeVisible();
+  expect((await runtimeSnapshot(page)).status).toBe('idle');
+
+  await page.locator('[data-action="start"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', tasks[0].microtaskId);
+  await settlePresentation(page);
+  expect(entryRecoveryNavigations).toEqual([]);
+  const storedKeys = await page.evaluate(() => Object.keys(localStorage));
+  expect(storedKeys.every(key => key !== 'poc:lesson1-2-experience:v1')).toBe(true);
 });
 
-test('a word-form object tap submits immediately and keeps the spoken word visible', async ({ page }) => {
-  await installManualAudio(page);
+test('the first listen keeps all seven lines visible and advances only after the seventh real ended', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 640 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  await settlePresentation(page);
+
+  const firstTask = tasks[0];
+  const firstStep = firstTask.steps[0];
+  const expectedLines = firstStep.audioSourceRefs.map(sourceRef => (
+    unit.lessonContent.lesson1.sources[sourceRef].text
+  ));
+  await expect(page.locator('.station-brand strong')).toHaveText(firstTask.presentation.title);
+  await expect(page.getByText(firstTask.presentation.title, { exact: true })).toHaveCount(1);
+  await expect(page.getByRole('heading', { name: firstTask.presentation.title })).toHaveCount(0);
+  expect(await page.locator('.dialogue-line__text, .language-audio-line').allTextContents()).toEqual(expectedLines);
+  await expect(page.locator('.adventure-heart-gauge')).toHaveCount(0);
+
+  const returnToCurrent = page.locator('[data-action="dialogue-return-current"]');
+  await expect(returnToCurrent).toBeHidden();
+  await page.evaluate(() => new Promise(resolve => (
+    requestAnimationFrame(() => requestAnimationFrame(resolve))
+  )));
+  await page.locator('.dialogue-script').hover();
+  await page.mouse.wheel(0, 420);
+  await expect(returnToCurrent).toBeVisible();
+  await returnToCurrent.click();
+  await expect(returnToCurrent).toBeHidden();
+  const followedLineGeometry = await page.locator('.dialogue-line[aria-current="true"]')
+    .evaluate(element => {
+      const line = element.getBoundingClientRect();
+      const script = element.closest('.dialogue-script').getBoundingClientRect();
+      return { lineTop: line.top, lineBottom: line.bottom, scriptTop: script.top, scriptBottom: script.bottom };
+    });
+  expect(followedLineGeometry.lineTop).toBeGreaterThanOrEqual(followedLineGeometry.scriptTop - 1);
+  expect(followedLineGeometry.lineBottom).toBeLessThanOrEqual(followedLineGeometry.scriptBottom + 1);
+
+  await expectActiveSpeakerVisual(page, await runtimeSnapshot(page));
+  await finishOneAudio(page);
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.audio.segmentIndex)).toBe(1);
+  const beforePagehide = await runtimeSnapshot(page);
+  const pagehideSnapshotKey = 'e2e:lesson1-2:pagehide-snapshot';
+  const lifecycleToken = 'lesson1-2-first-listen-document';
+  await page.evaluate(([key, token]) => {
+    window.__pageLifecycleToken = token;
+    addEventListener('pagehide', () => {
+      sessionStorage.setItem(key, JSON.stringify({
+        snapshot: window.__lessonScene.runtime.snapshot(),
+        effects: window.__runtimeEffects
+      }));
+    }, { once: true });
+  }, [pagehideSnapshotKey, lifecycleToken]);
+  await page.goto('/poc/lesson1-2-review/');
+  const pagehideCapture = JSON.parse(await page.evaluate(
+    key => sessionStorage.getItem(key), pagehideSnapshotKey
+  ));
+  const suspended = pagehideCapture.snapshot;
+  expect(suspended).toMatchObject({
+    microtaskId: beforePagehide.microtaskId,
+    phase: 'audio-suspended',
+    adventureHeartsRemaining: beforePagehide.adventureHeartsRemaining
+  });
+  expect(suspended.audio.segmentId).toBe(beforePagehide.audio.segmentId);
+  expect(pagehideCapture.effects).toContainEqual(expect.objectContaining({
+    type: 'audio/cancel',
+    requestId: beforePagehide.audio.requestId
+  }));
+  await page.goBack();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__lessonScene))).toBe(true);
+  const sameDocument = await page.evaluate(token => window.__pageLifecycleToken === token, lifecycleToken);
+  if (!sameDocument) await startOrResume(page);
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.phase)).toBe('audio-playing');
+  const resumed = await runtimeSnapshot(page);
+  expect(resumed.microtaskId).toBe(beforePagehide.microtaskId);
+  if (sameDocument) {
+    expect(resumed.audio.segmentId).toBe(beforePagehide.audio.segmentId);
+    expect(resumed.audio.requestId).not.toBe(beforePagehide.audio.requestId);
+  } else {
+    expect(resumed.audio.segmentIndex).toBe(0);
+  }
+  expect(resumed.adventureHeartsRemaining).toBe(beforePagehide.adventureHeartsRemaining);
+  await expectActiveAudioText(page, resumed);
+  await expectActiveSpeakerVisual(page, resumed);
+  await expect.poll(() => page.evaluate(() => window.__pendingCourseAudioCount())).toBe(1);
+
+  for (let index = resumed.audio.segmentIndex; index < 6; index += 1) {
+    const snapshot = await runtimeSnapshot(page);
+    expect(snapshot.microtaskId).toBe('L01-M07');
+    expect(snapshot.audio.segmentIndex).toBe(index);
+    await expectActiveAudioText(page, snapshot);
+    await expectActiveSpeakerVisual(page, snapshot);
+    await finishOneAudio(page);
+  }
+  expect((await runtimeSnapshot(page)).microtaskId).toBe('L01-M07');
+  await finishOneAudio(page);
+  await expect.poll(async () => {
+    const snapshot = await runtimeSnapshot(page);
+    return {
+      microtaskId: snapshot.microtaskId,
+      momentId: snapshot.currentPresentationMomentId,
+      awaiting: snapshot.presentationAwaitingEnd
+    };
+  }).toEqual({
+    microtaskId: 'L01-M07',
+    momentId: 'listen-complete',
+    awaiting: true
+  });
+  await expect(page.locator('.dialogue-line__text')).toHaveText(expectedLines);
+  const replayButton = page.locator(
+    '[data-presentation-manual="true"] [data-action="dialogue-replay"]'
+  );
+  const continueButton = page.locator(
+    '[data-presentation-manual="true"] [data-action="presentation-end"]'
+  );
+  await expect(replayButton).toBeVisible();
+  await expect(continueButton).toBeVisible();
+  const heldBeforeReplay = await runtimeSnapshot(page);
+  const startsBeforeReplay = await courseAudioStartCount(page);
+  await replayButton.click();
+  await expect.poll(() => courseAudioStartCount(page)).toBe(startsBeforeReplay + 1);
+  await expect(page.locator('[data-language-ref="L01-D01"]')).toHaveClass(/is-current/);
+  for (let index = 0; index < expectedLines.length; index += 1) {
+    await expect(page.locator(`[data-language-ref="L01-D0${index + 1}"]`)).toHaveClass(/is-current/);
+    await finishOneAudio(page);
+  }
+  await expect.poll(() => page.evaluate(() => window.__pendingCourseAudioCount())).toBe(0);
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    microtaskId: heldBeforeReplay.microtaskId,
+    stateVersion: heldBeforeReplay.stateVersion,
+    currentPresentationMomentId: heldBeforeReplay.currentPresentationMomentId,
+    presentationAwaitingEnd: true
+  });
+
+  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+  const stageEntry = page.locator('[data-action="toggle-stages"]');
+  await expect(stageEntry).toBeInViewport();
+  await stageEntry.click();
+  await expect(page.locator('#course-stage-map')).toBeVisible();
+  await page.locator('[data-action="close-stages"]').click();
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+  expect((await runtimeSnapshot(page)).microtaskId).toBe('L01-M07');
+  await continueButton.click();
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.microtaskId)).toBe('L01-M08');
+  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+});
+
+test('completed dialogue keeps one stable scene with only equal replay and continue actions', async ({ page }) => {
+  await page.setViewportSize({ width: 1428, height: 1147 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  const settled = await drainAudio(page);
+  expect(settled).toMatchObject({
+    microtaskId: 'L01-M07',
+    currentPresentationMomentId: 'listen-complete',
+    presentationAwaitingEnd: true
+  });
+
+  await expect(page.locator('.dialogue-complete-hint')).toHaveCount(0);
+  const replay = page.locator('[data-action="dialogue-replay"]');
+  const proceed = page.locator('[data-action="presentation-end"]');
+  await expect(replay).toHaveText('重新播放');
+  await expect(proceed).toHaveText('继续');
+  const actionWidths = await page.locator(
+    '.dialogue-complete-actions > button'
+  ).evaluateAll(buttons => buttons.map(button => button.getBoundingClientRect().width));
+  expect(actionWidths).toHaveLength(2);
+  expect(Math.abs(actionWidths[0] - actionWidths[1])).toBeLessThanOrEqual(1);
+  await expect(page.locator('.station-header')).toContainText('听听是谁丢了手提包');
+  await expect(page.locator('.scene-heading')).toHaveCount(0);
+
+  await page.evaluate(() => {
+    window.__r2StableWorld = document.querySelector('.station-world');
+    window.__r2StableConsole = document.querySelector('.mission-console');
+  });
+  await replay.click();
+  await expect(page.locator('.dialogue-complete-hint')).toHaveCount(0);
+  expect(await page.evaluate(() => (
+    window.__r2StableWorld === document.querySelector('.station-world')
+    && window.__r2StableConsole === document.querySelector('.mission-console')
+  ))).toBe(true);
+});
+
+test('the counter handbag keeps one real-background anchor without a second drawn counter', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 7：标签认领' }).click();
-  await expect(page.getByRole('button', { name: '就是它' })).toHaveCount(0);
-  await page.getByRole('button', { name: '铅笔' }).click();
+  await startOrResume(page);
 
-  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-playing');
-  await expect(page.locator('.feedback-audio-state')).toBeVisible();
-  await expect(page.locator('.feedback-audio-state')).toContainText('pencil');
-  await expect(page.locator('.feedback-audio-state button')).toHaveCount(0);
-  await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  await expect(page.locator('.feedback-audio-state')).toContainText('找对了，听听这个词');
-  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
-  expect(await page.evaluate(() => window.__courseAudioStarts.filter(
-    src => src.endsWith('/l02-w02.mp3')
-  ).length)).toBe(1);
+  const counterHandbagGeometry = () => page.locator('.station-world').evaluate(world => {
+    const handbag = world.querySelector('.scene-prop[data-entity-id="handbag"]');
+    const surface = handbag?.closest('.scene-props');
+    if (!handbag || !surface) return null;
+    const worldBox = world.getBoundingClientRect();
+    const handbagBox = handbag.getBoundingClientRect();
+    const surfaceStyle = getComputedStyle(surface);
+    return {
+      centerFromWorldTop: ((handbagBox.top + handbagBox.bottom) / 2) - worldBox.top,
+      surface: {
+        backgroundImage: surfaceStyle.backgroundImage,
+        backgroundColor: surfaceStyle.backgroundColor,
+        borderBottomWidth: surfaceStyle.borderBottomWidth,
+        boxShadow: surfaceStyle.boxShadow
+      }
+    };
+  });
 
-  await page.evaluate(() => window.__finishCourseAudio());
-  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'response');
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M02:S02');
+  let snapshot = await drainAudio(page);
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L01-M07',
+    currentPresentationMomentId: 'listen-complete',
+    presentationAwaitingEnd: true
+  });
+  const listenAnchor = await counterHandbagGeometry();
+  expect(listenAnchor).toBeTruthy();
+
+  await page.locator('[data-presentation-manual="true"] [data-action="presentation-end"]').click();
+  snapshot = await drainAudio(page);
+  expect(snapshot).toMatchObject({ microtaskId: 'L01-M08', challengeRef: 'L01-M08:C01' });
+  const ownerAnchor = await counterHandbagGeometry();
+  expect(ownerAnchor).toBeTruthy();
+
+  for (const anchor of [listenAnchor, ownerAnchor]) {
+    expect(anchor.surface).toEqual({
+      backgroundImage: 'none',
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      borderBottomWidth: '0px',
+      boxShadow: 'none'
+    });
+  }
+  expect(
+    Math.abs(listenAnchor.centerFromWorldTop - ownerAnchor.centerFromWorldTop),
+    JSON.stringify({ listenAnchor, ownerAnchor })
+  ).toBeLessThanOrEqual(12);
 });
 
-test('a physical action completes from the item and character taps without confirmation', async ({ page }) => {
-  await installManualAudio(page);
+test('R2 scene masters keep actors and the independent handbag inside their authored geometry', async ({ page }) => {
+  await page.setViewportSize({ width: 2539, height: 1202 });
+  await openFresh(page);
+  await startOrResume(page);
+  for (let guard = 0; guard < 20; guard += 1) {
+    const snapshot = await runtimeSnapshot(page);
+    if (snapshot.phase === 'audio-playing') {
+      await finishOneAudio(page);
+      continue;
+    }
+    if (snapshot.phase === 'audio-ready') {
+      await page.locator('[data-action="audio-play"]').click();
+      continue;
+    }
+    if (snapshot.presentationAwaitingEnd) break;
+    await page.waitForTimeout(10);
+  }
+
+  const readGeometry = () => page.locator('.station-world').evaluate(world => {
+    const worldBox = world.getBoundingClientRect();
+    const actors = [...world.querySelectorAll('.scene-people > .scene-character')].map(actor => {
+      const box = actor.getBoundingClientRect();
+      const image = actor.querySelector('img');
+      const paintedHeight = image?.naturalWidth && image?.naturalHeight
+        ? Math.min(box.height, box.width * image.naturalHeight / image.naturalWidth)
+        : box.height;
+      return {
+        entityId: actor.dataset.entityId,
+        paintedHeightRatio: paintedHeight / worldBox.height,
+        groundYRatio: (box.bottom - worldBox.top) / worldBox.height
+      };
+    });
+    const handbag = world.querySelector('.scene-prop[data-entity-id="handbag"]');
+    const handbagBox = handbag?.getBoundingClientRect();
+    const propSurface = handbag?.closest('.scene-props');
+    return {
+      actors,
+      handbagBottomRatio: handbagBox
+        ? (handbagBox.bottom - worldBox.top) / worldBox.height
+        : null,
+      runtimeShift: propSurface?.style.getPropertyValue('--scene-prop-shift-y') || ''
+    };
+  });
+
+  let geometry = await readGeometry();
+  expect(geometry.actors).toHaveLength(2);
+  for (const actor of geometry.actors) {
+    expect(actor.paintedHeightRatio, JSON.stringify(geometry)).toBeGreaterThanOrEqual(.65);
+    expect(actor.paintedHeightRatio, JSON.stringify(geometry)).toBeLessThanOrEqual(.75);
+    expect(actor.groundYRatio, JSON.stringify(geometry)).toBeCloseTo(1, 2);
+  }
+  expect(geometry.handbagBottomRatio, JSON.stringify(geometry)).toBeCloseTo(.75, 1);
+  expect(geometry.runtimeShift).toBe('');
+
   await page.setViewportSize({ width: 390, height: 844 });
+  await settleSceneViewport(page, { width: 390, height: 844 });
+  geometry = await readGeometry();
+  expect(geometry.actors).toHaveLength(2);
+  for (const actor of geometry.actors) {
+    expect(actor.paintedHeightRatio, JSON.stringify(geometry)).toBeGreaterThanOrEqual(.34);
+    expect(actor.paintedHeightRatio, JSON.stringify(geometry)).toBeLessThanOrEqual(.42);
+    expect(actor.groundYRatio, JSON.stringify(geometry)).toBeCloseTo(.76, 2);
+  }
+  expect(geometry.handbagBottomRatio, JSON.stringify(geometry)).toBeCloseTo(.65, 1);
+  expect(geometry.runtimeShift).toBe('');
+});
+
+test('R2 classroom typography and replay control stay readable from a teaching screen', async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
   await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 4：换个角色说谢谢' }).click();
-  await page.getByRole('button', { name: '播放英文' }).click();
-  await page.evaluate(() => window.__finishCourseAudio());
-  const explorer = page.getByRole('button', { name: '探险小猫' });
-  await expect(explorer.locator('img')).toBeVisible();
-  await expect(explorer).toHaveClass(/scene-companion--featured/);
-  const explorerSize = await explorer.evaluate(element => {
-    const box = element.getBoundingClientRect();
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M09');
+
+  const classroomSizes = await page.locator('.station-world').evaluate(world => {
+    const px = selector => Number.parseFloat(getComputedStyle(world.querySelector(selector)).fontSize);
+    return {
+      action: px('.stage-prompt'),
+      option: px('.speech-choice-card__body strong')
+    };
+  });
+  expect(classroomSizes.action).toBeGreaterThanOrEqual(38);
+  expect(classroomSizes.action).toBeLessThanOrEqual(44);
+  expect(classroomSizes.option).toBeGreaterThanOrEqual(26);
+  expect(classroomSizes.option).toBeLessThanOrEqual(30);
+
+  await advanceTo(page, 'L02-M13');
+  const languageSizes = await page.locator('.station-world').evaluate(world => {
+    const word = world.querySelector('.word-plaque');
+    const helper = world.querySelector('.gentle-hint');
+    const replay = world.querySelector('.shared-listen-replay__button');
+    const replayBox = replay.getBoundingClientRect();
+    return {
+      word: Number.parseFloat(getComputedStyle(word).fontSize),
+      helper: Number.parseFloat(getComputedStyle(helper).fontSize),
+      replayWidth: replayBox.width,
+      replayHeight: replayBox.height
+    };
+  });
+  expect(languageSizes.word).toBeGreaterThanOrEqual(36);
+  expect(languageSizes.word).toBeLessThanOrEqual(42);
+  expect(languageSizes.helper).toBeGreaterThanOrEqual(20);
+  expect(languageSizes.replayWidth).toBeGreaterThanOrEqual(60);
+  expect(languageSizes.replayHeight).toBeGreaterThanOrEqual(60);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await settleSceneViewport(page, { width: 390, height: 844 });
+  const phoneReplay = await page.locator('.shared-listen-replay__button').evaluate(button => {
+    const box = button.getBoundingClientRect();
     return { width: box.width, height: box.height };
   });
-  expect(explorerSize.width).toBeGreaterThanOrEqual(100);
-  expect(explorerSize.height).toBeGreaterThanOrEqual(112);
-  await page.getByRole('button', { name: '星灯探险徽章' }).click();
-  await page.getByRole('button', { name: '探险小猫' }).click();
-
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M04:S03');
-  await expect(page.getByRole('button', { name: '接过来' })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: '完成动作' })).toHaveCount(0);
+  expect(phoneReplay.width).toBeGreaterThanOrEqual(52);
+  expect(phoneReplay.height).toBeGreaterThanOrEqual(52);
 });
 
-test('the coat return shows a distinct returner and coat owner instead of making the cat the owner', async ({ page }) => {
-  await installInstantAudio(page);
+test('completed seven-line scroll stays inside the clear lane between both actors', async ({ page }) => {
+  await page.setViewportSize({ width: 1428, height: 1147 });
   await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 9：衣签归位' }).click();
+  await startOrResume(page);
+  await drainAudio(page);
 
-  for (const label of ['外套']) {
-    await page.getByRole('button', { name: label, exact: true }).click();
-    await settle(page);
-  }
+  const geometry = await page.locator('.station-world').evaluate(world => {
+    const panel = world.querySelector('.mission-console').getBoundingClientRect();
+    const characters = [...world.querySelectorAll('.scene-character')].map(element => {
+      const box = element.getBoundingClientRect();
+      return { left: box.left, right: box.right, top: box.top, bottom: box.bottom };
+    });
+    const overlapArea = character => {
+      const width = Math.max(0, Math.min(panel.right, character.right) - Math.max(panel.left, character.left));
+      const height = Math.max(0, Math.min(panel.bottom, character.bottom) - Math.max(panel.top, character.top));
+      return width * height;
+    };
+    return {
+      panel: { left: panel.left, right: panel.right, top: panel.top, bottom: panel.bottom },
+      characters,
+      overlapAreas: characters.map(overlapArea)
+    };
+  });
 
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M04:S03');
-  await expect(page.locator('.scene-people [data-entity-id="second-returner"] img')).toBeVisible();
-  await expect(page.locator('.scene-people [data-entity-id="coat-owner"] img')).toBeVisible();
-  await expect(page.locator('.scene-people [data-character-identity="explorer-cat"]')).toHaveCount(0);
-
-  await page.getByRole('button', { name: 'Yes, it is.' }).click();
-  await settle(page);
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M04:S04');
-  await clickValue(page, 'select-entity', 'coat');
-  await clickValue(page, 'select-target', 'coat-owner');
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M04:S05');
-  await expect(page.locator('.scene-people [data-entity-id="coat-owner"] img')).toBeVisible();
+  expect(geometry.characters).toHaveLength(2);
+  expect(geometry.overlapAreas, JSON.stringify(geometry)).toEqual([0, 0]);
+  expect(geometry.panel.left).toBeGreaterThanOrEqual(geometry.characters[0].right);
+  expect(geometry.panel.right).toBeLessThanOrEqual(geometry.characters[1].left);
 });
 
-test('slot, case, and block choices continue on the last meaningful tap', async ({ page }) => {
-  await installInstantAudio(page);
+test('owner recall keeps both neutral candidates reachable before revealing the lost-item tray', async ({ page }) => {
+  await page.setViewportSize({ width: 1428, height: 1147 });
   await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 7：标签认领' }).click();
-  for (const label of ['铅笔']) {
-    await page.getByRole('button', { name: label, exact: true }).click();
-    await settle(page);
-  }
-  await page.getByRole('button', { name: 'Excuse me!' }).click();
-  await settle(page);
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M02:S04');
-  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
-  await expect(page.locator('.scene-people [data-entity-id="first-claimant"] img')).toBeVisible();
-  await expect(page.getByRole('button', { name: '放进问句' })).toHaveCount(0);
-  await page.getByRole('button', { name: '手表', exact: true }).click();
-  await settle(page);
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M02:S06');
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  await drainAudio(page);
 
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 11：钥匙档案挂牌' }).click();
-  for (const label of ['车钥匙']) {
-    await page.getByRole('button', { name: label, exact: true }).click();
-    await settle(page);
-  }
-  await expect(page.getByRole('button', { name: '就选这份' })).toHaveCount(0);
-  await page.getByRole('button', { name: '车钥匙', exact: true }).click();
-  await page.getByRole('button', { name: 'Excuse me!' }).click();
-  await settle(page);
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M06:S05');
-  await expect(page.locator('.scene-people [data-entity-id="station-keeper"] img')).toBeVisible();
-  await expect(page.locator('.scene-people [data-entity-id="third-claimant"] img')).toBeVisible();
-  await expect(page.getByRole('button', { name: '排好问句' })).toHaveCount(0);
-  await page.getByRole('button', { name: 'Is this your', exact: true }).click();
-  await page.getByRole('button', { name: 'car', exact: true }).click();
-  await settle(page);
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L02-M06:S07');
-});
+  let snapshot = await runtimeSnapshot(page);
+  expect(snapshot.challengeRef).toBe('L01-M08:C01');
+  await expect(page.locator('.stage-prompt')).toHaveCount(0);
+  await expect(page.locator('.mission-prompt')).toHaveCount(0);
+  await expect(page.locator('.moment-language__item')).toHaveText(['Whose handbag is it?']);
+  await expect(page.locator('.action-stage__hint')).toHaveText('点击人物，选出手提包的主人');
+  await expect(page.locator('.scene-character')).toHaveCount(2);
+  await expect(page.locator('.scene-character.is-moment-focus')).toHaveCount(0);
+  const ownerRecallCastIds = await page.locator('.scene-people > .scene-character')
+    .evaluateAll(characters => characters.map(character => character.dataset.entityId).sort());
+  const candidateBoxes = await page.locator('button.scene-character').evaluateAll(elements => (
+    elements.map(element => {
+      const box = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return { width: box.width, opacity: style.opacity, filter: style.filter };
+    })
+  ));
+  expect(candidateBoxes).toHaveLength(2);
+  expect(Math.abs(candidateBoxes[0].width - candidateBoxes[1].width)).toBeLessThanOrEqual(2);
+  expect(candidateBoxes[0].opacity).toBe(candidateBoxes[1].opacity);
+  expect(candidateBoxes[0].filter).toBe(candidateBoxes[1].filter);
 
-test('earned milestone facts appear automatically and one action finishes each scene', async ({ page }) => {
-  await installInstantAudio(page);
-  await openFresh(page);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 5：案件归档' }).click();
-  await expect(page.getByText('点亮四张案件线索', { exact: true })).toHaveCount(0);
-  await expect(page.locator('[data-action="toggle-fact"]')).toHaveCount(0);
-  await expect(page.locator('[data-action="perform-direct"]')).toHaveAccessibleName('盖下印章');
-  await page.locator('[data-action="perform-direct"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-status', 'chapter-stop');
-  const chapterCompanion = page.locator('.milestone-companion[data-character-identity="explorer-cat"]');
-  await expect(chapterCompanion).toBeVisible();
-  expect(await chapterCompanion.evaluate(element => element.getBoundingClientRect().width))
-    .toBeGreaterThanOrEqual(120);
-
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
-  await expect(page.getByText('把三份认领记录都点亮', { exact: true })).toHaveCount(0);
-  await expect(page.locator('[data-action="toggle-fact"]')).toHaveCount(0);
-  await expect(page.locator('[data-action="perform-direct"]')).toHaveAccessibleName('拉下拉杆');
-  await page.locator('[data-action="perform-direct"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-status', 'unit-built');
-  await expect(page.locator('.milestone-companion[data-character-identity="explorer-cat"]'))
-    .toBeVisible();
-});
-
-test('the first listen identifies the owner without handing over the handbag', async ({ page }) => {
-  await installManualAudio(page);
-  await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-  for (let index = 0; index < 7; index += 1) {
-    await page.evaluate(() => window.__finishCourseAudio());
-  }
-  await expect(page.locator('.mission-prompt')).toHaveText('这是谁的手提包？找到它的主人');
-  await expect(page.locator('button[data-action="select-entity"][data-value="handbag"]')).toHaveCount(0);
-  await expect(page.locator('button[data-action="select-target"]')).toHaveCount(0);
-  await expect(page.locator('.mission-console > .heart-row')).toBeVisible();
-  await expect(page.locator('.scene-heading .heart-row')).toHaveCount(0);
-  expect(await page.locator('.mission-console').evaluate(element => element.getBoundingClientRect().height))
-    .toBeLessThanOrEqual(180);
-  await clickValue(page, 'select-entity', 'handbag-owner');
-  await expect(page.locator('.feedback-audio-state')).toBeVisible();
-  await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  expect(await page.evaluate(() => window.__correctCueStarts)).toBe(0);
-  await page.evaluate(() => window.__finishCourseAudio());
-  await expect(page.locator('.word-plaque')).toHaveText('handbag');
-  await clickValue(page, 'select-entity', 'handbag');
-
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M02:S01');
-  await expect(page.locator('[data-action="audio-play"]')).toHaveCount(0);
-  await expect(page.locator('.source-label-reveal')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: '收好标签' })).toHaveCount(0);
-  expect(await page.evaluate(() => (
-    window.__courseAudioStarts.filter(src => src.endsWith('/l01-w07.mp3')).length
-  ))).toBe(1);
-});
-
-test('the whole child UI completes twelve catalog tasks and grows only at the final boundary', async ({ page }) => {
-  const pageErrors = [];
-  page.on('pageerror', error => pageErrors.push(error.stack || error.message));
-  await installManualAudio(page);
   await page.setViewportSize({ width: 390, height: 844 });
-  const response = await openFresh(page);
-  expect(response.status()).toBe(200);
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-  await expect(page.locator('[data-action="start"]')).toBeVisible();
-  await enterFirstMission(page);
-
-  const selectedCaseByTask = {};
-  for (let guard = 0; guard < 320; guard += 1) {
-    const status = await app(page).getAttribute('data-runtime-status');
-    if (status === 'unit-built') break;
-    if (status === 'chapter-stop') {
-      const saved = JSON.parse(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY));
-      expect(saved.value.units['NCE-U01'].buildStage).toBe(0);
-      expect(saved.value.units['NCE-U01'].completedMicrotaskIds).toHaveLength(5);
-      await page.locator('[data-action="chapter-continue"]').click();
-      continue;
-    }
-
-    const phase = await app(page).getAttribute('data-runtime-phase');
-    if (phase === 'audio-ready') {
-      await page.locator('[data-action="audio-play"]').click();
-      await settle(page);
-      continue;
-    }
-    if (phase === 'audio-playing') {
-      const finished = await page.evaluate(() => window.__finishCourseAudio());
-      expect(finished).not.toBeNull();
-      await settle(page);
-      continue;
-    }
-    expect(phase).toBe('response');
-    const microtaskId = await app(page).getAttribute('data-runtime-microtask');
-    const stepId = await app(page).getAttribute('data-runtime-step');
-    const task = tasks.find(candidate => candidate.microtaskId === microtaskId);
-    const step = task.steps.find(candidate => candidate.stepId === stepId);
-    const rule = step.answerRule;
-
-    if (step.kind === 'explore-batch') {
-      const selected = page.locator('button[data-action="explore"].is-selected');
-      await selected.click();
-      await settle(page);
-      continue;
-    }
-    if (rule.type === 'match-entity') {
-      const challengeRef = await app(page).getAttribute('data-runtime-challenge');
-      await clickValue(page, 'select-entity', rule.pairs[challengeRef]);
-      await settle(page);
-      continue;
-    }
-    if (rule.type === 'select-one') {
-      if (rule.acceptedSourceRef) {
-        await clickValue(page, 'select-source', rule.acceptedSourceRef);
-        await settle(page);
-        continue;
-      }
-      if (rule.acceptedEntityIds) {
-        const selected = rule.acceptedEntityIds[0];
-        selectedCaseByTask[microtaskId] = selected;
-        await clickValue(page, 'select-entity', selected);
-        await settle(page);
-        continue;
-      }
-    }
-    if (rule.type === 'place-in-slot') {
-      await clickValue(page, 'select-entity', rule.entityId);
-      await settle(page);
-      continue;
-    }
-    if (rule.type === 'perform-action') {
-      if (['stamp', 'pull'].includes(rule.action)) {
-        await page.locator('[data-action="perform-direct"]').click();
-      } else {
-        const entityId = rule.entityFactId ? selectedCaseByTask[microtaskId] : rule.entityId;
-        await clickValue(page, 'select-entity', entityId);
-        await clickValue(page, 'select-target', rule.targetEntityId);
-      }
-      await settle(page);
-      continue;
-    }
-    if (rule.type === 'ordered-blocks') {
-      const selected = selectedCaseByTask[microtaskId];
-      for (const refId of rule.acceptedByEntityId[selected]) await clickValue(page, 'add-block', refId);
-      await settle(page);
-      continue;
-    }
-    throw new Error(`unhandled direct response ${microtaskId}:${stepId}:${rule.type}`);
+  await page.evaluate(() => scrollTo(0, 0));
+  const phoneCandidateVisibility = await page.locator('button.scene-character').evaluateAll(elements => (
+    elements.map(element => {
+      const box = element.getBoundingClientRect();
+      return {
+        left: box.left,
+        right: box.right,
+        visibleHeight: Math.max(0, Math.min(innerHeight, box.bottom) - Math.max(0, box.top))
+      };
+    })
+  ));
+  expect(phoneCandidateVisibility).toHaveLength(2);
+  for (const candidate of phoneCandidateVisibility) {
+    expect(candidate.left, JSON.stringify(phoneCandidateVisibility)).toBeGreaterThanOrEqual(-6);
+    expect(candidate.right, JSON.stringify(phoneCandidateVisibility)).toBeLessThanOrEqual(396);
+    expect(candidate.visibleHeight, JSON.stringify(phoneCandidateVisibility)).toBeGreaterThanOrEqual(150);
   }
 
+  const shortDesktopViewport = { width: 1280, height: 720 };
+  await page.setViewportSize(shortDesktopViewport);
+  await settleSceneViewport(page, shortDesktopViewport);
+  const desktopCandidateVisibility = await page.locator('button.scene-character').evaluateAll(elements => (
+    elements.map(element => {
+      const box = element.getBoundingClientRect();
+      const image = element.querySelector('img');
+      const paintedHeight = image?.naturalWidth && image?.naturalHeight
+        ? Math.min(box.height, box.width * image.naturalHeight / image.naturalWidth)
+        : box.height;
+      const paintedTop = box.bottom - paintedHeight;
+      return Math.max(0, Math.min(innerHeight, box.bottom) - Math.max(0, paintedTop));
+    })
+  ));
+  expect(desktopCandidateVisibility).toHaveLength(2);
+  for (const visibleHeight of desktopCandidateVisibility) {
+    expect(visibleHeight, JSON.stringify(desktopCandidateVisibility)).toBeGreaterThanOrEqual(300);
+  }
+
+  const shortDesktopHandbagVisibility = await page.locator('.scene-prop[data-entity-id="handbag"]')
+    .evaluate(element => {
+      const box = element.getBoundingClientRect();
+      return Math.max(0, Math.min(innerHeight, box.bottom) - Math.max(0, box.top));
+    });
+  expect(shortDesktopHandbagVisibility).toBeGreaterThanOrEqual(100);
+
+  await expect(page.locator('.scene-prop[data-entity-id="handbag"]')).toBeVisible();
+  await expect(page.locator('.scene-prop[data-entity-id="book"]')).toHaveCount(0);
+  await expect(page.locator('.scene-prop[data-entity-id="watch"]')).toHaveCount(0);
+  const heartIcons = page.locator('.adventure-heart .ui-icon');
+  await expect(heartIcons).toHaveCount(3);
+  expect(await heartIcons.evaluateAll(images => images.map(image => image.getAttribute('src'))))
+    .toEqual(Array(3).fill('/poc/lesson1-2-experience/assets/icons/heart-fill.svg'));
+
+  const ownerChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, ownerChallenge.answerRule, ownerChallenge, { correct: true });
+  await drainAudio(page);
+  snapshot = await runtimeSnapshot(page);
+  expect(snapshot.challengeRef).toBe('L01-M08:C02');
+  expect(await page.locator('.scene-people > .scene-character')
+    .evaluateAll(characters => characters.map(character => character.dataset.entityId).sort()))
+    .toEqual(ownerRecallCastIds);
+  for (const entityId of ['handbag', 'book', 'watch']) {
+    await expect(page.locator(`.scene-prop[data-entity-id="${entityId}"]`)).toBeVisible();
+  }
+});
+
+test('audio-form questions keep one answer surface visible and unlock it only after real ended', async ({ page }) => {
+  await page.setViewportSize({ width: 1428, height: 980 });
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  let snapshot = await drainAudio(page);
+  expect(snapshot.challengeRef).toBe('L01-M08:C01');
+
+  const ownerChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, ownerChallenge.answerRule, ownerChallenge, { correct: true });
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  snapshot = await runtimeSnapshot(page);
+  expect(snapshot).toMatchObject({
+    stepId: 'L01-M08:S02',
+    challengeRef: 'L01-M08:C02',
+    phase: 'audio-playing'
+  });
+
+  const sharedSurface = page.locator('[data-audio-response-presentation="shared-locked-until-ended"]');
+  await expect(sharedSurface).toBeVisible();
+  await expect(page.locator('.language-audio-panel')).toHaveCount(0);
+  await expect(sharedSurface.locator('.word-plaque')).toHaveText('handbag');
+  await expect(sharedSurface.locator('[data-response-fields]')).toHaveAttribute('inert', '');
+  await expect(page.locator('.scene-prop')).toHaveCount(3);
+  await expect(page.locator('button.scene-prop[data-action="select-entity"]')).toHaveCount(0);
+
+  await finishOneAudio(page);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('awaiting-response');
+  await expect(sharedSurface).toBeVisible();
+  await expect(sharedSurface.locator('.word-plaque')).toHaveText('handbag');
+  await expect(sharedSurface.locator('[data-response-fields]')).not.toHaveAttribute('inert', '');
+  await expect(page.locator('button.scene-prop[data-action="select-entity"]')).toHaveCount(3);
+
+  const unlockedSnapshot = await runtimeSnapshot(page);
+  const replay = sharedSurface.locator('[data-action="free-audio"]');
+  await expect(replay).toBeVisible();
+  await replay.click();
+  await expect.poll(() => page.evaluate(() => window.__pendingCourseAudioCount())).toBe(1);
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    phase: unlockedSnapshot.phase,
+    challengeRef: unlockedSnapshot.challengeRef,
+    stateVersion: unlockedSnapshot.stateVersion
+  });
+  await finishOneAudio(page);
+  await expect(sharedSurface.locator('[data-response-fields]')).not.toHaveAttribute('inert', '');
+});
+
+test('handbag question workbench keeps the prop clear of hearts and sentence controls', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L01-M10');
+
+  expect(snapshot.challengeRef).toBe('L01-M10:C01');
+  const viewports = [
+    { width: 1220, height: 1197 },
+    { width: 360, height: 640 },
+    { width: 390, height: 844 },
+    { width: 430, height: 932 },
+    { width: 844, height: 390 }
+  ];
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await settleSceneViewport(page, viewport);
+    const geometry = await page.locator('.station-world').evaluate(world => {
+      const bounds = selector => {
+        const element = world.querySelector(selector);
+        if (!element) return null;
+        const box = element.getBoundingClientRect();
+        return {
+          left: box.left,
+          top: box.top,
+          right: box.right,
+          bottom: box.bottom
+        };
+      };
+      const overlapArea = (left, right) => (
+        Math.max(0, Math.min(left.right, right.right) - Math.max(left.left, right.left))
+        * Math.max(0, Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top))
+      );
+      const handbag = bounds('.scene-prop[data-entity-id="handbag"]');
+      const panel = bounds('.mission-console');
+      const protectedControls = [
+        bounds('.adventure-heart-gauge'),
+        bounds('.block-builder__track'),
+        bounds('.block-builder__bank')
+      ];
+      return {
+        viewport: { width: innerWidth, height: innerHeight },
+        handbag,
+        panel,
+        protectedControls,
+        overlapAreas: protectedControls.map(control => overlapArea(handbag, control))
+      };
+    });
+
+    expect(geometry.handbag, JSON.stringify(geometry)).toBeTruthy();
+    expect(geometry.protectedControls.every(Boolean), JSON.stringify(geometry)).toBe(true);
+    expect(geometry.handbag.left, JSON.stringify(geometry)).toBeGreaterThanOrEqual(0);
+    expect(geometry.handbag.right, JSON.stringify(geometry)).toBeLessThanOrEqual(viewport.width);
+    expect(geometry.handbag.top, JSON.stringify(geometry)).toBeGreaterThanOrEqual(geometry.panel.bottom);
+    expect(geometry.overlapAreas, JSON.stringify(geometry)).toEqual([0, 0, 0]);
+    await noForbiddenScroll(page);
+  }
+});
+
+test('handbag question rests the handbag on the painted counter edge in both scene masters', async ({ page }) => {
+  await page.setViewportSize({ width: 1220, height: 1011 });
+  await openFresh(page);
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L01-M10');
+
+  expect(snapshot.challengeRef).toBe('L01-M10:C01');
+
+  for (const viewport of [
+    { width: 1220, height: 1011, counterEdgeRatio: 0.75 },
+    { width: 390, height: 844, counterEdgeRatio: 0.65 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await settleSceneViewport(page, viewport);
+    const geometry = await page.locator('.station-world').evaluate(world => {
+      const worldBox = world.getBoundingClientRect();
+      const handbagBox = world.querySelector('.scene-prop[data-entity-id="handbag"]')
+        .getBoundingClientRect();
+      const panelBox = world.querySelector('.mission-console').getBoundingClientRect();
+      return {
+        world: { top: worldBox.top, height: worldBox.height },
+        handbag: { top: handbagBox.top, bottom: handbagBox.bottom },
+        panel: { top: panelBox.top, bottom: panelBox.bottom }
+      };
+    });
+    const paintedCounterEdge = geometry.world.top + geometry.world.height * viewport.counterEdgeRatio;
+
+    expect(geometry.handbag.top, JSON.stringify({ viewport, geometry }))
+      .toBeGreaterThanOrEqual(geometry.panel.bottom);
+    expect(Math.abs(geometry.handbag.bottom - paintedCounterEdge), JSON.stringify({ viewport, geometry }))
+      .toBeLessThanOrEqual(28);
+  }
+});
+
+test('watch reference keeps every candidate prop neutral and clear of the answer controls', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L02-M15');
+  expect(snapshot.challengeRef).toBe('L02-M15:C01');
+  const questionChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, questionChallenge.answerRule, questionChallenge, { correct: true });
+
+  for (let guard = 0; guard < 20; guard += 1) {
+    snapshot = await settlePresentation(page);
+    if (snapshot.stepId === 'L02-M15:S03' && snapshot.phase === 'audio-playing') break;
+    if (['audio-playing', 'audio-retry'].includes(snapshot.phase)) {
+      await finishOneAudio(page);
+      continue;
+    }
+    await page.waitForTimeout(10);
+  }
+  expect(snapshot).toMatchObject({
+    stepId: 'L02-M15:S03',
+    challengeRef: 'L02-M15:C02',
+    phase: 'audio-playing'
+  });
+
+  const viewports = [
+    { width: 1259, height: 1090 },
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+    { width: 844, height: 390 }
+  ];
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await settleSceneViewport(page, viewport);
+    await expect(page.locator('.scene-props > .scene-prop')).toHaveCount(3);
+    expect(await page.locator('.scene-props > .scene-prop').evaluateAll(props => (
+      props.map(prop => prop.dataset.entityId).sort()
+    ))).toEqual(['book', 'handbag', 'watch']);
+    await expectNoProtectedRegionCollision(page);
+    await noForbiddenScroll(page);
+  }
+
+  await finishOneAudio(page);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('awaiting-response');
+  await expect(page.locator('.reference-answer')).toHaveText('Yes, it is.');
+  await expectNoProtectedRegionCollision(page);
+});
+
+test('the handbag conversation does not cut to a different scene before the question', async ({ page }) => {
+  await page.setViewportSize({ width: 1428, height: 1147 });
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M09');
+
+  const sceneFrame = () => page.locator('.station-world').evaluate(world => {
+    const characterFrames = [...world.querySelectorAll('.scene-people > .scene-character')]
+      .map(character => {
+        const style = getComputedStyle(character);
+        return {
+          entityId: character.dataset.entityId,
+          width: style.width,
+          height: style.height
+        };
+      })
+      .sort((left, right) => left.entityId.localeCompare(right.entityId));
+    const style = getComputedStyle(world);
+    return {
+      sceneMode: world.dataset.sceneMode,
+      backgroundImage: style.backgroundImage,
+      backgroundPosition: style.backgroundPosition,
+      backgroundSize: style.backgroundSize,
+      characterFrames
+    };
+  });
+
+  const before = await sceneFrame();
+  expect(before.sceneMode).toBe('dialogue-stage');
+  await completeCurrentMicrotask(page);
+  const snapshot = await drainAudio(page);
+  expect(snapshot.microtaskId).toBe('L01-M10');
+
+  const after = await sceneFrame();
+  expect(after.sceneMode).toBe(before.sceneMode);
+  expect(after.backgroundImage).toBe(before.backgroundImage);
+  expect(after.backgroundPosition).toBe(before.backgroundPosition);
+  expect(after.backgroundSize).toBe(before.backgroundSize);
+  expect(after.characterFrames).toEqual(before.characterFrames);
+});
+
+test('handbag word-form returns later as a return label instead of a repeated object hunt', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L01-M09');
+
+  expect(snapshot.challengeRef).toBe('L01-M09:C01');
+  await expect(page.locator('.stage-prompt')).toHaveText('礼貌叫住她，应该怎么说？');
+  await expect(page.locator('.word-plaque')).toHaveCount(0);
+  await expect(page.locator('.scene-prop[data-entity-id="handbag"]')).toBeVisible();
+  await expect(page.locator('.scene-prop[data-entity-id="book"]')).toHaveCount(0);
+  await expect(page.locator('.scene-prop[data-entity-id="watch"]')).toHaveCount(0);
+
+  await completeCurrentMicrotask(page);
+  await completeCurrentMicrotask(page);
+  snapshot = await advanceTo(page, 'L01-M11');
+  expect(snapshot.challengeRef).toBe('L01-M11:C01');
+  await expect(page.locator('.stage-prompt')).toHaveText('看手提包，选出对应的英文牌');
+  await expect(page.locator('.word-label-choice-grid')).toBeVisible();
+  await expect.poll(() => page.locator(
+    '.word-label-choice-grid [data-action="select-source"]'
+  ).allTextContents().then(values => values.map(value => value.trim()).sort()))
+    .toEqual(['excuse', 'handbag', 'pardon']);
+  await expect(page.locator('.scene-prop[data-entity-id="handbag"]')).toBeVisible();
+  await expect(page.locator('.scene-prop[data-entity-id="book"]')).toHaveCount(0);
+  await expect(page.locator('.scene-prop[data-entity-id="watch"]')).toHaveCount(0);
+});
+
+test('direct intent keeps one click per learning decision and one click for the final handoff', async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page, { reducedMotion: 'reduce' });
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L01-M11');
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L01-M11',
+    challengeRef: 'L01-M11:C01',
+    phase: 'awaiting-response',
+    adventureHeartsRemaining: 3
+  });
+
+  await expect(page.locator('[data-drag-source], [data-drop-target], [draggable="true"]'))
+    .toHaveCount(0);
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await expect(app(page)).toHaveAttribute('data-adventure-hearts', '2');
+  await expect(page.locator('.feedback-mission-bar')).toContainText(challenge.supportLayers[0].copy);
+  await submitRule(page, challenge.answerRule, challenge);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  snapshot = await drainAudio(page);
+
+  expect(snapshot.challengeRef).toBe('L01-M11:C02');
+  const thanksChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, thanksChallenge.answerRule, thanksChallenge);
+  snapshot = await drainAudio(page);
+  expect(snapshot.stepId).toBe('L01-M11:S03');
+  await page.locator(
+    'button.scene-character[data-action="perform-direct"][data-entity-id="handbag-owner"]'
+  ).click();
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  snapshot = await runtimeSnapshot(page);
+  expect(snapshot.audio.currentSegment).toMatchObject({
+    text: 'Thank you very much.',
+    speaker: 'woman'
+  });
+  await expect(page.locator(
+    '[data-entity-id="handbag"][data-moment-state*="handbag-with-owner"]'
+  )).toBeVisible();
+  await expect(page.locator('[data-action="presentation-end"]')).toHaveCount(0);
+  await finishOneAudio(page);
+  await expect(page.locator('[data-action="presentation-end"]')).toBeVisible();
+});
+
+test('word-form object choices stay visually neutral until the child answers', async ({ page }) => {
+  await page.setViewportSize({ width: 1220, height: 1011 });
+  await openFresh(page);
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L02-M13');
+
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L02-M13',
+    challengeRef: 'L02-M13:C01',
+    phase: 'awaiting-response'
+  });
+  const candidates = await page.locator('.scene-props > .scene-prop').evaluateAll(elements => (
+    elements.map(element => {
+      const style = getComputedStyle(element);
+      return {
+        entityId: element.dataset.entityId,
+        selected: element.classList.contains('is-selected'),
+        opacity: style.opacity,
+        transform: style.transform,
+        filter: style.filter,
+        outline: style.outline
+      };
+    })
+  ));
+
+  expect(candidates.map(candidate => candidate.entityId).sort()).toEqual([
+    'book', 'pen', 'pencil', 'watch'
+  ]);
+  expect(candidates.every(candidate => !candidate.selected)).toBe(true);
+  expect(new Set(candidates.map(candidate => JSON.stringify({
+    opacity: candidate.opacity,
+    transform: candidate.transform,
+    filter: candidate.filter,
+    outline: candidate.outline
+  }))).size).toBe(1);
+});
+
+test('formal candidates use the runtime shuffle and two wrong answers reveal catalog support layers', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  await drainAudio(page);
+
+  let snapshot = await runtimeSnapshot(page);
+  expect(snapshot.challengeRef).toBe('L01-M08:C01');
+  await expect(page.locator('.adventure-heart-gauge')).toHaveAttribute('aria-label', '冒险心：3 / 3');
+  const firstChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, firstChallenge.answerRule, firstChallenge, { correct: true });
+  await drainAudio(page);
+
+  snapshot = await runtimeSnapshot(page);
+  const challenge = activeContract(snapshot).challenge;
+  expect(snapshot.challengeRef).toBe('L01-M08:C02');
+  expect(snapshot.shuffleAlgorithmVersion).toContain('fisher-yates');
+  expect(Number.isInteger(snapshot.shuffleSeed)).toBe(true);
+  expect(new Set(snapshot.optionIds)).toEqual(new Set(challenge.candidateEntityIds));
+  const displayed = await page.locator('button.scene-prop[data-action="select-entity"]')
+    .evaluateAll(buttons => buttons.map(button => button.dataset.value));
+  expect(displayed).toEqual(snapshot.optionIds);
+
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await expect(app(page)).toHaveAttribute('data-adventure-hearts', '2');
+  await expect(page.locator('.feedback-mission-bar')).toContainText(challenge.supportLayers[0].copy);
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await expect(app(page)).toHaveAttribute('data-adventure-hearts', '1');
+  await expect(page.locator('.feedback-mission-bar')).toContainText(challenge.supportLayers[1].copy);
+});
+
+test('owner correction keeps the action instruction ahead of one compact clue group', async ({ page }) => {
+  await page.setViewportSize({ width: 986, height: 634 });
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  await drainAudio(page);
+
+  const snapshot = await runtimeSnapshot(page);
+  const challenge = activeContract(snapshot).challenge;
+  expect(snapshot.challengeRef).toBe('L01-M08:C01');
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await expect(page.locator('.feedback-mission-bar')).toContainText(challenge.supportLayers[0].copy);
+  await expect(page.locator('.feedback-mission-bar__copy')).toContainText(
+    unit.experience.uiCopy.feedback.labels.support
+  );
+  const supportLayout = await page.locator('.support-guidance').evaluate(element => {
+    const instruction = element.parentElement.querySelector('.support-action-instruction')
+      .getBoundingClientRect();
+    const hint = element.querySelector('.feedback-mission-bar').getBoundingClientRect();
+    const language = element.querySelector('.moment-language').getBoundingClientRect();
+    return {
+      instructionBottom: instruction.bottom,
+      hintTop: hint.top,
+      hintBottom: hint.bottom,
+      hintWidth: hint.width,
+      languageTop: language.top,
+      supportWidth: element.getBoundingClientRect().width
+    };
+  });
+  expect(supportLayout.instructionBottom).toBeLessThanOrEqual(supportLayout.hintTop + 1);
+  expect(supportLayout.hintBottom).toBeLessThanOrEqual(supportLayout.languageTop + 2);
+  expect(supportLayout.hintWidth / supportLayout.supportWidth).toBeGreaterThan(.9);
+});
+
+test('zero hearts clears temporary answers and restarts the whole current microtask', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  await drainAudio(page);
+
+  const first = activeContract(await runtimeSnapshot(page)).challenge;
+  await submitRule(page, first.answerRule, first, { correct: true });
+  await drainAudio(page);
+  const secondSnapshot = await runtimeSnapshot(page);
+  const second = activeContract(secondSnapshot).challenge;
+  expect(secondSnapshot.temporaryResults).toHaveLength(1);
+
+  await submitRule(page, second.answerRule, second, { correct: false });
+  await submitRule(page, second.answerRule, second, { correct: false });
+  await submitRule(page, second.answerRule, second, { correct: false });
+  await expect(app(page)).toHaveAttribute('data-adventure-hearts', '0');
+  await expect(page.locator('.feedback-bubble[data-tone="partner"]')).toContainText(second.supportLayers[2].copy);
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => ({
+    microtaskId: snapshot.microtaskId,
+    challengeRef: snapshot.challengeRef,
+    attemptRevision: snapshot.attemptRevision,
+    hearts: snapshot.adventureHeartsRemaining,
+    temporaryResults: snapshot.temporaryResults.length
+  })), { timeout: 5000 }).toEqual({
+    microtaskId: 'L01-M08',
+    challengeRef: 'L01-M08:C01',
+    attemptRevision: 1,
+    hearts: 3,
+    temporaryResults: 0
+  });
+});
+
+test('word-form success speaks automatically with visible English and no speaker confirmation click', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M11');
+
+  const snapshot = await runtimeSnapshot(page);
+  const challenge = activeContract(snapshot).challenge;
+  expect(challenge.channel).toBe('word-form');
+  await expect(page.locator('.word-label-choice-grid')).toContainText(challenge.targetText);
+  const startsBefore = await page.evaluate(() => window.__audioStarts.length);
+  await submitRule(page, challenge.answerRule, challenge, { correct: true });
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  await expect.poll(() => page.evaluate(() => window.__audioStarts.length)).toBeGreaterThan(startsBefore);
+  await expectActiveAudioText(page, await runtimeSnapshot(page));
+  await expect(page.getByRole('button', { name: /确认发音|听完继续|播放后确认/ })).toHaveCount(0);
+  await finishOneAudio(page);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.stepId)).toBe('L01-M11:S04');
+});
+
+test('R3 regression: stage 5 instruction does not disclose the correct English label', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M11');
+
+  const instruction = page.locator([
+    '.station-brand strong',
+    '.stage-prompt',
+    '.mission-prompt',
+    '.action-stage__hint',
+    '.support-action-instruction'
+  ].join(',')).filter({ visible: true });
+  await expect(instruction).not.toHaveCount(0);
+  const instructionCopy = (await instruction.allTextContents()).join(' ');
+  expect(instructionCopy).not.toMatch(/\bhandbag\b/i);
+});
+
+test('R3 regression: homeward scene choices stay readable on desktop and phone', async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await openFresh(page);
+  await startOrResume(page);
+  const expectChoiceGeometry = async (minimumWidth, minimumHeight) => {
+    const choices = page.locator('button[data-action="select-entity"]:has(img)');
+    await expect(choices).toHaveCount(2);
+    const geometry = await choices.evaluateAll(buttons => buttons.map(button => {
+      const image = button.querySelector('img');
+      const box = image.getBoundingClientRect();
+      const buttonBox = button.getBoundingClientRect();
+      const buttonStyle = getComputedStyle(button);
+      const naturalRatio = image.naturalWidth / image.naturalHeight;
+      const boxRatio = box.width / box.height;
+      const paintedWidth = boxRatio > naturalRatio ? box.height * naturalRatio : box.width;
+      const paintedHeight = boxRatio > naturalRatio ? box.height : box.width / naturalRatio;
+      const paintedLeft = box.left + ((box.width - paintedWidth) / 2);
+      const paintedTop = box.top + ((box.height - paintedHeight) / 2);
+      const clipLeft = buttonBox.left + parseFloat(buttonStyle.borderLeftWidth || '0');
+      const clipRight = buttonBox.right - parseFloat(buttonStyle.borderRightWidth || '0');
+      const clipTop = buttonBox.top + parseFloat(buttonStyle.borderTopWidth || '0');
+      const clipBottom = buttonBox.bottom - parseFloat(buttonStyle.borderBottomWidth || '0');
+      const visiblePaintedWidth = Math.max(
+        0,
+        Math.min(paintedLeft + paintedWidth, clipRight) - Math.max(paintedLeft, clipLeft)
+      );
+      const visiblePaintedHeight = Math.max(
+        0,
+        Math.min(paintedTop + paintedHeight, clipBottom) - Math.max(paintedTop, clipTop)
+      );
+      return {
+        width: box.width,
+        height: box.height,
+        paintedWidth,
+        paintedHeight,
+        visiblePaintedWidth,
+        visiblePaintedHeight,
+        objectFit: getComputedStyle(image).objectFit
+      };
+    }));
+    for (const box of geometry) {
+      expect(box.visiblePaintedWidth, JSON.stringify(geometry)).toBeGreaterThanOrEqual(minimumWidth);
+      expect(box.visiblePaintedHeight, JSON.stringify(geometry)).toBeGreaterThanOrEqual(minimumHeight);
+      expect(box.objectFit, JSON.stringify(geometry)).toBe('contain');
+    }
+  };
+
+  await advanceTo(page, 'L02-M20');
+  await expectChoiceGeometry(144, 144);
+  await completeCurrentMicrotask(page);
+  await advanceTo(page, 'L02-M21');
+  await expectChoiceGeometry(144, 144);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+  await expectChoiceGeometry(132, 132);
+});
+
+test('reached stages open as an isolated sandbox while future stages stay disabled', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  const before = await durableLedgerRecord(page);
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await expect(page.locator('.stage-map [data-action="preview-exit"]')).toHaveCount(0);
+  const completedButton = page.locator('[data-action="preview-jump"][data-value="L01-M07"]');
+  const currentButton = page.locator('[data-action="preview-jump"][data-value="L01-M08"]');
+  const futureButton = page.locator('[data-action="preview-jump"][data-value="L01-M09"]');
+  await expect(completedButton).toBeEnabled();
+  await expect(currentButton).toBeEnabled();
+  await expect(futureButton).toBeDisabled();
+  await expect(completedButton).toContainText('回看');
+  await expect(currentButton).toContainText('继续学习');
+  await expect(futureButton).toContainText('未到达');
+  await expect(completedButton).toHaveAccessibleName(`阶段 1：${tasks[0].presentation.title}`);
+
+  const currentBefore = await runtimeSnapshot(page);
+  await currentButton.click();
+  await expect(page.locator('#course-stage-map')).toHaveCount(0);
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'false');
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    microtaskId: currentBefore.microtaskId,
+    stepId: currentBefore.stepId,
+    challengeRef: currentBefore.challengeRef,
+    adventureHeartsRemaining: currentBefore.adventureHeartsRemaining
+  });
+  expect(await durableLedgerRecord(page)).toBe(before);
+
+  await page.locator('[data-action="toggle-stages"]').click();
+
+  await completedButton.click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
+  const persistentExit = page.locator('.station-header [data-action="preview-exit"]');
+  await expect(persistentExit).toBeVisible();
+  await expect(persistentExit).toHaveText('退出回看 · 不保存');
+  const replayed = await completeCurrentMicrotask(page);
+  expect(replayed.status).toBe('sandbox-complete');
+  expect(await durableLedgerRecord(page)).toBe(before);
+  const replayComplete = page.locator('[data-stage-replay-complete="true"]');
+  await expect(replayComplete).toBeVisible();
+  await expect(replayComplete).toContainText('这一阶段回看完成');
+  await expect(replayComplete).toContainText(`回到：${tasks[1].navigationTitle}`);
+  await expect(replayComplete.getByRole('button', { name: '返回继续学习' })).toBeVisible();
+  await expect(replayComplete.getByRole('button', { name: '选择其他阶段' })).toBeVisible();
+
+  await replayComplete.getByRole('button', { name: '返回继续学习' }).click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M08');
+  expect(await durableLedgerRecord(page)).toBe(before);
+});
+
+test('leaving a stage replay restores the exact active mainline attempt and restarts its audio', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M09');
+
+  let current = await runtimeSnapshot(page);
+  const challenge = activeContract(current).challenge;
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await submitRule(page, challenge.answerRule, challenge, { correct: true });
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.phase)).toBe('audio-playing');
+  const origin = await runtimeSnapshot(page);
+  expect(origin.adventureHeartsRemaining).toBe(2);
+  expect(origin.temporaryResults).toHaveLength(1);
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await page.locator('[data-action="preview-jump"][data-value="L01-M08"]').click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
+  const startsBeforeReturn = await courseAudioStartCount(page);
+  await page.locator('.station-header [data-action="preview-exit"]').click();
+
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'false');
+  current = await runtimeSnapshot(page);
+  expect(current.microtaskId).toBe(origin.microtaskId);
+  expect(current.stepId).toBe(origin.stepId);
+  expect(current.challengeRef).toBe(origin.challengeRef);
+  expect(current.adventureHeartsRemaining).toBe(origin.adventureHeartsRemaining);
+  expect(current.optionIds).toEqual(origin.optionIds);
+  expect(current.temporaryResults).toEqual(origin.temporaryResults);
+  expect(current.phase).toBe('audio-playing');
+  expect(current.audio.segmentId).toBe(origin.audio.segmentId);
+  expect(current.audio.requestId).not.toBe(origin.audio.requestId);
+  await expect.poll(() => courseAudioStartCount(page)).toBe(startsBeforeReturn + 1);
+});
+
+test('a completed replay can switch directly to another completed stage without changing progress', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M09');
+  const before = await durableLedgerRecord(page);
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await page.locator('[data-action="preview-jump"][data-value="L01-M07"]').click();
+  expect((await completeCurrentMicrotask(page)).status).toBe('sandbox-complete');
+
+  await page.getByRole('button', { name: '选择其他阶段' }).click();
+  await expect(page.locator('#course-stage-map')).toBeVisible();
+  await page.locator('[data-action="preview-jump"][data-value="L01-M08"]').click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M08');
+  expect(await durableLedgerRecord(page)).toBe(before);
+
+  expect((await completeCurrentMicrotask(page)).status).toBe('sandbox-complete');
+  await page.getByRole('button', { name: '返回继续学习' }).click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'false');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M09');
+  expect(await durableLedgerRecord(page)).toBe(before);
+});
+
+test('stage replay keeps its exit and both completion choices visible on an accepted phone viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await page.locator('[data-action="preview-jump"][data-value="L01-M07"]').click();
+  await expect(page.locator('.station-header [data-action="preview-exit"]')).toBeVisible();
+  expect((await completeCurrentMicrotask(page)).status).toBe('sandbox-complete');
+
+  const terminal = page.locator('[data-stage-replay-complete="true"]');
+  await expect(terminal.getByRole('button', { name: '返回继续学习' })).toBeVisible();
+  await expect(terminal.getByRole('button', { name: '选择其他阶段' })).toBeVisible();
+  const actionGeometry = await terminal.locator('button').evaluateAll(buttons => buttons.map(button => {
+    const box = button.getBoundingClientRect();
+    return { top: box.top, bottom: box.bottom, left: box.left, right: box.right };
+  }));
+  for (const box of actionGeometry) {
+    expect(box.top).toBeGreaterThanOrEqual(0);
+    expect(box.bottom).toBeLessThanOrEqual(844);
+    expect(box.left).toBeGreaterThanOrEqual(0);
+    expect(box.right).toBeLessThanOrEqual(390);
+  }
+  await noForbiddenScroll(page);
+});
+
+test('settings offers an explicit entry into the existing reached-stage map', async ({ page }) => {
+  await openFresh(page);
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  const before = await durableLedgerRecord(page);
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  const stageEntry = page.locator('[data-action="open-stages"]');
+  await expect(stageEntry).toBeVisible();
+  await expect(stageEntry).toContainText(unit.experience.uiCopy.navigation.chooseStageTitle);
+  await expect(page.locator('#course-stage-map')).toHaveCount(0);
+
+  await stageEntry.click();
+  await expect(page.locator('#course-settings-panel')).toHaveCount(0);
+  await expect(page.locator('#course-stage-map')).toBeVisible();
+  await expect(page.locator('[data-action="preview-jump"][data-value="L01-M07"]')).toBeEnabled();
+  await expect(page.locator('[data-action="preview-jump"][data-value="L01-M08"]')).toBeEnabled();
+  await expect(page.locator('[data-action="preview-jump"][data-value="L01-M09"]')).toBeDisabled();
+  expect(await durableLedgerRecord(page)).toBe(before);
+});
+
+test('stage replay navigation stays unavailable until the child enters the first stage', async ({ page }) => {
+  await openFresh(page);
+
+  await expect(page.locator('.case-progress')).toBeVisible();
+  await expect(page.locator('[data-action="toggle-stages"]')).toHaveCount(0);
+  await page.locator('[data-action="toggle-settings"]').click();
+  await expect(page.locator('[data-action="open-stages"]')).toHaveCount(0);
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  await startOrResume(page);
+  await expect(page.locator('[data-action="toggle-stages"]')).toBeVisible();
+  await page.locator('[data-action="toggle-settings"]').click();
+  await expect(page.locator('[data-action="open-stages"]')).toBeVisible();
+});
+
+test('the real page completes 17 recoverable stages and 29 stable challenges exactly once', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openFresh(page);
+  await startOrResume(page);
+  const observedChallenges = new Set();
+  const storyActions = [];
+  const seenAudioTexts = [];
+  const activeTaskIds = new Set();
+  const sceneModes = new Set();
+  const presentationMoments = new Set();
+  const outcomeRestVariants = new Set();
+  const handoffMomentIds = new Set();
+  const tracking = {
+    observedChallenges,
+    storyActions,
+    seenAudioTexts,
+    activeTaskIds,
+    sceneModes,
+    presentationMoments,
+    outcomeRestVariants,
+    handoffMomentIds
+  };
+
+  for (const [index, task] of tasks.entries()) {
+    let snapshot = await runtimeSnapshot(page);
+    expect(snapshot.microtaskId).toBe(task.microtaskId);
+    expect(snapshot.buildStage).toBe(0);
+
+    await reloadAndResume(page);
+    snapshot = await runtimeSnapshot(page);
+    expect(snapshot.microtaskId).toBe(task.microtaskId);
+    if (task.microtaskId === 'L02-M15') tracking.pauseAtManualPresentation = true;
+    const completed = await completeCurrentMicrotask(page, tracking);
+    delete tracking.pauseAtManualPresentation;
+
+    const projection = (await ledgerProjection(page)).units[unit.unitId];
+    expect(projection.completedMicrotaskIds).toContain(task.microtaskId);
+    expect(projection.completedMicrotaskIds).toHaveLength(index + 1);
+    if (task.microtaskId === 'L01-M12') {
+      await continueRestStop(page, 'lesson1-chapter-stop', tracking);
+    }
+    if (task.microtaskId === 'L02-M15') {
+      const terminalMoment = task.presentation.moments.at(-1);
+      expect(completed).toMatchObject({
+        status: 'active',
+        microtaskId: task.microtaskId,
+        microtaskStatus: 'completed',
+        currentPresentationMomentId: terminalMoment.momentId,
+        presentationAwaitingEnd: true
+      });
+      expect(terminalMoment.enterWhen).toEqual({ kind: 'microtask-complete' });
+      await expect(app(page)).toHaveAttribute('data-scene-mode', 'grammar-lab');
+      await expect(page.locator('.knowledge-layer')).toContainText(
+        unit.authoredContent['NCE-U01-C-KNOWLEDGE-QUESTION'].text
+      );
+      await expect(page.locator('.knowledge-card__detail')).toContainText(
+        unit.authoredContent['NCE-U01-C-KNOWLEDGE-IT'].text
+      );
+      await expect(page.locator('[data-action="knowledge-expand"]')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+      await expect(page.locator('[data-action="presentation-end"]')).toBeEnabled();
+      await expect(app(page)).toHaveAttribute('data-runtime-status', 'active');
+      await page.locator('[data-action="presentation-end"]').click();
+      await expect.poll(() => runtimeSnapshot(page).then(current => current.status)).toBe('rest-stop');
+      await continueRestStop(page, 'lesson2-midpoint-rest-stop', tracking);
+    }
+  }
+
+  const finalSnapshot = await runtimeSnapshot(page);
+  const finalProjection = (await ledgerProjection(page)).units[unit.unitId];
+  expect(finalSnapshot.status).toBe('unit-built');
+  expect(finalSnapshot.buildStage).toBe(5);
+  await expectOutcomeRest(page, 'unit-built', tracking);
+  expect(finalProjection.completedMicrotaskIds).toEqual(tasks.map(task => task.microtaskId));
+  expect(Object.keys(finalProjection.reviewCells)).toHaveLength(29);
+  expect(observedChallenges).toEqual(new Set(tasks.flatMap(task => (
+    task.steps.flatMap(step => (step.challenges || []).map(challenge => challenge.challengeRef))
+  ))));
+  expect(storyActions).toEqual([
+    'handbag->handbag-owner',
+    'coat->handbag-owner'
+  ]);
+  expect(seenAudioTexts.length).toBeGreaterThan(29);
+  expect(seenAudioTexts.every(text => typeof text === 'string' && text.length > 0)).toBe(true);
+  expect(activeTaskIds).toEqual(new Set(tasks.map(task => task.microtaskId)));
+  expect(sceneModes).toEqual(ACTIVE_SCENE_MODES);
+  expect(presentationMoments.size).toBeGreaterThanOrEqual(tasks.length);
+  expect(outcomeRestVariants).toEqual(OUTCOME_REST_VARIANTS);
+  expect(handoffMomentIds).toEqual(new Set([
+    'L01-M11:single-handoff',
+    'L02-M19:coat-handoff'
+  ]));
+  expect(taskById.get('L02-M21').presentation.moments.map(moment => moment.momentId))
+    .toEqual(expect.arrayContaining(['owner-boards-car', 'car-arrives-home']));
+  const growthEffects = await page.evaluate(() => window.__runtimeEffects.filter(effect => (
+    effect.type === 'landmark/build-stage'
+  )));
+  expect(growthEffects).toHaveLength(1);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__lessonScene))).toBe(true);
+  await expect(app(page)).toHaveAttribute('data-view', 'complete');
   await expect(app(page)).toHaveAttribute('data-runtime-status', 'unit-built');
   await expect(app(page)).toHaveAttribute('data-build-stage', '5');
-  const stored = JSON.parse(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY));
-  const projection = stored.value.units['NCE-U01'];
-  expect(projection.completedMicrotaskIds).toHaveLength(12);
-  expect(projection.buildStage).toBe(5);
-  expect(Object.keys(stored.value.targets['NCE-U01-T01'].variantCells)).toHaveLength(8);
-  expect(stored.value.districts['first-book-1-12'].challengeStars).toBe(0);
-  expect(pageErrors).toEqual([]);
+  await expect(page.locator('.completion-card')).toBeVisible();
+  await expect(page.locator('[data-action="start"]')).toHaveCount(0);
 });
 
-test('real ended callbacks gate progress and the next microtask is restored after reload', async ({ page }) => {
-  await installManualAudio(page);
-  await page.setViewportSize({ width: 390, height: 844 });
+test('Lesson 1 saves whole-role recovery, then unlocks a no-progress seven-line manual replay', async ({ page }) => {
+  test.setTimeout(120_000);
+  const formal = taskById.get('L01-M12').steps[0].practice;
+  const manual = outcomePracticeById.get('L01-RS01:manual-dialogue');
+  expect(formal?.rounds).toHaveLength(2);
+  expect(manual?.dialogueTurnRefs).toHaveLength(7);
   await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-
-  for (let segment = 0; segment < 6; segment += 1) {
-    await page.evaluate(() => window.__finishCourseAudio());
-    await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S01');
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M12');
+  await expect(page.locator('.outcome-practice-card--role-enactment')).toBeVisible();
+  if (process.env.CAPTURE_LESSON_ROLE_QA === '1') {
+    await page.screenshot({
+      path: 'output/playwright/lesson1-role-selection-desktop.png',
+      fullPage: true
+    });
   }
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
-  await page.evaluate(() => window.__finishCourseAudio());
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
-
-  await clickValue(page, 'select-entity', 'handbag-owner');
-  await page.evaluate(() => window.__finishCourseAudio());
-  await clickValue(page, 'select-entity', 'handbag');
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-
-  const stored = JSON.parse(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY));
-  expect(stored.value.units['NCE-U01'].checkpoint.microtaskId).toBe('L01-M01');
-  expect(stored.value.units['NCE-U01'].buildStage).toBe(0);
-  await page.reload();
-  await page.locator('[data-action="start"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-});
-
-test('audio failure requires an explicit visual fallback and never advances on elapsed time', async ({ page }) => {
-  await installInstantAudio(page, { failVoice: true });
-  await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-phase', 'audio-fallback');
-  await page.waitForTimeout(80);
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S01');
-  await page.locator('[data-action="audio-continue"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
-});
-
-test('the course exposes no background-music control without a reviewed track', async ({ page }) => {
-  await installInstantAudio(page);
-  await openFresh(page);
-  await expect(page.locator('[data-action="toggle-music"]')).toHaveCount(0);
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
-});
-
-test('playing English creates no ambient track', async ({ page }) => {
-  await installManualAudio(page);
-  await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-  expect(await page.evaluate(() => window.__courseAudioStarts)).toHaveLength(1);
-  expect(await page.evaluate(() => window.__courseAudioStarts.some(
-    src => /ambience|background/i.test(src)
-  ))).toBe(false);
-});
-
-test('a child can cancel or confirm restarting mid-unit without resurrecting background audio', async ({ page }) => {
-  await installInstantAudio(page);
+  const desktopViewport = page.viewportSize();
   await page.setViewportSize({ width: 390, height: 844 });
-  await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
-
-  await clickValue(page, 'select-entity', 'handbag-owner');
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S03');
-  await clickValue(page, 'select-entity', 'handbag');
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
-
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '重新开始本单元' }).click();
-  const dialog = page.getByRole('dialog', { name: '要重新开始吗？' });
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole('button', { name: '继续学习' }).click();
-  await expect(dialog).toBeHidden();
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
-
-  await page.locator('[data-action="toggle-settings"]').click();
-  await page.getByRole('button', { name: '重新开始本单元' }).click();
-  await page.getByRole('dialog', { name: '要重新开始吗？' })
-    .getByRole('button', { name: '确认重新开始' }).click();
-  await expect(page.locator('[data-action="start"]')).toBeVisible();
-  await expect(page.locator('[data-action="toggle-music"]')).toHaveCount(0);
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
-});
-
-test('the local stage navigator previews any microtask without changing durable progress', async ({ page }) => {
-  await installInstantAudio(page);
-  await page.setViewportSize({ width: 390, height: 844 });
-  await openFresh(page);
-  await enterFirstMission(page);
-  await page.locator('[data-action="audio-play"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-step', 'L01-M01:S02');
-  await clickValue(page, 'select-entity', 'handbag-owner');
-  await clickValue(page, 'select-entity', 'handbag');
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-  const durableBefore = await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY);
-
-  await page.locator('[data-action="toggle-settings"]').click();
-  for (const [index, task] of tasks.entries()) {
-    await expect(page.getByRole('button', { name: `阶段 ${index + 1}：${task.presentation.title}` }))
-      .toBeVisible();
+  await expect(page.locator('.outcome-practice-card--role-enactment')).toBeVisible();
+  await expect(page.locator('.role-practice-character__name')).toHaveCount(2);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  if (process.env.CAPTURE_LESSON_ROLE_QA === '1') {
+    await page.screenshot({
+      path: 'output/playwright/lesson1-role-selection-phone.png',
+      fullPage: true
+    });
   }
-  await page.getByRole('button', { name: '阶段 12：三案合闸' }).click();
-  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L02-M07');
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBe(durableBefore);
+  await page.setViewportSize(desktopViewport);
+  await expectOptionalPracticeHasNoGamification(page);
+  const leftCharacter = page.locator('.role-practice-character--left');
+  const rightCharacter = page.locator('.role-practice-character--right');
+  await expect(leftCharacter).toHaveAttribute('data-entity-id', formal.castOrder[0]);
+  await expect(rightCharacter).toHaveAttribute('data-entity-id', formal.castOrder[1]);
 
-  await page.locator('[data-action="perform-direct"]').click();
-  await expect(app(page)).toHaveAttribute('data-runtime-status', 'unit-built');
-  await expect(page.locator('.case-progress')).toContainText('12 / 12');
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBe(durableBefore);
+  const ownerRound = formal.rounds.find(round => round.roleEntityId === 'handbag-owner');
+  const keeperRound = formal.rounds.find(round => round.roleEntityId === 'station-keeper');
+  let startsBefore = await courseAudioStartCount(page);
+  startsBefore = await finishFormalRoleRound(page, formal, ownerRound, startsBefore);
+  const afterOwner = (await ledgerProjection(page)).units[unit.unitId];
+  expect(afterOwner.completedMicrotaskIds).not.toContain('L01-M12');
+  expect(afterOwner.rolePracticeProgress[formal.practiceId].completedRoundIds)
+    .toEqual([ownerRound.roundId]);
 
-  await page.getByRole('button', { name: '退出阶段预览' }).click();
+  await reloadAndResume(page);
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M12');
+  await expect(page.locator(
+    `[data-action="practice-role-select"][data-value="${ownerRound.roundId}"]`
+  )).toBeDisabled();
+  await expect(leftCharacter).toHaveAttribute('data-entity-id', formal.castOrder[0]);
+  await expect(rightCharacter).toHaveAttribute('data-entity-id', formal.castOrder[1]);
+  startsBefore = await courseAudioStartCount(page);
+  await finishFormalRoleRound(page, formal, keeperRound, startsBefore);
+  await expect(page.locator('.outcome-practice-card--role-enactment'))
+    .toHaveAttribute('data-practice-phase', 'all-roles-complete');
+  await expect(page.locator('[data-action="practice-enter-manual"]')).toBeVisible();
+  await page.locator('[data-action="practice-continue-course"]').click();
+  await expectOutcomeRest(page, 'lesson1-chapter-stop');
+
+  const baseline = await mainlineIsolationRecord(page);
+  await page.locator('[data-action="toggle-stages"]').click();
+  const manualEntry = page.locator(
+    `.stage-practice-tool[data-action="start-outcome-practice"][data-value="${manual.practiceId}"]`
+  );
+  await expect(manualEntry).toBeVisible();
+  await manualEntry.click();
+  await expect(page.locator('.outcome-practice-card--manual-dialogue')).toBeVisible();
+  await expect(app(page)).toHaveAttribute('data-scene-mode', manual.sceneMode);
+  await expect(app(page)).toHaveAttribute('data-scene-variant', manual.sceneVariant);
+  await expect(page.locator('.station-world')).toHaveAttribute('data-prop-surface', manual.propSurface);
+  await expect(page.locator('.role-practice-counter-surface')).toHaveCount(1);
+  await expect(page.locator(
+    '.role-practice-counter-surface > .role-practice-counter-prop[data-entity-id="handbag"]'
+  )).toBeVisible();
+  if (process.env.CAPTURE_LESSON_ROLE_QA === '1') {
+    await page.screenshot({
+      path: 'output/playwright/lesson1-manual-dialogue-desktop.png',
+      fullPage: true
+    });
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.outcome-practice-card--manual-dialogue')).toBeVisible();
+  await expect(page.locator('.role-practice-character__speaker')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  if (process.env.CAPTURE_LESSON_ROLE_QA === '1') {
+    await page.screenshot({
+      path: 'output/playwright/lesson1-manual-dialogue-phone.png',
+      fullPage: true
+    });
+  }
+  await page.setViewportSize(desktopViewport);
+  await expectOptionalPracticeHasNoGamification(page);
+  await expectMainlineUnchanged(page, baseline);
+  for (const sourceRef of manual.dialogueTurnRefs) {
+    await expect(page.getByText(sourceByRef.get(sourceRef).text, { exact: true })).toHaveCount(0);
+  }
+
+  const firstHint = manual.turnHints[0];
+  await page.locator('[data-action="practice-hint"]').click();
+  await expect(page.locator('.manual-dialogue-hint')).toContainText(firstHint.intent);
+  await expect(page.locator('.manual-dialogue-hint')).not.toContainText(firstHint.openingChunk);
+  await page.locator('[data-action="practice-hint"]').click();
+  await expect(page.locator('.manual-dialogue-hint')).toContainText(firstHint.openingChunk);
+
+  startsBefore = await courseAudioStartCount(page);
+  for (const [index, sourceRef] of manual.dialogueTurnRefs.entries()) {
+    const line = page.locator(`.manual-dialogue-line[data-source-ref="${sourceRef}"]`);
+    await expect(line).toHaveClass(/is-current/);
+    await page.locator('[data-action="practice-reveal"]').click();
+    await expect(line).toContainText(sourceByRef.get(sourceRef).text);
+    startsBefore = await expectPracticeAudioStarted(page, sourceRef, startsBefore);
+    await expect(page.locator('[data-action="practice-reveal"]')).toHaveCount(0);
+    await finishOneAudio(page);
+    if (index === 0) {
+      const secondLine = page.locator(
+        `.manual-dialogue-line[data-source-ref="${manual.dialogueTurnRefs[1]}"]`
+      );
+      await expect(secondLine).toHaveClass(/is-current/);
+      await line.locator('[data-action="practice-line-replay"]').click();
+      startsBefore = await expectPracticeAudioStarted(page, sourceRef, startsBefore);
+      await finishOneAudio(page);
+      await expect(secondLine).toHaveClass(/is-current/);
+    }
+  }
+  await expect(page.locator('.outcome-practice-card--manual-dialogue'))
+    .toHaveAttribute('data-practice-phase', 'manual-complete');
+  await expect(page.locator('[data-action="practice-restart"]')).toBeVisible();
+  await expect(page.locator('[data-action="practice-return-mainline"]'))
+    .toHaveText(manual.returnMainlineLabel);
+  for (const sourceRef of manual.dialogueTurnRefs) {
+    await expect(page.locator(
+      `.manual-dialogue-line[data-source-ref="${sourceRef}"]`
+    )).toContainText(sourceByRef.get(sourceRef).text);
+  }
+  await expectMainlineUnchanged(page, baseline);
+  await page.locator('[data-action="practice-return-mainline"]').click();
+  await expect(page.locator('#course-stage-map')).toHaveCount(0);
+  await expectOutcomeRest(page, 'lesson1-chapter-stop');
+  await expectMainlineUnchanged(page, baseline);
+});
+
+test('unit recap gates all three answers on real ended and replay only opens the completed stage map', async ({ page }) => {
+  test.setTimeout(120_000);
+  const practice = outcomePracticeById.get('NCE-U01-OUTCOME:case-recap');
+  expect(practice?.items).toHaveLength(3);
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L02-M21');
+  await completeCurrentMicrotask(page);
+  await expectOutcomeRest(page, 'unit-built');
+
+  const baseline = await mainlineIsolationRecord(page);
+  expect(baseline.rawStorage).toBeTruthy();
+  const entry = page.locator(
+    `[data-action="start-outcome-practice"][data-value="${practice.practiceId}"]`
+  );
+  await expect(entry).toBeVisible({ timeout: 5_000 });
+  await entry.click();
+  await expect(page.locator('.outcome-practice-card--case-recap')).toBeVisible();
+  await expectOptionalPracticeHasNoGamification(page);
+  await expectMainlineUnchanged(page, baseline);
+
+  const firstItem = practice.items[0];
+  const firstWrong = firstItem.options.find(option => (
+    !recapOptionMatchesRule(option, firstItem.answerRule)
+  ));
+  const startsBeforeWrong = await courseAudioStartCount(page);
+  await page.locator(
+    `[data-action="practice-submit"][data-value="${firstWrong.optionId}"]`
+  ).click();
+  await expect(page.locator('.practice-answer-feedback.is-wrong')).toHaveText(practice.wrongCopy);
+  expect(await courseAudioStartCount(page)).toBe(startsBeforeWrong);
+  await expect(page.locator(
+    '[data-action="practice-next"], [data-action="practice-finish"]'
+  )).toHaveCount(0);
+  await expectMainlineUnchanged(page, baseline);
+
+  await page.locator('[data-action="practice-exit"]').click();
+  await expectOutcomeRest(page, 'unit-built');
+  await expectMainlineUnchanged(page, baseline);
+  await expect(entry).toBeVisible({ timeout: 5_000 });
+  await entry.click();
+  await expect(page.locator('.outcome-practice-card--case-recap')).toBeVisible();
+  await expectMainlineUnchanged(page, baseline);
+
+  await page.locator(
+    `[data-action="practice-submit"][data-value="${firstWrong.optionId}"]`
+  ).click();
+  await expect(page.locator('.practice-answer-feedback.is-wrong')).toHaveText(practice.wrongCopy);
+  await expectMainlineUnchanged(page, baseline);
+
+  for (const [index, item] of practice.items.entries()) {
+    await expect(page.getByRole('heading', {
+      name: unit.authoredContent[item.promptRef].text
+    })).toBeVisible();
+    await answerRecapCorrectly(page, item, index === practice.items.length - 1);
+    await expectMainlineUnchanged(page, baseline);
+    if (index < practice.items.length - 1) {
+      await page.locator('[data-action="practice-next"]').click();
+    }
+  }
+
+  await page.locator('[data-action="practice-finish"]').click();
+  await expect(page.locator('.practice-finished')).toContainText(practice.finishedTitle);
+  await expectOptionalPracticeHasNoGamification(page);
+  await expectMainlineUnchanged(page, baseline);
+  await page.locator('[data-action="practice-exit"]').click();
+  await expectOutcomeRest(page, 'unit-built');
+  await expectMainlineUnchanged(page, baseline);
+
+  await page.locator('[data-action="replay"]').click();
+  await expect(page.locator('#course-stage-map')).toBeVisible();
   await expect(app(page)).toHaveAttribute('data-preview-mode', 'false');
-  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M02');
-  expect(await page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBe(durableBefore);
+  await expect(page.locator(
+    '#course-stage-map [data-action="preview-jump"]:not(:disabled)'
+  )).toHaveCount(tasks.length);
+  await expectMainlineUnchanged(page, baseline);
+  await page.locator('[data-action="close-stages"]').click();
+  await expect(page.locator('.completion-card')).toBeVisible();
+  await expectMainlineUnchanged(page, baseline);
+});
+
+test('a final save failure cannot grow the landmark and a retry grows it only once', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L02-M21');
+  const observedChallenges = new Set();
+  const tracking = { observedChallenges, storyActions: [], seenAudioTexts: [] };
+
+  while ((await runtimeSnapshot(page)).challengeRef !== 'L02-M21:C02') {
+    await answerCurrent(page, tracking);
+    await drainAudio(page, tracking.seenAudioTexts);
+  }
+  await page.evaluate(() => { window.__failLedgerWrites = true; });
+  await answerCurrent(page, tracking);
+  await drainAudio(page, tracking.seenAudioTexts, tracking);
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.phase)).toBe('persistence-retry');
+  const failedSnapshot = await settlePresentation(page, tracking);
+  expect(failedSnapshot.buildStage).toBe(0);
+  const pendingRecordBeforeReload = await page.evaluate(pendingKey => (
+    localStorage.getItem(pendingKey)
+  ), PENDING_COMMIT_KEY);
+  expect(pendingRecordBeforeReload).toBeTruthy();
+  const pendingPayloadBeforeReload = JSON.parse(pendingRecordBeforeReload).value.payload;
+  expect(pendingPayloadBeforeReload.microtaskId).toBe('L02-M21');
+  expect(pendingPayloadBeforeReload.targetResults).toEqual(failedSnapshot.temporaryResults);
+  expect((await ledgerProjection(page)).units[unit.unitId].completedMicrotaskIds).not.toContain('L02-M21');
+  expect(await page.evaluate(() => window.__runtimeEffects.filter(effect => (
+    effect.type === 'landmark/build-stage'
+  )).length)).toBe(0);
+  await expect(page.locator('[data-action="persistence-retry"]')).toBeVisible();
+
+  await reloadAndResume(page);
+  const restored = await settlePresentation(page, tracking);
+  expect(restored).toMatchObject({
+    microtaskId: 'L02-M21',
+    phase: 'persistence-retry',
+    microtaskStatus: 'answered',
+    buildStage: 0
+  });
+  expect(restored.pendingCommit.payload).toEqual(pendingPayloadBeforeReload);
+  expect(restored.temporaryResults).toEqual(pendingPayloadBeforeReload.targetResults);
+  expect(await page.evaluate(pendingKey => localStorage.getItem(pendingKey), PENDING_COMMIT_KEY))
+    .toBe(pendingRecordBeforeReload);
+  await expect(page.locator('[data-action="persistence-retry"]')).toBeVisible();
+  await expect(page.locator([
+    '[data-action="select-entity"]',
+    '[data-action="select-target"]',
+    '[data-action="select-source"]',
+    '[data-action="select-diagnostic"]',
+    '[data-action="add-block"]',
+    '[data-action="connect-reference"]'
+  ].join(','))).toHaveCount(0);
+
+  await page.locator('[data-action="persistence-retry"]').click();
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.status)).toBe('unit-built');
+  expect((await runtimeSnapshot(page)).buildStage).toBe(5);
+  expect(await page.evaluate(() => window.__runtimeEffects.filter(effect => (
+    effect.type === 'landmark/build-stage'
+  )).length)).toBe(1);
+  await expect(page.locator('[data-action="persistence-retry"]')).toHaveCount(0);
+  expect(JSON.parse(await page.evaluate(pendingKey => (
+    localStorage.getItem(pendingKey)
+  ), PENDING_COMMIT_KEY)).value).toBeNull();
+  await expectOutcomeRest(page, 'unit-built');
+});
+
+test('desktop and accepted phone widths have no horizontal or nested-card scrolling', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openFresh(page);
+  await startOrResume(page);
+  const viewports = [
+    { width: 1440, height: 900 },
+    { width: 360, height: 640 },
+    { width: 390, height: 844 },
+    { width: 430, height: 932 },
+    { width: 844, height: 390, landscape: true },
+    { width: 390, height: 844 }
+  ];
+  const inspectAllViewports = async () => {
+    const beforeRotation = await runtimeSnapshot(page);
+    const stableRuntimePosition = {
+      status: beforeRotation.status,
+      phase: beforeRotation.phase,
+      microtaskId: beforeRotation.microtaskId,
+      challengeRef: beforeRotation.challengeRef,
+      currentPresentationMomentId: beforeRotation.currentPresentationMomentId,
+      temporaryResults: beforeRotation.temporaryResults
+    };
+    for (const viewport of viewports) {
+      await page.setViewportSize(viewport);
+      if (viewport.landscape) {
+        await expect(page.locator('.portrait-hint')).toBeVisible();
+        await expect(page.locator('.portrait-hint')).toHaveText(unit.experience.uiCopy.scene.portraitHint);
+      } else {
+        await expect(page.locator('.portrait-hint')).toBeHidden();
+      }
+      await noForbiddenScroll(page);
+      const afterRotation = await runtimeSnapshot(page);
+      expect({
+        status: afterRotation.status,
+        phase: afterRotation.phase,
+        microtaskId: afterRotation.microtaskId,
+        challengeRef: afterRotation.challengeRef,
+        currentPresentationMomentId: afterRotation.currentPresentationMomentId,
+        temporaryResults: afterRotation.temporaryResults
+      }).toEqual(stableRuntimePosition);
+    }
+  };
+
+  await inspectAllViewports();
+  await advanceTo(page, 'L01-M12');
+  await completeCurrentMicrotask(page);
+  await expectOutcomeRest(page, 'lesson1-chapter-stop');
+  await inspectAllViewports();
+  await continueRestStop(page, 'lesson1-chapter-stop');
+  await expect(app(page)).toHaveAttribute('data-scene-mode', 'object-workbench');
+  await inspectAllViewports();
+  await advanceTo(page, 'L02-M15');
+  await expect(app(page)).toHaveAttribute('data-scene-mode', 'grammar-lab');
+  await inspectAllViewports();
+  await completeCurrentMicrotask(page, { pauseAtManualPresentation: true });
+  await inspectAllViewports();
+  await page.locator('[data-action="presentation-end"]').click();
+  await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.status)).toBe('rest-stop');
+  await expectOutcomeRest(page, 'lesson2-midpoint-rest-stop');
+  await inspectAllViewports();
+  await continueRestStop(page, 'lesson2-midpoint-rest-stop');
+  await advanceTo(page, 'L02-M20');
+  await expect(app(page)).toHaveAttribute('data-scene-mode', 'story-journey');
+  await inspectAllViewports();
+  await advanceTo(page, 'L02-M21');
+  await page.setViewportSize({ width: 844, height: 390 });
+  await expect(page.locator('.portrait-hint')).toBeVisible();
+  await completeCurrentMicrotask(page);
+  await expectOutcomeRest(page, 'unit-built');
+  await inspectAllViewports();
+});
+
+test('the main experience links to the isolated catalog-owned cross-day review contract', async () => {
+  expect(unit.experience.reviewRun).toMatchObject({
+    href: '/poc/lesson1-2-review/',
+    itemRange: [2, 4],
+    durationSecondsRange: [45, 90],
+    deferLabel: expect.any(String),
+    heartPool: 'isolated-three-hearts',
+    zeroAction: 'restart-entire-review-run'
+  });
+  expect(unit.experience.reviewRun.copy).toMatchObject({
+    entryTitle: expect.any(String),
+    startLabel: expect.any(String)
+  });
+  expect(Object.keys(unit.reviewContexts)).toHaveLength(4);
+});
+
+test('inspection remediation keeps the role scene on the real counter with stable desktop characters', async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M07');
+
+  const storyGeometry = await page.locator(
+    '.scene-people > .scene-character[data-entity-id]'
+  ).evaluateAll(elements => Object.fromEntries(elements.map(element => {
+    const box = element.getBoundingClientRect();
+    return [element.dataset.entityId, {
+      width: box.width,
+      height: box.height,
+      bottom: window.innerHeight - box.bottom
+    }];
+  })));
+  expect(Object.keys(storyGeometry).sort()).toEqual(['handbag-owner', 'station-keeper']);
+
+  await advanceTo(page, 'L01-M12');
+  const practiceGeometry = await page.locator(
+    '.role-practice-character[data-entity-id]'
+  ).evaluateAll(elements => Object.fromEntries(elements.map(element => {
+    const box = element.getBoundingClientRect();
+    return [element.dataset.entityId, {
+      width: box.width,
+      height: box.height,
+      bottom: window.innerHeight - box.bottom
+    }];
+  })));
+  expect(Object.keys(practiceGeometry).sort()).toEqual(['handbag-owner', 'station-keeper']);
+  for (const entityId of Object.keys(storyGeometry)) {
+    const widthRatio = practiceGeometry[entityId].width / storyGeometry[entityId].width;
+    const heightRatio = practiceGeometry[entityId].height / storyGeometry[entityId].height;
+    expect(widthRatio, `${entityId} width must stay stable within the desktop profile`)
+      .toBeGreaterThanOrEqual(0.88);
+    expect(widthRatio, `${entityId} width must stay stable within the desktop profile`)
+      .toBeLessThanOrEqual(1.12);
+    expect(heightRatio, `${entityId} height must stay stable within the desktop profile`)
+      .toBeGreaterThanOrEqual(0.88);
+    expect(heightRatio, `${entityId} height must stay stable within the desktop profile`)
+      .toBeLessThanOrEqual(1.12);
+    expect(Math.abs(practiceGeometry[entityId].bottom - storyGeometry[entityId].bottom))
+      .toBeLessThanOrEqual(32);
+  }
+
+  const counterPaint = await page.locator('.role-practice-counter-surface').evaluate(element => {
+    const style = getComputedStyle(element);
+    return {
+      backgroundImage: style.backgroundImage,
+      backgroundColor: style.backgroundColor,
+      borderTopWidth: style.borderTopWidth,
+      borderRightWidth: style.borderRightWidth,
+      borderBottomWidth: style.borderBottomWidth,
+      borderLeftWidth: style.borderLeftWidth,
+      boxShadow: style.boxShadow
+    };
+  });
+  expect(counterPaint).toEqual({
+    backgroundImage: 'none',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    borderTopWidth: '0px',
+    borderRightWidth: '0px',
+    borderBottomWidth: '0px',
+    borderLeftWidth: '0px',
+    boxShadow: 'none'
+  });
+});
+
+test('inspection remediation atomically leaves role practice when replaying stage one', async ({ page }) => {
+  test.setTimeout(180_000);
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M12');
+  await expect(page.locator('.outcome-practice-card--role-enactment')).toBeVisible();
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await page.locator('[data-action="preview-jump"][data-value="L01-M07"]').click();
+
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M07');
+  await expect(page.locator('.outcome-practice-card--role-enactment')).toHaveCount(0);
+  await expect(page.locator('.dialogue-listen')).toBeVisible();
+  const replayed = await runtimeSnapshot(page);
+  expect(replayed).toMatchObject({ microtaskId: 'L01-M07', status: 'active' });
+});
+
+test('inspection remediation removes drag affordances from the four personal-item stages', async ({ page }) => {
+  test.setTimeout(240_000);
+  await openFresh(page);
+  await startOrResume(page);
+
+  for (const microtaskId of ['L02-M11', 'L02-M12', 'L02-M13', 'L02-M14']) {
+    await advanceTo(page, microtaskId);
+    await expect(app(page)).toHaveAttribute('data-runtime-microtask', microtaskId);
+    await expect(page.locator('[data-drag-source], [data-drop-target], [draggable="true"]'))
+      .toHaveCount(0);
+    await expect(page.locator('.stage-prompt, .mission-prompt').first())
+      .not.toContainText(/拖|贴到|放到|放回/);
+    await completeCurrentMicrotask(page);
+  }
+});
+
+test('inspection remediation keeps both people in stage eleven and uses the theme replay icon only', async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page);
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L02-M15');
+
+  const people = page.locator('.scene-people > .scene-character[data-entity-id]');
+  await expect(people).toHaveCount(2);
+  await expect(page.locator('.scene-character[data-entity-id="station-keeper"]')).toBeVisible();
+  await expect(page.locator('.scene-character[data-entity-id="handbag-owner"]')).toBeVisible();
+
+  const firstChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, firstChallenge.answerRule, firstChallenge);
+  snapshot = await drainAudio(page);
+  expect(snapshot).toMatchObject({ microtaskId: 'L02-M15', stepId: 'L02-M15:S03' });
+
+  const replay = page.locator('.shared-listen-replay');
+  await expect(replay).toBeVisible();
+  await expect(replay.locator('small')).toHaveCount(0);
+  const replayButton = replay.getByRole('button', { name: '重新播放英文' });
+  await expect(replayButton).toBeVisible();
+  await expect(replayButton).toHaveText('');
+  await expect(replayButton.locator('img[src*="starlight-audio-replay-v1"]')).toHaveCount(1);
+  await expect(page.locator('.scene-props > button.scene-prop')).toHaveCount(3);
+  await expect(page.locator('.interaction-space .prop-shelf')).toHaveCount(0);
+});
+
+test('inspection remediation hands the bag to its owner with one click and waits after her thanks', async ({ page }) => {
+  test.setTimeout(180_000);
+  await openFresh(page);
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L01-M11');
+  const labelChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, labelChallenge.answerRule, labelChallenge);
+  snapshot = await drainAudio(page);
+  expect(snapshot).toMatchObject({ microtaskId: 'L01-M11', stepId: 'L01-M11:S04' });
+  const thanksChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, thanksChallenge.answerRule, thanksChallenge);
+  snapshot = await drainAudio(page);
+  expect(snapshot).toMatchObject({ microtaskId: 'L01-M11', stepId: 'L01-M11:S03' });
+
+  await expect(page.locator('[data-drag-source], [data-drop-target], [draggable="true"]'))
+    .toHaveCount(0);
+  const inactiveHandbag = page.locator('button.scene-prop[data-entity-id="handbag"]');
+  await expect(inactiveHandbag).toBeDisabled();
+  await expect(inactiveHandbag).not.toHaveAttribute('data-action');
+  const owner = page.locator('button.scene-character[data-entity-id="handbag-owner"]');
+  await expect(owner).toBeVisible();
+  await owner.click();
+
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase))
+    .toBe('audio-playing');
+  snapshot = await runtimeSnapshot(page);
+  expect(snapshot.audio.currentSegment.text).toBe('Thank you very much.');
+  expect(snapshot.audio.currentSegment.speaker).toBe('woman');
+  await expect(page.locator('[data-action="presentation-end"]')).toHaveCount(0);
+  await finishOneAudio(page);
+  await expect(page.locator('[data-action="presentation-end"]')).toBeVisible();
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    microtaskId: 'L01-M11',
+    status: 'active'
+  });
+});
+
+test('R2 keeps listen, replay, real candidates and correct pronunciation in one stable workbench', async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L02-M11');
+
+  await expect(page.locator('.inline-language-replay')).toBeVisible();
+  await expect(page.locator('.shared-listen-replay__button')).toBeVisible();
+  await expect(page.locator('.scene-props > button.scene-prop')).toHaveCount(4);
+  await expect(page.locator('.interaction-space .prop-shelf')).toHaveCount(0);
+  await expect(page.locator('.feedback-audio-state')).toHaveCount(0);
+  await expect(page.locator('.scene-prop.is-correct-response')).toHaveCount(0);
+
+  await page.evaluate(() => {
+    window.__r2StableWordWorld = document.querySelector('.station-world');
+    window.__r2StableWordConsole = document.querySelector('.mission-console');
+  });
+  await page.locator('.shared-listen-replay__button').click();
+  expect(await page.evaluate(() => (
+    window.__r2StableWordWorld === document.querySelector('.station-world')
+    && window.__r2StableWordConsole === document.querySelector('.mission-console')
+  ))).toBe(true);
+  await finishOneAudio(page);
+
+  snapshot = await runtimeSnapshot(page);
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  await expect(page.locator('.feedback-audio-state, .feedback-bubble[data-tone="correct"]'))
+    .toHaveCount(0);
+  await expect(page.locator('.inline-language-replay')).toBeVisible();
+  await expect(page.locator('.scene-props > .scene-prop')).toHaveCount(4);
+  const correctEntity = page.locator('.scene-prop.is-correct-response');
+  await expect(correctEntity).toHaveCount(1);
+  await expect(correctEntity).toHaveAttribute('data-entity-id', 'pen');
+  expect(await correctEntity.evaluate(element => getComputedStyle(element).animationName))
+    .toContain('r2-correct-settle');
+  await expect(page.locator('.adventure-heart-gauge')).toBeVisible();
+  await expect(page.locator('.adventure-heart.is-full')).toHaveCount(3);
+});
+
+test('QA-MUST-01 flicker regression: same-stage actions never remount the story stage', async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L02-M11');
+
+  await page.evaluate(() => {
+    window.__flickerGuardWorld = document.querySelector('.station-world');
+    window.__flickerGuardFrame = document.querySelector('.scene-frame');
+    window.__flickerGuardFrameImage = document.querySelector('.scene-frame img');
+    window.__flickerGuardConsole = document.querySelector('.mission-console');
+    window.__flickerGuardEntities = [...document.querySelectorAll(
+      '.scene-character[data-entity-id], .scene-prop[data-entity-id]'
+    )].map(element => ({
+      entityId: element.dataset.entityId,
+      element,
+      picture: element.querySelector('picture'),
+      image: element.querySelector('img')
+    }));
+  });
+  const stableStage = () => page.evaluate(() => ({
+    world: window.__flickerGuardWorld === document.querySelector('.station-world'),
+    frame: window.__flickerGuardFrame === document.querySelector('.scene-frame')
+      && window.__flickerGuardFrameImage === document.querySelector('.scene-frame img'),
+    console: window.__flickerGuardConsole === document.querySelector('.mission-console'),
+    entities: window.__flickerGuardEntities.every(({ entityId, element, picture, image }) => {
+      const current = document.querySelector(`[data-entity-id="${entityId}"]`);
+      return element === current
+        && picture === current?.querySelector('picture')
+        && image === current?.querySelector('img');
+    })
+  }));
+  const visibleStage = () => page.evaluate(() => {
+    const visible = element => {
+      if (!element) return false;
+      const style = getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      return style.display !== 'none'
+        && style.visibility !== 'hidden'
+        && Number(style.opacity) > 0
+        && box.width > 0
+        && box.height > 0;
+    };
+    const consoleElement = document.querySelector('.mission-console');
+    const characters = [...document.querySelectorAll('.scene-character[data-entity-id]')];
+    const content = [...(consoleElement?.querySelectorAll('*') || [])].filter(element => (
+      element.textContent?.trim()
+      && !element.closest('.adventure-heart-gauge, .heart-row')
+    ));
+    return {
+      world: visible(document.querySelector('.station-world')),
+      frame: visible(document.querySelector('.scene-frame')),
+      console: visible(consoleElement),
+      visibleCharacters: characters.filter(visible).length,
+      visibleContent: content.filter(visible).length
+    };
+  });
+  const expectedVisibleCharacters = (await visibleStage()).visibleCharacters;
+
+  await page.locator('.shared-listen-replay__button').click();
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  await finishOneAudio(page);
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  snapshot = await runtimeSnapshot(page);
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge);
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  await finishOneAudio(page);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase))
+    .toBe('awaiting-response');
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  snapshot = await runtimeSnapshot(page);
+  const nextChallenge = activeContract(snapshot).challenge;
+  await submitRule(page, nextChallenge.answerRule, nextChallenge, { correct: false });
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  await page.locator('[data-action="toggle-settings"]').click();
+  await expect(page.locator('#course-settings-panel')).toBeVisible();
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+  await page.locator('[data-action="toggle-settings"]').click();
+  await expect(page.locator('#course-settings-panel')).toHaveCount(0);
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await expect(page.locator('#course-stage-map')).toBeVisible();
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+  await page.locator('[data-action="close-stages"]').click();
+  await expect(page.locator('#course-stage-map')).toHaveCount(0);
+  expect(await stableStage()).toEqual({ world: true, frame: true, console: true, entities: true });
+
+  for (const viewport of [
+    { width: 1280, height: 720 },
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+    { width: 844, height: 390 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await expect.poll(() => page.evaluate(() => ({
+      width: window.innerWidth,
+      height: window.innerHeight
+    }))).toEqual(viewport);
+    await page.evaluate(() => new Promise(resolve => {
+      requestAnimationFrame(() => requestAnimationFrame(resolve));
+    }));
+    expect(await stableStage(), JSON.stringify(viewport)).toEqual({
+      world: true,
+      frame: true,
+      console: true,
+      entities: true
+    });
+    expect(await visibleStage(), JSON.stringify(viewport)).toMatchObject({
+      world: true,
+      frame: true,
+      console: true,
+      visibleCharacters: expectedVisibleCharacters
+    });
+    expect((await visibleStage()).visibleContent).toBeGreaterThan(0);
+    await page.locator('[data-action="toggle-stages"]').click();
+    await expect(page.locator('#course-stage-map')).toBeVisible();
+    expect(await stableStage(), JSON.stringify(viewport)).toEqual({
+      world: true,
+      frame: true,
+      console: true,
+      entities: true
+    });
+    expect(await visibleStage(), JSON.stringify(viewport)).toMatchObject({
+      world: true,
+      frame: true,
+      console: true,
+      visibleCharacters: expectedVisibleCharacters
+    });
+    expect((await visibleStage()).visibleContent).toBeGreaterThan(0);
+    await page.locator('[data-action="close-stages"]').click();
+    await expect(page.locator('#course-stage-map')).toHaveCount(0);
+    expect(await stableStage(), JSON.stringify(viewport)).toEqual({
+      world: true,
+      frame: true,
+      console: true,
+      entities: true
+    });
+    expect(await visibleStage(), JSON.stringify(viewport)).toMatchObject({
+      world: true,
+      frame: true,
+      console: true,
+      visibleCharacters: expectedVisibleCharacters
+    });
+    expect((await visibleStage()).visibleContent).toBeGreaterThan(0);
+  }
+});
+
+test('QA-MUST-01 flicker regression: stage replay enters and returns without an empty frame', async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  await completeCurrentMicrotask(page);
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M08');
+  await page.locator('.scene-frame img').evaluate(async image => {
+    if (!image.complete) {
+      await new Promise((resolve, reject) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', reject, { once: true });
+      });
+    }
+    await image.decode?.();
+  });
+
+  await page.evaluate(() => {
+    window.__atomicFrameGuard = {
+      active: true,
+      samples: 0,
+      failures: []
+    };
+    const sample = () => {
+      const guard = window.__atomicFrameGuard;
+      if (!guard?.active) return;
+      const worlds = document.querySelectorAll('.station-world');
+      const frames = document.querySelectorAll('.scene-frame');
+      const consoles = document.querySelectorAll('.mission-console');
+      const characters = [...document.querySelectorAll('.scene-character[data-entity-id]')];
+      const world = worlds[0];
+      const frame = frames[0];
+      const consoleElement = consoles[0];
+      const image = frame?.querySelector('img');
+      const worldBox = world?.getBoundingClientRect();
+      const frameBox = frame?.getBoundingClientRect();
+      const consoleBox = consoleElement?.getBoundingClientRect();
+      const frameStyle = frame ? getComputedStyle(frame) : null;
+      const consoleStyle = consoleElement ? getComputedStyle(consoleElement) : null;
+      const visible = element => {
+        if (!element) return false;
+        const style = getComputedStyle(element);
+        const box = element.getBoundingClientRect();
+        return style.display !== 'none'
+          && style.visibility !== 'hidden'
+          && Number(style.opacity) > 0
+          && box.width > 0
+          && box.height > 0;
+      };
+      const visibleCharacters = characters.filter(visible);
+      const visibleContent = [...(consoleElement?.querySelectorAll('*') || [])].filter(element => (
+        element.textContent?.trim()
+        && !element.closest('.adventure-heart-gauge, .heart-row')
+        && visible(element)
+      ));
+      guard.samples += 1;
+      if (
+        worlds.length !== 1
+        || frames.length !== 1
+        || consoles.length !== 1
+        || !image
+        || !image.complete
+        || image.naturalWidth === 0
+        || !image.currentSrc
+        || !worldBox?.width
+        || !worldBox?.height
+        || !frameBox?.width
+        || !frameBox?.height
+        || !consoleBox?.width
+        || !consoleBox?.height
+        || frameStyle?.display === 'none'
+        || frameStyle?.visibility === 'hidden'
+        || Number(frameStyle?.opacity) === 0
+        || consoleStyle?.display === 'none'
+        || consoleStyle?.visibility === 'hidden'
+        || Number(consoleStyle?.opacity) === 0
+        || visibleCharacters.length !== 2
+        || visibleContent.length === 0
+        || document.querySelector('[data-experience-startup]')
+      ) {
+        guard.failures.push({
+          sample: guard.samples,
+          worldCount: worlds.length,
+          frameCount: frames.length,
+          consoleCount: consoles.length,
+          imageComplete: Boolean(image?.complete),
+          imageNaturalWidth: image?.naturalWidth || 0,
+          imageSource: image?.currentSrc || '',
+          worldSize: [worldBox?.width || 0, worldBox?.height || 0],
+          frameSize: [frameBox?.width || 0, frameBox?.height || 0],
+          consoleSize: [consoleBox?.width || 0, consoleBox?.height || 0],
+          frameVisibility: [frameStyle?.display || '', frameStyle?.visibility || '', frameStyle?.opacity || ''],
+          consoleVisibility: [consoleStyle?.display || '', consoleStyle?.visibility || '', consoleStyle?.opacity || ''],
+          characterCounts: [characters.length, visibleCharacters.length],
+          visibleContentCount: visibleContent.length,
+          hasStartupFallback: Boolean(document.querySelector('[data-experience-startup]'))
+        });
+      }
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  await page.locator('[data-action="preview-jump"][data-value="L01-M07"]').click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'true');
+  await page.locator('.station-header [data-action="preview-exit"]').click();
+  await expect(app(page)).toHaveAttribute('data-preview-mode', 'false');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M08');
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+
+  const report = await page.evaluate(() => {
+    window.__atomicFrameGuard.active = false;
+    return {
+      samples: window.__atomicFrameGuard.samples,
+      failures: window.__atomicFrameGuard.failures
+    };
+  });
+  expect(report.samples).toBeGreaterThan(0);
+  expect(report.failures).toEqual([]);
+});
+
+test('QA-MUST-01 flicker regression: L01-M07 does not replay console-rise inside one microtask', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    microtaskId: 'L01-M07'
+  });
+  await armSameConsoleRiseGuard(page);
+  expect(await settlePresentation(page)).toMatchObject({
+    microtaskId: 'L01-M07',
+    phase: 'audio-playing'
+  });
+
+  for (let guard = 0; guard < 10; guard += 1) {
+    const before = await runtimeSnapshot(page);
+    if (!['audio-playing', 'audio-retry'].includes(before.phase)) break;
+    await finishOneAudio(page);
+    await expect.poll(() => runtimeSnapshot(page).then(snapshot => snapshot.stateVersion))
+      .not.toBe(before.stateVersion);
+  }
+
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    microtaskId: 'L01-M07',
+    currentPresentationMomentId: 'listen-complete',
+    presentationAwaitingEnd: true
+  });
+  expect(await sameConsoleRiseGuardReport(page)).toEqual({
+    sameConsole: true,
+    sameCharacters: true,
+    consoleRiseStarts: [],
+    characterEntryStarts: []
+  });
+  const restingAnimationNames = await page.locator('.mission-console').evaluate(consoleElement => (
+    getComputedStyle(consoleElement).animationName.split(',').map(name => name.trim())
+  ));
+  expect(restingAnimationNames).not.toContain('console-rise');
+});
+
+test('QA-MUST-01 flicker regression: L02-M11 wrong then correct never falls back to console-rise', async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L02-M11');
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L02-M11',
+    challengeRef: 'L02-M11:C01',
+    phase: 'awaiting-response'
+  });
+
+  await armSameConsoleRiseGuard(page);
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge, { correct: false });
+  await expect(page.locator('.mission-console')).toHaveClass(/mission-console--support/);
+  await page.locator('.mission-console').evaluate(async consoleElement => {
+    const supportAnimations = consoleElement.getAnimations().filter(animation => (
+      animation.animationName === 'gentle-answer-shake'
+    ));
+    await Promise.allSettled(supportAnimations.map(animation => animation.finished));
+  });
+
+  snapshot = await runtimeSnapshot(page);
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L02-M11',
+    challengeRef: 'L02-M11:C01',
+    phase: 'awaiting-response'
+  });
+  await submitRule(page, challenge.answerRule, challenge);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase))
+    .toBe('audio-playing');
+  await finishOneAudio(page);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.challengeRef))
+    .toBe('L02-M11:C02');
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase))
+    .toBe('awaiting-response');
+
+  expect(await sameConsoleRiseGuardReport(page)).toEqual({
+    sameConsole: true,
+    sameCharacters: true,
+    consoleRiseStarts: [],
+    characterEntryStarts: []
+  });
+  const restingAnimationNames = await page.locator('.mission-console').evaluate(consoleElement => (
+    getComputedStyle(consoleElement).animationName.split(',').map(name => name.trim())
+  ));
+  expect(restingAnimationNames).not.toContain('console-rise');
+});
+
+test('QA-MUST-01 flicker regression: L01-M08 keeps character entity nodes when interaction eligibility changes', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page, { reducedMotion: 'no-preference' });
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L01-M08');
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L01-M08',
+    challengeRef: 'L01-M08:C01',
+    phase: 'awaiting-response'
+  });
+
+  const characterEntityIds = ['station-keeper', 'handbag-owner'];
+  await page.evaluate(entityIds => {
+    window.__stableEligibilityEntities = entityIds.map(entityId => ({
+      entityId,
+      element: document.querySelector(`.scene-character[data-entity-id="${entityId}"]`)
+    }));
+  }, characterEntityIds);
+  await expect(page.locator('.scene-character[data-entity-id]')).toHaveCount(2);
+  const activeCharacters = page.locator('.scene-character[data-action="select-entity"]');
+  await expect(activeCharacters).toHaveCount(2);
+  expect(await activeCharacters.evaluateAll(elements => elements.every(element => (
+    !element.disabled && getComputedStyle(element).pointerEvents === 'auto'
+  )))).toBe(true);
+
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.challengeRef))
+    .toBe('L01-M08:C02');
+
+  const identityReport = await page.evaluate(() => (
+    window.__stableEligibilityEntities.map(({ entityId, element }) => {
+      const current = document.querySelector(`.scene-character[data-entity-id="${entityId}"]`);
+      return {
+        entityId,
+        presentBefore: Boolean(element),
+        presentAfter: Boolean(current),
+        sameNode: element === current
+      };
+    })
+  ));
+  expect(identityReport).toEqual(characterEntityIds.map(entityId => ({
+    entityId,
+    presentBefore: true,
+    presentAfter: true,
+    sameNode: true
+  })));
+  expect(await page.locator('.scene-character[data-entity-id]').evaluateAll(elements => (
+    elements.every(element => {
+      const style = getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      return style.display !== 'none'
+        && style.visibility !== 'hidden'
+        && Number(style.opacity) > 0
+        && box.width > 0
+        && box.height > 0;
+    })
+  ))).toBe(true);
+  const inactiveCharacterReport = await page.locator('.scene-character[data-entity-id]')
+    .evaluateAll(elements => elements.map(element => ({
+      disabled: element.disabled,
+      action: element.dataset.action || null,
+      ariaHidden: element.getAttribute('aria-hidden'),
+      pointerEvents: getComputedStyle(element).pointerEvents
+    })));
+  expect(inactiveCharacterReport).toEqual(characterEntityIds.map(() => ({
+    disabled: true,
+    action: null,
+    ariaHidden: 'true',
+    pointerEvents: 'none'
+  })));
+});
+
+test('R2 word-form checks pronounce the answer in place instead of opening a feedback page', async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page);
+  await startOrResume(page);
+  let snapshot = await advanceTo(page, 'L02-M13');
+
+  await expect(page.locator('.word-plaque')).toHaveText('pen');
+  await expect(page.locator('.shared-listen-replay__button')).toBeVisible();
+  await expect(page.locator('.scene-props > button.scene-prop')).toHaveCount(4);
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge);
+
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  await expect(page.locator('.feedback-audio-state, .feedback-bubble[data-tone="correct"]'))
+    .toHaveCount(0);
+  await expect(page.locator('.word-plaque')).toHaveText('pen');
+  await expect(page.locator('.scene-props > .scene-prop')).toHaveCount(4);
+  await expect(page.locator('.adventure-heart.is-full')).toHaveCount(3);
+  await finishOneAudio(page);
+  await expect(page.locator('.word-plaque')).toHaveText('pencil');
+  await expect(page.locator('.scene-props > button.scene-prop')).toHaveCount(4);
 });

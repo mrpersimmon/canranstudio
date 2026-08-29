@@ -11,10 +11,53 @@ const { createMemoryAdapter } = require('../../core/learning-store');
 const unit = catalog.getTeachingUnit('FLC-U01');
 const nceUnit = catalog.getTeachingUnit('NCE-U01');
 
+function roleStageLedger({ completedRoundIds = [] } = {}) {
+  const events = [];
+  const completedMicrotaskIds = ['L01-M07', 'L01-M08', 'L01-M09', 'L01-M10', 'L01-M11'];
+  const practiceId = 'L01-M12:role-enactment';
+  const state = {
+    experienceRevision: nceUnit.experienceRevision,
+    checkpoint: { checkpointId: 'L01-M11:complete', microtaskId: 'L01-M11' },
+    buildStage: 0, storyFacts: [], adventureHeartsRemaining: 3,
+    unitAttemptId: 'role-stage-attempt', completedMicrotaskIds,
+    pendingUiContinuation: null,
+    rolePracticeProgress: completedRoundIds.length ? {
+      [practiceId]: {
+        microtaskId: 'L01-M12', unitAttemptId: 'role-stage-attempt',
+        completedRoundIds: [...completedRoundIds]
+      }
+    } : {}
+  };
+  return {
+    events,
+    read() { return { units: { [nceUnit.unitId]: structuredClone(state) } }; },
+    apply(event) {
+      events.push(structuredClone(event));
+      if (event.type === 'role-practice-round-completed') {
+        const progress = state.rolePracticeProgress[event.practiceId] || {
+          microtaskId: event.microtaskId, unitAttemptId: event.unitAttemptId, completedRoundIds: []
+        };
+        if (!progress.completedRoundIds.includes(event.roundId)) {
+          progress.completedRoundIds.push(event.roundId);
+        }
+        state.rolePracticeProgress[event.practiceId] = progress;
+      }
+      if (event.type === 'microtask-completed') {
+        if (!state.completedMicrotaskIds.includes(event.microtaskId)) {
+          state.completedMicrotaskIds.push(event.microtaskId);
+        }
+        delete state.rolePracticeProgress[practiceId];
+      }
+      return { status: 'applied', persisted: true, effects: [], snapshot: this.read() };
+    }
+  };
+}
+
 function fakeNceLedger({
   checkpoint = null,
   buildStage = 0,
   storyFacts = [],
+  adventureHeartsRemaining = 3,
   failOnType = null,
   failures = 0
 } = {}) {
@@ -25,7 +68,7 @@ function fakeNceLedger({
     read() {
       return {
         units: {
-          [nceUnit.unitId]: { checkpoint, buildStage, storyFacts }
+          [nceUnit.unitId]: { checkpoint, buildStage, storyFacts, adventureHeartsRemaining }
         }
       };
     },
@@ -40,549 +83,270 @@ function fakeNceLedger({
   };
 }
 
-function finishActiveNceAudio(runtime) {
-  let result = { snapshot: runtime.snapshot() };
-  if (result.snapshot.phase === 'audio-ready') {
-    result = runtime.dispatch({ type: 'audio/play' });
-  }
-  assert.equal(result.snapshot.phase, 'audio-playing');
-  const requestId = result.snapshot.audio.requestId;
-  const segmentCount = result.snapshot.audio.refs.length;
-  for (let segmentIndex = 0; segmentIndex < segmentCount; segmentIndex += 1) {
-    result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex });
-  }
-  return result;
+function lesson12V2Fixture() {
+  const formalResult = {
+    resultId: 'NCE-U01-T01:L01-W07:word-form',
+    reviewCellId: 'NCE-U01-T01:L01-W07:word-form',
+    challengeRef: 'L01-M07:C01',
+    targetId: 'NCE-U01-T01',
+    stepId: 'L01-M07:S01',
+    sourceRef: 'L01-W07',
+    channel: 'word-form',
+    contextId: 'lost-and-found-counter',
+    variantId: 'handbag',
+    resultKind: 'formative'
+  };
+  const secondResult = {
+    resultId: 'NCE-U01-T01:L02-W03:word-form',
+    reviewCellId: 'NCE-U01-T01:L02-W03:word-form',
+    challengeRef: 'L01-M07:C02',
+    targetId: 'NCE-U01-T01',
+    stepId: 'L01-M07:S02',
+    sourceRef: 'L02-W03',
+    channel: 'word-form',
+    contextId: 'lost-and-found-counter',
+    variantId: 'book',
+    resultKind: 'formative'
+  };
+  const firstTask = {
+    microtaskId: 'L01-M07',
+    lessonId: 'lesson1',
+    targetResults: [formalResult, secondResult],
+    presentation: { title: '手提包标签' },
+    persistence: { atomic: true, checkpointFacts: ['handbag-labelled'] },
+    checkpointAfterSuccess: { checkpointId: 'L01-M07:complete' },
+    steps: [{
+      stepId: 'L01-M07:S01',
+      kind: 'match-entity',
+      submissionMode: 'formal',
+      challengeRef: formalResult.challengeRef,
+      resultId: formalResult.resultId,
+      reviewCellId: formalResult.reviewCellId,
+      sourceRef: formalResult.sourceRef,
+      channel: formalResult.channel,
+      contextId: formalResult.contextId,
+      candidateEntityIds: ['handbag', 'book', 'watch', 'pen'],
+      answerRule: { type: 'match-entity', pairs: { 'L01-W07': 'handbag' } },
+      supportLayers: [
+        { level: 'reobserve', message: '看看哪一件是手提包。' },
+        { level: 'partial-cue', message: '注意单词开头和物品形状。' },
+        { level: 'model', message: '小猫用另一件物品示范。' }
+      ]
+    }, {
+      stepId: 'L01-M07:S02',
+      kind: 'match-entity',
+      submissionMode: 'formal',
+      challengeRef: secondResult.challengeRef,
+      resultId: secondResult.resultId,
+      reviewCellId: secondResult.reviewCellId,
+      sourceRef: secondResult.sourceRef,
+      channel: secondResult.channel,
+      contextId: secondResult.contextId,
+      candidateEntityIds: ['handbag', 'book', 'watch', 'pen'],
+      answerRule: { type: 'match-entity', pairs: { 'L02-W03': 'book' } },
+      supportLayers: [
+        { level: 'reobserve', message: '再看一看。' },
+        { level: 'partial-cue', message: '注意开头字母。' },
+        { level: 'model', message: '小猫换一个词示范。' }
+      ]
+    }]
+  };
+  const laterTask = {
+    microtaskId: 'L01-M08',
+    lessonId: 'lesson1',
+    targetResults: [],
+    presentation: { title: '下一段' },
+    persistence: { atomic: true, checkpointFacts: [] },
+    checkpointAfterSuccess: { checkpointId: 'L01-M08:complete' },
+    steps: [{
+      stepId: 'L01-M08:S01', kind: 'story-action', submissionMode: 'story',
+      answerRule: { type: 'perform-action', action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+    }]
+  };
+  return {
+    unitId: 'NCE-U01',
+    experienceRevision: 'lesson1-2-v2.2',
+    runtimeProfile: 'microtask-v2',
+    lessonIds: ['lesson1', 'lesson2'],
+    shuffleProtocol: {
+      hash: 'fnv1a32-v1', prng: 'mulberry32-v1', permutation: 'fisher-yates-v1',
+      seedDomain: ['experienceRevision', 'unitAttemptId', 'microtaskId', 'attemptRevision', 'channel', 'challengeRef']
+    },
+    entities: {
+      handbag: { entityId: 'handbag' }, book: { entityId: 'book' },
+      watch: { entityId: 'watch' }, pen: { entityId: 'pen' }
+    },
+    lessonContent: {
+      lesson1: { sources: { 'L01-W07': { sourceId: 'L01-W07', text: 'handbag', audioSrc: '/handbag.mp3' } } },
+      lesson2: { sources: { 'L02-W03': { sourceId: 'L02-W03', text: 'book', audioSrc: '/book.mp3' } } }
+    },
+    authoredContent: {},
+    beats: [
+      { beatId: 'discover', microtasks: [firstTask, laterTask] },
+      { beatId: 'understand', microtasks: [] },
+      { beatId: 'teach', microtasks: [] },
+      { beatId: 'transfer', microtasks: [] },
+      { beatId: 'build', microtasks: [] }
+    ]
+  };
 }
 
-test('microtask v2 answer rules judge stable semantic identities rather than presentation order', () => {
-  assert.deepEqual(
-    evaluateRule(
-      { type: 'select-one', acceptedSourceRef: 'L01-D01' },
-      { sourceRef: 'L01-D01', presentationIndex: 99 }
-    ),
-    { correct: true, mismatchPath: null }
-  );
-  assert.equal(evaluateRule(
-    { type: 'match-entity', pairs: { 'L02-W01': 'pen' } },
-    { sourceRef: 'L02-W01', entityId: 'pencil' }
-  ).correct, false);
-  assert.equal(evaluateRule(
-    { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
-    { slotId: 'ownership-item', entityId: 'watch' }
-  ).correct, true);
-  assert.equal(evaluateRule(
+function lesson12PresentationFixture() {
+  const unitV2 = lesson12V2Fixture();
+  const [firstTask, laterTask] = unitV2.beats[0].microtasks;
+  firstTask.presentation.moments = [
+    { momentId: 'task-enter', enterWhen: { kind: 'microtask-start' } },
+    { momentId: 'first-instruction-audio', enterWhen: { kind: 'phase', phase: 'audio-playing' } },
+    { momentId: 'first-response-open', enterWhen: { kind: 'phase', phase: 'awaiting-response' } },
     {
-      type: 'ordered-blocks',
-      acceptedByEntityId: { 'car-key': ['block-question', 'L02-W09'] }
+      momentId: 'first-challenge-complete',
+      enterWhen: { kind: 'challenge-completed', challengeRef: 'L01-M07:C01' }
     },
-    { selectedEntityId: 'car-key', blockRefs: ['block-question', 'L02-W09'] }
-  ).correct, true);
-  assert.equal(evaluateRule(
-    { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'visitor' },
-    { action: 'give', entityId: 'watch', targetEntityId: 'visitor' }
-  ).correct, true);
-  assert.equal(evaluateRule(
-    { type: 'all-of', requiredFactIds: ['one', 'two', 'three'] },
-    { factIds: ['three', 'one', 'two'] }
-  ).correct, true);
-});
+    {
+      momentId: 'second-challenge-active',
+      enterWhen: { kind: 'challenge-active', challengeRef: 'L01-M07:C02' }
+    },
+    {
+      momentId: 'second-challenge-complete',
+      enterWhen: { kind: 'challenge-completed', challengeRef: 'L01-M07:C02' }
+    },
+    { momentId: 'save-retry', enterWhen: { kind: 'phase', phase: 'persistence-retry' } },
+    { momentId: 'task-complete', enterWhen: { kind: 'microtask-complete' } }
+  ];
+  laterTask.presentation.moments = [
+    { momentId: 'story-enter', enterWhen: { kind: 'microtask-start' } },
+    { momentId: 'story-action', enterWhen: { kind: 'step-active', stepId: 'L01-M08:S01' } },
+    { momentId: 'story-save-retry', enterWhen: { kind: 'phase', phase: 'persistence-retry' } },
+    { momentId: 'story-complete', enterWhen: { kind: 'microtask-complete' } }
+  ];
+  return unitV2;
+}
 
-test('Lesson 1 enters the first authored step of the first durable microtask', () => {
-  const runtime = create({ unit: nceUnit, ledger: fakeNceLedger(), seed: 101 });
-
-  const entered = runtime.enter({ entryLesson: 'lesson1' });
-
-  assert.equal(entered.snapshot.status, 'active');
-  assert.equal(entered.snapshot.mode, 'microtask-v2');
-  assert.equal(entered.snapshot.microtaskId, 'L01-M01');
-  assert.equal(entered.snapshot.stepId, 'L01-M01:S01');
-  assert.equal(entered.snapshot.phase, 'audio-ready');
-  assert.deepEqual(entered.effects, [{
-    type: 'scene/show',
-    beatId: 'discover',
-    microtaskId: 'L01-M01',
-    stepId: 'L01-M01:S01'
-  }]);
-});
-
-test('microtask preview enters any authored stage and never writes learning progress', () => {
-  const ledger = learningLedger.open({
-    store: createMemoryAdapter(),
-    key: 'preview-runtime',
-    catalog,
-    clock: { learningDay: () => '2026-08-17' }
-  });
-  const effects = [];
-  const authoredTasks = nceUnit.beats.flatMap(beat => beat.microtasks || []);
-  const before = ledger.read();
-  for (const [index, task] of authoredTasks.entries()) {
-    const candidate = create({ unit: nceUnit, ledger, seed: 102 + index });
-    const entered = candidate.preview({ microtaskId: task.microtaskId });
-    assert.equal(entered.snapshot.microtaskId, task.microtaskId);
-    assert.equal(entered.snapshot.stepId, task.steps[0].stepId);
-    assert.equal(entered.snapshot.mode, 'microtask-v2-preview');
-    assert.deepEqual(ledger.read(), before);
-    candidate.destroy();
-  }
-
-  const runtime = create({
-    unit: nceUnit,
-    ledger,
-    seed: 202,
-    effectSink: effect => effects.push(effect)
-  });
-
-  const entered = runtime.preview({ microtaskId: 'L02-M07' });
-  assert.equal(entered.snapshot.microtaskId, 'L02-M07');
-  assert.equal(entered.snapshot.stepId, 'L02-M07:S02');
-  assert.equal(entered.snapshot.mode, 'microtask-v2-preview');
-
-  const completed = runtime.dispatch({
-    type: 'response/submit',
-    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
-  });
-
-  assert.equal(completed.snapshot.status, 'unit-built');
-  assert.equal(completed.snapshot.buildStage, 0);
-  assert.deepEqual(ledger.read(), before);
-  assert.ok(!effects.some(effect => effect.type === 'landmark/build-stage'));
-});
-
-test('Lesson 1 full listening advances only after every active real audio ended callback', () => {
-  const ledger = fakeNceLedger();
-  const runtime = create({ unit: nceUnit, ledger, seed: 103 });
-  runtime.enter({ entryLesson: 'lesson1' });
-
-  assert.deepEqual(runtime.dispatch({
-    type: 'response/submit',
-    response: { entityId: 'handbag-owner' }
-  }).effects, []);
-  const playing = runtime.dispatch({ type: 'audio/play' });
-  const requestId = playing.snapshot.audio.requestId;
-  assert.equal(playing.snapshot.phase, 'audio-playing');
-  assert.equal(playing.effects[0].audioRef.refId, 'L01-D01');
-  assert.equal(playing.effects[0].audioRef.src, nceUnit.lessonContent.lesson1.sources['L01-D01'].audioSrc);
-
-  assert.deepEqual(runtime.dispatch({ type: 'time/elapsed', milliseconds: 120_000 }).effects, []);
-  assert.deepEqual(runtime.dispatch({
-    type: 'audio/ended', requestId: 'stale-request', segmentIndex: 0
-  }).effects, []);
-
-  let result;
-  for (let segmentIndex = 0; segmentIndex < 7; segmentIndex += 1) {
-    result = runtime.dispatch({ type: 'audio/ended', requestId, segmentIndex });
-    if (segmentIndex < 6) {
-      assert.equal(result.snapshot.stepId, 'L01-M01:S01');
-      assert.equal(result.effects[0].audioRef.refId, `L01-D0${segmentIndex + 2}`);
-    }
-  }
-
-  assert.equal(result.snapshot.stepId, 'L01-M01:S02');
-  assert.equal(result.snapshot.phase, 'response');
-  assert.equal(result.snapshot.audio.status, 'completed');
-  assert.deepEqual(ledger.events, []);
-});
-
-test('Lesson 1 turns three wrong actions into teaching support and still requires the child correction', () => {
-  const ledger = fakeNceLedger();
-  const runtime = create({ unit: nceUnit, ledger, seed: 107 });
-  runtime.enter({ entryLesson: 'lesson1' });
-  finishActiveNceAudio(runtime);
-  const wrong = {
-    type: 'response/submit',
-    response: { entityId: 'station-keeper' },
-    correct: true
+function durableContinuationFixture({
+  terminalMomentId = 'knowledge-layer',
+  restStopId = 'lesson2-midpoint-rest-stop',
+  restStopType = 'section'
+} = {}) {
+  const firstTask = {
+    microtaskId: restStopType === 'chapter' ? 'L01-M11' : 'L02-M15',
+    lessonId: restStopType === 'chapter' ? 'lesson1' : 'lesson2',
+    exposureRefs: [],
+    targetResults: [],
+    presentation: {
+      title: '待确认成果',
+      moments: [
+        { momentId: 'task-enter', enterWhen: { kind: 'microtask-start' } },
+        { momentId: 'story-action', enterWhen: { kind: 'step-active', stepId: 'S01' } },
+        ...(terminalMomentId ? [{
+          momentId: terminalMomentId,
+          enterWhen: { kind: 'microtask-complete' }
+        }] : [])
+      ]
+    },
+    persistence: { atomic: true, checkpointFacts: [] },
+    checkpointAfterSuccess: { checkpointId: 'first:complete' },
+    restStop: {
+      restStopId,
+      type: restStopType,
+      nextMicrotaskId: 'NEXT-M01'
+    },
+    steps: [{
+      stepId: 'S01', kind: 'story-action', submissionMode: 'story',
+      answerRule: { type: 'perform-action', action: 'confirm' }
+    }]
   };
-
-  const first = runtime.dispatch(wrong);
-  const second = runtime.dispatch(wrong);
-  const third = runtime.dispatch(wrong);
-
-  assert.equal(first.snapshot.supportLevel, 1);
-  assert.equal(first.snapshot.heartsRemaining, 2);
-  assert.equal(second.snapshot.supportLevel, 2);
-  assert.equal(second.snapshot.heartsRemaining, 1);
-  assert.equal(third.snapshot.supportLevel, 3);
-  assert.equal(third.snapshot.heartsRemaining, 0);
-  assert.equal(third.snapshot.assistanceMode, true);
-  assert.deepEqual(
-    [first, second, third].map(result => result.effects[0].type),
-    ['feedback/support', 'feedback/support', 'feedback/partner-demo']
-  );
-  assert.equal(third.snapshot.stepId, 'L01-M01:S02');
-  assert.deepEqual(ledger.events, []);
-
-  const corrected = runtime.dispatch({
-    type: 'response/submit',
-    response: { entityId: 'handbag-owner' }
-  });
-  assert.equal(corrected.snapshot.stepId, 'L01-M01:S03');
-  assert.equal(corrected.snapshot.phase, 'audio-playing');
-  assert.equal(corrected.snapshot.audio.purpose, 'feedback');
-  assert.equal(corrected.effects.at(-1).audioRef.refId, 'L01-W07');
-  assert.equal(corrected.snapshot.supportLevel, 0);
-  assert.equal(corrected.snapshot.heartsRemaining, 3);
-  assert.deepEqual(ledger.events, []);
-});
-
-test('Lesson 1 M01 persists after one word sound while the visible label files automatically', () => {
-  const ledger = fakeNceLedger();
-  const runtime = create({ unit: nceUnit, ledger, seed: 109 });
-  runtime.enter({ entryLesson: 'lesson1' });
-  finishActiveNceAudio(runtime);
-  runtime.dispatch({
-    type: 'response/submit',
-    response: { entityId: 'handbag-owner' }
-  });
-  finishActiveNceAudio(runtime);
-  const completed = runtime.dispatch({
-    type: 'response/submit',
-    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
-  });
-
-  assert.equal(completed.snapshot.microtaskId, 'L01-M02');
-  assert.equal(completed.snapshot.stepId, 'L01-M02:S01');
-  assert.equal(completed.snapshot.phase, 'response');
-  assert.equal(ledger.events.length, 1);
-  assert.deepEqual({
-    type: ledger.events[0].type,
-    microtaskId: ledger.events[0].microtaskId,
-    checkpointId: ledger.events[0].checkpointId,
-    completionStatus: ledger.events[0].completionStatus,
-    buildStage: ledger.events[0].buildStage
-  }, {
-    type: 'microtask-completed',
-    microtaskId: 'L01-M01',
-    checkpointId: 'L01-M01:complete',
-    completionStatus: 'completed-independent',
-    buildStage: undefined
-  });
-  assert.deepEqual(
-    ledger.events[0].targetResults.map(result => [result.resultId, result.outcome]),
-    [
-      ['NCE-U01-T04:L01-M01:owner', 'independent'],
-      ['NCE-U01-T01:L01-W07:audio-form-supported', 'independent']
+  const nextTask = {
+    microtaskId: 'NEXT-M01',
+    lessonId: 'lesson2',
+    exposureRefs: [],
+    targetResults: [],
+    presentation: {
+      title: '下一阶段',
+      moments: [{ momentId: 'next-enter', enterWhen: { kind: 'microtask-start' } }]
+    },
+    persistence: { atomic: true, checkpointFacts: [] },
+    checkpointAfterSuccess: { checkpointId: 'next:complete' },
+    steps: [{
+      stepId: 'NEXT:S01', kind: 'story-action', submissionMode: 'story',
+      answerRule: { type: 'perform-action', action: 'continue' }
+    }]
+  };
+  const unitV2 = {
+    unitId: 'DURABLE-U01',
+    experienceRevision: 'lesson1-2-v2.2',
+    runtimeProfile: 'microtask-v2',
+    districtId: 'durable-district',
+    landmarkId: 'durable-landmark',
+    lessonIds: ['lesson1', 'lesson2'],
+    entities: {}, lessonContent: { lesson1: { sources: {} }, lesson2: { sources: {} } },
+    authoredContent: {}, targets: [], reviewContexts: {},
+    beats: [
+      { beatId: 'story', microtasks: [firstTask, nextTask] },
+      { beatId: 'understand', microtasks: [] },
+      { beatId: 'teach', microtasks: [] },
+      { beatId: 'transfer', microtasks: [] },
+      { beatId: 'build', microtasks: [] }
     ]
-  );
-  assert.deepEqual(ledger.events[0].audioContactRefs, [
-    'L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07', 'L01-W07'
-  ]);
-  assert.deepEqual(ledger.events[0].storyFacts, ['handbag-owner-identified', 'case-clue-owner']);
-  assert.ok(!completed.effects.some(effect => effect.type === 'landmark/build-stage'));
-});
-
-test('Lesson 2 M01 explores four objects but checks only watch against all four choices', () => {
-  const ledger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L01-M05:complete',
-      beatId: 'discover',
-      microtaskId: 'L01-M05',
-      completionStatus: 'completed-independent'
-    },
-    storyFacts: ['lesson1-complete', 'work-lamp-on', 'sorting-room-open']
-  });
-  const runtime = create({ unit: nceUnit, ledger, seed: 113 });
-  const entered = runtime.enter({ entryLesson: 'lesson2' });
-  assert.equal(entered.snapshot.microtaskId, 'L02-M01');
-  assert.equal(entered.snapshot.stepId, 'L02-M01:S01');
-
-  const explorations = [
-    ['L02-W01', 'pen'],
-    ['L02-W02', 'pencil'],
-    ['L02-W03', 'book'],
-    ['L02-W04', 'watch']
-  ];
-  for (const [sourceRef, entityId] of explorations) {
-    const playing = runtime.dispatch({ type: 'explore/activate', sourceRef, entityId });
-    assert.equal(playing.snapshot.phase, 'audio-playing');
-    assert.equal(playing.effects[0].audioRef.refId, sourceRef);
-    runtime.dispatch({
-      type: 'audio/ended',
-      requestId: playing.snapshot.audio.requestId,
-      segmentIndex: 0
-    });
-  }
-  assert.equal(runtime.snapshot().stepId, 'L02-M01:S02');
-
-  const challenges = [['L02-W04', 'watch']];
-  for (const [sourceRef, entityId] of challenges) {
-    const heard = finishActiveNceAudio(runtime);
-    assert.equal(heard.snapshot.phase, 'response');
-    assert.equal(heard.snapshot.challengeRef, sourceRef);
-    assert.equal(
-      nceUnit.beats.flatMap(beat => beat.microtasks || [])
-        .find(task => task.microtaskId === 'L02-M01').steps[1].optionEntityIds.length,
-      4
-    );
-    runtime.dispatch({
-      type: 'response/submit',
-      response: { sourceRef, entityId }
-    });
-  }
-
-  assert.equal(runtime.snapshot().microtaskId, 'L02-M02');
-  assert.equal(runtime.snapshot().stepId, 'L02-M02:S01');
-  assert.equal(runtime.snapshot().phase, 'response');
-  assert.equal(ledger.events.length, 1);
-  assert.deepEqual(
-    ledger.events[0].targetResults.map(result => [result.sourceRef, result.channel]),
-    [['L02-W04', 'audio-form-supported']]
-  );
-});
-
-test('Lesson 2 checks one pencil word form and waits for feedback audio before the story continues', () => {
-  const ledger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L02-M01:complete', beatId: 'understand',
-      microtaskId: 'L02-M01', completionStatus: 'completed-independent'
-    },
-    storyFacts: ['pocket-shelf-ready']
-  });
-  const runtime = create({ unit: nceUnit, ledger, seed: 127 });
-  runtime.enter({ entryLesson: 'lesson2' });
-  assert.equal(runtime.snapshot().stepId, 'L02-M02:S01');
-  assert.equal(runtime.snapshot().challengeRef, 'L02-W02');
-
-  const submitted = runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L02-W02', entityId: 'pencil' }
-  });
-  assert.equal(submitted.snapshot.phase, 'audio-playing');
-  assert.equal(submitted.snapshot.batchIndex, 0);
-  assert.equal(submitted.snapshot.audio.purpose, 'feedback');
-  assert.equal(submitted.effects.at(-1).type, 'audio/play');
-  assert.deepEqual(runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L02-W02', entityId: 'pencil' }
-  }).effects, []);
-
-  const feedback = finishActiveNceAudio(runtime);
-  assert.equal(feedback.snapshot.stepId, 'L02-M02:S02');
-  assert.equal(feedback.snapshot.phase, 'response');
-  assert.deepEqual(ledger.events, []);
-});
-
-test('Lesson 2 sentence building is bound to the case the child actually selected', () => {
-  const ledger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L02-M05:complete', beatId: 'transfer',
-      microtaskId: 'L02-M05', completionStatus: 'completed-independent'
-    },
-    storyFacts: ['key-box-ready']
-  });
-  const runtime = create({ unit: nceUnit, ledger, seed: 129 });
-  runtime.enter({ entryLesson: 'lesson2' });
-
-  runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L02-W09', entityId: 'car-key' }
-  });
-  finishActiveNceAudio(runtime);
-  assert.equal(runtime.snapshot().stepId, 'L02-M06:S02');
-
-  runtime.dispatch({ type: 'response/submit', response: { entityId: 'car-key' } });
-  runtime.dispatch({ type: 'response/submit', response: { sourceRef: 'L01-D01' } });
-  finishActiveNceAudio(runtime);
-  finishActiveNceAudio(runtime);
-  assert.equal(runtime.snapshot().stepId, 'L02-M06:S05');
-
-  const forgedBranch = runtime.dispatch({
-    type: 'response/submit',
-    response: {
-      selectedEntityId: 'house-key',
-      blockRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W10']
+  };
+  return {
+    unit: unitV2,
+    catalog: {
+      TEACHING_UNITS: [unitV2],
+      getTeachingUnit(unitId) { return unitId === unitV2.unitId ? unitV2 : null; }
     }
-  });
-  assert.equal(forgedBranch.snapshot.stepId, 'L02-M06:S05');
-  assert.equal(forgedBranch.snapshot.supportLevel, 1);
+  };
+}
 
-  const selectedBranch = runtime.dispatch({
-    type: 'response/submit',
-    response: {
-      selectedEntityId: 'house-key',
-      blockRefs: ['NCE-U01-C-BLOCK-IS-THIS-YOUR', 'L02-W09']
+function openDurableFixtureLedger(fixture, store = createMemoryAdapter()) {
+  return learningLedger.open({
+    store,
+    key: 'durable-continuation-ledger',
+    catalog: fixture.catalog,
+    clock: { learningDay: () => '2026-08-23' }
+  });
+}
+
+function endPresentation(runtime, result) {
+  return runtime.dispatch({
+    type: 'presentation/ended',
+    experienceRevision: result.snapshot.experienceRevision,
+    stateVersion: result.snapshot.stateVersion,
+    microtaskId: result.snapshot.microtaskId,
+    attemptRevision: result.snapshot.attemptRevision,
+    momentId: result.snapshot.currentPresentationMomentId
+  });
+}
+
+function fakeRevisionLedger({ unitState = null, failOnType = null, failures = 0 } = {}) {
+  const events = [];
+  let remainingFailures = failures;
+  return {
+    events,
+    read() {
+      return { units: unitState ? { 'NCE-U01': structuredClone(unitState) } : {} };
+    },
+    apply(event) {
+      events.push(structuredClone(event));
+      if (event.type === failOnType && remainingFailures > 0) {
+        remainingFailures -= 1;
+        return { persisted: false, status: 'not-persisted', reason: 'unavailable' };
+      }
+      if (event.type === 'role-practice-round-completed' && unitState) {
+        unitState.rolePracticeProgress = unitState.rolePracticeProgress || {};
+        const progress = unitState.rolePracticeProgress[event.practiceId] || {
+          microtaskId: event.microtaskId,
+          unitAttemptId: event.unitAttemptId,
+          completedRoundIds: []
+        };
+        if (!progress.completedRoundIds.includes(event.roundId)) {
+          progress.completedRoundIds.push(event.roundId);
+        }
+        unitState.rolePracticeProgress[event.practiceId] = progress;
+      }
+      return { persisted: true, status: 'applied' };
     }
-  });
-  assert.equal(selectedBranch.snapshot.phase, 'audio-playing');
-  assert.equal(selectedBranch.effects.at(-1).type, 'audio/play');
-  assert.equal(selectedBranch.snapshot.audio.refs[0].refId, 'NCE-U01-C-Q-CAR');
-});
-
-test('microtask v2 audio failure needs explicit fallback and never forges an audio contact', () => {
-  const ledger = fakeNceLedger();
-  const runtime = create({ unit: nceUnit, ledger, seed: 131 });
-  runtime.enter({ entryLesson: 'lesson1' });
-
-  let playing = runtime.dispatch({ type: 'audio/play' });
-  const failedDialogue = runtime.dispatch({
-    type: 'audio/failed', requestId: playing.snapshot.audio.requestId, reason: 'decode-error'
-  });
-  assert.equal(failedDialogue.snapshot.phase, 'audio-fallback');
-  assert.equal(failedDialogue.effects[0].type, 'audio/fallback');
-  assert.deepEqual(runtime.dispatch({ type: 'time/elapsed', milliseconds: 999_999 }).effects, []);
-  runtime.dispatch({ type: 'audio/continue-without-sound' });
-  runtime.dispatch({
-    type: 'response/submit',
-    response: { entityId: 'handbag-owner' }
-  });
-
-  playing = runtime.dispatch({ type: 'audio/play' });
-  runtime.dispatch({
-    type: 'audio/failed', requestId: playing.snapshot.audio.requestId, reason: 'offline'
-  });
-  runtime.dispatch({ type: 'audio/continue-without-sound' });
-  runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
-  });
-  const completed = runtime.dispatch({
-    type: 'response/submit', response: { sourceRef: 'L01-W07' }
-  });
-
-  assert.equal(completed.snapshot.microtaskId, 'L01-M02');
-  assert.equal(ledger.events.length, 1);
-  assert.deepEqual(ledger.events[0].audioContactRefs, []);
-  assert.deepEqual(ledger.events[0].missingAudioRefs, [
-    'L01-D01', 'L01-D02', 'L01-D03', 'L01-D04', 'L01-D05', 'L01-D06', 'L01-D07', 'L01-W07'
-  ]);
-  assert.deepEqual(
-    ledger.events[0].targetResults.map(result => [result.resultId, result.outcome]),
-    [
-      ['NCE-U01-T04:L01-M01:owner', 'independent'],
-      ['NCE-U01-T01:L01-W07:audio-form-supported', 'audio-unavailable']
-    ]
-  );
-  assert.equal(ledger.events[0].completionStatus, 'completed-assisted');
-});
-
-test('Lesson 1 archive stops inside the station and resumes Lesson 2 only after the child chooses it', () => {
-  const storyFacts = [
-    'case-clue-owner', 'case-clue-attention', 'case-clue-repair', 'case-clue-thanks'
-  ];
-  const ledger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L01-M04:complete', beatId: 'discover',
-      microtaskId: 'L01-M04', completionStatus: 'completed-independent'
-    },
-    storyFacts
-  });
-  const runtime = create({ unit: nceUnit, ledger, seed: 137 });
-  runtime.enter({ entryLesson: 'lesson1' });
-  assert.equal(runtime.snapshot().microtaskId, 'L01-M05');
-
-  runtime.dispatch({ type: 'response/submit', response: { factIds: storyFacts } });
-  const archived = runtime.dispatch({
-    type: 'response/submit',
-    response: { action: 'stamp', entityId: 'case-stamp', targetEntityId: 'case-file' }
-  });
-  assert.equal(archived.snapshot.status, 'chapter-stop');
-  assert.equal(archived.snapshot.buildStage, 0);
-  assert.ok(archived.effects.some(effect => effect.type === 'chapter/interior-complete'));
-  assert.ok(!archived.effects.some(effect => effect.type === 'landmark/build-stage'));
-
-  const continued = runtime.dispatch({ type: 'chapter/continue' });
-  assert.equal(continued.snapshot.status, 'active');
-  assert.equal(continued.snapshot.microtaskId, 'L02-M01');
-  assert.equal(continued.snapshot.stepId, 'L02-M01:S01');
-
-  const restored = create({
-    unit: nceUnit,
-    ledger: fakeNceLedger({
-      checkpoint: {
-        checkpointId: 'L01-M05:complete', beatId: 'discover',
-        microtaskId: 'L01-M05', completionStatus: 'completed-independent'
-      },
-      storyFacts: [...storyFacts, 'lesson1-complete', 'work-lamp-on', 'sorting-room-open']
-    }),
-    seed: 139
-  }).enter({ entryLesson: 'lesson1' });
-  assert.equal(restored.snapshot.status, 'chapter-stop');
-  assert.equal(restored.snapshot.microtaskId, 'L01-M05');
-  assert.deepEqual(restored.effects, [{ type: 'chapter/interior-restored', lessonId: 'lesson1' }]);
-});
-
-test('the station grows only after Lesson 2 M07 is atomically persisted and read as complete', () => {
-  const claimFacts = ['claim-record-1', 'claim-record-2', 'claim-record-3'];
-  const blockedLedger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L02-M06:complete', beatId: 'transfer',
-      microtaskId: 'L02-M06', completionStatus: 'completed-independent'
-    },
-    storyFacts: claimFacts.slice(0, 2)
-  });
-  const blockedRuntime = create({ unit: nceUnit, ledger: blockedLedger, seed: 148 });
-  blockedRuntime.enter({ entryLesson: 'lesson2' });
-  const blocked = blockedRuntime.dispatch({
-    type: 'response/submit',
-    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
-  });
-  assert.equal(blocked.snapshot.status, 'active');
-  assert.equal(blocked.snapshot.stepId, 'L02-M07:S02');
-  assert.equal(blocked.snapshot.supportLevel, 1);
-  assert.deepEqual(blockedLedger.events, []);
-
-  const ledger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L02-M06:complete', beatId: 'transfer',
-      microtaskId: 'L02-M06', completionStatus: 'completed-independent'
-    },
-    storyFacts: claimFacts
-  });
-  const runtime = create({ unit: nceUnit, ledger, seed: 149 });
-  runtime.enter({ entryLesson: 'lesson2' });
-  assert.equal(runtime.snapshot().microtaskId, 'L02-M07');
-  assert.equal(runtime.snapshot().stepId, 'L02-M07:S02');
-
-  const opened = runtime.dispatch({
-    type: 'response/submit',
-    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
-  });
-  assert.equal(opened.snapshot.status, 'unit-built');
-  assert.equal(opened.snapshot.buildStage, 5);
-  assert.equal(ledger.events.length, 1);
-  assert.equal(ledger.events[0].type, 'microtask-completed');
-  assert.equal(ledger.events[0].microtaskId, 'L02-M07');
-  assert.equal(ledger.events[0].buildStage, 5);
-  assert.deepEqual(
-    opened.effects.filter(effect => effect.type === 'landmark/build-stage'),
-    [{ type: 'landmark/build-stage', buildStage: 5 }]
-  );
-  assert.ok(!JSON.stringify(ledger.events).includes('mastered'));
-});
-
-test('a failed Lesson 2 M07 write cannot reveal growth and can retry the same atomic event', () => {
-  const claimFacts = ['claim-record-1', 'claim-record-2', 'claim-record-3'];
-  const ledger = fakeNceLedger({
-    checkpoint: {
-      checkpointId: 'L02-M06:complete', beatId: 'transfer',
-      microtaskId: 'L02-M06', completionStatus: 'completed-independent'
-    },
-    storyFacts: claimFacts,
-    failOnType: 'microtask-completed',
-    failures: 1
-  });
-  const runtime = create({ unit: nceUnit, ledger, seed: 151 });
-  runtime.enter({ entryLesson: 'lesson2' });
-  runtime.dispatch({ type: 'response/submit', response: { factIds: claimFacts } });
-  const failed = runtime.dispatch({
-    type: 'response/submit',
-    response: { action: 'pull', entityId: 'opening-lever', targetEntityId: 'station-power' }
-  });
-
-  assert.equal(failed.snapshot.status, 'active');
-  assert.equal(failed.snapshot.phase, 'persistence-retry');
-  assert.equal(failed.snapshot.buildStage, 0);
-  assert.deepEqual(failed.effects, [{
-    type: 'runtime/persistence-failed',
-    operation: 'microtask-completed',
-    reason: 'unavailable',
-    retryable: true
-  }]);
-  assert.ok(!failed.effects.some(effect => effect.type === 'landmark/build-stage'));
-
-  const retried = runtime.dispatch({ type: 'persistence/retry' });
-  assert.equal(retried.snapshot.status, 'unit-built');
-  assert.equal(retried.snapshot.buildStage, 5);
-  assert.equal(ledger.events.length, 2);
-  assert.deepEqual(ledger.events[1], ledger.events[0]);
-  assert.ok(retried.effects.some(effect => effect.type === 'landmark/build-stage'));
-});
+  };
+}
 
 function fakeLedger({ checkpoint = null, buildStage = 0, failOnType = null } = {}) {
   const events = [];
@@ -606,9 +370,9 @@ function fakeLedger({ checkpoint = null, buildStage = 0, failOnType = null } = {
 }
 
 function answerAction(runtime, { correct = true, teachingUnit = unit, spoof = {} } = {}) {
-  const state = runtime.snapshot();
-  const beat = teachingUnit.beats.find(candidate => candidate.beatId === state.beatId);
-  const expectedAnswerId = beat.task.answerKeyByContext[state.contextId];
+  const runtimeState = runtime.snapshot();
+  const beat = teachingUnit.beats.find(candidate => candidate.beatId === runtimeState.beatId);
+  const expectedAnswerId = beat.task.answerKeyByContext[runtimeState.contextId];
   return {
     type: 'answer/submit',
     answerId: correct ? expectedAnswerId : `wrong:${expectedAnswerId}`,
@@ -616,7 +380,1677 @@ function answerAction(runtime, { correct = true, teachingUnit = unit, spoof = {}
   };
 }
 
-test('Lesson 49 with no progress enters the first beat', () => {
+function endAvailablePresentation(runtime, current, limit = 32) {
+  let result = current;
+  for (let count = 0; result.snapshot.presentationAwaitingEnd; count += 1) {
+    assert.ok(count < limit, 'presentation moments must settle without an unbounded loop');
+    result = runtime.dispatch({
+      type: 'presentation/ended',
+      experienceRevision: result.snapshot.experienceRevision,
+      stateVersion: result.snapshot.stateVersion,
+      microtaskId: result.snapshot.microtaskId,
+      attemptRevision: result.snapshot.attemptRevision,
+      momentId: result.snapshot.currentPresentationMomentId
+    });
+  }
+  return result;
+}
+
+test('Lesson 1–2 V2 publishes the frozen deterministic shuffle vector through its current challenge snapshot', () => {
+  const unitV2 = lesson12V2Fixture();
+  const first = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 1 })
+    .enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-alpha' });
+  const second = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 999 })
+    .enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-alpha' });
+
+  assert.deepEqual({
+    experienceRevision: first.snapshot.experienceRevision,
+    unitAttemptId: first.snapshot.unitAttemptId,
+    attemptRevision: first.snapshot.attemptRevision,
+    challengeRef: first.snapshot.challengeRef,
+    challengeSourceRef: first.snapshot.challengeSourceRef,
+    shuffleSeed: first.snapshot.shuffleSeed,
+    shuffleAlgorithmVersion: first.snapshot.shuffleAlgorithmVersion,
+    optionIds: first.snapshot.optionIds
+  }, {
+    experienceRevision: 'lesson1-2-v2.2',
+    unitAttemptId: 'attempt-alpha',
+    attemptRevision: 0,
+    challengeRef: 'L01-M07:C01',
+    challengeSourceRef: 'L01-W07',
+    shuffleSeed: 991944543,
+    shuffleAlgorithmVersion: 'fnv1a32-v1+mulberry32-v1+fisher-yates-v1',
+    optionIds: ['watch', 'handbag', 'book', 'pen']
+  });
+  assert.deepEqual(second.snapshot.optionIds, first.snapshot.optionIds);
+});
+
+test('Lesson 1–2 V2 advances presentation moments only from authored runtime conditions', () => {
+  const unitV2 = lesson12PresentationFixture();
+  const firstChallenge = unitV2.beats[0].microtasks[0].steps[0];
+  firstChallenge.audioSequence = {
+    segments: [{
+      segmentId: 'L01-M07:C01:instruction', sourceRef: 'L01-W07',
+      text: 'handbag', audioSrc: '/handbag.mp3'
+    }]
+  };
+  const ledger = fakeRevisionLedger();
+  const runtime = create({ unit: unitV2, ledger, seed: 201 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'moment-path' });
+
+  assert.equal(current.snapshot.currentPresentationMomentId, 'task-enter');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.phase, null);
+  assert.deepEqual(current.effects.map(effect => effect.type), ['scene/show']);
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.equal(ledger.events.length, 0);
+
+  const redrawn = runtime.snapshot();
+  assert.equal(redrawn.currentPresentationMomentId, 'task-enter');
+  const reducedMotion = runtime.dispatch({
+    type: 'preferences/reduced-motion', reduced: true,
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(reducedMotion.effects[0].reason, 'command-not-allowed');
+  assert.equal(reducedMotion.snapshot.currentPresentationMomentId, 'task-enter');
+  assert.equal(reducedMotion.snapshot.stateVersion, current.snapshot.stateVersion);
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-instruction-audio');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.deepEqual(current.effects.map(effect => effect.type), [
+    'runtime/presentation-moment-ended', 'audio/play'
+  ]);
+
+  const stalePresentation = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: 'task-enter'
+  });
+  assert.equal(stalePresentation.effects[0].reason, 'presentation-moment-mismatch');
+  assert.equal(stalePresentation.snapshot.currentPresentationMomentId, 'first-instruction-audio');
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-instruction-audio');
+  assert.equal(current.snapshot.presentationAwaitingEnd, false);
+
+  const duplicatePresentation = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(duplicatePresentation.effects[0].reason, 'presentation-moment-already-ended');
+  assert.equal(duplicatePresentation.snapshot.currentPresentationMomentId, 'first-instruction-audio');
+  assert.equal(duplicatePresentation.snapshot.presentationAwaitingEnd, false);
+  assert.deepEqual(duplicatePresentation.snapshot.temporaryResults, []);
+  assert.equal(duplicatePresentation.snapshot.adventureHearts, 3);
+  assert.equal(ledger.events.length, 0);
+
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-response-open');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C01');
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.equal(ledger.events.length, 0);
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-response-open');
+
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-challenge-complete');
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  const completedAudioIdentity = {
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision
+  };
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-challenge-complete');
+
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    ...completedAudioIdentity
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'second-challenge-active');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C02');
+
+  const late = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    ...completedAudioIdentity
+  });
+  assert.equal(late.effects[0].reason, 'audio-request-mismatch');
+  assert.equal(late.snapshot.currentPresentationMomentId, 'second-challenge-active');
+
+  const refreshed = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 999 })
+    .enter({ entryLesson: 'lesson1', unitAttemptId: 'moment-path' });
+  const sandbox = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 777 })
+    .preview({ microtaskId: 'L01-M07', unitAttemptId: 'moment-path' });
+  assert.equal(refreshed.snapshot.currentPresentationMomentId, 'task-enter');
+  assert.equal(sandbox.snapshot.currentPresentationMomentId, 'task-enter');
+  assert.equal(refreshed.snapshot.presentationAwaitingEnd, true);
+  assert.equal(sandbox.snapshot.presentationAwaitingEnd, true);
+});
+
+test('Lesson 1–2 V2 does not start the next audio challenge before the submitted challenge settle moment ends', () => {
+  const unitV2 = lesson12PresentationFixture();
+  const secondStep = unitV2.beats[0].microtasks[0].steps[1];
+  secondStep.audioSequence = {
+    segments: [{
+      segmentId: 'L01-M07:C02:instruction', sourceRef: 'L02-W03',
+      text: 'book', audioSrc: '/book.mp3'
+    }]
+  };
+  const runtime = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 206 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'settle-before-next-audio' });
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-response-open');
+  const fastTap = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(fastTap.effects[0].reason, 'presentation-moment-not-ended');
+  assert.deepEqual(fastTap.snapshot.temporaryResults, []);
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-challenge-complete');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C01');
+
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-challenge-complete');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C01');
+  assert.equal(current.effects.some(effect => effect.type === 'audio/play'), false);
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'second-challenge-active');
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C02');
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.effects.at(-1).type, 'audio/play');
+  assert.equal(current.effects.at(-1).sourceRef, 'L02-W03');
+});
+
+test('Lesson 1–2 V2 derives story, save, and sandbox-complete moments without extra evidence', () => {
+  const unitV2 = lesson12PresentationFixture();
+  unitV2.beats[0].microtasks = [unitV2.beats[0].microtasks[1]];
+  const ledger = fakeRevisionLedger({ failOnType: 'microtask-completed', failures: 1 });
+  const runtime = create({ unit: unitV2, ledger, seed: 202 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'story-moments' });
+
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-enter');
+  assert.equal(current.snapshot.phase, null);
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+  assert.equal(current.snapshot.adventureHearts, 3);
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-action');
+  assert.equal(current.snapshot.phase, 'awaiting-response');
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-action');
+
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-save-retry');
+  assert.equal(current.snapshot.phase, 'persistence-retry');
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+  assert.deepEqual(current.snapshot.completedMicrotaskIds, []);
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.deepEqual(ledger.events.map(event => event.type), ['microtask-completed']);
+
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-save-retry');
+
+  current = runtime.dispatch({
+    type: 'persistence/retry', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-complete');
+  assert.equal(current.snapshot.microtaskStatus, 'completed');
+  assert.deepEqual(current.snapshot.completedMicrotaskIds, ['L01-M08']);
+  assert.deepEqual(ledger.events.map(event => event.type), [
+    'microtask-completed', 'microtask-completed'
+  ]);
+
+  const sandboxLedger = fakeRevisionLedger();
+  const sandboxRuntime = create({ unit: unitV2, ledger: sandboxLedger, seed: 203 });
+  let sandbox = sandboxRuntime.preview({ microtaskId: 'L01-M08', unitAttemptId: 'story-sandbox' });
+  assert.equal(sandbox.snapshot.currentPresentationMomentId, 'story-enter');
+  sandbox = sandboxRuntime.dispatch({
+    type: 'presentation/ended', experienceRevision: sandbox.snapshot.experienceRevision,
+    stateVersion: sandbox.snapshot.stateVersion, microtaskId: sandbox.snapshot.microtaskId,
+    attemptRevision: sandbox.snapshot.attemptRevision,
+    momentId: sandbox.snapshot.currentPresentationMomentId
+  });
+  assert.equal(sandbox.snapshot.currentPresentationMomentId, 'story-action');
+  sandbox = sandboxRuntime.dispatch({
+    type: 'presentation/ended', experienceRevision: sandbox.snapshot.experienceRevision,
+    stateVersion: sandbox.snapshot.stateVersion, microtaskId: sandbox.snapshot.microtaskId,
+    attemptRevision: sandbox.snapshot.attemptRevision,
+    momentId: sandbox.snapshot.currentPresentationMomentId
+  });
+  sandbox = sandboxRuntime.dispatch({
+    type: 'response/submit', experienceRevision: sandbox.snapshot.experienceRevision,
+    stateVersion: sandbox.snapshot.stateVersion,
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  });
+  assert.equal(sandbox.snapshot.currentPresentationMomentId, 'story-complete');
+  assert.equal(sandbox.snapshot.microtaskStatus, 'practice-complete');
+  assert.deepEqual(sandbox.snapshot.completedMicrotaskIds, []);
+  assert.equal(sandbox.snapshot.adventureHearts, 3);
+  assert.equal(sandboxLedger.events.length, 0);
+});
+
+test('Lesson 1–2 V2 holds a saved microtask completion moment before entering the next task', () => {
+  const unitV2 = lesson12PresentationFixture();
+  const persisted = {
+    experienceRevision: unitV2.experienceRevision,
+    unitAttemptId: 'terminal-gate',
+    completedMicrotaskIds: [],
+    storyFacts: [],
+    adventureHeartsRemaining: 3,
+    buildStage: 0
+  };
+  const ledger = {
+    events: [],
+    read() { return { units: { [unitV2.unitId]: structuredClone(persisted) } }; },
+    apply(event) {
+      this.events.push(structuredClone(event));
+      if (event.type === 'microtask-completed') {
+        persisted.completedMicrotaskIds = [...new Set([
+          ...persisted.completedMicrotaskIds,
+          event.microtaskId
+        ])];
+        persisted.storyFacts = [...new Set([...persisted.storyFacts, ...event.storyFacts])];
+        persisted.adventureHeartsRemaining = event.adventureHeartsRemaining;
+      }
+      return { persisted: true, status: 'applied' };
+    }
+  };
+  const runtime = create({ unit: unitV2, ledger, seed: 204 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'terminal-gate' });
+
+  function endCurrentMoment() {
+    current = runtime.dispatch({
+      type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision,
+      momentId: current.snapshot.currentPresentationMomentId
+    });
+  }
+
+  endCurrentMoment();
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-response-open');
+  endCurrentMoment();
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'first-challenge-complete');
+  endCurrentMoment();
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'second-challenge-active');
+  endCurrentMoment();
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L02-W03', entityId: 'book' }
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'second-challenge-complete');
+  endCurrentMoment();
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+
+  assert.equal(current.snapshot.microtaskId, 'L01-M07');
+  assert.equal(current.snapshot.microtaskStatus, 'completed');
+  assert.equal(current.snapshot.currentPresentationMomentId, 'task-complete');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.deepEqual(current.snapshot.completedMicrotaskIds, ['L01-M07']);
+  assert.equal(ledger.events.length, 1);
+  assert.equal(current.snapshot.adventureHearts, 3);
+
+  endCurrentMoment();
+  assert.equal(current.snapshot.microtaskId, 'L01-M08');
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-enter');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.equal(ledger.events.length, 1);
+
+  const refreshed = create({ unit: unitV2, ledger, seed: 205 })
+    .enter({ entryLesson: 'lesson1', unitAttemptId: 'terminal-gate' });
+  assert.equal(refreshed.snapshot.microtaskId, 'L01-M08');
+  assert.equal(refreshed.snapshot.currentPresentationMomentId, 'story-enter');
+  assert.equal(ledger.events.length, 1);
+});
+
+test('Lesson 1–2 V2 refresh restores the saved knowledge terminal, then the section rest, without re-answering', () => {
+  const fixture = durableContinuationFixture();
+  const store = createMemoryAdapter();
+  const outbox = createMemoryAdapter();
+  const ledger = openDurableFixtureLedger(fixture, store);
+  const firstRuntime = create({ unit: fixture.unit, ledger, outbox, seed: 210 });
+  let current = firstRuntime.enter({ entryLesson: 'lesson2', unitAttemptId: 'durable-attempt' });
+
+  current = endPresentation(firstRuntime, current);
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-action');
+  current = endPresentation(firstRuntime, current);
+  current = firstRuntime.dispatch({
+    type: 'response/submit',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    response: { action: 'confirm' }
+  });
+  assert.equal(current.snapshot.microtaskId, 'L02-M15');
+  assert.equal(current.snapshot.microtaskStatus, 'completed');
+  assert.equal(current.snapshot.currentPresentationMomentId, 'knowledge-layer');
+  assert.equal(ledger.read().units['DURABLE-U01'].pendingUiContinuation.kind, 'terminal-presentation');
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+
+  const refreshedRuntime = create({ unit: fixture.unit, ledger, outbox, seed: 211 });
+  let refreshed = refreshedRuntime.enter({ entryLesson: 'lesson2', unitAttemptId: 'durable-attempt' });
+  assert.equal(refreshed.snapshot.microtaskId, 'L02-M15');
+  assert.equal(refreshed.snapshot.microtaskStatus, 'completed');
+  assert.equal(refreshed.snapshot.currentPresentationMomentId, 'knowledge-layer');
+  assert.equal(refreshed.snapshot.presentationAwaitingEnd, true);
+  assert.deepEqual(refreshed.snapshot.temporaryResults, []);
+  assert.deepEqual(ledger.read().units['DURABLE-U01'].completedMicrotaskIds, ['L02-M15']);
+
+  refreshed = endPresentation(refreshedRuntime, refreshed);
+  assert.equal(refreshed.snapshot.status, 'rest-stop');
+  assert.equal(ledger.read().units['DURABLE-U01'].pendingUiContinuation.kind, 'rest-stop');
+
+  const restRuntime = create({ unit: fixture.unit, ledger, outbox, seed: 212 });
+  let atRest = restRuntime.enter({ entryLesson: 'lesson2', unitAttemptId: 'durable-attempt' });
+  assert.equal(atRest.snapshot.status, 'rest-stop');
+  assert.equal(atRest.snapshot.microtaskId, 'L02-M15');
+  assert.deepEqual(atRest.snapshot.nextRestStop, {
+    restStopId: 'lesson2-midpoint-rest-stop', type: 'section', nextMicrotaskId: 'NEXT-M01'
+  });
+
+  atRest = restRuntime.dispatch({
+    type: 'rest-stop/continue',
+    experienceRevision: atRest.snapshot.experienceRevision,
+    stateVersion: atRest.snapshot.stateVersion
+  });
+  assert.equal(atRest.snapshot.microtaskId, 'NEXT-M01');
+  assert.equal(atRest.snapshot.currentPresentationMomentId, 'next-enter');
+  assert.equal(ledger.read().units['DURABLE-U01'].pendingUiContinuation, null);
+
+  const afterContinue = create({ unit: fixture.unit, ledger, outbox, seed: 213 })
+    .enter({ entryLesson: 'lesson2', unitAttemptId: 'durable-attempt' });
+  assert.equal(afterContinue.snapshot.microtaskId, 'NEXT-M01');
+  assert.equal(afterContinue.snapshot.currentPresentationMomentId, 'next-enter');
+});
+
+test('Lesson 1–2 V2 refresh restores a saved chapter rest until the child explicitly continues', () => {
+  const fixture = durableContinuationFixture({
+    terminalMomentId: null,
+    restStopId: 'lesson1-chapter-stop',
+    restStopType: 'chapter'
+  });
+  const store = createMemoryAdapter();
+  const outbox = createMemoryAdapter();
+  const ledger = openDurableFixtureLedger(fixture, store);
+  const runtime = create({ unit: fixture.unit, ledger, outbox, seed: 214 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'chapter-attempt' });
+  current = endPresentation(runtime, current);
+  current = endPresentation(runtime, current);
+  current = runtime.dispatch({
+    type: 'response/submit',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    response: { action: 'confirm' }
+  });
+  assert.equal(current.snapshot.status, 'rest-stop');
+
+  const refreshed = create({ unit: fixture.unit, ledger, outbox, seed: 215 })
+    .enter({ entryLesson: 'lesson1', unitAttemptId: 'chapter-attempt' });
+  assert.equal(refreshed.snapshot.status, 'rest-stop');
+  assert.equal(refreshed.snapshot.microtaskId, 'L01-M11');
+  assert.equal(refreshed.snapshot.nextRestStop.restStopId, 'lesson1-chapter-stop');
+  assert.deepEqual(ledger.read().units['DURABLE-U01'].completedMicrotaskIds, ['L01-M11']);
+});
+
+test('Lesson 1–2 V2 settles only the submitted current challenge and keeps the full candidate set for the next one', () => {
+  const runtime = create({ unit: lesson12V2Fixture(), ledger: fakeRevisionLedger(), seed: 2 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-alpha' });
+
+  const missingIdentity = runtime.dispatch({
+    type: 'response/submit', response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(missingIdentity.effects[0].type, 'runtime/command-rejected');
+  assert.equal(missingIdentity.effects[0].reason, 'experience-revision-mismatch');
+  assert.deepEqual(missingIdentity.snapshot.temporaryResults, []);
+
+  current = runtime.dispatch({
+    type: 'response/submit',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.snapshot.temporaryResults.length, 1);
+  assert.equal(current.snapshot.temporaryResults[0].resultId, 'NCE-U01-T01:L01-W07:word-form');
+  assert.deepEqual(current.effects.map(effect => effect.type), ['feedback/correct', 'audio/play']);
+  assert.equal(current.effects[1].visibleText, 'handbag');
+
+  current = runtime.dispatch({
+    type: 'audio/ended',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C02');
+  assert.equal(current.snapshot.challengeSourceRef, 'L02-W03');
+  assert.deepEqual([...current.snapshot.optionIds].sort(), ['book', 'handbag', 'pen', 'watch']);
+
+  const late = runtime.dispatch({
+    type: 'response/submit',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    challengeRef: 'L01-M07:C01',
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(late.effects[0].reason, 'challenge-ref-mismatch');
+  assert.deepEqual(late.snapshot.temporaryResults.map(result => result.resultId), [
+    'NCE-U01-T01:L01-W07:word-form'
+  ]);
+});
+
+test('Lesson 1–2 V2 opens an audio-led response only for the current request and segment real ended command', () => {
+  const unitV2 = lesson12V2Fixture();
+  const result = unitV2.beats[0].microtasks[0].targetResults[0];
+  const challenge = unitV2.beats[0].microtasks[0].steps[0];
+  result.channel = 'audio-form-supported';
+  challenge.channel = 'audio-form-supported';
+  challenge.audioSequence = {
+    segments: [{
+      segmentId: 'L01-M07:C01:prompt', sourceRef: 'L01-W07',
+      text: 'handbag', audioSrc: '/handbag.mp3'
+    }]
+  };
+  const runtime = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 3 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-audio' });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.effects.at(-1).type, 'audio/play');
+
+  const beforeSound = runtime.dispatch({
+    type: 'response/submit',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(beforeSound.effects[0].reason, 'response-not-open');
+  assert.deepEqual(beforeSound.snapshot.temporaryResults, []);
+
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  const playEffect = current.effects.at(-1);
+  assert.deepEqual({
+    experienceRevision: playEffect.experienceRevision,
+    microtaskId: playEffect.microtaskId,
+    attemptRevision: playEffect.attemptRevision,
+    segmentId: playEffect.segmentId,
+    visibleText: playEffect.visibleText
+  }, {
+    experienceRevision: 'lesson1-2-v2.2',
+    microtaskId: 'L01-M07',
+    attemptRevision: 0,
+    segmentId: 'L01-M07:C01:prompt',
+    visibleText: 'handbag'
+  });
+
+  const originalRequestId = current.snapshot.audio.requestId;
+  const replayed = runtime.dispatch({
+    type: 'audio/play',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    challengeRef: current.snapshot.challengeRef
+  });
+  assert.deepEqual(replayed.effects.map(effect => effect.type), ['audio/cancel', 'audio/play']);
+  assert.equal(replayed.effects[0].requestId, originalRequestId);
+  assert.notEqual(replayed.snapshot.audio.requestId, originalRequestId);
+  current = replayed;
+
+  const stale = runtime.dispatch({
+    type: 'audio/ended',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: originalRequestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(stale.effects[0].reason, 'audio-request-mismatch');
+  assert.equal(stale.snapshot.phase, 'audio-playing');
+  assert.deepEqual(stale.snapshot.temporaryResults, []);
+
+  current = runtime.dispatch({
+    type: 'audio/ended',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.phase, 'awaiting-response');
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+});
+
+test('Lesson 1–2 V2 suspends required audio across page lifecycle without spending a retry or accepting a late ended', () => {
+  const unitV2 = lesson12V2Fixture();
+  const result = unitV2.beats[0].microtasks[0].targetResults[0];
+  const challenge = unitV2.beats[0].microtasks[0].steps[0];
+  result.channel = 'audio-form-supported';
+  challenge.channel = 'audio-form-supported';
+  challenge.audioSequence = {
+    segments: [{
+      segmentId: 'L01-M07:C01:prompt', sourceRef: 'L01-W07',
+      text: 'handbag', audioSrc: '/handbag.mp3'
+    }]
+  };
+  const runtime = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 304 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'page-lifecycle' });
+  const original = {
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId,
+    retryAttempt: current.snapshot.audio.retryAttempt,
+    hearts: current.snapshot.adventureHeartsRemaining
+  };
+
+  current = runtime.dispatch({
+    type: 'audio/suspend',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.phase, 'audio-suspended');
+  assert.equal(current.snapshot.audio.status, 'suspended');
+  assert.deepEqual(current.effects, [{
+    type: 'audio/cancel',
+    experienceRevision: 'lesson1-2-v2.2',
+    microtaskId: 'L01-M07',
+    attemptRevision: 0,
+    requestId: original.requestId
+  }]);
+  assert.equal(current.snapshot.audio.retryAttempt, original.retryAttempt);
+  assert.equal(current.snapshot.adventureHeartsRemaining, original.hearts);
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+
+  const late = runtime.dispatch({
+    type: 'audio/ended',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: original.requestId,
+    segmentId: original.segmentId
+  });
+  assert.equal(late.effects[0].reason, 'audio-not-playing');
+  assert.equal(late.snapshot.phase, 'audio-suspended');
+  assert.deepEqual(late.snapshot.temporaryAudioContactRefs, []);
+
+  current = runtime.dispatch({
+    type: 'audio/resume',
+    experienceRevision: late.snapshot.experienceRevision,
+    stateVersion: late.snapshot.stateVersion,
+    challengeRef: late.snapshot.challengeRef
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.snapshot.audio.segmentId, original.segmentId);
+  assert.notEqual(current.snapshot.audio.requestId, original.requestId);
+  assert.equal(current.snapshot.audio.retryAttempt, original.retryAttempt);
+  assert.equal(current.snapshot.adventureHeartsRemaining, original.hearts);
+  assert.equal(current.effects[0].type, 'audio/play');
+  assert.equal(current.effects[0].visibleText, 'handbag');
+});
+
+test('Lesson 1–2 V2 retries transient audio at 250 and 750 ms then remains visibly fail-closed', () => {
+  const unitV2 = lesson12V2Fixture();
+  const challenge = unitV2.beats[0].microtasks[0].steps[0];
+  unitV2.beats[0].microtasks[0].targetResults[0].channel = 'audio-form-supported';
+  challenge.channel = 'audio-form-supported';
+  challenge.audioSequence = {
+    segments: [{ segmentId: 'word-prompt', sourceRef: 'L01-W07', text: 'handbag', audioSrc: '/handbag.mp3' }]
+  };
+  const runtime = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 4 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-retry' });
+  const initialRequestId = current.snapshot.audio.requestId;
+
+  current = runtime.dispatch({
+    type: 'audio/failed', failureKind: 'transient', reason: 'network',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId, segmentId: current.snapshot.audio.segmentId
+  });
+  assert.notEqual(current.snapshot.audio.requestId, initialRequestId);
+  assert.equal(current.snapshot.phase, 'audio-retry');
+  assert.equal(current.snapshot.audio.retryAttempt, 1);
+  assert.equal(current.snapshot.audio.manualRetryRequired, false);
+  assert.equal(current.effects[0].type, 'audio/play');
+  assert.equal(current.effects[0].delayMs, 250);
+  assert.equal(current.effects[0].visibleText, 'handbag');
+
+  current = runtime.dispatch({
+    type: 'audio/failed', failureKind: 'transient', reason: 'network',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId, segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.audio.retryAttempt, 2);
+  assert.equal(current.effects[0].delayMs, 750);
+
+  current = runtime.dispatch({
+    type: 'audio/failed', failureKind: 'transient', reason: 'network',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId, segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.phase, 'audio-failed');
+  assert.equal(current.snapshot.audio.manualRetryRequired, true);
+  assert.equal(current.effects[0].type, 'audio/failure');
+  assert.equal(current.effects[0].failClosed, true);
+  assert.equal(current.effects[0].visibleText, 'handbag');
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+
+  const bypass = runtime.dispatch({
+    type: 'audio/continue-without-sound',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(bypass.effects[0].reason, 'command-not-allowed');
+  assert.equal(bypass.snapshot.phase, 'audio-failed');
+
+  const replay = runtime.dispatch({
+    type: 'audio/retry', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef
+  });
+  assert.equal(replay.snapshot.phase, 'audio-playing');
+  assert.equal(replay.snapshot.audio.retryAttempt, 0);
+  assert.notEqual(replay.snapshot.audio.requestId, current.snapshot.audio.requestId);
+});
+
+test('Lesson 1–2 V2 audio requests stay unique across runtime reconstruction in the same millisecond', () => {
+  const originalNow = Date.now;
+  Date.now = () => 123456789;
+  try {
+    const firstRuntime = create({ unit: nceUnit, ledger: fakeRevisionLedger(), seed: 41 });
+    const secondRuntime = create({ unit: nceUnit, ledger: fakeRevisionLedger(), seed: 41 });
+    let first = firstRuntime.enter({ entryLesson: 'lesson1', unitAttemptId: 'same-attempt' });
+    let second = secondRuntime.enter({ entryLesson: 'lesson1', unitAttemptId: 'same-attempt' });
+    first = endAvailablePresentation(firstRuntime, first);
+    second = endAvailablePresentation(secondRuntime, second);
+    assert.notEqual(first.snapshot.audio.requestId, second.snapshot.audio.requestId);
+  } finally {
+    Date.now = originalNow;
+  }
+});
+
+test('Lesson 1–2 V2 audio retry remains on the failed segment instead of replaying completed segments', () => {
+  const runtime = create({ unit: nceUnit, ledger: fakeRevisionLedger(), seed: 42 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'segment-retry' });
+  current = endAvailablePresentation(runtime, current);
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  const failedSegmentId = current.snapshot.audio.segmentId;
+  const failedText = current.snapshot.audio.visibleText;
+
+  current = runtime.dispatch({
+    type: 'audio/failed', failureKind: 'transient', reason: 'network',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+
+  assert.equal(current.snapshot.audio.segmentId, failedSegmentId);
+  assert.equal(current.snapshot.audio.visibleText, failedText);
+  assert.equal(current.effects[0].segmentId, failedSegmentId);
+  assert.equal(current.effects[0].delayMs, 250);
+});
+
+test('Lesson 1–2 V2 keeps support after a correction and restarts the whole current microtask after rescue', () => {
+  const runtime = create({ unit: lesson12V2Fixture(), ledger: fakeRevisionLedger(), seed: 5 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-rescue' });
+  const command = (response, challengeRef = current.snapshot.challengeRef) => ({
+    type: 'response/submit',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    challengeRef,
+    response
+  });
+
+  current = runtime.dispatch(command({ sourceRef: 'L01-W07', entityId: 'book' }));
+  assert.equal(current.snapshot.adventureHearts, 2);
+  assert.equal(current.snapshot.supportLevel, 'reobserve');
+  assert.equal(current.effects[0].supportKind, 'reobserve');
+
+  current = runtime.dispatch(command({ sourceRef: 'L01-W07', entityId: 'handbag' }));
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.equal(current.snapshot.temporaryResults[0].outcome, 'supported');
+  assert.equal(current.snapshot.temporaryResults[0].supportLevel, 'reobserve');
+  assert.equal(current.snapshot.temporaryResults[0].heartsRemaining, 3);
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C02');
+
+  for (let count = 0; count < 3; count += 1) {
+    current = runtime.dispatch(command({ sourceRef: 'L02-W03', entityId: 'pen' }));
+  }
+  assert.equal(current.snapshot.phase, 'rescue-model');
+  assert.equal(current.snapshot.adventureHearts, 0);
+  assert.equal(current.snapshot.temporaryResults.length, 1);
+  assert.deepEqual(current.effects.map(effect => effect.type), ['feedback/partner-demo']);
+  assert.equal(current.effects[0].changedExample, true);
+  assert.equal(current.effects[0].revealsAnswer, false);
+
+  current = runtime.dispatch({
+    type: 'rescue/model-ended',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    challengeRef: current.snapshot.challengeRef
+  });
+  assert.deepEqual(current.effects.map(effect => effect.type), [
+    'runtime/temporary-cleared',
+    'runtime/attempt-revision-incremented',
+    'adventure-hearts/refilled',
+    'scene/restart-microtask'
+  ]);
+  assert.equal(current.snapshot.microtaskId, 'L01-M07');
+  assert.equal(current.snapshot.challengeRef, 'L01-M07:C01');
+  assert.equal(current.snapshot.attemptRevision, 1);
+  assert.equal(current.snapshot.adventureHearts, 3);
+  assert.equal(current.snapshot.rescueUsed, true);
+  assert.deepEqual(current.snapshot.temporaryResults, []);
+
+  for (const response of [
+    { sourceRef: 'L01-W07', entityId: 'handbag' },
+    { sourceRef: 'L02-W03', entityId: 'book' }
+  ]) {
+    current = runtime.dispatch(command(response));
+    current = runtime.dispatch({
+      type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+      segmentId: current.snapshot.audio.segmentId
+    });
+    current = endAvailablePresentation(runtime, current);
+  }
+  current = endAvailablePresentation(runtime, current);
+  assert.equal(current.snapshot.microtaskId, 'L01-M08');
+  assert.equal(current.snapshot.rescueUsed, false);
+  assert.equal(current.snapshot.supportLevel, 'none');
+});
+
+test('Lesson 1–2 V2 always uses the model layer when a carried-over final heart is depleted', () => {
+  const ledger = fakeRevisionLedger({
+    unitState: {
+      experienceRevision: 'lesson1-2-v2.4',
+      completedMicrotaskIds: ['L01-M07'],
+      adventureHeartsRemaining: 1,
+      storyFacts: [],
+      buildStage: 0
+    }
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 51 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'last-heart' });
+  const task = nceUnit.beats.flatMap(beat => beat.microtasks || [])
+    .find(candidate => candidate.microtaskId === 'L01-M08');
+  const modelLayer = task.steps[0].challenges[0].supportLayers[2];
+
+  current = endAvailablePresentation(runtime, current);
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { entityId: 'station-keeper' }
+  });
+
+  assert.equal(current.snapshot.phase, 'rescue-model');
+  assert.equal(current.snapshot.supportLevel, 'model');
+  assert.equal(current.effects[0].supportKind, 'changed-example-model');
+  assert.equal(current.effects[0].message, modelLayer.copy);
+});
+
+test('Lesson 1–2 V2 restores a revision-scoped pending commit and retries persistence without re-answering', () => {
+  const unitV2 = lesson12PresentationFixture();
+  const outbox = createMemoryAdapter();
+  const unavailableLedger = fakeRevisionLedger({
+    failOnType: 'microtask-completed', failures: 1
+  });
+  const runtime = create({
+    unit: unitV2, ledger: unavailableLedger, outbox, seed: 6
+  });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-outbox' });
+  current = endAvailablePresentation(runtime, current);
+
+  for (const response of [
+    { sourceRef: 'L01-W07', entityId: 'handbag' },
+    { sourceRef: 'L02-W03', entityId: 'book' }
+  ]) {
+    current = runtime.dispatch({
+      type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+      response
+    });
+    current = runtime.dispatch({
+      type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+      segmentId: current.snapshot.audio.segmentId
+    });
+    current = endAvailablePresentation(runtime, current);
+  }
+
+  assert.equal(current.snapshot.phase, 'persistence-retry');
+  assert.equal(current.snapshot.pendingCommit.status, 'stored');
+  assert.equal(current.snapshot.pendingCommit.payload.experienceRevision, 'lesson1-2-v2.2');
+  assert.deepEqual(
+    current.snapshot.pendingCommit.payload.targetResults.map(result => result.challengeRef),
+    ['L01-M07:C01', 'L01-M07:C02']
+  );
+  assert.equal(unavailableLedger.events.length, 1);
+  assert.equal(unavailableLedger.events[0].type, 'microtask-completed');
+
+  const restoredLedger = fakeRevisionLedger();
+  const restored = create({
+    unit: unitV2, ledger: restoredLedger, outbox, seed: 600
+  });
+  current = restored.enter({ entryLesson: 'lesson1', unitAttemptId: 'attempt-outbox' });
+  assert.equal(current.snapshot.microtaskId, 'L01-M07');
+  assert.equal(current.snapshot.phase, 'persistence-retry');
+  assert.equal(current.snapshot.currentPresentationMomentId, 'save-retry');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  assert.equal(current.effects[0].type, 'runtime/pending-commit-restored');
+
+  current = restored.dispatch({
+    type: 'persistence/retry',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  current = endAvailablePresentation(restored, current);
+  assert.equal(restoredLedger.events.length, 1);
+  assert.equal(restoredLedger.events[0].eventId, unavailableLedger.events[0].eventId);
+  assert.equal(current.snapshot.microtaskId, 'L01-M08');
+  assert.equal(current.snapshot.pendingCommit, null);
+  assert.deepEqual(current.snapshot.completedMicrotaskIds, ['L01-M07']);
+});
+
+test('Lesson 1–2 V2 ignores malformed pending commits instead of crashing the page bootstrap', () => {
+  const unitV2 = lesson12PresentationFixture();
+  const attemptId = 'attempt-malformed-outbox';
+  const firstBeat = unitV2.beats[0];
+  const firstTask = firstBeat.microtasks[0];
+  const pendingCommitKey = `learning-runtime:${unitV2.unitId}:${unitV2.experienceRevision}:pending-commit`;
+  const validPayloadShape = {
+    eventId: 'fixture:malformed-pending',
+    type: 'microtask-completed',
+    unitId: unitV2.unitId,
+    experienceRevision: unitV2.experienceRevision,
+    unitAttemptId: attemptId,
+    attemptRevision: 0,
+    beatId: firstBeat.beatId,
+    microtaskId: firstTask.microtaskId,
+    checkpointId: firstTask.checkpointAfterSuccess.checkpointId,
+    completionStatus: 'completed-independent',
+    targetResults: [],
+    sourceContacts: [],
+    audioContactRefs: [],
+    missingAudioRefs: [],
+    storyFacts: [],
+    adventureHeartsRemaining: 3,
+    source: 'new-learning'
+  };
+  const malformedValues = [
+    {
+      experienceRevision: unitV2.experienceRevision,
+      unitAttemptId: attemptId,
+      microtaskId: firstTask.microtaskId
+    },
+    {
+      experienceRevision: unitV2.experienceRevision,
+      unitAttemptId: attemptId,
+      microtaskId: firstTask.microtaskId,
+      payload: { ...validPayloadShape, targetResults: null }
+    },
+    {
+      experienceRevision: unitV2.experienceRevision,
+      unitAttemptId: attemptId,
+      microtaskId: firstTask.microtaskId,
+      payload: { ...validPayloadShape, targetResults: {} }
+    },
+    {
+      experienceRevision: unitV2.experienceRevision,
+      unitAttemptId: attemptId,
+      microtaskId: firstTask.microtaskId,
+      payload: { ...validPayloadShape, targetResults: [null] }
+    }
+  ];
+
+  for (const value of malformedValues) {
+    const outbox = createMemoryAdapter({
+      [pendingCommitKey]: { revision: 1, value }
+    });
+    const runtime = create({
+      unit: unitV2,
+      ledger: fakeRevisionLedger(),
+      outbox,
+      seed: 62
+    });
+    let current;
+
+    assert.doesNotThrow(() => {
+      current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: attemptId });
+    });
+    assert.equal(current.snapshot.microtaskId, firstTask.microtaskId);
+    assert.equal(current.snapshot.pendingCommit, null);
+    assert.notEqual(current.snapshot.phase, 'persistence-retry');
+    assert.equal(
+      current.effects.some(effect => effect.type === 'runtime/pending-commit-restored'),
+      false
+    );
+  }
+});
+
+test('Lesson 1–2 V2 permits a current-session save retry when durable outbox storage is unavailable', () => {
+  const unavailableOutbox = {
+    load() { return { status: 'unavailable', revision: 0, value: null }; },
+    commit() { return { status: 'unavailable', persisted: false, revision: 0, value: null }; }
+  };
+  const ledger = fakeRevisionLedger();
+  const runtime = create({
+    unit: lesson12V2Fixture(), ledger, outbox: unavailableOutbox, seed: 61
+  });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'volatile-save' });
+
+  for (const response of [
+    { sourceRef: 'L01-W07', entityId: 'handbag' },
+    { sourceRef: 'L02-W03', entityId: 'book' }
+  ]) {
+    current = runtime.dispatch({
+      type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+      response
+    });
+    current = runtime.dispatch({
+      type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+      segmentId: current.snapshot.audio.segmentId
+    });
+  }
+  assert.equal(current.snapshot.phase, 'persistence-retry');
+  assert.equal(current.snapshot.pendingCommit.status, 'memory-only');
+  assert.equal(current.effects[0].type, 'runtime/pending-commit-unprotected');
+
+  current = runtime.dispatch({
+    type: 'persistence/retry', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  current = endAvailablePresentation(runtime, current);
+  assert.equal(current.snapshot.microtaskId, 'L01-M08');
+  assert.equal(current.snapshot.pendingCommit, null);
+  assert.equal(ledger.events.length, 1);
+});
+
+test('Lesson 1–2 V2 isolates every legacy progress field when the stored experience revision differs', () => {
+  const runtime = create({
+    unit: lesson12V2Fixture(),
+    ledger: fakeRevisionLedger({
+      unitState: {
+        experienceRevision: 'lesson1-2-v1',
+        unitAttemptId: 'old-attempt',
+        completedMicrotaskIds: ['L01-M07', 'L01-M08'],
+        checkpoint: { microtaskId: 'L01-M08' },
+        adventureHearts: 0,
+        buildStage: 5,
+        storyFacts: ['old-story-fact'],
+        resultCells: { old: { outcome: 'independent' } }
+      }
+    }),
+    seed: 7
+  });
+
+  const entered = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'fresh-attempt' });
+
+  assert.equal(entered.snapshot.microtaskId, 'L01-M07');
+  assert.equal(entered.snapshot.unitAttemptId, 'fresh-attempt');
+  assert.equal(entered.snapshot.adventureHearts, 3);
+  assert.equal(entered.snapshot.buildStage, 0);
+  assert.deepEqual(entered.snapshot.completedMicrotaskIds, []);
+  assert.deepEqual(entered.snapshot.committedFacts, []);
+  assert.deepEqual(entered.snapshot.diagnosticArchive, {
+    ignoredExperienceRevision: 'lesson1-2-v1',
+    reason: 'experience-revision-mismatch'
+  });
+});
+
+test('Lesson 1–2 V2 restores completed language directly into verification or the built state', () => {
+  const completedMicrotaskIds = nceUnit.beats.flatMap(beat => beat.microtasks || [])
+    .map(task => task.microtaskId);
+  const verifyingLedger = fakeRevisionLedger({
+    unitState: {
+      experienceRevision: 'lesson1-2-v2.4', completedMicrotaskIds,
+      adventureHeartsRemaining: 3, storyFacts: [], buildStage: 0,
+      completionReadback: { readyForBuild: true }
+    }
+  });
+  const verifyingRuntime = create({ unit: nceUnit, ledger: verifyingLedger, seed: 71 });
+  const verifying = verifyingRuntime
+    .enter({ entryLesson: 'lesson2', unitAttemptId: 'verify-restore' });
+  assert.equal(verifying.snapshot.microtaskId, 'L02-M21');
+  assert.equal(verifying.snapshot.status, 'active');
+  assert.equal(verifying.snapshot.phase, 'unit-verifying');
+  assert.equal(verifying.snapshot.currentPresentationMomentId, 'save-readback');
+  assert.equal(verifying.snapshot.presentationAwaitingEnd, true);
+  assert.equal(verifyingLedger.events.length, 0);
+  const prematureVerification = verifyingRuntime.dispatch({
+    type: 'unit/verify-retry', experienceRevision: verifying.snapshot.experienceRevision,
+    stateVersion: verifying.snapshot.stateVersion
+  });
+  assert.equal(prematureVerification.effects[0].reason, 'presentation-moment-not-ended');
+  assert.equal(verifyingLedger.events.length, 0);
+
+  const builtLedger = fakeRevisionLedger({
+    unitState: {
+      experienceRevision: 'lesson1-2-v2.4', completedMicrotaskIds,
+      adventureHeartsRemaining: 3, storyFacts: [], buildStage: 5,
+      completionReadback: { readyForBuild: true }
+    }
+  });
+  const built = create({ unit: nceUnit, ledger: builtLedger, seed: 72 })
+    .enter({ entryLesson: 'lesson2', unitAttemptId: 'built-restore' });
+  assert.equal(built.snapshot.status, 'unit-built');
+  assert.equal(built.snapshot.phase, 'completed');
+  assert.equal(built.snapshot.buildStage, 5);
+  assert.equal(built.snapshot.reachedMicrotaskIds.length, 17);
+  assert.equal(builtLedger.events.length, 0);
+});
+
+test('Lesson 1–2 V2 declarative rules accept the catalog single-entity challenge shape', () => {
+  assert.deepEqual(evaluateRule(
+    { type: 'select-one', acceptedEntityId: 'handbag-owner' },
+    { entityId: 'handbag-owner' }
+  ), { correct: true, mismatchPath: null });
+  assert.deepEqual(evaluateRule(
+    { type: 'match-entity', acceptedSourceRef: 'L01-W07', acceptedEntityId: 'handbag' },
+    { sourceRef: 'L01-W07', entityId: 'handbag' }
+  ), { correct: true, mismatchPath: null });
+  assert.equal(evaluateRule(
+    { type: 'match-entity', acceptedSourceRef: 'L01-W07', acceptedEntityId: 'handbag' },
+    { sourceRef: 'L01-W07', entityId: 'book' }
+  ).correct, false);
+});
+
+test('the real Lesson 1 first listen publishes all seven visible lines and their authored speakers', () => {
+  const runtime = create({ unit: nceUnit, ledger: fakeRevisionLedger(), seed: 8 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'actual-first-listen' });
+
+  assert.equal(current.snapshot.microtaskId, 'L01-M07');
+  assert.equal(current.snapshot.currentPresentationMomentId, 'story-briefing');
+  assert.equal(current.snapshot.phase, null);
+  assert.deepEqual(current.effects.map(effect => effect.type), ['scene/show']);
+  current = runtime.dispatch({
+    type: 'presentation/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    momentId: current.snapshot.currentPresentationMomentId
+  });
+  assert.equal(current.snapshot.currentPresentationMomentId, 'seven-line-listen');
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.deepEqual(current.effects.map(effect => effect.type), [
+    'runtime/presentation-moment-ended', 'audio/play'
+  ]);
+  assert.equal(current.snapshot.audio.refs.length, 7);
+  assert.deepEqual(current.snapshot.audio.refs.map(ref => ref.text), [
+    'Excuse me!', 'Yes?', 'Is this your handbag?', 'Pardon?',
+    'Is this your handbag?', 'Yes, it is.', 'Thank you very much.'
+  ]);
+  assert.deepEqual(current.snapshot.audio.refs.map(ref => ref.speaker), [
+    'man', 'woman', 'man', 'woman', 'man', 'woman', 'woman'
+  ]);
+  assert.equal(current.effects[1].speaker, 'man');
+  assert.equal(current.effects[1].visibleText, 'Excuse me!');
+  current = endAvailablePresentation(runtime, current);
+  assert.equal(current.snapshot.phase, 'audio-playing');
+
+  while (current.snapshot.phase === 'audio-playing') {
+    current = runtime.dispatch({
+      type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+      segmentId: current.snapshot.audio.segmentId
+    });
+  }
+  assert.deepEqual({
+    microtaskId: current.snapshot.microtaskId,
+    phase: current.snapshot.phase,
+    momentId: current.snapshot.currentPresentationMomentId,
+    presentationAwaitingEnd: current.snapshot.presentationAwaitingEnd
+  }, {
+    microtaskId: 'L01-M07',
+    phase: 'answered-awaiting-save',
+    momentId: 'listen-complete',
+    presentationAwaitingEnd: true
+  });
+  current = endAvailablePresentation(runtime, current);
+  const activeTask = nceUnit.beats.flatMap(beat => beat.microtasks || [])
+    .find(task => task.microtaskId === current.snapshot.microtaskId);
+  const firstChallenge = activeTask.steps
+    .flatMap(step => step.challenges || [])
+    .find(challenge => challenge.challengeRef === current.snapshot.challengeRef);
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { entityId: 'station-keeper' }
+  });
+  assert.equal(current.effects[0].type, 'feedback/support');
+  assert.equal(current.effects[0].message, firstChallenge.supportLayers[0].copy);
+});
+
+test('the real Lesson 1 first-listen Source contacts pass the revisioned ledger contract', () => {
+  const ledger = learningLedger.open({
+    store: createMemoryAdapter(),
+    key: 'lesson12-v2-source-contacts',
+    catalog,
+    clock: { learningDay: () => '2026-08-23' }
+  });
+  const runtime = create({
+    unit: nceUnit, ledger, outbox: createMemoryAdapter(), seed: 81
+  });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'source-contacts' });
+  current = endAvailablePresentation(runtime, current);
+
+  while (current.snapshot.microtaskId === 'L01-M07' && current.snapshot.phase === 'audio-playing') {
+    current = runtime.dispatch({
+      type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+      segmentId: current.snapshot.audio.segmentId
+    });
+  }
+  current = endAvailablePresentation(runtime, current);
+
+  const storedUnit = ledger.read().units['NCE-U01'];
+  assert.equal(current.snapshot.microtaskId, 'L01-M08');
+  assert.ok(storedUnit.completedMicrotaskIds.includes('L01-M07'));
+  assert.deepEqual(storedUnit.sourceContacts['L01-D01'].contactModes, ['experienced', 'audio-ended']);
+  assert.deepEqual(storedUnit.sourceContacts['L01-W04'].contactModes, ['experienced']);
+});
+
+test('Lesson 1 completion stops at its authored rest point before Lesson 2 and resumes explicitly', () => {
+  const ledger = fakeRevisionLedger({
+    unitState: {
+      experienceRevision: 'lesson1-2-v2.4', unitAttemptId: 'rest-attempt',
+      completedMicrotaskIds: ['L01-M07', 'L01-M08', 'L01-M09', 'L01-M10'],
+      storyFacts: [], adventureHearts: 3, buildStage: 0
+    }
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 9 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'rest-attempt' });
+  assert.equal(current.snapshot.microtaskId, 'L01-M11');
+
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  current = endAvailablePresentation(runtime, current);
+  assert.notEqual(current.snapshot.currentPresentationMomentId, 'single-handoff');
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07' }
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  current = endAvailablePresentation(runtime, current);
+  assert.equal(current.snapshot.stepId, 'L01-M11:S04');
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-D07' }
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  current = endAvailablePresentation(runtime, current);
+  assert.equal(current.snapshot.stepId, 'L01-M11:S03');
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    response: { action: 'give', entityId: 'handbag', targetEntityId: 'handbag-owner' }
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.snapshot.currentPresentationMomentId, 'single-handoff');
+  assert.equal(current.snapshot.presentationAwaitingEnd, true);
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.phase, 'presentation-settling');
+  current = endAvailablePresentation(runtime, current);
+
+  assert.equal(current.snapshot.microtaskId, 'L01-M12');
+  assert.equal(current.snapshot.phase, 'role-practice-ready');
+  for (const roundId of ['keeper-round', 'owner-round']) {
+    current = runtime.dispatch({
+      type: 'role-practice/round-complete',
+      experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion,
+      practiceId: 'L01-M12:role-enactment',
+      roundId
+    });
+  }
+  current = runtime.dispatch({
+    type: 'role-practice/complete',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    practiceId: 'L01-M12:role-enactment'
+  });
+
+  assert.equal(current.snapshot.status, 'rest-stop');
+  assert.deepEqual(current.snapshot.nextRestStop, {
+    restStopId: 'lesson1-chapter-stop',
+    type: 'chapter',
+    nextMicrotaskId: 'L02-M11'
+  });
+  assert.equal(current.effects.at(-1).type, 'runtime/rest-stop');
+  assert.ok(current.snapshot.reachedMicrotaskIds.includes('L02-M11'));
+
+  current = runtime.dispatch({
+    type: 'rest-stop/continue', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  current = endAvailablePresentation(runtime, current);
+  assert.equal(current.snapshot.status, 'active');
+  assert.equal(current.snapshot.microtaskId, 'L02-M11');
+  assert.equal(current.snapshot.challengeRef, 'L02-M11:C01');
+});
+
+test('reached-stage navigation runs completed stages in an isolated sandbox and keeps future stages locked', () => {
+  const ledger = fakeRevisionLedger({
+    unitState: {
+      experienceRevision: 'lesson1-2-v2.4', unitAttemptId: 'sandbox-attempt',
+      completedMicrotaskIds: ['L01-M07', 'L01-M08'],
+      storyFacts: ['lesson1-dialogue-first-listen-complete', 'handbag-owner-identified'],
+      adventureHeartsRemaining: 2, buildStage: 0
+    }
+  });
+  const runtime = create({ unit: nceUnit, ledger, seed: 10 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'sandbox-attempt' });
+  assert.equal(current.snapshot.microtaskId, 'L01-M09');
+  assert.deepEqual(current.snapshot.reachedMicrotaskIds, ['L01-M07', 'L01-M08', 'L01-M09']);
+
+  current = endAvailablePresentation(runtime, current);
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-D04' }
+  });
+  assert.equal(current.snapshot.adventureHearts, 1);
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-D01' }
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  const origin = structuredClone(current.snapshot);
+
+  const locked = runtime.dispatch({
+    type: 'navigation/open-stage', microtaskId: 'L01-M10',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(locked.effects[0].reason, 'stage-not-reached');
+
+  current = runtime.dispatch({
+    type: 'navigation/open-stage', microtaskId: 'L01-M08',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(current.snapshot.mode, 'microtask-v2-sandbox');
+  assert.equal(current.snapshot.microtaskId, 'L01-M08');
+  assert.equal(current.snapshot.adventureHearts, 3);
+
+  current = endAvailablePresentation(runtime, current);
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { entityId: 'handbag-owner' }
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  current = runtime.dispatch({
+    type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  current = endAvailablePresentation(runtime, current);
+  current = runtime.dispatch({
+    type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+    response: { sourceRef: 'L01-W07', entityId: 'handbag' }
+  });
+  assert.equal(current.snapshot.status, 'sandbox-complete');
+  assert.equal(ledger.events.length, 0);
+
+  current = runtime.dispatch({
+    type: 'navigation/open-stage', microtaskId: 'L01-M07',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(current.snapshot.mode, 'microtask-v2-sandbox');
+  assert.equal(current.snapshot.status, 'active');
+  assert.equal(current.snapshot.microtaskId, 'L01-M07');
+  assert.equal(current.snapshot.adventureHeartsRemaining, 3);
+  assert.equal(ledger.events.length, 0);
+
+  current = runtime.dispatch({
+    type: 'navigation/exit-sandbox', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(current.snapshot.mode, 'microtask-v2');
+  assert.equal(current.snapshot.status, 'active');
+  assert.equal(current.snapshot.microtaskId, 'L01-M09');
+  assert.equal(current.snapshot.stepId, origin.stepId);
+  assert.equal(current.snapshot.challengeRef, origin.challengeRef);
+  assert.equal(current.snapshot.adventureHearts, origin.adventureHearts);
+  assert.deepEqual(current.snapshot.optionIds, origin.optionIds);
+  assert.deepEqual(current.snapshot.temporaryResults, origin.temporaryResults);
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.snapshot.audio.segmentId, origin.audio.segmentId);
+  assert.notEqual(current.snapshot.audio.requestId, origin.audio.requestId);
+  assert.equal(current.effects.at(-1).type, 'audio/play');
+  assert.equal(current.effects.at(-1).segmentId, origin.audio.segmentId);
+  assert.deepEqual(current.snapshot.reachedMicrotaskIds, ['L01-M07', 'L01-M08', 'L01-M09']);
+  assert.equal(current.snapshot.stageNavigation.find(item => item.microtaskId === 'L01-M10').status, 'locked');
+});
+
+test('Lesson 1–2 V2 destroy cancels the active audio request before closing the runtime', () => {
+  const runtime = create({ unit: nceUnit, ledger: fakeRevisionLedger(), seed: 12 });
+  let entered = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'destroy-audio' });
+  entered = endAvailablePresentation(runtime, entered);
+
+  const destroyed = runtime.destroy();
+
+  assert.equal(destroyed.snapshot.status, 'destroyed');
+  assert.equal(destroyed.snapshot.audio, null);
+  assert.deepEqual(destroyed.effects, [{
+    type: 'audio/cancel',
+    experienceRevision: 'lesson1-2-v2.4',
+    microtaskId: 'L01-M07',
+    attemptRevision: 0,
+    requestId: entered.snapshot.audio.requestId
+  }]);
+});
+
+test('the final route grows the landmark only after full readback, idempotent unit-built, and buildStage 5 readback', () => {
+  const taskIds = nceUnit.beats.flatMap(beat => beat.microtasks || [])
+    .map(task => task.microtaskId);
+  const events = [];
+  let readyForBuild = false;
+  let buildStage = 0;
+  const ledger = {
+    events,
+    read() {
+      return {
+        units: {
+          'NCE-U01': {
+            experienceRevision: 'lesson1-2-v2.4', unitAttemptId: 'final-attempt',
+            completedMicrotaskIds: taskIds.slice(0, -1), storyFacts: [],
+            adventureHearts: 3, buildStage,
+            completionReadback: { readyForBuild }
+          }
+        }
+      };
+    },
+    apply(event) {
+      events.push(structuredClone(event));
+      if (event.type === 'unit-built') {
+        if (!readyForBuild) {
+          return { persisted: false, reason: 'unit-readback-incomplete' };
+        }
+        buildStage = 5;
+      }
+      return { persisted: true, status: 'applied' };
+    },
+    makeReady() { readyForBuild = true; }
+  };
+  const runtime = create({ unit: nceUnit, ledger, seed: 11 });
+  let current = runtime.enter({ entryLesson: 'lesson2', unitAttemptId: 'final-attempt' });
+  assert.equal(current.snapshot.microtaskId, 'L02-M21');
+
+  for (const response of [
+    { sourceRef: 'L02-W09', entityId: 'car' },
+    { sourceRef: 'L02-W10', entityId: 'house' }
+  ]) {
+    current = endAvailablePresentation(runtime, current);
+    current = runtime.dispatch({
+      type: 'response/submit', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, challengeRef: current.snapshot.challengeRef,
+      response
+    });
+    current = runtime.dispatch({
+      type: 'audio/ended', experienceRevision: current.snapshot.experienceRevision,
+      stateVersion: current.snapshot.stateVersion, microtaskId: current.snapshot.microtaskId,
+      attemptRevision: current.snapshot.attemptRevision, requestId: current.snapshot.audio.requestId,
+      segmentId: current.snapshot.audio.segmentId
+    });
+    current = endAvailablePresentation(runtime, current);
+  }
+  assert.equal(current.snapshot.phase, 'unit-verifying');
+  assert.equal(current.snapshot.buildStage, 0);
+  assert.deepEqual(ledger.events.map(event => event.type), ['microtask-completed']);
+  assert.equal(ledger.events[0].microtaskId, 'L02-M21');
+  assert.equal(ledger.events[0].targetResults.length, 2);
+  assert.ok(ledger.events[0].storyFacts.includes('owner-home-arrival'));
+  assert.ok(!current.effects.some(effect => effect.type === 'landmark/build-stage'));
+
+  ledger.makeReady();
+  current = runtime.dispatch({
+    type: 'unit/verify-retry', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.deepEqual(ledger.events.map(event => event.type), ['microtask-completed', 'unit-built']);
+  assert.equal(current.snapshot.status, 'unit-built');
+  assert.equal(current.snapshot.buildStage, 5);
+  assert.deepEqual(current.effects.map(effect => effect.type), [
+    'runtime/unit-readback-complete', 'runtime/unit-built-committed',
+    'landmark/build-stage', 'runtime/unit-built'
+  ]);
+
+  const duplicate = runtime.dispatch({
+    type: 'unit/verify-retry', experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(duplicate.effects[0].reason, 'runtime-not-active');
+  assert.equal(ledger.events.filter(event => event.type === 'unit-built').length, 1);
+});
+
+test('microtask v2 answer rules judge stable semantic identities rather than presentation order', () => {
+  assert.deepEqual(
+    evaluateRule(
+      { type: 'select-one', acceptedSourceRef: 'L01-D01' },
+      { sourceRef: 'L01-D01', presentationIndex: 99 }
+    ),
+    { correct: true, mismatchPath: null }
+  );
+  assert.equal(evaluateRule(
+    { type: 'match-entity', pairs: { 'L02-W01': 'pen' } },
+    { sourceRef: 'L02-W01', entityId: 'pencil' }
+  ).correct, false);
+  assert.equal(evaluateRule(
+    { type: 'place-in-slot', slotId: 'ownership-item', entityId: 'watch' },
+    { slotId: 'ownership-item', entityId: 'watch' }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    {
+      type: 'ordered-blocks',
+      acceptedByEntityId: { car: ['block-question', 'L02-W09'] }
+    },
+    { selectedEntityId: 'car', blockRefs: ['block-question', 'L02-W09'] }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'ordered-blocks', acceptedOrder: ['is', 'this', 'your', 'watch'] },
+    { blockRefs: ['is', 'this', 'your', 'watch'], presentationOrder: [3, 1, 0, 2] }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'ordered-sequence', acceptedOrder: ['attention', 'ownership', 'repair', 'thanks'] },
+    { sequenceIds: ['attention', 'ownership', 'repair', 'thanks'] }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'connect-reference', sourceRef: 'L01-W09', entityId: 'handbag' },
+    { sourceRef: 'L01-W09', entityId: 'handbag' }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'detect-error', acceptedSourceRef: 'L01-D06' },
+    { sourceRef: 'L01-D06' }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'perform-action', action: 'give', entityId: 'watch', targetEntityId: 'visitor' },
+    { action: 'give', entityId: 'watch', targetEntityId: 'visitor' }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    { type: 'all-of', requiredFactIds: ['one', 'two', 'three'] },
+    { factIds: ['three', 'one', 'two'] }
+  ).correct, true);
+  assert.equal(evaluateRule(
+    {
+      type: 'all-of',
+      rules: [{ type: 'perform-action', action: 'stamp', entityId: 'case-stamp', targetEntityId: 'case-file' }]
+    },
+    { action: 'stamp', entityId: 'case-stamp', targetEntityId: 'case-file' }
+  ).correct, true);
+});
+
+ test('Lesson 49 with no progress enters the first beat', () => {
   const runtime = create({ unit, ledger: fakeLedger(), seed: 7 });
 
   const result = runtime.enter({ entryLesson: 'lesson49' });
@@ -1657,4 +3091,58 @@ test('page-supplied metadata cannot create target evidence for a checkpoint-only
   assert.equal(ledger.events[0].contextId, undefined);
   assert.equal(ledger.events[0].evidenceMode, undefined);
   assert.equal(runtime.snapshot().contextId, 'breakfast-stall');
+});
+
+test('required role stage persists whole-role checkpoints, restores them, and completes with no result or heart change', () => {
+  const ledger = roleStageLedger();
+  let runtime = create({ unit: nceUnit, ledger, seed: 801 });
+  let entered = runtime.enter({ entryLesson: 'lesson1' });
+  assert.equal(entered.snapshot.microtaskId, 'L01-M12');
+  assert.equal(entered.snapshot.phase, 'role-practice-ready');
+  assert.deepEqual(entered.snapshot.rolePracticeProgress.completedRoundIds, []);
+
+  let current = runtime.snapshot();
+  let saved = runtime.dispatch({
+    type: 'role-practice/round-complete',
+    experienceRevision: current.experienceRevision,
+    stateVersion: current.stateVersion,
+    practiceId: 'L01-M12:role-enactment',
+    roundId: 'keeper-round'
+  });
+  assert.equal(saved.effects.at(-1).type, 'runtime/role-practice-round-saved');
+  assert.deepEqual(saved.snapshot.rolePracticeProgress.completedRoundIds, ['keeper-round']);
+  assert.equal(saved.snapshot.adventureHeartsRemaining, 3);
+  assert.deepEqual(saved.snapshot.temporaryResults, []);
+
+  runtime.destroy();
+  runtime = create({ unit: nceUnit, ledger, seed: 802 });
+  entered = runtime.enter({ entryLesson: 'lesson1' });
+  assert.equal(entered.snapshot.microtaskId, 'L01-M12');
+  assert.deepEqual(entered.snapshot.rolePracticeProgress.completedRoundIds, ['keeper-round']);
+
+  current = runtime.snapshot();
+  runtime.dispatch({
+    type: 'role-practice/round-complete',
+    experienceRevision: current.experienceRevision,
+    stateVersion: current.stateVersion,
+    practiceId: 'L01-M12:role-enactment',
+    roundId: 'owner-round'
+  });
+  current = runtime.snapshot();
+  const completed = runtime.dispatch({
+    type: 'role-practice/complete',
+    experienceRevision: current.experienceRevision,
+    stateVersion: current.stateVersion,
+    practiceId: 'L01-M12:role-enactment'
+  });
+  assert.equal(completed.snapshot.status, 'rest-stop');
+  assert.equal(completed.snapshot.nextRestStop.restStopId, 'lesson1-chapter-stop');
+  assert.equal(completed.snapshot.adventureHeartsRemaining, 3);
+  assert.ok(completed.snapshot.completedMicrotaskIds.includes('L01-M12'));
+  const completionEvent = ledger.events.find(event => (
+    event.type === 'microtask-completed' && event.microtaskId === 'L01-M12'
+  ));
+  assert.ok(completionEvent);
+  assert.deepEqual(completionEvent.targetResults, []);
+  assert.deepEqual(completionEvent.audioContactRefs, []);
 });

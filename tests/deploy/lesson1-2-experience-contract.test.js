@@ -56,10 +56,11 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
     '/core/learning-store.js',
     '/core/learning-ledger.js',
     '/core/learning-runtime.js',
+    '/core/learning-outcome-practice.js',
     '/core/learning-microtask-scene.js',
     '/poc/lesson1-2-experience/experience.js'
   ];
-  const scriptOrder = sources.map(source => page.indexOf(`src="${source}"`));
+  const scriptOrder = sources.map(source => page.indexOf(`src="${source}?v=`));
   assert.ok(scriptOrder.every(index => index >= 0));
   assert.deepEqual(scriptOrder, [...scriptOrder].sort((left, right) => left - right));
   assert.ok(background.size > 100_000);
@@ -90,6 +91,23 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
     assert.equal(metadata.width, 1440, filename);
     assert.equal(metadata.height, 1024, filename);
   }
+  const responsiveSceneMasters = [
+    ['starlight-station-bg-v2-portrait', 1080, 2340],
+    ['starlight-station-bg-v2-wide', 1600, 1000]
+  ];
+  for (const [base, width, height] of responsiveSceneMasters) {
+    for (const extension of ['avif', 'webp']) {
+      const filename = `${base}.${extension}`;
+      const target = path.join(ROOT, 'poc/lesson1-2-experience/assets', filename);
+      const [metadata, stat] = await Promise.all([sharp(target).metadata(), fs.stat(target)]);
+      assert.deepEqual(
+        { width: metadata.width, height: metadata.height, hasAlpha: metadata.hasAlpha },
+        { width, height, hasAlpha: false },
+        filename
+      );
+      assert.ok(stat.size > 100_000, filename);
+    }
+  }
   for (const filename of stageAssetNames.filter(name => name.endsWith('.png'))) {
     const image = sharp(path.join(ROOT, 'poc/lesson1-2-experience/assets', filename));
     const metadata = await image.metadata();
@@ -98,12 +116,11 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
     assert.equal(stats.channels[3].min, 0, filename);
     assert.equal(stats.channels[3].max, 255, filename);
   }
-  const itemAssetBases = [
+  const transparentItemAssetBases = [
     'item-pen-v1', 'item-pencil-v1', 'item-book-v1', 'item-watch-v1',
-    'item-coat-v1', 'item-dress-v1', 'item-skirt-v1', 'item-shirt-v1',
-    'item-car-key-v1', 'item-house-key-v1'
+    'item-coat-v1', 'item-dress-v1', 'item-skirt-v1', 'item-shirt-v1'
   ];
-  for (const base of itemAssetBases) {
+  for (const base of transparentItemAssetBases) {
     const masterPath = path.join(ROOT, 'poc/lesson1-2-experience/assets', `${base}.png`);
     const master = sharp(masterPath);
     const [masterMetadata, masterStats] = await Promise.all([master.metadata(), master.stats()]);
@@ -123,6 +140,30 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
         `${base}.${extension}`
       );
       assert.ok(stat.size > 20_000, `${base}.${extension}`);
+    }
+  }
+  for (const base of ['scene-car-v1', 'scene-house-v1']) {
+    for (const [extension, size] of [['png', 1254], ['avif', 640], ['webp', 640]]) {
+      const target = path.join(ROOT, 'poc/lesson1-2-experience/assets', `${base}.${extension}`);
+      const [metadata, stat] = await Promise.all([sharp(target).metadata(), fs.stat(target)]);
+      assert.deepEqual(
+        { width: metadata.width, height: metadata.height, hasAlpha: metadata.hasAlpha },
+        { width: size, height: size, hasAlpha: false },
+        `${base}.${extension}`
+      );
+      assert.ok(stat.size > 20_000, `${base}.${extension}`);
+    }
+  }
+  for (const retiredBase of ['item-car-key-v1', 'item-house-key-v1']) {
+    for (const extension of ['png', 'avif', 'webp']) {
+      await assert.rejects(
+        fs.stat(path.join(
+          ROOT,
+          'poc/lesson1-2-experience/assets',
+          `${retiredBase}.${extension}`
+        )),
+        error => error?.code === 'ENOENT'
+      );
     }
   }
   const iconDir = path.join(ROOT, 'poc/lesson1-2-experience/assets/icons');
@@ -154,18 +195,316 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
 
   assert.doesNotMatch(home, /lesson1-2-experience/);
   assert.match(runtime, /NCE-U01/);
-  assert.match(runtime, /poc:lesson1-2-experience:v1/);
+  assert.doesNotMatch(runtime, /poc:lesson1-2-experience:v1/);
+  assert.match(runtime, /unit\.experienceRevision/);
+  assert.match(runtime, /storageKey:\s*revisionScopedStorageKey/);
   assert.match(runtime, /learningMicrotaskScene\.mount/);
   assert.doesNotMatch(
     `${page}\n${runtime}\n${scene}`,
-    /Excuse me!|Is this your handbag\?|Thank you very much\.|\bhandbag\b|\bpencil\b/i
+    /Excuse me!|Is this your handbag\?|Thank you very much\.|Yes, it is\.|\bhandbag\b|\bpencil\b|\bwatch\b/i
   );
+  assert.doesNotMatch(scene, /[\u3400-\u9fff]/,
+    'the generic page renderer must not own child-facing course copy');
   assert.match(scene, /type:\s*['"]response\/submit['"]/);
+  assert.match(scene, /challengeRef:\s*snapshot\.challengeRef/);
+  assert.match(scene, /experienceRevision:\s*snapshot\.experienceRevision/);
+  assert.match(scene, /stateVersion:\s*snapshot\.stateVersion/);
   assert.match(scene, /type:\s*['"]audio\/ended['"]/);
   assert.match(scene, /type:\s*['"]audio\/failed['"]/);
+  assert.match(scene, /failureKind:\s*['"]transient['"]/);
+  assert.match(scene, /type:\s*['"]audio\/retry['"]/);
+  assert.match(scene, /segmentId:\s*session\.segmentId/);
+  assert.doesNotMatch(scene, /continue-without-sound|audio-continue/);
+  assert.match(scene, /snapshot\.audio\?\.manualRetryRequired\s*===\s*true/);
+  assert.match(scene, /\['audio-fallback', 'audio-retry', 'audio-failed'\]/);
+  assert.match(scene, /source\(step\.answerSourceRef\s*\|\|\s*step\.sourceRef\)/);
+  assert.match(scene, /\['persistence-retry', 'answered-awaiting-save', 'unit-verifying'\]/);
+  assert.match(scene, /data-action="persistence-retry"/);
+  assert.match(scene, /task\.knowledgeCardRefs/);
+  assert.match(scene, /knowledgeLayerMarkup/);
+  assert.match(scene, /data-action="presentation-end"/);
+  assert.match(scene, /moment\?\.advancePolicy\s*!==\s*['"]explicit-child-continue['"]/);
+  assert.match(scene, /if\s*\(moment\.advancePolicy\s*===\s*['"]explicit-child-continue['"]\)\s*return;/);
+  assert.match(scene, /function\s+explicitPresentationMarkup\(/);
+  assert.match(scene, /data-presentation-manual="true"/);
+  assert.match(scene, /dialogueAudioPanel\(snapshot,\s*step,\s*adultEntityIds,\s*\{[\s\S]{0,120}completed:\s*true,[\s\S]{0,120}sourceRefs:\s*moment\.visibleLanguageRefs[\s\S]{0,40}\}\)/);
+  assert.doesNotMatch(scene, /data-action="knowledge-toggle"/);
+  assert.match(scene, /chapter\.restingCopy/);
+  assert.doesNotMatch(scene, /下次会从整理室继续/);
+  assert.match(scene, /snapshot\.optionIds/);
+  assert.match(scene, /snapshot\.challengeRef\s*\|\|\s*snapshot\.challengeIndex/);
+  assert.match(scene, /preserveCorrectForFollowingAudio/);
+  assert.match(scene, /ui\.feedback\.challengeRef\s*!==\s*snapshot\.challengeRef/);
+  assert.match(scene, /type:\s*['"]rescue\/model-ended['"]/);
+  assert.match(scene, /snapshot\.phase\s*===\s*['"]rescue-model['"]/);
+  assert.match(scene, /snapshot\.rescueUsed\s*\|\|\s*snapshot\.partnerRescueActive/);
+  assert.match(scene, /reachedMicrotaskIds/);
+  assert.match(scene, /data-action="toggle-stages"/);
+  assert.match(scene, /class="stage-map-backdrop"/);
+  assert.match(scene, /stageMapOpen/);
+  assert.match(scene, /durableLedger\.planReview/);
+  assert.match(scene, /class="review-entry"/);
+  assert.match(scene, /reviewRun\.href/);
+  assert.doesNotMatch(scene, /orderedForRevision/);
+  assert.doesNotMatch(scene, /['"]cat-guide['"]/);
+  assert.match(scene, /function\s+shouldShowAdventureHearts\(snapshot,\s*step\)/);
+  assert.match(
+    scene,
+    /formal[\s\S]{0,360}'audio-ready'[\s\S]{0,180}'awaiting-response'[\s\S]{0,120}\.includes\(snapshot\.phase\)/
+  );
+  assert.match(scene, /shouldShowAdventureHearts\(snapshot,\s*step\)\s*\?\s*adventureHeartGauge\(snapshot\)/);
+  assert.match(scene, /interactiveSceneStep\s*=\s*snapshot\.phase\s*===\s*['"]awaiting-response['"]/);
+  assert.match(scene, /snapshot\.presentationAwaitingEnd\s*!==\s*true/);
   assert.doesNotMatch(scene, /toggle-music|ambientAudioSrc/);
   assert.doesNotMatch(scene, /setTimeout\([^)]*audio\/ended|time\/elapsed[\s\S]{0,100}audio\/ended/);
   assert.doesNotMatch(runtime, /\b(?:fetch|XMLHttpRequest|sendBeacon)\s*\(|\/api\//);
+  assert.equal(
+    (scene.match(/adultEntityIds\.map\(id\s*=>\s*sceneCharacter/g) || []).length,
+    1,
+    'each adult actor must be rendered exactly once'
+  );
+  assert.doesNotMatch(scene, /data-drag-source=|data-drop-target=|directDragging|directDropResult/);
+  assert.doesNotMatch(scene, /pointerdown|pointermove|pointerup|pointercancel|blank-drop/);
+});
+
+test('optional outcome practice is catalog-owned and keeps a complete isolated audio lifecycle', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const [page, bootstrap, scene, practiceModule] = await Promise.all([
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/index.html'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/experience.js'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'core/learning-microtask-scene.js'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'core/learning-outcome-practice.js'), 'utf8')
+  ]);
+  const practiceScript = '/core/learning-outcome-practice.js';
+  const sceneScript = '/core/learning-microtask-scene.js';
+  assert.ok(page.indexOf(`src="${practiceScript}?v=`) >= 0);
+  assert.ok(page.indexOf(`src="${practiceScript}?v=`) < page.indexOf(`src="${sceneScript}?v=`));
+  assert.match(bootstrap, /outcomePracticeFactory:\s*core\.learningOutcomePractice/);
+
+  const practices = unit.experience.outcomePractices;
+  assert.deepEqual(practices.map(practice => [practice.practiceId, practice.kind]), [
+    ['L01-RS01:manual-dialogue', 'manual-dialogue'],
+    ['NCE-U01-OUTCOME:case-recap', 'case-recap']
+  ]);
+  const [manualDialogue, caseRecap] = practices;
+  const formalRole = unit.beats.flatMap(beat => beat.microtasks || [])
+    .find(task => task.microtaskId === 'L01-M12').steps[0].practice;
+  assert.deepEqual(
+    [...new Set(formalRole.rounds.flatMap(round => round.dialogueTurnRefs))],
+    Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`)
+  );
+  assert.deepEqual(
+    manualDialogue.dialogueTurnRefs,
+    Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`)
+  );
+  assert.deepEqual(caseRecap.items.map(item => item.promptRef), [
+    'NCE-U01-C-RECAP-OWNER', 'NCE-U01-C-RECAP-REPAIR', 'NCE-U01-C-RECAP-ROUTE'
+  ]);
+  assert.deepEqual([...new Set(caseRecap.items.flatMap(item => [
+    item.correctAudioRef,
+    ...item.options.map(option => option.sourceRef).filter(Boolean)
+  ]))].sort(), [
+    'L01-D01', 'L01-D04', 'L01-D06', 'L01-D07', 'L02-W04', 'L02-W09', 'L02-W10'
+  ]);
+  assert.ok(caseRecap.items.every(item => (
+    unit.authoredContent[item.promptRef]?.kind === 'practice-prompt'
+  )));
+
+  const catalogOwnedCopy = [
+    formalRole.kicker, formalRole.title, formalRole.intro, formalRole.roleSelectionLabel,
+    formalRole.completedRoleLabel, formalRole.currentRoleLabel,
+    formalRole.currentSpeakerLabel, formalRole.revealLabel,
+    formalRole.allCompleteTitle, formalRole.allCompleteCopy,
+    formalRole.manualEntryLabel, formalRole.continueCourseLabel,
+    ...formalRole.rounds.flatMap(round => [round.title, round.roleBadge, round.instruction]),
+    manualDialogue.entryKicker, manualDialogue.entryLabel, manualDialogue.entryHint,
+    manualDialogue.kicker, manualDialogue.intro, manualDialogue.revealLabel,
+    manualDialogue.hintLabel, manualDialogue.finishedTitle,
+    manualDialogue.finishedCopy, manualDialogue.returnStageLabel,
+    ...manualDialogue.turnHints.flatMap(hint => [hint.intent, hint.openingChunk]),
+    caseRecap.entryKicker, caseRecap.entryLabel, caseRecap.entryHint,
+    caseRecap.kicker, caseRecap.intro, caseRecap.nextLabel,
+    caseRecap.finishLabel, caseRecap.exitLabel, caseRecap.wrongCopy,
+    caseRecap.correctCopy, caseRecap.finishedTitle, caseRecap.finishedCopy,
+    caseRecap.returnLabel,
+    ...caseRecap.items.map(item => unit.authoredContent[item.promptRef].text)
+  ].filter(Boolean);
+  const catalogOwnedRefs = [
+    ...new Set([
+      ...formalRole.rounds.flatMap(round => round.dialogueTurnRefs),
+      ...manualDialogue.dialogueTurnRefs,
+      ...caseRecap.items.flatMap(item => [
+        item.promptRef,
+        item.correctAudioRef,
+        ...item.options.flatMap(option => [option.sourceRef, option.contentRef]).filter(Boolean)
+      ])
+    ])
+  ];
+  const genericSources = `${bootstrap}\n${scene}\n${practiceModule}`;
+  assert.doesNotMatch(scene, /[\u3400-\u9fff]/,
+    'the generic scene must not own optional-practice child copy');
+  assert.doesNotMatch(practiceModule, /[\u3400-\u9fff]/,
+    'the isolated practice state machine must not own optional-practice child copy');
+  for (const copy of catalogOwnedCopy) {
+    assert.equal(genericSources.includes(copy), false, copy);
+  }
+  for (const ref of catalogOwnedRefs) {
+    assert.equal(genericSources.includes(ref), false, ref);
+  }
+
+  function functionSection(source, name, nextName) {
+    const start = source.indexOf(`function ${name}`);
+    const end = source.indexOf(`function ${nextName}`, start + 1);
+    assert.ok(start >= 0, `${name} must exist`);
+    assert.ok(end > start, `${name} must end before ${nextName}`);
+    return source.slice(start, end);
+  }
+  const identityFields = ['practiceSessionId', 'stateVersion', 'requestId', 'segmentId'];
+  const identityValidator = functionSection(practiceModule, 'validateAudioAction', 'audioEnded');
+  for (const field of identityFields) assert.match(identityValidator, new RegExp(`action\\.${field}`));
+  const endedHandler = functionSection(practiceModule, 'audioEnded', 'audioFailed');
+  const failedHandler = functionSection(practiceModule, 'audioFailed', 'retryAudio');
+  assert.match(endedHandler, /validateAudioAction\(action\)/);
+  assert.match(failedHandler, /validateAudioAction\(action\)/);
+  const retryHandler = functionSection(practiceModule, 'retryAudio', 'next');
+  assert.ok(
+    /validateAudioAction\(action\)/.test(retryHandler)
+      || identityFields.every(field => retryHandler.includes(`action.${field}`)),
+    'audio retry must validate the full practice audio identity'
+  );
+  const cancelHandler = functionSection(practiceModule, 'cancelEffect', 'exit');
+  assert.match(cancelHandler, /type:\s*['"]practice\/audio-cancel['"]/);
+  for (const field of identityFields) assert.match(cancelHandler, new RegExp(`${field}:`));
+  assert.match(practiceModule, /action\.type\s*===\s*['"]audio\/ended['"]/);
+  assert.match(practiceModule, /action\.type\s*===\s*['"]audio\/failed['"]/);
+  assert.match(practiceModule, /action\.type\s*===\s*['"]audio\/retry['"]/);
+
+  assert.match(scene, /function\s+processPracticeEffects\s*\(/);
+  assert.match(scene, /type\s*===\s*['"]practice\/audio-play['"]/);
+  assert.match(scene, /type\s*===\s*['"]practice\/audio-cancel['"]/);
+  function assertSceneIdentityWiring(marker, extraToken) {
+    const windows = [];
+    let offset = 0;
+    while (offset < scene.length) {
+      const index = scene.indexOf(marker, offset);
+      if (index < 0) break;
+      windows.push(scene.slice(Math.max(0, index - 1200), index + 1600));
+      offset = index + marker.length;
+    }
+    assert.ok(windows.some(window => (
+      window.includes(extraToken)
+      && identityFields.every(field => window.includes(field))
+    )), `${marker} must wire practice session/state/request/segment identity`);
+  }
+  assertSceneIdentityWiring("'audio/ended'", 'outcomePracticeRuntime');
+  assertSceneIdentityWiring("'audio/failed'", 'outcomePracticeRuntime');
+  assertSceneIdentityWiring("'audio/retry'", 'outcomePracticeRuntime');
+  assertSceneIdentityWiring("'practice/audio-cancel'", 'pauseVoice');
+
+  const replayStart = scene.indexOf("if (action === 'replay')");
+  const replayEnd = scene.indexOf("if (action === 'persistence-retry')", replayStart);
+  assert.ok(replayStart >= 0 && replayEnd > replayStart);
+  const replayHandler = scene.slice(replayStart, replayEnd);
+  assert.match(replayHandler, /stageMapOpen\s*=\s*true/);
+  assert.doesNotMatch(replayHandler, /localStorage\.removeItem|location\.reload\s*\(/);
+  assert.match(scene, /href="\$\{escapeHtml\(complete\.leaveHref\s*\|\|\s*['"]\/['"]\)\}"/);
+  assert.equal(unit.experience.completion.leaveHref, '/');
+});
+
+test('the V2 page consumes authored presentation moments and durable save recovery', async () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const tasks = unit.beats.flatMap(beat => beat.microtasks || []);
+  const [scene, css] = await Promise.all([
+    fs.readFile(path.join(ROOT, 'core/learning-microtask-scene.js'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-experience/experience.css'), 'utf8')
+  ]);
+
+  assert.deepEqual(
+    Object.fromEntries(tasks.map(task => [task.microtaskId, task.presentation.sceneMode])),
+    {
+      'L01-M07': 'dialogue-stage',
+      'L01-M08': 'dialogue-stage',
+      'L01-M09': 'dialogue-stage',
+      'L01-M10': 'dialogue-stage',
+      'L01-M11': 'dialogue-stage',
+      'L01-M12': 'dialogue-stage',
+      'L02-M11': 'object-workbench',
+      'L02-M12': 'object-workbench',
+      'L02-M13': 'object-workbench',
+      'L02-M14': 'object-workbench',
+      'L02-M15': 'grammar-lab',
+      'L02-M16': 'object-workbench',
+      'L02-M17': 'object-workbench',
+      'L02-M18': 'object-workbench',
+      'L02-M19': 'object-workbench',
+      'L02-M20': 'story-journey',
+      'L02-M21': 'story-journey'
+    }
+  );
+
+  assert.match(scene, /snapshot\.currentPresentationMomentId/);
+  assert.match(scene, /task\.presentation\?\.moments/);
+  assert.match(scene, /moment\.participantEntityIds/);
+  assert.match(scene, /moment\?\.focusEntityIds/);
+  assert.match(scene, /moment\.visibleLanguageRefs/);
+  assert.match(scene, /data-presentation-moment=/);
+  assert.match(scene, /data-scene-variant=/);
+  assert.match(scene, /data-primary-motion=/);
+  assert.match(scene, /data-end-state=/);
+  assert.match(scene, /type:\s*['"]presentation\/ended['"]/);
+  assert.match(scene, /(?:animationend|transitionend)/);
+  assert.match(scene, /prefers-reduced-motion:\s*reduce/);
+  assert.doesNotMatch(scene, /microtaskId[\s\S]{0,120}(?:dialogue-stage|object-workbench|grammar-lab|route-investigation)/);
+
+  assert.match(scene, /outbox:\s*activeOutbox/);
+  assert.match(scene, /createRuntime\(ledger,\s*durableStore\)/);
+  assert.match(scene, /type:\s*['"]navigation\/open-stage['"]/);
+  assert.match(scene, /type:\s*['"]navigation\/exit-sandbox['"]/);
+  assert.match(scene, /shouldShowAdventureHearts\(snapshot,\s*step\)/);
+  assert.match(scene, /audio\/suspend/);
+  assert.match(scene, /audio\/resume/);
+  assert.match(scene, /presentationArmGeneration/);
+  assert.match(scene, /dialogueFollowEnabled/);
+  assert.match(scene, /step\.currentSegmentHighlight\s*===\s*true/);
+  assert.doesNotMatch(scene, /textVisibility\s*===\s*['"]visible-during-listen['"]/);
+  assert.doesNotMatch(scene, /route-map-visual/);
+  assert.match(scene, /function\s+sceneFramePicture\(/);
+  assert.doesNotMatch(scene, /data-drag-source=|data-drop-target=/);
+  assert.doesNotMatch(scene, /pointerdown|pointermove|pointerup|pointercancel|blank-drop/);
+  assert.match(scene, /aria-label="\$\{escapeHtml\(languageAudioCopy\.replayLabel/);
+  assert.match(scene, /starlight-audio-replay-v1\.png/);
+  assert.doesNotMatch(scene, />重新播放英文</);
+  assert.doesNotMatch(scene, /看着英文听一遍/);
+  assert.match(scene, /function\s+startFreeVoiceSequence\(/);
+  assert.match(scene, /data-action="dialogue-replay"/);
+  assert.match(scene, /class="dialogue-complete-actions"/);
+  assert.doesNotMatch(scene, /completionStatus|dialogue-complete-hint/);
+  assert.match(scene, /class="feedback-mission-bar__copy"/);
+
+  assert.match(
+    css,
+    /\.station-header\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;/s,
+    'the reached-stage entry must remain in the child viewport after dialogue following scrolls the page'
+  );
+  assert.match(
+    css,
+    /\.dialogue-listen--complete\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\);/s,
+    'the completed transcript must stop reserving a narrow desktop side rail'
+  );
+  assert.match(
+    css,
+    /\.dialogue-player--complete\s*\{[^}]*grid-column:\s*1\s*\/\s*-1;[^}]*grid-row:\s*2;/s,
+    'the completed hint and actions must form a full-width footer below the transcript'
+  );
+  assert.match(css, /\.support-guidance\s*\{/);
+
+  for (const mode of [
+    'dialogue-stage', 'object-workbench', 'grammar-lab', 'story-journey'
+  ]) {
+    assert.match(css, new RegExp(`data-scene-mode=["']${mode}["']`), mode);
+  }
+  assert.match(css, /is-moment-focus/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce/);
 });
 
 test('the local candidate voice pack covers every catalog audio identity and stays replaceable', async () => {
