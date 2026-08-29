@@ -11,10 +11,13 @@ const catalog = require('../../core/curriculum-catalog');
 const ROOT = path.resolve(__dirname, '../..');
 
 test('the Lesson 1–2 review route is isolated from the production release root', async () => {
-  const config = await fs.readFile(path.join(
-    ROOT,
-    'deploy/nginx/canranstudio-lesson-1-2-location.conf'
-  ), 'utf8');
+  const [config, reviewRuntime] = await Promise.all([
+    fs.readFile(path.join(
+      ROOT,
+      'deploy/nginx/canranstudio-lesson-1-2-location.conf'
+    ), 'utf8'),
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-review/review.js'), 'utf8')
+  ]);
 
   assert.match(config, /location\s*=\s*\/poc\/lesson-1-2\s*\{[\s\S]*return\s+308\s+\/poc\/lesson-1-2\/;/);
   assert.match(
@@ -51,6 +54,19 @@ test('the Lesson 1–2 review route is isolated from the production release root
   assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-review\/'\s+'"\/poc\/lesson-1-2\/review\/'/);
   assert.match(config, /sub_filter\s+"'\/poc\/lesson1-2-review\/"\s+"'\/poc\/lesson-1-2\/review\/"/);
   assert.match(config, /sub_filter\s+'`\/poc\/lesson1-2-review\/'\s+'`\/poc\/lesson-1-2\/review\/'/);
+  assert.match(reviewRuntime, /href="\/poc\/lesson1-2-experience\/"/);
+  const reviewAlias = config.match(
+    /location\s+\^~\s+\/poc\/lesson-1-2\/poc\/lesson1-2-review\/\s*\{[\s\S]*?\n\}/
+  )?.[0] || '';
+  assert.match(
+    reviewAlias,
+    /sub_filter\s+'"\/poc\/lesson1-2-experience\/'\s+'"\/poc\/lesson-1-2\/'/
+  );
+  assert.doesNotMatch(reviewAlias, /lesson-1-2\/poc\/lesson1-2-experience/);
+  const reviewResponse = [...reviewAlias.matchAll(/sub_filter\s+'([^']*)'\s+'([^']*)';/g)]
+    .reduce((body, [, source, target]) => body.replaceAll(source, target), reviewRuntime);
+  assert.match(reviewResponse, /href="\/poc\/lesson-1-2\/"/);
+  assert.doesNotMatch(reviewResponse, /href="\/poc\/lesson-1-2\/poc\//);
   assert.doesNotMatch(config, /\/var\/www\/canranstudio\/current/);
 });
 
