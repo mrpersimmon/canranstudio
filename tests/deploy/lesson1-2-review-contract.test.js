@@ -8,15 +8,18 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '../..');
 
 test('Lesson 1–2 cross-day review is a hidden catalog-driven runtime page', async () => {
-  const [page, script, styles] = await Promise.all([
+  const [page, script, styles, favicon] = await Promise.all([
     fs.readFile(path.join(ROOT, 'poc/lesson1-2-review/index.html'), 'utf8'),
     fs.readFile(path.join(ROOT, 'poc/lesson1-2-review/review.js'), 'utf8'),
-    fs.readFile(path.join(ROOT, 'poc/lesson1-2-review/review.css'), 'utf8')
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-review/review.css'), 'utf8'),
+    fs.readFile(path.join(ROOT, 'poc/lesson1-2-review/favicon.svg'), 'utf8')
   ]);
 
   assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
   assert.doesNotMatch(page, /<title>[^<]+<\/title>/,
     'the static shell must not own authored page title copy');
+  assert.match(page, /<link\s+rel="icon"\s+href="\/poc\/lesson1-2-review\/favicon\.svg"/i);
+  assert.match(favicon, /^<svg[\s\S]*<path\b[\s\S]*<\/svg>\s*$/);
   const sources = [
     '/core/curriculum-catalog.js',
     '/core/learning-store.js',
