@@ -20,6 +20,182 @@ test('Lesson 1 and Lesson 2 resolve to one elementary teaching unit', () => {
   );
 });
 
+test('Lesson 3 and Lesson 4 resolve to one curriculum-accepted catalog-only unit', () => {
+  const unit = catalog.getTeachingUnit('NCE-U02');
+
+  assert.equal(unit.unitId, 'NCE-U02');
+  assert.deepEqual(unit.lessonIds, ['lesson3', 'lesson4']);
+  assert.equal(catalog.getTeachingUnitForLesson('lesson3'), unit);
+  assert.equal(catalog.getTeachingUnitForLesson('lesson4'), unit);
+  assert.equal(unit.status, 'curriculum-accepted');
+  assert.equal(unit.publicationScope, 'catalog-only');
+  assert.equal(unit.runtimeProfile, 'not-authored');
+  assert.deepEqual(unit.beats, []);
+  assert.deepEqual(unit.authoredContent, {});
+  assert.deepEqual(unit.entities, {});
+  assert.equal(unit.landmarkId, undefined);
+  assert.equal(unit.title, undefined);
+  assert.equal(unit.experience, undefined);
+  assert.equal(unit.voiceBaselineId, undefined);
+  assert.deepEqual(unit.curriculumContract.acceptedDecisionRefs, [
+    'PA-01-A', 'PA-02-A', 'PA-03-A', 'PA-04-A'
+  ]);
+  assert.deepEqual(unit.curriculumContract.sourceRegister, {
+    sourceRegisterId: 'BOOK1-2022-07',
+    title: '外研社《新概念英语智慧版 1：英语初阶 First Things First》',
+    edition: '2022 年 7 月第 1 版第 1 次印刷',
+    isbn: '978-7-5213-3670-2',
+    snapshotSha256: 'a54740bdce7423b98ea30334dca9043603ef5533f85e64f86f5af6d31d93be9f',
+    totalPdfPages: 330,
+    lessonPageMap: {
+      lesson3: { pdfPages: [39, 40], textbookPages: [6, 7] },
+      lesson4: { pdfPages: [41, 42], textbookPages: [8, 9] }
+    }
+  });
+  assert.equal(unit.curriculumContract.audioAuditStatus, 'not-audited');
+  assert.equal(unit.curriculumContract.speakerMappingStatus, 'not-frozen');
+  assert.equal(unit.curriculumContract.storyDesignStatus, 'not-authored');
+  assert.equal(unit.curriculumContract.pageImplementationStatus, 'not-authored');
+  assert.equal(unit.curriculumContract.publicationAllowed, false);
+});
+
+test('Lesson 3–4 freezes the accepted source inventory without inventing audio or speakers', () => {
+  const unit = catalog.getTeachingUnit('NCE-U02');
+  const lesson3 = unit.lessonContent.lesson3;
+  const lesson4 = unit.lessonContent.lesson4;
+  const ids = (prefix, count) => Array.from(
+    { length: count }, (_, index) => `${prefix}${String(index + 1).padStart(2, '0')}`
+  );
+
+  assert.deepEqual(Object.keys(lesson3.sources), [
+    'L03-I01', 'L03-Q01',
+    ...ids('L03-D', 12), ...ids('L03-W', 10), ...ids('L03-N', 4), ...ids('L03-Z', 12)
+  ]);
+  assert.deepEqual(Object.keys(lesson4.sources), [
+    'L04-I01', ...ids('L04-P', 15), ...ids('L04-W', 5), 'L04-E01', 'L04-E02'
+  ]);
+  assert.deepEqual(
+    ids('L03-D', 12).map(sourceId => lesson3.sources[sourceId].text),
+    [
+      'My coat and my umbrella please.', 'Here is my ticket.', 'Thank you, sir.',
+      'Number five.', "Here's your umbrella and your coat.", 'This is not my umbrella.',
+      'Sorry, sir.', 'Is this your umbrella?', "No, it isn't.", 'Is this it?',
+      'Yes, it is.', 'Thank you very much.'
+    ]
+  );
+  assert.deepEqual(
+    ids('L03-D', 12).map(sourceId => lesson3.sources[sourceId].figureGroup),
+    [1, 2, 3, 3, 4, 5, 5, 6, 6, 7, 7, 7]
+  );
+  assert.deepEqual(
+    ids('L04-P', 15).map(sourceId => lesson4.sources[sourceId].text),
+    [
+      'Is this your pen?', 'Is this your pencil?', 'Is this your book?',
+      'Is this your watch?', 'Is this your coat?', 'Is this your dress?',
+      'Is this your skirt?', 'Is this your shirt?', 'Is this your car?',
+      'Is this your house?', 'Is this your suit?', 'Is this your school?',
+      'Is this your teacher?', 'Is this your son?', 'Is this your daughter?'
+    ]
+  );
+  assert.deepEqual(
+    ids('L04-P', 10).map(sourceId => lesson4.sources[sourceId].vocabularySourceRef),
+    ids('L02-W', 10)
+  );
+  assert.deepEqual(
+    ids('L04-P', 15).slice(10).map(sourceId => lesson4.sources[sourceId].vocabularySourceRef),
+    ids('L04-W', 5)
+  );
+  assert.deepEqual(lesson4.sources['L04-E01'].reusedSourceRefs, [
+    'L03-D06', 'L03-D07', 'L03-D08', 'L03-D09'
+  ]);
+  assert.deepEqual(lesson4.sources['L04-E02'].reusedSourceRefs, ids('L04-P', 10));
+  assert.equal(lesson4.sources['L04-E01'].requiredForUnitCompletion, false);
+  assert.equal(lesson4.sources['L04-E02'].producesLearningEvidence, false);
+
+  for (const lesson of [lesson3, lesson4]) {
+    const required = new Set(lesson.requiredSourceIds);
+    for (const sourceItem of Object.values(lesson.sources)) {
+      assert.equal(sourceItem.audioSrc, undefined);
+      assert.equal(sourceItem.audioSequences, undefined);
+      assert.equal(sourceItem.speaker, undefined);
+      assert.equal(sourceItem.voiceId, undefined);
+      assert.equal(
+        required.has(sourceItem.sourceId),
+        ['exposure', 'evidence'].includes(sourceItem.coveragePolicy),
+        sourceItem.sourceId
+      );
+    }
+  }
+});
+
+test('Lesson 3–4 freezes seven tiered targets and the accepted grouped coverage matrix', () => {
+  const unit = catalog.getTeachingUnit('NCE-U02');
+  const allSourceIds = Object.values(unit.lessonContent)
+    .flatMap(lesson => Object.keys(lesson.sources));
+  const coveredSourceIds = unit.sourceTargetCoverage.flatMap(row => row.sourceRefs);
+
+  assert.deepEqual(
+    unit.targets.map(target => ({
+      targetId: target.targetId,
+      tier: target.tier,
+      evidenceMode: target.evidenceModes[0],
+      structureRefs: target.structureRefs
+    })),
+    [
+      { targetId: 'NCE-U02-T01', tier: 'core', evidenceMode: 'dialogue-sequence-comprehension', structureRefs: [] },
+      { targetId: 'NCE-U02-T02', tier: 'core', evidenceMode: 'ownership-polarity-exchange', structureRefs: ['GS-OWNERSHIP-QUESTION-SG', 'GS-BE-SHORT-ANSWER-SG'] },
+      { targetId: 'NCE-U02-T03', tier: 'core', evidenceMode: 'possessor-relation-contrast', structureRefs: ['GS-POSSESSIVE-DETERMINER', 'GS-BE-NEGATIVE-SG'] },
+      { targetId: 'NCE-U02-T04', tier: 'support-communication', evidenceMode: 'request-and-handover-use', structureRefs: ['GS-REQUEST-HANDOVER', 'GS-HERE-PRESENTATION'] },
+      { targetId: 'NCE-U02-T05', tier: 'core', evidenceMode: 'anaphora-resolution', structureRefs: ['GS-PRONOUN-IT-REFERENCE'] },
+      { targetId: 'NCE-U02-T06', tier: 'support-communication', evidenceMode: 'social-repair-and-thanks', structureRefs: ['GS-POLITE-REPAIR'] },
+      { targetId: 'NCE-U02-T07', tier: 'lexical-sample', evidenceMode: 'lexical-form-meaning-association', structureRefs: [] }
+    ]
+  );
+  assert.ok(unit.targets.every(target => target.contextIds === undefined));
+  assert.ok(unit.targets.every(target => target.firstSessionBoundary.length > 0));
+  assert.deepEqual(unit.targets.find(target => target.targetId === 'NCE-U02-T05').inheritedSourceRefs, [
+    'L01-W09'
+  ]);
+  assert.equal(new Set(coveredSourceIds).size, coveredSourceIds.length);
+  assert.deepEqual([...coveredSourceIds].sort(), [...allSourceIds].sort());
+
+  const optionalRow = unit.sourceTargetCoverage.find(row => row.sourceRefs.includes('L04-E01'));
+  assert.deepEqual(optionalRow.coverage, {
+    'NCE-U02-T02': 'optional',
+    'NCE-U02-T03': 'optional',
+    'NCE-U02-T06': 'optional'
+  });
+  const translationRow = unit.sourceTargetCoverage.find(row => row.sourceRefs.includes('L03-Z01'));
+  assert.deepEqual(translationRow.coverage, {});
+  const ownershipRow = unit.sourceTargetCoverage.find(row => row.sourceRefs.includes('L04-P01'));
+  assert.deepEqual(ownershipRow.coverage, {
+    'NCE-U02-T02': 'eligible-evidence',
+    'NCE-U02-T03': 'eligible-evidence',
+    'NCE-U02-T07': 'eligible-evidence'
+  });
+});
+
+test('curriculum-accepted units cannot masquerade as authored or published runtime', () => {
+  function message(change) {
+    const unit = structuredClone(catalog.getTeachingUnit('NCE-U02'));
+    change(unit);
+    return catalog.validate([unit]).join('\n');
+  }
+
+  assert.deepEqual(catalog.validate([structuredClone(catalog.getTeachingUnit('NCE-U02'))]), []);
+  assert.match(message(unit => { unit.publicationScope = 'course-catalog'; }), /must remain catalog-only/i);
+  assert.match(message(unit => { unit.runtimeProfile = 'microtask-v2'; }), /must remain not-authored/i);
+  assert.match(message(unit => { unit.beats.push({ beatId: 'discover' }); }), /cannot declare runtime beats/i);
+  assert.match(message(unit => { unit.title = '提前写好的故事'; }), /cannot declare story or page design/i);
+  assert.match(message(unit => { unit.lessonContent.lesson3.sources['L03-D01'].audioSrc = '/fake.mp3'; }), /cannot declare audioSrc/i);
+  assert.match(message(unit => { unit.targets[0].contextIds = ['invented-scene']; }), /cannot declare runtime contexts/i);
+  assert.match(message(unit => { unit.targets[0].primarySourceRefs[0] = 'L03-D99'; }), /unknown primary source L03-D99/i);
+  assert.match(message(unit => { unit.sourceTargetCoverage[0].coverage['NCE-U02-T99'] = 'support'; }), /unknown target NCE-U02-T99/i);
+  assert.match(message(unit => { unit.sourceTargetCoverage[0].sourceRefs.pop(); }), /coverage matrix omits source L03-Q01/i);
+  assert.match(message(unit => { unit.lessonContent.lesson4.requiredSourceIds.push('L04-E01'); }), /optional or omitted source cannot be required/i);
+  assert.match(message(unit => { unit.curriculumContract.publicationAllowed = true; }), /preserve its unimplemented gate/i);
+});
+
 test('Lesson 1–2 V2 exposes the exact seventeen child-visible resume stages', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const microtasks = unit.beats.flatMap(beat => beat.microtasks || []);
@@ -1848,7 +2024,7 @@ test('the legacy lesson catalog exposes teaching-unit membership as a compatibil
   for (const unit of catalog.TEACHING_UNITS) {
     for (const lessonId of unit.lessonIds) {
       const course = courseCatalog.COURSES.find(candidate => candidate.id === lessonId);
-      if (unit.publicationScope === 'local-poc') {
+      if (unit.publicationScope !== 'course-catalog') {
         assert.equal(course, undefined);
         continue;
       }

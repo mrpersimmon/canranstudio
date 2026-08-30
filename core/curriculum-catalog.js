@@ -262,6 +262,247 @@
     audioSequences: {}
   };
 
+  const LESSON3_DIALOGUE_TEXT = [
+    'My coat and my umbrella please.',
+    'Here is my ticket.',
+    'Thank you, sir.',
+    'Number five.',
+    "Here's your umbrella and your coat.",
+    'This is not my umbrella.',
+    'Sorry, sir.',
+    'Is this your umbrella?',
+    "No, it isn't.",
+    'Is this it?',
+    'Yes, it is.',
+    'Thank you very much.'
+  ];
+  const LESSON3_DIALOGUE_FIGURE_GROUPS = [1, 2, 3, 3, 4, 5, 5, 6, 6, 7, 7, 7];
+  const LESSON3_DIALOGUE_POLICIES = [
+    ['target', 'evidence'],
+    ['target', 'evidence'],
+    ['support', 'exposure'],
+    ['support', 'exposure'],
+    ['target', 'exposure'],
+    ['target', 'evidence'],
+    ['target', 'evidence'],
+    ['target', 'evidence'],
+    ['target', 'evidence'],
+    ['target', 'evidence'],
+    ['target', 'evidence'],
+    ['target', 'evidence']
+  ];
+  const LESSON3_REFERENCE_TRANSLATIONS = [
+    '请把我的大衣和伞拿给我。',
+    '这是我（寄存东西）的牌子。',
+    '谢谢，先生。',
+    '是5号。',
+    '这是您的伞和大衣。',
+    '这不是我的伞。',
+    '对不起，先生。',
+    '这把伞是您的吗？',
+    '不，不是！',
+    '这把是吗？',
+    '是，是这把。',
+    '非常感谢。'
+  ];
+  const LESSON3_VOCABULARY = [
+    ['umbrella', '伞'],
+    ['please', '请'],
+    ['here', '这里'],
+    ['my', '我的'],
+    ['ticket', '票'],
+    ['number', '号码'],
+    ['five', '五'],
+    ['sorry', '对不起'],
+    ['sir', '先生'],
+    ['cloakroom', '衣帽存放处']
+  ];
+  const LESSON4_PRACTICE_NOUNS = [
+    'pen', 'pencil', 'book', 'watch', 'coat',
+    'dress', 'skirt', 'shirt', 'car', 'house',
+    'suit', 'school', 'teacher', 'son', 'daughter'
+  ];
+  const LESSON4_VOCABULARY = [
+    ['suit', '一套衣服'],
+    ['school', '学校'],
+    ['teacher', '老师'],
+    ['son', '儿子'],
+    ['daughter', '女儿']
+  ];
+
+  const LESSON3_SOURCES = {
+    'L03-I01': nceSource(
+      'L03-I01',
+      'textbook-instruction',
+      'Listen then answer this question.',
+      'context',
+      'exposure',
+      { translation: '听录音，然后回答问题。' }
+    ),
+    'L03-Q01': nceSource(
+      'L03-Q01',
+      'textbook-question',
+      'Does the man get his umbrella back?',
+      'context',
+      'exposure',
+      { translation: '这位男士拿回他的雨伞了吗？' }
+    ),
+    ...Object.fromEntries(LESSON3_DIALOGUE_TEXT.map((text, index) => {
+      const sourceId = `L03-D${String(index + 1).padStart(2, '0')}`;
+      const [sourceRole, coveragePolicy] = LESSON3_DIALOGUE_POLICIES[index];
+      return [sourceId, nceSource(
+        sourceId,
+        'dialogue',
+        text,
+        sourceRole,
+        coveragePolicy,
+        { figureGroup: LESSON3_DIALOGUE_FIGURE_GROUPS[index] }
+      )];
+    })),
+    ...Object.fromEntries(LESSON3_VOCABULARY.map(([text, translation], index) => {
+      const sourceId = `L03-W${String(index + 1).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'vocabulary',
+        text,
+        text === 'cloakroom' ? 'context' : 'support',
+        'exposure',
+        { translation, vocabularyOrder: index + 1 }
+      )];
+    })),
+    'L03-N01': nceSource(
+      'L03-N01',
+      'textbook-note',
+      "Here's = Here is.",
+      'support',
+      'exposure',
+      { linkedSourceRefs: ['L03-D02', 'L03-D05'] }
+    ),
+    'L03-N02': nceSource(
+      'L03-N02',
+      'textbook-note',
+      "Sorry = I'm sorry.",
+      'support',
+      'exposure',
+      { linkedSourceRefs: ['L03-D07'] }
+    ),
+    'L03-N03': nceSource(
+      'L03-N03',
+      'textbook-note',
+      'sir 是对男性的尊称。',
+      'support',
+      'exposure',
+      { linkedSourceRefs: ['L03-D03', 'L03-D07'] }
+    ),
+    'L03-N04': nceSource(
+      'L03-N04',
+      'textbook-note',
+      'Is this it? 中的 it 指代前文提到的物品。',
+      'support',
+      'exposure',
+      { linkedSourceRefs: ['L03-D10', 'L03-D11'] }
+    ),
+    ...Object.fromEntries(LESSON3_REFERENCE_TRANSLATIONS.map((text, index) => {
+      const sourceId = `L03-Z${String(index + 1).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'reference-translation',
+        text,
+        'context',
+        'optional',
+        { linkedSourceId: `L03-D${String(index + 1).padStart(2, '0')}` }
+      )];
+    }))
+  };
+
+  const LESSON4_SOURCES = {
+    'L04-I01': nceSource(
+      'L04-I01',
+      'textbook-instruction',
+      'Look, listen and repeat.',
+      'context',
+      'exposure',
+      { translation: '看图、听音并跟读。' }
+    ),
+    ...Object.fromEntries(LESSON4_PRACTICE_NOUNS.map((noun, index) => {
+      const sourceId = `L04-P${String(index + 1).padStart(2, '0')}`;
+      const vocabularySourceRef = index < 10
+        ? `L02-W${String(index + 1).padStart(2, '0')}`
+        : `L04-W${String(index - 9).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'substitution-prompt',
+        `Is this your ${noun}?`,
+        'support',
+        'exposure',
+        { promptOrder: index + 1, vocabularySourceRef }
+      )];
+    })),
+    ...Object.fromEntries(LESSON4_VOCABULARY.map(([text, translation], index) => {
+      const sourceId = `L04-W${String(index + 1).padStart(2, '0')}`;
+      return [sourceId, nceSource(
+        sourceId,
+        'vocabulary',
+        text,
+        'support',
+        'exposure',
+        { translation, vocabularyOrder: index + 1 }
+      )];
+    })),
+    'L04-E01': nceSource(
+      'L04-E01',
+      'exercise-mechanism',
+      'Copy these sentences.',
+      'context',
+      'optional',
+      {
+        reusedSourceRefs: ['L03-D06', 'L03-D07', 'L03-D08', 'L03-D09'],
+        extensionModes: ['paper-handwriting', 'tablet-handwriting'],
+        requiredForUnitCompletion: false,
+        producesLearningEvidence: false,
+        decisionRef: 'ADR-0098'
+      }
+    ),
+    'L04-E02': nceSource(
+      'L04-E02',
+      'exercise-mechanism',
+      'Answer these questions.',
+      'context',
+      'optional',
+      {
+        reusedSourceRefs: Array.from({ length: 10 }, (_, index) => (
+          `L04-P${String(index + 1).padStart(2, '0')}`
+        )),
+        extensionModes: ['paper-handwriting', 'tablet-handwriting'],
+        requiredForUnitCompletion: false,
+        producesLearningEvidence: false,
+        decisionRef: 'ADR-0098'
+      }
+    )
+  };
+
+  const LESSON3_CONTENT = {
+    lessonId: 'lesson3',
+    textbookTitle: 'Sorry, sir.',
+    sourceRegisterRef: 'BOOK1-2022-07',
+    textbookSource: '外研社《新概念英语智慧版 1》PDF 页 39–40，教材页 6–7',
+    requiredSourceIds: Object.keys(LESSON3_SOURCES).filter(sourceId => (
+      ['exposure', 'evidence'].includes(LESSON3_SOURCES[sourceId].coveragePolicy)
+    )),
+    sources: LESSON3_SOURCES
+  };
+
+  const LESSON4_CONTENT = {
+    lessonId: 'lesson4',
+    textbookTitle: 'Is this your ...?',
+    sourceRegisterRef: 'BOOK1-2022-07',
+    textbookSource: '外研社《新概念英语智慧版 1》PDF 页 41–42，教材页 8–9',
+    requiredSourceIds: Object.keys(LESSON4_SOURCES).filter(sourceId => (
+      ['exposure', 'evidence'].includes(LESSON4_SOURCES[sourceId].coveragePolicy)
+    )),
+    sources: LESSON4_SOURCES
+  };
+
   const NCE_AUTHORED_CONTENT = {
     'NCE-U01-C-Q-WATCH': {
       contentId: 'NCE-U01-C-Q-WATCH',
@@ -3694,6 +3935,238 @@
     };
   }
 
+  function sourceIdRange(prefix, first, last) {
+    return Array.from({ length: last - first + 1 }, (_, index) => (
+      `${prefix}${String(first + index).padStart(2, '0')}`
+    ));
+  }
+
+  function curriculumAcceptedUnit({
+    unitId,
+    districtId,
+    lessons,
+    unitLabel,
+    targets,
+    lessonContent,
+    sourceTargetCoverage,
+    curriculumContract
+  }) {
+    return {
+      unitId,
+      districtId,
+      lessonIds: lessons.map(lesson => `lesson${lesson}`),
+      unitLabel,
+      status: 'curriculum-accepted',
+      publicationScope: 'catalog-only',
+      runtimeProfile: 'not-authored',
+      beats: [],
+      targets,
+      lessonContent,
+      sourceTargetCoverage,
+      curriculumContract,
+      authoredContent: {},
+      entities: {},
+      vocabulary: []
+    };
+  }
+
+  const NCE_U02_TARGETS = [
+    {
+      targetId: 'NCE-U02-T01',
+      tier: 'core',
+      title: '听懂衣帽间取物从请求、交票、报号、拿错到找回的因果与顺序，并判断最终结果',
+      evidenceModes: ['dialogue-sequence-comprehension'],
+      structureRefs: [],
+      primarySourceRefs: [
+        'L03-Q01', ...sourceIdRange('L03-D', 1, 12),
+        'L03-W05', 'L03-W06', 'L03-W07', 'L03-W10'
+      ],
+      inheritedSourceRefs: [],
+      firstSessionBoundary: '一次整段理解证据，不把 12 句拆成 12 道题'
+    },
+    {
+      targetId: 'NCE-U02-T02',
+      tier: 'core',
+      title: '用归属问句询问，并按真实关系作肯定或否定短答',
+      evidenceModes: ['ownership-polarity-exchange'],
+      structureRefs: ['GS-OWNERSHIP-QUESTION-SG', 'GS-BE-SHORT-ANSWER-SG'],
+      primarySourceRefs: [
+        'L03-D08', 'L03-D09', 'L03-D11', ...sourceIdRange('L04-P', 1, 15)
+      ],
+      inheritedSourceRefs: [],
+      firstSessionBoundary: '少量代表变体形成证据，其余完整接触或回访'
+    },
+    {
+      targetId: 'NCE-U02-T03',
+      tier: 'core',
+      title: '用 my/your 和肯定／否定陈述表达归属对比',
+      evidenceModes: ['possessor-relation-contrast'],
+      structureRefs: ['GS-POSSESSIVE-DETERMINER', 'GS-BE-NEGATIVE-SG'],
+      primarySourceRefs: ['L03-D06', 'L03-D09', 'L03-W04', 'L04-E01', 'L04-E02'],
+      inheritedSourceRefs: [],
+      firstSessionBoundary: '功能词在完整关系中取证，不做孤立词义卡'
+    },
+    {
+      targetId: 'NCE-U02-T04',
+      tier: 'support-communication',
+      title: "在取物和交还时使用礼貌请求及 Here is/Here's ... 完成递交",
+      evidenceModes: ['request-and-handover-use'],
+      structureRefs: ['GS-REQUEST-HANDOVER', 'GS-HERE-PRESENTATION'],
+      primarySourceRefs: [
+        'L03-D01', 'L03-D02', 'L03-D05', 'L03-W02', 'L03-W03', 'L03-N01'
+      ],
+      inheritedSourceRefs: [],
+      firstSessionBoundary: '以完整表达和动作关系取证，不单独扩成训练章节'
+    },
+    {
+      targetId: 'NCE-U02-T05',
+      tier: 'core',
+      title: '判断 it 回指当前已提及物品，并在省略名词后继续理解问答',
+      evidenceModes: ['anaphora-resolution'],
+      structureRefs: ['GS-PRONOUN-IT-REFERENCE'],
+      primarySourceRefs: ['L03-D10', 'L03-D11', 'L03-N04'],
+      inheritedSourceRefs: ['L01-W09'],
+      firstSessionBoundary: '至少一个变化物品的关系证据；不考术语'
+    },
+    {
+      targetId: 'NCE-U02-T06',
+      tier: 'support-communication',
+      title: '在拿错物品时恰当使用道歉、称谓和感谢',
+      evidenceModes: ['social-repair-and-thanks'],
+      structureRefs: ['GS-POLITE-REPAIR'],
+      primarySourceRefs: [
+        'L03-D03', 'L03-D07', 'L03-D12', 'L03-W08', 'L03-W09', 'L03-N02', 'L03-N03'
+      ],
+      inheritedSourceRefs: [],
+      firstSessionBoundary: '在交际用途里取证，不做 sorry/sir 图片题或独立章节'
+    },
+    {
+      targetId: 'NCE-U02-T07',
+      tier: 'lexical-sample',
+      title: '将本单元新增用品、场所、号码和人物关系词连接到意义，并辨别复现词',
+      evidenceModes: ['lexical-form-meaning-association'],
+      structureRefs: [],
+      primarySourceRefs: [
+        'L03-W01', 'L03-W05', 'L03-W06', 'L03-W07', 'L03-W10',
+        ...sourceIdRange('L04-W', 1, 5),
+        ...sourceIdRange('L04-P', 1, 15)
+      ],
+      inheritedSourceRefs: [],
+      firstSessionBoundary: '首课抽样；具体词和通道配额待下一层冻结'
+    }
+  ];
+
+  const NCE_U02_SOURCE_TARGET_COVERAGE = [
+    {
+      sourceRefs: ['L03-I01', 'L03-Q01'],
+      coverage: { 'NCE-U02-T01': 'eligible-evidence' },
+      prohibitedInference: '不得据此声称已教授 does'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-D', 1, 2),
+      coverage: { 'NCE-U02-T01': 'support', 'NCE-U02-T04': 'eligible-evidence' },
+      prohibitedInference: '不得据此声称每句话都必须单独做题'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-D', 3, 5),
+      coverage: {
+        'NCE-U02-T01': 'eligible-evidence',
+        'NCE-U02-T04': 'eligible-evidence',
+        'NCE-U02-T06': 'support',
+        'NCE-U02-T07': 'support'
+      },
+      prohibitedInference: '不得据此声称记住 5 号即理解完整情节'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-D', 6, 7),
+      coverage: {
+        'NCE-U02-T01': 'eligible-evidence',
+        'NCE-U02-T03': 'eligible-evidence',
+        'NCE-U02-T06': 'eligible-evidence'
+      },
+      prohibitedInference: '不得据此声称一次否认即掌握所有否定'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-D', 8, 9),
+      coverage: {
+        'NCE-U02-T01': 'support',
+        'NCE-U02-T02': 'eligible-evidence',
+        'NCE-U02-T03': 'eligible-evidence'
+      },
+      prohibitedInference: '不得据此声称点击 No 即掌握归属对比'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-D', 10, 12),
+      coverage: {
+        'NCE-U02-T01': 'eligible-evidence',
+        'NCE-U02-T02': 'eligible-evidence',
+        'NCE-U02-T05': 'eligible-evidence',
+        'NCE-U02-T06': 'eligible-evidence'
+      },
+      prohibitedInference: '不得据此声称背诵 it 术语即理解指代'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-W', 1, 10),
+      coverage: {
+        'NCE-U02-T01': 'support',
+        'NCE-U02-T03': 'support',
+        'NCE-U02-T04': 'support',
+        'NCE-U02-T06': 'support',
+        'NCE-U02-T07': 'eligible-evidence'
+      },
+      prohibitedInference: '不得据此声称 10 词都要当天双通道正式考察'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-N', 1, 4),
+      coverage: {
+        'NCE-U02-T04': 'support',
+        'NCE-U02-T05': 'support',
+        'NCE-U02-T06': 'support'
+      },
+      prohibitedInference: '不得据此把 Notes 变成术语考试'
+    },
+    {
+      sourceRefs: sourceIdRange('L03-Z', 1, 12),
+      coverage: {},
+      prohibitedInference: '不得据此声称查看中文等于听懂英语'
+    },
+    {
+      sourceRefs: ['L04-I01'],
+      coverage: {},
+      prohibitedInference: '教材活动指令本身不形成独立 Target'
+    },
+    {
+      sourceRefs: sourceIdRange('L04-P', 1, 10),
+      coverage: {
+        'NCE-U02-T02': 'eligible-evidence',
+        'NCE-U02-T03': 'eligible-evidence',
+        'NCE-U02-T07': 'eligible-evidence'
+      },
+      prohibitedInference: '不得为复现词创建新的词汇 Source ID'
+    },
+    {
+      sourceRefs: [
+        ...sourceIdRange('L04-P', 11, 15),
+        ...sourceIdRange('L04-W', 1, 5)
+      ],
+      coverage: {
+        'NCE-U02-T02': 'eligible-evidence',
+        'NCE-U02-T03': 'support',
+        'NCE-U02-T07': 'eligible-evidence'
+      },
+      prohibitedInference: '不得据此复制 U01 全量双通道方案'
+    },
+    {
+      sourceRefs: ['L04-E01', 'L04-E02'],
+      coverage: {
+        'NCE-U02-T02': 'optional',
+        'NCE-U02-T03': 'optional',
+        'NCE-U02-T06': 'optional'
+      },
+      prohibitedInference: '不得据此声称已完成书写、拼写或手机输入能力'
+    }
+  ];
+
   const TEACHING_UNITS = deepFreeze([
     unit({
       unitId: 'NCE-U01',
@@ -4123,6 +4596,42 @@
       retiredMicrotaskResumeTargets: {},
       microtasksByBeat: LESSON1_2_MICROTASKS_BY_BEAT
     }),
+    curriculumAcceptedUnit({
+      unitId: 'NCE-U02',
+      districtId: 'first-book-1-12',
+      lessons: [3, 4],
+      unitLabel: 'Lesson 3–4',
+      targets: NCE_U02_TARGETS,
+      lessonContent: {
+        lesson3: LESSON3_CONTENT,
+        lesson4: LESSON4_CONTENT
+      },
+      sourceTargetCoverage: NCE_U02_SOURCE_TARGET_COVERAGE,
+      curriculumContract: {
+        acceptedOn: '2026-08-30',
+        acceptedDecisionRefs: ['PA-01-A', 'PA-02-A', 'PA-03-A', 'PA-04-A'],
+        launchPackRef: 'docs/designs/lesson3-4-teaching-unit-launch-pack-v1.md',
+        grammarSpineRef: 'docs/designs/new-concept-english-book1-grammar-spine-v1.md',
+        sourceRegister: {
+          sourceRegisterId: 'BOOK1-2022-07',
+          title: '外研社《新概念英语智慧版 1：英语初阶 First Things First》',
+          edition: '2022 年 7 月第 1 版第 1 次印刷',
+          isbn: '978-7-5213-3670-2',
+          snapshotSha256: 'a54740bdce7423b98ea30334dca9043603ef5533f85e64f86f5af6d31d93be9f',
+          totalPdfPages: 330,
+          lessonPageMap: {
+            lesson3: { pdfPages: [39, 40], textbookPages: [6, 7] },
+            lesson4: { pdfPages: [41, 42], textbookPages: [8, 9] }
+          }
+        },
+        writingPolicy: 'optional-nonblocking',
+        audioAuditStatus: 'not-audited',
+        speakerMappingStatus: 'not-frozen',
+        storyDesignStatus: 'not-authored',
+        pageImplementationStatus: 'not-authored',
+        publicationAllowed: false
+      }
+    }),
     unit({
       number: 1,
       lessons: [49, 50],
@@ -4381,6 +4890,11 @@
 
   function validate(units = TEACHING_UNITS) {
     const errors = [];
+    const allowedStatuses = new Set(['planned', 'candidate', 'curriculum-accepted']);
+    const allowedPublicationScopes = new Set(['course-catalog', 'local-poc', 'catalog-only']);
+    const allowedRuntimeProfiles = new Set(['five-beat-v1', 'microtask-v2', 'not-authored']);
+    const curriculumTargetTiers = new Set(['core', 'support-communication', 'lexical-sample']);
+    const curriculumCoverageModes = new Set(['eligible-evidence', 'support', 'optional']);
     const unitIds = new Set();
     const lessonOwners = new Map();
     const targetIds = new Set();
@@ -4396,7 +4910,58 @@
       if (unitIds.has(current.unitId)) errors.push(`${current.unitId} belongs to multiple units`);
       unitIds.add(current.unitId);
 
-      if (!getCourseVoiceBaseline(current.voiceBaselineId)) {
+      const isCurriculumAccepted = current.status === 'curriculum-accepted';
+      if (!allowedStatuses.has(current.status)) {
+        errors.push(`${current.unitId} has unknown status ${current.status}`);
+      }
+      if (!allowedPublicationScopes.has(current.publicationScope)) {
+        errors.push(`${current.unitId} has unknown publication scope ${current.publicationScope}`);
+      }
+      if (!allowedRuntimeProfiles.has(current.runtimeProfile)) {
+        errors.push(`${current.unitId} has unknown runtime profile ${current.runtimeProfile}`);
+      }
+
+      if (isCurriculumAccepted) {
+        if (current.publicationScope !== 'catalog-only') {
+          errors.push(`${current.unitId} curriculum-accepted unit must remain catalog-only`);
+        }
+        if (current.runtimeProfile !== 'not-authored') {
+          errors.push(`${current.unitId} curriculum-accepted unit must remain not-authored`);
+        }
+        if ((current.beats || []).length > 0) {
+          errors.push(`${current.unitId} curriculum-accepted unit cannot declare runtime beats`);
+        }
+        if (current.landmarkId || current.title || current.experience) {
+          errors.push(`${current.unitId} curriculum-accepted unit cannot declare story or page design`);
+        }
+        if (Object.keys(current.authoredContent || {}).length > 0
+          || Object.keys(current.entities || {}).length > 0
+          || (current.vocabulary || []).length > 0) {
+          errors.push(`${current.unitId} curriculum-accepted unit cannot declare authored runtime content`);
+        }
+        const forbiddenRuntimeKeys = new Set([
+          'audioSrc', 'audioSequence', 'audioSequences', 'speaker', 'voiceId', 'voiceBaselineId'
+        ]);
+        function findForbiddenRuntimeKey(value, path = current.unitId) {
+          if (!value || typeof value !== 'object') return;
+          for (const [key, nested] of Object.entries(value)) {
+            if (forbiddenRuntimeKeys.has(key)) {
+              errors.push(`${current.unitId} curriculum-accepted unit cannot declare ${key} at ${path}`);
+            }
+            findForbiddenRuntimeKey(nested, `${path}.${key}`);
+          }
+        }
+        findForbiddenRuntimeKey(current);
+        if (
+          current.curriculumContract?.publicationAllowed !== false
+          || current.curriculumContract?.audioAuditStatus !== 'not-audited'
+          || current.curriculumContract?.speakerMappingStatus !== 'not-frozen'
+          || current.curriculumContract?.storyDesignStatus !== 'not-authored'
+          || current.curriculumContract?.pageImplementationStatus !== 'not-authored'
+        ) {
+          errors.push(`${current.unitId} curriculum contract must preserve its unimplemented gate`);
+        }
+      } else if (!getCourseVoiceBaseline(current.voiceBaselineId)) {
         errors.push(`${current.unitId} references unknown voice baseline ${current.voiceBaselineId}`);
       }
 
@@ -4414,7 +4979,28 @@
         if (!Array.isArray(currentTarget.evidenceModes) || currentTarget.evidenceModes.length === 0) {
           errors.push(`${currentTarget.targetId} must declare evidence modes`);
         }
-        if (!Array.isArray(currentTarget.contextIds) || currentTarget.contextIds.length < 2) {
+        if (isCurriculumAccepted) {
+          if (!curriculumTargetTiers.has(currentTarget.tier)) {
+            errors.push(`${currentTarget.targetId} must declare an accepted curriculum tier`);
+          }
+          if (!Array.isArray(currentTarget.structureRefs)) {
+            errors.push(`${currentTarget.targetId} must declare structureRefs`);
+          }
+          if (!Array.isArray(currentTarget.primarySourceRefs)
+            || currentTarget.primarySourceRefs.length === 0) {
+            errors.push(`${currentTarget.targetId} must declare primary source refs`);
+          }
+          if (!Array.isArray(currentTarget.inheritedSourceRefs)) {
+            errors.push(`${currentTarget.targetId} must declare inherited source refs`);
+          }
+          if (typeof currentTarget.firstSessionBoundary !== 'string'
+            || currentTarget.firstSessionBoundary.length === 0) {
+            errors.push(`${currentTarget.targetId} must declare its first-session boundary`);
+          }
+          if (Object.prototype.hasOwnProperty.call(currentTarget, 'contextIds')) {
+            errors.push(`${currentTarget.targetId} cannot declare runtime contexts before design`);
+          }
+        } else if (!Array.isArray(currentTarget.contextIds) || currentTarget.contextIds.length < 2) {
           errors.push(`${currentTarget.targetId} must declare at least two contexts`);
         }
       }
@@ -4490,6 +5076,81 @@
       const knownContentIds = new Set(Object.keys(current.authoredContent || {}));
       const knownEntityIds = new Set(Object.keys(current.entities || {}));
       const knownReviewContextIds = new Set(Object.keys(current.reviewContexts || {}));
+      if (isCurriculumAccepted) {
+        const localTargetIds = new Set((current.targets || []).map(targetItem => targetItem.targetId));
+        const coverageSourceIds = new Set();
+
+        for (const targetItem of current.targets || []) {
+          const localRefs = targetItem.primarySourceRefs || [];
+          if (new Set(localRefs).size !== localRefs.length) {
+            errors.push(`${targetItem.targetId} has duplicated primary source refs`);
+          }
+          for (const sourceRef of localRefs) {
+            if (!knownSourceIds.has(sourceRef)) {
+              errors.push(`${targetItem.targetId} references unknown primary source ${sourceRef}`);
+            }
+          }
+          for (const sourceRef of targetItem.inheritedSourceRefs || []) {
+            if (!/^L\d{2}-[A-Z]\d{2}$/.test(sourceRef)) {
+              errors.push(`${targetItem.targetId} has invalid inherited source ref ${sourceRef}`);
+            }
+            if (knownSourceIds.has(sourceRef)) {
+              errors.push(`${targetItem.targetId} must keep local source ${sourceRef} in primarySourceRefs`);
+            }
+          }
+          for (const structureRef of targetItem.structureRefs || []) {
+            if (!/^GS-[A-Z0-9-]+$/.test(structureRef)) {
+              errors.push(`${targetItem.targetId} has invalid structure ref ${structureRef}`);
+            }
+          }
+        }
+
+        if (!Array.isArray(current.sourceTargetCoverage)
+          || current.sourceTargetCoverage.length === 0) {
+          errors.push(`${current.unitId} curriculum-accepted unit must declare source-target coverage`);
+        }
+        for (const [rowIndex, row] of (current.sourceTargetCoverage || []).entries()) {
+          if (!Array.isArray(row.sourceRefs) || row.sourceRefs.length === 0) {
+            errors.push(`${current.unitId} coverage row ${rowIndex + 1} must declare sourceRefs`);
+            continue;
+          }
+          if (typeof row.prohibitedInference !== 'string' || row.prohibitedInference.length === 0) {
+            errors.push(`${current.unitId} coverage row ${rowIndex + 1} must declare prohibitedInference`);
+          }
+          for (const sourceRef of row.sourceRefs) {
+            if (!knownSourceIds.has(sourceRef)) {
+              errors.push(`${current.unitId} coverage row references unknown source ${sourceRef}`);
+              continue;
+            }
+            if (coverageSourceIds.has(sourceRef)) {
+              errors.push(`${current.unitId} coverage matrix repeats source ${sourceRef}`);
+            }
+            coverageSourceIds.add(sourceRef);
+            const sourceItem = knownSourceById.get(sourceRef);
+            for (const mode of Object.values(row.coverage || {})) {
+              if (sourceItem.coveragePolicy === 'optional' && mode !== 'optional') {
+                errors.push(`${sourceRef} optional source cannot carry ${mode} coverage`);
+              }
+              if (sourceItem.coveragePolicy !== 'optional' && mode === 'optional') {
+                errors.push(`${sourceRef} required source cannot carry optional coverage`);
+              }
+            }
+          }
+          for (const [targetId, mode] of Object.entries(row.coverage || {})) {
+            if (!localTargetIds.has(targetId)) {
+              errors.push(`${current.unitId} coverage row references unknown target ${targetId}`);
+            }
+            if (!curriculumCoverageModes.has(mode)) {
+              errors.push(`${current.unitId} coverage row has invalid mode ${mode}`);
+            }
+          }
+        }
+        for (const sourceId of knownSourceIds) {
+          if (!coverageSourceIds.has(sourceId)) {
+            errors.push(`${current.unitId} coverage matrix omits source ${sourceId}`);
+          }
+        }
+      }
       if (current.experienceRevision === NCE_U01_V2_REVISION) {
         const outcomePractices = current.experience?.outcomePractices;
         const forbiddenPracticeField = /^(?:resultId|reviewCellId|challengeRef|targetResults|evidenceMode|adventureHearts|landmarkId|nextDueDay|mastery|checkpointFacts|microtaskId|storyFacts|progress)$/;
@@ -5450,6 +6111,7 @@
       for (const [lessonId, lesson] of Object.entries(current.lessonContent || {})) {
         const sourceIds = new Set(Object.keys(lesson.sources || {}));
         const requiredSourceIds = new Set(lesson.requiredSourceIds || []);
+        const requiresRuntimeCoverage = current.runtimeProfile !== 'not-authored';
         const lessonTasks = authoredMicrotasks.filter(task => task.lessonId === lessonId);
         const exposed = new Set(authoredMicrotasks.flatMap(task => task.exposureRefs || []));
         const evidenced = new Set(authoredMicrotasks.flatMap(task => task.evidenceRefs || []));
@@ -5460,11 +6122,14 @@
             continue;
           }
           const item = lesson.sources[sourceId];
+          if (['optional', 'omitted'].includes(item.coveragePolicy)) {
+            errors.push(`${sourceId} optional or omitted source cannot be required in ${lessonId}`);
+          }
           if (!item.coveragePolicy) {
-            if (!exposed.has(sourceId)) {
+            if (requiresRuntimeCoverage && !exposed.has(sourceId)) {
               errors.push(`${sourceId} requires exposure coverage in ${lessonId}`);
             }
-            if (!evidenced.has(sourceId)) {
+            if (requiresRuntimeCoverage && !evidenced.has(sourceId)) {
               errors.push(`${sourceId} requires evidence coverage in ${lessonId}`);
             }
           }
@@ -5483,11 +6148,11 @@
             if (!requiredSourceIds.has(sourceId)) {
               errors.push(`${sourceId} must be listed as required in ${lessonId}`);
             }
-            if (!exposed.has(sourceId)) {
+            if (requiresRuntimeCoverage && !exposed.has(sourceId)) {
               errors.push(`${sourceId} requires exposure coverage in ${lessonId}`);
             }
           }
-          if (item.coveragePolicy === 'evidence' && !evidenced.has(sourceId)) {
+          if (item.coveragePolicy === 'evidence' && requiresRuntimeCoverage && !evidenced.has(sourceId)) {
             errors.push(`${sourceId} requires evidence coverage in ${lessonId}`);
           }
           if (item.coveragePolicy === 'omitted') {

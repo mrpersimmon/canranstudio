@@ -2,6 +2,7 @@
 status: accepted
 partially_superseded_by:
   - ADR-0104
+  - ADR-0115
 ---
 
 # 语法采用显性实验室与累计式螺旋
