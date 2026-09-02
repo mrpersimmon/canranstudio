@@ -38,8 +38,11 @@ function face(family, file, weight, range) {
 }
 
 async function vendorFonts() {
-  await fs.rm(OUT, { recursive: true, force: true });
   await fs.mkdir(OUT, { recursive: true });
+  for (const entry of await fs.readdir(OUT, { withFileTypes: true })) {
+    if (entry.name === 'course-package' && entry.isDirectory()) continue;
+    await fs.rm(path.join(OUT, entry.name), { recursive: true, force: true });
+  }
   for (const [modulePath, target] of COPIES) {
     const source = path.join(ROOT, 'node_modules', modulePath);
     await fs.copyFile(source, path.join(OUT, target));
