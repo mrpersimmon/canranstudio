@@ -162,6 +162,30 @@ function v2ReviewAttempt(overrides = {}) {
   };
 }
 
+function roleRoundEvent(unit, task, roundId, disposition, overrides = {}) {
+  const practice = task.steps[0].practice;
+  const round = practice.rounds.find(candidate => candidate.roundId === roundId);
+  const completed = disposition === 'completed';
+  return {
+    eventId: `role-round:${roundId}:${disposition}`,
+    type: completed ? 'role-practice-round-completed' : 'role-practice-round-skipped',
+    unitId: unit.unitId,
+    experienceRevision: unit.experienceRevision,
+    unitAttemptId: 'lesson1-role-attempt',
+    microtaskId: task.microtaskId,
+    practiceId: practice.practiceId,
+    roundId,
+    targetResults: [],
+    sourceContacts: completed ? round.dialogueTurnRefs.map(sourceRef => ({
+      sourceRef, contactModes: ['experienced', 'audio-ended']
+    })) : [],
+    audioContactRefs: completed ? [...round.dialogueTurnRefs] : [],
+    missingAudioRefs: [],
+    storyFacts: [],
+    ...overrides
+  };
+}
+
 function reviewEvent({
   eventId,
   unitId = 'FLC-U01',
@@ -206,26 +230,22 @@ test('role-practice round checkpoints are revision-scoped resume state, not resu
   const roleTask = unit.beats.flatMap(beat => beat.microtasks || [])
     .find(task => task.microtaskId === 'L01-M12');
 
-  const saved = ledger.apply({
-    eventId: 'role-progress:keeper',
-    type: 'role-practice-round-completed',
-    unitId: unit.unitId,
-    experienceRevision: unit.experienceRevision,
-    unitAttemptId: 'lesson1-role-attempt',
-    microtaskId: roleTask.microtaskId,
-    practiceId: roleTask.steps[0].practice.practiceId,
-    roundId: 'keeper-round'
-  });
+  const saved = ledger.apply(roleRoundEvent(unit, roleTask, 'keeper-round', 'completed'));
   assert.equal(saved.persisted, true);
   let projection = ledger.read().units[unit.unitId];
   assert.deepEqual(projection.rolePracticeProgress, {
     'L01-M12:role-enactment': {
       microtaskId: 'L01-M12', unitAttemptId: 'lesson1-role-attempt',
-      completedRoundIds: ['keeper-round']
+      completedRoundIds: ['keeper-round'], skippedRoundIds: []
     }
   });
   assert.equal(projection.completedMicrotaskIds.includes('L01-M12'), false);
   assert.equal(projection.reviewCells && Object.keys(projection.reviewCells).length > 29, false);
+
+  const secondRound = ledger.apply(roleRoundEvent(unit, roleTask, 'owner-round', 'completed', {
+    eventId: 'role-progress:owner'
+  }));
+  assert.equal(secondRound.persisted, true);
 
   const completion = ledger.apply({
     eventId: 'role-stage:complete', type: 'microtask-completed',
@@ -236,9 +256,9 @@ test('role-practice round checkpoints are revision-scoped resume state, not resu
     checkpointId: roleTask.checkpointAfterSuccess.checkpointId,
     completionStatus: 'completed-independent', targetResults: [],
     sourceContacts: roleTask.exposureRefs.map(sourceRef => ({
-      sourceRef, contactModes: ['experienced']
+      sourceRef, contactModes: ['experienced', 'audio-ended']
     })),
-    audioContactRefs: [], missingAudioRefs: [],
+    audioContactRefs: [...roleTask.exposureRefs], missingAudioRefs: [],
     storyFacts: [...roleTask.persistence.checkpointFacts],
     adventureHeartsRemaining: 3
   });
@@ -246,6 +266,73 @@ test('role-practice round checkpoints are revision-scoped resume state, not resu
   projection = ledger.read().units[unit.unitId];
   assert.deepEqual(projection.rolePracticeProgress, {});
   assert.equal(projection.completedMicrotaskIds.includes('L01-M12'), true);
+});
+
+test('a skipped role stage is durable progress without completion, contacts, facts, or result evidence', () => {
+  const store = createMemoryAdapter();
+  const ledger = open({
+    store, key: 'lesson1-role-skip', catalog,
+    clock: fixedClock('2026-08-25')
+  });
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const beat = unit.beats.find(candidate => (
+    candidate.microtasks?.some(task => task.microtaskId === 'L01-M12')
+  ));
+  const task = beat.microtasks.find(candidate => candidate.microtaskId === 'L01-M12');
+  const practiceId = task.steps[0].practice.practiceId;
+
+  ledger.apply(roleRoundEvent(unit, task, 'keeper-round', 'completed', {
+    eventId: 'role-skip:keeper', unitAttemptId: 'role-skip-attempt'
+  }));
+  ledger.apply(roleRoundEvent(unit, task, 'owner-round', 'skipped', {
+    eventId: 'role-skip:owner', unitAttemptId: 'role-skip-attempt'
+  }));
+  const skipped = ledger.apply({
+    eventId: 'role-skip:confirmed', type: 'microtask-skipped',
+    unitId: unit.unitId, experienceRevision: unit.experienceRevision,
+    unitAttemptId: 'role-skip-attempt', attemptRevision: 0,
+    beatId: beat.beatId, microtaskId: task.microtaskId,
+    checkpointId: task.checkpointAfterSuccess.checkpointId,
+    completionStatus: 'skipped', targetResults: [], sourceContacts: [],
+    audioContactRefs: [], missingAudioRefs: [], storyFacts: [],
+    adventureHeartsRemaining: 3
+  });
+
+  assert.equal(skipped.persisted, true);
+  const projection = ledger.read().units[unit.unitId];
+  assert.deepEqual(projection.skippedMicrotaskIds, ['L01-M12']);
+  assert.equal(projection.completedMicrotaskIds.includes('L01-M12'), false);
+  assert.equal(projection.checkpoint.completionStatus, 'skipped');
+  assert.deepEqual(projection.rolePracticeProgress[practiceId].completedRoundIds, ['keeper-round']);
+  assert.deepEqual(projection.rolePracticeProgress[practiceId].skippedRoundIds, ['owner-round']);
+  assert.equal(projection.storyFacts.includes('lesson1-full-role-enactment-complete'), false);
+  assert.deepEqual(projection.sourceContacts['L01-D01'].contactModes, ['experienced', 'audio-ended']);
+  assert.equal(projection.completionReadback.skippedMicrotaskCount, 1);
+});
+
+test('role dispositions merge monotonically and completed wins stale concurrent skips', () => {
+  const store = createMemoryAdapter();
+  const clock = fixedClock('2026-08-25');
+  const first = open({ store, key: 'role-disposition-race', catalog, clock });
+  const stale = open({ store, key: 'role-disposition-race', catalog, clock });
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const task = unit.beats.flatMap(beat => beat.microtasks || [])
+    .find(candidate => candidate.microtaskId === 'L01-M12');
+
+  assert.equal(first.apply(roleRoundEvent(unit, task, 'keeper-round', 'skipped', {
+    eventId: 'race:skip:first'
+  })).persisted, true);
+  assert.equal(stale.apply(roleRoundEvent(unit, task, 'keeper-round', 'completed', {
+    eventId: 'race:complete'
+  })).persisted, true);
+  assert.equal(first.apply(roleRoundEvent(unit, task, 'keeper-round', 'skipped', {
+    eventId: 'race:skip:stale'
+  })).persisted, true);
+
+  const readback = open({ store, key: 'role-disposition-race', catalog, clock })
+    .read().units[unit.unitId].rolePracticeProgress[task.steps[0].practice.practiceId];
+  assert.deepEqual(readback.completedRoundIds, ['keeper-round']);
+  assert.deepEqual(readback.skippedRoundIds, []);
 });
 
 test('a versioned unit starts from an empty projection when stored experienceRevision is missing or stale', () => {
@@ -659,6 +746,8 @@ test('a V2 landmark builds only after ledger readback proves all 16 stages, 29 c
   assert.deepEqual(beforeBuild.completionReadback, {
     requiredMicrotaskCount: 16,
     completedMicrotaskCount: 16,
+    skippedMicrotaskCount: 0,
+    resolvedMicrotaskCount: 16,
     requiredResultCellCount: 29,
     completedResultCellCount: 29,
     requiredStoryFactCount: 16,
@@ -1041,7 +1130,7 @@ test('microtask v2 completion atomically stores checkpoint, contacts, story fact
 
   assert.equal(result.status, 'applied');
   assert.equal(result.snapshot.revision, 1);
-  assert.equal(projection.experienceRevision, 'lesson1-2-v2.4');
+  assert.equal(projection.experienceRevision, 'lesson1-2-v2.6');
   assert.equal(projection.checkpoint.microtaskId, 'L01-M08');
   assert.equal(projection.adventureHeartsRemaining, 2);
   assert.deepEqual(projection.completedMicrotaskIds, ['L01-M08']);
@@ -1126,12 +1215,26 @@ test('the real V2 catalog and ledger commit seventeen microtasks and twenty-nine
 
   for (const task of tasks) {
     const beat = unit.beats.find(candidate => candidate.microtasks.includes(task));
-    const audioContactRefs = audioRefsFor(task);
+    if (task.microtaskId === 'L01-M12') {
+      for (const round of task.steps[0].practice.rounds) {
+        const disposition = ledger.apply(roleRoundEvent(unit, task, round.roundId, 'completed', {
+          eventId: `complete-${task.microtaskId}:${round.roundId}`,
+          unitAttemptId: 'catalog-completion-attempt'
+        }));
+        assert.equal(disposition.status, 'applied', `${round.roundId}: ${disposition.reason}`);
+      }
+    }
+    const audioContactRefs = task.microtaskId === 'L01-M12'
+      ? [...task.exposureRefs]
+      : audioRefsFor(task);
     const result = ledger.apply({
       eventId: `complete-${task.microtaskId}`,
       type: 'microtask-completed',
       unitId: unit.unitId,
       experienceRevision: unit.experienceRevision,
+      ...(task.microtaskId === 'L01-M12'
+        ? { unitAttemptId: 'catalog-completion-attempt' }
+        : {}),
       beatId: beat.beatId,
       microtaskId: task.microtaskId,
       checkpointId: task.checkpointAfterSuccess.checkpointId,

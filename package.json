@@ -7,6 +7,7 @@
   },
   "scripts": {
     "build:static": "node scripts/build-static.js",
+    "build:course-packages": "node scripts/build-course-package-manifests.js",
     "sync:home-fallback": "node scripts/home-course-fallback.js",
     "verify:live:http": "node scripts/verify-live.js http://59.110.217.36",
     "test:deploy": "node --test tests/deploy/*.test.js",
@@ -18,6 +19,10 @@
     "art:build-atlas-background": "node scripts/build-atlas-background.js",
     "art:build-route-page": "node scripts/build-route-page-assets.js",
     "art:build-states": "node scripts/build-landmark-states.js",
+    "art:build:lesson3-4": "node scripts/extract-lesson3-4-generated-assets.mjs",
+    "audio:build:lesson3-4": "node scripts/build-story-stage-candidate-audio.mjs --unit=NCE-U02",
+    "audio:build:lesson5-6": "node scripts/build-story-stage-candidate-audio.mjs --unit=NCE-U03",
+    "audio:build:lesson7-8": "node scripts/build-story-stage-candidate-audio.mjs --unit=NCE-U04",
     "vendor:fonts": "node scripts/vendor-fonts.js"
   },
   "devDependencies": {

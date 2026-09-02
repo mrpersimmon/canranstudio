@@ -23,9 +23,11 @@
     'completed-assisted',
     'completed-partner-rescue'
   ]);
+  const CHECKPOINT_STATUSES = new Set([...COMPLETION_STATUSES, 'skipped']);
   const EVENT_TYPES = new Set([
     'checkpoint-completed',
     'microtask-completed',
+    'microtask-skipped',
     'unit-built',
     'formative-attempt',
     'review-attempt',
@@ -33,6 +35,7 @@
     'review-run-completed',
     'review-run-deferred',
     'role-practice-round-completed',
+    'role-practice-round-skipped',
     'ui-continuation-acknowledged'
   ]);
   const REVIEW_INTERVAL_DAYS = [1, 3, 7, 14, 30];
@@ -78,6 +81,7 @@
         buildStage: 0,
         adventureHeartsRemaining: 3,
         completedMicrotaskIds: [],
+        skippedMicrotaskIds: [],
         storyFacts: [],
         sourceContacts: {}
       };
@@ -171,21 +175,32 @@
     const expectedMicrotaskCount = Number.isInteger(unit.experience?.progressDenominator)
       ? unit.experience.progressDenominator
       : 16;
-    const requiredMicrotaskIds = unitMicrotasks(unit).map(task => task.microtaskId);
-    const requiredResultCellIds = unitMicrotasks(unit)
+    const allMicrotasks = unitMicrotasks(unit);
+    const requiredMicrotaskIds = allMicrotasks.map(task => task.microtaskId);
+    const skippedMicrotaskIds = new Set(stored.skippedMicrotaskIds || []);
+    const evidenceRequiredTasks = allMicrotasks.filter(task => !skippedMicrotaskIds.has(task.microtaskId));
+    const requiredResultCellIds = evidenceRequiredTasks
       .flatMap(task => task.targetResults || [])
       .map(result => result.reviewCellId || result.resultId);
-    const requiredChallengeRefs = unitMicrotasks(unit)
+    const requiredChallengeRefs = evidenceRequiredTasks
       .flatMap(task => task.targetResults || [])
       .map(result => result.challengeRef);
     const completedResultCellIds = new Set(unit.targets.flatMap(target => (
       Object.keys(state.targets[target.targetId]?.variantCells || {})
     )));
-    const requiredStoryFactIds = [...authoredStoryFacts(unit)];
-    const requiredSourceRefs = [...authoredSourceContacts(unit)];
-    const requiredAudioSourceRefs = [...new Set(unitMicrotasks(unit).flatMap(microtaskAudioSourceRefs))];
+    const requiredStoryFactIds = [...new Set(evidenceRequiredTasks
+      .flatMap(task => task.persistence?.checkpointFacts || []))];
+    const requiredSourceRefs = [...new Set(evidenceRequiredTasks.flatMap(task => (
+      Array.isArray(task.sourceContacts) && task.sourceContacts.length
+        ? task.sourceContacts.map(contact => contact.sourceRef)
+        : (task.exposureRefs || [])
+    )))];
+    const requiredAudioSourceRefs = [...new Set(evidenceRequiredTasks.flatMap(microtaskAudioSourceRefs))];
     const completedMicrotaskCount = requiredMicrotaskIds
       .filter(microtaskId => stored.completedMicrotaskIds.includes(microtaskId)).length;
+    const resolvedMicrotaskCount = requiredMicrotaskIds.filter(microtaskId => (
+      stored.completedMicrotaskIds.includes(microtaskId) || skippedMicrotaskIds.has(microtaskId)
+    )).length;
     const completedResultCellCount = requiredResultCellIds
       .filter(reviewCellId => completedResultCellIds.has(reviewCellId)).length;
     const completedStoryFactCount = requiredStoryFactIds
@@ -197,6 +212,8 @@
     return {
       requiredMicrotaskCount: requiredMicrotaskIds.length,
       completedMicrotaskCount,
+      skippedMicrotaskCount: skippedMicrotaskIds.size,
+      resolvedMicrotaskCount,
       requiredResultCellCount: requiredResultCellIds.length,
       completedResultCellCount,
       requiredStoryFactCount: requiredStoryFactIds.length,
@@ -210,7 +227,7 @@
         && requiredResultCellIds.length === 29
         && new Set(requiredResultCellIds).size === 29
         && new Set(requiredChallengeRefs).size === 29
-        && completedMicrotaskCount === requiredMicrotaskIds.length
+        && resolvedMicrotaskCount === requiredMicrotaskIds.length
         && completedResultCellCount === requiredResultCellIds.length
         && completedStoryFactCount === requiredStoryFactIds.length
         && completedSourceContactCount === requiredSourceRefs.length
@@ -280,7 +297,7 @@
           ...(typeof stored.checkpoint.microtaskId === 'string'
             ? { microtaskId: stored.checkpoint.microtaskId }
             : {}),
-          ...(COMPLETION_STATUSES.has(stored.checkpoint.completionStatus)
+          ...(CHECKPOINT_STATUSES.has(stored.checkpoint.completionStatus)
             ? { completionStatus: stored.checkpoint.completionStatus }
             : {}),
           learningDay: validLearningDay(stored.checkpoint.learningDay)
@@ -294,6 +311,11 @@
         stored.completedMicrotaskIds,
         allowedMicrotaskIds
       ).sort((left, right) => microtaskOrder.indexOf(left) - microtaskOrder.indexOf(right));
+      defaults.units[unit.unitId].skippedMicrotaskIds = orderedUnique(
+        stored.skippedMicrotaskIds,
+        allowedMicrotaskIds
+      ).filter(microtaskId => !defaults.units[unit.unitId].completedMicrotaskIds.includes(microtaskId))
+        .sort((left, right) => microtaskOrder.indexOf(left) - microtaskOrder.indexOf(right));
       defaults.units[unit.unitId].unitAttemptId = typeof stored.unitAttemptId === 'string'
         && stored.unitAttemptId
         ? stored.unitAttemptId
@@ -311,11 +333,17 @@
           saved.completedRoundIds,
           new Set(roundOrder)
         ).sort((left, right) => roundOrder.indexOf(left) - roundOrder.indexOf(right));
-        if (completedRoundIds.length === 0) continue;
+        const skippedRoundIds = orderedUnique(
+          saved.skippedRoundIds,
+          new Set(roundOrder)
+        ).filter(roundId => !completedRoundIds.includes(roundId))
+          .sort((left, right) => roundOrder.indexOf(left) - roundOrder.indexOf(right));
+        if (completedRoundIds.length === 0 && skippedRoundIds.length === 0) continue;
         defaults.units[unit.unitId].rolePracticeProgress[practice.practiceId] = {
           microtaskId: task.microtaskId,
           unitAttemptId: saved.unitAttemptId,
-          completedRoundIds
+          completedRoundIds,
+          skippedRoundIds
         };
       }
       const pendingContinuation = stored.pendingUiContinuation;
@@ -603,6 +631,9 @@
       }
     }
     for (const step of task.steps || []) {
+      if (step.kind === 'role-enactment' && step.practice?.kind === 'role-enactment') {
+        refs.push(...(step.practice.rounds || []).flatMap(round => round.dialogueTurnRefs || []));
+      }
       refs.push(...(step.audioSourceRefs || []));
       refs.push(...(step.challengeSourceRefs || []));
       if (step.kind === 'explore-batch') refs.push(...(step.sourceRefs || []));
@@ -617,7 +648,7 @@
     return [...new Set(refs)];
   }
 
-  function validateMicrotaskCompletion(event, unit) {
+  function validateMicrotaskCompletion(event, unit, state) {
     if (unit.runtimeProfile !== 'microtask-v2') return 'runtime-profile-invalid';
     if (unit.experienceRevision && event.experienceRevision !== unit.experienceRevision) {
       return 'experience-revision-mismatch';
@@ -626,6 +657,18 @@
     const beat = unit.beats.find(candidate => candidate.beatId === event.beatId);
     const task = beat?.microtasks?.find(candidate => candidate.microtaskId === event.microtaskId);
     if (!task) return 'microtask-invalid';
+    if (task.skipPolicy?.kind === 'role-round-child-confirmed') {
+      const contract = rolePracticeContracts(unit).find(({ task: authoredTask }) => (
+        authoredTask.microtaskId === task.microtaskId
+      ));
+      const progress = contract
+        ? state.units[event.unitId]?.rolePracticeProgress?.[contract.practice.practiceId]
+        : null;
+      const completed = new Set(progress?.completedRoundIds || []);
+      if (!contract || !(contract.practice.rounds || []).every(round => completed.has(round.roundId))) {
+        return 'role-practice-incomplete';
+      }
+    }
     if (event.checkpointId !== task.checkpointAfterSuccess?.checkpointId) {
       return 'checkpointId-invalid';
     }
@@ -744,6 +787,56 @@
     return null;
   }
 
+  function validateMicrotaskSkip(event, unit, state) {
+    if (unit.runtimeProfile !== 'microtask-v2') return 'runtime-profile-invalid';
+    if (unit.experienceRevision && event.experienceRevision !== unit.experienceRevision) {
+      return 'experience-revision-mismatch';
+    }
+    const beat = unit.beats.find(candidate => candidate.beatId === event.beatId);
+    const task = beat?.microtasks?.find(candidate => candidate.microtaskId === event.microtaskId);
+    if (!task) return 'microtask-invalid';
+    if (!['child-confirmed', 'role-round-child-confirmed'].includes(task.skipPolicy?.kind)) {
+      return 'microtask-not-skippable';
+    }
+    if (task.skipPolicy.kind === 'role-round-child-confirmed') {
+      const contract = rolePracticeContracts(unit).find(({ task: authoredTask }) => (
+        authoredTask.microtaskId === task.microtaskId
+      ));
+      const progress = contract
+        ? state.units[event.unitId]?.rolePracticeProgress?.[contract.practice.practiceId]
+        : null;
+      const completed = new Set(progress?.completedRoundIds || []);
+      const skipped = new Set(progress?.skippedRoundIds || []);
+      const rounds = contract?.practice.rounds || [];
+      if (rounds.length === 0
+        || !rounds.every(round => completed.has(round.roundId) || skipped.has(round.roundId))
+        || !rounds.some(round => skipped.has(round.roundId))) {
+        return 'role-practice-dispositions-incomplete';
+      }
+    }
+    if (state.units[event.unitId]?.completedMicrotaskIds.includes(event.microtaskId)) {
+      return 'microtask-already-completed';
+    }
+    if (typeof event.unitAttemptId !== 'string' || !event.unitAttemptId) {
+      return 'unitAttemptId-required';
+    }
+    if (!Number.isInteger(event.attemptRevision) || event.attemptRevision < 0) {
+      return 'attempt-revision-invalid';
+    }
+    if (event.checkpointId !== task.checkpointAfterSuccess?.checkpointId) {
+      return 'checkpointId-invalid';
+    }
+    if (event.completionStatus !== 'skipped') return 'completionStatus-invalid';
+    if (!Number.isInteger(event.adventureHeartsRemaining)
+      || event.adventureHeartsRemaining < 0 || event.adventureHeartsRemaining > 3) {
+      return 'adventure-hearts-invalid';
+    }
+    for (const field of ['targetResults', 'sourceContacts', 'audioContactRefs', 'missingAudioRefs', 'storyFacts']) {
+      if (!Array.isArray(event[field]) || event[field].length !== 0) return 'skip-evidence-forbidden';
+    }
+    return null;
+  }
+
   function validateEvent(event, catalog, state) {
     if (!event || typeof event !== 'object') return 'event-required';
     if (typeof event.eventId !== 'string' || event.eventId.trim() === '') return 'eventId-required';
@@ -755,7 +848,10 @@
     }
     if (state.processedEventIds.includes(processedEventToken(event, catalog))) return null;
 
-    if (event.type === 'role-practice-round-completed') {
+    if (
+      event.type === 'role-practice-round-completed'
+      || event.type === 'role-practice-round-skipped'
+    ) {
       if (typeof event.unitAttemptId !== 'string' || !event.unitAttemptId) {
         return 'unitAttemptId-required';
       }
@@ -764,8 +860,11 @@
         && practice.practiceId === event.practiceId
       ));
       if (!contract) return 'role-practice-invalid';
-      if (!(contract.practice.rounds || []).some(round => round.roundId === event.roundId)) {
-        return 'role-practice-round-invalid';
+      const round = (contract.practice.rounds || [])
+        .find(candidate => candidate.roundId === event.roundId);
+      if (!round) return 'role-practice-round-invalid';
+      if (contract.task.skipPolicy?.kind !== 'role-round-child-confirmed') {
+        return 'role-practice-disposition-policy-invalid';
       }
       const stored = state.units[event.unitId];
       if (stored.completedMicrotaskIds.includes(event.microtaskId)) {
@@ -774,6 +873,39 @@
       const activeProgress = stored.rolePracticeProgress[event.practiceId];
       if (activeProgress && activeProgress.unitAttemptId !== event.unitAttemptId) {
         return 'unit-attempt-mismatch';
+      }
+      if (stored.unitAttemptId && stored.unitAttemptId !== event.unitAttemptId) {
+        return 'unit-attempt-mismatch';
+      }
+      const emptyEvidenceFields = ['targetResults', 'storyFacts', 'missingAudioRefs'];
+      for (const field of emptyEvidenceFields) {
+        if (!Array.isArray(event[field]) || event[field].length !== 0) {
+          return 'role-practice-evidence-invalid';
+        }
+      }
+      if (event.type === 'role-practice-round-skipped') {
+        for (const field of ['sourceContacts', 'audioContactRefs']) {
+          if (!Array.isArray(event[field]) || event[field].length !== 0) {
+            return 'role-practice-skip-evidence-forbidden';
+          }
+        }
+        return null;
+      }
+      if (!Array.isArray(event.sourceContacts)
+        || event.sourceContacts.length !== round.dialogueTurnRefs.length
+        || !sameStringSet(
+          event.sourceContacts.map(contact => contact?.sourceRef),
+          round.dialogueTurnRefs
+        )) {
+        return 'role-practice-source-contacts-invalid';
+      }
+      for (const contact of event.sourceContacts) {
+        if (!sameStringSet(contact?.contactModes, ['experienced', 'audio-ended'])) {
+          return 'role-practice-source-contact-mode-invalid';
+        }
+      }
+      if (!sameStringSet(event.audioContactRefs, round.dialogueTurnRefs)) {
+        return 'role-practice-audio-contacts-invalid';
       }
       return null;
     }
@@ -825,7 +957,10 @@
     }
 
     if (event.type === 'microtask-completed') {
-      return validateMicrotaskCompletion(event, unit);
+      return validateMicrotaskCompletion(event, unit, state);
+    }
+    if (event.type === 'microtask-skipped') {
+      return validateMicrotaskSkip(event, unit, state);
     }
     if (event.type === 'checkpoint-completed') {
       if (typeof event.checkpointId !== 'string' || event.checkpointId.trim() === '') {
@@ -839,7 +974,7 @@
           return 'microtask-invalid';
         }
       }
-      if (event.completionStatus !== undefined && !COMPLETION_STATUSES.has(event.completionStatus)) {
+      if (event.completionStatus !== undefined && !CHECKPOINT_STATUSES.has(event.completionStatus)) {
         return 'completionStatus-invalid';
       }
       if (event.buildStage !== undefined && (!Number.isInteger(event.buildStage)
@@ -928,7 +1063,7 @@
     return [];
   }
 
-  function applyRolePracticeRound(state, event, catalog) {
+  function applyRolePracticeRoundDisposition(state, event, learningDay, catalog) {
     const unit = catalog.getTeachingUnit(event.unitId);
     const contract = rolePracticeContracts(unit).find(({ practice }) => (
       practice.practiceId === event.practiceId
@@ -937,18 +1072,40 @@
     const existing = stored.rolePracticeProgress[event.practiceId] || {
       microtaskId: event.microtaskId,
       unitAttemptId: event.unitAttemptId,
-      completedRoundIds: []
+      completedRoundIds: [],
+      skippedRoundIds: []
     };
-    const completed = new Set([...existing.completedRoundIds, event.roundId]);
+    const completed = new Set(existing.completedRoundIds || []);
+    const skipped = new Set(existing.skippedRoundIds || []);
+    if (event.type === 'role-practice-round-completed') {
+      completed.add(event.roundId);
+      skipped.delete(event.roundId);
+      for (const contact of event.sourceContacts) {
+        const existingContact = stored.sourceContacts[contact.sourceRef] || {
+          contactModes: [],
+          lastLearningDay: null
+        };
+        stored.sourceContacts[contact.sourceRef] = {
+          contactModes: normalizeContactModes([
+            ...existingContact.contactModes,
+            ...contact.contactModes
+          ]),
+          lastLearningDay: learningDay
+        };
+      }
+    } else if (!completed.has(event.roundId)) {
+      skipped.add(event.roundId);
+    }
     const roundOrder = (contract?.practice.rounds || []).map(round => round.roundId);
     stored.unitAttemptId = event.unitAttemptId;
     stored.rolePracticeProgress[event.practiceId] = {
       microtaskId: event.microtaskId,
       unitAttemptId: event.unitAttemptId,
-      completedRoundIds: roundOrder.filter(roundId => completed.has(roundId))
+      completedRoundIds: roundOrder.filter(roundId => completed.has(roundId)),
+      skippedRoundIds: roundOrder.filter(roundId => skipped.has(roundId) && !completed.has(roundId))
     };
     return [{
-      type: 'role-practice-round-completed',
+      type: event.type,
       unitId: event.unitId,
       microtaskId: event.microtaskId,
       practiceId: event.practiceId,
@@ -962,17 +1119,21 @@
     const microtaskIds = unitMicrotasks(unit).map(task => task.microtaskId);
     const incomingIndex = microtaskIds.indexOf(event.microtaskId);
     const storedIndex = microtaskIds.indexOf(stored.checkpoint?.microtaskId);
-    if (storedIndex >= 0 && incomingIndex < storedIndex) return [];
+    const completionIsBackfill = storedIndex >= 0 && incomingIndex < storedIndex;
+    if (storedIndex >= 0 && incomingIndex < storedIndex
+      && !stored.skippedMicrotaskIds.includes(event.microtaskId)) return [];
 
     const previousBuildStage = stored.buildStage;
     applyCheckpoint(state, event, learningDay, catalog);
     if (typeof event.unitAttemptId === 'string' && event.unitAttemptId) {
       stored.unitAttemptId = event.unitAttemptId;
     }
-    stored.pendingUiContinuation = continuationForCompletedTask(event, (
-      unit.beats.flatMap(beat => beat.microtasks || [])
-        .find(task => task.microtaskId === event.microtaskId)
-    ));
+    stored.pendingUiContinuation = completionIsBackfill
+      ? null
+      : continuationForCompletedTask(event, (
+          unit.beats.flatMap(beat => beat.microtasks || [])
+            .find(task => task.microtaskId === event.microtaskId)
+        ));
     stored.adventureHeartsRemaining = event.adventureHeartsRemaining;
     for (const [practiceId, progress] of Object.entries(stored.rolePracticeProgress)) {
       if (progress.microtaskId === event.microtaskId) delete stored.rolePracticeProgress[practiceId];
@@ -983,6 +1144,8 @@
         microtaskIds.indexOf(left) - microtaskIds.indexOf(right)
       ));
     }
+    stored.skippedMicrotaskIds = stored.skippedMicrotaskIds
+      .filter(microtaskId => microtaskId !== event.microtaskId);
     for (const factId of event.storyFacts) {
       if (!stored.storyFacts.includes(factId)) stored.storyFacts.push(factId);
     }
@@ -1142,6 +1305,28 @@
     const interval = REVIEW_INTERVAL_DAYS[Math.max(0, target.intervalStage - 1)];
     target.nextDueDay = addDays(learningDay, interval);
     return effects;
+  }
+
+  function applyMicrotaskSkip(state, event, learningDay, catalog) {
+    const unit = catalog.getTeachingUnit(event.unitId);
+    const stored = state.units[event.unitId];
+    const microtaskIds = unitMicrotasks(unit).map(task => task.microtaskId);
+    applyCheckpoint(state, event, learningDay, catalog);
+    stored.unitAttemptId = event.unitAttemptId;
+    stored.pendingUiContinuation = null;
+    stored.adventureHeartsRemaining = event.adventureHeartsRemaining;
+    if (!stored.skippedMicrotaskIds.includes(event.microtaskId)) {
+      stored.skippedMicrotaskIds.push(event.microtaskId);
+      stored.skippedMicrotaskIds.sort((left, right) => (
+        microtaskIds.indexOf(left) - microtaskIds.indexOf(right)
+      ));
+    }
+    return [{
+      type: 'microtask-skipped',
+      unitId: event.unitId,
+      microtaskId: event.microtaskId,
+      completionStatus: 'skipped'
+    }];
   }
 
   function applyReviewRunStart(state, event) {
@@ -1439,6 +1624,11 @@
         pendingUiContinuation: clone(stored.pendingUiContinuation),
         rolePracticeProgress: clone(stored.rolePracticeProgress),
         completedMicrotaskIds: clone(stored.completedMicrotaskIds),
+        skippedMicrotaskIds: clone(stored.skippedMicrotaskIds),
+        resolvedMicrotaskIds: [...new Set([
+          ...stored.completedMicrotaskIds,
+          ...stored.skippedMicrotaskIds
+        ])],
         storyFacts: clone(stored.storyFacts),
         sourceContacts: clone(stored.sourceContacts),
         buildStage: stored.buildStage,
@@ -1503,8 +1693,14 @@
     if (event.type === 'microtask-completed') {
       effects = applyMicrotaskCompletion(candidate, event, learningDay, catalog);
     }
-    if (event.type === 'role-practice-round-completed') {
-      effects = applyRolePracticeRound(candidate, event, catalog);
+    if (event.type === 'microtask-skipped') {
+      effects = applyMicrotaskSkip(candidate, event, learningDay, catalog);
+    }
+    if (
+      event.type === 'role-practice-round-completed'
+      || event.type === 'role-practice-round-skipped'
+    ) {
+      effects = applyRolePracticeRoundDisposition(candidate, event, learningDay, catalog);
     }
     if (event.type === 'ui-continuation-acknowledged') {
       effects = applyUiContinuationAcknowledgement(candidate, event);

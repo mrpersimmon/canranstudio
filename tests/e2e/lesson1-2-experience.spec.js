@@ -3,7 +3,7 @@
 const { test, expect } = require('@playwright/test');
 const catalog = require('../../core/curriculum-catalog');
 
-const EXPERIENCE_PATH = '/poc/lesson1-2-experience/';
+const EXPERIENCE_PATH = '/poc/lesson1-2-experience/?package-test-bypass=1';
 const unit = catalog.getTeachingUnit('NCE-U01');
 const tasks = unit.beats.flatMap(beat => beat.microtasks || []);
 const taskById = new Map(tasks.map(task => [task.microtaskId, task]));
@@ -160,12 +160,9 @@ async function openFresh(page, options = {}) {
 }
 
 async function startOrResume(page) {
-  if (await app(page).getAttribute('data-runtime-status') !== 'idle') return;
-  await page.locator('[data-action="start"]').click();
-  if (await app(page).getAttribute('data-view') === 'briefing') {
-    await page.locator('[data-action="start"]').click();
-  }
-  await expect(app(page)).toHaveAttribute('data-view', 'mission');
+  await expect.poll(() => app(page).getAttribute('data-runtime-status'))
+    .not.toBe('idle');
+  await expect(page.locator('[data-action="start"]')).toHaveCount(0);
 }
 
 async function reloadAndResume(page) {
@@ -294,6 +291,13 @@ async function answerRecapCorrectly(page, item, finalItem) {
     `[data-action="practice-submit"][data-value="${correctOption.optionId}"]`
   ).click();
   await expectPracticeAudioStarted(page, item.correctAudioRef, startsBefore);
+  if (item.answerFairness?.candidateLanguageBoundary === 'source-text-only') {
+    await expect(page.locator('.practice-options strong')).toHaveText(
+      item.options.map(option => sourceByRef.get(option.sourceRef).text)
+    );
+    await expect(page.locator('.practice-options small')).toHaveCount(0);
+    await expect(page.locator('.practice-answer-feedback.is-correct')).toHaveCount(0);
+  }
   await expect(page.locator(
     '[data-action="practice-next"], [data-action="practice-finish"]'
   )).toHaveCount(0);
@@ -424,6 +428,8 @@ async function expectNoProtectedRegionCollision(page) {
       world.querySelector('.stage-prompt'),
       world.querySelector('.scene-heading')
     ].map(visibleBox).filter(Boolean);
+    const mission = world.querySelector('.mission-console');
+    const missionStyle = mission ? getComputedStyle(mission) : null;
     return {
       world: {
         box: visibleBox(world),
@@ -434,6 +440,15 @@ async function expectNoProtectedRegionCollision(page) {
       propContainerSurface: world.querySelector('.scene-props')?.dataset.propSurface || '',
       props,
       protectedRegions,
+      mission: mission ? {
+        height: missionStyle.height,
+        minHeight: missionStyle.minHeight,
+        padding: missionStyle.padding,
+        children: [...mission.children].map(child => ({
+          box: visibleBox(child),
+          children: [...child.children].map(visibleBox).filter(Boolean)
+        })).filter(child => child.box)
+      } : null,
       collisions: props.flatMap(prop => protectedRegions.flatMap(region => {
         const area = overlapArea(prop, region);
         return area > 1 ? [{ prop: prop.label, region: region.label, area }] : [];
@@ -801,6 +816,10 @@ async function answerCurrent(page, {
   expect(snapshot.phase).toBe('awaiting-response');
   const { step, challenge } = activeContract(snapshot);
   expect(step).toBeTruthy();
+  const primaryTask = page.locator(
+    '[data-copy-purpose="task"][data-copy-priority="primary"]:visible'
+  );
+  await expect(primaryTask).toHaveCount(1);
   if (challenge) {
     expect(challenge.challengeRef).toBe(snapshot.challengeRef);
     const diagnosticCandidates = challenge.candidateEntityIds
@@ -815,9 +834,11 @@ async function answerCurrent(page, {
   const rule = challenge?.answerRule || step.answerRule;
   let handoffMoment = null;
   if (!challenge && rule.type === 'perform-action') {
+    await expect(page.locator('[data-task-surface="scene-action"]')).toHaveCount(1);
     if (step.actionInstruction) {
-      await expect(page.locator('.action-stage__hint, .direct-action-instruction strong'))
-        .toHaveText(step.actionInstruction);
+      await expect(primaryTask).toHaveText(step.prompt);
+      await expect(page.locator('.action-stage__hint, .direct-action-instruction'))
+        .toHaveCount(0);
     }
     storyActions?.push(`${rule.entityId}->${rule.targetEntityId}`);
     await expect(page.locator('.adventure-heart-gauge')).toHaveCount(0);
@@ -1027,7 +1048,7 @@ async function noForbiddenScroll(page) {
   expect(failures).toEqual([]);
 }
 
-test('uses the revision-scoped storage key and shows the story premise before V2 begins', async ({ page }) => {
+test('uses the revision-scoped storage key and folds the story premise into the first stage', async ({ page }) => {
   const entryRecoveryNavigations = [];
   page.on('framenavigated', frame => {
     if (
@@ -1038,17 +1059,13 @@ test('uses the revision-scoped storage key and shows the story premise before V2
   await openFresh(page);
   expect(STORAGE_KEY).toBe(`poc:learning-experience:NCE-U01:${unit.experienceRevision}`);
   expect(STORAGE_KEY).not.toContain(':v1');
-  await expect(page.locator('.arrival-card')).toBeVisible();
-  await expect(page.getByText(/AI 生成|老师审核|不打字/)).toHaveCount(0);
-
-  await page.locator('[data-action="start"]').click();
-  await expect(app(page)).toHaveAttribute('data-view', 'briefing');
-  await expect(page.getByRole('heading', { name: unit.experience.briefing.title })).toBeVisible();
-  await expect(page.getByText(unit.experience.briefing.copy, { exact: true })).toBeVisible();
-  expect((await runtimeSnapshot(page)).status).toBe('idle');
-
-  await page.locator('[data-action="start"]').click();
+  await expect(app(page)).toHaveAttribute('data-view', 'mission');
   await expect(app(page)).toHaveAttribute('data-runtime-microtask', tasks[0].microtaskId);
+  await expect(page.locator('.arrival-card, .briefing-card, #course-stage-map')).toHaveCount(0);
+  await expect(page.locator('[data-action="start"]')).toHaveCount(0);
+  await expect(page.locator('.station-brand strong')).toHaveText(tasks[0].presentation.title);
+  await expect(page.getByText(/AI 生成|老师审核|不打字/)).toHaveCount(0);
+  expect((await runtimeSnapshot(page)).status).toBe('active');
   await settlePresentation(page);
   expect(entryRecoveryNavigations).toEqual([]);
   const storedKeys = await page.evaluate(() => Object.keys(localStorage));
@@ -1377,21 +1394,19 @@ test('R2 classroom typography and replay control stay readable from a teaching s
   expect(classroomSizes.option).toBeLessThanOrEqual(30);
 
   await advanceTo(page, 'L02-M13');
+  await expect(page.locator('.gentle-hint')).toHaveCount(0);
   const languageSizes = await page.locator('.station-world').evaluate(world => {
     const word = world.querySelector('.word-plaque');
-    const helper = world.querySelector('.gentle-hint');
     const replay = world.querySelector('.shared-listen-replay__button');
     const replayBox = replay.getBoundingClientRect();
     return {
       word: Number.parseFloat(getComputedStyle(word).fontSize),
-      helper: Number.parseFloat(getComputedStyle(helper).fontSize),
       replayWidth: replayBox.width,
       replayHeight: replayBox.height
     };
   });
   expect(languageSizes.word).toBeGreaterThanOrEqual(36);
   expect(languageSizes.word).toBeLessThanOrEqual(42);
-  expect(languageSizes.helper).toBeGreaterThanOrEqual(20);
   expect(languageSizes.replayWidth).toBeGreaterThanOrEqual(60);
   expect(languageSizes.replayHeight).toBeGreaterThanOrEqual(60);
 
@@ -1447,9 +1462,14 @@ test('owner recall keeps both neutral candidates reachable before revealing the 
   await expect(page.locator('.stage-prompt')).toHaveCount(0);
   await expect(page.locator('.mission-prompt')).toHaveCount(0);
   await expect(page.locator('.moment-language__item')).toHaveText(['Whose handbag is it?']);
-  await expect(page.locator('.action-stage__hint')).toHaveText('点击人物，选出手提包的主人');
+  await expect(page.locator('.action-stage__hint')).toHaveCount(0);
+  await expect(page.locator(
+    '[data-copy-purpose="task"][data-copy-priority="primary"]:visible'
+  )).toHaveText('Whose handbag is it?');
   await expect(page.locator('.scene-character')).toHaveCount(2);
   await expect(page.locator('.scene-character.is-moment-focus')).toHaveCount(0);
+  await expect(page.locator('.mission-console'))
+    .toHaveAttribute('data-task-surface', 'scene-action');
   const ownerRecallCastIds = await page.locator('.scene-people > .scene-character')
     .evaluateAll(characters => characters.map(character => character.dataset.entityId).sort());
   const candidateBoxes = await page.locator('button.scene-character').evaluateAll(elements => (
@@ -1463,6 +1483,41 @@ test('owner recall keeps both neutral candidates reachable before revealing the 
   expect(Math.abs(candidateBoxes[0].width - candidateBoxes[1].width)).toBeLessThanOrEqual(2);
   expect(candidateBoxes[0].opacity).toBe(candidateBoxes[1].opacity);
   expect(candidateBoxes[0].filter).toBe(candidateBoxes[1].filter);
+
+  for (const viewport of [
+    { width: 1280, height: 720 },
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+    { width: 844, height: 390 },
+    { width: 762, height: 430 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await settleSceneViewport(page, viewport);
+    const geometry = await page.locator('.station-world').evaluate(world => {
+      const panel = world.querySelector('[data-task-surface="scene-action"]');
+      const task = panel.querySelector('.moment-language, .mission-prompt');
+      const panelBox = panel.getBoundingClientRect();
+      const taskStyle = getComputedStyle(task);
+      const lineHeight = Number.parseFloat(taskStyle.lineHeight);
+      const overlapArea = element => {
+        const box = element.getBoundingClientRect();
+        return Math.max(0, Math.min(panelBox.right, box.right) - Math.max(panelBox.left, box.left))
+          * Math.max(0, Math.min(panelBox.bottom, box.bottom) - Math.max(panelBox.top, box.top));
+      };
+      return {
+        panelHeight: panelBox.height,
+        taskHeight: task.getBoundingClientRect().height,
+        twoLineLimit: Number.isFinite(lineHeight) ? lineHeight * 2 + 16 : 80,
+        candidateOverlapAreas: [...world.querySelectorAll('button.scene-character')]
+          .map(overlapArea)
+      };
+    });
+    expect(geometry.panelHeight, JSON.stringify({ viewport, geometry })).toBeLessThanOrEqual(190);
+    expect(geometry.taskHeight, JSON.stringify({ viewport, geometry }))
+      .toBeLessThanOrEqual(geometry.twoLineLimit);
+    expect(geometry.candidateOverlapAreas, JSON.stringify({ viewport, geometry }))
+      .toEqual([0, 0]);
+  }
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => scrollTo(0, 0));
@@ -1772,7 +1827,7 @@ test('handbag word-form returns later as a return label instead of a repeated ob
   await completeCurrentMicrotask(page);
   snapshot = await advanceTo(page, 'L01-M11');
   expect(snapshot.challengeRef).toBe('L01-M11:C01');
-  await expect(page.locator('.stage-prompt')).toHaveText('看手提包，选出对应的英文牌');
+  await expect(page.locator('.stage-prompt')).toHaveText('看一看场景中的物品，选择对应的英文名称。');
   await expect(page.locator('.word-label-choice-grid')).toBeVisible();
   await expect.poll(() => page.locator(
     '.word-label-choice-grid [data-action="select-source"]'
@@ -1839,6 +1894,8 @@ test('word-form object choices stay visually neutral until the child answers', a
     challengeRef: 'L02-M13:C01',
     phase: 'awaiting-response'
   });
+  await page.mouse.move(1, 1);
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(resolve)));
   const candidates = await page.locator('.scene-props > .scene-prop').evaluateAll(elements => (
     elements.map(element => {
       const style = getComputedStyle(element);
@@ -2078,7 +2135,9 @@ test('reached stages open as an isolated sandbox while future stages stay disabl
   await expect(completedButton).toContainText('回看');
   await expect(currentButton).toContainText('继续学习');
   await expect(futureButton).toContainText('未到达');
-  await expect(completedButton).toHaveAccessibleName(`阶段 1：${tasks[0].presentation.title}`);
+  await expect(completedButton).toHaveAccessibleName(
+    `阶段 1：${tasks[0].presentation.title}，${unit.experience.stageNavigation.practiceLabel}`
+  );
 
   const currentBefore = await runtimeSnapshot(page);
   await currentButton.click();
@@ -2104,7 +2163,7 @@ test('reached stages open as an isolated sandbox while future stages stay disabl
   expect(await durableLedgerRecord(page)).toBe(before);
   const replayComplete = page.locator('[data-stage-replay-complete="true"]');
   await expect(replayComplete).toBeVisible();
-  await expect(replayComplete).toContainText('这一阶段回看完成');
+  await expect(replayComplete).toContainText('阶段回看完成');
   await expect(replayComplete).toContainText(`回到：${tasks[1].navigationTitle}`);
   await expect(replayComplete.getByRole('button', { name: '返回继续学习' })).toBeVisible();
   await expect(replayComplete.getByRole('button', { name: '选择其他阶段' })).toBeVisible();
@@ -2221,19 +2280,36 @@ test('settings offers an explicit entry into the existing reached-stage map', as
   expect(await durableLedgerRecord(page)).toBe(before);
 });
 
-test('stage replay navigation stays unavailable until the child enters the first stage', async ({ page }) => {
+test('a due review remains a nonblocking reminder and never opens the stage map on entry', async ({ page }) => {
   await openFresh(page);
+  await completeCurrentMicrotask(page);
+  await completeCurrentMicrotask(page);
+  await page.evaluate(storageKey => {
+    const record = JSON.parse(localStorage.getItem(storageKey));
+    const pending = [record.value];
+    let cell = null;
+    while (pending.length && !cell) {
+      const value = pending.shift();
+      if (!value || typeof value !== 'object') continue;
+      if (value.reviewCellId && Object.hasOwn(value, 'nextDueDay')) {
+        cell = value;
+        break;
+      }
+      pending.push(...Object.values(value));
+    }
+    if (!cell) throw new Error('fixture review cell is missing');
+    cell.nextDueDay = '2000-01-01';
+    localStorage.setItem(storageKey, JSON.stringify(record));
+  }, STORAGE_KEY);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => Boolean(window.__lessonScene))).toBe(true);
 
-  await expect(page.locator('.case-progress')).toBeVisible();
-  await expect(page.locator('[data-action="toggle-stages"]')).toHaveCount(0);
-  await page.locator('[data-action="toggle-settings"]').click();
-  await expect(page.locator('[data-action="open-stages"]')).toHaveCount(0);
-
-  await page.locator('[data-action="toggle-settings"]').click();
-  await startOrResume(page);
+  await expect(app(page)).toHaveAttribute('data-view', 'mission');
+  await expect(page.locator('#course-stage-map')).toHaveCount(0);
   await expect(page.locator('[data-action="toggle-stages"]')).toBeVisible();
-  await page.locator('[data-action="toggle-settings"]').click();
-  await expect(page.locator('[data-action="open-stages"]')).toBeVisible();
+  await page.locator('[data-action="toggle-stages"]').click();
+  await expect(page.locator('#course-stage-map')).toBeVisible();
+  await expect(page.locator('.review-entry')).toBeVisible();
 });
 
 test('the real page completes 17 recoverable stages and 29 stable challenges exactly once', async ({ page }) => {
@@ -2298,6 +2374,7 @@ test('the real page completes 17 recoverable stages and 29 stable challenges exa
         'aria-expanded',
         'true'
       );
+      await expect(page.locator('[data-action="knowledge-expand"]')).toHaveText('收起');
       await expect(page.locator('[data-action="presentation-end"]')).toBeEnabled();
       await expect(app(page)).toHaveAttribute('data-runtime-status', 'active');
       await page.locator('[data-action="presentation-end"]').click();
@@ -2342,6 +2419,7 @@ test('the real page completes 17 recoverable stages and 29 stable challenges exa
   await expect(app(page)).toHaveAttribute('data-runtime-status', 'unit-built');
   await expect(app(page)).toHaveAttribute('data-build-stage', '5');
   await expect(page.locator('.completion-card')).toBeVisible();
+  await expect(page.locator('.opening-stars i')).toHaveText(['★', '★', '★']);
   await expect(page.locator('[data-action="start"]')).toHaveCount(0);
 });
 
@@ -2447,6 +2525,7 @@ test('Lesson 1 saves whole-role recovery, then unlocks a no-progress seven-line 
   await expect(page.locator('.manual-dialogue-hint')).not.toContainText(firstHint.openingChunk);
   await page.locator('[data-action="practice-hint"]').click();
   await expect(page.locator('.manual-dialogue-hint')).toContainText(firstHint.openingChunk);
+  await expect(page.locator('[data-action="practice-hint"]')).toHaveCount(0);
 
   startsBefore = await courseAudioStartCount(page);
   for (const [index, sourceRef] of manual.dialogueTurnRefs.entries()) {
@@ -2485,6 +2564,205 @@ test('Lesson 1 saves whole-role recovery, then unlocks a no-progress seven-line 
   await expectMainlineUnchanged(page, baseline);
 });
 
+test('role practice skips one role truthfully, hides unavailable actions, and recovers from the map', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M12');
+
+  await expect(page.locator('.station-brand strong')).toHaveText('角色扮演');
+  const formal = taskById.get('L01-M12').steps[0].practice;
+  const ownerRound = formal.rounds.find(round => round.roleEntityId === 'handbag-owner');
+  const keeperRound = formal.rounds.find(round => round.roleEntityId === 'station-keeper');
+  await expect(page.locator('.role-practice-copy h1')).toHaveText('选择你想扮演的角色');
+  await expect(page.locator('[data-action="practice-skip"]')).toHaveCount(0);
+  await expect(page.locator('.role-choice strong')).toHaveText([
+    '你来当招领员', '你来当女顾客'
+  ]);
+  await expect(page.locator('.role-choice-grid')).not.toContainText('完整演完七句');
+
+  await page.locator(
+    `[data-action="practice-role-select"][data-value="${ownerRound.roundId}"]`
+  ).click();
+  const skip = page.locator('[data-action="practice-skip"]');
+  await expect.poll(() => page.evaluate(() => window.__pendingCourseAudioCount())).toBe(1);
+  await expect(skip).toHaveCount(0);
+  await expect(page.locator('[data-action="practice-hint"]')).toHaveCount(0);
+  await finishOneAudio(page);
+  await expect(skip).toBeVisible();
+  await expect(skip).toHaveText(unit.experience.uiCopy.roleSkip.actionLabel);
+
+  const hint = formal.turnHints.find(item => item.turnRef === 'L01-D02');
+  const hintButton = page.locator('[data-action="practice-hint"]');
+  await expect(hintButton).toHaveText('提示');
+  await hintButton.click();
+  await expect(page.locator('.role-enactment-hint')).toContainText(hint.intent);
+  await expect(page.locator('.role-enactment-hint')).not.toContainText(hint.openingChunk);
+  await expect(hintButton).toHaveText('再提示');
+  await hintButton.click();
+  await expect(page.locator('.role-enactment-hint')).toContainText(hint.openingChunk);
+  await expect(hintButton).toHaveCount(0);
+
+  await skip.click();
+  const dialog = page.locator('.role-skip-dialog');
+  await expect(dialog.locator('h2')).toHaveText('跳过这个角色？');
+  await expect(dialog.locator('p')).toHaveCount(0);
+  await expect(dialog.locator('[data-action="role-skip-cancel"]')).toHaveText('继续扮演');
+  await expect(dialog.locator('[data-action="role-skip-confirm"]')).toHaveText('跳过这个角色');
+  await expect.poll(() => page.evaluate(() => document.activeElement?.dataset.action))
+    .toBe('role-skip-cancel');
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveCount(0);
+
+  await skip.click();
+  await page.evaluate(() => { window.__failLedgerWrites = true; });
+  await page.locator('[data-action="role-skip-confirm"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M12');
+  await expect(page.locator('.outcome-practice-card--role-enactment'))
+    .toHaveAttribute('data-practice-phase', 'round-skip-save-failed');
+  await expect(page.locator('[data-action="practice-round-save-retry"]')).toBeVisible();
+  await expect(page.locator('[data-action="practice-skip"]')).toHaveCount(0);
+  expect((await ledgerProjection(page)).units[unit.unitId].skippedMicrotaskIds)
+    .not.toContain('L01-M12');
+
+  await page.evaluate(() => { window.__failLedgerWrites = false; });
+  await page.locator('[data-action="practice-round-save-retry"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M12');
+  await expect(page.locator(
+    `[data-action="practice-role-select"][data-value="${ownerRound.roundId}"]`
+  )).toBeEnabled();
+  await expect(page.locator('.role-choice-slot.is-skipped .role-choice-status'))
+    .toHaveText('已跳过');
+  const partialProjection = (await ledgerProjection(page)).units[unit.unitId];
+  expect(partialProjection.skippedMicrotaskIds).not.toContain('L01-M12');
+  expect(partialProjection.rolePracticeProgress[formal.practiceId].skippedRoundIds)
+    .toEqual([ownerRound.roundId]);
+
+  let startsBefore = await courseAudioStartCount(page);
+  await finishFormalRoleRound(page, formal, keeperRound, startsBefore);
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L02-M11');
+  const skippedProjection = (await ledgerProjection(page)).units[unit.unitId];
+  expect(skippedProjection.skippedMicrotaskIds).toContain('L01-M12');
+  expect(skippedProjection.completedMicrotaskIds).not.toContain('L01-M12');
+  expect(skippedProjection.rolePracticeProgress[formal.practiceId]).toMatchObject({
+    completedRoundIds: [keeperRound.roundId], skippedRoundIds: [ownerRound.roundId]
+  });
+
+  await page.locator('[data-action="toggle-stages"]').click();
+  const skippedStage = page.locator(
+    '[data-action="preview-jump"][data-value="L01-M12"]'
+  );
+  await expect(skippedStage).toHaveClass(/is-skipped/);
+  await expect(skippedStage).toContainText(unit.experience.stageNavigation.skippedLabel);
+  await expect(page.locator('[data-action="start-outcome-practice"]')).toHaveCount(0);
+  await skippedStage.click();
+  await expect(app(page)).toHaveAttribute('data-skip-recovery', 'true');
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L01-M12');
+  await expect(page.locator(
+    `[data-action="practice-role-select"][data-value="${keeperRound.roundId}"]`
+  )).toBeDisabled();
+  await expect(page.locator(
+    `[data-action="practice-role-select"][data-value="${ownerRound.roundId}"]`
+  )).toBeEnabled();
+  await expect(page.locator('[data-action="practice-return-learning"]'))
+    .toHaveText(formal.returnLearningLabel);
+
+  startsBefore = await courseAudioStartCount(page);
+  await finishFormalRoleRound(page, formal, ownerRound, startsBefore);
+  await expect(page.locator('.outcome-practice-card--role-enactment'))
+    .toHaveAttribute('data-practice-phase', 'all-roles-complete');
+  await expect(page.locator('[data-action="practice-enter-manual"]')).toHaveCount(0);
+  await page.locator('[data-action="practice-complete-recovery"]').click();
+  await expect(app(page)).toHaveAttribute('data-runtime-microtask', 'L02-M11');
+  await expect(app(page)).toHaveAttribute('data-skip-recovery', 'false');
+  const completedProjection = (await ledgerProjection(page)).units[unit.unitId];
+  expect(completedProjection.skippedMicrotaskIds).not.toContain('L01-M12');
+  expect(completedProjection.completedMicrotaskIds).toContain('L01-M12');
+});
+
+test('stage eleven uses five editable word tokens and keeps wrong work available for correction', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openFresh(page);
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L02-M15');
+  const challenge = activeContract(snapshot).challenge;
+  const accepted = challenge.answerRule.acceptedOrder;
+  expect(accepted).toHaveLength(5);
+
+  const bank = page.locator('.block-builder__bank [data-action="add-block"]');
+  const track = page.locator('.block-builder__track [data-action="remove-block"]');
+  await expect(bank).toHaveCount(5);
+  expect(await bank.evaluateAll(buttons => buttons.map(button => button.dataset.value)))
+    .not.toEqual(accepted);
+  await expect(track).toHaveCount(0);
+
+  const originalViewport = page.viewportSize();
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 390, height: 844 },
+    { width: 844, height: 390 },
+    { width: 762, height: 430 }
+  ]) {
+    await page.setViewportSize(viewport);
+    await settleSceneViewport(page, viewport);
+    await expect(bank).toHaveCount(5);
+    expect(await bank.evaluateAll(buttons => buttons.every(button => {
+      const box = button.getBoundingClientRect();
+      return box.width >= 44 && box.height >= 44;
+    }))).toBe(true);
+    await noForbiddenScroll(page);
+  }
+  await page.setViewportSize(originalViewport);
+  await settleSceneViewport(page, originalViewport);
+
+  const wrongOrder = [accepted[1], accepted[0], ...accepted.slice(2)];
+  for (const value of wrongOrder) {
+    await page.locator(`[data-action="add-block"][data-value="${value}"]`).click();
+  }
+  await expect(track).toHaveCount(5);
+  await expect(page.locator('[data-action="reset-blocks"]')).toHaveText(
+    unit.experience.uiCopy.interaction.reorderLabel
+  );
+  const resetBox = await page.locator('[data-action="reset-blocks"]').evaluate(button => {
+    const box = button.getBoundingClientRect();
+    return { width: box.width, height: box.height };
+  });
+  expect(resetBox.width).toBeGreaterThanOrEqual(44);
+  expect(resetBox.height).toBeGreaterThanOrEqual(44);
+  await track.first().click();
+  await expect(track).toHaveCount(4);
+  await page.locator('[data-action="reset-blocks"]').click();
+  await expect(track).toHaveCount(0);
+  await expect(bank).toHaveCount(5);
+
+  for (const value of wrongOrder) {
+    await page.locator(`[data-action="add-block"][data-value="${value}"]`).click();
+  }
+  const boundaryValues = await page.locator(
+    '.block-builder [data-boundary-cue="true"], .block-builder .is-boundary-cue'
+  ).evaluateAll(elements => [...new Set(elements.map(element => element.dataset.value))].sort());
+  expect(boundaryValues).toEqual([accepted[0], accepted.at(-1)].sort());
+  await page.locator('[data-action="reset-blocks"]').click();
+  for (const value of accepted) {
+    await page.locator(`[data-action="add-block"][data-value="${value}"]`).click();
+  }
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.phase)).toBe('audio-playing');
+  const feedback = await runtimeSnapshot(page);
+  expect(feedback.audio).toMatchObject({
+    purpose: 'word-form-answer',
+    currentSegment: { text: 'Is this your watch?' }
+  });
+  await expect(page.getByText('Is this your watch?', { exact: true })).toBeVisible();
+
+  for (const viewport of [
+    { width: 390, height: 844 },
+    { width: 762, height: 430 }
+  ]) {
+    await page.setViewportSize(viewport);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+});
+
 test('unit recap gates all three answers on real ended and replay only opens the completed stage map', async ({ page }) => {
   test.setTimeout(120_000);
   const practice = outcomePracticeById.get('NCE-U01-OUTCOME:case-recap');
@@ -2503,8 +2781,16 @@ test('unit recap gates all three answers on real ended and replay only opens the
   await expect(entry).toBeVisible({ timeout: 5_000 });
   await entry.click();
   await expect(page.locator('.outcome-practice-card--case-recap')).toBeVisible();
+  await expect(page.locator('.outcome-practice-card--case-recap .kicker')).toHaveCount(0);
+  await expect(page.locator('.outcome-practice-card--case-recap .practice-copy > p:not(.practice-position)'))
+    .toHaveCount(0);
+  await expect(page.locator(
+    '[data-copy-purpose="task"][data-copy-priority="primary"]:visible'
+  )).toHaveCount(1);
   await expectOptionalPracticeHasNoGamification(page);
   await expectMainlineUnchanged(page, baseline);
+  await expect(page.locator('.practice-options')).toContainText('女顾客');
+  await expect(page.locator('.practice-options')).not.toContainText('手提包主人');
 
   const firstItem = practice.items[0];
   const firstWrong = firstItem.options.find(option => (
@@ -2539,7 +2825,30 @@ test('unit recap gates all three answers on real ended and replay only opens the
     await expect(page.getByRole('heading', {
       name: unit.authoredContent[item.promptRef].text
     })).toBeVisible();
+    if (item.itemId === 'recap-new-route') {
+      await expect(page.locator('.practice-options strong')).toHaveText(['house', 'car', 'watch']);
+      await expect(page.locator('.practice-options small')).toHaveCount(0);
+      await expect(page.locator('.practice-options')).not.toContainText(/房子|小汽车|手表/);
+      await page.locator(
+        '[data-action="practice-submit"][data-value="route-car"]'
+      ).click();
+      await expect(page.locator('.practice-answer-feedback.is-wrong'))
+        .toHaveText(practice.wrongCopy);
+      await expect(page.locator('.practice-options strong')).toHaveText(['house', 'car', 'watch']);
+      await expect(page.locator('.practice-options small')).toHaveCount(0);
+      await expect(page.locator('.practice-options')).not.toContainText(/房子|小汽车|手表/);
+    }
     await answerRecapCorrectly(page, item, index === practice.items.length - 1);
+    if (item.itemId === 'recap-new-route') {
+      await expect(page.locator('.practice-options strong')).toHaveText(['house', 'car', 'watch']);
+      await expect(page.locator('.practice-options small')).toHaveCount(0);
+      await expect(page.locator('.practice-options')).not.toContainText(/房子|小汽车|手表/);
+      await expect(page.locator('.practice-answer-feedback.is-correct')).toHaveCount(0);
+      await expect(page.locator('.practice-answer-audio > strong')).toHaveText('house');
+      expect(await page.locator('.practice-options .practice-option').evaluateAll(buttons => (
+        buttons.map(button => button.getAttribute('aria-label') || button.textContent.trim())
+      ))).toEqual(['house', 'car', 'watch']);
+    }
     await expectMainlineUnchanged(page, baseline);
     if (index < practice.items.length - 1) {
       await page.locator('[data-action="practice-next"]').click();
@@ -2548,6 +2857,7 @@ test('unit recap gates all three answers on real ended and replay only opens the
 
   await page.locator('[data-action="practice-finish"]').click();
   await expect(page.locator('.practice-finished')).toContainText(practice.finishedTitle);
+  await expect(page.locator('.practice-finished > p')).toHaveCount(0);
   await expectOptionalPracticeHasNoGamification(page);
   await expectMainlineUnchanged(page, baseline);
   await page.locator('[data-action="practice-exit"]').click();
@@ -2864,6 +3174,9 @@ test('inspection remediation hands the bag to its owner with one click and waits
   await submitRule(page, thanksChallenge.answerRule, thanksChallenge);
   snapshot = await drainAudio(page);
   expect(snapshot).toMatchObject({ microtaskId: 'L01-M11', stepId: 'L01-M11:S03' });
+
+  await expect(page.locator('.mission-console'))
+    .toHaveAttribute('data-task-surface', 'scene-action');
 
   await expect(page.locator('[data-drag-source], [data-drop-target], [draggable="true"]'))
     .toHaveCount(0);
@@ -3369,6 +3682,157 @@ test('QA-MUST-01 flicker regression: L01-M08 keeps character entity nodes when i
     ariaHidden: 'true',
     pointerEvents: 'none'
   })));
+});
+
+test('I01 gives every actionable stage-two person stable hover, focus, and press feedback', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page);
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L01-M08');
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L01-M08',
+    challengeRef: 'L01-M08:C01',
+    phase: 'awaiting-response'
+  });
+
+  const candidates = page.locator('button.scene-character[data-action="select-entity"]');
+  await expect(candidates).toHaveCount(2);
+
+  const styleOf = locator => locator.evaluate(element => {
+    const style = getComputedStyle(element);
+    return {
+      filter: style.filter,
+      transform: style.transform,
+      touchAction: style.touchAction
+    };
+  });
+
+  for (const entityId of ['station-keeper', 'handbag-owner']) {
+    const candidate = page.locator(`button.scene-character[data-entity-id="${entityId}"]`);
+    const resting = await styleOf(candidate);
+
+    await candidate.hover();
+    const hovered = await styleOf(candidate);
+    expect(hovered.filter, `${entityId} hover should light the visible cutout`)
+      .not.toBe(resting.filter);
+    expect(hovered.transform, `${entityId} hover should lift the candidate`)
+      .not.toBe(resting.transform);
+
+    await page.mouse.move(720, 40);
+    await candidate.focus();
+    const focused = await styleOf(candidate);
+    expect(focused.filter, `${entityId} keyboard focus should light the visible cutout`)
+      .not.toBe(resting.filter);
+    expect(focused.transform, `${entityId} keyboard focus should lift the candidate`)
+      .not.toBe(resting.transform);
+    expect(focused.touchAction, `${entityId} must accept a direct touch press`)
+      .toBe('manipulation');
+
+    const box = await candidate.boundingBox();
+    expect(box).toBeTruthy();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    const pressed = await styleOf(candidate);
+    await page.mouse.move(720, 40);
+    await page.mouse.up();
+    expect(pressed.filter, `${entityId} press should keep visible pointing feedback`)
+      .not.toBe(resting.filter);
+    expect(pressed.transform, `${entityId} press should keep a tactile lift`)
+      .not.toBe(resting.transform);
+  }
+
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.challengeRef))
+    .toBe('L01-M08:C02');
+  const lockedPeople = page.locator('button.scene-character[data-entity-id]');
+  await expect(lockedPeople).toHaveCount(2);
+  expect(await lockedPeople.evaluateAll(elements => elements.every(element => (
+    element.disabled
+      && !element.dataset.action
+      && getComputedStyle(element).pointerEvents === 'none'
+  )))).toBe(true);
+});
+
+test('I01 keeps both stage-two people independently hittable on a phone', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFresh(page);
+  await startOrResume(page);
+  await advanceTo(page, 'L01-M08');
+
+  const hitReport = await page.locator(
+    'button.scene-character[data-action="select-entity"]'
+  ).evaluateAll(elements => elements.map(element => {
+    const bounds = element.getBoundingClientRect();
+    const hitOwner = document.elementFromPoint(
+      bounds.left + bounds.width / 2,
+      Math.min(innerHeight - 20, bounds.top + 100)
+    )?.closest?.('button.scene-character');
+    return {
+      entityId: element.dataset.entityId,
+      left: bounds.left,
+      right: bounds.right,
+      hitOwner: hitOwner?.dataset.entityId || null
+    };
+  }));
+
+  expect(hitReport.map(item => item.entityId)).toEqual(['station-keeper', 'handbag-owner']);
+  expect(hitReport[0].right).toBeLessThanOrEqual(hitReport[1].left + 1);
+  expect(hitReport.map(item => item.hitOwner)).toEqual([
+    'station-keeper',
+    'handbag-owner'
+  ]);
+});
+
+test('I02 renders the neutral stage-two contract without hiding the legitimate English evidence', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openFresh(page);
+  await startOrResume(page);
+  const snapshot = await advanceTo(page, 'L01-M08');
+  expect(snapshot).toMatchObject({
+    microtaskId: 'L01-M08',
+    challengeRef: 'L01-M08:C01',
+    phase: 'awaiting-response'
+  });
+
+  await expect(page.locator('.station-brand strong')).toHaveText('柜台边的新线索');
+  await expect(page.locator('.action-stage__hint')).toHaveCount(0);
+  await expect(page.locator(
+    '[data-copy-purpose="task"][data-copy-priority="primary"]:visible'
+  )).toHaveText('Whose handbag is it?');
+  await expect(page.locator('.scene-character[data-entity-id="station-keeper"] .scene-character__name'))
+    .toHaveText('招领员');
+  await expect(page.locator('.scene-character[data-entity-id="handbag-owner"] .scene-character__name'))
+    .toHaveText('女顾客');
+  await expect(page.getByText('Whose handbag is it?', { exact: true })).toBeVisible();
+  await expect(page.locator('.station-world')).toHaveAttribute(
+    'data-answer-evidence-channel',
+    'meaning'
+  );
+  await expect(page.locator('.station-world')).toHaveAttribute(
+    'data-intentional-support-refs',
+    'L01-Q01'
+  );
+
+  const challenge = activeContract(snapshot).challenge;
+  await submitRule(page, challenge.answerRule, challenge);
+  await expect.poll(() => runtimeSnapshot(page).then(current => current.challengeRef))
+    .toBe('L01-M08:C02');
+  await expect(page.locator('.station-brand strong')).toHaveText('柜台边的新线索');
+  await expect(page.locator('.stage-prompt, .mission-prompt').filter({
+    hasText: '听一听，点中声音说的物品。'
+  })).toHaveCount(1);
+  await expect(page.locator('.station-world')).toHaveAttribute(
+    'data-answer-evidence-channel',
+    'audio-form-supported'
+  );
+  await expect(page.locator('.station-world')).toHaveAttribute(
+    'data-intentional-support-refs',
+    'L01-W07'
+  );
 });
 
 test('R2 word-form checks pronounce the answer in place instead of opening a feedback page', async ({ page }) => {

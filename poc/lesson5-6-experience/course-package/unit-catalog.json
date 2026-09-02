@@ -1,0 +1,2684 @@
+{
+  "unitId": "NCE-U03",
+  "districtId": "first-book-1-12",
+  "lessonIds": [
+    "lesson5",
+    "lesson6"
+  ],
+  "unitLabel": "Lesson 5–6",
+  "title": "星光迎新厅",
+  "status": "candidate",
+  "publicationScope": "local-poc",
+  "runtimeProfile": "story-stage-v1",
+  "experienceRevision": "lesson5-6-v1",
+  "beats": [],
+  "targets": [
+    {
+      "targetId": "NCE-U03-T01",
+      "tier": "core",
+      "title": "听懂迎新介绍的顺序、人物与国籍，并回答教材总问题",
+      "evidenceModes": [
+        "dialogue-comprehension"
+      ],
+      "structureRefs": [],
+      "primarySourceRefs": [
+        "L05-Q01",
+        "L05-D01",
+        "L05-D02",
+        "L05-D03",
+        "L05-D04",
+        "L05-D05",
+        "L05-D06",
+        "L05-D07",
+        "L05-D08",
+        "L05-D09",
+        "L05-D10",
+        "L05-D11",
+        "L05-D12",
+        "L05-D13",
+        "L05-D14",
+        "L05-D15",
+        "L05-D16",
+        "L05-D17",
+        "L05-D18",
+        "L05-D19",
+        "L05-D20"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "整段理解只形成一次结果，不把二十句拆成二十道题",
+      "contextIds": [
+        "welcome-gallery",
+        "car-maker-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U03-T02",
+      "tier": "core",
+      "title": "用 This is ... 介绍他人，并用 Nice to meet you. 完成初次见面",
+      "evidenceModes": [
+        "introduction-and-greeting"
+      ],
+      "structureRefs": [
+        "GS-THIS-IS-INTRODUCTION"
+      ],
+      "primarySourceRefs": [
+        "L05-D03",
+        "L05-D06",
+        "L05-D08",
+        "L05-D09",
+        "L05-D11",
+        "L05-D12",
+        "L05-D14",
+        "L05-D15",
+        "L05-D17",
+        "L05-D18",
+        "L05-D20"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "在迎新关系中取证，不做脱离人物的短语卡",
+      "contextIds": [
+        "welcome-gallery",
+        "car-maker-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U03-T03",
+      "tier": "core",
+      "title": "按人物或物品选择 He、She、It，并保持 be 动词一致",
+      "evidenceModes": [
+        "pronoun-reference-choice"
+      ],
+      "structureRefs": [
+        "GS-SUBJECT-PRONOUN-SG",
+        "GS-BE-AFFIRMATIVE-SG"
+      ],
+      "primarySourceRefs": [
+        "L05-D05",
+        "L05-D07",
+        "L05-D10",
+        "L05-D13",
+        "L05-D16",
+        "L05-D19",
+        "L06-P01",
+        "L06-P02",
+        "L06-P03",
+        "L06-P04",
+        "L06-P05",
+        "L06-P06"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "只在清楚的指代关系中判断，不考术语名称",
+      "contextIds": [
+        "welcome-gallery",
+        "car-maker-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U03-T04",
+      "tier": "core",
+      "title": "连接人物、国籍、汽车牌子与国家属性",
+      "evidenceModes": [
+        "profile-nationality-and-make-match"
+      ],
+      "structureRefs": [
+        "GS-BE-AFFIRMATIVE-SG"
+      ],
+      "primarySourceRefs": [
+        "L05-D05",
+        "L05-D07",
+        "L05-D10",
+        "L05-D13",
+        "L05-D16",
+        "L05-D19",
+        "L06-P01",
+        "L06-P02",
+        "L06-P03",
+        "L06-P04",
+        "L06-P05",
+        "L06-P06",
+        "L06-W01",
+        "L06-W02",
+        "L06-W03",
+        "L06-W04",
+        "L06-W05",
+        "L06-W06",
+        "L06-W07",
+        "L06-W08",
+        "L06-W09",
+        "L06-W10"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "先完整接触，再抽人物与汽车各三个代表形成证据",
+      "contextIds": [
+        "welcome-gallery",
+        "car-maker-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U03-T05",
+      "tier": "core",
+      "title": "在人物和汽车之间迁移肯定陈述，并区分人称与物称",
+      "evidenceModes": [
+        "person-object-transfer"
+      ],
+      "structureRefs": [
+        "GS-SUBJECT-PRONOUN-SG"
+      ],
+      "primarySourceRefs": [
+        "L06-P01",
+        "L06-P02",
+        "L06-P03",
+        "L06-P04",
+        "L06-P05",
+        "L06-P06",
+        "L06-E01",
+        "L06-E02"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "页面只做口头和选择迁移，书写保持可选且不阻断",
+      "contextIds": [
+        "welcome-gallery",
+        "car-maker-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U03-T06",
+      "tier": "lexical-sample",
+      "title": "将迎新词、国籍词和汽车牌子连接到人物或图像",
+      "evidenceModes": [
+        "lexical-form-meaning-association"
+      ],
+      "structureRefs": [],
+      "primarySourceRefs": [
+        "L05-W01",
+        "L05-W02",
+        "L05-W03",
+        "L05-W04",
+        "L05-W05",
+        "L05-W06",
+        "L05-W07",
+        "L05-W08",
+        "L05-W09",
+        "L05-W10",
+        "L05-W11",
+        "L05-W12",
+        "L05-W13",
+        "L05-W14",
+        "L06-W01",
+        "L06-W02",
+        "L06-W03",
+        "L06-W04",
+        "L06-W05",
+        "L06-W06",
+        "L06-W07",
+        "L06-W08",
+        "L06-W09",
+        "L06-W10"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "不连续安排孤立词题；词汇跟随人物、汽车和完整句出现",
+      "contextIds": [
+        "welcome-gallery",
+        "car-maker-gallery"
+      ]
+    }
+  ],
+  "lessonContent": {
+    "lesson5": {
+      "lessonId": "lesson5",
+      "textbookTitle": "Nice to meet you.",
+      "sourceRegisterRef": "BOOK1-2022-07",
+      "textbookSource": "外研社《新概念英语智慧版 1》PDF 页 43–44，教材页 10–11",
+      "requiredSourceIds": [
+        "L05-I01",
+        "L05-Q01",
+        "L05-D01",
+        "L05-D02",
+        "L05-D03",
+        "L05-D04",
+        "L05-D05",
+        "L05-D06",
+        "L05-D07",
+        "L05-D08",
+        "L05-D09",
+        "L05-D10",
+        "L05-D11",
+        "L05-D12",
+        "L05-D13",
+        "L05-D14",
+        "L05-D15",
+        "L05-D16",
+        "L05-D17",
+        "L05-D18",
+        "L05-D19",
+        "L05-D20",
+        "L05-W01",
+        "L05-W02",
+        "L05-W03",
+        "L05-W04",
+        "L05-W05",
+        "L05-W06",
+        "L05-W07",
+        "L05-W08",
+        "L05-W09",
+        "L05-W10",
+        "L05-W11",
+        "L05-W12",
+        "L05-W13",
+        "L05-W14",
+        "L05-N01",
+        "L05-N02",
+        "L05-N03"
+      ],
+      "sources": {
+        "L05-I01": {
+          "sourceId": "L05-I01",
+          "sourceKind": "textbook-instruction",
+          "text": "Listen then answer this question.",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "听录音，然后回答问题。"
+        },
+        "L05-Q01": {
+          "sourceId": "L05-Q01",
+          "sourceKind": "textbook-question",
+          "text": "Is Chang-woo Chinese?",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "昌宇是中国人吗？"
+        },
+        "L05-D01": {
+          "sourceId": "L05-D01",
+          "sourceKind": "dialogue",
+          "text": "Good morning.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 1,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d01.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D02": {
+          "sourceId": "L05-D02",
+          "sourceKind": "dialogue",
+          "text": "Good morning, Mr. Blake.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 1,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "student-group"
+        },
+        "L05-D03": {
+          "sourceId": "L05-D03",
+          "sourceKind": "dialogue",
+          "text": "This is Miss Sophie Dupont.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 1,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d03.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D04": {
+          "sourceId": "L05-D04",
+          "sourceKind": "dialogue",
+          "text": "Sophie is a new student.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 2,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d04.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D05": {
+          "sourceId": "L05-D05",
+          "sourceKind": "dialogue",
+          "text": "She is French.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 2,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d05.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D06": {
+          "sourceId": "L05-D06",
+          "sourceKind": "dialogue",
+          "text": "Sophie, this is Hans.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 2,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d06.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D07": {
+          "sourceId": "L05-D07",
+          "sourceKind": "dialogue",
+          "text": "He is German.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d07.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D08": {
+          "sourceId": "L05-D08",
+          "sourceKind": "dialogue",
+          "text": "Nice to meet you.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d08.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "student-group"
+        },
+        "L05-D09": {
+          "sourceId": "L05-D09",
+          "sourceKind": "dialogue",
+          "text": "And this is Naoko.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d09.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D10": {
+          "sourceId": "L05-D10",
+          "sourceKind": "dialogue",
+          "text": "She's Japanese.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 4,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d10.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D11": {
+          "sourceId": "L05-D11",
+          "sourceKind": "dialogue",
+          "text": "Nice to meet you.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 4,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d11.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "student-group"
+        },
+        "L05-D12": {
+          "sourceId": "L05-D12",
+          "sourceKind": "dialogue",
+          "text": "And this is Chang-woo.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 4,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d12.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D13": {
+          "sourceId": "L05-D13",
+          "sourceKind": "dialogue",
+          "text": "He's South Korean.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d13.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D14": {
+          "sourceId": "L05-D14",
+          "sourceKind": "dialogue",
+          "text": "Nice to meet you.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d14.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "student-group"
+        },
+        "L05-D15": {
+          "sourceId": "L05-D15",
+          "sourceKind": "dialogue",
+          "text": "And this is Luming.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d15.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D16": {
+          "sourceId": "L05-D16",
+          "sourceKind": "dialogue",
+          "text": "He's Chinese.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d16.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D17": {
+          "sourceId": "L05-D17",
+          "sourceKind": "dialogue",
+          "text": "Nice to meet you.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d17.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "student-group"
+        },
+        "L05-D18": {
+          "sourceId": "L05-D18",
+          "sourceKind": "dialogue",
+          "text": "And this is Xiaohui.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d18.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D19": {
+          "sourceId": "L05-D19",
+          "sourceKind": "dialogue",
+          "text": "She's Chinese, too.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d19.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "teacher"
+        },
+        "L05-D20": {
+          "sourceId": "L05-D20",
+          "sourceKind": "dialogue",
+          "text": "Nice to meet you.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-d20.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "student-group"
+        },
+        "L05-W01": {
+          "sourceId": "L05-W01",
+          "sourceKind": "vocabulary",
+          "text": "Mr.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "先生",
+          "vocabularyOrder": 1,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w01.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W02": {
+          "sourceId": "L05-W02",
+          "sourceKind": "vocabulary",
+          "text": "good",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "好的",
+          "vocabularyOrder": 2,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W03": {
+          "sourceId": "L05-W03",
+          "sourceKind": "vocabulary",
+          "text": "morning",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "早晨",
+          "vocabularyOrder": 3,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W04": {
+          "sourceId": "L05-W04",
+          "sourceKind": "vocabulary",
+          "text": "Miss",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "小姐",
+          "vocabularyOrder": 4,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W05": {
+          "sourceId": "L05-W05",
+          "sourceKind": "vocabulary",
+          "text": "new",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "新的",
+          "vocabularyOrder": 5,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W06": {
+          "sourceId": "L05-W06",
+          "sourceKind": "vocabulary",
+          "text": "student",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "学生",
+          "vocabularyOrder": 6,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W07": {
+          "sourceId": "L05-W07",
+          "sourceKind": "vocabulary",
+          "text": "French",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "法国（人）的",
+          "vocabularyOrder": 7,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W08": {
+          "sourceId": "L05-W08",
+          "sourceKind": "vocabulary",
+          "text": "German",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "德国（人）的",
+          "vocabularyOrder": 8,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W09": {
+          "sourceId": "L05-W09",
+          "sourceKind": "vocabulary",
+          "text": "nice",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "美好的",
+          "vocabularyOrder": 9,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w09.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W10": {
+          "sourceId": "L05-W10",
+          "sourceKind": "vocabulary",
+          "text": "meet",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "遇见",
+          "vocabularyOrder": 10,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W11": {
+          "sourceId": "L05-W11",
+          "sourceKind": "vocabulary",
+          "text": "Japanese",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "日本（人）的",
+          "vocabularyOrder": 11,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w11.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W12": {
+          "sourceId": "L05-W12",
+          "sourceKind": "vocabulary",
+          "text": "South Korean",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "韩国（人）的",
+          "vocabularyOrder": 12,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w12.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W13": {
+          "sourceId": "L05-W13",
+          "sourceKind": "vocabulary",
+          "text": "Chinese",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "中国（人）的",
+          "vocabularyOrder": 13,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w13.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-W14": {
+          "sourceId": "L05-W14",
+          "sourceKind": "vocabulary",
+          "text": "too",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "也",
+          "vocabularyOrder": 14,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l05-w14.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L05-N01": {
+          "sourceId": "L05-N01",
+          "sourceKind": "textbook-note",
+          "text": "Good morning. 是英语中常见的问候用语。",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L05-D01",
+            "L05-D02"
+          ]
+        },
+        "L05-N02": {
+          "sourceId": "L05-N02",
+          "sourceKind": "textbook-note",
+          "text": "This is ... 用来把某人介绍给他人。",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L05-D03",
+            "L05-D06"
+          ]
+        },
+        "L05-N03": {
+          "sourceId": "L05-N03",
+          "sourceKind": "textbook-note",
+          "text": "Nice to meet you. 用于初次见面等非正式场合。",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L05-D08",
+            "L05-D11",
+            "L05-D14",
+            "L05-D17",
+            "L05-D20"
+          ]
+        },
+        "L05-Z01": {
+          "sourceId": "L05-Z01",
+          "sourceKind": "reference-translation",
+          "text": "早上好。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D01"
+        },
+        "L05-Z02": {
+          "sourceId": "L05-Z02",
+          "sourceKind": "reference-translation",
+          "text": "早上好，布莱克先生。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D02"
+        },
+        "L05-Z03": {
+          "sourceId": "L05-Z03",
+          "sourceKind": "reference-translation",
+          "text": "这位是索菲娅·杜邦小姐。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D03"
+        },
+        "L05-Z04": {
+          "sourceId": "L05-Z04",
+          "sourceKind": "reference-translation",
+          "text": "索菲娅是一名新生。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D04"
+        },
+        "L05-Z05": {
+          "sourceId": "L05-Z05",
+          "sourceKind": "reference-translation",
+          "text": "她是法国人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D05"
+        },
+        "L05-Z06": {
+          "sourceId": "L05-Z06",
+          "sourceKind": "reference-translation",
+          "text": "索菲娅，这位是汉斯。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D06"
+        },
+        "L05-Z07": {
+          "sourceId": "L05-Z07",
+          "sourceKind": "reference-translation",
+          "text": "他是德国人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D07"
+        },
+        "L05-Z08": {
+          "sourceId": "L05-Z08",
+          "sourceKind": "reference-translation",
+          "text": "很高兴见到你。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D08"
+        },
+        "L05-Z09": {
+          "sourceId": "L05-Z09",
+          "sourceKind": "reference-translation",
+          "text": "这位是直子。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D09"
+        },
+        "L05-Z10": {
+          "sourceId": "L05-Z10",
+          "sourceKind": "reference-translation",
+          "text": "她是日本人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D10"
+        },
+        "L05-Z11": {
+          "sourceId": "L05-Z11",
+          "sourceKind": "reference-translation",
+          "text": "很高兴见到你。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D11"
+        },
+        "L05-Z12": {
+          "sourceId": "L05-Z12",
+          "sourceKind": "reference-translation",
+          "text": "这位是昌宇。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D12"
+        },
+        "L05-Z13": {
+          "sourceId": "L05-Z13",
+          "sourceKind": "reference-translation",
+          "text": "他是韩国人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D13"
+        },
+        "L05-Z14": {
+          "sourceId": "L05-Z14",
+          "sourceKind": "reference-translation",
+          "text": "很高兴见到你。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D14"
+        },
+        "L05-Z15": {
+          "sourceId": "L05-Z15",
+          "sourceKind": "reference-translation",
+          "text": "这位是鲁明。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D15"
+        },
+        "L05-Z16": {
+          "sourceId": "L05-Z16",
+          "sourceKind": "reference-translation",
+          "text": "他是中国人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D16"
+        },
+        "L05-Z17": {
+          "sourceId": "L05-Z17",
+          "sourceKind": "reference-translation",
+          "text": "很高兴见到你。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D17"
+        },
+        "L05-Z18": {
+          "sourceId": "L05-Z18",
+          "sourceKind": "reference-translation",
+          "text": "这位是晓惠。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D18"
+        },
+        "L05-Z19": {
+          "sourceId": "L05-Z19",
+          "sourceKind": "reference-translation",
+          "text": "她也是中国人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D19"
+        },
+        "L05-Z20": {
+          "sourceId": "L05-Z20",
+          "sourceKind": "reference-translation",
+          "text": "很高兴见到你。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L05-D20"
+        }
+      }
+    },
+    "lesson6": {
+      "lessonId": "lesson6",
+      "textbookTitle": "What make is it?",
+      "sourceRegisterRef": "BOOK1-2022-07",
+      "textbookSource": "外研社《新概念英语智慧版 1》PDF 页 45–46，教材页 12–13",
+      "requiredSourceIds": [
+        "L06-I01",
+        "L06-P01",
+        "L06-P02",
+        "L06-P03",
+        "L06-P04",
+        "L06-P05",
+        "L06-P06",
+        "L06-W01",
+        "L06-W02",
+        "L06-W03",
+        "L06-W04",
+        "L06-W05",
+        "L06-W06",
+        "L06-W07",
+        "L06-W08",
+        "L06-W09",
+        "L06-W10"
+      ],
+      "sources": {
+        "L06-I01": {
+          "sourceId": "L06-I01",
+          "sourceKind": "textbook-instruction",
+          "text": "Look, listen and repeat.",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "看图听录音，然后练习。"
+        },
+        "L06-P01": {
+          "sourceId": "L06-P01",
+          "sourceKind": "substitution-prompt",
+          "text": "It's a Volvo. (Swedish)",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "make": "Volvo",
+          "nationality": "Swedish",
+          "illustrationOrder": 1,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-p01.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-P02": {
+          "sourceId": "L06-P02",
+          "sourceKind": "substitution-prompt",
+          "text": "It's a Peugeot. (French)",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "make": "Peugeot",
+          "nationality": "French",
+          "illustrationOrder": 2,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-p02.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-P03": {
+          "sourceId": "L06-P03",
+          "sourceKind": "substitution-prompt",
+          "text": "It's a Mercedes. (German)",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "make": "Mercedes",
+          "nationality": "German",
+          "illustrationOrder": 3,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-p03.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-P04": {
+          "sourceId": "L06-P04",
+          "sourceKind": "substitution-prompt",
+          "text": "It's a Toyota. (Japanese)",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "make": "Toyota",
+          "nationality": "Japanese",
+          "illustrationOrder": 4,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-p04.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-P05": {
+          "sourceId": "L06-P05",
+          "sourceKind": "substitution-prompt",
+          "text": "It's a Mini. (English)",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "make": "Mini",
+          "nationality": "English",
+          "illustrationOrder": 5,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-p05.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-P06": {
+          "sourceId": "L06-P06",
+          "sourceKind": "substitution-prompt",
+          "text": "It's a Ford. (American)",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "make": "Ford",
+          "nationality": "American",
+          "illustrationOrder": 6,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-p06.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W01": {
+          "sourceId": "L06-W01",
+          "sourceKind": "vocabulary",
+          "text": "make",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "（产品的）牌子",
+          "vocabularyOrder": 1,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w01.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W02": {
+          "sourceId": "L06-W02",
+          "sourceKind": "vocabulary",
+          "text": "Swedish",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "瑞典的",
+          "vocabularyOrder": 2,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W03": {
+          "sourceId": "L06-W03",
+          "sourceKind": "vocabulary",
+          "text": "English",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "英国的",
+          "vocabularyOrder": 3,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W04": {
+          "sourceId": "L06-W04",
+          "sourceKind": "vocabulary",
+          "text": "American",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "美国的",
+          "vocabularyOrder": 4,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W05": {
+          "sourceId": "L06-W05",
+          "sourceKind": "vocabulary",
+          "text": "Volvo",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "沃尔沃",
+          "vocabularyOrder": 5,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W06": {
+          "sourceId": "L06-W06",
+          "sourceKind": "vocabulary",
+          "text": "Peugeot",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "标致",
+          "vocabularyOrder": 6,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W07": {
+          "sourceId": "L06-W07",
+          "sourceKind": "vocabulary",
+          "text": "Mercedes",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "梅赛德斯",
+          "vocabularyOrder": 7,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W08": {
+          "sourceId": "L06-W08",
+          "sourceKind": "vocabulary",
+          "text": "Toyota",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "丰田",
+          "vocabularyOrder": 8,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W09": {
+          "sourceId": "L06-W09",
+          "sourceKind": "vocabulary",
+          "text": "Ford",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "福特",
+          "vocabularyOrder": 9,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w09.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-W10": {
+          "sourceId": "L06-W10",
+          "sourceKind": "vocabulary",
+          "text": "Mini",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "迷你",
+          "vocabularyOrder": 10,
+          "audioSrc": "/poc/lesson5-6-experience/audio/l06-w10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L06-E01": {
+          "sourceId": "L06-E01",
+          "sourceKind": "exercise-mechanism",
+          "text": "Complete these sentences using He, She or It.",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "requiredForUnitCompletion": false,
+          "producesLearningEvidence": false,
+          "decisionRef": "ADR-0098"
+        },
+        "L06-E02": {
+          "sourceId": "L06-E02",
+          "sourceKind": "exercise-mechanism",
+          "text": "Write questions and answers using He, She, It, a or an.",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "requiredForUnitCompletion": false,
+          "producesLearningEvidence": false,
+          "decisionRef": "ADR-0098"
+        }
+      }
+    }
+  },
+  "sourceTargetCoverage": [
+    {
+      "sourceRefs": [
+        "L05-I01",
+        "L05-Q01"
+      ],
+      "coverage": {
+        "NCE-U03-T01": "eligible-evidence"
+      },
+      "prohibitedInference": "教材问题只检查整段理解，不直接显示答案"
+    },
+    {
+      "sourceRefs": [
+        "L05-D01",
+        "L05-D02",
+        "L05-D03",
+        "L05-D04",
+        "L05-D05"
+      ],
+      "coverage": {
+        "NCE-U03-T01": "eligible-evidence",
+        "NCE-U03-T02": "support",
+        "NCE-U03-T03": "support"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L05-D06",
+        "L05-D07",
+        "L05-D08",
+        "L05-D09",
+        "L05-D10",
+        "L05-D11",
+        "L05-D12",
+        "L05-D13",
+        "L05-D14",
+        "L05-D15",
+        "L05-D16",
+        "L05-D17",
+        "L05-D18",
+        "L05-D19",
+        "L05-D20"
+      ],
+      "coverage": {
+        "NCE-U03-T01": "eligible-evidence",
+        "NCE-U03-T02": "eligible-evidence",
+        "NCE-U03-T03": "eligible-evidence",
+        "NCE-U03-T04": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L05-W01",
+        "L05-W02",
+        "L05-W03",
+        "L05-W04",
+        "L05-W05",
+        "L05-W06",
+        "L05-W07",
+        "L05-W08",
+        "L05-W09",
+        "L05-W10",
+        "L05-W11",
+        "L05-W12",
+        "L05-W13",
+        "L05-W14"
+      ],
+      "coverage": {
+        "NCE-U03-T02": "support",
+        "NCE-U03-T04": "support",
+        "NCE-U03-T06": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L05-N01",
+        "L05-N02",
+        "L05-N03"
+      ],
+      "coverage": {
+        "NCE-U03-T02": "support",
+        "NCE-U03-T03": "support"
+      },
+      "prohibitedInference": "Notes 不转成术语考试"
+    },
+    {
+      "sourceRefs": [
+        "L05-Z01",
+        "L05-Z02",
+        "L05-Z03",
+        "L05-Z04",
+        "L05-Z05",
+        "L05-Z06",
+        "L05-Z07",
+        "L05-Z08",
+        "L05-Z09",
+        "L05-Z10",
+        "L05-Z11",
+        "L05-Z12",
+        "L05-Z13",
+        "L05-Z14",
+        "L05-Z15",
+        "L05-Z16",
+        "L05-Z17",
+        "L05-Z18",
+        "L05-Z19",
+        "L05-Z20"
+      ],
+      "coverage": {},
+      "prohibitedInference": "查看参考译文不等于听懂英语"
+    },
+    {
+      "sourceRefs": [
+        "L06-I01"
+      ],
+      "coverage": {},
+      "prohibitedInference": "活动指令不形成独立学习结果"
+    },
+    {
+      "sourceRefs": [
+        "L06-P01",
+        "L06-P02",
+        "L06-P03",
+        "L06-P04",
+        "L06-P05",
+        "L06-P06"
+      ],
+      "coverage": {
+        "NCE-U03-T03": "eligible-evidence",
+        "NCE-U03-T04": "eligible-evidence",
+        "NCE-U03-T05": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L06-W01",
+        "L06-W02",
+        "L06-W03",
+        "L06-W04",
+        "L06-W05",
+        "L06-W06",
+        "L06-W07",
+        "L06-W08",
+        "L06-W09",
+        "L06-W10"
+      ],
+      "coverage": {
+        "NCE-U03-T04": "support",
+        "NCE-U03-T06": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L06-E01",
+        "L06-E02"
+      ],
+      "coverage": {
+        "NCE-U03-T05": "optional"
+      },
+      "prohibitedInference": "未完成书写不阻断网站单元完成"
+    }
+  ],
+  "firstSessionEvidencePlan": {
+    "policyId": "first-session-representative-retrieval-v1",
+    "frozenOn": "2026-08-31",
+    "sourceContactPolicy": "all-required-sources-before-unit-completion",
+    "remainingPromptPolicy": "exposure-then-performance-driven-review",
+    "remainingVocabularyPolicy": "exposure-then-performance-driven-review",
+    "promptEvidenceSourceRefs": [
+      "L06-P01",
+      "L06-P02",
+      "L06-P03",
+      "L06-P04",
+      "L06-P05",
+      "L06-P06"
+    ],
+    "lexicalEvidenceSourceRefs": [
+      "L05-W06",
+      "L05-W07",
+      "L05-W08",
+      "L05-W11",
+      "L05-W12",
+      "L05-W13",
+      "L06-W01",
+      "L06-W02",
+      "L06-W03",
+      "L06-W04"
+    ],
+    "evidenceSlots": [
+      {
+        "slotId": "NCE-U03-E01",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U03-T01",
+            "evidenceMode": "dialogue-comprehension"
+          }
+        ],
+        "sourceRefs": [
+          "L05-Q01",
+          "L05-D01",
+          "L05-D02",
+          "L05-D03",
+          "L05-D04",
+          "L05-D05",
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-D09",
+          "L05-D10",
+          "L05-D11",
+          "L05-D12",
+          "L05-D13",
+          "L05-D14",
+          "L05-D15",
+          "L05-D16",
+          "L05-D17",
+          "L05-D18",
+          "L05-D19",
+          "L05-D20"
+        ],
+        "retrievalOpportunityQuota": 1
+      },
+      {
+        "slotId": "NCE-U03-E02",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U03-T02",
+            "evidenceMode": "introduction-and-greeting"
+          }
+        ],
+        "sourceRefs": [
+          "L05-D03",
+          "L05-D08"
+        ],
+        "retrievalOpportunityQuota": 1
+      },
+      {
+        "slotId": "NCE-U03-E03",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U03-T03",
+            "evidenceMode": "pronoun-reference-choice"
+          }
+        ],
+        "sourceRefs": [
+          "L05-D05",
+          "L05-D07",
+          "L06-P05"
+        ],
+        "retrievalOpportunityQuota": 3
+      },
+      {
+        "slotId": "NCE-U03-E04",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U03-T04",
+            "evidenceMode": "profile-nationality-and-make-match"
+          }
+        ],
+        "sourceRefs": [
+          "L05-D10",
+          "L05-D13",
+          "L05-D16",
+          "L06-P01",
+          "L06-P02",
+          "L06-P05"
+        ],
+        "retrievalOpportunityQuota": 6
+      },
+      {
+        "slotId": "NCE-U03-E05",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U03-T05",
+            "evidenceMode": "person-object-transfer"
+          },
+          {
+            "targetId": "NCE-U03-T06",
+            "evidenceMode": "lexical-form-meaning-association"
+          }
+        ],
+        "sourceRefs": [
+          "L06-P01",
+          "L06-P02",
+          "L06-P05",
+          "L06-P03",
+          "L06-P04",
+          "L06-P06",
+          "L05-W06",
+          "L05-W07",
+          "L05-W08",
+          "L05-W11",
+          "L05-W12",
+          "L05-W13",
+          "L06-W01",
+          "L06-W02",
+          "L06-W03",
+          "L06-W04"
+        ],
+        "retrievalOpportunityQuota": 3
+      }
+    ]
+  },
+  "voiceBaselineId": "nce-youth-v1",
+  "audioReviewContract": {
+    "packId": "nce-u03-kokoro-candidate-v1",
+    "manifestPath": "/poc/lesson5-6-experience/audio/manifest.json",
+    "canonicalAudioSetSha256": "bbd582afcfd7ce6646bc923a790071ff0c48e88d1608e4d70b5723027ada6ad2",
+    "voiceBaselineId": "nce-youth-v1",
+    "dialogueRenderMode": "natural-utterance",
+    "standaloneWordRenderMode": "context-cropped-lexeme-v1",
+    "decodedOnsetLimitMs": 150,
+    "publicationGate": "human-language-review-per-file",
+    "nonAcceptedStatus": "unreviewed-candidate",
+    "expectedAudioSourceCount": 50
+  },
+  "curriculumContract": {
+    "acceptedOn": "2026-08-31",
+    "acceptedDecisionRefs": [
+      "NCE-U03-DIRECT-BUILD-APPROVAL-2026-08-31"
+    ],
+    "launchPackRef": "docs/designs/lesson5-6-teaching-unit-launch-pack-v1.md",
+    "grammarSpineRef": "docs/designs/new-concept-english-book1-grammar-spine-v1.md",
+    "sourceRegister": {
+      "sourceRegisterId": "BOOK1-2022-07",
+      "title": "外研社《新概念英语智慧版 1：英语初阶 First Things First》",
+      "edition": "2022 年 7 月第 1 版第 1 次印刷",
+      "isbn": "978-7-5213-3670-2",
+      "snapshotSha256": "a54740bdce7423b98ea30334dca9043603ef5533f85e64f86f5af6d31d93be9f",
+      "totalPdfPages": 330,
+      "lessonPageMap": {
+        "lesson5": {
+          "pdfPages": [
+            43,
+            44
+          ],
+          "textbookPages": [
+            10,
+            11
+          ]
+        },
+        "lesson6": {
+          "pdfPages": [
+            45,
+            46
+          ],
+          "textbookPages": [
+            12,
+            13
+          ]
+        }
+      }
+    },
+    "writingPolicy": "optional-nonblocking",
+    "audioAuditStatus": "candidate-generated-awaiting-human-review",
+    "audioSourceAudit": {
+      "checkedOn": "2026-08-31",
+      "result": "no-auditable-official-audio",
+      "checkedSurfaces": [
+        "controlled-pdf-embedded-files",
+        "controlled-pdf-page-annotations-43-46",
+        "repository-audio-assets",
+        "local-download-audio-assets"
+      ],
+      "officialAccessModel": "book-specific-activation-in-fltrp-u-learning-app",
+      "officialReferenceId": "FLTRP-2023-JCJYJXZY-P58"
+    },
+    "audioCandidatePack": {
+      "packId": "nce-u03-kokoro-candidate-v1",
+      "generationBasis": "nce-u01-kokoro-candidate-v3",
+      "status": "local-poc-candidate-unreviewed",
+      "disclosure": "ai-generated-not-official-textbook-audio"
+    },
+    "speakerMappingStatus": "frozen-course-role-mapping",
+    "speakerMappingBasis": "textbook-dialogue-semantics-and-figure-sequence",
+    "storyDesignStatus": "authored-local-candidate",
+    "pageImplementationStatus": "authored-local-candidate",
+    "publicationAllowed": false
+  },
+  "authoredContent": {
+    "NCE-U03-C-COMPLETION": {
+      "kind": "completion",
+      "kicker": "Lesson 5–6 完成",
+      "sceneTitle": "迎新名牌全部点亮",
+      "sceneInstruction": "人物、国籍和汽车牌子都已归位",
+      "title": "Sophie 完成了第一天的介绍",
+      "copy": "你听懂了迎新对话，也能在人和汽车之间选择 He、She、It。",
+      "restartLabel": "重新体验",
+      "leaveLabel": "继续",
+      "leaveHref": "/"
+    },
+    "NCE-U03-C-AUDIO-FAILURE": {
+      "kind": "recovery",
+      "title": "这句英语还没有播放成功",
+      "copy": "英文会留在原位。点“再听一次”，听完后才能继续。",
+      "actionLabel": "再听一次"
+    },
+    "NCE-U03-C-SAVE-FAILURE": {
+      "kind": "recovery",
+      "title": "进度还没有保存好",
+      "copy": "不用重答，留在这里再保存一次。",
+      "actionLabel": "重新保存"
+    }
+  },
+  "entities": {
+    "mr-blake": {
+      "entityId": "mr-blake",
+      "kind": "character",
+      "label": "布莱克先生",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-mr-blake-v1.avif"
+      }
+    },
+    "sophie": {
+      "entityId": "sophie",
+      "kind": "character",
+      "label": "Sophie",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-sophie-v1.avif"
+      }
+    },
+    "hans": {
+      "entityId": "hans",
+      "kind": "person-card",
+      "label": "Hans",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-hans-v1.avif"
+      }
+    },
+    "naoko": {
+      "entityId": "naoko",
+      "kind": "person-card",
+      "label": "Naoko",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-naoko-v1.avif"
+      }
+    },
+    "changwoo": {
+      "entityId": "changwoo",
+      "kind": "person-card",
+      "label": "Chang-woo",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-changwoo-v1.avif"
+      }
+    },
+    "luming": {
+      "entityId": "luming",
+      "kind": "person-card",
+      "label": "Luming",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-luming-v1.avif"
+      }
+    },
+    "xiaohui": {
+      "entityId": "xiaohui",
+      "kind": "person-card",
+      "label": "Xiaohui",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-xiaohui-v1.avif"
+      }
+    },
+    "volvo": {
+      "entityId": "volvo",
+      "kind": "vehicle",
+      "label": "Volvo",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/vehicle-volvo-v1.avif"
+      }
+    },
+    "peugeot": {
+      "entityId": "peugeot",
+      "kind": "vehicle",
+      "label": "Peugeot",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/vehicle-peugeot-v1.avif"
+      }
+    },
+    "mercedes": {
+      "entityId": "mercedes",
+      "kind": "vehicle",
+      "label": "Mercedes",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/vehicle-mercedes-v1.avif"
+      }
+    },
+    "toyota": {
+      "entityId": "toyota",
+      "kind": "vehicle",
+      "label": "Toyota",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/vehicle-toyota-v1.avif"
+      }
+    },
+    "mini": {
+      "entityId": "mini",
+      "kind": "vehicle",
+      "label": "Mini",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/vehicle-mini-v1.avif"
+      }
+    },
+    "ford": {
+      "entityId": "ford",
+      "kind": "vehicle",
+      "label": "Ford",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/vehicle-ford-v1.avif"
+      }
+    }
+  },
+  "experience": {
+    "schemaVersion": 2,
+    "documentTitle": "Lesson 5–6 · 星光迎新厅",
+    "unitTitle": "星光迎新厅",
+    "stageCount": 10,
+    "storageKey": "poc:learning-experience:NCE-U03:lesson5-6-v1",
+    "uiCopy": {
+      "progress": {
+        "openLabel": "打开阶段地图",
+        "currentPrefix": "打开阶段地图，当前第",
+        "currentMiddle": "阶段，共",
+        "currentSuffix": "阶段"
+      },
+      "settings": {
+        "visibleLabel": "设置",
+        "ariaLabel": "打开设置",
+        "heartsLabel": "冒险心",
+        "title": "学习设置",
+        "copy": "重新开始会清除本单元的本地进度。",
+        "restartLabel": "重新开始",
+        "returnLabel": "返回学习"
+      },
+      "stageMap": {
+        "title": "选择学习阶段",
+        "closeLabel": "关闭",
+        "copy": "已完成阶段可回演，跳过的角色阶段可补做。",
+        "completed": "已完成 · 回演",
+        "skipped": "已跳过 · 补做",
+        "current": "正在学习",
+        "locked": "尚未到达",
+        "stagePrefix": "第",
+        "stageMiddle": "阶段：",
+        "statusSeparator": "，"
+      },
+      "candidates": {
+        "neutralAriaPrefix": "候选人物 ",
+        "neutralVisiblePrefix": "候选 ",
+        "selectPrefix": "选择"
+      },
+      "hearts": {
+        "remainingPrefix": "还剩 ",
+        "remainingSuffix": " 颗冒险心"
+      },
+      "audio": {
+        "retryLabel": "再听一次",
+        "playQuestionLabel": "播放问句",
+        "playLineLabel": "播放这一句",
+        "playGroupLabel": "播放这一组",
+        "playingCopy": "正在播放英文……"
+      },
+      "task": {
+        "lockedStoryCopy": "声音会按故事顺序播放。听完整段后，问题才会出现。",
+        "lockedQuestionCopy": "先听清问句，再选择。",
+        "selectScenePersonCopy": "点击场景中的人物",
+        "stepPrefix": "第 ",
+        "stepMiddle": " 步 / 共 ",
+        "stepSuffix": " 步",
+        "groupPrefix": "第 ",
+        "groupMiddle": " 组 / 共 ",
+        "groupSuffix": " 组",
+        "groupListenPrefix": "先听完这一组的 ",
+        "groupListenSuffix": " 句话。",
+        "sampledQuestion": "刚才问到的是哪一件？",
+        "albumCopy": "每张图只要点一次。声音播完，号码牌就会留下一个小印记。",
+        "albumPlayPrefix": "播放",
+        "albumPlaySuffix": "问句",
+        "heardLabel": "已听",
+        "listenLabel": "点我听",
+        "segmentPrefix": "第 ",
+        "segmentMiddle": " 段 · "
+      },
+      "role": {
+        "choosePrefix": "我来演",
+        "assignedPrefix": "这次你演",
+        "assignedSuffix": "。",
+        "startLabel": "开始演完整段",
+        "skipLabel": "跳过这个角色",
+        "linePrefix": "第 ",
+        "lineMiddle": " 句 / 共 ",
+        "lineSuffix": " 句",
+        "childSpeakerLabel": "轮到你",
+        "hiddenLineCopy": "先想一想，这个角色会怎么说？",
+        "revealLabel": "揭晓并播放",
+        "partnerSpeakingCopy": "对方正在说……"
+      },
+      "rescue": {
+        "actionLabel": "听小猫示范"
+      },
+      "stageSession": {
+        "replayKicker": "单阶段回演",
+        "makeupKicker": "正式补做",
+        "replayCompleteTitle": "这一段回演完了",
+        "makeupCompleteTitle": "这个角色已经补做",
+        "replayCompleteCopy": "主线进度没有改变。",
+        "makeupCompleteCopy": "“已跳过”已经替换为“已完成”。",
+        "returnLabel": "返回主线",
+        "exitLabel": "退出",
+        "replayBanner": "单阶段回演 · 不改主线进度",
+        "makeupBanner": "正式补做 · 完成后替换跳过记录"
+      },
+      "completion": {
+        "skippedTitle": "主线故事走完了",
+        "skippedCopy": "角色扮演按你的选择标记为已跳过。可以打开阶段地图补做，不会伪装成已经完成。",
+        "reviewLabel": "次日复习"
+      },
+      "saveFailureCopy": "进度暂时没有保存好。"
+    },
+    "themeId": "welcome-gallery",
+    "scene": {
+      "backgroundWide": "/poc/lesson5-6-experience/assets/scene-welcome-hall-v1-wide.avif",
+      "backgroundPortrait": "/poc/lesson5-6-experience/assets/scene-welcome-hall-v1-portrait.avif",
+      "actorEntityIds": [
+        "mr-blake",
+        "sophie"
+      ],
+      "contactSurfaceY": {
+        "wide": 75,
+        "portrait": 73
+      }
+    },
+    "roles": {
+      "teacher": {
+        "entityId": "mr-blake",
+        "label": "布莱克先生"
+      },
+      "student-group": {
+        "entityId": "sophie",
+        "label": "新生代表"
+      }
+    },
+    "support": {
+      "firstWrong": "先看人物或汽车，再回想刚才听到的句子。",
+      "secondWrong": "只判断当前关系，不用把整句都背出来。"
+    },
+    "completionContentRef": "NCE-U03-C-COMPLETION",
+    "stages": [
+      {
+        "stageId": "NCE-U03-S01",
+        "microtaskId": "NCE-U03-S01",
+        "lessonId": "lesson5",
+        "kind": "dialogue-comprehension",
+        "title": "迎新介绍开始了",
+        "instruction": "先听完整段，再回答教材问题",
+        "prompt": "Chang-woo 来自哪个国家？",
+        "startLabel": "开始听迎新对话",
+        "audioRefs": [
+          "L05-D01",
+          "L05-D02",
+          "L05-D03",
+          "L05-D04",
+          "L05-D05",
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-D09",
+          "L05-D10",
+          "L05-D11",
+          "L05-D12",
+          "L05-D13",
+          "L05-D14",
+          "L05-D15",
+          "L05-D16",
+          "L05-D17",
+          "L05-D18",
+          "L05-D19",
+          "L05-D20"
+        ],
+        "options": [
+          {
+            "optionId": "south-korean",
+            "label": "South Korean"
+          },
+          {
+            "optionId": "chinese",
+            "label": "Chinese"
+          },
+          {
+            "optionId": "japanese",
+            "label": "Japanese"
+          }
+        ],
+        "answerRule": {
+          "acceptedOptionId": "south-korean"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "discourse-understanding",
+          "targetEvidenceSourceRefs": [
+            "L05-Q01",
+            "L05-D01",
+            "L05-D02",
+            "L05-D03",
+            "L05-D04",
+            "L05-D05",
+            "L05-D06",
+            "L05-D07",
+            "L05-D08",
+            "L05-D09",
+            "L05-D10",
+            "L05-D11",
+            "L05-D12",
+            "L05-D13",
+            "L05-D14",
+            "L05-D15",
+            "L05-D16",
+            "L05-D17",
+            "L05-D18",
+            "L05-D19",
+            "L05-D20"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L05-D13"
+        ],
+        "exposureRefs": [
+          "L05-I01",
+          "L05-Q01",
+          "L05-D01",
+          "L05-D02",
+          "L05-D03",
+          "L05-D04",
+          "L05-D05",
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-D09",
+          "L05-D10",
+          "L05-D11",
+          "L05-D12",
+          "L05-D13",
+          "L05-D14",
+          "L05-D15",
+          "L05-D16",
+          "L05-D17",
+          "L05-D18",
+          "L05-D19",
+          "L05-D20"
+        ],
+        "evidenceRefs": [
+          "L05-Q01",
+          "L05-D01",
+          "L05-D02",
+          "L05-D03",
+          "L05-D04",
+          "L05-D05",
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-D09",
+          "L05-D10",
+          "L05-D11",
+          "L05-D12",
+          "L05-D13",
+          "L05-D14",
+          "L05-D15",
+          "L05-D16",
+          "L05-D17",
+          "L05-D18",
+          "L05-D19",
+          "L05-D20"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S02",
+        "microtaskId": "NCE-U03-S02",
+        "lessonId": "lesson5",
+        "kind": "entity-action",
+        "title": "新生站到了大家面前",
+        "instruction": "听完介绍，再点击对应人物",
+        "prompt": "布莱克先生刚介绍的是谁？",
+        "promptAudioRefs": [
+          "L05-D03",
+          "L05-D04",
+          "L05-D05"
+        ],
+        "entityIds": [
+          "mr-blake",
+          "sophie"
+        ],
+        "answerRule": {
+          "acceptedEntityId": "sophie"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "discourse-understanding",
+          "targetEvidenceSourceRefs": [
+            "L05-D03",
+            "L05-D04",
+            "L05-D05"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L05-D05"
+        ],
+        "exposureRefs": [
+          "L05-D03",
+          "L05-D04",
+          "L05-D05"
+        ],
+        "evidenceRefs": [
+          "L05-D03",
+          "L05-D04",
+          "L05-D05"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S03",
+        "microtaskId": "NCE-U03-S03",
+        "lessonId": "lesson5",
+        "kind": "choice",
+        "title": "第一次见面怎么说",
+        "instruction": "选一句真正适合初次见面的英语",
+        "prompt": "Sophie 刚认识 Hans，哪句话最合适？",
+        "options": [
+          {
+            "optionId": "meet",
+            "label": "Nice to meet you."
+          },
+          {
+            "optionId": "morning",
+            "label": "Good morning."
+          },
+          {
+            "optionId": "make",
+            "label": "What make is it?"
+          }
+        ],
+        "answerRule": {
+          "acceptedOptionId": "meet"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "communication-structure",
+          "targetEvidenceSourceRefs": [
+            "L05-D06",
+            "L05-D08"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L05-D08"
+        ],
+        "exposureRefs": [
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-N01",
+          "L05-N02",
+          "L05-N03"
+        ],
+        "evidenceRefs": [
+          "L05-D06",
+          "L05-D08"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S04",
+        "microtaskId": "NCE-U03-S04",
+        "lessonId": "lesson5",
+        "kind": "sequence-choice",
+        "title": "人和物品用不同的词",
+        "instruction": "同一页完成 Sophie 和汽车两次判断",
+        "rounds": [
+          {
+            "roundId": "sophie-pronoun",
+            "propEntityId": "sophie",
+            "prompt": "Sophie is a new student. ___ is French.",
+            "options": [
+              {
+                "optionId": "she",
+                "label": "She"
+              },
+              {
+                "optionId": "he",
+                "label": "He"
+              },
+              {
+                "optionId": "it",
+                "label": "It"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "she"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L05-D05"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L05-D05"
+            ]
+          },
+          {
+            "roundId": "mini-pronoun",
+            "propEntityId": "mini",
+            "prompt": "This is a Mini. ___ is English.",
+            "options": [
+              {
+                "optionId": "it",
+                "label": "It"
+              },
+              {
+                "optionId": "she",
+                "label": "She"
+              },
+              {
+                "optionId": "he",
+                "label": "He"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "it"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L06-P05"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L06-P05"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L05-D04",
+          "L05-D05",
+          "L06-P05",
+          "L06-E01"
+        ],
+        "evidenceRefs": [
+          "L05-D05",
+          "L06-P05"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S05",
+        "microtaskId": "NCE-U03-S05",
+        "lessonId": "lesson5",
+        "kind": "prompt-album",
+        "title": "五张星座名牌",
+        "instruction": "点开每名同学，听清对应国籍",
+        "groups": [
+          {
+            "groupId": "classmates",
+            "label": "迎新同学",
+            "sourceRefs": [
+              "L05-D07",
+              "L05-D10",
+              "L05-D13",
+              "L05-D16",
+              "L05-D19"
+            ],
+            "entityIds": [
+              "hans",
+              "naoko",
+              "changwoo",
+              "luming",
+              "xiaohui"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L05-W01",
+          "L05-W02",
+          "L05-W03",
+          "L05-W04",
+          "L05-W05",
+          "L05-W06",
+          "L05-W07",
+          "L05-W08",
+          "L05-W09",
+          "L05-W10",
+          "L05-W11",
+          "L05-W12",
+          "L05-W13",
+          "L05-W14",
+          "L05-N01",
+          "L05-N02",
+          "L05-N03",
+          "L05-D07",
+          "L05-D10",
+          "L05-D13",
+          "L05-D16",
+          "L05-D19"
+        ],
+        "evidenceRefs": [
+          "L05-W06",
+          "L05-W07",
+          "L05-W08",
+          "L05-W11",
+          "L05-W12",
+          "L05-W13"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S06",
+        "microtaskId": "NCE-U03-S06",
+        "lessonId": "lesson5",
+        "kind": "role-enactment",
+        "title": "轮到你主持迎新",
+        "instruction": "选布莱克先生或新生代表，把整段对话演一遍",
+        "prompt": "对方台词会自动播放。轮到你时先自己说，再揭晓英文。",
+        "roleMode": "choose-first",
+        "roles": [
+          "teacher",
+          "student-group"
+        ],
+        "dialogueRefs": [
+          "L05-D01",
+          "L05-D02",
+          "L05-D03",
+          "L05-D04",
+          "L05-D05",
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-D09",
+          "L05-D10",
+          "L05-D11",
+          "L05-D12",
+          "L05-D13",
+          "L05-D14",
+          "L05-D15",
+          "L05-D16",
+          "L05-D17",
+          "L05-D18",
+          "L05-D19",
+          "L05-D20"
+        ],
+        "exposureRefs": [
+          "L05-D01",
+          "L05-D02",
+          "L05-D03",
+          "L05-D04",
+          "L05-D05",
+          "L05-D06",
+          "L05-D07",
+          "L05-D08",
+          "L05-D09",
+          "L05-D10",
+          "L05-D11",
+          "L05-D12",
+          "L05-D13",
+          "L05-D14",
+          "L05-D15",
+          "L05-D16",
+          "L05-D17",
+          "L05-D18",
+          "L05-D19",
+          "L05-D20"
+        ],
+        "evidenceRefs": []
+      },
+      {
+        "stageId": "NCE-U03-S07",
+        "microtaskId": "NCE-U03-S07",
+        "lessonId": "lesson6",
+        "kind": "prompt-album",
+        "title": "汽车展台亮起来了",
+        "instruction": "六辆车都点一次，听完整句",
+        "groups": [
+          {
+            "groupId": "car-makes",
+            "label": "六辆汽车",
+            "sourceRefs": [
+              "L06-P01",
+              "L06-P02",
+              "L06-P03",
+              "L06-P04",
+              "L06-P05",
+              "L06-P06"
+            ],
+            "entityIds": [
+              "volvo",
+              "peugeot",
+              "mercedes",
+              "toyota",
+              "mini",
+              "ford"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L06-I01",
+          "L06-P01",
+          "L06-P02",
+          "L06-P03",
+          "L06-P04",
+          "L06-P05",
+          "L06-P06",
+          "L06-W01",
+          "L06-W02",
+          "L06-W03",
+          "L06-W04",
+          "L06-W05",
+          "L06-W06",
+          "L06-W07",
+          "L06-W08",
+          "L06-W09",
+          "L06-W10"
+        ],
+        "evidenceRefs": [
+          "L06-P01",
+          "L06-P02",
+          "L06-P03",
+          "L06-P04",
+          "L06-P05",
+          "L06-P06",
+          "L06-W01",
+          "L06-W02",
+          "L06-W03",
+          "L06-W04"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S08",
+        "microtaskId": "NCE-U03-S08",
+        "lessonId": "lesson6",
+        "kind": "sequence-choice",
+        "title": "看牌子找到汽车",
+        "instruction": "三个名字，分别找到对应车辆",
+        "rounds": [
+          {
+            "roundId": "find-volvo",
+            "prompt": "哪一辆是 Volvo？",
+            "entityIds": [
+              "volvo",
+              "peugeot",
+              "mercedes"
+            ],
+            "hideEntityLabelsUntilCorrect": true,
+            "answerRule": {
+              "acceptedEntityId": "volvo"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "word-form",
+              "targetEvidenceSourceRefs": [
+                "L06-P01"
+              ],
+              "intentionalPreSubmitSupport": [],
+              "candidateLabelVisibility": "after-correct"
+            },
+            "successAudioRefs": [
+              "L06-P01"
+            ]
+          },
+          {
+            "roundId": "find-peugeot",
+            "prompt": "哪一辆是 Peugeot？",
+            "entityIds": [
+              "ford",
+              "peugeot",
+              "toyota"
+            ],
+            "hideEntityLabelsUntilCorrect": true,
+            "answerRule": {
+              "acceptedEntityId": "peugeot"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "word-form",
+              "targetEvidenceSourceRefs": [
+                "L06-P02"
+              ],
+              "intentionalPreSubmitSupport": [],
+              "candidateLabelVisibility": "after-correct"
+            },
+            "successAudioRefs": [
+              "L06-P02"
+            ]
+          },
+          {
+            "roundId": "find-mini",
+            "prompt": "哪一辆是 Mini？",
+            "entityIds": [
+              "mini",
+              "mercedes",
+              "volvo"
+            ],
+            "hideEntityLabelsUntilCorrect": true,
+            "answerRule": {
+              "acceptedEntityId": "mini"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "word-form",
+              "targetEvidenceSourceRefs": [
+                "L06-P05"
+              ],
+              "intentionalPreSubmitSupport": [],
+              "candidateLabelVisibility": "after-correct"
+            },
+            "successAudioRefs": [
+              "L06-P05"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L06-P01",
+          "L06-P02",
+          "L06-P05"
+        ],
+        "evidenceRefs": [
+          "L06-P01",
+          "L06-P02",
+          "L06-P05"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S09",
+        "microtaskId": "NCE-U03-S09",
+        "lessonId": "lesson6",
+        "kind": "sequence-choice",
+        "title": "牌子和国家连在一起",
+        "instruction": "看汽车，再选择正确的国家属性",
+        "rounds": [
+          {
+            "roundId": "volvo-country",
+            "propEntityId": "volvo",
+            "prompt": "这辆 Volvo 是……",
+            "options": [
+              {
+                "optionId": "swedish",
+                "label": "Swedish"
+              },
+              {
+                "optionId": "french",
+                "label": "French"
+              },
+              {
+                "optionId": "german",
+                "label": "German"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "swedish"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "vocabulary-transfer",
+              "targetEvidenceSourceRefs": [
+                "L06-P01"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L06-P01"
+            ]
+          },
+          {
+            "roundId": "peugeot-country",
+            "propEntityId": "peugeot",
+            "prompt": "这辆 Peugeot 是……",
+            "options": [
+              {
+                "optionId": "american",
+                "label": "American"
+              },
+              {
+                "optionId": "french",
+                "label": "French"
+              },
+              {
+                "optionId": "japanese",
+                "label": "Japanese"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "french"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "vocabulary-transfer",
+              "targetEvidenceSourceRefs": [
+                "L06-P02"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L06-P02"
+            ]
+          },
+          {
+            "roundId": "mini-country",
+            "propEntityId": "mini",
+            "prompt": "这辆 Mini 是……",
+            "options": [
+              {
+                "optionId": "english",
+                "label": "English"
+              },
+              {
+                "optionId": "swedish",
+                "label": "Swedish"
+              },
+              {
+                "optionId": "american",
+                "label": "American"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "english"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "vocabulary-transfer",
+              "targetEvidenceSourceRefs": [
+                "L06-P05"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L06-P05"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L06-P01",
+          "L06-P02",
+          "L06-P05",
+          "L06-W02",
+          "L06-W03",
+          "L06-W04"
+        ],
+        "evidenceRefs": [
+          "L06-P01",
+          "L06-P02",
+          "L06-P05"
+        ]
+      },
+      {
+        "stageId": "NCE-U03-S10",
+        "microtaskId": "NCE-U03-S10",
+        "lessonId": "lesson6",
+        "kind": "sequence-choice",
+        "title": "把介绍带到新对象上",
+        "instruction": "人物和汽车混在一起，仍要选对主语",
+        "rounds": [
+          {
+            "roundId": "naoko-transfer",
+            "propEntityId": "naoko",
+            "prompt": "This is Naoko. ___ Japanese.",
+            "options": [
+              {
+                "optionId": "she-is",
+                "label": "She is"
+              },
+              {
+                "optionId": "he-is",
+                "label": "He is"
+              },
+              {
+                "optionId": "it-is",
+                "label": "It is"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "she-is"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L05-D10"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L05-D10"
+            ]
+          },
+          {
+            "roundId": "hans-transfer",
+            "propEntityId": "hans",
+            "prompt": "This is Hans. ___ German.",
+            "options": [
+              {
+                "optionId": "he-is",
+                "label": "He is"
+              },
+              {
+                "optionId": "she-is",
+                "label": "She is"
+              },
+              {
+                "optionId": "it-is",
+                "label": "It is"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "he-is"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L05-D07"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L05-D07"
+            ]
+          },
+          {
+            "roundId": "ford-transfer",
+            "propEntityId": "ford",
+            "prompt": "This is a Ford. ___ American.",
+            "options": [
+              {
+                "optionId": "it-is",
+                "label": "It is"
+              },
+              {
+                "optionId": "he-is",
+                "label": "He is"
+              },
+              {
+                "optionId": "she-is",
+                "label": "She is"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "it-is"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L06-P06"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L06-P06"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L05-D07",
+          "L05-D10",
+          "L06-P06",
+          "L06-E02"
+        ],
+        "evidenceRefs": [
+          "L05-D07",
+          "L05-D10",
+          "L06-P06"
+        ]
+      }
+    ]
+  },
+  "vocabulary": []
+}

@@ -63,6 +63,27 @@ test('runtime contract rejects application services, cookies, analytics, and hid
     'localStorage.setItem("canran:adventure-profile:v1", JSON.stringify({ currentDistrictId: null }))',
     'device-profile.js'
   ));
+  assert.doesNotThrow(() => assertStaticRuntimeSource(
+    'navigator.serviceWorker.register("/core/course-package-service-worker.js"); fetch("/course-package-manifest.json")',
+    'course-package-entry.js',
+    { allowCoursePackage: true }
+  ));
+  assert.throws(
+    () => assertStaticRuntimeSource(
+      'fetch("/api/progress")',
+      'course-package-entry.js',
+      { allowCoursePackage: true }
+    ),
+    /application endpoint/
+  );
+  assert.throws(
+    () => assertStaticRuntimeSource(
+      'indexedDB.open("course")',
+      'course-package-entry.js',
+      { allowCoursePackage: true }
+    ),
+    /non-V1 client persistence/
+  );
 });
 
 test('public resources reject cross-origin runtime dependencies', () => {

@@ -1,0 +1,610 @@
+{
+  "schema": 1,
+  "packageId": "NCE-U01@lesson1-2-v2.6-course-package-v1",
+  "unitId": "NCE-U01",
+  "revision": "lesson1-2-v2.6",
+  "scopePath": "/poc/lesson1-2-experience/",
+  "totalBytes": 3618933,
+  "entries": [
+    {
+      "url": "/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-192.webp",
+      "kind": "image",
+      "bytes": 10494,
+      "sha256": "71530b2b596664a52f416802cd1d63c760fe56df8484820802cff67f7a207ef4"
+    },
+    {
+      "url": "/assets/adventure-map/mascot/loader/frame-1-route-page-20260806-01-256.avif",
+      "kind": "image",
+      "bytes": 13910,
+      "sha256": "467965f1edef9cae980d2dc83e2ddf82b479460d3a163d6eb0f9352ba3e6b325"
+    },
+    {
+      "url": "/assets/adventure-map/mascot/loader/frame-2-route-page-20260806-01-192.webp",
+      "kind": "image",
+      "bytes": 10622,
+      "sha256": "15fc0639ed3ff68a9a1abaafcb23b0a2dc1dfb600d70e8148e06ed52d00b3be2"
+    },
+    {
+      "url": "/assets/adventure-map/mascot/loader/frame-3-route-page-20260806-01-192.webp",
+      "kind": "image",
+      "bytes": 10624,
+      "sha256": "81334f480fbab8e3bfc59bd81ff0c8ef2b1b65dcb6e9a102f74d9afcf84a2c1a"
+    },
+    {
+      "url": "/assets/adventure-map/mascot/loader/frame-4-route-page-20260806-01-192.webp",
+      "kind": "image",
+      "bytes": 10968,
+      "sha256": "0e4c4999e03e8012f403e352b76dae6f0ba8c2d2325abdada304e41c74654d79"
+    },
+    {
+      "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
+      "kind": "font",
+      "bytes": 19556,
+      "sha256": "b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36"
+    },
+    {
+      "url": "/assets/fonts/course-package/baloo-2-latin-700-8e7ffc9b993aa8ca.woff2",
+      "kind": "font",
+      "bytes": 19436,
+      "sha256": "8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0"
+    },
+    {
+      "url": "/assets/fonts/course-package/baloo-2-latin-800-3e36c57e37bda5b5.woff2",
+      "kind": "font",
+      "bytes": 18632,
+      "sha256": "3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7"
+    },
+    {
+      "url": "/assets/fonts/course-package/fredoka-latin-400-9cf74f703532ef61.woff2",
+      "kind": "font",
+      "bytes": 16076,
+      "sha256": "9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f"
+    },
+    {
+      "url": "/assets/fonts/course-package/fredoka-latin-500-7d76e44a94b02894.woff2",
+      "kind": "font",
+      "bytes": 16248,
+      "sha256": "7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620"
+    },
+    {
+      "url": "/assets/fonts/course-package/fredoka-latin-600-b62f2898de150f01.woff2",
+      "kind": "font",
+      "bytes": 16468,
+      "sha256": "b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294"
+    },
+    {
+      "url": "/assets/fonts/course-package/fredoka-latin-700-ee61b48acab42fcf.woff2",
+      "kind": "font",
+      "bytes": 15900,
+      "sha256": "ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-103-400-normal-50282467120fe9a4.woff2",
+      "kind": "font",
+      "bytes": 23904,
+      "sha256": "50282467120fe9a4ec71dfe55a00261fcc14347c1e3ba3170516ca9fe3e46c5f"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-104-400-normal-c0acd7d2ec350cd0.woff2",
+      "kind": "font",
+      "bytes": 24128,
+      "sha256": "c0acd7d2ec350cd08b694aec3b2b038f8070690c7be0dd6fdf6aa893004d5ef7"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-105-400-normal-1643c43d2ef8911a.woff2",
+      "kind": "font",
+      "bytes": 25252,
+      "sha256": "1643c43d2ef8911a9edfce955dd733a876addf1c8eee9e3690d787052b729df5"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-107-400-normal-a00d367d3e34938c.woff2",
+      "kind": "font",
+      "bytes": 25108,
+      "sha256": "a00d367d3e34938c5adbbb9896a44f2c950e82421528ae5db7d7bae6f18ea1c3"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-108-400-normal-02ff9f52b3f3d999.woff2",
+      "kind": "font",
+      "bytes": 25704,
+      "sha256": "02ff9f52b3f3d999f500ac5345813b181d4eb5c8e7ab8bf1572ed86cf8fe4bc1"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-109-400-normal-90b710608fba7170.woff2",
+      "kind": "font",
+      "bytes": 24836,
+      "sha256": "90b710608fba7170bc26a5e07798cdc7f2867d09da6d130c2b66e7aa780f944e"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-110-400-normal-0677f049a3bda243.woff2",
+      "kind": "font",
+      "bytes": 24580,
+      "sha256": "0677f049a3bda24328ac72de9372bf58be9dd81c681d1f30d1cf8021e5217bb0"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-111-400-normal-fc52cad520b7e133.woff2",
+      "kind": "font",
+      "bytes": 25508,
+      "sha256": "fc52cad520b7e13361004f18b9eac1c6d45ba1615efd019eb0ab11211a779731"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-112-400-normal-71edf2516f884ec6.woff2",
+      "kind": "font",
+      "bytes": 24532,
+      "sha256": "71edf2516f884ec6c7f86e02b8d8d745838607916e019a4d1c647975427f43b6"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-113-400-normal-94cac626ff9f7052.woff2",
+      "kind": "font",
+      "bytes": 23932,
+      "sha256": "94cac626ff9f705212f42a9cd55351ce1bb830547f4268e98d5d087254ffcdeb"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-114-400-normal-1c0efd5598ab32c8.woff2",
+      "kind": "font",
+      "bytes": 23052,
+      "sha256": "1c0efd5598ab32c81e0d6c3e9eb324ee4d045f02d0de508372f97a3e48d4e1ef"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-115-400-normal-8eb0b4a390ef7d69.woff2",
+      "kind": "font",
+      "bytes": 22160,
+      "sha256": "8eb0b4a390ef7d69b897bb4c44a9554e39d22f9d54850e433fd9ca58e329f625"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-116-400-normal-2b59b351ef274389.woff2",
+      "kind": "font",
+      "bytes": 21148,
+      "sha256": "2b59b351ef274389f150e5c62c7f55fcea92041e1ec7b8a92084631a1bbdff9a"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-117-400-normal-525c969bb8919f43.woff2",
+      "kind": "font",
+      "bytes": 20892,
+      "sha256": "525c969bb8919f43b0f8fcaae01460eb318861b901b1d06400eafb633ef579e0"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-118-400-normal-f41133a809f7f501.woff2",
+      "kind": "font",
+      "bytes": 18396,
+      "sha256": "f41133a809f7f501679910bb205a3828134f71d75958cda2332e8ac04a88e0cf"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-119-400-normal-9affe788f86c3de7.woff2",
+      "kind": "font",
+      "bytes": 4664,
+      "sha256": "9affe788f86c3de75263f096e2743f1fd43bf1546fc1b55faae6c78e6ade8b42"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-59-400-normal-f1ce77e7550b2d1f.woff2",
+      "kind": "font",
+      "bytes": 7424,
+      "sha256": "f1ce77e7550b2d1f62ca9abc37b9eb07bca4b8e5ab413ed1d1f5f4aaf294c028"
+    },
+    {
+      "url": "/assets/fonts/course-package/zcool-kuaile-latin-400-8cfcedbad8bb0e17.woff2",
+      "kind": "font",
+      "bytes": 5344,
+      "sha256": "8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93"
+    },
+    {
+      "url": "/core/candidate-pointing-feedback.css",
+      "kind": "style",
+      "bytes": 1376,
+      "sha256": "7f3cee40cac9aa8a0abf79a1bf62cc5d0a2877c45d9d4797ff0b85cba9f91b39"
+    },
+    {
+      "url": "/core/course-package-entry.js",
+      "kind": "script",
+      "bytes": 17781,
+      "sha256": "26c26b7088d073f01eb579eb344a1b41d3f7067a814562016849b490a908e484"
+    },
+    {
+      "url": "/core/course-package-installer.js",
+      "kind": "script",
+      "bytes": 14215,
+      "sha256": "665cba26950d957ed272d2049e750ab6f4edaed69134d841b8ca4eb65fd9531c"
+    },
+    {
+      "url": "/core/course-package-service-worker.js",
+      "kind": "script",
+      "bytes": 4038,
+      "sha256": "ec2611702b2d31892b069f2a2115d76df5fa316f4520a529624d530aa4fa447b"
+    },
+    {
+      "url": "/core/learning-ledger.js",
+      "kind": "script",
+      "bytes": 81855,
+      "sha256": "1e601bae09c23943e3c47a0a728236624fdda281ae446ab212b164718763de75"
+    },
+    {
+      "url": "/core/learning-microtask-scene.js",
+      "kind": "script",
+      "bytes": 174377,
+      "sha256": "1e38462f601e970d29eadc57a52834422492575cbcf81cbe9861806e837bf436"
+    },
+    {
+      "url": "/core/learning-outcome-practice.js",
+      "kind": "script",
+      "bytes": 38280,
+      "sha256": "4b0fd8d19ac60478badea6dc3863336c58938c14cd3dba9f990b3d5b41ca14c5"
+    },
+    {
+      "url": "/core/learning-runtime.js",
+      "kind": "script",
+      "bytes": 146993,
+      "sha256": "1623893f5fed81945eb6b3dd7ec3bb02547e2b7aaa6aefa318c489234f5ae2eb"
+    },
+    {
+      "url": "/core/learning-store.js",
+      "kind": "script",
+      "bytes": 4636,
+      "sha256": "b44e22191ef52bee95af732074aae2843b3aeaa2d9b6d80f7e236e0862c26ff1"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.avif",
+      "kind": "image",
+      "bytes": 69734,
+      "sha256": "6b0a0575b76c741799f53132d3af065c121538e8a70eecd914e1bed8f7b5d7e8"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.avif",
+      "kind": "image",
+      "bytes": 81289,
+      "sha256": "3064a8c1d030c6de78998feeaa72de63fcb8b9d074805714bfe7cfa1bc6291e2"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/handbag-prop-v1.avif",
+      "kind": "image",
+      "bytes": 60223,
+      "sha256": "bdb3151d47f670dbe311b1170ca8b7a4902117d295e33646f569954e312c3663"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/icons/arrow-counterclockwise.svg",
+      "kind": "image",
+      "bytes": 356,
+      "sha256": "632527a2ee2386b829fc7227937de40af6e2594d120a723d3341089cd3aca3da"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/icons/arrow-right.svg",
+      "kind": "image",
+      "bytes": 311,
+      "sha256": "edcfe1180dcc2afb750f1cb4b45524a5cdf6622a862b2e75320b4e4f057fc28c"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/icons/gear-fill.svg",
+      "kind": "image",
+      "bytes": 811,
+      "sha256": "dca7ce68ef3e4ff59217393da7c8946ac8be1925d3e4d6adea1d2638fab85db8"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/icons/heart-fill.svg",
+      "kind": "image",
+      "bytes": 241,
+      "sha256": "2903966b0b1a314d61485658ec700fea9ac4b996621fbbc08117da1f35896b69"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/icons/play-fill.svg",
+      "kind": "image",
+      "bytes": 272,
+      "sha256": "ae8baa815c8aa11eed60d41beb8e62b9a51cab620d3264707979e118ca576498"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/icons/star-fill.svg",
+      "kind": "image",
+      "bytes": 399,
+      "sha256": "d14fae3fd37ee59d049d37423e610e58cf517e6a544b5dc52f7a63fa28a57e7e"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-book-v1.avif",
+      "kind": "image",
+      "bytes": 63810,
+      "sha256": "586b9f73734257979565736bc763862fb749cc6d0596772fc0783c925ff9dc7a"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-coat-v1.avif",
+      "kind": "image",
+      "bytes": 61749,
+      "sha256": "faa940738113bee09529adf59a059f0422f3e89e8db61388222a2f23293faa31"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-dress-v1.avif",
+      "kind": "image",
+      "bytes": 49164,
+      "sha256": "e23b3930aae0c6be23a026e5c29f53cae0ce3fc69ab340027af410a1ad9e14f4"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-pen-v1.avif",
+      "kind": "image",
+      "bytes": 25460,
+      "sha256": "22515e04a5ad5a1d9c57cdb046ea1825a27181e21aeb023ddaa9e6539c741783"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-pencil-v1.avif",
+      "kind": "image",
+      "bytes": 30667,
+      "sha256": "101a9b4554ca72e55a2afff0c8f3289062cffb31421e046f27054bd456aef074"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-shirt-v1.avif",
+      "kind": "image",
+      "bytes": 51500,
+      "sha256": "de49387e4a20ddaff2e48761518488318005a8fbd05146c43ac6e718ef963c0e"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-skirt-v1.avif",
+      "kind": "image",
+      "bytes": 60043,
+      "sha256": "b905956e04f07b72532223e0b62ea6a129d544cf380724cbf9f31f804d46a528"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/item-watch-v1.avif",
+      "kind": "image",
+      "bytes": 61973,
+      "sha256": "6aadb6d2bca0d594c3c5dec8b123bf92d15322071bb9a02308845efab5bfab3b"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.avif",
+      "kind": "image",
+      "bytes": 244058,
+      "sha256": "890b70306ba441fdb89281d6b3aed57682abce6817f6da7ba2faf4306021d119"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/scene-car-v2.avif",
+      "kind": "image",
+      "bytes": 60941,
+      "sha256": "16e231222dd17d7aa3862956dc58fce42aa5a535bed93f443bebec1ede42c69d"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/scene-house-v2.avif",
+      "kind": "image",
+      "bytes": 61772,
+      "sha256": "a9f92cf73432c3178d9086411c149042be04881499a90b16f4ec896b0d3122ce"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/starlight-audio-replay-v1.png",
+      "kind": "image",
+      "bytes": 80265,
+      "sha256": "82e06e36b160ba19ce7c688e2d95bbba229de4b81befb5dffe01d44b6d571c05"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif",
+      "kind": "image",
+      "bytes": 125880,
+      "sha256": "3c0e0107be64918505fb6493a4de95decd89210bfe9cd48151c8aa6cf36b1a68"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/starlight-station-bg-v2-portrait.avif",
+      "kind": "image",
+      "bytes": 145129,
+      "sha256": "82b9927c20250a5733ad4f935d72daa9cfd6a831f11b7674723e56c56c3c0a1f"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/starlight-station-bg-v2-wide.avif",
+      "kind": "image",
+      "bytes": 116737,
+      "sha256": "c18eba2c0eaf13cf474204537dcd1af1d5bfd47f7c6ef2a4876d89989d98a4cf"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.avif",
+      "kind": "image",
+      "bytes": 110487,
+      "sha256": "bb134cae7332c5601ab7e4c2a7aac7970ab9dc0bea62bf367f9ea20b0e1ee755"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d01.mp3",
+      "kind": "audio",
+      "bytes": 16749,
+      "sha256": "d118425d4d360f2e0bdede4ab0a0552466efb99ce992a8940936618606b04c64"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d02.mp3",
+      "kind": "audio",
+      "bytes": 11277,
+      "sha256": "77772244a1df3f087c0c8bb7e8a14acdcd2cd6a2fb7a37d7d0b53513a64acb74"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d03.mp3",
+      "kind": "audio",
+      "bytes": 23373,
+      "sha256": "67d9519af7c9ccc673b73a93e73205eaba70c0a59767158709383ae6c55b420b"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d04.mp3",
+      "kind": "audio",
+      "bytes": 11853,
+      "sha256": "741033811d6f3a49586ba91605913aad43e50be1f88bb0c5da275c15d153fd1a"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d05.mp3",
+      "kind": "audio",
+      "bytes": 23373,
+      "sha256": "c57997a99e2744bcd88d567f6abd0b1af46fa836616cf717fa94bc4533573dc5"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d06.mp3",
+      "kind": "audio",
+      "bytes": 15885,
+      "sha256": "34b03316a2b5e0c2880cd90622e69ad21b08d4bb4153197b072727e24f237394"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-d07.mp3",
+      "kind": "audio",
+      "bytes": 17325,
+      "sha256": "182644288c0ddc4ed5fafe099a1ecb4ea0a17f020672b0015b50a7c28f9a7855"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w01.mp3",
+      "kind": "audio",
+      "bytes": 11277,
+      "sha256": "41ca6cc649ca205daf717052e87a38c4f30c35def888f2e6e6bb2c8459cf80ef"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w02.mp3",
+      "kind": "audio",
+      "bytes": 7245,
+      "sha256": "7dfd4ab488d695c9a0efa7493eb81445c7b7d6d3082036afadd1efe52db1edfb"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w03.mp3",
+      "kind": "audio",
+      "bytes": 8973,
+      "sha256": "b67de118cdec7c00a43d95a8ab1d38679a87fb171a4ed4e0062295daf7550308"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w04.mp3",
+      "kind": "audio",
+      "bytes": 7821,
+      "sha256": "866caa64e9033da91c54950ddd705e601b2126ea947a630353bdd14a6d43162a"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w05.mp3",
+      "kind": "audio",
+      "bytes": 8973,
+      "sha256": "5921c0dfd967765df371aeb68934c48989efe8de076e31daaed84c96102587b8"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w06.mp3",
+      "kind": "audio",
+      "bytes": 7821,
+      "sha256": "ece1b6c685dad9d514eaaf8b793c43d95058bc915fc085d70a6d36c06de6d6c0"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w07.mp3",
+      "kind": "audio",
+      "bytes": 10989,
+      "sha256": "499bff59609fe4cb506fbbb375775afbe89dddceb787e2ccab1bd3883a440ed1"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w08.mp3",
+      "kind": "audio",
+      "bytes": 9549,
+      "sha256": "5f6122c9e13fdf173cedb13c6d8537ea185428eeea4d9805dfa050031390f5a0"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w09.mp3",
+      "kind": "audio",
+      "bytes": 6957,
+      "sha256": "b2d5b42d861e7af56a17bb14a15137a531f1755e47566f3d398d65d2b1c5c76b"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w10.mp3",
+      "kind": "audio",
+      "bytes": 9261,
+      "sha256": "2871797695cb798ec756d6d18f3265e2001bc149e00b3c52b2959c7c8c22d660"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l01-w11.mp3",
+      "kind": "audio",
+      "bytes": 11853,
+      "sha256": "622e7b96752246db831b7274ecc8303d3e4f79e269c04964c82f686ffba3d1c2"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w01.mp3",
+      "kind": "audio",
+      "bytes": 8109,
+      "sha256": "3bc026ae3c241865828bbdf9fbcd591dea82ae8aed922af15363dd970a80dd5f"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w02.mp3",
+      "kind": "audio",
+      "bytes": 9837,
+      "sha256": "cff4142e249ca95819239a17e7043f29f7a43e0759e796ee13ae7ae08b712ad4"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w03.mp3",
+      "kind": "audio",
+      "bytes": 8397,
+      "sha256": "e2b1fa75b8452c7a07471a0dc96bb7bffebeede703b35bc9124f06be8c6bfaa2"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w04.mp3",
+      "kind": "audio",
+      "bytes": 9261,
+      "sha256": "a305f2bb197ba2d9c351025eaf57cdc74fc1b007aacfae9e65a145375fbedbdf"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w05.mp3",
+      "kind": "audio",
+      "bytes": 8397,
+      "sha256": "78aaeced5faf1da980fa52bffecaa54a6f903c8da5d5ceb37a1a199ebfe5d36a"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w06.mp3",
+      "kind": "audio",
+      "bytes": 9837,
+      "sha256": "0b97030065844fb780e7d1a25e0a190da9aefe554fd020f18efd6f4a007793bf"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w07.mp3",
+      "kind": "audio",
+      "bytes": 9837,
+      "sha256": "152519e2a59eaa4d3f4918c994be85d005c92c974bc1e638daf44f916e902534"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w08.mp3",
+      "kind": "audio",
+      "bytes": 8109,
+      "sha256": "189312ec8ff5c13cdfeff053e72559d2e1a4137950eaad5549a3ecab6a2137e2"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w09.mp3",
+      "kind": "audio",
+      "bytes": 8397,
+      "sha256": "8d156b887199053c4e802103c0b07b993f7ef7696599dd1de1323c965c50d005"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/l02-w10.mp3",
+      "kind": "audio",
+      "bytes": 8973,
+      "sha256": "bbb6815fef75baa4b4e1e7db2975fa5d1c875772dc3c2d1cefbea62098e564f0"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/nce-u01-c-q-car.mp3",
+      "kind": "audio",
+      "bytes": 19053,
+      "sha256": "cb3fadcdbdbca5162aff32c8f5ac218d3ae14d52e30883ebb17614f4c547dd03"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/nce-u01-c-q-coat.mp3",
+      "kind": "audio",
+      "bytes": 18765,
+      "sha256": "df21029b3c8290d10d34a488f41a5315c607393956de9630db103d32c696d1f4"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/nce-u01-c-q-house.mp3",
+      "kind": "audio",
+      "bytes": 18189,
+      "sha256": "60a6b8511e1c42bea017c391d34e3e0538cce11004bd1ba5aa23ebdaa61f75b8"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/audio/nce-u01-c-q-watch.mp3",
+      "kind": "audio",
+      "bytes": 19053,
+      "sha256": "93214bab4ac2341b435414685681edc4940833d3713c61d3f08d35ed49fb0703"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/course-fonts.css",
+      "kind": "style",
+      "bytes": 27980,
+      "sha256": "07fefd454bac5c227492cf586edc023d4abc70f8d8ab349531d98720b7d9fd33"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/course-package/unit-catalog.json",
+      "kind": "data",
+      "bytes": 402555,
+      "sha256": "d3b8e77405022b65e37198b3e5066454542324439ef437c4630d4e80ead2067b"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/experience.css",
+      "kind": "style",
+      "bytes": 205162,
+      "sha256": "7d6b59c18e66847bdba069980a617fde8b4ca14d473688b6975adcbe83d4aecd"
+    },
+    {
+      "url": "/poc/lesson1-2-experience/experience.js",
+      "kind": "script",
+      "bytes": 2148,
+      "sha256": "fcfe4209fc6859af60297796cb54e84c52a7a46b9fee62fa2fcaf4de812b257f"
+    }
+  ]
+}

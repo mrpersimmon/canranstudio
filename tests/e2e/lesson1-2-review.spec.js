@@ -195,6 +195,11 @@ test('a due two-cell visit uses a changed catalog context, visible English, and 
   expect(state.cellCount).toBe(2);
   expect(state.estimatedSeconds).toBeGreaterThanOrEqual(45);
   expect(state.estimatedSeconds).toBeLessThanOrEqual(90);
+  await expect(page.locator('.review-timing')).toHaveCount(0);
+  await expect(page.locator('.review-target, .review-audio__english')).toHaveCount(1);
+  await expect(page.locator(
+    '[data-copy-purpose="task"][data-copy-priority="primary"]:visible'
+  )).toHaveCount(1);
   await expect(page.locator('[data-review-context]')).toHaveAttribute(
     'data-review-context-cell',
     state.currentCell.reviewContextId
@@ -210,6 +215,7 @@ test('a due two-cell visit uses a changed catalog context, visible English, and 
 
   await playAndFinishPrompt(page);
   state = await snapshot(page);
+  await expect(page.locator('.review-target, .review-audio__english')).toHaveCount(1);
   const challenge = microtask('L02-M11').steps[0].challenges.find(candidate => (
     candidate.challengeRef === state.currentCell.authoredChallengeRef
   ));
@@ -376,4 +382,55 @@ test('two independently recovered cells complete and persist the short visit', a
     .toBe('independent-retrieval');
   expect(cells['NCE-U01-T01:L02-W02:audio-form-supported'].lastReviewOutcome)
     .toBe('independent-retrieval');
+});
+
+test('the watch-question review keeps the same five-token editable assembly contract', async ({ page }) => {
+  await openReview(page, seededLedgerRecord(['L02-M15']));
+  await startReview(page);
+
+  let state = await snapshot(page);
+  expect(state.currentCell.authoredChallengeRef).toBe('L02-M15:C02');
+  await playAndFinishPrompt(page);
+  await chooseEntity(page, 'watch');
+  await expect.poll(async () => (await snapshot(page)).currentIndex).toBe(1);
+
+  state = await snapshot(page);
+  expect(state.currentCell.authoredChallengeRef).toBe('L02-M15:C01');
+  const challenge = microtask('L02-M15').steps[0].challenges[0];
+  const accepted = challenge.answerRule.acceptedOrder;
+  expect(state.currentCell.candidateContentRefs).toHaveLength(5);
+  expect(state.currentCell.candidateContentRefs).not.toEqual(accepted);
+
+  const option = identifier => page.locator(
+    `[data-review-option][data-option-id="${identifier}"]`
+  );
+  const track = page.locator('[data-action="review-remove-block"]');
+  const wrongOrder = [accepted[1], accepted[0], ...accepted.slice(2)];
+  for (const identifier of wrongOrder) await option(identifier).click();
+  await expect(track).toHaveCount(5);
+  await expect.poll(async () => (await snapshot(page)).phase).toBe('awaiting-response');
+  await expect(page.locator('[data-action="review-reset-blocks"]')).toHaveText(
+    unit.experience.uiCopy.interaction.reorderLabel
+  );
+  await track.first().click();
+  await expect(track).toHaveCount(4);
+  await page.locator('[data-action="review-reset-blocks"]').click();
+
+  for (const identifier of wrongOrder) await option(identifier).click();
+  await expect.poll(async () => (await snapshot(page)).phase).toBe('awaiting-response');
+  state = await snapshot(page);
+  expect(state.supportLevel).toBe('partial-cue');
+  const boundaryValues = await page.locator(
+    '.review-answer-area .is-boundary-cue'
+  ).evaluateAll(elements => [...new Set(elements.map(element => element.dataset.optionId))].sort());
+  expect(boundaryValues).toEqual([accepted[0], accepted.at(-1)].sort());
+  await page.locator('[data-action="review-reset-blocks"]').click();
+
+  for (const identifier of accepted) await option(identifier).click();
+  await expect.poll(async () => (await snapshot(page)).phase).toBe('audio-playing');
+  state = await snapshot(page);
+  expect(state.audio).toMatchObject({
+    purpose: 'correct-feedback',
+    segments: [{ text: 'Is this your watch?' }]
+  });
 });

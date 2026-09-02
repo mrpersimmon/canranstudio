@@ -34,6 +34,9 @@ function fullRoleEnactmentConfig() {
   return {
     practiceId: 'L01-M12:role-enactment', kind: 'role-enactment',
     castOrder: ['station-keeper', 'handbag-owner'], propEntityIds: ['handbag'],
+    turnHints: dialogueTurnRefs.map(turnRef => ({
+      turnRef, intent: `意图 ${turnRef}`, openingChunk: `开头 ${turnRef}`
+    })),
     rounds: [
       {
         roundId: 'keeper-round', roleEntityId: 'station-keeper', partnerEntityId: 'handbag-owner',
@@ -325,7 +328,8 @@ test('formal role enactment starts from role selection, completes either role fi
     saveRound({ roundId }) {
       savedRoundIds.push(roundId);
       return { persisted: true };
-    }
+    },
+    skipRound: () => ({ persisted: true })
   });
 
   const entered = runtime.enter({ completedRoundIds: [] });
@@ -370,7 +374,8 @@ test('formal role enactment starts from role selection, completes either role fi
 
 test('formal role enactment restores completed roles while an unfinished role restarts at D01', () => {
   const runtime = create(fullRoleEnactmentConfig(), {
-    saveRound: () => ({ persisted: true })
+    saveRound: () => ({ persisted: true }),
+    skipRound: () => ({ persisted: true })
   });
   runtime.enter({ completedRoundIds: ['keeper-round'] });
   assert.equal(runtime.snapshot().phase, 'role-selection');
@@ -379,6 +384,70 @@ test('formal role enactment restores completed roles while an unfinished role re
   const effects = runtime.dispatch({ type: 'role/select', roundId: 'owner-round' });
   assert.equal(runtime.snapshot().currentTurn.turnRef, 'L01-D01');
   assert.equal(audioEffect(effects).audioRef, 'L01-D01');
+});
+
+test('formal role enactment gives two reset hints and skips only an active stable role', () => {
+  const skippedRoundIds = [];
+  const runtime = create(fullRoleEnactmentConfig(), {
+    saveRound: () => ({ persisted: true }),
+    skipRound({ roundId }) {
+      if (!skippedRoundIds.includes(roundId)) skippedRoundIds.push(roundId);
+      return { persisted: true, completedRoundIds: [], skippedRoundIds };
+    }
+  });
+  runtime.enter({ completedRoundIds: [], skippedRoundIds: [] });
+  runtime.dispatch({ type: 'role/select', roundId: 'keeper-round' });
+  assert.equal(runtime.snapshot().phase, 'awaiting-reveal');
+
+  runtime.dispatch({ type: 'hint/show' });
+  assert.deepEqual(runtime.snapshot().currentHint, {
+    turnRef: 'L01-D01', intent: '意图 L01-D01', openingChunk: null
+  });
+  runtime.dispatch({ type: 'hint/show' });
+  assert.equal(runtime.snapshot().currentHint.openingChunk, '开头 L01-D01');
+  assert.equal(runtime.dispatch({ type: 'hint/show' })[0].reason, 'hint-exhausted');
+  assert.equal(runtime.snapshot().hintLevel, 2);
+
+  let effects = runtime.dispatch({ type: 'role/skip' });
+  assert.equal(effects.at(-1).type, 'practice/round-skipped');
+  assert.equal(runtime.snapshot().phase, 'role-selection');
+  assert.deepEqual(runtime.snapshot().skippedRoundIds, ['keeper-round']);
+
+  effects = runtime.dispatch({ type: 'role/select', roundId: 'owner-round' });
+  const partnerAudio = audioEffect(effects);
+  assert.equal(runtime.dispatch({ type: 'role/skip' })[0].reason, 'role-skip-not-available');
+  runtime.dispatch(audioAction('audio/failed', partnerAudio, { reason: 'media-error' }));
+  assert.equal(runtime.snapshot().phase, 'audio-retry');
+  effects = runtime.dispatch({ type: 'role/skip' });
+  assert.equal(effects.at(-1).allRolesDisposed, true);
+  assert.equal(effects.at(-1).allRolesComplete, false);
+  assert.deepEqual(runtime.snapshot().skippedRoundIds, ['keeper-round', 'owner-round']);
+  assert.equal(runtime.snapshot().phase, 'role-selection');
+});
+
+test('a failed role skip stays on retry and advances only after durable readback', () => {
+  let attempts = 0;
+  const runtime = create(fullRoleEnactmentConfig(), {
+    saveRound: () => ({ persisted: true }),
+    skipRound({ roundId }) {
+      attempts += 1;
+      return attempts === 1
+        ? { persisted: false, reason: 'unavailable' }
+        : { persisted: true, completedRoundIds: [], skippedRoundIds: [roundId] };
+    }
+  });
+  runtime.enter({ completedRoundIds: [], skippedRoundIds: [] });
+  runtime.dispatch({ type: 'role/select', roundId: 'keeper-round' });
+
+  let effects = runtime.dispatch({ type: 'role/skip' });
+  assert.equal(effects[0].type, 'practice/round-skip-save-failed');
+  assert.equal(runtime.snapshot().phase, 'round-skip-save-failed');
+  assert.deepEqual(runtime.snapshot().skippedRoundIds, []);
+
+  effects = runtime.dispatch({ type: 'role/save-retry' });
+  assert.equal(effects[0].type, 'practice/round-skipped');
+  assert.equal(runtime.snapshot().phase, 'role-selection');
+  assert.deepEqual(runtime.snapshot().skippedRoundIds, ['keeper-round']);
 });
 
 test('manual dialogue reveals exactly one line, uses two hint levels, and replay never advances', () => {

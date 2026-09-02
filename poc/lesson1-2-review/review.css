@@ -392,11 +392,30 @@ button:focus-visible {
   border-radius: 14px;
 }
 
-.review-order-track span {
+.review-order-track button {
+  min-height: 44px;
   padding: 4px 8px;
+  border: 0;
   border-radius: 9px;
+  color: #412a1b;
   background: #d2f2e9;
   font-weight: 800;
+}
+
+.review-order-track .review-order-reset {
+  border: 2px solid #9a7654;
+  background: #fffaf0;
+}
+
+.review-order-track .is-boundary-cue,
+.review-option.is-boundary-cue {
+  outline: 3px solid #efb93e;
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .review-order-track { flex-wrap: wrap; }
+  .review-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 .review-feedback {

@@ -9,10 +9,23 @@ import tempfile
 import numpy as np
 import soundfile as sf
 import kokoro.pipeline as kokoro_pipeline
+import kokoro.model as kokoro_model
 from kokoro import KPipeline
+from huggingface_hub import hf_hub_download
+import torch
 
 
 SAMPLE_RATE = 24000
+MODEL_REPO_ID = "hexgrad/Kokoro-82M"
+MODEL_REVISION = "f3ff3571791e39611d31c381e3a41a3af07b4987"
+
+
+def pinned_hf_download(*args, **kwargs):
+    repo_id = kwargs.get("repo_id") or (args[0] if args else None)
+    if repo_id != MODEL_REPO_ID:
+        raise RuntimeError(f"Unexpected Kokoro model repository: {repo_id}")
+    kwargs["revision"] = MODEL_REVISION
+    return hf_hub_download(*args, **kwargs)
 
 
 def audio_from_result(result):
@@ -54,17 +67,22 @@ def main():
     if not items:
         raise ValueError("No catalog audio items supplied")
 
-    # The bundled macOS espeak-ng wheel currently exits the process while
-    # constructing its out-of-dictionary fallback. This unit contains only
-    # curriculum words covered by Kokoro's American English lexicon, so fail
-    # closed instead of invoking an unverified fallback phonemizer.
+    # The bundled macOS espeak-ng wheel can exit the process while constructing
+    # its out-of-dictionary fallback. Keep that unverified fallback disabled and
+    # explicitly reject any alphabetic token that Kokoro's American English
+    # lexicon cannot phonemize; silently dropping a curriculum word is worse
+    # than stopping the candidate build.
     def reject_fallback(*_args, **_kwargs):
         raise RuntimeError("espeak fallback disabled for the frozen candidate pack")
 
+    np.random.seed(0)
+    torch.manual_seed(0)
+    kokoro_pipeline.hf_hub_download = pinned_hf_download
+    kokoro_model.hf_hub_download = pinned_hf_download
     kokoro_pipeline.espeak.EspeakFallback = reject_fallback
     pipeline = KPipeline(
         lang_code="a",
-        repo_id="hexgrad/Kokoro-82M",
+        repo_id=MODEL_REPO_ID,
         device="cpu",
     )
     for index, item in enumerate(items, start=1):
@@ -73,17 +91,35 @@ def main():
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         render_mode = item.get("renderMode", "natural-utterance")
         text = item["text"]
-        synthesis_text = text
+        synthesis_text = item.get("synthesisText", text)
         if render_mode == "context-cropped-lexeme-v1":
             label = "phrase" if " " in text.strip() else "word"
             synthesis_text = f"Here is the {label} {text}. {text}."
+        _, phoneme_tokens = pipeline.g2p(synthesis_text)
+        phoneme_overrides = {
+            key.lower(): value
+            for key, value in item.get("phonemeOverrides", {}).items()
+        }
+        for token in phoneme_tokens:
+            override = phoneme_overrides.get(token.text.lower())
+            if override:
+                token.phonemes = override
+        unresolved = [
+            token.text
+            for token in phoneme_tokens
+            if any(character.isalpha() for character in token.text)
+            and not token.phonemes
+        ]
+        if unresolved:
+            raise RuntimeError(
+                f"Kokoro lexicon cannot phonemize {source_id}: {unresolved}"
+            )
         chunks = [
             np.asarray(audio_from_result(result), dtype=np.float32)
-            for result in pipeline(
-                synthesis_text,
+            for result in pipeline.generate_from_tokens(
+                phoneme_tokens,
                 voice=item["voice"],
                 speed=float(item["speed"]),
-                split_pattern=r"\n+",
             )
         ]
         if not chunks:

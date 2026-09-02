@@ -82,9 +82,9 @@ Lesson 1–12 的完整映射如下：
 
 ### 3.1 稳定结构注册表
 
-“源事实锚点”属于教材事实层；“教材派生解释”属于带证据与置信度的 `I`；“课程设计引用”属于独立课程设计层，仅引用 Lesson 3–4 启动包中已接受的 Target，不把课程决定写回教材事实。
+“源事实锚点”属于教材事实层；“教材派生解释”属于带证据与置信度的 `I`；“课程设计引用”属于独立课程设计层，引用已登记的 Lesson 3–8 Target，不把课程决定写回教材事实。U03、U04 在页面实现前把原有粗结构继续拆成可由 Target 稳定引用的细结构；粗结构保留为课程审计总览，不与细结构形成第二套事实。
 
-| structureId | mapNodeId 回链 | 源事实锚点 | 教材派生解释（I） | 课程设计引用（已接受 U02 Target） |
+| structureId | mapNodeId 回链 | 源事实锚点 | 教材派生解释（I） | 课程设计引用（已登记 Target） |
 |---|---|---|---|---|
 | `GS-OWNERSHIP-QUESTION-SG` | `GSM-U01`、`GSM-U02` | L1–2 `Is this your ...?`，PDF p.35–38；L3–4 复现，PDF p.39–42 | 单数物品归属核验问句；U01 首次作为核心、U02 变化巩固（高） | `NCE-U02-T02` |
 | `GS-BE-SHORT-ANSWER-SG` | `GSM-U01`、`GSM-U02` | L1 `Yes, it is.`，PDF p.35–36；L3 `No, it isn't.`，PDF p.39–40 | 单数 `be` 问句的肯定／否定短答形成正负对照（高） | `NCE-U02-T02` |
@@ -100,6 +100,15 @@ Lesson 1–12 的完整映射如下：
 | `GS-WHAT-IDENTITY-QUESTION` | `GSM-U03` | L6 `What make is it?`，PDF p.45–46 | `What ...?` 首次作为身份／品牌信息问句核心出现（高） | — |
 | `GS-BE-I-YOU` | `GSM-U04` | L7–8 `I am/You are/Are you ...?`，PDF p.47–50 | `be` 人称系统扩展到第一、第二人称及相应短答（高） | — |
 | `GS-JOB-NATIONALITY-QUESTION` | `GSM-U04` | L7–8 国籍与职业问答，PDF p.47–50 | 两类 `What ...?` 问句用于交换人物身份信息（高） | — |
+| `GS-THIS-IS-INTRODUCTION` | `GSM-U03` | L5 `This is ...` 引见五名新同学，PDF p.43–44 | `This is ...` 从指物扩展为引见人物，并与初见问候构成交际链（高） | `NCE-U03-T02` |
+| `GS-SUBJECT-PRONOUN-SG` | `GSM-U03`、`GSM-U04` | L5–8 的 `he/she/it/I/you` 正文与练习，PDF p.43–50 | 主语代词随人物、物品和说话视角变化（高） | `NCE-U03-T03,T05`；`NCE-U04-T05` |
+| `GS-BE-AFFIRMATIVE-SG` | `GSM-U03` | L5–6 `He/She/It is ...`，PDF p.43–46 | 单数肯定陈述用于国籍和汽车属性连接（高） | `NCE-U03-T03,T04` |
+| `GS-I-AM` | `GSM-U04` | L7 `I am ... / I'm ...`，PDF p.47–48 | 第一人称以 `am` 自我介绍（高） | `NCE-U04-T02` |
+| `GS-MY-NAME-IS` | `GSM-U04` | L7 `My name is ... / My name's ...`，PDF p.47–48 | 姓名表达及其缩写用于双向自我介绍（高） | `NCE-U04-T02` |
+| `GS-BE-QUESTION-YOU` | `GSM-U04` | L7 `Are you ...?`，PDF p.47–48 | 第二人称 `be` 一般疑问用于核对国籍或身份（高） | `NCE-U04-T03` |
+| `GS-BE-SHORT-ANSWER-I` | `GSM-U04` | L7 `Yes, I am. / No, I am not.`，PDF p.47–48 | 第一人称肯定／否定短答形成对照（高） | `NCE-U04-T03` |
+| `GS-WHATS-YOUR-JOB` | `GSM-U04` | L7–8 `What's your job?`，PDF p.47–50 | 职业问句在人物交流与十个替换提示中复现（高） | `NCE-U04-T04` |
+| `GS-I-AM-A-JOB` | `GSM-U04` | L7–8 `I'm a/an ...`，PDF p.47–50 | 职业回答把 `I am` 与 `a/an + job` 组合使用（高） | `NCE-U04-T04` |
 | `GS-HOW-BE-STATE-QUESTION` | `GSM-U05` | L9–10 `How are you?/How is ...?`，PDF p.51–54 | `How + be + subject` 进入状态问答（高） | — |
 | `GS-BE-ADJECTIVE-PREDICATE` | `GSM-U05` | L9–10 人物与状态／外观形容词操练，PDF p.51–54 | `be + adjective` 成为本单元主要述谓变化之一（中） | — |
 | `GS-IMPERATIVE-LOOK` | `GSM-U05` | L10 `Look at ...` 及操练，PDF p.53–54 | 祈使句用于引导注意并触发人物描述（中） | — |

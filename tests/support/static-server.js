@@ -47,10 +47,14 @@ const server = http.createServer(async (request, response) => {
 
   try {
     const body = await fs.readFile(file);
-    response.writeHead(200, {
+    const headers = {
       'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream',
       'Cache-Control': 'no-store'
-    });
+    };
+    if (file === path.join(ROOT, 'core/course-package-service-worker.js')) {
+      headers['Service-Worker-Allowed'] = '/';
+    }
+    response.writeHead(200, headers);
     response.end(request.method === 'HEAD' ? undefined : body);
   } catch (error) {
     if (error.code === 'ENOENT' || error.code === 'EISDIR') {

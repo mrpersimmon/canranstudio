@@ -49,6 +49,15 @@
     return ordered;
   }
 
+  function shuffledWithConstraint(values, seed, constraint, acceptedOrder) {
+    const ordered = shuffled(values, seed);
+    if (constraint !== 'not-accepted-order' || ordered.length < 2) return ordered;
+    const accepted = Array.isArray(acceptedOrder) ? acceptedOrder : [];
+    const matches = ordered.length === accepted.length
+      && accepted.every((value, index) => ordered[index] === value);
+    return matches ? [...ordered.slice(1), ordered[0]] : ordered;
+  }
+
   function evaluateRule(rule, response, path = []) {
     if (!rule || typeof rule !== 'object' || !response || typeof response !== 'object') {
       return { correct: false, mismatchPath: path };
@@ -219,8 +228,11 @@
       const candidateSourceRefs = shuffled(
         challenge.candidateSourceRefs || [], candidateShuffleSeeds.sources
       );
-      const candidateContentRefs = shuffled(
-        challenge.candidateContentRefs || [], candidateShuffleSeeds.contents
+      const candidateContentRefs = shuffledWithConstraint(
+        challenge.candidateContentRefs || [],
+        candidateShuffleSeeds.contents,
+        challenge.shuffleConstraint,
+        challenge.answerRule?.acceptedOrder
       );
       state = {
         ...state,

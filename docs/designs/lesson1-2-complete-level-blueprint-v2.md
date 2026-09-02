@@ -1,22 +1,22 @@
 # Lesson 1–2 完整关卡蓝图 V2
 
-> 状态：原十六阶段蓝图已由产品负责人以 Q21-A 接受；2026-08-25 又确认把双角色全篇演练升级为第十七个必修阶段，并在完成后解锁无进度的无字逐句回演；2026-08-26 进一步冻结双画幅、最短语义点击、稳定人物舞台与回家终幕。V2.4 正在当前工作树实施与复验；这不表示已完成同一 SHA 全量候选、合并或发布
-> 日期：2026-08-24；本轮修订：2026-08-27
+> 状态：原十六阶段蓝图已由产品负责人以 Q21-A 接受；2026-08-25 增加第十七个双角色全篇演练阶段；2026-08-26 冻结双画幅、最短语义点击、稳定人物舞台与回家终幕；2026-09-02 又以 ADR-0119/0120 把该阶段改为诚实可跳过，并把阶段 11 改为五项逐词组织；ADR-0121 随后把跳过细化为按角色回合分别处置。V2.6 已在当前工作树实施并完成定向复验；这不表示已完成同一 SHA 全量候选、合并或发布
+> 日期：2026-08-24；本轮修订：2026-09-02
 > 教材范围：外研社《新概念英语智慧版 1》，物理页 35–38、书本页 2–5
 > 教学单元：Lesson 1 `Excuse me!` + Lesson 2 `Is this your ...?`
-> 决策来源：[Lesson 1–2 重构决策树](./lesson1-2-remediation-decision-tree-2026-08-23.md)、[ADR-0075](../adr/0075-learning-functions-do-not-prescribe-a-five-beat-flow.md)、[ADR-0089](../adr/0089-future-units-inherit-defaults-and-review-only-real-exceptions.md)、[ADR-0103](../adr/0103-lesson1-2-first-session-completes-dual-channel-word-retrieval.md)、[ADR-0104](../adr/0104-lesson1-2-unifies-story-structure-and-visible-recovery.md)、[ADR-0105](../adr/0105-lesson1-2-review-runs-use-an-isolated-heart-pool.md)、[ADR-0106](../adr/0106-lesson1-2-v2-uses-portrait-first-semantic-scenes.md)、[ADR-0107](../adr/0107-lesson1-2-v2-mobile-interaction-contract.md)、[ADR-0108](../adr/0108-lesson1-2-v2-separates-primary-scenes-from-presentation-moments.md)、[ADR-0109](../adr/0109-lesson1-2-v2-declares-story-semantic-interaction-patterns.md)、[ADR-0110](../adr/0110-lesson1-2-v2-adds-isolated-optional-practice-at-completed-outcomes.md)、[ADR-0112](../adr/0112-lesson1-requires-full-role-enactment-and-unlocks-manual-replay.md)、[ADR-0113](../adr/0113-lesson1-2-uses-dual-frame-direct-manipulation-and-a-homeward-finale.md)、[ADR-0114](../adr/0114-course-actions-default-to-direct-intent-and-stage-replay-switches-atomically.md)、[手机场景 Storyboard](./lesson1-2-v2-mobile-scene-storyboard.md)
+> 决策来源：[Lesson 1–2 重构决策树](./lesson1-2-remediation-decision-tree-2026-08-23.md)、[ADR-0075](../adr/0075-learning-functions-do-not-prescribe-a-five-beat-flow.md)、[ADR-0089](../adr/0089-future-units-inherit-defaults-and-review-only-real-exceptions.md)、[ADR-0103](../adr/0103-lesson1-2-first-session-completes-dual-channel-word-retrieval.md)、[ADR-0104](../adr/0104-lesson1-2-unifies-story-structure-and-visible-recovery.md)、[ADR-0105](../adr/0105-lesson1-2-review-runs-use-an-isolated-heart-pool.md)、[ADR-0106](../adr/0106-lesson1-2-v2-uses-portrait-first-semantic-scenes.md)、[ADR-0107](../adr/0107-lesson1-2-v2-mobile-interaction-contract.md)、[ADR-0108](../adr/0108-lesson1-2-v2-separates-primary-scenes-from-presentation-moments.md)、[ADR-0109](../adr/0109-lesson1-2-v2-declares-story-semantic-interaction-patterns.md)、[ADR-0110](../adr/0110-lesson1-2-v2-adds-isolated-optional-practice-at-completed-outcomes.md)、[ADR-0112](../adr/0112-lesson1-requires-full-role-enactment-and-unlocks-manual-replay.md)、[ADR-0113](../adr/0113-lesson1-2-uses-dual-frame-direct-manipulation-and-a-homeward-finale.md)、[ADR-0114](../adr/0114-course-actions-default-to-direct-intent-and-stage-replay-switches-atomically.md)、[ADR-0119](../adr/0119-lesson1-role-enactment-uses-truthful-skip.md)、[ADR-0120](../adr/0120-lesson1-2-progresses-from-chunks-to-word-level-assembly.md)、[手机场景 Storyboard](./lesson1-2-v2-mobile-scene-storyboard.md)
 > 当前实现边界：[V0 当前快照](./lesson1-2-unit-design-v0.md)与 [V1 实施验收包](./lesson1-2-implementation-acceptance-pack-v1.md)只描述历史候选；V2 工作树候选必须另按 [V2 实施验收包](./lesson1-2-implementation-acceptance-pack-v2.md)取得同一 SHA 证据，文件存在仍不等于已发布
 
 ## 1. 一句话体验
 
 孩子在同一晚、同一间星灯失物招领站里，帮助同一位男招领员和同一位女顾客完成一条连续事件：先听懂七句话，确认并归还她的手提包；再核对包中随身物品、找回她遗落在衣帽间的外套；最后听懂并认出 `car` 与 `house`，点击与英文对应的真实汽车和房屋，让女顾客上车并安全到家。英语每次都让人物回应、物品移动或场景改变，不设置路线图、交图、盖章、拉杆、点灯和“点亮已有线索”等空操作。
 
-完成体验应让六至八岁孩子感到自己解决了一件事，而不是连续做完二十九道题。二十九份正式语言结果藏在十七个短、可见、可恢复的故事阶段中；第十七阶段是无评分但必修的双角色全篇演练，不新增结果。题目之间必须有角色回应、物品归位、场景展开、人物上车或抵达家中等真实状态变化。
+完成体验应让六至八岁孩子感到自己解决了一件事，而不是连续做完二十九道题。二十九份正式语言结果藏在十七个短、可见、可恢复的故事阶段中；第六阶段是无评分双角色全篇演练，不新增结果，允许诚实跳过并在阶段地图中补做。题目之间必须有角色回应、物品归位、场景展开、人物上车或抵达家中等真实状态变化。
 
 ## 2. 不可退让的实施边界
 
 1. catalog 是教材英语、产品英语、中文提示、角色、实体、答案、支架、音频、阶段顺序、保存条件和故事动作的唯一真源。页面只有通用渲染与事件转发，课程内容副本为零。
-2. 十七个孩子可见阶段就是十七个原子恢复微任务。进度、阶段导航、保存、归零重启和验收不得另造一套隐藏边界；无字逐句回演是另行解锁的无编号工具，不是隐藏阶段。
+2. 十七个孩子可见阶段就是十七个原子恢复微任务。完成与跳过是可区分的持久状态；已跳过阶段计入旅程已解决数但不产生学习证据，可从阶段地图正式补做。无字逐句回演只有在角色扮演真实完成后解锁。
 3. 十一项具体物品词当天全部完成词音与词形两个独立通道，共二十二个词汇结果；另外保存七个课文理解／交际／迁移结果，总计二十九个。
 4. 每段语言音频播放时，对应英文始终可见；只有当前有效音频请求的真实 `ended` 才能开放门禁。失败、取消、过期回调均不得冒充结束。
 5. 正式答案只按 catalog 的稳定 Source ID、Content ID、entity ID 与关系判定。随机顺序、视觉位置、页面字符串和 DOM 序号永远不是答案。
@@ -26,7 +26,7 @@
 9. 同日完成不等于长期掌握。回看和重玩只算练习；跨日、变化情境、无支架成功才可进入独立调用与掌握判断。
 10. 本蓝图不授权合并 `main` 或发布网站；正式实现、测试、本地成人验收、儿童观察和发布证明是彼此独立的边界。
 11. V2 使用两套同语义构图母版：约 9:19.5 的手机竖版和 16:10 的平板／电脑宽版；不是一张背景任意裁切，也不按设备型号逐一作图。十六个挑战型活动使用对话、物品、语法或回家旅程构型，第十七阶段使用固定双人角色演练构型，已保存的章节／段落／单元成果另用成果／停靠构型。
-12. 十七阶段与二十九结果不因“更好玩”继续增加。正式挑战使用五种故事语义互动模式，同一模式最多连续承载两个正式挑战；`L01-M12` 虽是完成门禁，但没有结果或冒险心；handbag 示范、无字逐句回演与单元后三题复盘不制造新结果或主线进度。
+12. 十七阶段与二十九结果不因“更好玩”继续增加。正式挑战使用五种故事语义互动模式，同一模式最多连续承载两个正式挑战；`L01-M12` 没有结果或冒险心，跳过不得伪造完成、接触或证据；handbag 示范、无字逐句回演与单元后三题复盘不制造新结果或主线进度。
 13. 手机与电脑共享故事事实，不共享一套人物缩放值：电脑课堂宽版使用更大的落地人物，手机竖版使用更紧凑的人物尺度；同一画幅档内人物左右关系、脚底基线和比例保持稳定。手提包继续是独立故事道具，由 catalog 的竖版／宽版锚点范围动态落在真实柜台上，不烘焙进背景，也不生成额外台座。
 14. 真实场景人物或物品是唯一候选层；任务面板不得复制同一组答案。正确后只在原场景中演出实体反馈、播放目标英语并同步更新冒险心，禁止再出现通用“线索找到了”卡、答案过场页或二次确认。
 
@@ -165,7 +165,7 @@
 | 3 | `L01-M09` | 礼貌地叫住她 |
 | 4 | `L01-M10` | 把问题问清楚 |
 | 5 | `L01-M11` | 把手提包还给她 |
-| 6 | `L01-M12` | 轮流演完整故事 |
+| 6 | `L01-M12` | 角色扮演 |
 | 7 | `L02-M11` | 清点包里的文具 |
 | 8 | `L02-M12` | 继续清点随身物品 |
 | 9 | `L02-M13` | 给文具贴上英文名 |
@@ -187,9 +187,9 @@
 | 3 | `L01-M09` | 女顾客正要离开，孩子替招领员选择 `Excuse me!`。正确后自动播放男声 D01 与女声 D02，不再紧接着考第二次 `handbag` | ③ T2 礼貌引起注意 | 45s |
 | 4 | `L01-M10` | 保持同一柜台场景，只展开句块轨道：用 `Is this your` + `handbag` + `?` 组织问句；女顾客没听清时选择 `Pardon?`，随后自动播放 D05 | ④ T4 归属问句；⑤ T3 请求重复 | 85s |
 | 5 | `L01-M11` | 女顾客 D06 确认后，只保留真实手提包；孩子从随机排序的英文归还牌中选择 `handbag`，正确即自动发音。随后招领员只交包一次，孩子替女顾客选择并听完 `Thank you very much.` | ⑥ `handbag × word-form`；⑦ T5 收到物品后致谢 | 85s |
-| 6 | `L01-M12` | 手提包回到柜台形成明确回演舞台。孩子任选先扮演招领员或手提包主人，每个角色都按 D01–D07 完整演一遍；当前角色台词先隐藏、主动揭晓后播放原声，对方台词可见并自动播放。人物固定左右，完成一个角色后保存整轮并主动选择另一个 | 无新增语言结果；必修阶段完成，不显示冒险心或正确率 | 210s |
+| 6 | `L01-M12` | 手提包回到柜台形成明确回演舞台。孩子任选先扮演招领员或手提包主人，每个角色都按 D01–D07 完整演一遍；也可经确认诚实跳过。人物固定左右，已完成角色整轮保存，未完成角色补做时从 D01 开始 | 无新增语言结果；真实完成或独立“已跳过”状态，不显示冒险心或正确率 | 210s |
 
-`L01-M12` 两个角色都完成并原子保存后才出现章节停靠点：继续 Lesson 2 或回地图休息。完成页同时开放“进入无字逐句回演”和“稍后练习，继续课程”；无字回演此后也在阶段导航中作为无编号工具存在。它不写进度、结果、冒险心或掌握，每次重进从 D01 开始。
+`L01-M12` 两个角色都完成并原子保存后才开放无字逐句回演；跳过则在原子保存并读回后直接进入 `L02-M11`，阶段地图显示“已跳过 · 完成角色扮演”。补做真实完成后清除跳过状态并恢复无字回演入口。无字回演不写进度、结果、冒险心或掌握，每次重进从 D01 开始。
 
 ### 6.2 Lesson 2 前段：包内随身物品与句型（约 370 秒，6 分 10 秒）
 
@@ -201,7 +201,7 @@
 | 8 | `L02-M12` | 包内场景展开，`book`、`watch` 的目标英文持续与真实物品候选同屏并逐项自动播放；孩子在真实包内场景指认物品，正确后物品自动进入托盘。完成后四件物品形成清单并切换到标签册，不经过只显示单词的中间页 | ⑩–⑪ 两词 `audio-form-supported` | 70s |
 | 9 | `L02-M13` | 当前英文标签 `pen`、`pencil`、主题重听和真实物品候选始终在同一任务表面；孩子直接点击对应物品，提交前不播放答案音频，正确后系统连接标签并自动发音，再原地进入下一词 | ⑫–⑬ 两词 `word-form` | 70s |
 | 10 | `L02-M14` | `book`、`watch` 的英文词形、主题重听和真实物品候选始终在同一任务表面；孩子直接点击对应物品，正确后系统放入目标格并自动发音，再原地进入下一词，清单完成 | ⑭–⑮ 两词 `word-form` | 70s |
-| 11 | `L02-M15` | 先用已完成的 handbag 问句做一次无结果的完整变形示范，再由孩子用 `Is this your` + `watch` + `?` 三个大块迁移归属问句；自动播放 `NCE-U01-C-Q-WATCH`。女顾客说 `Yes, it is.` 后，孩子把 `it` 指回当前手表 | ⑯ T4 变化物品归属问句；⑰ T4 肯定确认与 `it` 指代 | 90s |
+| 11 | `L02-M15` | 先用已完成的 handbag 问句做一次无结果示范，示范退出后由孩子用 `Is | this | your | watch | ?` 五项逐词迁移归属问句；初排不得等于答案，错误排列可撤回或“重排”，正确后只显示并播放完整问句。女顾客说 `Yes, it is.` 后，孩子把 `it` 指回当前手表 | ⑯ T4 变化物品归属问句；⑰ T4 肯定确认与 `it` 指代 | 90s |
 
 `L02-M15` 成功后自动打开知识卡第一层：用儿童语言说明“这是一个一般疑问句；`it` 指刚才那件东西”，并立即提供“继续冒险”。只有孩子主动展开才显示第二层的 `be` 动词、一般疑问句、肯定简短回答、代词 `it`；两层都不计分。关闭后进入 Lesson 2 段落停靠点：可继续、可休息，但不结算 Lesson 2 或增长地标。
 
@@ -278,7 +278,7 @@ L02-M21 label-connect ×2
 
 跨阶段连续计算时，同一模式也不得超过两个正式挑战。只有动作目的、提交关系或故事后果真正变化才算切换模式；仅换图、换背景、换文案或改变点击动效不算。
 
-`L01-M12` 的双角色全篇演练是必修阶段，但没有 `challengeRef`、语言结果或冒险心；它完整保存后才把阶段进度从 `5/17` 推进到 `6/17`。`L01-RS01:manual-dialogue` 的无字逐句回演与 `NCE-U01-OUTCOME` 后的三题案件复盘都在正式主线之外：两者可跳过、不显示主线冒险心、不改变 `17/29`、地标、排期或掌握；案件复盘最多记录 `same-day-practice`。
+`L01-M12` 的双角色全篇演练没有 `challengeRef`、语言结果或冒险心。真实完成与诚实跳过都可把旅程已解决数从 `5/17` 推进到 `6/17`，但账本状态、接触与证据必须严格区分；只有真实完成才解锁 `L01-RS01:manual-dialogue`。无字逐句回演与三题案件复盘都在正式主线之外，不改变 `17/29`、地标、排期或掌握。
 
 ## 7. 二十二个词汇结果格
 
@@ -309,7 +309,7 @@ L02-M21 label-connect ×2
 | `NCE-U01-T04:L01-M10:handbag-question` | T4 | `L01-D03` | `handbag-question` | `NCE-U01-C-BLOCK-IS-THIS-YOUR`、`NCE-U01-C-BLOCK-HANDBAG`、`NCE-U01-C-PUNCT-QUESTION` | 对当前手提包发出归属问句 |
 | `NCE-U01-T03:L01-M10:repair` | T3 | `L01-D04` | `handbag-repair` | `L01-N02` | 在没听清时使用 `Pardon?` |
 | `NCE-U01-T05:L01-M11:thanks` | T5 | `L01-D07` | `handbag-return` | — | 物品真实交到接收者后表达感谢 |
-| `NCE-U01-T04:L02-M15:watch-question` | T4 | `L02-W04` | `watch-question` | `NCE-U01-C-Q-WATCH`、`NCE-U01-C-BLOCK-IS-THIS-YOUR`、`NCE-U01-C-PUNCT-QUESTION` | 把归属问句迁移到 watch |
+| `NCE-U01-T04:L02-M15:watch-question` | T4 | `L02-W04` | `watch-question` | `NCE-U01-C-Q-WATCH`、`NCE-U01-C-BLOCK-IS-CAPITAL`、`NCE-U01-C-BLOCK-THIS`、`NCE-U01-C-BLOCK-YOUR`、`NCE-U01-C-BLOCK-WATCH`、`NCE-U01-C-PUNCT-QUESTION` | 把归属问句迁移到 watch |
 | `NCE-U01-T04:L02-M15:it-reference` | T4 | `L01-D06` | `watch` | `L02-W04` | 理解 `Yes, it is.` 的肯定确认及 `it` 指当前手表 |
 
 ## 8. 随机顺序与声明式判定
@@ -366,13 +366,13 @@ L02-M21 label-connect ×2
 
 ### 11.2 回到任意已到达阶段
 
-- 孩子进入 `L01-M07` 前不开放阶段地图。进入后，点击紧凑顶栏进度，或点击设置中的“选择学习阶段”，打开同一个全屏儿童阶段地图。阶段地图列出十七个可理解标题而不是内部编号；`reached` 精确定义为“全部已完成阶段 + 当前第一个未完成阶段”，已完成项标“回看”，当前项标“继续学习”，未来项标“未到达”且禁用。完成全单元后十七项全部可回看；`L01-M12` 完成后另显示无编号的无字回演入口。儿童阶段地图与隐藏验收预览严格隔离。
+- 孩子进入 `L01-M07` 前不开放阶段地图。进入后，点击紧凑顶栏进度，或点击设置中的“选择学习阶段”，打开同一个全屏儿童阶段地图。阶段地图列出十七个可理解标题而不是内部编号；`reached` 精确定义为“全部已完成或已跳过阶段 + 当前第一个未解决阶段”，已完成项标“回看”，已跳过角色阶段标“已跳过 · 完成角色扮演”，当前项标“继续学习”，未来项标“未到达”且禁用。`L01-M12` 只有真实完成后才显示无编号的无字回演入口。
 - 回看运行在 sandbox practice session，不复用主线心池或提交接口；它不会撤销后续进度、再次持久化手提包／外套／到家事实、重复增长地标或覆盖首次结果。可选诊断日志记为 `same-day-practice`，但不改变 `lastOutcome`、`nextDueDay`、掌握、故事事实和地标。
 - 点击当前阶段不创建无保存副本，只关闭地图并继续正式学习。点击已完成阶段才进入“阶段回看”，一次只运行所选阶段；手提包、外套与上车／到家只重演可撤销的视觉代理。回看顶栏始终显示一键“退出回看 · 不保存”，不弹确认框。
 - 进入回看时保存正式主线的完整内存尝试，包括当前题、已选答案与支架状态、冒险心、候选顺序、临时结果和当前呈现位置。退出时原样恢复；若进入前正在播放某个词或句子，返回后从该音频段开头以新请求重播，旧回调全部作废。刷新仍遵守 §11.1 的阶段级持久恢复，不把这份内存快照虚假承诺为跨页面恢复。
 - 所选阶段完成后不得自动串到下一阶段，而是停在“这一阶段回看完成”页。页面只做小型庆祝，明确“本次回看不改变学习进度”，显示“回到：{原主线阶段}”，主按钮“返回继续学习”，次按钮“选择其他阶段”。后者可连续进入另一已完成阶段，并始终保留最初主线返回点；任何回看完成都不保存奖励、心池、结果、故事事实、排期或地标。
 - 未到达阶段不可直接跳过前置故事事实；“重头开始整个单元”放在设置中并二次确认。
-- 当前合同使用 `experienceRevision: lesson1-2-v2.4`。旧十二／十五／十六任务候选、无 revision 存档以及 `lesson1-2-v2`、`lesson1-2-v2.1`、`lesson1-2-v2.2`、`lesson1-2-v2.3` 的记录都只保留为诊断数据，不得迁移成 V2.4 完成证据。持久层主键必须包含 `experienceRevision`，新修订从 `L01-M07` 开始。
+- 当前合同使用 `experienceRevision: lesson1-2-v2.6`。旧十二／十五／十六任务候选、无 revision 存档以及 `lesson1-2-v2` 至 `lesson1-2-v2.5` 的记录都只保留为诊断数据，不得迁移成 V2.6 完成或跳过证据。持久层主键必须包含 `experienceRevision`，新修订从 `L01-M07` 开始。
 
 ## 12. 跨日最小回访
 
@@ -411,8 +411,8 @@ Q20 已选择 A：每个跨日回访 run 都使用一套与主线完全隔离的
 
 V2 catalog 至少声明：
 
-- `experienceRevision: lesson1-2-v2.4` 与十七个稳定 Microtask ID；
-- 稳定实体 `explorer-cat`、`car`、`house` 与 `handbag-owner`；`L02-M21` 的两个正确标签关系直接产生 `owner-boards-car` 与 `owner-home-arrival`，旧 `route-map` 只作历史迁移实体，不属于 V2.4 主线；
+- `experienceRevision: lesson1-2-v2.6` 与十七个稳定 Microtask ID；
+- 稳定实体 `explorer-cat`、`car`、`house` 与 `handbag-owner`；`L02-M21` 的两个正确标签关系直接产生 `owner-boards-car` 与 `owner-home-arrival`，旧 `route-map` 只作历史迁移实体，不属于 V2.6 主线；
 - 每阶段的 Source／Content 引用、角色、场景实体、步骤、正式或自由提交、答案关系、音频序列、支架、预计时长和完成事实；
 - 每个活动微任务稳定的 `presentation.sceneMode`，只允许 `dialogue-stage`、`object-workbench`、`grammar-lab`、`homeward-journey` 或 `full-role-enactment`；另有稳定 `sceneVariant` 与有序 `presentation.moments[]`，每段声明进入条件、参与者、焦点实体、可见语言、状态终点、主动作、减少动态效果终态和 `viewport`／`page` 滚动政策；页面不得按 Microtask ID、步骤前缀或课程字符串自行选择构图；
 - 每个正式 `challengeRef` 的 `interactionPattern`，只允许 §6.5 五个稳定值，并声明该模式需要的语义来源、承接目标或关系位；同一模式跨阶段最多连续两次。它不改变 `resultId`、答案关系、证据通道或恢复边界；
@@ -479,8 +479,8 @@ supportLevel, rescueUsed, learningDay, attemptedAt
 - `L01-D03` 与 `L01-D05` 独立存在，D05 为 target/exposure 且不生成重复结果；`L01-D07` 绑定女声；所有必需 Source ID 无缺口、无悬空引用。
 - `L01-W01–W06/W08–W11` 逐项绑定实际出现的话轮和 `utterance-embedded` 接触，不能整批写入；`L01-I01`、`L01-Q01`、`L02-I01` 的教材原文真实显示。
 - `pen`、`book`、`dress` 不再是首次主线 exposure-only；功能词没有被创建为物品图片题。
-- `explorer-cat`、`car`、`house` 与 `handbag-owner` 是稳定实体；`route-map`、`first-claimant`、`second-returner`、`coat-owner`、`third-claimant`、`case-stamp`、`station-power`、`opening-lever` 不属于 V2.4 活动主线。
-- `L01-M12` 两个完整角色回合与无字逐句回演引用的教材角色、七句话轮、提示和音频均来自 catalog；正式回合只能形成第十七阶段完成，不能生成第三十份结果、挑战星或跨日回访来源。无字回演、三项案件复盘和 `handbag-pattern-demo` 均不能增加主线阶段或结果。
+- `explorer-cat`、`car`、`house` 与 `handbag-owner` 是稳定实体；`route-map`、`first-claimant`、`second-returner`、`coat-owner`、`third-claimant`、`case-stamp`、`station-power`、`opening-lever` 不属于 V2.6 活动主线。
+- `L01-M12` 两个完整角色回合、诚实跳过合同与无字逐句回演引用的教材角色、话轮、提示和音频均来自 catalog；跳过状态不得生成结果、接触、故事事实、挑战星或回访来源，真实完成才能替换跳过并解锁无字回演。
 - `L02-E01` 仍 optional、无完成、无证据；页面脚本中教材／课程专属文案副本为零。
 - 四条已接受衣物词哈希保持不变，其余语音仍标未逐条真人审核；合同不得把文件存在或同配方生成写成语言验收通过。
 
@@ -497,7 +497,7 @@ supportLevel, rescueUsed, learningDay, attemptedAt
 - outbox 可恢复 commit 已答待存状态；最终按“完成 payload → 完整读回 → 幂等 unit-built → buildStage 再读回”四步增长，幂等重试只增长一次。
 - revision 不匹配时旧完成、心池、checkpoint、buildStage 和结果全部隔离；二十九格的 cell 级回访排序、间隔推导与同词不相邻可由固定时钟复现。
 - `currentPresentationMomentId` 只按 catalog 的确定性条件推进；重绘、旋转和迟到媒体回调不能跳段。它与生命周期 `phase` 独立，呈现段变化不创建结果、心池、checkpoint 或新的恢复边界；减少动态效果只改变到达终态的方式。
-- 正式双角色阶段只通过主运行时保存完整角色回合和最终阶段完成，不接收语言结果、心池或掌握接口。无字逐句回演与同日案件复盘运行在隔离练习会话；退出、刷新、重复进入或答错都不得修改主线心池、首次结果、故事事实、`nextDueDay`、独立证据、掌握或地标。复盘日志若启用只能写 `same-day-practice`。
+- 正式双角色阶段只通过主运行时保存完整角色回合、独立跳过或最终完成，不接收语言结果、心池或掌握接口。跳过必须原子保存、读回后前进；失败、重复点击、刷新与并发不得产生重复记录或伪完成。阶段地图补做完成后清除跳过状态。无字逐句回演与同日案件复盘继续运行在隔离练习会话。
 
 ### 14.3 E2E 儿童路径
 
@@ -510,8 +510,8 @@ supportLevel, rescueUsed, learningDay, attemptedAt
 - 已完成阶段以单阶段 sandbox 回看；顶栏出口一键可用，完成后停在双出口完成页，支持连续选择另一已完成阶段。回看不重复持久化交包、交衣、上车／到家、结果、奖励或地标。
 - 未来未到达阶段保持禁用；sandbox 中途退出与完成后返回都恢复同一主线题目、答案状态、冒险心和候选顺序。若原主线在播音频，以新请求从原音频段开头重播；心池、排期、首次结果和故事事实不变。
 - Lesson 1 停靠、Lesson 2 中点停靠和最终完成的状态彼此不混淆。
-- `L01-M12` 可任选先演角色，但两个角色都必须从 D01 到 D07 完成；人物不换边，完整角色整轮保存，未完成角色重进从 D01 开始。无字逐句回演可跳过、不记进度，所有未到达台词先隐藏，逐句揭晓与原声播放合一，已揭晓句可重听且不推进。
-- `L02-M15` 先演示已完成的 handbag 关系，再由孩子组装 watch 问句并连接 `it`；只有后两项既有挑战写结果，示范和知识层不扣心、不结算。
+- `L01-M12` 可任选先演角色，也可在英语未播放时经确认跳过；人物不换边，完整角色整轮保存，未完成角色补做时从 D01 开始。跳过直接进入 `L02-M11`，地图可补做，且无字逐句回演仍只在真实完成后开放。
+- `L02-M15` 先演示已完成的 handbag 关系，示范退出后由孩子从五个打散词项组装 watch 问句并连接 `it`；错误排列保留且可撤回／重排，正确后播放整句。主线与跨日回访使用相同五项编辑语义；只有两项既有挑战写结果，示范和知识层不扣心、不结算。
 - 至少用三组种子完整游玩；正确项覆盖所有位置。分别触发每类一次／二次错误和一次归零重启。
 - 模拟每段音频失败、重试、迟到回调、快速切换和前后台恢复；所有声音位置始终有对应英文。
 - 验证正确后自动自然发音，没有额外喇叭确认，也没有连续嗡鸣／背景音频节点。
@@ -539,7 +539,7 @@ supportLevel, rescueUsed, learningDay, attemptedAt
 
 主线课程结构、教材覆盖、二十九份结果、声音／词形节奏、纠错、恢复、音频、地标、跨日回访冒险心、双画幅交互、六类冻结构图、十七阶段主构型／场景呈现段映射和关键动效分镜的设计问题均已闭合。`L49B-01` 的互动模式接口由 ADR-0109 冻结；ADR-0112 取代 ADR-0110 中 Lesson 1 的旧短角色换位条款，并冻结必修双角色阶段与无字逐句回演；ADR-0113 取代旧路线终幕；ADR-0114 进一步冻结最短语义点击、原子阶段回看与稳定人物舞台；ADR-0110 对单元案件复盘仍有效。
 
-产品负责人已在 Q21-A 明确接受原 V2 蓝图与详细 storyboard，并在 2026-08-26 完成 Q1–Q10 的新版设计选择，随后明确确认实施。旧 `L49B-02/04` 定向合同只能算历史候选事实，不能替 V2.4 转绿。V2.4 必须记录同一候选 SHA、全部自动门禁、真人音频验收、成人全流程验收与尚未完成的儿童观察；任何共享脏树实现或本地绿灯仍不授权合并 `main` 或发布网站。
+产品负责人已在 Q21-A 明确接受原 V2 蓝图，并在 2026-09-02 确认实施角色诚实跳过、五项逐词组织和 ADR-0121 的按角色处置。旧 `L49B-02/04` 定向合同与 V2.4/V2.5 绿灯只能算历史候选事实，不能替 V2.6 转绿。V2.6 必须记录同一候选 SHA、全部自动门禁、真人音频验收、成人全流程验收与尚未完成的儿童观察；任何共享脏树实现或本地绿灯仍不授权合并 `main` 或发布网站。
 
 ## 17. 教师投屏第二阶段
 

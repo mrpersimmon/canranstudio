@@ -83,8 +83,11 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
   ]);
 
   assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
-  const sources = [
-    '/core/curriculum-catalog.js',
+  const initialSources = [
+    '/core/course-package-installer.js',
+    '/core/course-package-entry.js'
+  ];
+  const deferredSources = [
     '/core/learning-store.js',
     '/core/learning-ledger.js',
     '/core/learning-runtime.js',
@@ -92,9 +95,15 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
     '/core/learning-microtask-scene.js',
     '/poc/lesson1-2-experience/experience.js'
   ];
-  const scriptOrder = sources.map(source => page.indexOf(`src="${source}?v=`));
-  assert.ok(scriptOrder.every(index => index >= 0));
-  assert.deepEqual(scriptOrder, [...scriptOrder].sort((left, right) => left - right));
+  const initialScriptOrder = initialSources.map(source => page.indexOf(`src="${source}?v=`));
+  const deferredScriptOrder = deferredSources.map(source => page.indexOf(`"${source}?v=`));
+  assert.ok(initialScriptOrder.every(index => index >= 0));
+  assert.deepEqual(initialScriptOrder, [...initialScriptOrder].sort((left, right) => left - right));
+  assert.ok(deferredScriptOrder.every(index => index >= 0));
+  assert.deepEqual(deferredScriptOrder, [...deferredScriptOrder].sort((left, right) => left - right));
+  assert.doesNotMatch(page, /curriculum-catalog\.js/);
+  assert.match(page, /data-course-package-shell[^>]*data-package-state="checking"/);
+  assert.match(page, /data-manifest-sha256="[a-f0-9]{64}"/);
   assert.ok(background.size > 100_000);
   assert.ok(premiseAvif.size > 100_000);
   assert.ok(premiseJpeg.size > 100_000);
@@ -174,7 +183,7 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
       assert.ok(stat.size > 20_000, `${base}.${extension}`);
     }
   }
-  for (const base of ['scene-car-v1', 'scene-house-v1']) {
+  for (const base of ['scene-car-v2', 'scene-house-v2']) {
     for (const [extension, size] of [['png', 1254], ['avif', 640], ['webp', 640]]) {
       const target = path.join(ROOT, 'poc/lesson1-2-experience/assets', `${base}.${extension}`);
       const [metadata, stat] = await Promise.all([sharp(target).metadata(), fs.stat(target)]);
@@ -185,6 +194,16 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
       );
       assert.ok(stat.size > 20_000, `${base}.${extension}`);
     }
+    const { data } = await sharp(path.join(
+      ROOT,
+      'poc/lesson1-2-experience/assets',
+      `${base}.png`
+    )).resize(43, 41, { fit: 'fill' }).greyscale().raw().toBuffer({ resolveWithObject: true });
+    const values = [...data];
+    const meanLuminance = values.reduce((sum, value) => sum + value, 0) / values.length;
+    const darkPixelRatio = values.filter(value => value < 64).length / values.length;
+    assert.ok(meanLuminance >= 70, `${base} 43x41 mean luminance ${meanLuminance}`);
+    assert.ok(darkPixelRatio <= 0.55, `${base} 43x41 dark-pixel ratio ${darkPixelRatio}`);
   }
   for (const retiredBase of ['item-car-key-v1', 'item-house-key-v1']) {
     for (const extension of ['png', 'avif', 'webp']) {
@@ -309,8 +328,8 @@ test('optional outcome practice is catalog-owned and keeps a complete isolated a
   ]);
   const practiceScript = '/core/learning-outcome-practice.js';
   const sceneScript = '/core/learning-microtask-scene.js';
-  assert.ok(page.indexOf(`src="${practiceScript}?v=`) >= 0);
-  assert.ok(page.indexOf(`src="${practiceScript}?v=`) < page.indexOf(`src="${sceneScript}?v=`));
+  assert.ok(page.indexOf(`"${practiceScript}?v=`) >= 0);
+  assert.ok(page.indexOf(`"${practiceScript}?v=`) < page.indexOf(`"${sceneScript}?v=`));
   assert.match(bootstrap, /outcomePracticeFactory:\s*core\.learningOutcomePractice/);
 
   const practices = unit.experience.outcomePractices;

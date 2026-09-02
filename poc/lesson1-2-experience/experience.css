@@ -561,7 +561,7 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   padding: clamp(16px, 3.5vh, 42px) clamp(13px, 4vw, 56px) max(20px, env(safe-area-inset-bottom));
   background:
     linear-gradient(180deg, rgba(11, 30, 52, .1), rgba(5, 17, 32, .62)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg.png') center 58% / cover no-repeat;
+    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 .station-world::before {
@@ -1001,10 +1001,7 @@ button.scene-prop.is-selected {
   .station-world {
     background:
       linear-gradient(180deg, rgba(11, 30, 52, .08), rgba(5, 17, 32, .34)),
-      image-set(
-        url('/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.avif') type('image/avif'),
-        url('/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.webp') type('image/webp')
-      ) center / cover no-repeat;
+      url('/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.avif') center / cover no-repeat;
   }
 }
 
@@ -2574,13 +2571,17 @@ button.scene-prop.is-selected {
 .role-practice-copy--active { padding-bottom: 10px; border-bottom: 1px solid rgba(255, 217, 120, .24); }
 .role-choice-label { margin: 20px 0 9px; color: #ffe18b; font: 400 1.05rem/1.2 'ZCOOL KuaiLe', sans-serif; }
 .role-choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.role-choice-slot {
+  position: relative;
+  min-width: 0;
+  padding-bottom: 23px;
+}
 .role-choice {
+  width: 100%;
   min-height: 80px;
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  grid-template-rows: auto auto;
+  display: flex;
   align-items: center;
-  column-gap: 10px;
+  justify-content: center;
   padding: 11px 13px;
   border: 2px solid #b9843c;
   border-radius: 15px;
@@ -2588,12 +2589,26 @@ button.scene-prop.is-selected {
   background: linear-gradient(180deg, #fff8dc, #e9c982);
   box-shadow: 0 5px 0 #6f4825;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
 }
-.role-choice > span { grid-row: 1 / 3; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #2f817a; }
-.role-choice strong { font: 400 1.05rem/1.1 'ZCOOL KuaiLe', sans-serif; }
-.role-choice small { color: #71553e; font-weight: 900; }
-.role-choice.is-complete { opacity: .6; filter: saturate(.55); cursor: default; }
+.role-choice strong { font: 400 1.12rem/1.15 'ZCOOL KuaiLe', sans-serif; }
+.role-choice-slot.is-primary .role-choice {
+  border-color: #f2bf4b;
+  box-shadow: 0 5px 0 #6f4825, 0 0 0 3px rgba(255, 218, 103, .16);
+}
+.role-choice-slot.is-skipped .role-choice { background: linear-gradient(180deg, #fff9e9, #e5d2aa); }
+.role-choice-slot.is-complete .role-choice { opacity: .56; filter: saturate(.48); cursor: default; }
+.role-choice-status {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  padding: 3px 9px;
+  border: 1px solid rgba(255, 229, 158, .48);
+  border-radius: 999px;
+  color: #fff0bc;
+  background: rgba(24, 51, 57, .86);
+  font-weight: 900;
+}
 .role-practice-dialogue {
   display: grid;
   gap: 6px;
@@ -2656,6 +2671,7 @@ button.scene-prop.is-selected {
 .manual-dialogue-hint span { min-width: 0; padding: 7px 9px; border-radius: 9px; background: rgba(255, 248, 222, .1); text-align: left; }
 .manual-dialogue-hint small { display: block; color: #84e0d1; font-weight: 900; }
 .manual-dialogue-hint strong { display: block; margin-top: 2px; color: #fff0bc; overflow-wrap: anywhere; }
+.role-enactment-hint { animation: role-hint-arrive .18s ease-out both; }
 .role-practice-console .outcome-practice-actions { margin-top: 13px; }
 .role-practice-console .quiet-action { color: #fff3cf; border-color: rgba(255, 239, 192, .72); background: rgba(255, 250, 232, .12); box-shadow: 0 4px 0 rgba(0, 0, 0, .28); }
 .role-practice-finish-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2667,6 +2683,10 @@ button.scene-prop.is-selected {
 @keyframes role-line-pulse {
   from { box-shadow: -5px 0 0 #73d7c7, 0 0 0 2px rgba(115, 215, 199, .14), 0 8px 18px rgba(0, 0, 0, .2); }
   to { box-shadow: -5px 0 0 #ffd978, 0 0 0 4px rgba(255, 217, 120, .2), 0 8px 22px rgba(0, 0, 0, .28); }
+}
+@keyframes role-hint-arrive {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .moment-language {
@@ -2928,7 +2948,7 @@ button.scene-prop.is-selected {
   align-content: start;
   background:
     linear-gradient(180deg, rgba(8, 26, 45, .12), rgba(4, 14, 27, .48)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg.png') center 58% / cover no-repeat;
+    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -3018,7 +3038,7 @@ button.scene-prop.is-selected {
   background:
     radial-gradient(ellipse at 50% 36%, rgba(115, 215, 199, .17), transparent 34%),
     linear-gradient(180deg, rgba(6, 24, 42, .06), rgba(5, 17, 32, .54)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg.png') center 58% / cover no-repeat;
+    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -3093,7 +3113,7 @@ button.scene-prop.is-selected {
   background:
     radial-gradient(ellipse at 50% 18%, rgba(75, 155, 188, .26), transparent 44%),
     linear-gradient(180deg, rgba(6, 24, 45, .06), rgba(4, 15, 30, .58)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg.png') center 58% / cover no-repeat;
+    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -3186,7 +3206,7 @@ button.scene-prop.is-selected {
   background:
     radial-gradient(circle at 50% 32%, rgba(255, 215, 117, .26), transparent 28%),
     linear-gradient(180deg, rgba(4, 16, 31, .08), rgba(4, 14, 27, .48)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg.png') center 58% / cover no-repeat;
+    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -5734,12 +5754,15 @@ button.scene-prop.is-selected {
   }
 
   .station-world[data-scene-mode] > .stage-prompt {
+    display: block !important;
     position: absolute !important;
     top: 92px !important;
     left: 12px !important;
     width: calc(100% - 24px) !important;
     margin: 0 !important;
+    line-height: 1.15 !important;
     text-align: center;
+    transform: none !important;
   }
 
   .station-world[data-scene-mode] > .mission-console,
@@ -6036,7 +6059,7 @@ button.scene-prop.is-selected {
   }
 }
 
-/* V2.4 role-practice profile: reuse the same painted room, people anchors and
+/* V2.6 role-practice profile: reuse the same painted room, people anchors and
  * real counter coordinates as the story stages. Practice adds controls only;
  * it never paints a second table or resizes the cast within one device class. */
 @media (min-aspect-ratio: 4 / 5) and (min-width: 681px) {
@@ -6165,4 +6188,242 @@ button.scene-prop.is-selected {
   .station-world[data-scene-mode] > .scene-props {
     transform: translateX(-50%) !important;
   }
+}
+
+/* On narrow screens the full-height adult cutouts intentionally overlap as
+ * artwork. Their interactive boxes must not: each candidate owns one half of
+ * the viewport, while its pointer-transparent picture may extend across the
+ * centre seam. This keeps both labels and both people independently tappable. */
+@media (max-width: 680px) {
+  .station-world[data-scene-mode] > .scene-people > button.scene-character.is-choice-candidate {
+    width: 50% !important;
+    aspect-ratio: auto !important;
+    overflow: visible !important;
+  }
+
+  .station-world[data-scene-mode] > .scene-people > button.scene-character--left.is-choice-candidate {
+    right: auto !important;
+    left: 0 !important;
+    transform-origin: 75% bottom !important;
+  }
+
+  .station-world[data-scene-mode] > .scene-people > button.scene-character--right.is-choice-candidate {
+    right: 0 !important;
+    left: auto !important;
+    transform-origin: 25% bottom !important;
+  }
+
+  .station-world[data-scene-mode] > .scene-people > button.scene-character.is-choice-candidate picture {
+    position: absolute !important;
+    bottom: 0 !important;
+    width: auto !important;
+    height: 100% !important;
+    aspect-ratio: 2 / 3;
+    pointer-events: none !important;
+  }
+
+  .station-world[data-scene-mode] > .scene-people > button.scene-character--left.is-choice-candidate picture {
+    left: -5px !important;
+  }
+
+  .station-world[data-scene-mode] > .scene-people > button.scene-character--right.is-choice-candidate picture {
+    right: -5px !important;
+  }
+
+  .station-world[data-scene-mode] > .scene-people > button.scene-character.is-choice-candidate picture img {
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+  }
+
+  button.scene-character--left.is-choice-candidate .scene-character__name { left: 75%; }
+  button.scene-character--right.is-choice-candidate .scene-character__name { left: 25%; }
+}
+
+/* Direct scene actions use a compact station signal strip. The catalog/runtime
+ * declares this surface explicitly; layout never infers it from empty markup
+ * or from the amount of explanatory copy present. */
+.station-world[data-scene-mode] > .mission-console--scene-action,
+.station-world[data-scene-mode] > .mission-console--scene-action.mission-console--with-cast {
+  width: min(680px, calc(58vw - 2px)) !important;
+  max-width: min(680px, calc(58vw - 2px)) !important;
+  padding: 8px 14px 10px !important;
+  border-width: 3px;
+  border-radius: 20px;
+  box-shadow: 0 7px 0 rgba(72, 42, 24, .68), 0 15px 28px rgba(5, 17, 32, .2),
+    inset 0 0 0 3px rgba(107, 63, 42, .08);
+}
+
+.mission-console--scene-action::before,
+.mission-console--scene-action::after {
+  top: -9px;
+  width: 26px;
+  height: 14px;
+  border-width: 2px;
+}
+
+.mission-console--scene-action > .adventure-heart-gauge {
+  min-height: 32px;
+  margin: -3px auto 5px;
+  padding-block: 2px;
+}
+
+.mission-console--scene-action > .mission-prompt {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 4px;
+  font-size: clamp(1.08rem, 2.15vw, 1.45rem) !important;
+  line-height: 1.18 !important;
+  text-wrap: balance;
+}
+
+.mission-console--scene-action > .moment-language,
+.mission-console--scene-action .support-guidance > .moment-language {
+  width: 100%;
+  min-height: 38px;
+  margin: 0 auto 4px;
+  padding: 5px 9px;
+  border-radius: 11px;
+}
+
+.mission-console--scene-action .moment-language__item {
+  padding-block: 0;
+  font-size: clamp(.96rem, 1.75vw, 1.16rem);
+  line-height: 1.28;
+}
+
+.mission-console--scene-action > .interaction-space {
+  position: absolute;
+  z-index: 3;
+  top: 42px;
+  right: 14px;
+  left: 14px;
+  min-height: 0;
+  height: 38px;
+  gap: 4px;
+  align-content: center;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mission-console--scene-action:not(:has(> .adventure-heart-gauge)) > .interaction-space {
+  top: 8px;
+}
+
+.mission-console--scene-action .answer-pronunciation-line {
+  width: 100%;
+  min-height: 38px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 4px 9px;
+  border: 1px solid rgba(169, 111, 40, .5);
+  border-radius: 11px;
+  color: #4c301f;
+  background: linear-gradient(180deg, rgba(255, 252, 239, .99), rgba(246, 225, 180, .98));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .8);
+  font-size: clamp(1.28rem, 2.25vw, 1.8rem) !important;
+  line-height: 1.08 !important;
+}
+
+.mission-console--scene-action .support-action-instruction { display: none; }
+
+.mission-console--scene-action .support-guidance {
+  gap: 5px;
+  margin: 0 auto 4px;
+}
+
+.mission-console--scene-action .support-guidance > .feedback-mission-bar {
+  min-height: 48px;
+  padding-block: 5px;
+}
+
+.mission-console--scene-action.mission-console--support > .interaction-space {
+  min-height: 0;
+  height: 0;
+}
+
+@media (max-aspect-ratio: 4 / 5), (max-width: 680px) {
+  .station-world[data-scene-mode] > .mission-console--scene-action,
+  .station-world[data-scene-mode] > .mission-console--scene-action.mission-console--with-cast {
+    width: calc(100% - 20px) !important;
+    max-width: calc(100% - 20px) !important;
+    padding-inline: 10px !important;
+  }
+
+  .mission-console--scene-action > .adventure-heart-gauge {
+    margin-top: -2px;
+  }
+}
+
+/* V2.6 truthful role disposition and word-level assembly. This final layer owns the
+ * new interaction states so older compatibility profiles cannot dilute their
+ * touch size, focus cues, or skipped-stage meaning. */
+.stage-jump-button.is-skipped {
+  border-color: #c98b32;
+  background: #fff8e8;
+}
+
+.stage-jump-button.is-skipped b {
+  color: #5b351c;
+  border-color: #c98b32;
+  background: #f7c75d;
+}
+
+.role-skip-actions,
+.role-recovery-actions { justify-content: center; }
+
+.role-skip-action,
+.role-skip-failure .quiet-action,
+.block-builder__reset {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.role-skip-action {
+  color: rgba(255, 243, 207, .9);
+  border-color: rgba(255, 239, 192, .56);
+  background: rgba(255, 250, 232, .08);
+}
+
+.role-recovery-return { color: #fff0bc; }
+
+.role-skip-failure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff2c6;
+  font-weight: 800;
+}
+
+.block-builder__reset {
+  padding: 8px 18px;
+  border: 2px solid #9a7654;
+  border-radius: 999px;
+  color: #5b351c;
+  background: #fffaf0;
+  font-weight: 900;
+}
+
+.block-builder__track .is-boundary-cue,
+.block-builder__bank [data-boundary-cue="true"] {
+  outline: 3px solid #efb93e;
+  outline-offset: 2px;
+}
+
+.feedback-bubble__example {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #3f2a1d;
+  background: #fff1b8;
+  font: 800 1.05rem/1.25 'Fredoka', sans-serif;
+}
+
+@media (max-width: 844px) {
+  .block-builder__bank { flex-wrap: wrap; }
+  .block-builder__bank .choice-token { min-width: 56px; min-height: 48px; }
+  .role-skip-failure { flex-wrap: wrap; }
 }

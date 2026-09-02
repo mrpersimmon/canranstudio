@@ -1,0 +1,2596 @@
+{
+  "unitId": "NCE-U02",
+  "districtId": "first-book-1-12",
+  "lessonIds": [
+    "lesson3",
+    "lesson4"
+  ],
+  "unitLabel": "Lesson 3–4",
+  "title": "5号牌与两把雨伞",
+  "status": "candidate",
+  "publicationScope": "local-poc",
+  "runtimeProfile": "story-stage-v1",
+  "experienceRevision": "lesson3-4-v2",
+  "beats": [],
+  "targets": [
+    {
+      "targetId": "NCE-U02-T01",
+      "tier": "core",
+      "title": "听懂衣帽间取物从请求、交票、报号、拿错到找回的因果与顺序，并判断最终结果",
+      "evidenceModes": [
+        "dialogue-sequence-comprehension"
+      ],
+      "structureRefs": [],
+      "primarySourceRefs": [
+        "L03-Q01",
+        "L03-D01",
+        "L03-D02",
+        "L03-D03",
+        "L03-D04",
+        "L03-D05",
+        "L03-D06",
+        "L03-D07",
+        "L03-D08",
+        "L03-D09",
+        "L03-D10",
+        "L03-D11",
+        "L03-D12",
+        "L03-W05",
+        "L03-W06",
+        "L03-W07",
+        "L03-W10"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "一次整段理解证据，不把 12 句拆成 12 道题",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    },
+    {
+      "targetId": "NCE-U02-T02",
+      "tier": "core",
+      "title": "用归属问句询问，并按真实关系作肯定或否定短答",
+      "evidenceModes": [
+        "ownership-polarity-exchange"
+      ],
+      "structureRefs": [
+        "GS-OWNERSHIP-QUESTION-SG",
+        "GS-BE-SHORT-ANSWER-SG"
+      ],
+      "primarySourceRefs": [
+        "L03-D08",
+        "L03-D09",
+        "L03-D11",
+        "L04-P01",
+        "L04-P02",
+        "L04-P03",
+        "L04-P04",
+        "L04-P05",
+        "L04-P06",
+        "L04-P07",
+        "L04-P08",
+        "L04-P09",
+        "L04-P10",
+        "L04-P11",
+        "L04-P12",
+        "L04-P13",
+        "L04-P14",
+        "L04-P15"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "少量代表变体形成证据，其余完整接触或回访",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    },
+    {
+      "targetId": "NCE-U02-T03",
+      "tier": "core",
+      "title": "用 my/your 和肯定／否定陈述表达归属对比",
+      "evidenceModes": [
+        "possessor-relation-contrast"
+      ],
+      "structureRefs": [
+        "GS-POSSESSIVE-DETERMINER",
+        "GS-BE-NEGATIVE-SG"
+      ],
+      "primarySourceRefs": [
+        "L03-D06",
+        "L03-D09",
+        "L03-W04",
+        "L04-E01",
+        "L04-E02"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "功能词在完整关系中取证，不做孤立词义卡",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    },
+    {
+      "targetId": "NCE-U02-T04",
+      "tier": "support-communication",
+      "title": "在取物和交还时使用礼貌请求及 Here is/Here's ... 完成递交",
+      "evidenceModes": [
+        "request-and-handover-use"
+      ],
+      "structureRefs": [
+        "GS-REQUEST-HANDOVER",
+        "GS-HERE-PRESENTATION"
+      ],
+      "primarySourceRefs": [
+        "L03-D01",
+        "L03-D02",
+        "L03-D05",
+        "L03-W02",
+        "L03-W03",
+        "L03-N01"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "以完整表达和动作关系取证，不单独扩成训练章节",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    },
+    {
+      "targetId": "NCE-U02-T05",
+      "tier": "core",
+      "title": "判断 it 回指当前已提及物品，并在省略名词后继续理解问答",
+      "evidenceModes": [
+        "anaphora-resolution"
+      ],
+      "structureRefs": [
+        "GS-PRONOUN-IT-REFERENCE"
+      ],
+      "primarySourceRefs": [
+        "L03-D10",
+        "L03-D11",
+        "L03-N04"
+      ],
+      "inheritedSourceRefs": [
+        "L01-W09"
+      ],
+      "firstSessionBoundary": "至少一个变化物品的关系证据；不考术语",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    },
+    {
+      "targetId": "NCE-U02-T06",
+      "tier": "support-communication",
+      "title": "在拿错物品时恰当使用道歉、称谓和感谢",
+      "evidenceModes": [
+        "social-repair-and-thanks"
+      ],
+      "structureRefs": [
+        "GS-POLITE-REPAIR"
+      ],
+      "primarySourceRefs": [
+        "L03-D03",
+        "L03-D07",
+        "L03-D12",
+        "L03-W08",
+        "L03-W09",
+        "L03-N02",
+        "L03-N03"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "在交际用途里取证，不做 sorry/sir 图片题或独立章节",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    },
+    {
+      "targetId": "NCE-U02-T07",
+      "tier": "lexical-sample",
+      "title": "将本单元新增用品、场所、号码和人物关系词连接到意义，并辨别复现词",
+      "evidenceModes": [
+        "lexical-form-meaning-association"
+      ],
+      "structureRefs": [],
+      "primarySourceRefs": [
+        "L03-W01",
+        "L03-W05",
+        "L03-W06",
+        "L03-W07",
+        "L03-W10",
+        "L04-W01",
+        "L04-W02",
+        "L04-W03",
+        "L04-W04",
+        "L04-W05",
+        "L04-P01",
+        "L04-P02",
+        "L04-P03",
+        "L04-P04",
+        "L04-P05",
+        "L04-P06",
+        "L04-P07",
+        "L04-P08",
+        "L04-P09",
+        "L04-P10",
+        "L04-P11",
+        "L04-P12",
+        "L04-P13",
+        "L04-P14",
+        "L04-P15"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "首课只抽五个语义代表；其余完整接触后按表现回访",
+      "contextIds": [
+        "cloakroom-story",
+        "counter-transfer"
+      ]
+    }
+  ],
+  "lessonContent": {
+    "lesson3": {
+      "lessonId": "lesson3",
+      "textbookTitle": "Sorry, sir.",
+      "sourceRegisterRef": "BOOK1-2022-07",
+      "textbookSource": "外研社《新概念英语智慧版 1》PDF 页 39–40，教材页 6–7",
+      "requiredSourceIds": [
+        "L03-I01",
+        "L03-Q01",
+        "L03-D01",
+        "L03-D02",
+        "L03-D03",
+        "L03-D04",
+        "L03-D05",
+        "L03-D06",
+        "L03-D07",
+        "L03-D08",
+        "L03-D09",
+        "L03-D10",
+        "L03-D11",
+        "L03-D12",
+        "L03-W01",
+        "L03-W02",
+        "L03-W03",
+        "L03-W04",
+        "L03-W05",
+        "L03-W06",
+        "L03-W07",
+        "L03-W08",
+        "L03-W09",
+        "L03-W10",
+        "L03-N01",
+        "L03-N02",
+        "L03-N03",
+        "L03-N04"
+      ],
+      "sources": {
+        "L03-I01": {
+          "sourceId": "L03-I01",
+          "sourceKind": "textbook-instruction",
+          "text": "Listen then answer this question.",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "听录音，然后回答问题。"
+        },
+        "L03-Q01": {
+          "sourceId": "L03-Q01",
+          "sourceKind": "textbook-question",
+          "text": "Does the man get his umbrella back?",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "这位男士拿回他的雨伞了吗？"
+        },
+        "L03-D01": {
+          "sourceId": "L03-D01",
+          "sourceKind": "dialogue",
+          "text": "My coat and my umbrella please.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 1,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d01.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "visitor"
+        },
+        "L03-D02": {
+          "sourceId": "L03-D02",
+          "sourceKind": "dialogue",
+          "text": "Here is my ticket.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 2,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d02.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "visitor"
+        },
+        "L03-D03": {
+          "sourceId": "L03-D03",
+          "sourceKind": "dialogue",
+          "text": "Thank you, sir.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "cloakroom-attendant"
+        },
+        "L03-D04": {
+          "sourceId": "L03-D04",
+          "sourceKind": "dialogue",
+          "text": "Number five.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "cloakroom-attendant"
+        },
+        "L03-D05": {
+          "sourceId": "L03-D05",
+          "sourceKind": "dialogue",
+          "text": "Here's your umbrella and your coat.",
+          "sourceRole": "target",
+          "coveragePolicy": "exposure",
+          "figureGroup": 4,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "cloakroom-attendant"
+        },
+        "L03-D06": {
+          "sourceId": "L03-D06",
+          "sourceKind": "dialogue",
+          "text": "This is not my umbrella.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d06.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "visitor"
+        },
+        "L03-D07": {
+          "sourceId": "L03-D07",
+          "sourceKind": "dialogue",
+          "text": "Sorry, sir.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "cloakroom-attendant"
+        },
+        "L03-D08": {
+          "sourceId": "L03-D08",
+          "sourceKind": "dialogue",
+          "text": "Is this your umbrella?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "cloakroom-attendant"
+        },
+        "L03-D09": {
+          "sourceId": "L03-D09",
+          "sourceKind": "dialogue",
+          "text": "No, it isn't.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d09.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "visitor"
+        },
+        "L03-D10": {
+          "sourceId": "L03-D10",
+          "sourceKind": "dialogue",
+          "text": "Is this it?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "cloakroom-attendant"
+        },
+        "L03-D11": {
+          "sourceId": "L03-D11",
+          "sourceKind": "dialogue",
+          "text": "Yes, it is.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d11.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "visitor"
+        },
+        "L03-D12": {
+          "sourceId": "L03-D12",
+          "sourceKind": "dialogue",
+          "text": "Thank you very much.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-d12.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "visitor"
+        },
+        "L03-W01": {
+          "sourceId": "L03-W01",
+          "sourceKind": "vocabulary",
+          "text": "umbrella",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "伞",
+          "vocabularyOrder": 1,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w01.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W02": {
+          "sourceId": "L03-W02",
+          "sourceKind": "vocabulary",
+          "text": "please",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "请",
+          "vocabularyOrder": 2,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W03": {
+          "sourceId": "L03-W03",
+          "sourceKind": "vocabulary",
+          "text": "here",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "这里",
+          "vocabularyOrder": 3,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W04": {
+          "sourceId": "L03-W04",
+          "sourceKind": "vocabulary",
+          "text": "my",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "我的",
+          "vocabularyOrder": 4,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W05": {
+          "sourceId": "L03-W05",
+          "sourceKind": "vocabulary",
+          "text": "ticket",
+          "sourceRole": "target",
+          "coveragePolicy": "exposure",
+          "translation": "票",
+          "vocabularyOrder": 5,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W06": {
+          "sourceId": "L03-W06",
+          "sourceKind": "vocabulary",
+          "text": "number",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "号码",
+          "vocabularyOrder": 6,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W07": {
+          "sourceId": "L03-W07",
+          "sourceKind": "vocabulary",
+          "text": "five",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "五",
+          "vocabularyOrder": 7,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W08": {
+          "sourceId": "L03-W08",
+          "sourceKind": "vocabulary",
+          "text": "sorry",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "对不起",
+          "vocabularyOrder": 8,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W09": {
+          "sourceId": "L03-W09",
+          "sourceKind": "vocabulary",
+          "text": "sir",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "先生",
+          "vocabularyOrder": 9,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w09.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-W10": {
+          "sourceId": "L03-W10",
+          "sourceKind": "vocabulary",
+          "text": "cloakroom",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "衣帽存放处",
+          "vocabularyOrder": 10,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l03-w10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L03-N01": {
+          "sourceId": "L03-N01",
+          "sourceKind": "textbook-note",
+          "text": "Here's = Here is.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L03-D02",
+            "L03-D05"
+          ]
+        },
+        "L03-N02": {
+          "sourceId": "L03-N02",
+          "sourceKind": "textbook-note",
+          "text": "Sorry = I'm sorry.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L03-D07"
+          ]
+        },
+        "L03-N03": {
+          "sourceId": "L03-N03",
+          "sourceKind": "textbook-note",
+          "text": "sir 是对男性的尊称。",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L03-D03",
+            "L03-D07"
+          ]
+        },
+        "L03-N04": {
+          "sourceId": "L03-N04",
+          "sourceKind": "textbook-note",
+          "text": "Is this it? 中的 it 指代前文提到的物品。",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L03-D10",
+            "L03-D11"
+          ]
+        },
+        "L03-Z01": {
+          "sourceId": "L03-Z01",
+          "sourceKind": "reference-translation",
+          "text": "请把我的大衣和伞拿给我。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D01"
+        },
+        "L03-Z02": {
+          "sourceId": "L03-Z02",
+          "sourceKind": "reference-translation",
+          "text": "这是我（寄存东西）的牌子。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D02"
+        },
+        "L03-Z03": {
+          "sourceId": "L03-Z03",
+          "sourceKind": "reference-translation",
+          "text": "谢谢，先生。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D03"
+        },
+        "L03-Z04": {
+          "sourceId": "L03-Z04",
+          "sourceKind": "reference-translation",
+          "text": "是5号。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D04"
+        },
+        "L03-Z05": {
+          "sourceId": "L03-Z05",
+          "sourceKind": "reference-translation",
+          "text": "这是您的伞和大衣。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D05"
+        },
+        "L03-Z06": {
+          "sourceId": "L03-Z06",
+          "sourceKind": "reference-translation",
+          "text": "这不是我的伞。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D06"
+        },
+        "L03-Z07": {
+          "sourceId": "L03-Z07",
+          "sourceKind": "reference-translation",
+          "text": "对不起，先生。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D07"
+        },
+        "L03-Z08": {
+          "sourceId": "L03-Z08",
+          "sourceKind": "reference-translation",
+          "text": "这把伞是您的吗？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D08"
+        },
+        "L03-Z09": {
+          "sourceId": "L03-Z09",
+          "sourceKind": "reference-translation",
+          "text": "不，不是！",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D09"
+        },
+        "L03-Z10": {
+          "sourceId": "L03-Z10",
+          "sourceKind": "reference-translation",
+          "text": "这把是吗？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D10"
+        },
+        "L03-Z11": {
+          "sourceId": "L03-Z11",
+          "sourceKind": "reference-translation",
+          "text": "是，是这把。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D11"
+        },
+        "L03-Z12": {
+          "sourceId": "L03-Z12",
+          "sourceKind": "reference-translation",
+          "text": "非常感谢。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L03-D12"
+        }
+      }
+    },
+    "lesson4": {
+      "lessonId": "lesson4",
+      "textbookTitle": "Is this your ...?",
+      "sourceRegisterRef": "BOOK1-2022-07",
+      "textbookSource": "外研社《新概念英语智慧版 1》PDF 页 41–42，教材页 8–9",
+      "requiredSourceIds": [
+        "L04-I01",
+        "L04-P01",
+        "L04-P02",
+        "L04-P03",
+        "L04-P04",
+        "L04-P05",
+        "L04-P06",
+        "L04-P07",
+        "L04-P08",
+        "L04-P09",
+        "L04-P10",
+        "L04-P11",
+        "L04-P12",
+        "L04-P13",
+        "L04-P14",
+        "L04-P15",
+        "L04-W01",
+        "L04-W02",
+        "L04-W03",
+        "L04-W04",
+        "L04-W05"
+      ],
+      "sources": {
+        "L04-I01": {
+          "sourceId": "L04-I01",
+          "sourceKind": "textbook-instruction",
+          "text": "Look, listen and repeat.",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "看图、听音并跟读。"
+        },
+        "L04-P01": {
+          "sourceId": "L04-P01",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your pen?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 1,
+          "vocabularySourceRef": "L02-W01",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p01.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P02": {
+          "sourceId": "L04-P02",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your pencil?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 2,
+          "vocabularySourceRef": "L02-W02",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p02.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P03": {
+          "sourceId": "L04-P03",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your book?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 3,
+          "vocabularySourceRef": "L02-W03",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p03.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P04": {
+          "sourceId": "L04-P04",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your watch?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "promptOrder": 4,
+          "vocabularySourceRef": "L02-W04",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p04.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P05": {
+          "sourceId": "L04-P05",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your coat?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 5,
+          "vocabularySourceRef": "L02-W05",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p05.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P06": {
+          "sourceId": "L04-P06",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your dress?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 6,
+          "vocabularySourceRef": "L02-W06",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p06.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P07": {
+          "sourceId": "L04-P07",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your skirt?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 7,
+          "vocabularySourceRef": "L02-W07",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p07.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P08": {
+          "sourceId": "L04-P08",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your shirt?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 8,
+          "vocabularySourceRef": "L02-W08",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p08.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P09": {
+          "sourceId": "L04-P09",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your car?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 9,
+          "vocabularySourceRef": "L02-W09",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p09.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P10": {
+          "sourceId": "L04-P10",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your house?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 10,
+          "vocabularySourceRef": "L02-W10",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p10.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P11": {
+          "sourceId": "L04-P11",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your suit?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "promptOrder": 11,
+          "vocabularySourceRef": "L04-W01",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p11.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P12": {
+          "sourceId": "L04-P12",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your school?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 12,
+          "vocabularySourceRef": "L04-W02",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p12.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P13": {
+          "sourceId": "L04-P13",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your teacher?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 13,
+          "vocabularySourceRef": "L04-W03",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p13.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P14": {
+          "sourceId": "L04-P14",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your son?",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "promptOrder": 14,
+          "vocabularySourceRef": "L04-W04",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p14.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-P15": {
+          "sourceId": "L04-P15",
+          "sourceKind": "substitution-prompt",
+          "text": "Is this your daughter?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "promptOrder": 15,
+          "vocabularySourceRef": "L04-W05",
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-p15.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-W01": {
+          "sourceId": "L04-W01",
+          "sourceKind": "vocabulary",
+          "text": "suit",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "一套衣服",
+          "vocabularyOrder": 1,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-w01.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-W02": {
+          "sourceId": "L04-W02",
+          "sourceKind": "vocabulary",
+          "text": "school",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "学校",
+          "vocabularyOrder": 2,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-w02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-W03": {
+          "sourceId": "L04-W03",
+          "sourceKind": "vocabulary",
+          "text": "teacher",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "老师",
+          "vocabularyOrder": 3,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-w03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-W04": {
+          "sourceId": "L04-W04",
+          "sourceKind": "vocabulary",
+          "text": "son",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "儿子",
+          "vocabularyOrder": 4,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-w04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-W05": {
+          "sourceId": "L04-W05",
+          "sourceKind": "vocabulary",
+          "text": "daughter",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "女儿",
+          "vocabularyOrder": 5,
+          "audioSrc": "/poc/lesson3-4-experience/audio/l04-w05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L04-E01": {
+          "sourceId": "L04-E01",
+          "sourceKind": "exercise-mechanism",
+          "text": "Copy these sentences.",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "reusedSourceRefs": [
+            "L03-D06",
+            "L03-D07",
+            "L03-D08",
+            "L03-D09"
+          ],
+          "extensionModes": [
+            "paper-handwriting",
+            "tablet-handwriting"
+          ],
+          "requiredForUnitCompletion": false,
+          "producesLearningEvidence": false,
+          "decisionRef": "ADR-0098"
+        },
+        "L04-E02": {
+          "sourceId": "L04-E02",
+          "sourceKind": "exercise-mechanism",
+          "text": "Answer these questions.",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "reusedSourceRefs": [
+            "L04-P01",
+            "L04-P02",
+            "L04-P03",
+            "L04-P04",
+            "L04-P05",
+            "L04-P06",
+            "L04-P07",
+            "L04-P08",
+            "L04-P09",
+            "L04-P10"
+          ],
+          "extensionModes": [
+            "paper-handwriting",
+            "tablet-handwriting"
+          ],
+          "requiredForUnitCompletion": false,
+          "producesLearningEvidence": false,
+          "decisionRef": "ADR-0098"
+        }
+      }
+    }
+  },
+  "sourceTargetCoverage": [
+    {
+      "sourceRefs": [
+        "L03-I01",
+        "L03-Q01"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此声称已教授 does"
+    },
+    {
+      "sourceRefs": [
+        "L03-D01",
+        "L03-D02"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "support",
+        "NCE-U02-T04": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此声称每句话都必须单独做题"
+    },
+    {
+      "sourceRefs": [
+        "L03-D03",
+        "L03-D04",
+        "L03-D05"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "eligible-evidence",
+        "NCE-U02-T04": "eligible-evidence",
+        "NCE-U02-T06": "support",
+        "NCE-U02-T07": "support"
+      },
+      "prohibitedInference": "不得据此声称记住 5 号即理解完整情节"
+    },
+    {
+      "sourceRefs": [
+        "L03-D06",
+        "L03-D07"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "eligible-evidence",
+        "NCE-U02-T03": "eligible-evidence",
+        "NCE-U02-T06": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此声称一次否认即掌握所有否定"
+    },
+    {
+      "sourceRefs": [
+        "L03-D08",
+        "L03-D09"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "support",
+        "NCE-U02-T02": "eligible-evidence",
+        "NCE-U02-T03": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此声称点击 No 即掌握归属对比"
+    },
+    {
+      "sourceRefs": [
+        "L03-D10",
+        "L03-D11",
+        "L03-D12"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "eligible-evidence",
+        "NCE-U02-T02": "eligible-evidence",
+        "NCE-U02-T05": "eligible-evidence",
+        "NCE-U02-T06": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此声称背诵 it 术语即理解指代"
+    },
+    {
+      "sourceRefs": [
+        "L03-W01",
+        "L03-W02",
+        "L03-W03",
+        "L03-W04",
+        "L03-W05",
+        "L03-W06",
+        "L03-W07",
+        "L03-W08",
+        "L03-W09",
+        "L03-W10"
+      ],
+      "coverage": {
+        "NCE-U02-T01": "support",
+        "NCE-U02-T03": "support",
+        "NCE-U02-T04": "support",
+        "NCE-U02-T06": "support",
+        "NCE-U02-T07": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此声称 10 词都要当天双通道正式考察"
+    },
+    {
+      "sourceRefs": [
+        "L03-N01",
+        "L03-N02",
+        "L03-N03",
+        "L03-N04"
+      ],
+      "coverage": {
+        "NCE-U02-T04": "support",
+        "NCE-U02-T05": "support",
+        "NCE-U02-T06": "support"
+      },
+      "prohibitedInference": "不得据此把 Notes 变成术语考试"
+    },
+    {
+      "sourceRefs": [
+        "L03-Z01",
+        "L03-Z02",
+        "L03-Z03",
+        "L03-Z04",
+        "L03-Z05",
+        "L03-Z06",
+        "L03-Z07",
+        "L03-Z08",
+        "L03-Z09",
+        "L03-Z10",
+        "L03-Z11",
+        "L03-Z12"
+      ],
+      "coverage": {},
+      "prohibitedInference": "不得据此声称查看中文等于听懂英语"
+    },
+    {
+      "sourceRefs": [
+        "L04-I01"
+      ],
+      "coverage": {},
+      "prohibitedInference": "教材活动指令本身不形成独立 Target"
+    },
+    {
+      "sourceRefs": [
+        "L04-P01",
+        "L04-P02",
+        "L04-P03",
+        "L04-P04",
+        "L04-P05",
+        "L04-P06",
+        "L04-P07",
+        "L04-P08",
+        "L04-P09",
+        "L04-P10"
+      ],
+      "coverage": {
+        "NCE-U02-T02": "eligible-evidence",
+        "NCE-U02-T03": "eligible-evidence",
+        "NCE-U02-T07": "eligible-evidence"
+      },
+      "prohibitedInference": "不得为复现词创建新的词汇 Source ID"
+    },
+    {
+      "sourceRefs": [
+        "L04-P11",
+        "L04-P12",
+        "L04-P13",
+        "L04-P14",
+        "L04-P15",
+        "L04-W01",
+        "L04-W02",
+        "L04-W03",
+        "L04-W04",
+        "L04-W05"
+      ],
+      "coverage": {
+        "NCE-U02-T02": "eligible-evidence",
+        "NCE-U02-T03": "support",
+        "NCE-U02-T07": "eligible-evidence"
+      },
+      "prohibitedInference": "不得据此复制 U01 全量双通道方案"
+    },
+    {
+      "sourceRefs": [
+        "L04-E01",
+        "L04-E02"
+      ],
+      "coverage": {
+        "NCE-U02-T02": "optional",
+        "NCE-U02-T03": "optional",
+        "NCE-U02-T06": "optional"
+      },
+      "prohibitedInference": "不得据此声称已完成书写、拼写或手机输入能力"
+    }
+  ],
+  "firstSessionEvidencePlan": {
+    "policyId": "first-session-representative-retrieval-v1",
+    "frozenOn": "2026-08-31",
+    "sourceContactPolicy": "all-required-sources-before-unit-completion",
+    "promptEvidenceSourceRefs": [
+      "L04-P04",
+      "L04-P11",
+      "L04-P15"
+    ],
+    "lexicalEvidenceSourceRefs": [
+      "L03-W01",
+      "L03-W10",
+      "L04-W01",
+      "L04-W05"
+    ],
+    "remainingPromptPolicy": "exposure-then-performance-driven-review",
+    "remainingVocabularyPolicy": "exposure-then-performance-driven-review",
+    "evidenceSlots": [
+      {
+        "slotId": "NCE-U02-E01",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U02-T01",
+            "evidenceMode": "dialogue-sequence-comprehension"
+          }
+        ],
+        "sourceRefs": [
+          "L03-Q01",
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "retrievalOpportunityQuota": 1,
+        "boundary": "整段只形成一次结果，不按十二句话拆题"
+      },
+      {
+        "slotId": "NCE-U02-E02",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U02-T02",
+            "evidenceMode": "ownership-polarity-exchange"
+          },
+          {
+            "targetId": "NCE-U02-T03",
+            "evidenceMode": "possessor-relation-contrast"
+          }
+        ],
+        "sourceRefs": [
+          "L03-D06",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L04-P04",
+          "L04-P11",
+          "L04-P15"
+        ],
+        "retrievalOpportunityQuota": 2,
+        "requirements": [
+          "one-positive-relation",
+          "one-negative-relation",
+          "my-and-your-both-observed"
+        ]
+      },
+      {
+        "slotId": "NCE-U02-E03",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U02-T04",
+            "evidenceMode": "request-and-handover-use"
+          },
+          {
+            "targetId": "NCE-U02-T06",
+            "evidenceMode": "social-repair-and-thanks"
+          }
+        ],
+        "sourceRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D05",
+          "L03-D07",
+          "L03-D12"
+        ],
+        "retrievalOpportunityQuota": 1,
+        "boundary": "请求、递交、道歉和感谢只在一条完整交际链中取证"
+      },
+      {
+        "slotId": "NCE-U02-E04",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U02-T05",
+            "evidenceMode": "anaphora-resolution"
+          }
+        ],
+        "sourceRefs": [
+          "L03-D10",
+          "L03-D11",
+          "L03-N04"
+        ],
+        "retrievalOpportunityQuota": 1,
+        "requiresAuthoredTransfer": true,
+        "boundary": "必须换一个物品关系后判断 it，不考术语或原句背诵"
+      },
+      {
+        "slotId": "NCE-U02-E05",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U02-T07",
+            "evidenceMode": "lexical-form-meaning-association"
+          }
+        ],
+        "sourceRefs": [
+          "L03-W01",
+          "L03-W10",
+          "L04-W01",
+          "L04-W05"
+        ],
+        "retrievalOpportunityQuota": 4,
+        "boundary": "只抽取物品、场所、新用品和人物关系各一个代表词；明确指路的号码牌动作只作接触"
+      }
+    ]
+  },
+  "voiceBaselineId": "nce-youth-v1",
+  "audioReviewContract": {
+    "packId": "nce-u02-kokoro-candidate-v1",
+    "manifestPath": "/poc/lesson3-4-experience/audio/manifest.json",
+    "canonicalAudioSetSha256": "c5738057a5857bb8c44a6d7b4bbeffbaa411683942ba10ae6bf7f31984da580f",
+    "voiceBaselineId": "nce-youth-v1",
+    "dialogueRenderMode": "natural-utterance",
+    "standaloneWordRenderMode": "context-cropped-lexeme-v1",
+    "decodedOnsetLimitMs": 150,
+    "publicationGate": "human-language-review-per-file",
+    "nonAcceptedStatus": "unreviewed-candidate",
+    "expectedAudioSourceCount": 42
+  },
+  "curriculumContract": {
+    "acceptedOn": "2026-08-30",
+    "acceptedDecisionRefs": [
+      "PA-01-A",
+      "PA-02-A",
+      "PA-03-A",
+      "PA-04-A"
+    ],
+    "launchPackRef": "docs/designs/lesson3-4-teaching-unit-launch-pack-v1.md",
+    "grammarSpineRef": "docs/designs/new-concept-english-book1-grammar-spine-v1.md",
+    "sourceRegister": {
+      "sourceRegisterId": "BOOK1-2022-07",
+      "title": "外研社《新概念英语智慧版 1：英语初阶 First Things First》",
+      "edition": "2022 年 7 月第 1 版第 1 次印刷",
+      "isbn": "978-7-5213-3670-2",
+      "snapshotSha256": "a54740bdce7423b98ea30334dca9043603ef5533f85e64f86f5af6d31d93be9f",
+      "totalPdfPages": 330,
+      "lessonPageMap": {
+        "lesson3": {
+          "pdfPages": [
+            39,
+            40
+          ],
+          "textbookPages": [
+            6,
+            7
+          ]
+        },
+        "lesson4": {
+          "pdfPages": [
+            41,
+            42
+          ],
+          "textbookPages": [
+            8,
+            9
+          ]
+        }
+      }
+    },
+    "writingPolicy": "optional-nonblocking",
+    "audioAuditStatus": "candidate-generated-awaiting-human-review",
+    "audioSourceAudit": {
+      "checkedOn": "2026-08-31",
+      "result": "no-auditable-official-audio",
+      "checkedSurfaces": [
+        "controlled-pdf-embedded-files",
+        "controlled-pdf-page-annotations-39-42",
+        "repository-audio-assets",
+        "local-download-audio-assets"
+      ],
+      "officialAccessModel": "book-specific-activation-in-fltrp-u-learning-app",
+      "officialReferenceId": "FLTRP-2023-JCJYJXZY-P58"
+    },
+    "audioCandidatePack": {
+      "packId": "nce-u02-kokoro-candidate-v1",
+      "generationBasis": "nce-u01-kokoro-candidate-v3",
+      "status": "local-poc-candidate-unreviewed",
+      "disclosure": "ai-generated-not-official-textbook-audio"
+    },
+    "speakerMappingStatus": "frozen-course-role-mapping",
+    "speakerMappingBasis": "textbook-dialogue-semantics-and-figure-sequence",
+    "storyDesignStatus": "authored-local-candidate",
+    "pageImplementationStatus": "authored-local-candidate",
+    "publicationAllowed": false
+  },
+  "authoredContent": {
+    "NCE-U02-C-AUDIO-FAILURE": {
+      "kind": "recovery",
+      "title": "这句英语还没有播放成功",
+      "copy": "英文会留在原位。点“再听一次”，听完后才能继续。",
+      "actionLabel": "再听一次"
+    },
+    "NCE-U02-C-SAVE-FAILURE": {
+      "kind": "recovery",
+      "title": "进度还没有保存好",
+      "copy": "不用重答，留在这里再保存一次。",
+      "actionLabel": "重新保存"
+    },
+    "NCE-U02-C-COMPLETION": {
+      "kind": "completion",
+      "kicker": "Lesson 3–4 完成",
+      "sceneTitle": "故事顺利结束",
+      "sceneInstruction": "两把雨伞都回到了正确的位置",
+      "title": "来客拿回了自己的雨伞",
+      "copy": "今天的故事已经完成。下一次见到新物品，还可以继续问 Is this your ...?",
+      "restartLabel": "重新体验",
+      "leaveLabel": "继续",
+      "leaveHref": "/"
+    }
+  },
+  "entities": {
+    "explorer-cat": {
+      "entityId": "explorer-cat",
+      "kind": "guide",
+      "label": "探险小猫",
+      "assets": {
+        "preferred": "/assets/adventure-map/mascot/loader/frame-2-route-page-20260806-01-192.avif"
+      }
+    },
+    "visitor": {
+      "entityId": "visitor",
+      "kind": "character",
+      "label": "来客",
+      "roleId": "visitor",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.avif"
+      }
+    },
+    "attendant": {
+      "entityId": "attendant",
+      "kind": "character",
+      "label": "衣帽间服务员",
+      "roleId": "cloakroom-attendant",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.avif"
+      }
+    },
+    "ticket-five": {
+      "entityId": "ticket-five",
+      "kind": "prop",
+      "label": "5 号牌",
+      "sourceRef": "L03-W05",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/item-ticket-five-v1.avif"
+      }
+    },
+    "umbrella-star": {
+      "entityId": "umbrella-star",
+      "kind": "prop",
+      "label": "星星雨伞",
+      "sourceRef": "L03-W01",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/item-umbrella-star-v1.avif"
+      }
+    },
+    "umbrella-stripe": {
+      "entityId": "umbrella-stripe",
+      "kind": "prop",
+      "label": "条纹雨伞",
+      "sourceRef": "L03-W01",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/item-umbrella-stripe-v1.avif"
+      }
+    },
+    "umbrella-dot": {
+      "entityId": "umbrella-dot",
+      "kind": "prop",
+      "label": "圆点雨伞",
+      "sourceRef": "L03-W01",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/item-umbrella-dot-v1.avif"
+      }
+    },
+    "pen": {
+      "entityId": "pen",
+      "kind": "item",
+      "label": "钢笔",
+      "sourceRef": "L04-P01",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-pen-v1.avif"
+      }
+    },
+    "pencil": {
+      "entityId": "pencil",
+      "kind": "item",
+      "label": "铅笔",
+      "sourceRef": "L04-P02",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-pencil-v1.avif"
+      }
+    },
+    "book": {
+      "entityId": "book",
+      "kind": "item",
+      "label": "书",
+      "sourceRef": "L04-P03",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-book-v1.avif"
+      }
+    },
+    "watch": {
+      "entityId": "watch",
+      "kind": "item",
+      "label": "手表",
+      "sourceRef": "L04-P04",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-watch-v1.avif"
+      }
+    },
+    "coat": {
+      "entityId": "coat",
+      "kind": "item",
+      "label": "外套",
+      "sourceRef": "L04-P05",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-coat-v1.avif"
+      }
+    },
+    "dress": {
+      "entityId": "dress",
+      "kind": "item",
+      "label": "连衣裙",
+      "sourceRef": "L04-P06",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-dress-v1.avif"
+      }
+    },
+    "skirt": {
+      "entityId": "skirt",
+      "kind": "item",
+      "label": "裙子",
+      "sourceRef": "L04-P07",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-skirt-v1.avif"
+      }
+    },
+    "shirt": {
+      "entityId": "shirt",
+      "kind": "item",
+      "label": "衬衫",
+      "sourceRef": "L04-P08",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/item-shirt-v1.avif"
+      }
+    },
+    "car": {
+      "entityId": "car",
+      "kind": "item",
+      "label": "汽车",
+      "sourceRef": "L04-P09",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/scene-car-v1.avif"
+      }
+    },
+    "house": {
+      "entityId": "house",
+      "kind": "item",
+      "label": "房子",
+      "sourceRef": "L04-P10",
+      "assets": {
+        "preferred": "/poc/lesson1-2-experience/assets/scene-house-v1.avif"
+      }
+    },
+    "suit": {
+      "entityId": "suit",
+      "kind": "item",
+      "label": "西装",
+      "sourceRef": "L04-P11",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/item-suit-v1.avif"
+      }
+    },
+    "school": {
+      "entityId": "school",
+      "kind": "item",
+      "label": "学校",
+      "sourceRef": "L04-P12",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/scene-school-v1.avif"
+      }
+    },
+    "teacher": {
+      "entityId": "teacher",
+      "kind": "person-card",
+      "label": "老师",
+      "sourceRef": "L04-P13",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/character-teacher-card-v1.avif"
+      }
+    },
+    "son": {
+      "entityId": "son",
+      "kind": "person-card",
+      "label": "儿子",
+      "sourceRef": "L04-P14",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/character-son-card-v1.avif"
+      }
+    },
+    "daughter": {
+      "entityId": "daughter",
+      "kind": "person-card",
+      "label": "女儿",
+      "sourceRef": "L04-P15",
+      "assets": {
+        "preferred": "/poc/lesson3-4-experience/assets/character-daughter-card-v1.avif"
+      }
+    }
+  },
+  "experience": {
+    "schemaVersion": 1,
+    "documentTitle": "Lesson 3–4 · 5号牌与两把雨伞",
+    "unitTitle": "5号牌与两把雨伞",
+    "stageCount": 10,
+    "storageKey": "poc:learning-experience:NCE-U02:lesson3-4-v2",
+    "navigation": {
+      "mode": "compact-progress-stage-map",
+      "completedStageAction": "replay",
+      "skippedStageAction": "make-up",
+      "futureStageAction": "locked"
+    },
+    "stageTransition": {
+      "mode": "story-consequence-auto",
+      "showCompletionInterstitial": false
+    },
+    "uiCopy": {
+      "progress": {
+        "openLabel": "打开阶段地图",
+        "currentPrefix": "打开阶段地图，当前第",
+        "currentMiddle": "阶段，共",
+        "currentSuffix": "阶段"
+      },
+      "settings": {
+        "visibleLabel": "设置",
+        "ariaLabel": "打开设置",
+        "heartsLabel": "冒险心",
+        "title": "学习设置",
+        "copy": "重新开始会清除本单元的本地进度。",
+        "restartLabel": "重新开始",
+        "returnLabel": "返回学习"
+      },
+      "stageMap": {
+        "title": "选择学习阶段",
+        "closeLabel": "关闭",
+        "copy": "已完成阶段可回演，跳过的角色阶段可补做。",
+        "completed": "已完成 · 回演",
+        "skipped": "已跳过 · 补做",
+        "current": "正在学习",
+        "locked": "尚未到达",
+        "stagePrefix": "第",
+        "stageMiddle": "阶段：",
+        "statusSeparator": "，"
+      },
+      "candidates": {
+        "neutralAriaPrefix": "候选人物 ",
+        "neutralVisiblePrefix": "候选 ",
+        "selectPrefix": "选择"
+      },
+      "hearts": {
+        "remainingPrefix": "还剩 ",
+        "remainingSuffix": " 颗冒险心"
+      },
+      "audio": {
+        "retryLabel": "再听一次",
+        "playQuestionLabel": "播放问句",
+        "playLineLabel": "播放这一句",
+        "playGroupLabel": "播放这一组",
+        "playingCopy": "正在播放英文……"
+      },
+      "task": {
+        "lockedStoryCopy": "声音会按故事顺序播放。听完整段后，问题才会出现。",
+        "lockedQuestionCopy": "先听清问句，再选择。",
+        "selectScenePersonCopy": "点击场景中的人物",
+        "stepPrefix": "第 ",
+        "stepMiddle": " 步 / 共 ",
+        "stepSuffix": " 步",
+        "groupPrefix": "第 ",
+        "groupMiddle": " 组 / 共 ",
+        "groupSuffix": " 组",
+        "groupListenPrefix": "先听完这一组的 ",
+        "groupListenSuffix": " 句话。",
+        "sampledQuestion": "刚才问到的是哪一件？",
+        "albumCopy": "每张图只要点一次。声音播完，号码牌就会留下一个小印记。",
+        "albumPlayPrefix": "播放",
+        "albumPlaySuffix": "问句",
+        "heardLabel": "已听",
+        "listenLabel": "点我听",
+        "segmentPrefix": "第 ",
+        "segmentMiddle": " 段 · "
+      },
+      "role": {
+        "choosePrefix": "我来演",
+        "assignedPrefix": "这次你演",
+        "assignedSuffix": "。",
+        "startLabel": "开始演完整段",
+        "skipLabel": "跳过这个角色",
+        "linePrefix": "第 ",
+        "lineMiddle": " 句 / 共 ",
+        "lineSuffix": " 句",
+        "childSpeakerLabel": "轮到你",
+        "hiddenLineCopy": "先想一想，这个角色会怎么说？",
+        "revealLabel": "揭晓并播放",
+        "partnerSpeakingCopy": "对方正在说……"
+      },
+      "rescue": {
+        "actionLabel": "听小猫示范"
+      },
+      "stageSession": {
+        "replayKicker": "单阶段回演",
+        "makeupKicker": "正式补做",
+        "replayCompleteTitle": "这一段回演完了",
+        "makeupCompleteTitle": "这个角色已经补做",
+        "replayCompleteCopy": "主线进度没有改变。",
+        "makeupCompleteCopy": "“已跳过”已经替换为“已完成”。",
+        "returnLabel": "返回主线",
+        "exitLabel": "退出",
+        "replayBanner": "单阶段回演 · 不改主线进度",
+        "makeupBanner": "正式补做 · 完成后替换跳过记录"
+      },
+      "completion": {
+        "skippedTitle": "主线故事走完了",
+        "skippedCopy": "角色扮演按你的选择标记为已跳过。可以打开阶段地图补做，不会伪装成已经完成。",
+        "reviewLabel": "次日复习"
+      },
+      "saveFailureCopy": "进度暂时没有保存好。"
+    },
+    "adventureHearts": {
+      "maximum": 3,
+      "rescuePartnerEntityId": "explorer-cat",
+      "rescueResult": "assisted"
+    },
+    "rescueExample": {
+      "entityId": "explorer-cat",
+      "audioRefs": [
+        "L04-P01"
+      ],
+      "title": "探险小猫换个例子",
+      "copy": "先听小猫用另一件物品示范。听完后三颗冒险心会补满，这一小题从头再来。"
+    },
+    "completionLedgers": {
+      "journey": "completed-or-truthfully-skipped",
+      "firstSession": "independent-supported-or-assisted-evidence",
+      "longTermMastery": "cross-day-review-only"
+    },
+    "reviewRun": {
+      "href": "/poc/lesson3-4-review/",
+      "returnHref": "/poc/lesson3-4-experience/",
+      "availability": {
+        "mode": "next-local-calendar-day"
+      },
+      "itemRange": [
+        2,
+        4
+      ],
+      "durationSecondsRange": [
+        45,
+        90
+      ],
+      "heartPool": "isolated-three-hearts",
+      "zeroAction": "restart-entire-review-run",
+      "copy": {
+        "documentTitle": "5号牌与两把雨伞 · 次日复习",
+        "entryKicker": "Lesson 3–4 · 次日复习",
+        "entryTitle": "再访星灯衣帽间",
+        "entryBody": "用三条新线索，看看昨天的英语还能不能自己找回来。",
+        "startLabel": "开始复习",
+        "unavailableTitle": "先完成昨天的故事",
+        "unavailableBody": "课程主线走完后，次日复习才会单独开放。",
+        "returnLabel": "回到课程",
+        "listenLabel": "播放英文",
+        "retryLabel": "再听一次",
+        "playingCopy": "正在播放英文……",
+        "audioFailureCopy": "声音没有播放成功，题目还没有开始。",
+        "question": "刚才听到的是哪一个？",
+        "rescueLabel": "听小猫换例示范",
+        "rescueFeedback": "探险心用完了，小猫来换例示范。",
+        "retryFeedback": "再听一遍，答案还留在这里。",
+        "correctFeedback": "找到了。",
+        "heartAriaPrefix": "还剩",
+        "heartAriaSuffix": "颗复习冒险心",
+        "completeTitle": "今天的线索找回来了",
+        "completeBody": "这次复习已经单独记录，不会改写昨天的课程冒险心。",
+        "restartLabel": "再复习一次"
+      },
+      "items": [
+        {
+          "reviewId": "NCE-U02-R01",
+          "sourceRef": "L04-P02",
+          "prompt": "选择刚才问到的物品。",
+          "entityIds": [
+            "pen",
+            "pencil",
+            "book"
+          ],
+          "acceptedEntityId": "pencil"
+        },
+        {
+          "reviewId": "NCE-U02-R02",
+          "sourceRef": "L03-D08",
+          "prompt": "故事里的回答是哪一句？",
+          "options": [
+            {
+              "optionId": "yes",
+              "label": "Yes, it is."
+            },
+            {
+              "optionId": "no",
+              "label": "No, it isn't."
+            }
+          ],
+          "acceptedOptionId": "no"
+        },
+        {
+          "reviewId": "NCE-U02-R03",
+          "sourceRef": "L04-P14",
+          "prompt": "选择刚才问到的人物。",
+          "entityIds": [
+            "teacher",
+            "son",
+            "daughter"
+          ],
+          "acceptedEntityId": "son"
+        }
+      ]
+    },
+    "scene": {
+      "sceneId": "starlight-cloakroom",
+      "backgroundWide": "/poc/lesson1-2-experience/assets/starlight-station-bg-v2-wide.avif",
+      "backgroundPortrait": "/poc/lesson1-2-experience/assets/starlight-station-bg-v2-portrait.avif",
+      "visitorEntityId": "visitor",
+      "attendantEntityId": "attendant",
+      "actorEntityIds": [
+        "visitor",
+        "attendant"
+      ],
+      "completionPropEntityIds": [
+        "umbrella-star",
+        "ticket-five"
+      ],
+      "progressPropEntityId": "ticket-five"
+    },
+    "roles": {
+      "visitor": {
+        "entityId": "visitor",
+        "label": "来客"
+      },
+      "cloakroom-attendant": {
+        "entityId": "attendant",
+        "label": "衣帽间服务员"
+      }
+    },
+    "support": {
+      "firstWrong": "再听一次刚才的声音线索。",
+      "secondWrong": "看清现在柜台上的人或物，再判断它们的关系。"
+    },
+    "completionContentRef": "NCE-U02-C-COMPLETION",
+    "audioFailureContentRef": "NCE-U02-C-AUDIO-FAILURE",
+    "saveFailureContentRef": "NCE-U02-C-SAVE-FAILURE",
+    "stages": [
+      {
+        "stageId": "NCE-U02-S01",
+        "microtaskId": "NCE-U02-S01",
+        "lessonId": "lesson3",
+        "kind": "listen",
+        "title": "走进衣帽间",
+        "instruction": "点亮声音牌，听听这里叫什么",
+        "prompt": "这里是客人寄放外套和雨伞的地方。",
+        "actionLabel": "听 cloakroom",
+        "audioRefs": [
+          "L03-W10"
+        ],
+        "propEntityIds": [],
+        "exposureRefs": [
+          "L03-I01",
+          "L03-W10"
+        ],
+        "evidenceRefs": [
+          "L03-W10"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S02",
+        "microtaskId": "NCE-U02-S02",
+        "lessonId": "lesson3",
+        "kind": "dialogue-comprehension",
+        "title": "听完整故事",
+        "instruction": "听完 12 句话，再回答一个问题",
+        "prompt": "最后，来客拿回了自己的雨伞吗？",
+        "startLabel": "开始听完整对话",
+        "audioRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "options": [
+          {
+            "optionId": "returned",
+            "label": "拿回了"
+          },
+          {
+            "optionId": "not-returned",
+            "label": "还没有"
+          }
+        ],
+        "answerRule": {
+          "type": "select-one",
+          "acceptedOptionId": "returned"
+        },
+        "affectsAdventureHearts": true,
+        "answerFairness": {
+          "targetEvidenceChannel": "discourse-understanding",
+          "targetEvidenceSourceRefs": [
+            "L03-Q01",
+            "L03-D01",
+            "L03-D02",
+            "L03-D03",
+            "L03-D04",
+            "L03-D05",
+            "L03-D06",
+            "L03-D07",
+            "L03-D08",
+            "L03-D09",
+            "L03-D10",
+            "L03-D11",
+            "L03-D12"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L03-D12"
+        ],
+        "exposureRefs": [
+          "L03-Q01",
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "evidenceRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S03",
+        "microtaskId": "NCE-U02-S03",
+        "lessonId": "lesson3",
+        "kind": "entity-action",
+        "title": "递交号码牌",
+        "instruction": "直接点击服务员，号码牌会自动交到她手里",
+        "prompt": "谁能根据号码帮来客找回东西？",
+        "entityIds": [
+          "visitor",
+          "attendant"
+        ],
+        "answerRule": {
+          "type": "select-one",
+          "acceptedEntityId": "attendant"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "guided-story-action",
+          "targetEvidenceSourceRefs": [],
+          "intentionalPreSubmitSupport": [
+            {
+              "surface": "direct-story-instruction",
+              "entityId": "attendant"
+            }
+          ]
+        },
+        "successAudioRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05"
+        ],
+        "propEntityIds": [
+          "ticket-five"
+        ],
+        "exposureRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-W02",
+          "L03-W03",
+          "L03-W04",
+          "L03-W05",
+          "L03-W06",
+          "L03-W07",
+          "L03-W09"
+        ],
+        "evidenceRefs": []
+      },
+      {
+        "stageId": "NCE-U02-S04",
+        "microtaskId": "NCE-U02-S04",
+        "lessonId": "lesson3",
+        "kind": "ownership-choice",
+        "title": "第一把雨伞",
+        "instruction": "听来客怎么判断是不是自己的",
+        "prompt": "服务员第一次递来的雨伞，和来客的是同一把吗？",
+        "propEntityIds": [
+          "umbrella-stripe"
+        ],
+        "options": [
+          {
+            "optionId": "mine",
+            "label": "是他的"
+          },
+          {
+            "optionId": "not-mine",
+            "label": "不是他的"
+          }
+        ],
+        "answerRule": {
+          "type": "select-one",
+          "acceptedOptionId": "not-mine"
+        },
+        "affectsAdventureHearts": true,
+        "answerFairness": {
+          "targetEvidenceChannel": "discourse-understanding",
+          "targetEvidenceSourceRefs": [
+            "L03-D06",
+            "L03-D07"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L03-D06",
+          "L03-D07"
+        ],
+        "exposureRefs": [
+          "L03-D06",
+          "L03-D07",
+          "L03-W01",
+          "L03-W08",
+          "L03-N01",
+          "L03-N02",
+          "L03-N03",
+          "L03-N04"
+        ],
+        "evidenceRefs": [
+          "L03-D06",
+          "L03-D07",
+          "L03-W01"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S05",
+        "microtaskId": "NCE-U02-S05",
+        "lessonId": "lesson3",
+        "kind": "sequence-choice",
+        "title": "再找一把",
+        "affectsAdventureHearts": true,
+        "instruction": "在同一页连续判断两把雨伞",
+        "rounds": [
+          {
+            "roundId": "first-umbrella",
+            "propEntityId": "umbrella-stripe",
+            "prompt": "Is this your umbrella?",
+            "promptAudioRefs": [
+              "L03-D08"
+            ],
+            "options": [
+              {
+                "optionId": "yes",
+                "label": "Yes, it is."
+              },
+              {
+                "optionId": "no",
+                "label": "No, it isn't."
+              }
+            ],
+            "answerRule": {
+              "type": "select-one",
+              "acceptedOptionId": "no"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "communication-structure",
+              "targetEvidenceSourceRefs": [
+                "L03-D08",
+                "L03-D09"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L03-D09"
+            ]
+          },
+          {
+            "roundId": "second-umbrella",
+            "propEntityId": "umbrella-star",
+            "prompt": "Is this it?",
+            "promptAudioRefs": [
+              "L03-D10"
+            ],
+            "options": [
+              {
+                "optionId": "yes",
+                "label": "Yes, it is."
+              },
+              {
+                "optionId": "no",
+                "label": "No, it isn't."
+              }
+            ],
+            "answerRule": {
+              "type": "select-one",
+              "acceptedOptionId": "yes"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "communication-structure",
+              "targetEvidenceSourceRefs": [
+                "L03-D10",
+                "L03-D11"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L03-D11",
+              "L03-D12"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "evidenceRefs": [
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S06",
+        "microtaskId": "NCE-U02-S06",
+        "lessonId": "lesson3",
+        "kind": "role-enactment",
+        "title": "角色扮演",
+        "instruction": "选一个角色，从头演到尾",
+        "prompt": "对方的台词会自动播放。轮到你时，再揭晓自己的台词。",
+        "roleMode": "choose-first",
+        "roles": [
+          "visitor",
+          "cloakroom-attendant"
+        ],
+        "dialogueRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "skippableRoleRound": true,
+        "exposureRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "evidenceRefs": []
+      },
+      {
+        "stageId": "NCE-U02-S07",
+        "microtaskId": "NCE-U02-S07",
+        "lessonId": "lesson4",
+        "kind": "sampled-prompt-groups",
+        "title": "换物问一问",
+        "affectsAdventureHearts": true,
+        "instruction": "每组先听五句话，再找出刚才听到的物品",
+        "groups": [
+          {
+            "groupId": "desk-things",
+            "label": "第1组",
+            "sourceRefs": [
+              "L04-P01",
+              "L04-P02",
+              "L04-P03",
+              "L04-P04",
+              "L04-P05"
+            ],
+            "entityIds": [
+              "pen",
+              "pencil",
+              "book",
+              "watch",
+              "coat"
+            ],
+            "retrievalSourceRef": "L04-P03",
+            "acceptedEntityId": "book"
+          },
+          {
+            "groupId": "places-and-clothes",
+            "label": "第2组",
+            "sourceRefs": [
+              "L04-P06",
+              "L04-P07",
+              "L04-P08",
+              "L04-P09",
+              "L04-P10"
+            ],
+            "entityIds": [
+              "dress",
+              "skirt",
+              "shirt",
+              "car",
+              "house"
+            ],
+            "retrievalSourceRef": "L04-P08",
+            "acceptedEntityId": "shirt"
+          },
+          {
+            "groupId": "people-and-new-things",
+            "label": "第3组",
+            "sourceRefs": [
+              "L04-P11",
+              "L04-P12",
+              "L04-P13",
+              "L04-P14",
+              "L04-P15"
+            ],
+            "entityIds": [
+              "suit",
+              "school",
+              "teacher",
+              "son",
+              "daughter"
+            ],
+            "retrievalSourceRef": "L04-P12",
+            "acceptedEntityId": "school"
+          }
+        ],
+        "exposureRefs": [
+          "L04-I01",
+          "L04-P01",
+          "L04-P02",
+          "L04-P03",
+          "L04-P04",
+          "L04-P05",
+          "L04-P06",
+          "L04-P07",
+          "L04-P08",
+          "L04-P09",
+          "L04-P10",
+          "L04-P11",
+          "L04-P12",
+          "L04-P13",
+          "L04-P14",
+          "L04-P15",
+          "L04-W01",
+          "L04-W02",
+          "L04-W03",
+          "L04-W04",
+          "L04-W05"
+        ],
+        "evidenceRefs": [
+          "L04-P03",
+          "L04-P08",
+          "L04-P12"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S08",
+        "microtaskId": "NCE-U02-S08",
+        "lessonId": "lesson4",
+        "kind": "sequence-choice",
+        "title": "肯定与否定",
+        "affectsAdventureHearts": true,
+        "instruction": "先回答，再找出 it 指的是谁",
+        "rounds": [
+          {
+            "roundId": "watch-positive",
+            "propEntityId": "watch",
+            "prompt": "Is this your watch?",
+            "promptAudioRefs": [
+              "L04-P04"
+            ],
+            "options": [
+              {
+                "optionId": "yes",
+                "label": "Yes, it is."
+              },
+              {
+                "optionId": "no",
+                "label": "No, it isn't."
+              }
+            ],
+            "answerRule": {
+              "type": "select-one",
+              "acceptedOptionId": "yes"
+            },
+            "successAudioRefs": [
+              "L03-D11"
+            ],
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L04-P04"
+              ],
+              "intentionalPreSubmitSupport": []
+            }
+          },
+          {
+            "roundId": "suit-negative",
+            "propEntityId": "suit",
+            "prompt": "Is this your suit?",
+            "promptAudioRefs": [
+              "L04-P11"
+            ],
+            "options": [
+              {
+                "optionId": "yes",
+                "label": "Yes, it is."
+              },
+              {
+                "optionId": "no",
+                "label": "No, it isn't."
+              }
+            ],
+            "answerRule": {
+              "type": "select-one",
+              "acceptedOptionId": "no"
+            },
+            "successAudioRefs": [
+              "L03-D09"
+            ],
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L04-P11"
+              ],
+              "intentionalPreSubmitSupport": []
+            }
+          },
+          {
+            "roundId": "it-transfer",
+            "propEntityId": "coat",
+            "prompt": "服务员举起了新物品。这里的 it 指哪一件？",
+            "promptAudioRefs": [
+              "L03-D10"
+            ],
+            "entityIds": [
+              "watch",
+              "suit",
+              "coat"
+            ],
+            "answerRule": {
+              "type": "select-one",
+              "acceptedEntityId": "coat"
+            },
+            "successAudioRefs": [
+              "L03-D11"
+            ],
+            "answerFairness": {
+              "targetEvidenceChannel": "discourse-understanding",
+              "targetEvidenceSourceRefs": [
+                "L03-D10",
+                "L03-D11"
+              ],
+              "intentionalPreSubmitSupport": []
+            }
+          }
+        ],
+        "exposureRefs": [
+          "L04-P04",
+          "L04-P11",
+          "L04-W01",
+          "L03-D10",
+          "L03-D11"
+        ],
+        "evidenceRefs": [
+          "L04-P04",
+          "L04-P11",
+          "L04-W01"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S09",
+        "microtaskId": "NCE-U02-S09",
+        "lessonId": "lesson4",
+        "kind": "entity-action",
+        "title": "人物关系",
+        "affectsAdventureHearts": true,
+        "instruction": "听问句，找到对应的人物",
+        "prompt": "听清人物关系，再从三个人里选择。",
+        "promptAudioRefs": [
+          "L04-P15"
+        ],
+        "entityIds": [
+          "teacher",
+          "son",
+          "daughter"
+        ],
+        "hideEntityLabelsUntilCorrect": true,
+        "answerRule": {
+          "type": "select-one",
+          "acceptedEntityId": "daughter"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "audio-form",
+          "targetEvidenceSourceRefs": [
+            "L04-P15"
+          ],
+          "intentionalPreSubmitSupport": [],
+          "candidateLabelVisibility": "after-correct"
+        },
+        "successAudioRefs": [
+          "L04-W05"
+        ],
+        "exposureRefs": [
+          "L04-P15",
+          "L04-W05"
+        ],
+        "evidenceRefs": [
+          "L04-P15",
+          "L04-W05"
+        ]
+      },
+      {
+        "stageId": "NCE-U02-S10",
+        "microtaskId": "NCE-U02-S10",
+        "lessonId": "lesson3",
+        "kind": "role-enactment",
+        "title": "换个角色",
+        "instruction": "这次演刚才没演的角色",
+        "prompt": "系统已经把另一个角色留给你。完成后，今天的故事就演完了。",
+        "roleMode": "unplayed-role",
+        "roles": [
+          "visitor",
+          "cloakroom-attendant"
+        ],
+        "dialogueRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "skippableRoleRound": true,
+        "exposureRefs": [
+          "L03-D01",
+          "L03-D02",
+          "L03-D03",
+          "L03-D04",
+          "L03-D05",
+          "L03-D06",
+          "L03-D07",
+          "L03-D08",
+          "L03-D09",
+          "L03-D10",
+          "L03-D11",
+          "L03-D12"
+        ],
+        "evidenceRefs": []
+      }
+    ]
+  },
+  "vocabulary": []
+}

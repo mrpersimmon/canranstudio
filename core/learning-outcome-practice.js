@@ -13,6 +13,9 @@
   const ALLOWED_ROOT_NO_PROGRESS_FIELDS = new Set([
     'countsTowardProgress', 'producesLearningEvidence', 'affectsAdventureHearts'
   ]);
+  const ALLOWED_ANSWER_FAIRNESS_FIELDS = new Set([
+    'targetEvidenceChannel', 'targetEvidenceSourceRefs'
+  ]);
   const ROLE_KINDS = new Set(['role-swap', 'role-enactment']);
 
   function clone(value) {
@@ -41,8 +44,11 @@
       const allowedNoProgressDeclaration = path === 'config'
         && ALLOWED_ROOT_NO_PROGRESS_FIELDS.has(field)
         && child === false;
+      const allowedAnswerFairnessDeclaration = path.endsWith('.answerFairness')
+        && ALLOWED_ANSWER_FAIRNESS_FIELDS.has(field);
       if (!allowedAvailabilityBuildStage
         && !allowedNoProgressDeclaration
+        && !allowedAnswerFairnessDeclaration
         && (field === 'buildStage' || FORBIDDEN_MAINLINE_FIELD.test(field))) {
         errors.push(`forbidden mainline field ${field} at ${path}.${field}`);
       }
@@ -141,6 +147,24 @@
     });
   }
 
+  function validateTurnHints(config, dialogue, errors) {
+    if (!Array.isArray(config.turnHints) || config.turnHints.length !== dialogue.size) {
+      errors.push(`${config.kind} must declare one two-level hint for every dialogue turn`);
+      return;
+    }
+    const hintRefs = new Set();
+    for (const [index, hint] of config.turnHints.entries()) {
+      const path = `turnHints[${index}]`;
+      if (!hint || !dialogue.has(hint.turnRef)
+        || !nonEmptyString(hint.intent) || !nonEmptyString(hint.openingChunk)) {
+        errors.push(`${path} must declare turnRef, intent, and openingChunk`);
+        continue;
+      }
+      if (hintRefs.has(hint.turnRef)) errors.push(`${path} duplicates ${hint.turnRef}`);
+      hintRefs.add(hint.turnRef);
+    }
+  }
+
   function validateManualDialogue(config, errors) {
     validateAvailability(config.availableAt, errors);
     if (!nonEmptyString(config.unlockAfterStageId)) {
@@ -157,21 +181,7 @@
       errors,
       { min: 7, max: 7 }
     );
-    if (!Array.isArray(config.turnHints) || config.turnHints.length !== dialogue.size) {
-      errors.push('manual-dialogue must declare one two-level hint for every dialogue turn');
-      return;
-    }
-    const hintRefs = new Set();
-    for (const [index, hint] of config.turnHints.entries()) {
-      const path = `turnHints[${index}]`;
-      if (!hint || !dialogue.has(hint.turnRef)
-        || !nonEmptyString(hint.intent) || !nonEmptyString(hint.openingChunk)) {
-        errors.push(`${path} must declare turnRef, intent, and openingChunk`);
-        continue;
-      }
-      if (hintRefs.has(hint.turnRef)) errors.push(`${path} duplicates ${hint.turnRef}`);
-      hintRefs.add(hint.turnRef);
-    }
+    validateTurnHints(config, dialogue, errors);
   }
 
   function validateCaseRecap(config, errors) {
@@ -231,12 +241,15 @@
     }
     if (config.kind === 'role-swap') validateAvailability(config.availableAt, errors);
     if (ROLE_KINDS.has(config.kind)) validateRoleRounds(config, errors);
+    if (config.kind === 'role-enactment') {
+      validateTurnHints(config, new Set(config.rounds?.[0]?.dialogueTurnRefs || []), errors);
+    }
     if (config.kind === 'manual-dialogue') validateManualDialogue(config, errors);
     if (config.kind === 'case-recap') validateCaseRecap(config, errors);
     return errors;
   }
 
-  function create(sourceConfig, { evaluateRule, saveRound } = {}) {
+  function create(sourceConfig, { evaluateRule, saveRound, skipRound } = {}) {
     const errors = validateConfig(sourceConfig);
     if (errors.length > 0) throw new TypeError(errors.join('; '));
     if (sourceConfig.kind === 'case-recap' && typeof evaluateRule !== 'function') {
@@ -244,6 +257,9 @@
     }
     if (sourceConfig.kind === 'role-enactment' && typeof saveRound !== 'function') {
       throw new TypeError('role-enactment requires a whole-round save callback');
+    }
+    if (sourceConfig.kind === 'role-enactment' && typeof skipRound !== 'function') {
+      throw new TypeError('role-enactment requires a whole-round skip callback');
     }
     const config = deepFreeze(clone(sourceConfig));
     let stateVersion = 0;
@@ -267,7 +283,9 @@
         currentTurn: null,
         currentItem: null,
         completedRoundIds: [],
+        skippedRoundIds: [],
         pendingRoundId: null,
+        pendingRoundDisposition: null,
         revealedTurnRefs: [],
         hintLevel: 0,
         currentHint: null,
@@ -382,10 +400,10 @@
         && origin.buildStage === expected.buildStage;
     }
 
-    function completedRoleIds(origin) {
+    function roleDispositionIds(origin, field, excluded = new Set()) {
       const allowed = new Set((config.rounds || []).map(round => round.roundId));
-      return [...new Set((Array.isArray(origin?.completedRoundIds) ? origin.completedRoundIds : [])
-        .filter(roundId => allowed.has(roundId)))];
+      return [...new Set((Array.isArray(origin?.[field]) ? origin[field] : [])
+        .filter(roundId => allowed.has(roundId) && !excluded.has(roundId)))];
     }
 
     function enter(origin) {
@@ -397,7 +415,12 @@
       sessionOrdinal += 1;
       audioOrdinal = 0;
       bump();
-      const completedRoundIds = config.kind === 'role-enactment' ? completedRoleIds(origin) : [];
+      const completedRoundIds = config.kind === 'role-enactment'
+        ? roleDispositionIds(origin, 'completedRoundIds')
+        : [];
+      const skippedRoundIds = config.kind === 'role-enactment'
+        ? roleDispositionIds(origin, 'skippedRoundIds', new Set(completedRoundIds))
+        : [];
       const roleEnactmentComplete = config.kind === 'role-enactment'
         && completedRoundIds.length === config.rounds.length;
       state = {
@@ -411,6 +434,7 @@
         currentRound: config.kind === 'role-swap' ? clone(config.rounds[0]) : null,
         currentItem: config.kind === 'case-recap' ? publicItem(config.items[0]) : null,
         completedRoundIds,
+        skippedRoundIds,
         phase: config.kind === 'role-swap'
           ? 'awaiting-reveal'
           : (config.kind === 'case-recap'
@@ -452,7 +476,8 @@
         currentTurnIndex: null,
         currentTurn: null,
         revealedTurnRefs: [],
-        pendingRoundId: null
+        pendingRoundId: null,
+        pendingRoundDisposition: null
       };
       return deepFreeze([{
         type: 'practice/role-selected',
@@ -487,9 +512,13 @@
     function showHint() {
       if (destroyed) return reject('practice-destroyed');
       if (state.status !== 'active') return reject('practice-not-active');
-      if (config.kind !== 'manual-dialogue' || state.phase !== 'awaiting-manual-reveal') {
+      const formalHint = config.kind === 'role-enactment' && state.phase === 'awaiting-reveal';
+      const manualHint = config.kind === 'manual-dialogue'
+        && state.phase === 'awaiting-manual-reveal';
+      if (!formalHint && !manualHint) {
         return reject('hint-not-available');
       }
+      if (state.hintLevel >= 2) return reject('hint-exhausted');
       const authoredHint = config.turnHints.find(hint => hint.turnRef === state.currentTurn.turnRef);
       const hintLevel = Math.min(2, state.hintLevel + 1);
       bump();
@@ -561,52 +590,109 @@
       return null;
     }
 
-    function saveCompletedRound(roundId) {
+    function saveRoundDisposition(roundId, disposition) {
+      const writer = disposition === 'completed' ? saveRound : skipRound;
       let saved;
       try {
-        saved = saveRound({ practiceId: config.practiceId, roundId });
+        saved = writer({ practiceId: config.practiceId, roundId });
       } catch (error) {
         saved = { persisted: false, reason: error?.message || 'save-failed' };
       }
       if (saved?.persisted !== true) {
-        state = { ...state, phase: 'round-save-failed', pendingRoundId: roundId };
+        const failurePhase = disposition === 'completed'
+          ? 'round-save-failed'
+          : 'round-skip-save-failed';
+        state = {
+          ...state,
+          phase: failurePhase,
+          pendingRoundId: roundId,
+          pendingRoundDisposition: disposition,
+          audio: null
+        };
         return [{
-          type: 'practice/round-save-failed',
+          type: disposition === 'completed'
+            ? 'practice/round-save-failed'
+            : 'practice/round-skip-save-failed',
           roundId,
+          disposition,
           reason: saved?.reason || saved?.status || 'unavailable',
           retryable: true
         }];
       }
-      const completedRoundIds = state.completedRoundIds.includes(roundId)
-        ? state.completedRoundIds
-        : [...state.completedRoundIds, roundId];
+      const allowedRoundIds = config.rounds.map(round => round.roundId);
+      const fallbackCompleted = disposition === 'completed'
+        ? [...state.completedRoundIds, roundId]
+        : state.completedRoundIds;
+      const fallbackSkipped = disposition === 'skipped'
+        && !fallbackCompleted.includes(roundId)
+        ? [...state.skippedRoundIds, roundId]
+        : state.skippedRoundIds;
+      const completedRoundIds = allowedRoundIds.filter(candidate => (
+        (saved.completedRoundIds || fallbackCompleted).includes(candidate)
+      ));
+      const completedSet = new Set(completedRoundIds);
+      const skippedRoundIds = allowedRoundIds.filter(candidate => (
+        !completedSet.has(candidate)
+        && (saved.skippedRoundIds || fallbackSkipped).includes(candidate)
+      ));
       const allComplete = completedRoundIds.length === config.rounds.length;
+      const allDisposed = new Set([...completedRoundIds, ...skippedRoundIds]).size
+        === config.rounds.length;
       state = {
         ...state,
         completedRoundIds,
+        skippedRoundIds,
         pendingRoundId: null,
+        pendingRoundDisposition: null,
         currentRound: null,
         currentTurnIndex: null,
         currentTurn: null,
         currentIndex: null,
+        revealedTurnRefs: [],
+        hintLevel: 0,
+        currentHint: null,
+        audio: null,
         phase: allComplete ? 'all-roles-complete' : 'role-selection'
       };
       return [{
-        type: 'practice/round-saved',
+        type: disposition === 'completed' ? 'practice/round-saved' : 'practice/round-skipped',
         roundId,
+        disposition,
         completedRoundIds: clone(completedRoundIds),
+        skippedRoundIds: clone(skippedRoundIds),
+        allRolesDisposed: allDisposed,
         allRolesComplete: allComplete
       }];
+    }
+
+    function saveCompletedRound(roundId) {
+      return saveRoundDisposition(roundId, 'completed');
+    }
+
+    function skipCurrentRound() {
+      if (destroyed) return reject('practice-destroyed');
+      if (state.status !== 'active') return reject('practice-not-active');
+      if (config.kind !== 'role-enactment') return reject('command-not-allowed');
+      if (!['awaiting-reveal', 'audio-retry'].includes(state.phase) || !state.currentRound) {
+        return reject('role-skip-not-available');
+      }
+      const roundId = state.currentRound.roundId;
+      bump();
+      state = { ...state, audio: null, hintLevel: 0, currentHint: null };
+      return deepFreeze(saveRoundDisposition(roundId, 'skipped'));
     }
 
     function retryRoundSave() {
       if (destroyed) return reject('practice-destroyed');
       if (state.status !== 'active') return reject('practice-not-active');
-      if (config.kind !== 'role-enactment' || state.phase !== 'round-save-failed') {
+      if (config.kind !== 'role-enactment'
+        || !['round-save-failed', 'round-skip-save-failed'].includes(state.phase)) {
         return reject('round-save-retry-not-required');
       }
+      const roundId = state.pendingRoundId;
+      const disposition = state.pendingRoundDisposition;
       bump();
-      return deepFreeze(saveCompletedRound(state.pendingRoundId));
+      return deepFreeze(saveRoundDisposition(roundId, disposition));
     }
 
     function audioEnded(action) {
@@ -833,6 +919,7 @@
     function dispatch(action = {}) {
       if (['enter', 'practice/enter'].includes(action.type)) return enter(action.origin);
       if (action.type === 'role/select') return selectRole(action.roundId);
+      if (action.type === 'role/skip') return skipCurrentRound();
       if (['reveal', 'role-swap/reveal', 'manual-dialogue/reveal'].includes(action.type)) return reveal();
       if (action.type === 'hint/show') return showHint();
       if (action.type === 'line/replay') return replayLine(action.turnRef);

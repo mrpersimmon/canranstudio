@@ -7,7 +7,12 @@ const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry')
 const FORBIDDEN_RUNTIME = Object.freeze([
   {
     label: 'application service request',
-    pattern: /\b(?:EventSource|WebSocket|XMLHttpRequest|fetch|sendBeacon)\b/
+    pattern: /\b(?:EventSource|WebSocket|XMLHttpRequest|sendBeacon)\b/
+  },
+  {
+    label: 'application service request',
+    pattern: /\bfetch\b/,
+    allowCoursePackage: true
   },
   {
     label: 'cookie runtime',
@@ -15,7 +20,12 @@ const FORBIDDEN_RUNTIME = Object.freeze([
   },
   {
     label: 'non-V1 client persistence',
-    pattern: /\b(?:indexedDB|sessionStorage|serviceWorker)\b/
+    pattern: /\b(?:indexedDB|sessionStorage)\b/
+  },
+  {
+    label: 'non-V1 client persistence',
+    pattern: /\bserviceWorker\b/,
+    allowCoursePackage: true
   },
   {
     label: 'authentication secret',
@@ -42,6 +52,12 @@ const FORBIDDEN_RUNTIME = Object.freeze([
     pattern: /授权码|学习码|邀请码|请(?:先)?登录|登录后(?:继续|使用)|注册(?:账号|账户)/
   }
 ]);
+
+const COURSE_PACKAGE_RUNTIME_FILES = Object.freeze(new Set([
+  'core/course-package-entry.js',
+  'core/course-package-installer.js',
+  'core/course-package-service-worker.js'
+]));
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -182,9 +198,9 @@ function assertSameOriginResources(source, label) {
   }
 }
 
-function assertStaticRuntimeSource(source, label) {
+function assertStaticRuntimeSource(source, label, { allowCoursePackage = false } = {}) {
   for (const forbidden of FORBIDDEN_RUNTIME) {
-    if (forbidden.pattern.test(source)) {
+    if (forbidden.pattern.test(source) && !(allowCoursePackage && forbidden.allowCoursePackage)) {
       throw new Error(`${label}: forbidden ${forbidden.label} in public V1 runtime`);
     }
   }
@@ -270,7 +286,9 @@ async function assertPublicV1Boundary({
       assertSameOriginResources(source, relative);
       assertStaticRuntimeSource(inlineRuntime(source), relative);
     } else {
-      assertStaticRuntimeSource(source, relative);
+      assertStaticRuntimeSource(source, relative, {
+        allowCoursePackage: COURSE_PACKAGE_RUNTIME_FILES.has(relative)
+      });
     }
   }
 }

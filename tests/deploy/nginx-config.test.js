@@ -13,6 +13,7 @@ const config = fs.readFileSync(
 
 const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 const REVIEW_CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
+const COURSE_CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 
 function tokenizeNginx(text) {
   const tokens = [];
@@ -204,6 +205,8 @@ function assertHttpContract(text) {
     ...redirects.map(([source]) => block('location', ['=', source])),
     block('location', ['^~', '/poc/landmark-review/']),
     block('location', ['^~', '/poc/keepsake-review/']),
+    block('location', ['~', '^/poc/lesson(1-2|3-4|5-6|7-8)-experience/']),
+    block('location', ['=', '/core/course-package-service-worker.js']),
     block('location', ['~*', '^/assets/adventure-map/atlas/.*-atlas-[a-z0-9-]+-[0-9]+[.](avif|webp)$']),
     block('location', ['~*', '^/assets/adventure-map/.*/states/.*[.][a-z0-9]+$']),
     block('location', ['~*', '[.](avif|webp|png|jpe?g|svg)$']),
@@ -271,6 +274,42 @@ function assertHttpContract(text) {
   ], 'keepsake review');
   const keepsakeReviewLimit = one(keepsakeReview.children, 'limit_except', ['GET', 'HEAD']);
   assertExactChildren(keepsakeReviewLimit.children, [leaf('deny', ['all'])], 'keepsake review limit_except');
+
+  const coursePackages = one(children, 'location', [
+    '~',
+    '^/poc/lesson(1-2|3-4|5-6|7-8)-experience/'
+  ]);
+  assertExactChildren(coursePackages.children, [
+    leaf('try_files', ['$uri', '$uri/', '=404']),
+    leaf('expires', ['epoch']),
+    leaf('add_header', ['Content-Security-Policy', COURSE_CSP, 'always']),
+    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
+    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
+    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
+    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
+    leaf('add_header', ['X-Robots-Tag', 'noindex, nofollow, noarchive', 'always']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'course-package experiences');
+  const coursePackageLimit = one(coursePackages.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(coursePackageLimit.children, [leaf('deny', ['all'])], 'course-package limit_except');
+
+  const coursePackageWorker = one(children, 'location', [
+    '=',
+    '/core/course-package-service-worker.js'
+  ]);
+  assertExactChildren(coursePackageWorker.children, [
+    leaf('try_files', ['$uri', '=404']),
+    leaf('expires', ['epoch']),
+    leaf('add_header', ['Content-Security-Policy', CSP, 'always']),
+    leaf('add_header', ['X-Content-Type-Options', 'nosniff', 'always']),
+    leaf('add_header', ['X-Frame-Options', 'DENY', 'always']),
+    leaf('add_header', ['Referrer-Policy', 'strict-origin-when-cross-origin', 'always']),
+    leaf('add_header', ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()', 'always']),
+    leaf('add_header', ['Service-Worker-Allowed', '/', 'always']),
+    block('limit_except', ['GET', 'HEAD'])
+  ], 'course-package service worker');
+  const coursePackageWorkerLimit = one(coursePackageWorker.children, 'limit_except', ['GET', 'HEAD']);
+  assertExactChildren(coursePackageWorkerLimit.children, [leaf('deny', ['all'])], 'course-package worker limit_except');
 
   const atlasBackgrounds = one(children, 'location', [
     '~*',
@@ -385,7 +424,8 @@ test('effective Nginx CSPs preserve the public contract with one review-only fet
   );
   assert.deepEqual(values.sort(), [
     verifier.HTTP_HEADER_CONTRACT['content-security-policy'],
-    REVIEW_CSP
+    REVIEW_CSP,
+    COURSE_CSP
   ].sort());
 });
 

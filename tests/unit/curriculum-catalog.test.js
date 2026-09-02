@@ -20,23 +20,36 @@ test('Lesson 1 and Lesson 2 resolve to one elementary teaching unit', () => {
   );
 });
 
-test('Lesson 3 and Lesson 4 resolve to one curriculum-accepted catalog-only unit', () => {
+test('Lesson 3 and Lesson 4 resolve to one authored but unpublished local candidate', () => {
   const unit = catalog.getTeachingUnit('NCE-U02');
 
   assert.equal(unit.unitId, 'NCE-U02');
   assert.deepEqual(unit.lessonIds, ['lesson3', 'lesson4']);
   assert.equal(catalog.getTeachingUnitForLesson('lesson3'), unit);
   assert.equal(catalog.getTeachingUnitForLesson('lesson4'), unit);
-  assert.equal(unit.status, 'curriculum-accepted');
-  assert.equal(unit.publicationScope, 'catalog-only');
-  assert.equal(unit.runtimeProfile, 'not-authored');
+  assert.equal(unit.status, 'candidate');
+  assert.equal(unit.publicationScope, 'local-poc');
+  assert.equal(unit.runtimeProfile, 'story-stage-v1');
   assert.deepEqual(unit.beats, []);
-  assert.deepEqual(unit.authoredContent, {});
-  assert.deepEqual(unit.entities, {});
+  assert.ok(Object.keys(unit.authoredContent).length > 0);
+  assert.ok(Object.keys(unit.entities).length > 0);
   assert.equal(unit.landmarkId, undefined);
-  assert.equal(unit.title, undefined);
-  assert.equal(unit.experience, undefined);
-  assert.equal(unit.voiceBaselineId, undefined);
+  assert.equal(unit.title, '5号牌与两把雨伞');
+  assert.equal(unit.experienceRevision, 'lesson3-4-v2');
+  assert.equal(unit.experience.stages.length, 10);
+  assert.equal(unit.voiceBaselineId, 'nce-youth-v1');
+  assert.deepEqual(unit.audioReviewContract, {
+    packId: 'nce-u02-kokoro-candidate-v1',
+    manifestPath: '/poc/lesson3-4-experience/audio/manifest.json',
+    canonicalAudioSetSha256: 'c5738057a5857bb8c44a6d7b4bbeffbaa411683942ba10ae6bf7f31984da580f',
+    voiceBaselineId: 'nce-youth-v1',
+    dialogueRenderMode: 'natural-utterance',
+    standaloneWordRenderMode: 'context-cropped-lexeme-v1',
+    decodedOnsetLimitMs: 150,
+    publicationGate: 'human-language-review-per-file',
+    nonAcceptedStatus: 'unreviewed-candidate',
+    expectedAudioSourceCount: 42
+  });
   assert.deepEqual(unit.curriculumContract.acceptedDecisionRefs, [
     'PA-01-A', 'PA-02-A', 'PA-03-A', 'PA-04-A'
   ]);
@@ -52,14 +65,39 @@ test('Lesson 3 and Lesson 4 resolve to one curriculum-accepted catalog-only unit
       lesson4: { pdfPages: [41, 42], textbookPages: [8, 9] }
     }
   });
-  assert.equal(unit.curriculumContract.audioAuditStatus, 'not-audited');
-  assert.equal(unit.curriculumContract.speakerMappingStatus, 'not-frozen');
-  assert.equal(unit.curriculumContract.storyDesignStatus, 'not-authored');
-  assert.equal(unit.curriculumContract.pageImplementationStatus, 'not-authored');
+  assert.equal(
+    unit.curriculumContract.audioAuditStatus,
+    'candidate-generated-awaiting-human-review'
+  );
+  assert.deepEqual(unit.curriculumContract.audioSourceAudit, {
+    checkedOn: '2026-08-31',
+    result: 'no-auditable-official-audio',
+    checkedSurfaces: [
+      'controlled-pdf-embedded-files',
+      'controlled-pdf-page-annotations-39-42',
+      'repository-audio-assets',
+      'local-download-audio-assets'
+    ],
+    officialAccessModel: 'book-specific-activation-in-fltrp-u-learning-app',
+    officialReferenceId: 'FLTRP-2023-JCJYJXZY-P58'
+  });
+  assert.deepEqual(unit.curriculumContract.audioCandidatePack, {
+    packId: 'nce-u02-kokoro-candidate-v1',
+    generationBasis: 'nce-u01-kokoro-candidate-v3',
+    status: 'local-poc-candidate-unreviewed',
+    disclosure: 'ai-generated-not-official-textbook-audio'
+  });
+  assert.equal(unit.curriculumContract.speakerMappingStatus, 'frozen-course-role-mapping');
+  assert.equal(
+    unit.curriculumContract.speakerMappingBasis,
+    'textbook-dialogue-semantics-and-figure-sequence'
+  );
+  assert.equal(unit.curriculumContract.storyDesignStatus, 'authored-local-candidate');
+  assert.equal(unit.curriculumContract.pageImplementationStatus, 'authored-local-candidate');
   assert.equal(unit.curriculumContract.publicationAllowed, false);
 });
 
-test('Lesson 3–4 freezes the accepted source inventory without inventing audio or speakers', () => {
+test('Lesson 3–4 freezes the accepted source inventory and inherited candidate voice mapping', () => {
   const unit = catalog.getTeachingUnit('NCE-U02');
   const lesson3 = unit.lessonContent.lesson3;
   const lesson4 = unit.lessonContent.lesson4;
@@ -88,6 +126,26 @@ test('Lesson 3–4 freezes the accepted source inventory without inventing audio
     [1, 2, 3, 3, 4, 5, 5, 6, 6, 7, 7, 7]
   );
   assert.deepEqual(
+    ids('L03-D', 12).map(sourceId => {
+      const source = lesson3.sources[sourceId];
+      return [source.speakerRole, source.speaker, source.voiceId];
+    }),
+    [
+      ['visitor', 'man', 'am_michael'],
+      ['visitor', 'man', 'am_michael'],
+      ['cloakroom-attendant', 'woman', 'af_heart'],
+      ['cloakroom-attendant', 'woman', 'af_heart'],
+      ['cloakroom-attendant', 'woman', 'af_heart'],
+      ['visitor', 'man', 'am_michael'],
+      ['cloakroom-attendant', 'woman', 'af_heart'],
+      ['cloakroom-attendant', 'woman', 'af_heart'],
+      ['visitor', 'man', 'am_michael'],
+      ['cloakroom-attendant', 'woman', 'af_heart'],
+      ['visitor', 'man', 'am_michael'],
+      ['visitor', 'man', 'am_michael']
+    ]
+  );
+  assert.deepEqual(
     ids('L04-P', 15).map(sourceId => lesson4.sources[sourceId].text),
     [
       'Is this your pen?', 'Is this your pencil?', 'Is this your book?',
@@ -112,13 +170,38 @@ test('Lesson 3–4 freezes the accepted source inventory without inventing audio
   assert.equal(lesson4.sources['L04-E01'].requiredForUnitCompletion, false);
   assert.equal(lesson4.sources['L04-E02'].producesLearningEvidence, false);
 
+  const audioSources = [
+    ...ids('L03-D', 12), ...ids('L03-W', 10),
+    ...ids('L04-P', 15), ...ids('L04-W', 5)
+  ];
+  assert.equal(audioSources.length, 42);
+  for (const sourceId of audioSources) {
+    const source = lesson3.sources[sourceId] || lesson4.sources[sourceId];
+    assert.equal(
+      source.audioSrc,
+      `/poc/lesson3-4-experience/audio/${sourceId.toLowerCase()}.mp3`
+    );
+    assert.equal(source.audioReviewStatus, 'unreviewed-candidate');
+    const isWord = source.sourceKind === 'vocabulary';
+    if (isWord) assert.equal(source.voiceId, 'af_heart');
+    if (source.sourceKind === 'substitution-prompt') {
+      assert.equal(source.voiceId, 'am_michael');
+    }
+    assert.equal(
+      source.audioRenderMode,
+      isWord ? 'context-cropped-lexeme-v1' : 'natural-utterance'
+    );
+  }
+
   for (const lesson of [lesson3, lesson4]) {
     const required = new Set(lesson.requiredSourceIds);
     for (const sourceItem of Object.values(lesson.sources)) {
-      assert.equal(sourceItem.audioSrc, undefined);
       assert.equal(sourceItem.audioSequences, undefined);
-      assert.equal(sourceItem.speaker, undefined);
-      assert.equal(sourceItem.voiceId, undefined);
+      if (!audioSources.includes(sourceItem.sourceId)) {
+        assert.equal(sourceItem.audioSrc, undefined);
+        assert.equal(sourceItem.speaker, undefined);
+        assert.equal(sourceItem.voiceId, undefined);
+      }
       assert.equal(
         required.has(sourceItem.sourceId),
         ['exposure', 'evidence'].includes(sourceItem.coveragePolicy),
@@ -151,7 +234,9 @@ test('Lesson 3–4 freezes seven tiered targets and the accepted grouped coverag
       { targetId: 'NCE-U02-T07', tier: 'lexical-sample', evidenceMode: 'lexical-form-meaning-association', structureRefs: [] }
     ]
   );
-  assert.ok(unit.targets.every(target => target.contextIds === undefined));
+  assert.ok(unit.targets.every(target => (
+    JSON.stringify(target.contextIds) === JSON.stringify(['cloakroom-story', 'counter-transfer'])
+  )));
   assert.ok(unit.targets.every(target => target.firstSessionBoundary.length > 0));
   assert.deepEqual(unit.targets.find(target => target.targetId === 'NCE-U02-T05').inheritedSourceRefs, [
     'L01-W09'
@@ -175,7 +260,55 @@ test('Lesson 3–4 freezes seven tiered targets and the accepted grouped coverag
   });
 });
 
-test('curriculum-accepted units cannot masquerade as authored or published runtime', () => {
+test('Lesson 3–4 freezes a small representative first-session evidence plan', () => {
+  const unit = catalog.getTeachingUnit('NCE-U02');
+  const plan = unit.firstSessionEvidencePlan;
+  const sourceById = new Map(Object.values(unit.lessonContent)
+    .flatMap(lesson => Object.entries(lesson.sources)));
+
+  assert.equal(plan.policyId, 'first-session-representative-retrieval-v1');
+  assert.equal(plan.sourceContactPolicy, 'all-required-sources-before-unit-completion');
+  assert.deepEqual(plan.promptEvidenceSourceRefs, ['L04-P04', 'L04-P11', 'L04-P15']);
+  assert.deepEqual(plan.lexicalEvidenceSourceRefs, [
+    'L03-W01', 'L03-W10', 'L04-W01', 'L04-W05'
+  ]);
+  assert.deepEqual(
+    plan.evidenceSlots.map(slot => ({
+      slotId: slot.slotId,
+      targetIds: slot.targetBindings.map(binding => binding.targetId),
+      retrievalOpportunityQuota: slot.retrievalOpportunityQuota
+    })),
+    [
+      { slotId: 'NCE-U02-E01', targetIds: ['NCE-U02-T01'], retrievalOpportunityQuota: 1 },
+      { slotId: 'NCE-U02-E02', targetIds: ['NCE-U02-T02', 'NCE-U02-T03'], retrievalOpportunityQuota: 2 },
+      { slotId: 'NCE-U02-E03', targetIds: ['NCE-U02-T04', 'NCE-U02-T06'], retrievalOpportunityQuota: 1 },
+      { slotId: 'NCE-U02-E04', targetIds: ['NCE-U02-T05'], retrievalOpportunityQuota: 1 },
+      { slotId: 'NCE-U02-E05', targetIds: ['NCE-U02-T07'], retrievalOpportunityQuota: 4 }
+    ]
+  );
+  assert.equal(
+    plan.evidenceSlots.reduce((sum, slot) => sum + slot.retrievalOpportunityQuota, 0),
+    9
+  );
+  assert.equal(plan.evidenceSlots.find(slot => slot.slotId === 'NCE-U02-E04')
+    .requiresAuthoredTransfer, true);
+
+  for (const sourceRef of [
+    ...plan.promptEvidenceSourceRefs,
+    ...plan.lexicalEvidenceSourceRefs
+  ]) {
+    assert.equal(sourceById.get(sourceRef).sourceRole, 'target', sourceRef);
+    assert.equal(sourceById.get(sourceRef).coveragePolicy, 'evidence', sourceRef);
+  }
+  assert.equal(sourceById.get('L04-P01').coveragePolicy, 'exposure');
+  assert.equal(sourceById.get('L04-P14').coveragePolicy, 'exposure');
+  assert.equal(sourceById.get('L03-W02').coveragePolicy, 'exposure');
+  assert.equal(sourceById.get('L03-W05').sourceRole, 'target');
+  assert.equal(sourceById.get('L03-W05').coveragePolicy, 'exposure');
+  assert.equal(sourceById.get('L04-W04').coveragePolicy, 'exposure');
+});
+
+test('Lesson 3–4 keeps accepted curriculum, candidate audio, authored POC, and publication gates separate', () => {
   function message(change) {
     const unit = structuredClone(catalog.getTeachingUnit('NCE-U02'));
     change(unit);
@@ -183,17 +316,27 @@ test('curriculum-accepted units cannot masquerade as authored or published runti
   }
 
   assert.deepEqual(catalog.validate([structuredClone(catalog.getTeachingUnit('NCE-U02'))]), []);
-  assert.match(message(unit => { unit.publicationScope = 'course-catalog'; }), /must remain catalog-only/i);
-  assert.match(message(unit => { unit.runtimeProfile = 'microtask-v2'; }), /must remain not-authored/i);
-  assert.match(message(unit => { unit.beats.push({ beatId: 'discover' }); }), /cannot declare runtime beats/i);
-  assert.match(message(unit => { unit.title = '提前写好的故事'; }), /cannot declare story or page design/i);
-  assert.match(message(unit => { unit.lessonContent.lesson3.sources['L03-D01'].audioSrc = '/fake.mp3'; }), /cannot declare audioSrc/i);
-  assert.match(message(unit => { unit.targets[0].contextIds = ['invented-scene']; }), /cannot declare runtime contexts/i);
+  assert.match(message(unit => { unit.publicationScope = 'course-catalog'; }), /story-stage local candidate/i);
+  assert.match(message(unit => { unit.runtimeProfile = 'microtask-v2'; }), /story-stage local candidate/i);
+  assert.match(message(unit => { unit.beats.push({ beatId: 'discover' }); }), /cannot declare legacy beats/i);
+  assert.match(message(unit => { unit.experience.stages.pop(); }), /ten-stage contract/i);
+  assert.match(message(unit => { unit.lessonContent.lesson3.sources['L03-D01'].audioSrc = '/fake.mp3'; }), /preserve the inherited candidate audio mapping/i);
+  assert.match(message(unit => { unit.lessonContent.lesson3.sources['L03-D01'].voiceId = 'different-voice'; }), /preserve the inherited candidate audio mapping/i);
+  assert.match(message(unit => { unit.lessonContent.lesson3.sources['L03-D01'].speakerRole = 'invented-role'; }), /frozen course speaker role/i);
+  assert.match(message(unit => { unit.audioReviewContract.canonicalAudioSetSha256 = 'drifted'; }), /preserve the inherited voice review contract/i);
+  assert.match(message(unit => { unit.lessonContent.lesson3.sources['L03-D01'].audioSequence = []; }), /cannot declare audioSequence/i);
+  assert.match(message(unit => { unit.targets[0].contextIds = ['invented-scene']; }), /at least two authored contexts/i);
   assert.match(message(unit => { unit.targets[0].primarySourceRefs[0] = 'L03-D99'; }), /unknown primary source L03-D99/i);
   assert.match(message(unit => { unit.sourceTargetCoverage[0].coverage['NCE-U02-T99'] = 'support'; }), /unknown target NCE-U02-T99/i);
   assert.match(message(unit => { unit.sourceTargetCoverage[0].sourceRefs.pop(); }), /coverage matrix omits source L03-Q01/i);
   assert.match(message(unit => { unit.lessonContent.lesson4.requiredSourceIds.push('L04-E01'); }), /optional or omitted source cannot be required/i);
-  assert.match(message(unit => { unit.curriculumContract.publicationAllowed = true; }), /preserve its unimplemented gate/i);
+  assert.match(message(unit => { unit.firstSessionEvidencePlan.promptEvidenceSourceRefs.push('L04-P01'); }), /prompt evidence policy must match/i);
+  assert.match(message(unit => { unit.firstSessionEvidencePlan.evidenceSlots[0].targetBindings[0].evidenceMode = 'invented-mode'; }), /evidence mode is outside/i);
+  assert.match(message(unit => { unit.firstSessionEvidencePlan.evidenceSlots[0].answerId = 'revealed-answer'; }), /cannot author runtime field answerId/i);
+  assert.match(message(unit => { unit.firstSessionEvidencePlan.evidenceSlots[0].retrievalOpportunityQuota = 0; }), /positive retrieval opportunity quota/i);
+  assert.match(message(unit => { unit.curriculumContract.audioSourceAudit.result = 'audited'; }), /official-audio source audit/i);
+  assert.match(message(unit => { unit.curriculumContract.audioAuditStatus = 'not-audited'; }), /unpublished local gate/i);
+  assert.match(message(unit => { unit.curriculumContract.publicationAllowed = true; }), /unpublished local gate/i);
 });
 
 test('Lesson 1–2 V2 exposes the exact seventeen child-visible resume stages', () => {
@@ -205,7 +348,7 @@ test('Lesson 1–2 V2 exposes the exact seventeen child-visible resume stages', 
     progressDenominator: unit.experience.progressDenominator,
     microtaskIds: microtasks.map(task => task.microtaskId)
   }, {
-    experienceRevision: 'lesson1-2-v2.4',
+    experienceRevision: 'lesson1-2-v2.6',
     progressDenominator: 17,
     microtaskIds: [
       'L01-M07', 'L01-M08', 'L01-M09', 'L01-M10', 'L01-M11', 'L01-M12',
@@ -215,13 +358,13 @@ test('Lesson 1–2 V2 exposes the exact seventeen child-visible resume stages', 
   });
 });
 
-test('Lesson 1 ends with one required full-dialogue role stage and unlocks one unnumbered manual replay tool', () => {
+test('Lesson 1 includes one skippable full-dialogue role stage and unlocks replay only after completion', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const tasks = unit.beats.flatMap(beat => beat.microtasks || []);
   const taskById = new Map(tasks.map(task => [task.microtaskId, task]));
   const dialogueRefs = Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`);
 
-  assert.equal(unit.experienceRevision, 'lesson1-2-v2.4');
+  assert.equal(unit.experienceRevision, 'lesson1-2-v2.6');
   assert.equal(unit.experience.progressDenominator, 17);
   assert.equal(tasks.length, 17);
   assert.deepEqual(
@@ -273,6 +416,74 @@ test('Lesson 1 ends with one required full-dialogue role stage and unlocks one u
   assert.equal(manual.countsTowardProgress, false);
   assert.equal(manual.producesLearningEvidence, false);
   assert.equal(manual.affectsAdventureHearts, false);
+});
+
+test('Lesson 1 role play owns truthful role-round dispositions and direct interface copy', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const roleTask = unit.beats.flatMap(beat => beat.microtasks || [])
+    .find(task => task.microtaskId === 'L01-M12');
+
+  assert.equal(roleTask.navigationTitle, '角色扮演');
+  assert.equal(roleTask.presentation.title, '角色扮演');
+  const practice = roleTask.steps[0].practice;
+  assert.equal(practice.title, '选择你想扮演的角色');
+  assert.equal(practice.intro, '');
+  assert.deepEqual(practice.rounds.map(round => round.title), [
+    '你来当招领员', '你来当女顾客'
+  ]);
+  assert.deepEqual(practice.rounds.map(round => round.roleBadge), ['招领员', '女顾客']);
+  assert.equal(practice.hintLabel, '提示');
+  assert.equal(practice.nextHintLabel, '再提示');
+  assert.deepEqual(practice.turnHints.map(hint => hint.turnRef),
+    Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`));
+  assert.doesNotMatch(JSON.stringify(practice), /选择你先扮演的角色|完整演完七句，再换另一个角色/);
+  assert.deepEqual(roleTask.skipPolicy, {
+    kind: 'role-round-child-confirmed',
+    preservesPartialProgress: true,
+    countsAsResolved: true,
+    producesLearningEvidence: false,
+    unlocksOutcomePractice: false
+  });
+  assert.deepEqual(unit.experience.uiCopy.roleSkip, {
+    actionLabel: '跳过这个角色',
+    dialogTitle: '跳过这个角色？',
+    dialogCopy: '',
+    cancelLabel: '继续扮演',
+    confirmLabel: '跳过这个角色',
+    saveFailed: '没有保存成功',
+    retryLabel: '再试一次'
+  });
+  assert.equal(unit.experience.uiCopy.knowledge.collapseLabel, '收起');
+});
+
+test('stage eleven assembles Is this your watch question mark from five selectable tokens', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const task = unit.beats.flatMap(beat => beat.microtasks || [])
+    .find(item => item.microtaskId === 'L02-M15');
+  const step = task.steps.find(item => item.stepId === 'L02-M15:S01');
+  const challenge = step.challenges[0];
+  const expected = [
+    'NCE-U01-C-BLOCK-IS-CAPITAL', 'NCE-U01-C-BLOCK-THIS',
+    'NCE-U01-C-BLOCK-YOUR', 'NCE-U01-C-BLOCK-WATCH',
+    'NCE-U01-C-PUNCT-QUESTION'
+  ];
+
+  assert.deepEqual(step.blockContentRefs, expected);
+  assert.deepEqual(step.answerRule.acceptedOrder, expected);
+  assert.deepEqual(challenge.candidateContentRefs, expected);
+  assert.deepEqual(challenge.answerRule.acceptedOrder, expected);
+  assert.equal(step.shuffleConstraint, 'not-accepted-order');
+  assert.equal(challenge.shuffleConstraint, 'not-accepted-order');
+  assert.equal(step.allowReset, true);
+  assert.deepEqual(challenge.boundaryContentRefs, [expected[0], expected[4]]);
+  assert.deepEqual(challenge.supportLayers.map(layer => layer.copy), [
+    '问句从 Is 开始，问号放最后。',
+    '先找出 Is 和问号，中间的单词由你继续排列。',
+    '小猫换成 book 示范：Is this your book?'
+  ]);
+  assert.equal(task.presentation.moments.find(moment => (
+    moment.momentId === 'watch-question-build'
+  )).visibleLanguageRefs.length, 5);
 });
 
 test('Lesson 1–2 V2 uses only the five frozen scene families and explicit viewport policy', () => {
@@ -768,7 +979,7 @@ test('Lesson 1–2 V2 freezes shuffle, review, and full-dual-channel production 
     'deferredKicker', 'deferredTitle', 'deferredBody',
     'rescueTitle', 'rescueBody', 'retryAudioLabel'
   ]);
-  assert.equal(unit.experience.reviewRun.copy.entryTitle, '昨日线索，回来看看');
+  assert.equal(unit.experience.reviewRun.copy.entryTitle, '找回昨日线索');
   assert.equal(unit.experience.reviewRun.copy.rescueTitle, '小猫换个场景示范');
   assert.equal(unit.experience.reviewRun.href, '/poc/lesson1-2-review/');
 });
@@ -912,7 +1123,7 @@ test('Lesson 1–2 V2 freezes all twenty-nine story-semantic interaction contrac
     { challengeRef: 'L02-M13:C02', interactionPattern: 'label-connect', interactionSemantics: { sourceRefs: ['L02-W02'], targetId: 'pencil:english-label' } },
     { challengeRef: 'L02-M14:C01', interactionPattern: 'object-place', interactionSemantics: { sourceRefs: ['L02-W03'], targetId: 'personal-items-label-book:book' } },
     { challengeRef: 'L02-M14:C02', interactionPattern: 'object-place', interactionSemantics: { sourceRefs: ['L02-W04'], targetId: 'personal-items-label-book:watch' } },
-    { challengeRef: 'L02-M15:C01', interactionPattern: 'relation-reconstruct', interactionSemantics: { sourceRefs: ['L01-D03', 'L02-W04'], relationSlotIds: ['ownership-question:opening', 'ownership-question:watch', 'ownership-question:punctuation'] } },
+    { challengeRef: 'L02-M15:C01', interactionPattern: 'relation-reconstruct', interactionSemantics: { sourceRefs: ['L01-D03', 'L02-W04'], relationSlotIds: ['ownership-question:is', 'ownership-question:this', 'ownership-question:your', 'ownership-question:watch', 'ownership-question:punctuation'] } },
     { challengeRef: 'L02-M15:C02', interactionPattern: 'relation-reconstruct', interactionSemantics: { sourceRefs: ['L01-D06', 'L01-W09', 'L02-W04'], relationSlotIds: ['owner-answer:it-pronoun', 'owner-answer:watch-referent'] } },
     { challengeRef: 'L02-M16:C01', interactionPattern: 'object-place', interactionSemantics: { sourceRefs: ['L02-W05'], targetId: 'coatroom-rack:coat' } },
     { challengeRef: 'L02-M16:C02', interactionPattern: 'object-place', interactionSemantics: { sourceRefs: ['L02-W06'], targetId: 'coatroom-rack:dress' } },
@@ -1010,19 +1221,19 @@ test('Lesson 1–2 V2 keeps navigation, child prompts, knowledge cards, and fail
   const steps = new Map(tasks.flatMap(task => task.steps).map(step => [step.stepId, step]));
 
   assert.deepEqual(tasks.map(task => task.navigationTitle), [
-    '听听是谁丢了手提包', '找到手提包的主人', '礼貌地叫住她', '把问题问清楚',
-    '把手提包还给她', '轮流演完整故事',
+    '听听是谁丢了手提包', '柜台边的新线索', '礼貌地叫住她', '把问题问清楚',
+    '核对物品挂牌', '角色扮演',
     '清点包里的文具', '继续清点随身物品',
     '给文具贴上英文名', '给随身物品贴英文名', '换件物品问一问',
     '帮她寻找衣物', '找齐衣帽间的衣物', '给衣物贴上英文名',
-    '把外套还给她', '准备送她回家', '送她平安到家'
+    '把外套还给她', '回家路上的两个线索', '送她平安到家'
   ]);
   assert.deepEqual(tasks.map(task => task.presentation.title), tasks.map(task => task.navigationTitle));
   assert.equal(steps.get('L01-M08:S01').prompt, 'Whose handbag is it?');
   assert.equal(steps.get('L01-M11:S03').actionInstruction,
     '点击手提包主人，把手提包交给她');
   assert.equal(steps.get('L01-M09:S01').prompt, '礼貌叫住她，应该怎么说？');
-  assert.equal(steps.get('L01-M11:S02').prompt, '看手提包，选出对应的英文牌');
+  assert.equal(steps.get('L01-M11:S02').prompt, '看一看场景中的物品，选择对应的英文名称。');
   assert.equal(steps.get('L02-M11:S01').prompt, '听声音，点击对应的物品');
   assert.equal(steps.get('L02-M12:S01').prompt, '听声音，点击对应的物品');
   assert.equal(steps.get('L02-M13:S01').prompt, '看英文，点击对应的物品');
@@ -1047,13 +1258,188 @@ test('Lesson 1–2 V2 keeps navigation, child prompts, knowledge cards, and fail
     titleSource: 'microtask.navigationTitle',
     reachedPolicy: 'completed-plus-current',
     completedStageMode: 'sandbox-practice',
+    skippedStageMode: 'formal-completion',
     futureStageMode: 'visible-disabled',
     openLabel: '选择已到达的阶段',
     practiceLabel: '回看',
+    skippedLabel: '已跳过',
+    completeSkippedLabel: '完成角色扮演',
     currentLabel: '继续学习',
     lockedLabel: '未到达'
   });
   assert.doesNotMatch(JSON.stringify(tasks), /盖章|拉杆|点亮|钥匙|徽章/);
+});
+
+test('Lesson 1–2 child-action copy contract keeps one task, one status, and concise outcomes', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const ui = unit.experience.uiCopy;
+  const chapter = unit.experience.restStops['lesson1-chapter-stop'];
+  const midpoint = unit.experience.restStops['lesson2-midpoint-rest-stop'];
+  const manual = unit.experience.outcomePractices.find(practice => (
+    practice.practiceId === 'L01-RS01:manual-dialogue'
+  ));
+  const recap = unit.experience.outcomePractices.find(practice => (
+    practice.practiceId === 'NCE-U01-OUTCOME:case-recap'
+  ));
+
+  assert.equal(ui.dialogue.listenHint, '');
+  assert.equal(ui.feedbackAudio.autoContinue, '');
+  assert.equal(ui.languageAudio.listenHint, '');
+  assert.equal(ui.languageAudio.playingHint, '正在播放');
+  assert.equal(ui.interaction.soundQuestion, '');
+  assert.equal(ui.interaction.selectMatchingItem, '');
+  assert.equal(ui.navigation.restartCopy, '');
+  assert.equal(ui.navigation.dialogKicker, '');
+  assert.equal(ui.preview.savedTitle, '进度已保存');
+  assert.equal(ui.preview.dayBuildLabel, '');
+  assert.equal(ui.preview.reviewGrowthCopy, '');
+
+  assert.equal(chapter.kicker, '进度已保存');
+  assert.equal(chapter.copy, '');
+  assert.equal(midpoint.kicker, '进度已保存');
+  assert.equal(midpoint.copy, '');
+  assert.equal(unit.experience.completion.kicker, '');
+  assert.equal(unit.experience.completion.copy, '');
+
+  assert.deepEqual(
+    [manual.entryKicker, manual.entryLabel, manual.entryHint, manual.entryActionLabel],
+    ['可选 · 不计进度', '无字逐句回演', '', '开始回演']
+  );
+  assert.deepEqual(
+    [recap.entryKicker, recap.entryLabel, recap.entryHint, recap.entryActionLabel],
+    ['可选 · 3题', '案件复盘', '', '开始复盘']
+  );
+  assert.equal(recap.kicker, '');
+  assert.equal(recap.intro, '');
+  assert.equal(recap.exitLabel, '返回成果页');
+  assert.equal(recap.finishedTitle, '复盘完成');
+  assert.equal(recap.finishedCopy, '');
+
+  const copySurfaces = {
+    uiCopy: ui,
+    restStops: unit.experience.restStops,
+    outcomePractices: unit.experience.outcomePractices,
+    completion: unit.experience.completion,
+    reviewRun: unit.experience.reviewRun,
+    audioFailure: unit.experience.audioFailure,
+    saveFailure: unit.experience.saveFailure
+  };
+  const visibleCopy = [];
+  const collectStringValues = value => {
+    if (typeof value === 'string') {
+      visibleCopy.push(value);
+      return;
+    }
+    if (!value || typeof value !== 'object') return;
+    for (const nested of Object.values(value)) collectStringValues(nested);
+  };
+  collectStringValues(copySurfaces);
+  const visibleCopyText = visibleCopy.join('\n');
+  assert.doesNotMatch(visibleCopyText, /读完会自动继续|真实学习进度|稳定位置|当日建设|长期掌握/);
+  assert.doesNotMatch(
+    visibleCopyText,
+    /runtime|requestId|sourceRef|challengeRef|SHA-256|Service Worker|CacheStorage|HTTP\s*\d{3}/i
+  );
+});
+
+test('I02 freezes answer-neutral stage titles, prompts, and stage-two candidate labels', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const tasks = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
+    .map(task => [task.microtaskId, task]));
+  const steps = new Map([...tasks.values()].flatMap(task => task.steps || [])
+    .map(step => [step.stepId, step]));
+
+  assert.equal(tasks.get('L01-M08').navigationTitle, '柜台边的新线索');
+  assert.equal(tasks.get('L01-M08').presentation.title, '柜台边的新线索');
+  assert.deepEqual(tasks.get('L01-M08').presentation.candidateLabels, {
+    'station-keeper': '招领员',
+    'handbag-owner': '女顾客'
+  });
+  assert.equal(
+    steps.get('L01-M08:S01').actionInstruction,
+    '听完问题，点一下应该回应的人物。'
+  );
+  assert.equal(
+    steps.get('L01-M08:S02').prompt,
+    '听一听，点中声音说的物品。'
+  );
+
+  assert.equal(tasks.get('L01-M11').navigationTitle, '核对物品挂牌');
+  assert.equal(tasks.get('L01-M11').presentation.title, '核对物品挂牌');
+  assert.equal(
+    steps.get('L01-M11:S02').prompt,
+    '看一看场景中的物品，选择对应的英文名称。'
+  );
+
+  assert.equal(
+    steps.get('L01-M10:S01').prompt,
+    '礼貌确认，这是不是对方正在找的物品。'
+  );
+  assert.equal(
+    steps.get('L02-M15:S01').prompt,
+    '礼貌确认，这是不是对方正在找的物品。'
+  );
+
+  assert.equal(tasks.get('L02-M20').navigationTitle, '回家路上的两个线索');
+  assert.equal(tasks.get('L02-M20').presentation.title, '回家路上的两个线索');
+  assert.equal(
+    steps.get('L02-M20:S01').prompt,
+    '听一听，点中声音说的是哪一个。'
+  );
+  assert.equal(
+    tasks.get('L02-M20').presentation.prompt,
+    '听一听，点中声音说的是哪一个。'
+  );
+  assert.doesNotMatch(tasks.get('L02-M20').presentation.prompt, /car.*house|house.*car/i);
+});
+
+test('I02 declares and validates the evidence channel and intentional pre-submit support', () => {
+  const unit = catalog.getTeachingUnit('NCE-U01');
+  const challenges = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
+    .flatMap(task => task.steps || [])
+    .flatMap(step => step.challenges || [])
+    .map(challenge => [challenge.challengeRef, challenge]));
+
+  assert.deepEqual(challenges.get('L01-M08:C01').answerFairness, {
+    targetEvidenceChannel: 'meaning',
+    targetEvidenceSourceRefs: ['L01-D06'],
+    intentionalPreSubmitSupport: [
+      { sourceRef: 'L01-Q01', surface: 'english-question' }
+    ]
+  });
+  assert.deepEqual(challenges.get('L01-M08:C02').answerFairness, {
+    targetEvidenceChannel: 'audio-form-supported',
+    targetEvidenceSourceRefs: ['L01-W07'],
+    intentionalPreSubmitSupport: [
+      { sourceRef: 'L01-W07', surface: 'audio-word-plaque' }
+    ]
+  });
+  assert.deepEqual(challenges.get('L01-M11:C01').answerFairness, {
+    targetEvidenceChannel: 'word-form',
+    targetEvidenceSourceRefs: ['L01-W07'],
+    intentionalPreSubmitSupport: [
+      { sourceRef: 'L01-W07', surface: 'english-word-plaque' }
+    ]
+  });
+
+  const errorsAfter = mutate => {
+    const invalid = structuredClone(unit);
+    const challenge = invalid.beats.flatMap(beat => beat.microtasks || [])
+      .flatMap(task => task.steps || [])
+      .flatMap(step => step.challenges || [])
+      .find(candidate => candidate.challengeRef === 'L01-M08:C02');
+    mutate(challenge.answerFairness);
+    return catalog.validate([invalid]).join('\n');
+  };
+  assert.match(errorsAfter(fairness => {
+    fairness.targetEvidenceChannel = '';
+  }), /L01-M08:C02 answer fairness must declare its target evidence channel/i);
+  assert.match(errorsAfter(fairness => {
+    fairness.targetEvidenceSourceRefs = ['L01-W99'];
+  }), /L01-M08:C02 answer fairness references unknown source L01-W99/i);
+  assert.match(errorsAfter(fairness => {
+    fairness.intentionalPreSubmitSupport[0].surface = 'stage-title';
+  }), /L01-M08:C02 uses invalid intentional support surface stage-title/i);
 });
 
 test('textual choice prompts never disclose the accepted English option', () => {
@@ -1095,7 +1481,7 @@ test('Lesson 1–2 owner recall stays neutral and reveals distractor props only 
 
   assert.equal(ownerStep.prompt, 'Whose handbag is it?');
   assert.equal(ownerStep.promptSourceRef, 'L01-Q01');
-  assert.equal(ownerStep.actionInstruction, '点击人物，选出手提包的主人');
+  assert.equal(ownerStep.actionInstruction, '听完问题，点一下应该回应的人物。');
   assert.equal(ownerStep.candidatePresentation, 'neutral-before-submit');
   assert.equal(ownerStep.challenges[0].candidateSetPolicy,
     'authentic-story-participants');
@@ -1201,8 +1587,8 @@ test('Lesson 1 and Lesson 2 midpoint own distinct catalog rest stops without lan
     'lesson1-chapter-stop', 'lesson2-midpoint-rest-stop'
   ]);
   assert.deepEqual(Object.values(unit.experience.restStops).map(restStop => restStop.restingCopy), [
-    '下次进入，会从随身物品核对开始。',
-    '下次进入，会从衣帽间的 coat 和 dress 开始。'
+    '下次从随身物品核对继续。',
+    '下次从衣帽间的 coat 和 dress 继续。'
   ]);
   assert.ok(['L01-M12', 'L02-M15'].every(id => tasks.get(id).growthBoundary === 'none'));
 });
@@ -1270,6 +1656,74 @@ test('Lesson 1–2 rejects dangling or mainline-shaped outcome practice contract
   assert.match(message(practices => {
     practices[0].challengeRef = 'L01-RS01:C01';
   }), /L01-RS01:manual-dialogue.*forbidden mainline field challengeRef/i);
+});
+
+test('I05 every answer-bearing surface declares fairness and rejects direct answer leakage', () => {
+  const lessonOneTwo = catalog.getTeachingUnit('NCE-U01');
+  const recap = lessonOneTwo.experience.outcomePractices
+    .find(practice => practice.kind === 'case-recap');
+  const owner = recap.items.find(item => item.itemId === 'recap-story-owner');
+  const route = recap.items.find(item => item.itemId === 'recap-new-route');
+
+  assert.equal(lessonOneTwo.entities['handbag-owner'].title, '女顾客');
+  assert.equal(route.answerFairness.targetEvidenceChannel, 'vocabulary-transfer');
+  assert.equal(route.answerFairness.candidateLanguageBoundary, 'source-text-only');
+  assert.ok(recap.items.filter(item => item.options.some(option => option.sourceRef))
+    .every(item => item.answerFairness.candidateLanguageBoundary === 'source-text-only'));
+  assert.ok(recap.items.every(item => (
+    typeof item.answerFairness?.targetEvidenceChannel === 'string'
+      && Array.isArray(item.answerFairness.targetEvidenceSourceRefs)
+      && Array.isArray(item.answerFairness.intentionalPreSubmitSupport)
+  )));
+
+  const recapLeak = structuredClone(lessonOneTwo);
+  recapLeak.authoredContent['NCE-U01-C-RECAP-ROUTE'].text = '正确答案就是 house（房子）。';
+  assert.match(
+    catalog.validate([recapLeak]).join('\n'),
+    /recap-new-route.*answer leakage/i
+  );
+
+  const ownerLeak = structuredClone(lessonOneTwo);
+  ownerLeak.entities['handbag-owner'].title = '手提包主人';
+  assert.match(
+    catalog.validate([ownerLeak]).join('\n'),
+    /recap-story-owner.*answer leakage/i
+  );
+
+  const candidateLanguageLeak = structuredClone(lessonOneTwo);
+  delete candidateLanguageLeak.experience.outcomePractices
+    .find(practice => practice.kind === 'case-recap')
+    .items.find(item => item.itemId === 'recap-new-route')
+    .answerFairness.candidateLanguageBoundary;
+  assert.match(
+    catalog.validate([candidateLanguageLeak]).join('\n'),
+    /recap-new-route.*source-text-only language boundary/i
+  );
+
+  for (const unitId of ['NCE-U02', 'NCE-U03', 'NCE-U04']) {
+    const unit = structuredClone(catalog.getTeachingUnit(unitId));
+    const subjects = unit.experience.stages.flatMap(stage => (
+      stage.rounds?.length ? stage.rounds : [stage]
+    )).filter(subject => subject.answerRule);
+    assert.ok(subjects.length > 0);
+    assert.ok(subjects.every(subject => subject.answerFairness));
+
+    const evidenceSubject = subjects.find(subject => (
+      subject.answerFairness.targetEvidenceChannel !== 'guided-story-action'
+        && subject.answerRule.acceptedOptionId
+    ));
+    const accepted = evidenceSubject.options.find(option => (
+      option.optionId === evidenceSubject.answerRule.acceptedOptionId
+    ));
+    evidenceSubject.prompt = `正确答案就是 ${accepted.label}`;
+    assert.match(
+      catalog.validate([unit]).join('\n'),
+      /answer leakage/i,
+      `${unitId} must reject an injected direct answer`
+    );
+  }
+
+  assert.equal(owner.answerFairness.targetEvidenceChannel, 'discourse-understanding');
 });
 
 test('Lesson 1–2 rejects missing listen-answer and physical-surface contracts', () => {
@@ -1504,8 +1958,8 @@ test('all eleven textbook objects use illustrated project assets instead of emoj
     dress: 'item-dress-v1',
     skirt: 'item-skirt-v1',
     shirt: 'item-shirt-v1',
-    car: 'scene-car-v1',
-    house: 'scene-house-v1'
+    car: 'scene-car-v2',
+    house: 'scene-house-v2'
   };
 
   for (const [entityId, basename] of Object.entries(expectedAssets)) {
@@ -1514,6 +1968,10 @@ test('all eleven textbook objects use illustrated project assets instead of emoj
     assert.equal(entity.assetSrc, `/poc/lesson1-2-experience/assets/${basename}.avif`, entityId);
     assert.equal(entity.assetFallbackSrc, `/poc/lesson1-2-experience/assets/${basename}.webp`, entityId);
   }
+
+  const lessonThreeFour = catalog.getTeachingUnit('NCE-U02');
+  assert.match(lessonThreeFour.entities.car.assets.avif, /scene-car-v1\.avif$/);
+  assert.match(lessonThreeFour.entities.house.assets.avif, /scene-house-v1\.avif$/);
 });
 
 test('car and house use direct homeward scenes without a key or route-map metaphor', () => {
@@ -1538,7 +1996,7 @@ test('car and house use direct homeward scenes without a key or route-map metaph
   assert.equal(/key|钥匙|route-map|路线图/i.test(JSON.stringify([audioTask, formTask])), false);
 });
 
-test('Lesson 1–2 V2.4 uses direct intent, two scene masters, and a real homeward finale', () => {
+test('Lesson 1–2 V2.6 uses direct intent, two scene masters, and a real homeward finale', () => {
   const unit = catalog.getTeachingUnit('NCE-U01');
   const tasks = new Map(unit.beats.flatMap(beat => beat.microtasks || [])
     .map(task => [task.microtaskId, task]));
@@ -1557,7 +2015,7 @@ test('Lesson 1–2 V2.4 uses direct intent, two scene masters, and a real homewa
     assert.equal(challenge.correctFeedback.copy, challenge.targetText, challenge.challengeRef);
   }
 
-  assert.equal(unit.experienceRevision, 'lesson1-2-v2.4');
+  assert.equal(unit.experienceRevision, 'lesson1-2-v2.6');
   assert.deepEqual(Object.keys(unit.experience.sceneFrames.masters), ['portrait', 'wide']);
   assert.deepEqual(unit.experience.sceneFrames.actorSlots, {
     'station-keeper': 'left',

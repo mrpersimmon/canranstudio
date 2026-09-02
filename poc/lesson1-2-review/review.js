@@ -196,9 +196,6 @@
       if (effect.type === 'audio/play') startAudio(effect);
       if (effect.type === 'audio/cancel') stopAudio();
       if (effect.type === 'review/feedback-correct') setFeedback(effect);
-      if (effect.type === 'review/feedback-incorrect') {
-        orderedSelections.delete(runtime.snapshot().reviewChallengeRef);
-      }
       if (effect.type === 'review/support') {
         transientFeedback = effect.copy || copy.feedback.supportFallback;
         transientFeedbackCellId = runtime.snapshot().currentCell?.reviewCellId || null;
@@ -271,11 +268,15 @@
     const [kind, identifiers] = optionSets.find(([, values]) => values.length) || ['entity', []];
     const ordered = challenge.answerRule?.type === 'ordered-blocks';
     const selected = orderedSelections.get(snapshot.reviewChallengeRef) || [];
+    const boundaryRefs = ['partial-cue', 'model'].includes(snapshot.supportLevel)
+      ? new Set(challenge.boundaryContentRefs || [])
+      : new Set();
     const selectedTrack = ordered
       ? `<div class="review-order-track" aria-label="${escapeHtml(copy.interaction.sequenceTrackLabel)}">
           ${selected.map(identifier => (
-            `<span>${escapeHtml(optionLabel(kind, identifier))}</span>`
+            `<button type="button" data-action="review-remove-block" data-option-id="${escapeHtml(identifier)}" class="${boundaryRefs.has(identifier) ? 'is-boundary-cue' : ''}">${escapeHtml(optionLabel(kind, identifier))}</button>`
           )).join('')}
+          ${selected.length ? `<button class="review-order-reset" type="button" data-action="review-reset-blocks">${escapeHtml(copy.interaction.reorderLabel || '')}</button>` : ''}
         </div>`
       : '';
     return `<div class="review-answer-area" data-answer-kind="${escapeHtml(kind)}">
@@ -284,7 +285,7 @@
         ${identifiers.map(identifier => {
           const candidate = kind === 'entity' ? entity(identifier) : null;
           const disabled = selected.includes(identifier) ? ' disabled' : '';
-          return `<button class="review-option" type="button" data-review-option
+          return `<button class="review-option${boundaryRefs.has(identifier) ? ' is-boundary-cue' : ''}" type="button" data-review-option
             data-option-kind="${escapeHtml(kind)}" data-option-id="${escapeHtml(identifier)}"${disabled}>
             ${candidate ? picture(candidate, 'review-option__picture') : ''}
             <span>${escapeHtml(optionLabel(kind, identifier))}</span>
@@ -300,7 +301,7 @@
     }
     const failed = snapshot.phase === 'audio-failed';
     const paused = snapshot.phase === 'audio-paused';
-    const title = failed ? unit.experience.audioFailure.title : copy.languageAudio.regionLabel;
+    const title = failed ? unit.experience.audioFailure.title : '';
     const detail = failed
       ? unit.experience.audioFailure.copy
       : snapshot.phase === 'audio-playing'
@@ -308,16 +309,11 @@
         : copy.languageAudio.listenHint;
     const label = failed ? reviewCopy.retryAudioLabel : copy.languageAudio.playLabel;
     const action = failed || paused ? 'audio-retry' : 'audio-play';
-    const visibleEnglish = audioSession?.visibleText
-      || snapshot.audio?.visibleText
-      || snapshot.currentCell?.targetText
-      || '';
     return `<section class="review-audio" data-review-audio data-audio-phase="${escapeHtml(snapshot.phase)}">
       <div class="review-audio__orb" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="review-audio__copy">
-        <strong>${escapeHtml(title)}</strong>
-        <span class="review-audio__english" data-visible-english>${escapeHtml(visibleEnglish)}</span>
-        <small>${escapeHtml(detail)}</small>
+        ${title ? `<strong>${escapeHtml(title)}</strong>` : ''}
+        ${detail ? `<small>${escapeHtml(detail)}</small>` : ''}
       </div>
       ${snapshot.phase === 'audio-playing' ? '' : (
         `<button type="button" class="review-audio__button" data-action="${action}">${escapeHtml(label)}</button>`
@@ -351,11 +347,10 @@
         </div>
         ${heartGauge(snapshot)}
       </header>
-      <div class="review-timing"><span>${snapshot.cellCount} ${escapeHtml(reviewCopy.itemCountSuffix)}</span><span>·</span><span>${escapeHtml(reviewCopy.durationPrefix)} ${snapshot.estimatedSeconds}s</span></div>
       ${contextScene(snapshot)}
       <section class="review-mission" data-review-cell="${escapeHtml(snapshot.currentCell.reviewCellId)}">
-        <p class="review-instruction">${escapeHtml(instructionFor(challenge))}</p>
-        <div class="review-target" data-review-target>${escapeHtml(snapshot.currentCell.targetText)}</div>
+        <p class="review-instruction" data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(instructionFor(challenge))}</p>
+        <div class="review-target" data-review-target data-visible-english>${escapeHtml(snapshot.currentCell.targetText)}</div>
         ${audioPanel(snapshot)}
         ${responseOpen ? answerGrid(snapshot, challenge) : ''}
         ${feedbackPanel(snapshot)}
@@ -374,9 +369,9 @@
       <section class="quiet-card">
         ${showExplorer ? picture(explorer, 'quiet-cat') : ''}
         <span class="quiet-star" aria-hidden="true">✦</span>
-        <span class="quiet-kicker">${escapeHtml(kicker)}</span>
+        ${kicker ? `<span class="quiet-kicker">${escapeHtml(kicker)}</span>` : ''}
         <h1>${escapeHtml(title)}</h1>
-        <p>${escapeHtml(detail)}</p>
+        ${detail ? `<p>${escapeHtml(detail)}</p>` : ''}
         ${action || ''}
       </section>
     </article>`;
@@ -471,6 +466,19 @@
     }
     if (action === 'audio-retry') {
       reviewAction('audio/retry');
+      return;
+    }
+    if (action === 'review-remove-block' || action === 'review-reset-blocks') {
+      const snapshot = runtime.snapshot();
+      if (snapshot.phase !== 'awaiting-response') return;
+      const selected = orderedSelections.get(snapshot.reviewChallengeRef) || [];
+      orderedSelections.set(
+        snapshot.reviewChallengeRef,
+        action === 'review-reset-blocks'
+          ? []
+          : selected.filter(identifier => identifier !== event.target.closest('[data-option-id]')?.dataset.optionId)
+      );
+      render(snapshot);
       return;
     }
     const option = event.target.closest('[data-review-option]');

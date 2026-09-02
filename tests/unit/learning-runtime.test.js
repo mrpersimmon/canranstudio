@@ -11,7 +11,7 @@ const { createMemoryAdapter } = require('../../core/learning-store');
 const unit = catalog.getTeachingUnit('FLC-U01');
 const nceUnit = catalog.getTeachingUnit('NCE-U01');
 
-function roleStageLedger({ completedRoundIds = [] } = {}) {
+function roleStageLedger({ completedRoundIds = [], skippedRoundIds = [] } = {}) {
   const events = [];
   const completedMicrotaskIds = ['L01-M07', 'L01-M08', 'L01-M09', 'L01-M10', 'L01-M11'];
   const practiceId = 'L01-M12:role-enactment';
@@ -20,11 +20,12 @@ function roleStageLedger({ completedRoundIds = [] } = {}) {
     checkpoint: { checkpointId: 'L01-M11:complete', microtaskId: 'L01-M11' },
     buildStage: 0, storyFacts: [], adventureHeartsRemaining: 3,
     unitAttemptId: 'role-stage-attempt', completedMicrotaskIds,
+    skippedMicrotaskIds: [],
     pendingUiContinuation: null,
-    rolePracticeProgress: completedRoundIds.length ? {
+    rolePracticeProgress: completedRoundIds.length || skippedRoundIds.length ? {
       [practiceId]: {
         microtaskId: 'L01-M12', unitAttemptId: 'role-stage-attempt',
-        completedRoundIds: [...completedRoundIds]
+        completedRoundIds: [...completedRoundIds], skippedRoundIds: [...skippedRoundIds]
       }
     } : {}
   };
@@ -35,10 +36,24 @@ function roleStageLedger({ completedRoundIds = [] } = {}) {
       events.push(structuredClone(event));
       if (event.type === 'role-practice-round-completed') {
         const progress = state.rolePracticeProgress[event.practiceId] || {
-          microtaskId: event.microtaskId, unitAttemptId: event.unitAttemptId, completedRoundIds: []
+          microtaskId: event.microtaskId, unitAttemptId: event.unitAttemptId,
+          completedRoundIds: [], skippedRoundIds: []
         };
         if (!progress.completedRoundIds.includes(event.roundId)) {
           progress.completedRoundIds.push(event.roundId);
+        }
+        progress.skippedRoundIds = progress.skippedRoundIds
+          .filter(roundId => roundId !== event.roundId);
+        state.rolePracticeProgress[event.practiceId] = progress;
+      }
+      if (event.type === 'role-practice-round-skipped') {
+        const progress = state.rolePracticeProgress[event.practiceId] || {
+          microtaskId: event.microtaskId, unitAttemptId: event.unitAttemptId,
+          completedRoundIds: [], skippedRoundIds: []
+        };
+        if (!progress.completedRoundIds.includes(event.roundId)
+          && !progress.skippedRoundIds.includes(event.roundId)) {
+          progress.skippedRoundIds.push(event.roundId);
         }
         state.rolePracticeProgress[event.practiceId] = progress;
       }
@@ -47,6 +62,18 @@ function roleStageLedger({ completedRoundIds = [] } = {}) {
           state.completedMicrotaskIds.push(event.microtaskId);
         }
         delete state.rolePracticeProgress[practiceId];
+        state.skippedMicrotaskIds = state.skippedMicrotaskIds
+          .filter(microtaskId => microtaskId !== event.microtaskId);
+      }
+      if (event.type === 'microtask-skipped') {
+        if (!state.skippedMicrotaskIds.includes(event.microtaskId)) {
+          state.skippedMicrotaskIds.push(event.microtaskId);
+        }
+        state.checkpoint = {
+          checkpointId: event.checkpointId,
+          microtaskId: event.microtaskId,
+          completionStatus: 'skipped'
+        };
       }
       return { status: 'applied', persisted: true, effects: [], snapshot: this.read() };
     }
@@ -1300,7 +1327,7 @@ test('Lesson 1–2 V2 keeps support after a correction and restarts the whole cu
 test('Lesson 1–2 V2 always uses the model layer when a carried-over final heart is depleted', () => {
   const ledger = fakeRevisionLedger({
     unitState: {
-      experienceRevision: 'lesson1-2-v2.4',
+      experienceRevision: 'lesson1-2-v2.6',
       completedMicrotaskIds: ['L01-M07'],
       adventureHeartsRemaining: 1,
       storyFacts: [],
@@ -1544,7 +1571,7 @@ test('Lesson 1–2 V2 restores completed language directly into verification or 
     .map(task => task.microtaskId);
   const verifyingLedger = fakeRevisionLedger({
     unitState: {
-      experienceRevision: 'lesson1-2-v2.4', completedMicrotaskIds,
+      experienceRevision: 'lesson1-2-v2.6', completedMicrotaskIds,
       adventureHeartsRemaining: 3, storyFacts: [], buildStage: 0,
       completionReadback: { readyForBuild: true }
     }
@@ -1567,7 +1594,7 @@ test('Lesson 1–2 V2 restores completed language directly into verification or 
 
   const builtLedger = fakeRevisionLedger({
     unitState: {
-      experienceRevision: 'lesson1-2-v2.4', completedMicrotaskIds,
+      experienceRevision: 'lesson1-2-v2.6', completedMicrotaskIds,
       adventureHeartsRemaining: 3, storyFacts: [], buildStage: 5,
       completionReadback: { readyForBuild: true }
     }
@@ -1695,7 +1722,7 @@ test('the real Lesson 1 first-listen Source contacts pass the revisioned ledger 
 test('Lesson 1 completion stops at its authored rest point before Lesson 2 and resumes explicitly', () => {
   const ledger = fakeRevisionLedger({
     unitState: {
-      experienceRevision: 'lesson1-2-v2.4', unitAttemptId: 'rest-attempt',
+      experienceRevision: 'lesson1-2-v2.6', unitAttemptId: 'rest-attempt',
       completedMicrotaskIds: ['L01-M07', 'L01-M08', 'L01-M09', 'L01-M10'],
       storyFacts: [], adventureHearts: 3, buildStage: 0
     }
@@ -1797,7 +1824,7 @@ test('Lesson 1 completion stops at its authored rest point before Lesson 2 and r
 test('reached-stage navigation runs completed stages in an isolated sandbox and keeps future stages locked', () => {
   const ledger = fakeRevisionLedger({
     unitState: {
-      experienceRevision: 'lesson1-2-v2.4', unitAttemptId: 'sandbox-attempt',
+      experienceRevision: 'lesson1-2-v2.6', unitAttemptId: 'sandbox-attempt',
       completedMicrotaskIds: ['L01-M07', 'L01-M08'],
       storyFacts: ['lesson1-dialogue-first-listen-complete', 'handbag-owner-identified'],
       adventureHeartsRemaining: 2, buildStage: 0
@@ -1904,7 +1931,7 @@ test('Lesson 1–2 V2 destroy cancels the active audio request before closing th
   assert.equal(destroyed.snapshot.audio, null);
   assert.deepEqual(destroyed.effects, [{
     type: 'audio/cancel',
-    experienceRevision: 'lesson1-2-v2.4',
+    experienceRevision: 'lesson1-2-v2.6',
     microtaskId: 'L01-M07',
     attemptRevision: 0,
     requestId: entered.snapshot.audio.requestId
@@ -1923,7 +1950,7 @@ test('the final route grows the landmark only after full readback, idempotent un
       return {
         units: {
           'NCE-U01': {
-            experienceRevision: 'lesson1-2-v2.4', unitAttemptId: 'final-attempt',
+            experienceRevision: 'lesson1-2-v2.6', unitAttemptId: 'final-attempt',
             completedMicrotaskIds: taskIds.slice(0, -1), storyFacts: [],
             adventureHearts: 3, buildStage,
             completionReadback: { readyForBuild }
@@ -3093,7 +3120,7 @@ test('page-supplied metadata cannot create target evidence for a checkpoint-only
   assert.equal(runtime.snapshot().contextId, 'breakfast-stall');
 });
 
-test('required role stage persists whole-role checkpoints, restores them, and completes with no result or heart change', () => {
+test('role stage persists whole-role checkpoints, restores them, and completes with no result or heart change', () => {
   const ledger = roleStageLedger();
   let runtime = create({ unit: nceUnit, ledger, seed: 801 });
   let entered = runtime.enter({ entryLesson: 'lesson1' });
@@ -3144,5 +3171,149 @@ test('required role stage persists whole-role checkpoints, restores them, and co
   ));
   assert.ok(completionEvent);
   assert.deepEqual(completionEvent.targetResults, []);
-  assert.deepEqual(completionEvent.audioContactRefs, []);
+  assert.deepEqual(completionEvent.audioContactRefs,
+    Array.from({ length: 7 }, (_, index) => `L01-D0${index + 1}`));
+});
+
+test('role-round skip advances only after both roles are disposed and map recovery can replace it', () => {
+  const ledger = roleStageLedger();
+  const runtime = create({ unit: nceUnit, ledger, seed: 901 });
+  let current = runtime.enter({ entryLesson: 'lesson1' });
+
+  current = runtime.dispatch({
+    type: 'role-practice/round-complete',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    practiceId: 'L01-M12:role-enactment', roundId: 'keeper-round'
+  });
+  assert.equal(current.snapshot.microtaskId, 'L01-M12');
+  assert.deepEqual(current.snapshot.rolePracticeProgress, {
+    practiceId: 'L01-M12:role-enactment',
+    completedRoundIds: ['keeper-round'], skippedRoundIds: []
+  });
+  current = runtime.dispatch({
+    type: 'role-practice/round-skip',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    practiceId: 'L01-M12:role-enactment', roundId: 'owner-round'
+  });
+
+  assert.equal(current.snapshot.microtaskId, 'L02-M11');
+  assert.equal(current.snapshot.status, 'active');
+  assert.deepEqual(current.snapshot.skippedMicrotaskIds, ['L01-M12']);
+  assert.equal(current.snapshot.completedMicrotaskIds.includes('L01-M12'), false);
+  const skipEvent = ledger.events.find(event => event.type === 'microtask-skipped');
+  assert.ok(skipEvent);
+  for (const field of ['targetResults', 'sourceContacts', 'audioContactRefs', 'storyFacts']) {
+    assert.deepEqual(skipEvent[field], []);
+  }
+
+  current = runtime.dispatch({
+    type: 'navigation/open-stage',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: 'L01-M12'
+  });
+  assert.equal(current.snapshot.mode, 'microtask-v2-skip-recovery');
+  assert.equal(current.snapshot.microtaskId, 'L01-M12');
+  assert.deepEqual(current.snapshot.rolePracticeProgress.completedRoundIds, ['keeper-round']);
+  assert.deepEqual(current.snapshot.rolePracticeProgress.skippedRoundIds, ['owner-round']);
+
+  current = runtime.dispatch({
+    type: 'role-practice/round-complete',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    practiceId: 'L01-M12:role-enactment', roundId: 'owner-round'
+  });
+  current = runtime.dispatch({
+    type: 'role-practice/complete',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    practiceId: 'L01-M12:role-enactment'
+  });
+
+  assert.equal(current.snapshot.mode, 'microtask-v2');
+  assert.equal(current.snapshot.microtaskId, 'L02-M11');
+  assert.ok(current.snapshot.completedMicrotaskIds.includes('L01-M12'));
+  assert.equal(current.snapshot.skippedMicrotaskIds.includes('L01-M12'), false);
+  assert.ok(current.effects.some(effect => effect.type === 'runtime/skipped-stage-completed'));
+});
+
+test('skip-complete and skip-skip role combinations resolve as skipped without false completion', () => {
+  for (const [caseIndex, dispositions] of [
+    ['skipped', 'completed'],
+    ['skipped', 'skipped']
+  ].entries()) {
+    const ledger = roleStageLedger();
+    const runtime = create({ unit: nceUnit, ledger, seed: 1100 + caseIndex });
+    let current = runtime.enter({ entryLesson: 'lesson1' });
+    for (const [index, disposition] of dispositions.entries()) {
+      current = runtime.dispatch({
+        type: disposition === 'completed'
+          ? 'role-practice/round-complete'
+          : 'role-practice/round-skip',
+        experienceRevision: current.snapshot.experienceRevision,
+        stateVersion: current.snapshot.stateVersion,
+        practiceId: 'L01-M12:role-enactment',
+        roundId: index === 0 ? 'keeper-round' : 'owner-round'
+      });
+      if (index === 0) assert.equal(current.snapshot.microtaskId, 'L01-M12');
+    }
+    assert.equal(current.snapshot.microtaskId, 'L02-M11');
+    assert.ok(current.snapshot.skippedMicrotaskIds.includes('L01-M12'));
+    assert.equal(current.snapshot.completedMicrotaskIds.includes('L01-M12'), false);
+    assert.equal(ledger.events.some(event => (
+      event.type === 'microtask-completed' && event.microtaskId === 'L01-M12'
+    )), false);
+  }
+});
+
+test('refresh restores a single role disposition and skip recovery can return to the exact mainline state', () => {
+  let ledger = roleStageLedger({ skippedRoundIds: ['keeper-round'] });
+  let runtime = create({ unit: nceUnit, ledger, seed: 1001 });
+  let current = runtime.enter({ entryLesson: 'lesson1' });
+  assert.equal(current.snapshot.microtaskId, 'L01-M12');
+  assert.deepEqual(current.snapshot.rolePracticeProgress, {
+    practiceId: 'L01-M12:role-enactment',
+    completedRoundIds: [], skippedRoundIds: ['keeper-round']
+  });
+
+  ledger = roleStageLedger({ skippedRoundIds: ['keeper-round', 'owner-round'] });
+  ledger.apply({
+    eventId: 'seed-stage-skip', type: 'microtask-skipped',
+    unitId: nceUnit.unitId, experienceRevision: nceUnit.experienceRevision,
+    unitAttemptId: 'role-stage-attempt', attemptRevision: 0,
+    beatId: 'teach', microtaskId: 'L01-M12', checkpointId: 'L01-M12:complete',
+    completionStatus: 'skipped', targetResults: [], sourceContacts: [],
+    audioContactRefs: [], missingAudioRefs: [], storyFacts: [], adventureHeartsRemaining: 3
+  });
+  runtime = create({ unit: nceUnit, ledger, seed: 1002 });
+  current = runtime.enter({ entryLesson: 'lesson2' });
+  const origin = structuredClone(current.snapshot);
+  current = runtime.dispatch({
+    type: 'navigation/open-stage',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: 'L01-M12'
+  });
+  current = runtime.dispatch({
+    type: 'role-practice/round-complete',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    practiceId: 'L01-M12:role-enactment', roundId: 'keeper-round'
+  });
+  assert.equal(current.snapshot.mode, 'microtask-v2-skip-recovery');
+  assert.deepEqual(current.snapshot.rolePracticeProgress.completedRoundIds, ['keeper-round']);
+  assert.deepEqual(current.snapshot.rolePracticeProgress.skippedRoundIds, ['owner-round']);
+
+  current = runtime.dispatch({
+    type: 'navigation/exit-skip-recovery',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion
+  });
+  assert.equal(current.snapshot.mode, 'microtask-v2');
+  assert.equal(current.snapshot.microtaskId, origin.microtaskId);
+  assert.equal(current.snapshot.stepId, origin.stepId);
+  assert.equal(current.snapshot.phase, origin.phase);
+  assert.ok(current.effects.some(effect => effect.type === 'runtime/skipped-stage-returned'));
 });

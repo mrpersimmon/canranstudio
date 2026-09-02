@@ -1,0 +1,2622 @@
+{
+  "unitId": "NCE-U04",
+  "districtId": "first-book-1-12",
+  "lessonIds": [
+    "lesson7",
+    "lesson8"
+  ],
+  "unitLabel": "Lesson 7–8",
+  "title": "午夜职业茶会",
+  "status": "candidate",
+  "publicationScope": "local-poc",
+  "runtimeProfile": "story-stage-v1",
+  "experienceRevision": "lesson7-8-v1",
+  "beats": [],
+  "targets": [
+    {
+      "targetId": "NCE-U04-T01",
+      "tier": "core",
+      "title": "听懂 Robert 与 Sophie 从姓名、国籍到职业的完整对话，并回答教材总问题",
+      "evidenceModes": [
+        "dialogue-comprehension"
+      ],
+      "structureRefs": [],
+      "primarySourceRefs": [
+        "L07-Q01",
+        "L07-D01",
+        "L07-D02",
+        "L07-D03",
+        "L07-D04",
+        "L07-D05",
+        "L07-D06",
+        "L07-D07",
+        "L07-D08",
+        "L07-D09",
+        "L07-D10",
+        "L07-D11",
+        "L07-D12",
+        "L07-D13",
+        "L07-D14",
+        "L07-D15",
+        "L07-D16"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "完整对话只形成一次理解结果，不逐句设题",
+      "contextIds": [
+        "career-salon",
+        "job-badge-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U04-T02",
+      "tier": "core",
+      "title": "用 I am ... 和 My name is ... 介绍自己",
+      "evidenceModes": [
+        "self-introduction"
+      ],
+      "structureRefs": [
+        "GS-I-AM",
+        "GS-MY-NAME-IS"
+      ],
+      "primarySourceRefs": [
+        "L07-D01",
+        "L07-D02",
+        "L07-D03",
+        "L07-D04",
+        "L07-N01",
+        "L07-N02"
+      ],
+      "inheritedSourceRefs": [
+        "L05-D08"
+      ],
+      "firstSessionBoundary": "在两人见面场景中取证，不做机械缩写辨认",
+      "contextIds": [
+        "career-salon",
+        "job-badge-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U04-T03",
+      "tier": "core",
+      "title": "询问和回答国籍，区分 Yes, I am. 与 No, I am not.",
+      "evidenceModes": [
+        "nationality-question-answer"
+      ],
+      "structureRefs": [
+        "GS-BE-QUESTION-YOU",
+        "GS-BE-SHORT-ANSWER-I"
+      ],
+      "primarySourceRefs": [
+        "L07-D05",
+        "L07-D06",
+        "L07-D07",
+        "L07-D08",
+        "L07-D09",
+        "L07-D10",
+        "L07-N04"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "至少观察一肯定一否定，再完成一次 What nationality 迁移",
+      "contextIds": [
+        "career-salon",
+        "job-badge-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U04-T04",
+      "tier": "core",
+      "title": "用 What's your job? 询问职业，并用 I'm a/an ... 回答",
+      "evidenceModes": [
+        "job-question-answer"
+      ],
+      "structureRefs": [
+        "GS-WHATS-YOUR-JOB",
+        "GS-I-AM-A-JOB"
+      ],
+      "primarySourceRefs": [
+        "L07-D11",
+        "L07-D12",
+        "L07-D13",
+        "L07-D14",
+        "L07-D15",
+        "L07-D16",
+        "L07-N03",
+        "L08-P01",
+        "L08-P02",
+        "L08-P03",
+        "L08-P04",
+        "L08-P05",
+        "L08-P06",
+        "L08-P07",
+        "L08-P08",
+        "L08-P09",
+        "L08-P10"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "职业词必须留在问答或人物图像中，不连续做十道词卡",
+      "contextIds": [
+        "career-salon",
+        "job-badge-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U04-T05",
+      "tier": "core",
+      "title": "按人物性别与关系使用 he、she、his、her",
+      "evidenceModes": [
+        "third-person-job-reference"
+      ],
+      "structureRefs": [
+        "GS-SUBJECT-PRONOUN-SG",
+        "GS-POSSESSIVE-DETERMINER"
+      ],
+      "primarySourceRefs": [
+        "L08-E02",
+        "L08-P01",
+        "L08-P02",
+        "L08-P03",
+        "L08-P04",
+        "L08-P05",
+        "L08-P06",
+        "L08-P07",
+        "L08-P08",
+        "L08-P09",
+        "L08-P10"
+      ],
+      "inheritedSourceRefs": [
+        "L05-D05",
+        "L05-D07"
+      ],
+      "firstSessionBoundary": "用新职业图作口头迁移；书面造句保持非阻断扩展",
+      "contextIds": [
+        "career-salon",
+        "job-badge-gallery"
+      ]
+    },
+    {
+      "targetId": "NCE-U04-T06",
+      "tier": "lexical-sample",
+      "title": "将十种职业词连接到清楚、可辨认的人物图像",
+      "evidenceModes": [
+        "audio-form-job-match",
+        "word-form-job-match"
+      ],
+      "structureRefs": [],
+      "primarySourceRefs": [
+        "L08-W01",
+        "L08-W02",
+        "L08-W03",
+        "L08-W04",
+        "L08-W05",
+        "L08-W06",
+        "L08-W07",
+        "L08-W08",
+        "L08-W09",
+        "L08-W10",
+        "L08-P01",
+        "L08-P02",
+        "L08-P03",
+        "L08-P04",
+        "L08-P05",
+        "L08-P06",
+        "L08-P07",
+        "L08-P08",
+        "L08-P09",
+        "L08-P10"
+      ],
+      "inheritedSourceRefs": [],
+      "firstSessionBoundary": "十词全部接触，只抽三项听辨与四项迁移形成当天证据",
+      "contextIds": [
+        "career-salon",
+        "job-badge-gallery"
+      ]
+    }
+  ],
+  "lessonContent": {
+    "lesson7": {
+      "lessonId": "lesson7",
+      "textbookTitle": "Are you a teacher?",
+      "sourceRegisterRef": "BOOK1-2022-07",
+      "textbookSource": "外研社《新概念英语智慧版 1》PDF 页 47–48，教材页 14–15",
+      "requiredSourceIds": [
+        "L07-I01",
+        "L07-Q01",
+        "L07-D01",
+        "L07-D02",
+        "L07-D03",
+        "L07-D04",
+        "L07-D05",
+        "L07-D06",
+        "L07-D07",
+        "L07-D08",
+        "L07-D09",
+        "L07-D10",
+        "L07-D11",
+        "L07-D12",
+        "L07-D13",
+        "L07-D14",
+        "L07-D15",
+        "L07-D16",
+        "L07-W01",
+        "L07-W02",
+        "L07-W03",
+        "L07-W04",
+        "L07-W05",
+        "L07-W06",
+        "L07-W07",
+        "L07-W08",
+        "L07-W09",
+        "L07-W10",
+        "L07-W11",
+        "L07-N01",
+        "L07-N02",
+        "L07-N03",
+        "L07-N04"
+      ],
+      "sources": {
+        "L07-I01": {
+          "sourceId": "L07-I01",
+          "sourceKind": "textbook-instruction",
+          "text": "Listen then answer this question.",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "听录音，然后回答问题。"
+        },
+        "L07-Q01": {
+          "sourceId": "L07-Q01",
+          "sourceKind": "textbook-question",
+          "text": "What is Robert's job?",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "罗伯特是做什么工作的？"
+        },
+        "L07-D01": {
+          "sourceId": "L07-D01",
+          "sourceKind": "dialogue",
+          "text": "I am a new student.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 1,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d01.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D02": {
+          "sourceId": "L07-D02",
+          "sourceKind": "dialogue",
+          "text": "My name's Robert.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 1,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d02.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D03": {
+          "sourceId": "L07-D03",
+          "sourceKind": "dialogue",
+          "text": "Nice to meet you.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 2,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D04": {
+          "sourceId": "L07-D04",
+          "sourceKind": "dialogue",
+          "text": "My name's Sophie.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 2,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D05": {
+          "sourceId": "L07-D05",
+          "sourceKind": "dialogue",
+          "text": "Are you French?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d05.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D06": {
+          "sourceId": "L07-D06",
+          "sourceKind": "dialogue",
+          "text": "Yes, I am.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 3,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D07": {
+          "sourceId": "L07-D07",
+          "sourceKind": "dialogue",
+          "text": "Are you French, too?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 4,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D08": {
+          "sourceId": "L07-D08",
+          "sourceKind": "dialogue",
+          "text": "No, I am not.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 4,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d08.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D09": {
+          "sourceId": "L07-D09",
+          "sourceKind": "dialogue",
+          "text": "What nationality are you?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d09.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D10": {
+          "sourceId": "L07-D10",
+          "sourceKind": "dialogue",
+          "text": "I'm Italian.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 5,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d10.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D11": {
+          "sourceId": "L07-D11",
+          "sourceKind": "dialogue",
+          "text": "Are you a teacher?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d11.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D12": {
+          "sourceId": "L07-D12",
+          "sourceKind": "dialogue",
+          "text": "No, I'm not.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 6,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d12.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D13": {
+          "sourceId": "L07-D13",
+          "sourceKind": "dialogue",
+          "text": "What's your job?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d13.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-D14": {
+          "sourceId": "L07-D14",
+          "sourceKind": "dialogue",
+          "text": "I'm a keyboard operator.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d14.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D15": {
+          "sourceId": "L07-D15",
+          "sourceKind": "dialogue",
+          "text": "What's your job?",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d15.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman",
+          "speakerRole": "sophie"
+        },
+        "L07-D16": {
+          "sourceId": "L07-D16",
+          "sourceKind": "dialogue",
+          "text": "I'm an engineer.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "figureGroup": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-d16.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man",
+          "speakerRole": "robert"
+        },
+        "L07-W01": {
+          "sourceId": "L07-W01",
+          "sourceKind": "vocabulary",
+          "text": "I",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "我",
+          "vocabularyOrder": 1,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w01.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W02": {
+          "sourceId": "L07-W02",
+          "sourceKind": "vocabulary",
+          "text": "am",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "be 动词现在时第一人称单数",
+          "vocabularyOrder": 2,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W03": {
+          "sourceId": "L07-W03",
+          "sourceKind": "vocabulary",
+          "text": "are",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "be 动词现在时复数",
+          "vocabularyOrder": 3,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W04": {
+          "sourceId": "L07-W04",
+          "sourceKind": "vocabulary",
+          "text": "name",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "名字",
+          "vocabularyOrder": 4,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W05": {
+          "sourceId": "L07-W05",
+          "sourceKind": "vocabulary",
+          "text": "what",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "什么",
+          "vocabularyOrder": 5,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W06": {
+          "sourceId": "L07-W06",
+          "sourceKind": "vocabulary",
+          "text": "nationality",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "国籍",
+          "vocabularyOrder": 6,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W07": {
+          "sourceId": "L07-W07",
+          "sourceKind": "vocabulary",
+          "text": "Italian",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "意大利（人）的",
+          "vocabularyOrder": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W08": {
+          "sourceId": "L07-W08",
+          "sourceKind": "vocabulary",
+          "text": "job",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "工作",
+          "vocabularyOrder": 8,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W09": {
+          "sourceId": "L07-W09",
+          "sourceKind": "vocabulary",
+          "text": "keyboard",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "电脑键盘",
+          "vocabularyOrder": 9,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w09.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W10": {
+          "sourceId": "L07-W10",
+          "sourceKind": "vocabulary",
+          "text": "operator",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "操作人员",
+          "vocabularyOrder": 10,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-W11": {
+          "sourceId": "L07-W11",
+          "sourceKind": "vocabulary",
+          "text": "engineer",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "工程师",
+          "vocabularyOrder": 11,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l07-w11.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L07-N01": {
+          "sourceId": "L07-N01",
+          "sourceKind": "textbook-note",
+          "text": "My name's = My name is.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L07-D02",
+            "L07-D04"
+          ]
+        },
+        "L07-N02": {
+          "sourceId": "L07-N02",
+          "sourceKind": "textbook-note",
+          "text": "I'm = I am.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L07-D10",
+            "L07-D14",
+            "L07-D16"
+          ]
+        },
+        "L07-N03": {
+          "sourceId": "L07-N03",
+          "sourceKind": "textbook-note",
+          "text": "What's your job? 中 What's = What is.",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L07-D13",
+            "L07-D15"
+          ]
+        },
+        "L07-N04": {
+          "sourceId": "L07-N04",
+          "sourceKind": "textbook-note",
+          "text": "What nationality are you? 用来询问对方国籍。",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "linkedSourceRefs": [
+            "L07-D09"
+          ]
+        },
+        "L07-Z01": {
+          "sourceId": "L07-Z01",
+          "sourceKind": "reference-translation",
+          "text": "我是一名新生。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D01"
+        },
+        "L07-Z02": {
+          "sourceId": "L07-Z02",
+          "sourceKind": "reference-translation",
+          "text": "我的名字叫罗伯特。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D02"
+        },
+        "L07-Z03": {
+          "sourceId": "L07-Z03",
+          "sourceKind": "reference-translation",
+          "text": "很高兴见到你。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D03"
+        },
+        "L07-Z04": {
+          "sourceId": "L07-Z04",
+          "sourceKind": "reference-translation",
+          "text": "我的名字叫索菲娅。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D04"
+        },
+        "L07-Z05": {
+          "sourceId": "L07-Z05",
+          "sourceKind": "reference-translation",
+          "text": "你是法国人吗？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D05"
+        },
+        "L07-Z06": {
+          "sourceId": "L07-Z06",
+          "sourceKind": "reference-translation",
+          "text": "是的，我是。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D06"
+        },
+        "L07-Z07": {
+          "sourceId": "L07-Z07",
+          "sourceKind": "reference-translation",
+          "text": "你也是法国人吗？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D07"
+        },
+        "L07-Z08": {
+          "sourceId": "L07-Z08",
+          "sourceKind": "reference-translation",
+          "text": "不，我不是。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D08"
+        },
+        "L07-Z09": {
+          "sourceId": "L07-Z09",
+          "sourceKind": "reference-translation",
+          "text": "你是哪国人？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D09"
+        },
+        "L07-Z10": {
+          "sourceId": "L07-Z10",
+          "sourceKind": "reference-translation",
+          "text": "我是意大利人。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D10"
+        },
+        "L07-Z11": {
+          "sourceId": "L07-Z11",
+          "sourceKind": "reference-translation",
+          "text": "你是教师吗？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D11"
+        },
+        "L07-Z12": {
+          "sourceId": "L07-Z12",
+          "sourceKind": "reference-translation",
+          "text": "不，我不是。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D12"
+        },
+        "L07-Z13": {
+          "sourceId": "L07-Z13",
+          "sourceKind": "reference-translation",
+          "text": "你是做什么工作的？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D13"
+        },
+        "L07-Z14": {
+          "sourceId": "L07-Z14",
+          "sourceKind": "reference-translation",
+          "text": "我是电脑录入员。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D14"
+        },
+        "L07-Z15": {
+          "sourceId": "L07-Z15",
+          "sourceKind": "reference-translation",
+          "text": "你是做什么工作的？",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D15"
+        },
+        "L07-Z16": {
+          "sourceId": "L07-Z16",
+          "sourceKind": "reference-translation",
+          "text": "我是工程师。",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "linkedSourceId": "L07-D16"
+        }
+      }
+    },
+    "lesson8": {
+      "lessonId": "lesson8",
+      "textbookTitle": "What's your job?",
+      "sourceRegisterRef": "BOOK1-2022-07",
+      "textbookSource": "外研社《新概念英语智慧版 1》PDF 页 49–50，教材页 16–17",
+      "requiredSourceIds": [
+        "L08-I01",
+        "L08-P01",
+        "L08-P02",
+        "L08-P03",
+        "L08-P04",
+        "L08-P05",
+        "L08-P06",
+        "L08-P07",
+        "L08-P08",
+        "L08-P09",
+        "L08-P10",
+        "L08-W01",
+        "L08-W02",
+        "L08-W03",
+        "L08-W04",
+        "L08-W05",
+        "L08-W06",
+        "L08-W07",
+        "L08-W08",
+        "L08-W09",
+        "L08-W10"
+      ],
+      "sources": {
+        "L08-I01": {
+          "sourceId": "L08-I01",
+          "sourceKind": "textbook-instruction",
+          "text": "Look, listen and repeat.",
+          "sourceRole": "context",
+          "coveragePolicy": "exposure",
+          "translation": "看图听录音，然后练习。"
+        },
+        "L08-P01": {
+          "sourceId": "L08-P01",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a policeman.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "policeman",
+          "illustrationOrder": 1,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p01.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man"
+        },
+        "L08-P02": {
+          "sourceId": "L08-P02",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a policewoman.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "policewoman",
+          "illustrationOrder": 2,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman"
+        },
+        "L08-P03": {
+          "sourceId": "L08-P03",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a taxi driver.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "taxi driver",
+          "illustrationOrder": 3,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p03.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man"
+        },
+        "L08-P04": {
+          "sourceId": "L08-P04",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm an air hostess.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "air hostess",
+          "illustrationOrder": 4,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman"
+        },
+        "L08-P05": {
+          "sourceId": "L08-P05",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a postman.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "postman",
+          "illustrationOrder": 5,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p05.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man"
+        },
+        "L08-P06": {
+          "sourceId": "L08-P06",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a nurse.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "nurse",
+          "illustrationOrder": 6,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman"
+        },
+        "L08-P07": {
+          "sourceId": "L08-P07",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a mechanic.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "mechanic",
+          "illustrationOrder": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p07.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man"
+        },
+        "L08-P08": {
+          "sourceId": "L08-P08",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a hairdresser.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "hairdresser",
+          "illustrationOrder": 8,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman"
+        },
+        "L08-P09": {
+          "sourceId": "L08-P09",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a housewife.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "housewife",
+          "illustrationOrder": 9,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p09.mp3",
+          "voiceId": "am_michael",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "man"
+        },
+        "L08-P10": {
+          "sourceId": "L08-P10",
+          "sourceKind": "substitution-prompt",
+          "text": "I'm a milkman.",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "job": "milkman",
+          "illustrationOrder": 10,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-p10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "natural-utterance",
+          "audioReviewStatus": "unreviewed-candidate",
+          "speaker": "woman"
+        },
+        "L08-W01": {
+          "sourceId": "L08-W01",
+          "sourceKind": "vocabulary",
+          "text": "policeman",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "警察",
+          "vocabularyOrder": 1,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w01.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W02": {
+          "sourceId": "L08-W02",
+          "sourceKind": "vocabulary",
+          "text": "policewoman",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "女警察",
+          "vocabularyOrder": 2,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w02.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W03": {
+          "sourceId": "L08-W03",
+          "sourceKind": "vocabulary",
+          "text": "taxi driver",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "出租汽车司机",
+          "vocabularyOrder": 3,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w03.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W04": {
+          "sourceId": "L08-W04",
+          "sourceKind": "vocabulary",
+          "text": "air hostess",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "空中小姐",
+          "vocabularyOrder": 4,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w04.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W05": {
+          "sourceId": "L08-W05",
+          "sourceKind": "vocabulary",
+          "text": "postman",
+          "sourceRole": "target",
+          "coveragePolicy": "evidence",
+          "translation": "邮递员",
+          "vocabularyOrder": 5,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w05.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W06": {
+          "sourceId": "L08-W06",
+          "sourceKind": "vocabulary",
+          "text": "nurse",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "护士",
+          "vocabularyOrder": 6,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w06.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W07": {
+          "sourceId": "L08-W07",
+          "sourceKind": "vocabulary",
+          "text": "mechanic",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "机械师",
+          "vocabularyOrder": 7,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w07.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W08": {
+          "sourceId": "L08-W08",
+          "sourceKind": "vocabulary",
+          "text": "hairdresser",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "理发师",
+          "vocabularyOrder": 8,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w08.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W09": {
+          "sourceId": "L08-W09",
+          "sourceKind": "vocabulary",
+          "text": "housewife",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "家庭妇女",
+          "vocabularyOrder": 9,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w09.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-W10": {
+          "sourceId": "L08-W10",
+          "sourceKind": "vocabulary",
+          "text": "milkman",
+          "sourceRole": "support",
+          "coveragePolicy": "exposure",
+          "translation": "送牛奶的人",
+          "vocabularyOrder": 10,
+          "audioSrc": "/poc/lesson7-8-experience/audio/l08-w10.mp3",
+          "voiceId": "af_heart",
+          "audioRenderMode": "context-cropped-lexeme-v1",
+          "audioReviewStatus": "unreviewed-candidate"
+        },
+        "L08-E01": {
+          "sourceId": "L08-E01",
+          "sourceKind": "exercise-mechanism",
+          "text": "Complete these sentences using am or is.",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "requiredForUnitCompletion": false,
+          "producesLearningEvidence": false,
+          "decisionRef": "ADR-0098"
+        },
+        "L08-E02": {
+          "sourceId": "L08-E02",
+          "sourceKind": "exercise-mechanism",
+          "text": "Write questions and answers using his, her, he, she, a or an.",
+          "sourceRole": "context",
+          "coveragePolicy": "optional",
+          "requiredForUnitCompletion": false,
+          "producesLearningEvidence": false,
+          "decisionRef": "ADR-0098"
+        }
+      }
+    }
+  },
+  "sourceTargetCoverage": [
+    {
+      "sourceRefs": [
+        "L07-I01",
+        "L07-Q01"
+      ],
+      "coverage": {
+        "NCE-U04-T01": "eligible-evidence"
+      },
+      "prohibitedInference": "教材问题只检查整段理解，不直接显示答案"
+    },
+    {
+      "sourceRefs": [
+        "L07-D01",
+        "L07-D02",
+        "L07-D03",
+        "L07-D04"
+      ],
+      "coverage": {
+        "NCE-U04-T01": "eligible-evidence",
+        "NCE-U04-T02": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L07-D05",
+        "L07-D06",
+        "L07-D07",
+        "L07-D08",
+        "L07-D09",
+        "L07-D10"
+      ],
+      "coverage": {
+        "NCE-U04-T01": "eligible-evidence",
+        "NCE-U04-T03": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L07-D11",
+        "L07-D12",
+        "L07-D13",
+        "L07-D14",
+        "L07-D15",
+        "L07-D16"
+      ],
+      "coverage": {
+        "NCE-U04-T01": "eligible-evidence",
+        "NCE-U04-T04": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L07-W01",
+        "L07-W02",
+        "L07-W03",
+        "L07-W04",
+        "L07-W05",
+        "L07-W06",
+        "L07-W07",
+        "L07-W08",
+        "L07-W09",
+        "L07-W10",
+        "L07-W11"
+      ],
+      "coverage": {
+        "NCE-U04-T02": "support",
+        "NCE-U04-T03": "support",
+        "NCE-U04-T04": "support"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L07-N01",
+        "L07-N02",
+        "L07-N03",
+        "L07-N04"
+      ],
+      "coverage": {
+        "NCE-U04-T02": "support",
+        "NCE-U04-T03": "support",
+        "NCE-U04-T04": "support"
+      },
+      "prohibitedInference": "Notes 不转成术语考试"
+    },
+    {
+      "sourceRefs": [
+        "L07-Z01",
+        "L07-Z02",
+        "L07-Z03",
+        "L07-Z04",
+        "L07-Z05",
+        "L07-Z06",
+        "L07-Z07",
+        "L07-Z08",
+        "L07-Z09",
+        "L07-Z10",
+        "L07-Z11",
+        "L07-Z12",
+        "L07-Z13",
+        "L07-Z14",
+        "L07-Z15",
+        "L07-Z16"
+      ],
+      "coverage": {},
+      "prohibitedInference": "查看参考译文不等于听懂英语"
+    },
+    {
+      "sourceRefs": [
+        "L08-I01"
+      ],
+      "coverage": {},
+      "prohibitedInference": "活动指令不形成独立学习结果"
+    },
+    {
+      "sourceRefs": [
+        "L08-P01",
+        "L08-P02",
+        "L08-P03",
+        "L08-P04",
+        "L08-P05",
+        "L08-P06",
+        "L08-P07",
+        "L08-P08",
+        "L08-P09",
+        "L08-P10"
+      ],
+      "coverage": {
+        "NCE-U04-T04": "eligible-evidence",
+        "NCE-U04-T05": "eligible-evidence",
+        "NCE-U04-T06": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L08-W01",
+        "L08-W02",
+        "L08-W03",
+        "L08-W04",
+        "L08-W05",
+        "L08-W06",
+        "L08-W07",
+        "L08-W08",
+        "L08-W09",
+        "L08-W10"
+      ],
+      "coverage": {
+        "NCE-U04-T06": "eligible-evidence"
+      },
+      "prohibitedInference": "不得把一次点击等同于长期掌握"
+    },
+    {
+      "sourceRefs": [
+        "L08-E01",
+        "L08-E02"
+      ],
+      "coverage": {
+        "NCE-U04-T02": "optional",
+        "NCE-U04-T05": "optional"
+      },
+      "prohibitedInference": "未完成书写不阻断网站单元完成"
+    }
+  ],
+  "firstSessionEvidencePlan": {
+    "policyId": "first-session-representative-retrieval-v1",
+    "frozenOn": "2026-08-31",
+    "sourceContactPolicy": "all-required-sources-before-unit-completion",
+    "remainingPromptPolicy": "exposure-then-performance-driven-review",
+    "remainingVocabularyPolicy": "exposure-then-performance-driven-review",
+    "promptEvidenceSourceRefs": [
+      "L08-P01",
+      "L08-P02",
+      "L08-P03",
+      "L08-P04",
+      "L08-P05",
+      "L08-P06",
+      "L08-P07",
+      "L08-P08",
+      "L08-P09",
+      "L08-P10"
+    ],
+    "lexicalEvidenceSourceRefs": [
+      "L07-W06",
+      "L07-W07",
+      "L07-W08",
+      "L07-W10",
+      "L07-W11",
+      "L08-W01",
+      "L08-W02",
+      "L08-W03",
+      "L08-W04",
+      "L08-W05"
+    ],
+    "evidenceSlots": [
+      {
+        "slotId": "NCE-U04-E01",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U04-T01",
+            "evidenceMode": "dialogue-comprehension"
+          }
+        ],
+        "sourceRefs": [
+          "L07-Q01",
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10",
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16"
+        ],
+        "retrievalOpportunityQuota": 1
+      },
+      {
+        "slotId": "NCE-U04-E02",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U04-T02",
+            "evidenceMode": "self-introduction"
+          }
+        ],
+        "sourceRefs": [
+          "L07-D01",
+          "L07-D02",
+          "L07-D04"
+        ],
+        "retrievalOpportunityQuota": 1
+      },
+      {
+        "slotId": "NCE-U04-E03",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U04-T03",
+            "evidenceMode": "nationality-question-answer"
+          }
+        ],
+        "sourceRefs": [
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10"
+        ],
+        "retrievalOpportunityQuota": 3
+      },
+      {
+        "slotId": "NCE-U04-E04",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U04-T04",
+            "evidenceMode": "job-question-answer"
+          },
+          {
+            "targetId": "NCE-U04-T05",
+            "evidenceMode": "third-person-job-reference"
+          }
+        ],
+        "sourceRefs": [
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16",
+          "L08-P06",
+          "L08-P07"
+        ],
+        "retrievalOpportunityQuota": 4
+      },
+      {
+        "slotId": "NCE-U04-E05",
+        "targetBindings": [
+          {
+            "targetId": "NCE-U04-T06",
+            "evidenceMode": "audio-form-job-match"
+          }
+        ],
+        "sourceRefs": [
+          "L08-P01",
+          "L08-P06",
+          "L08-P10",
+          "L08-P02",
+          "L08-P03",
+          "L08-P04",
+          "L08-P05",
+          "L08-P07",
+          "L08-P08",
+          "L08-P09",
+          "L07-W06",
+          "L07-W07",
+          "L07-W08",
+          "L07-W10",
+          "L07-W11",
+          "L08-W01",
+          "L08-W02",
+          "L08-W03",
+          "L08-W04",
+          "L08-W05"
+        ],
+        "retrievalOpportunityQuota": 3
+      }
+    ]
+  },
+  "voiceBaselineId": "nce-youth-v1",
+  "audioReviewContract": {
+    "packId": "nce-u04-kokoro-candidate-v1",
+    "manifestPath": "/poc/lesson7-8-experience/audio/manifest.json",
+    "canonicalAudioSetSha256": "72bbe2fbdb64fcc477d96d1785c142400db4c9be9ef469f0dc53aed5077c44ea",
+    "voiceBaselineId": "nce-youth-v1",
+    "dialogueRenderMode": "natural-utterance",
+    "standaloneWordRenderMode": "context-cropped-lexeme-v1",
+    "decodedOnsetLimitMs": 150,
+    "publicationGate": "human-language-review-per-file",
+    "nonAcceptedStatus": "unreviewed-candidate",
+    "expectedAudioSourceCount": 47
+  },
+  "curriculumContract": {
+    "acceptedOn": "2026-08-31",
+    "acceptedDecisionRefs": [
+      "NCE-U04-DIRECT-BUILD-APPROVAL-2026-08-31"
+    ],
+    "launchPackRef": "docs/designs/lesson7-8-teaching-unit-launch-pack-v1.md",
+    "grammarSpineRef": "docs/designs/new-concept-english-book1-grammar-spine-v1.md",
+    "sourceRegister": {
+      "sourceRegisterId": "BOOK1-2022-07",
+      "title": "外研社《新概念英语智慧版 1：英语初阶 First Things First》",
+      "edition": "2022 年 7 月第 1 版第 1 次印刷",
+      "isbn": "978-7-5213-3670-2",
+      "snapshotSha256": "a54740bdce7423b98ea30334dca9043603ef5533f85e64f86f5af6d31d93be9f",
+      "totalPdfPages": 330,
+      "lessonPageMap": {
+        "lesson7": {
+          "pdfPages": [
+            47,
+            48
+          ],
+          "textbookPages": [
+            14,
+            15
+          ]
+        },
+        "lesson8": {
+          "pdfPages": [
+            49,
+            50
+          ],
+          "textbookPages": [
+            16,
+            17
+          ]
+        }
+      }
+    },
+    "writingPolicy": "optional-nonblocking",
+    "audioAuditStatus": "candidate-generated-awaiting-human-review",
+    "audioSourceAudit": {
+      "checkedOn": "2026-08-31",
+      "result": "no-auditable-official-audio",
+      "checkedSurfaces": [
+        "controlled-pdf-embedded-files",
+        "controlled-pdf-page-annotations-47-50",
+        "repository-audio-assets",
+        "local-download-audio-assets"
+      ],
+      "officialAccessModel": "book-specific-activation-in-fltrp-u-learning-app",
+      "officialReferenceId": "FLTRP-2023-JCJYJXZY-P58"
+    },
+    "audioCandidatePack": {
+      "packId": "nce-u04-kokoro-candidate-v1",
+      "generationBasis": "nce-u01-kokoro-candidate-v3",
+      "status": "local-poc-candidate-unreviewed",
+      "disclosure": "ai-generated-not-official-textbook-audio"
+    },
+    "speakerMappingStatus": "frozen-course-role-mapping",
+    "speakerMappingBasis": "textbook-dialogue-semantics-and-figure-sequence",
+    "storyDesignStatus": "authored-local-candidate",
+    "pageImplementationStatus": "authored-local-candidate",
+    "publicationAllowed": false
+  },
+  "authoredContent": {
+    "NCE-U04-C-COMPLETION": {
+      "kind": "completion",
+      "kicker": "Lesson 7–8 完成",
+      "sceneTitle": "职业茶会顺利结束",
+      "sceneInstruction": "姓名、国籍和职业都已说清楚",
+      "title": "Robert 和 Sophie 记住了彼此",
+      "copy": "你听懂了完整对话，也能用 his、her 和职业问句继续认识新朋友。",
+      "restartLabel": "重新体验",
+      "leaveLabel": "继续",
+      "leaveHref": "/"
+    },
+    "NCE-U04-C-AUDIO-FAILURE": {
+      "kind": "recovery",
+      "title": "这句英语还没有播放成功",
+      "copy": "英文会留在原位。点“再听一次”，听完后才能继续。",
+      "actionLabel": "再听一次"
+    },
+    "NCE-U04-C-SAVE-FAILURE": {
+      "kind": "recovery",
+      "title": "进度还没有保存好",
+      "copy": "不用重答，留在这里再保存一次。",
+      "actionLabel": "重新保存"
+    }
+  },
+  "entities": {
+    "robert": {
+      "entityId": "robert",
+      "kind": "character",
+      "label": "Robert",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/character-robert-v1.avif"
+      }
+    },
+    "sophie": {
+      "entityId": "sophie",
+      "kind": "character",
+      "label": "Sophie",
+      "assets": {
+        "preferred": "/poc/lesson5-6-experience/assets/character-sophie-v1.avif"
+      }
+    },
+    "policeman": {
+      "entityId": "policeman",
+      "kind": "job-card",
+      "label": "警察",
+      "englishLabel": "policeman",
+      "sourceRef": "L08-P01",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-policeman-v1.avif"
+      }
+    },
+    "policewoman": {
+      "entityId": "policewoman",
+      "kind": "job-card",
+      "label": "女警察",
+      "englishLabel": "policewoman",
+      "sourceRef": "L08-P02",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-policewoman-v1.avif"
+      }
+    },
+    "taxi-driver": {
+      "entityId": "taxi-driver",
+      "kind": "job-card",
+      "label": "出租汽车司机",
+      "englishLabel": "taxi driver",
+      "sourceRef": "L08-P03",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-taxi-driver-v1.avif"
+      }
+    },
+    "air-hostess": {
+      "entityId": "air-hostess",
+      "kind": "job-card",
+      "label": "空中小姐",
+      "englishLabel": "air hostess",
+      "sourceRef": "L08-P04",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-air-hostess-v1.avif"
+      }
+    },
+    "postman": {
+      "entityId": "postman",
+      "kind": "job-card",
+      "label": "邮递员",
+      "englishLabel": "postman",
+      "sourceRef": "L08-P05",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-postman-v1.avif"
+      }
+    },
+    "nurse": {
+      "entityId": "nurse",
+      "kind": "job-card",
+      "label": "护士",
+      "englishLabel": "nurse",
+      "sourceRef": "L08-P06",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-nurse-v1.avif"
+      }
+    },
+    "mechanic": {
+      "entityId": "mechanic",
+      "kind": "job-card",
+      "label": "机械师",
+      "englishLabel": "mechanic",
+      "sourceRef": "L08-P07",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-mechanic-v1.avif"
+      }
+    },
+    "hairdresser": {
+      "entityId": "hairdresser",
+      "kind": "job-card",
+      "label": "理发师",
+      "englishLabel": "hairdresser",
+      "sourceRef": "L08-P08",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-hairdresser-v1.avif"
+      }
+    },
+    "housewife": {
+      "entityId": "housewife",
+      "kind": "job-card",
+      "label": "家庭妇女",
+      "englishLabel": "housewife",
+      "sourceRef": "L08-P09",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-housewife-v1.avif"
+      }
+    },
+    "milkman": {
+      "entityId": "milkman",
+      "kind": "job-card",
+      "label": "送牛奶的人",
+      "englishLabel": "milkman",
+      "sourceRef": "L08-P10",
+      "assets": {
+        "preferred": "/poc/lesson7-8-experience/assets/job-milkman-v1.avif"
+      }
+    }
+  },
+  "experience": {
+    "schemaVersion": 2,
+    "documentTitle": "Lesson 7–8 · 午夜职业茶会",
+    "unitTitle": "午夜职业茶会",
+    "stageCount": 10,
+    "storageKey": "poc:learning-experience:NCE-U04:lesson7-8-v1",
+    "uiCopy": {
+      "progress": {
+        "openLabel": "打开阶段地图",
+        "currentPrefix": "打开阶段地图，当前第",
+        "currentMiddle": "阶段，共",
+        "currentSuffix": "阶段"
+      },
+      "settings": {
+        "visibleLabel": "设置",
+        "ariaLabel": "打开设置",
+        "heartsLabel": "冒险心",
+        "title": "学习设置",
+        "copy": "重新开始会清除本单元的本地进度。",
+        "restartLabel": "重新开始",
+        "returnLabel": "返回学习"
+      },
+      "stageMap": {
+        "title": "选择学习阶段",
+        "closeLabel": "关闭",
+        "copy": "已完成阶段可回演，跳过的角色阶段可补做。",
+        "completed": "已完成 · 回演",
+        "skipped": "已跳过 · 补做",
+        "current": "正在学习",
+        "locked": "尚未到达",
+        "stagePrefix": "第",
+        "stageMiddle": "阶段：",
+        "statusSeparator": "，"
+      },
+      "candidates": {
+        "neutralAriaPrefix": "候选人物 ",
+        "neutralVisiblePrefix": "候选 ",
+        "selectPrefix": "选择"
+      },
+      "hearts": {
+        "remainingPrefix": "还剩 ",
+        "remainingSuffix": " 颗冒险心"
+      },
+      "audio": {
+        "retryLabel": "再听一次",
+        "playQuestionLabel": "播放问句",
+        "playLineLabel": "播放这一句",
+        "playGroupLabel": "播放这一组",
+        "playingCopy": "正在播放英文……"
+      },
+      "task": {
+        "lockedStoryCopy": "声音会按故事顺序播放。听完整段后，问题才会出现。",
+        "lockedQuestionCopy": "先听清问句，再选择。",
+        "selectScenePersonCopy": "点击场景中的人物",
+        "stepPrefix": "第 ",
+        "stepMiddle": " 步 / 共 ",
+        "stepSuffix": " 步",
+        "groupPrefix": "第 ",
+        "groupMiddle": " 组 / 共 ",
+        "groupSuffix": " 组",
+        "groupListenPrefix": "先听完这一组的 ",
+        "groupListenSuffix": " 句话。",
+        "sampledQuestion": "刚才问到的是哪一件？",
+        "albumCopy": "每张图只要点一次。声音播完，号码牌就会留下一个小印记。",
+        "albumPlayPrefix": "播放",
+        "albumPlaySuffix": "问句",
+        "heardLabel": "已听",
+        "listenLabel": "点我听",
+        "segmentPrefix": "第 ",
+        "segmentMiddle": " 段 · "
+      },
+      "role": {
+        "choosePrefix": "我来演",
+        "assignedPrefix": "这次你演",
+        "assignedSuffix": "。",
+        "startLabel": "开始演完整段",
+        "skipLabel": "跳过这个角色",
+        "linePrefix": "第 ",
+        "lineMiddle": " 句 / 共 ",
+        "lineSuffix": " 句",
+        "childSpeakerLabel": "轮到你",
+        "hiddenLineCopy": "先想一想，这个角色会怎么说？",
+        "revealLabel": "揭晓并播放",
+        "partnerSpeakingCopy": "对方正在说……"
+      },
+      "rescue": {
+        "actionLabel": "听小猫示范"
+      },
+      "stageSession": {
+        "replayKicker": "单阶段回演",
+        "makeupKicker": "正式补做",
+        "replayCompleteTitle": "这一段回演完了",
+        "makeupCompleteTitle": "这个角色已经补做",
+        "replayCompleteCopy": "主线进度没有改变。",
+        "makeupCompleteCopy": "“已跳过”已经替换为“已完成”。",
+        "returnLabel": "返回主线",
+        "exitLabel": "退出",
+        "replayBanner": "单阶段回演 · 不改主线进度",
+        "makeupBanner": "正式补做 · 完成后替换跳过记录"
+      },
+      "completion": {
+        "skippedTitle": "主线故事走完了",
+        "skippedCopy": "角色扮演按你的选择标记为已跳过。可以打开阶段地图补做，不会伪装成已经完成。",
+        "reviewLabel": "次日复习"
+      },
+      "saveFailureCopy": "进度暂时没有保存好。"
+    },
+    "themeId": "career-salon",
+    "scene": {
+      "backgroundWide": "/poc/lesson7-8-experience/assets/scene-career-salon-v1-wide.avif",
+      "backgroundPortrait": "/poc/lesson7-8-experience/assets/scene-career-salon-v1-portrait.avif",
+      "actorEntityIds": [
+        "robert",
+        "sophie"
+      ],
+      "contactSurfaceY": {
+        "wide": 71,
+        "portrait": 69
+      }
+    },
+    "roles": {
+      "robert": {
+        "entityId": "robert",
+        "label": "Robert"
+      },
+      "sophie": {
+        "entityId": "sophie",
+        "label": "Sophie"
+      }
+    },
+    "support": {
+      "firstWrong": "先看当前人物，再听清问题是在问国籍还是职业。",
+      "secondWrong": "把 who、nationality、job 分开判断，不要一次猜完整句。"
+    },
+    "completionContentRef": "NCE-U04-C-COMPLETION",
+    "stages": [
+      {
+        "stageId": "NCE-U04-S01",
+        "microtaskId": "NCE-U04-S01",
+        "lessonId": "lesson7",
+        "kind": "dialogue-comprehension",
+        "title": "两位新同学开始聊天",
+        "instruction": "听完完整对话，再回答教材问题",
+        "prompt": "Robert 是做什么工作的？",
+        "startLabel": "开始听完整对话",
+        "audioRefs": [
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10",
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16"
+        ],
+        "options": [
+          {
+            "optionId": "engineer",
+            "label": "engineer"
+          },
+          {
+            "optionId": "operator",
+            "label": "keyboard operator"
+          },
+          {
+            "optionId": "teacher",
+            "label": "teacher"
+          }
+        ],
+        "answerRule": {
+          "acceptedOptionId": "engineer"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "discourse-understanding",
+          "targetEvidenceSourceRefs": [
+            "L07-Q01",
+            "L07-D01",
+            "L07-D02",
+            "L07-D03",
+            "L07-D04",
+            "L07-D05",
+            "L07-D06",
+            "L07-D07",
+            "L07-D08",
+            "L07-D09",
+            "L07-D10",
+            "L07-D11",
+            "L07-D12",
+            "L07-D13",
+            "L07-D14",
+            "L07-D15",
+            "L07-D16"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L07-D16"
+        ],
+        "exposureRefs": [
+          "L07-I01",
+          "L07-Q01",
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10",
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16"
+        ],
+        "evidenceRefs": [
+          "L07-Q01",
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10",
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S02",
+        "microtaskId": "NCE-U04-S02",
+        "lessonId": "lesson7",
+        "kind": "choice",
+        "title": "先把名字告诉对方",
+        "instruction": "选择 Robert 真正用过的自我介绍",
+        "prompt": "哪句话是在介绍自己的名字？",
+        "options": [
+          {
+            "optionId": "name",
+            "label": "My name's Robert."
+          },
+          {
+            "optionId": "french",
+            "label": "I am French."
+          },
+          {
+            "optionId": "job",
+            "label": "What's your job?"
+          }
+        ],
+        "answerRule": {
+          "acceptedOptionId": "name"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "communication-structure",
+          "targetEvidenceSourceRefs": [
+            "L07-D01",
+            "L07-D02",
+            "L07-D04"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L07-D02"
+        ],
+        "exposureRefs": [
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-N01",
+          "L07-N02"
+        ],
+        "evidenceRefs": [
+          "L07-D01",
+          "L07-D02",
+          "L07-D04"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S03",
+        "microtaskId": "NCE-U04-S03",
+        "lessonId": "lesson7",
+        "kind": "sequence-choice",
+        "title": "同一个问题会有两种回答",
+        "instruction": "先回答 Sophie，再回答 Robert",
+        "rounds": [
+          {
+            "roundId": "sophie-french",
+            "propEntityId": "sophie",
+            "prompt": "Are you French?",
+            "options": [
+              {
+                "optionId": "yes",
+                "label": "Yes, I am."
+              },
+              {
+                "optionId": "no",
+                "label": "No, I am not."
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "yes"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L07-D05",
+                "L07-D06"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L07-D06"
+            ]
+          },
+          {
+            "roundId": "robert-french",
+            "propEntityId": "robert",
+            "prompt": "Are you French, too?",
+            "options": [
+              {
+                "optionId": "no",
+                "label": "No, I am not."
+              },
+              {
+                "optionId": "yes",
+                "label": "Yes, I am."
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "no"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L07-D07",
+                "L07-D08"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L07-D08"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08"
+        ],
+        "evidenceRefs": [
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S04",
+        "microtaskId": "NCE-U04-S04",
+        "lessonId": "lesson7",
+        "kind": "choice",
+        "title": "还想知道对方来自哪里",
+        "instruction": "选择真正询问国籍的问题",
+        "prompt": "哪一句是在问国籍？",
+        "options": [
+          {
+            "optionId": "nationality",
+            "label": "What nationality are you?"
+          },
+          {
+            "optionId": "job",
+            "label": "What's your job?"
+          },
+          {
+            "optionId": "teacher",
+            "label": "Are you a teacher?"
+          }
+        ],
+        "answerRule": {
+          "acceptedOptionId": "nationality"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "communication-structure",
+          "targetEvidenceSourceRefs": [
+            "L07-D09",
+            "L07-D10"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L07-D09",
+          "L07-D10"
+        ],
+        "exposureRefs": [
+          "L07-D09",
+          "L07-D10",
+          "L07-N04"
+        ],
+        "evidenceRefs": [
+          "L07-D09",
+          "L07-D10"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S05",
+        "microtaskId": "NCE-U04-S05",
+        "lessonId": "lesson7",
+        "kind": "entity-action",
+        "title": "职业问题指向了谁",
+        "instruction": "听职业问答，再点击对应人物",
+        "prompt": "谁是 keyboard operator？",
+        "promptAudioRefs": [
+          "L07-D13",
+          "L07-D14"
+        ],
+        "entityIds": [
+          "robert",
+          "sophie"
+        ],
+        "answerRule": {
+          "acceptedEntityId": "sophie"
+        },
+        "answerFairness": {
+          "targetEvidenceChannel": "discourse-understanding",
+          "targetEvidenceSourceRefs": [
+            "L07-D13",
+            "L07-D14"
+          ],
+          "intentionalPreSubmitSupport": []
+        },
+        "successAudioRefs": [
+          "L07-D14"
+        ],
+        "exposureRefs": [
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16",
+          "L07-N03"
+        ],
+        "evidenceRefs": [
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S06",
+        "microtaskId": "NCE-U04-S06",
+        "lessonId": "lesson7",
+        "kind": "role-enactment",
+        "title": "轮到你参加茶会",
+        "instruction": "选 Robert 或 Sophie，把整段对话演一遍",
+        "prompt": "对方台词会自动播放。轮到你时先自己说，再揭晓英文。",
+        "roleMode": "choose-first",
+        "roles": [
+          "robert",
+          "sophie"
+        ],
+        "dialogueRefs": [
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10",
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16"
+        ],
+        "exposureRefs": [
+          "L07-D01",
+          "L07-D02",
+          "L07-D03",
+          "L07-D04",
+          "L07-D05",
+          "L07-D06",
+          "L07-D07",
+          "L07-D08",
+          "L07-D09",
+          "L07-D10",
+          "L07-D11",
+          "L07-D12",
+          "L07-D13",
+          "L07-D14",
+          "L07-D15",
+          "L07-D16",
+          "L07-W01",
+          "L07-W02",
+          "L07-W03",
+          "L07-W04",
+          "L07-W05",
+          "L07-W06",
+          "L07-W07",
+          "L07-W08",
+          "L07-W09",
+          "L07-W10",
+          "L07-W11",
+          "L07-N01",
+          "L07-N02",
+          "L07-N03",
+          "L07-N04"
+        ],
+        "evidenceRefs": [
+          "L07-W06",
+          "L07-W07",
+          "L07-W08",
+          "L07-W10",
+          "L07-W11"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S07",
+        "microtaskId": "NCE-U04-S07",
+        "lessonId": "lesson8",
+        "kind": "prompt-album",
+        "title": "十枚职业徽章",
+        "instruction": "分两组点亮，每个职业都听一遍",
+        "groups": [
+          {
+            "groupId": "city-jobs",
+            "label": "城市工作",
+            "sourceRefs": [
+              "L08-P01",
+              "L08-P02",
+              "L08-P03",
+              "L08-P04",
+              "L08-P05"
+            ],
+            "entityIds": [
+              "policeman",
+              "policewoman",
+              "taxi-driver",
+              "air-hostess",
+              "postman"
+            ]
+          },
+          {
+            "groupId": "care-jobs",
+            "label": "生活工作",
+            "sourceRefs": [
+              "L08-P06",
+              "L08-P07",
+              "L08-P08",
+              "L08-P09",
+              "L08-P10"
+            ],
+            "entityIds": [
+              "nurse",
+              "mechanic",
+              "hairdresser",
+              "housewife",
+              "milkman"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L08-I01",
+          "L08-P01",
+          "L08-P02",
+          "L08-P03",
+          "L08-P04",
+          "L08-P05",
+          "L08-P06",
+          "L08-P07",
+          "L08-P08",
+          "L08-P09",
+          "L08-P10",
+          "L08-W01",
+          "L08-W02",
+          "L08-W03",
+          "L08-W04",
+          "L08-W05",
+          "L08-W06",
+          "L08-W07",
+          "L08-W08",
+          "L08-W09",
+          "L08-W10"
+        ],
+        "evidenceRefs": [
+          "L08-P01",
+          "L08-P02",
+          "L08-P03",
+          "L08-P04",
+          "L08-P05",
+          "L08-P06",
+          "L08-P07",
+          "L08-P08",
+          "L08-P09",
+          "L08-P10",
+          "L08-W01",
+          "L08-W02",
+          "L08-W03",
+          "L08-W04",
+          "L08-W05"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S08",
+        "microtaskId": "NCE-U04-S08",
+        "lessonId": "lesson8",
+        "kind": "sequence-choice",
+        "title": "只听声音找到职业",
+        "instruction": "每一轮先听，再选图",
+        "rounds": [
+          {
+            "roundId": "hear-policeman",
+            "prompt": "刚才说的是哪一种职业？",
+            "promptAudioRefs": [
+              "L08-P01"
+            ],
+            "entityIds": [
+              "policeman",
+              "taxi-driver",
+              "postman"
+            ],
+            "hideEntityLabelsUntilCorrect": true,
+            "answerRule": {
+              "acceptedEntityId": "policeman"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "audio-form",
+              "targetEvidenceSourceRefs": [
+                "L08-P01"
+              ],
+              "intentionalPreSubmitSupport": [],
+              "candidateLabelVisibility": "after-correct"
+            }
+          },
+          {
+            "roundId": "hear-nurse",
+            "prompt": "刚才说的是哪一种职业？",
+            "promptAudioRefs": [
+              "L08-P06"
+            ],
+            "entityIds": [
+              "hairdresser",
+              "nurse",
+              "policewoman"
+            ],
+            "hideEntityLabelsUntilCorrect": true,
+            "answerRule": {
+              "acceptedEntityId": "nurse"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "audio-form",
+              "targetEvidenceSourceRefs": [
+                "L08-P06"
+              ],
+              "intentionalPreSubmitSupport": [],
+              "candidateLabelVisibility": "after-correct"
+            }
+          },
+          {
+            "roundId": "hear-milkman",
+            "prompt": "刚才说的是哪一种职业？",
+            "promptAudioRefs": [
+              "L08-P10"
+            ],
+            "entityIds": [
+              "mechanic",
+              "milkman",
+              "postman"
+            ],
+            "hideEntityLabelsUntilCorrect": true,
+            "answerRule": {
+              "acceptedEntityId": "milkman"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "audio-form",
+              "targetEvidenceSourceRefs": [
+                "L08-P10"
+              ],
+              "intentionalPreSubmitSupport": [],
+              "candidateLabelVisibility": "after-correct"
+            }
+          }
+        ],
+        "exposureRefs": [
+          "L08-P01",
+          "L08-P06",
+          "L08-P10"
+        ],
+        "evidenceRefs": [
+          "L08-P01",
+          "L08-P06",
+          "L08-P10"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S09",
+        "microtaskId": "NCE-U04-S09",
+        "lessonId": "lesson8",
+        "kind": "sequence-choice",
+        "title": "his 和 her 跟着人物变化",
+        "instruction": "看人物，选择正确的职业问题",
+        "rounds": [
+          {
+            "roundId": "her-job",
+            "propEntityId": "policewoman",
+            "prompt": "询问她的工作，哪一句正确？",
+            "options": [
+              {
+                "optionId": "her",
+                "label": "What's her job?"
+              },
+              {
+                "optionId": "his",
+                "label": "What's his job?"
+              },
+              {
+                "optionId": "your",
+                "label": "What's your job?"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "her"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L08-P02"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L08-P02"
+            ]
+          },
+          {
+            "roundId": "his-job",
+            "propEntityId": "mechanic",
+            "prompt": "询问他的工作，哪一句正确？",
+            "options": [
+              {
+                "optionId": "his",
+                "label": "What's his job?"
+              },
+              {
+                "optionId": "her",
+                "label": "What's her job?"
+              },
+              {
+                "optionId": "your",
+                "label": "What's your job?"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "his"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L08-P07"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L08-P07"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L08-P02",
+          "L08-P07",
+          "L08-E02"
+        ],
+        "evidenceRefs": [
+          "L08-P02",
+          "L08-P07"
+        ]
+      },
+      {
+        "stageId": "NCE-U04-S10",
+        "microtaskId": "NCE-U04-S10",
+        "lessonId": "lesson8",
+        "kind": "sequence-choice",
+        "title": "把问题带到新职业上",
+        "instruction": "四张职业图，分别选择正确的问题",
+        "rounds": [
+          {
+            "roundId": "nurse-wh",
+            "propEntityId": "nurse",
+            "prompt": "想知道她的职业，应该问……",
+            "options": [
+              {
+                "optionId": "her",
+                "label": "What's her job?"
+              },
+              {
+                "optionId": "his",
+                "label": "What's his job?"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "her"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L08-P06"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L08-P06"
+            ]
+          },
+          {
+            "roundId": "mechanic-wh",
+            "propEntityId": "mechanic",
+            "prompt": "想知道他的职业，应该问……",
+            "options": [
+              {
+                "optionId": "his",
+                "label": "What's his job?"
+              },
+              {
+                "optionId": "her",
+                "label": "What's her job?"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "his"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L08-P07"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L08-P07"
+            ]
+          },
+          {
+            "roundId": "air-hostess-polar",
+            "propEntityId": "air-hostess",
+            "prompt": "想确认她是不是空中小姐，应该问……",
+            "options": [
+              {
+                "optionId": "she",
+                "label": "Is she an air hostess?"
+              },
+              {
+                "optionId": "he",
+                "label": "Is he an air hostess?"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "she"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L08-P04"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L08-P04"
+            ]
+          },
+          {
+            "roundId": "postman-polar",
+            "propEntityId": "postman",
+            "prompt": "想确认他是不是邮递员，应该问……",
+            "options": [
+              {
+                "optionId": "he",
+                "label": "Is he a postman?"
+              },
+              {
+                "optionId": "she",
+                "label": "Is she a postman?"
+              }
+            ],
+            "answerRule": {
+              "acceptedOptionId": "he"
+            },
+            "answerFairness": {
+              "targetEvidenceChannel": "structure-use",
+              "targetEvidenceSourceRefs": [
+                "L08-P05"
+              ],
+              "intentionalPreSubmitSupport": []
+            },
+            "successAudioRefs": [
+              "L08-P05"
+            ]
+          }
+        ],
+        "exposureRefs": [
+          "L08-P04",
+          "L08-P05",
+          "L08-P06",
+          "L08-P07",
+          "L08-E01",
+          "L08-E02"
+        ],
+        "evidenceRefs": [
+          "L08-P04",
+          "L08-P05",
+          "L08-P06",
+          "L08-P07"
+        ]
+      }
+    ]
+  },
+  "vocabulary": []
+}

@@ -22,6 +22,13 @@
     return `<img class="ui-icon${className ? ` ${escapeHtml(className)}` : ''}" src="/poc/lesson1-2-experience/assets/icons/${escapeHtml(name)}.svg" alt="" aria-hidden="true">`;
   }
 
+  function imageMime(value) {
+    if (/\.avif(?:\?|$)/i.test(value || '')) return 'image/avif';
+    if (/\.webp(?:\?|$)/i.test(value || '')) return 'image/webp';
+    if (/\.png(?:\?|$)/i.test(value || '')) return 'image/png';
+    return 'image/jpeg';
+  }
+
   function learningDay() {
     try {
       return new Intl.DateTimeFormat('en-CA', {
@@ -89,12 +96,14 @@
         || stored.buildStage > 0
         || (Array.isArray(stored.completedMicrotaskIds)
           && stored.completedMicrotaskIds.length > 0)
+        || (Array.isArray(stored.skippedMicrotaskIds)
+          && stored.skippedMicrotaskIds.length > 0)
         || Object.keys(stored.rolePracticeProgress || {}).length > 0
       );
     }
 
     const ui = {
-      view: 'arrival',
+      view: 'mission',
       pendingEffects: [],
       lastStepKey: null,
       lastNavigationRenderKey: null,
@@ -109,9 +118,11 @@
       resting: false,
       knowledgeExpanded: false,
       settingsOpen: false,
-      stageMapOpen: dueReviewAvailable(),
+      stageMapOpen: false,
       restartConfirmOpen: false,
+      roleSkipConfirmOpen: false,
       previewMode: false,
+      skipRecoveryMode: false,
       previewTargetId: null,
       stageReplayOrigin: null,
       rewinding: false,
@@ -135,6 +146,96 @@
     let outcomePracticeConfig = null;
     let responsiveSceneLayoutFrame = null;
     const surfaceEntryAnimationCleanups = new Set();
+    const audioPreloadCache = new Map();
+    const imagePreloadCache = new Map();
+
+    function audioCacheKey(src) {
+      try { return new URL(src, global.location.href).href; } catch { return String(src || ''); }
+    }
+
+    function acquireAudio(src) {
+      const key = audioCacheKey(src);
+      const prepared = global.__coursePackage?.takePreparedAudio?.(src)
+        || audioPreloadCache.get(key)
+        || new global.Audio(src);
+      audioPreloadCache.delete(key);
+      prepared.preload = 'auto';
+      return prepared;
+    }
+
+    function preloadAudio(src) {
+      if (!src) return;
+      const key = audioCacheKey(src);
+      if (audioPreloadCache.has(key)) return;
+      const prepared = global.__coursePackage?.takePreparedAudio?.(src) || new global.Audio(src);
+      prepared.preload = 'auto';
+      audioPreloadCache.set(key, prepared);
+      try { prepared.load?.(); } catch { /* Playback still has the verified package byte fallback. */ }
+    }
+
+    function taskEntityIds(task) {
+      const knownIds = new Set(Object.keys(unit.entities || {}));
+      const found = new Set();
+      const seen = new Set();
+      const visit = value => {
+        if (typeof value === 'string') {
+          if (knownIds.has(value)) found.add(value);
+          return;
+        }
+        if (!value || typeof value !== 'object' || seen.has(value)) return;
+        seen.add(value);
+        for (const nested of Object.values(value)) visit(nested);
+      };
+      visit(task);
+      return [...found];
+    }
+
+    function entityImageCandidates(entityId) {
+      const item = unit.entities?.[entityId] || {};
+      return [...new Set([
+        item.assetSrc,
+        item.assetFallbackSrc,
+        item.assets?.preferred,
+        item.assets?.avif,
+        item.assets?.webp,
+        item.assets?.png
+      ].filter(Boolean))];
+    }
+
+    function preloadImageGroup(candidates) {
+      const key = candidates.join('|');
+      if (!key || typeof global.Image !== 'function') return Promise.resolve(null);
+      if (!imagePreloadCache.has(key)) {
+        imagePreloadCache.set(key, (async () => {
+          for (const url of candidates) {
+            try {
+              await new Promise((resolve, reject) => {
+                const image = new global.Image();
+                image.onload = async () => {
+                  try { await image.decode?.(); resolve(); } catch (error) { reject(error); }
+                };
+                image.onerror = reject;
+                image.src = url;
+              });
+              return url;
+            } catch {
+              // Older catalogs can still offer a second compatible format.
+            }
+          }
+          return null;
+        })());
+      }
+      return imagePreloadCache.get(key);
+    }
+
+    function primeTaskImageWindow(snapshot) {
+      const index = Math.max(0, tasks.findIndex(task => task.microtaskId === snapshot.microtaskId));
+      for (const task of tasks.slice(index, index + 2)) {
+        for (const entityId of taskEntityIds(task)) {
+          void preloadImageGroup(entityImageCandidates(entityId));
+        }
+      }
+    }
 
     function updateResponsiveSceneLayout() {
       const world = root.querySelector?.('.station-world[data-scene-mode]');
@@ -239,10 +340,13 @@
       return true;
     }
 
-    function saveRequiredRoleRound({ practiceId, roundId }) {
+    function persistRequiredRoleDisposition({ practiceId, roundId }, disposition) {
       const snapshot = runtime.snapshot();
+      primeTaskImageWindow(snapshot);
       const result = runtime.dispatch({
-        type: 'role-practice/round-complete',
+        type: disposition === 'completed'
+          ? 'role-practice/round-complete'
+          : 'role-practice/round-skip',
         experienceRevision: snapshot.experienceRevision,
         stateVersion: snapshot.stateVersion,
         practiceId,
@@ -253,11 +357,29 @@
       const failure = result.effects.find(effect => (
         effect.type === 'runtime/persistence-failed'
         || effect.type === 'runtime/role-practice-readback-incomplete'
+        || effect.type === 'runtime/skip-readback-incomplete'
         || effect.type === 'runtime/command-rejected'
+      ));
+      const saved = result.effects.find(effect => (
+        effect.type === 'runtime/role-practice-round-saved'
+        && effect.practiceId === practiceId
+        && effect.roundId === roundId
       ));
       return failure
         ? { persisted: false, reason: failure.reason || failure.type }
-        : { persisted: true };
+        : {
+            persisted: true,
+            completedRoundIds: saved?.completedRoundIds || [],
+            skippedRoundIds: saved?.skippedRoundIds || []
+          };
+    }
+
+    function saveRequiredRoleRound(identity) {
+      return persistRequiredRoleDisposition(identity, 'completed');
+    }
+
+    function skipRequiredRoleRound(identity) {
+      return persistRequiredRoleDisposition(identity, 'skipped');
     }
 
     function ensureRequiredRolePractice(snapshot) {
@@ -271,10 +393,12 @@
       outcomePracticeRuntime?.destroy();
       outcomePracticeConfig = config;
       outcomePracticeRuntime = outcomePracticeFactory.create(config, {
-        saveRound: saveRequiredRoleRound
+        saveRound: saveRequiredRoleRound,
+        skipRound: skipRequiredRoleRound
       });
       outcomePracticeRuntime.enter({
-        completedRoundIds: snapshot.rolePracticeProgress?.completedRoundIds || []
+        completedRoundIds: snapshot.rolePracticeProgress?.completedRoundIds || [],
+        skippedRoundIds: snapshot.rolePracticeProgress?.skippedRoundIds || []
       });
       return true;
     }
@@ -344,12 +468,15 @@
       const completedIds = Array.isArray(durableUnit.completedMicrotaskIds)
         ? durableUnit.completedMicrotaskIds
         : [];
-      const completedSet = new Set(completedIds);
-      const currentId = tasks.find(({ task }) => !completedSet.has(task.microtaskId))?.task.microtaskId;
+      const skippedIds = Array.isArray(durableUnit.skippedMicrotaskIds)
+        ? durableUnit.skippedMicrotaskIds
+        : [];
+      const resolvedSet = new Set([...completedIds, ...skippedIds]);
+      const currentId = tasks.find(({ task }) => !resolvedSet.has(task.microtaskId))?.task.microtaskId;
       const runtimeReached = !ui.previewMode && Array.isArray(snapshot.reachedMicrotaskIds)
         ? snapshot.reachedMicrotaskIds
         : [];
-      return new Set([...completedIds, ...runtimeReached, currentId].filter(Boolean));
+      return new Set([...completedIds, ...skippedIds, ...runtimeReached, currentId].filter(Boolean));
     }
 
     function resetSessionUi() {
@@ -371,6 +498,8 @@
       ui.settingsOpen = false;
       ui.stageMapOpen = false;
       ui.restartConfirmOpen = false;
+      ui.roleSkipConfirmOpen = false;
+      ui.skipRecoveryMode = false;
       ui.rewinding = false;
       ui.presentationCompletionKey = null;
       ui.presentationArmGeneration += 1;
@@ -411,7 +540,8 @@
         }
         return;
       }
-      if (navigationItem?.status !== 'completed') return;
+      if (!['completed', 'skipped'].includes(navigationItem?.status)) return;
+      const recoveringSkippedStage = navigationItem.status === 'skipped';
       if (!ui.previewMode) {
         const practiceSnapshot = outcomePracticeRuntime?.snapshot();
         if (practiceSnapshot?.phase === 'audio-playing' && practiceSnapshot.audio) {
@@ -455,7 +585,8 @@
         outcomePracticeRuntime = null;
         outcomePracticeConfig = null;
       }
-      ui.previewMode = true;
+      ui.previewMode = !recoveringSkippedStage;
+      ui.skipRecoveryMode = recoveringSkippedStage;
       ui.stageMapOpen = false;
       ui.settingsOpen = false;
       ui.previewTargetId = targetMicrotaskId;
@@ -493,6 +624,37 @@
         outcomePracticeConfig = origin.outcomePracticeConfig || null;
       }
       dispatch({ type: 'navigation/exit-sandbox' });
+    }
+
+    function finishSkipRecoveryUi() {
+      if (!ui.skipRecoveryMode) return;
+      const origin = ui.stageReplayOrigin;
+      pauseVoice();
+      outcomePracticeRuntime?.destroy();
+      outcomePracticeRuntime = null;
+      outcomePracticeConfig = null;
+      ui.skipRecoveryMode = false;
+      ui.previewTargetId = null;
+      ui.roleSkipConfirmOpen = false;
+      ui.stageReplayOrigin = null;
+      if (!origin) return;
+      ui.view = origin.view;
+      ui.lastStepKey = origin.lastStepKey;
+      ui.selectedEntityId = origin.selectedEntityId;
+      ui.selectedTargetId = origin.selectedTargetId;
+      ui.selectedSourceRef = origin.selectedSourceRef;
+      ui.selectedContentRef = origin.selectedContentRef;
+      ui.selectedBlockRefs = [...origin.selectedBlockRefs];
+      ui.selectedSequenceIds = [...origin.selectedSequenceIds];
+      ui.selectedCaseByTask = { ...origin.selectedCaseByTask };
+      ui.feedback = origin.feedback ? { ...origin.feedback } : null;
+      ui.resting = origin.resting;
+      ui.knowledgeExpanded = origin.knowledgeExpanded;
+      ui.dialogueFollowEnabled = origin.dialogueFollowEnabled;
+      ui.dialogueLastFollowKey = origin.dialogueLastFollowKey;
+      ui.dialogueProgrammaticScroll = origin.dialogueProgrammaticScroll;
+      outcomePracticeRuntime = origin.outcomePracticeRuntime || null;
+      outcomePracticeConfig = origin.outcomePracticeConfig || null;
     }
 
     function pauseVoice() {
@@ -598,8 +760,7 @@
           finishSequence();
           return;
         }
-        const audio = new global.Audio(audioItem.item.audioSrc);
-        audio.preload = 'auto';
+        const audio = acquireAudio(audioItem.item.audioSrc);
         session.audio = audio;
         session.segmentIndex = index;
         ui.freeAudioRef = audioItem.refId;
@@ -749,8 +910,7 @@
         segmentId: effect.segmentId
       };
       if (!audioRef.src) return;
-      const audio = new global.Audio(audioRef.src);
-      audio.preload = 'auto';
+      const audio = acquireAudio(audioRef.src);
       const activeSnapshot = runtime.snapshot();
       const session = {
         audio,
@@ -833,8 +993,7 @@
         fail('missing-audio-source');
         return;
       }
-      const audio = new global.Audio(audioSource.audioSrc);
-      audio.preload = 'auto';
+      const audio = acquireAudio(audioSource.audioSrc);
       const session = {
         audio,
         practice: true,
@@ -898,6 +1057,10 @@
     }
 
     function processEffect(effect) {
+      if (effect.type === 'audio/preload') {
+        preloadAudio(effect.audioRef?.src || effect.line?.audioSrc || effect.src);
+        return;
+      }
       if (effect.type === 'audio/cancel') {
         if (
           ui.voice?.requestId === effect.requestId
@@ -961,6 +1124,20 @@
         };
         return;
       }
+      if (effect.type === 'runtime/microtask-skipped') {
+        pauseVoice();
+        outcomePracticeRuntime?.destroy();
+        outcomePracticeRuntime = null;
+        outcomePracticeConfig = null;
+        ui.roleSkipConfirmOpen = false;
+        global.queueMicrotask(() => root.querySelector('[data-copy-purpose="task"], .station-brand strong')?.focus?.());
+        return;
+      }
+      if (effect.type === 'runtime/skipped-stage-completed'
+        || effect.type === 'runtime/skipped-stage-returned') {
+        finishSkipRecoveryUi();
+        return;
+      }
       if (effect.type === 'runtime/persistence-failed') {
         ui.feedback = { tone: 'danger', message: feedbackCopy.saveFailed || '' };
       }
@@ -1008,7 +1185,7 @@
     function entityPicture(item) {
       return item.assetSrc
         ? (item.assetFallbackSrc
-            ? `<picture><source srcset="${escapeHtml(item.assetSrc)}" type="image/avif"><img src="${escapeHtml(item.assetFallbackSrc)}" alt="" draggable="false"></picture>`
+            ? `<picture><source srcset="${escapeHtml(item.assetSrc)}" type="${imageMime(item.assetSrc)}"><img src="${escapeHtml(item.assetFallbackSrc)}" alt="" draggable="false"></picture>`
             : `<img src="${escapeHtml(item.assetSrc)}" alt="" draggable="false">`)
         : `<span aria-hidden="true">${escapeHtml(item.symbol || '✦')}</span>`;
     }
@@ -1106,6 +1283,7 @@
 
     function sceneCharacter(entityId, snapshot, step, moment, task, interactionEnabled = false) {
       const item = entity(entityId);
+      const candidateLabel = task?.presentation?.candidateLabels?.[entityId] || item.title;
       const targetable = (step?.kind === 'perform-action'
         && (step.targetEntityIds || []).includes(entityId));
       const selectable = step?.kind === 'select-entity'
@@ -1125,7 +1303,7 @@
       const correct = correctFeedbackEntityIds(task, step).has(entityId);
       return `<button type="button" class="scene-character scene-character--${escapeHtml(item.dialogueSide || 'center')}${selectable ? ' is-choice-candidate' : ''}${active ? ' is-active-speaker' : ''}${focused ? ' is-moment-focus' : ''}${selected ? ' is-selected' : ''}${correct ? ' is-correct-response' : ''}"${action}${pressed} data-entity-id="${escapeHtml(entityId)}" data-entity-kind="character" data-dialogue-side="${escapeHtml(item.dialogueSide || 'center')}" data-speaker-role="${escapeHtml(item.voiceRole || '')}" data-moment-state="${escapeHtml(momentEntityState(task, moment, entityId))}">
         ${entityPicture(item)}
-        <span class="scene-character__name">${escapeHtml(item.title)}</span>
+        <span class="scene-character__name">${escapeHtml(candidateLabel)}</span>
       </button>`;
     }
 
@@ -1224,8 +1402,9 @@
       const entries = refs.map(refId => {
         const item = source(refId) || content(refId);
         const label = item?.text || item?.title || '';
+        const primaryTask = refId === step?.promptSourceRef;
         return label
-          ? `<span class="moment-language__item" data-language-ref="${escapeHtml(refId)}">${escapeHtml(label)}</span>`
+          ? `<span class="moment-language__item" data-language-ref="${escapeHtml(refId)}"${primaryTask ? ' data-copy-purpose="task" data-copy-priority="primary"' : ''}>${escapeHtml(label)}</span>`
           : '';
       }).filter(Boolean).join('');
       return entries
@@ -1385,8 +1564,11 @@
     }
 
     function feedbackAudioCopy(snapshot, step) {
+      if (ui.feedback?.tone === 'correct' && ui.feedback.message) {
+        return ui.feedback.message;
+      }
       if (snapshot.audio?.purpose === 'followup') {
-        return step?.prompt || feedbackAudioCopybook.followupFallback || '';
+        return feedbackAudioCopybook.followupFallback || '';
       }
       if (['match-entity', 'match-entity-batch'].includes(step?.kind)) {
         return step.challengeMode === 'word-form'
@@ -1409,8 +1591,8 @@
           : ''}
         <div class="feedback-audio-state__copy">
           <strong class="feedback-audio-state__english" lang="en">${escapeHtml(activeAudio?.text || '')}</strong>
-          <span>${escapeHtml(feedbackAudioCopy(snapshot, step))}</span>
-          <small>${escapeHtml(feedbackAudioCopybook.autoContinue || '')}</small>
+          ${feedbackAudioCopy(snapshot, step) ? `<span>${escapeHtml(feedbackAudioCopy(snapshot, step))}</span>` : ''}
+          ${feedbackAudioCopybook.autoContinue ? `<small>${escapeHtml(feedbackAudioCopybook.autoContinue)}</small>` : ''}
         </div>
       </div>`;
     }
@@ -1437,7 +1619,9 @@
       return `<section class="language-audio-panel" aria-label="${escapeHtml(languageAudioCopy.regionLabel || '')}">
         <div class="language-audio-panel__text">${lines}</div>
         <button class="language-audio-play" type="button" data-action="audio-play">${escapeHtml(isPlaying ? languageAudioCopy.replayLabel : languageAudioCopy.playLabel)}</button>
-        <small role="status">${escapeHtml(isPlaying ? languageAudioCopy.playingHint : languageAudioCopy.listenHint)}</small>
+        ${(isPlaying ? languageAudioCopy.playingHint : languageAudioCopy.listenHint)
+          ? `<small role="status">${escapeHtml(isPlaying ? languageAudioCopy.playingHint : languageAudioCopy.listenHint)}</small>`
+          : ''}
       </section>`;
     }
 
@@ -1495,7 +1679,7 @@
       const waitingForAutomaticRetry = snapshot.phase === 'audio-retry' && !manualRetryRequired;
       return `<section class="sound-fallback" role="alert">
         <span aria-hidden="true">${uiIcon('play-fill')}</span>
-        <div><strong>${escapeHtml(waitingForAutomaticRetry ? (failure.retryingTitle || '') : (failure.title || ''))}</strong><p>${texts.map(escapeHtml).join(' &nbsp; ') || escapeHtml(waitingForAutomaticRetry ? (failure.retryingCopy || '') : (failure.copy || ''))}</p></div>
+        <div><strong>${escapeHtml(waitingForAutomaticRetry ? (failure.retryingTitle || '') : (failure.title || ''))}</strong>${(texts.length || (waitingForAutomaticRetry ? failure.retryingCopy : failure.copy)) ? `<p>${texts.map(escapeHtml).join(' &nbsp; ') || escapeHtml(waitingForAutomaticRetry ? (failure.retryingCopy || '') : (failure.copy || ''))}</p>` : ''}</div>
         ${manualRetryRequired ? `<button type="button" data-action="audio-retry">${escapeHtml(failure.retryLabel || '')}</button>` : ''}
       </section>`;
     }
@@ -1506,7 +1690,7 @@
       return `<section class="persistence-panel" role="status" aria-live="polite">
         <span class="persistence-panel__seal" aria-hidden="true">${uiIcon(retryable ? 'arrow-counterclockwise' : 'star-fill')}</span>
         <div><strong>${escapeHtml(retryable ? (copy.title || '') : (copy.savingTitle || ''))}</strong>
-        <p>${escapeHtml(retryable ? (copy.copy || '') : (copy.savingCopy || ''))}</p></div>
+        ${(retryable ? copy.copy : copy.savingCopy) ? `<p>${escapeHtml(retryable ? copy.copy : copy.savingCopy)}</p>` : ''}</div>
         ${retryable ? `<button type="button" data-action="persistence-retry">${escapeHtml(copy.retryLabel || '')}</button>` : ''}
       </section>`;
     }
@@ -1532,15 +1716,10 @@
       const challengeRef = snapshot.challengeSourceRef
         || activeChallenge?.sourceRef
         || step.challengeSourceRefs?.[snapshot.batchIndex];
-      const showForm = (activeChallenge?.channel || step.channel || step.challengeMode) === 'word-form';
       const replay = step.audioResponsePresentation?.startsWith('shared-')
         ? sharedListenReplay(snapshot, step)
         : '';
-      return `<div class="inline-language-replay"><div class="word-plaque" lang="en">${escapeHtml(source(challengeRef)?.text || '')}</div>${replay}</div>
-        <div class="match-workbench-instruction" data-response-kind="match">
-          ${showForm ? '' : `<p class="sound-clue"><strong>${escapeHtml(interactionCopy.soundQuestion || '')}</strong></p>`}
-          <p class="gentle-hint">${escapeHtml(interactionCopy.selectMatchingItem || interactionCopy.selectItem || '')}</p>
-        </div>`;
+      return `<div class="inline-language-replay" data-response-kind="match"><div class="word-plaque" lang="en">${escapeHtml(source(challengeRef)?.text || '')}</div>${replay}</div>`;
     }
 
     function selectOneResponse(snapshot, step) {
@@ -1670,23 +1849,19 @@
       }
       const characterTarget = (step.targetEntityIds || [])
         .some(entityId => entity(entityId).entityKind === 'character');
-      if (characterTarget) {
-        return `<div class="direct-action-instruction" data-response-kind="perform-action">
-          <strong>${escapeHtml(step.actionInstruction || interactionCopy.selectRecipient || '')}</strong>
-        </div>`;
-      }
+      if (characterTarget) return '';
       const targetIds = (step.targetEntityIds || [])
         .filter(entityId => entity(entityId).entityKind !== 'character');
       return `<div class="action-stage" data-response-kind="perform-action">
         ${itemIds.length ? `<div class="action-stage__rail"><span>${escapeHtml(interactionCopy.selectItem || '')}</span>${itemIds.map(entityId => choiceButton({
           action: 'select-entity', value: entityId, label: entity(entityId).title,
           selected: ui.selectedEntityId === entityId, visual: entityVisual(entityId, { compact: true })
-        })).join('')}</div>` : `<p class="action-stage__hint">${escapeHtml(step.actionInstruction || interactionCopy.selectItemThenPerson || '')}</p>`}
+        })).join('')}</div>` : ''}
         ${targetIds.length ? `<span class="action-arrow" aria-hidden="true">${uiIcon('arrow-right')}</span>` : ''}
         ${targetIds.length ? `<div class="action-stage__rail"><span>${escapeHtml(interactionCopy.selectTarget || '')}</span>${targetIds.map(entityId => choiceButton({
           action: 'select-target', value: entityId, label: entity(entityId).title,
           selected: ui.selectedTargetId === entityId, visual: entityVisual(entityId, { compact: true })
-        })).join('')}</div>` : (itemIds.length ? `<p class="action-stage__hint">${escapeHtml(interactionCopy.selectPersonNext || '')}</p>` : '')}
+        })).join('')}</div>` : ''}
       </div>`;
     }
 
@@ -1710,8 +1885,8 @@
       </div>`;
     }
 
-    function entityChoiceResponse(step) {
-      return `<div class="action-stage"><p class="action-stage__hint">${escapeHtml(step?.actionInstruction || interactionCopy.selectPerson || '')}</p></div>`;
+    function entityChoiceResponse() {
+      return '';
     }
 
     function orderedBlocksResponse(snapshot, step) {
@@ -1725,14 +1900,20 @@
       const expectedLength = step.answerRule?.acceptedOrder?.length
         || step.answerRule?.acceptedByEntityId?.[selectedCase]?.length
         || available.length;
+      const challenge = activeChallenge(snapshot, step);
+      const boundaryRefs = snapshot.supportDepth >= 2
+        ? new Set(challenge?.boundaryContentRefs || [])
+        : new Set();
       return `<div class="block-builder" data-response-kind="ordered-blocks">
         <div class="block-builder__track">${ui.selectedBlockRefs.length
-          ? ui.selectedBlockRefs.map(refId => `<button type="button" data-action="remove-block" data-value="${escapeHtml(refId)}">${escapeHtml(content(refId)?.text || source(refId)?.text || '')}</button>`).join('')
+          ? ui.selectedBlockRefs.map(refId => `<button class="${boundaryRefs.has(refId) ? 'is-boundary-cue' : ''}" type="button" data-action="remove-block" data-value="${escapeHtml(refId)}">${escapeHtml(content(refId)?.text || source(refId)?.text || '')}</button>`).join('')
           : `<span>${escapeHtml(interactionCopy.orderedBlocksPrefix || '')} ${expectedLength} ${escapeHtml(interactionCopy.orderedBlocksSuffix || '')}</span>`}</div>
         <div class="block-builder__bank">${available.map(refId => choiceButton({
           action: 'add-block', value: refId, label: content(refId)?.text || source(refId)?.text || '',
-          selected: ui.selectedBlockRefs.includes(refId)
+          selected: ui.selectedBlockRefs.includes(refId),
+          extra: boundaryRefs.has(refId) ? 'data-boundary-cue="true"' : ''
         })).join('')}</div>
+        ${step.allowReset && ui.selectedBlockRefs.length ? `<button class="block-builder__reset" type="button" data-action="reset-blocks">${escapeHtml(interactionCopy.reorderLabel || '')}</button>` : ''}
       </div>`;
     }
 
@@ -1746,7 +1927,7 @@
       if (!step.answerRule && step.submissionMode !== 'formal') return continueResponse(step);
       if (['match-entity', 'match-entity-batch'].includes(step.kind)) return matchResponse(snapshot, step);
       if (step.kind === 'select-one') return selectOneResponse(snapshot, step);
-      if (step.kind === 'select-entity') return entityChoiceResponse(step);
+      if (step.kind === 'select-entity') return entityChoiceResponse();
       if (step.kind === 'perform-action') return actionResponse(snapshot, step, sceneEntityIds);
       if (step.kind === 'place-in-slot') return slotResponse(step);
       if (step.kind === 'select-case') return caseResponse(step);
@@ -1771,9 +1952,12 @@
       const emblem = ui.feedback.tone === 'partner' && cat?.assetSrc
         ? `<span class="feedback-bubble__guide" aria-hidden="true"><img src="${escapeHtml(cat.assetSrc)}" alt=""></span>`
         : '<span class="feedback-bubble__seal" aria-hidden="true"></span>';
+      const changedExample = ui.feedback.tone === 'partner' && step?.rescueModel?.text
+        ? `<div class="feedback-bubble__example" data-changed-example="true">${escapeHtml(step.rescueModel.text)}</div>`
+        : '';
       return `<aside class="feedback-bubble" data-tone="${escapeHtml(ui.feedback.tone)}" role="status" aria-live="polite">
         ${emblem}
-        <div class="feedback-bubble__copy"><strong>${escapeHtml(labels[ui.feedback.tone] || '')}</strong><p>${escapeHtml(ui.feedback.message)}</p></div>
+        <div class="feedback-bubble__copy"><strong>${escapeHtml(labels[ui.feedback.tone] || '')}</strong><p>${escapeHtml(ui.feedback.message)}</p>${changedExample}</div>
       </aside>`;
     }
 
@@ -1790,11 +1974,16 @@
       const portrait = frames.masters?.portrait;
       const wide = frames.masters?.wide;
       if (!portrait?.assetSrc || !wide?.assetSrc) return '';
+      const portraitSources = [portrait.assetSrc, portrait.assetFallbackSrc]
+        .filter((value, index, values) => value && values.indexOf(value) === index)
+        .map(value => `<source media="${escapeHtml(portrait.media || '(max-aspect-ratio: 4/5)')}" srcset="${escapeHtml(value)}" type="${imageMime(value)}">`)
+        .join('');
+      const wideSources = [wide.assetSrc, wide.assetFallbackSrc]
+        .filter((value, index, values) => value && values.indexOf(value) === index)
+        .map(value => `<source media="${escapeHtml(wide.media || '(min-aspect-ratio: 4/5)')}" srcset="${escapeHtml(value)}" type="${imageMime(value)}">`)
+        .join('');
       return `<picture class="scene-frame" data-scene-frame-policy="responsive-picture" aria-hidden="true">
-        <source media="${escapeHtml(portrait.media || '(max-aspect-ratio: 4/5)')}" srcset="${escapeHtml(portrait.assetSrc)}" type="image/avif">
-        <source media="${escapeHtml(portrait.media || '(max-aspect-ratio: 4/5)')}" srcset="${escapeHtml(portrait.assetFallbackSrc || portrait.assetSrc)}" type="image/webp">
-        <source media="${escapeHtml(wide.media || '(min-aspect-ratio: 4/5)')}" srcset="${escapeHtml(wide.assetSrc)}" type="image/avif">
-        <source media="${escapeHtml(wide.media || '(min-aspect-ratio: 4/5)')}" srcset="${escapeHtml(wide.assetFallbackSrc || wide.assetSrc)}" type="image/webp">
+        ${portraitSources}${wideSources}
         <img src="${escapeHtml(wide.assetFallbackSrc || wide.assetSrc)}" alt="" data-frame-id="${escapeHtml(wide.frameId || 'wide')}">
       </picture>`;
     }
@@ -1852,8 +2041,17 @@
       const endStateId = presentationMoment?.endState?.stateId || '';
       const visibleLanguageRefs = presentationMoment?.visibleLanguageRefs?.join(' ') || '';
       const candidatePresentation = currentStep(snapshot)?.candidatePresentation || '';
+      const challenge = activeChallenge(snapshot, currentStep(snapshot));
+      const answerEvidenceChannel = challenge?.answerFairness?.targetEvidenceChannel || '';
+      const intentionalSupportRefs = (challenge?.answerFairness?.intentionalPreSubmitSupport || [])
+        .map(item => item.sourceRef)
+        .join(' ');
       const taskIndex = Math.max(0, tasks.findIndex(item => item.task.microtaskId === snapshot.microtaskId));
-      const completed = ledger.read().units?.[unit.unitId]?.completedMicrotaskIds?.length || 0;
+      const durableUnit = ledger.read().units?.[unit.unitId] || {};
+      const completed = new Set([
+        ...(durableUnit.completedMicrotaskIds || []),
+        ...(durableUnit.skippedMicrotaskIds || [])
+      ]).size;
       const progress = snapshot.status === 'unit-built'
         ? 100
         : Math.round(((ui.previewMode ? taskIndex + 1 : completed) / tasks.length) * 100);
@@ -1861,7 +2059,7 @@
         ? tasks.length
         : (snapshot.microtaskId ? taskIndex + 1 : completed);
       const stageNavigationAvailable = stagePreviewEnabled && snapshot.status !== 'idle';
-      const backgroundInactive = (ui.restartConfirmOpen || ui.stageMapOpen)
+      const backgroundInactive = (ui.restartConfirmOpen || ui.roleSkipConfirmOpen || ui.stageMapOpen)
         ? ' inert aria-hidden="true"'
         : '';
       const highlightedPreviewId = ui.previewMode
@@ -1874,43 +2072,46 @@
         ));
         const status = runtimeNavigation?.status
           || (reachedIds.has(task.microtaskId) ? 'completed' : 'locked');
-        const reached = ['completed', 'current'].includes(status);
+        const reached = ['completed', 'current', 'skipped'].includes(status);
         const stateLabel = status === 'current'
           ? stageNavigationCopy.currentLabel
-          : (status === 'completed' ? stageNavigationCopy.practiceLabel : stageNavigationCopy.lockedLabel);
-        return `<button class="stage-jump-button${status === 'current' ? ' is-current' : ''}${task.microtaskId === highlightedPreviewId ? ' is-previewed' : ''}${reached ? ' is-reached' : ' is-locked'}" type="button" data-action="preview-jump" data-value="${escapeHtml(task.microtaskId)}" aria-label="${escapeHtml(navigationCopy.stageAriaPrefix || '')} ${index + 1}${escapeHtml(navigationCopy.stageAriaSeparator || '')}${escapeHtml(task.presentation.title)}" ${status === 'current' ? 'aria-current="true"' : ''} ${reached ? '' : 'disabled aria-disabled="true"'}>
+          : (status === 'completed'
+              ? stageNavigationCopy.practiceLabel
+              : (status === 'skipped'
+                  ? `${stageNavigationCopy.skippedLabel || ''} · ${stageNavigationCopy.completeSkippedLabel || ''}`
+                  : stageNavigationCopy.lockedLabel));
+        return `<button class="stage-jump-button${status === 'current' ? ' is-current' : ''}${status === 'skipped' ? ' is-skipped' : ''}${task.microtaskId === highlightedPreviewId ? ' is-previewed' : ''}${reached ? ' is-reached' : ' is-locked'}" type="button" data-action="preview-jump" data-value="${escapeHtml(task.microtaskId)}" aria-label="${escapeHtml(navigationCopy.stageAriaPrefix || '')} ${index + 1}${escapeHtml(navigationCopy.stageAriaSeparator || '')}${escapeHtml(task.presentation.title)}，${escapeHtml(stateLabel || '')}" ${status === 'current' ? 'aria-current="true"' : ''} ${reached ? '' : 'disabled aria-disabled="true"'}>
           <b>${index + 1}</b><span><strong>${escapeHtml(task.presentation.title)}</strong><small>${escapeHtml(stateLabel || '')}</small></span>
         </button>`;
       }).join('');
       const manualDialogue = unlockedManualDialogue(snapshot);
       const manualDialogueTool = manualDialogue ? `<button class="stage-practice-tool" type="button" data-action="start-outcome-practice" data-value="${escapeHtml(manualDialogue.practiceId)}">
-          <span aria-hidden="true">✦</span><span><small>${escapeHtml(manualDialogue.entryKicker || '')}</small><strong>${escapeHtml(manualDialogue.entryLabel || '')}</strong><p>${escapeHtml(manualDialogue.entryHint || '')}</p></span>
+          <span aria-hidden="true">✦</span><span>${manualDialogue.entryKicker ? `<small>${escapeHtml(manualDialogue.entryKicker)}</small>` : ''}<strong>${escapeHtml(manualDialogue.entryLabel || '')}</strong>${manualDialogue.entryHint ? `<p>${escapeHtml(manualDialogue.entryHint)}</p>` : ''}</span>
         </button>` : '';
       const settings = ui.settingsOpen ? `<aside class="settings-tray" id="course-settings-panel" aria-label="${escapeHtml(navigationCopy.settingsLabel || '')}">
           ${stageNavigationAvailable ? `<button class="restart-control stage-navigation-control" type="button" data-action="open-stages" aria-haspopup="dialog" aria-controls="course-stage-map">
-            <span aria-hidden="true">${uiIcon('arrow-right')}</span><span><strong>${escapeHtml(navigationCopy.chooseStageTitle || '')}</strong><small>${escapeHtml(navigationCopy.chooseStageCopy || '')}</small></span>
+            <span aria-hidden="true">${uiIcon('arrow-right')}</span><span><strong>${escapeHtml(navigationCopy.chooseStageTitle || '')}</strong>${navigationCopy.chooseStageCopy ? `<small>${escapeHtml(navigationCopy.chooseStageCopy)}</small>` : ''}</span>
           </button>` : ''}
           ${ui.previewMode
             ? `<button class="restart-control preview-exit-control" type="button" data-action="preview-exit">
-                <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>${escapeHtml(navigationCopy.exitPreviewTitle || '')}</strong><small>${escapeHtml(navigationCopy.exitPreviewCopy || '')}</small></span>
+                <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>${escapeHtml(navigationCopy.exitPreviewTitle || '')}</strong>${navigationCopy.exitPreviewCopy ? `<small>${escapeHtml(navigationCopy.exitPreviewCopy)}</small>` : ''}</span>
               </button>`
             : `<button class="restart-control" type="button" data-action="restart-request">
-                <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>${escapeHtml(navigationCopy.restartTitle || '')}</strong><small>${escapeHtml(navigationCopy.restartCopy || '')}</small></span>
+                <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>${escapeHtml(navigationCopy.restartTitle || '')}</strong>${navigationCopy.restartCopy ? `<small>${escapeHtml(navigationCopy.restartCopy)}</small>` : ''}</span>
               </button>`}
         </aside>` : '';
       const reviewEntry = dueReviewAvailable() && reviewRun.href ? `<a class="review-entry" href="${escapeHtml(reviewRun.href)}">
           <span>${escapeHtml(reviewRun.copy?.entryKicker || '')}</span>
           <strong>${escapeHtml(reviewRun.copy?.entryTitle || '')}</strong>
-          <small>${escapeHtml(reviewRun.copy?.entryBody || '')}</small>
           <b>${escapeHtml(reviewRun.copy?.startLabel || '')}${uiIcon('arrow-right')}</b>
         </a>` : '';
       const stageMapPreviewExit = ui.previewMode ? `<button class="restart-control preview-exit-control stage-map__preview-exit" type="button" data-action="preview-exit">
-          <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>${escapeHtml(navigationCopy.exitPreviewTitle || '')}</strong><small>${escapeHtml(navigationCopy.exitPreviewCopy || '')}</small></span>
+          <span aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span><span><strong>${escapeHtml(navigationCopy.exitPreviewTitle || '')}</strong>${navigationCopy.exitPreviewCopy ? `<small>${escapeHtml(navigationCopy.exitPreviewCopy)}</small>` : ''}</span>
         </button>` : '';
       const stageMap = ui.stageMapOpen && stageNavigationAvailable ? `<div class="stage-map-backdrop">
           <section class="stage-map" id="course-stage-map" role="dialog" aria-modal="true" aria-labelledby="course-stage-map-title">
             <header class="stage-map__header">
-              <div><p>${escapeHtml(navigationCopy.previewNoSave || '')}</p><h2 id="course-stage-map-title">${escapeHtml(navigationCopy.heading || '')}</h2></div>
+              <div>${!ui.previewMode && navigationCopy.previewNoSave ? `<p>${escapeHtml(navigationCopy.previewNoSave)}</p>` : ''}<h2 id="course-stage-map-title">${escapeHtml(navigationCopy.heading || '')}</h2></div>
               <button type="button" data-action="close-stages" aria-label="${escapeHtml(navigationCopy.closeMapLabel || '')}">×</button>
             </header>
             ${reviewEntry}
@@ -1922,7 +2123,7 @@
       const restartConfirm = ui.restartConfirmOpen ? `<div class="restart-backdrop">
           <section class="restart-dialog" role="dialog" aria-modal="true" aria-labelledby="restart-dialog-title" aria-describedby="restart-dialog-copy">
             <span class="restart-seal" aria-hidden="true">${uiIcon('arrow-counterclockwise')}</span>
-            <p class="kicker">${escapeHtml(navigationCopy.dialogKicker || '')}</p>
+            ${navigationCopy.dialogKicker ? `<p class="kicker">${escapeHtml(navigationCopy.dialogKicker)}</p>` : ''}
             <h2 id="restart-dialog-title">${escapeHtml(navigationCopy.dialogTitle || '')}</h2>
             <p id="restart-dialog-copy">${escapeHtml(navigationCopy.dialogCopy || '')}</p>
             <div class="restart-dialog__actions">
@@ -1931,10 +2132,24 @@
             </div>
           </section>
         </div>` : '';
-      return `<div class="station-app" data-view="${escapeHtml(ui.view)}" data-preview-mode="${ui.previewMode ? 'true' : 'false'}" data-runtime-status="${escapeHtml(snapshot.status)}" data-runtime-phase="${escapeHtml(snapshot.phase || 'none')}" data-runtime-microtask="${escapeHtml(snapshot.microtaskId || 'none')}" data-runtime-step="${escapeHtml(snapshot.stepId || 'none')}" data-runtime-challenge="${escapeHtml(snapshot.challengeRef || 'none')}" data-adventure-hearts="${snapshot.adventureHeartsRemaining ?? snapshot.adventureHearts ?? 3}" data-partner-rescue="${snapshot.rescueUsed || snapshot.partnerRescueActive ? 'true' : 'false'}" data-build-stage="${snapshot.buildStage || 0}" data-scene-mode="${escapeHtml(sceneMode)}" data-scene-variant="${escapeHtml(sceneVariant)}" data-prop-surface="${escapeHtml(propSurface)}" data-presentation-moment="${escapeHtml(presentationMomentId)}" data-primary-motion="${escapeHtml(primaryMotion)}" data-end-state="${escapeHtml(endStateId)}" data-candidate-presentation="${escapeHtml(candidatePresentation)}">
+      const roleSkipCopy = uiCopy.roleSkip || {};
+      const roleSkipDescription = roleSkipCopy.dialogCopy
+        ? `<p id="role-skip-dialog-copy">${escapeHtml(roleSkipCopy.dialogCopy)}</p>`
+        : '';
+      const roleSkipConfirm = ui.roleSkipConfirmOpen ? `<div class="restart-backdrop role-skip-backdrop">
+          <section class="restart-dialog role-skip-dialog" role="dialog" aria-modal="true" aria-labelledby="role-skip-dialog-title"${roleSkipDescription ? ' aria-describedby="role-skip-dialog-copy"' : ''}>
+            <h2 id="role-skip-dialog-title">${escapeHtml(roleSkipCopy.dialogTitle || '')}</h2>
+            ${roleSkipDescription}
+            <div class="restart-dialog__actions">
+              <button class="restart-cancel" type="button" data-action="role-skip-cancel">${escapeHtml(roleSkipCopy.cancelLabel || '')}</button>
+              <button class="restart-confirm" type="button" data-action="role-skip-confirm">${escapeHtml(roleSkipCopy.confirmLabel || '')}</button>
+            </div>
+          </section>
+        </div>` : '';
+      return `<div class="station-app" data-view="${escapeHtml(ui.view)}" data-preview-mode="${ui.previewMode ? 'true' : 'false'}" data-skip-recovery="${ui.skipRecoveryMode ? 'true' : 'false'}" data-runtime-status="${escapeHtml(snapshot.status)}" data-runtime-phase="${escapeHtml(snapshot.phase || 'none')}" data-runtime-microtask="${escapeHtml(snapshot.microtaskId || 'none')}" data-runtime-step="${escapeHtml(snapshot.stepId || 'none')}" data-runtime-challenge="${escapeHtml(snapshot.challengeRef || 'none')}" data-adventure-hearts="${snapshot.adventureHeartsRemaining ?? snapshot.adventureHearts ?? 3}" data-partner-rescue="${snapshot.rescueUsed || snapshot.partnerRescueActive ? 'true' : 'false'}" data-build-stage="${snapshot.buildStage || 0}" data-scene-mode="${escapeHtml(sceneMode)}" data-scene-variant="${escapeHtml(sceneVariant)}" data-prop-surface="${escapeHtml(propSurface)}" data-presentation-moment="${escapeHtml(presentationMomentId)}" data-primary-motion="${escapeHtml(primaryMotion)}" data-end-state="${escapeHtml(endStateId)}" data-candidate-presentation="${escapeHtml(candidatePresentation)}" data-answer-evidence-channel="${escapeHtml(answerEvidenceChannel)}" data-intentional-support-refs="${escapeHtml(intentionalSupportRefs)}">
         <p class="portrait-hint" role="status">${escapeHtml(uiCopy.scene?.portraitHint || '')}</p>
         <header class="station-header"${backgroundInactive}>
-          <div class="station-brand"><span>${escapeHtml(unit.experience?.lessonLabel || '')}</span><strong>${escapeHtml(currentTask(snapshot)?.task.navigationTitle || unit.title)}</strong></div>
+          <div class="station-brand"><span>${escapeHtml(unit.experience?.lessonLabel || '')}</span><strong tabindex="-1">${escapeHtml(currentTask(snapshot)?.task.navigationTitle || unit.title)}</strong></div>
           ${stageNavigationAvailable
             ? `<button class="case-progress" type="button" data-action="toggle-stages" aria-expanded="${ui.stageMapOpen ? 'true' : 'false'}" aria-controls="course-stage-map" aria-label="${escapeHtml(ui.previewMode ? navigationCopy.previewProgressLabel : navigationCopy.dayProgressLabel)}"><span style="--progress:${progress}%"></span><b>${shownPosition} / ${tasks.length}</b></button>`
             : `<div class="case-progress is-static" role="status" aria-label="${escapeHtml(navigationCopy.dayProgressLabel || '')}"><span style="--progress:${progress}%"></span><b>${shownPosition} / ${tasks.length}</b></div>`}
@@ -1944,9 +2159,10 @@
           ${ui.previewMode ? `<button class="preview-mode-badge" type="button" data-action="preview-exit">${escapeHtml(navigationCopy.previewBadge || '')}</button>` : ''}
           ${settings}
         </header>
-        <section class="station-world" data-scene-mode="${escapeHtml(sceneMode)}" data-scene-variant="${escapeHtml(sceneVariant)}" data-prop-surface="${escapeHtml(propSurface)}" data-presentation-moment="${escapeHtml(presentationMomentId)}" data-primary-motion="${escapeHtml(primaryMotion)}" data-end-state="${escapeHtml(endStateId)}" data-candidate-presentation="${escapeHtml(candidatePresentation)}" data-visible-language-refs="${escapeHtml(visibleLanguageRefs)}"${surfaceStyle}${backgroundInactive}>${sceneFramePicture()}${body}</section>
+        <section class="station-world" data-scene-mode="${escapeHtml(sceneMode)}" data-scene-variant="${escapeHtml(sceneVariant)}" data-prop-surface="${escapeHtml(propSurface)}" data-presentation-moment="${escapeHtml(presentationMomentId)}" data-primary-motion="${escapeHtml(primaryMotion)}" data-end-state="${escapeHtml(endStateId)}" data-candidate-presentation="${escapeHtml(candidatePresentation)}" data-visible-language-refs="${escapeHtml(visibleLanguageRefs)}" data-answer-evidence-channel="${escapeHtml(answerEvidenceChannel)}" data-intentional-support-refs="${escapeHtml(intentionalSupportRefs)}"${surfaceStyle}${backgroundInactive}>${sceneFramePicture()}${body}</section>
         ${stageMap}
         ${restartConfirm}
+        ${roleSkipConfirm}
       </div>`;
     }
 
@@ -1967,10 +2183,7 @@
       const briefing = unit.experience?.briefing || {};
       return commonShell(`<article class="briefing-card" aria-labelledby="briefing-title">
         <figure class="briefing-visual">
-          <picture>
-            <source srcset="${escapeHtml(briefing.imageSrc || '')}" type="image/avif">
-            <img src="${escapeHtml(briefing.imageFallbackSrc || briefing.imageSrc || '')}" alt="${escapeHtml(briefing.imageAlt || '')}">
-          </picture>
+          <picture>${briefing.imageFallbackSrc ? `<source srcset="${escapeHtml(briefing.imageSrc || '')}" type="${imageMime(briefing.imageSrc)}">` : ''}<img src="${escapeHtml(briefing.imageFallbackSrc || briefing.imageSrc || '')}" alt="${escapeHtml(briefing.imageAlt || '')}"></picture>
         </figure>
         <div class="briefing-copy">
           <p class="kicker">${escapeHtml(briefing.kicker)}</p>
@@ -2064,6 +2277,7 @@
         || responseLockedByRequiredAudio
         || correctAudioInPlace
         || snapshot.phase === 'audio-suspended';
+      const hideCompletedAssembly = correctAudioInPlace && step?.kind === 'ordered-blocks';
       const visibleMomentLanguage = manualPresentation
         ? ''
         : momentLanguageMarkup(snapshot, step, moment);
@@ -2071,21 +2285,36 @@
         step?.promptSourceRef
         && moment?.visibleLanguageRefs?.includes(step.promptSourceRef)
       );
-      const promptRenderedInScene = adultEntityIds.length > 0 && !promptAlreadyRendered;
+      const dedicatedRecovery = [
+        'persistence-retry', 'answered-awaiting-save', 'unit-verifying',
+        'audio-fallback', 'audio-retry', 'audio-failed'
+      ].includes(snapshot.phase);
+      const sceneActionSurface = !manualPresentation && !dedicatedRecovery && (
+        step?.kind === 'select-entity'
+        || (
+          step?.kind === 'perform-action'
+          && (step.targetEntityIds || []).some(entityId => (
+            unit.entities?.[entityId]?.entityKind === 'character'
+          ))
+        )
+      );
+      const promptRenderedInScene = adultEntityIds.length > 0
+        && !promptAlreadyRendered
+        && !sceneActionSurface;
       const supportActionBeforeGuidance = supportFeedback && step?.kind === 'select-entity';
-      return commonShell(`${promptRenderedInScene ? `<p class="stage-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>` : ''}
+      return commonShell(`${promptRenderedInScene ? `<p class="stage-prompt" data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>` : ''}
         <div class="scene-people scene-cast${adultEntityIds.length ? ' scene-cast--with-adults' : ''}" data-scene-mode="${escapeHtml(task.presentation.sceneMode || '')}" data-scene-variant="${escapeHtml(task.presentation.sceneVariant || '')}" data-presentation-moment="${escapeHtml(moment?.momentId || '')}" aria-label="${escapeHtml(uiCopy.scene?.charactersLabel || '')}">
           ${adultEntityIds.map(id => sceneCharacter(id, snapshot, step, moment, task, Boolean(interactiveSceneStep))).join('')}
           ${showSceneCompanion ? sceneCompanion(snapshot, step, moment, task, Boolean(interactiveSceneStep)) : ''}
         </div>
         ${sceneEntityIds.length ? `<div class="scene-props" data-prop-surface="${escapeHtml(task.presentation.propSurface || '')}" aria-label="${escapeHtml(uiCopy.scene?.itemsLabel || '')}">${sceneEntityIds.map(id => sceneProp(id, snapshot, step, moment, task, Boolean(interactiveSceneStep))).join('')}</div>` : ''}
-        <section class="mission-console${adultEntityIds.length ? ' mission-console--with-cast' : ''}${supportFeedback ? ' mission-console--support' : ''}${partnerRescueScene ? ' mission-console--rewinding' : ''}"${sharedListenAnswer ? ` data-audio-response-presentation="${escapeHtml(step.audioResponsePresentation)}"` : ''}>
+        <section class="mission-console${adultEntityIds.length ? ' mission-console--with-cast' : ''}${supportFeedback ? ' mission-console--support' : ''}${partnerRescueScene ? ' mission-console--rewinding' : ''}${sceneActionSurface ? ' mission-console--scene-action' : ''}"${sceneActionSurface ? ' data-task-surface="scene-action"' : ''}${sharedListenAnswer ? ` data-audio-response-presentation="${escapeHtml(step.audioResponsePresentation)}"` : ''}>
           ${shouldShowAdventureHearts(snapshot, step) ? adventureHeartGauge(snapshot) : ''}
           ${supportFeedback ? '' : visibleMomentLanguage}
-          ${(promptAlreadyRendered || promptRenderedInScene) ? '' : `<p class="mission-prompt">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>`}
+          ${(promptAlreadyRendered || promptRenderedInScene) ? '' : `<p class="mission-prompt" data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(step?.prompt || task.presentation.prompt)}</p>`}
           ${supportActionBeforeGuidance ? `<div class="support-action-instruction">${body}</div>` : ''}
           ${supportFeedback ? `<div class="support-guidance">${feedbackMarkup(snapshot, step)}${visibleMomentLanguage}</div>` : ''}
-          <div class="interaction-space" data-response-fields ${(partnerRescueScene || responseLocked) ? 'inert' : ''}${partnerRescueScene ? ' aria-hidden="true"' : ''}>${correctAudioInPlace ? inPlaceAnswerPronunciation(snapshot, step) : ''}${supportActionBeforeGuidance ? '' : body}</div>
+          <div class="interaction-space" data-response-fields ${(partnerRescueScene || responseLocked) ? 'inert' : ''}${partnerRescueScene ? ' aria-hidden="true"' : ''}>${correctAudioInPlace ? inPlaceAnswerPronunciation(snapshot, step) : ''}${supportActionBeforeGuidance || hideCompletedAssembly ? '' : body}</div>
           ${supportFeedback || integratedCorrectFeedback ? '' : feedbackMarkup(snapshot, step)}
         </section>`, snapshot);
     }
@@ -2094,8 +2323,8 @@
       const practice = outcomePracticeForSnapshot(snapshot);
       if (!practice) return '';
       return `<aside class="optional-practice-entry" aria-label="${escapeHtml(uiCopy.outcomePractice?.regionLabel || '')}">
-        <div><small>${escapeHtml(practice.entryKicker || '')}</small><strong>${escapeHtml(practice.entryLabel || '')}</strong><p>${escapeHtml(practice.entryHint || '')}</p></div>
-        <button type="button" data-action="start-outcome-practice" data-value="${escapeHtml(practice.practiceId)}">${escapeHtml(practice.entryLabel || '')}</button>
+        <div>${practice.entryKicker ? `<small>${escapeHtml(practice.entryKicker)}</small>` : ''}<strong>${escapeHtml(practice.entryLabel || '')}</strong>${practice.entryHint ? `<p>${escapeHtml(practice.entryHint)}</p>` : ''}</div>
+        <button type="button" data-action="start-outcome-practice" data-value="${escapeHtml(practice.practiceId)}">${escapeHtml(practice.entryActionLabel || practice.entryLabel || '')}</button>
       </aside>`;
     }
 
@@ -2175,51 +2404,91 @@
       </li>`;
     }
 
+    function roleSkipControl(practiceSnapshot) {
+      const mainSnapshot = runtime.snapshot();
+      const task = currentTask(mainSnapshot)?.task;
+      if (
+        task?.skipPolicy?.kind !== 'role-round-child-confirmed'
+        || mainSnapshot.mode === 'microtask-v2-sandbox'
+        || !['awaiting-reveal', 'audio-retry'].includes(practiceSnapshot.phase)
+      ) {
+        return '';
+      }
+      const copy = uiCopy.roleSkip || {};
+      return `<button class="quiet-action role-skip-action" type="button" data-action="practice-skip">${escapeHtml(copy.actionLabel || '')}</button>`;
+    }
+
+    function roleRecoveryControl() {
+      const mainSnapshot = runtime.snapshot();
+      if (mainSnapshot.mode !== 'microtask-v2-skip-recovery') return '';
+      return `<button class="quiet-action role-recovery-return" type="button" data-action="practice-return-learning">${escapeHtml(outcomePracticeConfig.returnLearningLabel || '')}</button>`;
+    }
+
     function roleEnactmentPracticeMarkup(practiceSnapshot) {
       const phase = practiceSnapshot.phase;
       const round = practiceSnapshot.currentRound;
       const completed = new Set(practiceSnapshot.completedRoundIds || []);
+      const skipped = new Set(practiceSnapshot.skippedRoundIds || []);
+      const recoveryActive = runtime.snapshot().mode === 'microtask-v2-skip-recovery';
       if (phase === 'role-selection') {
         const choices = (outcomePracticeConfig.rounds || []).map(roleRound => {
           const done = completed.has(roleRound.roundId);
-          return `<button class="role-choice${done ? ' is-complete' : ''}" type="button" data-action="practice-role-select" data-value="${escapeHtml(roleRound.roundId)}" ${done ? 'disabled' : ''}>
-            <span>${done ? '✓' : '→'}</span><strong>${escapeHtml(roleRound.title || '')}</strong><small>${escapeHtml(done ? outcomePracticeConfig.completedRoleLabel : roleRound.roleBadge || '')}</small>
-          </button>`;
+          const wasSkipped = skipped.has(roleRound.roundId);
+          const status = done
+            ? outcomePracticeConfig.completedRoleLabel
+            : (wasSkipped ? outcomePracticeConfig.skippedRoleLabel : '');
+          return `<div class="role-choice-slot${done ? ' is-complete' : ''}${wasSkipped ? ' is-skipped' : ''}${!done && !wasSkipped ? ' is-primary' : ''}">
+            <button class="role-choice" type="button" data-action="practice-role-select" data-value="${escapeHtml(roleRound.roundId)}" ${done ? 'disabled' : ''}><strong>${escapeHtml(roleRound.title || '')}</strong></button>
+            ${status ? `<small class="role-choice-status" role="status">${escapeHtml(status)}</small>` : ''}
+          </div>`;
         }).join('');
         return fixedPracticeWorld(practiceSnapshot, `<div class="role-practice-copy">
-            <p class="kicker">${escapeHtml(outcomePracticeConfig.kicker || '')}</p>
-            <h1>${escapeHtml(outcomePracticeConfig.title || '')}</h1>
-            <p>${escapeHtml(outcomePracticeConfig.intro || '')}</p>
+            ${outcomePracticeConfig.kicker ? `<p class="kicker">${escapeHtml(outcomePracticeConfig.kicker)}</p>` : ''}
+            <h1 data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(outcomePracticeConfig.title || '')}</h1>
+            ${outcomePracticeConfig.intro ? `<p>${escapeHtml(outcomePracticeConfig.intro)}</p>` : ''}
           </div>
-          <div class="role-choice-label">${escapeHtml(outcomePracticeConfig.roleSelectionLabel || '')}</div>
-          <div class="role-choice-grid">${choices}</div>`, { selectable: false });
+          ${outcomePracticeConfig.roleSelectionLabel ? `<div class="role-choice-label">${escapeHtml(outcomePracticeConfig.roleSelectionLabel)}</div>` : ''}
+          <div class="role-choice-grid">${choices}</div>
+          <div class="outcome-practice-actions role-recovery-actions">${roleRecoveryControl()}</div>`, { selectable: false });
       }
       if (phase === 'all-roles-complete') {
         return fixedPracticeWorld(practiceSnapshot, `<div class="role-practice-copy role-practice-copy--complete">
-            <p class="kicker">${escapeHtml(outcomePracticeConfig.kicker || '')}</p>
+            ${outcomePracticeConfig.kicker ? `<p class="kicker">${escapeHtml(outcomePracticeConfig.kicker)}</p>` : ''}
             <h1>${escapeHtml(outcomePracticeConfig.allCompleteTitle || '')}</h1>
-            <p>${escapeHtml(outcomePracticeConfig.allCompleteCopy || '')}</p>
+            ${outcomePracticeConfig.allCompleteCopy ? `<p>${escapeHtml(outcomePracticeConfig.allCompleteCopy)}</p>` : ''}
           </div>
           <div class="outcome-practice-actions role-practice-finish-actions">
-            <button class="door-handle" type="button" data-action="practice-enter-manual">${escapeHtml(outcomePracticeConfig.manualEntryLabel || '')}</button>
-            <button class="door-handle door-handle--secondary" type="button" data-action="practice-continue-course">${escapeHtml(outcomePracticeConfig.continueCourseLabel || '')}</button>
+            ${recoveryActive
+              ? `<button class="door-handle" type="button" data-action="practice-complete-recovery">${escapeHtml(outcomePracticeConfig.returnLearningLabel || '')}</button>`
+              : `<button class="door-handle" type="button" data-action="practice-enter-manual">${escapeHtml(outcomePracticeConfig.manualEntryLabel || '')}</button>
+                <button class="door-handle door-handle--secondary" type="button" data-action="practice-continue-course">${escapeHtml(outcomePracticeConfig.continueCourseLabel || '')}</button>`}
           </div>`, { selectable: false });
       }
       const lines = round ? (round.dialogueTurnRefs || [])
         .map(sourceRef => roleEnactmentLine(sourceRef, practiceSnapshot, round)).join('') : '';
+      const hint = practiceSnapshot.currentHint;
+      const hintMarkup = hint ? `<aside class="manual-dialogue-hint role-enactment-hint" role="status">
+          <span><small>${escapeHtml(outcomePracticeConfig.hintIntentLabel || '')}</small><strong>${escapeHtml(hint.intent || '')}</strong></span>
+          ${hint.openingChunk ? `<span><small>${escapeHtml(outcomePracticeConfig.hintOpeningLabel || '')}</small><strong>${escapeHtml(hint.openingChunk)}</strong></span>` : ''}
+        </aside>` : '';
       let action = '';
       if (phase === 'awaiting-reveal') {
-        action = `<button class="door-handle" type="button" data-action="practice-reveal">${escapeHtml(outcomePracticeConfig.revealLabel || '')}</button>`;
+        const hintControl = practiceSnapshot.hintLevel < 2
+          ? `<button class="quiet-action" type="button" data-action="practice-hint">${escapeHtml(practiceSnapshot.hintLevel === 0 ? outcomePracticeConfig.hintLabel : outcomePracticeConfig.nextHintLabel)}</button>`
+          : '';
+        action = `<button class="door-handle" type="button" data-action="practice-reveal">${escapeHtml(outcomePracticeConfig.revealLabel || '')}</button>${hintControl}${roleSkipControl(practiceSnapshot)}`;
       } else if (phase === 'audio-retry') {
-        action = `<div class="practice-audio-retry" role="status"><p>${escapeHtml(outcomePracticeConfig.audioRetryCopy || '')}</p><button class="door-handle" type="button" data-action="practice-audio-retry">${escapeHtml(outcomePracticeConfig.audioRetryLabel || '')}</button></div>`;
-      } else if (phase === 'round-save-failed') {
-        action = `<div class="practice-audio-retry" role="status"><p>${escapeHtml(outcomePracticeConfig.roundSaveRetryCopy || '')}</p><button class="door-handle" type="button" data-action="practice-round-save-retry">${escapeHtml(outcomePracticeConfig.roundSaveRetryLabel || '')}</button></div>`;
+        action = `<div class="practice-audio-retry" role="status"><p>${escapeHtml(outcomePracticeConfig.audioRetryCopy || '')}</p><button class="door-handle" type="button" data-action="practice-audio-retry">${escapeHtml(outcomePracticeConfig.audioRetryLabel || '')}</button></div>${roleSkipControl(practiceSnapshot)}`;
+      } else if (phase === 'round-save-failed' || phase === 'round-skip-save-failed') {
+        const skippedSave = phase === 'round-skip-save-failed';
+        action = `<div class="practice-audio-retry" role="status"><p>${escapeHtml(skippedSave ? outcomePracticeConfig.roundSkipSaveRetryCopy : outcomePracticeConfig.roundSaveRetryCopy || '')}</p><button class="door-handle" type="button" data-action="practice-round-save-retry">${escapeHtml(skippedSave ? outcomePracticeConfig.roundSkipSaveRetryLabel : outcomePracticeConfig.roundSaveRetryLabel || '')}</button></div>`;
       }
       return fixedPracticeWorld(practiceSnapshot, `<div class="role-practice-copy role-practice-copy--active">
-          <p class="kicker">${escapeHtml(outcomePracticeConfig.kicker || '')}</p>
-          <h1>${escapeHtml(round?.title || '')}</h1><p>${escapeHtml(round?.instruction || '')}</p>
+          ${outcomePracticeConfig.kicker ? `<p class="kicker">${escapeHtml(outcomePracticeConfig.kicker)}</p>` : ''}
+          <h1 data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(round?.title || '')}</h1>${round?.instruction ? `<p>${escapeHtml(round.instruction)}</p>` : ''}
         </div>
         <ol class="role-practice-dialogue">${lines}</ol>
+        ${hintMarkup}
         <div class="outcome-practice-actions">${action}</div>`, {
         childRoleEntityId: round?.roleEntityId || null
       });
@@ -2250,8 +2519,10 @@
         </aside>` : '';
       let action = '';
       if (practiceSnapshot.phase === 'awaiting-manual-reveal') {
-        action = `<button class="door-handle" type="button" data-action="practice-reveal">${escapeHtml(outcomePracticeConfig.revealLabel || '')}</button>
-          <button class="quiet-action" type="button" data-action="practice-hint" ${practiceSnapshot.hintLevel >= 2 ? 'disabled' : ''}>${escapeHtml(outcomePracticeConfig.hintLabel || '')}</button>`;
+        const hintControl = practiceSnapshot.hintLevel < 2
+          ? `<button class="quiet-action" type="button" data-action="practice-hint">${escapeHtml(practiceSnapshot.hintLevel === 0 ? outcomePracticeConfig.hintLabel : outcomePracticeConfig.nextHintLabel)}</button>`
+          : '';
+        action = `<button class="door-handle" type="button" data-action="practice-reveal">${escapeHtml(outcomePracticeConfig.revealLabel || '')}</button>${hintControl}`;
       } else if (practiceSnapshot.phase === 'audio-retry') {
         action = `<div class="practice-audio-retry" role="status"><p>${escapeHtml(outcomePracticeConfig.audioRetryCopy || '')}</p><button class="door-handle" type="button" data-action="practice-audio-retry">${escapeHtml(outcomePracticeConfig.audioRetryLabel || '')}</button></div>`;
       } else if (finished) {
@@ -2261,8 +2532,7 @@
       const title = finished ? outcomePracticeConfig.finishedTitle : outcomePracticeConfig.kicker;
       const intro = finished ? outcomePracticeConfig.finishedCopy : outcomePracticeConfig.intro;
       return fixedPracticeWorld(practiceSnapshot, `<div class="role-practice-copy${finished ? ' role-practice-copy--complete' : ''}">
-          <p class="kicker">${escapeHtml(outcomePracticeConfig.entryKicker || '')}</p>
-          <h1>${escapeHtml(title || '')}</h1><p>${escapeHtml(intro || '')}</p>
+          <h1${finished ? '' : ' data-copy-purpose="task" data-copy-priority="primary"'}>${escapeHtml(title || '')}</h1>${intro ? `<p>${escapeHtml(intro)}</p>` : ''}
         </div>
         <ol class="role-practice-dialogue manual-dialogue-list">${lines}</ol>
         ${hintMarkup}
@@ -2301,7 +2571,7 @@
         primaryAction = `<button class="door-handle" type="button" data-action="practice-${finalRound ? 'finish' : 'next'}">${escapeHtml(finalRound ? outcomePracticeConfig.finishLabel : outcomePracticeConfig.nextLabel)}</button>`;
       }
       return `<div class="practice-cast">${people.map(entityId => practicePortrait(entityId, entityId === round.roleEntityId)).join('')}</div>
-        <div class="practice-copy"><h1>${escapeHtml(round.title || '')}</h1><p>${escapeHtml(round.instruction || outcomePracticeConfig.intro || '')}</p></div>
+        <div class="practice-copy"><h1 data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(round.title || '')}</h1>${(round.instruction || outcomePracticeConfig.intro) ? `<p>${escapeHtml(round.instruction || outcomePracticeConfig.intro)}</p>` : ''}</div>
         <ol class="practice-dialogue">${lines}</ol>
         <div class="outcome-practice-actions">
           ${primaryAction}
@@ -2314,18 +2584,23 @@
       const answered = ['audio-playing', 'audio-retry', 'answered'].includes(practiceSnapshot.phase);
       if (option.entityId) {
         const item = entity(option.entityId);
-        return `<button class="practice-option${selected ? ' is-selected' : ''}" type="button" data-action="practice-submit" data-value="${escapeHtml(option.optionId)}" ${answered ? 'disabled' : ''}>${entityVisual(option.entityId, { compact: true })}<strong>${escapeHtml(item.title)}</strong></button>`;
+        return `<button class="practice-option${selected ? ' is-selected' : ''}" type="button" data-action="practice-submit" data-value="${escapeHtml(option.optionId)}" ${answered ? 'disabled' : ''}>${entityVisual(option.entityId, { compact: true })}<strong>${escapeHtml(option.label || item.title)}</strong></button>`;
       }
       const item = source(option.sourceRef) || {};
-      return `<button class="practice-option practice-option--language${selected ? ' is-selected' : ''}" type="button" data-action="practice-submit" data-value="${escapeHtml(option.optionId)}" ${answered ? 'disabled' : ''}><strong>${escapeHtml(item.text || '')}</strong>${item.translation ? `<small>${escapeHtml(item.translation)}</small>` : ''}</button>`;
+      return `<button class="practice-option practice-option--language${selected ? ' is-selected' : ''}" type="button" data-action="practice-submit" data-value="${escapeHtml(option.optionId)}" ${answered ? 'disabled' : ''}><strong>${escapeHtml(item.text || '')}</strong></button>`;
     }
 
     function caseRecapPracticeMarkup(practiceSnapshot) {
       const item = practiceSnapshot.currentItem;
       const prompt = content(item.promptRef) || {};
       const finalItem = practiceSnapshot.currentIndex === outcomePracticeConfig.items.length - 1;
-      const feedback = practiceSnapshot.lastResponse
-        ? `<p class="practice-answer-feedback is-${practiceSnapshot.lastResponse.correct ? 'correct' : 'wrong'}" role="status">${escapeHtml(practiceSnapshot.lastResponse.correct ? outcomePracticeConfig.correctCopy : outcomePracticeConfig.wrongCopy)}</p>`
+      const feedbackCopy = practiceSnapshot.lastResponse
+        ? (practiceSnapshot.lastResponse.correct
+            ? outcomePracticeConfig.correctCopy
+            : outcomePracticeConfig.wrongCopy)
+        : '';
+      const feedback = feedbackCopy
+        ? `<p class="practice-answer-feedback is-${practiceSnapshot.lastResponse.correct ? 'correct' : 'wrong'}" role="status">${escapeHtml(feedbackCopy)}</p>`
         : '';
       const answerAudio = practiceSnapshot.lastResponse?.correct
         ? source(item.correctAudioRef)
@@ -2341,7 +2616,7 @@
       }
       return `<div class="practice-copy">
           <p class="practice-position">${escapeHtml(uiCopy.outcomePractice?.itemPrefix || '')}${practiceSnapshot.currentIndex + 1}${escapeHtml(uiCopy.outcomePractice?.itemSeparator || '')}${outcomePracticeConfig.items.length}${escapeHtml(uiCopy.outcomePractice?.itemSuffix || '')}</p>
-          <h1>${escapeHtml(prompt.text || '')}</h1><p>${escapeHtml(outcomePracticeConfig.intro || '')}</p>
+          <h1 data-copy-purpose="task" data-copy-priority="primary">${escapeHtml(prompt.text || '')}</h1>${outcomePracticeConfig.intro ? `<p>${escapeHtml(outcomePracticeConfig.intro)}</p>` : ''}
         </div>
         ${(item.sceneEntityIds || []).length ? `<div class="practice-scene-entities">${item.sceneEntityIds.map(entityId => entityVisual(entityId)).join('')}</div>` : ''}
         <div class="practice-options">${(item.options || []).map(option => recapOptionMarkup(option, practiceSnapshot)).join('')}</div>
@@ -2367,9 +2642,9 @@
       if (practiceSnapshot.status === 'finished') {
         return commonShell(`<section class="outcome-practice-card practice-finished" aria-label="${escapeHtml(uiCopy.outcomePractice?.regionLabel || '')}">
           ${milestoneCompanion(previewCopy.companionCompleteLabel || '')}
-          <p class="kicker">${escapeHtml(outcomePracticeConfig.kicker || '')}</p>
+          ${outcomePracticeConfig.kicker ? `<p class="kicker">${escapeHtml(outcomePracticeConfig.kicker)}</p>` : ''}
           <h1>${escapeHtml(outcomePracticeConfig.finishedTitle || '')}</h1>
-          <p>${escapeHtml(outcomePracticeConfig.finishedCopy || '')}</p>
+          ${outcomePracticeConfig.finishedCopy ? `<p>${escapeHtml(outcomePracticeConfig.finishedCopy)}</p>` : ''}
           <button class="door-handle" type="button" data-action="practice-exit">${escapeHtml(outcomePracticeConfig.returnLabel || '')}</button>
         </section>`, snapshot);
       }
@@ -2377,7 +2652,7 @@
         ? roleSwapPracticeMarkup(practiceSnapshot)
         : caseRecapPracticeMarkup(practiceSnapshot);
       return commonShell(`<section class="outcome-practice-card outcome-practice-card--${escapeHtml(practiceSnapshot.kind)}" data-practice-id="${escapeHtml(practiceSnapshot.practiceId)}" data-practice-kind="${escapeHtml(practiceSnapshot.kind)}" data-practice-phase="${escapeHtml(practiceSnapshot.phase)}" data-practice-session="${escapeHtml(practiceSnapshot.practiceSessionId)}" aria-label="${escapeHtml(uiCopy.outcomePractice?.regionLabel || '')}">
-        <p class="kicker">${escapeHtml(outcomePracticeConfig.kicker || '')}</p>
+        ${outcomePracticeConfig.kicker ? `<p class="kicker">${escapeHtml(outcomePracticeConfig.kicker)}</p>` : ''}
         ${body}
       </section>`, snapshot);
     }
@@ -2386,14 +2661,16 @@
       const chapter = unit.experience?.restStops?.[snapshot.nextRestStop?.restStopId]
         || unit.experience?.chapterStop
         || {};
+      const kicker = ui.previewMode ? previewCopy.kicker : chapter.kicker;
+      const detail = ui.previewMode
+        ? previewCopy.chapterCopy
+        : (ui.resting ? (chapter.restingCopy || previewCopy.defaultRestingCopy || '') : chapter.copy);
       return commonShell(`<div class="milestone-card chapter-card">
         ${milestoneCompanion(previewCopy.companionChapterLabel || '')}
         <div class="milestone-lamp" aria-hidden="true"><span>★</span></div>
-        <p class="kicker">${escapeHtml(ui.previewMode ? previewCopy.kicker : chapter.kicker)}</p>
+        ${kicker ? `<p class="kicker">${escapeHtml(kicker)}</p>` : ''}
         <h1>${escapeHtml(chapter.title)}</h1>
-        <p>${escapeHtml(ui.previewMode
-          ? previewCopy.chapterCopy
-          : (ui.resting ? (chapter.restingCopy || previewCopy.defaultRestingCopy || '') : chapter.copy))}</p>
+        ${detail ? `<p>${escapeHtml(detail)}</p>` : ''}
         <div class="chapter-actions">
           <button class="door-handle" type="button" data-action="chapter-continue">${escapeHtml(chapter.continueLabel)}</button>
           ${ui.previewMode
@@ -2406,15 +2683,17 @@
 
     function completionMarkup(snapshot) {
       const complete = unit.experience?.completion || {};
+      const kicker = ui.previewMode ? previewCopy.completeKicker : complete.kicker;
+      const detail = ui.previewMode ? previewCopy.completeCopy : complete.copy;
       return commonShell(`<div class="milestone-card completion-card">
         ${milestoneCompanion(previewCopy.companionCompleteLabel || '')}
-        <div class="opening-stars" aria-hidden="true"><i>✦</i><i>★</i><i>✦</i></div>
-        <p class="kicker">${escapeHtml(ui.previewMode ? previewCopy.completeKicker : complete.kicker)}</p>
+        <div class="opening-stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i></div>
+        ${kicker ? `<p class="kicker">${escapeHtml(kicker)}</p>` : ''}
         <h1>${escapeHtml(complete.title)}</h1>
-        <p>${escapeHtml(ui.previewMode ? previewCopy.completeCopy : complete.copy)}</p>
-        ${ui.previewMode
-          ? `<div class="saved-landmark"><span>${escapeHtml(previewCopy.isolatedLabel || '')}</span><strong>${escapeHtml(previewCopy.noProgressTitle || '')}</strong><small>${escapeHtml(previewCopy.returnCopy || '')}</small></div>`
-          : `<div class="saved-landmark"><span>${escapeHtml(previewCopy.dayBuildLabel || '')}</span><strong>${escapeHtml(previewCopy.savedTitle || '')}</strong><small>${escapeHtml(previewCopy.reviewGrowthCopy || '')}</small></div>`}
+        ${detail ? `<p>${escapeHtml(detail)}</p>` : ''}
+        ${!ui.previewMode && previewCopy.savedTitle
+          ? `<div class="saved-landmark"><strong>${escapeHtml(previewCopy.savedTitle)}</strong></div>`
+          : ''}
         <div class="chapter-actions completion-actions">
           ${ui.previewMode
             ? `<button class="quiet-action" type="button" data-action="preview-exit">${escapeHtml(previewCopy.exitLabel || '')}</button>`
@@ -2428,9 +2707,9 @@
       const returnLocation = ui.stageReplayOrigin?.locationLabel || unit.title;
       return commonShell(`<div class="milestone-card stage-replay-complete" data-stage-replay-complete="true">
         <div class="milestone-lamp stage-replay-complete__seal" aria-hidden="true"><span>✓</span></div>
-        <p class="kicker">${escapeHtml(previewCopy.completeKicker || '')}</p>
+        ${previewCopy.completeKicker ? `<p class="kicker">${escapeHtml(previewCopy.completeKicker)}</p>` : ''}
         <h1>${escapeHtml(previewCopy.replayCompleteTitle || '')}</h1>
-        <p>${escapeHtml(previewCopy.replayCompleteCopy || '')}</p>
+        ${previewCopy.replayCompleteCopy ? `<p>${escapeHtml(previewCopy.replayCompleteCopy)}</p>` : ''}
         <div class="stage-replay-complete__origin"><span>${escapeHtml(previewCopy.returnLocationPrefix || '')}</span><strong>${escapeHtml(returnLocation)}</strong></div>
         <div class="chapter-actions stage-replay-complete__actions">
           <button class="door-handle" type="button" data-action="preview-exit">${escapeHtml(previewCopy.returnLearningLabel || '')}</button>
@@ -2751,6 +3030,30 @@
         exitOutcomePractice();
         return;
       }
+      if (action === 'practice-skip') {
+        if (button.disabled) return;
+        ui.roleSkipConfirmOpen = true;
+        render();
+        global.queueMicrotask(() => root.querySelector('[data-action="role-skip-cancel"]')?.focus());
+        return;
+      }
+      if (action === 'practice-skip-retry') {
+        const effects = outcomePracticeRuntime?.dispatch({ type: 'role/save-retry' }) || [];
+        processPracticeEffects(effects);
+        return;
+      }
+      if (action === 'practice-return-learning') {
+        pauseVoice();
+        outcomePracticeRuntime?.destroy();
+        outcomePracticeRuntime = null;
+        outcomePracticeConfig = null;
+        dispatch({ type: 'navigation/exit-skip-recovery' });
+        return;
+      }
+      if (action === 'practice-complete-recovery') {
+        completeRequiredRolePractice();
+        return;
+      }
       if (outcomePracticeRuntime && action.startsWith('practice-')) {
         const practiceSnapshot = outcomePracticeRuntime.snapshot();
         let effects = [];
@@ -2848,26 +3151,22 @@
         global.queueMicrotask(() => root.querySelector('[data-action="toggle-settings"]')?.focus());
         return;
       }
+      if (action === 'role-skip-cancel') {
+        ui.roleSkipConfirmOpen = false;
+        render();
+        global.queueMicrotask(() => root.querySelector('[data-action="practice-skip"]')?.focus());
+        return;
+      }
+      if (action === 'role-skip-confirm') {
+        ui.roleSkipConfirmOpen = false;
+        const effects = outcomePracticeRuntime?.dispatch({ type: 'role/skip' }) || [];
+        processPracticeEffects(effects);
+        return;
+      }
       if (action === 'restart-confirm') {
         pauseVoice();
         try { global.localStorage.removeItem(storageKey); } catch { /* no-op */ }
         global.location.reload();
-        return;
-      }
-      if (action === 'start') {
-        const durable = ledger.read().units?.[unit.unitId];
-        if (
-          ui.view === 'arrival'
-          && !durable?.checkpoint
-          && unit.experience?.briefing
-        ) {
-          ui.view = 'briefing';
-          render();
-          return;
-        }
-        ui.view = 'mission';
-        runtime.enter({ entryLesson });
-        flushEffectsAndRender();
         return;
       }
       if (action === 'audio-play') {
@@ -2995,6 +3294,7 @@
         }
       }
       if (action === 'remove-block') ui.selectedBlockRefs = ui.selectedBlockRefs.filter(refId => refId !== value);
+      if (action === 'reset-blocks') ui.selectedBlockRefs = [];
       if (action === 'add-sequence' && !ui.selectedSequenceIds.includes(value)) {
         ui.selectedSequenceIds.push(value);
         if (step?.kind === 'ordered-sequence'
@@ -3007,7 +3307,7 @@
         ui.selectedSequenceIds = ui.selectedSequenceIds.filter(panelId => panelId !== value);
       }
       if ([
-        'select-entity', 'select-target', 'select-source', 'add-block', 'remove-block',
+        'select-entity', 'select-target', 'select-source', 'add-block', 'remove-block', 'reset-blocks',
         'add-sequence', 'remove-sequence'
       ].includes(action)) {
         render();
@@ -3036,19 +3336,24 @@
       if (action === 'persistence-retry') dispatch({ type: 'persistence/retry' });
     });
 
+    function onGlobalKeydown(event) {
+      if (event.key !== 'Escape' || !ui.roleSkipConfirmOpen) return;
+      event.preventDefault();
+      ui.roleSkipConfirmOpen = false;
+      render();
+      global.queueMicrotask(() => root.querySelector('[data-action="practice-skip"]')?.focus());
+    }
+
     global.addEventListener('pagehide', suspendRequiredAudio);
     global.addEventListener('pageshow', resumeRequiredAudio);
     global.addEventListener('wheel', stopDialogueFollowing, { passive: true });
     global.addEventListener('touchmove', stopDialogueFollowing, { passive: true });
     global.addEventListener('resize', scheduleResponsiveSceneLayout);
+    global.addEventListener('keydown', onGlobalKeydown);
     global.document.addEventListener('visibilitychange', onVisibilityChange);
-    if (durableResumeAvailable()) {
-      ui.view = 'mission';
-      runtime.enter({ entryLesson });
-      flushEffectsAndRender({ deferAudio: true });
-    } else {
-      render();
-    }
+    const hasDurableResume = durableResumeAvailable();
+    runtime.enter({ entryLesson });
+    flushEffectsAndRender({ deferAudio: hasDurableResume });
     return Object.freeze({
       destroy: () => {
         if (ui.destroyed) return { snapshot: runtime.snapshot(), effects: [] };
@@ -3058,10 +3363,15 @@
         global.removeEventListener('wheel', stopDialogueFollowing);
         global.removeEventListener('touchmove', stopDialogueFollowing);
         global.removeEventListener('resize', scheduleResponsiveSceneLayout);
+        global.removeEventListener('keydown', onGlobalKeydown);
         if (responsiveSceneLayoutFrame !== null) {
           global.cancelAnimationFrame?.(responsiveSceneLayoutFrame);
           responsiveSceneLayoutFrame = null;
         }
+        for (const audio of audioPreloadCache.values()) {
+          try { audio.pause?.(); } catch { /* no-op */ }
+        }
+        audioPreloadCache.clear();
         global.document.removeEventListener('visibilitychange', onVisibilityChange);
         if (
           ui.stageReplayOrigin?.outcomePracticeRuntime

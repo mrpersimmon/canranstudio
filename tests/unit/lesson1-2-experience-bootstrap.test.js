@@ -2,6 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { createHash } = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
@@ -64,10 +65,27 @@ function runBootstrap({ mount, includeScene = true } = {}) {
   return { root, errors, reloadListeners, thrown };
 }
 
-test('Lesson 1–2 HTML paints a startup surface before any script can run', () => {
-  assert.match(pageSource, /<main[^>]*data-learning-microtask-experience[^>]*>[\s\S]*data-experience-startup/);
-  assert.match(pageSource, /data-startup-state="loading"/);
-  assert.match(pageSource, /data-startup-reload/);
+test('Lesson 1–2 HTML paints an automatic course-package loader before any runtime script can run', () => {
+  assert.match(pageSource, /<main[^>]*data-learning-microtask-experience[^>]*data-course-package-entry/);
+  assert.match(pageSource, /data-course-package-shell[^>]*data-package-state="checking"/);
+  assert.match(pageSource, /data-package-progress/);
+  assert.doesNotMatch(pageSource, /data-package-start/);
+  assert.equal((pageSource.match(/course-package-cat[\s\S]*?<\/div>/)?.[0].match(/<img\b/g) || []).length, 4);
+  assert.doesNotMatch(pageSource, /data-experience-startup|class="station-app"/);
+});
+
+test('Lesson 1–2 loader is a single child-facing status surface, not a package explanation', () => {
+  const bodyMarkup = pageSource.slice(pageSource.indexOf('<body>'));
+  assert.match(bodyMarkup, /<h1>Lesson 1–2<\/h1>/);
+  assert.equal((bodyMarkup.match(/data-package-progress(?=[\s=>])/g) || []).length, 1);
+  assert.equal((bodyMarkup.match(/data-package-status\b/g) || []).length, 1);
+  assert.equal((bodyMarkup.match(/data-package-percent\b/g) || []).length, 1);
+  assert.doesNotMatch(bodyMarkup, /course-package-intro|data-package-bytes|data-package-phase|data-package-slow/);
+  assert.doesNotMatch(
+    bodyMarkup,
+    /先把整课|开始后就不用再等|所有人物、图片和声音|课程清单|\bMB\b/
+  );
+  assert.match(bodyMarkup, /data-package-continue[^>]*>继续等待<\/button>/);
 });
 
 test('Lesson 1–2 bootstrap replaces a missing core dependency with recovery UI', () => {
@@ -106,41 +124,45 @@ test('Lesson 1–2 bootstrap still delegates the healthy path to the scene mount
 
 const pageScriptSources = [...pageSource.matchAll(/<script\s+src="([^"]+)"\s*><\/script>/g)]
   .map(match => match[1]);
-const pageStylesheetSources = [...pageSource.matchAll(
-  /<link\b(?=[^>]*\brel="stylesheet")(?=[^>]*\bhref="([^"]+)")[^>]*>/g
-)].map(match => match[1]);
+const runtimeScriptSources = JSON.parse(pageSource.match(/data-course-scripts='([^']+)'/)?.[1] || '[]');
+const pageStylesheetSources = JSON.parse(pageSource.match(/data-course-styles='([^']+)'/)?.[1] || '[]');
 const pageScriptPaths = pageScriptSources
   .map(source => new URL(source, 'http://lesson.local').pathname);
 const pageDocumentRevision = new URL(
-  pageScriptSources[0],
+  runtimeScriptSources.at(-1),
   'http://lesson.local'
 ).searchParams.get('v');
 const bootstrapRevision = bootstrapSource.match(
   /const BOOT_REVISION = '([^']+)'/
 )?.[1] || '';
-const entryRescueSource = pageSource.match(
-  /<script\s+data-entry-rescue>([\s\S]*?)<\/script>/
-)?.[1] || '';
-
-test('Lesson 1–2 pins scripts, stylesheets, and bootstrap recovery to one document revision', () => {
-  const scriptRevisions = pageScriptSources.map(source => (
+test('Lesson 1–2 pins bootstrap and deferred runtime behind one hashed manifest', () => {
+  const bootstrapRevisions = pageScriptSources.map(source => (
+    new URL(source, 'http://lesson.local').searchParams.get('v')
+  ));
+  const runtimeRevisions = runtimeScriptSources.map(source => (
     new URL(source, 'http://lesson.local').searchParams.get('v')
   ));
   const stylesheetRevisions = pageStylesheetSources.map(source => (
     new URL(source, 'http://lesson.local').searchParams.get('v')
   ));
+  const expectedManifestHash = pageSource.match(/data-manifest-sha256="([a-f0-9]{64})"/)?.[1];
+  const actualManifestHash = createHash('sha256').update(fs.readFileSync(path.join(
+    ROOT,
+    'poc/lesson1-2-experience/course-package-manifest.json'
+  ))).digest('hex');
 
-  assert.equal(scriptRevisions.length, 7);
-  assert.ok(scriptRevisions.every(Boolean));
-  assert.equal(new Set(scriptRevisions).size, 1);
+  assert.deepEqual(pageScriptPaths, [
+    '/core/course-package-installer.js',
+    '/core/course-package-entry.js'
+  ]);
+  assert.deepEqual(bootstrapRevisions, ['course-package-v1', 'course-package-v1']);
+  assert.equal(runtimeRevisions.length, 6);
+  assert.ok(runtimeRevisions.every(Boolean));
+  assert.equal(new Set(runtimeRevisions).size, 1);
   assert.ok(pageStylesheetSources.length > 0);
   assert.ok(stylesheetRevisions.every(Boolean));
-  assert.deepEqual(
-    stylesheetRevisions,
-    Array(pageStylesheetSources.length).fill(scriptRevisions[0])
-  );
-  assert.equal(bootstrapRevision, scriptRevisions[0]);
-  assert.match(pageSource, new RegExp(`data-startup-reload href="\\?v=${scriptRevisions[0]}"`));
+  assert.equal(bootstrapRevision, runtimeRevisions[0]);
+  assert.equal(expectedManifestHash, actualManifestHash);
 });
 
 function runRealPageScripts({ initialHtml = null, omitSource = null, storedEntries = [] } = {}) {
@@ -181,6 +203,7 @@ function runRealPageScripts({ initialHtml = null, omitSource = null, storedEntri
     removeEventListener() {}
   };
   const context = vm.createContext({
+    CanranCore: { curriculumCatalog },
     document,
     localStorage: {
       getItem(key) { return stored.has(key) ? stored.get(key) : null; },
@@ -234,10 +257,7 @@ function runRealPageScripts({ initialHtml = null, omitSource = null, storedEntri
   const loadedSources = [];
   let thrown = null;
   try {
-    if (entryRescueSource) {
-      vm.runInContext(entryRescueSource, context, { filename: 'entry-rescue.js' });
-    }
-    for (const source of pageScriptSources) {
+    for (const source of runtimeScriptSources) {
       const sourcePath = new URL(source, 'http://lesson.local').pathname;
       if (source === omitSource || sourcePath === omitSource) continue;
       const filename = sourcePath.replace(/^\//, '');
@@ -251,6 +271,7 @@ function runRealPageScripts({ initialHtml = null, omitSource = null, storedEntri
   return {
     clickAction,
     clickActionWithCaptureCheckpoint,
+    captureClickListeners,
     document,
     errors,
     loadedSources,
@@ -281,9 +302,8 @@ function encodedLessonProgress(unitState) {
   });
 }
 
-test('Lesson 1–2 real index script chain boots the arrival scene without an uncaught error', () => {
-  assert.deepEqual(pageScriptPaths, [
-    '/core/curriculum-catalog.js',
+test('Lesson 1–2 deferred runtime script chain boots the first mission without an uncaught error', () => {
+  assert.deepEqual(runtimeScriptSources.map(source => new URL(source, 'http://lesson.local').pathname), [
     '/core/learning-store.js',
     '/core/learning-ledger.js',
     '/core/learning-runtime.js',
@@ -295,14 +315,31 @@ test('Lesson 1–2 real index script chain boots the arrival scene without an un
   const result = runRealPageScripts();
 
   assert.equal(result.thrown, null);
-  assert.equal(result.loadedSources.length, 7);
+  assert.equal(result.loadedSources.length, 6);
   assert.equal(result.errors.length, 0);
   assert.match(result.root.innerHTML, /class="station-app"/);
-  assert.match(result.root.innerHTML, /class="arrival-card"/);
+  assert.match(result.root.innerHTML, /data-view="mission"/);
+  assert.match(result.root.innerHTML, /data-runtime-microtask="L01-M07"/);
+  assert.match(result.root.innerHTML, /data-presentation-moment="story-briefing"/);
+  assert.doesNotMatch(result.root.innerHTML, /class="arrival-card"|class="briefing-card"/);
   assert.equal(result.document.title, 'Lesson 1–2 · 星灯失物招领站');
 });
 
-test('Lesson 1–2 real bootstrap restores a completed unit before the first page paint', () => {
+test('I04 package readiness enters the first mission without a start gate or stage map', () => {
+  assert.doesNotMatch(pageSource, /data-package-start/);
+
+  const result = runRealPageScripts();
+
+  assert.equal(result.thrown, null);
+  assert.match(result.root.innerHTML, /data-view="mission"/);
+  assert.match(result.root.innerHTML, /data-runtime-microtask="L01-M07"/);
+  assert.doesNotMatch(
+    result.root.innerHTML,
+    /class="arrival-card"|class="briefing-card"|id="course-stage-map"/
+  );
+});
+
+test('Lesson 1–2 deferred runtime restores a completed unit when the package gate opens', () => {
   const result = runRealPageScripts({
     storedEntries: [[LESSON_STORAGE_KEY, encodedLessonProgress({
       unitAttemptId: 'completed-attempt',
@@ -319,7 +356,7 @@ test('Lesson 1–2 real bootstrap restores a completed unit before the first pag
   assert.deepEqual(result.replacementUrls, []);
 });
 
-test('Lesson 1–2 real bootstrap restores a saved terminal presentation before the first page paint', () => {
+test('Lesson 1–2 deferred runtime restores a saved terminal presentation when the package gate opens', () => {
   const firstTask = LESSON_MICROTASKS[0];
   const terminalMoment = firstTask.presentation.moments.find(moment => (
     moment.enterWhen?.kind === 'microtask-complete'
@@ -367,15 +404,9 @@ test('Lesson 1–2 real bootstrap paints failed startup UI when outcome practice
   assert.equal(result.errors.length, 1);
 });
 
-test('Lesson 1–2 real arrival entry click advances through briefing into the first mission', async () => {
+test('Lesson 1–2 enters the first mission without a synthetic start click', async () => {
   const result = runRealPageScripts();
-  assert.equal(result.rootClickListeners.length, entryRescueSource ? 2 : 1);
-  assert.match(result.root.innerHTML, /class="arrival-card"/);
-
-  result.clickAction('start');
-  assert.match(result.root.innerHTML, /class="briefing-card"/);
-
-  result.clickAction('start');
+  assert.equal(result.rootClickListeners.length, 1);
   await new Promise(resolve => queueMicrotask(resolve));
   assert.match(result.root.innerHTML, /data-view="mission"/);
   assert.match(result.root.innerHTML, /data-runtime-microtask="L01-M07"/);
@@ -384,41 +415,29 @@ test('Lesson 1–2 real arrival entry click advances through briefing into the f
   assert.deepEqual(result.replacementUrls, []);
 });
 
-test('Lesson 1–2 entry rescue waits for the ordinary start listener across a capture microtask checkpoint', async () => {
+test('Lesson 1–2 deferred runtime keeps only its ordinary delegated interaction listener', async () => {
   const result = runRealPageScripts();
-  assert.match(result.root.innerHTML, /class="arrival-card"/);
-
-  await result.clickActionWithCaptureCheckpoint('start');
-  await new Promise(resolve => setTimeout(resolve, 0));
-
-  assert.match(result.root.innerHTML, /class="briefing-card"/);
+  assert.match(result.root.innerHTML, /data-view="mission"/);
+  assert.equal(result.rootClickListeners.length, 1);
+  assert.equal(result.captureClickListeners.length, 0);
+  assert.doesNotMatch(result.root.innerHTML, /data-action="start"/);
   assert.deepEqual(result.replacementUrls, []);
 });
 
-test('Lesson 1–2 real arrival entry remains clickable with a malformed recovery record', () => {
+test('Lesson 1–2 malformed recovery record still falls back to the first mission', () => {
   const result = runRealPageScripts({
     storedEntries: [['poc:learning-experience:NCE-U01:lesson1-2-v2.1', '{malformed-json']]
   });
   assert.equal(result.thrown, null);
-  assert.match(result.root.innerHTML, /class="arrival-card"/);
-
-  result.clickAction('start');
-  assert.match(result.root.innerHTML, /class="briefing-card"/);
+  assert.match(result.root.innerHTML, /data-view="mission"/);
+  assert.match(result.root.innerHTML, /data-runtime-microtask="L01-M07"/);
+  assert.doesNotMatch(result.root.innerHTML, /class="arrival-card"|class="briefing-card"/);
   assert.equal(result.errors.length, 0);
 });
 
-test('Lesson 1–2 entry rescue fresh-navigates a painted arrival when bootstrap did not run', async () => {
-  const healthy = runRealPageScripts();
-  const detached = runRealPageScripts({
-    initialHtml: healthy.root.innerHTML,
-    omitSource: '/poc/lesson1-2-experience/experience.js'
-  });
-  assert.match(detached.root.innerHTML, /class="arrival-card"/);
-  assert.equal(detached.rootClickListeners.length, 1);
-
-  const beforeClick = detached.root.innerHTML;
-  detached.clickAction('start');
-  await new Promise(resolve => setTimeout(resolve, 0));
-  assert.equal(detached.root.innerHTML, beforeClick);
-  assert.deepEqual(detached.replacementUrls, [`?v=${pageDocumentRevision}&recover=entry-noop`]);
+test('Lesson 1–2 initial document does not eagerly include deferred course scripts', () => {
+  for (const source of runtimeScriptSources) {
+    assert.equal(pageScriptSources.includes(source), false);
+  }
+  assert.equal(pageDocumentRevision, bootstrapRevision);
 });

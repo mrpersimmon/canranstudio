@@ -198,6 +198,16 @@
     return shuffled;
   }
 
+  function shuffledIdsWithConstraint(ids, seed, constraint, acceptedOrder) {
+    const shuffled = shuffledIds(ids, seed);
+    if (constraint !== 'not-accepted-order' || shuffled.length < 2) return shuffled;
+    const accepted = Array.isArray(acceptedOrder) ? acceptedOrder : [];
+    const matches = shuffled.length === accepted.length
+      && accepted.every((value, index) => shuffled[index] === value);
+    if (!matches) return shuffled;
+    return [...shuffled.slice(1), shuffled[0]];
+  }
+
   let audioRequestNamespaceSequence = 0;
 
   function createLesson12V2({ unit, ledger, effectSink, seed, outbox }) {
@@ -210,6 +220,8 @@
     const audioRequestNamespace = ++audioRequestNamespaceSequence;
     let sandboxActive = false;
     let sandboxOrigin = null;
+    let skipRecoveryActive = false;
+    let skipRecoveryOrigin = null;
     let endedPresentationMomentIds = new Set();
     let pendingPresentationContinuation = null;
     let durableRolePracticeProgress = {};
@@ -250,8 +262,10 @@
       pendingCommit: null,
       pendingUiContinuation: null,
       rolePracticeProgress: null,
+      rolePracticeSkipStatus: null,
       committedFacts: [],
       completedMicrotaskIds: [],
+      skippedMicrotaskIds: [],
       reachedMicrotaskIds: [],
       stageNavigation: [],
       nextRestStop: null,
@@ -375,6 +389,7 @@
     function refreshNavigation(currentMicrotaskId = state.microtaskId) {
       const reached = new Set([
         ...state.completedMicrotaskIds,
+        ...state.skippedMicrotaskIds,
         ...(currentMicrotaskId ? [currentMicrotaskId] : [])
       ]);
       state = {
@@ -387,7 +402,9 @@
           title: task.navigationTitle || task.presentation?.title || task.microtaskId,
           status: state.completedMicrotaskIds.includes(task.microtaskId)
             ? 'completed'
-            : (task.microtaskId === currentMicrotaskId ? 'current' : 'locked')
+            : (state.skippedMicrotaskIds.includes(task.microtaskId)
+                ? 'skipped'
+                : (task.microtaskId === currentMicrotaskId ? 'current' : 'locked'))
         }))
       };
     }
@@ -427,7 +444,12 @@
         shuffleSeed,
         optionIds: shuffleSeed === null
           ? candidateIds(challenge)
-          : shuffledIds(candidateIds(challenge), shuffleSeed),
+          : shuffledIdsWithConstraint(
+              candidateIds(challenge),
+              shuffleSeed,
+              challenge.shuffleConstraint || step.shuffleConstraint,
+              challenge.answerRule?.acceptedOrder || step.answerRule?.acceptedOrder
+            ),
         supportLevel: 'none',
         supportDepth: 0,
         audio: null
@@ -451,6 +473,11 @@
                 ? []
                 : clone(
                     durableRolePracticeProgress[step.practice.practiceId]?.completedRoundIds || []
+                  ),
+              skippedRoundIds: sandboxActive
+                ? []
+                : clone(
+                    durableRolePracticeProgress[step.practice.practiceId]?.skippedRoundIds || []
                   )
             }
           : null
@@ -924,12 +951,15 @@
       }
       const task = currentTask();
       const completedMicrotaskIds = [...new Set([...state.completedMicrotaskIds, task.microtaskId])];
+      const skippedMicrotaskIds = state.skippedMicrotaskIds
+        .filter(microtaskId => microtaskId !== task.microtaskId);
       const committedFacts = [...new Set([...state.committedFacts, ...(payload.storyFacts || [])])];
       const pendingUiContinuation = durableContinuation();
       transition({
         pendingCommit: null,
         pendingUiContinuation,
         completedMicrotaskIds,
+        skippedMicrotaskIds,
         committedFacts,
         temporaryResults: [],
         temporaryAudioContactRefs: [],
@@ -943,6 +973,10 @@
         checkpointId: payload.checkpointId,
         completionStatus: payload.completionStatus
       }];
+      if (skipRecoveryActive) {
+        effects.push(...restoreSkipRecoveryOrigin({ completed: true }));
+        return effects;
+      }
       if (task.growthBoundary === 'unit-verifying') {
         effects.push(...armPresentationContinuation({ kind: 'enter-unit-verifying' }));
         return effects;
@@ -1082,27 +1116,129 @@
         : null;
     }
 
-    function completeRolePracticeRound(action) {
+    function roleRoundEvidence(round, disposition) {
+      const dialogueTurnRefs = clone(round.dialogueTurnRefs || []);
+      if (disposition === 'skipped') {
+        return {
+          targetResults: [], sourceContacts: [], audioContactRefs: [],
+          missingAudioRefs: [], storyFacts: []
+        };
+      }
+      return {
+        targetResults: [],
+        sourceContacts: dialogueTurnRefs.map(sourceRef => ({
+          sourceRef,
+          contactModes: ['experienced', 'audio-ended']
+        })),
+        audioContactRefs: dialogueTurnRefs,
+        missingAudioRefs: [],
+        storyFacts: []
+      };
+    }
+
+    function skipResolvedRolePractice(task) {
+      const event = {
+        eventId: [
+          'runtime', unit.unitId, unit.experienceRevision, state.unitAttemptId,
+          task.microtaskId, 'skipped'
+        ].join(':'),
+        type: 'microtask-skipped',
+        unitId: unit.unitId,
+        experienceRevision: unit.experienceRevision,
+        unitAttemptId: state.unitAttemptId,
+        attemptRevision: state.attemptRevision,
+        beatId: authoredTasks[activeTaskIndex].beatId,
+        microtaskId: task.microtaskId,
+        checkpointId: task.checkpointAfterSuccess?.checkpointId || `${task.microtaskId}:complete`,
+        completionStatus: 'skipped',
+        targetResults: [],
+        sourceContacts: [],
+        audioContactRefs: [],
+        missingAudioRefs: [],
+        storyFacts: [],
+        adventureHeartsRemaining: state.adventureHearts
+      };
+      const applied = ledger.apply(event);
+      if (applied?.persisted !== true) {
+        return [{
+          type: 'runtime/persistence-failed',
+          operation: event.type,
+          reason: applied?.reason || applied?.status || 'unavailable',
+          retryable: true
+        }];
+      }
+      const projected = ledger.read()?.units?.[unit.unitId] || {};
+      if (!(projected.skippedMicrotaskIds || []).includes(task.microtaskId)) {
+        return [{
+          type: 'runtime/skip-readback-incomplete',
+          microtaskId: task.microtaskId,
+          retryable: true
+        }];
+      }
+      transition({
+        skippedMicrotaskIds: clone(projected.skippedMicrotaskIds || []),
+        completedMicrotaskIds: clone(projected.completedMicrotaskIds || []),
+        microtaskStatus: 'skipped'
+      });
+      const effects = [{
+        type: 'runtime/microtask-skipped',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: task.microtaskId,
+        completionStatus: 'skipped'
+      }];
+      const next = enterTask(activeTaskIndex + 1);
+      if (!next) {
+        effects.push(...verifyUnitAndBuild());
+        return effects;
+      }
+      effects.push({
+        type: 'scene/show',
+        experienceRevision: unit.experienceRevision,
+        beatId: next.beatId,
+        microtaskId: next.task.microtaskId,
+        stepId: next.task.steps[0].stepId,
+        advancedFromSkip: true
+      });
+      const audio = startReadyAudio();
+      if (audio) effects.push(audio);
+      return effects;
+    }
+
+    function saveRolePracticeRoundDisposition(action, disposition) {
       const invalid = validateCommand(action);
       if (invalid) return reject(invalid);
+      const task = currentTask();
       const practice = activeRolePractice();
       if (!practice || state.phase !== 'role-practice-ready') {
         return reject('role-practice-not-active');
       }
       if (action.practiceId !== practice.practiceId) return reject('practice-id-mismatch');
-      if (!(practice.rounds || []).some(round => round.roundId === action.roundId)) {
-        return reject('role-round-invalid');
+      const round = (practice.rounds || []).find(candidate => candidate.roundId === action.roundId);
+      if (!round) return reject('role-round-invalid');
+      if (task.skipPolicy?.kind !== 'role-round-child-confirmed') {
+        return reject('role-practice-disposition-policy-invalid');
       }
-      if (state.rolePracticeProgress?.completedRoundIds.includes(action.roundId)) {
+      if (disposition === 'completed'
+        && state.rolePracticeProgress?.completedRoundIds.includes(action.roundId)) {
         return reject('role-round-already-complete');
       }
       if (sandboxActive) {
+        if (disposition !== 'completed') return reject('sandbox-cannot-skip');
         const completedRoundIds = [
           ...state.rolePracticeProgress.completedRoundIds,
           action.roundId
         ];
         transition({
-          rolePracticeProgress: { practiceId: practice.practiceId, completedRoundIds }
+          rolePracticeProgress: {
+            practiceId: practice.practiceId,
+            completedRoundIds,
+            skippedRoundIds: (state.rolePracticeProgress.skippedRoundIds || [])
+              .filter(roundId => roundId !== action.roundId)
+          },
+          temporaryAudioContactRefs: [...new Set([
+            ...state.temporaryAudioContactRefs,
+            ...(round.dialogueTurnRefs || [])
+          ])]
         });
         return publish([{
           type: 'runtime/role-practice-round-saved',
@@ -1110,21 +1246,27 @@
           microtaskId: state.microtaskId,
           practiceId: practice.practiceId,
           roundId: action.roundId,
+          disposition,
+          completedRoundIds: clone(completedRoundIds),
+          skippedRoundIds: clone(state.rolePracticeProgress.skippedRoundIds || []),
           persistence: 'none'
         }]);
       }
       const event = {
         eventId: [
           'runtime', unit.unitId, unit.experienceRevision, state.unitAttemptId,
-          state.microtaskId, practice.practiceId, action.roundId, 'completed'
+          state.microtaskId, practice.practiceId, action.roundId, disposition
         ].join(':'),
-        type: 'role-practice-round-completed',
+        type: disposition === 'completed'
+          ? 'role-practice-round-completed'
+          : 'role-practice-round-skipped',
         unitId: unit.unitId,
         experienceRevision: unit.experienceRevision,
         unitAttemptId: state.unitAttemptId,
         microtaskId: state.microtaskId,
         practiceId: practice.practiceId,
-        roundId: action.roundId
+        roundId: action.roundId,
+        ...roleRoundEvidence(round, disposition)
       };
       const applied = ledger.apply(event);
       if (applied?.persisted !== true) {
@@ -1138,7 +1280,13 @@
       const projected = clone(
         ledger.read()?.units?.[unit.unitId]?.rolePracticeProgress?.[practice.practiceId]
       );
-      if (!projected?.completedRoundIds?.includes(action.roundId)) {
+      const dispositionPersisted = disposition === 'completed'
+        ? projected?.completedRoundIds?.includes(action.roundId)
+        : (
+            projected?.completedRoundIds?.includes(action.roundId)
+            || projected?.skippedRoundIds?.includes(action.roundId)
+          );
+      if (!dispositionPersisted) {
         return publish([{
           type: 'runtime/role-practice-readback-incomplete',
           practiceId: practice.practiceId,
@@ -1147,20 +1295,45 @@
         }]);
       }
       durableRolePracticeProgress[practice.practiceId] = projected;
+      const completed = new Set(projected.completedRoundIds || []);
+      const skipped = new Set(projected.skippedRoundIds || []);
+      const completedAudioRefs = (practice.rounds || [])
+        .filter(candidate => completed.has(candidate.roundId))
+        .flatMap(candidate => candidate.dialogueTurnRefs || []);
       transition({
         rolePracticeProgress: {
           practiceId: practice.practiceId,
-          completedRoundIds: clone(projected.completedRoundIds)
-        }
+          completedRoundIds: clone(projected.completedRoundIds || []),
+          skippedRoundIds: clone(projected.skippedRoundIds || [])
+        },
+        temporaryAudioContactRefs: [...new Set(completedAudioRefs)]
       });
-      return publish([{
+      const effects = [{
         type: 'runtime/role-practice-round-saved',
         experienceRevision: unit.experienceRevision,
         microtaskId: state.microtaskId,
         practiceId: practice.practiceId,
         roundId: action.roundId,
+        disposition,
+        completedRoundIds: clone(projected.completedRoundIds || []),
+        skippedRoundIds: clone(projected.skippedRoundIds || []),
         persistence: 'durable'
-      }]);
+      }];
+      const allDisposed = (practice.rounds || []).every(candidate => (
+        completed.has(candidate.roundId) || skipped.has(candidate.roundId)
+      ));
+      if (allDisposed && skipped.size > 0 && !skipRecoveryActive) {
+        effects.push(...skipResolvedRolePractice(task));
+      }
+      return publish(effects);
+    }
+
+    function completeRolePracticeRound(action) {
+      return saveRolePracticeRoundDisposition(action, 'completed');
+    }
+
+    function skipRolePracticeRound(action) {
+      return saveRolePracticeRoundDisposition(action, 'skipped');
     }
 
     function completeRolePractice(action) {
@@ -1183,6 +1356,53 @@
       }
       transition({ completedStepIds: [...new Set([...state.completedStepIds, state.stepId])] });
       return publish(beginPendingCommit());
+    }
+
+    function restoreSkipRecoveryOrigin({ completed = false } = {}) {
+      if (!skipRecoveryActive || !skipRecoveryOrigin) return [];
+      const origin = skipRecoveryOrigin;
+      const nextVersion = state.stateVersion + 1;
+      const projected = ledger.read()?.units?.[unit.unitId] || {};
+      const originAudio = clone(origin.state.audio);
+      const restartOriginAudio = originAudio
+        && ['audio-playing', 'audio-retry', 'audio-suspended'].includes(origin.state.phase);
+      skipRecoveryActive = false;
+      skipRecoveryOrigin = null;
+      activeTaskIndex = origin.activeTaskIndex;
+      endedPresentationMomentIds = new Set(origin.endedPresentationMomentIds || []);
+      pendingPresentationContinuation = clone(origin.pendingPresentationContinuation || null);
+      durableRolePracticeProgress = clone(projected.rolePracticeProgress || {});
+      state = {
+        ...clone(origin.state),
+        stateVersion: nextVersion,
+        mode: 'microtask-v2',
+        completedMicrotaskIds: clone(projected.completedMicrotaskIds || []),
+        skippedMicrotaskIds: clone(projected.skippedMicrotaskIds || []),
+        committedFacts: clone(projected.storyFacts || []),
+        buildStage: Number.isInteger(projected.buildStage) ? projected.buildStage : origin.state.buildStage,
+        rolePracticeSkipStatus: null,
+        ...(restartOriginAudio ? { phase: 'audio-ready', audio: null } : {})
+      };
+      refreshNavigation(state.status === 'unit-built' ? null : state.microtaskId);
+      const effects = [{
+        type: completed
+          ? 'runtime/skipped-stage-completed'
+          : 'runtime/skipped-stage-returned',
+        experienceRevision: unit.experienceRevision,
+        microtaskId: 'L01-M12'
+      }, {
+        type: 'scene/show',
+        experienceRevision: unit.experienceRevision,
+        beatId: state.beatId,
+        microtaskId: state.microtaskId,
+        stepId: state.stepId,
+        resumedFromSkipRecovery: true
+      }];
+      if (restartOriginAudio) {
+        const audio = startReadyAudio();
+        if (audio) effects.push(audio);
+      }
+      return effects;
     }
 
     function enterTask(taskIndex) {
@@ -1211,6 +1431,7 @@
         pendingCommit: null,
         pendingUiContinuation: null,
         rolePracticeProgress: null,
+        rolePracticeSkipStatus: null,
         supportLevel: 'none',
         supportDepth: 0,
         rescueUsed: false,
@@ -1295,6 +1516,7 @@
         adventureHearts: compatibleHearts,
         adventureHeartsRemaining: compatibleHearts,
         completedMicrotaskIds: clone(compatible.completedMicrotaskIds || []),
+        skippedMicrotaskIds: clone(compatible.skippedMicrotaskIds || []),
         committedFacts: clone(compatible.storyFacts || []),
         buildStage: Number.isInteger(compatible.buildStage) ? compatible.buildStage : 0,
         diagnosticArchive: stored.experienceRevision
@@ -1331,6 +1553,7 @@
       }
       const allAuthoredTasksCompleted = authoredTasks.every(({ task }) => (
         state.completedMicrotaskIds.includes(task.microtaskId)
+        || state.skippedMicrotaskIds.includes(task.microtaskId)
       ));
       if (allAuthoredTasksCompleted) {
         enterTask(authoredTasks.length - 1);
@@ -1374,6 +1597,7 @@
       const nextIndex = authoredTasks.findIndex(({ task }, index) => (
         index >= Math.max(0, firstForLesson)
         && !state.completedMicrotaskIds.includes(task.microtaskId)
+        && !state.skippedMicrotaskIds.includes(task.microtaskId)
       ));
       const authored = enterTask(nextIndex < 0 ? firstForLesson : nextIndex);
       if (!authored) return publish([]);
@@ -1512,7 +1736,8 @@
           return reject('sandbox-already-active');
         }
         if (!state.reachedMicrotaskIds.includes(action.microtaskId)) return reject('stage-not-reached');
-        if (!state.completedMicrotaskIds.includes(action.microtaskId)) {
+        const skippedStage = state.skippedMicrotaskIds.includes(action.microtaskId);
+        if (!state.completedMicrotaskIds.includes(action.microtaskId) && !skippedStage) {
           return reject('current-stage-already-open');
         }
         const targetIndex = authoredTasks.findIndex(({ task }) => task.microtaskId === action.microtaskId);
@@ -1520,6 +1745,36 @@
         const cancelEffect = state.audio && ['playing', 'scheduled'].includes(state.audio.status)
           ? audioCancelEffect(state.audio)
           : null;
+        if (skippedStage) {
+          if (skipRecoveryActive) return reject('skip-recovery-already-active');
+          skipRecoveryOrigin = {
+            activeTaskIndex,
+            state: clone(state),
+            endedPresentationMomentIds: [...endedPresentationMomentIds],
+            pendingPresentationContinuation: clone(pendingPresentationContinuation)
+          };
+          skipRecoveryActive = true;
+          const mainReached = clone(state.reachedMicrotaskIds);
+          const mainNavigation = clone(state.stageNavigation);
+          const authored = enterTask(targetIndex);
+          state = {
+            ...state,
+            mode: 'microtask-v2-skip-recovery',
+            reachedMicrotaskIds: mainReached,
+            stageNavigation: mainNavigation
+          };
+          const effects = [
+            ...(cancelEffect ? [cancelEffect] : []),
+            {
+              type: 'scene/show', experienceRevision: unit.experienceRevision,
+              beatId: authored.beatId, microtaskId: authored.task.microtaskId,
+              stepId: authored.task.steps[0].stepId, skipRecovery: true
+            }
+          ];
+          const audio = startReadyAudio();
+          if (audio) effects.push(audio);
+          return publish(effects);
+        }
         if (!sandboxActive) {
           sandboxOrigin = {
             activeTaskIndex,
@@ -1580,9 +1835,18 @@
         if (audio) effects.push(audio);
         return publish(effects);
       }
+      if (action.type === 'navigation/exit-skip-recovery') {
+        const invalid = validateCommand(action);
+        if (invalid) return reject(invalid);
+        if (!skipRecoveryActive) return reject('skip-recovery-not-active');
+        return publish(restoreSkipRecoveryOrigin());
+      }
       if (state.status !== 'active') return reject('runtime-not-active');
       if (action.type === 'role-practice/round-complete') {
         return completeRolePracticeRound(action);
+      }
+      if (action.type === 'role-practice/round-skip') {
+        return skipRolePracticeRound(action);
       }
       if (action.type === 'role-practice/complete') {
         return completeRolePractice(action);
