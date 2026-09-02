@@ -428,7 +428,7 @@ async function buildStatic({
   }
 
   const files = {};
-  for (const relative of await listOutputFiles(resolvedOut)) {
+  for (const relative of (await listOutputFiles(resolvedOut)).sort(comparePaths)) {
     const bytes = await fs.readFile(path.join(resolvedOut, relative));
     files[relative] = hash(bytes);
   }

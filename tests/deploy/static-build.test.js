@@ -281,7 +281,7 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
   );
 
   const expected = await expectedPublicFiles(ROOT);
-  const actual = await listRegularFiles(out);
+  const actual = (await listRegularFiles(out)).sort(comparePaths);
   assert.deepEqual(actual, [...expected, 'release-manifest.json'].sort(comparePaths));
   assert.deepEqual(Object.keys(manifest.files), expected);
   for (const relative of expected) {
