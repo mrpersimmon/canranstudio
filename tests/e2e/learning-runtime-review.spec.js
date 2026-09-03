@@ -1,6 +1,7 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
+const { TEST_ORIGIN } = require('../support/test-origin');
 
 const REVIEW_PATH = '/poc/learning-runtime-review/';
 
@@ -11,7 +12,7 @@ test('the noindex learning review restores a fixture without touching learner st
   });
   const externalRequests = [];
   page.on('request', request => {
-    if (new URL(request.url()).origin !== 'http://127.0.0.1:4173') externalRequests.push(request.url());
+    if (new URL(request.url()).origin !== TEST_ORIGIN) externalRequests.push(request.url());
   });
 
   const response = await page.goto(

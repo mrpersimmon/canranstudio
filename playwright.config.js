@@ -1,6 +1,7 @@
 'use strict';
 
 const { defineConfig } = require('@playwright/test');
+const { TEST_ORIGIN } = require('./tests/support/test-origin');
 
 module.exports = defineConfig({
   testDir: './tests/e2e',
@@ -8,13 +9,13 @@ module.exports = defineConfig({
   workers: 1,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: TEST_ORIGIN,
     browserName: 'chromium',
     trace: 'retain-on-failure'
   },
   webServer: {
     command: 'node tests/support/static-server.js',
-    url: 'http://127.0.0.1:4173',
+    url: TEST_ORIGIN,
     reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === '1',
     timeout: 10000
   }

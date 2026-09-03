@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 const { test, expect } = require('@playwright/test');
+const { TEST_ORIGIN } = require('../support/test-origin');
 
 const EXPERIENCE_PATH = '/poc/lesson-1-2/';
 const COURSE_ASSET_PATH = `${EXPERIENCE_PATH}course/`;
@@ -127,9 +128,9 @@ test('I03 same-version warm preparation auto-enters within one second without fa
   expect(await page.evaluate(() => globalThis.__packagePercentHistory)).not.toContain('0%');
 
   const allowedNetworkChecks = new Set([
-    new URL(EXPERIENCE_PATH, 'http://127.0.0.1:4173').href,
-    new URL(`${COURSE_ASSET_PATH}course-package-manifest.json`, 'http://127.0.0.1:4173').href,
-    new URL('/poc/lesson-1-2/core/course-package-service-worker.js?v=course-package-v1', 'http://127.0.0.1:4173').href
+    new URL(EXPERIENCE_PATH, TEST_ORIGIN).href,
+    new URL(`${COURSE_ASSET_PATH}course-package-manifest.json`, TEST_ORIGIN).href,
+    new URL('/poc/lesson-1-2/core/course-package-service-worker.js?v=course-package-v1', TEST_ORIGIN).href
   ]);
   const packageMisses = warmResponses.filter(item => (
     isCourseAsset(item.url)

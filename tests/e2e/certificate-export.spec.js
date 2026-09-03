@@ -1,11 +1,12 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
+const { TEST_ORIGIN } = require('../support/test-origin');
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/*', route => {
     const url = new URL(route.request().url());
-    if (url.origin === 'http://127.0.0.1:4173') return route.continue();
+    if (url.origin === TEST_ORIGIN) return route.continue();
     return route.abort();
   });
   await page.addInitScript(() => {

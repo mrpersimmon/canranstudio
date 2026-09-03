@@ -2,6 +2,7 @@
 
 const { test, expect } = require('@playwright/test');
 const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
+const { TEST_ORIGIN } = require('../support/test-origin');
 
 const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const routes = [
@@ -27,14 +28,14 @@ for (const route of routes) {
 test('/home/ remains a compatibility entry for plain static hosting', async ({ page }) => {
   const response = await page.goto('/home/');
   expect(response.status()).toBe(200);
-  await expect(page).toHaveURL('http://127.0.0.1:4173/');
+  await expect(page).toHaveURL(`${TEST_ORIGIN}/`);
   await expect(page).toHaveTitle(/十二城区冒险图鉴/);
 });
 
 test('/home/ preserves query and hash through the compatibility redirect', async ({ page }) => {
   const response = await page.goto('/home/?course=49#progress');
   expect(response.status()).toBe(200);
-  await expect(page).toHaveURL('http://127.0.0.1:4173/?course=49#progress');
+  await expect(page).toHaveURL(`${TEST_ORIGIN}/?course=49#progress`);
   await expect(page).toHaveTitle(/十二城区冒险图鉴/);
 });
 

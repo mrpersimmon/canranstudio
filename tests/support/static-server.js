@@ -3,9 +3,9 @@
 const http = require('node:http');
 const path = require('node:path');
 const fs = require('node:fs/promises');
+const { PLAYWRIGHT_PORT, TEST_ORIGIN } = require('./test-origin');
 
 const ROOT = process.cwd();
-const PORT = 4173;
 const CANONICAL_COURSE_ROUTE = '/poc/lesson-1-2/';
 const LEGACY_COURSE_ROUTE = '/poc/lesson1-2-experience';
 const TYPES = {
@@ -116,8 +116,8 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(PORT, '127.0.0.1', () => {
-  process.stdout.write(`static test server listening on http://127.0.0.1:${PORT}\n`);
+server.listen(PLAYWRIGHT_PORT, '127.0.0.1', () => {
+  process.stdout.write(`static test server listening on ${TEST_ORIGIN}\n`);
 });
 
 for (const signal of ['SIGINT', 'SIGTERM']) {

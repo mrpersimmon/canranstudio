@@ -3,8 +3,9 @@
 const { test, expect } = require('@playwright/test');
 const { PUBLISHED_COURSES } = require('../../core/course-catalog');
 const { PROFILE_KEY } = require('../../core/device-profile');
+const { TEST_ORIGIN } = require('../support/test-origin');
 
-const BASE_ORIGIN = 'http://127.0.0.1:4173';
+const BASE_ORIGIN = TEST_ORIGIN;
 const PUBLIC_ROUTES = [
   { id: 'home', route: '/' },
   ...PUBLISHED_COURSES.map(course => ({ id: course.id, route: course.route }))
