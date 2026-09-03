@@ -7373,7 +7373,7 @@
         'phase', 'challenge-completed', 'microtask-complete'
       ]);
       const presentationLifecyclePhases = new Set([
-        'awaiting-response', 'audio-playing', 'audio-retry', 'audio-failed',
+        'awaiting-response', 'audio-playing', 'audio-retry', 'audio-blocked', 'audio-failed',
         'answered-awaiting-save', 'persistence-retry', 'unit-verifying',
         'rescue-model', 'completed'
       ]);

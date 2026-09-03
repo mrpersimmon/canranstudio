@@ -86,6 +86,10 @@ async function installHarness(page, { audioMode = 'manual' } = {}) {
 
     window.__audioStarts = [];
     window.__pendingCourseAudio = [];
+    window.__courseAudioGestureGranted = false;
+    addEventListener('click', () => {
+      window.__courseAudioGestureGranted = true;
+    }, true);
     let audioSequence = 0;
     class ControlledAudio extends EventTarget {
       constructor(src) {
@@ -113,6 +117,12 @@ async function installHarness(page, { audioMode = 'manual' } = {}) {
           renderedMicrotaskId: renderedApp?.dataset.runtimeMicrotask || null,
           renderedMomentId: renderedWorld?.dataset.presentationMoment || null
         });
+        if (mode === 'autoplay-blocked' && !window.__courseAudioGestureGranted) {
+          return Promise.reject(new DOMException(
+            'Autoplay requires a user gesture',
+            'NotAllowedError'
+          ));
+        }
         window.__pendingCourseAudio.push(this);
         if (mode === 'instant') queueMicrotask(() => this.finish());
         return Promise.resolve();
@@ -1070,6 +1080,35 @@ test('uses the revision-scoped storage key and folds the story premise into the 
   expect(entryRecoveryNavigations).toEqual([]);
   const storedKeys = await page.evaluate(() => Object.keys(localStorage));
   expect(storedKeys.every(key => key !== 'poc:lesson1-2-experience:v1')).toBe(true);
+});
+
+test('an autoplay policy block stays in the first stage with a neutral play action', async ({ page }) => {
+  await openFresh(page, { audioMode: 'autoplay-blocked' });
+  await startOrResume(page);
+
+  await expect.poll(async () => (await runtimeSnapshot(page)).phase).toBe('audio-blocked');
+  await expect(page.locator('.sound-fallback')).toHaveCount(0);
+  await expect(page.getByText('这句英语还没有播放成功', { exact: true })).toHaveCount(0);
+  const play = page.locator('[data-action="audio-play"]');
+  await expect(play).toHaveText('播放课文');
+  expect(await runtimeSnapshot(page)).toMatchObject({
+    microtaskId: tasks[0].microtaskId,
+    phase: 'audio-blocked',
+    audio: {
+      status: 'blocked',
+      segmentIndex: 0,
+      retryAttempt: 0,
+      reason: 'autoplay-policy'
+    }
+  });
+
+  await play.click();
+  await expect.poll(async () => (await runtimeSnapshot(page)).phase).toBe('audio-playing');
+  await finishOneAudio(page);
+  await expect.poll(async () => (await runtimeSnapshot(page)).audio.segmentIndex).toBe(1);
+  expect((await page.evaluate(() => window.__runtimeEffects)).filter(
+    effect => effect.type === 'audio/failure'
+  )).toEqual([]);
 });
 
 test('the first listen keeps all seven lines visible and advances only after the seventh real ended', async ({ page }) => {

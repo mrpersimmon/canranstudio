@@ -1365,7 +1365,7 @@
       const projected = ledger.read()?.units?.[unit.unitId] || {};
       const originAudio = clone(origin.state.audio);
       const restartOriginAudio = originAudio
-        && ['audio-playing', 'audio-retry', 'audio-suspended'].includes(origin.state.phase);
+        && ['audio-playing', 'audio-retry', 'audio-suspended', 'audio-blocked'].includes(origin.state.phase);
       skipRecoveryActive = false;
       skipRecoveryOrigin = null;
       activeTaskIndex = origin.activeTaskIndex;
@@ -1642,7 +1642,7 @@
         const nextVersion = state.stateVersion + 1;
         const originAudio = clone(origin.state.audio);
         const restartOriginAudio = originAudio
-          && ['audio-playing', 'audio-retry', 'audio-suspended'].includes(origin.state.phase);
+          && ['audio-playing', 'audio-retry', 'audio-suspended', 'audio-blocked'].includes(origin.state.phase);
         sandboxActive = false;
         sandboxOrigin = null;
         activeTaskIndex = origin.activeTaskIndex;
@@ -1920,10 +1920,31 @@
         });
         return publish([audioCancelEffect(suspendedAudio)]);
       }
+      if (action.type === 'audio/blocked') {
+        const invalid = validateCommand(action, { media: true });
+        if (invalid) return reject(invalid);
+        if (!['audio-playing', 'audio-retry'].includes(state.phase)) {
+          return reject('audio-not-playing');
+        }
+        const blockedAudio = state.audio;
+        transition({
+          phase: 'audio-blocked',
+          audio: {
+            ...blockedAudio,
+            status: 'blocked',
+            reason: typeof action.reason === 'string' ? action.reason : 'autoplay-policy',
+            manualRetryRequired: false
+          }
+        });
+        return publish([audioCancelEffect(blockedAudio)]);
+      }
       if (action.type === 'audio/resume') {
         const invalid = validateCommand(action, { challenge: Boolean(state.challengeRef) });
         if (invalid) return reject(invalid);
-        if (state.phase !== 'audio-suspended' || state.audio?.status !== 'suspended') {
+        if (
+          !['audio-suspended', 'audio-blocked'].includes(state.phase)
+          || !['suspended', 'blocked'].includes(state.audio?.status)
+        ) {
           return reject('audio-not-suspended');
         }
         const suspendedAudio = state.audio;

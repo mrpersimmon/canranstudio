@@ -1133,6 +1133,66 @@ test('Lesson 1–2 V2 suspends required audio across page lifecycle without spen
   assert.equal(current.effects[0].visibleText, 'handbag');
 });
 
+test('Lesson 1–2 V2 keeps autoplay policy blocks neutral and resumes from the same segment', () => {
+  const unitV2 = lesson12V2Fixture();
+  const result = unitV2.beats[0].microtasks[0].targetResults[0];
+  const challenge = unitV2.beats[0].microtasks[0].steps[0];
+  result.channel = 'audio-form-supported';
+  challenge.channel = 'audio-form-supported';
+  challenge.audioSequence = {
+    segments: [{
+      segmentId: 'L01-M07:C01:prompt', sourceRef: 'L01-W07',
+      text: 'handbag', audioSrc: '/handbag.mp3'
+    }]
+  };
+  const runtime = create({ unit: unitV2, ledger: fakeRevisionLedger(), seed: 305 });
+  let current = runtime.enter({ entryLesson: 'lesson1', unitAttemptId: 'autoplay-policy' });
+  const original = {
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId,
+    retryAttempt: current.snapshot.audio.retryAttempt,
+    hearts: current.snapshot.adventureHeartsRemaining
+  };
+
+  current = runtime.dispatch({
+    type: 'audio/blocked',
+    reason: 'autoplay-policy',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    microtaskId: current.snapshot.microtaskId,
+    attemptRevision: current.snapshot.attemptRevision,
+    requestId: current.snapshot.audio.requestId,
+    segmentId: current.snapshot.audio.segmentId
+  });
+  assert.equal(current.snapshot.phase, 'audio-blocked');
+  assert.equal(current.snapshot.audio.status, 'blocked');
+  assert.equal(current.snapshot.audio.reason, 'autoplay-policy');
+  assert.equal(current.snapshot.audio.manualRetryRequired, false);
+  assert.equal(current.snapshot.audio.retryAttempt, original.retryAttempt);
+  assert.equal(current.snapshot.adventureHeartsRemaining, original.hearts);
+  assert.deepEqual(current.snapshot.temporaryAudioContactRefs, []);
+  assert.deepEqual(current.effects, [{
+    type: 'audio/cancel',
+    experienceRevision: 'lesson1-2-v2.2',
+    microtaskId: 'L01-M07',
+    attemptRevision: 0,
+    requestId: original.requestId
+  }]);
+
+  current = runtime.dispatch({
+    type: 'audio/resume',
+    experienceRevision: current.snapshot.experienceRevision,
+    stateVersion: current.snapshot.stateVersion,
+    challengeRef: current.snapshot.challengeRef
+  });
+  assert.equal(current.snapshot.phase, 'audio-playing');
+  assert.equal(current.snapshot.audio.segmentId, original.segmentId);
+  assert.notEqual(current.snapshot.audio.requestId, original.requestId);
+  assert.equal(current.snapshot.audio.retryAttempt, original.retryAttempt);
+  assert.equal(current.effects[0].type, 'audio/play');
+  assert.equal(current.effects[0].visibleText, 'handbag');
+});
+
 test('Lesson 1–2 V2 retries transient audio at 250 and 750 ms then remains visibly fail-closed', () => {
   const unitV2 = lesson12V2Fixture();
   const challenge = unitV2.beats[0].microtasks[0].steps[0];

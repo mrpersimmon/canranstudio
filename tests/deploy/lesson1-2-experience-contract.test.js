@@ -522,7 +522,8 @@ test('the V2 page consumes authored presentation moments and durable save recove
   assert.match(scene, /function\s+sceneFramePicture\(/);
   assert.doesNotMatch(scene, /data-drag-source=|data-drop-target=/);
   assert.doesNotMatch(scene, /pointerdown|pointermove|pointerup|pointercancel|blank-drop/);
-  assert.match(scene, /aria-label="\$\{escapeHtml\(languageAudioCopy\.replayLabel/);
+  assert.match(scene, /data-action="\$\{requiredAudioBlocked \? 'audio-play' : 'free-audio'\}"/);
+  assert.match(scene, /aria-label="\$\{escapeHtml\(requiredAudioBlocked[\s\S]{0,180}languageAudioCopy\.replayLabel/);
   assert.match(scene, /starlight-audio-replay-v1\.png/);
   assert.doesNotMatch(scene, />重新播放英文</);
   assert.doesNotMatch(scene, /看着英文听一遍/);

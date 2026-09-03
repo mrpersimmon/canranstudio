@@ -18,6 +18,10 @@
       .replaceAll("'", '&#039;');
   }
 
+  function isAutoplayPolicyBlock(error) {
+    return error?.name === 'NotAllowedError';
+  }
+
   function uiIcon(name, className = '') {
     return `<img class="ui-icon${className ? ` ${escapeHtml(className)}` : ''}" src="/poc/lesson1-2-experience/assets/icons/${escapeHtml(name)}.svg" alt="" aria-hidden="true">`;
   }
@@ -720,7 +724,7 @@
       }
       if (practiceSnapshot?.status === 'active') return;
       const snapshot = runtime.snapshot();
-      if (snapshot.phase !== 'audio-suspended') return;
+      if (!['audio-suspended', 'audio-blocked'].includes(snapshot.phase)) return;
       dispatch({ type: 'audio/resume' });
     }
 
@@ -939,6 +943,17 @@
             segmentIndex: session.segmentIndex,
             segmentId: session.segmentId
           });
+        } else if (type === 'blocked') {
+          dispatch({
+            type: 'audio/blocked',
+            experienceRevision: session.experienceRevision,
+            microtaskId: session.microtaskId,
+            attemptRevision: session.attemptRevision,
+            requestId: session.requestId,
+            segmentIndex: session.segmentIndex,
+            segmentId: session.segmentId,
+            reason: reason || 'autoplay-policy'
+          });
         } else {
           dispatch({
             type: 'audio/failed',
@@ -962,12 +977,18 @@
         let playResult;
         try {
           playResult = audio.play();
-        } catch {
-          finish('failed', 'play-threw');
+        } catch (error) {
+          finish(
+            isAutoplayPolicyBlock(error) ? 'blocked' : 'failed',
+            isAutoplayPolicyBlock(error) ? 'autoplay-policy' : 'play-threw'
+          );
           return;
         }
         if (playResult && typeof playResult.catch === 'function') {
-          playResult.catch(() => finish('failed', 'play-rejected'));
+          playResult.catch(error => finish(
+            isAutoplayPolicyBlock(error) ? 'blocked' : 'failed',
+            isAutoplayPolicyBlock(error) ? 'autoplay-policy' : 'play-rejected'
+          ));
         }
       }
 
@@ -1358,7 +1379,7 @@
       const add = values => {
         for (const value of values || []) if (value) refs.add(value);
       };
-      if (['audio-ready', 'audio-playing', 'audio-retry', 'audio-failed', 'audio-suspended'].includes(snapshot.phase)) {
+      if (['audio-ready', 'audio-playing', 'audio-retry', 'audio-failed', 'audio-suspended', 'audio-blocked'].includes(snapshot.phase)) {
         const visibleAudioRefs = step.kind === 'audio-sequence'
           ? (snapshot.audio?.refs || [])
           : [snapshot.audio?.refs?.[snapshot.audio?.segmentIndex || 0]].filter(Boolean);
@@ -1442,7 +1463,7 @@
         });
       }
       const audioStillActive = [
-        'audio-ready', 'audio-playing', 'audio-retry', 'audio-suspended'
+        'audio-ready', 'audio-playing', 'audio-retry', 'audio-suspended', 'audio-blocked'
       ].includes(snapshot.phase);
       return `<section class="presentation-continue" data-presentation-manual="true">
         ${momentLanguageMarkup(snapshot, step, moment)}
@@ -1476,7 +1497,7 @@
         && snapshot.microtaskStatus === 'in-progress'
         && formal
         && [
-          'audio-ready', 'audio-playing', 'audio-retry', 'audio-suspended',
+          'audio-ready', 'audio-playing', 'audio-retry', 'audio-suspended', 'audio-blocked',
           'awaiting-response', 'rescue-model', 'partner-rescue'
         ].includes(snapshot.phase);
     }
@@ -1636,11 +1657,13 @@
       if (!activeRef) return '';
       const requiredAudioPlaying = snapshot.phase === 'audio-playing'
         && snapshot.audio?.purpose === 'instruction';
+      const requiredAudioBlocked = snapshot.phase === 'audio-blocked'
+        && snapshot.audio?.purpose === 'instruction';
       const freeAudioPlaying = ui.freeAudioRef === activeRef;
       const playing = requiredAudioPlaying || freeAudioPlaying;
       const refKind = content(activeRef) ? 'content' : 'source';
       return `<div class="shared-listen-replay" role="group" aria-label="${escapeHtml(languageAudioCopy.regionLabel || '')}">
-        <button class="language-audio-play shared-listen-replay__button${playing ? ' is-playing' : ''}" type="button" data-action="free-audio" data-value="${escapeHtml(activeRef)}" data-ref-kind="${refKind}" aria-label="${escapeHtml(languageAudioCopy.replayLabel || '')}" title="${escapeHtml(languageAudioCopy.replayLabel || '')}"${playing ? ' disabled' : ''}>
+        <button class="language-audio-play shared-listen-replay__button${playing ? ' is-playing' : ''}" type="button" data-action="${requiredAudioBlocked ? 'audio-play' : 'free-audio'}"${requiredAudioBlocked ? '' : ` data-value="${escapeHtml(activeRef)}" data-ref-kind="${refKind}"`} aria-label="${escapeHtml(requiredAudioBlocked ? (languageAudioCopy.playLabel || '') : (languageAudioCopy.replayLabel || ''))}" title="${escapeHtml(requiredAudioBlocked ? (languageAudioCopy.playLabel || '') : (languageAudioCopy.replayLabel || ''))}"${playing ? ' disabled' : ''}>
           <img src="/poc/lesson1-2-experience/assets/starlight-audio-replay-v1.png" alt="" aria-hidden="true">
         </button>
       </div>`;
@@ -2247,7 +2270,7 @@
       const manualPresentation = knowledgeLayer || explicitPresentation;
       const sharedListenAnswer = step?.audioResponsePresentation === 'shared-locked-until-ended';
       const sharedInstructionAudio = sharedListenAnswer
-        && ['audio-ready', 'audio-playing', 'audio-suspended'].includes(snapshot.phase)
+        && ['audio-ready', 'audio-playing', 'audio-suspended', 'audio-blocked'].includes(snapshot.phase)
         && (!snapshot.audio?.purpose || snapshot.audio.purpose === 'instruction');
       const correctAudioInPlace = ui.feedback?.tone === 'correct'
         && ['audio-ready', 'audio-playing', 'audio-suspended'].includes(snapshot.phase)
@@ -2259,7 +2282,7 @@
           ? persistencePanel(snapshot)
           : (['audio-fallback', 'audio-retry', 'audio-failed'].includes(snapshot.phase)
               ? fallbackPanel(snapshot)
-              : (['audio-ready', 'audio-playing', 'audio-suspended'].includes(snapshot.phase)
+              : (['audio-ready', 'audio-playing', 'audio-suspended', 'audio-blocked'].includes(snapshot.phase)
                   ? (sharedInstructionAudio || correctAudioInPlace
                       ? responsePanel(snapshot, step, sceneEntityIds)
                       : audioPanel(snapshot, step, adultEntityIds))
@@ -2272,7 +2295,8 @@
         || snapshot.phase === 'partner-rescue';
       const responseLockedByPresentation = snapshot.presentationAwaitingEnd === true
         && !manualPresentation;
-      const responseLockedByRequiredAudio = sharedInstructionAudio;
+      const responseLockedByRequiredAudio = sharedInstructionAudio
+        && snapshot.phase !== 'audio-blocked';
       const responseLocked = responseLockedByPresentation
         || responseLockedByRequiredAudio
         || correctAudioInPlace
@@ -3170,7 +3194,11 @@
         return;
       }
       if (action === 'audio-play') {
-        dispatch({ type: 'audio/play' });
+        dispatch({
+          type: ['audio-suspended', 'audio-blocked'].includes(snapshot.phase)
+            ? 'audio/resume'
+            : 'audio/play'
+        });
         return;
       }
       if (action === 'audio-retry') {
