@@ -1,5 +1,7 @@
 # HTTP deployment runbook
 
+POC course URLs follow the repository-wide [public route standard](./POC-COURSE-ROUTES.md).
+
 ## Scope and transaction boundary
 
 Production intentionally remains on http://59.110.217.36. This procedure does not configure TLS,
