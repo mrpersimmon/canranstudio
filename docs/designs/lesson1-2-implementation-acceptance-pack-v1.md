@@ -4,7 +4,7 @@
 > 教材：外研社《新概念英语智慧版 1》，PDF 物理页 35–38、书本页 2–5
 > 教学单元：Lesson 1 `Excuse me!` + Lesson 2 `Is this your ...?`
 > 完整课程语义：[Lesson 1–2 儿童教学单元设计 V0](./lesson1-2-unit-design-v0.md)
-> 当前本地体验：`http://127.0.0.1:4173/poc/lesson1-2-experience/`
+> 当前本地体验：`http://127.0.0.1:4173/poc/lesson-1-2/`
 > 授权边界：本验收包不授权修改运行时、提交、推送、合并 `main` 或发布网站
 
 > **文档分层（2026-08-23）**：本文件记录当前可运行代码的 as-built 行为：Lesson 1 五项、Lesson 2 十项、当天八份 T1 抽样结果、三项语法实验室、全单元冒险心、`L01-M04 → L01-M05` 退役恢复和 car/house 真实场景。另见 [Lesson 1–2 重构决策树](./lesson1-2-remediation-decision-tree-2026-08-23.md) 与 [Lesson 1–2 完整关卡蓝图 V2](./lesson1-2-complete-level-blueprint-v2.md)；V2 的十六阶段、十一词当天双通道、同一女顾客与路线调查结局尚未进入代码，不得反写成当前实现事实。

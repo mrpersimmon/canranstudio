@@ -4,7 +4,7 @@ const { test, expect } = require('@playwright/test');
 const catalog = require('../../core/curriculum-catalog');
 const { open } = require('../../core/learning-ledger');
 
-const REVIEW_PATH = '/poc/lesson1-2-review/';
+const REVIEW_PATH = '/poc/lesson-1-2/review/';
 const unit = catalog.getTeachingUnit('NCE-U01');
 const STORAGE_KEY = `poc:learning-experience:${unit.unitId}:${unit.experienceRevision}`;
 const reviewCopy = unit.experience.reviewRun.copy;

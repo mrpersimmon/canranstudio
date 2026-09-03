@@ -378,7 +378,7 @@
   }
 
   function courseLink() {
-    return `<a class="quiet-action" href="/poc/lesson1-2-experience/">${escapeHtml(reviewCopy.returnLabel)}</a>`;
+    return `<a class="quiet-action" href="/poc/lesson-1-2/">${escapeHtml(reviewCopy.returnLabel)}</a>`;
   }
 
   function entryView(plan) {

@@ -561,7 +561,7 @@ button:focus-visible { outline: 4px solid #fff; outline-offset: 4px; }
   padding: clamp(16px, 3.5vh, 42px) clamp(13px, 4vw, 56px) max(20px, env(safe-area-inset-bottom));
   background:
     linear-gradient(180deg, rgba(11, 30, 52, .1), rgba(5, 17, 32, .62)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
+    url('/poc/lesson-1-2/course/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 .station-world::before {
@@ -1001,7 +1001,7 @@ button.scene-prop.is-selected {
   .station-world {
     background:
       linear-gradient(180deg, rgba(11, 30, 52, .08), rgba(5, 17, 32, .34)),
-      url('/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.avif') center / cover no-repeat;
+      url('/poc/lesson-1-2/course/assets/starlight-station-stage-bg-v1.avif') center / cover no-repeat;
   }
 }
 
@@ -1949,8 +1949,8 @@ button.scene-prop.is-selected {
   width: 21px;
   height: 21px;
   background: #fff6da;
-  -webkit-mask: url('/poc/lesson1-2-experience/assets/icons/star-fill.svg') center / contain no-repeat;
-  mask: url('/poc/lesson1-2-experience/assets/icons/star-fill.svg') center / contain no-repeat;
+  -webkit-mask: url('/poc/lesson-1-2/course/assets/icons/star-fill.svg') center / contain no-repeat;
+  mask: url('/poc/lesson-1-2/course/assets/icons/star-fill.svg') center / contain no-repeat;
 }
 .feedback-bubble__guide { overflow: hidden; background: var(--night-deep); }
 .feedback-bubble__guide img { width: 100%; height: 100%; object-fit: contain; }
@@ -2948,7 +2948,7 @@ button.scene-prop.is-selected {
   align-content: start;
   background:
     linear-gradient(180deg, rgba(8, 26, 45, .12), rgba(4, 14, 27, .48)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
+    url('/poc/lesson-1-2/course/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -3038,7 +3038,7 @@ button.scene-prop.is-selected {
   background:
     radial-gradient(ellipse at 50% 36%, rgba(115, 215, 199, .17), transparent 34%),
     linear-gradient(180deg, rgba(6, 24, 42, .06), rgba(5, 17, 32, .54)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
+    url('/poc/lesson-1-2/course/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -3113,7 +3113,7 @@ button.scene-prop.is-selected {
   background:
     radial-gradient(ellipse at 50% 18%, rgba(75, 155, 188, .26), transparent 44%),
     linear-gradient(180deg, rgba(6, 24, 45, .06), rgba(4, 15, 30, .58)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
+    url('/poc/lesson-1-2/course/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(
@@ -3206,7 +3206,7 @@ button.scene-prop.is-selected {
   background:
     radial-gradient(circle at 50% 32%, rgba(255, 215, 117, .26), transparent 28%),
     linear-gradient(180deg, rgba(4, 16, 31, .08), rgba(4, 14, 27, .48)),
-    url('/poc/lesson1-2-experience/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
+    url('/poc/lesson-1-2/course/assets/starlight-station-bg-package-v1.avif') center 58% / cover no-repeat;
 }
 
 :is(

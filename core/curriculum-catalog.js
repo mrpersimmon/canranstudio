@@ -132,7 +132,7 @@
         {
           speaker: LESSON1_DIALOGUE_SPEAKERS[index],
           embeddedSourceRefs: LESSON1_UTTERANCE_EMBEDDED_REFS[sourceId],
-          audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`,
+          audioSrc: `/poc/lesson-1-2/course/audio/${sourceId.toLowerCase()}.mp3`,
           voiceId: LESSON1_DIALOGUE_SPEAKERS[index] === 'man' ? 'am_michael' : 'af_heart',
           audioRenderMode: 'natural-utterance',
           audioReviewStatus: 'unreviewed-candidate'
@@ -150,7 +150,7 @@
         isHandbag ? 'evidence' : 'exposure',
         {
           translation,
-          audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`,
+          audioSrc: `/poc/lesson-1-2/course/audio/${sourceId.toLowerCase()}.mp3`,
           voiceId: 'af_heart',
           audioRenderMode: 'context-cropped-lexeme-v1',
           audioReviewStatus: 'unreviewed-candidate'
@@ -213,7 +213,7 @@
         'evidence',
         {
           translation,
-          audioSrc: `/poc/lesson1-2-experience/audio/${sourceId.toLowerCase()}.mp3`,
+          audioSrc: `/poc/lesson-1-2/course/audio/${sourceId.toLowerCase()}.mp3`,
           illustrationOrder: index + 1,
           voiceId: 'af_heart',
           audioRenderMode: 'context-cropped-lexeme-v1',
@@ -813,28 +813,28 @@
       kind: 'derived-expression',
       text: 'Is this your watch?',
       sourceRefs: ['L01-D03', 'L02-W04'],
-      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-watch.mp3'
+      audioSrc: '/poc/lesson-1-2/course/audio/nce-u01-c-q-watch.mp3'
     },
     'NCE-U01-C-Q-COAT': {
       contentId: 'NCE-U01-C-Q-COAT',
       kind: 'derived-expression',
       text: 'Is this your coat?',
       sourceRefs: ['L01-D03', 'L02-W05'],
-      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-coat.mp3'
+      audioSrc: '/poc/lesson-1-2/course/audio/nce-u01-c-q-coat.mp3'
     },
     'NCE-U01-C-Q-CAR': {
       contentId: 'NCE-U01-C-Q-CAR',
       kind: 'derived-expression',
       text: 'Is this your car?',
       sourceRefs: ['L01-D03', 'L02-W09'],
-      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-car.mp3'
+      audioSrc: '/poc/lesson-1-2/course/audio/nce-u01-c-q-car.mp3'
     },
     'NCE-U01-C-Q-HOUSE': {
       contentId: 'NCE-U01-C-Q-HOUSE',
       kind: 'derived-expression',
       text: 'Is this your house?',
       sourceRefs: ['L01-D03', 'L02-W10'],
-      audioSrc: '/poc/lesson1-2-experience/audio/nce-u01-c-q-house.mp3'
+      audioSrc: '/poc/lesson-1-2/course/audio/nce-u01-c-q-house.mp3'
     },
     'NCE-U01-C-BLOCK-IS-THIS-YOUR': {
       contentId: 'NCE-U01-C-BLOCK-IS-THIS-YOUR',
@@ -902,15 +902,15 @@
     entityKind: 'character',
     voiceRole: 'man',
     dialogueSide: 'left',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.webp'
+    assetSrc: '/poc/lesson-1-2/course/assets/character-adult-man-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson-1-2/course/assets/character-adult-man-cutout-v1.webp'
   };
   const NCE_WOMAN_CHARACTER = {
     entityKind: 'character',
     voiceRole: 'woman',
     dialogueSide: 'right',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.webp'
+    assetSrc: '/poc/lesson-1-2/course/assets/character-adult-woman-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson-1-2/course/assets/character-adult-woman-cutout-v1.webp'
   };
   const NCE_EXPLORER_CAT_CHARACTER = {
     entityKind: 'character',
@@ -925,8 +925,8 @@
       title,
       visualType,
       sourceRef,
-      assetSrc: `/poc/lesson1-2-experience/assets/${assetBasename}.avif`,
-      assetFallbackSrc: `/poc/lesson1-2-experience/assets/${assetBasename}.webp`
+      assetSrc: `/poc/lesson-1-2/course/assets/${assetBasename}.avif`,
+      assetFallbackSrc: `/poc/lesson-1-2/course/assets/${assetBasename}.webp`
     };
   }
 
@@ -2076,25 +2076,25 @@
     'review-schoolbag-check': {
       contextId: 'review-schoolbag-check', title: '晨光书包核对',
       changeType: 'changed-object-position', entityIds: ['handbag', 'pen', 'pencil', 'book', 'watch'],
-      backdropAssetSrc: '/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.webp',
+      backdropAssetSrc: '/poc/lesson-1-2/course/assets/starlight-station-stage-bg-v1.webp',
       backdropPosition: 'center'
     },
     'review-morning-coatroom': {
       contextId: 'review-morning-coatroom', title: '清晨衣帽间',
       changeType: 'changed-room', entityIds: ['coat', 'dress', 'skirt', 'shirt'],
-      backdropAssetSrc: '/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.webp',
+      backdropAssetSrc: '/poc/lesson-1-2/course/assets/starlight-station-stage-bg-v1.webp',
       backdropPosition: '67% center'
     },
     'review-neighbourhood-route': {
       contextId: 'review-neighbourhood-route', title: '白天街区回家路',
       changeType: 'changed-street-scene', entityIds: ['car', 'house'],
-      backdropAssetSrc: '/poc/lesson1-2-experience/assets/scene-house-v2.webp',
+      backdropAssetSrc: '/poc/lesson-1-2/course/assets/scene-house-v2.webp',
       backdropPosition: 'center 58%'
     },
     'review-help-desk-exchange': {
       contextId: 'review-help-desk-exchange', title: '另一张服务台',
       changeType: 'changed-person-and-object', entityIds: ['station-keeper', 'handbag-owner'],
-      backdropAssetSrc: '/poc/lesson1-2-experience/assets/starlight-station-stage-bg-v1.webp',
+      backdropAssetSrc: '/poc/lesson-1-2/course/assets/starlight-station-stage-bg-v1.webp',
       backdropPosition: '24% center'
     }
   };
@@ -5657,8 +5657,8 @@
             portrait: {
               frameId: 'starlight-station-portrait-v2', aspectRatio: '9:19.5',
               media: '(max-aspect-ratio: 4/5)',
-              assetSrc: '/poc/lesson1-2-experience/assets/starlight-station-bg-v2-portrait.avif',
-              assetFallbackSrc: '/poc/lesson1-2-experience/assets/starlight-station-bg-v2-portrait.webp',
+              assetSrc: '/poc/lesson-1-2/course/assets/starlight-station-bg-v2-portrait.avif',
+              assetFallbackSrc: '/poc/lesson-1-2/course/assets/starlight-station-bg-v2-portrait.webp',
               actorLayout: {
                 targetHeightPercent: 38,
                 allowedHeightPercentRange: [34, 42],
@@ -5675,8 +5675,8 @@
             wide: {
               frameId: 'starlight-station-wide-v2', aspectRatio: '16:10',
               media: '(min-aspect-ratio: 4/5)',
-              assetSrc: '/poc/lesson1-2-experience/assets/starlight-station-bg-v2-wide.avif',
-              assetFallbackSrc: '/poc/lesson1-2-experience/assets/starlight-station-bg-v2-wide.webp',
+              assetSrc: '/poc/lesson-1-2/course/assets/starlight-station-bg-v2-wide.avif',
+              assetFallbackSrc: '/poc/lesson-1-2/course/assets/starlight-station-bg-v2-wide.webp',
               actorLayout: {
                 targetHeightPercent: 70,
                 allowedHeightPercentRange: [65, 75],
@@ -5833,7 +5833,7 @@
         },
         reviewRun: {
           itemRange: [2, 4], durationSecondsRange: [45, 90],
-          href: '/poc/lesson1-2-review/',
+          href: '/poc/lesson-1-2/review/',
           deferLabel: '稍后再来', heartPool: 'isolated-three-hearts',
           zeroAction: 'restart-entire-review-run',
           assistedOutcome: 'review-assisted-practice',
@@ -5871,8 +5871,8 @@
           kicker: '开门前 · 先看看发生了什么',
           title: '小站收到一只没人认领的手提包',
           copy: '一位先生和一位女士来到窗口。先听他们怎么说，再帮手提包找到主人。',
-          imageSrc: '/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.avif',
-          imageFallbackSrc: '/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.jpg',
+          imageSrc: '/poc/lesson-1-2/course/assets/premise-handbag-arrival-v1.avif',
+          imageFallbackSrc: '/poc/lesson-1-2/course/assets/premise-handbag-arrival-v1.jpg',
           imageAlt: '探险小猫指着柜台上的手提包，一位先生和一位女士正准备交谈。',
           actionLabel: '去听他们说话'
         },

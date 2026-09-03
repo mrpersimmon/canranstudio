@@ -22,6 +22,18 @@ const pageSource = fs.readFileSync(path.join(
   'poc/lesson1-2-experience/index.html'
 ), 'utf8');
 
+function sourcePathname(publicPathname) {
+  for (const [publicPrefix, sourcePrefix] of [
+    ['/poc/lesson-1-2/core/', '/core/'],
+    ['/poc/lesson-1-2/course/', '/poc/lesson1-2-experience/']
+  ]) {
+    if (publicPathname.startsWith(publicPrefix)) {
+      return `${sourcePrefix}${publicPathname.slice(publicPrefix.length)}`;
+    }
+  }
+  return publicPathname;
+}
+
 function runBootstrap({ mount, includeScene = true } = {}) {
   const reloadListeners = [];
   const errors = [];
@@ -152,8 +164,8 @@ test('Lesson 1–2 pins bootstrap and deferred runtime behind one hashed manifes
   ))).digest('hex');
 
   assert.deepEqual(pageScriptPaths, [
-    '/core/course-package-installer.js',
-    '/core/course-package-entry.js'
+    '/poc/lesson-1-2/core/course-package-installer.js',
+    '/poc/lesson-1-2/core/course-package-entry.js'
   ]);
   assert.deepEqual(bootstrapRevisions, ['course-package-v1', 'course-package-v1']);
   assert.equal(runtimeRevisions.length, 6);
@@ -259,8 +271,9 @@ function runRealPageScripts({ initialHtml = null, omitSource = null, storedEntri
   try {
     for (const source of runtimeScriptSources) {
       const sourcePath = new URL(source, 'http://lesson.local').pathname;
-      if (source === omitSource || sourcePath === omitSource) continue;
-      const filename = sourcePath.replace(/^\//, '');
+      const localSourcePath = sourcePathname(sourcePath);
+      if (source === omitSource || sourcePath === omitSource || localSourcePath === omitSource) continue;
+      const filename = localSourcePath.replace(/^\//, '');
       vm.runInContext(fs.readFileSync(path.join(ROOT, filename), 'utf8'), context, { filename });
       loadedSources.push(source);
     }
@@ -304,12 +317,12 @@ function encodedLessonProgress(unitState) {
 
 test('Lesson 1–2 deferred runtime script chain boots the first mission without an uncaught error', () => {
   assert.deepEqual(runtimeScriptSources.map(source => new URL(source, 'http://lesson.local').pathname), [
-    '/core/learning-store.js',
-    '/core/learning-ledger.js',
-    '/core/learning-runtime.js',
-    '/core/learning-outcome-practice.js',
-    '/core/learning-microtask-scene.js',
-    '/poc/lesson1-2-experience/experience.js'
+    '/poc/lesson-1-2/core/learning-store.js',
+    '/poc/lesson-1-2/core/learning-ledger.js',
+    '/poc/lesson-1-2/core/learning-runtime.js',
+    '/poc/lesson-1-2/core/learning-outcome-practice.js',
+    '/poc/lesson-1-2/core/learning-microtask-scene.js',
+    '/poc/lesson-1-2/course/experience.js'
   ]);
 
   const result = runRealPageScripts();

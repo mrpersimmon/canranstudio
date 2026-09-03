@@ -23,7 +23,7 @@
   }
 
   function uiIcon(name, className = '') {
-    return `<img class="ui-icon${className ? ` ${escapeHtml(className)}` : ''}" src="/poc/lesson1-2-experience/assets/icons/${escapeHtml(name)}.svg" alt="" aria-hidden="true">`;
+    return `<img class="ui-icon${className ? ` ${escapeHtml(className)}` : ''}" src="/poc/lesson-1-2/course/assets/icons/${escapeHtml(name)}.svg" alt="" aria-hidden="true">`;
   }
 
   function imageMime(value) {
@@ -1664,7 +1664,7 @@
       const refKind = content(activeRef) ? 'content' : 'source';
       return `<div class="shared-listen-replay" role="group" aria-label="${escapeHtml(languageAudioCopy.regionLabel || '')}">
         <button class="language-audio-play shared-listen-replay__button${playing ? ' is-playing' : ''}" type="button" data-action="${requiredAudioBlocked ? 'audio-play' : 'free-audio'}"${requiredAudioBlocked ? '' : ` data-value="${escapeHtml(activeRef)}" data-ref-kind="${refKind}"`} aria-label="${escapeHtml(requiredAudioBlocked ? (languageAudioCopy.playLabel || '') : (languageAudioCopy.replayLabel || ''))}" title="${escapeHtml(requiredAudioBlocked ? (languageAudioCopy.playLabel || '') : (languageAudioCopy.replayLabel || ''))}"${playing ? ' disabled' : ''}>
-          <img src="/poc/lesson1-2-experience/assets/starlight-audio-replay-v1.png" alt="" aria-hidden="true">
+          <img src="/poc/lesson-1-2/course/assets/starlight-audio-replay-v1.png" alt="" aria-hidden="true">
         </button>
       </div>`;
     }

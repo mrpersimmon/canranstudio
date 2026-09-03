@@ -6,7 +6,7 @@
 >
 > 当前候选：NCE-U01 / Lesson 1–2 · 星灯失物招领站
 >
-> 实际页面路由：http://127.0.0.1:4173/poc/lesson1-2-experience/
+> 实际页面路由：http://127.0.0.1:4173/poc/lesson-1-2/
 >
 > 实现修订：Catalog 为 lesson1-2-v2.6；页面启动修订为 lesson1-2-v2-20260828-r4
 >

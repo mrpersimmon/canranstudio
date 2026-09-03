@@ -53,5 +53,40 @@ test('every isolated POC course exposes only the canonical lesson-pair entry rou
       new RegExp(`alias\\s+${escapeRegExp(isolatedRoot)}`),
       `${filename}: canonical route must use the isolated release root`
     );
+    assert.match(
+      source,
+      new RegExp(`location\\s*=\\s*${escapeRegExp(canonical)}\\s*\\{[\\s\\S]*?rewrite\\s+\\^\\s+${escapeRegExp(`${canonical}course/index.html`)}\\s+last;`),
+      `${filename}: canonical entry must resolve through its native course namespace`
+    );
+    assert.match(
+      source,
+      new RegExp(`location\\s*=\\s*${escapeRegExp(`${canonical}review/`)}\\s*\\{[\\s\\S]*?rewrite\\s+\\^\\s+${escapeRegExp(`${canonical}review-files/index.html`)}\\s+last;`),
+      `${filename}: canonical review entry must resolve through its native review namespace`
+    );
+    for (const prefix of ['assets', 'core', 'course', 'review-files']) {
+      assert.match(
+        source,
+        new RegExp(`location\\s+\\^~\\s+${escapeRegExp(`${canonical}${prefix}/`)}`),
+        `${filename}: canonical namespace must expose ${prefix}/`
+      );
+    }
+    const coreLocation = source.match(new RegExp(
+      `location\\s+\\^~\\s+${escapeRegExp(`${canonical}core/`)}\\s*\\{[\\s\\S]*?\\n\\}`
+    ))?.[0] || '';
+    assert.match(
+      coreLocation,
+      new RegExp(`Service-Worker-Allowed\\s+"${escapeRegExp(canonical)}"\\s+always;`),
+      `${filename}: service worker must be allowed to control the canonical course scope`
+    );
+    assert.match(
+      coreLocation,
+      /connect-src 'self'; worker-src 'self';/,
+      `${filename}: package fetches and the same-origin worker must be allowed`
+    );
+    assert.doesNotMatch(
+      source,
+      /sub_filter/,
+      `${filename}: response-body rewriting would invalidate packaged resource hashes`
+    );
   }
 });

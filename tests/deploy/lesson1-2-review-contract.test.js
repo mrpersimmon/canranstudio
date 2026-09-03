@@ -18,14 +18,14 @@ test('Lesson 1–2 cross-day review is a hidden catalog-driven runtime page', as
   assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
   assert.doesNotMatch(page, /<title>[^<]+<\/title>/,
     'the static shell must not own authored page title copy');
-  assert.match(page, /<link\s+rel="icon"\s+href="\/poc\/lesson1-2-review\/favicon\.svg"/i);
+  assert.match(page, /<link\s+rel="icon"\s+href="\/poc\/lesson-1-2\/review-files\/favicon\.svg"/i);
   assert.match(favicon, /^<svg[\s\S]*<path\b[\s\S]*<\/svg>\s*$/);
   const sources = [
-    '/core/curriculum-catalog.js',
-    '/core/learning-store.js',
-    '/core/learning-ledger.js',
-    '/core/learning-review-runtime.js',
-    '/poc/lesson1-2-review/review.js'
+    '/poc/lesson-1-2/core/curriculum-catalog.js',
+    '/poc/lesson-1-2/core/learning-store.js',
+    '/poc/lesson-1-2/core/learning-ledger.js',
+    '/poc/lesson-1-2/core/learning-review-runtime.js',
+    '/poc/lesson-1-2/review-files/review.js'
   ];
   const positions = sources.map(source => page.indexOf(`src="${source}`));
   assert.ok(positions.every(position => position >= 0));

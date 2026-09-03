@@ -22,7 +22,7 @@
 ## Latest implementation sync — 删除独立徽章并直呈 car/house（2026-08-23）
 
 - scope: as-built 文档同步，不是新的视觉方案选择或儿童验收
-- current implementation: `http://127.0.0.1:4173/poc/lesson1-2-experience/`
+- current implementation: `http://127.0.0.1:4173/poc/lesson-1-2/`
 - active route: Lesson 1 五项 + Lesson 2 十项；`L01-M04` 已退役并恢复到 `L01-M05`
 - current objects: handbag + 八张透明物品资产 + car/house 两张完整小镇场景资产
 - current story change: 独立徽章感谢页整体删除；T5 留在外套真实归还；car/house 不再使用钥匙、钥匙交接或额外感谢动作
@@ -35,7 +35,7 @@
 
 - source visual truth: `/Users/permission/.codex/generated_images/019ff04d-0b92-7441-bdf8-08e572cb4e45/exec-2e5f403a-ff6d-42b7-875e-0514037363c5.png`
 - source pixels: `1598 × 984`
-- current implementation: `http://127.0.0.1:4173/poc/lesson1-2-experience/`
+- current implementation: `http://127.0.0.1:4173/poc/lesson-1-2/`
 - intended comparison state: `NCE-U01 / L01-M02:S01 / audio-playing / correct Excuse me!`
 - intended desktop viewport: current Codex in-app Browser viewport, device density `1`
 - intended mobile viewport: `390 × 844` CSS px, device density `1`

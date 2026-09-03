@@ -10,11 +10,25 @@ const { validateManifest } = require('../../core/course-package-installer');
 
 const ROOT = path.resolve(__dirname, '../..');
 const CASES = [
-  ['NCE-U01', 'poc/lesson1-2-experience', '/poc/lesson1-2-experience/', 6 * 1024 * 1024],
+  ['NCE-U01', 'poc/lesson1-2-experience', '/poc/lesson-1-2/', 6 * 1024 * 1024],
   ['NCE-U02', 'poc/lesson3-4-experience', '/poc/lesson3-4-experience/', 4 * 1024 * 1024],
   ['NCE-U03', 'poc/lesson5-6-experience', '/poc/lesson5-6-experience/', 3 * 1024 * 1024],
   ['NCE-U04', 'poc/lesson7-8-experience', '/poc/lesson7-8-experience/', 3 * 1024 * 1024]
 ];
+
+function sourceResourcePath(publicUrl) {
+  for (const [publicPrefix, sourcePrefix] of [
+    ['/poc/lesson-1-2/course/', '/poc/lesson1-2-experience/'],
+    ['/poc/lesson-1-2/core/', '/core/'],
+    ['/poc/lesson-1-2/assets/', '/assets/'],
+    ['/poc/lesson-1-2/review-files/', '/poc/lesson1-2-review/']
+  ]) {
+    if (publicUrl.startsWith(publicPrefix)) {
+      return path.join(ROOT, `${sourcePrefix}${publicUrl.slice(publicPrefix.length)}`.slice(1));
+    }
+  }
+  return path.join(ROOT, publicUrl.slice(1));
+}
 
 function digest(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
@@ -37,7 +51,7 @@ for (const [unitId, directory, scopePath, byteBudget] of CASES) {
     }));
 
     for (const entry of manifest.entries) {
-      const bytes = fs.readFileSync(path.join(ROOT, entry.url.slice(1)));
+      const bytes = fs.readFileSync(sourceResourcePath(entry.url));
       assert.equal(bytes.length, entry.bytes, `${entry.url} byte count`);
       assert.equal(digest(bytes), entry.sha256, `${entry.url} integrity`);
     }
@@ -48,22 +62,34 @@ for (const [unitId, directory, scopePath, byteBudget] of CASES) {
       fs.readFileSync(path.join(ROOT, directory, 'course-package-manifest.json'), 'utf8')
     );
     const urls = new Set(manifest.entries.map(entry => entry.url));
-    const catalogUrl = `/${directory}/course-package/unit-catalog.json`;
-    const unit = JSON.parse(fs.readFileSync(path.join(ROOT, catalogUrl.slice(1)), 'utf8'));
+    const canonical = unitId === 'NCE-U01';
+    const catalogUrl = canonical
+      ? '/poc/lesson-1-2/course/course-package/unit-catalog.json'
+      : `/${directory}/course-package/unit-catalog.json`;
+    const corePrefix = canonical ? '/poc/lesson-1-2/core/' : '/core/';
+    const assetPrefix = canonical ? '/poc/lesson-1-2/assets/' : '/assets/';
+    const manifestUrl = canonical
+      ? '/poc/lesson-1-2/course/course-package-manifest.json'
+      : `/${directory}/course-package-manifest.json`;
+    const unit = JSON.parse(fs.readFileSync(sourceResourcePath(catalogUrl), 'utf8'));
 
     assert.equal(unit.unitId, unitId);
     assert.ok(urls.has(catalogUrl));
-    assert.ok(urls.has('/core/course-package-entry.js'));
-    assert.ok(urls.has('/core/course-package-installer.js'));
-    assert.ok(urls.has('/core/course-package-service-worker.js'));
-    assert.ok(!urls.has('/core/curriculum-catalog.js'));
-    assert.ok(!urls.has('/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2'));
+    assert.ok(urls.has(`${corePrefix}course-package-entry.js`));
+    assert.ok(urls.has(`${corePrefix}course-package-installer.js`));
+    assert.ok(urls.has(`${corePrefix}course-package-service-worker.js`));
+    assert.ok(!urls.has(manifestUrl), 'a package manifest cannot hash itself');
+    assert.ok(!urls.has(`${corePrefix}curriculum-catalog.js`));
+    assert.ok(!urls.has(`${assetPrefix}fonts/zcool-kuaile-chinese-simplified-400.woff2`));
     assert.ok([...urls].some(url => (
-      /^\/assets\/fonts\/course-package\/zcool-kuaile-\d+-400-normal-[a-f0-9]{16}\.woff2$/.test(url)
+      new RegExp(
+        `^${assetPrefix.replaceAll('/', '\\/')}fonts\\/course-package\\/`
+          + 'zcool-kuaile-\\d+-400-normal-[a-f0-9]{16}\\.woff2$'
+      ).test(url)
     )));
     for (const frame of [1, 2, 3, 4]) {
       assert.ok(urls.has(
-        `/assets/adventure-map/mascot/loader/frame-${frame}-route-page-20260806-01-192.webp`
+        `${assetPrefix}adventure-map/mascot/loader/frame-${frame}-route-page-20260806-01-192.webp`
       ));
     }
 

@@ -3,7 +3,7 @@
 const { test, expect } = require('@playwright/test');
 const catalog = require('../../core/curriculum-catalog');
 
-const EXPERIENCE_PATH = '/poc/lesson1-2-experience/?package-test-bypass=1';
+const EXPERIENCE_PATH = '/poc/lesson-1-2/?package-test-bypass=1';
 const unit = catalog.getTeachingUnit('NCE-U01');
 const tasks = unit.beats.flatMap(beat => beat.microtasks || []);
 const taskById = new Map(tasks.map(task => [task.microtaskId, task]));
@@ -1162,7 +1162,7 @@ test('the first listen keeps all seven lines visible and advances only after the
       }));
     }, { once: true });
   }, [pagehideSnapshotKey, lifecycleToken]);
-  await page.goto('/poc/lesson1-2-review/');
+  await page.goto('/poc/lesson-1-2/review/');
   const pagehideCapture = JSON.parse(await page.evaluate(
     key => sessionStorage.getItem(key), pagehideSnapshotKey
   ));
@@ -1609,7 +1609,7 @@ test('owner recall keeps both neutral candidates reachable before revealing the 
   const heartIcons = page.locator('.adventure-heart .ui-icon');
   await expect(heartIcons).toHaveCount(3);
   expect(await heartIcons.evaluateAll(images => images.map(image => image.getAttribute('src'))))
-    .toEqual(Array(3).fill('/poc/lesson1-2-experience/assets/icons/heart-fill.svg'));
+    .toEqual(Array(3).fill('/poc/lesson-1-2/course/assets/icons/heart-fill.svg'));
 
   const ownerChallenge = activeContract(snapshot).challenge;
   await submitRule(page, ownerChallenge.answerRule, ownerChallenge, { correct: true });
@@ -3055,7 +3055,7 @@ test('desktop and accepted phone widths have no horizontal or nested-card scroll
 
 test('the main experience links to the isolated catalog-owned cross-day review contract', async () => {
   expect(unit.experience.reviewRun).toMatchObject({
-    href: '/poc/lesson1-2-review/',
+    href: '/poc/lesson-1-2/review/',
     itemRange: [2, 4],
     durationSecondsRange: [45, 90],
     deferLabel: expect.any(String),

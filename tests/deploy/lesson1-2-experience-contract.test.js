@@ -10,7 +10,7 @@ const catalog = require('../../core/curriculum-catalog');
 
 const ROOT = path.resolve(__dirname, '../..');
 
-test('the Lesson 1–2 review route is isolated from the production release root', async () => {
+test('the Lesson 1–2 public namespace is native, isolated, and self-contained', async () => {
   const [config, reviewRuntime] = await Promise.all([
     fs.readFile(path.join(
       ROOT,
@@ -22,7 +22,7 @@ test('the Lesson 1–2 review route is isolated from the production release root
   assert.match(config, /location\s*=\s*\/poc\/lesson-1-2\s*\{[\s\S]*return\s+308\s+\/poc\/lesson-1-2\/;/);
   assert.match(
     config,
-    /location\s*=\s*\/poc\/lesson-1-2\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/index\.html\s+last;/
+    /location\s*=\s*\/poc\/lesson-1-2\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/course\/index\.html\s+last;/
   );
   assert.match(
     config,
@@ -30,43 +30,30 @@ test('the Lesson 1–2 review route is isolated from the production release root
   );
   assert.match(
     config,
-    /location\s*=\s*\/poc\/lesson-1-2\/review\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/poc\/lesson1-2-review\/index\.html\s+last;/
+    /location\s*=\s*\/poc\/lesson-1-2\/review\/\s*\{[^}]*rewrite\s+\^\s+\/poc\/lesson-1-2\/review-files\/index\.html\s+last;/
   );
-  assert.doesNotMatch(
-    config,
-    /alias\s+\/var\/www\/canranstudio-lesson-1-2\/current\/poc\/lesson1-2-experience\/index\.html;/
-  );
-  for (const prefix of [
-    'assets',
-    'core',
-    'poc/lesson1-2-experience',
-    'poc/lesson1-2-review'
+  for (const [prefix, source] of [
+    ['assets', 'assets'],
+    ['core', 'core'],
+    ['course', 'poc/lesson1-2-experience'],
+    ['review-files', 'poc/lesson1-2-review']
   ]) {
-    assert.match(config, new RegExp(
-      `location\\s+\\^~\\s+\\/poc\\/lesson-1-2\\/${prefix.replaceAll('/', '\\/')}\\/`
-    ));
+    const location = config.match(new RegExp(
+      `location\\s+\\^~\\s+\\/poc\\/lesson-1-2\\/${prefix}\\/\\s*\\{[\\s\\S]*?\\n\\}`
+    ))?.[0] || '';
+    assert.match(
+      location,
+      new RegExp(`alias\\s+\\/var\\/www\\/canranstudio-lesson-1-2\\/current\\/${source.replaceAll('/', '\\/')}\\/;`)
+    );
+    assert.match(location, /X-Robots-Tag\s+"noindex, nofollow, noarchive"\s+always;/);
   }
-  assert.match(config, /X-Robots-Tag\s+"noindex, nofollow, noarchive"\s+always;/);
-  assert.match(config, /sub_filter\s+'"\/core\/'\s+'"\/poc\/lesson-1-2\/core\/'/);
-  assert.match(config, /sub_filter\s+'"\/assets\/'\s+'"\/poc\/lesson-1-2\/assets\/'/);
-  assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-experience\/'\s+'"\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
-  assert.match(config, /sub_filter\s+'`\/poc\/lesson1-2-experience\/'\s+'`\/poc\/lesson-1-2\/poc\/lesson1-2-experience\/'/);
-  assert.match(config, /sub_filter\s+'"\/poc\/lesson1-2-review\/'\s+'"\/poc\/lesson-1-2\/review\/'/);
-  assert.match(config, /sub_filter\s+"'\/poc\/lesson1-2-review\/"\s+"'\/poc\/lesson-1-2\/review\/"/);
-  assert.match(config, /sub_filter\s+'`\/poc\/lesson1-2-review\/'\s+'`\/poc\/lesson-1-2\/review\/'/);
-  assert.match(reviewRuntime, /href="\/poc\/lesson1-2-experience\/"/);
-  const reviewAlias = config.match(
-    /location\s+\^~\s+\/poc\/lesson-1-2\/poc\/lesson1-2-review\/\s*\{[\s\S]*?\n\}/
+  const coreLocation = config.match(
+    /location\s+\^~\s+\/poc\/lesson-1-2\/core\/\s*\{[\s\S]*?\n\}/
   )?.[0] || '';
-  assert.match(
-    reviewAlias,
-    /sub_filter\s+'"\/poc\/lesson1-2-experience\/'\s+'"\/poc\/lesson-1-2\/'/
-  );
-  assert.doesNotMatch(reviewAlias, /lesson-1-2\/poc\/lesson1-2-experience/);
-  const reviewResponse = [...reviewAlias.matchAll(/sub_filter\s+'([^']*)'\s+'([^']*)';/g)]
-    .reduce((body, [, source, target]) => body.replaceAll(source, target), reviewRuntime);
-  assert.match(reviewResponse, /href="\/poc\/lesson-1-2\/"/);
-  assert.doesNotMatch(reviewResponse, /href="\/poc\/lesson-1-2\/poc\//);
+  assert.match(coreLocation, /Service-Worker-Allowed\s+"\/poc\/lesson-1-2\/"\s+always;/);
+  assert.match(coreLocation, /connect-src 'self'; worker-src 'self';/);
+  assert.doesNotMatch(config, /sub_filter/);
+  assert.match(reviewRuntime, /href="\/poc\/lesson-1-2\/"/);
   assert.doesNotMatch(config, /\/var\/www\/canranstudio\/current/);
 });
 
@@ -84,16 +71,16 @@ test('the Lesson 1–2 child experience is hidden, catalog-driven, and locally r
 
   assert.match(page, /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*"/i);
   const initialSources = [
-    '/core/course-package-installer.js',
-    '/core/course-package-entry.js'
+    '/poc/lesson-1-2/core/course-package-installer.js',
+    '/poc/lesson-1-2/core/course-package-entry.js'
   ];
   const deferredSources = [
-    '/core/learning-store.js',
-    '/core/learning-ledger.js',
-    '/core/learning-runtime.js',
-    '/core/learning-outcome-practice.js',
-    '/core/learning-microtask-scene.js',
-    '/poc/lesson1-2-experience/experience.js'
+    '/poc/lesson-1-2/core/learning-store.js',
+    '/poc/lesson-1-2/core/learning-ledger.js',
+    '/poc/lesson-1-2/core/learning-runtime.js',
+    '/poc/lesson-1-2/core/learning-outcome-practice.js',
+    '/poc/lesson-1-2/core/learning-microtask-scene.js',
+    '/poc/lesson-1-2/course/experience.js'
   ];
   const initialScriptOrder = initialSources.map(source => page.indexOf(`src="${source}?v=`));
   const deferredScriptOrder = deferredSources.map(source => page.indexOf(`"${source}?v=`));
@@ -326,8 +313,8 @@ test('optional outcome practice is catalog-owned and keeps a complete isolated a
     fs.readFile(path.join(ROOT, 'core/learning-microtask-scene.js'), 'utf8'),
     fs.readFile(path.join(ROOT, 'core/learning-outcome-practice.js'), 'utf8')
   ]);
-  const practiceScript = '/core/learning-outcome-practice.js';
-  const sceneScript = '/core/learning-microtask-scene.js';
+  const practiceScript = '/poc/lesson-1-2/core/learning-outcome-practice.js';
+  const sceneScript = '/poc/lesson-1-2/core/learning-microtask-scene.js';
   assert.ok(page.indexOf(`"${practiceScript}?v=`) >= 0);
   assert.ok(page.indexOf(`"${practiceScript}?v=`) < page.indexOf(`"${sceneScript}?v=`));
   assert.match(bootstrap, /outcomePracticeFactory:\s*core\.learningOutcomePractice/);
@@ -568,8 +555,18 @@ test('the local candidate voice pack covers every catalog audio identity and sta
     ...Object.values(unit.authoredContent)
   ].filter(item => item.audioSrc).map(item => ({
     sourceId: item.sourceId || item.contentId,
-    path: item.audioSrc
+    path: item.audioSrc.replace(
+      '/poc/lesson-1-2/course/',
+      '/poc/lesson1-2-experience/'
+    )
   }));
+
+  assert.ok([
+    ...Object.values(unit.lessonContent).flatMap(lesson => Object.values(lesson.sources)),
+    ...Object.values(unit.authoredContent)
+  ].filter(item => item.audioSrc).every(item => (
+    item.audioSrc.startsWith('/poc/lesson-1-2/course/audio/')
+  )));
 
   assert.equal(manifest.status, 'local-poc-candidate-unreviewed');
   assert.equal(manifest.voiceBaselineId, unit.voiceBaselineId);

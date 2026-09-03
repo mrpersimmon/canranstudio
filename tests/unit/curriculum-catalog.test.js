@@ -965,7 +965,7 @@ test('Lesson 1–2 V2 freezes shuffle, review, and full-dual-channel production 
   ]);
   assert.ok(results.every(result => unit.reviewContexts[result.reviewContextId]));
   assert.ok(Object.values(unit.reviewContexts).every(context => (
-    context.backdropAssetSrc?.startsWith('/poc/lesson1-2-experience/assets/')
+    context.backdropAssetSrc?.startsWith('/poc/lesson-1-2/course/assets/')
     && typeof context.backdropPosition === 'string'
   )));
   assert.equal(unit.experience.uiCopy.interaction.selectExpression, '选合适的英语');
@@ -981,7 +981,7 @@ test('Lesson 1–2 V2 freezes shuffle, review, and full-dual-channel production 
   ]);
   assert.equal(unit.experience.reviewRun.copy.entryTitle, '找回昨日线索');
   assert.equal(unit.experience.reviewRun.copy.rescueTitle, '小猫换个场景示范');
-  assert.equal(unit.experience.reviewRun.href, '/poc/lesson1-2-review/');
+  assert.equal(unit.experience.reviewRun.href, '/poc/lesson-1-2/review/');
 });
 
 test('Lesson 1–2 V2 keeps accepted clothing hashes separate from unreviewed audio candidates', () => {
@@ -1855,8 +1855,8 @@ test('Lesson 1 and Lesson 2 introduce the lost-handbag premise before the dialog
     kicker: '开门前 · 先看看发生了什么',
     title: '小站收到一只没人认领的手提包',
     copy: '一位先生和一位女士来到窗口。先听他们怎么说，再帮手提包找到主人。',
-    imageSrc: '/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.avif',
-    imageFallbackSrc: '/poc/lesson1-2-experience/assets/premise-handbag-arrival-v1.jpg',
+    imageSrc: '/poc/lesson-1-2/course/assets/premise-handbag-arrival-v1.avif',
+    imageFallbackSrc: '/poc/lesson-1-2/course/assets/premise-handbag-arrival-v1.jpg',
     imageAlt: '探险小猫指着柜台上的手提包，一位先生和一位女士正准备交谈。',
     actionLabel: '去听他们说话'
   });
@@ -1872,15 +1872,15 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
     entityKind: 'character',
     voiceRole: 'man',
     dialogueSide: 'left',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-man-cutout-v1.webp'
+    assetSrc: '/poc/lesson-1-2/course/assets/character-adult-man-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson-1-2/course/assets/character-adult-man-cutout-v1.webp'
   };
   const womanAsset = {
     entityKind: 'character',
     voiceRole: 'woman',
     dialogueSide: 'right',
-    assetSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/character-adult-woman-cutout-v1.webp'
+    assetSrc: '/poc/lesson-1-2/course/assets/character-adult-woman-cutout-v1.avif',
+    assetFallbackSrc: '/poc/lesson-1-2/course/assets/character-adult-woman-cutout-v1.webp'
   };
   const explorerCatAsset = {
     entityKind: 'character',
@@ -1917,8 +1917,8 @@ test('Lesson 1 and Lesson 2 use one illustrated adult cast and one explorer-cat 
     assetSrc: entities.handbag.assetSrc,
     assetFallbackSrc: entities.handbag.assetFallbackSrc
   }, {
-    assetSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.avif',
-    assetFallbackSrc: '/poc/lesson1-2-experience/assets/handbag-prop-v1.webp'
+    assetSrc: '/poc/lesson-1-2/course/assets/handbag-prop-v1.avif',
+    assetFallbackSrc: '/poc/lesson-1-2/course/assets/handbag-prop-v1.webp'
   });
   assert.deepEqual({
     entityKind: entities['cat-guide'].entityKind,
@@ -1965,8 +1965,8 @@ test('all eleven textbook objects use illustrated project assets instead of emoj
   for (const [entityId, basename] of Object.entries(expectedAssets)) {
     const entity = unit.entities[entityId];
     assert.equal(entity.symbol, undefined, entityId);
-    assert.equal(entity.assetSrc, `/poc/lesson1-2-experience/assets/${basename}.avif`, entityId);
-    assert.equal(entity.assetFallbackSrc, `/poc/lesson1-2-experience/assets/${basename}.webp`, entityId);
+    assert.equal(entity.assetSrc, `/poc/lesson-1-2/course/assets/${basename}.avif`, entityId);
+    assert.equal(entity.assetFallbackSrc, `/poc/lesson-1-2/course/assets/${basename}.webp`, entityId);
   }
 
   const lessonThreeFour = catalog.getTeachingUnit('NCE-U02');

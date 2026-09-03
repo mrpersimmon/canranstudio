@@ -5,7 +5,8 @@ const path = require('node:path');
 const { createHash } = require('node:crypto');
 const { test, expect } = require('@playwright/test');
 
-const EXPERIENCE_PATH = '/poc/lesson1-2-experience/';
+const EXPERIENCE_PATH = '/poc/lesson-1-2/';
+const COURSE_ASSET_PATH = `${EXPERIENCE_PATH}course/`;
 const MANIFEST_PATH = path.resolve(
   __dirname,
   '../../poc/lesson1-2-experience/course-package-manifest.json'
@@ -73,7 +74,7 @@ test('I03 cold preparation shows real progress, then auto-enters with course ass
   expect(await visibleImage.evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
 
   const rangedAudio = await page.evaluate(async () => {
-    const response = await fetch('/poc/lesson1-2-experience/audio/l01-d01.mp3', {
+    const response = await fetch('/poc/lesson-1-2/course/audio/l01-d01.mp3', {
       headers: { Range: 'bytes=0-63' }
     });
     return {
@@ -127,8 +128,8 @@ test('I03 same-version warm preparation auto-enters within one second without fa
 
   const allowedNetworkChecks = new Set([
     new URL(EXPERIENCE_PATH, 'http://127.0.0.1:4173').href,
-    new URL(`${EXPERIENCE_PATH}course-package-manifest.json`, 'http://127.0.0.1:4173').href,
-    new URL('/core/course-package-service-worker.js?v=course-package-v1', 'http://127.0.0.1:4173').href
+    new URL(`${COURSE_ASSET_PATH}course-package-manifest.json`, 'http://127.0.0.1:4173').href,
+    new URL('/poc/lesson-1-2/core/course-package-service-worker.js?v=course-package-v1', 'http://127.0.0.1:4173').href
   ]);
   const packageMisses = warmResponses.filter(item => (
     isCourseAsset(item.url)
@@ -225,9 +226,9 @@ test('Lesson 1–2 loading copy stays minimal at desktop and phone widths', asyn
 });
 
 test('I03 service worker is explicitly allowed to control each course scope', async ({ request }) => {
-  const response = await request.get('/core/course-package-service-worker.js');
+  const response = await request.get('/poc/lesson-1-2/core/course-package-service-worker.js');
   expect(response.ok()).toBeTruthy();
-  expect(response.headers()['service-worker-allowed']).toBe('/');
+  expect(response.headers()['service-worker-allowed']).toBe('/poc/lesson-1-2/');
 });
 
 test('I03 stalled preparation exposes slow-network copy and all three recovery paths', async ({ page }) => {

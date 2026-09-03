@@ -14,26 +14,35 @@ const CHINESE_SHARD_DIRECTORY = path.join(ROOT, 'node_modules/@fontsource/zcool-
 const SHARED_FONT_DIRECTORY = path.join(ROOT, 'assets/fonts/course-package');
 const PACKAGE_SCHEMA = 1;
 const PACKAGE_REVISION = 'course-package-v1';
+const U01_PUBLIC_ROUTE = '/poc/lesson-1-2/';
 const RESOURCE_EXTENSION = /\.(?:avif|css|jpe?g|js|json|mp3|png|svg|webp|woff2)$/i;
-const ABSOLUTE_RESOURCE = /\/(?:assets|core|poc)\/[A-Za-z0-9._~!$&'()*+,;=:@%/\-]+\.(?:avif|css|jpe?g|js|json|mp3|png|svg|webp|woff2)/gi;
+const ABSOLUTE_RESOURCE = /\/(?:assets|core|poc)\/[A-Za-z0-9._~!$&'()*+,;=:@%/\-]+\.(?:avif|css|jpe?g|json|js|mp3|png|svg|webp|woff2)/gi;
+const RESOURCE_SOURCE_ALIASES = Object.freeze([
+  [`${U01_PUBLIC_ROUTE}course/`, '/poc/lesson1-2-experience/'],
+  [`${U01_PUBLIC_ROUTE}core/`, '/core/'],
+  [`${U01_PUBLIC_ROUTE}assets/`, '/assets/'],
+  [`${U01_PUBLIC_ROUTE}review-files/`, '/poc/lesson1-2-review/']
+]);
 
 const UNITS = [
   {
     unitId: 'NCE-U01',
     pageDirectory: 'poc/lesson1-2-experience',
-    scopePath: '/poc/lesson1-2-experience/',
+    scopePath: U01_PUBLIC_ROUTE,
+    manifestUrl: `${U01_PUBLIC_ROUTE}course/course-package-manifest.json`,
+    unitCatalogUrl: `${U01_PUBLIC_ROUTE}course/course-package/unit-catalog.json`,
     styles: [
-      '/poc/lesson1-2-experience/course-fonts.css',
-      '/poc/lesson1-2-experience/experience.css',
-      '/core/candidate-pointing-feedback.css'
+      '/poc/lesson-1-2/course/course-fonts.css',
+      '/poc/lesson-1-2/course/experience.css',
+      '/poc/lesson-1-2/core/candidate-pointing-feedback.css'
     ],
     scripts: [
-      '/core/learning-store.js',
-      '/core/learning-ledger.js',
-      '/core/learning-runtime.js',
-      '/core/learning-outcome-practice.js',
-      '/core/learning-microtask-scene.js',
-      '/poc/lesson1-2-experience/experience.js'
+      '/poc/lesson-1-2/core/learning-store.js',
+      '/poc/lesson-1-2/core/learning-ledger.js',
+      '/poc/lesson-1-2/core/learning-runtime.js',
+      '/poc/lesson-1-2/core/learning-outcome-practice.js',
+      '/poc/lesson-1-2/core/learning-microtask-scene.js',
+      '/poc/lesson-1-2/course/experience.js'
     ]
   },
   {
@@ -100,7 +109,7 @@ const U01_DYNAMIC_ICONS = [
   'heart-fill.svg',
   'play-fill.svg',
   'star-fill.svg'
-].map(name => `/poc/lesson1-2-experience/assets/icons/${name}`);
+].map(name => `/poc/lesson-1-2/course/assets/icons/${name}`);
 
 const LATIN_FONT_FACES = [
   ['Baloo 2', 500, 'baloo-2-latin-500.woff2'],
@@ -131,11 +140,45 @@ function writeIfChanged(filePath, content) {
   return true;
 }
 
+function publicResourceUrl(config, value) {
+  if (config.unitId !== 'NCE-U01' || typeof value !== 'string') return value;
+  if (value.startsWith('/assets/')) return `${U01_PUBLIC_ROUTE}assets/${value.slice('/assets/'.length)}`;
+  if (value.startsWith('/core/')) return `${U01_PUBLIC_ROUTE}core/${value.slice('/core/'.length)}`;
+  if (value === '/poc/lesson1-2-experience/') return U01_PUBLIC_ROUTE;
+  if (value.startsWith('/poc/lesson1-2-experience/')) {
+    return `${U01_PUBLIC_ROUTE}course/${value.slice('/poc/lesson1-2-experience/'.length)}`;
+  }
+  if (value === '/poc/lesson1-2-review/') return `${U01_PUBLIC_ROUTE}review/`;
+  if (value.startsWith('/poc/lesson1-2-review/')) {
+    return `${U01_PUBLIC_ROUTE}review-files/${value.slice('/poc/lesson1-2-review/'.length)}`;
+  }
+  return value;
+}
+
+function mapPublicResourceUrls(config, value) {
+  if (typeof value === 'string') return publicResourceUrl(config, value);
+  if (!value || typeof value !== 'object') return value;
+  if (Array.isArray(value)) return value.map(item => mapPublicResourceUrls(config, item));
+  return Object.fromEntries(
+    Object.entries(value).map(([key, nested]) => [key, mapPublicResourceUrls(config, nested)])
+  );
+}
+
+function sourceResourceUrl(resourceUrlValue) {
+  for (const [publicPrefix, sourcePrefix] of RESOURCE_SOURCE_ALIASES) {
+    if (resourceUrlValue.startsWith(publicPrefix)) {
+      return `${sourcePrefix}${resourceUrlValue.slice(publicPrefix.length)}`;
+    }
+  }
+  return resourceUrlValue;
+}
+
 function resourcePath(resourceUrl) {
   if (!resourceUrl.startsWith('/') || resourceUrl.includes('..')) {
     throw new Error(`unsafe course-package resource URL: ${resourceUrl}`);
   }
-  const filePath = path.resolve(ROOT, `.${decodeURIComponent(resourceUrl)}`);
+  const sourceUrl = sourceResourceUrl(resourceUrl);
+  const filePath = path.resolve(ROOT, `.${decodeURIComponent(sourceUrl)}`);
   if (!filePath.startsWith(`${ROOT}${path.sep}`)) {
     throw new Error(`course-package resource escapes the repository: ${resourceUrl}`);
   }
@@ -381,7 +424,10 @@ function buildUnit(config, catalog, latinFaces) {
 
   const pageDirectory = path.join(ROOT, config.pageDirectory);
   const htmlPath = path.join(pageDirectory, 'index.html');
-  const packageUnit = normalizeUnitImages(JSON.parse(JSON.stringify(unit)));
+  const packageUnit = normalizeUnitImages(mapPublicResourceUrls(
+    config,
+    JSON.parse(JSON.stringify(unit))
+  ));
   const unitCatalogPath = path.join(pageDirectory, 'course-package/unit-catalog.json');
   const unitCatalogJson = `${JSON.stringify(packageUnit, null, 2)}\n`;
   writeIfChanged(unitCatalogPath, unitCatalogJson);
@@ -390,28 +436,41 @@ function buildUnit(config, catalog, latinFaces) {
   for (const resource of [...config.styles.filter(value => !value.endsWith('/course-fonts.css')), ...config.scripts]) {
     textInputs.push(fs.readFileSync(resourcePath(resource), 'utf8'));
   }
-  const chineseSubsets = materializeChineseSubset(textInputs.join('\n'));
-  const courseFontsCss = materializeCourseFonts(config, latinFaces, chineseSubsets);
+  const unitLatinFaces = latinFaces.map(face => ({
+    ...face,
+    url: publicResourceUrl(config, face.url)
+  }));
+  const chineseSubsets = materializeChineseSubset(textInputs.join('\n')).map(face => ({
+    ...face,
+    url: publicResourceUrl(config, face.url)
+  }));
+  const courseFontsCss = materializeCourseFonts(config, unitLatinFaces, chineseSubsets);
+  const bootstrapResources = BOOTSTRAP_RESOURCES.map(value => publicResourceUrl(config, value));
 
   const resources = new Set([
-    ...BOOTSTRAP_RESOURCES,
+    ...bootstrapResources,
     ...config.styles,
     ...config.scripts,
-    ...latinFaces.map(face => face.url),
+    ...unitLatinFaces.map(face => face.url),
     ...chineseSubsets.map(face => face.url),
-    `/${config.pageDirectory}/course-package/unit-catalog.json`
+    config.unitCatalogUrl || `/${config.pageDirectory}/course-package/unit-catalog.json`
   ]);
   if (config.unitId === 'NCE-U01') {
     for (const icon of U01_DYNAMIC_ICONS) resources.add(icon);
   }
   collectObjectResources(packageUnit, resources);
   collectTextResources(fs.readFileSync(htmlPath, 'utf8'), config.scopePath, resources);
-  collectTextResources(courseFontsCss, `/${config.pageDirectory}/course-fonts.css`, resources);
-  for (const resource of [...config.styles, ...config.scripts, ...BOOTSTRAP_RESOURCES]) {
+  const courseFontsUrl = config.styles.find(value => value.endsWith('/course-fonts.css'));
+  collectTextResources(courseFontsCss, courseFontsUrl, resources);
+  for (const resource of [...config.styles, ...config.scripts, ...bootstrapResources]) {
     const filePath = resourcePath(resource);
     if (!/\.(?:css|js)$/i.test(filePath)) continue;
     collectTextResources(fs.readFileSync(filePath, 'utf8'), resource, resources);
   }
+
+  const manifestUrl = config.manifestUrl
+    || `/${config.pageDirectory}/course-package-manifest.json`;
+  resources.delete(manifestUrl);
 
   const entries = [...resources]
     .map(value => resourceUrl(value, config.scopePath))
