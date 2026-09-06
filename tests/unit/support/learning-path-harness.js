@@ -30,13 +30,13 @@ function setup(options = {}) {
     send({ type: 'continue' });
   }
   function finishNode(nodeId) {
-    send({ type: 'open-node', nodeId }); let guard = 0;
+    send({ type: 'map' }); send({ type: 'open-node', nodeId }); let guard = 0;
     while (view().screen === 'activity' && guard++ < 100) completeStep();
     assert.equal(view().screen, 'celebration');
   }
   function reach(id) {
     for (const n of unit.nodes) {
-      send({ type: 'open-node', nodeId: n.id }); let guard = 0;
+      send({ type: 'map' }); send({ type: 'open-node', nodeId: n.id }); let guard = 0;
       while (view().screen === 'activity' && guard++ < 100) { if (view().activityId === id) return; completeStep(); }
     }
     throw Error(`Activity not reached: ${id}`);

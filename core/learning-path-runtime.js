@@ -484,12 +484,8 @@
         stopAudio(); pending = null; view = { screen: 'map', saveState: null, mode: 'main', audio: null }; read();
       } else if (pending || view.screen === 'blocked') {
         if (event.type === 'save-retry' && pending) save(pending.next, pending.after);
-      } else if (event.type === 'open-node') startNode(event.nodeId, event.mode);
+      } else if (event.type === 'open-node' && view.screen === 'map') startNode(event.nodeId, event.mode);
       else if (event.type === 'map') { stopAudio(); view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; }
-      else if (event.type === 'continue-course') {
-        const next = unit.nodes.find(node => !nodeDone(node));
-        if (next) startNode(next.id, 'main');
-      }
       else if (event.type === 'course-summary' && unit.courseId && unit.nodes.every(nodeDone)) {
         stopAudio(); view.screen = 'celebration'; view.mode = 'main'; view.nodeId = unit.nodes.at(-1).id; view.activityId = null; view.storyActivityId = null;
       }

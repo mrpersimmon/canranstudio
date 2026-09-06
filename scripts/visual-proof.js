@@ -7,6 +7,7 @@ const PROOF = 'test-results/readability-proof.json';
 const VIEWPORTS = [[320,568],[420,856],[906,801],[1440,900]];
 const ACTIVITY_IDS = Object.keys(require('../content/learning-course.json').activities);
 const TEACH_IDS = Object.values(require('../content/learning-course.json').activities).filter(a=>a.kind==='teach').map(a=>a.id);
+const NODE_IDS = require('../content/learning-course.json').nodes.map(node=>node.id);
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 function fingerprint(prepared, root = ROOT) {
   const sources = new Map(prepared.sources);
@@ -24,8 +25,11 @@ function validateReport(report) {
   if (report.checks.some(check=>check.expectedTheme!=='dark'||check.canvas!=='rgb(20, 31, 35)')) throw Error('Screens do not share the approved dark theme');
   for (const viewport of VIEWPORTS) {
     const cases = report.checks.filter(check=>String(check.viewport)===String(viewport));
-    for (const name of ['loader','map','story-two-lines','references','celebration','review-complete','blocked','save-failure','map-return','reload-map']) {
+    for (const name of ['loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...NODE_IDS.map(id=>'completion-return-'+id)]) {
       if (!cases.some(check=>check.name===name)) throw Error('Missing browser coverage: '+viewport+' / '+name);
+    }
+    for (const check of cases.filter(c=>['celebration','replay-complete','review-complete'].includes(c.name))) {
+      if (check.completionBoundary?.action !== 'map' || !check.completionBoundary.inViewport) throw Error('Completion must offer a visible return to the path: '+viewport);
     }
     const covered=new Set(cases.filter(c=>c.activityId).map(c=>c.activityId));
     if(ACTIVITY_IDS.some(id=>!covered.has(id)))throw Error('Missing authored activity coverage: '+viewport);
@@ -33,7 +37,7 @@ function validateReport(report) {
     const map=cases.find(c=>c.name==='map');
     if(!map.journeyLayout?.gaps?.length||map.journeyLayout.gaps.some(gap=>Math.abs(gap-map.journeyLayout.pitch)>1))throw Error('Missing or uneven map geometry: '+viewport);
   }
-  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

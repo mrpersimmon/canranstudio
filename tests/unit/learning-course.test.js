@@ -20,8 +20,8 @@ function setup(options={}) {
     else if(a.resultId){for(const id of a.answer)send({type:'select',id});send({type:'check'});hear();}
     send({type:'continue'});
   }
-  function finish(id){send({type:'open-node',nodeId:id});let guard=0;while(view().screen==='activity'&&guard++<100)step();assert.equal(view().screen,'celebration',id);}
-  function reach(id){for(const node of unit.nodes){send({type:'open-node',nodeId:node.id});let guard=0;while(view().screen==='activity'&&guard++<100){if(view().activityId===id)return;step();}}throw Error('Cannot reach '+id);}
+  function finish(id){send({type:'map'});send({type:'open-node',nodeId:id});let guard=0;while(view().screen==='activity'&&guard++<100)step();assert.equal(view().screen,'celebration',id);}
+  function reach(id){for(const node of unit.nodes){send({type:'map'});send({type:'open-node',nodeId:node.id});let guard=0;while(view().screen==='activity'&&guard++<100){if(view().activityId===id)return;step();}}throw Error('Cannot reach '+id);}
   return {adapter,rt,view,send,hear,step,finish,reach};
 }
 
@@ -46,7 +46,7 @@ test('imports original V3.6 results and story proof without modifying the old re
   assert.equal(JSON.stringify(old.adapter.load(old.rt.storageKey)),before);
   assert.deepEqual(h.view().record.results,old.view().record.results);
   assert.deepEqual(h.view().record.storyProgress,old.view().record.storyProgress);
-  h.send({type:'continue-course'});assert.equal(h.view().activityId,'C06:cloak-words');
+  h.send({type:'open-node',nodeId:'C04'});assert.equal(h.view().activityId,'C06:cloak-words');
 });
 
 test('manual teaching cards persist only ended recordings and recover after refresh',()=>{
@@ -57,7 +57,7 @@ test('manual teaching cards persist only ended recordings and recover after refr
   assert.deepEqual(h.view().heardWords,[]);assert.equal(h.view().audio.requestId,obsolete.requestId);
   h.send({type:'audio-ended',requestId:obsolete.requestId,index:0});
   assert.deepEqual(h.view().heardWords,['L03-W01']);h.hear();assert.deepEqual(h.view().heardWords,['L03-W01','L03-W05']);
-  const r=setup({adapter:h.adapter});r.send({type:'continue-course'});assert.deepEqual(r.view().heardWords,['L03-W01','L03-W05']);assert.equal(r.view().canContinue,false);
+  const r=setup({adapter:h.adapter});r.send({type:'open-node',nodeId:'C04'});assert.deepEqual(r.view().heardWords,['L03-W01','L03-W05']);assert.equal(r.view().canContinue,false);
   r.send({type:'continue'});assert.equal(r.view().activityId,'C06:cloak-words');
 });
 
@@ -66,7 +66,7 @@ test('new story advances only after ended audio and a manual continue, and resto
   h.send({type:'continue'});assert.equal(h.view().storyIndex,0);
   h.send({type:'story-start'});h.send({type:'continue'});assert.equal(h.view().storyIndex,0);
   h.hear();assert.equal(h.view().storyIndex,0);h.send({type:'continue'});assert.equal(h.view().storyIndex,1);
-  const r=setup({adapter:h.adapter});r.send({type:'continue-course'});assert.equal(r.view().storyIndex,1);assert.equal(r.view().audio,null);
+  const r=setup({adapter:h.adapter});r.send({type:'open-node',nodeId:'C04'});assert.equal(r.view().storyIndex,1);assert.equal(r.view().audio,null);
 });
 
 test('cross-lesson review is limited, does not duplicate a target, and preserves initial results',()=>{
@@ -91,7 +91,7 @@ test('reference listening supports pause, retry, and contact without awarding co
 test('wrong answer and hint survive refresh without turning supported work into independent work',()=>{
   const h=setup();h.reach('C06:whose-suit');h.hear();const a=unit.activities[h.view().activityId];
   h.send({type:'select',id:a.options.find(o=>!a.answer.includes(o.id)).id});h.send({type:'check'});assert.equal(h.view().feedback,'retry');
-  const r=setup({adapter:h.adapter});r.send({type:'continue-course'});r.hear();assert.equal(r.view().wrong,1);assert.equal(r.view().hintUsed,true);
+  const r=setup({adapter:h.adapter});r.send({type:'open-node',nodeId:'C05'});r.hear();assert.equal(r.view().wrong,1);assert.equal(r.view().hintUsed,true);
   r.step();assert.equal(r.view().record.results[a.resultId].initialEvidence,'supported');
 });
 
@@ -102,3 +102,28 @@ test('missing or changed textbook lines and non-cat actors are rejected',()=>{
 });
 
 module.exports={setup};
+
+test('every completed node returns through its visible primary action to the path',()=>{
+  const h=setup(),render=scene.createRenderer(unit).render;
+  for(const node of unit.nodes){
+    h.finish(node.id);
+    const saved=JSON.stringify(h.view().record);
+    const footer=render(h.view()).split('<footer class="lp-footer">').at(-1);
+    const action=footer.match(/data-action="([^"]+)"[^>]*class="[^"]*lp-primary/)?.[1];
+    assert.equal(action,'map',node.id+': completion must return to the path');
+    h.send({type:action});
+    assert.equal(h.view().screen,'map');assert.equal(h.view().activityId,null);
+    assert.equal(h.view().audio,null);assert.equal(JSON.stringify(h.view().record),saved);
+    const restored=setup({adapter:h.adapter});assert.equal(restored.view().screen,'map');
+    assert.equal(restored.view().completedCount,h.view().completedCount);
+  }
+});
+
+test('completion rejects a direct next-node event until the learner returns to the map',()=>{
+  const h=setup();h.finish('K01');const saved=JSON.stringify(h.view().record);
+  h.send({type:'continue-course'});assert.equal(h.view().screen,'celebration','obsolete continuous-course action must not start another node');
+  h.send({type:'open-node',nodeId:'K03'});assert.equal(h.view().screen,'celebration');
+  assert.equal(JSON.stringify(h.view().record),saved);
+  h.send({type:'map'});h.send({type:'open-node',nodeId:'K03'});
+  assert.equal(h.view().screen,'activity');assert.equal(h.view().nodeId,'K03');
+});

@@ -61,6 +61,15 @@
   window.auditReadability = async function (win, { expectedTheme, name }) {
     const doc = win.document, errors = [], resolved = [];
     const root = doc.querySelector('[data-learning-path]');
+    let completionBoundary = null;
+    if (root.querySelector('.lp-celebration')) {
+      const actions = root.querySelectorAll('.lp-footer .lp-primary');
+      const button = actions[0], rect = button?.getBoundingClientRect();
+      const inViewport = Boolean(rect && rect.top >= 0 && rect.bottom <= win.innerHeight && rect.left >= 0 && rect.right <= win.innerWidth);
+      completionBoundary = {action:button?.dataset.action, inViewport};
+      if (actions.length !== 1 || button.dataset.action !== 'map' || button.disabled) errors.push({rule:'completion-primary-action',action:button?.dataset.action});
+      if (!inViewport) errors.push({rule:'completion-action-offscreen'});
+    }
     const journeyLayout = { gaps: [], pitch: null };
     if (root.querySelector('[data-journey-tab="path"]')) {
       journeyLayout.pitch = parseFloat(win.getComputedStyle(root.querySelector('.journey-app')).getPropertyValue('--journey-pitch'));
@@ -155,6 +164,6 @@
         errors.push({rule:'contrast-unresolved', target:node.target, message:node.failureSummary});
       }
     }
-    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, journeyLayout, resolved, errors};
+    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, journeyLayout, completionBoundary, resolved, errors};
   };
 })();

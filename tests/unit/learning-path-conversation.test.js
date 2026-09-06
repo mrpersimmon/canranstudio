@@ -74,7 +74,7 @@ test('both complete cats stay in the story; handing over uses the cast instead o
 test('learning surfaces omit redundant instruction, mode paragraphs, mascot headings and slow controls', () => {
   const s = setup();
   for (const node of unit.nodes) {
-    s.send({ type: 'open-node', nodeId: node.id }); let guard = 0;
+    s.send({ type: 'map' }); s.send({ type: 'open-node', nodeId: node.id }); let guard = 0;
     while (s.view().screen === 'activity' && guard++ < 100) {
       const html = s.html();
       for (const text of ['跟着气泡听故事', 'Listen then answer this question.', 'Look, listen and repeat.', '慢速听', '正常听', '轻松重练', 'lp-heading-cat', 'lp-task-step']) assert.ok(!html.includes(text), text);

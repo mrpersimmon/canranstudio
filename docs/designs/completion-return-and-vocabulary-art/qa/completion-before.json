@@ -1,0 +1,26 @@
+{
+  "dom": "- main:\n  - button \"休息一下\"\n  - progressbar \"已保存的学习进度\"\n  - generic: 学习路线\n  - paragraph: 新概念英语 · Lesson 1–6\n  - heading \"旧知识，换个地方也会用\" [level=1]\n  - generic \"学习记录\"\n  - generic: 6 / 11 关\n  - button \"下一关\":\n    - generic: 下一关",
+  "geometry": {
+    "buttons": [
+      {
+        "action": "continue-course",
+        "label": "下一关",
+        "rect": {
+          "bottom": 1041,
+          "height": 56,
+          "left": 672.5,
+          "right": 842.5,
+          "top": 985,
+          "width": 170,
+          "x": 672.5,
+          "y": 985
+        }
+      }
+    ],
+    "scrollY": 0,
+    "viewport": [
+      1055,
+      1058
+    ]
+  }
+}

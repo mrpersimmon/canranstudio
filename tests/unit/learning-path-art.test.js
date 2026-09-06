@@ -3,6 +3,19 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const root=path.resolve(__dirname,'../..');
 const {getCourse,validateCourse}=require('../../core/learning-course-catalog');
 const approved=require('../../poc/learning-path/assets/story-v2/manifest.json');
+test('suit and school keep their reviewed imagegen originals, prompts and runtime bindings',()=>{
+  const c=getCourse(),manifest=require('../../poc/learning-path/assets/vocabulary-v2/manifest.json');
+  assert.equal(manifest.generator,'imagegen');
+  assert.deepEqual(manifest.assets.map(art=>art.entityId).sort(),['school','suit']);
+  for(const art of manifest.assets){
+    assert.equal(c.entities[art.entityId].assetSrc,art.assetSrc,'Do not restore the older unreviewed illustration');
+    assert.equal(c.entities[art.entityId].deliveryBackground,'transparent');
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,art.assetSrc))).digest('hex'),art.sha256,'Image replacement needs a new visual review');
+    assert.ok(fs.statSync(path.join(root,art.masterPath)).size>0);
+    assert.ok(fs.statSync(path.join(root,art.originalPath)).size>0);
+    assert.match(fs.readFileSync(path.join(root,art.promptPath),'utf8'),/imagegen|image_gen/i);
+  }
+});
 test('umbrella scene uses the reviewed imagegen set, with inward facing cats and distinct patterned props',()=>{
   const c=getCourse();assert.equal(approved.generator,'imagegen');
   assert.equal(approved.assets.length,6);

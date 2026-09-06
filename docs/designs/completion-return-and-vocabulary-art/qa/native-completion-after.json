@@ -1,0 +1,25 @@
+{
+  "dom": "- main:\n  - button \"休息一下\"\n  - progressbar \"已保存的学习进度\"\n  - generic: 学习路线\n  - paragraph: 重练\n  - heading \"也会说明“不是我的”了\" [level=1]\n  - generic: 6 / 11 关\n  - button \"回到路线\":\n    - generic: 回到路线",
+  "geometry": {
+    "primary": [
+      {
+        "action": "map",
+        "rect": {
+          "bottom": 1041,
+          "height": 56,
+          "left": 672.5,
+          "right": 842.5,
+          "top": 985,
+          "width": 170,
+          "x": 672.5,
+          "y": 985
+        },
+        "text": "回到路线"
+      }
+    ],
+    "viewport": [
+      1055,
+      1058
+    ]
+  }
+}

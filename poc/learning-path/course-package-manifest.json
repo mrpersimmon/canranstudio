@@ -4,7 +4,7 @@
   "unitId": "NCE-STARTER-06",
   "revision": "lesson1-6-v4.0",
   "scopePath": "/poc/learning-path/",
-  "totalBytes": 3612946,
+  "totalBytes": 3597408,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -75,14 +75,14 @@
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 38346,
-      "sha256": "316c6b127b9e4bdf233a66639e3d2be7b9083d8bf121badba8c7685e2e4c5862"
+      "bytes": 38203,
+      "sha256": "0fb8f49bfdde7b16e1eaa00f3cac32e38d67ebd766eb3e58da7491489ea4eb0a"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 30783,
-      "sha256": "6a039f3b5f69e330b86b38dd50be03870ecb21d5e398816547ebd90eb821b3a1"
+      "bytes": 30664,
+      "sha256": "95b9b2524c20d34df99a22e58eb62f27078e6148655acc9d5fb90d96c8d582fd"
     },
     {
       "url": "/core/learning-store.js",
@@ -337,6 +337,18 @@
       "sha256": "1c39206ff9ad53423fc469e8e01acae026e513aff3cf55ef455730e13a7a8fb6"
     },
     {
+      "url": "/poc/learning-path/assets/vocabulary-v2/school.webp",
+      "kind": "image",
+      "bytes": 27398,
+      "sha256": "03784674058ce466130ab97dce3d3a729c143c7b855530f042c8dd6b06d073ff"
+    },
+    {
+      "url": "/poc/learning-path/assets/vocabulary-v2/suit.webp",
+      "kind": "image",
+      "bytes": 18484,
+      "sha256": "a21ef7dc51d1523a3372810444dfe043a3a17a37595d819b02a4eb62688ebe67"
+    },
+    {
       "url": "/poc/learning-path/boot/course-entry-7f425f7d7277.js",
       "kind": "script",
       "bytes": 17848,
@@ -351,8 +363,8 @@
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 343774,
-      "sha256": "1309920d085206ae1207c9bed368748d76fd3d068773dac1510414d15cc90c50"
+      "bytes": 343748,
+      "sha256": "a264a8d8724959406717a3bffa9eca34880dca8b6e4324b79216a4b2232dab61"
     },
     {
       "url": "/poc/learning-path/course.css",
@@ -749,18 +761,6 @@
       "kind": "script",
       "bytes": 10251,
       "sha256": "7850824d622e62c7f8d5df7db35c09095975d0eeff2aca69e22afb00d2fa2038"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/assets/item-suit-v1.avif",
-      "kind": "image",
-      "bytes": 26311,
-      "sha256": "ae891d797b96f0f9835af12a7c89c2e688b3fa11411e1809733fc3edb1d5b4c7"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/assets/scene-school-v1.avif",
-      "kind": "image",
-      "bytes": 34821,
-      "sha256": "a1b749e654d92991cefffbf4770804dfb88c3b4d88c3d9ef7981e0121f26b900"
     },
     {
       "url": "/poc/lesson3-4-experience/audio/l03-d01.mp3",

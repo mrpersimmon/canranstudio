@@ -3046,14 +3046,14 @@
     "suit": {
       "entityId": "suit",
       "title": "西装",
-      "assetSrc": "/poc/lesson3-4-experience/assets/item-suit-v1.avif",
-      "deliveryBackground": "white"
+      "assetSrc": "/poc/learning-path/assets/vocabulary-v2/suit.webp",
+      "deliveryBackground": "transparent"
     },
     "school": {
       "entityId": "school",
       "title": "学校",
-      "assetSrc": "/poc/lesson3-4-experience/assets/scene-school-v1.avif",
-      "deliveryBackground": "white"
+      "assetSrc": "/poc/learning-path/assets/vocabulary-v2/school.webp",
+      "deliveryBackground": "transparent"
     },
     "volvo": {
       "entityId": "volvo",
@@ -9948,7 +9948,7 @@
     "modeled": "一起看看怎么做",
     "selectOrder": "点选下方词块，组成句子",
     "finishNode": "完成这一关",
-    "seePath": "看看学习路线",
+    "seePath": "回到路线",
     "reviewBody": "几道题，记得更牢。",
     "sourceNote": "课文小提示",
     "pathBody": "",
@@ -9963,7 +9963,6 @@
     "instructionLabel": "学习任务",
     "references": "课本回顾",
     "referenceBack": "返回路线",
-    "nextNode": "下一关",
     "chapterLabel": "主题",
     "listenExample": "听例句",
     "wordQueued": "待播放"

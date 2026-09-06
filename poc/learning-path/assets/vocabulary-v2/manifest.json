@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "generator": "imagegen",
+  "artDirection": "Disney hand-drawn animation",
+  "reviewedAt": "2026-09-06",
+  "assets": [
+    {
+      "entityId": "suit",
+      "assetSrc": "/poc/learning-path/assets/vocabulary-v2/suit.webp",
+      "promptPath": "poc/learning-path/assets/vocabulary-v2/source/suit.prompt.md",
+      "masterPath": "poc/learning-path/assets/vocabulary-v2/suit.png",
+      "originalPath": "poc/learning-path/assets/vocabulary-v2/source/suit-brighter-imagegen-original.png",
+      "sha256": "a21ef7dc51d1523a3372810444dfe043a3a17a37595d819b02a4eb62688ebe67",
+      "previousOriginalPath": "poc/learning-path/assets/vocabulary-v2/source/suit-imagegen-original.png"
+    },
+    {
+      "entityId": "school",
+      "assetSrc": "/poc/learning-path/assets/vocabulary-v2/school.webp",
+      "promptPath": "poc/learning-path/assets/vocabulary-v2/source/school.prompt.md",
+      "masterPath": "poc/learning-path/assets/vocabulary-v2/school.png",
+      "originalPath": "poc/learning-path/assets/vocabulary-v2/source/school-imagegen-original.png",
+      "sha256": "03784674058ce466130ab97dce3d3a729c143c7b855530f042c8dd6b06d073ff"
+    }
+  ]
+}
