@@ -6,10 +6,10 @@ const path=require('node:path');
 const os=require('node:os');
 const {VIEWPORTS,PROOF,fingerprint,validateReport,assertVisualProof}=require('../../scripts/visual-proof');
 function validReport(){return {schema:1,status:'passed',checks:VIEWPORTS.flatMap(viewport=>[
-  ...['loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...require('../../content/learning-course.json').nodes.map(node=>'completion-return-'+node.id)].map(name=>({name,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',journeyLayout:{pitch:162,gaps:[162,162]},completionBoundary:['celebration','replay-complete','review-complete'].includes(name)?{action:'map',inViewport:true}:null,errors:[]})),
+  ...['loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...require('../../content/learning-course.json').nodes.map(node=>'completion-return-'+node.id),...require('../../scripts/visual-proof').CHALLENGE_SCREENS,...require('../../content/learning-course.json').challenges.flatMap(c=>c.questions.flatMap(q=>['challenge-empty-','challenge-filled-','challenge-correct-'].map(prefix=>prefix+q.id)))].map(name=>({name,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',journeyLayout:{pitch:162,gaps:[162,162]},sessionProgress:{label:'本次闯关进度',completed:6,total:6},centeredIcons:[{action:'journey-locate',x:0,y:0}],completionBoundary:(['celebration','replay-complete','review-complete'].includes(name)||name.startsWith('challenge-complete-'))?{action:'map',inViewport:true}:null,errors:[]})),
   ...Object.values(require('../../content/learning-course.json').activities).filter(a=>a.kind==='teach').flatMap(a=>['words-queued-','words-heard-'].map(prefix=>({name:prefix+a.id,activityId:a.id,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]}))),
   ...Object.keys(require('../../content/learning-course.json').activities).map(activityId=>({name:'activity-'+activityId,activityId,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]}))
-]),mutations:['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen'].map(name=>({name,caught:true}))};}
+]),mutations:['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson'].map(name=>({name,caught:true}))};}
 test('visual release gate fails closed on errors, missing screens, missing widths and ineffective negative controls',()=>{
   validateReport(validReport());
   for(const mutate of [
@@ -27,7 +27,11 @@ test('visual release gate fails closed on errors, missing screens, missing width
     p=>{p.checks.find(c=>c.name==='celebration').completionBoundary.action='continue-course';},
     p=>{p.checks.find(c=>c.name==='review-complete').completionBoundary.inViewport=false;},
     p=>{p.mutations=p.mutations.filter(m=>m.name!=='completion-skips-map');},
-    p=>{p.mutations[0].caught=false;}
+    p=>{p.mutations[0].caught=false;},
+    p=>{p.checks.find(c=>c.name==='celebration').sessionProgress.total=11;},
+    p=>{p.checks.find(c=>c.name==='map').centeredIcons[0].x=-5;},
+    p=>{p.checks=p.checks.filter(c=>c.name!=='reset-failed');},
+    p=>{p.checks=p.checks.filter(c=>c.name!=='challenge-filled-CH12-1');}
   ]){const proof=validReport();mutate(proof);assert.throws(()=>validateReport(proof));}
 });
 test('browser proof is required and expires when any public asset or browser checker changes',()=>{

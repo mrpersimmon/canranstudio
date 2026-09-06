@@ -15,9 +15,29 @@
     await settle();return frame.contentWindow;
   }
   async function settle(){await pause();await pause();const win=frame.contentWindow;await win.document.fonts.ready;await Promise.all(Array.from(win.document.images).map(img=>img.decode().catch(()=>{})));await Promise.all(win.document.getAnimations().filter(animation=>{const timing=animation.effect?.getTiming();return timing&&timing.iterations!==Infinity&&Number(timing.duration)*timing.iterations<=600;}).map(animation=>animation.finished.catch(()=>{})));}
+  async function reloadFrame() {
+    const previous=frame.contentWindow.fixture,key=previous.runtime.storageKey;
+    const saved=previous.adapter.load(key);
+    // Reboot the actual page/controller, retaining only the test storage and clock.
+    window.fixtureReloadSeed={records:{[key]:{revision:saved.revision,value:saved.value}},now:previous.now};
+    frame.contentWindow.location.reload();
+    await wait(()=>frame.contentWindow?.fixture && frame.contentWindow.fixture!==previous && frame.contentWindow.fixture.ready);
+    await settle();
+  }
   function view(){return frame.contentWindow.fixture.runtime.snapshot();}
   function query(action,id){return Array.from(frame.contentDocument.querySelectorAll('button[data-action]')).find(el=>el.dataset.action===action&&(id===undefined||el.dataset.id===id)&&!el.disabled);}
-  async function click(action,id){const el=query(action,id);if(!el)throw Error('Missing enabled action '+action+' '+(id||'')+' in '+JSON.stringify({screen:view().screen,activity:view().activityId,storyIndex:view().storyIndex}));const f=frame.contentWindow.fixture,before=f.dispatchCount;el.click();if(!(action.startsWith('journey-')||action==='preview-node')||action==='journey-book'||action==='journey-nav'&&id==='book')await wait(()=>f.dispatchCount>before);await settle();}
+  async function settleScroll() {
+    const win=frame.contentWindow;let previous=NaN,stable=0;
+    // Native smooth scrolling is not returned by document.getAnimations().
+    // Inspect the settled position, then run the unchanged hit/occlusion tests.
+    for(let i=0;i<150;i++){
+      await new Promise(resolve=>win.requestAnimationFrame(resolve));
+      const current=win.scrollY;stable=Math.abs(current-previous)<.1?stable+1:0;previous=current;
+      if(stable>=5)return;
+    }
+    throw Error('Journey scrolling did not settle');
+  }
+  async function click(action,id){const el=query(action,id);if(!el)throw Error('Missing enabled action '+action+' '+(id||'')+' in '+JSON.stringify({screen:view().screen,activity:view().activityId,storyIndex:view().storyIndex}));const f=frame.contentWindow.fixture,before=f.dispatchCount;el.click();if(!(action.startsWith('journey-')||action==='preview-node')||action==='journey-book'||action==='journey-nav'&&id==='book')await wait(()=>f.dispatchCount>before);await settle();if(['preview-node','journey-locate'].includes(action))await settleScroll();}
   async function hear(){for(let i=0;view().audio?.status==='playing'&&i<30;i++){const f=frame.contentWindow.fixture,before=f.dispatchCount,audio=f.audio.at(-1);audio.finish();await wait(()=>f.dispatchCount>before);await settle();if(view().saveState)break;}}
   async function check(name,activityId,expectedTheme){
     status.textContent='正在检查 '+frame.width+' × '+frame.height+' · '+name;
@@ -128,6 +148,76 @@
     }
     await settle();await check('completion-restored');
   }
+  async function writeAnswer(value) {
+    const win=frame.contentWindow,input=frame.contentDocument.querySelector('[data-challenge-input]');
+    if(!input)throw Error('Written answer field missing');
+    input.focus(); input.value=value;
+    const before=win.fixture.dispatchCount;
+    input.dispatchEvent(new win.InputEvent('input',{bubbles:true,data:value}));
+    await wait(()=>win.fixture.dispatchCount>before);await settle();
+    if(frame.contentDocument.querySelector('[data-challenge-input]')!==input)throw Error('Typing replaced the focused input');
+  }
+  async function optionalChallenges(unit) {
+    const main=JSON.stringify({completed:view().record.completed,results:view().record.results});
+    for(const challenge of unit.challenges){
+      await click('journey-nav','review');await check('challenge-menu');
+      await click('open-challenge',challenge.id);await check('challenge-intro-'+challenge.id);
+      await click('challenge-start');
+      for(const [index,q] of challenge.questions.entries()){
+        await check('challenge-empty-'+q.id,q.id);
+        if(index===0){
+          const win=frame.contentWindow,input=frame.contentDocument.querySelector('[data-challenge-input]');
+          input.value='拼音';input.dispatchEvent(new win.InputEvent('input',{bubbles:true,isComposing:true}));
+          input.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,isComposing:true}));
+          if(view().feedback||view().challengeAnswer)throw Error('IME confirmation submitted an answer');
+          await writeAnswer('wrong answer');await click('challenge-check');await check('challenge-wrong-'+challenge.id);
+          await click('challenge-retry');
+          if(!view().challengeHintUsed || !frame.contentDocument.querySelector('.lp-hint'))throw Error('Correction did not expose the learning hint');
+          await check('challenge-hint-'+challenge.id);
+        }
+        await writeAnswer(q.answers[0]);await check('challenge-filled-'+q.id,q.id);
+        if(index===1){
+          await wait(()=>view().record.challenges?.[challenge.id]?.draft?.value===q.answers[0]);
+          await click('map');await reloadFrame();await click('journey-nav','review');
+          await click('open-challenge',challenge.id);await click('challenge-start');
+          if(view().challengeAnswer!==q.answers[0])throw Error('Draft disappeared after reload');
+          await check('challenge-draft-restored-'+challenge.id);
+        }
+        await click('challenge-check');await check('challenge-correct-'+q.id,q.id);
+        await click('challenge-next');
+      }
+      await check('challenge-complete-'+challenge.id);
+      if(view().record.challenges[challenge.id].answers[0].evidence!=='supported')throw Error('A corrected answer was awarded independent evidence');
+      await returnThroughPrimary('challenge-return-'+challenge.id);
+      await click('preview-node',challenge.unlockNodeId);await check('challenge-node-preview-'+challenge.id);
+      await click('open-challenge',challenge.id);await check('challenge-finished-intro-'+challenge.id);
+      const saved=JSON.stringify(view().record);
+      await click('reset-request',challenge.id);await check('reset-confirm-single-'+challenge.id);
+      await click('reset-confirm');await check('reset-single-'+challenge.id);
+      if(view().record.challenges[challenge.id])throw Error('Individual challenge did not reset');
+      await click('reset-undo');
+      if(JSON.stringify(view().record)!==saved)throw Error('Individual reset undo changed another record');
+    }
+    if(JSON.stringify({completed:view().record.completed,results:view().record.results})!==main)throw Error('An optional challenge changed the main route');
+    await click('journey-nav','progress');
+    const before=JSON.stringify(view().record);
+    await click('reset-request','challenges');await check('reset-confirm-challenges');
+    await click('reset-cancel');await check('reset-cancelled');
+    if(frame.contentDocument.activeElement!==query('reset-request','challenges'))throw Error('Reset cancellation lost the original button focus');
+    if(JSON.stringify(view().record)!==before)throw Error('Cancel reset modified the record');
+    await click('reset-request','challenges');await click('reset-confirm');await check('reset-challenges-saved');
+    if(view().completedCount!==11||Object.keys(view().record.challenges).length)throw Error('Challenge reset affected the main route');
+    await click('reset-undo');await check('reset-undo');
+    if(JSON.stringify(view().record)!==before)throw Error('Undo did not restore the record');
+    await click('journey-nav','progress');await click('reset-request','course');await check('reset-confirm-course');
+    frame.contentWindow.fixture.failSave=true;await click('reset-confirm');await check('reset-failed');
+    if(view().completedCount!==11)throw Error('Failed reset reported success');
+    frame.contentWindow.fixture.failSave=false;await click('save-retry');await check('reset-course-saved');
+    if(view().completedCount!==0||view().nodes[1].available)throw Error('Full reset did not return to the first node');
+    await reloadFrame();await check('reset-reload');
+    if(view().completedCount!==0)throw Error('Old progress came back after a reset');
+    await click('reset-undo');await check('reset-undo-restored');
+  }
   try {
     for(const viewport of config.viewports){
       await open(viewport,true);await check('loader',null,'dark');
@@ -165,6 +255,7 @@
         await click('check');await hear();await click('continue');await hear();
       }
       await check('review-complete');await returnThroughPrimary('review-return-map');
+      await optionalChallenges(unit);
       await open(viewport);await check('reload-map');
       await click('preview-node','K01');await click('open-node','K01');await click('story-start');
       frame.contentWindow.fixture.failSave=true;await hear();await click('continue');await check('save-failure');
@@ -205,6 +296,20 @@
     report.mutations.push({name:'uneven-node-spacing',caught:spacingCaught,errors:spacingResult.errors});
     spacingStyle.remove();
     if(!spacingCaught)throw Error('Negative control escaped: uneven-node-spacing');
+    const doc=frame.contentDocument,arrow=doc.querySelector('.journey-locate img');
+    arrow.style.transform='translateX(-5px)';await settle();
+    const arrowResult=await auditReadability(frame.contentWindow,{name:'off-center-arrow',expectedTheme:'dark'});
+    const arrowCaught=arrowResult.errors.some(e=>e.rule==='icon-not-centered');
+    report.mutations.push({name:'off-center-arrow',caught:arrowCaught,errors:arrowResult.errors});
+    arrow.style.transform='';
+    if(!arrowCaught)throw Error('Negative control escaped: off-center-arrow');
+    await click('preview-node','K01');await click('open-node','K01');await completeNode(frame.contentWindow.fixture.unit,'K01');
+    const bar=frame.contentDocument.querySelector('.lp-header [role="progressbar"]');
+    bar.setAttribute('aria-valuemax','11');bar.setAttribute('aria-valuenow','1');
+    const progressResult=await auditReadability(frame.contentWindow,{name:'route-progress-in-lesson',expectedTheme:'dark'});
+    const progressCaught=progressResult.errors.some(e=>e.rule==='session-progress-scope');
+    report.mutations.push({name:'route-progress-in-lesson',caught:progressCaught,errors:progressResult.errors});
+    if(!progressCaught)throw Error('Negative control escaped: route-progress-in-lesson');
     report.status='passed';
   }catch(error){report.status='failed';report.failure=String(error);}
   results.textContent=JSON.stringify(report,null,2);

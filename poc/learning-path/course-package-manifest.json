@@ -4,7 +4,7 @@
   "unitId": "NCE-STARTER-06",
   "revision": "lesson1-6-v4.0",
   "scopePath": "/poc/learning-path/",
-  "totalBytes": 3597408,
+  "totalBytes": 3629486,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -67,22 +67,28 @@
       "sha256": "ec2611702b2d31892b069f2a2115d76df5fa316f4520a529624d530aa4fa447b"
     },
     {
+      "url": "/core/learning-challenges.js",
+      "kind": "script",
+      "bytes": 3022,
+      "sha256": "f6efecf09edf8d3e78e0614d57c8bfd0e2bfa9f728a9775b31aa958aa13bfd51"
+    },
+    {
       "url": "/core/learning-journey.js",
       "kind": "script",
-      "bytes": 11306,
-      "sha256": "2a5bd7d22137cbd37aff006eb2ab19b9b806711f16c27cc7f7c5bc93fb0407c4"
+      "bytes": 12813,
+      "sha256": "f07183627bfcfb3bf6051cf37e15e9afed778e3e73639258a0b9f4a5bb74c991"
     },
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 38203,
-      "sha256": "0fb8f49bfdde7b16e1eaa00f3cac32e38d67ebd766eb3e58da7491489ea4eb0a"
+      "bytes": 45075,
+      "sha256": "ff84e5169f042c8c478a0a93e8aaeb9c42da28a6e444a097775a8b5d09c28412"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 30664,
-      "sha256": "95b9b2524c20d34df99a22e58eb62f27078e6148655acc9d5fb90d96c8d582fd"
+      "bytes": 36125,
+      "sha256": "210de22b694f4fd048f0ea2c21e97416aba574f5ca77f52093dfe985a5c374bb"
     },
     {
       "url": "/core/learning-store.js",
@@ -363,20 +369,20 @@
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 343748,
-      "sha256": "a264a8d8724959406717a3bffa9eca34880dca8b6e4324b79216a4b2232dab61"
+      "bytes": 353393,
+      "sha256": "7e1fe49ba02f8318b48d22081699122e89b68f9a958c95d7de0dd967dfb6f919"
     },
     {
       "url": "/poc/learning-path/course.css",
       "kind": "style",
-      "bytes": 6686,
-      "sha256": "15a3160ae8b9e4795586ee5c1df3b17c0c530cff9b38ddf5437484c5be67eb62"
+      "bytes": 9279,
+      "sha256": "cf7a5d78c239655e5062994621a7ba9caac73a8b11acc51800e844f51de4acce"
     },
     {
       "url": "/poc/learning-path/journey.css",
       "kind": "style",
-      "bytes": 17016,
-      "sha256": "c21f656568c35ef3f97f30ae70409d9df9d442cd539bc3cd46035bfbf407d721"
+      "bytes": 17471,
+      "sha256": "3b08077bf294d73e436b80cd05fc925b3863a8d08f0119cf58bc1d9d6d467a94"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/book.webp",
@@ -759,8 +765,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 10251,
-      "sha256": "7850824d622e62c7f8d5df7db35c09095975d0eeff2aca69e22afb00d2fa2038"
+      "bytes": 12774,
+      "sha256": "efbf13ced449210944a838c7e60d548a197ef9c93c36755def223f77a82a7469"
     },
     {
       "url": "/poc/lesson3-4-experience/audio/l03-d01.mp3",

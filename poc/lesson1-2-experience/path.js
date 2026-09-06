@@ -11,12 +11,14 @@
   const renderer = core.learningPathScene.createRenderer(unit);
   let media = null, mediaToken = 0, lastView = null, work = Promise.resolve();
   let journeyUI = { tab: 'path', selectedNodeId: null };
+  let draftTimer, modalReturnFocus;
   function stop() { mediaToken++; if (media) { media.pause(); media.removeAttribute('src'); media.load(); media = null; } }
   function render(view) {
     const active = global.document.activeElement;
     const action = active?.dataset?.action, id = active?.dataset?.id;
+    const previousModal = root.querySelector('[aria-modal="true"]');
     const focusFeedback = active?.matches('.lp-feedback');
-    const changed = view.screen !== lastView?.screen || (view.storyActivityId || view.activityId) !== (lastView?.storyActivityId || lastView?.activityId);
+    const changed = view.screen !== lastView?.screen || (view.storyActivityId || view.activityId) !== (lastView?.storyActivityId || lastView?.activityId) || view.challengeIndex !== lastView?.challengeIndex;
     const turnChanged = view.storyIndex !== lastView?.storyIndex;
     const previousHistory = root.querySelector('.lp-story-transcript');
     const historyScroll = previousHistory?.scrollTop || 0;
@@ -28,6 +30,7 @@
     }
     const modal = root.querySelector('[aria-modal="true"]');
     if (modal) {
+      if (!previousModal && action && !modalReturnFocus) modalReturnFocus = {action,id};
       for (const child of (root.querySelector('.lp-shell') || root).children) if (!child.contains(modal)) child.inert = true;
       modal.querySelector('button')?.focus();
     } else if (changed) {
@@ -35,6 +38,11 @@
       root.querySelector('[data-lesson-title]')?.focus({ preventScroll: true });
       const next = view.screen === 'map' && view.nodes.find(node => node.available && !node.done);
       if (next && view.completedCount > 1) root.querySelector(`[data-journey-current],.lp-node[data-id="${next.id}"]`)?.scrollIntoView({ block: 'center', behavior: 'instant' });
+    } else if (previousModal && modalReturnFocus) {
+      const trigger = [...root.querySelectorAll('[data-action]')].find(el => el.dataset.action === modalReturnFocus.action && el.dataset.id === modalReturnFocus.id);
+      trigger?.focus({preventScroll:true});
+      trigger?.scrollIntoView({block:'center',behavior:'instant'});
+      modalReturnFocus = null;
     } else if (action) {
       [...root.querySelectorAll('[data-action]')].find(el => el.dataset.action === action && el.dataset.id === id)?.focus({ preventScroll: true });
     }
@@ -83,8 +91,17 @@
   }
   function send(event) {
     if (event.type === 'map') journeyUI = { tab: 'path', selectedNodeId: null };
-    if (['open-node', 'references', 'review'].includes(event.type)) journeyUI.selectedNodeId = null;
-    const run = () => { const result = runtime.dispatch(event); render(result.view); result.effects.forEach(playEffect); };
+    if (['open-node', 'references', 'review', 'open-challenge','reset-confirm'].includes(event.type)) journeyUI.selectedNodeId = null;
+    const run = () => {
+      const result = runtime.dispatch(event);
+      // Typing must not replace the focused input, move its caret or interrupt IME.
+      if (['challenge-input','challenge-save-draft'].includes(event.type) && !result.view.saveState) {
+        const check = root.querySelector('[data-action="challenge-check"]');
+        if (check) check.disabled = !result.view.challengeAnswer?.trim();
+        lastView = result.view;
+      } else render(result.view);
+      result.effects.forEach(playEffect);
+    };
     // Serialize callbacks and clicks, then use the same lock across tabs before
     // the store's revision check and verified write.
     work = work.then(() => global.navigator.locks?.request ? global.navigator.locks.request(runtime.storageKey, run) : run()).catch(error => {
@@ -95,9 +112,19 @@
     });
     return work;
   }
+  function captureDraft(input) {
+    if (!input?.matches('[data-challenge-input]')) return;
+    const event = {type:'challenge-save-draft',id:input.dataset.challengeId,questionId:input.dataset.questionId};
+    send({type:'challenge-input',value:input.value});
+    global.clearTimeout(draftTimer);
+    draftTimer = global.setTimeout(() => send(event),300);
+  }
+  root.addEventListener('input', event => { if (!event.isComposing) captureDraft(event.target); });
+  root.addEventListener('compositionend', event => captureDraft(event.target));
   root.addEventListener('click', event => {
     const button = event.target.closest('button[data-action]');
     if (!button || button.disabled) return;
+    if (button.dataset.action === 'reset-request') modalReturnFocus = {action:button.dataset.action,id:button.dataset.id};
     if (unit.journey && (button.dataset.action.startsWith('journey-') || button.dataset.action === 'preview-node')) {
       const action = button.dataset.action, id = button.dataset.id;
       const motion = global.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
@@ -132,9 +159,21 @@
       if (action === 'journey-close') root.querySelector(`.journey-node[data-id="${previousId}"]`)?.focus({ preventScroll: true });
       return;
     }
-    send({ type: button.dataset.action, id: button.dataset.id, nodeId: button.dataset.id });
+    const input = root.querySelector('[data-challenge-input]');
+    if (input && !input.readOnly) {
+      global.clearTimeout(draftTimer);
+      send({type:'challenge-input',value:input.value});
+      if (button.dataset.action === 'map') send({type:'challenge-save-draft',id:input.dataset.challengeId,questionId:input.dataset.questionId});
+    }
+    send({ type: button.dataset.action, id: button.dataset.id, nodeId: button.dataset.id,scope:button.dataset.scope || button.dataset.id });
   });
   root.addEventListener('keydown', event => {
+    if (event.target?.matches?.('[data-challenge-input]') && event.key === 'Enter' && !event.shiftKey && !event.isComposing && event.keyCode !== 229 && !event.repeat) {
+      event.preventDefault();
+      if (!event.target.readOnly) { captureDraft(event.target); send({type:'challenge-check'}); }
+      return;
+    }
+    if (event.key === 'Escape' && runtime.snapshot().resetRequest) { send({type:'reset-cancel'}); return; }
     if (event.key === 'Escape' && journeyUI.selectedNodeId) {
       const id = journeyUI.selectedNodeId;
       journeyUI.selectedNodeId = null;

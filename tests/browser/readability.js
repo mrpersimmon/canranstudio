@@ -61,6 +61,24 @@
   window.auditReadability = async function (win, { expectedTheme, name }) {
     const doc = win.document, errors = [], resolved = [];
     const root = doc.querySelector('[data-learning-path]');
+    const run = win.fixture?.runtime.snapshot();
+    const progressBar = root.querySelector('.lp-header [role="progressbar"]');
+    const sessionProgress = progressBar ? {label:progressBar.getAttribute('aria-label'),completed:Number(progressBar.getAttribute('aria-valuenow')),total:Number(progressBar.getAttribute('aria-valuemax'))} : null;
+    if (run?.sessionProgress && (!sessionProgress || sessionProgress.label !== '本次闯关进度'
+      || sessionProgress.completed !== run.sessionProgress.completed || sessionProgress.total !== run.sessionProgress.total))
+      errors.push({rule:'session-progress-scope',actual:sessionProgress,expected:run.sessionProgress});
+    if (root.querySelector('.lp-celebration') && run?.sessionProgress && sessionProgress?.completed !== sessionProgress?.total)
+      errors.push({rule:'completion-progress-incomplete'});
+    if (run?.screen === 'references' && progressBar) errors.push({rule:'unrelated-progress-bar'});
+    const centeredIcons = [];
+    for (const button of root.querySelectorAll('.journey-locate,.journey-close,.journey-book-button')) {
+      if (!button.getClientRects().length) continue;
+      const b = button.getBoundingClientRect(), i = button.querySelector('img')?.getBoundingClientRect();
+      if (!i) continue;
+      const offset = {action:button.dataset.action,x:i.x+i.width/2-b.x-b.width/2,y:i.y+i.height/2-b.y-b.height/2};
+      centeredIcons.push(offset);
+      if (Math.abs(offset.x)>1 || Math.abs(offset.y)>1) errors.push({rule:'icon-not-centered',...offset});
+    }
     let completionBoundary = null;
     if (root.querySelector('.lp-celebration')) {
       const actions = root.querySelectorAll('.lp-footer .lp-primary');
@@ -121,7 +139,7 @@
         }
       }
     }
-    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint')){
+    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint,.journey-locate,.lp-reset-actions button,.journey-reset button,.journey-reset-notice button,[data-challenge-input]')){
       if(button.disabled||button.closest('[inert]')||!button.getClientRects().length)continue;
       const rect=button.getBoundingClientRect();
       if(rect.width<44||rect.height<44)errors.push({rule:'small-action',label:button.getAttribute('aria-label')||button.textContent});
@@ -164,6 +182,6 @@
         errors.push({rule:'contrast-unresolved', target:node.target, message:node.failureSummary});
       }
     }
-    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, journeyLayout, completionBoundary, resolved, errors};
+    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, journeyLayout, completionBoundary, sessionProgress, centeredIcons, resolved, errors};
   };
 })();

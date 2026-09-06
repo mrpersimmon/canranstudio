@@ -1,10 +1,11 @@
 (function attach(root, factory) {
   'use strict';
-  const api = factory();
+  const api = factory(root);
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (root) (root.CanranCore ||= {}).learningPathRuntime = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
+  const challenges = typeof module === 'object' && module.exports ? require('./learning-challenges') : root.CanranCore.learningChallenges;
   const clone = value => JSON.parse(JSON.stringify(value));
   const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const object = value => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -19,14 +20,14 @@
   function emptyRecord(unit) {
     return { schema: unit.recordSchema, unitId: unit.unitId, experienceRevision: unit.experienceRevision,
       completed: {}, results: {}, attempts: {}, roles: {}, roleTurns: {}, storyProgress: {}, storyFacts: {}, sourceContacts: {}, legacyFacts: null,
-      ...(unit.courseId ? { reviewEvents: [], teachingProgress: {} } : {}) };
+      ...(unit.courseId ? { reviewEvents: [], teachingProgress: {}, challenges: {} } : {}) };
   }
   function validPairs(pairs, activity, complete = false) {
     return object(pairs) && (!complete || Object.keys(pairs).length === activity.items.length)
       && Object.entries(pairs).every(([ref, value]) => activity.items.some(item => item.sourceRef === ref && item.entityId === value?.entityId)
         && ['matched-with-options', 'retry-supported', 'elimination-supported', 'modeled'].includes(value.evidence) && typeof value.at === 'string');
   }
-  function validRecord(record, unit) {
+  function validRecord(record, unit, allowBackup = true) {
     if (!object(record) || record.schema !== unit.recordSchema || record.unitId !== unit.unitId || record.experienceRevision !== unit.experienceRevision) return false;
     if (!['completed', 'results', 'attempts', 'roles', 'storyFacts', 'sourceContacts'].every(key => object(record[key]))) return false;
     if (!Object.entries(record.completed).every(([id, value]) => unit.activities[id] && object(value) && typeof value.at === 'string')) return false;
@@ -79,6 +80,12 @@
       if (!Array.isArray(record.reviewEvents) || !object(record.teachingProgress)) return false;
       if (record.reviewEvents.some(event => !unit.activities[event.activityId]?.resultId || !['independent','supported','modeled'].includes(event.evidence) || typeof event.at !== 'string')) return false;
       if (Object.entries(record.teachingProgress).some(([id, refs]) => unit.activities[id]?.kind !== 'teach' || !Array.isArray(refs) || refs.some(ref => !unit.activities[id].items.some(item => item.sourceRef === ref)))) return false;
+      if (record.challenges !== undefined && (!object(record.challenges) || Object.entries(record.challenges).some(([id, value]) => {
+        const definition = unit.challenges?.find(c => c.id === id);
+        return !definition || !challenges.validProgress(value, definition);
+      }))) return false;
+      if (record.resetBackup && (!allowBackup || typeof record.resetBackup.at !== 'string'
+        || !validRecord(record.resetBackup.record, unit, false))) return false;
     }
     const roundIds = unit.legacyRolePractice.rounds.map(r => r.roundId);
     return Object.entries(record.roles).every(([id, value]) => roundIds.includes(id) && object(value) && ['completed', 'skipped'].includes(value.disposition));
@@ -202,7 +209,7 @@
     }
     function mutateRecord(edit, after) {
       if (view.mode === 'repeat') { after(); return; }
-      const next = clone(record); edit(next); save(next, after);
+      const next = clone(record); delete next.resetBackup; edit(next); save(next, after);
     }
     function play(sequence, purpose) {
       if (!sequence.length) {
@@ -282,6 +289,10 @@
       view.mode = mode; view.nodeId = id; localAttempts = {}; extraIds = []; extraIndex = false;
       queue = mode === 'main' ? node.activityIds.filter(aid => !record.completed[aid]) : [...node.activityIds];
       queueIndex = 0;
+      view.sessionProgress = { completed: 0, total: queue.reduce((total, aid) => {
+        const a = unit.activities[aid];
+        return total + (a.kind === 'interactive-story' ? a.beats.length - (mode === 'repeat' ? 0 : Object.keys(record.storyProgress[aid]?.beats || {}).length) : 1);
+      }, 0) };
       if (queue.length) loadActivity(queue[0]);
     }
     function beginFeedback(type) {
@@ -335,8 +346,9 @@
         });
       }
     }
-    function nextActivity() {
+    function nextActivity(count = true) {
       stopAudio();
+      if (count) view.sessionProgress.completed++;
       queueIndex++;
       if (queueIndex < queue.length) { loadActivity(queue[queueIndex]); return; }
       if (!extraIndex && extraIds.length && view.mode === 'main') {
@@ -383,7 +395,9 @@
         }
       }, () => {
         if (view.storyActivityId) { advanceStory(storyProof()); return; }
-        if (a.assessment?.scope === 'assessment' && evidence !== 'independent' && !extraIndex && view.mode === 'main' && extraIds.length < unit.remediation.maxExtraPerNode && !extraIds.includes(a.id)) extraIds.push(a.id);
+        if (a.assessment?.scope === 'assessment' && evidence !== 'independent' && !extraIndex && view.mode === 'main' && extraIds.length < unit.remediation.maxExtraPerNode && !extraIds.includes(a.id)) {
+          extraIds.push(a.id); view.sessionProgress.total++;
+        }
         nextActivity();
       });
     }
@@ -421,7 +435,8 @@
     }
     function advanceStory(proof) {
       view.storyBeats[storyBeat().id] = proof;
-      if (view.storyIndex === story().beats.length - 1) { view.storyActivityId = null; nextActivity(); }
+      view.sessionProgress.completed++;
+      if (view.storyIndex === story().beats.length - 1) { view.storyActivityId = null; nextActivity(false); }
       else { view.storyIndex++; loadStoryBeat(true); }
     }
     function advanceStoryLine() {
@@ -467,6 +482,71 @@
         if (active.purpose === 'reference' && unit.courseId) mutateRecord(next => contact(next, [active.sequence[0].ref], 'heard-in-reference', now().toISOString()), () => {});
       }
     }
+    const challenge = () => unit.challenges?.find(c => c.id === view.challengeId);
+    const challengeQuestion = () => challenge()?.questions[view.challengeIndex];
+    const challengeUnlocked = c => c && nodeDone(unit.nodes.find(n => n.id === c.unlockNodeId));
+    function showChallenge(id) {
+      const definition = unit.challenges?.find(c => c.id === id);
+      if (!challengeUnlocked(definition)) return;
+      stopAudio();
+      Object.assign(view, {screen:'challenge-intro',mode:'challenge',challengeId:id,activityId:null,storyActivityId:null,sessionProgress:null,feedback:null});
+    }
+    function loadChallengeQuestion() {
+      const progress = record.challenges?.[view.challengeId] || {answers:[]};
+      const draft = progress.draft;
+      Object.assign(view, {screen:'challenge',challengeIndex:progress.answers.length,challengeAnswer:draft?.value || '',
+        challengeWrong:draft?.wrong || 0,challengeHintUsed:draft?.hintUsed || false,feedback:null});
+    }
+    function saveChallengeDraft(after = () => {}) {
+      if (view.screen !== 'challenge' || view.feedback === 'correct') { after(); return; }
+      const next = clone(record); delete next.resetBackup;
+      const progress = (next.challenges ||= {})[view.challengeId] ||= {answers:[]};
+      progress.draft = {questionId:challengeQuestion().id,value:view.challengeAnswer,wrong:view.challengeWrong,hintUsed:view.challengeHintUsed};
+      save(next, after);
+    }
+    function checkChallenge() {
+      if (view.feedback || !view.challengeAnswer.trim()) return;
+      stopAudio();
+      if (challenges.accepts(challengeQuestion(), view.challengeAnswer)) view.feedback = 'correct';
+      else {
+        view.challengeWrong++; view.challengeHintUsed = true;
+        saveChallengeDraft(() => { view.feedback = 'retry'; });
+      }
+    }
+    function completeChallengeQuestion() {
+      if (view.feedback !== 'correct') return;
+      const next = clone(record); delete next.resetBackup;
+      const progress = (next.challenges ||= {})[view.challengeId] ||= {answers:[]};
+      const definition = challenge();
+      if (progress.answers.length !== view.challengeIndex) return;
+      progress.answers.push({questionId:challengeQuestion().id,value:view.challengeAnswer,
+        evidence:view.challengeWrong || view.challengeHintUsed ? 'supported' : 'independent',at:now().toISOString()});
+      delete progress.draft;
+      if (progress.answers.length === definition.questions.length) progress.completedAt = now().toISOString();
+      stopAudio();
+      save(next, () => {
+        view.sessionProgress.completed++;
+        if (progress.completedAt) { view.screen = 'challenge-complete'; view.feedback = null; }
+        else loadChallengeQuestion();
+      });
+    }
+    function requestReset(scope, id) {
+      if (!unit.courseId || !['map','challenge-intro','challenge-complete'].includes(view.screen)) return;
+      if (!['course','challenges','challenge'].includes(scope) || scope === 'challenge' && !unit.challenges?.some(c => c.id === id)) return;
+      stopAudio(); view.resetRequest = {scope,id};
+    }
+    function confirmReset() {
+      if (!view.resetRequest) return;
+      const {scope,id} = view.resetRequest;
+      const old = clone(record); delete old.resetBackup;
+      const next = scope === 'course' ? emptyRecord(unit) : clone(old);
+      if (scope === 'challenges') next.challenges = {};
+      if (scope === 'challenge') delete (next.challenges ||= {})[id];
+      next.resetBackup = {at:now().toISOString(),record:old};
+      save(next, () => {
+        Object.assign(view,{screen:'map',mode:'main',activityId:null,storyActivityId:null,challengeId:null,resetRequest:null,sessionProgress:null});
+      });
+    }
     function snapshot() {
       const a = activity();
       return clone({ ...view, extraPractice: extraIndex,
@@ -484,13 +564,26 @@
         stopAudio(); pending = null; view = { screen: 'map', saveState: null, mode: 'main', audio: null }; read();
       } else if (pending || view.screen === 'blocked') {
         if (event.type === 'save-retry' && pending) save(pending.next, pending.after);
-      } else if (event.type === 'open-node' && view.screen === 'map') startNode(event.nodeId, event.mode);
-      else if (event.type === 'map') { stopAudio(); view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; }
+      } else if (view.resetRequest) {
+        if (event.type === 'reset-cancel') view.resetRequest = null;
+        if (event.type === 'reset-confirm') confirmReset();
+      } else if (event.type === 'reset-request') requestReset(event.scope, event.id);
+      else if (event.type === 'reset-undo' && view.screen === 'map' && record.resetBackup) {
+        save(clone(record.resetBackup.record), () => {});
+      } else if (event.type === 'open-challenge' && ['map','celebration','challenge-complete'].includes(view.screen)) showChallenge(event.id);
+      else if (event.type === 'challenge-start' && view.screen === 'challenge-intro' && !record.challenges?.[view.challengeId]?.completedAt) {
+        const completed = record.challenges?.[view.challengeId]?.answers.length || 0;
+        view.sessionProgress = {completed:0,total:challenge().questions.length-completed};
+        loadChallengeQuestion();
+      } else if (event.type === 'challenge-save-draft' && view.screen === 'challenge'
+        && event.id === view.challengeId && event.questionId === challengeQuestion().id) saveChallengeDraft();
+      else if (event.type === 'open-node' && view.screen === 'map') startNode(event.nodeId, event.mode);
+      else if (event.type === 'map') { stopAudio(); view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; view.sessionProgress = null; view.challengeId = null; }
       else if (event.type === 'course-summary' && unit.courseId && unit.nodes.every(nodeDone)) {
-        stopAudio(); view.screen = 'celebration'; view.mode = 'main'; view.nodeId = unit.nodes.at(-1).id; view.activityId = null; view.storyActivityId = null;
+        stopAudio(); view.screen = 'celebration'; view.mode = 'summary'; view.nodeId = unit.nodes.at(-1).id; view.activityId = null; view.storyActivityId = null; view.sessionProgress = null;
       }
       else if (event.type === 'references' && unit.referenceGroups) {
-        stopAudio(); view.screen = 'references'; view.activityId = null; view.storyActivityId = null; view.mode = 'reference'; view.referenceGroupId = null;
+        stopAudio(); view.screen = 'references'; view.activityId = null; view.storyActivityId = null; view.mode = 'reference'; view.referenceGroupId = null; view.sessionProgress = null;
       }
       else if (event.type === 'reference-section' && view.screen === 'references' && unit.referenceGroups.some(group => group.id === event.id)) {
         stopAudio(); view.referenceGroupId = view.referenceGroupId === event.id ? null : event.id;
@@ -499,11 +592,19 @@
         play([{ref:event.id,text:unit.sources[event.id].text}], 'reference');
       }
       else if (event.type === 'review') {
-        queue = dueItems(); if (queue.length) { view.mode = 'review'; view.nodeId = null; queueIndex = 0; extraIndex = false; extraIds = []; localAttempts = {}; loadActivity(queue[0]); }
+        queue = dueItems(); if (queue.length) { view.mode = 'review'; view.nodeId = null; queueIndex = 0; extraIndex = false; extraIds = []; localAttempts = {}; view.sessionProgress = {completed:0,total:queue.length}; loadActivity(queue[0]); }
       } else if (event.type.startsWith('audio-')) handleAudio(event);
       else if (event.type === 'retry-audio' && ['blocked', 'failed'].includes(view.audio?.status)) play(view.audio.sequence, view.audio.purpose);
       else if (event.type === 'pause' && view.audio?.status === 'playing') { view.audio.status = 'paused'; effects.push({ type: 'pause-audio' }); }
       else if (event.type === 'resume-audio' && view.audio?.status === 'paused') { view.audio.status = 'playing'; effects.push({ type: 'resume-audio', requestId: view.audio.requestId, index: view.audio.index }); }
+      else if (view.screen === 'challenge') {
+        if (event.type === 'challenge-input' && !view.feedback && typeof event.value === 'string') view.challengeAnswer = event.value.slice(0,180);
+        else if (event.type === 'challenge-check') checkChallenge();
+        else if (event.type === 'challenge-retry' && view.feedback === 'retry') view.feedback = null;
+        else if (event.type === 'challenge-hint' && !view.feedback) { view.challengeHintUsed = true; saveChallengeDraft(); }
+        else if (event.type === 'challenge-next') completeChallengeQuestion();
+        else if (event.type === 'challenge-audio' && view.feedback) play([{ref:challengeQuestion().sourceRef,text:unit.sources[challengeQuestion().sourceRef].text}], 'challenge-reference');
+      }
       else if (view.screen === 'activity') {
         const a = activity();
         if (event.type === 'select' && a.kind !== 'match' && view.requiredDone && !view.feedback && a.options.some(o => o.id === event.id)) {

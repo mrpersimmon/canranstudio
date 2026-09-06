@@ -1,0 +1,129 @@
+{
+  "date": "2026-09-06",
+  "branch": "codex/duolingo-version",
+  "baseCommit": "fd76aafc53d7b2db21954071c8aac81603dc3f67",
+  "publicInputsCommitted": false,
+  "unitTests": 76,
+  "browserStates": 1757,
+  "fingerprint": "c041e16a6a9970eb12b31a747187e2cb3adf63af7babe3ea3a9861ba701573ca",
+  "negativeControls": [
+    {
+      "name": "completion-skips-map",
+      "caught": true
+    },
+    {
+      "name": "completion-button-offscreen",
+      "caught": true
+    },
+    {
+      "name": "white-on-light",
+      "caught": true
+    },
+    {
+      "name": "dark-multiply",
+      "caught": true
+    },
+    {
+      "name": "missing-image",
+      "caught": true
+    },
+    {
+      "name": "opaque-art",
+      "caught": true
+    },
+    {
+      "name": "theme-discontinuity",
+      "caught": true
+    },
+    {
+      "name": "uneven-node-spacing",
+      "caught": true
+    },
+    {
+      "name": "off-center-arrow",
+      "caught": true
+    },
+    {
+      "name": "route-progress-in-lesson",
+      "caught": true
+    }
+  ],
+  "native": {
+    "url": "http://127.0.0.1:42817/",
+    "profile": "isolated challenge-qa",
+    "viewports": [
+      [
+        320,
+        568
+      ],
+      [
+        420,
+        856
+      ],
+      [
+        906,
+        801
+      ]
+    ],
+    "firstStory": {
+      "start": [
+        0,
+        10
+      ],
+      "finish": [
+        10,
+        10
+      ],
+      "naturalOriginalAudioEndings": 7,
+      "rate": 1,
+      "returnAction": "map"
+    },
+    "arrow": {
+      "xOffset": 0,
+      "yOffset": 0,
+      "emptyLabels": 0
+    },
+    "challenge": {
+      "draftRestored": "Is this your",
+      "resumedStart": [
+        0,
+        5
+      ],
+      "resumedFinish": [
+        5,
+        5
+      ],
+      "completedAnswers": 6,
+      "independent": 5,
+      "supported": 1,
+      "referenceAudio": {
+        "ref": "L03-D06",
+        "ended": true,
+        "rate": 1,
+        "remainsOnQuestion": "CH34-2"
+      }
+    },
+    "resetCancel": {
+      "focused": true,
+      "hit": true
+    },
+    "challengeReset": {
+      "mainActivities": 52,
+      "challenges": 0,
+      "undo": true
+    },
+    "fullResetAfterRefresh": {
+      "mainActivities": 0,
+      "challenges": 0,
+      "undo": true
+    },
+    "afterUndo": {
+      "mainActivities": 52,
+      "challengeAnswers": 6,
+      "undo": false
+    },
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "deployment": "No push or deployment for this change"
+}

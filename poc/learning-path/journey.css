@@ -65,6 +65,11 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 .journey-primary .journey-icon{width:22px;height:22px;filter:brightness(.15)}
 .journey-primary:hover:not(:disabled){background:#ffad25}
 .journey-primary:disabled .journey-icon{filter:brightness(0) invert(.75)}
+.journey-challenge-entry{margin-top:12px}
+.journey-reset{margin-top:32px;border-top:2px solid #34434b;padding-top:22px;display:grid;gap:14px}
+.journey-panel button{scroll-margin-top:100px;scroll-margin-bottom:110px}
+.journey-reset>p{color:#a0b0b8;font-size:14px}
+.journey-reset-notice{margin:16px 24px;padding:16px;background:#202f36;border:2px solid #41535d;border-radius:16px;display:grid;gap:10px;color:#f1f7f8;font-size:14px}
 .journey-companion{position:absolute;top:0;width:148px;text-align:center;z-index:1}
 .journey-companion.on-left{left:20px}.journey-companion.on-right{right:20px}
 .journey-mascot{width:148px;height:200px;padding:0;border:0;background:transparent;border-radius:30px;transform-origin:50% 90%;transition:transform .2s}
@@ -74,7 +79,7 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 .journey-chapter-stars .journey-icon{width:22px;height:22px}
 .journey-greeting{position:absolute;top:-15px;left:0;right:0;color:#72d6be;font-size:14px;font-weight:800;animation:journey-reveal .2s ease-out}
 .journey-companion.is-waving .journey-mascot{animation:journey-wave .65s ease-in-out 2}
-.journey-locate{position:fixed;right:max(20px,calc((100vw - 520px)/2 + 20px));bottom:102px;width:52px;height:52px;z-index:15;padding:10px;background:#141f23;border:2px solid #43545e;border-bottom-width:4px;border-radius:16px}
+.journey-locate{position:fixed;right:max(20px,calc((100vw - 520px)/2 + 20px));bottom:102px;width:52px;height:52px;min-height:44px;z-index:15;padding:0;gap:0;display:grid;place-items:center;background:#141f23;border:2px solid #43545e;border-radius:16px}
 .journey-locate .journey-icon{filter:invert(75%) sepia(30%) saturate(2555%) hue-rotate(164deg) brightness(100%) contrast(95%);width:30px;height:30px}
 .journey-locate:hover{background:#223239}
 .journey-app:has(.journey-preview) .journey-locate{display:none}
@@ -144,7 +149,7 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 }
 @media(max-width:370px){
  .journey-step{--path-x:clamp(-56px,var(--node-x),56px)}
- .journey-locate{right:4px;width:44px;height:44px;padding:7px}
+ .journey-locate{right:4px;width:44px;height:44px;padding:0}
  .journey-locate .journey-icon{width:26px;height:26px}
  .journey-stats{padding-left:20px;padding-right:20px;gap:12px}.journey-stat{gap:6px;font-size:21px}.journey-stat .journey-icon{width:28px}
  .journey-chapter-banner{margin-left:16px;margin-right:16px}.journey-chapter-banner h1{font-size:21px}.journey-chapter-banner>div{padding-left:16px}.journey-book-button{min-width:54px;padding:12px}

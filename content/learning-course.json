@@ -11337,5 +11337,348 @@
       "nodeHint": "点击关卡，开始探险",
       "noResults": "完成第一关，留下第一枚金色印记。"
     }
-  }
+  },
+  "challenges": [
+    {
+      "id": "CH12",
+      "title": "认领物品挑战",
+      "lessonLabel": "Lesson 1 & 2",
+      "unlockNodeId": "K04",
+      "nodeIds": [
+        "K04"
+      ],
+      "questions": [
+        {
+          "id": "CH12-1",
+          "kind": "gap",
+          "sourceRef": "L01-D03",
+          "prompt": "这是你的手提包吗？",
+          "answers": [
+            "your"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "“你的”放在物品前面。",
+          "prefix": "Is this ",
+          "suffix": " handbag?"
+        },
+        {
+          "id": "CH12-2",
+          "kind": "translation",
+          "sourceRef": "NCE-U01-C-Q-WATCH",
+          "prompt": "这是你的手表吗？",
+          "answers": [
+            "Is this your watch?"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "用 Is this … 开始提问。"
+        },
+        {
+          "id": "CH12-3",
+          "kind": "gap",
+          "sourceRef": "NCE-U01-C-Q-COAT",
+          "prompt": "这是你的外套吗？",
+          "answers": [
+            "coat"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "外套：回想衣物词卡。",
+          "prefix": "Is this your ",
+          "suffix": "?"
+        },
+        {
+          "id": "CH12-4",
+          "kind": "translation",
+          "sourceRef": "L01-D06",
+          "prompt": "是的，它是。",
+          "answers": [
+            "Yes, it is."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "用 it 指代刚才的物品。"
+        },
+        {
+          "id": "CH12-5",
+          "kind": "gap",
+          "sourceRef": "L01-D07",
+          "prompt": "非常感谢你。",
+          "answers": [
+            "very"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "“非常”对应 very much。",
+          "prefix": "Thank you ",
+          "suffix": " much."
+        },
+        {
+          "id": "CH12-6",
+          "kind": "translation",
+          "sourceRef": "L01-D03",
+          "prompt": "这是你的手提包吗？",
+          "answers": [
+            "Is this your handbag?"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "别忘了“你的”，也别忘了问句中的 is。"
+        }
+      ]
+    },
+    {
+      "id": "CH34",
+      "title": "说清物品归属",
+      "lessonLabel": "Lesson 3 & 4",
+      "unlockNodeId": "R01",
+      "nodeIds": [
+        "R01"
+      ],
+      "questions": [
+        {
+          "id": "CH34-1",
+          "kind": "gap",
+          "sourceRef": "L03-D02",
+          "prompt": "这是我的号码牌。",
+          "answers": [
+            "my"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "“我的”与“你的”不是同一个词。",
+          "prefix": "Here is ",
+          "suffix": " ticket."
+        },
+        {
+          "id": "CH34-2",
+          "kind": "translation",
+          "sourceRef": "L03-D06",
+          "prompt": "这不是我的雨伞。",
+          "answers": [
+            "This is not my umbrella.",
+            "This isn't my umbrella."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "陈述句从 This 开始，否定放在 is 后。"
+        },
+        {
+          "id": "CH34-3",
+          "kind": "gap",
+          "sourceRef": "L04-P15",
+          "prompt": "这是你的女儿吗？",
+          "answers": [
+            "daughter"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "回想 son 和 daughter 中表示“女儿”的词。",
+          "prefix": "Is this your ",
+          "suffix": "?"
+        },
+        {
+          "id": "CH34-4",
+          "kind": "translation",
+          "sourceRef": "L03-D09",
+          "prompt": "不，它不是。",
+          "answers": [
+            "No, it isn't.",
+            "No, it is not."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "先说 No，再用 it 回答。"
+        },
+        {
+          "id": "CH34-5",
+          "kind": "gap",
+          "sourceRef": "L03-D01",
+          "prompt": "请把我的外套和雨伞给我。",
+          "answers": [
+            "and"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "连接两件物品，要用“和”。",
+          "prefix": "My coat ",
+          "suffix": " my umbrella please."
+        },
+        {
+          "id": "CH34-6",
+          "kind": "translation",
+          "sourceRef": "L03-D02",
+          "prompt": "这是我的号码牌。",
+          "answers": [
+            "Here is my ticket.",
+            "Here's my ticket.",
+            "This is my ticket."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "用 Here is … 表示递出东西。"
+        }
+      ]
+    },
+    {
+      "id": "CH56",
+      "title": "介绍朋友与物品",
+      "lessonLabel": "Lesson 5 & 6",
+      "unlockNodeId": "C10",
+      "nodeIds": [
+        "C10"
+      ],
+      "questions": [
+        {
+          "id": "CH56-1",
+          "kind": "gap",
+          "sourceRef": "L05-D05",
+          "prompt": "她是法国人。",
+          "answers": [
+            "She"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "说的是“她”，不是“他”。",
+          "prefix": "",
+          "suffix": " is French."
+        },
+        {
+          "id": "CH56-2",
+          "kind": "translation",
+          "sourceRef": "L05-D07",
+          "prompt": "他是德国人。",
+          "answers": [
+            "He is German.",
+            "He's German."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "用 He 开始，再说明国籍。"
+        },
+        {
+          "id": "CH56-3",
+          "kind": "gap",
+          "sourceRef": "L05-D04",
+          "prompt": "Sophie 是一名新学生。",
+          "answers": [
+            "new"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "“新的”修饰 student。",
+          "prefix": "Sophie is a ",
+          "suffix": " student."
+        },
+        {
+          "id": "CH56-4",
+          "kind": "translation",
+          "sourceRef": "L05-D08",
+          "prompt": "很高兴见到你。",
+          "answers": [
+            "Nice to meet you."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "回想新同学见面时的招呼。"
+        },
+        {
+          "id": "CH56-5",
+          "kind": "gap",
+          "sourceRef": "C06-TEXT:It is an English car.",
+          "prompt": "它是一辆英国汽车。",
+          "answers": [
+            "an"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "English 以元音音素开始，在 a 和 an 中选择。",
+          "prefix": "It is ",
+          "suffix": " English car."
+        },
+        {
+          "id": "CH56-6",
+          "kind": "translation",
+          "sourceRef": "C06-TEXT:He is not French.",
+          "prompt": "他不是法国人。",
+          "answers": [
+            "He is not French.",
+            "He isn't French.",
+            "He's not French."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "把 not 放在 is 后，保留表示“他”的主语。"
+        }
+      ]
+    },
+    {
+      "id": "CHALL",
+      "title": "小镇输入挑战",
+      "lessonLabel": "Lesson 1–6",
+      "unlockNodeId": "R02",
+      "nodeIds": [
+        "R02"
+      ],
+      "questions": [
+        {
+          "id": "CHALL-1",
+          "kind": "translation",
+          "sourceRef": "NCE-U01-C-Q-WATCH",
+          "prompt": "这是你的手表吗？",
+          "answers": [
+            "Is this your watch?"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "问句从 Is this … 开始。"
+        },
+        {
+          "id": "CHALL-2",
+          "kind": "gap",
+          "sourceRef": "L01-D06",
+          "prompt": "是的，它是。",
+          "answers": [
+            "it"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "用一个词指代刚才的物品。",
+          "prefix": "Yes, ",
+          "suffix": " is."
+        },
+        {
+          "id": "CHALL-3",
+          "kind": "translation",
+          "sourceRef": "L03-D02",
+          "prompt": "这是我的号码牌。",
+          "answers": [
+            "Here is my ticket.",
+            "Here's my ticket.",
+            "This is my ticket."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "回想拿雨伞时递号码牌的说法。"
+        },
+        {
+          "id": "CHALL-4",
+          "kind": "gap",
+          "sourceRef": "L05-D19",
+          "prompt": "她也是中国人。",
+          "answers": [
+            "too"
+          ],
+          "actorId": "explorer-cat",
+          "hint": "表示“也”的词放在句尾。",
+          "prefix": "She's Chinese, ",
+          "suffix": "."
+        },
+        {
+          "id": "CHALL-5",
+          "kind": "translation",
+          "sourceRef": "C06-TEXT:It is an American car.",
+          "prompt": "它是一辆美国汽车。",
+          "answers": [
+            "It is an American car.",
+            "It's an American car."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "注意 American 前面的冠词。"
+        },
+        {
+          "id": "CHALL-6",
+          "kind": "translation",
+          "sourceRef": "L03-D06",
+          "prompt": "这不是我的雨伞。",
+          "answers": [
+            "This is not my umbrella.",
+            "This isn't my umbrella."
+          ],
+          "actorId": "explorer-cat",
+          "hint": "同时表达“不是”和“我的”。"
+        }
+      ]
+    }
+  ]
 }

@@ -12,7 +12,9 @@
     link.onload = resolve; link.onerror = () => reject(Error('Style failed: ' + href));
     document.head.append(link);
   });
-  const control = window.fixture = { audio: [], errors: [], dispatchCount: 0, now: '2026-09-06T12:00:00Z', failSave: false, throwNext: false };
+  const reloadSeed = window.parent.fixtureReloadSeed;
+  delete window.parent.fixtureReloadSeed;
+  const control = window.fixture = { audio: [], errors: [], dispatchCount: 0, now: reloadSeed?.now || '2026-09-06T12:00:00Z', failSave: false, throwNext: false };
   window.addEventListener('error', event => control.errors.push(event.message));
   window.addEventListener('unhandledrejection', event => control.errors.push(String(event.reason)));
   class TestAudio extends EventTarget {
@@ -31,7 +33,7 @@
       if (src.includes('/course/path.js')) {
         const core = window.CanranCore;
         core.curriculumCatalog = { getTeachingUnit: () => control.unit };
-        control.adapter = core.learningStore.createMemoryAdapter();
+        control.adapter = core.learningStore.createMemoryAdapter(reloadSeed?.records);
         core.learningStore = { ...core.learningStore, createLocalStorageAdapter: () => ({
           load: key => control.adapter.load(key),
           commit: (...args) => control.failSave ? {status:'unavailable', persisted:false} : control.adapter.commit(...args)

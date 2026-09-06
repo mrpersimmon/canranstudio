@@ -11,14 +11,12 @@
     const checkpointTotal = unit.checkpointIds.length;
     const icon = name => `<img class="lp-icon" src="${escape(unit.icons[name])}" alt="" width="24" height="24">`;
     const image = (id, className = '', labelled = false) => `<img class="${className}" src="${escape(unit.entities[id].assetSrc)}" alt="${labelled ? escape(unit.entities[id].title) : ''}" decoding="async">`;
-    function button(action, text, { id = '', disabled = false, className = '', symbol = '', label = '', pressed = null, language = '' } = {}) {
-      return `<button type="button" data-action="${action}"${id ? ` data-id="${escape(id)}"` : ''} class="lp-button ${className}"${disabled ? ' disabled' : ''}${label ? ` aria-label="${escape(label)}"` : ''}${pressed === null ? '' : ` aria-pressed="${pressed}"`}>${symbol ? icon(symbol) : ''}${text ? `<span${language ? ` lang="${escape(language)}"` : ''}>${escape(text)}</span>` : ''}</button>`;
+    function button(action, text, { id = '', scope = '', disabled = false, className = '', symbol = '', label = '', pressed = null, language = '' } = {}) {
+      return `<button type="button" data-action="${action}"${id ? ` data-id="${escape(id)}"` : ''}${scope ? ` data-scope="${escape(scope)}"` : ''} class="lp-button ${className}"${disabled ? ' disabled' : ''}${label ? ` aria-label="${escape(label)}"` : ''}${pressed === null ? '' : ` aria-pressed="${pressed}"`}>${symbol ? icon(symbol) : ''}${text ? `<span${language ? ` lang="${escape(language)}"` : ''}>${escape(text)}</span>` : ''}</button>`;
     }
     function header(v, label = c.learningPath) {
-      const parent = unit.activities[v.storyActivityId], node = unit.nodes.find(n => n.id === v.nodeId);
-      const total = parent ? parent.beats.length : v.screen === 'activity' && node ? node.activityIds.length : checkpointTotal;
-      const completed = parent ? v.storyIndex : v.screen === 'activity' && node ? Math.max(0, node.activityIds.indexOf(v.activityId)) : v.completedCount;
-      return `<header class="lp-header">${v.screen === 'map' ? `<div class="lp-brand">${image('explorer-cat')}<strong>${escape(unit.brandTitle)}</strong></div>` : button('map', '', { symbol: 'x-lg', className: 'lp-icon-button', label: c.rest })}<div class="lp-progress" role="progressbar" aria-label="${escape(v.screen === 'activity' ? c.currentProgress : c.ariaProgress)}" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${completed}"><span style="width:${completed / total * 100}%"></span></div><span class="lp-header-label">${escape(label)}</span></header>`;
+      const progress = v.sessionProgress;
+      return `<header class="lp-header">${v.screen === 'map' ? `<div class="lp-brand">${image('explorer-cat')}<strong>${escape(unit.brandTitle)}</strong></div>` : button('map', '', { symbol: 'x-lg', className: 'lp-icon-button', label: c.rest })}${progress?.total ? `<div class="lp-progress" role="progressbar" aria-label="本次闯关进度" aria-valuemin="0" aria-valuemax="${progress.total}" aria-valuenow="${progress.completed}"><span style="width:${progress.completed / progress.total * 100}%"></span></div>` : '<div class="lp-header-spacer"></div>'}<span class="lp-header-label">${escape(label)}</span></header>`;
     }
     function scene(a, small = false, returned = false) {
       return `<div class="lp-scene${small ? ' lp-scene-small' : ''}${returned ? ' is-returned' : ''}" role="img" aria-label="${escape(c.sceneLabel)}"><span class="lp-actor lp-keeper">${image('station-keeper')}</span>${a.focusEntityId ? image(a.focusEntityId, 'lp-scene-object') : ''}<span class="lp-actor lp-owner">${image('handbag-owner')}</span></div>`;
@@ -156,11 +154,33 @@
         }).join('')}</div>` : ''}</section>`;
       }).join('')}</div>${footer(v,button('map',c.referenceBack,{className:'lp-primary'}))}`;
     }
+    function renderChallenge(v) {
+      const challenge = unit.challenges.find(item => item.id === v.challengeId);
+      const progress = v.record.challenges?.[challenge.id] || {answers:[]};
+      if (v.screen === 'challenge-intro') {
+        const finished = Boolean(progress.completedAt);
+        return `${header(v,'输入挑战')}<section class="lp-lesson lp-challenge-intro">${image('explorer-cat')}<p class="lp-kicker">${escape(challenge.lessonLabel)} · 选做</p><h1 tabindex="-1" data-lesson-title>${escape(challenge.title)}</h1><p>填单词，写整句。试试不用选项提示。</p><p class="lp-challenge-count">${progress.answers.length} / ${challenge.questions.length} 题</p>${progress.answers.length || progress.draft ? button('reset-request',finished ? '再挑战一次' : '重新开始',{scope:'challenge',id:challenge.id,className:'lp-secondary'}) : ''}</section>${footer(v,finished ? button('map',c.seePath,{className:'lp-primary'}) : button('challenge-start',progress.answers.length || progress.draft ? '继续挑战' : '开始挑战',{className:'lp-primary'}))}`;
+      }
+      if (v.screen === 'challenge-complete') {
+        const independent = progress.answers.filter(answer => answer.evidence === 'independent').length;
+        return `${header(v,'输入挑战')}<section class="lp-celebration">${image('explorer-cat')}<p class="lp-kicker">${escape(challenge.lessonLabel)}</p><h1 tabindex="-1" data-lesson-title>输入挑战完成！</h1><div class="lp-challenge-result"><strong>${independent} / ${challenge.questions.length}</strong><span>独立完成</span>${independent < challenge.questions.length ? `<p>${challenge.questions.length-independent} 题借助了提示</p>` : ''}</div>${button('reset-request','再挑战一次',{scope:'challenge',id:challenge.id,className:'lp-secondary'})}</section>${footer(v,button('map',c.seePath,{className:'lp-primary',symbol:'arrow-right'}))}`;
+      }
+      const q = challenge.questions[v.challengeIndex], feedback = v.feedback;
+      const inputAttrs = `data-challenge-input data-question-id="${q.id}" data-challenge-id="${challenge.id}" lang="en" aria-label="${q.kind === 'gap' ? '填入缺少的单词' : '英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback ? ' readonly' : ''}`;
+      const input = q.kind === 'translation' ? `<textarea ${inputAttrs} rows="3" placeholder="用英文写出整句话">${escape(v.challengeAnswer)}</textarea>`
+        : `<div class="lp-gap-sentence" lang="en"><span>${escape(q.prefix)}</span><input ${inputAttrs} type="text" value="${escape(v.challengeAnswer)}" placeholder="…" size="9"><span>${escape(q.suffix)}</span></div>`;
+      const message = feedback ? `<section class="lp-feedback ${feedback === 'correct' ? 'lp-feedback-success' : 'lp-feedback-retry'}" tabindex="-1" aria-live="polite"><div class="lp-feedback-title">${icon(feedback === 'correct' ? 'check-circle-fill' : 'lightbulb')}<strong>${feedback === 'correct' ? '答对了！' : '再试一次'}</strong></div>${feedback === 'retry' ? '<p>参考答案：</p>' : ''}<p lang="en">${escape(unit.sources[q.sourceRef].text)}</p></section>` : '';
+      const body = `<div class="lp-lesson lp-challenge"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${q.kind === 'translation' ? '翻译这句话' : '补全句子'}</h1></div><div class="lp-challenge-prompt">${image(q.actorId)}<p>${escape(q.prompt)}</p></div><div class="lp-written-answer">${input}</div>${v.challengeHintUsed && !feedback ? `<p class="lp-hint">${escape(q.hint)}</p>` : ''}${message}</div>`;
+      const actions = feedback ? `${unit.sources[q.sourceRef].audioSrc ? button('challenge-audio','听参考答案',{symbol:'volume-up-fill',className:'lp-quiet'}) : ''}${button(feedback === 'correct' ? 'challenge-next' : 'challenge-retry',feedback === 'correct' ? '继续' : '修改答案',{className:'lp-primary'})}`
+        : `${button('challenge-hint','提示',{symbol:'lightbulb',className:'lp-quiet',disabled:v.challengeHintUsed})}${button('challenge-check','检查',{className:'lp-primary',disabled:!v.challengeAnswer.trim()})}`;
+      return `${header(v,'输入挑战')}${body}${footer(v,actions)}`;
+    }
     function render(v) {
       if (v.screen === 'blocked') return `<div class="station-app lp-blocked">${image('explorer-cat')}<h1>${escape(c.unsupportedRecord)}</h1>${button('reload', c.reloadProgress, { className: 'lp-primary' })}</div>`;
       let html;
       if (v.screen === 'map') html = renderMap(v);
       else if (v.screen === 'references') html = renderReferences(v);
+      else if (['challenge-intro','challenge','challenge-complete'].includes(v.screen)) html = renderChallenge(v);
       else if (v.screen === 'celebration' || v.screen === 'review-complete') {
         const node = unit.nodes.find(n => n.id === v.nodeId), done = v.nodes.every(n => n.done);
         const results = Object.values(v.record.results).filter(r => done || !node || unit.activities[r.activityId].nodeId === node.id);
@@ -176,7 +196,9 @@
         const outcome = results.length ? `<dl class="lp-evidence-summary">${[...groups.values()].map(group => `<div><dt>${escape(group.label)}</dt><dd>${group.practice ? `${group.count} ${escape(c.practiceGroupUnit)}` : `${escape(c.firstTry)} ${group.first}${group.helped ? ` · ${escape(c.helpedTry)} ${group.helped}` : ''}${group.modeled ? ` · ${escape(c.needsPracticeLabel)} ${group.modeled}` : ''}`}</dd></div>`).join('')}</dl>` : '';
         const homeScene = node?.completionScene === 'home' ? `<div class="lp-home-scene">${image('car')}${image('handbag-owner')}${image('house')}</div>` : image('explorer-cat');
         const detail = unit.courseId && outcome ? `<details class="lp-completion-details"><summary>学习记录</summary>${outcome}</details>` : outcome;
-        html = `${header(v)}<section class="lp-celebration">${homeScene}<p class="lp-kicker">${escape(v.mode === 'repeat' ? c.repeatNotice : c.lessonLabel)}</p><h1>${escape(v.screen === 'review-complete' ? c.reviewDone : done ? c.completedTitle : node.completionTitle)}</h1>${v.mode === 'main' ? detail : ''}<div class="lp-saved-progress">${icon('check-circle-fill')} ${v.completedCount} / ${checkpointTotal} ${escape(c.checkpointLabel)}</div></section>${footer(v, button('map', c.seePath, { className: 'lp-primary', symbol: 'arrow-right' }))}`;
+        const challenge = unit.challenges?.find(item => item.nodeIds.includes(node?.id));
+        const label = v.screen === 'review-complete' ? c.reviewTitle : node ? `${c.nodePrefix} ${unit.nodes.indexOf(node)+1} ${c.nodeSuffix}` : c.learningPath;
+        html = `${header(v,label)}<section class="lp-celebration">${homeScene}<p class="lp-kicker">${escape(v.mode === 'repeat' ? c.repeatNotice : c.lessonLabel)}</p><h1>${escape(v.screen === 'review-complete' ? c.reviewDone : v.mode === 'summary' || done && node === unit.nodes.at(-1) ? c.completedTitle : node.completionTitle)}</h1>${['main','summary'].includes(v.mode) ? detail : ''}<div class="lp-saved-progress">${icon('check-circle-fill')} ${v.screen === 'review-complete' ? '本次复习完成' : '本关完成'}</div>${challenge && v.screen === 'celebration' ? button('open-challenge','试试输入挑战',{id:challenge.id,className:'lp-secondary lp-challenge-entry'}) : ''}</section>${footer(v, button('map', c.seePath, { className: 'lp-primary', symbol: 'arrow-right' }))}`;
       } else {
         const a = unit.activities[v.activityId], node = unit.nodes.find(n => n.id === v.nodeId);
         const label = node ? `${c.nodePrefix} ${unit.nodes.indexOf(node) + 1} ${c.nodeSuffix}` : c.reviewTitle;
@@ -202,6 +224,12 @@
         html = `${header(v, v.mode === 'repeat' ? c.repeatNotice : label)}<div class="lp-lesson"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(a.title)}</h1></div>${body}</div>${footer(v, actions)}`;
       }
       if (v.saveState) html += `<div class="lp-modal-backdrop"><section class="lp-modal" role="alertdialog" aria-modal="true" aria-labelledby="lp-save-title"><h2 id="lp-save-title">${escape(v.saveState === 'conflict' ? c.saveConflict : v.saveState === 'unreadable' ? c.unsupportedRecord : c.saveFailure)}</h2>${button(v.saveState === 'failed' ? 'save-retry' : 'reload', v.saveState === 'failed' ? c.saveRetry : c.reloadProgress, { className: 'lp-primary' })}</section></div>`;
+      if (v.resetRequest && !v.saveState) {
+        const scope = v.resetRequest.scope;
+        const title = scope === 'course' ? '全部从零开始？' : scope === 'challenge' ? '重新开始这次挑战？' : '重置所有输入挑战？';
+        const body = scope === 'course' ? '这台设备的课程进度、复习和挑战记录将重置，回到第 1 关。' : '输入挑战记录将重置，课程路线进度保留。';
+        html += `<div class="lp-modal-backdrop"><section class="lp-modal" role="alertdialog" aria-modal="true" aria-labelledby="lp-reset-title"><h2 id="lp-reset-title">${title}</h2><p>${body}</p><p>再次学习前，可以撤销这次重置。</p><div class="lp-reset-actions">${button('reset-cancel','取消',{className:'lp-secondary'})}${button('reset-confirm','确认重置',{className:'lp-primary'})}</div></section></div>`;
+      }
       // Keep the package loader's existing ready-surface contract without
       // loading or coupling this renderer to V2's scene and styles.
       return `<div class="station-app lp-shell${unit.courseId ? ' lp-course' : ''}${unit.journey && v.screen === 'map' ? ' has-journey' : ''}">${html}</div>`;
