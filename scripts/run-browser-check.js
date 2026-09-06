@@ -9,9 +9,9 @@ async function main() {
   let browser;
   try {
     browser=await chromium.launch();
-    const page=await browser.newPage({viewport:{width:1500,height:1000}});
+    const page=await browser.newPage({viewport:{width:1500,height:1000},reducedMotion:'no-preference'});
     await page.goto('http://127.0.0.1:'+server.address().port+'/__qa__/runner.html');
-    await page.waitForFunction(()=>document.body.dataset.result,{timeout:300000});
+    await page.waitForFunction(()=>document.body.dataset.result,undefined,{timeout:300000});
     if(getReport()?.status!=='passed'){
       await page.screenshot({path:'test-results/readability-failed.png',fullPage:true});
       throw Error('Browser readability suite failed; see test-results/readability-failed.json');

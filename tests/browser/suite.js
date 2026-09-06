@@ -111,9 +111,15 @@
       try{
         if(name==='completion-skips-map')primary.dataset.action='continue-course';
         else primary.style.transform='translateY(200vh)';
+        // The production button transitions its transform for 120 ms. Wait for
+        // that real animation; an immediate rectangle still describes its start.
+        await settle();
+        const rect=primary.getBoundingClientRect();
+        const injected={action:primary.dataset.action,top:rect.top,bottom:rect.bottom,viewportHeight:frame.contentWindow.innerHeight};
+        if(name==='completion-button-offscreen'&&rect.top<frame.contentWindow.innerHeight)throw Error('Offscreen fault did not reach its target position');
         const result=await auditReadability(frame.contentWindow,{name,expectedTheme:'dark'});
         const caught=result.errors.some(error=>error.rule===rule);
-        report.mutations.push({name,caught,errors:result.errors});
+        report.mutations.push({name,caught,injected,errors:result.errors});
         if(!caught)throw Error('Negative control escaped: '+name);
       }finally{
         primary.dataset.action=action;
