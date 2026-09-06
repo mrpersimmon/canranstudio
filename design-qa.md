@@ -15,6 +15,7 @@ final result: passed
 - [完整页面前后对比](docs/designs/readability-guard/qa/comparison-full.png)
 - [猫猫和对话重点对比](docs/designs/readability-guard/qa/comparison-detail.png)
 - [手机对话](docs/designs/readability-guard/qa/story-420.png)、[420 像素交接选择](docs/designs/readability-guard/qa/handoff-420.jpg)、[320 像素交接选择](docs/designs/readability-guard/qa/handoff-320.jpg)、[手机课本](docs/designs/readability-guard/qa/reference-320.jpg)
+- [用户原本地网址更新后的实际页面](docs/designs/readability-guard/qa/local-preview-906.png)
 - [已完成 5 关的窄屏地图](docs/designs/readability-guard/qa/map-progress-5-320.png)、[词句题人物边界](docs/designs/readability-guard/qa/scene-fixed-420.png)、[异常恢复页](docs/designs/readability-guard/qa/blocked-906.png)
 
 ## 五项必查表面
@@ -37,7 +38,7 @@ final result: passed
 
 [完整原因、修复和证据记录](docs/designs/readability-guard/design-qa.md) · [防护网运行说明](docs/designs/readability-guard/README.md)
 
-全部发现的 P0/P1/P2 已修复，并完成同状态截图及两轮浏览器矩阵复核。当前结论是本地可读性验收通过；CI 配置已加入，未触发远端 CI，未部署线上网站。
+全部发现的 P0/P1/P2 已修复，并完成同状态截图及两轮浏览器矩阵复核。修复提交后，`npm run verify` 完整通过，生成 224 文件的本地发布包。当前结论是本地可读性验收和构建通过；CI 配置已加入，未触发远端 CI，未部署线上网站。
 
 ## 历史记录
 
