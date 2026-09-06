@@ -1,0 +1,29 @@
+STYLE REFERENCE
+/Users/permission/.codex/.chatgpt-projects/g-p-6a75fe3e1ec88191b3d5d52f3c636aa6/task-outputs/lesson1-2-duolingo-plan-2026-09-05/implementation/poc/lesson1-2-experience/assets/v3/handbag.png
+
+BUILT-IN IMAGE_GEN — WATCH GENERATION
+
+Use case: stylized-concept
+Asset type: standalone transparent lesson prop for an elementary English-learning app
+Input images: Image 1 is a style, scale, and visual-weight reference only. Match its strict geometric flat shapes, centered composition, clean silhouette, and generous padding; do not reproduce the handbag.
+Primary request: Create one original front-facing wristwatch, immediately recognizable as a wearable wristwatch at small UI size.
+Scene/backdrop: genuinely transparent background, no backdrop, no floor, no frame.
+Subject: one complete vertical wristwatch; full upper strap and full lower strap visible; deep navy-blue strap with rounded ends and a simple buckle-free front view; a centered circular case; a light-blue round dial; exactly two dark hands showing approximately 10:10; no second hand; no numerals, ticks, date window, or text.
+Style/medium: strict geometric flat-color raster illustration, vector-like clean contours, uniform solid color blocks.
+Composition/framing: centered on a square canvas; watch occupies about 46–50% of canvas width and 72–76% of canvas height; comparable visual weight to Image 1; at least 12% transparent empty safe area on every side.
+Color palette: exactly three opaque blue tones—deep navy #173F5F for strap and hands, medium blue #2C7FB8 for case rim, light blue #A9DDF4 for dial; neutral edge anti-aliasing only.
+Constraints: one watch only; actual alpha transparency; crisp anti-aliased edges; no cropped strap; no words; no letters; no digits; no logo; no watermark; no person; no wrist; no cat; no other object.
+Avoid: gradients, texture, gloss, highlights, reflections, realistic shadows, cast shadows, ambient shadows, 3D depth, photographic materials, stitching, metal effects, checkerboard pixels, halo, decorative marks.
+
+BUILT-IN IMAGE_GEN — PROPORTION REFINEMENT
+
+Use case: precise-object-edit
+Asset type: standalone transparent lesson prop
+Input images: Image 1 is the edit target.
+Primary request: Adjust only the watch proportions: enlarge the circular case to about 46–50% of the square canvas width and shorten both the upper and lower straps so the complete watch occupies about 72–76% of the canvas height. Keep the full upper strap and full lower strap visible with rounded ends.
+Constraints: preserve the exact front-facing centered orientation, deep navy strap, medium-blue circular rim, light-blue dial, and exactly two dark hands at approximately 10:10; preserve the simple geometric flat visual language; keep at least 12% empty space on every side; one watch only; no numerals, ticks, text, logo, date window, second hand, buckle, person, wrist, cat, or other object.
+Avoid: gradients, texture, gloss, highlight, reflection, shadow, 3D depth, checkerboard pixels, halo, cropped strap.
+
+FINISHING
+
+The built-in image_gen output was normalized to the exact three requested blue fills, given a genuine alpha channel, and resized to a 1024 x 1024 transparent PNG canvas while preserving its generated silhouette and proportions.

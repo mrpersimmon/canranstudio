@@ -1,0 +1,13 @@
+Use case: illustration-story
+Asset type: single vocabulary-choice clothing icon for a primary-school English learning app
+Input image: use book.png only as a reference for crisp geometric silhouettes, simple solid color blocking, edge softness, and answer-card visual weight. Do not reproduce its subject or blue colors.
+
+Primary request: create exactly one empty mustard-yellow long coat, shown from the front.
+Subject: a substantial knee-length or just-below-knee outer coat with a thick, roomy, straight silhouette; long full sleeves angled only slightly outward; broad clearly visible notched lapels; a centered front opening/placket with a simple vertical row of four large round buttons; two clearly visible roomy outlined patch pockets, one on each lower front side; a modest coat hem. The garment must visibly read as heavy outerwear.
+Semantic priority: silhouette must distinguish this coat from a shirt, blouse, jacket, skirt, or dress even if multiple clothing items later share the same mustard-yellow color. Emphasize long length, broad shoulders, thick lapels, roomy sleeves, front button opening, and two pockets.
+Style/medium: polished geometric flat-color raster illustration; large simple shapes; crisp smooth outline; strict solid color regions; no fabric detail.
+Composition/framing: square 1:1 canvas, 1024x1024; centered upright front view; show the entire coat from collar tips through both sleeve cuffs and complete hem; at least 12% genuine transparent padding on every side; no cropping; visual weight comparable to other vocabulary items.
+Color palette: one dominant mustard yellow plus one darker mustard only for lapel, placket, pocket outlines, buttons, and structural separation.
+Scene/backdrop: genuine transparent RGBA background; every pixel outside the coat has alpha 0; do not draw or simulate a checkerboard.
+Constraints: exactly one empty coat; no person or body inside; no hanger; no mannequin; no text, letters, numbers, logo, watermark, or other objects.
+Avoid: shirt length, cropped jacket, blazer, trench-belt details, dress shape, skirt-only shape, waist cinching, flared dress hem, hood, fur trim, zipper-only closure, gradients, highlights, shading, shadows, drop shadows, glow, texture, noise, fabric grain, folds, stitching, 3D photorealism, background, floor, frame, checkerboard pattern, white/gray/black background.

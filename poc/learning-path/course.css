@@ -1,0 +1,88 @@
+/* The continuous course extends the approved Lesson 1–2 visual system. */
+.lp-course .lp-map{margin:0 auto}
+.lp-course .lp-map-intro{justify-content:space-between}
+.lp-course-path{gap:24px;max-width:470px}
+.lp-course-path .lp-chapter{padding:20px 8px 5px;margin-top:10px;border-top:2px solid var(--lp-line)}
+.lp-course-path .lp-chapter:first-child{border:0;margin:0;padding-top:0}
+.lp-course-path .lp-chapter h2{font-size:1.1rem;font-weight:800}
+.lp-course-path .lp-path-step{padding-left:20px;gap:24px}
+.lp-course-path .lp-path-step:nth-child(3n){padding-left:60px}
+.lp-course-path .lp-path-step h3{font-size:1.08rem;line-height:1.45;margin:3px 0;font-weight:750}
+.lp-course-path .lp-path-step>div{min-width:0}
+.lp-course-path .is-review .lp-node{border-radius:26px}
+.lp-course-path .lp-daily-review{border-top:2px solid var(--lp-line);padding-top:26px;margin-top:8px;padding-left:20px}
+.lp-course-path .lp-daily-review .lp-node:not(:disabled){background:var(--lp-action);border-color:var(--lp-action-edge)}
+.lp-reference-entry{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;text-align:center;margin:6px 0 22px}
+.lp-course .lp-story-cast.has-no-object{grid-template-columns:repeat(var(--cast-count),minmax(0,1fr));gap:28px;max-width:500px}
+.lp-course .lp-story-cast.has-no-object .lp-story-character>img{max-width:150px}
+.lp-course .lp-story-character.is-speaking .lp-character-name{color:var(--lp-blue);font-weight:800}
+.lp-course .lp-interactive-story:not(.is-checkpoint) .lp-story-transcript{max-height:clamp(105px,calc(100dvh - 525px),280px)}
+.lp-course .lp-phrase-example{padding:13px 18px;margin:15px auto;color:var(--lp-blue);background:var(--lp-blue-tint);border-radius:12px;font-size:1.1rem;text-align:center}
+.lp-course .lp-vocabulary-card strong{font-size:1.2rem;overflow-wrap:anywhere}
+.lp-course .lp-vocabulary-caption{min-height:66px;justify-content:center}
+.lp-course .lp-vocabulary{align-items:stretch}
+.lp-course .lp-vocabulary-card{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between}
+.lp-course .lp-vocabulary-image{flex:none}
+.lp-references{padding-bottom:35px}
+.lp-reference-group{margin-top:16px}
+.lp-reference-toggle{width:100%;justify-content:space-between;background:var(--lp-action);border-color:var(--lp-action-edge)}
+.lp-reference-toggle>.lp-icon{order:2;width:18px;height:18px}
+.lp-reference-lines{padding:10px 0}
+.lp-reference-line{display:flex;gap:15px;align-items:center;border-bottom:1px solid var(--lp-line);padding:13px 12px;border-radius:8px}
+.lp-reference-line>p{flex:1;min-width:0;overflow-wrap:anywhere;white-space:pre-line;line-height:1.65}
+.lp-reference-line .lp-icon-button{flex:none;background:var(--lp-action);border:2px solid var(--lp-action-edge);border-bottom-width:4px}
+.lp-reference-line.is-speaking{background:var(--lp-blue-tint)}
+.lp-reference-line.is-speaking .lp-icon-button{background:var(--lp-selected);border-color:var(--lp-blue)}
+@media(min-width:760px){
+ .lp-course .lp-vocabulary:has(>.lp-vocabulary-card:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
+ .lp-course .lp-vocabulary-image{height:155px}
+}
+@media(max-width:600px){
+ .lp-course-path .lp-path-step{padding-left:0;gap:19px}
+ .lp-course-path .lp-path-step:nth-child(3n){padding-left:28px}
+ .lp-course-path .lp-daily-review{padding-left:0}
+ .lp-course-path .lp-path-step h3{font-size:1rem}
+ .lp-course-path .lp-chapter{padding-left:0;padding-right:0}
+ .lp-course .lp-story-cast.has-no-object{gap:12px}
+ .lp-course .lp-vocabulary-card strong{font-size:1.06rem}
+ .lp-course .lp-vocabulary-caption{min-height:72px}
+ .lp-reference-line{padding:12px 4px;gap:9px}
+}
+@media(prefers-reduced-motion:reduce){.lp-course *{scroll-behavior:auto!important}}
+@media(max-height:760px){
+ .lp-course .lp-interactive-story.is-checkpoint:not(.is-cast-question) .lp-story-character>img{height:clamp(48px,9vh,70px)}
+ .lp-course .lp-interactive-story.is-checkpoint:not(.is-cast-question) .lp-story-transcript{max-height:135px;margin:6px auto 12px}
+ .lp-course .lp-interactive-story.is-checkpoint:not(.is-cast-question) .lp-story-cast{margin-bottom:6px}
+ .lp-course .lp-interactive-story.is-cast-question .lp-story-character>img{height:clamp(95px,18vh,140px)}
+ .lp-course .lp-interactive-story.is-cast-question .lp-story-transcript{max-height:150px}
+ .lp-course .lp-interactive-story.is-cast-question .lp-story-cast{margin-top:14px;margin-bottom:22px}
+}
+@media(max-height:600px){.lp-course .lp-interactive-story.is-cast-question .lp-story-transcript{max-height:115px}}
+@media(max-height:700px){
+ .lp-course .lp-interactive-story.is-checkpoint:has(.lp-picture-options) .lp-story-transcript{max-height:96px}
+ .lp-course .lp-interactive-story .lp-picture-options{margin:15px 0 10px}
+ .lp-course .lp-interactive-story .lp-picture-options .lp-option{padding:9px}
+ .lp-course .lp-interactive-story .lp-picture-options .lp-option-image{height:82px;width:80px}
+}
+.lp-course .lp-cloze+.lp-options{flex-direction:row;gap:8px;margin:16px 0}
+.lp-course .lp-celebration>img{width:180px;height:190px}
+.lp-course .lp-completion-details{margin:12px auto;max-width:440px;text-align:left}
+.lp-completion-details>summary{min-height:44px;padding:10px;color:var(--lp-blue);cursor:pointer;font-weight:700;text-align:center}
+.lp-completion-details>summary:focus-visible{outline:3px solid var(--lp-blue);outline-offset:3px;border-radius:8px}
+.lp-course .lp-celebration .lp-saved-progress{margin-top:12px}
+.lp-course .lp-cloze+.lp-options>.lp-option{flex:1;min-width:0;justify-content:center;padding:12px 8px;gap:7px}
+.lp-course .lp-cloze+.lp-options .lp-choice-marker,.lp-course .lp-cloze+.lp-options .lp-choice-marker .lp-icon{width:17px;height:17px}
+@media(max-height:760px){
+ .lp-course .lp-lesson:has(.lp-cloze) .lp-question-object{margin:10px auto 4px;height:120px}
+ .lp-course .lp-lesson:has(.lp-cloze) .lp-question-object img{height:120px;width:180px}
+ .lp-course .lp-cloze{margin-top:12px;margin-bottom:10px}
+ .lp-course .lp-lesson:has(.lp-phrase-example) .lp-question-object,.lp-course .lp-lesson:has(.lp-phrase-example) .lp-question-object img{height:85px}
+ .lp-course .lp-lesson:has(.lp-cloze) .lp-phrase-example{margin:8px auto;padding:8px;font-size:1rem}
+}
+
+@media(max-height:700px){
+ .lp-course .lp-celebration{padding:12px 20px;gap:8px}
+ .lp-course .lp-celebration>img{width:120px;height:110px}
+ .lp-course .lp-completion-details{margin:0 auto}
+ .lp-course .lp-celebration .lp-saved-progress{margin-top:0}
+}

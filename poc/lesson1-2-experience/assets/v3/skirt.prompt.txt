@@ -1,0 +1,13 @@
+Use case: illustration-story
+Asset type: single vocabulary-choice clothing icon for a primary-school English learning app
+Input images: use dress.png and coat.png only as exact references for the same mustard-yellow palette, two-level solid color blocking, crisp geometric silhouette, edge softness, and answer-card visual weight. Create a distinct garment.
+
+Primary request: create exactly one empty mustard-yellow short skirt, shown from the front.
+Subject: a clear horizontal waistband at the top; a compact above-knee or knee-length A-line skirt body that widens visibly from the waistband to a broad lower hem; exactly three simple darker-mustard structural pleat lines descending partway from the waistband. Keep the silhouette clean and immediately readable.
+Semantic priority: the item must unmistakably read as a separate skirt and remain clearly different from the one-piece dress, coat, and shirt. The image must begin at the waistband and contain no garment above it.
+Style/medium: polished geometric flat-color raster illustration; large simple shapes; crisp smooth outline; strict solid color regions; no fabric detail.
+Composition/framing: square 1:1 canvas, 1024x1024; centered upright front view; show the complete waistband, both side edges, and complete hem; occupy similar answer-card visual weight to the other clothing items; at least 12% genuine transparent padding on every side; no cropping.
+Color palette: exactly the same dominant mustard yellow and darker mustard structural color as dress.png and coat.png.
+Scene/backdrop: genuine transparent RGBA background; every pixel outside the skirt has alpha 0; do not draw or simulate a checkerboard.
+Constraints: exactly one empty skirt; no torso, bodice, neckline, top, shoulders, straps, sleeves, legs, person, hanger, mannequin, pockets, belt buckle, bow, text, letters, numbers, logo, watermark, or other objects.
+Avoid: dress, shirt, shorts, trousers, coat, jacket, apron, suspenders, pleated-school-uniform complexity, many folds, ruffles, lace, patterns, gradients, highlights, shading, shadows, drop shadows, glow, texture, noise, fabric grain, stitching, 3D photorealism, background, floor, frame, checkerboard pattern, white/gray/black background.

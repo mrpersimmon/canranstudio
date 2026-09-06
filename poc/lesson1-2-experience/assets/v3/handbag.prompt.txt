@@ -1,0 +1,20 @@
+REFERENCE IMAGE
+/Users/permission/.codex/generated_images/01a07039-2bb9-7e21-be9b-39d6598f330b/exec-b987669b-f458-4171-a69a-b15eb28e1877.png
+
+BUILT-IN IMAGE_GEN PROMPT
+
+Use case: stylized-concept
+Asset type: standalone transparent lesson prop for an elementary English-learning app
+Input images: Image 1 is a visual style reference only. Match its simple geometric flat illustration language and the mustard-yellow handbag identity; do not reproduce any interface, character, text, icon, counter, or scene.
+Primary request: Create one original mustard-yellow handbag as a clean standalone UI asset.
+Scene/backdrop: genuinely transparent background, no backdrop, no floor, no frame.
+Subject: one front-facing handbag with a compact rounded-rectangle body, a short clearly readable curved handle attached at two points, a simple rounded flap, and one small square clasp; friendly balanced proportions; immediately recognizable as a handbag at small UI size.
+Style/medium: strict geometric flat-color raster illustration, vector-like clean silhouette, simple uniform solid color blocks.
+Composition/framing: centered on a square canvas; bag occupies about 70–74% of canvas width and 58–64% of canvas height; at least 12% transparent empty safe area on every side.
+Color palette: exactly two opaque mustard tones—main mustard yellow #E6A313 and darker ochre #B97805 for the flap, handle details, and clasp; neutral anti-aliasing only at edges.
+Constraints: one bag only; actual alpha transparency; crisp clean anti-aliased edges; no cropped parts; no text; no letters; no logo; no badge; no watermark; no people; no cats; no other objects.
+Avoid: gradients, texture, highlights, gloss, realistic shadows, cast shadows, ambient shadows, 3D depth, photographic leather, stitching, metal reflections, checkerboard pixels, colored halo, border, decorative pattern.
+
+FINISHING
+
+The built-in image_gen output was normalized to the exact two requested mustard fills, given a genuine alpha channel, and proportionally resized to a 1024 x 1024 transparent PNG canvas while preserving its generated silhouette.

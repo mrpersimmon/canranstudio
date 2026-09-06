@@ -61,6 +61,21 @@ def last_activity_segment(waveform):
     return waveform[start:end]
 
 
+def final_token_segment(result, target):
+    # Slow words can contain a stop-consonant silence longer than the old
+    # activity split gap. Use model token boundaries to keep the complete word.
+    words = [token for token in result.tokens or [] if any(ch.isalpha() for ch in token.text)]
+    if not words or words[-1].text.lower() != target.lower():
+        raise RuntimeError(f"Final contextual token does not match {target}")
+    final = words[-1]
+    if final.start_ts is None or final.end_ts is None or final.end_ts <= final.start_ts:
+        raise RuntimeError(f"Missing token timing for {target}")
+    waveform = np.asarray(audio_from_result(result), dtype=np.float32)
+    start = max(0, round((final.start_ts - 0.08) * SAMPLE_RATE))
+    end = min(len(waveform), round((final.end_ts + 0.18) * SAMPLE_RATE))
+    return waveform[start:end]
+
+
 def main():
     request = json.load(sys.stdin)
     items = request.get("items", [])
@@ -92,7 +107,7 @@ def main():
         render_mode = item.get("renderMode", "natural-utterance")
         text = item["text"]
         synthesis_text = item.get("synthesisText", text)
-        if render_mode == "context-cropped-lexeme-v1":
+        if render_mode in ["context-cropped-lexeme-v1", "context-cropped-lexeme-v2"]:
             label = "phrase" if " " in text.strip() else "word"
             synthesis_text = f"Here is the {label} {text}. {text}."
         _, phoneme_tokens = pipeline.g2p(synthesis_text)
@@ -114,19 +129,18 @@ def main():
             raise RuntimeError(
                 f"Kokoro lexicon cannot phonemize {source_id}: {unresolved}"
             )
-        chunks = [
-            np.asarray(audio_from_result(result), dtype=np.float32)
-            for result in pipeline.generate_from_tokens(
+        results = list(pipeline.generate_from_tokens(
                 phoneme_tokens,
                 voice=item["voice"],
                 speed=float(item["speed"]),
-            )
-        ]
-        if not chunks:
+            ))
+        if not results:
             raise RuntimeError(f"Kokoro produced no audio for {source_id}")
-        waveform = np.concatenate(chunks)
+        waveform = np.concatenate([np.asarray(audio_from_result(result), dtype=np.float32) for result in results])
         if render_mode == "context-cropped-lexeme-v1":
             waveform = last_activity_segment(waveform)
+        elif render_mode == "context-cropped-lexeme-v2":
+            waveform = final_token_segment(results[-1], text)
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temporary:
             wav_path = temporary.name
         try:

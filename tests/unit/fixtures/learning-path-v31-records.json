@@ -1,0 +1,1053 @@
+{
+  "capturedFromRevision": "lesson1-2-v3.1",
+  "partialOpening": {
+    "schema": 1,
+    "unitId": "NCE-U01",
+    "experienceRevision": "lesson1-2-v3.1",
+    "completed": {
+      "v3:L01-M07:S01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M08:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M08:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M09:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      }
+    },
+    "results": {
+      "v3:NCE-U01-T04:L01-M08:owner": {
+        "activityId": "v3:L01-M08:C01",
+        "targetId": "NCE-U01-T04",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L01-W07:audio-only": {
+        "activityId": "v3:L01-M08:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T02:L01-M09:attention": {
+        "activityId": "v3:L01-M09:C01",
+        "targetId": "NCE-U01-T02",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      }
+    },
+    "attempts": {},
+    "roles": {},
+    "storyFacts": {},
+    "sourceContacts": {
+      "L01-I01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D01": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W01": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W02": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D02": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W03": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D03": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W04": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W05": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W06": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W07": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D04": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W08": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D05": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D06": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W09": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D07": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W10": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W11": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-Q01": {
+        "modes": [
+          "observed",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-N01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "legacyFacts": null
+  },
+  "skippedRole": {
+    "schema": 1,
+    "unitId": "NCE-U01",
+    "experienceRevision": "lesson1-2-v3.1",
+    "completed": {
+      "v3:L01-M07:S01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M08:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M08:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M09:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M10:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M11:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M12:S01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "pending-role"
+      }
+    },
+    "results": {
+      "v3:NCE-U01-T04:L01-M08:owner": {
+        "activityId": "v3:L01-M08:C01",
+        "targetId": "NCE-U01-T04",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L01-W07:audio-only": {
+        "activityId": "v3:L01-M08:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T02:L01-M09:attention": {
+        "activityId": "v3:L01-M09:C01",
+        "targetId": "NCE-U01-T02",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T03:L01-M10:repair": {
+        "activityId": "v3:L01-M10:C02",
+        "targetId": "NCE-U01-T03",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T05:L01-M11:thanks": {
+        "activityId": "v3:L01-M11:C02",
+        "targetId": "NCE-U01-T05",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      }
+    },
+    "attempts": {},
+    "roles": {
+      "keeper-round": {
+        "disposition": "completed",
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "owner-round": {
+        "disposition": "skipped",
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "storyFacts": {
+      "handbag-returned": {
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "sourceContacts": {
+      "L01-I01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D01": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W01": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W02": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D02": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W03": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D03": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W04": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W05": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W06": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W07": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D04": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W08": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D05": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D06": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W09": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D07": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W10": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W11": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-Q01": {
+        "modes": [
+          "observed",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-N01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-N02": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "legacyFacts": null
+  },
+  "fullPath": {
+    "schema": 1,
+    "unitId": "NCE-U01",
+    "experienceRevision": "lesson1-2-v3.1",
+    "completed": {
+      "v3:L01-M07:S01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M08:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M08:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M09:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M10:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M11:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L01-M12:S01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "pending-role"
+      },
+      "v3.1:words:pocket": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M11:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M11:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M12:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M12:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M15:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3.1:words:clothes": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M16:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M16:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M17:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M17:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3.1:words:home": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M20:C01": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      },
+      "v3:L02-M20:C02": {
+        "at": "2026-09-05T04:00:00.000Z",
+        "evidence": "independent"
+      }
+    },
+    "results": {
+      "v3:NCE-U01-T04:L01-M08:owner": {
+        "activityId": "v3:L01-M08:C01",
+        "targetId": "NCE-U01-T04",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L01-W07:audio-only": {
+        "activityId": "v3:L01-M08:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T02:L01-M09:attention": {
+        "activityId": "v3:L01-M09:C01",
+        "targetId": "NCE-U01-T02",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T03:L01-M10:repair": {
+        "activityId": "v3:L01-M10:C02",
+        "targetId": "NCE-U01-T03",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T05:L01-M11:thanks": {
+        "activityId": "v3:L01-M11:C02",
+        "targetId": "NCE-U01-T05",
+        "channel": "meaning",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W01:audio-only": {
+        "activityId": "v3:L02-M11:C01",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W02:audio-only": {
+        "activityId": "v3:L02-M11:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W03:audio-only": {
+        "activityId": "v3:L02-M12:C01",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W04:audio-only": {
+        "activityId": "v3:L02-M12:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T04:L02-M15:watch-question": {
+        "activityId": "v3:L02-M15:C01",
+        "targetId": "NCE-U01-T04",
+        "channel": "assembly",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W05:audio-only": {
+        "activityId": "v3:L02-M16:C01",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W06:audio-only": {
+        "activityId": "v3:L02-M16:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W07:audio-only": {
+        "activityId": "v3:L02-M17:C01",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W08:audio-only": {
+        "activityId": "v3:L02-M17:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W09:audio-only": {
+        "activityId": "v3:L02-M20:C01",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      },
+      "v3:NCE-U01-T01:L02-W10:audio-only": {
+        "activityId": "v3:L02-M20:C02",
+        "targetId": "NCE-U01-T01",
+        "channel": "audio-only",
+        "initialEvidence": "independent",
+        "wrong": 0,
+        "hintUsed": false,
+        "at": "2026-09-05T04:00:00.000Z",
+        "intervalStage": 0,
+        "nextDueDay": "2026-09-06"
+      }
+    },
+    "attempts": {},
+    "roles": {
+      "keeper-round": {
+        "disposition": "completed",
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "owner-round": {
+        "disposition": "skipped",
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "storyFacts": {
+      "handbag-returned": {
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "customer-arrived-home": {
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "sourceContacts": {
+      "L01-I01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D01": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W01": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W02": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D02": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W03": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D03": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W04": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W05": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W06": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W07": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D04": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W08": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D05": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D06": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W09": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-D07": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W10": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-W11": {
+        "modes": [
+          "observed",
+          "heard"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-Q01": {
+        "modes": [
+          "observed",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-N01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L01-N02": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-I01": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W01": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W02": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W03": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W04": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "NCE-U01-C-Q-WATCH": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "V31-IT-NOTE": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "NCE-U01-C-BLOCK-IS-CAPITAL": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "NCE-U01-C-BLOCK-THIS": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "NCE-U01-C-BLOCK-YOUR": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "V31-WATCH-QUESTION-BLOCK": {
+        "modes": [
+          "observed"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W05": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W06": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W07": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W08": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W09": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      },
+      "L02-W10": {
+        "modes": [
+          "observed",
+          "heard",
+          "retrieved"
+        ],
+        "at": "2026-09-05T04:00:00.000Z"
+      }
+    },
+    "legacyFacts": null
+  }
+}

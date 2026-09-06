@@ -1,0 +1,12 @@
+Use case: illustration-story
+Asset type: single vocabulary-choice object icon for a primary-school English learning app
+Input image: use book.png only as the style reference for crisp geometric silhouettes, simple solid color blocking, edge softness, and option-card visual weight. Do not reproduce the book.
+
+Primary request: create exactly one fountain pen / ink pen, clearly recognizable as a pen and impossible to mistake for a pencil.
+Subject: a moderately thick cylindrical deep-navy pen barrel; a solid teal cap posted on the back end with a clearly visible simple darker-teal pocket clip; a prominent exposed silver-gray metal fountain-pen nib at the writing end, with one simple dark slit. The nib must be unmistakably pen hardware, not a sharpened wood or graphite point.
+Style/medium: polished geometric flat-color raster illustration; clean rounded shapes; only solid color regions; strong readable silhouette at small UI size; same visual family and weight as book, watch, and handbag.
+Composition/framing: square 1:1 canvas, 1024x1024; one complete pen set on a gentle diagonal rising toward the upper right, with the silver nib at the upper-right end and the capped back end at the lower-left; center it; make the length about 70-76% of the canvas and the body thick enough to read as an answer-card object; at least 12% genuine transparent padding on every side; no cropping.
+Color palette: deep navy barrel, teal cap, darker-teal clip and nib collar, silver-gray nib, one small dark nib slit.
+Scene/backdrop: genuine transparent RGBA background; every pixel outside the pen has alpha 0; do not draw or simulate a checkerboard.
+Constraints: exactly one assembled pen; cap remains attached/posted to the pen rather than floating separately; exposed silver nib; no text, letters, numbers, logo, watermark, characters, hands, or other objects.
+Avoid: pencil, wooden body, graphite tip, eraser, ballpoint-only tip, marker, brush, separate cap, open ink bottle, gradients, highlights, reflections, shadows, drop shadows, glow, texture, noise, metallic texture, 3D photorealism, background, floor, frame, checkerboard pattern, white/gray/black background.

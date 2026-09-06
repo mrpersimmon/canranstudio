@@ -1,0 +1,13 @@
+Use case: illustration-story
+Asset type: single vocabulary-choice clothing icon for a primary-school English learning app
+Input images: use coat.png, dress.png, and skirt.png only as exact references for the same mustard-yellow palette, two-level solid color blocking, crisp geometric silhouette, edge softness, and answer-card visual weight. Create a distinct garment.
+
+Primary request: create exactly one empty common mustard-yellow button-up shirt, shown from the front.
+Subject: a clearly recognizable collared shirt with a prominent pair of pointed turn-down collar tips; a centered front placket with a vertical row of small round buttons; full-length straight sleeves ending in clearly defined buttonless cuffs; a thin, straight torso ending at normal waist/hip shirt length with a modest slightly curved shirttail hem. Keep the garment light and ordinary rather than heavy outerwear.
+Semantic priority: the silhouette must unmistakably read as a woven button-up shirt, not a T-shirt, coat, jacket, dress, or blouse. It must be much shorter than coat.png, with thinner sleeves, a compact waist-length body, small buttons, pointed collar, and visible cuffs.
+Style/medium: polished geometric flat-color raster illustration; large simple shapes; crisp smooth outline; strict solid color regions; no fabric detail.
+Composition/framing: square 1:1 canvas, 1024x1024; centered upright front view; show the entire collar, both sleeves and cuffs, and complete waist-length hem; occupy similar answer-card visual weight to the other clothing items; at least 12% genuine transparent padding on every side; no cropping.
+Color palette: exactly the same dominant mustard yellow and darker mustard structural color as coat.png, dress.png, and skirt.png.
+Scene/backdrop: genuine transparent RGBA background; every pixel outside the shirt has alpha 0; do not draw or simulate a checkerboard.
+Constraints: exactly one empty shirt; no person or body inside; no hanger; no mannequin; no tie; no pocket; no text, letters, numbers, logo, watermark, or other objects.
+Avoid: T-shirt round neck, polo collar, short sleeves, coat length, coat lapels, large coat buttons, coat pockets, blazer, jacket, dress bodice, tunic length, cropped top, skirt, bow, ribbon, gradients, highlights, shading, shadows, drop shadows, glow, texture, noise, fabric grain, folds, stitching, 3D photorealism, background, floor, frame, checkerboard pattern, white/gray/black background.

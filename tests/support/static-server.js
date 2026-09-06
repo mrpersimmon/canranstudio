@@ -27,6 +27,9 @@ function sourcePathname(pathname) {
   if (pathname === CANONICAL_COURSE_ROUTE) {
     return '/poc/lesson1-2-experience/index.html';
   }
+  if (pathname === `${CANONICAL_COURSE_ROUTE}path.html`) {
+    return '/poc/lesson1-2-experience/path.html';
+  }
   if (pathname === `${CANONICAL_COURSE_ROUTE}review/`) {
     return '/poc/lesson1-2-review/index.html';
   }

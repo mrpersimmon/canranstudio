@@ -376,7 +376,7 @@ function materializeCourseFonts(config, latinFaces, chineseSubsets) {
     ...latinFaces.map(face => fontFace({ ...face, unicodeRange: LATIN_UNICODE_RANGE })),
     ...chineseSubsets.map(fontFace)
   ].join('');
-  const outputPath = path.join(ROOT, config.pageDirectory, 'course-fonts.css');
+  const outputPath = path.join(ROOT, config.pageDirectory, config.fontsFilename || 'course-fonts.css');
   writeIfChanged(outputPath, css);
   return css;
 }
@@ -423,29 +423,30 @@ function buildUnit(config, catalog, latinFaces) {
   }
 
   const pageDirectory = path.join(ROOT, config.pageDirectory);
-  const htmlPath = path.join(pageDirectory, 'index.html');
+  const htmlPath = path.join(pageDirectory, config.entryFilename || 'index.html');
   const packageUnit = normalizeUnitImages(mapPublicResourceUrls(
     config,
     JSON.parse(JSON.stringify(unit))
   ));
-  const unitCatalogPath = path.join(pageDirectory, 'course-package/unit-catalog.json');
+  const unitCatalogPath = path.join(pageDirectory, config.unitCatalogFilename || 'course-package/unit-catalog.json');
   const unitCatalogJson = `${JSON.stringify(packageUnit, null, 2)}\n`;
   writeIfChanged(unitCatalogPath, unitCatalogJson);
 
   const textInputs = [unitCatalogJson, fs.readFileSync(htmlPath, 'utf8')];
-  for (const resource of [...config.styles.filter(value => !value.endsWith('/course-fonts.css')), ...config.scripts]) {
+  const fontsFilename = config.fontsFilename || 'course-fonts.css';
+  for (const resource of [...config.styles.filter(value => !value.endsWith(`/${fontsFilename}`)), ...config.scripts]) {
     textInputs.push(fs.readFileSync(resourcePath(resource), 'utf8'));
   }
   const unitLatinFaces = latinFaces.map(face => ({
     ...face,
     url: publicResourceUrl(config, face.url)
   }));
-  const chineseSubsets = materializeChineseSubset(textInputs.join('\n')).map(face => ({
+  const chineseSubsets = (config.systemChineseFont ? [] : materializeChineseSubset(textInputs.join('\n'))).map(face => ({
     ...face,
     url: publicResourceUrl(config, face.url)
   }));
   const courseFontsCss = materializeCourseFonts(config, unitLatinFaces, chineseSubsets);
-  const bootstrapResources = BOOTSTRAP_RESOURCES.map(value => publicResourceUrl(config, value));
+  const bootstrapResources = (config.bootstrapResources || BOOTSTRAP_RESOURCES).map(value => publicResourceUrl(config, value));
 
   const resources = new Set([
     ...bootstrapResources,
@@ -456,11 +457,11 @@ function buildUnit(config, catalog, latinFaces) {
     config.unitCatalogUrl || `/${config.pageDirectory}/course-package/unit-catalog.json`
   ]);
   if (config.unitId === 'NCE-U01') {
-    for (const icon of U01_DYNAMIC_ICONS) resources.add(icon);
+    for (const icon of config.dynamicIcons || U01_DYNAMIC_ICONS) resources.add(icon);
   }
   collectObjectResources(packageUnit, resources);
   collectTextResources(fs.readFileSync(htmlPath, 'utf8'), config.scopePath, resources);
-  const courseFontsUrl = config.styles.find(value => value.endsWith('/course-fonts.css'));
+  const courseFontsUrl = config.styles.find(value => value.endsWith(`/${fontsFilename}`));
   collectTextResources(courseFontsCss, courseFontsUrl, resources);
   for (const resource of [...config.styles, ...config.scripts, ...bootstrapResources]) {
     const filePath = resourcePath(resource);
@@ -487,7 +488,7 @@ function buildUnit(config, catalog, latinFaces) {
     entries
   };
   const manifestBytes = Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`);
-  const manifestPath = path.join(pageDirectory, 'course-package-manifest.json');
+  const manifestPath = path.join(pageDirectory, config.manifestFilename || 'course-package-manifest.json');
   writeIfChanged(manifestPath, manifestBytes);
   const manifestSha256 = sha256(manifestBytes);
   replaceManifestHash(htmlPath, manifestSha256);
@@ -526,5 +527,7 @@ module.exports = Object.freeze({
   resourceUrl,
   chineseCodepoints,
   normalizeUnitImages,
+  buildUnit,
+  materializeSharedFonts,
   buildAll
 });

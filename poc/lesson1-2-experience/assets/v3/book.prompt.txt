@@ -1,0 +1,11 @@
+Use case: illustration-story
+Asset type: single vocabulary-choice object icon for a primary-school English learning app
+Input image: use handbag.png only as a reference for simple geometric shape language, flat-color weight, crisp silhouette, and option-card scale. Do not reproduce the handbag or its colors.
+
+Primary request: create exactly one closed book with a blue cover.
+Subject: one compact hardback book, fully closed, seen from a slight three-quarter side angle so a clean white page block is visible along the right and lower edge. The blue front cover remains the dominant readable shape. Use one uniform solid medium blue for the front cover and one uniform solid dark blue for the spine and back-cover edge, plus plain white for the pages.
+Style/medium: polished geometric flat-color illustration rendered as raster PNG; large simple shapes; crisp smooth contour; strict two-level solid blue color blocking; no decorative detail.
+Composition/framing: square 1:1 canvas, 1024x1024; center the book; book occupies comparable visual weight to the handbag and watch answer options; keep at least 12% genuinely transparent padding on every side; complete silhouette; no cropping.
+Scene/backdrop: genuine transparent RGBA background, with every pixel outside the book at alpha 0. Do not draw or simulate a checkerboard.
+Constraints: exactly one book; book is closed; blue cover; visible white page edge; clear silhouette at small UI size; no other objects; no characters; no text; no letters; no numbers; no icons; no logo; no watermark.
+Avoid: open book, stacked books, bookmark, pen, glasses, school symbols, face, arms, background, floor, frame, gradients, highlights, reflections, shading, shadows, drop shadows, glow, texture, noise, paper grain, leather grain, 3D photorealism, perspective distortion, checkerboard pattern, white/gray/black background, and more than two blue cover tones.

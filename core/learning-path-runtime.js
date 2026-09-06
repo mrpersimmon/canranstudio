@@ -1,0 +1,551 @@
+(function attach(root, factory) {
+  'use strict';
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) (root.CanranCore ||= {}).learningPathRuntime = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const object = value => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+  function day(date) {
+    return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+  }
+  function addDays(today, days) {
+    const date = new Date(`${today}T12:00:00`);
+    date.setDate(date.getDate() + days);
+    return day(date);
+  }
+  function emptyRecord(unit) {
+    return { schema: unit.recordSchema, unitId: unit.unitId, experienceRevision: unit.experienceRevision,
+      completed: {}, results: {}, attempts: {}, roles: {}, roleTurns: {}, storyProgress: {}, storyFacts: {}, sourceContacts: {}, legacyFacts: null,
+      ...(unit.courseId ? { reviewEvents: [], teachingProgress: {} } : {}) };
+  }
+  function validPairs(pairs, activity, complete = false) {
+    return object(pairs) && (!complete || Object.keys(pairs).length === activity.items.length)
+      && Object.entries(pairs).every(([ref, value]) => activity.items.some(item => item.sourceRef === ref && item.entityId === value?.entityId)
+        && ['matched-with-options', 'retry-supported', 'elimination-supported', 'modeled'].includes(value.evidence) && typeof value.at === 'string');
+  }
+  function validRecord(record, unit) {
+    if (!object(record) || record.schema !== unit.recordSchema || record.unitId !== unit.unitId || record.experienceRevision !== unit.experienceRevision) return false;
+    if (!['completed', 'results', 'attempts', 'roles', 'storyFacts', 'sourceContacts'].every(key => object(record[key]))) return false;
+    if (!Object.entries(record.completed).every(([id, value]) => unit.activities[id] && object(value) && typeof value.at === 'string')) return false;
+    if (!Object.entries(record.attempts).every(([id, value]) => unit.activities[id]?.resultId && object(value) && Number.isSafeInteger(value.wrong) && value.wrong >= 0 && typeof value.hintUsed === 'boolean')) return false;
+    if (!Object.entries(record.results).every(([id, value]) => unit.activities[value?.activityId]?.resultId === id && ['independent', 'supported', 'modeled'].includes(value.initialEvidence) && Number.isSafeInteger(value.intervalStage) && /^\d{4}-\d{2}-\d{2}$/.test(value.nextDueDay))) return false;
+    if (record.schema >= 3) {
+      if (!Object.values(record.results).every(value => equal(value.assessment, unit.activities[value.activityId].assessment))) return false;
+      for (const a of Object.values(unit.activities).filter(a => a.kind === 'match')) {
+        const attempt = record.attempts[a.id], result = record.results[a.resultId];
+        if (attempt && (!validPairs(attempt.matchedPairs, a) || !object(attempt.wrongByRef)
+          || !Object.entries(attempt.wrongByRef).every(([ref, count]) => a.items.some(item => item.sourceRef === ref) && Number.isSafeInteger(count) && count >= 0))) return false;
+        if (result && !validPairs(result.pairs, a, true)) return false;
+        if (record.completed[a.id] && !result) return false;
+      }
+    }
+    if (record.schema >= 2 && record.schema < 4) {
+      const role = Object.values(unit.activities).find(a => a.kind === 'role');
+      if (!role || !object(record.roleTurns) || !Object.entries(record.roleTurns).every(([ref, value]) =>
+        role.turns.some(turn => turn.ref === ref && turn.actorEntityId === value?.actorEntityId)
+        && value.evidence === 'manual-audio-ended' && typeof value.at === 'string')) return false;
+      const finished = role.turns.map(turn => Boolean(record.roleTurns[turn.ref]));
+      const firstMissing = finished.indexOf(false);
+      if (firstMissing >= 0 && finished.slice(firstMissing).some(Boolean)) return false;
+      if (Boolean(record.completed[role.id]) !== finished.every(Boolean)) return false;
+    }
+    if (record.schema >= 4) {
+      if (!object(record.storyProgress) || !object(record.roleTurns) || Object.keys(record.roleTurns).length) return false;
+      if (Object.keys(record.storyProgress).some(id => unit.activities[id]?.kind !== 'interactive-story')) return false;
+      for (const story of Object.values(unit.activities).filter(a => a.kind === 'interactive-story')) {
+        const progress = record.storyProgress[story.id];
+        if (progress && !object(progress.beats)) return false;
+        const beats = progress?.beats || {}, ids = Object.keys(beats);
+        if (ids.some(id => !story.beats.some(beat => beat.id === id))) return false;
+        let missing = false;
+        for (const beat of story.beats) {
+          const proof = beats[beat.id];
+          if (!proof) missing = true;
+          else if (missing || !object(proof) || typeof proof.at !== 'string' || proof.kind !== beat.kind) return false;
+          if (beat.kind === 'line' && proof && (proof.ref !== beat.ref || proof.actorEntityId !== beat.actorEntityId || proof.evidence !== 'audio-ended')) return false;
+          if (beat.kind === 'checkpoint') {
+            const a = unit.activities[beat.activityId];
+            if (!a || Boolean(proof) !== Boolean(record.completed[a.id]) || Boolean(proof) !== Boolean(record.results[a.resultId])) return false;
+            if (proof && (proof.activityId !== a.id || proof.evidence !== 'answered')) return false;
+          }
+        }
+        if (Boolean(record.completed[story.id]) !== (ids.length === story.beats.length)) return false;
+      }
+    }
+    if (unit.courseId) {
+      if (!Array.isArray(record.reviewEvents) || !object(record.teachingProgress)) return false;
+      if (record.reviewEvents.some(event => !unit.activities[event.activityId]?.resultId || !['independent','supported','modeled'].includes(event.evidence) || typeof event.at !== 'string')) return false;
+      if (Object.entries(record.teachingProgress).some(([id, refs]) => unit.activities[id]?.kind !== 'teach' || !Array.isArray(refs) || refs.some(ref => !unit.activities[id].items.some(item => item.sourceRef === ref)))) return false;
+    }
+    const roundIds = unit.legacyRolePractice.rounds.map(r => r.roundId);
+    return Object.entries(record.roles).every(([id, value]) => roundIds.includes(id) && object(value) && ['completed', 'skipped'].includes(value.disposition));
+  }
+  function createRuntime({ unit, adapter, now = () => new Date(), random = Math.random }) {
+    if (!unit?.nodes?.length || !adapter?.load || !adapter?.commit) throw new TypeError('unit and durable adapter required');
+    const storageKey = `poc:learning-path:${unit.unitId}:${unit.experienceRevision}`;
+    let record, revision, pending = null, serial = 0, effects = [];
+    let view = { screen: 'map', saveState: null, mode: 'main', audio: null };
+    let queue = [], queueIndex = 0, extraIds = [], extraIndex = false;
+    let localAttempts = {};
+    const today = () => day(now());
+    const activity = () => unit.activities[view.activityId];
+    const stopAudio = () => { effects.push({ type: 'stop-audio' }); view.audio = null; };
+    function read() {
+      const loaded = adapter.load(storageKey);
+      if (loaded.status !== 'ok' || (loaded.value !== null && !validRecord(loaded.value, unit))) {
+        view = { screen: 'blocked', saveState: 'unreadable', mode: 'main', audio: null };
+        return false;
+      }
+      record = loaded.value || emptyRecord(unit);
+      revision = loaded.revision;
+      const legacy = adapter.load(unit.legacy.storageKey);
+      view.legacyAvailable = legacy.status === 'ok' && Boolean(legacy.value);
+      if (loaded.value === null && unit.progressImports?.length) {
+        for (const source of unit.progressImports) {
+          const imported = adapter.load(source.storageKey);
+          if (imported.status !== 'ok' || imported.value && !validRecord(imported.value, source.contract)) {
+            view = { screen: 'blocked', saveState: 'unreadable', mode: 'main', audio: null };
+            return false;
+          }
+          if (!imported.value) continue;
+          const old = imported.value, next = emptyRecord(unit);
+          // Preserve every original record. Carry forward only unchanged learning tasks.
+          next.archivedProgress = { [source.contract.experienceRevision]: clone(old) };
+          const unchanged = id => equal(source.contract.activities[id], unit.activities[id]);
+          for (const [id, value] of Object.entries(old.completed)) if (unchanged(id)) next.completed[id] = clone(value);
+          for (const [id, value] of Object.entries(old.results)) if (unchanged(value.activityId)) next.results[id] = clone(value);
+          for (const [id, value] of Object.entries(old.attempts)) if (unchanged(id)) next.attempts[id] = clone(value);
+          for (const [id, value] of Object.entries(old.storyProgress || {})) if (unchanged(id)) next.storyProgress[id] = clone(value);
+          next.roles = clone(old.roles); next.sourceContacts = clone(old.sourceContacts); next.storyFacts = clone(old.storyFacts);
+          next.legacyFacts = clone(old.legacyFacts);
+          next.progressMigration = { fromUnit: source.contract.unitId, fromRevision: source.contract.experienceRevision, at: now().toISOString() };
+          save(next, () => {});
+          return true;
+        }
+      }
+      if (loaded.value === null) for (const previousRevision of unit.compatibleProgressRevisions || []) {
+        const previous = adapter.load(`poc:learning-path:${unit.unitId}:${previousRevision}`);
+        const version = unit.previousRevisionContracts?.[previousRevision];
+        const turnRecords = ['lesson1-2-v3.5', 'lesson1-2-v3.4', 'lesson1-2-v3.3'].includes(previousRevision);
+        const contracts = version?.activities || { ...unit.previousActivityContracts, [unit.legacyRolePractice.activityId]: { kind: 'role' } };
+        const previousUnit = { ...unit, recordSchema: version?.schema || (turnRecords ? 2 : 1), experienceRevision: previousRevision,
+          activities: Object.fromEntries(Object.entries(contracts).map(([id, contract]) => [id, { ...contract, id }])) };
+        if (previous.status !== 'ok' || (previous.value !== null && !validRecord(previous.value, previousUnit))) {
+          view = { screen: 'blocked', saveState: 'unreadable', mode: 'main', audio: null };
+          return false;
+        }
+        if (previous.value === null) continue;
+        // Keep historical scores in their original evidence context. Only
+        // unchanged activity identities transfer; node completion is derived.
+        const old = previous.value, migrated = emptyRecord(unit);
+        migrated.archivedProgress = { [previousRevision]: clone(old) };
+        for (const [id, completion] of Object.entries(old.completed)) if (unit.activities[id]) migrated.completed[id] = clone(completion);
+        for (const [id, result] of Object.entries(old.results)) {
+          const a = unit.activities[result.activityId];
+          if (a?.resultId === id) migrated.results[id] = { ...clone(result), assessment: clone(a.assessment) };
+        }
+        for (const [id, attempt] of Object.entries(old.attempts)) if (unit.activities[id]?.resultId) migrated.attempts[id] = clone(attempt);
+        migrated.roles = clone(old.roles);
+        // Retired dialogue turns remain in archivedProgress, never as new story proof.
+        migrated.sourceContacts = clone(old.sourceContacts);
+        migrated.storyFacts = clone(old.storyFacts);
+        migrated.legacyFacts = clone(old.legacyFacts || null);
+        migrated.progressMigration = { fromRevision: previousRevision, at: now().toISOString(), curriculumChanged: true, interactiveStoryChanged: true,
+          rolePracticeChanged: turnRecords ? Boolean(old.progressMigration?.rolePracticeChanged)
+            : Boolean(old.completed[unit.legacyRolePractice.activityId]) || Object.keys(old.roles).length > 0 };
+        save(migrated, () => {});
+        return true;
+      }
+      const oldUnit = legacy.value?.units?.[unit.unitId];
+      if (loaded.value === null && legacy.status === 'ok' && legacy.value?.schemaVersion === 1 && oldUnit?.experienceRevision === unit.legacy.revision) {
+        const migrated = clone(record), at = now().toISOString();
+        const heard = ref => Array.isArray(oldUnit.sourceContacts?.[ref]?.contactModes) && oldUnit.sourceContacts[ref].contactModes.includes('audio-ended');
+        const fullDialogueHeard = Array.isArray(oldUnit.completedMicrotaskIds) && oldUnit.completedMicrotaskIds.includes('L01-M07')
+          && unit.dialogueRefs.every(heard);
+        if (fullDialogueHeard) {
+          contact(migrated, unit.dialogueRefs, 'heard', at);
+          contact(migrated, ['L01-I01', ...unit.dialogueRefs], 'observed', at);
+        }
+        const savedRoles = oldUnit.rolePracticeProgress?.['L01-M12:role-enactment'];
+        for (const round of unit.legacyRolePractice.rounds) {
+          const completed = Array.isArray(savedRoles?.completedRoundIds) && savedRoles.completedRoundIds.includes(round.roundId)
+            && round.hiddenTurnRefs.every(heard);
+          const skipped = Array.isArray(savedRoles?.skippedRoundIds) && savedRoles.skippedRoundIds.includes(round.roundId);
+          if (completed || skipped) migrated.roles[round.roundId] = { disposition: completed ? 'completed' : 'skipped', at, migratedFrom: unit.legacy.revision };
+        }
+        migrated.legacyFacts = { revision: unit.legacy.revision, fullDialogueHeard, roleIds: Object.keys(migrated.roles), importedAt: at };
+        // Only matching audio-ended facts and explicit role dispositions move.
+        // Legacy scores, stars, audio-form-supported results, and review timing do not.
+        save(migrated, () => {});
+      }
+      return true;
+    }
+    read();
+    function save(next, after) {
+      pending = { next, after };
+      // The existing store adapter treats malformed envelopes as revision zero;
+      // check the read here so a corrupt record is never overwritten by a retry.
+      const current = adapter.load(storageKey);
+      if (current.status !== 'ok' || (current.value !== null && !validRecord(current.value, unit))) {
+        view.saveState = 'unreadable'; stopAudio(); return;
+      }
+      if (current.revision !== revision) { view.saveState = 'conflict'; stopAudio(); return; }
+      const result = adapter.commit(storageKey, { expectedRevision: revision, value: next });
+      if (!result.persisted || result.status !== 'committed') {
+        view.saveState = result.status === 'conflict' ? 'conflict' : 'failed'; stopAudio(); return;
+      }
+      record = clone(result.value); revision = result.revision; pending = null; view.saveState = null;
+      after();
+    }
+    function mutateRecord(edit, after) {
+      if (view.mode === 'repeat') { after(); return; }
+      const next = clone(record); edit(next); save(next, after);
+    }
+    function play(sequence, purpose) {
+      if (!sequence.length) {
+        if (purpose === 'required') view.requiredDone = true;
+        if (purpose === 'feedback') view.feedbackDone = true;
+        return;
+      }
+      stopAudio();
+      const recordings = sequence.map(entry => ({ ...entry, src: unit.sources[entry.ref].audioSrc }));
+      view.audio = { requestId: ++serial, sequence: recordings, index: 0, status: 'playing', purpose, rate: 1 };
+      effects.push({ type: 'play-audio', requestId: serial, index: 0, src: recordings[0].src, rate: 1 });
+    }
+    function shuffle(options, answer) {
+      const result = options.map(o => o.id);
+      for (let i = result.length - 1; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; }
+      if (result.length > 1 && equal(result, answer)) result.push(result.shift());
+      return result;
+    }
+    function loadActivity(id, withinStory = false) {
+      stopAudio();
+      const a = unit.activities[id];
+      if (!withinStory) {
+        view.storyActivityId = null; view.storyBeats = {}; view.storyIndex = 0;
+        if (a.kind === 'interactive-story') {
+          view.storyActivityId = id;
+          view.storyBeats = view.mode === 'repeat' ? {} : clone(record.storyProgress[id]?.beats || {});
+          view.storyIndex = a.beats.findIndex(beat => !view.storyBeats[beat.id]);
+          loadStoryBeat();
+          return;
+        }
+      }
+      const previous = view.mode === 'main' && !extraIndex ? record.attempts[id] : localAttempts[id];
+      Object.assign(view, { screen: 'activity', activityId: id, feedback: null, selected: [],
+        optionOrder: shuffle(a.options, a.kind === 'order' ? a.answer : []),
+        wrong: previous?.wrong || 0, hintUsed: previous?.hintUsed || false, hintLevel: previous?.hintUsed ? 1 : 0,
+        requiredDone: withinStory || !a.requiredAudio.length, feedbackDone: withinStory || !a.feedbackAudio.length,
+        heardWords: view.mode === 'main' ? clone(record.teachingProgress?.[id] || []) : [], heardRefs: [], matchedPairs: clone(previous?.matchedPairs || {}), wrongByRef: clone(previous?.wrongByRef || {}), matchWord: null, matchImage: null, matchMessage: '', storyRevealed: false, storyLineDone: false, storyHelp: false });
+      if (a.kind === 'teach' && a.items.every(item => view.heardWords.includes(item.sourceRef))) view.requiredDone = true;
+      if (a.kind === 'match') {
+        view.matchWordOrder = shuffle(a.items.map(item => ({ id: item.sourceRef })), []);
+        view.matchImageOrder = shuffle(a.items.map(item => ({ id: item.entityId })), view.matchWordOrder.map(ref => a.items.find(item => item.sourceRef === ref).entityId));
+        finishMatching();
+      } else if (!withinStory && a.requiredAudio.length && a.playbackMode !== 'manual-cards') play(a.requiredAudio, 'required');
+    }
+    const nodeDone = node => node.activityIds.every(id => record.completed[id]);
+    function dueItems() {
+      const due = Object.values(record?.results || {}).filter(r => r.nextDueDay <= today() && unit.activities[r.activityId].reviewEligible !== false).sort((a, b) =>
+        a.nextDueDay.localeCompare(b.nextDueDay) || (a.initialEvidence === 'independent' ? 1 : 0) - (b.initialEvidence === 'independent' ? 1 : 0)
+      );
+      const seen = new Set();
+      return due.filter(r => {
+        if (!unit.courseId) return true;
+        const key = r.targetId || r.activityId;
+        if (seen.has(key)) return false;
+        seen.add(key); return true;
+      }).slice(0, unit.review.limit).map(r => r.activityId);
+    }
+    function startNode(id, mode) {
+      const index = unit.nodes.findIndex(n => n.id === id);
+      if (index < 0 || (index > 0 && !nodeDone(unit.nodes[index]) && !unit.nodes.slice(0, index).every(nodeDone))) return;
+      const node = unit.nodes[index];
+      if (nodeDone(node)) mode = 'repeat';
+      else mode = 'main';
+      view.mode = mode; view.nodeId = id; localAttempts = {}; extraIds = []; extraIndex = false;
+      queue = mode === 'main' ? node.activityIds.filter(aid => !record.completed[aid]) : [...node.activityIds];
+      queueIndex = 0;
+      if (queue.length) loadActivity(queue[0]);
+    }
+    function beginFeedback(type) {
+      const a = activity();
+      view.feedback = type;
+      const autoPlay = !view.storyActivityId && a.feedbackAudio.length && !(a.feedbackPlayback === 'support-only' && type === 'correct');
+      view.feedbackDone = !autoPlay;
+      if (autoPlay) play(a.feedbackAudio, 'feedback');
+      else stopAudio();
+    }
+    function retainAttempt(after) {
+      const entry = { wrong: view.wrong, hintUsed: view.hintUsed, ...(activity().kind === 'match' ? { matchedPairs: clone(view.matchedPairs), wrongByRef: clone(view.wrongByRef) } : {}) };
+      localAttempts[view.activityId] = entry;
+      if (view.mode !== 'main' || extraIndex) { after(); return; }
+      mutateRecord(next => { next.attempts[view.activityId] = entry; }, after);
+    }
+    function finishMatching() {
+      if (activity().items.every(item => view.matchedPairs[item.sourceRef])) {
+        const modeled = Object.values(view.matchedPairs).some(pair => pair.evidence === 'modeled');
+        beginFeedback(modeled ? 'modeled' : view.wrong || view.hintUsed ? 'supported' : 'correct');
+      }
+    }
+    function matchPair(modeled = false) {
+      const a = activity();
+      if (a.kind !== 'match' || view.feedback || !view.matchWord || !view.matchImage) return;
+      const item = a.items.find(item => item.sourceRef === view.matchWord);
+      if (!item || view.matchedPairs[item.sourceRef] || Object.values(view.matchedPairs).some(pair => pair.entityId === view.matchImage)) return;
+      stopAudio();
+      if (item.entityId === view.matchImage) {
+        const remaining = a.items.length - Object.keys(view.matchedPairs).length;
+        view.matchedPairs[item.sourceRef] = { entityId: item.entityId, at: now().toISOString(),
+          evidence: modeled ? 'modeled' : remaining === 1 ? 'elimination-supported' : view.wrongByRef[item.sourceRef] ? 'retry-supported' : 'matched-with-options' };
+        view.matchMessage = modeled ? 'modeled' : 'correct';
+      } else {
+        view.wrong++; view.hintUsed = true;
+        view.wrongByRef[item.sourceRef] = (view.wrongByRef[item.sourceRef] || 0) + 1;
+        view.matchMessage = 'retry';
+      }
+      view.matchWord = null; view.matchImage = null;
+      retainAttempt(finishMatching);
+    }
+    function check() {
+      const a = activity();
+      if (!a.resultId || a.kind === 'match' || view.feedback || !view.requiredDone || view.selected.length !== a.answer.length) return;
+      if (equal(view.selected, a.answer)) beginFeedback(view.wrong || view.hintUsed ? 'supported' : 'correct');
+      else {
+        view.wrong++; view.hintUsed = true; view.hintLevel = Math.min(2, view.wrong);
+        retainAttempt(() => {
+          if (view.wrong >= unit.remediation.modelAfterErrors) { view.selected = [...a.answer]; beginFeedback('modeled'); }
+          else view.feedback = 'retry';
+        });
+      }
+    }
+    function nextActivity() {
+      stopAudio();
+      queueIndex++;
+      if (queueIndex < queue.length) { loadActivity(queue[queueIndex]); return; }
+      if (!extraIndex && extraIds.length && view.mode === 'main') {
+        extraIndex = true; queue = [...extraIds]; queueIndex = 0; localAttempts = {}; loadActivity(queue[0]); return;
+      }
+      view.screen = view.mode === 'review' ? 'review-complete' : 'celebration';
+      view.activityId = null; view.storyActivityId = null;
+    }
+    function finishActivity() {
+      const a = activity();
+      if (a.kind === 'interactive-story') { advanceStoryLine(); return; }
+      if ( (a.resultId ? !view.feedback || view.feedback === 'retry' || !view.feedbackDone : !view.requiredDone || !view.feedbackDone)) return;
+      const evidence = view.feedback === 'modeled' ? 'modeled' : view.feedback === 'supported' ? 'supported' : 'independent';
+      const at = now().toISOString();
+      mutateRecord(next => {
+        if (view.mode === 'review') {
+          const result = next.results[a.resultId];
+          const successful = evidence === 'independent';
+          result.intervalStage = successful ? Math.min(result.intervalStage + 1, unit.review.intervals.length - 1) : 0;
+          result.nextDueDay = addDays(today(), successful ? unit.review.intervals[result.intervalStage] : 1);
+          result.lastReviewEvidence = evidence; result.lastReviewedAt = at;
+          if (unit.courseId) next.reviewEvents.push({ activityId: a.id, targetId: a.targetId, evidence, at });
+          if (a.kind === 'match') result.lastReviewPairs = clone(view.matchedPairs);
+          return;
+        }
+        next.completed[a.id] ||= { at, evidence };
+        if (a.resultId) {
+          next.results[a.resultId] ||= { activityId: a.id, targetId: a.targetId, channel: a.channel,
+            initialEvidence: evidence, wrong: view.wrong, hintUsed: view.hintUsed, at, assessment: clone(a.assessment),
+            ...(a.kind === 'match' ? { pairs: clone(view.matchedPairs) } : {}),
+            intervalStage: 0, nextDueDay: addDays(today(), 1) };
+          if (extraIndex) next.results[a.resultId].extraPractice = { evidence, at, ...(a.kind === 'match' ? { pairs: clone(view.matchedPairs) } : {}) };
+          delete next.attempts[a.id];
+        }
+        if (a.storyFact) next.storyFacts[a.storyFact] = { at };
+        if (view.storyActivityId) writeStoryBeat(next, storyProof());
+        {
+          const observed = [...a.sourceRefs, ...(a.guideRef ? [a.guideRef] : []), ...(view.hintLevel ? a.noteRefs || [] : []), ...(a.conversation?.contextRefs || []), ...(a.conversation?.continuationRefs || []), ...a.options.filter(o => o.type === 'text').map(o => o.id)];
+          contact(next, observed, 'observed', at);
+          contact(next, view.heardRefs, 'heard', at);
+          contact(next, a.instructionRefs || [], 'implemented-in-flow', at);
+          contact(next, a.meaningRefs || [], 'posed-in-context', at);
+          if (a.resultId) contact(next, a.evidenceRefs || a.sourceRefs, evidence === 'independent' ? a.assessment.evidenceMode : 'supported', at);
+        }
+      }, () => {
+        if (view.storyActivityId) { advanceStory(storyProof()); return; }
+        if (a.assessment?.scope === 'assessment' && evidence !== 'independent' && !extraIndex && view.mode === 'main' && extraIds.length < unit.remediation.maxExtraPerNode && !extraIds.includes(a.id)) extraIds.push(a.id);
+        nextActivity();
+      });
+    }
+    const story = () => unit.activities[view.storyActivityId];
+    const storyBeat = () => story()?.beats[view.storyIndex];
+    function loadStoryBeat(autoPlay = false) {
+      const beat = storyBeat();
+      loadActivity(beat.kind === 'line' ? view.storyActivityId : beat.activityId, true);
+      if (autoPlay && beat.kind === 'line') playStoryLine();
+    }
+    function playStoryLine() {
+      const beat = storyBeat();
+      if (beat?.kind !== 'line') return;
+      view.storyRevealed = true; view.storyLineDone = false;
+      const source = unit.sources[beat.ref];
+      play([{ ref: beat.ref, text: source.text, speaker: source.speaker }], 'story-line');
+    }
+    function storyProof() {
+      const beat = storyBeat(), at = now().toISOString();
+      return beat.kind === 'line'
+        ? { kind: 'line', ref: beat.ref, actorEntityId: beat.actorEntityId, evidence: 'audio-ended', at }
+        : { kind: 'checkpoint', activityId: beat.activityId, evidence: 'answered', at };
+    }
+    function writeStoryBeat(next, proof) {
+      const parent = story(), beat = storyBeat();
+      (next.storyProgress[parent.id] ||= { beats: {} }).beats[beat.id] = proof;
+      if (beat.kind === 'line') {
+        contact(next, [beat.ref], 'heard', proof.at);
+        contact(next, [beat.ref], 'observed', proof.at);
+      }
+      if (view.storyIndex === parent.beats.length - 1) {
+        next.completed[parent.id] = { at: proof.at, evidence: 'interactive-story-completed' };
+        contact(next, parent.instructionRefs || [], 'implemented-in-flow', proof.at);
+      }
+    }
+    function advanceStory(proof) {
+      view.storyBeats[storyBeat().id] = proof;
+      if (view.storyIndex === story().beats.length - 1) { view.storyActivityId = null; nextActivity(); }
+      else { view.storyIndex++; loadStoryBeat(true); }
+    }
+    function advanceStoryLine() {
+      if (storyBeat()?.kind !== 'line' || !view.storyLineDone) return;
+      const proof = storyProof();
+      mutateRecord(next => writeStoryBeat(next, proof), () => advanceStory(proof));
+    }
+    function contact(next, refs, mode, at) {
+      const visited = new Set();
+      function add(ref) {
+        if (!unit.sources[ref] || visited.has(ref)) return;
+        visited.add(ref);
+        const existing = next.sourceContacts[ref];
+        next.sourceContacts[ref] = { modes: [...new Set([...(existing?.modes || []), mode])], at };
+        // A word heard within a sentence is exposure, never a separate retrieval.
+        if (mode === 'observed' || mode === 'heard') for (const nested of unit.sources[ref].embeddedSourceRefs || []) add(nested);
+      }
+      refs.forEach(add);
+    }
+    function handleAudio(event) {
+      const active = view.audio;
+      if (!active || active.requestId !== event.requestId || active.index !== event.index || active.status !== 'playing') return;
+      if (event.type === 'audio-error') { active.status = event.blocked ? 'blocked' : 'failed'; return; }
+      if (event.type !== 'audio-ended') return;
+      view.heardRefs = [...new Set([...(view.heardRefs || []), active.sequence[active.index].ref])];
+      if (active.index + 1 < active.sequence.length) {
+        active.index++;
+        effects.push({ type: 'play-audio', requestId: active.requestId, index: active.index, src: active.sequence[active.index].src, rate: 1 });
+      } else {
+        active.status = 'ended';
+        if (active.purpose === 'required') view.requiredDone = true;
+        if (active.purpose === 'feedback') view.feedbackDone = true;
+        if (active.purpose === 'story-line') view.storyLineDone = true;
+        if (active.purpose === 'word') {
+          view.heardWords = [...new Set([...view.heardWords, active.sequence[0].ref])];
+          view.requiredDone = activity().items.every(item => view.heardWords.includes(item.sourceRef));
+          if (unit.courseId && view.mode === 'main') mutateRecord(next => {
+            next.teachingProgress[view.activityId] = [...view.heardWords];
+            contact(next, [active.sequence[0].ref], 'heard', now().toISOString());
+          }, () => {});
+        }
+        if (active.purpose === 'reference' && unit.courseId) mutateRecord(next => contact(next, [active.sequence[0].ref], 'heard-in-reference', now().toISOString()), () => {});
+      }
+    }
+    function snapshot() {
+      const a = activity();
+      return clone({ ...view, extraPractice: extraIndex,
+        canContinue: view.screen === 'activity' && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
+        completedCount: unit.checkpointIds.filter(id => unit.checkpointActivities[id].every(aid => record?.completed[aid])).length,
+        nodes: unit.nodes.map((node, index) => ({ id: node.id, done: Boolean(record && nodeDone(node)),
+          available: Boolean(record && (nodeDone(node) || unit.nodes.slice(0, index).every(nodeDone))),
+          completeActivities: node.activityIds.filter(id => record?.completed[id]).length,
+          pendingRole: false })),
+        dueCount: dueItems().length, record: record || null });
+    }
+    function dispatch(event) {
+      effects = [];
+      if (event.type === 'reload') {
+        stopAudio(); pending = null; view = { screen: 'map', saveState: null, mode: 'main', audio: null }; read();
+      } else if (pending || view.screen === 'blocked') {
+        if (event.type === 'save-retry' && pending) save(pending.next, pending.after);
+      } else if (event.type === 'open-node') startNode(event.nodeId, event.mode);
+      else if (event.type === 'map') { stopAudio(); view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; }
+      else if (event.type === 'continue-course') {
+        const next = unit.nodes.find(node => !nodeDone(node));
+        if (next) startNode(next.id, 'main');
+      }
+      else if (event.type === 'course-summary' && unit.courseId && unit.nodes.every(nodeDone)) {
+        stopAudio(); view.screen = 'celebration'; view.mode = 'main'; view.nodeId = unit.nodes.at(-1).id; view.activityId = null; view.storyActivityId = null;
+      }
+      else if (event.type === 'references' && unit.referenceGroups) {
+        stopAudio(); view.screen = 'references'; view.activityId = null; view.storyActivityId = null; view.mode = 'reference'; view.referenceGroupId = null;
+      }
+      else if (event.type === 'reference-section' && view.screen === 'references' && unit.referenceGroups.some(group => group.id === event.id)) {
+        stopAudio(); view.referenceGroupId = view.referenceGroupId === event.id ? null : event.id;
+      }
+      else if (event.type === 'reference-play' && view.screen === 'references' && unit.referenceGroups.find(group => group.id === view.referenceGroupId)?.sourceRefs.includes(event.id) && unit.sources[event.id]?.audioSrc) {
+        play([{ref:event.id,text:unit.sources[event.id].text}], 'reference');
+      }
+      else if (event.type === 'review') {
+        queue = dueItems(); if (queue.length) { view.mode = 'review'; view.nodeId = null; queueIndex = 0; extraIndex = false; extraIds = []; localAttempts = {}; loadActivity(queue[0]); }
+      } else if (event.type.startsWith('audio-')) handleAudio(event);
+      else if (event.type === 'retry-audio' && ['blocked', 'failed'].includes(view.audio?.status)) play(view.audio.sequence, view.audio.purpose);
+      else if (event.type === 'pause' && view.audio?.status === 'playing') { view.audio.status = 'paused'; effects.push({ type: 'pause-audio' }); }
+      else if (event.type === 'resume-audio' && view.audio?.status === 'paused') { view.audio.status = 'playing'; effects.push({ type: 'resume-audio', requestId: view.audio.requestId, index: view.audio.index }); }
+      else if (view.screen === 'activity') {
+        const a = activity();
+        if (event.type === 'select' && a.kind !== 'match' && view.requiredDone && !view.feedback && a.options.some(o => o.id === event.id)) {
+          if (a.kind === 'order') view.selected = view.selected.includes(event.id) ? view.selected.filter(id => id !== event.id) : [...view.selected, event.id];
+          else view.selected = [event.id];
+        } else if (['match-word', 'match-image'].includes(event.type) && a.kind === 'match' && !view.feedback) {
+          const byWord = event.type === 'match-word';
+          const item = a.items.find(item => (byWord ? item.sourceRef : item.entityId) === event.id && !view.matchedPairs[item.sourceRef]);
+          if (item) {
+            view[byWord ? 'matchWord' : 'matchImage'] = event.id;
+            view.matchMessage = '';
+            matchPair();
+          }
+        } else if (event.type === 'match-model' && a.kind === 'match' && !view.feedback) {
+          const item = a.items.find(item => item.sourceRef === view.matchWord) || a.items.find(item => !view.matchedPairs[item.sourceRef]);
+          if (item) { view.hintUsed = true; view.matchWord = item.sourceRef; view.matchImage = item.entityId; matchPair(true); }
+        } else if (event.type === 'match-listen' && a.kind === 'match' && view.matchedPairs[event.id]) {
+          const source = unit.sources[event.id];
+          play([{ ref: event.id, text: source.text, src: source.audioSrc }], 'excerpt');
+        } else if (event.type === 'check') check();
+        else if (event.type === 'retry' && view.feedback === 'retry') { view.feedback = null; view.selected = []; }
+        else if (event.type === 'hint' && a.resultId && !view.feedback) {
+          view.hintUsed = true; view.hintLevel = Math.min(2, view.hintLevel + 1); retainAttempt(() => {});
+        } else if (event.type === 'word-play' && a.kind === 'teach' && a.items.some(item => item.sourceRef === event.id)) {
+          play(a.requiredAudio.filter(entry => entry.ref === event.id), 'word');
+        } else if (event.type === 'line-play') {
+          const allowed = view.storyActivityId ? story().beats.filter((beat, i) => beat.kind === 'line' && (i < view.storyIndex || i === view.storyIndex && view.storyLineDone)).map(beat => beat.ref)
+            : a.conversation ? view.feedback && view.feedback !== 'retry' ? view.feedbackDone ? [...a.conversation.contextRefs, a.conversation.replyRef, ...a.conversation.continuationRefs] : [] : a.conversation.contextRefs : [];
+          if (allowed.includes(event.id)) {
+            const source = unit.sources[event.id];
+            play([{ ref: event.id, text: source.text, src: source.audioSrc, speaker: source.speaker }], 'excerpt');
+          }
+        } else if (['replay', 'replay-current', 'story-start'].includes(event.type) && !['teach', 'match'].includes(a.kind)) {
+          if (view.storyActivityId) {
+            if (storyBeat().kind === 'line') playStoryLine();
+            else {
+              const beat = story().beats.slice(0, view.storyIndex).findLast(beat => beat.kind === 'line');
+              play([{ ref: beat.ref, text: unit.sources[beat.ref].text }], 'excerpt');
+            }
+          }
+          else if (view.feedback && view.feedback !== 'retry') { view.feedbackDone = false; play(a.feedbackAudio, 'feedback'); }
+          else if (a.conversation) play(a.conversation.contextRefs.map(ref => ({ ref, text: unit.sources[ref].text, src: unit.sources[ref].audioSrc })), 'excerpt');
+          else { if (!a.resultId) view.requiredDone = !a.requiredAudio.length; play(a.requiredAudio, 'required'); }
+        } else if (event.type === 'story-help' && view.storyActivityId && storyBeat().noteRef) {
+          view.storyHelp = !view.storyHelp;
+          if (view.storyHelp) mutateRecord(next => contact(next, [storyBeat().noteRef], 'observed', now().toISOString()), () => {});
+        }
+        else if (event.type === 'continue') finishActivity();
+      }
+      return { view: snapshot(), effects: clone(effects) };
+    }
+    return Object.freeze({ storageKey, dispatch, snapshot });
+  }
+  return Object.freeze({ createRuntime, validRecord, emptyRecord, addDays });
+});

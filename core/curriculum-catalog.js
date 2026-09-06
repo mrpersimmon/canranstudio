@@ -8322,10 +8322,371 @@
     return errors;
   }
 
+  // V3 is an opt-in authored experience. The V2 unit remains the immutable
+  // migration source; both presentations read the same textbook sources here.
+  function getPathExperience(unitId = 'NCE-U01') {
+    if (unitId !== 'NCE-U01') return null;
+    const original = getTeachingUnit(unitId);
+    const oldStages = original.beats.flatMap(beat => beat.microtasks);
+    const sources = Object.assign({}, ...Object.values(original.lessonContent).map(lesson => lesson.sources), original.authoredContent);
+    const source = ref => sources[ref];
+    const assetBase = '/poc/lesson-1-2/course/assets/v3/';
+    const assets = {
+      'explorer-cat': 'cat', 'station-keeper': 'keeper', 'handbag-owner': 'customer',
+      handbag: 'handbag', pen: 'pen', pencil: 'pencil', book: 'book', watch: 'watch',
+      coat: 'coat', dress: 'dress', skirt: 'skirt', shirt: 'shirt', car: 'car', house: 'house'
+    };
+    const entities = Object.fromEntries(Object.entries(assets).map(([id, name]) => [id, {
+      entityId: id, title: ({ 'explorer-cat': '探险猫', 'station-keeper': '店员猫', 'handbag-owner': '顾客猫' })[id] || original.entities[id].title,
+      characterSpecies: ['explorer-cat', 'station-keeper', 'handbag-owner'].includes(id) ? 'cat' : null,
+      deliveryBackground: ['explorer-cat', 'station-keeper', 'handbag-owner', 'car'].includes(id) ? 'white' : 'transparent',
+      assetSrc: `${assetBase}${name}.webp`, sourceRef: original.entities[id].sourceRef || null,
+      dialogueSide: original.entities[id].dialogueSide || null
+    }]));
+    const dialogueRefs = Array.from({ length: 7 }, (_, i) => `L01-D0${i + 1}`);
+    const iconBase = '/poc/lesson-1-2/course/assets/v3/icons/';
+    const icons = Object.fromEntries(['arrow-left', 'arrow-right', 'arrow-clockwise', 'check-lg', 'x-lg', 'volume-up-fill', 'play-fill', 'pause-fill', 'lock-fill', 'star-fill', 'book', 'chat-dots', 'hand-index-thumb', 'house', 'bag', 'lightbulb', 'gear', 'check-circle-fill', 'circle', 'record-circle-fill', 'plus-lg'].map(name => [name, `${iconBase}${name}.svg`]));
+    const nodeSpecs = [
+      ['K01', '找回手提包', '和两只猫一起，找到手提包的主人。', 'chat-dots', '约 3 分钟', '手提包回到主人手里了'],
+      ['K03', '认领随身物品', '认一组词，再听一听、问一问，让物品回到主人身边。', 'bag', '约 4 分钟', '换件物品，也能问一问'],
+      ['K04', '收拾好再回家', '整理衣物，补上一句询问，再听懂顾客的确认。', 'house', '约 4 分钟', '她平安到家了', 'home']
+    ];
+    const checkpointActivities = Object.fromEntries(nodeSpecs.map(([id]) => [id, []]));
+    const activities = {};
+    const audio = refs => refs.filter(Boolean).map(ref => ({ ref, text: source(ref)?.text || '', src: source(ref)?.audioSrc || '', speaker: source(ref)?.speaker || null })).filter(item => item.src);
+    const fromSegments = segments => segments.map(item => ({ ref: item.sourceRef || item.contentRef || item.segmentId, text: item.text, src: item.audioSrc, speaker: source(item.sourceRef)?.speaker || null }));
+    function register(nodeId, data) {
+      const activity = { ...data, checkpointId: nodeId, nodeId };
+      activities[activity.id] = activity;
+      if (!activity.embeddedIn) checkpointActivities[nodeId].push(activity.id);
+      return activity;
+    }
+    function option(ref, type = 'text') {
+      return { id: ref, type, text: type === 'text' ? (source(ref)?.text || ref) : null, entityId: type === 'image' ? ref : null };
+    }
+    const originalQuestions = new Map(oldStages.flatMap(stage => stage.steps.flatMap(step =>
+      (step.challenges || []).map(challenge => [challenge.challengeRef, { stage, step, challenge }])
+    )));
+    function question(nodeId, ref, changes = {}) {
+      const { stage, challenge } = originalQuestions.get(ref);
+      const rule = challenge.answerRule, ordered = rule.type === 'ordered-blocks';
+      const soundOnly = challenge.channel === 'audio-form-supported';
+      const imageOptions = Boolean(challenge.candidateEntityIds);
+      const refs = challenge.candidateContentRefs || challenge.candidateSourceRefs || challenge.candidateEntityIds || [];
+      const answer = rule.acceptedOrder || [rule.acceptedEntityId || rule.acceptedSourceRef || rule.acceptedContentRef || rule.entityId];
+      const channel = soundOnly ? 'audio-only' : challenge.channel;
+      return register(nodeId, {
+        id: `v3:${ref}`, kind: ordered ? 'order' : 'choice',
+        legacyChallengeId: ref, legacyResultId: challenge.resultId, legacyCheckpointId: stage.microtaskId,
+        resultId: `v3:${challenge.resultId.replace('audio-form-supported', 'audio-only')}`,
+        targetId: stage.targetResults.find(item => item.resultId === challenge.resultId)?.targetId,
+        channel, audioType: soundOnly ? 'word' : 'sentence', sourceRefs: [challenge.sourceRef],
+        title: '听一听，找出对应物品', instruction: '听完声音，再选一张图片。', questionText: null,
+        focusEntityId: null, scene: false,
+        options: refs.map(id => option(id, imageOptions ? 'image' : 'text')), answer,
+        requiredAudio: soundOnly ? audio([challenge.sourceRef]) : [],
+        feedbackAudio: challenge.feedbackAudioSequence ? fromSegments(challenge.feedbackAudioSequence.segments) : audio([challenge.sourceRef]),
+        feedbackPlayback: soundOnly ? 'support-only' : 'always',
+        feedbackText: challenge.targetText || source(challenge.sourceRef)?.text,
+        hints: soundOnly ? [ref.startsWith('L01') ? '回想一下，故事里的顾客想拿回什么。' : '回想刚才的词卡，再听一次声音。', `${source(challenge.sourceRef).text} 是${entities[rule.acceptedEntityId].title}。对照图片记一记。`]
+          : ['回想一下课文中发生了什么。', '想想这句话在什么时候会用到。'],
+        canMigrateResult: false,
+        answerFairness: { channel, targetHidden: soundOnly, candidateLanguage: imageOptions ? 'neutral-entity' : 'source-text-only' },
+        ...changes
+      });
+    }
+    function wordGroup(nodeId, id, words, title) {
+      const refs = words.map(([ref]) => ref);
+      return register(nodeId, { id: `v3.1:words:${id}`, kind: 'teach', title,
+        instruction: '点哪个，听哪个。每个都听一遍，也可以反复听。',
+        audioType: 'word', playbackMode: 'manual-cards',
+        sourceRefs: refs, instructionRefs: id === 'pocket' ? ['L02-I01'] : [],
+        items: words.map(([sourceRef, entityId]) => ({ sourceRef, entityId })),
+        requiredAudio: audio(refs), feedbackAudio: [], options: [] });
+    }
+    const roleStep = oldStages.flatMap(stage => stage.steps).find(step => step.kind === 'role-enactment');
+    const storyId = 'v3.6:interactive-story';
+    const storyCheck = (id, data) => register('K01', {
+      id: `v3.6:story:${id}`, resultId: `v3.6:story:${id}:result`, embeddedIn: storyId,
+      kind: 'choice', channel: 'story-context', audioType: 'sentence', instruction: '',
+      requiredAudio: [], feedbackAudio: [], feedbackPlayback: 'always', options: [],
+      ...data
+    });
+    sources['V36-REPEAT'] = { contentId: 'V36-REPEAT', kind: 'action-meaning', text: '再说一遍', sourceRefs: ['L01-D04', 'L01-D05'] };
+    sources['V36-HAND-OVER'] = { contentId: 'V36-HAND-OVER', kind: 'action-meaning', text: '交还手提包', sourceRefs: ['L01-D06'] };
+    const repair = storyCheck('repair', {
+      title: '她希望店员怎么做？', sourceRefs: ['L01-D04'], noteRefs: ['L01-N02'],
+      targetId: 'story:repair-intent', options: ['V36-REPEAT', 'V36-HAND-OVER'].map(ref => ({ ...option(ref), lang: 'zh' })), answer: ['V36-REPEAT'],
+      requiredAudio: audio(['L01-D03', 'L01-D04']), feedbackAudio: audio(['L01-D05']),
+      feedbackText: source('L01-D05').text,
+      hints: ['她还没听清。', 'Pardon? 是请对方再说一遍。'], wrongFeedback: '她还没听清，需要再问一遍。',
+      assessment: { skill: 'story-meaning', label: '理解对话', cue: 'progressive-multimodal-story', support: 'two-action-options', evidenceMode: 'interpreted-with-options', scope: 'assessment', boundary: '根据当下的读听情境理解 Pardon?，不是纯听力或自由表达。' }
+    });
+    const owner = storyCheck('owner', {
+      title: '把手提包交给谁？', sourceRefs: ['L01-D06'], meaningRefs: ['L01-Q01'],
+      targetId: 'story:ownership', options: ['station-keeper', 'handbag-owner'].map(id => option(id, 'image')), answer: ['handbag-owner'],
+      requiredAudio: audio(['L01-D05', 'L01-D06']), feedbackAudio: audio(['L01-D06']),
+      feedbackText: source('L01-D06').text, storyFact: 'handbag-returned', castChoice: true,
+      hints: ['谁说了“是我的”？', '顾客说 Yes, it is.，确认这是她的手提包。'], wrongFeedback: '顾客确认了物品，交给她吧。',
+      assessment: { skill: 'story-meaning', label: '理解对话', cue: 'progressive-multimodal-story', support: 'character-options', evidenceMode: 'interpreted-with-options', scope: 'assessment', boundary: '在完整情境中判断物品归属，不作为纯听力证据。' }
+    });
+    const thanks = storyCheck('thanks', {
+      title: '拿回手提包，她会说什么？', sourceRefs: ['L01-D07'],
+      targetId: 'story:thanks', options: ['L01-D07', 'L01-D04'].map(ref => option(ref)), answer: ['L01-D07'],
+      requiredAudio: audio(['L01-D06']), feedbackAudio: audio(['L01-D07']), feedbackText: source('L01-D07').text,
+      scene: true, focusEntityId: 'handbag', returnOnFeedback: true,
+      hints: ['向帮忙的人道谢。', 'Thank you very much. 是在表达感谢。'], wrongFeedback: '拿回了手提包，现在向店员道谢。',
+      assessment: { skill: 'pragmatic-choice', label: '情境接话', cue: 'resolved-story-situation', support: 'sentence-options', evidenceMode: 'selected-in-context', scope: 'assessment', boundary: '选择合适的感谢语，不代表能无提示地说出。' }
+    });
+    const line = ref => ({ id: ref, kind: 'line', ref, actorEntityId: source(ref).speaker === 'man' ? 'station-keeper' : 'handbag-owner',
+      ...(ref === 'L01-D01' ? { noteRef: 'L01-N01' } : ref === 'L01-D04' ? { noteRef: 'L01-N02' } : {}) });
+    const check = activity => ({ id: activity.id, kind: 'checkpoint', activityId: activity.id });
+    register('K01', { id: storyId, kind: 'interactive-story', title: '找回手提包', instruction: '',
+      audioType: 'sentence', playbackMode: 'manual-story', actorEntityIds: ['station-keeper', 'handbag-owner'], focusEntityId: 'handbag',
+      sourceRefs: dialogueRefs, instructionRefs: ['L01-I01'], noteRefs: ['L01-N01', 'L01-N02'],
+      beats: [...dialogueRefs.slice(0, 4).map(line), check(repair), ...dialogueRefs.slice(4, 6).map(line), check(owner), check(thanks), line('L01-D07')],
+      requiredAudio: [], feedbackAudio: [], options: [] });
+    wordGroup('K03', 'pocket', [['L02-W01', 'pen'], ['L02-W02', 'pencil'], ['L02-W03', 'book'], ['L02-W04', 'watch']], '认识物品');
+    matching('K03', 'pocket', '帮物品找到名字');
+    register('K03', {
+      id: 'v3.5:listen-watch', resultId: 'v3.5:listen-watch:result', kind: 'choice',
+      targetId: 'word:watch:in-sentence', channel: 'audio-only', audioType: 'sentence',
+      title: '店员问的是哪件物品？', instruction: '听完这句话，再帮店员找出物品。',
+      sourceRefs: ['NCE-U01-C-Q-WATCH'], evidenceRefs: ['L02-W04'],
+      scene: false, questionText: null, focusEntityId: null,
+      options: ['pen', 'pencil', 'book', 'watch'].map(id => option(id, 'image')), answer: ['watch'],
+      requiredAudio: audio(['NCE-U01-C-Q-WATCH']), feedbackAudio: audio(['NCE-U01-C-Q-WATCH']),
+      feedbackPlayback: 'support-only', feedbackText: source('NCE-U01-C-Q-WATCH').text,
+      hints: ['听一听，句子最后提到了什么。', 'watch 是手表。再听句尾，找找它的图片。'],
+      answerFairness: { channel: 'audio-only', targetHidden: true, candidateLanguage: 'neutral-entity' },
+      assessment: { skill: 'sentence-keyword', label: '听句找物', cue: 'audio-only', support: 'picture-options', evidenceMode: 'recognized-in-utterance', scope: 'assessment', boundary: '只证明能从句子中辨认物品词，不等于理解整句。' }
+    });
+    sources['V31-WATCH-QUESTION-BLOCK'] = { contentId: 'V31-WATCH-QUESTION-BLOCK', kind: 'language-block', text: 'watch?', sourceRefs: ['L02-W04', 'NCE-U01-C-Q-WATCH'] };
+    sources['V31-IT-NOTE'] = { contentId: 'V31-IT-NOTE', kind: 'source-note', text: '这里的 it 接着指前一句问到的手表。', sourceRefs: ['L01-D06', 'NCE-U01-C-Q-WATCH'] };
+    const watchBlocks = ['NCE-U01-C-BLOCK-IS-CAPITAL', 'NCE-U01-C-BLOCK-THIS', 'NCE-U01-C-BLOCK-YOUR', 'V31-WATCH-QUESTION-BLOCK'];
+    question('K03', 'L02-M15:C01', { title: '拼一句，问问手表', instruction: '用词块问：这是你的手表吗？',
+      sourceRefs: ['NCE-U01-C-Q-WATCH'], scene: true, focusEntityId: 'watch',
+      conversation: { contextRefs: [], replyRef: 'NCE-U01-C-Q-WATCH', replyActorId: 'station-keeper', continuationRefs: ['L01-D06'],
+        prompt: '…', outcome: '换成手表，你也能向主人确认了。' },
+      options: watchBlocks.map(ref => option(ref)), answer: watchBlocks,
+      feedbackText: source('NCE-U01-C-Q-WATCH').text, feedbackAudio: audio(['NCE-U01-C-Q-WATCH', 'L01-D06']), noteRefs: ['V31-IT-NOTE'],
+      hints: ['回想课文里是怎么问手提包的。', '课文说 Is this your handbag? 把 handbag 换成 watch，就能问手表了。'] });
+    wordGroup('K04', 'clothes', [['L02-W05', 'coat'], ['L02-W06', 'dress'], ['L02-W07', 'skirt'], ['L02-W08', 'shirt']], '认识衣物');
+    matching('K04', 'clothes', '把衣物和名字配起来');
+    register('K04', {
+      id: 'v3.5:complete-coat', resultId: 'v3.5:complete-coat:result', kind: 'cloze',
+      targetId: 'word:coat:sentence-slot', channel: 'lexical-completion', audioType: 'sentence',
+      title: '帮店员补上这句话', instruction: '看店员拿着什么，选一个词补进气泡。',
+      sourceRefs: ['L02-W05', 'NCE-U01-C-Q-COAT'], evidenceRefs: ['L02-W05'],
+      scene: true, focusEntityId: 'coat', questionText: null,
+      cloze: { prefix: 'Is this your ', suffix: '?', replyRef: 'NCE-U01-C-Q-COAT', actorId: 'station-keeper', outcome: '把物品名称放进句子，就能问主人了。' },
+      options: ['L02-W05', 'L02-W06', 'L02-W08'].map(ref => option(ref)), answer: ['L02-W05'],
+      requiredAudio: [], feedbackAudio: audio(['NCE-U01-C-Q-COAT']), feedbackText: source('NCE-U01-C-Q-COAT').text,
+      hints: ['把图片里的衣物名称放进句子。', 'coat 是外套。Is this your coat? 就是在问这件外套是不是你的。'],
+      assessment: { skill: 'lexical-completion', label: '看图补句', cue: 'picture-and-sentence-frame', support: 'word-options', evidenceMode: 'completed-with-options', scope: 'assessment', boundary: '考察词义与句框中的用词，不作为独立语法或自由表达证据。' }
+    });
+    wordGroup('K04', 'home', [['L02-W09', 'car'], ['L02-W10', 'house']], '认识汽车和房子');
+    sources['V35-RETURN-CONFIRMED'] = { contentId: 'V35-RETURN-CONFIRMED', kind: 'action-meaning', text: '直接交还', sourceRefs: ['L01-D06'] };
+    sources['V35-KEEP-CHECKING'] = { contentId: 'V35-KEEP-CHECKING', kind: 'action-meaning', text: '再问一遍', sourceRefs: ['L01-D04'] };
+    register('K04', {
+      id: 'v3.5:listen-confirmation', resultId: 'v3.5:listen-confirmation:result', kind: 'choice',
+      targetId: 'ownership:auditory-repair', channel: 'audio-meaning', audioType: 'sentence',
+      title: '店员下一步该怎么做？', instruction: '听听这次对话，帮店员决定下一步。',
+      sourceRefs: ['NCE-U01-C-Q-CAR', 'L01-D04', 'L01-D06'], evidenceRefs: ['L01-D04'], scene: false, questionText: null,
+      options: ['V35-RETURN-CONFIRMED', 'V35-KEEP-CHECKING'].map(ref => ({ ...option(ref), lang: 'zh' })), answer: ['V35-KEEP-CHECKING'],
+      requiredAudio: audio(['NCE-U01-C-Q-CAR', 'L01-D04']), feedbackAudio: audio(['NCE-U01-C-Q-CAR', 'L01-D06']),
+      feedbackPlayback: 'always', feedbackText: source('L01-D06').text,
+      listening: { contextRefs: ['L01-D04', 'NCE-U01-C-Q-CAR', 'L01-D06'], outcome: '顾客说 Pardon?，还没听清。店员再问一遍，她才确认了物品。现在可以交还了。' },
+      hints: ['顾客是在确认物品，还是希望店员再说一次？', 'Pardon? 表示没听清，还需要店员再问一遍。'],
+      storyFact: 'customer-arrived-home',
+      answerFairness: { channel: 'audio-meaning', targetHidden: true, candidateLanguage: 'action-meaning' },
+      assessment: { skill: 'listening-meaning', label: '听懂对话', cue: 'audio-dialogue', support: 'two-action-options', evidenceMode: 'interpreted-with-options', scope: 'assessment', boundary: '只考 Pardon? 在本次对话中需要重复、尚未确认的意思，不概括为一般听力。' }
+    });
+    function matching(nodeId, id, title) {
+      const group = activities[`v3.1:words:${id}`];
+      register(nodeId, { id: `v3.5:match:${id}`, kind: 'match', resultId: `v3.5:match:${id}:result`,
+        title, instruction: '点一个单词，再点它的图片。也可以先选图片。',
+        targetId: `word-group:${id}`, channel: 'guided-matching', audioType: 'word',
+        sourceRefs: group.items.map(item => item.sourceRef), items: group.items,
+        options: [], answer: [], requiredAudio: [], feedbackAudio: [],
+        hints: ['先找一对你认识的。', '还不确定时，可以点“看一对”一起学。'],
+        assessment: { skill: 'reading-meaning', label: '认词配对', cue: 'printed-word', support: 'visible-candidates-and-elimination', evidenceMode: 'matched-with-options', scope: 'practice', boundary: '整组为辅助练习，最后一对有排除支持，不折算为四个词独立掌握。' }
+      });
+    }
+    for (const activity of Object.values(activities)) {
+      if (!activity.resultId || activity.assessment) continue;
+      activity.assessment = activity.kind === 'order'
+        ? { skill: 'supported-assembly', label: '词块组句', cue: 'picture-and-chinese-intent', support: 'word-bank', evidenceMode: 'assembled-with-options', scope: 'assessment', boundary: '有词库的受支持组织，不是无提示表达。' }
+        : activity.conversation
+        ? { skill: 'pragmatic-choice', label: '情境接话', cue: 'scene-and-dialogue-context', support: 'sentence-options', evidenceMode: 'selected-in-context', scope: 'assessment', boundary: '选择合适回应，不代表能够自行说出。' }
+        : { skill: 'story-meaning', label: '故事理解', cue: 'remembered-multimodal-story', support: 'character-options', evidenceMode: 'interpreted-with-options', scope: 'assessment', boundary: '完整课文读听后的主人判断，不是纯听力。' };
+    }
+    const previousActivityContracts = {"v3:L01-M07:S01":{"kind":"dialogue"},"v3:L01-M08:C01":{"kind":"choice","resultId":"v3:NCE-U01-T04:L01-M08:owner"},"v3:L01-M08:C02":{"kind":"choice","resultId":"v3:NCE-U01-T01:L01-W07:audio-only"},"v3:L01-M09:C01":{"kind":"choice","resultId":"v3:NCE-U01-T02:L01-M09:attention"},"v3:L01-M10:C02":{"kind":"choice","resultId":"v3:NCE-U01-T03:L01-M10:repair"},"v3:L01-M11:C02":{"kind":"choice","resultId":"v3:NCE-U01-T05:L01-M11:thanks"},"v3.3:dialogue-challenge":{"kind":"role","turns":[{"ref":"L01-D01","actorEntityId":"station-keeper"},{"ref":"L01-D02","actorEntityId":"handbag-owner"},{"ref":"L01-D03","actorEntityId":"station-keeper"},{"ref":"L01-D04","actorEntityId":"handbag-owner"},{"ref":"L01-D05","actorEntityId":"station-keeper"},{"ref":"L01-D06","actorEntityId":"handbag-owner"},{"ref":"L01-D07","actorEntityId":"handbag-owner"}]},"v3.1:words:pocket":{"kind":"teach"},"v3:L02-M11:C01":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W01:audio-only"},"v3:L02-M11:C02":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W02:audio-only"},"v3:L02-M12:C01":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W03:audio-only"},"v3:L02-M12:C02":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W04:audio-only"},"v3:L02-M15:C01":{"kind":"order","resultId":"v3:NCE-U01-T04:L02-M15:watch-question"},"v3.1:words:clothes":{"kind":"teach"},"v3:L02-M16:C01":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W05:audio-only"},"v3:L02-M16:C02":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W06:audio-only"},"v3:L02-M17:C01":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W07:audio-only"},"v3:L02-M17:C02":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W08:audio-only"},"v3.1:words:home":{"kind":"teach"},"v3:L02-M20:C01":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W09:audio-only"},"v3:L02-M20:C02":{"kind":"choice","resultId":"v3:NCE-U01-T01:L02-W10:audio-only"}};
+    const previousRevisionContracts = { 'lesson1-2-v3.5': { schema: 3, activities: {"v3:L01-M07:S01":{"kind":"dialogue"},"v3:L01-M08:C01":{"kind":"choice","resultId":"v3:NCE-U01-T04:L01-M08:owner","assessment":{"skill":"story-meaning","label":"故事理解","cue":"remembered-multimodal-story","support":"character-options","evidenceMode":"interpreted-with-options","scope":"assessment","boundary":"完整课文读听后的主人判断，不是纯听力。"}},"v3:L01-M09:C01":{"kind":"choice","resultId":"v3:NCE-U01-T02:L01-M09:attention","assessment":{"skill":"pragmatic-choice","label":"情境接话","cue":"scene-and-dialogue-context","support":"sentence-options","evidenceMode":"selected-in-context","scope":"assessment","boundary":"选择合适回应，不代表能够自行说出。"}},"v3:L01-M10:C02":{"kind":"choice","resultId":"v3:NCE-U01-T03:L01-M10:repair","assessment":{"skill":"pragmatic-choice","label":"情境接话","cue":"scene-and-dialogue-context","support":"sentence-options","evidenceMode":"selected-in-context","scope":"assessment","boundary":"选择合适回应，不代表能够自行说出。"}},"v3:L01-M11:C02":{"kind":"choice","resultId":"v3:NCE-U01-T05:L01-M11:thanks","assessment":{"skill":"pragmatic-choice","label":"情境接话","cue":"scene-and-dialogue-context","support":"sentence-options","evidenceMode":"selected-in-context","scope":"assessment","boundary":"选择合适回应，不代表能够自行说出。"}},"v3.3:dialogue-challenge":{"kind":"role","turns":[{"ref":"L01-D01","actorEntityId":"station-keeper"},{"ref":"L01-D02","actorEntityId":"handbag-owner"},{"ref":"L01-D03","actorEntityId":"station-keeper"},{"ref":"L01-D04","actorEntityId":"handbag-owner"},{"ref":"L01-D05","actorEntityId":"station-keeper"},{"ref":"L01-D06","actorEntityId":"handbag-owner"},{"ref":"L01-D07","actorEntityId":"handbag-owner"}]},"v3.1:words:pocket":{"kind":"teach","items":[{"sourceRef":"L02-W01","entityId":"pen"},{"sourceRef":"L02-W02","entityId":"pencil"},{"sourceRef":"L02-W03","entityId":"book"},{"sourceRef":"L02-W04","entityId":"watch"}]},"v3.5:match:pocket":{"kind":"match","resultId":"v3.5:match:pocket:result","assessment":{"skill":"reading-meaning","label":"认词配对","cue":"printed-word","support":"visible-candidates-and-elimination","evidenceMode":"matched-with-options","scope":"practice","boundary":"整组为辅助练习，最后一对有排除支持，不折算为四个词独立掌握。"},"items":[{"sourceRef":"L02-W01","entityId":"pen"},{"sourceRef":"L02-W02","entityId":"pencil"},{"sourceRef":"L02-W03","entityId":"book"},{"sourceRef":"L02-W04","entityId":"watch"}]},"v3.5:listen-watch":{"kind":"choice","resultId":"v3.5:listen-watch:result","assessment":{"skill":"sentence-keyword","label":"听句找物","cue":"audio-only","support":"picture-options","evidenceMode":"recognized-in-utterance","scope":"assessment","boundary":"只证明能从句子中辨认物品词，不等于理解整句。"}},"v3:L02-M15:C01":{"kind":"order","resultId":"v3:NCE-U01-T04:L02-M15:watch-question","assessment":{"skill":"supported-assembly","label":"词块组句","cue":"picture-and-chinese-intent","support":"word-bank","evidenceMode":"assembled-with-options","scope":"assessment","boundary":"有词库的受支持组织，不是无提示表达。"}},"v3.1:words:clothes":{"kind":"teach","items":[{"sourceRef":"L02-W05","entityId":"coat"},{"sourceRef":"L02-W06","entityId":"dress"},{"sourceRef":"L02-W07","entityId":"skirt"},{"sourceRef":"L02-W08","entityId":"shirt"}]},"v3.5:match:clothes":{"kind":"match","resultId":"v3.5:match:clothes:result","assessment":{"skill":"reading-meaning","label":"认词配对","cue":"printed-word","support":"visible-candidates-and-elimination","evidenceMode":"matched-with-options","scope":"practice","boundary":"整组为辅助练习，最后一对有排除支持，不折算为四个词独立掌握。"},"items":[{"sourceRef":"L02-W05","entityId":"coat"},{"sourceRef":"L02-W06","entityId":"dress"},{"sourceRef":"L02-W07","entityId":"skirt"},{"sourceRef":"L02-W08","entityId":"shirt"}]},"v3.5:complete-coat":{"kind":"cloze","resultId":"v3.5:complete-coat:result","assessment":{"skill":"lexical-completion","label":"看图补句","cue":"picture-and-sentence-frame","support":"word-options","evidenceMode":"completed-with-options","scope":"assessment","boundary":"考察词义与句框中的用词，不作为独立语法或自由表达证据。"}},"v3.1:words:home":{"kind":"teach","items":[{"sourceRef":"L02-W09","entityId":"car"},{"sourceRef":"L02-W10","entityId":"house"}]},"v3.5:listen-confirmation":{"kind":"choice","resultId":"v3.5:listen-confirmation:result","assessment":{"skill":"listening-meaning","label":"听懂对话","cue":"audio-dialogue","support":"two-action-options","evidenceMode":"interpreted-with-options","scope":"assessment","boundary":"只考 Pardon? 在本次对话中需要重复、尚未确认的意思，不概括为一般听力。"}}} } };
+    const targets = [...original.targets, ...Object.values(activities).filter(activity => activity.resultId && !original.targets.some(target => target.targetId === activity.targetId)).map(activity => ({
+      targetId: activity.targetId, title: activity.assessment.label, evidenceModes: [activity.assessment.evidenceMode],
+      contextIds: [activity.nodeId], supportLadder: [activity.assessment.support], boundary: activity.assessment.boundary
+    }))];
+    const nodes = nodeSpecs.map(([id, title, description, icon, duration, completionTitle, completionScene = null]) => ({
+      id, title, description, icon, duration, checkpointIds: [id], activityIds: checkpointActivities[id],
+      completionTitle, completionScene
+    }));
+    return deepFreeze({
+      unitId, title: '失物招领站', brandTitle: '探险猫', lessonIds: original.lessonIds,
+      districtId: original.districtId, experienceRevision: 'lesson1-2-v3.6', runtimeProfile: 'learning-path-v3',
+      recordSchema: 4, previousActivityContracts, previousRevisionContracts, compatibleProgressRevisions: ['lesson1-2-v3.5', 'lesson1-2-v3.4', 'lesson1-2-v3.3', 'lesson1-2-v3.2', 'lesson1-2-v3.1'],
+      legacyRolePractice: { activityId: `v3:${roleStep.stepId}`, rounds: roleStep.practice.rounds },
+      audioPolicy: { playbackRate: 1, mode: 'original-recordings' },
+      status: 'candidate', publicationScope: 'local-poc', sources, entities, icons, nodes, activities,
+      checkpointIds: nodes.map(node => node.id), checkpointActivities,
+      dialogueRefs, targets, lessonContent: original.lessonContent,
+      experience: { scene: { actorEntityIds: ['explorer-cat', 'station-keeper', 'handbag-owner'] } },
+      legacy: { revision: original.experienceRevision, storageKey: `poc:learning-experience:${unitId}:${original.experienceRevision}`, href: '/poc/lesson-1-2/' },
+      remediation: { maxExtraPerNode: 1, maxExtraPerItem: 1, modelAfterErrors: 2 },
+      review: { intervals: [1, 3, 7, 14, 30], limit: 4, duration: '约 1 分钟' },
+      copy: {
+        lessonLabel: '新概念英语 · Lesson 1–2', heroTitle: '小帮手，出发吧！', heroBody: '听懂一句，用好一句。和探险猫一起，把东西送回主人身边。',
+        start: '开始学习', resume: '接着学习', check: '检查', next: '继续', replay: '重听', storyStart: '开始故事', storyListen: '听这一句',
+        chooseCat: '选这只猫', selected: '已选择', confirmed: '已确认', notSelected: '未选择', removeWord: '撤回', wordPlaying: '播放中',
+        map: '返回路线', rest: '休息一下', listenFirst: '请听完', chooseFirst: '先选一个答案',
+        correct: '答对了！', supported: '答对啦', needsPractice: '这条线索，下次再练',
+        retry: '再试一次', showAnswer: '看看答案', practiceLater: '记下来，稍后再练',
+        saveFailure: '还没保存好，先别着急离开。', saveRetry: '重新保存',
+        saveConflict: '另一个页面更新了进度，请载入最新记录。', reloadProgress: '载入最新进度',
+        audioBlocked: '点一下，就可以播放原声。', audioFailed: '声音没有播放成功，可以再试一次。',
+        audioRetry: '重新播放', roleHint: '提示', roleMoreHint: '再提示',
+        matchWord: '单词', matchPicture: '图片', matchDone: '配好了！', matchRetry: '还没配上，再找找。', matchModel: '看一对', matchModelNote: '一起记住这一对。', matchComplete: '这一组配好啦', matchedCount: '对', practicedGroup: '已练一组', practiceGroupUnit: '组 · 辅助练习', firstTry: '一次答对', helpedTry: '借助提示',
+        hearLine: '听这一句', conversation: '猫猫对话', chooseReply: '选一句接话', replyReady: '准备接话', previousLines: '刚才的对话',
+        rolePending: '来试试新的对话闯关', roleNext: '下一句', wordListen: '点一下听', wordHeard: '已听过', wordsRemaining: '先听词卡', wordCount: '个词',
+        reviewTitle: '找回学过的线索', reviewEmpty: '今天没有到期的练习', reviewStart: '开始回访',
+        reviewDone: '这次回访完成', completedTitle: '这次旅程完成啦！', completedBody: '你帮助她找回了物品，还把学到的英语用了一遍。',
+        legacyMessage: '旧版记录已保留。新版任务会单独记录练习。', legacyLink: '查看旧版记录',
+        repeatLabel: '再练一次', repeatNotice: '重练',
+        unsupportedRecord: '学习记录暂时无法读取。请保留记录，稍后重新打开。',
+        muted: '提示音已关闭', sound: '提示音已开启', reducedMotion: '减少动态效果',
+        knowledge: '提示', fullText: '完整课文', loading: '正在准备课程', oneMore: '再练一条线索',
+        passed: '已完成', traversed: '已走过', locked: '先完成前面的关卡', inProgress: '进行中',
+        noSpeechScoring: '先回想，再听原声核对。这里不会给口语打分。',
+        nodePrefix: '第', nodeSuffix: '关', checkpointLabel: '关', stepLabel: '步', optionLabel: '选项',
+        learningPath: '学习路线', yourTurn: '轮到你啦',
+        roleThink: '先想一想，这只猫会怎么说？', roleYou: '你来演', rolePartner: '等一等',
+        roleCurrent: '这一句', roleWaiting: '听对方说', roleSceneLabel: '两只猫一起对话',
+        pause: '暂停', play: '播放', heard: '听完了', modeled: '一起看看怎么做',
+        selectOrder: '点选下方词块，组成句子',
+        finishNode: '完成这一关', seePath: '看看学习路线',
+        reviewBody: '短短几题，把学过的线索再找回来。', sourceNote: '课文小提示',
+        pathBody: '每走一小步，都能用上新学会的英语。', roleRecovery: '开始对话',
+        independentLabel: '自己答对', supportedLabel: '借助提示', needsPracticeLabel: '需要练习',
+        currentProgress: '本关进度', ariaProgress: '本课已保存的学习进度', sceneLabel: '店员猫和顾客猫在失物招领站',
+        sourceEnglish: '课文原句', instructionLabel: '学习任务'
+      }
+    });
+  }
+
+  function validatePathExperience(candidate = getPathExperience()) {
+    const errors = [];
+    if (!candidate || candidate.experienceRevision !== 'lesson1-2-v3.6') return ['unsupported path experience'];
+    if (candidate.recordSchema !== 4) errors.push('interactive story requires beat-level records');
+    if (candidate.audioPolicy?.playbackRate !== 1 || candidate.audioPolicy?.mode !== 'original-recordings'
+      || Object.values(candidate.sources).some(source => source.slowAudio)) errors.push('only original recordings may be active');
+    const base = getTeachingUnit(candidate.unitId);
+    errors.push(...validate([base]));
+    if (candidate.nodes.length !== 3) errors.push('path requires three complete learning tasks');
+    const mapped = candidate.nodes.flatMap(node => node.checkpointIds);
+    if (mapped.length !== 3 || new Set(mapped).size !== 3) errors.push('path must map three saved nodes exactly once');
+    const questions = Object.values(candidate.activities).filter(activity => activity.resultId);
+    if (new Set(questions.map(activity => activity.resultId)).size !== questions.length) errors.push('duplicate assessment identity');
+    if (questions.filter(activity => activity.assessment?.scope === 'assessment').length !== 7
+      || questions.filter(activity => activity.kind === 'match').length !== 2) errors.push('requires seven focused checks and two guided matching groups');
+    if (questions.some(activity => activity.channel === 'word-form' || activity.channel === 'audio-only' && activity.audioType === 'word')) errors.push('isolated per-word quiz pass has been retired');
+    const sequence = candidate.nodes.flatMap(node => node.activityIds);
+    const embedded = Object.values(candidate.activities).filter(activity => activity.embeddedIn);
+    const expanded = [...sequence, ...embedded.map(activity => activity.id)];
+    if (sequence.length !== 10 || expanded.length !== Object.keys(candidate.activities).length || new Set(expanded).size !== expanded.length) errors.push('each activity must occur once in the main sequence or inside its story');
+    const introduced = new Set();
+    function introduce(ref) {
+      if (!candidate.sources[ref] || introduced.has(ref)) return;
+      introduced.add(ref);
+      for (const nested of [...(candidate.sources[ref].embeddedSourceRefs || []), ...(candidate.sources[ref].sourceRefs || [])]) introduce(nested);
+    }
+    for (const id of sequence) {
+      const activity = candidate.activities[id];
+      if (!activity) { errors.push(`unknown sequence activity: ${id}`); continue; }
+      const prerequisites = activity.kind === 'match' ? activity.items.map(item => item.sourceRef) : activity.channel === 'audio-only' || activity.kind === 'cloze' ? activity.evidenceRefs || activity.sourceRefs : [];
+      if (!prerequisites.every(ref => introduced.has(ref))) errors.push(`${id}: retrieval before vocabulary input`);
+      if (activity.kind === 'interactive-story' || activity.kind === 'teach') activity.sourceRefs.forEach(introduce);
+      if (activity.kind === 'teach' && (!activity.items?.length || activity.items.some(item => !candidate.entities[item.entityId] || !candidate.sources[item.sourceRef]))) errors.push(`${id}: incomplete vocabulary cards`);
+      if (activity.kind === 'teach' && (activity.playbackMode !== 'manual-cards'
+        || JSON.stringify(activity.requiredAudio.map(entry => entry.ref)) !== JSON.stringify(activity.items?.map(item => item.sourceRef)))) errors.push(`${id}: every word card requires individual playable audio`);
+    }
+    for (const activity of Object.values(candidate.activities)) {
+      const parent = activity.embeddedIn && candidate.activities[activity.embeddedIn];
+      if (parent) {
+        if (parent.kind !== 'interactive-story' || parent.nodeId !== activity.nodeId || parent.beats.filter(beat => beat.activityId === activity.id).length !== 1) errors.push(`${activity.id}: invalid embedded checkpoint`);
+      } else if (activity.embeddedIn || !candidate.nodes.find(node => node.id === activity.nodeId)?.activityIds.includes(activity.id)) errors.push(`${activity.id}: activity must belong to its saved node`);
+      if (['role', 'dialogue'].includes(activity.kind)) errors.push('separate listening and role passes have been retired');
+      if (activity.kind === 'interactive-story') {
+        const cast = activity.actorEntityIds || [], lines = activity.beats.filter(beat => beat.kind === 'line');
+        if (cast.length !== 2 || new Set(cast).size !== 2 || cast.some(id => candidate.entities[id]?.characterSpecies !== 'cat')) errors.push('story requires both cats');
+        if (activity.playbackMode !== 'manual-story' || JSON.stringify(lines.map(beat => beat.ref)) !== JSON.stringify(candidate.dialogueRefs)) errors.push('story must preserve all seven original lines in order');
+        if (lines.some(beat => beat.actorEntityId !== (candidate.sources[beat.ref]?.speaker === 'man' ? 'station-keeper' : 'handbag-owner'))) errors.push('story speaker differs from original recording');
+        if (activity.beats.length !== 10 || new Set(activity.beats.map(beat => beat.id)).size !== 10
+          || activity.beats.some(beat => beat.kind === 'checkpoint' && candidate.activities[beat.activityId]?.embeddedIn !== activity.id)) errors.push('story requires seven lines and three contextual checkpoints');
+      }
+      for (const ref of activity.sourceRefs) if (!candidate.sources[ref]) errors.push(`${activity.id}: unknown source ${ref}`);
+      for (const entry of [...activity.requiredAudio, ...activity.feedbackAudio]) if (!entry.src || !entry.text) errors.push(`${activity.id}: incomplete audio`);
+      const audioRefs = [...activity.requiredAudio, ...activity.feedbackAudio, ...(activity.beats || []).filter(beat => beat.kind === 'line')].map(entry => entry.ref);
+      if (activity.conversation) {
+        const conversation = activity.conversation;
+        audioRefs.push(...conversation.contextRefs, conversation.replyRef, ...conversation.continuationRefs);
+        if (!candidate.entities[conversation.replyActorId] || conversation.contextRefs.includes(conversation.replyRef)) errors.push(`${activity.id}: invalid dialogue reply context`);
+        if (JSON.stringify(activity.feedbackAudio.map(entry => entry.ref)) !== JSON.stringify([conversation.replyRef, ...conversation.continuationRefs])) errors.push(`${activity.id}: feedback must continue the conversation`);
+        if (activity.kind === 'choice' && !activity.answer.includes(conversation.replyRef)) errors.push(`${activity.id}: conversation reply differs from the assessed answer`);
+      }
+      for (const ref of audioRefs) if (!candidate.sources[ref]?.audioSrc) errors.push(`${activity.id}: missing original recording for ${ref}`);
+      if (activity.cloze) {
+        const cloze = activity.cloze;
+        if (cloze.prefix + candidate.sources[activity.answer[0]]?.text + cloze.suffix !== candidate.sources[cloze.replyRef]?.text) errors.push(`${activity.id}: cloze answer differs from the source sentence`);
+      }
+      if (!activity.resultId) continue;
+      if (!candidate.targets.some(target => target.targetId === activity.targetId)) errors.push(`${activity.id}: unknown learning target`);
+      if (!activity.assessment?.skill || !activity.assessment?.support || !activity.assessment?.boundary) errors.push(`${activity.id}: missing evidence boundary`);
+      if (activity.kind === 'match') {
+        if (activity.items?.length !== 4 || new Set(activity.items.map(item => item.sourceRef)).size !== 4 || new Set(activity.items.map(item => item.entityId)).size !== 4) errors.push(`${activity.id}: invalid matching pairs`);
+        if (activity.assessment.scope !== 'practice') errors.push(`${activity.id}: matching cannot certify independent mastery`);
+        if (activity.items.some(item => !candidate.sources[item.sourceRef] || !candidate.entities[item.entityId])) errors.push(`${activity.id}: unknown matching content`);
+      }
+      const optionIds = new Set(activity.options.map(item => item.id));
+      if (activity.answer.some(id => !optionIds.has(id))) errors.push(`${activity.id}: answer outside candidate set`);
+      if (['audio-only', 'audio-meaning'].includes(activity.channel)) {
+        const target = candidate.sources[activity.sourceRefs[0]]?.text;
+        if (activity.questionText || activity.channel === 'audio-only' && activity.options.some(item => item.text) || !activity.answerFairness.targetHidden) errors.push(`${activity.id}: audio target exposed before answer`);
+        if (target && new RegExp(`\\b${target}\\b`, 'i').test(`${activity.title} ${activity.instruction}`)) errors.push(`${activity.id}: prompt exposes target word`);
+      }
+    }
+    if (Object.values(candidate.activities).filter(activity => activity.kind === 'interactive-story').length !== 1) errors.push('one interactive story is required');
+    const covered = new Set();
+    function cover(ref) {
+      if (!ref || covered.has(ref)) return;
+      covered.add(ref);
+      const item = candidate.sources[ref];
+      for (const nested of [...(item?.embeddedSourceRefs || []), ...(item?.sourceRefs || [])]) cover(nested);
+    }
+    for (const activity of Object.values(candidate.activities)) {
+      for (const ref of [...activity.sourceRefs, ...(activity.noteRefs || []), ...(activity.instructionRefs || []), ...(activity.meaningRefs || []), ...activity.options.map(o => o.id), ...activity.requiredAudio.map(a => a.ref), ...activity.feedbackAudio.map(a => a.ref)]) cover(ref);
+    }
+    for (const lesson of Object.values(candidate.lessonContent)) for (const source of Object.values(lesson.sources)) {
+      if (['exposure', 'evidence'].includes(source.coveragePolicy) && !covered.has(source.sourceId)) errors.push(`required textbook source not mapped: ${source.sourceId}`);
+    }
+    return errors;
+  }
+
   return deepFreeze({
     TEACHING_UNITS,
     COURSE_VOICE_BASELINES,
     getCourseVoiceBaseline,
+    getPathExperience,
+    validatePathExperience,
     getTeachingUnit,
     getTeachingUnitForLesson,
     listTeachingUnitsForDistrict,

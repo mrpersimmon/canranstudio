@@ -1,0 +1,27 @@
+REFERENCE IMAGE
+/Users/permission/.codex/.chatgpt-projects/g-p-6a75fe3e1ec88191b3d5d52f3c636aa6/task-outputs/lesson1-2-duolingo-plan-2026-09-05/implementation/docs/designs/lesson1-2-v3/cat-disney-lineup.png
+
+BUILT-IN IMAGE_GEN — SINGLE REFERENCE-GUIDED GENERATION
+
+Use case: style-transfer
+Asset type: standalone guide-character raster asset for an elementary English-learning app.
+
+Input image: Image 1 is the sole character identity, pose, and visual-style reference. Recreate only the leftmost blue-gray British Shorthair cat from Image 1 as a single isolated character. Do not include or blend in either of the two standing cats.
+
+Primary request: Faithfully preserve the left cat's blue-gray coat, round British Shorthair face, small triangular ears, large clear expressive dark eyes, warm friendly open-mouth smile, yellow triangular neckerchief, seated body, one front paw raised in greeting with visible paw pads, grounded front paws, and curled tail resting to the character's left.
+
+Scene/backdrop: uniform pure white #FFFFFF, fully opaque background. No transparency, no alpha cutout, no floor line, no cast shadow, no scenery.
+
+Style/medium: classic Disney-inspired two-dimensional animated-feature character drawing, matching Image 1's expressive clean ink lines, softly organic shapes, and restrained cel-shaded light and dark paint areas. Preserve the reference model and proportions rather than simplifying it into a Duolingo-style flat mascot.
+
+Composition/framing: square 1024 x 1024 image; one complete centered cat; character approximately 75% of canvas height; at least 12% clean white margin on every side; all ear tips, raised paw, curled tail, and feet fully visible.
+
+Color and detail invariants: same slate blue-gray coat family and darker forehead/body markings as the left cat; same coral-pink inner ears and paw pads; same golden-yellow bandana; high-contrast readable eyes and facial expression; clean production-ready silhouette.
+
+Constraints: one cat only; no words, letters, numbers, logos, watermark, badge, clothing other than the yellow neckerchief, props, scene elements, border, frame, vignette, colored background, transparent background, checkerboard, or cropped anatomy.
+
+Avoid: 3D rendering, photorealism, Duolingo-style geometric flat mascot treatment, excessive baby proportions, different breed, long fur, extra limbs, extra tail, extra cats, blur, glow, gradient background, floor shadow.
+
+
+DELIVERY
+The unmodified built-in image_gen PNG (1254 x 1254) is retained as cat.png. The generated image has complete anatomy but tighter margins than requested. UI containers provide spacing; only the course packaging step resizes and exports a WebP. The earlier normalized canvas is not used.
