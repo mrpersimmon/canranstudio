@@ -2,6 +2,8 @@
 
 `codex/duolingo-version` 是当前 Duolingo 理念重构版的独立开发分支：新概念英语 Lesson 1–6 编排为 11 个连续学习节点，包含完整猫猫角色、互动故事、逐词学习、场景考察与跨课复习。
 
+设计与实现以 [Duolingo 设计原则](docs/design-principles.md) 为首要依据；课程、题型、界面、交互与动效拿不准时，先查用户参考图或 Duolingo 实际做法。
+
 ## 本地运行
 
 需要 Node.js 20 或更新版本。已使用的图片、字体、录音随仓库保存，产品运行不依赖第三方服务；开发验收使用 axe-core 和 Playwright（仅开发依赖）。
