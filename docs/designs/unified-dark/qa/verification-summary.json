@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "checkedStates": 984,
+  "viewports": [
+    "320×568",
+    "420×856",
+    "906×801",
+    "1440×900"
+  ],
+  "activities": 52,
+  "negativeControls": [
+    {
+      "name": "white-on-light",
+      "caught": true
+    },
+    {
+      "name": "dark-multiply",
+      "caught": true
+    },
+    {
+      "name": "missing-image",
+      "caught": true
+    },
+    {
+      "name": "opaque-art",
+      "caught": true
+    },
+    {
+      "name": "theme-discontinuity",
+      "caught": true
+    }
+  ],
+  "fingerprint": "c97a965f8413be2c9929609b44d7cb55c3fc29f01efe4b69d46235a4585b01ae",
+  "finishedAt": "2026-09-06T09:58:31.480Z"
+}

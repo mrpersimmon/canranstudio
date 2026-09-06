@@ -5,6 +5,16 @@
   const luminance = color => rgb(color).slice(0, 3).map(value => {
     value /= 255; return value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4;
   }).reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+  const rasterProof = new Map();
+  function checkCutout(win,img){
+    if(rasterProof.has(img.currentSrc))return rasterProof.get(img.currentSrc);
+    const canvas=win.document.createElement('canvas');canvas.width=64;canvas.height=64;
+    const context=canvas.getContext('2d',{willReadFrequently:true});context.drawImage(img,0,0,64,64);
+    const rgba=context.getImageData(0,0,64,64).data;
+    let transparent=0,opaque=0;
+    for(let i=3;i<rgba.length;i+=4){if(rgba[i]<8)transparent++;if(rgba[i]>248)opaque++;}
+    const result={transparent,opaque,samples:4096};rasterProof.set(img.currentSrc,result);return result;
+  }
   function surface(win, element) {
     for (let el = element; el; el = el.parentElement) {
       const color = win.getComputedStyle(el).backgroundColor;
@@ -67,6 +77,10 @@
       visibleImages++;
       const style = win.getComputedStyle(img);
       if (!img.complete || !img.naturalWidth) errors.push({rule:'image-loaded', src:img.getAttribute('src')});
+      else if(essential||img.matches('.lp-celebration>img,.lp-blocked>img,.course-package-shell>img')){
+        try{const pixels=checkCutout(win,img);if(pixels.transparent<40||pixels.opaque<40)errors.push({rule:'teaching-art-cutout',src:img.getAttribute('src'),...pixels});}
+        catch(error){errors.push({rule:'teaching-art-unresolved',src:img.getAttribute('src'),message:String(error)});}
+      }
       if (style.mixBlendMode === 'multiply' && luminance(surface(win, img)) < .5) errors.push({rule:'darkened-art', src:img.getAttribute('src')});
       if (!img.closest('[disabled],[aria-disabled="true"]') && Number(style.opacity) < .5) errors.push({rule:'faded-art', src:img.getAttribute('src')});
       if(essential)for(let el=img;el;el=el.parentElement){

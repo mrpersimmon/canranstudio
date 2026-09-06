@@ -25,14 +25,15 @@
     if(['references','celebration','review-complete'].includes(name)&&view().screen!==name)throw Error('Wrong screen at '+name);
     if(name==='save-failure'&&!frame.contentDocument.querySelector('[role="alertdialog"]'))throw Error('Save failure dialog did not appear');
     if(name==='blocked'&&!frame.contentDocument.querySelector('.lp-blocked'))throw Error('Blocked screen did not appear');
-    const check=await auditReadability(frame.contentWindow,{name,expectedTheme:expectedTheme||(view().screen==='map'?'dark':'light')});
+    const check=await auditReadability(frame.contentWindow,{name,expectedTheme:expectedTheme||'dark'});
     if(activityId)check.activityId=activityId;
     report.checks.push(check);
     if(check.errors.length)throw Error(name+': '+JSON.stringify(check.errors));
     const inspectKey=frame.width+' / '+name;
     if(inspection&&!inspected.has(inspectKey)&&(
       frame.width==='320'&&name==='map-return'&&view().completedCount===5 ||
-      frame.width==='420'&&name==='activity-v3:L02-M15:C01' ||
+      frame.width==='420'&&['story-two-lines','activity-v3.6:story:owner','correct-v3.5:complete-coat'].includes(name) ||
+      frame.width==='420'&&name==='assembled-v3:L02-M15:C01' ||
       frame.width==='906'&&name==='blocked'
     )){
       inspected.add(inspectKey);status.textContent='等待目视复核 · '+inspectKey;
@@ -87,6 +88,7 @@
               extraStates.add(kind);
             }
             for(const id of a.answer)if(!view().selected.includes(id))await click('select',id);
+            if(a.kind==='order')await check('assembled-'+a.id,a.id);
             await click('check');await hear();await check('correct-'+a.id,a.id);
           }
           await click('continue');await hear();
@@ -110,7 +112,7 @@
       frame.contentWindow.fixture.failSave=false;await click('save-retry');
       await click('map');
       frame.contentWindow.fixture.throwNext=true;await click('journey-nav','book');
-      await check('blocked',null,'light');
+      await check('blocked',null,'dark');
       // Recover through the same visible reload control.
       await click('reload');await check('map-return');
     }
@@ -118,16 +120,19 @@
     // exclusion from silently converting unreadable content into a pass.
     await open(config.viewports[1]);await click('preview-node','K01');await click('open-node','K01');await click('story-start');await hear();await click('continue');await hear();
     const mutations=[
-      ['white-on-light','.lp-chat-bubble p{color:#f1f7f8!important}', 'color-contrast'],
-      ['dark-multiply','body,.lp-shell{background:#141f23!important}', 'darkened-art'],
-      ['missing-image','', 'image-loaded']
+      ['white-on-light','.lp-chat-bubble{background:#eef1e8!important}.lp-chat-bubble p{color:#f1f7f8!important}', 'color-contrast'],
+      ['dark-multiply','.lp-story-character>img{mix-blend-mode:multiply!important}', 'darkened-art'],
+      ['missing-image','', 'image-loaded'],
+      ['opaque-art','', 'teaching-art-cutout'],
+      ['theme-discontinuity','body,.lp-shell{background:#dfe6df!important;color:#2c4035!important}', 'screen-canvas']
     ];
     for(const [name,css,rule] of mutations){
       const doc=frame.contentDocument,style=doc.createElement('style');style.textContent=css;doc.head.append(style);
       const img=doc.querySelector('.lp-story-character>img'),src=img.src;
       if(name==='missing-image')img.src='/__qa__/deliberately-missing.png';
+      if(name==='opaque-art')img.src='/__qa__/opaque-character.png';
       await settle();
-      const result=await auditReadability(frame.contentWindow,{name,expectedTheme:'light'});
+      const result=await auditReadability(frame.contentWindow,{name,expectedTheme:'dark'});
       const caught=result.errors.some(e=>e.rule===rule);report.mutations.push({name,caught,errors:result.errors});
       style.remove();img.src=src;await settle();
       if(!caught)throw Error('Negative control escaped: '+name);

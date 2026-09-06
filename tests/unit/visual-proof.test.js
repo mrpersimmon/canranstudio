@@ -6,13 +6,15 @@ const path=require('node:path');
 const os=require('node:os');
 const {VIEWPORTS,PROOF,fingerprint,validateReport,assertVisualProof}=require('../../scripts/visual-proof');
 function validReport(){return {schema:1,status:'passed',checks:VIEWPORTS.flatMap(viewport=>[
-  ...['loader','map','story-two-lines','references','celebration','review-complete','blocked','save-failure','map-return','reload-map'].map(name=>({name,viewport,errors:[]})),
-  ...Object.keys(require('../../content/learning-course.json').activities).map(activityId=>({name:'activity-'+activityId,activityId,viewport,errors:[]}))
-]),mutations:['white-on-light','dark-multiply','missing-image'].map(name=>({name,caught:true}))};}
+  ...['loader','map','story-two-lines','references','celebration','review-complete','blocked','save-failure','map-return','reload-map'].map(name=>({name,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]})),
+  ...Object.keys(require('../../content/learning-course.json').activities).map(activityId=>({name:'activity-'+activityId,activityId,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]}))
+]),mutations:['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity'].map(name=>({name,caught:true}))};}
 test('visual release gate fails closed on errors, missing screens, missing widths and ineffective negative controls',()=>{
   validateReport(validReport());
   for(const mutate of [
     p=>{p.status='running';},
+    p=>{p.checks[0].canvas='rgb(223, 230, 223)';},
+    p=>{p.checks[0].expectedTheme='light';},
     p=>{p.checks[0].errors.push({rule:'color-contrast'});},
     p=>{p.checks=p.checks.filter(c=>c.name!=='story-two-lines');},
     p=>{p.checks=p.checks.filter(c=>c.viewport[0]!==320);},

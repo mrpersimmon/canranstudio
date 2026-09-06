@@ -20,6 +20,7 @@ function fingerprint(prepared, root = ROOT) {
 function validateReport(report) {
   if (report?.schema !== 1 || report.status !== 'passed' || !Array.isArray(report.checks) || !report.checks.length) throw Error('Browser readability check failed or did not finish');
   if (report.checks.some(check=>!Array.isArray(check.errors)||check.errors.length)) throw Error('Browser readability violations remain');
+  if (report.checks.some(check=>check.expectedTheme!=='dark'||check.canvas!=='rgb(20, 31, 35)')) throw Error('Screens do not share the approved dark theme');
   for (const viewport of VIEWPORTS) {
     const cases = report.checks.filter(check=>String(check.viewport)===String(viewport));
     for (const name of ['loader','map','story-two-lines','references','celebration','review-complete','blocked','save-failure','map-return','reload-map']) {
@@ -28,7 +29,7 @@ function validateReport(report) {
     const covered=new Set(cases.filter(c=>c.activityId).map(c=>c.activityId));
     if(ACTIVITY_IDS.some(id=>!covered.has(id)))throw Error('Missing authored activity coverage: '+viewport);
   }
-  if (!['white-on-light','dark-multiply','missing-image'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

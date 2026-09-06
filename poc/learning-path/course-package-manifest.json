@@ -4,7 +4,7 @@
   "unitId": "NCE-STARTER-06",
   "revision": "lesson1-6-v4.0",
   "scopePath": "/poc/learning-path/",
-  "totalBytes": 3371052,
+  "totalBytes": 3495854,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -91,40 +91,70 @@
       "sha256": "b44e22191ef52bee95af732074aae2843b3aeaa2d9b6d80f7e236e0862c26ff1"
     },
     {
-      "url": "/poc/learning-path/assets/cats/changwoo-v1.webp",
+      "url": "/poc/learning-path/assets/dark/car-cutout.webp",
       "kind": "image",
-      "bytes": 34356,
-      "sha256": "9d6efbd0d47eacd46392ad4f498061fd9d258c9486b7c891fbaa6c42115e7f83"
+      "bytes": 10310,
+      "sha256": "849b614c5827cd1512a3946e437aa770416be1db7f20e0dfffe102449b32bff1"
     },
     {
-      "url": "/poc/learning-path/assets/cats/hans-v2.webp",
+      "url": "/poc/learning-path/assets/dark/cat-cutout.webp",
       "kind": "image",
-      "bytes": 54600,
-      "sha256": "dd73ab32ba21f503c14ca97a903970138ba1588797cfb7132775127e877d55be"
+      "bytes": 44180,
+      "sha256": "d7129f3dcee7d4cb721c1ebb1a7dbf39fb553ab4ce0e6909719177bace88ce66"
     },
     {
-      "url": "/poc/learning-path/assets/cats/luming-v1.webp",
+      "url": "/poc/learning-path/assets/dark/changwoo-v1-cutout.webp",
       "kind": "image",
-      "bytes": 52240,
-      "sha256": "fb59c2fdfd54437f311a957a33880d424446a13f0169a6058207039b9dcd9c98"
+      "bytes": 51174,
+      "sha256": "2c7b028d59ba3960d3247b958104a5827ed673ebe74fb56dc3bf8ccb0e9c051d"
     },
     {
-      "url": "/poc/learning-path/assets/cats/mr-blake-v1.webp",
+      "url": "/poc/learning-path/assets/dark/cloakroom-v1-cutout.webp",
       "kind": "image",
-      "bytes": 55136,
-      "sha256": "66ec0144f44089ead39fa18cbea71817eab69b86dd5dc4a98b826075ad657f64"
+      "bytes": 41040,
+      "sha256": "e2d8304fd6a240dc7bad27c64e76dc9c47d838546463f5b449ae5d70c8eb27ed"
     },
     {
-      "url": "/poc/learning-path/assets/cats/naoko-v1.webp",
+      "url": "/poc/learning-path/assets/dark/customer-cutout.webp",
       "kind": "image",
-      "bytes": 35486,
-      "sha256": "dd5ed4cc83c5e0ac11d25b803412974f64f9932e2b6e70bac5f4cc780bfebef6"
+      "bytes": 52056,
+      "sha256": "092605e4e5fcebec85da2e37cd87120083417f6ce0c1f1d4ec88be3eaf60ea81"
     },
     {
-      "url": "/poc/learning-path/assets/cats/xiaohui-v1.webp",
+      "url": "/poc/learning-path/assets/dark/hans-v2-cutout.webp",
       "kind": "image",
-      "bytes": 37204,
-      "sha256": "6f1aa8757ea62081b85f49416515a4dc03bdcdd012745bc672c745d3d894d583"
+      "bytes": 73854,
+      "sha256": "0d084bc68cc514d78be3e26c4770f58933f979f391599d3494522f57f366394b"
+    },
+    {
+      "url": "/poc/learning-path/assets/dark/keeper-cutout.webp",
+      "kind": "image",
+      "bytes": 49600,
+      "sha256": "8a877fdb4ee5f77afcd3cc7de06ac139193f071ae8393f3eb2c0a809bc28f3f6"
+    },
+    {
+      "url": "/poc/learning-path/assets/dark/luming-v1-cutout.webp",
+      "kind": "image",
+      "bytes": 75800,
+      "sha256": "641535c7a376ab0bbceba5a8e9c2842b7c62bd74621ed394d5bfa2e74ff13bec"
+    },
+    {
+      "url": "/poc/learning-path/assets/dark/mr-blake-v1-cutout.webp",
+      "kind": "image",
+      "bytes": 78696,
+      "sha256": "ea624389d5d8e7997568fa6966839970d6e020266e5238bb292b5b5ba23bb267"
+    },
+    {
+      "url": "/poc/learning-path/assets/dark/naoko-v1-cutout.webp",
+      "kind": "image",
+      "bytes": 40592,
+      "sha256": "4ed5682035cea068b886dd12755342d5aa568b26b078bb08476a7854142ec2d9"
+    },
+    {
+      "url": "/poc/learning-path/assets/dark/xiaohui-v1-cutout.webp",
+      "kind": "image",
+      "bytes": 43476,
+      "sha256": "aafe8ba03a1a37bb23b3af3fa2fdd1ee6b449673968b4189d44519220035dbdb"
     },
     {
       "url": "/poc/learning-path/assets/icons/book.svg",
@@ -271,12 +301,6 @@
       "sha256": "214c79796657aedfff4ff09ae02fcd13ebceb622035a7f892c6d9b0d892c8aa7"
     },
     {
-      "url": "/poc/learning-path/assets/props/cloakroom-v1.webp",
-      "kind": "image",
-      "bytes": 63450,
-      "sha256": "f57e19c1b0a11a3b52335acc14a196599d5db5ac77044a96ed2ca17714bbeb3c"
-    },
-    {
       "url": "/poc/learning-path/boot/course-entry-7f425f7d7277.js",
       "kind": "script",
       "bytes": 17848,
@@ -291,8 +315,8 @@
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 343666,
-      "sha256": "a1a663661a1665be5b817eb69367fdad9acb640c407f86563afd6acaae13d6c5"
+      "bytes": 343772,
+      "sha256": "f1086e9d977593942c7a33f10232ed5877d8ac668f4058bddb614d1d65b78c0e"
     },
     {
       "url": "/poc/learning-path/course.css",
@@ -313,28 +337,10 @@
       "sha256": "77b60ba5c80c16ff325ec3febd58b053aa2f1ce22d888763eab74eb6eea3ace8"
     },
     {
-      "url": "/poc/lesson-1-2/course/assets/v3/car.webp",
-      "kind": "image",
-      "bytes": 6868,
-      "sha256": "7dd1b1390ed13a218116ebe86f3d9ed4d6fba6ad94fe2cc70f465efe2f2430a6"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/cat.webp",
-      "kind": "image",
-      "bytes": 31820,
-      "sha256": "cf314c484776b4c27a074566b4bd16aa14e91c4e023f1799dbfd8876fed1378c"
-    },
-    {
       "url": "/poc/lesson-1-2/course/assets/v3/coat.webp",
       "kind": "image",
       "bytes": 13058,
       "sha256": "b9dc84f0ed4600fb6b9b3edeb6e0a7fe3f67d5370ace08f1b9fb13a14113b414"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/customer.webp",
-      "kind": "image",
-      "bytes": 32820,
-      "sha256": "84f09d21c8fc48abc71abe41bb86a4fb5fb3fecb5f3d4fa21148d889f7027918"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/dress.webp",
@@ -473,12 +479,6 @@
       "kind": "image",
       "bytes": 308,
       "sha256": "5ac6965c9989afaad195dc0fe739bd7443a7e94e52f8530b9b7d664d20c5d9e5"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/keeper.webp",
-      "kind": "image",
-      "bytes": 33616,
-      "sha256": "4625d55f046fde7612f092ce2d0365f1f8d9d5c32469a1a6c94c0bbbce9644ab"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/pen.webp",
@@ -705,8 +705,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.css",
       "kind": "style",
-      "bytes": 32476,
-      "sha256": "6a2907a0754b921a5d57dde3f69eaf431e3e56e24afc3bb9ac53c124080069e2"
+      "bytes": 33990,
+      "sha256": "50913eb4a76f0be601f9a8b95b84a64faad1dfe397b4860f33473bb3a9fbd5a6"
     },
     {
       "url": "/poc/lesson-1-2/course/path.js",

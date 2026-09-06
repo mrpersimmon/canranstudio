@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "fingerprint": "83f32907cf19177f9a7fb886062b1e8ee0cdb23021158ce6ef51569cc4aa7de3",
+  "status": "failed",
+  "checks": [
+    {
+      "name": "loader",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 1,
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "story-two-lines",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 7,
+      "resolved": [],
+      "errors": [
+        {
+          "rule": "teaching-art-cutout",
+          "src": "/poc/lesson-1-2/course/assets/v3/keeper.webp",
+          "transparent": 0,
+          "opaque": 4096,
+          "samples": 4096
+        },
+        {
+          "rule": "teaching-art-cutout",
+          "src": "/poc/lesson-1-2/course/assets/v3/customer.webp",
+          "transparent": 0,
+          "opaque": 4096,
+          "samples": 4096
+        }
+      ],
+      "activityId": "v3.6:interactive-story"
+    }
+  ],
+  "mutations": [],
+  "failure": "Error: story-two-lines: [{\"rule\":\"teaching-art-cutout\",\"src\":\"/poc/lesson-1-2/course/assets/v3/keeper.webp\",\"transparent\":0,\"opaque\":4096,\"samples\":4096},{\"rule\":\"teaching-art-cutout\",\"src\":\"/poc/lesson-1-2/course/assets/v3/customer.webp\",\"transparent\":0,\"opaque\":4096,\"samples\":4096}]",
+  "finishedAt": "2026-09-06T09:24:26.924Z"
+}
