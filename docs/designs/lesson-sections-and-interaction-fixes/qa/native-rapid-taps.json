@@ -1,0 +1,29 @@
+{
+  "url": "http://127.0.0.1:42817/",
+  "before": "- main:\n  - button \"休息一下\"\n  - progressbar \"本关进度\"\n  - generic: 重练\n  - heading \"认识衣物\" [active] [level=1]\n  - group \"认识衣物\":\n    - button \"点一下听 coat\":\n      - strong: coat\n      - generic: 外套\n      - generic: 点一下听\n    - button \"点一下听 dress\":\n      - strong: dress\n      - generic: 连衣裙\n      - generic: 点一下听\n    - button \"点一下听 skirt\":\n      - strong: skirt\n      - generic: 短裙\n      - generic: 点一下听\n    - button \"点一下听 shirt\":\n      - strong: shirt\n      - generic: 衬衫\n      - generic: 点一下听\n  - status \"已听过 0 / 4\": 0 / 4\n  - button \"继续\" [disabled]:\n    - generic: 继续",
+  "clicks": [
+    {
+      "word": "coat",
+      "at": 1788693021685,
+      "elapsedMs": 259
+    },
+    {
+      "word": "dress",
+      "at": 1788693021951,
+      "elapsedMs": 266
+    },
+    {
+      "word": "skirt",
+      "at": 1788693022219,
+      "elapsedMs": 268
+    },
+    {
+      "word": "shirt",
+      "at": 1788693022632,
+      "elapsedMs": 413
+    }
+  ],
+  "afterBurst": "- main:\n  - button \"休息一下\"\n  - progressbar \"本关进度\"\n  - generic: 重练\n  - heading \"认识衣物\" [level=1]\n  - group \"认识衣物\":\n    - button \"点一下听 coat\":\n      - strong: coat\n      - generic: 外套\n      - generic \"已听过\"\n      - generic: 重听\n    - button \"点一下听 dress\":\n      - strong: dress\n      - generic: 连衣裙\n      - generic: 播放中\n    - button \"点一下听 skirt，待播放\":\n      - strong: skirt\n      - generic: 短裙\n      - generic: 待播放\n    - button \"点一下听 shirt，待播放\" [active]:\n      - strong: shirt\n      - generic: 衬衫\n      - generic: 待播放\n  - button \"暂停\":\n    - generic: 暂停\n  - status \"已听过 1 / 4\": 1 / 4\n  - button \"继续\" [disabled]:\n    - generic: 继续",
+  "afterPlayback": "- main:\n  - button \"休息一下\"\n  - progressbar \"本关进度\"\n  - generic: 重练\n  - heading \"认识衣物\" [level=1]\n  - group \"认识衣物\":\n    - button \"点一下听 coat\":\n      - strong: coat\n      - generic: 外套\n      - generic \"已听过\"\n      - generic: 重听\n    - button \"点一下听 dress\":\n      - strong: dress\n      - generic: 连衣裙\n      - generic \"已听过\"\n      - generic: 重听\n    - button \"点一下听 skirt\":\n      - strong: skirt\n      - generic: 短裙\n      - generic \"已听过\"\n      - generic: 重听\n    - button \"点一下听 shirt\" [active]:\n      - strong: shirt\n      - generic: 衬衫\n      - generic \"已听过\"\n      - generic: 重听\n  - status \"已听过 4 / 4\": 4 / 4\n  - button \"继续\":\n    - generic: 继续",
+  "returnedMap": "- main:\n  - navigation \"学习导航\":\n    - strong: 探险猫\n    - generic: 猫猫小镇\n    - button \"路线\":\n      - generic: 路线\n    - button \"复习\":\n      - generic: 复习\n    - button \"课本\":\n      - generic: 课本\n    - button \"记录\":\n      - generic: 记录\n    - paragraph: 听懂一句，用好一句。\n  - generic \"新概念英语第 1 至 6 课\":\n    - generic: 1–6\n  - generic \"已完成 3 关，共 11 关\":\n    - generic: 3 / 11\n  - button \"0 条待复习线索\":\n    - generic: \"0\"\n  - region \"Lesson 1 & 2 帮物品找主人\":\n    - paragraph: Lesson 1 & 2\n    - heading \"帮物品找主人\" [level=1]\n    - button \"查看本主题课文\"\n    - list \"帮物品找主人的关卡\":\n      - button \"第 1 关 找回手提包，Lesson 1，互动故事，已完成\"\n      - button \"第 2 关 认领随身物品，Lesson 2，听与练，已完成\"\n      - button \"第 3 关 收拾好再回家，Lesson 2，综合练习，已完成\"\n      - button \"和探险猫打招呼\":\n        - img \"挥手的探险猫\"\n      - generic \"本主题已完成 3 关，共 3 关\"\n  - region \"Lesson 3 & 4 拿错了，怎么办？\":\n    - paragraph: Lesson 3 & 4\n    - heading \"拿错了，怎么办？\" [active] [level=1]\n    - button \"查看本主题课文\"\n    - list \"拿错了，怎么办？的关卡\":\n      - button \"继续\":\n        - generic: 继续\n      - button \"第 4 关 雨伞拿错了，Lesson 3，互动故事，继续\"\n      - button \"和探险猫打招呼\":\n        - img \"挥手的探险猫\"\n      - generic \"本主题已完成 0 关，共 3 关\"\n      - button \"第 5 关 我的，还是你的？，Lesson 3 & 4，听与练，未解锁\"\n      - button \"第 6 关 把学过的连起来，Lesson 1–4，串联复习，未解锁\"\n  - region \"Lesson 5 & 6 认识朋友与物品\":\n    - paragraph: Lesson 5 & 6\n    - heading \"认识朋友与物品\" [level=1]\n    - button \"查看本主题课文\"\n    - list \"认识朋友与物品的关卡\":\n      - button \"第 7 关 新同学来了，Lesson 5，互动故事，未解锁\"\n      - button \"第 8 关 认识更多朋友，Lesson 5，互动故事，未解锁\"\n      - button \"第 9 关 它是什么牌子？，Lesson 6，听与练，未解锁\"\n      - button \"第 10 关 把人和物说清楚，Lesson 5 & 6，综合练习，未解锁\"\n      - button \"第 11 关 小镇综合挑战，Lesson 1–6，综合复习，未解锁\"\n  - paragraph: 猫猫小镇 · Lesson 1–6\n  - button \"回到当前关卡\""
+}

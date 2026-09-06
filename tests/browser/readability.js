@@ -61,10 +61,32 @@
   window.auditReadability = async function (win, { expectedTheme, name }) {
     const doc = win.document, errors = [], resolved = [];
     const root = doc.querySelector('[data-learning-path]');
+    const journeyLayout = { gaps: [], pitch: null };
+    if (root.querySelector('[data-journey-tab="path"]')) {
+      journeyLayout.pitch = parseFloat(win.getComputedStyle(root.querySelector('.journey-app')).getPropertyValue('--journey-pitch'));
+      for (const list of root.querySelectorAll('.journey-nodes')) {
+        const nodes = [...list.querySelectorAll('.journey-node')];
+        for (let i = 1; i < nodes.length; i++) {
+          const previous = nodes[i-1].getBoundingClientRect(), current = nodes[i].getBoundingClientRect();
+          const distance = current.top + current.height/2 - previous.top - previous.height/2;
+          journeyLayout.gaps.push(distance);
+          if (!Number.isFinite(journeyLayout.pitch) || Math.abs(distance - journeyLayout.pitch) > 1) errors.push({rule:'journey-node-spacing',node:nodes[i].dataset.id,distance,expected:journeyLayout.pitch});
+        }
+        for (const cat of list.querySelectorAll('.journey-mascot')) if (cat.getClientRects().length) {
+          const a = cat.getBoundingClientRect();
+          for (const node of nodes) {
+            const b = node.getBoundingClientRect();
+            if (a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top) errors.push({rule:'journey-art-overlap',node:node.dataset.id});
+          }
+        }
+      }
+    }
     const shell = root.querySelector('.station-app,.course-package-shell') || root;
     const canvas = surface(win, shell);
     const expected = expectedTheme === 'dark' ? 'rgb(20, 31, 35)' : 'rgb(223, 230, 223)';
     if (canvas !== expected) errors.push({rule:'screen-canvas', actual:canvas, expected});
+    const chromeColor=doc.querySelector('meta[name="theme-color"]')?.content;
+    if(chromeColor!=='#141f23')errors.push({rule:'browser-theme',actual:chromeColor,expected:'#141f23'});
     if (doc.documentElement.scrollWidth > win.innerWidth + 1) errors.push({rule:'horizontal-overflow', width:doc.documentElement.scrollWidth, viewport:win.innerWidth});
     let visibleImages = 0;
     for (const img of root.querySelectorAll('img')) {
@@ -90,7 +112,7 @@
         }
       }
     }
-    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-line-play,[data-journey-current],.journey-start-hint')){
+    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint')){
       if(button.disabled||button.closest('[inert]')||!button.getClientRects().length)continue;
       const rect=button.getBoundingClientRect();
       if(rect.width<44||rect.height<44)errors.push({rule:'small-action',label:button.getAttribute('aria-label')||button.textContent});
@@ -133,6 +155,6 @@
         errors.push({rule:'contrast-unresolved', target:node.target, message:node.failureSummary});
       }
     }
-    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, resolved, errors};
+    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, journeyLayout, resolved, errors};
   };
 })();

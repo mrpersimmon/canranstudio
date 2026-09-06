@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "generator": "imagegen",
+  "artDirection": "Disney hand-drawn animation",
+  "reviewedAt": "2026-09-06",
+  "assets": [
+    {
+      "entityId": "cloak-attendant",
+      "assetSrc": "/poc/learning-path/assets/story-v2/attendant-right.webp",
+      "promptPath": "poc/learning-path/assets/story-v2/source/attendant-right.prompt.md",
+      "masterPath": "poc/learning-path/assets/story-v2/attendant-right.png",
+      "sha256": "263d9d77771a62dfbc77e67ae1f4d163879cfc7ed19fbaede2a3a31916722ac3",
+      "facing": "right"
+    },
+    {
+      "entityId": "umbrella-visitor",
+      "assetSrc": "/poc/learning-path/assets/story-v2/visitor-left.webp",
+      "promptPath": "poc/learning-path/assets/story-v2/visitor-left.prompt.md",
+      "masterPath": "poc/learning-path/assets/story-v2/visitor-left.png",
+      "sha256": "1c39206ff9ad53423fc469e8e01acae026e513aff3cf55ef455730e13a7a8fb6",
+      "facing": "left"
+    },
+    {
+      "entityId": "ticket-five",
+      "assetSrc": "/poc/learning-path/assets/story-v2/ticket-five.webp",
+      "promptPath": "poc/learning-path/assets/story-v2/ticket-five.prompt.md",
+      "masterPath": "poc/learning-path/assets/story-v2/ticket-five.png",
+      "sha256": "3497518118f7bd55904fe161ad2c9ca8259c2984b98e3c64de2e5bba353b0452",
+      "facing": null
+    },
+    {
+      "entityId": "umbrella-star",
+      "assetSrc": "/poc/learning-path/assets/story-v2/umbrella-star.webp",
+      "promptPath": "poc/learning-path/assets/story-v2/umbrella-star.prompt.md",
+      "masterPath": "poc/learning-path/assets/story-v2/umbrella-star.png",
+      "sha256": "ac90977c6e170109c6c6f22e18b7094ae382cc06ea544fe61cef7a6e2f0a8fb0",
+      "facing": null
+    },
+    {
+      "entityId": "umbrella-stripe",
+      "assetSrc": "/poc/learning-path/assets/story-v2/umbrella-stripe.webp",
+      "promptPath": "poc/learning-path/assets/story-v2/umbrella-stripe.prompt.md",
+      "masterPath": "poc/learning-path/assets/story-v2/umbrella-stripe.png",
+      "sha256": "5d63ea8a8fd3c2a9fdc7c8a1db47a6484363fa6b0311be49eabfed87d6f933c6",
+      "facing": null
+    },
+    {
+      "entityId": "umbrella-dot",
+      "assetSrc": "/poc/learning-path/assets/story-v2/umbrella-dot.webp",
+      "promptPath": "poc/learning-path/assets/story-v2/source/umbrella-dot.prompt.md",
+      "masterPath": "poc/learning-path/assets/story-v2/umbrella-dot.png",
+      "sha256": "146435bdeca2c78b120b1d717fa121101eb65853e23519b2e8e45a0363ed3b3a",
+      "facing": null
+    }
+  ]
+}

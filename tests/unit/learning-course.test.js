@@ -53,9 +53,11 @@ test('manual teaching cards persist only ended recordings and recover after refr
   const h=setup();h.reach('C06:cloak-words');
   assert.equal(h.view().audio,null);assert.equal(h.view().canContinue,false);
   h.send({type:'word-play',id:'L03-W01'});const obsolete=h.view().audio;
-  h.send({type:'word-play',id:'L03-W05'});h.send({type:'audio-ended',requestId:obsolete.requestId,index:0});
-  assert.deepEqual(h.view().heardWords,[]);h.hear();assert.deepEqual(h.view().heardWords,['L03-W05']);
-  const r=setup({adapter:h.adapter});r.send({type:'continue-course'});assert.deepEqual(r.view().heardWords,['L03-W05']);assert.equal(r.view().canContinue,false);
+  h.send({type:'word-play',id:'L03-W05'});
+  assert.deepEqual(h.view().heardWords,[]);assert.equal(h.view().audio.requestId,obsolete.requestId);
+  h.send({type:'audio-ended',requestId:obsolete.requestId,index:0});
+  assert.deepEqual(h.view().heardWords,['L03-W01']);h.hear();assert.deepEqual(h.view().heardWords,['L03-W01','L03-W05']);
+  const r=setup({adapter:h.adapter});r.send({type:'continue-course'});assert.deepEqual(r.view().heardWords,['L03-W01','L03-W05']);assert.equal(r.view().canContinue,false);
   r.send({type:'continue'});assert.equal(r.view().activityId,'C06:cloak-words');
 });
 

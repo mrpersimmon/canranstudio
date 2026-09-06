@@ -21,9 +21,10 @@ test('all three vocabulary groups play one original word per tap with no automat
     assert.equal(s.view().canContinue, true);
   }
 });
-test('switching cards cancels earlier playback without crediting stale endings or failed audio', () => {
+test('leaving cards cancels playback without crediting stale endings or failed audio', () => {
   const a = Object.values(unit.activities).find(a => a.kind === 'teach'), s = start(a);
   s.send({ type: 'word-play', id: a.items[0].sourceRef }); const stale = s.view().audio;
+  s.send({ type: 'map' }); s.send({ type: 'open-node', nodeId: a.nodeId });
   s.send({ type: 'word-play', id: a.items[1].sourceRef }); s.send({ type: 'audio-ended', requestId: stale.requestId, index: 0 });
   assert.deepEqual(s.view().heardWords, []); const current = s.view().audio;
   s.send({ type: 'audio-error', requestId: current.requestId, index: 0, blocked: true });

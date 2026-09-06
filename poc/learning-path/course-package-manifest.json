@@ -4,7 +4,7 @@
   "unitId": "NCE-STARTER-06",
   "revision": "lesson1-6-v4.0",
   "scopePath": "/poc/learning-path/",
-  "totalBytes": 3495854,
+  "totalBytes": 3612946,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -69,20 +69,20 @@
     {
       "url": "/core/learning-journey.js",
       "kind": "script",
-      "bytes": 11048,
-      "sha256": "cf895f37aaa4a45035c2e5b37885fbccb6f1a50140880f052a683b6b06b45294"
+      "bytes": 11306,
+      "sha256": "2a5bd7d22137cbd37aff006eb2ab19b9b806711f16c27cc7f7c5bc93fb0407c4"
     },
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 37500,
-      "sha256": "474d05dc6fae941085e577faf5677be89b5956f4ff509d5173aa48c27efa7eb7"
+      "bytes": 38346,
+      "sha256": "316c6b127b9e4bdf233a66639e3d2be7b9083d8bf121badba8c7685e2e4c5862"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 30500,
-      "sha256": "bae548dadd5b4c023fd7474eade3379d0eb30fcf6c61db669fc9d82d092bbc3f"
+      "bytes": 30783,
+      "sha256": "6a039f3b5f69e330b86b38dd50be03870ecb21d5e398816547ebd90eb821b3a1"
     },
     {
       "url": "/core/learning-store.js",
@@ -301,6 +301,42 @@
       "sha256": "214c79796657aedfff4ff09ae02fcd13ebceb622035a7f892c6d9b0d892c8aa7"
     },
     {
+      "url": "/poc/learning-path/assets/story-v2/attendant-right.webp",
+      "kind": "image",
+      "bytes": 59372,
+      "sha256": "263d9d77771a62dfbc77e67ae1f4d163879cfc7ed19fbaede2a3a31916722ac3"
+    },
+    {
+      "url": "/poc/learning-path/assets/story-v2/ticket-five.webp",
+      "kind": "image",
+      "bytes": 18368,
+      "sha256": "3497518118f7bd55904fe161ad2c9ca8259c2984b98e3c64de2e5bba353b0452"
+    },
+    {
+      "url": "/poc/learning-path/assets/story-v2/umbrella-dot.webp",
+      "kind": "image",
+      "bytes": 17530,
+      "sha256": "146435bdeca2c78b120b1d717fa121101eb65853e23519b2e8e45a0363ed3b3a"
+    },
+    {
+      "url": "/poc/learning-path/assets/story-v2/umbrella-star.webp",
+      "kind": "image",
+      "bytes": 16436,
+      "sha256": "ac90977c6e170109c6c6f22e18b7094ae382cc06ea544fe61cef7a6e2f0a8fb0"
+    },
+    {
+      "url": "/poc/learning-path/assets/story-v2/umbrella-stripe.webp",
+      "kind": "image",
+      "bytes": 16790,
+      "sha256": "5d63ea8a8fd3c2a9fdc7c8a1db47a6484363fa6b0311be49eabfed87d6f933c6"
+    },
+    {
+      "url": "/poc/learning-path/assets/story-v2/visitor-left.webp",
+      "kind": "image",
+      "bytes": 72602,
+      "sha256": "1c39206ff9ad53423fc469e8e01acae026e513aff3cf55ef455730e13a7a8fb6"
+    },
+    {
       "url": "/poc/learning-path/boot/course-entry-7f425f7d7277.js",
       "kind": "script",
       "bytes": 17848,
@@ -315,20 +351,20 @@
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 343772,
-      "sha256": "f1086e9d977593942c7a33f10232ed5877d8ac668f4058bddb614d1d65b78c0e"
+      "bytes": 343774,
+      "sha256": "1309920d085206ae1207c9bed368748d76fd3d068773dac1510414d15cc90c50"
     },
     {
       "url": "/poc/learning-path/course.css",
       "kind": "style",
-      "bytes": 6465,
-      "sha256": "810f3eb8b2a8eccfaa9ee9aa494e1de9556fd52752179d585eafddde01294bb7"
+      "bytes": 6686,
+      "sha256": "15a3160ae8b9e4795586ee5c1df3b17c0c530cff9b38ddf5437484c5be67eb62"
     },
     {
       "url": "/poc/learning-path/journey.css",
       "kind": "style",
-      "bytes": 16820,
-      "sha256": "0aba09db56bbb8bb6d8cdcf395fcab2d7e68b0c0c6ee058c30308d881c44e9c0"
+      "bytes": 17016,
+      "sha256": "c21f656568c35ef3f97f30ae70409d9df9d442cd539bc3cd46035bfbf407d721"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/book.webp",
@@ -711,38 +747,14 @@
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 10287,
-      "sha256": "035d02ad90d1bcbba389bad578ae36070fb241f125de09a39b0d6bcb2fe24722"
+      "bytes": 10251,
+      "sha256": "7850824d622e62c7f8d5df7db35c09095975d0eeff2aca69e22afb00d2fa2038"
     },
     {
       "url": "/poc/lesson3-4-experience/assets/item-suit-v1.avif",
       "kind": "image",
       "bytes": 26311,
       "sha256": "ae891d797b96f0f9835af12a7c89c2e688b3fa11411e1809733fc3edb1d5b4c7"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/assets/item-ticket-five-v1.avif",
-      "kind": "image",
-      "bytes": 26262,
-      "sha256": "cc9eb8058edd060a12eb702c00fbe2ec25933e780dcf31442aae0c90158eb00b"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/assets/item-umbrella-dot-v1.avif",
-      "kind": "image",
-      "bytes": 22018,
-      "sha256": "60eaa67960eeb9f816a77f403ab75535849bb96ed8d5b3d986bdc1cfae57d290"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/assets/item-umbrella-star-v1.avif",
-      "kind": "image",
-      "bytes": 18795,
-      "sha256": "774174ae97acb7323732ba2906da0cff7a2bc4875da59b1ebce01c52ff27ba47"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/assets/item-umbrella-stripe-v1.avif",
-      "kind": "image",
-      "bytes": 18701,
-      "sha256": "343af5672ec9c4ee20541500874af292cbc6865d8b942b64c06f3be8e8cb92e8"
     },
     {
       "url": "/poc/lesson3-4-experience/assets/scene-school-v1.avif",

@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..');
 const PROOF = 'test-results/readability-proof.json';
 const VIEWPORTS = [[320,568],[420,856],[906,801],[1440,900]];
 const ACTIVITY_IDS = Object.keys(require('../content/learning-course.json').activities);
+const TEACH_IDS = Object.values(require('../content/learning-course.json').activities).filter(a=>a.kind==='teach').map(a=>a.id);
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 function fingerprint(prepared, root = ROOT) {
   const sources = new Map(prepared.sources);
@@ -28,8 +29,11 @@ function validateReport(report) {
     }
     const covered=new Set(cases.filter(c=>c.activityId).map(c=>c.activityId));
     if(ACTIVITY_IDS.some(id=>!covered.has(id)))throw Error('Missing authored activity coverage: '+viewport);
+    if(TEACH_IDS.some(id=>!cases.some(c=>c.name==='words-queued-'+id)||!cases.some(c=>c.name==='words-heard-'+id)))throw Error('Missing rapid-tap coverage: '+viewport);
+    const map=cases.find(c=>c.name==='map');
+    if(!map.journeyLayout?.gaps?.length||map.journeyLayout.gaps.some(gap=>Math.abs(gap-map.journeyLayout.pitch)>1))throw Error('Missing or uneven map geometry: '+viewport);
   }
-  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

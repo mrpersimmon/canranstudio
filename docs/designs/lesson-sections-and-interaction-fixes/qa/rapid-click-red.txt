@@ -1,0 +1,81 @@
+✖ rapid taps on every teaching group queue explicit choices and persist every real ending once (3.406166ms)
+✖ repeated rapid taps do not restart or duplicate the current and queued words (1.140458ms)
+✖ queued words wait through pause and failed audio, then stop when leaving the activity (3.864291ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 83.171416
+
+✖ failing tests:
+
+test at tests/unit/learning-path-rapid-taps.test.js:17:1
+✖ rapid taps on every teaching group queue explicit choices and persist every real ending once (3.406166ms)
+  AssertionError [ERR_ASSERTION]: v3.1:words:pocket: first click must not be interrupted
+  + actual - expected
+  
+  + 'L02-W04'
+  - 'L02-W01'
+           ^
+  
+      at TestContext.<anonymous> (/Users/permission/.codex/.chatgpt-projects/g-p-6a75fe3e1ec88191b3d5d52f3c636aa6/task-outputs/duolingo-version/tests/unit/learning-path-rapid-taps.test.js:21:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'L02-W04',
+    expected: 'L02-W01',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/learning-path-rapid-taps.test.js:38:1
+✖ repeated rapid taps do not restart or duplicate the current and queued words (1.140458ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  41 !== 1
+  
+      at TestContext.<anonymous> (/Users/permission/.codex/.chatgpt-projects/g-p-6a75fe3e1ec88191b3d5d52f3c636aa6/task-outputs/duolingo-version/tests/unit/learning-path-rapid-taps.test.js:43:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 41,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/learning-path-rapid-taps.test.js:48:1
+✖ queued words wait through pause and failed audio, then stop when leaving the activity (3.864291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+  +   'L02-W08'
+  -   'L02-W05'
+    ]
+  
+      at TestContext.<anonymous> (/Users/permission/.codex/.chatgpt-projects/g-p-6a75fe3e1ec88191b3d5d52f3c636aa6/task-outputs/duolingo-version/tests/unit/learning-path-rapid-taps.test.js:57:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'L02-W08' ],
+    expected: [ 'L02-W05' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

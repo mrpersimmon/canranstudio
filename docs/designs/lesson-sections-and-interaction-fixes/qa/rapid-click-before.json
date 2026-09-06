@@ -1,0 +1,39 @@
+{
+  "activity": "v3.1:words:clothes",
+  "events": [
+    {
+      "clicked": "L02-W05",
+      "requestId": 1,
+      "stopPrevious": true,
+      "count": 0
+    },
+    {
+      "clicked": "L02-W06",
+      "requestId": 2,
+      "stopPrevious": true,
+      "count": 0
+    },
+    {
+      "clicked": "L02-W07",
+      "requestId": 3,
+      "stopPrevious": true,
+      "count": 0
+    },
+    {
+      "clicked": "L02-W08",
+      "requestId": 4,
+      "stopPrevious": true,
+      "count": 0
+    }
+  ],
+  "afterAllAudioEnds": {
+    "heard": [
+      "L02-W08"
+    ],
+    "persisted": [
+      "L02-W08"
+    ],
+    "canContinue": false
+  },
+  "expectedCount": 4
+}

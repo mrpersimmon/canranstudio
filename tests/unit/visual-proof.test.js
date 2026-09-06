@@ -6,9 +6,10 @@ const path=require('node:path');
 const os=require('node:os');
 const {VIEWPORTS,PROOF,fingerprint,validateReport,assertVisualProof}=require('../../scripts/visual-proof');
 function validReport(){return {schema:1,status:'passed',checks:VIEWPORTS.flatMap(viewport=>[
-  ...['loader','map','story-two-lines','references','celebration','review-complete','blocked','save-failure','map-return','reload-map'].map(name=>({name,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]})),
+  ...['loader','map','story-two-lines','references','celebration','review-complete','blocked','save-failure','map-return','reload-map'].map(name=>({name,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',journeyLayout:{pitch:162,gaps:[162,162]},errors:[]})),
+  ...Object.values(require('../../content/learning-course.json').activities).filter(a=>a.kind==='teach').flatMap(a=>['words-queued-','words-heard-'].map(prefix=>({name:prefix+a.id,activityId:a.id,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]}))),
   ...Object.keys(require('../../content/learning-course.json').activities).map(activityId=>({name:'activity-'+activityId,activityId,viewport,expectedTheme:'dark',canvas:'rgb(20, 31, 35)',errors:[]}))
-]),mutations:['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity'].map(name=>({name,caught:true}))};}
+]),mutations:['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing'].map(name=>({name,caught:true}))};}
 test('visual release gate fails closed on errors, missing screens, missing widths and ineffective negative controls',()=>{
   validateReport(validReport());
   for(const mutate of [
@@ -19,6 +20,8 @@ test('visual release gate fails closed on errors, missing screens, missing width
     p=>{p.checks=p.checks.filter(c=>c.name!=='story-two-lines');},
     p=>{p.checks=p.checks.filter(c=>c.viewport[0]!==320);},
     p=>{p.checks=p.checks.filter(c=>c.activityId!==Object.keys(require('../../content/learning-course.json').activities).at(-1));},
+    p=>{p.checks=p.checks.filter(c=>!c.name.startsWith('words-queued-'));},
+    p=>{p.checks.find(c=>c.name==='map').journeyLayout.gaps[0]=264;},
     p=>{p.mutations[0].caught=false;}
   ]){const proof=validReport();mutate(proof);assert.throws(()=>validateReport(proof));}
 });

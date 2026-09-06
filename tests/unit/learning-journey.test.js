@@ -8,6 +8,18 @@ const {describe, render} = require('../../core/learning-journey');
 const unit = getCourse();
 function setup() { const adapter = createMemoryAdapter(); return {adapter, rt:createRuntime({unit, adapter})}; }
 
+test('paired Lesson sections and exact review coverage stay visible without changing node identities', () => {
+  assert.deepEqual(unit.chapters.map(c=>c.lessonIds), [[1,2],[3,4],[5,6]]);
+  assert.deepEqual(unit.nodes.map(n=>n.id), ['K01','K03','K04','C04','C05','R01','C07','C08','C09','C10','R02']);
+  const {rt}=setup(),v=rt.snapshot(),html=render(unit,v);
+  for(const label of ['Lesson 1 &amp; 2','Lesson 3 &amp; 4','Lesson 5 &amp; 6']) assert.ok(html.includes(label));
+  for(const [id,label] of [['C04','Lesson 3'],['R01','Lesson 1–4'],['R02','Lesson 1–6']]) {
+    const preview=render(unit,{...v,journeyUI:{tab:'path',selectedNodeId:id}});
+    assert.ok(preview.includes(label));
+  }
+  for(const node of unit.nodes)assert.ok(unit.chapters.some(c=>c.id===node.chapterId));
+});
+
 test('journey previews and tabs are read-only and locked previews cannot start a later lesson', () => {
   const {rt, adapter} = setup();
   const before = adapter.load(rt.storageKey);

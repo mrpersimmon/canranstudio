@@ -22,6 +22,8 @@
 .lp-course .lp-vocabulary-caption{min-height:66px;justify-content:center}
 .lp-course .lp-vocabulary{align-items:stretch}
 .lp-course .lp-vocabulary-card{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between}
+.lp-course .lp-vocabulary-card.is-queued{border-color:var(--lp-blue);border-top-style:dashed;border-left-style:dashed;border-right-style:dashed}
+.lp-course .lp-vocabulary-card.is-queued .lp-word-cue{color:var(--lp-blue)}
 .lp-course .lp-vocabulary-image{flex:none}
 .lp-references{padding-bottom:35px}
 .lp-reference-group{margin-top:16px}

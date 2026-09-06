@@ -24,7 +24,7 @@
     root.innerHTML = renderer.render({ ...view, journeyUI });
     if (unit.journey) {
       global.document.documentElement.classList.toggle('journey-theme', view.screen === 'map');
-      global.document.querySelector('meta[name="theme-color"]')?.setAttribute('content', view.screen === 'map' ? '#141f23' : '#dfe6df');
+      global.document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#141f23');
     }
     const modal = root.querySelector('[aria-modal="true"]');
     if (modal) {

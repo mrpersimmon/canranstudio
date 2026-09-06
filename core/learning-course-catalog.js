@@ -15,7 +15,9 @@ function getCourse() { return course; }
     const errors = [], seen = new Set(), allRefs = new Set();
     const fail = text => errors.push(text);
     if (course.lessonIds.join(',') !== '1,2,3,4,5,6') fail('first six textbook lessons required');
+    if (JSON.stringify(course.chapters.map(chapter=>chapter.lessonIds)) !== '[[1,2],[3,4],[5,6]]') fail('textbook Lesson pair sections required');
     for (const node of course.nodes) {
+      if (!course.chapters.some(chapter=>chapter.id===node.chapterId)) fail('missing Lesson section '+node.id);
       if (seen.has(node.id)) fail('duplicate node '+node.id); seen.add(node.id);
       if (!node.activityIds.length) fail('empty node '+node.id);
       for (const id of node.activityIds) {
@@ -33,6 +35,10 @@ function getCourse() { return course; }
       if (act.options?.some(o=>o.type==='image'&&!course.entities[o.entityId])) fail('missing answer image '+id);
       if (act.kind==='teach' && (act.playbackMode!=='manual-cards'||act.items.some(item=>!course.sources[item.sourceRef]?.audioSrc||!course.entities[item.entityId]))) fail('invalid teaching cards '+id);
       if (act.kind==='interactive-story') {
+        for (const id of act.actorEntityIds) {
+          const actor=course.entities[id];
+          if (actor?.facing && actor.align && actor.facing===actor.align) fail('story actor must face the other speaker '+id);
+        }
         const beatIds = new Set();
         for (const beat of act.beats) {
           if (beatIds.has(beat.id)) fail('duplicate story beat '+beat.id); beatIds.add(beat.id);

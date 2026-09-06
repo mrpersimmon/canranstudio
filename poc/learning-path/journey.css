@@ -2,7 +2,7 @@
 html.journey-theme{color-scheme:dark;background:#141f23}
 html.journey-theme body{background:#141f23;color:#f1f7f8}
 .has-journey{flex:1;background:#141f23;color:#f1f7f8;--journey-bg:#141f23;--journey-line:#34434b;--journey-muted:#a0b0b8;--journey-orange:#ff9600;--journey-gold:#ffc800;--journey-blue:#49c0f8;--journey-pink:#f58dcc}
-.journey-app{min-height:100dvh;position:relative}
+.journey-app{min-height:100dvh;position:relative;--journey-pitch:162px}
 .lp-shell.has-journey img{mix-blend-mode:normal}
 .journey-app button{touch-action:manipulation}
 .journey-app button:focus-visible{outline:3px solid #49c0f8;outline-offset:5px}
@@ -33,10 +33,10 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 .journey-book-button:hover{background:#ffac20}
 .journey-book-button:active:not(:disabled){margin:0;border:0;border-left:2px solid #dd8100;transform:none;background:#e78900}
 .journey-book-button:focus-visible{outline-offset:-6px!important;outline-color:#663900!important}
-.journey-trail{position:relative;padding:32px 0 26px}
+.journey-trail{position:relative;padding:84px 0 26px}
 .journey-nodes{list-style:none;margin:0;padding:0;position:relative}
-.journey-step{--path-x:var(--node-x);height:104px;position:relative;scroll-margin-top:200px;scroll-margin-bottom:180px}
-.journey-step.is-selected{z-index:8;height:294px}
+.journey-step{--path-x:var(--node-x);height:var(--journey-pitch);position:relative;scroll-margin-top:200px;scroll-margin-bottom:180px}
+.journey-step.is-selected{z-index:14}
 .journey-node{position:relative;left:calc(50% + var(--path-x));margin-left:-46px;width:92px;height:86px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:transparent;transition:transform .14s;isolation:isolate}
 .journey-node:hover{transform:translateY(-3px)}
 .journey-node:active{transform:translateY(4px)}
@@ -49,11 +49,9 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 .journey-done-badge{position:absolute;right:0;bottom:1px;border:3px solid #141f23;background:#ffc800;border-radius:50%;width:26px;height:26px;display:grid;place-items:center}
 .journey-done-badge .journey-icon{width:16px;height:16px;filter:brightness(.15)}
 .journey-ring{position:absolute;inset:-12px -11px -10px;border:7px solid #34434b;border-top-color:#ff9600;border-right-color:#ff9600;border-radius:50%;z-index:-2;transform:rotate(-18deg)}
-.journey-start-hint{position:absolute;left:calc(50% + var(--path-x));bottom:calc(100% + 22px);transform:translateX(-50%);min-height:44px;padding:9px 19px;background:#141f23;border:2px solid #3d4c55;border-radius:12px;color:#ffb43b;white-space:nowrap;font-size:17px;animation:journey-invite 2.6s ease-in-out 3}
+.journey-start-hint{position:absolute;left:calc(50% + var(--path-x));bottom:calc(100% + 14px);transform:translateX(-50%);min-height:44px;padding:9px 19px;background:#141f23;border:2px solid #3d4c55;border-radius:12px;color:#ffb43b;white-space:nowrap;font-size:17px;animation:journey-invite 2.6s ease-in-out 3}
 .journey-start-hint:after{content:"";position:absolute;bottom:-8px;left:calc(50% - 6px);width:12px;height:12px;transform:rotate(45deg);background:#141f23;border-right:2px solid #3d4c55;border-bottom:2px solid #3d4c55}
 .journey-start-hint:active:not(:disabled){transform:translate(-50%,3px);margin:0;border-width:2px}
-.is-current:first-child{margin-top:48px}
-.journey-step.is-current:not(:first-child){margin-top:62px}
 .journey-preview{position:absolute;top:100px;left:24px;right:24px;background:#223239;border:2px solid #ffab25;border-bottom-width:5px;border-radius:18px;padding:12px 18px 18px;box-shadow:0 9px 0 #141f23;z-index:9;animation:journey-reveal .15s ease-out;scroll-margin-bottom:104px;scroll-margin-top:160px}
 .journey-preview:before{content:"";position:absolute;top:-9px;left:calc(50% + var(--path-x) - 7px);width:14px;height:14px;transform:rotate(45deg);background:#223239;border-top:2px solid #ffab25;border-left:2px solid #ffab25}
 .journey-preview.is-locked{border-color:#536670}
@@ -127,11 +125,9 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
  .journey-stats{height:84px;padding-left:28px;padding-right:28px}
  .journey-chapter-banner{top:84px;margin-top:10px;min-height:100px}
  .journey-chapter-banner h1{font-size:26px}.journey-chapter-banner p{font-size:15px}
- .journey-node{width:98px;height:92px;margin-left:-49px}.journey-step{height:136px}
+ .journey-node{width:98px;height:92px;margin-left:-49px}
  .journey-chapter-banner>div{padding-top:18px;padding-bottom:18px}
- .journey-step.is-current:first-child{margin-top:24px}
- .journey-step.is-current:not(:first-child){margin-top:44px}
- .journey-trail{padding-top:60px;padding-bottom:42px}
+ .journey-trail{padding-top:84px;padding-bottom:42px}
  .journey-node-symbol{width:44px;height:44px}
  .journey-companion.on-left{left:38px}.journey-companion.on-right{right:38px}.journey-companion{top:0;width:158px}.journey-mascot,.journey-mascot img{width:158px;height:218px}
  .journey-locate{bottom:28px;right:max(26px,calc((100vw - 210px - 520px)/2 + 22px))}
@@ -157,12 +153,18 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 }
 @media(prefers-reduced-motion:reduce){.journey-app *,.journey-app *::before,.journey-app *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* Reserve a row for the companion; its hit area cannot cover another node. */
-.journey-step.has-companion:not(.is-selected){height:264px}
+/* Every state uses the same node pitch. Art lives beside the node and fits
+   inside that pitch; previews overlay the path instead of moving its nodes. */
+.journey-chapter-banner .journey-lesson-label{font-size:18px;font-weight:850}
+.journey-companion{top:0;width:108px}
+.journey-mascot,.journey-mascot img{width:108px;height:136px}
+.journey-chapter-stars{gap:4px;margin-top:5px}
+.journey-chapter-stars .journey-icon{width:16px;height:16px}
 .journey-step.is-selected .journey-companion{display:none}
+.journey-step:last-child .journey-preview{top:auto;bottom:calc(100% + 18px)}
+.journey-step:last-child .journey-preview:before{top:auto;bottom:-9px;transform:rotate(225deg)}
 @media(max-width:600px){
- .journey-step.has-companion:not(.is-selected){height:194px}
  .journey-companion{width:96px}
- .journey-mascot,.journey-mascot img{width:96px;height:146px}
+ .journey-mascot,.journey-mascot img{width:96px;height:132px}
  .journey-companion.on-left{left:8px}.journey-companion.on-right{right:8px}
 }

@@ -3003,43 +3003,45 @@
       "entityId": "cloak-attendant",
       "title": "服务员猫",
       "characterSpecies": "cat",
-      "assetSrc": "/poc/learning-path/assets/dark/customer-cutout.webp",
-      "deliveryBackground": "white",
+      "assetSrc": "/poc/learning-path/assets/story-v2/attendant-right.webp",
+      "deliveryBackground": "transparent",
       "pronoun": "she",
-      "align": "left"
+      "align": "left",
+      "facing": "right"
     },
     "umbrella-visitor": {
       "entityId": "umbrella-visitor",
       "title": "顾客猫",
       "characterSpecies": "cat",
-      "assetSrc": "/poc/learning-path/assets/dark/hans-v2-cutout.webp",
-      "deliveryBackground": "white",
+      "assetSrc": "/poc/learning-path/assets/story-v2/visitor-left.webp",
+      "deliveryBackground": "transparent",
       "pronoun": "he",
-      "align": "right"
+      "align": "right",
+      "facing": "left"
     },
     "ticket-five": {
       "entityId": "ticket-five",
       "title": "5 号牌",
-      "assetSrc": "/poc/lesson3-4-experience/assets/item-ticket-five-v1.avif",
-      "deliveryBackground": "white"
+      "assetSrc": "/poc/learning-path/assets/story-v2/ticket-five.webp",
+      "deliveryBackground": "transparent"
     },
     "umbrella-star": {
       "entityId": "umbrella-star",
       "title": "星星雨伞",
-      "assetSrc": "/poc/lesson3-4-experience/assets/item-umbrella-star-v1.avif",
-      "deliveryBackground": "white"
+      "assetSrc": "/poc/learning-path/assets/story-v2/umbrella-star.webp",
+      "deliveryBackground": "transparent"
     },
     "umbrella-stripe": {
       "entityId": "umbrella-stripe",
       "title": "条纹雨伞",
-      "assetSrc": "/poc/lesson3-4-experience/assets/item-umbrella-stripe-v1.avif",
-      "deliveryBackground": "white"
+      "assetSrc": "/poc/learning-path/assets/story-v2/umbrella-stripe.webp",
+      "deliveryBackground": "transparent"
     },
     "umbrella-dot": {
       "entityId": "umbrella-dot",
       "title": "圆点雨伞",
-      "assetSrc": "/poc/lesson3-4-experience/assets/item-umbrella-dot-v1.avif",
-      "deliveryBackground": "white"
+      "assetSrc": "/poc/learning-path/assets/story-v2/umbrella-dot.webp",
+      "deliveryBackground": "transparent"
     },
     "suit": {
       "entityId": "suit",
@@ -3319,7 +3321,7 @@
     {
       "id": "C09",
       "title": "它是什么牌子？",
-      "chapterId": "describe",
+      "chapterId": "friends",
       "lessonIds": [
         6
       ],
@@ -3339,7 +3341,7 @@
     {
       "id": "C10",
       "title": "把人和物说清楚",
-      "chapterId": "describe",
+      "chapterId": "friends",
       "lessonIds": [
         5,
         6
@@ -3363,7 +3365,7 @@
     {
       "id": "R02",
       "title": "小镇综合挑战",
-      "chapterId": "describe",
+      "chapterId": "friends",
       "lessonIds": [
         1,
         2,
@@ -9963,7 +9965,8 @@
     "referenceBack": "返回路线",
     "nextNode": "下一关",
     "chapterLabel": "主题",
-    "listenExample": "听例句"
+    "listenExample": "听例句",
+    "wordQueued": "待播放"
   },
   "courseId": "nce-book1",
   "chapters": [
@@ -9985,15 +9988,9 @@
     },
     {
       "id": "friends",
-      "title": "认识新朋友",
+      "title": "认识朋友与物品",
       "lessonIds": [
-        5
-      ]
-    },
-    {
-      "id": "describe",
-      "title": "说说人和物",
-      "lessonIds": [
+        5,
         6
       ]
     }

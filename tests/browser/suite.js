@@ -32,7 +32,7 @@
     const inspectKey=frame.width+' / '+name;
     if(inspection&&!inspected.has(inspectKey)&&(
       frame.width==='320'&&name==='map-return'&&view().completedCount===5 ||
-      frame.width==='420'&&['story-two-lines','activity-v3.6:story:owner','correct-v3.5:complete-coat'].includes(name) ||
+      frame.width==='420'&&['story-two-lines','activity-v3.6:story:owner','correct-v3.5:complete-coat','words-queued-v3.1:words:clothes','words-heard-v3.1:words:clothes','activity-C06:umbrella-story','map-current-3','node-preview-C04'].includes(name) ||
       frame.width==='420'&&name==='assembled-v3:L02-M15:C01' ||
       frame.width==='906'&&name==='blocked'
     )){
@@ -69,7 +69,20 @@
             await hear();
             await check(state.storyIndex===1?'story-two-lines':'story-line-'+a.id+'-'+state.storyIndex,a.id);
           }else if(a.kind==='teach'){
-            for(const item of a.items){await click('word-play',item.sourceRef);await hear();}
+            // Exercise a real burst through the production controller, without
+            // waiting for any media ending or render between clicks.
+            const f=frame.contentWindow.fixture,before=f.dispatchCount;
+            for(const item of a.items) query('word-play',item.sourceRef).click();
+            query('word-play',a.items[0].sourceRef).click();
+            await wait(()=>f.dispatchCount>=before+a.items.length+1);await settle();
+            if(view().audio.sequence[0].ref!==a.items[0].sourceRef||view().wordQueue.length!==a.items.length-1)throw Error('Rapid taps cancelled or duplicated requested words: '+a.id);
+            if(frame.contentDocument.querySelectorAll('.lp-vocabulary-card.is-queued').length!==a.items.length-1)throw Error('Queued tap has no visible feedback: '+a.id);
+            await check('words-queued-'+a.id,a.id);
+            for(let i=0;i<a.items.length;i++){
+              const beforeEnd=f.dispatchCount;f.audio.at(-1).finish();await wait(()=>f.dispatchCount>beforeEnd);await settle();
+              const count=i+1,shown=frame.contentDocument.querySelector('.lp-word-progress').textContent.trim();
+              if(view().heardWords.length!==count||view().record.teachingProgress[a.id].length!==count||shown!==count+' / '+a.items.length)throw Error('Word ending, saved count and visible count differ: '+a.id);
+            }
             await check('words-heard-'+a.id,a.id);
           }else if(a.kind==='match'){
             for(const item of a.items){await click('match-word',item.sourceRef);await click('match-image',item.entityId);await hear();}
@@ -94,7 +107,7 @@
           await click('continue');await hear();
         }
         await check('celebration');
-        await click('map');await check('map-return');
+        await click('map');await check('map-return');await check('map-current-'+view().completedCount);
       }
       // Time changes only inside the test adapter to exercise due review.
       win.fixture.now='2026-09-09T12:00:00Z';
@@ -137,6 +150,15 @@
       style.remove();img.src=src;await settle();
       if(!caught)throw Error('Negative control escaped: '+name);
     }
+    await click('map');
+    const spacingStyle=frame.contentDocument.createElement('style');
+    spacingStyle.textContent='.journey-step.has-companion{height:264px!important}.journey-step.is-current{margin-top:62px!important}';
+    frame.contentDocument.head.append(spacingStyle);await settle();
+    const spacingResult=await auditReadability(frame.contentWindow,{name:'uneven-node-spacing',expectedTheme:'dark'});
+    const spacingCaught=spacingResult.errors.some(e=>e.rule==='journey-node-spacing');
+    report.mutations.push({name:'uneven-node-spacing',caught:spacingCaught,errors:spacingResult.errors});
+    spacingStyle.remove();
+    if(!spacingCaught)throw Error('Negative control escaped: uneven-node-spacing');
     report.status='passed';
   }catch(error){report.status='failed';report.failure=String(error);}
   results.textContent=JSON.stringify(report,null,2);

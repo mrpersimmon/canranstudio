@@ -1,0 +1,51 @@
+{
+  "dom": "- main:\n  - button \"休息一下\"\n  - progressbar \"本关进度\"\n  - generic: 第 4 关\n  - heading \"拿错雨伞了\" [active] [level=1]\n  - group \"猫猫一起学英语\":\n    - generic: 服务员猫\n    - generic: 顾客猫\n  - button \"开始故事\":\n    - generic: 开始故事",
+  "geometry": {
+    "images": [
+      {
+        "rect": {
+          "bottom": 283.1875,
+          "height": 125,
+          "left": 318.5,
+          "right": 480.5,
+          "top": 158.1875,
+          "width": 162,
+          "x": 318.5,
+          "y": 158.1875
+        },
+        "src": "/poc/learning-path/assets/story-v2/attendant-right.webp"
+      },
+      {
+        "rect": {
+          "bottom": 283.1875,
+          "height": 125,
+          "left": 574.5,
+          "right": 736.5,
+          "top": 158.1875,
+          "width": 162,
+          "x": 574.5,
+          "y": 158.1875
+        },
+        "src": "/poc/learning-path/assets/story-v2/visitor-left.webp"
+      },
+      {
+        "rect": {
+          "bottom": 260.578125,
+          "height": 64,
+          "left": 495.5,
+          "right": 559.5,
+          "top": 196.578125,
+          "width": 64,
+          "x": 495.5,
+          "y": 196.578125
+        },
+        "src": "/poc/learning-path/assets/story-v2/ticket-five.webp"
+      }
+    ],
+    "scrollY": 0,
+    "viewport": [
+      1055,
+      514
+    ]
+  }
+}

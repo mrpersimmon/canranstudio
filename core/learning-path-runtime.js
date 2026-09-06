@@ -92,7 +92,7 @@
     let localAttempts = {};
     const today = () => day(now());
     const activity = () => unit.activities[view.activityId];
-    const stopAudio = () => { effects.push({ type: 'stop-audio' }); view.audio = null; };
+    const stopAudio = (clearWords = true) => { effects.push({ type: 'stop-audio' }); view.audio = null; if (clearWords) view.wordQueue = []; };
     function read() {
       const loaded = adapter.load(storageKey);
       if (loaded.status !== 'ok' || (loaded.value !== null && !validRecord(loaded.value, unit))) {
@@ -190,12 +190,12 @@
       // check the read here so a corrupt record is never overwritten by a retry.
       const current = adapter.load(storageKey);
       if (current.status !== 'ok' || (current.value !== null && !validRecord(current.value, unit))) {
-        view.saveState = 'unreadable'; stopAudio(); return;
+        view.saveState = 'unreadable'; stopAudio(false); return;
       }
-      if (current.revision !== revision) { view.saveState = 'conflict'; stopAudio(); return; }
+      if (current.revision !== revision) { view.saveState = 'conflict'; stopAudio(false); return; }
       const result = adapter.commit(storageKey, { expectedRevision: revision, value: next });
       if (!result.persisted || result.status !== 'committed') {
-        view.saveState = result.status === 'conflict' ? 'conflict' : 'failed'; stopAudio(); return;
+        view.saveState = result.status === 'conflict' ? 'conflict' : 'failed'; stopAudio(false); return;
       }
       record = clone(result.value); revision = result.revision; pending = null; view.saveState = null;
       after();
@@ -210,10 +210,23 @@
         if (purpose === 'feedback') view.feedbackDone = true;
         return;
       }
-      stopAudio();
+      stopAudio(purpose !== 'word');
       const recordings = sequence.map(entry => ({ ...entry, src: unit.sources[entry.ref].audioSrc }));
       view.audio = { requestId: ++serial, sequence: recordings, index: 0, status: 'playing', purpose, rate: 1 };
       effects.push({ type: 'play-audio', requestId: serial, index: 0, src: recordings[0].src, rate: 1 });
+    }
+    // Explicit taps form a bounded queue. Switching used to cancel speech before
+    // ended, silently losing every fast tap except the last. Never award a tap
+    // as listening evidence, and never enqueue an unrequested word.
+    function requestWord(ref) {
+      const active = view.audio?.purpose === 'word' && view.audio.status !== 'ended';
+      if (active) {
+        if (view.audio.sequence[0].ref !== ref && !view.wordQueue.includes(ref)) view.wordQueue.push(ref);
+      } else play(activity().requiredAudio.filter(entry => entry.ref === ref), 'word');
+    }
+    function nextRequestedWord() {
+      const ref = view.wordQueue.shift();
+      if (ref) play(activity().requiredAudio.filter(entry => entry.ref === ref), 'word');
     }
     function shuffle(options, answer) {
       const result = options.map(o => o.id);
@@ -335,7 +348,7 @@
     function finishActivity() {
       const a = activity();
       if (a.kind === 'interactive-story') { advanceStoryLine(); return; }
-      if ( (a.resultId ? !view.feedback || view.feedback === 'retry' || !view.feedbackDone : !view.requiredDone || !view.feedbackDone)) return;
+      if (!snapshot().canContinue) return;
       const evidence = view.feedback === 'modeled' ? 'modeled' : view.feedback === 'supported' ? 'supported' : 'independent';
       const at = now().toISOString();
       mutateRecord(next => {
@@ -448,7 +461,8 @@
           if (unit.courseId && view.mode === 'main') mutateRecord(next => {
             next.teachingProgress[view.activityId] = [...view.heardWords];
             contact(next, [active.sequence[0].ref], 'heard', now().toISOString());
-          }, () => {});
+          }, nextRequestedWord);
+          else nextRequestedWord();
         }
         if (active.purpose === 'reference' && unit.courseId) mutateRecord(next => contact(next, [active.sequence[0].ref], 'heard-in-reference', now().toISOString()), () => {});
       }
@@ -456,7 +470,7 @@
     function snapshot() {
       const a = activity();
       return clone({ ...view, extraPractice: extraIndex,
-        canContinue: view.screen === 'activity' && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
+        canContinue: view.screen === 'activity' && !(a?.kind === 'teach' && (view.wordQueue.length || view.audio?.purpose === 'word' && view.audio.status !== 'ended')) && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
         completedCount: unit.checkpointIds.filter(id => unit.checkpointActivities[id].every(aid => record?.completed[aid])).length,
         nodes: unit.nodes.map((node, index) => ({ id: node.id, done: Boolean(record && nodeDone(node)),
           available: Boolean(record && (nodeDone(node) || unit.nodes.slice(0, index).every(nodeDone))),
@@ -518,7 +532,7 @@
         else if (event.type === 'hint' && a.resultId && !view.feedback) {
           view.hintUsed = true; view.hintLevel = Math.min(2, view.hintLevel + 1); retainAttempt(() => {});
         } else if (event.type === 'word-play' && a.kind === 'teach' && a.items.some(item => item.sourceRef === event.id)) {
-          play(a.requiredAudio.filter(entry => entry.ref === event.id), 'word');
+          requestWord(event.id);
         } else if (event.type === 'line-play') {
           const allowed = view.storyActivityId ? story().beats.filter((beat, i) => beat.kind === 'line' && (i < view.storyIndex || i === view.storyIndex && view.storyLineDone)).map(beat => beat.ref)
             : a.conversation ? view.feedback && view.feedback !== 'retry' ? view.feedbackDone ? [...a.conversation.contextRefs, a.conversation.replyRef, ...a.conversation.continuationRefs] : [] : a.conversation.contextRefs : [];
