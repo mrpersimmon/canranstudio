@@ -69,6 +69,39 @@
     }
   }
 
+  const mediaFlights = new Map();
+  async function verifiedMedia(scope, cache, request, entry, cached) {
+    const cryptoApi = scope.crypto || globalThis.crypto;
+    async function checked(response) {
+      if (!response?.ok) return null;
+      const bytes = await response.arrayBuffer();
+      if (bytes.byteLength !== entry.bytes) return null;
+      const hash = [...new Uint8Array(await cryptoApi.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
+      if (hash !== entry.sha256) return null;
+      const headers = new Headers(response.headers);
+      headers.delete('Content-Range'); headers.delete('Content-Encoding');
+      headers.set('Content-Length', String(bytes.byteLength));
+      headers.set('X-Course-Media-Verified', hash);
+      return new Response(bytes,{status:200,headers});
+    }
+    const valid = await checked(cached);
+    if (valid) return valid;
+    const key = request.url+'@'+entry.sha256;
+    if (!mediaFlights.has(key)) {
+      const pending = (async()=>{
+        const headers = new Headers(request.headers); headers.delete('Range');
+        const response = await scope.fetch(new Request(request,{headers,cache:'no-store'}));
+        const result = await checked(response);
+        if (!result) throw Error('Course media integrity check failed');
+        await cache.put(request.url,result.clone());
+        return result;
+      })();
+      mediaFlights.set(key,pending);
+      pending.catch(()=>{}).finally(()=>mediaFlights.delete(key));
+    }
+    return (await mediaFlights.get(key)).clone();
+  }
+
   async function activePackageResponse(scope, request) {
     const meta = await scope.caches.open(META_CACHE_NAME);
     const pointerKey = new URL(ACTIVE_POINTER_PATH, scope.registration.scope).href;
@@ -82,7 +115,25 @@
     }
     if (!pointer?.cacheName) return null;
     const cache = await scope.caches.open(pointer.cacheName);
-    return cache.match(request, { ignoreSearch: true });
+    const cached = await cache.match(request, { ignoreSearch: true });
+    const url = new URL(request.url);
+    if (!/\.(?:webp|png|avif|jpe?g|mp3)$/i.test(url.pathname)) return cached;
+    // Legacy releases were entirely eager. New releases pin the media index
+    // in the activation pointer, so losing it cannot fall back to unchecked media.
+    if (!pointer.mediaIndex) return cached;
+    const indexResponse = await cache.match(new URL(pointer.mediaIndex.url,scope.registration.scope).href);
+    if (!indexResponse) throw Error('Course media index is missing');
+    const indexBytes = await indexResponse.arrayBuffer();
+    const indexHash = [...new Uint8Array(await (scope.crypto || globalThis.crypto).subtle.digest('SHA-256',indexBytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
+    if (indexBytes.byteLength !== pointer.mediaIndex.bytes || indexHash !== pointer.mediaIndex.sha256) throw Error('Course media index integrity check failed');
+    const index = JSON.parse(new TextDecoder().decode(indexBytes));
+    const entry = index.entries?.find(item=>item.url===url.pathname);
+    if (!entry) {
+      if (cached) return cached;
+      throw Error('Media is outside the active course package');
+    }
+    if (!['audio','image'].includes(entry.kind) || !Number.isSafeInteger(entry.bytes) || entry.bytes<=0 || !/^[a-f0-9]{64}$/.test(entry.sha256)) throw Error('Invalid deferred media entry');
+    return verifiedMedia(scope,cache,request,entry,cached);
   }
 
   function attach(scope) {
@@ -99,7 +150,7 @@
         if (!cached) return scope.fetch(event.request);
         const range = event.request.headers.get('Range');
         return range ? rangedResponse(cached, range) : cached;
-      })());
+      })().catch(()=>new Response(null,{status:502,statusText:'Course media verification failed'})));
     });
   }
 
@@ -110,6 +161,7 @@
     rangedResponse,
     shouldBypassPackage,
     activePackageResponse,
+    verifiedMedia,
     attach
   });
 });

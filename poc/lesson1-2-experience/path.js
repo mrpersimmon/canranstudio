@@ -12,6 +12,16 @@
   let media = null, mediaToken = 0, lastView = null, work = Promise.resolve();
   let journeyUI = { tab: 'path', selectedNodeId: null };
   let draftTimer, modalReturnFocus;
+  function revealCurrentNode(view) {
+    const next=view.nodes.find(node=>node.available&&!node.done);
+    const element=next&&root.querySelector(`[data-journey-current],.lp-node[data-id="${next.id}"]`);
+    if(!element)return;
+    const bounds=element.getBoundingClientRect(),nav=root.querySelector('.journey-nav')?.getBoundingClientRect();
+    const bottom=nav&&nav.top>0?nav.top:global.innerHeight;
+    // Directory and reset notices can move even the first node below a fixed
+    // navigation bar. Visibility is geometry, not a completed-count threshold.
+    if(view.completedCount>0||bounds.bottom>bottom-16||bounds.top<60)element.scrollIntoView({block:'center',behavior:'instant'});
+  }
   function stop() { mediaToken++; if (media) { media.pause(); media.removeAttribute('src'); media.load(); media = null; } }
   function render(view) {
     const active = global.document.activeElement;
@@ -36,8 +46,7 @@
     } else if (changed) {
       global.scrollTo({ top: 0, behavior: 'instant' });
       root.querySelector('[data-lesson-title]')?.focus({ preventScroll: true });
-      const next = view.screen === 'map' && view.nodes.find(node => node.available && !node.done);
-      if (next && view.completedCount > 1) root.querySelector(`[data-journey-current],.lp-node[data-id="${next.id}"]`)?.scrollIntoView({ block: 'center', behavior: 'instant' });
+      if(view.screen==='map')revealCurrentNode(view);
     } else if (previousModal && modalReturnFocus) {
       const trigger = [...root.querySelectorAll('[data-action]')].find(el => el.dataset.action === modalReturnFocus.action && el.dataset.id === modalReturnFocus.id);
       trigger?.focus({preventScroll:true});
@@ -153,7 +162,7 @@
       if (action === 'journey-nav') {
         global.scrollTo({ top: 0, behavior: 'instant' });
         root.querySelector('[data-lesson-title]')?.focus({ preventScroll: true });
-        if (id === 'path' && lastView.completedCount > 1) root.querySelector('[data-journey-current]')?.scrollIntoView({ block: 'center', behavior: 'instant' });
+        if(id==='path')revealCurrentNode(lastView);
       }
       if (journeyUI.selectedNodeId) root.querySelector('.journey-preview')?.scrollIntoView({ block: 'nearest', behavior: motion });
       if (action === 'journey-close') root.querySelector(`.journey-node[data-id="${previousId}"]`)?.focus({ preventScroll: true });

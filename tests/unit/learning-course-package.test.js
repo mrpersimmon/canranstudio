@@ -21,5 +21,11 @@ test('continuous course ships matching catalog, HTML digest and bytes for every 
   assert.equal(bytes,manifest.totalBytes);assert.ok(bytes<4*1024*1024);
   assert.equal(manifest.unitId,'NCE-STARTER-06');
   assert.ok(manifest.entries.every(e=>!e.url.includes('/slow-')));
-  for(const id of new Set(Object.values(unit.sourceActors))){assert.equal(unit.entities[id].characterSpecies,'cat');assert.ok(manifest.entries.some(e=>e.url===unit.entities[id].assetSrc));}
+  const media=JSON.parse(fs.readFileSync(local(manifest.mediaIndexUrl)));
+  const all=[...manifest.entries,...media.entries];
+  for(const entry of media.entries){const content=fs.readFileSync(local(entry.url));assert.equal(content.length,entry.bytes,entry.url);assert.equal(sha256(content),entry.sha256,entry.url);}
+  assert.equal(media.totalBytes,media.entries.reduce((n,e)=>n+e.bytes,0));
+  for(const id of new Set(Object.values(unit.sourceActors))){assert.equal(unit.entities[id].characterSpecies,'cat');assert.ok(all.some(e=>e.url===unit.entities[id].assetSrc));}
+  assert.equal(manifest.revision,unit.releaseRevision);
+  assert.ok(media.entries.length>1000,'full media closure is published without preloading it');
 });

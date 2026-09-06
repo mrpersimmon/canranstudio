@@ -11,10 +11,13 @@ const { validateManifest } = require('../../core/course-package-installer');
 test('the home release contains one HTML page and the verified course dependency closure', () => {
   const { files, manifest } = prepare();
   assert.deepEqual([...files.keys()].filter(f => /\.html?$/.test(f)), ['index.html']);
-  assert.equal(files.size, manifest.entries.length + 2);
+  const media = JSON.parse(files.get(manifest.mediaIndexUrl.slice(1)));
+  const closure = [...manifest.entries, ...media.entries];
+  assert.equal(new Set(closure.map(entry => entry.url)).size, closure.length);
+  assert.equal(files.size, closure.length + 2);
   validateManifest(manifest, { scopeUrl: 'https://www.canranstudio.cn/' });
   assert.throws(() => validateManifest(manifest, { scopeUrl: 'https://www.canranstudio.cn/poc/learning-path/' }));
-  for (const entry of manifest.entries) {
+  for (const entry of closure) {
     const content = files.get(entry.url.slice(1));
     assert.equal(content.length, entry.bytes, entry.url);
     assert.equal(digest(content), entry.sha256, entry.url);

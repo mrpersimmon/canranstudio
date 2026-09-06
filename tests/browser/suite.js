@@ -1,7 +1,8 @@
 (async function () {
   'use strict';
-  const config = await (await fetch('/__qa__/config.json')).json();
-  const report = {schema:1, fingerprint:config.fingerprint, token:config.token, status:'running', checks:[], mutations:[]};
+  const shard = new URLSearchParams(location.search).get('shard');
+  const config = await (await fetch('/__qa__/config.json'+(shard===null?'':'?shard='+encodeURIComponent(shard)))).json();
+  const report = {schema:1, fingerprint:config.fingerprint, token:config.token, shard:config.shard, status:'running', checks:[], mutations:[]};
   const status = document.querySelector('#status'), results = document.querySelector('#results');
   const inspection=new URLSearchParams(location.search).get('inspect'), inspected=new Set();
   const pause = () => new Promise(resolve=>setTimeout(resolve,0));
@@ -233,12 +234,12 @@
     if(frame.contentDocument.activeElement!==query('reset-request','challenges'))throw Error('Reset cancellation lost the original button focus');
     if(JSON.stringify(view().record)!==before)throw Error('Cancel reset modified the record');
     await click('reset-request','challenges');await click('reset-confirm');await check('reset-challenges-saved');
-    if(view().completedCount!==11||Object.keys(view().record.challenges).length)throw Error('Challenge reset affected the main route');
+    if(view().completedCount!==unit.checkpointIds.length||Object.keys(view().record.challenges).length)throw Error('Challenge reset affected the main route');
     await click('reset-undo');await check('reset-undo');
     if(JSON.stringify(view().record)!==before)throw Error('Undo did not restore the record');
     await click('journey-nav','progress');await click('reset-request','course');await check('reset-confirm-course');
     frame.contentWindow.fixture.failSave=true;await click('reset-confirm');await check('reset-failed');
-    if(view().completedCount!==11)throw Error('Failed reset reported success');
+    if(view().completedCount!==unit.checkpointIds.length)throw Error('Failed reset reported success');
     frame.contentWindow.fixture.failSave=false;await click('save-retry');await check('reset-course-saved');
     if(view().completedCount!==0||view().nodes[1].available)throw Error('Full reset did not return to the first node');
     await reloadFrame();await check('reset-reload');
@@ -295,7 +296,7 @@
     }
     // Negative controls must fail. This prevents a non-running or overly broad
     // exclusion from silently converting unreadable content into a pass.
-    await open(config.viewports[1]);await click('preview-node','K01');await click('open-node','K01');await click('story-start');await hear();await click('continue');await hear();
+    await open(config.viewports[1]||config.viewports[0]);await click('preview-node','K01');await click('open-node','K01');await click('story-start');await hear();await click('continue');await hear();
     const mutations=[
       ['white-on-light','.lp-chat-bubble{background:#eef1e8!important}.lp-chat-bubble p{color:#f1f7f8!important}', 'color-contrast'],
       ['dark-multiply','.lp-story-character>img{mix-blend-mode:multiply!important}', 'darkened-art'],

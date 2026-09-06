@@ -66,13 +66,14 @@
  .lp-course .lp-interactive-story .lp-picture-options .lp-option{padding:9px}
  .lp-course .lp-interactive-story .lp-picture-options .lp-option-image{height:82px;width:80px}
 }
-.lp-course .lp-cloze+.lp-options{flex-direction:row;gap:8px;margin:16px 0}
+.lp-course .lp-cloze+.lp-options{flex-direction:row;flex-wrap:wrap;gap:8px;margin:16px 0}
 .lp-course .lp-celebration>img{width:180px;height:190px}
 .lp-course .lp-completion-details{margin:12px auto;max-width:440px;text-align:left}
 .lp-completion-details>summary{min-height:44px;padding:10px;color:var(--lp-blue);cursor:pointer;font-weight:700;text-align:center}
 .lp-completion-details>summary:focus-visible{outline:3px solid var(--lp-blue);outline-offset:3px;border-radius:8px}
 .lp-course .lp-celebration .lp-saved-progress{margin-top:12px}
-.lp-course .lp-cloze+.lp-options>.lp-option{flex:1;min-width:0;justify-content:center;padding:12px 8px;gap:7px}
+.lp-course .lp-cloze+.lp-options>.lp-option{flex:1 0 max-content;min-width:0;max-width:100%;justify-content:center;padding:12px 12px;gap:7px}
+.lp-course .lp-cloze+.lp-options>.lp-option>span[lang]{min-width:0;overflow-wrap:anywhere}
 .lp-course .lp-cloze+.lp-options .lp-choice-marker,.lp-course .lp-cloze+.lp-options .lp-choice-marker .lp-icon{width:17px;height:17px}
 @media(max-height:760px){
  .lp-course .lp-lesson:has(.lp-cloze) .lp-question-object{margin:10px auto 4px;height:120px}

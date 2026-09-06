@@ -68,6 +68,8 @@
     }
     invariant(Number.isSafeInteger(manifest.totalBytes) && manifest.totalBytes === totalBytes,
       'course-package manifest totalBytes must equal its entry byte total');
+    if (manifest.mediaIndexUrl !== undefined) invariant(manifest.entries.some(entry => entry.url === manifest.mediaIndexUrl),
+      'course-package media index must be a verified startup entry');
     return manifest;
   }
 
@@ -320,7 +322,8 @@
         revision: manifest.revision,
         cacheName,
         manifestSha256,
-        totalBytes: manifest.totalBytes
+        totalBytes: manifest.totalBytes,
+        ...(manifest.mediaIndexUrl ? {mediaIndex: manifest.entries.find(entry => entry.url === manifest.mediaIndexUrl)} : {})
       });
       await writePointer(cacheStorage, normalizedScope, active);
       const ready = progressSnapshot('ready', manifest, manifest.totalBytes, { warm: false });

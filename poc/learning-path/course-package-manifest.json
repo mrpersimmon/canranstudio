@@ -1,10 +1,11 @@
 {
   "schema": 1,
-  "packageId": "NCE-STARTER-06@lesson1-6-v4.0-course-package-v1",
+  "packageId": "NCE-STARTER-06@lesson1-50-v5.0-course-package-v1",
   "unitId": "NCE-STARTER-06",
-  "revision": "lesson1-6-v4.0",
+  "revision": "lesson1-50-v5.0",
   "scopePath": "/poc/learning-path/",
-  "totalBytes": 3629486,
+  "mediaIndexUrl": "/poc/learning-path/course-package/media-index.json",
+  "totalBytes": 2671083,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -57,14 +58,14 @@
     {
       "url": "/core/course-package-installer.js",
       "kind": "script",
-      "bytes": 14215,
-      "sha256": "665cba26950d957ed272d2049e750ab6f4edaed69134d841b8ca4eb65fd9531c"
+      "bytes": 14538,
+      "sha256": "4c77a4a2f3f88e78c1c7aba5433cce9046ec56001bac0e2cb2c22190291dc86b"
     },
     {
       "url": "/core/course-package-service-worker.js",
       "kind": "script",
-      "bytes": 4038,
-      "sha256": "ec2611702b2d31892b069f2a2115d76df5fa316f4520a529624d530aa4fa447b"
+      "bytes": 7120,
+      "sha256": "4a0ac9e0af0ace28f55f15cafc432c5f199e1ba0a56692c3638987055bddb8ad"
     },
     {
       "url": "/core/learning-challenges.js",
@@ -75,20 +76,20 @@
     {
       "url": "/core/learning-journey.js",
       "kind": "script",
-      "bytes": 12813,
-      "sha256": "f07183627bfcfb3bf6051cf37e15e9afed778e3e73639258a0b9f4a5bb74c991"
+      "bytes": 13316,
+      "sha256": "02822ecee0df89ffc9869b5d8c01569902552b7461b73de52d4b82b55fd3b69c"
     },
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 45075,
-      "sha256": "ff84e5169f042c8c478a0a93e8aaeb9c42da28a6e444a097775a8b5d09c28412"
+      "bytes": 45285,
+      "sha256": "8ae50fbdd4f4e7f1abf8844a2edfec095c9931a7cf19da45cf4a2c2b2dc3d6a0"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 36125,
-      "sha256": "210de22b694f4fd048f0ea2c21e97416aba574f5ca77f52093dfe985a5c374bb"
+      "bytes": 36744,
+      "sha256": "372e8d048740a2a9a962b01729683b7b00e4f1209194a23109a135926605c25d"
     },
     {
       "url": "/core/learning-store.js",
@@ -97,70 +98,10 @@
       "sha256": "b44e22191ef52bee95af732074aae2843b3aeaa2d9b6d80f7e236e0862c26ff1"
     },
     {
-      "url": "/poc/learning-path/assets/dark/car-cutout.webp",
-      "kind": "image",
-      "bytes": 10310,
-      "sha256": "849b614c5827cd1512a3946e437aa770416be1db7f20e0dfffe102449b32bff1"
-    },
-    {
       "url": "/poc/learning-path/assets/dark/cat-cutout.webp",
       "kind": "image",
       "bytes": 44180,
       "sha256": "d7129f3dcee7d4cb721c1ebb1a7dbf39fb553ab4ce0e6909719177bace88ce66"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/changwoo-v1-cutout.webp",
-      "kind": "image",
-      "bytes": 51174,
-      "sha256": "2c7b028d59ba3960d3247b958104a5827ed673ebe74fb56dc3bf8ccb0e9c051d"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/cloakroom-v1-cutout.webp",
-      "kind": "image",
-      "bytes": 41040,
-      "sha256": "e2d8304fd6a240dc7bad27c64e76dc9c47d838546463f5b449ae5d70c8eb27ed"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/customer-cutout.webp",
-      "kind": "image",
-      "bytes": 52056,
-      "sha256": "092605e4e5fcebec85da2e37cd87120083417f6ce0c1f1d4ec88be3eaf60ea81"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/hans-v2-cutout.webp",
-      "kind": "image",
-      "bytes": 73854,
-      "sha256": "0d084bc68cc514d78be3e26c4770f58933f979f391599d3494522f57f366394b"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/keeper-cutout.webp",
-      "kind": "image",
-      "bytes": 49600,
-      "sha256": "8a877fdb4ee5f77afcd3cc7de06ac139193f071ae8393f3eb2c0a809bc28f3f6"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/luming-v1-cutout.webp",
-      "kind": "image",
-      "bytes": 75800,
-      "sha256": "641535c7a376ab0bbceba5a8e9c2842b7c62bd74621ed394d5bfa2e74ff13bec"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/mr-blake-v1-cutout.webp",
-      "kind": "image",
-      "bytes": 78696,
-      "sha256": "ea624389d5d8e7997568fa6966839970d6e020266e5238bb292b5b5ba23bb267"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/naoko-v1-cutout.webp",
-      "kind": "image",
-      "bytes": 40592,
-      "sha256": "4ed5682035cea068b886dd12755342d5aa568b26b078bb08476a7854142ec2d9"
-    },
-    {
-      "url": "/poc/learning-path/assets/dark/xiaohui-v1-cutout.webp",
-      "kind": "image",
-      "bytes": 43476,
-      "sha256": "aafe8ba03a1a37bb23b3af3fa2fdd1ee6b449673968b4189d44519220035dbdb"
     },
     {
       "url": "/poc/learning-path/assets/icons/book.svg",
@@ -307,58 +248,10 @@
       "sha256": "214c79796657aedfff4ff09ae02fcd13ebceb622035a7f892c6d9b0d892c8aa7"
     },
     {
-      "url": "/poc/learning-path/assets/story-v2/attendant-right.webp",
-      "kind": "image",
-      "bytes": 59372,
-      "sha256": "263d9d77771a62dfbc77e67ae1f4d163879cfc7ed19fbaede2a3a31916722ac3"
-    },
-    {
-      "url": "/poc/learning-path/assets/story-v2/ticket-five.webp",
-      "kind": "image",
-      "bytes": 18368,
-      "sha256": "3497518118f7bd55904fe161ad2c9ca8259c2984b98e3c64de2e5bba353b0452"
-    },
-    {
-      "url": "/poc/learning-path/assets/story-v2/umbrella-dot.webp",
-      "kind": "image",
-      "bytes": 17530,
-      "sha256": "146435bdeca2c78b120b1d717fa121101eb65853e23519b2e8e45a0363ed3b3a"
-    },
-    {
-      "url": "/poc/learning-path/assets/story-v2/umbrella-star.webp",
-      "kind": "image",
-      "bytes": 16436,
-      "sha256": "ac90977c6e170109c6c6f22e18b7094ae382cc06ea544fe61cef7a6e2f0a8fb0"
-    },
-    {
-      "url": "/poc/learning-path/assets/story-v2/umbrella-stripe.webp",
-      "kind": "image",
-      "bytes": 16790,
-      "sha256": "5d63ea8a8fd3c2a9fdc7c8a1db47a6484363fa6b0311be49eabfed87d6f933c6"
-    },
-    {
-      "url": "/poc/learning-path/assets/story-v2/visitor-left.webp",
-      "kind": "image",
-      "bytes": 72602,
-      "sha256": "1c39206ff9ad53423fc469e8e01acae026e513aff3cf55ef455730e13a7a8fb6"
-    },
-    {
-      "url": "/poc/learning-path/assets/vocabulary-v2/school.webp",
-      "kind": "image",
-      "bytes": 27398,
-      "sha256": "03784674058ce466130ab97dce3d3a729c143c7b855530f042c8dd6b06d073ff"
-    },
-    {
-      "url": "/poc/learning-path/assets/vocabulary-v2/suit.webp",
-      "kind": "image",
-      "bytes": 18484,
-      "sha256": "a21ef7dc51d1523a3372810444dfe043a3a17a37595d819b02a4eb62688ebe67"
-    },
-    {
-      "url": "/poc/learning-path/boot/course-entry-7f425f7d7277.js",
+      "url": "/poc/learning-path/boot/course-entry-bf9a4f1bdb88.js",
       "kind": "script",
-      "bytes": 17848,
-      "sha256": "7f425f7d7277cf8e9743738f415a60d112fc2b78fcbb824fd1c6b6f27ce42a0c"
+      "bytes": 17875,
+      "sha256": "bf9a4f1bdb885e729b614888eaf4800bb89d4558680f61a01c9caa3dbdf4c325"
     },
     {
       "url": "/poc/learning-path/course-fonts.css",
@@ -367,52 +260,34 @@
       "sha256": "aedc5393bbf29f2cebd08671511a59e8cbc65029a766629a8fe3efd7f53a3c41"
     },
     {
+      "url": "/poc/learning-path/course-package/media-index.json",
+      "kind": "data",
+      "bytes": 251280,
+      "sha256": "579f703a8ca34560f169633b9d3bec702d88fbe8aaf808d515c293836cfed075"
+    },
+    {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 353393,
-      "sha256": "7e1fe49ba02f8318b48d22081699122e89b68f9a958c95d7de0dd967dfb6f919"
+      "bytes": 1936966,
+      "sha256": "de55018bc9bc6573b2b6e5fce4fe2a54cdf6ae55160746d34543a5bdaca3306a"
     },
     {
       "url": "/poc/learning-path/course.css",
       "kind": "style",
-      "bytes": 9279,
-      "sha256": "cf7a5d78c239655e5062994621a7ba9caac73a8b11acc51800e844f51de4acce"
+      "bytes": 9415,
+      "sha256": "5aa53da73b12831e025985403f1690d80ab6a7c7beefe675c2f3f18096a58368"
+    },
+    {
+      "url": "/poc/learning-path/expansion.css",
+      "kind": "style",
+      "bytes": 1820,
+      "sha256": "bb8265cc3869d02eb240e59a8bb3f41dddb24efab2fd4097f9399b5d3465cefd"
     },
     {
       "url": "/poc/learning-path/journey.css",
       "kind": "style",
-      "bytes": 17471,
-      "sha256": "3b08077bf294d73e436b80cd05fc925b3863a8d08f0119cf58bc1d9d6d467a94"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/book.webp",
-      "kind": "image",
-      "bytes": 13012,
-      "sha256": "77b60ba5c80c16ff325ec3febd58b053aa2f1ce22d888763eab74eb6eea3ace8"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/coat.webp",
-      "kind": "image",
-      "bytes": 13058,
-      "sha256": "b9dc84f0ed4600fb6b9b3edeb6e0a7fe3f67d5370ace08f1b9fb13a14113b414"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/dress.webp",
-      "kind": "image",
-      "bytes": 11438,
-      "sha256": "c3d74e69629a46bed53bbf0bd424fc8d32440cf70fcbab13f220f748de79086b"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/handbag.webp",
-      "kind": "image",
-      "bytes": 12716,
-      "sha256": "3a5fffe8aae6b10aefc68ef0951532698c5993aa7e3895bb2dcef037b2bcf9ce"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/house.webp",
-      "kind": "image",
-      "bytes": 14604,
-      "sha256": "56aab8f156520c4f041b0a7b049b859e9cbace9486474abf155dd12938f2ea7c"
+      "bytes": 17549,
+      "sha256": "d000c92315a02396e97d32d2e8431dec2f9d19b820006f2df1871e92910e086f"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/icons/arrow-clockwise.svg",
@@ -535,228 +410,6 @@
       "sha256": "5ac6965c9989afaad195dc0fe739bd7443a7e94e52f8530b9b7d664d20c5d9e5"
     },
     {
-      "url": "/poc/lesson-1-2/course/assets/v3/pen.webp",
-      "kind": "image",
-      "bytes": 10278,
-      "sha256": "5b60eb7ca349f3db6c14837962317b184c3247c3e8dde209035f444ac928f9ca"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
-      "kind": "image",
-      "bytes": 7066,
-      "sha256": "65ccd1e2449496be7c0653ff2854a895aeaf0eb430490b64238b0065c2533b17"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/shirt.webp",
-      "kind": "image",
-      "bytes": 16530,
-      "sha256": "fe47afa8fae1b40994657fbd072588d68faab528332128087b5964988c810bc5"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/skirt.webp",
-      "kind": "image",
-      "bytes": 11024,
-      "sha256": "652be700e821d00f7232b0e73692ff36cc5efb8f0351f3b083ef6081911beaa9"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/assets/v3/watch.webp",
-      "kind": "image",
-      "bytes": 13626,
-      "sha256": "745f76a4df5b76f9357519cea3f11d303574bb24b6e99acb285cc5e41fe24a66"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d01.mp3",
-      "kind": "audio",
-      "bytes": 16749,
-      "sha256": "d118425d4d360f2e0bdede4ab0a0552466efb99ce992a8940936618606b04c64"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d02.mp3",
-      "kind": "audio",
-      "bytes": 11277,
-      "sha256": "77772244a1df3f087c0c8bb7e8a14acdcd2cd6a2fb7a37d7d0b53513a64acb74"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d03.mp3",
-      "kind": "audio",
-      "bytes": 23373,
-      "sha256": "67d9519af7c9ccc673b73a93e73205eaba70c0a59767158709383ae6c55b420b"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d04.mp3",
-      "kind": "audio",
-      "bytes": 11853,
-      "sha256": "741033811d6f3a49586ba91605913aad43e50be1f88bb0c5da275c15d153fd1a"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d05.mp3",
-      "kind": "audio",
-      "bytes": 23373,
-      "sha256": "c57997a99e2744bcd88d567f6abd0b1af46fa836616cf717fa94bc4533573dc5"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d06.mp3",
-      "kind": "audio",
-      "bytes": 15885,
-      "sha256": "34b03316a2b5e0c2880cd90622e69ad21b08d4bb4153197b072727e24f237394"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-d07.mp3",
-      "kind": "audio",
-      "bytes": 17325,
-      "sha256": "182644288c0ddc4ed5fafe099a1ecb4ea0a17f020672b0015b50a7c28f9a7855"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w01.mp3",
-      "kind": "audio",
-      "bytes": 11277,
-      "sha256": "41ca6cc649ca205daf717052e87a38c4f30c35def888f2e6e6bb2c8459cf80ef"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w02.mp3",
-      "kind": "audio",
-      "bytes": 7245,
-      "sha256": "7dfd4ab488d695c9a0efa7493eb81445c7b7d6d3082036afadd1efe52db1edfb"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w03.mp3",
-      "kind": "audio",
-      "bytes": 8973,
-      "sha256": "b67de118cdec7c00a43d95a8ab1d38679a87fb171a4ed4e0062295daf7550308"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w04.mp3",
-      "kind": "audio",
-      "bytes": 7821,
-      "sha256": "866caa64e9033da91c54950ddd705e601b2126ea947a630353bdd14a6d43162a"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w05.mp3",
-      "kind": "audio",
-      "bytes": 8973,
-      "sha256": "5921c0dfd967765df371aeb68934c48989efe8de076e31daaed84c96102587b8"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w06.mp3",
-      "kind": "audio",
-      "bytes": 7821,
-      "sha256": "ece1b6c685dad9d514eaaf8b793c43d95058bc915fc085d70a6d36c06de6d6c0"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w07.mp3",
-      "kind": "audio",
-      "bytes": 10989,
-      "sha256": "499bff59609fe4cb506fbbb375775afbe89dddceb787e2ccab1bd3883a440ed1"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w08.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "5f6122c9e13fdf173cedb13c6d8537ea185428eeea4d9805dfa050031390f5a0"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w09.mp3",
-      "kind": "audio",
-      "bytes": 6957,
-      "sha256": "b2d5b42d861e7af56a17bb14a15137a531f1755e47566f3d398d65d2b1c5c76b"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w10.mp3",
-      "kind": "audio",
-      "bytes": 9261,
-      "sha256": "2871797695cb798ec756d6d18f3265e2001bc149e00b3c52b2959c7c8c22d660"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l01-w11.mp3",
-      "kind": "audio",
-      "bytes": 11853,
-      "sha256": "622e7b96752246db831b7274ecc8303d3e4f79e269c04964c82f686ffba3d1c2"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w01.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "3bc026ae3c241865828bbdf9fbcd591dea82ae8aed922af15363dd970a80dd5f"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w02.mp3",
-      "kind": "audio",
-      "bytes": 9837,
-      "sha256": "cff4142e249ca95819239a17e7043f29f7a43e0759e796ee13ae7ae08b712ad4"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w03.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "e2b1fa75b8452c7a07471a0dc96bb7bffebeede703b35bc9124f06be8c6bfaa2"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w04.mp3",
-      "kind": "audio",
-      "bytes": 9261,
-      "sha256": "a305f2bb197ba2d9c351025eaf57cdc74fc1b007aacfae9e65a145375fbedbdf"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w05.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "78aaeced5faf1da980fa52bffecaa54a6f903c8da5d5ceb37a1a199ebfe5d36a"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w06.mp3",
-      "kind": "audio",
-      "bytes": 9837,
-      "sha256": "0b97030065844fb780e7d1a25e0a190da9aefe554fd020f18efd6f4a007793bf"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w07.mp3",
-      "kind": "audio",
-      "bytes": 9837,
-      "sha256": "152519e2a59eaa4d3f4918c994be85d005c92c974bc1e638daf44f916e902534"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w08.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "189312ec8ff5c13cdfeff053e72559d2e1a4137950eaad5549a3ecab6a2137e2"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w09.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "8d156b887199053c4e802103c0b07b993f7ef7696599dd1de1323c965c50d005"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/l02-w10.mp3",
-      "kind": "audio",
-      "bytes": 8973,
-      "sha256": "bbb6815fef75baa4b4e1e7db2975fa5d1c875772dc3c2d1cefbea62098e564f0"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/nce-u01-c-q-car.mp3",
-      "kind": "audio",
-      "bytes": 19053,
-      "sha256": "cb3fadcdbdbca5162aff32c8f5ac218d3ae14d52e30883ebb17614f4c547dd03"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/nce-u01-c-q-coat.mp3",
-      "kind": "audio",
-      "bytes": 18765,
-      "sha256": "df21029b3c8290d10d34a488f41a5315c607393956de9630db103d32c696d1f4"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/nce-u01-c-q-house.mp3",
-      "kind": "audio",
-      "bytes": 18189,
-      "sha256": "60a6b8511e1c42bea017c391d34e3e0538cce11004bd1ba5aa23ebdaa61f75b8"
-    },
-    {
-      "url": "/poc/lesson-1-2/course/audio/nce-u01-c-q-watch.mp3",
-      "kind": "audio",
-      "bytes": 19053,
-      "sha256": "93214bab4ac2341b435414685681edc4940833d3713c61d3f08d35ed49fb0703"
-    },
-    {
       "url": "/poc/lesson-1-2/course/path.css",
       "kind": "style",
       "bytes": 33990,
@@ -765,596 +418,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 12774,
-      "sha256": "efbf13ced449210944a838c7e60d548a197ef9c93c36755def223f77a82a7469"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d01.mp3",
-      "kind": "audio",
-      "bytes": 29421,
-      "sha256": "3c92bec27b63a1de7a841bfc60e466d6b892500b5b1fe2d058a704c629c3eda0"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d02.mp3",
-      "kind": "audio",
-      "bytes": 17613,
-      "sha256": "e06d0846d6d604a86d11492ad7859e9aef0cebd8c4ceac6d893c959bf0a02282"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d03.mp3",
-      "kind": "audio",
-      "bytes": 13869,
-      "sha256": "437f39e56ec97a4aa2e19bc3ddf69e54ad9c747d20ec29f394902a8c1ca06186"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d04.mp3",
-      "kind": "audio",
-      "bytes": 14445,
-      "sha256": "c06c2bb30e3d7ac1848144abc4cd7d59951c6c0e81da8bcd699789d5954d7023"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d05.mp3",
-      "kind": "audio",
-      "bytes": 25101,
-      "sha256": "ac90f8bfa2ce655e60d1e09c941683d571fcd6c133e209e1cf4b9bf06ba9696e"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d06.mp3",
-      "kind": "audio",
-      "bytes": 23661,
-      "sha256": "40dd61ea4200c4aba9ec808bb3a8ee60df8924540a50756ff0a009cc3f3a5fd3"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d07.mp3",
-      "kind": "audio",
-      "bytes": 13293,
-      "sha256": "b162d361a130caa70860b7ed5012c18ea87c401f91c7005d2b80b7956200dee2"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d08.mp3",
-      "kind": "audio",
-      "bytes": 18477,
-      "sha256": "a94305c246ff8a7ba68603ecbc0ce8e6fadd2bf0466cfdad9f57356a30ae78bb"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d09.mp3",
-      "kind": "audio",
-      "bytes": 15885,
-      "sha256": "35b480357854adcc8e9167c06250b95acf0d1e94361247600d1f823a546f6d48"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d10.mp3",
-      "kind": "audio",
-      "bytes": 13293,
-      "sha256": "953172c1ab8f1ec721042843d5ab0ab0e02f10cc04014cd0c226af96afd113aa"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d11.mp3",
-      "kind": "audio",
-      "bytes": 15309,
-      "sha256": "7c1010d19228f99b7bd0102e53e21f921ab2b788b9cb9a3d4221c5aa4bcca63c"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-d12.mp3",
-      "kind": "audio",
-      "bytes": 19053,
-      "sha256": "91acdabcc6db7a42b71594545699f7b09b5c766c490f37a95e14ea1fbd95abe9"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w01.mp3",
-      "kind": "audio",
-      "bytes": 10413,
-      "sha256": "9c3f69b5b3a2f5e046bf589bdbc2f470fff50bb9b234f042c67d38aa2f6adc26"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w02.mp3",
-      "kind": "audio",
-      "bytes": 9837,
-      "sha256": "16efe0e70fb6cc23bc25401a7d2974d340b383ba4a8e02343c0cebd2349b120c"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w03.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "d5b01a995b1631561527016590d434673a4e5713a5fde939b19ecb7dcbbf4bd7"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w04.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "92f8aec1e77872f396a15c6a22de44fda903ed920c60b8a4a50fea250434ab36"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w05.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "10c71d472ddf23548488549777a70957070cf4c59a6514590f151d01857eff2b"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w06.mp3",
-      "kind": "audio",
-      "bytes": 9261,
-      "sha256": "e28daa9fd31ae141ff5dac65ce054b142cd5faab89332ba0b3dbc45044aa16d4"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w07.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "d5798a4a06c135cd32581b69feb8cdfe8cda0c3991490bb54f2dce6db8ffeec1"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w08.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "fbcb7283efcd04b29fe18ef50eade06c65e0ff33ac51f30d4c6ce645518d1de4"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w09.mp3",
-      "kind": "audio",
-      "bytes": 7821,
-      "sha256": "bb37f08ad3a3a77c3e82adc05c675e249c72cc80e3123270c8eba28c13bd1a75"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l03-w10.mp3",
-      "kind": "audio",
-      "bytes": 10413,
-      "sha256": "7c5647dbda753d68fbf68c18fdbbe28cc8f39be43b099a4674fbf8d052c4cdca"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p01.mp3",
-      "kind": "audio",
-      "bytes": 17613,
-      "sha256": "067a3f25cea0da6f594b242918ab64f0ba1df9b64afab607cf7498548a4e44ba"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p02.mp3",
-      "kind": "audio",
-      "bytes": 18765,
-      "sha256": "bab903c6c9ad8810afb2cb9cb8d6805d808ba7293baae9ba289d5c29224fb4cd"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p03.mp3",
-      "kind": "audio",
-      "bytes": 15885,
-      "sha256": "4783259af931f47bd4b27626b8645050363c8ff17a1e86834d8bc855e91fca4f"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p04.mp3",
-      "kind": "audio",
-      "bytes": 17613,
-      "sha256": "e17eb2a004cbd8e765762d39409e7337e3c9a024f05ea6260ab235693b24f319"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p05.mp3",
-      "kind": "audio",
-      "bytes": 16749,
-      "sha256": "bc111e78c76d22d2bf3cec284fbee51c829a4c2073473bd5fd2dfa75c0c3988e"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p06.mp3",
-      "kind": "audio",
-      "bytes": 18765,
-      "sha256": "db219e5980d19a00c7a3ecf8a832290d2eb37fa0bd5ccad97923332ad362cc8a"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p07.mp3",
-      "kind": "audio",
-      "bytes": 17037,
-      "sha256": "d942d673c2e9368180e09f917f05fd6b27bf33f77d692a5cd1f49d38a2fc2f60"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p08.mp3",
-      "kind": "audio",
-      "bytes": 16749,
-      "sha256": "271025442ed4fa7724984f9a151072a52f590215b6b5fcfc9ee44043534bae3a"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p09.mp3",
-      "kind": "audio",
-      "bytes": 17613,
-      "sha256": "03ce438bfae1a7cbab7ad90892a3deda675c702261cf8c74ed5189c165e010c4"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p10.mp3",
-      "kind": "audio",
-      "bytes": 17037,
-      "sha256": "90942a6b5ba378285893b509c37fef908b9a8a254231b546db94407fbd072d03"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p11.mp3",
-      "kind": "audio",
-      "bytes": 17613,
-      "sha256": "6c6696322f562f8d3e643b807d47eaad8040b2849b5e4b01dbd7949ff132ce43"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p12.mp3",
-      "kind": "audio",
-      "bytes": 17901,
-      "sha256": "d8041f85b3071d1c25f5b91825b061ac2e24df3c94bc66e56a7c5ef198d337a4"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p13.mp3",
-      "kind": "audio",
-      "bytes": 19341,
-      "sha256": "4d969165d4b486b401a30b28a613e154463665235e3ef9dafcbcb91e523eef9a"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p14.mp3",
-      "kind": "audio",
-      "bytes": 17613,
-      "sha256": "f1bd1e31ed7a0da16be7f93ca970830b00daffbf537a807eea58e7efbf66334b"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-p15.mp3",
-      "kind": "audio",
-      "bytes": 19053,
-      "sha256": "5f3bc256eeba9d78a489f34bf7fe0a73c60ac8d79b8ae5e1140ddc392604fc6d"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-w01.mp3",
-      "kind": "audio",
-      "bytes": 8685,
-      "sha256": "22ae73322759c4d542d49a474675f287ce6e5b7464f1e5fd69e668a954d33f07"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-w02.mp3",
-      "kind": "audio",
-      "bytes": 10125,
-      "sha256": "50460b5f7a104306d160e5d142b655408774471317bfb4708ab90e28cc981d19"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-w03.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "03fb676ee3aab04e84adff2f3d5d7ce7a87a8369947798c24445705e472f9273"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-w04.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "681a03ae33c212aac6e778279fdb104988c702f044042fbafdaa709e0e47717b"
-    },
-    {
-      "url": "/poc/lesson3-4-experience/audio/l04-w05.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "b140b91667d010400da1b1871b404800e3d157f99d2d0b504780ea2ca2a49418"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/assets/vehicle-ford-v1.avif",
-      "kind": "image",
-      "bytes": 22429,
-      "sha256": "1e6cd35244931e7a79df01b518ab78a7a9df91eb5633be255ac81152c17c5e8d"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/assets/vehicle-mercedes-v1.avif",
-      "kind": "image",
-      "bytes": 22520,
-      "sha256": "2b0249f0276dd897f1f08fdcc283b861fc65af8c0d98b2adc9c0d5d3b5da2b50"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/assets/vehicle-mini-v1.avif",
-      "kind": "image",
-      "bytes": 25947,
-      "sha256": "ae30a7a26395fff25e86ea86318b2a20a70d79915d1db4d94dd66b8496b607f8"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/assets/vehicle-peugeot-v1.avif",
-      "kind": "image",
-      "bytes": 24658,
-      "sha256": "905757274273eeb631b423fb4be872d4f7de5f3dc057656a065787f5622126b2"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/assets/vehicle-toyota-v1.avif",
-      "kind": "image",
-      "bytes": 23207,
-      "sha256": "dfb47416683ec78b7a981752375cdd9c021a8250579ecc3274caf4d2906eb12c"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/assets/vehicle-volvo-v1.avif",
-      "kind": "image",
-      "bytes": 24856,
-      "sha256": "36937414b4e04fc3dcb78d812754af5dd54c402d7faf4cc50a2f79b35ab45019"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d01.mp3",
-      "kind": "audio",
-      "bytes": 13581,
-      "sha256": "17f4ff4f3fbec37b74bd1f65c0cae57e22773e3147b18d9caaa145f75e418920"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d02.mp3",
-      "kind": "audio",
-      "bytes": 21357,
-      "sha256": "aee44aa25816909eaed7da23336b8480aa7047a78693da9291c7225ce5aaceee"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d03.mp3",
-      "kind": "audio",
-      "bytes": 23373,
-      "sha256": "912628e916fcd7fc1a438265f64262b78ae742c02a1014407d7c49ffb1540294"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d04.mp3",
-      "kind": "audio",
-      "bytes": 20781,
-      "sha256": "b1c16e419b36b3b50fcd710910a4606c4751701a9086dc21422275d5b6bff1ca"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d05.mp3",
-      "kind": "audio",
-      "bytes": 16173,
-      "sha256": "3d1bf0a51b502818286cb8b54dd773aea25ee1564de781d53aed6cb22d1eb0a2"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d06.mp3",
-      "kind": "audio",
-      "bytes": 19917,
-      "sha256": "3959acfb387e5ad40eca949e4cc0c3038c49ef44b1d8871b489b238523767fc3"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d07.mp3",
-      "kind": "audio",
-      "bytes": 16749,
-      "sha256": "d63a8ee31a72caf7a68ff352ea7473210d817af760e95c59bff00f8b28dc106f"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d08.mp3",
-      "kind": "audio",
-      "bytes": 16461,
-      "sha256": "0f7f410996ec7ddd2e925104270da5e008d7b73f2c4d0b52db80bcb6affec3b6"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d09.mp3",
-      "kind": "audio",
-      "bytes": 22797,
-      "sha256": "e4d2c5f1f8e7400cab074c27d3ee5792cfee940b0475043a4e805d0510cd249f"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d10.mp3",
-      "kind": "audio",
-      "bytes": 17325,
-      "sha256": "74f9af62692eb66f4fa3cbdc45fae4088d1212b47b5ad9f6c8b83021edd95db1"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d11.mp3",
-      "kind": "audio",
-      "bytes": 15597,
-      "sha256": "d826ba3240f12ef8e52d60aa625b7dec09e3ac41b4152a4caa27f524ce42d92e"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d12.mp3",
-      "kind": "audio",
-      "bytes": 17901,
-      "sha256": "883d37170b5ef3e2b10b5dbed1f9820a2d668fc4160831b1b1a45bf8e25c8c11"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d13.mp3",
-      "kind": "audio",
-      "bytes": 18189,
-      "sha256": "115decf7cc68007c10d41d876b394b5dc4489dcfb488270c4692cdb072384652"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d14.mp3",
-      "kind": "audio",
-      "bytes": 16749,
-      "sha256": "921f84768fcfc0b6a41683e9597c1b706168f672b910a3be77d9fbcff5f7e767"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d15.mp3",
-      "kind": "audio",
-      "bytes": 18765,
-      "sha256": "ad7dee504f2e17f839e97390c87558f85432099d264844bed40ae8a302b10cde"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d16.mp3",
-      "kind": "audio",
-      "bytes": 17037,
-      "sha256": "8f4b387f396bd587bccf655be6251952aaa9291a405b7e89a552995582d1f5a6"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d17.mp3",
-      "kind": "audio",
-      "bytes": 16749,
-      "sha256": "d6fae08f8e288914d9c411d24a0260e57e3190fabe856f6946a714e14c00c91b"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d18.mp3",
-      "kind": "audio",
-      "bytes": 20493,
-      "sha256": "9fe773bd35ac4704fb16a68831d69d774d4002022e25bd5bab703b6cb710039d"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d19.mp3",
-      "kind": "audio",
-      "bytes": 19629,
-      "sha256": "7ffc4ef08a11d65794ff64fe0c2595d6dac89f598ab04da673fd38fa14b9a3cd"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-d20.mp3",
-      "kind": "audio",
-      "bytes": 15597,
-      "sha256": "a9a8df1b7c9c690ec746a87aad6c5db751c36b83b1568f94858a1dbffce86291"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w01.mp3",
-      "kind": "audio",
-      "bytes": 23373,
-      "sha256": "a6189afc7289246780eca2f80db01c2f0d4bc119bb8c38efea3f6db8a2a8645b"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w02.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "2367f9ac6139f658c8535fb64662c96f6f797a56fb88d701789dd31df063855b"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w03.mp3",
-      "kind": "audio",
-      "bytes": 9261,
-      "sha256": "e5b6f41c28bf16c3b514245e90025f249b38df8454f6e7c26ab07dec2e59ab6f"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w04.mp3",
-      "kind": "audio",
-      "bytes": 8685,
-      "sha256": "6a9e9f4208ea971b7508b71814a148a83898ac21bf0cca511384d62793cac2be"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w05.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "8940d3fff69e4594689f4446a1a5fee584d87842ae254ea4f9aaedc117062488"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w06.mp3",
-      "kind": "audio",
-      "bytes": 10413,
-      "sha256": "f25fa2e5884b1d48c010ee1385fb83961e4051277ee7d5511180788757df0800"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w07.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "628b7fc357392fc32e288c2f4e0b9652b878163e6ea1f851339188d3bfaae829"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w08.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "26ed934e64a0707feeb07464562a774dd47f2202407fa100a4c90042385451ac"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w09.mp3",
-      "kind": "audio",
-      "bytes": 9261,
-      "sha256": "8e328c625421cfa6a14e8c1e5b547c7a15aad7e83cd97bea323f2facde84ec8e"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w10.mp3",
-      "kind": "audio",
-      "bytes": 8685,
-      "sha256": "93f2e974807dcf9a660673dc9ab840e3c47de87f71b770a9bf21ed81c1034c28"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w11.mp3",
-      "kind": "audio",
-      "bytes": 12141,
-      "sha256": "c57dc3475f3d0363633bfd91de394a3d751e5557f7f38df5da64151f80d909bb"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w12.mp3",
-      "kind": "audio",
-      "bytes": 13293,
-      "sha256": "9d846cedd6b384320a0e887126d6720e25df6e20de8b84449b7e36eee48bbce5"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w13.mp3",
-      "kind": "audio",
-      "bytes": 10989,
-      "sha256": "0bb28cb203bb51062f8fc1d852f0ffe47691962da2a33adce58a9eab2648202b"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l05-w14.mp3",
-      "kind": "audio",
-      "bytes": 7821,
-      "sha256": "b6287d4c08d6d539d59f74ab620aa38e552ad9146dc60c3d119438c54f11199d"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-p01.mp3",
-      "kind": "audio",
-      "bytes": 23949,
-      "sha256": "5af463fba4eac57b26dd83f752e5f0087cf6fb3b4ab6dffdf99d8d4048e63e21"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-p02.mp3",
-      "kind": "audio",
-      "bytes": 25101,
-      "sha256": "4e5c68864e6f083a381fee422ba237c99e6c46d67077faf63edda2292048dedd"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-p03.mp3",
-      "kind": "audio",
-      "bytes": 24525,
-      "sha256": "d7bd442b3d49a76de9b2a6bba955d98fa589ed7c29e3aa9d679b40ae94fd3cf4"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-p04.mp3",
-      "kind": "audio",
-      "bytes": 29421,
-      "sha256": "a0c5e741f3d59096af3573901076f703c68c34d8cfe54dbc1e8b376e0b3995ea"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-p05.mp3",
-      "kind": "audio",
-      "bytes": 21645,
-      "sha256": "b7fc58e2b5ff8e78d0e487c8e2f66da0f7ff31d2641e1198aa84f51d0bd57f34"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-p06.mp3",
-      "kind": "audio",
-      "bytes": 25101,
-      "sha256": "cf2da9f6290834dbbfdc33b932f9289fcd4a3281e727a06833565e15f0ecfcce"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w01.mp3",
-      "kind": "audio",
-      "bytes": 8397,
-      "sha256": "d875a6951c5cb25217e3c35b9dae4d6468b4cb374a16416c02eeff7f9d5c64ac"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w02.mp3",
-      "kind": "audio",
-      "bytes": 10701,
-      "sha256": "006ac7d7d82c5dabf3dcbeef1d4f692eba2b8a049091a626e3a4da6a5b9419f1"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w03.mp3",
-      "kind": "audio",
-      "bytes": 9837,
-      "sha256": "002fb7d7da4160ddd0ef5768aa41d8a4abce1dbcf4db3efb1c42c049f43023b0"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w04.mp3",
-      "kind": "audio",
-      "bytes": 10989,
-      "sha256": "0b3ec384cfd83b9753f6d9658d1cd754f0646ea3c1172ebe2c11bcf62926a688"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w05.mp3",
-      "kind": "audio",
-      "bytes": 10701,
-      "sha256": "a8cfee03c6f47d94617cc5038ba4e4911ff79531bf8a46e194a8cd5376ee99c6"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w06.mp3",
-      "kind": "audio",
-      "bytes": 9549,
-      "sha256": "b03093f3f059ad940bbe6d3a72de1db3b59d8f471ae0aab2b139cb372b5dd40c"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w07.mp3",
-      "kind": "audio",
-      "bytes": 10989,
-      "sha256": "2a2f517ae30e3281e632bc6e8d5524f7f48696d9c9c8cb6fe093758be1b2ed2b"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w08.mp3",
-      "kind": "audio",
-      "bytes": 11277,
-      "sha256": "325ef05ce194c54d89c1d3b1afc2bb43b0c4cdee14a1589337ab29a2857b2fae"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w09.mp3",
-      "kind": "audio",
-      "bytes": 8973,
-      "sha256": "7cb55844afcfb7be290dbb93d31e811ba66b29749e8ed7188968064f7a2eccc9"
-    },
-    {
-      "url": "/poc/lesson5-6-experience/audio/l06-w10.mp3",
-      "kind": "audio",
-      "bytes": 8109,
-      "sha256": "e3d17311e19e66e7c8d103a61ae9212c80dc0a721aa60a92d5095a226fac2cda"
+      "bytes": 13135,
+      "sha256": "0ff2e1a996405c5f30fdc0e2db2b61f4a761bfa515b66c2730c689165dd00b44"
     }
   ]
 }

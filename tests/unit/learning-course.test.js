@@ -10,15 +10,15 @@ const unit=catalog.getCourse();
 
 const {setup}=require('./support/course-harness');
 
-test('all six lessons complete through actual runtime actions, with every original dialogue once',()=>{
+test('all fifty lessons complete through actual runtime actions, with every original dialogue once',()=>{
   assert.deepEqual(catalog.validateCourse(unit),[]);
   const h=setup();
   h.send({type:'open-node',nodeId:'C04'});assert.equal(h.view().screen,'map');
   for(const n of unit.nodes)h.finish(n.id);
-  assert.equal(h.view().completedCount,11);
+  assert.equal(h.view().completedCount,unit.checkpointIds.length);
   assert.equal(Object.keys(h.view().record.completed).length,Object.keys(unit.activities).length);
   for(const ref of unit.dialogueRefs)assert.ok(h.view().record.sourceContacts[ref].modes.includes('heard'),ref);
-  const restored=setup({adapter:h.adapter});assert.equal(restored.view().completedCount,11);
+  const restored=setup({adapter:h.adapter});assert.equal(restored.view().completedCount,unit.checkpointIds.length);
   restored.send({type:'course-summary'});assert.equal(restored.view().screen,'celebration');
   const recap=scene.createRenderer(unit).render(restored.view());assert.match(recap,/<details class="lp-completion-details">/);assert.match(recap,/<dt>看例子练习<\/dt>/);assert.match(recap,/<dt>选择冠词<\/dt>/);
   const before=JSON.stringify(h.adapter.load(h.rt.storageKey));h.finish('C07');assert.equal(JSON.stringify(h.adapter.load(h.rt.storageKey)),before,'completed-node replay does not change learning evidence');
@@ -61,7 +61,7 @@ test('cross-lesson review is limited, does not duplicate a target, and preserves
   assert.equal(r.view().dueCount,4);r.send({type:'review'});
   const ids=[];while(r.view().screen==='activity'){ids.push(r.view().activityId);r.step();assert.ok(ids.length<=4);}
   assert.equal(r.view().screen,'review-complete');assert.equal(new Set(ids.map(id=>unit.activities[id].targetId)).size,4);
-  assert.equal(r.view().record.reviewEvents.length,4);assert.equal(r.view().completedCount,11);
+  assert.equal(r.view().record.reviewEvents.length,4);assert.equal(r.view().completedCount,unit.checkpointIds.length);
   for(const [id,v]of Object.entries(initial))assert.equal(r.view().record.results[id].initialEvidence,v.initialEvidence);
 });
 

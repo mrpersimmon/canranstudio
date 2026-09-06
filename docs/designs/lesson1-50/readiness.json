@@ -1,0 +1,106 @@
+{
+  "checkedAt": "2026-09-07",
+  "scope": "Textbook Lesson 1–50 / 25 paired sections",
+  "mode": "read-only readiness assessment",
+  "verdict": "Foundations sufficient to start production; not fifty-lesson implementation or release readiness",
+  "mandatoryUserInputs": [],
+  "current": {
+    "branch": "codex/duolingo-version",
+    "commit": "fac029f858bb6fa9e99857bf2256d4317631cd47",
+    "lessonIds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "chapters": 3,
+    "nodes": 11,
+    "activities": 52,
+    "optionalChallengeSets": 4,
+    "optionalChallengeQuestions": 24,
+    "catalogErrors": 0,
+    "packageEntries": 225,
+    "packageBytes": 3629486,
+    "packageIntegrityErrors": 0,
+    "packageMapping": "scripts/build-learning-path-release.js sourcePath: /poc/lesson-1-2/course/ -> poc/lesson1-2-experience/"
+  },
+  "source": {
+    "path": "/Users/permission/Downloads/外研社新概念英语智慧版1.pdf",
+    "pdfPages": 330,
+    "firstFiftyPdfRange": [
+      35,
+      134
+    ],
+    "printedRange": [
+      2,
+      101
+    ],
+    "lessonNumberAnchorsVerified": 50,
+    "pagesRenderedAndOverviewInspected": 100,
+    "detailedPagesInspected": [
+      83,
+      95,
+      109,
+      115,
+      134
+    ],
+    "allSentencesProofread": false,
+    "extractionQuality": "OCR text contains spelling losses and Chinese corruption; page verification required"
+  },
+  "legacy": {
+    "lesson7to20": {
+      "pairs": 7,
+      "sourceRecords": 476,
+      "candidateAudio": 314,
+      "fileOrTextIntegrityErrors": 0,
+      "listeningAccepted": false,
+      "manifestStatus": "local-poc-candidate-unreviewed"
+    },
+    "lesson21to48": {
+      "structuredUnitsFoundInInspectedCatalogs": 0,
+      "originalTextbookAvailable": true
+    },
+    "lesson49to50": {
+      "legacyPagesAvailable": true,
+      "catalogContentLessons": [
+        49
+      ],
+      "catalogSourceRecords": 32,
+      "audioFileCounts": {
+        "lesson49": 52,
+        "lesson50": 100
+      },
+      "audioCoverageAndListeningAccepted": false
+    }
+  },
+  "capabilities": {
+    "imagegen": "tool available and current asset provenance present; no new generation in this assessment",
+    "tts": "Kokoro 0.9.4 environment, ffmpeg and frozen model cache present; no fresh inference in this assessment"
+  },
+  "scopeProbe": {
+    "type": "in-memory only range/pair extension",
+    "errors": [
+      "first six textbook lessons required",
+      "textbook Lesson pair sections required"
+    ],
+    "syntheticCourseWasBuilt": false
+  },
+  "prerequisites": [
+    "Source-indexed 50-lesson teaching and assessment blueprint",
+    "General course-range validation and data-driven labels",
+    "Course loading and 25-section navigation/performance verification",
+    "Explicit current-user progress migration including challenges, teaching, reviews and reset backup",
+    "Narrative, spatial, action and tense teaching interactions",
+    "Restorable media generation pipeline and per-asset review",
+    "Expanded actual-browser, media, storage and deployment acceptance"
+  ],
+  "limits": [
+    "No new course implemented or deployed",
+    "No fresh complete browser flow run in this assessment",
+    "Existing six-lesson release evidence is not fifty-lesson coverage",
+    "No fifty-lesson performance or storage stress test yet",
+    "No full textbook sentence-by-sentence proofread yet"
+  ]
+}

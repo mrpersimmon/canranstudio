@@ -1,0 +1,280 @@
+{
+  "date": "2026-09-07",
+  "releaseRevision": "lesson1-50-v5.0",
+  "baseline": "fac029f858bb6fa9e99857bf2256d4317631cd47",
+  "scope": {
+    "lessons": 50,
+    "chapters": 25,
+    "nodes": 129,
+    "activities": 576,
+    "originalStoryLines": 349,
+    "challengeGroups": 26,
+    "challengeQuestions": 190
+  },
+  "browser": {
+    "status": "passed",
+    "fingerprint": "23010be1188c8fbf13a646d7e5372798c1497f7c9aa431a00d047b79a32c8e98",
+    "finishedAt": "2026-09-06T18:26:02.933Z",
+    "states": 14716,
+    "viewports": [
+      "1440x900",
+      "320x568",
+      "420x856",
+      "906x801"
+    ],
+    "faultControls": [
+      "completion-skips-map",
+      "completion-button-offscreen",
+      "white-on-light",
+      "dark-multiply",
+      "missing-image",
+      "opaque-art",
+      "theme-discontinuity",
+      "uneven-node-spacing",
+      "off-center-arrow",
+      "route-progress-in-lesson"
+    ],
+    "allInjectedFaultsCaught": true,
+    "errors": 0,
+    "fullReceiptSha256": "30e3a554ef976f8d8bd1447691b6d6d9c8976d9b13f219b73dd929d40a19d34c"
+  },
+  "media": {
+    "status": "passed",
+    "fingerprint": "53ba4bd6984894854b11a48c1ca4cb99fd57e7589c2e5a8374880f36dd9f7378",
+    "finishedAt": "2026-09-06T18:03:40.639Z",
+    "recordings": 1231,
+    "minDuration": 0.5059583333333333,
+    "maxDuration": 4.513958333333333,
+    "maxPeak": 0.7902616858482361,
+    "fullReceiptSha256": "af2c2c9d349fcd31b78e36631783b236f3ea40dd53242702e291925a891d9b27"
+  },
+  "nativeMedia": {
+    "status": "passed",
+    "revision": "lesson1-50-v5.0",
+    "samples": [
+      {
+        "ref": "L01-D01",
+        "audio": {
+          "src": "/poc/lesson-1-2/course/audio/l01-d01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.368
+        },
+        "hash": "d118425d4d360f2e0bdede4ab0a0552466efb99ce992a8940936618606b04c64",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L07-D01",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l07-d01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.463917
+        },
+        "hash": "d908f500945facfc5a14e87557471e8b3c59aa18b70f6ddc21a9c1b92a707a03",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L21-D01",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l21-d01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.67275
+        },
+        "hash": "dd6988bf1f1ad2dc326207fafce3410ccd5e1bc64b86f16dfebdc156b85f061c",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L25-D01",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l25-d01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.835167
+        },
+        "hash": "6eb31a35f5f101dd8b23388aef074fb30d22ab18d7d83ddce9d351e468b4905e",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L27-NUM10",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l27-num10.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.506833
+        },
+        "hash": "e9d983323727cbc5e3a937a086d0aef399d65127907a6a89c0a39d47905cc92b",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L31-D04",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l31-d04.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.650375
+        },
+        "hash": "c1b76de9c610a5c93ffc75e63e59c60d84ba6fa3b24a5dee16ef953729f1c63c",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L33-D08",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l33-d08.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 2.045583
+        },
+        "hash": "ebb8d705799b7de7248282e6d7e004ff415043f645e8c1c358a869093fce5912",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L35-D03",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l35-d03.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.669792
+        },
+        "hash": "937128a4af7528012854ac73d58c7086bd3685e0fcb6b728f0eb5bf04e8ef348",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L37-D03",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l37-d03.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.527208
+        },
+        "hash": "cfd82a29cb188de0af0160b1549875ebc2b9d98f8114ea3754d862464997dbd6",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L39-D08",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l39-d08.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.062708
+        },
+        "hash": "5ec51822daba7f2e9398234bfbdbe8b11ab443178c11f5e313db56e0f03203a8",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L41-D06",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l41-d06.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.18925
+        },
+        "hash": "e4d2521eac0fac0fbd701afcf47dab2f55ee03c6394cd2ad7c56abad6740492c",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L43-D01",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l43-d01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.407625
+        },
+        "hash": "54ea775927beeabc30fc8941018a9d24e02879a3bd4db587ad24d408cccb83d9",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L45-D03",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l45-d03.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.127792
+        },
+        "hash": "e5a7b3904606d52ec82616d6cb863b74881cd99464a1d58b594e1ad285ec9ecb",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L47-D01",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l47-d01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 1.35
+        },
+        "hash": "b24e417dc7cd01b1f791101e4955ce9b509c73be142ff7ad62ee91fd5341a857",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L49-D15",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l49-d15.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 3.706042
+        },
+        "hash": "5613b9cecb209383d95f92620219f39639be11c4f2bdc1d69f979ad0a6a7baa9",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      },
+      {
+        "ref": "L49-ORD01",
+        "audio": {
+          "src": "/assets/lesson1-50/audio/l49-ord01.mp3",
+          "ended": true,
+          "errors": 0,
+          "duration": 0.932458
+        },
+        "hash": "1f05037446a63e44d461bc923e90984ed80d9265010ff04e7fa8dcbd63bd04a4",
+        "rangeStatus": 206,
+        "rangeBytes": 12
+      }
+    ],
+    "errors": [],
+    "offlineReplay": true,
+    "upgrade": {
+      "preservedNodes": 11,
+      "next": "L07-STORY",
+      "loadedScene": true
+    },
+    "finishedAt": "2026-09-06T18:26:28.254Z",
+    "fullReceiptSha256": "fcbf7294e0e44ab332de24a09738c999b6c87319d590dfccbf789ade73977db0"
+  },
+  "package": {
+    "startupFiles": 69,
+    "startupBytes": 2671083,
+    "totalFiles": 1357,
+    "totalBytes": 25514004
+  },
+  "boundaries": [
+    "Browser suite drives deterministic media fixtures to cover all states; native Audio verification is separately listed.",
+    "Native ended, waveform checks and screenshots do not claim human listening acceptance for every recording.",
+    "Six screenshot flows used isolated test progress. The in-app preview record was restored to its original empty value.",
+    "No push or production deployment in this implementation task."
+  ],
+  "unitTests": {
+    "status": "passed",
+    "command": "npm test",
+    "tests": 85,
+    "pass": 85,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 97380.542375,
+    "logSha256": "ca97c0e7220383a1fe228f66bd05d8bbdd9623da28feb244ff4595315b94650a"
+  }
+}

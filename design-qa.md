@@ -1,21 +1,43 @@
-# 当前版本验收 · 本次进度与可选输入挑战
+# 当前版本验收 · Lesson 1–50
 
-2026-09-06 · `codex/duolingo-version`
+2026-09-07 · `codex/duolingo-version` · `lesson1-50-v5.0`
 
 final result: passed
 
-本地实现和验收完成，预览：http://127.0.0.1:42817/ 。业务代码已提交并推送为 101fcb6；首次远端检查发现测试动作等待竞态，修复后本地完整 1,757 个状态重新通过。官网发布状态以本次发布记录为准。
+前 50 课的本地实现与检查完成。25 个 Lesson 双课分区、129 个关卡、576 个活动、349 段教材原文，以及 26 组选做输入挑战的 190 道题已接入正式课程入口。详细内容见 [课程地图](docs/designs/lesson1-50/course-map.md)。
 
-- 顶部条只统计本次闯关，完成页保持 100%；路线总数只在路线/记录页出现。定位箭头的实际横纵中心偏差均为 0。
-- 增加四组可选输入挑战，共 24 题，包含中文到英文整句输入和句内填词；草稿可恢复，提示/错后修改证据独立记录，不改变主线进度。
-- “记录 → 重新开始”可只重置输入挑战或全部从零开始；也能单独重置某组。确认、取消、失败重试、刷新与撤销均已验证。
+## 已验证
 
-76 项程序检查、四种视口的 1,757 个浏览器渲染状态及十类故障注入通过。独立正式预览使用真实存储与原始音频走完第一关，并完成输入、刷新恢复、重置与撤销；控制台无错误和警告。
+| 范围 | 实际结果 |
+| --- | --- |
+| 程序与课程约束 | `npm test` 85 项通过，0 失败、0 跳过 |
+| 四种屏幕的完整流程 | 320×568、420×856、906×801、1440×900，共 14,716 个状态通过 |
+| 防护网自身有效性 | 十类故障注入在四种尺寸均被拦截，包括浅底白字、角色变黑、资源缺失、背景不一致、节距变化、箭头偏移、误用整体进度、跳过路线及按钮不可达 |
+| 全量音频文件 | 1,231 条完整解码，无静音或不合理时长，文件指纹与待发布资源一致 |
+| 原生浏览器媒体 | 16 条代表录音真实 ended、完整文件哈希、Range 206、缓存后离线重听通过 |
+| 老用户升级 | 保留原来 11 关成绩及存储身份，下一关进入 Lesson 7；重置备份与恢复另有程序验证 |
+| 原文核对 | Lesson 21–49 的正文英文词序逐课对照用户 PDF，无漏词、替换或额外正文词；7–20 复用既有结构化教材来源 |
+| 实际页面 | 独立生产入口查看 Lesson 25、31、37、49 和两种输入挑战；窄屏长选项、完整插画、手动继续与底栏已查看 |
 
-- [原因、漏检与防护记录](docs/designs/session-progress-and-challenges/README.md)
-- [完整验收、证据及范围](docs/designs/session-progress-and-challenges/design-qa.md)
-- [输入界面](docs/designs/session-progress-and-challenges/qa/native-translation-desktop.png)
-- [完成页 100%](docs/designs/session-progress-and-challenges/qa/native-complete-100.png)
-- [Duolingo 参考与本课程决策](docs/references/duolingo/2026-09-06/optional-input-challenges.md)
+逐项指纹、范围、原生音频样本和时间保存在 [verification.json](docs/designs/lesson1-50/verification.json)。完整自动化证据在 `test-results/`，CI 会重新运行并上传。发布构建继续要求有效的浏览器证据、全量音频证据，以及与 HEAD 一致的公开文件，不能仅靠一份 Markdown 声明通过。
 
-历史验收：[完成页返回与词汇美术](docs/designs/completion-return-and-vocabulary-art/design-qa.md)、[Lesson 分区与交互修复](docs/designs/lesson-sections-and-interaction-fixes/design-qa.md)、[统一深色](docs/designs/unified-dark/design-qa.md)。用户体验验收和部署状态独立记录。
+## 素材与体验
+
+- 新增 21 幅 imagegen 绘制的迪士尼绘画方向场景，人物为猫猫；素材原图、完整提示词与来源登记一并保存。
+- 沿用内外统一深色背景、固定节距、明显操作状态、每关结束返回路线和本次闯关进度。
+- 课文与词句都由点击触发，原速播放，可重听；没有慢速拉伸或自动推进故事。
+- 主线、挑战、复习和重置独立保留证据。选做挑战不会阻挡路线继续学习。
+- 首次准备 69 个文件、2,671,083 字节，保持原 4 MiB 启动预算。课内录音和插画按需校验后缓存；完整发布资源 1,357 个文件、25,514,004 字节（不含发布清单本身）。
+
+## 验收边界与交付
+
+全量状态遍历使用可控音频夹具；16 条原生录音验证单独记录。解码正常与 ended 不等于 1,231 条录音均通过人工听感验收，也不等于已经完成儿童实地试学。人工使用验收继续与自动检查区分。
+
+本地预览为 http://127.0.0.1:42850/ 。测试使用独立进度，内置浏览器用于查看后段课程的临时记录已恢复为原来的空值。发布包输出到 `dist/learning-path/`，实际提交号、资源指纹与证据写入其中的 `release-manifest.json`。本次实施没有推送或更新官网。
+
+- [实施与维护说明](docs/designs/lesson1-50/README.md)
+- [问题原因、漏检原因与复发防护](docs/designs/lesson1-50/bug-prevention.md)
+- [真实页面截图](docs/designs/lesson1-50/qa/README.md)
+- [教材核对记录](docs/designs/lesson1-50/source-verification.json)
+
+历史验收：[本次进度与选做挑战](docs/designs/session-progress-and-challenges/design-qa.md)、[完成页返回与词汇美术](docs/designs/completion-return-and-vocabulary-art/design-qa.md)、[Lesson 分区与交互修复](docs/designs/lesson-sections-and-interaction-fixes/design-qa.md)、[统一深色](docs/designs/unified-dark/design-qa.md)。

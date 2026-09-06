@@ -1,12 +1,15 @@
 {
   "name": "canranstudio-duolingo-version",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "private": true,
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "dev": "node scripts/serve-learning-path.js",
+    "compile:course": "node scripts/compile-lesson1-50.js",
+    "test:media": "node scripts/verify-course-media.js",
+    "test:browser-media": "node scripts/check-course-browser-media.js",
     "build:course": "node scripts/build-learning-course-package.js",
     "build": "node scripts/build-learning-path-release.js",
     "build:static": "npm run build",

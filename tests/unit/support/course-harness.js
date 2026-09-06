@@ -5,6 +5,7 @@ const scene=require('../../../core/learning-path-scene');
 const store=require('../../../core/learning-store');
 const unit=require('../../../core/learning-course-catalog').getCourse();
 function setup(options={}) {
+  const unit=options.unit||require('../../../core/learning-course-catalog').getCourse();
   const adapter=options.adapter||store.createMemoryAdapter();
   const rt=runtime.createRuntime({unit,adapter,now:()=>new Date('2026-09-06T12:00:00'),random:()=>.37,...options});
   const view=rt.snapshot;

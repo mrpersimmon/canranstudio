@@ -115,9 +115,15 @@
     const chromeColor=doc.querySelector('meta[name="theme-color"]')?.content;
     if(chromeColor!=='#141f23')errors.push({rule:'browser-theme',actual:chromeColor,expected:'#141f23'});
     if (doc.documentElement.scrollWidth > win.innerWidth + 1) errors.push({rule:'horizontal-overflow', width:doc.documentElement.scrollWidth, viewport:win.innerWidth});
+    for(const label of root.querySelectorAll('.lp-option>span[lang]')){
+      const text=label.getBoundingClientRect(),button=label.closest('button').getBoundingClientRect();
+      if(text.left<button.left+1||text.right>button.right-1||text.top<button.top+1||text.bottom>button.bottom-1)errors.push({rule:'option-content-overflow',text:label.textContent});
+    }
     let visibleImages = 0;
     for (const img of root.querySelectorAll('img')) {
-      const essential=img.matches('.lp-story-character>img,.lp-actor img,.lp-story-object,.lp-question-object>img,.lp-vocabulary-image,.lp-option-image,.lp-chat-avatar>img');
+      const cutout=img.matches('.lp-story-character>img,.lp-actor img,.lp-story-object,.lp-question-object>img,.lp-vocabulary-image,.lp-option-image,.lp-chat-avatar>img');
+      const painting=img.matches('.lp-scene-painting');
+      const essential=cutout||painting;
       const bounds=img.getBoundingClientRect();
       if(essential&&(bounds.width<16||bounds.height<16))errors.push({rule:'hidden-teaching-image',src:img.getAttribute('src')});
       const scene=img.matches('.lp-actor img')&&img.closest('.lp-scene')?.getBoundingClientRect();
@@ -126,9 +132,14 @@
       visibleImages++;
       const style = win.getComputedStyle(img);
       if (!img.complete || !img.naturalWidth) errors.push({rule:'image-loaded', src:img.getAttribute('src')});
-      else if(essential||img.matches('.lp-celebration>img,.lp-blocked>img,.course-package-shell>img')){
+      else if(cutout||img.matches('.lp-celebration>img,.lp-blocked>img,.course-package-shell>img')){
         try{const pixels=checkCutout(win,img);if(pixels.transparent<40||pixels.opaque<40)errors.push({rule:'teaching-art-cutout',src:img.getAttribute('src'),...pixels});}
         catch(error){errors.push({rule:'teaching-art-unresolved',src:img.getAttribute('src'),message:String(error)});}
+      }
+      // Narrative paintings are intentionally opaque. Keep cutout alpha tests
+      // intact and separately require the complete painting to fit its frame.
+      if(painting&&img.naturalWidth){
+        if(style.objectFit!=='contain'||bounds.width<120||bounds.height<80)errors.push({rule:'teaching-scene-framing',src:img.getAttribute('src'),objectFit:style.objectFit,width:bounds.width,height:bounds.height});
       }
       if (style.mixBlendMode === 'multiply' && luminance(surface(win, img)) < .5) errors.push({rule:'darkened-art', src:img.getAttribute('src')});
       if (!img.closest('[disabled],[aria-disabled="true"]') && Number(style.opacity) < .5) errors.push({rule:'faded-art', src:img.getAttribute('src')});
@@ -178,6 +189,22 @@
           const retry=await win.axe.run(element,{runOnly:{type:'rule',values:['color-contrast']},resultTypes:['violations','incomplete']});
           history.scrollTop=scroll;win.scrollTo({top,behavior:'instant'});
           if(!retry.violations.length&&!retry.incomplete.length){resolved.push({target:node.target,method:'scroll-and-recheck'});continue;}
+        }
+        // Long practice screens are scrollable. A sticky footer can clip an
+        // option at the current scroll position. Test its text after a real
+        // scroll AND prove every rendered text rectangle is unobscured; an
+        // unreadable or unreachable option still fails the exact same rule.
+        if(element?.closest('.lp-option')&&node.any.some(c=>c.data?.messageKey==='elmPartiallyObscured')){
+          const top=win.scrollY;
+          element.scrollIntoView({block:'center',behavior:'instant'});
+          const range=doc.createRange();range.selectNodeContents(element);
+          const visible=[...range.getClientRects()].every(rect=>[.1,.5,.9].every(x=>[.25,.75].every(y=>{
+            const hit=doc.elementFromPoint(rect.left+rect.width*x,rect.top+rect.height*y);
+            return hit&&element.contains(hit);
+          })));
+          const retry=visible&&await win.axe.run(element,{runOnly:{type:'rule',values:['color-contrast']},resultTypes:['violations','incomplete']});
+          win.scrollTo({top,behavior:'instant'});
+          if(retry&&!retry.violations.length&&!retry.incomplete.length){resolved.push({target:node.target,method:'scroll-option-text-and-recheck'});continue;}
         }
         errors.push({rule:'contrast-unresolved', target:node.target, message:node.failureSummary});
       }

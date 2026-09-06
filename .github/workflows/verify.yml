@@ -12,6 +12,9 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run build:course
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: npm run test:media
+      - run: npm run test:browser-media
       - run: npm run test:browser
       - run: npm run verify
       - run: git diff --exit-code

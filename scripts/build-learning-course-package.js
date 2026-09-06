@@ -9,6 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const PAGE = 'poc/learning-path';
 const MANIFEST_URL = '/poc/learning-path/course-package-manifest.json';
 const CATALOG_URL = '/poc/learning-path/course-package/unit-catalog.json';
+const MEDIA_INDEX_URL = '/poc/learning-path/course-package/media-index.json';
 const EXTENSION = /\.(avif|css|jpe?g|json|js|mp3|png|svg|webp|woff2)$/i;
 const sha256 = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const localPath = url => path.join(ROOT, sourcePath(url));
@@ -40,12 +41,12 @@ function build() {
   let html = fs.readFileSync(htmlPath, 'utf8').replace(/\/poc\/learning-path\/boot\/course-entry-[a-f0-9]+\.js/g, bootURL);
   if (!html.includes('src="' + bootURL + '"')) throw Error('Missing course bootstrap script');
   fs.mkdirSync(path.dirname(localPath(CATALOG_URL)), { recursive: true });
-  fs.writeFileSync(localPath(CATALOG_URL), JSON.stringify(unit, null, 2) + '\n');
+  fs.writeFileSync(localPath(CATALOG_URL), JSON.stringify(unit) + '\n');
 
   const resources = new Set([CATALOG_URL, bootURL, '/core/course-package-installer.js', '/core/course-package-service-worker.js']);
   function add(value, base) {
     const url = resourceURL(value, base);
-    if (url && url !== MANIFEST_URL) resources.add(url);
+    if (url && url !== MANIFEST_URL && url !== MEDIA_INDEX_URL) resources.add(url);
   }
   function scanObject(value) {
     if (typeof value === 'string') add(value);
@@ -67,13 +68,26 @@ function build() {
     else if (/\.(css|js)$/.test(url)) scanText(bytes.toString('utf8'), url);
   }
   const kinds = { avif: 'image', jpg: 'image', jpeg: 'image', png: 'image', svg: 'image', webp: 'image', mp3: 'audio', woff2: 'font', css: 'style', js: 'script', json: 'data' };
-  const entries = [...resources].sort().map(url => {
+  const allEntries = [...resources].sort().map(url => {
     const bytes = fs.readFileSync(localPath(url));
     return { url, kind: kinds[path.extname(url).slice(1).toLowerCase()], bytes: bytes.length, sha256: sha256(bytes) };
   });
+  const revision = unit.releaseRevision || unit.experienceRevision;
+  const eagerArt=new Set([...Object.values(unit.journey?.assets||{}),unit.entities['explorer-cat']?.assetSrc]);
+  for(const match of html.matchAll(/<img[^>]+src="([^"]+)"/g))eagerArt.add(match[1]);
+  const media = allEntries.filter(entry=>entry.kind==='audio'||entry.kind==='image'&&!entry.url.endsWith('.svg')&&!eagerArt.has(entry.url));
+  const entries = allEntries.filter(entry=>!media.includes(entry));
+  if (media.length) {
+    const index = {schema:1,packageId:unit.unitId+'@'+revision+'-media',unitId:unit.unitId,revision,scopePath:'/poc/learning-path/',totalBytes:media.reduce((n,e)=>n+e.bytes,0),entries:media};
+    const bytes = Buffer.from(JSON.stringify(index,null,2)+'\n');
+    fs.writeFileSync(localPath(MEDIA_INDEX_URL),bytes);
+    entries.push({url:MEDIA_INDEX_URL,kind:'data',bytes:bytes.length,sha256:sha256(bytes)});
+    entries.sort((a,b)=>a.url.localeCompare(b.url));
+  }
   const manifest = {
-    schema: 1, packageId: unit.unitId + '@' + unit.experienceRevision + '-course-package-v1',
-    unitId: unit.unitId, revision: unit.experienceRevision, scopePath: '/poc/learning-path/',
+    schema: 1, packageId: unit.unitId + '@' + revision + '-course-package-v1',
+    unitId: unit.unitId, revision, scopePath: '/poc/learning-path/',
+    ...(media.length ? {mediaIndexUrl:MEDIA_INDEX_URL} : {}),
     totalBytes: entries.reduce((n, entry) => n + entry.bytes, 0), entries
   };
   const manifestBytes = Buffer.from(JSON.stringify(manifest, null, 2) + '\n');

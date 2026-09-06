@@ -14,10 +14,14 @@ function getCourse() { return course; }
   function validateCourse(course = getCourse()) {
     const errors = [], seen = new Set(), allRefs = new Set();
     const fail = text => errors.push(text);
-    if (course.lessonIds.join(',') !== '1,2,3,4,5,6') fail('first six textbook lessons required');
-    if (JSON.stringify(course.chapters.map(chapter=>chapter.lessonIds)) !== '[[1,2],[3,4],[5,6]]') fail('textbook Lesson pair sections required');
+    const lessonIds = course.lessonIds || [];
+    if (!lessonIds.length || lessonIds.length % 2 || lessonIds.some((id,index)=>id!==index+1)) fail('continuous textbook lessons starting at 1 required');
+    const expectedPairs = Array.from({length:Math.floor(lessonIds.length/2)},(_,index)=>[index*2+1,index*2+2]);
+    if (JSON.stringify(course.chapters.map(chapter=>chapter.lessonIds)) !== JSON.stringify(expectedPairs)) fail('textbook Lesson pair sections required');
+    if (new Set(course.chapters.map(chapter=>chapter.id)).size !== course.chapters.length) fail('duplicate Lesson section');
     for (const node of course.nodes) {
       if (!course.chapters.some(chapter=>chapter.id===node.chapterId)) fail('missing Lesson section '+node.id);
+      if (!node.lessonIds?.length || node.lessonIds.some(id=>!lessonIds.includes(id))) fail('invalid Lesson scope '+node.id);
       if (seen.has(node.id)) fail('duplicate node '+node.id); seen.add(node.id);
       if (!node.activityIds.length) fail('empty node '+node.id);
       for (const id of node.activityIds) {
@@ -33,7 +37,9 @@ function getCourse() { return course; }
       for (const entry of [...act.requiredAudio,...act.feedbackAudio]) if (!course.sources[entry.ref]?.audioSrc) fail('missing audio '+entry.ref);
       if (act.resultId && (!act.assessment || act.kind!=='match' && (!act.answer.length || act.answer.some(x=>!act.options.some(o=>o.id===x))))) fail('invalid answer '+id);
       if (act.options?.some(o=>o.type==='image'&&!course.entities[o.entityId])) fail('missing answer image '+id);
-      if (act.kind==='teach' && (act.playbackMode!=='manual-cards'||act.items.some(item=>!course.sources[item.sourceRef]?.audioSrc||!course.entities[item.entityId]))) fail('invalid teaching cards '+id);
+      if (act.kind==='teach' && (act.playbackMode!=='manual-cards'||!act.items.length||act.items.some(item=>!course.sources[item.sourceRef]?.audioSrc||(item.presentation==='text' ? !item.caption : !course.entities[item.entityId])))) fail('invalid teaching cards '+id);
+      if (act.sceneEntityId && course.entities[act.sceneEntityId]?.presentation!=='scene') fail('invalid teaching scene '+id);
+      if (act.embeddedIn && !course.activities[act.embeddedIn]?.beats?.some(beat=>beat.kind==='checkpoint'&&beat.activityId===id)) fail('unreachable story check '+id);
       if (act.kind==='interactive-story') {
         for (const id of act.actorEntityIds) {
           const actor=course.entities[id];

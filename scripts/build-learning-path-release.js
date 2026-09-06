@@ -42,6 +42,18 @@ function prepare(root = ROOT) {
     if (bytes.length !== entry.bytes || digest(bytes) !== entry.sha256) throw Error('Package resource differs: ' + entry.url);
     files.set(entry.url.slice(1), bytes);
   }
+  if (original.mediaIndexUrl) {
+    const indexBytes = files.get(sourcePath(original.mediaIndexUrl));
+    if (!indexBytes) throw Error('Deferred media index is not part of the verified startup package');
+    const index = validateManifest(JSON.parse(indexBytes), {scopeUrl:'https://www.canranstudio.cn/poc/learning-path/'});
+    if (index.unitId!==original.unitId || index.revision!==original.revision) throw Error('Deferred media belongs to another course revision');
+    for (const entry of index.entries) {
+      if (!/^\/(?:assets|poc)\/.+\.(?:webp|png|avif|jpe?g|mp3)$/.test(entry.url) || !['image','audio'].includes(entry.kind)) throw Error('Unexpected deferred resource '+entry.url);
+      const bytes = read(sourcePath(entry.url));
+      if (bytes.length!==entry.bytes || digest(bytes)!==entry.sha256) throw Error('Deferred resource differs '+entry.url);
+      files.set(entry.url.slice(1),bytes);
+    }
+  }
   const manifest = { ...original, packageId: original.packageId + '-home', scopePath: '/' };
   validateManifest(manifest, { scopeUrl: 'https://www.canranstudio.cn/' });
   const bytes = Buffer.from(JSON.stringify(manifest, null, 2) + '\n');
@@ -54,7 +66,7 @@ function prepare(root = ROOT) {
   read('core/learning-course-catalog.js');
   const authored = JSON.parse(read('content/learning-course.json'));
   const packaged = files.get('poc/learning-path/course-package/unit-catalog.json');
-  if (!packaged || !packaged.equals(Buffer.from(JSON.stringify(authored, null, 2) + '\n'))) {
+  if (!packaged || !packaged.equals(Buffer.from(JSON.stringify(authored) + '\n'))) {
     throw Error('Authored course and package differ; run npm run build:course');
   }
   read('content/textbook-sources.json');
@@ -77,6 +89,7 @@ function build() {
   const prepared = prepare();
   const commit = assertCommitted(prepared.sources);
   const visual = require('./visual-proof').assertVisualProof(prepared);
+  const media = require('./verify-course-media').assertMediaProof(prepared);
   const out = path.join(ROOT, 'dist/learning-path');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   if (fs.existsSync(out)) {
@@ -95,6 +108,7 @@ function build() {
     sourceManifestSha256: prepared.originalManifestSha256,
     packageManifestSha256: prepared.packageManifestSha256,
     visualEvidence: { fingerprint: visual.fingerprint, checkedStates: visual.checks.length, finishedAt: visual.finishedAt },
+    mediaEvidence: { fingerprint: media.fingerprint, recordings: media.entries.length, finishedAt: media.finishedAt },
     files: hashes
   };
   fs.writeFileSync(path.join(out, 'release-manifest.json'), JSON.stringify(release, null, 2) + '\n');

@@ -5,7 +5,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { prepare } = require('./build-learning-path-release');
 const { ROOT, PROOF, VIEWPORTS, fingerprint, validateReport } = require('./visual-proof');
-function createVisualServer() {
+function createVisualServer({sharded=false}={}) {
   const prepared = prepare(), stamp = fingerprint(prepared), token = crypto.randomBytes(24).toString('hex');
   const files = new Map(prepared.files);
   const html = files.get('index.html').toString();
@@ -17,17 +17,31 @@ function createVisualServer() {
   files.set('__qa__/axe.js',fs.readFileSync(require.resolve('axe-core/axe.min.js')));
   files.set('__qa__/config.json',Buffer.from(JSON.stringify({token, fingerprint:stamp, viewports:VIEWPORTS})));
   let report = null;
+  const partials=new Map();
   const server = http.createServer((req,res)=>{
     const url = new URL(req.url,'http://127.0.0.1'), relative = url.pathname.slice(1);
+    if(sharded&&relative==='__qa__/config.json'){
+      const shard=Number(url.searchParams.get('shard'));
+      if(!url.searchParams.has('shard')||!Number.isInteger(shard)||!VIEWPORTS[shard]){res.writeHead(400);res.end('Invalid viewport shard');return;}
+      res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});
+      res.end(JSON.stringify({token,fingerprint:stamp,viewports:[VIEWPORTS[shard]],shard}));return;
+    }
     if (req.method==='POST' && relative==='__qa__/result') {
       if (req.headers.origin !== 'http://'+req.headers.host) {res.writeHead(403);res.end();return;}
       let bytes = 0, chunks = [];
-      req.on('data',chunk=>{bytes+=chunk.length;if(bytes>8*1024*1024)req.destroy();else chunks.push(chunk);});
+      req.on('data',chunk=>{bytes+=chunk.length;if(bytes>32*1024*1024)req.destroy();else chunks.push(chunk);});
       req.on('end',()=>{
         try {
           const payload=JSON.parse(Buffer.concat(chunks));
           if(payload.token!==token||payload.fingerprint!==stamp)throw Error('Wrong test run');
-          report={...payload,token:undefined,finishedAt:new Date().toISOString()};
+          if(sharded){
+            if(!Number.isInteger(payload.shard)||!VIEWPORTS[payload.shard]||partials.has(payload.shard))throw Error('Invalid or repeated viewport shard');
+            if(payload.checks.some(check=>String(check.viewport)!==String(VIEWPORTS[payload.shard])))throw Error('Wrong viewport in shard evidence');
+            partials.set(payload.shard,payload);
+            const runs=[...partials.values()];
+            report={schema:1,fingerprint:stamp,finishedAt:new Date().toISOString(),status:runs.some(run=>run.status!=='passed')?'failed':partials.size===VIEWPORTS.length?'passed':'running',checks:runs.flatMap(run=>run.checks),mutations:runs.flatMap(run=>run.mutations),failures:runs.filter(run=>run.failure).map(run=>({shard:run.shard,failure:run.failure}))};
+          }else report={...payload,token:undefined,finishedAt:new Date().toISOString()};
+          if(report.status==='running'){res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({accepted:payload.shard,remaining:VIEWPORTS.length-partials.size}));return;}
           if(report.status==='passed')validateReport(report);
           fs.mkdirSync(path.join(ROOT,'test-results'),{recursive:true});
           const name=report.status==='passed'?PROOF:'test-results/readability-failed.json';

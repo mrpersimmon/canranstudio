@@ -38,7 +38,7 @@ test('browser proof is required and expires when any public asset or browser che
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'canran-visual-proof-'));
   const prepared={sources:new Map([['path.css',Buffer.from('original CSS')]])};
   try{
-    for(const file of ['tests/browser/check.js','scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','package.json','package-lock.json']){
+    for(const file of ['tests/browser/check.js','scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/verify-course-media.js','package.json','package-lock.json']){
       fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),'fixture');
     }
     assert.throws(()=>assertVisualProof(prepared,root),/No browser readability proof/);

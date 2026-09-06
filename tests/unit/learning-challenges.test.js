@@ -22,7 +22,7 @@ test('challenge answer contract accepts presentation variants but rejects change
 test('all optional challenges complete without changing the main route or review evidence',()=>{
   const h=setup();
   h.send({type:'open-challenge',id:'CH12'});assert.equal(h.view().screen,'map');
-  unlock(h);const before=structuredClone(h.view().record);
+  unlock(h,unit.nodes.at(-1).id);const before=structuredClone(h.view().record);
   for(const c of unit.challenges){
     open(h,c.id);assert.equal(h.view().sessionProgress.completed,0);
     for(const [i,q] of c.questions.entries()){
@@ -32,12 +32,12 @@ test('all optional challenges complete without changing the main route or review
       h.send({type:'challenge-next'});
     }
     assert.equal(h.view().screen,'challenge-complete');
-    assert.deepEqual(h.view().sessionProgress,{completed:6,total:6});
-    assert.equal(h.view().record.challenges[c.id].answers.length,6);
+    assert.deepEqual(h.view().sessionProgress,{completed:c.questions.length,total:c.questions.length});
+    assert.equal(h.view().record.challenges[c.id].answers.length,c.questions.length);
     h.send({type:'map'});
   }
   for(const key of ['completed','results','storyProgress','teachingProgress','reviewEvents'])assert.deepEqual(h.view().record[key],before[key],key);
-  assert.equal(h.view().completedCount,11);
+  assert.equal(h.view().completedCount,unit.checkpointIds.length);
 });
 test('draft, mistakes and hints survive refresh and never become independent evidence',()=>{
   const h=setup();unlock(h,'K04');open(h);

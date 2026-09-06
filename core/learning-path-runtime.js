@@ -549,13 +549,19 @@
     }
     function snapshot() {
       const a = activity();
+      // Compute the available prefix once, rather than rechecking all earlier
+      // lessons for every node on every audio event.
+      let previousDone = true;
+      const nodes = unit.nodes.map(node => {
+        const done = Boolean(record && nodeDone(node));
+        const available = Boolean(record && (done || previousDone));
+        previousDone = previousDone && done;
+        return {id:node.id,done,available,completeActivities:node.activityIds.filter(id=>record?.completed[id]).length,pendingRole:false};
+      });
       return clone({ ...view, extraPractice: extraIndex,
         canContinue: view.screen === 'activity' && !(a?.kind === 'teach' && (view.wordQueue.length || view.audio?.purpose === 'word' && view.audio.status !== 'ended')) && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
         completedCount: unit.checkpointIds.filter(id => unit.checkpointActivities[id].every(aid => record?.completed[aid])).length,
-        nodes: unit.nodes.map((node, index) => ({ id: node.id, done: Boolean(record && nodeDone(node)),
-          available: Boolean(record && (nodeDone(node) || unit.nodes.slice(0, index).every(nodeDone))),
-          completeActivities: node.activityIds.filter(id => record?.completed[id]).length,
-          pendingRole: false })),
+        nodes,
         dueCount: dueItems().length, record: record || null });
     }
     function dispatch(event) {
