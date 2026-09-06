@@ -18,7 +18,10 @@ def sha(data):
 
 
 def run(*args):
-    return subprocess.check_output(args, stderr=subprocess.STDOUT).decode()
+    try:
+        return subprocess.check_output(args, stderr=subprocess.STDOUT).decode()
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError(error.output.decode())
 
 
 def replace_link(link, target):
