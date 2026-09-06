@@ -14,7 +14,7 @@
   });
   const reloadSeed = window.parent.fixtureReloadSeed;
   delete window.parent.fixtureReloadSeed;
-  const control = window.fixture = { audio: [], errors: [], dispatchCount: 0, now: reloadSeed?.now || '2026-09-06T12:00:00Z', failSave: false, throwNext: false };
+  const control = window.fixture = { audio: [], errors: [], dispatchCount: 0, completedDispatches: {}, now: reloadSeed?.now || '2026-09-06T12:00:00Z', failSave: false, throwNext: false };
   window.addEventListener('error', event => control.errors.push(event.message));
   window.addEventListener('unhandledrejection', event => control.errors.push(String(event.reason)));
   class TestAudio extends EventTarget {
@@ -44,8 +44,12 @@
           control.runtime = real;
           return { ...real, dispatch: event => {
             control.dispatchCount++;
-            if (control.throwNext) { control.throwNext = false; throw Error('Intentional QA controller failure'); }
-            return real.dispatch(event);
+            try {
+              if (control.throwNext) { control.throwNext = false; throw Error('Intentional QA controller failure'); }
+              return real.dispatch(event);
+            } finally {
+              control.completedDispatches[event.type]=(control.completedDispatches[event.type]||0)+1;
+            }
           } };
         } };
         window.Audio = TestAudio;

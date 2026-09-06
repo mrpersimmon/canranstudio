@@ -37,7 +37,20 @@
     }
     throw Error('Journey scrolling did not settle');
   }
-  async function click(action,id){const el=query(action,id);if(!el)throw Error('Missing enabled action '+action+' '+(id||'')+' in '+JSON.stringify({screen:view().screen,activity:view().activityId,storyIndex:view().storyIndex}));const f=frame.contentWindow.fixture,before=f.dispatchCount;el.click();if(!(action.startsWith('journey-')||action==='preview-node')||action==='journey-book'||action==='journey-nav'&&id==='book')await wait(()=>f.dispatchCount>before);await settle();if(['preview-node','journey-locate'].includes(action))await settleScroll();}
+  async function click(action,id){
+    const el=query(action,id);
+    if(!el)throw Error('Missing enabled action '+action+' '+(id||'')+' in '+JSON.stringify({screen:view().screen,activity:view().activityId,storyIndex:view().storyIndex}));
+    const f=frame.contentWindow.fixture;
+    const eventType=action==='journey-book'?'reference-section':action==='journey-nav'&&id==='book'?'references'
+      :action.startsWith('journey-')||action==='preview-node'?null:action;
+    const before=f.completedDispatches[eventType]||0;
+    el.click();
+    // A click can queue input/draft actions before its requested transition.
+    // Start waiting for rendered assets only after that exact action finishes.
+    if(eventType)await wait(()=>(f.completedDispatches[eventType]||0)>before);
+    await settle();
+    if(['preview-node','journey-locate'].includes(action))await settleScroll();
+  }
   async function hear(){for(let i=0;view().audio?.status==='playing'&&i<30;i++){const f=frame.contentWindow.fixture,before=f.dispatchCount,audio=f.audio.at(-1);audio.finish();await wait(()=>f.dispatchCount>before);await settle();if(view().saveState)break;}}
   async function check(name,activityId,expectedTheme){
     status.textContent='正在检查 '+frame.width+' × '+frame.height+' · '+name;
@@ -170,7 +183,21 @@
           input.value='拼音';input.dispatchEvent(new win.InputEvent('input',{bubbles:true,isComposing:true}));
           input.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,isComposing:true}));
           if(view().feedback||view().challengeAnswer)throw Error('IME confirmation submitted an answer');
-          await writeAnswer('wrong answer');await click('challenge-check');await check('challenge-wrong-'+challenge.id);
+          await writeAnswer('wrong answer');
+          if(challenge.id===unit.challenges[0].id){
+            // One real click queues the latest input before checking it. Delay
+            // that second Web Lock to expose an early action acknowledgement.
+            const locks=win.navigator.locks,request=locks.request;let calls=0;
+            locks.request=function(...args){
+              if(++calls===2)return new Promise(resolve=>win.setTimeout(()=>resolve(request.apply(locks,args)),180));
+              return request.apply(locks,args);
+            };
+            try{
+              await click('challenge-check');
+              if(view().feedback!=='retry')throw Error('The click helper returned before the queued answer check rendered');
+            }finally{locks.request=request;}
+          }else await click('challenge-check');
+          await check('challenge-wrong-'+challenge.id);
           await click('challenge-retry');
           if(!view().challengeHintUsed || !frame.contentDocument.querySelector('.lp-hint'))throw Error('Correction did not expose the learning hint');
           await check('challenge-hint-'+challenge.id);

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "fingerprint": "c041e16a6a9970eb12b31a747187e2cb3adf63af7babe3ea3a9861ba701573ca",
+  "fingerprint": "6ed89efae71a8de7b7a7122f905ecf09fce3a0942264628cd73a3d3adf52f92a",
   "status": "passed",
   "checks": [
     {
@@ -54253,7 +54253,7 @@
       "errors": [
         {
           "rule": "darkened-art",
-          "src": "http://127.0.0.1:54455/poc/learning-path/assets/dark/keeper-cutout.webp"
+          "src": "http://127.0.0.1:60114/poc/learning-path/assets/dark/keeper-cutout.webp"
         },
         {
           "rule": "darkened-art",
@@ -54376,5 +54376,5 @@
       ]
     }
   ],
-  "finishedAt": "2026-09-06T14:21:57.087Z"
+  "finishedAt": "2026-09-06T15:14:22.786Z"
 }
