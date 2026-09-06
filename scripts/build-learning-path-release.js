@@ -76,6 +76,7 @@ function assertCommitted(sources, root = ROOT) {
 function build() {
   const prepared = prepare();
   const commit = assertCommitted(prepared.sources);
+  const visual = require('./visual-proof').assertVisualProof(prepared);
   const out = path.join(ROOT, 'dist/learning-path');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   if (fs.existsSync(out)) {
@@ -93,6 +94,7 @@ function build() {
     schema: 2, commit, revision: prepared.manifest.revision,
     sourceManifestSha256: prepared.originalManifestSha256,
     packageManifestSha256: prepared.packageManifestSha256,
+    visualEvidence: { fingerprint: visual.fingerprint, checkedStates: visual.checks.length, finishedAt: visual.finishedAt },
     files: hashes
   };
   fs.writeFileSync(path.join(out, 'release-manifest.json'), JSON.stringify(release, null, 2) + '\n');

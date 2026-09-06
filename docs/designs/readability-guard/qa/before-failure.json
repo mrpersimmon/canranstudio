@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "fingerprint": "2527dd20ac7935b6d6857370443e801615301a1c941ca4c7f7228a10cdc333e5",
+  "status": "failed",
+  "checks": [
+    {
+      "name": "loader",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 1,
+      "errors": []
+    },
+    {
+      "name": "story-two-lines",
+      "expectedTheme": "light",
+      "viewport": [
+        320,
+        568
+      ],
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 7,
+      "errors": [
+        {
+          "rule": "screen-canvas",
+          "actual": "rgb(20, 31, 35)",
+          "expected": "rgb(223, 230, 223)"
+        },
+        {
+          "rule": "darkened-art",
+          "src": "/poc/lesson-1-2/course/assets/v3/keeper.webp"
+        },
+        {
+          "rule": "darkened-art",
+          "src": "/poc/lesson-1-2/course/assets/v3/customer.webp"
+        },
+        {
+          "rule": "darkened-art",
+          "src": "/poc/lesson-1-2/course/assets/v3/handbag.webp"
+        },
+        {
+          "rule": "color-contrast",
+          "target": [
+            ".lp-header-label"
+          ],
+          "message": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 9.6pt (12.8px), font weight: bold). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": [
+            ".lp-story-character:nth-child(1) > .lp-character-name"
+          ],
+          "message": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 9.1pt (12.16px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": [
+            ".lp-story-character.is-speaking > .lp-character-name"
+          ],
+          "message": "Fix any of the following:\n  Element has insufficient color contrast of 2.96 (foreground color: #2d6d91, background color: #141f23, font size: 9.1pt (12.16px), font weight: bold). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": [
+            ".is-keeper > .lp-chat-message > .lp-chat-name"
+          ],
+          "message": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": [
+            ".is-keeper > .lp-chat-message > .lp-chat-bubble > p"
+          ],
+          "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": [
+            ".is-owner > .lp-chat-message > .lp-chat-name"
+          ],
+          "message": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+        }
+      ],
+      "activityId": "v3.6:interactive-story"
+    }
+  ],
+  "mutations": [],
+  "failure": "Error: story-two-lines: [{\"rule\":\"screen-canvas\",\"actual\":\"rgb(20, 31, 35)\",\"expected\":\"rgb(223, 230, 223)\"},{\"rule\":\"darkened-art\",\"src\":\"/poc/lesson-1-2/course/assets/v3/keeper.webp\"},{\"rule\":\"darkened-art\",\"src\":\"/poc/lesson-1-2/course/assets/v3/customer.webp\"},{\"rule\":\"darkened-art\",\"src\":\"/poc/lesson-1-2/course/assets/v3/handbag.webp\"},{\"rule\":\"color-contrast\",\"target\":[\".lp-header-label\"],\"message\":\"Fix any of the following:\\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 9.6pt (12.8px), font weight: bold). Expected contrast ratio of 4.5:1\"},{\"rule\":\"color-contrast\",\"target\":[\".lp-story-character:nth-child(1) > .lp-character-name\"],\"message\":\"Fix any of the following:\\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 9.1pt (12.16px), font weight: normal). Expected contrast ratio of 4.5:1\"},{\"rule\":\"color-contrast\",\"target\":[\".lp-story-character.is-speaking > .lp-character-name\"],\"message\":\"Fix any of the following:\\n  Element has insufficient color contrast of 2.96 (foreground color: #2d6d91, background color: #141f23, font size: 9.1pt (12.16px), font weight: bold). Expected contrast ratio of 4.5:1\"},{\"rule\":\"color-contrast\",\"target\":[\".is-keeper > .lp-chat-message > .lp-chat-name\"],\"message\":\"Fix any of the following:\\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1\"},{\"rule\":\"color-contrast\",\"target\":[\".is-keeper > .lp-chat-message > .lp-chat-bubble > p\"],\"message\":\"Fix any of the following:\\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1\"},{\"rule\":\"color-contrast\",\"target\":[\".is-owner > .lp-chat-message > .lp-chat-name\"],\"message\":\"Fix any of the following:\\n  Element has insufficient color contrast of 2.81 (foreground color: #566858, background color: #141f23, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1\"}]",
+  "finishedAt": "2026-09-06T07:58:11.950Z"
+}

@@ -2,6 +2,7 @@
 
 本目录只保留猫猫课程重构所需的资料与证据。
 
+- [页面可读性防护网与回归规则](designs/readability-guard/README.md)：主题切换、文字和图片、按钮遮挡、发布拦截。
 - [现行课程设计与实现边界](designs/lesson1-6-path-v4/implementation.md)：前六课的 11 个节点、题目公平性、手动语音、进度与复习规则。
 - [用户提供的题型及学习活动材料](references/duolingo/2026-09-05/用户提供-题型与学习活动汇总.txt)与[人机交互及 UI 材料](references/duolingo/2026-09-05/用户提供-人机交互与UI设计理念.md)：保留原内容，作为参考材料。
 - [来源核对与落地规则](references/duolingo/2026-09-05/人机交互与UI-来源核对及落地规则.md)：区分官方来源、分析归纳与本课程决定。

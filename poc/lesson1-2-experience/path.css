@@ -1,7 +1,10 @@
-:root{color-scheme:light;--lp-canvas:#dfe6df;--lp-paper:#eef1e8;--lp-cloud:#e2e9df;--lp-ink:#2c4035;--lp-muted:#566858;--lp-line:#c4d0bd;--lp-green:#83ac4a;--lp-green-edge:#648a37;--lp-green-tint:#e0ead3;--lp-blue:#2d6d91;--lp-blue-tint:#d8e6e8;--lp-action:#dcebf3;--lp-action-edge:#5e849c;--lp-action-hover:#cde3ef;--lp-selected:#bcdff1;--lp-yellow:#be9532;--lp-yellow-tint:#eee6c9;--lp-radius:16px;font-family:Arial,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--lp-ink);background:var(--lp-canvas);font-size:16px;line-height:1.5}
+:root{color-scheme:light;--lp-canvas:#dfe6df;--lp-paper:#eef1e8;--lp-cloud:#e2e9df;--lp-ink:#2c4035;--lp-muted:#566858;--lp-line:#c4d0bd;--lp-green:#83ac4a;--lp-green-edge:#648a37;--lp-green-tint:#e0ead3;--lp-blue:#285f80;--lp-blue-tint:#d8e6e8;--lp-action:#dcebf3;--lp-action-edge:#5e849c;--lp-action-hover:#cde3ef;--lp-selected:#bcdff1;--lp-yellow:#be9532;--lp-yellow-tint:#eee6c9;--lp-radius:16px;font-family:Arial,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--lp-ink);background:var(--lp-canvas);font-size:16px;line-height:1.5}
 
 *{box-sizing:border-box}
-body{margin:0;min-width:320px}
+/* A screen must own both its canvas and its foreground. Loader and journey
+   colors must never be inherited by the light learning experience. */
+body{margin:0;min-width:320px;background:var(--lp-canvas);color:var(--lp-ink)}
+.lp-shell,.lp-blocked{background:var(--lp-canvas);color:var(--lp-ink);isolation:isolate}
 button,a{-webkit-tap-highlight-color:transparent}
 button{font:inherit;cursor:pointer;color:inherit}
 button:disabled{cursor:default}
@@ -283,7 +286,7 @@ main[data-learning-path]{min-height:100dvh;display:flex;flex-direction:column}
 .lp-chat-message{min-width:0;flex:1}
 .lp-chat-name{display:block;font-size:.76rem;font-weight:700;color:var(--lp-muted);margin:0 8px 5px}
 .is-owner .lp-chat-name{text-align:right}
-.lp-chat-bubble{display:flex;align-items:center;gap:8px;position:relative;min-height:64px;padding:13px 16px;background:var(--lp-paper);border:1px solid var(--lp-line);border-radius:19px 19px 19px 5px}
+.lp-chat-bubble{color:var(--lp-ink);display:flex;align-items:center;gap:8px;position:relative;min-height:64px;padding:13px 16px;background:var(--lp-paper);border:1px solid var(--lp-line);border-radius:19px 19px 19px 5px}
 .is-owner .lp-chat-bubble{border-radius:19px 19px 5px 19px;background:#e6eadf}
 .lp-chat-bubble p{flex:1;min-width:0;font-size:1.16rem;line-height:1.45;overflow-wrap:break-word}
 .lp-chat-bubble p[lang="en"]{font-family:Fredoka,Arial,sans-serif;font-weight:400}
@@ -439,3 +442,11 @@ main[data-learning-path]{min-height:100dvh;display:flex;flex-direction:column}
  .lp-interactive-story.is-cast-question .lp-story-cast{margin-top:12px}
  .lp-interactive-story .lp-option{min-height:52px;padding-top:10px;padding-bottom:10px}
 }
+
+/* Shared light surfaces retain their foreground when opened from the map. */
+.lp-modal{color:var(--lp-ink);color-scheme:light}
+
+/* Constrain the grid track as well as the image. An intrinsic image height
+   must not expand the actors beyond the scene and cover the speaker name. */
+.lp-scene{grid-template-rows:minmax(0,1fr)}
+.lp-actor{min-height:0}

@@ -90,7 +90,8 @@
     work = work.then(() => global.navigator.locks?.request ? global.navigator.locks.request(runtime.storageKey, run) : run()).catch(error => {
       global.console.error('Learning path action failed', error);
       stop();
-      root.innerHTML = renderer.render({ screen: 'blocked' });
+      // Error recovery is a screen transition too; release the map theme.
+      render({ screen: 'blocked' });
     });
     return work;
   }

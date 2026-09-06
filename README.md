@@ -4,7 +4,7 @@
 
 ## 本地运行
 
-需要 Node.js 20 或更新版本。已使用的图片、字体、录音随仓库保存，运行与构建无需额外第三方依赖。
+需要 Node.js 20 或更新版本。已使用的图片、字体、录音随仓库保存，产品运行不依赖第三方服务；开发验收使用 axe-core 和 Playwright（仅开发依赖）。
 
 ```bash
 npm ci
@@ -37,9 +37,31 @@ npm run dev
 npm run verify
 ```
 
-该命令重建课程包、运行当前范围测试，并生成 `dist/learning-path/`。发布过程要求所有输入与 Git HEAD 一致，因此修改和重新生成后应先提交，再运行完整发布验证；平时可先单独执行 `npm run build:course` 与 `npm test`。
+该命令重建课程包、运行当前范围测试，并检查与当前代码绑定的浏览器可读性证据，然后生成 `dist/learning-path/`。发布过程要求所有输入与 Git HEAD 一致，因此修改和重新生成后应先提交，再运行完整发布验证；平时可先单独执行 `npm run build:course` 与 `npm test`。
 
 发布包只含一个首页与必要资源。部署步骤见 [部署说明](deploy/README.md)。创建本分支不自动推送或重新部署；线上地址仍为 <https://www.canranstudio.cn/>。
+
+### 浏览器防护网
+
+课程逻辑测试通过，不能代替页面可读性验收。每次修改课程、样式、图片、入口或浏览器测试后，必须重新运行实际浏览器检查。
+
+在 Codex 内置浏览器中运行同一套检查：
+
+```bash
+npm run build:course
+npm run visual:serve
+```
+
+打开该命令输出的本地检查页。页面会用独立的测试记录自动走完课程，在四种屏幕尺寸检查对比度、图片、主题与主要按钮；结果存入 `test-results/readability-proof.json`。无需修改浏览器安全设置。
+
+CI 或已经允许使用 Playwright 的本地环境：
+
+```bash
+npx playwright install chromium
+npm run test:browser
+```
+
+两条路径运行同一个浏览器测试页面。`npm run build` 会拦截缺失、失败、不完整或过期的浏览器证据，CI 也会在每次推送和 PR 重新检查。自动检查后仍需按 [可读性验收规则](docs/designs/readability-guard/README.md) 查看实际页面截图。
 
 ## 文档
 

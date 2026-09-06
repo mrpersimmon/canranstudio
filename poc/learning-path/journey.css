@@ -1,6 +1,6 @@
 /* Path presentation: color roles are deliberately independent of lesson UI. */
 html.journey-theme{color-scheme:dark;background:#141f23}
-html.journey-theme body{background:#141f23}
+html.journey-theme body{background:#141f23;color:#f1f7f8}
 .has-journey{flex:1;background:#141f23;color:#f1f7f8;--journey-bg:#141f23;--journey-line:#34434b;--journey-muted:#a0b0b8;--journey-orange:#ff9600;--journey-gold:#ffc800;--journey-blue:#49c0f8;--journey-pink:#f58dcc}
 .journey-app{min-height:100dvh;position:relative}
 .lp-shell.has-journey img{mix-blend-mode:normal}
@@ -23,7 +23,7 @@ html.journey-theme body{background:#141f23}
 .journey-chapter{position:relative}
 .journey-chapter-banner{position:sticky;top:60px;z-index:10;background:#ff9600;box-shadow:0 5px 0 #c97700;display:flex;align-items:stretch;justify-content:space-between;border-radius:20px;min-height:84px;margin:8px 24px 0;color:white;overflow:hidden}
 .journey-chapter-banner>div{padding:12px 0 12px 20px;min-width:0;flex:1}
-.journey-chapter-banner p{color:#663900;font-size:14px;font-weight:800;line-height:1.35;letter-spacing:.025em;margin-bottom:5px}
+.journey-chapter-banner p{color:#5e3400;font-size:14px;font-weight:800;line-height:1.35;letter-spacing:.025em;margin-bottom:5px}
 .journey-chapter-banner h1{color:#422a08;font-size:24px;line-height:1.3;font-weight:850;letter-spacing:0}
 .journey-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;border:2px solid #34434b;border-bottom-width:5px;border-radius:14px;background:#202f36;color:#f1f7f8;font-weight:800;padding:10px 20px;line-height:1.3;transition:transform .12s,background .12s,border-color .12s}
 .journey-button:active:not(:disabled){transform:translateY(3px);border-bottom-width:2px;margin-bottom:3px}
@@ -67,7 +67,7 @@ html.journey-theme body{background:#141f23}
 .journey-primary .journey-icon{width:22px;height:22px;filter:brightness(.15)}
 .journey-primary:hover:not(:disabled){background:#ffad25}
 .journey-primary:disabled .journey-icon{filter:brightness(0) invert(.75)}
-.journey-companion{position:absolute;top:158px;width:148px;text-align:center;z-index:1}
+.journey-companion{position:absolute;top:0;width:148px;text-align:center;z-index:1}
 .journey-companion.on-left{left:20px}.journey-companion.on-right{right:20px}
 .journey-mascot{width:148px;height:200px;padding:0;border:0;background:transparent;border-radius:30px;transform-origin:50% 90%;transition:transform .2s}
 .journey-mascot:hover{transform:rotate(-4deg)}
@@ -133,7 +133,7 @@ html.journey-theme body{background:#141f23}
  .journey-step.is-current:not(:first-child){margin-top:44px}
  .journey-trail{padding-top:60px;padding-bottom:42px}
  .journey-node-symbol{width:44px;height:44px}
- .journey-companion.on-left{left:38px}.journey-companion.on-right{right:38px}.journey-companion{top:173px;width:158px}.journey-mascot,.journey-mascot img{width:158px;height:218px}
+ .journey-companion.on-left{left:38px}.journey-companion.on-right{right:38px}.journey-companion{top:0;width:158px}.journey-mascot,.journey-mascot img{width:158px;height:218px}
  .journey-locate{bottom:28px;right:max(26px,calc((100vw - 210px - 520px)/2 + 22px))}
  .journey-preview{top:109px;scroll-margin-bottom:24px}
  .journey-panel{padding-top:38px}
@@ -156,3 +156,13 @@ html.journey-theme body{background:#141f23}
  .journey-preview{left:16px;right:16px}.journey-nav{padding-left:10px;padding-right:10px}.journey-panel{padding-left:20px;padding-right:20px}.journey-metrics>div{padding:16px 12px;gap:6px}.journey-metrics strong{font-size:20px}
 }
 @media(prefers-reduced-motion:reduce){.journey-app *,.journey-app *::before,.journey-app *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Reserve a row for the companion; its hit area cannot cover another node. */
+.journey-step.has-companion:not(.is-selected){height:264px}
+.journey-step.is-selected .journey-companion{display:none}
+@media(max-width:600px){
+ .journey-step.has-companion:not(.is-selected){height:194px}
+ .journey-companion{width:96px}
+ .journey-mascot,.journey-mascot img{width:96px;height:146px}
+ .journey-companion.on-left{left:8px}.journey-companion.on-right{right:8px}
+}

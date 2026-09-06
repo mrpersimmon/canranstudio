@@ -10,5 +10,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build:course
+      - run: npm run test:browser
       - run: npm run verify
       - run: git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readability-browser-evidence
+          path: test-results/
