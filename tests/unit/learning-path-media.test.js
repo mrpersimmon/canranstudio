@@ -23,8 +23,8 @@ test('the page plays original recordings at native speed, stops stale media and 
   }
   const context = {
     Audio: AudioStub, Promise, navigator: {}, console,
-    localStorage: {}, scrollTo() {}, addEventListener() {},
-    document: { querySelector: () => root, activeElement: null, addEventListener() {} },
+    localStorage: {}, scrollTo() {}, addEventListener() {}, matchMedia: () => ({ matches: true }),
+    document: { documentElement: { classList: { toggle() {} } }, querySelector: selector => selector === '[data-learning-path]' ? root : null, activeElement: null, addEventListener() {} },
     CanranCore: {
       curriculumCatalog: { getTeachingUnit: () => unit },
       learningStore: { createLocalStorageAdapter: () => store.createMemoryAdapter() },
@@ -54,4 +54,11 @@ test('the page plays original recordings at native speed, stops stale media and 
   assert.equal(rt.snapshot().canContinue, false);
   await click('map'); assert.equal(audioElements.at(-1).paused, true);
   audioElements.at(-1).events.ended(); await flush(); assert.equal(rt.snapshot().screen, 'map');
+  const before = JSON.stringify(rt.snapshot().record);
+  await click('journey-nav', 'review'); assert.match(root.innerHTML, /data-journey-tab="review"/);
+  await click('journey-nav', 'progress'); assert.match(root.innerHTML, /data-journey-tab="progress"/);
+  await click('journey-nav', 'path'); assert.match(root.innerHTML, /data-journey-tab="path"/);
+  await click('preview-node', 'C04'); assert.match(root.innerHTML, /id="journey-preview-C04"/);
+  handlers.keydown({ key: 'Escape' }); assert.doesNotMatch(root.innerHTML, /id="journey-preview-C04"/);
+  assert.equal(JSON.stringify(rt.snapshot().record), before);
 });

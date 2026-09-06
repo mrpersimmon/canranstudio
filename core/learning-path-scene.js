@@ -1,9 +1,9 @@
 (function attach(root, factory) {
   'use strict';
-  const api = factory();
+  const api = factory(root);
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (root) (root.CanranCore ||= {}).learningPathScene = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
   const escape = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
   function createRenderer(unit) {
@@ -128,6 +128,10 @@
       }).join('')}</ol><section class="lp-review-card">${icon('arrow-clockwise')}<div><h2>${escape(c.reviewTitle)}</h2><p>${escape(v.dueCount ? c.reviewBody : c.reviewEmpty)}</p></div>${button('review', c.reviewStart, { disabled: !v.dueCount, className: 'lp-secondary' })}</section>${v.legacyAvailable ? `<aside class="lp-legacy"><p>${escape(c.legacyMessage)}</p><a href="${escape(unit.legacy.href)}">${escape(c.legacyLink)}</a></aside>` : ''}</div>${next ? footer(v, `<p class="lp-footer-caption">${escape(next.title)}</p>${button('open-node', first.completeActivities ? c.resume : c.start, { id: next.id, className: 'lp-primary', symbol: 'arrow-right' })}`) : ''}`;
     }
     function renderCourseMap(v) {
+      if (unit.journey) {
+        const journey = typeof module === 'object' && module.exports ? require('./learning-journey') : root.CanranCore.learningJourney;
+        return journey.render(unit, v);
+      }
       const first = v.nodes.find(n => !n.done), next = first && unit.nodes.find(n => n.id === first.id);
       let chapterId = null;
       const route = unit.nodes.map((node, i) => {
@@ -199,7 +203,7 @@
       if (v.saveState) html += `<div class="lp-modal-backdrop"><section class="lp-modal" role="alertdialog" aria-modal="true" aria-labelledby="lp-save-title"><h2 id="lp-save-title">${escape(v.saveState === 'conflict' ? c.saveConflict : v.saveState === 'unreadable' ? c.unsupportedRecord : c.saveFailure)}</h2>${button(v.saveState === 'failed' ? 'save-retry' : 'reload', v.saveState === 'failed' ? c.saveRetry : c.reloadProgress, { className: 'lp-primary' })}</section></div>`;
       // Keep the package loader's existing ready-surface contract without
       // loading or coupling this renderer to V2's scene and styles.
-      return `<div class="station-app lp-shell${unit.courseId ? ' lp-course' : ''}">${html}</div>`;
+      return `<div class="station-app lp-shell${unit.courseId ? ' lp-course' : ''}${unit.journey && v.screen === 'map' ? ' has-journey' : ''}">${html}</div>`;
     }
     return Object.freeze({ render });
   }

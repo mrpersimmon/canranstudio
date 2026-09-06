@@ -13,7 +13,7 @@ async function withServer(run) {
   finally { await new Promise(resolve => server.close(resolve)); }
 }
 
-test('standalone preview serves the same home and all 199 verified dependencies', async () => {
+test('standalone preview serves the same home and all verified dependencies', async () => {
   const { files } = prepare();
   await withServer(async origin => {
     for (const [relative, expected] of files) {
