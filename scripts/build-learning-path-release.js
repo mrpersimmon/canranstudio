@@ -1,7 +1,6 @@
 'use strict';
 
-// Publish the reviewed course alone. The general static build intentionally
-// includes older courses, so it is not the artifact for this home-page release.
+// Publish the reviewed course as the site's single root-page experience.
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
@@ -51,6 +50,14 @@ function prepare(root = ROOT) {
   files.set(PACKAGE, bytes);
   files.set('index.html', Buffer.from(html));
   read('scripts/build-learning-path-release.js');
+  read('scripts/build-learning-course-package.js');
+  read('core/learning-course-catalog.js');
+  const authored = JSON.parse(read('content/learning-course.json'));
+  const packaged = files.get('poc/learning-path/course-package/unit-catalog.json');
+  if (!packaged || !packaged.equals(Buffer.from(JSON.stringify(authored, null, 2) + '\n'))) {
+    throw Error('Authored course and package differ; run npm run build:course');
+  }
+  read('content/textbook-sources.json');
   read(CONFIG);
   return { files, sources, manifest, originalManifestSha256: digest(originalBytes), packageManifestSha256: digest(bytes) };
 }
@@ -71,7 +78,10 @@ function build() {
   const commit = assertCommitted(prepared.sources);
   const out = path.join(ROOT, 'dist/learning-path');
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  if (fs.existsSync(out)) throw Error('Release output already exists; use a fresh build directory');
+  if (fs.existsSync(out)) {
+    if (!fs.lstatSync(out).isDirectory() || fs.realpathSync(out) !== out) throw Error('Unsafe release output');
+    fs.rmSync(out, { recursive: true });
+  }
   fs.mkdirSync(out);
   const hashes = {};
   for (const [relative, bytes] of [...prepared.files].sort(([a], [b]) => a.localeCompare(b))) {

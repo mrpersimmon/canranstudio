@@ -1,36 +1,15 @@
 {
-  "name": "canranstudio",
-  "version": "0.0.0",
+  "name": "canranstudio-duolingo-version",
+  "version": "4.0.0",
   "private": true,
-  "engines": {
-    "node": ">=20"
-  },
+  "engines": { "node": ">=20" },
   "scripts": {
-    "build:static": "node scripts/build-static.js",
-    "build:course-packages": "node scripts/build-course-package-manifests.js",
-    "sync:home-fallback": "node scripts/home-course-fallback.js",
-    "verify:live:http": "node scripts/verify-live.js http://59.110.217.36",
-    "test:deploy": "node --test tests/deploy/*.test.js",
-    "test:unit": "node --test tests/unit/*.test.js",
-    "test:e2e": "playwright test",
-    "test:state": "playwright test tests/e2e/l49-progress.spec.js tests/e2e/home-progress.spec.js tests/e2e/l50-assessment.spec.js tests/e2e/soundmark-progress.spec.js tests/e2e/l51-progress.spec.js tests/e2e/l52-progress.spec.js tests/e2e/l53-progress.spec.js tests/e2e/l54-progress.spec.js",
-    "test": "npm run test:unit && npm run test:e2e",
-    "verify:v1:release": "npm run test:unit && npm run test:e2e && npm run test:deploy && npm run build:static",
-    "art:build-atlas-background": "node scripts/build-atlas-background.js",
-    "art:build-route-page": "node scripts/build-route-page-assets.js",
-    "art:build-states": "node scripts/build-landmark-states.js",
-    "art:build:lesson3-4": "node scripts/extract-lesson3-4-generated-assets.mjs",
-    "audio:build:lesson3-4": "node scripts/build-story-stage-candidate-audio.mjs --unit=NCE-U02",
-    "audio:build:lesson5-6": "node scripts/build-story-stage-candidate-audio.mjs --unit=NCE-U03",
-    "audio:build:lesson7-8": "node scripts/build-story-stage-candidate-audio.mjs --unit=NCE-U04",
-    "vendor:fonts": "node scripts/vendor-fonts.js"
-  },
-  "devDependencies": {
-    "@fontsource/baloo-2": "5.3.0",
-    "@fontsource/fredoka": "5.3.0",
-    "@fontsource/zcool-kuaile": "5.3.0",
-    "@playwright/test": "1.62.0",
-    "bootstrap-icons": "1.11.3",
-    "sharp": "^0.35.3"
+    "dev": "node scripts/serve-learning-path.js",
+    "build:course": "node scripts/build-learning-course-package.js",
+    "build": "node scripts/build-learning-path-release.js",
+    "build:static": "npm run build",
+    "test": "node --test tests/unit/*.test.js",
+    "test:unit": "npm test",
+    "verify": "npm run build:course && npm test && npm run build"
   }
 }

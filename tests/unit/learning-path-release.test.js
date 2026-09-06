@@ -39,3 +39,19 @@ test('the release refuses changed or untracked input instead of labelling it as 
     assert.throws(() => assertCommitted(new Map([['missing.js', Buffer.from('new')]]), dir), /not committed/);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('the release refuses an authored catalog that has not been repackaged', () => {
+  const dir = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'canran-course-source-')));
+  try {
+    for (const [relative, bytes] of prepare().sources) {
+      const filename = path.join(dir, relative);
+      fs.mkdirSync(path.dirname(filename), { recursive: true });
+      fs.writeFileSync(filename, bytes);
+    }
+    const filename = path.join(dir, 'content/learning-course.json');
+    const authored = JSON.parse(fs.readFileSync(filename));
+    authored.title = 'Changed course';
+    fs.writeFileSync(filename, JSON.stringify(authored, null, 2) + '\n');
+    assert.throws(() => prepare(dir), /Authored course and package differ/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});

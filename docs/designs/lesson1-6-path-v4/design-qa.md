@@ -1,5 +1,7 @@
 # 前六课连续路径 V4 页面验收
 
+历史记录：以下内容保留 V4 实现时的验收结论。后续发布见 [publication.md](publication.md)，独立分支本次验证见 [branch-isolation.md](branch-isolation.md)。
+
 日期：2026-09-06。范围：本地候选的课程界面、操作和资源就绪，不包含逐条人耳发音验收或公开发布。
 
 final result: passed

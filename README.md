@@ -1,77 +1,46 @@
-# canranstudio
+# 探险猫 · 猫猫小镇
 
-儿童英语互动课件静态站点。
+`codex/duolingo-version` 是当前 Duolingo 理念重构版的独立开发分支：新概念英语 Lesson 1–6 编排为 11 个连续学习节点，包含完整猫猫角色、互动故事、逐词学习、场景考察与跨课复习。
 
-## Public routes
+## 本地运行
 
-- `/` — 十二城区冒险图鉴世界总览
-- `/lesson49/` — 新概念英语 Lesson 49
-- `/lesson49/present/` — Lesson 49 公开课堂投屏
-- `/lesson50/` — 新概念英语 Lesson 50
-- `/lesson51/` — 新概念英语 Lesson 51《A Pleasant Climate》
-- `/lesson52/` — 新概念英语 Lesson 52《What Nationality Are They?》环球护照之旅 Ⅰ
-- `/lesson53/` — 新概念英语 Lesson 53《An Interesting Climate》英伦气候小主播
-- `/lesson54/` — 新概念英语 Lesson 54《Where Do They Come From?》环球护照之旅 Ⅱ
-- `/soundmark/` — 音标魔法乐园
-- `/home/` — 兼容入口，跳转到 `/`
-
-## Local verification
-
-Requires Node.js 20 or newer.
+需要 Node.js 20 或更新版本。已使用的图片、字体、录音随仓库保存，运行与构建无需额外第三方依赖。
 
 ```bash
 npm ci
-npx playwright install chromium
+npm run build:course
 npm test
+npm run dev
 ```
 
-For a clean V1 release candidate, run the complete local boundary gate:
+打开 <http://127.0.0.1:42817/>。本地预览与正式发布共用同一个首页生成过程；它只提供当前课程及依赖。修改后重新生成课程包、重启预览并刷新页面。
+
+## 维护位置
+
+| 目录 | 职责 |
+| --- | --- |
+| `content/learning-course.json` | 课程内容唯一编写入口：课文、题目、角色、音频映射、顺序与复习规则 |
+| `content/textbook-sources.json` | 前六课原文的固定核对基准，用于防止重构时改变教材原句 |
+| `core/` | 当前课程校验、路径运行、场景呈现、进度保存与课程包加载 |
+| `poc/learning-path/` | 当前 HTML 入口、附加样式、新猫猫素材及生成的课程包 |
+| `poc/lesson1-2-experience/` | 当前仍使用的共享页面、样式、猫猫和录音资源 |
+| `assets/` | 当前课程所用图片、录音、字体及许可 |
+| `docs/` | Duolingo 参考材料、现行设计、页面验收与发布记录 |
+| `tests/` | 当前课程、记录兼容、音频控制、包完整性与预览检查 |
+| `scripts/`、`deploy/` | 当前课程的打包、预览、单首页发布和部署说明 |
+
+课文只在 catalog 中编写，页面负责呈现和转发操作。`poc/learning-path/course-package/unit-catalog.json` 是自动生成文件，不直接修改。部分资源保留原路径以兼容已发布课程的地址与缓存；这些目录没有另一套可访问的旧课程。V3.6 测试快照仅验证现行产品的旧进度导入契约。
+
+## 验证与发布
 
 ```bash
-npm run verify:v1:release
+npm run verify
 ```
 
-This command runs unit, browser, deployment-contract, and exact static-build verification. It
-does not commit, push, deploy, or change ICP, DNS, TLS, or the accepted HTTP origin. The final
-build step deliberately refuses public files that differ from `HEAD`.
+该命令重建课程包、运行当前范围测试，并生成 `dist/learning-path/`。发布过程要求所有输入与 Git HEAD 一致，因此修改和重新生成后应先提交，再运行完整发布验证；平时可先单独执行 `npm run build:course` 与 `npm test`。
 
-## Runtime and font assets
+发布包只含一个首页与必要资源。部署步骤见 [部署说明](deploy/README.md)。创建本分支不自动推送或重新部署；线上地址仍为 <https://www.canranstudio.cn/>。
 
-The published site remains static and package-free at runtime. The pinned Fontsource 5.3.0
-packages are build-time inputs only: run `npm run vendor:fonts` after `npm ci` to regenerate the
-committed local font assets. The generated WOFF2 files, `fonts.css`, and copied OFL licenses all
-live under `assets/fonts/`, and every public page loads its fonts from that same-origin path.
+## 文档
 
-Certificate issue, print, and save entry points re-check their own course eligibility before they act. The six course certificate experiences provide accessible, polite, atomic feedback. Lessons 49, 50, 51, 52, 53, and 54 require exactly 15/15 stars; soundmark requires exactly 12/12 stars. Lesson 49 continues to export through a Blob and revoke every object URL after preview closure, authorization loss, or creation failure.
-
-## Production transport
-
-The current accepted deployment target is `http://59.110.217.36`. HTTPS, HSTS, and an
-HTTP-to-HTTPS redirect are intentionally out of scope until the external filing and deployment
-decision changes. RISK-HTTP-01 remains accepted and deferred.
-
-See `deploy/README.md` for the release and verification contract.
-
-See `docs/course-authoring.md` for the single-catalog workflow used when adding another numbered
-Lesson while the V1 map remains limited to Lesson 49–60.
-
-See `docs/classroom-presentation.md` for the public, device-data-free classroom presentation contract.
-
-See `docs/mobile-release-smoke-checklist.md` for the required real-device WeChat, iPhone Safari,
-and Android Chromium evidence. Those checks remain manual and must not be replaced by desktop
-browser simulation.
-
-See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the public, indexable,
-credential-free static V1 release boundary and its automated/manual evidence split.
-
-“暖灯集市”当前发布 Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线。每个地点
-都使用同一高清母版逐步编辑的完整累计状态图：编号课程为 `state-0` 至 `state-5`，音标
-专项为 `state-0` 至 `state-4`。运行时只加载当前状态的一张图，完成阶段时切换成长前后
-两张完整图；完成全部阶段后会永久保留独立纪念物。
-
-See `docs/v1-map-usability-pilot-toolkit.md` and its linked workbook for the blank, privacy-safe
-two-round child usability and teacher-presentation trial kit. Actual trial results remain an
-institution-run manual requirement.
-
-Lesson 49 is the first catalog-declared classroom presentation. Its standalone public route uses
-the existing same-origin recordings and deliberately omits device progress and profile runtimes.
+从 [文档索引](docs/README.md) 开始；[现行课程设计](docs/designs/lesson1-6-path-v4/implementation.md) 说明节点与考察方式，[分支整理记录](docs/designs/lesson1-6-path-v4/branch-isolation.md) 说明保留范围和验证结果。当前工作树已移除旧网站、旧课程运行代码及无关文档，原始 Git 历史与其他分支保留。

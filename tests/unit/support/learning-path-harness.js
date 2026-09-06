@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('node:assert/strict');
-const catalog = require('../../../core/curriculum-catalog');
+const catalog = { getPathExperience: () => require('../fixtures/lesson1-2-v36-catalog.json') };
 const runtime = require('../../../core/learning-path-runtime');
 const store = require('../../../core/learning-store');
 const scene = require('../../../core/learning-path-scene');

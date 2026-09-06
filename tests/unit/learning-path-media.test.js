@@ -3,15 +3,15 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const catalog = require('../../core/curriculum-catalog');
+const catalog = require('../../core/learning-course-catalog');
 const runtime = require('../../core/learning-path-runtime');
 const store = require('../../core/learning-store');
 const scene = require('../../core/learning-path-scene');
 const boot = fs.readFileSync(require.resolve('../../poc/lesson1-2-experience/path.js'), 'utf8');
 
 test('the page plays original recordings at native speed, stops stale media and advances story only on clicks', async () => {
-  const unit = catalog.getPathExperience(), audioElements = [], handlers = {};
-  const root = { dataset: { unitId: 'NCE-U01' }, innerHTML: '', querySelector: () => null, querySelectorAll: () => [], addEventListener: (type, handler) => { handlers[type] = handler; } };
+  const unit = catalog.getCourse(), audioElements = [], handlers = {};
+  const root = { dataset: { unitId: unit.unitId }, innerHTML: '', querySelector: () => null, querySelectorAll: () => [], addEventListener: (type, handler) => { handlers[type] = handler; } };
   let rt;
   class AudioStub {
     constructor(src) { this.src = src; this.events = {}; audioElements.push(this); }
