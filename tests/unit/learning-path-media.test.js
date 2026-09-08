@@ -35,7 +35,8 @@ test('the page plays original recordings at native speed, stops stale media and 
   vm.runInNewContext(boot, context);
   const flush = () => new Promise(resolve => setImmediate(resolve));
   async function click(action, id) {
-    handlers.click({ target: { closest: () => ({ dataset: { action, id }, disabled: false }) } });
+    const button = { dataset: { action, id }, disabled: false };
+    handlers.click({ target: { closest: selector => selector === 'button[data-action]' ? button : null } });
     await flush();
   }
   await click('open-node', 'K01');
