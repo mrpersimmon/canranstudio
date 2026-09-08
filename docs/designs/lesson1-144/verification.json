@@ -1,0 +1,1083 @@
+{
+  "date": "2026-09-08",
+  "status": "passed",
+  "scope": "New Concept English Book 1, Lesson 1–144",
+  "revision": "lesson1-144-v6.0",
+  "counts": {
+    "lessons": 144,
+    "pairs": 72,
+    "nodes": 354,
+    "activities": 1567,
+    "originalStorySegments": 991,
+    "sources": 4168,
+    "challenges": 73,
+    "challengeQuestions": 580,
+    "newScenes": 47,
+    "newRecordings": 1592,
+    "totalRecordings": 2823
+  },
+  "source": {
+    "pdfSha256": "a54740bdce7423b98ea30334dca9043603ef5533f85e64f86f5af6d31d93be9f",
+    "newSegments": 642,
+    "normalizedMatches": 641,
+    "visuallyVerifiedOcrCorrections": 1,
+    "details": "source-verification.json"
+  },
+  "programChecks": {
+    "effectiveUniqueCasesPassed": 95,
+    "initial": {
+      "log": "unit-tests-continued.log",
+      "tests": 93,
+      "passed": 92,
+      "failed": 1
+    },
+    "initialFailure": "Stale 25-pair test expectation; corrected to an explicit 72 pairs and all 72 rendered labels.",
+    "reruns": [
+      {
+        "log": "journey-tests-144.log",
+        "tests": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "log": "final-content-tests.log",
+        "tests": 7,
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "log": "final-guard-tests.log",
+        "tests": 6,
+        "passed": 6,
+        "failed": 0
+      }
+    ],
+    "initialCommandExitedSuccessfully": false,
+    "answerReview": {
+      "reviewedSentences": 82,
+      "acceptedAlternatives": 129,
+      "negativeCases": 6,
+      "positiveCases": 7,
+      "redLog": "translation-contraction-red.log"
+    }
+  },
+  "browser": {
+    "fingerprint": "82e426806050d1e3371ca6a4f9a1d8119ccccfc9109f585bc81310f69bed8d9a",
+    "finishedAt": "2026-09-08T03:45:42.812Z",
+    "states": 40660,
+    "failures": [],
+    "viewports": [
+      {
+        "viewport": [
+          320,
+          568
+        ],
+        "states": 10165,
+        "scrollbarWidths": [
+          15
+        ],
+        "maxOverflow": 0
+      },
+      {
+        "viewport": [
+          420,
+          856
+        ],
+        "states": 10165,
+        "scrollbarWidths": [
+          15
+        ],
+        "maxOverflow": 0
+      },
+      {
+        "viewport": [
+          906,
+          801
+        ],
+        "states": 10165,
+        "scrollbarWidths": [
+          15
+        ],
+        "maxOverflow": 0
+      },
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "states": 10165,
+        "scrollbarWidths": [
+          15
+        ],
+        "maxOverflow": 0
+      }
+    ],
+    "negativeControls": [
+      {
+        "name": "completion-skips-map",
+        "caught": true,
+        "injected": {
+          "action": "continue-course",
+          "top": 728,
+          "bottom": 784,
+          "viewportHeight": 801
+        },
+        "errors": [
+          {
+            "rule": "completion-primary-action",
+            "action": "continue-course"
+          }
+        ]
+      },
+      {
+        "name": "completion-button-offscreen",
+        "caught": true,
+        "injected": {
+          "action": "map",
+          "top": 2330,
+          "bottom": 2386,
+          "viewportHeight": 801
+        },
+        "errors": [
+          {
+            "rule": "completion-action-offscreen"
+          }
+        ]
+      },
+      {
+        "name": "low-contrast-sticky-title",
+        "caught": true,
+        "viewport": [
+          906,
+          801
+        ]
+      },
+      {
+        "name": "covered-sticky-title",
+        "caught": true,
+        "viewport": [
+          906,
+          801
+        ]
+      },
+      {
+        "name": "white-on-light",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "dark-multiply",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "darkened-art",
+            "src": "http://127.0.0.1:62928/poc/learning-path/assets/dark/keeper-cutout.webp"
+          },
+          {
+            "rule": "darkened-art",
+            "src": "/poc/learning-path/assets/dark/customer-cutout.webp"
+          }
+        ]
+      },
+      {
+        "name": "missing-image",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "image-loaded",
+            "src": "/__qa__/deliberately-missing.png"
+          }
+        ]
+      },
+      {
+        "name": "opaque-art",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "teaching-art-cutout",
+            "src": "/__qa__/opaque-character.png",
+            "transparent": 0,
+            "opaque": 4096,
+            "samples": 4096
+          }
+        ]
+      },
+      {
+        "name": "theme-discontinuity",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "screen-canvas",
+            "actual": "rgb(223, 230, 223)",
+            "expected": "rgb(20, 31, 35)"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-header-label"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 10.6pt (14.08px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character:nth-child(1) > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character.is-speaking > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.62 (foreground color: #49c0f8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "scrollbar-width-overflow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "horizontal-overflow",
+            "width": 906,
+            "contentWidth": 891,
+            "scrollWidth": 906,
+            "scrollbarWidth": 15
+          }
+        ]
+      },
+      {
+        "name": "uneven-node-spacing",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "journey-node-spacing",
+            "node": "K03",
+            "distance": 264,
+            "expected": 162
+          }
+        ]
+      },
+      {
+        "name": "off-center-arrow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "icon-not-centered",
+            "action": "journey-locate",
+            "x": -5,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "name": "route-progress-in-lesson",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "session-progress-scope",
+            "actual": {
+              "label": "本次闯关进度",
+              "completed": 1,
+              "total": 11
+            },
+            "expected": {
+              "completed": 9,
+              "total": 9
+            }
+          },
+          {
+            "rule": "completion-progress-incomplete"
+          }
+        ]
+      },
+      {
+        "name": "completion-skips-map",
+        "caught": true,
+        "injected": {
+          "action": "continue-course",
+          "top": 827,
+          "bottom": 883,
+          "viewportHeight": 900
+        },
+        "errors": [
+          {
+            "rule": "completion-primary-action",
+            "action": "continue-course"
+          }
+        ]
+      },
+      {
+        "name": "completion-button-offscreen",
+        "caught": true,
+        "injected": {
+          "action": "map",
+          "top": 2627,
+          "bottom": 2683,
+          "viewportHeight": 900
+        },
+        "errors": [
+          {
+            "rule": "completion-action-offscreen"
+          }
+        ]
+      },
+      {
+        "name": "low-contrast-sticky-title",
+        "caught": true,
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      {
+        "name": "covered-sticky-title",
+        "caught": true,
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      {
+        "name": "white-on-light",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "dark-multiply",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "darkened-art",
+            "src": "http://127.0.0.1:62928/poc/learning-path/assets/dark/keeper-cutout.webp"
+          },
+          {
+            "rule": "darkened-art",
+            "src": "/poc/learning-path/assets/dark/customer-cutout.webp"
+          }
+        ]
+      },
+      {
+        "name": "missing-image",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "image-loaded",
+            "src": "/__qa__/deliberately-missing.png"
+          }
+        ]
+      },
+      {
+        "name": "opaque-art",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "teaching-art-cutout",
+            "src": "/__qa__/opaque-character.png",
+            "transparent": 0,
+            "opaque": 4096,
+            "samples": 4096
+          }
+        ]
+      },
+      {
+        "name": "theme-discontinuity",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "screen-canvas",
+            "actual": "rgb(223, 230, 223)",
+            "expected": "rgb(20, 31, 35)"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-header-label"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 10.6pt (14.08px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character:nth-child(1) > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character.is-speaking > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.62 (foreground color: #49c0f8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "scrollbar-width-overflow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "horizontal-overflow",
+            "width": 1440,
+            "contentWidth": 1425,
+            "scrollWidth": 1440,
+            "scrollbarWidth": 15
+          }
+        ]
+      },
+      {
+        "name": "uneven-node-spacing",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "journey-node-spacing",
+            "node": "K03",
+            "distance": 264,
+            "expected": 162
+          }
+        ]
+      },
+      {
+        "name": "off-center-arrow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "icon-not-centered",
+            "action": "journey-locate",
+            "x": -5,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "name": "route-progress-in-lesson",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "session-progress-scope",
+            "actual": {
+              "label": "本次闯关进度",
+              "completed": 1,
+              "total": 11
+            },
+            "expected": {
+              "completed": 9,
+              "total": 9
+            }
+          },
+          {
+            "rule": "completion-progress-incomplete"
+          }
+        ]
+      },
+      {
+        "name": "completion-skips-map",
+        "caught": true,
+        "injected": {
+          "action": "continue-course",
+          "top": 787,
+          "bottom": 843,
+          "viewportHeight": 856
+        },
+        "errors": [
+          {
+            "rule": "completion-primary-action",
+            "action": "continue-course"
+          }
+        ]
+      },
+      {
+        "name": "completion-button-offscreen",
+        "caught": true,
+        "injected": {
+          "action": "map",
+          "top": 2499,
+          "bottom": 2555,
+          "viewportHeight": 856
+        },
+        "errors": [
+          {
+            "rule": "completion-action-offscreen"
+          }
+        ]
+      },
+      {
+        "name": "low-contrast-sticky-title",
+        "caught": true,
+        "viewport": [
+          420,
+          856
+        ]
+      },
+      {
+        "name": "covered-sticky-title",
+        "caught": true,
+        "viewport": [
+          420,
+          856
+        ]
+      },
+      {
+        "name": "white-on-light",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "dark-multiply",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "darkened-art",
+            "src": "http://127.0.0.1:62928/poc/learning-path/assets/dark/keeper-cutout.webp"
+          },
+          {
+            "rule": "darkened-art",
+            "src": "/poc/learning-path/assets/dark/customer-cutout.webp"
+          }
+        ]
+      },
+      {
+        "name": "missing-image",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "image-loaded",
+            "src": "/__qa__/deliberately-missing.png"
+          }
+        ]
+      },
+      {
+        "name": "opaque-art",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "teaching-art-cutout",
+            "src": "/__qa__/opaque-character.png",
+            "transparent": 0,
+            "opaque": 4096,
+            "samples": 4096
+          }
+        ]
+      },
+      {
+        "name": "theme-discontinuity",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "screen-canvas",
+            "actual": "rgb(223, 230, 223)",
+            "expected": "rgb(20, 31, 35)"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-header-label"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 9.6pt (12.8px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character:nth-child(1) > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character.is-speaking > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.62 (foreground color: #49c0f8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "scrollbar-width-overflow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "horizontal-overflow",
+            "width": 420,
+            "contentWidth": 405,
+            "scrollWidth": 420,
+            "scrollbarWidth": 15
+          }
+        ]
+      },
+      {
+        "name": "uneven-node-spacing",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "journey-node-spacing",
+            "node": "K03",
+            "distance": 264,
+            "expected": 162
+          }
+        ]
+      },
+      {
+        "name": "off-center-arrow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "icon-not-centered",
+            "action": "journey-locate",
+            "x": -5,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "name": "route-progress-in-lesson",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "session-progress-scope",
+            "actual": {
+              "label": "本次闯关进度",
+              "completed": 1,
+              "total": 11
+            },
+            "expected": {
+              "completed": 9,
+              "total": 9
+            }
+          },
+          {
+            "rule": "completion-progress-incomplete"
+          }
+        ]
+      },
+      {
+        "name": "completion-skips-map",
+        "caught": true,
+        "injected": {
+          "action": "continue-course",
+          "top": 499,
+          "bottom": 555,
+          "viewportHeight": 568
+        },
+        "errors": [
+          {
+            "rule": "completion-primary-action",
+            "action": "continue-course"
+          }
+        ]
+      },
+      {
+        "name": "completion-button-offscreen",
+        "caught": true,
+        "injected": {
+          "action": "map",
+          "top": 1635,
+          "bottom": 1691,
+          "viewportHeight": 568
+        },
+        "errors": [
+          {
+            "rule": "completion-action-offscreen"
+          }
+        ]
+      },
+      {
+        "name": "low-contrast-sticky-title",
+        "caught": true,
+        "viewport": [
+          320,
+          568
+        ]
+      },
+      {
+        "name": "covered-sticky-title",
+        "caught": true,
+        "viewport": [
+          320,
+          568
+        ]
+      },
+      {
+        "name": "white-on-light",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-bubble > p"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.05 (foreground color: #f1f7f8, background color: #eef1e8, font size: 13.4pt (17.92px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "dark-multiply",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "darkened-art",
+            "src": "http://127.0.0.1:62928/poc/learning-path/assets/dark/keeper-cutout.webp"
+          },
+          {
+            "rule": "darkened-art",
+            "src": "/poc/learning-path/assets/dark/customer-cutout.webp"
+          }
+        ]
+      },
+      {
+        "name": "missing-image",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "image-loaded",
+            "src": "/__qa__/deliberately-missing.png"
+          }
+        ]
+      },
+      {
+        "name": "opaque-art",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "teaching-art-cutout",
+            "src": "/__qa__/opaque-character.png",
+            "transparent": 0,
+            "opaque": 4096,
+            "samples": 4096
+          }
+        ]
+      },
+      {
+        "name": "theme-discontinuity",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "screen-canvas",
+            "actual": "rgb(223, 230, 223)",
+            "expected": "rgb(20, 31, 35)"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-header-label"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 9.6pt (12.8px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character:nth-child(1) > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".lp-story-character.is-speaking > .lp-character-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.62 (foreground color: #49c0f8, background color: #dfe6df, font size: 9.1pt (12.16px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-keeper > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          },
+          {
+            "rule": "color-contrast",
+            "target": [
+              ".is-owner > .lp-chat-message > .lp-chat-name"
+            ],
+            "message": "Fix any of the following:\n  Element has insufficient color contrast of 1.75 (foreground color: #a0b0b8, background color: #dfe6df, font size: 8.4pt (11.2px), font weight: bold). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      },
+      {
+        "name": "scrollbar-width-overflow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "horizontal-overflow",
+            "width": 320,
+            "contentWidth": 305,
+            "scrollWidth": 320,
+            "scrollbarWidth": 15
+          }
+        ]
+      },
+      {
+        "name": "uneven-node-spacing",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "journey-node-spacing",
+            "node": "K03",
+            "distance": 264,
+            "expected": 162
+          }
+        ]
+      },
+      {
+        "name": "off-center-arrow",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "icon-not-centered",
+            "action": "journey-locate",
+            "x": -5,
+            "y": 0
+          }
+        ]
+      },
+      {
+        "name": "route-progress-in-lesson",
+        "caught": true,
+        "errors": [
+          {
+            "rule": "session-progress-scope",
+            "actual": {
+              "label": "本次闯关进度",
+              "completed": 1,
+              "total": 11
+            },
+            "expected": {
+              "completed": 9,
+              "total": 9
+            }
+          },
+          {
+            "rule": "completion-progress-incomplete"
+          }
+        ]
+      }
+    ],
+    "fullProof": "test-results/readability-proof.json"
+  },
+  "media": {
+    "status": "passed",
+    "recordings": 2823,
+    "fingerprint": "78a0383b39469c29445e17066f0c23c55eb0d202a20c48cc2b3d6eddbfc3250d",
+    "finishedAt": "2026-09-07T02:18:34.540Z",
+    "scope": "Decoder, non-silent waveform and duration; not a claim of human listening acceptance."
+  },
+  "nativeMedia": {
+    "status": "passed",
+    "finishedAt": "2026-09-07T02:21:12.666Z",
+    "samples": 31,
+    "currentSampleHashesVerified": true,
+    "allSampleEnded": true,
+    "allSampleRange206": true,
+    "offlineReplay": true,
+    "sixLessonUpgrade": {
+      "preservedNodes": 11,
+      "next": "L07-STORY",
+      "loadedScene": true
+    }
+  },
+  "preservedFirst50": {
+    "sources": 1860,
+    "nodes": 129,
+    "activities": 576,
+    "chapters": 25,
+    "referenceGroups": 50,
+    "challenges": 26
+  },
+  "nativeWalkthrough": {
+    "origin": "http://127.0.0.1:42860/",
+    "isolatedSeededTestProfile": true,
+    "first50Upgrade": {
+      "completed": 129,
+      "total": 354,
+      "next": "L51-STORY",
+      "canStart": true
+    },
+    "lesson121": {
+      "nativeStoryLines": 13,
+      "comprehensionChecks": 2,
+      "completedBefore": 301,
+      "completedAfter": 302,
+      "returnedToMap": true
+    },
+    "challenge143144": {
+      "independent": 6,
+      "supported": 2,
+      "reset": {
+        "beforeReset": {
+          "completedActivities": 1567,
+          "challengeAnswers": 8,
+          "independent": 6
+        },
+        "afterReset": {
+          "completedActivities": 1567,
+          "challengeAnswers": 0,
+          "independent": 0
+        },
+        "afterReload": {
+          "completedActivities": 1567,
+          "challengeAnswers": 0,
+          "independent": 0
+        },
+        "afterUndo": {
+          "completedActivities": 1567,
+          "challengeAnswers": 8,
+          "independent": 6
+        }
+      }
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "screenshots": "qa/screenshots.json",
+    "details": "qa/README.md",
+    "answerReview": {
+      "date": "2026-09-08",
+      "origin": "http://127.0.0.1:42860/",
+      "viewport": [
+        320,
+        568
+      ],
+      "question": "CH61-62-5",
+      "invalidInput": "He's a toothache.",
+      "rejection": {
+        "before": "5",
+        "after": "5",
+        "text": "输入挑战\n翻译这句话\n\n他牙痛。\n\n再试一次\n\n参考答案：\n\nHe has a toothache.\n\n听参考答案\n修改答案"
+      },
+      "correctedInput": "He's got a toothache.",
+      "correction": {
+        "accepted": true,
+        "feedback": "输入挑战\n翻译这句话\n\n他牙痛。\n\n答对了！\n\nHe has a toothache.\n\n听参考答案\n继续",
+        "after": "6",
+        "geometry": {
+          "width": 320,
+          "content": 320,
+          "scroll": 320
+        }
+      }
+    }
+  },
+  "performance": {
+    "scope": "Completed 354-node record, repeated native-runtime word actions in an isolated in-memory adapter. Run after browser matrix to reduce CPU contention.",
+    "events": 61,
+    "recordUtf16Bytes": 1989202,
+    "p50Ms": 7.792666999999938,
+    "p95Ms": 10.273167,
+    "maxMs": 27.210165999999987,
+    "note": "Isolated in-memory runtime benchmark, not a measurement for every phone or a claim about browser storage latency."
+  },
+  "package": {
+    "startupFiles": 70,
+    "startupBytes": 3154821,
+    "startupLimitBytes": 4194304,
+    "codec": "course-table-v1",
+    "catalogSha256": "cf418c79152237a3fa8a02dd439edf5fe7eb157279bcfcebea77a81b8865c2a8",
+    "releaseManifest": "dist/learning-path/release-manifest.json"
+  },
+  "publication": {
+    "pushed": false,
+    "deployed": false,
+    "note": "This record covers local construction and acceptance. Exact build commit is recorded in the release manifest."
+  },
+  "limits": [
+    "Browser matrix uses test audio-completion events; real audio is covered separately by 31 native samples and a full Lesson 121 walkthrough.",
+    "2,823 recordings have not all received individual human listening acceptance.",
+    "Typed challenges accept explicitly reviewed equivalent forms; they are not an unrestricted semantic English grader.",
+    "No claim of QA on every physical device or of official-site publication."
+  ]
+}

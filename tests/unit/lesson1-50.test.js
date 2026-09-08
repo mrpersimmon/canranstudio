@@ -21,12 +21,12 @@ test('a blank targets a whole word instead of matching his inside This',()=>{
   }
 });
 
-test('all 25 textbook pairs have original text, teaching, retrieval and an optional written challenge',()=>{
-  assert.deepEqual(unit.lessonIds,Array.from({length:50},(_,i)=>i+1));
-  assert.equal(unit.chapters.length,25);
-  assert.equal(unit.referenceGroups.length,50);
+test('all 72 textbook pairs have original text, teaching, retrieval and an optional written challenge',()=>{
+  assert.deepEqual(unit.lessonIds,Array.from({length:144},(_,i)=>i+1));
+  assert.equal(unit.chapters.length,72);
+  assert.equal(unit.referenceGroups.length,144);
   const introduced=new Set(Object.values(baseline.activities).flatMap(a=>a.sourceRefs));
-  for(let lesson=7;lesson<=49;lesson+=2){
+  for(let lesson=7;lesson<=143;lesson+=2){
     const chapter=unit.chapters.find(c=>c.lessonIds[0]===lesson);
     assert.deepEqual(chapter.lessonIds,[lesson,lesson+1]);
     const nodes=unit.nodes.filter(n=>n.chapterId===chapter.id);

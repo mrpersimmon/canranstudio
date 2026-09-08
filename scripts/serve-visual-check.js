@@ -9,10 +9,13 @@ function createVisualServer({sharded=false}={}) {
   const prepared = prepare(), stamp = fingerprint(prepared), token = crypto.randomBytes(24).toString('hex');
   const files = new Map(prepared.files);
   const html = files.get('index.html').toString();
+  // Classic scrollbars consume layout width; overlay-only headless defaults
+  // must not hide narrow-screen overflow. Keep this device fixture out of releases.
+  const fixtureHtml = html.replace('</head>','<link rel="stylesheet" href="/__qa__/scrollbar.css"></head>');
   // Retain the exact production HTML, including critical loader CSS. Only the
   // package installer is replaced with a deterministic, test-only adapter.
-  files.set('__qa__/frame.html', Buffer.from(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace('</body>','<script src="/__qa__/fixture-boot.js"></script></body>')));
-  files.set('__qa__/loader.html', Buffer.from(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace('</body>','<script src="/__qa__/axe.js"></script></body>')));
+  files.set('__qa__/frame.html', Buffer.from(fixtureHtml.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace('</body>','<script src="/__qa__/fixture-boot.js"></script></body>')));
+  files.set('__qa__/loader.html', Buffer.from(fixtureHtml.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace('</body>','<script src="/__qa__/axe.js"></script></body>')));
   for (const file of fs.readdirSync(path.join(ROOT,'tests/browser'))) files.set('__qa__/'+file,fs.readFileSync(path.join(ROOT,'tests/browser',file)));
   files.set('__qa__/axe.js',fs.readFileSync(require.resolve('axe-core/axe.min.js')));
   files.set('__qa__/config.json',Buffer.from(JSON.stringify({token, fingerprint:stamp, viewports:VIEWPORTS})));

@@ -26,6 +26,12 @@ function validateReport(report) {
   if (report?.schema !== 1 || report.status !== 'passed' || !Array.isArray(report.checks) || !report.checks.length) throw Error('Browser readability check failed or did not finish');
   if (report.checks.some(check=>!Array.isArray(check.errors)||check.errors.length)) throw Error('Browser readability violations remain');
   if (report.checks.some(check=>check.expectedTheme!=='dark'||check.canvas!=='rgb(20, 31, 35)')) throw Error('Screens do not share the approved dark theme');
+  if (report.checks.some(check=>{
+    const g=check.viewportGeometry;
+    return !g || !['width','contentWidth','scrollWidth','scrollbarWidth'].every(key=>Number.isFinite(g[key]))
+      || g.width!==check.viewport[0] || g.contentWidth<=0 || g.scrollbarWidth<1
+      || Math.abs(g.width-g.contentWidth-g.scrollbarWidth)>1 || g.scrollWidth>g.contentWidth+1;
+  })) throw Error('Missing reserved-scrollbar coverage or horizontal overflow remains');
   for (const viewport of VIEWPORTS) {
     const cases = report.checks.filter(check=>String(check.viewport)===String(viewport));
     for (const name of ['loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...NODE_IDS.map(id=>'completion-return-'+id),...CHALLENGE_SCREENS]) {
@@ -44,7 +50,7 @@ function validateReport(report) {
     if(!map.journeyLayout?.gaps?.length||map.journeyLayout.gaps.some(gap=>Math.abs(gap-map.journeyLayout.pitch)>1))throw Error('Missing or uneven map geometry: '+viewport);
     if(!map.centeredIcons?.some(icon=>icon.action==='journey-locate') || map.centeredIcons.some(icon=>Math.abs(icon.x)>1 || Math.abs(icon.y)>1))throw Error('Missing or uncentered icon geometry: '+viewport);
   }
-  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

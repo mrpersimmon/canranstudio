@@ -3,7 +3,8 @@
 *{box-sizing:border-box}
 /* A screen must own both its canvas and its foreground. The journey and
    learning screens share the same dark design baseline. */
-body{margin:0;min-width:320px;background:var(--lp-canvas);color:var(--lp-ink)}
+/* Use the available layout width, including space consumed by native scrollbars. */
+body{margin:0;min-width:0;background:var(--lp-canvas);color:var(--lp-ink)}
 .lp-shell,.lp-blocked{background:var(--lp-canvas);color:var(--lp-ink);isolation:isolate}
 button,a{-webkit-tap-highlight-color:transparent}
 button{font:inherit;cursor:pointer;color:inherit}

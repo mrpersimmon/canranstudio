@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "packageId": "NCE-STARTER-06@lesson1-50-v5.0-course-package-v1",
+  "packageId": "NCE-STARTER-06@lesson1-144-v6.0-course-package-v1",
   "unitId": "NCE-STARTER-06",
-  "revision": "lesson1-50-v5.0",
+  "revision": "lesson1-144-v6.0",
   "scopePath": "/poc/learning-path/",
   "mediaIndexUrl": "/poc/learning-path/course-package/media-index.json",
-  "totalBytes": 2671083,
+  "totalBytes": 3154821,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -54,6 +54,12 @@
       "kind": "font",
       "bytes": 5344,
       "sha256": "8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93"
+    },
+    {
+      "url": "/core/course-catalog-wire.js",
+      "kind": "script",
+      "bytes": 3218,
+      "sha256": "6d7ebcbc05bfbf1d3ed4ec2882262d7790f83a79775e27c90b728279952408be"
     },
     {
       "url": "/core/course-package-installer.js",
@@ -248,10 +254,10 @@
       "sha256": "214c79796657aedfff4ff09ae02fcd13ebceb622035a7f892c6d9b0d892c8aa7"
     },
     {
-      "url": "/poc/learning-path/boot/course-entry-bf9a4f1bdb88.js",
+      "url": "/poc/learning-path/boot/course-entry-377d3afaf572.js",
       "kind": "script",
-      "bytes": 17875,
-      "sha256": "bf9a4f1bdb885e729b614888eaf4800bb89d4558680f61a01c9caa3dbdf4c325"
+      "bytes": 17973,
+      "sha256": "377d3afaf5724404315ea468a696b3a991f73471f1499b6de89275f91a72d4f2"
     },
     {
       "url": "/poc/learning-path/course-fonts.css",
@@ -262,14 +268,14 @@
     {
       "url": "/poc/learning-path/course-package/media-index.json",
       "kind": "data",
-      "bytes": 251280,
-      "sha256": "579f703a8ca34560f169633b9d3bec702d88fbe8aaf808d515c293836cfed075"
+      "bytes": 449159,
+      "sha256": "b94acf85e6a6ee1378f428a446cc4bd43955b2932dbc09071c01c226ac3ed86e"
     },
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 1936966,
-      "sha256": "de55018bc9bc6573b2b6e5fce4fe2a54cdf6ae55160746d34543a5bdaca3306a"
+      "bytes": 2219428,
+      "sha256": "e9e70c5b38653bd4141e2579bb72fc7caa15bddc3b34e7379cb6beb9951fd2f5"
     },
     {
       "url": "/poc/learning-path/course.css",
@@ -412,8 +418,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.css",
       "kind": "style",
-      "bytes": 33990,
-      "sha256": "50913eb4a76f0be601f9a8b95b84a64faad1dfe397b4860f33473bb3a9fbd5a6"
+      "bytes": 34071,
+      "sha256": "05a802d46b34865f5d0cb74b16670f962d84f2e188d42926f16e14c2b6a99a44"
     },
     {
       "url": "/poc/lesson-1-2/course/path.js",

@@ -1,0 +1,390 @@
+{
+  "date": "2026-09-08",
+  "nativePage": "http://127.0.0.1:42860/",
+  "isolatedFixture": {
+    "completedNodes": 159,
+    "viewport": [
+      320,
+      568
+    ]
+  },
+  "deviceComparison": [
+    {
+      "mode": "hidden-scrollbar",
+      "geometry": {
+        "width": 320,
+        "contentWidth": 320,
+        "scrollWidth": 305,
+        "scrollbarWidth": 0
+      }
+    },
+    {
+      "mode": "visible-scrollbar",
+      "geometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      }
+    }
+  ],
+  "stickyTitle": {
+    "symptom": "elmPartiallyObscuring on Jimmy 为什么要休息",
+    "cause": "Different course nodes behind the fully opaque orange sticky banner appear in the per-line background stacks.",
+    "baseline": {
+      "variant": "baseline",
+      "errors": [],
+      "resolved": [
+        {
+          "target": [
+            "h1[data-lesson-title=\"\"]"
+          ],
+          "method": "opaque-sticky-title-hit-test",
+          "ratio": 6.138210643050892,
+          "minimum": 3,
+          "foreground": "rgb(66, 42, 8)",
+          "background": "rgb(255, 150, 0)",
+          "textRects": [
+            {
+              "x": 32,
+              "y": 103.296875,
+              "width": 177.375,
+              "height": 23
+            },
+            {
+              "x": 32,
+              "y": 130.59375,
+              "width": 21,
+              "height": 23
+            }
+          ]
+        }
+      ],
+      "geometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "scope": "Initial minimized diagnostic; the final checker additionally restores reachable headings and detects covered glyphs independently."
+    },
+    "negativeControls": [
+      {
+        "name": "low-contrast-sticky-title",
+        "caught": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "name": "covered-sticky-title",
+        "caught": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "name": "scrollbar-width-overflow",
+        "caught": true,
+        "rules": [
+          "horizontal-overflow"
+        ]
+      }
+    ]
+  },
+  "targetedRegression": {
+    "cases": 24,
+    "normalCases": 8,
+    "negativeCases": 16,
+    "passed": true,
+    "states": [
+      "after L61-STORY",
+      "after L61-REVIEW"
+    ],
+    "coveredFault": "Opaque pseudo-element positioned relative to the sticky banner, so it remains on the target when scrolling.",
+    "reachability": "Partially pushed headings are scrolled into view and checked again using the same contrast threshold; previous scroll position is restored.",
+    "casesDetail": [
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "stage": "STORY",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "stage": "STORY",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "stage": "STORY",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "stage": "REVIEW",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "stage": "REVIEW",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "stage": "REVIEW",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "stage": "STORY",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "stage": "STORY",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "stage": "STORY",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "stage": "REVIEW",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "stage": "REVIEW",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "stage": "REVIEW",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "stage": "STORY",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "stage": "STORY",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "stage": "STORY",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "stage": "REVIEW",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "stage": "REVIEW",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "stage": "REVIEW",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "stage": "STORY",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "stage": "STORY",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "stage": "STORY",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "stage": "REVIEW",
+        "variant": "baseline",
+        "passed": true,
+        "rules": []
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "stage": "REVIEW",
+        "variant": "low-contrast-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "stage": "REVIEW",
+        "variant": "covered-sticky-title",
+        "passed": true,
+        "rules": [
+          "contrast-unresolved",
+          "covered-journey-title"
+        ]
+      }
+    ],
+    "finalMatrix": "../verification.json"
+  }
+}

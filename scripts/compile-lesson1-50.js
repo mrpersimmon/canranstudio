@@ -8,9 +8,16 @@ const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const write=(file,data)=>{fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),JSON.stringify(data,null,2)+'\n');};
 const unit=read('content/expansion/lesson1-6-baseline.json');
 const legacy=read('content/expansion/legacy7-20-reference.json');
-const originals=require('../content/expansion/textbook21-50');
-const designs=require('../content/expansion/learning-design');
+const continuation=require('../content/book1');
+const reviewedTranslations=require('../content/book1/accepted-translations.json');
+const roles=require('../content/book1/roles');
+const originals=[...require('../content/expansion/textbook21-50'),...continuation];
+const sourcePage=lesson=>33+2*lesson+(lesson>=73?4:0);
+const isFemale=(role,lesson)=>female.has(role)||(lesson>50&&roles.female.includes(role));
+const speakerLabel=(role,lesson)=>(lesson>50&&roles.names[role])||speakerNames[role]||role;
+const designs=[...require('../content/expansion/learning-design'),...continuation.map(x=>({...x,title:x.label}))];
 const additional=require('../content/expansion/additional-scope');
+const bookScope=require('../content/book1/supplementary');
 const translations=require('../content/expansion/translations7-20');
 const {testedSpan}=require('./lib/textbook-authoring');
 const pairs=text=>text.trim().split('\n').filter(Boolean).map(line=>line.split('|'));
@@ -26,11 +33,11 @@ for(const [ref,s] of Object.entries(smallOldTextbook)) if(/^L0[1-6]-/.test(ref))
 function source(s,lesson,original=true) {
   const ref=s.sourceId;
   if(unit.sources[ref]) throw Error('Duplicate authored source '+ref);
-  s={...s,lessonId:lesson,provenance:original?'supplied-textbook':'course-authored',sourcePage:33+2*lesson};
+  s={...s,lessonId:lesson,provenance:original?'supplied-textbook':'course-authored',sourcePage:sourcePage(lesson)};
   const spoken=!!s.audioSrc||['dialogue','narrative','vocabulary','course-example','number'].includes(s.sourceKind);
   if(spoken){
     const previous=s.audioSrc;
-    s.audioSrc=outputAudio+ref.toLowerCase().replace(/[^a-z0-9-]/g,'-')+'.mp3';
+    s.audioSrc=(lesson>50?'/assets/lesson1-144/audio/':outputAudio)+ref.toLowerCase().replace(/[^a-z0-9-]/g,'-')+'.mp3';
     s.voiceId=s.voiceId||(s.speaker==='woman'?'af_heart':'am_michael');
     s.audioRenderMode='natural-utterance';
     s.audioReviewStatus='generated-awaiting-playback-review';
@@ -39,19 +46,19 @@ function source(s,lesson,original=true) {
     if(previous && fs.existsSync(path.join(oldRoot,previous))){
       fs.copyFileSync(path.join(oldRoot,previous),target);
       copied.push({sourceId:ref,source:previous,destination:s.audioSrc});
-    }else audioRequests.push({sourceId:ref,text:s.text,voice:s.voiceId,speed:1,renderMode:'natural-utterance',phonemeOverrides:{pamela:'pˈæmələ',ann:'ˈæn',christine:'kɹɪstˈin'},outputPath:'.'+s.audioSrc});
+    }else audioRequests.push({sourceId:ref,text:s.text,voice:s.voiceId,speed:1,renderMode:'natural-utterance',phonemeOverrides:{pamela:'pˈæmələ',ann:'ˈæn',christine:'kɹɪstˈin',...(lesson>50?require('../content/book1/pronunciations.json'):{})},outputPath:'.'+s.audioSrc});
   }
   unit.sources[ref]=s;
-  if(original)sourceIndex[ref]={sourceId:ref,text:s.text,lessonId:lesson,sourceKind:s.sourceKind,pdfPages:[33+2*lesson,34+2*lesson]};
+  if(original)sourceIndex[ref]={sourceId:ref,text:s.text,lessonId:lesson,sourceKind:s.sourceKind,pdfPages:[sourcePage(lesson),sourcePage(lesson)+1]};
   return ref;
 }
 function actor(role,lesson){
   const id=`L${pad(lesson)}-actor-${role}`;
   if(!unit.entities[id]){
-    const woman=female.has(role),base=unit.entities[role==='narrator'?'explorer-cat':woman?'handbag-owner':'station-keeper'];
-    unit.entities[id]={...base,entityId:id,title:speakerNames[role]||role,characterSpecies:'cat',pronoun:woman?'she':'he',align:woman?'right':'left'};
+    const woman=isFemale(role,lesson),base=unit.entities[role==='narrator'?'explorer-cat':woman?'handbag-owner':'station-keeper'];
+    unit.entities[id]={...base,entityId:id,title:speakerLabel(role,lesson),characterSpecies:'cat',pronoun:woman?'she':'he',align:woman?'right':'left'};
     delete unit.entities[id].facing;
-    unit.speakerLabels[id]=speakerNames[role]||role;
+    unit.speakerLabels[id]=speakerLabel(role,lesson);
   }
   return id;
 }
@@ -107,22 +114,30 @@ function sentenceAnswers(text){
   return [...answers];
 }
 
-unit.lessonIds=Array.from({length:50},(_,i)=>i+1);
-unit.title='猫猫小镇 · Lesson 1–50';
-unit.releaseRevision='lesson1-50-v5.0';
+function extendedAnswers(example){
+  const reviewed=reviewedTranslations[example.ref];
+  if(reviewed&&reviewed.canonical!==example.en)throw Error('Re-review accepted translations after changing '+example.ref);
+  // Main verbs, auxiliaries and modal complements cannot share a text-replace
+  // rule. The author supplies complete, reviewed equivalents in the catalog.
+  return [...new Set([example.en,...(example.translationAlternatives||[]),...(reviewed?.alternatives||[])])];
+}
+
+unit.lessonIds=Array.from({length:144},(_,i)=>i+1);
+unit.title='猫猫小镇 · Lesson 1–144';
+unit.releaseRevision='lesson1-144-v6.0';
 // Opaque storage identity deliberately stays unchanged: expanding the scope is
 // append-only, not a new learner record. Tests protect old evidence and resets.
-unit.copy.lessonLabel='新概念英语 · Lesson 1–50';
-unit.copy.completedTitle='前五十课探险完成！';
-unit.journey.copy.footer='猫猫小镇 · Lesson 1–50';
-unit.journey.copy.allDone='前五十课探险完成！';
-unit.publicationScope='Lesson 1–50 continuous learning path';
+unit.copy.lessonLabel='新概念英语 · Lesson 1–144';
+unit.copy.completedTitle='第一册探险完成！';
+unit.journey.copy.footer='猫猫小镇 · Lesson 1–144';
+unit.journey.copy.allDone='第一册探险完成！';
+unit.publicationScope='New Concept English Book 1 · Lesson 1–144 continuous learning path';
 let previousExamples=[];const exampleHistory=[];
 for(const design of designs){
   const l=design.lesson,key='L'+pad(l),chapter={id:'lesson-'+l+'-'+(l+1),title:design.title,lessonIds:[l,l+1],goal:design.goal};
   unit.chapters.push(chapter);
   const sceneName=l===11?'shirt':l===23?'glasses':design.scene,scene='scene-'+sceneName;
-  unit.entities[scene]={entityId:scene,title:design.title,assetSrc:'/assets/lesson1-50/scenes/'+sceneName+'.webp',presentation:'scene',artDirection:'Disney-like painted imagegen',alt:design.title+'的猫猫故事插画'};
+  unit.entities[scene]={entityId:scene,title:design.title,assetSrc:(l>50?'/assets/lesson1-144/scenes/':'/assets/lesson1-50/scenes/')+sceneName+'.webp',presentation:'scene',artDirection:'Disney-like painted imagegen',alt:design.title+'的猫猫故事插画'};
   const lessonSources=[],wordRefs=[],dialogue=[];
   const old=legacy.find(x=>x.lessonIds.includes('lesson'+l));
   if(old){
@@ -142,7 +157,7 @@ for(const design of designs){
     const o=originals.find(x=>x.lesson===l);
     const refs=[];
     pairs(o.lines).forEach(([role,text,translation],index)=>{
-      const ref=source({sourceId:key+'-D'+pad(index+1),sourceKind:o.narrative?'narrative':'dialogue',text,translation,speakerRole:role,speaker:female.has(role)?'woman':'man'},l);dialogue.push(ref);refs.push(ref);
+      const ref=source({sourceId:key+'-D'+pad(index+1),sourceKind:o.narrative?'narrative':'dialogue',text,translation,speakerRole:role,speaker:isFemale(role,l)?'woman':'man'},l);dialogue.push(ref);refs.push(ref);
     });
     for(const [lessonNo,words,title] of [[l,o.words,o.title],[l+1,o.evenWords,o.evenTitle]]){
       const own=lessonNo===l?refs:[];
@@ -151,7 +166,7 @@ for(const design of designs){
         const ref=source({sourceId:'L'+pad(lessonNo)+'-W'+pad(index+1),sourceKind:'vocabulary',text,translation},lessonNo);wordRefs.push(ref);own.push(ref);
       });
       lessonSources.push({lesson:lessonNo,refs:own,title});
-      unit.lessonContent['lesson'+lessonNo]={lessonId:'lesson'+lessonNo,textbookTitle:title,textbookSource:`外研社《新概念英语智慧版 1》PDF 页 ${33+2*lessonNo}–${34+2*lessonNo}`,requiredSourceIds:own,sources:Object.fromEntries(own.map(ref=>[ref,unit.sources[ref]]))};
+      unit.lessonContent['lesson'+lessonNo]={lessonId:'lesson'+lessonNo,textbookTitle:title,textbookSource:`外研社《新概念英语智慧版 1》PDF 页 ${sourcePage(lessonNo)}–${sourcePage(lessonNo)+1}`,requiredSourceIds:own,sources:Object.fromEntries(own.map(ref=>[ref,unit.sources[ref]]))};
     }
   }
   const note=source({sourceId:key+'-N-GRAMMAR',sourceKind:'course-note',text:design.note||originals.find(x=>x.lesson===l).note},l,false);
@@ -161,12 +176,14 @@ for(const design of designs){
     dialogue.forEach((ref,index)=>unit.sources[ref].translation=meanings[index]);
   }
   const refsByLesson=new Map(lessonSources.map(s=>[s.lesson,s.refs]));
-  const examples=pairs(design.examples+'\n'+(additional.examples[l]||'')).map(([en,zh,focus,wrong,hint],index)=>{
+  const examples=pairs(design.examples+'\n'+(additional.examples[l]||bookScope.examples[l]||'')).map(([en,zh,focus,wrong,hint],index)=>{
     const ref=source({sourceId:key+'-E'+pad(index+1),sourceKind:'course-example',text:en,translation:zh,derivedFrom:[note]},l+1,false);
-    return{ref,en,zh,focus,distractors:wrong.split('/'),hint};
+    return{ref,en,zh,focus,distractors:wrong.split('/'),hint,...(l>50?{gapAnswers:[focus,...(design.focusAlternatives?.[index]||[])],translationAlternatives:design.translationAlternatives?.[index]||bookScope.translationAlternatives[l]?.[index]||[]}: {})};
   });
-  const numberRefs=(additional.numbers[l+1]||[]).map((n,index)=>source({sourceId:key+'-NUM'+pad(index+1),sourceKind:'number',text:numberWords(n),translation:n.toLocaleString('en-US'),printedValue:String(n),derivedFromPdfPage:35+2*l},l+1,false));
+  const numberRefs=(additional.numbers[l+1]||bookScope.numbers[l+1]||[]).map((n,index)=>source({sourceId:key+'-NUM'+pad(index+1),sourceKind:'number',text:numberWords(n),translation:n.toLocaleString('en-US'),printedValue:String(n),derivedFromPdfPage:sourcePage(l+1)},l+1,false));
   const ordinalRefs=(additional.ordinals[l+1]||[]).map((text,index)=>source({sourceId:key+'-ORD'+pad(index+1),sourceKind:'number',text,translation:'第 '+(l===47?index+1:index+13)+' 个',printedValue:text,derivedFromPdfPage:35+2*l},l+1,false));
+  for(const [index,[text,value]]of (bookScope.ordinals[l+1]||[]).entries())ordinalRefs.push(source({sourceId:key+'-ORD'+pad(index+1),sourceKind:'number',text,translation:'第 '+value+' 个',printedValue:String(value),derivedFromPdfPage:sourcePage(l+1)},l+1,false));
+  const tableRefs=(bookScope.tables[l+1]||[]).map(([forms,meaning],index)=>source({sourceId:key+'-N-FORM'+pad(index+1),sourceKind:'course-note',text:forms+'（'+meaning+'；原形 → 过去式 → 过去分词）',derivedFromPdfPage:sourcePage(l+1)},l+1,false));
   // Full textbook story, manual turn-by-turn audio, with two contextual checks.
   const sn=node(key+'-STORY',design.title,chapter,[l],'story'),storyId=key+':story',beats=[],cast=[];
   const checkRows=pairs(design.checks);
@@ -200,7 +217,8 @@ for(const design of designs){
       if(unique.length>1)choice(vn,vn.id+':hear', '听词，选意思',pick,unique,{channel:'audio-meaning',requiredAudio:[audio(pick)],audioType:'word',feedbackAudio:[audio(pick)],explanation:unit.sources[pick].text+'：'+options[0],assessment:evidence('listening-meaning','听词辨义','meaning-options')});
     }
   }
-  const selectedNumbers=ordinalRefs.length?ordinalRefs:[...new Set([numberRefs[0],numberRefs[Math.floor(numberRefs.length/3)],numberRefs[Math.floor(numberRefs.length*2/3)],numberRefs.at(-1)].filter(Boolean))];
+  const availableNumbers=ordinalRefs.length?ordinalRefs:numberRefs;
+  const selectedNumbers=ordinalRefs.length&&l<50?ordinalRefs:[...new Set([availableNumbers[0],availableNumbers[Math.floor(availableNumbers.length/3)],availableNumbers[Math.floor(availableNumbers.length*2/3)],availableNumbers.at(-1)].filter(Boolean))];
   if(selectedNumbers.length){
     const nn=selectedNumbers.length>4||!lastWordsNode?node(key+'-NUMBERS',ordinalRefs.length?'用英语说顺序':'数字小练习',chapter,[l+1]):lastWordsNode;
     for(let i=0;i<selectedNumbers.length;i+=4)teach(nn,key+':numbers-'+i,selectedNumbers.slice(i,i+4),ordinalRefs.length?'认识序数词':'数字怎么读');
@@ -211,7 +229,7 @@ for(const design of designs){
   cloze(pn,key+':gap-1',examples[0]);
   order(pn,key+':order-2',examples[1]);
   cloze(pn,key+':gap-3',examples[2]);
-  const rn=node(key+'-REVIEW',l===49?'前五十课综合闯关':'换个情境再试试',chapter,previousExamples.length?[l-2,l-1,l,l+1]:[5,6,l,l+1],'review');
+  const rn=node(key+'-REVIEW',l===143?'第一册综合闯关':l===49?'前五十课综合闯关':'换个情境再试试',chapter,previousExamples.length?[l-2,l-1,l,l+1]:[5,6,l,l+1],'review');
   const ex=examples[3];
   // Meaning distractors are other explicitly learned sentences, never random
   // translations produced from the answer at rendering time.
@@ -221,29 +239,40 @@ for(const design of designs){
   for(let i=4;i<examples.length;i++)cloze(rn,key+':extra-'+i,examples[i]);
   if(previousExamples.length){order(rn,key+':return',previousExamples[0]);cloze(rn,key+':return-gap',exampleHistory[Math.max(0,exampleHistory.length-4)][3]);}
   else {cloze(rn,key+':first-review',examples[3]);}
-  if(l===49)for(const [index,exampleSet]of exampleHistory.filter((_,i)=>i%5===0).entries())order(rn,key+':final-recall-'+index,exampleSet[1]);
+  if(l===49||l===143)for(const [index,exampleSet]of exampleHistory.filter((_,i)=>i%5===0).entries())order(rn,key+':final-recall-'+index,exampleSet[1]);
   const challenge={id:'CH'+l+'-'+(l+1),title:design.title+'挑战',lessonLabel:`Lesson ${l} & ${l+1}`,unlockNodeId:rn.id,nodeIds:[rn.id],questions:[]};
   for(const [index,e] of examples.entries()){
     const isGap=index%2===0;
-    challenge.questions.push({id:challenge.id+'-'+index,kind:isGap?'gap':'translation',sourceRef:e.ref,prompt:e.zh,answers:isGap?[e.focus]:sentenceAnswers(e.en),actorId:'explorer-cat',hint:e.hint,...(isGap?testedSpan(e.en,e.focus):{})});
+    challenge.questions.push({id:challenge.id+'-'+index,kind:isGap?'gap':'translation',sourceRef:e.ref,prompt:e.zh,answers:isGap?(e.gapAnswers||[e.focus]):(l>50?extendedAnswers(e):sentenceAnswers(e.en)),actorId:'explorer-cat',hint:e.hint,...(isGap?testedSpan(e.en,e.focus):{})});
   }
   // Two later recall questions use earlier sources and were introduced in the
   // main path; optional challenge completion never blocks the next section.
-  for(const [index,e] of previousExamples.slice(0,2).entries())challenge.questions.push({id:challenge.id+'-recall-'+index,kind:'translation',sourceRef:e.ref,prompt:e.zh,answers:sentenceAnswers(e.en),actorId:'explorer-cat',hint:e.hint});
+  for(const [index,e] of previousExamples.slice(0,2).entries())challenge.questions.push({id:challenge.id+'-recall-'+index,kind:'translation',sourceRef:e.ref,prompt:e.zh,answers:l>50?extendedAnswers(e):sentenceAnswers(e.en),actorId:'explorer-cat',hint:e.hint});
   unit.challenges.push(challenge);
   for(const ls of lessonSources){
-    const extras=ls.lesson===l?[note]:[...examples.map(e=>e.ref),...numberRefs,...ordinalRefs];
+    const extras=ls.lesson===l?[note]:[...examples.map(e=>e.ref),...numberRefs,...ordinalRefs,...tableRefs];
     unit.referenceGroups.push({id:'lesson'+ls.lesson,title:`Lesson ${ls.lesson} · ${ls.title}`,sourceRefs:[...ls.refs,...extras]});
   }
-  coverage.push({lessonIds:chapter.lessonIds,goal:design.goal,originalStoryLines:dialogue.length,originalVocabulary:wordRefs.length,taughtVocabulary:learnedWords.length,referenceOnly:wordRefs.filter(r=>!learnedWords.includes(r)),numbers:[...numberRefs,...ordinalRefs],taughtNumbers:selectedNumbers,examples:examples.map(e=>e.ref),nodeIds:unit.nodes.filter(n=>n.chapterId===chapter.id).map(n=>n.id),challengeId:challenge.id});
+  coverage.push({lessonIds:chapter.lessonIds,goal:design.goal,originalStoryLines:dialogue.length,originalVocabulary:wordRefs.length,taughtVocabulary:learnedWords.length,referenceOnly:wordRefs.filter(r=>!learnedWords.includes(r)),numbers:[...numberRefs,...ordinalRefs],taughtNumbers:selectedNumbers,examples:examples.map(e=>e.ref),nodeIds:unit.nodes.filter(n=>n.chapterId===chapter.id).map(n=>n.id),challengeId:challenge.id,...(l>50?{tableRefs}: {})});
   previousExamples=examples;
   exampleHistory.push(examples);
 }
-unit.coverage.lesson1To50=coverage;
+unit.coverage.lesson1To50=coverage.filter(x=>x.lessonIds[0]<=50);
+unit.coverage.lesson1To144=coverage;
 unit.status='implementation-candidate';
+// Estimates describe the actual run length, including every manual story line.
+// Keep earlier authored node contracts byte-identical for saved progress.
+for(const n of unit.nodes.filter(n=>Math.min(...n.lessonIds)>50)){
+  const seconds=n.activityIds.reduce((sum,id)=>{
+    const a=unit.activities[id];
+    if(a.kind==='interactive-story')return sum+a.beats.reduce((t,b)=>t+(b.kind==='line'?Math.max(5,unit.sources[b.ref].text.split(/\s+/).length/2+3):15),0);
+    return sum+(a.kind==='teach'?a.items.reduce((t,i)=>t+Math.max(5,unit.sources[i.sourceRef].text.split(/\s+/).length/2+3),0):a.kind==='order'?24:15);
+  },0);
+  n.duration='约 '+Math.max(1,Math.round(seconds/60))+' 分钟';
+}
 write('content/learning-course.json',unit);
 write('content/textbook-sources.json',sourceIndex);
 write('content/expansion/audio-request.json',{model:'Kokoro-82M',revision:'f3ff3571791e39611d31c381e3a41a3af07b4987',items:audioRequests});
 write('content/expansion/audio-reused.json',copied);
-write('docs/designs/lesson1-50/coverage.json',coverage);
+write('docs/designs/lesson1-144/coverage.json',coverage);
 console.log(JSON.stringify({lessons:unit.lessonIds.length,sections:unit.chapters.length,nodes:unit.nodes.length,activities:Object.keys(unit.activities).length,storyLines:unit.dialogueRefs.length,challenges:unit.challenges.length,audioToGenerate:audioRequests.length,audioCopied:copied.length}));

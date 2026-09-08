@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-08",
+  "origin": "http://127.0.0.1:42860/",
+  "viewport": [
+    320,
+    568
+  ],
+  "question": "CH61-62-5",
+  "invalidInput": "He's a toothache.",
+  "rejection": {
+    "before": "5",
+    "after": "5",
+    "text": "输入挑战\n翻译这句话\n\n他牙痛。\n\n再试一次\n\n参考答案：\n\nHe has a toothache.\n\n听参考答案\n修改答案"
+  },
+  "correctedInput": "He's got a toothache.",
+  "correction": {
+    "accepted": true,
+    "feedback": "输入挑战\n翻译这句话\n\n他牙痛。\n\n答对了！\n\nHe has a toothache.\n\n听参考答案\n继续",
+    "after": "6",
+    "geometry": {
+      "width": 320,
+      "content": 320,
+      "scroll": 320
+    }
+  }
+}

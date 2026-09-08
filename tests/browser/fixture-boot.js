@@ -27,7 +27,8 @@
   }
   try {
     await Promise.all(JSON.parse(entry.dataset.courseStyles).map(loadStyle));
-    control.unit = await (await fetch(entry.dataset.unitCatalogUrl)).json();
+    await loadScript('/core/course-catalog-wire.js');
+    control.unit = window.CanranCore.courseCatalogWire.decode(await (await fetch(entry.dataset.unitCatalogUrl)).json());
     for (const src of JSON.parse(entry.dataset.courseScripts)) {
       // Install adapters just before the actual production controller boots.
       if (src.includes('/course/path.js')) {

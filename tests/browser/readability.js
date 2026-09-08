@@ -58,8 +58,61 @@
     }
     return flatControlContrast(win,element);
   }
+  // axe compares the stacks below each line of a sticky heading, including
+  // unrelated nodes behind its fully opaque banner. Resolve that exact case
+  // only after proving the text is visible and its painted surface is uniform.
+  function visibleTitleRects(win,element){
+    const banner=element.closest('.journey-chapter-banner');if(!banner)return null;
+    const range=win.document.createRange();range.selectNodeContents(element);
+    const rects=[...range.getClientRects()],bounds=banner.getBoundingClientRect();
+    if(!rects.length)return null;
+    for(const r of rects){
+      if(r.left<bounds.left||r.right>bounds.right||r.top<bounds.top||r.bottom>bounds.bottom||r.top<0||r.bottom>win.innerHeight)return null;
+      for(const x of [.1,.5,.9])for(const y of [.25,.75]){
+        const stack=win.document.elementsFromPoint(r.left+r.width*x,r.top+r.height*y),stop=stack.indexOf(banner);
+        if(!element.contains(stack[0])||stop<0||stack.slice(0,stop).some(el=>!element.contains(el)&&!el.contains(element)))return null;
+      }
+    }
+    return rects;
+  }
+  function stickyTitleContrast(win,element){
+    const banner=element.closest('.journey-chapter-banner');
+    if(!banner||win.getComputedStyle(banner).position!=='sticky')return null;
+    const bg=win.getComputedStyle(banner).backgroundColor,fg=win.getComputedStyle(element);
+    const opaque=color=>rgb(color).length===3||rgb(color)[3]===1;
+    if(!opaque(bg)||!opaque(fg.color)||surface(win,element)!==bg)return null;
+    for(let el=element;el;el=el.parentElement){
+      const style=win.getComputedStyle(el);
+      if(style.opacity!=='1'||style.filter!=='none'||style.mixBlendMode!=='normal'||style.backgroundImage!=='none'||style.textShadow!=='none')return null;
+      for(const pseudo of ['::before','::after']){
+        const s=win.getComputedStyle(el,pseudo);
+        if(s.content!=='none'&&s.display!=='none'&&s.visibility!=='hidden')return null;
+      }
+    }
+    const rects=visibleTitleRects(win,element);if(!rects)return null;
+    const a=luminance(fg.color),b=luminance(bg),ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+    const large=parseFloat(fg.fontSize)>=24||parseFloat(fg.fontSize)>=18.667&&Number(fg.fontWeight)>=700;
+    return {method:'opaque-sticky-title-hit-test',ratio,minimum:large?3:4.5,foreground:fg.color,background:bg,textRects:rects.map(r=>({x:r.x,y:r.y,width:r.width,height:r.height}))};
+  }
+  async function reachableTitle(win,element){
+    if(!element?.closest('.journey-chapter-banner'))return null;
+    const top=win.scrollY;
+    try{
+      element.scrollIntoView({block:'center',behavior:'instant'});
+      if(!visibleTitleRects(win,element))return null;
+      const retry=await win.axe.run(element,{runOnly:{type:'rule',values:['color-contrast']},resultTypes:['violations','incomplete']});
+      if(retry.violations.length)return null;
+      if(!retry.incomplete.length)return {method:'scroll-sticky-title-and-recheck'};
+      if(retry.incomplete.every(v=>v.nodes.every(n=>n.any.some(c=>c.data?.messageKey==='elmPartiallyObscuring')))){
+        const measured=stickyTitleContrast(win,element);
+        if(measured&&measured.ratio>=measured.minimum)return {...measured,method:'scroll-and-measure-sticky-title'};
+      }
+      return null;
+    }finally{win.scrollTo({top,behavior:'instant'});}
+  }
   window.auditReadability = async function (win, { expectedTheme, name }) {
     const doc = win.document, errors = [], resolved = [];
+    const viewportGeometry = {width:win.innerWidth,contentWidth:doc.documentElement.clientWidth,scrollWidth:doc.documentElement.scrollWidth,scrollbarWidth:win.innerWidth-doc.documentElement.clientWidth};
     const root = doc.querySelector('[data-learning-path]');
     const run = win.fixture?.runtime.snapshot();
     const progressBar = root.querySelector('.lp-header [role="progressbar"]');
@@ -83,7 +136,7 @@
     if (root.querySelector('.lp-celebration')) {
       const actions = root.querySelectorAll('.lp-footer .lp-primary');
       const button = actions[0], rect = button?.getBoundingClientRect();
-      const inViewport = Boolean(rect && rect.top >= 0 && rect.bottom <= win.innerHeight && rect.left >= 0 && rect.right <= win.innerWidth);
+      const inViewport = Boolean(rect && rect.top >= 0 && rect.bottom <= doc.documentElement.clientHeight && rect.left >= 0 && rect.right <= viewportGeometry.contentWidth);
       completionBoundary = {action:button?.dataset.action, inViewport};
       if (actions.length !== 1 || button.dataset.action !== 'map' || button.disabled) errors.push({rule:'completion-primary-action',action:button?.dataset.action});
       if (!inViewport) errors.push({rule:'completion-action-offscreen'});
@@ -114,7 +167,7 @@
     if (canvas !== expected) errors.push({rule:'screen-canvas', actual:canvas, expected});
     const chromeColor=doc.querySelector('meta[name="theme-color"]')?.content;
     if(chromeColor!=='#141f23')errors.push({rule:'browser-theme',actual:chromeColor,expected:'#141f23'});
-    if (doc.documentElement.scrollWidth > win.innerWidth + 1) errors.push({rule:'horizontal-overflow', width:doc.documentElement.scrollWidth, viewport:win.innerWidth});
+    if (viewportGeometry.scrollWidth > viewportGeometry.contentWidth + 1) errors.push({rule:'horizontal-overflow',...viewportGeometry});
     for(const label of root.querySelectorAll('.lp-option>span[lang]')){
       const text=label.getBoundingClientRect(),button=label.closest('button').getBoundingClientRect();
       if(text.left<button.left+1||text.right>button.right-1||text.top<button.top+1||text.bottom>button.bottom-1)errors.push({rule:'option-content-overflow',text:label.textContent});
@@ -170,15 +223,26 @@
         }
       }
     }
+    // axe may omit fully covered glyphs. Assert title reachability separately;
+    // partially scrolled banners must be read after a real scroll, like options.
+    for(const title of root.querySelectorAll('.journey-chapter-banner h1')){
+      const bounds=title.getBoundingClientRect();
+      if(bounds.bottom<=0||bounds.top>=win.innerHeight||visibleTitleRects(win,title))continue;
+      const measured=await reachableTitle(win,title);
+      if(measured)resolved.push({title:title.textContent,...measured});
+      else errors.push({rule:'covered-journey-title',title:title.textContent});
+    }
     if(win.fixture?.errors.length)errors.push({rule:'browser-error',messages:win.fixture.errors});
     const results = await win.axe.run(root, {runOnly:{type:'rule',values:['color-contrast']}, resultTypes:['violations','incomplete']});
     for (const v of results.violations) for (const node of v.nodes) errors.push({rule:v.id, target:node.target, message:node.failureSummary});
     // Do not quietly turn unmeasurable text into a pass.
     for (const v of results.incomplete) for (const node of v.nodes) {
       const element=node.target.length===1&&doc.querySelector(node.target[0]);
-      const measurement=element&&(node.any.some(check=>check.data?.messageKey==='pseudoContent')?flatControlContrast(win,element):modalTextContrast(win,element));
+      const measurement=element&&((node.any.some(check=>check.data?.messageKey==='elmPartiallyObscuring')&&stickyTitleContrast(win,element))||(node.any.some(check=>check.data?.messageKey==='pseudoContent')?flatControlContrast(win,element):modalTextContrast(win,element)));
       if(measurement&&measurement.ratio>=measurement.minimum)resolved.push({target:node.target,...measurement});
       else {
+        const title=element?.closest('.journey-chapter-banner')&&await reachableTitle(win,element);
+        if(title){resolved.push({target:node.target,...title});continue;}
         // Previous lines intentionally live in a scrollable transcript. Inspect
         // clipped text by actually scrolling it into view, then run the same
         // contrast rule again. Do not exclude the transcript from checking.
@@ -209,6 +273,6 @@
         errors.push({rule:'contrast-unresolved', target:node.target, message:node.failureSummary});
       }
     }
-    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], canvas, visibleImages, journeyLayout, completionBoundary, sessionProgress, centeredIcons, resolved, errors};
+    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], viewportGeometry, canvas, visibleImages, journeyLayout, completionBoundary, sessionProgress, centeredIcons, resolved, errors};
   };
 })();

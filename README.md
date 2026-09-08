@@ -1,6 +1,6 @@
 # 探险猫 · 猫猫小镇
 
-`codex/duolingo-version` 是当前 Duolingo 理念重构版的独立开发分支：新概念英语 Lesson 1–50 编排为 25 个教材分区、129 个连续学习关卡，包含 576 个学习活动、349 段原文、26 组选做输入挑战和跨课复习。
+`codex/duolingo-version` 是当前 Duolingo 理念重构版的独立开发分支：新概念英语第一册 Lesson 1–144 编排为 72 个教材分区、354 个连续学习关卡，包含 1,567 个学习活动、991 段原文、73 组选做输入挑战（580 题）和跨课复习。
 
 设计与实现以 [Duolingo 设计原则](docs/design-principles.md) 为首要依据；课程、题型、界面、交互与动效拿不准时，先查用户参考图或 Duolingo 实际做法。
 
@@ -22,8 +22,9 @@ npm run dev
 | 目录 | 职责 |
 | --- | --- |
 | `content/learning-course.json` | 编译后的唯一运行时 catalog：课文、题目、角色、音频映射、顺序与复习规则 |
-| `content/textbook-sources.json` | 前 50 课原文的固定核对基准，用于防止重构时改变教材原句 |
+| `content/textbook-sources.json` | 第一册原文及对应教材 PDF 页码，用于防止重构时改变教材原句 |
 | `content/expansion/` | 原文、中文释义、逐课蓝图与编译来源；前六课保留 fac029f 基线 |
+| `content/book1/` | Lesson 51–144 原文、中文注释、教学与挑战蓝图、发音表、美术出处 |
 | `core/` | 当前课程校验、路径运行、场景呈现、进度保存与课程包加载 |
 | `poc/learning-path/` | 当前 HTML 入口、附加样式、新猫猫素材及生成的课程包 |
 | `poc/lesson1-2-experience/` | 当前仍使用的共享页面、样式、猫猫和录音资源 |
@@ -32,7 +33,7 @@ npm run dev
 | `tests/` | 当前课程、记录兼容、音频控制、包完整性与预览检查 |
 | `scripts/`、`deploy/` | 当前课程的打包、预览、单首页发布和部署说明 |
 
-修改 7–50 课时先编辑 `content/expansion/` 的原文与教学蓝图，再运行 `npm run compile:course`，统一生成 catalog；页面只呈现和转发操作。录音生成请求使用冻结的 Kokoro 版本，具体操作与素材来源见前 50 课实施文档。`poc/learning-path/course-package/unit-catalog.json` 是自动生成文件，不直接修改。部分资源保留原路径以兼容已发布课程的地址与缓存；这些目录没有另一套可访问的旧课程。V3.6 测试快照仅验证现行产品的旧进度导入契约。
+修改 7–50 课时先编辑 `content/expansion/`，51–144 课编辑 `content/book1/`，再运行 `npm run compile:course`，统一生成 catalog；页面只呈现和转发操作。录音生成请求使用冻结的 Kokoro 版本，具体操作与素材来源见第一册实施文档。`poc/learning-path/course-package/unit-catalog.json` 是去重传输格式，由 `core/course-catalog-wire.js` 无损还原，不直接修改。部分资源保留原路径以兼容已发布课程的地址与缓存；这些目录没有另一套可访问的旧课程。V3.6 测试快照仅验证现行产品的旧进度导入契约。
 
 ## 验证与发布
 
@@ -71,4 +72,4 @@ npm run test:browser
 
 ## 文档
 
-从 [文档索引](docs/README.md) 开始；[现行课程设计](docs/designs/lesson1-50/README.md) 说明节点与考察方式，[分支整理记录](docs/designs/lesson1-6-path-v4/branch-isolation.md) 说明保留范围和验证结果。当前工作树已移除旧网站、旧课程运行代码及无关文档，原始 Git 历史与其他分支保留。
+从 [文档索引](docs/README.md) 开始；[现行课程设计](docs/designs/lesson1-144/README.md) 说明节点与考察方式，[分支整理记录](docs/designs/lesson1-6-path-v4/branch-isolation.md) 说明保留范围和验证结果。当前工作树已移除旧网站、旧课程运行代码及无关文档，原始 Git 历史与其他分支保留。

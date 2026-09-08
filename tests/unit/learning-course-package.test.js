@@ -13,7 +13,7 @@ const manifest=JSON.parse(manifestBytes);
 function local(url){for(const [prefix,target]of [['/poc/lesson-1-2/course/','/poc/lesson1-2-experience/'],['/poc/lesson-1-2/core/','/core/'],['/poc/lesson-1-2/assets/','/assets/']])if(url.startsWith(prefix))return path.join(ROOT,target,url.slice(prefix.length));return path.join(ROOT,url);}
 
 test('continuous course ships matching catalog, HTML digest and bytes for every dependency',()=>{
-  const unit=JSON.parse(fs.readFileSync(path.join(PAGE,'course-package/unit-catalog.json')));
+  const unit=require('../../core/course-catalog-wire').decode(JSON.parse(fs.readFileSync(path.join(PAGE,'course-package/unit-catalog.json'))));
   assert.deepEqual(validateCourse(unit),[]);assert.deepEqual(unit.nodes,getCourse().nodes);
   assert.doesNotThrow(()=>validateManifest(manifest,{origin:'https://course.test',scopeUrl:'https://course.test/poc/learning-path/'}));
   const html=fs.readFileSync(path.join(PAGE,'index.html'),'utf8');assert.equal(/data-manifest-sha256="([a-f0-9]{64})"/.exec(html)[1],sha256(manifestBytes));

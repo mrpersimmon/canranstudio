@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const catalog = require('../core/learning-course-catalog');
+const { encode } = require('../core/course-catalog-wire');
 const { sourcePath } = require('./build-learning-path-release');
 const ROOT = path.resolve(__dirname, '..');
 const PAGE = 'poc/learning-path';
@@ -41,7 +42,7 @@ function build() {
   let html = fs.readFileSync(htmlPath, 'utf8').replace(/\/poc\/learning-path\/boot\/course-entry-[a-f0-9]+\.js/g, bootURL);
   if (!html.includes('src="' + bootURL + '"')) throw Error('Missing course bootstrap script');
   fs.mkdirSync(path.dirname(localPath(CATALOG_URL)), { recursive: true });
-  fs.writeFileSync(localPath(CATALOG_URL), JSON.stringify(unit) + '\n');
+  fs.writeFileSync(localPath(CATALOG_URL), JSON.stringify(encode(unit)) + '\n');
 
   const resources = new Set([CATALOG_URL, bootURL, '/core/course-package-installer.js', '/core/course-package-service-worker.js']);
   function add(value, base) {
@@ -79,7 +80,7 @@ function build() {
   const entries = allEntries.filter(entry=>!media.includes(entry));
   if (media.length) {
     const index = {schema:1,packageId:unit.unitId+'@'+revision+'-media',unitId:unit.unitId,revision,scopePath:'/poc/learning-path/',totalBytes:media.reduce((n,e)=>n+e.bytes,0),entries:media};
-    const bytes = Buffer.from(JSON.stringify(index,null,2)+'\n');
+    const bytes = Buffer.from(JSON.stringify(index)+'\n');
     fs.writeFileSync(localPath(MEDIA_INDEX_URL),bytes);
     entries.push({url:MEDIA_INDEX_URL,kind:'data',bytes:bytes.length,sha256:sha256(bytes)});
     entries.sort((a,b)=>a.url.localeCompare(b.url));

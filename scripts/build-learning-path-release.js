@@ -64,9 +64,10 @@ function prepare(root = ROOT) {
   read('scripts/build-learning-path-release.js');
   read('scripts/build-learning-course-package.js');
   read('core/learning-course-catalog.js');
+  read('core/course-catalog-wire.js');
   const authored = JSON.parse(read('content/learning-course.json'));
   const packaged = files.get('poc/learning-path/course-package/unit-catalog.json');
-  if (!packaged || !packaged.equals(Buffer.from(JSON.stringify(authored) + '\n'))) {
+  if (!packaged || JSON.stringify(require('../core/course-catalog-wire').decode(JSON.parse(packaged))) !== JSON.stringify(authored)) {
     throw Error('Authored course and package differ; run npm run build:course');
   }
   read('content/textbook-sources.json');

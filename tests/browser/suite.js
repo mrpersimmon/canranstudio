@@ -13,7 +13,10 @@
     frame.width=viewport[0];frame.height=viewport[1];frame.title='实际课程渲染 '+viewport.join(' × ');
     frame.src=loader?'/__qa__/loader.html':'/__qa__/frame.html';document.querySelector('#frames').append(frame);
     await wait(()=>frame.contentWindow?.axe && (loader || frame.contentWindow.fixture?.ready));
-    await settle();return frame.contentWindow;
+    await settle();
+    const win=frame.contentWindow;
+    if(win.innerWidth-win.document.documentElement.clientWidth<1)throw Error('Reserved scrollbar fixture is inactive; do not hide Chromium scrollbars');
+    return win;
   }
   async function settle(){await pause();await pause();const win=frame.contentWindow;await win.document.fonts.ready;await Promise.all(Array.from(win.document.images).map(img=>img.decode().catch(()=>{})));await Promise.all(win.document.getAnimations().filter(animation=>{const timing=animation.effect?.getTiming();return timing&&timing.iterations!==Infinity&&Number(timing.duration)*timing.iterations<=600;}).map(animation=>animation.finished.catch(()=>{})));}
   async function reloadFrame() {
@@ -136,6 +139,24 @@
     const state=view();
     if(state.screen!=='map'||state.activityId!==null||state.audio!==null||JSON.stringify(state.record)!==before)throw Error('Completion advanced, played audio or changed progress after returning: '+name);
     await check(name);
+    if(name==='completion-return-L61-STORY')await stickyTitleNegativeControls();
+  }
+  async function stickyTitleNegativeControls(){
+    const win=frame.contentWindow,doc=win.document,title=doc.querySelector('h1[data-lesson-title]');
+    for(const name of ['low-contrast-sticky-title','covered-sticky-title']){
+      const fault=doc.createElement('style');
+      if(name==='low-contrast-sticky-title')fault.textContent='.journey-chapter-banner [data-lesson-title]{color:#ff9600!important}';
+      else{
+        fault.textContent='.journey-chapter-banner:after{content:"";position:absolute;inset:35px 30px 0 12px;background:#141f23;z-index:20}';
+      }
+      doc.body.append(fault);await settle();
+      const result=await auditReadability(win,{name,expectedTheme:'dark'});
+      const caught=result.errors.some(e=>e.rule==='covered-journey-title'||['color-contrast','contrast-unresolved'].includes(e.rule)&&e.target?.some(t=>t.includes('data-lesson-title')));
+      fault.remove();await settle();
+      report.mutations.push({name,caught,viewport:[win.innerWidth,win.innerHeight]});
+      if(!caught)throw Error('Sticky title negative control escaped: '+name);
+    }
+    await check('sticky-title-restored');
   }
   async function completionNegativeControls() {
     if(report.mutations.some(m=>m.name==='completion-skips-map'))return;
@@ -302,7 +323,8 @@
       ['dark-multiply','.lp-story-character>img{mix-blend-mode:multiply!important}', 'darkened-art'],
       ['missing-image','', 'image-loaded'],
       ['opaque-art','', 'teaching-art-cutout'],
-      ['theme-discontinuity','body,.lp-shell{background:#dfe6df!important;color:#2c4035!important}', 'screen-canvas']
+      ['theme-discontinuity','body,.lp-shell{background:#dfe6df!important;color:#2c4035!important}', 'screen-canvas'],
+      ['scrollbar-width-overflow','body{min-width:'+frame.contentWindow.innerWidth+'px!important}', 'horizontal-overflow']
     ];
     for(const [name,css,rule] of mutations){
       const doc=frame.contentDocument,style=doc.createElement('style');style.textContent=css;doc.head.append(style);
