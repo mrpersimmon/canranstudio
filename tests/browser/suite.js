@@ -192,6 +192,84 @@
     await wait(()=>win.fixture.dispatchCount>before);await settle();
     if(frame.contentDocument.querySelector('[data-challenge-input]')!==input)throw Error('Typing replaced the focused input');
   }
+  async function placementTests(viewport) {
+    await open(viewport);
+    const main=JSON.stringify(view().record.completed);
+    frame.contentDocument.querySelector('.journey-lesson-index summary').click();
+    frame.contentDocument.querySelector('a[href="#chapter-umbrella"]').click();
+    await settle();await settleScroll();await check('placement-directory-arrival');
+    if(frame.contentDocument.querySelector('.journey-lesson-index').open)throw Error('Directory stayed open after choosing a Lesson');
+    const banner=frame.contentDocument.querySelector('#chapter-umbrella .journey-chapter-banner').getBoundingClientRect();
+    const entry=frame.contentDocument.querySelector('[data-action="open-placement"][data-id="umbrella"]').getBoundingClientRect();
+    if(entry.top<banner.bottom+5 || entry.bottom>frame.contentWindow.innerHeight-80)throw Error('Directory jump hides placement entry behind navigation');
+    await click('preview-node','C04');await check('placement-preview');
+    await click('open-placement','umbrella');await check('placement-intro');
+    const heart=frame.contentDocument.querySelector('.lp-placement-hearts .is-full');
+    heart.className='is-empty';
+    const heartAudit=await auditReadability(frame.contentWindow,{name:'placement-heart-mismatch',expectedTheme:'dark'});
+    const heartCaught=heartAudit.errors.some(e=>e.rule==='placement-hearts');
+    report.mutations.push({name:'placement-heart-mismatch',caught:heartCaught,errors:heartAudit.errors});
+    heart.className='is-full';
+    if(!heartCaught)throw Error('Negative control escaped: placement-heart-mismatch');
+    await click('placement-start');await check('placement-empty');
+    const questionTitle=frame.contentDocument.querySelector('[data-lesson-title]'), originalTitle=questionTitle.textContent;
+    questionTitle.textContent='错误的题型提示';
+    const typeAudit=await auditReadability(frame.contentWindow,{name:'placement-answer-type-mismatch',expectedTheme:'dark'});
+    const typeCaught=typeAudit.errors.some(e=>e.rule==='placement-answer-type');
+    report.mutations.push({name:'placement-answer-type-mismatch',caught:typeCaught,errors:typeAudit.errors});
+    questionTitle.textContent=originalTitle;
+    if(!typeCaught)throw Error('Negative control escaped: placement-answer-type-mismatch');
+    async function write(value) {
+      const win=frame.contentWindow,input=frame.contentDocument.querySelector('[data-placement-input]');
+      input.focus();input.value=value;
+      input.dispatchEvent(new win.InputEvent('input',{bubbles:true,data:value}));
+      await wait(()=>view().placementAnswer===value);await settle();
+      if(frame.contentDocument.querySelector('[data-placement-input]')!==input)throw Error('Placement typing replaced the focused input');
+    }
+    const answer=()=>{const a=view().placementAttempt;return frame.contentWindow.fixture.unit.placement.questions.find(q=>q.id===a.questionIds[a.cursor]).answers[0];};
+    const input=frame.contentDocument.querySelector('[data-placement-input]'),win=frame.contentWindow;
+    input.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,isComposing:true}));
+    if(view().placementAttempt.responses.length)throw Error('IME confirmation submitted placement');
+    await write('wrong answer');
+    frame.contentWindow.fixture.failSave=true;await click('placement-check');await check('placement-save-failure');
+    if(view().placementAttempt.responses.length)throw Error('Unsaved answer consumed a heart');
+    frame.contentWindow.fixture.failSave=false;await click('save-retry');await check('placement-wrong');
+    if(view().placementAttempt.responses.filter(r=>!r.correct).length!==1)throw Error('Wrong answer did not consume exactly one heart');
+    const saved=JSON.stringify(view().placementAttempt);
+    await reloadFrame();await click('open-placement','umbrella');await click('placement-start');await check('placement-restored');
+    if(JSON.stringify(view().placementAttempt)!==saved||view().feedback!=='incorrect')throw Error('Reload reset placement feedback or questions');
+    await click('placement-next');await write('unfinished draft');
+    await reloadFrame();await click('open-placement','umbrella');await click('placement-start');await check('placement-draft-restored');
+    if(view().placementAnswer!=='unfinished draft')throw Error('Placement draft disappeared');
+    while(view().screen==='placement') {
+      await write(answer());await check('placement-filled');
+      await click('placement-check');
+      if(view().feedback){await check('placement-correct');await click('placement-next');}
+    }
+    await check('placement-passed');
+    if(view().placementAttempt.status!=='passed'||view().passedCount!==3||JSON.stringify(view().record.completed)!==main)throw Error('Placement fabricated progress or failed to unlock target');
+    await click('map');await check('placement-map');
+    await click('preview-node','K03');await check('placement-skipped-preview');await click('journey-close');
+    await click('open-placement','friends');await click('placement-start');
+    for(let i=0;i<5;i++){
+      await write('wrong answer');
+      const button=query('placement-check'),f=frame.contentWindow.fixture,before=f.completedDispatches['placement-check']||0;
+      button.click();button.click();
+      await wait(()=>(f.completedDispatches['placement-check']||0)>=before+2);await settle();
+      if(view().placementAttempt.responses.filter(r=>!r.correct).length!==i+1)throw Error('Double click lost two hearts');
+      if(i<4)await click('placement-next');
+    }
+    await check('placement-failed');
+    if(view().placementAttempt.status!=='failed'||view().passedCount!==3)throw Error('Fifth wrong answer unlocked target');
+    await click('placement-retry');await check('placement-retry-intro');await click('placement-start');await check('placement-retry');
+    if(view().placementAttempt.responses.length)throw Error('Explicit retry did not reset the attempt');
+    await click('map');await click('open-placement','lesson-143-144');await check('placement-wide-intro');await click('placement-start');
+    while(view().screen==='placement'){
+      await write(answer());await check('placement-wide-question');
+      await click('placement-check');if(view().feedback)await click('placement-next');
+    }
+    await check('placement-wide-passed');await click('map');await check('placement-wide-map');
+  }
   async function optionalChallenges(unit) {
     const main=JSON.stringify({completed:view().record.completed,results:view().record.results});
     for(const challenge of unit.challenges){
@@ -269,6 +347,7 @@
   }
   try {
     for(const viewport of config.viewports){
+      await placementTests(viewport);
       await open(viewport,true);await check('loader',null,'dark');
       const win=await open(viewport),unit=win.fixture.unit;
       // Start with the user's exact regression, before broader map checks.

@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "verifiedAt": "2026-09-08T09:23:18.014357+00:00",
+  "branch": "codex/duolingo-version",
+  "baseCommit": "9c9bef2dcae6b4394cf5fe4deafe40be69ee3d5c",
+  "workingTree": "uncommitted candidate",
+  "course": {
+    "lessons": 144,
+    "chapters": 72,
+    "nodes": 354,
+    "activities": 1567,
+    "normalChallenges": 73,
+    "normalChallengeQuestions": 580
+  },
+  "placement": {
+    "destinations": 71,
+    "questionVariants": 592,
+    "questionsPerAttempt": 20,
+    "failureAtMistake": 5,
+    "recordScope": "device-local; placement progress separate from completed learning"
+  },
+  "unitTests": {
+    "initialFullRun": {
+      "total": 103,
+      "passed": 102,
+      "failed": 1,
+      "cause": "Existing test expected the future chapter entry to remain disabled instead of offering a placement invitation."
+    },
+    "correctedJourneyFile": {
+      "total": 5,
+      "passed": 5
+    },
+    "finalAffectedRun": {
+      "total": 16,
+      "passed": 16,
+      "files": [
+        "tests/unit/learning-placement.test.js",
+        "tests/unit/learning-journey.test.js",
+        "tests/unit/visual-proof.test.js"
+      ]
+    },
+    "newRegressionObservedFailBeforeFix": "authored answer types distinguish words from full sentences even when source IDs contain W",
+    "note": "The complete 104-case suite was not rerun after the final targeted corrections; the affected 16 cases and the complete browser matrix were rerun."
+  },
+  "browser": {
+    "finishedAt": "2026-09-08T09:21:26.582Z",
+    "states": 40956,
+    "statesByViewport": {
+      "906x801": 10239,
+      "1440x900": 10239,
+      "420x856": 10239,
+      "320x568": 10239
+    },
+    "fingerprint": "99e565eac1a9eef978bf8f2de3de835c662962a6de0f2e52908fc0fef135132a",
+    "rawProofSha256": "a710497d8d0d8a4cab0bb33dcb24e358fd916f68a8b60b7d3fd298dc002041d7",
+    "fingerprintVerified": true,
+    "mutationTypes": [
+      "completion-button-offscreen",
+      "completion-skips-map",
+      "covered-sticky-title",
+      "dark-multiply",
+      "low-contrast-sticky-title",
+      "missing-image",
+      "off-center-arrow",
+      "opaque-art",
+      "placement-answer-type-mismatch",
+      "placement-heart-mismatch",
+      "route-progress-in-lesson",
+      "scrollbar-width-overflow",
+      "theme-discontinuity",
+      "uneven-node-spacing",
+      "white-on-light"
+    ],
+    "allNegativeControlsCaught": true,
+    "violations": 0
+  },
+  "nativeBrowser": {
+    "at": "2026-09-08T08:51:52.387Z",
+    "screenshots": 13,
+    "pass": {
+      "status": "passed",
+      "responses": 20,
+      "wrong": 1
+    },
+    "failure": {
+      "status": "failed",
+      "responses": 5
+    },
+    "refreshPreserved": true,
+    "sentenceLabelCorrect": true,
+    "skippedNodeCanBeLearnedWithRealAudioEnded": true,
+    "consoleErrors": [],
+    "proof": "native-browser-proof.json",
+    "localRouteProof": "local-route-proof.json"
+  },
+  "build": {
+    "coursePackage": "passed",
+    "startupFiles": 73,
+    "startupBytes": 3250784,
+    "immutableReleasePackage": "not created; requires a separately authorized commit and release"
+  },
+  "commitPushDeploy": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "limitations": [
+    "Automated and native browser acceptance is not a human educational review of every question.",
+    "Only a native audio-ended sample was observed; all existing audio recordings were not listened to manually."
+  ],
+  "recordStage": "pre-release functional acceptance snapshot"
+}

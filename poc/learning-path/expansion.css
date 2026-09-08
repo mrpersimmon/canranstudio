@@ -13,7 +13,5 @@
 .journey-lesson-index a{display:flex;flex-direction:column;padding:12px;border:2px solid #52656d;border-radius:12px;color:#59c9f1;text-decoration:none;min-height:64px;font-weight:700}
 .journey-lesson-index a span{font-size:.8rem;line-height:1.5;color:#c3d3da}
 .journey-lesson-index a:focus-visible{outline:3px solid #49c0f8;outline-offset:2px}
-.journey-chapter{scroll-margin-top:18px}
 @media(max-width:480px){.lp-scene-painting{max-height:195px}.lp-learning-scene{margin:8px auto 14px}.lp-text-card{min-height:120px}.lp-text-card .lp-vocabulary-caption strong{font-size:1.12rem}}
 @media(max-height:650px){.lp-scene-painting{max-height:145px}.lp-learning-scene{margin:4px auto 12px}}
-

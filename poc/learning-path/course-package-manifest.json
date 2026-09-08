@@ -5,7 +5,7 @@
   "revision": "lesson1-144-v6.0",
   "scopePath": "/poc/learning-path/",
   "mediaIndexUrl": "/poc/learning-path/course-package/media-index.json",
-  "totalBytes": 3154821,
+  "totalBytes": 3250784,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -82,20 +82,26 @@
     {
       "url": "/core/learning-journey.js",
       "kind": "script",
-      "bytes": 13316,
-      "sha256": "02822ecee0df89ffc9869b5d8c01569902552b7461b73de52d4b82b55fd3b69c"
+      "bytes": 14783,
+      "sha256": "d5be8abaca6a22380793c30d0cfe6bef6805c9309bffe75a19ea9d987c45c4d4"
     },
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 45285,
-      "sha256": "8ae50fbdd4f4e7f1abf8844a2edfec095c9931a7cf19da45cf4a2c2b2dc3d6a0"
+      "bytes": 48917,
+      "sha256": "31a661d6f30e15e8f58dac19b4d5453c9025f155a18526a31b73027eb9c592bc"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 36744,
-      "sha256": "372e8d048740a2a9a962b01729683b7b00e4f1209194a23109a135926605c25d"
+      "bytes": 41541,
+      "sha256": "31f286fcdef9ea86d6143b10fdf834227ce990c1748f5eb9550ff298c6255db2"
+    },
+    {
+      "url": "/core/learning-placement.js",
+      "kind": "script",
+      "bytes": 8310,
+      "sha256": "fe0b1741cddac8c911dd98e6670f4d8c9f6812f5a9272ae01fea0839d05b9baa"
     },
     {
       "url": "/core/learning-store.js",
@@ -182,10 +188,22 @@
       "sha256": "c570f2a42ca0c3fe7f2748c5f010363138513b39c4a62df3f7dff6e54c81c69e"
     },
     {
+      "url": "/poc/learning-path/assets/journey/icons/fast-forward.svg",
+      "kind": "image",
+      "bytes": 277,
+      "sha256": "1294f6a380c0c5a354b61d7ea07f8581f17c5daf4dfeb73aed1937dfc0c2ee5d"
+    },
+    {
       "url": "/poc/learning-path/assets/journey/icons/headphones.svg",
       "kind": "image",
       "bytes": 1477,
       "sha256": "3e97a74ce0f32db2e9b813d5caa299a6b7288c3476d581feb9880955402857c5"
+    },
+    {
+      "url": "/poc/learning-path/assets/journey/icons/heart.svg",
+      "kind": "image",
+      "bytes": 167,
+      "sha256": "4090f1d45acb8b6ffde057bc1dd807caac979c7c633c3807fb6b3167548b04af"
     },
     {
       "url": "/poc/learning-path/assets/journey/icons/house.svg",
@@ -274,26 +292,26 @@
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 2219428,
-      "sha256": "e9e70c5b38653bd4141e2579bb72fc7caa15bddc3b34e7379cb6beb9951fd2f5"
+      "bytes": 2291900,
+      "sha256": "0aea1aee50c1941cb73b018f9fad0a47d398d8c217d81f54f2dff2a1dc3fde51"
     },
     {
       "url": "/poc/learning-path/course.css",
       "kind": "style",
-      "bytes": 9415,
-      "sha256": "5aa53da73b12831e025985403f1690d80ab6a7c7beefe675c2f3f18096a58368"
+      "bytes": 11585,
+      "sha256": "4c320fca388c752e2716a7a59bdfb289e250c2991af205fd86dadb014ee54d40"
     },
     {
       "url": "/poc/learning-path/expansion.css",
       "kind": "style",
-      "bytes": 1820,
-      "sha256": "bb8265cc3869d02eb240e59a8bb3f41dddb24efab2fd4097f9399b5d3465cefd"
+      "bytes": 1778,
+      "sha256": "011bc215f9b1a23f9915bd960ee83e9b5868c2b0298f5b99ab80ae048bb03558"
     },
     {
       "url": "/poc/learning-path/journey.css",
       "kind": "style",
-      "bytes": 17549,
-      "sha256": "d000c92315a02396e97d32d2e8431dec2f9d19b820006f2df1871e92910e086f"
+      "bytes": 18528,
+      "sha256": "3f26f82574b84b737666ef241746be73d857bb6ebe2f8263c9f4026f61e4c698"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/icons/arrow-clockwise.svg",
@@ -424,8 +442,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 13135,
-      "sha256": "0ff2e1a996405c5f30fdc0e2db2b61f4a761bfa515b66c2730c689165dd00b44"
+      "bytes": 14869,
+      "sha256": "8020a45774eb725d7316dabf2da99fc9b36847da24904375e59c3d1797b7bdfe"
     }
   ]
 }

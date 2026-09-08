@@ -1,0 +1,159 @@
+{
+  "at": "2026-09-08T08:51:52.387Z",
+  "origin": "http://127.0.0.1:42861/",
+  "checks": [
+    {
+      "questionId": "PL12-14",
+      "submitted": "wrong answer",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-19",
+      "submitted": "house",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-4",
+      "submitted": "Yes, it is.",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-3",
+      "submitted": "Pardon?",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-15",
+      "submitted": "dress",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-5",
+      "submitted": "very much",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-17",
+      "submitted": "shirt",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-1",
+      "submitted": "handbag",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-12",
+      "submitted": "book",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-18",
+      "submitted": "car",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-2",
+      "submitted": "Is this your handbag?",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-11",
+      "submitted": "pencil",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-6",
+      "submitted": "Is this your watch?",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-9",
+      "submitted": "this",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-16",
+      "submitted": "skirt",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-0",
+      "submitted": "me",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-13",
+      "submitted": "watch",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-10",
+      "submitted": "pen",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-8",
+      "submitted": "Is this your car?",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-7",
+      "submitted": "your",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL-CH34-5",
+      "submitted": "wrong answer",
+      "hearts": "剩余 4 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-8",
+      "submitted": "wrong answer",
+      "hearts": "剩余 3 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-14",
+      "submitted": "wrong answer",
+      "hearts": "剩余 2 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-15",
+      "submitted": "wrong answer",
+      "hearts": "剩余 1 次机会，共 5 次"
+    },
+    {
+      "questionId": "PL12-16",
+      "submitted": "wrong answer",
+      "hearts": "剩余 0 次机会，共 5 次"
+    }
+  ],
+  "screenshots": [
+    "placement-jump-entry-420.png",
+    "placement-intro-420.png",
+    "placement-wrong-420.png",
+    "placement-draft-420.png",
+    "placement-watch-sentence-420.png",
+    "placement-passed-420.png",
+    "placement-map-420.png",
+    "placement-skipped-preview-420.png",
+    "placement-failed-420.png",
+    "placement-retry-intro-420.png",
+    "placement-wide-intro-906.png",
+    "placement-wide-question-906.png",
+    "placement-wide-question-320.png"
+  ],
+  "refreshPreserved": true,
+  "sentenceLabelCorrect": true,
+  "pass": {
+    "status": "passed",
+    "responses": 20,
+    "wrong": 1
+  },
+  "skippedNodeCanBeLearnedWithRealAudioEnded": true,
+  "failure": {
+    "status": "failed",
+    "responses": 5
+  },
+  "consoleErrors": []
+}

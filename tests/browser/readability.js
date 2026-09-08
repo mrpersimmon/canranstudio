@@ -115,6 +115,18 @@
     const viewportGeometry = {width:win.innerWidth,contentWidth:doc.documentElement.clientWidth,scrollWidth:doc.documentElement.scrollWidth,scrollbarWidth:win.innerWidth-doc.documentElement.clientWidth};
     const root = doc.querySelector('[data-learning-path]');
     const run = win.fixture?.runtime.snapshot();
+    if (run?.screen?.startsWith('placement')) {
+      const total=win.fixture.unit.placement.maxMistakes, wrong=run.screen==='placement-intro'&&run.placementAttempt?.status!=='active'?0:run.placementAttempt?.responses.filter(r=>!r.correct).length||0, remaining=total-wrong;
+      const hearts=root.querySelector('.lp-placement-hearts');
+      if (!hearts || hearts.children.length!==total || hearts.querySelectorAll('.is-full').length!==remaining
+        || hearts.getAttribute('aria-label')!==`剩余 ${remaining} 次机会，共 ${total} 次`) errors.push({rule:'placement-hearts',remaining});
+      if(run.screen==='placement') {
+        const q=win.fixture.unit.placement.questions.find(q=>q.id===run.placementAttempt.questionIds[run.placementAttempt.cursor]);
+        const expected=q.kind==='gap'?'补全句子':q.answerType==='word'?'写出英文单词':'翻译这句话';
+        if(root.querySelector('[data-lesson-title]')?.textContent!==expected
+          || (q.answerType==='word' && q.answers.some(a=>/\s/.test(a.trim()))))errors.push({rule:'placement-answer-type',questionId:q.id,expected});
+      }
+    }
     const progressBar = root.querySelector('.lp-header [role="progressbar"]');
     const sessionProgress = progressBar ? {label:progressBar.getAttribute('aria-label'),completed:Number(progressBar.getAttribute('aria-valuenow')),total:Number(progressBar.getAttribute('aria-valuemax'))} : null;
     if (run?.sessionProgress && (!sessionProgress || sessionProgress.label !== '本次闯关进度'
@@ -203,7 +215,7 @@
         }
       }
     }
-    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint,.journey-locate,.lp-reset-actions button,.journey-reset button,.journey-reset-notice button,[data-challenge-input]')){
+    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint,.journey-locate,.lp-reset-actions button,.journey-reset button,.journey-reset-notice button,[data-challenge-input],[data-placement-input]')){
       if(button.disabled||button.closest('[inert]')||!button.getClientRects().length)continue;
       const rect=button.getBoundingClientRect();
       if(rect.width<44||rect.height<44)errors.push({rule:'small-action',label:button.getAttribute('aria-label')||button.textContent});

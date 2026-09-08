@@ -9,7 +9,9 @@ const ACTIVITY_IDS = Object.keys(require('../content/learning-course.json').acti
 const TEACH_IDS = Object.values(require('../content/learning-course.json').activities).filter(a=>a.kind==='teach').map(a=>a.id);
 const NODE_IDS = require('../content/learning-course.json').nodes.map(node=>node.id);
 const CHALLENGES = require('../content/learning-course.json').challenges;
+const PLACEMENT_SCREENS=['placement-directory-arrival','placement-preview','placement-intro','placement-empty','placement-save-failure','placement-wrong','placement-restored','placement-draft-restored','placement-filled','placement-correct','placement-passed','placement-map','placement-skipped-preview','placement-failed','placement-retry-intro','placement-retry','placement-wide-intro','placement-wide-question','placement-wide-passed','placement-wide-map'];
 const CHALLENGE_SCREENS = ['challenge-menu','reset-confirm-course','reset-confirm-challenges','reset-cancelled','reset-challenges-saved','reset-undo','reset-failed','reset-course-saved','reset-reload','reset-undo-restored',
+  ...PLACEMENT_SCREENS,
   ...CHALLENGES.flatMap(c=>['challenge-intro-','challenge-complete-','challenge-return-','challenge-draft-restored-','challenge-node-preview-','challenge-finished-intro-','reset-confirm-single-','reset-single-'].map(prefix=>prefix+c.id))];
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 function fingerprint(prepared, root = ROOT) {
@@ -50,7 +52,7 @@ function validateReport(report) {
     if(!map.journeyLayout?.gaps?.length||map.journeyLayout.gaps.some(gap=>Math.abs(gap-map.journeyLayout.pitch)>1))throw Error('Missing or uneven map geometry: '+viewport);
     if(!map.centeredIcons?.some(icon=>icon.action==='journey-locate') || map.centeredIcons.some(icon=>Math.abs(icon.x)>1 || Math.abs(icon.y)>1))throw Error('Missing or uncentered icon geometry: '+viewport);
   }
-  if (!['white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['placement-heart-mismatch','placement-answer-type-mismatch','white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

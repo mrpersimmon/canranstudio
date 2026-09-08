@@ -270,6 +270,28 @@ for(const n of unit.nodes.filter(n=>Math.min(...n.lessonIds)>50)){
   },0);
   n.duration='约 '+Math.max(1,Math.round(seconds/60))+' 分钟';
 }
+const placement = require('../content/placement');
+unit.journey.icons['fast-forward']='/poc/learning-path/assets/journey/icons/fast-forward.svg';
+unit.icons.heart='/poc/learning-path/assets/journey/icons/heart.svg';
+unit.placement = {version:placement.version,questionCount:placement.questionCount,maxMistakes:placement.maxMistakes,skippedShare:placement.skippedShare,questions:[]};
+for (const [index,[ref,prompt,answerType]] of placement.foundation.entries()) {
+  const gap=placement.gaps[ref];
+  unit.placement.questions.push({id:'PL12-'+index,chapterId:'found',kind:gap?'gap':'translation',
+    sourceRef:ref,prompt,answers:[gap?gap[1]:unit.sources[ref].text],actorId:'explorer-cat',
+    ...(answerType?{answerType}:{}),...(gap?{prefix:gap[0],suffix:gap[2]}:{})});
+}
+// Determine the chapter from the source's first challenge occurrence, so later
+// recall questions cannot leak future language into an earlier placement test.
+const sourceChapter=new Map(unit.placement.questions.map(q=>[q.sourceRef,q.chapterId]));
+for (const challenge of unit.challenges) {
+  const chapterId=unit.nodes.find(n=>n.id===challenge.unlockNodeId).chapterId;
+  for (const q of challenge.questions) {
+    if (!sourceChapter.has(q.sourceRef)) sourceChapter.set(q.sourceRef,chapterId);
+    if (sourceChapter.get(q.sourceRef)==='found') continue;
+    const {hint,...question}=q;
+    unit.placement.questions.push({...question,id:'PL-'+q.id,chapterId:sourceChapter.get(q.sourceRef)});
+  }
+}
 write('content/learning-course.json',unit);
 write('content/textbook-sources.json',sourceIndex);
 write('content/expansion/audio-request.json',{model:'Kokoro-82M',revision:'f3ff3571791e39611d31c381e3a41a3af07b4987',items:audioRequests});

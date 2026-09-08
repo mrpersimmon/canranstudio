@@ -6,6 +6,7 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
   const challenges = typeof module === 'object' && module.exports ? require('./learning-challenges') : root.CanranCore.learningChallenges;
+  const placement = typeof module === 'object' && module.exports ? require('./learning-placement') : root.CanranCore.learningPlacement;
   const clone = value => JSON.parse(JSON.stringify(value));
   const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const object = value => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -86,6 +87,7 @@
       }))) return false;
       if (record.resetBackup && (!allowBackup || typeof record.resetBackup.at !== 'string'
         || !validRecord(record.resetBackup.record, unit, false))) return false;
+      if (record.placement !== undefined && (!placement || !placement.validProgress(record.placement,unit))) return false;
     }
     const roundIds = unit.legacyRolePractice.rounds.map(r => r.roundId);
     return Object.entries(record.roles).every(([id, value]) => roundIds.includes(id) && object(value) && ['completed', 'skipped'].includes(value.disposition));
@@ -268,6 +270,7 @@
       } else if (!withinStory && a.requiredAudio.length && a.playbackMode !== 'manual-cards') play(a.requiredAudio, 'required');
     }
     const nodeDone = node => node.activityIds.every(id => record.completed[id]);
+    const nodePassed = node => nodeDone(node) || unit.nodes.indexOf(node) < (placement?.skippedUntil(unit,record)||0);
     function dueItems() {
       const due = Object.values(record?.results || {}).filter(r => r.nextDueDay <= today() && unit.activities[r.activityId].reviewEligible !== false).sort((a, b) =>
         a.nextDueDay.localeCompare(b.nextDueDay) || (a.initialEvidence === 'independent' ? 1 : 0) - (b.initialEvidence === 'independent' ? 1 : 0)
@@ -282,7 +285,7 @@
     }
     function startNode(id, mode) {
       const index = unit.nodes.findIndex(n => n.id === id);
-      if (index < 0 || (index > 0 && !nodeDone(unit.nodes[index]) && !unit.nodes.slice(0, index).every(nodeDone))) return;
+      if (index < 0 || (index > 0 && !nodePassed(unit.nodes[index]) && !unit.nodes.slice(0, index).every(nodePassed))) return;
       const node = unit.nodes[index];
       if (nodeDone(node)) mode = 'repeat';
       else mode = 'main';
@@ -484,7 +487,7 @@
     }
     const challenge = () => unit.challenges?.find(c => c.id === view.challengeId);
     const challengeQuestion = () => challenge()?.questions[view.challengeIndex];
-    const challengeUnlocked = c => c && nodeDone(unit.nodes.find(n => n.id === c.unlockNodeId));
+    const challengeUnlocked = c => c && nodePassed(unit.nodes.find(n => n.id === c.unlockNodeId));
     function showChallenge(id) {
       const definition = unit.challenges?.find(c => c.id === id);
       if (!challengeUnlocked(definition)) return;
@@ -530,6 +533,48 @@
         else loadChallengeQuestion();
       });
     }
+    const placementAttempt = () => record.placement?.attempts[view.placementId];
+    function showPlacement(id) {
+      if (!placement.eligible(unit,record,id)) return;
+      stopAudio();
+      Object.assign(view,{screen:'placement-intro',mode:'placement',placementId:id,activityId:null,storyActivityId:null,challengeId:null,feedback:null,sessionProgress:null});
+    }
+    function loadPlacement() {
+      const a=placementAttempt();
+      Object.assign(view,{screen:a.status==='active'?'placement':'placement-result',mode:'placement',
+        placementIndex:a.cursor,placementAnswer:a.draft,feedback:a.status==='active'&&a.responses.length>a.cursor?(a.responses[a.cursor].correct?'correct':'incorrect'):null,
+        sessionProgress:{completed:a.responses.length,total:a.questionIds.length}});
+    }
+    function writePlacement(attempt,after=loadPlacement) {
+      const next=clone(record); delete next.resetBackup;
+      ((next.placement ||= {attempts:{}}).attempts)[view.placementId]=attempt;
+      save(next,after);
+    }
+    function startPlacement() {
+      const old=placementAttempt();
+      if (old?.status==='active') { loadPlacement(); return; }
+      if (!placement.eligible(unit,record,view.placementId)) return;
+      // New attempts get a new seed; opening, refreshing and resuming never do.
+      let seed=Math.floor(random()*4294967296)>>>0;
+      if (seed===old?.seed) seed=(seed+1)>>>0;
+      const attempt=placement.createAttempt(unit,record,view.placementId,seed,now().toISOString());
+      if (attempt) writePlacement(attempt);
+    }
+    function handlePlacement(event) {
+      const a=placementAttempt();
+      // Identity guards also reject queued clicks/IME drafts from a previous
+      // question. The persisted response is the single source of life loss.
+      if (a?.status!=='active' || event.attemptId!==a.id || event.questionId!==a.questionIds[a.cursor]) return;
+      if (event.type==='placement-input' && !view.feedback && typeof event.value==='string') {
+        const value=event.value.slice(0,180);
+        if (value!==a.draft) writePlacement({...clone(a),draft:value},()=>{view.placementAnswer=value;});
+      } else if (event.type==='placement-check' && !view.feedback) {
+        const next=placement.grade(unit,a,a.draft,now().toISOString());
+        if (next) writePlacement(next);
+      } else if (event.type==='placement-next' && view.feedback) {
+        writePlacement({...clone(a),cursor:a.cursor+1,draft:''});
+      }
+    }
     function requestReset(scope, id) {
       if (!unit.courseId || !['map','challenge-intro','challenge-complete'].includes(view.screen)) return;
       if (!['course','challenges','challenge'].includes(scope) || scope === 'challenge' && !unit.challenges?.some(c => c.id === id)) return;
@@ -552,15 +597,19 @@
       // Compute the available prefix once, rather than rechecking all earlier
       // lessons for every node on every audio event.
       let previousDone = true;
-      const nodes = unit.nodes.map(node => {
+      const skippedUntil=placement?.skippedUntil(unit,record)||0;
+      const nodes = unit.nodes.map((node,index) => {
         const done = Boolean(record && nodeDone(node));
-        const available = Boolean(record && (done || previousDone));
-        previousDone = previousDone && done;
-        return {id:node.id,done,available,completeActivities:node.activityIds.filter(id=>record?.completed[id]).length,pendingRole:false};
+        const skipped=Boolean(record && !done && index<skippedUntil),passed=done||skipped;
+        const available = Boolean(record && (passed || previousDone));
+        previousDone = previousDone && passed;
+        return {id:node.id,done,skipped,passed,available,completeActivities:node.activityIds.filter(id=>record?.completed[id]).length,pendingRole:false};
       });
       return clone({ ...view, extraPractice: extraIndex,
         canContinue: view.screen === 'activity' && !(a?.kind === 'teach' && (view.wordQueue.length || view.audio?.purpose === 'word' && view.audio.status !== 'ended')) && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
         completedCount: unit.checkpointIds.filter(id => unit.checkpointActivities[id].every(aid => record?.completed[aid])).length,
+        passedCount:nodes.filter(n=>n.passed).length,
+        placementAttempt:record?.placement?.attempts[view.placementId]||null,
         nodes,
         dueCount: dueItems().length, record: record || null });
     }
@@ -576,7 +625,11 @@
       } else if (event.type === 'reset-request') requestReset(event.scope, event.id);
       else if (event.type === 'reset-undo' && view.screen === 'map' && record.resetBackup) {
         save(clone(record.resetBackup.record), () => {});
-      } else if (event.type === 'open-challenge' && ['map','celebration','challenge-complete'].includes(view.screen)) showChallenge(event.id);
+      } else if (event.type === 'open-placement' && view.screen==='map') showPlacement(event.id);
+      else if (event.type === 'placement-start' && view.screen==='placement-intro') startPlacement();
+      else if (event.type === 'placement-retry' && view.screen==='placement-result' && placementAttempt()?.status==='failed') showPlacement(view.placementId);
+      else if (event.type.startsWith('placement-') && view.screen==='placement') handlePlacement(event);
+      else if (event.type === 'open-challenge' && ['map','celebration','challenge-complete'].includes(view.screen)) showChallenge(event.id);
       else if (event.type === 'challenge-start' && view.screen === 'challenge-intro' && !record.challenges?.[view.challengeId]?.completedAt) {
         const completed = record.challenges?.[view.challengeId]?.answers.length || 0;
         view.sessionProgress = {completed:0,total:challenge().questions.length-completed};

@@ -1,0 +1,27 @@
+{
+  "at": "2026-09-08T09:08:56.916Z",
+  "origin": "http://127.0.0.1:42861/",
+  "manifestScope": "/",
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "sha256": "b894932717f5ff4ba0d2fd31407e6a318824333559b02a42749cf83f09df3061"
+    },
+    {
+      "file": "core/learning-placement.js",
+      "status": 200,
+      "sha256": "fe0b1741cddac8c911dd98e6670f4d8c9f6812f5a9272ae01fea0839d05b9baa"
+    },
+    {
+      "file": "poc/learning-path/course-package/unit-catalog.json",
+      "status": 200,
+      "sha256": "0aea1aee50c1941cb73b018f9fad0a47d398d8c217d81f54f2dff2a1dc3fde51"
+    },
+    {
+      "file": "poc/learning-path/course-package-manifest.json",
+      "status": 200,
+      "sha256": "3bd17ae49e8822fd672c45b3f077bb5e3e17ba0dea666b3a3af6490ace27ad8a"
+    }
+  ]
+}

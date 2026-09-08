@@ -1,4 +1,13 @@
-/* Path presentation: color roles are deliberately independent of lesson UI. */
+/* Shared dark canvas. Teal identifies an optional placement jump. */
+.journey-jump-face{position:absolute;inset:0 0 8px;z-index:-1;border-radius:50%;background:#00c9a7;box-shadow:0 8px 0 #008c77,inset 0 4px 0 #25d5b8}
+.is-jump>.journey-node .journey-coin,.is-skipped>.journey-node .journey-coin{display:none}
+.is-jump>.journey-node .journey-node-symbol,.is-skipped>.journey-node .journey-node-symbol{margin-top:-8px;filter:brightness(0) invert(1)}
+.journey-button.journey-jump-hint{color:#42dfc2;white-space:nowrap}
+.journey-button.journey-placement-primary{background:#49c0f8;color:#10252e;border-color:#219dcc}
+.journey-placement-primary .journey-icon{filter:brightness(0)}
+.journey-skipped-label{position:absolute;top:calc(100% + 15px);color:#80dcc9;background:#141f23;padding:2px 4px;border-radius:4px;font-size:12px;font-weight:750;white-space:nowrap}
+.journey-placement-note{color:#a0b0b8;margin-top:14px;font-size:14px;line-height:1.6}
+.is-selected .journey-skipped-label{display:none}
 html.journey-theme{color-scheme:dark;background:#141f23}
 html.journey-theme body{background:#141f23;color:#f1f7f8}
 .has-journey{flex:1;background:#141f23;color:#f1f7f8;--journey-bg:#141f23;--journey-line:#34434b;--journey-muted:#a0b0b8;--journey-orange:#ff9600;--journey-gold:#ffc800;--journey-blue:#49c0f8;--journey-pink:#f58dcc}
@@ -20,7 +29,7 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
 .journey-stat .journey-icon{width:32px;height:34px}
 .journey-stat small{font-size:15px;color:#a0b0b8;font-weight:500}
 .journey-stat:first-child{color:#f1f7f8}
-.journey-chapter{position:relative}
+.journey-chapter{position:relative;scroll-margin-top:68px}
 .journey-chapter-banner{position:sticky;top:60px;z-index:10;background:#ff9600;box-shadow:0 5px 0 #c97700;display:flex;align-items:stretch;justify-content:space-between;border-radius:20px;min-height:84px;margin:8px 24px 0;color:white;overflow:hidden}
 .journey-chapter-banner>div{padding:12px 0 12px 20px;min-width:0;flex:1}
 .journey-chapter-banner p{color:#5e3400;font-size:14px;font-weight:800;line-height:1.35;letter-spacing:.025em;margin-bottom:5px}
@@ -128,6 +137,7 @@ html.journey-theme body{background:#141f23;color:#f1f7f8}
  .journey-nav-dot{right:15px;top:14px}.journey-nav-footer{display:block;margin-top:auto;color:#83959e;font-size:12px;padding:14px 3px}
  .journey-main{padding-bottom:40px}
  .journey-stats{height:84px;padding-left:28px;padding-right:28px}
+ .journey-chapter{scroll-margin-top:92px}
  .journey-chapter-banner{top:84px;margin-top:10px;min-height:100px}
  .journey-chapter-banner h1{font-size:26px}.journey-chapter-banner p{font-size:15px}
  .journey-node{width:98px;height:92px;margin-left:-49px}

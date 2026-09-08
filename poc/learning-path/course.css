@@ -92,6 +92,31 @@
 
 .lp-header-spacer{flex:1}
 .lp-challenge-intro{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+.lp-placement-hearts{display:flex;align-items:center;gap:6px;flex:none}
+.lp-placement-hearts .lp-icon{width:26px;height:26px}
+.lp-placement-hearts .is-full .lp-icon{filter:invert(65%) sepia(93%) saturate(1924%) hue-rotate(358deg) brightness(105%) contrast(106%)}
+.lp-placement-hearts .is-empty .lp-icon{filter:invert(32%) sepia(12%) saturate(550%) hue-rotate(156deg) brightness(90%) contrast(90%)}
+.lp-placement-intro{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding-top:24px;padding-bottom:24px}
+.lp-placement-mascot{width:170px;height:180px;object-fit:contain}
+.lp-placement-intro h1{font-size:clamp(28px,5vw,36px);line-height:1.3;margin:0}
+.lp-placement-description{color:var(--lp-muted);line-height:1.8;margin:0}
+.lp-placement-rule{font-size:18px;line-height:1.5;margin:0}
+.lp-placement-rule strong{color:#ffb43b}
+.lp-placement-resume{color:var(--lp-blue);font-weight:700}
+.lp-placement-actions{display:flex;flex-direction:column;gap:8px;width:100%;max-width:480px;margin:auto}
+.lp-placement-actions .lp-button{width:100%}
+.lp-placement-actions .lp-quiet{color:var(--lp-blue);background:transparent}
+.lp-button.lp-placement-start{background:var(--lp-blue);border-color:#219dcc;color:#10252e}
+.lp-placement-score{display:grid;gap:4px}
+.lp-placement-score strong{font-size:28px;color:var(--lp-green)}
+.lp-placement-score span,.lp-placement-question-count{color:var(--lp-muted);font-size:14px}
+.lp-placement-intro.is-failed .lp-placement-score strong{color:#ffb43b}
+.lp-placement-question .lp-lesson-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lp-placement-question-count{white-space:nowrap;font-weight:700}
+.lp-feedback.lp-placement-wrong{color:#ffabae;background:#35262d;border-color:#a76168}
+.lp-placement-wrong .lp-icon{filter:invert(76%) sepia(13%) saturate(1200%) hue-rotate(301deg) brightness(107%) contrast(100%)}
+@media(max-width:420px){.lp-placement-hearts{gap:3px}.lp-placement-hearts .lp-icon{width:21px;height:21px}}
+@media(max-height:650px){.lp-placement-mascot{width:96px;height:100px}.lp-placement-intro{gap:12px}.lp-placement-intro h1{font-size:26px}}
 .lp-challenge-intro>img{width:150px;height:170px}
 .lp-challenge-intro>p:not(.lp-kicker){color:var(--lp-muted);max-width:360px}
 .lp-challenge-intro .lp-challenge-count{font-weight:800;color:var(--lp-blue)}

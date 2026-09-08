@@ -26,8 +26,13 @@ test('journey previews and tabs are read-only and locked previews cannot start a
   for (const tab of ['path', 'review', 'progress']) {
     const html = render(unit, {...rt.snapshot(), journeyUI:{tab, selectedNodeId:'C04'}});
     assert.doesNotMatch(html, /(?:undefined|NaN)/);
-    if (tab === 'path') assert.match(html, /data-action="open-node" data-id="C04"[^>]* disabled/);
+    if (tab === 'path') {
+      assert.match(html, /data-action="open-placement" data-id="umbrella"/);
+      assert.doesNotMatch(html, /data-action="open-node" data-id="C04"/);
+    }
   }
+  const locked=render(unit,{...rt.snapshot(),journeyUI:{tab:'path',selectedNodeId:'C05'}});
+  assert.match(locked,/data-action="open-node" data-id="C05"[^>]* disabled/);
   assert.deepEqual(adapter.load(rt.storageKey), before);
   assert.equal(rt.dispatch({type:'open-node', nodeId:'C04'}).view.screen, 'map');
   assert.equal(rt.snapshot().completedCount, 0);

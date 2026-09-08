@@ -176,12 +176,35 @@
         : `${button('challenge-hint','提示',{symbol:'lightbulb',className:'lp-quiet',disabled:v.challengeHintUsed})}${button('challenge-check','检查',{className:'lp-primary',disabled:!v.challengeAnswer.trim()})}`;
       return `${header(v,'输入挑战')}${body}${footer(v,actions)}`;
     }
+    function renderPlacement(v) {
+      const config=unit.placement, attempt=v.placementAttempt, chapter=unit.chapters.find(ch=>ch.id===v.placementId);
+      const label='Lesson '+chapter.lessonIds.join(' & ');
+      const wrong=v.screen==='placement-intro'&&attempt?.status!=='active'?0:attempt?.responses.filter(r=>!r.correct).length||0, remaining=config.maxMistakes-wrong;
+      const hearts=`<div class="lp-placement-hearts" role="img" aria-label="剩余 ${remaining} 次机会，共 ${config.maxMistakes} 次">${Array.from({length:config.maxMistakes},(_,i)=>`<span class="${i<remaining?'is-full':'is-empty'}">${icon('heart')}</span>`).join('')}</div>`;
+      const top=header(v,'跳级测试').replace('<span class="lp-header-label">跳级测试</span>',hearts);
+      if(v.screen==='placement-intro') {
+        const active=attempt?.status==='active';
+        const testedEnd=chapter.lessonIds[0]-1;
+        return `${top}<section class="lp-lesson lp-placement-intro">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–${testedEnd} 抽取 ${config.questionCount} 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p>${active?`<p class="lp-placement-resume">已答 ${attempt.responses.length} / ${config.questionCount} 题 · 剩余 ${remaining} 次机会</p>`:''}</section>${footer(v,`<div class="lp-placement-actions">${button('placement-start',active?'继续测试':'开始测试',{className:'lp-primary lp-placement-start'})}${button('map','下次再说',{className:'lp-quiet'})}</div>`)}`;
+      }
+      if(v.screen==='placement-result') {
+        const passed=attempt.status==='passed';
+        return `${top}<section class="lp-lesson lp-placement-intro ${passed?'is-passed':'is-failed'}">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>${passed?'跳级成功！':'这次还没通过'}</h1><p class="lp-placement-description">${passed?'已解锁 '+escape(label)+'<br>回到路线，开始新的探险':'已答错 5 题，课程进度保持不变<br>先练一练，再来挑战'}</p><div class="lp-placement-score"><strong>${attempt.responses.length-wrong} / ${attempt.responses.length}</strong><span>答对题数</span></div></section>${footer(v,`<div class="lp-placement-actions">${button('map','回到路线',{className:'lp-primary'})}${!passed?button('placement-retry','再试一次',{className:'lp-quiet'}):''}</div>`)}`;
+      }
+      const q=config.questions.find(q=>q.id===attempt.questionIds[attempt.cursor]), feedback=v.feedback;
+      const attrs=`data-placement-input data-attempt-id="${escape(attempt.id)}" data-question-id="${escape(q.id)}" lang="en" aria-label="${q.kind==='gap'?'填入缺少的单词':q.answerType==='word'?'英文单词':'英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback?' readonly':''}`;
+      const input=q.kind==='gap'?`<div class="lp-gap-sentence" lang="en"><span>${escape(q.prefix)}</span><input ${attrs} type="text" value="${escape(v.placementAnswer)}" placeholder="…" size="9"><span>${escape(q.suffix)}</span></div>`:`<textarea ${attrs} rows="${q.answerType==='word'?1:3}" placeholder="${q.answerType==='word'?'用英文写出单词':'用英文写出整句话'}">${escape(v.placementAnswer)}</textarea>`;
+      const message=feedback?`<section class="lp-feedback ${feedback==='correct'?'lp-feedback-success':'lp-placement-wrong'}" tabindex="-1" aria-live="polite"><div class="lp-feedback-title">${icon(feedback==='correct'?'check-circle-fill':'x-lg')}<strong>${feedback==='correct'?'答对了！':'答错了 · 剩余 '+remaining+' 次机会'}</strong></div>${feedback==='incorrect'?'<p>参考答案：</p>':''}<p lang="en">${escape(unit.sources[q.sourceRef].text)}</p></section>`:'';
+      const title=q.kind==='gap'?'补全句子':q.answerType==='word'?'写出英文单词':'翻译这句话';
+      return `${top}<div class="lp-lesson lp-challenge lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${title}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${config.questionCount}</span></div><div class="lp-challenge-prompt">${image(q.actorId)}<p>${escape(q.prompt)}</p></div><div class="lp-written-answer">${input}</div>${message}</div>${footer(v,button(feedback?'placement-next':'placement-check',feedback?'继续':'检查',{className:'lp-primary',disabled:!feedback&&!v.placementAnswer.trim()}))}`;
+    }
     function render(v) {
       if (v.screen === 'blocked') return `<div class="station-app lp-blocked">${image('explorer-cat')}<h1>${escape(c.unsupportedRecord)}</h1>${button('reload', c.reloadProgress, { className: 'lp-primary' })}</div>`;
       let html;
       if (v.screen === 'map') html = renderMap(v);
       else if (v.screen === 'references') html = renderReferences(v);
       else if (['challenge-intro','challenge','challenge-complete'].includes(v.screen)) html = renderChallenge(v);
+      else if (['placement-intro','placement','placement-result'].includes(v.screen)) html = renderPlacement(v);
       else if (v.screen === 'celebration' || v.screen === 'review-complete') {
         const node = unit.nodes.find(n => n.id === v.nodeId), done = v.nodes.every(n => n.done);
         const results = Object.values(v.record.results).filter(r => done || !node || unit.activities[r.activityId].nodeId === node.id);

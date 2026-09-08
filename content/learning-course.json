@@ -55838,7 +55838,8 @@
     "record-circle-fill": "/poc/lesson-1-2/course/assets/v3/icons/record-circle-fill.svg",
     "plus-lg": "/poc/lesson-1-2/course/assets/v3/icons/plus-lg.svg",
     "chevron-up": "/poc/learning-path/assets/icons/chevron-up.svg",
-    "chevron-down": "/poc/learning-path/assets/icons/chevron-down.svg"
+    "chevron-down": "/poc/learning-path/assets/icons/chevron-down.svg",
+    "heart": "/poc/learning-path/assets/journey/icons/heart.svg"
   },
   "nodes": [
     {
@@ -227851,7 +227852,8 @@
       "notebook": "/poc/learning-path/assets/journey/icons/notebook.svg",
       "path": "/poc/learning-path/assets/journey/icons/path.svg",
       "compass": "/poc/learning-path/assets/journey/icons/compass.svg",
-      "x": "/poc/learning-path/assets/journey/icons/x.svg"
+      "x": "/poc/learning-path/assets/journey/icons/x.svg",
+      "fast-forward": "/poc/learning-path/assets/journey/icons/fast-forward.svg"
     },
     "nodeIcons": {
       "K01": "book-open",
@@ -236451,5 +236453,7195 @@
       ]
     }
   ],
-  "releaseRevision": "lesson1-144-v6.0"
+  "releaseRevision": "lesson1-144-v6.0",
+  "placement": {
+    "version": 1,
+    "questionCount": 20,
+    "maxMistakes": 5,
+    "skippedShare": 0.7,
+    "questions": [
+      {
+        "id": "PL12-0",
+        "chapterId": "found",
+        "kind": "gap",
+        "sourceRef": "L01-D01",
+        "prompt": "打扰一下。",
+        "answers": [
+          "me"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Excuse ",
+        "suffix": "!"
+      },
+      {
+        "id": "PL12-1",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L01-W07",
+        "prompt": "手提包",
+        "answers": [
+          "handbag"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-2",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L01-D03",
+        "prompt": "这是你的手提包吗？",
+        "answers": [
+          "Is this your handbag?"
+        ],
+        "actorId": "explorer-cat"
+      },
+      {
+        "id": "PL12-3",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L01-D04",
+        "prompt": "请再说一遍？（用一个词）",
+        "answers": [
+          "Pardon?"
+        ],
+        "actorId": "explorer-cat"
+      },
+      {
+        "id": "PL12-4",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L01-D06",
+        "prompt": "是的，它是。",
+        "answers": [
+          "Yes, it is."
+        ],
+        "actorId": "explorer-cat"
+      },
+      {
+        "id": "PL12-5",
+        "chapterId": "found",
+        "kind": "gap",
+        "sourceRef": "L01-D07",
+        "prompt": "非常感谢你。",
+        "answers": [
+          "very much"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Thank you ",
+        "suffix": "."
+      },
+      {
+        "id": "PL12-6",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "NCE-U01-C-Q-WATCH",
+        "prompt": "这是你的手表吗？",
+        "answers": [
+          "Is this your watch?"
+        ],
+        "actorId": "explorer-cat"
+      },
+      {
+        "id": "PL12-7",
+        "chapterId": "found",
+        "kind": "gap",
+        "sourceRef": "NCE-U01-C-Q-COAT",
+        "prompt": "这是你的外套吗？",
+        "answers": [
+          "your"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Is this ",
+        "suffix": " coat?"
+      },
+      {
+        "id": "PL12-8",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "NCE-U01-C-Q-CAR",
+        "prompt": "这是你的汽车吗？",
+        "answers": [
+          "Is this your car?"
+        ],
+        "actorId": "explorer-cat"
+      },
+      {
+        "id": "PL12-9",
+        "chapterId": "found",
+        "kind": "gap",
+        "sourceRef": "NCE-U01-C-Q-HOUSE",
+        "prompt": "这是你的房子吗？",
+        "answers": [
+          "this"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Is ",
+        "suffix": " your house?"
+      },
+      {
+        "id": "PL12-10",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W01",
+        "prompt": "钢笔",
+        "answers": [
+          "pen"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-11",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W02",
+        "prompt": "铅笔",
+        "answers": [
+          "pencil"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-12",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W03",
+        "prompt": "书",
+        "answers": [
+          "book"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-13",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W04",
+        "prompt": "手表",
+        "answers": [
+          "watch"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-14",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W05",
+        "prompt": "外套",
+        "answers": [
+          "coat"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-15",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W06",
+        "prompt": "连衣裙",
+        "answers": [
+          "dress"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-16",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W07",
+        "prompt": "短裙",
+        "answers": [
+          "skirt"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-17",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W08",
+        "prompt": "衬衫",
+        "answers": [
+          "shirt"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-18",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W09",
+        "prompt": "汽车",
+        "answers": [
+          "car"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL12-19",
+        "chapterId": "found",
+        "kind": "translation",
+        "sourceRef": "L02-W10",
+        "prompt": "房子",
+        "answers": [
+          "house"
+        ],
+        "actorId": "explorer-cat",
+        "answerType": "word"
+      },
+      {
+        "id": "PL-CH34-1",
+        "kind": "gap",
+        "sourceRef": "L03-D02",
+        "prompt": "这是我的号码牌。",
+        "answers": [
+          "my"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Here is ",
+        "suffix": " ticket.",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH34-2",
+        "kind": "translation",
+        "sourceRef": "L03-D06",
+        "prompt": "这不是我的雨伞。",
+        "answers": [
+          "This is not my umbrella.",
+          "This isn't my umbrella."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH34-3",
+        "kind": "gap",
+        "sourceRef": "L04-P15",
+        "prompt": "这是你的女儿吗？",
+        "answers": [
+          "daughter"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Is this your ",
+        "suffix": "?",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH34-4",
+        "kind": "translation",
+        "sourceRef": "L03-D09",
+        "prompt": "不，它不是。",
+        "answers": [
+          "No, it isn't.",
+          "No, it is not."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH34-5",
+        "kind": "gap",
+        "sourceRef": "L03-D01",
+        "prompt": "请把我的外套和雨伞给我。",
+        "answers": [
+          "and"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "My coat ",
+        "suffix": " my umbrella please.",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH34-6",
+        "kind": "translation",
+        "sourceRef": "L03-D02",
+        "prompt": "这是我的号码牌。",
+        "answers": [
+          "Here is my ticket.",
+          "Here's my ticket.",
+          "This is my ticket."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH56-1",
+        "kind": "gap",
+        "sourceRef": "L05-D05",
+        "prompt": "她是法国人。",
+        "answers": [
+          "She"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " is French.",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CH56-2",
+        "kind": "translation",
+        "sourceRef": "L05-D07",
+        "prompt": "他是德国人。",
+        "answers": [
+          "He is German.",
+          "He's German."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CH56-3",
+        "kind": "gap",
+        "sourceRef": "L05-D04",
+        "prompt": "Sophie 是一名新学生。",
+        "answers": [
+          "new"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Sophie is a ",
+        "suffix": " student.",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CH56-4",
+        "kind": "translation",
+        "sourceRef": "L05-D08",
+        "prompt": "很高兴见到你。",
+        "answers": [
+          "Nice to meet you."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CH56-5",
+        "kind": "gap",
+        "sourceRef": "C06-TEXT:It is an English car.",
+        "prompt": "它是一辆英国汽车。",
+        "answers": [
+          "an"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is ",
+        "suffix": " English car.",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CH56-6",
+        "kind": "translation",
+        "sourceRef": "C06-TEXT:He is not French.",
+        "prompt": "他不是法国人。",
+        "answers": [
+          "He is not French.",
+          "He isn't French.",
+          "He's not French."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CHALL-3",
+        "kind": "translation",
+        "sourceRef": "L03-D02",
+        "prompt": "这是我的号码牌。",
+        "answers": [
+          "Here is my ticket.",
+          "Here's my ticket.",
+          "This is my ticket."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CHALL-4",
+        "kind": "gap",
+        "sourceRef": "L05-D19",
+        "prompt": "她也是中国人。",
+        "answers": [
+          "too"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She's Chinese, ",
+        "suffix": ".",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CHALL-5",
+        "kind": "translation",
+        "sourceRef": "C06-TEXT:It is an American car.",
+        "prompt": "它是一辆美国汽车。",
+        "answers": [
+          "It is an American car.",
+          "It's an American car."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "friends"
+      },
+      {
+        "id": "PL-CHALL-6",
+        "kind": "translation",
+        "sourceRef": "L03-D06",
+        "prompt": "这不是我的雨伞。",
+        "answers": [
+          "This is not my umbrella.",
+          "This isn't my umbrella."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "umbrella"
+      },
+      {
+        "id": "PL-CH7-8-0",
+        "kind": "gap",
+        "sourceRef": "L07-E01",
+        "prompt": "我是一名工程师。",
+        "answers": [
+          "am"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I ",
+        "suffix": " an engineer.",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH7-8-1",
+        "kind": "translation",
+        "sourceRef": "L07-E02",
+        "prompt": "你是一名护士吗？",
+        "answers": [
+          "Are you a nurse?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH7-8-2",
+        "kind": "gap",
+        "sourceRef": "L07-E03",
+        "prompt": "我不是一名老师。",
+        "answers": [
+          "not"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I am ",
+        "suffix": " a teacher.",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH7-8-3",
+        "kind": "translation",
+        "sourceRef": "L07-E04",
+        "prompt": "你的职业是什么？",
+        "answers": [
+          "What is your job?",
+          "What's your job?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH7-8-4",
+        "kind": "gap",
+        "sourceRef": "L07-E05",
+        "prompt": "她的职业是什么？",
+        "answers": [
+          "her"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "What is ",
+        "suffix": " job?",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH7-8-5",
+        "kind": "translation",
+        "sourceRef": "L07-E06",
+        "prompt": "他是一名工程师。",
+        "answers": [
+          "He is an engineer.",
+          "He's an engineer."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH9-10-0",
+        "kind": "gap",
+        "sourceRef": "L09-E01",
+        "prompt": "我很好。",
+        "answers": [
+          "well"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I am very ",
+        "suffix": ".",
+        "chapterId": "lesson-9-10"
+      },
+      {
+        "id": "PL-CH9-10-1",
+        "kind": "translation",
+        "sourceRef": "L09-E02",
+        "prompt": "她个子高。",
+        "answers": [
+          "She is tall.",
+          "She's tall."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-9-10"
+      },
+      {
+        "id": "PL-CH9-10-2",
+        "kind": "gap",
+        "sourceRef": "L09-E03",
+        "prompt": "他不忙。",
+        "answers": [
+          "not"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He is ",
+        "suffix": " busy.",
+        "chapterId": "lesson-9-10"
+      },
+      {
+        "id": "PL-CH9-10-3",
+        "kind": "translation",
+        "sourceRef": "L09-E04",
+        "prompt": "她冷吗？",
+        "answers": [
+          "Is she cold?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-9-10"
+      },
+      {
+        "id": "PL-CH9-10-recall-0",
+        "kind": "translation",
+        "sourceRef": "L07-E01",
+        "prompt": "我是一名工程师。",
+        "answers": [
+          "I am an engineer.",
+          "I'm an engineer."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH9-10-recall-1",
+        "kind": "translation",
+        "sourceRef": "L07-E02",
+        "prompt": "你是一名护士吗？",
+        "answers": [
+          "Are you a nurse?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-7-8"
+      },
+      {
+        "id": "PL-CH11-12-0",
+        "kind": "gap",
+        "sourceRef": "L11-E01",
+        "prompt": "这是他的衬衫。",
+        "answers": [
+          "his"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This is ",
+        "suffix": " shirt.",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH11-12-1",
+        "kind": "translation",
+        "sourceRef": "L11-E02",
+        "prompt": "这是她的女衬衫。",
+        "answers": [
+          "This is her blouse."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH11-12-2",
+        "kind": "gap",
+        "sourceRef": "L11-E03",
+        "prompt": "这是谁的领带？",
+        "answers": [
+          "Whose"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " tie is this?",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH11-12-3",
+        "kind": "translation",
+        "sourceRef": "L11-E04",
+        "prompt": "它是我哥哥的领带。",
+        "answers": [
+          "It is my brother's tie.",
+          "It's my brother's tie."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH11-12-4",
+        "kind": "gap",
+        "sourceRef": "L11-E05",
+        "prompt": "这是你的雨伞吗？",
+        "answers": [
+          "your"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Is this ",
+        "suffix": " umbrella?",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH11-12-5",
+        "kind": "translation",
+        "sourceRef": "L11-E06",
+        "prompt": "它是我爸爸的西装。",
+        "answers": [
+          "It is my father's suit.",
+          "It's my father's suit."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH11-12-recall-0",
+        "kind": "translation",
+        "sourceRef": "L09-E01",
+        "prompt": "我很好。",
+        "answers": [
+          "I am very well.",
+          "I'm very well."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-9-10"
+      },
+      {
+        "id": "PL-CH11-12-recall-1",
+        "kind": "translation",
+        "sourceRef": "L09-E02",
+        "prompt": "她个子高。",
+        "answers": [
+          "She is tall.",
+          "She's tall."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-9-10"
+      },
+      {
+        "id": "PL-CH13-14-0",
+        "kind": "gap",
+        "sourceRef": "L13-E01",
+        "prompt": "你的帽子是什么颜色？",
+        "answers": [
+          "colour"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "What ",
+        "suffix": " is your hat?",
+        "chapterId": "lesson-13-14"
+      },
+      {
+        "id": "PL-CH13-14-1",
+        "kind": "translation",
+        "sourceRef": "L13-E02",
+        "prompt": "我的帽子是绿色的。",
+        "answers": [
+          "My hat is green."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-13-14"
+      },
+      {
+        "id": "PL-CH13-14-2",
+        "kind": "gap",
+        "sourceRef": "L13-E03",
+        "prompt": "这是一个棕色的箱子。",
+        "answers": [
+          "brown"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This is a ",
+        "suffix": " case.",
+        "chapterId": "lesson-13-14"
+      },
+      {
+        "id": "PL-CH13-14-3",
+        "kind": "translation",
+        "sourceRef": "L13-E04",
+        "prompt": "它们的颜色相同。",
+        "answers": [
+          "They are the same colour.",
+          "They're the same colour."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-13-14"
+      },
+      {
+        "id": "PL-CH13-14-recall-0",
+        "kind": "translation",
+        "sourceRef": "L11-E01",
+        "prompt": "这是他的衬衫。",
+        "answers": [
+          "This is his shirt."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH13-14-recall-1",
+        "kind": "translation",
+        "sourceRef": "L11-E02",
+        "prompt": "这是她的女衬衫。",
+        "answers": [
+          "This is her blouse."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-11-12"
+      },
+      {
+        "id": "PL-CH15-16-0",
+        "kind": "gap",
+        "sourceRef": "L15-E01",
+        "prompt": "我们是游客。",
+        "answers": [
+          "are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We ",
+        "suffix": " tourists.",
+        "chapterId": "lesson-15-16"
+      },
+      {
+        "id": "PL-CH15-16-1",
+        "kind": "translation",
+        "sourceRef": "L15-E02",
+        "prompt": "这些是你们的护照吗？",
+        "answers": [
+          "Are these your passports?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-15-16"
+      },
+      {
+        "id": "PL-CH15-16-2",
+        "kind": "gap",
+        "sourceRef": "L15-E03",
+        "prompt": "我们的箱子是棕色的。",
+        "answers": [
+          "Our"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " cases are brown.",
+        "chapterId": "lesson-15-16"
+      },
+      {
+        "id": "PL-CH15-16-3",
+        "kind": "translation",
+        "sourceRef": "L15-E04",
+        "prompt": "他们不是丹麦人。",
+        "answers": [
+          "They are not Danish.",
+          "They're not Danish.",
+          "They aren't Danish."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-15-16"
+      },
+      {
+        "id": "PL-CH15-16-recall-0",
+        "kind": "translation",
+        "sourceRef": "L13-E01",
+        "prompt": "你的帽子是什么颜色？",
+        "answers": [
+          "What colour is your hat?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-13-14"
+      },
+      {
+        "id": "PL-CH15-16-recall-1",
+        "kind": "translation",
+        "sourceRef": "L13-E02",
+        "prompt": "我的帽子是绿色的。",
+        "answers": [
+          "My hat is green."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-13-14"
+      },
+      {
+        "id": "PL-CH17-18-0",
+        "kind": "gap",
+        "sourceRef": "L17-E01",
+        "prompt": "他们是办公室助理。",
+        "answers": [
+          "are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " office assistants.",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH17-18-1",
+        "kind": "translation",
+        "sourceRef": "L17-E02",
+        "prompt": "这些男士是销售代表。",
+        "answers": [
+          "These men are sales reps."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH17-18-2",
+        "kind": "gap",
+        "sourceRef": "L17-E03",
+        "prompt": "他们的职业是什么？",
+        "answers": [
+          "their"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "What are ",
+        "suffix": " jobs?",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH17-18-3",
+        "kind": "translation",
+        "sourceRef": "L17-E04",
+        "prompt": "这些雇员工作勤奋。",
+        "answers": [
+          "The employees are hard-working."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH17-18-4",
+        "kind": "gap",
+        "sourceRef": "L17-E05",
+        "prompt": "他们不是机械师，他们是销售代表。",
+        "answers": [
+          "not"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They are ",
+        "suffix": " mechanics. They are sales reps.",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH17-18-5",
+        "kind": "translation",
+        "sourceRef": "L17-E06",
+        "prompt": "这些女士是键盘操作员。",
+        "answers": [
+          "These women are keyboard operators."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH17-18-recall-0",
+        "kind": "translation",
+        "sourceRef": "L15-E01",
+        "prompt": "我们是游客。",
+        "answers": [
+          "We are tourists.",
+          "We're tourists."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-15-16"
+      },
+      {
+        "id": "PL-CH17-18-recall-1",
+        "kind": "translation",
+        "sourceRef": "L15-E02",
+        "prompt": "这些是你们的护照吗？",
+        "answers": [
+          "Are these your passports?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-15-16"
+      },
+      {
+        "id": "PL-CH19-20-0",
+        "kind": "gap",
+        "sourceRef": "L19-E01",
+        "prompt": "我们又累又渴。",
+        "answers": [
+          "thirsty"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We are tired and ",
+        "suffix": ".",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH19-20-1",
+        "kind": "translation",
+        "sourceRef": "L19-E02",
+        "prompt": "这些箱子很重。",
+        "answers": [
+          "The boxes are heavy."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH19-20-2",
+        "kind": "gap",
+        "sourceRef": "L19-E03",
+        "prompt": "这些商店开着门吗？",
+        "answers": [
+          "open"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Are the shops ",
+        "suffix": "?",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH19-20-3",
+        "kind": "translation",
+        "sourceRef": "L19-E04",
+        "prompt": "这些鞋很小。",
+        "answers": [
+          "These shoes are small."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH19-20-4",
+        "kind": "gap",
+        "sourceRef": "L19-E05",
+        "prompt": "这些鞋脏还是干净？",
+        "answers": [
+          "or"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Are the shoes dirty ",
+        "suffix": " clean?",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH19-20-5",
+        "kind": "translation",
+        "sourceRef": "L19-E06",
+        "prompt": "它们不脏，很干净。",
+        "answers": [
+          "They are not dirty. They are clean.",
+          "They're not dirty. They are clean.",
+          "They aren't dirty. They are clean."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH19-20-recall-0",
+        "kind": "translation",
+        "sourceRef": "L17-E01",
+        "prompt": "他们是办公室助理。",
+        "answers": [
+          "They are office assistants.",
+          "They're office assistants."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH19-20-recall-1",
+        "kind": "translation",
+        "sourceRef": "L17-E02",
+        "prompt": "这些男士是销售代表。",
+        "answers": [
+          "These men are sales reps."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-17-18"
+      },
+      {
+        "id": "PL-CH21-22-0",
+        "kind": "gap",
+        "sourceRef": "L21-E01",
+        "prompt": "给我一个小盒子。",
+        "answers": [
+          "small"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Give me a ",
+        "suffix": " box.",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH21-22-1",
+        "kind": "translation",
+        "sourceRef": "L21-E02",
+        "prompt": "给我一个空玻璃杯。",
+        "answers": [
+          "Give me an empty glass."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH21-22-2",
+        "kind": "gap",
+        "sourceRef": "L21-E03",
+        "prompt": "红色的那个是满的。",
+        "answers": [
+          "full"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The red one is ",
+        "suffix": ".",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH21-22-3",
+        "kind": "translation",
+        "sourceRef": "L21-E04",
+        "prompt": "哪把刀是锋利的？",
+        "answers": [
+          "Which knife is sharp?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH21-22-4",
+        "kind": "gap",
+        "sourceRef": "L21-E05",
+        "prompt": "给他一本新书。",
+        "answers": [
+          "him"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Give ",
+        "suffix": " a new book.",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH21-22-5",
+        "kind": "translation",
+        "sourceRef": "L21-E06",
+        "prompt": "给我们一个干净的杯子。",
+        "answers": [
+          "Give us a clean cup."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH21-22-recall-0",
+        "kind": "translation",
+        "sourceRef": "L19-E01",
+        "prompt": "我们又累又渴。",
+        "answers": [
+          "We are tired and thirsty.",
+          "We're tired and thirsty."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH21-22-recall-1",
+        "kind": "translation",
+        "sourceRef": "L19-E02",
+        "prompt": "这些箱子很重。",
+        "answers": [
+          "The boxes are heavy."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-19-20"
+      },
+      {
+        "id": "PL-CH23-24-0",
+        "kind": "gap",
+        "sourceRef": "L23-E01",
+        "prompt": "给我一些盘子。",
+        "answers": [
+          "some"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Give me ",
+        "suffix": " plates.",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH23-24-1",
+        "kind": "translation",
+        "sourceRef": "L23-E02",
+        "prompt": "桌子上的那些。",
+        "answers": [
+          "The ones on the table."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH23-24-2",
+        "kind": "gap",
+        "sourceRef": "L23-E03",
+        "prompt": "这些杂志在床上。",
+        "answers": [
+          "on"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "These magazines are ",
+        "suffix": " the bed.",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH23-24-3",
+        "kind": "translation",
+        "sourceRef": "L23-E04",
+        "prompt": "哪些玻璃杯是干净的？",
+        "answers": [
+          "Which glasses are clean?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH23-24-4",
+        "kind": "gap",
+        "sourceRef": "L23-E05",
+        "prompt": "给他们一些勺子。",
+        "answers": [
+          "them"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Give ",
+        "suffix": " some spoons.",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH23-24-5",
+        "kind": "translation",
+        "sourceRef": "L23-E06",
+        "prompt": "给她一些书。",
+        "answers": [
+          "Give her some books."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH23-24-recall-0",
+        "kind": "translation",
+        "sourceRef": "L21-E01",
+        "prompt": "给我一个小盒子。",
+        "answers": [
+          "Give me a small box."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH23-24-recall-1",
+        "kind": "translation",
+        "sourceRef": "L21-E02",
+        "prompt": "给我一个空玻璃杯。",
+        "answers": [
+          "Give me an empty glass."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-21-22"
+      },
+      {
+        "id": "PL-CH25-26-0",
+        "kind": "gap",
+        "sourceRef": "L25-E01",
+        "prompt": "桌子上有一个杯子。",
+        "answers": [
+          "is"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There ",
+        "suffix": " a cup on the table.",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH25-26-1",
+        "kind": "translation",
+        "sourceRef": "L25-E02",
+        "prompt": "冰箱在右边。",
+        "answers": [
+          "The refrigerator is on the right."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH25-26-2",
+        "kind": "gap",
+        "sourceRef": "L25-E03",
+        "prompt": "瓶子在哪里？",
+        "answers": [
+          "Where"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " is the bottle?",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH25-26-3",
+        "kind": "translation",
+        "sourceRef": "L25-E04",
+        "prompt": "炉灶在厨房里。",
+        "answers": [
+          "The cooker is in the kitchen."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH25-26-4",
+        "kind": "gap",
+        "sourceRef": "L25-E05",
+        "prompt": "桌子上有一本书。",
+        "answers": [
+          "a"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There is ",
+        "suffix": " book on the table.",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH25-26-5",
+        "kind": "translation",
+        "sourceRef": "L25-E06",
+        "prompt": "那本书是红色的。",
+        "answers": [
+          "The book is red."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH25-26-recall-0",
+        "kind": "translation",
+        "sourceRef": "L23-E01",
+        "prompt": "给我一些盘子。",
+        "answers": [
+          "Give me some plates."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH25-26-recall-1",
+        "kind": "translation",
+        "sourceRef": "L23-E02",
+        "prompt": "桌子上的那些。",
+        "answers": [
+          "The ones on the table."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-23-24"
+      },
+      {
+        "id": "PL-CH27-28-0",
+        "kind": "gap",
+        "sourceRef": "L27-E01",
+        "prompt": "墙上有一些画。",
+        "answers": [
+          "are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There ",
+        "suffix": " some pictures on the wall.",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH27-28-1",
+        "kind": "translation",
+        "sourceRef": "L27-E02",
+        "prompt": "扶手椅在桌子旁边。",
+        "answers": [
+          "The armchairs are near the table."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH27-28-2",
+        "kind": "gap",
+        "sourceRef": "L27-E03",
+        "prompt": "长裤在哪里？",
+        "answers": [
+          "are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Where ",
+        "suffix": " the trousers?",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH27-28-3",
+        "kind": "translation",
+        "sourceRef": "L27-E04",
+        "prompt": "门边有一套音响。",
+        "answers": [
+          "There is a stereo near the door."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH27-28-4",
+        "kind": "gap",
+        "sourceRef": "L27-E05",
+        "prompt": "厨房里有盘子吗？",
+        "answers": [
+          "Are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " there any plates in the kitchen?",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH27-28-5",
+        "kind": "translation",
+        "sourceRef": "L27-E06",
+        "prompt": "桌子上没有书。",
+        "answers": [
+          "There are not any books on the table.",
+          "There aren't any books on the table."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH27-28-recall-0",
+        "kind": "translation",
+        "sourceRef": "L25-E01",
+        "prompt": "桌子上有一个杯子。",
+        "answers": [
+          "There is a cup on the table."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH27-28-recall-1",
+        "kind": "translation",
+        "sourceRef": "L25-E02",
+        "prompt": "冰箱在右边。",
+        "answers": [
+          "The refrigerator is on the right."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-25-26"
+      },
+      {
+        "id": "PL-CH29-30-0",
+        "kind": "gap",
+        "sourceRef": "L29-E01",
+        "prompt": "请打开窗户。",
+        "answers": [
+          "Open"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " the window, please.",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH29-30-1",
+        "kind": "translation",
+        "sourceRef": "L29-E02",
+        "prompt": "关掉电视机。",
+        "answers": [
+          "Turn off the television."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH29-30-2",
+        "kind": "gap",
+        "sourceRef": "L29-E03",
+        "prompt": "我必须整理床铺。",
+        "answers": [
+          "make"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I must ",
+        "suffix": " the bed.",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH29-30-3",
+        "kind": "translation",
+        "sourceRef": "L29-E04",
+        "prompt": "把这些衣服放进衣柜。",
+        "answers": [
+          "Put these clothes in the wardrobe."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH29-30-4",
+        "kind": "gap",
+        "sourceRef": "L29-E05",
+        "prompt": "脱下你的外套。",
+        "answers": [
+          "off"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Take ",
+        "suffix": " your coat.",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH29-30-5",
+        "kind": "translation",
+        "sourceRef": "L29-E06",
+        "prompt": "打开音响。",
+        "answers": [
+          "Turn on the stereo."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH29-30-recall-0",
+        "kind": "translation",
+        "sourceRef": "L27-E01",
+        "prompt": "墙上有一些画。",
+        "answers": [
+          "There are some pictures on the wall."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH29-30-recall-1",
+        "kind": "translation",
+        "sourceRef": "L27-E02",
+        "prompt": "扶手椅在桌子旁边。",
+        "answers": [
+          "The armchairs are near the table."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-27-28"
+      },
+      {
+        "id": "PL-CH31-32-0",
+        "kind": "gap",
+        "sourceRef": "L31-E01",
+        "prompt": "她正坐在树下。",
+        "answers": [
+          "sitting"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She is ",
+        "suffix": " under the tree.",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH31-32-1",
+        "kind": "translation",
+        "sourceRef": "L31-E02",
+        "prompt": "他正在打一封信。",
+        "answers": [
+          "He is typing a letter.",
+          "He's typing a letter."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH31-32-2",
+        "kind": "gap",
+        "sourceRef": "L31-E03",
+        "prompt": "小狗正在吃骨头。",
+        "answers": [
+          "eating"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The dog is ",
+        "suffix": " a bone.",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH31-32-3",
+        "kind": "translation",
+        "sourceRef": "L31-E04",
+        "prompt": "她正在做什么？",
+        "answers": [
+          "What is she doing?",
+          "What's she doing?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH31-32-4",
+        "kind": "gap",
+        "sourceRef": "L31-E05",
+        "prompt": "她不是在倒空篮子。",
+        "answers": [
+          "emptying"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She is not ",
+        "suffix": " the basket.",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH31-32-5",
+        "kind": "translation",
+        "sourceRef": "L31-E06",
+        "prompt": "他正在刷牙。",
+        "answers": [
+          "He is cleaning his teeth.",
+          "He's cleaning his teeth."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH31-32-recall-0",
+        "kind": "translation",
+        "sourceRef": "L29-E01",
+        "prompt": "请打开窗户。",
+        "answers": [
+          "Open the window, please."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH31-32-recall-1",
+        "kind": "translation",
+        "sourceRef": "L29-E02",
+        "prompt": "关掉电视机。",
+        "answers": [
+          "Turn off the television."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-29-30"
+      },
+      {
+        "id": "PL-CH33-34-0",
+        "kind": "gap",
+        "sourceRef": "L33-E01",
+        "prompt": "他们正从桥上走过。",
+        "answers": [
+          "are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " walking over the bridge.",
+        "chapterId": "lesson-33-34"
+      },
+      {
+        "id": "PL-CH33-34-1",
+        "kind": "translation",
+        "sourceRef": "L33-E02",
+        "prompt": "大船正从桥下驶过。",
+        "answers": [
+          "The ship is going under the bridge."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-33-34"
+      },
+      {
+        "id": "PL-CH33-34-2",
+        "kind": "gap",
+        "sourceRef": "L33-E03",
+        "prompt": "孩子们正在睡觉。",
+        "answers": [
+          "sleeping"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The children are ",
+        "suffix": ".",
+        "chapterId": "lesson-33-34"
+      },
+      {
+        "id": "PL-CH33-34-3",
+        "kind": "translation",
+        "sourceRef": "L33-E04",
+        "prompt": "他们正在做什么？",
+        "answers": [
+          "What are they doing?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-33-34"
+      },
+      {
+        "id": "PL-CH33-34-recall-0",
+        "kind": "translation",
+        "sourceRef": "L31-E01",
+        "prompt": "她正坐在树下。",
+        "answers": [
+          "She is sitting under the tree.",
+          "She's sitting under the tree."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH33-34-recall-1",
+        "kind": "translation",
+        "sourceRef": "L31-E02",
+        "prompt": "他正在打一封信。",
+        "answers": [
+          "He is typing a letter.",
+          "He's typing a letter."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-31-32"
+      },
+      {
+        "id": "PL-CH35-36-0",
+        "kind": "gap",
+        "sourceRef": "L35-E01",
+        "prompt": "村庄在两座小山之间。",
+        "answers": [
+          "between"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The village is ",
+        "suffix": " two hills.",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH35-36-1",
+        "kind": "translation",
+        "sourceRef": "L35-E02",
+        "prompt": "我们正沿着河走。",
+        "answers": [
+          "We are walking along the river.",
+          "We're walking along the river."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH35-36-2",
+        "kind": "gap",
+        "sourceRef": "L35-E03",
+        "prompt": "他正在游过河。",
+        "answers": [
+          "across"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He is swimming ",
+        "suffix": " the river.",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH35-36-3",
+        "kind": "translation",
+        "sourceRef": "L35-E04",
+        "prompt": "他们正走进公园。",
+        "answers": [
+          "They are going into the park.",
+          "They're going into the park."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH35-36-4",
+        "kind": "gap",
+        "sourceRef": "L35-E05",
+        "prompt": "他们正从大楼里出来。",
+        "answers": [
+          "out of"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They are coming ",
+        "suffix": " the building.",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH35-36-5",
+        "kind": "translation",
+        "sourceRef": "L35-E06",
+        "prompt": "她正坐在妈妈旁边。",
+        "answers": [
+          "She is sitting beside her mother.",
+          "She's sitting beside her mother."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH35-36-recall-0",
+        "kind": "translation",
+        "sourceRef": "L33-E01",
+        "prompt": "他们正从桥上走过。",
+        "answers": [
+          "They are walking over the bridge.",
+          "They're walking over the bridge."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-33-34"
+      },
+      {
+        "id": "PL-CH35-36-recall-1",
+        "kind": "translation",
+        "sourceRef": "L33-E02",
+        "prompt": "大船正从桥下驶过。",
+        "answers": [
+          "The ship is going under the bridge."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-33-34"
+      },
+      {
+        "id": "PL-CH37-38-0",
+        "kind": "gap",
+        "sourceRef": "L37-E01",
+        "prompt": "我正在做一个书架。",
+        "answers": [
+          "making"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I am ",
+        "suffix": " a bookcase.",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH37-38-1",
+        "kind": "translation",
+        "sourceRef": "L37-E02",
+        "prompt": "我打算把它漆成粉红色。",
+        "answers": [
+          "I am going to paint it pink.",
+          "I'm going to paint it pink."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH37-38-2",
+        "kind": "gap",
+        "sourceRef": "L37-E03",
+        "prompt": "她打算做家庭作业。",
+        "answers": [
+          "do"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She is going to ",
+        "suffix": " her homework.",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH37-38-3",
+        "kind": "translation",
+        "sourceRef": "L37-E04",
+        "prompt": "我们打算听音响。",
+        "answers": [
+          "We are going to listen to the stereo.",
+          "We're going to listen to the stereo."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH37-38-4",
+        "kind": "gap",
+        "sourceRef": "L37-E05",
+        "prompt": "你现在正在做什么？",
+        "answers": [
+          "doing"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "What are you ",
+        "suffix": " now?",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH37-38-5",
+        "kind": "translation",
+        "sourceRef": "L37-E06",
+        "prompt": "你打算做什么？",
+        "answers": [
+          "What are you going to do?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH37-38-recall-0",
+        "kind": "translation",
+        "sourceRef": "L35-E01",
+        "prompt": "村庄在两座小山之间。",
+        "answers": [
+          "The village is between two hills."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH37-38-recall-1",
+        "kind": "translation",
+        "sourceRef": "L35-E02",
+        "prompt": "我们正沿着河走。",
+        "answers": [
+          "We are walking along the river.",
+          "We're walking along the river."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-35-36"
+      },
+      {
+        "id": "PL-CH39-40-0",
+        "kind": "gap",
+        "sourceRef": "L39-E01",
+        "prompt": "不要把它放在那里。",
+        "answers": [
+          "not"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Do ",
+        "suffix": " put it there.",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH39-40-1",
+        "kind": "translation",
+        "sourceRef": "L39-E02",
+        "prompt": "把它给我。",
+        "answers": [
+          "Give it to me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH39-40-2",
+        "kind": "gap",
+        "sourceRef": "L39-E03",
+        "prompt": "我打算把它给她看。",
+        "answers": [
+          "her"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I am going to show it to ",
+        "suffix": ".",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH39-40-3",
+        "kind": "translation",
+        "sourceRef": "L39-E04",
+        "prompt": "把花瓶放在架子上。",
+        "answers": [
+          "Put the vase on the shelf."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH39-40-4",
+        "kind": "gap",
+        "sourceRef": "L39-E05",
+        "prompt": "我打算穿上它们。",
+        "answers": [
+          "them"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I am going to put ",
+        "suffix": " on.",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH39-40-5",
+        "kind": "translation",
+        "sourceRef": "L39-E06",
+        "prompt": "我打算关掉它。",
+        "answers": [
+          "I am going to turn it off.",
+          "I'm going to turn it off."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH39-40-recall-0",
+        "kind": "translation",
+        "sourceRef": "L37-E01",
+        "prompt": "我正在做一个书架。",
+        "answers": [
+          "I am making a bookcase.",
+          "I'm making a bookcase."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH39-40-recall-1",
+        "kind": "translation",
+        "sourceRef": "L37-E02",
+        "prompt": "我打算把它漆成粉红色。",
+        "answers": [
+          "I am going to paint it pink.",
+          "I'm going to paint it pink."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-37-38"
+      },
+      {
+        "id": "PL-CH41-42-0",
+        "kind": "gap",
+        "sourceRef": "L41-E01",
+        "prompt": "袋子里有一些奶酪。",
+        "answers": [
+          "some"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There is ",
+        "suffix": " cheese in the bag.",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH41-42-1",
+        "kind": "translation",
+        "sourceRef": "L41-E02",
+        "prompt": "有牛奶吗？",
+        "answers": [
+          "Is there any milk?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH41-42-2",
+        "kind": "gap",
+        "sourceRef": "L41-E03",
+        "prompt": "给我一条面包。",
+        "answers": [
+          "loaf"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Give me a ",
+        "suffix": " of bread.",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH41-42-3",
+        "kind": "translation",
+        "sourceRef": "L41-E04",
+        "prompt": "有一块肥皂。",
+        "answers": [
+          "There is a bar of soap."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH41-42-4",
+        "kind": "gap",
+        "sourceRef": "L41-E05",
+        "prompt": "有一瓶牛奶。",
+        "answers": [
+          "bottle"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There is a ",
+        "suffix": " of milk.",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH41-42-5",
+        "kind": "translation",
+        "sourceRef": "L41-E06",
+        "prompt": "没有茶叶。",
+        "answers": [
+          "There is not any tea.",
+          "There isn't any tea."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH41-42-recall-0",
+        "kind": "translation",
+        "sourceRef": "L39-E01",
+        "prompt": "不要把它放在那里。",
+        "answers": [
+          "Do not put it there.",
+          "Don't put it there."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH41-42-recall-1",
+        "kind": "translation",
+        "sourceRef": "L39-E02",
+        "prompt": "把它给我。",
+        "answers": [
+          "Give it to me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-39-40"
+      },
+      {
+        "id": "PL-CH43-44-0",
+        "kind": "gap",
+        "sourceRef": "L43-E01",
+        "prompt": "橱柜里有茶杯吗？",
+        "answers": [
+          "Are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " there any cups in the cupboard?",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH43-44-1",
+        "kind": "translation",
+        "sourceRef": "L43-E02",
+        "prompt": "水壶里有水吗？",
+        "answers": [
+          "Is there any water in the kettle?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH43-44-2",
+        "kind": "gap",
+        "sourceRef": "L43-E03",
+        "prompt": "我能看见茶壶。",
+        "answers": [
+          "see"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I can ",
+        "suffix": " the teapot.",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH43-44-3",
+        "kind": "translation",
+        "sourceRef": "L43-E04",
+        "prompt": "茶叶在茶壶后面。",
+        "answers": [
+          "The tea is behind the teapot."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH43-44-4",
+        "kind": "gap",
+        "sourceRef": "L43-E05",
+        "prompt": "有一些刀，但没有叉子。",
+        "answers": [
+          "knives"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There are some ",
+        "suffix": ", but there are not any forks.",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH43-44-5",
+        "kind": "translation",
+        "sourceRef": "L43-E06",
+        "prompt": "我能看见一些盘子。",
+        "answers": [
+          "I can see some dishes."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH43-44-recall-0",
+        "kind": "translation",
+        "sourceRef": "L41-E01",
+        "prompt": "袋子里有一些奶酪。",
+        "answers": [
+          "There is some cheese in the bag."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH43-44-recall-1",
+        "kind": "translation",
+        "sourceRef": "L41-E02",
+        "prompt": "有牛奶吗？",
+        "answers": [
+          "Is there any milk?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-41-42"
+      },
+      {
+        "id": "PL-CH45-46-0",
+        "kind": "gap",
+        "sourceRef": "L45-E01",
+        "prompt": "你能打这封信吗？",
+        "answers": [
+          "type"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Can you ",
+        "suffix": " this letter?",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH45-46-1",
+        "kind": "translation",
+        "sourceRef": "L45-E02",
+        "prompt": "她看不懂这封信。",
+        "answers": [
+          "She cannot read the letter.",
+          "She can't read the letter."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH45-46-2",
+        "kind": "gap",
+        "sourceRef": "L45-E03",
+        "prompt": "他能举起这个箱子吗？",
+        "answers": [
+          "lift"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Can he ",
+        "suffix": " the box?",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH45-46-3",
+        "kind": "translation",
+        "sourceRef": "L45-E04",
+        "prompt": "是的，我当然能。",
+        "answers": [
+          "Yes, of course I can."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH45-46-4",
+        "kind": "gap",
+        "sourceRef": "L45-E05",
+        "prompt": "我们会洗盘子。",
+        "answers": [
+          "can"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We ",
+        "suffix": " wash the dishes.",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH45-46-5",
+        "kind": "translation",
+        "sourceRef": "L45-E06",
+        "prompt": "她会做蛋糕，但不会做饼干。",
+        "answers": [
+          "She can make cakes, but she cannot make biscuits.",
+          "She can make cakes, but she can't make biscuits."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH45-46-recall-0",
+        "kind": "translation",
+        "sourceRef": "L43-E01",
+        "prompt": "橱柜里有茶杯吗？",
+        "answers": [
+          "Are there any cups in the cupboard?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH45-46-recall-1",
+        "kind": "translation",
+        "sourceRef": "L43-E02",
+        "prompt": "水壶里有水吗？",
+        "answers": [
+          "Is there any water in the kettle?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-43-44"
+      },
+      {
+        "id": "PL-CH47-48-0",
+        "kind": "gap",
+        "sourceRef": "L47-E01",
+        "prompt": "你喜欢苹果吗？",
+        "answers": [
+          "Do"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " you like apples?",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH47-48-1",
+        "kind": "translation",
+        "sourceRef": "L47-E02",
+        "prompt": "我不喜欢牛奶。",
+        "answers": [
+          "I do not like milk.",
+          "I don't like milk."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH47-48-2",
+        "kind": "gap",
+        "sourceRef": "L47-E03",
+        "prompt": "你想要一块饼干吗？",
+        "answers": [
+          "want"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Do you ",
+        "suffix": " a biscuit?",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH47-48-3",
+        "kind": "translation",
+        "sourceRef": "L47-E04",
+        "prompt": "好的，请给我。",
+        "answers": [
+          "Yes, please."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH47-48-4",
+        "kind": "gap",
+        "sourceRef": "L47-E05",
+        "prompt": "我喜欢苹果，但现在不想要一个。",
+        "answers": [
+          "want"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I like apples, but I do not ",
+        "suffix": " one.",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH47-48-5",
+        "kind": "translation",
+        "sourceRef": "L47-E06",
+        "prompt": "我喜欢黄油，但现在不想要。",
+        "answers": [
+          "I like butter, but I do not want any.",
+          "I like butter, but I don't want any."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH47-48-recall-0",
+        "kind": "translation",
+        "sourceRef": "L45-E01",
+        "prompt": "你能打这封信吗？",
+        "answers": [
+          "Can you type this letter?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH47-48-recall-1",
+        "kind": "translation",
+        "sourceRef": "L45-E02",
+        "prompt": "她看不懂这封信。",
+        "answers": [
+          "She cannot read the letter.",
+          "She can't read the letter."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-45-46"
+      },
+      {
+        "id": "PL-CH49-50-0",
+        "kind": "gap",
+        "sourceRef": "L49-E01",
+        "prompt": "他喜欢牛排。",
+        "answers": [
+          "likes"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He ",
+        "suffix": " steak.",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH49-50-1",
+        "kind": "translation",
+        "sourceRef": "L49-E02",
+        "prompt": "她不喜欢卷心菜。",
+        "answers": [
+          "She does not like cabbage.",
+          "She doesn't like cabbage."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH49-50-2",
+        "kind": "gap",
+        "sourceRef": "L49-E03",
+        "prompt": "他想要一些土豆吗？",
+        "answers": [
+          "Does"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " he want any potatoes?",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH49-50-3",
+        "kind": "translation",
+        "sourceRef": "L49-E04",
+        "prompt": "我也不喜欢鸡肉。",
+        "answers": [
+          "I do not like chicken either.",
+          "I don't like chicken either."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH49-50-4",
+        "kind": "gap",
+        "sourceRef": "L49-E05",
+        "prompt": "她喜欢西红柿吗？",
+        "answers": [
+          "Does"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " she like tomatoes?",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH49-50-5",
+        "kind": "translation",
+        "sourceRef": "L49-E06",
+        "prompt": "她喜欢梨，但现在不想要。",
+        "answers": [
+          "She likes pears, but she does not want any.",
+          "She likes pears, but she doesn't want any."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH49-50-recall-0",
+        "kind": "translation",
+        "sourceRef": "L47-E01",
+        "prompt": "你喜欢苹果吗？",
+        "answers": [
+          "Do you like apples?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH49-50-recall-1",
+        "kind": "translation",
+        "sourceRef": "L47-E02",
+        "prompt": "我不喜欢牛奶。",
+        "answers": [
+          "I do not like milk.",
+          "I don't like milk."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-47-48"
+      },
+      {
+        "id": "PL-CH51-52-0",
+        "kind": "gap",
+        "sourceRef": "L51-E01",
+        "prompt": "他来自希腊。",
+        "answers": [
+          "comes"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He ",
+        "suffix": " from Greece.",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH51-52-1",
+        "kind": "translation",
+        "sourceRef": "L51-E02",
+        "prompt": "她来自哪里？",
+        "answers": [
+          "Where does she come from?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH51-52-2",
+        "kind": "gap",
+        "sourceRef": "L51-E03",
+        "prompt": "三月经常刮风。",
+        "answers": [
+          "in"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is often windy ",
+        "suffix": " March.",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH51-52-3",
+        "kind": "translation",
+        "sourceRef": "L51-E04",
+        "prompt": "冬天有时下雪。",
+        "answers": [
+          "It snows sometimes in winter."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH51-52-4",
+        "kind": "gap",
+        "sourceRef": "L51-E05",
+        "prompt": "她是荷兰人。她来自荷兰。",
+        "answers": [
+          "the Netherlands"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She is Dutch. She comes from ",
+        "suffix": ".",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH51-52-5",
+        "kind": "translation",
+        "sourceRef": "L51-E06",
+        "prompt": "他们来自巴西。",
+        "answers": [
+          "They come from Brazil."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH51-52-recall-0",
+        "kind": "translation",
+        "sourceRef": "L49-E01",
+        "prompt": "他喜欢牛排。",
+        "answers": [
+          "He likes steak."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH51-52-recall-1",
+        "kind": "translation",
+        "sourceRef": "L49-E02",
+        "prompt": "她不喜欢卷心菜。",
+        "answers": [
+          "She does not like cabbage.",
+          "She doesn't like cabbage."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-49-50"
+      },
+      {
+        "id": "PL-CH53-54-0",
+        "kind": "gap",
+        "sourceRef": "L53-E01",
+        "prompt": "她来自加拿大。",
+        "answers": [
+          "Canada"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She comes from ",
+        "suffix": ".",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH53-54-1",
+        "kind": "translation",
+        "sourceRef": "L53-E02",
+        "prompt": "太阳升得早吗？",
+        "answers": [
+          "Does the sun rise early?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH53-54-2",
+        "kind": "gap",
+        "sourceRef": "L53-E03",
+        "prompt": "天气不总是宜人。",
+        "answers": [
+          "always"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The weather is not ",
+        "suffix": " pleasant.",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH53-54-3",
+        "kind": "translation",
+        "sourceRef": "L53-E04",
+        "prompt": "他是澳大利亚人。",
+        "answers": [
+          "He is Australian.",
+          "He's Australian."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH53-54-4",
+        "kind": "gap",
+        "sourceRef": "L53-E05",
+        "prompt": "夏天白天长。",
+        "answers": [
+          "are"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The days ",
+        "suffix": " long in summer.",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH53-54-5",
+        "kind": "translation",
+        "sourceRef": "L53-E06",
+        "prompt": "他们来自韩国。",
+        "answers": [
+          "They come from South Korea."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH53-54-recall-0",
+        "kind": "translation",
+        "sourceRef": "L51-E01",
+        "prompt": "他来自希腊。",
+        "answers": [
+          "He comes from Greece."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH53-54-recall-1",
+        "kind": "translation",
+        "sourceRef": "L51-E02",
+        "prompt": "她来自哪里？",
+        "answers": [
+          "Where does she come from?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-51-52"
+      },
+      {
+        "id": "PL-CH55-56-0",
+        "kind": "gap",
+        "sourceRef": "L55-E01",
+        "prompt": "她每天洗碗。",
+        "answers": [
+          "washes"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " the dishes every day.",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH55-56-1",
+        "kind": "translation",
+        "sourceRef": "L55-E02",
+        "prompt": "他早上做什么？",
+        "answers": [
+          "What does he do in the morning?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH55-56-2",
+        "kind": "gap",
+        "sourceRef": "L55-E03",
+        "prompt": "他们很早到家。",
+        "answers": [
+          "home"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They arrive ",
+        "suffix": " early.",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH55-56-3",
+        "kind": "translation",
+        "sourceRef": "L55-E04",
+        "prompt": "他通常看报纸。",
+        "answers": [
+          "He usually reads his newspaper."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH55-56-4",
+        "kind": "gap",
+        "sourceRef": "L55-E05",
+        "prompt": "他们晚上做作业。",
+        "answers": [
+          "at"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They do their homework ",
+        "suffix": " night.",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH55-56-5",
+        "kind": "translation",
+        "sourceRef": "L55-E06",
+        "prompt": "她每天待在家里。",
+        "answers": [
+          "She stays at home every day."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH55-56-recall-0",
+        "kind": "translation",
+        "sourceRef": "L53-E01",
+        "prompt": "她来自加拿大。",
+        "answers": [
+          "She comes from Canada."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH55-56-recall-1",
+        "kind": "translation",
+        "sourceRef": "L53-E02",
+        "prompt": "太阳升得早吗？",
+        "answers": [
+          "Does the sun rise early?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-53-54"
+      },
+      {
+        "id": "PL-CH57-58-0",
+        "kind": "gap",
+        "sourceRef": "L57-E01",
+        "prompt": "她通常喝茶，但现在她正在喝咖啡。",
+        "answers": [
+          "is drinking"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She usually drinks tea, but now she ",
+        "suffix": " coffee.",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-1",
+        "kind": "translation",
+        "sourceRef": "L57-E02",
+        "prompt": "他们今天正步行去上学。",
+        "answers": [
+          "They are going to school on foot today.",
+          "They're going to school on foot today."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-2",
+        "kind": "gap",
+        "sourceRef": "L57-E03",
+        "prompt": "现在是八点。",
+        "answers": [
+          "eight"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is ",
+        "suffix": " o'clock.",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-3",
+        "kind": "translation",
+        "sourceRef": "L57-E04",
+        "prompt": "他此刻正在读书。",
+        "answers": [
+          "He is reading a book at the moment.",
+          "He's reading a book at the moment."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-4",
+        "kind": "gap",
+        "sourceRef": "L57-E05",
+        "prompt": "她上午通常待在家里。",
+        "answers": [
+          "stays"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She usually ",
+        "suffix": " at home in the morning.",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-5",
+        "kind": "translation",
+        "sourceRef": "L57-E06",
+        "prompt": "他们今晚没有在做作业。",
+        "answers": [
+          "They are not doing their homework tonight.",
+          "They're not doing their homework tonight.",
+          "They aren't doing their homework tonight."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-6",
+        "kind": "gap",
+        "sourceRef": "L57-E07",
+        "prompt": "现在是七点半。",
+        "answers": [
+          "half past"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is ",
+        "suffix": " seven.",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-7",
+        "kind": "translation",
+        "sourceRef": "L57-E08",
+        "prompt": "现在是八点一刻。",
+        "answers": [
+          "It is a quarter past eight.",
+          "It is eight fifteen.",
+          "It is quarter past eight.",
+          "It's a quarter past eight.",
+          "It's eight fifteen.",
+          "It's quarter past eight."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH57-58-recall-0",
+        "kind": "translation",
+        "sourceRef": "L55-E01",
+        "prompt": "她每天洗碗。",
+        "answers": [
+          "She washes the dishes every day."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH57-58-recall-1",
+        "kind": "translation",
+        "sourceRef": "L55-E02",
+        "prompt": "他早上做什么？",
+        "answers": [
+          "What does he do in the morning?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-55-56"
+      },
+      {
+        "id": "PL-CH59-60-0",
+        "kind": "gap",
+        "sourceRef": "L59-E01",
+        "prompt": "你们有信封吗？",
+        "answers": [
+          "any"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Do you have ",
+        "suffix": " envelopes?",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-1",
+        "kind": "translation",
+        "sourceRef": "L59-E02",
+        "prompt": "我没有胶水。",
+        "answers": [
+          "I do not have any glue.",
+          "I don't have any glue."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-2",
+        "kind": "gap",
+        "sourceRef": "L59-E03",
+        "prompt": "我有一些信纸。",
+        "answers": [
+          "some"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have ",
+        "suffix": " writing paper.",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-3",
+        "kind": "translation",
+        "sourceRef": "L59-E04",
+        "prompt": "你还想要什么？",
+        "answers": [
+          "What else do you want?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-4",
+        "kind": "gap",
+        "sourceRef": "L59-E05",
+        "prompt": "我只有大的那些。",
+        "answers": [
+          "ones"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I only have large ",
+        "suffix": ".",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-5",
+        "kind": "translation",
+        "sourceRef": "L59-E06",
+        "prompt": "现在是十点半。",
+        "answers": [
+          "It is half past ten.",
+          "It's half past ten."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-6",
+        "kind": "gap",
+        "sourceRef": "L59-E07",
+        "prompt": "现在是差一刻九点。",
+        "answers": [
+          "to"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is a quarter ",
+        "suffix": " nine.",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-7",
+        "kind": "translation",
+        "sourceRef": "L59-E08",
+        "prompt": "现在是十点二十。",
+        "answers": [
+          "It is twenty past ten.",
+          "It is ten twenty.",
+          "It's twenty past ten.",
+          "It's ten twenty."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH59-60-recall-0",
+        "kind": "translation",
+        "sourceRef": "L57-E01",
+        "prompt": "她通常喝茶，但现在她正在喝咖啡。",
+        "answers": [
+          "She usually drinks tea, but now she is drinking coffee."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH59-60-recall-1",
+        "kind": "translation",
+        "sourceRef": "L57-E02",
+        "prompt": "他们今天正步行去上学。",
+        "answers": [
+          "They are going to school on foot today.",
+          "They're going to school on foot today."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-57-58"
+      },
+      {
+        "id": "PL-CH61-62-0",
+        "kind": "gap",
+        "sourceRef": "L61-E01",
+        "prompt": "他怎么了？",
+        "answers": [
+          "with"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "What is the matter ",
+        "suffix": " him?",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH61-62-1",
+        "kind": "translation",
+        "sourceRef": "L61-E02",
+        "prompt": "他必须看医生。",
+        "answers": [
+          "He must see a doctor."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH61-62-2",
+        "kind": "gap",
+        "sourceRef": "L61-E03",
+        "prompt": "她头痛。",
+        "answers": [
+          "has"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " a headache.",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH61-62-3",
+        "kind": "translation",
+        "sourceRef": "L61-E04",
+        "prompt": "他觉得不舒服。",
+        "answers": [
+          "He feels ill."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH61-62-4",
+        "kind": "gap",
+        "sourceRef": "L61-E05",
+        "prompt": "我们必须请医生来。",
+        "answers": [
+          "call"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We must ",
+        "suffix": " the doctor.",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH61-62-5",
+        "kind": "translation",
+        "sourceRef": "L61-E06",
+        "prompt": "他牙痛。",
+        "answers": [
+          "He has a toothache.",
+          "He has got a toothache.",
+          "He's got a toothache."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH61-62-recall-0",
+        "kind": "translation",
+        "sourceRef": "L59-E01",
+        "prompt": "你们有信封吗？",
+        "answers": [
+          "Do you have any envelopes?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH61-62-recall-1",
+        "kind": "translation",
+        "sourceRef": "L59-E02",
+        "prompt": "我没有胶水。",
+        "answers": [
+          "I do not have any glue.",
+          "I don't have any glue."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-59-60"
+      },
+      {
+        "id": "PL-CH63-64-0",
+        "kind": "gap",
+        "sourceRef": "L63-E01",
+        "prompt": "你不可以在图书馆里吵闹。",
+        "answers": [
+          "must not"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "You ",
+        "suffix": " make a noise in the library.",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH63-64-1",
+        "kind": "translation",
+        "sourceRef": "L63-E02",
+        "prompt": "你必须仔细听。",
+        "answers": [
+          "You must listen carefully."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH63-64-2",
+        "kind": "gap",
+        "sourceRef": "L63-E03",
+        "prompt": "不要玩火柴。",
+        "answers": [
+          "with"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Do not play ",
+        "suffix": " matches.",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH63-64-3",
+        "kind": "translation",
+        "sourceRef": "L63-E04",
+        "prompt": "他必须再待在家里两天。",
+        "answers": [
+          "He must stay at home for another two days."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH63-64-4",
+        "kind": "gap",
+        "sourceRef": "L63-E05",
+        "prompt": "你不可以把身体探出窗外。",
+        "answers": [
+          "lean"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "You must not ",
+        "suffix": " out of the window.",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH63-64-5",
+        "kind": "translation",
+        "sourceRef": "L63-E06",
+        "prompt": "让房间保持暖和。",
+        "answers": [
+          "Keep the room warm."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH63-64-recall-0",
+        "kind": "translation",
+        "sourceRef": "L61-E01",
+        "prompt": "他怎么了？",
+        "answers": [
+          "What is the matter with him?",
+          "What's the matter with him?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH63-64-recall-1",
+        "kind": "translation",
+        "sourceRef": "L61-E02",
+        "prompt": "他必须看医生。",
+        "answers": [
+          "He must see a doctor."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-61-62"
+      },
+      {
+        "id": "PL-CH65-66-0",
+        "kind": "gap",
+        "sourceRef": "L65-E01",
+        "prompt": "请问可以把钥匙给我吗？",
+        "answers": [
+          "Can"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " I have the key, please?",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-1",
+        "kind": "translation",
+        "sourceRef": "L65-E02",
+        "prompt": "她十一点一刻必须到家。",
+        "answers": [
+          "She must be home at a quarter past eleven."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-2",
+        "kind": "gap",
+        "sourceRef": "L65-E03",
+        "prompt": "他们总是玩得很开心。",
+        "answers": [
+          "themselves"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They always enjoy ",
+        "suffix": ".",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-3",
+        "kind": "translation",
+        "sourceRef": "L65-E04",
+        "prompt": "他正玩得开心。",
+        "answers": [
+          "He is enjoying himself.",
+          "He's enjoying himself."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-4",
+        "kind": "gap",
+        "sourceRef": "L65-E05",
+        "prompt": "我们三点半必须见她。",
+        "answers": [
+          "at"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We must meet her ",
+        "suffix": " half past three.",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-5",
+        "kind": "translation",
+        "sourceRef": "L65-E06",
+        "prompt": "我总是玩得很开心。",
+        "answers": [
+          "I always enjoy myself."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-6",
+        "kind": "gap",
+        "sourceRef": "L65-E07",
+        "prompt": "她必须在一点一刻到达。",
+        "answers": [
+          "at"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She must arrive ",
+        "suffix": " a quarter past one.",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-7",
+        "kind": "translation",
+        "sourceRef": "L65-E08",
+        "prompt": "我们必须在差一刻四点离开。",
+        "answers": [
+          "We must leave at a quarter to four.",
+          "We must leave at three forty-five.",
+          "We must leave at quarter to four."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH65-66-recall-0",
+        "kind": "translation",
+        "sourceRef": "L63-E01",
+        "prompt": "你不可以在图书馆里吵闹。",
+        "answers": [
+          "You must not make a noise in the library.",
+          "You mustn't make a noise in the library."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH65-66-recall-1",
+        "kind": "translation",
+        "sourceRef": "L63-E02",
+        "prompt": "你必须仔细听。",
+        "answers": [
+          "You must listen carefully."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-63-64"
+      },
+      {
+        "id": "PL-CH67-68-0",
+        "kind": "gap",
+        "sourceRef": "L67-E01",
+        "prompt": "她星期五在面包店。",
+        "answers": [
+          "was"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " at the baker's on Friday.",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-1",
+        "kind": "translation",
+        "sourceRef": "L67-E02",
+        "prompt": "你昨天在家吗？",
+        "answers": [
+          "Were you at home yesterday?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-2",
+        "kind": "gap",
+        "sourceRef": "L67-E03",
+        "prompt": "他星期一没上学。",
+        "answers": [
+          "on"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He was absent from school ",
+        "suffix": " Monday.",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-3",
+        "kind": "translation",
+        "sourceRef": "L67-E04",
+        "prompt": "他们准备在乡下过三天。",
+        "answers": [
+          "They are going to spend three days in the country.",
+          "They're going to spend three days in the country."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-4",
+        "kind": "gap",
+        "sourceRef": "L67-E05",
+        "prompt": "我星期二在学校。",
+        "answers": [
+          "at school"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I was ",
+        "suffix": " on Tuesday.",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-5",
+        "kind": "translation",
+        "sourceRef": "L67-E06",
+        "prompt": "我们昨天在杂货店。",
+        "answers": [
+          "We were at the grocer's yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-6",
+        "kind": "gap",
+        "sourceRef": "L67-E07",
+        "prompt": "五点半时我在家。",
+        "answers": [
+          "at"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I was ",
+        "suffix": " home at half past five.",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-7",
+        "kind": "translation",
+        "sourceRef": "L67-E08",
+        "prompt": "一月一日她在学校。",
+        "answers": [
+          "She was at school on January first.",
+          "She was at school on the first of January.",
+          "She was at school on January the first.",
+          "She was at school on January 1st."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH67-68-recall-0",
+        "kind": "translation",
+        "sourceRef": "L65-E01",
+        "prompt": "请问可以把钥匙给我吗？",
+        "answers": [
+          "Can I have the key, please?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH67-68-recall-1",
+        "kind": "translation",
+        "sourceRef": "L65-E02",
+        "prompt": "她十一点一刻必须到家。",
+        "answers": [
+          "She must be home at a quarter past eleven."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-65-66"
+      },
+      {
+        "id": "PL-CH69-70-0",
+        "kind": "gap",
+        "sourceRef": "L69-E01",
+        "prompt": "有二十辆车参加了比赛。",
+        "answers": [
+          "were"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There ",
+        "suffix": " twenty cars in the race.",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH69-70-1",
+        "kind": "translation",
+        "sourceRef": "L69-E02",
+        "prompt": "他们九月在加拿大。",
+        "answers": [
+          "They were in Canada in September."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH69-70-2",
+        "kind": "gap",
+        "sourceRef": "L69-E03",
+        "prompt": "我们四点在那里。",
+        "answers": [
+          "at"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We were there ",
+        "suffix": " four o'clock.",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH69-70-3",
+        "kind": "translation",
+        "sourceRef": "L69-E04",
+        "prompt": "他星期一在文具店。",
+        "answers": [
+          "He was at the stationer's on Monday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH69-70-4",
+        "kind": "gap",
+        "sourceRef": "L69-E05",
+        "prompt": "1995 年有一场比赛。",
+        "answers": [
+          "was"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There ",
+        "suffix": " a race in 1995.",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH69-70-5",
+        "kind": "translation",
+        "sourceRef": "L69-E06",
+        "prompt": "获胜者开的是十五号车。",
+        "answers": [
+          "The winner was in car number fifteen."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH69-70-recall-0",
+        "kind": "translation",
+        "sourceRef": "L67-E01",
+        "prompt": "她星期五在面包店。",
+        "answers": [
+          "She was at the baker's on Friday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH69-70-recall-1",
+        "kind": "translation",
+        "sourceRef": "L67-E02",
+        "prompt": "你昨天在家吗？",
+        "answers": [
+          "Were you at home yesterday?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-67-68"
+      },
+      {
+        "id": "PL-CH71-72-0",
+        "kind": "gap",
+        "sourceRef": "L71-E01",
+        "prompt": "他昨天打电话了吗？",
+        "answers": [
+          "telephone"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Did he ",
+        "suffix": " yesterday?",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH71-72-1",
+        "kind": "translation",
+        "sourceRef": "L71-E02",
+        "prompt": "她没有接电话。",
+        "answers": [
+          "She did not answer the phone.",
+          "She didn't answer the phone."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH71-72-2",
+        "kind": "gap",
+        "sourceRef": "L71-E03",
+        "prompt": "他们昨天擦了鞋。",
+        "answers": [
+          "cleaned"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " their shoes yesterday.",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH71-72-3",
+        "kind": "translation",
+        "sourceRef": "L71-E04",
+        "prompt": "她昨晚做了什么？",
+        "answers": [
+          "What did she do last night?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH71-72-4",
+        "kind": "gap",
+        "sourceRef": "L71-E05",
+        "prompt": "他六点到家了。",
+        "answers": [
+          "arrived"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He ",
+        "suffix": " home at six o'clock.",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH71-72-5",
+        "kind": "translation",
+        "sourceRef": "L71-E06",
+        "prompt": "她昨天说了再见。",
+        "answers": [
+          "She said goodbye yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH71-72-recall-0",
+        "kind": "translation",
+        "sourceRef": "L69-E01",
+        "prompt": "有二十辆车参加了比赛。",
+        "answers": [
+          "There were twenty cars in the race."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH71-72-recall-1",
+        "kind": "translation",
+        "sourceRef": "L69-E02",
+        "prompt": "他们九月在加拿大。",
+        "answers": [
+          "They were in Canada in September."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-69-70"
+      },
+      {
+        "id": "PL-CH73-74-0",
+        "kind": "gap",
+        "sourceRef": "L73-E01",
+        "prompt": "他慢慢地读了那句短语。",
+        "answers": [
+          "slowly"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He read the phrase ",
+        "suffix": ".",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH73-74-1",
+        "kind": "translation",
+        "sourceRef": "L73-E02",
+        "prompt": "她上周去了伦敦。",
+        "answers": [
+          "She went to London last week."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH73-74-2",
+        "kind": "gap",
+        "sourceRef": "L73-E03",
+        "prompt": "他热情地问候了我。",
+        "answers": [
+          "warmly"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He greeted me ",
+        "suffix": ".",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH73-74-3",
+        "kind": "translation",
+        "sourceRef": "L73-E04",
+        "prompt": "他们昨天工作很努力。",
+        "answers": [
+          "They worked very hard yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH73-74-4",
+        "kind": "gap",
+        "sourceRef": "L73-E05",
+        "prompt": "她从包里拿出一本书。",
+        "answers": [
+          "took"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " a book out of her bag.",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH73-74-5",
+        "kind": "translation",
+        "sourceRef": "L73-E06",
+        "prompt": "他昨天游得很好。",
+        "answers": [
+          "He swam very well yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH73-74-recall-0",
+        "kind": "translation",
+        "sourceRef": "L71-E01",
+        "prompt": "他昨天打电话了吗？",
+        "answers": [
+          "Did he telephone yesterday?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH73-74-recall-1",
+        "kind": "translation",
+        "sourceRef": "L71-E02",
+        "prompt": "她没有接电话。",
+        "answers": [
+          "She did not answer the phone.",
+          "She didn't answer the phone."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-71-72"
+      },
+      {
+        "id": "PL-CH75-76-0",
+        "kind": "gap",
+        "sourceRef": "L75-E01",
+        "prompt": "她上个月买了那些鞋。",
+        "answers": [
+          "bought"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " those shoes last month.",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH75-76-1",
+        "kind": "translation",
+        "sourceRef": "L75-E02",
+        "prompt": "她是在这里买的吗？",
+        "answers": [
+          "Did she buy them here?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH75-76-2",
+        "kind": "gap",
+        "sourceRef": "L75-E03",
+        "prompt": "我一分钟前洗了手。",
+        "answers": [
+          "ago"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I washed my hands a minute ",
+        "suffix": ".",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH75-76-3",
+        "kind": "translation",
+        "sourceRef": "L75-E04",
+        "prompt": "我们去年有那种鞋。",
+        "answers": [
+          "We had those shoes last year."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH75-76-4",
+        "kind": "gap",
+        "sourceRef": "L75-E05",
+        "prompt": "它们看起来不舒服。",
+        "answers": [
+          "uncomfortable"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They look ",
+        "suffix": ".",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH75-76-5",
+        "kind": "translation",
+        "sourceRef": "L75-E06",
+        "prompt": "你什么时候给书柜刷了漆？",
+        "answers": [
+          "When did you paint the bookcase?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH75-76-recall-0",
+        "kind": "translation",
+        "sourceRef": "L73-E01",
+        "prompt": "他慢慢地读了那句短语。",
+        "answers": [
+          "He read the phrase slowly."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH75-76-recall-1",
+        "kind": "translation",
+        "sourceRef": "L73-E02",
+        "prompt": "她上周去了伦敦。",
+        "answers": [
+          "She went to London last week."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-73-74"
+      },
+      {
+        "id": "PL-CH77-78-0",
+        "kind": "gap",
+        "sourceRef": "L77-E01",
+        "prompt": "我预约了十点。",
+        "answers": [
+          "at"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have an appointment ",
+        "suffix": " ten o'clock.",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH77-78-1",
+        "kind": "translation",
+        "sourceRef": "L77-E02",
+        "prompt": "她星期三去了伦敦。",
+        "answers": [
+          "She went to London on Wednesday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH77-78-2",
+        "kind": "gap",
+        "sourceRef": "L77-E03",
+        "prompt": "他五月买了一辆车。",
+        "answers": [
+          "in"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He bought a car ",
+        "suffix": " May.",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH77-78-3",
+        "kind": "translation",
+        "sourceRef": "L77-E04",
+        "prompt": "我七点半见到了他。",
+        "answers": [
+          "I saw him at half past seven."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH77-78-4",
+        "kind": "gap",
+        "sourceRef": "L77-E05",
+        "prompt": "她昨天丢了钢笔。",
+        "answers": [
+          "lost"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " her pen yesterday.",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH77-78-5",
+        "kind": "translation",
+        "sourceRef": "L77-E06",
+        "prompt": "你能等到今天下午吗？",
+        "answers": [
+          "Can you wait till this afternoon?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH77-78-recall-0",
+        "kind": "translation",
+        "sourceRef": "L75-E01",
+        "prompt": "她上个月买了那些鞋。",
+        "answers": [
+          "She bought those shoes last month."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH77-78-recall-1",
+        "kind": "translation",
+        "sourceRef": "L75-E02",
+        "prompt": "她是在这里买的吗？",
+        "answers": [
+          "Did she buy them here?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-75-76"
+      },
+      {
+        "id": "PL-CH79-80-0",
+        "kind": "gap",
+        "sourceRef": "L79-E01",
+        "prompt": "我们的西红柿不多了。",
+        "answers": [
+          "many"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We have not got ",
+        "suffix": " tomatoes.",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH79-80-1",
+        "kind": "translation",
+        "sourceRef": "L79-E02",
+        "prompt": "她的钱不多。",
+        "answers": [
+          "She has not got much money.",
+          "She's not got much money.",
+          "She hasn't got much money."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH79-80-2",
+        "kind": "gap",
+        "sourceRef": "L79-E03",
+        "prompt": "我必须去面包店买些面包。",
+        "answers": [
+          "baker's"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I must go to the ",
+        "suffix": " to get some bread.",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH79-80-3",
+        "kind": "translation",
+        "sourceRef": "L79-E04",
+        "prompt": "他需要很多信封。",
+        "answers": [
+          "He needs a lot of envelopes."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH79-80-4",
+        "kind": "gap",
+        "sourceRef": "L79-E05",
+        "prompt": "他们有很多土豆。",
+        "answers": [
+          "have"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " got a lot of potatoes.",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH79-80-5",
+        "kind": "translation",
+        "sourceRef": "L79-E06",
+        "prompt": "我必须去蔬菜水果店买些水果。",
+        "answers": [
+          "I must go to the greengrocer's to get some fruit."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH79-80-recall-0",
+        "kind": "translation",
+        "sourceRef": "L77-E01",
+        "prompt": "我预约了十点。",
+        "answers": [
+          "I have an appointment at ten o'clock.",
+          "I have got an appointment at ten o'clock.",
+          "I've got an appointment at ten o'clock."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH79-80-recall-1",
+        "kind": "translation",
+        "sourceRef": "L77-E02",
+        "prompt": "她星期三去了伦敦。",
+        "answers": [
+          "She went to London on Wednesday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-77-78"
+      },
+      {
+        "id": "PL-CH81-82-0",
+        "kind": "gap",
+        "sourceRef": "L81-E01",
+        "prompt": "他们昨天一起吃了午饭。",
+        "answers": [
+          "had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " lunch together yesterday.",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH81-82-1",
+        "kind": "translation",
+        "sourceRef": "L81-E02",
+        "prompt": "他正在洗澡。",
+        "answers": [
+          "He is having a bath.",
+          "He's having a bath."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH81-82-2",
+        "kind": "gap",
+        "sourceRef": "L81-E03",
+        "prompt": "我们准备举行聚会。",
+        "answers": [
+          "have"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We are going to ",
+        "suffix": " a party.",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH81-82-3",
+        "kind": "translation",
+        "sourceRef": "L81-E04",
+        "prompt": "你午饭吃了什么？",
+        "answers": [
+          "What did you have for lunch?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH81-82-4",
+        "kind": "gap",
+        "sourceRef": "L81-E05",
+        "prompt": "她昨天玩得很开心。",
+        "answers": [
+          "had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " a good time yesterday.",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH81-82-5",
+        "kind": "translation",
+        "sourceRef": "L81-E06",
+        "prompt": "他们现在正在上课。",
+        "answers": [
+          "They are having a lesson now.",
+          "They're having a lesson now."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH81-82-recall-0",
+        "kind": "translation",
+        "sourceRef": "L79-E01",
+        "prompt": "我们的西红柿不多了。",
+        "answers": [
+          "We have not got many tomatoes.",
+          "We've not got many tomatoes.",
+          "We haven't got many tomatoes."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH81-82-recall-1",
+        "kind": "translation",
+        "sourceRef": "L79-E02",
+        "prompt": "她的钱不多。",
+        "answers": [
+          "She has not got much money.",
+          "She's not got much money.",
+          "She hasn't got much money."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-79-80"
+      },
+      {
+        "id": "PL-CH83-84-0",
+        "kind": "gap",
+        "sourceRef": "L83-E01",
+        "prompt": "我已经吃过午饭了。",
+        "answers": [
+          "had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have already ",
+        "suffix": " lunch.",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH83-84-1",
+        "kind": "translation",
+        "sourceRef": "L83-E02",
+        "prompt": "她刚吃了些水果。",
+        "answers": [
+          "She has just had some fruit.",
+          "She's just had some fruit."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH83-84-2",
+        "kind": "gap",
+        "sourceRef": "L83-E03",
+        "prompt": "我十二点半吃了午饭。",
+        "answers": [
+          "had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I ",
+        "suffix": " lunch at half past twelve.",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH83-84-3",
+        "kind": "translation",
+        "sourceRef": "L83-E04",
+        "prompt": "你吃过蔬菜了吗？",
+        "answers": [
+          "Have you had any vegetables?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH83-84-4",
+        "kind": "gap",
+        "sourceRef": "L83-E05",
+        "prompt": "我已经吃过一个了。",
+        "answers": [
+          "one"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have already had ",
+        "suffix": ".",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH83-84-5",
+        "kind": "translation",
+        "sourceRef": "L83-E06",
+        "prompt": "他们还没有喝咖啡。",
+        "answers": [
+          "They have not had any coffee.",
+          "They've not had any coffee.",
+          "They haven't had any coffee."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH83-84-recall-0",
+        "kind": "translation",
+        "sourceRef": "L81-E01",
+        "prompt": "他们昨天一起吃了午饭。",
+        "answers": [
+          "They had lunch together yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH83-84-recall-1",
+        "kind": "translation",
+        "sourceRef": "L81-E02",
+        "prompt": "他正在洗澡。",
+        "answers": [
+          "He is having a bath.",
+          "He's having a bath."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-81-82"
+      },
+      {
+        "id": "PL-CH85-86-0",
+        "kind": "gap",
+        "sourceRef": "L85-E01",
+        "prompt": "你去过巴黎吗？",
+        "answers": [
+          "been"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Have you ever ",
+        "suffix": " to Paris?",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH85-86-1",
+        "kind": "translation",
+        "sourceRef": "L85-E02",
+        "prompt": "我从未去过那里。",
+        "answers": [
+          "I have never been there.",
+          "I've never been there."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH85-86-2",
+        "kind": "gap",
+        "sourceRef": "L85-E03",
+        "prompt": "她刚打开了窗户。",
+        "answers": [
+          "has"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She ",
+        "suffix": " just opened the window.",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH85-86-3",
+        "kind": "translation",
+        "sourceRef": "L85-E04",
+        "prompt": "他去年给书柜刷了漆。",
+        "answers": [
+          "He painted the bookcase last year."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH85-86-4",
+        "kind": "gap",
+        "sourceRef": "L85-E05",
+        "prompt": "我已经看过那部电影了。",
+        "answers": [
+          "seen"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have already ",
+        "suffix": " that film.",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH85-86-5",
+        "kind": "translation",
+        "sourceRef": "L85-E06",
+        "prompt": "她一小时前打开了窗户。",
+        "answers": [
+          "She opened the window an hour ago."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH85-86-recall-0",
+        "kind": "translation",
+        "sourceRef": "L83-E01",
+        "prompt": "我已经吃过午饭了。",
+        "answers": [
+          "I have already had lunch.",
+          "I've already had lunch."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH85-86-recall-1",
+        "kind": "translation",
+        "sourceRef": "L83-E02",
+        "prompt": "她刚吃了些水果。",
+        "answers": [
+          "She has just had some fruit.",
+          "She's just had some fruit."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-83-84"
+      },
+      {
+        "id": "PL-CH87-88-0",
+        "kind": "gap",
+        "sourceRef": "L87-E01",
+        "prompt": "他们做完了吗？",
+        "answers": [
+          "finished"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Have they ",
+        "suffix": " yet?",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-1",
+        "kind": "translation",
+        "sourceRef": "L87-E02",
+        "prompt": "她找到钢笔了。",
+        "answers": [
+          "She has found her pen.",
+          "She's found her pen."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-2",
+        "kind": "gap",
+        "sourceRef": "L87-E03",
+        "prompt": "我三天前把它带到这里。",
+        "answers": [
+          "brought"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I ",
+        "suffix": " it here three days ago.",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-3",
+        "kind": "translation",
+        "sourceRef": "L87-E04",
+        "prompt": "你什么时候见到她的？",
+        "answers": [
+          "When did you meet her?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-4",
+        "kind": "gap",
+        "sourceRef": "L87-E05",
+        "prompt": "他还没有离开。",
+        "answers": [
+          "left"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He has not ",
+        "suffix": " yet.",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-5",
+        "kind": "translation",
+        "sourceRef": "L87-E06",
+        "prompt": "他们仍在修车。",
+        "answers": [
+          "They are still working on the car.",
+          "They're still working on the car."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-6",
+        "kind": "gap",
+        "sourceRef": "L87-E07",
+        "prompt": "她已经寄出那封信了。",
+        "answers": [
+          "sent"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She has already ",
+        "suffix": " the letter.",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-7",
+        "kind": "translation",
+        "sourceRef": "L87-E08",
+        "prompt": "他昨天扫了地。",
+        "answers": [
+          "He swept the floor yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH87-88-recall-0",
+        "kind": "translation",
+        "sourceRef": "L85-E01",
+        "prompt": "你去过巴黎吗？",
+        "answers": [
+          "Have you ever been to Paris?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH87-88-recall-1",
+        "kind": "translation",
+        "sourceRef": "L85-E02",
+        "prompt": "我从未去过那里。",
+        "answers": [
+          "I have never been there.",
+          "I've never been there."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-85-86"
+      },
+      {
+        "id": "PL-CH89-90-0",
+        "kind": "gap",
+        "sourceRef": "L89-E01",
+        "prompt": "我在这里住了二十年。",
+        "answers": [
+          "for"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have lived here ",
+        "suffix": " twenty years.",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-1",
+        "kind": "translation",
+        "sourceRef": "L89-E02",
+        "prompt": "她从 2010 年起就在这里。",
+        "answers": [
+          "She has been here since 2010.",
+          "She's been here since 2010."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-2",
+        "kind": "gap",
+        "sourceRef": "L89-E03",
+        "prompt": "你在这里住了多久？",
+        "answers": [
+          "How long"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "",
+        "suffix": " have you lived here?",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-3",
+        "kind": "translation",
+        "sourceRef": "L89-E04",
+        "prompt": "他已经做完作业了。",
+        "answers": [
+          "He has done his homework.",
+          "He's done his homework."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-4",
+        "kind": "gap",
+        "sourceRef": "L89-E05",
+        "prompt": "你看过这本书了吗？",
+        "answers": [
+          "read"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Have you ",
+        "suffix": " this book yet?",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-5",
+        "kind": "translation",
+        "sourceRef": "L89-E06",
+        "prompt": "她已经和他说过话了。",
+        "answers": [
+          "She has spoken to him.",
+          "She's spoken to him."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-6",
+        "kind": "gap",
+        "sourceRef": "L89-E07",
+        "prompt": "我读过这本书。",
+        "answers": [
+          "read"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have ",
+        "suffix": " this book.",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-7",
+        "kind": "translation",
+        "sourceRef": "L89-E08",
+        "prompt": "她已经做完作业了。",
+        "answers": [
+          "She has already done her homework.",
+          "She's already done her homework."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH89-90-recall-0",
+        "kind": "translation",
+        "sourceRef": "L87-E01",
+        "prompt": "他们做完了吗？",
+        "answers": [
+          "Have they finished yet?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH89-90-recall-1",
+        "kind": "translation",
+        "sourceRef": "L87-E02",
+        "prompt": "她找到钢笔了。",
+        "answers": [
+          "She has found her pen.",
+          "She's found her pen."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-87-88"
+      },
+      {
+        "id": "PL-CH91-92-0",
+        "kind": "gap",
+        "sourceRef": "L91-E01",
+        "prompt": "他明天上午会到。",
+        "answers": [
+          "arrive"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He will ",
+        "suffix": " tomorrow morning.",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH91-92-1",
+        "kind": "translation",
+        "sourceRef": "L91-E02",
+        "prompt": "她不会相信我。",
+        "answers": [
+          "She will not believe me.",
+          "She won't believe me.",
+          "She'll not believe me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH91-92-2",
+        "kind": "gap",
+        "sourceRef": "L91-E03",
+        "prompt": "他们什么时候搬进来？",
+        "answers": [
+          "will"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "When ",
+        "suffix": " they move in?",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH91-92-3",
+        "kind": "translation",
+        "sourceRef": "L91-E04",
+        "prompt": "今晚会下雪。",
+        "answers": [
+          "It will snow tonight.",
+          "It'll snow tonight."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH91-92-4",
+        "kind": "gap",
+        "sourceRef": "L91-E05",
+        "prompt": "他们还没有搬家。",
+        "answers": [
+          "yet"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They have not moved ",
+        "suffix": ".",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH91-92-5",
+        "kind": "translation",
+        "sourceRef": "L91-E06",
+        "prompt": "我们后天会见到他。",
+        "answers": [
+          "We will see him the day after tomorrow.",
+          "We'll see him the day after tomorrow."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH91-92-recall-0",
+        "kind": "translation",
+        "sourceRef": "L89-E01",
+        "prompt": "我在这里住了二十年。",
+        "answers": [
+          "I have lived here for twenty years.",
+          "I've lived here for twenty years."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH91-92-recall-1",
+        "kind": "translation",
+        "sourceRef": "L89-E02",
+        "prompt": "她从 2010 年起就在这里。",
+        "answers": [
+          "She has been here since 2010.",
+          "She's been here since 2010."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-89-90"
+      },
+      {
+        "id": "PL-CH93-94-0",
+        "kind": "gap",
+        "sourceRef": "L93-E01",
+        "prompt": "他一周前飞去了西班牙。",
+        "answers": [
+          "flew"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He ",
+        "suffix": " to Spain a week ago.",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH93-94-1",
+        "kind": "translation",
+        "sourceRef": "L93-E02",
+        "prompt": "她下个月将飞往东京。",
+        "answers": [
+          "She will fly to Tokyo next month.",
+          "She'll fly to Tokyo next month."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH93-94-2",
+        "kind": "gap",
+        "sourceRef": "L93-E03",
+        "prompt": "我们不会去雅典。",
+        "answers": [
+          "go"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We will not ",
+        "suffix": " to Athens.",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH93-94-3",
+        "kind": "translation",
+        "sourceRef": "L93-E04",
+        "prompt": "他下下周将返回。",
+        "answers": [
+          "He will return the week after next.",
+          "He'll return the week after next."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH93-94-4",
+        "kind": "gap",
+        "sourceRef": "L93-E05",
+        "prompt": "你去年去悉尼了吗？",
+        "answers": [
+          "go"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Did you ",
+        "suffix": " to Sydney last year?",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH93-94-5",
+        "kind": "translation",
+        "sourceRef": "L93-E06",
+        "prompt": "他们已经去过几乎每个国家。",
+        "answers": [
+          "They have already been to nearly every country.",
+          "They've already been to nearly every country."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH93-94-recall-0",
+        "kind": "translation",
+        "sourceRef": "L91-E01",
+        "prompt": "他明天上午会到。",
+        "answers": [
+          "He will arrive tomorrow morning.",
+          "He'll arrive tomorrow morning."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH93-94-recall-1",
+        "kind": "translation",
+        "sourceRef": "L91-E02",
+        "prompt": "她不会相信我。",
+        "answers": [
+          "She will not believe me.",
+          "She won't believe me.",
+          "She'll not believe me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-91-92"
+      },
+      {
+        "id": "PL-CH95-96-0",
+        "kind": "gap",
+        "sourceRef": "L95-E01",
+        "prompt": "我们现在最好回去。",
+        "answers": [
+          "go"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We had better ",
+        "suffix": " back now.",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-1",
+        "kind": "translation",
+        "sourceRef": "L95-E02",
+        "prompt": "下一班火车将在一小时后出发。",
+        "answers": [
+          "The next train will leave in an hour's time."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-2",
+        "kind": "gap",
+        "sourceRef": "L95-E03",
+        "prompt": "现在是七点五十七分。",
+        "answers": [
+          "to"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is three minutes ",
+        "suffix": " eight.",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-3",
+        "kind": "translation",
+        "sourceRef": "L95-E04",
+        "prompt": "他两天前去了伦敦。",
+        "answers": [
+          "He went to London two days ago."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-4",
+        "kind": "gap",
+        "sourceRef": "L95-E05",
+        "prompt": "他们将在两周后返回。",
+        "answers": [
+          "will return"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " in two weeks' time.",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-5",
+        "kind": "translation",
+        "sourceRef": "L95-E06",
+        "prompt": "你最好小心。",
+        "answers": [
+          "You had better be careful."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-6",
+        "kind": "gap",
+        "sourceRef": "L95-E07",
+        "prompt": "现在是差十分六点。",
+        "answers": [
+          "to"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is ten ",
+        "suffix": " six.",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-7",
+        "kind": "translation",
+        "sourceRef": "L95-E08",
+        "prompt": "现在是八点零五分。",
+        "answers": [
+          "It is five past eight.",
+          "It is eight oh five.",
+          "It is eight zero five.",
+          "It's five past eight.",
+          "It's eight oh five.",
+          "It's eight zero five."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH95-96-recall-0",
+        "kind": "translation",
+        "sourceRef": "L93-E01",
+        "prompt": "他一周前飞去了西班牙。",
+        "answers": [
+          "He flew to Spain a week ago."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH95-96-recall-1",
+        "kind": "translation",
+        "sourceRef": "L93-E02",
+        "prompt": "她下个月将飞往东京。",
+        "answers": [
+          "She will fly to Tokyo next month.",
+          "She'll fly to Tokyo next month."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-93-94"
+      },
+      {
+        "id": "PL-CH97-98-0",
+        "kind": "gap",
+        "sourceRef": "L97-E01",
+        "prompt": "这个箱子属于我。",
+        "answers": [
+          "me"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This case belongs to ",
+        "suffix": ".",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH97-98-1",
+        "kind": "translation",
+        "sourceRef": "L97-E02",
+        "prompt": "这些书是我们的。",
+        "answers": [
+          "These books are ours."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH97-98-2",
+        "kind": "gap",
+        "sourceRef": "L97-E03",
+        "prompt": "这个箱子是你的吗？",
+        "answers": [
+          "yours"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Is this case ",
+        "suffix": "?",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH97-98-3",
+        "kind": "translation",
+        "sourceRef": "L97-E04",
+        "prompt": "它不属于她。",
+        "answers": [
+          "It does not belong to her.",
+          "It doesn't belong to her."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH97-98-4",
+        "kind": "gap",
+        "sourceRef": "L97-E05",
+        "prompt": "那些票是他们的。",
+        "answers": [
+          "theirs"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Those tickets are ",
+        "suffix": ".",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH97-98-5",
+        "kind": "translation",
+        "sourceRef": "L97-E06",
+        "prompt": "这是我的行李箱。",
+        "answers": [
+          "This is my suitcase."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH97-98-recall-0",
+        "kind": "translation",
+        "sourceRef": "L95-E01",
+        "prompt": "我们现在最好回去。",
+        "answers": [
+          "We had better go back now."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH97-98-recall-1",
+        "kind": "translation",
+        "sourceRef": "L95-E02",
+        "prompt": "下一班火车将在一小时后出发。",
+        "answers": [
+          "The next train will leave in an hour's time."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-95-96"
+      },
+      {
+        "id": "PL-CH99-100-0",
+        "kind": "gap",
+        "sourceRef": "L99-E01",
+        "prompt": "他说他觉得累。",
+        "answers": [
+          "feels"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He says that he ",
+        "suffix": " tired.",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH99-100-1",
+        "kind": "translation",
+        "sourceRef": "L99-E02",
+        "prompt": "他们说他们需要帮助。",
+        "answers": [
+          "They say that they need some help."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH99-100-2",
+        "kind": "gap",
+        "sourceRef": "L99-E03",
+        "prompt": "她认为他很快会来。",
+        "answers": [
+          "will come"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She thinks that he ",
+        "suffix": " soon.",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH99-100-3",
+        "kind": "translation",
+        "sourceRef": "L99-E04",
+        "prompt": "我昨天滑倒并摔了一跤。",
+        "answers": [
+          "I slipped and fell yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH99-100-4",
+        "kind": "gap",
+        "sourceRef": "L99-E05",
+        "prompt": "让我帮助你。",
+        "answers": [
+          "help"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Let me ",
+        "suffix": " you.",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH99-100-5",
+        "kind": "translation",
+        "sourceRef": "L99-E06",
+        "prompt": "她说她已经找到钢笔了。",
+        "answers": [
+          "She says that she has found her pen.",
+          "She says she has found her pen.",
+          "She says that she's found her pen.",
+          "She says she's found her pen."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH99-100-recall-0",
+        "kind": "translation",
+        "sourceRef": "L97-E01",
+        "prompt": "这个箱子属于我。",
+        "answers": [
+          "This case belongs to me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH99-100-recall-1",
+        "kind": "translation",
+        "sourceRef": "L97-E02",
+        "prompt": "这些书是我们的。",
+        "answers": [
+          "These books are ours."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-97-98"
+      },
+      {
+        "id": "PL-CH101-102-0",
+        "kind": "gap",
+        "sourceRef": "L101-E01",
+        "prompt": "他说他刚到。",
+        "answers": [
+          "has"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He says he ",
+        "suffix": " just arrived.",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH101-102-1",
+        "kind": "translation",
+        "sourceRef": "L101-E02",
+        "prompt": "她说她住在一家旅舍。",
+        "answers": [
+          "She says she is staying at a hostel.",
+          "She says that she is staying at a hostel.",
+          "She says she's staying at a hostel.",
+          "She says that she's staying at a hostel."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH101-102-2",
+        "kind": "gap",
+        "sourceRef": "L101-E03",
+        "prompt": "他说他很快会写信。",
+        "answers": [
+          "write"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He says he will ",
+        "suffix": " soon.",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH101-102-3",
+        "kind": "translation",
+        "sourceRef": "L101-E04",
+        "prompt": "他们说他们完成了。",
+        "answers": [
+          "They say they have finished."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH101-102-4",
+        "kind": "gap",
+        "sourceRef": "L101-E05",
+        "prompt": "她说她已经关门了。",
+        "answers": [
+          "shut"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She says she has ",
+        "suffix": " the door.",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH101-102-5",
+        "kind": "translation",
+        "sourceRef": "L101-E06",
+        "prompt": "他希望我们都好。",
+        "answers": [
+          "He hopes we are all well.",
+          "He hopes that we are all well.",
+          "He hopes we're all well.",
+          "He hopes that we're all well."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH101-102-recall-0",
+        "kind": "translation",
+        "sourceRef": "L99-E01",
+        "prompt": "他说他觉得累。",
+        "answers": [
+          "He says that he feels tired.",
+          "He says he feels tired."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH101-102-recall-1",
+        "kind": "translation",
+        "sourceRef": "L99-E02",
+        "prompt": "他们说他们需要帮助。",
+        "answers": [
+          "They say that they need some help."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-99-100"
+      },
+      {
+        "id": "PL-CH103-104-0",
+        "kind": "gap",
+        "sourceRef": "L103-E01",
+        "prompt": "这个包太重，我提不动。",
+        "answers": [
+          "too"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The bag is ",
+        "suffix": " heavy for me to carry.",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH103-104-1",
+        "kind": "translation",
+        "sourceRef": "L103-E02",
+        "prompt": "这道题足够容易，我能答。",
+        "answers": [
+          "The question is easy enough for me to answer."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH103-104-2",
+        "kind": "gap",
+        "sourceRef": "L103-E03",
+        "prompt": "我能答出十六道题。",
+        "answers": [
+          "answer"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I could ",
+        "suffix": " sixteen questions.",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH103-104-3",
+        "kind": "translation",
+        "sourceRef": "L103-E04",
+        "prompt": "这个箱子够轻，可以提动。",
+        "answers": [
+          "The box is light enough to carry."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH103-104-4",
+        "kind": "gap",
+        "sourceRef": "L103-E05",
+        "prompt": "音乐声太低，我们听不见。",
+        "answers": [
+          "too"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The music was ",
+        "suffix": " low for us to hear.",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH103-104-5",
+        "kind": "translation",
+        "sourceRef": "L103-E06",
+        "prompt": "她答不出其余的题。",
+        "answers": [
+          "She could not answer the rest.",
+          "She couldn't answer the rest."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH103-104-recall-0",
+        "kind": "translation",
+        "sourceRef": "L101-E01",
+        "prompt": "他说他刚到。",
+        "answers": [
+          "He says he has just arrived.",
+          "He says that he has just arrived.",
+          "He says he's just arrived.",
+          "He says that he's just arrived."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH103-104-recall-1",
+        "kind": "translation",
+        "sourceRef": "L101-E02",
+        "prompt": "她说她住在一家旅舍。",
+        "answers": [
+          "She says she is staying at a hostel.",
+          "She says that she is staying at a hostel.",
+          "She says she's staying at a hostel.",
+          "She says that she's staying at a hostel."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-101-102"
+      },
+      {
+        "id": "PL-CH105-106-0",
+        "kind": "gap",
+        "sourceRef": "L105-E01",
+        "prompt": "我希望你纠正它。",
+        "answers": [
+          "to correct"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I want you ",
+        "suffix": " it.",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH105-106-1",
+        "kind": "translation",
+        "sourceRef": "L105-E02",
+        "prompt": "告诉她马上来。",
+        "answers": [
+          "Tell her to come at once."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH105-106-2",
+        "kind": "gap",
+        "sourceRef": "L105-E03",
+        "prompt": "他正告诉他们不要弄丢它。",
+        "answers": [
+          "not to"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He is telling them ",
+        "suffix": " lose it.",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH105-106-3",
+        "kind": "translation",
+        "sourceRef": "L105-E04",
+        "prompt": "我不希望他错过火车。",
+        "answers": [
+          "I do not want him to miss the train.",
+          "I don't want him to miss the train."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH105-106-4",
+        "kind": "gap",
+        "sourceRef": "L105-E05",
+        "prompt": "她希望我帮她。",
+        "answers": [
+          "to help"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She wants me ",
+        "suffix": " her.",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH105-106-5",
+        "kind": "translation",
+        "sourceRef": "L105-E06",
+        "prompt": "告诉他们不要打破它。",
+        "answers": [
+          "Tell them not to break it."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH105-106-recall-0",
+        "kind": "translation",
+        "sourceRef": "L103-E01",
+        "prompt": "这个包太重，我提不动。",
+        "answers": [
+          "The bag is too heavy for me to carry."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH105-106-recall-1",
+        "kind": "translation",
+        "sourceRef": "L103-E02",
+        "prompt": "这道题足够容易，我能答。",
+        "answers": [
+          "The question is easy enough for me to answer."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-103-104"
+      },
+      {
+        "id": "PL-CH107-108-0",
+        "kind": "gap",
+        "sourceRef": "L107-E01",
+        "prompt": "这条裙子比蓝色的更小。",
+        "answers": [
+          "than"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This dress is smaller ",
+        "suffix": " the blue one.",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH107-108-1",
+        "kind": "translation",
+        "sourceRef": "L107-E02",
+        "prompt": "这是店里最大的裙子。",
+        "answers": [
+          "This is the largest dress in the shop."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH107-108-2",
+        "kind": "gap",
+        "sourceRef": "L107-E03",
+        "prompt": "蓝色行李箱比棕色的更重。",
+        "answers": [
+          "heavier"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The blue suitcase is ",
+        "suffix": " than the brown one.",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH107-108-3",
+        "kind": "translation",
+        "sourceRef": "L107-E04",
+        "prompt": "昨天比今天更热。",
+        "answers": [
+          "Yesterday was hotter than today."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH107-108-4",
+        "kind": "gap",
+        "sourceRef": "L107-E05",
+        "prompt": "这次测验比那次容易。",
+        "answers": [
+          "easier"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This test is ",
+        "suffix": " than that one.",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH107-108-5",
+        "kind": "translation",
+        "sourceRef": "L107-E06",
+        "prompt": "他是我们班最高的学生。",
+        "answers": [
+          "He is the tallest student in our class.",
+          "He's the tallest student in our class."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH107-108-recall-0",
+        "kind": "translation",
+        "sourceRef": "L105-E01",
+        "prompt": "我希望你纠正它。",
+        "answers": [
+          "I want you to correct it."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH107-108-recall-1",
+        "kind": "translation",
+        "sourceRef": "L105-E02",
+        "prompt": "告诉她马上来。",
+        "answers": [
+          "Tell her to come at once."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-105-106"
+      },
+      {
+        "id": "PL-CH109-110-0",
+        "kind": "gap",
+        "sourceRef": "L109-E01",
+        "prompt": "我的牛奶比你的少。",
+        "answers": [
+          "less"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have ",
+        "suffix": " milk than you.",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH109-110-1",
+        "kind": "translation",
+        "sourceRef": "L109-E02",
+        "prompt": "她的书比我的少。",
+        "answers": [
+          "She has fewer books than me.",
+          "She has got fewer books than me.",
+          "She's got fewer books than me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH109-110-2",
+        "kind": "gap",
+        "sourceRef": "L109-E03",
+        "prompt": "碗里有一点糖。",
+        "answers": [
+          "a little"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There is ",
+        "suffix": " sugar in the bowl.",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH109-110-3",
+        "kind": "translation",
+        "sourceRef": "L109-E04",
+        "prompt": "盒子里有几块饼干。",
+        "answers": [
+          "There are a few biscuits in the box."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH109-110-4",
+        "kind": "gap",
+        "sourceRef": "L109-E05",
+        "prompt": "这是我读过的最好的书。",
+        "answers": [
+          "best"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This is the ",
+        "suffix": " book I have read.",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH109-110-5",
+        "kind": "translation",
+        "sourceRef": "L109-E06",
+        "prompt": "这天气比昨天的更糟。",
+        "answers": [
+          "This weather is worse than yesterday's."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH109-110-recall-0",
+        "kind": "translation",
+        "sourceRef": "L107-E01",
+        "prompt": "这条裙子比蓝色的更小。",
+        "answers": [
+          "This dress is smaller than the blue one."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH109-110-recall-1",
+        "kind": "translation",
+        "sourceRef": "L107-E02",
+        "prompt": "这是店里最大的裙子。",
+        "answers": [
+          "This is the largest dress in the shop."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-107-108"
+      },
+      {
+        "id": "PL-CH111-112-0",
+        "kind": "gap",
+        "sourceRef": "L111-E01",
+        "prompt": "这个型号比那个更贵。",
+        "answers": [
+          "more expensive"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This model is ",
+        "suffix": " than that one.",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH111-112-1",
+        "kind": "translation",
+        "sourceRef": "L111-E02",
+        "prompt": "这是我做过的最难的测验。",
+        "answers": [
+          "This is the most difficult test I have done.",
+          "This is the most difficult test I've done."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH111-112-2",
+        "kind": "gap",
+        "sourceRef": "L111-E03",
+        "prompt": "青苹果不如红苹果甜。",
+        "answers": [
+          "sweet"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The green apple is not as ",
+        "suffix": " as the red one.",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH111-112-3",
+        "kind": "translation",
+        "sourceRef": "L111-E04",
+        "prompt": "这本书不如你的有趣。",
+        "answers": [
+          "This book is less interesting than yours."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH111-112-4",
+        "kind": "gap",
+        "sourceRef": "L111-E05",
+        "prompt": "这是最便宜的型号。",
+        "answers": [
+          "least"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "It is the ",
+        "suffix": " expensive model.",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH111-112-5",
+        "kind": "translation",
+        "sourceRef": "L111-E06",
+        "prompt": "我的包和你的一样轻。",
+        "answers": [
+          "My bag is as light as yours."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH111-112-recall-0",
+        "kind": "translation",
+        "sourceRef": "L109-E01",
+        "prompt": "我的牛奶比你的少。",
+        "answers": [
+          "I have less milk than you.",
+          "I have got less milk than you.",
+          "I've got less milk than you."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH111-112-recall-1",
+        "kind": "translation",
+        "sourceRef": "L109-E02",
+        "prompt": "她的书比我的少。",
+        "answers": [
+          "She has fewer books than me.",
+          "She has got fewer books than me.",
+          "She's got fewer books than me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-109-110"
+      },
+      {
+        "id": "PL-CH113-114-0",
+        "kind": "gap",
+        "sourceRef": "L113-E01",
+        "prompt": "我没有钱。",
+        "answers": [
+          "no"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I have got ",
+        "suffix": " money.",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH113-114-1",
+        "kind": "translation",
+        "sourceRef": "L113-E02",
+        "prompt": "我一点也没有。",
+        "answers": [
+          "I have got none.",
+          "I've got none."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH113-114-2",
+        "kind": "gap",
+        "sourceRef": "L113-E03",
+        "prompt": "我会游泳。我也会。",
+        "answers": [
+          "So can I"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I can swim. ",
+        "suffix": ".",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH113-114-3",
+        "kind": "translation",
+        "sourceRef": "L113-E04",
+        "prompt": "我不会游泳。我也不会。",
+        "answers": [
+          "I cannot swim. Neither can I.",
+          "I can't swim. Neither can I."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH113-114-4",
+        "kind": "gap",
+        "sourceRef": "L113-E05",
+        "prompt": "我累了。我也累了。",
+        "answers": [
+          "So am I"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I am tired. ",
+        "suffix": ".",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH113-114-5",
+        "kind": "translation",
+        "sourceRef": "L113-E06",
+        "prompt": "我没见过他。我也没见过。",
+        "answers": [
+          "I did not meet him. Neither did I.",
+          "I didn't meet him. Neither did I."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH113-114-recall-0",
+        "kind": "translation",
+        "sourceRef": "L111-E01",
+        "prompt": "这个型号比那个更贵。",
+        "answers": [
+          "This model is more expensive than that one."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH113-114-recall-1",
+        "kind": "translation",
+        "sourceRef": "L111-E02",
+        "prompt": "这是我做过的最难的测验。",
+        "answers": [
+          "This is the most difficult test I have done.",
+          "This is the most difficult test I've done."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-111-112"
+      },
+      {
+        "id": "PL-CH115-116-0",
+        "kind": "gap",
+        "sourceRef": "L115-E01",
+        "prompt": "大家都在花园里。",
+        "answers": [
+          "is"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Everyone ",
+        "suffix": " in the garden.",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH115-116-1",
+        "kind": "translation",
+        "sourceRef": "L115-E02",
+        "prompt": "我没有看见任何人。",
+        "answers": [
+          "I did not see anyone.",
+          "I didn't see anyone."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH115-116-2",
+        "kind": "gap",
+        "sourceRef": "L115-E03",
+        "prompt": "盒子里什么也没有。",
+        "answers": [
+          "nothing"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "There is ",
+        "suffix": " in the box.",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH115-116-3",
+        "kind": "translation",
+        "sourceRef": "L115-E04",
+        "prompt": "我到处找钢笔。",
+        "answers": [
+          "I looked for my pen everywhere."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH115-116-4",
+        "kind": "gap",
+        "sourceRef": "L115-E05",
+        "prompt": "她有东西可喝。",
+        "answers": [
+          "something"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She has ",
+        "suffix": " to drink.",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH115-116-5",
+        "kind": "translation",
+        "sourceRef": "L115-E06",
+        "prompt": "一切都很安静。",
+        "answers": [
+          "Everything is very quiet."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH115-116-recall-0",
+        "kind": "translation",
+        "sourceRef": "L113-E01",
+        "prompt": "我没有钱。",
+        "answers": [
+          "I have got no money.",
+          "I've got no money."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH115-116-recall-1",
+        "kind": "translation",
+        "sourceRef": "L113-E02",
+        "prompt": "我一点也没有。",
+        "answers": [
+          "I have got none.",
+          "I've got none."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-113-114"
+      },
+      {
+        "id": "PL-CH117-118-0",
+        "kind": "gap",
+        "sourceRef": "L117-E01",
+        "prompt": "电话响时我正在读书。",
+        "answers": [
+          "was reading"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I ",
+        "suffix": " when the phone rang.",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH117-118-1",
+        "kind": "translation",
+        "sourceRef": "L117-E02",
+        "prompt": "我到时他们正在做饭。",
+        "answers": [
+          "They were cooking when I arrived."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH117-118-2",
+        "kind": "gap",
+        "sourceRef": "L117-E03",
+        "prompt": "他做饭时她在读书。",
+        "answers": [
+          "while"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She was reading ",
+        "suffix": " he was cooking.",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH117-118-3",
+        "kind": "translation",
+        "sourceRef": "L117-E04",
+        "prompt": "我洗碗时电话响了。",
+        "answers": [
+          "The phone rang when I was washing the dishes."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH117-118-4",
+        "kind": "gap",
+        "sourceRef": "L117-E05",
+        "prompt": "他到时你正在做什么？",
+        "answers": [
+          "were"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "What ",
+        "suffix": " you doing when he arrived?",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH117-118-5",
+        "kind": "translation",
+        "sourceRef": "L117-E06",
+        "prompt": "昨天下午我正在花园干活。",
+        "answers": [
+          "I was working in the garden yesterday afternoon."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH117-118-recall-0",
+        "kind": "translation",
+        "sourceRef": "L115-E01",
+        "prompt": "大家都在花园里。",
+        "answers": [
+          "Everyone is in the garden."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH117-118-recall-1",
+        "kind": "translation",
+        "sourceRef": "L115-E02",
+        "prompt": "我没有看见任何人。",
+        "answers": [
+          "I did not see anyone.",
+          "I didn't see anyone."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-115-116"
+      },
+      {
+        "id": "PL-CH119-120-0",
+        "kind": "gap",
+        "sourceRef": "L119-E01",
+        "prompt": "我到时火车已经开走了。",
+        "answers": [
+          "had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The train ",
+        "suffix": " already left when I arrived.",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH119-120-1",
+        "kind": "translation",
+        "sourceRef": "L119-E02",
+        "prompt": "她完成工作后回家了。",
+        "answers": [
+          "She went home after she had finished work."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH119-120-2",
+        "kind": "gap",
+        "sourceRef": "L119-E03",
+        "prompt": "他睡觉前已经做完作业。",
+        "answers": [
+          "done"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He had ",
+        "suffix": " his homework before he went to bed.",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH119-120-3",
+        "kind": "translation",
+        "sourceRef": "L119-E04",
+        "prompt": "我问价格前，他们已经卖掉了车。",
+        "answers": [
+          "They had sold the car before I asked the price."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH119-120-4",
+        "kind": "gap",
+        "sourceRef": "L119-E05",
+        "prompt": "他们到之前我们已经吃过晚饭。",
+        "answers": [
+          "had had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We ",
+        "suffix": " dinner before they arrived.",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH119-120-5",
+        "kind": "translation",
+        "sourceRef": "L119-E06",
+        "prompt": "她看过电影后读了那本书。",
+        "answers": [
+          "She read the book after she had seen the film."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH119-120-recall-0",
+        "kind": "translation",
+        "sourceRef": "L117-E01",
+        "prompt": "电话响时我正在读书。",
+        "answers": [
+          "I was reading when the phone rang."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH119-120-recall-1",
+        "kind": "translation",
+        "sourceRef": "L117-E02",
+        "prompt": "我到时他们正在做饭。",
+        "answers": [
+          "They were cooking when I arrived."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-117-118"
+      },
+      {
+        "id": "PL-CH121-122-0",
+        "kind": "gap",
+        "sourceRef": "L121-E01",
+        "prompt": "她就是接待我的那位女士。",
+        "answers": [
+          "who",
+          "that"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She is the woman ",
+        "suffix": " served me.",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH121-122-1",
+        "kind": "translation",
+        "sourceRef": "L121-E02",
+        "prompt": "这就是我昨天买的书。",
+        "answers": [
+          "This is the book which I bought yesterday.",
+          "This is the book that I bought yesterday.",
+          "This is the book I bought yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH121-122-2",
+        "kind": "gap",
+        "sourceRef": "L121-E03",
+        "prompt": "站在那里的男人是我的老师。",
+        "answers": [
+          "is standing"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The man who ",
+        "suffix": " there is my teacher.",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH121-122-3",
+        "kind": "translation",
+        "sourceRef": "L121-E04",
+        "prompt": "他就是上周来这里的那个人。",
+        "answers": [
+          "He is the man who came here last week.",
+          "He is the man that came here last week.",
+          "He's the man who came here last week.",
+          "He's the man that came here last week."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH121-122-4",
+        "kind": "gap",
+        "sourceRef": "L121-E05",
+        "prompt": "这就是抛锚的那辆车。",
+        "answers": [
+          "which",
+          "that"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This is the car ",
+        "suffix": " broke down.",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH121-122-5",
+        "kind": "translation",
+        "sourceRef": "L121-E06",
+        "prompt": "这些就是我买的东西。",
+        "answers": [
+          "These are the things which I bought.",
+          "These are the things that I bought.",
+          "These are the things I bought."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH121-122-recall-0",
+        "kind": "translation",
+        "sourceRef": "L119-E01",
+        "prompt": "我到时火车已经开走了。",
+        "answers": [
+          "The train had already left when I arrived."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH121-122-recall-1",
+        "kind": "translation",
+        "sourceRef": "L119-E02",
+        "prompt": "她完成工作后回家了。",
+        "answers": [
+          "She went home after she had finished work."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-119-120"
+      },
+      {
+        "id": "PL-CH123-124-0",
+        "kind": "gap",
+        "sourceRef": "L123-E01",
+        "prompt": "那就是我们乘坐的船。",
+        "answers": [
+          "on"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "That is the ship we travelled ",
+        "suffix": ".",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH123-124-1",
+        "kind": "translation",
+        "sourceRef": "L123-E02",
+        "prompt": "这些是我旅途中认识的人。",
+        "answers": [
+          "These are the people I met during the trip.",
+          "These are the people whom I met during the trip.",
+          "These are the people who I met during the trip.",
+          "These are the people that I met during the trip."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH123-124-2",
+        "kind": "gap",
+        "sourceRef": "L123-E03",
+        "prompt": "这是我昨天拍的照片。",
+        "answers": [
+          "took"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "This is the photograph I ",
+        "suffix": " yesterday.",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH123-124-3",
+        "kind": "translation",
+        "sourceRef": "L123-E04",
+        "prompt": "这就是我和你说过的那本书。",
+        "answers": [
+          "This is the book I told you about.",
+          "This is the book which I told you about.",
+          "This is the book that I told you about."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH123-124-4",
+        "kind": "gap",
+        "sourceRef": "L123-E05",
+        "prompt": "我在旅途中留了胡子。",
+        "answers": [
+          "grew"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I ",
+        "suffix": " a beard during the trip.",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH123-124-5",
+        "kind": "translation",
+        "sourceRef": "L123-E06",
+        "prompt": "站在那里的女士是我的老师。",
+        "answers": [
+          "The woman standing there is my teacher."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH123-124-recall-0",
+        "kind": "translation",
+        "sourceRef": "L121-E01",
+        "prompt": "她就是接待我的那位女士。",
+        "answers": [
+          "She is the woman who served me.",
+          "She's the woman who served me."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH123-124-recall-1",
+        "kind": "translation",
+        "sourceRef": "L121-E02",
+        "prompt": "这就是我昨天买的书。",
+        "answers": [
+          "This is the book which I bought yesterday.",
+          "This is the book that I bought yesterday.",
+          "This is the book I bought yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-121-122"
+      },
+      {
+        "id": "PL-CH125-126-0",
+        "kind": "gap",
+        "sourceRef": "L125-E01",
+        "prompt": "你不必给花园浇水。",
+        "answers": [
+          "need"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "You do not ",
+        "suffix": " to water the garden.",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH125-126-1",
+        "kind": "translation",
+        "sourceRef": "L125-E02",
+        "prompt": "她必须马上离开。",
+        "answers": [
+          "She has to leave immediately.",
+          "She has got to leave immediately.",
+          "She's got to leave immediately."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH125-126-2",
+        "kind": "gap",
+        "sourceRef": "L125-E03",
+        "prompt": "我昨天不得不乘出租车。",
+        "answers": [
+          "had"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I ",
+        "suffix": " to take a taxi yesterday.",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH125-126-3",
+        "kind": "translation",
+        "sourceRef": "L125-E04",
+        "prompt": "我们明天将不得不早起。",
+        "answers": [
+          "We will have to get up early tomorrow.",
+          "We'll have to get up early tomorrow."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH125-126-4",
+        "kind": "gap",
+        "sourceRef": "L125-E05",
+        "prompt": "你现在必须离开吗？",
+        "answers": [
+          "have"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Do you ",
+        "suffix": " to leave now?",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH125-126-5",
+        "kind": "translation",
+        "sourceRef": "L125-E06",
+        "prompt": "我将独自喝茶。",
+        "answers": [
+          "I will have tea by myself.",
+          "I'll have tea by myself."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH125-126-recall-0",
+        "kind": "translation",
+        "sourceRef": "L123-E01",
+        "prompt": "那就是我们乘坐的船。",
+        "answers": [
+          "That is the ship we travelled on."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH125-126-recall-1",
+        "kind": "translation",
+        "sourceRef": "L123-E02",
+        "prompt": "这些是我旅途中认识的人。",
+        "answers": [
+          "These are the people I met during the trip.",
+          "These are the people whom I met during the trip.",
+          "These are the people who I met during the trip.",
+          "These are the people that I met during the trip."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-123-124"
+      },
+      {
+        "id": "PL-CH127-128-0",
+        "kind": "gap",
+        "sourceRef": "L127-E01",
+        "prompt": "他的包在这里，他一定在附近。",
+        "answers": [
+          "must"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "His bag is here. He ",
+        "suffix": " be nearby.",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH127-128-1",
+        "kind": "translation",
+        "sourceRef": "L127-E02",
+        "prompt": "这不可能是我的钥匙，我的是蓝色的。",
+        "answers": [
+          "This cannot be my key. Mine is blue.",
+          "This can't be my key. Mine is blue."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH127-128-2",
+        "kind": "gap",
+        "sourceRef": "L127-E03",
+        "prompt": "她现在一定在睡觉。",
+        "answers": [
+          "be sleeping"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She must ",
+        "suffix": " now.",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH127-128-3",
+        "kind": "translation",
+        "sourceRef": "L127-E04",
+        "prompt": "不可能是星期一，今天是星期二。",
+        "answers": [
+          "It cannot be Monday. Today is Tuesday.",
+          "It can't be Monday. Today is Tuesday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH127-128-4",
+        "kind": "gap",
+        "sourceRef": "L127-E05",
+        "prompt": "他一定至少四十岁。",
+        "answers": [
+          "at least"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He must be ",
+        "suffix": " forty.",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH127-128-5",
+        "kind": "translation",
+        "sourceRef": "L127-E06",
+        "prompt": "他们一定正在外面等。",
+        "answers": [
+          "They must be waiting outside."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH127-128-recall-0",
+        "kind": "translation",
+        "sourceRef": "L125-E01",
+        "prompt": "你不必给花园浇水。",
+        "answers": [
+          "You do not need to water the garden.",
+          "You don't need to water the garden."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH127-128-recall-1",
+        "kind": "translation",
+        "sourceRef": "L125-E02",
+        "prompt": "她必须马上离开。",
+        "answers": [
+          "She has to leave immediately.",
+          "She has got to leave immediately.",
+          "She's got to leave immediately."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-125-126"
+      },
+      {
+        "id": "PL-CH129-130-0",
+        "kind": "gap",
+        "sourceRef": "L129-E01",
+        "prompt": "他没听到电话，他当时一定在睡觉。",
+        "answers": [
+          "must have been"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He did not hear the phone. He ",
+        "suffix": " sleeping.",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH129-130-1",
+        "kind": "translation",
+        "sourceRef": "L129-E02",
+        "prompt": "我丢了钥匙，所以不得不等待。",
+        "answers": [
+          "I lost my key, so I had to wait."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH129-130-2",
+        "kind": "gap",
+        "sourceRef": "L129-E03",
+        "prompt": "她昨天不可能在家。",
+        "answers": [
+          "have been"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She cannot ",
+        "suffix": " at home yesterday.",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH129-130-3",
+        "kind": "translation",
+        "sourceRef": "L129-E04",
+        "prompt": "你最好不要开这么快。",
+        "answers": [
+          "You had better not drive so quickly."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH129-130-4",
+        "kind": "gap",
+        "sourceRef": "L129-E05",
+        "prompt": "他们旅行后一定很累。",
+        "answers": [
+          "have been"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They must ",
+        "suffix": " tired after the trip.",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH129-130-5",
+        "kind": "translation",
+        "sourceRef": "L129-E06",
+        "prompt": "他忘了箱子，所以不得不回家。",
+        "answers": [
+          "He forgot his case, so he had to return home."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH129-130-recall-0",
+        "kind": "translation",
+        "sourceRef": "L127-E01",
+        "prompt": "他的包在这里，他一定在附近。",
+        "answers": [
+          "His bag is here. He must be nearby."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH129-130-recall-1",
+        "kind": "translation",
+        "sourceRef": "L127-E02",
+        "prompt": "这不可能是我的钥匙，我的是蓝色的。",
+        "answers": [
+          "This cannot be my key. Mine is blue.",
+          "This can't be my key. Mine is blue."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-127-128"
+      },
+      {
+        "id": "PL-CH131-132-0",
+        "kind": "gap",
+        "sourceRef": "L131-E01",
+        "prompt": "我们今年可能出国。",
+        "answers": [
+          "may"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We ",
+        "suffix": " go abroad this year.",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH131-132-1",
+        "kind": "translation",
+        "sourceRef": "L131-E02",
+        "prompt": "他昨天可能很忙。",
+        "answers": [
+          "He may have been busy yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH131-132-2",
+        "kind": "gap",
+        "sourceRef": "L131-E03",
+        "prompt": "她现在可能正在读书。",
+        "answers": [
+          "be reading"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She may ",
+        "suffix": " now.",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH131-132-3",
+        "kind": "translation",
+        "sourceRef": "L131-E04",
+        "prompt": "他们可能哪儿也不去。",
+        "answers": [
+          "They might not go anywhere."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH131-132-4",
+        "kind": "gap",
+        "sourceRef": "L131-E05",
+        "prompt": "我们拿不定主意。",
+        "answers": [
+          "minds"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We cannot make up our ",
+        "suffix": ".",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH131-132-5",
+        "kind": "translation",
+        "sourceRef": "L131-E06",
+        "prompt": "谁将照看花园？",
+        "answers": [
+          "Who will look after the garden?"
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH131-132-recall-0",
+        "kind": "translation",
+        "sourceRef": "L129-E01",
+        "prompt": "他没听到电话，他当时一定在睡觉。",
+        "answers": [
+          "He did not hear the phone. He must have been sleeping.",
+          "He didn't hear the phone. He must have been sleeping."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH131-132-recall-1",
+        "kind": "translation",
+        "sourceRef": "L129-E02",
+        "prompt": "我丢了钥匙，所以不得不等待。",
+        "answers": [
+          "I lost my key, so I had to wait."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-129-130"
+      },
+      {
+        "id": "PL-CH133-134-0",
+        "kind": "gap",
+        "sourceRef": "L133-E01",
+        "prompt": "他说他累了。",
+        "answers": [
+          "was"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He said he ",
+        "suffix": " tired.",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH133-134-1",
+        "kind": "translation",
+        "sourceRef": "L133-E02",
+        "prompt": "她告诉我她在读书。",
+        "answers": [
+          "She told me she was reading.",
+          "She told me that she was reading."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH133-134-2",
+        "kind": "gap",
+        "sourceRef": "L133-E03",
+        "prompt": "他们说他们想吃晚饭。",
+        "answers": [
+          "wanted"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They said they ",
+        "suffix": " their dinner.",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH133-134-3",
+        "kind": "translation",
+        "sourceRef": "L133-E04",
+        "prompt": "他告诉我他已经做完了作业。",
+        "answers": [
+          "He told me he had finished his homework.",
+          "He told me that he had finished his homework.",
+          "He told me he'd finished his homework.",
+          "He told me that he'd finished his homework."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH133-134-4",
+        "kind": "gap",
+        "sourceRef": "L133-E05",
+        "prompt": "她说那本书很有趣。",
+        "answers": [
+          "was"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "She said the book ",
+        "suffix": " interesting.",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH133-134-5",
+        "kind": "translation",
+        "sourceRef": "L133-E06",
+        "prompt": "他们告诉我她已经到了。",
+        "answers": [
+          "They told me she had arrived.",
+          "They told me that she had arrived.",
+          "They told me she'd arrived.",
+          "They told me that she'd arrived."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH133-134-recall-0",
+        "kind": "translation",
+        "sourceRef": "L131-E01",
+        "prompt": "我们今年可能出国。",
+        "answers": [
+          "We may go abroad this year."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH133-134-recall-1",
+        "kind": "translation",
+        "sourceRef": "L131-E02",
+        "prompt": "他昨天可能很忙。",
+        "answers": [
+          "He may have been busy yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-131-132"
+      },
+      {
+        "id": "PL-CH135-136-0",
+        "kind": "gap",
+        "sourceRef": "L135-E01",
+        "prompt": "他说他很快会离开。",
+        "answers": [
+          "would"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He said he ",
+        "suffix": " leave soon.",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH135-136-1",
+        "kind": "translation",
+        "sourceRef": "L135-E02",
+        "prompt": "她告诉我她能理解英语。",
+        "answers": [
+          "She told me she could understand English.",
+          "She told me that she could understand English."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH135-136-2",
+        "kind": "gap",
+        "sourceRef": "L135-E03",
+        "prompt": "他说他可能退休。",
+        "answers": [
+          "might"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He said he ",
+        "suffix": " retire.",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH135-136-3",
+        "kind": "translation",
+        "sourceRef": "L135-E04",
+        "prompt": "她告诉我她无法完成它。",
+        "answers": [
+          "She told me she could not finish it.",
+          "She told me she couldn't finish it.",
+          "She told me that she could not finish it.",
+          "She told me that she couldn't finish it."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH135-136-4",
+        "kind": "gap",
+        "sourceRef": "L135-E05",
+        "prompt": "他们说他们稍后会到。",
+        "answers": [
+          "would arrive"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They said they ",
+        "suffix": " later.",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH135-136-5",
+        "kind": "translation",
+        "sourceRef": "L135-E06",
+        "prompt": "让我把他介绍给你。",
+        "answers": [
+          "Let me introduce him to you."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH135-136-recall-0",
+        "kind": "translation",
+        "sourceRef": "L133-E01",
+        "prompt": "他说他累了。",
+        "answers": [
+          "He said he was tired.",
+          "He said that he was tired."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH135-136-recall-1",
+        "kind": "translation",
+        "sourceRef": "L133-E02",
+        "prompt": "她告诉我她在读书。",
+        "answers": [
+          "She told me she was reading.",
+          "She told me that she was reading."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-133-134"
+      },
+      {
+        "id": "PL-CH137-138-0",
+        "kind": "gap",
+        "sourceRef": "L137-E01",
+        "prompt": "如果明天下雨，我们就待在家里。",
+        "answers": [
+          "rains"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "If it ",
+        "suffix": " tomorrow, we will stay at home.",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH137-138-1",
+        "kind": "translation",
+        "sourceRef": "L137-E02",
+        "prompt": "如果他错过公共汽车，就会乘出租车。",
+        "answers": [
+          "If he misses the bus, he will take a taxi."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH137-138-2",
+        "kind": "gap",
+        "sourceRef": "L137-E03",
+        "prompt": "如果不快点，我们就会错过火车。",
+        "answers": [
+          "do not"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "We will miss the train if we ",
+        "suffix": " hurry.",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH137-138-3",
+        "kind": "translation",
+        "sourceRef": "L137-E04",
+        "prompt": "如果他们早回家，就可以在花园玩。",
+        "answers": [
+          "If they come home early, they can play in the garden."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH137-138-4",
+        "kind": "gap",
+        "sourceRef": "L137-E05",
+        "prompt": "如果你问我，我会告诉你真相。",
+        "answers": [
+          "will tell"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "If you ask me, I ",
+        "suffix": " you the truth.",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH137-138-5",
+        "kind": "translation",
+        "sourceRef": "L137-E06",
+        "prompt": "一切取决于天气。",
+        "answers": [
+          "Everything depends on the weather."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH137-138-recall-0",
+        "kind": "translation",
+        "sourceRef": "L135-E01",
+        "prompt": "他说他很快会离开。",
+        "answers": [
+          "He said he would leave soon.",
+          "He said that he would leave soon.",
+          "He said he'd leave soon.",
+          "He said that he'd leave soon."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH137-138-recall-1",
+        "kind": "translation",
+        "sourceRef": "L135-E02",
+        "prompt": "她告诉我她能理解英语。",
+        "answers": [
+          "She told me she could understand English.",
+          "She told me that she could understand English."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-135-136"
+      },
+      {
+        "id": "PL-CH139-140-0",
+        "kind": "gap",
+        "sourceRef": "L139-E01",
+        "prompt": "我想知道你是否累了。",
+        "answers": [
+          "if",
+          "whether"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "I want to know ",
+        "suffix": " you are tired.",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH139-140-1",
+        "kind": "translation",
+        "sourceRef": "L139-E02",
+        "prompt": "告诉我你为什么迟到。",
+        "answers": [
+          "Tell me why you are late."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH139-140-2",
+        "kind": "gap",
+        "sourceRef": "L139-E03",
+        "prompt": "他想知道她在读什么。",
+        "answers": [
+          "she is"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "He wants to know what ",
+        "suffix": " reading.",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH139-140-3",
+        "kind": "translation",
+        "sourceRef": "L139-E04",
+        "prompt": "我不知道他什么时候会完成。",
+        "answers": [
+          "I do not know when he will finish.",
+          "I don't know when he will finish.",
+          "I do not know when he'll finish.",
+          "I don't know when he'll finish."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH139-140-4",
+        "kind": "gap",
+        "sourceRef": "L139-E05",
+        "prompt": "告诉我汤姆什么时候到的。",
+        "answers": [
+          "arrived"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Tell me when Tom ",
+        "suffix": ".",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH139-140-5",
+        "kind": "translation",
+        "sourceRef": "L139-E06",
+        "prompt": "我想知道汤姆是否早睡了。",
+        "answers": [
+          "I want to know if Tom went to bed early.",
+          "I want to know whether Tom went to bed early."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH139-140-recall-0",
+        "kind": "translation",
+        "sourceRef": "L137-E01",
+        "prompt": "如果明天下雨，我们就待在家里。",
+        "answers": [
+          "If it rains tomorrow, we will stay at home."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH139-140-recall-1",
+        "kind": "translation",
+        "sourceRef": "L137-E02",
+        "prompt": "如果他错过公共汽车，就会乘出租车。",
+        "answers": [
+          "If he misses the bus, he will take a taxi."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-137-138"
+      },
+      {
+        "id": "PL-CH141-142-0",
+        "kind": "gap",
+        "sourceRef": "L141-E01",
+        "prompt": "萨莉被邀请参加聚会。",
+        "answers": [
+          "was invited"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "Sally ",
+        "suffix": " to a party.",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH141-142-1",
+        "kind": "translation",
+        "sourceRef": "L141-E02",
+        "prompt": "这个房间定期打扫。",
+        "answers": [
+          "This room is cleaned regularly."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH141-142-2",
+        "kind": "gap",
+        "sourceRef": "L141-E03",
+        "prompt": "这些花每天都有人浇水。",
+        "answers": [
+          "are watered"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "These flowers ",
+        "suffix": " every day.",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH141-142-3",
+        "kind": "translation",
+        "sourceRef": "L141-E04",
+        "prompt": "这辆车昨天修好了。",
+        "answers": [
+          "The car was repaired yesterday."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH141-142-4",
+        "kind": "gap",
+        "sourceRef": "L141-E05",
+        "prompt": "今天早上有人在车站接他们。",
+        "answers": [
+          "were met"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "They ",
+        "suffix": " at the station this morning.",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH141-142-5",
+        "kind": "translation",
+        "sourceRef": "L141-E06",
+        "prompt": "这些书是上周买的。",
+        "answers": [
+          "The books were bought last week."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH141-142-recall-0",
+        "kind": "translation",
+        "sourceRef": "L139-E01",
+        "prompt": "我想知道你是否累了。",
+        "answers": [
+          "I want to know if you are tired."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH141-142-recall-1",
+        "kind": "translation",
+        "sourceRef": "L139-E02",
+        "prompt": "告诉我你为什么迟到。",
+        "answers": [
+          "Tell me why you are late."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-139-140"
+      },
+      {
+        "id": "PL-CH143-144-0",
+        "kind": "gap",
+        "sourceRef": "L143-E01",
+        "prompt": "这辆车已经修好了。",
+        "answers": [
+          "been"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The car has already ",
+        "suffix": " repaired.",
+        "chapterId": "lesson-143-144"
+      },
+      {
+        "id": "PL-CH143-144-1",
+        "kind": "translation",
+        "sourceRef": "L143-E02",
+        "prompt": "这些窗户明天会打开。",
+        "answers": [
+          "The windows will be opened tomorrow."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-143-144"
+      },
+      {
+        "id": "PL-CH143-144-2",
+        "kind": "gap",
+        "sourceRef": "L143-E03",
+        "prompt": "这些书已经被买走了。",
+        "answers": [
+          "have"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "These books ",
+        "suffix": " already been bought.",
+        "chapterId": "lesson-143-144"
+      },
+      {
+        "id": "PL-CH143-144-3",
+        "kind": "translation",
+        "sourceRef": "L143-E04",
+        "prompt": "这个房间还没有打扫。",
+        "answers": [
+          "The room has not been cleaned yet.",
+          "The room hasn't been cleaned yet."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-143-144"
+      },
+      {
+        "id": "PL-CH143-144-4",
+        "kind": "gap",
+        "sourceRef": "L143-E05",
+        "prompt": "这些花很快就会有人浇水。",
+        "answers": [
+          "watered"
+        ],
+        "actorId": "explorer-cat",
+        "prefix": "The flowers will be ",
+        "suffix": " soon.",
+        "chapterId": "lesson-143-144"
+      },
+      {
+        "id": "PL-CH143-144-5",
+        "kind": "translation",
+        "sourceRef": "L143-E06",
+        "prompt": "游客已被要求保持树林整洁。",
+        "answers": [
+          "Visitors have been asked to keep the woods tidy."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-143-144"
+      },
+      {
+        "id": "PL-CH143-144-recall-0",
+        "kind": "translation",
+        "sourceRef": "L141-E01",
+        "prompt": "萨莉被邀请参加聚会。",
+        "answers": [
+          "Sally was invited to a party."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-141-142"
+      },
+      {
+        "id": "PL-CH143-144-recall-1",
+        "kind": "translation",
+        "sourceRef": "L141-E02",
+        "prompt": "这个房间定期打扫。",
+        "answers": [
+          "This room is cleaned regularly."
+        ],
+        "actorId": "explorer-cat",
+        "chapterId": "lesson-141-142"
+      }
+    ]
+  }
 }

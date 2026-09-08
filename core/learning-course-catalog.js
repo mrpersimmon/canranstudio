@@ -65,6 +65,7 @@ function getCourse() { return course; }
     }
     if (!course.nodes.some(n=>n.kind==='review'&&n.lessonIds.length>2)) fail('cross-lesson review required');
     errors.push(...require('./learning-challenges').validateDefinitions(course));
+    errors.push(...require('./learning-placement').validateDefinitions(course));
     return errors;
   }
 module.exports = Object.freeze({ getCourse, validateCourse });
