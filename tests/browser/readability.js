@@ -115,7 +115,7 @@
     const viewportGeometry = {width:win.innerWidth,contentWidth:doc.documentElement.clientWidth,scrollWidth:doc.documentElement.scrollWidth,scrollbarWidth:win.innerWidth-doc.documentElement.clientWidth};
     const root = doc.querySelector('[data-learning-path]');
     const run = win.fixture?.runtime.snapshot();
-    if (run?.screen?.startsWith('placement')) {
+    if (['placement-intro','placement'].includes(run?.screen)) {
       const total=win.fixture.unit.placement.maxMistakes, wrong=run.screen==='placement-intro'&&run.placementAttempt?.status!=='active'?0:run.placementAttempt?.responses.filter(r=>!r.correct).length||0, remaining=total-wrong;
       const hearts=root.querySelector('.lp-placement-hearts');
       if (!hearts || hearts.children.length!==total || hearts.querySelectorAll('.is-full').length!==remaining
@@ -129,11 +129,33 @@
     }
     const progressBar = root.querySelector('.lp-header [role="progressbar"]');
     const sessionProgress = progressBar ? {label:progressBar.getAttribute('aria-label'),completed:Number(progressBar.getAttribute('aria-valuenow')),total:Number(progressBar.getAttribute('aria-valuemax'))} : null;
-    if (run?.sessionProgress && (!sessionProgress || sessionProgress.label !== '本次闯关进度'
+    const isSettlement = ['celebration','review-complete','challenge-complete','placement-result'].includes(run?.screen);
+    if (!isSettlement && run?.sessionProgress && (!sessionProgress || sessionProgress.label !== '本次闯关进度'
       || sessionProgress.completed !== run.sessionProgress.completed || sessionProgress.total !== run.sessionProgress.total))
       errors.push({rule:'session-progress-scope',actual:sessionProgress,expected:run.sessionProgress});
-    if (root.querySelector('.lp-celebration') && run?.sessionProgress && sessionProgress?.completed !== sessionProgress?.total)
+    if (isSettlement && run?.screen !== 'placement-result' && run?.sessionProgress && run.sessionProgress.completed !== run.sessionProgress.total)
       errors.push({rule:'completion-progress-incomplete'});
+    let settlement = null;
+    if (isSettlement) {
+      const cards=[...root.querySelectorAll('[data-settlement-value]')];
+      const values=cards.map(el=>el.textContent);
+      settlement={headerAbsent:!root.querySelector('.lp-header'),values,completed:run.settlement?.completed||0,finished:run.settlement?.finished||false};
+      if (!settlement.headerAbsent || cards.length!==3) errors.push({rule:'settlement-structure',...settlement});
+      if (run.settlement) {
+        const s=run.settlement,seconds=Math.floor(s.elapsedMs/1000);
+        const expected=[String(s.completed),s.assessed?'×'+s.bestStreak:String(s.heard),Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0')];
+        if (!s.finished || JSON.stringify(values)!==JSON.stringify(expected)) errors.push({rule:'settlement-session-values',values,expected});
+      }
+      if (run.screen==='placement-result') {
+        const responses=run.placementAttempt.responses,wrong=responses.filter(r=>!r.correct).length;
+        if(values[0]!==`${responses.length-wrong}/${responses.length}` || values[2]!==String(win.fixture.unit.placement.maxMistakes-wrong)) errors.push({rule:'settlement-placement-values',values});
+      }
+      for (const el of cards) {
+        const b=el.getBoundingClientRect(),card=el.closest('.lp-settlement-stat').getBoundingClientRect();
+        const border=parseFloat(win.getComputedStyle(el.closest('.lp-settlement-stat')).borderLeftWidth);
+        if(b.left<card.left+border+1 || b.right>card.right-border-1 || b.bottom>card.bottom)errors.push({rule:'settlement-value-overflow',value:el.textContent});
+      }
+    }
     if (run?.screen === 'references' && progressBar) errors.push({rule:'unrelated-progress-bar'});
     const centeredIcons = [];
     for (const button of root.querySelectorAll('.journey-locate,.journey-close,.journey-book-button')) {
@@ -186,7 +208,7 @@
     }
     let visibleImages = 0;
     for (const img of root.querySelectorAll('img')) {
-      const cutout=img.matches('.lp-story-character>img,.lp-actor img,.lp-story-object,.lp-question-object>img,.lp-vocabulary-image,.lp-option-image,.lp-chat-avatar>img');
+      const cutout=img.matches('.lp-story-character>img,.lp-actor img,.lp-story-object,.lp-question-object>img,.lp-vocabulary-image,.lp-option-image,.lp-chat-avatar>img,.lp-settlement-metric-art');
       const painting=img.matches('.lp-scene-painting');
       const essential=cutout||painting;
       const bounds=img.getBoundingClientRect();
@@ -197,7 +219,7 @@
       visibleImages++;
       const style = win.getComputedStyle(img);
       if (!img.complete || !img.naturalWidth) errors.push({rule:'image-loaded', src:img.getAttribute('src')});
-      else if(cutout||img.matches('.lp-celebration>img,.lp-blocked>img,.course-package-shell>img')){
+      else if(cutout||img.matches('.lp-celebration>img,.lp-settlement-mascot,.lp-blocked>img,.course-package-shell>img')){
         try{const pixels=checkCutout(win,img);if(pixels.transparent<40||pixels.opaque<40)errors.push({rule:'teaching-art-cutout',src:img.getAttribute('src'),...pixels});}
         catch(error){errors.push({rule:'teaching-art-unresolved',src:img.getAttribute('src'),message:String(error)});}
       }
@@ -285,6 +307,6 @@
         errors.push({rule:'contrast-unresolved', target:node.target, message:node.failureSummary});
       }
     }
-    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], viewportGeometry, canvas, visibleImages, journeyLayout, completionBoundary, sessionProgress, centeredIcons, resolved, errors};
+    return {name, expectedTheme, viewport:[win.innerWidth,win.innerHeight], viewportGeometry, canvas, visibleImages, journeyLayout, completionBoundary, sessionProgress, settlement, centeredIcons, resolved, errors};
   };
 })();

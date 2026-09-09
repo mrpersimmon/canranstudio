@@ -5,7 +5,7 @@
   "revision": "lesson1-144-v6.0",
   "scopePath": "/poc/learning-path/",
   "mediaIndexUrl": "/poc/learning-path/course-package/media-index.json",
-  "totalBytes": 3250784,
+  "totalBytes": 3260192,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -88,14 +88,14 @@
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 48917,
-      "sha256": "31a661d6f30e15e8f58dac19b4d5453c9025f155a18526a31b73027eb9c592bc"
+      "bytes": 50864,
+      "sha256": "13ebe76a0646445d8a3589e84db1ba227d663a2bee5927b55657b6065681c997"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 41541,
-      "sha256": "31f286fcdef9ea86d6143b10fdf834227ce990c1748f5eb9550ff298c6255db2"
+      "bytes": 42701,
+      "sha256": "ef44ebd4526fb9d4c0c35a786748f2f79dcf341fcc569dc483c17c81dd5a999c"
     },
     {
       "url": "/core/learning-placement.js",
@@ -286,14 +286,14 @@
     {
       "url": "/poc/learning-path/course-package/media-index.json",
       "kind": "data",
-      "bytes": 449159,
-      "sha256": "b94acf85e6a6ee1378f428a446cc4bd43955b2932dbc09071c01c226ac3ed86e"
+      "bytes": 449846,
+      "sha256": "f075213c415d3cb331e6265d27bd894feb1c9a5bc59d3d29d4cc7d16ba4323fe"
     },
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 2291900,
-      "sha256": "0aea1aee50c1941cb73b018f9fad0a47d398d8c217d81f54f2dff2a1dc3fde51"
+      "bytes": 2292836,
+      "sha256": "4164e9fd639e516109b8480b235c666679038785e571d16788f5c64fe4ff7967"
     },
     {
       "url": "/poc/learning-path/course.css",
@@ -312,6 +312,12 @@
       "kind": "style",
       "bytes": 18528,
       "sha256": "3f26f82574b84b737666ef241746be73d857bb6ebe2f8263c9f4026f61e4c698"
+    },
+    {
+      "url": "/poc/learning-path/settlement.css",
+      "kind": "style",
+      "bytes": 4357,
+      "sha256": "87340a4b604296e68de6d5c5d4312ab74dcabcfed2b2da559012dc905c0c6404"
     },
     {
       "url": "/poc/lesson-1-2/course/assets/v3/icons/arrow-clockwise.svg",
@@ -442,8 +448,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 14869,
-      "sha256": "8020a45774eb725d7316dabf2da99fc9b36847da24904375e59c3d1797b7bdfe"
+      "bytes": 15190,
+      "sha256": "de454d8829ab573dfedb5080c2ea4acaf978d27c873c4946ad8e7240ec05ebf5"
     }
   ]
 }

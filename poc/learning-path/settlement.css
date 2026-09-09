@@ -1,0 +1,53 @@
+/* Completion is a distinct state, on the same canvas as the path and lesson. */
+.lp-shell.has-settlement{--settlement-gold:#ffd000;--settlement-cyan:#31d8ee;--settlement-teal:#13d6aa}
+.lp-settlement.lp-celebration{width:100%;max-width:650px;margin:0 auto;padding:clamp(24px,6vh,66px) 24px 22px;gap:0;justify-content:center}
+.lp-settlement-hero{width:clamp(180px,30vh,260px);height:clamp(180px,30vh,260px);margin:0 auto 24px;flex:none}
+.lp-settlement-mascot{display:block;width:100%;height:100%;object-fit:contain;animation:settlement-arrive .48s ease-out both}
+.lp-settlement-copy{width:100%}
+.lp-settlement-context{font-size:14px;line-height:1.4;font-weight:700;color:var(--lp-muted);margin-bottom:8px}
+.lp-settlement h1{font-size:clamp(27px,5.5vw,36px);line-height:1.25;letter-spacing:0;color:var(--settlement-cyan);font-weight:800}
+.lp-settlement h1:focus{outline:none}
+.lp-settlement.is-failed h1{color:var(--settlement-gold)}
+.lp-settlement-message{font-size:clamp(16px,3.6vw,20px);line-height:1.5;margin:16px 0 0;color:var(--lp-ink)}
+.lp-settlement-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;margin:40px 0 0}
+.lp-settlement-stat{--stat-color:var(--settlement-gold);min-width:0;border:3px solid var(--stat-color);border-radius:20px;overflow:hidden;background:var(--stat-color)}
+.lp-settlement-stat.stat-1{--stat-color:var(--settlement-cyan)}
+.lp-settlement-stat.stat-2{--stat-color:var(--settlement-teal)}
+.lp-settlement-stat dt{background:var(--stat-color);color:var(--lp-canvas);font-weight:750;font-size:14px;line-height:1.4;padding:8px 3px;white-space:nowrap}
+.lp-settlement-stat dd{margin:0;min-height:74px;display:flex;gap:8px;align-items:center;justify-content:center;background:var(--lp-canvas);border-radius:16px 16px 0 0;color:var(--stat-color);font-weight:800;font-size:clamp(22px,5vw,30px);line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lp-settlement-stat .lp-icon{width:26px;height:26px;filter:invert(81%) sepia(88%) saturate(1279%) hue-rotate(359deg) brightness(105%) contrast(104%)}
+.lp-settlement-stat.stat-1 .lp-icon{filter:invert(77%) sepia(89%) saturate(1077%) hue-rotate(146deg) brightness(96%) contrast(95%)}
+.lp-settlement-stat.stat-2 .lp-icon{filter:invert(73%) sepia(88%) saturate(569%) hue-rotate(108deg) brightness(91%) contrast(91%)}
+.lp-settlement-metric-art{display:block;width:36px;height:36px;object-fit:contain;flex:none;filter:none;mix-blend-mode:normal}
+.lp-settlement-secondary{min-height:48px;margin:18px 0 0}
+.lp-settlement-secondary .lp-quiet{color:var(--lp-blue);font-weight:750;min-height:44px;margin:0}
+.has-settlement .lp-footer{border:0;padding:20px 24px calc(24px + env(safe-area-inset-bottom))}
+.has-settlement .lp-footer-inner{max-width:602px;width:100%;justify-content:center}
+.has-settlement .lp-settlement-return{width:100%;max-width:none;margin:0;background:var(--lp-blue);border-color:#1799cb;color:var(--lp-canvas);min-height:58px;font-size:18px}
+.has-settlement .lp-settlement-return:hover:not(:disabled){background:#68ccfa}
+@keyframes settlement-arrive{from{transform:translateY(14px) scale(.94)}to{transform:translateY(0) scale(1)}}
+@media(max-width:420px){
+ .lp-settlement.lp-celebration{padding-right:16px;padding-left:16px}
+ .lp-settlement-stats{gap:10px}
+ .lp-settlement-stat{border-radius:16px}
+ .lp-settlement-stat dt{font-size:12px;padding:7px 2px}
+ .lp-settlement-stat dd{gap:5px;min-height:65px;font-size:23px}
+ .lp-settlement-stat .lp-icon{width:21px;height:21px}
+ .lp-settlement-metric-art{width:30px;height:30px}
+ .has-settlement .lp-footer{padding:16px 16px calc(20px + env(safe-area-inset-bottom))}
+}
+@media(max-width:350px){
+ .lp-settlement-stat dd{font-size:20px;gap:4px}
+ .lp-settlement-stat dd.has-long-value{font-size:18px}
+ .lp-settlement-stat .lp-icon{width:18px;height:18px}
+ .lp-settlement-metric-art{width:24px;height:24px}
+}
+@media(max-height:680px){
+ .lp-settlement.lp-celebration{padding-top:20px;padding-bottom:12px}
+ .lp-settlement-hero{width:150px;height:150px;margin-bottom:14px}
+ .lp-settlement-message{margin-top:10px;font-size:16px}
+ .lp-settlement-stats{margin-top:24px}
+ .lp-settlement-secondary{margin-top:10px}
+ .has-settlement .lp-footer{padding-top:12px;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.lp-settlement-mascot{animation:none}}

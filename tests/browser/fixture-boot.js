@@ -60,5 +60,8 @@
     await loadScript('/__qa__/axe.js');
     await document.fonts.ready;
     control.ready = true;
+    // Local-only, reproducible completion states for screenshot review. Uses
+    // production controls/runtime with this file's memory/audio adapters.
+    if (new URLSearchParams(location.search).has('settlement')) await loadScript('/__qa__/settlement-preview.js');
   } catch (error) { control.errors.push(String(error)); }
 })();

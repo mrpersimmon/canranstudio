@@ -7,6 +7,7 @@ const root=path.resolve(__dirname,'..');
 const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const write=(file,data)=>{fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),JSON.stringify(data,null,2)+'\n');};
 const unit=read('content/expansion/lesson1-6-baseline.json');
+unit.settlement=read('content/settlement.json');
 const legacy=read('content/expansion/legacy7-20-reference.json');
 const continuation=require('../content/book1');
 const reviewedTranslations=require('../content/book1/accepted-translations.json');
@@ -273,6 +274,7 @@ for(const n of unit.nodes.filter(n=>Math.min(...n.lessonIds)>50)){
 const placement = require('../content/placement');
 unit.journey.icons['fast-forward']='/poc/learning-path/assets/journey/icons/fast-forward.svg';
 unit.icons.heart='/poc/learning-path/assets/journey/icons/heart.svg';
+unit.icons.clock='/poc/learning-path/assets/journey/icons/clock.svg';
 unit.placement = {version:placement.version,questionCount:placement.questionCount,maxMistakes:placement.maxMistakes,skippedShare:placement.skippedShare,questions:[]};
 for (const [index,[ref,prompt,answerType]] of placement.foundation.entries()) {
   const gap=placement.gaps[ref];

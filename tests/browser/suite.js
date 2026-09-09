@@ -29,6 +29,20 @@
     await settle();
   }
   function view(){return frame.contentWindow.fixture.runtime.snapshot();}
+  async function progressNegativeControl(){
+    // A progress bar belongs to an active lesson. Run this before the full
+    // course walk, so an invalid fixture fails early instead of at settlement.
+    const bar=frame.contentDocument.querySelector('.lp-header [role="progressbar"]');
+    if(view().screen!=='activity'||!bar)throw Error('Progress negative control requires an active lesson with its progress bar');
+    const maximum=bar.getAttribute('aria-valuemax'),value=bar.getAttribute('aria-valuenow');
+    try{
+      bar.setAttribute('aria-valuemax','11');bar.setAttribute('aria-valuenow','1');
+      const result=await auditReadability(frame.contentWindow,{name:'route-progress-in-lesson',expectedTheme:'dark'});
+      const caught=result.errors.some(e=>e.rule==='session-progress-scope');
+      report.mutations.push({name:'route-progress-in-lesson',caught,errors:result.errors});
+      if(!caught)throw Error('Negative control escaped: route-progress-in-lesson');
+    }finally{bar.setAttribute('aria-valuemax',maximum);bar.setAttribute('aria-valuenow',value);}
+  }
   function query(action,id){return Array.from(frame.contentDocument.querySelectorAll('button[data-action]')).find(el=>el.dataset.action===action&&(id===undefined||el.dataset.id===id)&&!el.disabled);}
   async function settleScroll() {
     const win=frame.contentWindow;let previous=NaN,stable=0;
@@ -181,6 +195,22 @@
         if(style===null)primary.removeAttribute('style');else primary.setAttribute('style',style);
       }
     }
+    const metric=frame.contentDocument.querySelector('[data-settlement-value]'),value=metric.textContent;
+    try {
+      metric.textContent='999';
+      const result=await auditReadability(frame.contentWindow,{name:'settlement-historical-total',expectedTheme:'dark'});
+      const caught=result.errors.some(e=>e.rule==='settlement-session-values');
+      report.mutations.push({name:'settlement-historical-total',caught});
+      if(!caught)throw Error('Historical totals escaped settlement guard');
+    } finally {metric.textContent=value;}
+    const header=frame.contentDocument.createElement('header');header.className='lp-header';
+    try {
+      frame.contentDocument.querySelector('.lp-shell').prepend(header);
+      const result=await auditReadability(frame.contentWindow,{name:'settlement-lesson-header',expectedTheme:'dark'});
+      const caught=result.errors.some(e=>e.rule==='settlement-structure');
+      report.mutations.push({name:'settlement-lesson-header',caught});
+      if(!caught)throw Error('Lesson header escaped settlement guard');
+    } finally {header.remove();}
     await settle();await check('completion-restored');
   }
   async function writeAnswer(value) {
@@ -191,6 +221,14 @@
     input.dispatchEvent(new win.InputEvent('input',{bubbles:true,data:value}));
     await wait(()=>win.fixture.dispatchCount>before);await settle();
     if(frame.contentDocument.querySelector('[data-challenge-input]')!==input)throw Error('Typing replaced the focused input');
+    if(!report.checks.some(c=>c.name==='settlement-visibility-input'&&c.viewport[0]===Number(frame.width))){
+      input.setSelectionRange(1,1);
+      const before=win.fixture.completedDispatches['session-visibility']||0;
+      win.document.dispatchEvent(new win.Event('visibilitychange'));
+      await wait(()=>(win.fixture.completedDispatches['session-visibility']||0)>before);
+      if(!input.isConnected || win.document.activeElement!==input || input.selectionStart!==1)throw Error('Visibility update replaced the answer or caret');
+      await check('settlement-visibility-input');
+    }
   }
   async function placementTests(viewport) {
     await open(viewport);
@@ -353,6 +391,7 @@
       // Start with the user's exact regression, before broader map checks.
       await click('preview-node','K01');await click('open-node','K01');await click('story-start');await hear();await click('continue');await hear();
       await check('story-two-lines',view().activityId);
+      await progressNegativeControl();
       await click('map');
       await check('map');
       await click('journey-nav','review');await check('review-empty');
@@ -432,13 +471,6 @@
     report.mutations.push({name:'off-center-arrow',caught:arrowCaught,errors:arrowResult.errors});
     arrow.style.transform='';
     if(!arrowCaught)throw Error('Negative control escaped: off-center-arrow');
-    await click('preview-node','K01');await click('open-node','K01');await completeNode(frame.contentWindow.fixture.unit,'K01');
-    const bar=frame.contentDocument.querySelector('.lp-header [role="progressbar"]');
-    bar.setAttribute('aria-valuemax','11');bar.setAttribute('aria-valuenow','1');
-    const progressResult=await auditReadability(frame.contentWindow,{name:'route-progress-in-lesson',expectedTheme:'dark'});
-    const progressCaught=progressResult.errors.some(e=>e.rule==='session-progress-scope');
-    report.mutations.push({name:'route-progress-in-lesson',caught:progressCaught,errors:progressResult.errors});
-    if(!progressCaught)throw Error('Negative control escaped: route-progress-in-lesson');
     report.status='passed';
   }catch(error){report.status='failed';report.failure=String(error);}
   results.textContent=JSON.stringify(report,null,2);

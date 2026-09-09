@@ -18,10 +18,11 @@ test('each run measures only its own work and finishes at 100 percent', () => {
     }
     const p=h.view().sessionProgress;
     assert.equal(p.completed,p.total,node.id);
-    const header=scene.createRenderer(unit).render(h.view()).match(/<header[^]*?<\/header>/)[0];
-    assert.match(header,/aria-label="本次闯关进度"/);
-    assert.match(header,/width:100%/);
-    assert.doesNotMatch(header,/学习路线|已保存的学习进度/);
+    const html=scene.createRenderer(unit).render(h.view());
+    assert.doesNotMatch(html,/<header|role="progressbar"/,'settlement no longer looks like an active lesson');
+    assert.equal(h.view().settlement.completed,p.total);
+    assert.equal(h.view().settlement.finished,true);
+    assert.equal((html.match(/data-settlement-value/g)||[]).length,3);
   }
   h.send({type:'map'});h.send({type:'open-node',nodeId:'K01'});
   assert.equal(h.view().sessionProgress.completed,0,'replay starts a new run');

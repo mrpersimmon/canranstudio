@@ -20,7 +20,10 @@ test('all fifty lessons complete through actual runtime actions, with every orig
   for(const ref of unit.dialogueRefs)assert.ok(h.view().record.sourceContacts[ref].modes.includes('heard'),ref);
   const restored=setup({adapter:h.adapter});assert.equal(restored.view().completedCount,unit.checkpointIds.length);
   restored.send({type:'course-summary'});assert.equal(restored.view().screen,'celebration');
-  const recap=scene.createRenderer(unit).render(restored.view());assert.match(recap,/<details class="lp-completion-details">/);assert.match(recap,/<dt>看例子练习<\/dt>/);assert.match(recap,/<dt>选择冠词<\/dt>/);
+  const recap=scene.createRenderer(unit).render(restored.view());
+  assert.match(recap,/aria-label="全部学习记录"/);assert.match(recap,/<dt>完成关卡<\/dt>/);
+  assert.match(recap,/<dt>学过课程<\/dt>/);assert.equal((recap.match(/data-settlement-value/g)||[]).length,3);
+  assert.doesNotMatch(recap,/本次用时|role="progressbar"/,'historical summary is not a timed run');
   const before=JSON.stringify(h.adapter.load(h.rt.storageKey));h.finish('C07');assert.equal(JSON.stringify(h.adapter.load(h.rt.storageKey)),before,'completed-node replay does not change learning evidence');
 });
 

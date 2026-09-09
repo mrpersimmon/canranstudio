@@ -1,0 +1,93 @@
+{
+  "status": "failed",
+  "fingerprint": "b6e67d70c0222dabeea6eb088b1b0468561fbf3ff00ff1b83d0ced5537bd8d92",
+  "finishedAt": "2026-09-08T17:56:56.659Z",
+  "failures": [
+    {
+      "shard": 2,
+      "failure": "TypeError: Cannot read properties of null (reading 'setAttribute')"
+    },
+    {
+      "shard": 3,
+      "failure": "TypeError: Cannot read properties of null (reading 'setAttribute')"
+    },
+    {
+      "shard": 1,
+      "failure": "TypeError: Cannot read properties of null (reading 'setAttribute')"
+    },
+    {
+      "shard": 0,
+      "failure": "TypeError: Cannot read properties of null (reading 'setAttribute')"
+    }
+  ],
+  "checkCount": 40960,
+  "checkErrors": 0,
+  "mutations": [
+    {
+      "name": "completion-button-offscreen",
+      "caught": true
+    },
+    {
+      "name": "completion-skips-map",
+      "caught": true
+    },
+    {
+      "name": "covered-sticky-title",
+      "caught": true
+    },
+    {
+      "name": "dark-multiply",
+      "caught": true
+    },
+    {
+      "name": "low-contrast-sticky-title",
+      "caught": true
+    },
+    {
+      "name": "missing-image",
+      "caught": true
+    },
+    {
+      "name": "off-center-arrow",
+      "caught": true
+    },
+    {
+      "name": "opaque-art",
+      "caught": true
+    },
+    {
+      "name": "placement-answer-type-mismatch",
+      "caught": true
+    },
+    {
+      "name": "placement-heart-mismatch",
+      "caught": true
+    },
+    {
+      "name": "scrollbar-width-overflow",
+      "caught": true
+    },
+    {
+      "name": "settlement-historical-total",
+      "caught": true
+    },
+    {
+      "name": "settlement-lesson-header",
+      "caught": true
+    },
+    {
+      "name": "theme-discontinuity",
+      "caught": true
+    },
+    {
+      "name": "uneven-node-spacing",
+      "caught": true
+    },
+    {
+      "name": "white-on-light",
+      "caught": true
+    }
+  ],
+  "cause": "The previous route-progress negative control finished K01, then tried to mutate a progress bar on the new headerless settlement screen.",
+  "fix": "Inject the same invalid progress in the active lesson, restore its attributes, and run it before the full course matrix."
+}

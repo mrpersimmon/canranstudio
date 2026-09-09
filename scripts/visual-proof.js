@@ -36,12 +36,12 @@ function validateReport(report) {
   })) throw Error('Missing reserved-scrollbar coverage or horizontal overflow remains');
   for (const viewport of VIEWPORTS) {
     const cases = report.checks.filter(check=>String(check.viewport)===String(viewport));
-    for (const name of ['loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...NODE_IDS.map(id=>'completion-return-'+id),...CHALLENGE_SCREENS]) {
+    for (const name of ['settlement-visibility-input','loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...NODE_IDS.map(id=>'completion-return-'+id),...CHALLENGE_SCREENS]) {
       if (!cases.some(check=>check.name===name)) throw Error('Missing browser coverage: '+viewport+' / '+name);
     }
     for (const check of cases.filter(c=>['celebration','replay-complete','review-complete'].includes(c.name) || c.name.startsWith('challenge-complete-'))) {
       if (check.completionBoundary?.action !== 'map' || !check.completionBoundary.inViewport) throw Error('Completion must offer a visible return to the path: '+viewport);
-      if (check.sessionProgress?.label !== '本次闯关进度' || check.sessionProgress.total<=0 || check.sessionProgress.completed !== check.sessionProgress.total) throw Error('Completion must show a completed session, not the route: '+viewport);
+      if (check.sessionProgress || !check.settlement?.headerAbsent || check.settlement.values.length!==3 || !check.settlement.finished || check.settlement.completed<=0) throw Error('Completion must show three current-session metrics without a lesson header: '+viewport);
     }
     for(const c of CHALLENGES) for(const q of c.questions) for(const prefix of ['challenge-empty-','challenge-filled-','challenge-correct-'])
       if(!cases.some(check=>check.name===prefix+q.id))throw Error('Missing written challenge state: '+viewport+' / '+prefix+q.id);
@@ -52,7 +52,7 @@ function validateReport(report) {
     if(!map.journeyLayout?.gaps?.length||map.journeyLayout.gaps.some(gap=>Math.abs(gap-map.journeyLayout.pitch)>1))throw Error('Missing or uneven map geometry: '+viewport);
     if(!map.centeredIcons?.some(icon=>icon.action==='journey-locate') || map.centeredIcons.some(icon=>Math.abs(icon.x)>1 || Math.abs(icon.y)>1))throw Error('Missing or uncentered icon geometry: '+viewport);
   }
-  if (!['placement-heart-mismatch','placement-answer-type-mismatch','white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['settlement-historical-total','settlement-lesson-header','placement-heart-mismatch','placement-answer-type-mismatch','white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

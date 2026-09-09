@@ -99,6 +99,27 @@
     let view = { screen: 'map', saveState: null, mode: 'main', audio: null };
     let queue = [], queueIndex = 0, extraIds = [], extraIndex = false;
     let localAttempts = {};
+    // A settlement belongs to this visit, never to historical course totals.
+    // Commit callbacks own scoring; retries and repeated renders cannot award twice.
+    let session = null, activeSince = null, pageHidden = false;
+    function beginSession() {
+      session = { assessed: 0, independent: 0, streak: 0, bestStreak: 0, heardRefs: [], elapsedMs: 0, finished: false };
+      activeSince = pageHidden ? null : now().getTime();
+    }
+    function clockSession(hidden = pageHidden, finish = false) {
+      if (!session || session.finished) return;
+      const time = now().getTime();
+      if (activeSince !== null) session.elapsedMs += Math.max(0, time - activeSince);
+      session.finished = finish;
+      activeSince = hidden || finish ? null : time;
+    }
+    function scoreSession(independent) {
+      if (!session || session.finished) return;
+      session.assessed++;
+      if (independent) session.independent++;
+      session.streak = independent ? session.streak + 1 : 0;
+      session.bestStreak = Math.max(session.bestStreak, session.streak);
+    }
     const today = () => day(now());
     const activity = () => unit.activities[view.activityId];
     const stopAudio = (clearWords = true) => { effects.push({ type: 'stop-audio' }); view.audio = null; if (clearWords) view.wordQueue = []; };
@@ -296,6 +317,7 @@
         const a = unit.activities[aid];
         return total + (a.kind === 'interactive-story' ? a.beats.length - (mode === 'repeat' ? 0 : Object.keys(record.storyProgress[aid]?.beats || {}).length) : 1);
       }, 0) };
+      beginSession();
       if (queue.length) loadActivity(queue[0]);
     }
     function beginFeedback(type) {
@@ -359,6 +381,7 @@
       }
       view.screen = view.mode === 'review' ? 'review-complete' : 'celebration';
       view.activityId = null; view.storyActivityId = null;
+      clockSession(pageHidden, true);
     }
     function finishActivity() {
       const a = activity();
@@ -397,6 +420,7 @@
           if (a.resultId) contact(next, a.evidenceRefs || a.sourceRefs, evidence === 'independent' ? a.assessment.evidenceMode : 'supported', at);
         }
       }, () => {
+        if (a.resultId) scoreSession(evidence === 'independent');
         if (view.storyActivityId) { advanceStory(storyProof()); return; }
         if (a.assessment?.scope === 'assessment' && evidence !== 'independent' && !extraIndex && view.mode === 'main' && extraIds.length < unit.remediation.maxExtraPerNode && !extraIds.includes(a.id)) {
           extraIds.push(a.id); view.sessionProgress.total++;
@@ -464,6 +488,9 @@
       if (!active || active.requestId !== event.requestId || active.index !== event.index || active.status !== 'playing') return;
       if (event.type === 'audio-error') { active.status = event.blocked ? 'blocked' : 'failed'; return; }
       if (event.type !== 'audio-ended') return;
+      if (session && !session.finished && view.screen === 'activity') {
+        session.heardRefs = [...new Set([...session.heardRefs, active.sequence[active.index].ref])];
+      }
       view.heardRefs = [...new Set([...(view.heardRefs || []), active.sequence[active.index].ref])];
       if (active.index + 1 < active.sequence.length) {
         active.index++;
@@ -528,8 +555,9 @@
       if (progress.answers.length === definition.questions.length) progress.completedAt = now().toISOString();
       stopAudio();
       save(next, () => {
+        scoreSession(progress.answers.at(-1).evidence === 'independent');
         view.sessionProgress.completed++;
-        if (progress.completedAt) { view.screen = 'challenge-complete'; view.feedback = null; }
+        if (progress.completedAt) { view.screen = 'challenge-complete'; view.feedback = null; clockSession(pageHidden, true); }
         else loadChallengeQuestion();
       });
     }
@@ -606,6 +634,8 @@
         return {id:node.id,done,skipped,passed,available,completeActivities:node.activityIds.filter(id=>record?.completed[id]).length,pendingRole:false};
       });
       return clone({ ...view, extraPractice: extraIndex,
+        settlement: session?.finished && ['celebration','review-complete','challenge-complete'].includes(view.screen) && view.mode !== 'summary'
+          ? { ...session, completed: view.sessionProgress.completed, heard: session.heardRefs.length } : null,
         canContinue: view.screen === 'activity' && !(a?.kind === 'teach' && (view.wordQueue.length || view.audio?.purpose === 'word' && view.audio.status !== 'ended')) && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
         completedCount: unit.checkpointIds.filter(id => unit.checkpointActivities[id].every(aid => record?.completed[aid])).length,
         passedCount:nodes.filter(n=>n.passed).length,
@@ -615,6 +645,10 @@
     }
     function dispatch(event) {
       effects = [];
+      if (event.type === 'session-visibility') {
+        pageHidden = Boolean(event.hidden); clockSession(pageHidden);
+        return {view:snapshot(),effects};
+      }
       if (event.type === 'reload') {
         stopAudio(); pending = null; view = { screen: 'map', saveState: null, mode: 'main', audio: null }; read();
       } else if (pending || view.screen === 'blocked') {
@@ -633,6 +667,7 @@
       else if (event.type === 'challenge-start' && view.screen === 'challenge-intro' && !record.challenges?.[view.challengeId]?.completedAt) {
         const completed = record.challenges?.[view.challengeId]?.answers.length || 0;
         view.sessionProgress = {completed:0,total:challenge().questions.length-completed};
+        beginSession();
         loadChallengeQuestion();
       } else if (event.type === 'challenge-save-draft' && view.screen === 'challenge'
         && event.id === view.challengeId && event.questionId === challengeQuestion().id) saveChallengeDraft();
@@ -651,7 +686,7 @@
         play([{ref:event.id,text:unit.sources[event.id].text}], 'reference');
       }
       else if (event.type === 'review') {
-        queue = dueItems(); if (queue.length) { view.mode = 'review'; view.nodeId = null; queueIndex = 0; extraIndex = false; extraIds = []; localAttempts = {}; view.sessionProgress = {completed:0,total:queue.length}; loadActivity(queue[0]); }
+        queue = dueItems(); if (queue.length) { view.mode = 'review'; view.nodeId = null; queueIndex = 0; extraIndex = false; extraIds = []; localAttempts = {}; view.sessionProgress = {completed:0,total:queue.length}; beginSession(); loadActivity(queue[0]); }
       } else if (event.type.startsWith('audio-')) handleAudio(event);
       else if (event.type === 'retry-audio' && ['blocked', 'failed'].includes(view.audio?.status)) play(view.audio.sequence, view.audio.purpose);
       else if (event.type === 'pause' && view.audio?.status === 'playing') { view.audio.status = 'paused'; effects.push({ type: 'pause-audio' }); }

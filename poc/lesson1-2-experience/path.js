@@ -104,7 +104,11 @@
     const run = () => {
       const result = runtime.dispatch(event);
       // Typing must not replace the focused input, move its caret or interrupt IME.
-      if (['challenge-input','challenge-save-draft','placement-input'].includes(event.type) && !result.view.saveState) {
+      if (event.type === 'session-visibility') {
+        // Clock-only updates must preserve the input node, caret, IME and the
+        // one-shot celebration animation when the browser loses/regains focus.
+        lastView = result.view;
+      } else if (['challenge-input','challenge-save-draft','placement-input'].includes(event.type) && !result.view.saveState) {
         const placing=event.type==='placement-input';
         const check = root.querySelector(placing?'[data-action="placement-check"]':'[data-action="challenge-check"]');
         if (check) check.disabled = !(placing?result.view.placementAnswer:result.view.challengeAnswer)?.trim();
@@ -230,6 +234,7 @@
     if (history) history.scrollTop = history.scrollHeight;
   });
   global.document.addEventListener('visibilitychange', () => {
+    send({ type: 'session-visibility', hidden: global.document.hidden });
     if (global.document.hidden && lastView?.audio?.status === 'playing') send({ type: 'pause' });
   });
   render(runtime.snapshot());

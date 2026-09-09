@@ -31,6 +31,29 @@
       return `<div class="lp-notice" role="status"><p>${escape(v.audio.status === 'blocked' ? c.audioBlocked : c.audioFailed)}</p>${button('retry-audio', c.audioRetry, { symbol: 'volume-up-fill', className: 'lp-quiet' })}</div>`;
     }
     function footer(v, body) { return `<footer class="lp-footer">${audioNotice(v)}<div class="lp-footer-inner">${body}</div></footer>`; }
+    function sessionMetrics(v) {
+      const s = v.settlement, text = unit.settlement || {};
+      if (!s) return [];
+      const seconds = Math.floor(s.elapsedMs / 1000);
+      const duration = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+      return [
+        { label: text.questions || '完成题目', value: s.completed, symbol: 'check-circle-fill' },
+        { label: s.assessed ? text.streak || '最佳连对' : text.listened || '听过词句', value: s.assessed ? `×${s.bestStreak}` : s.heard, symbol: s.assessed ? 'record-circle-fill' : 'volume-up-fill', asset: s.assessed ? text.metricAssets?.streak : null },
+        { label: text.time || '本次用时', value: duration, symbol: unit.icons.clock ? 'clock' : 'arrow-clockwise', asset: text.metricAssets?.time }
+      ];
+    }
+    function settlement(v, { title, message, context = '', metrics = sessionMetrics(v), secondary = '', passed = true }) {
+      const metricArt = m => m.asset || (m.symbol === 'check-circle-fill' && unit.settlement?.metricAssets?.completed);
+      const art = passed && unit.settlement?.celebrationAsset
+        ? `<img class="lp-settlement-mascot" src="${escape(unit.settlement.celebrationAsset)}" alt="开心庆祝的探险猫" width="260" height="260" decoding="async">`
+        : image('explorer-cat', 'lp-settlement-mascot');
+      return `<section class="lp-celebration lp-settlement${passed ? ' is-passed' : ' is-failed'}" aria-labelledby="settlement-title">
+        <div class="lp-settlement-hero">${art}</div>
+        <div class="lp-settlement-copy">${context ? `<p class="lp-settlement-context">${escape(context)}</p>` : ''}<h1 id="settlement-title" tabindex="-1" data-lesson-title>${escape(title)}</h1><p class="lp-settlement-message">${escape(message)}</p></div>
+        <dl class="lp-settlement-stats" aria-label="${v.mode === 'summary' ? '全部学习记录' : v.screen === 'placement-result' ? '本次跳级测试表现' : '本次练习表现'}">${metrics.map((m, i) => `<div class="lp-settlement-stat stat-${i}"><dt>${escape(m.label)}</dt><dd${String(m.value).length > 4 ? ' class="has-long-value"' : ''}>${metricArt(m) ? `<img class="lp-settlement-metric-art" src="${escape(metricArt(m))}" alt="" width="36" height="36">` : icon(m.symbol)}<span data-settlement-value>${escape(m.value)}</span></dd></div>`).join('')}</dl>
+        ${secondary ? `<div class="lp-settlement-secondary">${secondary}</div>` : ''}
+      </section>${footer(v, button('map', c.seePath, {className:'lp-primary lp-settlement-return'}))}`;
+    }
     function chatLine(ref, v, { actorId = null, interactive = false, content = null, blank = false, current = false } = {}) {
       const source = unit.sources[ref];
       const actor = actorId || unit.sourceActors?.[ref] || (source.speaker === 'woman' ? 'handbag-owner' : 'station-keeper');
@@ -163,8 +186,9 @@
         return `${header(v,'输入挑战')}<section class="lp-lesson lp-challenge-intro">${image('explorer-cat')}<p class="lp-kicker">${escape(challenge.lessonLabel)} · 选做</p><h1 tabindex="-1" data-lesson-title>${escape(challenge.title)}</h1><p>填单词，写整句。试试不用选项提示。</p><p class="lp-challenge-count">${progress.answers.length} / ${challenge.questions.length} 题</p>${progress.answers.length || progress.draft ? button('reset-request',finished ? '再挑战一次' : '重新开始',{scope:'challenge',id:challenge.id,className:'lp-secondary'}) : ''}</section>${footer(v,finished ? button('map',c.seePath,{className:'lp-primary'}) : button('challenge-start',progress.answers.length || progress.draft ? '继续挑战' : '开始挑战',{className:'lp-primary'}))}`;
       }
       if (v.screen === 'challenge-complete') {
-        const independent = progress.answers.filter(answer => answer.evidence === 'independent').length;
-        return `${header(v,'输入挑战')}<section class="lp-celebration">${image('explorer-cat')}<p class="lp-kicker">${escape(challenge.lessonLabel)}</p><h1 tabindex="-1" data-lesson-title>输入挑战完成！</h1><div class="lp-challenge-result"><strong>${independent} / ${challenge.questions.length}</strong><span>独立完成</span>${independent < challenge.questions.length ? `<p>${challenge.questions.length-independent} 题借助了提示</p>` : ''}</div>${button('reset-request','再挑战一次',{scope:'challenge',id:challenge.id,className:'lp-secondary'})}</section>${footer(v,button('map',c.seePath,{className:'lp-primary',symbol:'arrow-right'}))}`;
+        return settlement(v, {title:unit.settlement?.challengeTitle || '输入挑战完成！', context:challenge.lessonLabel,
+          message:v.settlement?.independent ? `本次独立答对 ${v.settlement.independent} 题，做得好！` : '练习完成，再试会更熟练。',
+          secondary:button('reset-request','再挑战一次',{scope:'challenge',id:challenge.id,className:'lp-quiet'})});
       }
       const q = challenge.questions[v.challengeIndex], feedback = v.feedback;
       const inputAttrs = `data-challenge-input data-question-id="${q.id}" data-challenge-id="${challenge.id}" lang="en" aria-label="${q.kind === 'gap' ? '填入缺少的单词' : '英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback ? ' readonly' : ''}`;
@@ -189,7 +213,13 @@
       }
       if(v.screen==='placement-result') {
         const passed=attempt.status==='passed';
-        return `${top}<section class="lp-lesson lp-placement-intro ${passed?'is-passed':'is-failed'}">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>${passed?'跳级成功！':'这次还没通过'}</h1><p class="lp-placement-description">${passed?'已解锁 '+escape(label)+'<br>回到路线，开始新的探险':'已答错 5 题，课程进度保持不变<br>先练一练，再来挑战'}</p><div class="lp-placement-score"><strong>${attempt.responses.length-wrong} / ${attempt.responses.length}</strong><span>答对题数</span></div></section>${footer(v,`<div class="lp-placement-actions">${button('map','回到路线',{className:'lp-primary'})}${!passed?button('placement-retry','再试一次',{className:'lp-quiet'}):''}</div>`)}`;
+        let streak=0,best=0;
+        for(const response of attempt.responses){streak=response.correct?streak+1:0;best=Math.max(best,streak);}
+        return settlement(v,{passed,context:label,title:passed?'跳级成功！':'这次还没通过',
+          message:passed?`已解锁 ${label}，开始新的探险！`:'已答错 5 题，进度保留。练一练再来！',
+          metrics:[{label:'答对题数',value:`${attempt.responses.length-wrong}/${attempt.responses.length}`,symbol:'check-circle-fill'},
+            {label:'最佳连对',value:`×${best}`,symbol:'record-circle-fill',asset:unit.settlement?.metricAssets?.streak},{label:'剩余机会',value:remaining,symbol:'heart'}],
+          secondary:passed?'':button('placement-retry','再试一次',{className:'lp-quiet'})});
       }
       const q=config.questions.find(q=>q.id===attempt.questionIds[attempt.cursor]), feedback=v.feedback;
       const attrs=`data-placement-input data-attempt-id="${escape(attempt.id)}" data-question-id="${escape(q.id)}" lang="en" aria-label="${q.kind==='gap'?'填入缺少的单词':q.answerType==='word'?'英文单词':'英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback?' readonly':''}`;
@@ -206,23 +236,18 @@
       else if (['challenge-intro','challenge','challenge-complete'].includes(v.screen)) html = renderChallenge(v);
       else if (['placement-intro','placement','placement-result'].includes(v.screen)) html = renderPlacement(v);
       else if (v.screen === 'celebration' || v.screen === 'review-complete') {
-        const node = unit.nodes.find(n => n.id === v.nodeId), done = v.nodes.every(n => n.done);
-        const results = Object.values(v.record.results).filter(r => done || !node || unit.activities[r.activityId].nodeId === node.id);
-        const groups = new Map();
-        for (const result of results) {
-          const evidence = unit.activities[result.activityId].assessment;
-          const key = evidence.skill + ':' + evidence.scope;
-          const group = groups.get(key) || { label: evidence.label, practice: evidence.scope === 'practice', count: 0, first: 0, helped: 0, modeled: 0 };
-          group.count++;
-          group[result.initialEvidence === 'independent' ? 'first' : result.initialEvidence === 'modeled' ? 'modeled' : 'helped']++;
-          groups.set(key, group);
-        }
-        const outcome = results.length ? `<dl class="lp-evidence-summary">${[...groups.values()].map(group => `<div><dt>${escape(group.label)}</dt><dd>${group.practice ? `${group.count} ${escape(c.practiceGroupUnit)}` : `${escape(c.firstTry)} ${group.first}${group.helped ? ` · ${escape(c.helpedTry)} ${group.helped}` : ''}${group.modeled ? ` · ${escape(c.needsPracticeLabel)} ${group.modeled}` : ''}`}</dd></div>`).join('')}</dl>` : '';
-        const homeScene = node?.completionScene === 'home' ? `<div class="lp-home-scene">${image('car')}${image('handbag-owner')}${image('house')}</div>` : image('explorer-cat');
-        const detail = unit.courseId && outcome ? `<details class="lp-completion-details"><summary>学习记录</summary>${outcome}</details>` : outcome;
-        const challenge = unit.challenges?.find(item => item.nodeIds.includes(node?.id));
-        const label = v.screen === 'review-complete' ? c.reviewTitle : node ? `${c.nodePrefix} ${unit.nodes.indexOf(node)+1} ${c.nodeSuffix}` : c.learningPath;
-        html = `${header(v,label)}<section class="lp-celebration">${homeScene}<p class="lp-kicker">${escape(v.mode === 'repeat' ? c.repeatNotice : c.lessonLabel)}</p><h1>${escape(v.screen === 'review-complete' ? c.reviewDone : v.mode === 'summary' || done && node === unit.nodes.at(-1) ? c.completedTitle : node.completionTitle)}</h1>${['main','summary'].includes(v.mode) ? detail : ''}<div class="lp-saved-progress">${icon('check-circle-fill')} ${v.screen === 'review-complete' ? '本次复习完成' : '本关完成'}</div>${challenge && v.screen === 'celebration' ? button('open-challenge','试试输入挑战',{id:challenge.id,className:'lp-secondary lp-challenge-entry'}) : ''}</section>${footer(v, button('map', c.seePath, { className: 'lp-primary', symbol: 'arrow-right' }))}`;
+        const node = unit.nodes.find(n => n.id === v.nodeId), text = unit.settlement || {};
+        const review = v.screen === 'review-complete', repeat = v.mode === 'repeat', summary = v.mode === 'summary';
+        const chapter = unit.chapters?.find(ch => ch.id === node?.chapterId);
+        const context = summary ? c.lessonLabel : chapter ? 'Lesson ' + chapter.lessonIds.join(' & ') : review ? c.reviewTitle : c.lessonLabel;
+        const challenge = !review && !summary && unit.challenges?.find(item => item.nodeIds.includes(node?.id));
+        const title = summary ? c.completedTitle : review ? text.reviewTitle || c.reviewDone : repeat ? text.repeatTitle || '越练越熟练！' : text.completedTitle || '闯关完成！';
+        const message = summary ? '每一步努力，都值得记住。' : review ? text.reviewMessage : repeat ? text.repeatMessage : text.completedMessage;
+        html = settlement(v, {title, context, message:message || '又前进了一步，做得好！',
+          ...(summary ? {metrics:[{label:'完成关卡',value:v.nodes.filter(n=>n.done).length,symbol:'check-circle-fill'},
+            {label:'学过课程',value:unit.lessonIds?.length || 2,symbol:'book'},
+            {label:'完成挑战',value:Object.values(v.record.challenges || {}).filter(p=>p.completedAt).length,symbol:'star-fill'}]} : {}),
+          secondary:challenge ? button('open-challenge','试试输入挑战',{id:challenge.id,className:'lp-quiet lp-challenge-entry'}) : ''});
       } else {
         const a = unit.activities[v.activityId], node = unit.nodes.find(n => n.id === v.nodeId);
         const label = node ? `${c.nodePrefix} ${unit.nodes.indexOf(node) + 1} ${c.nodeSuffix}` : c.reviewTitle;
@@ -256,7 +281,7 @@
       }
       // Keep the package loader's existing ready-surface contract without
       // loading or coupling this renderer to V2's scene and styles.
-      return `<div class="station-app lp-shell${unit.courseId ? ' lp-course' : ''}${unit.journey && v.screen === 'map' ? ' has-journey' : ''}">${html}</div>`;
+      return `<div class="station-app lp-shell${unit.courseId ? ' lp-course' : ''}${unit.journey && v.screen === 'map' ? ' has-journey' : ''}${['celebration','review-complete','challenge-complete','placement-result'].includes(v.screen) ? ' has-settlement' : ''}">${html}</div>`;
     }
     return Object.freeze({ render });
   }

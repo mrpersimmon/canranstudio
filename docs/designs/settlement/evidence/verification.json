@@ -1,0 +1,122 @@
+{
+  "date": "2026-09-09",
+  "branch": "codex/duolingo-version",
+  "scope": "local implementation, no commit, push or deployment",
+  "status": "passed",
+  "unit": {
+    "initialSuite": {
+      "total": 108,
+      "passed": 105,
+      "failed": 3,
+      "reason": "Old completion-layout assertions; updated for the selected reference without weakening progression or readability checks."
+    },
+    "finalFocused": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "finalFullCourseSummary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "walksAllMainlineNodes": 354
+    },
+    "wholeSuiteRepeated": false
+  },
+  "nativeBrowser": {
+    "origin": "http://127.0.0.1:42862/",
+    "usedRealStorage": true,
+    "usedNativeAudio": true,
+    "resumedLesson": "K01",
+    "newSteps": 2,
+    "bestStreak": 1,
+    "elapsed": "0:34",
+    "returnsToMap": true,
+    "startsNextLessonAutomatically": false,
+    "consoleErrors": []
+  },
+  "keyboard": {
+    "normalTabDestination": "回到路线",
+    "normalReturnKey": "map",
+    "failureTabOrder": [
+      "再试一次",
+      "回到路线"
+    ],
+    "buttonFocusOutline": "3px solid rgb(73, 192, 248)"
+  },
+  "reducedMotion": {
+    "tested": true,
+    "computedAnimationName": "none",
+    "restored": true
+  },
+  "screenshots": [
+    {
+      "file": "normal-420-final.png",
+      "sha256": "e22ac375359d9cd13c1a0339b18277893830c0ba974e5259ef65fb23430a6e47"
+    },
+    {
+      "file": "challenge-320-final.png",
+      "sha256": "4d99e049c5228f1dbdb829725c37ed3d8b94862d0d8f3aba3630bfea53535976"
+    },
+    {
+      "file": "review-906-final.png",
+      "sha256": "50db3b033fca2edb3099c03121ddb9541519687fd0df028e56d533bd26715d51"
+    },
+    {
+      "file": "normal-1440-final.png",
+      "sha256": "f1ff9a20361304d2d0b5c986bde481d12fa8fedd93be45c6372fc9d2da73ec44"
+    },
+    {
+      "file": "placement-passed-420-final.png",
+      "sha256": "260660c3ca2741883b971ec10f4c37b60c25e4c9bca8396316f3550571b7d634"
+    },
+    {
+      "file": "placement-failed-420-final.png",
+      "sha256": "22f25f83ac25feccda15bb199d4ac238832aad979c61147376ae362336efec71"
+    },
+    {
+      "file": "actual-resumed-completion.png",
+      "sha256": "21d2c5ca2e805f03136388ef645bcf110151702f7c01187daa2e402038596b9f"
+    }
+  ],
+  "browser": {
+    "status": "passed",
+    "finishedAt": "2026-09-08T18:32:22.715Z",
+    "fingerprint": "33e9406b2d73e1054a18b9fe5f34d3ea8f7fb9c134ae881dce533248f7e38e8e",
+    "renderedStates": 40864,
+    "countsByViewport": {
+      "1440x900": 10216,
+      "320x568": 10216,
+      "420x856": 10216,
+      "906x801": 10216
+    },
+    "pageViolations": 0,
+    "failures": [],
+    "caughtFaultCategories": [
+      "completion-button-offscreen",
+      "completion-skips-map",
+      "covered-sticky-title",
+      "dark-multiply",
+      "low-contrast-sticky-title",
+      "missing-image",
+      "off-center-arrow",
+      "opaque-art",
+      "placement-answer-type-mismatch",
+      "placement-heart-mismatch",
+      "route-progress-in-lesson",
+      "scrollbar-width-overflow",
+      "settlement-historical-total",
+      "settlement-lesson-header",
+      "theme-discontinuity",
+      "uneven-node-spacing",
+      "white-on-light"
+    ],
+    "allFaultInjectionsCaught": true,
+    "previousFailedRun": "guard-state-failure.json"
+  },
+  "verifyVisual": {
+    "status": "passed",
+    "message": "Browser readability proof valid: 40864 states",
+    "fingerprint": "33e9406b2d73e1054a18b9fe5f34d3ea8f7fb9c134ae881dce533248f7e38e8e"
+  }
+}
