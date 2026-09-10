@@ -56,6 +56,9 @@ async function main(){
           // Reopen the graded question. Stored success must remain silent.
           await page.reload();await page.locator('.journey-app').waitFor();
           await page.locator('[data-action="open-placement"][data-id="friends"]').click();await page.locator('[data-action="placement-start"]').click();
+          // Click completion can precede the controller's queued Web Lock action.
+          // Wait for restored feedback before counting it or checking silence.
+          await page.locator('.lp-feedback-success').waitFor({state:'visible'});
           assert.equal(await page.locator('.lp-feedback-success').count(),1);
           assert.equal(await page.evaluate(()=>observedAudio.filter(e=>e.src.includes('/feedback/')).length),0);
           await context.setOffline(false);
