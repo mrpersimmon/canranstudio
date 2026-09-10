@@ -1,6 +1,8 @@
 # 探险猫 · 猫猫小镇
 
-`codex/duolingo-version` 是当前 Duolingo 理念重构版的独立开发分支：新概念英语第一册 Lesson 1–144 编排为 72 个教材分区、354 个连续学习关卡，包含 1,567 个学习活动、991 段原文、73 组选做输入挑战（580 题）和跨课复习。
+`codex/duolingo-version` 是当前 Duolingo 理念重构版的独立开发分支：新概念英语第一册 Lesson 1–144 编排为 72 个教材分区、354 个连续学习关卡，包含 1,573 个学习活动、991 段原文、73 组选做输入挑战（580 题）和跨课复习。
+
+v6.1 加入旧记录兼容与恢复、统一审核答案、输入与地图性能优化，以及 Lesson 49–50 的六个主线语法输入任务和三类延后新句。实施边界、当前验收及全册待补齐项目见 [评审修复记录](docs/designs/review-repair-20260909/README.md)。
 
 设计与实现以 [Duolingo 设计原则](docs/design-principles.md) 为首要依据；课程、题型、界面、交互与动效拿不准时，先查用户参考图或 Duolingo 实际做法。
 
@@ -25,6 +27,7 @@ npm run dev
 | `content/textbook-sources.json` | 第一册原文及对应教材 PDF 页码，用于防止重构时改变教材原句 |
 | `content/expansion/` | 原文、中文释义、逐课蓝图与编译来源；前六课保留 fac029f 基线 |
 | `content/book1/` | Lesson 51–144 原文、中文注释、教学与挑战蓝图、发音表、美术出处 |
+| `content/grammar/`、`content/history/` | 语法试点题目与不可重写的已发布历史评分契约 |
 | `core/` | 当前课程校验、路径运行、场景呈现、进度保存与课程包加载 |
 | `poc/learning-path/` | 当前 HTML 入口、附加样式、新猫猫素材及生成的课程包 |
 | `poc/lesson1-2-experience/` | 当前仍使用的共享页面、样式、猫猫和录音资源 |
@@ -40,8 +43,10 @@ npm run dev
 ```bash
 npm run test:media
 npm run test:browser-media
+npm run test:review-browser
 npm run test:browser
 npm run verify
+node scripts/check-course-storage.js
 ```
 
 音频检查需要 ffmpeg。以上流程先完整解码录音，再用原生浏览器验证播放、缓存与旧记录，随后检查四种尺寸中的每个活动；最后一个命令重建课程包、运行当前范围测试，并检查与当前代码绑定的浏览器可读性证据，然后生成 `dist/learning-path/`。发布过程要求所有输入与 Git HEAD 一致，因此修改和重新生成后应先提交，再运行完整发布验证；平时可先单独执行 `npm run build:course` 与 `npm test`。

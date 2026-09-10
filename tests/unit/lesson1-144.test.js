@@ -2,6 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const unit=require('../../content/learning-course.json'),preserved=require('../../content/expansion/lesson1-50-preservation.json');
 const {setup}=require('./support/course-harness');
+const {priorItem,priorCourse}=require('./support/review-history');
 test('learner notes keep language explanations separate from authoring and implementation instructions',()=>{
   const notes=Object.values(unit.sources).filter(s=>s.lessonId>50&&s.sourceKind==='course-note');
   assert.ok(notes.length>=47);
@@ -9,10 +10,10 @@ test('learner notes keep language explanations separate from authoring and imple
 });
 const canonical=value=>JSON.stringify(sort(value));
 function sort(value){if(Array.isArray(value))return value.map(sort);if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,sort(value[k])]));return value;}
-test('expanding to 144 does not change any first-50 node, task, answer, source or reference contract',()=>{
+test('original first-50 hashes remain intact beneath the explicitly reviewed v6.1 changes',()=>{
   for(const [field,hashes]of Object.entries(preserved)){
     const index=Array.isArray(unit[field])?Object.fromEntries(unit[field].map(x=>[x.id,x])):unit[field];
-    for(const [id,expected]of Object.entries(hashes))assert.equal(crypto.createHash('sha256').update(canonical(index[id])).digest('hex'),expected,field+'/'+id);
+    for(const [id,expected]of Object.entries(hashes))assert.equal(crypto.createHash('sha256').update(canonical(priorItem(unit,field,index[id]))).digest('hex'),expected,field+'/'+id);
   }
 });
 test('new authoring has continuous pairs, complete original stories and correct post-test PDF page offsets',()=>{
@@ -74,22 +75,22 @@ test('written answers distinguish auxiliary contractions from main verbs and mod
   const reviewed=require('../../content/book1/accepted-translations.json');
   for(const [ref,entry]of Object.entries(reviewed)){
     assert.equal(entry.canonical,unit.sources[ref].text,ref+' review matches source');
-    const translations=questions.filter(q=>q.kind==='translation'&&q.sourceRef===ref&&Number(q.id.match(/^CH(\d+)/)?.[1])>50);
+    const translations=questions.filter(q=>q.kind==='translation'&&q.sourceRef===ref);
     assert.ok(translations.length,ref+' is exercised');
     for(const q of translations)for(const answer of entry.alternatives)assert.equal(accepts(q,answer),true,q.id+' accepts reviewed '+answer);
   }
 });
 test('a finished first-50 record survives upgrade and resumes at Lesson 51 without inventing progress',()=>{
-  const oldUnit=structuredClone(unit);
-  for(const [field,hashes]of Object.entries(preserved))oldUnit[field]=Array.isArray(unit[field])?oldUnit[field].filter(x=>hashes[x.id]):Object.fromEntries(Object.entries(oldUnit[field]).filter(([id])=>hashes[id]));
-  oldUnit.lessonIds=Array.from({length:50},(_,i)=>i+1);
-  oldUnit.checkpointIds=oldUnit.nodes.flatMap(n=>n.checkpointIds);
+  const oldUnit=priorCourse(unit);
   const old=setup({unit:oldUnit});for(const node of oldUnit.nodes)old.finish(node.id);
   old.send({type:'map'});
-  const before=structuredClone(old.view().record),stored=JSON.stringify(old.adapter.load(old.rt.storageKey));
+  const before=structuredClone(old.view().record),stored=old.adapter.inspect(old.rt.storageKey).raw;
   const upgraded=setup({adapter:old.adapter});
-  assert.deepEqual(upgraded.view().record,before);
-  assert.equal(JSON.stringify(old.adapter.load(old.rt.storageKey)),stored);
+  const migrated=structuredClone(upgraded.view().record);
+  for(const result of Object.values(migrated.results))delete result.contractVersion;
+  for(const field of ['completed','results','attempts','storyProgress','teachingProgress','challenges'])assert.deepEqual(migrated[field],before[field],field);
+  assert.equal(old.adapter.inspect(old.rt.storageKey).migration,stored);
+  for(const id of unit.grammar.activityIds)assert.equal(migrated.completed[id],undefined);
   assert.equal(upgraded.view().completedCount,129);
   assert.equal(upgraded.view().nodes.find(x=>x.id==='L51-STORY').available,true);
   assert.equal(upgraded.view().nodes.find(x=>x.id==='L53-STORY').available,false);

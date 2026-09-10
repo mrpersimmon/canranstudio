@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "scope": "Local implementation and automated/browser validation; no commit, push or deployment.",
+  "branch": "codex/duolingo-version",
+  "baseCommit": "68728442524e9aeb7052b7c643cfbcd6b2070fd3",
+  "release": "lesson1-144-v6.1",
+  "recordSchema": 4,
+  "contractVersion": 2,
+  "sourceManifestSha256": "e7ac0b45faaa62290e46cb516ed28ba34e7e76a0985f259eab9299162dbf0856",
+  "rootManifestSha256": "8fb8537f39bfecf28868a5703fea293b625591847072c283960a85c989fbc75a",
+  "fingerprint": "4bafa9fbf69fa08a7cd0371a988bd67a60148b10b346cb7b9bf58580fe7c8540",
+  "finishedAt": "2026-09-09T07:39:54.945Z",
+  "unitTests": {
+    "passed": 132,
+    "failed": 0,
+    "skipped": 0,
+    "targetedRegressions": 22
+  },
+  "browser": {
+    "states": 40960,
+    "viewports": [
+      {
+        "viewport": [
+          320,
+          568
+        ],
+        "states": 10240,
+        "mainlineActivities": 1573,
+        "challengeQuestions": 580,
+        "violations": 0
+      },
+      {
+        "viewport": [
+          420,
+          856
+        ],
+        "states": 10240,
+        "mainlineActivities": 1573,
+        "challengeQuestions": 580,
+        "violations": 0
+      },
+      {
+        "viewport": [
+          906,
+          801
+        ],
+        "states": 10240,
+        "mainlineActivities": 1573,
+        "challengeQuestions": 580,
+        "violations": 0
+      },
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "states": 10240,
+        "mainlineActivities": 1573,
+        "challengeQuestions": 580,
+        "violations": 0
+      }
+    ],
+    "negativeControlTypes": 17,
+    "negativeControlCases": 68,
+    "allNegativeControlsCaught": true
+  },
+  "audio": {
+    "decoded": 2823,
+    "nativeEnded": 31,
+    "manualAllRecordingListening": false
+  },
+  "startup": {
+    "resources": 74,
+    "bytes": 3462429
+  },
+  "releaseBuild": {
+    "status": "blocked-by-uncommitted-inputs",
+    "message": "Release input differs from HEAD: poc/learning-path/course-package-manifest.json"
+  }
+}

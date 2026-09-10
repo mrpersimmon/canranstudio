@@ -5,6 +5,7 @@
 - [首要设计原则：以 Duolingo 为基准](design-principles.md)：所有题型、UI、交互和动效设计的必读入口；拿不准时先核对实际产品。
 
 - [页面可读性防护网与回归规则](designs/readability-guard/README.md)：主题切换、文字和图片、按钮遮挡、发布拦截。
+- [2026-09-09 评审修复与验证](designs/review-repair-20260909/README.md)：历史契约、记录恢复、公平判题、语法试点、输入与地图性能、离线重开，以及全册待补齐范围。
 - [前 50 课实施与验收](designs/lesson1-50/README.md)：25 个教材分区、129 关、课程覆盖、美术与音频出处、扩课修复记录。
 - [完整第一册 Lesson 1–144](designs/lesson1-144/README.md)：72 个分区、354 关、完整课文、正常语速录音、选做挑战、历史记录兼容与加载扩容。
 - [前六课基线设计与实现边界](designs/lesson1-6-path-v4/implementation.md)：前六课的 11 个节点、题目公平性、手动语音、进度与复习规则。

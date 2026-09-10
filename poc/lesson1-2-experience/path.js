@@ -7,7 +7,7 @@
   if (unit?.runtimeProfile !== 'learning-path-v3') throw new Error('V3 catalog required');
   let storage;
   try { storage = global.localStorage; } catch { storage = { getItem() { throw new Error('storage unavailable'); } }; }
-  const runtime = core.learningPathRuntime.createRuntime({ unit, adapter: core.learningStore.createLocalStorageAdapter(storage) });
+  const runtime = core.learningPathRuntime.createRuntime({ unit, deferRead:true, adapter: core.learningStore.createLocalStorageAdapter(storage) });
   const renderer = core.learningPathScene.createRenderer(unit);
   let media = null, mediaToken = 0, lastView = null, work = Promise.resolve();
   let journeyUI = { tab: 'path', selectedNodeId: null };
@@ -23,6 +23,29 @@
     if(view.completedCount>0||bounds.bottom>bottom-16||bounds.top<60)element.scrollIntoView({block:'center',behavior:'instant'});
   }
   function stop() { mediaToken++; if (media) { media.pause(); media.removeAttribute('src'); media.load(); media = null; } }
+  // Reconcile a stable activity in place: selecting a word or receiving an
+  // audio event must not recreate its controls and restart unrelated images.
+  function reconcile(current, next) {
+    if(current.nodeType!==next.nodeType || current.nodeName!==next.nodeName){current.replaceWith(next);return;}
+    if(current.nodeType===3){if(current.nodeValue!==next.nodeValue)current.nodeValue=next.nodeValue;return;}
+    if(current.nodeType!==1)return;
+    for(const attr of [...current.attributes])if(!next.hasAttribute(attr.name))current.removeAttribute(attr.name);
+    for(const attr of [...next.attributes])if(current.getAttribute(attr.name)!==attr.value)current.setAttribute(attr.name,attr.value);
+    if(current.matches('input,textarea')){
+      if(current!==global.document.activeElement || !composing)if(current.value!==next.value)current.value=next.value;
+      return;
+    }
+    const key=node=>node.nodeType===1?(node.id || (node.dataset.action ? node.dataset.action+':'+(node.dataset.id || '') : null)):null;
+    let index=0;
+    for(const child of [...next.childNodes]){
+      let old=current.childNodes[index],wanted=key(child);
+      if(wanted && key(old || {})!==wanted){const match=[...current.childNodes].slice(index).find(node=>key(node)===wanted);if(match){current.insertBefore(match,old || null);old=match;}else {current.insertBefore(child,old || null);index++;continue;}}
+      if(old)reconcile(old,child);else current.append(child);
+      index++;
+    }
+    while(current.childNodes.length>index)current.lastChild.remove();
+  }
+  let composing=false;
   function render(view) {
     const active = global.document.activeElement;
     const action = active?.dataset?.action, id = active?.dataset?.id;
@@ -33,7 +56,11 @@
     const previousHistory = root.querySelector('.lp-story-transcript');
     const historyScroll = previousHistory?.scrollTop || 0;
     const historyAtBottom = previousHistory && previousHistory.scrollHeight - historyScroll - previousHistory.clientHeight < 8;
-    root.innerHTML = renderer.render({ ...view, journeyUI });
+    const html=renderer.render({ ...view, journeyUI });
+    if(!changed && root.firstElementChild && view.screen==='activity' && !previousModal && !view.saveState){
+      const template=global.document.createElement('template');template.innerHTML=html;
+      if(root.firstElementChild)reconcile(root.firstElementChild,template.content.firstElementChild);else root.innerHTML=html;
+    }else root.innerHTML=html;
     if (unit.journey) {
       global.document.documentElement.classList.toggle('journey-theme', view.screen === 'map');
       global.document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#141f23');
@@ -78,6 +105,10 @@
     lastView = view;
   }
   function playEffect(effect) {
+    if (effect.type === 'export-record') {
+      const url=URL.createObjectURL(new Blob([effect.content],{type:'application/json'}));
+      const link=global.document.createElement('a');link.href=url;link.download='canran-learning-record.json';link.click();global.setTimeout(()=>URL.revokeObjectURL(url),1000);return;
+    }
     if (effect.type === 'stop-audio') { stop(); return; }
     if (effect.type === 'pause-audio') { media?.pause(); return; }
     if (effect.type === 'resume-audio') {
@@ -102,22 +133,24 @@
     if (event.type === 'map') journeyUI = { tab: 'path', selectedNodeId: null };
     if (['open-node', 'references', 'review', 'open-challenge','open-placement','reset-confirm'].includes(event.type)) journeyUI.selectedNodeId = null;
     const run = () => {
-      const result = runtime.dispatch(event);
+      const result = runtime.dispatch(event,{light:true});
       // Typing must not replace the focused input, move its caret or interrupt IME.
       if (event.type === 'session-visibility') {
         // Clock-only updates must preserve the input node, caret, IME and the
         // one-shot celebration animation when the browser loses/regains focus.
         lastView = result.view;
-      } else if (['challenge-input','challenge-save-draft','placement-input'].includes(event.type) && !result.view.saveState) {
+      } else if (['challenge-input','challenge-save-draft','placement-input','activity-input'].includes(event.type) && !result.view.saveState) {
         const placing=event.type==='placement-input';
-        const check = root.querySelector(placing?'[data-action="placement-check"]':'[data-action="challenge-check"]');
-        if (check) check.disabled = !(placing?result.view.placementAnswer:result.view.challengeAnswer)?.trim();
+        const writing=event.type==='activity-input';
+        const check = root.querySelector(writing?'[data-action="check"]':placing?'[data-action="placement-check"]':'[data-action="challenge-check"]');
+        if (check) check.disabled = !(writing?result.view.inputAnswer:placing?result.view.placementAnswer:result.view.challengeAnswer)?.trim();
         lastView = result.view;
       } else render(result.view);
       result.effects.forEach(playEffect);
     };
     // Serialize callbacks and clicks, then use the same lock across tabs before
     // the store's revision check and verified write.
+    if (['challenge-input','placement-input','activity-input'].includes(event.type)) {run();return Promise.resolve();}
     work = work.then(() => global.navigator.locks?.request ? global.navigator.locks.request(runtime.storageKey, run) : run()).catch(error => {
       global.console.error('Learning path action failed', error);
       stop();
@@ -130,27 +163,29 @@
     return {attemptId:input?.dataset.attemptId,questionId:input?.dataset.questionId};
   }
   function captureDraft(input) {
+    if (input?.matches('[data-activity-input]')) {if(!input.readOnly)send({type:'activity-input',id:input.dataset.activityId,value:input.value});return;}
     if (input?.matches('[data-placement-input]')) {
       if (!input.readOnly) send({type:'placement-input',value:input.value,...placementIdentity(input)});
       return;
     }
     if (!input?.matches('[data-challenge-input]')) return;
     const event = {type:'challenge-save-draft',id:input.dataset.challengeId,questionId:input.dataset.questionId};
-    send({type:'challenge-input',value:input.value});
-    global.clearTimeout(draftTimer);
-    draftTimer = global.setTimeout(() => send(event),300);
+    send({type:'challenge-input',value:input.value,questionId:input.dataset.questionId});
   }
   root.addEventListener('input', event => { if (!event.isComposing) captureDraft(event.target); });
-  root.addEventListener('compositionend', event => captureDraft(event.target));
+  root.addEventListener('compositionstart',()=>{composing=true;});
+  root.addEventListener('compositionend', event => {composing=false;captureDraft(event.target);});
   root.addEventListener('click', event => {
     const lessonLink=event.target.closest('.journey-lesson-index a[href^="#chapter-"]');
     if (lessonLink && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       // Collapse the directory before native fragment navigation measures the
       // destination. The section's scroll margin keeps its jump button clear
       // of the sticky statistics and Lesson banner.
-      lessonLink.closest('details').open=false;
+      event.preventDefault();
+      journeyUI.chapterId=lessonLink.hash.slice('#chapter-'.length);journeyUI.selectedNodeId=null;
+      render(runtime.snapshot());
       const heading=global.document.getElementById(lessonLink.hash.slice(1))?.querySelector('h1');
-      if (heading) {heading.tabIndex=-1;heading.focus({preventScroll:true});}
+      if (heading) {heading.tabIndex=-1;heading.focus({preventScroll:true});heading.closest('.journey-chapter').scrollIntoView({block:'start',behavior:'instant'});}
       return;
     }
     const button = event.target.closest('button[data-action]');
@@ -164,6 +199,7 @@
         return;
       }
       if (action === 'journey-locate') {
+        journeyUI.chapterId=null;journeyUI.selectedNodeId=null;render(runtime.snapshot());
         root.querySelector('[data-journey-current]')?.scrollIntoView({ block: 'center', behavior: motion });
         root.querySelector('[data-journey-current]')?.focus({ preventScroll: true });
         return;
@@ -176,11 +212,14 @@
         global.setTimeout(() => { companion.classList.remove('is-waving'); companion.querySelector('.journey-greeting').hidden = true; }, 1700);
         return;
       }
+      if(action==='journey-section'){journeyUI.chapterId=id;journeyUI.selectedNodeId=null;}
+      if(action==='journey-expand')journeyUI.expanded=!journeyUI.expanded;
       const previousId = journeyUI.selectedNodeId;
       if (action === 'journey-nav') journeyUI = { tab: id, selectedNodeId: null };
       if (action === 'preview-node') journeyUI.selectedNodeId = previousId === id ? null : id;
       if (action === 'journey-close') journeyUI.selectedNodeId = null;
       render(runtime.snapshot());
+      if(action==='journey-section')root.querySelector('#chapter-'+id)?.scrollIntoView({block:'start',behavior:'instant'});
       if (action === 'journey-nav') {
         global.scrollTo({ top: 0, behavior: 'instant' });
         root.querySelector('[data-lesson-title]')?.focus({ preventScroll: true });
@@ -196,11 +235,13 @@
       send({type:'challenge-input',value:input.value});
       if (button.dataset.action === 'map') send({type:'challenge-save-draft',id:input.dataset.challengeId,questionId:input.dataset.questionId});
     }
+    const writtenInput=root.querySelector('[data-activity-input]');if(writtenInput)captureDraft(writtenInput);
     const placementInput=root.querySelector('[data-placement-input]');
     if (placementInput) captureDraft(placementInput);
     send({ type: button.dataset.action, id: button.dataset.id, nodeId: button.dataset.id,scope:button.dataset.scope || button.dataset.id,...placementIdentity(placementInput) });
   });
   root.addEventListener('keydown', event => {
+    if(event.target?.matches?.('[data-activity-input]') && event.key==='Enter'&&!event.shiftKey&&!event.isComposing&&event.keyCode!==229&&!event.repeat){event.preventDefault();if(!event.target.readOnly){captureDraft(event.target);send({type:'check'});}return;}
     if (event.target?.matches?.('[data-placement-input]') && event.key==='Enter' && !event.shiftKey && !event.isComposing && event.keyCode!==229 && !event.repeat) {
       event.preventDefault();
       if (!event.target.readOnly) { captureDraft(event.target);send({type:'placement-check',...placementIdentity(event.target)}); }
@@ -237,5 +278,7 @@
     send({ type: 'session-visibility', hidden: global.document.hidden });
     if (global.document.hidden && lastView?.audio?.status === 'playing') send({ type: 'pause' });
   });
-  render(runtime.snapshot());
+  // Loading can migrate a historical record. Use the same cross-tab lock as
+  // every later commit before the first record is read or written.
+  send({type:'reload'});
 })(globalThis);

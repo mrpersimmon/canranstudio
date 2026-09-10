@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "name": "windowed-map",
+      "sections": 2,
+      "nodes": 6
+    },
+    {
+      "name": "durable-draft",
+      "keystrokes": 23,
+      "fullRecordWrites": 0,
+      "maxJournalBytes": 127
+    },
+    {
+      "name": "offline-reload-new-page-and-audio-range",
+      "passed": true
+    },
+    {
+      "name": "export-and-backup-restore",
+      "passed": true
+    },
+    {
+      "name": "offline-browser-process-restart-and-record-restore",
+      "passed": true
+    },
+    {
+      "name": "pilot-ui-L49:grammar-s",
+      "passed": true,
+      "buttonBounds": {
+        "top": 499,
+        "bottom": 555,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-correct",
+      "passed": true,
+      "buttonBounds": {
+        "top": 499,
+        "bottom": 555,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-question",
+      "passed": true,
+      "buttonBounds": {
+        "top": 498.5625,
+        "bottom": 554.5625,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-s",
+      "passed": true,
+      "buttonBounds": {
+        "top": 499,
+        "bottom": 555,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-transfer-s",
+      "passed": true,
+      "buttonBounds": {
+        "top": 499,
+        "bottom": 555,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-transfer-base",
+      "passed": true,
+      "buttonBounds": {
+        "top": 499,
+        "bottom": 555,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-transfer-question",
+      "passed": true,
+      "buttonBounds": {
+        "top": 498.5625,
+        "bottom": 554.5625,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "pilot-ui-L49:grammar-transfer-s",
+      "passed": true,
+      "buttonBounds": {
+        "top": 499,
+        "bottom": 555,
+        "viewport": 568
+      }
+    },
+    {
+      "name": "three-delayed-grammar-inputs",
+      "questionIds": [
+        "G49-delayed-s",
+        "G49-delayed-base",
+        "G49-delayed-question"
+      ],
+      "passed": true
+    }
+  ],
+  "status": "passed"
+}

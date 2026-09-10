@@ -30,13 +30,13 @@ test('cached audio can satisfy a real Range request without touching the network
   assert.deepEqual([...new Uint8Array(await partial.arrayBuffer())], [2, 3, 4, 5]);
 });
 
-test('navigation and manifest checks bypass the active package cache', () => {
+test('navigation has a verified offline fallback while manifest and install checks bypass cache', () => {
   assert.equal(shouldBypassPackage({
     url: 'https://course.test/poc/lesson/',
     method: 'GET',
     mode: 'navigate',
     headers: new Headers()
-  }), true);
+  }), false);
   assert.equal(shouldBypassPackage(new Request(
     'https://course.test/poc/lesson/course-package-manifest.json'
   )), true);

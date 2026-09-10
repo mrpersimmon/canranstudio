@@ -120,9 +120,10 @@
     if (shell) shell.dataset.packageState = 'failed';
     if (phase) phase.textContent = phaseCopy('failed');
     if (status) {
-      status.textContent = childActionCopy
-        ? (configuredCopy.failed || phaseCopy('failed'))
-        : '连接可能中断了。已经准备好的内容会保留，可以从这里继续。';
+      const message=String(error?.message || ''),name=error?.name;
+      const category=/integrity|SHA-256|verification/i.test(message)?'integrity':/version|revision|catalog|manifest.*(?:invalid|JSON|scope)/i.test(message)?'version':/storage|quota|cache storage/i.test(message)||name==='QuotaExceededError'?'storage':/network|fetch|request failed|offline/i.test(message)?'network':'unavailable';
+      state.failureCode=category;root.dataset.packageError=category;
+      status.textContent=({integrity:'课程文件校验未通过，请重新准备。',version:'课程版本没有对齐，请重新加载。',storage:'这台设备暂时无法保存课程，请检查可用空间后重试。',network:'连接中断了，已经准备的内容会保留。',unavailable:'课程暂时无法打开，请重试。'})[category];
     }
     if (recovery) recovery.hidden = false;
     if (retryButton) retryButton.hidden = false;
@@ -177,10 +178,13 @@
       throw new Error('course-package service worker is unavailable');
     }
     const scopeUrl = new URL('./', global.location.href);
-    await global.navigator.serviceWorker.register(root.dataset.serviceWorkerUrl, {
+    try { await global.navigator.serviceWorker.register(root.dataset.serviceWorkerUrl, {
       scope: scopeUrl.pathname,
       updateViaCache: 'none'
-    });
+    }); } catch(error) {
+      const existing=await global.navigator.serviceWorker.getRegistration(scopeUrl.href);
+      if(!existing?.active || existing.scope!==scopeUrl.href)throw error;
+    }
     await global.navigator.serviceWorker.ready;
     await waitForController();
     return scopeUrl;
@@ -244,6 +248,7 @@
       state.result = await installer.prepare({
         manifestUrl: new URL(root.dataset.manifestUrl, global.location.href).href,
         expectedManifestSha256: root.dataset.manifestSha256,
+        shellUrl:scopeUrl.href,
         signal: state.abortController.signal,
         onProgress: renderProgress
       });

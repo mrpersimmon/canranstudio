@@ -180,12 +180,19 @@
     async function loadManifest(manifestUrl, expectedManifestSha256, signal) {
       invariant(/^[a-f0-9]{64}$/.test(expectedManifestSha256 || ''),
         'expected course-package manifest SHA-256 is invalid');
-      const response = await fetchImpl(new Request(manifestUrl, {
+      let response;
+      try { response = await fetchImpl(new Request(manifestUrl, {
         cache: 'no-store',
         credentials: 'same-origin',
         headers: { 'X-Course-Package-Manifest': '1' },
         signal
-      }));
+      })); } catch(error) {
+        if(signal?.aborted)throw error;
+        const pointer=await readPointer(cacheStorage,normalizedScope);
+        if(pointer?.manifestSha256!==expectedManifestSha256 || pointer.manifestUrl!==manifestUrl || !pointer.shell)throw error;
+        response=await (await cacheStorage.open(pointer.cacheName)).match(manifestUrl);
+        if(!response)throw error;
+      }
       invariant(response?.ok, `course-package manifest request failed with ${response?.status || 0}`);
       const bytes = await response.arrayBuffer();
       const actualHash = await sha256Hex(cryptoApi, bytes);
@@ -198,18 +205,39 @@
         throw new Error('course-package manifest is not valid JSON');
       }
       validateManifest(manifest, { origin: normalizedOrigin, scopeUrl: normalizedScope });
-      return { manifest, manifestSha256: actualHash };
+      return { manifest, manifestSha256: actualHash, bytes };
     }
 
     async function prepare({
       manifestUrl,
       expectedManifestSha256,
       onProgress = () => {},
+      shellUrl,
       signal
     } = {}) {
       const loaded = await loadManifest(manifestUrl, expectedManifestSha256, signal);
       const { manifest, manifestSha256 } = loaded;
       onProgress(progressSnapshot('checking', manifest, 0));
+      async function cacheBootstrap(cache, pointer) {
+        await cache.put(manifestUrl,new Response(loaded.bytes,{headers:{'Content-Type':'application/json'}}));
+        if(!shellUrl)return {manifestUrl};
+        const url=new URL(shellUrl);url.search='';url.hash='';
+        invariant(url.origin===normalizedOrigin && [new URL(normalizedScope).pathname,new URL('index.html',normalizedScope).pathname].includes(url.pathname),'course shell is outside installer scope');
+        if(pointer?.shell) {
+          const response=await cache.match(pointer.shell.url);
+          if(response){const bytes=await response.arrayBuffer();if(bytes.byteLength===pointer.shell.bytes && await sha256Hex(cryptoApi,bytes)===pointer.shell.sha256)return {manifestUrl,shell:pointer.shell};}
+        }
+        const response=await fetchImpl(new Request(url.href,{cache:'no-store',headers:{'X-Course-Package-Install':'1'},signal}));
+        invariant(response?.ok,'course shell request failed');
+        const bytes=await response.arrayBuffer(),html=new TextDecoder().decode(bytes);
+        invariant(html.includes('data-manifest-sha256="'+manifestSha256+'"'),'course shell manifest version mismatch');
+        const shell={url:normalizedScope,bytes:bytes.byteLength,sha256:await sha256Hex(cryptoApi,bytes)};
+        await cache.put(shell.url,new Response(bytes,{headers:{'Content-Type':'text/html; charset=utf-8'}}));
+        const saved=await cache.match(shell.url);
+        invariant(saved && await sha256Hex(cryptoApi,await saved.arrayBuffer())===shell.sha256,'course shell storage verification failed');
+        return {manifestUrl,shell};
+      }
+
 
       const baseCacheName = cacheNameFor(manifest, manifestSha256);
       const repairCacheName = `${baseCacheName}:repair`;
@@ -227,6 +255,8 @@
           cryptoApi
         );
         if (activeVerified.size === manifest.entries.length) {
+          const bootstrap=await cacheBootstrap(activeCache,pointer);
+          await writePointer(cacheStorage,normalizedScope,{...pointer,...bootstrap});
           const ready = progressSnapshot('ready', manifest, manifest.totalBytes, { warm: true });
           onProgress(ready);
           return Object.freeze({
@@ -315,7 +345,9 @@
       const finalVerified = await verifiedEntries(cache, manifest, normalizedOrigin, cryptoApi);
       invariant(finalVerified.size === manifest.entries.length,
         'course-package verification did not cover every manifest entry');
+      const bootstrap=await cacheBootstrap(cache);
       const active = Object.freeze({
+        ...bootstrap,
         schema: 1,
         unitId: manifest.unitId,
         packageId: manifest.packageId,

@@ -140,7 +140,7 @@
       const label = ({ correct: c.correct, supported: c.supported, modeled: c.modeled, retry: c.retry })[v.feedback];
       const spokenLines = a.feedbackAudio.length > 1 ? a.feedbackAudio.map(entry => entry.text) : [a.feedbackText];
       const english = v.storyActivityId || a.listening || a.cloze || a.conversation ? '' : spokenLines.filter(Boolean).map(text => `<p class="lp-feedback-english" lang="en">${escape(text)}</p>`).join('');
-      return `<section class="lp-feedback ${v.feedback === 'retry' ? 'lp-feedback-retry' : 'lp-feedback-success'}" aria-live="polite" tabindex="-1"><div class="lp-feedback-title">${icon(v.feedback === 'retry' ? 'lightbulb' : 'check-circle-fill')}<strong>${escape(label)}</strong></div>${v.feedback === 'retry' ? `<p>${escape(a.wrongFeedback || a.hints[Math.min(v.hintLevel, 2) - 1])}</p>` : english}</section>`;
+      return `<section class="lp-feedback ${v.feedback === 'retry' ? 'lp-feedback-retry' : 'lp-feedback-success'}" aria-live="polite" tabindex="-1"><div class="lp-feedback-title">${icon(v.feedback === 'retry' ? 'lightbulb' : 'check-circle-fill')}<strong>${escape(label)}</strong></div>${v.feedback === 'retry' ? `<p>${escape(v.inputDiagnostic?.feedback || a.wrongFeedback || a.hints[Math.min(v.hintLevel, 2) - 1])}</p>` : english}</section>`;
     }
     function renderMap(v) {
       if (unit.courseId) return renderCourseMap(v);
@@ -179,7 +179,7 @@
       }).join('')}</div>${footer(v,button('map',c.referenceBack,{className:'lp-primary'}))}`;
     }
     function renderChallenge(v) {
-      const challenge = unit.challenges.find(item => item.id === v.challengeId);
+      const challenge = unit.challenges.find(item => item.id === v.challengeId) || {id:'grammar',lessonLabel:'Lesson 49 & 50',questions:[]};
       const progress = v.record.challenges?.[challenge.id] || {answers:[]};
       if (v.screen === 'challenge-intro') {
         const finished = Boolean(progress.completedAt);
@@ -190,7 +190,7 @@
           message:v.settlement?.independent ? `本次独立答对 ${v.settlement.independent} 题，做得好！` : '练习完成，再试会更熟练。',
           secondary:button('reset-request','再挑战一次',{scope:'challenge',id:challenge.id,className:'lp-quiet'})});
       }
-      const q = challenge.questions[v.challengeIndex], feedback = v.feedback;
+      const q = v.reviewQuestion || challenge.questions[v.challengeIndex], feedback = v.feedback;
       const inputAttrs = `data-challenge-input data-question-id="${q.id}" data-challenge-id="${challenge.id}" lang="en" aria-label="${q.kind === 'gap' ? '填入缺少的单词' : '英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback ? ' readonly' : ''}`;
       const input = q.kind === 'translation' ? `<textarea ${inputAttrs} rows="3" placeholder="用英文写出整句话">${escape(v.challengeAnswer)}</textarea>`
         : `<div class="lp-gap-sentence" lang="en"><span>${escape(q.prefix)}</span><input ${inputAttrs} type="text" value="${escape(v.challengeAnswer)}" placeholder="…" size="9"><span>${escape(q.suffix)}</span></div>`;
@@ -198,7 +198,7 @@
       const body = `<div class="lp-lesson lp-challenge"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${q.kind === 'translation' ? '翻译这句话' : '补全句子'}</h1></div><div class="lp-challenge-prompt">${image(q.actorId)}<p>${escape(q.prompt)}</p></div><div class="lp-written-answer">${input}</div>${v.challengeHintUsed && !feedback ? `<p class="lp-hint">${escape(q.hint)}</p>` : ''}${message}</div>`;
       const actions = feedback ? `${unit.sources[q.sourceRef].audioSrc ? button('challenge-audio','听参考答案',{symbol:'volume-up-fill',className:'lp-quiet'}) : ''}${button(feedback === 'correct' ? 'challenge-next' : 'challenge-retry',feedback === 'correct' ? '继续' : '修改答案',{className:'lp-primary'})}`
         : `${button('challenge-hint','提示',{symbol:'lightbulb',className:'lp-quiet',disabled:v.challengeHintUsed})}${button('challenge-check','检查',{className:'lp-primary',disabled:!v.challengeAnswer.trim()})}`;
-      return `${header(v,'输入挑战')}${body}${footer(v,actions)}`;
+      return `${header(v,v.mode==='review'?'今日复习':'输入挑战')}${body}${footer(v,actions)}`;
     }
     function renderPlacement(v) {
       const config=unit.placement, attempt=v.placementAttempt, chapter=unit.chapters.find(ch=>ch.id===v.placementId);
@@ -221,7 +221,8 @@
             {label:'最佳连对',value:`×${best}`,symbol:'record-circle-fill',asset:unit.settlement?.metricAssets?.streak},{label:'剩余机会',value:remaining,symbol:'heart'}],
           secondary:passed?'':button('placement-retry','再试一次',{className:'lp-quiet'})});
       }
-      const q=config.questions.find(q=>q.id===attempt.questionIds[attempt.cursor]), feedback=v.feedback;
+      const policyVersion=attempt.responses[attempt.cursor]?.answerPolicyVersion || (attempt.responses.length>attempt.cursor?attempt.version:config.version);
+      const q=(policyVersion===unit.history?.placement.version?unit.history.placement:config).questions.find(q=>q.id===attempt.questionIds[attempt.cursor]), feedback=v.feedback;
       const attrs=`data-placement-input data-attempt-id="${escape(attempt.id)}" data-question-id="${escape(q.id)}" lang="en" aria-label="${q.kind==='gap'?'填入缺少的单词':q.answerType==='word'?'英文单词':'英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback?' readonly':''}`;
       const input=q.kind==='gap'?`<div class="lp-gap-sentence" lang="en"><span>${escape(q.prefix)}</span><input ${attrs} type="text" value="${escape(v.placementAnswer)}" placeholder="…" size="9"><span>${escape(q.suffix)}</span></div>`:`<textarea ${attrs} rows="${q.answerType==='word'?1:3}" placeholder="${q.answerType==='word'?'用英文写出单词':'用英文写出整句话'}">${escape(v.placementAnswer)}</textarea>`;
       const message=feedback?`<section class="lp-feedback ${feedback==='correct'?'lp-feedback-success':'lp-placement-wrong'}" tabindex="-1" aria-live="polite"><div class="lp-feedback-title">${icon(feedback==='correct'?'check-circle-fill':'x-lg')}<strong>${feedback==='correct'?'答对了！':'答错了 · 剩余 '+remaining+' 次机会'}</strong></div>${feedback==='incorrect'?'<p>参考答案：</p>':''}<p lang="en">${escape(unit.sources[q.sourceRef].text)}</p></section>`:'';
@@ -229,7 +230,10 @@
       return `${top}<div class="lp-lesson lp-challenge lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${title}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${config.questionCount}</span></div><div class="lp-challenge-prompt">${image(q.actorId)}<p>${escape(q.prompt)}</p></div><div class="lp-written-answer">${input}</div>${message}</div>${footer(v,button(feedback?'placement-next':'placement-check',feedback?'继续':'检查',{className:'lp-primary',disabled:!feedback&&!v.placementAnswer.trim()}))}`;
     }
     function render(v) {
-      if (v.screen === 'blocked') return `<div class="station-app lp-blocked">${image('explorer-cat')}<h1>${escape(c.unsupportedRecord)}</h1>${button('reload', c.reloadProgress, { className: 'lp-primary' })}</div>`;
+      if (v.screen === 'blocked') {
+        const recovery=v.recovery;
+        return `<div class="station-app lp-blocked">${image('explorer-cat')}<h1>${escape(c.unsupportedRecord)}</h1><p>${recovery?.canExport?'可以重试读取，或导出原始记录留存。':'请检查这台设备的保存权限后重试。'}</p>${recovery?.confirm ? `<section role="alertdialog" aria-modal="true" aria-label="确认恢复学习记录"><p>${recovery.confirm==='restore'?'恢复这台设备上最近可用的学习备份。':'仅将这套课程从零开始，当前原始记录会另行保留。'}</p>${button('recovery-confirm','确认'+(recovery.confirm==='restore'?'恢复备份':'从零开始'),{className:'lp-primary'})}${button('recovery-cancel','取消')}</section>` : `${button('reload',c.reloadProgress,{className:'lp-primary'})}${recovery?.canExport ? button('recovery-export','导出原始记录') : ''}${recovery?.canRestore ? button('recovery-restore','恢复可用备份') : ''}${recovery?.canReset ? button('recovery-reset','这套课程从零开始') : ''}`}<small>${escape(recovery?.code || 'RECORD_UNAVAILABLE')}</small></div>`;
+      }
       let html;
       if (v.screen === 'map') html = renderMap(v);
       else if (v.screen === 'references') html = renderReferences(v);
@@ -260,6 +264,10 @@
               + button(v.storyRevealed ? 'continue' : 'story-start', !v.storyRevealed ? v.storyIndex ? c.storyListen : c.storyStart : v.storyIndex === parent.beats.length - 1 ? c.finishNode : c.next, { disabled: v.storyRevealed && !v.canContinue, className: 'lp-primary' });
           } else actions = v.feedback ? button(v.feedback === 'retry' ? 'retry' : 'continue', v.feedback === 'retry' ? c.retry : c.next, { disabled: v.feedback !== 'retry' && !v.canContinue, className: 'lp-primary' })
             : `${button('hint', c.knowledge, { symbol: 'lightbulb', className: 'lp-quiet', disabled: v.hintLevel >= 2 })}${button('check', c.check, { disabled: v.selected.length !== a.answer.length, className: 'lp-primary' })}`;
+        } else if (a.kind === 'input') {
+          const attrs=`data-activity-input data-activity-id="${escape(a.id)}" lang="en" aria-label="英文答案" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${v.feedback?' readonly':''}`;
+          body=`<div class="lp-written-answer">${a.taskKind==='gap'?`<div class="lp-gap-sentence" lang="en"><span>${escape(a.prefix)}</span><input ${attrs} value="${escape(v.inputAnswer)}" size="9"><span>${escape(a.suffix)}</span></div>`:`<textarea ${attrs} rows="3" placeholder="用英文写出整句话">${escape(v.inputAnswer)}</textarea>`}</div>${v.hintLevel&&!v.feedback?`<p class="lp-hint">${escape(a.hints[v.hintLevel-1])}</p>`:''}${feedback(a,v)}`;
+          actions=v.feedback?button(v.feedback==='retry'?'retry':'continue',v.feedback==='retry'?'修改答案':'继续',{className:'lp-primary',disabled:v.feedback!=='retry'&&!v.canContinue}):`${button('hint',c.knowledge,{className:'lp-quiet',disabled:v.hintLevel>=2})}${button('check',c.check,{className:'lp-primary',disabled:!v.inputAnswer.trim()})}`;
         } else if (a.kind === 'match') {
           body = matching(a, v);
           actions = `${['playing', 'paused'].includes(v.audio?.status) ? playback(v) : ''}<p class="lp-word-progress">${Object.keys(v.matchedPairs).length} / ${a.items.length} ${escape(c.matchedCount)}</p>${v.feedback ? button('continue', c.next, { disabled: !v.canContinue, className: 'lp-primary' }) : button('match-model', c.matchModel, { symbol: 'lightbulb', className: 'lp-quiet' })}`;

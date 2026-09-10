@@ -14,9 +14,23 @@ test('all fifty lessons complete through actual runtime actions, with every orig
   assert.deepEqual(catalog.validateCourse(unit),[]);
   const h=setup();
   h.send({type:'open-node',nodeId:'C04'});assert.equal(h.view().screen,'map');
-  for(const n of unit.nodes)h.finish(n.id);
+  for(const [index,n] of unit.nodes.entries()){
+    h.finish(n.id);
+    if(index===2){
+      require('node:fs').mkdirSync('test-results/review-repair',{recursive:true});
+      require('node:fs').writeFileSync('test-results/review-repair/lab-new-course-record.json',JSON.stringify(h.adapter.load(h.rt.storageKey)));
+    }
+    if(index===Math.floor(unit.nodes.length/2)-1){
+      require('node:fs').mkdirSync('test-results/review-repair',{recursive:true});
+      require('node:fs').writeFileSync('test-results/review-repair/lab-half-course-record.json',JSON.stringify(h.adapter.load(h.rt.storageKey)));
+    }
+  }
   assert.equal(h.view().completedCount,unit.checkpointIds.length);
   assert.equal(Object.keys(h.view().record.completed).length,Object.keys(unit.activities).length);
+  // A synthetic full-course record also exercises the real-browser storage
+  // budget and recovery checks; this contains no user's learning history.
+  require('node:fs').mkdirSync('test-results/review-repair',{recursive:true});
+  require('node:fs').writeFileSync('test-results/review-repair/lab-full-course-record.json',JSON.stringify(h.adapter.load(h.rt.storageKey)));
   for(const ref of unit.dialogueRefs)assert.ok(h.view().record.sourceContacts[ref].modes.includes('heard'),ref);
   const restored=setup({adapter:h.adapter});assert.equal(restored.view().completedCount,unit.checkpointIds.length);
   restored.send({type:'course-summary'});assert.equal(restored.view().screen,'celebration');

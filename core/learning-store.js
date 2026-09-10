@@ -23,40 +23,62 @@
   }
 
   function createMemoryAdapter(seed = {}) {
-    const records = new Map();
-    for (const [key, record] of Object.entries(seed)) records.set(key, clone(record));
-    return Object.freeze({
-      load(key) {
-        if (!records.has(key)) return { status: 'ok', revision: 0, value: null };
-        const record = records.get(key);
-        if (!isValidEnvelope(record)) return { status: 'corrupt', revision: 0, value: null };
-        return { status: 'ok', revision: record.revision, value: clone(record.value) };
-      },
-      commit(key, { expectedRevision, value }) {
-        const stored = records.get(key);
-        const current = isValidEnvelope(stored) ? stored : { revision: 0, value: null };
-        if (current.revision !== expectedRevision) {
-          return {
-            status: 'conflict',
-            persisted: false,
-            revision: current.revision,
-            value: clone(current.value)
-          };
-        }
-        const record = { revision: expectedRevision + 1, value: clone(value) };
-        records.set(key, record);
-        return {
-          status: 'committed',
-          persisted: true,
-          revision: record.revision,
-          value: clone(record.value)
-        };
-      }
-    });
+    const records = new Map(Object.entries(seed).map(([key,value]) => [key,JSON.stringify(value)]));
+    return createLocalStorageAdapter({getItem:key=>records.get(key)??null,setItem:(key,value)=>records.set(key,String(value)),removeItem:key=>records.delete(key)});
   }
 
   function createLocalStorageAdapter(storage) {
+    const readRaw = key => storage.getItem(key);
+    function verifiedWrite(key, raw) {
+      storage.setItem(key,raw);
+      if (readRaw(key) !== raw) throw new Error('Storage readback differs');
+    }
+    const draftReads = new Map();
     return Object.freeze({
+      inspect(key) {
+        try { return {status:'ok',raw:readRaw(key),backup:readRaw(key+':recovery:backup'),migration:readRaw(key+':recovery:migration')}; }
+        catch { return {status:'unavailable'}; }
+      },
+      checkpoint(key, {expectedRevision, migration = false}) {
+        try {
+          const raw = readRaw(key);
+          if (raw === null) return {status:'ok'};
+          const record = JSON.parse(raw);
+          if (!isValidEnvelope(record) || record.revision !== expectedRevision) return {status:'conflict'};
+          const backupKey = key+':recovery:'+(migration?'migration':'backup');
+          if (!migration || readRaw(backupKey) === null) verifiedWrite(backupKey,raw);
+          return {status:readRaw(key)===raw?'ok':'conflict'};
+        } catch { return {status:'unavailable'}; }
+      },
+      recover(key, {expectedRaw,value}) {
+        try {
+          if (readRaw(key) !== expectedRaw) return {status:'conflict',persisted:false};
+          if (expectedRaw !== null) verifiedWrite(key+':recovery:quarantine',expectedRaw);
+          // Recheck after the backup write; a competing tab must not be erased.
+          if (readRaw(key) !== expectedRaw) return {status:'conflict',persisted:false};
+          let old; try { old=JSON.parse(expectedRaw); } catch {}
+          const next={revision:(isValidEnvelope(old)?old.revision:0)+1,value:clone(value)};
+          verifiedWrite(key,JSON.stringify(next));
+          return {status:'committed',persisted:true,...next};
+        } catch { return {status:'unavailable',persisted:false}; }
+      },
+      loadDraft(key) {
+        try {
+          const raw=readRaw(key+':draft'); draftReads.set(key,raw);
+          if (raw===null) return {status:'ok',value:null};
+          const value=JSON.parse(raw);
+          return {status:'ok',value};
+        } catch { return {status:'unavailable',value:null}; }
+      },
+      saveDraft(key, value) {
+        try {
+          const raw=readRaw(key+':draft');
+          if (draftReads.has(key) && draftReads.get(key)!==raw) return {status:'conflict'};
+          const encoded=JSON.stringify(value);
+          verifiedWrite(key+':draft',encoded); draftReads.set(key,encoded);
+          return {status:'ok'};
+        } catch { return {status:'unavailable'}; }
+      },
       load(key) {
         let encoded;
         try {

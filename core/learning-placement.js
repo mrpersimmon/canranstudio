@@ -7,11 +7,16 @@
   'use strict';
   const object = x => Boolean(x) && typeof x === 'object' && !Array.isArray(x);
   const cache = new WeakMap();
-  function index(unit) {
-    if (!cache.has(unit)) cache.set(unit, new Map((unit.placement?.questions || []).map(q => [q.id, q])));
-    return cache.get(unit);
+  function config(unit, version = unit.placement?.version) {
+    return version === unit.placement?.version ? unit.placement : version === unit.history?.placement.version ? unit.history.placement : null;
   }
-  const question = (unit, id) => index(unit).get(id);
+  function index(unit, version) {
+    const definition = config(unit, version);
+    if (!definition) return new Map();
+    if (!cache.has(definition)) cache.set(definition, new Map(definition.questions.map(q => [q.id, q])));
+    return cache.get(definition);
+  }
+  const question = (unit, id, version) => index(unit, version).get(id);
   const chapterIndex = (unit, id) => unit.chapters.findIndex(c => c.id === id);
   const boundary = (unit, id) => unit.nodes.findIndex(n => n.chapterId === id);
   function skippedUntil(unit, record) {
@@ -34,12 +39,15 @@
     for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
     return out;
   }
-  function sample(unit, fromId, targetId, seed) {
-    const from = chapterIndex(unit, fromId), target = chapterIndex(unit, targetId), config = unit.placement;
-    if (!config || from < 0 || target <= from) return [];
+  function sample(unit, fromId, targetId, seed, version = unit.placement?.version) {
+    const from = chapterIndex(unit, fromId), target = chapterIndex(unit, targetId), rules = config(unit, version);
+    if (!rules || from < 0 || target <= from) return [];
     const random = seeded(seed), selected = [], used = new Set();
-    const pool = shuffle(config.questions, random).filter(q => chapterIndex(unit, q.chapterId) < target);
-    const key = q => answers.normalize(unit.sources[q.sourceRef].text);
+    const eligible = q => chapterIndex(unit, q.chapterId) < target;
+    // v1 order is frozen for historical attempts. v2 excludes future questions
+    // before shuffling, so later chapters cannot alter earlier tests.
+    const pool = version === 1 ? shuffle(rules.questions, random).filter(eligible) : shuffle(rules.questions.filter(eligible), random);
+    const key = q => answers.normalize(version===1 && unit.history?.placementSourceText?.[q.sourceRef] || unit.sources[q.sourceRef].text);
     const take = q => { if (q && !used.has(key(q))) { selected.push(q.id); used.add(key(q)); return true; } return false; };
     // Distribute anchors across the entire skipped range, always including its
     // last prerequisite chapter. A wide jump must not test only its easy start.
@@ -51,9 +59,11 @@
       for (const ci of shuffle(chapters, random)) take(pool.find(q => chapterIndex(unit, q.chapterId) === ci && !used.has(key(q))));
       for (const q of pool) if (selected.length < end && chapterIndex(unit, q.chapterId) >= lo && chapterIndex(unit, q.chapterId) < hi) take(q);
     }
-    const total = config.questionCount;
-    draw(from, target, from ? Math.ceil(total * config.skippedShare) : total);
-    draw(0, from, total - selected.length);
+    const total = rules.questionCount;
+    if(version>=2) for(const skill of unit.grammar?.skills || [])take(pool.find(q=>q.grammarSkillId===skill.id));
+    const selectedSkipped=selected.filter(id=>chapterIndex(unit,question(unit,id,version).chapterId)>=from).length;
+    draw(from, target, Math.max(0,(from ? Math.ceil(total * rules.skippedShare) : total)-selectedSkipped));
+    draw(0, from, Math.max(0,total - selected.length));
     for (const q of pool) if (selected.length < total) take(q);
     return shuffle(selected, random);
   }
@@ -67,8 +77,10 @@
   const mistakes = attempt => attempt.responses.filter(r => !r.correct).length;
   function grade(unit, attempt, value, at) {
     if (attempt.status !== 'active' || attempt.responses.length !== attempt.cursor || !value.trim()) return null;
-    const next = JSON.parse(JSON.stringify(attempt)), q = question(unit, next.questionIds[next.cursor]);
-    next.responses.push({questionId:q.id, value:value.slice(0,180), correct:answers.accepts(q, value), at});
+    const next = JSON.parse(JSON.stringify(attempt));
+    const policyVersion=unit.answerPolicyVersion===unit.placement.version?unit.answerPolicyVersion:next.version;
+    const q = question(unit, next.questionIds[next.cursor],policyVersion);
+    next.responses.push({questionId:q.id, value:value.slice(0,180), correct:answers.accepts(q, value), answerPolicyVersion:policyVersion, at});
     next.draft = value.slice(0,180);
     if (mistakes(next) === unit.placement.maxMistakes) next.status = 'failed';
     else if (next.responses.length === next.questionIds.length) next.status = 'passed';
@@ -76,15 +88,16 @@
     return next;
   }
   function validAttempt(a, unit, targetId) {
-    if (!object(a) || a.version !== unit.placement?.version || a.targetId !== targetId || typeof a.id !== 'string'
+    if (!object(a) || !config(unit, a.version) || a.targetId !== targetId || typeof a.id !== 'string'
       || typeof a.startedAt !== 'string' || !Number.isSafeInteger(a.seed) || a.seed < 0 || a.seed > 4294967295
       || !Array.isArray(a.questionIds) || !Array.isArray(a.responses) || !Number.isInteger(a.cursor)
       || typeof a.draft !== 'string' || a.draft.length > 180) return false;
-    if (JSON.stringify(a.questionIds) !== JSON.stringify(sample(unit,a.fromId,a.targetId,a.seed))
+    if (JSON.stringify(a.questionIds) !== JSON.stringify(sample(unit,a.fromId,a.targetId,a.seed,a.version))
       || a.questionIds.length !== unit.placement.questionCount || a.responses.length > a.questionIds.length) return false;
     if (!a.responses.every((r,i) => object(r) && r.questionId === a.questionIds[i] && typeof r.value === 'string'
       && r.value.length <= 180 && Boolean(r.value.trim()) && typeof r.at === 'string'
-      && r.correct === answers.accepts(question(unit,r.questionId),r.value))) return false;
+      && question(unit,r.questionId,r.answerPolicyVersion ?? a.version)
+      && r.correct === answers.accepts(question(unit,r.questionId,r.answerPolicyVersion ?? a.version),r.value))) return false;
     const wrong = mistakes(a), expected = wrong >= unit.placement.maxMistakes ? 'failed' : a.responses.length === a.questionIds.length ? 'passed' : 'active';
     if (a.status !== expected || wrong > unit.placement.maxMistakes
       || a.responses.slice(0,-1).filter(r=>!r.correct).length >= unit.placement.maxMistakes) return false;
@@ -97,7 +110,7 @@
   function validateDefinitions(unit) {
     if (!unit.placement) return [];
     const p = unit.placement, errors = [], ids = new Set();
-    if (p.version !== 1 || p.questionCount !== 20 || p.maxMistakes !== 5 || p.skippedShare !== .7) errors.push('invalid placement rules');
+    if (![1,2].includes(p.version) || p.questionCount !== 20 || p.maxMistakes !== 5 || p.skippedShare !== .7) errors.push('invalid placement rules');
     for (const q of p.questions || []) {
       if (ids.has(q.id) || !['translation','gap'].includes(q.kind) || !q.prompt || !unit.entities[q.actorId]
         || chapterIndex(unit,q.chapterId)<0 || !unit.sources[q.sourceRef] || !Array.isArray(q.answers) || !q.answers.length

@@ -35,19 +35,22 @@
         const core = window.CanranCore;
         core.curriculumCatalog = { getTeachingUnit: () => control.unit };
         control.adapter = core.learningStore.createMemoryAdapter(reloadSeed?.records);
+        if(reloadSeed?.draft)control.adapter.saveDraft(reloadSeed.key,reloadSeed.draft);
         core.learningStore = { ...core.learningStore, createLocalStorageAdapter: () => ({
+          ...control.adapter,
+          saveDraft:(...args)=>control.failSave?{status:'unavailable'}:control.adapter.saveDraft(...args),
           load: key => control.adapter.load(key),
           commit: (...args) => control.failSave ? {status:'unavailable', persisted:false} : control.adapter.commit(...args)
         }) };
         const runtime = core.learningPathRuntime;
         core.learningPathRuntime = { ...runtime, createRuntime: options => {
           const real = runtime.createRuntime({ ...options, now: () => new Date(control.now), random: () => .37 });
-          control.runtime = real;
-          return { ...real, dispatch: event => {
+          control.runtime = {...real,snapshot:()=>real.snapshot(true)};
+          return { ...real, dispatch: (event,options) => {
             control.dispatchCount++;
             try {
               if (control.throwNext) { control.throwNext = false; throw Error('Intentional QA controller failure'); }
-              return real.dispatch(event);
+              return real.dispatch(event,options);
             } finally {
               control.completedDispatches[event.type]=(control.completedDispatches[event.type]||0)+1;
             }

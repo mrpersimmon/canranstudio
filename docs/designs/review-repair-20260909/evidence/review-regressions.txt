@@ -1,0 +1,30 @@
+✔ an active legacy placement retains its sample when future questions are appended (72.193166ms)
+✔ a historical wrong answer is not regraded using an expanded answer policy (64.267083ms)
+✔ adding assessment metadata preserves original result evidence (65.960833ms)
+✔ reviewed translations apply to early challenges and placement without forgiving grammar errors (0.168292ms)
+✔ migration first preserves the original bytes outside the primary record (31.859958ms)
+✔ corrupt records offer export and explicit scoped recovery, preserving corrupt bytes (1.747875ms)
+✔ restoration detects a different raw record written while confirmation is open (0.611791ms)
+✔ placement typing journals small durable drafts without rewriting course progress (6.736667ms)
+✔ grammar pilot uses new IDs and distinguishes writing, transfer and delayed retrieval (1.17375ms)
+✔ a correct sentence task can continue when optional reference audio fails (32.862208ms)
+✔ wrong challenge answers survive correction and enter next-day review without mainline credit (31.996834ms)
+✔ an ongoing old placement uses the new answer policy only for its new responses (32.2585ms)
+✔ two tabs cannot silently replace each other’s journal (6.590125ms)
+✔ a failed independent migration backup never overwrites the original record (31.138333ms)
+✔ pilot prerequisite skills appear in a wide placement while the 20-question rule is retained (5.316209ms)
+✔ v1 grading and sampling contracts remain immutable across later releases (4.099375ms)
+✔ unknown placement answer policies fail validation without crashing record recovery (34.490625ms)
+✔ the light presentation view is immutable while full exports remain isolated copies (0.9455ms)
+✔ pilot writing preserves the actual diagnostic and routes novel sentences to later review (30.877709ms)
+✔ a pilot challenge error recalls a new sentence of the same grammar skill (30.4675ms)
+✔ malformed new error histories and input drafts reach record recovery without throwing (7.962292ms)
+✔ a grandfathered completed node can earn its newly added input evidence (85.53475ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 690.693709

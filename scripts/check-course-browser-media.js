@@ -18,7 +18,10 @@ async function main(){
       window.Audio=function(...args){const audio=new NativeAudio(...args),event={src:args[0]||'',ended:false,errors:0};window.__nativeAudio.push(event);audio.addEventListener('ended',()=>{event.ended=true;event.duration=audio.duration;});audio.addEventListener('error',()=>event.errors++);return audio;};window.Audio.prototype=NativeAudio.prototype;
     });
     await page.goto(url);await page.locator('.journey-app').waitFor();
+    assert.ok(await page.locator('.journey-node').count()<unit.nodes.length);
+    await page.locator('[data-action="journey-expand"]').click();
     assert.equal(await page.locator('.journey-node').count(),unit.nodes.length);
+    await page.locator('[data-action="journey-expand"]').click();
     assert.equal(await page.evaluate(()=>window.__coursePackage.result.manifest.revision),unit.releaseRevision);
     await page.locator('[data-action="journey-nav"][data-id="book"]').click();
     const sampleRefs=['L01-D01','L07-D01','L21-D01','L25-D01','L27-NUM10','L31-D04','L33-D08','L35-D03','L37-D03','L39-D08','L41-D06','L43-D01','L45-D03','L47-D01','L49-D15','L49-ORD01',
@@ -48,9 +51,12 @@ async function main(){
     const upgraded=await browser.newContext({viewport:{width:906,height:801}}),p=await upgraded.newPage();
     await p.addInitScript(({key,record})=>{if(!sessionStorage.getItem('seeded')){localStorage.setItem(key,JSON.stringify(record));sessionStorage.setItem('seeded','yes');}}, {key:old.rt.storageKey,record:oldRecord});
     await p.goto(url);await p.locator('.journey-app').waitFor();
+    await p.locator('[data-action="journey-expand"]').click();
     assert.equal(await p.locator('.journey-step.is-done').count(),11);
     assert.equal(await p.locator('[data-journey-current]').getAttribute('data-id'),'L07-STORY');
-    assert.deepEqual(await p.evaluate(key=>JSON.parse(localStorage.getItem(key)).value,old.rt.storageKey),oldRecord.value);
+    const migrated=await p.evaluate(key=>JSON.parse(localStorage.getItem(key)).value,old.rt.storageKey);
+    assert.deepEqual(require('../tests/unit/support/review-history').evidenceOnly(migrated),oldRecord.value);
+    assert.deepEqual(await p.evaluate(key=>JSON.parse(localStorage.getItem(key+':recovery:migration')).value,old.rt.storageKey),oldRecord.value);
     await p.locator('.journey-node[data-id="L07-STORY"]').click();await p.locator('[data-action="open-node"][data-id="L07-STORY"]').click();
     await p.locator('.lp-scene-painting').waitFor();assert.equal(await p.locator('.lp-scene-painting').evaluate(img=>img.complete&&img.naturalWidth>0),true);
     report.upgrade={preservedNodes:11,next:'L07-STORY',loadedScene:true};await upgraded.close();

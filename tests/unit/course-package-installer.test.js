@@ -206,6 +206,7 @@ test('cold preparation verifies every byte before one atomic activation', async 
   assert.equal(progress.at(-1).phase, 'ready');
   assert.equal(progress.at(-1).preparedBytes, manifest.totalBytes);
   assert.deepEqual(await activePointer(cacheStorage), {
+    manifestUrl:MANIFEST_URL,
     schema: 1,
     unitId: 'NCE-U01',
     packageId: 'NCE-U01@v1',
@@ -398,4 +399,16 @@ test('a corrupt active cache is rehashed and repaired in a separate cache before
     repairNetwork.calls.filter(url => url === `${ORIGIN}/poc/lesson/audio/line.mp3`).length,
     0
   );
+});
+test('offline reopen uses only the matching fully verified manifest and shell',async()=>{
+ const files={'/core/runtime.js':'runtime-v1'}, manifest=manifestFor('offline-v1',files), network=fakeNetwork(manifest,files),caches=new MemoryCacheStorage();
+ const html='<main data-manifest-sha256="'+network.manifestHash+'">course</main>';
+ const online=async request=>requestUrl(request)===SCOPE?new Response(html,{headers:{'Content-Type':'text/html'}}):network.fetch(request);
+ await installerFor(caches,online).prepare({manifestUrl:MANIFEST_URL,expectedManifestSha256:network.manifestHash,shellUrl:SCOPE});
+ const pointer=await activePointer(caches);assert.ok(pointer.shell?.sha256);
+ const offline=installerFor(caches,async()=>{throw new TypeError('offline');});
+ const result=await offline.prepare({manifestUrl:MANIFEST_URL,expectedManifestSha256:network.manifestHash,shellUrl:SCOPE});assert.equal(result.status,'ready');
+ await assert.rejects(offline.prepare({manifestUrl:MANIFEST_URL,expectedManifestSha256:'a'.repeat(64),shellUrl:SCOPE}));
+ const cache=await caches.open(pointer.cacheName);await cache.put(ORIGIN+'/core/runtime.js',new Response('broken'));
+ await assert.rejects(offline.prepare({manifestUrl:MANIFEST_URL,expectedManifestSha256:network.manifestHash,shellUrl:SCOPE}));
 });

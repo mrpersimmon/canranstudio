@@ -3,6 +3,7 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const {getCourse,validateCourse}=require('../../core/learning-course-catalog');
 const {setup}=require('./support/course-harness');
+const {priorItem,evidenceOnly}=require('./support/review-history');
 const baseline=require('../../content/expansion/lesson1-6-baseline.json');
 const unit=getCourse();
 test('a blank targets a whole word instead of matching his inside This',()=>{
@@ -54,14 +55,14 @@ test('the six-lesson catalog and its learner identity remain unchanged when the 
   assert.equal(unit.unitId,baseline.unitId);
   assert.equal(unit.experienceRevision,baseline.experienceRevision);
   assert.notEqual(unit.releaseRevision,unit.experienceRevision);
-  for(const [id,activity] of Object.entries(baseline.activities))assert.deepEqual(unit.activities[id],activity,id);
+  for(const [id,activity] of Object.entries(baseline.activities))assert.deepEqual(priorItem(unit,'activities',unit.activities[id]),activity,id);
   for(const node of baseline.nodes)assert.deepEqual(unit.nodes.find(n=>n.id===node.id),node,node.id);
   const old=setup({unit:baseline});for(const node of baseline.nodes)old.finish(node.id);
-  const before=JSON.stringify(old.adapter.load(old.rt.storageKey));
+  const before=old.adapter.inspect(old.rt.storageKey).raw;
   const upgraded=setup({adapter:old.adapter});
   assert.equal(upgraded.view().completedCount,baseline.nodes.length);
-  assert.deepEqual(upgraded.view().record,old.view().record);
-  assert.equal(JSON.stringify(old.adapter.load(old.rt.storageKey)),before);
+  assert.deepEqual(evidenceOnly(upgraded.view().record),old.view().record);
+  assert.equal(old.adapter.inspect(old.rt.storageKey).migration,before);
   assert.equal(upgraded.view().nodes.find(n=>n.id==='L07-STORY').available,true);
   upgraded.send({type:'open-node',nodeId:'L07-STORY'});
   assert.equal(upgraded.view().activityId,'L07:story');
@@ -75,7 +76,7 @@ test('expansion preserves a six-lesson reset backup and restores it without inve
   const upgraded=setup({adapter:old.adapter});
   assert.equal(upgraded.view().completedCount,0);
   upgraded.send({type:'reset-undo'});
-  assert.deepEqual(upgraded.view().record,before);
+  assert.deepEqual(evidenceOnly(upgraded.view().record),before);
   assert.equal(upgraded.view().completedCount,1);
   assert.equal(upgraded.view().nodes.find(n=>n.id==='L07-STORY').available,false);
 });

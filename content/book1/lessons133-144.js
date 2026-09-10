@@ -18,7 +18,7 @@ words:'reporter:记者;sensational:轰动的;mink coat:貂皮大衣',evenWords:'
 note:'过去时 said/told 后常把 am/is → was、are → were、have done → had done。tell 后需要听者宾语，say 不直接接人。that 可省略。',
 checks:`4|Miss Marsh 为什么想退休？|她觉得很累|她刚买了房子/她不会演戏|I feel very tired.
 9|报道怎样转述“我刚拍了一部电影”？|把 have made 变成 had made|把 made 变成 making/完全改成将来时|She told me she had just made a new film.`,
-examples:`He said he was tired.|他说他累了。|was|is/am|练习转述过去的话，把 am 改为 was。
+examples:`He said he was tired.|把他说的“I am tired.”改为过去转述，使用时态后移。|was|is/am|练习转述过去的话，把 am 改为 was。
 She told me she was reading.|她告诉我她在读书。|told|said/say|tell 后直接接 me。
 They said they wanted their dinner.|他们说他们想吃晚饭。|wanted|want/wants|过去转述中 want 变 wanted。
 He told me he had finished his homework.|他告诉我他已经做完了作业。|had|has/have|完成发生在说话之前，用 had finished。

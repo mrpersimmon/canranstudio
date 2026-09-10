@@ -15,10 +15,13 @@
     const answer = normalize(value);
     return Boolean(answer) && question.answers.some(candidate => normalize(candidate) === answer);
   }
-  function validProgress(progress, challenge) {
+  function validProgress(progress, challenge, unit) {
+    const historical = unit?.history?.challenges.find(c => c.id === challenge.id);
+    const gradedQuestion = (answer, i) => (answer.answerPolicyVersion || 1) === 1 && historical ? historical.questions[i] : challenge.questions[i];
     if (!object(progress) || !Array.isArray(progress.answers) || progress.answers.length > challenge.questions.length) return false;
     if (!progress.answers.every((answer, i) => object(answer) && answer.questionId === challenge.questions[i].id
-      && typeof answer.value === 'string' && accepts(challenge.questions[i], answer.value)
+      && (answer.answerPolicyVersion === undefined || [1,unit?.answerPolicyVersion].includes(answer.answerPolicyVersion))
+      && typeof answer.value === 'string' && gradedQuestion(answer,i) && accepts(gradedQuestion(answer,i), answer.value)
       && ['independent','supported'].includes(answer.evidence) && typeof answer.at === 'string')) return false;
     if (Boolean(progress.completedAt) !== (progress.answers.length === challenge.questions.length)) return false;
     if (progress.completedAt !== undefined && typeof progress.completedAt !== 'string') return false;
@@ -46,5 +49,27 @@
     }
     return errors;
   }
-  return Object.freeze({normalize, accepts, validProgress, validateDefinitions});
+  function reviewQuestion(unit, entry) {
+    if(entry.origin==='grammar')return unit.grammar?.delayedQuestions.find(q=>q.id===entry.questionId);
+    const original=unit.challenges?.find(c=>c.id===entry.challengeId)?.questions.find(q=>q.id===entry.questionId);
+    return original && (unit.grammar?.delayedQuestions.find(q=>q.grammarSkillId===original.grammarSkillId) || original);
+  }
+  function validReviews(record,unit) {
+    if(record.retrievalReviews===undefined)return true;
+    return object(record.retrievalReviews) && Object.entries(record.retrievalReviews).every(([id,e])=>object(e) && id===e.questionId && ['grammar','challenge'].includes(e.origin)
+      && reviewQuestion(unit,e) && /^\d{4}-\d{2}-\d{2}$/.test(e.nextDueDay) && Number.isSafeInteger(e.intervalStage) && e.intervalStage>=0 && e.intervalStage<unit.review.intervals.length
+      && Number.isSafeInteger(e.wrong) && e.wrong>=0 && validErrors(e.errors)
+      && (e.lastEvidence===undefined || ['independent','supported'].includes(e.lastEvidence))
+      && (e.lastQuestionId===undefined || e.lastQuestionId===reviewQuestion(unit,e).id && typeof e.lastAnswer==='string' && e.lastAnswer.length<=180 && accepts(reviewQuestion(unit,e),e.lastAnswer) && e.lastAnswerPolicyVersion===unit.answerPolicyVersion));
+  }
+  function validErrors(errors) {
+    return Array.isArray(errors) && errors.length<=5 && errors.every(error=>object(error) && typeof error.value==='string' && error.value.length<=180 && typeof error.at==='string' && (error.code===undefined || typeof error.code==='string' && error.code.length<=80));
+  }
+  function scheduleReview(record, details) {
+    const queue=record.retrievalReviews ||= {}, {questionId,nextDueDay,error,...identity}=details;
+    const entry=queue[questionId] ||= {...identity,questionId,nextDueDay,intervalStage:0,wrong:0,errors:[]};
+    if(error){entry.wrong++;entry.errors=[...entry.errors,error].slice(-5);entry.nextDueDay=nextDueDay;entry.intervalStage=0;}
+    return entry;
+  }
+  return Object.freeze({normalize, accepts, validProgress, validateDefinitions, reviewQuestion, validReviews, validErrors, scheduleReview});
 });

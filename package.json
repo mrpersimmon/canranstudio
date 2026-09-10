@@ -1,6 +1,6 @@
 {
   "name": "canranstudio-duolingo-version",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "private": true,
   "engines": {
     "node": ">=20"
@@ -18,7 +18,9 @@
     "verify": "npm run build:course && npm test && npm run build",
     "visual:serve": "node scripts/serve-visual-check.js",
     "test:browser": "node scripts/run-browser-check.js",
-    "verify:visual": "node scripts/visual-proof.js"
+    "verify:visual": "node scripts/visual-proof.js",
+    "test:review-browser": "node scripts/check-course-review.js",
+    "report:grammar": "node scripts/report-grammar-coverage.js"
   },
   "devDependencies": {
     "axe-core": "4.13.0",

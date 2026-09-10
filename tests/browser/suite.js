@@ -23,7 +23,7 @@
     const previous=frame.contentWindow.fixture,key=previous.runtime.storageKey;
     const saved=previous.adapter.load(key);
     // Reboot the actual page/controller, retaining only the test storage and clock.
-    window.fixtureReloadSeed={records:{[key]:{revision:saved.revision,value:saved.value}},now:previous.now};
+    window.fixtureReloadSeed={records:{[key]:{revision:saved.revision,value:saved.value}},key,draft:previous.adapter.loadDraft(key).value,now:previous.now};
     frame.contentWindow.location.reload();
     await wait(()=>frame.contentWindow?.fixture && frame.contentWindow.fixture!==previous && frame.contentWindow.fixture.ready);
     await settle();
@@ -56,6 +56,7 @@
     throw Error('Journey scrolling did not settle');
   }
   async function click(action,id){
+    if(['preview-node','open-placement'].includes(action)&&!query(action,id)){const chapter=action==='open-placement'?id:frame.contentWindow.fixture.unit.nodes.find(n=>n.id===id)?.chapterId;const link=frame.contentDocument.querySelector('a[href="#chapter-'+chapter+'"]');if(link){link.click();await settle();}}
     const el=query(action,id);
     if(!el)throw Error('Missing enabled action '+action+' '+(id||'')+' in '+JSON.stringify({screen:view().screen,activity:view().activityId,storyIndex:view().storyIndex}));
     const f=frame.contentWindow.fixture;
@@ -125,6 +126,13 @@
       }else if(a.kind==='match'){
         for(const item of a.items){await click('match-word',item.sourceRef);await click('match-image',item.entityId);await hear();}
         await check('matched-'+a.id,a.id);
+      }else if(a.kind==='input'){
+        const input=frame.contentDocument.querySelector('[data-activity-input]'),win=frame.contentWindow;
+        input.focus();input.value='wrong';input.dispatchEvent(new win.InputEvent('input',{bubbles:true}));
+        await click('check');await check('input-wrong-'+a.id,a.id);await click('retry');
+        const corrected=frame.contentDocument.querySelector('[data-activity-input]');corrected.focus();corrected.value=a.answers[0];corrected.dispatchEvent(new win.InputEvent('input',{bubbles:true}));
+        if(frame.contentDocument.querySelector('[data-activity-input]')!==corrected)throw Error('Grammar input replaced during typing');
+        await click('check');await check('input-correct-'+a.id,a.id);
       }else if(a.resultId){
         await hear();
         const kind=a.castChoice?'cast':a.kind;
@@ -342,7 +350,7 @@
         }
         await writeAnswer(q.answers[0]);await check('challenge-filled-'+q.id,q.id);
         if(index===1){
-          await wait(()=>view().record.challenges?.[challenge.id]?.draft?.value===q.answers[0]);
+          await wait(()=>frame.contentWindow.fixture.adapter.loadDraft(frame.contentWindow.fixture.runtime.storageKey).value?.value===q.answers[0]);
           await click('map');await reloadFrame();await click('journey-nav','review');
           await click('open-challenge',challenge.id);await click('challenge-start');
           if(view().challengeAnswer!==q.answers[0])throw Error('Draft disappeared after reload');

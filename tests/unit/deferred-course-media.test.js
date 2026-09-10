@@ -46,3 +46,14 @@ test('a manifest cannot name an unverified media index',()=>{
   const manifest=require('../../poc/learning-path/course-package-manifest.json');
   assert.throws(()=>validateManifest({...manifest,mediaIndexUrl:'/unverified.json'},{origin,scopeUrl:origin+manifest.scopePath}),/verified startup entry/);
 });
+test('concurrent and warm media requests share one verified index per activation identity',async()=>{
+ const f=fixture(),meta=memoryCache(),index=Buffer.from(JSON.stringify({entries:[f.entry]}));let indexHashes=0;
+ const pointer={cacheName:'warm',mediaIndex:{url:'/index.json',bytes:index.length,sha256:digest(index)}};
+ await meta.put(origin+'/'+ACTIVE_POINTER_PATH,new Response(JSON.stringify(pointer)));await f.cache.put(origin+'/index.json',new Response(index));
+ f.scope.crypto={subtle:{digest:async(algorithm,bytes)=>{if(bytes.byteLength===index.length)indexHashes++;return crypto.webcrypto.subtle.digest(algorithm,bytes);}}};
+ Object.assign(f.scope,{registration:{scope:origin+'/'},caches:{open:async name=>name===META_CACHE_NAME?meta:f.cache}});
+ await Promise.all([activePackageResponse(f.scope,f.request),activePackageResponse(f.scope,f.request)]);await activePackageResponse(f.scope,f.request);
+ assert.equal(indexHashes,1);
+ await meta.put(origin+'/'+ACTIVE_POINTER_PATH,new Response(JSON.stringify({...pointer,cacheName:'next'})));
+ await activePackageResponse(f.scope,f.request);assert.equal(indexHashes,2);
+});
