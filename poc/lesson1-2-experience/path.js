@@ -9,9 +9,9 @@
   try { storage = global.localStorage; } catch { storage = { getItem() { throw new Error('storage unavailable'); } }; }
   const runtime = core.learningPathRuntime.createRuntime({ unit, deferRead:true, adapter: core.learningStore.createLocalStorageAdapter(storage) });
   const renderer = core.learningPathScene.createRenderer(unit);
-  let media = null, mediaToken = 0, lastView = null, work = Promise.resolve();
+  let media = null, mediaToken = 0, feedbackMedia = null, lastView = null, work = Promise.resolve();
   let journeyUI = { tab: 'path', selectedNodeId: null };
-  let draftTimer, modalReturnFocus;
+  let modalReturnFocus;
   function revealCurrentNode(view) {
     const next=view.nodes.find(node=>node.available&&!(node.passed||node.done));
     const element=next&&root.querySelector(`[data-journey-current],.lp-node[data-id="${next.id}"]`);
@@ -31,10 +31,6 @@
     if(current.nodeType!==1)return;
     for(const attr of [...current.attributes])if(!next.hasAttribute(attr.name))current.removeAttribute(attr.name);
     for(const attr of [...next.attributes])if(current.getAttribute(attr.name)!==attr.value)current.setAttribute(attr.name,attr.value);
-    if(current.matches('input,textarea')){
-      if(current!==global.document.activeElement || !composing)if(current.value!==next.value)current.value=next.value;
-      return;
-    }
     const key=node=>node.nodeType===1?(node.id || (node.dataset.action ? node.dataset.action+':'+(node.dataset.id || '') : null)):null;
     let index=0;
     for(const child of [...next.childNodes]){
@@ -45,7 +41,6 @@
     }
     while(current.childNodes.length>index)current.lastChild.remove();
   }
-  let composing=false;
   function render(view) {
     const active = global.document.activeElement;
     const action = active?.dataset?.action, id = active?.dataset?.id;
@@ -57,7 +52,7 @@
     const historyScroll = previousHistory?.scrollTop || 0;
     const historyAtBottom = previousHistory && previousHistory.scrollHeight - historyScroll - previousHistory.clientHeight < 8;
     const html=renderer.render({ ...view, journeyUI });
-    if(!changed && root.firstElementChild && view.screen==='activity' && !previousModal && !view.saveState){
+    if(!changed && root.firstElementChild && ['activity','challenge','placement'].includes(view.screen) && !previousModal && !view.saveState){
       const template=global.document.createElement('template');template.innerHTML=html;
       if(root.firstElementChild)reconcile(root.firstElementChild,template.content.firstElementChild);else root.innerHTML=html;
     }else root.innerHTML=html;
@@ -93,7 +88,7 @@
     if (feedback && (feedbackShown || focusFeedback)) feedback.focus({ preventScroll: true });
     // Keep the explanation visible when submitting an answer adds content below
     // the choices. The sticky action bar must not cover the reason to retry.
-    if (feedbackShown) feedback.scrollIntoView({ block: 'center', behavior: 'instant' });
+    if (feedbackShown && !feedback.closest('.lp-footer')) feedback.scrollIntoView({ block: 'center', behavior: 'instant' });
     const activeLine = root.querySelector('.lp-chat-row[aria-current="true"]');
     const currentRef = view.audio?.sequence[view.audio.index]?.ref;
     const previousRef = lastView?.audio?.sequence[lastView.audio.index]?.ref;
@@ -105,6 +100,15 @@
     lastView = view;
   }
   function playEffect(effect) {
+    if (effect.type === 'play-feedback') {
+      feedbackMedia?.pause();
+      const audio=new global.Audio(effect.src);feedbackMedia=audio;audio.volume=effect.volume;
+      audio.addEventListener('ended',()=>{if(feedbackMedia===audio)feedbackMedia=null;},{once:true});
+      // Optional feedback is a separate channel: failure never blocks answering
+      // or reports a failed lesson recording, and ended never earns listening.
+      try { Promise.resolve(audio.play()).catch(()=>{}); } catch {}
+      return;
+    }
     if (effect.type === 'export-record') {
       const url=URL.createObjectURL(new Blob([effect.content],{type:'application/json'}));
       const link=global.document.createElement('a');link.href=url;link.download='canran-learning-record.json';link.click();global.setTimeout(()=>URL.revokeObjectURL(url),1000);return;
@@ -134,23 +138,13 @@
     if (['open-node', 'references', 'review', 'open-challenge','open-placement','reset-confirm'].includes(event.type)) journeyUI.selectedNodeId = null;
     const run = () => {
       const result = runtime.dispatch(event,{light:true});
-      // Typing must not replace the focused input, move its caret or interrupt IME.
-      if (event.type === 'session-visibility') {
-        // Clock-only updates must preserve the input node, caret, IME and the
-        // one-shot celebration animation when the browser loses/regains focus.
-        lastView = result.view;
-      } else if (['challenge-input','challenge-save-draft','placement-input','activity-input'].includes(event.type) && !result.view.saveState) {
-        const placing=event.type==='placement-input';
-        const writing=event.type==='activity-input';
-        const check = root.querySelector(writing?'[data-action="check"]':placing?'[data-action="placement-check"]':'[data-action="challenge-check"]');
-        if (check) check.disabled = !(writing?result.view.inputAnswer:placing?result.view.placementAnswer:result.view.challengeAnswer)?.trim();
-        lastView = result.view;
-      } else render(result.view);
+      // Clock-only updates preserve focus and the one-shot celebration.
+      if(event.type==='session-visibility')lastView=result.view;
+      else render(result.view);
       result.effects.forEach(playEffect);
     };
     // Serialize callbacks and clicks, then use the same lock across tabs before
     // the store's revision check and verified write.
-    if (['challenge-input','placement-input','activity-input'].includes(event.type)) {run();return Promise.resolve();}
     work = work.then(() => global.navigator.locks?.request ? global.navigator.locks.request(runtime.storageKey, run) : run()).catch(error => {
       global.console.error('Learning path action failed', error);
       stop();
@@ -159,22 +153,6 @@
     });
     return work;
   }
-  function placementIdentity(input) {
-    return {attemptId:input?.dataset.attemptId,questionId:input?.dataset.questionId};
-  }
-  function captureDraft(input) {
-    if (input?.matches('[data-activity-input]')) {if(!input.readOnly)send({type:'activity-input',id:input.dataset.activityId,value:input.value});return;}
-    if (input?.matches('[data-placement-input]')) {
-      if (!input.readOnly) send({type:'placement-input',value:input.value,...placementIdentity(input)});
-      return;
-    }
-    if (!input?.matches('[data-challenge-input]')) return;
-    const event = {type:'challenge-save-draft',id:input.dataset.challengeId,questionId:input.dataset.questionId};
-    send({type:'challenge-input',value:input.value,questionId:input.dataset.questionId});
-  }
-  root.addEventListener('input', event => { if (!event.isComposing) captureDraft(event.target); });
-  root.addEventListener('compositionstart',()=>{composing=true;});
-  root.addEventListener('compositionend', event => {composing=false;captureDraft(event.target);});
   root.addEventListener('click', event => {
     const lessonLink=event.target.closest('.journey-lesson-index a[href^="#chapter-"]');
     if (lessonLink && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
@@ -182,7 +160,7 @@
       // destination. The section's scroll margin keeps its jump button clear
       // of the sticky statistics and Lesson banner.
       event.preventDefault();
-      journeyUI.chapterId=lessonLink.hash.slice('#chapter-'.length);journeyUI.selectedNodeId=null;
+      journeyUI.selectedNodeId=null;
       render(runtime.snapshot());
       const heading=global.document.getElementById(lessonLink.hash.slice(1))?.querySelector('h1');
       if (heading) {heading.tabIndex=-1;heading.focus({preventScroll:true});heading.closest('.journey-chapter').scrollIntoView({block:'start',behavior:'instant'});}
@@ -199,7 +177,7 @@
         return;
       }
       if (action === 'journey-locate') {
-        journeyUI.chapterId=null;journeyUI.selectedNodeId=null;render(runtime.snapshot());
+        journeyUI.selectedNodeId=null;render(runtime.snapshot());
         root.querySelector('[data-journey-current]')?.scrollIntoView({ block: 'center', behavior: motion });
         root.querySelector('[data-journey-current]')?.focus({ preventScroll: true });
         return;
@@ -212,14 +190,11 @@
         global.setTimeout(() => { companion.classList.remove('is-waving'); companion.querySelector('.journey-greeting').hidden = true; }, 1700);
         return;
       }
-      if(action==='journey-section'){journeyUI.chapterId=id;journeyUI.selectedNodeId=null;}
-      if(action==='journey-expand')journeyUI.expanded=!journeyUI.expanded;
       const previousId = journeyUI.selectedNodeId;
       if (action === 'journey-nav') journeyUI = { tab: id, selectedNodeId: null };
       if (action === 'preview-node') journeyUI.selectedNodeId = previousId === id ? null : id;
       if (action === 'journey-close') journeyUI.selectedNodeId = null;
       render(runtime.snapshot());
-      if(action==='journey-section')root.querySelector('#chapter-'+id)?.scrollIntoView({block:'start',behavior:'instant'});
       if (action === 'journey-nav') {
         global.scrollTo({ top: 0, behavior: 'instant' });
         root.querySelector('[data-lesson-title]')?.focus({ preventScroll: true });
@@ -229,29 +204,11 @@
       if (action === 'journey-close') root.querySelector(`.journey-node[data-id="${previousId}"]`)?.focus({ preventScroll: true });
       return;
     }
-    const input = root.querySelector('[data-challenge-input]');
-    if (input && !input.readOnly) {
-      global.clearTimeout(draftTimer);
-      send({type:'challenge-input',value:input.value});
-      if (button.dataset.action === 'map') send({type:'challenge-save-draft',id:input.dataset.challengeId,questionId:input.dataset.questionId});
-    }
-    const writtenInput=root.querySelector('[data-activity-input]');if(writtenInput)captureDraft(writtenInput);
-    const placementInput=root.querySelector('[data-placement-input]');
-    if (placementInput) captureDraft(placementInput);
-    send({ type: button.dataset.action, id: button.dataset.id, nodeId: button.dataset.id,scope:button.dataset.scope || button.dataset.id,...placementIdentity(placementInput) });
+    const exercise=root.querySelector('[data-exercise-id]');
+    const attempt=lastView?.placementAttempt;
+    send({type:button.dataset.action,id:button.dataset.id,nodeId:button.dataset.id,scope:button.dataset.scope||button.dataset.id,questionId:exercise?.dataset.exerciseId,attemptId:attempt?.id});
   });
   root.addEventListener('keydown', event => {
-    if(event.target?.matches?.('[data-activity-input]') && event.key==='Enter'&&!event.shiftKey&&!event.isComposing&&event.keyCode!==229&&!event.repeat){event.preventDefault();if(!event.target.readOnly){captureDraft(event.target);send({type:'check'});}return;}
-    if (event.target?.matches?.('[data-placement-input]') && event.key==='Enter' && !event.shiftKey && !event.isComposing && event.keyCode!==229 && !event.repeat) {
-      event.preventDefault();
-      if (!event.target.readOnly) { captureDraft(event.target);send({type:'placement-check',...placementIdentity(event.target)}); }
-      return;
-    }
-    if (event.target?.matches?.('[data-challenge-input]') && event.key === 'Enter' && !event.shiftKey && !event.isComposing && event.keyCode !== 229 && !event.repeat) {
-      event.preventDefault();
-      if (!event.target.readOnly) { captureDraft(event.target); send({type:'challenge-check'}); }
-      return;
-    }
     if (event.key === 'Escape' && runtime.snapshot().resetRequest) { send({type:'reset-cancel'}); return; }
     if (event.key === 'Escape' && journeyUI.selectedNodeId) {
       const id = journeyUI.selectedNodeId;
@@ -267,7 +224,7 @@
     if (event.shiftKey && global.document.activeElement === first) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && global.document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
-  global.addEventListener('pagehide', stop);
+  global.addEventListener('pagehide', () => {stop();feedbackMedia?.pause();feedbackMedia=null;});
   // A smaller viewport can wrap earlier lines and displace the current turn.
   // Keep the latest story context visible after a resize or orientation change.
   global.addEventListener('resize', () => {

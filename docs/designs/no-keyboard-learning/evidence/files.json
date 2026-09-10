@@ -1,0 +1,77 @@
+[
+  {
+    "file": "repair-correct-320.png",
+    "source": "test-results/review-repair/L49-grammar-correct-tap-320.png",
+    "sha256": "2d6b5a2f568bdd73663577179c056a8eca85ecb3aaff41df55304edc8521a412"
+  },
+  {
+    "file": "picture-sentence-320.png",
+    "source": "test-results/review-repair/L49-grammar-transfer-s-tap-320.png",
+    "sha256": "88f14169698ee6bc251da23b1ae1d6ad41a797b9ccb3d01d09ae4ad78756e74c"
+  },
+  {
+    "file": "audio-pairs-correct-320-full.png",
+    "source": "test-results/review-repair/L49-WORDS-1-teach-0-sound-pairs-tap-320.png",
+    "sha256": "7df7dea1ee83e777e07d4efd43cc35d67c95bb5337ef4d89b933a2d7bf83994a"
+  },
+  {
+    "file": "keywords-selected-420.png",
+    "source": "test-results/no-keyboard-homepage/keywords-selected-420.png",
+    "sha256": "481b00401b467a2a5b16200d887ac1893ce310f90ab37a3171fd744c0d9f1847"
+  },
+  {
+    "file": "mission-empty-420.png",
+    "source": "test-results/no-keyboard-homepage/mission-empty-420.png",
+    "sha256": "daa46f88cbd6bbe893fa5297984770a3f8518fcbd3e8b4efa3df7eff1718df37"
+  },
+  {
+    "file": "mission-selected-420.png",
+    "source": "test-results/no-keyboard-homepage/mission-selected-420.png",
+    "sha256": "ba4b734388be4261001f8ffd90759c9eba5fb7db87984aed9fe357533e4f4b80"
+  },
+  {
+    "file": "mission-correct-420.png",
+    "source": "test-results/no-keyboard-homepage/mission-correct-420.png",
+    "sha256": "827662986f6ef8fe62616c219856b4ec9d182271f1e69ee9ff20cc116579413d"
+  },
+  {
+    "file": "challenge-restored-420.png",
+    "source": "test-results/no-keyboard-homepage/challenge-restored-420.png",
+    "sha256": "4d352ef141feedae3c3b6a81a72f8c220553fb75fee3bfdb9a02009e33634642"
+  },
+  {
+    "file": "map-current-420.png",
+    "source": "test-results/no-keyboard-homepage/current-bubble-420.png",
+    "sha256": "ad05bd14e25aa4a5887baac7d9529fdc879686757157f5acfd14ec1e5a6f8d02"
+  },
+  {
+    "file": "reference-lesson1-420.png",
+    "source": "test-results/no-keyboard-homepage/reference-lesson1-420.png",
+    "sha256": "9284383fd3687c070d907523ab789812b9d372ae43594c19947a15e84c16a224"
+  },
+  {
+    "file": "browser-logs.json",
+    "source": "test-results/no-keyboard-homepage/browser-logs.json",
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  {
+    "file": "storage-budget.json",
+    "source": "test-results/review-repair/storage-budget.json",
+    "sha256": "233714bc6a793dd5d6f2cfa94b8dac79ab01c7a8e5cdc9235da76fca11760ad4"
+  },
+  {
+    "file": "visual-summary.json",
+    "source": "current verification reports",
+    "sha256": "ca74a2e0633ee62be1bd5f7300291b98792b86a2b3be1cec1883401245766b1e"
+  },
+  {
+    "file": "verification-summary.json",
+    "source": "current verification reports",
+    "sha256": "dc628d506c7daae9cbd34a05412611488aa0cc048a5674558c526c1cad7dc305"
+  },
+  {
+    "file": "post-course-summary.json",
+    "source": "current verification reports",
+    "sha256": "7958e4d24d355fbbe427fa7075bacd9cf072d24500f22d05cbae2dff851b3f5a"
+  }
+]

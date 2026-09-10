@@ -1,13 +1,31 @@
 (function attachLearningStore(root, factory) {
   'use strict';
-  const api = factory();
+  const api = factory(root);
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (root) {
     root.CanranCore = root.CanranCore || {};
     root.CanranCore.learningStore = api;
   }
-})(typeof globalThis !== 'undefined' ? globalThis : this, function learningStoreFactory() {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function learningStoreFactory(root) {
   'use strict';
+
+  const table = typeof module === 'object' && module.exports ? require('./course-catalog-wire') : root.CanranCore.courseCatalogWire;
+
+  function decodeEnvelope(raw) {
+    const envelope=JSON.parse(raw);
+    if(envelope?.encoding===undefined)return envelope;
+    if(envelope.encoding!=='record-table-v1'||!isValidEnvelope(envelope))throw Error('Invalid record encoding');
+    return {revision:envelope.revision,value:table.decode(envelope.value)};
+  }
+
+  function encodeEnvelope(envelope) {
+    const plain=JSON.stringify(envelope),value=envelope.value;
+    // Keep original migration/quarantine bytes untouched. Only new, large
+    // archived records share repeated strings and subtrees on disk.
+    if(plain.length<65536||!(value?.keyboardArchive||value?.resetBackup?.record?.keyboardArchive))return plain;
+    const packed=JSON.stringify({revision:envelope.revision,encoding:'record-table-v1',value:table.encode(value)});
+    return packed.length<plain.length?packed:plain;
+  }
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
@@ -35,6 +53,7 @@
     }
     const draftReads = new Map();
     return Object.freeze({
+      decodeEnvelope,
       inspect(key) {
         try { return {status:'ok',raw:readRaw(key),backup:readRaw(key+':recovery:backup'),migration:readRaw(key+':recovery:migration')}; }
         catch { return {status:'unavailable'}; }
@@ -58,7 +77,7 @@
           if (readRaw(key) !== expectedRaw) return {status:'conflict',persisted:false};
           let old; try { old=JSON.parse(expectedRaw); } catch {}
           const next={revision:(isValidEnvelope(old)?old.revision:0)+1,value:clone(value)};
-          verifiedWrite(key,JSON.stringify(next));
+          verifiedWrite(key,encodeEnvelope(next));
           return {status:'committed',persisted:true,...next};
         } catch { return {status:'unavailable',persisted:false}; }
       },
@@ -72,6 +91,8 @@
       },
       saveDraft(key, value) {
         try {
+          const primary=readRaw(key),envelope=primary===null?null:JSON.parse(primary);
+          if((envelope?.revision||0)!==value.baseRevision)return {status:'conflict'};
           const raw=readRaw(key+':draft');
           if (draftReads.has(key) && draftReads.get(key)!==raw) return {status:'conflict'};
           const encoded=JSON.stringify(value);
@@ -89,7 +110,7 @@
         if (encoded === null) return { status: 'ok', revision: 0, value: null };
         let record;
         try {
-          record = JSON.parse(encoded);
+          record = decodeEnvelope(encoded);
         } catch {
           return { status: 'corrupt', revision: 0, value: null };
         }
@@ -111,7 +132,7 @@
         let stored = { revision: 0, value: null };
         if (encoded !== null) {
           try {
-            stored = JSON.parse(encoded);
+            stored = decodeEnvelope(encoded);
           } catch {
             stored = null;
           }
@@ -126,7 +147,7 @@
           };
         }
         const record = { revision: expectedRevision + 1, value: clone(value) };
-        const nextEncoded = JSON.stringify(record);
+        const nextEncoded = encodeEnvelope(record);
         try {
           storage.setItem(key, nextEncoded);
         } catch {

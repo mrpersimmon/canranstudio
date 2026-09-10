@@ -31,11 +31,12 @@ function getCourse() { return course; }
     }
     const spoken = [];
     for (const [id,act] of Object.entries(course.activities)) {
-      if (id !== act.id || !['choice','teach','match','order','cloze','input','interactive-story'].includes(act.kind)) fail('unknown activity '+id);
+      if (id !== act.id || !['choice','teach','match','order','cloze','exercise','interactive-story'].includes(act.kind)) fail('unknown activity '+id);
+      if(act.kind==='exercise')errors.push(...require('./learning-exercises').validate(act,course));
       const refs=[...act.sourceRefs,...(act.noteRefs||[]),...(act.instructionRefs||[]),...(act.meaningRefs||[]),...(act.guideRef?[act.guideRef]:[])];
       for (const ref of refs) { allRefs.add(ref); if (!course.sources[ref]) fail('missing source '+ref); }
       for (const entry of [...act.requiredAudio,...act.feedbackAudio]) if (!course.sources[entry.ref]?.audioSrc) fail('missing audio '+entry.ref);
-      if (act.resultId && (!act.assessment || !['match','input'].includes(act.kind) && (!act.answer.length || act.answer.some(x=>!act.options.some(o=>o.id===x))))) fail('invalid answer '+id);
+      if (act.resultId && (!act.assessment || !['match','exercise'].includes(act.kind) && (!act.answer.length || act.answer.some(x=>!act.options.some(o=>o.id===x))))) fail('invalid answer '+id);
       if(act.kind==='input' && (!['gap','translation'].includes(act.taskKind)||!act.answers?.length||act.answers.some(x=>typeof x!=='string'||!x.trim())||!act.assessment.grammarSkillId))fail('invalid input activity '+id);
       if (act.options?.some(o=>o.type==='image'&&!course.entities[o.entityId])) fail('missing answer image '+id);
       if (act.kind==='teach' && (act.playbackMode!=='manual-cards'||!act.items.length||act.items.some(item=>!course.sources[item.sourceRef]?.audioSrc||(item.presentation==='text' ? !item.caption : !course.entities[item.entityId])))) fail('invalid teaching cards '+id);

@@ -59,15 +59,15 @@ test('settlement is shown only after durable completion, and saving twice cannot
   h.send({type:'save-retry'});assert.deepEqual(h.view().settlement,s);
 });
 
-test('input challenge resumes only remaining questions and assisted answers are not a streak',()=>{
+test('tap challenge resumes only remaining questions and assisted answers are not a streak',()=>{
   const h=setup();for(const n of unit.nodes.slice(0,3))h.finish(n.id);
   h.send({type:'map'});h.send({type:'open-challenge',id:'CH12'});h.send({type:'challenge-start'});
   const questions=unit.challenges.find(c=>c.id==='CH12').questions;
-  h.send({type:'challenge-input',value:questions[0].answers[0]});h.send({type:'challenge-check'});h.send({type:'challenge-next'});
+  require('./support/tap-exercise').answer(h,questions[0]);h.send({type:'challenge-check'});h.send({type:'challenge-next'});
   const r=setup({adapter:h.adapter});r.send({type:'open-challenge',id:'CH12'});r.send({type:'challenge-start'});
   for(const [i,q] of questions.slice(1).entries()){
     if(i===0)r.send({type:'challenge-hint'});
-    r.send({type:'challenge-input',value:q.answers[0]});r.send({type:'challenge-check'});r.send({type:'challenge-next'});
+    require('./support/tap-exercise').answer(r,q);r.send({type:'challenge-check'});r.send({type:'challenge-next'});
   }
   assert.equal(r.view().screen,'challenge-complete');assert.equal(r.view().settlement.completed,questions.length-1);
   assert.equal(r.view().settlement.independent,questions.length-2);assert.equal(r.view().settlement.bestStreak,questions.length-2);

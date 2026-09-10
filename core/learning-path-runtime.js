@@ -7,6 +7,8 @@
   'use strict';
   const challenges = typeof module === 'object' && module.exports ? require('./learning-challenges') : root.CanranCore.learningChallenges;
   const placement = typeof module === 'object' && module.exports ? require('./learning-placement') : root.CanranCore.learningPlacement;
+  const exercises = typeof module === 'object' && module.exports ? require('./learning-exercises') : root.CanranCore.learningExercises;
+  const migration = typeof module === 'object' && module.exports ? require('./learning-record-migration') : root.CanranCore.learningRecordMigration;
   const clone = value => JSON.parse(JSON.stringify(value));
   function freeze(value){if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;}
   const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -37,7 +39,20 @@
   }
   function validRecord(record, unit, allowBackup = true) {
     if (!object(record) || record.schema !== unit.recordSchema || record.unitId !== unit.unitId || record.experienceRevision !== unit.experienceRevision) return false;
-    if(record.contractVersion!==undefined && ![1,unit.contractVersion].includes(record.contractVersion))return false;
+    if(record.contractVersion!==undefined && ![1,...(unit.keyboardHistory?[2]:[]),unit.contractVersion].includes(record.contractVersion))return false;
+    if(record.legacyCompletedNodes!==undefined){
+      const old=record.keyboardArchive?.record;
+      if(!unit.keyboardHistory||!old||!validRecord(old,unit.keyboardHistory)||!object(record.legacyCompletedNodes))return false;
+      if(Object.entries(record.legacyCompletedNodes).some(([id,p])=>p?.version!==2||!unit.keyboardHistory.nodes.some(n=>n.id===id&&(n.activityIds.every(aid=>old.completed[aid])||(old.completedNodeContracts?.[id]===1||(old.contractVersion||1)===1)&&unit.history.nodes[id]?.every(aid=>old.completed[aid])))))return false;
+    }
+    if(record.importedCompletedNodes!==undefined){
+      if(!object(record.importedCompletedNodes))return false;
+      for(const [id,revision]of Object.entries(record.importedCompletedNodes)){
+        const source=unit.progressImports?.find(p=>p.contract.experienceRevision===revision),old=record.archivedProgress?.[revision];
+        const ids=Object.values(source?.contract.activities||{}).filter(a=>a.nodeId===id).map(a=>a.id);
+        if(!source||!old||!validRecord(old,source.contract)||!ids.length||!ids.every(id=>old.completed[id]))return false;
+      }
+    }
     if(record.completedNodeContracts!==undefined && (!object(record.completedNodeContracts)||Object.entries(record.completedNodeContracts).some(([id,version])=>version!==1||!unit.history?.nodes[id]?.every(aid=>record.completed?.[aid]))))return false;
     if (!['completed', 'results', 'attempts', 'roles', 'storyFacts', 'sourceContacts'].every(key => object(record[key]))) return false;
     if (!Object.entries(record.completed).every(([id, value]) => unit.activities[id] && object(value) && typeof value.at === 'string')) return false;
@@ -46,7 +61,9 @@
     if (!Object.entries(record.results).every(([id, value]) => unit.activities[value?.activityId]?.resultId === id && ['independent', 'supported', 'modeled'].includes(value.initialEvidence) && Number.isSafeInteger(value.intervalStage) && /^\d{4}-\d{2}-\d{2}$/.test(value.nextDueDay))) return false;
     if (!Object.values(record.results).every(value=>unit.activities[value.activityId].kind!=='input' || typeof value.value==='string' && value.value.length<=180 && challenges.validErrors(value.errors))) return false;
     if (record.schema >= 3) {
-      if (!Object.values(record.results).every(value => (value.contractVersion === undefined || [1,unit.contractVersion].includes(value.contractVersion)) && equal(value.assessment, (value.contractVersion || record.contractVersion || 1) === 1 && unit.history ? unit.history.assessments[value.activityId] : unit.activities[value.activityId].assessment))) return false;
+      if (!Object.values(record.results).every(value => (value.contractVersion === undefined || [1,...(unit.keyboardHistory?[2]:[]),unit.contractVersion].includes(value.contractVersion)) && equal(value.assessment, (value.contractVersion || record.contractVersion || 1) === 1 && unit.history ? unit.history.assessments[value.activityId] : value.contractVersion===2&&unit.keyboardHistory?unit.keyboardHistory.activities[value.activityId]?.assessment:unit.activities[value.activityId].assessment))) return false;
+      if(!Object.values(record.results).every(r=>unit.activities[r.activityId]?.kind!=='exercise'||exercises.accepts(unit.activities[r.activityId],r.response)&&exercises.ready(unit.activities[r.activityId],r.response,r.heardRefs)&&challenges.validErrors(r.errors)&&r.errors.every(e=>exercises.valid(unit.activities[r.activityId],e.value))))return false;
+      if(!Object.entries(record.attempts).every(([id,a])=>unit.activities[id]?.kind!=='exercise'||exercises.valid(unit.activities[id],a.response)&&challenges.validErrors(a.errors)&&a.errors.every(e=>exercises.valid(unit.activities[id],e.value))))return false;
       for (const a of contracts(unit).matches) {
         const attempt = record.attempts[a.id], result = record.results[a.resultId];
         if (attempt && (!validPairs(attempt.matchedPairs, a) || !object(attempt.wrongByRef)
@@ -95,6 +112,7 @@
       if (Object.entries(record.teachingProgress).some(([id, refs]) => unit.activities[id]?.kind !== 'teach' || !Array.isArray(refs) || refs.some(ref => !unit.activities[id].items.some(item => item.sourceRef === ref)))) return false;
       if (record.challenges !== undefined && (!object(record.challenges) || Object.entries(record.challenges).some(([id, value]) => {
         const definition = unit.challenges?.find(c => c.id === id);
+        if(value.legacyCount && value.legacyCount!==record.keyboardArchive?.record.challenges?.[id]?.answers.length)return true;
         return !definition || !challenges.validProgress(value, definition, unit);
       }))) return false;
       if (record.resetBackup && (!allowBackup || typeof record.resetBackup.at !== 'string'
@@ -136,16 +154,16 @@
     const today = () => day(now());
     let journal = adapter.loadDraft?.(storageKey)?.value || null;
     function draftValue(kind, identity) {
-      return journal?.baseRevision===revision && journal.kind===kind && journal.identity===identity && typeof journal.value==='string' && journal.value.length<=180 ? journal.value : null;
+      return journal?.baseRevision===revision && journal.kind===kind && journal.identity===identity ? journal.value : null;
     }
     function writeDraft(kind, identity, value, after) {
-      const next={baseRevision:revision,kind,identity,value:value.slice(0,180)};
+      const next={baseRevision:revision,kind,identity,value:clone(value)};
       const result=adapter.saveDraft?.(storageKey,next);
       if (!result) {
         const full=clone(record);
         if(kind==='placement')full.placement.attempts[view.placementId].draft=next.value;
         else if(kind==='challenge')((full.challenges ||= {})[view.challengeId] ||= {answers:[]}).draft={questionId:challengeQuestion().id,value:next.value,wrong:view.challengeWrong,hintUsed:view.challengeHintUsed};
-        else full.attempts[view.activityId]={wrong:view.wrong,hintUsed:view.hintUsed,value:next.value};
+        else full.attempts[view.activityId]={wrong:view.wrong,hintUsed:view.hintUsed,response:next.value,errors:clone(view.inputErrors)};
         save(full,after);return;
       }
       if (result.status!=='ok') {draftPending={kind,identity,value,after};view.saveState=result.status==='conflict'?'conflict':'failed';return;}
@@ -157,7 +175,7 @@
       recovery = adapter.inspect?.(storageKey) || {status:'unavailable'};
       recovery.validBackup = null;
       for (const raw of [recovery.backup,recovery.migration]) {
-        try { const backup=JSON.parse(raw); if (backup?.value && validRecord(backup.value,unit)) { recovery.validBackup=backup.value; break; } } catch {}
+        try { const backup=adapter.decodeEnvelope?adapter.decodeEnvelope(raw):JSON.parse(raw); if (backup?.value && validRecord(backup.value,unit)) { recovery.validBackup=backup.value; break; } } catch {}
       }
       view.recovery = {canExport:typeof recovery.raw==='string',canRestore:Boolean(recovery.validBackup),canReset:recovery.status==='ok',code:view.saveState==='storage'?'STORAGE_UNAVAILABLE':'RECORD_INVALID'};
     }
@@ -176,6 +194,12 @@
     }
     function read() {
       const loaded = adapter.load(storageKey);
+      if(loaded.status==='ok'&&loaded.value?.schema===unit.keyboardHistory?.recordSchema&&unit.recordSchema===5&&validRecord(loaded.value,unit.keyboardHistory)){
+        record=loaded.value;revision=loaded.revision;
+        const next=migration.migrate(record,unit,now().toISOString(),journal);
+        if(!validRecord(next,unit)){view={screen:'blocked',saveState:'unreadable',mode:'main',audio:null};inspectRecovery();return false;}
+        save(next,()=>{journal=null;});return !pending;
+      }
       if (loaded.status !== 'ok' || (loaded.value !== null && !validRecord(loaded.value, unit))) {
         view = { screen: 'blocked', saveState: loaded.status === 'unavailable' ? 'storage' : 'unreadable', mode: 'main', audio: null };
         inspectRecovery();
@@ -200,6 +224,8 @@
           const old = imported.value, next = emptyRecord(unit);
           // Preserve every original record. Carry forward only unchanged learning tasks.
           next.archivedProgress = { [source.contract.experienceRevision]: clone(old) };
+          next.importedCompletedNodes={};
+          for(const n of unit.nodes){const ids=Object.values(source.contract.activities).filter(a=>a.nodeId===n.id).map(a=>a.id);if(ids.length&&ids.every(id=>old.completed[id]))next.importedCompletedNodes[n.id]=source.contract.experienceRevision;}
           const unchanged = id => {const previous=source.contract.activities[id],current=unit.activities[id];return previous && current && equal({...previous,feedbackPlayback:current.feedbackPlayback},current);};
           for (const [id, value] of Object.entries(old.completed)) if (unchanged(id)) next.completed[id] = clone(value);
           for (const [id, value] of Object.entries(old.results)) if (unchanged(value.activityId)) next.results[id] = clone(value);
@@ -281,11 +307,12 @@
       // The existing store adapter treats malformed envelopes as revision zero;
       // check the read here so a corrupt record is never overwritten by a retry.
       const current = adapter.load(storageKey);
-      if (current.status !== 'ok' || (current.value !== null && !validRecord(current.value, unit))) {
+      const migrating=current.value?.schema===4&&next.schema===5&&unit.keyboardHistory&&validRecord(current.value,unit.keyboardHistory);
+      if (current.status !== 'ok' || (current.value !== null && !migrating && !validRecord(current.value, unit))) {
         view.saveState = 'unreadable'; stopAudio(false); return;
       }
       if (current.revision !== revision) { view.saveState = 'conflict'; stopAudio(false); return; }
-      const checkpoint = adapter.checkpoint?.(storageKey,{expectedRevision:revision,migration:Boolean(next.contentMigration && !current.value?.contractVersion)}) || {status:'ok'};
+      const checkpoint = adapter.checkpoint?.(storageKey,{expectedRevision:revision,migration:Boolean(migrating||next.contentMigration && !current.value?.contractVersion)}) || {status:'ok'};
       if (checkpoint.status!=='ok') {view.saveState=checkpoint.status==='conflict'?'conflict':'failed';stopAudio(false);return;}
       const result = adapter.commit(storageKey, { expectedRevision: revision, value: next });
       if (!result.persisted || result.status !== 'committed') {
@@ -333,7 +360,7 @@
       if(id.startsWith('retrieval:')) {
         const entry=record.retrievalReviews[id.slice(10)],q=challenges.reviewQuestion(unit,entry);
         Object.assign(view,{screen:'challenge',activityId:null,storyActivityId:null,challengeId:entry.challengeId || 'grammar',reviewQuestion:q,reviewKey:entry.questionId,challengeIndex:0,challengeAnswer:draftValue('challenge',(entry.challengeId || 'grammar')+':'+q.id) || '',challengeWrong:0,challengeHintUsed:false,feedback:null});
-        return;
+        initExercise(q,draftValue('challenge',(entry.challengeId || 'grammar')+':'+q.id));return;
       }
       view.reviewQuestion=null;view.reviewKey=null;
       const a = unit.activities[id];
@@ -349,11 +376,12 @@
       }
       const previous = view.mode === 'main' && !extraIndex ? record.attempts[id] : localAttempts[id];
       Object.assign(view, { screen: 'activity', activityId: id, feedback: null, selected: [],
-        inputAnswer:draftValue('activity',id) ?? previous?.value ?? '',inputErrors:clone(previous?.errors || []),inputDiagnostic:null,
+        inputErrors:clone(previous?.errors || []),inputDiagnostic:null,
         optionOrder: shuffle(a.options, a.kind === 'order' ? a.answer : []),
         wrong: previous?.wrong || 0, hintUsed: previous?.hintUsed || false, hintLevel: previous?.hintUsed ? 1 : 0,
         requiredDone: withinStory || !a.requiredAudio.length, feedbackDone: withinStory || !a.feedbackAudio.length,
         heardWords: view.mode === 'main' ? clone(record.teachingProgress?.[id] || []) : [], heardRefs: [], matchedPairs: clone(previous?.matchedPairs || {}), wrongByRef: clone(previous?.wrongByRef || {}), matchWord: null, matchImage: null, matchMessage: '', storyRevealed: false, storyLineDone: false, storyHelp: false });
+      if(a.kind==='exercise'){initExercise(a,draftValue('activity',id)??previous?.response);return;}
       if (a.kind === 'teach' && a.items.every(item => view.heardWords.includes(item.sourceRef))) view.requiredDone = true;
       if (a.kind === 'match') {
         view.matchWordOrder = shuffle(a.items.map(item => ({ id: item.sourceRef })), []);
@@ -361,10 +389,10 @@
         finishMatching();
       } else if (!withinStory && a.requiredAudio.length && a.playbackMode !== 'manual-cards') play(a.requiredAudio, 'required');
     }
-    const nodeDone = node => node.activityIds.every(id => record.completed[id]) || record.completedNodeContracts?.[node.id]===1 && unit.history?.nodes[node.id]?.every(id=>record.completed[id]);
+    const nodeDone = node => Boolean(record.legacyCompletedNodes?.[node.id]||record.importedCompletedNodes?.[node.id]) || node.activityIds.every(id => record.completed[id]) || record.completedNodeContracts?.[node.id]===1 && unit.history?.nodes[node.id]?.every(id=>record.completed[id]);
     const nodePassed = node => nodeDone(node) || unit.nodes.indexOf(node) < (placement?.skippedUntil(unit,record)||0);
     function dueItems() {
-      const due = Object.values(record?.results || {}).filter(r => r.nextDueDay <= today() && unit.activities[r.activityId].reviewEligible !== false).sort((a, b) =>
+      const due = Object.values(record?.results || {}).filter(r => r.nextDueDay <= today() && unit.activities[r.activityId] && unit.activities[r.activityId].reviewEligible !== false).sort((a, b) =>
         a.nextDueDay.localeCompare(b.nextDueDay) || (a.initialEvidence === 'independent' ? 1 : 0) - (b.initialEvidence === 'independent' ? 1 : 0)
       );
       const seen = new Set();
@@ -402,13 +430,13 @@
       else stopAudio();
     }
     function retainAttempt(after) {
-      const entry = { wrong: view.wrong, hintUsed: view.hintUsed, ...(activity().kind==='input'?{value:view.inputAnswer,errors:clone(view.inputErrors)}:{}), ...(activity().kind === 'match' ? { matchedPairs: clone(view.matchedPairs), wrongByRef: clone(view.wrongByRef) } : {}) };
+      const entry = { wrong: view.wrong, hintUsed: view.hintUsed, ...(activity().kind==='exercise'?{response:clone(view.response),errors:clone(view.inputErrors)}:{}), ...(activity().kind === 'match' ? { matchedPairs: clone(view.matchedPairs), wrongByRef: clone(view.wrongByRef) } : {}) };
       localAttempts[view.activityId] = entry;
       if (view.mode !== 'main' || extraIndex) { after(); return; }
       mutateRecord(next => {
         const a=activity(),previousWrong=next.attempts[view.activityId]?.wrong || 0;
         next.attempts[view.activityId] = entry;
-        if(a.kind==='input' && entry.wrong>previousWrong){
+        if(a.kind==='exercise' && a.assessment.grammarSkillId && entry.wrong>previousWrong){
           const q=unit.grammar.delayedQuestions.find(q=>q.grammarSkillId===a.assessment.grammarSkillId);
           challenges.scheduleReview(next,{origin:'grammar',questionId:q.id,grammarSkillId:q.grammarSkillId,nextDueDay:addDays(today(),1),error:entry.errors.at(-1)});
         }
@@ -441,14 +469,15 @@
     }
     function check() {
       const a = activity();
-      if(a.kind==='input') {
-        if(view.feedback || !view.inputAnswer.trim())return;
-        if(challenges.accepts(a,view.inputAnswer))beginFeedback(view.wrong || view.hintUsed?'supported':'correct');
-        else {view.inputDiagnostic=a.diagnostics?.find(d=>d.values.some(value=>challenges.normalize(value)===challenges.normalize(view.inputAnswer))) || null;view.inputErrors=[...view.inputErrors,{value:view.inputAnswer,code:view.inputDiagnostic?.code || 'unclassified',at:now().toISOString()}].slice(-5);view.wrong++;view.hintUsed=true;view.hintLevel=Math.min(2,view.wrong);retainAttempt(()=>{view.feedback='retry';});}
+      if(a.kind==='exercise'){
+        if(view.feedback||!exercises.ready(a,view.response,view.heardRefs))return;
+        if(exercises.accepts(a,view.response))beginFeedback(view.wrong||view.hintUsed?'supported':'correct');
+        else{view.wrong++;view.hintUsed=true;view.hintLevel=1;view.inputErrors=[...view.inputErrors,{value:clone(view.response),code:a.assessment.grammarSkillId||a.mechanism,at:now().toISOString()}].slice(-5);retainAttempt(()=>{view.feedback='retry';});}
         return;
       }
       if (!a.resultId || a.kind === 'match' || view.feedback || !view.requiredDone || view.selected.length !== a.answer.length) return;
-      if (equal(view.selected, a.answer)) beginFeedback(view.wrong || view.hintUsed ? 'supported' : 'correct');
+      const correct=a.kind==='order'?exercises.accepts({...a,mechanism:'order'},{selected:view.selected,pairs:[],anchor:null}):equal(view.selected,a.answer);
+      if (correct) beginFeedback(view.wrong || view.hintUsed ? 'supported' : 'correct');
       else {
         view.wrong++; view.hintUsed = true; view.hintLevel = Math.min(2, view.wrong);
         retainAttempt(() => {
@@ -490,13 +519,13 @@
         if (a.resultId) {
           next.results[a.resultId] ||= { activityId: a.id, targetId: a.targetId, channel: a.channel,
             ...(unit.contractVersion ? {contractVersion:unit.contractVersion} : {}),
-            ...(a.kind==='input'?{value:view.inputAnswer,errors:clone(view.inputErrors)}:{}),
+            ...(a.kind==='exercise'?{response:clone(view.response),errors:clone(view.inputErrors),heardRefs:clone(view.heardRefs),authoredSupport:a.assessment.support}:{}),
             initialEvidence: evidence, wrong: view.wrong, hintUsed: view.hintUsed, at, assessment: clone(a.assessment),
             ...(a.kind === 'match' ? { pairs: clone(view.matchedPairs) } : {}),
             intervalStage: 0, nextDueDay: addDays(today(), 1) };
           if (extraIndex) next.results[a.resultId].extraPractice = { evidence, at, ...(a.kind === 'match' ? { pairs: clone(view.matchedPairs) } : {}) };
           delete next.attempts[a.id];
-          if(a.kind==='input') {const q=unit.grammar.delayedQuestions.find(q=>q.grammarSkillId===a.assessment.grammarSkillId);challenges.scheduleReview(next,{origin:'grammar',questionId:q.id,grammarSkillId:q.grammarSkillId,nextDueDay:addDays(today(),1)});}
+          if(a.kind==='exercise'&&a.assessment.grammarSkillId) {const q=unit.grammar.delayedQuestions.find(q=>q.grammarSkillId===a.assessment.grammarSkillId);challenges.scheduleReview(next,{origin:'grammar',questionId:q.id,grammarSkillId:q.grammarSkillId,nextDueDay:addDays(today(),1)});}
         }
         if (a.storyFact) next.storyFacts[a.storyFact] = { at };
         if (view.storyActivityId) writeStoryBeat(next, storyProof());
@@ -603,6 +632,24 @@
     }
     const challenge = () => unit.challenges?.find(c => c.id === view.challengeId);
     const challengeQuestion = () => view.reviewQuestion || challenge()?.questions[view.challengeIndex];
+    function currentExercise(){return view.screen==='activity'?activity():view.screen==='challenge'?challengeQuestion():view.screen==='placement'?placement.question(unit,placementAttempt()?.questionIds[view.placementIndex],3):null;}
+    function initExercise(q,response){
+      view.response=exercises.valid(q,response)?clone(response):exercises.empty();
+      view.heardRefs=[];view.exerciseOptionOrder=shuffle(q.options,[]);
+    }
+    function handleExercise(event){
+      const q=currentExercise();if(q?.kind!=='exercise'||event.questionId!==q.id)return;
+      if(event.type==='exercise-listen'){
+        if(q.listenRefs.includes(event.id))play([{ref:event.id}], 'exercise');
+        else if(view.feedback&&event.id===q.sourceRef&&unit.sources[event.id].audioSrc)play([{ref:event.id}],'exercise-feedback');
+        return;
+      }
+      if(event.type!=='exercise-select'||view.feedback)return;
+      const response=exercises.reduce(q,view.response,event.id),pair=q.pairs?.find(p=>p.id===event.id);
+      const kind=view.screen==='activity'?'activity':view.screen==='placement'?'placement':'challenge';
+      const identity=kind==='activity'?q.id:kind==='placement'?placementAttempt().id+':'+q.id:view.challengeId+':'+q.id;
+      writeDraft(kind,identity,response,()=>{view.response=response;if(pair)play([{ref:pair.sourceRef}],'exercise');});
+    }
     const challengeUnlocked = c => c && nodePassed(unit.nodes.find(n => n.id === c.unlockNodeId));
     function showChallenge(id) {
       const definition = unit.challenges?.find(c => c.id === id);
@@ -613,30 +660,32 @@
     function loadChallengeQuestion() {
       const progress = record.challenges?.[view.challengeId] || {answers:[]};
       const draft = progress.draft;
-      const typed=draftValue('challenge',view.challengeId+':'+challenge().questions[progress.answers.length]?.id);
-      Object.assign(view, {screen:'challenge',challengeIndex:progress.answers.length,challengeAnswer:typed ?? draft?.value ?? '',
+      const index=(progress.legacyCount||0)+progress.answers.length;
+      const typed=draftValue('challenge',view.challengeId+':'+challenge().questions[index]?.id);
+      Object.assign(view, {screen:'challenge',challengeIndex:index,challengeAnswer:typed ?? draft?.value ?? '',
         challengeWrong:draft?.wrong || 0,challengeHintUsed:draft?.hintUsed || false,feedback:null});
+      initExercise(challengeQuestion(),typed??draft?.value);
     }
     function saveChallengeDraft(after = () => {}, error = false) {
       if (view.mode==='review' || view.screen !== 'challenge' || view.feedback === 'correct') { after(); return; }
       const next = clone(record); delete next.resetBackup;
       const progress = (next.challenges ||= {})[view.challengeId] ||= {answers:[]};
-      progress.draft = {questionId:challengeQuestion().id,value:view.challengeAnswer,wrong:view.challengeWrong,hintUsed:view.challengeHintUsed};
+      progress.draft = {questionId:challengeQuestion().id,value:clone(view.response),wrong:view.challengeWrong,hintUsed:view.challengeHintUsed};
       if(error) scheduleChallengeReview(next,true);
       save(next, after);
     }
     function challengeError() {
       const diagnostic=challengeQuestion().diagnostics?.find(d=>d.values.some(value=>challenges.normalize(value)===challenges.normalize(view.challengeAnswer)));
-      return {value:view.challengeAnswer,code:diagnostic?.code || 'unclassified',at:now().toISOString()};
+      return {value:clone(view.response),code:diagnostic?.code || challengeQuestion().mechanism,at:now().toISOString()};
     }
     function scheduleChallengeReview(next,error=false) {
       const q=challengeQuestion();
       challenges.scheduleReview(next,{origin:'challenge',challengeId:view.challengeId,questionId:q.id,...(q.grammarSkillId?{grammarSkillId:q.grammarSkillId}:{}),nextDueDay:addDays(today(),1),...(error?{error:challengeError()}: {})});
     }
     function checkChallenge() {
-      if (view.feedback || !view.challengeAnswer.trim()) return;
+      if (view.feedback || !exercises.ready(challengeQuestion(),view.response,view.heardRefs)) return;
       stopAudio();
-      if (challenges.accepts(challengeQuestion(), view.challengeAnswer)) view.feedback = 'correct';
+      if (challenges.accepts(challengeQuestion(), view.response)) view.feedback = 'correct';
       else {
         view.challengeWrong++; view.challengeHintUsed = true;
         if(view.mode==='review') mutateRecord(next=>challenges.scheduleReview(next,{...next.retrievalReviews[view.reviewKey],nextDueDay:addDays(today(),1),error:challengeError()}),()=>{view.feedback='retry';});
@@ -651,19 +700,19 @@
         entry.intervalStage=evidence==='independent'?Math.min(entry.intervalStage+1,unit.review.intervals.length-1):0;
         entry.nextDueDay=addDays(today(),evidence==='independent'?unit.review.intervals[entry.intervalStage]:1);
         entry.lastEvidence=evidence;entry.lastReviewedAt=now().toISOString();
-        entry.lastQuestionId=challengeQuestion().id;entry.lastAnswer=view.challengeAnswer;entry.lastAnswerPolicyVersion=unit.answerPolicyVersion || 1;
+        entry.lastQuestionId=challengeQuestion().id;entry.lastAnswer=clone(view.response);entry.lastAnswerPolicyVersion=unit.answerPolicyVersion || 1;
         entry.authoredSupport=challengeQuestion().authoredSupport || (challengeQuestion().kind==='gap'?'sentence-frame':'none');
         entry.reviewCount=(entry.reviewCount || 0)+1;
         save(next,()=>{scoreSession(evidence==='independent');nextActivity();});return;
       }
       const progress = (next.challenges ||= {})[view.challengeId] ||= {answers:[]};
       const definition = challenge();
-      if (progress.answers.length !== view.challengeIndex) return;
-      progress.answers.push({questionId:challengeQuestion().id,value:view.challengeAnswer,answerPolicyVersion:unit.answerPolicyVersion || 1,wrong:view.challengeWrong,hintUsed:view.challengeHintUsed,
+      if ((progress.legacyCount||0)+progress.answers.length !== view.challengeIndex) return;
+      progress.answers.push({questionId:challengeQuestion().id,value:clone(view.response),assessment:clone(challengeQuestion().assessment),heardRefs:clone(view.heardRefs),answerPolicyVersion:unit.answerPolicyVersion || 1,wrong:view.challengeWrong,hintUsed:view.challengeHintUsed,
         evidence:view.challengeWrong || view.challengeHintUsed ? 'supported' : 'independent',at:now().toISOString()});
       scheduleChallengeReview(next);
       delete progress.draft;
-      if (progress.answers.length === definition.questions.length) progress.completedAt = now().toISOString();
+      if ((progress.legacyCount||0)+progress.answers.length === definition.questions.length) progress.completedAt = now().toISOString();
       stopAudio();
       save(next, () => {
         scoreSession(progress.answers.at(-1).evidence === 'independent');
@@ -683,6 +732,7 @@
       Object.assign(view,{screen:a.status==='active'?'placement':'placement-result',mode:'placement',
         placementIndex:a.cursor,placementAnswer:(a.responses.length===a.cursor ? draftValue('placement',a.id+':'+a.questionIds[a.cursor]) : null) ?? a.draft,feedback:a.status==='active'&&a.responses.length>a.cursor?(a.responses[a.cursor].correct?'correct':'incorrect'):null,
         sessionProgress:{completed:a.responses.length,total:a.questionIds.length}});
+      if(a.status==='active')initExercise(placement.question(unit,a.questionIds[a.cursor],3),view.placementAnswer);
     }
     function writePlacement(attempt,after=loadPlacement) {
       const next=clone(record); delete next.resetBackup;
@@ -704,14 +754,11 @@
       // Identity guards also reject queued clicks/IME drafts from a previous
       // question. The persisted response is the single source of life loss.
       if (a?.status!=='active' || event.attemptId!==a.id || event.questionId!==a.questionIds[a.cursor]) return;
-      if (event.type==='placement-input' && !view.feedback && typeof event.value==='string') {
-        const value=event.value.slice(0,180);
-        if (value!==view.placementAnswer) writeDraft('placement',a.id+':'+a.questionIds[a.cursor],value,()=>{view.placementAnswer=value;});
-      } else if (event.type==='placement-check' && !view.feedback) {
-        const next=placement.grade(unit,a,view.placementAnswer,now().toISOString());
+      if (event.type==='placement-check' && !view.feedback) {
+        const next=placement.grade(unit,a,view.response,now().toISOString(),view.heardRefs);
         if (next) writePlacement(next);
       } else if (event.type==='placement-next' && view.feedback) {
-        writePlacement({...clone(a),cursor:a.cursor+1,draft:''});
+        stopAudio();writePlacement({...clone(a),cursor:a.cursor+1,draft:exercises.empty()});
       }
     }
     function requestReset(scope, id) {
@@ -746,7 +793,7 @@
         previousDone = previousDone && passed;
         return {id:node.id,done,skipped,passed,available,completeActivities:node.activityIds.filter(id=>record?.completed[id]).length,pendingRole:false};
       });
-      projection={nodes,completedCount:unit.checkpointIds.filter(id=>unit.checkpointActivities[id].every(aid=>record?.completed[aid]) || record?.completedNodeContracts?.[id]===1 && nodes.find(n=>n.id===id)?.done).length,passedCount:nodes.filter(n=>n.passed).length,dueCount:dueItems().length};
+      projection={nodes,completedCount:unit.checkpointIds.filter(id=>unit.checkpointActivities[id].every(aid=>record?.completed[aid]) || (record?.legacyCompletedNodes?.[id]||record?.importedCompletedNodes?.[id]||record?.completedNodeContracts?.[id]===1) && nodes.find(n=>n.id===id)?.done).length,passedCount:nodes.filter(n=>n.passed).length,dueCount:dueItems().length};
       projectedRecord=record;projectedDay=today();publicRecord=freeze(clone(record || null));
       }
       const state=clone({ ...view, extraPractice: extraIndex,
@@ -761,6 +808,8 @@
     }
     function dispatch(event, {light = false} = {}) {
       effects = [];
+      const before={feedback:view.feedback,finished:session?.finished,placement:record?.placement?.attempts[view.placementId]?.status,
+        pairs:Object.keys(view.matchedPairs||{}).length,wrong:view.wrong};
       if (event.type === 'session-visibility') {
         pageHidden = Boolean(event.hidden); clockSession(pageHidden);
         return {view:snapshot(light),effects};
@@ -783,10 +832,11 @@
       } else if (event.type === 'open-placement' && view.screen==='map') showPlacement(event.id);
       else if (event.type === 'placement-start' && view.screen==='placement-intro') startPlacement();
       else if (event.type === 'placement-retry' && view.screen==='placement-result' && placementAttempt()?.status==='failed') showPlacement(view.placementId);
+      else if (event.type.startsWith('exercise-'))handleExercise(event);
       else if (event.type.startsWith('placement-') && view.screen==='placement') handlePlacement(event);
       else if (event.type === 'open-challenge' && ['map','celebration','challenge-complete'].includes(view.screen)) showChallenge(event.id);
       else if (event.type === 'challenge-start' && view.screen === 'challenge-intro' && !record.challenges?.[view.challengeId]?.completedAt) {
-        const completed = record.challenges?.[view.challengeId]?.answers.length || 0;
+        const p=record.challenges?.[view.challengeId];const completed = (p?.legacyCount||0)+(p?.answers.length || 0);
         view.sessionProgress = {completed:0,total:challenge().questions.length-completed};
         beginSession();
         loadChallengeQuestion();
@@ -794,7 +844,7 @@
         && event.id === view.challengeId && event.questionId === challengeQuestion().id) saveChallengeDraft();
       else if (event.type === 'open-node' && view.screen === 'map') startNode(event.nodeId, event.mode);
       else if (event.type === 'map') {
-        if (view.screen==='placement' && !view.feedback && view.placementAnswer!==placementAttempt().draft) writePlacement({...clone(placementAttempt()),draft:view.placementAnswer},()=>{});
+        if (view.screen==='placement' && !view.feedback && !equal(view.response,placementAttempt().draft)) writePlacement({...clone(placementAttempt()),draft:clone(view.response)},()=>{});
         if (view.screen==='challenge') saveChallengeDraft();
         if (pending) return {view:snapshot(light),effects:clone(effects)};
         stopAudio(); view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; view.sessionProgress = null; view.challengeId = null; }
@@ -817,8 +867,7 @@
       else if (event.type === 'pause' && view.audio?.status === 'playing') { view.audio.status = 'paused'; effects.push({ type: 'pause-audio' }); }
       else if (event.type === 'resume-audio' && view.audio?.status === 'paused') { view.audio.status = 'playing'; effects.push({ type: 'resume-audio', requestId: view.audio.requestId, index: view.audio.index }); }
       else if (view.screen === 'challenge') {
-        if (event.type === 'challenge-input' && !view.feedback && typeof event.value === 'string' && (!event.questionId || event.questionId===challengeQuestion().id)) writeDraft('challenge',view.challengeId+':'+challengeQuestion().id,event.value,()=>{view.challengeAnswer=event.value.slice(0,180);});
-        else if (event.type === 'challenge-check') checkChallenge();
+        if (event.type === 'challenge-check') checkChallenge();
         else if (event.type === 'challenge-retry' && view.feedback === 'retry') view.feedback = null;
         else if (event.type === 'challenge-hint' && !view.feedback) { view.challengeHintUsed = true; saveChallengeDraft(); }
         else if (event.type === 'challenge-next') completeChallengeQuestion();
@@ -826,8 +875,7 @@
       }
       else if (view.screen === 'activity') {
         const a = activity();
-        if (event.type==='activity-input' && a.kind==='input' && !view.feedback && event.id===a.id && typeof event.value==='string') writeDraft('activity',a.id,event.value,()=>{view.inputAnswer=event.value.slice(0,180);});
-        else if (event.type === 'select' && a.kind !== 'match' && view.requiredDone && !view.feedback && a.options.some(o => o.id === event.id)) {
+        if (event.type === 'select' && a.kind !== 'match' && view.requiredDone && !view.feedback && a.options.some(o => o.id === event.id)) {
           if (a.kind === 'order') view.selected = view.selected.includes(event.id) ? view.selected.filter(id => id !== event.id) : [...view.selected, event.id];
           else view.selected = [event.id];
         } else if (['match-word', 'match-image'].includes(event.type) && a.kind === 'match' && !view.feedback) {
@@ -874,6 +922,20 @@
         }
         else if (event.type === 'continue') finishActivity();
       }
+      // Feedback follows a new outcome, never a render, restored answer, or
+      // historical result. It cannot satisfy a course recording's ended gate.
+      let sound;
+      const status=record?.placement?.attempts[view.placementId]?.status;
+      if(!view.saveState){
+        if(before.placement==='active'&&['passed','failed'].includes(status))sound=status==='passed'?'complete':'failed';
+        else if(session?.finished&&!before.finished)sound='complete';
+        else if(['check','challenge-check','placement-check','match-image','match-word','save-retry'].includes(event.type)){
+          if(view.feedback&&view.feedback!==before.feedback)sound=['correct','supported'].includes(view.feedback)?'correct':'incorrect';
+          else if(Object.keys(view.matchedPairs||{}).length>before.pairs)sound='correct';
+          else if(view.matchMessage==='retry'&&view.wrong>before.wrong)sound='incorrect';
+        }
+      }
+      if(sound&&unit.feedbackSounds?.[sound])effects.push({type:'play-feedback',sound,...unit.feedbackSounds[sound]});
       return { view: snapshot(light), effects: clone(effects) };
     }
     return Object.freeze({ storageKey, dispatch, snapshot });

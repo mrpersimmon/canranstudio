@@ -6,20 +6,15 @@ const unit=require('../../core/learning-course-catalog').getCourse();
 const placement=require('../../core/learning-placement'),answers=require('../../core/learning-challenges');
 function open(h,id='umbrella') {h.send({type:'open-placement',id});assert.equal(h.view().screen,'placement-intro');h.send({type:'placement-start'});}
 function identity(h){const a=h.view().placementAttempt;return {attemptId:a.id,questionId:a.questionIds[a.cursor]};}
-function input(h,value){h.send({type:'placement-input',value,...identity(h)});}
-function grade(h,correct=true){const q=placement.question(unit,identity(h).questionId);input(h,correct?q.answers.at(-1):'wrong answer');h.send({type:'placement-check',...identity(h)});}
+function input(h,value){const q=placement.question(unit,identity(h).questionId);if(value==='unfinished draft'||value==='other tab')h.send({type:'exercise-select',questionId:q.id,id:q.options[0].id});else require('./support/tap-exercise').answer(h,q,value!=='wrong answer');}
+function grade(h,correct=true){const q=placement.question(unit,identity(h).questionId);input(h,correct?true:'wrong answer');h.send({type:'placement-check',...identity(h)});}
 function finish(h,wrong=0){for(let i=0;i<20 && h.view().screen==='placement';i++){grade(h,i>=wrong);if(h.view().feedback)h.send({type:'placement-next',...identity(h)});}}
 
-test('authored answer types distinguish words from full sentences even when source IDs contain W',()=>{
-  const watch=unit.placement.questions.find(q=>q.sourceRef==='NCE-U01-C-Q-WATCH');
-  assert.notEqual(watch.answerType,'word');
-  assert.equal(unit.placement.questions.find(q=>q.sourceRef==='L02-W04').answerType,'word');
-  for(const q of unit.placement.questions.filter(q=>q.answerType==='word'))assert.equal(q.answers[0].trim().split(/\s+/).length,1,q.id);
-  const bad=structuredClone(unit);bad.placement.questions.find(q=>q.id===watch.id).answerType='word';
-  assert.ok(placement.validateDefinitions(bad).some(e=>e.includes('answer type')));
-  const h=setup();open(h);while(identity(h).questionId!==watch.id){grade(h);h.send({type:'placement-next',...identity(h)});}
-  const html=require('../../core/learning-path-scene').createRenderer(unit).render(h.view());
-  assert.match(html,/>翻译这句话<\/h1>/);assert.match(html,/placeholder="用英文写出整句话"/);
+test('foundation uses picture choice and word banks with no editable answers',()=>{
+ const watch=unit.placement.questions.find(q=>q.sourceRef==='L02-W04');assert.equal(watch.form,'T02');
+ assert.ok(watch.options.every(o=>o.entityId));
+ const q=unit.placement.questions.find(q=>q.sourceRef==='NCE-U01-C-Q-WATCH');assert.equal(q.mechanism,'order');
+ const h=setup();open(h);const html=require('../../core/learning-path-scene').createRenderer(unit).render(h.view());assert.doesNotMatch(html,/<input|<textarea|翻译这句话/);
 });
 
 test('every skip destination has 20 unique, bounded questions; wide jumps cover the skipped range',()=>{
@@ -61,7 +56,7 @@ test('fixed questions, current draft, feedback and mistakes survive leave and re
   h.send({type:'placement-next',...identity(h)});input(h,'unfinished draft');
   const saved=structuredClone(h.view().placementAttempt);
   h=setup({adapter:h.adapter});open(h,'lesson-21-22');
-  assert.deepEqual(h.view().placementAttempt,saved);assert.equal(h.view().placementAnswer,'unfinished draft');
+  assert.deepEqual(h.view().placementAttempt,saved);assert.deepEqual(h.view().response.selected,[placement.question(unit,identity(h).questionId).options[0].id]);
   assert.equal(h.view().sessionProgress.completed,1);assert.equal(h.view().sessionProgress.total,20);
 });
 test('four mistakes may pass only after all 20 responses; skipping never fabricates learned evidence',()=>{
@@ -90,15 +85,15 @@ test('saving the final answer must succeed before unlocking; stale tabs cannot o
   const adapter={load:backing.load,commit:(...args)=>fail?{status:'unavailable',persisted:false}:backing.commit(...args)};
   const h=setup({adapter});open(h);
   for(let i=0;i<19;i++){grade(h);h.send({type:'placement-next',...identity(h)});}
-  input(h,placement.question(unit,identity(h).questionId).answers[0]);
+  input(h,true);
   fail=true;h.rt.dispatch({type:'placement-check',...identity(h)});
   assert.equal(h.view().saveState,'failed');assert.equal(h.view().passedCount,0);
   assert.equal(backing.load(h.rt.storageKey).value.placement.attempts.umbrella.responses.length,19);
   fail=false;h.send({type:'save-retry'});assert.equal(h.view().passedCount,3);
   h.send({type:'map'});open(h,'friends');
   const other=setup({adapter});open(other,'friends');input(other,'other tab');
-  h.rt.dispatch({type:'placement-input',value:'stale',...identity(h)});
-  assert.equal(h.view().saveState,'conflict');assert.equal(backing.load(h.rt.storageKey).value.placement.attempts.friends.draft,'other tab');
+  h.rt.dispatch({type:'exercise-select',id:placement.question(unit,identity(h).questionId).options[1].id,questionId:identity(h).questionId});
+  assert.equal(h.view().saveState,'conflict');assert.ok(backing.load(h.rt.storageKey).value.placement.attempts.friends.draft.selected.length);
 });
 test('damaged or fabricated placement responses are rejected without touching stored progress',()=>{
   const h=setup();open(h);grade(h,false);const good=structuredClone(h.view().record);

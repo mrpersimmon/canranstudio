@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..');
 const PROOF = 'test-results/readability-proof.json';
 const VIEWPORTS = [[320,568],[420,856],[906,801],[1440,900]];
 const ACTIVITY_IDS = Object.keys(require('../content/learning-course.json').activities);
+const EXERCISE_IDS = Object.values(require('../content/learning-course.json').activities).filter(a=>a.kind==='exercise').map(a=>a.id);
 const TEACH_IDS = Object.values(require('../content/learning-course.json').activities).filter(a=>a.kind==='teach').map(a=>a.id);
 const NODE_IDS = require('../content/learning-course.json').nodes.map(node=>node.id);
 const CHALLENGES = require('../content/learning-course.json').challenges;
@@ -19,7 +20,7 @@ function fingerprint(prepared, root = ROOT) {
   for (const dir of ['tests/browser']) for (const file of fs.readdirSync(path.join(root, dir))) {
     sources.set(dir + '/' + file, fs.readFileSync(path.join(root, dir, file)));
   }
-  for (const file of ['scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/verify-course-media.js','package.json','package-lock.json']) {
+  for (const file of ['scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/verify-course-media.js','package.json','package-lock.json']) {
     sources.set(file, fs.readFileSync(path.join(root, file)));
   }
   return hash([...sources].sort(([a],[b])=>a.localeCompare(b)).map(([name,bytes])=>name+':'+hash(bytes)).join('\n'));
@@ -36,7 +37,7 @@ function validateReport(report) {
   })) throw Error('Missing reserved-scrollbar coverage or horizontal overflow remains');
   for (const viewport of VIEWPORTS) {
     const cases = report.checks.filter(check=>String(check.viewport)===String(viewport));
-    for (const name of ['settlement-visibility-input','loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...NODE_IDS.map(id=>'completion-return-'+id),...CHALLENGE_SCREENS]) {
+    for (const name of ['settlement-visibility-selection','loader','map','story-two-lines','references','celebration','replay-complete','replay-return-map','review-complete','review-return-map','blocked','save-failure','map-return','reload-map',...NODE_IDS.map(id=>'completion-return-'+id),...CHALLENGE_SCREENS]) {
       if (!cases.some(check=>check.name===name)) throw Error('Missing browser coverage: '+viewport+' / '+name);
     }
     for (const check of cases.filter(c=>['celebration','replay-complete','review-complete'].includes(c.name) || c.name.startsWith('challenge-complete-'))) {
@@ -44,7 +45,8 @@ function validateReport(report) {
       if (check.sessionProgress || !check.settlement?.headerAbsent || check.settlement.values.length!==3 || !check.settlement.finished || check.settlement.completed<=0) throw Error('Completion must show three current-session metrics without a lesson header: '+viewport);
     }
     for(const c of CHALLENGES) for(const q of c.questions) for(const prefix of ['challenge-empty-','challenge-filled-','challenge-correct-'])
-      if(!cases.some(check=>check.name===prefix+q.id))throw Error('Missing written challenge state: '+viewport+' / '+prefix+q.id);
+      if(!cases.some(check=>check.name===prefix+q.id))throw Error('Missing tap challenge state: '+viewport+' / '+prefix+q.id);
+    for(const id of EXERCISE_IDS)if(!cases.some(c=>c.name==='tap-selected-'+id)||!cases.some(c=>c.name==='tap-correct-'+id))throw Error('Missing exercise interaction state: '+viewport+' / '+id);
     const covered=new Set(cases.filter(c=>c.activityId).map(c=>c.activityId));
     if(ACTIVITY_IDS.some(id=>!covered.has(id)))throw Error('Missing authored activity coverage: '+viewport);
     if(TEACH_IDS.some(id=>!cases.some(c=>c.name==='words-queued-'+id)||!cases.some(c=>c.name==='words-heard-'+id)))throw Error('Missing rapid-tap coverage: '+viewport);
@@ -52,7 +54,7 @@ function validateReport(report) {
     if(!map.journeyLayout?.gaps?.length||map.journeyLayout.gaps.some(gap=>Math.abs(gap-map.journeyLayout.pitch)>1))throw Error('Missing or uneven map geometry: '+viewport);
     if(!map.centeredIcons?.some(icon=>icon.action==='journey-locate') || map.centeredIcons.some(icon=>Math.abs(icon.x)>1 || Math.abs(icon.y)>1))throw Error('Missing or uncentered icon geometry: '+viewport);
   }
-  if (!['settlement-historical-total','settlement-lesson-header','placement-heart-mismatch','placement-answer-type-mismatch','white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
+  if (!['keyboard-answer-regression','settlement-historical-total','settlement-lesson-header','placement-heart-mismatch','placement-answer-type-mismatch','white-on-light','dark-multiply','missing-image','opaque-art','theme-discontinuity','uneven-node-spacing','completion-skips-map','completion-button-offscreen','off-center-arrow','route-progress-in-lesson','scrollbar-width-overflow','low-contrast-sticky-title','covered-sticky-title'].every(name=>report.mutations?.some(m=>m.name===name&&m.caught))) throw Error('Readability guard did not detect its negative controls');
 }
 function assertVisualProof(prepared, root = ROOT) {
   let proof;

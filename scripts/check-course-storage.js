@@ -47,7 +47,47 @@ async function main() {
     assert.ok(result.copies.every(Boolean));
     assert.equal(result.completed, Object.keys(unit.activities).length);
     assert.equal(result.screen, 'map');
-    const report = {status: 'passed', ...result};
+    // Derive a large historical fixture from completed, unchanged activities.
+    // Do not invent grades for retired input tasks or newly added exercises.
+    const old=structuredClone(envelope.value),history=unit.keyboardHistory;
+    const unchanged=id=>unit.activities[id]&&history.activities[id]&&JSON.stringify(unit.activities[id])===JSON.stringify(history.activities[id]);
+    old.schema=history.recordSchema;old.contractVersion=history.contractVersion;
+    for(const key of ['keyboardArchive','legacyCompletedNodes','interruptedPlacements'])delete old[key];
+    old.completed=Object.fromEntries(Object.entries(old.completed).filter(([id])=>unchanged(id)));
+    old.results=Object.fromEntries(Object.entries(old.results).filter(([,r])=>unchanged(r.activityId)).map(([id,r])=>[id,{...r,contractVersion:history.contractVersion}]));
+    old.attempts=Object.fromEntries(Object.entries(old.attempts).filter(([id])=>unchanged(id)));
+    old.reviewEvents=(old.reviewEvents||[]).filter(e=>unchanged(e.activityId));
+    old.challenges={};old.retrievalReviews={};old.placement={attempts:{}};
+    assert.ok(runtime.validRecord(old,history));
+    const migration=await page.evaluate(({old,unitId})=>{
+      const c=window.CanranCore,u=c.curriculumCatalog.getTeachingUnit(unitId),key=`poc:learning-path:${u.unitId}:${u.experienceRevision}`;
+      const raw=JSON.stringify({revision:7,value:old});localStorage.clear();
+      for(const suffix of ['',':recovery:backup',':recovery:quarantine'])localStorage.setItem(key+suffix,raw);
+      const adapter=c.learningStore.createLocalStorageAdapter(localStorage);
+      const first=c.learningPathRuntime.createRuntime({unit:u,adapter}).snapshot(true),loaded=adapter.load(key);
+      const checkpoint=adapter.checkpoint(key,{expectedRevision:loaded.revision});
+      const committed=checkpoint.status==='ok'?adapter.commit(key,{expectedRevision:loaded.revision,value:loaded.value}):null;
+      const saved=localStorage.getItem(key),preserved=localStorage.getItem(key+':recovery:migration')===raw&&localStorage.getItem(key+':recovery:quarantine')===raw;
+      const totalCharacters=Array.from({length:localStorage.length},(_,i)=>localStorage.getItem(localStorage.key(i)).length).reduce((a,b)=>a+b,0);
+      // The actual recovery controller must recognize a packed valid backup.
+      const bad='{"revision":99,"encoding":"record-table-v1","value":{"codec":"course-table-v1","strings":[],"nodes":[[0,4]],"root":0}}';
+      localStorage.setItem(key,bad);
+      const broken=c.learningPathRuntime.createRuntime({unit:u,adapter}),canRestore=broken.snapshot().recovery?.canRestore;
+      const exported=broken.dispatch({type:'recovery-export'}).effects.find(e=>e.type==='export-record')?.content;
+      broken.dispatch({type:'recovery-restore'});broken.dispatch({type:'recovery-confirm'});
+      const restored=broken.snapshot(true);
+      return {oldActivities:Object.keys(old.completed).length,initialScreen:first.screen,schema:first.record.schema,checkpoint:checkpoint.status,commit:committed?.status,
+        exactOldCopies:preserved,storedCharacters:saved.length,totalCharacters,canRestore,exportExact:exported===bad,restoredScreen:restored.screen,
+        exactArchivedRecord:JSON.stringify(restored.record.keyboardArchive?.record)===JSON.stringify(old),
+        originalMigrationBytes:localStorage.getItem(key+':recovery:migration')===raw,quarantineExact:localStorage.getItem(key+':recovery:quarantine')===bad,
+        valid:c.learningPathRuntime.validRecord(restored.record,u)};
+    },{old,unitId:unit.unitId});
+    assert.equal(migration.initialScreen,'map');assert.equal(migration.schema,5);
+    assert.equal(migration.checkpoint,'ok');assert.equal(migration.commit,'committed');
+    for(const key of ['exactOldCopies','canRestore','exportExact','exactArchivedRecord','originalMigrationBytes','quarantineExact','valid'])assert.equal(migration[key],true,key);
+    assert.equal(migration.restoredScreen,'map');
+    await page.reload();await page.waitForSelector('.journey-app');assert.equal(await page.locator('[data-action="recovery-restore"]').count(),0);
+    const report = {status: 'passed', ...result, largeArchiveMigration:migration};
     fs.writeFileSync('test-results/review-repair/storage-budget.json', JSON.stringify(report, null, 2) + '\n');
     console.log(JSON.stringify(report, null, 2));
   } finally {

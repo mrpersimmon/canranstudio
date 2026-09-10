@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-09-10T12:19:33.339621+00:00",
+  "scope": "Local preview service recovery; no course or UI changes",
+  "questionId": "PL12-8:tap",
+  "sourceRef": "NCE-U01-C-Q-CAR",
+  "text": "Is this your car?",
+  "command": "node scripts/check-local-preview.js 42827",
+  "before": {
+    "failedCommandRuns": 2,
+    "connectionError": "ECONNREFUSED",
+    "listenerPresent": false,
+    "assetInPackage": true,
+    "assetBytes": 19053,
+    "checkEnabled": false
+  },
+  "after": {
+    "checkedResources": 13,
+    "rangeStatus": 206,
+    "rangeBytesMatch": true,
+    "nativeEndedVisible": true,
+    "checkEnabled": true,
+    "selectedWords": [
+      "Is",
+      "this",
+      "your",
+      "car?"
+    ],
+    "questionNumber": "1 / 20",
+    "hearts": 5,
+    "answerSubmittedByAgent": false,
+    "pid": 17013,
+    "parentPid": 1,
+    "idempotentStart": true,
+    "occupiedPortPreserved": true
+  },
+  "visualProof": {
+    "action": "Validated the existing unchanged fingerprint; did not rerun the matrix",
+    "states": 41356,
+    "status": "passed"
+  },
+  "images": [
+    {
+      "file": "reported.png",
+      "dimensions": [
+        865,
+        1212
+      ],
+      "sha256": "afbea30ffb5b43df3cfd7b26747e1d903a1d6f355739a865cdae598d2c5e1529"
+    },
+    {
+      "file": "before.jpg",
+      "dimensions": [
+        1157,
+        1234
+      ],
+      "sha256": "85a51dce96e5ccb50ec0a9618ddce613f282ed4ee468e4653983e4634d89c671"
+    },
+    {
+      "file": "after.jpg",
+      "dimensions": [
+        1157,
+        1234
+      ],
+      "sha256": "a5d91e8120f7830d7769327f2347e44a7401069e162d9e84ff173b32d5ab7d7e"
+    }
+  ]
+}

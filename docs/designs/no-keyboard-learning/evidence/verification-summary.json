@@ -1,0 +1,110 @@
+{
+  "revision": "lesson1-144-v7.0",
+  "scope": "local implementation and technical verification",
+  "status": "passed",
+  "unitTests": {
+    "passed": 142,
+    "failed": 0,
+    "skipped": 0,
+    "note": "npm test full suite; visual-proof tests were rerun after the browser preflight change"
+  },
+  "coursePackage": {
+    "resources": 76,
+    "bytes": 4184345
+  },
+  "visual": {
+    "status": "passed",
+    "finishedAt": "2026-09-10T06:06:37.116Z",
+    "fingerprint": "25713db305028f1559fcd8a5dfbd4f445b4385003a52c9188be7e2d08e290002",
+    "states": 41356,
+    "errors": 0,
+    "mutations": 72,
+    "caught": 72,
+    "viewports": [
+      {
+        "size": [
+          320,
+          568
+        ],
+        "states": 10339,
+        "activities": 1581,
+        "challengeEmpty": 580,
+        "challengeSelected": 580,
+        "challengeCorrect": 580,
+        "scrollbarWidths": [
+          15
+        ]
+      },
+      {
+        "size": [
+          420,
+          856
+        ],
+        "states": 10339,
+        "activities": 1581,
+        "challengeEmpty": 580,
+        "challengeSelected": 580,
+        "challengeCorrect": 580,
+        "scrollbarWidths": [
+          15
+        ]
+      },
+      {
+        "size": [
+          906,
+          801
+        ],
+        "states": 10339,
+        "activities": 1581,
+        "challengeEmpty": 580,
+        "challengeSelected": 580,
+        "challengeCorrect": 580,
+        "scrollbarWidths": [
+          15
+        ]
+      },
+      {
+        "size": [
+          1440,
+          900
+        ],
+        "states": 10339,
+        "activities": 1581,
+        "challengeEmpty": 580,
+        "challengeSelected": 580,
+        "challengeCorrect": 580,
+        "scrollbarWidths": [
+          15
+        ]
+      }
+    ]
+  },
+  "media": {
+    "status": "passed",
+    "entries": 2832,
+    "fingerprint": "0833fcc2b5fb4498839eaf7ea67522804a1df86dded7951f2ca4a82833e08b6f",
+    "finishedAt": "2026-09-10T03:50:01.871Z",
+    "humanListening": false
+  },
+  "nativeBrowser": {
+    "status": "passed",
+    "samples": 42,
+    "errors": [],
+    "offlineReplay": true,
+    "upgrade": {
+      "preservedNodes": 11,
+      "next": "L07-STORY",
+      "loadedScene": true
+    },
+    "finishedAt": "2026-09-10T04:51:51.700Z"
+  },
+  "releaseBuild": {
+    "status": "blocked",
+    "reason": "Release input differs from HEAD: poc/learning-path/course-package-manifest.json"
+  },
+  "commit": false,
+  "push": false,
+  "deployment": false,
+  "teacherReview": "pending",
+  "studentTrial": "pending"
+}

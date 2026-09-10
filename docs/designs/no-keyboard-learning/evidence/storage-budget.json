@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "checkpoint": "ok",
+  "commit": "committed",
+  "copies": [
+    true,
+    true,
+    true
+  ],
+  "completed": 1581,
+  "screen": "map",
+  "characters": 1068569,
+  "totalCharacters": 4274262,
+  "largeArchiveMigration": {
+    "oldActivities": 1427,
+    "initialScreen": "map",
+    "schema": 5,
+    "checkpoint": "ok",
+    "commit": "committed",
+    "exactOldCopies": true,
+    "storedCharacters": 316708,
+    "totalCharacters": 2520374,
+    "canRestore": true,
+    "exportExact": true,
+    "restoredScreen": "map",
+    "exactArchivedRecord": true,
+    "originalMigrationBytes": true,
+    "quarantineExact": true,
+    "valid": true
+  }
+}

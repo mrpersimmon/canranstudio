@@ -303,6 +303,7 @@ for (const challenge of unit.challenges) {
 require('./lib/compile-grammar-pilot')(unit);
 for(const c of unit.challenges) for(const q of c.questions) q.answerPolicy=q.kind==='gap'?'constrained-form':'reviewed-translation';
 for(const q of unit.placement.questions) q.answerPolicy=q.kind==='gap'?'constrained-form':'reviewed-translation';
+require('./lib/compile-no-keyboard')(unit,audioRequests);
 write('content/learning-course.json',unit);
 write('content/textbook-sources.json',sourceIndex);
 write('content/expansion/audio-request.json',{model:'Kokoro-82M',revision:'f3ff3571791e39611d31c381e3a41a3af07b4987',items:audioRequests});

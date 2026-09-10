@@ -6,10 +6,14 @@ test('the complete authored catalog round-trips with every value and order intac
   assert.deepEqual(decode(JSON.parse(JSON.stringify(wire))),course);
   assert.equal(JSON.stringify(decode(wire)),JSON.stringify(course));
   assert.ok(Buffer.byteLength(JSON.stringify(wire))<Buffer.byteLength(JSON.stringify(course))*0.55);
+  const compact=encode(course,{compactStrings:true});
+  assert.equal(JSON.stringify(decode(compact)),JSON.stringify(course));
+  assert.ok(Buffer.byteLength(JSON.stringify(compact))<Buffer.byteLength(JSON.stringify(wire)));
 });
 test('transport distinguishes strings, references, primitives and special object keys',()=>{
   const values=JSON.parse('{"__proto__":{"safe":true},"constructor":7,"items":[-1,0,1,null,true,false,"",[],{},["same"],["same"]]}');
   assert.deepEqual(decode(encode(values)),values);
+  for(const value of [values,'single',0,null,[],{},true])assert.deepEqual(decode(encode(value,{compactStrings:true})),value);
   assert.equal({}.safe,undefined);
   assert.throws(()=>encode({bad:undefined}),/JSON/);
 });

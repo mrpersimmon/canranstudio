@@ -1,0 +1,6 @@
+Command: node scripts/check-answer-feedback.js
+Before the production fix, after adding the viewport-y assertion:
+AssertionError [ERR_ASSERTION]: 832 o2 y shifted -167px
+Exit code: 1
+
+The initial geometry probe also measured unchanged documentY, relativeX, relativeY, width and height for every image. A test-only controller response removed the feedback scrollIntoView call: 832, 420 and 320 widths passed with dy=0. See scroll-probe.json.

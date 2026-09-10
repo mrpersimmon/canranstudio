@@ -42,7 +42,7 @@ function build() {
   let html = fs.readFileSync(htmlPath, 'utf8').replace(/\/poc\/learning-path\/boot\/course-entry-[a-f0-9]+\.js/g, bootURL);
   if (!html.includes('src="' + bootURL + '"')) throw Error('Missing course bootstrap script');
   fs.mkdirSync(path.dirname(localPath(CATALOG_URL)), { recursive: true });
-  fs.writeFileSync(localPath(CATALOG_URL), JSON.stringify(encode(unit)) + '\n');
+  fs.writeFileSync(localPath(CATALOG_URL), JSON.stringify(encode(unit,{compactStrings:true})) + '\n');
 
   const resources = new Set([CATALOG_URL, bootURL, '/core/course-package-installer.js', '/core/course-package-service-worker.js']);
   function add(value, base) {

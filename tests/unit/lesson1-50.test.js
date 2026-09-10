@@ -16,16 +16,17 @@ test('a blank targets a whole word instead of matching his inside This',()=>{
     assert.ok(!/[a-z]$/i.test(a.cloze.prefix)||!/^[a-z]/i.test(answer),a.id);
     assert.ok(!/^[a-z]/i.test(a.cloze.suffix)||!/[a-z]$/i.test(answer),a.id);
   }
-  for(const c of unit.challenges)for(const q of c.questions.filter(q=>q.kind==='gap')){
+  for(const c of unit.challenges)for(const q of c.questions.filter(q=>q.mechanism==='cloze')){
     const source=unit.sources[q.sourceRef].text;
-    assert.deepEqual({prefix:q.prefix,suffix:q.suffix},testedSpan(source,q.answers[0]),q.id);
+    assert.deepEqual({prefix:q.prefix,suffix:q.suffix},testedSpan(source,q.options.find(o=>q.answer.includes(o.id)).text),q.id);
   }
 });
 
-test('all 72 textbook pairs have original text, teaching, retrieval and an optional written challenge',()=>{
+test('all 72 textbook pairs have original text, teaching, retrieval and an optional tap challenge',()=>{
   assert.deepEqual(unit.lessonIds,Array.from({length:144},(_,i)=>i+1));
   assert.equal(unit.chapters.length,72);
-  assert.equal(unit.referenceGroups.length,144);
+  assert.equal(unit.referenceGroups.filter(g=>/^lesson\d+$/.test(g.id)).length,144);
+  assert.equal(unit.referenceGroups.find(g=>g.id==='grammar49-examples').sourceRefs.length,9);
   const introduced=new Set(Object.values(baseline.activities).flatMap(a=>a.sourceRefs));
   for(let lesson=7;lesson<=143;lesson+=2){
     const chapter=unit.chapters.find(c=>c.lessonIds[0]===lesson);
@@ -43,8 +44,8 @@ test('all 72 textbook pairs have original text, teaching, retrieval and an optio
     for(const word of words)assert.ok(taught.has(word.sourceId),'word never introduced: '+word.sourceId);
     const challenge=unit.challenges.find(c=>c.unlockNodeId===nodes.at(-1).id);
     assert.ok(challenge,'missing challenge for '+lesson);
-    assert.ok(challenge.questions.some(q=>q.kind==='translation'));
-    assert.ok(challenge.questions.some(q=>q.kind==='gap'));
+    assert.ok(challenge.questions.some(q=>q.mechanism==='order'||q.mechanism==='choice'));
+    assert.ok(challenge.questions.some(q=>q.mechanism==='cloze'));
     for(const q of challenge.questions)assert.ok(introduced.has(q.sourceRef),'challenge precedes teaching: '+q.id+' '+q.sourceRef);
     assert.ok(acts.some(a=>a.kind==='order'));
     assert.ok(acts.some(a=>a.kind==='cloze'));
@@ -55,13 +56,13 @@ test('the six-lesson catalog and its learner identity remain unchanged when the 
   assert.equal(unit.unitId,baseline.unitId);
   assert.equal(unit.experienceRevision,baseline.experienceRevision);
   assert.notEqual(unit.releaseRevision,unit.experienceRevision);
-  for(const [id,activity] of Object.entries(baseline.activities))assert.deepEqual(priorItem(unit,'activities',unit.activities[id]),activity,id);
-  for(const node of baseline.nodes)assert.deepEqual(unit.nodes.find(n=>n.id===node.id),node,node.id);
+  for(const [id,activity] of Object.entries(baseline.activities))assert.deepEqual(priorItem(unit.keyboardHistory,'activities',unit.keyboardHistory.activities[id]),activity,id);
+  for(const node of baseline.nodes)assert.deepEqual(unit.keyboardHistory.nodes.find(n=>n.id===node.id),node,node.id);
   const old=setup({unit:baseline});for(const node of baseline.nodes)old.finish(node.id);
   const before=old.adapter.inspect(old.rt.storageKey).raw;
   const upgraded=setup({adapter:old.adapter});
   assert.equal(upgraded.view().completedCount,baseline.nodes.length);
-  assert.deepEqual(evidenceOnly(upgraded.view().record),old.view().record);
+  assert.deepEqual(upgraded.view().record.keyboardArchive.record,old.view().record);
   assert.equal(old.adapter.inspect(old.rt.storageKey).migration,before);
   assert.equal(upgraded.view().nodes.find(n=>n.id==='L07-STORY').available,true);
   upgraded.send({type:'open-node',nodeId:'L07-STORY'});
@@ -76,7 +77,7 @@ test('expansion preserves a six-lesson reset backup and restores it without inve
   const upgraded=setup({adapter:old.adapter});
   assert.equal(upgraded.view().completedCount,0);
   upgraded.send({type:'reset-undo'});
-  assert.deepEqual(evidenceOnly(upgraded.view().record),before);
+  assert.deepEqual(upgraded.view().record.keyboardArchive.record,before);
   assert.equal(upgraded.view().completedCount,1);
   assert.equal(upgraded.view().nodes.find(n=>n.id==='L07-STORY').available,false);
 });

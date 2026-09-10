@@ -17,8 +17,9 @@ function priorItem(unit,field,item){
  if(field==='challenges')value.questions=clone(unit.history.challenges.find(c=>c.id===value.id).questions);
  return value;
 }
-function priorCourse(unit){
- const old=clone(unit);
+function priorCourse(current){
+ const unit={...current,...current.keyboardHistory};
+ const old=clone(unit);old.recordSchema=4;delete old.keyboardHistory;
  for(const [field,hashes]of Object.entries(preserved))old[field]=Array.isArray(unit[field])?unit[field].filter(x=>hashes[x.id]).map(x=>priorItem(unit,field,x)):Object.fromEntries(Object.entries(unit[field]).filter(([id])=>hashes[id]).map(([id,x])=>[id,priorItem(unit,field,x)]));
  old.lessonIds=Array.from({length:50},(_,i)=>i+1);old.checkpointIds=old.nodes.flatMap(n=>n.checkpointIds);
  for(const n of old.nodes)old.checkpointActivities[n.id]=[...n.activityIds];

@@ -1,0 +1,175 @@
+{
+  "status": "passed",
+  "scope": "Local implementation and technical verification; uncommitted, unpushed, unpublished.",
+  "revision": "lesson1-144-v7.0",
+  "finishedAt": "2026-09-10T15:00:46.704Z",
+  "unitTests": {
+    "command": "npm test",
+    "passed": 150,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "command": "npm run test:browser",
+    "verificationCommand": "npm run verify:visual",
+    "fingerprint": "eec3b091b167ac82ad3fa687d2aed8a866dc6370ca1cc177622a5292b7c08406",
+    "states": 41356,
+    "viewports": [
+      {
+        "viewport": [
+          320,
+          568
+        ],
+        "states": 10339,
+        "violations": 0,
+        "scrollbarWidths": [
+          15
+        ]
+      },
+      {
+        "viewport": [
+          420,
+          856
+        ],
+        "states": 10339,
+        "violations": 0,
+        "scrollbarWidths": [
+          15
+        ]
+      },
+      {
+        "viewport": [
+          906,
+          801
+        ],
+        "states": 10339,
+        "violations": 0,
+        "scrollbarWidths": [
+          15
+        ]
+      },
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "states": 10339,
+        "violations": 0,
+        "scrollbarWidths": [
+          15
+        ]
+      }
+    ],
+    "mutationKinds": 18,
+    "mutations": 72,
+    "caught": 72
+  },
+  "orderTiles": {
+    "questions": 805,
+    "tiles": 4766,
+    "internalSpellingPreserved": true,
+    "oldPlacementVerdictsPreserved": true
+  },
+  "pictureFeedback": {
+    "question": "PL12-11:tap",
+    "viewports": [
+      {
+        "viewport": {
+          "width": 832,
+          "height": 902
+        },
+        "scrollDeltaPx": 0,
+        "maxImageDeltaPx": 0
+      },
+      {
+        "viewport": {
+          "width": 420,
+          "height": 856
+        },
+        "scrollDeltaPx": 0,
+        "maxImageDeltaPx": 0
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 568
+        },
+        "scrollDeltaPx": 0,
+        "maxImageDeltaPx": 0
+      },
+      {
+        "viewport": {
+          "width": 906,
+          "height": 801
+        },
+        "scrollDeltaPx": 0,
+        "maxImageDeltaPx": 0
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "scrollDeltaPx": 0,
+        "maxImageDeltaPx": 0
+      }
+    ]
+  },
+  "media": {
+    "command": "npm run test:media",
+    "files": 2836,
+    "fingerprint": "225fa8fe3133bd184bdb83effdbb22cca056fc519f235c4150d9615ee265836e",
+    "finishedAt": "2026-09-10T13:36:30.898Z"
+  },
+  "nativeAudio": {
+    "command": "npm run test:browser-media",
+    "courseRecordings": 42,
+    "feedbackSounds": [
+      {
+        "sound": "correct",
+        "ended": true,
+        "volume": 0.35,
+        "errors": 0
+      },
+      {
+        "sound": "incorrect",
+        "ended": true,
+        "volume": 0.35,
+        "errors": 0
+      },
+      {
+        "sound": "complete",
+        "ended": true,
+        "volume": 0.5,
+        "errors": 0
+      },
+      {
+        "sound": "failed",
+        "ended": true,
+        "volume": 0.5,
+        "errors": 0
+      }
+    ],
+    "unavailableDoesNotBlock": true,
+    "offlineSpeechReplay": true,
+    "restoredFeedbackSilent": true
+  },
+  "package": {
+    "startupResources": 76,
+    "startupBytes": 3665308,
+    "startupLimitBytes": 4194304,
+    "manifestSha256": "1a5f9ac262a50e64d296f559e2a7d94753d81a60335f441db58fbb78bfee37cb"
+  },
+  "livePreview": {
+    "origin": "http://127.0.0.1:42827/",
+    "checkedResources": 13,
+    "rangeStatus": 206,
+    "routeEvidence": "live-route.json"
+  },
+  "humanAcceptance": {
+    "thisThese": "Previously confirmed by the user.",
+    "newTeacherAudio": "Pending",
+    "childTrials": "Pending",
+    "placementDifficultyCalibration": "Pending"
+  }
+}

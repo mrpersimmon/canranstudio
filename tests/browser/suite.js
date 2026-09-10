@@ -5,6 +5,7 @@
   const report = {schema:1, fingerprint:config.fingerprint, token:config.token, shard:config.shard, status:'running', checks:[], mutations:[]};
   const status = document.querySelector('#status'), results = document.querySelector('#results');
   const inspection=new URLSearchParams(location.search).get('inspect'), inspected=new Set();
+  const postCoursePreflight=window.__postCoursePreflight;
   const pause = () => new Promise(resolve=>setTimeout(resolve,0));
   const wait = async predicate => {for(let i=0;i<3000;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,5));}throw Error('Fixture did not become ready');};
   let frame;
@@ -126,13 +127,13 @@
       }else if(a.kind==='match'){
         for(const item of a.items){await click('match-word',item.sourceRef);await click('match-image',item.entityId);await hear();}
         await check('matched-'+a.id,a.id);
-      }else if(a.kind==='input'){
-        const input=frame.contentDocument.querySelector('[data-activity-input]'),win=frame.contentWindow;
-        input.focus();input.value='wrong';input.dispatchEvent(new win.InputEvent('input',{bubbles:true}));
-        await click('check');await check('input-wrong-'+a.id,a.id);await click('retry');
-        const corrected=frame.contentDocument.querySelector('[data-activity-input]');corrected.focus();corrected.value=a.answers[0];corrected.dispatchEvent(new win.InputEvent('input',{bubbles:true}));
-        if(frame.contentDocument.querySelector('[data-activity-input]')!==corrected)throw Error('Grammar input replaced during typing');
-        await click('check');await check('input-correct-'+a.id,a.id);
+      }else if(a.kind==='exercise'){
+        await tapAnswer(a,true);await check('tap-selected-'+a.id,a.id);
+        if(!extraStates.has(a.mechanism)){
+          await tapAnswer(a,false);await click('check');await check('tap-wrong-'+a.id,a.id);await click('retry');
+          await check('tap-hint-'+a.id,a.id);await tapAnswer(a,true);extraStates.add(a.mechanism);
+        }
+        await click('check');await check('tap-correct-'+a.id,a.id);
       }else if(a.resultId){
         await hear();
         const kind=a.castChoice?'cast':a.kind;
@@ -221,21 +222,27 @@
     } finally {header.remove();}
     await settle();await check('completion-restored');
   }
-  async function writeAnswer(value) {
-    const win=frame.contentWindow,input=frame.contentDocument.querySelector('[data-challenge-input]');
-    if(!input)throw Error('Written answer field missing');
-    input.focus(); input.value=value;
-    const before=win.fixture.dispatchCount;
-    input.dispatchEvent(new win.InputEvent('input',{bubbles:true,data:value}));
-    await wait(()=>win.fixture.dispatchCount>before);await settle();
-    if(frame.contentDocument.querySelector('[data-challenge-input]')!==input)throw Error('Typing replaced the focused input');
-    if(!report.checks.some(c=>c.name==='settlement-visibility-input'&&c.viewport[0]===Number(frame.width))){
-      input.setSelectionRange(1,1);
-      const before=win.fixture.completedDispatches['session-visibility']||0;
+  function currentQuestion(){const v=view(),u=frame.contentWindow.fixture.unit;return v.screen==='activity'?u.activities[v.activityId]:v.screen==='placement'?u.placement.questions.find(q=>q.id===v.placementAttempt.questionIds[v.placementAttempt.cursor]):v.reviewQuestion||u.challenges.find(c=>c.id===v.challengeId).questions[v.challengeIndex];}
+  async function tapAnswer(q,correct=true){
+    if(q.mechanism!=='pairs')for(const ref of q.listenRefs){await click('exercise-listen',ref);await hear();}
+    if(['order','multi'].includes(q.mechanism))for(const id of [...view().response.selected])await click('exercise-select',id);
+    if(q.mechanism==='pairs'){
+      for(const [i,p]of q.pairs.entries()){await click('exercise-select',p.id);await hear();await click('exercise-select',correct?p.answer:q.pairs[(i+1)%q.pairs.length].answer);}
+    }else{
+      const wrong=q.options.find(o=>!q.answer.includes(o.id));
+      const selected=correct?q.answer:q.mechanism==='order'?[...q.answer].reverse():q.mechanism==='repair'?[wrong.id,q.answer[1]]:q.mechanism==='mission'?q.answer.map((id,i)=>q.options.find(o=>o.stage===i&&o.id!==id).id):q.mechanism==='multi'?[...q.answer.slice(1),wrong.id]:[wrong.id];
+      for(const id of selected)if(['order','multi'].includes(q.mechanism)||!view().response.selected.includes(id))await click('exercise-select',id);
+    }
+  }
+  async function writeAnswer(value){
+    const q=currentQuestion();await tapAnswer(q,value!=='wrong answer');
+    if(!report.checks.some(c=>c.name==='settlement-visibility-selection'&&c.viewport[0]===Number(frame.width))){
+      const win=frame.contentWindow,button=query('exercise-select');button.focus();
+      const before=win.fixture.completedDispatches['session-visibility']||0,response=JSON.stringify(view().response);
       win.document.dispatchEvent(new win.Event('visibilitychange'));
       await wait(()=>(win.fixture.completedDispatches['session-visibility']||0)>before);
-      if(!input.isConnected || win.document.activeElement!==input || input.selectionStart!==1)throw Error('Visibility update replaced the answer or caret');
-      await check('settlement-visibility-input');
+      if(!button.isConnected||win.document.activeElement!==button||JSON.stringify(view().response)!==response)throw Error('Visibility update replaced the selection or focus');
+      await check('settlement-visibility-selection');
     }
   }
   async function placementTests(viewport) {
@@ -258,6 +265,11 @@
     heart.className='is-full';
     if(!heartCaught)throw Error('Negative control escaped: placement-heart-mismatch');
     await click('placement-start');await check('placement-empty');
+    const forbidden=frame.contentDocument.createElement('textarea');frame.contentDocument.querySelector('.lp-lesson').append(forbidden);
+    const keyboardAudit=await auditReadability(frame.contentWindow,{name:'keyboard-answer-regression',expectedTheme:'dark'});
+    const keyboardCaught=keyboardAudit.errors.some(e=>e.rule==='keyboard-answer');forbidden.remove();
+    report.mutations.push({name:'keyboard-answer-regression',caught:keyboardCaught});if(!keyboardCaught)throw Error('Keyboard-answer negative control escaped');
+
     const questionTitle=frame.contentDocument.querySelector('[data-lesson-title]'), originalTitle=questionTitle.textContent;
     questionTitle.textContent='错误的题型提示';
     const typeAudit=await auditReadability(frame.contentWindow,{name:'placement-answer-type-mismatch',expectedTheme:'dark'});
@@ -265,17 +277,10 @@
     report.mutations.push({name:'placement-answer-type-mismatch',caught:typeCaught,errors:typeAudit.errors});
     questionTitle.textContent=originalTitle;
     if(!typeCaught)throw Error('Negative control escaped: placement-answer-type-mismatch');
-    async function write(value) {
-      const win=frame.contentWindow,input=frame.contentDocument.querySelector('[data-placement-input]');
-      input.focus();input.value=value;
-      input.dispatchEvent(new win.InputEvent('input',{bubbles:true,data:value}));
-      await wait(()=>view().placementAnswer===value);await settle();
-      if(frame.contentDocument.querySelector('[data-placement-input]')!==input)throw Error('Placement typing replaced the focused input');
-    }
-    const answer=()=>{const a=view().placementAttempt;return frame.contentWindow.fixture.unit.placement.questions.find(q=>q.id===a.questionIds[a.cursor]).answers[0];};
-    const input=frame.contentDocument.querySelector('[data-placement-input]'),win=frame.contentWindow;
-    input.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,isComposing:true}));
-    if(view().placementAttempt.responses.length)throw Error('IME confirmation submitted placement');
+    const write=async value=>tapAnswer(currentQuestion(),value!=='wrong answer');
+    const answer=()=>true;
+    const win=frame.contentWindow;
+    if(frame.contentDocument.querySelector('input,textarea,[contenteditable="true"]'))throw Error('Placement must not have a text answer');
     await write('wrong answer');
     frame.contentWindow.fixture.failSave=true;await click('placement-check');await check('placement-save-failure');
     if(view().placementAttempt.responses.length)throw Error('Unsaved answer consumed a heart');
@@ -284,9 +289,9 @@
     const saved=JSON.stringify(view().placementAttempt);
     await reloadFrame();await click('open-placement','umbrella');await click('placement-start');await check('placement-restored');
     if(JSON.stringify(view().placementAttempt)!==saved||view().feedback!=='incorrect')throw Error('Reload reset placement feedback or questions');
-    await click('placement-next');await write('unfinished draft');
+    await click('placement-next');await click('exercise-select',currentQuestion().options[0].id);const draft=JSON.stringify(view().response);
     await reloadFrame();await click('open-placement','umbrella');await click('placement-start');await check('placement-draft-restored');
-    if(view().placementAnswer!=='unfinished draft')throw Error('Placement draft disappeared');
+    if(JSON.stringify(view().response)!==draft)throw Error('Placement draft disappeared');
     while(view().screen==='placement') {
       await write(answer());await check('placement-filled');
       await click('placement-check');
@@ -325,36 +330,22 @@
       for(const [index,q] of challenge.questions.entries()){
         await check('challenge-empty-'+q.id,q.id);
         if(index===0){
-          const win=frame.contentWindow,input=frame.contentDocument.querySelector('[data-challenge-input]');
-          input.value='拼音';input.dispatchEvent(new win.InputEvent('input',{bubbles:true,isComposing:true}));
-          input.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true,isComposing:true}));
-          if(view().feedback||view().challengeAnswer)throw Error('IME confirmation submitted an answer');
-          await writeAnswer('wrong answer');
-          if(challenge.id===unit.challenges[0].id){
-            // One real click queues the latest input before checking it. Delay
-            // that second Web Lock to expose an early action acknowledgement.
-            const locks=win.navigator.locks,request=locks.request;let calls=0;
-            locks.request=function(...args){
-              if(++calls===2)return new Promise(resolve=>win.setTimeout(()=>resolve(request.apply(locks,args)),180));
-              return request.apply(locks,args);
-            };
-            try{
-              await click('challenge-check');
-              if(view().feedback!=='retry')throw Error('The click helper returned before the queued answer check rendered');
-            }finally{locks.request=request;}
-          }else await click('challenge-check');
+          if(frame.contentDocument.querySelector('input,textarea,[contenteditable="true"]'))throw Error('Challenge has a keyboard answer');
+          await writeAnswer('wrong answer');await click('challenge-check');
           await check('challenge-wrong-'+challenge.id);
           await click('challenge-retry');
           if(!view().challengeHintUsed || !frame.contentDocument.querySelector('.lp-hint'))throw Error('Correction did not expose the learning hint');
           await check('challenge-hint-'+challenge.id);
         }
-        await writeAnswer(q.answers[0]);await check('challenge-filled-'+q.id,q.id);
+        await writeAnswer(true);await check('challenge-filled-'+q.id,q.id);
         if(index===1){
-          await wait(()=>frame.contentWindow.fixture.adapter.loadDraft(frame.contentWindow.fixture.runtime.storageKey).value?.value===q.answers[0]);
+          const savedResponse=JSON.stringify(view().response);
+          await wait(()=>JSON.stringify(frame.contentWindow.fixture.adapter.loadDraft(frame.contentWindow.fixture.runtime.storageKey).value?.value)===savedResponse);
           await click('map');await reloadFrame();await click('journey-nav','review');
           await click('open-challenge',challenge.id);await click('challenge-start');
-          if(view().challengeAnswer!==q.answers[0])throw Error('Draft disappeared after reload');
+          if(JSON.stringify(view().response)!==savedResponse)throw Error('Draft disappeared after reload');
           await check('challenge-draft-restored-'+challenge.id);
+          for(const ref of q.listenRefs){await click('exercise-listen',ref);await hear();}
         }
         await click('challenge-check');await check('challenge-correct-'+q.id,q.id);
         await click('challenge-next');
@@ -391,8 +382,48 @@
     if(view().completedCount!==0)throw Error('Old progress came back after a reset');
     await click('reset-undo');await check('reset-undo-restored');
   }
+  async function postCourse(viewport,unit){
+      const completedBeforeReplay=view().completedCount;
+      await click('preview-node','K01');await click('open-node','K01');
+      await completeNode(unit,'K01');await check('replay-complete');
+      await returnThroughPrimary('replay-return-map');
+      if(view().completedCount!==completedBeforeReplay)throw Error('Replay advanced the main path');
+      // Time changes only inside the test adapter to exercise due review.
+      frame.contentWindow.fixture.now='2026-09-09T12:00:00Z';
+      await click('journey-nav','review');await check('review-due');
+      await click('review');
+      for(let guard=0;view().screen==='activity'&&guard<6;guard++){
+        const a=unit.activities[view().activityId];await hear();await check('review-'+a.id);
+        if(a.kind==='match'){
+          for(const item of a.items){await click('match-word',item.sourceRef);await click('match-image',item.entityId);await hear();}
+        }else{
+          if(a.kind==='exercise')await tapAnswer(a,true);
+          else for(const id of a.answer)await click('select',id);
+          await click('check');await hear();
+        }
+        await click('continue');await hear();
+      }
+      await check('review-complete');await returnThroughPrimary('review-return-map');
+      await optionalChallenges(unit);
+      await open(viewport);await check('reload-map');
+      await click('preview-node','K01');await click('open-node','K01');await click('story-start');
+      frame.contentWindow.fixture.failSave=true;await hear();await click('continue');await check('save-failure');
+      frame.contentWindow.fixture.failSave=false;await click('save-retry');
+      await click('map');
+      frame.contentWindow.fixture.throwNext=true;await click('journey-nav','book');
+      await check('blocked',null,'dark');
+      // Recover through the same visible reload control.
+      await click('reload');await check('map-return');
+  }
   try {
     for(const viewport of config.viewports){
+      if(postCoursePreflight){
+        const win=await open(viewport),f=win.fixture,key=f.runtime.storageKey;
+        if(!win.CanranCore.learningPathRuntime.validRecord(postCoursePreflight.value,f.unit))throw Error('Invalid preflight record');
+        const saved=f.adapter.commit(key,{expectedRevision:f.adapter.load(key).revision,value:postCoursePreflight.value});
+        if(saved.status!=='committed')throw Error('Preflight seed failed');
+        await reloadFrame();await postCourse(viewport,frame.contentWindow.fixture.unit);continue;
+      }
       await placementTests(viewport);
       await open(viewport,true);await check('loader',null,'dark');
       const win=await open(viewport),unit=win.fixture.unit;
@@ -415,32 +446,9 @@
         await check('celebration');await completionNegativeControls();
         await returnThroughPrimary('completion-return-'+node.id);await check('map-return');await check('map-current-'+view().completedCount);
       }
-      const completedBeforeReplay=view().completedCount;
-      await click('preview-node','K01');await click('open-node','K01');
-      await completeNode(unit,'K01');await check('replay-complete');
-      await returnThroughPrimary('replay-return-map');
-      if(view().completedCount!==completedBeforeReplay)throw Error('Replay advanced the main path');
-      // Time changes only inside the test adapter to exercise due review.
-      win.fixture.now='2026-09-09T12:00:00Z';
-      await click('journey-nav','review');await check('review-due');
-      await click('review');
-      for(let guard=0;view().screen==='activity'&&guard<6;guard++){
-        const a=unit.activities[view().activityId];await hear();await check('review-'+a.id);
-        for(const id of a.answer)await click('select',id);
-        await click('check');await hear();await click('continue');await hear();
-      }
-      await check('review-complete');await returnThroughPrimary('review-return-map');
-      await optionalChallenges(unit);
-      await open(viewport);await check('reload-map');
-      await click('preview-node','K01');await click('open-node','K01');await click('story-start');
-      frame.contentWindow.fixture.failSave=true;await hear();await click('continue');await check('save-failure');
-      frame.contentWindow.fixture.failSave=false;await click('save-retry');
-      await click('map');
-      frame.contentWindow.fixture.throwNext=true;await click('journey-nav','book');
-      await check('blocked',null,'dark');
-      // Recover through the same visible reload control.
-      await click('reload');await check('map-return');
+      await postCourse(viewport,unit);
     }
+    if(!postCoursePreflight){
     // Negative controls must fail. This prevents a non-running or overly broad
     // exclusion from silently converting unreadable content into a pass.
     await open(config.viewports[1]||config.viewports[0]);await click('preview-node','K01');await click('open-node','K01');await click('story-start');await hear();await click('continue');await hear();
@@ -479,9 +487,12 @@
     report.mutations.push({name:'off-center-arrow',caught:arrowCaught,errors:arrowResult.errors});
     arrow.style.transform='';
     if(!arrowCaught)throw Error('Negative control escaped: off-center-arrow');
-    report.status='passed';
+    }
+    report.status=postCoursePreflight?'preflight-passed':'passed';
   }catch(error){report.status='failed';report.failure=String(error);}
   results.textContent=JSON.stringify(report,null,2);
+  // A scoped preflight never posts or creates a release readability proof.
+  if(postCoursePreflight){window.__postCourseReport=report;status.textContent=report.status+' · '+(report.failure||report.checks.length+' states');document.body.dataset.result=report.status;return;}
   const response=await fetch('/__qa__/result',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report)});
   if(!response.ok){report.status='failed';report.failure='Evidence was rejected: '+await response.text();}
   status.textContent=report.status==='passed'?'通过 · '+report.checks.length+' 个实际渲染状态':'未通过 · '+report.failure;

@@ -18,25 +18,27 @@
     await hear();
     if(a.kind==='teach')for(const item of a.items){await click('word-play',item.sourceRef);await hear();}
     else if(a.kind==='match')for(const item of a.items){await click('match-word',item.sourceRef);await click('match-image',item.entityId);}
+    else if(a.kind==='exercise'){await answer(a);await click('check');await hear();}
     else if(a.resultId){for(const id of a.answer)await click('select',id);await click('check');await hear();}
     await click('continue');
   }
   async function finish(id){await click('preview-node',id);await click('open-node',id);while(view().screen==='activity')await step();}
-  async function write(value,placement=false){
-    const input=document.querySelector(placement?'[data-placement-input]':'[data-challenge-input]');
-    input.focus();input.value=value;input.dispatchEvent(new InputEvent('input',{bubbles:true,data:value}));await tick();await tick();
-    input.setSelectionRange(1,1);
+  async function answer(q,correct=true){
+    if(q.mechanism!=='pairs')for(const ref of q.listenRefs){await click('exercise-listen',ref);await hear();}
+    if(q.mechanism==='pairs'){for(const p of q.pairs){await click('exercise-select',p.id);await hear();await click('exercise-select',p.answer);}}
+    else{let ids=[...q.answer];if(!correct)ids=q.mechanism==='order'?ids.reverse():[q.options.find(o=>!q.answer.includes(o.id)).id];for(const id of ids)await click('exercise-select',id);}
+    const button=document.querySelector('[data-action="exercise-select"]');button.focus();
     const before=f.completedDispatches['session-visibility']||0;
     document.dispatchEvent(new Event('visibilitychange'));
     await wait(()=>(f.completedDispatches['session-visibility']||0)>before);
-    if(document.activeElement!==input || !input.isConnected || input.selectionStart!==1)throw Error('Visibility change replaced the active answer input');
+    if(document.activeElement!==button||!button.isConnected)throw Error('Visibility change replaced the active answer option');
   }
   try {
     if(scenario.startsWith('placement')){
       await click('open-placement','umbrella');await click('placement-start');
       while(view().screen==='placement'){
         const a=view().placementAttempt,q=unit.placement.questions.find(q=>q.id===a.questionIds[a.cursor]);
-        await write(scenario==='placement-fail'?'wrong':q.answers[0],true);await click('placement-check');
+        await answer(q,scenario!=='placement-fail');await click('placement-check');
         if(view().screen==='placement')await click('placement-next');
       }
     } else {
@@ -50,7 +52,7 @@
         await click('open-challenge','CH12');await click('challenge-start');
         for(const q of unit.challenges.find(c=>c.id==='CH12').questions){
           f.now=new Date(new Date(f.now).getTime()+21000).toISOString();
-          await write(q.answers[0]);await click('challenge-check');await click('challenge-next');
+          await answer(q);await click('challenge-check');await click('challenge-next');
         }
       }
     }

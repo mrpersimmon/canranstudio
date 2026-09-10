@@ -14,11 +14,11 @@
   });
   const reloadSeed = window.parent.fixtureReloadSeed;
   delete window.parent.fixtureReloadSeed;
-  const control = window.fixture = { audio: [], errors: [], dispatchCount: 0, completedDispatches: {}, now: reloadSeed?.now || '2026-09-06T12:00:00Z', failSave: false, throwNext: false };
+  const control = window.fixture = { audio: [], feedbackAudio: [], errors: [], dispatchCount: 0, completedDispatches: {}, now: reloadSeed?.now || '2026-09-06T12:00:00Z', failSave: false, throwNext: false };
   window.addEventListener('error', event => control.errors.push(event.message));
   window.addEventListener('unhandledrejection', event => control.errors.push(String(event.reason)));
   class TestAudio extends EventTarget {
-    constructor(src) { super(); this.src = src; control.audio.push(this); }
+    constructor(src) { super(); this.src = src; (src.includes('/assets/feedback/')?control.feedbackAudio:control.audio).push(this); }
     play() { this.playing = true; return Promise.resolve(); }
     pause() { this.playing = false; }
     removeAttribute() { this.src = null; }

@@ -7,6 +7,7 @@
   'use strict';
   const escape = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
   function createRenderer(unit) {
+    const exercises=typeof module==='object'&&module.exports?require('./learning-exercises'):root.CanranCore.learningExercises;
     const c = unit.copy;
     const checkpointTotal = unit.checkpointIds.length;
     const icon = name => `<img class="lp-icon" src="${escape(unit.icons[name])}" alt="" width="24" height="24">`;
@@ -30,7 +31,7 @@
       if (!['failed', 'blocked'].includes(v.audio?.status)) return '';
       return `<div class="lp-notice" role="status"><p>${escape(v.audio.status === 'blocked' ? c.audioBlocked : c.audioFailed)}</p>${button('retry-audio', c.audioRetry, { symbol: 'volume-up-fill', className: 'lp-quiet' })}</div>`;
     }
-    function footer(v, body) { return `<footer class="lp-footer">${audioNotice(v)}<div class="lp-footer-inner">${body}</div></footer>`; }
+    function footer(v, body, message = '') { return `<footer class="lp-footer">${message}${audioNotice(v)}<div class="lp-footer-inner">${body}</div></footer>`; }
     function sessionMetrics(v) {
       const s = v.settlement, text = unit.settlement || {};
       if (!s) return [];
@@ -178,27 +179,57 @@
         }).join('')}</div>` : ''}</section>`;
       }).join('')}</div>${footer(v,button('map',c.referenceBack,{className:'lp-primary'}))}`;
     }
+    function exerciseBody(q,v){
+      const r=v.response||exercises.empty(),locked=Boolean(v.feedback),ordered=v.exerciseOptionOrder||q.options.map(o=>o.id);
+      const tile=(o,css='lp-option',selected=r.selected.includes(o.id))=>`<button type="button" data-action="exercise-select" data-id="${escape(o.id)}" class="${css==='lp-token'?'lp-button ':''}${css}${selected?' is-selected':''}${q.mechanism==='order'&&css==='lp-option'&&selected?' is-placed':''}" aria-pressed="${selected}"${locked||q.mechanism==='order'&&css==='lp-option'&&selected?' disabled':''}>${o.entityId?`${image(o.entityId,'lp-option-image')}<span>${escape(unit.entities[o.entityId].title)}</span>`:`<span lang="${o.lang==='zh'?'zh-Hans':'en'}">${escape(o.text)}</span>`}</button>`;
+      const sounds=q.mechanism==='pairs'?'':(q.listenRefs||[]).map((ref,i)=>button('exercise-listen',q.listenRefs.length===1?'播放声音':'播放第 '+(i+1)+' 段',{id:ref,symbol:'volume-up-fill',className:'lp-secondary',label:'播放'+(q.listenRefs.length===1?'声音':'第 '+(i+1)+' 段声音')})).join('');
+      const listen=sounds?`<div class="lp-exercise-audio">${sounds}<p role="status">${q.listenRefs.every(ref=>v.heardRefs?.includes(ref))?'听完了，可以重听。':'听完声音，再检查答案。'}</p></div>`:'';
+      const context=(q.contextRefs||[]).map(ref=>`<p class="lp-phrase-example" lang="en">${escape(unit.sources[ref].text)}</p>`).join('');
+      let content='';
+      if(q.mechanism==='pairs'){
+        content=`<div class="lp-match-board lp-audio-pairs"><div class="lp-match-column">${q.pairs.map((p,i)=>{const pair=r.pairs.find(x=>x[0]===p.id),chosen=pair&&q.options.find(o=>o.id===pair[1]),heard=v.heardRefs?.includes(p.sourceRef),playing=v.audio?.status==='playing'&&v.audio.sequence?.[v.audio.index]?.ref===p.sourceRef;return button(locked?'exercise-listen':'exercise-select','录音 '+(i+1)+(heard?' ✓':'')+(chosen?' · '+chosen.text:''),{id:locked?p.sourceRef:p.id,className:'lp-match-tile'+(!locked&&r.anchor===p.id||playing?' is-selected':''),symbol:'volume-up-fill',pressed:locked?null:r.anchor===p.id,label:'录音 '+(i+1)+(playing?'，播放中':heard?'，已听完':'，还没听完')+(chosen?'，搭档 '+chosen.text:'')});}).join('')}</div><div class="lp-match-column">${ordered.map(id=>{const o=q.options.find(o=>o.id===id);return tile(o,'lp-match-tile',r.pairs.some(p=>p[1]===id));}).join('')}</div></div><p role="status" class="lp-exercise-count">已配 ${r.pairs.length} / ${q.pairs.length} 组 · 已听完 ${q.listenRefs.filter(ref=>v.heardRefs?.includes(ref)).length} / ${q.listenRefs.length} 段。${v.feedback?v.feedback==='retry'?'看看提示，再重新选择搭档。':'这一组完成啦，点录音还可以重听。':q.listenRefs.every(ref=>v.heardRefs?.includes(ref))?'可以检查了；点录音可重听或更换搭档。':'请把没有 ✓ 的录音听完整，再检查。'}</p>`;
+      }else if(q.mechanism==='repair'){
+        content=`<div class="lp-repair-sentence" role="group" aria-label="点选需要修改的词">${q.words.map(o=>tile(o,'lp-token')).join('')}</div>${r.selected.length?`<p>把这个词换成：</p><div class="lp-options">${ordered.map(id=>q.options.find(o=>o.id===id)).filter(o=>o.group==='replacement').map(o=>tile(o)).join('')}</div>`:'<p class="lp-exercise-count">先点句中的一个词。</p>'}`;
+      }else if(q.mechanism==='mission'){
+        content=q.steps.map((label,i)=>i<=r.selected.length?`<section class="lp-mission-step"><h2>${i+1}. ${escape(label)}</h2><div class="lp-options lp-picture-options">${ordered.map(id=>q.options.find(o=>o.id===id)).filter(o=>o.stage===i).map(o=>tile(o)).join('')}</div></section>`:'').join('');
+      }else{
+        const selected=r.selected.map(id=>q.options.find(o=>o.id===id));
+        if(q.mechanism==='order')content=`<div class="lp-answer-line" aria-label="已选词块，点一下可撤回">${selected.length?selected.map(o=>tile(o,'lp-token',true)).join(''):'按顺序点选下面的词块'}</div>`;
+        if(q.mechanism==='cloze')content=`<p class="lp-phrase-example" lang="en">${escape(q.prefix)}<span class="lp-cloze-slot">${escape(selected[0]?.text||'…')}</span>${escape(q.suffix)}</p>`;
+        if(q.mechanism==='multi')content=`<p class="lp-exercise-count" role="status">选 ${q.answer.length} 个 · 已选 ${r.selected.length} 个，可再次点选撤回</p>`;
+        content+=`<div class="lp-options${q.mechanism==='order'?' lp-word-bank':''}${q.options.every(o=>o.entityId)?' lp-picture-options':''}" role="group" aria-label="作答选项">${ordered.map(id=>q.options.find(o=>o.id===id)).map(o=>tile(o)).join('')}</div>`;
+      }
+      if(q.mechanism==='repair'&&v.feedback&&!['retry','incorrect'].includes(v.feedback))content=`<p class="lp-phrase-example" lang="en">${escape(q.feedbackText)}</p>`;
+      return `<div class="lp-exercise" data-exercise-id="${escape(q.id)}" data-exercise-form="${q.form}">${q.activityGroup?`<p class="lp-kicker">${escape(q.activityGroup)}</p>`:''}${q.sceneEntityId?`<figure class="lp-learning-scene">${image(q.sceneEntityId,'lp-scene-painting')}</figure>`:''}${context}${listen}${content}${pictureChoice(q)?'':exerciseFeedback(q,v)}</div>`;
+    }
+    function pictureChoice(q){return !q.castChoice&&(q.kind==='choice'||q.mechanism==='choice')&&q.options.length>0&&q.options.every(o=>o.entityId);}
+    function pictureFeedback(q,v){return pictureChoice(q)?`<div class="lp-picture-feedback-slot">${(q.kind==='exercise'?exerciseFeedback(q,v):feedback(q,v))||'<p class="lp-supporting">选好图片后，点「检查」。</p>'}</div>`:'';}
+    function exerciseFeedback(q,v){
+      const success=v.feedback&&!['retry','incorrect'].includes(v.feedback),hinted=v.challengeHintUsed||v.hintLevel;
+      return v.feedback?`<section class="lp-feedback ${success?'lp-feedback-success':'lp-feedback-retry'}" aria-live="polite" tabindex="-1"><strong>${success?'答对了！':v.feedback==='incorrect'?'这次没选对':'再试一次'}</strong>${q.mechanism==='repair'&&success?'':`<p${success||v.feedback==='incorrect'?' lang="en"':''}>${escape(success?q.outcome||q.feedbackText:v.feedback==='incorrect'?q.feedbackText:q.hint)}</p>`}</section>`:hinted&&v.screen!=='placement'?`<p class="lp-hint">${escape(q.hint)}</p>`:'';
+    }
+    function exercisePrompt(q){return `<div class="lp-exercise-prompt">${!q.sceneEntityId?image(q.actorId||'explorer-cat','lp-exercise-guide'):''}<p>${escape(q.prompt)}</p></div>`;}
+    function exerciseActions(q,v,mode){
+      const actions=mode==='challenge'?['challenge-check','challenge-next','challenge-retry','challenge-hint']:mode==='placement'?['placement-check','placement-next',null,null]:['check','continue','retry','hint'];
+      if(v.feedback)return `${v.feedback!=='retry'&&unit.sources[q.sourceRef]?.audioSrc?button('exercise-listen','听示范',{id:q.sourceRef,symbol:'volume-up-fill',className:'lp-quiet'}):''}${button(v.feedback==='retry'?actions[2]:actions[1],v.feedback==='retry'?'重新选择':'继续',{className:'lp-primary'})}`;
+      return `${actions[3]?button(actions[3],'提示',{className:'lp-quiet',symbol:'lightbulb',disabled:Boolean(v.challengeHintUsed||v.hintLevel)}):''}${button(actions[0],'检查',{className:'lp-primary',disabled:!exercises.ready(q,v.response,v.heardRefs)})}`;
+    }
     function renderChallenge(v) {
       const challenge = unit.challenges.find(item => item.id === v.challengeId) || {id:'grammar',lessonLabel:'Lesson 49 & 50',questions:[]};
       const progress = v.record.challenges?.[challenge.id] || {answers:[]};
       if (v.screen === 'challenge-intro') {
-        const finished = Boolean(progress.completedAt);
-        return `${header(v,'输入挑战')}<section class="lp-lesson lp-challenge-intro">${image('explorer-cat')}<p class="lp-kicker">${escape(challenge.lessonLabel)} · 选做</p><h1 tabindex="-1" data-lesson-title>${escape(challenge.title)}</h1><p>填单词，写整句。试试不用选项提示。</p><p class="lp-challenge-count">${progress.answers.length} / ${challenge.questions.length} 题</p>${progress.answers.length || progress.draft ? button('reset-request',finished ? '再挑战一次' : '重新开始',{scope:'challenge',id:challenge.id,className:'lp-secondary'}) : ''}</section>${footer(v,finished ? button('map',c.seePath,{className:'lp-primary'}) : button('challenge-start',progress.answers.length || progress.draft ? '继续挑战' : '开始挑战',{className:'lp-primary'}))}`;
+        const finished = Boolean(progress.completedAt),old=v.record.keyboardArchive?.record.challenges?.[challenge.id];
+        const archive=old?.answers.length?`<details class="lp-history"><summary>查看以前完成的 ${old.answers.length} 题</summary><ol>${old.answers.map(a=>`<li><span lang="en">${escape(a.value)}</span><small>${escape(a.at.slice(0,10))} · ${a.evidence==='supported'?'有提示完成':'当时未用额外提示'}</small></li>`).join('')}</ol></details>`:'';
+        return `${header(v,'小镇挑战')}<section class="lp-lesson lp-challenge-intro">${image('explorer-cat')}<p class="lp-kicker">${escape(challenge.lessonLabel)} · 选做</p><h1 tabindex="-1" data-lesson-title>${escape(challenge.title)}</h1><p>听一听，选一选，把学过的话用起来。</p><p class="lp-challenge-count">${(progress.legacyCount||0)+progress.answers.length} / ${challenge.questions.length} 题</p>${archive}${progress.legacyCount || progress.answers.length || progress.draft ? button('reset-request',finished ? '再挑战一次' : '重新开始',{scope:'challenge',id:challenge.id,className:'lp-secondary'}) : ''}</section>${footer(v,finished ? button('map',c.seePath,{className:'lp-primary'}) : button('challenge-start',progress.legacyCount || progress.answers.length || progress.draft ? '继续挑战' : '开始挑战',{className:'lp-primary'}))}`;
       }
       if (v.screen === 'challenge-complete') {
-        return settlement(v, {title:unit.settlement?.challengeTitle || '输入挑战完成！', context:challenge.lessonLabel,
-          message:v.settlement?.independent ? `本次独立答对 ${v.settlement.independent} 题，做得好！` : '练习完成，再试会更熟练。',
+        return settlement(v, {title:unit.settlement?.challengeTitle || '小镇挑战完成！', context:challenge.lessonLabel,
+          message:v.settlement?.independent ? `本次未用额外提示答对 ${v.settlement.independent} 题，做得好！` : '练习完成，再试会更熟练。',
           secondary:button('reset-request','再挑战一次',{scope:'challenge',id:challenge.id,className:'lp-quiet'})});
       }
       const q = v.reviewQuestion || challenge.questions[v.challengeIndex], feedback = v.feedback;
-      const inputAttrs = `data-challenge-input data-question-id="${q.id}" data-challenge-id="${challenge.id}" lang="en" aria-label="${q.kind === 'gap' ? '填入缺少的单词' : '英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback ? ' readonly' : ''}`;
-      const input = q.kind === 'translation' ? `<textarea ${inputAttrs} rows="3" placeholder="用英文写出整句话">${escape(v.challengeAnswer)}</textarea>`
-        : `<div class="lp-gap-sentence" lang="en"><span>${escape(q.prefix)}</span><input ${inputAttrs} type="text" value="${escape(v.challengeAnswer)}" placeholder="…" size="9"><span>${escape(q.suffix)}</span></div>`;
-      const message = feedback ? `<section class="lp-feedback ${feedback === 'correct' ? 'lp-feedback-success' : 'lp-feedback-retry'}" tabindex="-1" aria-live="polite"><div class="lp-feedback-title">${icon(feedback === 'correct' ? 'check-circle-fill' : 'lightbulb')}<strong>${feedback === 'correct' ? '答对了！' : '再试一次'}</strong></div>${feedback === 'retry' ? '<p>参考答案：</p>' : ''}<p lang="en">${escape(unit.sources[q.sourceRef].text)}</p></section>` : '';
-      const body = `<div class="lp-lesson lp-challenge"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${q.kind === 'translation' ? '翻译这句话' : '补全句子'}</h1></div><div class="lp-challenge-prompt">${image(q.actorId)}<p>${escape(q.prompt)}</p></div><div class="lp-written-answer">${input}</div>${v.challengeHintUsed && !feedback ? `<p class="lp-hint">${escape(q.hint)}</p>` : ''}${message}</div>`;
-      const actions = feedback ? `${unit.sources[q.sourceRef].audioSrc ? button('challenge-audio','听参考答案',{symbol:'volume-up-fill',className:'lp-quiet'}) : ''}${button(feedback === 'correct' ? 'challenge-next' : 'challenge-retry',feedback === 'correct' ? '继续' : '修改答案',{className:'lp-primary'})}`
-        : `${button('challenge-hint','提示',{symbol:'lightbulb',className:'lp-quiet',disabled:v.challengeHintUsed})}${button('challenge-check','检查',{className:'lp-primary',disabled:!v.challengeAnswer.trim()})}`;
-      return `${header(v,v.mode==='review'?'今日复习':'输入挑战')}${body}${footer(v,actions)}`;
+      const body=`<div class="lp-lesson lp-challenge"><h1 tabindex="-1" data-lesson-title>${escape(q.title)}</h1>${exercisePrompt(q)}${exerciseBody(q,v)}</div>`;
+      return `${header(v,v.mode==='review'?'今日复习':'小镇挑战')}${body}${footer(v,exerciseActions(q,v,'challenge'),pictureFeedback(q,v))}`;
     }
     function renderPlacement(v) {
       const config=unit.placement, attempt=v.placementAttempt, chapter=unit.chapters.find(ch=>ch.id===v.placementId);
@@ -208,8 +239,9 @@
       const top=header(v,'跳级测试').replace('<span class="lp-header-label">跳级测试</span>',hearts);
       if(v.screen==='placement-intro') {
         const active=attempt?.status==='active';
+        const interrupted=v.record.interruptedPlacements?.some(a=>a.targetId===v.placementId);
         const testedEnd=chapter.lessonIds[0]-1;
-        return `${top}<section class="lp-lesson lp-placement-intro">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–${testedEnd} 抽取 ${config.questionCount} 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p>${active?`<p class="lp-placement-resume">已答 ${attempt.responses.length} / ${config.questionCount} 题 · 剩余 ${remaining} 次机会</p>`:''}</section>${footer(v,`<div class="lp-placement-actions">${button('placement-start',active?'继续测试':'开始测试',{className:'lp-primary lp-placement-start'})}${button('map','下次再说',{className:'lp-quiet'})}</div>`)}`;
+        return `${top}<section class="lp-lesson lp-placement-intro">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–${testedEnd} 抽取 ${config.questionCount} 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p>${interrupted&&!active?'<p>上次测试因版本更新中止，未扣机会。这次从新的 20 题开始。</p>':''}${active?`<p class="lp-placement-resume">已答 ${attempt.responses.length} / ${config.questionCount} 题 · 剩余 ${remaining} 次机会</p>`:''}</section>${footer(v,`<div class="lp-placement-actions">${button('placement-start',active?'继续测试':'开始测试',{className:'lp-primary lp-placement-start'})}${button('map','下次再说',{className:'lp-quiet'})}</div>`)}`;
       }
       if(v.screen==='placement-result') {
         const passed=attempt.status==='passed';
@@ -223,11 +255,7 @@
       }
       const policyVersion=attempt.responses[attempt.cursor]?.answerPolicyVersion || (attempt.responses.length>attempt.cursor?attempt.version:config.version);
       const q=(policyVersion===unit.history?.placement.version?unit.history.placement:config).questions.find(q=>q.id===attempt.questionIds[attempt.cursor]), feedback=v.feedback;
-      const attrs=`data-placement-input data-attempt-id="${escape(attempt.id)}" data-question-id="${escape(q.id)}" lang="en" aria-label="${q.kind==='gap'?'填入缺少的单词':q.answerType==='word'?'英文单词':'英文答案'}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${feedback?' readonly':''}`;
-      const input=q.kind==='gap'?`<div class="lp-gap-sentence" lang="en"><span>${escape(q.prefix)}</span><input ${attrs} type="text" value="${escape(v.placementAnswer)}" placeholder="…" size="9"><span>${escape(q.suffix)}</span></div>`:`<textarea ${attrs} rows="${q.answerType==='word'?1:3}" placeholder="${q.answerType==='word'?'用英文写出单词':'用英文写出整句话'}">${escape(v.placementAnswer)}</textarea>`;
-      const message=feedback?`<section class="lp-feedback ${feedback==='correct'?'lp-feedback-success':'lp-placement-wrong'}" tabindex="-1" aria-live="polite"><div class="lp-feedback-title">${icon(feedback==='correct'?'check-circle-fill':'x-lg')}<strong>${feedback==='correct'?'答对了！':'答错了 · 剩余 '+remaining+' 次机会'}</strong></div>${feedback==='incorrect'?'<p>参考答案：</p>':''}<p lang="en">${escape(unit.sources[q.sourceRef].text)}</p></section>`:'';
-      const title=q.kind==='gap'?'补全句子':q.answerType==='word'?'写出英文单词':'翻译这句话';
-      return `${top}<div class="lp-lesson lp-challenge lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${title}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${config.questionCount}</span></div><div class="lp-challenge-prompt">${image(q.actorId)}<p>${escape(q.prompt)}</p></div><div class="lp-written-answer">${input}</div>${message}</div>${footer(v,button(feedback?'placement-next':'placement-check',feedback?'继续':'检查',{className:'lp-primary',disabled:!feedback&&!v.placementAnswer.trim()}))}`;
+      return `${top}<div class="lp-lesson lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(q.title)}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${config.questionCount}</span></div>${exercisePrompt(q)}${exerciseBody(q,v)}</div>${footer(v,exerciseActions(q,v,'placement'),pictureFeedback(q,v))}`;
     }
     function render(v) {
       if (v.screen === 'blocked') {
@@ -251,7 +279,7 @@
           ...(summary ? {metrics:[{label:'完成关卡',value:v.nodes.filter(n=>n.done).length,symbol:'check-circle-fill'},
             {label:'学过课程',value:unit.lessonIds?.length || 2,symbol:'book'},
             {label:'完成挑战',value:Object.values(v.record.challenges || {}).filter(p=>p.completedAt).length,symbol:'star-fill'}]} : {}),
-          secondary:challenge ? button('open-challenge','试试输入挑战',{id:challenge.id,className:'lp-quiet lp-challenge-entry'}) : ''});
+          secondary:challenge ? button('open-challenge','试试小镇挑战',{id:challenge.id,className:'lp-quiet lp-challenge-entry'}) : ''});
       } else {
         const a = unit.activities[v.activityId], node = unit.nodes.find(n => n.id === v.nodeId);
         const label = node ? `${c.nodePrefix} ${unit.nodes.indexOf(node) + 1} ${c.nodeSuffix}` : c.reviewTitle;
@@ -264,10 +292,8 @@
               + button(v.storyRevealed ? 'continue' : 'story-start', !v.storyRevealed ? v.storyIndex ? c.storyListen : c.storyStart : v.storyIndex === parent.beats.length - 1 ? c.finishNode : c.next, { disabled: v.storyRevealed && !v.canContinue, className: 'lp-primary' });
           } else actions = v.feedback ? button(v.feedback === 'retry' ? 'retry' : 'continue', v.feedback === 'retry' ? c.retry : c.next, { disabled: v.feedback !== 'retry' && !v.canContinue, className: 'lp-primary' })
             : `${button('hint', c.knowledge, { symbol: 'lightbulb', className: 'lp-quiet', disabled: v.hintLevel >= 2 })}${button('check', c.check, { disabled: v.selected.length !== a.answer.length, className: 'lp-primary' })}`;
-        } else if (a.kind === 'input') {
-          const attrs=`data-activity-input data-activity-id="${escape(a.id)}" lang="en" aria-label="英文答案" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="180"${v.feedback?' readonly':''}`;
-          body=`<div class="lp-written-answer">${a.taskKind==='gap'?`<div class="lp-gap-sentence" lang="en"><span>${escape(a.prefix)}</span><input ${attrs} value="${escape(v.inputAnswer)}" size="9"><span>${escape(a.suffix)}</span></div>`:`<textarea ${attrs} rows="3" placeholder="用英文写出整句话">${escape(v.inputAnswer)}</textarea>`}</div>${v.hintLevel&&!v.feedback?`<p class="lp-hint">${escape(a.hints[v.hintLevel-1])}</p>`:''}${feedback(a,v)}`;
-          actions=v.feedback?button(v.feedback==='retry'?'retry':'continue',v.feedback==='retry'?'修改答案':'继续',{className:'lp-primary',disabled:v.feedback!=='retry'&&!v.canContinue}):`${button('hint',c.knowledge,{className:'lp-quiet',disabled:v.hintLevel>=2})}${button('check',c.check,{className:'lp-primary',disabled:!v.inputAnswer.trim()})}`;
+        } else if (a.kind === 'exercise') {
+          body=exerciseBody(a,v);actions=exerciseActions(a,v,'activity');
         } else if (a.kind === 'match') {
           body = matching(a, v);
           actions = `${['playing', 'paused'].includes(v.audio?.status) ? playback(v) : ''}<p class="lp-word-progress">${Object.keys(v.matchedPairs).length} / ${a.items.length} ${escape(c.matchedCount)}</p>${v.feedback ? button('continue', c.next, { disabled: !v.canContinue, className: 'lp-primary' }) : button('match-model', c.matchModel, { symbol: 'lightbulb', className: 'lp-quiet' })}`;
@@ -275,16 +301,16 @@
           body = vocabulary(a, v);
           actions = `${['playing', 'paused'].includes(v.audio?.status) ? playback(v) : ''}<p class="lp-word-progress" role="status" aria-label="${escape(c.wordHeard)} ${v.heardWords.length} / ${a.items.length}">${v.heardWords.length} / ${a.items.length}</p>${button('continue', c.next, { disabled: !v.canContinue, className: 'lp-primary' })}`;
         } else {
-          body = `${a.sceneEntityId ? `<figure class="lp-learning-scene">${image(a.sceneEntityId, 'lp-scene-painting', true)}</figure>` : ''}${a.scene ? scene(a, true, Boolean(a.returnOnFeedback && v.feedback && v.feedback !== 'retry')) : a.focusEntityId ? `<div class="lp-question-object">${image(a.focusEntityId)}</div>` : ''}${['audio-only', 'audio-meaning'].includes(a.channel) ? `<div class="lp-sound-prompt">${button(v.audio?.status === 'playing' ? 'pause' : v.audio?.status === 'paused' ? 'resume-audio' : 'replay-current', '', { symbol: v.audio?.status === 'playing' ? 'pause-fill' : 'volume-up-fill', className: 'lp-sound-button', label: v.audio?.status === 'playing' ? c.pause : c.play })}</div>` : ''}${a.questionText ? `<p class="lp-question-text" lang="en">${escape(a.questionText)}</p>` : ''}${a.conversation ? conversation(a, v) : a.cloze ? cloze(a, v) : a.listening && v.feedback && v.feedback !== 'retry' ? `<div class="lp-chat">${a.listening.contextRefs.map(ref => chatLine(ref, v)).join('')}</div>` : ''}${choices(a, v)}${!v.feedback && v.hintLevel ? `<p class="lp-hint" role="status">${escape(a.hints[v.hintLevel - 1])}${(a.noteRefs || []).map(ref => `<span class="lp-source-note">${escape(unit.sources[ref].text)}</span>`).join('')}</p>` : ''}${feedback(a, v)}`;
+          body = `${a.sceneEntityId ? `<figure class="lp-learning-scene">${image(a.sceneEntityId, 'lp-scene-painting', true)}</figure>` : ''}${a.scene ? scene(a, true, Boolean(a.returnOnFeedback && v.feedback && v.feedback !== 'retry')) : a.focusEntityId ? `<div class="lp-question-object">${image(a.focusEntityId)}</div>` : ''}${['audio-only', 'audio-meaning'].includes(a.channel) ? `<div class="lp-sound-prompt">${button(v.audio?.status === 'playing' ? 'pause' : v.audio?.status === 'paused' ? 'resume-audio' : 'replay-current', '', { symbol: v.audio?.status === 'playing' ? 'pause-fill' : 'volume-up-fill', className: 'lp-sound-button', label: v.audio?.status === 'playing' ? c.pause : c.play })}</div>` : ''}${a.questionText ? `<p class="lp-question-text" lang="en">${escape(a.questionText)}</p>` : ''}${a.conversation ? conversation(a, v) : a.cloze ? cloze(a, v) : a.listening && v.feedback && v.feedback !== 'retry' ? `<div class="lp-chat">${a.listening.contextRefs.map(ref => chatLine(ref, v)).join('')}</div>` : ''}${choices(a, v)}${!v.feedback && v.hintLevel ? `<p class="lp-hint" role="status">${escape(a.hints[v.hintLevel - 1])}${(a.noteRefs || []).map(ref => `<span class="lp-source-note">${escape(unit.sources[ref].text)}</span>`).join('')}</p>` : ''}${pictureChoice(a)?'':feedback(a, v)}`;
           actions = v.feedback ? v.feedback === 'retry' ? button('retry', c.retry, { className: 'lp-primary' }) : `${a.feedbackAudio.length ? playback(v) : ''}${button('continue', c.next, { disabled: !v.canContinue, className: 'lp-primary' })}` : `${!['audio-only', 'audio-meaning'].includes(a.channel) && (a.requiredAudio.length || a.conversation?.contextRefs.length) ? playback(v) : ''}${button('hint', c.knowledge, { symbol: 'lightbulb', className: 'lp-quiet', disabled: v.hintLevel >= 2 })}${button('check', c.check, { disabled: !v.requiredDone || v.selected.length !== a.answer.length, className: 'lp-primary' })}`;
         }
-        html = `${header(v, v.mode === 'repeat' ? c.repeatNotice : label)}<div class="lp-lesson"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(a.title)}</h1></div>${a.prompt ? `<p class="lp-task-context">${escape(a.prompt)}</p>` : ''}${body}</div>${footer(v, actions)}`;
+        html = `${header(v, v.mode === 'repeat' ? c.repeatNotice : label)}<div class="lp-lesson"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(a.title)}</h1></div>${a.prompt ? a.kind==='exercise'?exercisePrompt(a):`<p class="lp-task-context">${escape(a.prompt)}</p>` : ''}${body}</div>${footer(v, actions,pictureFeedback(a,v))}`;
       }
       if (v.saveState) html += `<div class="lp-modal-backdrop"><section class="lp-modal" role="alertdialog" aria-modal="true" aria-labelledby="lp-save-title"><h2 id="lp-save-title">${escape(v.saveState === 'conflict' ? c.saveConflict : v.saveState === 'unreadable' ? c.unsupportedRecord : c.saveFailure)}</h2>${button(v.saveState === 'failed' ? 'save-retry' : 'reload', v.saveState === 'failed' ? c.saveRetry : c.reloadProgress, { className: 'lp-primary' })}</section></div>`;
       if (v.resetRequest && !v.saveState) {
         const scope = v.resetRequest.scope;
-        const title = scope === 'course' ? '全部从零开始？' : scope === 'challenge' ? '重新开始这次挑战？' : '重置所有输入挑战？';
-        const body = scope === 'course' ? '这台设备的课程进度、复习和挑战记录将重置，回到第 1 关。' : '输入挑战记录将重置，课程路线进度保留。';
+        const title = scope === 'course' ? '全部从零开始？' : scope === 'challenge' ? '重新开始这次挑战？' : '重置所有小镇挑战？';
+        const body = scope === 'course' ? '这台设备的课程进度、复习和挑战记录将重置，回到第 1 关。' : '小镇挑战记录将重置，课程路线进度保留。';
         html += `<div class="lp-modal-backdrop"><section class="lp-modal" role="alertdialog" aria-modal="true" aria-labelledby="lp-reset-title"><h2 id="lp-reset-title">${title}</h2><p>${body}</p><p>再次学习前，可以撤销这次重置。</p><div class="lp-reset-actions">${button('reset-cancel','取消',{className:'lp-secondary'})}${button('reset-confirm','确认重置',{className:'lp-primary'})}</div></section></div>`;
       }
       // Keep the package loader's existing ready-surface contract without

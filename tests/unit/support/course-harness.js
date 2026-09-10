@@ -14,7 +14,7 @@ function setup(options={}) {
   function step(){const a=unit.activities[view().activityId];if(a.kind==='interactive-story'&&!view().storyRevealed)send({type:'story-start'});hear();
     if(a.kind==='teach')for(const item of a.items){send({type:'word-play',id:item.sourceRef});hear();}
     else if(a.kind==='match')for(const item of a.items){send({type:'match-word',id:item.sourceRef});send({type:'match-image',id:item.entityId});}
-    else if(a.kind==='input'){send({type:'activity-input',id:a.id,value:a.answers[0]});send({type:'check'});}
+    else if(a.kind==='exercise'){require('./tap-exercise').answer({send,view,hear},a);send({type:'check'});}
     else if(a.resultId){for(const id of a.answer)send({type:'select',id});send({type:'check'});hear();}
     send({type:'continue'});
   }

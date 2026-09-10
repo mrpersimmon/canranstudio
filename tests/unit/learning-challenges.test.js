@@ -6,18 +6,18 @@ const catalog=require('../../core/learning-course-catalog'), rules=require('../.
 const unit=catalog.getCourse();
 function unlock(h,id='R02'){for(const n of unit.nodes){h.finish(n.id);if(n.id===id)break;}h.send({type:'map'});}
 function open(h,id='CH12'){h.send({type:'open-challenge',id});assert.equal(h.view().screen,'challenge-intro');h.send({type:'challenge-start'});}
-function answer(h,value){h.send({type:'challenge-input',value});h.send({type:'challenge-check'});}
+function answer(h,value){const q=unit.challenges.find(c=>c.id===h.view().challengeId).questions[h.view().challengeIndex];require('./support/tap-exercise').answer(h,q,!['mine','wrong'].includes(value));h.send({type:'challenge-check'});}
 function reset(h,scope='course',id){h.send({type:'reset-request',scope,id});h.send({type:'reset-confirm'});}
 
 test('challenge answer contract accepts presentation variants but rejects changed language',()=>{
   assert.deepEqual(catalog.validateCourse(),[]);
-  const sentence=unit.challenges[1].questions[1];
+  const sentence=unit.keyboardHistory.challenges[1].questions[1];
   for(const value of ['THIS IS NOT MY UMBRELLA !',"This isn’t my umbrella.",'  This  is not my umbrella。']) {
     assert.equal(rules.accepts(sentence,value),true,value);
   }
   for(const value of ['', 'This my umbrella.','This is my umbrella.','This is not your umbrella.'])assert.equal(rules.accepts(sentence,value),false,value);
-  const bad=structuredClone(unit);bad.challenges[0].questions[0].answers=['mine'];
-  assert.ok(catalog.validateCourse(bad).some(error=>error.includes('challenge answer differs')));
+  const bad=structuredClone(unit);bad.challenges[0].questions[0].answer=['unknown-option'];
+  assert.ok(catalog.validateCourse(bad).some(error=>error.includes('invalid exercise answer')));
 });
 test('all optional challenges complete without changing the main route or review evidence',()=>{
   const h=setup();
@@ -27,7 +27,7 @@ test('all optional challenges complete without changing the main route or review
     open(h,c.id);assert.equal(h.view().sessionProgress.completed,0);
     for(const [i,q] of c.questions.entries()){
       assert.equal(h.view().challengeIndex,i);assert.equal(h.view().audio,null,'answers cannot be heard before retrieval');
-      answer(h,q.answers.at(-1));assert.equal(h.view().feedback,'correct');
+      answer(h,true);assert.equal(h.view().feedback,'correct');
       assert.equal(h.view().challengeIndex,i,'checking does not auto advance');
       h.send({type:'challenge-next'});
     }
@@ -42,13 +42,13 @@ test('all optional challenges complete without changing the main route or review
 test('draft, mistakes and hints survive refresh and never become independent evidence',()=>{
   const h=setup();unlock(h,'K04');open(h);
   answer(h,'mine');assert.equal(h.view().feedback,'retry');
-  h.send({type:'challenge-retry'});h.send({type:'challenge-input',value:'you'});
-  h.send({type:'challenge-save-draft',id:'CH12',questionId:'CH12-1'});
+  h.send({type:'challenge-retry'});h.send({type:'exercise-select',questionId:unit.challenges[0].questions[0].id,id:'o0'});
+  h.send({type:'challenge-save-draft',id:'CH12',questionId:unit.challenges[0].questions[0].id});
   const r=setup({adapter:h.adapter});open(r);
-  assert.equal(r.view().challengeAnswer,'you');assert.equal(r.view().challengeWrong,1);
+  assert.deepEqual(r.view().response.selected,['o0']);assert.equal(r.view().challengeWrong,1);
   answer(r,'your');r.send({type:'challenge-next'});
   assert.equal(r.view().record.challenges.CH12.answers[0].evidence,'supported');
-  r.send({type:'challenge-save-draft',id:'CH12',questionId:'CH12-1'});
+  r.send({type:'challenge-save-draft',id:'CH12',questionId:unit.challenges[0].questions[0].id});
   assert.equal(r.view().record.challenges.CH12.draft,undefined,'late draft from the previous question is ignored');
 });
 test('scoped reset requires confirmation, keeps main progress, supports undo and persists across refresh',()=>{
@@ -78,7 +78,7 @@ test('resetting one challenge preserves every other challenge and allows startin
   reset(h,'challenge','CH12');assert.equal(h.view().record.challenges.CH12,undefined);
   assert.deepEqual(h.view().record.challenges.CH34,before.challenges.CH34);
   assert.deepEqual(h.view().record.completed,before.completed);
-  open(h,'CH12');assert.equal(h.view().challengeIndex,0);assert.equal(h.view().challengeAnswer,'');
+  open(h,'CH12');assert.equal(h.view().challengeIndex,0);assert.deepEqual(h.view().response.selected,[]);
   assert.deepEqual(h.view().sessionProgress,{completed:0,total:6});
 });
 test('full reset writes an empty current record, cannot reimport old progress or erase unrelated data',()=>{

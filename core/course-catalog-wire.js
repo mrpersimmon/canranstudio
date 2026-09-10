@@ -7,7 +7,7 @@
   'use strict';
   // Lossless transport only. The authored catalog remains the sole truth.
   // Repeated strings and subtrees share table entries; data meaning is unchanged.
-  function encode(value) {
+  function encode(value, {compactStrings=false} = {}) {
     const strings=[], stringIds=new Map(), nodes=[], nodeIds=new Map();
     function stringId(value) {
       if (!stringIds.has(value)) { stringIds.set(value,strings.length); strings.push(value); }
@@ -25,6 +25,21 @@
       return nodeIds.get(key);
     }
     const root=visit(value);
+    if(compactStrings){
+      // Short IDs for frequently referenced strings reduce the download while
+      // retaining the existing wire format and exact authored object order.
+      const counts=strings.map(()=>0);
+      for(const node of nodes)for(let i=1;i<node.length;i++){
+        const ref=node[i];
+        if(node[0]===1&&i%2)counts[ref]++;
+        else if(typeof ref==='number'&&ref<0)counts[-ref-1]++;
+      }
+      const order=counts.map((count,id)=>({count,id})).sort((a,b)=>b.count-a.count||a.id-b.id),ids=[];
+      order.forEach((item,id)=>{ids[item.id]=id;});
+      const remap=ref=>typeof ref==='number'&&ref<0?-ids[-ref-1]-1:ref;
+      return {codec:'course-table-v1',strings:order.map(item=>strings[item.id]),
+        nodes:nodes.map(node=>node.map((ref,i)=>!i?ref:node[0]===1&&i%2?ids[ref]:remap(ref))),root:remap(root)};
+    }
     return {codec:'course-table-v1',strings,nodes,root};
   }
   function decode(wire) {

@@ -207,3 +207,38 @@ test('invalid JSON is corrupt and can be repaired from revision zero', () => {
     value: repaired
   });
 });
+
+test('large migrated progress keeps exact history and all recovery copies within the storage budget', () => {
+  const old = {schema:4, results:Object.fromEntries(Array.from({length:1600}, (_, i) => ['question-'+i, {
+    activityId:'activity-'+i, value:'She does not like steak.', at:'2026-09-10T12:00:00.000Z',
+    assessment:{skill:'sentence-organization', support:'authored-options', target:'the original classroom target'}
+  }]))};
+  const raw=JSON.stringify({revision:7,value:old}),data=new Map();
+  const storage={getItem:key=>data.get(key)??null,setItem(key,value){
+    const size=[...data].filter(([k])=>k!==key).reduce((n,[,v])=>n+v.length,0)+value.length;
+    if(size>raw.length*5.5)throw Error('quota');data.set(key,String(value));
+  }};
+  for(const suffix of ['',':recovery:backup',':recovery:quarantine'])storage.setItem('learner'+suffix,raw);
+  const adapter=createLocalStorageAdapter(storage);
+  assert.equal(adapter.checkpoint('learner',{expectedRevision:7,migration:true}).status,'ok');
+  const value={...structuredClone(old),schema:5,keyboardArchive:{at:'2026-09-10',record:structuredClone(old),draft:{value:'original typed answer'}}};
+  assert.equal(adapter.commit('learner',{expectedRevision:7,value}).status,'committed');
+  assert.equal(adapter.checkpoint('learner',{expectedRevision:8}).status,'ok');
+  assert.equal(adapter.commit('learner',{expectedRevision:8,value}).status,'committed');
+  assert.deepEqual(adapter.load('learner').value,value);
+  assert.equal(storage.getItem('learner:recovery:migration'),raw);
+  assert.equal(storage.getItem('learner:recovery:quarantine'),raw);
+  assert.equal(adapter.commit('learner',{expectedRevision:8,value:{}}).status,'conflict');
+  adapter.loadDraft('learner');
+  assert.equal(adapter.saveDraft('learner',{baseRevision:9,value:{selected:['your']}}).status,'ok');
+  assert.deepEqual(adapter.decodeEnvelope(adapter.inspect('learner').backup).value,value);
+  adapter.load('learner').value.keyboardArchive.record.results['question-0'].value='changed outside';
+  assert.equal(adapter.load('learner').value.keyboardArchive.record.results['question-0'].value,old.results['question-0'].value);
+  const bad='{"revision":10,"encoding":"record-table-v1","value":{"codec":"course-table-v1","strings":[],"nodes":[[0,4]],"root":0}}';
+  storage.setItem('learner',bad);
+  assert.equal(adapter.load('learner').status,'corrupt');assert.equal(adapter.inspect('learner').raw,bad);
+  assert.equal(adapter.recover('learner',{expectedRaw:bad,value}).status,'committed');
+  assert.deepEqual(adapter.load('learner').value,value);
+  assert.equal(storage.getItem('learner:recovery:quarantine'),bad);
+  assert.equal(storage.getItem('learner:recovery:migration'),raw);
+});

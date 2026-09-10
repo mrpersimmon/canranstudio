@@ -46,7 +46,8 @@ test('imports original V3.6 results and story proof without modifying the old re
   const before=JSON.stringify(old.adapter.load(old.rt.storageKey));
   const h=setup({adapter:old.adapter});assert.equal(h.view().completedCount,3);assert.equal(h.view().nodes.find(n=>n.id==='C04').available,true);
   assert.equal(JSON.stringify(old.adapter.load(old.rt.storageKey)),before);
-  assert.deepEqual(h.view().record.results,old.view().record.results);
+  assert.deepEqual(h.view().record.archivedProgress[old.view().record.experienceRevision].results,old.view().record.results);
+  for(const [id,result]of Object.entries(h.view().record.results))assert.deepEqual(result,old.view().record.results[id]);
   assert.deepEqual(h.view().record.storyProgress,old.view().record.storyProgress);
   h.send({type:'open-node',nodeId:'C04'});assert.equal(h.view().activityId,'C06:cloak-words');
 });

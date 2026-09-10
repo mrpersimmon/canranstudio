@@ -12,8 +12,8 @@ const canonical=value=>JSON.stringify(sort(value));
 function sort(value){if(Array.isArray(value))return value.map(sort);if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,sort(value[k])]));return value;}
 test('original first-50 hashes remain intact beneath the explicitly reviewed v6.1 changes',()=>{
   for(const [field,hashes]of Object.entries(preserved)){
-    const index=Array.isArray(unit[field])?Object.fromEntries(unit[field].map(x=>[x.id,x])):unit[field];
-    for(const [id,expected]of Object.entries(hashes))assert.equal(crypto.createHash('sha256').update(canonical(priorItem(unit,field,index[id]))).digest('hex'),expected,field+'/'+id);
+    const frozen={...unit,...unit.keyboardHistory};const index=Array.isArray(frozen[field])?Object.fromEntries(frozen[field].map(x=>[x.id,x])):frozen[field];
+    for(const [id,expected]of Object.entries(hashes))assert.equal(crypto.createHash('sha256').update(canonical(priorItem(unit.keyboardHistory,field,index[id]))).digest('hex'),expected,field+'/'+id);
   }
 });
 test('new authoring has continuous pairs, complete original stories and correct post-test PDF page offsets',()=>{
@@ -46,7 +46,7 @@ test('new recordings keep full natural utterances, explicit pronunciations and o
 });
 test('typed challenges accept reviewed relative clauses, contractions and clock variants but reject grammar changes',()=>{
   const {accepts}=require('../../core/learning-challenges');
-  const questions=unit.challenges.flatMap(x=>x.questions),find=id=>questions.find(x=>x.id===id);
+  const questions=unit.keyboardHistory.challenges.flatMap(x=>x.questions),find=id=>questions.find(x=>x.id===id);
   for(const [id,text]of [['CH121-122-0','that'],['CH139-140-0','whether'],['CH57-58-7',"It's eight fifteen."],['CH65-66-7','We must leave at three forty-five.']])assert.equal(accepts(find(id),text),true,id);
   assert.equal(accepts(find('CH121-122-0'),'what'),false);
   assert.equal(accepts(find('CH57-58-7'),"It's eight fifty."),false);
@@ -54,7 +54,7 @@ test('typed challenges accept reviewed relative clauses, contractions and clock 
 });
 test('written answers distinguish auxiliary contractions from main verbs and modal complements',()=>{
   const {accepts}=require('../../core/learning-challenges');
-  const questions=unit.challenges.flatMap(x=>x.questions),find=id=>questions.find(x=>x.id===id);
+  const questions=unit.keyboardHistory.challenges.flatMap(x=>x.questions),find=id=>questions.find(x=>x.id===id);
   for(const [id,text]of [
     ['CH61-62-5',"He's a toothache."],
     ['CH67-68-recall-0',"Can I've the key, please?"],
@@ -88,7 +88,9 @@ test('a finished first-50 record survives upgrade and resumes at Lesson 51 witho
   const upgraded=setup({adapter:old.adapter});
   const migrated=structuredClone(upgraded.view().record);
   for(const result of Object.values(migrated.results))delete result.contractVersion;
-  for(const field of ['completed','results','attempts','storyProgress','teachingProgress','challenges'])assert.deepEqual(migrated[field],before[field],field);
+  assert.deepEqual(migrated.keyboardArchive.record,before);
+  for(const [id,result] of Object.entries(migrated.results))assert.deepEqual(result,before.results[id],id);
+  for(const field of ['storyProgress','teachingProgress'])assert.deepEqual(migrated[field],before[field],field);
   assert.equal(old.adapter.inspect(old.rt.storageKey).migration,stored);
   for(const id of unit.grammar.activityIds)assert.equal(migrated.completed[id],undefined);
   assert.equal(upgraded.view().completedCount,129);

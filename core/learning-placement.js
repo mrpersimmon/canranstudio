@@ -7,8 +7,9 @@
   'use strict';
   const object = x => Boolean(x) && typeof x === 'object' && !Array.isArray(x);
   const cache = new WeakMap();
+  const exercises=typeof module==='object'&&module.exports?require('./learning-exercises'):globalThis.CanranCore.learningExercises;
   function config(unit, version = unit.placement?.version) {
-    return version === unit.placement?.version ? unit.placement : version === unit.history?.placement.version ? unit.history.placement : null;
+    return version === unit.placement?.version ? unit.placement : version === unit.history?.placement.version ? unit.history.placement : version===unit.keyboardHistory?.placement.version?unit.keyboardHistory.placement:null;
   }
   function index(unit, version) {
     const definition = config(unit, version);
@@ -24,7 +25,7 @@
   }
   function currentChapter(unit, record) {
     const skip = skippedUntil(unit, record);
-    return unit.nodes.find((n, i) => i >= skip && !n.activityIds.every(id => record?.completed[id]))?.chapterId;
+    return unit.nodes.find((n, i) => i >= skip && !record?.legacyCompletedNodes?.[n.id] && !record?.importedCompletedNodes?.[n.id] && !n.activityIds.every(id => record?.completed[id]))?.chapterId;
   }
   function eligible(unit, record, targetId) {
     return Boolean(unit.placement) && chapterIndex(unit, targetId) > chapterIndex(unit, currentChapter(unit, record))
@@ -61,6 +62,13 @@
     }
     const total = rules.questionCount;
     if(version>=2) for(const skill of unit.grammar?.skills || [])take(pool.find(q=>q.grammarSkillId===skill.id));
+    if(version>=3){
+      // Use distinct available mechanisms without displacing range or target anchors.
+      for(const mechanism of [...new Set(pool.map(q=>q.mechanism))].slice(0,3)){
+        if(selected.some(id=>question(unit,id,version).mechanism===mechanism))continue;
+        take(pool.find(q=>q.mechanism===mechanism&&chapterIndex(unit,q.chapterId)>=from&&!used.has(key(q)))||pool.find(q=>q.mechanism===mechanism&&!used.has(key(q))));
+      }
+    }
     const selectedSkipped=selected.filter(id=>chapterIndex(unit,question(unit,id,version).chapterId)>=from).length;
     draw(from, target, Math.max(0,(from ? Math.ceil(total * rules.skippedShare) : total)-selectedSkipped));
     draw(0, from, Math.max(0,total - selected.length));
@@ -72,11 +80,21 @@
     const fromId = currentChapter(unit, record), questionIds = sample(unit, fromId, targetId, seed);
     if (questionIds.length !== unit.placement.questionCount) return null;
     return {version: unit.placement.version, id: at + ':' + seed, fromId, targetId, seed,
-      questionIds, responses: [], cursor: 0, draft: '', status: 'active', startedAt: at};
+      questionIds, responses: [], cursor: 0, draft: unit.placement.version>=3?exercises.empty():'', status: 'active', startedAt: at};
   }
   const mistakes = attempt => attempt.responses.filter(r => !r.correct).length;
-  function grade(unit, attempt, value, at) {
-    if (attempt.status !== 'active' || attempt.responses.length !== attempt.cursor || !value.trim()) return null;
+  function grade(unit, attempt, value, at, heard=[]) {
+    if(attempt.version>=3){
+      const q=question(unit,attempt.questionIds[attempt.cursor],attempt.version);
+      if(attempt.status!=='active'||attempt.responses.length!==attempt.cursor||!q||!exercises.ready(q,value,heard))return null;
+      const next=JSON.parse(JSON.stringify(attempt));
+      next.responses.push({questionId:q.id,value:JSON.parse(JSON.stringify(value)),correct:exercises.accepts(q,value),answerPolicyVersion:3,...(q.priorOrderTexts?{wordBankVersion:2}:{}),assessment:q.assessment,heardRefs:[...heard],at});next.draft=value;
+      if(mistakes(next)===unit.placement.maxMistakes)next.status='failed';
+      else if(next.responses.length===next.questionIds.length)next.status='passed';
+      if(next.status!=='active'){next.cursor=next.responses.length;next.finishedAt=at;next.draft=exercises.empty();}
+      return next;
+    }
+    if (attempt.status !== 'active' || attempt.responses.length !== attempt.cursor || typeof value!=='string'||!value.trim()) return null;
     const next = JSON.parse(JSON.stringify(attempt));
     const policyVersion=unit.answerPolicyVersion===unit.placement.version?unit.answerPolicyVersion:next.version;
     const q = question(unit, next.questionIds[next.cursor],policyVersion);
@@ -88,6 +106,20 @@
     return next;
   }
   function validAttempt(a, unit, targetId) {
+    if(a?.version>=3){
+      if(!object(a)||a.version!==unit.placement.version||a.targetId!==targetId||typeof a.id!=='string'||typeof a.startedAt!=='string'||!Number.isSafeInteger(a.seed)||a.seed<0||a.seed>4294967295||!Array.isArray(a.questionIds)||!Array.isArray(a.responses)||!Number.isInteger(a.cursor))return false;
+      if(JSON.stringify(a.questionIds)!==JSON.stringify(sample(unit,a.fromId,a.targetId,a.seed,a.version))||a.questionIds.length!==20||a.responses.length>20)return false;
+      if(!a.responses.every((r,i)=>{
+        const q=question(unit,a.questionIds[i],3);
+        if(!r||r.wordBankVersion!==undefined&&(r.wordBankVersion!==2||!q.priorOrderTexts))return false;
+        const graded=q.priorOrderTexts&&r.wordBankVersion===undefined?{...q,options:q.options.map((o,j)=>({...o,text:q.priorOrderTexts[j]}))}:q;
+        return r.questionId===q.id&&r.answerPolicyVersion===3&&typeof r.at==='string'&&exercises.ready(q,r.value,r.heardRefs)&&r.correct===exercises.accepts(graded,r.value)&&JSON.stringify(r.assessment)===JSON.stringify(q.assessment);
+      }))return false;
+      const wrong=mistakes(a),expected=wrong>=5?'failed':a.responses.length===20?'passed':'active';
+      if(a.status!==expected||wrong>5||a.responses.slice(0,-1).filter(r=>!r.correct).length>=5)return false;
+      if(expected==='active')return a.finishedAt===undefined&&a.cursor>=0&&(a.cursor===a.responses.length||a.cursor===a.responses.length-1&&JSON.stringify(a.draft)===JSON.stringify(a.responses.at(-1).value))&&exercises.valid(question(unit,a.questionIds[a.cursor],3),a.draft);
+      return typeof a.finishedAt==='string'&&a.cursor===a.responses.length&&JSON.stringify(a.draft)===JSON.stringify(exercises.empty());
+    }
     if (!object(a) || !config(unit, a.version) || a.targetId !== targetId || typeof a.id !== 'string'
       || typeof a.startedAt !== 'string' || !Number.isSafeInteger(a.seed) || a.seed < 0 || a.seed > 4294967295
       || !Array.isArray(a.questionIds) || !Array.isArray(a.responses) || !Number.isInteger(a.cursor)
@@ -110,8 +142,14 @@
   function validateDefinitions(unit) {
     if (!unit.placement) return [];
     const p = unit.placement, errors = [], ids = new Set();
-    if (![1,2].includes(p.version) || p.questionCount !== 20 || p.maxMistakes !== 5 || p.skippedShare !== .7) errors.push('invalid placement rules');
+    if (![1,2,3].includes(p.version) || p.questionCount !== 20 || p.maxMistakes !== 5 || p.skippedShare !== .7) errors.push('invalid placement rules');
     for (const q of p.questions || []) {
+      if(q.kind==='exercise'){
+        if(ids.has(q.id)||chapterIndex(unit,q.chapterId)<0||['pairs','mission'].includes(q.mechanism))errors.push('invalid placement exercise '+q.id);
+        ids.add(q.id);errors.push(...exercises.validate(q,unit));
+        for(const ref of [...q.sourceRefs,...q.prerequisiteRefs,...q.listenRefs]){const s=unit.sources[ref],lesson=s?.lessonId||Number(ref.match(/^L(\d+)-/)?.[1]);if(lesson>unit.chapters[chapterIndex(unit,q.chapterId)].lessonIds.at(-1))errors.push('placement source from a future chapter '+q.id);}
+        continue;
+      }
       if (ids.has(q.id) || !['translation','gap'].includes(q.kind) || !q.prompt || !unit.entities[q.actorId]
         || chapterIndex(unit,q.chapterId)<0 || !unit.sources[q.sourceRef] || !Array.isArray(q.answers) || !q.answers.length
         || q.answers.some(a=>typeof a!=='string'||!answers.normalize(a))) { errors.push('invalid placement question '+q.id); continue; }

@@ -122,13 +122,13 @@
         || hearts.getAttribute('aria-label')!==`剩余 ${remaining} 次机会，共 ${total} 次`) errors.push({rule:'placement-hearts',remaining});
       if(run.screen==='placement') {
         const q=win.fixture.unit.placement.questions.find(q=>q.id===run.placementAttempt.questionIds[run.placementAttempt.cursor]);
-        const expected=q.kind==='gap'?'补全句子':q.answerType==='word'?'写出英文单词':'翻译这句话';
-        if(root.querySelector('[data-lesson-title]')?.textContent!==expected
-          || (q.answerType==='word' && q.answers.some(a=>/\s/.test(a.trim()))))errors.push({rule:'placement-answer-type',questionId:q.id,expected});
+        const expected=q.title;
+        if(root.querySelector('[data-lesson-title]')?.textContent!==expected)errors.push({rule:'placement-answer-type',questionId:q.id,expected});
       }
     }
     const progressBar = root.querySelector('.lp-header [role="progressbar"]');
     const sessionProgress = progressBar ? {label:progressBar.getAttribute('aria-label'),completed:Number(progressBar.getAttribute('aria-valuenow')),total:Number(progressBar.getAttribute('aria-valuemax'))} : null;
+    if(root.querySelector('.lp-lesson textarea,.lp-lesson input:not([type=radio]):not([type=checkbox]),.lp-lesson [contenteditable=true]'))errors.push({rule:'keyboard-answer'});
     const isSettlement = ['celebration','review-complete','challenge-complete','placement-result'].includes(run?.screen);
     if (!isSettlement && run?.sessionProgress && (!sessionProgress || sessionProgress.label !== '本次闯关进度'
       || sessionProgress.completed !== run.sessionProgress.completed || sessionProgress.total !== run.sessionProgress.total))
@@ -237,7 +237,7 @@
         }
       }
     }
-    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint,.journey-locate,.lp-reset-actions button,.journey-reset button,.journey-reset-notice button,[data-challenge-input],[data-placement-input]')){
+    for(const button of root.querySelectorAll('.lp-footer button,.lp-option,.lp-vocabulary-card,.lp-line-play,.journey-preview button,[data-journey-current],.journey-start-hint,.journey-locate,.lp-reset-actions button,.journey-reset button,.journey-reset-notice button,.lp-exercise button')){
       if(button.disabled||button.closest('[inert]')||!button.getClientRects().length)continue;
       const rect=button.getBoundingClientRect();
       if(rect.width<44||rect.height<44)errors.push({rule:'small-action',label:button.getAttribute('aria-label')||button.textContent});
