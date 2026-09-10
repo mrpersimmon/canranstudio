@@ -12,7 +12,8 @@ async function main(){
  try{
   const context=await browser.newContext({viewport:{width:420,height:856}});const page=await context.newPage();
   await page.goto(origin);await page.waitForSelector('[data-journey-current]',{timeout:60000});
-  report.checks.push({name:'windowed-map',sections:await page.locator('.journey-chapter').count(),nodes:await page.locator('[data-journey-node]').count()});assert.ok(report.checks.at(-1).sections<=3);
+  report.checks.push({name:'continuous-map',sections:await page.locator('.journey-chapter').count(),nodes:await page.locator('[data-journey-node]').count(),pagingControls:await page.locator('[data-action="journey-section"],[data-action="journey-expand"]').count()});
+  assert.equal(report.checks.at(-1).sections,unit.chapters.length);assert.equal(report.checks.at(-1).nodes,unit.nodes.length);assert.equal(report.checks.at(-1).pagingControls,0);
   await page.locator('.journey-lesson-index summary').click();await page.locator('a[href="#chapter-lesson-143-144"]').click();await page.waitForSelector('#chapter-lesson-143-144');
   await page.locator('[data-action="journey-locate"]').click();await page.waitForSelector('[data-journey-current]');
   await page.locator('[data-action="preview-node"][data-id="C04"]').click();await page.locator('[data-action="open-placement"][data-id="umbrella"]').click();await page.locator('[data-action="placement-start"]').click();
