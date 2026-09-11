@@ -1,0 +1,534 @@
+{
+  "source": "/Users/permission/Documents/ChatGPT/canranstudio.cn-main/lesson49/index.html",
+  "sha256": "818f662d96770adab22ba5a78060063d3d83f5d498c79debf7504ea6c35787e2",
+  "arrays": {
+    "WORDS": [
+      {
+        "en": "butcher",
+        "ph": "/'bʊtʃə(r)/",
+        "pos": "n.",
+        "cn": "卖肉者，肉店老板",
+        "icon": "🔪"
+      },
+      {
+        "en": "meat",
+        "ph": "/miːt/",
+        "pos": "n.",
+        "cn": "（食用）肉",
+        "icon": "🥩"
+      },
+      {
+        "en": "beef",
+        "ph": "/biːf/",
+        "pos": "n.",
+        "cn": "牛肉",
+        "icon": "🐄"
+      },
+      {
+        "en": "lamb",
+        "ph": "/læm/",
+        "pos": "n.",
+        "cn": "羔羊肉",
+        "icon": "🐑"
+      },
+      {
+        "en": "mutton",
+        "ph": "/'mʌtn/",
+        "pos": "n.",
+        "cn": "羊肉",
+        "icon": "🍖"
+      },
+      {
+        "en": "steak",
+        "ph": "/steɪk/",
+        "pos": "n.",
+        "cn": "牛排",
+        "icon": "🥓"
+      },
+      {
+        "en": "mince",
+        "ph": "/mɪns/",
+        "pos": "n.",
+        "cn": "肉馅",
+        "icon": "🥣"
+      },
+      {
+        "en": "chicken",
+        "ph": "/'tʃɪkɪn/",
+        "pos": "n.",
+        "cn": "鸡肉",
+        "icon": "🍗"
+      },
+      {
+        "en": "pork",
+        "ph": "/pɔːk/",
+        "pos": "n.",
+        "cn": "猪肉",
+        "icon": "🐷"
+      },
+      {
+        "en": "fish",
+        "ph": "/fɪʃ/",
+        "pos": "n.",
+        "cn": "鱼肉",
+        "icon": "🐟"
+      },
+      {
+        "en": "husband",
+        "ph": "/'hʌzbənd/",
+        "pos": "n.",
+        "cn": "丈夫",
+        "icon": "🤵"
+      },
+      {
+        "en": "tell",
+        "ph": "/tel/",
+        "pos": "v.",
+        "cn": "告诉",
+        "icon": "🗣️"
+      },
+      {
+        "en": "truth",
+        "ph": "/truːθ/",
+        "pos": "n.",
+        "cn": "实情",
+        "icon": "💎"
+      },
+      {
+        "en": "either",
+        "ph": "/'aɪðə(r)/",
+        "pos": "adv.",
+        "cn": "也（用于否定句）",
+        "icon": "➗"
+      }
+    ],
+    "PHRASES": [
+      {
+        "en": "a piece of steak",
+        "ph": "",
+        "pos": "短语",
+        "cn": "一块牛排",
+        "icon": "🥩"
+      },
+      {
+        "en": "a pound of mince",
+        "ph": "",
+        "pos": "短语",
+        "cn": "一磅肉馅",
+        "icon": "⚖️"
+      },
+      {
+        "en": "instant boiled mutton",
+        "ph": "",
+        "pos": "短语",
+        "cn": "涮羊肉（= mutton hotpot）",
+        "icon": "🍲"
+      }
+    ],
+    "DIALOGUE": [
+      {
+        "who": "butcher",
+        "text": "Do you want any meat today, Mrs. Bird?",
+        "cn": "您今天要来点肉吗，伯德夫人？"
+      },
+      {
+        "who": "bird",
+        "text": "Yes, please.",
+        "cn": "好的，谢谢。"
+      },
+      {
+        "who": "butcher",
+        "text": "Do you want beef or lamb?",
+        "cn": "您要牛肉还是羔羊肉？"
+      },
+      {
+        "who": "bird",
+        "text": "Beef, please.",
+        "cn": "请给我牛肉。"
+      },
+      {
+        "who": "butcher",
+        "text": "This lamb's very good.",
+        "cn": "这羔羊肉很不错。"
+      },
+      {
+        "who": "bird",
+        "text": "I like lamb, but my husband doesn't.",
+        "cn": "我喜欢羔羊肉，可是我丈夫不喜欢。"
+      },
+      {
+        "who": "butcher",
+        "text": "What about some steak? This is a nice piece.",
+        "cn": "来点牛排怎么样？这块很好。"
+      },
+      {
+        "who": "bird",
+        "text": "Give me that piece, please. And a pound of mince, too.",
+        "cn": "请给我那块。再来一磅肉馅。"
+      },
+      {
+        "who": "butcher",
+        "text": "Do you want a chicken, Mrs. Bird? They're very nice.",
+        "cn": "您要只鸡吗，伯德夫人？鸡很好。"
+      },
+      {
+        "who": "bird",
+        "text": "No, thank you. My husband likes steak, but he doesn't like chicken.",
+        "cn": "不了，谢谢。我丈夫喜欢牛排，但他不喜欢鸡肉。"
+      },
+      {
+        "who": "butcher",
+        "text": "To tell you the truth, Mrs. Bird, I don't like chicken either!",
+        "cn": "说实话，伯德夫人，我也不喜欢鸡肉！",
+        "punch": true
+      }
+    ],
+    "DOARE": [
+      {
+        "q": "busy",
+        "a": "are",
+        "full": "Are you busy?",
+        "cn": "你忙吗？"
+      },
+      {
+        "q": "a teacher",
+        "a": "are",
+        "full": "Are you a teacher?",
+        "cn": "你是老师吗？"
+      },
+      {
+        "q": "at home",
+        "a": "are",
+        "full": "Are you at home?",
+        "cn": "你在家吗？"
+      },
+      {
+        "q": "sleep well",
+        "a": "do",
+        "full": "Do you sleep well?",
+        "cn": "你睡得好吗？"
+      },
+      {
+        "q": "make the bed",
+        "a": "do",
+        "full": "Do you make the bed?",
+        "cn": "你整理床铺吗？"
+      },
+      {
+        "q": "put on your coat",
+        "a": "do",
+        "full": "Do you put on your coat?",
+        "cn": "你穿上外套吗？"
+      }
+    ],
+    "GIVE": {
+      "give": {
+        "a": [
+          "Give",
+          "me",
+          "that piece,",
+          "please."
+        ],
+        "b": [
+          "Give",
+          "that piece",
+          "to",
+          "me,",
+          "please."
+        ]
+      },
+      "show": {
+        "a": [
+          "Show",
+          "me",
+          "your ticket,",
+          "please."
+        ],
+        "b": [
+          "Show",
+          "your ticket",
+          "to",
+          "me,",
+          "please."
+        ]
+      },
+      "send": {
+        "a": [
+          "Send",
+          "him",
+          "a postcard."
+        ],
+        "b": [
+          "Send",
+          "a postcard",
+          "to",
+          "him."
+        ]
+      },
+      "take": {
+        "a": [
+          "Take",
+          "her",
+          "some flowers."
+        ],
+        "b": [
+          "Take",
+          "some flowers",
+          "to",
+          "her."
+        ]
+      }
+    },
+    "POUCH": [
+      {
+        "en": "To tell you the truth",
+        "cn": "说实话；老实告诉你"
+      },
+      {
+        "en": "To be honest",
+        "cn": "老实说；说实在的"
+      },
+      {
+        "en": "Well",
+        "cn": "嗯……（委婉地开口）"
+      },
+      {
+        "en": "Yeah",
+        "cn": "是啊（随和地应答）"
+      },
+      {
+        "en": "That's to say",
+        "cn": "也就是说；换句话说"
+      }
+    ],
+    "ET": [
+      {
+        "s": "I don't like chicken ___.",
+        "a": "either",
+        "why": "有 don't，是否定句 → either"
+      },
+      {
+        "s": "He isn't a teacher ___.",
+        "a": "either",
+        "why": "有 isn't，是否定句 → either"
+      },
+      {
+        "s": "She isn't at home ___.",
+        "a": "either",
+        "why": "有 isn't，是否定句 → either"
+      },
+      {
+        "s": "Do you love English ___?",
+        "a": "too",
+        "why": "肯定的疑问句 → too"
+      },
+      {
+        "s": "They can play football ___.",
+        "a": "too",
+        "why": "肯定句 → too"
+      },
+      {
+        "s": "We are students ___.",
+        "a": "too",
+        "why": "肯定句 → too"
+      }
+    ],
+    "TP_SING": [
+      "Lucy",
+      "Sam",
+      "Mr. Han",
+      "her husband",
+      "his sister",
+      "that student",
+      "the apple",
+      "this book",
+      "Beijing",
+      "my aunt",
+      "his dog",
+      "its bone",
+      "the teacher"
+    ],
+    "TP_PLUR": [
+      "they",
+      "I",
+      "my parents",
+      "the students",
+      "we",
+      "you",
+      "Tom and Jim",
+      "these books"
+    ],
+    "FILL": [
+      {
+        "pre": "He",
+        "verb": "love",
+        "post": "his girlfriend very much.",
+        "opts": [
+          "love",
+          "loves"
+        ],
+        "a": "loves",
+        "why": "He 是单三 → loves"
+      },
+      {
+        "pre": "Jim and Lily",
+        "verb": "walk",
+        "post": "to school every day.",
+        "opts": [
+          "walk",
+          "walks"
+        ],
+        "a": "walk",
+        "why": "Jim and Lily 是两个人，非单三 → walk"
+      },
+      {
+        "pre": "They",
+        "verb": "drink",
+        "post": "beer every night.",
+        "opts": [
+          "drink",
+          "drinks"
+        ],
+        "a": "drink",
+        "why": "They 非单三 → drink"
+      },
+      {
+        "pre": "My dog",
+        "verb": "watch",
+        "post": "TV at night.",
+        "opts": [
+          "watch",
+          "watches"
+        ],
+        "a": "watches",
+        "why": "My dog=it 是单三 → watches"
+      },
+      {
+        "pre": "The student",
+        "verb": "go",
+        "post": "to school on foot.",
+        "opts": [
+          "go",
+          "goes"
+        ],
+        "a": "goes",
+        "why": "The student=he/she 是单三 → goes"
+      }
+    ],
+    "CHOICE": [
+      {
+        "q": "She ___ up at six in the morning.",
+        "opts": [
+          "get",
+          "gets",
+          "getting"
+        ],
+        "a": 1,
+        "why": "She 是单三 → gets"
+      },
+      {
+        "q": "Tom is a student. He ___ in the classroom.",
+        "opts": [
+          "work",
+          "works",
+          "working"
+        ],
+        "a": 1,
+        "why": "He 是单三 → works"
+      }
+    ],
+    "TRANS": [
+      {
+        "cn": "她喜欢桃子。",
+        "en": "She likes peaches."
+      },
+      {
+        "cn": "他想要一辆小汽车。",
+        "en": "He wants a car."
+      }
+    ],
+    "EXAM": [
+      {
+        "tag": "单词",
+        "q": "🥩「牛排」用英语怎么说？",
+        "opts": [
+          "mince",
+          "steak",
+          "mutton",
+          "pork"
+        ],
+        "a": 1
+      },
+      {
+        "tag": "单词",
+        "q": "音标 /'mʌtn/ 是哪个单词？",
+        "opts": [
+          "mutton",
+          "mince",
+          "meat",
+          "lamb"
+        ],
+        "a": 0
+      },
+      {
+        "tag": "单词",
+        "q": "「也（用于否定句）」是哪个词？",
+        "opts": [
+          "too",
+          "either",
+          "truth",
+          "tell"
+        ],
+        "a": 1
+      },
+      {
+        "tag": "Do/Are",
+        "q": "___ you a teacher?",
+        "opts": [
+          "Do",
+          "Are"
+        ],
+        "a": 1
+      },
+      {
+        "tag": "Do/Are",
+        "q": "___ you sleep well?",
+        "opts": [
+          "Do",
+          "Are"
+        ],
+        "a": 0
+      },
+      {
+        "tag": "三单",
+        "q": "My husband ___ steak. (like)",
+        "opts": [
+          "like",
+          "likes",
+          "liking"
+        ],
+        "a": 1
+      },
+      {
+        "tag": "三单",
+        "q": "They ___ beer every night. (drink)",
+        "opts": [
+          "drink",
+          "drinks",
+          "drinking"
+        ],
+        "a": 0
+      },
+      {
+        "tag": "三单",
+        "q": "「她喜欢桃子。」怎么翻译？",
+        "opts": [
+          "She like peaches.",
+          "She likes peaches.",
+          "She liking peaches."
+        ],
+        "a": 1
+      }
+    ]
+  }
+}

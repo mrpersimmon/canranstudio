@@ -1,0 +1,3027 @@
+{
+  "source": "/Users/permission/Documents/ChatGPT/canranstudio.cn/content/learning-course.json",
+  "sha256": "28793372a426504840ebac4fcb9aa4d3379de305abb0edcdf5d1c611ab8b613f",
+  "revision": "lesson1-6-v4.0",
+  "nodes": [
+    {
+      "id": "L49-STORY",
+      "title": "替家人挑选食物",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        49
+      ],
+      "kind": "story",
+      "description": "",
+      "icon": "book-open",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49:story"
+      ],
+      "checkpointIds": [
+        "L49-STORY"
+      ],
+      "completionTitle": "替家人挑选食物，完成！"
+    },
+    {
+      "id": "L49-WORDS-1",
+      "title": "词语与用法 1",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        49,
+        50
+      ],
+      "kind": "practice",
+      "description": "",
+      "icon": "star",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49-WORDS-1:teach-0",
+        "L49-WORDS-1:teach-4",
+        "L49-WORDS-1:teach-0:sound-pairs:tap"
+      ],
+      "checkpointIds": [
+        "L49-WORDS-1"
+      ],
+      "completionTitle": "词语与用法 1，完成！"
+    },
+    {
+      "id": "L49-WORDS-2",
+      "title": "词语与用法 2",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        49,
+        50
+      ],
+      "kind": "practice",
+      "description": "",
+      "icon": "star",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49-WORDS-2:teach-0",
+        "L49-WORDS-2:teach-4",
+        "L49-WORDS-2:hear"
+      ],
+      "checkpointIds": [
+        "L49-WORDS-2"
+      ],
+      "completionTitle": "词语与用法 2，完成！"
+    },
+    {
+      "id": "L49-WORDS-3",
+      "title": "词语与用法 3",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        49,
+        50
+      ],
+      "kind": "practice",
+      "description": "",
+      "icon": "star",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49-WORDS-3:teach-0",
+        "L49-WORDS-3:hear"
+      ],
+      "checkpointIds": [
+        "L49-WORDS-3"
+      ],
+      "completionTitle": "词语与用法 3，完成！"
+    },
+    {
+      "id": "L49-NUMBERS",
+      "title": "用英语说顺序",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        50
+      ],
+      "kind": "practice",
+      "description": "",
+      "icon": "star",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49:numbers-0",
+        "L49:numbers-4",
+        "L49:numbers-8",
+        "L49:number-check-0",
+        "L49:number-check-1"
+      ],
+      "checkpointIds": [
+        "L49-NUMBERS"
+      ],
+      "completionTitle": "用英语说顺序，完成！"
+    },
+    {
+      "id": "L49-USE",
+      "title": "把句子用起来",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        49,
+        50
+      ],
+      "kind": "practice",
+      "description": "",
+      "icon": "star",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49:examples",
+        "L49:examples-4",
+        "L49:gap-1",
+        "L49:order-2:tap",
+        "L49:gap-3",
+        "L49:grammar-s:tap",
+        "L49:grammar-correct:tap",
+        "L49:grammar-question:tap"
+      ],
+      "checkpointIds": [
+        "L49-USE"
+      ],
+      "completionTitle": "把句子用起来，完成！"
+    },
+    {
+      "id": "L49-REVIEW",
+      "title": "前五十课综合闯关",
+      "chapterId": "lesson-49-50",
+      "lessonIds": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "kind": "review",
+      "description": "",
+      "icon": "arrows-clockwise",
+      "duration": "约 3–5 分钟",
+      "activityIds": [
+        "L49:meaning",
+        "L49:transfer",
+        "L49:contrast",
+        "L49:extra-4",
+        "L49:extra-5",
+        "L49:return",
+        "L49:return-gap",
+        "L49:final-recall-0",
+        "L49:final-recall-1",
+        "L49:final-recall-2",
+        "L49:final-recall-3",
+        "L49:final-recall-4",
+        "L49:grammar-transfer-s:tap",
+        "L49:grammar-transfer-base:tap",
+        "L49:grammar-transfer-question:tap"
+      ],
+      "checkpointIds": [
+        "L49-REVIEW"
+      ],
+      "completionTitle": "前五十课综合闯关，完成！"
+    }
+  ],
+  "activities": {
+    "L49:story": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-D01",
+        "L49-D02",
+        "L49-D03",
+        "L49-D04",
+        "L49-D05",
+        "L49-D06",
+        "L49-D07",
+        "L49-D08",
+        "L49-D09",
+        "L49-D10",
+        "L49-D11",
+        "L49-D12",
+        "L49-D13",
+        "L49-D14",
+        "L49-D15"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49:story",
+      "kind": "interactive-story",
+      "title": "替家人挑选食物",
+      "playbackMode": "manual-story",
+      "audioType": "sentence",
+      "noteRefs": [
+        "L49-N-LINE01",
+        "L49-N-LINE02",
+        "L49-N-LINE03",
+        "L49-N-LINE04",
+        "L49-N-LINE05",
+        "L49-N-LINE06",
+        "L49-N-LINE07",
+        "L49-N-LINE08",
+        "L49-N-LINE09",
+        "L49-N-LINE10",
+        "L49-N-LINE11",
+        "L49-N-LINE12",
+        "L49-N-LINE13",
+        "L49-N-LINE14",
+        "L49-N-LINE15"
+      ],
+      "actorEntityIds": [
+        "L49-actor-butcher",
+        "L49-actor-mrs-bird"
+      ],
+      "sceneEntityId": "scene-market",
+      "narrative": false,
+      "beats": [
+        {
+          "id": "L49-D01",
+          "kind": "line",
+          "ref": "L49-D01",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE01"
+        },
+        {
+          "id": "L49-D02",
+          "kind": "line",
+          "ref": "L49-D02",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE02"
+        },
+        {
+          "id": "L49-D03",
+          "kind": "line",
+          "ref": "L49-D03",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE03"
+        },
+        {
+          "id": "L49-D04",
+          "kind": "line",
+          "ref": "L49-D04",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE04"
+        },
+        {
+          "id": "L49-D05",
+          "kind": "line",
+          "ref": "L49-D05",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE05"
+        },
+        {
+          "id": "L49-D06",
+          "kind": "line",
+          "ref": "L49-D06",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE06"
+        },
+        {
+          "id": "L49-D07",
+          "kind": "line",
+          "ref": "L49-D07",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE07"
+        },
+        {
+          "id": "L49-D08",
+          "kind": "line",
+          "ref": "L49-D08",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE08"
+        },
+        {
+          "id": "L49-D09",
+          "kind": "line",
+          "ref": "L49-D09",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE09"
+        },
+        {
+          "id": "L49:story-check-9",
+          "kind": "checkpoint",
+          "activityId": "L49:story-check-9"
+        },
+        {
+          "id": "L49-D10",
+          "kind": "line",
+          "ref": "L49-D10",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE10"
+        },
+        {
+          "id": "L49-D11",
+          "kind": "line",
+          "ref": "L49-D11",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE11"
+        },
+        {
+          "id": "L49-D12",
+          "kind": "line",
+          "ref": "L49-D12",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE12"
+        },
+        {
+          "id": "L49-D13",
+          "kind": "line",
+          "ref": "L49-D13",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE13"
+        },
+        {
+          "id": "L49-D14",
+          "kind": "line",
+          "ref": "L49-D14",
+          "actorEntityId": "L49-actor-mrs-bird",
+          "noteRef": "L49-N-LINE14"
+        },
+        {
+          "id": "L49-D15",
+          "kind": "line",
+          "ref": "L49-D15",
+          "actorEntityId": "L49-actor-butcher",
+          "noteRef": "L49-N-LINE15"
+        },
+        {
+          "id": "L49:story-check-15",
+          "kind": "checkpoint",
+          "activityId": "L49:story-check-15"
+        }
+      ],
+      "nodeId": "L49-STORY",
+      "checkpointId": "L49-STORY"
+    },
+    "L49-WORDS-1:teach-0": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-W01",
+        "L49-W02",
+        "L49-W03",
+        "L49-W04"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-W01",
+          "text": "butcher",
+          "src": "/assets/lesson1-50/audio/l49-w01.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W02",
+          "text": "meat",
+          "src": "/assets/lesson1-50/audio/l49-w02.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W03",
+          "text": "beef",
+          "src": "/assets/lesson1-50/audio/l49-w03.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W04",
+          "text": "lamb",
+          "src": "/assets/lesson1-50/audio/l49-w04.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49-WORDS-1:teach-0",
+      "kind": "teach",
+      "title": "认识这些词",
+      "sceneEntityId": "scene-market",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L49-W01",
+          "term": "butcher",
+          "caption": "肉商",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W02",
+          "term": "meat",
+          "caption": "肉",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W03",
+          "term": "beef",
+          "caption": "牛肉",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W04",
+          "term": "lamb",
+          "caption": "羊肉",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-WORDS-1",
+      "checkpointId": "L49-WORDS-1"
+    },
+    "L49-WORDS-1:teach-4": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-W05",
+        "L49-W06",
+        "L49-W07",
+        "L49-W08"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-W05",
+          "text": "husband",
+          "src": "/assets/lesson1-50/audio/l49-w05.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W06",
+          "text": "steak",
+          "src": "/assets/lesson1-50/audio/l49-w06.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W07",
+          "text": "mince",
+          "src": "/assets/lesson1-50/audio/l49-w07.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W08",
+          "text": "chicken",
+          "src": "/assets/lesson1-50/audio/l49-w08.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49-WORDS-1:teach-4",
+      "kind": "teach",
+      "title": "认识这些词",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L49-W05",
+          "term": "husband",
+          "caption": "丈夫",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W06",
+          "term": "steak",
+          "caption": "牛排",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W07",
+          "term": "mince",
+          "caption": "肉馅",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W08",
+          "term": "chicken",
+          "caption": "鸡肉",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-WORDS-1",
+      "checkpointId": "L49-WORDS-1"
+    },
+    "L49-WORDS-1:teach-0:sound-pairs:tap": {
+      "id": "L49-WORDS-1:teach-0:sound-pairs:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "L49-W01",
+      "sourceRefs": [
+        "L49-W01",
+        "L49-W02",
+        "L49-W03"
+      ],
+      "targetId": "L49-WORDS-1:teach-0:sound-word-group",
+      "actorId": "explorer-cat",
+      "hint": "回想课上和刚才练过的内容。",
+      "feedbackText": "butcher · meat · beef",
+      "listenRefs": [
+        "L49-W01",
+        "L49-W02",
+        "L49-W03"
+      ],
+      "answer": [],
+      "prerequisiteRefs": [
+        "L49-W01",
+        "L49-W02",
+        "L49-W03"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T03",
+      "mechanism": "pairs",
+      "title": "听音，找搭档",
+      "prompt": "点左边听录音，再点右边的词。配好后点检查。",
+      "options": [
+        {
+          "id": "o0",
+          "text": "butcher",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "meat",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o2",
+          "text": "beef",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "pairs": [
+        {
+          "id": "sound0",
+          "sourceRef": "L49-W01",
+          "answer": "o0"
+        },
+        {
+          "id": "sound1",
+          "sourceRef": "L49-W02",
+          "answer": "o1"
+        },
+        {
+          "id": "sound2",
+          "sourceRef": "L49-W03",
+          "answer": "o2"
+        }
+      ],
+      "activityGroup": "小镇电台",
+      "assessment": {
+        "skill": "sound-word-matching",
+        "label": "音文配对",
+        "support": "paired-options-with-elimination",
+        "cue": "audio-without-transcript",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。"
+      },
+      "authoredSupport": "paired-options-with-elimination",
+      "nodeId": "L49-WORDS-1",
+      "checkpointId": "L49-WORDS-1",
+      "resultId": "L49-WORDS-1:teach-0:sound-pairs:tap:result",
+      "channel": "sound-word-matching",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "回想课上和刚才练过的内容。",
+        "butcher · meat · beef"
+      ],
+      "wrongFeedback": "回想课上和刚才练过的内容。"
+    },
+    "L49-WORDS-2:teach-0": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-W09",
+        "L49-W10",
+        "L49-W11",
+        "L50-W01"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-W09",
+          "text": "tell",
+          "src": "/assets/lesson1-50/audio/l49-w09.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W10",
+          "text": "truth",
+          "src": "/assets/lesson1-50/audio/l49-w10.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-W11",
+          "text": "either",
+          "src": "/assets/lesson1-50/audio/l49-w11.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W01",
+          "text": "tomato",
+          "src": "/assets/lesson1-50/audio/l50-w01.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49-WORDS-2:teach-0",
+      "kind": "teach",
+      "title": "认识这些词",
+      "sceneEntityId": "scene-market",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L49-W09",
+          "term": "tell",
+          "caption": "告诉",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W10",
+          "term": "truth",
+          "caption": "实情",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-W11",
+          "term": "either",
+          "caption": "也（用于否定句）",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W01",
+          "term": "tomato",
+          "caption": "西红柿",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-WORDS-2",
+      "checkpointId": "L49-WORDS-2"
+    },
+    "L49-WORDS-2:teach-4": {
+      "instruction": "",
+      "sourceRefs": [
+        "L50-W02",
+        "L50-W03",
+        "L50-W04",
+        "L50-W05"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L50-W02",
+          "text": "potato",
+          "src": "/assets/lesson1-50/audio/l50-w02.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W03",
+          "text": "cabbage",
+          "src": "/assets/lesson1-50/audio/l50-w03.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W04",
+          "text": "lettuce",
+          "src": "/assets/lesson1-50/audio/l50-w04.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W05",
+          "text": "pea",
+          "src": "/assets/lesson1-50/audio/l50-w05.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49-WORDS-2:teach-4",
+      "kind": "teach",
+      "title": "认识这些词",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L50-W02",
+          "term": "potato",
+          "caption": "土豆",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W03",
+          "term": "cabbage",
+          "caption": "卷心菜",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W04",
+          "term": "lettuce",
+          "caption": "生菜",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W05",
+          "term": "pea",
+          "caption": "豌豆",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-WORDS-2",
+      "checkpointId": "L49-WORDS-2"
+    },
+    "L49-WORDS-2:hear": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-W09"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-W09",
+          "text": "tell",
+          "src": "/assets/lesson1-50/audio/l49-w09.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [
+        {
+          "ref": "L49-W09",
+          "text": "tell",
+          "src": "/assets/lesson1-50/audio/l49-w09.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49-WORDS-2:hear-0",
+          "type": "text",
+          "text": "告诉",
+          "lang": "zh"
+        },
+        {
+          "id": "L49-WORDS-2:hear-1",
+          "type": "text",
+          "text": "实情",
+          "lang": "zh"
+        },
+        {
+          "id": "L49-WORDS-2:hear-2",
+          "type": "text",
+          "text": "也（用于否定句）",
+          "lang": "zh"
+        },
+        {
+          "id": "L49-WORDS-2:hear-3",
+          "type": "text",
+          "text": "西红柿",
+          "lang": "zh"
+        }
+      ],
+      "id": "L49-WORDS-2:hear",
+      "resultId": "L49-WORDS-2:hear:result",
+      "targetId": "L49-W09",
+      "kind": "choice",
+      "title": "听词，选意思",
+      "channel": "audio-meaning",
+      "audioType": "word",
+      "answer": [
+        "L49-WORDS-2:hear-0"
+      ],
+      "feedbackText": "tell",
+      "hints": [
+        "tell：告诉",
+        "tell：告诉"
+      ],
+      "wrongFeedback": "tell：告诉",
+      "assessment": {
+        "skill": "listening-meaning",
+        "label": "听词辨义",
+        "cue": "audio-without-transcript",
+        "support": "meaning-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "explanation": "tell：告诉",
+      "nodeId": "L49-WORDS-2",
+      "checkpointId": "L49-WORDS-2"
+    },
+    "L49-WORDS-3:teach-0": {
+      "instruction": "",
+      "sourceRefs": [
+        "L50-W06",
+        "L50-W07",
+        "L50-W08",
+        "L50-W09"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L50-W06",
+          "text": "bean",
+          "src": "/assets/lesson1-50/audio/l50-w06.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W07",
+          "text": "pear",
+          "src": "/assets/lesson1-50/audio/l50-w07.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W08",
+          "text": "grape",
+          "src": "/assets/lesson1-50/audio/l50-w08.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L50-W09",
+          "text": "peach",
+          "src": "/assets/lesson1-50/audio/l50-w09.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49-WORDS-3:teach-0",
+      "kind": "teach",
+      "title": "认识这些词",
+      "sceneEntityId": "scene-market",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L50-W06",
+          "term": "bean",
+          "caption": "豆角",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W07",
+          "term": "pear",
+          "caption": "梨",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W08",
+          "term": "grape",
+          "caption": "葡萄",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L50-W09",
+          "term": "peach",
+          "caption": "桃子",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-WORDS-3",
+      "checkpointId": "L49-WORDS-3"
+    },
+    "L49-WORDS-3:hear": {
+      "instruction": "",
+      "sourceRefs": [
+        "L50-W06"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L50-W06",
+          "text": "bean",
+          "src": "/assets/lesson1-50/audio/l50-w06.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [
+        {
+          "ref": "L50-W06",
+          "text": "bean",
+          "src": "/assets/lesson1-50/audio/l50-w06.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49-WORDS-3:hear-0",
+          "type": "text",
+          "text": "豆角",
+          "lang": "zh"
+        },
+        {
+          "id": "L49-WORDS-3:hear-1",
+          "type": "text",
+          "text": "梨",
+          "lang": "zh"
+        },
+        {
+          "id": "L49-WORDS-3:hear-2",
+          "type": "text",
+          "text": "葡萄",
+          "lang": "zh"
+        },
+        {
+          "id": "L49-WORDS-3:hear-3",
+          "type": "text",
+          "text": "桃子",
+          "lang": "zh"
+        }
+      ],
+      "id": "L49-WORDS-3:hear",
+      "resultId": "L49-WORDS-3:hear:result",
+      "targetId": "L50-W06",
+      "kind": "choice",
+      "title": "听词，选意思",
+      "channel": "audio-meaning",
+      "audioType": "word",
+      "answer": [
+        "L49-WORDS-3:hear-0"
+      ],
+      "feedbackText": "bean",
+      "hints": [
+        "bean：豆角",
+        "bean：豆角"
+      ],
+      "wrongFeedback": "bean：豆角",
+      "assessment": {
+        "skill": "listening-meaning",
+        "label": "听词辨义",
+        "cue": "audio-without-transcript",
+        "support": "meaning-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "explanation": "bean：豆角",
+      "nodeId": "L49-WORDS-3",
+      "checkpointId": "L49-WORDS-3"
+    },
+    "L49:numbers-0": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-ORD01",
+        "L49-ORD02",
+        "L49-ORD03",
+        "L49-ORD04"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-ORD01",
+          "text": "thirteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord01.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD02",
+          "text": "fourteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord02.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD03",
+          "text": "fifteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord03.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD04",
+          "text": "sixteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord04.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49:numbers-0",
+      "kind": "teach",
+      "title": "认识序数词",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L49-ORD01",
+          "term": "thirteenth",
+          "caption": "第 13 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD02",
+          "term": "fourteenth",
+          "caption": "第 14 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD03",
+          "term": "fifteenth",
+          "caption": "第 15 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD04",
+          "term": "sixteenth",
+          "caption": "第 16 个",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-NUMBERS",
+      "checkpointId": "L49-NUMBERS"
+    },
+    "L49:numbers-4": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-ORD05",
+        "L49-ORD06",
+        "L49-ORD07",
+        "L49-ORD08"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-ORD05",
+          "text": "seventeenth",
+          "src": "/assets/lesson1-50/audio/l49-ord05.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD06",
+          "text": "eighteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord06.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD07",
+          "text": "nineteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord07.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD08",
+          "text": "twentieth",
+          "src": "/assets/lesson1-50/audio/l49-ord08.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49:numbers-4",
+      "kind": "teach",
+      "title": "认识序数词",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L49-ORD05",
+          "term": "seventeenth",
+          "caption": "第 17 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD06",
+          "term": "eighteenth",
+          "caption": "第 18 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD07",
+          "term": "nineteenth",
+          "caption": "第 19 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD08",
+          "term": "twentieth",
+          "caption": "第 20 个",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-NUMBERS",
+      "checkpointId": "L49-NUMBERS"
+    },
+    "L49:numbers-8": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-ORD09",
+        "L49-ORD10",
+        "L49-ORD11",
+        "L49-ORD12"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-ORD09",
+          "text": "twenty-first",
+          "src": "/assets/lesson1-50/audio/l49-ord09.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD10",
+          "text": "twenty-second",
+          "src": "/assets/lesson1-50/audio/l49-ord10.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD11",
+          "text": "twenty-third",
+          "src": "/assets/lesson1-50/audio/l49-ord11.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-ORD12",
+          "text": "twenty-fourth",
+          "src": "/assets/lesson1-50/audio/l49-ord12.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49:numbers-8",
+      "kind": "teach",
+      "title": "认识序数词",
+      "playbackMode": "manual-cards",
+      "audioType": "word",
+      "items": [
+        {
+          "sourceRef": "L49-ORD09",
+          "term": "twenty-first",
+          "caption": "第 21 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD10",
+          "term": "twenty-second",
+          "caption": "第 22 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD11",
+          "term": "twenty-third",
+          "caption": "第 23 个",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-ORD12",
+          "term": "twenty-fourth",
+          "caption": "第 24 个",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-NUMBERS",
+      "checkpointId": "L49-NUMBERS"
+    },
+    "L49:number-check-0": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-ORD01"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-ORD01",
+          "text": "thirteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord01.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [
+        {
+          "ref": "L49-ORD01",
+          "text": "thirteenth",
+          "src": "/assets/lesson1-50/audio/l49-ord01.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:number-check-0-0",
+          "type": "text",
+          "text": "第 13 个",
+          "lang": "zh"
+        },
+        {
+          "id": "L49:number-check-0-1",
+          "type": "text",
+          "text": "第 14 个",
+          "lang": "zh"
+        },
+        {
+          "id": "L49:number-check-0-2",
+          "type": "text",
+          "text": "第 15 个",
+          "lang": "zh"
+        }
+      ],
+      "id": "L49:number-check-0",
+      "resultId": "L49:number-check-0:result",
+      "targetId": "L49-ORD01",
+      "kind": "choice",
+      "title": "听一听，选数字",
+      "channel": "audio-meaning",
+      "audioType": "sentence",
+      "answer": [
+        "L49:number-check-0-0"
+      ],
+      "feedbackText": "thirteenth",
+      "hints": [
+        "thirteenth：第 13 个",
+        "thirteenth：第 13 个"
+      ],
+      "wrongFeedback": "thirteenth：第 13 个",
+      "assessment": {
+        "skill": "listening-meaning",
+        "label": "听数字辨义",
+        "cue": "audio-without-transcript",
+        "support": "numeric-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "explanation": "thirteenth：第 13 个",
+      "nodeId": "L49-NUMBERS",
+      "checkpointId": "L49-NUMBERS"
+    },
+    "L49:number-check-1": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-ORD12"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-ORD12",
+          "text": "twenty-fourth",
+          "src": "/assets/lesson1-50/audio/l49-ord12.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [
+        {
+          "ref": "L49-ORD12",
+          "text": "twenty-fourth",
+          "src": "/assets/lesson1-50/audio/l49-ord12.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:number-check-1-0",
+          "type": "text",
+          "text": "第 24 个",
+          "lang": "zh"
+        },
+        {
+          "id": "L49:number-check-1-1",
+          "type": "text",
+          "text": "第 13 个",
+          "lang": "zh"
+        },
+        {
+          "id": "L49:number-check-1-2",
+          "type": "text",
+          "text": "第 14 个",
+          "lang": "zh"
+        }
+      ],
+      "id": "L49:number-check-1",
+      "resultId": "L49:number-check-1:result",
+      "targetId": "L49-ORD12",
+      "kind": "choice",
+      "title": "听一听，选数字",
+      "channel": "audio-meaning",
+      "audioType": "sentence",
+      "answer": [
+        "L49:number-check-1-0"
+      ],
+      "feedbackText": "twenty-fourth",
+      "hints": [
+        "twenty-fourth：第 24 个",
+        "twenty-fourth：第 24 个"
+      ],
+      "wrongFeedback": "twenty-fourth：第 24 个",
+      "assessment": {
+        "skill": "listening-meaning",
+        "label": "听数字辨义",
+        "cue": "audio-without-transcript",
+        "support": "numeric-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "explanation": "twenty-fourth：第 24 个",
+      "nodeId": "L49-NUMBERS",
+      "checkpointId": "L49-NUMBERS"
+    },
+    "L49:examples": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E01",
+        "L49-E02",
+        "L49-E03",
+        "L49-E04"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-E01",
+          "text": "He likes steak.",
+          "src": "/assets/lesson1-50/audio/l49-e01.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-E02",
+          "text": "She does not like cabbage.",
+          "src": "/assets/lesson1-50/audio/l49-e02.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-E03",
+          "text": "Does he want any potatoes?",
+          "src": "/assets/lesson1-50/audio/l49-e03.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-E04",
+          "text": "I do not like chicken either.",
+          "src": "/assets/lesson1-50/audio/l49-e04.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49:examples",
+      "kind": "teach",
+      "title": "听听怎么说",
+      "playbackMode": "manual-cards",
+      "audioType": "sentence",
+      "items": [
+        {
+          "sourceRef": "L49-E01",
+          "term": "He likes steak.",
+          "caption": "他喜欢牛排。",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-E02",
+          "term": "She does not like cabbage.",
+          "caption": "她不喜欢卷心菜。",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-E03",
+          "term": "Does he want any potatoes?",
+          "caption": "他想要一些土豆吗？",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-E04",
+          "term": "I do not like chicken either.",
+          "caption": "我也不喜欢鸡肉。",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE"
+    },
+    "L49:examples-4": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E05",
+        "L49-E06"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-E05",
+          "text": "Does she like tomatoes?",
+          "src": "/assets/lesson1-50/audio/l49-e05.mp3",
+          "speaker": null
+        },
+        {
+          "ref": "L49-E06",
+          "text": "She likes pears, but she does not want any.",
+          "src": "/assets/lesson1-50/audio/l49-e06.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [],
+      "options": [],
+      "id": "L49:examples-4",
+      "kind": "teach",
+      "title": "听听怎么说",
+      "playbackMode": "manual-cards",
+      "audioType": "sentence",
+      "items": [
+        {
+          "sourceRef": "L49-E05",
+          "term": "Does she like tomatoes?",
+          "caption": "她喜欢西红柿吗？",
+          "presentation": "text"
+        },
+        {
+          "sourceRef": "L49-E06",
+          "term": "She likes pears, but she does not want any.",
+          "caption": "她喜欢梨，但现在不想要。",
+          "presentation": "text"
+        }
+      ],
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE"
+    },
+    "L49:gap-1": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E01"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E01",
+          "text": "He likes steak.",
+          "src": "/assets/lesson1-50/audio/l49-e01.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:gap-1-0",
+          "type": "text",
+          "text": "likes",
+          "lang": "en"
+        },
+        {
+          "id": "L49:gap-1-1",
+          "type": "text",
+          "text": "like",
+          "lang": "en"
+        },
+        {
+          "id": "L49:gap-1-2",
+          "type": "text",
+          "text": "liking",
+          "lang": "en"
+        }
+      ],
+      "id": "L49:gap-1",
+      "resultId": "L49:gap-1:result",
+      "targetId": "L49-E01",
+      "kind": "cloze",
+      "title": "补全句子",
+      "channel": "sentence-completion",
+      "audioType": "sentence",
+      "answer": [
+        "L49:gap-1-0"
+      ],
+      "feedbackText": "He likes steak.",
+      "hints": [
+        "主语 he，肯定句 like 加 s。",
+        "He likes steak."
+      ],
+      "wrongFeedback": "主语 he，肯定句 like 加 s。",
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "补全句子",
+        "cue": "explicit-task",
+        "support": "word-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。",
+        "grammarSkillId": "present-third-person-s",
+        "family": "present-simple",
+        "phase": "supported",
+        "authoredSupport": "options"
+      },
+      "prompt": "他喜欢牛排。",
+      "cloze": {
+        "prefix": "He ",
+        "suffix": " steak.",
+        "replyRef": "L49-E01",
+        "actorId": "explorer-cat"
+      },
+      "feedbackPlayback": "optional",
+      "explanation": "主语 he，肯定句 like 加 s。",
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE"
+    },
+    "L49:order-2:tap": {
+      "id": "L49:order-2:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "L49-E02",
+      "sourceRefs": [
+        "L49-E02"
+      ],
+      "targetId": "L49-E02",
+      "actorId": "explorer-cat",
+      "hint": "does not 后恢复动词原形 like。",
+      "feedbackText": "She does not like cabbage.",
+      "listenRefs": [
+        "L49-E02"
+      ],
+      "answer": [
+        "o0",
+        "o1",
+        "o2",
+        "o3",
+        "o4"
+      ],
+      "prerequisiteRefs": [
+        "L49-E02"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T06",
+      "mechanism": "order",
+      "title": "听一听，拼一句",
+      "prompt": "听完后，按顺序点选词块。",
+      "options": [
+        {
+          "id": "o0",
+          "text": "She",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "does",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o2",
+          "text": "not",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o3",
+          "text": "like",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o4",
+          "text": "cabbage.",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "assessment": {
+        "skill": "supported-listening-assembly",
+        "label": "听音组句",
+        "support": "word-bank",
+        "cue": "audio-without-transcript",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "does-base-verb",
+        "phase": "supported"
+      },
+      "authoredSupport": "word-bank",
+      "grammarSkillId": "does-base-verb",
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE",
+      "resultId": "L49:order-2:tap:result",
+      "channel": "supported-listening-assembly",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "does not 后恢复动词原形 like。",
+        "She does not like cabbage."
+      ],
+      "wrongFeedback": "does not 后恢复动词原形 like。"
+    },
+    "L49:gap-3": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E03"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E03",
+          "text": "Does he want any potatoes?",
+          "src": "/assets/lesson1-50/audio/l49-e03.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:gap-3-0",
+          "type": "text",
+          "text": "Does",
+          "lang": "en"
+        },
+        {
+          "id": "L49:gap-3-1",
+          "type": "text",
+          "text": "Do",
+          "lang": "en"
+        },
+        {
+          "id": "L49:gap-3-2",
+          "type": "text",
+          "text": "Is",
+          "lang": "en"
+        }
+      ],
+      "id": "L49:gap-3",
+      "resultId": "L49:gap-3:result",
+      "targetId": "L49-E03",
+      "kind": "cloze",
+      "title": "补全句子",
+      "channel": "sentence-completion",
+      "audioType": "sentence",
+      "answer": [
+        "L49:gap-3-0"
+      ],
+      "feedbackText": "Does he want any potatoes?",
+      "hints": [
+        "主语 he，用 Does … want?。",
+        "Does he want any potatoes?"
+      ],
+      "wrongFeedback": "主语 he，用 Does … want?。",
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "补全句子",
+        "cue": "explicit-task",
+        "support": "word-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。",
+        "grammarSkillId": "does-question",
+        "family": "present-simple",
+        "phase": "supported",
+        "authoredSupport": "options"
+      },
+      "prompt": "他想要一些土豆吗？",
+      "cloze": {
+        "prefix": "",
+        "suffix": " he want any potatoes?",
+        "replyRef": "L49-E03",
+        "actorId": "explorer-cat"
+      },
+      "feedbackPlayback": "optional",
+      "explanation": "主语 he，用 Does … want?。",
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE"
+    },
+    "L49:grammar-s:tap": {
+      "id": "L49:grammar-s:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "G49-s",
+      "sourceRefs": [
+        "G49-s"
+      ],
+      "targetId": "present-third-person-s",
+      "actorId": "explorer-cat",
+      "hint": "主语 he，肯定句 like 加 s。",
+      "feedbackText": "He likes chicken.",
+      "listenRefs": [],
+      "answer": [
+        "o0"
+      ],
+      "prerequisiteRefs": [
+        "G49-s"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T08",
+      "mechanism": "cloze",
+      "title": "选词补句",
+      "prompt": "说说他的喜好：他喜欢鸡肉。",
+      "prefix": "He ",
+      "suffix": " chicken.",
+      "options": [
+        {
+          "id": "o0",
+          "text": "likes",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "like",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "选词补句",
+        "support": "answer-options",
+        "cue": "explicit-task",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "present-third-person-s",
+        "phase": "recall"
+      },
+      "authoredSupport": "answer-options",
+      "grammarSkillId": "present-third-person-s",
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE",
+      "resultId": "L49:grammar-s:tap:result",
+      "channel": "sentence-completion",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "主语 he，肯定句 like 加 s。",
+        "He likes chicken."
+      ],
+      "wrongFeedback": "主语 he，肯定句 like 加 s。",
+      "reviewEligible": false
+    },
+    "L49:grammar-correct:tap": {
+      "id": "L49:grammar-correct:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "G49-correct",
+      "sourceRefs": [
+        "G49-correct"
+      ],
+      "targetId": "does-base-verb",
+      "actorId": "explorer-cat",
+      "hint": "does 已经标记第三人称，后面用 like。",
+      "feedbackText": "She does not like steak.",
+      "listenRefs": [],
+      "answer": [
+        "w3",
+        "o0"
+      ],
+      "prerequisiteRefs": [
+        "G49-correct"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T11",
+      "mechanism": "repair",
+      "title": "找一找，改一改",
+      "prompt": "这句只有一个动词形式需要修改。先点那个词，再选正确的词。",
+      "words": [
+        {
+          "id": "w0",
+          "text": "She",
+          "group": "word"
+        },
+        {
+          "id": "w1",
+          "text": "does",
+          "group": "word"
+        },
+        {
+          "id": "w2",
+          "text": "not",
+          "group": "word"
+        },
+        {
+          "id": "w3",
+          "text": "likes",
+          "group": "word"
+        },
+        {
+          "id": "w4",
+          "text": "steak.",
+          "group": "word"
+        }
+      ],
+      "wrongIndex": 3,
+      "options": [
+        {
+          "id": "w0",
+          "text": "She",
+          "group": "word"
+        },
+        {
+          "id": "w1",
+          "text": "does",
+          "group": "word"
+        },
+        {
+          "id": "w2",
+          "text": "not",
+          "group": "word"
+        },
+        {
+          "id": "w3",
+          "text": "likes",
+          "group": "word"
+        },
+        {
+          "id": "w4",
+          "text": "steak.",
+          "group": "word"
+        },
+        {
+          "id": "o0",
+          "text": "like",
+          "type": "text",
+          "lang": "en",
+          "group": "replacement"
+        },
+        {
+          "id": "o1",
+          "text": "liking",
+          "type": "text",
+          "lang": "en",
+          "group": "replacement"
+        }
+      ],
+      "assessment": {
+        "skill": "supported-correction",
+        "label": "点词改错",
+        "support": "answer-options",
+        "cue": "explicit-task",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "does-base-verb",
+        "phase": "correction"
+      },
+      "authoredSupport": "answer-options",
+      "grammarSkillId": "does-base-verb",
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE",
+      "resultId": "L49:grammar-correct:tap:result",
+      "channel": "supported-correction",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "does 已经标记第三人称，后面用 like。",
+        "She does not like steak."
+      ],
+      "wrongFeedback": "does 已经标记第三人称，后面用 like。",
+      "reviewEligible": false
+    },
+    "L49:grammar-question:tap": {
+      "id": "L49:grammar-question:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "G49-question",
+      "sourceRefs": [
+        "G49-question"
+      ],
+      "targetId": "does-question",
+      "actorId": "explorer-cat",
+      "hint": "Does 放句首，want 用原形，some 改为 any。",
+      "feedbackText": "Does he want any cabbage?",
+      "listenRefs": [],
+      "answer": [
+        "o0",
+        "o1",
+        "o2",
+        "o3",
+        "o4"
+      ],
+      "prerequisiteRefs": [
+        "G49-question"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T07",
+      "mechanism": "order",
+      "title": "帮他问一问",
+      "prompt": "想问他要不要卷心菜。用 Does 开头，按“Does + he + want”的顺序，再接 any cabbage。",
+      "options": [
+        {
+          "id": "o0",
+          "text": "Does",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "he",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o2",
+          "text": "want",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o3",
+          "text": "any",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o4",
+          "text": "cabbage?",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "情境组句",
+        "support": "word-bank",
+        "cue": "explicit-task",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "does-question",
+        "phase": "transformation"
+      },
+      "authoredSupport": "word-bank",
+      "grammarSkillId": "does-question",
+      "nodeId": "L49-USE",
+      "checkpointId": "L49-USE",
+      "resultId": "L49:grammar-question:tap:result",
+      "channel": "supported-assembly",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "Does 放句首，want 用原形，some 改为 any。",
+        "Does he want any cabbage?"
+      ],
+      "wrongFeedback": "Does 放句首，want 用原形，some 改为 any。",
+      "reviewEligible": false
+    },
+    "L49:meaning": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E04"
+      ],
+      "requiredAudio": [
+        {
+          "ref": "L49-E04",
+          "text": "I do not like chicken either.",
+          "src": "/assets/lesson1-50/audio/l49-e04.mp3",
+          "speaker": null
+        }
+      ],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E04",
+          "text": "I do not like chicken either.",
+          "src": "/assets/lesson1-50/audio/l49-e04.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:meaning-0",
+          "type": "text",
+          "text": "我也不喜欢鸡肉。",
+          "lang": "zh"
+        },
+        {
+          "id": "L49:meaning-1",
+          "type": "text",
+          "text": "他喜欢牛排。",
+          "lang": "zh"
+        },
+        {
+          "id": "L49:meaning-2",
+          "type": "text",
+          "text": "她不喜欢卷心菜。",
+          "lang": "zh"
+        }
+      ],
+      "id": "L49:meaning",
+      "resultId": "L49:meaning:result",
+      "targetId": "L49-E04",
+      "kind": "choice",
+      "title": "听句子，选意思",
+      "channel": "audio-meaning",
+      "audioType": "sentence",
+      "answer": [
+        "L49:meaning-0"
+      ],
+      "feedbackText": "I do not like chicken either.",
+      "hints": [
+        "否定句末的“也不”用 either。",
+        "否定句末的“也不”用 either。"
+      ],
+      "wrongFeedback": "否定句末的“也不”用 either。",
+      "assessment": {
+        "skill": "listening-meaning",
+        "label": "听句辨义",
+        "cue": "audio-without-transcript",
+        "support": "meaning-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "explanation": "否定句末的“也不”用 either。",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:transfer": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E03"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E03",
+          "text": "Does he want any potatoes?",
+          "src": "/assets/lesson1-50/audio/l49-e03.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:transfer-0",
+          "type": "text",
+          "text": "Does"
+        },
+        {
+          "id": "L49:transfer-1",
+          "type": "text",
+          "text": "he"
+        },
+        {
+          "id": "L49:transfer-2",
+          "type": "text",
+          "text": "want"
+        },
+        {
+          "id": "L49:transfer-3",
+          "type": "text",
+          "text": "any"
+        },
+        {
+          "id": "L49:transfer-4",
+          "type": "text",
+          "text": "potatoes?"
+        }
+      ],
+      "id": "L49:transfer",
+      "resultId": "L49:transfer:result",
+      "targetId": "L49-E03",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "他想要一些土豆吗？",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:transfer-0",
+        "L49:transfer-1",
+        "L49:transfer-2",
+        "L49:transfer-3",
+        "L49:transfer-4"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "Does he want any potatoes?",
+      "hints": [
+        "主语 he，用 Does … want?。",
+        "Does he want any potatoes?"
+      ],
+      "wrongFeedback": "主语 he，用 Does … want?。",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:contrast": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E02"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E02",
+          "text": "She does not like cabbage.",
+          "src": "/assets/lesson1-50/audio/l49-e02.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:contrast-0",
+          "type": "text",
+          "text": "like",
+          "lang": "en"
+        },
+        {
+          "id": "L49:contrast-1",
+          "type": "text",
+          "text": "likes",
+          "lang": "en"
+        },
+        {
+          "id": "L49:contrast-2",
+          "type": "text",
+          "text": "liking",
+          "lang": "en"
+        }
+      ],
+      "id": "L49:contrast",
+      "resultId": "L49:contrast:result",
+      "targetId": "L49-E02",
+      "kind": "cloze",
+      "title": "补全句子",
+      "channel": "sentence-completion",
+      "audioType": "sentence",
+      "answer": [
+        "L49:contrast-0"
+      ],
+      "feedbackText": "She does not like cabbage.",
+      "hints": [
+        "does not 后恢复动词原形 like。",
+        "She does not like cabbage."
+      ],
+      "wrongFeedback": "does not 后恢复动词原形 like。",
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "补全句子",
+        "cue": "explicit-task",
+        "support": "word-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "prompt": "她不喜欢卷心菜。",
+      "cloze": {
+        "prefix": "She does not ",
+        "suffix": " cabbage.",
+        "replyRef": "L49-E02",
+        "actorId": "explorer-cat"
+      },
+      "feedbackPlayback": "optional",
+      "explanation": "does not 后恢复动词原形 like。",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:extra-4": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E05"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E05",
+          "text": "Does she like tomatoes?",
+          "src": "/assets/lesson1-50/audio/l49-e05.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:extra-4-0",
+          "type": "text",
+          "text": "Does",
+          "lang": "en"
+        },
+        {
+          "id": "L49:extra-4-1",
+          "type": "text",
+          "text": "Do",
+          "lang": "en"
+        },
+        {
+          "id": "L49:extra-4-2",
+          "type": "text",
+          "text": "Is",
+          "lang": "en"
+        }
+      ],
+      "id": "L49:extra-4",
+      "resultId": "L49:extra-4:result",
+      "targetId": "L49-E05",
+      "kind": "cloze",
+      "title": "补全句子",
+      "channel": "sentence-completion",
+      "audioType": "sentence",
+      "answer": [
+        "L49:extra-4-0"
+      ],
+      "feedbackText": "Does she like tomatoes?",
+      "hints": [
+        "第三人称单数问句用 Does。",
+        "Does she like tomatoes?"
+      ],
+      "wrongFeedback": "第三人称单数问句用 Does。",
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "补全句子",
+        "cue": "explicit-task",
+        "support": "word-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "prompt": "她喜欢西红柿吗？",
+      "cloze": {
+        "prefix": "",
+        "suffix": " she like tomatoes?",
+        "replyRef": "L49-E05",
+        "actorId": "explorer-cat"
+      },
+      "feedbackPlayback": "optional",
+      "explanation": "第三人称单数问句用 Does。",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:extra-5": {
+      "instruction": "",
+      "sourceRefs": [
+        "L49-E06"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L49-E06",
+          "text": "She likes pears, but she does not want any.",
+          "src": "/assets/lesson1-50/audio/l49-e06.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:extra-5-0",
+          "type": "text",
+          "text": "want",
+          "lang": "en"
+        },
+        {
+          "id": "L49:extra-5-1",
+          "type": "text",
+          "text": "wants",
+          "lang": "en"
+        },
+        {
+          "id": "L49:extra-5-2",
+          "type": "text",
+          "text": "wanting",
+          "lang": "en"
+        }
+      ],
+      "id": "L49:extra-5",
+      "resultId": "L49:extra-5:result",
+      "targetId": "L49-E06",
+      "kind": "cloze",
+      "title": "补全句子",
+      "channel": "sentence-completion",
+      "audioType": "sentence",
+      "answer": [
+        "L49:extra-5-0"
+      ],
+      "feedbackText": "She likes pears, but she does not want any.",
+      "hints": [
+        "does not 后用 want 原形。",
+        "She likes pears, but she does not want any."
+      ],
+      "wrongFeedback": "does not 后用 want 原形。",
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "补全句子",
+        "cue": "explicit-task",
+        "support": "word-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "prompt": "她喜欢梨，但现在不想要。",
+      "cloze": {
+        "prefix": "She likes pears, but she does not ",
+        "suffix": " any.",
+        "replyRef": "L49-E06",
+        "actorId": "explorer-cat"
+      },
+      "feedbackPlayback": "optional",
+      "explanation": "does not 后用 want 原形。",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:return": {
+      "instruction": "",
+      "sourceRefs": [
+        "L47-E01"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L47-E01",
+          "text": "Do you like apples?",
+          "src": "/assets/lesson1-50/audio/l47-e01.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:return-0",
+          "type": "text",
+          "text": "Do"
+        },
+        {
+          "id": "L49:return-1",
+          "type": "text",
+          "text": "you"
+        },
+        {
+          "id": "L49:return-2",
+          "type": "text",
+          "text": "like"
+        },
+        {
+          "id": "L49:return-3",
+          "type": "text",
+          "text": "apples?"
+        }
+      ],
+      "id": "L49:return",
+      "resultId": "L49:return:result",
+      "targetId": "L47-E01",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "你喜欢苹果吗？",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:return-0",
+        "L49:return-1",
+        "L49:return-2",
+        "L49:return-3"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "Do you like apples?",
+      "hints": [
+        "问日常喜好用 Do you like …?",
+        "Do you like apples?"
+      ],
+      "wrongFeedback": "问日常喜好用 Do you like …?",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:return-gap": {
+      "instruction": "",
+      "sourceRefs": [
+        "L41-E04"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L41-E04",
+          "text": "There is a bar of soap.",
+          "src": "/assets/lesson1-50/audio/l41-e04.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:return-gap-0",
+          "type": "text",
+          "text": "bar",
+          "lang": "en"
+        },
+        {
+          "id": "L49:return-gap-1",
+          "type": "text",
+          "text": "loaf",
+          "lang": "en"
+        },
+        {
+          "id": "L49:return-gap-2",
+          "type": "text",
+          "text": "bottle",
+          "lang": "en"
+        }
+      ],
+      "id": "L49:return-gap",
+      "resultId": "L49:return-gap:result",
+      "targetId": "L41-E04",
+      "kind": "cloze",
+      "title": "补全句子",
+      "channel": "sentence-completion",
+      "audioType": "sentence",
+      "answer": [
+        "L49:return-gap-0"
+      ],
+      "feedbackText": "There is a bar of soap.",
+      "hints": [
+        "一块肥皂用 a bar of soap。",
+        "There is a bar of soap."
+      ],
+      "wrongFeedback": "一块肥皂用 a bar of soap。",
+      "assessment": {
+        "skill": "sentence-completion",
+        "label": "补全句子",
+        "cue": "explicit-task",
+        "support": "word-options",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "prompt": "有一块肥皂。",
+      "cloze": {
+        "prefix": "There is a ",
+        "suffix": " of soap.",
+        "replyRef": "L41-E04",
+        "actorId": "explorer-cat"
+      },
+      "feedbackPlayback": "optional",
+      "explanation": "一块肥皂用 a bar of soap。",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:final-recall-0": {
+      "instruction": "",
+      "sourceRefs": [
+        "L07-E02"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L07-E02",
+          "text": "Are you a nurse?",
+          "src": "/assets/lesson1-50/audio/l07-e02.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:final-recall-0-0",
+          "type": "text",
+          "text": "Are"
+        },
+        {
+          "id": "L49:final-recall-0-1",
+          "type": "text",
+          "text": "you"
+        },
+        {
+          "id": "L49:final-recall-0-2",
+          "type": "text",
+          "text": "a"
+        },
+        {
+          "id": "L49:final-recall-0-3",
+          "type": "text",
+          "text": "nurse?"
+        }
+      ],
+      "id": "L49:final-recall-0",
+      "resultId": "L49:final-recall-0:result",
+      "targetId": "L07-E02",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "你是一名护士吗？",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:final-recall-0-0",
+        "L49:final-recall-0-1",
+        "L49:final-recall-0-2",
+        "L49:final-recall-0-3"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "Are you a nurse?",
+      "hints": [
+        "询问“你是……吗”用 Are you …?",
+        "Are you a nurse?"
+      ],
+      "wrongFeedback": "询问“你是……吗”用 Are you …?",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:final-recall-1": {
+      "instruction": "",
+      "sourceRefs": [
+        "L17-E02"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L17-E02",
+          "text": "These men are sales reps.",
+          "src": "/assets/lesson1-50/audio/l17-e02.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:final-recall-1-0",
+          "type": "text",
+          "text": "These"
+        },
+        {
+          "id": "L49:final-recall-1-1",
+          "type": "text",
+          "text": "men"
+        },
+        {
+          "id": "L49:final-recall-1-2",
+          "type": "text",
+          "text": "are"
+        },
+        {
+          "id": "L49:final-recall-1-3",
+          "type": "text",
+          "text": "sales"
+        },
+        {
+          "id": "L49:final-recall-1-4",
+          "type": "text",
+          "text": "reps."
+        }
+      ],
+      "id": "L49:final-recall-1",
+      "resultId": "L49:final-recall-1:result",
+      "targetId": "L17-E02",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "这些男士是销售代表。",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:final-recall-1-0",
+        "L49:final-recall-1-1",
+        "L49:final-recall-1-2",
+        "L49:final-recall-1-3",
+        "L49:final-recall-1-4"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "These men are sales reps.",
+      "hints": [
+        "man 的复数形式是 men。",
+        "These men are sales reps."
+      ],
+      "wrongFeedback": "man 的复数形式是 men。",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:final-recall-2": {
+      "instruction": "",
+      "sourceRefs": [
+        "L27-E02"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L27-E02",
+          "text": "The armchairs are near the table.",
+          "src": "/assets/lesson1-50/audio/l27-e02.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:final-recall-2-0",
+          "type": "text",
+          "text": "The"
+        },
+        {
+          "id": "L49:final-recall-2-1",
+          "type": "text",
+          "text": "armchairs"
+        },
+        {
+          "id": "L49:final-recall-2-2",
+          "type": "text",
+          "text": "are"
+        },
+        {
+          "id": "L49:final-recall-2-3",
+          "type": "text",
+          "text": "near the"
+        },
+        {
+          "id": "L49:final-recall-2-4",
+          "type": "text",
+          "text": "table."
+        }
+      ],
+      "id": "L49:final-recall-2",
+      "resultId": "L49:final-recall-2:result",
+      "targetId": "L27-E02",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "扶手椅在桌子旁边。",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:final-recall-2-0",
+        "L49:final-recall-2-1",
+        "L49:final-recall-2-2",
+        "L49:final-recall-2-3",
+        "L49:final-recall-2-4"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "The armchairs are near the table.",
+      "hints": [
+        "near 表示靠近。",
+        "The armchairs are near the table."
+      ],
+      "wrongFeedback": "near 表示靠近。",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:final-recall-3": {
+      "instruction": "",
+      "sourceRefs": [
+        "L37-E02"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L37-E02",
+          "text": "I am going to paint it pink.",
+          "src": "/assets/lesson1-50/audio/l37-e02.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:final-recall-3-0",
+          "type": "text",
+          "text": "I"
+        },
+        {
+          "id": "L49:final-recall-3-1",
+          "type": "text",
+          "text": "am"
+        },
+        {
+          "id": "L49:final-recall-3-2",
+          "type": "text",
+          "text": "going"
+        },
+        {
+          "id": "L49:final-recall-3-3",
+          "type": "text",
+          "text": "to"
+        },
+        {
+          "id": "L49:final-recall-3-4",
+          "type": "text",
+          "text": "paint"
+        },
+        {
+          "id": "L49:final-recall-3-5",
+          "type": "text",
+          "text": "it"
+        },
+        {
+          "id": "L49:final-recall-3-6",
+          "type": "text",
+          "text": "pink."
+        }
+      ],
+      "id": "L49:final-recall-3",
+      "resultId": "L49:final-recall-3:result",
+      "targetId": "L37-E02",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "我打算把它漆成粉红色。",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:final-recall-3-0",
+        "L49:final-recall-3-1",
+        "L49:final-recall-3-2",
+        "L49:final-recall-3-3",
+        "L49:final-recall-3-4",
+        "L49:final-recall-3-5",
+        "L49:final-recall-3-6"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "I am going to paint it pink.",
+      "hints": [
+        "going to 后面用动词原形。",
+        "I am going to paint it pink."
+      ],
+      "wrongFeedback": "going to 后面用动词原形。",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:final-recall-4": {
+      "instruction": "",
+      "sourceRefs": [
+        "L47-E02"
+      ],
+      "requiredAudio": [],
+      "feedbackAudio": [
+        {
+          "ref": "L47-E02",
+          "text": "I do not like milk.",
+          "src": "/assets/lesson1-50/audio/l47-e02.mp3",
+          "speaker": null
+        }
+      ],
+      "options": [
+        {
+          "id": "L49:final-recall-4-0",
+          "type": "text",
+          "text": "I"
+        },
+        {
+          "id": "L49:final-recall-4-1",
+          "type": "text",
+          "text": "do"
+        },
+        {
+          "id": "L49:final-recall-4-2",
+          "type": "text",
+          "text": "not"
+        },
+        {
+          "id": "L49:final-recall-4-3",
+          "type": "text",
+          "text": "like"
+        },
+        {
+          "id": "L49:final-recall-4-4",
+          "type": "text",
+          "text": "milk."
+        }
+      ],
+      "id": "L49:final-recall-4",
+      "resultId": "L49:final-recall-4:result",
+      "targetId": "L47-E02",
+      "kind": "order",
+      "title": "组成这句话",
+      "prompt": "我不喜欢牛奶。",
+      "channel": "assembly",
+      "audioType": "sentence",
+      "answer": [
+        "L49:final-recall-4-0",
+        "L49:final-recall-4-1",
+        "L49:final-recall-4-2",
+        "L49:final-recall-4-3",
+        "L49:final-recall-4-4"
+      ],
+      "feedbackPlayback": "optional",
+      "feedbackText": "I do not like milk.",
+      "hints": [
+        "do not like 表示不喜欢。",
+        "I do not like milk."
+      ],
+      "wrongFeedback": "do not like 表示不喜欢。",
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "词块组句",
+        "cue": "explicit-task",
+        "support": "word-bank",
+        "evidenceMode": "answered-with-options",
+        "scope": "assessment",
+        "boundary": "仅记录本题提供的支持条件；有词库和选项的表现不作为无提示表达证据。"
+      },
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW"
+    },
+    "L49:grammar-transfer-s:tap": {
+      "id": "L49:grammar-transfer-s:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "G49-transfer-s",
+      "sourceRefs": [
+        "G49-transfer-s"
+      ],
+      "targetId": "present-third-person-s",
+      "actorId": "explorer-cat",
+      "hint": "主语 she，肯定句 like 加 s。",
+      "feedbackText": "She likes potatoes.",
+      "listenRefs": [],
+      "answer": [
+        "o0"
+      ],
+      "prerequisiteRefs": [
+        "G49-transfer-s"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T01",
+      "mechanism": "choice",
+      "title": "看场景，选一句",
+      "prompt": "她最喜欢吃土豆。选出描述她喜好的句子。",
+      "sceneEntityId": "scene-likes-potatoes",
+      "options": [
+        {
+          "id": "o0",
+          "text": "She likes potatoes.",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "She like potatoes.",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "assessment": {
+        "skill": "meaning-recognition",
+        "label": "图像与意义",
+        "support": "answer-options",
+        "cue": "explicit-task",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "present-third-person-s",
+        "phase": "transfer"
+      },
+      "authoredSupport": "answer-options",
+      "grammarSkillId": "present-third-person-s",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW",
+      "resultId": "L49:grammar-transfer-s:tap:result",
+      "channel": "meaning-recognition",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "主语 she，肯定句 like 加 s。",
+        "She likes potatoes."
+      ],
+      "wrongFeedback": "主语 she，肯定句 like 加 s。",
+      "reviewEligible": false
+    },
+    "L49:grammar-transfer-base:tap": {
+      "id": "L49:grammar-transfer-base:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "G49-transfer-base",
+      "sourceRefs": [
+        "G49-transfer-base"
+      ],
+      "targetId": "does-base-verb",
+      "actorId": "explorer-cat",
+      "hint": "does not 后用动词原形 like。",
+      "feedbackText": "He does not like cabbage.",
+      "listenRefs": [],
+      "answer": [
+        "o0"
+      ],
+      "prerequisiteRefs": [
+        "G49-transfer-base"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T09",
+      "mechanism": "choice",
+      "title": "替朋友说明喜好",
+      "prompt": "朋友不喜欢卷心菜。选一句，告诉点餐的伙伴。",
+      "options": [
+        {
+          "id": "o0",
+          "text": "He does not like cabbage.",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "He does not likes cabbage.",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "assessment": {
+        "skill": "contextual-response",
+        "label": "情境接话",
+        "support": "answer-options",
+        "cue": "explicit-task",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "does-base-verb",
+        "phase": "transfer"
+      },
+      "authoredSupport": "answer-options",
+      "grammarSkillId": "does-base-verb",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW",
+      "resultId": "L49:grammar-transfer-base:tap:result",
+      "channel": "contextual-response",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "does not 后用动词原形 like。",
+        "He does not like cabbage."
+      ],
+      "wrongFeedback": "does not 后用动词原形 like。",
+      "reviewEligible": false
+    },
+    "L49:grammar-transfer-question:tap": {
+      "id": "L49:grammar-transfer-question:tap",
+      "kind": "exercise",
+      "version": 1,
+      "sourceRef": "G49-transfer-question",
+      "sourceRefs": [
+        "G49-transfer-question"
+      ],
+      "targetId": "does-question",
+      "actorId": "explorer-cat",
+      "hint": "Does + she + want，问句中使用 any。",
+      "feedbackText": "Does she want any chicken?",
+      "listenRefs": [],
+      "answer": [
+        "o0",
+        "o1",
+        "o2",
+        "o3",
+        "o4"
+      ],
+      "prerequisiteRefs": [
+        "G49-transfer-question"
+      ],
+      "distractorRationale": "沿用本目标已经编写的词形、词义或情境对比；词块只承载当前目标句。",
+      "form": "T07",
+      "mechanism": "order",
+      "title": "问问她的选择",
+      "prompt": "鸡肉可以点给她吗？帮大家问她想不想要一些鸡肉，用 any 来提问。",
+      "options": [
+        {
+          "id": "o0",
+          "text": "Does",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o1",
+          "text": "she",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o2",
+          "text": "want",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o3",
+          "text": "any",
+          "type": "text",
+          "lang": "en"
+        },
+        {
+          "id": "o4",
+          "text": "chicken?",
+          "type": "text",
+          "lang": "en"
+        }
+      ],
+      "assessment": {
+        "skill": "supported-assembly",
+        "label": "情境组句",
+        "support": "word-bank",
+        "cue": "explicit-task",
+        "scope": "assessment",
+        "evidenceMode": "answered-with-options",
+        "boundary": "记录本题支持下的听辨、理解或组织；不作为自主拼写、自由写作或口语达标证据。",
+        "grammarSkillId": "does-question",
+        "phase": "transfer"
+      },
+      "authoredSupport": "word-bank",
+      "grammarSkillId": "does-question",
+      "nodeId": "L49-REVIEW",
+      "checkpointId": "L49-REVIEW",
+      "resultId": "L49:grammar-transfer-question:tap:result",
+      "channel": "supported-assembly",
+      "requiredAudio": [],
+      "feedbackAudio": [],
+      "feedbackPlayback": "optional",
+      "instruction": "",
+      "hints": [
+        "Does + she + want，问句中使用 any。",
+        "Does she want any chicken?"
+      ],
+      "wrongFeedback": "Does + she + want，问句中使用 any。",
+      "reviewEligible": false
+    }
+  }
+}
