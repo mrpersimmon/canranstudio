@@ -3,7 +3,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const {chromium}=require('playwright');
 const {createServer}=require('./serve-learning-path');
 const {createVisualServer}=require('./serve-visual-check');
-const unit=require('../content/learning-course.json'),runtime=require('../core/learning-path-runtime'),placement=require('../core/learning-placement'),exercises=require('../core/learning-exercises');
+const unit=require('../content/learning-course.json'),runtime=require('../core/learning-path-runtime'),placement=require('../core/learning-placement');
+const {setup}=require('../tests/unit/support/course-harness'),{answer}=require('../tests/unit/support/tap-exercise');
 const key=`poc:learning-path:${unit.unitId}:${unit.experienceRevision}`;
 async function main(){
  fs.mkdirSync('test-results/review-repair',{recursive:true});
@@ -75,9 +76,16 @@ async function main(){
   try {
    const page=await browser.newPage({viewport:{width:320,height:568}});
    await page.goto('http://127.0.0.1:'+visual.address().port+'/__qa__/frame.html');await page.waitForFunction(()=>window.fixture?.ready);
-   const record=runtime.emptyRecord(unit);let attempt=placement.createAttempt(unit,record,'lesson-49-50',81,'2026-09-09');
-   while(attempt.status==='active'){const q=placement.question(unit,attempt.questionIds[attempt.cursor]);attempt=placement.grade(unit,attempt,exercises.solution(q),'2026-09-09',q.listenRefs);if(attempt.status==='active'){attempt.cursor++;attempt.draft=exercises.empty();}}
-   record.placement={attempts:{'lesson-49-50':attempt}};
+   const h=setup({random:()=>81/4294967296,now:()=>new Date('2026-09-09T12:00:00Z')});
+   h.send({type:'open-placement',id:'lesson-49-50'});h.send({type:'placement-start'});
+   while(h.view().screen==='placement'){
+    const attempt=h.view().placementAttempt,q=placement.question(unit,attempt.questionIds[attempt.cursor]);
+    answer(h,q);h.send({type:'placement-check',attemptId:attempt.id,questionId:q.id});
+    h.send({type:'placement-next',attemptId:attempt.id,questionId:q.id});
+   }
+   assert.equal(h.view().screen,'placement-result');
+   const record=h.view().record;
+   assert.equal(record.placement.attempts['lesson-49-50'].feedbackPending,false,'Review setup must confirm final feedback before unlocking Lesson 49');
    await page.evaluate(({key,record})=>{fixture.adapter.commit(key,{expectedRevision:0,value:record});}, {key,record});
    // Reload the fixture through a real browser reload, persisting only this lab record.
    await page.addInitScript(({key,record})=>{parent.fixtureReloadSeed={records:{[key]:{revision:1,value:record}},now:'2026-09-09T12:00:00Z'};}, {key,record});
