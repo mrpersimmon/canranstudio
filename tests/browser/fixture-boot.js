@@ -29,6 +29,8 @@
     await Promise.all(JSON.parse(entry.dataset.courseStyles).map(loadStyle));
     await loadScript('/core/course-catalog-wire.js');
     control.unit = window.CanranCore.courseCatalogWire.decode(await (await fetch(entry.dataset.unitCatalogUrl)).json());
+    // Test-only short/empty bank. Keep actual authored questions and controls.
+    if(Number.isInteger(reloadSeed?.placementPoolSize))control.unit.placement.questions=control.unit.placement.questions.filter(q=>q.chapterId==='found').slice(0,reloadSeed.placementPoolSize);
     for (const src of JSON.parse(entry.dataset.courseScripts)) {
       // Install adapters just before the actual production controller boots.
       if (src.includes('/course/path.js')) {
@@ -44,7 +46,9 @@
         }) };
         const runtime = core.learningPathRuntime;
         core.learningPathRuntime = { ...runtime, createRuntime: options => {
-          const real = runtime.createRuntime({ ...options, now: () => new Date(control.now), random: () => .37 });
+          control.randomState=reloadSeed?.randomSeed;
+          const random=()=>control.randomState===undefined?.37:((control.randomState=(Math.imul(control.randomState,1664525)+1013904223)>>>0)/4294967296);
+          const real = runtime.createRuntime({ ...options, now: () => new Date(control.now), random });
           control.runtime = {...real,snapshot:()=>real.snapshot(true)};
           return { ...real, dispatch: (event,options) => {
             control.dispatchCount++;

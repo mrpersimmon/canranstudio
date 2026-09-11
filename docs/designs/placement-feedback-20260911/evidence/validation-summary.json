@@ -1,0 +1,86 @@
+{
+  "updatedAt": "2026-09-11T07:09:11.375Z",
+  "baseCommit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
+  "branch": "codex/placement-feedback-repair",
+  "scope": {
+    "implemented": [
+      1,
+      2,
+      4
+    ],
+    "pending": [
+      3
+    ]
+  },
+  "unit": {
+    "total": 157,
+    "passed": 157,
+    "failed": 0,
+    "skipped": 0
+  },
+  "targeted": {
+    "passed": 28
+  },
+  "picture": {
+    "status": "passed",
+    "samples": 15,
+    "seeds": [
+      1,
+      8,
+      37
+    ],
+    "widths": [
+      832,
+      420,
+      320,
+      906,
+      1440
+    ]
+  },
+  "nativeAudio": {
+    "status": "passed",
+    "realEnded": true,
+    "finalFeedbackRestored": true
+  },
+  "visualMatrix": {
+    "status": "passed",
+    "finishedAt": "2026-09-11T07:07:32.177Z",
+    "fingerprint": "61405c0c922b07a142dddc277f512d736cd93e41af974abcee895305fce58e31",
+    "states": 41456,
+    "viewports": [
+      {
+        "viewport": "906x801",
+        "states": 10364
+      },
+      {
+        "viewport": "1440x900",
+        "states": 10364
+      },
+      {
+        "viewport": "420x856",
+        "states": 10364
+      },
+      {
+        "viewport": "320x568",
+        "states": 10364
+      }
+    ],
+    "mutations": 72,
+    "caught": 72,
+    "fingerprintVerified": true
+  },
+  "release": {
+    "committed": false,
+    "pushed": false,
+    "published": false
+  },
+  "preview": "http://127.0.0.1:42878/",
+  "freshNativeAttempt": {
+    "status": "passed",
+    "questions": 20,
+    "elapsedMs": 15891,
+    "observedWallMs": 16048,
+    "displayedTime": "0:15"
+  },
+  "overall": "blocked: question 3 awaits the question-count decision"
+}

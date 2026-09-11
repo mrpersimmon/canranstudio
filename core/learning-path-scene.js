@@ -234,28 +234,30 @@
     function renderPlacement(v) {
       const config=unit.placement, attempt=v.placementAttempt, chapter=unit.chapters.find(ch=>ch.id===v.placementId);
       const label='Lesson '+chapter.lessonIds.join(' & ');
-      const wrong=v.screen==='placement-intro'&&attempt?.status!=='active'?0:attempt?.responses.filter(r=>!r.correct).length||0, remaining=config.maxMistakes-wrong;
-      const hearts=`<div class="lp-placement-hearts" role="img" aria-label="剩余 ${remaining} 次机会，共 ${config.maxMistakes} 次">${Array.from({length:config.maxMistakes},(_,i)=>`<span class="${i<remaining?'is-full':'is-empty'}">${icon('heart')}</span>`).join('')}</div>`;
+      const {questionCount,maxMistakes,fromId}=v.placementPlan;
+      const wrong=v.screen==='placement-intro'&&attempt?.status!=='active'&&!attempt?.feedbackPending?0:attempt?.responses.filter(r=>!r.correct).length||0, remaining=Math.max(0,maxMistakes-wrong);
+      const hearts=`<div class="lp-placement-hearts" role="img" aria-label="剩余 ${remaining} 次机会，共 ${maxMistakes} 次">${Array.from({length:maxMistakes},(_,i)=>`<span class="${i<remaining?'is-full':'is-empty'}">${icon('heart')}</span>`).join('')}</div>`;
       const top=header(v,'跳级测试').replace('<span class="lp-header-label">跳级测试</span>',hearts);
       if(v.screen==='placement-intro') {
-        const active=attempt?.status==='active';
+        const active=attempt?.status==='active'||attempt?.feedbackPending;
         const interrupted=v.record.interruptedPlacements?.some(a=>a.targetId===v.placementId);
-        const testedEnd=chapter.lessonIds[0]-1;
-        return `${top}<section class="lp-lesson lp-placement-intro">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–${testedEnd} 抽取 ${config.questionCount} 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p>${interrupted&&!active?'<p>上次测试因版本更新中止，未扣机会。这次从新的 20 题开始。</p>':''}${active?`<p class="lp-placement-resume">已答 ${attempt.responses.length} / ${config.questionCount} 题 · 剩余 ${remaining} 次机会</p>`:''}</section>${footer(v,`<div class="lp-placement-actions">${button('placement-start',active?'继续测试':'开始测试',{className:'lp-primary lp-placement-start'})}${button('map','下次再说',{className:'lp-quiet'})}</div>`)}`;
+        const testedEnd=chapter.lessonIds[0]-1,testedStart=unit.chapters.find(ch=>ch.id===fromId)?.lessonIds[0]||1;
+        const description=active&&!attempt.samplingPolicy?`从 Lesson 1–${testedEnd} 抽取 ${questionCount} 题`:`优先从 Lesson ${testedStart}–${testedEnd} 抽取 ${questionCount} 题<br>题目不足时，从更早的课程补充`;
+        return `${top}<section class="lp-lesson lp-placement-intro">${image('explorer-cat','lp-placement-mascot')}<p class="lp-kicker">${escape(label)}</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1>${questionCount?`<p class="lp-placement-description">${description}</p><p class="lp-placement-rule">答错 <strong>${maxMistakes} 题</strong>，本次跳级失败</p>`:'<p class="lp-placement-description">暂时没有可用的测试题，先继续学习吧。</p>'}${interrupted&&!active?`<p>上次测试因版本更新中止，未扣机会。这次从新的 ${questionCount} 题开始。</p>`:''}${active?`<p class="lp-placement-resume">已答 ${attempt.responses.length} / ${questionCount} 题 · 剩余 ${remaining} 次机会</p>`:''}</section>${footer(v,`<div class="lp-placement-actions">${questionCount?button('placement-start',active?'继续测试':'开始测试',{className:'lp-primary lp-placement-start'}):''}${button('map','下次再说',{className:'lp-quiet'})}</div>`)}`;
       }
       if(v.screen==='placement-result') {
         const passed=attempt.status==='passed';
         let streak=0,best=0;
         for(const response of attempt.responses){streak=response.correct?streak+1:0;best=Math.max(best,streak);}
         return settlement(v,{passed,context:label,title:passed?'跳级成功！':'这次还没通过',
-          message:passed?`已解锁 ${label}，开始新的探险！`:'已答错 5 题，进度保留。练一练再来！',
+          message:passed?`已解锁 ${label}，开始新的探险！`:`已答错 ${maxMistakes} 题，进度保留。练一练再来！`,
           metrics:[{label:'答对题数',value:`${attempt.responses.length-wrong}/${attempt.responses.length}`,symbol:'check-circle-fill'},
-            {label:'最佳连对',value:`×${best}`,symbol:'record-circle-fill',asset:unit.settlement?.metricAssets?.streak},{label:'剩余机会',value:remaining,symbol:'heart'}],
+            {label:'最佳连对',value:`×${best}`,symbol:'record-circle-fill',asset:unit.settlement?.metricAssets?.streak},{label:'剩余机会',value:remaining,symbol:'heart',asset:unit.settlement?.metricAssets?.chances}],
           secondary:passed?'':button('placement-retry','再试一次',{className:'lp-quiet'})});
       }
       const policyVersion=attempt.responses[attempt.cursor]?.answerPolicyVersion || (attempt.responses.length>attempt.cursor?attempt.version:config.version);
       const q=(policyVersion===unit.history?.placement.version?unit.history.placement:config).questions.find(q=>q.id===attempt.questionIds[attempt.cursor]), feedback=v.feedback;
-      return `${top}<div class="lp-lesson lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(q.title)}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${config.questionCount}</span></div>${exercisePrompt(q)}${exerciseBody(q,v)}</div>${footer(v,exerciseActions(q,v,'placement'),pictureFeedback(q,v))}`;
+      return `${top}<div class="lp-lesson lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(q.title)}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${questionCount}</span></div>${exercisePrompt(q)}${exerciseBody(q,v)}</div>${footer(v,exerciseActions(q,v,'placement'),pictureFeedback(q,v))}`;
     }
     function render(v) {
       if (v.screen === 'blocked') {

@@ -1,0 +1,223 @@
+{
+  "status": "passed",
+  "samples": [
+    {
+      "sound": "correct",
+      "native": {
+        "src": "/assets/feedback/duolingo-correct.mp3",
+        "ended": true,
+        "errors": 0,
+        "paused": 1,
+        "volume": 0.35,
+        "duration": 1.166168
+      },
+      "sequence": [
+        "/assets/feedback/duolingo-correct.mp3"
+      ],
+      "picture": {
+        "before": {
+          "scrollY": 0,
+          "images": [
+            {
+              "id": "o2",
+              "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+              "x": 34,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o1",
+              "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+              "x": 229,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o3",
+              "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+              "x": 34,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o0",
+              "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+              "x": 229,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            }
+          ]
+        },
+        "after": {
+          "scrollY": 0,
+          "images": [
+            {
+              "id": "o2",
+              "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+              "x": 34,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o1",
+              "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+              "x": 229,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o3",
+              "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+              "x": 34,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o0",
+              "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+              "x": 229,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sound": "incorrect",
+      "native": {
+        "src": "/assets/feedback/duolingo-incorrect.mp3",
+        "ended": true,
+        "errors": 0,
+        "paused": 1,
+        "volume": 0.35,
+        "duration": 1.039705
+      },
+      "sequence": [
+        "/assets/feedback/duolingo-incorrect.mp3"
+      ],
+      "picture": {
+        "before": {
+          "scrollY": 0,
+          "images": [
+            {
+              "id": "o1",
+              "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+              "x": 34,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o2",
+              "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+              "x": 229,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o0",
+              "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+              "x": 34,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o3",
+              "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+              "x": 229,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            }
+          ]
+        },
+        "after": {
+          "scrollY": 0,
+          "images": [
+            {
+              "id": "o1",
+              "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+              "x": 34,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o2",
+              "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+              "x": 229,
+              "y": 329.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o0",
+              "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+              "x": 34,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            },
+            {
+              "id": "o3",
+              "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+              "x": 229,
+              "y": 485.453125,
+              "width": 157,
+              "height": 80
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sound": "complete",
+      "native": {
+        "src": "/assets/feedback/duolingo-complete.mp3",
+        "ended": true,
+        "errors": 0,
+        "paused": 1,
+        "volume": 0.5,
+        "duration": 2.382948
+      },
+      "sequence": [
+        "/assets/feedback/duolingo-correct.mp3",
+        "/assets/feedback/duolingo-complete.mp3"
+      ],
+      "finalFeedbackRestored": true,
+      "durationFrozen": true
+    },
+    {
+      "sound": "failed",
+      "native": {
+        "src": "/assets/feedback/duolingo-failed.mp3",
+        "ended": true,
+        "errors": 0,
+        "paused": 1,
+        "volume": 0.5,
+        "duration": 2.789093
+      },
+      "sequence": [
+        "/assets/feedback/duolingo-incorrect.mp3",
+        "/assets/feedback/duolingo-failed.mp3"
+      ],
+      "finalFeedbackRestored": true,
+      "durationFrozen": true
+    }
+  ],
+  "errors": [],
+  "unavailableDoesNotBlock": true,
+  "offlineSpeechReplay": true,
+  "restoredFeedbackSilent": true
+}

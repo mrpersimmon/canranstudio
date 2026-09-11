@@ -292,10 +292,14 @@
     await click('placement-next');await click('exercise-select',currentQuestion().options[0].id);const draft=JSON.stringify(view().response);
     await reloadFrame();await click('open-placement','umbrella');await click('placement-start');await check('placement-draft-restored');
     if(JSON.stringify(view().response)!==draft)throw Error('Placement draft disappeared');
+    frame.contentWindow.fixture.randomState=1;
     while(view().screen==='placement') {
       await write(answer());await check('placement-filled');
+      const stable=JSON.stringify({order:view().exerciseOptionOrder,heard:view().heardRefs});
       await click('placement-check');
-      if(view().feedback){await check('placement-correct');await click('placement-next');}
+      if(JSON.stringify({order:view().exerciseOptionOrder,heard:view().heardRefs})!==stable)throw Error('Grading reinitialized option order or listening evidence');
+      await check('placement-options-stable');
+      if(view().feedback){await check(view().placementAttempt.feedbackPending?'placement-final-correct':'placement-correct');await click('placement-next');}
     }
     await check('placement-passed');
     if(view().placementAttempt.status!=='passed'||view().passedCount!==3||JSON.stringify(view().record.completed)!==main)throw Error('Placement fabricated progress or failed to unlock target');
@@ -308,7 +312,7 @@
       button.click();button.click();
       await wait(()=>(f.completedDispatches['placement-check']||0)>=before+2);await settle();
       if(view().placementAttempt.responses.filter(r=>!r.correct).length!==i+1)throw Error('Double click lost two hearts');
-      if(i<4)await click('placement-next');
+      await check(i<4?'placement-wrong':'placement-final-wrong');await click('placement-next');
     }
     await check('placement-failed');
     if(view().placementAttempt.status!=='failed'||view().passedCount!==3)throw Error('Fifth wrong answer unlocked target');

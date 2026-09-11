@@ -1,0 +1,27 @@
+✖ final incorrect answer waits for manual continue, including reload (68.219292ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 234.625916
+
+✖ failing tests:
+
+test at tests/unit/placement-feedback-regression.test.js:30:35
+✖ final incorrect answer waits for manual continue, including reload (68.219292ms)
+  AssertionError [ERR_ASSERTION]: resuming final feedback retains the actual hearts
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:43:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '<div class="station-app lp-shell lp-course"><header class="lp-header"><button type="button" data-action="map" class="lp-button lp-icon-button" aria-label="休息一下"><img class="lp-icon" src="/poc/lesson-1-2/course/assets/v3/icons/x-lg.svg" alt="" width="24" height="24"></button><div class="lp-header-spacer"></div><div class="lp-placement-hearts" role="img" aria-label="剩余 5 次机会，共 5 次"><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span></div></header><section class="lp-lesson lp-placement-intro"><img class="lp-placement-mascot" src="/poc/learning-path/assets/dark/cat-cutout.webp" alt="" decoding="async"><p class="lp-kicker">Lesson 5 &amp; 6</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–4 抽取 20 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p><p class="lp-placement-resume">已答 5 / 20 题 · 剩余 5 次机会</p></section><footer class="lp-footer"><div class="lp-footer-inner"><div class="lp-placement-actions"><button type="button" data-action="placement-start" class="lp-button lp-primary lp-placement-start"><span>继续测试</span></button><button type="button" data-action="map" class="lp-button lp-quiet"><span>下次再说</span></button></div></div></footer></div>',
+    expected: /剩余 0 次机会，共 5 次/,
+    operator: 'match',
+    diff: 'simple'
+  }

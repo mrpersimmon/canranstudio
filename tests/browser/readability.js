@@ -116,7 +116,7 @@
     const root = doc.querySelector('[data-learning-path]');
     const run = win.fixture?.runtime.snapshot();
     if (['placement-intro','placement'].includes(run?.screen)) {
-      const total=win.fixture.unit.placement.maxMistakes, wrong=run.screen==='placement-intro'&&run.placementAttempt?.status!=='active'?0:run.placementAttempt?.responses.filter(r=>!r.correct).length||0, remaining=total-wrong;
+      const total=run.placementPlan.maxMistakes, wrong=run.screen==='placement-intro'&&run.placementAttempt?.status!=='active'&&!run.placementAttempt?.feedbackPending?0:run.placementAttempt?.responses.filter(r=>!r.correct).length||0, remaining=total-wrong;
       const hearts=root.querySelector('.lp-placement-hearts');
       if (!hearts || hearts.children.length!==total || hearts.querySelectorAll('.is-full').length!==remaining
         || hearts.getAttribute('aria-label')!==`剩余 ${remaining} 次机会，共 ${total} 次`) errors.push({rule:'placement-hearts',remaining});
@@ -148,7 +148,10 @@
       }
       if (run.screen==='placement-result') {
         const responses=run.placementAttempt.responses,wrong=responses.filter(r=>!r.correct).length;
-        if(values[0]!==`${responses.length-wrong}/${responses.length}` || values[2]!==String(win.fixture.unit.placement.maxMistakes-wrong)) errors.push({rule:'settlement-placement-values',values});
+        const remaining=String(run.placementPlan.maxMistakes-wrong);
+        const labels=[...root.querySelectorAll('.lp-settlement-stat dt')].map(x=>x.textContent);
+        if(values[0]!==`${responses.length-wrong}/${responses.length}` || values[2]!==remaining || labels[2]!=='剩余机会') errors.push({rule:'settlement-placement-values',values,labels,remaining});
+        if(root.querySelector('.lp-settlement-stat.stat-2 .lp-settlement-metric-art')?.getAttribute('src')!==win.fixture.unit.settlement.metricAssets.chances)errors.push({rule:'settlement-chances-art'});
       }
       for (const el of cards) {
         const b=el.getBoundingClientRect(),card=el.closest('.lp-settlement-stat').getBoundingClientRect();

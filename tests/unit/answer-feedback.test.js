@@ -56,16 +56,17 @@ test('main practice and challenge distinguish retry, correct, completion and rep
   assert.deepEqual(sounds(h.rt.dispatch({type:'challenge-next'})),['complete']);
   assert.deepEqual(sounds(h.rt.dispatch({type:'reload'})),[]);
 });
-test('placement ending emits one result sound, without stacking the final answer sound',()=>{
+test('placement plays answer feedback first and the result sound only after manual continue',()=>{
   for(const correct of [true,false]){
     const h=setup({random:()=>2/4294967296});h.send({type:'open-placement',id:'friends'});h.send({type:'placement-start'});
     for(let i=0;i<(correct?20:5);i++){
       const a=h.view().placementAttempt,q=unit.placement.questions.find(q=>q.id===a.questionIds[a.cursor]),identity={attemptId:a.id,questionId:q.id};
       answer(h,q,correct);
       const result=h.rt.dispatch({type:'placement-check',...identity}),last=i===(correct?19:4);
-      assert.deepEqual(sounds(result),[last?correct?'complete':'failed':correct?'correct':'incorrect']);
+      assert.deepEqual(sounds(result),[correct?'correct':'incorrect']);
       assert.deepEqual(sounds(h.rt.dispatch({type:'placement-check',...identity})),[]);
-      if(!last)h.send({type:'placement-next',...identity});
+      const next=h.rt.dispatch({type:'placement-next',...identity});
+      assert.deepEqual(sounds(next),last?[correct?'complete':'failed']:[]);
     }
   }
 });

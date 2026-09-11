@@ -1,0 +1,36 @@
+✔ all live order tiles omit punctuation while source sentences keep it (4.740042ms)
+✔ the route renders every chapter without section paging controls (14.80675ms)
+✔ grading emits one feedback sound and resuming does not replay it (51.471625ms)
+✔ story character choices retain one feedback message without a picture-card footer (60.031417ms)
+✔ main practice and challenge distinguish retry, correct, completion and repeated events (13.274958ms)
+✔ placement plays answer feedback first and the result sound only after manual continue (300.758334ms)
+✔ identical visible words are interchangeable in the original order activity (3.248625ms)
+✔ punctuation removal preserves old placement verdicts while accepting equal words in new answers (80.137875ms)
+✔ foundation uses picture choice and word banks with no editable answers (27.472709ms)
+✔ every skip destination has 20 unique, bounded questions; wide jumps cover the skipped range (255.894584ms)
+✔ fifth mistake stops grading, shows feedback, and waits for continue; duplicate actions consume no lives (109.502917ms)
+✔ fixed questions, current draft, feedback and mistakes survive leave and refresh (44.611541ms)
+✔ four mistakes may pass only after all 20 responses; skipping never fabricates learned evidence (373.222792ms)
+✔ reset scopes and undo preserve the distinction between placement and regular challenges (330.193791ms)
+✔ saving the final answer must succeed before unlocking; stale tabs cannot overwrite an attempt (326.663292ms)
+✔ damaged or fabricated placement responses are rejected without touching stored progress (24.721333ms)
+✔ current chapter cannot be skipped, and opening an invitation does not mutate the learner record (17.197959ms)
+✔ settlement measures this visit, freezes time, excludes hidden time and resets on replay (104.080375ms)
+✔ wrong and helped answers break the streak; resumed history is not awarded again (75.3785ms)
+✔ settlement is shown only after durable completion, and saving twice cannot award twice (38.809584ms)
+✔ tap challenge resumes only remaining questions and assisted answers are not a streak (275.366625ms)
+✔ grading a picture preserves every option identity, position and heard reference with changing random values (235.759583ms)
+✔ final correct answer waits for manual continue, including reload (254.435459ms)
+✔ final incorrect answer waits for manual continue, including reload (65.489334ms)
+✔ placement persists foreground time, excludes background and offline gaps, freezes on the last grade (240.342625ms)
+✔ legacy completed attempts retain their verdict without inventing a duration (7.443041ms)
+✔ saving time on visibility changes retains a selected draft and reload excludes time away (38.509417ms)
+✔ background time remains excluded while a placement draft save is waiting for retry (14.52925ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1758.519333

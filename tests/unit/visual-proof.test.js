@@ -19,6 +19,9 @@ test('visual release gate fails closed on errors, missing screens, missing width
     p=>{p.checks=p.checks.filter(c=>!c.name.startsWith('tap-selected-'));},
     p=>{p.checks=p.checks.filter(c=>c.name!=='settlement-visibility-selection');},
     p=>{p.checks=p.checks.filter(c=>c.name!=='placement-passed');},
+    p=>{p.checks=p.checks.filter(c=>c.name!=='placement-options-stable');},
+    p=>{p.checks=p.checks.filter(c=>c.name!=='placement-final-correct');},
+    p=>{p.checks=p.checks.filter(c=>c.name!=='placement-final-wrong');},
     p=>{p.mutations=p.mutations.filter(m=>m.name!=='placement-heart-mismatch');},
     p=>{p.mutations=p.mutations.filter(m=>m.name!=='placement-answer-type-mismatch');},
     p=>{delete p.checks[0].viewportGeometry;},
@@ -56,7 +59,7 @@ test('browser proof is required and expires when any public asset or browser che
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'canran-visual-proof-'));
   const prepared={sources:new Map([['path.css',Buffer.from('original CSS')]])};
   try{
-    for(const file of ['tests/browser/check.js','scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/verify-course-media.js','package.json','package-lock.json']){
+    for(const file of ['tests/browser/check.js','scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/check-placement-feedback.js','scripts/check-placement-pool-browser.js','scripts/verify-course-media.js','package.json','package-lock.json']){
       fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),'fixture');
     }
     assert.throws(()=>assertVisualProof(prepared,root),/No browser readability proof/);
@@ -67,6 +70,12 @@ test('browser proof is required and expires when any public asset or browser che
     fs.appendFileSync(path.join(root,'scripts/check-answer-feedback.js'),'changed');
     assert.throws(()=>assertVisualProof(prepared,root),/stale/);
     fs.writeFileSync(path.join(root,'scripts/check-answer-feedback.js'),'fixture');
+    fs.appendFileSync(path.join(root,'scripts/check-placement-feedback.js'),'changed');
+    assert.throws(()=>assertVisualProof(prepared,root),/stale/);
+    fs.writeFileSync(path.join(root,'scripts/check-placement-feedback.js'),'fixture');
+    fs.appendFileSync(path.join(root,'scripts/check-placement-pool-browser.js'),'changed');
+    assert.throws(()=>assertVisualProof(prepared,root),/stale/);
+    fs.writeFileSync(path.join(root,'scripts/check-placement-pool-browser.js'),'fixture');
     fs.appendFileSync(path.join(root,'tests/browser/check.js'),'changed');
     assert.throws(()=>assertVisualProof(prepared,root),/stale/);
   }finally{fs.rmSync(root,{recursive:true,force:true});}

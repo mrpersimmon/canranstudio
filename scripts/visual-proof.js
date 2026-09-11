@@ -10,7 +10,7 @@ const EXERCISE_IDS = Object.values(require('../content/learning-course.json').ac
 const TEACH_IDS = Object.values(require('../content/learning-course.json').activities).filter(a=>a.kind==='teach').map(a=>a.id);
 const NODE_IDS = require('../content/learning-course.json').nodes.map(node=>node.id);
 const CHALLENGES = require('../content/learning-course.json').challenges;
-const PLACEMENT_SCREENS=['placement-directory-arrival','placement-preview','placement-intro','placement-empty','placement-save-failure','placement-wrong','placement-restored','placement-draft-restored','placement-filled','placement-correct','placement-passed','placement-map','placement-skipped-preview','placement-failed','placement-retry-intro','placement-retry','placement-wide-intro','placement-wide-question','placement-wide-passed','placement-wide-map'];
+const PLACEMENT_SCREENS=['placement-directory-arrival','placement-preview','placement-intro','placement-empty','placement-save-failure','placement-wrong','placement-restored','placement-draft-restored','placement-filled','placement-options-stable','placement-correct','placement-final-correct','placement-final-wrong','placement-passed','placement-map','placement-skipped-preview','placement-failed','placement-retry-intro','placement-retry','placement-wide-intro','placement-wide-question','placement-wide-passed','placement-wide-map'];
 const CHALLENGE_SCREENS = ['challenge-menu','reset-confirm-course','reset-confirm-challenges','reset-cancelled','reset-challenges-saved','reset-undo','reset-failed','reset-course-saved','reset-reload','reset-undo-restored',
   ...PLACEMENT_SCREENS,
   ...CHALLENGES.flatMap(c=>['challenge-intro-','challenge-complete-','challenge-return-','challenge-draft-restored-','challenge-node-preview-','challenge-finished-intro-','reset-confirm-single-','reset-single-'].map(prefix=>prefix+c.id))];
@@ -20,7 +20,7 @@ function fingerprint(prepared, root = ROOT) {
   for (const dir of ['tests/browser']) for (const file of fs.readdirSync(path.join(root, dir))) {
     sources.set(dir + '/' + file, fs.readFileSync(path.join(root, dir, file)));
   }
-  for (const file of ['scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/verify-course-media.js','package.json','package-lock.json']) {
+  for (const file of ['scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/check-placement-feedback.js','scripts/check-placement-pool-browser.js','scripts/verify-course-media.js','package.json','package-lock.json']) {
     sources.set(file, fs.readFileSync(path.join(root, file)));
   }
   return hash([...sources].sort(([a],[b])=>a.localeCompare(b)).map(([name,bytes])=>name+':'+hash(bytes)).join('\n'));

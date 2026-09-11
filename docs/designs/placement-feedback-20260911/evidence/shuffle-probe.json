@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "singleChange": "Skip initialization on graded feedback only; no CSS or scrolling changes",
+  "baseline": {
+    "before": {
+      "order": [
+        "o3",
+        "o2",
+        "o1",
+        "o0"
+      ],
+      "heard": [
+        "L02-W02"
+      ]
+    },
+    "after": {
+      "order": [
+        "o1",
+        "o3",
+        "o0",
+        "o2"
+      ],
+      "heard": []
+    }
+  },
+  "probe": {
+    "before": {
+      "order": [
+        "o3",
+        "o2",
+        "o1",
+        "o0"
+      ],
+      "heard": [
+        "L02-W02"
+      ]
+    },
+    "after": {
+      "order": [
+        "o3",
+        "o2",
+        "o1",
+        "o0"
+      ],
+      "heard": [
+        "L02-W02"
+      ]
+    }
+  }
+}

@@ -272498,7 +272498,8 @@
     "metricAssets": {
       "completed": "/poc/learning-path/assets/settlement/completed-check.webp",
       "streak": "/poc/learning-path/assets/settlement/streak-target.webp",
-      "time": "/poc/learning-path/assets/settlement/time-stopwatch.webp"
+      "time": "/poc/learning-path/assets/settlement/time-stopwatch.webp",
+      "chances": "/poc/learning-path/assets/settlement/chances-heart.webp"
     },
     "completedTitle": "闯关完成！",
     "repeatTitle": "越练越熟练！",
@@ -340415,7 +340416,8 @@
         "authoredSupport": "word-bank",
         "chapterId": "lesson-141-142"
       }
-    ]
+    ],
+    "samplingPolicy": "skipped-first-v1"
   },
   "grammar": {
     "pilotLessons": [

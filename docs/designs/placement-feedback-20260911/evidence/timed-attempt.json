@@ -1,0 +1,282 @@
+{
+  "status": "passed",
+  "origin": "http://127.0.0.1:42878/",
+  "questions": [
+    {
+      "id": "PL12-12:tap",
+      "form": "T02",
+      "elapsedMs": 921
+    },
+    {
+      "id": "PL12-2:tap",
+      "form": "T06",
+      "elapsedMs": 3220
+    },
+    {
+      "id": "PL12-8:tap",
+      "form": "T06",
+      "elapsedMs": 5187
+    },
+    {
+      "id": "PL12-0:tap",
+      "form": "T08",
+      "elapsedMs": 5369
+    },
+    {
+      "id": "PL12-4:tap",
+      "form": "T09",
+      "elapsedMs": 5537
+    },
+    {
+      "id": "PL12-16:tap",
+      "form": "T02",
+      "elapsedMs": 6620
+    },
+    {
+      "id": "PL12-18:tap",
+      "form": "T02",
+      "elapsedMs": 7520
+    },
+    {
+      "id": "PL12-3:tap",
+      "form": "T09",
+      "elapsedMs": 7686
+    },
+    {
+      "id": "PL-CH34-5:tap",
+      "form": "T08",
+      "elapsedMs": 7837
+    },
+    {
+      "id": "PL12-5:tap",
+      "form": "T08",
+      "elapsedMs": 8020
+    },
+    {
+      "id": "PL-CHALL-3:tap",
+      "form": "T06",
+      "elapsedMs": 9804
+    },
+    {
+      "id": "PL12-9:tap",
+      "form": "T08",
+      "elapsedMs": 9987
+    },
+    {
+      "id": "PL-CH34-3:tap",
+      "form": "T08",
+      "elapsedMs": 10137
+    },
+    {
+      "id": "PL12-19:tap",
+      "form": "T02",
+      "elapsedMs": 11070
+    },
+    {
+      "id": "PL12-10:tap",
+      "form": "T02",
+      "elapsedMs": 11937
+    },
+    {
+      "id": "PL12-14:tap",
+      "form": "T02",
+      "elapsedMs": 12820
+    },
+    {
+      "id": "PL12-11:tap",
+      "form": "T02",
+      "elapsedMs": 13837
+    },
+    {
+      "id": "PL-CH34-2:tap",
+      "form": "T07",
+      "elapsedMs": 14203
+    },
+    {
+      "id": "PL12-13:tap",
+      "form": "T02",
+      "elapsedMs": 15471
+    },
+    {
+      "id": "PL-CH34-4:tap",
+      "form": "T09",
+      "elapsedMs": 15891
+    }
+  ],
+  "errors": [],
+  "elapsedMs": 15891,
+  "observedWallMs": 16048,
+  "displayedTime": "0:15",
+  "nativeAudio": [
+    {
+      "src": "http://127.0.0.1:42878/poc/lesson-1-2/course/audio/l01-d01.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w03.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l01-d03.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/nce-u01-c-q-car.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w07.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w09.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson3-4-experience/audio/l03-d02.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w10.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w01.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w05.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w02.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson-1-2/course/audio/l02-w04.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": false,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-correct.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/poc/lesson3-4-experience/audio/l03-d09.mp3",
+      "ended": true,
+      "error": false
+    },
+    {
+      "src": "/assets/feedback/duolingo-complete.mp3",
+      "ended": false,
+      "error": false
+    }
+  ]
+}

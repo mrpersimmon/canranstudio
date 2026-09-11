@@ -1,0 +1,1469 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "pass-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [
+        {
+          "label": "书",
+          "method": "scroll-action-and-recheck"
+        },
+        {
+          "label": "手提包",
+          "method": "scroll-action-and-recheck"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "pass-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "5/6",
+          "×5",
+          "1"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [
+        {
+          "label": "书",
+          "method": "scroll-action-and-recheck"
+        },
+        {
+          "label": "手提包",
+          "method": "scroll-action-and-recheck"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "fail-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "0/2",
+          "×0",
+          "0"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "empty-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        320,
+        568
+      ],
+      "viewportGeometry": {
+        "width": 320,
+        "contentWidth": 305,
+        "scrollWidth": 305,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 2,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "5/6",
+          "×5",
+          "1"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "0/2",
+          "×0",
+          "0"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "empty-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        420,
+        856
+      ],
+      "viewportGeometry": {
+        "width": 420,
+        "contentWidth": 405,
+        "scrollWidth": 405,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 2,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "5/6",
+          "×5",
+          "1"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "0/2",
+          "×0",
+          "0"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "empty-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        906,
+        801
+      ],
+      "viewportGeometry": {
+        "width": 906,
+        "contentWidth": 891,
+        "scrollWidth": 891,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 2,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 6,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 6,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "pass-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "5/6",
+          "×5",
+          "1"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-question",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 8,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 0,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-final-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-restored-feedback",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 5,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": {
+        "label": "本次闯关进度",
+        "completed": 2,
+        "total": 6
+      },
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "fail-result",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 4,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": {
+        "action": "map",
+        "inViewport": true
+      },
+      "sessionProgress": null,
+      "settlement": {
+        "headerAbsent": true,
+        "values": [
+          "0/2",
+          "×0",
+          "0"
+        ],
+        "completed": 0,
+        "finished": false
+      },
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    },
+    {
+      "name": "empty-intro",
+      "expectedTheme": "dark",
+      "viewport": [
+        1440,
+        900
+      ],
+      "viewportGeometry": {
+        "width": 1440,
+        "contentWidth": 1425,
+        "scrollWidth": 1425,
+        "scrollbarWidth": 15
+      },
+      "canvas": "rgb(20, 31, 35)",
+      "visibleImages": 2,
+      "journeyLayout": {
+        "gaps": [],
+        "pitch": null
+      },
+      "completionBoundary": null,
+      "sessionProgress": null,
+      "settlement": null,
+      "centeredIcons": [],
+      "resolved": [],
+      "errors": []
+    }
+  ],
+  "cases": [
+    {
+      "viewport": [
+        320,
+        568
+      ],
+      "mode": "pass",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        320,
+        568
+      ],
+      "mode": "fail",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        320,
+        568
+      ],
+      "mode": "empty",
+      "count": 0,
+      "maxMistakes": 0
+    },
+    {
+      "viewport": [
+        420,
+        856
+      ],
+      "mode": "pass",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        420,
+        856
+      ],
+      "mode": "fail",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        420,
+        856
+      ],
+      "mode": "empty",
+      "count": 0,
+      "maxMistakes": 0
+    },
+    {
+      "viewport": [
+        906,
+        801
+      ],
+      "mode": "pass",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        906,
+        801
+      ],
+      "mode": "fail",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        906,
+        801
+      ],
+      "mode": "empty",
+      "count": 0,
+      "maxMistakes": 0
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "mode": "pass",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "mode": "fail",
+      "count": 6,
+      "maxMistakes": 2
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "mode": "empty",
+      "count": 0,
+      "maxMistakes": 0
+    }
+  ]
+}

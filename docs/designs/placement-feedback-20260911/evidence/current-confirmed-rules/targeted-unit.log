@@ -1,0 +1,42 @@
+✔ all live order tiles omit punctuation while source sentences keep it (8.462084ms)
+✔ the route renders every chapter without section paging controls (23.081834ms)
+✔ grading emits one feedback sound and resuming does not replay it (43.728125ms)
+✔ story character choices retain one feedback message without a picture-card footer (69.696292ms)
+✔ main practice and challenge distinguish retry, correct, completion and repeated events (24.058458ms)
+✔ placement plays answer feedback first and the result sound only after manual continue (395.377667ms)
+✔ identical visible words are interchangeable in the original order activity (3.83225ms)
+✔ punctuation removal preserves old placement verdicts while accepting equal words in new answers (14.649542ms)
+✔ foundation uses picture choice and word banks with no editable answers (19.007ms)
+✔ every skip destination has 20 unique, bounded questions; wide jumps cover the skipped range (185.753167ms)
+✔ fifth mistake stops grading, shows feedback, and waits for continue; duplicate actions consume no lives (111.451167ms)
+✔ fixed questions, current draft, feedback and mistakes survive leave and refresh (71.960209ms)
+✔ four mistakes may pass only after all 20 responses; skipping never fabricates learned evidence (453.770334ms)
+✔ reset scopes and undo preserve the distinction between placement and regular challenges (293.227709ms)
+✔ saving the final answer must succeed before unlocking; stale tabs cannot overwrite an attempt (293.569042ms)
+✔ damaged or fabricated placement responses are rejected without touching stored progress (24.85325ms)
+✔ current chapter cannot be skipped, and opening an invitation does not mutate the learner record (15.309458ms)
+✔ settlement measures this visit, freezes time, excludes hidden time and resets on replay (131.79425ms)
+✔ wrong and helped answers break the streak; resumed history is not awarded again (99.363875ms)
+✔ settlement is shown only after durable completion, and saving twice cannot award twice (33.637792ms)
+✔ tap challenge resumes only remaining questions and assisted answers are not a streak (305.815416ms)
+✔ grading a picture preserves every option identity, position and heard reference with changing random values (194.254625ms)
+✔ final correct answer waits for manual continue, including reload (325.981292ms)
+✔ final incorrect answer waits for manual continue, including reload (91.442541ms)
+✔ placement persists foreground time, excludes background and offline gaps, freezes on the last grade (252.932542ms)
+✔ completed attempts without a duration still show their real remaining chances (10.944833ms)
+✔ saving time on visibility changes retains a selected draft and reload excludes time away (38.76525ms)
+✔ background time remains excluded while a placement draft save is waiting for retry (15.594792ms)
+✔ new placement uses only skipped courses when they supply 20 distinct questions (6.400166ms)
+✔ short skipped pools are exhausted before earlier courses, nearest earlier first (9.87375ms)
+✔ every course range respects skipped-first, source deduplication, bounds and target size (3359.12ms)
+✔ reduced banks use their real count, proportional chances and manual terminal feedback (246.8125ms)
+✔ an empty bank has an explicit unavailable invitation and cannot award a pass (2.433292ms)
+✔ stored v3 orders without the new policy keep their original sample and can resume (22.350542ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3913.259042

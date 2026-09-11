@@ -5,7 +5,7 @@
   "revision": "lesson1-144-v7.0",
   "scopePath": "/poc/learning-path/",
   "mediaIndexUrl": "/poc/learning-path/course-package/media-index.json",
-  "totalBytes": 3665308,
+  "totalBytes": 3672830,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -94,20 +94,20 @@
     {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 69833,
-      "sha256": "0d5faff19ac3431b69c8931f3bf5009605154b3e7543e867347af8ed8c325e0d"
+      "bytes": 72438,
+      "sha256": "9ca2287694572cfb78bbe92bcd796551cc690ec51894ae5422449c0a5d305a47"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 48869,
-      "sha256": "970fdf295c41cfadcfc095e58310027f93466e57d37b2dc1e7e5637e38ae9adb"
+      "bytes": 49407,
+      "sha256": "014a978f9cd94d4b4400b08795639f2c7dbe77ce303be83b92ebde7ebc370000"
     },
     {
       "url": "/core/learning-placement.js",
       "kind": "script",
-      "bytes": 13517,
-      "sha256": "a75c1676c0ed30001fd124db80ee873474ff17310c6d429f84953edf0068753a"
+      "bytes": 17572,
+      "sha256": "78a5381e4916fd4d85507f790ad73781d5047c9320966e96bdbb51684587b5c2"
     },
     {
       "url": "/core/learning-record-migration.js",
@@ -298,14 +298,14 @@
     {
       "url": "/poc/learning-path/course-package/media-index.json",
       "kind": "data",
-      "bytes": 452056,
-      "sha256": "92cc804bcb994342b1acb8f85f8d7db14e3c4a0234c63381e03edec41a6a5678"
+      "bytes": 452226,
+      "sha256": "4d56f2ccb31cad50705e33f792b9bd1cf13dbc585732b3e52033fa7001383fd3"
     },
     {
       "url": "/poc/learning-path/course-package/unit-catalog.json",
       "kind": "data",
-      "bytes": 2639075,
-      "sha256": "16f4a5f43520a80161bee0e8d3f86fea9ca53fd4d82e49abcb1e7423964a85c5"
+      "bytes": 2639205,
+      "sha256": "1a205554a3fc6af2c1b1e85afc0733377095364d659af52032d8915c0ac68337"
     },
     {
       "url": "/poc/learning-path/course.css",
@@ -460,8 +460,8 @@
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 15763,
-      "sha256": "f13741749366e6135505131376d6d4c2ca6201c19b6af15e63450ada1298cd39"
+      "bytes": 15787,
+      "sha256": "54e559501a910ce5b966b8aa7cd36cd0a9f24af74575329912b668947aaa1959"
     }
   ]
 }

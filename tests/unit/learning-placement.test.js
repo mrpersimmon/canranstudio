@@ -27,11 +27,11 @@ test('every skip destination has 20 unique, bounded questions; wide jumps cover 
   }
   const from=unit.chapters[20].id,target=unit.chapters[60].id;
   const qs=placement.sample(unit,from,target,481).map(id=>placement.question(unit,id));
-  assert.equal(qs.filter(q=>unit.chapters.findIndex(c=>c.id===q.chapterId)<20).length,6);
+  assert.equal(qs.filter(q=>unit.chapters.findIndex(c=>c.id===q.chapterId)<20).length,0);
   assert.ok(new Set(qs.map(q=>q.chapterId)).size>=14);
   assert.notDeepEqual(placement.sample(unit,from,target,481),placement.sample(unit,from,target,482));
 });
-test('fifth mistake fails immediately; duplicate checks and late drafts cannot consume more lives',()=>{
+test('fifth mistake stops grading, shows feedback, and waits for continue; duplicate actions consume no lives',()=>{
   const h=setup();open(h);const original=structuredClone(h.view().record.completed);
   for(let i=0;i<5;i++){
     const token=identity(h);grade(h,false);
@@ -42,7 +42,8 @@ test('fifth mistake fails immediately; duplicate checks and late drafts cannot c
     if(i<4){assert.equal(h.view().screen,'placement');h.send({type:'placement-next',...token});
       const current=structuredClone(h.view().record);h.send({type:'placement-next',...token});assert.deepEqual(h.view().record,current);}
   }
-  assert.equal(h.view().screen,'placement-result');assert.equal(h.view().placementAttempt.status,'failed');
+  assert.equal(h.view().screen,'placement');assert.equal(h.view().feedback,'incorrect');assert.equal(h.view().placementAttempt.status,'failed');
+  h.send({type:'placement-next',...identity(h)});assert.equal(h.view().screen,'placement-result');
   assert.equal(h.view().nodes[3].available,false);assert.deepEqual(h.view().record.completed,original);
   const seed=h.view().placementAttempt.seed;
   h.send({type:'placement-retry'});h.send({type:'placement-start'});
@@ -89,7 +90,9 @@ test('saving the final answer must succeed before unlocking; stale tabs cannot o
   fail=true;h.rt.dispatch({type:'placement-check',...identity(h)});
   assert.equal(h.view().saveState,'failed');assert.equal(h.view().passedCount,0);
   assert.equal(backing.load(h.rt.storageKey).value.placement.attempts.umbrella.responses.length,19);
-  fail=false;h.send({type:'save-retry'});assert.equal(h.view().passedCount,3);
+  fail=false;h.send({type:'save-retry'});assert.equal(h.view().passedCount,0);assert.equal(h.view().feedback,'correct');
+  fail=true;h.rt.dispatch({type:'placement-next',...identity(h)});assert.equal(h.view().saveState,'failed');assert.equal(h.view().passedCount,0);
+  fail=false;h.send({type:'save-retry'});assert.equal(h.view().passedCount,3);assert.equal(h.view().screen,'placement-result');
   h.send({type:'map'});open(h,'friends');
   const other=setup({adapter});open(other,'friends');input(other,'other tab');
   h.rt.dispatch({type:'exercise-select',id:placement.question(unit,identity(h).questionId).options[1].id,questionId:identity(h).questionId});

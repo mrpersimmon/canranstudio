@@ -1,6 +1,7 @@
 'use strict';
 // Authored alternatives: each set contrasts the actual target, not random words.
 module.exports={
+  placementSamplingPolicy:'skipped-first-v1',
   questions:require('./no-keyboard-question-design.json'),
   gaps:{
     'PL12-0':['me','you'], 'PL12-5':['very much','please'],

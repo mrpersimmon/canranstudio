@@ -1,0 +1,14 @@
+✔ new placement uses only skipped courses when they supply 20 distinct questions (2.851958ms)
+✔ short skipped pools are exhausted before earlier courses, nearest earlier first (3.830458ms)
+✔ every course range respects skipped-first, source deduplication, bounds and target size (3038.688833ms)
+✔ reduced banks use their real count, proportional chances and manual terminal feedback (248.999333ms)
+✔ an empty bank has an explicit unavailable invitation and cannot award a pass (2.080209ms)
+✔ stored v3 orders without the new policy keep their original sample and can resume (20.2715ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3473.376375

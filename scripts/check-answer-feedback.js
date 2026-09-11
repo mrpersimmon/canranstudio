@@ -7,13 +7,19 @@ const {setup}=require('../tests/unit/support/course-harness');
 const {answer}=require('../tests/unit/support/tap-exercise');
 const unit=require('../content/learning-course.json');
 function seedPicture(){
-  const h=setup({random:()=>2/4294967296});
+  const placement=require('../core/learning-placement'),empty=require('../core/learning-path-runtime').emptyRecord(unit);
+  const target=unit.placement.questions.find(q=>q.form==='T02'&&unit.sources[q.sourceRef].text==='pencil');
+  let seed=0;
+  while(seed<1000&&!placement.createAttempt(unit,empty,'friends',seed,'2026-09-06T12:00:00Z').questionIds.includes(target.id))seed++;
+  assert.ok(seed<1000,'Picture regression requires an actual sampled pencil question');
+  const h=setup({random:()=>seed/4294967296});
   h.send({type:'open-placement',id:'friends'});h.send({type:'placement-start'});
-  while(true){
+  while(h.view().placementAttempt.status==='active'){
     const a=h.view().placementAttempt,q=unit.placement.questions.find(q=>q.id===a.questionIds[a.cursor]);
     if(q.form==='T02'&&unit.sources[q.sourceRef].text==='pencil')break;
     answer(h,q);h.send({type:'placement-check',attemptId:a.id,questionId:q.id});h.send({type:'placement-next',attemptId:a.id,questionId:q.id});
   }
+  assert.equal(h.view().placementAttempt.questionIds[h.view().placementAttempt.cursor],target.id);
   const key=h.rt.storageKey,saved=h.adapter.load(key);
   return {records:{[key]:saved},key,now:'2026-09-06T12:00:00Z'};
 }

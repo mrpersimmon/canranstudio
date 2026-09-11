@@ -1,0 +1,38 @@
+✖ saving time on visibility changes retains a selected draft and reload excludes time away (18.88475ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 179.572542
+
+✖ failing tests:
+
+test at tests/unit/placement-feedback-regression.test.js:83:1
+✖ saving time on visibility changes retains a selected draft and reload excludes time away (18.88475ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    {
+      anchor: null,
+      pairs: [],
+  +   selected: []
+  -   selected: [
+  -     'o0'
+  -   ]
+    }
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:87:68)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { selected: [], pairs: [], anchor: null },
+    expected: { selected: [ 'o0' ], pairs: [], anchor: null },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

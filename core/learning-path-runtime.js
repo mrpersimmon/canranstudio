@@ -133,6 +133,7 @@
     // A settlement belongs to this visit, never to historical course totals.
     // Commit callbacks own scoring; retries and repeated renders cannot award twice.
     let session = null, activeSince = null, pageHidden = false;
+    let placementClock=null;
     function beginSession() {
       session = { assessed: 0, independent: 0, streak: 0, bestStreak: 0, heardRefs: [], elapsedMs: 0, finished: false };
       activeSince = pageHidden ? null : now().getTime();
@@ -726,22 +727,46 @@
       if (!placement.eligible(unit,record,id)) return;
       stopAudio();
       Object.assign(view,{screen:'placement-intro',mode:'placement',placementId:id,activityId:null,storyActivityId:null,challengeId:null,feedback:null,sessionProgress:null});
+      const attempt=placementAttempt();
+      view.placementPlan=attempt?.status==='active'||attempt?.feedbackPending?placement.attemptRules(unit,attempt):placement.plan(unit,record,id);
+    }
+    function clockPlacement(paused) {
+      if(!placementClock)return;
+      const time=now().getTime();
+      if(placementClock.activeSince!==null)placementClock.elapsedMs+=Math.max(0,time-placementClock.activeSince);
+      placementClock.activeSince=paused?null:time;
     }
     function loadPlacement() {
       const a=placementAttempt();
-      Object.assign(view,{screen:a.status==='active'?'placement':'placement-result',mode:'placement',
-        placementIndex:a.cursor,placementAnswer:(a.responses.length===a.cursor ? draftValue('placement',a.id+':'+a.questionIds[a.cursor]) : null) ?? a.draft,feedback:a.status==='active'&&a.responses.length>a.cursor?(a.responses[a.cursor].correct?'correct':'incorrect'):null,
+      const answering=a.status==='active'||a.feedbackPending;
+      const sameQuestion=view.screen==='placement'&&view.placementIndex===a.cursor&&view.exerciseIdentity===a.id+':'+a.questionIds[a.cursor];
+      Object.assign(view,{screen:answering?'placement':'placement-result',mode:'placement',
+        placementPlan:placement.attemptRules(unit,a),
+        placementIndex:a.cursor,placementAnswer:(a.responses.length===a.cursor ? draftValue('placement',a.id+':'+a.questionIds[a.cursor]) : null) ?? a.draft,feedback:answering&&a.responses.length>a.cursor?(a.responses[a.cursor].correct?'correct':'incorrect'):null,
         sessionProgress:{completed:a.responses.length,total:a.questionIds.length}});
-      if(a.status==='active')initExercise(placement.question(unit,a.questionIds[a.cursor],3),view.placementAnswer);
+      if(answering&&!sameQuestion){
+        initExercise(placement.question(unit,a.questionIds[a.cursor],3),view.placementAnswer);
+        view.exerciseIdentity=a.id+':'+a.questionIds[a.cursor];
+        if(view.feedback)view.heardRefs=[...a.responses[a.cursor].heardRefs];
+      }
+      if(a.status==='active'){
+        if(placementClock?.id!==a.id)placementClock={id:a.id,elapsedMs:a.elapsedMs||0,activeSince:null,partial:a.timingPartial||a.elapsedMs===undefined&&a.responses.length>0};
+        if(placementClock.activeSince===null&&!pageHidden)placementClock.activeSince=now().getTime();
+      }else if(placementClock)placementClock.activeSince=null;
     }
     function writePlacement(attempt,after=loadPlacement) {
+      if(placementClock?.id===attempt.id){
+        clockPlacement(attempt.status!=='active'||pageHidden);
+        attempt={...attempt,elapsedMs:Math.max(attempt.elapsedMs||0,placementClock.elapsedMs),...(placementClock.partial?{timingPartial:true}:{})};
+      }
       const next=clone(record); delete next.resetBackup;
       ((next.placement ||= {attempts:{}}).attempts)[view.placementId]=attempt;
       save(next,after);
+      if(pending&&placementClock)placementClock.activeSince=null;
     }
     function startPlacement() {
       const old=placementAttempt();
-      if (old?.status==='active') { loadPlacement(); return; }
+      if (old?.status==='active'||old?.feedbackPending) { loadPlacement(); return; }
       if (!placement.eligible(unit,record,view.placementId)) return;
       // New attempts get a new seed; opening, refreshing and resuming never do.
       let seed=Math.floor(random()*4294967296)>>>0;
@@ -753,7 +778,12 @@
       const a=placementAttempt();
       // Identity guards also reject queued clicks/IME drafts from a previous
       // question. The persisted response is the single source of life loss.
-      if (a?.status!=='active' || event.attemptId!==a.id || event.questionId!==a.questionIds[a.cursor]) return;
+      if (!a || event.attemptId!==a.id || event.questionId!==a.questionIds[a.cursor]) return;
+      if(a.feedbackPending){
+        if(event.type==='placement-next'&&view.feedback){stopAudio();writePlacement({...clone(a),feedbackPending:false,cursor:a.responses.length,draft:exercises.empty()});}
+        return;
+      }
+      if(a.status!=='active')return;
       if (event.type==='placement-check' && !view.feedback) {
         const next=placement.grade(unit,a,view.response,now().toISOString(),view.heardRefs);
         if (next) writePlacement(next);
@@ -808,18 +838,26 @@
     }
     function dispatch(event, {light = false} = {}) {
       effects = [];
-      const before={feedback:view.feedback,finished:session?.finished,placement:record?.placement?.attempts[view.placementId]?.status,
+      const before={screen:view.screen,feedback:view.feedback,finished:session?.finished,placement:record?.placement?.attempts[view.placementId]?.status,
         pairs:Object.keys(view.matchedPairs||{}).length,wrong:view.wrong};
       if (event.type === 'session-visibility') {
         pageHidden = Boolean(event.hidden); clockSession(pageHidden);
+        if(view.screen==='placement'&&placementAttempt()?.status==='active'){
+          // Pausing is independent of storage health; a pending draft cannot
+          // turn time in the background into time spent answering.
+          clockPlacement(pageHidden||Boolean(pending));
+          if(!pending&&!draftPending)writePlacement({...clone(placementAttempt()),...(!view.feedback?{draft:clone(view.response)}:{})},()=>{});
+        }
         return {view:snapshot(light),effects};
       }
       if (draftPending) {
         if(event.type==='save-retry') writeDraft(draftPending.kind,draftPending.identity,draftPending.value,draftPending.after);
-        else if(event.type==='reload') {draftPending=null;pending=null;view={screen:'map',saveState:null,mode:'main',audio:null};journal=adapter.loadDraft?.(storageKey)?.value || null;read();}
+        else if(event.type==='reload') {draftPending=null;pending=null;placementClock=null;view={screen:'map',saveState:null,mode:'main',audio:null};journal=adapter.loadDraft?.(storageKey)?.value || null;read();}
       }
       else if (event.type.startsWith('recovery-') && view.screen==='blocked') recoverRecord(event);
       else if (event.type === 'reload') {
+        if(!pending&&view.screen==='placement'&&placementAttempt()?.status==='active')writePlacement({...clone(placementAttempt()),...(!view.feedback?{draft:clone(view.response)}:{})},()=>{});
+        placementClock=null;
         stopAudio(); pending = null; journal=adapter.loadDraft?.(storageKey)?.value || null; view = { screen: 'map', saveState: null, mode: 'main', audio: null }; read();
       } else if (pending || view.screen === 'blocked') {
         if (event.type === 'save-retry' && pending) save(pending.next, pending.after);
@@ -844,10 +882,10 @@
         && event.id === view.challengeId && event.questionId === challengeQuestion().id) saveChallengeDraft();
       else if (event.type === 'open-node' && view.screen === 'map') startNode(event.nodeId, event.mode);
       else if (event.type === 'map') {
-        if (view.screen==='placement' && !view.feedback && !equal(view.response,placementAttempt().draft)) writePlacement({...clone(placementAttempt()),draft:clone(view.response)},()=>{});
+        if(view.screen==='placement'&&placementAttempt()?.status==='active')writePlacement({...clone(placementAttempt()),...(!view.feedback?{draft:clone(view.response)}:{})},()=>{});
         if (view.screen==='challenge') saveChallengeDraft();
         if (pending) return {view:snapshot(light),effects:clone(effects)};
-        stopAudio(); view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; view.sessionProgress = null; view.challengeId = null; }
+        stopAudio();placementClock=null; view.screen = 'map'; view.activityId = null; view.storyActivityId = null; view.mode = 'main'; view.sessionProgress = null; view.challengeId = null; }
       else if (event.type === 'course-summary' && unit.courseId && unit.nodes.every(nodeDone)) {
         stopAudio(); view.screen = 'celebration'; view.mode = 'summary'; view.nodeId = unit.nodes.at(-1).id; view.activityId = null; view.storyActivityId = null; view.sessionProgress = null;
       }
@@ -927,7 +965,7 @@
       let sound;
       const status=record?.placement?.attempts[view.placementId]?.status;
       if(!view.saveState){
-        if(before.placement==='active'&&['passed','failed'].includes(status))sound=status==='passed'?'complete':'failed';
+        if(before.screen==='placement'&&view.screen==='placement-result'&&['passed','failed'].includes(status))sound=status==='passed'?'complete':'failed';
         else if(session?.finished&&!before.finished)sound='complete';
         else if(['check','challenge-check','placement-check','match-image','match-word','save-retry'].includes(event.type)){
           if(view.feedback&&view.feedback!==before.feedback)sound=['correct','supported'].includes(view.feedback)?'correct':'incorrect';

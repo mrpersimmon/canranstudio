@@ -1,0 +1,141 @@
+✖ grading a picture preserves every option identity, position and heard reference with changing random values (56.085541ms)
+✖ final correct answer waits for manual continue, including reload (161.8035ms)
+✖ final incorrect answer waits for manual continue, including reload (39.395958ms)
+✖ placement persists foreground time, excludes background and offline gaps, freezes on the last grade (3.763584ms)
+✖ legacy completed attempts retain their verdict without inventing a duration (5.623416ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 443.673208
+
+✖ failing tests:
+
+test at tests/unit/placement-feedback-regression.test.js:14:1
+✖ grading a picture preserves every option identity, position and heard reference with changing random values (56.085541ms)
+  AssertionError [ERR_ASSERTION]: grading must not shuffle options again
+  + actual - expected
+
+    [
+  +   'o3',
+  +   'o0',
+      'o1',
+  -   'o0',
+      'o2',
+  -   'o3'
+    ]
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:21:16)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'o3', 'o0', 'o1', 'o2' ],
+    expected: [ 'o1', 'o0', 'o2', 'o3' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-feedback-regression.test.js:30:35
+✖ final correct answer waits for manual continue, including reload (161.8035ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+  +   'complete'
+  -   'correct'
+    ]
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:35:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'complete' ],
+    expected: [ 'correct' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-feedback-regression.test.js:30:35
+✖ final incorrect answer waits for manual continue, including reload (39.395958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    [
+  +   'failed'
+  -   'incorrect'
+    ]
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:35:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'failed' ],
+    expected: [ 'incorrect' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-feedback-regression.test.js:51:1
+✖ placement persists foreground time, excludes background and offline gaps, freezes on the last grade (3.763584ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - 12000
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:54:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 12000,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-feedback-regression.test.js:67:1
+✖ legacy completed attempts retain their verdict without inventing a duration (5.623416ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /本次用时/. Input:
+
+  '<div class="station-app lp-shell lp-course has-settlement"><section class="lp-celebration lp-settlement is-passed" aria-labelledby="settlement-title">\n' +
+    '        <div class="lp-settlement-hero"><img class="lp-settlement-mascot" src="/poc/learning-path/assets/settlement/cat-celebrate.webp" alt="开心庆祝的探险猫" width="260" height="260" decoding="async"></div>\n' +
+    '        <div class="lp-settlement-copy"><p class="lp-settlement-context">Lesson 5 &amp; 6</p><h1 id="settlement-title" tabindex="-1" data-lesson-title>跳级成功！</h1><p class="lp-settlement-message">已解锁 Lesson 5 &amp; 6，开始新的探险！</p></div>\n' +
+    '        <dl class="lp-settlement-stats" aria-label="本次跳级测试表现"><div class="lp-settlement-stat stat-0"><dt>答对题数</dt><dd class="has-long-value"><img class="lp-settlement-metric-art" src="/poc/learning-path/assets/settlement/completed-check.webp" alt="" width="36" height="36"><span data-settlement-value>20/20</span></dd></div><div class="lp-settlement-stat stat-1"><dt>最佳连对</dt><dd><img class="lp-settlement-metric-art" src="/poc/learning-path/assets/settlement/streak-target.webp" alt="" width="36" height="36"><span data-settlement-value>×20</span></dd></div><div class="lp-settlement-stat stat-2"><dt>剩余机会</dt><dd><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"><span data-settlement-value>5</span></dd></div></dl>\n' +
+    '        \n' +
+    '      </section><footer class="lp-footer"><div class="lp-footer-inner"><button type="button" data-action="map" class="lp-button lp-primary lp-settlement-return"><span>回到路线</span></button></div></footer></div>'
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-feedback-regression.test.js:78:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '<div class="station-app lp-shell lp-course has-settlement"><section class="lp-celebration lp-settlement is-passed" aria-labelledby="settlement-title">\n        <div class="lp-settlement-hero"><img class="lp-settlement-mascot" src="/poc/learning-path/assets/settlement/cat-celebrate.webp" alt="开心庆祝的探险猫" width="260" height="260" decoding="async"></div>\n        <div class="lp-settlement-copy"><p class="lp-settlement-context">Lesson 5 &amp; 6</p><h1 id="settlement-title" tabindex="-1" data-lesson-title>跳级成功！</h1><p class="lp-settlement-message">已解锁 Lesson 5 &amp; 6，开始新的探险！</p></div>\n        <dl class="lp-settlement-stats" aria-label="本次跳级测试表现"><div class="lp-settlement-stat stat-0"><dt>答对题数</dt><dd class="has-long-value"><img class="lp-settlement-metric-art" src="/poc/learning-path/assets/settlement/completed-check.webp" alt="" width="36" height="36"><span data-settlement-value>20/20</span></dd></div><div class="lp-settlement-stat stat-1"><dt>最佳连对</dt><dd><img class="lp-settlement-metric-art" src="/poc/learning-path/assets/settlement/streak-target.webp" alt="" width="36" height="36"><span data-settlement-value>×20</span></dd></div><div class="lp-settlement-stat stat-2"><dt>剩余机会</dt><dd><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"><span data-settlement-value>5</span></dd></div></dl>\n        \n      </section><footer class="lp-footer"><div class="lp-footer-inner"><button type="button" data-action="map" class="lp-button lp-primary lp-settlement-return"><span>回到路线</span></button></div></footer></div>',
+    expected: /本次用时/,
+    operator: 'match',
+    diff: 'simple'
+  }

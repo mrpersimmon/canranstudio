@@ -1,0 +1,13 @@
+✔ grading a picture preserves every option identity, position and heard reference with changing random values (139.600792ms)
+✔ final correct answer waits for manual continue, including reload (162.968458ms)
+✔ final incorrect answer waits for manual continue, including reload (45.006667ms)
+✔ placement persists foreground time, excludes background and offline gaps, freezes on the last grade (191.876083ms)
+✔ legacy completed attempts retain their verdict without inventing a duration (5.953167ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 723.004458

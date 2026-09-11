@@ -1,0 +1,116 @@
+✖ new placement uses only skipped courses when they supply 20 distinct questions (6.532583ms)
+✖ short skipped pools are exhausted before earlier courses, nearest earlier first (4.14425ms)
+✖ every course range respects skipped-first, source deduplication, bounds and target size (124.544875ms)
+✖ reduced banks use their real count, proportional chances and manual terminal feedback (6.488125ms)
+✖ an empty bank has an explicit unavailable invitation and cannot award a pass (2.293792ms)
+✔ stored v3 orders without the new policy keep their original sample and can resume (22.669167ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 1
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 365.348042
+
+✖ failing tests:
+
+test at tests/unit/placement-pool-policy.test.js:11:1
+✖ new placement uses only skipped courses when they supply 20 distinct questions (6.532583ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(qs.every(q=>ci(q.chapterId)>=20&&ci(q.chapterId)<60))
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-pool-policy.test.js:13:37)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-pool-policy.test.js:16:1
+✖ short skipped pools are exhausted before earlier courses, nearest earlier first (4.14425ms)
+  AssertionError [ERR_ASSERTION]: skipped a closer prerequisite
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-pool-policy.test.js:22:106)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-pool-policy.test.js:24:1
+✖ every course range respects skipped-first, source deduplication, bounds and target size (124.544875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  14 !== 19
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-pool-policy.test.js:32:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 14,
+    expected: 19,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-pool-policy.test.js:36:1
+✖ reduced banks use their real count, proportional chances and manual terminal feedback (6.488125ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /抽取 1 题/. Input:
+
+  '<div class="station-app lp-shell lp-course"><header class="lp-header"><button type="button" data-action="map" class="lp-button lp-icon-button" aria-label="休息一下"><img class="lp-icon" src="/poc/lesson-1-2/course/assets/v3/icons/x-lg.svg" alt="" width="24" height="24"></button><div class="lp-header-spacer"></div><div class="lp-placement-hearts" role="img" aria-label="剩余 5 次机会，共 5 次"><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span></div></header><section class="lp-lesson lp-placement-intro"><img class="lp-placement-mascot" src="/poc/learning-path/assets/dark/cat-cutout.webp" alt="" decoding="async"><p class="lp-kicker">Lesson 3 &amp; 4</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–2 抽取 20 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p></section><footer class="lp-footer"><div class="lp-footer-inner"><div class="lp-placement-actions"><button type="button" data-action="placement-start" class="lp-button lp-primary lp-placement-start"><span>开始测试</span></button><button type="button" data-action="map" class="lp-button lp-quiet"><span>下次再说</span></button></div></div></footer></div>'
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-pool-policy.test.js:41:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '<div class="station-app lp-shell lp-course"><header class="lp-header"><button type="button" data-action="map" class="lp-button lp-icon-button" aria-label="休息一下"><img class="lp-icon" src="/poc/lesson-1-2/course/assets/v3/icons/x-lg.svg" alt="" width="24" height="24"></button><div class="lp-header-spacer"></div><div class="lp-placement-hearts" role="img" aria-label="剩余 5 次机会，共 5 次"><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span></div></header><section class="lp-lesson lp-placement-intro"><img class="lp-placement-mascot" src="/poc/learning-path/assets/dark/cat-cutout.webp" alt="" decoding="async"><p class="lp-kicker">Lesson 3 &amp; 4</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–2 抽取 20 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p></section><footer class="lp-footer"><div class="lp-footer-inner"><div class="lp-placement-actions"><button type="button" data-action="placement-start" class="lp-button lp-primary lp-placement-start"><span>开始测试</span></button><button type="button" data-action="map" class="lp-button lp-quiet"><span>下次再说</span></button></div></div></footer></div>',
+    expected: /抽取 1 题/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/unit/placement-pool-policy.test.js:59:1
+✖ an empty bank has an explicit unavailable invitation and cannot award a pass (2.293792ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /暂时没有可用的测试题/. Input:
+
+  '<div class="station-app lp-shell lp-course"><header class="lp-header"><button type="button" data-action="map" class="lp-button lp-icon-button" aria-label="休息一下"><img class="lp-icon" src="/poc/lesson-1-2/course/assets/v3/icons/x-lg.svg" alt="" width="24" height="24"></button><div class="lp-header-spacer"></div><div class="lp-placement-hearts" role="img" aria-label="剩余 5 次机会，共 5 次"><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span></div></header><section class="lp-lesson lp-placement-intro"><img class="lp-placement-mascot" src="/poc/learning-path/assets/dark/cat-cutout.webp" alt="" decoding="async"><p class="lp-kicker">Lesson 3 &amp; 4</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–2 抽取 20 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p></section><footer class="lp-footer"><div class="lp-footer-inner"><div class="lp-placement-actions"><button type="button" data-action="placement-start" class="lp-button lp-primary lp-placement-start"><span>开始测试</span></button><button type="button" data-action="map" class="lp-button lp-quiet"><span>下次再说</span></button></div></div></footer></div>'
+
+      at TestContext.<anonymous> (/Users/permission/Documents/ChatGPT/canranstudio-placement-repair/tests/unit/placement-pool-policy.test.js:62:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '<div class="station-app lp-shell lp-course"><header class="lp-header"><button type="button" data-action="map" class="lp-button lp-icon-button" aria-label="休息一下"><img class="lp-icon" src="/poc/lesson-1-2/course/assets/v3/icons/x-lg.svg" alt="" width="24" height="24"></button><div class="lp-header-spacer"></div><div class="lp-placement-hearts" role="img" aria-label="剩余 5 次机会，共 5 次"><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span><span class="is-full"><img class="lp-icon" src="/poc/learning-path/assets/journey/icons/heart.svg" alt="" width="24" height="24"></span></div></header><section class="lp-lesson lp-placement-intro"><img class="lp-placement-mascot" src="/poc/learning-path/assets/dark/cat-cutout.webp" alt="" decoding="async"><p class="lp-kicker">Lesson 3 &amp; 4</p><h1 tabindex="-1" data-lesson-title>跳级到这里？</h1><p class="lp-placement-description">从 Lesson 1–2 抽取 20 题<br>重点考察要跳过的内容</p><p class="lp-placement-rule">答错 <strong>5 题</strong>，本次跳级失败</p></section><footer class="lp-footer"><div class="lp-footer-inner"><div class="lp-placement-actions"><button type="button" data-action="placement-start" class="lp-button lp-primary lp-placement-start"><span>开始测试</span></button><button type="button" data-action="map" class="lp-button lp-quiet"><span>下次再说</span></button></div></div></footer></div>',
+    expected: /暂时没有可用的测试题/,
+    operator: 'match',
+    diff: 'simple'
+  }

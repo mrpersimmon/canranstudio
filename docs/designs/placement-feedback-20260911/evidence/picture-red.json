@@ -1,0 +1,854 @@
+{
+  "status": "failed",
+  "probe": false,
+  "samples": [
+    {
+      "viewport": {
+        "width": 832,
+        "height": 902
+      },
+      "randomSeed": 1,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 0,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 105.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 427.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 105.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 427.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 0,
+        "heard": [],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 105.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 427.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 105.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 427.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 832,
+        "height": 902
+      },
+      "randomSeed": 8,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 0,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 105.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 427.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 105.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 427.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 0,
+        "heard": [],
+        "images": [
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 105.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 427.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 105.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 427.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 832,
+        "height": 902
+      },
+      "randomSeed": 37,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 0,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 105.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 427.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 105.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 427.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 0,
+        "heard": [],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 105.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 427.5,
+            "y": 361.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 105.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 427.5,
+            "y": 517.875,
+            "width": 284,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 420,
+        "height": 856
+      },
+      "randomSeed": 1,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 0,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 221.5,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 221.5,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 0,
+        "heard": [],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 221.5,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 34,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 221.5,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 420,
+        "height": 856
+      },
+      "randomSeed": 8,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 0,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 221.5,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 221.5,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 0,
+        "heard": [],
+        "images": [
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 34,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 221.5,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 34,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 221.5,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 420,
+        "height": 856
+      },
+      "randomSeed": 37,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 0,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 34,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 221.5,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 221.5,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 0,
+        "heard": [],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 221.5,
+            "y": 329.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 221.5,
+            "y": 485.453125,
+            "width": 149.5,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "randomSeed": 1,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 265,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 171.5,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 171.5,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 265,
+        "heard": [],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 171.5,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 34,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 171.5,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "randomSeed": 8,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 109,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 171.5,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 383.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 171.5,
+            "y": 383.828125,
+            "width": 99.5,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 109,
+        "heard": [],
+        "images": [
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 34,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 171.5,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 34,
+            "y": 383.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 171.5,
+            "y": 383.828125,
+            "width": 99.5,
+            "height": 80
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "randomSeed": 37,
+      "question": "PL12-11:tap",
+      "before": {
+        "scrollY": 265,
+        "heard": [
+          "L02-W02"
+        ],
+        "images": [
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 34,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 171.5,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 171.5,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          }
+        ]
+      },
+      "after": {
+        "scrollY": 265,
+        "heard": [],
+        "images": [
+          {
+            "id": "o1",
+            "src": "/poc/lesson-1-2/course/assets/v3/pencil.webp",
+            "x": 34,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o2",
+            "src": "/poc/lesson-1-2/course/assets/v3/book.webp",
+            "x": 171.5,
+            "y": 71.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o3",
+            "src": "/poc/lesson-1-2/course/assets/v3/watch.webp",
+            "x": 34,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          },
+          {
+            "id": "o0",
+            "src": "/poc/lesson-1-2/course/assets/v3/pen.webp",
+            "x": 171.5,
+            "y": 227.828125,
+            "width": 99.5,
+            "height": 80
+          }
+        ]
+      }
+    }
+  ],
+  "failures": [
+    {
+      "viewport": {
+        "width": 832,
+        "height": 902
+      },
+      "randomSeed": 1,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n\n  [\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o3',\n-     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n      width: 284,\n      x: 105.5,\n      y: 361.875\n    },\n    {\n      height: 80,\n+     id: 'o3',\n+     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 284,\n      x: 427.5,\n      y: 361.875\n    },\n    {\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 284,\n      x: 105.5,\n      y: 517.875\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 284,\n      x: 427.5,\n      y: 517.875\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 832,
+        "height": 902
+      },
+      "randomSeed": 8,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n\n  [\n    {\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 284,\n      x: 105.5,\n      y: 361.875\n    },\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 284,\n      x: 427.5,\n      y: 361.875\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o3',\n-     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n      width: 284,\n      x: 105.5,\n      y: 517.875\n    },\n    {\n      height: 80,\n+     id: 'o3',\n+     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 284,\n      x: 427.5,\n      y: 517.875\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 832,
+        "height": 902
+      },
+      "randomSeed": 37,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 284,\n      x: 105.5,\n      y: 361.875\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 284,\n      x: 427.5,\n      y: 361.875\n    },\n    {\n...\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 284,\n      x: 427.5,\n      y: 517.875\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 420,
+        "height": 856
+      },
+      "randomSeed": 1,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n\n  [\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o3',\n-     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n      width: 149.5,\n      x: 34,\n      y: 329.453125\n    },\n    {\n      height: 80,\n+     id: 'o3',\n+     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 149.5,\n      x: 221.5,\n      y: 329.453125\n    },\n    {\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 149.5,\n      x: 34,\n      y: 485.453125\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 149.5,\n      x: 221.5,\n      y: 485.453125\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 420,
+        "height": 856
+      },
+      "randomSeed": 8,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n\n  [\n    {\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 149.5,\n      x: 34,\n      y: 329.453125\n    },\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 149.5,\n      x: 221.5,\n      y: 329.453125\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o3',\n-     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n      width: 149.5,\n      x: 34,\n      y: 485.453125\n    },\n    {\n      height: 80,\n+     id: 'o3',\n+     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 149.5,\n      x: 221.5,\n      y: 485.453125\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 420,
+        "height": 856
+      },
+      "randomSeed": 37,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 149.5,\n      x: 34,\n      y: 329.453125\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 149.5,\n      x: 221.5,\n      y: 329.453125\n    },\n    {\n...\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 149.5,\n      x: 221.5,\n      y: 485.453125\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "randomSeed": 1,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n\n  [\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o3',\n-     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n      width: 99.5,\n      x: 34,\n      y: 71.828125\n    },\n    {\n      height: 80,\n+     id: 'o3',\n+     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 99.5,\n      x: 171.5,\n      y: 71.828125\n    },\n    {\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 99.5,\n      x: 34,\n      y: 227.828125\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 99.5,\n      x: 171.5,\n      y: 227.828125\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "randomSeed": 8,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n\n  [\n    {\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 99.5,\n      x: 34,\n      y: 227.828125\n    },\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 99.5,\n      x: 171.5,\n      y: 227.828125\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o3',\n-     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n      width: 99.5,\n      x: 34,\n      y: 383.828125\n    },\n    {\n      height: 80,\n+     id: 'o3',\n+     src: '/poc/lesson-1-2/course/assets/v3/watch.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 99.5,\n      x: 171.5,\n      y: 383.828125\n    }\n  ]\n"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "randomSeed": 37,
+      "error": "picture identities must stay in their selected positions\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      height: 80,\n+     id: 'o1',\n+     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n-     id: 'o2',\n-     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n      width: 99.5,\n      x: 34,\n      y: 71.828125\n    },\n    {\n      height: 80,\n+     id: 'o2',\n+     src: '/poc/lesson-1-2/course/assets/v3/book.webp',\n-     id: 'o0',\n-     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n      width: 99.5,\n      x: 171.5,\n      y: 71.828125\n    },\n    {\n...\n      height: 80,\n+     id: 'o0',\n+     src: '/poc/lesson-1-2/course/assets/v3/pen.webp',\n-     id: 'o1',\n-     src: '/poc/lesson-1-2/course/assets/v3/pencil.webp',\n      width: 99.5,\n      x: 171.5,\n      y: 227.828125\n    }\n  ]\n"
+    }
+  ]
+}

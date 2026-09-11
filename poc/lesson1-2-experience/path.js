@@ -139,7 +139,7 @@
     const run = () => {
       const result = runtime.dispatch(event,{light:true});
       // Clock-only updates preserve focus and the one-shot celebration.
-      if(event.type==='session-visibility')lastView=result.view;
+      if(event.type==='session-visibility'&&!result.view.saveState)lastView=result.view;
       else render(result.view);
       result.effects.forEach(playEffect);
     };

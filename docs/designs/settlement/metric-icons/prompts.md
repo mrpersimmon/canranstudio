@@ -1,5 +1,15 @@
 # 结算指标图标生成提示词
 
+## 2026-09-11 追加：剩余机会
+
+用户允许跳级第三卡使用剩余机会，并要求与已有图标保持一致。先目视核对蓝色靶心、绿色秒表及已归档的 Duolingo 结算截图。两次带图参考生成结果含烘焙棋盘背景，alpha 检查失败，未用于项目。第三次独立生成得到真实 alpha，保留原图并仅等比缩小、编码为 256×256 WebP；没有代码去底或重绘。
+
+```text
+A single isolated glossy mint turquoise heart game UI icon. Disney-like painted animation illustration, softly sculpted plump rounded heart, broad pale mint painted upper-left highlight and darker teal thick lower-right bevel, front-facing with a small three-quarter tilt. One heart ONLY, no other objects, no writing, no outlines, no shadows on ground, no patterns. Square canvas with transparent background and ample 8% margins. It is a UI asset that MUST HAVE AN ALPHA CHANNEL, fully transparent outside the heart. Do not show a background or any texture or checkerboard. This must be a transparent PNG cutout. Preserve simple strong recognizable silhouette at 24 pixels, rich turquoise #13d6aa with mint high points and deep teal depth. Match a family of softly painted glossy gold completion badge and cyan bullseye icons. Output transparent alpha PNG.
+```
+
+选用原图、透明度、文件指纹见 assets.json 的 chances-heart。页面素材为 `poc/learning-path/assets/settlement/chances-heart.webp`，9,020 字节。生成源的透明像素保持透明，主体 alpha 接近不透明（缩小后最大 254）；没有人为更改生成 alpha。
+
 工具：Codex 内置 `image_gen.imagegen`，分别生成三枚透明图标。未使用 CLI 或手绘替代。
 
 用途：金色勾选用于“完成题目”，蓝色靶心用于“最佳连对”，绿色秒表用于“本次用时”。用户上传的 Duolingo 结算图是形状、精致程度和语义参考，沿用项目已指定的迪士尼绘画风格。

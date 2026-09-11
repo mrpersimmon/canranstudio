@@ -88,6 +88,7 @@ module.exports=function compileNoKeyboard(u,audioRequests=[]){
   u.grammar.delayedQuestions=u.grammar.delayedQuestions.map(old=>map(old,grammar(old,design.delayed[old.id.replace('G49-delayed-','')]),'delayed'));
   for(const c of u.challenges){c.title=c.title.replace('输入挑战','挑战');c.questions=c.questions.map((old,i)=>map(old,convert(old,i),'challenge'));}
   u.placement.questions=u.placement.questions.map((old,i)=>({...map(old,convert(old,i),'placement'),chapterId:old.chapterId}));u.placement.version=3;
+  u.placement.samplingPolicy=design.placementSamplingPolicy;
   // One listening sequence and one small audio/word group in each chapter with
   // suitable taught material. Replace a retrieval task instead of inflating it.
   for(const chapter of u.chapters){

@@ -23,9 +23,17 @@ async function checkPreview(port) {
   const rt = runtime.createRuntime({unit, adapter:store.createMemoryAdapter(), random:()=>2 / 4294967296});
   rt.dispatch({type:'open-placement', id:'friends'});
   rt.dispatch({type:'placement-start'});
-  const attempt = rt.snapshot().placementAttempt;
-  const question = placement.question(unit, attempt.questionIds[0]);
-  assert.equal(question.id, 'PL12-8:tap');
+  let attempt = rt.snapshot().placementAttempt;
+  // Reach the actual recorded listening sentence regardless of sampler order.
+  let question;
+  for(const id of attempt.questionIds){
+    const q=placement.question(unit,id);
+    if(q.listenRefs.length){question=q;break;}
+    for(const selected of q.answer)rt.dispatch({type:'exercise-select',questionId:q.id,id:selected});
+    rt.dispatch({type:'placement-check',attemptId:attempt.id,questionId:q.id});
+    rt.dispatch({type:'placement-next',attemptId:attempt.id,questionId:q.id});attempt=rt.snapshot().placementAttempt;
+  }
+  assert.ok(question,'Placement sample must contain a listening question');
   const result = rt.dispatch({type:'exercise-listen', questionId:question.id, id:question.listenRefs[0]});
   const effect = result.effects.find(effect => effect.type === 'play-audio');
   assert.ok(effect?.src, 'Placement must request a recording');

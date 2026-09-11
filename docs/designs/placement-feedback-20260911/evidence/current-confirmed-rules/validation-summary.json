@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "scope": "local technical verification",
+  "branch": "codex/placement-feedback-repair",
+  "baseCommit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
+  "policy": "skipped-first-v1",
+  "unitTests": {
+    "passed": 163,
+    "failed": 0,
+    "skipped": 0
+  },
+  "rangeCases": 2556,
+  "shortSkippedRanges": 193,
+  "currentBankReducedTests": 0,
+  "shortBankBrowser": {
+    "cases": 12,
+    "states": 44,
+    "status": "passed"
+  },
+  "pictureBrowser": {
+    "cases": 15,
+    "status": "passed"
+  },
+  "nativeAudio": {
+    "status": "passed",
+    "sounds": [
+      "correct",
+      "incorrect",
+      "complete",
+      "failed"
+    ],
+    "offlineSpeechReplay": true,
+    "restoredFeedbackSilent": true,
+    "unavailableDoesNotBlock": true
+  },
+  "fullBrowser": {
+    "status": "passed",
+    "fingerprint": "6027b6929bd7eb92c4d6ef41bdf1d4d99ce938d99b21854caaf6fcae1a80668f",
+    "finishedAt": "2026-09-11T13:41:30.799Z",
+    "states": 41456,
+    "byViewport": {
+      "1440,900": 10364,
+      "906,801": 10364,
+      "420,856": 10364,
+      "320,568": 10364
+    },
+    "violations": 0,
+    "mutations": 72,
+    "caught": 72
+  },
+  "coursePackage": {
+    "packageId": "NCE-STARTER-06@lesson1-144-v7.0-course-package-v1",
+    "entries": 76,
+    "totalBytes": 3672830,
+    "sourceManifestSha256": "be1448ced5ea04b18883a7cf732da9cf9325f65893131dbe88f7bca880449573"
+  },
+  "preview": {
+    "origin": "http://127.0.0.1:42878/",
+    "checkedResources": 13,
+    "audioRangeStatus": 206
+  },
+  "delivery": {
+    "committed": false,
+    "pushed": false,
+    "published": false
+  }
+}

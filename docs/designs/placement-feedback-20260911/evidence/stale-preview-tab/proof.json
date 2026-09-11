@@ -1,0 +1,99 @@
+{
+  "recordedAt": "2026-09-11T14:44:03.772Z",
+  "origin": "http://127.0.0.1:42878/",
+  "status": "passed",
+  "scope": "existing user tab version and read-only saved-result rendering",
+  "before": {
+    "visible": {
+      "images": [
+        "/poc/learning-path/assets/settlement/completed-check.webp",
+        "/poc/learning-path/assets/settlement/streak-target.webp",
+        "/poc/learning-path/assets/settlement/time-stopwatch.webp"
+      ],
+      "metrics": "答对题数19/20最佳连对×17本次用时1:41",
+      "scripts": [
+        "http://127.0.0.1:42878/core/course-package-installer.js?v=course-package-v1",
+        "http://127.0.0.1:42878/poc/learning-path/boot/course-entry-c06be7118842.js",
+        "http://127.0.0.1:42878/core/course-catalog-wire.js",
+        "http://127.0.0.1:42878/core/learning-store.js?v=course-v40-20260906",
+        "http://127.0.0.1:42878/core/learning-exercises.js?v=tap-v1",
+        "http://127.0.0.1:42878/core/learning-record-migration.js?v=tap-v1",
+        "http://127.0.0.1:42878/core/learning-challenges.js?v=challenge-v1",
+        "http://127.0.0.1:42878/core/learning-placement.js?v=placement-v1",
+        "http://127.0.0.1:42878/core/learning-path-runtime.js?v=course-v40-20260906",
+        "http://127.0.0.1:42878/core/learning-journey.js?v=journey-dark-v1",
+        "http://127.0.0.1:42878/core/learning-path-scene.js?v=course-v40-20260906",
+        "http://127.0.0.1:42878/poc/lesson-1-2/course/path.js?v=course-v40-20260906"
+      ],
+      "title": "跳级成功！"
+    },
+    "diagnosis": {
+      "loadedAt": "2026-09-11T06:16:43.299Z",
+      "manifest": "762bd78977ca3efe7534ec47468b18445961687e665159b70c44424c6b7efb45",
+      "pointer": {
+        "cacheName": "course-package:NCE-STARTER-06@lesson1-144-v7.0-course-package-v1-home:762bd78977ca3efe",
+        "manifestSha256": "762bd78977ca3efe7534ec47468b18445961687e665159b70c44424c6b7efb45"
+      },
+      "rendererUsesRemaining": false,
+      "serviceWorker": "http://127.0.0.1:42878/core/course-package-service-worker.js?v=course-package-v1",
+      "storage": [
+        {
+          "bytes": 152,
+          "key": "poc:learning-path:NCE-STARTER-06:lesson1-6-v4.0:draft",
+          "sha256": "23e18fd7a5448b6bf12091b55d2fc624698bf2fc03fab092db100bf87cd1c011"
+        },
+        {
+          "bytes": 9088,
+          "key": "poc:learning-path:NCE-STARTER-06:lesson1-6-v4.0",
+          "sha256": "332d7099d07e20ba65a5f04ef4e070c988c6977055aa88fa03f2f87c13ba9b99"
+        },
+        {
+          "bytes": 9091,
+          "key": "poc:learning-path:NCE-STARTER-06:lesson1-6-v4.0:recovery:backup",
+          "sha256": "97e7f62053961ae63ff7f4f1cde9831a20f9deeea20d98b2769126f3add9f83a"
+        }
+      ]
+    }
+  },
+  "after": {
+    "manifest": "d86b7d24696aa75afde778759f7f4daba732bb131aeab5e34dd3202f7f452bf2",
+    "pointer": "d86b7d24696aa75afde778759f7f4daba732bb131aeab5e34dd3202f7f452bf2",
+    "rendererUsesRemaining": true,
+    "storage": [
+      {
+        "bytes": 152,
+        "key": "poc:learning-path:NCE-STARTER-06:lesson1-6-v4.0:draft",
+        "sha256": "23e18fd7a5448b6bf12091b55d2fc624698bf2fc03fab092db100bf87cd1c011"
+      },
+      {
+        "bytes": 9088,
+        "key": "poc:learning-path:NCE-STARTER-06:lesson1-6-v4.0",
+        "sha256": "332d7099d07e20ba65a5f04ef4e070c988c6977055aa88fa03f2f87c13ba9b99"
+      },
+      {
+        "bytes": 9091,
+        "key": "poc:learning-path:NCE-STARTER-06:lesson1-6-v4.0:recovery:backup",
+        "sha256": "97e7f62053961ae63ff7f4f1cde9831a20f9deeea20d98b2769126f3add9f83a"
+      }
+    ]
+  },
+  "savedResult": {
+    "answerCount": 20,
+    "correct": 19,
+    "expectedRemaining": 4,
+    "heading": "跳级成功！",
+    "icons": [
+      "/poc/learning-path/assets/settlement/completed-check.webp",
+      "/poc/learning-path/assets/settlement/streak-target.webp",
+      "/poc/learning-path/assets/settlement/chances-heart.webp"
+    ],
+    "metrics": "答对题数19/20最佳连对×17剩余机会4",
+    "passed": true,
+    "readOnlyRender": true
+  },
+  "intervention": "one normal tab reload; no cache clearing or storage writes",
+  "persistedRecordsByteIdentical": true,
+  "finalVisibleScreen": "map",
+  "serverManifestSha256": "d86b7d24696aa75afde778759f7f4daba732bb131aeab5e34dd3202f7f452bf2",
+  "productionCodeChanged": false
+}
