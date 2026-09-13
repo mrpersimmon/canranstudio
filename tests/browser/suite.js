@@ -21,7 +21,8 @@
   }
   // Layout assertions wait for the student-facing preparation screen to finish.
   // Cold image readiness itself is tested at DOM insertion in test:loading.
-  async function settle(){await pause();await pause();const win=frame.contentWindow;await wait(()=>!win.document.querySelector('.lp-preparation'));await win.document.fonts.ready;await Promise.all(Array.from(win.document.images).map(img=>img.decode().catch(()=>{})));await Promise.all(win.document.getAnimations().filter(animation=>{const timing=animation.effect?.getTiming();return timing&&timing.iterations!==Infinity&&Number(timing.duration)*timing.iterations<=600;}).map(animation=>animation.finished.catch(()=>{})));}
+  // playing can replace the waiting controls; collect images after that render.
+  async function settle(){await pause();await pause();const win=frame.contentWindow;await wait(()=>!win.document.querySelector('.lp-preparation')&&win.fixture?.runtime.snapshot().audio?.status!=='loading');await win.document.fonts.ready;await Promise.all(Array.from(win.document.images).map(img=>img.decode().catch(()=>{})));await Promise.all(win.document.getAnimations().filter(animation=>{const timing=animation.effect?.getTiming();return timing&&timing.iterations!==Infinity&&Number(timing.duration)*timing.iterations<=600;}).map(animation=>animation.finished.catch(()=>{})));}
   async function reloadFrame() {
     const previous=frame.contentWindow.fixture,key=previous.runtime.storageKey;
     const saved=previous.adapter.load(key);
@@ -73,7 +74,7 @@
     await settle();
     if(['preview-node','journey-locate'].includes(action))await settleScroll();
   }
-  async function hear(){for(let i=0;view().audio?.status==='playing'&&i<30;i++){const f=frame.contentWindow.fixture,before=f.dispatchCount,audio=f.audio.at(-1);audio.finish();await wait(()=>f.dispatchCount>before);await settle();if(view().saveState)break;}}
+  async function hear(){await settle();for(let i=0;view().audio?.status==='playing'&&i<30;i++){const f=frame.contentWindow.fixture,before=f.completedDispatches['audio-ended']||0,audio=f.audio.at(-1);audio.finish();await wait(()=>(f.completedDispatches['audio-ended']||0)>before);await settle();if(view().saveState)break;}}
   async function check(name,activityId,expectedTheme){
     status.textContent='正在检查 '+frame.width+' × '+frame.height+' · '+name;
     if(['map','map-return','reload-map'].includes(name)&&view().screen!=='map')throw Error('Expected map at '+name);
@@ -113,15 +114,16 @@
       }else if(a.kind==='teach'){
         // Exercise a real burst through the production controller, without
         // waiting for any media ending or render between clicks.
-        const f=frame.contentWindow.fixture,before=f.dispatchCount;
+        // Preparation/playing notifications are not completed word taps.
+        const f=frame.contentWindow.fixture,before=f.completedDispatches['word-play']||0;
         for(const item of a.items) query('word-play',item.sourceRef).click();
         query('word-play',a.items[0].sourceRef).click();
-        await wait(()=>f.dispatchCount>=before+a.items.length+1);await settle();
+        await wait(()=>(f.completedDispatches['word-play']||0)>=before+a.items.length+1);await settle();
         if(view().audio.sequence[0].ref!==a.items[0].sourceRef||view().wordQueue.length!==a.items.length-1)throw Error('Rapid taps cancelled or duplicated requested words: '+a.id);
         if(frame.contentDocument.querySelectorAll('.lp-vocabulary-card.is-queued').length!==a.items.length-1)throw Error('Queued tap has no visible feedback: '+a.id);
         await check('words-queued-'+a.id,a.id);
         for(let i=0;i<a.items.length;i++){
-          const beforeEnd=f.dispatchCount;f.audio.at(-1).finish();await wait(()=>f.dispatchCount>beforeEnd);await settle();
+          const beforeEnd=f.completedDispatches['audio-ended']||0;f.audio.at(-1).finish();await wait(()=>(f.completedDispatches['audio-ended']||0)>beforeEnd);await settle();
           const count=i+1,shown=frame.contentDocument.querySelector('.lp-word-progress').textContent.trim();
           if(view().heardWords.length!==count||view().record.teachingProgress[a.id].length!==count||shown!==count+' / '+a.items.length)throw Error('Word ending, saved count and visible count differ: '+a.id);
         }
@@ -157,10 +159,10 @@
     }
   }
   async function returnThroughPrimary(name) {
-    const before=JSON.stringify(view().record),f=frame.contentWindow.fixture,dispatches=f.dispatchCount;
+    const before=JSON.stringify(view().record),f=frame.contentWindow.fixture,dispatches=f.completedDispatches.map||0;
     const primary=frame.contentDocument.querySelector('.lp-footer .lp-primary');
     if(!primary||primary.disabled||primary.dataset.action!=='map')throw Error('Completion primary must return to the map');
-    primary.click();await wait(()=>f.dispatchCount>dispatches);await settle();
+    primary.click();await wait(()=>(f.completedDispatches.map||0)>dispatches);await settle();
     const state=view();
     if(state.screen!=='map'||state.activityId!==null||state.audio!==null||JSON.stringify(state.record)!==before)throw Error('Completion advanced, played audio or changed progress after returning: '+name);
     await check(name);
