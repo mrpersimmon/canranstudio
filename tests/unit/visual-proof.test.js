@@ -59,7 +59,7 @@ test('browser proof is required and expires when any public asset or browser che
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'canran-visual-proof-'));
   const prepared={sources:new Map([['path.css',Buffer.from('original CSS')]])};
   try{
-    for(const file of ['tests/browser/check.js','scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/check-placement-feedback.js','scripts/check-placement-pool-browser.js','scripts/verify-course-media.js','package.json','package-lock.json']){
+    for(const file of ['tests/browser/check.js','scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-browser-fixture-ready.js','scripts/check-answer-feedback.js','scripts/check-placement-feedback.js','scripts/check-placement-pool-browser.js','scripts/verify-course-media.js','package.json','package-lock.json']){
       fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),'fixture');
     }
     assert.throws(()=>assertVisualProof(prepared,root),/No browser readability proof/);
@@ -67,6 +67,9 @@ test('browser proof is required and expires when any public asset or browser che
     fs.mkdirSync(path.join(root,'test-results'));fs.writeFileSync(path.join(root,PROOF),JSON.stringify(proof));
     assertVisualProof(prepared,root);
     assert.throws(()=>assertVisualProof({sources:new Map([['path.css',Buffer.from('changed CSS')]])},root),/stale/);
+    fs.appendFileSync(path.join(root,'scripts/check-browser-fixture-ready.js'),'changed');
+    assert.throws(()=>assertVisualProof(prepared,root),/stale/);
+    fs.writeFileSync(path.join(root,'scripts/check-browser-fixture-ready.js'),'fixture');
     fs.appendFileSync(path.join(root,'scripts/check-answer-feedback.js'),'changed');
     assert.throws(()=>assertVisualProof(prepared,root),/stale/);
     fs.writeFileSync(path.join(root,'scripts/check-answer-feedback.js'),'fixture');
