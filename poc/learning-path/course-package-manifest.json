@@ -5,7 +5,7 @@
   "revision": "lesson1-144-v7.0",
   "scopePath": "/poc/learning-path/",
   "mediaIndexUrl": "/poc/learning-path/course-package/media-index.json",
-  "totalBytes": 3672830,
+  "totalBytes": 3688136,
   "entries": [
     {
       "url": "/assets/fonts/course-package/baloo-2-latin-500-b533661a076cc6e6.woff2",
@@ -92,16 +92,22 @@
       "sha256": "6b6ec2df1747fdc754dcbeb9a6d25d0782c6a7b33afa6d3adcd3159dff49f5c9"
     },
     {
+      "url": "/core/learning-media.js",
+      "kind": "script",
+      "bytes": 7623,
+      "sha256": "b036c954f69b08a5baf3d8195be20c89238473aaf1014f369165c99fee96a070"
+    },
+    {
       "url": "/core/learning-path-runtime.js",
       "kind": "script",
-      "bytes": 72438,
-      "sha256": "9ca2287694572cfb78bbe92bcd796551cc690ec51894ae5422449c0a5d305a47"
+      "bytes": 73133,
+      "sha256": "2e24b3fb9f9955c2f188c51e7aeb2656ffdf2a1b0192fc47956738709330e3ef"
     },
     {
       "url": "/core/learning-path-scene.js",
       "kind": "script",
-      "bytes": 49407,
-      "sha256": "014a978f9cd94d4b4400b08795639f2c7dbe77ce303be83b92ebde7ebc370000"
+      "bytes": 50730,
+      "sha256": "bf159662bd97fd4b0f831f346ecd8f184d4258d2a942bd876b2cbe7ab18b4969"
     },
     {
       "url": "/core/learning-placement.js",
@@ -454,14 +460,14 @@
     {
       "url": "/poc/lesson-1-2/course/path.css",
       "kind": "style",
-      "bytes": 34071,
-      "sha256": "05a802d46b34865f5d0cb74b16670f962d84f2e188d42926f16e14c2b6a99a44"
+      "bytes": 34292,
+      "sha256": "ed263931e1363e8e5d4814670fee2e700a4e1d462b611cabdd9ed93c2670cc3c"
     },
     {
       "url": "/poc/lesson-1-2/course/path.js",
       "kind": "script",
-      "bytes": 15787,
-      "sha256": "54e559501a910ce5b966b8aa7cd36cd0a9f24af74575329912b668947aaa1959"
+      "bytes": 21231,
+      "sha256": "5f02933ac4939488250c5a0c446eb3feca3fa8be913270a46518d7ef79ca808b"
     }
   ]
 }

@@ -15,7 +15,7 @@ async function main(){
     page.on('pageerror',error=>report.errors.push(String(error)));
     await page.addInitScript(()=>{
       window.__nativeAudio=[];const NativeAudio=window.Audio;
-      window.Audio=function(...args){const audio=new NativeAudio(...args),event={src:args[0]||'',ended:false,errors:0};window.__nativeAudio.push(event);audio.addEventListener('ended',()=>{event.ended=true;event.duration=audio.duration;});audio.addEventListener('error',()=>event.errors++);return audio;};window.Audio.prototype=NativeAudio.prototype;
+      window.Audio=function(...args){const audio=new NativeAudio(...args),event={src:new URL(args[0],location.href).pathname,ended:false,endCount:0,errors:0};window.__nativeAudio.push(event);audio.addEventListener('ended',()=>{event.ended=true;event.endCount++;event.duration=audio.duration;});audio.addEventListener('error',()=>event.errors++);return audio;};window.Audio.prototype=NativeAudio.prototype;
     });
     await page.goto(url);await page.locator('.journey-app').waitFor();
     assert.equal(await page.locator('.journey-node').count(),unit.nodes.length);
@@ -43,7 +43,7 @@ async function main(){
     await context.setOffline(true);
     const lastRef=sampleRefs.at(-1);
     await page.locator('[data-action="reference-play"][data-id="'+lastRef+'"]').click();
-    await page.waitForFunction(src=>window.__nativeAudio.filter(a=>a.src===src&&a.ended).length===2,unit.sources[lastRef].audioSrc,{timeout:15000});
+    await page.waitForFunction(src=>window.__nativeAudio.filter(a=>a.src===src).reduce((total,a)=>total+a.endCount,0)===2,unit.sources[lastRef].audioSrc,{timeout:15000});
     report.offlineReplay=true;await context.close();
     const old=setup({unit:baseline});for(const node of baseline.nodes)old.finish(node.id);
     const oldRecord=old.adapter.load(old.rt.storageKey);

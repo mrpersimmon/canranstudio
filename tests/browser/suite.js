@@ -19,7 +19,9 @@
     if(win.innerWidth-win.document.documentElement.clientWidth<1)throw Error('Reserved scrollbar fixture is inactive; do not hide Chromium scrollbars');
     return win;
   }
-  async function settle(){await pause();await pause();const win=frame.contentWindow;await win.document.fonts.ready;await Promise.all(Array.from(win.document.images).map(img=>img.decode().catch(()=>{})));await Promise.all(win.document.getAnimations().filter(animation=>{const timing=animation.effect?.getTiming();return timing&&timing.iterations!==Infinity&&Number(timing.duration)*timing.iterations<=600;}).map(animation=>animation.finished.catch(()=>{})));}
+  // Layout assertions wait for the student-facing preparation screen to finish.
+  // Cold image readiness itself is tested at DOM insertion in test:loading.
+  async function settle(){await pause();await pause();const win=frame.contentWindow;await wait(()=>!win.document.querySelector('.lp-preparation'));await win.document.fonts.ready;await Promise.all(Array.from(win.document.images).map(img=>img.decode().catch(()=>{})));await Promise.all(win.document.getAnimations().filter(animation=>{const timing=animation.effect?.getTiming();return timing&&timing.iterations!==Infinity&&Number(timing.duration)*timing.iterations<=600;}).map(animation=>animation.finished.catch(()=>{})));}
   async function reloadFrame() {
     const previous=frame.contentWindow.fixture,key=previous.runtime.storageKey;
     const saved=previous.adapter.load(key);

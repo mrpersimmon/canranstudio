@@ -12,7 +12,7 @@ function setup(options = {}) {
   const send = event => rt.dispatch(event).view, view = rt.snapshot;
   function hear() {
     let guard = 0;
-    while (view().audio?.status === 'playing' && guard++ < 20) {
+    while (['loading','playing'].includes(view().audio?.status) && guard++ < 20) {
       const a = view().audio; send({ type: 'audio-ended', requestId: a.requestId, index: a.index });
     }
   }

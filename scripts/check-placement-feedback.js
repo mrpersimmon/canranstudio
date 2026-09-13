@@ -16,7 +16,7 @@ async function main(){
       const click=async(action,id)=>{const n=await page.evaluate(()=>fixture.dispatchCount);await page.locator('[data-action="'+action+'"]'+(id?'[data-id="'+id+'"]':'')).first().click();await page.waitForFunction(n=>fixture.dispatchCount>n,n);};
       await click('open-placement','friends');await click('placement-start');
       const q=await page.evaluate(()=>{const v=fixture.runtime.snapshot();return fixture.unit.placement.questions.find(q=>q.id===v.placementAttempt.questionIds[v.placementIndex]);});
-      await click('exercise-listen',q.listenRefs[0]);await page.evaluate(()=>fixture.audio.at(-1).finish());await page.waitForFunction(()=>fixture.runtime.snapshot().heardRefs.length>0);
+      await click('exercise-listen',q.listenRefs[0]);await page.waitForFunction(()=>fixture.audio.at(-1)?.playing);await page.evaluate(()=>fixture.audio.at(-1).finish());await page.waitForFunction(()=>fixture.runtime.snapshot().heardRefs.length>0);
       await click('exercise-select',q.answer[0]);await page.locator('[data-action="placement-check"]').scrollIntoViewIfNeeded();
       await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));});
       const geometry=()=>page.evaluate(()=>({scrollY,heard:fixture.runtime.snapshot().heardRefs,images:[...document.querySelectorAll('.lp-picture-options .lp-option-image')].map(i=>{const r=i.getBoundingClientRect();return {id:i.parentElement.dataset.id,src:i.getAttribute('src'),x:r.x,y:r.y,width:r.width,height:r.height};})}));

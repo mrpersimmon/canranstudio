@@ -1,0 +1,327 @@
+{
+  "status": "implemented-and-verified-locally",
+  "origin": "https://www.canranstudio.cn/",
+  "release": {
+    "releaseCommit": "bab4d27cfc4308215357c00cb19fcbb65f6894c1",
+    "checks": [
+      {
+        "path": "/",
+        "matchesReleasedBuild": true
+      },
+      {
+        "path": "poc/learning-path/boot/course-entry-c06be7118842.js",
+        "matchesReleasedBuild": true
+      },
+      {
+        "path": "core/course-package-service-worker.js",
+        "matchesReleasedBuild": true
+      },
+      {
+        "path": "poc/learning-path/course-package-manifest.json",
+        "matchesReleasedBuild": true
+      }
+    ]
+  },
+  "conditions": {
+    "date": "2026-09-12",
+    "browser": "isolated Playwright Chromium",
+    "viewport": {
+      "width": 420,
+      "height": 856
+    },
+    "network": "natural connection, no throttling",
+    "sampleLimit": "one session with pauses between interactions; not percentiles or a performance guarantee",
+    "mediaStartBoundary": "native playing event; audible waveform onset not measured"
+  },
+  "startup": {
+    "cold": {
+      "phase": "entering",
+      "totalBytes": 3672830,
+      "packageReadyMs": 12057,
+      "courseEntryMs": 574,
+      "warm": false
+    },
+    "warm": {
+      "warm": true,
+      "packageReadyMs": 631,
+      "courseEntryMs": 259,
+      "totalBytes": 3672830
+    },
+    "coldRouteAtMs": 13984.100000023842,
+    "warmRouteAtMs": 1145.5
+  },
+  "image": {
+    "src": "/poc/lesson-1-2/course/assets/v3/handbag.webp",
+    "insertedAt": 137355.60000002384,
+    "loadedAtInsertion": false,
+    "loadedAt": 140146.5,
+    "width": 420,
+    "nodeToLoadMs": 2790.9
+  },
+  "firstAudio": {
+    "source": "https://www.canranstudio.cn/poc/lesson-1-2/course/audio/l01-d02.mp3",
+    "clickLabel": "继续",
+    "clickAtMs": 269576.5,
+    "playCallAtMs": 269631.6999999881,
+    "readyStateAtCall": 0,
+    "playingAtMs": 270738.60000002384,
+    "clickToPlayingMs": 1162.1,
+    "events": [
+      {
+        "type": "waiting",
+        "at": 269658.60000002384,
+        "currentTime": 0,
+        "readyState": 0
+      },
+      {
+        "type": "loadstart",
+        "at": 269659,
+        "currentTime": 0,
+        "readyState": 0
+      },
+      {
+        "type": "loadedmetadata",
+        "at": 270727.60000002384,
+        "currentTime": 0,
+        "readyState": 1
+      },
+      {
+        "type": "loadeddata",
+        "at": 270738.60000002384,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "canplay",
+        "at": 270738.60000002384,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "playing",
+        "at": 270738.60000002384,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "ended",
+        "at": 271698.10000002384,
+        "currentTime": 0.912,
+        "readyState": 4
+      }
+    ]
+  },
+  "repeatedAudio": {
+    "source": "https://www.canranstudio.cn/poc/lesson-1-2/course/audio/l01-d02.mp3",
+    "clickLabel": "重听",
+    "clickAtMs": 364706.8000000119,
+    "playCallAtMs": 364724.5,
+    "readyStateAtCall": 0,
+    "playingAtMs": 364728.3000000119,
+    "clickToPlayingMs": 21.5,
+    "events": [
+      {
+        "type": "waiting",
+        "at": 364725.3000000119,
+        "currentTime": 0,
+        "readyState": 0
+      },
+      {
+        "type": "loadstart",
+        "at": 364725.3000000119,
+        "currentTime": 0,
+        "readyState": 0
+      },
+      {
+        "type": "loadedmetadata",
+        "at": 364727.39999997616,
+        "currentTime": 0,
+        "readyState": 1
+      },
+      {
+        "type": "loadeddata",
+        "at": 364728.3000000119,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "canplay",
+        "at": 364728.3000000119,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "playing",
+        "at": 364728.3000000119,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "ended",
+        "at": 365650.8000000119,
+        "currentTime": 0.912,
+        "readyState": 4
+      }
+    ]
+  },
+  "nextAudio": {
+    "source": "https://www.canranstudio.cn/poc/lesson-1-2/course/audio/l01-d03.mp3",
+    "clickLabel": "继续",
+    "clickAtMs": 450905.10000002384,
+    "playCallAtMs": 450930.3000000119,
+    "readyStateAtCall": 0,
+    "playingAtMs": 452277.6999999881,
+    "clickToPlayingMs": 1372.6,
+    "events": [
+      {
+        "type": "waiting",
+        "at": 450931.39999997616,
+        "currentTime": 0,
+        "readyState": 0
+      },
+      {
+        "type": "loadstart",
+        "at": 450931.5,
+        "currentTime": 0,
+        "readyState": 0
+      },
+      {
+        "type": "loadedmetadata",
+        "at": 452276,
+        "currentTime": 0,
+        "readyState": 1
+      },
+      {
+        "type": "loadeddata",
+        "at": 452277.6999999881,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "canplay",
+        "at": 452277.6999999881,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "playing",
+        "at": 452277.6999999881,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      {
+        "type": "ended",
+        "at": 454225.60000002384,
+        "currentTime": 1.92,
+        "readyState": 4
+      }
+    ]
+  },
+  "nextAudioNetwork": [
+    {
+      "url": "https://www.canranstudio.cn/poc/lesson-1-2/course/audio/l01-d03.mp3",
+      "fromWorker": true,
+      "resourceType": "fetch",
+      "timing": {
+        "startTime": 1789222967923.306,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": 0.963,
+        "secureConnectionStart": 1.698,
+        "connectEnd": 876.793,
+        "requestStart": 876.843,
+        "responseStart": 1325.958,
+        "responseEnd": 1333.871
+      },
+      "status": 200,
+      "responseFromWorker": false,
+      "headers": {
+        "cacheControl": "no-cache",
+        "contentLength": "23373"
+      }
+    },
+    {
+      "url": "https://www.canranstudio.cn/poc/lesson-1-2/course/audio/l01-d03.mp3",
+      "fromWorker": false,
+      "resourceType": "media",
+      "timing": {
+        "startTime": 1789222967915.886,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.529,
+        "responseStart": 1343.052,
+        "responseEnd": 1343.489
+      },
+      "status": 206,
+      "responseFromWorker": true,
+      "headers": {
+        "cacheControl": "no-cache",
+        "contentLength": "23373"
+      }
+    }
+  ],
+  "symptomSignal": {
+    "imageLoadOverOneSecond": true,
+    "firstPlaybackOverOneSecond": true,
+    "replayUnderOneHundredMs": true,
+    "thresholdMeaning": "diagnostic classification only; product acceptance targets are undecided"
+  },
+  "productChanges": true,
+  "decisionQ1": "confirmed-per-level-preparation-and-next-level-prefetch",
+  "decisionQ2": "confirmed-required-media-blocks-optional-media-degrades",
+  "decisionQ3": "confirmed-mobile-and-tablet-first-desktop-compatible",
+  "designStatus": "decisions-confirmed",
+  "baselineStatus": "diagnosed-not-fixed",
+  "implementationReport": "implementation-report.md",
+  "validation": {
+    "unit": {
+      "passed": 163,
+      "failed": 0
+    },
+    "loadingGroups": 6,
+    "nativeRecordings": 42,
+    "feedbackSounds": 4,
+    "viewportWidths": [
+      390,
+      820,
+      1440
+    ],
+    "productionPublished": false,
+    "physicalDeviceAcceptance": false,
+    "sourceManifestSha256": "c590c8d8da707b653eb3ea9b5dd3687ae647b37ec070986338ab9e05fc47c634",
+    "playback": {
+      "environment": "loopback HTTP with production installer and service worker",
+      "browser": "153.0.8010.12",
+      "stats": {
+        "first": {
+          "n": 3,
+          "minMs": 17.100000023841858,
+          "maxMs": 18.80000001192093,
+          "failures": 0
+        },
+        "next": {
+          "n": 3,
+          "minMs": 19.5,
+          "maxMs": 22.799999952316284,
+          "failures": 0
+        },
+        "replay": {
+          "n": 3,
+          "minMs": 15.5,
+          "maxMs": 17.899999976158142,
+          "failures": 0
+        },
+        "offline-reload": {
+          "n": 3,
+          "minMs": 16.900000035762787,
+          "maxMs": 19.69999998807907,
+          "failures": 0
+        }
+      }
+    },
+    "finishedLocalDate": "2026-09-13"
+  }
+}

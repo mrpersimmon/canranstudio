@@ -19,6 +19,7 @@ async function main(){
         await page.waitForFunction(({action,before})=>(fixture.completedDispatches[action]||0)>before,{action,before});
       };
       const check=async state=>{
+        await page.locator('.lp-preparation').waitFor({state:'hidden'});
         await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));await Promise.all(document.getAnimations().filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{})));});
         const result=await page.evaluate(name=>auditReadability(window,{name,expectedTheme:'dark'}),mode+'-'+state);
         report.checks.push(result);assert.deepEqual(result.errors,[],width+' '+mode+' '+state);

@@ -1,4 +1,10 @@
-# 2026-09-11 后续确认 · 当前本地验收
+# 2026-09-13 加载机制更新
+
+加载准备的实施、真实媒体和专项验收见[本轮报告](docs/designs/loading-mechanism-20260912/implementation-report.md)。新版本的完整发布矩阵必须重新生成，不能沿用下面的历史指纹；发布构建仍校验当前源码、媒体和页面证据。官网发布与线上验证结果独立保存在 `output/playwright/loading-release/publication.json`。
+
+以下保留先前版本的实际验收记录。
+
+# 2026-09-11 后续确认 · 历史本地验收
 
 final result: passed
 

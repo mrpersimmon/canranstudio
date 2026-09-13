@@ -10,7 +10,7 @@ const history=require('../../content/history/lesson1-144-v6.0.json');
 const unit=catalog.getCourse(), clone=x=>JSON.parse(JSON.stringify(x));
 const key=`poc:learning-path:${unit.unitId}:${unit.experienceRevision}`;
 const oldUnit=()=>({...clone(unit),...clone(unit.keyboardHistory),contractVersion:undefined,history:undefined,placement:clone(history.placement),answerPolicyVersion:1});
-function tap(rt,q,correct=true){const h={send:e=>rt.dispatch(e).view,view:()=>rt.snapshot(),hear(){while(rt.snapshot().audio?.status==='playing'){const a=rt.snapshot().audio;rt.dispatch({type:'audio-ended',requestId:a.requestId,index:a.index});}}};require('./support/tap-exercise').answer(h,q,correct);}
+function tap(rt,q,correct=true){const h={send:e=>rt.dispatch(e).view,view:()=>rt.snapshot(),hear(){while(['loading','playing'].includes(rt.snapshot().audio?.status)){const a=rt.snapshot().audio;rt.dispatch({type:'audio-ended',requestId:a.requestId,index:a.index});}}};require('./support/tap-exercise').answer(h,q,correct);}
 function oldPlacement(){const old=oldUnit(), record=runtime.emptyRecord(old);const attempt=placement.createAttempt(old,record,'lesson-23-24',8,'2026-09-09T00:00:00Z');return {old,record,attempt};}
 test('an active legacy placement retains its sample when future questions are appended',()=>{
  const {record,attempt}=oldPlacement();record.placement={attempts:{[attempt.targetId]:attempt}};

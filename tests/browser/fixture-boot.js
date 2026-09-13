@@ -18,8 +18,8 @@
   window.addEventListener('error', event => control.errors.push(event.message));
   window.addEventListener('unhandledrejection', event => control.errors.push(String(event.reason)));
   class TestAudio extends EventTarget {
-    constructor(src) { super(); this.src = src; (src.includes('/assets/feedback/')?control.feedbackAudio:control.audio).push(this); }
-    play() { this.playing = true; return Promise.resolve(); }
+    constructor(src) { super(); this.src = src; this.readyState = 4; }
+    play() { this.playing = true; const list=this.src.includes('/assets/feedback/')?control.feedbackAudio:control.audio;list.push(this);this.dispatchEvent(new Event('playing')); return Promise.resolve(); }
     pause() { this.playing = false; }
     removeAttribute() { this.src = null; }
     load() {}

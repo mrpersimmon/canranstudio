@@ -43,7 +43,7 @@ async function main(){
       await click('open-placement','friends');await click('placement-start');
       const q=await page.evaluate(()=>{const v=fixture.runtime.snapshot();return fixture.unit.placement.questions.find(q=>q.id===v.placementAttempt.questionIds[v.placementIndex]);});
       await click('exercise-listen',q.listenRefs[0]);
-      await page.evaluate(()=>fixture.audio.at(-1).finish());
+      await page.waitForFunction(()=>fixture.audio.at(-1)?.playing);await page.evaluate(()=>fixture.audio.at(-1).finish());
       await page.waitForFunction(()=>fixture.runtime.snapshot().audio.status==='ended');
       await click('exercise-select',q.answer[0]);
       await page.locator('[data-action="placement-check"]').scrollIntoViewIfNeeded();

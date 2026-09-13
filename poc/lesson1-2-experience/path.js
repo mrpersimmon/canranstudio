@@ -9,7 +9,11 @@
   try { storage = global.localStorage; } catch { storage = { getItem() { throw new Error('storage unavailable'); } }; }
   const runtime = core.learningPathRuntime.createRuntime({ unit, deferRead:true, adapter: core.learningStore.createLocalStorageAdapter(storage) });
   const renderer = core.learningPathScene.createRenderer(unit);
-  let media = null, mediaToken = 0, feedbackMedia = null, lastView = null, work = Promise.resolve();
+  const preparation = core.learningMedia.createPreparation(unit);
+  let preparationToken = 0, preparationAbort = null, preparationTimer = null, pendingPresentation = null, preparedGroup = null, preparedStep = null;
+  let backgroundJob = null, backgroundTimer = null, backgroundRetryAt = 0;
+  const preparedAhead = new Set();
+  let media = null, mediaToken = 0, mediaListeners = null, feedbackMedia = null, lastView = null, work = Promise.resolve();
   let journeyUI = { tab: 'path', selectedNodeId: null };
   let modalReturnFocus;
   function revealCurrentNode(view) {
@@ -22,7 +26,7 @@
     // navigation bar. Visibility is geometry, not a completed-count threshold.
     if(view.completedCount>0||bounds.bottom>bottom-16||bounds.top<60)element.scrollIntoView({block:'center',behavior:'instant'});
   }
-  function stop() { mediaToken++; if (media) { media.pause(); media.removeAttribute('src'); media.load(); media = null; } }
+  function stop() { mediaToken++; mediaListeners?.abort(); if (media) { media.pause(); media = null; } }
   // Reconcile a stable activity in place: selecting a word or receiving an
   // audio event must not recreate its controls and restart unrelated images.
   function reconcile(current, next) {
@@ -52,7 +56,7 @@
     const historyScroll = previousHistory?.scrollTop || 0;
     const historyAtBottom = previousHistory && previousHistory.scrollHeight - historyScroll - previousHistory.clientHeight < 8;
     const html=renderer.render({ ...view, journeyUI });
-    if(!changed && root.firstElementChild && ['activity','challenge','placement'].includes(view.screen) && !previousModal && !view.saveState){
+    if(!changed && root.firstElementChild && ['activity','challenge','placement','preparing'].includes(view.screen) && !previousModal && !view.saveState){
       const template=global.document.createElement('template');template.innerHTML=html;
       if(root.firstElementChild)reconcile(root.firstElementChild,template.content.firstElementChild);else root.innerHTML=html;
     }else root.innerHTML=html;
@@ -123,25 +127,37 @@
     if (effect.type !== 'play-audio') return;
     stop();
     const token = mediaToken;
-    const audio = new global.Audio(effect.src); media = audio;
+    const audio = preparation.takeAudio(effect.src); media = audio;
     const event = type => ({ type, requestId: effect.requestId, index: effect.index });
     audio.preload = 'auto';
     // Play the original recording at its native speed.
     audio.defaultPlaybackRate = 1;
     audio.playbackRate = 1;
-    audio.addEventListener('ended', () => { if (token === mediaToken) send(event('audio-ended')); }, { once: true });
-    audio.addEventListener('error', () => { if (token === mediaToken) send({ ...event('audio-error'), blocked: false }); }, { once: true });
+    mediaListeners = new global.AbortController();
+    const options = { signal: mediaListeners.signal };
+    audio.addEventListener('playing', () => { if (token === mediaToken) send(event('audio-playing')); }, options);
+    audio.addEventListener('waiting', () => { if (token === mediaToken) send(event('audio-waiting')); }, options);
+    audio.addEventListener('ended', () => { if (token === mediaToken) send(event('audio-ended')); }, { ...options, once: true });
+    audio.addEventListener('error', () => { if (token === mediaToken) send({ ...event('audio-error'), blocked: false }); }, { ...options, once: true });
+    if (global.document.hidden) { send({type:'pause'}); return; }
     Promise.resolve(audio.play()).catch(error => { if (token === mediaToken) send({ ...event('audio-error'), blocked: error.name === 'NotAllowedError' }); });
   }
   function send(event) {
     if (event.type === 'map') journeyUI = { tab: 'path', selectedNodeId: null };
     if (['open-node', 'references', 'review', 'open-challenge','open-placement','reset-confirm'].includes(event.type)) journeyUI.selectedNodeId = null;
     const run = () => {
+      if (event.type === 'preparation-ready') {
+        if (event.token !== preparationToken || !pendingPresentation) return;
+        const effects = pendingPresentation.effects;
+        const result = runtime.dispatch({type:'media-preparation',pending:false},{light:true});
+        pendingPresentation = null; preparedGroup = event.group; preparedStep = event.step;
+        render(result.view); effects.forEach(playEffect); prepareAhead(result.view);
+        return;
+      }
       const result = runtime.dispatch(event,{light:true});
       // Clock-only updates preserve focus and the one-shot celebration.
-      if(event.type==='session-visibility'&&!result.view.saveState)lastView=result.view;
-      else render(result.view);
-      result.effects.forEach(playEffect);
+      if(event.type==='session-visibility'&&!result.view.saveState) { if (!pendingPresentation) lastView=result.view; if(global.document.hidden)stopBackground(); }
+      else present(result);
     };
     // Serialize callbacks and clicks, then use the same lock across tabs before
     // the store's revision check and verified write.
@@ -152,6 +168,64 @@
       render({ screen: 'blocked' });
     });
     return work;
+  }
+  function present(result) {
+    const token = ++preparationToken;
+    preparationAbort?.abort();
+    global.clearTimeout(preparationTimer);
+    pendingPresentation = null;
+    const group = result.view.mode === 'review' && ['activity','challenge'].includes(result.view.screen) ? 'review:' + result.view.mediaActivityIds.join(',')
+      : result.view.screen === 'references' && result.view.referenceGroupId ? 'reference:' + result.view.referenceGroupId
+      : result.view.screen === 'placement' ? result.view.placementAttempt.id
+      : result.view.screen === 'challenge' ? 'challenge:' + result.view.challengeId
+      : result.view.screen === 'activity' ? result.view.mode + ':' + result.view.nodeId : null;
+    const step = [group,result.view.activityId,result.view.storyIndex,result.view.challengeIndex,result.view.placementIndex].join(':');
+    const wholeLevel = group && group !== preparedGroup;
+    if (wholeLevel || group && step !== preparedStep && !preparation.ready(result.view)) {
+      stopBackground();
+      stop(); pendingPresentation = result;
+      runtime.dispatch({type:'media-preparation',pending:true},{light:true});
+      preparationAbort = new global.AbortController();
+      const progressChanged = progress => {
+        if (token !== preparationToken || preparationAbort.signal.aborted) return;
+        render({ screen: 'preparing', preparation: progress });
+        global.clearTimeout(preparationTimer);
+        preparationTimer = global.setTimeout(() => {
+          if (token === preparationToken) render({ screen: 'preparing', preparation: { ...progress, slow: true } });
+        }, 8000);
+      };
+      const task = wholeLevel ? preparation.prepare(result.view, progressChanged, preparationAbort.signal)
+        : (progressChanged({completed:0,total:1}), preparation.warm(result.view));
+      task.then(() => {
+        if (token !== preparationToken) return;
+        global.clearTimeout(preparationTimer);
+        send({type:'preparation-ready',token,group,step});
+      }).catch(() => {
+        if (token === preparationToken) { global.clearTimeout(preparationTimer); preparationAbort.abort(); render({ screen: 'preparing', preparation: { failed: true } }); }
+      });
+    } else { runtime.dispatch({type:'media-preparation',pending:false},{light:true}); preparedGroup = group; preparedStep = step; render(result.view); result.effects.forEach(playEffect); }
+    if (group && group === preparedGroup) void preparation.warm(result.view).catch(() => {});
+    if (!group) preparation.clear();
+    if (!pendingPresentation) prepareAhead(result.view);
+  }
+  function stopBackground() {
+    global.clearTimeout(backgroundTimer); backgroundTimer = null;
+    backgroundJob?.controller.abort(); backgroundJob = null;
+  }
+  function prepareAhead(view) {
+    const index = unit.nodes.findIndex(node => node.id === view.nodeId), next = unit.nodes[index + 1];
+    if (view.screen !== 'activity' || view.mode === 'review' || !next || index < 0 || global.document.hidden || ['loading','playing'].includes(view.audio?.status)) { stopBackground(); return; }
+    if (preparedAhead.has(next.id) || backgroundJob?.id === next.id || backgroundTimer || Date.now() < backgroundRetryAt) return;
+    stopBackground();
+    backgroundTimer = global.setTimeout(() => {
+      backgroundTimer = null;
+      const job = { id: next.id, controller: new global.AbortController() }; backgroundJob = job;
+      // File-only, one request at a time. Playing or leaving this level cancels
+      // remaining work; the verified bytes already cached remain reusable.
+      preparation.prepare({ screen:'activity', nodeId:next.id }, () => {}, job.controller.signal, { background:true }).then(() => {
+        if (!job.controller.signal.aborted) preparedAhead.add(next.id);
+      }).catch(() => { if (!job.controller.signal.aborted) backgroundRetryAt = Date.now() + 30000; }).finally(() => { if (backgroundJob === job) backgroundJob = null; });
+    }, 200);
   }
   root.addEventListener('click', event => {
     const lessonLink=event.target.closest('.journey-lesson-index a[href^="#chapter-"]');
@@ -168,6 +242,7 @@
     }
     const button = event.target.closest('button[data-action]');
     if (!button || button.disabled) return;
+    if (button.dataset.action === 'prepare-retry' && pendingPresentation) { present(pendingPresentation); return; }
     if (button.dataset.action === 'reset-request') modalReturnFocus = {action:button.dataset.action,id:button.dataset.id};
     if (unit.journey && (button.dataset.action.startsWith('journey-') || button.dataset.action === 'preview-node')) {
       const action = button.dataset.action, id = button.dataset.id;
@@ -224,7 +299,7 @@
     if (event.shiftKey && global.document.activeElement === first) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && global.document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
-  global.addEventListener('pagehide', () => {stop();feedbackMedia?.pause();feedbackMedia=null;});
+  global.addEventListener('pagehide', () => {stop();stopBackground();preparationAbort?.abort();global.clearTimeout(preparationTimer);feedbackMedia?.pause();feedbackMedia=null;});
   // A smaller viewport can wrap earlier lines and displace the current turn.
   // Keep the latest story context visible after a resize or orientation change.
   global.addEventListener('resize', () => {
@@ -233,7 +308,7 @@
   });
   global.document.addEventListener('visibilitychange', () => {
     send({ type: 'session-visibility', hidden: global.document.hidden });
-    if (global.document.hidden && lastView?.audio?.status === 'playing') send({ type: 'pause' });
+    if (global.document.hidden && ['loading','playing'].includes(lastView?.audio?.status)) send({ type: 'pause' });
   });
   // Loading can migrate a historical record. Use the same cross-tab lock as
   // every later commit before the first record is read or written.

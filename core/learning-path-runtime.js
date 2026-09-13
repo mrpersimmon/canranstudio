@@ -132,13 +132,13 @@
     let localAttempts = {};
     // A settlement belongs to this visit, never to historical course totals.
     // Commit callbacks own scoring; retries and repeated renders cannot award twice.
-    let session = null, activeSince = null, pageHidden = false;
+    let session = null, activeSince = null, pageHidden = false, mediaPreparing = false;
     let placementClock=null;
     function beginSession() {
       session = { assessed: 0, independent: 0, streak: 0, bestStreak: 0, heardRefs: [], elapsedMs: 0, finished: false };
-      activeSince = pageHidden ? null : now().getTime();
+      activeSince = pageHidden || mediaPreparing ? null : now().getTime();
     }
-    function clockSession(hidden = pageHidden, finish = false) {
+    function clockSession(hidden = pageHidden || mediaPreparing, finish = false) {
       if (!session || session.finished) return;
       const time = now().getTime();
       if (activeSince !== null) session.elapsedMs += Math.max(0, time - activeSince);
@@ -334,7 +334,7 @@
       }
       stopAudio(purpose !== 'word');
       const recordings = sequence.map(entry => ({ ...entry, src: unit.sources[entry.ref].audioSrc }));
-      view.audio = { requestId: ++serial, sequence: recordings, index: 0, status: 'playing', purpose, rate: 1 };
+      view.audio = { requestId: ++serial, sequence: recordings, index: 0, status: 'loading', purpose, rate: 1 };
       effects.push({ type: 'play-audio', requestId: serial, index: 0, src: recordings[0].src, rate: 1 });
     }
     // Explicit taps form a bounded queue. Switching used to cancel speech before
@@ -604,7 +604,9 @@
     }
     function handleAudio(event) {
       const active = view.audio;
-      if (!active || active.requestId !== event.requestId || active.index !== event.index || active.status !== 'playing') return;
+      if (!active || active.requestId !== event.requestId || active.index !== event.index || !['loading','playing'].includes(active.status)) return;
+      if (event.type === 'audio-playing') { active.status = 'playing'; return; }
+      if (event.type === 'audio-waiting') { active.status = 'loading'; return; }
       if (event.type === 'audio-error') { active.status = event.blocked ? 'blocked' : 'failed'; return; }
       if (event.type !== 'audio-ended') return;
       if (session && !session.finished && view.screen === 'activity') {
@@ -613,6 +615,7 @@
       view.heardRefs = [...new Set([...(view.heardRefs || []), active.sequence[active.index].ref])];
       if (active.index + 1 < active.sequence.length) {
         active.index++;
+        active.status = 'loading';
         effects.push({ type: 'play-audio', requestId: active.requestId, index: active.index, src: active.sequence[active.index].src, rate: 1 });
       } else {
         active.status = 'ended';
@@ -641,6 +644,7 @@
     function handleExercise(event){
       const q=currentExercise();if(q?.kind!=='exercise'||event.questionId!==q.id)return;
       if(event.type==='exercise-listen'){
+        if(view.audio?.status==='loading')return;
         if(q.listenRefs.includes(event.id))play([{ref:event.id}], 'exercise');
         else if(view.feedback&&event.id===q.sourceRef&&unit.sources[event.id].audioSrc)play([{ref:event.id}],'exercise-feedback');
         return;
@@ -751,12 +755,12 @@
       }
       if(a.status==='active'){
         if(placementClock?.id!==a.id)placementClock={id:a.id,elapsedMs:a.elapsedMs||0,activeSince:null,partial:a.timingPartial||a.elapsedMs===undefined&&a.responses.length>0};
-        if(placementClock.activeSince===null&&!pageHidden)placementClock.activeSince=now().getTime();
+        if(placementClock.activeSince===null&&!pageHidden&&!mediaPreparing)placementClock.activeSince=now().getTime();
       }else if(placementClock)placementClock.activeSince=null;
     }
     function writePlacement(attempt,after=loadPlacement) {
       if(placementClock?.id===attempt.id){
-        clockPlacement(attempt.status!=='active'||pageHidden);
+        clockPlacement(attempt.status!=='active'||pageHidden||mediaPreparing);
         attempt={...attempt,elapsedMs:Math.max(attempt.elapsedMs||0,placementClock.elapsedMs),...(placementClock.partial?{timingPartial:true}:{})};
       }
       const next=clone(record); delete next.resetBackup;
@@ -827,6 +831,7 @@
       projectedRecord=record;projectedDay=today();publicRecord=freeze(clone(record || null));
       }
       const state=clone({ ...view, extraPractice: extraIndex,
+        mediaActivityIds: [...queue], mediaActivityIndex: queueIndex,
         settlement: session?.finished && ['celebration','review-complete','challenge-complete'].includes(view.screen) && view.mode !== 'summary'
           ? { ...session, completed: view.sessionProgress.completed, heard: session.heardRefs.length } : null,
         canContinue: view.screen === 'activity' && !(a?.kind === 'teach' && (view.wordQueue.length || view.audio?.purpose === 'word' && view.audio.status !== 'ended')) && (a?.kind === 'interactive-story' ? view.storyLineDone : a?.resultId ? Boolean(view.feedback && view.feedback !== 'retry' && view.feedbackDone) : view.requiredDone && view.feedbackDone),
@@ -840,12 +845,17 @@
       effects = [];
       const before={screen:view.screen,feedback:view.feedback,finished:session?.finished,placement:record?.placement?.attempts[view.placementId]?.status,
         pairs:Object.keys(view.matchedPairs||{}).length,wrong:view.wrong};
+      if (event.type === 'media-preparation') {
+        mediaPreparing = Boolean(event.pending);
+        clockSession(); clockPlacement(pageHidden || mediaPreparing || Boolean(pending));
+        return {view:snapshot(light),effects};
+      }
       if (event.type === 'session-visibility') {
-        pageHidden = Boolean(event.hidden); clockSession(pageHidden);
+        pageHidden = Boolean(event.hidden); clockSession();
         if(view.screen==='placement'&&placementAttempt()?.status==='active'){
           // Pausing is independent of storage health; a pending draft cannot
           // turn time in the background into time spent answering.
-          clockPlacement(pageHidden||Boolean(pending));
+          clockPlacement(pageHidden||mediaPreparing||Boolean(pending));
           if(!pending&&!draftPending)writePlacement({...clone(placementAttempt()),...(!view.feedback?{draft:clone(view.response)}:{})},()=>{});
         }
         return {view:snapshot(light),effects};
@@ -902,8 +912,8 @@
         queue = dueItems(); if (queue.length) { view.mode = 'review'; view.nodeId = null; queueIndex = 0; extraIndex = false; extraIds = []; localAttempts = {}; view.sessionProgress = {completed:0,total:queue.length}; beginSession(); loadActivity(queue[0]); }
       } else if (event.type.startsWith('audio-')) handleAudio(event);
       else if (event.type === 'retry-audio' && ['blocked', 'failed'].includes(view.audio?.status)) play(view.audio.sequence, view.audio.purpose);
-      else if (event.type === 'pause' && view.audio?.status === 'playing') { view.audio.status = 'paused'; effects.push({ type: 'pause-audio' }); }
-      else if (event.type === 'resume-audio' && view.audio?.status === 'paused') { view.audio.status = 'playing'; effects.push({ type: 'resume-audio', requestId: view.audio.requestId, index: view.audio.index }); }
+      else if (event.type === 'pause' && ['loading','playing'].includes(view.audio?.status)) { view.audio.status = 'paused'; effects.push({ type: 'pause-audio' }); }
+      else if (event.type === 'resume-audio' && view.audio?.status === 'paused') { view.audio.status = 'loading'; effects.push({ type: 'resume-audio', requestId: view.audio.requestId, index: view.audio.index }); }
       else if (view.screen === 'challenge') {
         if (event.type === 'challenge-check') checkChallenge();
         else if (event.type === 'challenge-retry' && view.feedback === 'retry') view.feedback = null;

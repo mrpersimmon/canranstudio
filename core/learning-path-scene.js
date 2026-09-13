@@ -7,12 +7,14 @@
   'use strict';
   const escape = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
   function createRenderer(unit) {
+    let audioLoading = false;
     const exercises=typeof module==='object'&&module.exports?require('./learning-exercises'):root.CanranCore.learningExercises;
     const c = unit.copy;
     const checkpointTotal = unit.checkpointIds.length;
     const icon = name => `<img class="lp-icon" src="${escape(unit.icons[name])}" alt="" width="24" height="24">`;
     const image = (id, className = '', labelled = false) => `<img class="${className}" src="${escape(unit.entities[id].assetSrc)}" alt="${labelled ? escape(unit.entities[id].title) : ''}" decoding="async">`;
     function button(action, text, { id = '', scope = '', disabled = false, className = '', symbol = '', label = '', pressed = null, language = '' } = {}) {
+      disabled ||= audioLoading && ['replay','replay-current','line-play','exercise-listen','reference-play','challenge-audio','story-start','retry-audio'].includes(action);
       return `<button type="button" data-action="${action}"${id ? ` data-id="${escape(id)}"` : ''}${scope ? ` data-scope="${escape(scope)}"` : ''} class="lp-button ${className}"${disabled ? ' disabled' : ''}${label ? ` aria-label="${escape(label)}"` : ''}${pressed === null ? '' : ` aria-pressed="${pressed}"`}>${symbol ? icon(symbol) : ''}${text ? `<span${language ? ` lang="${escape(language)}"` : ''}>${escape(text)}</span>` : ''}</button>`;
     }
     function header(v, label = c.learningPath) {
@@ -22,12 +24,18 @@
     function scene(a, small = false, returned = false) {
       return `<div class="lp-scene${small ? ' lp-scene-small' : ''}${returned ? ' is-returned' : ''}" role="img" aria-label="${escape(c.sceneLabel)}"><span class="lp-actor lp-keeper">${image('station-keeper')}</span>${a.focusEntityId ? image(a.focusEntityId, 'lp-scene-object') : ''}<span class="lp-actor lp-owner">${image('handbag-owner')}</span></div>`;
     }
+    function preparation(v) {
+      const p = v.preparation, count = p.total ? `${p.completed} / ${p.total}` : '';
+      return `<div class="lp-lesson lp-preparation"><h1 tabindex="-1" data-lesson-title>${p.failed ? '还没准备好' : '正在准备本关'}</h1><p role="status">${p.failed ? '有些内容没有加载成功，请再试一次。' : p.slow ? '网络有点慢，可以再等等或重试。' : '准备好了就出发！'}</p>${p.total ? `<progress aria-label="本关准备进度" value="${p.completed}" max="${p.total}"></progress><p>${count}</p>` : ''}</div>${footer(v, `${p.failed || p.slow ? button('prepare-retry', '再试一次', {className:'lp-primary'}) : ''}${button('map', '返回路线', {className:'lp-quiet'})}`)}`;
+    }
     function playback(v) {
+      if (v.audio?.status === 'loading') return '<div class="lp-playback" role="status">正在准备声音…</div>';
       const playing = v.audio?.status === 'playing', paused = v.audio?.status === 'paused';
       const action = paused ? 'resume-audio' : playing ? 'pause' : 'replay';
       return `<div class="lp-playback">${button(action, paused ? c.play : playing ? c.pause : c.replay, { symbol: paused ? 'play-fill' : playing ? 'pause-fill' : 'volume-up-fill', className: 'lp-quiet' })}</div>`;
     }
     function audioNotice(v) {
+      if (v.audio?.status === 'loading' && !v.storyActivityId) return '<div class="lp-notice" role="status">正在准备声音…</div>';
       if (!['failed', 'blocked'].includes(v.audio?.status)) return '';
       return `<div class="lp-notice" role="status"><p>${escape(v.audio.status === 'blocked' ? c.audioBlocked : c.audioFailed)}</p>${button('retry-audio', c.audioRetry, { symbol: 'volume-up-fill', className: 'lp-quiet' })}</div>`;
     }
@@ -260,12 +268,14 @@
       return `${top}<div class="lp-lesson lp-placement-question"><div class="lp-lesson-heading"><h1 tabindex="-1" data-lesson-title>${escape(q.title)}</h1><span class="lp-placement-question-count">${attempt.cursor+1} / ${questionCount}</span></div>${exercisePrompt(q)}${exerciseBody(q,v)}</div>${footer(v,exerciseActions(q,v,'placement'),pictureFeedback(q,v))}`;
     }
     function render(v) {
+      audioLoading = v.audio?.status === 'loading';
       if (v.screen === 'blocked') {
         const recovery=v.recovery;
         return `<div class="station-app lp-blocked">${image('explorer-cat')}<h1>${escape(c.unsupportedRecord)}</h1><p>${recovery?.canExport?'可以重试读取，或导出原始记录留存。':'请检查这台设备的保存权限后重试。'}</p>${recovery?.confirm ? `<section role="alertdialog" aria-modal="true" aria-label="确认恢复学习记录"><p>${recovery.confirm==='restore'?'恢复这台设备上最近可用的学习备份。':'仅将这套课程从零开始，当前原始记录会另行保留。'}</p>${button('recovery-confirm','确认'+(recovery.confirm==='restore'?'恢复备份':'从零开始'),{className:'lp-primary'})}${button('recovery-cancel','取消')}</section>` : `${button('reload',c.reloadProgress,{className:'lp-primary'})}${recovery?.canExport ? button('recovery-export','导出原始记录') : ''}${recovery?.canRestore ? button('recovery-restore','恢复可用备份') : ''}${recovery?.canReset ? button('recovery-reset','这套课程从零开始') : ''}`}<small>${escape(recovery?.code || 'RECORD_UNAVAILABLE')}</small></div>`;
       }
       let html;
-      if (v.screen === 'map') html = renderMap(v);
+      if (v.screen === 'preparing') html = preparation(v);
+      else if (v.screen === 'map') html = renderMap(v);
       else if (v.screen === 'references') html = renderReferences(v);
       else if (['challenge-intro','challenge','challenge-complete'].includes(v.screen)) html = renderChallenge(v);
       else if (['placement-intro','placement','placement-result'].includes(v.screen)) html = renderPlacement(v);

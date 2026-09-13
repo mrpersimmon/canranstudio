@@ -5,8 +5,8 @@ const exercises=require('../../core/learning-exercises'),runtime=require('../../
 const unit=catalog.getCourse(),at='2026-09-10T12:00:00.000Z';
 function solve(rt,q){
   const send=e=>rt.dispatch(e).view;
-  for(const ref of q.listenRefs){let v=send({type:'exercise-listen',id:ref,questionId:q.id});assert.equal(v.audio.status,'playing');send({type:'audio-ended',requestId:v.audio.requestId,index:v.audio.index});}
-  for(const [left,right]of exercises.solution(q).pairs){send({type:'exercise-select',id:left,questionId:q.id});const v=rt.snapshot();if(v.audio?.status==='playing')send({type:'audio-ended',requestId:v.audio.requestId,index:0});send({type:'exercise-select',id:right,questionId:q.id});}
+  for(const ref of q.listenRefs){let v=send({type:'exercise-listen',id:ref,questionId:q.id});assert.equal(v.audio.status,'loading');send({type:'audio-ended',requestId:v.audio.requestId,index:v.audio.index});}
+  for(const [left,right]of exercises.solution(q).pairs){send({type:'exercise-select',id:left,questionId:q.id});const v=rt.snapshot();if(['loading','playing'].includes(v.audio?.status))send({type:'audio-ended',requestId:v.audio.requestId,index:0});send({type:'exercise-select',id:right,questionId:q.id});}
   for(const id of q.answer)send({type:'exercise-select',id,questionId:q.id});
 }
 test('all current student question banks exclude free text and keep every old target mapped',()=>{

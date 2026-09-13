@@ -10,6 +10,7 @@
     "compile:course": "node scripts/compile-lesson1-50.js",
     "test:media": "node scripts/verify-course-media.js",
     "test:browser-media": "node scripts/check-course-browser-media.js",
+    "test:loading": "node scripts/check-learning-media.js",
     "build:course": "node scripts/build-learning-course-package.js",
     "build": "node scripts/build-learning-path-release.js",
     "build:static": "npm run build",

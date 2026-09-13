@@ -465,3 +465,5 @@ main[data-learning-path]{min-height:100dvh;display:flex;flex-direction:column}
 .lp-story-character.is-accepted .lp-character-action{color:var(--lp-green)}
 .lp-story-character.is-accepted .lp-character-action .lp-icon,.lp-story-character.is-retry .lp-character-action .lp-icon{filter:brightness(0) invert(1)}
 .lp-word-bank .lp-option{font-weight:500}
+.lp-preparation { display: grid; align-content: center; justify-items: center; min-height: 60vh; text-align: center; gap: 16px; }
+.lp-preparation progress { width: min(100%, 320px); height: 18px; accent-color: #58cc02; }

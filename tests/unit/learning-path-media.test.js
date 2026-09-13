@@ -13,16 +13,17 @@ test('the page plays original recordings at native speed, stops stale media and 
   const unit = catalog.getCourse(), audioElements = [], handlers = {};
   const root = { dataset: { unitId: unit.unitId }, innerHTML: '', querySelector: () => null, querySelectorAll: () => [], addEventListener: (type, handler) => { handlers[type] = handler; } };
   let rt;
-  class AudioStub {
-    constructor(src) { this.src = src; this.events = {}; audioElements.push(this); }
-    addEventListener(type, handler) { this.events[type] = handler; }
-    play() { this.playedRate = this.playbackRate; this.keptPitch = this.preservesPitch; return Promise.resolve(); }
+  class AudioStub extends EventTarget {
+    constructor(src) { super(); this.src = src; this.readyState = 4; this.events = {}; audioElements.push(this); }
+    addEventListener(type, handler, options) { this.events[type] = handler; super.addEventListener(type, handler, options); }
+    play() { this.playedRate = this.playbackRate; this.keptPitch = this.preservesPitch; this.dispatchEvent(new Event('playing')); return Promise.resolve(); }
     pause() { this.paused = true; }
     removeAttribute(name) { delete this[name]; }
     load() {}
   }
   const context = {
-    Audio: AudioStub, Promise, navigator: {}, console,
+    Audio: AudioStub, Promise, navigator: {}, console, AbortController, setTimeout, clearTimeout,
+    Image: class { decode() { return Promise.resolve(); } }, fetch: async () => ({ok:true,arrayBuffer:async()=>new ArrayBuffer(1)}),
     localStorage: {}, scrollTo() {}, addEventListener() {}, matchMedia: () => ({ matches: true }),
     document: { documentElement: { classList: { toggle() {} } }, querySelector: selector => selector === '[data-learning-path]' ? root : null, activeElement: null, addEventListener() {} },
     CanranCore: {
@@ -32,6 +33,7 @@ test('the page plays original recordings at native speed, stops stale media and 
       learningPathScene: scene
     }
   };
+  vm.runInNewContext(fs.readFileSync(require.resolve('../../core/learning-media.js'),'utf8'), context);
   vm.runInNewContext(boot, context);
   const flush = () => new Promise(resolve => setImmediate(resolve));
   async function click(action, id) {
@@ -40,21 +42,21 @@ test('the page plays original recordings at native speed, stops stale media and 
     await flush();
   }
   await click('open-node', 'K01');
-  assert.equal(audioElements.length, 0);
+  assert.equal(audioElements.filter(a=>a.playedRate).length, 0);
   await click('story-start');
-  const first = audioElements.at(-1); assert.equal(first.playedRate, 1);
-  await click('replay'); const replay = audioElements.at(-1);
-  assert.equal(first.paused, true); assert.equal(first.src, undefined);
+  const first = audioElements.find(a=>a.playedRate), staleEnded=first.events.ended; assert.equal(first.playedRate, 1);
+  await click('replay'); const replay = first;
+  assert.equal(first.paused, true);
   assert.equal(replay.defaultPlaybackRate, 1); assert.equal(replay.src, unit.sources['L01-D01'].audioSrc);
   assert.equal(replay.playedRate, 1); assert.equal(replay.keptPitch, undefined);
-  first.events.ended(); await flush(); assert.equal(rt.snapshot().canContinue, false);
+  staleEnded(); await flush(); assert.equal(rt.snapshot().canContinue, false);
   replay.events.ended(); await flush(); assert.equal(rt.snapshot().canContinue, true);
-  assert.equal(rt.snapshot().storyIndex, 0); assert.equal(audioElements.length, 2);
+  assert.equal(rt.snapshot().storyIndex, 0);
   await click('continue'); assert.equal(rt.snapshot().storyIndex, 1);
-  assert.equal(audioElements.at(-1).src, unit.sources['L01-D02'].audioSrc);
+  const second=audioElements.find(a=>a.src===unit.sources['L01-D02'].audioSrc);assert.equal(second.playedRate,1);
   assert.equal(rt.snapshot().canContinue, false);
-  await click('map'); assert.equal(audioElements.at(-1).paused, true);
-  audioElements.at(-1).events.ended(); await flush(); assert.equal(rt.snapshot().screen, 'map');
+  await click('map'); assert.equal(second.paused, true);
+  second.events.ended(); await flush(); assert.equal(rt.snapshot().screen, 'map');
   const before = JSON.stringify(rt.snapshot().record);
   await click('journey-nav', 'review'); assert.match(root.innerHTML, /data-journey-tab="review"/);
   await click('journey-nav', 'progress'); assert.match(root.innerHTML, /data-journey-tab="progress"/);

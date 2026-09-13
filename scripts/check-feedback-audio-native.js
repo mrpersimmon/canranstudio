@@ -27,8 +27,8 @@ async function main(){
       await page.addInitScript(({key,record})=>{
         if(!sessionStorage.getItem('seeded')){localStorage.setItem(key,JSON.stringify(record));sessionStorage.setItem('seeded','yes');}
         const NativeAudio=window.Audio;window.observedAudio=[];
-        window.Audio=function(src){const a=new NativeAudio(src),e={src,ended:false,errors:0,paused:0};window.observedAudio.push(e);
-          a.addEventListener('ended',()=>{e.ended=true;e.volume=a.volume;e.duration=a.duration;});a.addEventListener('error',()=>e.errors++);a.addEventListener('pause',()=>e.paused++);return a;};
+        window.Audio=function(src){const a=new NativeAudio(src),e={src,ended:false,endCount:0,errors:0,paused:0};window.observedAudio.push(e);
+          a.addEventListener('ended',()=>{e.ended=true;e.endCount++;e.volume=a.volume;e.duration=a.duration;});a.addEventListener('error',()=>e.errors++);a.addEventListener('pause',()=>e.paused++);return a;};
         window.Audio.prototype=NativeAudio.prototype;
       },{key:seed.key,record:seed.records[seed.key]});
       page.on('pageerror',e=>report.errors.push(String(e)));
@@ -87,7 +87,7 @@ async function main(){
         if(sound==='correct'){
           await context.setOffline(true);
           await page.locator('.lp-footer [data-action="exercise-listen"]').click();
-          await page.waitForFunction(src=>observedAudio.filter(e=>e.src===src&&e.ended).length===2,unit.sources[q.sourceRef].audioSrc);
+          await page.waitForFunction(src=>observedAudio.filter(e=>e.src===src).reduce((total,e)=>total+e.endCount,0)===2,unit.sources[q.sourceRef].audioSrc);
           // Reopen the graded question. Stored success must remain silent.
           await page.reload();await page.locator('.journey-app').waitFor();
           await page.locator('[data-action="open-placement"][data-id="friends"]').click();await page.locator('[data-action="placement-start"]').click();
