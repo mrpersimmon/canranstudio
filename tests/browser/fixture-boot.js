@@ -66,6 +66,13 @@
     }
     await loadScript('/__qa__/axe.js');
     await document.fonts.ready;
+    // The controller's first read is asynchronous and waits for its storage
+    // lock. Script onload alone can precede both dispatch and the initial DOM.
+    const deadline=performance.now()+15000;
+    while(!control.completedDispatches.reload || !entry.querySelector('.lp-shell')){
+      if(performance.now()>deadline)throw Error('Initial course reload did not render');
+      await new Promise(resolve=>setTimeout(resolve,5));
+    }
     control.ready = true;
     // Local-only, reproducible completion states for screenshot review. Uses
     // production controls/runtime with this file's memory/audio adapters.

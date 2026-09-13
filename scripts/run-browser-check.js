@@ -4,6 +4,7 @@
 const { chromium } = require('playwright');
 const { createVisualServer } = require('./serve-visual-check');
 async function main() {
+  await require('./check-browser-fixture-ready').main();
   await require('./check-answer-feedback').main();
   await require('./check-placement-feedback').main();
   await require('./check-placement-pool-browser').main();

@@ -20,7 +20,7 @@ function fingerprint(prepared, root = ROOT) {
   for (const dir of ['tests/browser']) for (const file of fs.readdirSync(path.join(root, dir))) {
     sources.set(dir + '/' + file, fs.readFileSync(path.join(root, dir, file)));
   }
-  for (const file of ['scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-answer-feedback.js','scripts/check-placement-feedback.js','scripts/check-placement-pool-browser.js','scripts/verify-course-media.js','package.json','package-lock.json']) {
+  for (const file of ['scripts/visual-proof.js','scripts/serve-visual-check.js','scripts/run-browser-check.js','scripts/check-browser-fixture-ready.js','scripts/check-answer-feedback.js','scripts/check-placement-feedback.js','scripts/check-placement-pool-browser.js','scripts/verify-course-media.js','package.json','package-lock.json']) {
     sources.set(file, fs.readFileSync(path.join(root, file)));
   }
   return hash([...sources].sort(([a],[b])=>a.localeCompare(b)).map(([name,bytes])=>name+':'+hash(bytes)).join('\n'));
