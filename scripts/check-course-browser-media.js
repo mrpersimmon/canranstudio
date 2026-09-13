@@ -65,5 +65,6 @@ async function main(){
   }
   console.log('Native browser: '+report.samples.length+' real ended recordings, verified ranges, offline replay and preserved six-lesson progress.');
   await require('./check-feedback-audio-native').main();
+  await require('./check-learning-media').main();
 }
 if(require.main===module)main().catch(error=>{console.error(error);process.exitCode=1;});
