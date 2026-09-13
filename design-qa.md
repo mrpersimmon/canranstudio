@@ -1,3 +1,17 @@
+# 2026-09-13 播放按钮闪屏修复
+
+final result: passed
+
+本轮本地验收通过：完整矩阵 41,456 状态无违规，72 次故障注入均被检出；163 项单元、51 项复习流程及存储恢复检查通过。官网发布与线上验收单独记录。详见[现象、根因、旧检查遗漏与回归](docs/designs/loading-mechanism-20260912/playback-flash-fix.md)。
+
+- 官网与本地各 3/3 复现：已准备好的图片题起播时插入底部准备提示，操作栏上下移动 56px。
+- 已取消该通栏；保持播放按钮占位，持续等待超过 300ms 才显示按钮内部的准备状态。播放请求、重复点击保护和原生 ended 记录保持原有约束。
+- 新增 16 例原生播放专项，覆盖四种屏幕、正常/延迟起播、重听、词卡、课本、失败重试和退出；逐次 DOM mutation 检查页面位置，不只等待最终稳定状态。
+- 42 段原始录音、4 种音效和 7 组加载/播放集成检查通过。必需素材未就绪仍保留入关门槛，离线重听与旧记录兼容通过。
+- 已目视检查 320px、390px 的局部等待状态，并与既有 Duolingo 深色题型参考核对字体、背景、题图、文案及固定底部操作区域。
+
+当前源码指纹：`204fd06a8aa86fde2cb75e245a327289698caaf1b621b66d8661ce0945a7a292`。[本次验证摘要](docs/designs/loading-mechanism-20260912/playback-flash-validation.json)。下方均为历史记录；本轮发布与官网验收另记在 `output/playwright/playback-flash-release/`。
+
 # 2026-09-13 加载机制更新
 
 加载准备的实施、真实媒体和专项验收见[本轮报告](docs/designs/loading-mechanism-20260912/implementation-report.md)。新版本的完整发布矩阵必须重新生成，不能沿用下面的历史指纹；发布构建仍校验当前源码、媒体和页面证据。官网发布与线上验证结果独立保存在 `output/playwright/loading-release/publication.json`。

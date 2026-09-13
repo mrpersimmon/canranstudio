@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "sourceManifestSha256": "74ba17280870a93e072ffef111c9c97361b8c2b5e0e8d89ce8296e8aff12db5f",
+  "visual": {
+    "fingerprint": "204fd06a8aa86fde2cb75e245a327289698caaf1b621b66d8661ce0945a7a292",
+    "finishedAt": "2026-09-13T13:49:07.043Z",
+    "states": 41456,
+    "negativeControls": 72,
+    "caught": 72
+  },
+  "unit": {
+    "passed": 163,
+    "failed": 0,
+    "skipped": 0
+  },
+  "native": {
+    "recordings": 42,
+    "feedbackSounds": 4,
+    "loadingGroups": 7,
+    "playbackCases": 16
+  },
+  "review": {
+    "checks": 51,
+    "status": "passed"
+  },
+  "storage": "passed",
+  "scope": "Current local source and native Chromium. Production publication and verification are recorded separately in output/playwright/playback-flash-release/publication.json."
+}

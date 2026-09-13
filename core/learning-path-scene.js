@@ -7,15 +7,21 @@
   'use strict';
   const escape = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
   function createRenderer(unit) {
-    let audioLoading = false;
+    let audioLoading = false, audioWaiting = false, audioRef = null;
     const exercises=typeof module==='object'&&module.exports?require('./learning-exercises'):root.CanranCore.learningExercises;
     const c = unit.copy;
     const checkpointTotal = unit.checkpointIds.length;
     const icon = name => `<img class="lp-icon" src="${escape(unit.icons[name])}" alt="" width="24" height="24">`;
     const image = (id, className = '', labelled = false) => `<img class="${className}" src="${escape(unit.entities[id].assetSrc)}" alt="${labelled ? escape(unit.entities[id].title) : ''}" decoding="async">`;
-    function button(action, text, { id = '', scope = '', disabled = false, className = '', symbol = '', label = '', pressed = null, language = '' } = {}) {
-      disabled ||= audioLoading && ['replay','replay-current','line-play','exercise-listen','reference-play','challenge-audio','story-start','retry-audio'].includes(action);
-      return `<button type="button" data-action="${action}"${id ? ` data-id="${escape(id)}"` : ''}${scope ? ` data-scope="${escape(scope)}"` : ''} class="lp-button ${className}"${disabled ? ' disabled' : ''}${label ? ` aria-label="${escape(label)}"` : ''}${pressed === null ? '' : ` aria-pressed="${pressed}"`}>${symbol ? icon(symbol) : ''}${text ? `<span${language ? ` lang="${escape(language)}"` : ''}>${escape(text)}</span>` : ''}</button>`;
+    function audioWait(text = true) {
+      return `<span class="lp-audio-wait" role="status" aria-label="正在准备声音…">${text ? '准备中…' : '<span class="lp-audio-wait-dots" aria-hidden="true">•••</span>'}</span>`;
+    }
+    function button(action, text, { id = '', scope = '', disabled = false, className = '', symbol = '', label = '', pressed = null, language = '', audioTarget = false } = {}) {
+      const audioAction = ['replay','replay-current','line-play','exercise-listen','reference-play','challenge-audio','story-start','retry-audio','resume-audio','match-listen'].includes(action);
+      const pending = audioLoading && (audioTarget || audioAction && (!id || id === audioRef));
+      const waiting = pending && audioWaiting;
+      disabled ||= audioLoading && audioAction;
+      return `<button type="button" data-action="${action}"${id ? ` data-id="${escape(id)}"` : ''}${scope ? ` data-scope="${escape(scope)}"` : ''} class="lp-button ${className}${waiting ? ' is-audio-waiting' : ''}"${disabled ? ' disabled' : ''}${pending ? ' aria-busy="true"' : ''}${label ? ` aria-label="${escape(label)}"` : ''}${pressed === null ? '' : ` aria-pressed="${pressed}"`}>${symbol ? icon(symbol) : ''}${text ? `<span${language ? ` lang="${escape(language)}"` : ''}>${escape(text)}</span>` : ''}${waiting ? audioWait(Boolean(text)) : ''}</button>`;
     }
     function header(v, label = c.learningPath) {
       const progress = v.sessionProgress;
@@ -29,13 +35,11 @@
       return `<div class="lp-lesson lp-preparation"><h1 tabindex="-1" data-lesson-title>${p.failed ? '还没准备好' : '正在准备本关'}</h1><p role="status">${p.failed ? '有些内容没有加载成功，请再试一次。' : p.slow ? '网络有点慢，可以再等等或重试。' : '准备好了就出发！'}</p>${p.total ? `<progress aria-label="本关准备进度" value="${p.completed}" max="${p.total}"></progress><p>${count}</p>` : ''}</div>${footer(v, `${p.failed || p.slow ? button('prepare-retry', '再试一次', {className:'lp-primary'}) : ''}${button('map', '返回路线', {className:'lp-quiet'})}`)}`;
     }
     function playback(v) {
-      if (v.audio?.status === 'loading') return '<div class="lp-playback" role="status">正在准备声音…</div>';
       const playing = v.audio?.status === 'playing', paused = v.audio?.status === 'paused';
       const action = paused ? 'resume-audio' : playing ? 'pause' : 'replay';
       return `<div class="lp-playback">${button(action, paused ? c.play : playing ? c.pause : c.replay, { symbol: paused ? 'play-fill' : playing ? 'pause-fill' : 'volume-up-fill', className: 'lp-quiet' })}</div>`;
     }
     function audioNotice(v) {
-      if (v.audio?.status === 'loading' && !v.storyActivityId) return '<div class="lp-notice" role="status">正在准备声音…</div>';
       if (!['failed', 'blocked'].includes(v.audio?.status)) return '';
       return `<div class="lp-notice" role="status"><p>${escape(v.audio.status === 'blocked' ? c.audioBlocked : c.audioFailed)}</p>${button('retry-audio', c.audioRetry, { symbol: 'volume-up-fill', className: 'lp-quiet' })}</div>`;
     }
@@ -138,10 +142,11 @@
     function vocabulary(a, v) {
       return `${a.sceneEntityId ? `<figure class="lp-learning-scene lp-vocabulary-scene">${image(a.sceneEntityId,'lp-scene-painting')}</figure>` : ''}${a.guideRef ? `<div class="lp-phrase-example"><p lang="en">${escape(unit.sources[a.guideRef].text)}</p>${a.guideCaption ? `<small>${escape(a.guideCaption)}</small>` : ''}</div>` : ''}<div class="lp-vocabulary" role="group" aria-label="${escape(a.title)}">${a.items.map(item => {
         const active = v.audio?.purpose === 'word' && ['playing', 'paused'].includes(v.audio.status) && v.audio.sequence[v.audio.index]?.ref === item.sourceRef;
+        const waiting = audioWaiting && audioRef === item.sourceRef;
         const heard = v.heardWords.includes(item.sourceRef);
         const queued = (v.wordQueue || []).includes(item.sourceRef);
-        const cue = queued ? c.wordQueued || '待播放' : active ? c.wordPlaying : heard ? c.replay : a.audioType === 'sentence' && c.listenExample ? c.listenExample : c.wordListen;
-        return `<button type="button" class="lp-vocabulary-card${item.presentation === 'text' ? ' lp-text-card' : ''}${active ? ' is-speaking' : ''}${queued ? ' is-queued' : ''}${heard ? ' is-heard' : ''}" data-action="word-play" data-id="${escape(item.sourceRef)}" aria-label="${escape(`${c.wordListen} ${unit.sources[item.sourceRef].text}${queued ? '，' + cue : ''}`)}"${active ? ' aria-current="true"' : ''}>${item.presentation === 'text' ? '' : image(item.entityId, 'lp-vocabulary-image')}<span class="lp-vocabulary-caption"><strong lang="en">${escape(item.term || unit.sources[item.sourceRef].text)}</strong><span>${escape(item.caption || unit.entities[item.entityId]?.title)}</span></span>${heard ? `<span class="lp-word-heard" aria-label="${escape(c.wordHeard)}">${icon('check-circle-fill')}</span>` : ''}<span class="lp-word-cue" aria-hidden="true">${icon('volume-up-fill')}<span>${escape(cue)}</span></span></button>`;
+        const cue = waiting ? '准备中…' : queued ? c.wordQueued || '待播放' : active ? c.wordPlaying : heard ? c.replay : a.audioType === 'sentence' && c.listenExample ? c.listenExample : c.wordListen;
+        return `<button type="button" class="lp-vocabulary-card${item.presentation === 'text' ? ' lp-text-card' : ''}${active ? ' is-speaking' : ''}${queued ? ' is-queued' : ''}${heard ? ' is-heard' : ''}" data-action="word-play" data-id="${escape(item.sourceRef)}" aria-label="${escape(`${c.wordListen} ${unit.sources[item.sourceRef].text}${queued || waiting ? '，' + cue : ''}`)}"${active ? ' aria-current="true"' : ''}>${item.presentation === 'text' ? '' : image(item.entityId, 'lp-vocabulary-image')}<span class="lp-vocabulary-caption"><strong lang="en">${escape(item.term || unit.sources[item.sourceRef].text)}</strong><span>${escape(item.caption || unit.entities[item.entityId]?.title)}</span></span>${heard ? `<span class="lp-word-heard" aria-label="${escape(c.wordHeard)}">${icon('check-circle-fill')}</span>` : ''}<span class="lp-word-cue" aria-hidden="true">${icon('volume-up-fill')}<span>${escape(cue)}</span></span></button>`;
       }).join('')}</div>`;
     }
     function feedback(a, v) {
@@ -195,7 +200,7 @@
       const context=(q.contextRefs||[]).map(ref=>`<p class="lp-phrase-example" lang="en">${escape(unit.sources[ref].text)}</p>`).join('');
       let content='';
       if(q.mechanism==='pairs'){
-        content=`<div class="lp-match-board lp-audio-pairs"><div class="lp-match-column">${q.pairs.map((p,i)=>{const pair=r.pairs.find(x=>x[0]===p.id),chosen=pair&&q.options.find(o=>o.id===pair[1]),heard=v.heardRefs?.includes(p.sourceRef),playing=v.audio?.status==='playing'&&v.audio.sequence?.[v.audio.index]?.ref===p.sourceRef;return button(locked?'exercise-listen':'exercise-select','录音 '+(i+1)+(heard?' ✓':'')+(chosen?' · '+chosen.text:''),{id:locked?p.sourceRef:p.id,className:'lp-match-tile'+(!locked&&r.anchor===p.id||playing?' is-selected':''),symbol:'volume-up-fill',pressed:locked?null:r.anchor===p.id,label:'录音 '+(i+1)+(playing?'，播放中':heard?'，已听完':'，还没听完')+(chosen?'，搭档 '+chosen.text:'')});}).join('')}</div><div class="lp-match-column">${ordered.map(id=>{const o=q.options.find(o=>o.id===id);return tile(o,'lp-match-tile',r.pairs.some(p=>p[1]===id));}).join('')}</div></div><p role="status" class="lp-exercise-count">已配 ${r.pairs.length} / ${q.pairs.length} 组 · 已听完 ${q.listenRefs.filter(ref=>v.heardRefs?.includes(ref)).length} / ${q.listenRefs.length} 段。${v.feedback?v.feedback==='retry'?'看看提示，再重新选择搭档。':'这一组完成啦，点录音还可以重听。':q.listenRefs.every(ref=>v.heardRefs?.includes(ref))?'可以检查了；点录音可重听或更换搭档。':'请把没有 ✓ 的录音听完整，再检查。'}</p>`;
+        content=`<div class="lp-match-board lp-audio-pairs"><div class="lp-match-column">${q.pairs.map((p,i)=>{const pair=r.pairs.find(x=>x[0]===p.id),chosen=pair&&q.options.find(o=>o.id===pair[1]),heard=v.heardRefs?.includes(p.sourceRef),playing=v.audio?.status==='playing'&&v.audio.sequence?.[v.audio.index]?.ref===p.sourceRef;return button(locked?'exercise-listen':'exercise-select','录音 '+(i+1)+(heard?' ✓':'')+(chosen?' · '+chosen.text:''),{id:locked?p.sourceRef:p.id,audioTarget:p.sourceRef===audioRef,className:'lp-match-tile'+(!locked&&r.anchor===p.id||playing?' is-selected':''),symbol:'volume-up-fill',pressed:locked?null:r.anchor===p.id,label:'录音 '+(i+1)+(playing?'，播放中':heard?'，已听完':'，还没听完')+(chosen?'，搭档 '+chosen.text:'')});}).join('')}</div><div class="lp-match-column">${ordered.map(id=>{const o=q.options.find(o=>o.id===id);return tile(o,'lp-match-tile',r.pairs.some(p=>p[1]===id));}).join('')}</div></div><p role="status" class="lp-exercise-count">已配 ${r.pairs.length} / ${q.pairs.length} 组 · 已听完 ${q.listenRefs.filter(ref=>v.heardRefs?.includes(ref)).length} / ${q.listenRefs.length} 段。${v.feedback?v.feedback==='retry'?'看看提示，再重新选择搭档。':'这一组完成啦，点录音还可以重听。':q.listenRefs.every(ref=>v.heardRefs?.includes(ref))?'可以检查了；点录音可重听或更换搭档。':'请把没有 ✓ 的录音听完整，再检查。'}</p>`;
       }else if(q.mechanism==='repair'){
         content=`<div class="lp-repair-sentence" role="group" aria-label="点选需要修改的词">${q.words.map(o=>tile(o,'lp-token')).join('')}</div>${r.selected.length?`<p>把这个词换成：</p><div class="lp-options">${ordered.map(id=>q.options.find(o=>o.id===id)).filter(o=>o.group==='replacement').map(o=>tile(o)).join('')}</div>`:'<p class="lp-exercise-count">先点句中的一个词。</p>'}`;
       }else if(q.mechanism==='mission'){
@@ -269,6 +274,8 @@
     }
     function render(v) {
       audioLoading = v.audio?.status === 'loading';
+      audioWaiting = audioLoading && Boolean(v.audioWaiting);
+      audioRef = v.audio?.sequence[v.audio.index]?.ref;
       if (v.screen === 'blocked') {
         const recovery=v.recovery;
         return `<div class="station-app lp-blocked">${image('explorer-cat')}<h1>${escape(c.unsupportedRecord)}</h1><p>${recovery?.canExport?'可以重试读取，或导出原始记录留存。':'请检查这台设备的保存权限后重试。'}</p>${recovery?.confirm ? `<section role="alertdialog" aria-modal="true" aria-label="确认恢复学习记录"><p>${recovery.confirm==='restore'?'恢复这台设备上最近可用的学习备份。':'仅将这套课程从零开始，当前原始记录会另行保留。'}</p>${button('recovery-confirm','确认'+(recovery.confirm==='restore'?'恢复备份':'从零开始'),{className:'lp-primary'})}${button('recovery-cancel','取消')}</section>` : `${button('reload',c.reloadProgress,{className:'lp-primary'})}${recovery?.canExport ? button('recovery-export','导出原始记录') : ''}${recovery?.canRestore ? button('recovery-restore','恢复可用备份') : ''}${recovery?.canReset ? button('recovery-reset','这套课程从零开始') : ''}`}<small>${escape(recovery?.code || 'RECORD_UNAVAILABLE')}</small></div>`;

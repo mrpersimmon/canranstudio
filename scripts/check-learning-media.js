@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),crypto=require('node:crypto');
 async function main(){
-  const checks=['level-preparation','level-preparation-modes','level-preparation-recovery','level-playback','level-background','level-decode-window'];
+  const checks=['level-preparation','level-preparation-modes','level-preparation-recovery','level-playback','level-background','level-decode-window','playback-stability'];
   const report={status:'running',environment:'Local HTTP, isolated Chromium, desktop CPU; mobile/tablet viewports are not physical-device acceptance',checks:[],playback:[]};
   try{
     for(const name of checks){

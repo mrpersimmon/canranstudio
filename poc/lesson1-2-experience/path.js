@@ -14,6 +14,7 @@
   let backgroundJob = null, backgroundTimer = null, backgroundRetryAt = 0;
   const preparedAhead = new Set();
   let media = null, mediaToken = 0, mediaListeners = null, feedbackMedia = null, lastView = null, work = Promise.resolve();
+  let audioWaitKey = null, audioWaitTimer = null, audioWaiting = false;
   let journeyUI = { tab: 'path', selectedNodeId: null };
   let modalReturnFocus;
   function revealCurrentNode(view) {
@@ -46,6 +47,18 @@
     while(current.childNodes.length>index)current.lastChild.remove();
   }
   function render(view) {
+    // Loading is immediate in the runtime (including duplicate-click guards).
+    // Only its visual hint waits: cached native starts often take just one turn
+    // of the event loop and must not flash or resize the activity's controls.
+    const waitingKey = view.audio?.status === 'loading' ? `${view.audio.requestId}:${view.audio.index}` : null;
+    if (waitingKey !== audioWaitKey) {
+      global.clearTimeout(audioWaitTimer); audioWaitKey = waitingKey; audioWaiting = false;
+      if (waitingKey) audioWaitTimer = global.setTimeout(() => {
+        if (audioWaitKey !== waitingKey) return;
+        audioWaiting = true; render(runtime.snapshot());
+      }, 300);
+    }
+    view = { ...view, audioWaiting };
     const active = global.document.activeElement;
     const action = active?.dataset?.action, id = active?.dataset?.id;
     const previousModal = root.querySelector('[aria-modal="true"]');
@@ -299,7 +312,7 @@
     if (event.shiftKey && global.document.activeElement === first) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && global.document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
-  global.addEventListener('pagehide', () => {stop();stopBackground();preparationAbort?.abort();global.clearTimeout(preparationTimer);feedbackMedia?.pause();feedbackMedia=null;});
+  global.addEventListener('pagehide', () => {stop();stopBackground();preparationAbort?.abort();global.clearTimeout(preparationTimer);global.clearTimeout(audioWaitTimer);audioWaitKey=null;feedbackMedia?.pause();feedbackMedia=null;});
   // A smaller viewport can wrap earlier lines and displace the current turn.
   // Keep the latest story context visible after a resize or orientation change.
   global.addEventListener('resize', () => {

@@ -57,6 +57,12 @@ main[data-learning-path]{min-height:100dvh;display:flex;flex-direction:column}
 .lp-footer-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:630px;margin:auto}
 .lp-footer-caption{font-weight:700;color:var(--lp-muted)}
 .lp-playback{display:flex;align-items:center;gap:2px}
+.is-audio-waiting{position:relative}
+.is-audio-waiting>img,.is-audio-waiting>span:not(.lp-audio-wait){visibility:hidden}
+/* The original content keeps the button's size while the local wait label
+   occupies the same space. No notice is added to the footer's layout. */
+.lp-audio-wait{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--lp-muted);font-size:.85em;white-space:nowrap;pointer-events:none}
+.lp-audio-wait-dots{font-size:18px;letter-spacing:2px}
 .lp-notice{max-width:630px;margin:0 auto 12px;padding:12px;border-radius:12px;background:var(--lp-yellow-tint);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .lp-notice p{font-size:.9rem}
 .lp-map{width:100%;max-width:680px;margin:auto;padding:15px 28px 45px}

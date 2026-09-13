@@ -54,7 +54,7 @@ async function main() {
     report.samples.push(await timing('replay','/l01-d02.mp3','replay'));
     await page.evaluate(()=>{window.audioStartDelay=1500;});
     await page.locator('[data-action="replay"]').click();
-    await page.getByText('正在准备声音…',{exact:true}).waitFor({timeout:750});
+    await page.locator('.lp-audio-wait[aria-label="正在准备声音…"]').waitFor({timeout:750});
     assert.equal(await page.locator('[data-action="pause"]').count(),0,'do not claim playing before native playing');
     await page.locator('[data-action="pause"]').waitFor();
     await page.waitForFunction(()=>playbackObservation.elements.some(e=>e.src.endsWith('/l01-d02.mp3')&&e.events.filter(v=>v.type==='ended').length===3));

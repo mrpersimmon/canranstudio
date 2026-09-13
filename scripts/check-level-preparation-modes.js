@@ -50,7 +50,7 @@ async function main() {
     await context.setOffline(true);
     await page.evaluate(()=>{window.startDelay=1000;});
     await page.locator('[data-action="exercise-listen"][data-id="'+question.listenRefs[0]+'"]').click();
-    await page.getByText('正在准备声音…',{exact:true}).waitFor({timeout:750});
+    await page.locator('.lp-audio-wait[aria-label="正在准备声音…"]').waitFor({timeout:750});
     assert.equal(await page.locator('[data-action="exercise-listen"][data-id="'+question.listenRefs[0]+'"]').isDisabled(),true,'waiting speech suppresses duplicate play requests');
     await page.locator('[data-action="exercise-select"][data-id="'+question.answer[0]+'"]').click();
     await page.locator('[data-action="placement-check"]').click();
