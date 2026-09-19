@@ -1,9 +1,9 @@
-# Lesson 50 landmark assets
+# Lesson 50 王室厨房素材
 
-Lesson 50「挑食小王子」运行时只使用 `states/state-0.png` 至 `state-5.png` 六张完整累计状态图。城堡、菜园基线、透视和镜头固定，每关只增加与挑食、蔬菜、宴会和王子故事有关的内容。
+正式图片使用 `states/state-0.png` 至 `state-5.png`，每张都是完整地点；成长主题是蔬果、宴席和王子故事。
 
-`states/manifest.json` 登记 512/768/1024 三档 AVIF、WebP 与 PNG 回退；地图只加载当前状态，成长揭晓只显示相邻两张完整图。`royal-vegetable-crest.png` 是独立永久纪念物，不得烘焙进 `state-5`。
+[素材清单](states/manifest.json)登记原图和三档网页图片。[royal-vegetable-crest.png](royal-vegetable-crest.png)是独立纪念物，不画进最后状态。
 
-原始 ImageGen 资产表保存在 `docs/designs/adventure-map/generated-sheets/lesson50-magenta-sheet.png`。目标风格为儿童绘本水彩与水粉、暖色石砌小城堡、红紫色屋顶和金色点缀；禁止文字、人物、UI、水印以及与本阶段无关的装饰。
+[美术规则](../../../docs/designs/adventure-map/landmark-art-bible-v1.md)统一说明画布、透明背景、固定位置、导出与验收；[本课状态联系表](../../../docs/designs/adventure-map/lesson50-state-snapshots-contact-sheet.png)用于逐阶段比较。
 
-`landmark-base.png`、`growth-*.png`、`mobile-preview.png` 与原始洋红素材表只保留为历史美术过程文件，运行时不得引用。联系表为 `docs/designs/adventure-map/lesson50-state-snapshots-contact-sheet.png`。
+旧 `landmark-base.png`、`growth-*.png`、`base.png` 和 `mobile-preview.png` 仅作历史参考，页面不再引用。

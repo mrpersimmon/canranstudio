@@ -49,11 +49,11 @@ test('every published course appears in the shared home catalog and authored rel
   );
 });
 
-test('README describes the current atlas-only cumulative-state publication contract', async () => {
+test('README describes the course home and preserves the internal growth artwork contract', async () => {
   const readme = await fs.readFile(path.join(ROOT, 'README.md'), 'utf8');
 
-  assert.match(readme, /`\/` — 十二城区冒险图鉴世界总览/);
-  assert.match(readme, /Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线/);
+  assert.match(readme, /`\/` — 我的课程：继续学习与课程卡片/);
+  assert.match(readme, /原 Lesson 49、50 在“单课练习”中/);
   assert.match(readme, /同一高清母版逐步编辑的完整累计状态图/);
   assert.match(readme, /运行时只加载当前状态的一张图/);
   assert.match(readme, /完成阶段时切换成长前后\s*两张完整图/);
@@ -62,19 +62,18 @@ test('README describes the current atlas-only cumulative-state publication contr
   assert.doesNotMatch(readme, /Lesson 49 uses\s+one cumulative landmark snapshot/);
 });
 
-test('home renders only published map locations and contains no course-directory fallback', async () => {
+test('home directly links available courses without generating a second directory', async () => {
   const home = await fs.readFile(path.join(ROOT, 'index.html'), 'utf8');
 
-  assert.match(home, /courseCatalog\.MAP_COURSES/);
-  assert.match(home, /href="\$\{location\.route\}"/);
+  assert.match(home, /href="\/unit49-50\/#learn\/words"/);
   assert.equal(homeFallback.synchronizeFallback(home), home);
   const authoredHome = homeFallback.withoutGeneratedFallback(home);
   assert.deepEqual(
-    homeFallback.anchorHrefs(authoredHome).filter(href => /^\/(?:lesson\d+|soundmark)\/$/.test(href)),
-    []
+    homeFallback.anchorHrefs(authoredHome).filter(href => /^\/(?:lesson\d+|soundmark)\/$/.test(href)).sort(),
+    PUBLISHED_COURSES.map(course => course.route).sort()
   );
   assert.doesNotMatch(home, /course-catalog-fallback:(?:start|end)/);
-  assert.doesNotMatch(home, /找指定课号|番外站 · 专项技能|继续学习/);
+  assert.doesNotMatch(home, /十二城区冒险图鉴|进入四季生活城/);
 });
 
 test('a future shared-catalog course does not create a second homepage entrance', async () => {
@@ -106,8 +105,7 @@ test('authored fallback guard recognizes browser-parsed course href variants', (
 
 test('public HTML contains no third-party runtime asset URL', async () => {
   const entries = ['index.html', 'home/index.html',
-    ...PUBLISHED_COURSES.map(course => course.entry),
-    ...courseCatalog.PRESENTATION_COURSES.map(course => course.presentation.entry)];
+    ...PUBLISHED_COURSES.map(course => course.entry)];
   const runtimeTag = /<(script|link|img|audio|video|source)\b[^>]*(?:src|href)=["']([^"']+)["'][^>]*>/gi;
   const external = [];
 

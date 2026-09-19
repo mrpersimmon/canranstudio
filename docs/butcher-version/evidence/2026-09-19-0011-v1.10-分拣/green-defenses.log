@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:37239) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：非布尔的已检查标记不能自动代答 (1.9s)
+  ✓  2 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：别轮答案不能自动代答 (310ms)
+  ✓  3 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：跳过前题的答案不能自动代答 (305ms)
+  ✓  4 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：提前完成不能自动代答 (301ms)
+  ✓  5 tests/e2e/l49-v110-defenses.spec.js:27:1 › 键盘检查后焦点跟随继续，按 Enter 换题且整页不跳动 (381ms)
+
+  5 passed (4.1s)

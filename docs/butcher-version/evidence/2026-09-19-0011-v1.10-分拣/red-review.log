@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+(node:32340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v110.spec.js:35:1 › 末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数 (8.4s)
+
+
+  1) tests/e2e/l49-v110.spec.js:35:1 › 末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数 ───────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-subjects').locator('#tpProg')
+    Expected substring: "再练一题"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-subjects').locator('#tpProg')
+
+
+      42 |   }
+      43 |   for(const i of [0,1]){
+    > 44 |     await expect(stage.locator('#tpProg')).toContainText('再练一题');
+         |                                            ^
+      45 |     await expect(stage.locator('#tpProg')).toContainText('还有 1 道待练');
+      46 |     await expect(stage.locator('#tpItemText')).toHaveText(subjects[i]);
+      47 |     await answerSubject(stage,answers[i]);
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v110.spec.js:44:44
+
+    Error Context: test-results/l49-v110-末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v110-末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v110-末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v110.spec.js:35:1 › 末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数 ────────────────────────────

@@ -1,0 +1,47 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/unit49-50.spec.js --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:54489) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/unit49-50.spec.js:5:1 › 两课共用一个采购单元与词卡，旧课满星不会完成新单元 (5.3s)
+
+
+  1) tests/e2e/unit49-50.spec.js:5:1 › 两课共用一个采购单元与词卡，旧课满星不会完成新单元 ───────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '晚餐采购大冒险', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: '晚餐采购大冒险', exact: true })
+
+
+       9 |   });
+      10 |   await page.goto('/unit49-50/');
+    > 11 |   await expect(page.getByRole('heading', { name: '晚餐采购大冒险', exact: true })).toBeVisible();
+         |                                                                             ^
+      12 |   await expect(page.getByText('新概念英语 · Lesson 49–50', { exact: true })).toBeVisible();
+      13 |   await expect(page.locator('#starCount')).toHaveText('0');
+      14 |   await page.getByRole('button', { name: '开始采购', exact: true }).click();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/unit49-50.spec.js:11:77
+
+    Error Context: test-results/unit49-50-两课共用一个采购单元与词卡，旧课满星不会完成新单元/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit49-50-两课共用一个采购单元与词卡，旧课满星不会完成新单元/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit49-50-两课共用一个采购单元与词卡，旧课满星不会完成新单元/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/unit49-50.spec.js:5:1 › 两课共用一个采购单元与词卡，旧课满星不会完成新单元 ────────────────────────────────────

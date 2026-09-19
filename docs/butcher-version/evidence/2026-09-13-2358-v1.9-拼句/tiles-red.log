@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:47664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v19.spec.js:13:1 › 拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回
+  1) tests/e2e/l49-v19.spec.js:13:1 › 拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回 ──────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      19 |   const initialBoxes=await bank.getByRole('button').evaluateAll(nodes=>nodes.map(n=>({name:n.getAttribute('aria-label')||n.textContent,x:n.getBoundingClientRect().x,y:n.getBoundingClientRect().y,width:n.getBoundingClientRect().width})));
+      20 |   const bankBox=await bank.boundingBox();
+    > 21 |   expect(initialBoxes.every(box=>box.width<bankBox.width*.7)).toBe(true);
+         |                                                               ^
+      22 |   expect(new Set(initialBoxes.map(box=>box.y)).size).toBeLessThan(initialBoxes.length);
+      23 |   await expect(stage.getByRole('button',{name:'撤回最后一个',exact:true})).toHaveCount(0);
+      24 |   const before={bank:await documentTop(bank),check:await documentTop(check)};
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v19.spec.js:21:63
+
+    Error Context: test-results/l49-v19-拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v19-拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v19-拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v19.spec.js:13:1 › 拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回 ───────────────────────────────────

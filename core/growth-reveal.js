@@ -127,6 +127,7 @@
     courses = catalogApi?.COURSES || [],
     courseId = null,
     gateMs = 700,
+    soundEnabled = true,
     onStopAudio = null
   } = {}) {
     if (!doc?.createElement || !doc.body) return createInertController();
@@ -230,6 +231,7 @@
     }
 
     function playFeedback(model) {
+      if (!soundEnabled) return;
       try {
         if (model.soundAsset && win?.Audio) {
           const audio = new win.Audio(publicAsset(model.soundAsset));

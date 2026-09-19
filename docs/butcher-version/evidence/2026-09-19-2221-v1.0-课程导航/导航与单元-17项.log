@@ -1,0 +1,28 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/butcher-navigation.spec.js tests/e2e/unit49-50.spec.js --reporter=list
+
+
+Running 17 tests using 1 worker
+
+(node:57122) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/butcher-navigation.spec.js:4:1 › 首页直接进入组合单元，单课入口不需要经过城区地图 (2.1s)
+  ✓   2 tests/e2e/butcher-navigation.spec.js:18:1 › 继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿 (249ms)
+  ✓   3 tests/e2e/butcher-navigation.spec.js:36:1 › 旧返回地址展开对应单课，错误参数和损坏草稿仍可正常开始 (232ms)
+  ✓   4 tests/e2e/butcher-navigation.spec.js:47:1 › 回到首页与浏览器返回都能继续刚才学习的关卡 (452ms)
+  ✓   5 tests/e2e/butcher-navigation.spec.js:60:1 › 手机平板和桌面均可点击课程，图标完整且无横向溢出 (779ms)
+  ✓   6 tests/e2e/butcher-navigation.spec.js:79:1 › 关闭脚本仍能选择全部课程，键盘可以展开单课 (164ms)
+  ✓   7 tests/e2e/butcher-navigation.spec.js:89:1 › 重开必须两次确认，取消保留单元记录，确认后不会恢复旧进度 (554ms)
+  ✓   8 tests/e2e/unit49-50.spec.js:31:1 › 两课共用一个采购单元与词卡，旧课满星不会完成新单元 (587ms)
+  ✓   9 tests/e2e/unit49-50.spec.js:58:1 › 23 词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答 (3.8s)
+  ✓  10 tests/e2e/unit49-50.spec.js:90:1 › 课文必须听完再进入理解题，历史点读与刷新不代替当前句 (1.2s)
+  ✓  11 tests/e2e/unit49-50.spec.js:122:1 › 区分喜好与当前需求，并保留 Written A 的六种否定结构 (1.1s)
+  ✓  12 tests/e2e/unit49-50.spec.js:140:1 › 从空记录完成整个单元，只有末站结算后领证，保存与打印同一张单元证书 (8.5s)
+  ✓  13 tests/e2e/unit49-50.spec.js:210:1 › 电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列 (2.9s)
+  ✓  14 tests/e2e/unit49-50.spec.js:258:1 › 在长页直接操作另一站后，刷新和封面的继续按钮回到该站 (396ms)
+  ✓  15 tests/e2e/unit49-50.spec.js:274:1 › 新增九词使用可播放的本地录音与完整图卡，听辨录音失败不能靠后备语音解锁检查 (19.2s)
+  ✓  16 tests/e2e/unit49-50.spec.js:309:1 › 采购挑战延续原课的标题旁暂停，暂停和继续保留本题选择 (378ms)
+  ✓  17 tests/e2e/unit49-50.spec.js:323:1 › 从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文 (249ms)
+
+  17 passed (44.2s)

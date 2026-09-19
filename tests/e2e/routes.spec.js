@@ -1,18 +1,14 @@
 'use strict';
 
 const { test, expect } = require('@playwright/test');
-const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
+const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
 const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const routes = [
-  { path: '/', title: /十二城区冒险图鉴/ },
+  { path: '/', title: /我的课程/ },
   ...PUBLISHED_COURSES.map(course => ({
     path: course.route,
     title: new RegExp(escapeRegExp(course.title))
-  })),
-  ...PRESENTATION_COURSES.map(course => ({
-    path: course.presentation.route,
-    title: /课堂投屏/
   }))
 ];
 
@@ -28,24 +24,24 @@ test('/home/ remains a compatibility entry for plain static hosting', async ({ p
   const response = await page.goto('/home/');
   expect(response.status()).toBe(200);
   await expect(page).toHaveURL('http://127.0.0.1:4173/');
-  await expect(page).toHaveTitle(/十二城区冒险图鉴/);
+  await expect(page).toHaveTitle(/我的课程/);
 });
 
 test('/home/ preserves query and hash through the compatibility redirect', async ({ page }) => {
   const response = await page.goto('/home/?course=49#progress');
   expect(response.status()).toBe(200);
   await expect(page).toHaveURL('http://127.0.0.1:4173/?course=49#progress');
-  await expect(page).toHaveTitle(/十二城区冒险图鉴/);
+  await expect(page).toHaveTitle(/我的课程/);
 });
 
-test('atlas landmarks and course return links form a closed navigation loop', async ({ page }) => {
+test('course cards and course return links form a closed navigation loop', async ({ page }) => {
   const routePageCourses = PUBLISHED_COURSES.filter(course => (
     ['lesson49', 'lesson50', 'lesson51', 'lesson52'].includes(course.id)
   ));
   await page.goto('/');
-  await page.getByRole('button', { name: '进入四季生活城', exact: true }).click();
+  await page.getByText('单课练习', { exact: true }).click();
   for (const course of routePageCourses) {
-    await expect(page.locator(`#districtLocations a[href="${course.route}"]`)).toHaveCount(1);
+    await expect(page.locator(`main a[href="${course.route}"]`)).toHaveCount(1);
   }
   for (const course of routePageCourses) {
     await page.goto(course.route);

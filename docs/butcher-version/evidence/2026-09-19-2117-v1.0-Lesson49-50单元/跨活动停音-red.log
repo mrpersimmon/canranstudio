@@ -1,0 +1,40 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/unit49-50.spec.js --grep 从长页直接切到 --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:55769) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/unit49-50.spec.js:321:1 › 从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文 (1.8s)
+
+
+  1) tests/e2e/unit49-50.spec.js:321:1 › 从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文 ────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      325 |   await story.getByRole('button',{name:'开始听课文',exact:true}).click();
+      326 |   await page.locator('.stage-needs').getByRole('button',{name:"She likes tomatoes, but she doesn't want any.",exact:true}).click();
+    > 327 |   expect(await page.evaluate(()=>window.unitAudio[0].paused)).toBe(true);
+          |                                                               ^
+      328 |   await page.evaluate(()=>window.unitAudio[0].dispatchEvent(new Event('ended')));
+      329 |   await expect(story.getByRole('button',{name:'下一句',exact:true})).toBeDisabled();
+      330 |   await expect(page.locator('.stage-needs').getByRole('button',{name:'检查答案',exact:true})).toBeEnabled();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/unit49-50.spec.js:327:63
+
+    Error Context: test-results/unit49-50-从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit49-50-从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit49-50-从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/unit49-50.spec.js:321:1 › 从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文 ─────────────────────────────

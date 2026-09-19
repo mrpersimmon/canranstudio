@@ -3,6 +3,7 @@
 const http = require('node:http');
 const path = require('node:path');
 const fs = require('node:fs/promises');
+const { relocateSource, subpathRuntime } = require('../../scripts/public-base-path');
 
 const ROOT = process.cwd();
 const PORT = 4173;
@@ -22,7 +23,8 @@ const TYPES = {
 };
 
 function resolveRequestPath(requestUrl) {
-  const pathname = decodeURIComponent(new URL(requestUrl, 'http://127.0.0.1').pathname);
+  let pathname = decodeURIComponent(new URL(requestUrl, 'http://127.0.0.1').pathname);
+  if (pathname.startsWith('/lesson/')) pathname = pathname.slice('/lesson'.length);
   const withIndex = pathname.endsWith('/') ? `${pathname}index.html` : pathname;
   const absolute = path.resolve(ROOT, `.${withIndex}`);
   if (absolute !== ROOT && !absolute.startsWith(`${ROOT}${path.sep}`)) {
@@ -32,6 +34,15 @@ function resolveRequestPath(requestUrl) {
 }
 
 const server = http.createServer(async (request, response) => {
+  const pathname = new URL(request.url, 'http://127.0.0.1').pathname;
+  const scoped = pathname.startsWith('/lesson/');
+  if (pathname === '/lesson' || /^\/lesson\/home(?:\/|\/index\.html)?$/.test(pathname)) {
+    response.writeHead(308, { Location: '/lesson/' }).end(); return;
+  }
+  const generated = scoped && subpathRuntime('/lesson/')[pathname.slice('/lesson/'.length)];
+  if (generated) {
+    response.writeHead(200, { 'Content-Type': TYPES['.js'], 'Service-Worker-Allowed': '/lesson/' }).end(generated); return;
+  }
   let file;
   try {
     file = resolveRequestPath(request.url);
@@ -46,9 +57,11 @@ const server = http.createServer(async (request, response) => {
   }
 
   try {
-    const body = await fs.readFile(file);
+    let body = await fs.readFile(file);
+    if (scoped && /\.(?:html|js|css|json|svg)$/.test(file)) body = relocateSource(body.toString(), path.relative(ROOT, file), '/lesson/');
     response.writeHead(200, {
       'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream',
+      ...(pathname === '/tests/fixtures/root-media-worker.js' ? { 'Service-Worker-Allowed': '/' } : {}),
       'Cache-Control': 'no-store'
     });
     response.end(request.method === 'HEAD' ? undefined : body);

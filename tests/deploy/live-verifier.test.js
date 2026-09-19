@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
-const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('../../scripts/course-registry');
+const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 const verifier = require('../../scripts/verify-live');
 const {
   verifyBase,
@@ -19,10 +19,6 @@ const {
 const EXPECTED_ROUTES = [
   { path: '/', file: 'index.html' },
   ...PUBLISHED_COURSES.map(course => ({ path: course.route, file: course.entry })),
-  ...PRESENTATION_COURSES.map(course => ({
-    path: course.presentation.route,
-    file: course.presentation.entry
-  })),
   { path: '/poc/landmark-review/', file: 'poc/landmark-review/index.html' },
   { path: '/release-manifest.json', file: 'release-manifest.json' }
 ];
@@ -45,7 +41,6 @@ const REVIEW_SECURITY_HEADERS = {
 const FIXTURE_FILES = {
   'index.html': Buffer.from('home'),
   'lesson49/index.html': Buffer.from('lesson49'),
-  'lesson49/present/index.html': Buffer.from('lesson49 classroom presentation'),
   'lesson50/index.html': Buffer.from('lesson50'),
   'soundmark/index.html': Buffer.from('soundmark'),
   'lesson51/index.html': Buffer.from('lesson51'),
@@ -144,7 +139,6 @@ function manifestFetch(root, options = {}) {
   const routeFiles = new Map([
     ['/', 'index.html'],
     ...PUBLISHED_COURSES.map(course => [course.route, course.entry]),
-    ...PRESENTATION_COURSES.map(course => [course.presentation.route, course.presentation.entry]),
     ['/poc/landmark-review/', 'poc/landmark-review/index.html'],
     ['/release-manifest.json', 'release-manifest.json']
   ]);
@@ -277,7 +271,6 @@ test('verifyBase fetches and hashes every runtime artifact with bounded concurre
     [
       { file: 'index.html', path: '/' },
       { file: 'lesson49/index.html', path: '/lesson49/' },
-      { file: 'lesson49/present/index.html', path: '/lesson49/present/' },
       { file: 'lesson50/index.html', path: '/lesson50/' },
       { file: 'soundmark/index.html', path: '/soundmark/' },
       { file: 'lesson51/index.html', path: '/lesson51/' },

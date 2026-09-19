@@ -6,369 +6,9 @@
 <title>肉店大冒险 · At the Butcher's | 新概念英语 Lesson 49</title>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/core/certificate-gate.css">
-<style>
-:root{
-  --cream:#FFF6E9; --red:#E8503A; --yellow:#F4A72C; --green:#7FB069; --brown:#4A3226;
-  --paper:#FFFDF6; --pink:#FF8FA3; --red-d:#C93A28; --yellow-d:#D98E16; --green-d:#5E9150;
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Baloo 2','ZCOOL KuaiLe','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
-  background:var(--cream);
-  color:var(--brown);
-  font-size:19px; line-height:1.6;
-  background-image:radial-gradient(#f7e8d2 1.5px, transparent 1.5px);
-  background-size:28px 28px;
-  padding-bottom:calc(96px + env(safe-area-inset-bottom)); /* 给底部 Tab 栏留位，防内容遮挡 */
-}
-h1,h2,h3{font-weight:800;line-height:1.25}
-button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none}
-button:focus-visible,a:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
-.hidden{display:none !important}
-.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
-
-/* ===== 顶部导航 ===== */
-#topbar{
-  position:sticky;top:0;z-index:50;background:var(--paper);
-  border-bottom:4px solid var(--brown);box-shadow:0 4px 0 rgba(74,50,38,.12);
-}
-#topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
-#logo{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:20px;font-weight:800;white-space:nowrap;color:var(--red-d);text-decoration:none}
-#logo:hover{color:var(--red)}
-/* ===== 右侧关卡圆点 ===== */
-#sectionDots{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:10px}
-#sectionDots a{width:14px;height:14px;border-radius:50%;border:3px solid var(--brown);background:var(--paper);display:block;transition:transform .2s,background .2s;position:relative}
-#sectionDots a.on{background:var(--red);transform:scale(1.3)}
-#sectionDots a span{position:absolute;right:24px;top:50%;transform:translateY(-50%);background:var(--brown);color:#fff;font-size:12px;padding:2px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
-#sectionDots a:hover span,#sectionDots a:focus-visible span{opacity:1}
-/* ===== 底部 Tab 栏（移动端优先：上一课/世界地图/下一课） ===== */
-#coursenav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);z-index:60;display:flex;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--paper);border-top:4px solid var(--brown);box-shadow:0 -4px 0 rgba(74,50,38,.12)}
-#coursenav .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:54px;border-radius:14px;border:2px solid var(--brown);background:var(--cream);color:var(--brown);text-decoration:none;font-weight:800;font-size:13px;line-height:1.25;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-#coursenav .tab .ti{font-size:20px}
-#coursenav .tab small{font-size:11px;font-weight:400;opacity:.7}
-#coursenav .tab:active{transform:scale(.95)}
-#coursenav .tab.disabled{opacity:.45;border-style:dashed}
-#cnToast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);background:var(--brown);color:var(--cream);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:61;white-space:nowrap}
-#cnToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#starBox{margin-left:auto;display:flex;flex:none;align-items:center;font-weight:800;background:var(--paper);border:3px solid var(--brown);border-radius:999px;padding:5px 15px;box-shadow:3px 3px 0 var(--brown);white-space:nowrap}
-#starCountWrap,#starCount{font-size:17px}
-
-/* ===== 通用组件 ===== */
-section.lvl{scroll-margin-top:96px;padding:56px 0}
-.lvl-head{display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap}
-.lvl-num{
-  width:58px;height:58px;border-radius:50%;background:var(--red);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;
-  border:4px solid var(--brown);box-shadow:3px 3px 0 var(--brown);flex:none;
-}
-.lvl-head h2{font-size:clamp(26px,4.5vw,38px)}
-.lvl-head .en-sub{opacity:.7;font-size:18px;font-weight:700}
-.lvl-stars{font-size:26px;color:var(--yellow);text-shadow:1px 1px 0 var(--brown);letter-spacing:2px}
-.lvl-desc{background:var(--paper);border:3px solid var(--brown);border-radius:18px;padding:12px 18px;margin:10px 0 24px;box-shadow:4px 4px 0 rgba(74,50,38,.15)}
-.panel{background:var(--paper);border:4px solid var(--brown);border-radius:24px;padding:24px;box-shadow:6px 6px 0 rgba(74,50,38,.18);margin-bottom:26px}
-.panel h3{font-size:24px;margin-bottom:12px}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:52px;padding:12px 26px;font-size:20px;font-weight:800;border-radius:999px;
-  border:4px solid var(--brown);color:#fff;transition:transform .12s, box-shadow .12s;
-  box-shadow:0 5px 0 var(--brown);user-select:none;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--brown)}
-.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--brown)}
-.btn-red{background:var(--red)}
-.btn-yellow{background:var(--yellow);color:var(--brown)}
-.btn-green{background:var(--green)}
-.btn-mini{min-height:44px;padding:6px 16px;font-size:16px;border-width:3px;box-shadow:0 3px 0 var(--brown)}
-.spk{
-  min-width:44px;min-height:44px;border-radius:50%;background:var(--yellow);
-  border:3px solid var(--brown);font-size:20px;display:inline-flex;align-items:center;justify-content:center;
-  box-shadow:0 3px 0 var(--brown);transition:transform .12s;flex:none;
-}
-.spk:hover{transform:scale(1.12) rotate(-6deg)}
-.no-speech .spk{display:none}
-.opt-btn{
-  min-height:52px;padding:12px 22px;font-size:20px;font-weight:800;background:#fff;
-  border:3px solid var(--brown);border-radius:18px;box-shadow:0 4px 0 var(--brown);
-  transition:transform .12s;display:inline-flex;align-items:center;gap:8px;
-}
-.opt-btn:hover{transform:translateY(-2px);background:var(--cream)}
-.opt-btn.small{min-height:48px;font-size:18px;padding:8px 18px}
-.opt-btn.good{background:var(--green);color:#fff;animation:pop .35s}
-.opt-btn.bad{background:var(--red);color:#fff}
-.opt-btn .oicon{font-size:24px}
-.fb{min-height:30px;font-weight:800;margin-top:8px;font-size:17px}
-.fb.good{color:var(--green-d)}
-.fb.bad{color:var(--red-d)}
-
-/* ===== 动画 ===== */
-@keyframes bounceIn{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.08)}80%{transform:scale(.96)}100%{transform:scale(1);opacity:1}}
-@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
-@keyframes wiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes dropIn{0%{transform:translateY(-70px) rotate(-8deg);opacity:0}60%{transform:translateY(8px) rotate(2deg);opacity:1}80%{transform:translateY(-4px)}100%{transform:translateY(0) rotate(0)}}
-@keyframes flyL{to{transform:translate(-160px,90px) scale(.3) rotate(-25deg);opacity:0}}
-@keyframes flyR{to{transform:translate(160px,90px) scale(.3) rotate(25deg);opacity:0}}
-@keyframes talk{from{transform:scaleY(.25)}to{transform:scaleY(1.35)}}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes cfall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(110vh) rotate(720deg)}}
-@keyframes punchGlow{0%,100%{box-shadow:0 0 0 0 rgba(232,80,58,.55)}50%{box-shadow:0 0 0 16px rgba(232,80,58,0)}}
-@keyframes starPop{0%{transform:scale(0) rotate(-180deg)}70%{transform:scale(1.3)}100%{transform:scale(1) rotate(0)}}
-.bounce-in{animation:bounceIn .6s cubic-bezier(.34,1.56,.64,1) both}
-.shake{animation:shake .45s}
-.wiggle{animation:wiggle .5s ease-in-out 3}
-.drop{animation:dropIn .5s cubic-bezier(.34,1.56,.64,1) both}
-.flyL{animation:flyL .55s forwards}
-.flyR{animation:flyR .55s forwards}
-
-/* ===== 封面 ===== */
-#cover{min-height:92vh;display:flex;align-items:center;padding:40px 0 60px;scroll-margin-top:80px}
-.cover-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:30px;align-items:center;width:100%}
-.cover-art svg{width:100%;height:auto;display:block;filter:drop-shadow(6px 6px 0 rgba(74,50,38,.15))}
-.cover-txt h1{font-size:clamp(36px,6.5vw,62px);color:var(--red);text-shadow:3px 3px 0 #fff,5px 5px 0 var(--brown);margin-bottom:6px}
-.cover-txt .en-title{font-size:clamp(22px,3.4vw,34px);font-weight:800;color:var(--brown)}
-.cover-txt .sub{
-  display:inline-block;background:var(--yellow);border:3px solid var(--brown);border-radius:999px;
-  padding:8px 20px;font-weight:800;margin:16px 0 24px;box-shadow:3px 3px 0 var(--brown);font-size:19px;
-}
-#startBtn{font-size:26px;padding:16px 44px}
-.startBtn-wrap{display:inline-block;animation:floaty 2.4s ease-in-out infinite}
-.cover-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.presentation-entry{background:var(--brown);color:#fff;text-decoration:none;font-size:18px;padding-inline:24px}
-.cover-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.cover-badges span{background:#fff;border:3px solid var(--brown);border-radius:14px;padding:6px 14px;font-weight:700;font-size:16px;box-shadow:3px 3px 0 rgba(74,50,38,.18)}
-
-/* ===== 第一关 单词卡 ===== */
-#cardGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:18px}
-.fcard{perspective:900px;height:248px;position:relative}
-.fcard-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.34,1.4,.64,1);cursor:pointer}
-.fcard.flipped .fcard-in{transform:rotateY(180deg)}
-.fface{
-  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border:4px solid var(--brown);border-radius:22px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:6px;padding:12px;text-align:center;
-  box-shadow:5px 5px 0 rgba(74,50,38,.18);
-}
-.ffront{background:#fff}
-.fback{background:var(--yellow);transform:rotateY(180deg)}
-.fcard .spk{position:absolute;top:8px;right:8px;min-width:44px;min-height:44px;font-size:18px}
-.ficon{font-size:52px;line-height:1.1;animation:floaty 3s ease-in-out infinite}
-.fen{font-size:26px;font-weight:800}
-.fph{font-size:16px;opacity:.75;font-weight:700}
-.fflip{font-size:13px;opacity:.55;font-weight:700}
-.fcn{font-size:26px;font-weight:800}
-.fpos{font-size:16px;font-weight:700;background:#fff;border:2px solid var(--brown);border-radius:999px;padding:2px 14px}
-.fcard:hover .fcard-in{transform:translateY(-6px) rotate(-1deg)}
-.fcard.flipped:hover .fcard-in{transform:rotateY(180deg) translateY(-6px)}
-
-/* 听音选词 */
-#listenGame{text-align:center}
-#lgPlay .big-ear{font-size:56px;animation:wiggle 1.2s infinite}
-#lgOpts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
-#lgBar{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:19px;margin-bottom:12px;flex-wrap:wrap;gap:8px}
-#lgRound{background:var(--red);color:#fff;border:3px solid var(--brown);border-radius:999px;padding:4px 18px}
-#lgScoreBox{background:var(--yellow);border:3px solid var(--brown);border-radius:999px;padding:4px 18px}
-.lg-result{animation:bounceIn .5s}
-.big-emoji{font-size:64px}
-
-/* ===== 第二关 课文剧场 ===== */
-#stage{
-  background:linear-gradient(#FFE8C9 0 68%, #E8B06B 68% 100%);
-  border:4px solid var(--brown);border-radius:26px;padding:20px 16px 8px;position:relative;overflow:hidden;
-}
-.stage-top{display:flex;justify-content:space-around;align-items:flex-end;gap:10px}
-.char{width:min(42%,260px);text-align:center;transition:transform .2s}
-.char svg{width:100%;height:auto}
-.char .name-tag{
-  display:inline-block;background:#fff;border:3px solid var(--brown);border-radius:999px;
-  padding:4px 16px;font-weight:800;font-size:16px;margin-top:-6px;box-shadow:3px 3px 0 rgba(74,50,38,.25);
-}
-.char.speaking svg{animation:bob .35s ease-in-out infinite}
-.char.speaking .mouth{animation:talk .18s ease-in-out infinite alternate;transform-origin:center;transform-box:fill-box}
-#bubbleArea{margin:18px auto 6px;max-width:760px;min-height:120px;display:flex;flex-direction:column;gap:14px;padding-bottom:12px}
-.bubble-row{display:flex;gap:10px;align-items:flex-start;animation:bounceIn .45s both}
-.bubble-row.bird{flex-direction:row-reverse}
-.avatar{font-size:34px;background:#fff;border:3px solid var(--brown);border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:3px 3px 0 rgba(74,50,38,.25)}
-.bubble{
-  background:#fff;border:4px solid var(--brown);border-radius:20px;padding:12px 18px;max-width:78%;
-  box-shadow:4px 4px 0 rgba(74,50,38,.2);position:relative;
-}
-.bubble-row.butcher .bubble{border-color:var(--red);border-top-left-radius:4px}
-.bubble-row.bird .bubble{border-color:var(--yellow);border-top-right-radius:4px;margin-left:auto}
-.bname{font-size:14px;font-weight:800;opacity:.65;letter-spacing:1px}
-.btext{font-size:22px;font-weight:800}
-.bcn{font-size:16px;opacity:.75;font-weight:700}
-.bbtns{display:flex;gap:8px;margin-top:6px}
-.btext.masked{background:var(--brown);color:var(--yellow);border-radius:12px;padding:2px 12px;display:inline-block;animation:wiggle 1s infinite}
-.bubble-row.punch .bubble{background:var(--yellow);border-color:var(--red);animation:punchGlow 1.6s infinite}
-.bubble-row.punch .btext{font-size:24px;color:var(--red-d)}
-.stage-ctrl{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-#roleBar{background:#fff;border:3px dashed var(--brown);border-radius:18px;padding:12px 16px;margin-top:16px;text-align:center;font-weight:700}
-#roleBar .btn{margin:4px}
-#l2done{text-align:center;font-size:22px;font-weight:800;color:var(--green-d);padding:10px}
-
-/* ===== 第三关 句型魔法屋 ===== */
-#tabbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
-.tabbtn{
-  min-height:52px;padding:10px 20px;font-size:18px;font-weight:800;background:#fff;
-  border:3px solid var(--brown);border-radius:16px;box-shadow:0 4px 0 var(--brown);transition:all .15s;
-}
-.tabbtn.on{background:var(--red);color:#fff;transform:translateY(2px);box-shadow:0 2px 0 var(--brown)}
-.tabpane{display:none}
-.tabpane.on{display:block;animation:pop .35s}
-/* 3a 分拣机 */
-#daStage{text-align:center;position:relative}
-#daItem{
-  display:inline-block;background:#fff;border:4px solid var(--brown);border-radius:20px;
-  padding:18px 34px;font-size:28px;font-weight:800;box-shadow:5px 5px 0 rgba(74,50,38,.2);min-width:280px;
-}
-.baskets{display:flex;justify-content:center;gap:24px;margin-top:22px;flex-wrap:wrap}
-.basket{
-  min-width:220px;min-height:96px;border-radius:22px;border:4px solid var(--brown);
-  font-size:26px;font-weight:800;color:#fff;box-shadow:0 5px 0 var(--brown);transition:transform .15s;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;
-}
-.basket small{font-size:15px;font-weight:700;opacity:.9}
-.basket:hover{transform:scale(1.05)}
-#daDo{background:var(--green)}
-#daAre{background:var(--red)}
-.basket.glow{animation:punchGlow 1s infinite;transform:scale(1.06)}
-#daList{display:flex;flex-direction:column;gap:8px;margin-top:16px;text-align:left}
-.da-line{background:#fff;border:3px solid var(--brown);border-radius:14px;padding:8px 14px;font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px;animation:bounceIn .4s both}
-.da-line .tag{font-size:13px;background:var(--yellow);border:2px solid var(--brown);border-radius:999px;padding:1px 10px;flex:none}
-/* 3b give 变身 */
-#giveStage{text-align:center}
-.give-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0;min-height:60px;align-items:center}
-.tok{
-  background:#fff;border:3px solid var(--brown);border-radius:14px;padding:10px 16px;font-size:21px;font-weight:800;
-  box-shadow:3px 3px 0 rgba(74,50,38,.2);display:inline-block;transition:opacity .3s, transform .3s;
-}
-.tok-to{background:var(--red);color:#fff;animation:starPop .5s both}
-.tok-hl{background:var(--yellow)}
-.give-arrow{font-size:34px;font-weight:800}
-#giveChips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-.gchip{
-  min-height:48px;padding:8px 22px;border-radius:999px;border:3px solid var(--brown);background:#fff;
-  font-size:19px;font-weight:800;box-shadow:0 3px 0 var(--brown);
-}
-.gchip.on{background:var(--green);color:#fff}
-/* 3c 锦囊 */
-#pouchGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.pouch{perspective:800px;height:170px}
-.pouch-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
-.pouch.flipped .pouch-in{transform:rotateY(180deg)}
-.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:4px solid var(--brown);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px;text-align:center;box-shadow:4px 4px 0 rgba(74,50,38,.18)}
-.pfront{background:var(--red);color:#fff;font-size:21px;font-weight:800}
-.pfront::before{content:'🧧';font-size:34px}
-.pback{background:var(--yellow);transform:rotateY(180deg);font-size:20px;font-weight:800}
-.pouch .spk{position:absolute;top:6px;right:6px;min-width:40px;min-height:40px;font-size:16px}
-/* 3d 跷跷板 */
-.rulecard{background:var(--green);color:#fff;border:4px solid var(--brown);border-radius:20px;padding:16px 20px;font-size:20px;font-weight:800;margin-bottom:18px;box-shadow:5px 5px 0 rgba(74,50,38,.2)}
-.rulecard .hl{background:#fff;color:var(--green-d);border-radius:8px;padding:1px 10px}
-#etQ{font-size:26px;font-weight:800;background:#fff;border:4px solid var(--brown);border-radius:18px;padding:16px 22px;text-align:center;margin-bottom:16px}
-#etBtns{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-.et-btn{min-width:180px;min-height:64px;font-size:26px;font-weight:800;border-radius:999px;border:4px solid var(--brown);box-shadow:0 5px 0 var(--brown);color:#fff;transition:transform .12s}
-.et-btn:hover{transform:scale(1.06)}
-#etToo{background:var(--green)}
-#etEither{background:var(--red)}
-
-/* ===== 第四关 三单 ===== */
-#tpItem{display:inline-block;background:#fff;border:4px solid var(--brown);border-radius:20px;padding:16px 32px;font-size:28px;font-weight:800;box-shadow:5px 5px 0 rgba(74,50,38,.2);min-width:260px}
-.tp-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-.tp-col{border:4px dashed var(--brown);border-radius:20px;padding:14px;min-height:150px;background:#fff}
-.tp-col h4{font-size:22px;margin-bottom:10px;text-align:center}
-.tp-col.s h4{color:var(--red)}
-.tp-col.n h4{color:var(--green-d)}
-.tp-chips{display:flex;flex-wrap:wrap;gap:8px}
-.tp-chip{background:var(--cream);border:3px solid var(--brown);border-radius:999px;padding:4px 14px;font-weight:800;font-size:17px;animation:pop .3s}
-.tp-chip.miss{background:var(--red);color:#fff}
-.tp-btns{display:flex;gap:20px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-.qcard{background:#fff;border:3px solid var(--brown);border-radius:18px;padding:14px 18px;margin-bottom:14px;box-shadow:4px 4px 0 rgba(74,50,38,.15)}
-.qtext{font-size:22px;font-weight:800;margin-bottom:10px}
-.qtext .verb{background:var(--yellow);border-radius:8px;padding:1px 10px;font-size:18px}
-.qtext u.blank{color:var(--red);text-decoration:underline wavy var(--red);min-width:60px;display:inline-block;text-align:center}
-.qopts{display:flex;gap:12px;flex-wrap:wrap}
-.trans-card{background:#fff;border:3px solid var(--brown);border-radius:18px;padding:16px 18px;margin-bottom:14px;text-align:center}
-.trans-cn{font-size:24px;font-weight:800}
-.trans-en{font-size:24px;font-weight:800;color:var(--green-d);margin:10px 0;animation:bounceIn .4s}
-#l4result{text-align:center}
-
-/* ===== 第五关 考核 ===== */
-#quizProgTrack{height:22px;border:3px solid var(--brown);border-radius:999px;background:#fff;overflow:hidden;margin-bottom:14px}
-#quizProgFill{height:100%;width:0;background:var(--green);transition:width .4s;border-radius:999px}
-#quizQ{font-size:25px;font-weight:800;background:#fff;border:4px solid var(--brown);border-radius:18px;padding:18px 22px;margin-bottom:16px;min-height:84px}
-#quizOpts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
-#quizResult{text-align:center}
-#quizResult .big-emoji{animation:bounceIn .6s}
-#certArea{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
-#certName{
-  min-height:52px;font-size:20px;font-family:inherit;font-weight:700;border:3px solid var(--brown);
-  border-radius:14px;padding:8px 16px;background:#fff;color:var(--brown);width:min(260px,80vw);text-align:center;
-}
-/* 证书 */
-#certModal{
-  border:0;background:transparent;padding:16px;width:100%;max-width:none;height:100%;max-height:none;
-  overflow-y:auto;
-}
-#certModal::backdrop{background:rgba(74,50,38,.6)}
-#certModal:not([open]){display:none}
-#certModal[open]{display:flex;align-items:center;justify-content:center}
-#certCard{
-  background:var(--paper);border:6px solid var(--brown);border-radius:26px;max-width:640px;width:100%;
-  padding:30px 26px;text-align:center;position:relative;box-shadow:10px 10px 0 rgba(0,0,0,.25);
-  animation:bounceIn .5s;
-}
-#certCard::before{content:'';position:absolute;inset:10px;border:3px dashed var(--red);border-radius:18px;pointer-events:none}
-#certCard h3{font-size:32px;color:var(--red);margin:6px 0}
-#certCard .cert-ribbon{font-size:52px}
-#certNameOut{font-size:34px;font-weight:800;color:var(--brown);border-bottom:4px solid var(--yellow);display:inline-block;padding:0 18px;margin:8px 0}
-#certCard p{font-size:19px;font-weight:700;margin:6px 0}
-#certStars{font-size:36px;color:var(--yellow);text-shadow:2px 2px 0 var(--brown);letter-spacing:4px}
-.cert-btns{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-
-/* 撒花 */
-#confetti{position:fixed;inset:0;pointer-events:none;z-index:98;overflow:hidden}
-.cfp{position:absolute;top:-20px;width:14px;height:14px;animation:cfall linear forwards}
-
-footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
-
-/* ===== 响应式 ===== */
-@media (max-width:820px){
-  .cover-grid{grid-template-columns:1fr}
-}
-@media (max-width:640px){
-  body{font-size:17px}
-  #cardGrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-  .fcard{height:220px}
-  .fen{font-size:21px}.ficon{font-size:42px}.fcn{font-size:21px}
-  .tp-cols{grid-template-columns:1fr}
-  .bubble{max-width:92%}
-  .btext{font-size:19px}
-  #daItem,#tpItem{font-size:22px;min-width:0;width:100%}
-  .btn{font-size:18px;padding:10px 18px}
-  .lvl-num{width:46px;height:46px;font-size:20px}
-}
-/* 手机端顶部吸顶横幅压缩 */
-@media (max-width:720px){
-  #topbar .wrap{gap:10px;padding-top:7px;padding-bottom:7px}
-  #logo{font-size:17px}
-  #starBox{padding:4px 11px;box-shadow:2px 2px 0 var(--brown)}
-  #starCountWrap,#starCount{font-size:14px}
-  #sectionDots{display:none}
-}
-/* ===== 打印证书 ===== */
-@media print{
-  body *{visibility:hidden}
-  #certModal,#certModal *{visibility:visible}
-  #certModal{display:block;position:absolute;inset:0;background:#fff}
-  .cert-btns{display:none}
-}
-@media (prefers-reduced-motion: reduce){
-  *{animation:none!important;transition:none!important}
-}
-</style>
+<link rel="stylesheet" href="/core/lesson49-base.css?v=butcher-1.14">
 <link rel="stylesheet" href="/core/growth-reveal.css">
+<link rel="stylesheet" href="/core/lesson49-experience.css?v=butcher-1.15">
 </head>
 <body>
 <div id="confetti"></div>
@@ -376,10 +16,14 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 <!-- ===== 顶部导航 ===== -->
 <header id="topbar">
   <div class="wrap">
-    <a id="logo" href="/?district=first-book-49-60&amp;focus=lesson49" aria-label="返回肉店在世界地图的位置">🥩 肉店大冒险</a>
+    <a id="logo" href="/?district=first-book-49-60&amp;focus=lesson49" aria-label="返回肉店在我的课程的位置">🥩 肉店大冒险</a>
     <div id="starBox" title="已获星星">
       <span id="starCountWrap">⭐ <span id="starCount">0</span>/15</span>
     </div>
+  </div>
+  <div id="learningSaveWarning" role="alert" hidden>
+    <span>这次暂未保存，先别关闭页面。可以继续练习，再试一次保存。</span>
+    <button id="learningSaveRetry" class="btn btn-mini btn-yellow" hidden>重试保存</button>
   </div>
 </header>
 <nav id="sectionDots" aria-label="本课关卡导航">
@@ -498,15 +142,15 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       </p>
       <div class="cover-actions">
         <div class="startBtn-wrap"><button class="btn btn-red" id="startBtn">🚀 开始冒险！</button></div>
-        <a class="btn presentation-entry" href="/lesson49/present/" aria-label="打开 Lesson 49 课堂投屏">课堂投屏</a>
       </div>
       <div class="cover-badges">
-        <span>🃏 17 张单词卡</span><span>🎭 11 句课文</span><span>✨ 4 个句型魔法</span><span>💪 三单特训</span>
+        <span>🃏 17 张单词卡</span><span>🎭 11 段原文</span><span>✨ 4 个句型魔法</span><span>💪 三单特训</span>
       </div>
     </div>
   </div>
 </section>
 
+<p id="speechNotice" class="wrap" role="status" hidden></p>
 <!-- ===== 第一关·单词肉铺 ===== -->
 <section class="lvl" id="l1">
   <div class="wrap">
@@ -519,21 +163,10 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
     <div id="cardGrid"></div>
 
     <div class="panel" id="listenGame">
-      <h3>🎧 小游戏：听音选词</h3>
-      <p style="font-weight:700;margin-bottom:12px">仔细听发音，从 4 个选项中选出你听到的单词！共 8 轮，答对越多星星越多～</p>
-      <div id="lgStartBox">
-        <button class="btn btn-green" id="lgStartBtn">▶️ 开始挑战（8 轮）</button>
-      </div>
-      <div id="lgPlay" class="hidden">
-        <div id="lgBar">
-          <span id="lgRound">第 1 / 8 轮</span>
-          <button class="spk" id="lgReplay" title="再听一遍">🔊</button>
-          <span id="lgScoreBox">得分 <span id="lgScore">0</span></span>
-        </div>
-        <div class="big-ear">👂 听——是哪一个单词？</div>
-        <div id="lgOpts"></div>
-      </div>
-      <div id="lgResult" class="lg-result hidden"></div>
+      <h3>🎧 听懂客人的话</h3>
+      <div class="practice-toolbar" id="listenStart"><button class="btn btn-green" id="lgStartBtn">开始听辨</button></div>
+      <div id="listenPractice"></div><div id="listenSummary"></div>
+      <details id="listenRecord"><summary>听辨记录</summary><p id="vocabCoverage"></p><p>可以随时重听。</p></details>
     </div>
   </div>
 </section>
@@ -546,7 +179,7 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       <h2>课文剧场 <span class="en-sub">At the Butcher's · 小剧场</span></h2>
       <div class="lvl-stars" id="st-l2">☆☆☆</div>
     </div>
-    <div class="lvl-desc">🎬 点「下一句」看对话上演，点「自动播放」看完整剧情！每句都能点 🔊 跟读。注意最后一句——老板说了个大实话 😂</div>
+    <div class="lvl-desc">🎬 听完一句，再点「下一句」。可以随时重听，完整学过原文后再练角色回应。</div>
 
     <div id="stage">
       <div class="stage-top">
@@ -605,22 +238,22 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
           <div class="name-tag">👜 MRS. BIRD</div>
         </div>
       </div>
-      <div id="bubbleArea"></div>
+      <div id="bubbleArea" role="log" aria-label="课文对话" aria-live="off"></div>
     </div>
 
     <div class="stage-ctrl">
+      <div class="stage-tools">
+      <button class="btn btn-mini btn-yellow" id="autoBtn">重听本句</button>
+      <button class="btn btn-mini btn-yellow" id="replayBtn">重新上演</button>
+      </div>
       <button class="btn btn-red" id="nextBtn">➡️ 下一句</button>
-      <button class="btn btn-yellow" id="autoBtn">▶️ 自动播放</button>
-      <button class="btn btn-green" id="replayBtn">🔄 重新上演</button>
     </div>
 
     <div id="roleBar">
-      🎭 <b>角色扮演模式</b>：选一个角色，TA 的台词会被遮住，你大声说完再点「揭晓」核对！<br>
-      <button class="btn btn-mini btn-yellow" id="roleBird">我演 MRS. BIRD 👜</button>
-      <button class="btn btn-mini btn-red" id="roleButcher">我演 BUTCHER 🔪</button>
-      <button class="btn btn-mini btn-green hidden" id="roleOff">退出扮演</button>
       <div id="roleInfo" style="margin-top:6px;color:var(--red-d)"></div>
+      <button class="btn btn-green" id="roleListenBtn">先听完整课文</button>
     </div>
+    <div id="rolePractice" class="panel" hidden></div>
     <div id="l2done" class="hidden">🎉 演出完成！课文全部读完，奖励已到账～</div>
   </div>
 </section>
@@ -644,71 +277,35 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
     <!-- 3a -->
     <div class="tabpane on" id="t3a">
       <div class="panel" id="daStage">
-        <h3>🧺 Do/Are 分拣机</h3>
-        <p style="font-weight:700">口诀：<b style="color:var(--green-d)">动词 → Do you</b> ｜ <b style="color:var(--red)">非动词（形容词/名词/地点）→ Are you</b><br>把掉下来的题干投进正确的篮子！</p>
-        <p style="margin:10px 0"><b id="daProg">1 / 6</b></p>
-        <div id="daItem" class="drop"><span id="daItemText">you + busy ?</span></div>
-        <div class="fb" id="daHint"></div>
-        <div class="baskets">
-          <button class="basket" id="daDo">DO YOU<small>🐟 后面接动词</small></button>
-          <button class="basket" id="daAre">ARE YOU<small>🍎 后面接非动词</small></button>
-        </div>
-        <div id="daDoneBox" class="hidden">
-          <h3 style="margin-top:18px">🎉 全部分拣完成！完整 6 句跟我读：</h3>
-        </div>
-        <div id="daList"></div>
-        <button class="btn btn-mini btn-green hidden" id="daAgain" style="margin-top:12px">🔄 再玩一次</button>
+        <h3>🧺 现在想问什么？</h3>
+        <div id="doarePractice"></div>
       </div>
     </div>
 
     <!-- 3b -->
-    <div class="tabpane" id="t3b">
-      <div class="panel" id="giveStage">
-        <h3>🔄 give 变身术：give sb. sth. = give sth. to sb.</h3>
-        <p style="font-weight:700">魔法口诀：<b style="color:var(--red)">先换某人和某物，然后中间加个 to！</b> show / send / take 也会同样的变身哦～</p>
-        <div class="give-row" id="giveRow1" style="margin-top:18px"></div>
-        <div class="give-arrow">⬇️ 变身！ ⬇️</div>
-        <div class="give-row" id="giveRow2"></div>
-        <button class="btn btn-red" id="morphBtn" style="margin-top:8px">✨ 播放变身魔法</button>
-        <div class="fb" id="giveFb"></div>
-        <h3 style="margin-top:20px">👇 点芯片，看其他动词的变身：</h3>
-        <div id="giveChips">
-          <button class="gchip on" data-v="give">give 给</button>
-          <button class="gchip" data-v="show">show 给…看</button>
-          <button class="gchip" data-v="send">send 寄</button>
-          <button class="gchip" data-v="take">take 带</button>
-        </div>
-      </div>
-    </div>
+    <div class="tabpane" id="t3b"><div class="panel" id="giveStage">
+      <h3>🔄 给谁？给什么？</h3>
+      <p>先理解订单，再猜另一种说法，最后自己拼好句子、送对人。</p>
+      <div class="give-row" id="giveRow1"></div><div class="give-row" id="giveRow2" hidden></div>
+      <div id="givePractice"></div>
+      <details><summary>选看 give / show / send / take</summary><div id="giveExamples"></div></details>
+    </div></div>
 
     <!-- 3c -->
     <div class="tabpane" id="t3c">
       <div class="panel">
-        <h3>🧧 实话锦囊：想说实话时，先掏出一张锦囊！</h3>
-        <p style="font-weight:700;margin-bottom:14px">老板说的 <b style="color:var(--red)">To tell you the truth</b> 就是「说实话」。下面 5 张锦囊，点开看含义，点 🔊 听发音～</p>
-        <div id="pouchGrid"></div>
+        <h3>🧧 表达锦囊：不同的话，各有用途</h3>
+        <p style="font-weight:700;margin-bottom:14px">老板说的 <b style="color:var(--red)">To tell you the truth</b> 就是「说实话」。其余表达供选看。打开锦囊只算浏览，下面试试在对话中选一句。</p>
+        <div id="pouchGrid"></div><div id="pouchPractice"></div>
       </div>
     </div>
 
     <!-- 3d -->
-    <div class="tabpane" id="t3d">
-      <div class="panel">
-        <h3>⚖️ either / too 跷跷板</h3>
-        <div class="rulecard">✅ 肯定句用 <span class="hl">too</span> 　❌ 否定句用 <span class="hl">either</span><br><small style="font-size:16px">例：I don't like chicken <u>either</u>. / Do you love English <u>too</u>?</small></div>
-        <p style="font-weight:800" id="etProg">第 1 / 6 题</p>
-        <div id="etQ">I don't like chicken ___.</div>
-        <div id="etBtns">
-          <button class="et-btn" id="etToo">too 😊<br><small style="font-size:14px">肯定句</small></button>
-          <button class="et-btn" id="etEither">either 🙅<br><small style="font-size:14px">否定句</small></button>
-        </div>
-        <div class="fb" id="etFb" style="text-align:center"></div>
-        <div id="etDone" class="hidden" style="text-align:center;margin-top:14px">
-          <div class="big-emoji">⚖️🎉</div>
-          <h3>跷跷板平衡大师就是你！</h3>
-          <button class="btn btn-mini btn-green" id="etAgain">🔄 再玩一次</button>
-        </div>
-      </div>
-    </div>
+    <div class="tabpane" id="t3d"><div class="panel">
+      <h3>⚖️ 两个人的想法连起来</h3>
+      <p class="rulecard">“我也喜欢”：I like steak, too.<br>“我也不喜欢”：I don't like chicken either.<br><small>先听前一个人，再看另一个人的偏好；意思和句式一起判断。</small></p>
+      <div id="eitherPractice"></div>
+    </div></div>
   </div>
 </section>
 
@@ -720,38 +317,21 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       <h2>三单训练营 <span class="en-sub">一般现在时 · 第三人称单数</span></h2>
       <div class="lvl-stars" id="st-l4">☆☆☆</div>
     </div>
-    <div class="rulecard">📏 规则卡：主语<b>不是</b>单三 → 动词用<span class="hl">原形</span>；主语<b>是</b>单三（能换成 he/she/it）→ 动词加<span class="hl">s 小尾巴</span>！<br>
-    <small style="font-size:17px">例：My husband like<span style="background:#fff;color:var(--green-d);border-radius:6px;padding:0 6px">s</span> steak. ／ I like lamb.</small></div>
 
-    <div class="panel" style="text-align:center">
-      <h3>🏀 第一练：单三主语分拣</h3>
-      <p style="font-weight:700">谁是「单三」？能换成 he / she / it 的就是！把它投进正确的训练营～（共 <span id="tpTotal"></span> 个）</p>
-      <p style="margin:8px 0"><b id="tpProg"></b></p>
-      <div id="tpItem" class="drop"><span id="tpItemText">Lucy</span></div>
-      <div class="fb" id="tpHint"></div>
-      <div class="tp-btns">
-        <button class="basket" id="tpS" style="background:var(--red);min-width:200px">单三 S 🐶<small>动词加 s</small></button>
-        <button class="basket" id="tpN" style="background:var(--green);min-width:200px">非单三 👨‍👩‍👧<small>动词用原形</small></button>
-      </div>
-      <div class="tp-cols">
-        <div class="tp-col s"><h4>🔴 单三 S 训练营</h4><div class="tp-chips" id="tpListS"></div></div>
-        <div class="tp-col n"><h4>🟢 非单三·原形训练营</h4><div class="tp-chips" id="tpListN"></div></div>
-      </div>
-      <button class="btn btn-mini btn-green hidden" id="tpAgain" style="margin-top:12px">🔄 再练一次</button>
-    </div>
+    <div class="panel"><div id="subjectPractice"></div></div>
 
     <div class="panel">
-      <h3>✏️ 第二练：填空 — 动词要不要加 s？</h3>
+      <h3>✏️ 第二练：把主语放回句子</h3>
       <div id="fillList"></div>
     </div>
 
     <div class="panel">
-      <h3>🎯 第三练：选择题</h3>
+      <h3>🎯 第三练：喜欢与不喜欢</h3>
       <div id="choiceList"></div>
     </div>
 
     <div class="panel">
-      <h3>🌏 第四练：翻译挑战 — 先在心里翻，再揭晓！</h3>
+      <h3>🌏 第四练：用词块说一句</h3>
       <div id="transList"></div>
     </div>
 
@@ -770,28 +350,21 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
       <h2>老板考核 <span class="en-sub">Final Challenge</span></h2>
       <div class="lvl-stars" id="st-l5">☆☆☆</div>
     </div>
-    <div class="lvl-desc">🎓 老板亲自出题！<b>3 道单词 + 2 道 Do/Are + 3 道三单</b>，共 8 题。答完后继续补满五关 15 颗星，就能领取结业证书。</div>
+    <div class="lvl-desc">🎓 用学过的本领处理新订单。共 10 题，两段各 5 题，可以暂停后回来。答题记录和完成奖励分别保留。</div>
 
     <div class="panel">
       <div id="quizStartBox" style="text-align:center">
-        <div class="big-emoji">👨‍🍳📋</div>
-        <button class="btn btn-red" id="quizStartBtn">🔔 开始考核（8 题）</button>
+        <div class="big-emoji">👨‍🍳📋</div><p class="challenge-intro">10 题 · 分两段 · 可以暂停</p><button class="btn btn-red" id="quizStartBtn">开始挑战</button>
       </div>
-      <div id="quizBox" class="hidden">
-        <div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:8px"><span id="quizQnum">第 1 / 8 题</span><span id="quizTag"></span></div>
-        <div id="quizProgTrack"><div id="quizProgFill"></div></div>
-        <div id="quizQ"></div>
-        <div id="quizOpts"></div>
-      </div>
+      <div id="quizBox" class="hidden"><div id="examPractice"></div></div>
       <div id="quizResult" class="hidden">
-        <div class="big-emoji" id="quizEmoji">🏆</div>
-        <h3>考核结束！</h3>
-        <p style="font-size:24px;font-weight:800">得分：<span id="quizScore" style="color:var(--red)">0 / 8</span></p>
-        <p style="font-size:34px" id="quizStars">☆☆☆</p>
-        <button class="btn btn-mini btn-yellow" id="quizAgain">🔄 再考一次</button>
+        <p id="quizStars" aria-label="完成奖励：三颗星"></p><div id="quizHighlights" class="challenge-highlights"></div>
+        <details><summary>本次答题记录</summary><p id="quizScore"></p><p id="quizReview"></p>
+          <p>这份记录只说明本次选项和词块任务的表现；没有检查的词、自由口语与独立写作不在其中。</p>
+        </details>
       </div>
       <div id="certArea">
-        <input id="certName" maxlength="12" placeholder="写上你的大名 ✍️">
+        <input id="certName" maxlength="12" placeholder="你的名字" aria-label="证书上的名字">
         <button class="btn btn-green" id="certBtn">📜 生成结业证书</button>
         <span id="certGateMsg"></span>
       </div>
@@ -800,6 +373,9 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
   </div>
 </section>
 
+<div class="wrap"><details class="panel" id="learningNotebook"><summary>学徒手记</summary>
+<div id="learningRecord"></div><p id="learningSaveStatus" role="status"></p>
+</details></div>
 <!-- ===== 证书弹窗 ===== -->
 <dialog id="certModal" aria-modal="true" aria-labelledby="l49CertTitle">
   <div id="certCard">
@@ -808,10 +384,10 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
     <p>Certificate of Butcher Shop Apprentice</p>
     <p style="margin-top:10px">兹证明小学徒</p>
     <div id="certNameOut">小学徒</div>
-    <p>已通关《新概念英语 Lesson 49 · At the Butcher's》<br>全部五大关卡，表现优秀，特发此证！</p>
+    <p>已通关《新概念英语 Lesson 49 · At the Butcher's》<br>完成全部五大关卡的学习活动，特发此证！</p>
     <div id="certStars">★★★</div>
-    <p>考核星级 ｜ 总星星 ⭐ <span id="certTotal">0</span>/15</p>
-    <p style="margin-top:8px">📅 <span id="certDate"></span>　🔪 肉店老板（盖章）</p>
+    <p>考核星级 ｜ 总星星 <span id="certTotal">0</span>/15</p>
+    <p style="margin-top:8px"><span id="certDate"></span>　肉店老板（盖章）</p>
     <div class="cert-btns">
       <button class="btn btn-mini btn-red" id="certSave">📷 保存图片</button>
       <button class="btn btn-mini btn-green" id="certPrint">🖨️ 打印</button>
@@ -823,13 +399,18 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
 <footer>
   🥩 肉店大冒险 · 新概念英语第一册 Lesson 49 互动课件 ｜ 给爱英语的你 ❤️
 </footer>
-<script src="/core/course-catalog.js"></script>
+<script src="/core/course-catalog.js?v=butcher-1.13"></script>
 <script src="/core/storage.js"></script>
 <script src="/core/progress.js"></script>
 <script src="/core/device-profile.js"></script>
 <script src="/core/growth-reveal.js"></script>
 <script src="/core/certificate-gate.js"></script>
 <script src="/core/audio-player.js"></script>
+<script src="/core/lesson49-icons.js"></script>
+<script src="/core/lesson49-feedback.js?v=butcher-1.14"></script>
+<script src="/core/lesson49-practice.js?v=butcher-1.15"></script>
+<script src="/core/lesson49-role-stage.js?v=butcher-1.13"></script>
+<script src="/core/lesson49-subjects.js?v=butcher-1.15"></script>
 <script>
 'use strict';
 /* ================= 工具 ================= */
@@ -838,135 +419,29 @@ const $$=s=>Array.from(document.querySelectorAll(s));
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
 /* ================= 数据 ================= */
-const WORDS=[
- {en:'butcher',ph:"/'bʊtʃə(r)/",pos:'n.',cn:'卖肉者，肉店老板',icon:'🔪'},
- {en:'meat',ph:'/miːt/',pos:'n.',cn:'（食用）肉',icon:'🥩'},
- {en:'beef',ph:'/biːf/',pos:'n.',cn:'牛肉',icon:'🐄'},
- {en:'lamb',ph:'/læm/',pos:'n.',cn:'羔羊肉',icon:'🐑'},
- {en:'mutton',ph:"/'mʌtn/",pos:'n.',cn:'羊肉',icon:'🍖'},
- {en:'steak',ph:'/steɪk/',pos:'n.',cn:'牛排',icon:'🥓'},
- {en:'mince',ph:'/mɪns/',pos:'n.',cn:'肉馅',icon:'🥣'},
- {en:'chicken',ph:"/'tʃɪkɪn/",pos:'n.',cn:'鸡肉',icon:'🍗'},
- {en:'pork',ph:'/pɔːk/',pos:'n.',cn:'猪肉',icon:'🐷'},
- {en:'fish',ph:'/fɪʃ/',pos:'n.',cn:'鱼肉',icon:'🐟'},
- {en:'husband',ph:"/'hʌzbənd/",pos:'n.',cn:'丈夫',icon:'🤵'},
- {en:'tell',ph:'/tel/',pos:'v.',cn:'告诉',icon:'🗣️'},
- {en:'truth',ph:'/truːθ/',pos:'n.',cn:'实情',icon:'💎'},
- {en:'either',ph:"/'aɪðə(r)/",pos:'adv.',cn:'也（用于否定句）',icon:'➗'}
-];
-const PHRASES=[
- {en:'a piece of steak',ph:'',pos:'短语',cn:'一块牛排',icon:'🥩'},
- {en:'a pound of mince',ph:'',pos:'短语',cn:'一磅肉馅',icon:'⚖️'},
- {en:'instant boiled mutton',ph:'',pos:'短语',cn:'涮羊肉（= mutton hotpot）',icon:'🍲'}
-];
-const POSMAP={'n.':'名词','v.':'动词','adv.':'副词','短语':'短语'};
+const WORDS=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.WORDS;
+const PHRASES=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.PHRASES;
+const POSMAP=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.POSMAP;
 
-const DIALOGUE=[
- {who:'butcher',text:'Do you want any meat today, Mrs. Bird?',cn:'您今天要来点肉吗，伯德夫人？'},
- {who:'bird',text:'Yes, please.',cn:'好的，谢谢。'},
- {who:'butcher',text:'Do you want beef or lamb?',cn:'您要牛肉还是羔羊肉？'},
- {who:'bird',text:'Beef, please.',cn:'请给我牛肉。'},
- {who:'butcher',text:"This lamb's very good.",cn:'这羔羊肉很不错。'},
- {who:'bird',text:"I like lamb, but my husband doesn't.",cn:'我喜欢羔羊肉，可是我丈夫不喜欢。'},
- {who:'butcher',text:'What about some steak? This is a nice piece.',cn:'来点牛排怎么样？这块很好。'},
- {who:'bird',text:'Give me that piece, please. And a pound of mince, too.',cn:'请给我那块。再来一磅肉馅。'},
- {who:'butcher',text:"Do you want a chicken, Mrs. Bird? They're very nice.",cn:'您要只鸡吗，伯德夫人？鸡很好。'},
- {who:'bird',text:"No, thank you. My husband likes steak, but he doesn't like chicken.",cn:'不了，谢谢。我丈夫喜欢牛排，但他不喜欢鸡肉。'},
- {who:'butcher',text:"To tell you the truth, Mrs. Bird, I don't like chicken either!",cn:'说实话，伯德夫人，我也不喜欢鸡肉！',punch:true}
-];
+const DIALOGUE=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.DIALOGUE;
 
-const DOARE=[
- {q:'busy',a:'are',full:'Are you busy?',cn:'你忙吗？'},
- {q:'a teacher',a:'are',full:'Are you a teacher?',cn:'你是老师吗？'},
- {q:'at home',a:'are',full:'Are you at home?',cn:'你在家吗？'},
- {q:'sleep well',a:'do',full:'Do you sleep well?',cn:'你睡得好吗？'},
- {q:'make the bed',a:'do',full:'Do you make the bed?',cn:'你整理床铺吗？'},
- {q:'put on your coat',a:'do',full:'Do you put on your coat?',cn:'你穿上外套吗？'}
-];
+const DOARE=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.DOARE;
 
-const GIVE={
- give:{a:['Give','me','that piece,','please.'],b:['Give','that piece','to','me,','please.']},
- show:{a:['Show','me','your ticket,','please.'],b:['Show','your ticket','to','me,','please.']},
- send:{a:['Send','him','a postcard.'],b:['Send','a postcard','to','him.']},
- take:{a:['Take','her','some flowers.'],b:['Take','some flowers','to','her.']}
-};
+const GIVE=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.GIVE;
 
-const POUCH=[
- {en:'To tell you the truth',cn:'说实话；老实告诉你'},
- {en:'To be honest',cn:'老实说；说实在的'},
- {en:'Well',cn:'嗯……（委婉地开口）'},
- {en:'Yeah',cn:'是啊（随和地应答）'},
- {en:"That's to say",cn:'也就是说；换句话说'}
-];
+const POUCH=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.POUCH;
 
-const ET=[
- {s:"I don't like chicken ___.",a:'either',why:"有 don't，是否定句 → either"},
- {s:"He isn't a teacher ___.",a:'either',why:"有 isn't，是否定句 → either"},
- {s:"She isn't at home ___.",a:'either',why:"有 isn't，是否定句 → either"},
- {s:'Do you love English ___?',a:'too',why:'肯定的疑问句 → too'},
- {s:'They can play football ___.',a:'too',why:'肯定句 → too'},
- {s:'We are students ___.',a:'too',why:'肯定句 → too'}
-];
+const ET=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.ET;
 
-const TP_SING=['Lucy','Sam','Mr. Han','her husband','his sister','that student','the apple','this book','Beijing','my aunt','his dog','its bone','the teacher'];
-const TP_PLUR=['they','I','my parents','the students','we','you','Tom and Jim','these books'];
 
-const FILL=[
- {pre:'He',verb:'love',post:'his girlfriend very much.',opts:['love','loves'],a:'loves',why:'He 是单三 → loves'},
- {pre:'Jim and Lily',verb:'walk',post:'to school every day.',opts:['walk','walks'],a:'walk',why:'Jim and Lily 是两个人，非单三 → walk'},
- {pre:'They',verb:'drink',post:'beer every night.',opts:['drink','drinks'],a:'drink',why:'They 非单三 → drink'},
- {pre:'My dog',verb:'watch',post:'TV at night.',opts:['watch','watches'],a:'watches',why:'My dog=it 是单三 → watches'},
- {pre:'The student',verb:'go',post:'to school on foot.',opts:['go','goes'],a:'goes',why:'The student=he/she 是单三 → goes'}
-];
-const CHOICE=[
- {q:'She ___ up at six in the morning.',opts:['get','gets','getting'],a:1,why:'She 是单三 → gets'},
- {q:'Tom is a student. He ___ in the classroom.',opts:['work','works','working'],a:1,why:'He 是单三 → works'}
-];
-const TRANS=[
- {cn:'她喜欢桃子。',en:'She likes peaches.'},
- {cn:'他想要一辆小汽车。',en:'He wants a car.'}
-];
+const FILL=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FILL;
+const CHOICE=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.CHOICE;
+const TRANS=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.TRANS;
 
-const EXAM=[
- {tag:'单词',q:'🥩「牛排」用英语怎么说？',opts:['mince','steak','mutton','pork'],a:1},
- {tag:'单词',q:"音标 /'mʌtn/ 是哪个单词？",opts:['mutton','mince','meat','lamb'],a:0},
- {tag:'单词',q:'「也（用于否定句）」是哪个词？',opts:['too','either','truth','tell'],a:1},
- {tag:'Do/Are',q:'___ you a teacher?',opts:['Do','Are'],a:1},
- {tag:'Do/Are',q:'___ you sleep well?',opts:['Do','Are'],a:0},
- {tag:'三单',q:'My husband ___ steak. (like)',opts:['like','likes','liking'],a:1},
- {tag:'三单',q:'They ___ beer every night. (drink)',opts:['drink','drinks','drinking'],a:0},
- {tag:'三单',q:'「她喜欢桃子。」怎么翻译？',opts:['She like peaches.','She likes peaches.','She liking peaches.'],a:1}
-];
-
-/* ================= 音效（WebAudio 合成，无需音频文件） ================= */
-let AC=null;
-function ac(){
-  if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){AC=null;}}
-  if(AC&&AC.state==='suspended'){AC.resume();}
-  return AC;
-}
-function tone(f,delay,dur,type,vol){
-  const c=ac();if(!c)return;
-  try{
-    const o=c.createOscillator(),g=c.createGain();
-    o.type=type||'sine';o.frequency.value=f;
-    const T=c.currentTime+(delay||0);
-    g.gain.setValueAtTime(0.0001,T);
-    g.gain.exponentialRampToValueAtTime(vol||0.22,T+0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001,T+dur);
-    o.connect(g);g.connect(c.destination);
-    o.start(T);o.stop(T+dur+0.05);
-  }catch(e){}
-}
-function sndClick(){tone(620,0,0.08,'triangle',0.14);}
-function sndCorrect(){tone(523,0,0.12,'sine',0.25);tone(659,0.1,0.12,'sine',0.25);tone(784,0.2,0.22,'sine',0.25);}
-function sndWrong(){tone(196,0,0.18,'sawtooth',0.10);tone(147,0.12,0.24,'sawtooth',0.10);}
-function sndStar(){tone(880,0,0.1,'triangle',0.2);tone(1175,0.09,0.18,'triangle',0.2);}
-function fanfare(){[523,659,784,1047].forEach((f,i)=>tone(f,i*0.15,0.24,'triangle',0.25));tone(1319,0.62,0.45,'triangle',0.28);}
-document.addEventListener('pointerdown',()=>{ac();},{once:true});
+const EXAM=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.EXAM;
 
 /* ================= 语音朗读（优雅降级） ================= */
-const speechOK=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+const speechOK=Boolean(window.speechSynthesis&&typeof window.SpeechSynthesisUtterance==='function');
 let speechWarned=false;
 if(!speechOK){document.documentElement.classList.add('no-speech');}
 /* 英式语音包挑选（语音列表可能异步加载，需监听 voiceschanged） */
@@ -985,21 +460,24 @@ function pickBritishVoice(){
 }
 if(speechOK){
   ukVoice=pickBritishVoice();
-  window.speechSynthesis.addEventListener('voiceschanged',()=>{ukVoice=pickBritishVoice();});
+  window.speechSynthesis.addEventListener?.('voiceschanged',()=>{ukVoice=pickBritishVoice();});
 }
 const lesson49Audio=CanranCore.audio.createAudioPlayer();
-function speak(text){
+window.addEventListener('lesson49:leave-activity',()=>lesson49Audio.stop());
+function speak(text,onFinish){
   const value=String(text);
-  const source=CanranCore.audio.slugify(value);
+  const source=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.AUDIO[value];
   return lesson49Audio.play({
     text:value,
-    src:source?'audio/'+source+'.mp3':'',
+    retrySource:true,
+    src:source?'/'+source:'',
     rate:0.85,
     voice:ukVoice||pickBritishVoice(),
     onFinish:result=>{
+      if(onFinish)onFinish(result);
       if(result.reason==='unsupported'&&!speechWarned){
         speechWarned=true;
-        alert('当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～');
+        $('#speechNotice').hidden=false;$('#speechNotice').textContent='声音暂时没有播放，请再点一次试试。';
       }
     }
   });
@@ -1022,18 +500,14 @@ const l49GrowthReveal=CanranCore.growthReveal.create({
   storage:localStorage,
   courses:CanranCore.courseCatalog.COURSES,
   courseId:'lesson49',
+  soundEnabled:false,
   onStopAudio:()=>{lesson49Audio.stop();try{speechSynthesis.cancel()}catch{}}
 });
 function getStar(l){return stars[l];}
 function starStr(n){return '★'.repeat(n)+'☆'.repeat(3-n);}
 function totalStars(){return CanranCore.progress.totalRatings(stars,LVLS);}
-const L49_CERTIFICATE_TARGETS=[
-  {id:'l1',selector:'#l1',label:'单词'},
-  {id:'l2',selector:'#l2',label:'课文剧场'},
-  {id:'l3',selector:'#l3',label:'句型魔法屋'},
-  {id:'l4',selector:'#l4',label:'三单训练营'},
-  {id:'l5',selector:'#l5',label:'老板考核'}
-];
+const L49_CERTIFICATE_TARGETS=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.WORKSPACE
+  .map(level=>({id:level.id,selector:'#'+level.id,label:level.title,focusSelector:'h2',hash:'#'+level.id}));
 function canIssueL49Certificate(){
   return CanranCore.certificateGate
     .completionState(stars,L49_CERTIFICATE_TARGETS).eligible;
@@ -1062,7 +536,7 @@ function award(l,n){
   const awarded=CanranCore.progress.awardRating(stars,l,n);
   if(!awarded.changed)return;
   stars=awarded.ratings;
-  const saved=persistStars();renderStars();sndStar();
+  const saved=persistStars();renderStars();
   const growth=CanranCore.growthReveal.recordStageResult({
     storage:localStorage,courses:CanranCore.courseCatalog.COURSES,
     courseId:'lesson49',stageId:l,previousRating,nextRating:stars[l],progressPersisted:saved.persisted
@@ -1088,9 +562,13 @@ function confetti(n){
 }
 
 /* ================= 封面 ================= */
-$('#startBtn').addEventListener('click',()=>{sndClick();document.getElementById('l1').scrollIntoView({behavior:'smooth'});});
 
 /* ================= 第一关：单词卡 ================= */
+function wordArt(w){
+  if(w.image)return '<img src="'+w.image+'" alt="'+w.alt+'" loading="lazy">';
+  if(w.illustration==='butcher')return '<svg role="img" aria-label="肉店老板" viewBox="0 0 200 230">'+$('#charButcher svg').innerHTML+'</svg>';
+  return w.icon||'<span class="word-context">看情境 · 想意思</span>';
+}
 function buildCards(){
   const g=$('#cardGrid');
   if(g.dataset.cardsInitialized==='true')return;
@@ -1102,18 +580,16 @@ function buildCards(){
     c.innerHTML=
       '<div class="fcard-in">'+
         '<div class="fface ffront">'+
-          '<div class="ficon">'+w.icon+'</div>'+
+          '<div class="ficon">'+wordArt(w)+'</div>'+
           '<div class="fen">'+w.en+'</div>'+
           (w.ph?'<div class="fph">'+w.ph+'</div>':'')+
-          '<div class="fflip">👆 点我翻面</div>'+
         '</div>'+
         '<div class="fface fback">'+
-          '<div class="ficon">'+w.icon+'</div>'+
-          '<div class="fcn">'+w.cn+'</div>'+
+          '<div class="ficon">'+wordArt(w)+'</div>'+
+          '<div class="fcn">'+w.cn+'</div>'+ (w.context?'<p class="word-context">'+w.context+'</p>':'')+
           '<div class="fpos">'+w.pos+' '+(POSMAP[w.pos]||'')+'</div>'+
         '</div>'+
-      '</div>'+
-      '<button class="spk" title="听发音">🔊</button>';
+      '</div>';
     const cardIn=c.querySelector('.fcard-in');
     const front=cardIn.querySelector('.ffront');
     const back=cardIn.querySelector('.fback');
@@ -1125,28 +601,20 @@ function buildCards(){
     cardIn.setAttribute('aria-expanded','false');
     front.setAttribute('aria-hidden','false');
     back.setAttribute('aria-hidden','true');
-    function isSpeakerTarget(target){
-      const element=target&&target.nodeType===1?target:target&&target.parentElement;
-      return Boolean(element&&typeof element.closest==='function'&&element.closest('.spk'));
-    }
     function toggleCard(){
       const flipped=c.classList.toggle('flipped');
       cardIn.setAttribute('aria-expanded',String(flipped));
       front.setAttribute('aria-hidden',String(flipped));
       back.setAttribute('aria-hidden',String(!flipped));
-      sndClick();
+      speak(w.en);
     }
-    cardIn.addEventListener('click',event=>{
-      if(isSpeakerTarget(event.target))return;
-      toggleCard();
-    });
+    cardIn.addEventListener('click',toggleCard);
     cardIn.addEventListener('keydown',event=>{
-      if(event.repeat||isSpeakerTarget(event.target))return;
+      if(event.repeat)return;
       if(event.key!=='Enter'&&event.key!==' ')return;
       event.preventDefault();
       toggleCard();
     });
-    c.querySelector('.spk').addEventListener('click',e=>{e.stopPropagation();speak(w.en);});
     fragment.appendChild(c);
   });
   g.appendChild(fragment);
@@ -1154,151 +622,125 @@ function buildCards(){
 }
 
 /* ================= 第一关：听音选词 ================= */
-let LG={round:0,score:0,order:[],cur:null,lock:false};
+const learning=CanranCore.lesson49Practice;
+const roleStage=CanranCore.lesson49RoleStage.create({bar:$('#roleBar'),playAudio:speak});
+const lessonContent=CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning;
+function renderVocabularyCoverage(){
+  const checked=learning.activity('vocabularyChecked')||[];
+  const vocabulary=lessonContent.LISTEN_ROUNDS.flat().map(q=>q.answer);
+  const missing=vocabulary.filter(word=>!checked.includes(word));
+  $('#vocabCoverage').textContent='已练 '+(vocabulary.length-missing.length)+' / '+vocabulary.length+'。'+(missing.length?'待练：'+missing.join('、'):'');
+}
 function startListen(){
-  LG={round:0,score:0,order:shuffle(WORDS).slice(0,8),cur:null,lock:false};
-  $('#lgStartBox').classList.add('hidden');
-  $('#lgResult').classList.add('hidden');
-  $('#lgPlay').classList.remove('hidden');
-  nextLG();
-}
-function nextLG(){
-  if(LG.round>=8){finishLG();return;}
-  LG.lock=false;
-  const w=LG.order[LG.round];LG.cur=w;
-  const opts=shuffle([w].concat(shuffle(WORDS.filter(x=>x.en!==w.en)).slice(0,3)));
-  $('#lgRound').textContent='第 '+(LG.round+1)+' / 8 轮';
-  $('#lgScore').textContent=LG.score;
-  const box=$('#lgOpts');box.innerHTML='';
-  opts.forEach(o=>{
-    const b=document.createElement('button');
-    b.className='opt-btn';b.dataset.en=o.en;
-    b.innerHTML='<span class="oicon">'+o.icon+'</span>'+o.en;
-    b.addEventListener('click',()=>ansLG(b,o));
-    box.appendChild(b);
+  const legacySessionIds=learning.activity('listenMode')==='extra'?['extra','core']:['core','extra'];
+  learning.activity('listenMode','all');$('#listenStart').hidden=true;$('#listenSummary').textContent='';
+  const questions=lessonContent.LISTEN_ROUNDS.flat();
+  learning.mount({element:$('#listenPractice'),questions,sessionId:'all',legacySessionIds,playAudio:speak,
+    allowHints:false,
+    optionImages:Object.fromEntries(WORDS.map(word=>[word.en,word.image])),
+    onAnswer:q=>{const checked=learning.activity('vocabularyChecked')||[];if(!checked.includes(q.answer))learning.activity('vocabularyChecked',checked.concat(q.answer));renderVocabularyCoverage();},
+    onComplete:()=>{learning.activity('listeningComplete',true);award('l1',3);}
   });
-  setTimeout(()=>{if(LG.cur===w)speak(w.en);},350);
 }
-function ansLG(b,o){
-  if(LG.lock)return;LG.lock=true;
-  if(o.en===LG.cur.en){
-    LG.score++;b.classList.add('good');sndCorrect();
-  }else{
-    b.classList.add('bad','shake');sndWrong();
-    $$('#lgOpts .opt-btn').forEach(x=>{if(x.dataset.en===LG.cur.en)x.classList.add('good');});
-  }
-  $('#lgScore').textContent=LG.score;
-  setTimeout(()=>{LG.round++;nextLG();},1050);
-}
-function finishLG(){
-  const s=LG.score;
-  const st=s>=7?3:(s>=5?2:1);
-  award('l1',st);
-  $('#lgPlay').classList.add('hidden');
-  const r=$('#lgResult');
-  r.classList.remove('hidden');
-  r.innerHTML='<div class="big-emoji">'+(s>=7?'🏆':(s>=5?'🎉':'💪'))+'</div>'+
-    '<h3>听力挑战结束！</h3>'+
-    '<p style="font-size:22px;font-weight:800">答对 '+s+' / 8 题 · 获得 <span style="color:var(--yellow-d)">'+starStr(st)+'</span></p>'+
-    '<p style="font-weight:700;margin:6px 0 12px">'+(s>=7?'顺风耳！肉店单词全拿下！':(s>=5?'很棒！再把单词卡多听几遍就更稳啦～':'别灰心，回去点点 🔊 再来一次！'))+'</p>'+
-    '<button class="btn btn-yellow" id="lgAgain">🔄 再玩一次</button>';
-  $('#lgAgain').addEventListener('click',startListen);
-  if(st>=2){confetti(60);fanfare();}else{sndCorrect();}
-}
-$('#lgStartBtn').addEventListener('click',()=>{sndClick();startListen();});
-$('#lgReplay').addEventListener('click',()=>{if(LG.cur)speak(LG.cur.en);});
+$('#lgStartBtn').addEventListener('click',()=>startListen());
+renderVocabularyCoverage();
+if(learning.activity('listenMode')||Number.isInteger(learning.activity('listenRound')))startListen();
 
 /* ================= 第二关：课文剧场 ================= */
-let D={i:-1,auto:null,role:null};
-function speakAnim(who){
-  const el=who==='butcher'?$('#charButcher'):$('#charBird');
-  el.classList.add('speaking');
-  setTimeout(()=>el.classList.remove('speaking'),1500);
+let D={i:-1,ready:true,done:false,heard:[],generation:0};
+const dialogueStatus=document.createElement('p');dialogueStatus.id='dialogueStatus';dialogueStatus.className='fb';dialogueStatus.setAttribute('role','status');$('#bubbleArea').after(dialogueStatus);
+function saveDialogue(){learning.activity('dialogueDraft',{i:D.i,heard:D.heard,done:D.done});}
+function updateRoleAccess(){
+  const complete=learning.activity('fullDialogue')===true;
+  $('#roleInfo').textContent=complete?'':'听完课文，来找故事里的答案。';
+  $('#roleListenBtn').hidden=complete;
+  if(complete&&$('#rolePractice').hidden)startStory();
+}
+function clearDialoguePlayback(){
+  $$('#bubbleArea .bubble-row').forEach(row=>{
+    row.classList.remove('is-playing');row.querySelector('.btext').setAttribute('aria-busy','false');
+  });
+  $$('#stage .char').forEach(character=>character.classList.remove('speaking'));
+}
+function playDialogue(line,index){
+  const generation=++D.generation;
+  clearDialoguePlayback();
+  // A historical replay owns its audio, never the current sentence's completion.
+  D.ready=index===D.i?false:D.heard[D.i]===true;
+  $('#nextBtn').disabled=!D.ready;dialogueStatus.textContent='';
+  const row=$('#bubbleArea').children[index];
+  row.classList.add('is-playing');row.querySelector('.btext').setAttribute('aria-busy','true');
+  $(line.who==='butcher'?'#charButcher':'#charBird').classList.add('speaking');
+  speak(line.text,result=>{
+    if(generation!==D.generation)return;
+    clearDialoguePlayback();
+    const ended=result.reason==='ended'&&!result.sourceFailed;
+    if(index===D.i){
+      if(ended){D.heard[index]=true;saveDialogue();}
+      D.ready=D.heard[index]===true;$('#nextBtn').disabled=!D.ready;
+    }
+    if(!ended&&result.reason!=='cancelled')dialogueStatus.textContent='录音还没有播放完，点这句再听一次。';
+  });
+}
+function followDialogue(){
+  const area=$('#bubbleArea');area.scrollTop=area.scrollHeight;
+}
+function showStoryLead(){
+  const lead=document.createElement('section');lead.className='story-lead';lead.setAttribute('aria-label','听前问题');
+  const title=document.createElement('h3');title.textContent='带着问题听';
+  const list=document.createElement('ol');
+  lessonContent.STORY_LEAD.forEach(text=>{const item=document.createElement('li');item.textContent=text;list.append(item);});
+  lead.append(title,list);$('#bubbleArea').replaceChildren(lead);$('#bubbleArea').scrollTop=0;
+}
+function appendDialogue(index){
+  const line=DIALOGUE[index],row=document.createElement('div');row.className='bubble-row '+line.who+(line.punch?' punch':'');
+  row.innerHTML='<div class="avatar"><img src="/assets/lesson49/icons/'+(line.who==='butcher'?'butcher':'bird')+'.svg" alt=""></div><div class="bubble"><div class="bname">'+(line.who==='butcher'?'BUTCHER 老板':'MRS. BIRD 伯德夫人')+'</div><button type="button" class="btext" aria-busy="false"></button><div class="bcn" hidden></div><div class="bbtns"><button class="btn btn-mini btn-yellow translation">看中文</button></div></div>';
+  const sentence=document.createElement('span');sentence.textContent=line.text;
+  row.querySelector('.btext').append(sentence,CanranCore.lesson49Icons.create('audio'));row.querySelector('.bcn').textContent=line.cn;
+  row.querySelector('.btext').addEventListener('click',()=>playDialogue(line,index));
+  row.querySelector('.translation').addEventListener('click',function(){const cn=row.querySelector('.bcn');cn.hidden=!cn.hidden;this.textContent=cn.hidden?'看中文':'收起中文';});
+  $('#bubbleArea').append(row);followDialogue();return row;
 }
 function nextLine(){
-  if(D.i>=DIALOGUE.length-1)return false;
-  D.i++;
-  const line=DIALOGUE[D.i];
-  const masked=(D.role===line.who);
-  const area=$('#bubbleArea');
-  const row=document.createElement('div');
-  row.className='bubble-row '+line.who+(line.punch?' punch':'');
-  row.innerHTML=
-    '<div class="avatar">'+(line.who==='butcher'?'🔪':'👜')+'</div>'+
-    '<div class="bubble">'+
-      '<div class="bname">'+(line.who==='butcher'?'BUTCHER 老板':'MRS. BIRD 伯德夫人')+(line.punch?' 😂 笑点来了！':'')+'</div>'+
-      '<div class="btext'+(masked?' masked':'')+'">'+(masked?'🎭 轮到你说啦！说完点「揭晓」':line.text)+'</div>'+
-      '<div class="bcn">'+(masked?'':line.cn)+'</div>'+
-      '<div class="bbtns">'+
-        (masked?'<button class="btn btn-mini btn-red reveal">🙈 揭晓</button>':'<button class="spk" title="朗读">🔊</button>')+
-      '</div>'+
-    '</div>';
-  area.appendChild(row);
-  const sp=row.querySelector('.spk');
-  if(sp)sp.addEventListener('click',()=>{speak(line.text);speakAnim(line.who);});
-  const rv=row.querySelector('.reveal');
-  if(rv)rv.addEventListener('click',()=>{
-    const bt=row.querySelector('.btext');
-    bt.classList.remove('masked');bt.textContent=line.text;
-    row.querySelector('.bcn').textContent=line.cn;
-    rv.remove();
-    const b2=document.createElement('button');b2.className='spk';b2.textContent='🔊';
-    b2.addEventListener('click',()=>{speak(line.text);speakAnim(line.who);});
-    row.querySelector('.bbtns').appendChild(b2);
-    speak(line.text);speakAnim(line.who);
-  });
-  speakAnim(line.who);
-  if(!masked)speak(line.text);
-  row.scrollIntoView({behavior:'smooth',block:'center'});
-  if(D.i>=DIALOGUE.length-1)endDialogue();
-  return true;
+  if(!D.ready||D.i>=DIALOGUE.length-1)return;
+  if(D.i===-1)$('#bubbleArea').replaceChildren();
+  D.i++;saveDialogue();appendDialogue(D.i);$('#nextBtn').textContent=D.i===DIALOGUE.length-1?'完成课文学习':'下一句';playDialogue(DIALOGUE[D.i],D.i);
 }
 function endDialogue(){
-  stopAuto();
-  award('l2',D.role?3:2);
-  $('#l2done').classList.remove('hidden');
-  $('#l2done').textContent=D.role
-    ?'🎉 角色扮演完成！你演得真棒，3 颗星到手～'
-    :'🎉 演出完成！试试「角色扮演」，能拿第 3 颗星哦～';
-  confetti(40);
+  if(!D.ready||D.heard.filter(Boolean).length!==DIALOGUE.length)return;
+  D.done=true;saveDialogue();learning.activity('fullDialogue',true);updateRoleAccess();
+  CanranCore.lesson49Feedback.play('complete');
+  $('#l2done').classList.remove('hidden');$('#l2done').textContent='完整听过原文！';$('#nextBtn').textContent='重看课文';award('l2',2);
 }
 function resetDialogue(){
-  stopAuto();
-  D.i=-1;
-  $('#bubbleArea').innerHTML='';
-  $('#l2done').classList.add('hidden');
-  $('#nextBtn').disabled=false;
+  ++D.generation;lesson49Audio.stop();D.i=-1;D.ready=true;D.done=false;D.heard=[];saveDialogue();$('#bubbleArea').replaceChildren();dialogueStatus.textContent='';$('#l2done').classList.add('hidden');$('#nextBtn').disabled=false;$('#nextBtn').textContent='开始听课文';
+  showStoryLead();
 }
-function stopAuto(){
-  if(D.auto){clearInterval(D.auto);D.auto=null;$('#autoBtn').textContent='▶️ 自动播放';}
+$('#nextBtn').textContent='开始听课文';$('#autoBtn').textContent='重听本句';
+$('#nextBtn').addEventListener('click',()=>{if(!D.ready)return;if(D.done){resetDialogue();}else if(D.i===DIALOGUE.length-1)endDialogue();else nextLine();});
+$('#autoBtn').addEventListener('click',()=>{if(D.i<0)nextLine();else playDialogue(DIALOGUE[D.i],D.i);});
+$('#replayBtn').addEventListener('click',resetDialogue);
+function startStory(){
+  if(learning.activity('fullDialogue')!==true)return;
+  $('#rolePractice').hidden=false;
+  roleStage.setReady(true);
+  // A changed activity starts its own run; archived role answers stay in the notebook.
+  learning.mount({element:$('#rolePractice'),questions:lessonContent.STORY_TASKS,sessionId:'story-v1',sceneView:roleStage,onComplete:()=>{ award('l2',3); }});
 }
-$('#nextBtn').addEventListener('click',()=>{sndClick();if(D.i>=DIALOGUE.length-1)resetDialogue();nextLine();});
-$('#autoBtn').addEventListener('click',function(){
-  sndClick();
-  if(D.auto){stopAuto();return;}
-  if(D.i>=DIALOGUE.length-1)resetDialogue();
-  this.textContent='⏸ 停止播放';
-  const step=()=>{const more=nextLine();if(!more)stopAuto();};
-  step();
-  D.auto=setInterval(step,3400);
-});
-$('#replayBtn').addEventListener('click',()=>{sndClick();resetDialogue();nextLine();});
-function setRole(r){
-  D.role=r;sndClick();
-  $('#roleOff').classList.remove('hidden');
-  $('#roleInfo').textContent=r==='bird'
-    ?'你扮演 MRS. BIRD 👜：她的台词先遮住，大声说完再点「揭晓」！'
-    :'你扮演 BUTCHER 🔪：他的台词先遮住，大声说完再点「揭晓」！';
-  resetDialogue();
+$('#roleListenBtn').addEventListener('click',()=>CanranCore.lesson49Experience.navigate('learn/text'));
+function restoreDialogue(){
+  const draft=learning.activity('dialogueDraft');
+  if(draft&&Number.isInteger(draft.i)&&draft.i>=-1&&draft.i<DIALOGUE.length&&Array.isArray(draft.heard)){
+    D.i=draft.i;D.heard=draft.heard;D.done=!!draft.done;D.ready=D.i<0||D.heard[D.i]===true;
+    for(let i=0;i<=D.i;i++)appendDialogue(i);
+    requestAnimationFrame(followDialogue);
+    $('#nextBtn').disabled=!D.ready;$('#nextBtn').textContent=D.done?'重看课文':D.i===DIALOGUE.length-1?'完成课文学习':D.i<0?'开始听课文':'下一句';
+    if(D.i>=0)dialogueStatus.textContent=D.ready?'':'请重听本句。';
+    if(D.done){$('#l2done').classList.remove('hidden');$('#l2done').textContent='完整听过原文！';}
+  }
+  if(D.i<0)showStoryLead();
+  updateRoleAccess();
 }
-$('#roleBird').addEventListener('click',()=>setRole('bird'));
-$('#roleButcher').addEventListener('click',()=>setRole('butcher'));
-$('#roleOff').addEventListener('click',()=>{
-  D.role=null;sndClick();
-  $('#roleOff').classList.add('hidden');
-  $('#roleInfo').textContent='';
-  resetDialogue();
-});
 
 /* ================= 第三关：tab 切换 ================= */
 $$('.tabbtn').forEach(b=>b.addEventListener('click',()=>{
@@ -1306,7 +748,8 @@ $$('.tabbtn').forEach(b=>b.addEventListener('click',()=>{
   b.classList.add('on');
   $$('.tabpane').forEach(p=>p.classList.remove('on'));
   document.getElementById(b.dataset.tab).classList.add('on');
-  sndClick();
+  learning.activity('grammarTab',b.dataset.tab);
+
 }));
 
 /* ---- 3a Do/Are 分拣机 ---- */
@@ -1315,399 +758,71 @@ function checkL3(){
   const n=(L3DONE.da?1:0)+(L3DONE.give?1:0)+(L3DONE.pouch?1:0)+(L3DONE.et?1:0);
   if(n>0)award('l3',n>=4?3:(n>=2?2:1));
 }
-let DA={i:0,order:[],done:false};
 function startDA(){
-  DA={i:0,order:shuffle(DOARE),done:false};
-  $('#daList').innerHTML='';
-  $('#daDoneBox').classList.add('hidden');
-  $('#daAgain').classList.add('hidden');
-  $('#daItem').classList.remove('hidden');
-  $('#daHint').textContent='';
-  showDA();
+  CanranCore.lesson49Practice.mount({element:$('#doarePractice'),questions:DOARE,presentation:'question',onComplete:()=>{L3DONE.da=true;checkL3();}});
 }
-function showDA(){
-  const it=DA.order[DA.i];
-  $('#daProg').textContent=(DA.i+1)+' / 6';
-  const el=$('#daItem');
-  $('#daItemText').textContent='you + '+it.q+' ?';
-  el.classList.remove('drop','flyL','flyR','shake');
-  void el.offsetWidth;
-  el.classList.add('drop');
-}
-function ansDA(kind){
-  if(DA.done)return;
-  const it=DA.order[DA.i];
-  const el=$('#daItem');
-  if(it.a===kind){
-    sndCorrect();
-    el.classList.remove('drop');
-    el.classList.add(kind==='do'?'flyL':'flyR');
-    $('#daHint').textContent='✅ 正确！'+(kind==='do'?'「'+it.q+'」是动词 → Do you':'「'+it.q+'」不是动词 → Are you');
-    $('#daHint').className='fb good';
-    addDALine(it);
-    DA.i++;
-    if(DA.i>=6){DA.done=true;setTimeout(finishDA,650);}
-    else setTimeout(showDA,520);
-  }else{
-    sndWrong();
-    el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
-    (kind==='do'?$('#daAre'):$('#daDo')).classList.add('glow');
-    setTimeout(()=>{$('#daDo').classList.remove('glow');$('#daAre').classList.remove('glow');},900);
-    $('#daHint').textContent='💡 再想想：「'+it.q+'」是动作（动词）吗？动词找 Do you，不是动词找 Are you！';
-    $('#daHint').className='fb bad';
-  }
-}
-function addDALine(it){
-  const d=document.createElement('div');
-  d.className='da-line';
-  d.innerHTML='<span class="tag">'+(it.a==='do'?'DO':'ARE')+'</span><span style="flex:1">'+it.full+' <small style="opacity:.6">'+it.cn+'</small></span><button class="spk">🔊</button>';
-  d.querySelector('.spk').addEventListener('click',()=>speak(it.full));
-  $('#daList').appendChild(d);
-}
-function finishDA(){
-  $('#daDoneBox').classList.remove('hidden');
-  $('#daAgain').classList.remove('hidden');
-  confetti(35);
-  L3DONE.da=true;checkL3();
-}
-$('#daDo').addEventListener('click',()=>ansDA('do'));
-$('#daAre').addEventListener('click',()=>ansDA('are'));
-$('#daAgain').addEventListener('click',()=>{sndClick();startDA();});
 
 /* ---- 3b give 变身术 ---- */
-let GV={v:'give',used:false};
 function renderGive(){
-  const g=GIVE[GV.v];
-  $('#giveRow1').innerHTML=g.a.map(t=>'<span class="tok">'+t+'</span>').join('');
-  $('#giveRow2').innerHTML=g.b.map(t=>'<span class="tok'+(t==='to'?' tok-to':'')+'">'+t+'</span>').join('');
-  $('#giveRow2').querySelectorAll('.tok').forEach(t=>{t.style.opacity='1';});
-}
-function morph(){
-  const row2=$('#giveRow2');
-  const toks=row2.querySelectorAll('.tok');
-  toks.forEach(t=>{t.style.opacity='0';t.style.transform='scale(.3)';});
-  sndClick();
-  toks.forEach((t,i)=>{
-    setTimeout(()=>{
-      t.style.opacity='1';t.style.transform='scale(1)';
-      if(t.classList.contains('tok-to')){t.classList.remove('tok-to');void t.offsetWidth;t.classList.add('tok-to');}
-      tone(500+i*90,0,0.1,'triangle',0.16);
-    },i*160);
+  $('#giveRow1').textContent=GIVE.give.a.join(' ');$('#giveRow2').hidden=true;
+  learning.mount({element:$('#givePractice'),questions:lessonContent.GIVE_TASK,onComplete:()=>{L3DONE.give=true;checkL3();}});
+  const box=$('#giveExamples');box.replaceChildren();
+  Object.entries(GIVE).forEach(([verb,g])=>{
+    const detail=document.createElement('details');detail.className='expression-card';
+    const title=document.createElement('summary');title.textContent=verb+' 的两种说法';
+    const example=document.createElement('p');example.textContent=g.a.join(' ')+' → '+g.b.join(' ');
+    detail.append(title,example);box.append(detail);
   });
-  setTimeout(()=>{
-    sndCorrect();
-    $('#giveFb').textContent='✨ 看到没：某人和某物交换位置，中间蹦出一个 to！';
-    $('#giveFb').className='fb good';
-  },toks.length*160+150);
-  if(!GV.used){GV.used=true;L3DONE.give=true;checkL3();}
 }
-$('#morphBtn').addEventListener('click',morph);
-$$('.gchip').forEach(ch=>ch.addEventListener('click',()=>{
-  $$('.gchip').forEach(x=>x.classList.remove('on'));
-  ch.classList.add('on');
-  GV.v=ch.dataset.v;
-  renderGive();
-  $('#giveFb').textContent='';
-  morph();
-  const g=GIVE[GV.v];
-  setTimeout(()=>speak(g.a.join(' ')),900);
-}));
 
 /* ---- 3c 实话锦囊 ---- */
-let pouchOpened=0;
 function buildPouch(){
-  const g=$('#pouchGrid');
+  const box=$('#pouchGrid');box.replaceChildren();
   POUCH.forEach(p=>{
-    const c=document.createElement('div');
-    c.className='pouch';
-    c.innerHTML=
-      '<div class="pouch-in">'+
-        '<div class="pface pfront">'+p.en+'<span style="font-size:14px;opacity:.85">👆 点开锦囊</span></div>'+
-        '<div class="pface pback"><button class="spk">🔊</button><div>'+p.en+'</div><div style="font-size:17px">'+p.cn+'</div></div>'+
-      '</div>';
-    c.querySelector('.pouch-in').addEventListener('click',e=>{
-      if(e.target.closest('.spk'))return;
-      if(!c.classList.contains('flipped')){
-        pouchOpened++;
-        if(pouchOpened>=3&&!L3DONE.pouch){L3DONE.pouch=true;checkL3();}
-      }
-      c.classList.toggle('flipped');sndClick();
-    });
-    c.querySelector('.spk').addEventListener('click',e=>{e.stopPropagation();speak(p.en);});
-    g.appendChild(c);
+    const card=document.createElement('details');card.className='expression-card';
+    const title=document.createElement('summary');title.textContent=p.en;
+    const meaning=document.createElement('p');meaning.textContent=p.cn;
+    const example=document.createElement('p');example.textContent=p.example;
+    const replay=document.createElement('button');replay.className='btn btn-mini btn-yellow';replay.textContent='听表达';
+    replay.addEventListener('click',()=>speak(p.en));card.append(title,meaning,example,replay);box.append(card);
   });
+  learning.mount({element:$('#pouchPractice'),questions:lessonContent.POUCH_TASK,onComplete:()=>{L3DONE.pouch=true;checkL3();}});
 }
 
 /* ---- 3d either/too ---- */
-let ETst={i:0,order:[],done:false};
 function startET(){
-  ETst={i:0,order:shuffle(ET),done:false};
-  $('#etDone').classList.add('hidden');
-  $('#etQ').classList.remove('hidden');
-  $('#etBtns').classList.remove('hidden');
-  $('#etFb').textContent='';
-  showET();
+  learning.mount({element:$('#eitherPractice'),questions:ET,presentation:'reply',onComplete:()=>{L3DONE.et=true;checkL3();}});
 }
-function showET(){
-  const q=ETst.order[ETst.i];
-  $('#etProg').textContent='第 '+(ETst.i+1)+' / 6 题';
-  $('#etQ').textContent=q.s;
-  $('#etQ').classList.remove('shake');
-}
-function ansET(pick){
-  if(ETst.done)return;
-  const q=ETst.order[ETst.i];
-  if(pick===q.a){
-    sndCorrect();
-    $('#etQ').textContent=q.s.replace('___',q.a);
-    $('#etFb').textContent='✅ '+q.why;
-    $('#etFb').className='fb good';
-    ETst.i++;
-    if(ETst.i>=6){
-      ETst.done=true;
-      setTimeout(()=>{
-        $('#etQ').classList.add('hidden');
-        $('#etBtns').classList.add('hidden');
-        $('#etDone').classList.remove('hidden');
-        confetti(35);
-        L3DONE.et=true;checkL3();
-      },900);
-    }else setTimeout(showET,900);
-  }else{
-    sndWrong();
-    $('#etQ').classList.remove('shake');void $('#etQ').offsetWidth;$('#etQ').classList.add('shake');
-    $('#etFb').textContent='💡 看看句子里有没有 not / n\'t：有 → either，没有 → too！';
-    $('#etFb').className='fb bad';
-  }
-}
-$('#etToo').addEventListener('click',()=>ansET('too'));
-$('#etEither').addEventListener('click',()=>ansET('either'));
-$('#etAgain').addEventListener('click',()=>{sndClick();startET();});
 
 /* ================= 第四关：三单训练营 ================= */
-const L4={fill:0,choice:0,awarded:false};
-/* ---- 分拣 ---- */
-let TP={i:0,ok:0,order:[],done:false};
-function startTP(){
-  TP={i:0,ok:0,
-    order:shuffle(TP_SING.map(t=>({t:t,s:true})).concat(TP_PLUR.map(t=>({t:t,s:false})))),
-    done:false};
-  $('#tpListS').innerHTML='';$('#tpListN').innerHTML='';
-  $('#tpTotal').textContent=TP.order.length;
-  $('#tpAgain').classList.add('hidden');
-  $('#tpItem').classList.remove('hidden');
-  $('#tpHint').textContent='';
-  showTP();
-}
-function showTP(){
-  const it=TP.order[TP.i];
-  $('#tpProg').textContent=(TP.i+1)+' / '+TP.order.length;
-  const el=$('#tpItem');
-  $('#tpItemText').textContent=it.t;
-  el.classList.remove('drop','flyL','flyR','shake');
-  void el.offsetWidth;
-  el.classList.add('drop');
-}
-function addTPChip(it,miss){
-  const c=document.createElement('span');
-  c.className='tp-chip'+(miss?' miss':'');
-  c.textContent=it.t+(miss?'（应在这边）':'');
-  (it.s?$('#tpListS'):$('#tpListN')).appendChild(c);
-}
-function ansTP(pickS){
-  if(TP.done)return;
-  const it=TP.order[TP.i];
-  const el=$('#tpItem');
-  if(pickS===it.s){
-    TP.ok++;
-    sndCorrect();
-    el.classList.remove('drop');
-    el.classList.add(pickS?'flyL':'flyR');
-    addTPChip(it,false);
-    $('#tpHint').textContent='✅ 对啦！「'+it.t+'」'+(it.s?'能换成 he/she/it，是单三 → 动词加 s':'不是单三 → 动词用原形');
-    $('#tpHint').className='fb good';
-  }else{
-    sndWrong();
-    el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
-    addTPChip(it,true);
-    $('#tpHint').textContent='💡 「'+it.t+'」'+(it.s?'其实能换成 he/she/it，是单三哦！':'不能换成 he/she/it，不是单三哦！')+'（小提示：试试在心里替换）';
-    $('#tpHint').className='fb bad';
-  }
-  TP.i++;
-  if(TP.i>=TP.order.length){
-    TP.done=true;
-    setTimeout(()=>{
-      $('#tpItem').classList.add('hidden');
-      $('#tpAgain').classList.remove('hidden');
-      $('#tpHint').textContent='🏁 分拣完成！答对 '+TP.ok+' / '+TP.order.length+' 个！';
-      $('#tpHint').className='fb good';
-      checkL4();
-    },600);
-  }else setTimeout(showTP,650);
-}
-$('#tpS').addEventListener('click',()=>ansTP(true));
-$('#tpN').addEventListener('click',()=>ansTP(false));
-$('#tpAgain').addEventListener('click',()=>{sndClick();startTP();});
-
-/* ---- 填空 ---- */
-function buildFill(){
-  const box=$('#fillList');
-  FILL.forEach((f,idx)=>{
-    const d=document.createElement('div');
-    d.className='qcard';
-    d.innerHTML='<div class="qtext">'+(idx+1)+'. '+f.pre+' <u class="blank">___</u> '+f.post+' <span class="verb">('+f.verb+')</span></div>'+
-      '<div class="qopts"></div><div class="fb"></div>';
-    const ops=d.querySelector('.qopts');
-    f.opts.forEach(o=>{
-      const b=document.createElement('button');
-      b.className='opt-btn small';b.textContent=o;
-      b.addEventListener('click',()=>{
-        if(d.dataset.done)return;
-        if(o===f.a){
-          d.dataset.done='1';
-          b.classList.add('good');
-          ops.querySelectorAll('button').forEach(x=>x.disabled=true);
-          d.querySelector('.blank').textContent=f.a;
-          const fb=d.querySelector('.fb');fb.textContent='✅ '+f.why;fb.className='fb good';
-          sndCorrect();L4.fill++;checkL4();
-          speak(f.pre+' '+f.a+' '+f.post);
-        }else{
-          b.classList.add('bad','shake');sndWrong();
-          const fb=d.querySelector('.fb');fb.textContent='💡 想一想：「'+f.pre+'」能换成 he / she / it 吗？';fb.className='fb bad';
-          setTimeout(()=>b.classList.remove('bad','shake'),650);
-        }
-      });
-      ops.appendChild(b);
-    });
-    box.appendChild(d);
-  });
-}
-/* ---- 选择 ---- */
-function buildChoice(){
-  const box=$('#choiceList');
-  CHOICE.forEach((f,idx)=>{
-    const d=document.createElement('div');
-    d.className='qcard';
-    const letters=['A','B','C'];
-    d.innerHTML='<div class="qtext">'+(idx+1)+'. '+f.q+'</div><div class="qopts"></div><div class="fb"></div>';
-    const ops=d.querySelector('.qopts');
-    f.opts.forEach((o,oi)=>{
-      const b=document.createElement('button');
-      b.className='opt-btn small';b.textContent=letters[oi]+'. '+o;
-      b.addEventListener('click',()=>{
-        if(d.dataset.done)return;
-        if(oi===f.a){
-          d.dataset.done='1';
-          b.classList.add('good');
-          ops.querySelectorAll('button').forEach(x=>x.disabled=true);
-          const fb=d.querySelector('.fb');fb.textContent='✅ '+f.why;fb.className='fb good';
-          sndCorrect();L4.choice++;checkL4();
-          speak(f.q.replace('___',o));
-        }else{
-          b.classList.add('bad','shake');sndWrong();
-          const fb=d.querySelector('.fb');fb.textContent='💡 找找主语！它是单三吗？动词要加 s 小尾巴吗？';fb.className='fb bad';
-          setTimeout(()=>b.classList.remove('bad','shake'),650);
-        }
-      });
-      ops.appendChild(b);
-    });
-    box.appendChild(d);
-  });
-}
-/* ---- 翻译 ---- */
-function buildTrans(){
-  const box=$('#transList');
-  TRANS.forEach((t,idx)=>{
-    const d=document.createElement('div');
-    d.className='trans-card';
-    d.innerHTML='<div class="trans-cn">'+(idx+1)+'. '+t.cn+'</div>'+
-      '<div class="fb" style="text-align:center">🤔 先在心里翻译一遍，注意主语是不是单三！</div>'+
-      '<div class="trans-en hidden">'+t.en+'</div>'+
-      '<button class="btn btn-mini btn-yellow revealT">🙈 揭晓答案</button> '+
-      '<button class="spk hidden">🔊</button>';
-    const en=d.querySelector('.trans-en'),btn=d.querySelector('.revealT'),sp=d.querySelector('.spk');
-    btn.addEventListener('click',()=>{
-      en.classList.remove('hidden');
-      sp.classList.remove('hidden');
-      btn.classList.add('hidden');
-      d.querySelector('.fb').textContent='✅ 对照一下：三单的 s 加对了吗？';
-      d.querySelector('.fb').className='fb good';
-      sndCorrect();speak(t.en);
-    });
-    sp.addEventListener('click',()=>speak(t.en));
-    box.appendChild(d);
-  });
-}
-/* ---- 结算 ---- */
+const L4={fill:false,choice:false,trans:false,awarded:false};
+function startTP(){CanranCore.lesson49Subjects.mount({element:$('#subjectPractice'),onComplete:checkL4});}
+function buildFill(){learning.mount({element:$('#fillList'),questions:FILL,presentation:'cloze',onComplete:()=>{L4.fill=true;checkL4();}});}
+function buildChoice(){learning.mount({element:$('#choiceList'),questions:CHOICE,onComplete:()=>{L4.choice=true;checkL4();}});}
+function buildTrans(){learning.mount({element:$('#transList'),questions:TRANS,onComplete:()=>{L4.trans=true;checkL4();}});}
 function checkL4(){
-  if(L4.awarded)return;
-  if(TP.done&&L4.fill>=FILL.length&&L4.choice>=CHOICE.length){
-    L4.awarded=true;
-    const max=TP.order.length+FILL.length+CHOICE.length;
-    const got=TP.ok+L4.fill+L4.choice;
-    const pct=got/max;
-    const st=pct>=0.85?3:(pct>=0.6?2:1);
-    award('l4',st);
-    $('#l4result').classList.remove('hidden');
-    $('#l4summary').innerHTML='训练营毕业！总分 '+got+' / '+max+' · 获得 <span style="color:var(--yellow-d)">'+starStr(st)+'</span>';
-    if(st>=2)confetti(60);else sndCorrect();
-    $('#l4result').scrollIntoView({behavior:'smooth',block:'center'});
-  }
+  if(L4.awarded||!CanranCore.lesson49Subjects.isComplete()||!L4.fill||!L4.choice||!L4.trans)return;
+  L4.awarded=true;$('#l4result').classList.remove('hidden');$('#l4summary').textContent='三单练习完成！主语分类、完整句和词块任务的表现分别记下了。';award('l4',3);
 }
 
 /* ================= 第五关：老板考核 ================= */
-let EX={i:0,ok:0};
 function startExam(){
-  EX={i:0,ok:0};
-  $('#quizStartBox').classList.add('hidden');
-  $('#quizResult').classList.add('hidden');
-  $('#quizBox').classList.remove('hidden');
-  showEX();
+  const result=$('#quizResult');
+  learning.activity('examStarted',true);$('#quizStartBox').classList.add('hidden');$('#quizBox').classList.remove('hidden');$('#quizResult').classList.add('hidden');
+  learning.mount({element:$('#examPractice'),questions:EXAM,playAudio:speak,chunkSize:5,finalLabel:'查看本次记录',completionDetails:result,onProgress:()=>result.classList.add('hidden'),onComplete:states=>{
+    const first=states.filter(state=>state.firstCorrect&&!state.hintUsed&&!state.revealed).length;
+    const retry=states.filter(state=>state.firstCorrect===false).length;
+    const hinted=states.filter(state=>state.firstCorrect&&state.hintUsed).length;
+    $('#quizHighlights').replaceChildren(...[[first+' / '+EXAM.length,'首次无提示答对'],[hinted,'提示后完成'],[retry,'修正后完成']].map(([count,label])=>{
+      const item=document.createElement('div'),number=document.createElement('strong'),caption=document.createElement('span');
+      number.textContent=count;caption.textContent=label;item.append(number,caption);return item;
+    }));
+    $('#quizResult').classList.remove('hidden');$('#quizScore').textContent='首次且未用额外提示答对：'+first+' / '+EXAM.length+'；提示后完成：'+hinted+'；修正后完成：'+retry+'。';
+    $('#quizReview').textContent=retry||hinted?'建议再练：'+EXAM.filter((q,i)=>!states[i]?.firstCorrect||states[i]?.hintUsed).map(q=>q.target).join('、'):'本次挑战已完成。隔一段时间可以再来练一练。';
+    $('#quizStars').textContent='★★★';award('l5',3);
+  }});
 }
-function showEX(){
-  const q=EXAM[EX.i];
-  $('#quizQnum').textContent='第 '+(EX.i+1)+' / '+EXAM.length+' 题';
-  $('#quizTag').textContent='考点：'+q.tag;
-  $('#quizProgFill').style.width=(EX.i/EXAM.length*100)+'%';
-  $('#quizQ').textContent=q.q;
-  const box=$('#quizOpts');box.innerHTML='';delete box.dataset.lock;
-  const opts=q.opts.map((o,i)=>({o:o,ok:i===q.a}));
-  shuffle(opts).forEach(it=>{
-    const b=document.createElement('button');
-    b.className='opt-btn';b.textContent=it.o;
-    b.addEventListener('click',()=>{
-      if(box.dataset.lock)return;box.dataset.lock='1';
-      if(it.ok){EX.ok++;b.classList.add('good');sndCorrect();}
-      else{
-        b.classList.add('bad','shake');sndWrong();
-        box.querySelectorAll('button').forEach(x=>{if(x.textContent===q.opts[q.a])x.classList.add('good');});
-      }
-      setTimeout(()=>{
-        EX.i++;
-        if(EX.i>=EXAM.length)finishEX();else showEX();
-      },1100);
-    });
-    box.appendChild(b);
-  });
-}
-function finishEX(){
-  const s=EX.ok;
-  const st=CanranCore.progress.ratingFor(s,[
-    {min:7,rating:3},
-    {min:5,rating:2},
-    {min:1,rating:1}
-  ]);
-  if(st>0)award('l5',st);
-  renderStars();
-  $('#quizBox').classList.add('hidden');
-  $('#quizResult').classList.remove('hidden');
-  $('#quizEmoji').textContent=s>=7?'🏆':(s>=5?'🎉':'💪');
-  $('#quizScore').textContent=s+' / '+EXAM.length;
-  $('#quizStars').textContent=starStr(st);
-  if(st>=2){confetti(130);fanfare();}else{sndCorrect();}
-}
-$('#quizStartBtn').addEventListener('click',()=>{sndClick();startExam();});
-$('#quizAgain').addEventListener('click',()=>{sndClick();startExam();});
+$('#quizStartBtn').addEventListener('click',startExam);
 
 /* ================= 结业证书 ================= */
 const l49CertDialog=$('#certModal');
@@ -1750,7 +865,8 @@ function issueL49Certificate(){
   $('#certStars').textContent=starStr(getStar('l5'));
   $('#certTotal').textContent=totalStars();
   openL49CertificateDialog();
-  fanfare();confetti(90);
+  CanranCore.lesson49Feedback.play('complete');
+  confetti(90);
   warmCertFonts(); // 弹窗显示时即预热卡通字体，保证稍后 canvas 绘制时已加载
   return true;
 }
@@ -1760,6 +876,7 @@ const l49CertificateGate=CanranCore.certificateGate.create({
   courseName:'Lesson 49 · 肉店大冒险',icon:'🥩',accent:'#c43f36',
   pageColor:'var(--cream)',itemLabel:'关',
   readyMessage:'15/15 颗星已集齐，可以生成证书。',
+  beforeNavigate:target=>CanranCore.lesson49Experience.navigate(target.hash.slice(1)),
   onEligible:issueL49Certificate
 });
 l49CertDialog.addEventListener('cancel',event=>{
@@ -1878,8 +995,7 @@ function renderCertCanvas(){
   ctx.textAlign='center';ctx.textBaseline='middle';
   const cx=W/2;
   // 顶部图标行
-  ctx.font='92px '+FCN;
-  ctx.fillText('🎖️🥩🎖️',cx,132);
+  certDrawStars(ctx,cx,132,1,1,52,YELLOW,BROWN);
   // 红色大标题
   ctx.fillStyle=RED;
   ctx.font='bold 64px '+FCN;
@@ -1903,16 +1019,16 @@ function renderCertCanvas(){
   ctx.fillStyle=BROWN;
   ctx.font='30px '+FCN;
   ctx.fillText('已通关《新概念英语 Lesson 49 · At the Butcher\'s》',cx,532);
-  ctx.fillText('全部五大关卡，表现优秀，特发此证！',cx,578);
+  ctx.fillText('完成全部五大关卡的学习活动，特发此证！',cx,578);
   // 大星星（按 #certStars 实际星数，黄色 + 深棕描边/阴影）
   const starTxt=$('#certStars').textContent||'';
   const filled=(starTxt.match(/★/g)||[]).length;
   certDrawStars(ctx,cx,668,filled,3,50,YELLOW,BROWN);
   // 统计行（含 #certTotal 数值）
   ctx.font='30px '+FCN;
-  ctx.fillText('考核星级 ｜ 总星星 ⭐ '+($('#certTotal').textContent||'0')+'/15',cx,758);
+  ctx.fillText('考核星级 ｜ 总星星 '+($('#certTotal').textContent||'0')+'/15',cx,758);
   // 日期行
-  ctx.fillText('📅 '+($('#certDate').textContent||'')+'　🔪 肉店老板（盖章）',cx,812);
+  ctx.fillText(($('#certDate').textContent||'')+'　肉店老板（盖章）',cx,812);
   // 右下角红色圆形印章
   certDrawSeal(ctx,W-206,H-196,88,FCN);
   return cv;
@@ -2078,7 +1194,6 @@ function showCertOverlay(src){
     safeRevoke(src);
     safeRemoveNode(ov);
     focusAfterL49Certificate(overlayReturnFocus);
-    try{sndClick();}catch{}
   };
   try{
     ov=document.createElement('div');
@@ -2108,7 +1223,7 @@ function showCertOverlay(src){
 }
 $('#certClose').addEventListener('click',()=>{
   closeL49CertificateDialog();
-  sndClick();
+
 });
 $('#certSave').addEventListener('click',()=>{
   if(!canIssueL49Certificate()){
@@ -2116,7 +1231,7 @@ $('#certSave').addEventListener('click',()=>{
     l49CertificateGate.open();
     return;
   }
-  sndClick();
+
   saveCertImage();
 });
 $('#certPrint').addEventListener('click',()=>{
@@ -2154,6 +1269,8 @@ addEventListener('scroll',updateCourseSectionDots,{passive:true});
 addEventListener('hashchange',updateCourseSectionDots);
 
 /* ================= 初始化 ================= */
+CanranCore.lesson49Practice.initializeNotebook();
+restoreDialogue();
 buildCards();
 buildPouch();
 startDA();
@@ -2163,6 +1280,12 @@ startTP();
 buildFill();
 buildChoice();
 buildTrans();
+const previousGrammarTab=learning.activity('grammarTab');
+if($$('.tabbtn').some(button=>button.dataset.tab===previousGrammarTab)){
+  $$('.tabbtn').forEach(button=>button.classList.toggle('on',button.dataset.tab===previousGrammarTab));
+  $$('.tabpane').forEach(pane=>pane.classList.toggle('on',pane.id===previousGrammarTab));
+}
+if(learning.activity('examStarted'))startExam();
 initializeLiveRegions();
 renderStars();
 updateCourseSectionDots();
@@ -2178,12 +1301,13 @@ document.querySelectorAll('#coursenav .tab.disabled').forEach(function(el){
 });
 });
 </script>
-<!-- ===== 底部 Tab 栏：上一课 / 世界地图 / 下一课 ===== -->
+<!-- ===== 底部 Tab 栏：上一课 / 我的课程 / 下一课 ===== -->
 <nav id="coursenav" aria-label="课程导航">
   <span class="tab disabled" aria-disabled="true"><span class="ti">🔒</span><span>◀ 上一课</span><small>敬请期待</small></span>
-  <a class="tab" href="/?district=first-book-49-60&amp;focus=lesson49"><span class="ti">🗺️</span><span>世界地图</span><small>看肉店</small></a>
+  <a class="tab" href="/?district=first-book-49-60&amp;focus=lesson49"><span class="ti">🗺️</span><span>我的课程</span><small>看肉店</small></a>
   <a class="tab" href="/lesson50/"><span class="ti">🤴</span><span>下一课 ▶</span><small>L50 小王子</small></a>
 </nav>
 <div id="cnToast" role="status">🔒 新课程正在建造中，敬请期待！</div>
+<script src="/core/lesson49-experience.js?v=butcher-1.15"></script>
 </body>
 </html>

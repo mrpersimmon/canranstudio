@@ -1,47 +1,9 @@
-# Lesson 51 分层地图发布 QA
+# Lesson 51 旧分层地图检查
 
-> 历史记录：本方案已被 2026-08-05 的完整累计状态图合同取代，不得作为当前生产实现依据。当前权威证据见 `lesson51-state-snapshots-contact-sheet.png`、`assets/adventure-map/lesson51/states/manifest.json` 与 `tests/unit/landmark-state-assets.test.js`。
+历史检查 · 2026-08-03。独立图层方案已于 2026-08-05 被完整累计状态图替代，不作当前实现依据。
 
-## 发布范围
+当时将 Lesson 51 加入暖灯集市，使用底图加五层装饰；Lesson 49 保留完整快照。所有图片为 1024 × 1024 透明 PNG，纪念物独立。
 
-Lesson 51「希腊四季之旅」成为“暖灯集市”的第二个正式学习地点。Lesson 49 保留完整累计快照模式；Lesson 51 使用固定底图和五张独立成长图层，两种模式由共享课程目录显式声明，页面不再根据文件名或课程编号猜测。
+原记录：63 项单元、221 项浏览器、68 项发布检查通过，静态构建成功；752 像素平板预览显示预期的 2/5 图层，无横向溢出或控制台错误。真机仍待执行。
 
-## 状态合同
-
-- 0/5：只渲染 `landmark-base.png`；
-- 1/5–4/5：固定底图，并按真实完成阶段叠加对应图层；
-- 5/5：底图加五层完整花园，另行显示“四季导游罗盘”；
-- 稀疏阶段：只显示 `completedStages.lesson51` 中真实存在的阶段；
-- Lesson 49：每个状态仍只渲染一张完整快照，未迁移成图层模式。
-
-所有 Lesson 51 正式图像均为 `1024 × 1024` PNG 固定画布并带透明通道。移动预览是底图与五层的发布衍生图，不参与成长状态；纪念物没有烘焙进第五层。
-
-## 自动化证据
-
-候选工作区验证：
-
-```text
-63 unit tests passed
-221 Playwright tests passed
-68 deploy tests passed on a clean committed snapshot
-static artifact built successfully
-```
-
-新增或扩展的门禁包括：
-
-- 课程目录拒绝未知地标渲染模式；
-- Lesson 51 从 0/5 到 5/5 始终保留一张底图，并累计显示零至五张独立图层；
-- 每张页面图像的自然尺寸为 `1024 × 1024`，地点框尺寸不随状态变化；
-- 390×844、768×1024、1024×768 均无页面横向溢出；
-- 完成 Lesson 49 后，推荐自然推进到 Lesson 51；
-- 发布合同校验 Lesson 49 与 Lesson 51 的底图、成长图、纪念物和移动预览尺寸与透明通道。
-
-## 浏览器证据
-
-应用内浏览器在 752px 平板视口读取已有 Lesson 51 2/5 进度，页面实际渲染：
-
-1. `landmark-base.png`；
-2. `growth-01-weather.png`；
-3. `growth-02-theatre.png`。
-
-页面宽度等于视口宽度，控制台没有错误。真实微信、iPhone Safari 与 Android Chromium 仍须执行 `docs/mobile-release-smoke-checklist.md`，不得由桌面模拟替代。
+现行图片依据：[状态联系表](../../designs/adventure-map/lesson51-state-snapshots-contact-sheet.png)、[素材清单](../../../assets/adventure-map/lesson51/states/manifest.json)、[图片检查](../../../tests/unit/landmark-state-assets.test.js)。[完整旧记录](../../archive/2026-09-17-docs-before-simplification.zip)。

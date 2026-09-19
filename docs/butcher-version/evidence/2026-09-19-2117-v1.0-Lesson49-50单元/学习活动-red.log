@@ -1,0 +1,120 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/unit49-50.spec.js --reporter=list
+
+
+Running 4 tests using 1 worker
+
+(node:54744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/unit49-50.spec.js:31:1 › 两课共用一个采购单元与词卡，旧课满星不会完成新单元 (2.2s)
+  ✘  2 tests/e2e/unit49-50.spec.js:58:1 › 23 词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答 (5.2s)
+(node:54769) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/e2e/unit49-50.spec.js:90:1 › 课文必须听完再进入理解题，历史点读与刷新不代替当前句 (6.5s)
+(node:54775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/e2e/unit49-50.spec.js:122:1 › 区分喜好与当前需求，并保留 Written A 的六种否定结构 (6.4s)
+
+
+  1) tests/e2e/unit49-50.spec.js:58:1 › 23 词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答 ──────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('region', { name: '听音寻宝', exact: true })
+    Expected substring: "第 1 / 23 题"
+    Received string:    "听音寻宝怎么玩"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('region', { name: '听音寻宝', exact: true })
+        14 × locator resolved to <section role="region" id="learn/listen" aria-label="听音寻宝" class="shop-stage stage-listen">…</section>
+           - unexpected value "听音寻宝怎么玩"
+
+
+      63 |   await expect(room.getByRole('button', { name: '给点线索', exact: true })).toHaveCount(0);
+      64 |   for (let i = 0; i < listeningAnswers.length; i++) {
+    > 65 |     await expect(room).toContainText(`第 ${i + 1} / 23 题`);
+         |                        ^
+      66 |     await expect(room.getByRole('button', { pressed: true })).toHaveCount(0);
+      67 |     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+      68 |     const option = room.getByRole('button', { name: listeningAnswers[i], exact: true });
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/unit49-50.spec.js:65:24
+
+    Error Context: test-results/unit49-50-23-词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit49-50-23-词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit49-50-23-词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/unit49-50.spec.js:90:1 › 课文必须听完再进入理解题，历史点读与刷新不代替当前句 ─────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-roles').getByRole('button', { name: '先听故事', exact: true })
+
+
+      93 |   const roles = page.locator('.stage-roles');
+      94 |   await expect(roles.getByRole('button', { name: 'steak', exact: true })).toHaveCount(0);
+    > 95 |   await roles.getByRole('button', { name: '先听故事', exact: true }).click();
+         |                                                                  ^
+      96 |   const room = page.locator('.stage-text');
+      97 |   await room.getByRole('button', { name: '开始听课文', exact: true }).click();
+      98 |   await expect(room.getByRole('button', { name: '下一句', exact: true })).toBeDisabled();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/unit49-50.spec.js:95:66
+
+    Error Context: test-results/unit49-50-课文必须听完再进入理解题，历史点读与刷新不代替当前句/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit49-50-课文必须听完再进入理解题，历史点读与刷新不代替当前句/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit49-50-课文必须听完再进入理解题，历史点读与刷新不代替当前句/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/unit49-50.spec.js:122:1 › 区分喜好与当前需求，并保留 Written A 的六种否定结构 ───────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-needs')
+    Expected substring: "Penny 喜欢西红柿，家里已经够了，今天不想再买。哪句话符合？"
+    Received string:    "餐桌小任务怎么玩"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-needs')
+        14 × locator resolved to <section role="region" id="learn/needs" aria-label="餐桌小任务" class="shop-stage stage-needs">…</section>
+           - unexpected value "餐桌小任务怎么玩"
+
+
+      123 |   await page.goto('/unit49-50/#learn/needs');
+      124 |   const room = page.locator('.stage-needs');
+    > 125 |   await expect(room).toContainText('Penny 喜欢西红柿，家里已经够了，今天不想再买。哪句话符合？');
+          |                      ^
+      126 |   await room.getByRole('button', { name: 'She likes tomatoes, and she wants some.', exact: true }).click();
+      127 |   await room.getByRole('button', { name: '检查答案', exact: true }).click();
+      128 |   await expect(room.getByRole('status')).toContainText('喜欢不等于这次想要');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/unit49-50.spec.js:125:22
+
+    Error Context: test-results/unit49-50-区分喜好与当前需求，并保留-Written-A-的六种否定结构/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit49-50-区分喜好与当前需求，并保留-Written-A-的六种否定结构/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit49-50-区分喜好与当前需求，并保留-Written-A-的六种否定结构/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/unit49-50.spec.js:58:1 › 23 词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答 ───────────────────────────
+    tests/e2e/unit49-50.spec.js:90:1 › 课文必须听完再进入理解题，历史点读与刷新不代替当前句 ──────────────────────────────────
+    tests/e2e/unit49-50.spec.js:122:1 › 区分喜好与当前需求，并保留 Written A 的六种否定结构 ────────────────────────────
+  1 passed (22.2s)

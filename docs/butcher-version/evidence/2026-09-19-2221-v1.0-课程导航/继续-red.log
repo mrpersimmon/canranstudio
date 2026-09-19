@@ -1,0 +1,47 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/butcher-navigation.spec.js -g 继续学习回到 --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:56656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/butcher-navigation.spec.js:18:1 › 继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿 (5.4s)
+
+
+  1) tests/e2e/butcher-navigation.spec.js:18:1 › 继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿 ─────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('上次学到 · 故事小侦探')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText('上次学到 · 故事小侦探')
+
+
+      26 |   }, saved);
+      27 |   await page.goto('/');
+    > 28 |   await expect(page.getByText('上次学到 · 故事小侦探')).toBeVisible();
+         |                                                ^
+      29 |   await expect(page.getByRole('link',{name:/Lesson 51 希腊四季之旅/})).toContainText('5 / 15 颗星');
+      30 |   expect(await page.evaluate(()=>localStorage.getItem('canran:unit49-50:learning:v1'))).toBe(saved);
+      31 |   await page.getByRole('link',{name:'继续学习',exact:true}).click();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/butcher-navigation.spec.js:28:48
+
+    Error Context: test-results/butcher-navigation-继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/butcher-navigation-继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/butcher-navigation-继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/butcher-navigation.spec.js:18:1 › 继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿 ──────────────────

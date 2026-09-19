@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:90574) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v17.spec.js:148:1 › 辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记
+  1) tests/e2e/l49-v17.spec.js:148:1 › 辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记 ───────────────────────────────
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  getByRole('button', { name: '学徒手记', exact: true })
+    Expected: "solid"
+    Received: "none"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" with timeout 5000ms
+      - waiting for getByRole('button', { name: '学徒手记', exact: true })
+        14 × locator resolved to <button type="button" class="workspace-back">学徒手记</button>
+           - unexpected value "none"
+
+
+      150 |   await page.goto('/lesson49/#learn/text');
+      151 |   for (const button of [page.getByRole('button', { name: '学徒手记', exact: true }), page.locator('.stage-text').getByRole('button', { name: '怎么玩', exact: true }), page.locator('#autoBtn'), page.locator('#replayBtn')]) {
+    > 152 |     await expect(button).toHaveCSS('border-top-style', 'solid');
+          |                          ^
+      153 |     expect(await button.evaluate(node => parseFloat(getComputedStyle(node).borderTopWidth))).toBeGreaterThanOrEqual(2);
+      154 |     expect((await button.boundingBox()).height).toBeGreaterThanOrEqual(44);
+      155 |   }
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:152:26
+
+    Error Context: test-results/l49-v17-辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17.spec.js:148:1 › 辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记 ────────────────────────────────

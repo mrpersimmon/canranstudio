@@ -8,30 +8,13 @@ async function setLiveRatings(page, ratings) {
   }, ratings);
 }
 
-test('Lesson 49 describes its mixed listening options as words, never meat', async ({ page }) => {
-  await page.addInitScript(() => {
-    Object.defineProperty(window, 'speechSynthesis', {
-      configurable: true,
-      value: {
-        getVoices: () => [],
-        addEventListener: () => {},
-        removeEventListener: () => {},
-        speak: utterance => queueMicrotask(() => utterance.onend?.()),
-        cancel: () => {}
-      }
-    });
-  });
-  await page.goto('/lesson49/#l1');
-
-  const level = page.locator('#l1');
-  await expect(page.locator('#cardGrid')).toContainText('husband');
-  await expect(level.locator('.lvl-desc')).toContainText('听音选词');
-  await expect(level.locator('#listenGame h3')).toHaveText('🎧 小游戏：听音选词');
-  await expect(level.locator('#listenGame p').first()).toHaveText(
-    '仔细听发音，从 4 个选项中选出你听到的单词！共 8 轮，答对越多星星越多～'
-  );
-  await expect(level).not.toContainText('听音挑肉');
-  await expect(level).not.toContainText('4 块「肉」');
+test('Lesson 49 describes mixed listening choices as words, never meat', async ({ page }) => {
+  await page.goto('/lesson49/#learn/listen');
+  await expect(page.getByRole('heading',{name:'听音寻宝',exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'开始听辨',exact:true}).click();
+  await expect(page.locator('#listenPractice h3')).toHaveText('听一听，选出单词。');
+  await expect(page.locator('#listenPractice')).not.toContainText('听音挑肉');
+  await expect(page.locator('#listenPractice')).not.toContainText('4 块「肉」');
 });
 
 test('Lesson 49 repairs legacy ratings and does not crash on negative values', async ({ page }) => {
@@ -58,6 +41,7 @@ test('Lesson 49 repairs legacy ratings and does not crash on negative values', a
   expect(saved.ratings).toEqual({ l1: 0, l2: 2, l3: 3, l4: 0, l5: 1 });
   await expect(page.locator('#certBtn')).toBeEnabled();
   await expect(page.locator('#certBtn')).toHaveAttribute('data-certificate-state', 'locked');
+  await page.goto('/lesson49/#learn/certificate');
   await page.locator('#certBtn').click();
   await expect(page.locator('#certModal')).not.toBeVisible();
 });
@@ -90,7 +74,7 @@ test('Lesson 49 rejects all-corrupt v2 ratings before certificate gating', async
 });
 
 test('Lesson 49 keeps its locked certificate entry visible from zero stars', async ({ page }) => {
-  await page.goto('/lesson49/#l5');
+  await page.goto('/lesson49/#learn/certificate');
   await expect(page.locator('#certArea')).toBeVisible();
   await expect(page.locator('#certBtn')).toBeEnabled();
   await expect(page.locator('#certBtn')).toHaveAttribute('data-certificate-state', 'locked');
@@ -100,7 +84,7 @@ test('Lesson 49 five one-star levels remain locked', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
     version: 2, ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 1 }
   })));
-  await page.goto('/lesson49/#l5');
+  await page.goto('/lesson49/#learn/certificate');
   await page.locator('#certBtn').click();
   await expect(page.locator('#certModal')).not.toBeVisible();
   await expect(page.locator('[data-certificate-count]')).toHaveText('还差 10 颗星，还有 5 关未满星。');
@@ -110,11 +94,11 @@ test('Lesson 49 gate guides partial progress and restores focus', async ({ page 
   await page.addInitScript(() => localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
     version: 2, ratings: { l1: 3, l2: 2, l3: 3, l4: 0, l5: 3 }
   })));
-  await page.goto('/lesson49/#l5');
+  await page.goto('/lesson49/#learn/certificate');
 
   await page.locator('#certBtn').click();
   await expect(page.locator('[data-certificate-count]')).toHaveText('还差 4 颗星，还有 2 关未满星。');
-  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「课文剧场」补满星');
+  await expect(page.locator('[data-certificate-go]')).toHaveText('前往「肉店小剧场」补满星');
   await expect(page.locator('[data-certificate-go]')).toBeFocused();
 
   await page.locator('[data-certificate-dismiss]').click();
@@ -123,19 +107,22 @@ test('Lesson 49 gate guides partial progress and restores focus', async ({ page 
   await page.locator('#certBtn').click();
   await page.locator('[data-certificate-go]').click();
   await expect(page).toHaveURL(/#l2$/);
-  await expect(page.locator('#l2 h2')).toBeFocused();
+  await expect(page.locator('#l2-title')).toHaveText('肉店小剧场');
+  await expect(page.locator('#l2-title')).toBeFocused();
 });
 
 test('Lesson 49 certificate opens only when all five levels have three stars', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
     version: 2, ratings: { l1: 3, l2: 3, l3: 3, l4: 3, l5: 3 }
   })));
-  await page.goto('/lesson49/#l5');
+  await page.goto('/lesson49/#learn/certificate');
 
   await expect(page.locator('#certBtn')).toHaveAttribute('data-certificate-state', 'ready');
   await expect(page.locator('#certGateMsg')).toHaveText('15/15 颗星已集齐，可以生成证书。');
   await page.locator('#certBtn').click();
   await expect(page.locator('#certModal')).toBeVisible();
+  await expect(page.locator('#certCard')).toHaveCSS('opacity', '1');
+  await page.screenshot({ path: 'output/playwright/butcher-certificate-ready.png', animations: 'disabled' });
 });
 
 test('Lesson 49 dialog, save, and print paths recheck live eligibility', async ({ page }) => {
@@ -146,7 +133,7 @@ test('Lesson 49 dialog, save, and print paths recheck live eligibility', async (
     window.__printCalls = 0;
     window.print = () => { window.__printCalls += 1; };
   });
-  await page.goto('/lesson49/#l5');
+  await page.goto('/lesson49/#learn/certificate');
 
   const incomplete = { l1: 3, l2: 2, l3: 3, l4: 3, l5: 3 };
   for (const action of ['dialog', 'save', 'print']) {

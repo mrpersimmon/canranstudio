@@ -1,0 +1,112 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/l49-v112.spec.js tests/e2e/l49-v111.spec.js tests/e2e/l49-v110.spec.js tests/e2e/l49-focus.spec.js tests/e2e/l49-v17-actions.spec.js tests/e2e/l49-v18.spec.js tests/e2e/l49-v110-defenses.spec.js --reporter=list
+
+
+Running 61 tests using 1 worker
+
+(node:52344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/l49-focus.spec.js:25:1 › 一个听辨入口贯穿14词，暂停恢复且整轮完成后才满星 (5.1s)
+  ✓   2 tests/e2e/l49-focus.spec.js:58:1 › 课文逐段保留前文，仅对话区跟随新句，下一句不移动整页 (658ms)
+  ✓   3 tests/e2e/l49-focus.spec.js:85:3 › give 检查时不跳动，继续后题干可见 (386ms)
+  ✓   4 tests/e2e/l49-focus.spec.js:85:3 › either 检查时不跳动，继续后题干可见 (387ms)
+  ✓   5 tests/e2e/l49-focus.spec.js:85:3 › fill 检查时不跳动，继续后题干可见 (382ms)
+  ✓   6 tests/e2e/l49-focus.spec.js:85:3 › choice 检查时不跳动，继续后题干可见 (387ms)
+  ✓   7 tests/e2e/l49-focus.spec.js:85:3 › trans 检查时不跳动，继续后题干可见 (459ms)
+  ✓   8 tests/e2e/l49-focus.spec.js:85:3 › exam 检查时不跳动，继续后题干可见 (455ms)
+  ✓   9 tests/e2e/l49-focus.spec.js:101:1 › 人称分拣的选项不被反馈挤动，继续后新主语可见 (372ms)
+  ✓  10 tests/e2e/l49-focus.spec.js:117:1 › 故事理解只显示当前任务，离开与刷新保留当前作答位置 (507ms)
+  ✓  11 tests/e2e/l49-focus.spec.js:130:1 › 退出正在播放的活动会停音，回来后可重听到结束 (349ms)
+  ✓  12 tests/e2e/l49-focus.spec.js:147:71 › 320×568 小屏仍能作答、打开帮助和返回 (427ms)
+  ✓  13 tests/e2e/l49-focus.spec.js:147:71 › 844×390 小屏仍能作答、打开帮助和返回 (435ms)
+  ✓  14 tests/e2e/l49-focus.spec.js:160:1 › 证书使用统一图标并可从公开按钮保存图片、关闭预览 (1.3s)
+  ✓  15 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：非布尔的已检查标记不能自动代答 (253ms)
+  ✓  16 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：别轮答案不能自动代答 (233ms)
+  ✓  17 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：跳过前题的答案不能自动代答 (239ms)
+  ✓  18 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：提前完成不能自动代答 (233ms)
+  ✓  19 tests/e2e/l49-v110-defenses.spec.js:27:1 › 键盘检查不跳动，Enter 换题后新主语与进度可见 (306ms)
+  ✓  20 tests/e2e/l49-v110-defenses.spec.js:47:35 › 320 宽度分拣四格与结束操作不溢出，手机主次按钮同宽 (1.5s)
+  ✓  21 tests/e2e/l49-v110-defenses.spec.js:47:35 › 768 宽度分拣四格与结束操作不溢出，手机主次按钮同宽 (1.6s)
+  ✓  22 tests/e2e/l49-v110-defenses.spec.js:47:35 › 1280 宽度分拣四格与结束操作不溢出，手机主次按钮同宽 (1.6s)
+  ✓  23 tests/e2e/l49-v110-defenses.spec.js:70:1 › 订单听辨真实播放到结束才允许检查，实际请求的是 a pound of mince 录音 (2.7s)
+  ✓  24 tests/e2e/l49-v110-defenses.spec.js:87:1 › 320 窄屏长误选反馈不裁掉开头或结尾 (1.4s)
+  ✓  25 tests/e2e/l49-v110.spec.js:7:42 › 逐题复核 第一人称：答对简短确认，纠错与题稿逐字一致 (1.6s)
+  ✓  26 tests/e2e/l49-v110.spec.js:7:42 › 逐题复核 第二人称：答对简短确认，纠错与题稿逐字一致 (1.6s)
+  ✓  27 tests/e2e/l49-v110.spec.js:7:42 › 逐题复核 第三人称单数：答对简短确认，纠错与题稿逐字一致 (1.6s)
+  ✓  28 tests/e2e/l49-v110.spec.js:7:42 › 逐题复核 第三人称复数：答对简短确认，纠错与题稿逐字一致 (1.4s)
+  ✓  29 tests/e2e/l49-v110.spec.js:20:1 › 全错仍可继续回练，间隔题再错进入待练，刷新后保留首答与回练进度 (2.6s)
+  ✓  30 tests/e2e/l49-v110.spec.js:42:1 › 间隔题再次答错，不能从待练集合消失；连点检查和继续不跳题 (1.7s)
+  ✓  31 tests/e2e/l49-v110.spec.js:64:1 › 分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题 (397ms)
+  ✓  32 tests/e2e/l49-v110.spec.js:89:1 › 12 张关系图均可见；390 窄屏中提示、反馈、长题目和完成按钮保持稳定 (2.7s)
+  ✓  33 tests/e2e/l49-v110.spec.js:130:1 › 同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断 (4.2s)
+  ✓  34 tests/e2e/l49-v110.spec.js:208:1 › 刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答 (947ms)
+  ✓  35 tests/e2e/l49-v110.spec.js:243:1 › 末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数 (1.8s)
+  ✓  36 tests/e2e/l49-v111.spec.js:15:1 › 升级加载避开未标版本及 v1.11 旧组件，刷新保留星星、题号和待检查选择 (654ms)
+  ✓  37 tests/e2e/l49-v111.spec.js:57:1 › 短屏从检查区换题后，新题题干可见；检查反馈本身不移动按钮 (383ms)
+  ✓  38 tests/e2e/l49-v111.spec.js:73:1 › 挑战从长听力题切换到阅读题，题干必须出现在顶部导航下方 (421ms)
+  ✓  39 tests/e2e/l49-v111.spec.js:88:1 › 下一题题干已在视口内时，保持滚动位置 (369ms)
+  ✓  40 tests/e2e/l49-v111.spec.js:101:1 › 两处听辨均为大喇叭和两列图文选项，挑战暂停在标题旁 (466ms)
+  ✓  41 tests/e2e/l49-v111.spec.js:132:1 › 选择题反馈靠近答案；直接纠错、提示和检查都不推移操作按钮 (499ms)
+  ✓  42 tests/e2e/l49-v111.spec.js:170:1 › 普通练习和挑战的问句、回应与填空使用同一表现，结束后可重练和继续 (2.7s)
+  ✓  43 tests/e2e/l49-v112.spec.js:5:1 › 错题直接说明，重试与答对后清除纠错，不再提供展开原因入口 (611ms)
+  ✓  44 tests/e2e/l49-v112.spec.js:27:1 › 分拣题答对只显示成功，答错保留对应误选的纠错信息 (593ms)
+  ✓  45 tests/e2e/l49-v112.spec.js:49:4 › 听音寻宝听辨答错后可重听重选，不展示释义或原因入口 (4.5s)
+  ✓  46 tests/e2e/l49-v112.spec.js:49:4 › 老板的挑战听辨答错后可重听重选，不展示释义或原因入口 (6.7s)
+  ✓  47 tests/e2e/l49-v112.spec.js:70:44 › 320px 直接纠错完整可见，灯泡、检查和重试的位置稳定 (450ms)
+  ✓  48 tests/e2e/l49-v112.spec.js:70:44 › 390px 直接纠错完整可见，灯泡、检查和重试的位置稳定 (416ms)
+  ✓  49 tests/e2e/l49-v112.spec.js:70:44 › 768px 直接纠错完整可见，灯泡、检查和重试的位置稳定 (439ms)
+  ✓  50 tests/e2e/l49-v112.spec.js:70:44 › 1280px 直接纠错完整可见，灯泡、检查和重试的位置稳定 (465ms)
+  ✓  51 tests/e2e/l49-v112.spec.js:91:1 › 词块拼装答错直接纠错，重拼答对后清除解释并保留真实首答记录 (591ms)
+  ✓  52 tests/e2e/l49-v112.spec.js:113:1 › 320px 锦囊纠错只说明本题依据，全文不需要在反馈区内滚动 (323ms)
+  ✓  53 tests/e2e/l49-v17-actions.spec.js:71:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐 (21.6s)
+  ✓  54 tests/e2e/l49-v17-actions.spec.js:71:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐 (20.1s)
+  ✓  55 tests/e2e/l49-v17-actions.spec.js:127:1 › 320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组 (2.5s)
+  ✘  56 tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定 (5.7s)
+(node:52534) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  57 tests/e2e/l49-v18.spec.js:86:35 › 320 宽度八个非听辨活动统一灯泡，提示可读且刷新不预选、不播放 (4.5s)
+  ✓  58 tests/e2e/l49-v18.spec.js:86:35 › 768 宽度八个非听辨活动统一灯泡，提示可读且刷新不预选、不播放 (3.2s)
+  ✓  59 tests/e2e/l49-v18.spec.js:86:35 › 1280 宽度八个非听辨活动统一灯泡，提示可读且刷新不预选、不播放 (3.3s)
+  ✓  60 tests/e2e/l49-v18.spec.js:126:1 › 词块题用线索后仍需手动拼装，记录提示后完成，下一题和重练清空线索 (920ms)
+  ✓  61 tests/e2e/l49-v18.spec.js:149:1 › 挑战听辨保留听完门槛；阅读题灯泡、暂停和刷新不自动作答 (965ms)
+
+
+  1) tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定 ────────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.stage-doare').getByRole('status')
+    Expected: "再看看，试一次。"
+    Received: "再看看，试一次。本句用动词 like 表达喜好，一般现在时问句是 Do you like meat?"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('.stage-doare').getByRole('status')
+        14 × locator resolved to <div role="status" class="fb bad" aria-live="polite" aria-atomic="true">…</div>
+           - unexpected value "再看看，试一次。本句用动词 like 表达喜好，一般现在时问句是 Do you like meat?"
+
+
+      49 |   await check.scrollIntoViewIfNeeded();const selectedScroll=await page.evaluate(()=>scrollY);
+      50 |   await check.press('Enter');
+    > 51 |   await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+         |                                           ^
+      52 |   await expect(hint).toBeDisabled();await expect(stage.locator('.practice-hint')).toBeHidden();
+      53 |   const retry=stage.getByRole('button',{name:'再试一次',exact:true});
+      54 |   expect(await top(retry)).toBe(initial.check);expect(await top(options)).toBe(initial.options);
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v18.spec.js:51:43
+
+    Error Context: test-results/l49-v18-问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v18-问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v18-问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定 ─────────────────────────────────
+  60 passed (2.1m)

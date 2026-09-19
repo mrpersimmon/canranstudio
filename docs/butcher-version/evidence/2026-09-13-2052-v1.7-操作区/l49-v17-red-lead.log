@@ -1,0 +1,52 @@
+
+Running 1 test using 1 worker
+
+(node:89417) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v17.spec.js:51:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答
+  1) tests/e2e/l49-v17.spec.js:51:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答 ──────────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByRole('region', { name: '听前问题', exact: true }).getByRole('listitem')
+    Timeout: 5000ms
+    - Expected  - 5
+    + Received  + 1
+
+    - Array [
+    -   "丈夫喜欢什么肉？",
+    -   "Mrs. Bird 先选了哪种肉？",
+    -   "老板喜欢鸡肉吗？",
+    - ]
+    + Array []
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for getByRole('region', { name: '听前问题', exact: true }).getByRole('listitem')
+        14 × locator resolved to 0 elements
+
+
+      53 |   await page.goto('/lesson49/#learn/text');
+      54 |   const lead = page.getByRole('region', { name: '听前问题', exact: true });
+    > 55 |   await expect(lead.getByRole('listitem')).toHaveText(['丈夫喜欢什么肉？', 'Mrs. Bird 先选了哪种肉？', '老板喜欢鸡肉吗？']);
+         |                                            ^
+      56 |   await expect(lead.getByRole('button')).toHaveCount(0);
+      57 |   await expect(page.locator('#rolePractice')).toBeHidden();
+      58 |   const next = page.locator('#nextBtn');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:55:44
+
+    Error Context: test-results/l49-v17-先看三个问题再听课文，完整听过并手动完成才开放故事作答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-先看三个问题再听课文，完整听过并手动完成才开放故事作答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-先看三个问题再听课文，完整听过并手动完成才开放故事作答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17.spec.js:51:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答 ───────────────────────────────────

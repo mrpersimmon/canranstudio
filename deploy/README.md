@@ -1,22 +1,39 @@
-# Deployment runbook
+# 网站发布指南
 
-## Scope and transaction boundary
+发布是把已检查的版本放到正式网站。修改文件、本地测试、提交代码和上线是不同步骤。
 
-Production is served at https://www.canranstudio.cn with HSTS. The repository-owned `:80` server
-for 59.110.217.36 now redirects every request to the canonical HTTPS origin; it serves no content.
-TLS/HSTS live on the canonical HTTPS server block, managed outside this repository.
-RISK-HTTP-01 is resolved/retired.
+正式地址配置为 [www.canranstudio.cn](https://www.canranstudio.cn)。直接访问服务器地址 `http://59.110.217.36` 时会跳转到 HTTPS 加密网站；加密连接与强制加密规则（HSTS）由仓库外的正式站点配置管理。
 
-The Nginx configuration gate and content release are intentionally separate. The first changes and
-reloads a repository-owned configuration after an operator observed-file gate; it is not described
-as atomic with content. The second changes only the current symlink and is atomic content
-activation. Never automatically alter an unknown site file or delete a prior release.
+当前 `codex/butcher-version` 使用独立的 `/lesson/` 入口，按[子目录发布说明](../docs/butcher-version/2026-09-20-0109-v1.2-lesson子目录发布.md)操作。下方根目录切换命令不用于覆盖现有官网首页。
 
-## 1. Build a clean, exact, verified artifact
+## 先看流程
 
-Run this from the release commit. The verifier rejects symbolic links, special files, missing or
-extra files, non-derived directories, malformed manifests, and mismatched hashes. It binds every
-regular artifact file to the manifest, including Lesson 51 HTML, its lesson51/audio/ tree, and all other manifest files.
+| 顺序 | 做什么 | 完成后应看到什么 |
+| --- | --- | --- |
+| 1 | 检查并打包已提交版本 | 发布包与提交号、文件校验值一致 |
+| 2 | 查看服务器现有配置 | 明确当前版本和受影响的站点配置 |
+| 3 | 上传固定发布包 | 新建的专用上传目录，不覆盖旧包 |
+| 4 | 检查并启用站点配置 | 配置检查、重新加载均成功 |
+| 5 | 切换网站内容 | 当前版本入口指向新发布目录，旧版仍保留 |
+| 6 | 核对线上文件 | 与第 1 步发布包一致；失败则回退 |
+| 7 | 清理临时上传文件 | 只删除本次已核对的临时文件 |
+
+需要 Node.js 20+、Python 3、服务器连接权限和已配置的 `CANRAN_DEPLOY_TARGET`。这是 SSH 连接别名或主机名，不填写密码。所有步骤在项目根目录按顺序执行，使用同一已提交版本。
+
+公开路由：`/`、`/lesson49/`、`/lesson50/`、`/lesson51/`、`/lesson52/`、`/lesson53/`、`/lesson54/`、`/soundmark/`；`/home/` 是兼容入口。
+
+“提交号”是这次代码版本的 40 位标识；“校验值”用于确认文件没有变化；`current` 是服务器指向当前版本的入口。配置更新与内容切换分开进行，只有内容切换是一次完成的操作。
+
+## 维护者操作
+
+下面保留完整命令。每步报错就停在该步，按报错处理后再继续。初次建站没有可回退旧版时，需要单独设计首次部署，不能套用下面的常规更新流程。
+
+### 1. 检查和打包
+
+先通过测试，并确保待发布文件已提交、工作区干净。打包后记下提交号和两个校验值；记录后不要重新生成发布包。
+
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -126,13 +143,14 @@ require_target "$CANRAN_DEPLOY_TARGET"
 printf 'release=%s archive=%s config=%s\n' "$RELEASE_SHA" "$ARCHIVE_SHA" "$CONFIG_SHA"
 ~~~
 
-Do not rebuild the archive after ARCHIVE_SHA is recorded. That digest binds the verified local
-payload.
+</details>
 
-## 2. Read-only server preflight and manual observed-file gate
+### 2. 只读检查服务器
 
-CANRAN_DEPLOY_TARGET must pass the trusted alias/IPv4/hostname rule above before every ssh or scp.
-It cannot start with a dash and cannot include whitespace, a colon, or shell metacharacters.
+检查所有能响应目标 IP 和端口的站点，尤其是默认站点、重写、别名和根目录。处理旧站点前，由维护者核对具体文件、备份并明确批准；不能猜测要停用哪个配置。确认相关内容站点关闭文件缓存，才可只切换内容而不重载。
+
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -145,19 +163,14 @@ ssh "$CANRAN_DEPLOY_TARGET" 'readlink -f /var/www/canranstudio/current || true'
 ssh "$CANRAN_DEPLOY_TARGET" 'sudo sha256sum /etc/nginx/conf.d/canranstudio-http.conf 2>/dev/null || true'
 ~~~
 
-Inspect every server block able to answer 59.110.217.36:80, including wildcard/default and IPv4/IPv6
-listeners. Stop for an unaccounted rewrite, alias, root, or default block affecting /, /lesson49/,
-/lesson49/present/, /lesson50/, /lesson51/, /lesson52/, /lesson53/, /lesson54/, or /soundmark/. An operator must observe, back up, and explicitly approve an exact old
-site file before disabling only it; its path is never inferred by this repository.
+</details>
 
-The repository-owned matched server explicitly sets open_file_cache off. The complete nginx -T
-output still requires manual inspection for unknown matched blocks; the explicit server directive
-is the prerequisite for content-only activation without reload.
+### 3. 上传发布包
 
-## 3. Transfer no-reuse, SHA-named inputs
+每次上传使用包含校验值的新目录；目录已存在时停止，不能复用覆盖。
 
-This private upload directory, archive, configuration candidate, and every transfer name include
-the applicable SHA values. Reuse fails; no fixed /tmp configuration filename is used.
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -186,13 +199,14 @@ scp "$RELEASE_ARCHIVE" "$CANRAN_DEPLOY_TARGET:$REMOTE_ARCHIVE"
 scp deploy/nginx/canranstudio-http.conf "$CANRAN_DEPLOY_TARGET:$REMOTE_CONFIG"
 ~~~
 
-## 4. Separate operator Nginx configuration gate
+</details>
 
-This operation is complete before content activation and is not a cross-object atomic claim. It
-first verifies the unique candidate hash. When a prior repository-owned configuration exists it
-takes a SHA-named no-reuse backup. On either nginx -t or reload failure it restores the prior
-configuration; when there was none it removes the newly installed file, then validates and reloads
-the restored state.
+### 4. 启用站点配置
+
+只处理本仓库负责的配置文件。已有配置先备份；语法检查或重新加载失败时，命令恢复原配置并再次检查。成功后保留回退状态文件。
+
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -241,19 +255,14 @@ echo "configuration rollback state: $state"
 REMOTE
 ~~~
 
-## 5. Atomic content activation only
+</details>
 
-Run only when section 4 reported the active configuration hash equals CONFIG_SHA and current already
-resolves to a valid release. The remote verifier requires Python 3 and checks archive digest,
-rejects empty archives, duplicate paths, absolute/parent paths, symlinks, hardlinks, devices,
-FIFOs and every other non-file/non-directory tar entry. After extraction it checks the exact tree,
-manifest schema and commit, and every manifest hash.
+### 5. 切换网站内容
 
-The content lock is owned only after this invocation successfully creates it. A failed second
-invocation cannot remove the first invocation's lock. Staging and the SHA release directory refuse
-reuse. current is replaced through a temporary symlink in its own directory plus mv -T, an atomic
-rename on that filesystem. Nginx configuration is unchanged here, so nginx -t and reload are
-intentionally neither needed nor attempted.
+仅在第 4 步配置校验值一致、当前旧版有效时执行。检查压缩包、文件清单和每个文件后，一次切换 current。保存输出中的 CANRAN_PREVIOUS_RELEASE 和 CANRAN_CONFIG_STATE；不要删除旧发布目录。此步不改服务器配置，也不重新加载 Nginx。
+
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -375,19 +384,14 @@ echo "export CANRAN_CONFIG_STATE=$upload/config-state-$release_sha-$config_sha"
 REMOTE
 ~~~
 
-A first deployment without a valid current release is a separately reviewed bootstrap. It must not
-use this routine or claim rollback-capable atomic activation.
+</details>
 
-## 6. Exact live verification and content rollback
+### 6. 核对线上版本
 
-Use the verifier only from the same local checkout whose exact artifact was uploaded. It compares
-`release-manifest.json` first, then checks every runtime-retrievable manifest file plus all three
-`/home` aliases. Local success is not live evidence.
+使用上传时同一份本地 dist，先比对清单，再核对全部可访问文件、响应头和旧首页跳转。默认同时下载 2 个资源，每个超时 60 秒。本地测试通过不能代替本步。
 
-- `/lesson51/` returns the exact `lesson51/index.html` bytes;
-- every manifest-declared Lesson 51 MP3 under `/lesson51/audio/` returns exact bytes;
-- the CLI uses two concurrent downloads with a 60-second per-resource timeout, calibrated against
-  the canonical HTTPS origin while retaining exact hashes, headers, URL, size, and redirect checks.
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -401,9 +405,14 @@ remote_manifest="$(ssh "$CANRAN_DEPLOY_TARGET" 'cat /var/www/canranstudio/curren
 RELEASE_SHA="$RELEASE_SHA" REMOTE_MANIFEST="$remote_manifest" node -e 'if (JSON.parse(process.env.REMOTE_MANIFEST).commit !== process.env.RELEASE_SHA) process.exit(1)'
 ~~~
 
-On a live-verification failure, run the full rollback below. It restores prior content and the
-recorded configuration state, then runs nginx -t and reload. Any restoration failure is non-zero
-and requires operator escalation.
+</details>
+
+### 核对失败时：完整回退
+
+先设置第 5 步记录的 CANRAN_PREVIOUS_RELEASE。下面恢复旧内容和记录的旧配置；任何恢复失败都交由维护者处理。成功后，在旧提交号上重新构建 dist，再运行 npm run verify:live；失败版本的 dist 不能用于验证旧版本。
+
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -563,18 +572,14 @@ echo "full rollback completed: $previous / $mode"
 REMOTE
 ~~~
 
-Rebuild dist at CANRAN_PREVIOUS_RELEASE, verify its manifest commit, then run npm run
-verify:live. A dist artifact from the failed release is expected to hash-mismatch.
+</details>
 
+### 7. 清理临时上传文件
 
-## 7. Successful-upload cleanup or safe retry cleanup
+仅在线上核对成功后，或重新上传前使用。命令会核对目录归属和全部条目；发现未知文件就停止。它不删除旧发布目录或配置备份。
 
-After a successful live gate, or before retrying a failed transfer, run this self-contained cleanup.
-It constructs only the fixed private SHA path, requires current-user ownership and no symlink, and
-allows only the expected regular archive/config/state names (a partial upload is allowed). It first
-records and validates the complete NUL-delimited directory snapshot, including hidden entries, and
-only then removes the validated regular files. Any unexpected entry stops before the upload
-directory or any of its contents changes.
+<details>
+<summary>展开完整命令</summary>
 
 ~~~bash
 set -euo pipefail
@@ -609,3 +614,9 @@ while IFS= read -r -d '' entry; do rm -f -- "$entry"; done < "$entry_list"
 rmdir -- "$upload"
 REMOTE
 ~~~
+
+</details>
+
+## 发布后的人工检查
+
+按[真机检查表](../docs/mobile-release-smoke-checklist.md)确认课程、声音、进度恢复和手机布局。报告应分别写明提交、推送、发布、线上核对和人工验收的结果。

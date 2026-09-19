@@ -1,0 +1,40 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/l49-v113.spec.js --grep 变身魔法 --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:53283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v113.spec.js:34:1 › 变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入 (2.3s)
+
+
+  1) tests/e2e/l49-v113.spec.js:34:1 › 变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入 ────────────────────────────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 290
+    Received:   990
+
+      52 |     await page.setViewportSize({ width, height: 960 });
+      53 |     const left = await before.boundingBox(), right = await after.boundingBox();
+    > 54 |     expect(left.x + left.width).toBeLessThan(right.x);
+         |                                 ^
+      55 |     expect(Math.abs(left.y + left.height / 2 - right.y - right.height / 2)).toBeLessThanOrEqual(2);
+      56 |     if (width === 1280) {
+      57 |       expect(left.height).toBeLessThan(40);
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v113.spec.js:54:33
+
+    Error Context: test-results/l49-v113-变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v113-变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v113-变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v113.spec.js:34:1 › 变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入 ─────────────────────────────

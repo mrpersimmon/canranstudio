@@ -1,0 +1,49 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/l49-v12.spec.js tests/e2e/l49-v16.spec.js tests/e2e/l49-v17.spec.js tests/e2e/l49-v19.spec.js --reporter=list
+
+
+Running 38 tests using 1 worker
+
+(node:52651) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/l49-v12.spec.js:23:1 › 点击词卡即可朗读并翻面，键盘等价，快速点读只保留当前词 (1.9s)
+  ✓   2 tests/e2e/l49-v12.spec.js:45:1 › 最后一组词卡提供开始听辨，刷新后仍可一步进入第一题 (550ms)
+  ✓   3 tests/e2e/l49-v12.spec.js:64:1 › 检查答案时播放对应反馈音，选择、提示、重试、继续和恢复保持安静 (626ms)
+  ✓   4 tests/e2e/l49-v12.spec.js:92:1 › 最后一题先响正确音，手动完成后才响完成音，重新进入和刷新不重播 (1.4s)
+  ✓   5 tests/e2e/l49-v12.spec.js:124:1 › 主语分拣也有正误和完成音，答案反馈停留到手动继续 (1.8s)
+  ✓   6 tests/e2e/l49-v12.spec.js:146:1 › mutton hotpot 点读加载本地录音并真实播放到结束，不调用系统朗读 (3.3s)
+  ✓   7 tests/e2e/l49-v12.spec.js:167:1 › 课堂投屏入口和独立页面均已移除，学生课程正常打开 (436ms)
+  ✓   8 tests/e2e/l49-v12.spec.js:178:1 › 课文最后一句听完后等待手动完成，只在完成动作播放完成音 (816ms)
+  ✓   9 tests/e2e/l49-v12.spec.js:196:1 › 领取证书播放同款完成音，关闭和恢复保持安静 (1.3s)
+  ✓  10 tests/e2e/l49-v12.spec.js:209:1 › 三种反馈录音都能由浏览器真实播放到结束 (7.1s)
+  ✓  11 tests/e2e/l49-v12.spec.js:236:1 › 听辨选项不朗读，旧反馈结束不充当听完新单词，音效失败仍可继续 (575ms)
+  ✓  12 tests/e2e/l49-v12.spec.js:267:3 › give 的正确作答使用统一反馈音 (303ms)
+  ✓  13 tests/e2e/l49-v12.spec.js:267:3 › either 的正确作答使用统一反馈音 (304ms)
+  ✓  14 tests/e2e/l49-v12.spec.js:267:3 › fill 的正确作答使用统一反馈音 (293ms)
+  ✓  15 tests/e2e/l49-v12.spec.js:267:3 › choice 的正确作答使用统一反馈音 (306ms)
+  ✓  16 tests/e2e/l49-v12.spec.js:267:3 › trans 的正确作答使用统一反馈音 (353ms)
+  ✓  17 tests/e2e/l49-v16.spec.js:43:1 › 双人舞台保留站位，检查正确后才显示对应食物 (359ms)
+  ✓  18 tests/e2e/l49-v16.spec.js:62:1 › 播放失败可重试且不阻塞答题，离开后迟到录音不污染新场景 (469ms)
+  ✓  19 tests/e2e/l49-v16.spec.js:89:1 › 三句情境台词播放对应本地录音到真实结束，不借用近似台词或合成兜底 (8.6s)
+  ✓  20 tests/e2e/l49-v16.spec.js:111:1 › 阅读即可作答，错答和未检查选择不进入舞台，换题停止旧朗读 (700ms)
+  ✓  21 tests/e2e/l49-v17.spec.js:22:1 › 作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓 (287ms)
+  ✓  22 tests/e2e/l49-v17.spec.js:61:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答 (1.9s)
+  ✓  23 tests/e2e/l49-v17.spec.js:88:1 › 统一五题都有明确题干，未选不检查，末题反馈后手动完成 (1.0s)
+  ✓  24 tests/e2e/l49-v17.spec.js:121:49 › 320 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 (1.4s)
+  ✓  25 tests/e2e/l49-v17.spec.js:121:49 › 390 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 (1.6s)
+  ✓  26 tests/e2e/l49-v17.spec.js:121:49 › 600 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 (1.4s)
+  ✓  27 tests/e2e/l49-v17.spec.js:121:49 › 768 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 (1.4s)
+  ✓  28 tests/e2e/l49-v17.spec.js:121:49 › 1280 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 (1.6s)
+  ✓  29 tests/e2e/l49-v17.spec.js:170:1 › 旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练 (1.7s)
+  ✓  30 tests/e2e/l49-v17.spec.js:236:1 › 辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记 (424ms)
+  ✓  31 tests/e2e/l49-v19.spec.js:13:1 › 拼句使用紧凑词块，选中后原位留空，点击句中词块直接撤回 (463ms)
+  ✓  32 tests/e2e/l49-v19.spec.js:42:1 › 词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成 (907ms)
+  ✓  33 tests/e2e/l49-v19.spec.js:67:1 › 刷新与重试保留候选词块原位置，未完成草稿仍由孩子拼完整 (577ms)
+  ✓  34 tests/e2e/l49-v19.spec.js:108:39 › 320 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.5s)
+  ✓  35 tests/e2e/l49-v19.spec.js:108:39 › 600 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.6s)
+  ✓  36 tests/e2e/l49-v19.spec.js:108:39 › 768 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.6s)
+  ✓  37 tests/e2e/l49-v19.spec.js:108:39 › 1280 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.5s)
+  ✓  38 tests/e2e/l49-v19.spec.js:146:1 › v1.8 旧拼句草稿恢复已选词和线索，历史成绩不代答下一题 (581ms)
+
+  38 passed (1.0m)

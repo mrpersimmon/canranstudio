@@ -56,8 +56,9 @@ test('first persisted stage completion reveals once, blocks event-through, and c
   await expect(page.locator('.growth-reveal')).toBeHidden();
 });
 
-test('fifth stage awards the souvenir, then the uncluttered map shows one final summary', async ({ page }) => {
+test('fifth stage retains the souvenir, then the course navigation shows actual stars', async ({ page }) => {
   await page.addInitScript(() => {
+    if (localStorage.getItem('canran:l49:progress:v2')) return;
     localStorage.setItem('canran:l49:progress:v2', JSON.stringify({
       version: 2,
       ratings: { l1: 1, l2: 1, l3: 1, l4: 1, l5: 0 }
@@ -81,15 +82,15 @@ test('fifth stage awards the souvenir, then the uncluttered map shows one final 
   await expect(reveal).toBeHidden();
   await page.locator('a[href="/?district=first-book-49-60&focus=lesson49"]').first().click();
 
-  await expect(page.locator('#currentDistrict')).toBeVisible();
-  await expect(page.locator('#mapUpdateToast')).toContainText('地点完成');
-  await expect(page.locator('[data-location-id="lesson49"] [data-souvenir-id]')).toHaveCount(0);
-  await expect(page.locator('[data-location-id="lesson49"] [data-landmark-snapshot="5"]')).toHaveCount(1);
+  await expect(page.getByRole('heading',{name:'今天，去哪儿冒险？'})).toBeVisible();
+  await expect(page.locator('[data-course="lesson49"]')).toBeFocused();
+  await expect(page.locator('[data-course="lesson49"] .course-progress')).toHaveText('5 / 15 颗星');
+  await expect(page.locator('#currentDistrict,#mapUpdateToast')).toHaveCount(0);
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)).souvenirs, PROFILE_KEY))
     .toContain('food-basket');
-  await expect(page.locator('#mapUpdateToast')).toBeHidden({ timeout: 4_000 });
   await page.reload();
-  await expect(page.locator('#mapUpdateToast')).toBeHidden();
+  await expect(page.locator('[data-course="lesson49"] .course-progress')).toHaveText('5 / 15 颗星');
+  await expect(page.locator('#mapUpdateToast')).toHaveCount(0);
 });
 
 test('image failures and rotation keep a readable, full-screen, dismissible reveal', async ({ page }) => {

@@ -1,0 +1,14 @@
+
+Running 6 tests using 1 worker
+
+(node:98803) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] tests/e2e/l49-v13.spec.js:29:1 › 词卡按6／6／5分组，末组可明确前往听音寻宝，刷新保留位置
+[2/6] tests/e2e/l49-v13.spec.js:147:1 › 旧版四张分组的草稿迁移到同一个词，新组可往返且再次刷新不重复迁移
+[3/6] tests/e2e/l49-v15.spec.js:53:44 › 1280宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[4/6] tests/e2e/l49-v15.spec.js:53:44 › 768宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[5/6] tests/e2e/l49-v15.spec.js:53:44 › 390宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[6/6] tests/e2e/l49-v15.spec.js:53:44 › 320宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+  6 passed (11.5s)

@@ -110,14 +110,16 @@ function isStudentCourseRoute(href) {
   return /^\/(?:lesson\d+|soundmark)\/$/.test(href);
 }
 
-function assertAtlasOnlyHome(source) {
+function assertCourseHome(source) {
   if (typeof source !== 'string') throw new TypeError('index.html source must be a string');
   if (source.includes(RETIRED_START_MARKER) || source.includes(RETIRED_END_MARKER)) {
-    throw new Error('retired course fallback markers must not appear in the atlas-only home');
+    throw new Error('retired course fallback markers must not appear in the course home');
   }
   const authoredCourseRoutes = anchorHrefs(source).filter(isStudentCourseRoute);
-  if (authoredCourseRoutes.length) {
-    throw new Error(`atlas-only home must not author course directory links: ${authoredCourseRoutes.join(', ')}`);
+  const published = new Set(require('../core/course-catalog').PUBLISHED_COURSES.map(course => course.route));
+  const unavailable = authoredCourseRoutes.filter(route => !published.has(route));
+  if (unavailable.length) {
+    throw new Error(`course home links to unavailable courses: ${unavailable.join(', ')}`);
   }
   return source;
 }
@@ -127,23 +129,23 @@ function generatedLinks() {
 }
 
 function synchronizeFallback(source) {
-  return assertAtlasOnlyHome(source);
+  return assertCourseHome(source);
 }
 
 function withoutGeneratedFallback(source) {
-  return assertAtlasOnlyHome(source);
+  return assertCourseHome(source);
 }
 
 async function syncHomeFallback({ root = path.resolve(__dirname, '..') } = {}) {
   const file = path.join(root, 'index.html');
   const source = await fs.readFile(file, 'utf8');
-  assertAtlasOnlyHome(source);
+  assertCourseHome(source);
   return false;
 }
 
 if (require.main === module) {
   syncHomeFallback()
-    .then(() => process.stdout.write('atlas-only home contains no course fallback\n'))
+    .then(() => process.stdout.write('course home contains only available course links\n'))
     .catch(error => {
       process.stderr.write(`${error.stack || error.message}\n`);
       process.exitCode = 1;
@@ -155,6 +157,6 @@ module.exports = {
   synchronizeFallback,
   withoutGeneratedFallback,
   anchorHrefs,
-  assertAtlasOnlyHome,
+  assertCourseHome,
   syncHomeFallback
 };

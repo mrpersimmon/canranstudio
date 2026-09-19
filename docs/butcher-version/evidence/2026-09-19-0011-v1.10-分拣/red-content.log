@@ -1,0 +1,60 @@
+
+Running 1 test using 1 worker
+
+(node:34608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v110.spec.js:72:1 › 同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断 (7.1s)
+
+
+  1) tests/e2e/l49-v110.spec.js:72:1 › 同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断 ────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('dialog')
+    Timeout: 5000ms
+    - Expected substring  - 1
+    + Received string     + 7
+
+    - Do you live here?
+    + 关闭问话小帮手 · 怎么玩
+    +       
+    +         
+    +         Are you a teacher? 问身份；Do you like meat? 问喜好。在本组一般现在时句型中，身份、状态、地点用 Are you…；like / want 等一般动词用 Do you…。
+    +         
+    +       
+    +     
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('dialog')
+        14 × locator resolved to <dialog open="" id="activityHelpDialog" aria-labelledby="helpTitle">…</dialog>
+           - unexpected value "关闭问话小帮手 · 怎么玩
+          
+            
+            Are you a teacher? 问身份；Do you like meat? 问喜好。在本组一般现在时句型中，身份、状态、地点用 Are you…；like / want 等一般动词用 Do you…。
+            
+          
+        "
+
+
+      82 |   let stage=page.locator('.stage-doare');
+      83 |   await stage.getByRole('button',{name:'怎么玩',exact:true}).click();
+    > 84 |   await expect(page.getByRole('dialog')).toContainText('Do you live here?');
+         |                                          ^
+      85 |   await expect(page.getByRole('dialog')).not.toContainText('地点用 Are');
+      86 |   await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
+      87 |   const pairs=[
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v110.spec.js:84:42
+
+    Error Context: test-results/l49-v110-同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v110-同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v110-同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v110.spec.js:72:1 › 同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断 ─────────────────────────────

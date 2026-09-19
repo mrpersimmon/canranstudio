@@ -1,0 +1,139 @@
+
+Running 3 tests using 1 worker
+
+(node:95985) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/3] tests/e2e/l49-v17-actions.spec.js:70:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐
+  1) tests/e2e/l49-v17-actions.spec.js:70:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐 ────────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 17
+
+    - Array []
+    + Array [
+    +   "listen: 桌面主次按钮未在同一行，次左主右",
+    +   "listen: 按钮过小或溢出",
+    +   "roles: 桌面主次按钮未在同一行，次左主右",
+    +   "roles: 按钮过小或溢出",
+    +   "doare: 完成操作未收拢为一组",
+    +   "give: 完成操作未收拢为一组",
+    +   "pouch: 完成操作未收拢为一组",
+    +   "either: 完成操作未收拢为一组",
+    +   "fill: 完成操作未收拢为一组",
+    +   "choice: 完成操作未收拢为一组",
+    +   "trans: 完成操作未收拢为一组",
+    +   "exam: 完成操作未收拢为一组",
+    +   "text: 完成操作未收拢为一组",
+    +   "text: 结束后重复显示重新上演",
+    +   "subjects: 完成操作未收拢为一组",
+    + ]
+
+      121 |   await shot(page,page.locator('#certCard'),'certificate-dialog',width);
+      122 |   await page.locator('#certClose').click();
+    > 123 |   expect(issues).toEqual([]);
+          |                  ^
+      124 | });
+      125 |
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17-actions.spec.js:123:18
+
+    Error Context: test-results/l49-v17-actions-1280-宽度逐站完成、重练与导航，所有结束操作集中对齐/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-actions-1280-宽度逐站完成、重练与导航，所有结束操作集中对齐/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-actions-1280-宽度逐站完成、重练与导航，所有结束操作集中对齐/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:96183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/3] tests/e2e/l49-v17-actions.spec.js:70:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐
+  2) tests/e2e/l49-v17-actions.spec.js:70:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐 ─────────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 17
+
+    - Array []
+    + Array [
+    +   "listen: 手机主按钮未在次按钮正上方",
+    +   "listen: 按钮过小或溢出",
+    +   "roles: 手机主按钮未在次按钮正上方",
+    +   "roles: 按钮过小或溢出",
+    +   "doare: 完成操作未收拢为一组",
+    +   "give: 完成操作未收拢为一组",
+    +   "pouch: 完成操作未收拢为一组",
+    +   "either: 完成操作未收拢为一组",
+    +   "fill: 完成操作未收拢为一组",
+    +   "choice: 完成操作未收拢为一组",
+    +   "trans: 完成操作未收拢为一组",
+    +   "exam: 完成操作未收拢为一组",
+    +   "text: 完成操作未收拢为一组",
+    +   "text: 结束后重复显示重新上演",
+    +   "subjects: 完成操作未收拢为一组",
+    + ]
+
+      121 |   await shot(page,page.locator('#certCard'),'certificate-dialog',width);
+      122 |   await page.locator('#certClose').click();
+    > 123 |   expect(issues).toEqual([]);
+          |                  ^
+      124 | });
+      125 |
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17-actions.spec.js:123:18
+
+    Error Context: test-results/l49-v17-actions-390-宽度逐站完成、重练与导航，所有结束操作集中对齐/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-actions-390-宽度逐站完成、重练与导航，所有结束操作集中对齐/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-actions-390-宽度逐站完成、重练与导航，所有结束操作集中对齐/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:96202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/3] tests/e2e/l49-v17.spec.js:121:49 › 320 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+  3) tests/e2e/l49-v17.spec.js:121:49 › 320 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 ────────────────────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 8
+    Received:    -250
+
+      139 |     expect(t.y + t.height).toBeLessThanOrEqual(storyArea.y + 2);
+      140 |     expect(h.y).toBeCloseTo(c.y, 0);
+    > 141 |     expect(c.x - h.x - h.width).toBeGreaterThanOrEqual(8);
+          |                                 ^
+      142 |     expect(c.x - h.x - h.width).toBeLessThanOrEqual(16);
+      143 |     await hint.focus(); const before = await page.evaluate(() => scrollY);
+      144 |     await hint.press('Enter');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:141:33
+
+    Error Context: test-results/l49-v17-320-宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-320-宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-320-宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  3 failed
+    tests/e2e/l49-v17-actions.spec.js:70:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐 ─────────────────────────
+    tests/e2e/l49-v17-actions.spec.js:70:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐 ──────────────────────────
+    tests/e2e/l49-v17.spec.js:121:49 › 320 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作 ─────────────────────────────────

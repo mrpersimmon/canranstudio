@@ -1,0 +1,12 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/accessibility.spec.js -g course navigation supports --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:57235) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/accessibility.spec.js:774:1 › course navigation supports keyboard expansion and restores settings focus (472ms)
+
+  1 passed (1.2s)

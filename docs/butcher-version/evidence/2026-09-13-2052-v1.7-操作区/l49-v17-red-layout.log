@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:88245) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v17.spec.js:16:1 › 作答卡组与检查按钮在舞台中线，线索具有完整按钮轮廓
+  1) tests/e2e/l49-v17.spec.js:16:1 › 作答卡组与检查按钮在舞台中线，线索具有完整按钮轮廓 ────────────────────────────────────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 2
+    Received:   97
+
+      21 |   const middle = await center(room);
+      22 |   for (const item of [room.getByRole('group', { name: '选择回应', exact: true }), room.getByRole('button', { name: '检查答案', exact: true })]) {
+    > 23 |     expect(Math.abs(await center(item) - middle)).toBeLessThan(2);
+         |                                                   ^
+      24 |   }
+      25 |   const hint = room.getByRole('button', { name: '给点线索', exact: true });
+      26 |   await expect(hint).toHaveCSS('border-top-style', 'solid');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:23:51
+
+    Error Context: test-results/l49-v17-作答卡组与检查按钮在舞台中线，线索具有完整按钮轮廓/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-作答卡组与检查按钮在舞台中线，线索具有完整按钮轮廓/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-作答卡组与检查按钮在舞台中线，线索具有完整按钮轮廓/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17.spec.js:16:1 › 作答卡组与检查按钮在舞台中线，线索具有完整按钮轮廓 ─────────────────────────────────────

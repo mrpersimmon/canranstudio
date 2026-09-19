@@ -51,6 +51,7 @@ test('course catalog is the complete immutable contract for lessons and special 
       assetDirectories: ['lesson49/audio'],
       progress: {
         key: 'canran:l49:progress:v2',
+        learningKey: 'canran:l49:learning:v1',
         legacyKey: 'l49-stars-v1',
         ids: ['l1', 'l2', 'l3', 'l4', 'l5'],
         legacyMode: 'ratings',
@@ -374,64 +375,6 @@ test('lesson map creation and directory status keep future courses outside V1', 
     catalog.COURSES.find(course => course.id === 'lesson51')
   ), 'published');
   assert.equal(catalog.directoryMapStatus(soundmark), 'not-applicable');
-});
-
-test('catalog publishes one complete classroom presentation without making other courses appear ready', () => {
-  const lesson49 = catalog.COURSES.find(course => course.id === 'lesson49');
-  const lesson50 = catalog.COURSES.find(course => course.id === 'lesson50');
-
-  assert.deepEqual(catalog.PRESENTATION_COURSES.map(course => course.id), ['lesson49']);
-  assert.deepEqual(
-    {
-      declaredStatus: lesson49.presentation.declaredStatus,
-      route: lesson49.presentation.route,
-      entry: lesson49.presentation.entry,
-      controls: lesson49.presentation.controls,
-      stepIds: lesson49.presentation.steps.map(step => step.id),
-      audioAssets: lesson49.presentation.steps.map(step => step.audioAsset),
-      regressionTest: lesson49.presentation.regressionTest
-    },
-    {
-      declaredStatus: 'published',
-      route: '/lesson49/present/',
-      entry: 'lesson49/present/index.html',
-      controls: ['fullscreen', 'audio', 'hint', 'previous', 'next', 'exit'],
-      stepIds: ['welcome', 'vocabulary', 'dialogue', 'grammar', 'recap'],
-      audioAssets: [
-        'lesson49/audio/butcher.mp3',
-        'lesson49/audio/beef.mp3',
-        'lesson49/audio/do_you_want_any_meat_today_mrs_bird.mp3',
-        'lesson49/audio/are_you_a_teacher.mp3',
-        'lesson49/audio/to_tell_you_the_truth_mrs_bird_i_don_t_like_chicken_either.mp3'
-      ],
-      regressionTest: 'tests/e2e/classroom-presentation.spec.js'
-    }
-  );
-  assert.deepEqual(catalog.assessClassroomPresentation(lesson49), {
-    status: 'published',
-    route: '/lesson49/present/',
-    checklist: {
-      publicPage: true,
-      completeControls: true,
-      teachingSteps: true,
-      prerecordedAudio: true,
-      regressionVerification: true
-    },
-    missing: []
-  });
-  assert.deepEqual(catalog.assessClassroomPresentation(lesson50), {
-    status: 'not-ready',
-    route: null,
-    checklist: null,
-    missing: []
-  });
-  assertDeepFrozen(catalog.PRESENTATION_COURSES);
-
-  const invalid = structuredClone(catalog.COURSES);
-  invalid.find(course => course.id === 'lesson49').presentation.controls = ['fullscreen'];
-  assert.deepEqual(catalog.validateCatalog(invalid), [
-    'lesson49: published presentation contract missing completeControls'
-  ]);
 });
 
 test('every published map stage declares a child-readable growth reveal', () => {

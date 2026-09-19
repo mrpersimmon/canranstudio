@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:98114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v17-actions.spec.js:126:1 › 320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组
+  1) tests/e2e/l49-v17-actions.spec.js:126:1 › 320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组 ───────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      151 |     return 0;
+      152 |   });
+    > 153 |   expect(activityNameLines).toBe(1);
+          |                             ^
+      154 |   await shot(page,page.locator('.stage-words'),'words-last',320);
+      155 |   await page.locator('.stage-words').getByRole('button',{name:'怎么玩',exact:true}).click();
+      156 |   await expect(page.getByRole('dialog',{name:'肉店小图鉴 · 怎么玩',exact:true})).toBeVisible();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17-actions.spec.js:153:29
+
+    Error Context: test-results/l49-v17-actions-320-窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-actions-320-窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-actions-320-窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17-actions.spec.js:126:1 › 320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组 ────────────────────────

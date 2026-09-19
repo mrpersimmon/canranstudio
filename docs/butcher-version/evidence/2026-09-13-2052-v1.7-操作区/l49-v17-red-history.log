@@ -1,0 +1,48 @@
+
+Running 2 tests using 1 worker
+
+(node:92218) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] tests/e2e/l49-v17.spec.js:111:49 › 600 宽度题干和线索固定，帮助与长句不挤动选项和主按钮
+[2/2] tests/e2e/l49-v17.spec.js:153:1 › 旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练
+  1) tests/e2e/l49-v17.spec.js:153:1 › 旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练 ───────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#learningRecord')
+    Expected substring: "看过示范后完成"
+    Received string:    "记录的是有选项或词块支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。课文回应理解 · 课文中，老板问要牛肉还是羔羊肉时，Mrs. Bird 怎么回答？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）课文信息理解 · 课文中，Mrs. Bird 的丈夫喜欢什么肉？：修正后完成（首次未答对，额外提示未用，提交 2 次）课文回应理解 · 课文中，Mrs. Bird 说丈夫不喜欢鸡肉后，老板怎么回应？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）新情境回应 · 如果 Mrs. Bird 这次想买羔羊肉，她应该怎么回答？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）新情境回应 · 顾客说“I like steak.”，如果老板也喜欢牛排，他应该怎么回答？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#learningRecord')
+        14 × locator resolved to <div id="learningRecord">…</div>
+           - unexpected value "记录的是有选项或词块支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。课文回应理解 · 课文中，老板问要牛肉还是羔羊肉时，Mrs. Bird 怎么回答？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）课文信息理解 · 课文中，Mrs. Bird 的丈夫喜欢什么肉？：修正后完成（首次未答对，额外提示未用，提交 2 次）课文回应理解 · 课文中，Mrs. Bird 说丈夫不喜欢鸡肉后，老板怎么回应？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）新情境回应 · 如果 Mrs. Bird 这次想买羔羊肉，她应该怎么回答？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）新情境回应 · 顾客说“I like steak.”，如果老板也喜欢牛排，他应该怎么回答？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）"
+
+
+      208 |   await expect(page.locator('#starCount')).toHaveText('6');
+      209 |   await page.getByRole('button', { name: '学徒手记', exact: true }).click();
+    > 210 |   await expect(page.locator('#learningRecord')).toContainText('看过示范后完成');
+          |                                                 ^
+      211 |   await expect(page.locator('#learningRecord')).toContainText(prompts[1]);
+      212 |   await page.getByRole('button', { name: '关闭', exact: true }).click();
+      213 |   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:210:49
+
+    Error Context: test-results/l49-v17-旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17.spec.js:153:1 › 旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练 ────────────────────────────────
+  1 passed (12.1s)

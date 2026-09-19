@@ -1,0 +1,24 @@
+{
+  "text": "mutton hotpot",
+  "path": "lesson49/audio/mutton_hotpot.mp3",
+  "generatedAt": "2026-09-12",
+  "generator": "edge-tts 7.2.8",
+  "voice": "en-GB-SoniaNeural",
+  "rate": "-10%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "sha256": "66ed95eb62bf42eb55f63c4439a668208f93bbfc133ae76fbb07790ff0cf549c",
+  "reference": "lesson49/audio/mutton.mp3",
+  "referenceMatch": {
+    "method": "same-text regeneration, decoded 24 kHz mono PCM normalized cross correlation",
+    "SoniaMinus10Percent": 0.9991276860237122,
+    "SoniaDefault": 0.7022618651390076,
+    "RyanDefault": 0.11140039563179016,
+    "referenceDurationSeconds": 1.224,
+    "candidateDurationSeconds": 1.224
+  },
+  "durationSeconds": 1.848,
+  "sampleRate": 24000,
+  "channels": 1,
+  "regenerate": "python -m edge_tts --voice en-GB-SoniaNeural --rate=-10% --text 'mutton hotpot' --write-media lesson49/audio/mutton_hotpot.mp3"
+}

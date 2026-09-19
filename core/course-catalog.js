@@ -89,12 +89,11 @@
   }
 
   function isPublicRoute(value) {
-    return typeof value === 'string' && /^\/[a-z0-9-]+\/$/.test(value);
+    return typeof value === 'string' && /^\/(?:[a-z0-9-]+\/)+$/.test(value);
   }
 
   const LESSON_STAGE_IDS = ['l1', 'l2', 'l3', 'l4', 'l5'];
   const SOUND_STAGE_IDS = ['vs', 'g1', 'g2', 'g3'];
-  const PRESENTATION_CONTROLS = ['fullscreen', 'audio', 'hint', 'previous', 'next', 'exit'];
   const DISTRICTS = deepFreeze([
     { id: 'first-book-1-12', order: 1, title: '晨光原野', lessonStart: 1, lessonEnd: 12, v1Accessible: false },
     { id: 'first-book-13-24', order: 2, title: '回声溪谷', lessonStart: 13, lessonEnd: 24, v1Accessible: false },
@@ -195,31 +194,6 @@
     });
   }
 
-  function createClassroomPresentation(id, {
-    declaredStatus = 'not-ready',
-    steps = [],
-    regressionTest = null
-  } = {}) {
-    if (declaredStatus !== 'published') {
-      return deepFreeze({
-        declaredStatus: 'not-ready',
-        route: null,
-        entry: null,
-        controls: [],
-        steps: [],
-        regressionTest: null
-      });
-    }
-    return deepFreeze({
-      declaredStatus,
-      route: `/${id}/present/`,
-      entry: `${id}/present/index.html`,
-      controls: [...PRESENTATION_CONTROLS],
-      steps: steps.map(step => ({ ...step })),
-      regressionTest
-    });
-  }
-
   function publishedLesson({
     lesson,
     title,
@@ -232,7 +206,7 @@
     legacyMode,
     souvenir = null,
     mapPublication = {},
-    presentationPublication = {}
+    learning = null,
   }) {
     const id = `lesson${lesson}`;
     const progress = {
@@ -240,6 +214,7 @@
       ids: [...LESSON_STAGE_IDS],
       max: 15
     };
+    if (learning) progress.learningKey = 'canran:l49:learning:v1';
     if (legacyKey) progress.legacyKey = legacyKey;
     if (legacyMode) progress.legacyMode = legacyMode;
     return {
@@ -258,8 +233,8 @@
       art,
       tone,
       progress,
+      ...(learning ? { learning } : {}),
       map: createLessonMap(lesson, { souvenir, ...mapPublication }),
-      presentation: createClassroomPresentation(id, presentationPublication)
     };
   }
 
@@ -281,13 +256,1607 @@
       tone: 'soon',
       progress: null,
       map: createLessonMap(lesson),
-      presentation: createClassroomPresentation(`lesson${lesson}`)
     };
   }
+
+  const LESSON49_LEARNING = {
+  "FEEDBACK": {
+    "correct": { "src": "assets/feedback/duolingo-correct.mp3", "volume": 0.35 },
+    "incorrect": { "src": "assets/feedback/duolingo-incorrect.mp3", "volume": 0.35 },
+    "complete": { "src": "assets/feedback/duolingo-complete.mp3", "volume": 0.5 }
+  },
+  "WORKSPACE": [
+    {
+      "id": "l1",
+      "title": "开门准备",
+      "icon": "steak",
+      "activities": [
+        {
+          "id": "words",
+          "title": "肉店小图鉴",
+          "icon": "cards"
+        },
+        {
+          "id": "listen",
+          "title": "听音寻宝",
+          "icon": "audio"
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "title": "肉店小剧场",
+      "icon": "butcher",
+      "activities": [
+        {
+          "id": "text",
+          "title": "老板与客人",
+          "icon": "book"
+        },
+        {
+          "id": "roles",
+          "title": "故事小侦探",
+          "icon": "people"
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "title": "招呼有妙招",
+      "icon": "give",
+      "activities": [
+        {
+          "id": "doare",
+          "title": "问话小帮手",
+          "icon": "question"
+        },
+        {
+          "id": "give",
+          "title": "交接小帮手",
+          "icon": "give"
+        },
+        {
+          "id": "pouch",
+          "title": "店员小锦囊",
+          "icon": "speech"
+        },
+        {
+          "id": "either",
+          "title": "心声接力",
+          "icon": "people"
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "title": "店员训练场",
+      "icon": "people",
+      "activities": [
+        {
+          "id": "subjects",
+          "title": "分拣小能手",
+          "icon": "people"
+        },
+        {
+          "id": "fill",
+          "title": "动词换装间",
+          "icon": "book"
+        },
+        {
+          "id": "choice",
+          "title": "句子检查站",
+          "icon": "heart"
+        },
+        {
+          "id": "trans",
+          "title": "词块拼装台",
+          "icon": "cards"
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "title": "小店我当家",
+      "icon": "order",
+      "activities": [
+        {
+          "id": "exam",
+          "title": "老板的挑战",
+          "icon": "order"
+        },
+        {
+          "id": "certificate",
+          "title": "我的学徒证书",
+          "icon": "star"
+        }
+      ]
+    }
+  ],
+  "DOARE": [
+    {
+      "id": "doare-like",
+      "target": "完整问句",
+      "prompt": "想知道客人喜不喜欢肉，你会怎样问？",
+      "options": [
+        "Do you like meat?",
+        "Are you like meat?"
+      ],
+      "answer": "Do you like meat?",
+      "explanation": "本句用动词 like 表达喜好，一般现在时问句是 Do you like meat?"
+    },
+    {
+      "id": "doare-teacher",
+      "target": "完整问句",
+      "prompt": "想知道新朋友是不是老师，你会怎样问？",
+      "options": [
+        "Are you a teacher?",
+        "Do you a teacher?"
+      ],
+      "answer": "Are you a teacher?",
+      "explanation": "本句用 be 连接 you 和 a teacher，问句是 Are you a teacher?"
+    },
+    {
+      "id": "doare-busy",
+      "target": "完整问句",
+      "prompt": "想知道妈妈现在忙不忙，你会怎样问？",
+      "options": [
+        "Are you busy?",
+        "Do you busy?"
+      ],
+      "answer": "Are you busy?",
+      "explanation": "本句用 be 连接 you 和 busy，问句是 Are you busy?"
+    },
+    {
+      "id": "doare-home",
+      "target": "完整问句",
+      "prompt": "想知道朋友现在在不在家，你会怎样问？",
+      "options": [
+        "Are you at home?",
+        "Do you at home?"
+      ],
+      "answer": "Are you at home?",
+      "explanation": "本句用 be 表达“在家”，问句是 Are you at home?"
+    },
+    {
+      "id": "doare-want",
+      "target": "完整问句",
+      "prompt": "想知道顾客要不要牛肉，你会怎样问？",
+      "options": [
+        "Do you want beef?",
+        "Are you want beef?"
+      ],
+      "answer": "Do you want beef?",
+      "explanation": "本句用动词 want 表达需求，一般现在时问句是 Do you want beef?"
+    },
+    {
+      "id": "doare-sleep",
+      "target": "完整问句",
+      "prompt": "想知道朋友平时睡得好不好，你会怎样问？",
+      "options": [
+        "Do you sleep well?",
+        "Are you sleep well?"
+      ],
+      "answer": "Do you sleep well?",
+      "explanation": "本句用动词 sleep 表达平时睡觉的情况，问句是 Do you sleep well?"
+    },
+    {
+      "id": "doare-bed",
+      "target": "完整问句",
+      "prompt": "想知道朋友平时整理床铺吗，你会怎样问？",
+      "options": [
+        "Do you make the bed?",
+        "Are you make the bed?"
+      ],
+      "answer": "Do you make the bed?",
+      "explanation": "make the bed 表示整理床铺；本句用动词 make，问句是 Do you make the bed?"
+    },
+    {
+      "id": "doare-coat",
+      "target": "完整问句",
+      "prompt": "想知道朋友出门时是否穿上外套，你会怎样问？",
+      "options": [
+        "Do you put on your coat?",
+        "Are you put on your coat?"
+      ],
+      "answer": "Do you put on your coat?",
+      "explanation": "put on your coat 表示穿上外套；本句用动词 put，问句是 Do you put on your coat?"
+    }
+  ],
+  "WORDS": [
+    {
+      "en": "butcher",
+      "ph": "/'bʊtʃə(r)/",
+      "pos": "n.",
+      "cn": "卖肉者，肉店老板",
+      "scope": "教材词",
+      "alt": "肉店老板",
+      "image": "/assets/lesson49/icons/butcher.svg"
+    },
+    {
+      "en": "meat",
+      "ph": "/miːt/",
+      "pos": "n.",
+      "cn": "（食用）肉",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/meat.svg",
+      "alt": "（食用）肉"
+    },
+    {
+      "en": "beef",
+      "ph": "/biːf/",
+      "pos": "n.",
+      "cn": "牛肉",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/beef.svg",
+      "alt": "牛肉"
+    },
+    {
+      "en": "lamb",
+      "ph": "/læm/",
+      "pos": "n.",
+      "cn": "羔羊肉",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/lamb.svg",
+      "alt": "羔羊肉"
+    },
+    {
+      "en": "mutton",
+      "ph": "/'mʌtn/",
+      "pos": "n.",
+      "cn": "羊肉",
+      "scope": "补充词",
+      "image": "/assets/lesson49/icons/mutton.svg",
+      "alt": "羊肉"
+    },
+    {
+      "en": "steak",
+      "ph": "/steɪk/",
+      "pos": "n.",
+      "cn": "牛排",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/steak.svg",
+      "alt": "一块牛排"
+    },
+    {
+      "en": "mince",
+      "ph": "/mɪns/",
+      "pos": "n.",
+      "cn": "肉馅",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/mince.svg",
+      "alt": "细碎的肉馅"
+    },
+    {
+      "en": "chicken",
+      "ph": "/'tʃɪkɪn/",
+      "pos": "n.",
+      "cn": "鸡肉",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/chicken.svg",
+      "alt": "鸡肉",
+      "context": "课文中的 a chicken：一只整鸡。"
+    },
+    {
+      "en": "pork",
+      "ph": "/pɔːk/",
+      "pos": "n.",
+      "cn": "猪肉",
+      "scope": "补充词",
+      "image": "/assets/lesson49/icons/pork.svg",
+      "alt": "猪肉"
+    },
+    {
+      "en": "fish",
+      "ph": "/fɪʃ/",
+      "pos": "n.",
+      "cn": "鱼肉",
+      "scope": "补充词",
+      "image": "/assets/lesson49/icons/fish.svg",
+      "alt": "鱼肉"
+    },
+    {
+      "en": "husband",
+      "ph": "/'hʌzbənd/",
+      "pos": "n.",
+      "cn": "丈夫",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/husband.svg",
+      "alt": "丈夫"
+    },
+    {
+      "en": "tell",
+      "ph": "/tel/",
+      "pos": "v.",
+      "cn": "告诉",
+      "scope": "教材词",
+      "image": "/assets/lesson49/icons/tell.svg",
+      "alt": "告诉"
+    },
+    {
+      "en": "truth",
+      "ph": "/truːθ/",
+      "pos": "n.",
+      "cn": "实情",
+      "scope": "教材词",
+      "context": "To tell you the truth… 说出真实的想法：老板也不喜欢鸡肉。",
+      "image": "/assets/lesson49/icons/truth.svg",
+      "alt": "实情"
+    },
+    {
+      "en": "either",
+      "ph": "/'aɪðə(r)/",
+      "pos": "adv.",
+      "cn": "也（用于否定句）",
+      "scope": "教材词",
+      "context": "A: I don't like chicken. B: I don't like chicken either. 两个人都不喜欢，B 说“也不”。",
+      "image": "/assets/lesson49/icons/either.svg",
+      "alt": "也（用于否定句）"
+    }
+  ],
+  "PHRASES": [
+    {
+      "en": "a piece of steak",
+      "ph": "",
+      "pos": "短语",
+      "cn": "一块牛排",
+      "scope": "课文短语",
+      "image": "/assets/lesson49/icons/piece.svg",
+      "alt": "一块牛排"
+    },
+    {
+      "en": "a pound of mince",
+      "ph": "",
+      "pos": "短语",
+      "cn": "一磅肉馅",
+      "scope": "课文短语",
+      "image": "/assets/lesson49/icons/pound.svg",
+      "alt": "一磅肉馅"
+    },
+    {
+      "en": "mutton hotpot",
+      "ph": "",
+      "pos": "短语",
+      "cn": "羊肉火锅",
+      "scope": "补充表达",
+      "image": "/assets/lesson49/icons/hotpot.svg",
+      "alt": "羊肉火锅"
+    }
+  ],
+  "POSMAP": {
+    "n.": "名词",
+    "v.": "动词",
+    "adv.": "副词",
+    "短语": "短语"
+  },
+  "LISTEN_ROUNDS": [
+    [
+      {
+        "id": "listen-butcher",
+        "target": "听辨 butcher",
+        "prompt": "听一听，选出单词。",
+        "audioText": "butcher",
+        "options": [
+          "butcher",
+          "husband",
+          "tell",
+          "truth"
+        ],
+        "answer": "butcher",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "butcher：卖肉者，肉店老板。"
+      },
+      {
+        "id": "listen-meat",
+        "target": "听辨 meat",
+        "prompt": "听一听，选出单词。",
+        "audioText": "meat",
+        "options": [
+          "meat",
+          "mince",
+          "steak",
+          "chicken"
+        ],
+        "answer": "meat",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "meat：（食用）肉。"
+      },
+      {
+        "id": "listen-beef",
+        "target": "听辨 beef",
+        "prompt": "听一听，选出单词。",
+        "audioText": "beef",
+        "options": [
+          "beef",
+          "lamb",
+          "mince",
+          "chicken"
+        ],
+        "answer": "beef",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "beef：牛肉。"
+      },
+      {
+        "id": "listen-lamb",
+        "target": "听辨 lamb",
+        "prompt": "听一听，选出单词。",
+        "audioText": "lamb",
+        "options": [
+          "lamb",
+          "beef",
+          "steak",
+          "meat"
+        ],
+        "answer": "lamb",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "lamb：羔羊肉。"
+      },
+      {
+        "id": "listen-steak",
+        "target": "听辨 steak",
+        "prompt": "听一听，选出单词。",
+        "audioText": "steak",
+        "options": [
+          "steak",
+          "mince",
+          "chicken",
+          "beef"
+        ],
+        "answer": "steak",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "steak：牛排。"
+      },
+      {
+        "id": "listen-mince",
+        "target": "听辨 mince",
+        "prompt": "听一听，选出单词。",
+        "audioText": "mince",
+        "options": [
+          "mince",
+          "meat",
+          "steak",
+          "lamb"
+        ],
+        "answer": "mince",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "mince：肉馅。"
+      }
+    ],
+    [
+      {
+        "id": "listen-chicken",
+        "target": "听辨 chicken",
+        "prompt": "听一听，选出单词。",
+        "audioText": "chicken",
+        "options": [
+          "chicken",
+          "lamb",
+          "steak",
+          "beef"
+        ],
+        "answer": "chicken",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "chicken：鸡肉。"
+      },
+      {
+        "id": "listen-husband",
+        "target": "听辨 husband",
+        "prompt": "听一听，选出单词。",
+        "audioText": "husband",
+        "options": [
+          "husband",
+          "butcher",
+          "truth",
+          "either"
+        ],
+        "answer": "husband",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "husband：丈夫。"
+      },
+      {
+        "id": "listen-tell",
+        "target": "听辨 tell",
+        "prompt": "听一听，选出单词。",
+        "audioText": "tell",
+        "options": [
+          "tell",
+          "truth",
+          "either",
+          "meat"
+        ],
+        "answer": "tell",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "tell：告诉。"
+      },
+      {
+        "id": "listen-truth",
+        "target": "听辨 truth",
+        "prompt": "听一听，选出单词。",
+        "audioText": "truth",
+        "options": [
+          "truth",
+          "tell",
+          "husband",
+          "either"
+        ],
+        "answer": "truth",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "truth：实情。"
+      },
+      {
+        "id": "listen-either",
+        "target": "听辨 either",
+        "prompt": "听一听，选出单词。",
+        "audioText": "either",
+        "options": [
+          "either",
+          "truth",
+          "tell",
+          "butcher"
+        ],
+        "answer": "either",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "either：也（用于否定句）。"
+      }
+    ],
+    [
+      {
+        "id": "listen-mutton",
+        "target": "听辨 mutton",
+        "prompt": "听一听，选出单词。",
+        "audioText": "mutton",
+        "options": [
+          "mutton",
+          "lamb",
+          "mince",
+          "meat"
+        ],
+        "answer": "mutton",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "mutton：羊肉。"
+      },
+      {
+        "id": "listen-pork",
+        "target": "听辨 pork",
+        "prompt": "听一听，选出单词。",
+        "audioText": "pork",
+        "options": [
+          "pork",
+          "beef",
+          "fish",
+          "lamb"
+        ],
+        "answer": "pork",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "pork：猪肉。"
+      },
+      {
+        "id": "listen-fish",
+        "target": "听辨 fish",
+        "prompt": "听一听，选出单词。",
+        "audioText": "fish",
+        "options": [
+          "fish",
+          "pork",
+          "mince",
+          "chicken"
+        ],
+        "answer": "fish",
+        "hint": "先重听；需要时可以回看词卡。这条提示不会显示答案。",
+        "explanation": "fish：鱼肉。"
+      }
+    ]
+  ],
+  "POUCH": [
+    {
+      "en": "To tell you the truth",
+      "cn": "坦白自己的真实想法",
+      "scope": "课文表达",
+      "example": "A: Do you like chicken? B: To tell you the truth, I don't like chicken."
+    },
+    {
+      "en": "To be honest",
+      "cn": "坦诚地表达意见",
+      "scope": "补充表达",
+      "example": "To be honest, I like lamb."
+    },
+    {
+      "en": "Well",
+      "cn": "留一点思考时间，或委婉开口",
+      "scope": "补充表达",
+      "example": "A: Beef or lamb? B: Well, beef, please."
+    },
+    {
+      "en": "Yeah",
+      "cn": "随和地表示同意",
+      "scope": "补充表达",
+      "example": "A: Do you like steak? B: Yeah!"
+    },
+    {
+      "en": "That is to say",
+      "cn": "进一步解释前面的话",
+      "scope": "补充表达",
+      "example": "The shop is closed. That is to say, we cannot buy meat here now."
+    }
+  ],
+  "POUCH_TASK": [
+    {
+      "id": "pouch-truth",
+      "target": "表达用途",
+      "prompt": "课文中，老板用哪个开头说出自己不喜欢鸡肉？",
+      "options": [
+        "To tell you the truth",
+        "Yeah",
+        "That is to say"
+      ],
+      "answer": "To tell you the truth",
+      "explanation": "课文用 To tell you the truth 引出坦白的话。"
+    }
+  ],
+  "ET": [
+    {
+      "id": "either-meaning-too",
+      "target": "也的意思",
+      "prompt": "A: I like steak.\nB 的偏好：喜欢牛排。两个人的意思有什么联系？",
+      "options": [
+        "两个人都喜欢牛排",
+        "只有 A 喜欢牛排"
+      ],
+      "answer": "两个人都喜欢牛排",
+      "explanation": "A 喜欢牛排，B 也喜欢牛排。两个人的喜好相同。"
+    },
+    {
+      "id": "either-form-too",
+      "target": "too 回应",
+      "prompt": "A: I like steak.\nB 也喜欢牛排，怎样接话？",
+      "options": [
+        "I like steak, too.",
+        "I don't like steak either."
+      ],
+      "answer": "I like steak, too.",
+      "explanation": "两个人都喜欢，用 I like steak, too. 表示“我也喜欢”。"
+    },
+    {
+      "id": "either-meaning-either",
+      "target": "也不的意思",
+      "prompt": "A: I don't like chicken.\nB 的偏好：不喜欢鸡肉。两个人的意思有什么联系？",
+      "options": [
+        "两个人都不喜欢鸡肉",
+        "只有 A 不喜欢鸡肉"
+      ],
+      "answer": "两个人都不喜欢鸡肉",
+      "explanation": "A 不喜欢鸡肉，B 也不喜欢鸡肉。两个人都不喜欢。"
+    },
+    {
+      "id": "either-form-either",
+      "target": "either 回应",
+      "prompt": "A: I don't like chicken.\nB 也不喜欢鸡肉，怎样接话？",
+      "options": [
+        "I don't like chicken either.",
+        "I like chicken, too."
+      ],
+      "answer": "I don't like chicken either.",
+      "explanation": "先理解两个人都不喜欢，再用否定句加 either 表示“也不”。"
+    },
+    {
+      "id": "either-teachers",
+      "target": "身份相同",
+      "prompt": "A: I am a teacher.\nB 也是老师，怎样接话？",
+      "options": [
+        "I am a teacher, too.",
+        "I am not a teacher either."
+      ],
+      "answer": "I am a teacher, too.",
+      "explanation": "两个人都是老师，所以 B 肯定地接话：I am a teacher, too."
+    },
+    {
+      "id": "either-home",
+      "target": "状态相同",
+      "prompt": "A: I am not at home.\nB 也不在家，怎样接话？",
+      "options": [
+        "I am not at home either.",
+        "I am at home, too."
+      ],
+      "answer": "I am not at home either.",
+      "explanation": "A 和 B 都不在家，B 用否定句和 either 表示“也不”。"
+    }
+  ],
+  "GIVE": {
+    "give": {
+      "a": [
+        "Give",
+        "me",
+        "that piece,",
+        "please."
+      ],
+      "b": [
+        "Give",
+        "that piece",
+        "to",
+        "me,",
+        "please."
+      ]
+    },
+    "show": {
+      "a": [
+        "Show",
+        "me",
+        "your ticket,",
+        "please."
+      ],
+      "b": [
+        "Show",
+        "your ticket",
+        "to",
+        "me,",
+        "please."
+      ]
+    },
+    "send": {
+      "a": [
+        "Send",
+        "him",
+        "a postcard."
+      ],
+      "b": [
+        "Send",
+        "a postcard",
+        "to",
+        "him."
+      ]
+    },
+    "take": {
+      "a": [
+        "Take",
+        "her",
+        "some flowers."
+      ],
+      "b": [
+        "Take",
+        "some flowers",
+        "to",
+        "her."
+      ]
+    }
+  },
+  "GIVE_TASK": [
+    {
+      "id": "give-recipient-person",
+      "target": "give 接收者",
+      "prompt": "Mrs. Bird 说：Give me that piece, please.\n接收者是谁？",
+      "options": [
+        "Mrs. Bird",
+        "the butcher"
+      ],
+      "optionImages": {
+        "Mrs. Bird": "/assets/lesson49/icons/bird.svg",
+        "the butcher": "/assets/lesson49/icons/butcher.svg"
+      },
+      "answer": "Mrs. Bird",
+      "explanation": "me 指正在说话的 Mrs. Bird，她是接收者。"
+    },
+    {
+      "id": "give-object",
+      "target": "give 物品",
+      "prompt": "Give me that piece, please.\n哪部分表示要给的物品？",
+      "options": [
+        "me",
+        "that piece"
+      ],
+      "answer": "that piece",
+      "explanation": "that piece 指柜台上的那块肉，是物品。"
+    },
+    {
+      "id": "give-predict",
+      "target": "give 词序预测",
+      "prompt": "先放物品 that piece，再放接收者 me。另一种说法会怎样排列？",
+      "options": [
+        "Give that piece to me, please.",
+        "Give to that piece me, please."
+      ],
+      "answer": "Give that piece to me, please.",
+      "explanation": "把物品放在前面，用 to 引出接收者。",
+      "morph": {
+        "from": "Give me that piece, please.",
+        "to": "Give that piece to me, please."
+      }
+    },
+    {
+      "id": "give-order",
+      "target": "give 词块组织",
+      "type": "order",
+      "prompt": "撤去示范。用词块组成“请把那块肉给我”。",
+      "tokens": [
+        "Give",
+        "that piece",
+        "to",
+        "me,",
+        "please."
+      ],
+      "answer": "Give that piece to me, please.",
+      "hint": "先放动作，再放物品，to 后面连接接收者。",
+      "explanation": "Give that piece to me, please. 物品 that piece 在前，接收者 me 在 to 后。"
+    },
+    {
+      "id": "give-handoff",
+      "target": "give 交接意思",
+      "prompt": "新订单：Give that piece of steak to Tom, please.\n把牛排交给谁？",
+      "options": [
+        "Tom",
+        "Lily"
+      ],
+      "answer": "Tom",
+      "image": "/assets/lesson49/icons/steak.svg",
+      "imageAlt": "待交接的一块牛排",
+      "explanation": "这句话请把牛排给 Tom；to Tom 标明接收者。",
+      "delivery": "Tom",
+      "hint": "找 to 后面的人名。",
+      "successText": "牛排交给 Tom 了。"
+    },
+    {
+      "id": "show-order",
+      "target": "show 迁移",
+      "type": "order",
+      "lesson": "show 表示“给……看”。示范：Show me your ticket, please. → Show your ticket to me, please.",
+      "prompt": "试着换个人：请把你的票给 Lily 看。用“物品 + to + 接收者”组织词块。",
+      "tokens": [
+        "Show",
+        "your ticket",
+        "to",
+        "Lily,",
+        "please."
+      ],
+      "answer": "Show your ticket to Lily, please.",
+      "hint": "先放 show 和物品，再用 to 引出 Lily。",
+      "explanation": "Show your ticket to Lily, please. 这次物品是票，接收者是 Lily。"
+    }
+  ],
+  "DOARE_HELP": [
+  "Are you a teacher? 用 be 连接 you 和 a teacher。",
+  "Do you like meat? 使用动词 like，一般现在时问句用 do。",
+  "Do you live here? 虽然问地点，仍使用动词 live，问句用 do；不能只看问的是身份、状态还是地点。"
+],
+  "VERB_HELP": [
+  "这些题练习一般现在时。在 like、want 等一般动词的肯定句里，第三人称单数主语后用相应词形，例如 My husband likes steak.；I / you / we / they 后用原形。",
+  "本组否定句中，doesn’t 后的一般动词用原形：He doesn’t like chicken.",
+  "be 的形式另看主语：I am，you / we / they are，he / she / it is。"
+],
+  "SUBJECTS": {
+  "version": "l49-subjects-v1.10-four-categories",
+  "prompt": "作主语时，属于哪一类？",
+  "categories": [
+    "第一人称",
+    "第二人称",
+    "第三人称单数",
+    "第三人称复数"
+  ],
+  "help": [
+    "I / we 是第一人称，分别为单数／复数。",
+    "you 是第二人称，可指一人或多人；本题指伯德夫人一人。",
+    "本题的 Mrs. Bird 是第三人称单数，Mrs. Bird and her husband 是第三人称复数。",
+    "本题 they 明确指夫妇二人；不能把它概括为永远只指多人。"
+  ],
+  "questions": [
+    {
+      "id": "S01",
+      "subject": "Mrs. Bird",
+      "answer": "第三人称单数",
+      "explanation": "Mrs. Bird 指一位被谈论的人，作主语时是第三人称单数。",
+      "wrong": {
+        "第一人称": "Mrs. Bird 是本题谈论的人，不是说话者使用的“我／我们”。",
+        "第二人称": "本题用 Mrs. Bird 谈论这位夫人，不是用 you 称呼她。",
+        "第三人称复数": "Mrs. Bird 只指一位夫人，数量是单数。"
+      },
+      "hint": "伯德夫人。",
+      "image": "/assets/lesson49/subjects/s01.svg",
+      "imageAlt": "圈内是伯德夫人一人",
+      "context": ""
+    },
+    {
+      "id": "S02",
+      "subject": "Mrs. Bird and her husband",
+      "answer": "第三人称复数",
+      "explanation": "Mrs. Bird and her husband 指两个人，是第三人称复数。",
+      "wrong": {
+        "第一人称": "这里的主语是被谈论的夫妇二人，不是说话者说的“我们”。",
+        "第二人称": "这里谈论夫妇二人，不是用 you 称呼对方。",
+        "第三人称单数": "and 连接伯德夫人与丈夫，两个人是复数。"
+      },
+      "hint": "伯德夫人和她的丈夫。",
+      "image": "/assets/lesson49/subjects/s02.svg",
+      "imageAlt": "圈内是伯德夫人和丈夫两人",
+      "context": ""
+    },
+    {
+      "id": "S03",
+      "subject": "her husband",
+      "answer": "第三人称单数",
+      "explanation": "her 表示“她的”；整个主语指她的丈夫，是第三人称单数。",
+      "wrong": {
+        "第一人称": "her husband 指她的丈夫；her 表示“她的”，不表示“我／我们”。",
+        "第二人称": "her husband 在这里指被谈论的丈夫，不是对对方说 you。",
+        "第三人称复数": "整个短语只指丈夫；不能把表示所属的 her 也算成一个主语成员。"
+      },
+      "hint": "她的丈夫。",
+      "image": "/assets/lesson49/subjects/s03.svg",
+      "imageAlt": "圈内只有丈夫，旁边的小图表示伯德夫人",
+      "context": ""
+    },
+    {
+      "id": "S04",
+      "subject": "the butcher",
+      "answer": "第三人称单数",
+      "explanation": "the butcher 指这位肉店老板，作主语时是第三人称单数。",
+      "wrong": {
+        "第一人称": "the butcher 是本题谈论的老板，不是说话者使用的“我／我们”。",
+        "第二人称": "the butcher 在这里用作谈论老板的主语，不是称呼对方的 you。",
+        "第三人称复数": "the butcher 指这位老板一个人，是单数。"
+      },
+      "hint": "这位肉店老板。",
+      "image": "/assets/lesson49/subjects/s04.svg",
+      "imageAlt": "圈内是肉店老板一人",
+      "context": ""
+    },
+    {
+      "id": "S05",
+      "subject": "I",
+      "answer": "第一人称",
+      "explanation": "I 指说话的“我”，是第一人称单数。",
+      "wrong": {
+        "第二人称": "I 是说话的“我”；称呼对方的“你”用 you。",
+        "第三人称单数": "I 虽然指一个人，但它是第一人称，不是第三人称。",
+        "第三人称复数": "I 指说话的一个人，是第一人称单数，不是第三人称复数。"
+      },
+      "hint": "我。",
+      "image": "/assets/lesson49/subjects/s05.svg",
+      "imageAlt": "老板指自己说 I",
+      "context": "老板说 I"
+    },
+    {
+      "id": "S06",
+      "subject": "you",
+      "answer": "第二人称",
+      "explanation": "这里 you 指被称呼的伯德夫人，是第二人称单数。",
+      "wrong": {
+        "第一人称": "you 指正在被称呼的对方；说话者称自己为 I。",
+        "第三人称单数": "这里 you 虽然指一位夫人，但人称是第二人称。",
+        "第三人称复数": "这里 you 是对一位夫人的称呼，是第二人称单数。"
+      },
+      "hint": "你。",
+      "image": "/assets/lesson49/subjects/s06.svg",
+      "imageAlt": "老板对伯德夫人说 you，圈内是夫人",
+      "context": "老板对伯德夫人说 you"
+    },
+    {
+      "id": "S07",
+      "subject": "this book",
+      "answer": "第三人称单数",
+      "explanation": "this book 指这一本书，作主语时是第三人称单数。",
+      "wrong": {
+        "第一人称": "this book 是本题谈论的物品，不是说话的“我／我们”。",
+        "第二人称": "this book 指这本书，不是对对方说的 you。",
+        "第三人称复数": "this book 指一本书，是单数。"
+      },
+      "hint": "这本书。",
+      "image": "/assets/lesson49/subjects/s07.svg",
+      "imageAlt": "圈内是一本书",
+      "context": ""
+    },
+    {
+      "id": "S08",
+      "subject": "these books",
+      "answer": "第三人称复数",
+      "explanation": "these books 指这些书，是第三人称复数。",
+      "wrong": {
+        "第一人称": "these books 指被谈论的书，不是包含说话者的“我们”。",
+        "第二人称": "these books 指这些书，不是对对方说的 you。",
+        "第三人称单数": "these books 指多本书，是复数。"
+      },
+      "hint": "这些书。",
+      "image": "/assets/lesson49/subjects/s08.svg",
+      "imageAlt": "圈内是两本分开的书",
+      "context": ""
+    },
+    {
+      "id": "S09",
+      "subject": "we",
+      "answer": "第一人称",
+      "explanation": "这里 we 包括说话的伯德夫人和她的丈夫，是第一人称复数。",
+      "wrong": {
+        "第二人称": "we 包括说话者自己；you 是对对方的称呼。",
+        "第三人称单数": "we 在这里包含说话者和丈夫，是第一人称复数。",
+        "第三人称复数": "多人不一定是第三人称；we 包含说话者，是第一人称复数。"
+      },
+      "hint": "我们。",
+      "image": "/assets/lesson49/subjects/s09.svg",
+      "imageAlt": "伯德夫人说 we，圈内是夫人与丈夫",
+      "context": "伯德夫人说 we"
+    },
+    {
+      "id": "S10",
+      "subject": "his dogs",
+      "answer": "第三人称复数",
+      "explanation": "这里 his dogs 指两只狗，是第三人称复数。",
+      "wrong": {
+        "第一人称": "his 表示“他的”；整个主语指被谈论的狗，不是“我／我们”。",
+        "第二人称": "his dogs 指这些狗，不是对对方说的 you。",
+        "第三人称单数": "要看 dogs 所指的狗有几只；这里有两只，不看主人的人数。"
+      },
+      "hint": "他的狗（不止一只）。",
+      "image": "/assets/lesson49/subjects/s10.svg",
+      "imageAlt": "圈内有两只狗，圈外小图表示主人",
+      "context": ""
+    },
+    {
+      "id": "S11",
+      "subject": "his dog",
+      "answer": "第三人称单数",
+      "explanation": "his 表示“他的”；主语说的是那一只狗，是第三人称单数。",
+      "wrong": {
+        "第一人称": "his 表示“他的”；整个主语指被谈论的狗，不是“我／我们”。",
+        "第二人称": "his dog 指这只狗，不是对对方说的 you。",
+        "第三人称复数": "主语只指一只狗，主人不算在这个主语所指的数量中。"
+      },
+      "hint": "他的狗（这里是一只）。",
+      "image": "/assets/lesson49/subjects/s11.svg",
+      "imageAlt": "圈内只有一只狗，圈外小图表示主人",
+      "context": ""
+    },
+    {
+      "id": "S12",
+      "subject": "they",
+      "answer": "第三人称复数",
+      "explanation": "这里 they 指老板谈论的伯德夫人和她的丈夫，是第三人称复数。",
+      "wrong": {
+        "第一人称": "这里 they 不包含说话的老板，指的是夫人和丈夫；包含说话者的“我们”用 we。",
+        "第二人称": "这里 they 用来谈论夫妇二人，不是用 you 称呼他们。",
+        "第三人称单数": "本题明确指夫人和丈夫两个人，因此是复数。"
+      },
+      "hint": "他们（这里指伯德夫人和她的丈夫）。",
+      "image": "/assets/lesson49/subjects/s12.svg",
+      "imageAlt": "老板在圈外说 they，圈内是伯德夫人与丈夫",
+      "context": "they → Mrs. Bird and her husband"
+    }
+  ]
+},
+  "FILL": [
+    {
+      "id": "fill-aunt",
+      "target": "完整句中的主语与词形",
+      "prompt": "My aunt ___ fish.",
+      "options": [
+        "likes",
+        "like"
+      ],
+      "answer": "likes",
+      "explanation": "My aunt 可以换成 she，本句用 likes。"
+    },
+    {
+      "id": "fill-parents",
+      "target": "完整句中的主语与词形",
+      "prompt": "My parents ___ fish.",
+      "options": [
+        "like",
+        "likes"
+      ],
+      "answer": "like",
+      "explanation": "My parents 指父母两人，用 like。"
+    },
+    {
+      "id": "fill-watch",
+      "target": "完整句中的主语与词形",
+      "prompt": "My dog ___ TV at night.",
+      "options": [
+        "watches",
+        "watch"
+      ],
+      "answer": "watches",
+      "explanation": "watch 变成 watches，增加的是 -es。"
+    },
+    {
+      "id": "fill-go",
+      "target": "完整句中的主语与词形",
+      "prompt": "The student ___ to school on foot.",
+      "options": [
+        "goes",
+        "go"
+      ],
+      "answer": "goes",
+      "explanation": "go 变成 goes，增加的是 -es。"
+    },
+    {
+      "id": "fill-love",
+      "target": "完整句中的主语与词形",
+      "prompt": "He ___ his dog very much.",
+      "options": [
+        "loves",
+        "love"
+      ],
+      "answer": "loves",
+      "explanation": "He 是第三人称单数，本句用 loves。"
+    },
+    {
+      "id": "fill-walk",
+      "target": "完整句中的主语与词形",
+      "prompt": "Jim and Lily ___ to school every day.",
+      "options": [
+        "walk",
+        "walks"
+      ],
+      "answer": "walk",
+      "explanation": "Jim and Lily 是并列主语，用原形 walk。"
+    },
+    {
+      "id": "fill-drink",
+      "target": "完整句中的主语与词形",
+      "prompt": "They ___ water every day.",
+      "options": [
+        "drink",
+        "drinks"
+      ],
+      "answer": "drink",
+      "explanation": "在这个一般现在时肯定句里，They 后用 drink：They drink water every day."
+    }
+  ],
+  "CHOICE": [
+    {
+      "id": "negative-like",
+      "target": "否定句原形",
+      "lesson": "对比：He likes steak. / He doesn't like chicken.\n肯定句 likes 带 -s；doesn't 已经变化，后面用 like。",
+      "prompt": "他不喜欢鸡肉。哪句符合这个意思？",
+      "options": [
+        "He doesn't like chicken.",
+        "He doesn't likes chicken.",
+        "He likes chicken."
+      ],
+      "answer": "He doesn't like chicken.",
+      "explanation": "doesn't 后面的 like 用原形；不能再加 -s。"
+    },
+    {
+      "id": "negative-want",
+      "target": "否定句迁移",
+      "prompt": "Lucy 不想要牛肉，选出正确句子。",
+      "options": [
+        "Lucy doesn't want beef.",
+        "Lucy doesn't wants beef.",
+        "Lucy wants beef."
+      ],
+      "answer": "Lucy doesn't want beef.",
+      "explanation": "Lucy doesn't want beef. doesn't 后面也用 want 的原形。"
+    },
+    {
+      "id": "choice-get",
+      "target": "三单词形",
+      "prompt": "She ___ up at six in the morning.",
+      "options": [
+        "get",
+        "gets",
+        "getting"
+      ],
+      "answer": "gets",
+      "explanation": "She 是第三人称单数，本句用 gets。"
+    },
+    {
+      "id": "choice-work",
+      "target": "三单词形",
+      "prompt": "Tom is a student. He ___ in the classroom.",
+      "options": [
+        "work",
+        "works",
+        "working"
+      ],
+      "answer": "works",
+      "explanation": "He 是第三人称单数，本句用 works。"
+    }
+  ],
+  "TRANS": [
+    {
+      "id": "trans-peaches",
+      "target": "词块组织",
+      "type": "order",
+      "prompt": "用词块表达：她喜欢桃子。",
+      "tokens": [
+        "She",
+        "likes",
+        "peaches."
+      ],
+      "answer": "She likes peaches.",
+      "explanation": "She likes peaches. 主语是 she，用 likes。"
+    },
+    {
+      "id": "trans-car",
+      "target": "词块组织",
+      "type": "order",
+      "prompt": "用词块表达：他想要一辆小汽车。",
+      "tokens": [
+        "He",
+        "wants",
+        "a car."
+      ],
+      "answer": "He wants a car.",
+      "explanation": "He wants a car. 主语是 he，用 wants。"
+    }
+  ],
+  "DIALOGUE": [
+    {
+      "who": "butcher",
+      "text": "Do you want any meat today, Mrs. Bird?",
+      "cn": "您今天要来点肉吗，伯德夫人？"
+    },
+    {
+      "who": "bird",
+      "text": "Yes, please.",
+      "cn": "好的，谢谢。"
+    },
+    {
+      "who": "butcher",
+      "text": "Do you want beef or lamb?",
+      "cn": "您要牛肉还是羔羊肉？"
+    },
+    {
+      "who": "bird",
+      "text": "Beef, please.",
+      "cn": "请给我牛肉。"
+    },
+    {
+      "who": "butcher",
+      "text": "This lamb's very good.",
+      "cn": "这羔羊肉很不错。"
+    },
+    {
+      "who": "bird",
+      "text": "I like lamb, but my husband doesn't.",
+      "cn": "我喜欢羔羊肉，可是我丈夫不喜欢。"
+    },
+    {
+      "who": "butcher",
+      "text": "What about some steak? This is a nice piece.",
+      "cn": "来点牛排怎么样？这块很好。"
+    },
+    {
+      "who": "bird",
+      "text": "Give me that piece, please. And a pound of mince, too.",
+      "cn": "请给我那块。再来一磅肉馅。"
+    },
+    {
+      "who": "butcher",
+      "text": "Do you want a chicken, Mrs. Bird? They're very nice.",
+      "cn": "您要只鸡吗，伯德夫人？鸡很好。"
+    },
+    {
+      "who": "bird",
+      "text": "No, thank you. My husband likes steak, but he doesn't like chicken.",
+      "cn": "不了，谢谢。我丈夫喜欢牛排，但他不喜欢鸡肉。"
+    },
+    {
+      "who": "butcher",
+      "text": "To tell you the truth, Mrs. Bird, I don't like chicken either!",
+      "cn": "说实话，伯德夫人，我也不喜欢鸡肉！",
+      "punch": true
+    }
+  ],
+  "STORY_LEAD": [
+    "丈夫喜欢什么肉？",
+    "Mrs. Bird 先选了哪种肉？",
+    "老板喜欢鸡肉吗？"
+  ],
+  "STORY_TASKS": [
+    {
+      "id": "story-husband-reading",
+      "target": "课文信息理解",
+      "prompt": "课文中，Mrs. Bird 的丈夫喜欢什么肉？",
+      "scene": {
+        "replyWho": "bird"
+      },
+      "optionImages": {
+        "steak": "/assets/lesson49/icons/steak.svg",
+        "lamb": "/assets/lesson49/icons/lamb.svg",
+        "chicken": "/assets/lesson49/icons/chicken.svg"
+      },
+      "options": [
+        "steak",
+        "lamb",
+        "chicken"
+      ],
+      "answer": "steak",
+      "hint": "找到 Mrs. Bird 说的“My husband likes…”；注意区分她和丈夫的喜好。",
+      "explanation": "Mrs. Bird 说丈夫喜欢 steak；他不喜欢 chicken。她自己喜欢 lamb。"
+    },
+    {
+      "id": "story-bird-order",
+      "target": "课文回应理解",
+      "prompt": "课文中，老板问要牛肉还是羔羊肉时，Mrs. Bird 怎么回答？",
+      "options": [
+        "Beef, please.",
+        "Yes, I do.",
+        "Thank you."
+      ],
+      "answer": "Beef, please.",
+      "hint": "老板让她在两种肉里选一种，回答要说出肉的名字。",
+      "explanation": "Beef, please. 请给我牛肉。",
+      "scene": {
+        "who": "butcher",
+        "text": "Do you want beef or lamb?",
+        "replyWho": "bird"
+      }
+    },
+    {
+      "id": "story-butcher-either",
+      "target": "课文回应理解",
+      "prompt": "课文中，Mrs. Bird 说丈夫不喜欢鸡肉后，老板怎么回应？",
+      "options": [
+        "To tell you the truth, Mrs. Bird, I don't like chicken either.",
+        "Beef, please.",
+        "My husband likes steak."
+      ],
+      "answer": "To tell you the truth, Mrs. Bird, I don't like chicken either.",
+      "hint": "听课文最后一句：老板也不喜欢鸡肉。否定句中的“也”用 either。",
+      "explanation": "不喜欢鸡肉，再说“我也不喜欢”时，用 either。",
+      "scene": {
+        "who": "bird",
+        "text": "No, thank you. My husband likes steak, but he doesn't like chicken.",
+        "replyWho": "butcher"
+      }
+    },
+    {
+      "id": "story-lamb-application",
+      "target": "新情境回应",
+      "prompt": "如果 Mrs. Bird 这次想买羔羊肉，她应该怎么回答？",
+      "options": [
+        "Lamb, please.",
+        "Beef, please.",
+        "I don't like chicken either."
+      ],
+      "answer": "Lamb, please.",
+      "hint": "这次的需求与课文不同；羔羊肉是 lamb。",
+      "explanation": "这次想买羔羊肉，所以说 Lamb, please.",
+      "scene": {
+        "who": "butcher",
+        "text": "Do you want beef or lamb?",
+        "replyWho": "bird"
+      }
+    },
+    {
+      "id": "story-steak-too",
+      "target": "新情境回应",
+      "prompt": "顾客说“I like steak.”，如果老板也喜欢牛排，他应该怎么回答？",
+      "options": [
+        "I like steak, too.",
+        "I don't like steak either.",
+        "Beef, please."
+      ],
+      "answer": "I like steak, too.",
+      "explanation": "两个人都喜欢，所以说 I like steak, too.",
+      "scene": {
+        "who": "bird",
+        "text": "I like steak.",
+        "replyWho": "butcher"
+      },
+      "hint": "两个人都喜欢；肯定句中的“也”用 too。"
+    }
+  ],
+  "EXAM": [
+    {
+      "id": "exam-listen",
+      "target": "订单听辨",
+      "prompt": "听订单，选出录音里出现的单词。",
+      "audioText": "a pound of mince",
+      "options": [
+        "mince",
+        "beef",
+        "chicken",
+        "lamb"
+      ],
+      "answer": "mince",
+      "explanation": "录音说的是 a pound of mince，听到的名称是 mince，意思是肉馅。"
+    },
+    {
+      "id": "exam-story",
+      "presentation": "preferences",
+      "target": "家人偏好",
+      "prompt": "根据原文，哪张偏好卡同时符合 Mrs. Bird 和她丈夫？",
+      "options": [
+        "Mrs. Bird: lamb · husband: steak",
+        "Mrs. Bird: steak · husband: lamb",
+        "Mrs. Bird: chicken · husband: chicken"
+      ],
+      "answer": "Mrs. Bird: lamb · husband: steak",
+      "explanation": "原文明确说 Mrs. Bird 喜欢 lamb，她的丈夫喜欢 steak。"
+    },
+    {
+      "id": "exam-are",
+      "presentation": "question",
+      "target": "身份问句",
+      "prompt": "想知道新顾客是不是学生，怎样问？",
+      "options": [
+        "Are you a student?",
+        "Do you a student?"
+      ],
+      "answer": "Are you a student?",
+      "explanation": "本句用 be 连接 you 和 a student，问句是 Are you a student?"
+    },
+    {
+      "id": "exam-do",
+      "presentation": "question",
+      "target": "需求问句",
+      "prompt": "想知道顾客要不要鸡肉，怎样问？",
+      "options": [
+        "Do you want chicken?",
+        "Are you want chicken?"
+      ],
+      "answer": "Do you want chicken?",
+      "explanation": "want 是一般动词，这组问句用 Do you want…?。"
+    },
+    {
+      "id": "exam-order",
+      "target": "give 新物品词序",
+      "type": "order",
+      "prompt": "新订单：请把牛肉给 Lily。用“物品 + to + 接收者”组织句子。",
+      "tokens": [
+        "Give",
+        "the beef",
+        "to",
+        "Lily,",
+        "please."
+      ],
+      "answer": "Give the beef to Lily, please.",
+      "hint": "先放动作和物品，再用 to 引出 Lily。",
+      "explanation": "Give the beef to Lily, please. 牛肉是物品，Lily 是接收者。"
+    },
+    {
+      "id": "exam-handoff",
+      "target": "新接收者交接",
+      "prompt": "Give that piece to Sam, please.\n这块肉应该交给谁？",
+      "options": [
+        "Tom",
+        "Sam"
+      ],
+      "answer": "Sam",
+      "explanation": "这句话请把这块肉给 Sam；to Sam 标明接收者。",
+      "delivery": "Sam",
+      "hint": "找 to 后面的人名。",
+      "successText": "这块肉交给 Sam 了。"
+    },
+    {
+      "id": "exam-too",
+      "presentation": "reply",
+      "target": "相同喜好回应",
+      "prompt": "A: I like lamb.\nB 也喜欢羔羊肉，怎样回应？",
+      "options": [
+        "I like lamb, too.",
+        "I don't like lamb either."
+      ],
+      "answer": "I like lamb, too.",
+      "explanation": "两个人都喜欢，B 说 I like lamb, too."
+    },
+    {
+      "id": "exam-subject",
+      "presentation": "cloze",
+      "target": "名词短语主语",
+      "prompt": "My parents ___ lamb. 选出正确词形。",
+      "options": [
+        "want",
+        "wants"
+      ],
+      "answer": "want",
+      "explanation": "My parents 指父母两人，本句用 want。"
+    },
+    {
+      "id": "exam-negative",
+      "target": "否定句原形迁移",
+      "prompt": "Tom 不喜欢牛肉，怎样表达？",
+      "options": [
+        "Tom doesn't like beef.",
+        "Tom doesn't likes beef.",
+        "Tom likes beef."
+      ],
+      "answer": "Tom doesn't like beef.",
+      "explanation": "doesn't 后面的 like 用原形。"
+    },
+    {
+      "id": "exam-either",
+      "presentation": "reply",
+      "target": "相同否定回应",
+      "prompt": "A: I don't like lamb.\nB 也不喜欢羔羊肉，怎样回应？",
+      "options": [
+        "I don't like lamb either.",
+        "I like lamb, too."
+      ],
+      "answer": "I don't like lamb either.",
+      "explanation": "A 和 B 都不喜欢，B 用否定句加 either 表示“也不喜欢”。"
+    }
+  ],
+  "AUDIO": {
+    "butcher": "lesson49/audio/butcher.mp3",
+    "meat": "lesson49/audio/meat.mp3",
+    "beef": "lesson49/audio/beef.mp3",
+    "lamb": "lesson49/audio/lamb.mp3",
+    "mutton": "lesson49/audio/mutton.mp3",
+    "steak": "lesson49/audio/steak.mp3",
+    "mince": "lesson49/audio/mince.mp3",
+    "chicken": "lesson49/audio/chicken.mp3",
+    "pork": "lesson49/audio/pork.mp3",
+    "fish": "lesson49/audio/fish.mp3",
+    "husband": "lesson49/audio/husband.mp3",
+    "tell": "lesson49/audio/tell.mp3",
+    "truth": "lesson49/audio/truth.mp3",
+    "either": "lesson49/audio/either.mp3",
+    "a piece of steak": "lesson49/audio/a_piece_of_steak.mp3",
+    "a pound of mince": "lesson49/audio/a_pound_of_mince.mp3",
+    "mutton hotpot": "lesson49/audio/mutton_hotpot.mp3",
+    "To tell you the truth": "lesson49/audio/to_tell_you_the_truth.mp3",
+    "To be honest": "lesson49/audio/to_be_honest.mp3",
+    "Well": "lesson49/audio/well.mp3",
+    "Yeah": "lesson49/audio/yeah.mp3",
+    "That is to say": null,
+    "Do you want any meat today, Mrs. Bird?": "lesson49/audio/do_you_want_any_meat_today_mrs_bird.mp3",
+    "Yes, please.": "lesson49/audio/yes_please.mp3",
+    "Do you want beef or lamb?": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+    "Beef, please.": "lesson49/audio/beef_please.mp3",
+    "This lamb's very good.": "lesson49/audio/this_lamb_s_very_good.mp3",
+    "I like lamb, but my husband doesn't.": "lesson49/audio/i_like_lamb_but_my_husband_doesn_t.mp3",
+    "What about some steak? This is a nice piece.": "lesson49/audio/what_about_some_steak_this_is_a_nice_piece.mp3",
+    "Give me that piece, please. And a pound of mince, too.": "lesson49/audio/give_me_that_piece_please_and_a_pound_of_mince_too.mp3",
+    "Do you want a chicken, Mrs. Bird? They're very nice.": "lesson49/audio/do_you_want_a_chicken_mrs_bird_they_re_very_nice.mp3",
+    "No, thank you. My husband likes steak, but he doesn't like chicken.": "lesson49/audio/no_thank_you_my_husband_likes_steak_but_he_doesn_t_like_chicken.mp3",
+    "To tell you the truth, Mrs. Bird, I don't like chicken either!": "lesson49/audio/to_tell_you_the_truth_mrs_bird_i_don_t_like_chicken_either.mp3",
+    "Give me that piece, please.": "lesson49/audio/give_me_that_piece_please.mp3",
+    "Give that piece to me, please.": null,
+    "Show me your ticket, please.": "lesson49/audio/show_me_your_ticket_please.mp3",
+    "Show your ticket to me, please.": null,
+    "Send him a postcard.": "lesson49/audio/send_him_a_postcard.mp3",
+    "Send a postcard to him.": null,
+    "Take her some flowers.": "lesson49/audio/take_her_some_flowers.mp3",
+    "Take some flowers to her.": null,
+    "Do you like meat?": null,
+    "Are you a teacher?": "lesson49/audio/are_you_a_teacher.mp3",
+    "Are you busy?": "lesson49/audio/are_you_busy.mp3",
+    "Are you at home?": "lesson49/audio/are_you_at_home.mp3",
+    "Do you want beef?": null,
+    "Do you sleep well?": "lesson49/audio/do_you_sleep_well.mp3",
+    "Do you make the bed?": "lesson49/audio/do_you_make_the_bed.mp3",
+    "Do you put on your coat?": "lesson49/audio/do_you_put_on_your_coat.mp3",
+    "两个人都喜欢牛排": null,
+    "I like steak.": "lesson49/audio/i_like_steak.mp3",
+    "I like steak, too.": "lesson49/audio/i_like_steak_too.mp3",
+    "两个人都不喜欢鸡肉": null,
+    "I don't like chicken either.": null,
+    "I am a teacher, too.": null,
+    "I am not at home either.": null,
+    "likes": null,
+    "like": null,
+    "watches": null,
+    "goes": null,
+    "loves": null,
+    "walk": null,
+    "drink": null,
+    "He doesn't like chicken.": null,
+    "Lucy doesn't want beef.": null,
+    "gets": null,
+    "works": null,
+    "She likes peaches.": "lesson49/audio/she_likes_peaches.mp3",
+    "He wants a car.": "lesson49/audio/he_wants_a_car.mp3",
+    "Mrs. Bird: lamb · husband: steak": null,
+    "Are you a student?": null,
+    "Do you want chicken?": null,
+    "Give the beef to Lily, please.": null,
+    "Sam": null,
+    "I like lamb, too.": null,
+    "want": null,
+    "Tom doesn't like beef.": null,
+    "I don't like lamb either.": null,
+    "me": null,
+    "that piece": null,
+    "Tom": null,
+    "Show your ticket to Lily, please.": null,
+    "Lamb, please.": "lesson49/audio/lamb_please.mp3",
+    "To tell you the truth, Mrs. Bird, I don't like chicken either.": "lesson49/audio/to_tell_you_the_truth_mrs_bird_i_don_t_like_chicken_either.mp3"
+  }
+};
 
   const COURSES = deepFreeze([
     publishedLesson({
       lesson: 49,
+      learning: LESSON49_LEARNING,
       title: '肉店大冒险',
       subtitle: "At the Butcher's",
       description: '跟着伯德夫人去肉店买肉！17 张单词卡、课文小剧场、句型魔法屋，还有三单训练营等你来闯。',
@@ -322,57 +1891,6 @@
         mobilePreview: 'assets/adventure-map/lesson49/mobile-preview.png',
         regressionTest: 'tests/e2e/lesson49-map.spec.js'
       },
-      presentationPublication: {
-        declaredStatus: 'published',
-        regressionTest: 'tests/e2e/classroom-presentation.spec.js',
-        steps: [
-          {
-            id: 'welcome',
-            eyebrow: '开场 · 进入肉店',
-            title: "Welcome to the butcher's!",
-            prompt: '今天我们一起当肉店小帮手。先听一听店里的主人是谁。',
-            hint: '邀请全班看着屏幕，一起指向肉店老板，再跟读两遍。',
-            audioText: 'butcher',
-            audioAsset: 'lesson49/audio/butcher.mp3'
-          },
-          {
-            id: 'vocabulary',
-            eyebrow: '词汇 · 看图跟读',
-            title: 'beef',
-            prompt: '听清长音 /iː/，再请全班用响亮声音跟读。',
-            hint: '可以让孩子用手比出一块牛肉的大小，再一起说 beef。',
-            audioText: 'beef',
-            audioAsset: 'lesson49/audio/beef.mp3'
-          },
-          {
-            id: 'dialogue',
-            eyebrow: '对话 · 老板开口',
-            title: 'Do you want any meat today, Mrs. Bird?',
-            prompt: '先完整听一句，再分成 Do you want / any meat / today 三段跟读。',
-            hint: '老师扮演老板，全班扮演 Mrs. Bird；听完后用 Yes, please 回答。',
-            audioText: 'Do you want any meat today, Mrs. Bird?',
-            audioAsset: 'lesson49/audio/do_you_want_any_meat_today_mrs_bird.mp3'
-          },
-          {
-            id: 'grammar',
-            eyebrow: '句型 · Do 还是 Are',
-            title: 'Are you a teacher?',
-            prompt: '观察 teacher 是身份，不是动作，所以句首要用 Are。',
-            hint: '把 teacher 换成 student，让全班两人一组互相问答。',
-            audioText: 'Are you a teacher?',
-            audioAsset: 'lesson49/audio/are_you_a_teacher.mp3'
-          },
-          {
-            id: 'recap',
-            eyebrow: '收尾 · 真心话挑战',
-            title: "To tell you the truth, Mrs. Bird, I don't like chicken either.",
-            prompt: '听出老板的真心话，再一起找出表示“也不”的单词。',
-            hint: '答案是 either。请全班用 I don\'t like … either 说一个自己的例句。',
-            audioText: "To tell you the truth, Mrs. Bird, I don't like chicken either.",
-            audioAsset: 'lesson49/audio/to_tell_you_the_truth_mrs_bird_i_don_t_like_chicken_either.mp3'
-          }
-        ]
-      }
     }),
     publishedLesson({
       lesson: 50,
@@ -601,7 +2119,6 @@
         mobilePreview: 'assets/adventure-map/soundmark/mobile-preview.png',
         regressionTest: 'tests/e2e/soundmark-progress.spec.js'
       }),
-      presentation: createClassroomPresentation('soundmark')
     }
   ]);
 
@@ -614,10 +2131,6 @@
   const MAP_COURSES = deepFreeze(
     COURSES.filter(course => course.map.v1Visible)
   );
-  const PRESENTATION_COURSES = deepFreeze(
-    COURSES.filter(course => course.presentation.declaredStatus === 'published')
-  );
-
   function requirePublishedCourse(id) {
     const course = PUBLISHED_COURSES.find(candidate => candidate.id === id);
     if (!course) throw new Error(`published course not found: ${id}`);
@@ -708,63 +2221,6 @@
       map.souvenir === null &&
       map.mobilePreview === null &&
       map.regressionTest === null;
-  }
-
-  function assessClassroomPresentation(course) {
-    if (!course?.presentation || course.presentation.declaredStatus !== 'published') {
-      return deepFreeze({
-        status: 'not-ready',
-        route: null,
-        checklist: null,
-        missing: []
-      });
-    }
-    const presentation = course.presentation;
-    const steps = Array.isArray(presentation.steps) ? presentation.steps : [];
-    const stepIds = steps.map(step => step?.id);
-    const checklist = {
-      publicPage: course.courseStatus === 'published' &&
-        presentation.route === `${course.route}present/` &&
-        presentation.entry === `${course.id}/present/index.html` &&
-        isRelativePublicPath(presentation.entry),
-      completeControls: Array.isArray(presentation.controls) &&
-        presentation.controls.length === PRESENTATION_CONTROLS.length &&
-        presentation.controls.every((control, index) => control === PRESENTATION_CONTROLS[index]),
-      teachingSteps: steps.length === 5 &&
-        new Set(stepIds).size === steps.length &&
-        steps.every(step => (
-          typeof step?.id === 'string' && /^[a-z0-9-]+$/.test(step.id) &&
-          ['eyebrow', 'title', 'prompt', 'hint', 'audioText']
-            .every(field => typeof step[field] === 'string' && step[field].trim())
-        )),
-      prerecordedAudio: course.courseStatus === 'published' &&
-        Array.isArray(course.assetDirectories) &&
-        course.assetDirectories.includes(`${course.id}/audio`) &&
-        steps.length > 0 && steps.every(step => (
-          isRelativePublicPath(step?.audioAsset) &&
-          step.audioAsset.startsWith(`${course.id}/audio/`) &&
-          step.audioAsset.toLowerCase().endsWith('.mp3')
-        )),
-      regressionVerification: isRegressionTestPath(presentation.regressionTest)
-    };
-    const missing = Object.entries(checklist)
-      .filter(([, complete]) => !complete)
-      .map(([item]) => item);
-    return deepFreeze({
-      status: missing.length === 0 ? 'published' : 'not-ready',
-      route: missing.length === 0 ? presentation.route : null,
-      checklist,
-      missing
-    });
-  }
-
-  function hasNotReadyPresentationContract(presentation) {
-    return presentation?.declaredStatus === 'not-ready' &&
-      presentation.route === null &&
-      presentation.entry === null &&
-      Array.isArray(presentation.controls) && presentation.controls.length === 0 &&
-      Array.isArray(presentation.steps) && presentation.steps.length === 0 &&
-      presentation.regressionTest === null;
   }
 
   function validateCatalog(courses) {
@@ -899,16 +2355,6 @@
         errors.push(`${id}: special course map must be published or not-applicable`);
       }
 
-      if (!course.presentation || typeof course.presentation !== 'object') {
-        errors.push(`${id}: classroom presentation contract is required`);
-      } else if (course.presentation.declaredStatus === 'published') {
-        const assessment = assessClassroomPresentation(course);
-        if (assessment.status !== 'published') {
-          errors.push(`${id}: published presentation contract missing ${assessment.missing.join(', ')}`);
-        }
-      } else if (!hasNotReadyPresentationContract(course.presentation)) {
-        errors.push(`${id}: classroom presentation must be published or not-ready`);
-      }
     });
 
     return Object.freeze(errors);
@@ -932,13 +2378,11 @@
     PUBLISHED_COURSES,
     HOME_COURSES,
     MAP_COURSES,
-    PRESENTATION_COURSES,
     createLessonMap,
     createSpecialMap,
     mapStateAssetUrl,
     requirePublishedCourse,
     assessLearningLocation,
-    assessClassroomPresentation,
     directoryMapStatus,
     validateCatalog,
     assertValidCatalog

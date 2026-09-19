@@ -1,0 +1,108 @@
+.unit-top-actions{display:flex;align-items:center;gap:12px}
+.unit-workspace #logo{min-height:44px;display:inline-flex;align-items:center}
+.unit-cover{max-width:1040px;margin:auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:42px 24px!important}
+.unit-workspace #cover{display:grid}
+.unit-cover h1{font:44px/1.3 'ZCOOL KuaiLe',sans-serif;color:var(--red-d)}
+.unit-source{font-size:16px;color:#795f4b;margin-bottom:12px}.unit-intro{margin:18px 0 24px}
+.unit-cover-art{display:flex;align-items:flex-end;justify-content:center;gap:8px;min-height:230px}
+.unit-cover-art>img{width:26%;height:210px;object-fit:contain}
+.unit-groceries{display:flex;align-items:center;flex-wrap:wrap;justify-content:center;width:38%;padding:12px 4px;border:4px solid var(--brown);border-radius:16px 16px 36px 36px;background:#efbe77;box-shadow:0 5px 0 var(--brown)}
+.unit-groceries img{width:50%;height:70px;object-fit:contain}
+.unit-words{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.unit-word{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:210px;padding:16px 6px;text-align:center}
+.unit-word img{width:76px;height:76px;object-fit:contain}.unit-word strong{font-size:25px;line-height:1.25}.unit-word small{font-size:15px;color:#796653}
+.unit-word[aria-expanded="true"]{background:#fff0bb}.unit-word .word-meaning{font-size:20px}
+.unit-word[aria-expanded="true"]>strong,.unit-word[aria-expanded="true"]>small{display:none}
+.unit-workspace [hidden]{display:none!important}
+.unit-workspace .practice-morph[hidden]{display:inline-flex!important;visibility:hidden}
+.unit-dialog{width:min(740px,calc(100% - 32px));max-height:85vh;margin:auto;padding:24px;border:3px solid var(--brown);border-radius:20px;background:var(--paper);color:var(--brown);font:inherit;overflow:auto}
+.unit-dialog::backdrop{background:#4a322680}.unit-dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.unit-dialog h2{font-size:24px}.unit-dialog p{margin:12px 0}.unit-dialog li{margin:12px 0 12px 24px}
+.unit-certificate{text-align:center}.unit-certificate input{width:min(340px,100%);padding:12px;border:3px solid var(--brown);border-radius:12px;font:inherit;display:block;margin:8px auto 0}
+.certificate-greeting{display:flex;flex-direction:column;align-items:center;gap:10px;margin:10px 0 24px}
+.certificate-greeting>.shop-icon{width:64px;height:64px;filter:grayscale(1);opacity:.6}
+.is-ready .certificate-greeting>.shop-icon{filter:none;opacity:1}
+.certificate-greeting p{font:26px/1.4 'ZCOOL KuaiLe',sans-serif;margin:0}
+.certificate-name-label{display:block;font-size:16px;font-weight:700;margin-top:24px}
+.certificate-track{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;list-style:none;padding:0;max-width:640px;margin:0 auto}
+.certificate-track li{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:80px;font-size:14px;line-height:1.3;color:#776955}
+.certificate-track .shop-icon{width:46px;height:46px;padding:6px;box-sizing:content-box;border:2px dashed #baa58c;border-radius:50%;filter:grayscale(1);opacity:.55}
+.certificate-track .is-earned{color:var(--brown)}
+.certificate-track .is-earned .shop-icon{filter:none;opacity:1;background:#e1edd5;border:2px solid #79945e}
+.unit-workspace button:disabled{cursor:default;opacity:.55}
+.unit-workspace .unit-results{font-size:18px;line-height:1.5;text-align:center}.unit-results details{margin:12px auto 0}.unit-results ul{padding-left:24px;text-align:left;width:fit-content;margin:auto}
+.unit-workspace .stage-needs .practice-scene{display:block;width:88px;height:88px;object-fit:contain;margin:12px auto 16px}
+.unit-workspace .unit-certificate-actions{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;gap:16px;margin:20px auto 4px}.unit-certificate-actions .btn{font-size:18px;min-width:150px}
+.certificate-dialog{width:min(850px,calc(100% - 32px));max-width:none;padding:20px;max-height:calc(100dvh - 32px)}
+.certificate-dialog>.unit-dialog-heading{position:sticky;top:-20px;z-index:2;padding:12px 20px;margin:-20px -20px 18px;background:var(--paper);border-bottom:2px solid #eadac4}
+.certificate-paper{position:relative;overflow:hidden;border:3px solid var(--brown);border-radius:22px;background:#fffdf6;padding:28px 24px 18px;text-align:center;box-shadow:0 5px 0 #d6bc96}
+.certificate-paper::before{content:'';position:absolute;inset:0 0 auto;height:13px;background:repeating-linear-gradient(90deg,#e8503a 0 28px,#fffdf6 28px 56px);border-bottom:2px solid var(--brown)}
+.certificate-paper p{margin:0}
+.certificate-paper .certificate-course{font-size:14px;line-height:1.5;color:#795f4b;margin:0 0 8px}
+.certificate-crown{display:flex;justify-content:center;align-items:flex-end;gap:4px;height:48px;margin:4px 0 8px}
+.certificate-crown>.shop-icon{width:32px;height:32px}.certificate-crown>.shop-icon:nth-child(2){width:48px;height:48px}
+.certificate-paper .certificate-award{font:42px/1.2 'ZCOOL KuaiLe',sans-serif;color:#ba3929;margin:4px 0 16px}
+.certificate-heroes{display:grid;grid-template-columns:112px minmax(0,1fr) 112px;align-items:center;gap:12px;max-width:620px;min-height:138px;margin:0 auto}
+.certificate-heroes>.shop-icon{width:112px;height:136px;object-fit:contain}
+.certificate-recipient{min-width:0;padding:6px 0}
+.certificate-to{font-size:15px;color:#795f4b}
+.certificate-paper #certificateName{font:48px/1.25 'ZCOOL KuaiLe',sans-serif;color:var(--brown);overflow-wrap:anywhere;border-bottom:5px solid var(--yellow);padding:8px 4px 10px;margin:0}
+.certificate-paper #certificateName.is-long{font-size:30px}
+.certificate-paper .certificate-completion{font-size:16px;line-height:1.5;margin:8px 0}
+.certificate-paper .certificate-thanks{font:22px/1.5 'ZCOOL KuaiLe',sans-serif;color:#4c753b;margin:8px 0 18px}
+.certificate-badges{list-style:none;display:flex;justify-content:center;gap:10px;padding:0;margin:0}
+.certificate-dialog .certificate-badge{display:flex;flex:1;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--badge-color);border:2px solid #d3b697;border-radius:15px;padding:12px 3px;margin:0;font:15px/1.4 'ZCOOL KuaiLe',sans-serif}
+.certificate-badge-art{display:flex;align-items:center;justify-content:center}
+.certificate-badge-art>.shop-icon{width:46px;height:46px;object-fit:contain}
+.certificate-badge>span:last-child{min-height:2.8em;display:flex;align-items:center;justify-content:center}
+.certificate-foot{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:18px;padding:0;opacity:1}
+.certificate-paper .certificate-reward{padding:6px 18px;border-radius:24px;background:#e1edd5;color:#426b32;font-size:16px;font-weight:800}
+.certificate-paper .certificate-date{font-size:13px;line-height:1.5;color:#795f4b}
+.certificate-export-area{position:sticky;bottom:-20px;margin:18px -20px -20px;padding:14px 20px 12px;background:var(--paper);border-top:2px solid #eadac4;z-index:2}
+.unit-workspace .certificate-export-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.certificate-export-actions .btn{min-width:0;width:100%;font-size:18px;padding:9px 12px;min-height:48px}
+.certificate-export-actions .shop-icon{width:24px;height:24px}
+.certificate-dialog .certificate-save-status{font-size:14px;line-height:1.5;min-height:21px;text-align:center;margin:10px 0 0}
+.certificate-dialog[open] .certificate-paper{animation:certificate-arrive 450ms ease-out both}
+@keyframes certificate-arrive{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.unit-workspace .stage-text:has(.practice-finish:not([hidden])) .stage-ctrl{display:none}
+#learningSaveWarning:not([hidden]){position:fixed;bottom:0;left:0;right:0;z-index:90;border:2px solid var(--brown)}
+@media print{body.unit-workspace{background:white;padding:0}.unit-workspace>*{display:none!important}.unit-workspace #certificateDialog,.unit-workspace #certificateDialog *{visibility:visible}.unit-workspace #certificateDialog[open]{display:block!important;position:static;border:0;padding:0;max-height:none;width:100%;max-width:none}.unit-workspace #certificateDialog>*:not(.certificate-paper){display:none!important}.unit-workspace .certificate-paper{display:block!important;width:100%;margin:50px auto;break-inside:avoid}.unit-workspace #certificateDialog::backdrop{display:none}}
+@media(max-width:600px){.unit-cover{grid-template-columns:1fr;gap:24px;padding:28px 18px!important;text-align:center}.unit-cover-art{min-height:170px;max-width:340px;margin:auto}.unit-cover-art>img{height:160px}.unit-cover h1{font-size:34px}.unit-top-actions{gap:6px}.unit-words{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.unit-word{height:190px}.unit-word strong{font-size:21px}.unit-word img{width:64px;height:64px}.unit-workspace #logo{font-size:15px}.unit-workspace #starCountWrap{font-size:15px;padding:5px 8px}.unit-workspace #notebookButton{font-size:14px;padding:6px 8px}}
+@media(max-width:600px){
+ .certificate-dialog{width:calc(100% - 16px);max-height:calc(100dvh - 16px);padding:12px}
+ .certificate-dialog>.unit-dialog-heading{top:-12px;margin:-12px -12px 12px;padding:10px 12px}
+ .certificate-dialog>.unit-dialog-heading h2{font-size:21px}
+ .certificate-paper{padding:25px 10px 14px;border-radius:16px}
+ .certificate-paper .certificate-course{font-size:13px}
+ .certificate-paper .certificate-award{font-size:27px;margin-bottom:12px}
+ .certificate-heroes{grid-template-columns:54px minmax(0,1fr) 54px;gap:4px;min-height:100px}
+ .certificate-heroes>.shop-icon{width:54px;height:92px}
+ .certificate-paper #certificateName{font-size:30px;padding:6px 0 8px}
+ .certificate-heroes:has(.is-long){grid-template-columns:1fr 1fr;gap:0 30px}
+ .certificate-heroes:has(.is-long)>.shop-icon:first-child{justify-self:end}
+ .certificate-heroes:has(.is-long)>.shop-icon:last-child{justify-self:start}
+ .certificate-heroes:has(.is-long) .certificate-recipient{grid-column:1/-1;grid-row:2}
+ .certificate-paper #certificateName.is-long{font-size:23px}
+ .certificate-paper .certificate-completion{font-size:14px}
+ .certificate-paper .certificate-thanks{font-size:18px;margin-bottom:14px}
+ .certificate-badges{flex-wrap:wrap;gap:8px}
+ .certificate-dialog .certificate-badge{flex:0 1 calc((100% - 16px)/3);font-size:13px;padding:8px 2px}
+ .certificate-badge-art>.shop-icon{width:36px;height:36px}
+ .certificate-export-area{bottom:-12px;margin:14px -12px -12px;padding:12px}
+ .certificate-export-actions .btn{font-size:16px;padding:8px 4px;gap:4px}
+ .certificate-export-actions .shop-icon{width:20px;height:20px}
+ .certificate-greeting p{font-size:23px}
+ .certificate-track li{flex:0 1 calc((100% - 24px)/3);min-width:0}
+}
+@media print{
+ @page{size:A4 portrait;margin:12mm}
+ .unit-workspace .certificate-paper{width:100%;margin:0;box-shadow:none;padding:28px 24px 18px;animation:none!important;transform:none!important}
+ .certificate-paper .certificate-award{font-size:38px}
+ .certificate-heroes{grid-template-columns:100px minmax(0,1fr) 100px}
+ .certificate-heroes>.shop-icon{width:100px;height:130px}
+ .certificate-paper #certificateName{font-size:42px}
+ .certificate-badges{flex-wrap:nowrap}
+ .certificate-dialog .certificate-badge{flex:1;font-size:15px}
+ .certificate-paper,.certificate-paper *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media(prefers-reduced-motion:reduce){.unit-workspace *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}

@@ -251,12 +251,10 @@ test('unsupported Lesson 50 speech completes without voice lookup errors', async
 
 test('Lesson 49 replaces an active recording without leaving two players', async ({ page }) => {
   await installManualAudio(page);
-  await page.goto('/lesson49/');
+  await page.goto('/lesson49/#learn/words');
 
-  await page.evaluate(() => {
-    speak('apple');
-    speak('banana');
-  });
+  await page.locator('#cardGrid .fcard-in').nth(0).click();
+  await page.locator('#cardGrid .fcard-in').nth(1).click();
 
   expect(await page.evaluate(() => window.__audios.length)).toBe(2);
   expect(await page.evaluate(() => window.__audios[0].paused)).toBe(true);
@@ -289,16 +287,16 @@ test('Lesson 49 falls back to speech when active recording playback errors', asy
       }
     });
   });
-  await page.goto('/lesson49/');
+  await page.goto('/lesson49/#learn/words');
 
-  await page.evaluate(() => speak('apple'));
+  await page.locator('#cardGrid .fcard-in').first().click();
   await expect.poll(() => page.evaluate(() => window.__audios.length)).toBe(1);
   await page.evaluate(() => window.__audios[0].dispatchEvent(new Event('error')));
 
-  await expect.poll(() => page.evaluate(() => window.__spoken)).toEqual(['apple']);
+  await expect.poll(() => page.evaluate(() => window.__spoken)).toEqual(['butcher']);
 });
 
-test('unsupported Lesson 49 speech completes without voice lookup errors and warns once', async ({ page }) => {
+test('unsupported Lesson 49 speech gives visible retry guidance without voice lookup errors', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
   await page.addInitScript(() => {
@@ -306,17 +304,9 @@ test('unsupported Lesson 49 speech completes without voice lookup errors and war
     Reflect.deleteProperty(window, 'speechSynthesis');
     Reflect.deleteProperty(window, 'SpeechSynthesisUtterance');
   });
-  await page.goto('/lesson49/');
-  await page.evaluate(() => {
-    window.__speechWarnings = [];
-    window.alert = message => window.__speechWarnings.push(message);
-    speechWarned = false;
-    speak('apple');
-    speak('banana');
-  });
-
-  await expect.poll(() => page.evaluate(() => window.__speechWarnings)).toEqual([
-    '当前浏览器不支持语音朗读 😢 可以用 Chrome / Edge 打开试试～'
-  ]);
+  await page.goto('/lesson49/#learn/words');
+  await page.locator('#cardGrid .fcard-in').nth(0).click();
+  await page.locator('#cardGrid .fcard-in').nth(1).click();
+  await expect(page.locator('#speechNotice')).toHaveText('声音暂时没有播放，请再点一次试试。');
   expect(pageErrors).toEqual([]);
 });

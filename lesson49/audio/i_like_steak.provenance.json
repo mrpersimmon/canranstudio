@@ -1,0 +1,77 @@
+{
+  "text": "I like steak.",
+  "path": "lesson49/audio/i_like_steak.mp3",
+  "generatedAt": "2026-09-13T19:03+08:00",
+  "generator": "edge-tts 7.2.8",
+  "voice": "en-GB-SoniaNeural",
+  "rate": "-5%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "sha256": "5819776e408af7284344d560e6bd57d10d2ab52233dde36cb2d9fdb91e0ea094",
+  "reference": "lesson49/audio/beef_please.mp3",
+  "referenceMatch": {
+    "method": "Same-text regeneration; decoded 24 kHz mono PCM cross-correlation and exact PCM equality",
+    "normalizedCorrelation": 1.0,
+    "decodedPCMEqual": true,
+    "candidates": [
+      {
+        "role": "bird",
+        "voice": "en-GB-SoniaNeural",
+        "rate": "-10%",
+        "reference": "lesson49/audio/beef_please.mp3",
+        "correlation": 0.4974198043346405,
+        "referenceSeconds": 1.824,
+        "candidateSeconds": 1.92
+      },
+      {
+        "role": "bird",
+        "voice": "en-GB-SoniaNeural",
+        "rate": "+0%",
+        "reference": "lesson49/audio/beef_please.mp3",
+        "correlation": 0.5865869522094727,
+        "referenceSeconds": 1.824,
+        "candidateSeconds": 1.728
+      },
+      {
+        "role": "bird",
+        "voice": "en-GB-SoniaNeural",
+        "rate": "-5%",
+        "reference": "lesson49/audio/beef_please.mp3",
+        "correlation": 1.000000238418579,
+        "referenceSeconds": 1.824,
+        "candidateSeconds": 1.824
+      },
+      {
+        "role": "bird",
+        "voice": "en-GB-RyanNeural",
+        "rate": "-10%",
+        "reference": "lesson49/audio/beef_please.mp3",
+        "correlation": 0.20508402585983276,
+        "referenceSeconds": 1.824,
+        "candidateSeconds": 2.472
+      },
+      {
+        "role": "bird",
+        "voice": "en-GB-RyanNeural",
+        "rate": "+0%",
+        "reference": "lesson49/audio/beef_please.mp3",
+        "correlation": 0.23160040378570557,
+        "referenceSeconds": 1.824,
+        "candidateSeconds": 2.232
+      },
+      {
+        "role": "bird",
+        "voice": "en-GB-RyanNeural",
+        "rate": "-5%",
+        "reference": "lesson49/audio/beef_please.mp3",
+        "correlation": 0.25814783573150635,
+        "referenceSeconds": 1.824,
+        "candidateSeconds": 2.352
+      }
+    ]
+  },
+  "durationSeconds": 1.584,
+  "sampleRate": 24000,
+  "channels": 1,
+  "regenerate": "python -m edge_tts --voice en-GB-SoniaNeural --rate=-5% --text 'I like steak.' --write-media lesson49/audio/i_like_steak.mp3"
+}

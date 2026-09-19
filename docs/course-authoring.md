@@ -1,36 +1,35 @@
-# 编号课程上新
+# 课程编写指南
 
-`core/course-catalog.js` 是课程目录、首页入口、进度合同和 V1 地图归属的唯一课程清单。不要再向 `index.html` 添加一份手写课程链接。
+课程内容和配置统一维护在 [course-catalog.js](../core/course-catalog.js)，简称“课程清单”。页面负责显示内容和接收操作，避免同一题目或音频映射在多处重复维护。
 
-新增一门已上线编号课时：
+## 先把题目写对
 
-1. 添加 `lessonN/index.html` 和 `lessonN/audio/` 下的同源预录音频。
-2. 在 `core/course-catalog.js` 的 `COURSES` 中增加一条 `publishedLesson(...)`；首页目录和静态构建会从这里自动取得课程。随后运行 `npm run sync:home-fallback`，更新由共享目录生成的无脚本课程入口；发布检查会拒绝手写或过期的副本。
-3. 课程页继续通过 `requirePublishedCourse('lessonN').progress` 读取共享进度合同。
-4. Lesson 49–60 只有满足完整地图发布合同后才会成为可点击学习地点；未完成美术合同的地点在地图中完全不渲染。
-   地标必须声明 `states` 模式：每个阶段是一张从同一母版逐步编辑的完整累计快照，页面始终只显示当前状态的一张图。禁止恢复 `base + growth layers` 运行时组合，也禁止为六个阶段分别独立生成建筑。
+每道题写清：要学什么、题目依据、正确答案、为什么、需要什么图片或录音。
 
-   所有正式地图母图保持 `1024 × 1024` RGBA、固定画布、固定建筑锚点，并生成 512/768/1024 三档 AVIF、WebP 与 PNG 回退；纪念物不得烘焙进最后阶段。
-5. Lesson 61 及以后不会进入 V1 世界总览、首发城区或地图推荐。它的直达页必须包含一条真实可见的说明：
+- 选项要有明确的判断依据；语法正确但不符合情境，不能解释成“语法错误”。
+- 提示只帮助思考；看过材料、播放录音、使用提示和独立答对分别记录。
+- 面向小学生，线上优先点选、配对、拼词块；长篇书写和开放表达交给纸笔或课堂。
+- 新题不能用旧成绩自动填答案，旧学习记录应保留。
+- Lesson 49 的具体内容要求见[教学复核](butcher-version/2026-09-14-0119-v1.10-题目教学正确性要求与复核.md)。
 
-   ```html
-   <p data-course-map-status="v2">课程现在可以直接学习，对应地图将在 V2 到来。</p>
-   ```
+## 新增一课
 
-6. 按现有静态发布流程同步 `README.md`、`deploy/README.md` 和 Nginx 的精确路由；这些是发布信息，不是第二份首页课程清单。
+1. 添加 `lessonN/index.html` 和 `lessonN/audio/`，音频、字体等资源与网站放在一起。
+2. 在课程清单的 `COURSES` 中登记 `publishedLesson(...)`；页面通过 `requirePublishedCourse('lessonN').progress` 读取进度配置。
+3. 准备地图素材。Lesson 49–60 只有完成地图配置和素材要求后才显示入口；运行时每次显示一张完整状态图。
+4. 同步[项目入口](../README.md)和[发布说明](../deploy/README.md)。当前首页只展示图鉴；`npm run sync:home-fallback` 检查首页入口，不再生成手写课程列表。
+5. 按[测试说明](../tests/README.md)检查课程、进度恢复、音频和手机布局，再按[发布指南](../deploy/README.md)形成发布版本。
 
-形成候选提交前运行：
+Lesson 61 及以后的课程暂不进入 V1 地图；直达页面需要显示：
 
-```bash
-npm run test:unit
-npm run test:e2e -- tests/e2e/home-progress.spec.js
+```html
+<p data-course-map-status="v2">课程现在可以直接学习，对应地图将在 V2 到来。</p>
 ```
 
-提交候选版本后，在没有额外公共文件修改的干净 worktree 或候选 SHA 上运行：
+## 素材和共用行为
 
-```bash
-npm run test:deploy
-npm run build:static
-```
+地图每一阶段都是从同一母版编辑得到的完整图片。母图为 1024 × 1024 RGBA，建筑位置固定；导出 512、768、1024 三档 AVIF/WebP 和 PNG 回退图，纪念物单独保存。详见[地标美术规则](designs/adventure-map/landmark-art-bible-v1.md)。
 
-静态发布检查会拒绝缺少课程页、预录音频、共享进度接线或 V2 地图说明声明的未来课程；浏览器回归还会逐页确认这条说明经过实际样式计算后确实可见。
+优先播放 `audio/<slug>.mp3`；失败时由共享播放器尝试浏览器朗读。`slug` 是文本转小写后，把连续非英文字母或数字换成下划线，再去掉首尾下划线。例如 `It's often wet.` 对应 `it_s_often_wet.mp3`。
+
+证书的领取、保存和打印都要重新检查满星条件。字体统一从 `/assets/fonts/` 加载；只有修改字体时才运行 `npm run vendor:fonts`，并保留许可证。

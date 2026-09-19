@@ -248,6 +248,7 @@
         };
       }
       active = session;
+      if (request.retrySource && session.src) failedSources.delete(session.src);
       startAudio(session);
       return {
         cancel() {

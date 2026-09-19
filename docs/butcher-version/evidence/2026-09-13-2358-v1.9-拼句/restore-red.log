@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+(node:48892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v19.spec.js:67:1 › 刷新与重试保留候选词块原位置，旧草稿恢复后仍由孩子拼完整
+  1) tests/e2e/l49-v19.spec.js:67:1 › 刷新与重试保留候选词块原位置，旧草稿恢复后仍由孩子拼完整 ─────────────────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+    +   "She",
+        "likes",
+        "peaches.",
+    -   "She",
+      ]
+
+      78 |   const initial=await order();
+      79 |   await bank.getByRole('button',{name:'She',exact:true}).click();
+    > 80 |   await page.reload();expect(await order()).toEqual(initial);
+         |                                             ^
+      81 |   await expect(answer.getByRole('button',{name:'撤回 She',exact:true})).toBeVisible();await expect(check).toBeDisabled();
+      82 |   await bank.getByRole('button',{name:'peaches.',exact:true}).click();await bank.getByRole('button',{name:'likes',exact:true}).click();
+      83 |   await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v19.spec.js:80:45
+
+    Error Context: test-results/l49-v19-刷新与重试保留候选词块原位置，旧草稿恢复后仍由孩子拼完整/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v19-刷新与重试保留候选词块原位置，旧草稿恢复后仍由孩子拼完整/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v19-刷新与重试保留候选词块原位置，旧草稿恢复后仍由孩子拼完整/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v19.spec.js:67:1 › 刷新与重试保留候选词块原位置，旧草稿恢复后仍由孩子拼完整 ──────────────────────────────────

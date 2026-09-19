@@ -1,0 +1,73 @@
+
+Running 2 tests using 1 worker
+
+(node:90104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] tests/e2e/l49-v17.spec.js:51:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答
+  1) tests/e2e/l49-v17.spec.js:51:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答 ──────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      66 |   await expect(page.locator('.stage-roles')).toContainText('第 1 / 5 题');
+      67 |   const reveal = page.getByRole('dialog', { name: /肉店|变化|成长|解锁/ });
+    > 68 |   await expect.poll(async () => { await page.keyboard.press('Escape'); return page.locator('.growth-reveal').count(); }).toBe(0);
+         |                                                                                                                          ^
+      69 |   await next.click();
+      70 |   await expect(lead).toBeVisible();
+      71 |   await expect(next).toHaveText('开始听课文');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:68:122
+
+    Error Context: test-results/l49-v17-先看三个问题再听课文，完整听过并手动完成才开放故事作答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-先看三个问题再听课文，完整听过并手动完成才开放故事作答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-先看三个问题再听课文，完整听过并手动完成才开放故事作答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:90257) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/2] tests/e2e/l49-v17.spec.js:111:44 › 1280 宽度题干和线索固定，帮助与长句不挤动选项和主按钮
+  2) tests/e2e/l49-v17.spec.js:111:44 › 1280 宽度题干和线索固定，帮助与长句不挤动选项和主按钮 ──────────────────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 928
+    Received:    590.5
+
+      125 |     const h = await hint.boundingBox(), t = await title.boundingBox();
+      126 |     if (width > 580) expect(h.x).toBeGreaterThanOrEqual(t.x + t.width);
+    > 127 |     else expect(h.y).toBeGreaterThanOrEqual(t.y + t.height);
+          |                                  ^
+      128 |     await hint.focus(); const before = await page.evaluate(() => scrollY);
+      129 |     await hint.press('Enter');
+      130 |     await expect(room.locator('.practice-hint')).toBeVisible();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:127:34
+
+    Error Context: test-results/l49-v17-1280-宽度题干和线索固定，帮助与长句不挤动选项和主按钮/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-1280-宽度题干和线索固定，帮助与长句不挤动选项和主按钮/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-1280-宽度题干和线索固定，帮助与长句不挤动选项和主按钮/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2 failed
+    tests/e2e/l49-v17.spec.js:51:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答 ───────────────────────────────────
+    tests/e2e/l49-v17.spec.js:111:44 › 1280 宽度题干和线索固定，帮助与长句不挤动选项和主按钮 ───────────────────────────────

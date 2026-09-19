@@ -1,0 +1,37 @@
+{
+  "retrievedAt": "2026-09-10",
+  "publisher": "Duolingo",
+  "discoveredFrom": "https://www.duolingo.com/",
+  "sourceBundle": "https://d35aaqx5ub95lt.cloudfront.net/js/app-d0e3a844.js",
+  "method": "Official public application sound table; unchanged MP3 bytes and published volume values.",
+  "items": [
+    {
+      "event": "correct",
+      "sourceSymbol": "CORRECT",
+      "sourceURL": "https://d35aaqx5ub95lt.cloudfront.net/sounds/37d8f0b39dcfe63872192c89653a93f6.mp3",
+      "localPath": "assets/feedback/duolingo-correct.mp3",
+      "bytes": 30092,
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "volume": 0.35
+    },
+    {
+      "event": "incorrect",
+      "sourceSymbol": "INCORRECT",
+      "sourceURL": "https://d35aaqx5ub95lt.cloudfront.net/sounds/f0b6ab4396d5891241ef4ca73b4de13a.mp3",
+      "localPath": "assets/feedback/duolingo-incorrect.mp3",
+      "bytes": 26957,
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "volume": 0.35
+    },
+    {
+      "event": "complete",
+      "sourceSymbol": "PASSED",
+      "sourceURL": "https://d35aaqx5ub95lt.cloudfront.net/sounds/2aae0ea735c8e9ed884107d6f0a09e35.mp3",
+      "localPath": "assets/feedback/duolingo-complete.mp3",
+      "bytes": 58931,
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "volume": 0.5
+    }
+  ],
+  "importedFrom": "codex/duolingo-version@dee9a08"
+}

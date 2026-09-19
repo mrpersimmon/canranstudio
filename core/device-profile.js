@@ -291,6 +291,7 @@
     for (const course of Array.isArray(courses) ? courses : []) {
       if (course?.progress?.key) keys.add(course.progress.key);
       if (course?.progress?.legacyKey) keys.add(course.progress.legacyKey);
+      if (course?.progress?.learningKey) keys.add(course.progress.learningKey);
     }
     return [...keys];
   }

@@ -37,10 +37,10 @@ async function expectSameLiveRegion(locator) {
   expect(await locator.evaluate(element => element === window.__eh2FeedbackNode)).toBe(true);
 }
 
-test('Lesson 49 flip cards expose independent keyboard state and isolate speakers', async ({ page }) => {
+test('Lesson 49 flip cards expose keyboard state through one read-aloud control', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/lesson49/');
+  await page.goto('/lesson49/#learn/words');
 
   const cards = page.locator('#cardGrid .fcard-in');
   const card = cards.first();
@@ -100,12 +100,7 @@ test('Lesson 49 flip cards expose independent keyboard state and isolate speaker
   })).toBe(false);
   await expect(card).toHaveAttribute('aria-expanded', 'false');
 
-  const speaker = page.locator('#cardGrid .fcard').first().locator('.spk');
-  await speaker.focus();
-  await page.keyboard.press('Enter');
-  await expect(card).toHaveAttribute('aria-expanded', 'false');
-  await speaker.click();
-  await expect(card).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#cardGrid .fcard').first().locator('.spk')).toHaveCount(0);
 
   await card.evaluate(element => {
     element.querySelector('.fen').firstChild.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -165,9 +160,10 @@ test('Lesson 49 retains live feedback semantics after a feedback update', async 
   await page.goto('/lesson49/');
   await expectFeedbackRegions(page);
 
-  const feedback = page.locator('#daHint');
+  const feedback = page.locator('#doarePractice [role=status]');
   const before = await rememberFeedbackNode(feedback);
-  await page.locator('#daDo').click();
+  await page.locator('#doarePractice .opt-btn').first().click();
+  await page.locator('#doarePractice').getByRole('button',{name:'检查答案',exact:true}).click();
   await expect(feedback).not.toHaveText(before);
   await expectSameLiveRegion(feedback);
 });
@@ -775,40 +771,19 @@ test('Lesson 50 rolls back a partially appended preview and revokes once', async
   });
 });
 
-test('atlas keeps one keyboard path through world, district, settings, and back', async ({ page }) => {
+test('course navigation supports keyboard expansion and restores settings focus', async ({ page }) => {
   await page.goto('/');
-
-  await expect(page.locator('.distant-region')).toHaveCount(11);
-  expect(await page.locator('.distant-region').evaluateAll(regions =>
-    regions.every(region => region.getAttribute('aria-hidden') === 'true')
-  )).toBe(true);
-  const entrance = page.getByRole('button', { name: '进入四季生活城', exact: true });
-  await entrance.focus();
-  await page.keyboard.press('Enter');
-  await expect(page.locator('#currentDistrictTitle')).toBeFocused();
-
-  const locations = page.locator('#districtLocations .published-location');
-  await expect(locations).toHaveCount(4);
-  for (const link of await locations.all()) {
-    await expect(link).toHaveAttribute('aria-label', /学习进度 \d\/\d/);
-  }
-
-  const settings = page.getByRole('button', { name: '设备冒险设置', exact: true });
-  await settings.focus();
-  await page.keyboard.press('Enter');
-  await expect(page.getByRole('dialog', { name: '设备冒险设置', exact: true })).toBeVisible();
-  await page.keyboard.press('Escape');
-  await expect(page.getByRole('dialog', { name: '设备冒险设置', exact: true })).toBeHidden();
-
-  const back = page.getByRole('button', { name: '返回世界总览', exact: true });
-  await back.focus();
-  await page.keyboard.press('Enter');
-  await expect(entrance).toBeFocused();
+  const summary=page.locator('summary');await summary.focus();await page.keyboard.press('Enter');
+  await expect(page.getByRole('link',{name:/Lesson 49 肉店大冒险/})).toBeVisible();
+  const settings=page.getByRole('button',{name:'设备冒险设置',exact:true});
+  await settings.focus();await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog',{name:'设备冒险设置',exact:true})).toBeVisible();
+  await page.keyboard.press('Escape');await expect(settings).toBeFocused();
 });
 
 test('growth reveal is a button-free keyboard-dismissible dialog and restores focus', async ({ page }) => {
   await page.goto('/lesson49/');
-  const returnTarget = page.locator('#daDo');
+  const returnTarget = page.locator('#doarePractice .opt-btn').first();
   await returnTarget.focus();
   await page.evaluate(() => window.eval('award("l1", 1)'));
 

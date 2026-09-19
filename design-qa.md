@@ -1,47 +1,23 @@
-# Landmark Review Immersive Mode — Design QA
+# 地标验收台：沉浸预览检查
 
-- source visual truth path: `docs/designs/adventure-map/golden-route-page-49-52/selection-v5-glowing-plaque-flag.png`
-- implementation screenshot paths:
-  - `docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-immersive-mobile.png`
-  - `docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-immersive-desktop.png`
-  - `docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-child-map-mobile.png`
-- viewport:
-  - mobile: `390 x 844` CSS px
-  - desktop: `1440 x 1000` CSS px
-- pixel dimensions and normalization:
-  - source: `1023 x 1537` px at 72 dpi
-  - mobile implementation: `390 x 844` px at device scale factor `1`
-  - desktop implementation: `1440 x 1000` px at device scale factor `1`
-  - the source was proportionally normalized to `562 x 844` px and placed beside the unscaled `390 x 844` browser capture; no stretch or crop was used
-- state: Lesson 51, stage 3, child preview, journey scenario; current landmark unfinished and intentionally unlit
-- full-view comparison evidence: `docs/designs/adventure-map/golden-route-page-49-52/design-qa-comparison-v5-immersive-mobile.png`
-- focused region comparison evidence: not needed; the full-height comparison keeps the glowing Lesson 51 plaque and the adjacent cat/flag marker readable at final mobile density
+历史检查记录。原结论：通过；本次文档整理未重新执行这些页面测试。
 
-## Findings
+## 当时的结果
 
-- No actionable P0, P1, or P2 visual findings remain.
-- The current lesson is identified by a contained warm-gold plaque glow, not a landmark-sized halo.
-- The cat and purple-gold explorer flag read as one route marker without a separate ground ring.
-- The unfinished Lesson 51 building remains unlit; selection emphasis is isolated to the plaque and route marker.
-- The same plaque/flag treatment is present on the real child atlas, not only inside the review workbench.
-- Mobile single-page and desktop spread previews retain their authored aspect ratios and stay inside the viewport.
-- Immersive chrome auto-hides, leaving an unobstructed review surface, and returns on pointer, touch, focus, or keyboard activity.
+当前地点用铭牌暖光和小猫／旗帜标记，未完成建筑保持未点亮。手机单页和电脑双页保留比例；操作栏自动隐藏，触摸、鼠标、键盘或焦点活动可唤回。
 
-## Comparison History
+修复了三处问题：过大的地标光圈与偏移底圈、原生全屏立即取消时连带关闭沉浸预览、手机小猫旗帜过小。标记宽度由地图的 17% 调到 21%，锚点不变。
 
-1. P1: the previous landmark halo dominated the page and the cat's ground marker was visibly offset. Fix: removed both halos, moved emphasis to the plaque, and replaced the ground marker with a dedicated purple-gold flag asset. Post-fix evidence: `design-qa-comparison-v5-immersive-mobile.png`.
-2. P1: the in-app browser briefly entered and immediately cancelled native fullscreen, which also closed the CSS immersive fallback. Fix: added a cancellation grace path that preserves the window-filling review mode when native fullscreen is interrupted during entry. Post-fix evidence: `implementation-v5-immersive-desktop.png`; the preview fills the viewport and controls are hidden.
-3. P2: the first browser capture rendered the new cat/flag marker too small to read at phone size. Fix: increased the authored marker footprint from 17% to 21% of the route-page width while preserving its anchor. Post-fix evidence: `implementation-v5-immersive-mobile.png`.
+## 证据
 
-## Interaction and Runtime Checks
+- [选定画面](docs/designs/adventure-map/golden-route-page-49-52/selection-v5-glowing-plaque-flag.png)
+- [手机对比](docs/designs/adventure-map/golden-route-page-49-52/design-qa-comparison-v5-immersive-mobile.png)
+- [手机实现](docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-immersive-mobile.png)
+- [电脑实现](docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-immersive-desktop.png)
+- [实际孩子端](docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-child-map-mobile.png)
 
-- Primary interactions tested: enter/exit immersive review, `F` toggle, `Esc` exit, left/right stage switching, stage-strip auto-hide/reveal, and art/placement/student review modes.
-- Responsive checks: 390 x 844 phone, 466 x 980 Huawei simulation, 1440 x 1000 desktop spread, plus the real child atlas at 390 x 844.
-- Console warnings and errors checked: none.
-- Automated evidence: 24 landmark-review end-to-end tests passed, including fallback fullscreen, geometry, flag, plaque glow, storage isolation, preload, and responsive layout coverage.
+场景为 Lesson 51、第 3 阶段、旅程预览。源图 1023 × 1537 等比缩至 562 × 844 后，与 390 × 844 手机截图比较，未拉伸裁切。
 
-## Residual Test Gap
+原记录：24 项浏览器检查通过，控制台无错误；覆盖进入／退出、F 与 Esc、左右切阶段、自动隐藏、数据隔离和加载。检查尺寸含 390 × 844、466 × 980、1440 × 1000。
 
-- Native system-fullscreen behavior still depends on each physical browser shell; the CSS immersive fallback is verified and remains the authoritative no-failure path.
-
-final result: passed
+仍需确认不同真实浏览器的系统全屏行为；已验证的窗口内沉浸显示作为回退。完整原参数见[原文备份](docs/archive/2026-09-17-docs-before-simplification.zip)。

@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:48284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v19.spec.js:42:1 › 词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成
+  1) tests/e2e/l49-v19.spec.js:42:1 › 词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成 ─────────────────────────────
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('.stage-trans').getByRole('button', { name: '检查答案', exact: true })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for locator('.stage-trans').getByRole('button', { name: '检查答案', exact: true })
+        14 × locator resolved to <button type="button" class="btn btn-green">检查答案</button>
+           - unexpected value "enabled"
+
+
+      45 |   const answer=stage.getByRole('group',{name:'已选词块',exact:true}),check=stage.getByRole('button',{name:'检查答案',exact:true});
+      46 |   for(const text of ['likes','She']){
+    > 47 |     await bank.getByRole('button',{name:text,exact:true}).click();await expect(check).toBeDisabled();
+         |                                                                                       ^
+      48 |   }
+      49 |   await bank.getByRole('button',{name:'peaches.',exact:true}).click();await expect(check).toBeEnabled();
+      50 |   await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v19.spec.js:47:87
+
+    Error Context: test-results/l49-v19-词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v19-词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v19-词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v19.spec.js:42:1 › 词块未拼完整时不能检查，撤回后重新等待完整句子，末题仍需手动完成 ──────────────────────────────

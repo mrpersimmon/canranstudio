@@ -5,19 +5,20 @@ const { execFileSync } = require('node:child_process');
 const { constants } = require('node:fs');
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry');
+const { PUBLISHED_COURSES } = require('./course-registry');
 const { assertCourseCatalogContract } = require('./course-catalog-contract');
 const { assertPublicV1Boundary } = require('./public-v1-boundary');
+const { normalizeBasePath, relocateSource, subpathRuntime } = require('./public-base-path');
 
 const REQUIRED_FILES = Object.freeze([
   'index.html',
   'home/index.html',
-  ...PUBLISHED_COURSES.map(course => course.entry),
-  ...PRESENTATION_COURSES.map(course => course.presentation.entry)
+  ...PUBLISHED_COURSES.map(course => course.entry)
 ]);
 const REQUIRED_DIRECTORIES = Object.freeze([
   ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),
   'core',
+  'unit49-50',
   'poc'
 ]);
 const REQUIRED_RUNTIME_FILES = Object.freeze([
@@ -396,8 +397,10 @@ async function removeEmptyDirectories(directory) {
 
 async function buildStatic({
   root = path.resolve(__dirname, '..'),
-  out = path.resolve(root, 'dist')
+  out = path.resolve(root, 'dist'),
+  basePath = '/'
 } = {}) {
+  normalizeBasePath(basePath);
   const resolvedRoot = path.resolve(root);
   const resolvedOut = path.resolve(out);
   await assertSafeOutput(resolvedRoot, resolvedOut);
@@ -427,6 +430,17 @@ async function buildStatic({
     if (entry.isDirectory()) await removeEmptyDirectories(path.join(resolvedOut, entry.name));
   }
 
+  if (basePath !== '/') {
+    for (const relative of await listOutputFiles(resolvedOut)) {
+      if (!/\.(?:html|js|css|json|svg)$/.test(relative)) continue;
+      const file = path.join(resolvedOut, relative);
+      await fs.writeFile(file, relocateSource(await fs.readFile(file, 'utf8'), relative, basePath));
+    }
+    for (const [relative, source] of Object.entries(subpathRuntime(basePath))) {
+      await fs.writeFile(path.join(resolvedOut, relative), source);
+    }
+  }
+
   const files = {};
   for (const relative of await listOutputFiles(resolvedOut)) {
     const bytes = await fs.readFile(path.join(resolvedOut, relative));
@@ -451,7 +465,9 @@ async function buildStatic({
 }
 
 if (require.main === module) {
-  buildStatic()
+  const args = process.argv.slice(2);
+  const valid = !args.length || args.length === 2 && args[0] === '--base-path';
+  (valid ? buildStatic({ basePath: args[1] || '/' }) : Promise.reject(new Error('usage: build-static.js [--base-path /lesson/]')))
     .then(manifest => process.stdout.write(`built dist for ${manifest.commit}\n`))
     .catch(error => {
       process.stderr.write(`${error.stack || error.message}\n`);

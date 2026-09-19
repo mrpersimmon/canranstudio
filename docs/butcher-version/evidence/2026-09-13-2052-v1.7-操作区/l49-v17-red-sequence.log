@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+(node:88831) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v17.spec.js:40:1 › 统一五题都有明确题干，未选不检查，末题反馈后手动完成
+  1) tests/e2e/l49-v17.spec.js:40:1 › 统一五题都有明确题干，未选不检查，末题反馈后手动完成 ───────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: '故事小侦探', exact: true }).getByRole('heading', { name: '课文中，Mrs. Bird 的丈夫喜欢什么肉？', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: '故事小侦探', exact: true }).getByRole('heading', { name: '课文中，Mrs. Bird 的丈夫喜欢什么肉？', exact: true })
+
+
+      48 |   await expect(room.getByRole('button', { name: /我演|更换角色|看看怎么说/ })).toHaveCount(0);
+      49 |   for (let i = 0; i < 5; i++) {
+    > 50 |     await expect(room.getByRole('heading', { name: prompts[i], exact: true })).toBeVisible();
+         |                                                                                ^
+      51 |     await expect(room).toContainText(`第 ${i + 1} / 5 题`);
+      52 |     await expect(options.locator('[aria-pressed="true"]')).toHaveCount(0);
+      53 |     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:50:80
+
+    Error Context: test-results/l49-v17-统一五题都有明确题干，未选不检查，末题反馈后手动完成/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-统一五题都有明确题干，未选不检查，末题反馈后手动完成/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-统一五题都有明确题干，未选不检查，末题反馈后手动完成/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17.spec.js:40:1 › 统一五题都有明确题干，未选不检查，末题反馈后手动完成 ────────────────────────────────────

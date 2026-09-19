@@ -1,0 +1,20 @@
+
+Running 12 tests using 1 worker
+
+(node:96639) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/12] tests/e2e/l49-v17-actions.spec.js:70:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐
+[2/12] tests/e2e/l49-v17-actions.spec.js:70:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐
+[3/12] tests/e2e/l49-v17.spec.js:22:1 › 作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓
+[4/12] tests/e2e/l49-v17.spec.js:61:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答
+[5/12] tests/e2e/l49-v17.spec.js:88:1 › 统一五题都有明确题干，未选不检查，末题反馈后手动完成
+[6/12] tests/e2e/l49-v17.spec.js:121:49 › 320 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[7/12] tests/e2e/l49-v17.spec.js:121:49 › 390 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[8/12] tests/e2e/l49-v17.spec.js:121:49 › 600 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[9/12] tests/e2e/l49-v17.spec.js:121:49 › 768 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[10/12] tests/e2e/l49-v17.spec.js:121:49 › 1280 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[11/12] tests/e2e/l49-v17.spec.js:166:1 › 旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练
+[12/12] tests/e2e/l49-v17.spec.js:232:1 › 辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记
+  12 passed (1.3m)

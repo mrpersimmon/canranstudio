@@ -1,0 +1,13 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/l49-v113.spec.js --reporter=list
+
+
+Running 2 tests using 1 worker
+
+(node:53393) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/l49-v113.spec.js:11:1 › 接收者题直接问是谁，只能选择人物，并按说话者理解 me (2.1s)
+  ✓  2 tests/e2e/l49-v113.spec.js:34:1 › 变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入 (1.0s)
+
+  2 passed (3.8s)

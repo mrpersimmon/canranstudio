@@ -1,0 +1,38 @@
+
+Running 1 test using 1 worker
+
+(node:93387) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v17.spec.js:15:1 › 作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓
+  1) tests/e2e/l49-v17.spec.js:15:1 › 作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓 ───────────────────────────────────
+
+    TimeoutError: locator.boundingBox: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-roles').getByRole('group', { name: '作答操作', exact: true })
+
+
+      17 |   await openStory(page);
+      18 |   const room = page.locator('.stage-roles');
+    > 19 |   const center = async locator => { const box = await locator.boundingBox(); return box.x + box.width / 2; };
+         |                                                               ^
+      20 |   const middle = await center(room);
+      21 |   for (const item of [room.getByRole('group', { name: '选择回应', exact: true }), room.getByRole('group', { name: '作答操作', exact: true })]) {
+      22 |     expect(Math.abs(await center(item) - middle)).toBeLessThan(2);
+        at center (/Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:19:63)
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v17.spec.js:22:27
+
+    Error Context: test-results/l49-v17-作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v17-作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v17-作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v17.spec.js:15:1 › 作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓 ────────────────────────────────────

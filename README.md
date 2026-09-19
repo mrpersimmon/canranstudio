@@ -1,78 +1,50 @@
-# canranstudio
+# 灿然工作室 · 儿童英语课件
 
-儿童英语互动课件静态站点。
+这是一个打开浏览器就能使用的英语学习网站。孩子通过词卡、听音、对话和小游戏学习；进度保存在当前浏览器。
 
-## Public routes
+## 第一次使用
 
-- `/` — 十二城区冒险图鉴世界总览
-- `/lesson49/` — 新概念英语 Lesson 49
-- `/lesson49/present/` — Lesson 49 公开课堂投屏
-- `/lesson50/` — 新概念英语 Lesson 50
-- `/lesson51/` — 新概念英语 Lesson 51《A Pleasant Climate》
-- `/lesson52/` — 新概念英语 Lesson 52《What Nationality Are They?》环球护照之旅 Ⅰ
-- `/lesson53/` — 新概念英语 Lesson 53《An Interesting Climate》英伦气候小主播
-- `/lesson54/` — 新概念英语 Lesson 54《Where Do They Come From?》环球护照之旅 Ⅱ
-- `/soundmark/` — 音标魔法乐园
-- `/home/` — 兼容入口，跳转到 `/`
+- 学习课程：打开[正式网站](https://www.canranstudio.cn)，选择课程。
+- 在自己电脑上查看或修改：按下面的“本地预览”操作。
+- 找其他说明：看[文档导航](docs/README.md)。
 
-## Local verification
+## 本地预览
 
-Requires Node.js 20 or newer.
+先安装 Node.js 20 或更新版本。在项目文件夹打开终端（输入命令的窗口），逐行复制运行下面两条命令：第一条准备项目依赖，第二条启动预览。
 
 ```bash
 npm ci
-npx playwright install chromium
-npm test
+node tests/support/static-server.js
 ```
 
-For a clean V1 release candidate, run the complete local boundary gate:
+看到服务已启动的提示后，打开 [本地首页](http://127.0.0.1:4173/)。终端保持打开；结束时按 Ctrl+C。不要直接双击 HTML 文件。
 
-```bash
-npm run verify:v1:release
-```
+## 课程入口
 
-This command runs unit, browser, deployment-contract, and exact static-build verification. It
-does not commit, push, deploy, or change ICP, DNS, TLS, or the canonical HTTPS origin. The final
-build step deliberately refuses public files that differ from `HEAD`.
+以下是当前分支的入口；本地修改是否上线，需要另行发布和检查。
 
-## Runtime and font assets
+- `/` — 我的课程：继续学习与课程卡片
+- `/unit49-50/` — 晚餐采购大冒险（Lesson 49–50 教学单元）
+- `/lesson49/` — 肉店大冒险
+- `/lesson50/` — 挑食小王子
+- `/lesson51/` — 希腊四季之旅
+- `/lesson52/` — 环球护照之旅 Ⅰ
+- `/lesson53/` — 英伦气候小主播
+- `/lesson54/` — 环球护照之旅 Ⅱ
+- `/soundmark/` — 音标魔法乐园
+- `/home/` — 旧入口，自动转到首页
 
-The published site remains static and package-free at runtime. The pinned Fontsource 5.3.0
-packages are build-time inputs only: run `npm run vendor:fonts` after `npm ci` to regenerate the
-committed local font assets. The generated WOFF2 files, `fonts.css`, and copied OFL licenses all
-live under `assets/fonts/`, and every public page loads its fonts from that same-origin path.
+首页直接进入 Lesson 49–50 教学单元；“更多冒险”保留 Lesson 51–54，音标课单列。原 Lesson 49、50 在“单课练习”中，原地址与星星保留。单元独立记录进度，共 15 星；编号单课各 15 星，音标课 12 星。
 
-Certificate issue, print, and save entry points re-check their own course eligibility before they act. The six course certificate experiences provide accessible, polite, atomic feedback. Lessons 49, 50, 51, 52, 53, and 54 require exactly 15/15 stars; soundmark requires exactly 12/12 stars. Lesson 49 continues to export through a Blob and revoke every object URL after preview closure, authorization loss, or creation failure.
+## 修改后怎么检查
 
-## Production transport
+停止上面的预览服务，再按[测试说明](tests/README.md)执行检查。发布前使用[发布指南](deploy/README.md)；本地预览或测试通过都不等于已经上线。
 
-The production site is served at `https://www.canranstudio.cn` with HSTS
-(`max-age=31536000; includeSubDomains`). The bare-IP `http://59.110.217.36` endpoint is retired:
-port 80 no longer serves content and redirects every request (301) to the canonical HTTPS origin.
-RISK-HTTP-01 is resolved/retired.
+新增课程看[课程编写指南](docs/course-authoring.md)。正式使用前还要完成[真机检查](docs/mobile-release-smoke-checklist.md)和[儿童试用](docs/v1-map-usability-pilot-toolkit.md)。
 
-See `deploy/README.md` for the release and verification contract.
+<details>
+<summary>维护者：地图图片规则</summary>
 
-See `docs/course-authoring.md` for the single-catalog workflow used when adding another numbered
-Lesson while the V1 map remains limited to Lesson 49–60.
+每个地标使用同一高清母版逐步编辑的完整累计状态图。运行时只加载当前状态的一张图，完成阶段时切换成长前后两张完整图。编号课有 6 张状态图，音标课有 5 张；完成后另保留独立纪念物。
 
-See `docs/classroom-presentation.md` for the public, device-data-free classroom presentation contract.
-
-See `docs/mobile-release-smoke-checklist.md` for the required real-device WeChat, iPhone Safari,
-and Android Chromium evidence. Those checks remain manual and must not be replaced by desktop
-browser simulation.
-
-See `docs/superpowers/qa/2026-08-02-v1-map-09-public-static-boundary.md` for the public, indexable,
-credential-free static V1 release boundary and its automated/manual evidence split.
-
-“暖灯集市”当前发布 Lesson 49–54 六个编号课程地点与音标魔法乐园专项支线。每个地点
-都使用同一高清母版逐步编辑的完整累计状态图：编号课程为 `state-0` 至 `state-5`，音标
-专项为 `state-0` 至 `state-4`。运行时只加载当前状态的一张图，完成阶段时切换成长前后
-两张完整图；完成全部阶段后会永久保留独立纪念物。
-
-See `docs/v1-map-usability-pilot-toolkit.md` and its linked workbook for the blank, privacy-safe
-two-round child usability and teacher-presentation trial kit. Actual trial results remain an
-institution-run manual requirement.
-
-Lesson 49 is the first catalog-declared classroom presentation. Its standalone public route uses
-the existing same-origin recordings and deliberately omits device progress and profile runtimes.
+</details>

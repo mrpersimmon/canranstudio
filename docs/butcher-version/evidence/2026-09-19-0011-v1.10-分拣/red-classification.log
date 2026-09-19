@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:31873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v110.spec.js:6:1 › 分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题 (7.0s)
+
+
+  1) tests/e2e/l49-v110.spec.js:6:1 › 分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题 ─────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.stage-subjects').locator('#tpProg')
+    Expected: "第 1 / 12 题"
+    Received: "第 1 组 · 1 / 6"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('.stage-subjects').locator('#tpProg')
+        14 × locator resolved to <b id="tpProg">第 1 组 · 1 / 6</b>
+           - unexpected value "第 1 组 · 1 / 6"
+
+
+       7 |   await page.goto('/lesson49/#learn/subjects');
+       8 |   const stage=page.locator('.stage-subjects');
+    >  9 |   await expect(stage.locator('#tpProg')).toHaveText('第 1 / 12 题');
+         |                                          ^
+      10 |   await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird');
+      11 |   const options=stage.getByRole('group',{name:'选择主语类别',exact:true});
+      12 |   await expect(options.getByRole('button')).toHaveText(categories);
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v110.spec.js:9:42
+
+    Error Context: test-results/l49-v110-分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v110-分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v110-分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v110.spec.js:6:1 › 分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题 ──────────────────────────────

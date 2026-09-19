@@ -1,0 +1,57 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/l49-v113.spec.js tests/e2e/l49-butcher.spec.js tests/e2e/l49-focus.spec.js tests/e2e/l49-v110.spec.js tests/e2e/l49-v19.spec.js tests/e2e/l49-v17-actions.spec.js tests/e2e/l49-v12.spec.js tests/e2e/l49-v111.spec.js --grep 接收者题|变身魔法|旧版 me|we 属于|give 先理解|全部活动|give 检查|同批文案|全部五道拼句|逐站完成|give 的正确作答|升级加载 --reporter=list
+
+
+Running 15 tests using 1 worker
+
+(node:53467) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/l49-butcher.spec.js:187:1 › give 先理解人物物品，再预测、撤回重排并交给新接收者 (2.7s)
+  ✓   2 tests/e2e/l49-focus.spec.js:85:3 › give 检查时不跳动，继续后题干可见 (390ms)
+  ✓   3 tests/e2e/l49-v110.spec.js:130:1 › 同批文案：按原文、句子结构和真实交接状态解释，不作超出证据的判断 (4.4s)
+  ✓   4 tests/e2e/l49-v111.spec.js:15:1 › 升级加载避开未标版本及 v1.11、v1.12 旧组件，刷新保留星星、题号和待检查选择 (676ms)
+  ✓   5 tests/e2e/l49-v113.spec.js:12:1 › 接收者题直接问是谁，只能选择人物，并按说话者理解 me (505ms)
+  ✘   6 tests/e2e/l49-v113.spec.js:35:1 › 旧版 me 的完成草稿不能代答人物题，历史手记、星星和其他活动草稿保留 (5.3s)
+(node:53504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 tests/e2e/l49-v113.spec.js:76:1 › we 属于第一人称复数，误选第三人称复数时解释包含说话者 (2.3s)
+  ✓   8 tests/e2e/l49-v113.spec.js:86:1 › 变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入 (1.0s)
+  ✓   9 tests/e2e/l49-v12.spec.js:267:3 › give 的正确作答使用统一反馈音 (316ms)
+  ✓  10 tests/e2e/l49-v17-actions.spec.js:71:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐 (21.5s)
+  ✓  11 tests/e2e/l49-v17-actions.spec.js:71:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐 (20.3s)
+  ✓  12 tests/e2e/l49-v19.spec.js:108:39 › 320 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.6s)
+  ✓  13 tests/e2e/l49-v19.spec.js:108:39 › 600 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.7s)
+  ✓  14 tests/e2e/l49-v19.spec.js:108:39 › 768 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.6s)
+  ✓  15 tests/e2e/l49-v19.spec.js:108:39 › 1280 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 (3.5s)
+
+
+  1) tests/e2e/l49-v113.spec.js:35:1 › 旧版 me 的完成草稿不能代答人物题，历史手记、星星和其他活动草稿保留 ─────────────────────────
+
+    TimeoutError: locator.click: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for getByRole('region', { name: '故事小侦探', exact: true }).getByRole('button', { name: 'steak', exact: true })
+
+
+      54 |   await page.goto('/lesson49/#learn/roles');
+      55 |   const roles = page.getByRole('region', { name: '故事小侦探', exact: true });
+    > 56 |   await roles.getByRole('button', { name: 'steak', exact: true }).click();
+         |                                                                   ^
+      57 |   await page.goto('/lesson49/#learn/give');
+      58 |   const room = page.getByRole('region', { name: '交接小帮手', exact: true });
+      59 |   await expect(room).toContainText('第 1 / 6 题');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v113.spec.js:56:67
+
+    Error Context: test-results/l49-v113-旧版-me-的完成草稿不能代答人物题，历史手记、星星和其他活动草稿保留/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v113-旧版-me-的完成草稿不能代答人物题，历史手记、星星和其他活动草稿保留/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v113-旧版-me-的完成草稿不能代答人物题，历史手记、星星和其他活动草稿保留/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v113.spec.js:35:1 › 旧版 me 的完成草稿不能代答人物题，历史手记、星星和其他活动草稿保留 ──────────────────────────
+  14 passed (1.3m)

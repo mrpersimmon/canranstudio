@@ -1,0 +1,13 @@
+
+Running 5 tests using 1 worker
+
+(node:98439) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/5] tests/e2e/l49-v14.spec.js:162:3 › 320 完成页两个操作相邻居中，桌面次左主右、手机主上次下
+[2/5] tests/e2e/l49-v14.spec.js:162:3 › 768 完成页两个操作相邻居中，桌面次左主右、手机主上次下
+[3/5] tests/e2e/l49-v14.spec.js:162:3 › 1280 完成页两个操作相邻居中，桌面次左主右、手机主上次下
+[4/5] tests/e2e/l49-v15.spec.js:171:1 › 十一句完成后保留全部对白，刷新保持静音，显式重演从第一句累积并保留奖励
+[5/5] tests/e2e/l49-v17-actions.spec.js:126:1 › 320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组
+  5 passed (13.8s)

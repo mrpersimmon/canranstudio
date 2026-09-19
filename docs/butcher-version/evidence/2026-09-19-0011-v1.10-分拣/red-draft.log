@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:32618) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v110.spec.js:35:1 › 刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答 (6.9s)
+
+
+  1) tests/e2e/l49-v110.spec.js:35:1 › 刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答 ─────────────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-subjects').getByRole('button', { name: '第一人称', exact: true })
+    Expected: "true"
+    Received: "false"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-subjects').getByRole('button', { name: '第一人称', exact: true })
+        14 × locator resolved to <button type="button" class="opt-btn" aria-pressed="false">第一人称</button>
+           - unexpected value "false"
+
+
+      45 |   await stage.getByRole('button',{name:'第一人称',exact:true}).click();
+      46 |   await page.reload();
+    > 47 |   await expect(stage.getByRole('button',{name:'第一人称',exact:true})).toHaveAttribute('aria-pressed','true');
+         |                                                                    ^
+      48 |   await expect(stage.getByRole('status')).toBeEmpty();
+      49 |   await stage.getByRole('button',{name:'给点线索',exact:true}).click();
+      50 |   await expect(stage.locator('.practice-hint')).toHaveText('伯德夫人。');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v110.spec.js:47:68
+
+    Error Context: test-results/l49-v110-刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v110-刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v110-刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v110.spec.js:35:1 › 刷新保留本题选择、反馈和分开的辅助记录；旧题草稿及星星不能代答 ──────────────────────────────

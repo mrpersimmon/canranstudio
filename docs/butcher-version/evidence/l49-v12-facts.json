@@ -1,0 +1,40 @@
+{
+  "cardClick": {
+    "recordings": [],
+    "tts": [],
+    "tones": 1
+  },
+  "speakerClick": {
+    "recordings": [
+      "/lesson49/audio/butcher.mp3"
+    ],
+    "tts": [],
+    "tones": 1
+  },
+  "lastPage": {
+    "progress": "5 / 5",
+    "nextDisabled": true,
+    "previousEnabled": true,
+    "visibleButtons": [
+      "学习小记",
+      "返回本关",
+      "mutton hotpot补充表达👆 点我翻面羊肉火锅涮羊肉也可放在这一情境中理解。选看，不考查。短语 短语",
+      "",
+      "上一组词卡",
+      "下一组词卡"
+    ]
+  },
+  "hotpot": {
+    "recordings": [
+      "/lesson49/audio/butcher.mp3"
+    ],
+    "tts": [
+      "mutton hotpot"
+    ],
+    "tones": 1
+  },
+  "correctFeedback": {
+    "text": "答对了！",
+    "toneDelta": 0
+  }
+}

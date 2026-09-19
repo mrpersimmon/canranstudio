@@ -6,12 +6,13 @@ const lessons = [
   {
     path: '/lesson49/',
     mapReturn: '/?district=first-book-49-60&focus=lesson49',
-    mapLabel: '返回肉店在世界地图的位置',
+    mapLabel: '我的课程',
     mapSmall: '看肉店',
-    brand: '🥩 肉店大冒险',
+    brand: '我的课程',
+    storyNavigation: true,
     brandColor: 'rgb(201, 58, 40)',
     activeColor: 'rgb(232, 80, 58)',
-    labels: ['封面', '第 1 关 · 单词', '第 2 关 · 课文', '第 3 关 · 句型', '第 4 关 · 三单', '第 5 关 · 考核']
+    labels: ['开门准备', '肉店小剧场', '招呼有妙招', '店员训练场', '小店我当家']
   },
   {
     path: '/lesson50/',
@@ -37,6 +38,20 @@ for (const lesson of lessons) {
     await expect(brand).toHaveAttribute('href', lesson.mapReturn);
     await expect(brand).toHaveAttribute('aria-label', lesson.mapLabel);
     await expect(brand).toHaveCSS('color', lesson.brandColor);
+
+    if (lesson.storyNavigation) {
+      await expect(page.locator('#starCount')).toHaveText('0');
+      await expect(page.locator('#starBox')).toContainText('/15');
+      const links = page.locator('#chapterNav a');
+      await expect(links).toHaveCount(5);
+      expect(await links.allTextContents()).toEqual(lesson.labels);
+      await expect(page.locator('#chapterNav a[href="#l1"]')).toHaveAttribute('aria-current', 'location');
+      await page.locator('#chapterNav a[href="#l2"]').click();
+      await expect(page).toHaveURL(/\/lesson49\/#l2$/);
+      await expect(page.locator('#chapterNav a[href="#l2"]')).toHaveAttribute('aria-current', 'location');
+      await expect(page.getByRole('heading', { name: '肉店小剧场', exact: true })).toBeFocused();
+      return;
+    }
 
     await expect(page.locator('#starBox')).toContainText('⭐ 0/15');
 
@@ -70,6 +85,7 @@ for (const lesson of lessons) {
       const stars = header.querySelector('#starBox').getBoundingClientRect();
       return {
         height: header.getBoundingClientRect().height,
+        rowHeight: header.querySelector('.wrap').getBoundingClientRect().height,
         brandLeft: brand.left,
         brandRight: brand.right,
         starsLeft: stars.left,
@@ -78,9 +94,21 @@ for (const lesson of lessons) {
       };
     });
 
-    expect(metrics.height).toBeLessThanOrEqual(64);
+    expect(metrics.rowHeight).toBeLessThanOrEqual(64);
+    // Lesson 49's approved long page has a compact utility row and a chapter row.
+    expect(metrics.height).toBeLessThanOrEqual(lesson.storyNavigation ? 132 : 64);
     expect(metrics.brandLeft).toBeGreaterThanOrEqual(0);
     expect(metrics.brandRight).toBeLessThanOrEqual(metrics.starsLeft);
     expect(metrics.starsRight).toBeLessThanOrEqual(metrics.viewportWidth);
+    if (lesson.storyNavigation) {
+      const chapters = page.getByRole('combobox', { name: '选择关卡', exact: true });
+      await expect(chapters).toBeVisible();
+      const box = await chapters.boundingBox();
+      expect(box.height).toBeGreaterThanOrEqual(40);
+      expect(box.x + box.width).toBeLessThanOrEqual(320);
+      await chapters.selectOption('l2');
+      await expect(page).toHaveURL(/\/lesson49\/#l2$/);
+      await expect(page.getByRole('heading', { name: '肉店小剧场', exact: true })).toBeFocused();
+    }
   });
 }

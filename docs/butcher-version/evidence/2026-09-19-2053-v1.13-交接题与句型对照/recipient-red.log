@@ -1,0 +1,47 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/l49-v113.spec.js --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:53026) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v113.spec.js:11:1 › 接收者题直接问是谁，只能选择人物，并按说话者理解 me (6.9s)
+
+
+  1) tests/e2e/l49-v113.spec.js:11:1 › 接收者题直接问是谁，只能选择人物，并按说话者理解 me ─────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: '交接小帮手', exact: true }).getByRole('heading', { name: 'Mrs. Bird 说：Give me that piece, please. 接收者是谁？', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: '交接小帮手', exact: true }).getByRole('heading', { name: 'Mrs. Bird 说：Give me that piece, please. 接收者是谁？', exact: true })
+
+
+      12 |   await page.goto('/lesson49/#learn/give');
+      13 |   const room = page.getByRole('region', { name: '交接小帮手', exact: true });
+    > 14 |   await expect(room.getByRole('heading', { name: 'Mrs. Bird 说：Give me that piece, please. 接收者是谁？', exact: true })).toBeVisible();
+         |                                                                                                                    ^
+      15 |   const options = room.locator('.practice-options');
+      16 |   await expect(options.getByRole('button')).toHaveCount(2);
+      17 |   await expect(options.getByRole('button', { name: 'me', exact: true })).toHaveCount(0);
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v113.spec.js:14:116
+
+    Error Context: test-results/l49-v113-接收者题直接问是谁，只能选择人物，并按说话者理解-me/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v113-接收者题直接问是谁，只能选择人物，并按说话者理解-me/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v113-接收者题直接问是谁，只能选择人物，并按说话者理解-me/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/l49-v113.spec.js:11:1 › 接收者题直接问是谁，只能选择人物，并按说话者理解 me ──────────────────────────────────

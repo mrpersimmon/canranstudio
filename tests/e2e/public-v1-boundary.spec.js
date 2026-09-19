@@ -7,10 +7,12 @@ const { PROFILE_KEY } = require('../../core/device-profile');
 const BASE_ORIGIN = 'http://127.0.0.1:4173';
 const PUBLIC_ROUTES = [
   { id: 'home', route: '/' },
+  { id: 'unit49-50', route: '/unit49-50/' },
   ...PUBLISHED_COURSES.map(course => ({ id: course.id, route: course.route }))
 ];
 const AUDIO_PROBES = [
-  { id: 'lesson49', route: '/lesson49/', selector: '.spk:visible' },
+  { id: 'lesson49', route: '/lesson49/#learn/words', buttonName: 'butcher' },
+  { id: 'unit49-50', route: '/unit49-50/#learn/words', selector: 'button[aria-label="butcher"]', audioDirectory: 'lesson49' },
   { id: 'lesson50', route: '/lesson50/', selector: '.spk:visible' },
   { id: 'lesson51', route: '/lesson51/', selector: '.spk:visible' },
   { id: 'lesson52', route: '/lesson52/', selector: '.spk:visible' },
@@ -19,8 +21,10 @@ const AUDIO_PROBES = [
 ];
 const ALLOWED_STORAGE_KEYS = new Set([
   PROFILE_KEY,
+  'canran:unit49-50:learning:v1',
   ...PUBLISHED_COURSES.flatMap(course => [
     course.progress?.key,
+    course.progress?.learningKey,
     course.progress?.legacyKey
   ]).filter(Boolean)
 ]);
@@ -260,14 +264,17 @@ for (const probe of AUDIO_PROBES) {
     expect(await page.evaluate(() => window.__audioAttempts), 'recording before gesture').toEqual([]);
     expect(await page.evaluate(() => window.__speechAttempts), 'speech fallback before gesture').toEqual([]);
 
-    await page.locator(probe.selector).first().click();
+    const trigger = probe.buttonName
+      ? page.getByRole('button', { name: probe.buttonName, exact: true })
+      : page.locator(probe.selector).first();
+    await trigger.click();
     await expect.poll(() => page.evaluate(() => window.__audioAttempts.length)).toBeGreaterThan(0);
 
     const attempts = await page.evaluate(() => window.__audioAttempts);
     for (const attempt of attempts) {
       const audio = new URL(attempt);
       expect(audio.origin).toBe(BASE_ORIGIN);
-      expect(audio.pathname).toMatch(new RegExp(`^/${probe.id}/audio/.+\\.mp3$`, 'i'));
+      expect(audio.pathname).toMatch(new RegExp(`^/${probe.audioDirectory || probe.id}/audio/.+\\.mp3$`, 'i'));
     }
     expect(await page.evaluate(() => window.__speechAttempts)).toEqual([]);
   });

@@ -57,8 +57,8 @@ test('restart requires two confirmations, cancellation is safe, and old progress
   await page.getByRole('button', { name: '继续确认', exact: true }).click();
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
 
-  await expect(page.locator('#worldOverview')).toBeVisible();
-  await expect(page.locator('#worldCompletedCount')).toHaveText('0');
+  await expect(page.locator('#courses')).toBeVisible();
+  await expect(page.getByRole('link', { name: '开始学习', exact: true })).toBeVisible();
   const after = await page.evaluate(() => ({
     profile: JSON.parse(localStorage.getItem('canran:adventure-profile:v1')),
     progress: JSON.parse(localStorage.getItem('canran:l49:progress:v2')),
@@ -84,7 +84,7 @@ test('blocked browser storage keeps the public course experience usable', async 
   page.on('pageerror', error => pageErrors.push(error.message));
 
   await page.goto('/');
-  await expect(page.locator('#worldOverview')).toBeVisible();
+  await expect(page.locator('#courses')).toBeVisible();
   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
     '当前浏览器无法永久保存进度。'
@@ -110,7 +110,7 @@ test('readable but unwritable browser storage stays usable with neutral feedback
   page.on('pageerror', error => pageErrors.push(error.message));
 
   await page.goto('/');
-  await expect(page.locator('#worldOverview')).toBeVisible();
+  await expect(page.locator('#courses')).toBeVisible();
   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
     '当前浏览器无法永久保存进度。'
@@ -121,10 +121,10 @@ test('readable but unwritable browser storage stays usable with neutral feedback
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
 
   await expect(page.locator('#deviceStorageStatus')).toHaveText(
-    '当前浏览器无法永久保存进度。'
+    '部分记录暂时无法清除，请重试。'
   );
-  await expect(page.locator('#worldOverview')).toBeVisible();
-  await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
+  await expect(page.locator('#courses')).toBeVisible();
+
   await expect(page.getByRole('button', { name: '重开冒险', exact: true })).toBeVisible();
   expect(pageErrors).toEqual([]);
 });

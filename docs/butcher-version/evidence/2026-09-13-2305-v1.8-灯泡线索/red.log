@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:45098) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定
+  1) tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定 ────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-doare').getByRole('button', { name: '给点线索', exact: true }).locator('img')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-doare').getByRole('button', { name: '给点线索', exact: true }).locator('img')
+
+
+      12 |   const hint=stage.getByRole('button',{name:'给点线索',exact:true});
+      13 |   const check=stage.getByRole('button',{name:'检查答案',exact:true});
+    > 14 |   await expect(hint.locator('img')).toBeVisible();
+         |                                     ^
+      15 |   expect(await hint.locator('img').evaluate(image=>image.complete&&image.naturalWidth>0)).toBe(true);
+      16 |   await expect(hint).toHaveText('');
+      17 |   const h=await hint.boundingBox(),c=await check.boundingBox();
+        at bulbLayout (/Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v18.spec.js:14:37)
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v18.spec.js:33:28
+
+    Error Context: test-results/l49-v18-问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v18-问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v18-问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定 ─────────────────────────────────

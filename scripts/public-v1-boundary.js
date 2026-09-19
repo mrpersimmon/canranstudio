@@ -2,7 +2,7 @@
 
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { PUBLISHED_COURSES, PRESENTATION_COURSES } = require('./course-registry');
+const { PUBLISHED_COURSES } = require('./course-registry');
 
 const FORBIDDEN_RUNTIME = Object.freeze([
   {
@@ -234,19 +234,19 @@ async function runtimeFilesIn(root, relative) {
 
 async function assertPublicV1Boundary({
   root = path.resolve(__dirname, '..'),
-  courses = PUBLISHED_COURSES,
-  presentations = PRESENTATION_COURSES
+  courses = PUBLISHED_COURSES
 } = {}) {
   const resolvedRoot = path.resolve(root);
   const indexablePages = [
     { label: 'home', entry: 'index.html' },
+    { label: 'unit49-50', entry: 'unit49-50/index.html' },
     ...courses.map(course => ({ label: course.id, entry: course.entry }))
   ];
   const pageEntries = new Set([
     'index.html',
     'home/index.html',
-    ...courses.map(course => course.entry),
-    ...presentations.map(course => course.presentation.entry)
+    'unit49-50/index.html',
+    ...courses.map(course => course.entry)
   ]);
 
   for (const page of indexablePages) {
@@ -256,6 +256,7 @@ async function assertPublicV1Boundary({
   const runtimeFiles = new Set([
     ...pageEntries,
     ...await runtimeFilesIn(resolvedRoot, 'core'),
+    ...await runtimeFilesIn(resolvedRoot, 'unit49-50'),
     ...await runtimeFilesIn(resolvedRoot, 'assets'),
     ...(
       await Promise.all(

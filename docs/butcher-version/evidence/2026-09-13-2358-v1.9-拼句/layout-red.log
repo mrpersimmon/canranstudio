@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:49518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/l49-v19.spec.js:108:26 › 320 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区
+  1) tests/e2e/l49-v19.spec.js:108:26 › 320 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 ────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      124 |       for(const text of wrong)await bank.getByRole('button',{name:text,exact:true}).click();
+      125 |       expect(await documentTop(bank)).toBe(before.bank);expect(await documentTop(check)).toBe(before.check);
+    > 126 |       expect(await answer.evaluate(node=>node.scrollHeight<=node.clientHeight)).toBe(true);
+          |                                                                                 ^
+      127 |       for(const tile of await answer.getByRole('button').all()){
+      128 |         expect(await tile.evaluate(node=>node.scrollWidth<=node.clientWidth)).toBe(true);
+      129 |         const box=await tile.boundingBox(),area=await answer.boundingBox();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v19.spec.js:126:81
+
+    Error Context: test-results/l49-v19-320-宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v19-320-宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v19-320-宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/l49-v19.spec.js:108:26 › 320 宽度全部五道拼句：乱序也不裁切词块，选词及正误反馈不推移操作区 ─────────────────────────

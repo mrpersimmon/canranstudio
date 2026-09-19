@@ -12,13 +12,20 @@
     "test:deploy": "node --test tests/deploy/*.test.js",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:e2e": "playwright test",
+    "test:l49:behavior": "playwright test tests/e2e/l49-",
     "test:state": "playwright test tests/e2e/l49-progress.spec.js tests/e2e/home-progress.spec.js tests/e2e/l50-assessment.spec.js tests/e2e/soundmark-progress.spec.js tests/e2e/l51-progress.spec.js tests/e2e/l52-progress.spec.js tests/e2e/l53-progress.spec.js tests/e2e/l54-progress.spec.js",
     "test": "npm run test:unit && npm run test:e2e",
     "verify:v1:release": "npm run test:unit && npm run test:e2e && npm run test:deploy && npm run build:static",
     "art:build-atlas-background": "node scripts/build-atlas-background.js",
     "art:build-route-page": "node scripts/build-route-page-assets.js",
     "art:build-states": "node scripts/build-landmark-states.js",
-    "vendor:fonts": "node scripts/vendor-fonts.js"
+    "vendor:fonts": "node scripts/vendor-fonts.js",
+    "check:plan": "node scripts/check-workflow.js commit --plan",
+    "check:commit": "node scripts/check-workflow.js commit",
+    "test:quick": "node scripts/check-workflow.js quick",
+    "test:workflow": "node --test tests/workflow/*.test.js",
+    "test:full": "npm test",
+    "test:e2e:cached": "node scripts/check-workflow.js browser-full"
   },
   "devDependencies": {
     "@fontsource/baloo-2": "5.3.0",

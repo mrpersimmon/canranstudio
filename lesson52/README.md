@@ -1,22 +1,13 @@
-# lesson52 — 环球护照之旅 Ⅰ（新概念英语第一册 Lesson 52）
+# Lesson 52 · 环球护照之旅 Ⅰ
 
-What nationality are they? / Where do they come from? 互动闯关课件 · 欧美篇
-与 lesson54（Ⅱ 卷）同一主题上下篇。
+学习国家、国籍及 `What nationality are they?`、`Where do they come from?`，以欧美国家为主。
 
-## 玩法
-1. 单词签证官：12 组「国家 → 国籍」对卡（the U.S.→American … Sweden→Swedish），点击听英音 + 听音挑国小游戏
-2. 到达大厅广播剧：12 位欧美旅客说「I'm American. / I come from the U.S.」（I/He/She/We/You/They 全部人称），可自动播放全部
-3. 护照盖章：国家与国籍点选配对，12 对全部盖满过关
-4. 句型魔法屋：第三人称单数动词小尾巴 come/comes、like/likes 选择填空（课本练习 A 七句）
-5. 海关终极考核：8 题测验，五关全部三星（15/15）解锁打印「环球小使者 Ⅰ」证书
+1. **单词签证官**：12 组国家与国籍词卡，听音挑国。
+2. **到达大厅广播剧**：听 12 位旅客介绍自己，练不同人称。
+3. **护照盖章**：完成 12 对国家与国籍配对。
+4. **句型魔法屋**：用课本练习 A 的 7 句练 come／comes、like／likes。
+5. **海关终极考核**：完成 8 道题。
 
-## 工程规范（与仓库其他课件一致）
-- 语音：`core/audio-player.js`（预录 `audio/<slug>.mp3` 优先，speechSynthesis 兜底，en-GB 语音）
-- 进度：`core/storage.js` + `core/progress.js`，键 `canran:l52:progress:v2`，五关 l1~l5，每关 0~3 星
-- 证书闸门：`core/certificate-gate.js`（15/15 三星解锁，缺星引导跳转）
-- 字体：自托管 `/assets/fonts/fonts.css`，无外部 CDN
-- 首页插图：`assets/home/lesson52-passport.svg`
+五关各满 3 星，共 15 星后可打印“环球小使者 Ⅰ”证书。进度保存在当前浏览器，存储键为 `canran:l52:progress:v2`。
 
-## 部署
-静态文件，需与 `/core`、`/assets` 同根部署；路由见 `deploy/nginx/canranstudio-http.conf`。
-线上地址：https://www.canranstudio.cn/lesson52/
+[打开正式课程](https://www.canranstudio.cn/lesson52/) · [下篇 Lesson 54](../lesson54/README.md) · [本地预览](../README.md#本地预览) · [编写与音频规则](../docs/course-authoring.md)

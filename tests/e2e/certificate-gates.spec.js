@@ -5,7 +5,7 @@ const CASES=[
   {
     label:'Lesson 49',path:'/lesson49/',hash:'#l5',key:'canran:l49:progress:v2',
     ratings:{l1:3,l2:2,l3:3,l4:0,l5:3},trigger:'#certBtn',status:'#certGateMsg',
-    course:'Lesson 49 · 肉店大冒险',icon:'🥩',
+    course:'Lesson 49 · 肉店大冒险',iconAsset:'/assets/lesson49/icons/star.svg',
     expectedCount:'还差 4 颗星，还有 2 关未满星。',accent:'#c43f36'
   },
   {
@@ -63,7 +63,11 @@ await trigger.click();
 await expect(gate).toBeVisible();
 await expect(page.locator('[data-certificate-count]')).toHaveText(config.expectedCount);
 await expect(page.locator('[data-certificate-course]')).toHaveText(config.course);
-await expect(page.locator('[data-certificate-icon]')).toHaveText(config.icon);
+if(config.iconAsset){
+  const icon=page.locator('[data-certificate-icon] img');
+  await expect(icon).toHaveAttribute('src',config.iconAsset);
+  await expect.poll(()=>icon.evaluate(image=>image.complete&&image.naturalWidth>0)).toBe(true);
+}else await expect(page.locator('[data-certificate-icon]')).toHaveText(config.icon);
 await expect(trigger).toHaveAttribute('aria-expanded','true');
 const statusId=await status.getAttribute('id');
 const gateId=await gate.getAttribute('id');

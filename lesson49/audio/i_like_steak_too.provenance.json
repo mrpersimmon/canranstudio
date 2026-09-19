@@ -1,0 +1,77 @@
+{
+  "text": "I like steak, too.",
+  "path": "lesson49/audio/i_like_steak_too.mp3",
+  "generatedAt": "2026-09-13T19:03+08:00",
+  "generator": "edge-tts 7.2.8",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-5%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "sha256": "3dee6b3a8bc6105310fb04441465a62db874aa562a5d31536258ee8a8f69f661",
+  "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+  "referenceMatch": {
+    "method": "Same-text regeneration; decoded 24 kHz mono PCM cross-correlation and exact PCM equality",
+    "normalizedCorrelation": 1.0,
+    "decodedPCMEqual": true,
+    "candidates": [
+      {
+        "role": "butcher",
+        "voice": "en-GB-SoniaNeural",
+        "rate": "-10%",
+        "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+        "correlation": 0.2031933218240738,
+        "referenceSeconds": 2.424,
+        "candidateSeconds": 2.16
+      },
+      {
+        "role": "butcher",
+        "voice": "en-GB-SoniaNeural",
+        "rate": "+0%",
+        "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+        "correlation": 0.20209574699401855,
+        "referenceSeconds": 2.424,
+        "candidateSeconds": 1.944
+      },
+      {
+        "role": "butcher",
+        "voice": "en-GB-SoniaNeural",
+        "rate": "-5%",
+        "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+        "correlation": 0.1965516060590744,
+        "referenceSeconds": 2.424,
+        "candidateSeconds": 2.04
+      },
+      {
+        "role": "butcher",
+        "voice": "en-GB-RyanNeural",
+        "rate": "-10%",
+        "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+        "correlation": 0.4403350353240967,
+        "referenceSeconds": 2.424,
+        "candidateSeconds": 2.568
+      },
+      {
+        "role": "butcher",
+        "voice": "en-GB-RyanNeural",
+        "rate": "+0%",
+        "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+        "correlation": 0.6290624141693115,
+        "referenceSeconds": 2.424,
+        "candidateSeconds": 2.304
+      },
+      {
+        "role": "butcher",
+        "voice": "en-GB-RyanNeural",
+        "rate": "-5%",
+        "reference": "lesson49/audio/do_you_want_beef_or_lamb.mp3",
+        "correlation": 1.000000238418579,
+        "referenceSeconds": 2.424,
+        "candidateSeconds": 2.424
+      }
+    ]
+  },
+  "durationSeconds": 2.616,
+  "sampleRate": 24000,
+  "channels": 1,
+  "regenerate": "python -m edge_tts --voice en-GB-RyanNeural --rate=-5% --text 'I like steak, too.' --write-media lesson49/audio/i_like_steak_too.mp3"
+}

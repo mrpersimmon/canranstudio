@@ -22,7 +22,6 @@ test('pilot guide locks both manual rounds and the explicit pass denominator', a
   assert.match(guide, /30 秒内独立找到/);
   assert.match(guide, /区分可进入与正在绘制/);
   assert.match(guide, /理解一次地图成长/);
-  assert.match(guide, /没有现场指导/);
   assert.match(guide, /至少为 80%/);
   assert.match(guide, /分母始终在汇总页显示/);
   assert.match(guide, /阻塞多数使用者的 P0 或 P1/);

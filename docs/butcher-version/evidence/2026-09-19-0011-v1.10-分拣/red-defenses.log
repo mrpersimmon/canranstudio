@@ -1,0 +1,94 @@
+
+Running 9 tests using 1 worker
+
+(node:37139) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：非布尔的已检查标记不能自动代答 (6.9s)
+(node:37179) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：别轮答案不能自动代答 (1.6s)
+  ✓  3 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：跳过前题的答案不能自动代答 (311ms)
+  ✓  4 tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：提前完成不能自动代答 (303ms)
+  ✘  5 tests/e2e/l49-v110-defenses.spec.js:27:1 › 键盘检查后焦点跟随继续，按 Enter 换题且整页不跳动 (5.4s)
+(node:37191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  6 tests/e2e/l49-v110-defenses.spec.js:43:35 › 320 宽度分拣四格与结束操作不溢出，手机主次按钮同宽 (3.1s)
+  ✓  7 tests/e2e/l49-v110-defenses.spec.js:43:35 › 768 宽度分拣四格与结束操作不溢出，手机主次按钮同宽 (1.8s)
+  ✓  8 tests/e2e/l49-v110-defenses.spec.js:43:35 › 1280 宽度分拣四格与结束操作不溢出，手机主次按钮同宽 (1.7s)
+  ✓  9 tests/e2e/l49-v110-defenses.spec.js:66:1 › 订单听辨真实播放到结束才允许检查，实际请求的是 a pound of mince 录音 (2.8s)
+
+
+  1) tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：非布尔的已检查标记不能自动代答 ───────────────────────────────
+
+    Error: expect(locator).toBeEmpty() failed
+
+    Locator:  locator('.stage-subjects').getByRole('status')
+    Expected: empty
+    Received: notEmpty
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeEmpty" with timeout 5000ms
+      - waiting for locator('.stage-subjects').getByRole('status')
+        14 × locator resolved to <div role="status" aria-live="polite" aria-atomic="true" class="subject-feedback">…</div>
+           - unexpected value "notEmpty"
+
+
+      19 |   const stage=page.locator('.stage-subjects');
+      20 |   await expect(stage.locator('#tpProg')).toHaveText('第 1 / 12 题');
+    > 21 |   await expect(stage.getByRole('status')).toBeEmpty();
+         |                                           ^
+      22 |   await expect(stage.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+      23 |   await expect(stage.locator('[aria-pressed="true"]')).toHaveCount(0);
+      24 |   await expect(stage.getByRole('button',{name:/^下一站：/})).toBeHidden();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v110-defenses.spec.js:21:43
+
+    Error Context: test-results/l49-v110-defenses-草稿防护：非布尔的已检查标记不能自动代答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v110-defenses-草稿防护：非布尔的已检查标记不能自动代答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v110-defenses-草稿防护：非布尔的已检查标记不能自动代答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/l49-v110-defenses.spec.js:27:1 › 键盘检查后焦点跟随继续，按 Enter 换题且整页不跳动 ───────────────────────
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('.stage-subjects').getByRole('button', { name: '继续', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for locator('.stage-subjects').getByRole('button', { name: '继续', exact: true })
+        14 × locator resolved to <button type="button" class="btn btn-green">继续</button>
+           - unexpected value "inactive"
+
+
+      34 |   const scroll=await page.evaluate(()=>scrollY);
+      35 |   await check.press('Enter');
+    > 36 |   await expect(stage.getByRole('button',{name:'继续',exact:true})).toBeFocused();
+         |                                                                  ^
+      37 |   expect(await page.evaluate(()=>scrollY)).toBe(scroll);
+      38 |   await page.keyboard.press('Enter');
+      39 |   await expect(stage.locator('#tpProg')).toHaveText('第 2 / 12 题');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/l49-v110-defenses.spec.js:36:66
+
+    Error Context: test-results/l49-v110-defenses-键盘检查后焦点跟随继续，按-Enter-换题且整页不跳动/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/l49-v110-defenses-键盘检查后焦点跟随继续，按-Enter-换题且整页不跳动/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/l49-v110-defenses-键盘检查后焦点跟随继续，按-Enter-换题且整页不跳动/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/l49-v110-defenses.spec.js:6:63 › 草稿防护：非布尔的已检查标记不能自动代答 ────────────────────────────────
+    tests/e2e/l49-v110-defenses.spec.js:27:1 › 键盘检查后焦点跟随继续，按 Enter 换题且整页不跳动 ────────────────────────
+  7 passed (26.0s)

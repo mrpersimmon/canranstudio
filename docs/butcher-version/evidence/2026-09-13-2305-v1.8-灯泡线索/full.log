@@ -1,0 +1,147 @@
+
+> canranstudio@0.0.0 test:l49:behavior
+> playwright test tests/e2e/l49- --reporter=line
+
+
+Running 135 tests using 1 worker
+
+(node:46266) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/135] tests/e2e/l49-butcher.spec.js:37:1 › 三单答错后保留当前题和解释，孩子点击继续才换题
+[2/135] tests/e2e/l49-butcher.spec.js:52:1 › 课文等待录音结束，结束后仍由孩子手动进入下一句
+[3/135] tests/e2e/l49-butcher.spec.js:66:1 › Do/Are 根据情境选择完整问句，错误解释停留到手动继续
+[4/135] tests/e2e/l49-butcher.spec.js:85:1 › 词卡保留准确图义和抽象词情境，移除来源分类
+[5/135] tests/e2e/l49-butcher.spec.js:102:1 › 提示与首次错误分别记录，刷新恢复作答反馈，旧星星不冒充新记录
+[6/135] tests/e2e/l49-butcher.spec.js:126:1 › 连续听辨重听不记提示，六题后仍显示待练单词
+[7/135] tests/e2e/l49-butcher.spec.js:147:1 › 锦囊开合不发星星，表达按用途理解后才完成任务
+[8/135] tests/e2e/l49-butcher.spec.js:170:1 › either 与 too 先判断两个人的意思，再选择有前文的回应
+[9/135] tests/e2e/l49-butcher.spec.js:187:1 › give 先理解人物物品，再预测、撤回重排并交给新接收者
+[10/135] tests/e2e/l49-butcher.spec.js:218:1 › 三单短轮包含 I 和 you，否定句用原形，翻译需要组织词块
+[11/135] tests/e2e/l49-butcher.spec.js:244:1 › 完整原文听完后开放理解题，使用线索记录为提示后完成
+[12/135] tests/e2e/l49-butcher.spec.js:280:1 › 新订单分两段暂停恢复，最后一题反馈不会被结算跳过
+[13/135] tests/e2e/l49-butcher.spec.js:319:1 › 完成任务后地图成长，重开冒险同时清除新的练习草稿
+[14/135] tests/e2e/l49-butcher.spec.js:341:1 › 损坏的练习草稿不阻断答题，保存失败可通过页面重试恢复
+[15/135] tests/e2e/l49-butcher.spec.js:373:1 › 原录音失败时保持课文位置，重试成功后才允许继续
+[16/135] tests/e2e/l49-butcher.spec.js:393:1 › 390 短屏词卡不溢出，答题后选项尺寸稳定且支持键盘继续
+[17/135] tests/e2e/l49-butcher.spec.js:418:1 › 真实本地录音逐段结束后可完成全部原文，仍需手动确认
+[18/135] tests/e2e/l49-butcher.spec.js:438:1 › 从零完成五关可领学习证书，返回地图显示完成状态
+[19/135] tests/e2e/l49-focus.spec.js:19:1 › 一个听辨入口贯穿14词，暂停恢复且整轮完成后才满星
+[20/135] tests/e2e/l49-focus.spec.js:52:1 › 课文逐段保留前文，仅对话区跟随新句，下一句不移动整页
+[21/135] tests/e2e/l49-focus.spec.js:79:3 › give 的检查与继续位置稳定
+[22/135] tests/e2e/l49-focus.spec.js:79:3 › either 的检查与继续位置稳定
+[23/135] tests/e2e/l49-focus.spec.js:79:3 › fill 的检查与继续位置稳定
+[24/135] tests/e2e/l49-focus.spec.js:79:3 › choice 的检查与继续位置稳定
+[25/135] tests/e2e/l49-focus.spec.js:79:3 › trans 的检查与继续位置稳定
+[26/135] tests/e2e/l49-focus.spec.js:79:3 › exam 的检查与继续位置稳定
+[27/135] tests/e2e/l49-focus.spec.js:94:1 › 三单分拣的选项不被反馈挤动，继续后留在原位置
+[28/135] tests/e2e/l49-focus.spec.js:103:1 › 故事理解只显示当前任务，离开与刷新保留当前作答位置
+[29/135] tests/e2e/l49-focus.spec.js:116:1 › 退出正在播放的活动会停音，回来后可重听到结束
+[30/135] tests/e2e/l49-focus.spec.js:133:71 › 320×568 小屏仍能作答、打开帮助和返回
+[31/135] tests/e2e/l49-focus.spec.js:133:71 › 844×390 小屏仍能作答、打开帮助和返回
+[32/135] tests/e2e/l49-focus.spec.js:146:1 › 证书使用统一图标并可从公开按钮保存图片、关闭预览
+[33/135] tests/e2e/l49-l50-navigation.spec.js:30:3 › /lesson49/ uses the compact themed course header
+[34/135] tests/e2e/l49-l50-navigation.spec.js:75:3 › /lesson49/ keeps the compact header usable at 320px
+[35/135] tests/e2e/l49-l50-navigation.spec.js:30:3 › /lesson50/ uses the compact themed course header
+[36/135] tests/e2e/l49-l50-navigation.spec.js:75:3 › /lesson50/ keeps the compact header usable at 320px
+[37/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:44:3 › 已经进入末题正确反馈的异常旧草稿，只重做后三题且正常新答案可刷新恢复
+[38/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:44:3 › 已经进入完成页的异常旧草稿，只重做后三题且正常新答案可刷新恢复
+[39/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:70:1 › 只有历史成绩回填形成的旧完成草稿恢复为待答，历史手记与星星保留
+[40/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:93:3 › 草稿防护：上一轮答案不能被恢复为本轮正确作答
+[41/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:93:3 › 草稿防护：另一题答案不能被恢复为本轮正确作答
+[42/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:93:3 › 草稿防护：零次提交却已答对不能被恢复为本轮正确作答
+[43/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:93:3 › 草稿防护：答案与判分矛盾不能被恢复为本轮正确作答
+[44/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:93:3 › 草稿防护：未答完却停在完成页不能被恢复为本轮正确作答
+[45/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:93:3 › 草稿防护：未知草稿版本不能被恢复为本轮正确作答
+[46/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:130:3 › 旧主线第3题继续，旧三词已完成，12至14题必须等待本轮选择
+[47/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:130:3 › 最小复现：旧主线第11题继续，仅旧三词草稿，12至14题必须等待本轮选择
+[48/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:130:3 › 对照：旧主线第11题继续，无旧三词与历史成绩，12至14题必须等待本轮选择
+[49/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:130:3 › 历史成绩回填：无三词草稿但有历史成绩，12至14题必须等待本轮选择
+[50/135] tests/e2e/l49-listen-restore-diagnosis.spec.js:130:3 › 已经合并为14词的草稿仍含旧三词答案，12至14题必须等待本轮选择
+[51/135] tests/e2e/l49-progress.spec.js:11:1 › Lesson 49 describes mixed listening choices as words, never meat
+[52/135] tests/e2e/l49-progress.spec.js:20:1 › Lesson 49 repairs legacy ratings and does not crash on negative values
+[53/135] tests/e2e/l49-progress.spec.js:49:1 › Lesson 49 rejects all-corrupt v2 ratings before certificate gating
+[54/135] tests/e2e/l49-progress.spec.js:76:1 › Lesson 49 keeps its locked certificate entry visible from zero stars
+[55/135] tests/e2e/l49-progress.spec.js:83:1 › Lesson 49 five one-star levels remain locked
+[56/135] tests/e2e/l49-progress.spec.js:93:1 › Lesson 49 gate guides partial progress and restores focus
+[57/135] tests/e2e/l49-progress.spec.js:114:1 › Lesson 49 certificate opens only when all five levels have three stars
+[58/135] tests/e2e/l49-progress.spec.js:128:1 › Lesson 49 dialog, save, and print paths recheck live eligibility
+[59/135] tests/e2e/l49-v12.spec.js:22:1 › 点击词卡即可朗读并翻面，键盘等价，快速点读只保留当前词
+[60/135] tests/e2e/l49-v12.spec.js:44:1 › 最后一组词卡提供开始听辨，刷新后仍可一步进入第一题
+[61/135] tests/e2e/l49-v12.spec.js:63:1 › 检查答案时播放对应反馈音，选择、提示、重试、继续和恢复保持安静
+[62/135] tests/e2e/l49-v12.spec.js:91:1 › 最后一题先响正确音，手动完成后才响完成音，重新进入和刷新不重播
+[63/135] tests/e2e/l49-v12.spec.js:123:1 › 主语分拣也有正误和完成音，答案反馈停留到手动继续
+[64/135] tests/e2e/l49-v12.spec.js:145:1 › mutton hotpot 点读加载本地录音并真实播放到结束，不调用系统朗读
+[65/135] tests/e2e/l49-v12.spec.js:166:1 › 课堂投屏入口和独立页面均已移除，学生课程正常打开
+[66/135] tests/e2e/l49-v12.spec.js:177:1 › 课文最后一句听完后等待手动完成，只在完成动作播放完成音
+[67/135] tests/e2e/l49-v12.spec.js:195:1 › 领取证书播放同款完成音，关闭和恢复保持安静
+[68/135] tests/e2e/l49-v12.spec.js:208:1 › 三种反馈录音都能由浏览器真实播放到结束
+[69/135] tests/e2e/l49-v12.spec.js:235:1 › 听辨选项不朗读，旧反馈结束不充当听完新单词，音效失败仍可继续
+[70/135] tests/e2e/l49-v12.spec.js:266:3 › give 的正确作答使用统一反馈音
+[71/135] tests/e2e/l49-v12.spec.js:266:3 › either 的正确作答使用统一反馈音
+[72/135] tests/e2e/l49-v12.spec.js:266:3 › fill 的正确作答使用统一反馈音
+[73/135] tests/e2e/l49-v12.spec.js:266:3 › choice 的正确作答使用统一反馈音
+[74/135] tests/e2e/l49-v12.spec.js:266:3 › trans 的正确作答使用统一反馈音
+[75/135] tests/e2e/l49-v13.spec.js:8:1 › 五关十四个舞台连续展开，顶部导航只定位且标记当前关卡
+[76/135] tests/e2e/l49-v13.spec.js:29:1 › 词卡按6／6／5分组，末组可明确前往听音寻宝，刷新保留位置
+[77/135] tests/e2e/l49-v13.spec.js:50:3 › 1280宽度下检查、重试、下一题不移动整页，选项位置稳定
+[78/135] tests/e2e/l49-v13.spec.js:50:3 › 768宽度下检查、重试、下一题不移动整页，选项位置稳定
+[79/135] tests/e2e/l49-v13.spec.js:50:3 › 390宽度下检查、重试、下一题不移动整页，选项位置稳定
+[80/135] tests/e2e/l49-v13.spec.js:81:1 › 刷新书签仍定位原活动；手机紧凑导航能定位五关
+[81/135] tests/e2e/l49-v13.spec.js:94:1 › 五个锦囊按需展开，浏览不算作答；怎么玩和学徒手记可关闭
+[82/135] tests/e2e/l49-v13.spec.js:109:1 › 直接操作另一个舞台会中止旧朗读，键盘点词也更新继续上次的位置
+[83/135] tests/e2e/l49-v13.spec.js:128:1 › 完成后下一站出现在当前舞台，重练时恢复未作答状态
+[84/135] tests/e2e/l49-v13.spec.js:147:1 › 旧版四张分组的草稿迁移到同一个词，新组可往返且再次刷新不重复迁移
+[85/135] tests/e2e/l49-v13.spec.js:160:1 › 桌面与手机舞台截图，所有词卡翻面文字都在卡内
+[86/135] tests/e2e/l49-v14.spec.js:42:1 › 听音寻宝连续14词，末题先反馈，完成返回后能从第一词重练
+[87/135] tests/e2e/l49-v14.spec.js:88:1 › 旧11词完成和3词草稿合并，未提交选择、提示及已得星星可以恢复
+[88/135] tests/e2e/l49-v14.spec.js:121:1 › 大喇叭配四张图文选项，真实听完才能提交，答后卡片位置稳定
+[89/135] tests/e2e/l49-v14.spec.js:162:3 › 320 完成页两个操作相邻居中，桌面次左主右、手机主上次下
+[90/135] tests/e2e/l49-v14.spec.js:162:3 › 768 完成页两个操作相邻居中，桌面次左主右、手机主上次下
+[91/135] tests/e2e/l49-v14.spec.js:162:3 › 1280 完成页两个操作相邻居中，桌面次左主右、手机主上次下
+[92/135] tests/e2e/l49-v14.spec.js:197:1 › 词卡、短语与相关帮助不暴露来源分类，图义和点读保留
+[93/135] tests/e2e/l49-v14.spec.js:223:1 › 课文播放和恢复使用按钮状态，正常听完不插入说明句
+[94/135] tests/e2e/l49-v14.spec.js:242:1 › 旧轮重练草稿优先于历史成绩，未作答的新题不会被历史答案填满
+[95/135] tests/e2e/l49-v14.spec.js:274:1 › 旧三词最后一题的正确反馈在升级后仍等待手动完成
+[96/135] tests/e2e/l49-v14.spec.js:294:3 › 320 图文选项保持两列，正误反馈与下一题不挪动选项或整页
+[97/135] tests/e2e/l49-v14.spec.js:294:3 › 768 图文选项保持两列，正误反馈与下一题不挪动选项或整页
+[98/135] tests/e2e/l49-v14.spec.js:294:3 › 1280 图文选项保持两列，正误反馈与下一题不挪动选项或整页
+[99/135] tests/e2e/l49-v14.spec.js:329:1 › 14个词从大喇叭加载本地录音并真实结束，完成后可以重练
+[100/135] tests/e2e/l49-v15.spec.js:28:1 › 听音删除无效线索，重试和刷新不恢复它，其他活动保留实质提示
+[101/135] tests/e2e/l49-v15.spec.js:53:44 › 1280宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[102/135] tests/e2e/l49-v15.spec.js:53:44 › 768宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[103/135] tests/e2e/l49-v15.spec.js:53:44 › 390宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[104/135] tests/e2e/l49-v15.spec.js:53:44 › 320宽度的上一组保留完整按钮轮廓，往返分组不挪动整页
+[105/135] tests/e2e/l49-v15.spec.js:85:1 › 历史句可点读并高亮，打断当前句或晚到的音频结束不会误推进
+[106/135] tests/e2e/l49-v15.spec.js:124:1 › 逐句中文开关互不影响，也不会误触句子朗读
+[107/135] tests/e2e/l49-v15.spec.js:146:1 › 中途离开和刷新恢复对白，未听完的当前句仍需重听，取消播放不留高亮
+[108/135] tests/e2e/l49-v15.spec.js:171:1 › 十一句完成后保留全部对白，刷新保持静音，显式重演从第一句累积并保留奖励
+[109/135] tests/e2e/l49-v15.spec.js:203:3 › 1280宽度中对白持续累积与中文展开只影响内部滚动，整页和按钮稳定
+[110/135] tests/e2e/l49-v15.spec.js:203:3 › 768宽度中对白持续累积与中文展开只影响内部滚动，整页和按钮稳定
+[111/135] tests/e2e/l49-v15.spec.js:203:3 › 320宽度中对白持续累积与中文展开只影响内部滚动，整页和按钮稳定
+[112/135] tests/e2e/l49-v15.spec.js:239:1 › 历史句录音失败后可直接重试，不影响已听完的当前句继续
+[113/135] tests/e2e/l49-v16.spec.js:43:1 › 双人舞台保留站位，检查正确后才显示对应食物
+[114/135] tests/e2e/l49-v16.spec.js:62:1 › 播放失败可重试且不阻塞答题，离开后迟到录音不污染新场景
+[115/135] tests/e2e/l49-v16.spec.js:89:1 › 三句情境台词播放对应本地录音到真实结束，不借用近似台词或合成兜底
+[116/135] tests/e2e/l49-v16.spec.js:111:1 › 阅读即可作答，错答和未检查选择不进入舞台，换题停止旧朗读
+[117/135] tests/e2e/l49-v17-actions.spec.js:70:31 › 1280 宽度逐站完成、重练与导航，所有结束操作集中对齐
+[118/135] tests/e2e/l49-v17-actions.spec.js:70:31 › 390 宽度逐站完成、重练与导航，所有结束操作集中对齐
+[119/135] tests/e2e/l49-v17-actions.spec.js:126:1 › 320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次分组
+[120/135] tests/e2e/l49-v17.spec.js:22:1 › 作答卡组与操作区在舞台中线，灯泡线索具有完整按钮轮廓
+[121/135] tests/e2e/l49-v17.spec.js:61:1 › 先看三个问题再听课文，完整听过并手动完成才开放故事作答
+[122/135] tests/e2e/l49-v17.spec.js:88:1 › 统一五题都有明确题干，未选不检查，末题反馈后手动完成
+[123/135] tests/e2e/l49-v17.spec.js:121:49 › 320 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[124/135] tests/e2e/l49-v17.spec.js:121:49 › 390 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[125/135] tests/e2e/l49-v17.spec.js:121:49 › 600 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[126/135] tests/e2e/l49-v17.spec.js:121:49 › 768 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[127/135] tests/e2e/l49-v17.spec.js:121:49 › 1280 宽度灯泡紧邻检查按钮，线索就近展开且不挤动操作
+[128/135] tests/e2e/l49-v17.spec.js:166:1 › 旧角色草稿和历史成绩不预填新题，旧星星保留，新草稿静音续练
+[129/135] tests/e2e/l49-v17.spec.js:232:1 › 辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记
+[130/135] tests/e2e/l49-v18.spec.js:28:1 › 问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定
+[131/135] tests/e2e/l49-v18.spec.js:86:35 › 320 宽度九个活动统一灯泡，提示可读且刷新不预选、不播放
+[132/135] tests/e2e/l49-v18.spec.js:86:35 › 768 宽度九个活动统一灯泡，提示可读且刷新不预选、不播放
+[133/135] tests/e2e/l49-v18.spec.js:86:35 › 1280 宽度九个活动统一灯泡，提示可读且刷新不预选、不播放
+[134/135] tests/e2e/l49-v18.spec.js:127:1 › 词块题用线索后仍需手动拼装，记录提示后完成，下一题和重练清空线索
+[135/135] tests/e2e/l49-v18.spec.js:150:1 › 挑战灯泡不绕过听完门槛，暂停和刷新仍保留线索而不自动作答
+  135 passed (4.7m)

@@ -1,44 +1,19 @@
-# 🤴 挑食小王子大冒险 · The Picky Prince
+# Lesson 50 · 挑食小王子
 
-新概念英语第一册 **Lesson 50** 儿童互动闯关课件（单文件 HTML，静态且运行时零依赖、零外部图片依赖）。
-与《🥩 肉店大冒险 · Lesson 49》同系列姊妹篇。
+学习 9 个蔬果词、一般现在时、第三人称单数和 do／does 问句、否定句。
 
-## 课程内容
+| 关卡 | 孩子做什么 |
+| --- | --- |
+| 蔬果图鉴 | 翻词卡、听音摘果 |
+| 王子的餐桌 | 按喜好分食物，练 likes／doesn't like |
+| 动词变身魔法屋 | 观察并练习动词的第三人称单数形式 |
+| 照妖镜挑战 | 选择 Do／Does，改写疑问句和否定句 |
+| 皇家大考核 | 完成 8 道综合题 |
 
-- **词汇**：tomato / potato / cabbage / lettuce / pea / bean / pear / grape / peach（9 个蔬果名词）
-- **语法**：一般现在时（经常的状态 / 习惯的动作 / 客观真理）+ 第三人称单数变化（+s / +es / y→ies / have→has、go→goes、do→does）+ do/does 句式变化（"助动词照妖镜，后面动词现原形"）
+五关各满 3 星，共 15 星后可领证书。可选的食物篮子故事不影响进入课程。
 
-## 关卡结构
+录音优先使用本课 `audio/` 中的英式发音，失败时尝试浏览器朗读。星星保存在当前浏览器，存储键为 `canran:l50:progress:v2`。
 
-- **封面**：卡通城堡 + 小王子 SVG 场景
-- **第 1 关 · 蔬果图鉴**：9 张翻卡（音标/词性/中文）+「听音摘果」8 轮听力游戏
-- **第 2 关 · 王子的餐桌**：投喂分拣（😋 爱吃 / 🤢 不爱吃）练 He/She likes... doesn't like... + 句型三连跟读卡 + 快问快答（含彩蛋题）
-- **第 3 关 · 动词变身魔法屋**：三卷概念卷轴 + 6 组三单变身秀 + 10 词魔法锅分拣
-- **第 4 关 · 照妖镜挑战**：Do/Does 主语分拣机 + 6 题句子大变身（否定/疑问）
-- **第 5 关 · 皇家大考核**：8 题综合测验（选项随机洗牌）+ 星级评定 + Canvas 结业证书（保存 PNG / 打印）
+[打开正式课程](https://www.canranstudio.cn/lesson50/) · [本地预览](../README.md#本地预览) · [编写规则](../docs/course-authoring.md) · [测试](../tests/README.md)
 
-## 发音
-
-`audio/` 内置 100 个预录**英式发音（en-GB）** MP3（edge-tts 神经网络语音 Sonia 女声，语速 -10%），全浏览器可播；缺失时静默回退浏览器 speechSynthesis（自动挑选 en-GB 语音）。
-
-文件名规则：`audio/<slug>.mp3`，其中 `slug = text.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'')`
-
-页面初始化不自动朗读（浏览器自动播放策略），首次交互后菜盘/动词出现时自动发音。
-
-## 部署
-
-纯静态文件，任意 Web 服务器指到本目录即可（需能通过 HTTP 访问 `audio/` 子目录；直接双击 file:// 打开时音频自动回退 speechSynthesis）。
-
-## 技术
-
-- 单文件 `index.html`（HTML + CSS + 原生 JS，约 88KB）
-- Web Speech API（兜底）、Web Audio 合成音效、Canvas 撒花与证书绘制、localStorage 星星进度（键 `canran:l50:progress:v2`）
-- 移动端自适应（390px 无横向溢出、吸顶导航压缩、`prefers-reduced-motion` 支持、翻卡键盘可达）
-
-## 加固与无障碍合同
-
-- 页面运行时保持静态、无 package；固定 Fontsource 5.3.0 构建期包的已提交输出由
-  `npm run vendor:fonts` 重建。WOFF2、`fonts.css` 与 OFL 许可证副本位于
-  `assets/fonts/`，字体只从同源路径请求。
-- 证书领取、打印和保存处理各自重新检查资格。证书界面是原生模态 `<dialog>`，反馈状态区
-  使用 `polite`、`atomic` live region。
+部署时需保留项目根目录下的 `core/`、`assets/` 和本课文件夹，详见[发布指南](../deploy/README.md)。

@@ -1,0 +1,44 @@
+
+> canranstudio@0.0.0 test:e2e
+> playwright test tests/e2e/unit49-50.spec.js --grep 电脑和平板手机 --reporter=list
+
+
+Running 1 test using 1 worker
+
+(node:55632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/unit49-50.spec.js:210:1 › 电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列 (2.8s)
+
+
+  1) tests/e2e/unit49-50.spec.js:210:1 › 电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列 ────────────────────────────
+
+    Error: expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 892.1875
+    Received: 899.6875
+
+    Expected precision:    0
+    Expected difference: < 0.5
+    Received difference:   7.5
+
+      223 |     const controlsTop=await words.locator('.word-controls').evaluate(el=>el.getBoundingClientRect().top+scrollY);
+      224 |     await words.getByRole('button',{name:'a pound of mince',exact:true}).click();
+    > 225 |     expect(await words.locator('.word-controls').evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(controlsTop,0);
+          |                                                                                                        ^
+      226 |     await words.screenshot({path:`output/playwright/unit49-50-words-${width}.png`});
+      227 |     await page.goto('/unit49-50/#learn/needs');
+      228 |     const room=page.locator('.stage-needs');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/unit49-50.spec.js:225:104
+
+    Error Context: test-results/unit49-50-电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit49-50-电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit49-50-电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/unit49-50.spec.js:210:1 › 电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列 ─────────────────────────────
