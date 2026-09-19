@@ -5,7 +5,7 @@
   const audio=core.audio.createAudioPlayer();
   function node(tag,copy='',className=''){const el=document.createElement(tag);el.className=className;el.textContent=copy;return el;}
   function button(copy,action,className='btn btn-green'){const el=node('button',copy,className);el.type='button';el.addEventListener('click',action);return el;}
-  function speak(text,onFinish){return audio.play({text,src:content.AUDIO[text]?'/'+content.AUDIO[text]:'',retrySource:true,onFinish:result=>onFinish?.(result.sourceFailed?{...result,reason:'failed'}:result)});}
+  function speak(text,onFinish){return audio.play({text,src:content.AUDIO[text]?core.courseCatalog.publicAssetUrl(content.AUDIO[text]):'',retrySource:true,onFinish:result=>onFinish?.(result.sourceFailed?{...result,reason:'failed'}:result)});}
   const surfaces=new Map(),activities=stages.flatMap(stage=>stage.activities.map(([id,title,art])=>({id,title,art,stage:stage.id})));
   const routeIds=new Set(['cover',...stages.map(stage=>stage.id),...activities.map(activity=>'learn/'+activity.id)]);
   let activeActivity=null;

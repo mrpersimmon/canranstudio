@@ -26,6 +26,11 @@
       !/[\0-\x1f\x7f]/.test(value);
   }
 
+  function publicAssetUrl(relative) {
+    if (!isRelativePublicPath(relative)) throw new Error('Expected a relative public asset path');
+    return `/${relative}`;
+  }
+
   function isMapImagePath(value) {
     return isRelativePublicPath(value) &&
       value.startsWith('assets/') &&
@@ -2381,6 +2386,7 @@
     createLessonMap,
     createSpecialMap,
     mapStateAssetUrl,
+    publicAssetUrl,
     requirePublishedCourse,
     assessLearningLocation,
     directoryMapStatus,

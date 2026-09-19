@@ -2,6 +2,46 @@
 const { test, expect } = require('@playwright/test');
 const { completeUnit } = require('../support/unit49-50-flow');
 
+async function observeNativeAudio(page) {
+  await page.addInitScript(() => {
+    window.__nativePlays = [];
+    const original = HTMLMediaElement.prototype.play;
+    HTMLMediaElement.prototype.play = function (...args) {
+      const item = { src: this.src, ended: false };
+      window.__nativePlays.push(item);
+      this.addEventListener('ended', () => { item.ended = true; }, { once: true });
+      return Reflect.apply(original, this, args);
+    };
+  });
+}
+
+for (const course of ['lesson49', 'unit49-50']) {
+  test(`${course} 点击词卡、听题与答对音效都在子目录真实播放`, async ({ page }) => {
+    await observeNativeAudio(page);
+    await page.goto(`/lesson/${course}/#learn/words`);
+    await page.locator('.stage-words').getByRole('button', { name: 'butcher', exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__nativePlays.some(item => item.ended))).toBe(true);
+    expect(await page.evaluate(() => window.__nativePlays.map(item => new URL(item.src).pathname)))
+      .toEqual(['/lesson/lesson49/audio/butcher.mp3']);
+
+    await page.goto(`/lesson/${course}/#learn/listen`);
+    await page.evaluate(() => { window.__nativePlays = []; });
+    const room = page.locator('.stage-listen');
+    if (course === 'lesson49') await room.getByRole('button', { name: '开始听辨', exact: true }).click();
+    await room.getByRole('button', { name: '听一遍', exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__nativePlays.some(item => item.ended))).toBe(true);
+    const recording = await page.evaluate(() => new URL(window.__nativePlays[0].src).pathname);
+    expect(recording).toMatch(/^\/lesson\/lesson(?:49|50)\/audio\/[^/]+\.mp3$/);
+    const word = recording.split('/').pop().replace('.mp3', '');
+    await room.getByRole('button', { name: word, exact: true }).click();
+    await room.getByRole('button', { name: '检查答案', exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__nativePlays.some(item =>
+      new URL(item.src).pathname === '/lesson/assets/feedback/duolingo-correct.mp3' && item.ended
+    ))).toBe(true);
+    expect(await page.evaluate(() => window.__nativePlays.every(item => new URL(item.src).pathname.startsWith('/lesson/')))).toBe(true);
+  });
+}
+
 test('lesson 子目录直接显示导航，组合单元和返回导航都留在子目录', async ({ page }) => {
   const outside = [], failures = [];
   page.on('request', request => {
@@ -65,6 +105,7 @@ test('lesson 中走完整单元并下载新版证书，返回导航能继续学�
 });
 
 test('旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以结束', async ({ page }) => {
+  await observeNativeAudio(page);
   await page.goto('/');
   await page.evaluate(async () => {
     await navigator.serviceWorker.register('/tests/fixtures/root-media-worker.js', { scope: '/' });
@@ -74,13 +115,10 @@ test('旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以
   await page.goto('/lesson/unit49-50/#learn/words');
   await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL)).toContain('/lesson/core/subpath-worker.js');
   await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
-  const outcome = await page.evaluate(() => new Promise(resolve => {
-    const audio = new Audio('/lesson/lesson49/audio/butcher.mp3');
-    audio.addEventListener('ended', () => resolve('ended'), { once: true });
-    audio.addEventListener('error', () => resolve('error'), { once: true });
-    audio.play().catch(() => resolve('rejected'));
-  }));
-  expect(outcome).toBe('ended');
+  await page.locator('.stage-words').getByRole('button', { name: 'butcher', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__nativePlays.some(item =>
+    new URL(item.src).pathname === '/lesson/lesson49/audio/butcher.mp3' && item.ended
+  ))).toBe(true);
 });
 
 test('手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航', async ({ page }) => {

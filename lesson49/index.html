@@ -470,7 +470,7 @@ function speak(text,onFinish){
   return lesson49Audio.play({
     text:value,
     retrySource:true,
-    src:source?'/'+source:'',
+    src:source?CanranCore.courseCatalog.publicAssetUrl(source):'',
     rate:0.85,
     voice:ukVoice||pickBritishVoice(),
     onFinish:result=>{

@@ -16,7 +16,7 @@
     if (!sound) return;
     stop();
     try {
-      const audio = new root.Audio('/' + sound.src);
+      const audio = new root.Audio(root.CanranCore.courseCatalog.publicAssetUrl(sound.src));
       active = audio;
       audio.volume = sound.volume;
       const release = () => { if (active === audio) active = null; };
