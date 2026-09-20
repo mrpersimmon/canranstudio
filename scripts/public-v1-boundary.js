@@ -240,12 +240,14 @@ async function assertPublicV1Boundary({
   const indexablePages = [
     { label: 'home', entry: 'index.html' },
     { label: 'unit49-50', entry: 'unit49-50/index.html' },
+    { label: 'unit1-2', entry: 'unit1-2/index.html' },
     ...courses.map(course => ({ label: course.id, entry: course.entry }))
   ];
   const pageEntries = new Set([
     'index.html',
     'home/index.html',
     'unit49-50/index.html',
+    'unit1-2/index.html',
     ...courses.map(course => course.entry)
   ]);
 
@@ -257,6 +259,7 @@ async function assertPublicV1Boundary({
     ...pageEntries,
     ...await runtimeFilesIn(resolvedRoot, 'core'),
     ...await runtimeFilesIn(resolvedRoot, 'unit49-50'),
+    ...await runtimeFilesIn(resolvedRoot, 'unit1-2'),
     ...await runtimeFilesIn(resolvedRoot, 'assets'),
     ...(
       await Promise.all(

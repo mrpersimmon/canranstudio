@@ -1,0 +1,47 @@
+Use case: ui-mockup.
+Create ONE polished visual comparison board for an already selected design direction, not a set of competing concepts. The user approved one 2-column by 3-row comparison of two existing Chinese children's English learning units. Target dimensions 2400 x 3000 px, portrait, crisp readable Chinese and English. This is a design review artifact, not a new website homepage.
+
+Title: “教学单元视觉对照”
+Subtitle: “活动有区分 · 单元有主题 · 操作保持一致”
+Two columns with persistent headings: LEFT “Lesson 1–2 · 礼貌小帮手”, RIGHT “Lesson 49–50 · 晚餐采购大冒险”.
+Three aligned rows: “故事舞台”, “词卡图鉴”, “听音练习”. Exactly six comfortably spaced UI excerpts. One cohesive chosen visual system applied to six views. No device frames. White outer presentation board, thin neutral separators, generous margins. Prioritize spacing, grouping, typography and hierarchy. No extra panels, metrics, maps, coins, settings or invented features.
+
+Input images are references, NOT pages to copy unchanged:
+1: current Lesson 1–2 story with the abstract man and woman, rounded Chinese type, brown outlines, dialogue structure. Preserve this character style and their identity.
+2: current Lesson 1–2 vocabulary cards; source for accurate object artwork and English labels.
+3: current listening exercise; source for familiar listening control, 2x2 choices, footer action and progress hierarchy.
+4: current Lesson 49–50 vocabulary surface; style continuity reference, not the required card contents.
+5: existing certificate is ONLY a character/style reference for the butcher (white cap, striped apron, red neck scarf) and Mrs. Bird (green dress, bun, pink handbag); do NOT show a certificate in this comparison board.
+
+Shared immutable visual language: flat abstract illustrated people and objects, dark brown #4A3226 outlines, restrained rounded shapes, bold playful Chinese headings, rounded bold English like Baloo 2. Reuse the familiar control system. Main forward button solid green #7FB069 with adequate dark outline, secondary controls warm white with brown outlines; amber speaker button. Dark brown readable text throughout. Avoid watercolor, photorealism, 3D, gradients, neon, huge shadow stacks and mascot replacements.
+
+Approved differentiation:
+LEFT unit: soft sky blue #EAF3F8 scene with warm white #FFFDF8 content and small muted apricot accents. No red-white butcher awning anywhere on left.
+RIGHT unit: warm peach #FCEBDD, cream #FFF8EE, restrained brick red #C45D46. The butcher awning belongs ONLY to the story stage, not every container.
+Make activity containers recognizably different, while same activity across units retains matching internal structure and control positions.
+Story row can feel like an illustrated stage; vocabulary row like a calm collection page with lighter outer boundaries; practice row like a clean focused worksheet. Do not make every region into another heavy card. Clickable cards have clearer outline and shallow solid bottom edge than their parent surface.
+
+Top LEFT story excerpt, title “相遇小剧场”: light sky-blue stage, very subtle environmental hints at edges only, existing man left and woman right, white central dialogue area, two readable speech lines “Excuse me!” and “Yes?”. Characters labelled “男士” and “女士”. No handbag attached to either person and no ownership cues. Small warm-white “重听本句”, green “下一句”, aligned centrally below stage. If there is a translation control, short “看中文” inside each speech bubble. Keep the scene quiet behind the text.
+Top RIGHT story excerpt, title “肉店小剧场”: peach butcher-store stage with a restrained red/cream awning at the top; existing butcher left and Mrs. Bird right; central white dialogue area. Speech lines “Do you want any meat today, Mrs. Bird?” and “Yes, please.” Small “看中文” controls. Same action positions: “重听本句” and green “下一句”. No detailed store scenery behind text.
+
+Middle LEFT, title “物品小图鉴”: pale apricot collection background, minimal outer frame, six equal white clickable cards in 3 columns x 2 rows with accurate flat illustrations and labels: handbag, pen (fountain pen), pencil, book, watch, coat. Every card unselected and equal visual emphasis. One centered action row below: disabled “上一组词卡”, label “1 / 4”, green “下一组词卡”.
+Middle RIGHT, title “采购小图鉴”: muted cream/peach collection background, subtle store/shelf motif confined to heading, six equal white clickable cards with accurate flat illustrations and labels: butcher, meat, beef, lamb, steak, chicken. Same grid and actions, label “1 / 5”. No red stripes around vocabulary.
+
+Bottom row BOTH panels title “听音寻宝”. Left only a small blue accent in heading/periphery, right a small peach accent; BOTH use identical warm-white answer surface, generous breathing room, same layout. At top small “第 1 题” and a neutral segmented progress line with current amber outline, NO green completed segments. Prompt “听一听，选出单词。” One large amber speaker-icon button centered. 2x2 equal white choice buttons, each with big accurate object illustration and English. LEFT handbag, skirt, watch, pen. RIGHT meat, beef, lamb, chicken. All choices unselected, no answer clues, no highlights, no hint lightbulb for listening. Muted disabled “检查答案” centered below identical separators. Accent scene colors never recolor controls or favor an answer.
+
+Keep realistic readable text, adequate contrast, correct English spelling, consistent scale within a row, all content fully inside each excerpt. The board should demonstrate noticeable unit identity and three kinds of surfaces without multiplying interaction rules. Bottom annotation “设计对照稿 · 非运行页面”. Do not include dates, browser chrome, code, technical metadata, variant numbers, extra decorative UI or unnecessary instructions.
+
+
+---
+修订：纠正伯德夫人标签，移除装饰英文，将听辨区背景收敛，并统一物品图标。
+
+Edit this existing ONE approved UI comparison board. Preserve its two columns, three rows, overall composition, Chinese heading, dimensions/aspect ratio, most colors, all button positions, all learning actions, character identities and English lesson sentences. This is a targeted correction of the same design, not a new option. Use case: ui-mockup. Target 2400 x 3000 or preserve the original portrait aspect ratio without stretching.
+
+Make these exact corrections:
+1. In the top-right butcher story panel, the female character is Mrs. Bird. Replace the incorrect label “小小采购员” with “伯德夫人”. Keep her green dress and bun. Label the left character “肉店老板”. Do not change the LEFT unit labels “男士” and “女士”.
+2. Remove invented English scene slogans “FRESH MEAT” and “GOOD FOOD HAPPY DAY”. Remove those signs entirely. Preserve the simple awning and restrained store cues. Do not add any new text or features.
+3. Use the original project's simple flat abstract object language, not shaded meat renderings. In BOTH right-column vocabulary and listening panels, beef should use a recognizable friendly cow-head icon, lamb a friendly sheep-head icon, chicken a simple chicken-drumstick icon. Keep the exact English labels beef / lamb / chicken. meat and steak remain simple flat red meat-cut illustrations with thick brown lines. All choices stay unselected and equally prominent. Do not change left-column object images or spellings.
+4. Make the bottom-row practice surfaces equally quiet: remove decorative bushes and bricks around the bottom corners. Keep only the small pale-blue header accent on the left and pale-peach header accent on the right, with identical warm-white answer areas. Keep the amber speaker button and muted disabled “检查答案”, same placement on both sides. No hints in listening.
+5. Use flat muted color fills rather than gradient washes; retain the obvious soft-blue scene vs warm-peach scene distinction and the light collection-page containers. Preserve existing warm-white cards, shallow solid button edges and brown outlines.
+
+Keep all other Chinese/English text exactly as in the source, including “相遇小剧场”, “肉店小剧场”, “物品小图鉴”, “采购小图鉴”, “听音寻宝”, “Excuse me!”, “Yes?”, “Do you want any meat today, Mrs. Bird?”, “Yes, please.” and bottom label “设计对照稿 · 非运行页面”. No phone/browser frames. Ensure no clipped text and no answer leakage.

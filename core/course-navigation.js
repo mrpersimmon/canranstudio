@@ -5,6 +5,10 @@
   let storage;
   try { storage = window.localStorage; } catch { storage = null; }
   const profileState = core.deviceProfile.initializeDeviceProfile({ storage, courses });
+  const units = [
+    { ...core.unit4950, ...core.learningContext, path: '/unit49-50/', start: 'learn/words', entry: 'unitEntry', label: 'resumeLocation' },
+    { ...core.unit12, entry: 'unit12Entry', label: 'unit12Resume' }
+  ];
   function read(key) {
     try { return JSON.parse(storage?.getItem(key) || 'null'); } catch { return null; }
   }
@@ -16,17 +20,19 @@
       const stars = Object.values(progress.ratings).reduce((sum, value) => sum + value, 0);
       card.querySelector('.course-progress').textContent = stars ? `${stars} / ${course.progress.max} 颗星` : '';
     }
-    const unit = core.unit4950;
-    const destinations = new Map(unit.stages.flatMap(stage => [[stage.id, stage.title], ...stage.activities.map(([id, title]) => ['learn/' + id, title])]));
-    const saved = read(core.learningContext.progress.learningKey);
-    const valid = saved?.version === 1 && isRecord(saved.groups) && isRecord(saved.records) && isRecord(saved.activity);
-    const route = valid && destinations.has(saved.activity.unitLocation) ? saved.activity.unitLocation : null;
-    const entry = document.getElementById('unitEntry');
-    entry.textContent = route ? '继续学习' : '开始学习';
-    entry.href = '/unit49-50/#' + (route || 'learn/words');
-    const label = document.getElementById('resumeLocation');
-    label.hidden = !route;
-    label.textContent = route ? '上次学到 · ' + destinations.get(route) : '';
+    for (const unit of units) {
+      const destinations = new Map(unit.stages.flatMap(stage => [[stage.id, stage.title], ...stage.activities.map(([id, title]) => ['learn/' + id, title])]));
+      const saved = read(unit.progress.learningKey);
+      const valid = saved?.version === 1 && isRecord(saved.groups) && isRecord(saved.records) && isRecord(saved.activity);
+      const route = valid && destinations.has(saved.activity.unitLocation) ? saved.activity.unitLocation : null;
+      const entry = document.getElementById(unit.entry);
+      entry.textContent = route ? '继续学习' : '开始学习';
+      if (entry.hasAttribute('aria-label')) entry.setAttribute('aria-label', entry.textContent + '：' + unit.title);
+      entry.href = unit.path + '#' + (route || unit.start);
+      const label = document.getElementById(unit.label);
+      label.hidden = !route;
+      label.textContent = route ? '上次学到 · ' + destinations.get(route) : '';
+    }
   }
   refreshCourses();
   window.addEventListener('pageshow', refreshCourses);
@@ -53,7 +59,7 @@
   document.getElementById('continueRestart').addEventListener('click', () => panel(2, 'cancelRestart'));
   for (const id of ['cancelRestartFirst', 'cancelRestart']) document.getElementById(id).addEventListener('click', () => panel(0, 'beginRestart'));
   document.getElementById('confirmRestart').addEventListener('click', () => {
-    const result = core.deviceProfile.restartAdventure({ storage, courses: [...courses, core.learningContext] });
+    const result = core.deviceProfile.restartAdventure({ storage, courses: [...courses, ...units] });
     if (result.cleared) location.assign('/');
     else { panel(0, 'beginRestart'); document.getElementById('deviceStorageStatus').textContent = '部分记录暂时无法清除，请重试。'; }
   });

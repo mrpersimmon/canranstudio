@@ -1,0 +1,21 @@
+
+Running 13 tests using 1 worker
+
+(node:92460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/13] tests/e2e/unit-themes.spec.js:19:1 › 两单元有清晰的冷暖场景，图鉴与答题区有层次，选项和操作仍遵循同一视觉规则
+[2/13] tests/e2e/unit-themes.spec.js:51:3 › unit1-2 换主题保留已答题，继续后不代答，主按钮和反馈文字清晰可读
+[3/13] tests/e2e/unit-themes.spec.js:51:3 › unit49-50 换主题保留已答题，继续后不代答，主按钮和反馈文字清晰可读
+[4/13] tests/e2e/unit-themes.spec.js:85:3 › unit1-2 320 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[5/13] tests/e2e/unit-themes.spec.js:85:3 › unit49-50 320 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[6/13] tests/e2e/unit-themes.spec.js:85:3 › unit1-2 1100 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[7/13] tests/e2e/unit-themes.spec.js:85:3 › unit49-50 1100 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[8/13] tests/e2e/unit1-2-layout.spec.js:16:3 › 320 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[9/13] tests/e2e/unit1-2-layout.spec.js:16:3 › 390 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[10/13] tests/e2e/unit1-2-layout.spec.js:16:3 › 768 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[11/13] tests/e2e/unit1-2-layout.spec.js:16:3 › 1280 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[12/13] tests/e2e/unit1-2-layout.spec.js:58:1 › 词块撤回、错误、刷新、修正和末题都沿用同一行为，历史分数不能答未来题
+[13/13] tests/e2e/unit1-2-layout.spec.js:83:1 › 键盘可播放、查看帮助与关闭弹层，短屏换题能看到题干
+  13 passed (13.3s)

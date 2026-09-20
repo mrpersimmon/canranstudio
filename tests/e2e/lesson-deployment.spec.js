@@ -72,7 +72,7 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
   await page.evaluate(() => localStorage.setItem('canran:unit49-50:learning:v1', 'original-app-record'));
   await page.getByText('单课练习', { exact: true }).click();
   const entries = await page.locator('main a').evaluateAll(links => links.map(link => ({ href: link.href, text: link.textContent })));
-  expect(entries).toHaveLength(8);
+  expect(entries).toHaveLength(9);
   for (const entry of entries) {
     expect(new URL(entry.href).pathname).toMatch(/^\/lesson\//);
     const response = await page.goto(entry.href);

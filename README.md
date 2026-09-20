@@ -4,8 +4,9 @@
 
 ## 第一次使用
 
-- 学习课程：打开[正式网站](https://www.canranstudio.cn)，选择课程。
+- 学习已发布课程：打开[正式课程导航](https://www.canranstudio.cn/lesson/)，选择课程。
 - 在自己电脑上查看或修改：按下面的“本地预览”操作。
+- 设计或扩充教学单元：先读[统一设计标准与验收清单](docs/butcher-version/2026-09-20-1325-v1.17-教学单元设计标准与验收清单.md)。
 - 找其他说明：看[文档导航](docs/README.md)。
 
 ## 本地预览
@@ -24,6 +25,7 @@ node tests/support/static-server.js
 以下是当前分支的入口；本地修改是否上线，需要另行发布和检查。
 
 - `/` — 我的课程：继续学习与课程卡片
+- `/unit1-2/` — 礼貌小帮手（Lesson 1–2 教学单元，本地新增）
 - `/unit49-50/` — 晚餐采购大冒险（Lesson 49–50 教学单元）
 - `/lesson49/` — 肉店大冒险
 - `/lesson50/` — 挑食小王子
@@ -34,7 +36,7 @@ node tests/support/static-server.js
 - `/soundmark/` — 音标魔法乐园
 - `/home/` — 旧入口，自动转到首页
 
-首页直接进入 Lesson 49–50 教学单元；“更多冒险”保留 Lesson 51–54，音标课单列。原 Lesson 49、50 在“单课练习”中，原地址与星星保留。单元独立记录进度，共 15 星；编号单课各 15 星，音标课 12 星。
+首页选择 Lesson 1–2 或 Lesson 49–50 教学单元，各自恢复上次学习位置；“更多冒险”保留 Lesson 51–54，音标课单列。原 Lesson 49、50 在“单课练习”中，原地址与星星保留。每个单元独立记录 15 星；编号单课各 15 星，音标课 12 星。
 
 ## 修改后怎么检查
 
@@ -43,7 +45,7 @@ node tests/support/static-server.js
 新增课程看[课程编写指南](docs/course-authoring.md)。正式使用前还要完成[真机检查](docs/mobile-release-smoke-checklist.md)和[儿童试用](docs/v1-map-usability-pilot-toolkit.md)。
 
 <details>
-<summary>维护者：地图图片规则</summary>
+<summary>维护者：旧编号课程的地图图片规则</summary>
 
 每个地标使用同一高清母版逐步编辑的完整累计状态图。运行时只加载当前状态的一张图，完成阶段时切换成长前后两张完整图。编号课有 6 张状态图，音标课有 5 张；完成后另保留独立纪念物。
 

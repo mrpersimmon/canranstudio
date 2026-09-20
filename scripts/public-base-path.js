@@ -12,7 +12,7 @@ function relocateSource(source, relative, basePath = '/') {
   if (basePath === '/' || !/\.(?:html|js|css|json|svg)$/.test(relative)) return source;
   const prefix = basePath.slice(0, -1);
   let result = source
-    .replace(/(["'`])\/(?=(?:assets|core|unit49-50|lesson\d+|soundmark|home|poc)\/|\$\{|[?#])/g, '$1' + basePath)
+    .replace(/(["'`])\/(?=(?:assets|core|unit\d+-\d+|lesson\d+|soundmark|home|poc)\/|\$\{|[?#])/g, '$1' + basePath)
     .replace(/(\b(?:href|src)\s*=\s*["'])\/(?=["'])/g, '$1' + basePath)
     .replace(/(\blocation\.(?:assign|replace)\(\s*["'])\/(?=["'])/g, '$1' + basePath)
     .replace(/(url\(\s*)\/(?=[a-z])/g, '$1' + basePath);

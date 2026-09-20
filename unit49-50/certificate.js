@@ -1,14 +1,14 @@
 (function (root) {
   'use strict';
   const core = root.CanranCore;
-  const copy = {
+  const defaultCopy = {
     title: '晚餐采购小达人',
     course: '晚餐采购大冒险 · Lesson 49–50',
     completion: '完成 Lesson 49–50 单元练习',
     thanks: '谢谢你，晚餐准备好啦！',
     reward: '15 颗星 · 五关完成'
   };
-  const badges = [
+  const defaultBadges = [
     { title: '采购准备', icon: 'audio', color: '#FFF0BC' },
     { title: '肉店小剧场', icon: 'book', color: '#FBE2CD' },
     { title: '帮忙买晚餐', icon: 'give', color: '#E1EDD5' },
@@ -27,7 +27,13 @@
   };
   const displayDate = value => new Date(value).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
-  function mount({ element, initialName, initialIssuedAt, canClaim, onClaim }) {
+  function mount({ element, initialName, initialIssuedAt, canClaim, onClaim, design = {} }) {
+    const copy = { ...defaultCopy, ...design.copy };
+    const badges = design.badges || defaultBadges;
+    const characters = design.characters || ['butcher', 'bird'];
+    const characterLabels = design.characterLabels || ['肉店老板', '伯德夫人'];
+    const drawIcon = design.icon || icon;
+    const defaultName = design.defaultName || '采购小学徒';
     let issuedAt = typeof initialIssuedAt === 'string' && Number.isFinite(Date.parse(initialIssuedAt)) ? initialIssuedAt : null;
     let exportTicket = 0, downloadUrl = null;
     const panel = node('div', '', 'unit-certificate');
@@ -48,7 +54,7 @@
       if (!canClaim()) return;
       issuedAt ||= new Date().toISOString();
       const recipient = name.value.trim();
-      nameOut.textContent = recipient || '采购小学徒';
+      nameOut.textContent = recipient || defaultName;
       nameOut.classList.toggle('is-long', Array.from(nameOut.textContent).length > 10);
       dateOut.textContent = '领取于 ' + displayDate(issuedAt);
       onClaim({ name: recipient, issuedAt });
@@ -61,7 +67,7 @@
     const dialog = node('dialog', '', 'unit-dialog certificate-dialog'); dialog.id = 'certificateDialog';
     dialog.setAttribute('aria-labelledby', 'certificateTitle');
     const header = node('div', '', 'unit-dialog-heading');
-    const title = node('h2', '采购纪念'); title.id = 'certificateTitle';
+    const title = node('h2', design.dialogTitle || '采购纪念'); title.id = 'certificateTitle';
     header.append(title, button('关闭', () => dialog.close(), 'workspace-back'));
     const paper = node('article', '', 'certificate-paper'); paper.setAttribute('aria-label', '我的冒险纪念证书');
     const stars = node('div', '', 'certificate-crown'); stars.setAttribute('aria-hidden', 'true');
@@ -71,7 +77,7 @@
     const recipient = node('div', '', 'certificate-recipient');
     const nameOut = node('p', '', 'certificate-recipient-name'); nameOut.id = 'certificateName';
     recipient.append(node('span', '送给', 'certificate-to'), nameOut);
-    heroes.append(icon('butcher', '肉店老板'), recipient, icon('bird', '伯德夫人'));
+    heroes.append(drawIcon(characters[0], characterLabels[0]), recipient, drawIcon(characters[1], characterLabels[1]));
     paper.append(heroes, node('p', copy.completion, 'certificate-completion'), node('p', copy.thanks, 'certificate-thanks'));
     const stamps = node('ol', '', 'certificate-badges'); stamps.setAttribute('aria-label', '我的五关徽章');
     badges.forEach(badge => {
@@ -110,11 +116,19 @@
         await Promise.all([...paper.querySelectorAll('img')].map(async image => {
           await image.decode(); images.set(image.getAttribute('src').split('/').pop().replace('.svg', ''), image);
         }));
-        const canvas = drawCertificate({ name: nameOut.textContent, date: dateOut.textContent, images });
+        const paperStyle = root.getComputedStyle(paper);
+        const theme = {
+          page: root.getComputedStyle(document.body).backgroundColor,
+          paper: paperStyle.backgroundColor,
+          band: root.getComputedStyle(paper, '::before').backgroundColor,
+          accent: root.getComputedStyle(paper.querySelector('.certificate-award')).color,
+          edge: paperStyle.getPropertyValue('--certificate-edge').trim() || '#DDBB87'
+        };
+        const canvas = drawCertificate({ name: nameOut.textContent, date: dateOut.textContent, images, copy, badges, characters, theme });
         const blob = await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('No image')), 'image/png'));
         if (ticket !== exportTicket || !dialog.open || !canClaim()) return;
         discardDownload(); downloadUrl = URL.createObjectURL(blob);
-        const link = document.createElement('a'); link.download = 'Lesson49-50-采购纪念.png'; link.href = downloadUrl; link.click();
+        const link = document.createElement('a'); link.download = design.fileName || 'Lesson49-50-采购纪念.png'; link.href = downloadUrl; link.click();
         saveStatus.textContent = '纪念图片已保存，快给家人看看吧！';
       } catch {
         if (ticket === exportTicket) saveStatus.textContent = '图片暂时没有生成，请重试，或使用打印证书。';
@@ -139,10 +153,10 @@
     };
   }
 
-  function drawCertificate({ name, date, images }) {
+  function drawCertificate({ name, date, images, copy, badges, characters, theme }) {
     const canvas = document.createElement('canvas'); canvas.width = 1440; canvas.height = 1100;
     const ctx = canvas.getContext('2d');
-    const brown = '#4A3226', paper = '#FFFDF6', gold = '#F4A72C';
+    const brown = '#4A3226', paper = theme.paper, gold = '#F4A72C';
     function box(x, y, width, height, radius, fill, stroke = '', lineWidth = 3) {
       ctx.beginPath(); ctx.roundRect(x, y, width, height, radius); ctx.fillStyle = fill; ctx.fill();
       if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lineWidth; ctx.stroke(); }
@@ -157,17 +171,14 @@
       const w = image.naturalWidth * scale, h = image.naturalHeight * scale;
       ctx.drawImage(image, x + (width - w) / 2, y + (height - h) / 2, w, h);
     }
-    ctx.fillStyle = '#FFF6E9'; ctx.fillRect(0, 0, 1440, 1100);
+    ctx.fillStyle = theme.page; ctx.fillRect(0, 0, 1440, 1100);
     box(24, 24, 1392, 1052, 34, paper, brown, 6);
-    box(44, 44, 1352, 1012, 22, paper, '#DDBB87', 2);
-    // The striped frame belongs to the shop's existing UI, not new character art.
-    ctx.save(); ctx.beginPath(); ctx.roundRect(24, 24, 1392, 44, [34, 34, 0, 0]); ctx.clip();
-    for (let x = 24; x < 1416; x += 104) { ctx.fillStyle = '#E8503A'; ctx.fillRect(x, 24, 52, 44); }
-    ctx.restore();
+    box(44, 44, 1352, 1012, 22, paper, theme.edge, 2);
+    box(27, 27, 1386, 40, [30, 30, 0, 0], theme.band);
     text(copy.course, 720, 112, 30, '#795F4B');
     art('star', 615, 172, 48); art('star', 682, 150, 76); art('star', 777, 172, 48);
-    text(copy.title, 720, 286, 84, '#BA3929', true);
-    art('butcher', 125, 354, 205, 238); art('bird', 1110, 354, 205, 238);
+    text(copy.title, 720, 286, 84, theme.accent, true);
+    art(characters[0], 125, 354, 205, 238); art(characters[1], 1110, 354, 205, 238);
     text('送给', 720, 374, 30, '#795F4B');
     text(name, 720, 449, 92, brown, true, 740);
     box(453, 504, 534, 8, 4, gold);

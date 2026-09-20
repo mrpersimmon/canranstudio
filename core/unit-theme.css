@@ -1,0 +1,115 @@
+/* v1.17: unit identity and activity surfaces. Shared controls keep one meaning. */
+.unit-workspace{
+ --unit-page:#FFF9F4;--unit-wash:#FCEBDD;--unit-line:#E6C4AC;--unit-accent:#98513E;
+ --unit-scene:url('../assets/unit49-50/story-background.webp');
+ --shelf-paper:#FFF5E5;--shelf-line:#E8CDA5;--paper:#FFFDF8;--cream:#FFF8EE;
+ --action-green:#527B3D;--green-d:#466D35;
+ background:var(--unit-page);
+}
+.unit12-workspace{
+ --unit-page:#F7FAFC;--unit-wash:#EAF3F8;--unit-line:#BDD7E6;--unit-accent:#3F6F84;
+ --unit-scene:url('../assets/unit1-2/story-background.webp');
+}
+.unit-workspace #topbar{border-bottom:2px solid var(--unit-line);box-shadow:0 2px 0 #4a322609}
+.unit-workspace #logo,.unit-workspace .chapter-number,.unit-workspace .unit-cover h1{color:var(--unit-accent)}
+.unit-workspace .chapter-links{border-top-color:var(--unit-line)}
+.unit-workspace .chapter-links a[aria-current]{background:var(--unit-wash);color:var(--unit-accent);border-radius:12px 12px 0 0}
+.unit-workspace .chapter-links a[aria-current]::after{background:var(--unit-accent)}
+.unit-workspace .chapter-select select{background:var(--paper);border-color:var(--unit-line)}
+.unit-workspace .chapter-heading{border-color:var(--unit-line)}
+.unit-workspace .unit-cover{margin:22px auto 4px;border-radius:24px;background:var(--unit-wash)}
+.unit-workspace .btn-green{background:var(--action-green)}
+.unit-workspace button.btn:disabled{background:#E5E0D6;border-color:#AAA195;color:#746C61;box-shadow:0 3px 0 #AAA195;opacity:1}
+.unit-workspace .practice-options .opt-btn:disabled{opacity:1}
+
+/* Outer surfaces are quiet; the dark outlines belong to things you can press. */
+.unit-workspace .shop-stage{
+ --stage-pad-x:30px;--stage-pad-y:24px;
+ padding:var(--stage-pad-y) var(--stage-pad-x) 26px;
+ border:2px solid var(--unit-line);background:var(--paper);box-shadow:0 3px 0 #4a322609;
+}
+.unit-workspace .stage-heading{
+ margin:calc(-1 * var(--stage-pad-y)) calc(-1 * var(--stage-pad-x)) 20px;
+ padding:18px var(--stage-pad-x);border-bottom:1px solid var(--unit-line);
+ border-radius:22px 22px 0 0;background:var(--unit-wash);
+}
+.unit-workspace .stage-heading>.shop-icon{width:42px;height:46px}
+.unit-workspace .stage-heading h3{font-size:26px}
+.unit-workspace :is(.stage-text,.stage-roles)::before{content:none}
+.unit-workspace .stage-words,.unit-workspace .stage-phrases,.unit-workspace .stage-pouch{
+ background:var(--shelf-paper);border-color:var(--shelf-line);
+}
+.unit-workspace :is(.stage-words,.stage-phrases,.stage-pouch)>.stage-heading{background:transparent;border-color:var(--shelf-line)}
+.unit-workspace .unit-word{border-width:2px;box-shadow:0 4px 0 var(--brown)}
+.unit-workspace .unit-word:hover:not([aria-expanded="true"]){background:#FFFBF3}
+.unit-workspace .word-controls{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:18px;width:min(620px,100%);border-color:var(--shelf-line);align-items:stretch;padding-top:20px}
+.unit-workspace #wordPageProgress{grid-column:2;grid-row:1;white-space:nowrap;align-self:center}
+.unit-workspace .word-controls .btn{grid-row:1}
+.unit-workspace .word-controls .btn:first-child{grid-column:1}
+.unit-workspace .word-controls .btn:last-child{grid-column:3}
+
+/* Backgrounds are illustrations; speech, characters and every control stay live. */
+.unit-workspace .stage-text{background:var(--unit-wash)}
+.unit-workspace .stage-text :is(#stage,.dialogue-stage){
+ display:grid;grid-template-columns:128px minmax(0,1fr) 128px;gap:16px;align-items:center;
+ max-width:none;margin:0;padding:42px 16px 12px;border:0;border-radius:18px;
+ background:var(--unit-scene) center / cover no-repeat;box-shadow:none;
+}
+.unit-workspace .stage-text :is(.char,.dialogue-actor){width:128px;grid-row:1;align-self:center;text-align:center;font-size:14px}
+.unit-workspace .stage-text #charButcher{grid-column:1}
+.unit-workspace .stage-text #charBird{grid-column:3}
+.unit-workspace .stage-text .name-tag{background:none;border:0;border-radius:0;box-shadow:none;padding:0;margin:0;font-weight:500}
+.unit-workspace .stage-text :is(.char>.shop-icon,.dialogue-actor>img){width:128px;height:178px;object-fit:contain}
+.unit-workspace .stage-text :is(#bubbleArea,.dialogue-log){
+ grid-column:2;grid-row:1;display:flex;flex-direction:column;gap:14px;
+ height:320px;min-height:0;margin:0;padding:14px 12px;
+ border:0;border-radius:16px;background:var(--paper);
+ overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;
+}
+.unit-workspace .stage-text .bubble-row{margin:0;flex:none}
+.unit-workspace .stage-text .bubble{max-width:94%;border:2px solid #CCAD8A;border-radius:16px;padding:12px;box-shadow:0 2px 0 #4a322612;background:#FFF8EC}
+.unit12-workspace .stage-text .man .bubble{border-color:#96BBD1;background:#E8F4FC}
+.unit-workspace .stage-text :is(.bird,.woman) .bubble{border-color:#A8C3A0;background:#EFF7EB}
+.unit-workspace .stage-text .btext{font-size:22px;line-height:1.4}
+.unit-workspace .stage-text .bname{color:#795E4B;font-size:12px;opacity:1}
+.unit-workspace .stage-text .bcn{font-size:16px}
+.unit-workspace .stage-text .bubble-row.is-playing .bubble{background:#FFF0B7;border-color:#B78533;box-shadow:0 2px 0 #4a322619}
+.unit-workspace .stage-text :is(.dialogue-status,#dialogueStatus){min-height:26px;font-size:15px;margin:0;padding:0;grid-column:1/-1}
+.unit-workspace .stage-text .stage-ctrl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;max-width:480px;margin:0 auto;padding-top:18px;border-color:var(--unit-line)}
+.unit-workspace .stage-text .stage-ctrl>.btn{grid-column:2;grid-row:1;min-height:52px;font-size:18px;padding:8px 12px;border-width:3px}
+.unit-workspace .stage-text .stage-tools{display:contents}
+.unit-workspace .stage-text .stage-tools>.btn:first-child{grid-column:1;grid-row:1;min-height:52px;font-size:18px;border-width:3px}
+.unit-workspace .stage-text .stage-tools>.btn:last-child{grid-column:1/-1;grid-row:2;justify-self:center;min-height:44px;padding:6px 18px}
+
+/* Celebration uses the unit colour, with one palette shared by HTML and export. */
+.unit-workspace .stage-certificate{background:#FFF6DC;border-color:#E2C58B;border-style:solid}
+.unit-workspace .stage-certificate>.stage-heading{background:transparent;border-color:#E2C58B}
+.unit-workspace .certificate-paper{--certificate-band:var(--unit-wash);--certificate-accent:var(--unit-accent);--certificate-edge:var(--unit-line);background:var(--paper);box-shadow:0 5px 0 var(--unit-line)}
+.unit-workspace .certificate-paper::before{background:var(--certificate-band);border-bottom:1px solid var(--certificate-edge)}
+.unit-workspace .certificate-paper .certificate-award{color:var(--certificate-accent)}
+
+@media(max-width:760px){
+ .unit-workspace .shop-stage{--stage-pad-x:20px;--stage-pad-y:20px}
+ .unit-workspace .unit-cover{border-radius:0;margin:0 0 4px}
+}
+@media(max-width:600px){
+ .unit-workspace .shop-stage{--stage-pad-x:14px;--stage-pad-y:16px}
+ .unit-workspace .stage-heading{padding-top:14px;padding-bottom:14px;gap:10px;border-radius:18px 18px 0 0}
+ .unit-workspace .stage-heading h3{font-size:23px}
+ .unit-workspace .stage-heading>.shop-icon{width:32px;height:38px}
+ .unit-workspace .stage-text :is(#stage,.dialogue-stage){grid-template-columns:42px minmax(0,1fr) 42px;gap:4px;padding:32px 4px 8px;margin:0 -6px}
+ .unit-workspace .stage-text :is(.char,.dialogue-actor){width:42px;grid-row:1;font-size:12px}
+ .unit-workspace .stage-text :is(.char>.shop-icon,.dialogue-actor>img){width:42px;height:90px}
+ .unit-workspace .stage-text :is(#bubbleArea,.dialogue-log){grid-column:2;grid-row:1;height:310px;padding:8px 5px;scrollbar-gutter:auto}
+ .unit-workspace .stage-text .bubble{max-width:100%;padding:8px 6px}
+ .unit-workspace .stage-text .btext{font-size:18px;gap:4px;overflow-wrap:anywhere}
+ .unit-workspace .stage-text .btext>.shop-icon{width:20px;height:20px}
+ .unit-workspace .stage-text .bcn{font-size:15px}
+ .unit-workspace .stage-text .name-tag{font-size:12px;line-height:1.4;padding:3px 0;display:block;max-width:2.8em;margin:auto}
+ .unit-workspace .stage-text .stage-ctrl>.btn,.unit-workspace .stage-text .stage-tools>.btn:first-child{font-size:16px}
+ .unit-workspace .word-controls{gap:10px;font-size:14px}
+ .unit-workspace .word-controls .btn{padding:8px 4px;font-size:15px}
+}
+@media print{
+ .unit-workspace .certificate-paper{box-shadow:none}
+}

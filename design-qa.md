@@ -1,23 +1,52 @@
-# 地标验收台：沉浸预览检查
+# 双单元主题视觉复核
 
-历史检查记录。原结论：通过；本次文档整理未重新执行这些页面测试。
+final result: passed
 
-## 当时的结果
+本轮没有未处理的 P0／P1／P2 项。范围是已确认的 B＋适度 C 视觉方向；共用标准见[设计标准 v1.17](docs/butcher-version/2026-09-20-1325-v1.17-教学单元设计标准与验收清单.md)，实际功能与验证范围见[实施记录](docs/butcher-version/2026-09-20-1521-v1.17-双单元主题实施与验收.md)。
 
-当前地点用铭牌暖光和小猫／旗帜标记，未完成建筑保持未点亮。手机单页和电脑双页保留比例；操作栏自动隐藏，触摸、鼠标、键盘或焦点活动可唤回。
+## 比较对象与证据
 
-修复了三处问题：过大的地标光圈与偏移底圈、原生全屏立即取消时连带关闭沉浸预览、手机小猫旗帜过小。标记宽度由地图的 17% 调到 21%，锚点不变。
+- source visual truth：[批准的双单元视觉稿](docs/butcher-version/evidence/2026-09-20-1325-v1.17/单元视觉对照稿.png)，1122 × 1402 像素。
+- implementation：本地 `/unit1-2/` 与 `/unit49-50/`；浏览器视口 1100 × 900 CSS 像素，设备像素比 1。完整活动截图宽 1000 像素，另有 320 像素手机状态；原布局回归覆盖 390、768、1280 像素及短屏。
+- 主对照使用上述页面测试截图；内置浏览器补图实际为 1085 × 888 像素，不混作一对一尺寸依据。各图片尺寸见[尺寸记录](docs/butcher-version/evidence/2026-09-20-1521-v1.17/截图尺寸.json)。
+- normalization：设计稿按活动与单元裁出宽 539 像素的区域；实际活动等比缩至相同宽度后并排，不拉伸、不以浏览器外框比较。小剧场是两句已播、未完成；图鉴是第一组正面；听辨是第一题未作答。
+- full-view comparison：[小剧场](docs/butcher-version/evidence/2026-09-20-1521-v1.17/story-对照.png)、[图鉴](docs/butcher-version/evidence/2026-09-20-1521-v1.17/words-对照.png)、[听辨](docs/butcher-version/evidence/2026-09-20-1521-v1.17/listen-对照.png)。均把原稿和实现在同一张图中查看。
+- focused evidence：另以原始尺寸查看[听辨控件](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit1-2-listen.png)、[故事两句与按钮](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit49-50-story.png)、[手机对白](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit49-50-story-320.png)，检查字形、选项描边、当前喇叭和按钮间距。
+- 内置浏览器证据：[图鉴](docs/butcher-version/evidence/2026-09-20-1521-v1.17/iab-unit1-2-words.png)、[听辨](docs/butcher-version/evidence/2026-09-20-1521-v1.17/iab-unit1-2-listen.png)、[采购故事完成状态](docs/butcher-version/evidence/2026-09-20-1521-v1.17/iab-unit49-50-story.png)。已检查真实点击、键盘翻卡、桌面与手机布局；控制台未见错误或警告。
 
-## 证据
+设计稿不是 539 像素网页的精确尺寸说明。归一化图只用来比较场景、分组和层次；字号、点击面积另外在原始 CSS 尺寸核对。原稿中的词序、题量、图标近似和短标题不作为教学来源。运行页保留原课的音标、题名、固定高度历史对白、次要“重新上演”和真实随机选项次序。
 
-- [选定画面](docs/designs/adventure-map/golden-route-page-49-52/selection-v5-glowing-plaque-flag.png)
-- [手机对比](docs/designs/adventure-map/golden-route-page-49-52/design-qa-comparison-v5-immersive-mobile.png)
-- [手机实现](docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-immersive-mobile.png)
-- [电脑实现](docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-immersive-desktop.png)
-- [实际孩子端](docs/designs/adventure-map/golden-route-page-49-52/implementation-v5-child-map-mobile.png)
+## 发现与修正历史
 
-场景为 Lesson 51、第 3 阶段、旅程预览。源图 1023 × 1537 等比缩至 562 × 844 后，与 390 × 844 手机截图比较，未拉伸裁切。
+| 轮次 | 发现 | 修正与再次验证 |
+| --- | --- | --- |
+| 1 | [P2] 原界面都是暖色粗外框，容器与按钮同样显眼。 | 引入浅蓝／暖桃主题，外框减弱，图鉴浅杏，答题区暖白。对照图和主题页面检查通过。 |
+| 2 | [P1] 手机采购故事中，旧规则把伯德夫人放进对白列。 | 显式指定两侧人物列，移除旧名牌外观；320 像素边界检查由失败转为通过，最终手机图已复查。 |
+| 3 | [P2] 新页面证书与 PNG 导出配色不一致。 | 绘图读取当前证书配色；两单元的真实下载像素核对由失败转为通过，PNG 与打印页目视通过。 |
+| 4 | [P2] 答对文字对比只有约 3.66:1，角色小字因透明度偏淡。 | 答对文字约 5.90:1、主按钮白字约 4.93:1；角色名取消半透明，并重新截图。 |
+| 5 | [P2] 手机末组长按钮高出另一侧 14 像素，活动名折行不完整。 | 两侧随行等高，活动名完整换行；补查首组和末组真实页面。97 项回归后，最后补跑 13 项主题与布局检查通过。[修正前后并排图](docs/butcher-version/evidence/2026-09-20-1521-v1.17/末组按钮-对照.png)与[内置浏览器复查](docs/butcher-version/evidence/2026-09-20-1521-v1.17/iab-words-last.png)均通过目视检查。 |
 
-原记录：24 项浏览器检查通过，控制台无错误；覆盖进入／退出、F 与 Esc、左右切阶段、自动隐藏、数据隔离和加载。检查尺寸含 390 × 844、466 × 980、1440 × 1000。
+## 必查的五个方面
 
-仍需确认不同真实浏览器的系统全屏行为；已验证的窗口内沉浸显示作为回退。完整原参数见[原文备份](docs/archive/2026-09-17-docs-before-simplification.zip)。
+| 方面 | 复核结论 |
+| --- | --- |
+| 字体与层级 | 保留现有快乐体标题、Baloo 英文和中文后备字体。原生尺寸下标题、正文、角色名、按钮能区分；长句在对白内部折行，长名字证书不越界。 |
+| 间距与布局 | 两侧人物、中央对白、下方操作稳定；图鉴翻页一行；主次结束按钮沿用统一组件。手机长历史内部滑动，不把整页操作区推走。 |
+| 色彩与状态 | 浅蓝街景、暖桃店景明显区分；图鉴浅杏、答题暖白。选中、正确、错误、禁用及焦点规则不随主题改变；未选选项不提示答案。 |
+| 图像与素材 | 复用原人物和教学 SVG；新背景由内置 image_gen 生成并检查，无占位图、代码仿画或损坏图。按比例显示，装饰主要在两侧。 |
+| 文案与内容 | 教材内容、题目、音频和进度版本保持原值。无装饰英文或归属暗示；并未把设计示意中的词序和图标近似覆盖进题库。 |
+
+## 图片与打印
+
+真实保存的 [Lesson 1–2 PNG](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit1-2-certificate.png) 和 [Lesson 49–50 PNG](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit49-50-certificate.png) 均为 1440 × 1100 像素；名字、两侧人物、五关徽章和主题色可见。
+
+已查看实际打印渲染：[礼貌证书](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit1-2-print.png)、[采购证书](docs/butcher-version/evidence/2026-09-20-1521-v1.17/unit49-50-print.png)、[七句练习纸](docs/butcher-version/evidence/2026-09-20-1521-v1.17/writing-print.png)。均为单页、无文字裁切；纸张与 PNG 的长宽比不同，打印留白不作像素一致要求。
+
+## 完成与后续
+
+- [x] 两课页面、导航单元卡片和证书采用主题。
+- [x] 对照图、原生尺寸控件、手机页、PNG 与打印逐一检查。
+- [x] 核心流程、旧进度、页面错误、点击与键盘回归通过。
+- [x] 新素材、生成提示词、运行证据与标准入口归档。
+
+P3：桌面街景为适应对白高度会等比裁掉部分边缘树木与路灯；背景仍可辨识且不影响阅读。此处不增加新场景控件。儿童是否更喜欢这套视觉，以及课堂效果，仍待真实使用反馈；本报告不替代教学验收或发布验收。

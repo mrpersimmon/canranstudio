@@ -49,6 +49,9 @@ test('领奖后保留姓名与首次领取日，五关徽章、角色和真实 P
   const png = await fs.readFile('output/playwright/certificate-design/03-export.png');
   expect(png.subarray(1, 4).toString()).toBe('PNG');
   expect(png.readUInt32BE(16)).toBe(1440); expect(png.readUInt32BE(20)).toBe(1100);
+  const band = await dialog.locator('.certificate-paper').evaluate(el => getComputedStyle(el, '::before').backgroundColor.match(/\d+/g).slice(0, 3).map(Number));
+  const pixel = await require('sharp')(png).extract({left:100,top:40,width:1,height:1}).removeAlpha().raw().toBuffer();
+  expect([...pixel], '保存的纪念图片与页面使用同一单元主题').toEqual(band);
   await expect(dialog.getByRole('status')).toContainText('纪念图片已保存');
   await dialog.screenshot({ path: 'output/playwright/certificate-design/04-dialog.png' });
   await dialog.getByRole('button', { name: '关闭', exact: true }).click();

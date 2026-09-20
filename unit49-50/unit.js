@@ -21,7 +21,11 @@
     }
     $('#lessonWorkspace').append(section);
   }
-  function navigate(id){location.hash=id;}
+  function navigate(id){
+    // Scrolling back to the cover keeps the hash; resume must still reposition.
+    if(location.hash==='#'+id)route();
+    else location.hash=id;
+  }
   function markLocation(id){
     if(!routeIds.has(id))return;
     if(activeActivity!==id){audio.stop();root.dispatchEvent(new Event('lesson49:leave-activity'));activeActivity=id;}
@@ -134,7 +138,7 @@
     const character=node('div','','char');character.id=id;character.append(icon(art),node('div',title,'name-tag'));theatre.append(character);
   }
   const log=node('div');log.id='bubbleArea';log.setAttribute('role','log');log.setAttribute('aria-label','课文对话');log.setAttribute('aria-live','off');log.tabIndex=0;
-  const dialogueStatus=node('p','','fb');dialogueStatus.id='dialogueStatus';dialogueStatus.setAttribute('role','status');theatre.append(log,dialogueStatus);
+  const dialogueStatus=node('p','','fb');dialogueStatus.id='dialogueStatus';dialogueStatus.setAttribute('role','status');theatre.append(log);
   const dialogueControls=node('div','','stage-ctrl'),tools=node('div','','stage-tools');
   const nextLineButton=button('开始听课文',advanceDialogue,'btn btn-green');nextLineButton.id='nextBtn';
   const replayLine=button('重听本句',()=>{if(dialogue.i<0)advanceDialogue();else playLine(dialogue.i);},'btn btn-yellow');
@@ -142,7 +146,7 @@
   const textFinish=node('div','','practice-finish');textFinish.hidden=true;
   const textFinishActions=node('div','','practice-finish-actions');textFinishActions.setAttribute('role','group');textFinishActions.setAttribute('aria-label','完成后的操作');
   textFinishActions.append(button('再听一遍',resetDialogue,'btn btn-yellow'));nextStation('text',textFinishActions);textFinish.append(node('p','故事听完了！'),textFinishActions);
-  textHost.append(theatre,dialogueControls,textFinish);
+  textHost.append(theatre,dialogueStatus,dialogueControls,textFinish);
   let dialogue={i:-1,heard:[],done:false},dialogueGeneration=0;
   function saveDialogue(){practice.activity('unitDialogue',{...dialogue,signature:signatures.text});}
   function clearPlaying(){log.querySelectorAll('.bubble-row').forEach(row=>{row.classList.remove('is-playing');row.querySelector('.btext').setAttribute('aria-busy','false');});theatre.querySelectorAll('.char').forEach(character=>character.classList.remove('speaking'));}

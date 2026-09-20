@@ -1,0 +1,92 @@
+'use strict';
+const {test,expect}=require('@playwright/test');
+test.use({reducedMotion:'reduce',actionTimeout:5000});
+async function audioBoundary(page) {
+  await page.addInitScript(()=>{
+    window.Audio=class extends EventTarget { constructor(src){super();this.src=src;this.currentTime=0;} play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();} pause(){} };
+  });
+}
+async function answer(room,value,next='下一题') {
+  await room.locator('.practice-options').getByRole('button',{name:value,exact:true}).click();
+  await room.getByRole('button',{name:'检查答案',exact:true}).click();
+  await expect(room.getByRole('status').filter({hasText:'答对了！'})).toBeVisible();
+  if(next)await room.getByRole('button',{name:next,exact:true}).click();
+}
+for(const width of [320,390,768,1280]) {
+  test(`${width} 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动`,async({page})=>{
+    await audioBoundary(page);await page.setViewportSize({width,height:740});
+    const errors=[];page.on('pageerror',error=>errors.push(error.message));
+    await page.goto('/unit1-2/#learn/text');await page.evaluate(()=>document.fonts.ready);
+    const story=page.locator('.stage-text');
+    const footerY=()=>story.locator('.stage-ctrl').evaluate(el=>el.getBoundingClientRect().top+scrollY);
+    const before=await footerY();
+    await story.getByRole('button',{name:'开始听课文',exact:true}).click();
+    for(let i=1;i<7;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
+    expect(await footerY()).toBeCloseTo(before,0);
+    await story.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();
+    expect(await footerY()).toBeCloseTo(before,0);
+    await story.screenshot({path:`output/playwright/unit1-2-story-${width}.png`});
+    await page.goto('/unit1-2/#learn/words');const words=page.locator('.stage-words');
+    await words.screenshot({path:`output/playwright/unit1-2-words-${width}.png`});
+    await page.goto('/unit1-2/#learn/listen');const listen=page.locator('.stage-listen');
+    await listen.screenshot({path:`output/playwright/unit1-2-listen-${width}.png`});
+    await page.goto('/unit1-2/#learn/manners');const room=page.locator('.stage-manners');
+    const row=room.getByRole('group',{name:'作答操作',exact:true});
+    const rowY=()=>row.evaluate(el=>el.getBoundingClientRect().top+scrollY);const initialY=await rowY();
+    const hint=room.getByRole('button',{name:'给点线索',exact:true});const check=room.getByRole('button',{name:'检查答案',exact:true});
+    const h=await hint.boundingBox(),c=await check.boundingBox();expect(h.x+h.width).toBeLessThan(c.x);
+    await hint.click();expect(await rowY()).toBeCloseTo(initialY,0);
+    await room.getByRole('button',{name:'Pardon?',exact:true}).click();await check.click();
+    expect(await rowY()).toBeCloseTo(initialY,0);
+    await room.getByRole('button',{name:'再试一次',exact:true}).click();
+    await answer(room,'Excuse me!',null);expect(await rowY()).toBeCloseTo(initialY,0);
+    await room.getByRole('button',{name:'下一题',exact:true}).click();
+    await answer(room,'Pardon?');await answer(room,'Yes, it is.');await answer(room,'Thank you very much.','完成这一站');
+    const finish=room.getByRole('group',{name:'完成后的操作',exact:true});
+    await expect(finish.getByRole('button')).toHaveCount(2);
+    for(const control of await finish.getByRole('button').all()){
+      const b=await control.boundingBox();expect(b.x).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width);expect(b.height).toBeGreaterThanOrEqual(44);
+    }
+    await room.screenshot({path:`output/playwright/unit1-2-finish-${width}.png`});
+    await page.goto('/unit1-2/#learn/trans');await page.locator('.stage-trans').screenshot({path:`output/playwright/unit1-2-order-${width}.png`});
+    await page.goto('/unit1-2/#learn/phrases');await page.locator('.stage-phrases').getByText('换个物品问一问',{exact:true}).click();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+    expect(errors).toEqual([]);
+  });
+}
+
+test('词块撤回、错误、刷新、修正和末题都沿用同一行为，历史分数不能答未来题',async({page})=>{
+  await audioBoundary(page);await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans');
+  const bank=room.getByRole('group',{name:'待选词块',exact:true}),selected=room.getByRole('group',{name:'已选词块',exact:true});
+  const order=await bank.getByRole('button').allTextContents();
+  await bank.getByRole('button',{name:'this',exact:true}).click();
+  await selected.getByRole('button',{name:'撤回 this',exact:true}).click();
+  await expect(bank.getByRole('button',{name:'this',exact:true})).toBeEnabled();
+  for(const word of ['this','Is','your','pen?'])await bank.getByRole('button',{name:word,exact:true}).click();
+  await page.reload();expect(await bank.getByRole('button').allTextContents()).toEqual(order);
+  await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+  await room.getByRole('button',{name:'再试一次',exact:true}).click();expect(await bank.getByRole('button').allTextContents()).toEqual(order);
+  for(const word of ['Is','this','your','pen?'])await bank.getByRole('button',{name:word,exact:true}).click();
+  await room.getByRole('button',{name:'检查答案',exact:true}).click();
+  await page.reload();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');
+  await room.getByRole('button',{name:'下一题',exact:true}).click();
+  await expect(selected.getByRole('button')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  for(const words of [['Yes,','it','is.'],['Thank','you','very','much.']]){
+    for(const word of words)await bank.getByRole('button',{name:word,exact:true}).click();
+    await room.getByRole('button',{name:'检查答案',exact:true}).click();
+    await room.getByRole('button',{name:words[0]==='Yes,'?'下一题':'完成这一站',exact:true}).click();
+  }
+  await room.getByRole('button',{name:'再练一轮',exact:true}).click();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(selected.getByRole('button')).toHaveCount(0);
+});
+
+test('键盘可播放、查看帮助与关闭弹层，短屏换题能看到题干',async({page})=>{
+  await audioBoundary(page);await page.setViewportSize({width:390,height:400});
+  await page.goto('/unit1-2/#learn/words');const words=page.locator('.stage-words');
+  const card=words.getByRole('button',{name:'handbag',exact:true});await card.focus();await page.keyboard.press('Enter');await expect(card).toHaveAttribute('aria-expanded','true');
+  const help=words.getByRole('button',{name:'怎么玩',exact:true});await help.focus();await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog',{name:'物品小图鉴',exact:true})).toBeVisible();await page.keyboard.press('Escape');await expect(help).toBeFocused();
+  await page.goto('/unit1-2/#learn/ask');const room=page.locator('.stage-ask');
+  await answer(room,'Is this your pen?');
+  await expect(room.getByRole('heading',{name:'想问对方“这是你的铅笔吗？”，怎样说？',exact:true})).toBeInViewport();
+});

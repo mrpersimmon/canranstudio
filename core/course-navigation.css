@@ -10,6 +10,11 @@ h1,h2{font-family:'ZCOOL KuaiLe','PingFang SC',sans-serif;font-weight:400}h1,h2,
 main{max-width:1080px;margin:auto;padding:36px 24px 24px}.page-heading{margin-bottom:25px}.page-heading p{font-size:14px;color:var(--muted);margin-bottom:8px}.page-heading h1{font-size:34px;line-height:1.25}
 .featured-course{position:relative;overflow:hidden;display:grid;grid-template-columns:1.12fr 1fr;align-items:center;gap:20px;border:3px solid var(--brown);border-radius:24px;background:var(--paper);padding:40px 36px 34px;box-shadow:0 6px 0 var(--brown)}
 .featured-course:before{content:'';position:absolute;inset:0 0 auto;height:11px;background:repeating-linear-gradient(90deg,var(--red) 0 38px,var(--paper) 38px 76px);border-bottom:2px solid var(--brown)}
+.featured-course+.featured-course{margin-top:26px}
+.featured-course[data-unit]{--unit-wash:#FCEBDD;--unit-line:#E6C4AC;--unit-accent:#98513E;background:var(--unit-wash);border:2px solid var(--unit-line);box-shadow:0 4px 0 #4a322612;padding-top:34px}
+.featured-course[data-unit="unit1-2"]{--unit-wash:#EAF3F8;--unit-line:#BDD7E6;--unit-accent:#3F6F84}
+.featured-course[data-unit]::before{content:none}
+.featured-course[data-unit] .featured-copy h2{color:var(--unit-accent)}
 .lesson-label{font-size:16px;line-height:1.2;color:var(--muted);margin-bottom:12px}.featured-copy h2{font-size:36px;line-height:1.25;color:#C93A28}.course-intro{margin-top:14px;font-size:16px}.resume-location{margin-top:10px;font-size:14px;color:var(--muted)}
 .primary-button{display:inline-flex;align-items:center;justify-content:center;min-height:56px;min-width:200px;padding:10px 24px;margin-top:24px;border:3px solid var(--brown);border-radius:999px;background:var(--red);color:white;font-size:21px;font-weight:800;box-shadow:0 5px 0 var(--brown)}
 .featured-art{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0}.actor{width:29%;height:190px;object-fit:contain}.food-cards{width:38%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px}.food-cards img{width:calc(50% - 3px);height:64px;object-fit:contain}.food-cards img:last-child{width:56%;height:80px}

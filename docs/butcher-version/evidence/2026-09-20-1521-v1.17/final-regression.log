@@ -1,0 +1,105 @@
+
+Running 97 tests using 1 worker
+
+(node:91342) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/97] tests/e2e/butcher-navigation.spec.js:4:1 › 首页直接进入组合单元，单课入口不需要经过城区地图
+[2/97] tests/e2e/butcher-navigation.spec.js:18:1 › 继续学习回到实际活动，组合单元不冒用单课星星且打开首页不改答题草稿
+[3/97] tests/e2e/butcher-navigation.spec.js:36:1 › 旧返回地址展开对应单课，错误参数和损坏草稿仍可正常开始
+[4/97] tests/e2e/butcher-navigation.spec.js:47:1 › 回到首页与浏览器返回都能继续刚才学习的关卡
+[5/97] tests/e2e/butcher-navigation.spec.js:60:1 › 手机平板和桌面均可点击课程，图标完整且无横向溢出
+[6/97] tests/e2e/butcher-navigation.spec.js:79:1 › 关闭脚本仍能选择全部课程，键盘可以展开单课
+[7/97] tests/e2e/butcher-navigation.spec.js:89:1 › 重开必须两次确认，取消保留单元记录，确认后不会恢复旧进度
+[8/97] tests/e2e/l49-v115-progress.spec.js:28:1 › 交接题每次答对立即填绿，4/4 答对即全绿，刷新与重练保持真实进度
+[9/97] tests/e2e/l49-v115-progress.spec.js:55:1 › 分拣答错不填绿，回练只补上原题，最后一次答对立刻满格
+[10/97] tests/e2e/l49-v115-progress.spec.js:83:1 › Lesson 49 的提示、选中和错答不会填绿，答对更新时操作按钮不跳动
+[11/97] tests/e2e/l49-v115-progress.spec.js:112:1 › 分拣间隔题重答不重复计数，再错则撤回该格，修正后恢复
+[12/97] tests/e2e/l49-v115-progress.spec.js:151:1 › 320 窄屏的 23 词进度完整可见，重听和刷新不增加正确数
+[13/97] tests/e2e/l49-v115-progress.spec.js:179:1 › 挑战跨题型、暂停、分段和刷新后保留进度，末题答对即十格全绿
+[14/97] tests/e2e/lesson-deployment.spec.js:19:3 › lesson49 点击词卡、听题与答对音效都在子目录真实播放
+[15/97] tests/e2e/lesson-deployment.spec.js:19:3 › unit49-50 点击词卡、听题与答对音效都在子目录真实播放
+[16/97] tests/e2e/lesson-deployment.spec.js:45:1 › lesson 子目录直接显示导航，组合单元和返回导航都留在子目录
+[17/97] tests/e2e/lesson-deployment.spec.js:64:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除
+[18/97] tests/e2e/lesson-deployment.spec.js:92:1 › lesson 中走完整单元并下载新版证书，返回导航能继续学习
+[19/97] tests/e2e/lesson-deployment.spec.js:107:1 › 旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以结束
+[20/97] tests/e2e/lesson-deployment.spec.js:124:1 › 手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航
+[21/97] tests/e2e/public-v1-boundary.spec.js:164:1 › every public V1 route is directly reachable and exposes indexable static metadata
+[22/97] tests/e2e/public-v1-boundary.spec.js:200:1 › public V1 runtime stays static, same-origin, cookieless, and identity-free
+[23/97] tests/e2e/public-v1-boundary.spec.js:240:1 › a growth reveal remains same-origin, cookieless, and identity-free
+[24/97] tests/e2e/public-v1-boundary.spec.js:262:3 › lesson49 waits for a user gesture and then uses a same-origin recording
+[25/97] tests/e2e/public-v1-boundary.spec.js:262:3 › unit49-50 waits for a user gesture and then uses a same-origin recording
+[26/97] tests/e2e/public-v1-boundary.spec.js:262:3 › unit1-2 waits for a user gesture and then uses a same-origin recording
+[27/97] tests/e2e/public-v1-boundary.spec.js:262:3 › lesson50 waits for a user gesture and then uses a same-origin recording
+[28/97] tests/e2e/public-v1-boundary.spec.js:262:3 › lesson51 waits for a user gesture and then uses a same-origin recording
+[29/97] tests/e2e/public-v1-boundary.spec.js:262:3 › lesson52 waits for a user gesture and then uses a same-origin recording
+[30/97] tests/e2e/public-v1-boundary.spec.js:262:3 › lesson54 waits for a user gesture and then uses a same-origin recording
+[31/97] tests/e2e/public-v1-boundary.spec.js:262:3 › soundmark waits for a user gesture and then uses a same-origin recording
+[32/97] tests/e2e/routes.spec.js:16:3 › / has a deterministic static file
+[33/97] tests/e2e/routes.spec.js:16:3 › /lesson49/ has a deterministic static file
+[34/97] tests/e2e/routes.spec.js:16:3 › /lesson50/ has a deterministic static file
+[35/97] tests/e2e/routes.spec.js:16:3 › /lesson51/ has a deterministic static file
+[36/97] tests/e2e/routes.spec.js:16:3 › /lesson52/ has a deterministic static file
+[37/97] tests/e2e/routes.spec.js:16:3 › /lesson53/ has a deterministic static file
+[38/97] tests/e2e/routes.spec.js:16:3 › /lesson54/ has a deterministic static file
+[39/97] tests/e2e/routes.spec.js:16:3 › /soundmark/ has a deterministic static file
+[40/97] tests/e2e/routes.spec.js:23:1 › /home/ remains a compatibility entry for plain static hosting
+[41/97] tests/e2e/routes.spec.js:30:1 › /home/ preserves query and hash through the compatibility redirect
+[42/97] tests/e2e/routes.spec.js:37:1 › course cards and course return links form a closed navigation loop
+[43/97] tests/e2e/routes.spec.js:53:1 › Lesson 49 audio is present below the Lesson 49 route
+[44/97] tests/e2e/smoke.spec.js:8:3 › / loads without an uncaught page error
+[45/97] tests/e2e/smoke.spec.js:8:3 › /home/ loads without an uncaught page error
+[46/97] tests/e2e/smoke.spec.js:8:3 › /lesson49/ loads without an uncaught page error
+[47/97] tests/e2e/smoke.spec.js:8:3 › /lesson50/ loads without an uncaught page error
+[48/97] tests/e2e/smoke.spec.js:8:3 › /lesson51/ loads without an uncaught page error
+[49/97] tests/e2e/smoke.spec.js:8:3 › /lesson52/ loads without an uncaught page error
+[50/97] tests/e2e/smoke.spec.js:8:3 › /lesson53/ loads without an uncaught page error
+[51/97] tests/e2e/smoke.spec.js:8:3 › /lesson54/ loads without an uncaught page error
+[52/97] tests/e2e/smoke.spec.js:8:3 › /soundmark/ loads without an uncaught page error
+[53/97] tests/e2e/unit-themes.spec.js:19:1 › 两单元有清晰的冷暖场景，图鉴与答题区有层次，选项和操作仍遵循同一视觉规则
+[54/97] tests/e2e/unit-themes.spec.js:51:3 › unit1-2 换主题保留已答题，继续后不代答，主按钮和反馈文字清晰可读
+[55/97] tests/e2e/unit-themes.spec.js:51:3 › unit49-50 换主题保留已答题，继续后不代答，主按钮和反馈文字清晰可读
+[56/97] tests/e2e/unit-themes.spec.js:85:3 › unit1-2 320 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[57/97] tests/e2e/unit-themes.spec.js:85:3 › unit49-50 320 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[58/97] tests/e2e/unit-themes.spec.js:85:3 › unit1-2 1100 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[59/97] tests/e2e/unit-themes.spec.js:85:3 › unit49-50 1100 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作
+[60/97] tests/e2e/unit1-2-audio.spec.js:21:1 › 偶数课十物问句都有可点读的完整示范，来自教材替换结构
+[61/97] tests/e2e/unit1-2-audio.spec.js:28:1 › 38 个录音均通过真实控件播放，词卡、两位角色与问句各自文字对应
+[62/97] tests/e2e/unit1-2-audio.spec.js:55:1 › 子目录真实听题与正误音效可播放，音频失败不会启用检查，恢复后可以重试
+[63/97] tests/e2e/unit1-2-certificate.spec.js:21:39 › 320 像素领奖、长名字、人物、首次日期与真实图片下载
+[64/97] tests/e2e/unit1-2-certificate.spec.js:21:39 › 390 像素领奖、长名字、人物、首次日期与真实图片下载
+[65/97] tests/e2e/unit1-2-certificate.spec.js:21:39 › 768 像素领奖、长名字、人物、首次日期与真实图片下载
+[66/97] tests/e2e/unit1-2-certificate.spec.js:21:39 › 1280 像素领奖、长名字、人物、首次日期与真实图片下载
+[67/97] tests/e2e/unit1-2-certificate.spec.js:34:1 › 图片失败有重试、空名字有称呼，证书与七句练习纸分别为单页打印
+[68/97] tests/e2e/unit1-2-certificate.spec.js:53:1 › 内容升版撤回旧完成凭据，旧证书不能冒充新题已经答完
+[69/97] tests/e2e/unit1-2-layout.spec.js:16:3 › 320 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[70/97] tests/e2e/unit1-2-layout.spec.js:16:3 › 390 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[71/97] tests/e2e/unit1-2-layout.spec.js:16:3 › 768 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[72/97] tests/e2e/unit1-2-layout.spec.js:16:3 › 1280 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[73/97] tests/e2e/unit1-2-layout.spec.js:58:1 › 词块撤回、错误、刷新、修正和末题都沿用同一行为，历史分数不能答未来题
+[74/97] tests/e2e/unit1-2-layout.spec.js:83:1 › 键盘可播放、查看帮助与关闭弹层，短屏换题能看到题干
+[75/97] tests/e2e/unit1-2-navigation.spec.js:5:3 › / 导航进入两个独立单元，分别继续，所有资源保留在正确路径
+[76/97] tests/e2e/unit1-2-navigation.spec.js:5:3 › /lesson/ 导航进入两个独立单元，分别继续，所有资源保留在正确路径
+[77/97] tests/e2e/unit1-2-navigation.spec.js:30:1 › 子目录重开清除两个单元，只影响该版本，取消不会清除任何记录
+[78/97] tests/e2e/unit1-2.spec.js:32:1 › Lesson 1–2 从课文开始，先听完整七句再回答归属问题，历史重听不替当前句完成
+[79/97] tests/e2e/unit1-2.spec.js:65:1 › 40 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书
+[80/97] tests/e2e/unit1-2.spec.js:141:1 › 21 张词卡点读且功能词有语境，11 词听辨逐题提交、末题即时全绿、重练不代答
+[81/97] tests/e2e/unit49-50-certificate.spec.js:32:1 › 领奖后保留姓名与首次领取日，五关徽章、角色和真实 PNG 都可见
+[82/97] tests/e2e/unit49-50-certificate.spec.js:68:38 › 320 像素下长名字不越界，徽章可读，保存和关闭可操作
+[83/97] tests/e2e/unit49-50-certificate.spec.js:68:38 › 390 像素下长名字不越界，徽章可读，保存和关闭可操作
+[84/97] tests/e2e/unit49-50-certificate.spec.js:68:38 › 768 像素下长名字不越界，徽章可读，保存和关闭可操作
+[85/97] tests/e2e/unit49-50-certificate.spec.js:90:1 › 只打印奖状本身，保留名字、角色和徽章，A4 单页无操作按钮
+[86/97] tests/e2e/unit49-50-certificate.spec.js:102:1 › 图像加载失败时提示重试；恢复后可保存，空名字有友好称呼
+[87/97] tests/e2e/unit49-50-certificate.spec.js:117:1 › 没有完成任务时只有待集齐徽章，不能领证，继续按钮到真实下一站
+[88/97] tests/e2e/unit49-50.spec.js:31:1 › 两课共用一个采购单元与词卡，旧课满星不会完成新单元
+[89/97] tests/e2e/unit49-50.spec.js:58:1 › 23 词连续听辨，新加入的词必须逐题作答，末题主动完成，重练不代答
+[90/97] tests/e2e/unit49-50.spec.js:90:1 › 课文必须听完再进入理解题，历史点读与刷新不代替当前句
+[91/97] tests/e2e/unit49-50.spec.js:122:1 › 区分喜好与当前需求，并保留 Written A 的六种否定结构
+[92/97] tests/e2e/unit49-50.spec.js:140:1 › 从空记录完成整个单元，只有末站结算后领证，保存与打印同一张单元证书
+[93/97] tests/e2e/unit49-50.spec.js:212:1 › 电脑和平板手机布局不溢出，翻组后新词卡可见，结束动作集中排列
+[94/97] tests/e2e/unit49-50.spec.js:260:1 › 在长页直接操作另一站后，刷新和封面的继续按钮回到该站
+[95/97] tests/e2e/unit49-50.spec.js:276:1 › 新增九词使用可播放的本地录音与完整图卡，听辨录音失败不能靠后备语音解锁检查
+[96/97] tests/e2e/unit49-50.spec.js:311:1 › 采购挑战延续原课的标题旁暂停，暂停和继续保留本题选择
+[97/97] tests/e2e/unit49-50.spec.js:325:1 › 从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文
+  97 passed (3.8m)
