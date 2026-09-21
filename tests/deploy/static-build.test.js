@@ -21,6 +21,8 @@ const PUBLIC_INPUTS = [
   'core',
   'unit49-50',
   'unit1-2',
+  'unit3-4',
+  'unit5-6',
   'assets',
   'poc'
 ];
@@ -90,6 +92,8 @@ async function writeSyntheticPublicRoot(root) {
     'home/index.html',
     'unit49-50/index.html',
     'unit1-2/index.html',
+    'unit3-4/index.html',
+    'unit5-6/index.html',
     'lesson49/index.html',
     'lesson49/audio/clip.mp3',
     'lesson50/index.html',
@@ -117,7 +121,7 @@ async function writeSyntheticPublicRoot(root) {
     await fs.mkdir(path.dirname(file), { recursive: true });
     const contents = relative.endsWith('.mp3')
       ? VALID_MP3_BYTES
-      : relative === 'index.html' || relative === 'unit49-50/index.html' || relative === 'unit1-2/index.html'
+      : relative === 'index.html' || /^unit\d+-\d+\/index\.html$/.test(relative)
         ? publicHtml('灿然英语公开课程')
         : relative;
     await fs.writeFile(file, contents);

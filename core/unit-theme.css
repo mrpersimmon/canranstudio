@@ -113,3 +113,7 @@
 @media print{
  .unit-workspace .certificate-paper{box-shadow:none}
 }
+
+.unit34-workspace{--unit-page:#FAF8FC;--unit-wash:#F1EDF8;--unit-line:#D1C1E3;--unit-accent:#705584;--unit-scene:url('../assets/unit3-4/story-background.svg')}
+.unit34-workspace .stage-text .visitor .bubble{border-color:#B4A0CD;background:#F2EDF9}
+.unit34-workspace .stage-text .attendant .bubble{border-color:#A8C3A0;background:#EFF7EB}

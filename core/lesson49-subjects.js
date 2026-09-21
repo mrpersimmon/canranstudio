@@ -30,6 +30,10 @@
     if (submissions.length < questions.length) return { q: questions[submissions.length], phase: 'base' };
     const { pending, last } = results(submissions);
     if (!pending.size) return null;
+    if (content.reviewMode === 'mistakes-only') {
+      const q = questions.filter(question => pending.has(question.id)).sort((a, b) => last.get(a.id) - last.get(b.id))[0];
+      return { q, phase: 'review' };
+    }
     // A repeated question is eligible only after two different OTHER questions
     // have been submitted. Correct interval questions can become pending again.
     const eligible = question => new Set(submissions.slice(last.get(question.id) + 1)
@@ -101,7 +105,7 @@
         actions.append(button('再练一轮', () => {
           archive(run, 'completed-run'); run = freshRun(); save(); render(); learning.revealQuestion(element);
         }, 'btn btn-yellow'));
-        finish.append(stamp, node('p', '分拣完成！'), node('p', `基础题首次答对 ${score} / 12`), actions);
+        finish.append(stamp, node('p', '分拣完成！'), node('p', `基础题首次答对 ${score} / ${questions.length}`), actions);
         element.append(finish); onComplete(); return;
       }
       const current = run.current;
@@ -113,7 +117,7 @@
       // Repeated interval questions retain their green fill until answered wrong.
       const solved = questions.map(question => last.has(question.id) && !pending.has(question.id));
       const progress = learning.progressLabel(current.phase === 'base'
-        ? `第 ${questions.indexOf(q) + 1} / 12 题`
+        ? `第 ${questions.indexOf(q) + 1} / ${questions.length} 题`
         : `${current.phase === 'review' ? '回练' : '再练一题'} · 还有 ${pending.size} 道待练`, solved,
         current.checked && current.selection === q.answer ? -1 : questions.indexOf(q));
       progress.id = 'tpProg';

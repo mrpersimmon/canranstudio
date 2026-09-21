@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { subjectAnswers, submitSubject } = require('../support/l49-subject-flow');
+const { submitSubject } = require('../support/l49-subject-flow');
+const { unitSubjectAnswers: subjectAnswers } = require('../support/unit49-50-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 const listeningAnswers = ['butcher','meat','beef','lamb','mutton','steak','mince','chicken','pork','fish','husband','tell','truth','either','tomato','potato','cabbage','lettuce','pea','bean','pear','grape','peach'];
@@ -115,7 +116,7 @@ test('课文必须听完再进入理解题，历史点读与刷新不代替当�
   await expect(room.locator('.bubble-row')).toHaveCount(11);
   await room.getByRole('button', { name: '下一站：故事小侦探', exact: true }).click();
   await expect(roles.getByRole('button', { name: 'steak', exact: true })).toBeVisible();
-  await finishGroup(page, 'roles', ['steak','Beef, please.',"To tell you the truth, Mrs. Bird, I don't like chicken either.",'Lamb, please.','I like steak, too.']);
+  await finishGroup(page, 'roles', ['steak','Beef, please.',"To tell you the truth, Mrs. Bird, I don't like chicken either.",'Lamb, please.']);
   await expect(page.locator('#starCount')).toHaveText('3');
 });
 
@@ -152,8 +153,8 @@ test('从空记录完成整个单元，只有末站结算后领证，保存与�
   await story.getByRole('button',{name:'开始听课文',exact:true}).click();
   for(let i=1;i<11;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
   await story.getByRole('button',{name:'完成课文学习',exact:true}).click();
-  await finishGroup(page,'roles',['steak','Beef, please.',"To tell you the truth, Mrs. Bird, I don't like chicken either.",'Lamb, please.','I like steak, too.']);
-  await finishGroup(page,'doare',['Do you like meat?','Are you a teacher?','Do you want beef?','Does Penny like tomatoes?','Do you like peas?','Does she want peaches?']);
+  await finishGroup(page,'roles',['steak','Beef, please.',"To tell you the truth, Mrs. Bird, I don't like chicken either.",'Lamb, please.']);
+  await finishGroup(page,'doare',['Do you like meat?','Are you a teacher?','Does Penny like tomatoes?','Do you like peas?','Does she want peaches?']);
   await finishGroup(page,'give',['Mrs. Bird','that piece','Give that piece to me, please.',['Give','that piece','to','me,','please.']]);
   await finishGroup(page,'needs',["She likes tomatoes, but she doesn't want any.","I like potatoes, but I don't want any.",'Yes, he does.',"No, I don't."]);
   await finishGroup(page,'pouch',['To tell you the truth']);
@@ -168,20 +169,16 @@ test('从空记录完成整个单元，只有末站结算后领证，保存与�
   await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await page.getByRole('button',{name:'继续：采购小挑战',exact:true}).click();
   const exam=page.locator('.stage-exam');
-  const examAnswers=['mince','Mrs. Bird: lamb · husband: steak',['Give','the beef','to','Lily,','please.'],"I don't like lamb either.",'pear',"Tom likes beans, but he doesn't want any.",'Does she like peaches?','am not','like',['He',"doesn't",'want','any peas.']];
+  const examAnswers=['mince','Mrs. Bird: lamb · husband: steak','cabbage','I like chicken.','likes 改为 like'];
   for(let i=0;i<examAnswers.length;i++){
-    if(i===0||i===4)await exam.getByRole('button',{name:'听一遍',exact:true}).click();
-    await answer(exam,examAnswers[i],i===9?null:'下一题');
-    if(i===4){
-      await expect(exam).toContainText('已完成 5 / 10 题');
-      await page.reload();
-      await exam.getByRole('button',{name:'继续第二段（5 题）',exact:true}).click();
-    }
+    if(i===0)await exam.getByRole('button',{name:'听一遍',exact:true}).click();
+    await answer(exam,examAnswers[i],i===examAnswers.length-1?null:'下一题');
+    if(i===2)await page.reload();
   }
   await expect(page.locator('#starCount')).toHaveText('12');
   await exam.getByRole('button',{name:'查看本次记录',exact:true}).click();
   await expect(page.locator('#starCount')).toHaveText('15');
-  await expect(exam).toContainText('首次独立答对 10 / 10');
+  await expect(exam).toContainText('首次独立答对 5 / 5');
   await exam.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();
   await page.reload();
   await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('小小采购员');
@@ -313,7 +310,7 @@ test('采购挑战延续原课的标题旁暂停，暂停和继续保留本题�
   const room=page.locator('.stage-exam'),heading=room.locator('.stage-heading');
   await room.getByRole('button',{name:'mince',exact:true}).click();
   await heading.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();
-  await expect(room).toContainText('已暂停 · 第 1 / 10 题');
+  await expect(room).toContainText('已暂停 · 第 1 / 5 题');
   await expect(heading.getByRole('button',{name:'暂停，稍后继续',exact:true})).toBeHidden();
   await page.reload();
   await room.getByRole('button',{name:'继续挑战',exact:true}).click();

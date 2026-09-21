@@ -20,6 +20,8 @@ const REQUIRED_DIRECTORIES = Object.freeze([
   'core',
   'unit49-50',
   'unit1-2',
+  'unit3-4',
+  'unit5-6',
   'poc'
 ]);
 const REQUIRED_RUNTIME_FILES = Object.freeze([

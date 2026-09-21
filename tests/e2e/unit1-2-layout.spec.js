@@ -86,7 +86,7 @@ test('键盘可播放、查看帮助与关闭弹层，短屏换题能看到题�
   const card=words.getByRole('button',{name:'handbag',exact:true});await card.focus();await page.keyboard.press('Enter');await expect(card).toHaveAttribute('aria-expanded','true');
   const help=words.getByRole('button',{name:'怎么玩',exact:true});await help.focus();await page.keyboard.press('Enter');
   await expect(page.getByRole('dialog',{name:'物品小图鉴',exact:true})).toBeVisible();await page.keyboard.press('Escape');await expect(help).toBeFocused();
-  await page.goto('/unit1-2/#learn/ask');const room=page.locator('.stage-ask');
-  await answer(room,'Is this your pen?');
-  await expect(room.getByRole('heading',{name:'想问对方“这是你的铅笔吗？”，怎样说？',exact:true})).toBeInViewport();
+  await page.goto('/unit1-2/#learn/manners');const room=page.locator('.stage-manners');
+  await answer(room,'Excuse me!');
+  await expect(room.getByRole('heading',{name:'同学说得太轻，你没听清。怎样请他再说一遍？',exact:true})).toBeInViewport();
 });

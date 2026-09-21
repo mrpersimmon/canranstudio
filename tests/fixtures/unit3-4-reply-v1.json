@@ -1,0 +1,202 @@
+[
+  {
+    "id": "u34-v1-reply-pen",
+    "target": "否定并说明钢笔的归属",
+    "prompt": "同学问“Is this your pen?”。已知钢笔是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my pen. It's your pen.",
+      "Yes. It's my pen.",
+      "No. It isn't your pen. It's my pen."
+    ],
+    "answer": "No. It isn't my pen. It's your pen.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知钢笔是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/pen.svg",
+    "imageAlt": "钢笔",
+    "distractorReasons": {
+      "Yes. It's my pen.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知钢笔是同学的，先否定 my，再说明 your。",
+      "No. It isn't your pen. It's my pen.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知钢笔是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-pencil",
+    "target": "否定并说明铅笔的归属",
+    "prompt": "同学问“Is this your pencil?”。已知铅笔是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my pencil. It's your pencil.",
+      "Yes. It's my pencil.",
+      "No. It isn't your pencil. It's my pencil."
+    ],
+    "answer": "No. It isn't my pencil. It's your pencil.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知铅笔是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/pencil.svg",
+    "imageAlt": "铅笔",
+    "distractorReasons": {
+      "Yes. It's my pencil.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知铅笔是同学的，先否定 my，再说明 your。",
+      "No. It isn't your pencil. It's my pencil.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知铅笔是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-book",
+    "target": "否定并说明书的归属",
+    "prompt": "同学问“Is this your book?”。已知书是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my book. It's your book.",
+      "Yes. It's my book.",
+      "No. It isn't your book. It's my book."
+    ],
+    "answer": "No. It isn't my book. It's your book.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知书是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/book.svg",
+    "imageAlt": "书",
+    "distractorReasons": {
+      "Yes. It's my book.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知书是同学的，先否定 my，再说明 your。",
+      "No. It isn't your book. It's my book.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知书是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-watch",
+    "target": "否定并说明手表的归属",
+    "prompt": "同学问“Is this your watch?”。已知手表是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my watch. It's your watch.",
+      "Yes. It's my watch.",
+      "No. It isn't your watch. It's my watch."
+    ],
+    "answer": "No. It isn't my watch. It's your watch.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知手表是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/watch.svg",
+    "imageAlt": "手表",
+    "distractorReasons": {
+      "Yes. It's my watch.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知手表是同学的，先否定 my，再说明 your。",
+      "No. It isn't your watch. It's my watch.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知手表是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-coat",
+    "target": "否定并说明外套的归属",
+    "prompt": "同学问“Is this your coat?”。已知外套是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my coat. It's your coat.",
+      "Yes. It's my coat.",
+      "No. It isn't your coat. It's my coat."
+    ],
+    "answer": "No. It isn't my coat. It's your coat.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知外套是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/coat.svg",
+    "imageAlt": "外套",
+    "distractorReasons": {
+      "Yes. It's my coat.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知外套是同学的，先否定 my，再说明 your。",
+      "No. It isn't your coat. It's my coat.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知外套是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-dress",
+    "target": "否定并说明连衣裙的归属",
+    "prompt": "同学问“Is this your dress?”。已知连衣裙是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my dress. It's your dress.",
+      "Yes. It's my dress.",
+      "No. It isn't your dress. It's my dress."
+    ],
+    "answer": "No. It isn't my dress. It's your dress.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知连衣裙是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/dress.svg",
+    "imageAlt": "连衣裙",
+    "distractorReasons": {
+      "Yes. It's my dress.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知连衣裙是同学的，先否定 my，再说明 your。",
+      "No. It isn't your dress. It's my dress.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知连衣裙是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-skirt",
+    "target": "否定并说明裙子的归属",
+    "prompt": "同学问“Is this your skirt?”。已知裙子是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my skirt. It's your skirt.",
+      "Yes. It's my skirt.",
+      "No. It isn't your skirt. It's my skirt."
+    ],
+    "answer": "No. It isn't my skirt. It's your skirt.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知裙子是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/skirt.svg",
+    "imageAlt": "裙子",
+    "distractorReasons": {
+      "Yes. It's my skirt.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知裙子是同学的，先否定 my，再说明 your。",
+      "No. It isn't your skirt. It's my skirt.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知裙子是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-shirt",
+    "target": "否定并说明衬衫的归属",
+    "prompt": "同学问“Is this your shirt?”。已知衬衫是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my shirt. It's your shirt.",
+      "Yes. It's my shirt.",
+      "No. It isn't your shirt. It's my shirt."
+    ],
+    "answer": "No. It isn't my shirt. It's your shirt.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知衬衫是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/shirt.svg",
+    "imageAlt": "衬衫",
+    "distractorReasons": {
+      "Yes. It's my shirt.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知衬衫是同学的，先否定 my，再说明 your。",
+      "No. It isn't your shirt. It's my shirt.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知衬衫是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-car",
+    "target": "否定并说明小汽车的归属",
+    "prompt": "同学问“Is this your car?”。已知小汽车是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my car. It's your car.",
+      "Yes. It's my car.",
+      "No. It isn't your car. It's my car."
+    ],
+    "answer": "No. It isn't my car. It's your car.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知小汽车是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/car.svg",
+    "imageAlt": "小汽车",
+    "distractorReasons": {
+      "Yes. It's my car.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知小汽车是同学的，先否定 my，再说明 your。",
+      "No. It isn't your car. It's my car.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知小汽车是同学的，先否定 my，再说明 your。"
+    }
+  },
+  {
+    "id": "u34-v1-reply-house",
+    "target": "否定并说明房子的归属",
+    "prompt": "同学问“Is this your house?”。已知房子是同学的。怎样回答“不是我的，是你的”？",
+    "options": [
+      "No. It isn't my house. It's your house.",
+      "Yes. It's my house.",
+      "No. It isn't your house. It's my house."
+    ],
+    "answer": "No. It isn't my house. It's your house.",
+    "explanation": "你是说话人：my 是“我的”，your 是“你的”。已知房子是同学的，先否定 my，再说明 your。",
+    "hint": "对你来说，“我的”是 my，“同学的”在对话中是 your。",
+    "source": "Lesson 4 纸页 9 练习 B；显式补充物品属于对方的练习条件",
+    "image": "/assets/unit1-2/house.svg",
+    "imageAlt": "房子",
+    "distractorReasons": {
+      "Yes. It's my house.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知房子是同学的，先否定 my，再说明 your。",
+      "No. It isn't your house. It's my house.": "不符合本题给定的人物、物品或事实。你是说话人：my 是“我的”，your 是“你的”。已知房子是同学的，先否定 my，再说明 your。"
+    }
+  }
+]

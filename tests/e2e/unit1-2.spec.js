@@ -64,7 +64,7 @@ test('Lesson 1–2 可回看课文，先听完整七句再回答归属问题，�
   await expect(detective.getByRole('button',{name:'女士',exact:true})).toBeEnabled();
 });
 
-test('40 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书',async({page})=>{
+test('27 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书',async({page})=>{
   test.setTimeout(120000);
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await audioBoundary(page);
@@ -98,23 +98,23 @@ test('40 题与七句原文构成完整单元，礼貌与指代不误教，末�
   await expect(manners.getByRole('status')).toContainText('引起对方注意');
   await manners.getByRole('button',{name:'再试一次',exact:true}).click();
   await finishGroup(page,'manners',['Excuse me!','Pardon?','Yes, it is.','Thank you very much.']);
-  await finishGroup(page,'ask',['Is this your pen?','Is this your pencil?','Is this your book?','Is this your watch?','Is this your coat?','Is this your dress?','Is this your skirt?','Is this your shirt?','Is this your car?','Is this your house?']);
+  await finishGroup(page,'ask',['Is this your pen?']);
   await finishGroup(page,'trans',[['Is','this','your','pen?'],['Yes,','it','is.'],['Thank','you','very','much.']]);
   await expect(page.locator('#starCount')).toHaveText('12');
   await page.goto('/unit1-2/#learn/certificate');
   await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await page.getByRole('button',{name:'继续：礼貌小挑战',exact:true}).click();
   const exam=page.locator('.stage-exam');
-  const values=['pencil','Pardon?','Is this your dress?','Yes, it is.','对面的同学','car',['Is','this','your','house?'],'Thank you very much.'];
-  for(let i=0;i<8;i++){
-    if(i===0||i===5)await exam.getByRole('button',{name:'听一遍',exact:true}).click();
-    await answer(exam,values[i],i===7?null:'下一题');
+  const values=['car','Yes?','Is this your handbag?','Yes, it is. Thank you very much.'];
+  for(let i=0;i<values.length;i++){
+    if(i===0)await exam.getByRole('button',{name:'听一遍',exact:true}).click();
+    await answer(exam,values[i],i===values.length-1?null:'下一题');
     if(i===3)await page.reload();
   }
-  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuenow','8');
+  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuenow','4');
   await expect(page.locator('#starCount')).toHaveText('12');
   await exam.getByRole('button',{name:'查看本次记录',exact:true}).click();
-  await expect(exam).toContainText('首次独立答对 8 / 8');
+  await expect(exam).toContainText('首次独立答对 4 / 4');
   await expect(page.locator('#starCount')).toHaveText('15');
   await exam.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();
   await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('小小礼貌员');

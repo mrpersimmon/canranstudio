@@ -7,7 +7,9 @@
   const profileState = core.deviceProfile.initializeDeviceProfile({ storage, courses });
   const units = [
     { ...core.unit4950, ...core.learningContext, path: '/unit49-50/', start: 'learn/words', entry: 'unitEntry', label: 'resumeLocation' },
-    { ...core.unit12, entry: 'unit12Entry', label: 'unit12Resume' }
+    { ...core.unit12, entry: 'unit12Entry', label: 'unit12Resume' },
+    { ...core.unit34, entry: 'unit34Entry', label: 'unit34Resume' },
+    { ...core.unit56, entry: 'unit56Entry', label: 'unit56Resume' }
   ];
   function read(key) {
     try { return JSON.parse(storage?.getItem(key) || 'null'); } catch { return null; }

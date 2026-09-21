@@ -51,6 +51,7 @@
   const question = (id, target, prompt, options, answer, explanation, hint, extra = {}) => ({
     id: 'u12-v1-' + id, target, prompt, options, answer, explanation, hint, source, ...extra
   });
+  const revised = (...args) => ({ ...question(...args), id: 'u12-v2-' + args[0] });
   const ask = word => `Is this your ${word}?`;
   const pictureOptions = Object.fromEntries(objects.map(word => [word.en, word.image]));
   const questions = {
@@ -72,27 +73,19 @@
       question('polite-confirm', '肯定确认归属', '同学问“Is this your book?”，这本书确实是你的。怎样回答？', ['Yes, it is.', 'Pardon?', 'Excuse me!'], 'Yes, it is.', '对方问“这是你的书吗？”，你用 Yes, it is. 确认。', '书是你的，先肯定回答。'),
       question('polite-thanks', '得到帮助后致谢', '路人把你的手表还给你，你想感谢他。怎样说？', ['Thank you very much.', 'Pardon?', 'Is this your watch?'], 'Thank you very much.', '得到帮助后可以说 Thank you very much.。', '手表已经还给你了，现在表达感谢。')
     ],
-    ask: objects.slice(1).map((word, index, list) => question(
-      'ask-' + word.en, '用物品替换问句：' + word.en,
-      '想问对方“这是你的' + word.cn + '吗？”，怎样说？',
-      [ask(word.en), ask(list[(index + 1) % list.length].en), ask(list[(index + 3) % list.length].en)],
-      ask(word.en), '用 Is this your…? 询问归属，' + word.cn + '是 ' + word.en + '。',
-      '保留 Is this your，把物品名称放在后面。', { image: word.image, imageAlt: word.cn }
-    )),
+    ask: [
+      revised('ask-purpose', '发起归属询问', '想问同学这支钢笔是不是他的，应该说什么？', ['Is this your pen?', 'Pardon?', 'Thank you very much.'], 'Is this your pen?', 'Is this your pen? 是在问对方“这是你的钢笔吗？”。Pardon? 请人重复，Thank you very much. 表示感谢。', '现在要询问归属，还不是请人重复或道谢。', { image: image('pen'), imageAlt: '钢笔' })
+    ],
     trans: [
       question('build-pen', '拼出归属问句', '用词块问：这是你的钢笔吗？', undefined, 'Is this your pen?', '问句是 Is this your pen?，Is 放在开头。', '从 Is 开始，再说 this 和 your。', { type: 'order', tokens: ['Is', 'this', 'your', 'pen?'] }),
       question('build-yes', '拼出肯定回答', '这确实是你的钢笔。用词块回答。', undefined, 'Yes, it is.', '用 Yes, it is. 作肯定回答，it 指刚才说的钢笔。', '先说 Yes，再用 it is 回答。', { type: 'order', tokens: ['Yes,', 'it', 'is.'] }),
       question('build-thanks', '拼出感谢表达', '用词块说：非常感谢！', undefined, 'Thank you very much.', 'Thank you 表示谢谢，very much 加强感谢。', '先说 Thank you，再加 very much。', { type: 'order', tokens: ['Thank', 'you', 'very', 'much.'] })
     ],
     exam: [
-      question('exam-pencil', '听辨物品', '听一听，选出单词。', ['pencil', 'pen', 'book', 'watch'], 'pencil', '再听一次，分辨铅笔和其他物品。', '', { audioText: 'pencil', optionImages: pictureOptions }),
-      question('exam-pardon', '把请求重复用在新情境', '朋友的话被车声盖住了，你没听清。怎样说？', ['Pardon?', 'Yes, it is.', 'Thank you very much.'], 'Pardon?', 'Pardon? 请对方把刚才的话重复一遍。', '你想听清刚才那句话。', { source: source + '；另设情境' }),
-      question('exam-dress', '在新物品上询问归属', '想问对方“这是你的连衣裙吗？”，怎样说？', [ask('dress'), ask('skirt'), ask('shirt')], ask('dress'), '连衣裙是 dress，问句是 Is this your dress?。', '连衣裙上下连在一起，区别于裙子 skirt。', { image: image('dress'), imageAlt: '连衣裙' }),
-      question('exam-yes', '根据事实肯定回应', '朋友问“Is this your coat?”，外套确实是你的。怎样确认？', ['Yes, it is.', 'Pardon?', 'Excuse me!'], 'Yes, it is.', '外套是你的，用 Yes, it is. 确认。', '对方没有要求你重复，是在问物品的归属。'),
-      question('exam-your', '在新情境理解 your', '你问对面的同学“Is this your watch?”，这里的 your 指谁？', ['对面的同学', '你自己'], '对面的同学', '你在问同学“这是你的手表吗？”，your 指同学的。', 'your 表示“你的”，看你在问谁。', { source: source + '；另设情境' }),
       question('exam-car', '从完整问句听出物品', '听一听，正在问哪件东西？', ['car', 'house', 'coat', 'watch'], 'car', '再听一次，注意句子末尾的物品名。', '', { audioText: ask('car'), optionImages: pictureOptions }),
-      question('exam-house', '拼出新的归属问句', '用词块问：这是你的房子吗？', undefined, ask('house'), 'Is this your house? 用 house 替换物品名称。', 'Is this your 后面放 house。', { type: 'order', tokens: ['Is', 'this', 'your', 'house?'] }),
-      question('exam-thanks', '把感谢用到新情境', '朋友帮你找到了书，你想认真地感谢他。怎样说？', ['Thank you very much.', 'Pardon?', 'Is this your book?'], 'Thank you very much.', '找到书后向帮助你的人说 Thank you very much.。', '书已经找到了，现在要表达感谢。', { source: source + '；另设情境' })
+      revised('exam-attention', '按话轮区分回应招呼和确认', '男士：Excuse me!\n女士：___\n男士：Is this your handbag?\n女士先怎样回应招呼？', ['Yes?', 'Yes, it is.', 'Thank you very much.'], 'Yes?', '这时还没有问物品归属。Yes? 回应招呼；Yes, it is. 才用于肯定确认。', '男士刚刚叫住她，还没问手提包。'),
+      revised('exam-repeat-question', '根据请求重复继续对话', '男士：Is this your handbag?\n女士：Pardon?\n男士接下来应该怎样说？', ['Is this your handbag?', 'Yes, it is.', 'Thank you very much.'], 'Is this your handbag?', '女士请男士再说一遍，所以男士重复刚才的问句。不能替女士确认归属。', 'Pardon? 是请刚才说话的人再说一遍。'),
+      revised('exam-confirm-thank', '组合确认与感谢', '同学把书送回来，问“Is this your book?”。书确实是你的。你先确认，再感谢，怎样说？', ['Yes, it is. Thank you very much.', 'Yes? Pardon?', 'Is this your book? Thank you very much.'], 'Yes, it is. Thank you very much.', '先用 Yes, it is. 确认书是自己的，再用 Thank you very much. 感谢同学。', '你是回答的人：先确认，再道谢。')
     ]
   };
   const stages = [

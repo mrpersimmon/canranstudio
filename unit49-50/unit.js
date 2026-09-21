@@ -206,11 +206,11 @@
   const subjects=host('subjects');core.lesson49Subjects.mount({element:subjects,onComplete:()=>{complete('subjects');nextStation('subjects',subjects.querySelector('.practice-finish-actions'));}});
   mountPractice('fill',{presentation:'cloze'});mountPractice('choice',{presentation:'cloze'});mountPractice('trans');
   const results=node('div','','unit-results');
-  mountPractice('exam',{chunkSize:5,finalLabel:'查看本次记录',completionDetails:results,onComplete:states=>{
+  mountPractice('exam',{chunkSize:questions.exam.length,finalLabel:'查看本次记录',completionDetails:results,onComplete:states=>{
     const independent=states.filter(state=>state.firstCorrect&&!state.hintUsed&&!state.revealed).length;
     const assisted=states.filter(state=>state.firstCorrect&&(state.hintUsed||state.revealed)).length;
     const corrected=states.filter(state=>!state.firstCorrect).length;
-    results.replaceChildren(node('p',`首次独立答对 ${independent} / 10`),node('p',`提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
+    results.replaceChildren(node('p',`首次独立答对 ${independent} / ${questions.exam.length}`),node('p',`提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
     const review=questions.exam.filter((_,i)=>!states[i].firstCorrect||states[i].hintUsed||states[i].revealed);
     if(review.length){const details=node('details'),list=node('ul');details.append(node('summary','下次再练'));review.forEach(q=>list.append(node('li',q.target)));details.append(list);results.append(details);}
   }});

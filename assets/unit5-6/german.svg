@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <title>德国国旗</title>
+  <defs><clipPath id="flag"><rect x="9" y="16.4" width="102" height="61.2" rx="5"/></clipPath></defs>
+  <rect x="9" y="20.4" width="102" height="61.2" rx="6" fill="#4A3226" opacity=".14"/>
+  <g clip-path="url(#flag)"><rect x="9" y="16.4" width="102" height="20.4" fill="#171717"/><rect x="9" y="36.8" width="102" height="20.4" fill="#D00A14"/><rect x="9" y="57.2" width="102" height="20.4" fill="#FFCE00"/></g>
+  <rect x="9" y="16.4" width="102" height="61.2" rx="5" fill="none" stroke="#4A3226" stroke-width="3.4" stroke-linejoin="round"/>
+  <rect x="16" y="92" width="88" height="23" rx="9" fill="#FFF0C3" stroke="#4A3226" stroke-width="3.4"/>
+  <text x="60" y="109" text-anchor="middle" font-size="17" font-family="sans-serif" fill="#4A3226">德国</text>
+</svg>
