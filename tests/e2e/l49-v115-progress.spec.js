@@ -2,6 +2,7 @@
 
 const { test, expect } = require('@playwright/test');
 const { subjectAnswers, submitSubject } = require('../support/l49-subject-flow');
+const { unitSubjectAnswers } = require('../support/unit49-50-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 async function expectProgress(room, completed, total, current) {
@@ -56,28 +57,29 @@ test('分拣答错不填绿，回练只补上原题，最后一次答对立刻�
   test.setTimeout(60000);
   await page.goto('/unit49-50/#learn/subjects');
   const room = page.locator('.stage-subjects');
-  for (let i = 0; i < subjectAnswers.length; i++) {
-    await expectProgress(room, 0, 12, i + 1);
-    await submitSubject(room, subjectAnswers[i] === '第一人称' ? '第二人称' : '第一人称', false);
-    await expectProgress(room, 0, 12, i + 1);
+  const total = unitSubjectAnswers.length;
+  for (let i = 0; i < total; i++) {
+    await expectProgress(room, 0, total, i + 1);
+    await submitSubject(room, unitSubjectAnswers[i] === '第一人称' ? '第二人称' : '第一人称', false);
+    await expectProgress(room, 0, total, i + 1);
     await room.getByRole('button', { name: '继续', exact: true }).click();
   }
-  await expect(room).toContainText('回练 · 还有 12 道待练');
+  await expect(room).toContainText(`回练 · 还有 ${total} 道待练`);
   await page.reload();
-  await expectProgress(room, 0, 12, 1);
-  for (let i = 0; i < subjectAnswers.length; i++) {
-    await submitSubject(room, subjectAnswers[i], false);
-    await expectProgress(room, i + 1, 12, null);
-    if (i < 11) await room.getByRole('button', { name: '继续', exact: true }).click();
+  await expectProgress(room, 0, total, 1);
+  for (let i = 0; i < total; i++) {
+    await submitSubject(room, unitSubjectAnswers[i], false);
+    await expectProgress(room, i + 1, total, null);
+    if (i < total - 1) await room.getByRole('button', { name: '继续', exact: true }).click();
   }
   await expect(room.getByRole('button', { name: '完成', exact: true })).toBeVisible();
   await page.reload();
-  await expectProgress(room, 12, 12, null);
+  await expectProgress(room, total, total, null);
   await room.screenshot({ path: 'output/playwright/progress-subject-review-complete.png' });
   await room.getByRole('button', { name: '完成', exact: true }).click();
-  await expect(room).toContainText('基础题首次答对 0 / 12');
+  await expect(room).toContainText(`基础题首次答对 0 / ${total}`);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
-  await expectProgress(room, 0, 12, 1);
+  await expectProgress(room, 0, total, 1);
 });
 
 test('Lesson 49 的提示、选中和错答不会填绿，答对更新时操作按钮不跳动', async ({ page }) => {
@@ -176,34 +178,54 @@ test('320 窄屏的 23 词进度完整可见，重听和刷新不增加正确数
   await room.locator('.practice-content').screenshot({ path: 'output/playwright/progress-listen-320.png' });
 });
 
-test('挑战跨题型、暂停、分段和刷新后保留进度，末题答对即十格全绿', async ({ page }) => {
+for (const scenario of [
+  {
+    course: 'unit49-50', label: '组合单元五题连续挑战', segmented: false,
+    answers: ['mince', 'Mrs. Bird: lamb · husband: steak', 'cabbage', 'I like chicken.', 'likes 改为 like'],
+    score: '首次独立答对 5 / 5'
+  },
+  {
+    course: 'lesson49', label: 'Lesson 49 单课十题分段挑战', segmented: true,
+    answers: ['mince', 'Mrs. Bird: lamb · husband: steak', 'Are you a student?', 'Do you want chicken?',
+      ['Give', 'the beef', 'to', 'Lily,', 'please.'], 'Sam', 'I like lamb, too.', 'want', "Tom doesn't like beef.", "I don't like lamb either."],
+    score: '首次且未用额外提示答对：10 / 10'
+  }
+]) test(`${scenario.label}：暂停、刷新、末题满格和重练保持真实进度`, async ({ page }) => {
   await fastAudio(page);
-  await page.goto('/unit49-50/#learn/exam');
+  await page.goto(`/${scenario.course}/#learn/exam`);
   const room = page.locator('.stage-exam');
-  const answers = ['mince', 'Mrs. Bird: lamb · husband: steak', ['Give', 'the beef', 'to', 'Lily,', 'please.'], "I don't like lamb either.", 'pear', "Tom likes beans, but he doesn't want any.", 'Does she like peaches?', 'am not', 'like', ['He', "doesn't", 'want', 'any peas.']];
+  if (scenario.course === 'lesson49') await room.getByRole('button', { name: '开始挑战', exact: true }).click();
+  const { answers } = scenario;
+  const total = answers.length;
   for (let i = 0; i < answers.length; i++) {
-    await expectProgress(room, i, 10, i + 1);
-    if (i === 0 || i === 4) await room.getByRole('button', { name: '听一遍', exact: true }).click();
+    await expectProgress(room, i, total, i + 1);
+    if (i === 0) await room.getByRole('button', { name: '听一遍', exact: true }).click();
     await choose(room, answers[i]);
-    await expectProgress(room, i + 1, 10, null);
+    await expectProgress(room, i + 1, total, null);
     if (i === 0) {
       await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click();
       await page.reload();
       await room.getByRole('button', { name: '继续挑战', exact: true }).click();
-      await expectProgress(room, 1, 10, null);
+      await expectProgress(room, 1, total, null);
     }
-    if (i < 9) await room.getByRole('button', { name: '下一题', exact: true }).click();
-    if (i === 4) {
+    if (i < total - 1) await room.getByRole('button', { name: '下一题', exact: true }).click();
+    if (i === 4 && scenario.segmented) {
       await expect(room).toContainText('已完成 5 / 10 题');
       await page.reload();
       await room.getByRole('button', { name: '继续第二段（5 题）', exact: true }).click();
       await expectProgress(room, 5, 10, 6);
     }
   }
+  if (!scenario.segmented) await expect(room.getByRole('button', { name: '继续第二段（5 题）', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: '查看本次记录', exact: true })).toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('0');
   await room.getByRole('button', { name: '查看本次记录', exact: true }).click();
-  await expect(room).toContainText('首次独立答对 10 / 10');
+  if (scenario.course === 'lesson49') {
+    const reward = page.getByRole('dialog', { name: '红白遮阳棚', exact: true });
+    await expect(reward).toBeVisible();
+    await expect.poll(async () => { await page.keyboard.press('Escape'); return reward.isVisible(); }).toBe(false);
+  }
+  await expect(room).toContainText(scenario.score);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
-  await expectProgress(room, 0, 10, 1);
+  await expectProgress(room, 0, total, 1);
 });
