@@ -98,9 +98,11 @@ for(const item of [
   await visibleQuestion(page, room.locator('.practice-content h3'));await expect(check).toBeVisible();
 });
 
-test('人称分拣的选项不被反馈挤动，继续后新主语可见',async({page})=>{
-  await page.setViewportSize({width:390,height:664});await page.goto('/lesson49/#learn/subjects');await page.evaluate(()=>document.fonts.ready);
+for(const route of ['/lesson49/','/unit49-50/'])test(`${route} 人称分拣答错原题重试不跳动，答对继续后新主语可见`,async({page})=>{
+  await page.setViewportSize({width:390,height:664});await page.goto(route+'#learn/subjects');await page.evaluate(()=>document.fonts.ready);
   const stage=page.locator('.stage-subjects');
+  const subject=stage.locator('#tpItemText');
+  await expect(subject).toHaveText('Mrs. Bird');
   const option=stage.getByRole('button',{name:'第一人称',exact:true});
   await option.click();
   const check=stage.getByRole('button',{name:'检查答案',exact:true});
@@ -108,8 +110,25 @@ test('人称分拣的选项不被反馈挤动，继续后新主语可见',async(
   const before=await option.boundingBox();await check.press('Enter');
   expect(Math.abs((await option.boundingBox()).y-before.y)).toBeLessThanOrEqual(2);
   expect(await page.evaluate(()=>scrollY)).toBe(scrollBefore);
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(stage.getByRole('button',{name:'继续',exact:true})).toHaveCount(0);
+  await expect(stage.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+  await stage.getByRole('button',{name:'再试一次',exact:true}).press('Enter');
+  await expect(subject).toHaveText('Mrs. Bird');
+  await expect(check).toBeDisabled();
+  expect(Math.abs((await option.boundingBox()).y-before.y)).toBeLessThanOrEqual(2);
+  expect(await page.evaluate(()=>scrollY)).toBe(scrollBefore);
+  await stage.getByRole('button',{name:'第三人称单数',exact:true}).click();
+  await check.scrollIntoViewIfNeeded();
+  const correctBefore=await option.boundingBox(),correctScroll=await page.evaluate(()=>scrollY);
+  await check.press('Enter');
+  await expect(stage.getByRole('status')).toHaveText('答对了！');
+  await expect(stage.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');
+  expect(Math.abs((await option.boundingBox()).y-correctBefore.y)).toBeLessThanOrEqual(2);
+  expect(await page.evaluate(()=>scrollY)).toBe(correctScroll);
   await stage.getByRole('button',{name:'继续',exact:true}).press('Enter');
-  await visibleQuestion(page, stage.locator('#tpItemText'));
+  await expect(subject).toHaveText('Mrs. Bird and her husband');
+  await visibleQuestion(page, subject);
   const after=await option.boundingBox();
   expect(Math.abs(after.y+(await page.evaluate(()=>scrollY))-before.y-scrollBefore)).toBeLessThanOrEqual(2);
 });

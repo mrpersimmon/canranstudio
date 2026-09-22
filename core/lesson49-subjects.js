@@ -164,7 +164,7 @@
         if (nextQuestion) run.current = freshAppearance(nextQuestion, run.runId); else run.done = true;
         save(); render();
         if (run.done) core.lesson49Feedback.play('complete');
-        learning.revealQuestion(element);
+        if (!nextQuestion || nextQuestion.q.id !== q.id) learning.revealQuestion(element);
       });
       next.classList.add('subject-next'); next.setAttribute('aria-describedby', status.id);
       content.categories.forEach(category => {

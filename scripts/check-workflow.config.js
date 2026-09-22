@@ -18,7 +18,7 @@ function tasks(root, files) {
     'browser-unit78': browser(['tests/e2e/unit7-8']),
     'browser-units9-12': browser(['tests/e2e/unit9-10', 'tests/e2e/unit11-12', 'tests/e2e/units9-12-classroom.spec.js']),
     'browser-unit1314': browser(['tests/e2e/unit13-14']),
-    'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js']),
+    'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js', 'tests/e2e/l49-focus.spec.js']),
     'browser-state': browser(['tests/e2e/home-progress.spec.js', 'tests/e2e/l49-progress.spec.js']),
     'browser-layout': browser(['tests/e2e/accessibility.spec.js', 'tests/e2e/mobile-release.spec.js']),
     'browser-changed': browser(changedTests.length ? changedTests : ['tests/e2e/smoke.spec.js']),
