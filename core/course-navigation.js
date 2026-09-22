@@ -13,7 +13,11 @@
     { ...core.unit78, entry: 'unit78Entry', label: 'unit78Resume' },
     { ...core.unit910, entry: 'unit910Entry', label: 'unit910Resume' },
     { ...core.unit1112, entry: 'unit1112Entry', label: 'unit1112Resume' },
-    { ...core.unit1314, entry: 'unit1314Entry', label: 'unit1314Resume' }
+    { ...core.unit1314, entry: 'unit1314Entry', label: 'unit1314Resume' },
+    { ...core.unit1516, entry: 'unit1516Entry', label: 'unit1516Resume' },
+    { ...core.unit1718, entry: 'unit1718Entry', label: 'unit1718Resume' },
+    { ...core.unit1920, entry: 'unit1920Entry', label: 'unit1920Resume' },
+    { ...core.unit2122, entry: 'unit2122Entry', label: 'unit2122Resume' }
   ];
   function read(key) {
     try { return JSON.parse(storage?.getItem(key) || 'null'); } catch { return null; }

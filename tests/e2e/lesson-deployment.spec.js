@@ -73,7 +73,7 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
   await page.getByText('单课练习', { exact: true }).click();
   const entries = await page.locator('main a').evaluateAll(links => links.map(link => ({ href: link.href, text: link.textContent })));
   expect(entries.map(entry => new URL(entry.href).pathname)).toEqual([
-    '/lesson/unit1-2/', '/lesson/unit3-4/', '/lesson/unit5-6/', '/lesson/unit7-8/', '/lesson/unit9-10/', '/lesson/unit11-12/', '/lesson/unit13-14/', '/lesson/unit49-50/',
+    '/lesson/unit1-2/', '/lesson/unit3-4/', '/lesson/unit5-6/', '/lesson/unit7-8/', '/lesson/unit9-10/', '/lesson/unit11-12/', '/lesson/unit13-14/', '/lesson/unit15-16/', '/lesson/unit17-18/', '/lesson/unit19-20/', '/lesson/unit21-22/', '/lesson/unit49-50/',
     '/lesson/lesson51/', '/lesson/lesson52/', '/lesson/lesson53/', '/lesson/lesson54/',
     '/lesson/soundmark/', '/lesson/lesson49/', '/lesson/lesson50/'
   ]);
