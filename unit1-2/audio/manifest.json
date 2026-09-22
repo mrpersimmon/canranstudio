@@ -127,15 +127,112 @@
     {
       "sourceId": "L01-W01",
       "catalogTextSha256": "b76c1db1f24b29fe617bf3cf4d9bca1301a3ce446f85e32aa7302bbcc57a3df6",
-      "path": "unit1-2/audio/l01-w01.mp3",
+      "path": "unit1-2/audio/l01-w01-v2.mp3",
       "voiceId": "af_heart",
-      "renderMode": "context-cropped-lexeme-v1",
+      "renderMode": "token-bounded-lexeme-v1",
       "speed": 1,
-      "sha256": "41ca6cc649ca205daf717052e87a38c4f30c35def888f2e6e6bb2c8459cf80ef",
-      "bytes": 11277,
-      "durationMs": 860,
+      "sha256": "e81291215fcda115611fa6c017ffdd02833ed22a3ecd0856c2d9303bd6d3cfec",
+      "bytes": 11853,
+      "durationMs": 911,
       "reviewStatus": "unreviewed-candidate",
-      "text": "excuse"
+      "text": "excuse",
+      "decodedOnsetMs": 70,
+      "generationRecipe": {
+        "path": "scripts/media/lexemes/unit1-2-excuse.json",
+        "sha256": "5dbb5a4ba23af7eb5d359722c5153bdffb835db14bb648c6d2edbce49161fd27",
+        "generator": "scripts/media/render-lexeme.py",
+        "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e",
+        "environment": {
+          "python": "3.12",
+          "kokoro": "0.9.4",
+          "misaki": "0.9.4",
+          "torch": "2.14.0",
+          "numpy": "2.5.3",
+          "soundfile": "0.14.0",
+          "spacy": "3.8.16",
+          "en-core-web-sm": "3.8.0"
+        }
+      },
+      "pronunciationRepair": {
+        "revision": "2026-09-22-v2",
+        "issue": "A04",
+        "supersedesPath": "unit1-2/audio/l01-w01.mp3",
+        "supersedesSha256": "41ca6cc649ca205daf717052e87a38c4f30c35def888f2e6e6bb2c8459cf80ef",
+        "previousOrigin": null,
+        "actualPhonemes": "hˈɪɹ ɪz ðə wˈɜɹd ɪkskjˈuz. ɪkskjˈuz.",
+        "tokens": [
+          {
+            "text": "Here",
+            "phonemes": "hˈɪɹ",
+            "startMs": 275,
+            "endMs": 488
+          },
+          {
+            "text": "is",
+            "phonemes": "ɪz",
+            "startMs": 488,
+            "endMs": 612
+          },
+          {
+            "text": "the",
+            "phonemes": "ðə",
+            "startMs": 612,
+            "endMs": 700
+          },
+          {
+            "text": "word",
+            "phonemes": "wˈɜɹd",
+            "startMs": 700,
+            "endMs": 912
+          },
+          {
+            "text": "excuse",
+            "phonemes": "ɪkskjˈuz",
+            "startMs": 912,
+            "endMs": 1575
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 1575,
+            "endMs": 1688
+          },
+          {
+            "text": "excuse",
+            "phonemes": "ɪkskjˈuz",
+            "startMs": 1688,
+            "endMs": 2575
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 2575,
+            "endMs": 2750
+          }
+        ],
+        "boundaries": {
+          "targetStartMs": 1688,
+          "targetEndMs": 2575,
+          "cropStartMs": 1608,
+          "cropEndMs": 2755
+        },
+        "automatedRecognition": {
+          "base.en": "Excuse.",
+          "tiny.en": "Excuse.",
+          "limit": "Recognition is auxiliary evidence; human pronunciation and naturalness review remains pending."
+        },
+        "humanListening": "pending"
+      },
+      "origin": {
+        "kind": "local-generation",
+        "recipe": "scripts/media/lexemes/unit1-2-excuse.json",
+        "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+        "seed": 0
+      },
+      "pronunciationOverride": true,
+      "phonemeOverrides": {
+        "excuse": "ɪkskjˈuz"
+      }
     },
     {
       "sourceId": "L01-W02",

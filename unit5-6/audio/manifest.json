@@ -303,25 +303,95 @@
       "sourceId": "L05-D12",
       "sourceKind": "dialogue",
       "catalogTextSha256": "d01a5a9381310db7659aef1f67eb55022df87e14702c3a08551f190cc65e891e",
-      "path": "unit5-6/audio/l05-d12.mp3",
+      "path": "unit5-6/audio/l05-d12-v2.mp3",
       "voiceId": "am_michael",
       "renderMode": "natural-utterance",
       "speed": 0.9,
       "speaker": "man",
       "speakerRole": "teacher",
       "pronunciationOverride": true,
-      "pronunciationOverrideSha256": "84eded6e8506b1105ad6c56f89c4005181d7bbeedbdcd2576ed7be0986163459",
-      "sha256": "883d37170b5ef3e2b10b5dbed1f9820a2d668fc4160831b1b1a45bf8e25c8c11",
-      "bytes": 17901,
-      "durationMs": 1394,
+      "sha256": "bdd633afc60c611f794ac4333066f8bc7ea808743d49991304449411f7a520b4",
+      "bytes": 20493,
+      "durationMs": 1610,
       "decodedOnsetMs": 70,
       "reviewStatus": "unreviewed-candidate",
       "text": "And this is Chang-woo.",
       "origin": {
-        "kind": "git",
-        "commit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
-        "path": "poc/lesson5-6-experience/audio/l05-d12.mp3",
-        "originalReviewStatus": "unreviewed-candidate"
+        "kind": "local-generation",
+        "recipe": "scripts/media/lexemes/unit5-6-chang-woo.json",
+        "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+        "seed": 0
+      },
+      "generationRecipe": {
+        "path": "scripts/media/lexemes/unit5-6-chang-woo.json",
+        "sha256": "a98c83978fd61c04283a6262c5608d5edfe2e1d2de01a926582274289f1a8560",
+        "generator": "scripts/media/render-lexeme.py",
+        "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e",
+        "environment": {
+          "python": "3.12",
+          "kokoro": "0.9.4",
+          "misaki": "0.9.4",
+          "torch": "2.14.0",
+          "numpy": "2.5.3",
+          "soundfile": "0.14.0",
+          "spacy": "3.8.16",
+          "en-core-web-sm": "3.8.0"
+        }
+      },
+      "pronunciationRepair": {
+        "revision": "2026-09-22-v2",
+        "issue": "A02",
+        "supersedesPath": "unit5-6/audio/l05-d12.mp3",
+        "supersedesSha256": "883d37170b5ef3e2b10b5dbed1f9820a2d668fc4160831b1b1a45bf8e25c8c11",
+        "previousOrigin": {
+          "kind": "git",
+          "commit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
+          "path": "poc/lesson5-6-experience/audio/l05-d12.mp3",
+          "originalReviewStatus": "unreviewed-candidate"
+        },
+        "actualPhonemes": "ˌænd ðɪs ɪz ʧˈæŋ wˌu.",
+        "tokens": [
+          {
+            "text": "And",
+            "phonemes": "ˌænd",
+            "startMs": 425,
+            "endMs": 575
+          },
+          {
+            "text": "this",
+            "phonemes": "ðɪs",
+            "startMs": 575,
+            "endMs": 825
+          },
+          {
+            "text": "is",
+            "phonemes": "ɪz",
+            "startMs": 825,
+            "endMs": 1000
+          },
+          {
+            "text": "Chang-woo",
+            "phonemes": "ʧˈæŋ wˌu",
+            "startMs": 1000,
+            "endMs": 2025
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 2025,
+            "endMs": 2300
+          }
+        ],
+        "boundaries": {},
+        "automatedRecognition": {
+          "base.en": "and this is Chang Wu.",
+          "tiny.en": "and this is Chang Woo.",
+          "limit": "Recognition is auxiliary evidence; human pronunciation and naturalness review remains pending."
+        },
+        "humanListening": "pending"
+      },
+      "phonemeOverrides": {
+        "Chang-woo": "ʧˈæŋ wˌu"
       }
     },
     {
@@ -516,21 +586,112 @@
       "sourceId": "L05-W01",
       "sourceKind": "vocabulary",
       "catalogTextSha256": "1a24b7688c199c24d87b5984d152b37d1d528911ec852d9cdf98c3ef29b916ea",
-      "path": "unit5-6/audio/l05-w01.mp3",
+      "path": "unit5-6/audio/l05-w01-v2.mp3",
       "voiceId": "af_heart",
-      "renderMode": "context-cropped-lexeme-v1",
+      "renderMode": "token-bounded-lexeme-v1",
       "speed": 1,
-      "sha256": "a6189afc7289246780eca2f80db01c2f0d4bc119bb8c38efea3f6db8a2a8645b",
-      "bytes": 23373,
-      "durationMs": 1870,
+      "sha256": "765dfbeffd1aeb67c94fad7cdc473b64ccb8c7095d4bbbfcefd01b0c2a1f6ef2",
+      "bytes": 8973,
+      "durationMs": 672,
       "decodedOnsetMs": 70,
       "reviewStatus": "unreviewed-candidate",
       "text": "Mr.",
       "origin": {
-        "kind": "git",
-        "commit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
-        "path": "poc/lesson5-6-experience/audio/l05-w01.mp3",
-        "originalReviewStatus": "unreviewed-candidate"
+        "kind": "local-generation",
+        "recipe": "scripts/media/lexemes/unit5-6-mister.json",
+        "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+        "seed": 0
+      },
+      "generationRecipe": {
+        "path": "scripts/media/lexemes/unit5-6-mister.json",
+        "sha256": "2d000fa826b30ccfe3623964da7c80f6ae1881b71324b4250d103cc1c805f1f2",
+        "generator": "scripts/media/render-lexeme.py",
+        "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e",
+        "environment": {
+          "python": "3.12",
+          "kokoro": "0.9.4",
+          "misaki": "0.9.4",
+          "torch": "2.14.0",
+          "numpy": "2.5.3",
+          "soundfile": "0.14.0",
+          "spacy": "3.8.16",
+          "en-core-web-sm": "3.8.0"
+        }
+      },
+      "pronunciationRepair": {
+        "revision": "2026-09-22-v2",
+        "issue": "A01",
+        "supersedesPath": "unit5-6/audio/l05-w01.mp3",
+        "supersedesSha256": "a6189afc7289246780eca2f80db01c2f0d4bc119bb8c38efea3f6db8a2a8645b",
+        "previousOrigin": {
+          "kind": "git",
+          "commit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
+          "path": "poc/lesson5-6-experience/audio/l05-w01.mp3",
+          "originalReviewStatus": "unreviewed-candidate"
+        },
+        "actualPhonemes": "hˈɪɹ ɪz ðə wˈɜɹd mˈɪstəɹ. mˈɪstəɹ.",
+        "tokens": [
+          {
+            "text": "Here",
+            "phonemes": "hˈɪɹ",
+            "startMs": 275,
+            "endMs": 500
+          },
+          {
+            "text": "is",
+            "phonemes": "ɪz",
+            "startMs": 500,
+            "endMs": 638
+          },
+          {
+            "text": "the",
+            "phonemes": "ðə",
+            "startMs": 638,
+            "endMs": 725
+          },
+          {
+            "text": "word",
+            "phonemes": "wˈɜɹd",
+            "startMs": 725,
+            "endMs": 962
+          },
+          {
+            "text": "mister",
+            "phonemes": "mˈɪstəɹ",
+            "startMs": 962,
+            "endMs": 1500
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 1500,
+            "endMs": 1625
+          },
+          {
+            "text": "mister",
+            "phonemes": "mˈɪstəɹ",
+            "startMs": 1625,
+            "endMs": 2250
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 2250,
+            "endMs": 2425
+          }
+        ],
+        "boundaries": {
+          "targetStartMs": 1625,
+          "targetEndMs": 2250,
+          "cropStartMs": 1545,
+          "cropEndMs": 2430
+        },
+        "automatedRecognition": {
+          "base.en": "Mr.",
+          "tiny.en": "Mr.",
+          "limit": "Recognition is auxiliary evidence; human pronunciation and naturalness review remains pending."
+        },
+        "humanListening": "pending"
       }
     },
     {

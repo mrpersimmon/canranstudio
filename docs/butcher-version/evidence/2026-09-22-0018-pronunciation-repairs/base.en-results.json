@@ -1,0 +1,82 @@
+[
+  {
+    "path": "tmp/audio-repairs-20260922/unit5-6-mister.mp3",
+    "sha256": "765dfbeffd1aeb67c94fad7cdc473b64ccb8c7095d4bbbfcefd01b0c2a1f6ef2",
+    "expected": "Mr.",
+    "expectedBasis": "repair-recipe",
+    "recognized": "Mr.",
+    "similarity": 1.0,
+    "flags": [],
+    "signal": {
+      "decodedMs": 672,
+      "onsetMs": 70,
+      "activeSpanMs": 420,
+      "activeFramesMs": 410,
+      "peak": 0.755,
+      "clippedSamples": 0,
+      "tailMs": 182
+    },
+    "humanListening": "not-performed"
+  },
+  {
+    "path": "tmp/audio-repairs-20260922/unit5-6-chang-woo.mp3",
+    "sha256": "bdd633afc60c611f794ac4333066f8bc7ea808743d49991304449411f7a520b4",
+    "expected": "And this is Chang-woo.",
+    "expectedBasis": "repair-recipe",
+    "recognized": "and this is Chang Wu.",
+    "similarity": 0.909,
+    "flags": [
+      "transcript-difference"
+    ],
+    "signal": {
+      "decodedMs": 1610,
+      "onsetMs": 70,
+      "activeSpanMs": 1360,
+      "activeFramesMs": 1310,
+      "peak": 0.7496,
+      "clippedSamples": 0,
+      "tailMs": 180
+    },
+    "humanListening": "not-performed"
+  },
+  {
+    "path": "tmp/audio-repairs-20260922/unit11-12-pauls.mp3",
+    "sha256": "8657e3f2c89168b4cf2dc43ae7bb46099479da979897104b09730dcd1e4b914b",
+    "expected": "Whose is this car? It's Paul's. It's his car.",
+    "expectedBasis": "repair-recipe",
+    "recognized": "Who's is this car? It's Paul's. It's his car.",
+    "similarity": 0.984,
+    "flags": [
+      "transcript-difference"
+    ],
+    "signal": {
+      "decodedMs": 2834,
+      "onsetMs": 70,
+      "activeSpanMs": 2580,
+      "activeFramesMs": 2160,
+      "peak": 0.7609,
+      "clippedSamples": 0,
+      "tailMs": 184
+    },
+    "humanListening": "not-performed"
+  },
+  {
+    "path": "tmp/audio-repairs-20260922/unit1-2-excuse.mp3",
+    "sha256": "e81291215fcda115611fa6c017ffdd02833ed22a3ecd0856c2d9303bd6d3cfec",
+    "expected": "excuse",
+    "expectedBasis": "repair-recipe",
+    "recognized": "Excuse.",
+    "similarity": 1.0,
+    "flags": [],
+    "signal": {
+      "decodedMs": 911,
+      "onsetMs": 70,
+      "activeSpanMs": 660,
+      "activeFramesMs": 600,
+      "peak": 0.7188,
+      "clippedSamples": 0,
+      "tailMs": 181
+    },
+    "humanListening": "not-performed"
+  }
+]

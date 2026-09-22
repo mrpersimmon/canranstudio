@@ -8,10 +8,10 @@ async function heard(page,control,path){const before=await page.evaluate(()=>win
 test('80 段录音由真实页面逐一播完，完整原文、词卡、四组指代、十二组问答绑定正确',async({page})=>{
   test.setTimeout(360000);await observe(page);const failed=[];page.on('response',r=>{if(r.status()>=400)failed.push(r.url());});
   await page.goto('/unit5-6/#learn/words');const words=page.locator('.stage-words');
-  const entries=[['French','l05-w07'],['German','l05-w08'],['Japanese','l05-w11'],['South Korean','l05-w12'],['Chinese','l05-w13'],['Swedish','l06-w02'],['English','l06-w03'],['American','l06-w04'],['student','l05-w06'],['Mr.','l05-w01'],['Miss','l05-w04'],['morning','l05-w03'],['good','l05-w02'],['new','l05-w05'],['nice','l05-w09'],['meet','l05-w10'],['too','l05-w14'],['make','l06-w01'],['Volvo','l06-w05'],['Peugeot','l06-w06'],['Mercedes','l06-w07'],['Toyota','l06-w08'],['Ford','l06-w09'],['Mini','l06-w10']];
+  const entries=[['French','l05-w07'],['German','l05-w08'],['Japanese','l05-w11'],['South Korean','l05-w12'],['Chinese','l05-w13'],['Swedish','l06-w02'],['English','l06-w03'],['American','l06-w04'],['student','l05-w06'],['Mr.','l05-w01-v2'],['Miss','l05-w04'],['morning','l05-w03'],['good','l05-w02'],['new','l05-w05'],['nice','l05-w09'],['meet','l05-w10'],['too','l05-w14'],['make','l06-w01'],['Volvo','l06-w05'],['Peugeot','l06-w06'],['Mercedes','l06-w07'],['Toyota','l06-w08'],['Ford','l06-w09'],['Mini','l06-w10']];
   for(let i=0;i<entries.length;i++){if(i&&i%6===0)await words.getByRole('button',{name:'下一组词卡',exact:true}).click();await heard(page,words.getByRole('button',{name:entries[i][0],exact:true}),'/unit5-6/audio/'+entries[i][1]+'.mp3');}
   await page.getByRole('link',{name:'新朋友来了',exact:true}).click();const story=page.locator('.stage-text');
-  for(let i=0;i<20;i++){await heard(page,story.getByRole('button',{name:i?'下一句':'开始听课文',exact:true}),'/unit5-6/audio/l05-d'+String(i+1).padStart(2,'0')+'.mp3');await expect(story.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}
+  for(let i=0;i<20;i++){await heard(page,story.getByRole('button',{name:i?'下一句':'开始听课文',exact:true}),'/unit5-6/audio/l05-d'+String(i+1).padStart(2,'0')+(i===11?'-v2':'')+'.mp3');await expect(story.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}
   await story.getByRole('button',{name:'完成课文学习',exact:true}).click();
   await page.getByRole('link',{name:'介绍有办法',exact:true}).click();const phrases=page.locator('.stage-phrases');
   await phrases.getByText('他、她、它怎么接着说',{exact:true}).click();

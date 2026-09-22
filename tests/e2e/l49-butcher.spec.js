@@ -9,8 +9,8 @@ test.setTimeout(60000);
 async function openActivity(page,id){
   await page.goto('/lesson49/#learn/'+id);
 }
-async function reason(room,text){
-  await expect(room.getByRole('status')).toContainText(text);
+async function retryFeedback(room){
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await expect(room.getByText('看看原因',{exact:true})).toHaveCount(0);
 }
 async function record(page,text){
@@ -35,7 +35,7 @@ async function finishAudio(page) {
   await page.evaluate(() => window.testRecordings.at(-1).dispatchEvent(new Event('ended')));
 }
 
-test('三单答错后保留当前题和解释，孩子点击继续才换题', async ({ page }) => {
+test('三单答错后保留当前题，孩子点击重试才重新作答', async ({ page }) => {
   await page.addInitScript(() => { Math.random = () => 0.5; });
   await page.goto('/lesson49/#learn/subjects');
   const subject = await page.locator('#tpItemText').innerText();
@@ -43,9 +43,9 @@ test('三单答错后保留当前题和解释，孩子点击继续才换题', as
   await submitSubject(stage,'第一人称',false);
   await page.waitForTimeout(1200);
   await expect(page.locator('#tpItemText')).toHaveText(subject);
-  await expect(stage.getByRole('status')).toContainText('正确答案：第三人称单数');
-  await stage.getByRole('button', { name: '继续', exact: true }).click();
-  await expect(page.locator('#tpItemText')).not.toHaveText(subject);
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+  await stage.getByRole('button', { name: '再试一次', exact: true }).click();
+  await expect(page.locator('#tpItemText')).toHaveText(subject);
   await expect(stage.getByRole('status')).toBeEmpty();
 });
 
@@ -69,7 +69,7 @@ test('Do/Are 根据情境选择完整问句，错误解释停留到手动继续'
   await expect(room).toContainText('想知道客人喜不喜欢肉');
   await room.getByRole('button', { name: 'Are you like meat?', exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await reason(room,'本句用动词 like 表达喜好');
+  await retryFeedback(room);
   await page.waitForTimeout(1200);
   await expect(room).toContainText('想知道客人喜不喜欢肉');
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
@@ -101,22 +101,22 @@ test('词卡保留准确图义和抽象词情境，移除来源分类', async ({
 
 test('提示与首次错误分别记录，刷新恢复作答反馈，旧星星不冒充新记录', async ({ page }) => {
   await page.addInitScript(() => { localStorage.setItem('l49-stars-v1', JSON.stringify({l1:3,l2:3,l3:3,l4:3,l5:3})); });
-  await page.goto('/lesson49/#learn/doare');
+  await page.goto('/lesson49/#learn/subjects');
   await expect(page.locator('#starCount')).toHaveText('15');
   await page.getByText('学徒手记', { exact: true }).click();
   await expect(page.locator('#learningRecord')).toContainText('还没有新的作答记录');
   await page.getByRole('button',{name:'关闭',exact:true}).click();
-  const room=page.locator('#t3a');
+  const room=page.locator('.stage-subjects');
   await room.getByRole('button', {name:'给点线索',exact:true}).click();
-  await room.getByRole('button', {name:'Do you like meat?',exact:true}).click();
+  await room.getByRole('button', {name:'第三人称单数',exact:true}).click();
   await room.getByRole('button', {name:'检查答案',exact:true}).click();
   await expect(room.getByRole('status')).toHaveText('答对了！');
   await record(page,'提示后完成');
   await page.reload();
   await expect(room.getByRole('status')).toHaveText('答对了！');
   await record(page,'提示后完成');
-  await room.getByRole('button', {name: /^(下一题|完成这一站)$/,exact:true}).click();
-  await room.getByRole('button', {name:'Do you a teacher?',exact:true}).click();
+  await room.getByRole('button', {name:'继续',exact:true}).click();
+  await room.getByRole('button', {name:'第三人称单数',exact:true}).click();
   await room.getByRole('button', {name:'检查答案',exact:true}).click();
   await page.getByText('学徒手记', { exact:true }).click();
   await expect(page.locator('#learningRecord')).toContainText('首次未答对');
@@ -176,7 +176,7 @@ test('either 与 too 先判断两个人的意思，再选择有前文的回应',
   await choose(room,'I like steak, too.');
   await expect(room).toContainText("A: I don't like chicken.");
   await choose(room,'只有 A 不喜欢鸡肉',false);
-  await reason(room,'B 也不喜欢鸡肉');
+  await retryFeedback(room);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   await choose(room,'两个人都不喜欢鸡肉');
   await choose(room,"I don't like chicken either.",false);
@@ -228,7 +228,7 @@ test('主语分类包含 I 和 you，否定句用原形，翻译需要组织词�
   const choice=page.locator('#choiceList');
   await expect(choice).toContainText("He doesn't like chicken.");
   await choose(choice,"He doesn't likes chicken.",false);
-  await reason(choice,"doesn't 后面的 like 用原形");
+  await retryFeedback(choice);
   await choice.getByRole('button',{name:'再试一次',exact:true}).click();
   await choose(choice,"He doesn't like chicken.");
   await openActivity(page,'trans');

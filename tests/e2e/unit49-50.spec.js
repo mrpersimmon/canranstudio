@@ -126,7 +126,7 @@ test('区分喜好与当前需求，并保留 Written A 的六种否定结构', 
   await expect(room).toContainText('Penny 喜欢西红柿，但这次不想买。哪句话符合？');
   await room.getByRole('button', { name: 'She likes tomatoes, and she wants some.', exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.getByRole('status')).toContainText('喜欢不等于这次想要');
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await answer(room, "She likes tomatoes, but she doesn't want any.");
   await answer(room, "I like potatoes, but I don't want any.");

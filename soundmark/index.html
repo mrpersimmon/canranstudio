@@ -554,7 +554,7 @@ const VOWELS = [
   {sym:'ʊ', name:'短呜精灵', tip:'像说「呜」，但更短促，嘴唇放松。短、轻、快。', letters:'u / oo / ou / o', cls:'c2', face:'o',
    words:[['book','bʊk'],['look','lʊk'],['good','gʊd'],['took','tʊk'],['bush','bʊʃ'],['would','wʊd'],['foot','fʊt'],['cook','kʊk']]},
   {sym:'u:', name:'泡泡鱼精灵', tip:'嘴巴使劲向前撅，模仿小鱼吐泡泡：呜——', letters:'u / o / oo / ue / ui / oe', cls:'c3', face:'fish',
-   words:[['too','tu:'],['food','fu:d'],['loose','lu:z'],['moon','mu:n'],['soon','su:n'],['blue','blu:'],['cool','ku:l'],['flew','flu:']]},
+   words:[['too','tu:'],['food','fu:d'],['loose','lu:s'],['moon','mu:n'],['soon','su:n'],['blue','blu:'],['cool','ku:l'],['flew','flu:']]},
   {sym:'æ', name:'大嘴巴精灵', tip:'嘴巴向两侧大大咧开，声音靠前，短促有力。', letters:'a', cls:'c4', face:'wide',
    words:[['bad','bæd'],['fat','fæt'],['pat','pæt'],['lad','læd'],['mat','mæt'],['sat','sæt'],['fan','fæn'],['lamp','læmp']]},
   {sym:'e', name:'小 e 精灵', tip:'嘴唇向两侧微微张开，声音靠前，短促有力。', letters:'e / ea / a / ie', cls:'c5', face:'mid',
@@ -806,7 +806,7 @@ function faceSVG(kind){
       const outcome=CanranCore.assessment.submitAttempt(attempt,correct);
       attempt=outcome.state;
       if(!outcome.solved){
-        p.classList.add('wrong');fb.textContent='再想想～';fb.className='fb bad';return;
+        p.classList.add('wrong');fb.textContent='再看看，试一次。';fb.className='fb bad';return;
       }
       transitioning=true;
       if(outcome.scored)score++;
@@ -955,7 +955,7 @@ function gameDone(scoreId,rating){
     const outcome=CanranCore.assessment.submitAttempt(attempt,b.dataset.sym===cur.sym);
     attempt=outcome.state;
     if(!outcome.solved){
-      b.classList.add('wrong');fb.textContent='不对哦，再听一次试试！';fb.className='fb bad';return;
+      b.classList.add('wrong');fb.textContent='再看看，试一次。';fb.className='fb bad';return;
     }
     locked=true;b.classList.add('right');
     if(outcome.scored)score++;
@@ -1018,7 +1018,7 @@ function gameDone(scoreId,rating){
     const outcome=CanranCore.assessment.submitAttempt(attempt,b.dataset.w===cur.w);
     attempt=outcome.state;
     if(!outcome.solved){
-      b.classList.add('wrong');fb.textContent='再仔细听听，差别就在那个小音里！';fb.className='fb bad';return;
+      b.classList.add('wrong');fb.textContent='再看看，试一次。';fb.className='fb bad';return;
     }
     locked=true;b.classList.add('right');
     if(outcome.scored)score++;
@@ -1077,7 +1077,7 @@ function gameDone(scoreId,rating){
     const outcome=CanranCore.assessment.submitAttempt(attempt,w===cur[1]);
     attempt=outcome.state;
     if(!outcome.solved){
-      b.classList.add('wrong');fb.textContent='差一点点～把音标一个一个拼起来再试试！';fb.className='fb bad';return;
+      b.classList.add('wrong');fb.textContent='再看看，试一次。';fb.className='fb bad';return;
     }
     locked=true;b.classList.add('right');
     if(outcome.scored)score++;

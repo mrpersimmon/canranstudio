@@ -25,45 +25,23 @@ async function bulbLayout(stage) {
   return {hint,check};
 }
 
-test('问话线索统一为检查左侧灯泡，展开、检查、重试与刷新保持稳定',async({page})=>{
-  await page.setViewportSize({width:320,height:664});
-  await page.goto('/lesson49/#learn/doare');await page.evaluate(()=>document.fonts.ready);
-  const stage=page.locator('.stage-doare');
-  await capture(page,stage,process.env.L49_HINT_PASS==='before'?'before':'doare');
-  const {hint,check}=await bulbLayout(stage);
-  const top=element=>element.evaluate(node=>node.getBoundingClientRect().top+scrollY);
-  const options=stage.locator('.practice-options');
-  const initial={check:await top(check),options:await top(options)};
-  await hint.focus();const before=await page.evaluate(()=>scrollY);
-  await hint.press('Enter');
-  await expect(hint).toHaveAttribute('aria-expanded','true');
-  await expect(stage.locator('.practice-hint')).toContainText('本句用动词 like 表达喜好');
-  await expect(stage.locator('.practice-hint')).toBeInViewport();
-  await expect(check).toBeDisabled();
-  await expect(options.locator('[aria-pressed="true"]')).toHaveCount(0);
-  await expect(page.locator('#starCount')).toHaveText('0');
-  expect(await page.evaluate(()=>scrollY)).toBe(before);
-  expect(await top(check)).toBe(initial.check);expect(await top(options)).toBe(initial.options);
-  await capture(page,stage,'doare-hint');
-  await options.getByRole('button',{name:'Are you like meat?',exact:true}).click();
-  await check.scrollIntoViewIfNeeded();const selectedScroll=await page.evaluate(()=>scrollY);
-  await check.press('Enter');
-  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。本句用动词 like 表达喜好，一般现在时问句是 Do you like meat?');
-  await expect(hint).toBeDisabled();await expect(stage.locator('.practice-hint')).toBeHidden();
-  const retry=stage.getByRole('button',{name:'再试一次',exact:true});
-  expect(await top(retry)).toBe(initial.check);expect(await top(options)).toBe(initial.options);
-  expect(await page.evaluate(()=>scrollY)).toBe(selectedScroll);
-  await retry.click();
-  await expect(hint).toBeEnabled();await expect(hint).toHaveAttribute('aria-expanded','true');
-  await expect(stage.locator('.practice-hint')).toBeVisible();
-  await page.reload();
-  await bulbLayout(stage);await expect(hint).toHaveAttribute('aria-expanded','true');
-  await expect(check).toBeDisabled();
-  await options.getByRole('button',{name:'Do you like meat?',exact:true}).click();
-  await check.click();await expect(hint).toBeDisabled();
-  const next=stage.getByRole('button',{name:'下一题',exact:true});
-  expect(await top(next)).toBe(initial.check);
-  await next.click();await expect(hint).toBeEnabled();
+test('交接线索统一为左侧灯泡，展开、检查、重试与刷新保持稳定',async({page})=>{
+  await page.setViewportSize({width:320,height:664});await page.goto('/lesson49/#learn/give');await page.evaluate(()=>document.fonts.ready);
+  const stage=page.locator('.stage-give');
+  for(const value of ['Mrs. Bird','that piece','Give that piece to me, please.']){
+    await stage.locator('.practice-options').getByRole('button',{name:value,exact:true}).click();
+    await stage.getByRole('button',{name:'检查答案',exact:true}).click();await stage.getByRole('button',{name:'下一题',exact:true}).click();
+  }
+  const {hint,check}=await bulbLayout(stage),bank=stage.getByRole('group',{name:'待选词块',exact:true});
+  const top=el=>el.evaluate(node=>node.getBoundingClientRect().top+scrollY),initial=await top(check);
+  await hint.press('Enter');await expect(hint).toHaveAttribute('aria-expanded','true');await expect(stage.locator('.practice-hint')).toHaveText('先放动作，再放物品，to 后面连接接收者。');
+  expect(await top(check)).toBe(initial);await expect(check).toBeDisabled();
+  for(const word of ['Give','that piece','me,','to','please.'])await bank.getByRole('button',{name:word,exact:true}).click();
+  await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');await expect(hint).toBeDisabled();
+  const retry=stage.getByRole('button',{name:'再试一次',exact:true});expect(await top(retry)).toBe(initial);await retry.click();
+  await page.reload();await bulbLayout(stage);await expect(hint).toHaveAttribute('aria-expanded','true');await expect(check).toBeDisabled();
+  for(const word of ['Give','that piece','to','me,','please.'])await bank.getByRole('button',{name:word,exact:true}).click();
+  await check.click();await expect(hint).toBeDisabled();await stage.getByRole('button',{name:'下一题',exact:true}).click();
   await expect(hint).toHaveAttribute('aria-expanded','false');await expect(check).toBeDisabled();
 });
 
@@ -83,12 +61,18 @@ async function prepare(page, automatic=true) {
   },automatic);
 }
 
-for(const width of [320,768,1280])test(`${width} 宽度八个非听辨活动统一灯泡，提示可读且刷新不预选、不播放`,async({page})=>{
+for(const width of [320,768,1280])test(`${width} 宽度八个非听辨活动仅在有独立线索时显示灯泡，刷新不代答`,async({page})=>{
   test.setTimeout(90000);
   await page.setViewportSize({width,height:width<500?664:900});await prepare(page);
   for(const id of ['roles','doare','give','pouch','either','fill','choice','trans']){
     await page.goto(`/lesson49/#learn/${id}`);await page.evaluate(()=>document.fonts.ready);
-    const stage=page.locator(`.stage-${id}`),{hint,check}=await bulbLayout(stage);
+    const stage=page.locator(`.stage-${id}`);
+    if(id!=='roles'){
+      await expect(stage.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
+      await page.reload();await expect(stage.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+      continue;
+    }
+    const {hint,check}=await bulbLayout(stage);
     await expect(hint.locator('img')).toHaveAttribute('src','/assets/lesson49/icons/hint.svg');
     await expect(hint).toHaveAttribute('aria-expanded','false');
     const options=stage.locator('.practice-options');
@@ -124,22 +108,24 @@ for(const width of [320,768,1280])test(`${width} 宽度八个非听辨活动统�
 });
 
 test('词块题用线索后仍需手动拼装，记录提示后完成，下一题和重练清空线索',async({page})=>{
-  await prepare(page);await page.goto('/lesson49/#learn/trans');
+  await prepare(page);await page.goto('/unit1-2/#learn/trans');
   const stage=page.locator('.stage-trans'),{hint,check}=await bulbLayout(stage);
   await hint.click();await page.reload();await expect(hint).toHaveAttribute('aria-expanded','true');
   const bank=stage.getByRole('group',{name:'待选词块',exact:true});
   await expect(stage.getByRole('group',{name:'已选词块',exact:true}).getByRole('button')).toHaveCount(0);
   await expect(check).toBeDisabled();
-  for(const word of ['She','likes','peaches.'])await bank.getByRole('button',{name:word,exact:true}).click();
+  for(const word of ['Is','this','your','pen?'])await bank.getByRole('button',{name:word,exact:true}).click();
   await check.click();await expect(stage.getByRole('status')).toHaveText('答对了！');
   await expect(hint).toBeDisabled();await expect(stage.locator('.practice-hint')).toBeHidden();
-  await page.getByRole('button',{name:'学徒手记',exact:true}).click();
+  await page.getByRole('button',{name:'学习手记',exact:true}).click();
   await expect(page.locator('#learningRecord')).toContainText('提示后完成');
   await expect(page.locator('#learningRecord')).toContainText('额外提示已用');
   await page.getByRole('button',{name:'关闭',exact:true}).click();
   await stage.getByRole('button',{name:'下一题',exact:true}).click();
   await expect(hint).toHaveAttribute('aria-expanded','false');await expect(check).toBeDisabled();
-  for(const word of ['He','wants','a car.'])await bank.getByRole('button',{name:word,exact:true}).click();
+  for(const word of ['Yes,','it','is.'])await bank.getByRole('button',{name:word,exact:true}).click();
+  await check.click();await stage.getByRole('button',{name:'下一题',exact:true}).click();
+  for(const word of ['Thank','you','very','much.'])await bank.getByRole('button',{name:word,exact:true}).click();
   await check.click();await stage.getByRole('button',{name:'完成这一站',exact:true}).click();
   await expect(hint).toHaveCount(0);
   await stage.getByRole('button',{name:'再练一轮',exact:true}).click();
@@ -161,6 +147,11 @@ test('挑战听辨保留听完门槛；阅读题灯泡、暂停和刷新不自�
   await expect(check).toBeEnabled();await check.click();
   await expect(stage.getByRole('status')).toHaveText('答对了！');
   await stage.getByRole('button',{name:'下一题',exact:true}).click();
+  for(const value of ['Mrs. Bird: lamb · husband: steak','Are you a student?','Do you want chicken?']){
+    await expect(stage.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
+    await stage.locator('.practice-options').getByRole('button',{name:value,exact:true}).click();await check.click();
+    await stage.getByRole('button',{name:'下一题',exact:true}).click();
+  }
   const {hint}=await bulbLayout(stage);
   await expect(hint).toHaveAttribute('aria-expanded','false');await expect(check).toBeDisabled();
   await hint.click();

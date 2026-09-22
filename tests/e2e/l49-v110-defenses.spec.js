@@ -84,7 +84,7 @@ test('订单听辨真实播放到结束才允许检查，实际请求的是 a po
   await check.click();await expect(stage.getByRole('status')).toHaveText('答对了！');
 });
 
-test('320 窄屏长误选反馈不裁掉开头或结尾',async({page})=>{
+test('320 窄屏重试反馈不裁切，各题原题修正后推进',async({page})=>{
   await page.setViewportSize({width:320,height:844});
   await page.goto('/lesson49/#learn/subjects');await page.evaluate(()=>document.fonts.ready);
   const stage=page.locator('.stage-subjects');
@@ -94,6 +94,11 @@ test('320 窄屏长误选反馈不裁掉开头或结尾',async({page})=>{
     const feedback=await stage.getByRole('status').boundingBox();
     expect(feedback.y).toBeGreaterThanOrEqual(note.y);
     expect(feedback.y+feedback.height).toBeLessThanOrEqual(note.y+note.height);
-    await stage.getByRole('button',{name:'继续',exact:true}).click();
+    if(await stage.getByRole('button',{name:'再试一次',exact:true}).isVisible()){
+      await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+      await stage.getByRole('button',{name:'再试一次',exact:true}).click();
+      await submitSubject(stage,subjectAnswers[i],false);
+    }
+    await stage.getByRole('button',{name:i===11?'完成':'继续',exact:true}).click();
   }
 });

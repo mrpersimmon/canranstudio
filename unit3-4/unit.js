@@ -97,7 +97,7 @@
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
-  const passed = id => completed[id] === signatures[id];
+  const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
   const fullyComplete = () => stages.every(stage => stage.required.every(passed));
   function updateProgress() {
     let total = 0;

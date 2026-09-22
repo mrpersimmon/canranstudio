@@ -97,9 +97,18 @@
 
   const signatures = Object.fromEntries(Object.entries(questions).map(([id, items]) => [id, JSON.stringify([unit.version, items])]));
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
+  // This pronunciation-only replacement keeps the same text and questions.
+  // Accept only the exact former audio path, not arbitrary older story content.
+  const priorPronunciationSignature = JSON.stringify([unit.version, content.DIALOGUE.map(line =>
+    line.id === 'L05-D12' && line.audio === 'unit5-6/audio/l05-d12-v2.mp3'
+      ? { ...line, audio: 'unit5-6/audio/l05-d12.mp3' } : line)]);
+  const sameDialogue = signature => signature === signatures.text || signature === priorPronunciationSignature;
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
-  const passed = id => completed[id] === signatures[id];
+  if (completed.text === priorPronunciationSignature && completed.text !== signatures.text) {
+    completed.text = signatures.text; practice.activity('unitCompleted', completed);
+  }
+  const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
   const fullyComplete = () => stages.every(stage => stage.required.every(passed));
   function updateProgress() {
     let total = 0;
@@ -191,10 +200,11 @@
   }
   function resetDialogue() { ++generation; audio.stop(); clearPlaying(); dialogue = { i: -1, heard: [], done: false }; saveDialogue(); lead(); showPerson(-1); status.textContent = ''; refreshDialogue(); }
   const draft = practice.activity('unitDialogue');
-  if (draft?.signature === signatures.text && Number.isInteger(draft.i) && draft.i >= 0 && draft.i < content.DIALOGUE.length && Array.isArray(draft.heard)) {
+  if (sameDialogue(draft?.signature) && Number.isInteger(draft.i) && draft.i >= 0 && draft.i < content.DIALOGUE.length && Array.isArray(draft.heard)) {
     const gap = content.DIALOGUE.findIndex((_, index) => index < draft.i && draft.heard[index] !== true), index = gap < 0 ? draft.i : gap;
     dialogue = { i: index, heard: draft.heard.slice(0, index + 1).map(value => value === true), done: draft.done === true && index === content.DIALOGUE.length - 1 && content.DIALOGUE.every((_, i) => draft.heard[i] === true) };
     for (let i = 0; i <= index; i++) appendLine(i);
+    if (draft.signature !== signatures.text) saveDialogue();
     if (dialogue.done) complete('text');
   } else lead();
   showPerson(dialogue.i); refreshDialogue(); unlockStory();

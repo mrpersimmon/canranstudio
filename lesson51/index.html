@@ -734,7 +734,7 @@ function celebrate(el){
     if(!outcome.accepted) return;
     if(!correct){
       button.classList.add('wrong');
-      fb.textContent = '不对哦，再听一次～'; fb.className = 'fb bad';
+      fb.textContent = '再看看，试一次。'; fb.className = 'fb bad';
       return;
     }
     if(outcome.scored) firstTryScore += 1;
@@ -828,7 +828,7 @@ document.getElementById('heroQ').onclick = ()=> manualSpeak('Does it ever snow i
       if(!correct){
         chip.classList.add('wrong');
         setTimeout(()=>chip.classList.remove('wrong'), 400);
-        fb.textContent = '不对哦，想想课文里怎么说的？';
+        fb.textContent = '再看看，试一次。';
         fb.className = 'fb bad';
         return;
       }
@@ -882,8 +882,7 @@ document.getElementById('heroQ').onclick = ()=> manualSpeak('Does it ever snow i
       const outcome = CanranCore.assessment.submitAttempt(attempts.get(sel),correct);
       attempts.set(sel,outcome.state);
       if(!correct){
-        fb.textContent = sel.dataset.lv === 'always' ? '它说的是「每一天」，应该站最高！' :
-          (sel.dataset.lv === 'sometimes' ? '句子里有 sometimes，是最低台阶哦' : '再想想，often 是「常常」');
+        fb.textContent = '再看看，试一次。';
         fb.className = 'fb bad';
         return;
       }
@@ -932,7 +931,7 @@ document.getElementById('heroQ').onclick = ()=> manualSpeak('Does it ever snow i
         if(!outcome.accepted) return;
         if(!correct){
           button.classList.add('wrong');
-          fb.textContent = '再想想～可以回到前面的关卡看看'; fb.className = 'fb bad';
+          fb.textContent = '再看看，试一次。'; fb.className = 'fb bad';
           return;
         }
         if(outcome.scored) firstTryScore += 1;

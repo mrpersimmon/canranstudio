@@ -1,5 +1,7 @@
 # 怎样检查修改
 
+错答反馈统一按[现行设计标准](../docs/butcher-version/2026-09-20-1325-v1.17-教学单元设计标准与验收清单.md)验收。运行 `npx playwright test tests/e2e/retry-feedback.spec.js`，覆盖 15 个现行课程入口的短反馈、原题重试、不高亮／朗读答案、灯泡不以解析兜底、真实空格及旧记录衔接。课程和共享练习改动会自动加入 `browser-retry-feedback` 检查计划。历史测试中“答错显示正确答案”的预期已经失效；不能为了保留旧断言恢复泄题。
+
 需要 Node.js 20 或更新版本。首次检查前，在项目根目录运行：
 
 ```bash
@@ -59,7 +61,19 @@ Lesson 3–4 的检查用 `npx playwright test tests/e2e/unit3-4`：覆盖 12 �
 
 Lesson 5–6 的检查用 `npx playwright test tests/e2e/unit5-6`：从独立题稿验证 20 句原文、27 题、24 张配套音标词卡、80 段录音真实结束、历史点读与失败恢复、错答和提示记录、四种宽度、键盘、证书图片与 A4 练习纸、首页独立继续和 `/lesson/` 路径。导航改动同时回归 `butcher-navigation.spec.js`、`unit1-2-navigation.spec.js` 和 `lesson-deployment.spec.js`。不把原生播放成功当成人工发音验收。
 
-重复题整改用 `npx playwright test tests/e2e/unit-dedup.spec.js`：覆盖三单元新题、基础拼句到完整接力的顺序、综合挑战、分拣只回练错题，以及真实旧题稿升级后不代答、未改活动保留。历史题稿放在 `tests/fixtures/unit-dedup-before/`，只用于隔离的浏览器升级检查；课件从当前内容加载。完整流程分别验证 27、27、73 题，并回归 `l49-v110.spec.js`、`l49-v110-defenses.spec.js`，确保 Lesson 49 单课的十二题与原回练规则不被组合单元修改。题目必要性仍需按统一标准人工审稿，不能靠程序数题代替。
+Lesson 7–8 当前是[不依赖配音的课堂配套版](../docs/butcher-version/2026-09-22-0039-v1.2-Lesson7-8课堂配套版本与验收.md)，用 `npx playwright test tests/e2e/unit7-8`：24 项页面检查覆盖 16 句、27 题、22 张音标词卡、零英语配音请求、全部声音失败仍可完成、正误反馈音、末题刷新不代答、课文续读与稳定按钮、词块撤回、四种宽度、证书与单页练习纸。升级验证从历史页面实际作答并播放产生旧记录，再加载现行页面；原页面快照位于 `tests/fixtures/unit7-8-voiced-before/`，不会打包发布。首页与 `/lesson/` 隔离同上回归三个导航文件。`browser-unit78` 随本单元源码、历史样例或流程辅助变化加入检查计划。课堂教师与儿童验收单列。
+
+I 词卡可单独运行 `npx playwright test tests/e2e/unit7-8-audio.spec.js -g 'I 词卡'`：现行预期是保留 /aɪ/ 和释义，翻面、刷新和相邻 am／are 不请求英语配音；两种路径都检查。原 65 段播放和 I 文件指纹检查随历史页面保留在上述样例目录的 `audio.spec.js`，不再作为现行页面交互预期。恢复配音前须重新听审，不能为了通过测试而更换指纹；历史证据见[I 修复记录](../docs/butcher-version/2026-09-21-2112-v1.1-Lesson7-8词音修复与防护.md)。
+
+Lesson 9–10 已改为课堂配套版，专属检查为 `npx playwright test tests/e2e/unit9-10`：14 句阅读原文、26 题、22 张音标词卡；无英语配音请求，保留末题刷新、提示／错答／暂停、内容升版、四种宽度、键盘、证书 PNG、A 六题与 B 十二题单页打印。不能把页数检查当作目视验收。
+
+Lesson 11–12 已改为课堂配套版，专属检查为 `npx playwright test tests/e2e/unit11-12`：三人原文 16 句、23 题、18 张音标词卡；无英语配音请求，保留四种宽度、短屏、三人舞台、末题刷新、词块撤回、提示／错答／暂停、内容升版、证书 PNG 与 A 四题／B 十二题单页练习纸。
+
+Lesson 13–14 从第一版为课堂配套版，使用 `npx playwright test tests/e2e/unit13-14`：独立题稿的 13 句、26 题、21 张音标词卡，十幅配色图和 A 五组／B 十二组完整材料；全部声音失败仍通关、反馈音真实结束、末三题刷新不代答、提示和错答分别记录、词块撤回、内容更新保留未改活动、四种宽度与短屏、证书 PNG 和单页打印。图卡正面显示英文和音标，翻面显示中文；不能把翻面隐藏正面内容当作音标丢失。`browser-unit1314` 随源码、插图和流程辅助变化加入检查计划；导航改动回归同上三个文件。导出的实际图片、A4 和颜色图仍须目视检查，教师与儿童验收单列。
+
+两个单元交付时同时运行 `npx playwright test tests/e2e/unit9-10 tests/e2e/unit11-12 tests/e2e/units9-12-classroom.spec.js`：增加完整原文、语境词义与图片题、正误反馈音、全部声音失败仍可领证、旧录音中断续读、旧 15 星迁移为 9 星后完成新题、稳定按钮与长选项检查。旧记录从两份 `tests/fixtures/unit*-voiced-before/` 历史页面实际产生，57／55 段旧音频的原测试保留在其中，不再要求现行页面播放。`browser-units9-12` 已加入相关源码、样例与流程辅助变化时的检查计划。首页、继续学习、重开和 `/lesson/` 隔离继续检查，导航变化回归前述三个文件；教师与儿童验收另记。
+
+重复题整改用 `npx playwright test tests/e2e/unit-dedup.spec.js`：覆盖三单元新题、基础拼句到完整接力的顺序、综合挑战、分拣错题原题重试，以及真实旧题稿升级后不代答、未改活动保留。历史题稿放在 `tests/fixtures/unit-dedup-before/`，只用于隔离的浏览器升级检查；课件从当前内容加载。完整流程分别验证 27、27、73 题，并回归 `l49-v110.spec.js`、`l49-v110-defenses.spec.js`，确保 Lesson 49 单课的十二题、原题重试和旧回练记录衔接不被组合单元修改。题目必要性仍需按统一标准人工审稿，不能靠程序数题代替。
 
 其中 `unit1-2-navigation.spec.js` 检查新学习先图鉴、旧章节地址与独立继续；`unit1-2-vocabulary-standard.spec.js` 逐卡检查 21 条按词典核对的音标、翻面与窄屏，`unit1-2.spec.js` 验证听辨后进入课文、理解和后续练习以及证书徽章顺序。词典标注检查不等于人工发音听审。
 
@@ -71,9 +85,48 @@ Lesson 5–6 的检查用 `npx playwright test tests/e2e/unit5-6`：从独立题
 
 `/lesson/` 发布路径用 `lesson-deployment.spec.js`：检查导航与资源路径、原课程进度隔离、完整单元、证书、旧官网缓存下的录音，以及手机布局。
 
-题目进度检查用 `l49-v115-progress.spec.js`：覆盖 Lesson 49 和合并单元的答对即时填绿、末题、错答、回练、重练、刷新、暂停和 320 像素窄屏。去重改变题量或分段时也必须运行：单课仍为十二题分拣、十题分段挑战；组合单元是十一题分拣、五题连续挑战，不能共用旧题量。它也会随 `test:l49:behavior` 执行。
+题目进度检查用 `l49-v115-progress.spec.js`：覆盖 Lesson 49 和合并单元的答对即时填绿、末题、错答、回练、重练、刷新、暂停和 320 像素窄屏。去重改变题量或分段时也必须运行：单课仍为十二题分拣、十题分段挑战；组合单元是十一题分拣、五题连续挑战，不能共用旧题量。分拣现按原题重试检查，错答和重试不填绿，真正改对后只补一格，末题和刷新同样适用。它也会随 `test:l49:behavior` 执行。
 
 ## 怎样判断完成
+
+### 发音素材排查
+
+发音要求统一看[设计标准第 6 节](../docs/butcher-version/2026-09-20-1325-v1.17-教学单元设计标准与验收清单.md#6-声音插图与资源)。素材排查是只读诊断，不替代课程的页面行为测试或人工听审，也不自动改录音、提交或发布。
+
+在项目根目录清点当前课程文件：
+
+```bash
+mkdir -p tmp/audio-audit
+node scripts/media/course-audio-inventory.cjs > tmp/audio-audit/inventory.json
+```
+
+初筛另需 FFmpeg、Python 的 `numpy` 与 `faster-whisper`，以及本地已有的模型缓存；脚本不下载模型。本次使用 `faster-whisper 1.2.1`、`ctranslate2 4.8.2`、`numpy 2.5.3`。配置好相应 Python 环境后运行：
+
+```bash
+python scripts/media/audit-course-audio.py tmp/audio-audit/inventory.json \
+  --output tmp/audio-audit --model base.en --model-cache <已有模型缓存目录>
+```
+
+生成的 JSONL 按文件指纹、模型名与参数缓存。复用前仍核对当前文件；更新模型内容时使用新的输出目录，避免把同名不同版本视为同一模型。要复核指定文件，可再加 `--model tiny.en --only-paths <文件路径数组.json>`。期望文字不会作为识别提示；转写不同只进入待复核队列，不能自动判错。
+
+旧课程动态标签可以通过真实浏览器观察后传给清点工具的 `--dom-bindings <观察记录.json>`；本轮记录与全量清单见[2026-09-21 发音排查](../docs/butcher-version/2026-09-21-2143-v1.0-全课程发音排查.md)。只从文件名推断的条目必须继续补查文字真源。页内音频验证继续走各单元的实际控件，确认新文件和两种访问路径；人工结论记录审核人、日期和文件指纹。
+
+### 发音修复防回退
+
+五处发音修复与 I 词卡现行行为的相关页面检查：
+
+```bash
+npx playwright test tests/e2e/pronunciation-repairs.spec.js tests/e2e/unit7-8-audio.spec.js \
+  --grep '修订录音|loose|新录音|只更换录音|I 词卡' --reporter=line
+```
+
+五处修复覆盖真实控件收到的文件与指纹、原速原生结束、重听、刷新、失败重试、根路径与 `/lesson/`。A03 的 Paul’s 已不在学生页面播放，相关检查通过保留的 Lesson 11–12 历史配音页验证素材，标题明确标为“历史”；其当前停用行为另由课堂配套检查覆盖。I 词卡同样检查英语配音保持停用。旧进度验证先在旧页面实际学习，再升级，不直接写入本地记录。`browser-pronunciation` 已加入相关课程、播放器、生成工具和原问题样例变化时的检查计划；手动运行上面的命令也可复验。
+
+修订预期保存在 `tests/fixtures/pronunciation-repairs.json`，原问题样例放在 `tests/fixtures/pronunciation-before/`，不从待测课程清单生成预期。更换录音必须复核读音、留存新证据，再更新预期，不能只为通过指纹检查而改值。
+
+生成配方位于 `scripts/media/lexemes/`。配置清单所记录的 Kokoro／Misaki／FFmpeg 环境后，可用 `python scripts/media/render-lexeme.py <配方.json> --output <新候选.mp3>` 复现；例外必须命中完整词及指定次数，实际音素与目标边界不符时停止。工具只生成待听审候选，不覆盖现用文件，也不自动取得人工通过。实际环境与拒绝诊断见[本次修复记录](../docs/butcher-version/2026-09-22-0018-v1.0-五处发音问题修复与验收.md)。
+
+### 交付状态
 
 命令结束且没有失败项，只说明对应自动检查通过。还需在真实页面检查题目意思、反馈、重听、重练、刷新恢复和小屏布局；真机结果填入[真机检查表](../docs/mobile-release-smoke-checklist.md)。
 

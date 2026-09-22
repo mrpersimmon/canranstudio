@@ -1,0 +1,85 @@
+{
+  "phonemes": "hˌuz ɪz ðɪs kˈɑɹ? ˌɪts pˈɔlz. ˌɪts hɪz kˈɑɹ.",
+  "tokens": [
+    {
+      "text": "Whose",
+      "phonemes": "hˌuz",
+      "startMs": 300,
+      "endMs": 525
+    },
+    {
+      "text": "is",
+      "phonemes": "ɪz",
+      "startMs": 525,
+      "endMs": 675
+    },
+    {
+      "text": "this",
+      "phonemes": "ðɪs",
+      "startMs": 675,
+      "endMs": 875
+    },
+    {
+      "text": "car",
+      "phonemes": "kˈɑɹ",
+      "startMs": 875,
+      "endMs": 1300
+    },
+    {
+      "text": "?",
+      "phonemes": "?",
+      "startMs": 1300,
+      "endMs": 1400
+    },
+    {
+      "text": "It's",
+      "phonemes": "ˌɪts",
+      "startMs": 1400,
+      "endMs": 1600
+    },
+    {
+      "text": "Paul's",
+      "phonemes": "pˈɔlz",
+      "startMs": 1600,
+      "endMs": 2075
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 2075,
+      "endMs": 2150
+    },
+    {
+      "text": "It's",
+      "phonemes": "ˌɪts",
+      "startMs": 2150,
+      "endMs": 2312
+    },
+    {
+      "text": "his",
+      "phonemes": "hɪz",
+      "startMs": 2312,
+      "endMs": 2488
+    },
+    {
+      "text": "car",
+      "phonemes": "kˈɑɹ",
+      "startMs": 2488,
+      "endMs": 3150
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 3150,
+      "endMs": 3325
+    }
+  ],
+  "sha256": "8657e3f2c89168b4cf2dc43ae7bb46099479da979897104b09730dcd1e4b914b",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "renderMode": "natural-utterance",
+  "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+  "reviewStatus": "unreviewed-candidate",
+  "recipeSha256": "390e2b8d60ef3ce3a80f4ff34f52d8bfc1c1d976f1610e8568a4185bcf0b093a",
+  "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e"
+}

@@ -243,6 +243,10 @@ async function assertPublicV1Boundary({
     { label: 'unit1-2', entry: 'unit1-2/index.html' },
     { label: 'unit3-4', entry: 'unit3-4/index.html' },
     { label: 'unit5-6', entry: 'unit5-6/index.html' },
+    { label: 'unit7-8', entry: 'unit7-8/index.html' },
+    { label: 'unit9-10', entry: 'unit9-10/index.html' },
+    { label: 'unit11-12', entry: 'unit11-12/index.html' },
+    { label: 'unit13-14', entry: 'unit13-14/index.html' },
     ...courses.map(course => ({ label: course.id, entry: course.entry }))
   ];
   const pageEntries = new Set([
@@ -252,6 +256,10 @@ async function assertPublicV1Boundary({
     'unit1-2/index.html',
     'unit3-4/index.html',
     'unit5-6/index.html',
+    'unit7-8/index.html',
+    'unit9-10/index.html',
+    'unit11-12/index.html',
+    'unit13-14/index.html',
     ...courses.map(course => course.entry)
   ]);
 
@@ -266,6 +274,10 @@ async function assertPublicV1Boundary({
     ...await runtimeFilesIn(resolvedRoot, 'unit1-2'),
     ...await runtimeFilesIn(resolvedRoot, 'unit3-4'),
     ...await runtimeFilesIn(resolvedRoot, 'unit5-6'),
+    ...await runtimeFilesIn(resolvedRoot, 'unit7-8'),
+    ...await runtimeFilesIn(resolvedRoot, 'unit9-10'),
+    ...await runtimeFilesIn(resolvedRoot, 'unit11-12'),
+    ...await runtimeFilesIn(resolvedRoot, 'unit13-14'),
     ...await runtimeFilesIn(resolvedRoot, 'assets'),
     ...(
       await Promise.all(

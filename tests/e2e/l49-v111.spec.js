@@ -129,7 +129,7 @@ test('两处听辨均为大喇叭和两列图文选项，挑战暂停在标题�
   expect(sizes[0].width).toBe(sizes[1].width);
 });
 
-test('选择题反馈靠近答案；直接纠错、提示和检查都不推移操作按钮', async ({ page }) => {
+test('选择题短反馈靠近答案，无独立线索时不显示灯泡', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/lesson49/#learn/doare');
   const room = page.getByRole('region', { name: '问话小帮手', exact: true });
@@ -137,12 +137,12 @@ test('选择题反馈靠近答案；直接纠错、提示和检查都不推移�
   const last = await room.locator('.practice-options').boundingBox();
   const first = await check.boundingBox();
   expect(first.y - last.y - last.height).toBeLessThanOrEqual(160);
-  await room.getByRole('button', { name: '给点线索', exact: true }).click();
+  await expect(room.getByRole('button', { name: '给点线索', exact: true })).toHaveCount(0);
   expect((await check.boundingBox()).y).toBeCloseTo(first.y, 0);
   await room.getByRole('button', { name: 'Are you like meat?', exact: true }).click();
   await check.click();
   const retry = room.getByRole('button', { name: '再试一次', exact: true });
-  await expect(room.getByRole('status')).toContainText('本句用动词 like');
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   expect((await retry.boundingBox()).y).toBeCloseTo(first.y, 0);
   await retry.click();
   await room.getByRole('button', { name: 'Do you like meat?', exact: true }).click();
@@ -185,7 +185,7 @@ test('普通练习和挑战的问句、回应与填空使用同一表现，结�
       await room.getByRole('button', { name: '检查答案', exact: true }).click();
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
-    if (i === 1) await room.getByRole('button', { name: '给点线索', exact: true }).click();
+    if (i === 4) await room.getByRole('button', { name: '给点线索', exact: true }).click();
     if (i === 2) expect(await promptStyle(room)).toEqual(styles.doare);
     if (i === 6) expect(await promptStyle(room)).toEqual(styles.either);
     if (i === 7) expect(await promptStyle(room)).toEqual(styles.fill);

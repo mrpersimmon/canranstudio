@@ -53,21 +53,21 @@ test('交接题每次答对立即填绿，4/4 答对即全绿，刷新与重练�
   await room.screenshot({ path: 'output/playwright/progress-give-start.png' });
 });
 
-test('分拣答错不填绿，回练只补上原题，最后一次答对立刻满格', async ({ page }) => {
+test('分拣答错不填绿，原题重试后只补一格，最后一次答对立刻满格', async ({ page }) => {
   test.setTimeout(60000);
   await page.goto('/unit49-50/#learn/subjects');
   const room = page.locator('.stage-subjects');
   const total = unitSubjectAnswers.length;
   for (let i = 0; i < total; i++) {
-    await expectProgress(room, 0, total, i + 1);
+    await expectProgress(room, i, total, i + 1);
     await submitSubject(room, unitSubjectAnswers[i] === '第一人称' ? '第二人称' : '第一人称', false);
-    await expectProgress(room, 0, total, i + 1);
-    await room.getByRole('button', { name: '继续', exact: true }).click();
-  }
-  await expect(room).toContainText(`回练 · 还有 ${total} 道待练`);
-  await page.reload();
-  await expectProgress(room, 0, total, 1);
-  for (let i = 0; i < total; i++) {
+    await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+    await expectProgress(room, i, total, i + 1);
+    await page.reload();
+    await expectProgress(room, i, total, i + 1);
+    await room.getByRole('button', { name: '再试一次', exact: true }).click();
+    await expect(room).toContainText(`第 ${i + 1} / ${total} 题`);
+    await expectProgress(room, i, total, i + 1);
     await submitSubject(room, unitSubjectAnswers[i], false);
     await expectProgress(room, i + 1, total, null);
     if (i < total - 1) await room.getByRole('button', { name: '继续', exact: true }).click();
@@ -82,12 +82,12 @@ test('分拣答错不填绿，回练只补上原题，最后一次答对立刻�
   await expectProgress(room, 0, total, 1);
 });
 
-test('Lesson 49 的提示、选中和错答不会填绿，答对更新时操作按钮不跳动', async ({ page }) => {
+test('Lesson 49 选中和错答不会填绿，没有独立线索时不显示灯泡，答对按钮不跳动', async ({ page }) => {
   await page.goto('/lesson49/#learn/fill');
   await page.evaluate(() => document.fonts.ready);
   const room = page.locator('.stage-fill');
   await expectProgress(room, 0, 7, 1);
-  await room.getByRole('button', { name: '给点线索', exact: true }).click();
+  await expect(room.getByRole('button', { name: '给点线索', exact: true })).toHaveCount(0);
   await expectProgress(room, 0, 7, 1);
   await room.getByRole('button', { name: 'like', exact: true }).click();
   await expectProgress(room, 0, 7, 1);
@@ -111,30 +111,25 @@ test('Lesson 49 的提示、选中和错答不会填绿，答对更新时操作�
   await expectProgress(room, 1, 7, 2);
 });
 
-test('分拣间隔题重答不重复计数，再错则撤回该格，修正后恢复', async ({ page }) => {
+test('分拣末题连续重试不重复计数，修正后补上最后一格并保留首次成绩', async ({ page }) => {
   await page.goto('/lesson49/#learn/subjects');
   const room = page.locator('.stage-subjects');
-  for (let i = 0; i < 12; i++) await submitSubject(room, i === 11 ? '第一人称' : subjectAnswers[i]);
-  await expect(room.locator('#tpItemText')).toHaveText('Mrs. Bird');
-  await expectProgress(room, 11, 12, 1);
-  // 已答对的间隔题保留绿色，同时用黄色描边标记当前题。
-  await expect(room.locator('.practice-step').first()).toHaveClass(/is-complete/);
-  await submitSubject(room, '第一人称', false);
-  await expectProgress(room, 10, 12, 1);
-  await page.reload();
-  await expectProgress(room, 10, 12, 1);
-  await room.getByRole('button', { name: '继续', exact: true }).click();
-  await expectProgress(room, 10, 12, 2);
-  await submitSubject(room, '第三人称复数', false);
-  await expectProgress(room, 10, 12, null);
-  await room.getByRole('button', { name: '继续', exact: true }).click();
+  for (let i = 0; i < 11; i++) await submitSubject(room, subjectAnswers[i]);
   await expect(room.locator('#tpItemText')).toHaveText('they');
+  await expectProgress(room, 11, 12, 12);
+  await submitSubject(room, '第一人称', false);
+  await expectProgress(room, 11, 12, 12);
+  await page.reload();
+  await expectProgress(room, 11, 12, 12);
+  await room.getByRole('button', { name: '再试一次', exact: true }).click();
+  await expect(room.locator('#tpItemText')).toHaveText('they');
+  await submitSubject(room, '第二人称', false);
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await expectProgress(room, 11, 12, 12);
+  await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await submitSubject(room, '第三人称复数', false);
-  await expectProgress(room, 11, 12, null);
-  await expect(room.locator('.practice-step').last()).toHaveClass(/is-complete/);
-  await expect(room.locator('.practice-step').first()).not.toHaveClass(/is-complete/);
-  await room.getByRole('button', { name: '继续', exact: true }).click();
-  await submitSubject(room, '第三人称单数', false);
+  await expectProgress(room, 12, 12, null);
+  await page.reload();
   await expectProgress(room, 12, 12, null);
   await room.getByRole('button', { name: '完成', exact: true }).click();
   await expect(room).toContainText('基础题首次答对 11 / 12');

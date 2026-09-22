@@ -1,0 +1,21 @@
+{
+  "guards": [
+    {
+      "case": "missed-possessive",
+      "stoppedBeforeOutput": true,
+      "reason": "ValueError: Pronunciation override did not match 'Paul' exactly"
+    },
+    {
+      "case": "missing-name-rule",
+      "stoppedBeforeOutput": true,
+      "reason": "ValueError: Pronunciation/tokenizer changed: 'hˌuz ɪz ðɪs kˈɑɹ? ˌɪts s. ˌɪts hɪz kˈɑɹ.'"
+    },
+    {
+      "case": "wrong-match-count",
+      "stoppedBeforeOutput": true,
+      "reason": "ValueError: Pronunciation override did not match \"Paul's\" exactly"
+    }
+  ],
+  "existingIRecipe": "byte-identical",
+  "iSha256": "7161ed477f308aa7e07dc6c41b133d7a4a097bc3bfa82fd2b232d85d83dac1e0"
+}

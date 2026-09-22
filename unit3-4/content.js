@@ -74,7 +74,7 @@
       return question('listen-' + en, '听辨 ' + en, '听一听，选出单词。', [en, others[i % others.length], others[(i + 2) % others.length], others[(i + 4) % others.length]], en, '再听一次，选出对应的词。', '', { audioText: en, optionImages: pictureOptions });
     }),
     roles: [
-      question('story-items', '听懂客人的请求', '故事里的客人要取回什么？', ['外套和雨伞', '书和钢笔', '西服和手表'], '外套和雨伞', '客人说“My coat and my umbrella please.”，要取外套和雨伞。', '回想第一句里的 coat 和 umbrella。'),
+      question('story-items', '听懂客人的请求', '故事里的客人要取回什么？', ['外套和雨伞', '书和钢笔', '西服和手表'], '外套和雨伞', '客人说“My coat and my umbrella please.”，要取外套和雨伞。', '回顾客人开头提出的请求。'),
       question('story-number', '听懂寄存牌号码', '客人的寄存牌是几号？', ['五号', '三号', '九号'], '五号', '工作人员读出“Number five.”，是五号。', '回想 Number 后面的词。'),
       question('story-wrong', '分辨拿错的物品', '客人说哪一件不是自己的？', ['雨伞', '外套', '寄存牌'], '雨伞', '客人说“This is not my umbrella.”，没有说外套拿错了。', '回想 This is not my 后面说了什么。', { optionImages: { '雨伞': image('umbrella'), '外套': oldImage('coat'), '寄存牌': image('ticket') } }),
       question('story-my', '按说话人理解 my', '客人说“Here is my ticket.”，寄存牌是谁的？', ['客人的', '工作人员的'], '客人的', 'my 指说话人自己的；这句话是客人说的。', '先找说这句话的人。', { optionImages: { '客人的': image('visitor'), '工作人员的': image('attendant') } }),
@@ -98,7 +98,7 @@
     ],
     trans: [
       question('build-not', '拼出否定说明', '用词块说：这不是我的雨伞。', undefined, 'This is not my umbrella.', '在 is 后放 not，my umbrella 表示“我的雨伞”。', '先放 This is，再放 not。', { type: 'order', tokens: ['This', 'is', 'not', 'my', 'umbrella.'] }),
-      question('build-your', '用 your 说明对方的', '书是对面同学的。用词块对他说：这是你的书。', undefined, "It's your book.", 'It’s 是 It is 的缩写，your 指听话的同学的。', '从 It’s 开始，再说 your book。', { type: 'order', tokens: ["It's", 'your', 'book.'] })
+      question('build-your', '用 your 说明对方的', '书是对面同学的。用词块对他说：这是你的书。', undefined, "It's your book.", 'It’s 是 It is 的缩写，your 指听话的同学的。', '先确认书属于说话的人，还是听话的人。', { type: 'order', tokens: ["It's", 'your', 'book.'] })
     ],
     exam: [
       question('exam-school', '从完整问句听出目标', '听一听，正在问什么？', ['school', 'house', 'teacher', 'suit'], 'school', '再听问句，注意 your 后面的词。', '', { audioText: ask('school'), optionImages: pictureOptions }),

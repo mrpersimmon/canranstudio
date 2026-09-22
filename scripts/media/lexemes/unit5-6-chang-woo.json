@@ -1,0 +1,18 @@
+{
+  "sourceId": "L05-D12",
+  "text": "And this is Chang-woo.",
+  "voice": "am_michael",
+  "speed": 0.9,
+  "seed": 0,
+  "renderMode": "natural-utterance",
+  "synthesisText": "And this is Chang-woo.",
+  "phonemeOverrides": {
+    "Chang-woo": {
+      "phonemes": "ʧˈæŋ wˌu",
+      "occurrences": 1
+    }
+  },
+  "expectedPhonemes": "ˌænd ðɪs ɪz ʧˈæŋ wˌu.",
+  "reference": "New Concept English 1, Lesson 5, paper page 10 / PDF page 43",
+  "reason": "Restore both parts of the written name in this English-voice candidate; name pronunciation remains subject to teacher listening review."
+}

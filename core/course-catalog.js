@@ -1406,7 +1406,7 @@
     {
       "id": "negative-like",
       "target": "否定句原形",
-      "lesson": "对比：He likes steak. / He doesn't like chicken.\n肯定句 likes 带 -s；doesn't 已经变化，后面用 like。",
+      "lesson": "对比：She wants fish. / She doesn't want fish.\n观察两句中表示否定的部分，以及后面动词的形式。",
       "prompt": "他不喜欢鸡肉。哪句符合这个意思？",
       "options": [
         "He doesn't like chicken.",
@@ -1594,7 +1594,7 @@
         "My husband likes steak."
       ],
       "answer": "To tell you the truth, Mrs. Bird, I don't like chicken either.",
-      "hint": "听课文最后一句：老板也不喜欢鸡肉。否定句中的“也”用 either。",
+      "hint": "回顾老板最后的回应，留意他和丈夫的喜好是否相同。",
       "explanation": "不喜欢鸡肉，再说“我也不喜欢”时，用 either。",
       "scene": {
         "who": "bird",
@@ -1612,7 +1612,7 @@
         "I don't like chicken either."
       ],
       "answer": "Lamb, please.",
-      "hint": "这次的需求与课文不同；羔羊肉是 lamb。",
+      "hint": "先核对这次要买的肉，再选礼貌的回应。",
       "explanation": "这次想买羔羊肉，所以说 Lamb, please.",
       "scene": {
         "who": "butcher",
@@ -1636,7 +1636,7 @@
         "text": "I like steak.",
         "replyWho": "butcher"
       },
-      "hint": "两个人都喜欢；肯定句中的“也”用 too。"
+      "hint": "先看两人的喜好是否相同，再留意句子是肯定还是否定。"
     }
   ],
   "EXAM": [

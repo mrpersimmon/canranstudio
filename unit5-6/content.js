@@ -1,7 +1,8 @@
 (function (root) {
   'use strict';
   const image = name => '/assets/unit5-6/' + name + '.svg';
-  const recording = name => 'unit5-6/audio/' + name + '.mp3';
+  const recordingRevisions = { 'l05-w01': 'l05-w01-v2', 'l05-d12': 'l05-d12-v2' };
+  const recording = name => 'unit5-6/audio/' + (recordingRevisions[name] || name) + '.mp3';
   const source = '《新概念英语智慧版1》纸页 10–13（PDF 43–46），按原文或题目明示条件';
   const word = (en, cn, ph, audio, art, example = '') => ({ en, cn, ph, audio: recording(audio), image: image(art), example, source });
   const WORDS = [

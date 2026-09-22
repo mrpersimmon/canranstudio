@@ -1,0 +1,65 @@
+{
+  "phonemes": "hˈɪɹ ɪz ðə wˈɜɹd mˈɪstəɹ. mˈɪstəɹ.",
+  "targetStartMs": 1625,
+  "targetEndMs": 2250,
+  "cropStartMs": 1545,
+  "cropEndMs": 2430,
+  "tokens": [
+    {
+      "text": "Here",
+      "phonemes": "hˈɪɹ",
+      "startMs": 275,
+      "endMs": 500
+    },
+    {
+      "text": "is",
+      "phonemes": "ɪz",
+      "startMs": 500,
+      "endMs": 638
+    },
+    {
+      "text": "the",
+      "phonemes": "ðə",
+      "startMs": 638,
+      "endMs": 725
+    },
+    {
+      "text": "word",
+      "phonemes": "wˈɜɹd",
+      "startMs": 725,
+      "endMs": 962
+    },
+    {
+      "text": "mister",
+      "phonemes": "mˈɪstəɹ",
+      "startMs": 962,
+      "endMs": 1500
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 1500,
+      "endMs": 1625
+    },
+    {
+      "text": "mister",
+      "phonemes": "mˈɪstəɹ",
+      "startMs": 1625,
+      "endMs": 2250
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 2250,
+      "endMs": 2425
+    }
+  ],
+  "sha256": "765dfbeffd1aeb67c94fad7cdc473b64ccb8c7095d4bbbfcefd01b0c2a1f6ef2",
+  "voice": "af_heart",
+  "speed": 1,
+  "renderMode": "aligned-lexeme",
+  "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+  "reviewStatus": "unreviewed-candidate",
+  "recipeSha256": "2d000fa826b30ccfe3623964da7c80f6ae1881b71324b4250d103cc1c805f1f2",
+  "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e"
+}

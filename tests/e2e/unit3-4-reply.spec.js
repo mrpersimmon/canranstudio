@@ -45,7 +45,7 @@ for (const width of [320, 1280]) test(`${width} 接力用四种判断逐步练�
         await room.getByRole('button', { name: "No. It isn't my umbrella. It's your umbrella.", exact: true }).click();
         await check.click();
         await expect(meter).toHaveAttribute('aria-valuenow', '3');
-        await expect(room.getByRole('status')).toContainText('还不知道是谁的');
+        await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
         await room.getByRole('button', { name: '再试一次', exact: true }).click();
       }
       await room.getByRole('button', { name: answers[i], exact: true }).click();

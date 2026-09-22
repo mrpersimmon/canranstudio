@@ -170,7 +170,7 @@ h2{font-size:clamp(28px,5vw,40px);margin-bottom:8px}
 .m-step .cloze{font-family:'Fredoka';font-weight:600;font-size:18.5px;line-height:2}
 .m-step .cloze .gap{display:inline-block;min-width:86px;border-bottom:3px dashed var(--coral);color:var(--coral-d);
   text-align:center;font-weight:700;cursor:pointer;padding:0 4px}
-.m-step .cloze .gap.empty{color:transparent;text-shadow:0 0 8px rgba(0,0,0,.15)}
+.m-step .cloze .gap.empty{color:var(--ink);text-shadow:0 0 8px rgba(0,0,0,.15)}
 .m-step .choices{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .m-chip{background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;padding:5px 16px;
   font-family:'Fredoka';font-weight:700;font-size:16px;box-shadow:3px 3px 0 var(--ink)}
@@ -647,7 +647,7 @@ function w1Next(){
         $('#w1Msg').textContent='✅ 答对啦！继续～';
         setTimeout(w1Next,900);
         if(w1State.score>=5)award('l1',3);else if(w1State.score>=3)award('l1',2);else award('l1',1);
-      }else{b.classList.add('wrong');sndWrong();$('#w1Msg').textContent='❌ 再听一次试试！';}
+      }else{b.classList.add('wrong');sndWrong();$('#w1Msg').textContent='再看看，试一次。';}
     };
     box.appendChild(b);
   });
@@ -768,7 +768,7 @@ function pickMatch(el,side,country){
       sndWrong();
       const a=w3.pickedC.el,b=w3.pickedN.el;
       a.classList.add('no');b.classList.add('no');
-      $('#w3Msg').textContent='❌ 这对不对哦，再想想！';
+      $('#w3Msg').textContent='再看看，试一次。';
       setTimeout(()=>{a.classList.remove('no','picked');b.classList.remove('no','picked');},500);
       w3.pickedC=null;w3.pickedN=null;
     }
@@ -793,7 +793,7 @@ function renderMagics(){
     const qStep=document.createElement('div');qStep.className='m-step';
     qStep.innerHTML='<div class="s-label"><span class="tagq">疑问句</span>请 does 出马</div>';
     const qCloze=document.createElement('div');qCloze.className='cloze';
-    qCloze.innerHTML=m.q[0]+' <span class="gap empty" data-full="'+m.q[1]+'">'+m.q[1]+'</span> '+m.q[2];
+    qCloze.innerHTML=m.q[0]+' <span class="gap empty" data-full="'+m.q[1]+'">___</span> '+m.q[2];
     const qCh=document.createElement('div');qCh.className='choices';
     CanranCore.assessment.shuffleOptions([m.q[1],'likes','sets','wants','comes'].filter((v,i,a)=>a.indexOf(v)===i).slice(0,3),0).map(e=>e.text).forEach(o=>{
       const chip=document.createElement('button');chip.className='m-chip';chip.textContent=o;
@@ -805,7 +805,7 @@ function renderMagics(){
     const nStep=document.createElement('div');nStep.className='m-step';
     nStep.innerHTML='<div class="s-label"><span class="tagn">否定句</span>doesn\'t 来帮忙</div>';
     const nCloze=document.createElement('div');nCloze.className='cloze';
-    nCloze.innerHTML=m.n[0]+' <span class="gap empty" data-full="'+m.gap+'">'+m.gap+'</span> '+m.n[2];
+    nCloze.innerHTML=m.n[0]+' <span class="gap empty" data-full="'+m.gap+'">___</span> '+m.n[2];
     const nCh=document.createElement('div');nCh.className='choices';
     const wrongN='dont '+m.gap.split(' ')[1];
     CanranCore.assessment.shuffleOptions([m.gap,wrongN,"doesn't "+m.gap.split(' ')[1]+'s'].filter((v,i,a)=>a.indexOf(v)===i).slice(0,3),0).map(e=>e.text).forEach(o=>{
@@ -827,7 +827,7 @@ function fillGap(gap,chip,val,fullSentence,stepEl){
     stepEl.style.borderStyle='solid';stepEl.style.borderColor='var(--leaf-d)';
     if(!stepEl.dataset.done){stepEl.dataset.done='1';w4.solved++;
       if(w4.solved>=8)award('l4',3);else if(w4.solved>=5)award('l4',2);else if(w4.solved>=2)award('l4',1);}
-  }else{sndWrong();chip.classList.add('off');toast('❌ 动词的小尾巴 s 要脱掉哦');}
+  }else{sndWrong();toast('再看看，试一次。');}
 }
 
 /* ================= W5 考核 ================= */
@@ -848,7 +848,7 @@ function renderQuiz(){
       if(entry.correct){
         b.classList.add('right');sndCorrect();qState.correct++;
         $('#qNext').classList.remove('hidden');
-      }else{b.classList.add('wrong');sndWrong();qState.answered=false;}
+      }else{b.classList.add('wrong');sndWrong();toast('再看看，试一次。');qState.answered=false;}
     };
     box.appendChild(b);
   });

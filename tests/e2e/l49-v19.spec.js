@@ -47,7 +47,7 @@ test('词块未拼完整时不能检查，撤回后重新等待完整句子，�
     await bank.getByRole('button',{name:text,exact:true}).click();await expect(check).toBeDisabled();
   }
   await bank.getByRole('button',{name:'peaches.',exact:true}).click();await expect(check).toBeEnabled();
-  await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。She likes peaches. 主语是 she，用 likes。');
+  await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   for(const token of await answer.getByRole('button').all())await expect(token).toBeDisabled();
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();await expect(answer.getByRole('button')).toHaveCount(0);
   await expect(check).toBeDisabled();
@@ -80,7 +80,7 @@ test('刷新与重试保留候选词块原位置，未完成草稿仍由孩子�
   await page.reload();expect(await order()).toEqual(initial);
   await expect(answer.getByRole('button',{name:'撤回 She',exact:true})).toBeVisible();await expect(check).toBeDisabled();
   await bank.getByRole('button',{name:'peaches.',exact:true}).click();await bank.getByRole('button',{name:'likes',exact:true}).click();
-  await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。She likes peaches. 主语是 she，用 likes。');
+  await check.click();await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();expect(await order()).toEqual(initial);
   await expect(answer.getByRole('button')).toHaveCount(0);
 });
@@ -131,7 +131,7 @@ for(const width of [320,600,768,1280])test(`${width} 宽度全部五道拼句：
       }
       if(i===0)await capture(page,stage,`${id}-assembled`);
       await check.scrollIntoViewIfNeeded();const scroll=await page.evaluate(()=>scrollY);
-      await check.press('Enter');await expect(stage.locator('.practice-actions').getByRole('status')).toContainText('再看看，试一次。'+phrase.join(' '));
+      await check.press('Enter');await expect(stage.locator('.practice-actions').getByRole('status')).toHaveText('再看看，试一次。');
       expect(await page.evaluate(()=>scrollY)).toBe(scroll);
       const retry=stage.getByRole('button',{name:'再试一次',exact:true});expect(await documentTop(retry)).toBe(before.check);
       await retry.press('Enter');expect(await documentTop(bank)).toBe(before.bank);
@@ -143,7 +143,7 @@ for(const width of [320,600,768,1280])test(`${width} 宽度全部五道拼句：
   }
 });
 
-test('v1.8 旧拼句草稿恢复已选词和线索，历史成绩不代答下一题',async({page})=>{
+test('v1.8 旧草稿保留已选词与提示记录，隐藏旧解析，历史成绩不代答',async({page})=>{
   await page.addInitScript(()=>{
     if(localStorage.getItem('canran:l49:learning:v1'))return;
     const runId='existing-v18-word-round';
@@ -157,7 +157,7 @@ test('v1.8 旧拼句草稿恢复已选词和线索，历史成绩不代答下一
   const stage=page.locator('.stage-trans'),bank=stage.getByRole('group',{name:'待选词块',exact:true});
   const answer=stage.getByRole('group',{name:'已选词块',exact:true}),check=stage.getByRole('button',{name:'检查答案',exact:true});
   await expect(answer.getByRole('button',{name:'撤回 She',exact:true})).toBeVisible();
-  await expect(stage.getByRole('button',{name:'给点线索',exact:true})).toHaveAttribute('aria-expanded','true');
+  await expect(stage.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
   await expect(check).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('9');
   await page.reload();await expect(answer.getByRole('button')).toHaveCount(1);await expect(check).toBeDisabled();
   for(const text of ['likes','peaches.'])await bank.getByRole('button',{name:text,exact:true}).click();

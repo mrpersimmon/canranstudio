@@ -4,84 +4,59 @@ test.use({reducedMotion:'reduce',actionTimeout:5000});
 const categories=['第一人称','第二人称','第三人称单数','第三人称复数'];
 // Independently transcribed from the approved manuscript, never read from the catalog.
 const expectedQuestions=require('../fixtures/l49-subject-v110-expected.json');
-for(let category=0;category<4;category++)test(`逐题复核 ${categories[category]}：答对简短确认，纠错与题稿逐字一致`,async({page})=>{
-  await page.goto('/lesson49/#learn/subjects');
-  const stage=page.locator('.stage-subjects');
+for(let category=0;category<4;category++)test(`逐题复核 ${categories[category]}：答错不泄题，原题改对后才能推进`,async({page})=>{
+  await page.goto('/lesson49/#learn/subjects');const stage=page.locator('.stage-subjects');
   for(let i=0;i<12;i++){
-    const expected=expectedQuestions[i];
-    await expect(stage.locator('#tpItemText')).toHaveText(expected.subject);
-    await answerSubject(stage,categories[category]);
-    const correct=expected.answer===categories[category];
-    await expect(stage.getByRole('status')).toHaveText(correct?'答对了！':'正确答案：'+expected.answer+expected.wrong[category]);
-    await stage.getByRole('button',{name:'继续',exact:true}).click();
-  }
-});
-
-test('全错仍可继续回练，间隔题再错进入待练，刷新后保留首答与回练进度',async({page})=>{
-  await page.goto('/lesson49/#learn/subjects');
-  const stage=page.locator('.stage-subjects');
-  for(let i=0;i<12;i++){
-    await answerSubject(stage,answers[i]==='第一人称'?'第二人称':'第一人称');
-    await stage.getByRole('button',{name:'继续',exact:true}).click();
-  }
-  await expect(stage.locator('#tpProg')).toHaveText('回练 · 还有 12 道待练');
-  for(let i=0;i<12;i++){
-    if(i===3){await page.reload();await expect(stage.locator('#tpProg')).toHaveText('回练 · 还有 9 道待练');}
-    await expect(stage.locator('#tpItemText')).toHaveText(subjects[i]);
-    await answerSubject(stage,answers[i]);
+    const expected=expectedQuestions[i];await expect(stage.locator('#tpItemText')).toHaveText(expected.subject);
+    await answerSubject(stage,categories[category]);const correct=expected.answer===categories[category];
+    await expect(stage.getByRole('status')).toHaveText(correct?'答对了！':'再看看，试一次。');
+    if(!correct){await stage.getByRole('button',{name:'再试一次',exact:true}).click();await answerSubject(stage,expected.answer);}
     await stage.getByRole('button',{name:i===11?'完成':'继续',exact:true}).click();
   }
-  await expect(stage).toContainText('基础题首次答对 0 / 12');
-  await page.getByRole('button',{name:'学徒手记',exact:true}).click();
-  await expect(page.locator('#learningRecord')).toContainText('修正后完成');
-  await expect(page.locator('#learningRecord').getByRole('listitem')).toHaveCount(12);
-  await expect(page.locator('#learningRecord').getByRole('listitem').first()).toContainText('首次未答对');
-  await expect(page.locator('#learningRecord').getByRole('listitem').first()).toContainText('提交 2 次');
+  const first=expectedQuestions.filter(q=>q.answer===categories[category]).length;
+  await expect(stage).toContainText('基础题首次答对 '+first+' / 12');
 });
 
-test('间隔题再次答错，不能从待练集合消失；连点检查和继续不跳题',async({page})=>{
-  await page.goto('/lesson49/#learn/subjects');
-  const stage=page.locator('.stage-subjects');
+test('全题首答错误后逐题重试，刷新保留首次结果与提交次数',async({page})=>{
+  await page.goto('/lesson49/#learn/subjects');const stage=page.locator('.stage-subjects');
   for(let i=0;i<12;i++){
-    await answerSubject(stage,i===11?'第一人称':answers[i]);
-    await stage.getByRole('button',{name:'继续',exact:true}).dblclick();
-  }
-  await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird');
-  await stage.getByRole('button',{name:'第一人称',exact:true}).click();
-  await stage.getByRole('button',{name:'检查答案',exact:true}).dblclick();
-  await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird');
-  await expect(stage.getByRole('status')).toContainText('正确答案');
-  await stage.getByRole('button',{name:'继续',exact:true}).click();
-  await expect(stage.locator('#tpProg')).toContainText('还有 2 道待练');
-  for(const i of [1,11,0]){
     await expect(stage.locator('#tpItemText')).toHaveText(subjects[i]);
-    await answerSubject(stage,answers[i]);
-    await stage.getByRole('button',{name:i===0?'完成':'继续',exact:true}).click();
+    await answerSubject(stage,answers[i]==='第一人称'?'第二人称':'第一人称');
+    if(i===3)await page.reload();
+    await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+    await stage.getByRole('button',{name:'再试一次',exact:true}).click();await answerSubject(stage,answers[i]);
+    await stage.getByRole('button',{name:i===11?'完成':'继续',exact:true}).click();
   }
-  await expect(stage).toContainText('基础题首次答对 11 / 12');
+  await expect(stage).toContainText('基础题首次答对 0 / 12');await page.getByRole('button',{name:'学徒手记',exact:true}).click();
+  await expect(page.locator('#learningRecord').getByRole('listitem')).toHaveCount(12);
+  for(const item of await page.locator('#learningRecord').getByRole('listitem').all()){
+    await expect(item).toContainText('修正后完成');await expect(item).toContainText('首次未答对');await expect(item).toContainText('提交 2 次');
+  }
 });
 
-test('分拣四类别：必须手动选择和检查，误选有具体解释，继续后清空上一题',async({page})=>{
-  await page.goto('/lesson49/#learn/subjects');
-  const stage=page.locator('.stage-subjects');
-  await expect(stage.locator('#tpProg')).toHaveText('第 1 / 12 题');
-  await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird');
-  const options=stage.getByRole('group',{name:'选择主语类别',exact:true});
-  await expect(options.getByRole('button')).toHaveText(categories);
-  const check=stage.getByRole('button',{name:'检查答案',exact:true});
-  await expect(check).toBeDisabled();
-  await options.getByRole('button',{name:'第一人称',exact:true}).click();
-  await expect(stage.getByRole('status')).toBeEmpty();
-  await check.click();
-  await expect(stage.getByRole('status')).toContainText('正确答案：第三人称单数');
-  await expect(stage.getByRole('status')).toContainText('不是说话者使用的');
-  await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird');
-  await stage.getByRole('button',{name:'继续',exact:true}).click();
-  await expect(stage.locator('#tpProg')).toHaveText('第 2 / 12 题');
+test('连续错答不解锁下一题，双击重试或检查不跳题',async({page})=>{
+  await page.goto('/lesson49/#learn/subjects');const stage=page.locator('.stage-subjects');
+  for(const wrong of ['第一人称','第二人称']){
+    await stage.getByRole('button',{name:wrong,exact:true}).click();await stage.getByRole('button',{name:'检查答案',exact:true}).dblclick();
+    await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+    await stage.getByRole('button',{name:'再试一次',exact:true}).dblclick();await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird');
+    await expect(stage.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  }
+  await answerSubject(stage,'第三人称单数');await stage.getByRole('button',{name:'继续',exact:true}).dblclick();
   await expect(stage.locator('#tpItemText')).toHaveText('Mrs. Bird and her husband');
-  await expect(options.locator('[aria-pressed="true"]')).toHaveCount(0);
-  await expect(check).toBeDisabled();
-  await expect(stage.getByRole('status')).toBeEmpty();
+  await page.getByRole('button',{name:'学徒手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('提交 3 次');
+});
+
+test('分拣四类别：必须手动选择和检查，重试及下一题均清空选择',async({page})=>{
+  await page.goto('/lesson49/#learn/subjects');const stage=page.locator('.stage-subjects');
+  const options=stage.getByRole('group',{name:'选择主语类别',exact:true}),check=stage.getByRole('button',{name:'检查答案',exact:true});
+  await expect(options.getByRole('button')).toHaveText(categories);await expect(check).toBeDisabled();
+  await options.getByRole('button',{name:'第一人称',exact:true}).click();await expect(stage.getByRole('status')).toBeEmpty();await check.click();
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');await stage.getByRole('button',{name:'再试一次',exact:true}).click();
+  await expect(options.locator('[aria-pressed="true"]')).toHaveCount(0);await expect(check).toBeDisabled();
+  await answerSubject(stage,'第三人称单数');await stage.getByRole('button',{name:'继续',exact:true}).click();
+  await expect(stage.locator('#tpProg')).toHaveText('第 2 / 12 题');await expect(options.locator('[aria-pressed="true"]')).toHaveCount(0);
+  await expect(check).toBeDisabled();await expect(stage.getByRole('status')).toBeEmpty();
 });
 
 const subjects=['Mrs. Bird','Mrs. Bird and her husband','her husband','the butcher','I','you','this book','these books','we','his dogs','his dog','they'];
@@ -152,7 +127,7 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   const wrongQuestions=['Are you like meat?','Do you a teacher?','Do you busy?','Do you at home?','Are you want beef?','Are you sleep well?','Are you make the bed?','Are you put on your coat?'];
   for(const [index,[answer,reason]]of pairs.entries()){
     await choosePractice(stage,wrongQuestions[index],false);
-    await expect(stage.getByRole('status')).toContainText(reason);
+    await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
     await stage.getByRole('button',{name:'再试一次',exact:true}).click();
     await choosePractice(stage,answer);
   }
@@ -163,11 +138,11 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
   for(const answer of ['likes','like','watches','goes','loves','walk'])await choosePractice(stage,answer);
   await choosePractice(stage,'drinks',false);
-  await expect(stage.getByRole('status')).toContainText('在这个一般现在时肯定句里，They 后用 drink');
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await page.goto('/lesson49/#learn/pouch');stage=page.locator('.stage-pouch');
   await expect(stage).toContainText('课文中，老板用哪个开头说出自己不喜欢鸡肉？');
   await choosePractice(stage,'Yeah',false);
-  await expect(stage.getByRole('status')).toContainText('课文用 To tell you the truth 引出坦白的话');
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await page.goto('/lesson49/#learn/words');
   await page.getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.locator('.fcard').filter({has:page.getByText('chicken',{exact:true})}).click();
@@ -178,7 +153,7 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   await expect(stage.locator('.practice-hint')).toHaveText('找 to 后面的人名。');
   await expect(stage).not.toContainText('牛排交给 Tom 了。');
   await choosePractice(stage,'Lily',false);
-  await expect(stage.getByRole('status')).toContainText('这句话请把牛排给 Tom；to Tom 标明接收者。');
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await expect(stage).not.toContainText('牛排交给 Tom 了。');
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();await choosePractice(stage,'Tom',false);
   await expect(stage.getByRole('img',{name:'已送给 Tom 的肉品'})).toBeVisible();
@@ -190,17 +165,17 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   await expect(stage.getByText('看看原因',{exact:true})).toHaveCount(0);
   await stage.getByRole('button',{name:'下一题',exact:true}).click();
   await choosePractice(stage,'Mrs. Bird: steak · husband: lamb',false);
-  await expect(stage.getByRole('status')).toContainText('原文明确说 Mrs. Bird 喜欢 lamb，她的丈夫喜欢 steak。');
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await expect(stage).not.toContainText('两人都不喜欢 chicken');
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();await choosePractice(stage,'Mrs. Bird: lamb · husband: steak');
   await choosePractice(stage,'Do you a student?',false);
-  await expect(stage.getByRole('status')).toContainText('本句用 be 连接 you 和 a student');
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();await choosePractice(stage,'Are you a student?');
   await choosePractice(stage,'Do you want chicken?');await choosePractice(stage,['Give','the beef','to','Lily,','please.']);
   await stage.getByRole('button',{name:'继续第二段（5 题）',exact:true}).click();
   await stage.getByRole('button',{name:'给点线索',exact:true}).click();await expect(stage.locator('.practice-hint')).toHaveText('找 to 后面的人名。');
   await choosePractice(stage,'Tom',false);
-  await expect(stage.getByRole('status')).toContainText('这句话请把这块肉给 Sam；to Sam 标明接收者。');
+  await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await expect(stage).not.toContainText('这块肉交给 Sam 了。');
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();await choosePractice(stage,'Sam',false);
   await expect(stage.locator('.delivery-success')).toHaveText('这块肉交给 Sam 了。');
@@ -240,28 +215,14 @@ test('刷新保留本题选择、反馈和分开的辅助记录；旧题草稿�
   await expect(page.locator('#wordPageProgress')).toHaveText('3 / 3');
   await expect(page.locator('#starCount')).toHaveText('15');
 });
-test('末题答错：先隔两道不同题，再回练；最后反馈后才能完成并保留首答分数',async({page})=>{
-  await page.goto('/lesson49/#learn/subjects');
-  const stage=page.locator('.stage-subjects');
-  for(let i=0;i<12;i++){
-    await expect(stage.locator('#tpItemText')).toHaveText(subjects[i]);
-    await answerSubject(stage,i===11?'第一人称':answers[i]);
-    await stage.getByRole('button',{name:'继续',exact:true}).click();
-  }
-  for(const i of [0,1]){
-    await expect(stage.locator('#tpProg')).toContainText('再练一题');
-    await expect(stage.locator('#tpProg')).toContainText('还有 1 道待练');
-    await expect(stage.locator('#tpItemText')).toHaveText(subjects[i]);
-    await answerSubject(stage,answers[i]);
-    await stage.getByRole('button',{name:'继续',exact:true}).click();
-  }
-  await expect(stage.locator('#tpProg')).toHaveText('回练 · 还有 1 道待练');
-  await expect(stage.locator('#tpItemText')).toHaveText('they');
-  await expect(stage.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
-  await answerSubject(stage,'第三人称复数');
-  await expect(stage.getByRole('status')).toContainText('答对了');
-  await expect(stage.getByRole('button',{name:/^下一站：/})).toBeHidden();
-  await stage.getByRole('button',{name:'完成',exact:true}).click();
+test('末题答错须原题重试，改对后手动完成且保留首次分数',async({page})=>{
+  await page.goto('/lesson49/#learn/subjects');const stage=page.locator('.stage-subjects');
+  for(let i=0;i<11;i++){await answerSubject(stage,answers[i]);await stage.getByRole('button',{name:'继续',exact:true}).click();}
+  await answerSubject(stage,'第一人称');await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(stage.getByRole('button',{name:'完成',exact:true})).toBeHidden();
+  await page.reload();await stage.getByRole('button',{name:'再试一次',exact:true}).click();await expect(stage.locator('#tpItemText')).toHaveText('they');
+  await answerSubject(stage,'第三人称复数');await expect(stage.getByRole('status')).toHaveText('答对了！');
+  await expect(stage.getByRole('button',{name:/^下一站：/})).toBeHidden();await stage.getByRole('button',{name:'完成',exact:true}).click();
   await expect(stage).toContainText('基础题首次答对 11 / 12');
   await expect(stage.getByRole('button',{name:'下一站：动词换装间',exact:true})).toBeVisible();
   await stage.getByRole('button',{name:'再练一轮',exact:true}).click();

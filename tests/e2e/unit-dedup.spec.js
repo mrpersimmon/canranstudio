@@ -34,7 +34,7 @@ test('Lesson 1–2 用一次提问应用和四个综合任务取代换词长队�
   await expect(exam).toContainText('Excuse me!');
   await exam.getByRole('button', { name: 'Yes, it is.', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toContainText('还没有问物品归属');
+  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, 'Yes?');
   await expect(exam).toContainText('Pardon?');
@@ -80,7 +80,7 @@ test('Lesson 3–4 先拼句再接力，四项接力和三题挑战不重复刷�
   await expect(exam).toContainText('Here is my coat. This is not my umbrella.');
   await exam.getByRole('button', { name: '外套是我的；雨伞是工作人员的', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toContainText('不能猜成工作人员的');
+  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit34-evidence-390.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -88,7 +88,7 @@ test('Lesson 3–4 先拼句再接力，四项接力和三题挑战不重复刷�
   await expect(exam).toContainText('首次独立答对 2 / 3');
 });
 
-test('Lesson 49–50 区分本次需求和喜好，分拣只回练错题，五题挑战需要综合判断', async ({ page }) => {
+test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/unit49-50/#learn/doare');
   const asking = page.locator('.stage-doare');
@@ -98,7 +98,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣只回练错题，五�
   await expect(asking).toContainText('问 Sam');
   await asking.getByRole('button', { name: 'Does she like peaches?', exact: true }).click();
   await asking.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(asking.getByRole('status')).toContainText('want');
+  await expect(asking.getByRole('status')).toHaveText('再看看，试一次。');
   await asking.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(asking, 'Does she want peaches?', '完成这一站');
 
@@ -108,12 +108,14 @@ test('Lesson 49–50 区分本次需求和喜好，分拣只回练错题，五�
   const base = ['第三人称单数', '第三人称复数', '第三人称单数', '第一人称', '第二人称', '第三人称单数', '第三人称复数', '第一人称', '第三人称复数', '第三人称单数'];
   for (const answer of base) await submitSubject(subjects, answer);
   await expect(subjects.getByRole('heading', { name: 'they', exact: true })).toBeVisible();
-  await submitSubject(subjects, '第一人称');
-  await expect(subjects).toContainText('回练 · 还有 1 道待练');
+  await submitSubject(subjects, '第一人称', false);
+  await expect(subjects.getByRole('status')).toHaveText('再看看，试一次。');
+  await subjects.getByRole('button', { name: '再试一次', exact: true }).click();
+  await expect(subjects).toContainText('第 11 / 11 题');
   await expect(subjects.getByRole('heading', { name: 'they', exact: true })).toBeVisible();
   await expect(subjects.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await page.reload();
-  await expect(subjects).toContainText('回练 · 还有 1 道待练');
+  await expect(subjects).toContainText('第 11 / 11 题');
   await submitSubject(subjects, '第三人称复数');
   await expect(subjects).toContainText('基础题首次答对 10 / 11');
 
@@ -128,7 +130,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣只回练错题，五�
   await expect(exam).toContainText('B 喜欢鸡肉');
   await exam.getByRole('button', { name: 'I like chicken, too.', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toContainText('喜好不同');
+  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, 'I like chicken.');
   await expect(exam).toContainText("Sam doesn't likes grapes.");

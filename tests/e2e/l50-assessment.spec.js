@@ -29,16 +29,11 @@ async function setLiveRatings(page, ratings) {
   }, ratings);
 }
 
-test('final quiz highlights the semantic correct answer after shuffle', async ({ page }) => {
-  await installInstantAudio(page);
-  await page.goto('/lesson50/');
-  await page.locator('#quizStartBtn').click();
-  const correct = await globalValue(page, 'QUIZ[QZ.idx].a');
-  const wrong = correct === 0 ? 1 : 0;
-
-  await page.locator(`#quizOpts [data-option-id="${wrong}"]`).click();
-
-  await expect(page.locator(`#quizOpts [data-option-id="${correct}"]`)).toHaveClass(/good/);
+test('final quiz retains a wrong question without highlighting the answer', async ({ page }) => {
+  await installInstantAudio(page);await page.goto('/lesson50/');await page.locator('#quizStartBtn').click();
+  await page.locator('#quizOpts').getByRole('button',{name:'lettuce',exact:true}).click();
+  await expect(page.locator('#quizFb')).toHaveText('再看看，试一次。');await expect(page.locator('#quizOpts .good')).toHaveCount(0);
+  await page.waitForTimeout(1800);await expect(page.locator('#quizQ')).toContainText('卷心菜');
 });
 
 test('listen challenge solves a retry without adding first-try score', async ({ page }) => {

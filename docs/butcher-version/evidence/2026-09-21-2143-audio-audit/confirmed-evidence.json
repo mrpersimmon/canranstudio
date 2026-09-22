@@ -1,0 +1,279 @@
+{
+  "pageEvidence": {
+    "mr": {
+      "dir": "unit5-6",
+      "label": "mr",
+      "path": "/unit5-6/audio/l05-w01.mp3",
+      "sha256": "a6189afc7289246780eca2f80db01c2f0d4bc119bb8c38efea3f6db8a2a8645b",
+      "events": [
+        {
+          "src": "http://127.0.0.1:4175/unit5-6/audio/l05-w01.mp3",
+          "rate": 1,
+          "ended": true
+        }
+      ]
+    },
+    "loose": {
+      "dir": "soundmark",
+      "label": "loose",
+      "path": "/soundmark/audio/loose.mp3",
+      "sha256": "8086dba1da802dadbce0803e2326e4d0fe93dd209187a2d417322e495b9f2ebf",
+      "events": [
+        {
+          "src": "http://127.0.0.1:4175/soundmark/audio/loose.mp3",
+          "rate": 1,
+          "ended": true
+        }
+      ],
+      "displayed": "loose\n/lu:z/"
+    },
+    "domPages": 14,
+    "pauls": {
+      "url": "http://127.0.0.1:4175/unit11-12/#learn/models",
+      "label": "pauls",
+      "path": "/unit11-12/audio/l12-b02.mp3",
+      "displayed": "Whose is this car? It's Paul's. It's his car.",
+      "sha256": "943ba1ca49e9a3b3e2a9e68b760e14730cf2f8224213a6aa6f512784bebd4449",
+      "events": [
+        {
+          "src": "http://127.0.0.1:4175/unit11-12/audio/l12-b02.mp3",
+          "rate": 1,
+          "ended": true
+        }
+      ]
+    },
+    "excuse": {
+      "url": "http://127.0.0.1:4175/unit1-2/#learn/words",
+      "label": "excuse",
+      "path": "/unit1-2/audio/l01-w01.mp3",
+      "displayed": "excuse\n/ɪkˈskjuːz/\nExcuse me!",
+      "sha256": "41ca6cc649ca205daf717052e87a38c4f30c35def888f2e6e6bb2c8459cf80ef",
+      "events": [
+        {
+          "src": "http://127.0.0.1:4175/unit1-2/audio/l01-w01.mp3",
+          "rate": 1,
+          "ended": true
+        }
+      ]
+    },
+    "chang": {
+      "url": "http://127.0.0.1:4175/unit5-6/#learn/text",
+      "label": "chang",
+      "path": "/unit5-6/audio/l05-d12.mp3",
+      "displayed": "And this is Chang-woo.",
+      "sha256": "883d37170b5ef3e2b10b5dbed1f9820a2d668fc4160831b1b1a45bf8e25c8c11",
+      "events": [
+        {
+          "src": "http://127.0.0.1:4175/unit5-6/audio/l05-d12.mp3",
+          "rate": 1,
+          "ended": true
+        }
+      ]
+    }
+  },
+  "nameWaveComparison": [
+    {
+      "actual": "unit5-6/audio/l05-d12.mp3",
+      "probe": "tmp/audio-audit-20260921/chang-default.mp3",
+      "normalizedCorrelation": 0.9552560741835511,
+      "actualMs": 1393.9583333333333,
+      "probeMs": 1393.9583333333333
+    },
+    {
+      "actual": "unit11-12/audio/l12-b02.mp3",
+      "probe": "tmp/audio-audit-20260921/paul-possessive-default.mp3",
+      "normalizedCorrelation": 0.9908051060656163,
+      "actualMs": 2426.4166666666665,
+      "probeMs": 2425.9583333333335
+    }
+  ],
+  "excuseWaveComparison": [
+    {
+      "candidate": "tmp/audio-audit-20260921/excuse-default.mp3",
+      "normalizedCorrelation": 0.9609088127443295,
+      "actualMs": 860.0416666666666,
+      "candidateMs": 859.9166666666666
+    },
+    {
+      "candidate": "tmp/audio-audit-20260921/excuse-verb.mp3",
+      "normalizedCorrelation": 0.5441314230068014,
+      "actualMs": 860.0416666666666,
+      "candidateMs": 901.5833333333334
+    }
+  ],
+  "g2pReplay": [
+    {
+      "path": "unit1-2/audio/l01-w01.mp3",
+      "text": "excuse",
+      "tokens": [
+        {
+          "text": "Here",
+          "phonemes": "hˈɪɹ"
+        },
+        {
+          "text": "is",
+          "phonemes": "ɪz"
+        },
+        {
+          "text": "the",
+          "phonemes": "ðə"
+        },
+        {
+          "text": "word",
+          "phonemes": "wˈɜɹd"
+        },
+        {
+          "text": "excuse",
+          "phonemes": "ɪkskjˈus"
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        },
+        {
+          "text": "excuse",
+          "phonemes": "ɪkskjˈus"
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        }
+      ],
+      "terminalPresent": true
+    },
+    {
+      "path": "unit5-6/audio/l05-w01.mp3",
+      "text": "Mr.",
+      "tokens": [
+        {
+          "text": "Here",
+          "phonemes": "hˈɪɹ"
+        },
+        {
+          "text": "is",
+          "phonemes": "ɪz"
+        },
+        {
+          "text": "the",
+          "phonemes": "ðə"
+        },
+        {
+          "text": "word",
+          "phonemes": "wˈɜɹd"
+        },
+        {
+          "text": "Mr..",
+          "phonemes": "mˈɪstəɹ"
+        },
+        {
+          "text": "Mr",
+          "phonemes": "mˈɪstəɹ"
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        }
+      ],
+      "terminalPresent": true
+    },
+    {
+      "path": "unit11-12/audio/l12-b02.mp3",
+      "text": "Whose is this car? It's Paul's. It's his car.",
+      "tokens": [
+        {
+          "text": "Whose",
+          "phonemes": "hˌuz"
+        },
+        {
+          "text": "is",
+          "phonemes": "ɪz"
+        },
+        {
+          "text": "this",
+          "phonemes": "ðɪs"
+        },
+        {
+          "text": "car",
+          "phonemes": "kˈɑɹ"
+        },
+        {
+          "text": "?",
+          "phonemes": "?"
+        },
+        {
+          "text": "It's",
+          "phonemes": "ˌɪts"
+        },
+        {
+          "text": "Paul's",
+          "phonemes": "s"
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        },
+        {
+          "text": "It's",
+          "phonemes": "ˌɪts"
+        },
+        {
+          "text": "his",
+          "phonemes": "hɪz"
+        },
+        {
+          "text": "car",
+          "phonemes": "kˈɑɹ"
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        }
+      ]
+    },
+    {
+      "path": "unit5-6/audio/l05-d12.mp3",
+      "text": "And this is Chang-woo.",
+      "tokens": [
+        {
+          "text": "And",
+          "phonemes": "ˌænd"
+        },
+        {
+          "text": "this",
+          "phonemes": "ðɪs"
+        },
+        {
+          "text": "is",
+          "phonemes": "ɪz"
+        },
+        {
+          "text": "Chang-woo",
+          "phonemes": "wˈu"
+        },
+        {
+          "text": ".",
+          "phonemes": "."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Cambridge: excuse，动词 /z/、名词 /s/",
+      "url": "https://dictionary.cambridge.org/us/pronunciation/english/excuse"
+    },
+    {
+      "title": "Cambridge: loose /luːs/",
+      "url": "https://dictionary.cambridge.org/pronunciation/english/loose"
+    }
+  ],
+  "caveats": [
+    "波形相关系数是生成原因的辅助证据，不是普遍适用的发音评分。",
+    "Chang-woo 的历史 override 只留校验值；当前缺词重放是对照，不假称已还原完整历史规则。",
+    "本轮没有人工听审记录。"
+  ]
+}

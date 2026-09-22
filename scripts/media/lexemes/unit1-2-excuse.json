@@ -1,0 +1,19 @@
+{
+  "sourceId": "L01-W01",
+  "text": "excuse",
+  "ipa": "/ɪkˈskjuːz/",
+  "voice": "af_heart",
+  "speed": 1,
+  "seed": 0,
+  "synthesisText": "Here is the word excuse. excuse.",
+  "phonemeOverrides": {
+    "excuse": {
+      "phonemes": "ɪkskjˈuz",
+      "occurrences": 2
+    }
+  },
+  "expectedPhonemes": "hˈɪɹ ɪz ðə wˈɜɹd ɪkskjˈuz. ɪkskjˈuz.",
+  "targetOccurrences": 2,
+  "reference": "https://dictionary.cambridge.org/us/pronunciation/english/excuse",
+  "reason": "Verb in Excuse me; preserve voiced /z/ rather than noun /s/."
+}

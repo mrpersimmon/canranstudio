@@ -117,7 +117,7 @@ test('阅读即可作答，错答和未检查选择不进入舞台，换题停�
   await room.getByRole('group', { name: '选择回应', exact: true }).getByRole('button', { name: 'Thank you.', exact: true }).click();
   await expect(scene.getByRole('button', { name: 'Thank you.', exact: true })).toHaveCount(0);
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.locator('#rolePractice').getByRole('status')).toHaveText('再看看，试一次。Beef, please. 请给我牛肉。');
+  await expect(room.locator('#rolePractice').getByRole('status')).toHaveText('再看看，试一次。');
   await expect(scene.getByRole('button', { name: 'Thank you.', exact: true })).toHaveCount(0);
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await cue.click(); await expect(cue).toHaveAttribute('aria-busy', 'true');

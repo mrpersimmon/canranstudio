@@ -32,7 +32,7 @@ test('38 个录音均通过真实控件播放，词卡、两位角色与问句�
   const words=page.locator('.stage-words');
   const groups=[
     [['handbag','l01-w07'],['pen','l02-w01'],['pencil','l02-w02'],['book','l02-w03'],['watch','l02-w04'],['coat','l02-w05']],
-    [['dress','l02-w06'],['skirt','l02-w07'],['shirt','l02-w08'],['car','l02-w09'],['house','l02-w10'],['excuse','l01-w01']],
+    [['dress','l02-w06'],['skirt','l02-w07'],['shirt','l02-w08'],['car','l02-w09'],['house','l02-w10'],['excuse','l01-w01-v2']],
     [['me','l01-w02'],['yes','l01-w03'],['is','l01-w04'],['this','l01-w05'],['your','l01-w06'],['pardon','l01-w08']],
     [['it','l01-w09'],['thank you','l01-w10'],['very much','l01-w11']]
   ];

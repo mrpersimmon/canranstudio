@@ -1,2 +1,4 @@
 # Keep captured test output verbatim; source and documentation still use normal whitespace checks.
 docs/butcher-version/evidence/**/*.log -whitespace
+# CSV audit exports use CRLF line endings; retain the other whitespace checks.
+docs/butcher-version/evidence/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

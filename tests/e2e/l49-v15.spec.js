@@ -25,7 +25,7 @@ async function finishAudio(page, index = -1) {
   }, index);
 }
 
-test('听音删除无效线索，重试和刷新不恢复它，其他活动保留实质提示', async ({ page }) => {
+test('听音删除无效线索，重试和刷新不恢复它，其他活动有独立线索才显示灯泡', async ({ page }) => {
   await audioBoundary(page);
   await page.goto('/lesson49/#learn/listen');
   await page.getByRole('button', { name: '开始听辨', exact: true }).click();
@@ -45,7 +45,9 @@ test('听音删除无效线索，重试和刷新不恢复它，其他活动保�
   await noHint();
   await page.screenshot({ path: 'output/playwright/l49-v15-listen.png' });
   await page.goto('/lesson49/#learn/doare');
-  const grammar = page.locator('#doarePractice');
+  await expect(page.locator('#doarePractice').getByRole('button', { name: '给点线索', exact: true })).toHaveCount(0);
+  await page.goto('/unit1-2/#learn/trans');
+  const grammar = page.locator('.stage-trans');
   await grammar.getByRole('button', { name: '给点线索', exact: true }).click();
   await expect(grammar.locator('.practice-hint')).toBeVisible();
 });

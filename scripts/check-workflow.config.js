@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
-const runtimeInputs = ['core', 'assets', 'home', 'index.html', 'unit49-50', 'unit1-2', 'unit3-4', 'unit5-6', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
+const runtimeInputs = ['core', 'assets', 'home', 'index.html', 'unit49-50', 'unit1-2', 'unit3-4', 'unit5-6', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
 const isDoc = file => /\.md$/i.test(file) || file.startsWith('docs/') || file.startsWith('.superpowers/');
 const isWorkflow = file => /^(scripts\/check-workflow(?:\.config)?\.js|tests\/workflow\/|\.github\/|AGENTS\.md|\.gitignore)/.test(file);
 const unitFiles = root => fs.readdirSync(path.join(root, 'tests/unit')).filter(name => name.endsWith('.test.js')).sort().map(name => 'tests/unit/' + name);
@@ -14,6 +14,11 @@ function tasks(root, files) {
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
+    'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
+    'browser-unit78': browser(['tests/e2e/unit7-8']),
+    'browser-units9-12': browser(['tests/e2e/unit9-10', 'tests/e2e/unit11-12', 'tests/e2e/units9-12-classroom.spec.js']),
+    'browser-unit1314': browser(['tests/e2e/unit13-14']),
+    'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js']),
     'browser-state': browser(['tests/e2e/home-progress.spec.js', 'tests/e2e/l49-progress.spec.js']),
     'browser-layout': browser(['tests/e2e/accessibility.spec.js', 'tests/e2e/mobile-release.spec.js']),
     'browser-changed': browser(changedTests.length ? changedTests : ['tests/e2e/smoke.spec.js']),
@@ -30,6 +35,11 @@ function select(files) {
   const runtime = code.filter(file => !file.startsWith('tests/'));
   if (runtime.length) selected.push('browser-smoke');
   if (runtime.some(file => /audio|feedback|\.mp3$/.test(file))) selected.push('browser-audio');
+  if (code.some(file => /^(unit(?:1-2|5-6|7-8|11-12)\/|soundmark\/|core\/audio-player\.js|scripts\/media\/|tests\/fixtures\/pronunciation)/.test(file))) selected.push('browser-pronunciation');
+  if (code.some(file => /^(unit7-8\/|tests\/fixtures\/unit7-8-voiced-before\/|tests\/support\/unit7-8-flow\.js)/.test(file))) selected.push('browser-unit78');
+  if (code.some(file => /^(unit(?:9-10|11-12)\/|tests\/fixtures\/unit(?:9-10|11-12)-voiced-before\/|tests\/support\/unit(?:9-10|11-12)-flow\.js)/.test(file))) selected.push('browser-units9-12');
+  if (code.some(file => /^(unit13-14\/|assets\/unit13-14\/|tests\/support\/unit13-14-flow\.js)/.test(file))) selected.push('browser-unit1314');
+  if (code.some(file => /^(unit[^/]*\/|lesson\d+\/|soundmark\/|core\/(?:lesson49-practice|lesson49-subjects|course-catalog)\.js|tests\/(?:e2e\/retry-feedback\.spec\.js|fixtures\/l49-subjects-before-retry\.js))/.test(file))) selected.push('browser-retry-feedback');
   if (runtime.some(file => /^(lesson49\/|core\/)|progress|storage/.test(file))) selected.push('browser-state');
   if (runtime.some(file => /^(lesson5[0-4]\/|soundmark\/)/.test(file))) selected.push('browser-lessons');
   if (runtime.some(file => /\.css$|adventure|landmark|device-profile/.test(file))) selected.push('browser-layout');

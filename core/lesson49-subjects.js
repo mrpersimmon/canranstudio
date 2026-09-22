@@ -26,8 +26,14 @@
     });
     return { pending, last };
   }
-  function upcoming(submissions) {
-    if (submissions.length < questions.length) return { q: questions[submissions.length], phase: 'base' };
+  function upcoming(submissions, retryFrom = run?.retryFrom ?? 0) {
+    const immediate = submissions.length >= retryFrom;
+    const previous = submissions.at(-1);
+    if (immediate && previous && !previous.correct) {
+      return { q: questions.find(question => question.id === previous.questionId), phase: 'retry' };
+    }
+    const baseCount = immediate ? submissions.filter(answer => answer.phase === 'base').length : submissions.length;
+    if (baseCount < questions.length) return { q: questions[baseCount], phase: 'base' };
     const { pending, last } = results(submissions);
     if (!pending.size) return null;
     if (content.reviewMode === 'mistakes-only') {
@@ -48,7 +54,7 @@
   }
   function freshRun() {
     const runId = id();
-    return { version: content.version, runId, submissions: [], usage: [], done: false,
+    return { version: content.version, runId, retryFrom: 0, submissions: [], usage: [], done: false,
       current: freshAppearance(upcoming([]), runId) };
   }
   function archive(draft, reason) {
@@ -62,6 +68,8 @@
     function incompatible() { archive(draft, 'incompatible-subject-draft'); return freshRun(); }
     if (draft.version !== content.version || typeof draft.runId !== 'string' || !draft.runId ||
         !Array.isArray(draft.submissions) || !Array.isArray(draft.usage) || typeof draft.done !== 'boolean') return incompatible();
+    const retryFrom = draft.retryFrom === undefined ? Infinity : draft.retryFrom;
+    if (retryFrom !== Infinity && (!Number.isInteger(retryFrom) || retryFrom < 0 || retryFrom > draft.submissions.length + 1)) return incompatible();
     const ids = new Set(), verified = [];
     const owns = (answer, expected) => answer && expected && answer.runId === draft.runId &&
       answer.questionId === expected.q.id && answer.phase === expected.phase &&
@@ -70,7 +78,7 @@
     // Rebuild progress from submissions in this version and run. Neither a
     // stored score nor a done flag can manufacture unanswered future questions.
     for (const answer of draft.submissions) {
-      const expected = upcoming(verified);
+      const expected = upcoming(verified, retryFrom);
       if (!owns(answer, expected) || ids.has(answer.appearanceId) || answer.checked !== true ||
           !content.categories.includes(answer.selection) || answer.correct !== (answer.selection === expected.q.answer)) return incompatible();
       ids.add(answer.appearanceId); verified.push(answer);
@@ -80,9 +88,12 @@
     if (current?.checked) {
       const last = verified.at(-1);
       if (!last || ['runId','questionId','appearanceId','phase','selection','hintUsed','ruleUsed'].some(key => current[key] !== last[key])) return incompatible();
-    } else if (current?.checked !== false || !owns(current, upcoming(verified)) || ids.has(current.appearanceId) ||
+    } else if (current?.checked !== false || !owns(current, upcoming(verified, retryFrom)) || ids.has(current.appearanceId) ||
         (current.selection !== null && !content.categories.includes(current.selection))) return incompatible();
-    if (draft.done && (!current.checked || upcoming(verified))) return incompatible();
+    if (draft.done && (!current.checked || upcoming(verified, retryFrom))) return incompatible();
+    // Validate the old spaced-review history under its original contract before
+    // adopting immediate retries. An in-progress unanswered question stays put.
+    if (draft.retryFrom === undefined) draft.retryFrom = verified.length + (current.checked ? 0 : 1);
     return draft;
   }
   const save = () => learning.activity('subjectRound', run);
@@ -99,7 +110,7 @@
       if (run.done) {
         const finish = node('div', '', 'practice-finish');
         const stamp = core.lesson49Icons.create('check'); stamp.classList.add('finish-icon');
-        const score = run.submissions.slice(0, questions.length).filter(answer => answer.correct).length;
+        const score = run.submissions.filter(answer => answer.phase === 'base' && answer.correct).length;
         const actions = node('div', '', 'practice-finish-actions');
         actions.setAttribute('role', 'group'); actions.setAttribute('aria-label', '完成后的操作');
         actions.append(button('再练一轮', () => {
@@ -116,7 +127,7 @@
       // One progress marker per question, using its latest verified answer in this run.
       // Repeated interval questions retain their green fill until answered wrong.
       const solved = questions.map(question => last.has(question.id) && !pending.has(question.id));
-      const progress = learning.progressLabel(current.phase === 'base'
+      const progress = learning.progressLabel(current.phase === 'base' || current.phase === 'retry'
         ? `第 ${questions.indexOf(q) + 1} / ${questions.length} 题`
         : `${current.phase === 'review' ? '回练' : '再练一题'} · 还有 ${pending.size} 道待练`, solved,
         current.checked && current.selection === q.answer ? -1 : questions.indexOf(q));
@@ -148,7 +159,7 @@
         element.querySelector('.subject-next')?.focus({ preventScroll: true });
       });
       const nextQuestion = current.checked ? upcoming(run.submissions) : null;
-      const next = button(current.checked && !nextQuestion ? '完成' : '继续', () => {
+      const next = button(current.checked && current.selection !== q.answer ? '再试一次' : current.checked && !nextQuestion ? '完成' : '继续', () => {
         if (!ownsAppearance() || !current.checked) return;
         if (nextQuestion) run.current = freshAppearance(nextQuestion, run.runId); else run.done = true;
         save(); render();
@@ -173,8 +184,7 @@
       }
       if (current.checked) {
         const correct = current.selection === q.answer;
-        status.append(node('strong', correct ? '答对了！' : '正确答案：' + q.answer));
-        if (!correct) status.append(node('p', q.wrong[current.selection]));
+        status.append(node('strong', correct ? '答对了！' : '再看看，试一次。'));
       }
       body.append(progress, scene, subject, context, node('p', content.prompt, 'subject-prompt'), choices);
       const actions = node('div', '', 'practice-actions');

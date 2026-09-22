@@ -1,0 +1,43 @@
+{
+  "phonemes": "ˌænd ðɪs ɪz ʧˈæŋ wˌu.",
+  "tokens": [
+    {
+      "text": "And",
+      "phonemes": "ˌænd",
+      "startMs": 425,
+      "endMs": 575
+    },
+    {
+      "text": "this",
+      "phonemes": "ðɪs",
+      "startMs": 575,
+      "endMs": 825
+    },
+    {
+      "text": "is",
+      "phonemes": "ɪz",
+      "startMs": 825,
+      "endMs": 1000
+    },
+    {
+      "text": "Chang-woo",
+      "phonemes": "ʧˈæŋ wˌu",
+      "startMs": 1000,
+      "endMs": 2025
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 2025,
+      "endMs": 2300
+    }
+  ],
+  "sha256": "bdd633afc60c611f794ac4333066f8bc7ea808743d49991304449411f7a520b4",
+  "voice": "am_michael",
+  "speed": 0.9,
+  "renderMode": "natural-utterance",
+  "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+  "reviewStatus": "unreviewed-candidate",
+  "recipeSha256": "a98c83978fd61c04283a6262c5608d5edfe2e1d2de01a926582274289f1a8560",
+  "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e"
+}

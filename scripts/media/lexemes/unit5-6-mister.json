@@ -1,0 +1,14 @@
+{
+  "sourceId": "L05-W01",
+  "displayText": "Mr.",
+  "text": "mister",
+  "ipa": "/ˈmɪstɚ/",
+  "voice": "af_heart",
+  "speed": 1,
+  "seed": 0,
+  "synthesisText": "Here is the word mister. mister.",
+  "expectedPhonemes": "hˈɪɹ ɪz ðə wˈɜɹd mˈɪstəɹ. mˈɪstəɹ.",
+  "targetOccurrences": 2,
+  "reference": "https://dictionary.cambridge.org/pronunciation/english/mister",
+  "reason": "Expand the title for synthesis, then crop only the final aligned word. Display stays Mr."
+}

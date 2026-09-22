@@ -1,0 +1,1463 @@
+{
+  "schemaVersion": 1,
+  "packId": "butcher-unit11-12-v1",
+  "unitId": "NCE-U06",
+  "voiceBaselineId": "nce-youth-v1",
+  "status": "local-poc-candidate-unreviewed",
+  "disclosure": "英文语音由 AI 生成，仅供内部逐条试听；不是教材官方录音，也尚未获准发布。",
+  "accentTarget": "General American English",
+  "generationBasis": "nce-u01-kokoro-candidate-v3",
+  "engine": {
+    "name": "Kokoro",
+    "packageVersion": "0.9.4",
+    "model": "hexgrad/Kokoro-82M",
+    "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+    "deterministicSeed": 0,
+    "modelLicense": "Apache-2.0",
+    "outputUseStatus": "requires-review-before-publication"
+  },
+  "encoding": {
+    "format": "mp3",
+    "sampleRateHz": 24000,
+    "bitrateKbps": 96,
+    "loudnessTargetLufs": -18
+  },
+  "processing": {
+    "profileId": "instructional-onset-v1",
+    "silenceThresholdDb": -45,
+    "decodedOnsetLimitMs": 150,
+    "leadingSilenceKeptMs": 100,
+    "trailingSilenceKeptMs": 240,
+    "standaloneWordRenderMode": "context-cropped-lexeme-v1"
+  },
+  "voiceAssignment": {
+    "teacher": "am_michael",
+    "dave": "am_adam",
+    "tim": "am_adam",
+    "standaloneWord": "af_heart",
+    "ownershipModel": "af_heart",
+    "reference": "af_heart",
+    "challenge": "am_michael"
+  },
+  "replacementContract": {
+    "scope": "whole-unit-pack",
+    "identity": "catalog Source ID",
+    "rule": "Replace all listed files together without changing catalog text, speaker roles, or runtime."
+  },
+  "files": [
+    {
+      "sourceId": "L11-W01",
+      "sourceKind": "word",
+      "text": "whose",
+      "catalogTextSha256": "55efa0938f9f52fb6de33f27375ee1916aa9c5d27367eac89ea1207026bb16f8",
+      "path": "unit11-12/audio/l11-w01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "8a59e87b10171277fcf28baf7c42efc8b9b89d179ef69385ae3524d361912e7d",
+      "bytes": 9837,
+      "durationMs": 722,
+      "decodedOnsetMs": 60,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.59,
+        "targetStartSeconds": 1.5875,
+        "deltaMs": 2.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L11-W02",
+      "sourceKind": "word",
+      "text": "blue",
+      "catalogTextSha256": "16477688c0e00699c6cfa4497a3612d7e83c532062b64b250fed8908128ed548",
+      "path": "unit11-12/audio/l11-w02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "0fa56c43acc7386d14d7b2d10350f6e3a3cfe6a75be5d1de35a0166d1373a057",
+      "bytes": 8685,
+      "durationMs": 628,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.67,
+        "targetStartSeconds": 1.7125,
+        "deltaMs": -42.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L11-W03",
+      "sourceKind": "word",
+      "text": "perhaps",
+      "catalogTextSha256": "1ba2ebb275e86668d38ccdfbb7a6e009e90b89b97a90a06ed257f2b19ce49b66",
+      "path": "unit11-12/audio/l11-w03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "81a92b6259d25373c2ec7951b6462ae05120a531bf750c0adda685c896609180",
+      "bytes": 11565,
+      "durationMs": 866,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.82,
+        "targetStartSeconds": 1.825,
+        "deltaMs": -5.0,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L11-W04",
+      "sourceKind": "word",
+      "text": "white",
+      "catalogTextSha256": "018fa96a44715c90bf93be148069cb28dd45d398f2cc75aa1565311f6e55d174",
+      "path": "unit11-12/audio/l11-w04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "bd9c2be07cf4a60c26ba1a6a66b8e7d334ca103310b59661b8a8b9a41d6df167",
+      "bytes": 8973,
+      "durationMs": 666,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.62,
+        "targetStartSeconds": 1.6625,
+        "deltaMs": -42.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L11-W05",
+      "sourceKind": "word",
+      "text": "catch",
+      "catalogTextSha256": "9f925cdc4feedda4d9ae06f2e1b476680f4781ac2e0fb95fcc819be70328453d",
+      "path": "unit11-12/audio/l11-w05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "2e73db2e2091231e5d3106d0110ada6465cf25ec10b17d07c46a8ca52c5ed33d",
+      "bytes": 9549,
+      "durationMs": 706,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.69,
+        "targetStartSeconds": 1.7125,
+        "deltaMs": -22.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W01",
+      "sourceKind": "word",
+      "text": "father",
+      "catalogTextSha256": "88a1881f0025cf7117501d07aefc5d4be6696656790d765678df8bc48ca52687",
+      "path": "unit11-12/audio/l12-w01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "102e7e4cec37f9b4d1873b6e602e0cedcaf0a994f909e4db85d6d36f3900ec3f",
+      "bytes": 8973,
+      "durationMs": 650,
+      "decodedOnsetMs": 60,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.74,
+        "targetStartSeconds": 1.75,
+        "deltaMs": -10.0,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W02",
+      "sourceKind": "word",
+      "text": "mother",
+      "catalogTextSha256": "cf0622ef2a661cd2f11b0b644e40e4e00eb962918424a8c8ba53842fdf290235",
+      "path": "unit11-12/audio/l12-w02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "d1e6d8764c2093aa6430951ee743614ef49a25a309bb5b051bd9a9b8d254dae4",
+      "bytes": 8973,
+      "durationMs": 658,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.67,
+        "targetStartSeconds": 1.7125,
+        "deltaMs": -42.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W03",
+      "sourceKind": "word",
+      "text": "blouse",
+      "catalogTextSha256": "2e094b416432919c2a8d8615d04c1798c8b5c8defff080cb76ebc22e15c2fba3",
+      "path": "unit11-12/audio/l12-w03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "692e61c447b9dc0a25d6ff7812c57aba5306c9289de4beb7ad3085d05f77d12f",
+      "bytes": 10125,
+      "durationMs": 750,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "blouse": "blˈWs"
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.77,
+        "targetStartSeconds": 1.7625,
+        "deltaMs": 7.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W04",
+      "sourceKind": "word",
+      "text": "sister",
+      "catalogTextSha256": "1980d3927f07fec9c8d727f187ddde727da7e45247dbb71c7555e5ae0eca66d5",
+      "path": "unit11-12/audio/l12-w04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "987311ab15ee29515d0126e57f8cc255ac3fb80fe7eab3d535eafc8ae969e301",
+      "bytes": 10413,
+      "durationMs": 777,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.73,
+        "targetStartSeconds": 1.775,
+        "deltaMs": -45.0,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W05",
+      "sourceKind": "word",
+      "text": "tie",
+      "catalogTextSha256": "6f595eba3f46ceaa9fd0b0a93cb363cad6c66fedd2699850115c8d85d9e5b852",
+      "path": "unit11-12/audio/l12-w05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "1229b8c94d4f5c9ee9f93df5b5ac1dc69377fa9a36edeac5b541b5587f5b6330",
+      "bytes": 8685,
+      "durationMs": 633,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.66,
+        "targetStartSeconds": 1.6875,
+        "deltaMs": -27.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W06",
+      "sourceKind": "word",
+      "text": "brother",
+      "catalogTextSha256": "0b4bd77cec705cf5df016344c0fc673fb3c2240078e6af572b2c5c6fa76114af",
+      "path": "unit11-12/audio/l12-w06.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "466e830c11eee04ce6a74b0b4a5e647181775b6aed27cc67c4f4272e6d64983e",
+      "bytes": 9261,
+      "durationMs": 683,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.73,
+        "targetStartSeconds": 1.7625,
+        "deltaMs": -32.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W07",
+      "sourceKind": "word",
+      "text": "his",
+      "catalogTextSha256": "73c9c98668a34c54d131ff609d0bf129068d1b5ed3efd7cdfe753f909596456c",
+      "path": "unit11-12/audio/l12-w07.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "78c755f6d5db5592da2bd25af4bb972dbd4c46e2cde2b0a13b488fab163c4c9e",
+      "bytes": 9261,
+      "durationMs": 690,
+      "decodedOnsetMs": 60,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.59,
+        "targetStartSeconds": 1.5875,
+        "deltaMs": 2.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L12-W08",
+      "sourceKind": "word",
+      "text": "her",
+      "catalogTextSha256": "354cbfc814262a7a81d343f7d6ebc4adfb4266e5081a78f6a19ff16802dce8b2",
+      "path": "unit11-12/audio/l12-w08.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "839ef414d857405834b866db1bcdfe2f589385248771ede9d294acea98765c2f",
+      "bytes": 8397,
+      "durationMs": 602,
+      "decodedOnsetMs": 60,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "her": "hˈɜɹ"
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.53,
+        "targetStartSeconds": 1.5375,
+        "deltaMs": -7.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "REVIEW-W01",
+      "sourceKind": "word",
+      "text": "shirt",
+      "catalogTextSha256": "a52514252adf86066966790e947f72ef6ea6690a6852d5bb5480ee2eeb663395",
+      "path": "unit11-12/audio/review-w01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "c91664f7db7735d9efaa6a733545bd5f7a040923e6e2ecc0ebda1e1e8b54def5",
+      "bytes": 8973,
+      "durationMs": 667,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.61,
+        "targetStartSeconds": 1.675,
+        "deltaMs": -65.0,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "REVIEW-W02",
+      "sourceKind": "word",
+      "text": "suit",
+      "catalogTextSha256": "21839e0eb260dda7a564eef13fa1ae94970a32834064cfc8437e636cfe7533fb",
+      "path": "unit11-12/audio/review-w02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "77e5eb0dce44d41f67b1fd87c7d254c257996a2dd6171c6bf3a250ec79869f65",
+      "bytes": 8973,
+      "durationMs": 655,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.59,
+        "targetStartSeconds": 1.6625,
+        "deltaMs": -72.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "REVIEW-W03",
+      "sourceKind": "word",
+      "text": "skirt",
+      "catalogTextSha256": "3abafce5bc548613ff47ae39983fff685a2db66ba1a4fa6f93a1d57286e034ef",
+      "path": "unit11-12/audio/review-w03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "2b4eb90748dbefee47dc5faa01c2d30443de93c99302299d955f34ebb9b97689",
+      "bytes": 10125,
+      "durationMs": 750,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.65,
+        "targetStartSeconds": 1.7,
+        "deltaMs": -50.0,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "REVIEW-W04",
+      "sourceKind": "word",
+      "text": "son",
+      "catalogTextSha256": "98aa6675482552881925fe70d82559692d811b3bcd33f53b9a702c24d5322696",
+      "path": "unit11-12/audio/review-w04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "317b179b4bb8de11b470545901161380bc61d9128d11e2ac7876d3b068a7cf1c",
+      "bytes": 8685,
+      "durationMs": 638,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.56,
+        "targetStartSeconds": 1.625,
+        "deltaMs": -65.0,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "REVIEW-W05",
+      "sourceKind": "word",
+      "text": "daughter",
+      "catalogTextSha256": "4ed28f82ca96c3342a5c591668270f78c26dae22fd953772a6c14e52f46e1b22",
+      "path": "unit11-12/audio/review-w05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "05fc7286d0c0fda888fe6e917f866c40b3522b7eb9d9a4a3e447907fbab005e2",
+      "bytes": 8685,
+      "durationMs": 634,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "compare final activity segment with lexical token timing in the same generated context",
+        "cropStartSeconds": 1.71,
+        "targetStartSeconds": 1.7125,
+        "deltaMs": -2.5,
+        "result": "No prior lexical token included; human word-edge listening pending"
+      }
+    },
+    {
+      "sourceId": "L11-D01",
+      "sourceKind": "dialogue",
+      "text": "Whose shirt is that?",
+      "catalogTextSha256": "83e4ad15f8614f85d3a922a8aba679fb006929e5d2997a2a05dadae338181a59",
+      "path": "unit11-12/audio/l11-d01.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "2c56c03109b33b69900c21db7ecae174a9f2f5129a756442836b4a97dd39e625",
+      "bytes": 17037,
+      "durationMs": 1322,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D02",
+      "sourceKind": "dialogue",
+      "text": "Is this your shirt, Dave?",
+      "catalogTextSha256": "f4778049dee524ed8441d5b3822a114d6fdaf71165aa8245d7f5be3cc5f8ac86",
+      "path": "unit11-12/audio/l11-d02.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "435032dc49b4b8f4901ae5e249823ad037e9a11fda3638bbc88f60992cef3af3",
+      "bytes": 20493,
+      "durationMs": 1630,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D03",
+      "sourceKind": "dialogue",
+      "text": "No, sir.",
+      "catalogTextSha256": "4150f4c47657cc2a4a60a4a4e74f34b726bd3d9c47fad4b22e0589d3704b430c",
+      "path": "unit11-12/audio/l11-d03.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "dave",
+      "sha256": "847c0f90278eed3a8d8fe92ed9afe81e61415e1a7a5632be816017de3b73f168",
+      "bytes": 13293,
+      "durationMs": 1031,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D04",
+      "sourceKind": "dialogue",
+      "text": "It's not my shirt.",
+      "catalogTextSha256": "8014d5b04e2ccfc0ee77e66cdb2cbcd439f910fcd1c5ec3ed86f7df91fc8bd03",
+      "path": "unit11-12/audio/l11-d04.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "dave",
+      "sha256": "b2138f7b1545557a0bb8c61826cae036d55463fb155de1a5c332a321fcdb77a7",
+      "bytes": 17901,
+      "durationMs": 1404,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D05",
+      "sourceKind": "dialogue",
+      "text": "This is my shirt.",
+      "catalogTextSha256": "6d83835d6c3c7f708a85d52a4a9a52ded2252419a48c3152d4c772d082b56945",
+      "path": "unit11-12/audio/l11-d05.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "dave",
+      "sha256": "fc31c2acbb7700e66b6d7a5fba37df9e061e17e1799d667b1140183ca6bbdc9e",
+      "bytes": 16461,
+      "durationMs": 1292,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D06",
+      "sourceKind": "dialogue",
+      "text": "My shirt's blue.",
+      "catalogTextSha256": "a700a144d8c8b1ae5ec32b89a5e7f5b3f82caed3718b4f621c8834586b89773d",
+      "path": "unit11-12/audio/l11-d06.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "dave",
+      "sha256": "31538e61865144d4c32a439c807a149288cd57b0c089dd99070ae2a741838880",
+      "bytes": 17037,
+      "durationMs": 1324,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D07",
+      "sourceKind": "dialogue",
+      "text": "Is this shirt Tim's?",
+      "catalogTextSha256": "28f113ff1892848cb0f6cde9c40f02694e45b0608cb5ff6205c610ba396e0b80",
+      "path": "unit11-12/audio/l11-d07.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "c9500db25db15c95afef1608522ba0d0fd2de0a74844fc9c97e2753292d6a731",
+      "bytes": 19341,
+      "durationMs": 1533,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D08",
+      "sourceKind": "dialogue",
+      "text": "Perhaps it is, sir.",
+      "catalogTextSha256": "c8e6c3c2f953c4758d269fc77941c41eccf44f9927cca9d26a24249157dd03bd",
+      "path": "unit11-12/audio/l11-d08.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "dave",
+      "sha256": "4dab51b3f1a9e607426434cd6d181c0118701512b1e6928399b4de7b5cc93736",
+      "bytes": 17325,
+      "durationMs": 1357,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D09",
+      "sourceKind": "dialogue",
+      "text": "Tim's shirt's white.",
+      "catalogTextSha256": "18a98e1d9ab5ea59bb4ef9ed51adcb20e5e1e69838ed84cbafc23a9ea3f5d123",
+      "path": "unit11-12/audio/l11-d09.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "dave",
+      "sha256": "6cea0eed8b92f963f74a4831d55e70f91fb85b264f457bb770414509a7094b80",
+      "bytes": 17037,
+      "durationMs": 1325,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D10",
+      "sourceKind": "dialogue",
+      "text": "Tim!",
+      "catalogTextSha256": "406239d1604ab1956a631d608d92afb5cbb3d1210750fc526cc629364cf10310",
+      "path": "unit11-12/audio/l11-d10.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "1f7196eaf9ebf5874724faf4dbb971b76a6d951d0453623eb76572ae9d06369b",
+      "bytes": 10989,
+      "durationMs": 826,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D11",
+      "sourceKind": "dialogue",
+      "text": "Yes, sir?",
+      "catalogTextSha256": "c70df1156d2b4d29e5792a05a16859c2a54aa91f02273f9dc0a1a18496f2e771",
+      "path": "unit11-12/audio/l11-d11.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "tim",
+      "sha256": "ba67c102fcbe8bfd05d83fc47ba58470d2d5f589fc80782961a08f848683dd14",
+      "bytes": 13005,
+      "durationMs": 995,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D12",
+      "sourceKind": "dialogue",
+      "text": "Is this your shirt?",
+      "catalogTextSha256": "af23d52d93719851092557e87bef8209cf86a94b70f4c249eb8e372cb74f8389",
+      "path": "unit11-12/audio/l11-d12.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "9e17d94bf7c6a0fb6b13880a258ac0045e725b8fe6eb2724e591c0a9e39bc615",
+      "bytes": 16749,
+      "durationMs": 1306,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D13",
+      "sourceKind": "dialogue",
+      "text": "Yes, sir.",
+      "catalogTextSha256": "c8f858c119db9abf646c0713ae48068fb7c8e4f965cbaffcaf7a923dec11635a",
+      "path": "unit11-12/audio/l11-d13.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "tim",
+      "sha256": "8fb3b40a3ede6d2c60463b79c28217f91e599c7c8caf7d1ffd2e96f90acc283c",
+      "bytes": 13005,
+      "durationMs": 991,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D14",
+      "sourceKind": "dialogue",
+      "text": "Here you are.",
+      "catalogTextSha256": "3f3d9f370444b48214a7eddc525b0847455ca7707a1cb058691cf343411a1134",
+      "path": "unit11-12/audio/l11-d14.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "b1c1772a8bd25b4cd61537b9a09ff2f682b13ee6763f29497f59dac7c891ef55",
+      "bytes": 14733,
+      "durationMs": 1150,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D15",
+      "sourceKind": "dialogue",
+      "text": "Catch!",
+      "catalogTextSha256": "2b0d2e0be1fabcb658d3b17e943051f672553c9d40ad3da148b297b6fa4e93ee",
+      "path": "unit11-12/audio/l11-d15.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "teacher",
+      "sha256": "2cdc71d20d775b7248c937d2253651000bf8dc802205c1ba9b6177a0c7cc8d56",
+      "bytes": 11565,
+      "durationMs": 874,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L11-D16",
+      "sourceKind": "dialogue",
+      "text": "Thank you, sir.",
+      "catalogTextSha256": "c4561ba81a0125a234745dca10c938a7c1cb173dc51973c02cbcaa42010f1f62",
+      "path": "unit11-12/audio/l11-d16.mp3",
+      "voiceId": "am_adam",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "tim",
+      "sha256": "07898b9ca431455359a0e89c6381ca60361693388db64ba3e2c239f50e0ecd80",
+      "bytes": 14733,
+      "durationMs": 1132,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B01",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this handbag? It's Stella's. It's her handbag.",
+      "catalogTextSha256": "9aea98961530a8c99d6af29c665b181c5f837e6e639f9dbd9c0c4aa94a1df2b0",
+      "path": "unit11-12/audio/l12-b01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "481873d3a9745012513adc553308bcafd51336f8f9a1a551019b5c471f554028",
+      "bytes": 43533,
+      "durationMs": 3547,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B02",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this car? It's Paul's. It's his car.",
+      "catalogTextSha256": "86783ae09fe46f0ebad8b076a42d40cc4dda24cee7f4c7c2ac8680cd315fe6d9",
+      "path": "unit11-12/audio/l12-b02-v2.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "8657e3f2c89168b4cf2dc43ae7bb46099479da979897104b09730dcd1e4b914b",
+      "bytes": 35181,
+      "durationMs": 2834,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "recipe": "scripts/media/lexemes/unit11-12-pauls.json",
+        "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+        "seed": 0
+      },
+      "generationRecipe": {
+        "path": "scripts/media/lexemes/unit11-12-pauls.json",
+        "sha256": "390e2b8d60ef3ce3a80f4ff34f52d8bfc1c1d976f1610e8568a4185bcf0b093a",
+        "generator": "scripts/media/render-lexeme.py",
+        "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e",
+        "environment": {
+          "python": "3.12",
+          "kokoro": "0.9.4",
+          "misaki": "0.9.4",
+          "torch": "2.14.0",
+          "numpy": "2.5.3",
+          "soundfile": "0.14.0",
+          "spacy": "3.8.16",
+          "en-core-web-sm": "3.8.0"
+        }
+      },
+      "pronunciationRepair": {
+        "revision": "2026-09-22-v2",
+        "issue": "A03",
+        "supersedesPath": "unit11-12/audio/l12-b02.mp3",
+        "supersedesSha256": "943ba1ca49e9a3b3e2a9e68b760e14730cf2f8224213a6aa6f512784bebd4449",
+        "previousOrigin": {
+          "kind": "local-generation",
+          "sourcePages": "paper 22–25 / PDF 55–58",
+          "seed": 0
+        },
+        "actualPhonemes": "hˌuz ɪz ðɪs kˈɑɹ? ˌɪts pˈɔlz. ˌɪts hɪz kˈɑɹ.",
+        "tokens": [
+          {
+            "text": "Whose",
+            "phonemes": "hˌuz",
+            "startMs": 300,
+            "endMs": 525
+          },
+          {
+            "text": "is",
+            "phonemes": "ɪz",
+            "startMs": 525,
+            "endMs": 675
+          },
+          {
+            "text": "this",
+            "phonemes": "ðɪs",
+            "startMs": 675,
+            "endMs": 875
+          },
+          {
+            "text": "car",
+            "phonemes": "kˈɑɹ",
+            "startMs": 875,
+            "endMs": 1300
+          },
+          {
+            "text": "?",
+            "phonemes": "?",
+            "startMs": 1300,
+            "endMs": 1400
+          },
+          {
+            "text": "It's",
+            "phonemes": "ˌɪts",
+            "startMs": 1400,
+            "endMs": 1600
+          },
+          {
+            "text": "Paul's",
+            "phonemes": "pˈɔlz",
+            "startMs": 1600,
+            "endMs": 2075
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 2075,
+            "endMs": 2150
+          },
+          {
+            "text": "It's",
+            "phonemes": "ˌɪts",
+            "startMs": 2150,
+            "endMs": 2312
+          },
+          {
+            "text": "his",
+            "phonemes": "hɪz",
+            "startMs": 2312,
+            "endMs": 2488
+          },
+          {
+            "text": "car",
+            "phonemes": "kˈɑɹ",
+            "startMs": 2488,
+            "endMs": 3150
+          },
+          {
+            "text": ".",
+            "phonemes": ".",
+            "startMs": 3150,
+            "endMs": 3325
+          }
+        ],
+        "boundaries": {},
+        "automatedRecognition": {
+          "base.en": "Who's is this car? It's Paul's. It's his car.",
+          "tiny.en": "Who's is this car? It's Paul's, it's his car.",
+          "limit": "Recognition is auxiliary evidence; human pronunciation and naturalness review remains pending."
+        },
+        "humanListening": "pending"
+      },
+      "pronunciationOverride": true,
+      "phonemeOverrides": {
+        "Paul's": "pˈɔlz"
+      }
+    },
+    {
+      "sourceId": "L12-B03",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this coat? It's Sophie's. It's her coat.",
+      "catalogTextSha256": "9b03a25858525bcbe574dd1e0742ce59dc1852fed27fb0bb028b29c55d7df829",
+      "path": "unit11-12/audio/l12-b03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "fafeddd02b0300f4e97fe8304f82fc196f50f77c46125fdac0b58c5d07a543dd",
+      "bytes": 36045,
+      "durationMs": 2916,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B04",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this umbrella? It's Steven's. It's his umbrella.",
+      "catalogTextSha256": "27a646ab546f4b0965247182afb6e10103c7d4c7a338dc2116e3502959c57550",
+      "path": "unit11-12/audio/l12-b04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "716b065b91bbfd6009b052a8ce281ceda52595c5faacdddcbcabccaad2572882",
+      "bytes": 46413,
+      "durationMs": 3782,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B05",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this pen? It's my son's. It's his pen.",
+      "catalogTextSha256": "9afe97306108891dc3cbf3620fb0fc52467ada5562e90f369489967b719cf1b3",
+      "path": "unit11-12/audio/l12-b05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "d3a6073845d2467af307c5276e2e9273bcdbdfb3f5a96a23abcebdd835a26e6e",
+      "bytes": 38349,
+      "durationMs": 3116,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B06",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this dress? It's my daughter's. It's her dress.",
+      "catalogTextSha256": "7b1b40cc63f6e487213ab5a62509783fc5ac57a568c76e91a230fa7f185238c3",
+      "path": "unit11-12/audio/l12-b06.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "aeddb68a86d1f1f00f84d3ec6a352bfb86679d85ac616737ba4d6d066cbe38f1",
+      "bytes": 39213,
+      "durationMs": 3183,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B07",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this suit? It's my father's. It's his suit.",
+      "catalogTextSha256": "cbe2ad72e4fddb4644d579b4482b7d918e90953a8124461953009f1998a70c75",
+      "path": "unit11-12/audio/l12-b07.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "1ae660406b2d6f5f742afc53c2f92d64a048c24e519563355ff888c4497a9230",
+      "bytes": 36621,
+      "durationMs": 2958,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B08",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this skirt? It's my mother's. It's her skirt.",
+      "catalogTextSha256": "2d6462fe9725c5d798f576480aa3f7ce1d12977cb3967258a64f57abce12350e",
+      "path": "unit11-12/audio/l12-b08.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "37242216f9f107e64f6928489dcee9f74b93b2539a3a1b0deccbed5cdaac4d1b",
+      "bytes": 37773,
+      "durationMs": 3055,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B09",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this blouse? It's my sister's. It's her blouse.",
+      "catalogTextSha256": "e48b800ddfd981317a7791f63d6c26879de1d20432c95ae2057e864001157f2c",
+      "path": "unit11-12/audio/l12-b09.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "df9edc807b32d1cf734b028a90213afd6000fd3f385c8a3920fb5685fafab75b",
+      "bytes": 42381,
+      "durationMs": 3443,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B10",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this tie? It's my brother's. It's his tie.",
+      "catalogTextSha256": "cee92232377e2e94179bb155c875b34fa6236c0ece3bfbad08f581ca0f2f648a",
+      "path": "unit11-12/audio/l12-b10.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "5b76d7c5a6eb31a2c7eb19eb0ce9b5455283a70ab2e79a3685cf2ad94c8a90ba",
+      "bytes": 34893,
+      "durationMs": 2828,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B11",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this pen? It's Sophie's. It's her pen.",
+      "catalogTextSha256": "d6d82733931a36a6ca8357deaed1f6f77bdc196099a9afe7e60041a1241cd01e",
+      "path": "unit11-12/audio/l12-b11.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "367755034f3147c22a07f5aa35789b1e37cd26f440f5e722f79fb4e461932665",
+      "bytes": 35469,
+      "durationMs": 2862,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B12",
+      "sourceKind": "ownership-model",
+      "text": "Whose is this pencil? It's Hans's. It's his pencil.",
+      "catalogTextSha256": "62c1b8ea3240d93d22d2e17ec39980ba479fea12acaa7577b56ac2af2f324f87",
+      "path": "unit11-12/audio/l12-b12.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "b5e873fa42e262c4e82711fb9337f75473a0c7e47f1d11550d9e9fd2db0c3232",
+      "bytes": 41517,
+      "durationMs": 3371,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-B00",
+      "sourceKind": "written-example",
+      "text": "Whose is this shirt? It's Tim's. It's his shirt.",
+      "catalogTextSha256": "184c8b44cd75aef89062a9398cdc144ad63547579ee8d9e272a89a05452fc799",
+      "path": "unit11-12/audio/l12-b00.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "042a877cf23957715ab71e8dc5388ab770d5596bbad4917f2f76af6df60d46df",
+      "bytes": 35757,
+      "durationMs": 2898,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-A00",
+      "sourceKind": "written-reference",
+      "text": "Hans is here. That is his car.",
+      "catalogTextSha256": "f5ae88fffa8de40af816a798a94569f73c6d8249879ac0cfd9762b708178b25e",
+      "path": "unit11-12/audio/written-a-00.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "67ffe2db4eb5decc027ca60ffddfe0f725dd658fee707b5214f0d9a90d62494f",
+      "bytes": 26253,
+      "durationMs": 2106,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-A01",
+      "sourceKind": "written-reference",
+      "text": "Stella is here. That is her car.",
+      "catalogTextSha256": "7656550fbbac529322eeb84ae12accdae700502352ada308e9465a338edb0fa4",
+      "path": "unit11-12/audio/written-a-01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "697672dd20974f0032289f7f6e5def8d14de6ed03d20e11bdb99d9a431c8a13a",
+      "bytes": 26829,
+      "durationMs": 2159,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-A02",
+      "sourceKind": "written-reference",
+      "text": "Excuse me, Steven. Is this your umbrella?",
+      "catalogTextSha256": "fb822f46eaa186974f24f4fca27e5be1fbf4496e75acf14a74c0d4da75211228",
+      "path": "unit11-12/audio/written-a-02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "938153c5acfdbe65c0c2df604ef9ffd4183f6712300844dbdec9be3402cd70be",
+      "bytes": 33165,
+      "durationMs": 2682,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L12-A03",
+      "sourceKind": "written-reference",
+      "text": "I am an air hostess. My name is Britt.",
+      "catalogTextSha256": "eef0cea5c4623ef5d6d69f829ec33ac542875386a617d483489580990d0767e5",
+      "path": "unit11-12/audio/written-a-03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "db30df13716ca05ab7c80a0baa89a23d1c3c8998a1f1b74aabe0bc482db3dbf9",
+      "bytes": 34317,
+      "durationMs": 2783,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "britt": "bɹˈɪt"
+      }
+    },
+    {
+      "sourceId": "L12-A04",
+      "sourceKind": "written-reference",
+      "text": "Paul is here, too. That is his coat.",
+      "catalogTextSha256": "b182e71fe6a141da2dbd7b64ae043add09fe9e409141dae3e5ce98e48ae064d4",
+      "path": "unit11-12/audio/written-a-04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "a921d1d9b0158d1a0418644d4a8621e8f3f8089f2010bd8c7c870a7a28257600",
+      "bytes": 29421,
+      "durationMs": 2359,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "paul": "pˈɔl"
+      }
+    },
+    {
+      "sourceId": "U1112-P1",
+      "sourceKind": "phrase",
+      "text": "Whose is this shirt?",
+      "catalogTextSha256": "a57951f25395a816900d9e392d0723939142f3d2af754edfe670ae59110ce670",
+      "path": "unit11-12/audio/phrase-this.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "3c2b9901322b0b0dd6c7812fbba35e6e85b3b2aefde9f633ff82035f433172e8",
+      "bytes": 16749,
+      "durationMs": 1314,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "U1112-P2",
+      "sourceKind": "phrase",
+      "text": "Whose is that tie?",
+      "catalogTextSha256": "3d30e9957cdf2c8def68b9de4186afdfa12e7a5f60635298c31c79f1df50fe2d",
+      "path": "unit11-12/audio/phrase-that.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "12639076423df129945e14c5fc7518d8f4b7269db04f6ab0763d21117fd6713a",
+      "bytes": 17325,
+      "durationMs": 1357,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "U1112-CHALLENGE-01",
+      "sourceKind": "challenge",
+      "text": "This is my brother's pen. It's his pen.",
+      "catalogTextSha256": "f64aa18931235ebdba5a06fad8431a69155aa3d3dc32bb3e6392a35ce9e6fdb6",
+      "path": "unit11-12/audio/challenge-owner.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "c2f74c0119808f348a0f636a7faf953fcb6adbd87df69fb8d3101d6a12560aac",
+      "bytes": 36621,
+      "durationMs": 2971,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 22–25 / PDF 55–58",
+        "seed": 0
+      }
+    }
+  ],
+  "generator": {
+    "kind": "git",
+    "commit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
+    "path": "scripts/media/generate-kokoro-audio.py",
+    "sha256": "40497c7af1f96e07975e482a441230aa8a53581bf6559e242b48299ba481439f",
+    "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987"
+  }
+}

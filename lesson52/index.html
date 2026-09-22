@@ -170,9 +170,9 @@ h2{font-size:clamp(28px,5vw,40px);margin-bottom:8px}
 .m-step .cloze{font-family:'Fredoka';font-weight:600;font-size:18.5px;line-height:2}
 .m-step .cloze .gap{display:inline-block;min-width:86px;border-bottom:3px dashed var(--coral);color:var(--coral-d);
   text-align:center;font-weight:700;cursor:pointer;padding:0 4px}
-.m-step .cloze .gap.empty{color:transparent;text-shadow:0 0 8px rgba(0,0,0,.15)}
+.m-step .cloze .gap.empty{color:var(--ink);text-shadow:0 0 8px rgba(0,0,0,.15)}
 .m-sentence .gap{display:inline-block;min-width:70px;border-bottom:3px dashed var(--ink);color:var(--coral-d);text-align:center;padding:0 4px}
-.m-sentence .gap.empty{color:transparent;text-shadow:0 0 9px rgba(0,0,0,.28)}
+.m-sentence .gap.empty{color:var(--ink);text-shadow:0 0 9px rgba(0,0,0,.28)}
 .m-step .choices{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .m-chip{background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;padding:5px 16px;
   font-family:'Fredoka';font-weight:700;font-size:16px;box-shadow:3px 3px 0 var(--ink)}
@@ -649,7 +649,7 @@ function w1Next(){
         $('#w1Msg').textContent='✅ 答对啦！继续～';
         setTimeout(w1Next,900);
         if(w1State.score>=5)award('l1',3);else if(w1State.score>=3)award('l1',2);else award('l1',1);
-      }else{b.classList.add('wrong');sndWrong();$('#w1Msg').textContent='❌ 再听一次试试！';}
+      }else{b.classList.add('wrong');sndWrong();$('#w1Msg').textContent='再看看，试一次。';}
     };
     box.appendChild(b);
   });
@@ -770,7 +770,7 @@ function pickMatch(el,side,country){
       sndWrong();
       const a=w3.pickedC.el,b=w3.pickedN.el;
       a.classList.add('no');b.classList.add('no');
-      $('#w3Msg').textContent='❌ 这对不对哦，再想想！';
+      $('#w3Msg').textContent='再看看，试一次。';
       setTimeout(()=>{a.classList.remove('no','picked');b.classList.remove('no','picked');},500);
       w3.pickedC=null;w3.pickedN=null;
     }
@@ -785,7 +785,7 @@ function renderMagics(){
     const el=document.createElement('div');el.className='magic';
     const row=document.createElement('div');row.className='m-stat';
     const st=document.createElement('button');st.className='m-sentence';
-    st.innerHTML='<span>'+m.pre+' <span class="gap empty" style="min-width:70px" data-full="'+m.ans+'">'+m.ans+'</span> '+m.post+'</span> <span style="font-size:14.5px;opacity:.65;font-family:\'ZCOOL KuaiLe\'">'+m.cn+'</span>';
+    st.innerHTML='<span>'+m.pre+' <span class="gap empty" style="min-width:70px" data-full="'+m.ans+'">___</span> '+m.post+'</span> <span style="font-size:14.5px;opacity:.65;font-family:\'ZCOOL KuaiLe\'">'+m.cn+'</span>';
     st.addEventListener('click',()=>{
       if(st.dataset.done)speak(m.full);
     });
@@ -804,8 +804,8 @@ function renderMagics(){
           w4.solved++;
           if(w4.solved>=7)award('l4',3);else if(w4.solved>=5)award('l4',2);else if(w4.solved>=3)award('l4',1);
         }else{
-          sndWrong();chip.classList.add('off');
-          toast('❌ 想一想：主语是第几人称？');
+          sndWrong();
+          toast('再看看，试一次。');
         }
       };
       ch.appendChild(chip);
@@ -834,7 +834,7 @@ function renderQuiz(){
       if(entry.correct){
         b.classList.add('right');sndCorrect();qState.correct++;
         $('#qNext').classList.remove('hidden');
-      }else{b.classList.add('wrong');sndWrong();qState.answered=false;}
+      }else{b.classList.add('wrong');sndWrong();toast('再看看，试一次。');qState.answered=false;}
     };
     box.appendChild(b);
   });

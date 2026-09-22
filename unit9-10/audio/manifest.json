@@ -1,0 +1,1437 @@
+{
+  "schemaVersion": 1,
+  "packId": "butcher-unit9-10-v1",
+  "unitId": "NCE-U05",
+  "voiceBaselineId": "nce-youth-v1",
+  "status": "local-poc-candidate-unreviewed",
+  "disclosure": "英文语音由 AI 生成，仅供内部逐条试听；不是教材官方录音，也尚未获准发布。",
+  "accentTarget": "General American English",
+  "generationBasis": "nce-u01-kokoro-candidate-v3",
+  "engine": {
+    "name": "Kokoro",
+    "packageVersion": "0.9.4",
+    "model": "hexgrad/Kokoro-82M",
+    "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+    "deterministicSeed": 0,
+    "modelLicense": "Apache-2.0",
+    "outputUseStatus": "requires-review-before-publication"
+  },
+  "encoding": {
+    "format": "mp3",
+    "sampleRateHz": 24000,
+    "bitrateKbps": 96,
+    "loudnessTargetLufs": -18
+  },
+  "processing": {
+    "profileId": "instructional-onset-v1",
+    "silenceThresholdDb": -45,
+    "decodedOnsetLimitMs": 150,
+    "leadingSilenceKeptMs": 100,
+    "trailingSilenceKeptMs": 240,
+    "standaloneWordRenderMode": "context-cropped-lexeme-v1"
+  },
+  "voiceAssignment": {
+    "steven": "am_michael",
+    "helen": "af_heart",
+    "standaloneWord": "af_heart",
+    "descriptionModel": "af_heart",
+    "reference": "af_heart",
+    "challenge": "am_michael"
+  },
+  "replacementContract": {
+    "scope": "whole-unit-pack",
+    "identity": "catalog Source ID",
+    "rule": "Replace all listed files together without changing catalog text, speaker roles, or runtime."
+  },
+  "files": [
+    {
+      "sourceId": "L09-W01",
+      "sourceKind": "word",
+      "text": "hello",
+      "catalogTextSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "path": "unit9-10/audio/l09-w01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "b9aeb9698d78954edbbd785bbd963fedd6fad53dadbd787583130c7a6934bebf",
+      "bytes": 9837,
+      "durationMs": 722,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "hello": "hɛlˈO"
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.71,
+        "targetStartSeconds": 1.7375,
+        "targetEndSeconds": 2.45,
+        "startDifferenceMs": -28,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W02",
+      "sourceKind": "word",
+      "text": "hi",
+      "catalogTextSha256": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      "path": "unit9-10/audio/l09-w02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "61332754b5ecfc8404fcbd1173e396644fb8bc94ac641c1a1be18f6a98988d87",
+      "bytes": 8109,
+      "durationMs": 590,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.64,
+        "targetStartSeconds": 1.6625,
+        "targetEndSeconds": 2.225,
+        "startDifferenceMs": -22,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W03",
+      "sourceKind": "word",
+      "text": "how",
+      "catalogTextSha256": "8044aae1f86875d993f20d7fe3815306b640d6e039c4512cd7a2f8453207b4cd",
+      "path": "unit9-10/audio/l09-w03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "717e336621e1c2a8d6af015de08a26e97110f501b192ec1fd4bbe977208eeb8b",
+      "bytes": 8109,
+      "durationMs": 599,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.58,
+        "targetStartSeconds": 1.6125,
+        "targetEndSeconds": 2.175,
+        "startDifferenceMs": -32,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W04",
+      "sourceKind": "word",
+      "text": "today",
+      "catalogTextSha256": "e0f4f767ac88a9303e7317843ac20be980665a36f52397e5b26d4cc2bf54011d",
+      "path": "unit9-10/audio/l09-w04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "798890dfb6784391ae74a62843d91d7f547104a89fcf07e25805230c4f3ecb22",
+      "bytes": 9261,
+      "durationMs": 683,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.64,
+        "targetStartSeconds": 1.6625,
+        "targetEndSeconds": 2.35,
+        "startDifferenceMs": -22,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W05",
+      "sourceKind": "word",
+      "text": "well",
+      "catalogTextSha256": "a7722b765d15608d5d24a319140e6665cb361a0758285125722a2d5aece38808",
+      "path": "unit9-10/audio/l09-w05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "1f034d77128f13178e6bdecfbc9cf72a0cc9443e913ff97db103f24623140816",
+      "bytes": 8109,
+      "durationMs": 595,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.6,
+        "targetStartSeconds": 1.6375,
+        "targetEndSeconds": 2.25,
+        "startDifferenceMs": -38,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W06",
+      "sourceKind": "word",
+      "text": "fine",
+      "catalogTextSha256": "d14a58bae804a2b80b5b76a010239c88ffca1fc7951a90f8e9131beda1e23c1b",
+      "path": "unit9-10/audio/l09-w06.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "b43f618a26079619f1f45a4df0eeef52c46b361a4ba771046cd2465e08038ea9",
+      "bytes": 9549,
+      "durationMs": 698,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.67,
+        "targetStartSeconds": 1.7,
+        "targetEndSeconds": 2.425,
+        "startDifferenceMs": -30,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W07",
+      "sourceKind": "word",
+      "text": "thanks",
+      "catalogTextSha256": "a6a2729cbf6bcadce577a31f7f76201d5ce63c57d6c53318000d67714bb354ef",
+      "path": "unit9-10/audio/l09-w07.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "484b4c2d905a0bd08a274b009774e79f5b185bf34ce3b1c881175617a6aead99",
+      "bytes": 8973,
+      "durationMs": 658,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.7,
+        "targetStartSeconds": 1.6875,
+        "targetEndSeconds": 2.375,
+        "startDifferenceMs": 12,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W08",
+      "sourceKind": "word",
+      "text": "goodbye",
+      "catalogTextSha256": "82e35a63ceba37e9646434c5dd412ea577147f1e4a41ccde1614253187e3dbf9",
+      "path": "unit9-10/audio/l09-w08.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "0593eb1948e4ac1c3d3b1e78cb0803b2b6491d90eefa67ebb4f786cdcdc38ffb",
+      "bytes": 11277,
+      "durationMs": 850,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.87,
+        "targetStartSeconds": 1.8625,
+        "targetEndSeconds": 2.75,
+        "startDifferenceMs": 8,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-W09",
+      "sourceKind": "word",
+      "text": "see",
+      "catalogTextSha256": "aa9e9b5c907d50feb410f2a84e81ab72c5ae6724d57ccc53650f9361d33dc734",
+      "path": "unit9-10/audio/l09-w09.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "97009e774b06e0408d8d31a75639027902bd31e275d771d4fa73b3f13f5e7cae",
+      "bytes": 8973,
+      "durationMs": 650,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.51,
+        "targetStartSeconds": 1.575,
+        "targetEndSeconds": 2.175,
+        "startDifferenceMs": -65,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W01",
+      "sourceKind": "word",
+      "text": "fat",
+      "catalogTextSha256": "be07f5139a61ebb919cc31bc0a4c69e6990f98e5b1e73047657115abca90f0ee",
+      "path": "unit9-10/audio/l10-w01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "8fac33e519757367b15706144bdc716ab3dbbba09fdefd6e034b16dc8a10887e",
+      "bytes": 8973,
+      "durationMs": 650,
+      "decodedOnsetMs": 50,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.57,
+        "targetStartSeconds": 1.575,
+        "targetEndSeconds": 2.225,
+        "startDifferenceMs": -5,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W02",
+      "sourceKind": "word",
+      "text": "woman",
+      "catalogTextSha256": "cf2e5bff1ef03dcd20d1a0b18ef7d89fc80a3554434165753672f6f40fde1d25",
+      "path": "unit9-10/audio/l10-w02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "78252ac441d0511cd74fc2f053ce436f781682a0ad5df3190b905cc9e56370f2",
+      "bytes": 9261,
+      "durationMs": 680,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.78,
+        "targetStartSeconds": 1.8125,
+        "targetEndSeconds": 2.5,
+        "startDifferenceMs": -32,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W03",
+      "sourceKind": "word",
+      "text": "thin",
+      "catalogTextSha256": "1a0dc227b5aa78f8400838aec14099a5e23b9da69ff5ee37dffd8b6b40003a95",
+      "path": "unit9-10/audio/l10-w03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "6b2f2656191e3fb2038abcaa2b383743bb5dfeda141fa08a66f635e7b9dcc351",
+      "bytes": 8109,
+      "durationMs": 590,
+      "decodedOnsetMs": 20,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.73,
+        "targetStartSeconds": 1.7,
+        "targetEndSeconds": 2.35,
+        "startDifferenceMs": 30,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W04",
+      "sourceKind": "word",
+      "text": "tall",
+      "catalogTextSha256": "241daf2e753a6a2f37a1b147ee6d4af459515d4e3da723f0b1e226cddb214cfe",
+      "path": "unit9-10/audio/l10-w04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "b2f1d89f4bbc526d8bd4aab51b795bc696fd0aaca8c02e167586a528ffc71ad0",
+      "bytes": 8685,
+      "durationMs": 636,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "tall": "tˈɑl"
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.64,
+        "targetStartSeconds": 1.6625,
+        "targetEndSeconds": 2.325,
+        "startDifferenceMs": -22,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W05",
+      "sourceKind": "word",
+      "text": "short",
+      "catalogTextSha256": "f9b0078b5df596d2ea19010c001bbd009e651de2c57e8fb7e355f31eb9d3f739",
+      "path": "unit9-10/audio/l10-w05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "1ad2b6b48c63af0a2d8372ffa5822ab666e969150b45529f734e6e9c8dc78de6",
+      "bytes": 9261,
+      "durationMs": 680,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.61,
+        "targetStartSeconds": 1.675,
+        "targetEndSeconds": 2.325,
+        "startDifferenceMs": -65,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W06",
+      "sourceKind": "word",
+      "text": "dirty",
+      "catalogTextSha256": "d0c92c764c5647d43d7166efc3e7d350751de063c1388bd2e113fab4865529d3",
+      "path": "unit9-10/audio/l10-w06.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "ebc17af3d0f75825a37cfa3866a6c556016e2b66b18071d7ff924152dfe8d4c0",
+      "bytes": 9837,
+      "durationMs": 732,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.73,
+        "targetStartSeconds": 1.7875,
+        "targetEndSeconds": 2.525,
+        "startDifferenceMs": -58,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W07",
+      "sourceKind": "word",
+      "text": "clean",
+      "catalogTextSha256": "3b066804f6d1d077173cfe4d06002e6a61e6f21c2b2e648417962115f1afcd8e",
+      "path": "unit9-10/audio/l10-w07.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "2c56ee91f90cc401fe334030ba85000c01dfd5545c2d653890e112cf0a0996c6",
+      "bytes": 9837,
+      "durationMs": 727,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.72,
+        "targetStartSeconds": 1.7375,
+        "targetEndSeconds": 2.5,
+        "startDifferenceMs": -18,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W08",
+      "sourceKind": "word",
+      "text": "hot",
+      "catalogTextSha256": "7f5d1618e7d28cc7bf32788672be04c24877d9a8911f65fef8e3e013c9cbc373",
+      "path": "unit9-10/audio/l10-w08.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "23eedeff301d349732db3047d5f8f1de621c3a8b14313c86a72496e35e1e35b6",
+      "bytes": 8685,
+      "durationMs": 640,
+      "decodedOnsetMs": 60,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.62,
+        "targetStartSeconds": 1.6375,
+        "targetEndSeconds": 2.25,
+        "startDifferenceMs": -18,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W09",
+      "sourceKind": "word",
+      "text": "cold",
+      "catalogTextSha256": "e272deecde720ffc773d7a6a81adabbc366ccbb64da5abdb6b26f52cd3f952cb",
+      "path": "unit9-10/audio/l10-w09.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "84f15b6e258aedcbb5a79cedfafa70cf7c962940e69f9b3f943c6e3169f1d22f",
+      "bytes": 9837,
+      "durationMs": 733,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.79,
+        "targetStartSeconds": 1.8125,
+        "targetEndSeconds": 2.55,
+        "startDifferenceMs": -22,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W10",
+      "sourceKind": "word",
+      "text": "old",
+      "catalogTextSha256": "cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4",
+      "path": "unit9-10/audio/l10-w10.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "99e3e5a2d76cee25f2c5925cdc244038c842260b4ff132b1d3b0fe147f707933",
+      "bytes": 9837,
+      "durationMs": 725,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.69,
+        "targetStartSeconds": 1.7125,
+        "targetEndSeconds": 2.45,
+        "startDifferenceMs": -22,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W11",
+      "sourceKind": "word",
+      "text": "young",
+      "catalogTextSha256": "dbba921ce20510210ee7db98e000ee32d0e17f5e93105707acc498d6f8ef5a7e",
+      "path": "unit9-10/audio/l10-w11.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "407fefa7cd3dd3b9ef690c1be80695677a3c043ec76cb3b06d0bd449896401d8",
+      "bytes": 8973,
+      "durationMs": 656,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.65,
+        "targetStartSeconds": 1.7,
+        "targetEndSeconds": 2.375,
+        "startDifferenceMs": -50,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W12",
+      "sourceKind": "word",
+      "text": "busy",
+      "catalogTextSha256": "c9bc072f4fa8189466c2a8f2c36a56a4ef1e60a2ffa4986ba2f155cd176c128b",
+      "path": "unit9-10/audio/l10-w12.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "c5119ff501effcd8df8e483521d88e2015d49d2174a97608844651ed6d01b59f",
+      "bytes": 9261,
+      "durationMs": 688,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.81,
+        "targetStartSeconds": 1.7875,
+        "targetEndSeconds": 2.55,
+        "startDifferenceMs": 22,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L10-W13",
+      "sourceKind": "word",
+      "text": "lazy",
+      "catalogTextSha256": "81fd67d02f679b818a4df6a50139958aa857eddc4d8f3561630dfb905e6d3c24",
+      "path": "unit9-10/audio/l10-w13.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "context-cropped-lexeme-v1",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "738772c4baf21c1decedcd5fe62536f5d4b550502a558a6e89288137bf2768ac",
+      "bytes": 10701,
+      "durationMs": 811,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "cropBoundaryAudit": {
+        "method": "generated-token-timestamps-compared-with-final-activity-segment",
+        "cropStartSeconds": 1.85,
+        "targetStartSeconds": 1.9,
+        "targetEndSeconds": 2.725,
+        "startDifferenceMs": -50,
+        "result": "No preceding lexical token in crop; timing check only, human listening pending"
+      }
+    },
+    {
+      "sourceId": "L09-D01",
+      "sourceKind": "dialogue",
+      "text": "Hello, Helen.",
+      "catalogTextSha256": "752a4ff7f70ec20e71fce2e5816f9c11180a9be2b7480f42c6cfb726cdf784a8",
+      "path": "unit9-10/audio/l09-d01.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "c45027568c775a5284d0b32008479e402a804d592dd6f425be3e8d1bb3604f03",
+      "bytes": 15597,
+      "durationMs": 1210,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D02",
+      "sourceKind": "dialogue",
+      "text": "Hi, Steven.",
+      "catalogTextSha256": "605851afe2839371d3d10cafaf7b31c697f09ceba0b3bb38d5b34ff127baa25e",
+      "path": "unit9-10/audio/l09-d02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "10f5a89d939cd208553b657c5b4b4932993904e4c5b1e92fea5a7e7ec17dafb0",
+      "bytes": 14157,
+      "durationMs": 1102,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D03",
+      "sourceKind": "dialogue",
+      "text": "How are you today?",
+      "catalogTextSha256": "68514b65884697a4725d4b231dd376aa745abfd4feb3cf9aaa21e4194e2b8acc",
+      "path": "unit9-10/audio/l09-d03.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "d39a8ebc96c26852411e45e4e801dea01c833b74123fdb5dee1a9041f13b6598",
+      "bytes": 17325,
+      "durationMs": 1352,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D04",
+      "sourceKind": "dialogue",
+      "text": "I'm very well, thank you.",
+      "catalogTextSha256": "2033545a5134b35b300b2490dba5837d7076817168d1b9330ae8a8295567fbb9",
+      "path": "unit9-10/audio/l09-d04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "1fb81e4d62ef9a30b975982de6330d3f1c8ed73384cfe64da0615db8a969551c",
+      "bytes": 19053,
+      "durationMs": 1498,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D05",
+      "sourceKind": "dialogue",
+      "text": "And you?",
+      "catalogTextSha256": "0c1c23dc335e76d0716be6f8fbd4a526dc6f58a39960621dd893929e7dcc1bd8",
+      "path": "unit9-10/audio/l09-d05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "8bf875150d1f2e89d38b606bd38b0589fa82c8887d1a1a5c32b8f3f082eb4087",
+      "bytes": 11853,
+      "durationMs": 890,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D06",
+      "sourceKind": "dialogue",
+      "text": "I'm fine, thanks.",
+      "catalogTextSha256": "b730320655ef331c86a45159cbcee93018d4076409350ad9ec2482ea8e38db55",
+      "path": "unit9-10/audio/l09-d06.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "ea65d4d5d607f260f0f24dfe036a5a348a4ae2b9d01cecaf3d74315287f1ea13",
+      "bytes": 17325,
+      "durationMs": 1364,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D07",
+      "sourceKind": "dialogue",
+      "text": "How is Tony?",
+      "catalogTextSha256": "64db9b5911a1058762f3290ddca3669bd51072b7cf93280fc976deddd6d60892",
+      "path": "unit9-10/audio/l09-d07.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "80bec0399e4ae269aa301d3b28e1da85b02b884f0cd060ccf05d2e4a10bcbc43",
+      "bytes": 15885,
+      "durationMs": 1227,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D08",
+      "sourceKind": "dialogue",
+      "text": "He's fine, thanks.",
+      "catalogTextSha256": "287cf9723fc144408022ab50f9f6e2e95e5039c9e56808551e069424cb80eec5",
+      "path": "unit9-10/audio/l09-d08.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "eacc09b6818463331a50c9a9fddf498375599faa7f4220087a8f6dbf53649e25",
+      "bytes": 16461,
+      "durationMs": 1294,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D09",
+      "sourceKind": "dialogue",
+      "text": "How's Emma?",
+      "catalogTextSha256": "9e3a71ad40e945eb78dc007e9025f252bbafb4705645a1f1316935140ea5fd12",
+      "path": "unit9-10/audio/l09-d09.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "fc642bb504a82dbd2f6882d25b5342ddf06e8068225548234dd753cd27a7277f",
+      "bytes": 12429,
+      "durationMs": 956,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D10",
+      "sourceKind": "dialogue",
+      "text": "She's very well, too, Helen.",
+      "catalogTextSha256": "6ba4eb8fd8fe35c8ec76681a8cacab8580471af7ecab44e5092b9ebf25c6f24a",
+      "path": "unit9-10/audio/l09-d10.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "82e2f8b4b8501bc21c9d7b8d682f1f6d2b56d7726525172ba6983895608e4b13",
+      "bytes": 22797,
+      "durationMs": 1804,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D11",
+      "sourceKind": "dialogue",
+      "text": "Goodbye, Helen.",
+      "catalogTextSha256": "b7633cc50db23f152faf47682d330c1e67b89a862ef082a2b9a8765c37e33087",
+      "path": "unit9-10/audio/l09-d11.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "9657739b260b0dac4f902159c9a69ae6af4f82f7a3674adb675862744eaa9108",
+      "bytes": 16173,
+      "durationMs": 1270,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D12",
+      "sourceKind": "dialogue",
+      "text": "Nice to see you.",
+      "catalogTextSha256": "77b845d22632a9ef6b425ad85357df74c459c8058576dc41d6b6079af7f32b8a",
+      "path": "unit9-10/audio/l09-d12.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "steven",
+      "sha256": "a06eb7147e280770174d6167c7017cb0ea42d7a248c8c95c182383f3c31b4e23",
+      "bytes": 16749,
+      "durationMs": 1298,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D13",
+      "sourceKind": "dialogue",
+      "text": "Nice to see you, too, Steven.",
+      "catalogTextSha256": "726bd7f21ab0528a6a7a83aa8d640a881e7ce748dc34a7934629af05eaf1ceb5",
+      "path": "unit9-10/audio/l09-d13.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "5048e9227afb8f6449c42fbf6748f3a46e6ee21e4b403be3c70cbb8bb106da2c",
+      "bytes": 24237,
+      "durationMs": 1937,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L09-D14",
+      "sourceKind": "dialogue",
+      "text": "Goodbye.",
+      "catalogTextSha256": "2b687db6298b629d3bcb482f16aa774a55eb5ae768407b8fba9982387b6c6f81",
+      "path": "unit9-10/audio/l09-d14.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "helen",
+      "sha256": "04251295213eed6ca18fe9f94e345801bc37921b963fecd9da860df52c8f2988",
+      "bytes": 12141,
+      "durationMs": 929,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B01",
+      "sourceKind": "description-model",
+      "text": "Look at that man! He's very fat.",
+      "catalogTextSha256": "d45585097bcf85bad65f67435aaad687cbf6f26604b6581006b70c2643544e47",
+      "path": "unit9-10/audio/l10-b01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "a4ea0b7f8ac8b491ad96da989b01530956a194a2351fc6364e65692dc668d804",
+      "bytes": 27981,
+      "durationMs": 2254,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B02",
+      "sourceKind": "description-model",
+      "text": "Look at that woman! She's very thin.",
+      "catalogTextSha256": "9f3408a217fe4b1cf5751590330b25c5365f20442585faa0dd5214bd5ff170a1",
+      "path": "unit9-10/audio/l10-b02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "f346570b8c211fe73215650d1c87355880002d45f626a29ccd3fac086114b850",
+      "bytes": 28845,
+      "durationMs": 2319,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B03",
+      "sourceKind": "description-model",
+      "text": "Look at that policeman! He's very tall.",
+      "catalogTextSha256": "69f2d3356331241ac13ccc68245280fad6b1c33e600eefd6835e10817c312bc3",
+      "path": "unit9-10/audio/l10-b03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "5cceccf9db5080428de11af3b78f12407dab4fbf34bcb7008ffc2973cb34d63a",
+      "bytes": 30861,
+      "durationMs": 2476,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B04",
+      "sourceKind": "description-model",
+      "text": "Look at that policewoman! She's very short.",
+      "catalogTextSha256": "bceade87d5fe793ea752539a36956ff0aa5a5faf70f512985761eeef6ca7f604",
+      "path": "unit9-10/audio/l10-b04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "404c8610ae01f9c725ba2bb213dfc372f13959bb314bfd802d8ae6eba7596522",
+      "bytes": 33741,
+      "durationMs": 2722,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B05",
+      "sourceKind": "description-model",
+      "text": "Look at that mechanic! He's very dirty.",
+      "catalogTextSha256": "80383657203385ff050020ebdb0b5b975d8d8dbfbc4ce19829e07c5a3e55994b",
+      "path": "unit9-10/audio/l10-b05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "a5bc56c04d0ec0bf5de810bf68a3e530cc17d9c5d8e18be385492f7d02a8e4ea",
+      "bytes": 31725,
+      "durationMs": 2546,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B06",
+      "sourceKind": "description-model",
+      "text": "Look at that nurse! She's very clean.",
+      "catalogTextSha256": "3a4ed0e5259226c7f6087de28bfb2c9acdcf740cff0d97d1d6ded4b9da167a63",
+      "path": "unit9-10/audio/l10-b06.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "c433181d34d5329fc85afa7da2dd772e31d4149cbfb2891b6ce4beff4d2312a9",
+      "bytes": 29421,
+      "durationMs": 2363,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B07",
+      "sourceKind": "description-model",
+      "text": "Look at Steven! He's very hot.",
+      "catalogTextSha256": "4a5a51d5361a021d3d81c869025b8f8672e16c5aa9e760b0aaeec9d5f84d7c62",
+      "path": "unit9-10/audio/l10-b07.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "90f2b90e941be2e1c64a99297c9f941117eefc527fe3d791a5c3198980c3433c",
+      "bytes": 27405,
+      "durationMs": 2186,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B08",
+      "sourceKind": "description-model",
+      "text": "Look at Emma! She's very cold.",
+      "catalogTextSha256": "14e77010a32497d982bc81bd2a893db420f5dd21d66b3a3bcb19b0dba4dfd079",
+      "path": "unit9-10/audio/l10-b08.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "25df4b9f6ff4eeb1570a88efb5449b4e6a4fb76005f42744786fefb83e996461",
+      "bytes": 24813,
+      "durationMs": 1980,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B09",
+      "sourceKind": "description-model",
+      "text": "Look at that milkman! He's very old.",
+      "catalogTextSha256": "257662a6e78671cd12b6829ed1c5f750849b0bebe6d52f450d18edb0d1f58492",
+      "path": "unit9-10/audio/l10-b09.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "3c92a592700d15c98350a93dc2a73f4a001e812550699477a0ec14bc9def703f",
+      "bytes": 29421,
+      "durationMs": 2361,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B10",
+      "sourceKind": "description-model",
+      "text": "Look at that air hostess! She's very young.",
+      "catalogTextSha256": "830bc78a9520005e761f466fd120ed09f0ed14f445fe0eb792b7bb305291fe14",
+      "path": "unit9-10/audio/l10-b10.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "cac2cc109b04bd2fa98ddf22a0b1b3fcbd8e826584777c213997644553b4cb01",
+      "bytes": 34605,
+      "durationMs": 2807,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B11",
+      "sourceKind": "description-model",
+      "text": "Look at that hairdresser! He's very busy.",
+      "catalogTextSha256": "292aa9c8fb2f7bb6245334812ce57fb92353ec1946794d9b4d9012efeccfbe9f",
+      "path": "unit9-10/audio/l10-b11.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "f21798f1154b53c17835fd79bb86e7cb620e6eb586b39ee0acd8f3baa5ce3f11",
+      "bytes": 33165,
+      "durationMs": 2672,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B12",
+      "sourceKind": "description-model",
+      "text": "Look at that housewife! She's very lazy.",
+      "catalogTextSha256": "eec8b9e2f54f50ae90ce316645b587eaea43eb5baef7f927c49c0ab700c78490",
+      "path": "unit9-10/audio/l10-b12.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "fbbfb9b5be7aafb63b465a00b04708c039cf5b6f7837ad6d8e1024145250faaa",
+      "bytes": 31437,
+      "durationMs": 2542,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-B00",
+      "sourceKind": "written-example",
+      "text": "Look at Helen. She's very well.",
+      "catalogTextSha256": "bf93a23552d3b8cc996dec07de7d93770135feca33feeefcd3dafbcd6881683c",
+      "path": "unit9-10/audio/l10-b00.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "abde6425eac412b4733139d7e2858578a3e4e42a94eaefa54f36679aba48c496",
+      "bytes": 25389,
+      "durationMs": 2023,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-A00",
+      "sourceKind": "written-reference",
+      "text": "Robert isn't a teacher. He's an engineer.",
+      "catalogTextSha256": "d7cd8558b9edb9ca2d02865c82292be0d5ef72f0961a6f03c9f398e317c08abe",
+      "path": "unit9-10/audio/written-a-00.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "93e7a4bfbf0df47df8e37f5df3d4312cf4eb01c126f2e1fa45594b486a3e4cdc",
+      "bytes": 33453,
+      "durationMs": 2695,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-A01",
+      "sourceKind": "written-reference",
+      "text": "Mr. Blake isn't a student. He's a teacher.",
+      "catalogTextSha256": "99a5927582e560741abcd210983f366868d48218202d91c62eb6388249ec8b2e",
+      "path": "unit9-10/audio/written-a-01.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "2dc272ff484af8f7985fee5f128420c33ba1504b6c92c2492bc6246d173eefd9",
+      "bytes": 34029,
+      "durationMs": 2752,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-A02",
+      "sourceKind": "written-reference",
+      "text": "This isn't my umbrella. It's your umbrella.",
+      "catalogTextSha256": "a4ef596cc5fbfd29922a52e363854348926b44b96941df18d36009834979a82b",
+      "path": "unit9-10/audio/written-a-02.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "126750397b8eb896e37ce21a5a826707afea5e1bb0710b5e5c37a42e4b30f13c",
+      "bytes": 32013,
+      "durationMs": 2587,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-A03",
+      "sourceKind": "written-reference",
+      "text": "Sophie isn't a teacher. She's a keyboard operator.",
+      "catalogTextSha256": "fee5880644e7fa5bc61b69b9ed6676c1ccb1239130c68b459dcfe9386e07d6b5",
+      "path": "unit9-10/audio/written-a-03.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "7d5fc4fdfa92868a5703fdb2a34236a9658c03b223d89fcb255d9b58d1a81e5e",
+      "bytes": 39789,
+      "durationMs": 3219,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-A04",
+      "sourceKind": "written-reference",
+      "text": "Steven isn't cold. He's hot.",
+      "catalogTextSha256": "622aa03fa6b8dbeeabb0263016ab4be88f2cd1417a5479b4f99cad84de05c719",
+      "path": "unit9-10/audio/written-a-04.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "b9560bc6ed370c53787d3cbdf5529087b9359bed87d9b8f3593a9035578be63d",
+      "bytes": 27693,
+      "durationMs": 2218,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "L10-A05",
+      "sourceKind": "written-reference",
+      "text": "Naoko isn't Chinese. She's Japanese.",
+      "catalogTextSha256": "f4bf3152cbed9ee1e6d0c9fa4a95065f8f1fc6bbdb2129ff751e199686a4d95e",
+      "path": "unit9-10/audio/written-a-05.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "0e40e327bce43dbb83a7d4076fc1ec05d9563ecaf7023b8582ce3638b16c5f4e",
+      "bytes": 36333,
+      "durationMs": 2949,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      },
+      "phonemeOverrides": {
+        "naoko": "nˈɑOkO"
+      }
+    },
+    {
+      "sourceId": "L10-A06",
+      "sourceKind": "written-reference",
+      "text": "This isn't a German car. It's a Swedish car.",
+      "catalogTextSha256": "596d6e5041048a1f096079a6d421704826779ff8f75f4603564e999af31e997c",
+      "path": "unit9-10/audio/written-a-06.mp3",
+      "voiceId": "af_heart",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "b8c24033fabc2387f397f35a7093099fc7e18c654f5f5c88bbd7bce095c08c0a",
+      "bytes": 35469,
+      "durationMs": 2860,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    },
+    {
+      "sourceId": "U910-CHALLENGE-01",
+      "sourceKind": "challenge",
+      "text": "Tony is very well, thanks.",
+      "catalogTextSha256": "ec79d99a7665590edd2704c69e50d5c08eb93542bcb7c9340e92bad8f53c074e",
+      "path": "unit9-10/audio/challenge-tony.mp3",
+      "voiceId": "am_michael",
+      "renderMode": "natural-utterance",
+      "speed": 0.9,
+      "speakerRole": "narration",
+      "sha256": "64bd91151cf5c902bd3095d4d7d1f83d3c306a9f9438bb764cc069244eba261a",
+      "bytes": 23661,
+      "durationMs": 1877,
+      "decodedOnsetMs": 70,
+      "reviewStatus": "unreviewed-candidate",
+      "origin": {
+        "kind": "local-generation",
+        "sourcePages": "paper 18–21 / PDF 51–54",
+        "seed": 0
+      }
+    }
+  ],
+  "generator": {
+    "kind": "git",
+    "commit": "dee9a0803d9a1070f4cad4f98f7e6c34771dbeaf",
+    "path": "scripts/media/generate-kokoro-audio.py",
+    "sha256": "40497c7af1f96e07975e482a441230aa8a53581bf6559e242b48299ba481439f",
+    "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987"
+  }
+}

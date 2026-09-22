@@ -66,10 +66,10 @@ test('检查答案时播放对应反馈音，选择、提示、重试、继续�
   await page.goto('/lesson49/#learn/doare');
   const room = page.locator('#doarePractice');
   await room.getByRole('button', { name: 'Are you like meat?', exact: true }).click();
-  await room.getByRole('button', { name: '给点线索', exact: true }).click();
+  await expect(room.getByRole('button', { name: '给点线索', exact: true })).toHaveCount(0);
   expect(await page.evaluate(() => window.recordedAudio.length)).toBe(0);
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。本句用动词 like 表达喜好，一般现在时问句是 Do you like meat?');
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   expect(await page.evaluate(() => window.recordedAudio.map(audio => [audio.src, audio.volume]))).toEqual([
     ['/assets/feedback/duolingo-incorrect.mp3', 0.35]
   ]);
@@ -127,12 +127,12 @@ test('主语分拣也有正误和完成音，答案反馈停留到手动继续',
   const stage=page.locator('.stage-subjects');
   for (let index = 0; index < 13; index++) {
     const subject = await page.locator('#tpItemText').innerText();
-    await submitSubject(stage,index===0?'第一人称':subjectAnswers[index%12],false);
+    await submitSubject(stage,index===0?'第一人称':subjectAnswers[index-1],false);
     await expect(page.locator('#tpItemText')).toHaveText(subject);
-    await expect(stage.getByRole('button',{name:index===12?'完成':'继续',exact:true})).toBeVisible();
+    await expect(stage.getByRole('button',{name:index===0?'再试一次':index===12?'完成':'继续',exact:true})).toBeVisible();
     const sounds = await page.evaluate(() => window.recordedAudio.map(audio => audio.src));
     expect(sounds.at(-1)).toBe(index === 0 ? '/assets/feedback/duolingo-incorrect.mp3' : '/assets/feedback/duolingo-correct.mp3');
-    await stage.getByRole('button',{name:index===12?'完成':'继续',exact:true}).click();
+    await stage.getByRole('button',{name:index===0?'再试一次':index===12?'完成':'继续',exact:true}).click();
   }
   await expect(stage).toContainText('分拣完成！');
   expect(await page.evaluate(() => window.recordedAudio.map(audio => audio.src))).toEqual([

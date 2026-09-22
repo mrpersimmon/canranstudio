@@ -58,6 +58,16 @@
     if (arguments.length > 1) { notebook.activity[key] = value; save(); }
     return notebook.activity[key];
   }
+  // Hint wording is presentation, not a new assessment. Preserve completion
+  // only when every other field (including version, questions and answers) matches.
+  function sameContentSignature(saved, current) {
+    if (saved === current) return true;
+    if (typeof saved !== 'string' || typeof current !== 'string') return false;
+    try {
+      const withoutHints = signature => JSON.stringify(JSON.parse(signature), (key, value) => key === 'hint' ? undefined : value);
+      return withoutHints(saved) === withoutHints(current);
+    } catch { return false; }
+  }
   // Only a deliberate transition may reposition the page. Selecting, checking,
   // replaying and opening hints must leave the child's controls in place.
   function revealQuestion(element, heading) {
@@ -99,6 +109,7 @@
   }
   function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice' }) {
     const key = sessionId ? element.id+'/'+sessionId : element.id;
+    const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
     let group = notebook.groups[key];
     const existing = group;
     const sources=sessionId && legacySessionIds.length ? [...legacySessionIds.map(id=>notebook.groups[element.id+'/'+id]),notebook.groups[element.id]]
@@ -110,6 +121,10 @@
     }
     if(isRecord(group)&&group.draftVersion!==undefined&&group.draftVersion!==DRAFT_VERSION){
       retainRecoveryDraft('unsupported-draft-version');
+      group=null;
+    }
+    if(isRecord(group)&&group.contentSignature!==undefined&&group.contentSignature!==contentSignature){
+      retainRecoveryDraft('changed-question-content');
       group=null;
     }
     if (!group || group.signature !== questions.map(q => q.id).join('|') || !Number.isInteger(group.index) || group.index < 0 || group.index > questions.length || !Array.isArray(group.states)) {
@@ -177,6 +192,9 @@
       group.states.length=Math.min(group.states.length,group.index+1,questions.length);
     }
     normalizeDraft();
+    // Older drafts still pass the ownership/answer validation above; from this
+    // revision onward a changed prompt cannot silently re-award completion.
+    group.contentSignature=contentSignature;
     save();
     function button(label, action, className = 'btn btn-green') {
       const item = document.createElement('button');
@@ -214,7 +232,7 @@
       const q = questions[group.index];
       element.dataset.kind = q.type === 'order' ? 'order' : q.delivery ? 'delivery' : q.audioText ? 'listening' : q.presentation || presentation;
       const images = q.optionImages || optionImages || (q.audioText ? wordImages : null);
-      const hintsEnabled = allowHints && !q.audioText;
+      const hintsEnabled = allowHints && !q.audioText && typeof q.hint === 'string' && q.hint.trim().length > 0;
       const content = document.createElement('div'); content.className = 'practice-content';
       const actions = document.createElement('div'); actions.className = 'practice-actions';
       const previous = group.states[group.index];
@@ -243,7 +261,7 @@
       if(q.image)parcel.src=q.image;else{parcel.append(root.CanranCore.lesson49Icons.create('steak'));parcel.setAttribute('role','img');}
       if(q.delivery){const counter=document.createElement('span');counter.append(root.CanranCore.lesson49Icons.create('butcher'),'柜台');deliverySource.append(counter,parcel);}
       const feedback = document.createElement('div'); feedback.className = 'fb'; feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live','polite'); feedback.setAttribute('aria-atomic','true');
-      const hintCopy = document.createElement('p'); hintCopy.className = 'practice-hint'; hintCopy.hidden = !state.hintUsed; hintCopy.textContent = q.hint || q.explanation;
+      const hintCopy = document.createElement('p'); hintCopy.className = 'practice-hint'; hintCopy.hidden = !state.hintUsed; hintCopy.textContent = q.hint || '';
       hintCopy.id=element.id+'-hint';
       const hint = button('给点线索', () => { state.hintUsed = true; hintCopy.hidden = false; hint.setAttribute('aria-expanded','true'); save(); }, 'btn btn-mini btn-yellow');
       hint.setAttribute('aria-controls',hintCopy.id);hint.setAttribute('aria-expanded',String(!hintCopy.hidden));
@@ -353,8 +371,6 @@
       });
       const morphScene=document.createElement('div');morphScene.className='morph-scene';morphScene.hidden=true;
       morphScene.setAttribute('role','group');morphScene.setAttribute('aria-label','句型变换');
-      const correction=document.createElement('p');correction.className='practice-correction';
-      correction.textContent=q.explanation || '';
       const morph=button('播放变身魔法',()=>{
         morphScene.hidden=false;morphScene.replaceChildren();
         const before=document.createElement('span');before.className='morph-sentence';before.textContent=q.morph.from;
@@ -382,9 +398,8 @@
         hint.setAttribute('aria-expanded',String(!hintCopy.hidden));
         morph.hidden = !q.morph || !state.checked || !state.correct;
         feedback.textContent = state.checked ? (state.correct ? '答对了！' : '再看看，试一次。') : '';
-        // Listening is corrected by replaying; other mistakes get immediate,
-        // concise guidance. Correct answers leave only the success feedback.
-        if(state.checked && !state.correct && !q.audioText && q.explanation)feedback.append(correction);
+        // Feedback never supplies the answer, including after repeated errors
+        // or a restored draft. Only the child can solve the current question.
         feedback.className = 'fb ' + (state.checked ? (state.correct ? 'good' : 'bad') : '');
       }
       function submit() {
@@ -445,5 +460,5 @@
     renderRecord();
   }
   root.CanranCore = root.CanranCore || {};
-  root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel };
+  root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel, sameContentSignature };
 })(globalThis);

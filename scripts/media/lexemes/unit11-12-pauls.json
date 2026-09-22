@@ -1,0 +1,18 @@
+{
+  "sourceId": "L12-B02",
+  "text": "Whose is this car? It's Paul's. It's his car.",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "seed": 0,
+  "renderMode": "natural-utterance",
+  "synthesisText": "Whose is this car? It's Paul's. It's his car.",
+  "phonemeOverrides": {
+    "Paul's": {
+      "phonemes": "pˈɔlz",
+      "occurrences": 1
+    }
+  },
+  "expectedPhonemes": "hˌuz ɪz ðɪs kˈɑɹ? ˌɪts pˈɔlz. ˌɪts hɪz kˈɑɹ.",
+  "reference": "Lesson 12 Written B; Paul matches the existing written-a-04 name override pˈɔl, with voiced possessive /z/.",
+  "reason": "Match the full possessive token; the old phonemizer kept only s."
+}

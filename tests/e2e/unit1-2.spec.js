@@ -95,7 +95,7 @@ test('27 题与七句原文构成完整单元，礼貌与指代不误教，末�
   const manners=page.locator('.stage-manners');
   await manners.getByRole('button',{name:'Pardon?',exact:true}).click();
   await manners.getByRole('button',{name:'检查答案',exact:true}).click();
-  await expect(manners.getByRole('status')).toContainText('引起对方注意');
+  await expect(manners.getByRole('status')).toHaveText('再看看，试一次。');
   await manners.getByRole('button',{name:'再试一次',exact:true}).click();
   await finishGroup(page,'manners',['Excuse me!','Pardon?','Yes, it is.','Thank you very much.']);
   await finishGroup(page,'ask',['Is this your pen?']);

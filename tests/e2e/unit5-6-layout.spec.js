@@ -34,7 +34,7 @@ for(const width of [320,1280])test(`${width} 提示位于检查左侧，错答�
   const room=page.locator('.stage-refer'),actions=room.getByRole('group',{name:'作答操作',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true}),hint=room.getByRole('button',{name:'给点线索',exact:true});
   const y=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await y(),h=await hint.boundingBox(),c=await check.boundingBox();expect(h.x+h.width).toBeLessThan(c.x);
   await hint.click();expect(await y()).toBeCloseTo(before,0);await room.getByRole('button',{name:'He',exact:true}).click();await check.click();
-  expect(await y()).toBeCloseTo(before,0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('status')).toContainText('Alice');
+  expect(await y()).toBeCloseTo(before,0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ['She','He','It'].entries()){
     await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));

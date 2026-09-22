@@ -17,7 +17,7 @@
   // Function words keep their meaning in this lesson; pictures are memory cues,
   // not a claim that a word has only one referent or grammatical use.
   const expressions = [
-    ['excuse', '原谅；本句用于礼貌招呼', 'Excuse me!', 'speech', 'l01-w01', '/ɪkˈskjuːz/'],
+    ['excuse', '原谅；本句用于礼貌招呼', 'Excuse me!', 'speech', 'l01-w01-v2', '/ɪkˈskjuːz/'],
     ['me', '我（宾格）', 'Excuse me!', 'people', 'l01-w02', '/miː/'],
     ['yes', '是的；Yes? 在本句中是“什么事？”', 'Yes? / Yes, it is.', 'check', 'l01-w03', '/jes/'],
     ['is', 'be 的一种形式；本句搭配 this / it', 'Is this your handbag?', 'question', 'l01-w04', '/ɪz/'],
@@ -77,9 +77,9 @@
       revised('ask-purpose', '发起归属询问', '想问同学这支钢笔是不是他的，应该说什么？', ['Is this your pen?', 'Pardon?', 'Thank you very much.'], 'Is this your pen?', 'Is this your pen? 是在问对方“这是你的钢笔吗？”。Pardon? 请人重复，Thank you very much. 表示感谢。', '现在要询问归属，还不是请人重复或道谢。', { image: image('pen'), imageAlt: '钢笔' })
     ],
     trans: [
-      question('build-pen', '拼出归属问句', '用词块问：这是你的钢笔吗？', undefined, 'Is this your pen?', '问句是 Is this your pen?，Is 放在开头。', '从 Is 开始，再说 this 和 your。', { type: 'order', tokens: ['Is', 'this', 'your', 'pen?'] }),
-      question('build-yes', '拼出肯定回答', '这确实是你的钢笔。用词块回答。', undefined, 'Yes, it is.', '用 Yes, it is. 作肯定回答，it 指刚才说的钢笔。', '先说 Yes，再用 it is 回答。', { type: 'order', tokens: ['Yes,', 'it', 'is.'] }),
-      question('build-thanks', '拼出感谢表达', '用词块说：非常感谢！', undefined, 'Thank you very much.', 'Thank you 表示谢谢，very much 加强感谢。', '先说 Thank you，再加 very much。', { type: 'order', tokens: ['Thank', 'you', 'very', 'much.'] })
+      question('build-pen', '拼出归属问句', '用词块问：这是你的钢笔吗？', undefined, 'Is this your pen?', '问句是 Is this your pen?，Is 放在开头。', '这句话是在提问，还是在说明一件事？', { type: 'order', tokens: ['Is', 'this', 'your', 'pen?'] }),
+      question('build-yes', '拼出肯定回答', '这确实是你的钢笔。用词块回答。', undefined, 'Yes, it is.', '用 Yes, it is. 作肯定回答，it 指刚才说的钢笔。', '先想清楚要肯定还是否定，再检查回应是否完整。', { type: 'order', tokens: ['Yes,', 'it', 'is.'] }),
+      question('build-thanks', '拼出感谢表达', '用词块说：非常感谢！', undefined, 'Thank you very much.', 'Thank you 表示谢谢，very much 加强感谢。', '先表达感谢，再表达感谢的程度。', { type: 'order', tokens: ['Thank', 'you', 'very', 'much.'] })
     ],
     exam: [
       question('exam-car', '从完整问句听出物品', '听一听，正在问哪件东西？', ['car', 'house', 'coat', 'watch'], 'car', '再听一次，注意句子末尾的物品名。', '', { audioText: ask('car'), optionImages: pictureOptions }),

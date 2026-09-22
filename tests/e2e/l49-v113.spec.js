@@ -24,7 +24,7 @@ test('接收者题直接问是谁，只能选择人物，并按说话者理解 m
   }
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await submit(room, 'the butcher', false);
-  await expect(room.getByRole('status')).toContainText('me 指正在说话的 Mrs. Bird，她是接收者。');
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await submit(room, 'Mrs. Bird', false);
   await expect(room.getByRole('status')).toHaveText('答对了！');
@@ -73,14 +73,15 @@ test('旧版 me 的完成草稿不能代答人物题，历史手记、星星和�
   await expect(page.getByRole('dialog').getByRole('listitem').filter({ hasText: '哪一个词表示接收者“给谁”？' })).toBeVisible();
 });
 
-test('we 属于第一人称复数，误选第三人称复数时解释包含说话者', async ({ page }) => {
+test('we 属于第一人称复数，误选后不泄题，改选第一人称可答对', async ({ page }) => {
   await page.goto('/lesson49/#learn/subjects');
   const room = page.getByRole('region', { name: '分拣小能手', exact: true });
   for (const answer of subjectAnswers.slice(0, 8)) await submitSubject(room, answer);
   await expect(room).toContainText('we');
   await submitSubject(room, '第三人称复数', false);
-  await expect(room.getByRole('status')).toContainText('正确答案：第一人称');
-  await expect(room.getByRole('status')).toContainText('we 包含说话者，是第一人称复数。');
+  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await room.getByRole('button',{name:'再试一次',exact:true}).click();
+  await submitSubject(room,'第一人称',false);await expect(room.getByRole('status')).toHaveText('答对了！');
 });
 
 test('变身魔法以原句、箭头、新句横向对照，窄屏保持可读且重播不重复插入', async ({ page }) => {

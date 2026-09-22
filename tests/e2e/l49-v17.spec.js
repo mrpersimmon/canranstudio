@@ -196,9 +196,9 @@ test('旧角色草稿和历史成绩不预填新题，旧星星保留，新草�
   await page.getByRole('button', { name: '关闭', exact: true }).click();
   await options.getByRole('button', { name: 'chicken', exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(feedback).toHaveText('再看看，试一次。Mrs. Bird 说丈夫喜欢 steak；他不喜欢 chicken。她自己喜欢 lamb。');
+  await expect(feedback).toHaveText('再看看，试一次。');
   await page.reload();
-  await expect(feedback).toHaveText('再看看，试一次。Mrs. Bird 说丈夫喜欢 steak；他不喜欢 chicken。她自己喜欢 lamb。');
+  await expect(feedback).toHaveText('再看看，试一次。');
   expect(await page.evaluate(() => window.playedAudio.length)).toBe(0);
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await options.getByRole('button', { name: 'steak', exact: true }).click();

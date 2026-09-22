@@ -1,0 +1,65 @@
+{
+  "phonemes": "hˈɪɹ ɪz ðə wˈɜɹd ɪkskjˈuz. ɪkskjˈuz.",
+  "targetStartMs": 1688,
+  "targetEndMs": 2575,
+  "cropStartMs": 1608,
+  "cropEndMs": 2755,
+  "tokens": [
+    {
+      "text": "Here",
+      "phonemes": "hˈɪɹ",
+      "startMs": 275,
+      "endMs": 488
+    },
+    {
+      "text": "is",
+      "phonemes": "ɪz",
+      "startMs": 488,
+      "endMs": 612
+    },
+    {
+      "text": "the",
+      "phonemes": "ðə",
+      "startMs": 612,
+      "endMs": 700
+    },
+    {
+      "text": "word",
+      "phonemes": "wˈɜɹd",
+      "startMs": 700,
+      "endMs": 912
+    },
+    {
+      "text": "excuse",
+      "phonemes": "ɪkskjˈuz",
+      "startMs": 912,
+      "endMs": 1575
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 1575,
+      "endMs": 1688
+    },
+    {
+      "text": "excuse",
+      "phonemes": "ɪkskjˈuz",
+      "startMs": 1688,
+      "endMs": 2575
+    },
+    {
+      "text": ".",
+      "phonemes": ".",
+      "startMs": 2575,
+      "endMs": 2750
+    }
+  ],
+  "sha256": "e81291215fcda115611fa6c017ffdd02833ed22a3ecd0856c2d9303bd6d3cfec",
+  "voice": "af_heart",
+  "speed": 1,
+  "renderMode": "aligned-lexeme",
+  "modelRevision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+  "reviewStatus": "unreviewed-candidate",
+  "recipeSha256": "5dbb5a4ba23af7eb5d359722c5153bdffb835db14bb648c6d2edbce49161fd27",
+  "generatorSha256": "2c126bd23c3ee4c94d9afc6b0a959008f474c82d9d6a121a86f3207f861e804e"
+}

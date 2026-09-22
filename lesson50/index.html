@@ -1342,7 +1342,7 @@ function startQA(){
 }
 function nextQA(){
   if(QA.idx>=QAS.length){finishQA();return;}
-  QA.lock=false;
+  QA.lock=false;QA.attempt=CanranCore.assessment.createAttempt();
   const q=QAS[QA.idx];
   $('#qaFb').textContent='';
   $('#qaQ').innerHTML='❓ '+q.q+' <button class="spk" id="qaSpk" title="听问题" style="min-width:44px;min-height:44px;font-size:17px">🔊</button>';
@@ -1361,11 +1361,12 @@ function ansQA(b,i){
   if(QA.lock)return;QA.lock=true;
   const q=QAS[QA.idx];
   const correct=(q.a===-1)||(i===q.a);
+  const outcome=CanranCore.assessment.submitAttempt(QA.attempt,correct);QA.attempt=outcome.state;
   const sayText=q.opts[i];
   let advanced=false;
   const advance=()=>{if(advanced)return;advanced=true;QA.idx++;nextQA();};
   if(correct){
-    b.classList.add('good');QA.score++;sndCorrect();
+    b.classList.add('good');if(outcome.scored)QA.score++;sndCorrect();
     $('#qaFb').className='fb good';
     $('#qaFb').textContent=q.tip?q.tip:'✅ 答对啦！';
     speak(sayText,advance); /* 答句读完再出下一题（兜底3.6秒） */
@@ -1373,9 +1374,8 @@ function ansQA(b,i){
   }else{
     b.classList.add('bad');b.classList.add('shake');sndWrong();
     $('#qaFb').className='fb bad';
-    $('#qaFb').textContent='❌ 再想想王子的投喂记录～正确答案是：'+q.opts[q.a];
-    speak(q.opts[q.a]);
-    setTimeout(advance,2200);
+    $('#qaFb').textContent='再看看，试一次。';
+    setTimeout(()=>{b.classList.remove('bad','shake');QA.lock=false;},500);
   }
 }
 function finishQA(){
@@ -1384,7 +1384,7 @@ function finishQA(){
   const r=$('#qaResult');r.classList.remove('hidden');
   const s=QA.score;
   r.innerHTML='<div class="big-emoji">'+(s===3?'🏆':'🎉')+'</div>'+
-    '<h3>问答结束！答对 '+s+' / '+QAS.length+' 题</h3>'+
+    '<h3>问答完成！首次答对 '+s+' / '+QAS.length+' 题</h3>'+
     '<button class="btn btn-purple" id="qaAgain" style="margin-top:10px">🔄 再答一次</button>';
   $('#qaAgain').addEventListener('click',()=>{sndClick();startQA();});
   checkL2Star();
@@ -1488,7 +1488,7 @@ function ansPot(btn){
   }else{
     sndWrong();btn.classList.add('shake');
     $('#potFb').className='fb bad';
-    $('#potFb').textContent='❌ 这口锅不对，念念变身规则再试试！';
+    $('#potFb').textContent='再看看，试一次。';
     setTimeout(()=>{btn.classList.remove('shake');POT.lock=false;},650);
   }
 }
@@ -1541,7 +1541,7 @@ function ansDD(pickDoes){
     sndWrong();
     $('#ddItem').classList.add('shake');
     $('#ddFb').className='fb bad';
-    $('#ddFb').textContent='❌ 想一想：「'+d.s+'」是他/她/它（三单）吗？';
+    $('#ddFb').textContent='再看看，试一次。';
     setTimeout(()=>{$('#ddItem').classList.remove('shake');DD.lock=false;},650);
   }
 }
@@ -1590,7 +1590,7 @@ function buildMirror(){
         firstTry=false;
         b.classList.add('bad','shake');sndWrong();
         card.querySelector('.fb').className='fb bad';
-        card.querySelector('.fb').textContent='❌ 不对哦——do/does 后面动词要现原形！';
+        card.querySelector('.fb').textContent='再看看，试一次。';
         setTimeout(()=>b.classList.remove('bad','shake'),650);
       }
     }));
@@ -1624,7 +1624,7 @@ function startQuiz(){
 }
 function renderQ(){
   const q=QUIZ[QZ.idx];
-  QZ.lock=false;
+  QZ.lock=false;QZ.attempt=CanranCore.assessment.createAttempt();
   $('#quizFb').textContent='';
   $('#quizProgFill').style.width=(QZ.idx/QUIZ.length*100)+'%';
   let listenBtn='';
@@ -1647,9 +1647,9 @@ function renderQ(){
 function ansQ(b,i){
   if(QZ.lock)return;QZ.lock=true;
   const q=QUIZ[QZ.idx];
-  const box=$('#quizOpts');
+  const outcome=CanranCore.assessment.submitAttempt(QZ.attempt,i===q.a);QZ.attempt=outcome.state;
   if(i===q.a){
-    b.classList.add('good');QZ.score++;sndCorrect();
+    b.classList.add('good');if(outcome.scored)QZ.score++;sndCorrect();
     $('#quizFb').className='fb good';
     $('#quizFb').textContent='✅ 答对啦！';
     if(q.okSay){
@@ -1662,10 +1662,9 @@ function ansQ(b,i){
     }
   }else{
     b.classList.add('bad');sndWrong();
-    box.querySelector('[data-option-id="'+q.a+'"]')?.classList.add('good');
     $('#quizFb').className='fb bad';
-    $('#quizFb').textContent='❌ 正确答案是：'+q.opts[q.a];
-    setTimeout(nextQ,1700);
+    $('#quizFb').textContent='再看看，试一次。';
+    setTimeout(()=>{b.classList.remove('bad');QZ.lock=false;},500);
   }
 }
 function nextQ(){
@@ -1682,7 +1681,7 @@ function finishQuiz(){
   const emoji=s>=8?'👑':(s>=6?'🏆':(s>=4?'🎉':'💪'));
   const msg=s>=8?'满分！你就是皇家营养小顾问！':(s>=6?'厉害！差一点点就满分啦～':(s>=4?'不错！回去再闯几关会更强！':'别灰心，回到前面几关再练一练！'));
   r.innerHTML='<div class="big-emoji">'+emoji+'</div>'+
-    '<h3>考核结束！答对 '+s+' / 8 题 '+starStr(Math.max(n,0))+'</h3>'+
+    '<h3>考核完成！首次答对 '+s+' / 8 题 '+starStr(Math.max(n,0))+'</h3>'+
     '<p style="font-weight:800;font-size:21px;margin:8px 0">'+msg+'</p>'+
     '<button class="btn btn-red" id="quizAgain">🔄 再考一次</button>';
   $('#quizAgain').addEventListener('click',()=>{sndClick();startQuiz();});

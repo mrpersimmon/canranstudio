@@ -1,0 +1,17 @@
+{
+  "sourceId": "L07-W01",
+  "text": "I",
+  "ipa": "/aɪ/",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "seed": 0,
+  "synthesisText": "Here is the word I. I.",
+  "tokenRepairs": {
+    "I.": [
+      {"text": "I", "phonemes": "ˈI"},
+      {"text": ".", "phonemes": "."}
+    ]
+  },
+  "expectedPhonemes": "hˈɪɹ ɪz ðə wˈɜɹd ˈI. ˈI.",
+  "targetOccurrences": 2
+}
