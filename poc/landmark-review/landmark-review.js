@@ -544,6 +544,7 @@
 
     return Object.freeze({
       start,
+      cancel() { cancelSession(); emit(); },
       ensure,
       retryFailed,
       getRecord,
@@ -715,10 +716,13 @@
 
     function warmAllStages(location, stage, image) {
       cancelWarmupSchedule();
+      const isCurrentImage = () => image.isConnected && state.location === location.id;
       const schedule = () => {
+        if (!isCurrentImage()) return;
         const run = () => {
           warmupHandle = null;
           warmupHandleType = null;
+          if (!isCurrentImage()) return;
           assetPool.start(location, { stage, viewport: state.viewport });
         };
         if (typeof windowRef.requestIdleCallback === 'function') {
@@ -1286,6 +1290,10 @@
       }
       renderGeneration += 1;
       const location = currentLocation();
+      if (assetPool.getSnapshot().locationId !== location.id) {
+        cancelWarmupSchedule();
+        assetPool.cancel();
+      }
       state = normalizeReviewState(serializeReviewState(state), locations, routePages);
       delete frame.dataset.pendingStage;
       delete frame.dataset.pendingReview;

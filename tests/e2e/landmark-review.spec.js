@@ -606,7 +606,7 @@ test('stage count comes from the selected location contract', async ({ page }) =
   await expect(page.locator('[data-review-preload-count]')).toHaveText('15/15');
 });
 
-test('switching landmarks stops the old queue before starting the new contract', async ({ page }) => {
+for (const imageDelay of [0, 350]) test(`switching landmarks stops the old queue before starting the new contract (${imageDelay}ms new image)`, async ({ page }) => {
   let switched = false;
   const oldRequestsAfterSwitch = [];
   page.on('request', request => {
@@ -614,15 +614,29 @@ test('switching landmarks stops the old queue before starting the new contract',
       oldRequestsAfterSwitch.push(request.url());
     }
   });
+  let releaseOld, markOldStarted;
+  const oldHeld = new Promise(resolve => { releaseOld = resolve; });
+  const oldStarted = new Promise(resolve => { markOldStarted = resolve; });
   await page.route(/lesson49\/states\/state-\d+-(?:512|768|1024)\.avif/, async route => {
-    await new Promise(resolve => setTimeout(resolve, 90));
+    if (route.request().resourceType() === 'image') { await route.continue(); return; }
+    markOldStarted();
+    await oldHeld;
+    await route.continue();
+  });
+  await page.route(/lesson52\/states\//, async route => {
+    if (route.request().resourceType() === 'image' && imageDelay) {
+      await new Promise(resolve => setTimeout(resolve, imageDelay));
+    }
     await route.continue();
   });
 
-  await page.goto(`${REVIEW_PATH}?location=lesson49&stage=0&review=art&viewport=huawei`);
+  await page.goto(`${REVIEW_PATH}?location=lesson49&stage=0&review=art&viewport=huawei`, { waitUntil: 'domcontentloaded' });
+  await oldStarted;
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-state', 'loading');
-  switched = true;
   await page.locator('[data-location-picker]').selectOption('lesson52');
+  // Release the old response after the actual UI change, not before Playwright dispatches it.
+  switched = true;
+  releaseOld();
 
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-location-id', 'lesson52');
   await expect(page.locator('[data-review-preload-status]')).toHaveAttribute('data-state', 'ready');
