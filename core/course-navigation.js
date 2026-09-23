@@ -17,7 +17,11 @@
     { ...core.unit1516, entry: 'unit1516Entry', label: 'unit1516Resume' },
     { ...core.unit1718, entry: 'unit1718Entry', label: 'unit1718Resume' },
     { ...core.unit1920, entry: 'unit1920Entry', label: 'unit1920Resume' },
-    { ...core.unit2122, entry: 'unit2122Entry', label: 'unit2122Resume' }
+    { ...core.unit2122, entry: 'unit2122Entry', label: 'unit2122Resume' },
+    { ...core.unit2324, entry: 'unit2324Entry', label: 'unit2324Resume' },
+    { ...core.unit2526, entry: 'unit2526Entry', label: 'unit2526Resume' },
+    { ...core.unit2728, entry: 'unit2728Entry', label: 'unit2728Resume' },
+    { ...core.unit2930, entry: 'unit2930Entry', label: 'unit2930Resume' }
   ];
   function read(key) {
     try { return JSON.parse(storage?.getItem(key) || 'null'); } catch { return null; }

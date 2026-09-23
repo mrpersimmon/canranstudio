@@ -30,6 +30,10 @@ const REQUIRED_DIRECTORIES = Object.freeze([
   'unit17-18',
   'unit19-20',
   'unit21-22',
+  'unit23-24',
+  'unit25-26',
+  'unit27-28',
+  'unit29-30',
   'poc'
 ]);
 const REQUIRED_RUNTIME_FILES = Object.freeze([

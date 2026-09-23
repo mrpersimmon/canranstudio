@@ -349,7 +349,8 @@
         }, 'opt-btn');
         const imageSource = images?.[value];
         if(imageSource){
-          const picture=document.createElement('img');picture.src=imageSource;picture.alt='';
+          const picture=document.createElement('img');picture.src=imageSource;picture.alt=q.optionImageAlts?.[value] || '';
+          if(picture.alt){option.setAttribute('aria-label',value);option.setAttribute('aria-description',picture.alt);}
           const label=document.createElement('span');label.textContent=value;
           option.replaceChildren(picture,label);option.classList.add('picture-option');
         }

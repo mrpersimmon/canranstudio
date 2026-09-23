@@ -31,6 +31,10 @@ const PUBLIC_INPUTS = [
   'unit17-18',
   'unit19-20',
   'unit21-22',
+  'unit23-24',
+  'unit25-26',
+  'unit27-28',
+  'unit29-30',
   'assets',
   'poc'
 ];
@@ -110,6 +114,10 @@ async function writeSyntheticPublicRoot(root) {
     'unit17-18/index.html',
     'unit19-20/index.html',
     'unit21-22/index.html',
+    'unit23-24/index.html',
+    'unit25-26/index.html',
+    'unit27-28/index.html',
+    'unit29-30/index.html',
     'lesson49/index.html',
     'lesson49/audio/clip.mp3',
     'lesson50/index.html',

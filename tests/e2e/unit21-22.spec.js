@@ -22,7 +22,7 @@ test('所有声音不可用仍完成26题与8段原文，领取并导出课堂�
  await completeUnit2122(page);expect(audio.every(url=>/\/assets\/feedback\//.test(url))).toBe(true);expect(await page.evaluate(()=>voiceCalls)).toBe(0);expect(errors).toEqual([]);
  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('小小交接员');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
  const dialog=page.getByRole('dialog',{name:'寻物交接站纪念',exact:true});await expect(dialog).toContainText('完成 Lesson 21–22 课堂配套练习');await expect(dialog.locator('#certificateName')).toHaveText('小小交接员');const day=await dialog.locator('#certificateDate').innerText();
- await dialog.screenshot({path:'output/playwright/unit21-22/certificate-desktop.png'});const download=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await(await download).saveAs('output/playwright/unit21-22/certificate-saved.png');
+ await dialog.screenshot({path:'output/playwright/unit21-22/certificate-desktop.png'});const download=page.waitForEvent('download',{timeout:15000});await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await(await download).saveAs('output/playwright/unit21-22/certificate-saved.png');
  const pdf=await page.pdf({path:'output/playwright/unit21-22/certificate-print.pdf',preferCSSPageSize:true,printBackground:true});expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
  await page.keyboard.press('Escape');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(dialog.locator('#certificateDate')).toHaveText(day);
 });
@@ -87,7 +87,7 @@ test('证书长名字在三种窄屏中完整，实际保存图片与单元主�
   const bounds=await paper.boundingBox();for(const box of await paper.locator('h3,p,li,img').evaluateAll(xs=>xs.map(x=>{const r=x.getBoundingClientRect();return {left:r.left,right:r.right};}))){expect(box.left).toBeGreaterThanOrEqual(bounds.x-1);expect(box.right).toBeLessThanOrEqual(bounds.x+bounds.width+1);}
   expect((await dialog.getByRole('button',{name:'保存图片',exact:true}).boundingBox()).height).toBeGreaterThanOrEqual(44);await dialog.screenshot({path:`output/playwright/unit21-22/certificate-long-${width}.png`});
  }
- const pending=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();const download=await pending;expect(download.suggestedFilename()).toBe('Lesson21-22-寻物交接站.png');const path='output/playwright/unit21-22/certificate-long-saved.png';await download.saveAs(path);
+ const pending=page.waitForEvent('download',{timeout:15000});await dialog.getByRole('button',{name:'保存图片',exact:true}).click();const download=await pending;expect(download.suggestedFilename()).toBe('Lesson21-22-寻物交接站.png');const path='output/playwright/unit21-22/certificate-long-saved.png';await download.saveAs(path);
  const png=await require('node:fs/promises').readFile(path);expect(png.readUInt32BE(16)).toBe(1440);expect(png.readUInt32BE(20)).toBe(1100);
  const band=await paper.evaluate(el=>getComputedStyle(el,'::before').backgroundColor.match(/\d+/g).slice(0,3).map(Number));const pixel=await require('sharp')(png).extract({left:100,top:40,width:1,height:1}).removeAlpha().raw().toBuffer();expect([...pixel]).toEqual(band);
  await dialog.getByRole('button',{name:'关闭',exact:true}).click();await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeFocused();
@@ -96,5 +96,21 @@ test('证书长名字在三种窄屏中完整，实际保存图片与单元主�
 test('证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试',async({page})=>{
  test.setTimeout(45000);await completeUnit2122(page);await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('');await page.route('**/assets/unit21-22/jane.svg',r=>r.abort());await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
  const dialog=page.getByRole('dialog',{name:'寻物交接站纪念',exact:true});await expect(dialog.locator('#certificateName')).toHaveText('细心的小小交接员');const downloads=[];page.on('download',d=>downloads.push(d));await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await expect(dialog.getByRole('status')).toContainText('图片暂时没有生成');await expect(dialog.getByRole('button',{name:'保存图片',exact:true})).toBeEnabled();expect(downloads).toHaveLength(0);
- await page.unroute('**/assets/unit21-22/jane.svg');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const pending=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await pending;await expect(dialog.getByRole('status')).toContainText('纪念图片已保存');expect(downloads).toHaveLength(1);
+ await page.unroute('**/assets/unit21-22/jane.svg');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const pending=page.waitForEvent('download',{timeout:15000});await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await pending;await expect(dialog.getByRole('status')).toContainText('纪念图片已保存');expect(downloads).toHaveLength(1);
+});
+
+test('证书长名字在资源较慢时仍生成实际图片',async({page})=>{
+ test.setTimeout(45000);
+ await completeUnit2122(page);
+ await page.route('**/assets/unit21-22/jane.svg',async route=>{await new Promise(resolve=>setTimeout(resolve,6000));await route.continue();});
+ await page.reload({waitUntil:'domcontentloaded'});
+ await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('热爱英语的小小交接员');
+ await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
+ const dialog=page.locator('#certificateDialog');
+ const pending=page.waitForEvent('download',{timeout:15000});
+ await dialog.getByRole('button',{name:'保存图片',exact:true}).click();
+ const download=await pending;
+ const p='output/playwright/unit21-22/certificate-slow.png';await download.saveAs(p);
+ const bytes=await require('node:fs/promises').readFile(p);expect(bytes.readUInt32BE(16)).toBe(1440);expect(bytes.readUInt32BE(20)).toBe(1100);
+ await expect(dialog.getByRole('status')).toContainText('纪念图片已保存');
 });
