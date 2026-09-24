@@ -15,7 +15,7 @@
   }
   function art(name, label = '') {
     if (!['man', 'woman', ...unit.objects.map(word => word.en)].includes(name)) return icon(name, label);
-    const picture = node('img', '', 'shop-icon'); picture.src = '/assets/unit1-2/' + name + '.svg'; picture.alt = label; return picture;
+    const picture = node('img', '', 'shop-icon'); picture.src = '/assets/unit1-2/' + (['man', 'woman'].includes(name) ? 'scene/' : '') + name + '.svg' + (name === 'handbag' ? '?v=scene-2' : ''); picture.alt = label; return picture;
   }
   function speak(text, onFinish, source = content.AUDIO[text]) {
     return audio.play({ text, src: source ? core.courseCatalog.publicAssetUrl(source) : '', retrySource: true,
@@ -78,7 +78,8 @@
     words: ['点整张词卡听发音、看意思。用上一组和下一组翻页。'],
     listen: ['先点喇叭，再选出听到的单词。录音听完才可以检查，随时可以重听。'],
     phrases: ['点表达卡听一听，再到下一站试着使用。'],
-    ask: ['看物品和题目，选出对应的问句。'],
+    manners: ['帮男士把手提包还回去。选择一句话、点人物或拼好词块，再点“检查答案”。答对后，场景会随故事改变。'],
+    ask: ['读男士的英文问句，点出他问到的物品，再检查。'],
     trans: ['点词块组成句子，点已选的词块可以撤回。全部用完再检查。'],
     certificate: ['完成五关后领取、保存或打印。证书记录练习完成，不评价自由口语或独立写作。']
   };
@@ -115,15 +116,25 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit12-' + id + '-practice'; surfaces.get(id).append(element);
+    if ((id === 'manners' || id === 'ask') && questions[id].every(question => question.scene)) {
+      settings.sceneView = core.unit12Scene.create({ element });
+      if (id === 'manners') settings.completionDetails = settings.sceneView.completion();
+    }
     practice.mount({ element, questions: questions[id], playAudio: speak, sessionId: 'v' + unit.version, ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+      onComplete: states => {
+        complete(id);
+        if (settings.sceneView) element.querySelector('.practice-finish > p').textContent = id === 'manners' ? '手提包送回去了！' : '找到啦！';
+        nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
+      } });
     return element;
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
+  stage.id = 'unit12-dialogue';
   function actor(who, name) { const element = node('div', '', 'dialogue-actor'); element.dataset.actor = who; element.append(art(who), node('span', name)); return element; }
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  stage.append(actor('man', '男士'), log, actor('woman', '女士'));
+  const storyBag = art('handbag', '等待归还的手提包'); storyBag.classList.add('dialogue-handbag');
+  stage.append(actor('man', '男士'), log, actor('woman', '女士'), storyBag);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始听课文', advanceDialogue);
@@ -145,14 +156,18 @@
     advance.disabled = dialogue.i >= 0 && !dialogue.heard[dialogue.i];
     advance.textContent = dialogue.i < 0 ? '开始听课文' : dialogue.i === 6 ? '完成课文学习' : '下一句';
     replay.disabled = dialogue.i < 0; controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
+    const returned = dialogue.heard[5] === true;
+    stage.classList.toggle('has-returned-bag', returned);
+    storyBag.alt = returned ? '女士确认后的手提包' : '等待归还的手提包';
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('handbag'), node('p', '这是谁的手提包？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(node('p', '这是谁的手提包？')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
-    const speech = button('', () => playLine(index), 'btext'); speech.append(node('span', line.text), icon('audio')); speech.setAttribute('aria-busy', 'false');
+    const speech = button('', () => playLine(index), 'btext'); speech.append(node('span', line.text), icon('audio')); speech.setAttribute('aria-busy', 'false'); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
     const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
+    log.querySelector('.is-current')?.classList.remove('is-current'); row.classList.add('is-current');
     bubble.append(node('div', line.who === 'man' ? '男士' : '女士', 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
   function playLine(index) {
@@ -244,7 +259,7 @@
   content.SENTENCE_MODELS.forEach(expression => modelGrid.append(expressionCard(expression))); sentenceModels.append(modelGrid);
   const phraseActions = node('div', '', 'activity-actions'); nextStation('phrases', phraseActions);
   surfaces.get('phrases').append(phraseGrid, sentenceModels, phraseActions);
-  mountPractice('manners'); mountPractice('ask', { presentation: 'question' }); mountPractice('trans');
+  mountPractice('manners'); mountPractice('ask'); mountPractice('trans');
 
   const examResults = node('div', '', 'unit-results');
   mountPractice('exam', { finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {

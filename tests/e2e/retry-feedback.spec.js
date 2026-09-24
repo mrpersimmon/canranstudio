@@ -8,10 +8,10 @@ test('只改线索保留已完成活动，内容版本变化不能沿用完成�
   const source=fs.readFileSync(path.join(__dirname,'../../unit1-2/content.js'),'utf8');
   await page.route('**/unit1-2/content.js*',route=>route.fulfill({contentType:'application/javascript',body:source.replace('这句话是在提问，还是在说明一件事？','从 Is 开始，再说 this 和 your。')}));
   await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans');
-  const responses=[['Is','this','your','pen?'],['Yes,','it','is.'],['Thank','you','very','much.']];
+  const responses=[['Is','this','your','pen?'],['Yes,','it','is.']];
   for(let i=0;i<responses.length;i++){
     for(const token of responses[i])await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
-    await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:i===2?'完成这一站':'下一题',exact:true}).click();
+    await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:i===responses.length-1?'完成这一站':'下一题',exact:true}).click();
   }
   await page.goto('/unit1-2/#cover');await expect(page.locator('#starCount')).toHaveText('1');
   await page.unroute('**/unit1-2/content.js*');await page.reload();await expect(page.locator('#starCount')).toHaveText('1');

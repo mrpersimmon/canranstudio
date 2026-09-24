@@ -15,35 +15,29 @@ async function choose(room, answer, next = '下一题') {
   if (next) await room.getByRole('button', { name: next, exact: true }).click();
 }
 
-test('Lesson 1–2 用一次提问应用和四个综合任务取代换词长队列', async ({ page }) => {
+test('Lesson 1–2 用场景找物与两项综合判断取代换词长队列', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/unit1-2/#learn/ask');
   const ask = page.locator('.stage-ask');
   await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '1');
-  await expect(ask.getByRole('heading', { name: '想问同学这支钢笔是不是他的，应该说什么？', exact: true })).toBeVisible();
-  await choose(ask, 'Is this your pen?', '完成这一站');
+  await expect(ask.getByRole('heading', { name: '男士问的是哪件物品？', exact: true })).toBeVisible();
+  await choose(ask, '手表', '完成这一站');
   await expect(ask.getByRole('button', { name: '下一站：词块拼装台', exact: true })).toBeVisible();
 
   await page.goto('/unit1-2/#learn/exam');
   const exam = page.locator('.stage-exam');
-  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
-  await exam.getByRole('button', { name: 'car', exact: true }).click();
-  await expect(exam.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-  await exam.getByRole('button', { name: '听一遍', exact: true }).click();
-  await choose(exam, 'car');
+  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '2');
   await expect(exam).toContainText('Excuse me!');
   await exam.getByRole('button', { name: 'Yes, it is.', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
   await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, 'Yes?');
-  await expect(exam).toContainText('Pardon?');
-  await choose(exam, 'Is this your handbag?');
   await expect(exam).toContainText('书确实是你的');
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit12-combined-320.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await choose(exam, 'Yes, it is. Thank you very much.', '查看本次记录');
-  await expect(exam).toContainText('首次独立答对 3 / 4');
+  await expect(exam).toContainText('首次独立答对 1 / 2');
   await expect(exam.getByRole('button', { name: '下一站：我的单元证书', exact: true })).toBeVisible();
 });
 
@@ -183,7 +177,7 @@ async function expectFresh(page, unit, activity, count) {
   await expect(room.locator('button[aria-pressed="true"]')).toHaveCount(0);
 }
 
-test('Lesson 1–2 升级只重开旧提问和挑战，未改拼句保留完成', async ({ page }) => {
+test('Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答', async ({ page }) => {
   const upgrade = await priorEdition(page, 'unit1-2');
   await priorGroup(page, 'unit1-2', 'ask', ['Is this your pen?', 'Is this your pencil?', 'Is this your book?', 'Is this your watch?', 'Is this your coat?', 'Is this your dress?', 'Is this your skirt?', 'Is this your shirt?', 'Is this your car?', 'Is this your house?']);
   await priorGroup(page, 'unit1-2', 'trans', [['Is', 'this', 'your', 'pen?'], ['Yes,', 'it', 'is.'], ['Thank', 'you', 'very', 'much.']]);
@@ -192,10 +186,9 @@ test('Lesson 1–2 升级只重开旧提问和挑战，未改拼句保留完成'
   upgrade();
   await page.reload();
   await expectFresh(page, 'unit1-2', 'ask', 1);
-  await expectFresh(page, 'unit1-2', 'exam', 4);
-  await page.goto('/unit1-2/#learn/trans');
-  await expect(page.locator('.stage-trans').getByRole('button', { name: '再练一轮', exact: true })).toBeVisible();
-  await expect(page.locator('#starCount')).toHaveText('1');
+  await expectFresh(page, 'unit1-2', 'exam', 2);
+  await expectFresh(page, 'unit1-2', 'trans', 2);
+  await expect(page.locator('#starCount')).toHaveText('0');
 });
 
 test('Lesson 3–4 升级旧五题接力和拼句后重新作答，课文与理解记录保留', async ({ page }) => {

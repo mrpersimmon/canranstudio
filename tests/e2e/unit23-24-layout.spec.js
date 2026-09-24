@@ -94,10 +94,12 @@ test('位置图画布上沿和尺寸一致，不因说明换行而上下错位',
  }
 });
 
-test('四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮',async({browser})=>{
+for(const fontMode of ['正常字体','字体不可用'])test(fontMode+'：四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮',async({browser})=>{
  test.setTimeout(45000);const {chooseTokens}=require('../support/unit23-24-flow');
  for(const width of [320,390,768,1280]){
-  const context=await browser.newContext({viewport:{width,height:740},reducedMotion:'reduce'});const page=await context.newPage();await page.goto('http://127.0.0.1:4173/unit23-24/#learn/trans');await page.evaluate(()=>document.fonts.ready);
+  const context=await browser.newContext({viewport:{width,height:740},reducedMotion:'reduce'});const page=await context.newPage();
+  if(fontMode==='字体不可用')await page.route('**/assets/fonts/**',route=>route.request().resourceType()==='font'?route.abort():route.continue());
+  await page.goto('http://127.0.0.1:4173/unit23-24/#learn/trans');await page.evaluate(()=>document.fonts.ready);
   const room=page.locator('.stage-trans'),actions=room.getByRole('group',{name:'作答操作',exact:true}),selected=room.getByRole('group',{name:'已选词块',exact:true});
   for(const [i,answer] of ANSWERS.trans.entries()){
    const initialTop=await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY);await chooseTokens(room,answer);

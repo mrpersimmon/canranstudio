@@ -32,10 +32,10 @@ for(const width of [320,390,768,1280])test(`${width} 像素领奖、长名字、
   await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(dialog.locator('#certificateDate')).toHaveText(date);
 });
 test('图片失败有重试、空名字有称呼，证书与七句练习纸分别为单页打印',async({page})=>{
-  await page.route('**/unit1-2/man.svg',route=>route.abort());const dialog=await claim(page);
+  await page.route('**/unit1-2/scene/man.svg',route=>route.abort());const dialog=await claim(page);
   await expect(dialog.locator('#certificateName')).toHaveText('礼貌小帮手');
   await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await expect(dialog.getByRole('status')).toContainText('请重试');
-  await page.unroute('**/unit1-2/man.svg');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
+  await page.unroute('**/unit1-2/scene/man.svg');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
   const download=page.waitForEvent('download',{timeout:15000});await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await download;
   const pdf=await page.pdf({path:'output/playwright/unit1-2-certificate-print.pdf',preferCSSPageSize:true,printBackground:true});
   expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);

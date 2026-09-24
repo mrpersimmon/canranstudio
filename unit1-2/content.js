@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  const image = name => '/assets/unit1-2/' + name + '.svg';
+  const image = name => '/assets/unit1-2/' + (['man', 'woman'].includes(name) ? 'scene/' : '') + name + '.svg';
   const sharedImage = name => '/assets/lesson49/icons/' + name + '.svg';
   const recording = name => 'unit1-2/audio/' + name + '.mp3';
   const source = '《新概念英语智慧版1》纸页 2–5（PDF 35–38 页）';
@@ -52,14 +52,13 @@
     id: 'u12-v1-' + id, target, prompt, options, answer, explanation, hint, source, ...extra
   });
   const revised = (...args) => ({ ...question(...args), id: 'u12-v2-' + args[0] });
+  const sceneQuestion = (...args) => ({ ...question(...args), id: 'u12-scene-v1-' + args[0] });
   const ask = word => `Is this your ${word}?`;
   const pictureOptions = Object.fromEntries(objects.map(word => [word.en, word.image]));
   const questions = {
     roles: [
-      question('story-owner', '听懂手提包的归属', '故事里的手提包是谁的？', ['女士', '男士'], '女士', '男士询问后，女士回答“Yes, it is.”，确认手提包是她的。', '回想是谁回答了“Yes, it is.”。', { optionImages: { '女士': image('woman'), '男士': image('man') } }),
       question('story-your', '理解问句中的 your', '男士问“Is this your handbag?”，这里的 your 指谁？', ['对面的女士', '说话的男士'], '对面的女士', '男士在问对面的女士：“这是你的手提包吗？”your 在这句话中指女士的。', 'your 表示“你的”，看说话的人正在问谁。'),
-      question('story-pardon', '理解请求重复', '女士说“Pardon?”，希望男士做什么？', ['再说一遍', '把包留下', '说谢谢'], '再说一遍', 'Pardon? 在这里是“请再说一遍”，不是拒绝手提包。', '留意她说完后，男士又说了什么。'),
-      question('story-thanks', '理解致谢对象', '女士最后是在感谢谁？', ['男士', '她自己'], '男士', '男士帮她找回手提包，女士向男士道谢。', '是谁把手提包交回来的？', { optionImages: { '男士': image('man'), '她自己': image('woman') } })
+      sceneQuestion('story-it', '区分物品指代与人物', '女士说“Yes, it is.”，it 指什么？', ['手提包', '男士', '女士'], '手提包', 'it 指男士刚刚询问的手提包。', '回看上一句，正在确认哪件事物。', { optionImages: { '手提包': image('handbag'), '男士': image('man'), '女士': image('woman') } })
     ],
     listen: objects.map((word, index) => {
       const nearby = objects.slice(1);
@@ -68,23 +67,20 @@
       return question('listen-' + word.en, '听辨 ' + word.en, '听一听，选出单词。', choices, word.en, '再听一次，找出对应物品。', '', { audioText: word.en, optionImages: pictureOptions });
     }),
     manners: [
-      question('polite-attention', '礼貌引起注意', '想叫住一位路人，先说什么？', ['Excuse me!', 'Pardon?', 'Thank you very much.'], 'Excuse me!', 'Excuse me! 可以礼貌地引起对方注意。', '你还没有和对方说话，先礼貌地打个招呼。'),
-      question('polite-repeat', '请对方重复', '同学说得太轻，你没听清。怎样请他再说一遍？', ['Pardon?', 'Yes, it is.', 'Thank you very much.'], 'Pardon?', '没听清时用 Pardon? 请求重复。', '不是表示同意，而是请他重复刚才的话。'),
-      question('polite-confirm', '肯定确认归属', '同学问“Is this your book?”，这本书确实是你的。怎样回答？', ['Yes, it is.', 'Pardon?', 'Excuse me!'], 'Yes, it is.', '对方问“这是你的书吗？”，你用 Yes, it is. 确认。', '书是你的，先肯定回答。'),
-      question('polite-thanks', '得到帮助后致谢', '路人把你的手表还给你，你想感谢他。怎样说？', ['Thank you very much.', 'Pardon?', 'Is this your watch?'], 'Thank you very much.', '得到帮助后可以说 Thank you very much.。', '手表已经还给你了，现在表达感谢。')
+      sceneQuestion('attention', '在相遇时礼貌引起注意', '帮男士叫住她。', ['Excuse me!', 'Pardon?', 'Thank you very much.'], 'Excuse me!', '用 Excuse me! 引起注意。', '两个人还没开始说话。', { scene: { beat: 'attention', step: '叫住她', before: [], after: [['man', 'Excuse me!'], ['woman', 'Yes?']] } }),
+      sceneQuestion('repeat', '根据请求重复接续话轮', '她没听清，男士接下来怎么说？', ['Is this your handbag?', 'Yes, it is.', 'Thank you very much.'], 'Is this your handbag?', 'Pardon? 请对方再说一遍。', '想想 Pardon? 是请谁重复哪句话。', { scene: { beat: 'repeat', step: '再问一次', before: [['man', 'Is this your handbag?'], ['woman', 'Pardon?']], after: [['man', 'Is this your handbag?']] } }),
+      sceneQuestion('return', '根据原文确认接收者并交还物品', '确认好了，把手提包交给谁？', ['男士', '女士'], '女士', '女士回答 Yes, it is.，确认手提包是她的。', '看是谁回答了刚才的归属问句。', { optionImages: { '男士': image('man'), '女士': image('woman') }, scene: { beat: 'return', step: '把包送回', before: [['man', 'Is this your handbag?'], ['woman', 'Yes, it is.']], after: [] } }),
+      sceneQuestion('thanks', '从接受帮助推进到组织感谢', '包回来了，帮女士说声谢谢。', undefined, 'Thank you very much.', '感谢帮助自己的人。', '先表达感谢，再表达感谢的程度。', { type: 'order', tokens: ['Thank', 'you', 'very', 'much.'], scene: { beat: 'thanks', step: '说声谢谢', before: [], after: [['woman', 'Thank you very much.']] } })
     ],
     ask: [
-      revised('ask-purpose', '发起归属询问', '想问同学这支钢笔是不是他的，应该说什么？', ['Is this your pen?', 'Pardon?', 'Thank you very much.'], 'Is this your pen?', 'Is this your pen? 是在问对方“这是你的钢笔吗？”。Pardon? 请人重复，Thank you very much. 表示感谢。', '现在要询问归属，还不是请人重复或道谢。', { image: image('pen'), imageAlt: '钢笔' })
+      sceneQuestion('find-watch', '从完整问句定位物品', '男士问的是哪件物品？', ['手表', '书', '手提包'], '手表', 'watch 表示手表。', '留意问句最后的物品名。', { optionImages: { '手表': image('watch'), '书': image('book'), '手提包': image('handbag') }, scene: { beat: 'find', step: '找出物品', before: [['man', 'Is this your watch?']], after: [] } })
     ],
     trans: [
       question('build-pen', '拼出归属问句', '用词块问：这是你的钢笔吗？', undefined, 'Is this your pen?', '问句是 Is this your pen?，Is 放在开头。', '这句话是在提问，还是在说明一件事？', { type: 'order', tokens: ['Is', 'this', 'your', 'pen?'] }),
-      question('build-yes', '拼出肯定回答', '这确实是你的钢笔。用词块回答。', undefined, 'Yes, it is.', '用 Yes, it is. 作肯定回答，it 指刚才说的钢笔。', '先想清楚要肯定还是否定，再检查回应是否完整。', { type: 'order', tokens: ['Yes,', 'it', 'is.'] }),
-      question('build-thanks', '拼出感谢表达', '用词块说：非常感谢！', undefined, 'Thank you very much.', 'Thank you 表示谢谢，very much 加强感谢。', '先表达感谢，再表达感谢的程度。', { type: 'order', tokens: ['Thank', 'you', 'very', 'much.'] })
+      question('build-yes', '拼出肯定回答', '这确实是你的钢笔。用词块回答。', undefined, 'Yes, it is.', '用 Yes, it is. 作肯定回答，it 指刚才说的钢笔。', '先想清楚要肯定还是否定，再检查回应是否完整。', { type: 'order', tokens: ['Yes,', 'it', 'is.'] })
     ],
     exam: [
-      question('exam-car', '从完整问句听出物品', '听一听，正在问哪件东西？', ['car', 'house', 'coat', 'watch'], 'car', '再听一次，注意句子末尾的物品名。', '', { audioText: ask('car'), optionImages: pictureOptions }),
       revised('exam-attention', '按话轮区分回应招呼和确认', '男士：Excuse me!\n女士：___\n男士：Is this your handbag?\n女士先怎样回应招呼？', ['Yes?', 'Yes, it is.', 'Thank you very much.'], 'Yes?', '这时还没有问物品归属。Yes? 回应招呼；Yes, it is. 才用于肯定确认。', '男士刚刚叫住她，还没问手提包。'),
-      revised('exam-repeat-question', '根据请求重复继续对话', '男士：Is this your handbag?\n女士：Pardon?\n男士接下来应该怎样说？', ['Is this your handbag?', 'Yes, it is.', 'Thank you very much.'], 'Is this your handbag?', '女士请男士再说一遍，所以男士重复刚才的问句。不能替女士确认归属。', 'Pardon? 是请刚才说话的人再说一遍。'),
       revised('exam-confirm-thank', '组合确认与感谢', '同学把书送回来，问“Is this your book?”。书确实是你的。你先确认，再感谢，怎样说？', ['Yes, it is. Thank you very much.', 'Yes? Pardon?', 'Is this your book? Thank you very much.'], 'Yes, it is. Thank you very much.', '先用 Yes, it is. 确认书是自己的，再用 Thank you very much. 感谢同学。', '你是回答的人：先确认，再道谢。')
     ]
   };
@@ -92,8 +88,8 @@
     // Chapter IDs remain stable when the recommended learning order changes.
     { id: 'l2', title: '身边的小物品', activities: [['words', '物品小图鉴', 'cards'], ['listen', '听音寻宝', 'audio']], required: ['listen'] },
     { id: 'l1', title: '手提包的故事', activities: [['text', '相遇小剧场', 'book'], ['roles', '故事小侦探', 'people']], required: ['text', 'roles'] },
-    { id: 'l3', title: '开口有礼貌', activities: [['phrases', '礼貌小锦囊', 'speech'], ['manners', '回应小帮手', 'heart']], required: ['manners'] },
-    { id: 'l4', title: '问句小工坊', activities: [['ask', '看图问一问', 'question'], ['trans', '词块拼装台', 'order']], required: ['ask', 'trans'] },
+    { id: 'l3', title: '开口有礼貌', activities: [['phrases', '礼貌小锦囊', 'speech'], ['manners', '帮忙还手提包', 'give']], required: ['manners'] },
+    { id: 'l4', title: '问句小工坊', activities: [['ask', '找对物品', 'question'], ['trans', '词块拼装台', 'order']], required: ['ask', 'trans'] },
     { id: 'l5', title: '小帮手出发', activities: [['exam', '礼貌小挑战', 'star'], ['certificate', '我的单元证书', 'star']], required: ['exam'] }
   ];
   const expressionMeanings = {
@@ -116,7 +112,7 @@
     }));
   }
   const definition = {
-    id: 'unit1-2', version: 1, title: '礼貌小帮手', path: '/unit1-2/', start: 'learn/words',
+    id: 'unit1-2', version: 1, experienceVersion: 'scene-1', title: '礼貌小帮手', path: '/unit1-2/', start: 'learn/words',
     progress: { learningKey: 'canran:unit1-2:learning:v1' },
     learning: { WORDS, PHRASES, SENTENCE_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK }, objects, stages, questions
   };

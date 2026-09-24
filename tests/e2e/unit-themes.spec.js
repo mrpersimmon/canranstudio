@@ -82,7 +82,7 @@ for (const [unit, answer] of [['unit1-2', 'handbag'], ['unit49-50', 'butcher']])
 }
 
 for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
-  test(`${unit} ${width} 像素：人物在对白两侧，翻译和重听不移动操作区，图鉴与听辨可操作`, async ({ page }) => {
+  test(`${unit} ${width} 像素：人物与对白不遮挡，翻译和重听不移动操作区，图鉴与听辨可操作`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.addInitScript(() => {
@@ -101,8 +101,13 @@ for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
     const people = story.locator('.char,.dialogue-actor');
     const left = await people.first().boundingBox(), right = await people.last().boundingBox();
     const log = await story.getByRole('log', { name: '课文对话', exact: true }).boundingBox();
-    expect.soft(left.x + left.width).toBeLessThanOrEqual(log.x);
-    expect.soft(right.x).toBeGreaterThanOrEqual(log.x + log.width);
+    if (unit === 'unit1-2' && width <= 600) {
+      expect.soft(log.y + log.height).toBeLessThanOrEqual(Math.min(left.y, right.y));
+      expect.soft(left.x + left.width).toBeLessThanOrEqual(right.x);
+    } else {
+      expect.soft(left.x + left.width).toBeLessThanOrEqual(log.x);
+      expect.soft(right.x).toBeGreaterThanOrEqual(log.x + log.width);
+    }
     const position = () => story.locator('.stage-ctrl').evaluate(el => el.getBoundingClientRect().top + scrollY);
     const before = await position();
     await story.getByRole('button', { name: '看中文', exact: true }).last().click();
