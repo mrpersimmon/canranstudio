@@ -1,0 +1,42 @@
+{
+  "commit": "00e02d6932f84a441265fe08fb41289a669cc6a9",
+  "browser": "151.0.7922.34",
+  "stats": {
+    "startTime": "2026-09-24T15:15:27.380Z",
+    "duration": 247561.70799999998,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "scenarios": [
+    {
+      "title": "正式首页完整加载、新品牌和全部课程导航",
+      "passed": true,
+      "durationsMs": [
+        68751
+      ]
+    },
+    {
+      "title": "正式配音课程原生录音、完整答题与证书",
+      "passed": true,
+      "durationsMs": [
+        112393
+      ]
+    },
+    {
+      "title": "正式无配音课程断网完成全部活动并保存证书",
+      "passed": true,
+      "durationsMs": [
+        36079
+      ]
+    },
+    {
+      "title": "正式缓存复访后关闭浏览器，重启且网络不可达仍恢复词卡",
+      "passed": true,
+      "durationsMs": [
+        29581
+      ]
+    }
+  ]
+}

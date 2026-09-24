@@ -1,0 +1,15 @@
+{
+  "commit": "00e02d6932f84a441265fe08fb41289a669cc6a9",
+  "status": "passed",
+  "createdAt": "2026-09-24T15:12:30.986187+00:00",
+  "unitChecks": 93,
+  "browserCases": 955,
+  "firstComplementPassed": 684,
+  "initialFailuresRechecked": 40,
+  "finalScopedBrowserCases": 253,
+  "reuseBoundary": "Only a no-script fallback changed after the first run; all changed browser checks and cache scenarios reran. Learning runtime and media unchanged.",
+  "releaseRuleChecks": 73,
+  "artifactFiles": 3836,
+  "remoteBranchMatches": true,
+  "remoteCI": "recorded separately"
+}

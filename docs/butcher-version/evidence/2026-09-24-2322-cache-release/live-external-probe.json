@@ -1,0 +1,38 @@
+{
+  "baseUrl": "https://www.canranstudio.cn/lesson/",
+  "commit": "00e02d6932f84a441265fe08fb41289a669cc6a9",
+  "checkedAtUTC": "2026-09-24T15:31:05.389Z",
+  "transport": "External HTTPS using public DNS",
+  "files": [
+    {
+      "path": "release-manifest.json",
+      "status": 200,
+      "sha256": "f1938ce94291ae6a5c9dbd6be7e187d0ec37a3cd3c73e77a35df5b2148e583b7",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "sha256": "0723199170e7b2d4289622241023f10e7e0a62aab0da453ed6f34f1be61c6145",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "course-index.json",
+      "status": 200,
+      "sha256": "372aa09a9b9b8e049e810febbed9283cfb7eb29f9478d319963a2a5ac106c578",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "core/subpath-worker.js",
+      "status": 200,
+      "sha256": "9c4af1ea3603252ac6b7c259bfc616b30ceb56071f3e0f55748b9e076cce9053",
+      "cacheControl": "no-cache"
+    },
+    {
+      "path": "resources/00a2ffe473500081215c2d41dd96d836c2e41385c4dd20a6f6c4f646396dc55c/hot.svg",
+      "status": 200,
+      "sha256": "00a2ffe473500081215c2d41dd96d836c2e41385c4dd20a6f6c4f646396dc55c",
+      "cacheControl": "public, max-age=31536000, immutable"
+    }
+  ]
+}
