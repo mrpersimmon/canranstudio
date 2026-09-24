@@ -110,6 +110,7 @@ for(const width of [320,768,1280])test(`${width} 宽度八个非听辨活动仅�
 test('词块题用线索后仍需手动拼装，记录提示后完成，下一题和重练清空线索',async({page})=>{
   await prepare(page);await page.goto('/unit1-2/#learn/trans');
   const stage=page.locator('.stage-trans'),{hint,check}=await bulbLayout(stage);
+  await expect(stage.getByRole('progressbar')).toHaveAttribute('aria-valuemax','2');
   await hint.click();await page.reload();await expect(hint).toHaveAttribute('aria-expanded','true');
   const bank=stage.getByRole('group',{name:'待选词块',exact:true});
   await expect(stage.getByRole('group',{name:'已选词块',exact:true}).getByRole('button')).toHaveCount(0);
@@ -124,9 +125,11 @@ test('词块题用线索后仍需手动拼装，记录提示后完成，下一�
   await stage.getByRole('button',{name:'下一题',exact:true}).click();
   await expect(hint).toHaveAttribute('aria-expanded','false');await expect(check).toBeDisabled();
   for(const word of ['Yes,','it','is.'])await bank.getByRole('button',{name:word,exact:true}).click();
-  await check.click();await stage.getByRole('button',{name:'下一题',exact:true}).click();
-  for(const word of ['Thank','you','very','much.'])await bank.getByRole('button',{name:word,exact:true}).click();
-  await check.click();await stage.getByRole('button',{name:'完成这一站',exact:true}).click();
+  await check.click();await expect(stage.getByRole('status')).toHaveText('答对了！');
+  await expect(stage.getByRole('progressbar')).toHaveAttribute('aria-valuenow','2');
+  await expect(stage.getByRole('button',{name:'下一题',exact:true})).toHaveCount(0);
+  await expect(stage.getByRole('button',{name:'再练一轮',exact:true})).toHaveCount(0);
+  await stage.getByRole('button',{name:'完成这一站',exact:true}).click();
   await expect(hint).toHaveCount(0);
   await stage.getByRole('button',{name:'再练一轮',exact:true}).click();
   await expect(hint).toBeEnabled();await expect(hint).toHaveAttribute('aria-expanded','false');await expect(check).toBeDisabled();

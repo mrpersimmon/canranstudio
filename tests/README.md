@@ -63,7 +63,7 @@ npm run test:e2e -- tests/e2e/audio-lifecycle.spec.js
 
 当前分支的课程导航检查用 `butcher-navigation.spec.js`，覆盖组合单元入口、继续学习、旧地址、触屏、键盘与进度隔离；组合单元完整流程用 `unit49-50.spec.js`。旧城区地图的界面专属检查已随设计替换归档在 `tests/archive/atlas-2026-09-19/`，现行路由、进度与设备检查仍保留运行。
 
-Lesson 1–2 的检查用 `npx playwright test tests/e2e/unit1-2`：覆盖教材七句、当前样板全部 22 题、词卡、38 个真实录音、重试、刷新、窄屏、证书与导航隔离。课件功能只走浏览器行为；语音合成质量、教师内容验收与儿童试用另行记录。证书共享修改时，连同 `unit49-50-certificate.spec.js` 回归；导航与子目录修改时，连同 `butcher-navigation.spec.js` 和 `lesson-deployment.spec.js` 回归。
+Lesson 1–2 的检查用 `npx playwright test tests/e2e/unit1-2`：覆盖教材七句、当前样板全部 22 题、词卡、38 个真实录音、重试、刷新、窄屏、证书与导航隔离。题量或提示行为调整时，连同 `l49-v18.spec.js` 回归；这份历史文件也包含 Lesson 1–2 的提示、末题确认和重练场景，不能仅按文件名前缀选择检查。课件功能只走浏览器行为；语音合成质量、教师内容验收与儿童试用另行记录。证书共享修改时，连同 `unit49-50-certificate.spec.js` 回归；导航与子目录修改时，连同 `butcher-navigation.spec.js` 和 `lesson-deployment.spec.js` 回归。
 
 Lesson 3–4 的检查用 `npx playwright test tests/e2e/unit3-4`：覆盖 12 句课文、全部 27 题的真实流程、63 个录音原生结束、失败重试与历史点读、词卡音标、暂停与刷新、窄屏、证书及练习纸。`unit3-4-reply.spec.js` 另验接力四题的不同判断、旧十题不代答新题、保留其他活动记录；旧版本通过页面作答建立进度。预期来自教材和独立题稿；导航改动连同原两单元入口检查。听音回调观察不替换真实播放器，下载 PNG 与打印 PDF 仍需目视复看。
 
