@@ -34,7 +34,14 @@ function entryHtml(source, basePath, course, brandImage) {
   html = html.replace(/<html\b/i, '<html data-course-preparing');
   const failed = "document.getElementById('courseLoadingStatus').textContent='还没准备好，请刷新后再试。';document.getElementById('courseLoadingRetry').hidden=false;document.getElementById('courseLoadingRetry').onclick=function(){location.reload()}";
   html = html.replace(/<head>/i, `<head><style id="courseLoaderStyle">${LOADER_CSS}</style><script defer src="${basePath}core/course-cache.js" onerror="${failed}"></script><script defer src="${basePath}core/course-loader.js" data-course="${course.id}" data-base="${basePath}" onerror="${failed}"></script>`);
-  return html.replace(/(<body\b[^>]*>)/i, '$1' + loaderMarkup(basePath, course, brandImage));
+  // Keep real text navigation available when scripting is disabled. The normal
+  // page stays gated, so this fallback cannot expose a partly loaded picture.
+  const fallback = course.id === 'home'
+    ? (source.match(/<main\b[^>]*>[\s\S]*?<\/main>/i)?.[0] || '')
+      .replace(/<img\b[^>]*>/gi, '').replace(/\s+id="[^"]*"/g, '')
+    : `<h1>${course.title.replace(/[<>&"]/g, '')}</h1><p>请开启浏览器的 JavaScript 后再进入课程。</p><a href="${basePath}">返回课程</a>`;
+  const noScript = `<noscript id="courseNoScript"><style>#courseLoader{display:none!important}html[data-course-preparing] body>#courseNoScript{display:block!important;font:18px/1.6 system-ui,sans-serif;padding:24px;color:#4b3428;background:#fcf8ef}noscript a{display:inline-block;padding:12px;color:inherit}noscript section{margin:24px 0}noscript [hidden]{display:none!important}</style>${fallback}</noscript>`;
+  return html.replace(/(<body\b[^>]*>)/i, '$1' + loaderMarkup(basePath, course, brandImage) + noScript);
 }
 
 async function createCoursePackages({ root, basePath = '/' }) {

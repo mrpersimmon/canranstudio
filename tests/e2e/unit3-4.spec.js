@@ -71,7 +71,7 @@ test('真实听完 12 句、完成 27 题后领奖，刷新、暂停、末题、
 
 test('子目录入口与三单元记录独立，封面同地址继续会重新定位', async ({ page }) => {
   const outside = [], failed = [];
-  page.on('request', req => { const u = new URL(req.url()); if (u.origin === 'http://127.0.0.1:4173' && !u.pathname.startsWith('/lesson/')) outside.push(u.pathname); });
+  page.on('request', req => { const u = new URL(req.url()); if (u.protocol === 'http:' && u.origin === 'http://127.0.0.1:4173' && !u.pathname.startsWith('/lesson/')) outside.push(u.pathname); });
   page.on('response', res => { if (res.status() >= 400) failed.push(res.url()); });
   await page.goto('/lesson/');
   await page.getByRole('link', { name: '开始学习：雨伞认领小帮手', exact: true }).click();
@@ -89,7 +89,7 @@ test('子目录入口与三单元记录独立，封面同地址继续会重新�
 
 test('重开包含新单元，取消保留三单元记录，确认只清除当前路径版本', async ({ page }) => {
   await page.goto('/unit3-4/#learn/reply');
-  for (const route of ['unit1-2/#learn/ask', 'unit3-4/#learn/reply', 'unit49-50/#learn/give']) await page.goto('/lesson/' + route);
+  for (const route of ['unit1-2/#learn/ask', 'unit3-4/#learn/reply', 'unit49-50/#learn/give']) { await page.goto('/lesson/' + route); await expect(page.locator('.stage-' + route.split('#learn/')[1])).toBeVisible(); }
   await page.goto('/lesson/');
   const records = () => page.evaluate(() => Object.fromEntries(Object.entries(localStorage).filter(([key]) => key.includes('learning:'))));
   const before = await records();

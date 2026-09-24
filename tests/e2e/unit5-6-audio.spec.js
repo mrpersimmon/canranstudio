@@ -40,6 +40,9 @@ test('80 段录音由真实页面逐一播完，完整原文、词卡、四组�
   const paths=await page.evaluate(()=>[...new Set(window.nativePlays.filter(x=>x.ended&&x.src.includes('/unit5-6/audio/')).map(x=>new URL(x.src).pathname))]);expect(paths).toHaveLength(80);expect(failed).toEqual([]);
 });
 
+test.describe(() => {
+// Fault injection covers an uncached browser; cached replay is verified separately.
+test.use({ serviceWorkers: 'block' });
 test('子目录音频失败后能重听，未听完不能提交，答对答错沿用反馈音效',async({page})=>{
   test.setTimeout(60000);await observe(page);let fail=true;
   await page.route('**/unit5-6/audio/l05-w07.mp3',route=>fail?route.abort():route.continue());
@@ -53,6 +56,7 @@ test('子目录音频失败后能重听，未听完不能提交，答对答错�
   await heard(page,room.getByRole('button',{name:'检查答案',exact:true}),'/lesson/assets/feedback/duolingo-correct.mp3');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');
   expect(await page.evaluate(()=>window.nativePlays.every(x=>new URL(x.src).pathname.startsWith('/lesson/')))).toBe(true);
+});
 });
 
 test('重听旧句和切换章节不会替未听完的新句记完成',async({page})=>{

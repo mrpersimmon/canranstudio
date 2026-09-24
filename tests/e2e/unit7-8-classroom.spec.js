@@ -1,4 +1,5 @@
 'use strict';
+const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const { DIALOGUE, SPEAKERS, ANSWERS, completeActivity, completeUnit78 } = require('../support/unit7-8-flow');
@@ -7,7 +8,7 @@ test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 async function blockVoices(page) {
   const requests = [];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/, route => {
-    if (new URL(route.request().url()).pathname.includes('/assets/feedback/')) return route.continue();
+    if (isFeedbackAudio(route.request().url())) return route.continue();
     requests.push(route.request().url()); return route.abort();
   });
   return requests;
@@ -135,7 +136,7 @@ test('lesson 路径全部声音不可用时仍能完成27题、浏览原文并�
   const voices = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.route(/\.(mp3|wav|ogg)(\?|$)/, route => {
-    if (!new URL(route.request().url()).pathname.includes('/assets/feedback/')) voices.push(route.request().url());
+    if (!isFeedbackAudio(route.request().url())) voices.push(route.request().url());
     return route.abort();
   });
   await page.goto('/lesson/unit7-8/#learn/certificate');

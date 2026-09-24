@@ -49,6 +49,9 @@ test('63 段录音逐一从页面原生播完，词卡、12 句原文及完整�
   expect(paths).toHaveLength(63); expect(failed).toEqual([]);
 });
 
+test.describe(() => {
+// Fault injection covers an uncached browser; cached replay is verified separately.
+test.use({ serviceWorkers: 'block' });
 test('子目录听辨失败可重试，未真实听完不解锁，错答重试与反馈声保持一致', async ({ page }) => {
   test.setTimeout(60000); await observeNativeAudio(page);
   let fail = true; await page.route('**/unit3-4/audio/l03-w01.mp3', route => fail ? route.abort() : route.continue());
@@ -68,6 +71,7 @@ test('子目录听辨失败可重试，未真实听完不解锁，错答重试�
   await heard(page, room.getByRole('button', { name: '检查答案', exact: true }), '/lesson/assets/feedback/duolingo-correct.mp3');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
   expect(await page.evaluate(() => window.nativePlays.every(item => new URL(item.src).pathname.startsWith('/lesson/')))).toBe(true);
+});
 });
 
 test('课文旧句重听及离开时的旧回调不能替新句完成', async ({ page }) => {

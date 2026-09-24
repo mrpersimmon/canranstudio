@@ -1,4 +1,5 @@
 'use strict';
+const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const units = [
@@ -13,7 +14,7 @@ const vocabularyAnswers = {
 async function blockVoices(page, all = false) {
   const voices = [];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/, route => {
-    const feedback = new URL(route.request().url()).pathname.includes('/assets/feedback/');
+    const feedback = isFeedbackAudio(route.request().url());
     if (!feedback) voices.push(route.request().url());
     return !feedback || all ? route.abort() : route.continue();
   });

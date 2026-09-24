@@ -46,3 +46,18 @@ for (const width of [320, 390, 768, 1280]) test('加载失败界面在 ' + width
   await retry.focus(); await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
 });
+
+test('关闭脚本时可看课程导航，课程入口给出明确恢复方式', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const page = await context.newPage();
+    await page.goto('http://127.0.0.1:4173/lesson/unit1-2/');
+    await expect(page.getByText('请开启浏览器的 JavaScript 后再进入课程。', { exact: true })).toBeVisible();
+    await expect(page.locator('#courseLoader')).not.toBeVisible();
+    await page.getByRole('link', { name: '返回课程', exact: true }).click();
+    await expect(page.getByRole('link', { name: '开始学习：礼貌小帮手', exact: true })).toHaveAttribute('href', '/lesson/unit1-2/#learn/words');
+    await page.locator('noscript').getByText('单课练习', { exact: true }).click();
+    await expect(page.locator('noscript main a')).toHaveCount(23);
+    await expect(page.locator('img:visible')).toHaveCount(0);
+  } finally { await context.close(); }
+});

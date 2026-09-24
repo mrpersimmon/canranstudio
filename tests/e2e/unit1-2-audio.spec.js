@@ -52,6 +52,10 @@ test('38 个录音均通过真实控件播放，词卡、两位角色与问句�
   expect(paths).toHaveLength(38);expect(failed).toEqual([]);
 });
 
+test.describe(() => {
+// A cached recording should survive a network failure; test the uncached
+// browser fallback here, and worker/offline playback in course-cache tests.
+test.use({ serviceWorkers: 'block' });
 test('子目录真实听题与正误音效可播放，音频失败不会启用检查，恢复后可以重试',async({page})=>{
   test.setTimeout(60000);await nativeAudio(page);
   let fail=true;await page.route('**/unit1-2/audio/l01-w07.mp3',route=>fail?route.abort():route.continue());
@@ -73,4 +77,6 @@ test('子目录真实听题与正误音效可播放，音频失败不会启用�
   await heard(page,room.getByRole('button',{name:'检查答案',exact:true}),'/lesson/assets/feedback/duolingo-correct.mp3');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');
   expect(await page.evaluate(()=>window.nativePlays.every(item=>new URL(item.src).pathname.startsWith('/lesson/')))).toBe(true);
+});
+
 });

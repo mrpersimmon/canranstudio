@@ -1,8 +1,9 @@
 'use strict';
+const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 for(const base of ['', '/lesson'])test(`unit11-12 词卡翻面、示范阅读和刷新都不请求英语配音 ${base||'/'}`,async({page})=>{
- const voices=[];await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{if(!new URL(route.request().url()).pathname.includes('/assets/feedback/'))voices.push(route.request().url());return route.abort();});
+ const voices=[];await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{if(!isFeedbackAudio(route.request().url()))voices.push(route.request().url());return route.abort();});
  await page.goto(base+'/unit11-12/#learn/words');const room=page.locator('.stage-words');
  for(let i=0;i<18;i+=6){
   for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeHidden();await expect(card.locator('.word-phonetic')).toBeVisible();}

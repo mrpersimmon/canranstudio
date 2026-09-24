@@ -1,4 +1,5 @@
 'use strict';
+const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
 const {completeActivity,completeStory,completeUnit1920}=require('../support/unit19-20-flow');
 const fs=require('node:fs/promises');
@@ -20,7 +21,7 @@ test('挑战错答与提示分别记账，暂停刷新保留选择，不提前�
 test('正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生',async({page})=>{
   const voices=[];let speechCalls=0;await page.exposeFunction('noteEnglishSpeech',()=>speechCalls++);
   await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{
-    if(!route.request().url().includes('/assets/feedback/')){voices.push(route.request().url());return route.abort();}
+    if(!isFeedbackAudio(route.request().url())){voices.push(route.request().url());return route.abort();}
     return route.continue();
   });
   await page.addInitScript(()=>{
@@ -41,7 +42,7 @@ test('正误和完成反馈音实际播放结束，任何英语声音请求和�
 
 test('lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用',async({page})=>{
   test.setTimeout(45000);const voices=[];
-  await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{if(!route.request().url().includes('/assets/feedback/'))voices.push(route.request().url());return route.abort();});
+  await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{if(!isFeedbackAudio(route.request().url()))voices.push(route.request().url());return route.abort();});
   await completeUnit1920(page,'/lesson');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'冰淇淋休息站纪念',exact:true})).toBeVisible();await page.keyboard.press('Escape');await page.reload();await expect(page.locator('#starCount')).toHaveText('15');
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await expect(page).toHaveURL(/\/lesson\/$/);

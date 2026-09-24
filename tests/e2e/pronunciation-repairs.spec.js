@@ -51,18 +51,21 @@ function control(page, item, advance = false) {
   return page.locator(item.kind === 'word' ? '.stage-words' : item.kind === 'model' ? '.stage-models' : '.stage-text').getByRole('button', { name: item.text, exact: true });
 }
 async function verifiedPlayback(page, item, button, base, testInfo) {
-  const stem = item.oldPath.replace(/\.mp3$/, '');
-  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname.startsWith(base + '/' + stem));
   const before = await page.evaluate(() => window.pronunciationPlays.length);
   await button.click();
-  const response = await responsePromise;
-  // The fixture was frozen from the independently diagnosed replacement. It is
-  // intentionally not derived from the course manifest being tested.
-  expect(new URL(response.url()).pathname).toBe(base + '/' + item.path);
-  const bytes = await response.body();
+  const expectedPath = base + '/' + item.path;
+  await expect.poll(() => page.evaluate(({ before, path }) => window.pronunciationPlays.slice(before).some(event => event.ended && event.rate === 1 && new URL(event.src).pathname === path), { before, path: expectedPath }), { timeout: 15000 }).toBe(true);
+  // Replaying cached audio need not emit a network response. Read the file at
+  // the observed native player's URL through the same browser/worker boundary.
+  const bytes = Buffer.from(await page.evaluate(async ({ before, path }) => {
+    const played = window.pronunciationPlays.slice(before).find(event => event.ended && new URL(event.src).pathname === path);
+    const response = await fetch(played.src);
+    if (!response.ok) throw new Error('Played audio is unavailable');
+    return [...new Uint8Array(await response.arrayBuffer())];
+  }, { before, path: expectedPath }));
+  // The fingerprint comes from the independent repair fixture, not the package.
   expect(createHash('sha256').update(bytes).digest('hex')).toBe(item.sha256);
   await fs.writeFile(testInfo.outputPath(item.key + '.mp3'), bytes);
-  await expect.poll(() => page.evaluate(({ before, path }) => window.pronunciationPlays.slice(before).some(event => event.ended && event.rate === 1 && new URL(event.src).pathname === path), { before, path: base + '/' + item.path }), { timeout: 15000 }).toBe(true);
 }
 for (const base of ['', '/lesson']) {
   for (const item of repairs) test(`${item.course === 'unit11-12' ? '历史' : ''}修订录音 ${item.issue}：实际文件、重听和刷新 ${base || '/'}`, async ({ page }, testInfo) => {
@@ -86,6 +89,10 @@ for (const base of ['', '/lesson']) {
     await heard(page, word, base + '/soundmark/audio/loose.mp3');
   });
 }
+test.describe(() => {
+// Network-failure fallback is exercised without an already cached worker file.
+// Normal cached playback is covered above and by the course-cache tests.
+test.use({ serviceWorkers: 'block' });
 for (const item of repairs.filter(item => item.kind !== 'dialogue')) test(`${item.course === 'unit11-12' ? '历史' : ''}修订录音失败后仍可重试 ${item.issue}`, async ({ page }, testInfo) => {
   await observe(page); const base = '/lesson';
   const button = await prepare(page, item, base);
@@ -111,6 +118,8 @@ test('课文新录音失败不推进，重试后可继续，旧句重听不改�
   await heard(page, next, base + '/unit5-6/audio/l05-d13.mp3');
   await verifiedPlayback(page, item, control(page, item), base, testInfo);
   await expect(page.locator('.stage-text .bubble-row')).toHaveCount(13);
+});
+
 });
 
 for (const completed of [false, true]) test(`只更换录音时保留原课文${completed ? '完成记录' : '当前句'}与其他答题进度`, async ({ page }, testInfo) => {

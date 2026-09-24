@@ -6,7 +6,7 @@ for(const base of ['/','/lesson/']) {
     const failed=[],outside=[],errors=[];
     page.on('pageerror',error=>errors.push(error.message));
     page.on('response',response=>{if(response.status()>=400)failed.push(response.url());});
-    page.on('request',request=>{const url=new URL(request.url());if(base==='/lesson/'&&url.origin==='http://127.0.0.1:4173'&&!url.pathname.startsWith(base))outside.push(url.pathname);});
+    page.on('request',request=>{const url=new URL(request.url());if(base==='/lesson/'&&url.protocol==='http:'&&url.origin==='http://127.0.0.1:4173'&&!url.pathname.startsWith(base))outside.push(url.pathname);});
     await page.goto(base);
     const beginner=page.getByRole('region',{name:'礼貌小帮手',exact:true});
     await beginner.getByRole('link',{name:'开始学习：礼貌小帮手',exact:true}).click();
