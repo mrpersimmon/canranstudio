@@ -3,6 +3,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { normalizeBasePath } = require('./public-base-path');
+const { LESSON_HEADER_CONTRACT } = require('./http-header-contract');
 
 const digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 async function verifySubpath({ baseUrl, root = path.resolve(__dirname, '../dist'), concurrency = 3 }) {
@@ -30,6 +31,12 @@ async function verifySubpath({ baseUrl, root = path.resolve(__dirname, '../dist'
   }
   function checkHeaders(response, file) {
     if (response.headers.get('x-content-type-options') !== 'nosniff' || response.headers.get('x-frame-options') !== 'DENY' || !response.headers.get('strict-transport-security')?.includes('max-age=31536000') || !response.headers.get('content-security-policy')?.includes("object-src 'none'")) throw Error('Missing security headers: ' + file);
+    if (manifest.files['course-index.json']) {
+      if (response.headers.get('content-security-policy') !== LESSON_HEADER_CONTRACT['content-security-policy']) throw Error('Course cache CSP differs: ' + file);
+      const immutable = /^(?:resources|course-packages)\//.test(file);
+      if (response.headers.get('cache-control') !== (immutable ? 'public, max-age=31536000, immutable' : 'no-cache')) throw Error('Course cache header differs: ' + file);
+      if (file === 'core/subpath-worker.js' && response.headers.get('service-worker-allowed') !== base.pathname) throw Error('Wrong course worker scope');
+    }
   }
   const remote = await request('release-manifest.json');
   if (remote.status !== 200 || !Buffer.from(await remote.arrayBuffer()).equals(localBytes)) throw Error('Published manifest differs from this artifact');

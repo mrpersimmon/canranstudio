@@ -13,4 +13,9 @@ const LANDMARK_REVIEW_HEADER_CONTRACT = Object.freeze({
   'content-security-policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
 });
 
-module.exports = { HTTP_HEADER_CONTRACT, LANDMARK_REVIEW_HEADER_CONTRACT };
+const LESSON_HEADER_CONTRACT = Object.freeze({
+  ...HTTP_HEADER_CONTRACT,
+  'content-security-policy': HTTP_HEADER_CONTRACT['content-security-policy'].replace("connect-src 'none'", "connect-src 'self'; worker-src 'self'")
+});
+
+module.exports = { HTTP_HEADER_CONTRACT, LANDMARK_REVIEW_HEADER_CONTRACT, LESSON_HEADER_CONTRACT };

@@ -12,6 +12,7 @@ function tasks(root, files) {
     workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: runtimeInputs },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
+    'browser-course-cache': browser(['tests/e2e/course-loading.spec.js', 'tests/e2e/course-cache-updates.spec.js', 'tests/e2e/course-cache-journeys.spec.js', 'tests/e2e/lesson-deployment.spec.js']),
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
     'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
@@ -42,6 +43,7 @@ function select(files) {
   if (code.some(file => /^tests\/e2e\/.*\.spec\.js$/.test(file))) selected.push('browser-changed');
   const runtime = code.filter(file => !file.startsWith('tests/'));
   if (runtime.length) selected.push('browser-smoke');
+  if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-course-cache');
   if (runtime.some(file => /audio|feedback|\.mp3$/.test(file))) selected.push('browser-audio');
   if (code.some(file => /^(unit(?:1-2|5-6|7-8|11-12)\/|soundmark\/|core\/audio-player\.js|scripts\/media\/|tests\/fixtures\/pronunciation)/.test(file))) selected.push('browser-pronunciation');
   if (code.some(file => /^(unit7-8\/|tests\/fixtures\/unit7-8-voiced-before\/|tests\/support\/unit7-8-flow\.js)/.test(file))) selected.push('browser-unit78');

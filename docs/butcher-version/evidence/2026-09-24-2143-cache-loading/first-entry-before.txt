@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:26227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/course-loading.spec.js:4:1 › 整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节
+  1) tests/e2e/course-loading.spec.js:4:1 › 整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节 ─────────────────────────
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  getByRole('heading', { name: '物品小图鉴', exact: true })
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: '物品小图鉴', exact: true })
+        14 × locator resolved to <h3 class="">物品小图鉴</h3>
+           - unexpected value "visible"
+
+
+       8 |   try {
+       9 |     await page.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
+    > 10 |     await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).not.toBeVisible();
+         |                                                                                 ^
+      11 |     await expect(page.getByRole('status', { name: '课程准备状态', exact: true })).toContainText('准备');
+      12 |   } finally {
+      13 |     release();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/course-loading.spec.js:10:81
+
+    Error Context: test-results/course-loading-整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/course-loading-整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/course-loading-整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/course-loading.spec.js:4:1 › 整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节 ──────────────────────────

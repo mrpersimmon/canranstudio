@@ -6,6 +6,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "preview:cached": "node scripts/preview-courses.js",
     "build:static": "node scripts/build-static.js",
     "sync:home-fallback": "node scripts/home-course-fallback.js",
     "verify:live": "node scripts/verify-live.js https://www.canranstudio.cn",

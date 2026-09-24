@@ -9,6 +9,8 @@ function normalizeBasePath(value = '/') {
 
 function relocateSource(source, relative, basePath = '/') {
   normalizeBasePath(basePath);
+  // Scoped infrastructure derives URLs and storage names from its explicit base.
+  if (/^core\/course-(?:cache|loader|worker)\.js$/.test(relative)) return source;
   if (basePath === '/' || !/\.(?:html|js|css|json|svg)$/.test(relative)) return source;
   const prefix = basePath.slice(0, -1);
   let result = source

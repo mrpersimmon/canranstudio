@@ -1292,7 +1292,7 @@ initializeLiveRegions();
 renderStars();
 updateCourseSectionDots();
 /* ===== 底部 Tab 栏：禁用按钮提示（DOMContentLoaded：tabbar HTML 在本脚本之后） ===== */
-document.addEventListener('DOMContentLoaded',function(){
+function initializeCourseNav(){
 document.querySelectorAll('#coursenav .tab.disabled').forEach(function(el){
   el.addEventListener('click',function(){
     var t=document.getElementById('cnToast');if(!t)return;
@@ -1301,7 +1301,9 @@ document.querySelectorAll('#coursenav .tab.disabled').forEach(function(el){
     if(navigator.vibrate)navigator.vibrate(15);
   });
 });
-});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initializeCourseNav,{once:true});
+else initializeCourseNav();
 </script>
 <!-- ===== 底部 Tab 栏：上一课 / 我的课程 / 下一课 ===== -->
 <nav id="coursenav" aria-label="课程导航">

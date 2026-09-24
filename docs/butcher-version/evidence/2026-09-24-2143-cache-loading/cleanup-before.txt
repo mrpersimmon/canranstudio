@@ -1,0 +1,39 @@
+
+Running 1 test using 1 worker
+
+(node:27411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/course-loading.spec.js:4:1 › 清理课程资源保留学习位置、活动课程和官网缓存
+  1) tests/e2e/course-loading.spec.js:4:1 › 清理课程资源保留学习位置、活动课程和官网缓存 ─────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '清理课程资源', exact: true })
+
+
+      14 |   });
+      15 |   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
+    > 16 |   await page.getByRole('button', { name: '清理课程资源', exact: true }).click();
+         |                                                                   ^
+      17 |   await expect(page.getByText('已清理未使用的课程资源，学习记录已保留。', { exact: true })).toBeVisible();
+      18 |   expect(await page.evaluate(async () => (await (await caches.open('root-site-cache')).match('/root-site-file')).text())).toBe('official-site');
+      19 |   await context.setOffline(true);
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/course-loading.spec.js:16:67
+
+    Error Context: test-results/course-loading-清理课程资源保留学习位置、活动课程和官网缓存/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/course-loading-清理课程资源保留学习位置、活动课程和官网缓存/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/course-loading-清理课程资源保留学习位置、活动课程和官网缓存/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/course-loading.spec.js:4:1 › 清理课程资源保留学习位置、活动课程和官网缓存 ──────────────────────────────────

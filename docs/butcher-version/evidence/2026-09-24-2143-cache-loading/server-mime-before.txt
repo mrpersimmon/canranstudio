@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+(node:30309) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/course-loading.spec.js:4:1 › 接受服务器实际使用的 JavaScript 类型，同时拒绝伪装成脚本的 HTML
+  1) tests/e2e/course-loading.spec.js:4:1 › 接受服务器实际使用的 JavaScript 类型，同时拒绝伪装成脚本的 HTML ───────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })
+
+
+       8 |   });
+       9 |   await page.goto('/lesson/unit29-30/#learn/words');
+    > 10 |   await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
+         |                                                                                                  ^
+      11 | });
+      12 | test('清理课程资源保留学习位置、活动课程和官网缓存', async ({ page, context }) => {
+      13 |   await page.goto('/lesson/unit29-30/#learn/words');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/course-loading.spec.js:10:98
+
+    Error Context: test-results/course-loading-接受服务器实际使用的-JavaScript-类型，同时拒绝伪装成脚本的-HTML/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/course-loading-接受服务器实际使用的-JavaScript-类型，同时拒绝伪装成脚本的-HTML/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/course-loading-接受服务器实际使用的-JavaScript-类型，同时拒绝伪装成脚本的-HTML/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/course-loading.spec.js:4:1 › 接受服务器实际使用的 JavaScript 类型，同时拒绝伪装成脚本的 HTML ────────────────

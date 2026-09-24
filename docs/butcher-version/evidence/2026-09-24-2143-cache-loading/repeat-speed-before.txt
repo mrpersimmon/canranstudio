@@ -1,0 +1,49 @@
+
+Running 8 tests using 1 worker
+
+(node:28243) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] tests/e2e/course-cache-updates.spec.js:11:1 › 两个标签页同时准备同课，关掉一页后另一页仍能完整进入
+[2/8] tests/e2e/course-cache-updates.spec.js:27:1 › 已知撤回版本不会继续推进作答，新版失败时保留位置等待更新
+[3/8] tests/e2e/course-cache-updates.spec.js:45:1 › 缓存录音支持真实点播和断网分段读取，下载不增加听辨进度
+[4/8] tests/e2e/course-cache-updates.spec.js:65:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时
+  1) tests/e2e/course-cache-updates.spec.js:65:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时 ───────────────────────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 1500
+    Received:   3191
+
+      79 |   await testInfo.attach('warm-visits.json', { contentType: 'application/json', body: Buffer.from(JSON.stringify({ browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, samples, p95 })) });
+      80 |   expect(fetched).toEqual([]);
+    > 81 |   expect(p95).toBeLessThan(1500);
+         |               ^
+      82 | });
+      83 |
+      84 | async function revisedCourse(request, id = 'unit29-30') {
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/e2e/course-cache-updates.spec.js:81:15
+
+    Error Context: test-results/course-cache-updates-完整缓存-20-次复访恢复可操作位置并记录实际耗时/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/course-cache-updates-完整缓存-20-次复访恢复可操作位置并记录实际耗时/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/course-cache-updates-完整缓存-20-次复访恢复可操作位置并记录实际耗时/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:28314) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/8] tests/e2e/course-cache-updates.spec.js:98:1 › 普通更新后台准备，旧页不被改写，下一次进入使用完整新版且不重下未变文件
+[6/8] tests/e2e/course-cache-updates.spec.js:127:1 › 损坏一张已存图片，刷新只补齐该文件并保留词卡页
+[7/8] tests/e2e/course-cache-updates.spec.js:147:1 › 已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网
+[8/8] tests/e2e/course-cache-updates.spec.js:177:1 › 无配音课断网走完所有题型并保存证书，不请求英语配音
+  1 failed
+    tests/e2e/course-cache-updates.spec.js:65:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时 ────────────────────────
+  7 passed (55.2s)

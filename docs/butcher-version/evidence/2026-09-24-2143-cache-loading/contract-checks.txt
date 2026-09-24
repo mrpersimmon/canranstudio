@@ -1,0 +1,35 @@
+✔ Nginx contract defines the complete redirect-to-HTTPS policy (2.267125ms)
+✔ Nginx tokenizer keeps comment markers and delimiters inside quoted arguments (0.133333ms)
+✔ Nginx contract does not accept directives forged only in comments (0.937917ms)
+✔ Nginx contract does not accept active directive text hidden in set strings (1.175333ms)
+✔ Nginx contract rejects legal directives that alter redirect semantics (0.216458ms)
+✔ repository public runtime satisfies the static V1 boundary (57.871083ms)
+✔ indexing contract rejects redirects, noindex, and credential gates (0.541125ms)
+✔ runtime contract rejects application services, cookies, analytics, and hidden identity (0.137791ms)
+✔ public resources reject cross-origin runtime dependencies (0.283333ms)
+✔ every published course appears in the shared home catalog and authored release surfaces (5.293875ms)
+✔ README describes the course home and preserves the internal growth artwork contract (0.855917ms)
+✔ home directly links available courses without generating a second directory (2.613792ms)
+✔ a future shared-catalog course does not create a second homepage entrance (0.825834ms)
+✔ authored fallback guard recognizes browser-parsed course href variants (0.282375ms)
+✔ public HTML contains no third-party runtime asset URL (3.606208ms)
+✔ repository publication documentation contains no stale transport-risk ID (37.735791ms)
+✔ unchanged successful inputs reuse evidence without executing the command again (111.30975ms)
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (358.143875ms)
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (219.463625ms)
+✔ a source change during a successful command invalidates the run (132.10625ms)
+✔ missing required artifacts force a rerun and missing new outputs fail (187.583291ms)
+fatal: Needed a single revision
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (131.11ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (110.902125ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (57.756417ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (1.312208ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (131.448291ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1507.482

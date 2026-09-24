@@ -1,0 +1,73 @@
+
+Running 65 tests using 1 worker
+
+(node:30390) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit7-8 缓存后断网完成真实题型和证书
+[2/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit9-10 缓存后断网完成真实题型和证书
+[3/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit11-12 缓存后断网完成真实题型和证书
+[4/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit13-14 缓存后断网完成真实题型和证书
+[5/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit15-16 缓存后断网完成真实题型和证书
+[6/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit17-18 缓存后断网完成真实题型和证书
+[7/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit19-20 缓存后断网完成真实题型和证书
+[8/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit21-22 缓存后断网完成真实题型和证书
+[9/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit23-24 缓存后断网完成真实题型和证书
+[10/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit25-26 缓存后断网完成真实题型和证书
+[11/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit27-28 缓存后断网完成真实题型和证书
+[12/65] tests/e2e/course-cache-journeys.spec.js:7:3 › unit29-30 缓存后断网完成真实题型和证书
+[13/65] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 320 宽度可以看清并用键盘重试
+[14/65] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 390 宽度可以看清并用键盘重试
+[15/65] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 768 宽度可以看清并用键盘重试
+[16/65] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 1280 宽度可以看清并用键盘重试
+[17/65] tests/e2e/course-cache-updates.spec.js:11:1 › 固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时
+[18/65] tests/e2e/course-cache-updates.spec.js:27:1 › 两个标签页同时准备同课，关掉一页后另一页仍能完整进入
+[19/65] tests/e2e/course-cache-updates.spec.js:43:1 › 已知撤回版本不会继续推进作答，新版失败时保留位置等待更新
+[20/65] tests/e2e/course-cache-updates.spec.js:61:1 › 缓存录音支持真实点播和断网分段读取，下载不增加听辨进度
+[21/65] tests/e2e/course-cache-updates.spec.js:81:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时
+[22/65] tests/e2e/course-cache-updates.spec.js:115:1 › 普通更新后台准备，旧页不被改写，下一次进入使用完整新版且不重下未变文件
+[23/65] tests/e2e/course-cache-updates.spec.js:144:1 › 损坏一张已存图片，刷新只补齐该文件并保留词卡页
+[24/65] tests/e2e/course-cache-updates.spec.js:164:1 › 已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网
+[25/65] tests/e2e/course-cache-updates.spec.js:194:1 › 无配音课断网走完所有题型并保存证书，不请求英语配音
+[26/65] tests/e2e/course-loading.spec.js:4:1 › 服务器实际使用的 JavaScript 类型仍能完成准备
+[27/65] tests/e2e/course-loading.spec.js:12:1 › 清理课程资源保留学习位置、活动课程和官网缓存
+[28/65] tests/e2e/course-loading.spec.js:34:57 › 404 失败留在准备页，重试复用好文件后进入原章节
+[29/65] tests/e2e/course-loading.spec.js:34:57 › html 失败留在准备页，重试复用好文件后进入原章节
+[30/65] tests/e2e/course-loading.spec.js:34:57 › corrupt 失败留在准备页，重试复用好文件后进入原章节
+[31/65] tests/e2e/course-loading.spec.js:34:57 › font 失败留在准备页，重试复用好文件后进入原章节
+[32/65] tests/e2e/course-loading.spec.js:51:1 › 浏览器禁止保存资源仍能在本次会话断网换词卡，不假称永久保存
+[33/65] tests/e2e/course-loading.spec.js:69:27 › home 完整准备后显示原有课程，必需资源无缺项
+[34/65] tests/e2e/course-loading.spec.js:69:27 › unit1-2 完整准备后显示原有课程，必需资源无缺项
+[35/65] tests/e2e/course-loading.spec.js:69:27 › unit11-12 完整准备后显示原有课程，必需资源无缺项
+[36/65] tests/e2e/course-loading.spec.js:69:27 › unit13-14 完整准备后显示原有课程，必需资源无缺项
+[37/65] tests/e2e/course-loading.spec.js:69:27 › unit15-16 完整准备后显示原有课程，必需资源无缺项
+[38/65] tests/e2e/course-loading.spec.js:69:27 › unit17-18 完整准备后显示原有课程，必需资源无缺项
+[39/65] tests/e2e/course-loading.spec.js:69:27 › unit19-20 完整准备后显示原有课程，必需资源无缺项
+[40/65] tests/e2e/course-loading.spec.js:69:27 › unit21-22 完整准备后显示原有课程，必需资源无缺项
+[41/65] tests/e2e/course-loading.spec.js:69:27 › unit23-24 完整准备后显示原有课程，必需资源无缺项
+[42/65] tests/e2e/course-loading.spec.js:69:27 › unit25-26 完整准备后显示原有课程，必需资源无缺项
+[43/65] tests/e2e/course-loading.spec.js:69:27 › unit27-28 完整准备后显示原有课程，必需资源无缺项
+[44/65] tests/e2e/course-loading.spec.js:69:27 › unit29-30 完整准备后显示原有课程，必需资源无缺项
+[45/65] tests/e2e/course-loading.spec.js:69:27 › unit3-4 完整准备后显示原有课程，必需资源无缺项
+[46/65] tests/e2e/course-loading.spec.js:69:27 › unit49-50 完整准备后显示原有课程，必需资源无缺项
+[47/65] tests/e2e/course-loading.spec.js:69:27 › unit5-6 完整准备后显示原有课程，必需资源无缺项
+[48/65] tests/e2e/course-loading.spec.js:69:27 › unit7-8 完整准备后显示原有课程，必需资源无缺项
+[49/65] tests/e2e/course-loading.spec.js:69:27 › unit9-10 完整准备后显示原有课程，必需资源无缺项
+[50/65] tests/e2e/course-loading.spec.js:69:27 › lesson49 完整准备后显示原有课程，必需资源无缺项
+[51/65] tests/e2e/course-loading.spec.js:69:27 › lesson50 完整准备后显示原有课程，必需资源无缺项
+[52/65] tests/e2e/course-loading.spec.js:69:27 › lesson51 完整准备后显示原有课程，必需资源无缺项
+[53/65] tests/e2e/course-loading.spec.js:69:27 › lesson52 完整准备后显示原有课程，必需资源无缺项
+[54/65] tests/e2e/course-loading.spec.js:69:27 › lesson53 完整准备后显示原有课程，必需资源无缺项
+[55/65] tests/e2e/course-loading.spec.js:69:27 › lesson54 完整准备后显示原有课程，必需资源无缺项
+[56/65] tests/e2e/course-loading.spec.js:69:27 › soundmark 完整准备后显示原有课程，必需资源无缺项
+[57/65] tests/e2e/course-loading.spec.js:83:1 › 整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节
+[58/65] tests/e2e/course-loading.spec.js:102:1 › 准备过的无配音课断网刷新后恢复词卡位置，后续图片仍完整
+[59/65] tests/e2e/lesson-deployment.spec.js:19:3 › lesson49 点击词卡、听题与答对音效都在子目录真实播放
+[60/65] tests/e2e/lesson-deployment.spec.js:19:3 › unit49-50 点击词卡、听题与答对音效都在子目录真实播放
+[61/65] tests/e2e/lesson-deployment.spec.js:45:1 › lesson 子目录直接显示导航，组合单元和返回导航都留在子目录
+[62/65] tests/e2e/lesson-deployment.spec.js:64:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除
+[63/65] tests/e2e/lesson-deployment.spec.js:96:1 › lesson 中走完整单元并下载新版证书，返回导航能继续学习
+[64/65] tests/e2e/lesson-deployment.spec.js:111:1 › 旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以结束
+[65/65] tests/e2e/lesson-deployment.spec.js:128:1 › 手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航
+  65 passed (2.6m)

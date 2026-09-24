@@ -9,6 +9,7 @@ const { PUBLISHED_COURSES } = require('./course-registry');
 const { assertCourseCatalogContract } = require('./course-catalog-contract');
 const { assertPublicV1Boundary } = require('./public-v1-boundary');
 const { normalizeBasePath, relocateSource, subpathRuntime } = require('./public-base-path');
+const { writeCoursePackages } = require('./course-packages');
 
 const REQUIRED_FILES = Object.freeze([
   'index.html',
@@ -264,6 +265,7 @@ function isManifestPath(relative) {
 }
 
 function isAllowedArtifactFile(relative) {
+  if (relative === 'course-index.json' || /^resources\/[a-f0-9]{64}\/[a-zA-Z0-9._-]+$/.test(relative) || /^course-packages\/(?:home|unit\d+-\d+|lesson\d+|soundmark)\/[a-f0-9]{64}\.json$/.test(relative)) return true;
   return REQUIRED_FILES.includes(relative) || [...REQUIRED_DIRECTORIES, ...OPTIONAL_DIRECTORIES]
     .some(directory => relative.startsWith(`${directory}/`));
 }
@@ -454,6 +456,7 @@ async function buildStatic({
     for (const [relative, source] of Object.entries(subpathRuntime(basePath))) {
       await fs.writeFile(path.join(resolvedOut, relative), source);
     }
+    await writeCoursePackages({ root: resolvedRoot, out: resolvedOut, basePath });
   }
 
   const files = {};

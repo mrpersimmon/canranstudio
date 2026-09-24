@@ -4,9 +4,12 @@ const http = require('node:http');
 const path = require('node:path');
 const fs = require('node:fs/promises');
 const { relocateSource, subpathRuntime } = require('../../scripts/public-base-path');
+const { createCoursePackages } = require('../../scripts/course-packages');
+const { LESSON_HEADER_CONTRACT } = require('../../scripts/http-header-contract');
 
 const ROOT = process.cwd();
 const PORT = 4173;
+let lessonPackages;
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
@@ -36,8 +39,19 @@ function resolveRequestPath(requestUrl) {
 const server = http.createServer(async (request, response) => {
   const pathname = new URL(request.url, 'http://127.0.0.1').pathname;
   const scoped = pathname.startsWith('/lesson/');
+  if (scoped) for (const [key, value] of Object.entries(LESSON_HEADER_CONTRACT)) response.setHeader(key, value);
   if (pathname === '/lesson' || /^\/lesson\/home(?:\/|\/index\.html)?$/.test(pathname)) {
     response.writeHead(308, { Location: '/lesson/' }).end(); return;
+  }
+  if (scoped && !pathname.startsWith('/lesson/tests/')) {
+    lessonPackages ||= createCoursePackages({ root: ROOT, basePath: '/lesson/' });
+    const packages = await lessonPackages;
+    const relative = pathname.slice('/lesson/'.length) + (pathname.endsWith('/') ? 'index.html' : '');
+    const item = packages.generated.get(relative);
+    if (item) {
+      response.writeHead(200, { 'Content-Type': item.type, 'Cache-Control': item.immutable ? 'public, max-age=31536000, immutable' : 'no-cache', ...(item.worker ? { 'Service-Worker-Allowed': '/lesson/' } : {}) }).end(request.method === 'HEAD' ? undefined : item.body);
+      return;
+    }
   }
   const generated = scoped && subpathRuntime('/lesson/')[pathname.slice('/lesson/'.length)];
   if (generated) {
