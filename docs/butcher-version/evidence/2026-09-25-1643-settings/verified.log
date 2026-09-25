@@ -1,0 +1,15 @@
+
+> canranstudio@0.0.0 test:login
+> playwright test -c playwright.login.config.js tests/login/settings.spec.js tests/login/access.spec.js -g 学习设置|窄屏与横屏|完整无配音课程成果与证书同步
+
+
+Running 4 tests using 1 worker
+
+(node:79294) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (7.4s)
+  ✓  2 tests/login/settings.spec.js:53:1 › 学习设置在屏幕中间，按钮文字清晰且关闭不改变学习 (1.5s)
+  ✓  3 tests/login/settings.spec.js:75:1 › 16 个单元的学习设置在桌面和手机均清晰居中，Escape 返回原课程 (15.3s)
+  ✓  4 tests/login/settings.spec.js:101:1 › 窄屏与横屏的重开确认可读，取消不丢已选答案，账号按钮仍可使用 (2.1s)
+
+  4 passed (27.9s)

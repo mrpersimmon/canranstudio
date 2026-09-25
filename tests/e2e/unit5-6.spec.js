@@ -1,6 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { DIALOGUE, completeStory, completeUnit56 } = require('../support/unit5-6-flow');
+const { completeUnit56 } = require('../support/unit5-6-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并留足书写空间', async ({ page }) => {
@@ -15,6 +15,9 @@ test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并�
   await expect(page.locator('.reply-writing li>span:first-child')).toHaveText([
     'Naoko · Japanese / German','Peugeot · French / German','Hans · German / French','Xiaohui · Chinese / Japanese','Mini · English / American','Chang-woo · South Korean / Japanese','Luming · Chinese / English','Mercedes · German / French','Toyota · Japanese / Chinese','Ford · American / English'
   ]);
+  await expect(page.locator('#unitWriting')).toContainText('先写一个 or 选择问句');
+  await expect(page.locator('#unitWriting')).toContainText('Is she a French student or a Swedish student?');
+  await expect(page.locator('#unitWriting')).toContainText('Is it a Swedish car or a French car?');
   await page.evaluate(()=>{window.print=()=>{};});
   await page.getByRole('button',{name:'打印练习纸',exact:true}).click();
   await page.emulateMedia({media:'print',reducedMotion:'reduce'});
@@ -26,7 +29,7 @@ test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并�
   expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
 });
 
-test('真实完成 20 句与 27 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
+test('真实完成 20 句与 23 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
   test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/unit5-6/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await completeUnit56(page);
@@ -45,12 +48,12 @@ test('真实完成 20 句与 27 题获得 15 星，领取、保存、打印与�
   await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeFocused();
   await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(dialog.locator('#certificateDate')).toHaveText(date);await page.keyboard.press('Escape');
   await page.goto('/unit5-6/#learn/listen');const room=page.locator('.stage-listen');await room.getByRole('button',{name:'再练一轮',exact:true}).click();
-  await expect(room).toContainText('第 1 / 9 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  await expect(room).toContainText('第 1 / 8 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
   for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();}
   expect(errors).toEqual([]);
 });
 
-test('新单元从图鉴开始，24 个词的音标与点读可见，末组主动进入九词听辨', async ({ page }) => {
+test('新单元从图鉴开始，24 个词的音标与翻面可见，末组主动进入八词辨义', async ({ page }) => {
   test.setTimeout(60000);
   await page.goto('/unit5-6/');
   await expect(page).toHaveTitle('新朋友见面会 · Lesson 5–6');
@@ -60,13 +63,12 @@ test('新单元从图鉴开始，24 个词的音标与点读可见，末组主�
   await expect(words.locator('.unit-word')).toHaveCount(6);
   await expect(words.getByRole('button', { name: 'French', exact: true })).toContainText('/frentʃ/');
   await words.getByRole('button', { name: 'French', exact: true }).click();
-  await expect(words.getByRole('button', { name: 'French', exact: true })).toHaveAttribute('aria-busy', 'false', { timeout: 10000 });
   await expect(words.getByRole('button', { name: 'French', exact: true })).toContainText('法国');
   for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
   await expect(words.locator('.unit-word')).toHaveCount(6);
   await expect(words.locator('.word-phonetic')).toHaveCount(6);
-  await words.getByRole('button', { name: '下一站：听音寻宝', exact: true }).click();
-  await expect(page.locator('.stage-listen')).toContainText('第 1 / 9 题');
+  await words.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
+  await expect(page.locator('.stage-listen')).toContainText('第 1 / 8 题');
   await expect(page.locator('.stage-listen').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(page.locator('#starCount')).toHaveText('0');
 });
@@ -88,21 +90,6 @@ test('首页与 lesson 子目录有新单元入口，独立继续并保留资源
   await page.goto('/unit5-6/#learn/refer');
   await expect(page.locator('.stage-refer').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','false');
   expect(bad).toEqual([]);
-});
-
-test('20 句原文保留五次问好，舞台跟随介绍人物，听完才解锁理解题', async ({ page }) => {
-  test.setTimeout(100000);
-  await page.goto('/unit5-6/#learn/roles');
-  await expect(page.locator('.stage-roles').getByRole('button',{name:'先听故事',exact:true})).toBeVisible();
-  await completeStory(page);
-  const story=page.locator('.stage-text');
-  await expect(story.locator('.btext span')).toHaveText(DIALOGUE);
-  await expect(story.locator('.bname')).toHaveText(['Mr. Blake','Students','Mr. Blake','Mr. Blake','Mr. Blake','Mr. Blake','Mr. Blake','Hans','Mr. Blake','Mr. Blake','Naoko','Mr. Blake','Mr. Blake','Chang-woo','Mr. Blake','Mr. Blake','Luming','Mr. Blake','Mr. Blake','Xiaohui']);
-  await story.locator('.bubble-row').nth(10).getByRole('button',{name:'Nice to meet you.',exact:true}).click();
-  await expect(story.locator('[data-actor="student"] span')).toHaveText('Naoko');
-  await expect(story.locator('.btext[aria-busy="true"]')).toHaveCount(0,{timeout:10000});
-  await page.reload();await expect(story.locator('.btext span')).toHaveText(DIALOGUE);
-  await expect(page.locator('.stage-roles')).toContainText('第 1 / 4 题');
 });
 
 test('题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动',async({page})=>{

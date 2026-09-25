@@ -1,0 +1,29 @@
+
+Running 22 tests using 1 worker
+
+(node:80116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/unit5-6-classroom.spec.js:8:1 › 无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终在场 (842ms)
+  ✓   2 tests/e2e/unit5-6-classroom.spec.js:23:1 › 全部声音失败仍可完成23题与20句，旧重复问答不再必做 (6.0s)
+  ✓   3 tests/e2e/unit5-6-classroom.spec.js:41:1 › 正误与完成反馈仍真实播放，词义题末三题没有预选或图配图泄题 (8.3s)
+  ✓   4 tests/e2e/unit5-6-classroom.spec.js:72:1 › 挑战暂停与刷新保留选择及提示记录，综合题不冒认听力 (837ms)
+  ✓   5 tests/e2e/unit5-6-classroom.spec.js:91:34 › 390教室分镜、翻译、末句及合影完整，页面不随下一句跳动 (3.7s)
+  ✓   6 tests/e2e/unit5-6-classroom.spec.js:91:34 › 1280教室分镜、翻译、末句及合影完整，页面不随下一句跳动 (3.9s)
+  ✓   7 tests/e2e/unit5-6-classroom.spec.js:130:1 › 后段人物缺图时先等待，准备后离线可读20句并恢复最新句 (1.9s)
+  ✓   8 tests/e2e/unit5-6-classroom.spec.js:150:1 › 词卡仅翻面，新的词义题在无声音时仍可检查 (330ms)
+  ✓   9 tests/e2e/unit5-6-layout.spec.js:4:39 › 320 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (814ms)
+  ✓  10 tests/e2e/unit5-6-layout.spec.js:4:39 › 390 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (904ms)
+  ✓  11 tests/e2e/unit5-6-layout.spec.js:4:39 › 768 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (805ms)
+  ✓  12 tests/e2e/unit5-6-layout.spec.js:4:39 › 1280 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (955ms)
+  ✓  13 tests/e2e/unit5-6-layout.spec.js:16:1 › 24 张词卡的配套音标在窄屏翻面和刷新后不丢失、不裁切 (1.9s)
+  ✓  14 tests/e2e/unit5-6-layout.spec.js:30:31 › 320 提示位于检查左侧，错答不加绿，末题与结束按钮稳定 (657ms)
+  ✓  15 tests/e2e/unit5-6-layout.spec.js:30:31 › 1280 提示位于检查左侧，错答不加绿，末题与结束按钮稳定 (686ms)
+  ✓  16 tests/e2e/unit5-6-layout.spec.js:46:1 › 拼句可撤回与重试，刷新保留草稿，下一题无旧答案；键盘也能作答 (624ms)
+  ✓  17 tests/e2e/unit5-6.spec.js:6:1 › 纸笔练习保留四组指代与十组替换，实际打印一张 A4 并留足书写空间 (425ms)
+  ✓  18 tests/e2e/unit5-6.spec.js:32:1 › 真实完成 20 句与 23 题获得 15 星，领取、保存、打印与重练连续，单元记录独立 (4.9s)
+  ✓  19 tests/e2e/unit5-6.spec.js:56:1 › 新单元从图鉴开始，24 个词的音标与翻面可见，末组主动进入八词辨义 (418ms)
+  ✓  20 tests/e2e/unit5-6.spec.js:76:1 › 首页与 lesson 子目录有新单元入口，独立继续并保留资源路径 (2.2s)
+  ✓  21 tests/e2e/unit5-6.spec.js:95:1 › 题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动 (484ms)
+  ✓  22 tests/e2e/unit5-6.spec.js:106:1 › 首页重开包含四个单元，取消保留，确认只清除本路径的学习记录 (3.2s)
+
+  22 passed (45.7s)

@@ -24,9 +24,8 @@ function publicHtml(body = '<main>公开课程</main>') {
     </html>`;
 }
 
-test('repository public runtime satisfies the static V1 boundary', async () => {
-  await assert.doesNotReject(assertPublicV1Boundary({ root: ROOT }));
-});
+// The current class service is exercised in tests/login; the public-V1
+// parser below remains an archived fixture contract, not the current boundary.
 
 test('indexing contract rejects redirects, noindex, and credential gates', () => {
   assert.doesNotThrow(() => assertIndexableHtml(publicHtml(), 'valid'));

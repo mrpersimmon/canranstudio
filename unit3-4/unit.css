@@ -9,13 +9,11 @@
 .unit34-workspace .dialogue-stage{display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:14px;align-items:center;margin:20px auto;max-width:900px}
 .unit34-workspace .dialogue-actor{text-align:center;align-self:center;font-size:16px}
 .unit34-workspace .dialogue-actor>img{width:110px;height:178px;object-fit:contain}
-.unit34-workspace .dialogue-actor.speaking>img{filter:drop-shadow(0 0 5px #e9b758)}
 .unit34-workspace .dialogue-log{height:320px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:12px 10px;border:2px solid #ead9bd;border-radius:18px;background:#fffcf5}
 .unit34-workspace .dialogue-log .bubble-row{display:flex;margin:0 0 14px}
 .unit34-workspace .dialogue-log .bubble-row.attendant{justify-content:flex-end}
 .unit34-workspace .dialogue-log .bubble{max-width:96%;position:relative;margin:0;border:2px solid #cbb69a;border-radius:16px;padding:12px;background:white;box-shadow:0 3px 0 #e9d7be}
 .unit34-workspace .dialogue-log .attendant .bubble{background:#eef4e6}
-.unit34-workspace .dialogue-log .is-playing .bubble{border-color:var(--brown);background:#fff0b7}
 .unit34-workspace .dialogue-log .btext{display:flex;justify-content:space-between;gap:10px;align-items:center;text-align:left;width:100%;background:none;border:0;font:700 22px/1.35 'Baloo 2',sans-serif;color:var(--brown);padding:3px 0;min-height:44px;cursor:pointer}
 .unit34-workspace .dialogue-log .btext>.shop-icon{width:23px;height:23px;flex:none}
 .unit34-workspace .dialogue-log .bname{font-size:12px;color:#795e4b}.unit34-workspace .dialogue-log .bcn{font-size:16px;margin:10px 0}.unit34-workspace .dialogue-log .bbtns{margin-top:8px;justify-content:flex-start}
@@ -34,16 +32,130 @@
 .unit34-workspace .reply-writing{padding-left:24px;font:17px/1.8 'Baloo 2',sans-serif}
 .unit34-workspace .reply-writing li{padding:3px 0;overflow-wrap:anywhere}
 .unit34-workspace .writing-rule{display:block;height:22px;border-bottom:1px solid #bda78a}
+/* A real counter anchors people and props. Answer controls remain shared. */
+.unit34-workspace .cloakroom-world{--actor-width:168px;--hand-reach:60px;position:relative;isolation:isolate;height:360px;min-width:0;overflow:hidden;border:1px solid var(--unit-line);border-radius:18px;background:var(--unit-scene) center bottom/auto 100% no-repeat}
+.unit34-workspace .cloakroom-actor{position:absolute;bottom:9px;width:var(--actor-width);text-align:center;z-index:2;transform:translateX(-50%);font-size:14px;line-height:26px}
+.unit34-workspace .cloakroom-actor>img{display:block;width:100%;height:auto;aspect-ratio:200/260;object-fit:contain}
+.unit34-workspace .cloakroom-actor>span{display:inline-block;padding:0 8px;white-space:nowrap;border-radius:8px;background:#FFFCF3;font-weight:600}
+.unit34-workspace :is(.counter-visitor,.dialogue-visitor,.cover-visitor){left:16%}
+.unit34-workspace :is(.counter-attendant,.dialogue-attendant,.cover-attendant){left:84%}
+.unit34-workspace .cloakroom-desk{position:absolute;left:64%;bottom:36px;transform:translateX(-50%);width:56%;height:96px;object-fit:fill;z-index:3}
+.unit34-workspace .cloakroom-prop,.unit34-workspace .counter-item{position:absolute;bottom:119px;left:59%;transform:translateX(-50%);display:flex;align-items:flex-end;justify-content:center;z-index:4;gap:4px}
+.unit34-workspace :is(.cloakroom-prop,.counter-item)>img{display:block;width:110px;height:110px;object-fit:contain}
+.unit34-workspace .coat-prop{left:50%}.unit34-workspace .coat-prop>img{width:88px;height:96px}
+.unit34-workspace .umbrella-prop{left:67%}
+.unit34-workspace .umbrella-outgoing{position:absolute;inset:0;background:center/contain no-repeat;pointer-events:none}
+.unit34-workspace .ticket-prop{left:calc(16% + var(--hand-reach));bottom:132px}
+.unit34-workspace .ticket-prop>img{width:48px;height:48px;transform:rotate(-9deg)}
+.unit34-workspace [data-ticket=counter] .ticket-prop{left:44%;bottom:120px}
+.unit34-workspace .scene-caption{position:absolute;left:35%;right:19%;bottom:9px;font-size:14px;line-height:24px;text-align:center;z-index:5}
+.unit34-workspace .scene-caption:empty{display:none}
+.unit34-workspace .cloakroom-props[data-beat=returned] .umbrella-prop,.unit34-workspace .counter-item.is-returned{left:calc(16% + var(--hand-reach));bottom:120px}
+.unit34-workspace .cloakroom-props[data-beat=returned] .umbrella-prop>img,.unit34-workspace .counter-item.is-returned>img{width:100px;height:142px}
+.unit34-workspace .cloakroom-props[data-beat=returned] .coat-prop{left:calc(16% - 38px);bottom:65px;z-index:3}
+.unit34-workspace .cloakroom-props[data-beat=returned] .coat-prop>img{width:70px;height:86px;transform:rotate(8deg)}
+.unit34-workspace .cloakroom-props[data-beat=returned] .scene-caption,.unit34-workspace .counter-stage[data-returned=true] .scene-caption{left:35%;right:19%}
+.unit34-workspace .counter-runner{max-width:880px}
+.unit34-workspace .counter-runner .practice-content{padding:0}
+.unit34-workspace .counter-prompt{margin:14px auto 18px;text-align:center}
+.unit34-workspace .counter-stage{height:396px;margin-bottom:18px}
+.unit34-workspace .counter-conversation{position:absolute;left:27%;right:22%;top:12px;height:178px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:2px 9px 8px;z-index:5}
+.unit34-workspace .counter-bubble{position:relative;flex:none;border:2px solid #B4A0CD;border-radius:16px;background:#FFFAEE;padding:8px 12px;max-width:96%;text-align:left;box-shadow:0 2px 0 #4a322610}
+.unit34-workspace .counter-bubble::before{content:'';position:absolute;left:-7px;bottom:15px;width:10px;height:10px;background:inherit;border-left:2px solid #B4A0CD;border-bottom:2px solid #B4A0CD;transform:rotate(45deg)}
+.unit34-workspace .counter-bubble-attendant{align-self:flex-end;background:#F6F0F8;border-color:#B4A0CD}
+.unit34-workspace .counter-bubble-attendant::before{left:auto;right:-7px;transform:rotate(225deg)}
+.unit34-workspace .counter-bubble p{font:700 21px/1.3 'Baloo 2',sans-serif;margin:3px 0;overflow-wrap:break-word}
+.unit34-workspace .counter-bubble small{font-size:12px;color:#6a5141}
+.unit34-workspace .counter-item>img{width:100px;height:100px}
+.unit34-workspace .counter-item-ticket{left:calc(16% + var(--hand-reach));bottom:128px}
+.unit34-workspace .counter-item-ticket>img{width:58px;height:58px;transform:rotate(-7deg)}
+.unit34-workspace .counter-item-ticket.is-presented{left:53%;bottom:119px}
+.unit34-workspace .counter-runner .practice-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch;margin:14px 0;min-height:80px}
+.unit34-workspace .counter-runner .practice-options>.opt-btn{font-size:20px;line-height:1.3;min-height:80px;text-align:center;justify-content:center;padding:10px 12px}
+.unit34-workspace .counter-runner .practice-progress{margin-bottom:16px}
+.unit34-workspace .claim-receipt{max-width:540px;width:100%;height:280px;margin:0 auto 20px;--actor-width:136px;--hand-reach:50px}
+.unit34-workspace .claim-receipt .cloakroom-desk{height:82px}
+.unit34-workspace .claim-receipt[data-beat=returned] .umbrella-prop{bottom:93px}
+.unit34-workspace .claim-receipt[data-beat=returned] .coat-prop{bottom:50px}
+.unit34-workspace .claim-receipt .scene-caption{left:35%;right:19%;font-size:13px}
+.unit34-workspace .reference-card{border:1px solid #dcccad;border-radius:14px;background:#fffdf8;box-shadow:none;cursor:default}
+.unit34-workspace .reference-card strong{font-family:'Baloo 2',sans-serif;line-height:1.35;overflow-wrap:break-word}
+/* Full-width dialogue on mobile; the desktop history sits above the counter. */
+.unit34-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:minmax(0,1fr);gap:0;padding:0;margin:0;background:none;position:relative}
+.unit34-workspace #lessonWorkspace .stage-text .cloakroom-props{height:480px;grid-area:1/1;--actor-width:176px;--hand-reach:63px}
+.unit34-workspace #lessonWorkspace .stage-text .dialogue-actor{position:absolute;bottom:9px;width:var(--actor-width);align-self:auto;grid-row:auto}
+.unit34-workspace #lessonWorkspace .stage-text .dialogue-actor>img{width:100%;height:auto;aspect-ratio:200/260;object-fit:contain}
+.unit34-workspace #lessonWorkspace .stage-text .dialogue-actor.is-current>span{outline:2px solid #B79DC9;outline-offset:2px}
+.unit34-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;width:54%;height:240px;margin:12px auto 0;padding:10px 14px;background:#FFFCF34D;border:0;border-radius:14px;gap:14px;align-items:stretch;scrollbar-width:thin;scrollbar-color:#BCA5C6 transparent}
+.unit34-workspace #lessonWorkspace .stage-text .bubble-row{flex:0 0 auto;align-items:flex-start}
+.unit34-workspace #lessonWorkspace .stage-text .bubble{width:fit-content;max-width:94%;min-height:0;flex:none;padding:10px 12px}
+.unit34-workspace #lessonWorkspace .stage-text .bubble::before{content:'';position:absolute;top:20px;left:-7px;width:10px;height:10px;background:inherit;border-left:2px solid #B4A0CD;border-bottom:2px solid #B4A0CD;transform:rotate(45deg)}
+.unit34-workspace #lessonWorkspace .stage-text .attendant .bubble::before{left:auto;right:-7px;border-color:#A8C3A0;transform:rotate(225deg)}
+.unit34-workspace #lessonWorkspace .stage-text .btext{display:block;margin:3px 0;min-height:0;cursor:default;font-size:22px;overflow-wrap:break-word}
+.unit34-workspace #lessonWorkspace .stage-text .bbtns{margin-top:5px}
+.unit34-workspace #lessonWorkspace .stage-text .bbtns .btn{min-height:44px;padding:4px 12px}
+.unit34-workspace #lessonWorkspace .stage-text .stage-ctrl{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:12px;max-width:500px}
+.unit34-workspace #lessonWorkspace .stage-text .stage-ctrl>.btn{order:2;flex:1}
+.unit34-workspace #lessonWorkspace .stage-text .stage-tools{display:block;flex:1}
+.unit34-workspace #lessonWorkspace .stage-text .stage-tools>.btn{width:100%;margin:0;min-height:52px;padding:8px 12px;font-size:18px}
+/* The cover uses the same room, actors and foreground objects. */
+.unit34-workspace .unit-cover{grid-template-columns:1.12fr 1fr;gap:0;padding:0;overflow:hidden}
+.unit34-workspace .unit-cover>div:last-child{padding:30px}
+.unit34-workspace .cover-cloakroom{width:100%;height:340px;min-height:0;border:0;border-radius:0;--actor-width:144px;--hand-reach:53px}
+.unit34-workspace .cover-cloakroom .cloakroom-actor{bottom:24px}
+.unit34-workspace .cover-cloakroom .cloakroom-desk{width:54%;height:92px;bottom:30px}
+.unit34-workspace .cover-cloakroom .umbrella-prop{left:60%;bottom:109px}
+.unit34-workspace .cover-cloakroom .ticket-prop{bottom:99px}
+@media(max-width:760px){
+ .unit34-workspace .unit-cover{grid-template-columns:1fr;padding:0!important;gap:0}
+ .unit34-workspace .cover-cloakroom{max-width:none;height:280px;margin:0}
+ .unit34-workspace .counter-runner .practice-options>.opt-btn{font-size:18px}
+}
 @media(max-width:600px){
- .unit34-workspace .dialogue-stage{grid-template-columns:48px minmax(0,1fr) 48px;gap:4px}
- .unit34-workspace .dialogue-actor{font-size:13px}.unit34-workspace .dialogue-actor>img{width:48px;height:98px}
- .unit34-workspace .dialogue-log{height:310px;padding:8px 4px;scrollbar-gutter:auto}
- .unit34-workspace .dialogue-log .bubble{max-width:100%;padding:9px 7px}
- .unit34-workspace .dialogue-log .btext{font-size:19px;gap:3px;overflow-wrap:anywhere}
- .unit34-workspace .dialogue-log .btext>.shop-icon{width:20px;height:20px}
  .unit34-workspace .phrase-grid{grid-template-columns:1fr}
  .unit34-workspace .unit-word{height:238px}.unit34-workspace .unit-word .word-meaning{font-size:15px;padding:0 3px}
  .unit34-workspace .word-example{font-size:13px;padding:0 3px}
+ .unit34-workspace .cloakroom-world{--actor-width:104px;--hand-reach:37px;height:350px}
+ .unit34-workspace .counter-stage{height:350px}
+ .unit34-workspace .cloakroom-actor{font-size:12px;line-height:24px;bottom:9px}
+ .unit34-workspace .cloakroom-actor>span{padding:0 4px}
+ .unit34-workspace .cloakroom-desk{bottom:34px;height:65px;width:57%;left:63%}
+ .unit34-workspace .cloakroom-prop,.unit34-workspace .counter-item{bottom:87px;gap:0}
+ .unit34-workspace :is(.cloakroom-prop,.counter-item)>img{width:80px;height:80px}
+ .unit34-workspace .counter-item-coat>img{width:66px;height:76px}
+ .unit34-workspace .ticket-prop{bottom:91px}
+ .unit34-workspace .ticket-prop>img{width:34px;height:34px}
+ .unit34-workspace .coat-prop>img{width:53px;height:64px}
+ .unit34-workspace .coat-prop{left:49%}
+ .unit34-workspace [data-ticket=counter] .ticket-prop{left:43%;bottom:88px}
+ .unit34-workspace .scene-caption{font-size:12px;line-height:24px;left:33%;right:22%;bottom:9px;white-space:nowrap}
+ .unit34-workspace .cloakroom-props[data-beat=returned] .umbrella-prop,.unit34-workspace .counter-item.is-returned{bottom:82px}
+ .unit34-workspace .cloakroom-props[data-beat=returned] .umbrella-prop>img,.unit34-workspace .counter-item.is-returned>img{width:76px;height:108px}
+ .unit34-workspace .cloakroom-props[data-beat=returned] .coat-prop{left:calc(16% - 20px);bottom:48px}
+ .unit34-workspace .cloakroom-props[data-beat=returned] .coat-prop>img{width:44px;height:58px}
+ .unit34-workspace .counter-conversation{left:5%;right:5%;height:162px;top:10px;padding:2px 8px 8px}
+ .unit34-workspace .counter-bubble p{font-size:20px}
+ .unit34-workspace .counter-item-ticket{bottom:90px}
+ .unit34-workspace .counter-item-ticket>img{width:40px;height:40px}
+ .unit34-workspace .counter-item-ticket.is-presented{bottom:88px}
+ .unit34-workspace .counter-runner .practice-options{grid-template-columns:1fr;min-height:0;gap:10px}
+ .unit34-workspace .counter-runner .practice-options>.opt-btn{font-size:19px;min-height:52px;padding:10px}
+ .unit34-workspace #lessonWorkspace .stage-text .dialogue-stage{grid-template-columns:1fr;gap:8px;margin:0 -6px;padding:0}
+ .unit34-workspace #lessonWorkspace .stage-text .cloakroom-props{grid-area:1/1;height:234px;--actor-width:104px;--hand-reach:37px}
+ .unit34-workspace #lessonWorkspace .stage-text .dialogue-actor{width:var(--actor-width);grid-row:auto}
+ .unit34-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:2/1;width:100%;height:310px;margin:0;padding:12px 12px;background:#F8F3FA;border:1px solid var(--unit-line)}
+ .unit34-workspace #lessonWorkspace .stage-text .btext{font-size:20px}
+ .unit34-workspace #lessonWorkspace .stage-text .bubble{max-width:94%;padding:8px 10px}
+ .unit34-workspace #lessonWorkspace .stage-text .stage-tools>.btn{font-size:16px}
+ .unit34-workspace .claim-receipt{height:234px;--actor-width:104px;--hand-reach:37px}
+ .unit34-workspace .claim-receipt .cloakroom-desk{height:65px}
+ .unit34-workspace .claim-receipt[data-beat=returned] .umbrella-prop{bottom:82px}
+ .unit34-workspace .claim-receipt .scene-caption{font-size:12px}
+ .unit34-workspace .cover-cloakroom{height:268px;--actor-width:120px;--hand-reach:43px}
+ .unit34-workspace .cover-cloakroom .cloakroom-desk{height:70px;bottom:30px}
+ .unit34-workspace .cover-cloakroom .ticket-prop{bottom:86px}
+ .unit34-workspace .cover-cloakroom .umbrella-prop{bottom:89px}
+ .unit34-workspace .unit-cover>div:last-child{padding:22px 18px 30px}
 }
 @media print{
  body.print-writing #unitWriting,body.print-writing #unitWriting *{visibility:visible!important}
@@ -57,3 +169,5 @@
  body.print-writing .reply-writing .writing-rule{height:19px}
  body.print-writing #unitWriting p{font-size:12px;line-height:1.35;margin:8px 0}
 }
+
+.unit34-workspace #lessonWorkspace .stage-text .stage-ctrl[hidden]{display:none}

@@ -1,0 +1,36 @@
+
+Running 28 tests using 1 worker
+
+(node:90700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/28] tests/e2e/unit27-28-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[2/28] tests/e2e/unit27-28-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[3/28] tests/e2e/unit27-28-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[4/28] tests/e2e/unit27-28-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[5/28] tests/e2e/unit27-28-layout.spec.js:20:1 › 320 窄屏30张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[6/28] tests/e2e/unit27-28-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[7/28] tests/e2e/unit27-28-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[8/28] tests/e2e/unit27-28-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与从头看同行，展开中文不移动推进按钮
+[9/28] tests/e2e/unit27-28-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[10/28] tests/e2e/unit27-28-layout.spec.js:78:1 › 320 最后一道长拼句和挑战选项完整可读，不因完成上一题而预选
+[11/28] tests/e2e/unit27-28-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位
+[12/28] tests/e2e/unit27-28-layout.spec.js:97:1 › 四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[13/28] tests/e2e/unit27-28-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[14/28] tests/e2e/unit27-28-state.spec.js:21:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[15/28] tests/e2e/unit27-28-state.spec.js:43:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[16/28] tests/e2e/unit27-28-state.spec.js:56:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[17/28] tests/e2e/unit27-28-state.spec.js:73:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[18/28] tests/e2e/unit27-28-state.spec.js:86:1 › 关闭JavaScript首页仍提供新单元真实链接
+[19/28] tests/e2e/unit27-28-state.spec.js:91:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[20/28] tests/e2e/unit27-28.spec.js:4:1 › 首页新单元从客厅小图鉴开始，音标可见
+[21/28] tests/e2e/unit27-28.spec.js:11:1 › 全部声音失败仍完成19题和完整原文，15星后保存真实证书，刷新保留日期
+[22/28] tests/e2e/unit27-28.spec.js:25:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[23/28] tests/e2e/unit27-28.spec.js:40:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[24/28] tests/e2e/unit27-28.spec.js:46:1 › 8道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[25/28] tests/e2e/unit27-28.spec.js:56:1 › 原文13句逐句保留，不虚构对话，主动完成后才解锁理解
+[26/28] tests/e2e/unit27-28.spec.js:67:1 › 30张词卡完整音标、翻义、加载、五组翻页与末组续学
+[27/28] tests/e2e/unit27-28.spec.js:83:1 › 图句十组、A五题和B十组五句问答完整，打印一页且有完整句书写空间
+[28/28] tests/e2e/unit27-28.spec.js:94:1 › 语法支架不误教，图选同等可读，连续错误不泄露正确的双条件
+  28 passed (58.2s)

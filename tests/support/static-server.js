@@ -8,7 +8,7 @@ const { createCoursePackages } = require('../../scripts/course-packages');
 const { LESSON_HEADER_CONTRACT } = require('../../scripts/http-header-contract');
 
 const ROOT = process.cwd();
-const PORT = 4173;
+const PORT = Number(process.env.COURSE_TEST_PORT || 4173);
 let lessonPackages;
 const TYPES = {
   '.html': 'text/html; charset=utf-8',

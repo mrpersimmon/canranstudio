@@ -1,0 +1,44 @@
+
+> canranstudio@0.0.0 test:login
+> playwright test -c playwright.login.config.js tests/login/student-accounts.spec.js
+
+[WebServer] (node:70828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:70839) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/login/student-accounts.spec.js:4:1 › 重名学生独立学号，拼音初始密码登录后先改密才能学习 (1.0m)
+
+
+  1) tests/login/student-accounts.spec.js:4:1 › 重名学生独立学号，拼音初始密码登录后先改密才能学习 ──────────────────────────
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '核对姓名拼音' })
+
+
+      13 |   await expect(page.getByRole('status')).toContainText('开放课程已保存');
+      14 |   await page.getByLabel('学生姓名或课堂称呼，每行一位').fill('段晓东\n段晓东\n李明');
+    > 15 |   await page.getByRole('button', { name: '核对姓名拼音' }).click();
+         |                                                      ^
+      16 |   await expect(page.getByLabel('第 1 位学生的姓名拼音')).toHaveValue('duanxiaodong');
+      17 |   await expect(page.getByLabel('第 3 位学生的姓名拼音')).toHaveValue('liming');
+      18 |   await page.getByRole('button', { name: '确认添加学生' }).click();
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/login/student-accounts.spec.js:15:54
+
+    Error Context: test-results/student-accounts-重名学生独立学号，拼音初始密码登录后先改密才能学习/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/student-accounts-重名学生独立学号，拼音初始密码登录后先改密才能学习/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/student-accounts-重名学生独立学号，拼音初始密码登录后先改密才能学习/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/login/student-accounts.spec.js:4:1 › 重名学生独立学号，拼音初始密码登录后先改密才能学习 ───────────────────────────

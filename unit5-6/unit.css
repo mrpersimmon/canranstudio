@@ -1,26 +1,9 @@
-.unit-keepsakes{width:42%;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px}
-.unit-keepsakes>img{width:38%;height:72px;object-fit:contain}.unit-keepsakes>.hero-handbag{width:90%;height:130px}
 .unit56-workspace .unit-word{height:244px;gap:6px}
 .unit56-workspace .unit-word .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
 .unit56-workspace .unit-word .word-meaning{font-size:17px;line-height:1.45;padding:0 10px}
 .unit56-workspace .word-example{font-size:14px;line-height:1.4;font-weight:600;color:#795e4b;padding:0 8px}
 .unit56-workspace .practice-scene{display:block;width:100px;height:100px;object-fit:contain;margin:10px auto 18px}
 .unit56-workspace .stage-roles .picture-option img{height:110px}
-.unit56-workspace .dialogue-stage{display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:14px;align-items:center;margin:20px auto;max-width:900px}
-.unit56-workspace .dialogue-actor{text-align:center;align-self:center;font-size:16px}
-.unit56-workspace .dialogue-actor>img{width:110px;height:178px;object-fit:contain}
-.unit56-workspace .dialogue-actor.speaking>img{filter:drop-shadow(0 0 5px #e9b758)}
-.unit56-workspace .dialogue-log{height:320px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:12px 10px;border:2px solid #ead9bd;border-radius:18px;background:#fffcf5}
-.unit56-workspace .dialogue-log .bubble-row{display:flex;margin:0 0 14px}
-.unit56-workspace .dialogue-log .bubble-row.student{justify-content:flex-end}
-.unit56-workspace .dialogue-log .bubble{max-width:96%;position:relative;margin:0;border:2px solid #cbb69a;border-radius:16px;padding:12px;background:white;box-shadow:0 3px 0 #e9d7be}
-.unit56-workspace .dialogue-log .student .bubble{background:#eef4e6}
-.unit56-workspace .dialogue-log .is-playing .bubble{border-color:var(--brown);background:#fff0b7}
-.unit56-workspace .dialogue-log .btext{display:flex;justify-content:space-between;gap:10px;align-items:center;text-align:left;width:100%;background:none;border:0;font:700 22px/1.35 'Baloo 2',sans-serif;color:var(--brown);padding:3px 0;min-height:44px;cursor:pointer}
-.unit56-workspace .dialogue-log .btext>.shop-icon{width:23px;height:23px;flex:none}
-.unit56-workspace .dialogue-log .bname{font-size:12px;color:#795e4b}.unit56-workspace .dialogue-log .bcn{font-size:16px;margin:10px 0}.unit56-workspace .dialogue-log .bbtns{margin-top:8px;justify-content:flex-start}
-.unit56-workspace .story-lead{text-align:center;padding:20px 8px;display:flex;flex-direction:column;align-items:center;gap:14px}.unit56-workspace .story-lead>img{width:88px;height:88px}
-.unit56-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:0 0 12px}
 .unit56-workspace .phrase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px auto}
 .unit56-workspace .phrase-card{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;min-height:152px;padding:16px;text-align:center}
 .unit56-workspace .phrase-card>img{width:44px;height:44px}.unit56-workspace .phrase-card>strong{font-size:23px}.unit56-workspace .phrase-card>span{font-size:16px;line-height:1.4}
@@ -35,12 +18,6 @@
 .unit56-workspace .reply-writing li{padding:3px 0;overflow-wrap:anywhere}
 .unit56-workspace .writing-rule{display:block;height:22px;border-bottom:1px solid #bda78a}
 @media(max-width:600px){
- .unit56-workspace .dialogue-stage{grid-template-columns:48px minmax(0,1fr) 48px;gap:4px}
- .unit56-workspace .dialogue-actor{font-size:13px}.unit56-workspace .dialogue-actor>img{width:48px;height:98px}
- .unit56-workspace .dialogue-log{height:310px;padding:8px 4px;scrollbar-gutter:auto}
- .unit56-workspace .dialogue-log .bubble{max-width:100%;padding:9px 7px}
- .unit56-workspace .dialogue-log .btext{font-size:19px;gap:3px;overflow-wrap:anywhere}
- .unit56-workspace .dialogue-log .btext>.shop-icon{width:20px;height:20px}
  .unit56-workspace .phrase-grid{grid-template-columns:1fr}
  .unit56-workspace .unit-word{height:238px}.unit56-workspace .unit-word .word-meaning{font-size:15px;padding:0 3px}
  .unit56-workspace .word-example{font-size:13px;padding:0 3px}
@@ -64,10 +41,69 @@
 .unit56-workspace .stage-models{background:var(--shelf-paper);border-color:var(--shelf-line)}
 .unit56-workspace .stage-models>.stage-heading{background:transparent;border-color:var(--shelf-line)}
 .unit56-workspace .model-pair{border-top:1px solid var(--shelf-line);padding:12px 0}.unit56-workspace .model-pair>p{text-align:center;margin:6px}.unit56-workspace .model-pair .phrase-grid{margin:10px auto}
-.unit56-workspace .dialogue-actor span{display:block;overflow-wrap:anywhere}
-@media(max-width:600px){
- .unit56-workspace .stage-text :is(#stage,.dialogue-stage){grid-template-columns:54px minmax(0,1fr) 54px}
- .unit56-workspace .stage-text .dialogue-actor{width:54px}
- .unit56-workspace .stage-text .dialogue-actor>img{width:54px;height:90px}
- .unit56-workspace .stage-text .dialogue-actor span{overflow-wrap:normal;word-break:normal}
+/* A classroom welcome, with the new student remaining beside the host. */
+.unit56-workspace .classroom-cover{max-width:100%;width:100%;min-height:250px}
+.unit56-workspace .classroom-cover>img{width:100%;height:auto;max-height:350px}
+.unit56-workspace .stage-text :is(#stage,.dialogue-stage){display:block;position:relative;isolation:isolate;height:430px;max-width:960px;margin:20px auto 10px;padding:0;background:var(--unit-scene) center/100% 100% no-repeat;border-radius:20px;overflow:hidden}
+.unit56-workspace .classroom-cast{position:absolute;inset:0;pointer-events:none}
+.unit56-workspace .classroom-hosts{position:absolute;left:.5%;bottom:36px;width:28%;display:flex;align-items:flex-end;justify-content:center}
+.unit56-workspace .classroom-classmate{position:absolute;right:1%;bottom:36px;width:17%;display:flex;justify-content:center}
+.unit56-workspace .classroom-person{min-width:0;text-align:center;font:600 15px/1.25 'Baloo 2',sans-serif;position:relative}
+.unit56-workspace .classroom-hosts .classroom-person{width:52%}
+.unit56-workspace .classroom-person>img{display:block;width:100%;height:190px;object-fit:contain;object-position:bottom}
+.unit56-workspace .classroom-hosts [data-person=blake]>img{height:207px}
+.unit56-workspace .classroom-person>span{display:block;position:absolute;left:50%;transform:translateX(-50%);top:100%;white-space:nowrap;padding:2px 6px;border-radius:7px;background:#fffaf0ee}
+.unit56-workspace .classroom-person.is-speaking>img{filter:drop-shadow(0 0 5px #E3B250)}
+.unit56-workspace .classroom-person.is-introduced>span{background:#FCE4A5}
+.unit56-workspace .classroom-classmate .classroom-person{width:100%;max-width:122px}
+.unit56-workspace .classroom-person[data-person=students]>img{height:183px}
+.unit56-workspace .stage-text :is(#bubbleArea,.dialogue-log){position:absolute;inset:24px 18% auto 29%;height:323px;display:flex;flex-direction:column;gap:12px;margin:0;padding:12px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;border:0;border-radius:14px;background:transparent}
+.unit56-workspace .dialogue-log .bubble-row{display:flex;margin:0;flex:none}
+.unit56-workspace .dialogue-log .student{justify-content:flex-end}
+.unit56-workspace .stage-text .bubble{max-width:96%;margin:0;padding:12px 14px;position:relative;border:2px solid #A5B99C;border-radius:5px 18px 18px;background:#FFFCF2;box-shadow:0 3px 0 #4a32260a}
+.unit56-workspace .stage-text .student .bubble{border-radius:18px 5px 18px 18px;background:#F2F6EC;border-color:#A6BCA4}
+.unit56-workspace .stage-text .bubble-row.is-current .bubble{border-color:#6F927C}
+.unit56-workspace .stage-text .btext{font:700 23px/1.4 'Baloo 2',sans-serif;color:var(--brown);margin:5px 0 0;min-height:0;text-align:left;cursor:auto;overflow-wrap:break-word}
+.unit56-workspace .stage-text .bname{font-size:13px;color:#755F4B}
+.unit56-workspace .stage-text .bcn{font-size:16px;line-height:1.5;margin:8px 0}
+.unit56-workspace .stage-text .bbtns{margin-top:8px;justify-content:flex-start}
+.unit56-workspace .story-lead{margin:auto;text-align:center;padding:18px;display:grid;justify-items:center;gap:10px;background:#FFFCF2;border:2px solid #A5B99C;border-radius:18px}
+.unit56-workspace .story-lead>img{width:100px;height:120px}
+.unit56-workspace .story-lead>p{margin:0;font-size:20px}
+.unit56-workspace .dialogue-status{text-align:center;min-height:26px;font-size:15px}
+.unit56-workspace .stage-text .stage-ctrl{display:flex;flex-direction:row;justify-content:center;align-items:center;flex-wrap:nowrap;gap:12px;max-width:500px}
+.unit56-workspace .stage-text .stage-ctrl>.btn{order:2;min-width:180px;flex:1}
+.unit56-workspace .stage-text .stage-tools{display:contents}
+.unit56-workspace .stage-text .stage-tools>.btn{order:1;min-height:48px;font-size:16px;flex:none}
+.unit56-workspace .classroom-photo{margin:12px auto 20px;width:min(680px,100%);text-align:center}
+.unit56-workspace .classroom-photo>img{display:block;width:100%;height:auto;border:1px solid #C3CBAF;border-radius:18px}
+.unit56-workspace .classroom-photo figcaption{font:700 24px/1.4 'Baloo 2',sans-serif;margin-top:8px}
+.unit56-workspace .reference-card{border:1px solid var(--unit-line);border-radius:16px;background:#FFFDF7;box-shadow:none;color:var(--brown)}
+.unit56-workspace .reference-card>strong{font:700 23px/1.4 'Baloo 2',sans-serif}
+.unit56-workspace .car-showroom{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:20px;border:2px solid #D7C6A3;border-radius:20px;background:#EFE7D4}
+.unit56-workspace .car-showroom .phrase-card{background:#FFFCF3;border:0;border-radius:6px 6px 15px 15px;box-shadow:0 5px 0 #C6B792}
+.unit56-workspace .car-showroom .phrase-card>img{width:105px;height:105px}
+.unit56-workspace .car-showroom .phrase-card>strong{font-size:21px}
+@media(max-width:760px){
+ .unit56-workspace .stage-text :is(#stage,.dialogue-stage){height:540px;margin:14px 0 10px;background-size:100% 225px;background-position:top;background-color:#E8EFE2}
+ .unit56-workspace .classroom-cast{height:215px}
+ .unit56-workspace .classroom-hosts{left:3%;bottom:28px;width:57%;justify-content:space-between}
+ .unit56-workspace .classroom-classmate{right:3%;bottom:28px;width:27%}
+ .unit56-workspace .classroom-person>img{height:145px}
+ .unit56-workspace .classroom-hosts [data-person=blake]>img{height:157px}
+ .unit56-workspace .classroom-person[data-person=students]>img{height:134px}
+ .unit56-workspace .classroom-person{font-size:13px}
+ .unit56-workspace .stage-text :is(#bubbleArea,.dialogue-log){inset:223px 0 auto;height:308px;padding:10px 8px;background:transparent;scrollbar-gutter:stable}
+ .unit56-workspace .stage-text .btext{font-size:20px;overflow-wrap:break-word}
+ .unit56-workspace .stage-text .bubble{padding:10px 12px}
+ .unit56-workspace .story-lead{padding:12px}
+ .unit56-workspace .story-lead>img{width:82px;height:100px}
+ .unit56-workspace .stage-text .stage-ctrl>.btn{min-width:136px;font-size:16px}
+ .unit56-workspace .stage-text .stage-tools>.btn{padding:8px 12px}
+ .unit56-workspace .car-showroom{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:12px}
+ .unit56-workspace .car-showroom .phrase-card{padding:12px 6px}
+ .unit56-workspace .car-showroom .phrase-card>strong{font-size:18px}
+ .unit56-workspace .classroom-cover{min-height:150px;max-width:100%}
 }
+@media(max-width:360px){.unit56-workspace .classroom-person{font-size:11px}.unit56-workspace .classroom-person>span{padding:2px 3px}.unit56-workspace .car-showroom{grid-template-columns:1fr}}
+.unit56-workspace .stage-text .stage-tools>.btn:last-child{min-height:52px;padding:8px 18px;grid-row:auto}

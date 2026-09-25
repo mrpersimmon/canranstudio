@@ -1,0 +1,17 @@
+
+Running 4 tests using 1 worker
+
+(node:83112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"width":390,"hiddenFrames":0,"scrollRange":504,"blankFrames":0}
+  ✓  1 tests/e2e/unit5-6-word-stability.spec.js:4:34 › 390 新朋友词卡换组不重新出现整页加载 (2.0s)
+{"width":1280,"hiddenFrames":0,"scrollRange":0,"blankFrames":0}
+  ✓  2 tests/e2e/unit5-6-word-stability.spec.js:4:34 › 1280 新朋友词卡换组不重新出现整页加载 (1.4s)
+(node:83118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"width":390,"hiddenFrames":0,"scrollRange":504,"blankFrames":0}
+  ✓  3 tests/e2e/unit5-6-word-stability.spec.js:4:34 › 390 新朋友词卡换组不重新出现整页加载 (1.5s)
+{"width":1280,"hiddenFrames":0,"scrollRange":0,"blankFrames":0}
+  ✓  4 tests/e2e/unit5-6-word-stability.spec.js:4:34 › 1280 新朋友词卡换组不重新出现整页加载 (1.4s)
+
+  4 passed (7.6s)

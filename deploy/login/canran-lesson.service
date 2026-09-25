@@ -1,0 +1,22 @@
+[Unit]
+Description=Canran class course access
+After=network.target
+[Service]
+Type=simple
+User=canran-lesson
+Group=canran-lesson
+WorkingDirectory=/opt/canran-lesson/current
+Environment=NODE_ENV=production
+Environment=LESSON_PORT=4182
+Environment=LESSON_ORIGIN=https://www.canranstudio.cn
+Environment=LESSON_DATA_DIR=/var/lib/canran-lesson
+ExecStart=/usr/bin/node server/run.js
+Restart=on-failure
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/canran-lesson
+[Install]
+WantedBy=multi-user.target

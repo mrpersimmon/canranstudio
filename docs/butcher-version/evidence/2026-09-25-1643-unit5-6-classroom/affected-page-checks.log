@@ -1,0 +1,21 @@
+
+Running 14 tests using 1 worker
+
+(node:80323) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A01：实际文件、重听和刷新 / (4.6s)
+  ✓   2 tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A02：实际文件、重听和刷新 / (28.7s)
+  ✓   3 tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A03：实际文件、重听和刷新 / (10.5s)
+  ✓   4 tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A01：实际文件、重听和刷新 /lesson (3.5s)
+  ✓   5 tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A02：实际文件、重听和刷新 /lesson (28.7s)
+  ✓   6 tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A03：实际文件、重听和刷新 /lesson (10.6s)
+  ✓   7 tests/e2e/pronunciation-repairs.spec.js:97:70 › 历史修订录音失败后仍可重试 A01 (1.2s)
+  ✓   8 tests/e2e/pronunciation-repairs.spec.js:97:70 › 历史修订录音失败后仍可重试 A03 (3.3s)
+  ✓   9 tests/e2e/pronunciation-repairs.spec.js:108:1 › 历史配音版课文新录音失败不推进，重试后可继续，旧句重听不改变当前句 (28.6s)
+  ✓  10 tests/e2e/pronunciation-repairs.spec.js:126:40 › 历史配音版只更换录音时保留原课文当前句与其他答题进度 (27.6s)
+  ✓  11 tests/e2e/pronunciation-repairs.spec.js:126:40 › 历史配音版只更换录音时保留原课文完成记录与其他答题进度 (43.3s)
+  ✓  12 tests/e2e/unit5-6-classroom.spec.js:130:1 › 后段人物缺图时先等待，准备后离线可读20句并恢复最新句 (2.7s)
+  ✓  13 tests/e2e/unit5-6-classroom.spec.js:161:34 › 390共用人物与汽车的后续课程仍清晰可见 (865ms)
+  ✓  14 tests/e2e/unit5-6-classroom.spec.js:161:34 › 1280共用人物与汽车的后续课程仍清晰可见 (881ms)
+
+  14 passed (3.3m)

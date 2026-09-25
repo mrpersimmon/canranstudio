@@ -126,7 +126,7 @@
   ];
   const definition = { id:'unit13-14',version:1,title:'新衣配色屋',path:'/unit13-14/',start:'learn/words',
     progress:{learningKey:'canran:unit13-14:learning:v1'},objects:WORDS,stages,questions,
-    learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK}
+    learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}
   };
   root.CanranCore.unit1314 = definition;
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;

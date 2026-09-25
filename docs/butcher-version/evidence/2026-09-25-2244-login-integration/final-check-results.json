@@ -1,0 +1,135 @@
+{
+  "baseline": "831c1a81a04fd12d905073a17c550f2512566f6a",
+  "runtimeInputsUnchanged": 2360,
+  "results": [
+    {
+      "check": "browser-login",
+      "status": "passed",
+      "passed": 27,
+      "failed": 0
+    },
+    {
+      "check": "workflow",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "check": "unit",
+      "status": "passed",
+      "passed": 93,
+      "failed": 0
+    },
+    {
+      "check": "browser-smoke",
+      "status": "passed",
+      "passed": 21,
+      "failed": 0
+    },
+    {
+      "check": "browser-course-cache",
+      "status": "existing-performance-failure",
+      "passed": 73,
+      "failed": 1
+    },
+    {
+      "check": "browser-pronunciation",
+      "status": "passed",
+      "passed": 18,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit56",
+      "status": "passed",
+      "passed": 27,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit78",
+      "status": "passed",
+      "passed": 24,
+      "failed": 0
+    },
+    {
+      "check": "browser-units9-12",
+      "status": "passed",
+      "passed": 54,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit1314",
+      "status": "passed",
+      "passed": 20,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit1516",
+      "status": "passed",
+      "passed": 22,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit1718",
+      "status": "passed",
+      "passed": 23,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit1920",
+      "status": "passed",
+      "passed": 26,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit2122",
+      "status": "passed",
+      "passed": 30,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit2324",
+      "status": "passed",
+      "passed": 29,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit2526",
+      "status": "passed",
+      "passed": 28,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit2728",
+      "status": "passed",
+      "passed": 28,
+      "failed": 0
+    },
+    {
+      "check": "browser-unit2930",
+      "status": "passed",
+      "passed": 27,
+      "failed": 0
+    },
+    {
+      "check": "browser-retry-feedback",
+      "status": "passed",
+      "passed": 47,
+      "failed": 0
+    },
+    {
+      "check": "browser-state",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "check": "browser-layout",
+      "status": "passed",
+      "passed": 29,
+      "failed": 0
+    }
+  ],
+  "targetedLegacy49MigrationPassed": 1,
+  "buildLogin": "passed:16 units",
+  "fullReleaseAcceptance": "not run"
+}

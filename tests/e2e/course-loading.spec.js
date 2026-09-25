@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
+const { isFeedbackAudio } = require('../support/course-resource-urls');
 test('服务器实际使用的 JavaScript 类型仍能完成准备', async ({ page }) => {
   await page.route(/\/resources\/.*\.js$/, async route => {
     const response = await route.fetch();
@@ -70,14 +71,14 @@ for (const id of entries) test(`${id} 完整准备后显示原有课程，必需
   const failures = [], errors = [], voices = [];
   page.on('response', response => { if (response.status() >= 400) failures.push(response.url()); });
   page.on('pageerror', error => errors.push(error.message));
-  page.on('request', request => { if (/\/audio\/.*\.mp3/.test(request.url())) voices.push(request.url()); });
+  page.on('request', request => { if (/\.mp3(?:\?|$)/.test(request.url()) && !isFeedbackAudio(request.url())) voices.push(request.url()); });
   await page.goto('/lesson/' + (id === 'home' ? '' : id + '/'), { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#courseLoader')).toHaveCount(0, { timeout: 20000 });
   await expect(page.locator('body')).not.toBeEmpty();
   await expect.poll(() => page.locator('img:visible').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   expect(errors).toEqual([]);
   expect(failures).toEqual([]);
-  if (/^unit/.test(id) && !['unit1-2', 'unit3-4', 'unit5-6', 'unit49-50'].includes(id)) expect(voices).toEqual([]);
+  if (/^unit/.test(id) && !['unit1-2', 'unit49-50'].includes(id)) expect(voices).toEqual([]);
 });
 
 test('整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节', async ({ page }) => {

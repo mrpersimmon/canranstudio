@@ -1,0 +1,18 @@
+
+Running 10 tests using 1 worker
+
+(node:90932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/10] tests/e2e/home-progress.spec.js:4:1 › 课程卡片显示各自星星，不把已完成单课冒充组合单元完成
+[2/10] tests/e2e/home-progress.spec.js:19:1 › 单课历史星星在刷新后保留，导航不会清除练习手记
+[3/10] tests/e2e/l49-progress.spec.js:11:1 › Lesson 49 describes mixed listening choices as words, never meat
+[4/10] tests/e2e/l49-progress.spec.js:20:1 › Lesson 49 repairs legacy ratings and does not crash on negative values
+[5/10] tests/e2e/l49-progress.spec.js:49:1 › Lesson 49 rejects all-corrupt v2 ratings before certificate gating
+[6/10] tests/e2e/l49-progress.spec.js:76:1 › Lesson 49 keeps its locked certificate entry visible from zero stars
+[7/10] tests/e2e/l49-progress.spec.js:83:1 › Lesson 49 five one-star levels remain locked
+[8/10] tests/e2e/l49-progress.spec.js:93:1 › Lesson 49 gate guides partial progress and restores focus
+[9/10] tests/e2e/l49-progress.spec.js:114:1 › Lesson 49 certificate opens only when all five levels have three stars
+[10/10] tests/e2e/l49-progress.spec.js:128:1 › Lesson 49 dialog, save, and print paths recheck live eligibility
+  10 passed (8.9s)

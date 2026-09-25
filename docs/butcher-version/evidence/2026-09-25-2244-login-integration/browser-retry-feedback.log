@@ -1,0 +1,55 @@
+
+Running 47 tests using 1 worker
+
+(node:90834) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/47] tests/e2e/l49-focus.spec.js:25:1 › 一个听辨入口贯穿14词，暂停恢复且整轮完成后才满星
+[2/47] tests/e2e/l49-focus.spec.js:58:1 › 课文逐段保留前文，仅对话区跟随新句，下一句不移动整页
+[3/47] tests/e2e/l49-focus.spec.js:85:3 › give 检查时不跳动，继续后题干可见
+[4/47] tests/e2e/l49-focus.spec.js:85:3 › either 检查时不跳动，继续后题干可见
+[5/47] tests/e2e/l49-focus.spec.js:85:3 › fill 检查时不跳动，继续后题干可见
+[6/47] tests/e2e/l49-focus.spec.js:85:3 › choice 检查时不跳动，继续后题干可见
+[7/47] tests/e2e/l49-focus.spec.js:85:3 › trans 检查时不跳动，继续后题干可见
+[8/47] tests/e2e/l49-focus.spec.js:85:3 › exam 检查时不跳动，继续后题干可见
+[9/47] tests/e2e/l49-focus.spec.js:101:49 › /lesson49/ 人称分拣答错原题重试不跳动，答对继续后新主语可见
+[10/47] tests/e2e/l49-focus.spec.js:101:49 › /unit49-50/ 人称分拣答错原题重试不跳动，答对继续后新主语可见
+[11/47] tests/e2e/l49-focus.spec.js:136:1 › 故事理解只显示当前任务，离开与刷新保留当前作答位置
+[12/47] tests/e2e/l49-focus.spec.js:149:1 › 退出正在播放的活动会停音，回来后可重听到结束
+[13/47] tests/e2e/l49-focus.spec.js:166:71 › 320×568 小屏仍能作答、打开帮助和返回
+[14/47] tests/e2e/l49-focus.spec.js:166:71 › 844×390 小屏仍能作答、打开帮助和返回
+[15/47] tests/e2e/l49-focus.spec.js:179:1 › 证书使用统一图标并可从公开按钮保存图片、关闭预览
+[16/47] tests/e2e/retry-feedback.spec.js:7:1 › 只改线索保留已完成活动，内容版本变化不能沿用完成记录
+[17/47] tests/e2e/retry-feedback.spec.js:23:35 › 旧分拣真实错答记录升级，已继续=false
+[18/47] tests/e2e/retry-feedback.spec.js:23:35 › 旧分拣真实错答记录升级，已继续=true
+[19/47] tests/e2e/retry-feedback.spec.js:39:3 › unit1-2 选择题错答只提示重试，改选后正常推进
+[20/47] tests/e2e/retry-feedback.spec.js:39:3 › unit3-4 选择题错答只提示重试，改选后正常推进
+[21/47] tests/e2e/retry-feedback.spec.js:39:3 › unit5-6 选择题错答只提示重试，改选后正常推进
+[22/47] tests/e2e/retry-feedback.spec.js:39:3 › unit7-8 选择题错答只提示重试，改选后正常推进
+[23/47] tests/e2e/retry-feedback.spec.js:39:3 › unit9-10 选择题错答只提示重试，改选后正常推进
+[24/47] tests/e2e/retry-feedback.spec.js:39:3 › unit11-12 选择题错答只提示重试，改选后正常推进
+[25/47] tests/e2e/retry-feedback.spec.js:39:3 › unit13-14 选择题错答只提示重试，改选后正常推进
+[26/47] tests/e2e/retry-feedback.spec.js:39:3 › unit15-16 选择题错答只提示重试，改选后正常推进
+[27/47] tests/e2e/retry-feedback.spec.js:39:3 › unit17-18 选择题错答只提示重试，改选后正常推进
+[28/47] tests/e2e/retry-feedback.spec.js:39:3 › unit19-20 选择题错答只提示重试，改选后正常推进
+[29/47] tests/e2e/retry-feedback.spec.js:39:3 › unit21-22 选择题错答只提示重试，改选后正常推进
+[30/47] tests/e2e/retry-feedback.spec.js:39:3 › unit23-24 选择题错答只提示重试，改选后正常推进
+[31/47] tests/e2e/retry-feedback.spec.js:39:3 › unit25-26 选择题错答只提示重试，改选后正常推进
+[32/47] tests/e2e/retry-feedback.spec.js:39:3 › unit27-28 选择题错答只提示重试，改选后正常推进
+[33/47] tests/e2e/retry-feedback.spec.js:39:3 › unit29-30 选择题错答只提示重试，改选后正常推进
+[34/47] tests/e2e/retry-feedback.spec.js:39:3 › unit49-50 选择题错答只提示重试，改选后正常推进
+[35/47] tests/e2e/retry-feedback.spec.js:39:3 › lesson49 选择题错答只提示重试，改选后正常推进
+[36/47] tests/e2e/retry-feedback.spec.js:50:1 › 音标课答错只提示重试，原题改选可继续
+[37/47] tests/e2e/retry-feedback.spec.js:60:3 › lesson52 填空初始及错答均不把答案放在空格中，可连续重试
+[38/47] tests/e2e/retry-feedback.spec.js:60:3 › lesson53 填空初始及错答均不把答案放在空格中，可连续重试
+[39/47] tests/e2e/retry-feedback.spec.js:60:3 › lesson54 填空初始及错答均不把答案放在空格中，可连续重试
+[40/47] tests/e2e/retry-feedback.spec.js:71:1 › Lesson50 考核答错不标亮答案，不自动翻题，原题可以改选
+[41/47] tests/e2e/retry-feedback.spec.js:87:1 › Lesson50 快问快答不朗读正确答案或自动跳过错题
+[42/47] tests/e2e/retry-feedback.spec.js:103:1 › Lesson51 频率分拣答错不告知应该选哪个台阶
+[43/47] tests/e2e/retry-feedback.spec.js:112:1 › 没有独立线索的题目不把解析放进灯泡
+[44/47] tests/e2e/retry-feedback.spec.js:117:1 › 拼句线索只给思考方向，不提供完整词序
+[45/47] tests/e2e/retry-feedback.spec.js:123:44 › lesson49 分拣答错原题重试，刷新保留首次错误记录
+[46/47] tests/e2e/retry-feedback.spec.js:123:44 › unit49-50 分拣答错原题重试，刷新保留首次错误记录
+[47/47] tests/e2e/retry-feedback.spec.js:136:1 › Lesson13–14首次和连续答错只提示重试，刷新不泄题，改对后记录修正完成
+  47 passed (1.2m)

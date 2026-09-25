@@ -1,0 +1,30 @@
+
+Running 22 tests using 1 worker
+
+(node:90217) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/22] tests/e2e/unit15-16-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[2/22] tests/e2e/unit15-16-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[3/22] tests/e2e/unit15-16-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[4/22] tests/e2e/unit15-16-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[5/22] tests/e2e/unit15-16-layout.spec.js:20:1 › 320 窄屏25张词卡展开后字义和音标不裁切，图册双色物品完整可辨
+[6/22] tests/e2e/unit15-16-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[7/22] tests/e2e/unit15-16-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[8/22] tests/e2e/unit15-16-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[9/22] tests/e2e/unit15-16-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[10/22] tests/e2e/unit15-16-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[11/22] tests/e2e/unit15-16-state.spec.js:21:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[12/22] tests/e2e/unit15-16-state.spec.js:43:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[13/22] tests/e2e/unit15-16-state.spec.js:56:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[14/22] tests/e2e/unit15-16-state.spec.js:73:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[15/22] tests/e2e/unit15-16-state.spec.js:86:1 › 关闭JavaScript首页仍提供新单元真实链接
+[16/22] tests/e2e/unit15-16.spec.js:6:1 › 从导航进入护照小检查站，先看有音标的词卡，翻义无需配音
+[17/22] tests/e2e/unit15-16.spec.js:23:1 › 配套练习无需任何配音，25题与完整原文通关，领取并导出准确的课堂证书
+[18/22] tests/e2e/unit15-16.spec.js:51:1 › 从首页进入护照小检查站，25张音标词卡可翻义翻页，全程不调用英语配音
+[19/22] tests/e2e/unit15-16.spec.js:79:1 › 11个新词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星
+[20/22] tests/e2e/unit15-16.spec.js:108:1 › 无音频时逐句读完18句原文，历史中文可展开，刷新续读且看完才解锁理解题
+[21/22] tests/e2e/unit15-16.spec.js:137:1 › 教材四张国籍卡、十五幅复数图、A六题和B十二组问答完整，可打印真实A4练习纸
+[22/22] tests/e2e/unit15-16.spec.js:163:1 › 教材图册蓝套装、白手提包、红汽车与可见文字相符
+  22 passed (45.2s)

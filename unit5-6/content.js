@@ -103,7 +103,7 @@
   const question=(id,target,prompt,options,answer,explanation,hint='',extra={})=>({id:'u56-v1-'+id,target,prompt,options,answer,explanation,hint,source,...extra});
   const pictureOptions=Object.fromEntries(WORDS.map(w=>[w.en,w.image]));
   const listenWords=['French','German','Japanese','South Korean','Chinese','Swedish','English','American','student'];
-  const questions={
+  const previousQuestions={
     listen:listenWords.map((en,i)=>{const other=listenWords.filter(v=>v!==en);return question('hear-'+i,'听辨 '+en,'听一听，选出单词。',[en,other[i%8],other[(i+3)%8],other[(i+5)%8]],en,'再听一次，选出对应的词。','',{audioText:en,optionImages:pictureOptions});}),
     roles:[
       question('story-new','找出新同学','故事里，谁是新来的同学？',['Sophie','Mr. Blake','Hans'],'Sophie','老师说“Sophie is a new student.”。','回想 new student 前面的名字。',{optionImages:{Sophie:image('sophie'),'Mr. Blake':image('blake'),Hans:image('hans')}}),
@@ -136,19 +136,44 @@
       question('exam-known','只根据已知英语材料判断','老师只说：“This is a new student.”\n现在可以确定什么？',['这是一位新同学','这是一位法国同学','这是一位德国同学'],'这是一位新同学','new student 说明是新同学；没有介绍国籍，不能猜成 French 或 German。','只记录这句话实际告诉你的信息。')
     ]
   };
-  for(const [activity,items] of Object.entries(questions)) for(const q of items){
+  for(const [activity,items] of Object.entries(previousQuestions)) for(const q of items){
     q.source+=(activity==='roles'?'；Lesson 5 原文理解':'；改编练习条件，不新增原文事实');
     if(q.options)q.distractorReasons=Object.fromEntries(q.options.filter(o=>o!==q.answer).map(o=>[o,q.explanation]));
   }
+  // Exact preceding edition for preserving unchanged current-round answers.
+  // Audio metadata below remains historical; the classroom page has no player.
+  const meaningQuestion = (id, en, prompt, options, answer) => ({
+    ...question(id, '理解 ' + en, prompt, options, answer, en + '：' + WORDS.find(w => w.en === en).cn),
+    id: 'u56-classroom-v2-' + id,
+    distractorReasons: Object.fromEntries(options.filter(item => item !== answer).map(item => [item, '与该词在本课的含义不符。']))
+  });
+  const questions = {
+    listen: [
+      meaningQuestion('french', 'French', 'French 表示什么？', ['法国（人）的', '德国（人）的', '中国（人）的'], '法国（人）的'),
+      meaningQuestion('german', 'German', '选出“德国（人）的”。', ['German', 'French', 'Japanese'], 'German'),
+      meaningQuestion('japanese', 'Japanese', 'Japanese 表示什么？', ['日本（人）的', '韩国（人）的', '瑞典（人）的'], '日本（人）的'),
+      meaningQuestion('korean', 'South Korean', '选出“韩国（人）的”。', ['South Korean', 'Chinese', 'English'], 'South Korean'),
+      meaningQuestion('chinese', 'Chinese', 'Chinese 表示什么？', ['中国（人）的', '美国（人）的', '法国（人）的'], '中国（人）的'),
+      meaningQuestion('swedish', 'Swedish', '选出“瑞典（人）的”。', ['Swedish', 'American', 'German'], 'Swedish'),
+      meaningQuestion('english', 'English', 'English 在这课的汽车介绍中表示什么？', ['英格兰的', '美国的', '瑞典的'], '英格兰的'),
+      meaningQuestion('american', 'American', '选出“美国（人）的”。', ['American', 'English', 'South Korean'], 'American')
+    ],
+    roles: previousQuestions.roles.slice(0, 3),
+    refer: previousQuestions.refer,
+    articles: previousQuestions.articles.map(q => q.id === 'u56-v1-article-a' ? { ...q, hint: '紧接空格的 French，音标开头是辅音 /f/。' } : q),
+    choice: previousQuestions.choice.slice(1),
+    trans: previousQuestions.trans,
+    exam: previousQuestions.exam.slice(1)
+  };
   const stages=[
-    {id:'l1',title:'见面前准备',activities:[['words','新朋友小图鉴','cards'],['listen','听音寻宝','audio']],required:['listen']},
+    {id:'l1',title:'见面前准备',activities:[['words','新朋友小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
     {id:'l2',title:'新朋友来了',activities:[['text','教室小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
     {id:'l3',title:'介绍有办法',activities:[['phrases','见面小锦囊','speech'],['refer','他她它接力','people'],['articles','介绍小标签','cards']],required:['refer','articles']},
-    {id:'l4',title:'汽车小展台',activities:[['models','汽车小图册','cards'],['choice','问答小帮手','question'],['trans','词块拼装台','order']],required:['choice','trans']},
+    {id:'l4',title:'汽车小展台',activities:[['models','汽车小图册','cards'],['choice','品牌小问答','question'],['trans','词块拼装台','order']],required:['choice','trans']},
     {id:'l5',title:'见面小达人',activities:[['exam','见面小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
   ];
-  const definition={id:'unit5-6',version:1,title:'新朋友见面会',path:'/unit5-6/',start:'learn/words',progress:{learningKey:'canran:unit5-6:learning:v1'},
-    learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,CARS,CHOICE_MODELS,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
+  const definition={id:'unit5-6',version:1,contentRevision:'classroom-v2',mode:'classroom',title:'新朋友见面会',path:'/unit5-6/',start:'learn/words',progress:{learningKey:'canran:unit5-6:learning:v1'},
+    learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,CARS,CHOICE_MODELS,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions};
   root.CanranCore.unit56=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

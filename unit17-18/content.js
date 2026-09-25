@@ -137,7 +137,7 @@
     {id:'l5',title:'小访客出发',activities:[['exam','访客小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
   ];
   const definition={id:'unit17-18',version:1,title:'办公室探访记',path:'/unit17-18/',start:'learn/words',progress:{learningKey:'canran:unit17-18:learning:v1'},objects:WORDS,stages,questions,
-    learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK}};
+    learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
   root.CanranCore.unit1718=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

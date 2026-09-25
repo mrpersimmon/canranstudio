@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  const base = root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning;
+  const base = root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning;
   const foods = [
     ['tomato','西红柿',"/təˈmɑːtəʊ/"], ['potato','土豆',"/pəˈteɪtəʊ/"],
     ['cabbage','卷心菜',"/ˈkæbɪdʒ/"], ['lettuce','莴苣',"/ˈletɪs/"],
@@ -51,11 +51,11 @@
 
   };
   const stages = [
-    {id:'l1',title:'采购准备',activities:[['words','采购小图鉴','cards'],['listen','听音寻宝','audio']]},
-    {id:'l2',title:'肉店小剧场',activities:[['text','老板与客人','book'],['roles','故事小侦探','people']]},
-    {id:'l3',title:'帮忙买晚餐',activities:[['doare','问话小帮手','question'],['give','交接小帮手','give'],['needs','餐桌小任务','heart'],['pouch','表达小锦囊','speech'],['either','心声接力','people']]},
-    {id:'l4',title:'表达训练场',activities:[['subjects','分拣小能手','people'],['fill','动词换装间','order'],['choice','句子检查站','check'],['trans','词块拼装台','cards']]},
-    {id:'l5',title:'晚餐准备好了',activities:[['exam','采购小挑战','star'],['certificate','我的单元证书','star']]}
+    {id:'l1',required:["listen"],title:'采购准备',activities:[['words','采购小图鉴','cards'],['listen','听音寻宝','audio']]},
+    {id:'l2',required:["text","roles"],title:'肉店小剧场',activities:[['text','老板与客人','book'],['roles','故事小侦探','people']]},
+    {id:'l3',required:["doare","give","needs","pouch","either"],title:'帮忙买晚餐',activities:[['doare','问话小帮手','question'],['give','交接小帮手','give'],['needs','餐桌小任务','heart'],['pouch','表达小锦囊','speech'],['either','心声接力','people']]},
+    {id:'l4',required:["subjects","fill","choice","trans"],title:'表达训练场',activities:[['subjects','分拣小能手','people'],['fill','动词换装间','order'],['choice','句子检查站','check'],['trans','词块拼装台','cards']]},
+    {id:'l5',required:["exam"],title:'晚餐准备好了',activities:[['exam','采购小挑战','star'],['certificate','我的单元证书','star']]}
   ];
   root.CanranCore.learningContext={id:'unit49-50',progress:{learningKey:'canran:unit49-50:learning:v1'},learning};
   root.CanranCore.unit4950={learning,foods,stages,questions};

@@ -1,0 +1,34 @@
+
+Running 26 tests using 1 worker
+
+(node:90322) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/26] tests/e2e/unit19-20-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[2/26] tests/e2e/unit19-20-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[3/26] tests/e2e/unit19-20-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[4/26] tests/e2e/unit19-20-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[5/26] tests/e2e/unit19-20-layout.spec.js:20:1 › 320 窄屏34张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[6/26] tests/e2e/unit19-20-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[7/26] tests/e2e/unit19-20-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[8/26] tests/e2e/unit19-20-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[9/26] tests/e2e/unit19-20-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[10/26] tests/e2e/unit19-20-layout.spec.js:78:1 › 两个相同的 They're 词块独立选取撤回，刷新不丢失也不替孩子补选
+[11/26] tests/e2e/unit19-20-layout.spec.js:87:1 › 320 窄屏最长亲属选项完整可读，保持四按钮网格与可点击高度
+[12/26] tests/e2e/unit19-20-layout.spec.js:95:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位
+[13/26] tests/e2e/unit19-20-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[14/26] tests/e2e/unit19-20-state.spec.js:21:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[15/26] tests/e2e/unit19-20-state.spec.js:43:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[16/26] tests/e2e/unit19-20-state.spec.js:56:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[17/26] tests/e2e/unit19-20-state.spec.js:73:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[18/26] tests/e2e/unit19-20-state.spec.js:86:1 › 关闭JavaScript首页仍提供新单元真实链接
+[19/26] tests/e2e/unit19-20-state.spec.js:91:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[20/26] tests/e2e/unit19-20.spec.js:4:1 › 导航进入冰淇淋休息站，先看音标词卡，整卡翻义无需配音
+[21/26] tests/e2e/unit19-20.spec.js:17:1 › 配套练习无需任何配音，28题与完整原文通关，领取并导出准确的课堂证书
+[22/26] tests/e2e/unit19-20.spec.js:46:1 › 15题覆盖两课新词，错答不泄题，最后三题刷新不代答，重练不重复计星
+[23/26] tests/e2e/unit19-20.spec.js:60:1 › 原文13段完整保留，分角色接话与合说准确，最后一段后显式完成才解锁
+[24/26] tests/e2e/unit19-20.spec.js:74:1 › 34张卡片默认音标、翻面词义可访问，图片完整加载，末组有下一站
+[25/26] tests/e2e/unit19-20.spec.js:84:1 › 教材20幅对比图、A六题、B十组与数字完整，练习纸实际导出单页A4
+[26/26] tests/e2e/unit19-20.spec.js:99:1 › 同词依语境判断，体形无好坏暗示，否定不能补出未说的信息
+  26 passed (49.9s)

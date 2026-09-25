@@ -68,7 +68,8 @@
   const replyQuestion = (id, ...args) => ({ ...question('reply-' + id, ...args), id: 'u34-v2-reply-' + id, source: 'Lesson 3–4 的 my／your、肯定与否定问答；另设应用情境，非新增课文事实' });
   const pictureOptions = Object.fromEntries(objects.map(word => [word.en, word.image]));
   const listenWords = ['umbrella', 'ticket', 'suit', 'school', 'teacher', 'son', 'daughter'];
-  const questions = {
+  // Frozen task contracts from the last voiced edition; not student activities.
+  const previousQuestions = {
     listen: listenWords.map((en, i) => {
       const others = listenWords.filter(word => word !== en);
       return question('listen-' + en, '听辨 ' + en, '听一听，选出单词。', [en, others[i % others.length], others[(i + 2) % others.length], others[(i + 4) % others.length]], en, '再听一次，选出对应的词。', '', { audioText: en, optionImages: pictureOptions });
@@ -106,22 +107,60 @@
       question('exam-evidence', '同时区分已知归属与未知归属', '你说：“Here is my coat. This is not my umbrella.”\n根据这两句话，哪张记录有依据？', ['外套是我的；雨伞主人还不知道', '外套和雨伞都是我的', '外套是我的；雨伞是工作人员的'], '外套是我的；雨伞主人还不知道', 'my coat 表示自己的外套；后一句只说伞不是自己的，没有说明主人，不能猜成工作人员的。', '只记录题目已经告诉你的事实。', { id: 'u34-v3-exam-evidence' })
     ]
   };
-  for (const [activity, items] of Object.entries(questions)) for (const q of items) {
+  for (const [activity, items] of Object.entries(previousQuestions)) for (const q of items) {
     if (activity === 'roles') q.source = 'Lesson 3 纸页 6–7，原文理解';
     else if (['manners', 'exam'].includes(activity)) q.source += '；另设应用情境，非新增课文事实';
     if (q.options) q.distractorReasons = Object.fromEntries(q.options.filter(value => value !== q.answer).map(value => [value, `不符合本题给定的人物、物品或事实。${q.explanation}`]));
   }
+
+  // Exact predecessor retained only to migrate still-valid answers from the
+  // last voiced edition. These tasks are not mounted in the classroom version.
+  const classroomQuestion = (id, ...args) => ({ ...question(id, ...args), id: 'u34-classroom-v2-' + id });
+  const questions = {
+    listen: [
+      classroomQuestion('word-umbrella', '辨认 umbrella', '哪一个词对应图中的物品？', ['umbrella', 'ticket', 'suit'], 'umbrella', 'umbrella 是雨伞。', '', { image: image('umbrella'), imageAlt: '雨伞' }),
+      classroomQuestion('word-ticket', '理解 ticket 的本课词义', 'Here is my ticket.\n在衣帽寄存处，ticket 是什么？', ['寄存牌', '雨伞', '学校'], '寄存牌', '本课 ticket 是认领寄存物品时出示的牌子。'),
+      classroomQuestion('word-suit', '辨认 suit', '哪一个词表示图中的一套衣服？', ['shirt', 'suit', 'skirt'], 'suit', 'suit 表示一套衣服；图中是一套西服。', '', { image: image('suit'), imageAlt: '西服上衣和长裤组成的一套衣服' }),
+      classroomQuestion('word-school', '理解 school', 'school 表示什么？', ['学校', '房子', '老师'], '学校', 'school 是学校。'),
+      classroomQuestion('word-teacher', '根据词义选择 teacher', '选出表示“老师”的英文。', ['teacher', 'school', 'daughter'], 'teacher', 'teacher 是老师，school 是学校。'),
+      classroomQuestion('word-son', '理解 son 的亲子关系', 'son 表示什么？', ['儿子', '女儿', '所有男孩'], '儿子', 'son 是相对于父母来说的儿子，不等于所有男孩。'),
+      classroomQuestion('word-daughter', '根据亲子关系选择 daughter', '父母说“女儿”，对应哪个词？', ['son', 'daughter', 'teacher'], 'daughter', 'daughter 是相对于父母来说的女儿。')
+    ],
+    roles: [
+      previousQuestions.roles[2],
+      previousQuestions.roles[4],
+      classroomQuestion('story-number', '找到原文中的号码', '客人的寄存牌是几号？', ['五号', '三号', '九号'], '五号', '原文 Number five. 表示五号。', '回想 Number 后面的英文。')
+    ],
+    manners: [
+      classroomQuestion('counter-request', '礼貌提出取回请求', '取回你的外套和雨伞，怎样请求？', ['My coat and my umbrella please.', 'Here is my ticket.', 'Sorry, sir.'], 'My coat and my umbrella please.', '用 please 礼貌提出取回物品的请求。', '说清要取回什么，再加上 please。'),
+      classroomQuestion('counter-ticket', '出示自己的寄存牌', '你把寄存牌递给工作人员，怎样说？', ['Here is my ticket.', 'This is not my umbrella.', 'Thank you very much.'], 'Here is my ticket.', 'Here is my ticket. 用来出示自己的寄存牌。', 'here is 用来出示东西。'),
+      previousQuestions.manners[0],
+      previousQuestions.manners[3]
+    ],
+    reply: [
+      ...previousQuestions.reply.slice(1),
+      classroomQuestion('read-owner', '读懂对方说的 your', '同学对你说：“No. It isn’t my pen. It’s your pen.”\n钢笔是谁的？', ['你的', '同学的'], '你的', '同学正在对你说话，your 指听话的你。')
+    ],
+    exam: [
+      ...previousQuestions.exam.slice(1),
+      { ...previousQuestions.ask[0], id: 'u34-classroom-v2-exam-relationship' }
+    ]
+  };
+  for (const items of Object.values(questions)) for (const q of items) {
+    if (!q.distractorReasons && q.options) q.distractorReasons = Object.fromEntries(q.options.filter(value => value !== q.answer).map(value => [value, '与本题的英文、物品或已知人物关系不符。']));
+  }
+
   const stages = [
-    { id: 'l1', title: '认领前准备', activities: [['words', '认领小图鉴', 'cards'], ['listen', '听音寻宝', 'audio']], required: ['listen'] },
+    { id: 'l1', title: '认领前准备', activities: [['words', '认领小图鉴', 'cards'], ['listen', '单词寻宝', 'cards']], required: ['listen'] },
     { id: 'l2', title: '找回我的伞', activities: [['text', '衣帽间小剧场', 'book'], ['roles', '故事小侦探', 'people']], required: ['text', 'roles'] },
-    { id: 'l3', title: '礼貌认领', activities: [['phrases', '认领小锦囊', 'speech'], ['manners', '回应小帮手', 'heart']], required: ['manners'] },
-    { id: 'l4', title: '你我的小工坊', activities: [['ask', '看图问一问', 'question'], ['trans', '词块拼装台', 'order'], ['reply', '你我的接力', 'give']], required: ['ask', 'trans', 'reply'] },
+    { id: 'l3', title: '办一次认领', activities: [['phrases', '认领小锦囊', 'speech'], ['manners', '认领柜台', 'give']], required: ['manners'] },
+    { id: 'l4', title: '换人说一说', activities: [['reply', '你我的接力', 'people']], required: ['reply'] },
     { id: 'l5', title: '认领小达人', activities: [['exam', '认领小挑战', 'star'], ['certificate', '我的单元证书', 'star']], required: ['exam'] }
   ];
   const definition = {
-    id: 'unit3-4', version: 1, title: '雨伞认领小帮手', path: '/unit3-4/', start: 'learn/words',
+    id: 'unit3-4', version: 1, contentRevision: 'classroom-v2', mode: 'classroom', title: '雨伞认领小帮手', path: '/unit3-4/', start: 'learn/words',
     progress: { learningKey: 'canran:unit3-4:learning:v1' },
-    learning: { WORDS, PHRASES, SENTENCE_MODELS, REPLY_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK }, objects, stages, questions
+    learning: { WORDS, PHRASES, SENTENCE_MODELS, REPLY_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions, previousQuestions
   };
   root.CanranCore.unit34 = definition;
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;

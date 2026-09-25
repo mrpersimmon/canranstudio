@@ -1,0 +1,31 @@
+
+Running 23 tests using 1 worker
+
+(node:90285) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/23] tests/e2e/unit17-18-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[2/23] tests/e2e/unit17-18-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[3/23] tests/e2e/unit17-18-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[4/23] tests/e2e/unit17-18-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[5/23] tests/e2e/unit17-18-layout.spec.js:20:1 › 320 窄屏30张词卡展开后字义和音标不裁切，图册成双人物完整可辨
+[6/23] tests/e2e/unit17-18-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[7/23] tests/e2e/unit17-18-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[8/23] tests/e2e/unit17-18-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[9/23] tests/e2e/unit17-18-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[10/23] tests/e2e/unit17-18-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[11/23] tests/e2e/unit17-18-state.spec.js:21:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[12/23] tests/e2e/unit17-18-state.spec.js:43:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[13/23] tests/e2e/unit17-18-state.spec.js:56:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[14/23] tests/e2e/unit17-18-state.spec.js:73:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[15/23] tests/e2e/unit17-18-state.spec.js:86:1 › 关闭JavaScript首页仍提供新单元真实链接
+[16/23] tests/e2e/unit17-18-state.spec.js:91:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[17/23] tests/e2e/unit17-18.spec.js:4:1 › 导航进入办公室探访记，先看音标词卡，整卡翻义无需配音
+[18/23] tests/e2e/unit17-18.spec.js:17:1 › 配套练习无需任何配音，22题与完整原文通关，领取并导出准确的课堂证书
+[19/23] tests/e2e/unit17-18.spec.js:45:1 › 8个词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星
+[20/23] tests/e2e/unit17-18.spec.js:74:1 › 无音频时逐句读完16句原文，历史中文可展开，刷新续读且看完才解锁理解题
+[21/23] tests/e2e/unit17-18.spec.js:104:1 › 30张词卡默认有准确音标，所有图片完整加载，末组有下一站且刷新续页
+[22/23] tests/e2e/unit17-18.spec.js:119:1 › 15组职业、A六题、B十组与数字材料完整，纸笔练习打印为一页A4
+[23/23] tests/e2e/unit17-18.spec.js:142:1 › 用完整语境区别不很忙与懒惰，保留教师带读而不冒记听力成绩
+  23 passed (44.7s)

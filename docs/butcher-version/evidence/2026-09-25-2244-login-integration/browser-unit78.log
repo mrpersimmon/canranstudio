@@ -1,0 +1,32 @@
+
+Running 24 tests using 1 worker
+
+(node:89908) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/24] tests/e2e/unit7-8-audio.spec.js:7:37 › I 词卡保留音标和释义，翻面与刷新不请求配音：/
+[2/24] tests/e2e/unit7-8-audio.spec.js:7:37 › I 词卡保留音标和释义，翻面与刷新不请求配音：/lesson
+[3/24] tests/e2e/unit7-8-classroom.spec.js:31:1 › 课文无配音也能浏览全部原文、刷新续读并主动完成
+[4/24] tests/e2e/unit7-8-classroom.spec.js:59:1 › 单词寻宝以13个新词的词义和图片作答，不需播放且末题刷新不代答
+[5/24] tests/e2e/unit7-8-classroom.spec.js:97:1 › 图鉴和示范供阅读，挑战读英文作答，正误反馈音仍正常
+[6/24] tests/e2e/unit7-8-classroom.spec.js:134:1 › lesson 路径全部声音不可用时仍能完成27题、浏览原文并领取证书
+[7/24] tests/e2e/unit7-8-classroom.spec.js:181:1 › 旧配音中断的位置可续读，未改练习与选择保留，旧听辨不代答
+[8/24] tests/e2e/unit7-8-classroom.spec.js:214:1 › 旧15星不填满新词汇和阅读挑战，其他活动保留，重做后可领新版证书
+[9/24] tests/e2e/unit7-8-layout.spec.js:4:31 › 320 无配音课文翻句时按钮稳定，看图选词完整可见
+[10/24] tests/e2e/unit7-8-layout.spec.js:4:31 › 1280 无配音课文翻句时按钮稳定，看图选词完整可见
+[11/24] tests/e2e/unit7-8-layout.spec.js:21:39 › 320 各站无横向溢出、图标完整，双人人名不挤入对白
+[12/24] tests/e2e/unit7-8-layout.spec.js:21:39 › 390 各站无横向溢出、图标完整，双人人名不挤入对白
+[13/24] tests/e2e/unit7-8-layout.spec.js:21:39 › 768 各站无横向溢出、图标完整，双人人名不挤入对白
+[14/24] tests/e2e/unit7-8-layout.spec.js:21:39 › 1280 各站无横向溢出、图标完整，双人人名不挤入对白
+[15/24] tests/e2e/unit7-8-layout.spec.js:32:1 › 22 张词卡窄屏正反面不裁切音标或解释，最后一组主动进入单词寻宝
+[16/24] tests/e2e/unit7-8-layout.spec.js:46:31 › 320 灯泡在检查左边，错答、提示和结束操作不乱跳
+[17/24] tests/e2e/unit7-8-layout.spec.js:46:31 › 1280 灯泡在检查左边，错答、提示和结束操作不乱跳
+[18/24] tests/e2e/unit7-8-layout.spec.js:53:1 › 词块可撤回、键盘重组，刷新保留草稿，下一题不继承答案
+[19/24] tests/e2e/unit7-8.spec.js:5:1 › 从词卡开始，浏览16句并完成27题后才获得15星课堂配套证书
+[20/24] tests/e2e/unit7-8.spec.js:24:1 › 首页新增采访站，lesson 子目录独立继续，返回同地址仍定位当前活动
+[21/24] tests/e2e/unit7-8.spec.js:31:1 › 纸笔练习保留 Written A 三组与 B 十组，明确人物并实际打印一张 A4
+[22/24] tests/e2e/unit7-8.spec.js:37:1 › 挑战暂停保留选择，记录区分独立、提示和修正；不提前发证
+[23/24] tests/e2e/unit7-8.spec.js:42:1 › 内容升版只失效被改活动，未改活动的选择仍保留
+[24/24] tests/e2e/unit7-8.spec.js:46:1 › 首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录
+  24 passed (1.7m)

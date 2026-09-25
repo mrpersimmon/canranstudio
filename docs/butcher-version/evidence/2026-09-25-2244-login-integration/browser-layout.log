@@ -1,0 +1,37 @@
+
+Running 29 tests using 1 worker
+
+(node:90951) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/29] tests/e2e/accessibility.spec.js:40:1 › Lesson 49 flip cards expose keyboard state through one read-aloud control
+[2/29] tests/e2e/accessibility.spec.js:112:1 › Lesson 49 card initialization is idempotent without replacing accessible state
+[3/29] tests/e2e/accessibility.spec.js:159:1 › Lesson 49 retains live feedback semantics after a feedback update
+[4/29] tests/e2e/accessibility.spec.js:171:1 › Lesson 50 retains live feedback semantics after a quiz update
+[5/29] tests/e2e/accessibility.spec.js:183:1 › soundmark retains feedback and toast live semantics after updates
+[6/29] tests/e2e/accessibility.spec.js:234:1 › Lesson 49 certificate dialog contains focus and returns it
+[7/29] tests/e2e/accessibility.spec.js:241:1 › Lesson 50 certificate dialog contains focus and returns it
+[8/29] tests/e2e/accessibility.spec.js:248:1 › soundmark certificate dialog contains focus and returns it
+[9/29] tests/e2e/accessibility.spec.js:297:3 › Lesson 49 certificate dialog has one name and three reliable close paths
+[10/29] tests/e2e/accessibility.spec.js:330:3 › Lesson 49 rapid Escape beats deferred primary focus and duplicate lifecycle is safe
+[11/29] tests/e2e/accessibility.spec.js:377:3 › Lesson 49 safely falls back when its remembered opener is disabled or removed
+[12/29] tests/e2e/accessibility.spec.js:297:3 › Lesson 50 certificate dialog has one name and three reliable close paths
+[13/29] tests/e2e/accessibility.spec.js:330:3 › Lesson 50 rapid Escape beats deferred primary focus and duplicate lifecycle is safe
+[14/29] tests/e2e/accessibility.spec.js:377:3 › Lesson 50 safely falls back when its remembered opener is disabled or removed
+[15/29] tests/e2e/accessibility.spec.js:297:3 › soundmark certificate dialog has one name and three reliable close paths
+[16/29] tests/e2e/accessibility.spec.js:330:3 › soundmark rapid Escape beats deferred primary focus and duplicate lifecycle is safe
+[17/29] tests/e2e/accessibility.spec.js:377:3 › soundmark safely falls back when its remembered opener is disabled or removed
+[18/29] tests/e2e/accessibility.spec.js:416:3 › Lesson 49 save and print reject eligibility lost after opening
+[19/29] tests/e2e/accessibility.spec.js:457:3 › Lesson 49 saved preview remains operable after the modal closes
+[20/29] tests/e2e/accessibility.spec.js:416:3 › Lesson 50 save and print reject eligibility lost after opening
+[21/29] tests/e2e/accessibility.spec.js:457:3 › Lesson 50 saved preview remains operable after the modal closes
+[22/29] tests/e2e/accessibility.spec.js:483:1 › Lesson 50 aborts save when eligibility is lost during Blob encoding
+[23/29] tests/e2e/accessibility.spec.js:529:1 › Lesson 50 revokes a created URL when eligibility is lost before exposure
+[24/29] tests/e2e/accessibility.spec.js:574:1 › Lesson 50 rapid saves keep one preview owner across reverse completion
+[25/29] tests/e2e/accessibility.spec.js:671:1 › Lesson 50 replaces mixed foreign preview IDs before committing its owner
+[26/29] tests/e2e/accessibility.spec.js:724:1 › Lesson 50 rolls back a partially appended preview and revokes once
+[27/29] tests/e2e/accessibility.spec.js:774:1 › course navigation supports keyboard expansion and restores settings focus
+[28/29] tests/e2e/accessibility.spec.js:784:1 › growth reveal is a button-free keyboard-dismissible dialog and restores focus
+[29/29] tests/e2e/mobile-release.spec.js:29:1 › the optional Lesson 50 story stays reachable and unobstructed in every release viewport
+  29 passed (35.0s)

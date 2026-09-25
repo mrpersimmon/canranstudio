@@ -1,0 +1,59 @@
+
+Running 22 tests using 1 worker
+
+(node:89048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit7-8 缓存后断网完成真实题型和证书
+[2/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit9-10 缓存后断网完成真实题型和证书
+[3/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit11-12 缓存后断网完成真实题型和证书
+[4/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit13-14 缓存后断网完成真实题型和证书
+[5/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit15-16 缓存后断网完成真实题型和证书
+[6/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit17-18 缓存后断网完成真实题型和证书
+[7/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit19-20 缓存后断网完成真实题型和证书
+[8/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit21-22 缓存后断网完成真实题型和证书
+[9/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit23-24 缓存后断网完成真实题型和证书
+[10/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit25-26 缓存后断网完成真实题型和证书
+[11/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit27-28 缓存后断网完成真实题型和证书
+[12/22] tests/e2e/course-cache-journeys.spec.js:7:3 › unit29-30 缓存后断网完成真实题型和证书
+[13/22] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 320 宽度可以看清并用键盘重试
+[14/22] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 390 宽度可以看清并用键盘重试
+[15/22] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 768 宽度可以看清并用键盘重试
+[16/22] tests/e2e/course-cache-journeys.spec.js:36:44 › 加载失败界面在 1280 宽度可以看清并用键盘重试
+[17/22] tests/e2e/course-cache-journeys.spec.js:50:1 › 关闭脚本时可看课程导航，课程入口给出明确恢复方式
+[18/22] tests/e2e/course-cache-updates.spec.js:11:1 › 固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时
+[19/22] tests/e2e/course-cache-updates.spec.js:27:1 › 两个标签页同时准备同课，关掉一页后另一页仍能完整进入
+[20/22] tests/e2e/course-cache-updates.spec.js:43:1 › 已知撤回版本不会继续推进作答，新版失败时保留位置等待更新
+[21/22] tests/e2e/course-cache-updates.spec.js:61:1 › 缓存录音支持真实点播和断网分段读取，下载不增加听辨进度
+[22/22] tests/e2e/course-cache-updates.spec.js:81:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时
+  1) tests/e2e/course-cache-updates.spec.js:81:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时 ───────────────────────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 1500
+    Received:   1614
+
+       96 |   await testInfo.attach('warm-visits.json', { contentType: 'application/json', body: Buffer.from(JSON.stringify({ browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, samples, p95 })) });
+       97 |   expect(fetched).toEqual([]);
+    >  98 |   expect(p95).toBeLessThan(1500);
+          |               ^
+       99 | });
+      100 |
+      101 | async function revisedCourse(request, id = 'unit29-30') {
+        at /Users/permission/.codex/merge-backups/20260925-222141-login-into-butcher/performance-baseline/tests/e2e/course-cache-updates.spec.js:98:15
+
+    Error Context: test-results/course-cache-updates-完整缓存-20-次复访恢复可操作位置并记录实际耗时/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/course-cache-updates-完整缓存-20-次复访恢复可操作位置并记录实际耗时/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/course-cache-updates-完整缓存-20-次复访恢复可操作位置并记录实际耗时/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/course-cache-updates.spec.js:81:1 › 完整缓存 20 次复访恢复可操作位置并记录实际耗时 ────────────────────────
+  21 passed (1.8m)

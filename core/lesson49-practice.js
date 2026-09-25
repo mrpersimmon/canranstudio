@@ -107,11 +107,32 @@
     solved.forEach(()=>{const step=document.createElement('span');step.className='practice-step';step.setAttribute('aria-hidden','true');meter.append(step);});
     label.append(copy,meter);updateProgress(label,solved,currentIndex);return label;
   }
-  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice' }) {
+  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice' }) {
     const key = sessionId ? element.id+'/'+sessionId : element.id;
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
     let group = notebook.groups[key];
     const existing = group;
+    // Opt-in migration from an explicitly supplied, exact predecessor. Keep
+    // only unchanged questions from this active round, never notebook history.
+    if (isRecord(group) && group.draftVersion === DRAFT_VERSION && group.contentSignature !== contentSignature) {
+      const serialize = value => JSON.stringify(value, (field, item) => field === 'hint' ? undefined : item);
+      const prior = previousQuestionSets.find(items =>
+        group.contentSignature === serialize([context.version ?? null, items]) &&
+        group.signature === items.map(q => q.id).join('|'));
+      if (prior && Array.isArray(group.states) && typeof group.runId === 'string' && group.runId &&
+          Number.isInteger(group.index) && group.index >= 0 && group.index <= prior.length) {
+        const states = questions.map(q => {
+          const i = prior.findIndex(old => serialize(old) === serialize(q));
+          const state = group.states[i];
+          return i >= 0 && isRecord(state) && state.questionId === q.id && state.runId === group.runId ? state : null;
+        });
+        const unfinished = states.findIndex(state => !state?.checked || !state.correct);
+        // A checked final answer still needs the learner's Finish action.
+        const index = unfinished < 0 ? (group.index === prior.length ? questions.length : questions.length - 1) : unfinished;
+        group = { ...group, index, states, signature: questions.map(q => q.id).join('|'), contentSignature };
+        notebook.groups[key] = group;
+      }
+    }
     const sources=sessionId && legacySessionIds.length ? [...legacySessionIds.map(id=>notebook.groups[element.id+'/'+id]),notebook.groups[element.id]]
       .filter(old=>typeof old?.signature==='string'&&Array.isArray(old.states))
       .map(old=>({...old,ids:old.signature.split('|')})) : [];

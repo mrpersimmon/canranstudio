@@ -1,0 +1,62 @@
+
+Running 54 tests using 1 worker
+
+(node:90003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/54] tests/e2e/unit11-12-audio.spec.js:5:35 › unit11-12 词卡翻面、示范阅读和刷新都不请求英语配音 /
+[2/54] tests/e2e/unit11-12-audio.spec.js:5:35 › unit11-12 词卡翻面、示范阅读和刷新都不请求英语配音 /lesson
+[3/54] tests/e2e/unit11-12-layout.spec.js:4:1 › 三人舞台保留完整人物，侧边学生不把固定对话区与按钮挤开
+[4/54] tests/e2e/unit11-12-layout.spec.js:12:1 › 单张示范卡在宽窄屏居中，打印填空至少留出 64 像素书写宽度
+[5/54] tests/e2e/unit11-12-layout.spec.js:16:39 › 320 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[6/54] tests/e2e/unit11-12-layout.spec.js:16:39 › 390 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[7/54] tests/e2e/unit11-12-layout.spec.js:16:39 › 768 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[8/54] tests/e2e/unit11-12-layout.spec.js:16:39 › 1280 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[9/54] tests/e2e/unit11-12-layout.spec.js:26:1 › 18 张词卡在窄屏可翻面、读音标，末组刷新后仍有下一站
+[10/54] tests/e2e/unit11-12-layout.spec.js:32:31 › 320 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算
+[11/54] tests/e2e/unit11-12-layout.spec.js:32:31 › 1280 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算
+[12/54] tests/e2e/unit11-12-layout.spec.js:41:1 › 词块支持撤回和键盘；错序刷新不获正确，换题不继承已选词块
+[13/54] tests/e2e/unit11-12.spec.js:5:1 › 物主选项限定为教材已教的 my、your、his、her，不引入新结构
+[14/54] tests/e2e/unit11-12.spec.js:8:1 › 从音标图鉴开始，浏览16句并完成23题才取得15星课堂配套证书
+[15/54] tests/e2e/unit11-12.spec.js:19:1 › 首页和 lesson 子目录进入新单元，独立恢复草稿并定位同一地址
+[16/54] tests/e2e/unit11-12.spec.js:26:1 › 纸笔保留教材 A 四题与 B 十二题，真实打印一张 A4 且每组有三行书写区
+[17/54] tests/e2e/unit11-12.spec.js:33:1 › 挑战错答、提示、暂停刷新与独立作答分别记录，不提前发证
+[18/54] tests/e2e/unit11-12.spec.js:38:1 › 内容升版只让改过的活动失效，另一个活动的草稿保留
+[19/54] tests/e2e/unit11-12.spec.js:42:1 › 重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录
+[20/54] tests/e2e/unit11-12.spec.js:47:1 › 短屏单词练习末题与重练可操作，重练清本轮答案且保留已获星星
+[21/54] tests/e2e/unit9-10-audio.spec.js:5:35 › unit9-10 词卡翻面、示范阅读和刷新都不请求英语配音 /
+[22/54] tests/e2e/unit9-10-audio.spec.js:5:35 › unit9-10 词卡翻面、示范阅读和刷新都不请求英语配音 /lesson
+[23/54] tests/e2e/unit9-10-layout.spec.js:4:1 › 单张示范卡在宽窄屏居中，打印填空至少留出 64 像素书写宽度
+[24/54] tests/e2e/unit9-10-layout.spec.js:8:39 › 320 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点
+[25/54] tests/e2e/unit9-10-layout.spec.js:8:39 › 390 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点
+[26/54] tests/e2e/unit9-10-layout.spec.js:8:39 › 768 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点
+[27/54] tests/e2e/unit9-10-layout.spec.js:8:39 › 1280 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点
+[28/54] tests/e2e/unit9-10-layout.spec.js:18:1 › 22 张词卡在窄屏可翻面、读音标，末组刷新后仍有下一站
+[29/54] tests/e2e/unit9-10-layout.spec.js:24:31 › 320 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算
+[30/54] tests/e2e/unit9-10-layout.spec.js:24:31 › 1280 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算
+[31/54] tests/e2e/unit9-10-layout.spec.js:33:1 › 词块支持撤回和键盘；错序刷新不获正确，换题不继承已选词块
+[32/54] tests/e2e/unit9-10.spec.js:5:1 › 从带音标词卡开始，浏览14句并完成26题才取得15星课堂配套证书
+[33/54] tests/e2e/unit9-10.spec.js:19:1 › 首页与 lesson 子目录进入问候站，独立恢复草稿并定位同一地址
+[34/54] tests/e2e/unit9-10.spec.js:27:1 › 纸笔保留教材 A 六题与 B 十二题，真实输出一张有足够书写空间的 A4
+[35/54] tests/e2e/unit9-10.spec.js:34:1 › 挑战错答、提示、暂停刷新与独立拼句分别记录，不提前发证
+[36/54] tests/e2e/unit9-10.spec.js:39:1 › 内容升版使被改活动失效，其他活动草稿保留；不会套用旧答案
+[37/54] tests/e2e/unit9-10.spec.js:43:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录
+[38/54] tests/e2e/unit9-10.spec.js:48:1 › 短屏单词练习末题与重练都能操作，重练清本轮答案并保留已得星星
+[39/54] tests/e2e/units9-12-classroom.spec.js:37:27 › Lesson 9–10 无配音可逐句看完原文，刷新续读，中文独立展开
+[40/54] tests/e2e/units9-12-classroom.spec.js:37:27 › Lesson 11–12 无配音可逐句看完原文，刷新续读，中文独立展开
+[41/54] tests/e2e/units9-12-classroom.spec.js:65:27 › Lesson 9–10 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留
+[42/54] tests/e2e/units9-12-classroom.spec.js:65:27 › Lesson 11–12 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留
+[43/54] tests/e2e/units9-12-classroom.spec.js:88:27 › Lesson 9–10 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择
+[44/54] tests/e2e/units9-12-classroom.spec.js:88:27 › Lesson 11–12 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择
+[45/54] tests/e2e/units9-12-classroom.spec.js:116:27 › Lesson 9–10 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立
+[46/54] tests/e2e/units9-12-classroom.spec.js:116:27 › Lesson 11–12 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立
+[47/54] tests/e2e/units9-12-classroom.spec.js:137:27 › Lesson 9–10 旧录音中断可续读，保留词卡页、原练习与词块草稿
+[48/54] tests/e2e/units9-12-classroom.spec.js:137:27 › Lesson 11–12 旧录音中断可续读，保留词卡页、原练习与词块草稿
+[49/54] tests/e2e/units9-12-classroom.spec.js:167:27 › Lesson 9–10 旧15星升级保留9星，新题独立完成后再领课堂配套证书
+[50/54] tests/e2e/units9-12-classroom.spec.js:167:27 › Lesson 11–12 旧15星升级保留9星，新题独立完成后再领课堂配套证书
+[51/54] tests/e2e/units9-12-classroom.spec.js:186:59 › Lesson 9–10 320 阅读控件不跳动，图片题和长词义选项完整
+[52/54] tests/e2e/units9-12-classroom.spec.js:186:59 › Lesson 9–10 1280 阅读控件不跳动，图片题和长词义选项完整
+[53/54] tests/e2e/units9-12-classroom.spec.js:186:59 › Lesson 11–12 320 阅读控件不跳动，图片题和长词义选项完整
+[54/54] tests/e2e/units9-12-classroom.spec.js:186:59 › Lesson 11–12 1280 阅读控件不跳动，图片题和长词义选项完整
+  54 passed (3.3m)

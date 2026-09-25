@@ -96,7 +96,7 @@
   {id:'l5',title:'我的厨房导览',activities:[['exam','厨房小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
  const definition={id:'unit25-26',version:1,title:'厨房探访记',path:'/unit25-26/',start:'learn/words',progress:{learningKey:'canran:unit25-26:learning:v1'},objects:WORDS,stages,questions,
-  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK}};
+  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit2526=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

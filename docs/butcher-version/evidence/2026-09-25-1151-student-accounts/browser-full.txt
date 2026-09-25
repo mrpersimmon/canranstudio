@@ -1,0 +1,31 @@
+
+> canranstudio@0.0.0 test:login
+> playwright test -c playwright.login.config.js
+
+
+Running 19 tests using 1 worker
+
+(node:71867) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/login/access.spec.js:6:1 › 未登录先看到学号密码入口，不能直接进入教学单元 (257ms)
+  ✓   2 tests/login/access.spec.js:15:1 › 学号密码进入自己的班级，七项下架且旧直链不能越权 (2.0s)
+  ✓   3 tests/login/access.spec.js:33:1 › 管理员可以创建班级并只开放 Lesson 1–2 (399ms)
+  ✓   4 tests/login/access.spec.js:49:1 › 已完成活动跨设备同步，未提交选项留在原设备 (4.8s)
+  ✓   5 tests/login/access.spec.js:62:1 › A/B 范围、已缓存课程换人、清单与固定资源均受权限限制 (2.6s)
+  ✓   6 tests/login/access.spec.js:78:1 › 两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作 (1.7s)
+  ✓   7 tests/login/access.spec.js:93:1 › 离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待 (3.1s)
+  ✓   8 tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (7.1s)
+  ✓   9 tests/login/access.spec.js:111:1 › 转班、停用、恢复、重置密码和空班预览 (3.3s)
+  ✓  10 tests/login/access.spec.js:123:1 › 16 个教学单元冷启动、图片完整、词卡和一道真实作答，手机界面 (18.2s)
+  ✓  11 tests/login/access.spec.js:143:1 › 49–50 完整课程真实音频、作答和证书，成果换设备保留 (1.6m)
+  ✓  12 tests/login/access.spec.js:149:1 › 冷启动图片失败保持加载页，修复后重试；未登录的脚本关闭页面无课件 (2.6s)
+  ✓  13 tests/login/access.spec.js:158:1 › 学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效 (4.5s)
+  ✓  14 tests/login/access.spec.js:172:1 › 进入核验失败时可见重试界面，不被资源加载层遮住 (1.4s)
+
+  ✓  15 tests/login/recovery.spec.js:8:1 › 停服务备份恢复后，原学号密码、班级和真实成果仍可使用 (3.5s)
+  ✓  16 tests/login/recovery.spec.js:26:1 › 学习卡数据库升级保留原学生成果，旧卡及旧会话失效，重启不重复分配学号 (3.2s)
+  ✓  17 tests/login/recovery.spec.js:50:1 › 旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领 (5.7s)
+  ✓  18 tests/login/student-accounts.spec.js:6:1 › 重名学生独立学号，拼音初始密码登录后先改密才能学习 (2.2s)
+  ✓  19 tests/login/student-accounts.spec.js:60:1 › 丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果 (3.6s)
+
+  19 passed (2.8m)

@@ -41,45 +41,15 @@ test('Lesson 1–2 用场景找物与两项综合判断取代换词长队列', a
   await expect(exam.getByRole('button', { name: '下一站：我的单元证书', exact: true })).toBeVisible();
 });
 
-test('Lesson 3–4 先拼句再接力，四项接力和三题挑战不重复刷肯定回答', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/unit3-4/#learn/listen');
+test('Lesson 3–4 合并重复工坊，21题覆盖不同语言判断', async ({ page }) => {
+  const { completeActivity } = require('../support/unit3-4-flow');
+  await page.goto('/unit3-4/#learn/reply');
+  await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
   await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '7');
-  await page.goto('/unit3-4/#learn/ask');
-  const ask = page.locator('.stage-ask');
-  await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '1');
-  await choose(ask, 'Is this your teacher?', '完成这一站');
-  await ask.getByRole('button', { name: '下一站：词块拼装台', exact: true }).click();
-  await expect(page).toHaveURL(/#learn\/trans$/);
-  const trans = page.locator('.stage-trans');
-  await expect(trans.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '2');
-  await choose(trans, ['This', 'is', 'not', 'my', 'umbrella.']);
-  await choose(trans, ["It's", 'your', 'book.'], '完成这一站');
-  await trans.getByRole('button', { name: '下一站：你我的接力', exact: true }).click();
-  const reply = page.locator('.stage-reply');
-  await expect(reply.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
-  await reply.getByRole('button', { name: '听一遍', exact: true }).click();
-  await choose(reply, '你的');
-  await expect(reply).toContainText('换同学对你说');
-  await choose(reply, 'your');
-  await choose(reply, ['No.', "It isn't", 'my coat.', "It's", 'your coat.']);
-  await expect(reply).toContainText('不知道是谁的');
-  await choose(reply, "No, it isn't.", '完成这一站');
-  await reply.getByRole('button', { name: '下一站：认领小挑战', exact: true }).click();
-  const exam = page.locator('.stage-exam');
-  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3');
-  await exam.getByRole('button', { name: '听一遍', exact: true }).click();
-  await choose(exam, 'school');
-  await choose(exam, 'Sorry, sir. Is this your umbrella?');
-  await expect(exam).toContainText('Here is my coat. This is not my umbrella.');
-  await exam.getByRole('button', { name: '外套是我的；雨伞是工作人员的', exact: true }).click();
-  await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
-  await exam.getByRole('button', { name: '再试一次', exact: true }).click();
-  await exam.screenshot({ path: 'output/playwright/unit-dedup/unit34-evidence-390.png' });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await choose(exam, '外套是我的；雨伞主人还不知道', '查看本次记录');
-  await expect(exam).toContainText('首次独立答对 2 / 3');
+  await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
+  await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3');
+  await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
+  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 3 / 3');
 });
 
 test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断', async ({ page }) => {
@@ -142,6 +112,12 @@ async function priorEdition(page, unit) {
   await page.route('**/' + unit + '/content.js*', route => prior
     ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit-dedup-before', unit + '.js'), contentType: 'text/javascript', headers: { 'cache-control': 'no-store' } })
     : route.continue());
+  if (unit === 'unit3-4') {
+    for (const name of ['index.html', 'unit.js']) {
+      const pattern = name === 'index.html' ? /\/unit3-4\/(?:index\.html)?$/ : '**/unit3-4/unit.js*';
+      await page.route(pattern, route => prior ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit3-4-voiced-before', name), contentType: name.endsWith('.html') ? 'text/html' : 'text/javascript' }) : route.continue());
+    }
+  }
   // Fast state-transition setup only; native audio is covered by the tests above.
   await page.addInitScript(() => {
     window.Audio = class extends EventTarget {
@@ -191,7 +167,7 @@ test('Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答'
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 
-test('Lesson 3–4 升级旧五题接力和拼句后重新作答，课文与理解记录保留', async ({ page }) => {
+test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留', async ({ page }) => {
   const upgrade = await priorEdition(page, 'unit3-4');
   await priorStory(page, 'unit3-4', 12);
   await priorGroup(page, 'unit3-4', 'roles', ['外套和雨伞', '五号', '雨伞', '客人的', '是不是客人的雨伞', '找回了']);
@@ -201,11 +177,13 @@ test('Lesson 3–4 升级旧五题接力和拼句后重新作答，课文与理�
   await expect(page.locator('#starCount')).toHaveText('6');
   upgrade();
   await page.reload();
-  for (const [activity, count] of [['ask', 1], ['trans', 2], ['reply', 4]]) await expectFresh(page, 'unit3-4', activity, count);
+  for (const [activity, count] of [['listen', 7], ['reply', 4]]) await expectFresh(page, 'unit3-4', activity, count);
   await page.goto('/unit3-4/#learn/roles');
-  await expect(page.locator('.stage-roles').getByRole('button', { name: '再练一轮', exact: true })).toBeVisible();
-  await expect(page.locator('.stage-text')).toContainText('故事听完了！');
-  await expect(page.locator('#starCount')).toHaveText('3');
+  // This edition changed reply, but its six story questions exactly match the
+  // reviewed predecessor. Keep only the two still-identical story questions.
+  await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
+  await expect(page.locator('.stage-text')).toContainText('故事看完了！');
+  await expect(page.locator('#starCount')).toHaveText('1');
 });
 
 test('Lesson 49–50 旧理解、问句、分类与挑战不代答新版，交接活动保留', async ({ page }) => {

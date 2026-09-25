@@ -4,7 +4,7 @@
   const base = entryScript.dataset.base, courseId = entryScript.dataset.course;
   const store = CanranCourseCache.open(base);
   const updates = typeof BroadcastChannel === 'function' ? new BroadcastChannel(store.prefix) : null;
-  const memoryUrls = new Map(), heldBackgrounds = [];
+  const memoryUrls = new Map(), heldImages = new Map();
   const cancellation = new AbortController();
   const taskKey = 'preparing:' + crypto.randomUUID();
   let observer, painting = false, withdrawn = false, replacement;
@@ -83,6 +83,11 @@
     if (!image.naturalWidth) throw new Error('图片暂未准备好');
     return image;
   }
+  async function holdImage(src) {
+    if (!heldImages.has(src)) heldImages.set(src, imageReady(src));
+    try { return await heldImages.get(src); }
+    catch (error) { heldImages.delete(src); throw error; }
+  }
   async function prepare(pack, foreground = true) {
     await store.maintain(() => store.put('meta', leaseKey(pack), { pack: pack.id + '@' + pack.revision, expires: Date.now() + 30 * 60 * 1000, resources: [...pack.required, ...pack.audio].map(item => item.sha256) })).catch(() => {});
     let done = 0;
@@ -135,6 +140,13 @@
       }
       fallbackImages();
     }
+    // Validating cached bytes through a temporary blob URL does not prepare the
+    // URL used by a later card or character. Keep every actual display image
+    // decoded before entry, so routine DOM swaps never reopen the page guard.
+    const pictures = [...resources.values()].filter(({ item }) => item.type.startsWith('image/'));
+    await Promise.all(Array.from({ length: 4 }, async () => {
+      while (pictures.length) await holdImage(resourceAddress(pictures.shift().item.key));
+    }));
     const parsed = new DOMParser().parseFromString(new TextDecoder().decode(resources.get(pack.entry).buffer), 'text/html');
     const scripts = [...parsed.querySelectorAll('script')].map(script => ({ src: script.getAttribute('src'), text: script.textContent, type: script.type }));
     parsed.querySelectorAll('script').forEach(script => script.remove());
@@ -154,7 +166,7 @@
     document.body.className = parsed.body.className;
     for (const attribute of parsed.documentElement.attributes) if (attribute.name !== 'data-course-preparing') document.documentElement.setAttribute(attribute.name, attribute.value);
     const backgrounds = new Set([...document.querySelectorAll('style')].flatMap(style => [...style.textContent.matchAll(/url\(\s*["']?([^)'"\s]+)["']?\s*\)/g)].map(match => match[1])).filter(url => /\.(?:svg|png|webp|avif|jpe?g)(?:[?#]|$)/.test(url) || url.startsWith('blob:')));
-    for (const url of backgrounds) heldBackgrounds.push(await imageReady(url));
+    for (const url of backgrounds) await holdImage(resourceAddress(url));
     await Promise.all([...document.fonts].map(font => font.load()));
     for (const original of scripts) {
       executionStarted = true;
@@ -271,9 +283,11 @@
     document.getElementById('courseLoadingRetry').hidden = true;
     status('正在准备课程…');
     try {
+      if (window.CanranAccessReady) await window.CanranAccessReady;
       controlled = await connectWorker();
       store.onQuota = controlled ? () => rpc(navigator.serviceWorker.controller, { type: 'course:clean' }, 15000) : null;
-      const pack = await store.current(courseId) || await latest();
+      const cachedPack = await store.current(courseId);
+      const pack = (cachedPack && (!window.CanranAccessReady || cachedPack.accessPolicy === 'class-v1') ? cachedPack : null) || await latest();
       const resources = await prepare(pack);
       await start(pack, resources);
     } catch (error) {

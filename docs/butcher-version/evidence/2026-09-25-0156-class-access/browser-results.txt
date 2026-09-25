@@ -1,0 +1,20 @@
+2026-09-25 本地 Chromium；不是生产或手机真机验收。
+
+Running 16 tests using 1 worker
+  ✓   1 tests/login/access.spec.js:25:1 › 未登录先看到个人学习码入口，不能直接进入教学单元 (401ms)
+  ✓   2 tests/login/access.spec.js:34:1 › 学习卡进入自己的班级，七项下架且旧直链不能越权 (1.3s)
+  ✓   3 tests/login/access.spec.js:53:1 › 管理员可以创建班级并只开放 Lesson 1–2 (347ms)
+  ✓   4 tests/login/access.spec.js:70:1 › 已完成活动跨设备同步，未提交选项留在原设备 (4.2s)
+  ✓   5 tests/login/access.spec.js:83:1 › A/B 范围、已缓存课程换人、清单与固定资源均受权限限制 (1.9s)
+  ✓   6 tests/login/access.spec.js:98:1 › 两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作 (1.2s)
+  ✓   7 tests/login/access.spec.js:113:1 › 离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待 (1.9s)
+  ✓   8 tests/login/access.spec.js:123:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (6.5s)
+  ✓   9 tests/login/access.spec.js:131:1 › 转班、停用、恢复、重发学习卡和空班预览 (2.6s)
+  ✓  10 tests/login/access.spec.js:143:1 › 16 个教学单元冷启动、图片完整、词卡和一道真实作答，手机界面 (16.6s)
+  ✓  11 tests/login/access.spec.js:163:1 › 49–50 完整课程真实音频、作答和证书，成果换设备保留 (1.6m)
+  ✓  12 tests/login/access.spec.js:169:1 › 冷启动图片失败保持加载页，修复后重试；未登录的脚本关闭页面无课件 (2.3s)
+  ✓  13 tests/login/access.spec.js:178:1 › 学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效 (3.1s)
+  ✓  14 tests/login/access.spec.js:192:1 › 进入核验失败时可见重试界面，不被资源加载层遮住 (964ms)
+  ✓  15 tests/login/recovery.spec.js:7:1 › 停服务备份恢复后，原学习卡、班级和真实成果仍可使用 (3.2s)
+  ✓  16 tests/login/recovery.spec.js:26:1 › 旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领 (5.5s)
+  16 passed (2.5m)

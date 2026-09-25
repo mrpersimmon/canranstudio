@@ -483,6 +483,7 @@ async function buildStatic({
 }
 
 if (require.main === module) {
+  if(require('node:fs').existsSync(path.join(__dirname,'../server/catalog.js'))){console.error('班级访问版本必须使用 build:login 和访问服务，不能发布为公开静态目录。');process.exit(1);}
   const args = process.argv.slice(2);
   const valid = !args.length || args.length === 2 && args[0] === '--base-path';
   (valid ? buildStatic({ basePath: args[1] || '/' }) : Promise.reject(new Error('usage: build-static.js [--base-path /lesson/]')))

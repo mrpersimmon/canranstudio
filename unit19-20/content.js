@@ -108,7 +108,7 @@
   {id:'l5',title:'再出发',activities:[['exam','公园小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
  const definition={id:'unit19-20',version:1,title:'冰淇淋休息站',path:'/unit19-20/',start:'learn/words',progress:{learningKey:'canran:unit19-20:learning:v1'},objects:WORDS,stages,questions,
-  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK}};
+  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit1920=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

@@ -1,0 +1,26 @@
+
+Running 18 tests using 1 worker
+
+(node:89461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A01：实际文件、重听和刷新 /
+[2/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A02：实际文件、重听和刷新 /
+[3/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A03：实际文件、重听和刷新 /
+[4/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 修订录音 A04：实际文件、重听和刷新 /
+[5/18] tests/e2e/pronunciation-repairs.spec.js:84:3 › loose 音标、实际播放与刷新 /
+[6/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A01：实际文件、重听和刷新 /lesson
+[7/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A02：实际文件、重听和刷新 /lesson
+[8/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 历史修订录音 A03：实际文件、重听和刷新 /lesson
+[9/18] tests/e2e/pronunciation-repairs.spec.js:72:31 › 修订录音 A04：实际文件、重听和刷新 /lesson
+[10/18] tests/e2e/pronunciation-repairs.spec.js:84:3 › loose 音标、实际播放与刷新 /lesson
+[11/18] tests/e2e/pronunciation-repairs.spec.js:97:70 › 历史修订录音失败后仍可重试 A01
+[12/18] tests/e2e/pronunciation-repairs.spec.js:97:70 › 历史修订录音失败后仍可重试 A03
+[13/18] tests/e2e/pronunciation-repairs.spec.js:97:70 › 修订录音失败后仍可重试 A04
+[14/18] tests/e2e/pronunciation-repairs.spec.js:108:1 › 历史配音版课文新录音失败不推进，重试后可继续，旧句重听不改变当前句
+[15/18] tests/e2e/pronunciation-repairs.spec.js:126:40 › 历史配音版只更换录音时保留原课文当前句与其他答题进度
+[16/18] tests/e2e/pronunciation-repairs.spec.js:126:40 › 历史配音版只更换录音时保留原课文完成记录与其他答题进度
+[17/18] tests/e2e/unit7-8-audio.spec.js:7:37 › I 词卡保留音标和释义，翻面与刷新不请求配音：/
+[18/18] tests/e2e/unit7-8-audio.spec.js:7:37 › I 词卡保留音标和释义，翻面与刷新不请求配音：/lesson
+  18 passed (3.8m)
