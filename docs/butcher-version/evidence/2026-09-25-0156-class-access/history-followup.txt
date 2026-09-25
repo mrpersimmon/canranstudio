@@ -1,0 +1,5 @@
+历史恢复遮罩补充后的页面复查：
+  ✓  1 tests/login/access.spec.js:83:1 › A/B 范围、已缓存课程换人、清单与固定资源均受权限限制 (2.0s)
+  ✓  2 tests/login/access.spec.js:99:1 › 两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作 (1.2s)
+  ✓  3 tests/login/access.spec.js:193:1 › 进入核验失败时可见重试界面，不被资源加载层遮住 (964ms)
+  3 passed (5.1s)

@@ -1,0 +1,49 @@
+
+> canranstudio@0.0.0 test:login
+> playwright test -c playwright.login.config.js tests/login/student-accounts.spec.js --grep 脚本不可用
+
+
+Running 1 test using 1 worker
+
+(node:72757) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/login/student-accounts.spec.js:6:1 › 脚本不可用时禁用登录提交，不把密码写入地址 (5.2s)
+
+
+  1) tests/login/student-accounts.spec.js:6:1 › 脚本不可用时禁用登录提交，不把密码写入地址 ──────────────────────────────
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('button', { name: '进入我的课程' })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: '进入我的课程' })
+        14 × locator resolved to <button class="primary">进入我的课程</button>
+           - unexpected value "enabled"
+
+
+       8 |   try {
+       9 |     const page = await context.newPage(); await page.goto('/lesson/');
+    > 10 |     await expect(page.getByRole('button', { name: '进入我的课程' })).toBeDisabled();
+         |                                                                ^
+      11 |     await expect(page.getByLabel('密码', { exact: true })).toBeDisabled();
+      12 |     await expect(page.getByText('请开启浏览器的 JavaScript 后使用学号和密码进入课程。')).toBeVisible();
+      13 |     expect(new URL(page.url()).search).toBe('');
+        at /Users/permission/Documents/ChatGPT/canranstudio.cn/tests/login/student-accounts.spec.js:10:64
+
+    Error Context: test-results/student-accounts-脚本不可用时禁用登录提交，不把密码写入地址/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/student-accounts-脚本不可用时禁用登录提交，不把密码写入地址/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/student-accounts-脚本不可用时禁用登录提交，不把密码写入地址/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/login/student-accounts.spec.js:6:1 › 脚本不可用时禁用登录提交，不把密码写入地址 ───────────────────────────────

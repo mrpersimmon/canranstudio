@@ -5,8 +5,8 @@ const subjectAnswers = ['第三人称单数','第三人称复数','第三人称�
 
 // Fixed expectations transcribed from the approved unit. Setup earns a real
 // browser session through the learner flow, without fabricating completion.
-async function completeUnit(page, { basePath = '/' } = {}) {
-  await page.addInitScript(() => {
+async function completeUnit(page, { basePath = '/', realAudio = false } = {}) {
+  if (!realAudio) await page.addInitScript(() => {
     window.Audio = class extends EventTarget {
       constructor(src) { super(); this.src = src; this.currentTime = 0; }
       play() { queueMicrotask(() => this.dispatchEvent(new Event('ended'))); return Promise.resolve(); }

@@ -86,7 +86,7 @@
 
   // A completion belongs to this unit and this activity's content version.
   // Replaying creates a fresh draft without turning earned completion into answers.
-  const required={l1:['listen'],l2:['text','roles'],l3:['doare','give','needs','pouch','either'],l4:['subjects','fill','choice','trans'],l5:['exam']};
+  const required=Object.fromEntries(stages.map(stage=>[stage.id,stage.required]));
   const signatures=Object.fromEntries(Object.entries(questions).map(([id,items])=>[id,'v1:'+items.map(q=>q.id).join('|')]));
   signatures.text='v1:'+content.DIALOGUE.map(line=>line.text).join('|');signatures.subjects='v1:'+content.SUBJECTS.version;
   const saved=practice.activity('unitCompleted');

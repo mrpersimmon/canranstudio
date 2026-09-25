@@ -121,7 +121,7 @@
   const definition = {
     id: 'unit3-4', version: 1, title: '雨伞认领小帮手', path: '/unit3-4/', start: 'learn/words',
     progress: { learningKey: 'canran:unit3-4:learning:v1' },
-    learning: { WORDS, PHRASES, SENTENCE_MODELS, REPLY_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK }, objects, stages, questions
+    learning: { WORDS, PHRASES, SENTENCE_MODELS, REPLY_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions
   };
   root.CanranCore.unit34 = definition;
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;

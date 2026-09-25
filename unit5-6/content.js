@@ -148,7 +148,7 @@
     {id:'l5',title:'见面小达人',activities:[['exam','见面小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
   ];
   const definition={id:'unit5-6',version:1,title:'新朋友见面会',path:'/unit5-6/',start:'learn/words',progress:{learningKey:'canran:unit5-6:learning:v1'},
-    learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,CARS,CHOICE_MODELS,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
+    learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,CARS,CHOICE_MODELS,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
   root.CanranCore.unit56=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

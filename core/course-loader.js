@@ -271,9 +271,11 @@
     document.getElementById('courseLoadingRetry').hidden = true;
     status('正在准备课程…');
     try {
+      if (window.CanranAccessReady) await window.CanranAccessReady;
       controlled = await connectWorker();
       store.onQuota = controlled ? () => rpc(navigator.serviceWorker.controller, { type: 'course:clean' }, 15000) : null;
-      const pack = await store.current(courseId) || await latest();
+      const cachedPack = await store.current(courseId);
+      const pack = (cachedPack && (!window.CanranAccessReady || cachedPack.accessPolicy === 'class-v1') ? cachedPack : null) || await latest();
       const resources = await prepare(pack);
       await start(pack, resources);
     } catch (error) {

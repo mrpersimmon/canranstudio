@@ -44,13 +44,19 @@ function entryHtml(source, basePath, course, brandImage) {
   return html.replace(/(<body\b[^>]*>)/i, '$1' + loaderMarkup(basePath, course, brandImage) + noScript);
 }
 
-async function createCoursePackages({ root, basePath = '/' }) {
+async function createCoursePackages({ root, basePath = '/', courseIds = null, isolatedDefinitions = false }) {
   normalizeBasePath(basePath);
   const generated = new Map(), sourceFiles = new Map(), resourceEntries = new Map();
+  let currentCourse;
   async function bytes(relative) {
     if (!sourceFiles.has(relative)) {
       if (relative.startsWith('/') || relative.split('/').includes('..')) throw new Error('Invalid course resource: ' + relative);
       let value = await fs.readFile(path.join(root, relative));
+      if (isolatedDefinitions && relative === 'core/course-catalog.js') {
+        const learning = catalog.requireCourseDefinition('lesson49').learning;
+        const definition = { learning: currentCourse === 'unit49-50' ? learning : { FEEDBACK: learning.FEEDBACK } };
+        value = Buffer.from(`(function(root){root.CanranCore=root.CanranCore||{};const definition=${JSON.stringify(definition)};root.CanranCore.courseCatalog={publicAssetUrl:value=>${JSON.stringify(basePath)} + value.replace(/^\\//,''),requireCourseDefinition:id=>{if(id!=='lesson49')throw new Error('Unknown teaching definition');return definition;}};})(globalThis);`);
+      }
       if (/\.(?:html|js|css|json|svg)$/.test(relative)) value = Buffer.from(scopeSource(value.toString(), relative, basePath));
       sourceFiles.set(relative, value);
     }
@@ -79,6 +85,10 @@ async function createCoursePackages({ root, basePath = '/' }) {
   const courses = [{ id: 'home', entry: 'index.html' }, ...units.map(id => ({ id, entry: id + '/index.html' })), ...catalog.COURSES.filter(course => course.status === 'published').map(course => ({ id: course.id, entry: course.entry }))];
   // COURSE registration uses published map state; keep the source entry list authoritative.
   for (const item of require('./course-registry').PUBLISHED_COURSES) if (!courses.some(course => course.id === item.id)) courses.push({ id: item.id, entry: item.entry });
+  if (courseIds) {
+    if (courseIds.some(id => !courses.some(course => course.id === id))) throw new Error('Unknown course in publication list');
+    for (let i = courses.length - 1; i >= 0; i--) if (!courseIds.includes(courses[i].id)) courses.splice(i, 1);
+  }
   const withdrawn = JSON.parse(await fs.readFile(path.join(root, 'core/course-withdrawals.json'), 'utf8'));
   if (!Array.isArray(withdrawn) || withdrawn.some(value => !/^(?:home|unit\d+-\d+|lesson\d+|soundmark)@[a-f0-9]{64}$/.test(value))) throw new Error('Invalid withdrawn course versions');
   const index = { schema: 1, basePath, protocol: 1, courses: {}, withdrawn };
@@ -86,6 +96,8 @@ async function createCoursePackages({ root, basePath = '/' }) {
   const brandImage = 'data:image/png;base64,' + (await bytes('assets/brand/starflower.png')).toString('base64');
 
   for (const course of courses) {
+    currentCourse = course.id;
+    if (isolatedDefinitions) { sourceFiles.delete('core/course-catalog.js'); resourceEntries.delete('core/course-catalog.js'); }
     const source = (await bytes(course.entry)).toString();
     course.title = course.id === 'home' ? '灿然英语工作室' : (source.match(/<title>([^<]+)<\/title>/i)?.[1] || '我的课程').split(' · ')[0];
     if (!VOICED.has(course.id) && !CLASSROOM.has(course.id)) throw new Error('Declare the teaching mode for ' + course.id);
@@ -148,7 +160,7 @@ async function createCoursePackages({ root, basePath = '/' }) {
     const audio = resources.filter(item => item.type.startsWith('audio/'));
     const mode = noVoice ? 'classroom' : 'voiced';
     const revision = digest(JSON.stringify([mode, resources.map(item => [item.key, item.sha256])]));
-    const manifest = { schema: 1, protocol: 1, basePath, id: course.id, title: course.title, entry: basePath + course.entry, shell: shell.key, route: course.id === 'home' ? basePath : basePath + course.id + '/', revision, mode, required, audio, narration: audio.filter(item => !item.key.includes('/assets/feedback/')), feedback: audio.filter(item => item.key.includes('/assets/feedback/')) };
+    const manifest = { ...(isolatedDefinitions ? {accessPolicy:'class-v1'} : {}), schema: 1, protocol: 1, basePath, id: course.id, title: course.title, entry: basePath + course.entry, shell: shell.key, route: course.id === 'home' ? basePath : basePath + course.id + '/', revision, mode, required, audio, narration: audio.filter(item => !item.key.includes('/assets/feedback/')), feedback: audio.filter(item => item.key.includes('/assets/feedback/')) };
     const manifestBody = Buffer.from(JSON.stringify(manifest));
     const manifestPath = `course-packages/${course.id}/${revision}.json`;
     generated.set(manifestPath, { body: manifestBody, type: TYPES['.json'], immutable: true });

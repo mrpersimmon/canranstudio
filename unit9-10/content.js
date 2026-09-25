@@ -245,6 +245,6 @@
   {id:'l4',title:'看一看，说一说',activities:[['models','观察小画册','cards'],['describe','描述有依据','question'],['trans','词块拼装台','order']],required:['describe','trans']},
   {id:'l5',title:'暖心小伙伴',activities:[['exam','街角小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit9-10',version:1,title:'街角问候站',path:'/unit9-10/',start:'learn/words',progress:{learningKey:'canran:unit9-10:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,MODELS,MODEL_EXAMPLE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
+ const definition={id:'unit9-10',version:1,title:'街角问候站',path:'/unit9-10/',start:'learn/words',progress:{learningKey:'canran:unit9-10:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,MODELS,MODEL_EXAMPLE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
  root.CanranCore.unit910=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

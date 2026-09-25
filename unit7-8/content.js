@@ -128,6 +128,6 @@
   {id:'l4',title:'职业采访台',activities:[['models','职业小图册','cards'],['interview','替朋友问一问','people'],['trans','词块拼装台','order']],required:['interview','trans']},
   {id:'l5',title:'采访小达人',activities:[['exam','采访小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit7-8',version:1,title:'新朋友采访站',path:'/unit7-8/',start:'learn/words',progress:{learningKey:'canran:unit7-8:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,JOBS,INTERVIEWS,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
+ const definition={id:'unit7-8',version:1,title:'新朋友采访站',path:'/unit7-8/',start:'learn/words',progress:{learningKey:'canran:unit7-8:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,JOBS,INTERVIEWS,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
  root.CanranCore.unit78=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

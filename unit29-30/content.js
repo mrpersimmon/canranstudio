@@ -81,7 +81,7 @@
   {id:'l5',title:'我的整理行动',activities:[['exam','整理小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
  const definition={id:'unit29-30',version:1,title:'房间整理行动',path:'/unit29-30/',start:'learn/words',progress:{learningKey:'canran:unit29-30:learning:v1'},objects:WORDS,stages,questions,
-  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,REFERENCE,WRITING_VERBS,WRITING_NOUNS,MODELS,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK}};
+  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,REFERENCE,WRITING_VERBS,WRITING_NOUNS,MODELS,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit2930=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

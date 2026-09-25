@@ -34,20 +34,13 @@ test('/home/ preserves query and hash through the compatibility redirect', async
   await expect(page).toHaveTitle(/我的课程/);
 });
 
-test('course cards and course return links form a closed navigation loop', async ({ page }) => {
-  const routePageCourses = PUBLISHED_COURSES.filter(course => (
-    ['lesson49', 'lesson50', 'lesson51', 'lesson52'].includes(course.id)
-  ));
+test('paired unit navigation excludes retired standalone course cards', async ({ page }) => {
   await page.goto('/');
-  await page.getByText('单课练习', { exact: true }).click();
-  for (const course of routePageCourses) {
-    await expect(page.locator(`main a[href="${course.route}"]`)).toHaveCount(1);
-  }
-  for (const course of routePageCourses) {
-    await page.goto(course.route);
-    const returnRoute = `/?district=first-book-49-60&focus=${course.id}`;
-    expect(await page.locator(`a[href="${returnRoute}"]`).count()).toBeGreaterThanOrEqual(1);
-  }
+  await expect(page.locator('.featured-course')).toHaveCount(16);
+  await expect(page.locator('main a[href^="/lesson49/"], main a[href^="/lesson50/"], main a[href^="/soundmark/"]')).toHaveCount(0);
+  await page.locator('#unit12Entry').click();
+  await page.getByRole('link',{name:'我的课程',exact:true}).click();
+  await expect(page.locator('#unit12Entry')).toBeVisible();
 });
 
 test('Lesson 49 audio is present below the Lesson 49 route', async ({ request }) => {

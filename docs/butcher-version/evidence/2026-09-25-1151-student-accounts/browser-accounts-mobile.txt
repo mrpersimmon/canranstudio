@@ -1,0 +1,14 @@
+
+> canranstudio@0.0.0 test:login
+> playwright test -c playwright.login.config.js tests/login/student-accounts.spec.js
+
+
+Running 3 tests using 1 worker
+
+(node:72275) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/student-accounts.spec.js:6:1 › 重名学生独立学号，拼音初始密码登录后先改密才能学习 (2.3s)
+  ✓  2 tests/login/student-accounts.spec.js:60:1 › 手机核对多音字和 ü，必填拼音阻止部分添加；主动改密撤销其他设备 (1.9s)
+  ✓  3 tests/login/student-accounts.spec.js:115:1 › 丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果 (3.8s)
+
+  3 passed (8.9s)

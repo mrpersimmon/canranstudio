@@ -1,0 +1,159 @@
+'use strict';
+const { test, expect } = require('@playwright/test');
+const { adminLogin, createStudent, fillLogin, setPassword, studentLogin } = require('./helpers');
+const { completeActivity } = require('../support/unit13-14-flow');
+
+test('脚本不可用时禁用登录提交，不把密码写入地址', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const page = await context.newPage(); await page.goto('/lesson/');
+    await expect(page.getByRole('button', { name: '进入我的课程' })).toBeDisabled();
+    await expect(page.getByLabel('密码', { exact: true })).toBeDisabled();
+    await expect(page.getByText('登录页面尚未准备好，请刷新页面或启用 JavaScript 后重试。')).toBeVisible();
+    expect(new URL(page.url()).search).toBe('');
+  } finally { await context.close(); }
+});
+
+test('重名学生独立学号，拼音初始密码登录后先改密才能学习', async ({ page, browser }) => {
+  await page.goto('/lesson/admin/');
+  await page.getByLabel('管理员账号').fill('teacher');
+  await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');
+  await page.getByRole('button', { name: '登录管理页' }).click();
+  await page.getByLabel('新班级名称').fill('学号体验班');
+  await page.getByRole('button', { name: '创建班级', exact: true }).click();
+  await page.getByRole('checkbox', { name: /Lesson 13–14 / }).check();
+  await page.getByRole('button', { name: '保存开放课程' }).click();
+  await expect(page.getByRole('status')).toContainText('开放课程已保存');
+  await page.getByLabel('学生姓名或课堂称呼，每行一位').fill('段晓东\n段晓东\n李明');
+  await page.getByRole('button', { name: '核对姓名拼音' }).click();
+  await expect(page.getByLabel('第 1 位学生的姓名拼音')).toHaveValue('duanxiaodong');
+  await expect(page.getByLabel('第 3 位学生的姓名拼音')).toHaveValue('liming');
+  await page.getByRole('button', { name: '确认添加学生' }).click();
+  const rows = page.locator('.student-row');
+  await expect(rows).toHaveCount(3);
+  const accounts = await rows.locator('.student-number').allTextContents();
+  expect(accounts.every(value => /^[a-z]\d{8}$/.test(value))).toBe(true);
+  expect(accounts[0][0]).toBe('d'); expect(accounts[1][0]).toBe('d'); expect(accounts[2][0]).toBe('l');
+  expect(Number(accounts[1].slice(1))).toBe(Number(accounts[0].slice(1)) + 1);
+  expect(Number(accounts[2].slice(1))).toBe(Number(accounts[1].slice(1)) + 1);
+  const context = await browser.newContext(); const student = await context.newPage();
+  try {
+    await student.goto('/lesson/');
+    await student.getByLabel('学号', { exact: true }).fill(accounts[0]);
+    await student.getByLabel('密码', { exact: true }).fill('duanxiaodong');
+    await student.getByRole('button', { name: '进入我的课程' }).click();
+    await expect(student.getByRole('heading', { name: '设置你的新密码' })).toBeVisible();
+    await student.goto('/lesson/unit13-14/#learn/words');
+    await expect(student.getByRole('heading', { name: '设置你的新密码' })).toBeVisible();
+    await expect(student.locator('.unit-word')).toHaveCount(0);
+    expect(await student.evaluate(async () => (await fetch('/lesson/course-index.json')).status)).toBe(403);
+    await student.getByLabel('新密码', { exact: true }).fill('duanxiaodong');
+    await student.getByLabel('再输一次新密码').fill('duanxiaodong');
+    await student.getByRole('button', { name: '保存新密码，开始学习' }).click();
+    await expect(student.getByRole('status')).toContainText('不能使用姓名拼音');
+    await student.getByLabel('新密码', { exact: true }).fill('My-new-journey-2026');
+    await student.getByLabel('再输一次新密码').fill('My-new-journey-2026');
+    await student.getByRole('button', { name: '保存新密码，开始学习' }).click();
+    await expect(student.locator('.unit-word').first()).toBeVisible();
+    await student.goto('/lesson/');
+    await expect(student.getByRole('heading', { name: '段晓东的课程' })).toBeVisible();
+    await student.getByRole('button', { name: '切换学生', exact: true }).click();
+    await student.getByLabel('学号', { exact: true }).fill(accounts[0]);
+    await student.getByLabel('密码', { exact: true }).fill('duanxiaodong');
+    await student.getByRole('button', { name: '进入我的课程' }).click();
+    await expect(student.getByRole('status')).toContainText('学号或密码不正确');
+    await student.getByLabel('密码', { exact: true }).fill('My-new-journey-2026');
+    await student.getByRole('button', { name: '进入我的课程' }).click();
+    await expect(student.getByRole('heading', { name: '段晓东的课程' })).toBeVisible();
+  } finally { await context.close(); }
+});
+
+test('手机核对多音字和 ü，必填拼音阻止部分添加；主动改密撤销其他设备', async ({ page, browser }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await adminLogin(page);
+  await page.getByLabel('新班级名称').fill('拼音核对班');
+  await page.getByRole('button', { name: '创建班级', exact: true }).click();
+  await page.getByRole('checkbox', { name: /Lesson 13–14 / }).check();
+  await page.getByRole('button', { name: '保存开放课程' }).click();
+  await expect(page.getByRole('status')).toContainText('开放课程已保存');
+  await page.getByLabel('学生姓名或课堂称呼，每行一位').fill('曾乐\n吕明');
+  await page.getByRole('button', { name: '核对姓名拼音' }).click();
+  await page.getByLabel('第 1 位学生的姓名拼音').fill('zengyue');
+  await expect(page.getByLabel('第 2 位学生的姓名拼音')).toHaveValue('lvming');
+  await page.getByLabel('第 2 位学生的姓名拼音').fill('');
+  await page.getByRole('button', { name: '确认添加学生' }).click();
+  await expect(page.getByRole('heading', { name: '核对姓名拼音' })).toBeVisible();
+  await page.getByLabel('第 2 位学生的姓名拼音').fill('lvming');
+  await page.getByRole('button', { name: '确认添加学生' }).click();
+  await expect(page.locator('.student-row')).toHaveCount(2);
+  const number = await page.locator('.student-row .student-number').first().textContent();
+  const account = { number, password: 'zengyue', fresh: true };
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const learner = await context.newPage(); let other;
+  try {
+    await learner.goto('/lesson/');
+    await learner.getByRole('button', { name: '忘记学号或密码' }).click();
+    await expect(learner.getByRole('status')).toContainText('请联系老师');
+    await learner.screenshot({ path: 'output/login/student-number-login-mobile.png', fullPage: true });
+    await fillLogin(learner, account);
+    await expect(learner.getByRole('heading', { name: '设置你的新密码' })).toBeVisible();
+    await learner.screenshot({ path: 'output/login/student-password-setup-mobile.png', fullPage: true });
+    expect(await learner.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await setPassword(learner, 'My-first-password-2026');
+    account.password = 'My-first-password-2026'; account.fresh = false;
+    other = await studentLogin(browser, account);
+    await learner.getByRole('button', { name: '修改密码', exact: true }).click();
+    await learner.getByLabel('当前密码').fill('Wrong-first-password-2026');
+    await learner.getByLabel('新密码', { exact: true }).fill('My-second-password-2026');
+    await learner.getByLabel('再输一次新密码').fill('My-second-password-2026');
+    await learner.getByRole('button', { name: '保存新密码', exact: true }).click();
+    await expect(learner.getByRole('status')).toContainText('当前密码不正确');
+    await learner.getByLabel('当前密码').fill(account.password);
+    await learner.getByLabel('再输一次新密码').fill('Mismatched-password-2026');
+    await learner.getByRole('button', { name: '保存新密码', exact: true }).click();
+    await expect(learner.getByRole('status')).toContainText('两次输入的新密码不一致');
+    await learner.getByLabel('再输一次新密码').fill('My-second-password-2026');
+    await learner.getByRole('button', { name: '保存新密码', exact: true }).click();
+    await expect(learner.getByRole('heading', { name: '曾乐的课程' })).toBeVisible();
+    await other.page.reload(); await expect(other.page.getByLabel('学号', { exact: true })).toBeVisible();
+    await fillLogin(other.page, account);
+    await expect(other.page.getByRole('status')).toContainText('学号或密码不正确');
+    await fillLogin(other.page, account, 'My-second-password-2026');
+    await expect(other.page.getByRole('heading', { name: '曾乐的课程' })).toBeVisible();
+  } finally { await context.close(); await other?.context.close(); }
+});
+
+test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果', async ({ page, browser }) => {
+  await adminLogin(page);
+  const account = await createStudent(page, '找回账号班', '单乐', [/Lesson 13–14 /]);
+  expect(account.initialPassword).toBe('shanle');
+  const a = await studentLogin(browser, account), b = await studentLogin(browser, account);
+  try {
+    await completeActivity(a.page, 'colours', '/lesson');
+    await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    await page.getByLabel('查找学生（姓名或学号）').fill('单乐');
+    const row = page.locator('#searchResults .student-row');
+    await expect(row.locator('.student-number')).toHaveText(account.number);
+    await row.getByRole('button', { name: '查看账号' }).click();
+    await expect(page.locator('.learning-card')).toContainText('已设置密码');
+    await expect(page.locator('.initial-password')).toHaveCount(0);
+    await page.getByRole('button', { name: '返回班级', exact: true }).click();
+    await page.getByRole('button', { name: '管理学生', exact: true }).click();
+    await page.getByLabel('学生称呼').fill('单乐乐');
+    await page.getByRole('button', { name: '保存学生信息' }).click();
+    await expect(page.locator('.student-number')).toHaveText(account.number);
+    await page.getByRole('button', { name: '管理学生', exact: true }).click();
+    await page.getByRole('button', { name: '重置密码', exact: true }).click();
+    await page.getByLabel('姓名拼音（重置后的初始密码）').fill('shanlele');
+    await page.getByRole('button', { name: '确认重置密码' }).click();
+    await expect(page.locator('.initial-password')).toHaveText('shanlele');
+    await a.page.reload(); await expect(a.page.getByLabel('学号', { exact: true })).toBeVisible();
+    await b.page.reload(); await expect(b.page.getByLabel('学号', { exact: true })).toBeVisible();
+    await fillLogin(b.page, account);
+    await expect(b.page.getByRole('status')).toContainText('学号或密码不正确');
+    await fillLogin(b.page, account, 'shanlele');
+    await setPassword(b.page, 'Recovered-journey-2026!');
+    await expect(b.page.locator('.course')).toContainText('3 / 15');
+    await b.page.locator('.course').click(); await expect(b.page.locator('#starCount')).toHaveText('3');
+  } finally { await a.context.close(); await b.context.close(); }
+});

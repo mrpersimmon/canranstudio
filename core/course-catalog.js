@@ -2141,6 +2141,12 @@
     if (!course) throw new Error(`published course not found: ${id}`);
     return course;
   }
+  // Shared teaching definitions may outlive their public course entry.
+  function requireCourseDefinition(id) {
+    const course = COURSES.find(candidate => candidate.id === id);
+    if (!course) throw new Error(`course definition not found: ${id}`);
+    return course;
+  }
 
   function assessLearningLocation(course) {
     if (!course || course.map?.v1Visible !== true) {
@@ -2381,6 +2387,7 @@
     LAUNCH_DISTRICT,
     COURSES,
     PUBLISHED_COURSES,
+    requireCourseDefinition,
     HOME_COURSES,
     MAP_COURSES,
     createLessonMap,

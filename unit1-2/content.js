@@ -114,7 +114,7 @@
   const definition = {
     id: 'unit1-2', version: 1, experienceVersion: 'scene-1', title: '礼貌小帮手', path: '/unit1-2/', start: 'learn/words',
     progress: { learningKey: 'canran:unit1-2:learning:v1' },
-    learning: { WORDS, PHRASES, SENTENCE_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK }, objects, stages, questions
+    learning: { WORDS, PHRASES, SENTENCE_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions
   };
   root.CanranCore.unit12 = definition;
   // The navigation can read unit metadata without activating its storage context.

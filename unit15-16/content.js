@@ -148,7 +148,7 @@
   ];
   const definition = {id:'unit15-16',version:1,title:'护照小检查站',path:'/unit15-16/',start:'learn/words',
     progress:{learningKey:'canran:unit15-16:learning:v1'},objects:WORDS,stages,questions,
-    learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,NATIONALITIES,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requirePublishedCourse('lesson49').learning.FEEDBACK}};
+    learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,NATIONALITIES,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
   root.CanranCore.unit1516=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
