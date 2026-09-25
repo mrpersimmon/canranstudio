@@ -1,56 +1,68 @@
 # 班级访问版本的运行与发布
 
-当前为本地实现，未部署。产品规则见[班级课程访问方案](../../docs/butcher-version/publish/2026-09-25-1151-v1.1-班级课程访问设计与验收.md)。生产发布必须另行得到用户指令，并确认目标提交、检查结果和真机验收状态。
+生产布局已经用户确认：根目录是新版课程入口，原首页迁到 `/exercise/`，旧 `/lesson/` 下线。账号规则见[班级访问方案](../../docs/butcher-version/publish/2026-09-26-0048-v1.2-班级课程访问设计与验收.md)，迁移规则见[根目录发布与迁移](../../docs/butcher-version/publish/2026-09-26-0134-v1.0-根目录发布与迁移.md)。文档中的发布步骤不代表线上已完成，提交号与线上结果单独记录。
 
-## 目录与首次准备
+## 地址与目录
 
-- 代码：`/opt/canran-lesson/releases/<提交号>`；`/opt/canran-lesson/current` 指向本次版本。
-- 数据：`/var/lib/canran-lesson`，归专用 `canran-lesson` 用户，目录权限 700。不能位于版本目录内。
-- Node.js 24 或更新版本；安装路径如不是 `/usr/bin/node`，对应修改 systemd 的 ExecStart。
-- 私有工作目录保留代码和素材，HTTP 只能通过 `server/app.js` 的允许清单读取。不能把 Git 仓库、数据目录或 dist-login 直接设置为站点根目录。
+| 用途 | 地址或目录 |
+| --- | --- |
+| 学生登录、登录后的班级课程导航 | `https://www.canranstudio.cn/` |
+| 教师管理 | `https://www.canranstudio.cn/admin/` |
+| 原首页和练习内容 | `https://www.canranstudio.cn/exercise/` |
+| 旧课程入口 | `/lesson`、`/lesson/` 及其内容返回 410，不重定向回旧课件 |
+| 私有代码 | `/opt/canran-lesson/releases/<提交号>`；`/opt/canran-lesson/current` 指向本次版本 |
+| 学生数据 | `/var/lib/canran-lesson`；专用用户所有、目录 700，不放在版本目录中 |
+| Node.js | `/opt/canran-node/bin/node`，使用经官方 SHA-256 核验的 Node.js 24 或更新版本 |
+| 原站迁移产物 | `/var/www/canranstudio-exercise/releases/<迁移版本>`；`current` 指向该版本 |
 
-发布前执行：
+HTTP 只通过账号服务的资源允许清单读取新版课程。不能把仓库、数据目录或 dist-login 作为静态根目录。旧练习站保留原有公开方式，它不使用新版学生成果。
+
+## 发布前检查
 
 ```bash
 npm ci
+npm run check:plan
+npm run check:commit
 npm run test:login
-npm run build:login
+LESSON_BASE_PATH=/ npm run build:login
 ```
 
-`dist-login/publication.json` 仅用于核对十六单元和课包版本。生产依赖使用 `npm ci --omit=dev`，服务启动时生成受保护课包。历史课包在私有数据目录保留七天，已有页面可以补齐原版本资源；同样必须登录且具备该课资格。过期课包和无引用资源在服务启动时清理。
+当前账号测试包含根目录整课通关、旧目录下线、迁址后的真实已完成活动保留。`dist-login/publication.json` 是十六单元及课包版本核对表，不是可公开的静态课件。正式包来自已提交版本；生产运行只安装 `npm ci --omit=dev`，不携带本地数据、密钥或 Git 目录。
 
-首次管理员初始化在服务器端运行，先配置 `LESSON_DATA_DIR=/var/lib/canran-lesson`，再运行 `node server/manage.js bootstrap`。凭据只写入该目录的 `admin-first-login.txt`。管理员登录、建班、加学生、核对拼音并打印学号账号单；不要在代码或发布记录里填写密码或账号清单。
+## 首次部署或升级
 
-## 切换入口
+1. 记录并备份当前站点配置、首页发布目录和 `/lesson/` 发布目录；保留旧版本在非公开位置。
+2. 从原首页完整发布包制作迁移产物：`node scripts/migrate-exercise.js <原首页目录> <新的迁移输出目录>`。脚本先核对原发布清单，重写 `/exercise/` 地址，再重算媒体清单、课包、首页及发布清单的校验值。不可禁用完整性校验来解决加载失败。
+3. 上传并核对已提交的账号服务与迁移产物。安装 [systemd 服务](canran-lesson.service)，先在回环地址 `/health` 检查服务，尚不切换公网。
+4. `LESSON_BASE_PATH=/`、`LESSON_ORIGIN=https://www.canranstudio.cn`、`LESSON_TRUST_PROXY=loopback` 和独立 `LESSON_DATA_DIR` 均须显式配置。本地预览默认仍为 `/lesson/`；根目录预览显式配置 `/`。
+5. 数据迁移必须使用配套 SQLite 备份和 card-key，不能复制运行中的数据库单文件。首次管理员初始化或旧管理员恢复使用下方管理命令；是否迁入本地班级数据按用户决定执行。
+6. 用 [site.conf](site.conf) 和 [nginx.conf](nginx.conf) 替换已确认的主域名站点规则。旧 `/lesson/` 及其资源静态 alias 必须取消，不能与新规则并存。TLS 证书与其他独立域名的配置保持原有管理方式。
+7. 先 `nginx -t`，通过后才 reload；再验证根目录登录、班级导航、实际作答与刷新、匿名资源拒绝、旧地址 410，以及 `/exercise/` 首访和复访。正式 Nginx 来源限流也在此阶段验收。
 
-安装 [systemd 服务](canran-lesson.service)，先以 loopback 访问 `/lesson/health` 确认服务能启动。`LESSON_ORIGIN` 必须与最终 HTTPS 来源一致。
+Nginx 必须以 `$remote_addr` 覆写 `X-Forwarded-For`，不能追加客户端输入。生产漏配信任代理会拒绝启动。服务只监听 127.0.0.1，不缓存身份、课程清单和成果；服务不可用时不能回落到公开课件。
 
-**替换**原来的 `canranstudio-lesson-location.conf` 引用为 [nginx.conf](nginx.conf)，同时移除旧 `/lesson/resources/` 和 `/lesson/course-packages/` 的静态 alias。不能把新配置与旧资源 location 并排保留，否则较长的旧 location 仍可能公开资源。检查其他旧根路径是否还指向课件，旧别名也须转入受控 `/lesson/`。
+新旧缓存分别作用于 `/` 与 `/exercise/`。旧 `/lesson/core/subpath-worker.js` 只保留网络直通的退役脚本，替换旧公开缓存；这是清退机制，不是保留旧课程内容。旧根目录课包 Worker 的原地址也返回受权限约束的新 Worker，以更新联网的旧浏览器。已经离线保存且未收到更新的副本无法被即时撤回。
 
-运行 `nginx -t` 后才 reload。保留主官网、证书和其他路径。权限服务不可用时返回失败，不回落到旧公开目录。每次切换必须用无痕未登录、A／B 学生、旧缓存浏览器、七个下架路径和固定资源直链重新验收。对已经完全离线的旧公开副本不作即时撤回承诺。
+## 数据初始化、备份与恢复
 
-网站需要的只有本站 Cookie 和同源请求。服务只监听 127.0.0.1；Nginx 不缓存身份、课程清单或成果。生产启动检查 HTTPS origin 和数据目录位置，配置错误会拒绝启动。
-
-## 备份与恢复
-
-以数据所有者执行。备份包含数据库和配套卡片密钥，缺一不可。目录参数必须使用新目录，避免覆盖已有备份。
+以数据所有者运行，环境中先设置 `LESSON_DATA_DIR=/var/lib/canran-lesson`。首次 `node server/manage.js bootstrap` 将新管理员登录信息写入私有 `admin-first-login.txt`；不在代码或发布记录中填写密码。已有管理员时不会覆盖。
 
 ```bash
 LESSON_DATA_DIR=/var/lib/canran-lesson node server/manage.js backup /var/backups/canran-lesson/新的备份目录
 ```
 
-恢复前停服务，使用新的空数据目录，先恢复、验证，再修改服务的 LESSON_DATA_DIR 指向该目录：
+恢复前停服务，使用新的空数据目录，恢复并检查后再改变服务的数据目录：
 
 ```bash
 LESSON_DATA_DIR=/var/lib/canran-lesson-restored node server/manage.js restore /var/backups/canran-lesson/选定备份目录
 ```
 
-恢复会检查 SQLite 完整性及学习卡密钥，随后在页面核对原学生学号、新密码、班级、开放课程和真实成果。课包由发布代码重建，不依赖浏览器缓存，也不把资源缓存当成学生记录备份。
+恢复核对 SQLite 完整性、加密密钥、学生身份、学号、正式密码、班级、开放课程和成果。课包从发布代码重建。初始密码的截止时间及领取状态以所选备份为准；旧快照不包含备份之后的领取或改密，需要教师核对并重新发放相关待激活账号。
 
-## 回退与账号恢复
+旧库升级只为待激活且已核对拼音的账号轮换随机初始密码，撤销旧学生／待改密会话；正式密码及成果保留。初始密码固定 7 天内可领取一次，领取后最多 15 分钟完成改密，不能超过原截止时间。旧账号单需重新发放。姓名拼音不再作为密码。
 
-回退只切换代码版本，保留数据；仅能回到已验收的班级访问版本。首次上线没有这样的前版时，应停止课程服务并修复，不能退回匿名公开站点。任何未来数据库不兼容升级都需另写迁移／恢复步骤。
+## 回退
 
-重置唯一管理员：使用同一个数据目录运行 `node server/manage.js reset-admin`；生成新密码并撤销旧管理会话。学生卡在管理页逐个重发，不删除学生成果。
+已发布的账号服务只能回退到同样执行随机密码、代理限流和访问控制的兼容版本，保留独立数据目录。首次上线没有兼容前版时，应保持课程服务不可用并修复，不能把新版受限课程退回匿名公开状态。`/exercise/` 有独立的发布目录和链接，不因账号服务回退丢失。
 
-升级学习卡旧库前先备份。首次新服务启动会原位分配学号和初始密码并撤销旧学生会话；内部学生标识及成果不变。通知学生/家长向老师领取学号、完成首次改密；旧二维码不再自动登录。新密码只存摘要，管理员只能重置不能查看。`card-key` 目前仍是旧库兼容备份的一部分，不能单独丢弃。
+管理员恢复使用同一数据目录运行 `node server/manage.js reset-admin`，生成新密码并撤销旧管理会话；不能删除重建学生以解决登录问题。开发、检查、提交、推送、生产切换和真机验收分别记录。

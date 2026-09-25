@@ -1,12 +1,12 @@
 # 网站发布指南
 
-> `codex/login-version` 使用班级访问服务，旧静态发布步骤仅供历史追溯。当前启动、备份与发布边界见[班级访问运行说明](login/README.md)；未正式部署。
+> 当前 `codex/butcher-version` 使用班级访问服务。用户已确认新版部署到根目录、旧首页迁至 `/exercise/`、旧 `/lesson/` 下线。使用[班级访问运行说明](login/README.md)；以下旧静态发布流程仅供历史追溯，不用于本次发布。
 
 发布是把已检查的版本放到正式网站。修改文件、本地测试、提交代码和上线是不同步骤。
 
 正式地址配置为 [www.canranstudio.cn](https://www.canranstudio.cn)。直接访问服务器地址 `http://59.110.217.36` 时会跳转到 HTTPS 加密网站；加密连接与强制加密规则（HSTS）由仓库外的正式站点配置管理。
 
-当前 `codex/butcher-version` 使用独立的 `/lesson/` 入口，按[子目录发布说明](../docs/butcher-version/2026-09-20-0109-v1.2-lesson子目录发布.md)操作。下方根目录切换命令不用于覆盖现有官网首页。
+历史 `codex/butcher-version` 使用独立的 `/lesson/` 入口，当时按[子目录发布说明](../docs/butcher-version/2026-09-20-0109-v1.2-lesson子目录发布.md)操作。下方根目录切换命令不用于覆盖现有官网首页。
 
 缓存改造按[网页加载缓存设计](../docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md)实施并验收。已完成本轮子目录部署，实际验证范围见[发布记录](../docs/butcher-version/2026-09-24-2322-v1.0-缓存与品牌发布验收.md)。后续子目录发布仍须先把固定资源加入长期存储，再切换入口；具体步骤见该文档第 9 节，不能只上传 HTML。
 

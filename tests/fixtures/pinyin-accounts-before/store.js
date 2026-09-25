@@ -1,14 +1,14 @@
+// Frozen from 6e847f3: produces real legacy pinyin-account databases for upgrade tests.
 'use strict';
 const { DatabaseSync, backup } = require('node:sqlite');
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { UNITS } = require('./catalog');
-const { suggestPinyin, validPinyin } = require('./student-credentials');
+const { UNITS } = require('../../../server/catalog');
+const { suggestPinyin, validPinyin } = require('../../../server/student-credentials');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const token = () => crypto.randomBytes(32).toString('base64url');
 const id = () => crypto.randomUUID();
-const INITIAL_PASSWORD_TTL = 7 * 86400000;
 const encodePassword = password => { const salt = crypto.randomBytes(16).toString('hex'); return salt + ':' + crypto.scryptSync(password, salt, 64).toString('hex'); };
 function passwordMatches(password, encoded) {
   const [salt, expected] = encoded.split(':');
@@ -46,34 +46,20 @@ function openStore(directory) {
     if (sequence > 99999999) throw Error('学号已达到当前位数上限');
     return prefix + String(sequence).padStart(8, '0');
   };
-  const newInitialPassword = () => {
-    const password = crypto.randomBytes(12).toString('base64url');
-    return { encoded: encodePassword(password), sealed: seal(password), expires: Date.now() + INITIAL_PASSWORD_TTL };
-  };
   // Upgrade in place: UUIDs remain the owners of all progress and local drafts.
   transaction(() => {
     const columns = new Set(db.prepare('PRAGMA table_info(students)').all().map(row => row.name));
-    for (const [name, type] of [['studentNumber','TEXT'], ['loginPinyin','TEXT'], ['passwordHash','TEXT'], ['mustChangePassword','INTEGER NOT NULL DEFAULT 1'], ['initialPassword','TEXT'], ['initialPasswordExpiresAt','INTEGER']]) {
+    for (const [name, type] of [['studentNumber','TEXT'], ['loginPinyin','TEXT'], ['passwordHash','TEXT'], ['mustChangePassword','INTEGER NOT NULL DEFAULT 1']]) {
       if (!columns.has(name)) db.exec(`ALTER TABLE students ADD COLUMN ${name} ${type}`);
     }
     db.exec('CREATE TABLE IF NOT EXISTS student_numbers (sequence INTEGER PRIMARY KEY AUTOINCREMENT)');
     for (const row of db.prepare('SELECT id,name FROM students WHERE studentNumber IS NULL ORDER BY rowid').all()) {
       const spelling = suggestPinyin(row.name);
       db.prepare('UPDATE students SET studentNumber=?,loginPinyin=?,passwordHash=?,mustChangePassword=1 WHERE id=?')
-        .run(nextNumber(spelling[0] || 's'), spelling, encodePassword(token()), row.id);
+        .run(nextNumber(spelling[0] || 's'), spelling, encodePassword(spelling || token()), row.id);
       db.prepare("DELETE FROM sessions WHERE subject=? AND role IN ('student','student-setup')").run(row.id);
     }
     db.exec('CREATE UNIQUE INDEX IF NOT EXISTS students_number ON students(studentNumber)');
-    // Only legacy, unactivated accounts need rotation. A consumed or expired
-    // credential keeps its deadline, so a restart can never reissue it.
-    for (const row of db.prepare('SELECT id,loginPinyin FROM students WHERE mustChangePassword=1 AND initialPasswordExpiresAt IS NULL').all()) {
-      db.prepare("DELETE FROM sessions WHERE subject=? AND role IN ('student','student-setup')").run(row.id);
-      // Unverified legacy names still require teacher confirmation/reset.
-      if (!validPinyin(row.loginPinyin)) continue;
-      const initial = newInitialPassword();
-      db.prepare('UPDATE students SET passwordHash=?,initialPassword=?,initialPasswordExpiresAt=? WHERE id=?')
-        .run(initial.encoded, initial.sealed, initial.expires, row.id);
-    }
   });
   const student = who => db.prepare('SELECT id,name,classId,active,studentNumber,mustChangePassword FROM students WHERE id=?').get(who);
   const credentials = who => db.prepare('SELECT studentNumber,loginPinyin,passwordHash,mustChangePassword FROM students WHERE id=?').get(who);
@@ -82,24 +68,18 @@ function openStore(directory) {
     // Old grants can only upload this student's pending completed work after
     // signing in again. Their revoked session cannot enter or load a course.
   };
-  const createSession = (role, subject, now, deadline = Infinity) => {
-    db.prepare('DELETE FROM sessions WHERE expires<=?').run(now);
-    const raw = token(), duration = role === 'admin' ? 12 * 3600000 : role === 'student-setup' ? 15 * 60000 : 30 * 86400000;
-    db.prepare('INSERT INTO sessions VALUES (?,?,?,?)').run(hash(raw), role, subject, Math.min(now + duration, deadline));
-    return raw;
-  };
   const insertStudent = (name, classId, spelling) => {
     if (!validPinyin(spelling)) throw Error('请核对姓名拼音');
-    const code = crypto.randomBytes(12).toString('hex').toUpperCase(), who = id(), initial = newInitialPassword();
-    db.prepare('INSERT INTO students(id,name,classId,codeHash,card,studentNumber,loginPinyin,passwordHash,initialPassword,initialPasswordExpiresAt) VALUES(?,?,?,?,?,?,?,?,?,?)')
-      .run(who, name, classId, hash(code), seal(code), nextNumber(spelling[0]), spelling, initial.encoded, initial.sealed, initial.expires);
+    const code = crypto.randomBytes(12).toString('hex').toUpperCase(), who = id();
+    db.prepare('INSERT INTO students(id,name,classId,codeHash,card,studentNumber,loginPinyin,passwordHash) VALUES(?,?,?,?,?,?,?,?)')
+      .run(who, name, classId, hash(code), seal(code), nextNumber(spelling[0]), spelling, encodePassword(spelling));
     return student(who);
   };
   return {
     directory,
     close: () => db.close(),
     hasAdmin:()=>!!db.prepare('SELECT 1 FROM admin LIMIT 1').get(),
-    checkIntegrity:()=>{if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok')throw Error('数据库完整性检查未通过');for(const row of db.prepare('SELECT card,initialPassword FROM students').all()){unseal(row.card);if(row.initialPassword)unseal(row.initialPassword);}},
+    checkIntegrity:()=>{if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok')throw Error('数据库完整性检查未通过');for(const row of db.prepare('SELECT card FROM students').all())unseal(row.card);},
     async backup(destination) { await backup(db, destination); fs.chmodSync(destination, 0o600); },
     setAdmin(username, password) {
       if (!username || password.length < 14) throw new Error('账号不能为空，管理员密码至少 14 个字符');
@@ -107,15 +87,8 @@ function openStore(directory) {
       try { db.prepare('DELETE FROM admin').run(); db.prepare('INSERT INTO admin VALUES (?,?)').run(username, encodePassword(password)); db.prepare("DELETE FROM sessions WHERE role='admin'").run(); db.exec('COMMIT'); } catch (error) { db.exec('ROLLBACK'); throw error; }
     },
     adminLogin(username, password) { const row = db.prepare('SELECT * FROM admin WHERE username=?').get(username); return row && passwordMatches(password, row.password) ? row.username : null; },
-    session: createSession,
-    lookupSession(raw, role, now) {
-      const auth = raw && db.prepare('SELECT * FROM sessions WHERE hash=? AND role=? AND expires>?').get(hash(raw), role, now);
-      if (auth && role === 'student-setup') {
-        const row = db.prepare('SELECT active,mustChangePassword,initialPassword,initialPasswordExpiresAt FROM students WHERE id=?').get(auth.subject);
-        if (!row?.active || !row.mustChangePassword || row.initialPassword || !(row.initialPasswordExpiresAt > now)) return null;
-      }
-      return auth;
-    },
+    session(role, subject, now) { db.prepare('DELETE FROM sessions WHERE expires<=?').run(now); const raw = token(); db.prepare('INSERT INTO sessions VALUES (?,?,?,?)').run(hash(raw), role, subject, now + (role === 'admin' ? 12 * 3600000 : role === 'student-setup' ? 15 * 60000 : 30 * 86400000)); return raw; },
+    lookupSession(raw, role, now) { return raw && db.prepare('SELECT * FROM sessions WHERE hash=? AND role=? AND expires>?').get(hash(raw), role, now); },
     logout(raw) { if (raw) db.prepare('DELETE FROM sessions WHERE hash=?').run(hash(raw)); },
     classes: allClasses,
     createClass(name) { const row = { id: id(), name, courses: [] }; db.prepare('INSERT INTO classes VALUES (?,?,?)').run(row.id, row.name, '[]'); return row; },
@@ -123,35 +96,22 @@ function openStore(directory) {
     student,
     students: () => db.prepare('SELECT id,name,classId,active,studentNumber,loginPinyin,mustChangePassword FROM students ORDER BY rowid').all(),
     createStudents(rows, classId) { return transaction(() => rows.map(row => insertStudent(row.name, classId, row.pinyin))); },
-    initialCredential(who, now = Date.now()) {
-      const row = db.prepare('SELECT mustChangePassword,initialPassword,initialPasswordExpiresAt FROM students WHERE id=?').get(who);
-      const state = !row?.mustChangePassword ? 'set' : !row.initialPasswordExpiresAt ? 'unverified' : !row.initialPassword ? 'used' : row.initialPasswordExpiresAt <= now ? 'expired' : 'ready';
-      return { initialPassword: state === 'ready' ? unseal(row.initialPassword) : null, initialPasswordExpiresAt: row?.initialPasswordExpiresAt ?? null, initialPasswordState: state };
-    },
-    studentLogin(number, password, now = Date.now()) { return transaction(() => {
-      const row = db.prepare('SELECT id,active,passwordHash,mustChangePassword,initialPassword,initialPasswordExpiresAt FROM students WHERE studentNumber=?').get(number.trim().toLowerCase());
+    studentLogin(number, password) {
+      const row = db.prepare('SELECT id,active,passwordHash FROM students WHERE studentNumber=?').get(number.trim().toLowerCase());
       // A dummy hash keeps unknown-account and incorrect-password work comparable.
       const encoded = row?.passwordHash || '00112233445566778899aabbccddeeff00:' + '00'.repeat(64);
       const matches = passwordMatches(password, encoded);
-      if (!matches || !row?.active) return null;
-      if (!row.mustChangePassword) return student(row.id);
-      if (!row.initialPassword || !(row.initialPasswordExpiresAt > now)) return null;
-      // Redeem and issue the only setup session in the same transaction.
-      db.prepare('UPDATE students SET initialPassword=NULL WHERE id=?').run(row.id);
-      revokeStudent(row.id);
-      return { ...student(row.id), setupToken: createSession('student-setup', row.id, now, row.initialPasswordExpiresAt), setupExpiresAt: Math.min(now + 15 * 60000, row.initialPasswordExpiresAt) };
-    }); },
+      return matches && row?.active ? student(row.id) : null;
+    },
     credentials,
     checkStudentPassword(who, password) { const row = credentials(who); return !!row && passwordMatches(password, row.passwordHash); },
     changePassword(who, password) { return transaction(() => {
-      db.prepare('UPDATE students SET passwordHash=?,mustChangePassword=0,initialPassword=NULL,initialPasswordExpiresAt=NULL WHERE id=?').run(encodePassword(password), who);
+      db.prepare('UPDATE students SET passwordHash=?,mustChangePassword=0 WHERE id=?').run(encodePassword(password), who);
       revokeStudent(who);
     }); },
     resetPassword(who, spelling) { return transaction(() => {
       if (!validPinyin(spelling)) throw Error('请核对姓名拼音');
-      const initial = newInitialPassword();
-      const result = db.prepare('UPDATE students SET loginPinyin=?,passwordHash=?,mustChangePassword=1,initialPassword=?,initialPasswordExpiresAt=? WHERE id=?')
-        .run(spelling, initial.encoded, initial.sealed, initial.expires, who);
+      const result = db.prepare('UPDATE students SET loginPinyin=?,passwordHash=?,mustChangePassword=1 WHERE id=?').run(spelling, encodePassword(spelling), who);
       revokeStudent(who); return result.changes;
     }); },
     updateStudent(who, name, classId, active) { return db.prepare('UPDATE students SET name=?,classId=?,active=? WHERE id=?').run(name, classId, active ? 1 : 0, who).changes; },

@@ -7,6 +7,11 @@ function normalizeBasePath(value = '/') {
   return value;
 }
 
+function scopeStorage(source, namespace) {
+  return source.replace(/canran:/g, 'canran:' + namespace + ':')
+    .replace(/(["'`])((?:l\d+|phonics-magic)-stars-v\d+)(?=["'`])/g, '$1' + namespace + ':$2');
+}
+
 function relocateSource(source, relative, basePath = '/') {
   normalizeBasePath(basePath);
   // Scoped infrastructure derives URLs and storage names from its explicit base.
@@ -20,8 +25,7 @@ function relocateSource(source, relative, basePath = '/') {
     .replace(/(url\(\s*)\/(?=[a-z])/g, '$1' + basePath);
   if (/\.(?:html|js)$/.test(relative)) {
     // Sharing an origin must not make restarting this version erase another app.
-    result = result.replace(/canran:/g, 'canran:' + prefix.slice(1).replaceAll('/', ':') + ':')
-      .replace(/(["'`])((?:l\d+|phonics-magic)-stars-v\d+)(?=["'`])/g, '$1' + prefix.slice(1) + ':$2');
+    result = scopeStorage(result, prefix.slice(1).replaceAll('/', ':'));
   }
   if (/\.html$/.test(relative)) {
     result = result.replace(/<head>/i, '<head>\n<script src="' + basePath + 'core/subpath-entry.js"></script>');
@@ -58,4 +62,4 @@ function subpathRuntime(basePath = '/') {
   };
 }
 
-module.exports = { normalizeBasePath, relocateSource, subpathRuntime };
+module.exports = { normalizeBasePath, relocateSource, subpathRuntime, scopeStorage };

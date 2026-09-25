@@ -1,6 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, fillLogin, setPassword, studentLogin } = require('./helpers');
+const { adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword } = require('./helpers');
 const { completeActivity } = require('../support/unit13-14-flow');
 
 test('脚本不可用时禁用登录提交，不把密码写入地址', async ({ browser }) => {
@@ -14,7 +14,7 @@ test('脚本不可用时禁用登录提交，不把密码写入地址', async ({
   } finally { await context.close(); }
 });
 
-test('重名学生独立学号，拼音初始密码登录后先改密才能学习', async ({ page, browser }) => {
+test('重名学生独立学号及随机初始密码，首次登录先改密才能学习', async ({ page, browser }) => {
   await page.goto('/lesson/admin/');
   await page.getByLabel('管理员账号').fill('teacher');
   await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');
@@ -36,11 +36,23 @@ test('重名学生独立学号，拼音初始密码登录后先改密才能学�
   expect(accounts[0][0]).toBe('d'); expect(accounts[1][0]).toBe('d'); expect(accounts[2][0]).toBe('l');
   expect(Number(accounts[1].slice(1))).toBe(Number(accounts[0].slice(1)) + 1);
   expect(Number(accounts[2].slice(1))).toBe(Number(accounts[1].slice(1)) + 1);
+  await page.getByRole('button', { name: '打印全班账号' }).click();
+  await expect(page.locator('.initial-password')).toHaveCount(3);
+  const initialPasswords = await page.locator('.initial-password').allTextContents();
+  expect(new Set(initialPasswords).size).toBe(3);
+  expect(initialPasswords.every(value => /^[A-Za-z0-9_-]{16}$/.test(value))).toBe(true);
+  await expect(page.locator('.initial-expiry')).toHaveCount(3);
+  await page.emulateMedia({ media: 'print' });
+  await expect(page.locator('.learning-card').first()).toContainText('仅可登录一次');
+  await page.emulateMedia({ media: 'screen' });
   const context = await browser.newContext(); const student = await context.newPage();
   try {
     await student.goto('/lesson/');
     await student.getByLabel('学号', { exact: true }).fill(accounts[0]);
     await student.getByLabel('密码', { exact: true }).fill('duanxiaodong');
+    await student.getByRole('button', { name: '进入我的课程' }).click();
+    await expect(student.getByRole('status')).toContainText('学号或密码不正确');
+    await student.getByLabel('密码', { exact: true }).fill(initialPasswords[0]);
     await student.getByRole('button', { name: '进入我的课程' }).click();
     await expect(student.getByRole('heading', { name: '设置你的新密码' })).toBeVisible();
     await student.goto('/lesson/unit13-14/#learn/words');
@@ -59,7 +71,7 @@ test('重名学生独立学号，拼音初始密码登录后先改密才能学�
     await expect(student.getByRole('heading', { name: '段晓东的课程' })).toBeVisible();
     await student.getByRole('button', { name: '切换学生', exact: true }).click();
     await student.getByLabel('学号', { exact: true }).fill(accounts[0]);
-    await student.getByLabel('密码', { exact: true }).fill('duanxiaodong');
+    await student.getByLabel('密码', { exact: true }).fill(initialPasswords[0]);
     await student.getByRole('button', { name: '进入我的课程' }).click();
     await expect(student.getByRole('status')).toContainText('学号或密码不正确');
     await student.getByLabel('密码', { exact: true }).fill('My-new-journey-2026');
@@ -87,7 +99,7 @@ test('手机核对多音字和 ü，必填拼音阻止部分添加；主动改�
   await page.getByRole('button', { name: '确认添加学生' }).click();
   await expect(page.locator('.student-row')).toHaveCount(2);
   const number = await page.locator('.student-row .student-number').first().textContent();
-  const account = { number, password: 'zengyue', fresh: true };
+  const account = { number, password: await readInitialPassword(page), fresh: true };
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const learner = await context.newPage(); let other;
   try {
@@ -126,7 +138,7 @@ test('手机核对多音字和 ü，必填拼音阻止部分添加；主动改�
 test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果', async ({ page, browser }) => {
   await adminLogin(page);
   const account = await createStudent(page, '找回账号班', '单乐', [/Lesson 13–14 /]);
-  expect(account.initialPassword).toBe('shanle');
+  expect(account.initialPassword).not.toBe('shanle');
   const a = await studentLogin(browser, account), b = await studentLogin(browser, account);
   try {
     await completeActivity(a.page, 'colours', '/lesson');
@@ -144,14 +156,17 @@ test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留�
     await expect(page.locator('.student-number')).toHaveText(account.number);
     await page.getByRole('button', { name: '管理学生', exact: true }).click();
     await page.getByRole('button', { name: '重置密码', exact: true }).click();
-    await page.getByLabel('姓名拼音（重置后的初始密码）').fill('shanlele');
+    await page.getByLabel('姓名拼音（核对学生）').fill('shanlele');
     await page.getByRole('button', { name: '确认重置密码' }).click();
-    await expect(page.locator('.initial-password')).toHaveText('shanlele');
+    const resetPassword = await page.locator('.initial-password').textContent();
+    expect(resetPassword).not.toBe('shanlele'); expect(resetPassword).not.toBe(account.initialPassword);
     await a.page.reload(); await expect(a.page.getByLabel('学号', { exact: true })).toBeVisible();
     await b.page.reload(); await expect(b.page.getByLabel('学号', { exact: true })).toBeVisible();
     await fillLogin(b.page, account);
     await expect(b.page.getByRole('status')).toContainText('学号或密码不正确');
     await fillLogin(b.page, account, 'shanlele');
+    await expect(b.page.getByRole('status')).toContainText('学号或密码不正确');
+    await fillLogin(b.page, account, resetPassword);
     await setPassword(b.page, 'Recovered-journey-2026!');
     await expect(b.page.locator('.course')).toContainText('3 / 15');
     await b.page.locator('.course').click(); await expect(b.page.locator('#starCount')).toHaveText('3');

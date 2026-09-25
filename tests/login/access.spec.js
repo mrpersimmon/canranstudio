@@ -116,8 +116,8 @@ test('转班、停用、恢复、重置密码和空班预览',async({page,browse
  await a.page.goto('/lesson/');await expect(a.page.getByRole('heading',{name:'老师还没开放课程'})).toBeVisible();
  await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await page.getByRole('button',{name:'保存开放课程'}).click();await a.page.getByRole('button',{name:'刷新课程'}).click();await expect(a.page.locator('.course')).toContainText('3 / 15');
  await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('false');await page.getByRole('button',{name:'保存学生信息'}).click();await a.page.reload();await expect(a.page.getByRole('status')).toContainText('学生账号已停用');
- await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('true');await page.getByRole('button',{name:'保存学生信息'}).click();await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByRole('button',{name:'重置密码',exact:true}).click();await page.getByRole('button',{name:'确认重置密码'}).click();await expect(page.locator('.initial-password')).toHaveText(code.initialPassword);
- await a.page.reload();await fillLogin(a.page,code);await expect(a.page.getByRole('status')).toContainText('学号或密码不正确');await fillLogin(a.page,code,code.initialPassword);await setPassword(a.page,'Reset-class-journey-2026');await expect(a.page.locator('.course')).toContainText('3 / 15');await a.context.close();
+ await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('true');await page.getByRole('button',{name:'保存学生信息'}).click();await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByRole('button',{name:'重置密码',exact:true}).click();await page.getByRole('button',{name:'确认重置密码'}).click();const resetPassword=await page.locator('.initial-password').textContent();expect(resetPassword).not.toBe(code.initialPassword);
+ await a.page.reload();await fillLogin(a.page,code);await expect(a.page.getByRole('status')).toContainText('学号或密码不正确');await fillLogin(a.page,code,resetPassword);await setPassword(a.page,'Reset-class-journey-2026');await expect(a.page.locator('.course')).toContainText('3 / 15');await a.context.close();
 });
 
 test('16 个教学单元冷启动、图片完整、词卡和一道真实作答，手机界面',async({page,browser})=>{
@@ -165,7 +165,7 @@ test('学生不能提交别人的成果，旧上传不能覆盖重开，来源�
  const stale=await a.page.evaluate(async body=>(await fetch('/lesson/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json(),completed);expect(stale.stale).toBe(true);await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('0');
  const cross=await page.request.post('/lesson/api/admin/classes',{headers:{Origin:'https://another-origin.invalid'},data:{name:'不应该创建的班级'}});expect(cross.status()).toBe(403);await page.reload();await expect(page.getByRole('button',{name:'管理 不应该创建的班级',exact:true})).toHaveCount(0);
  await b.page.getByRole('button',{name:'切换学生',exact:true}).click();await b.page.getByLabel('学号',{exact:true}).fill('x99999999');await b.page.getByLabel('密码',{exact:true}).fill('Invalid-password-123');
- for(let i=0;i<13;i++){await b.page.getByRole('button',{name:'进入我的课程'}).click();await expect(b.page.getByRole('status')).toHaveText(i===12?'尝试有些频繁，请一分钟后再试':'学号或密码不正确，或账号已停用');}
+ for(let i=0;i<13;i++){await b.page.getByRole('button',{name:'进入我的课程'}).click();await expect(b.page.getByRole('status')).toHaveText(i===12?'尝试有些频繁，请一分钟后再试':'学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');}
  await a.context.close();await b.context.close();
 });
 

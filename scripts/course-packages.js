@@ -4,7 +4,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const catalog = require('../core/course-catalog');
-const { normalizeBasePath, relocateSource } = require('./public-base-path');
+const { normalizeBasePath, relocateSource, scopeStorage } = require('./public-base-path');
 const { LESSON_HEADER_CONTRACT } = require('./http-header-contract');
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.avif': 'image/avif', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.woff2': 'font/woff2', '.mp3': 'audio/mpeg' };
@@ -58,6 +58,8 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
         value = Buffer.from(`(function(root){root.CanranCore=root.CanranCore||{};const definition=${JSON.stringify(definition)};root.CanranCore.courseCatalog={publicAssetUrl:value=>${JSON.stringify(basePath)} + value.replace(/^\\//,''),requireCourseDefinition:id=>{if(id!=='lesson49')throw new Error('Unknown teaching definition');return definition;}};})(globalThis);`);
       }
       if (/\.(?:html|js|css|json|svg)$/.test(relative)) value = Buffer.from(scopeSource(value.toString(), relative, basePath));
+      // Account-owned drafts keep their established namespace when URLs move.
+      if (isolatedDefinitions && basePath === '/' && /\.(?:html|js)$/.test(relative) && !/^core\/course-(?:cache|loader|worker)\.js$/.test(relative)) value = Buffer.from(scopeStorage(value.toString(), 'lesson'));
       sourceFiles.set(relative, value);
     }
     return sourceFiles.get(relative);

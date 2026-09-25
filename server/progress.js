@@ -5,13 +5,13 @@ const vm = require('node:vm');
 const catalog = require('../core/course-catalog');
 const {relocateSource}=require('../scripts/public-base-path');
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
-function definition(root, course) {
+function definition(root, course, basePath = '/lesson/') {
   const sandbox = { CanranCore: { courseCatalog: catalog }, document: { documentElement: { dataset: { unit:course } } } };
-  vm.runInNewContext(relocateSource(fs.readFileSync(path.join(root, course, 'content.js'), 'utf8'),course+'/content.js','/lesson/'), sandbox);
+  vm.runInNewContext(relocateSource(fs.readFileSync(path.join(root, course, 'content.js'), 'utf8'),course+'/content.js',basePath), sandbox);
   const unit=sandbox.CanranCore['unit' + course.slice(4).replace('-', '')];
   return unit;
 }
-function sameSignature(saved,current){if(saved===current)return true;if(typeof saved!=='string'||typeof current!=='string')return false;try{const clean=s=>JSON.stringify(JSON.parse(s),(key,value)=>key==='hint'?undefined:value);return clean(saved)===clean(current);}catch{return false;}}
+function sameSignature(saved,current){if(saved===current)return true;if(typeof saved!=='string'||typeof current!=='string')return false;try{const clean=s=>JSON.stringify(JSON.parse(s),(key,value)=>key==='hint'?undefined:typeof value==='string'?value.replace(/^\/lesson\/(?=assets\/)/,'/'):value);return clean(saved)===clean(current);}catch{return false;}}
 function normalize(value, unit, course) {
   const result={version:1,groups:{},records:{},activity:{unitCompleted:{}}};
   if (!record(value) || !record(value.activity)) return result;
@@ -33,7 +33,8 @@ function normalize(value, unit, course) {
       const entry=Object.entries(value.groups||{}).find(([,group])=>group.signature===questions.map(q=>q.id).join('|')&&group.index===questions.length&&questions.every((q,i)=>{const s=group.states?.[i];return s?.checked===true&&s.correct===true&&s.selection===q.answer&&s.attempts>0&&s.questionId===q.id&&s.runId===group.runId;}));
       if(!entry)continue;
       if(['__proto__','constructor','prototype'].includes(entry[0]))continue;
-      result.groups[entry[0]]=entry[1];
+      const currentContent=JSON.stringify([unit.version??null,questions],(key,item)=>key==='hint'?undefined:item);
+      result.groups[entry[0]]=sameSignature(entry[1].contentSignature,currentContent)?{...entry[1],contentSignature:currentContent}:entry[1];
       for(const q of questions)if(record(value.records?.[q.id]))result.records[q.id]=value.records[q.id];
     }
     result.activity.unitCompleted[id]=signatures[id];

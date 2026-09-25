@@ -8,11 +8,14 @@ const { createCoursePackages } = require('../scripts/course-packages');
 const progress = require('./progress');
 const {retainPackages}=require('./bundles');
 const { suggestPinyin, validPinyin, passwordProblem } = require('./student-credentials');
-const BASE = '/lesson/';
+const { clientAddress } = require('./client-address');
+const { normalizeBasePath } = require('../scripts/public-base-path');
 const fail = (status, message) => Object.assign(new Error(message), { status });
 const cleanName = value => typeof value === 'string' && value.trim().length > 0 && value.trim().length <= 60 ? value.trim() : (() => { throw fail(400, '名称请填写 1–60 个字'); })();
 const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null } = {}) {
+async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null, trustProxy = false, basePath = '/lesson/' } = {}) {
+  const BASE = normalizeBasePath(basePath);
+  if (trustProxy !== false && trustProxy !== 'loopback') throw Error('trustProxy must be false or loopback');
   const store = openStore(dataDir);
   const packages = bundle || await createCoursePackages({ root, basePath: BASE, courseIds: UNITS, isolatedDefinitions: true });
   const logical = new Map(), owners = new Map();
@@ -25,23 +28,24 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       addOwner(item.key, course); addOwner(item.url, course);
     }
   }
-  for(const pack of await retainPackages(packages,dataDir)){addOwner(BASE+'course-packages/'+pack.id+'/'+pack.revision+'.json',pack.id);for(const item of [...pack.required,...pack.audio])addOwner(item.url,pack.id);}
+  for(const pack of await retainPackages(packages,dataDir,BASE)){addOwner(BASE+'course-packages/'+pack.id+'/'+pack.revision+'.json',pack.id);for(const item of [...pack.required,...pack.audio])addOwner(item.url,pack.id);}
   const descriptions = await Promise.all(UNITS.map(async id => {
     const source = await fs.readFile(path.join(root, id, 'index.html'), 'utf8');
     const image = source.match(/<section id="cover"[\s\S]*?<img[^>]+src="([^"]+)"/)?.[1];
     return { id, title: packages.index.courses[id].title, label: 'Lesson ' + id.slice(4).replace('-', '–'), image: image?.startsWith('/') ? BASE.slice(0, -1) + image : null };
   }));
-  const definitions = Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,id)]));
+  const definitions = Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,id,BASE)]));
+  const currentProgress = (studentId, course) => { const saved = store.progress(studentId, course); return { ...saved, value: progress.normalize(saved.value, definitions[course], course) }; };
   const rate = new Map();
   function clearFailures(kind, credential) {
     rate.delete(kind + ':' + require('node:crypto').createHash('sha256').update(String(credential)).digest('hex'));
   }
   function throttle(request, kind, credential) {
     const now = Date.now();
-    const ipKey='ip:'+request.socket.remoteAddress;const ip=rate.get(ipKey)||{count:0,until:now+60000};
+    for (const [k,v] of rate) if (v.until <= now) rate.delete(k);
+    const ipKey='ip:'+clientAddress(request, trustProxy);const ip=rate.get(ipKey)||{count:0,until:now+60000};
     if(ip.until>now&&++ip.count>120)throw fail(429,'尝试有些频繁，请一分钟后再试');rate.set(ipKey,ip.until>now?ip:{count:1,until:now+60000});
     const key = kind + ':' + require('node:crypto').createHash('sha256').update(String(credential)).digest('hex');
-    for (const [k,v] of rate) if (v.until <= now) rate.delete(k);
     const entry = rate.get(key) || { count: 0, until: now + 60000 };
     if (++entry.count > 12) throw fail(429, '尝试有些频繁，请一分钟后再试');
     rate.set(key, entry);
@@ -57,7 +61,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     if (!allowSetup && (student.mustChangePassword || auth.role === 'student-setup')) throw fail(403, '请先设置新密码');
     return { auth, student };
   }
-  function setCookie(response, role, token, maxAge) { response.setHeader('Set-Cookie', `canran_${role}=${token}; Path=/lesson/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${origin.startsWith('https:') ? '; Secure' : ''}`); }
+  function setCookie(response, role, token, maxAge) { response.setHeader('Set-Cookie', `canran_${role}=${token}; Path=${BASE}; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${origin.startsWith('https:') ? '; Secure' : ''}`); }
   async function body(request) {
     if (request.headers.origin !== origin || !request.headers['content-type']?.startsWith('application/json')) throw fail(403, '请求来源不正确');
     let raw = ''; for await (const chunk of request) { raw += chunk; if (Buffer.byteLength(raw) > 1500000) throw fail(413, '提交内容过大'); }
@@ -72,14 +76,16 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     return { student, className: store.classes().find(c => c.id === student.classId)?.name || '', courses: store.allowed(student.id), preview: false, auth };
   }
   const json = (res, value, status = 200) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(JSON.stringify(value)); };
-  async function publicFile(res, file, type, status = 200) { res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' }).end(await fs.readFile(path.join(root, 'server/public', file))); }
-  function notice(res, title, code) { res.writeHead(code, { 'Content-Type': 'text/html; charset=utf-8' }).end(`<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/lesson/portal.css"><title>${escape(title)}</title><main><section class="login panel"><h1>${escape(title)}</h1><a class="button primary" href="/lesson/">返回课程</a></section></main></html>`); }
+  async function publicFile(res, file, type, status = 200) { const content = await fs.readFile(path.join(root, 'server/public', file), 'utf8'); res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' }).end(content.replaceAll('/lesson/', BASE)); }
+  function notice(res, title, code) { res.writeHead(code, { 'Content-Type': 'text/html; charset=utf-8' }).end(`<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="${BASE}portal.css"><title>${escape(title)}</title><main><section class="login panel"><h1>${escape(title)}</h1><a class="button primary" href="${BASE}">返回课程</a></section></main></html>`); }
   const server = http.createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'no-store'); response.setHeader('X-Content-Type-Options', 'nosniff'); response.setHeader('Referrer-Policy', 'no-referrer'); response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'");
     try {
       const url = new URL(request.url, origin), pathname = decodeURIComponent(url.pathname), relative = pathname.slice(BASE.length);
-      if (pathname === '/lesson') return response.writeHead(308, { Location: BASE }).end();
+      if (BASE === '/' && pathname === '/lesson/core/subpath-worker.js') { response.setHeader('Service-Worker-Allowed', '/lesson/'); return publicFile(response, 'retired-worker.js', 'text/javascript'); }
+      if (BASE === '/' && (pathname === '/lesson' || pathname.startsWith('/lesson/'))) return notice(response, '旧课程入口已移除', 410);
+      if (BASE !== '/' && pathname === BASE.slice(0, -1)) return response.writeHead(308, { Location: BASE }).end();
       if (!pathname.startsWith(BASE) || relative.split('/').some(part => part === '..' || part.startsWith('.'))) throw fail(404, '页面不存在');
       if (relative === 'health') return json(response, { ok: true, access: 'class-v1' });
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
@@ -88,6 +94,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
       if (relative === 'core/subpath-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
+      if (BASE === '/' && relative === 'core/course-package-service-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
       if (['assets/brand/starflower.png','assets/brand/starflower-favicon.png','assets/brand/starflower-apple-touch.png'].includes(relative)) { response.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control':'public, max-age=86400' }); return response.end(await fs.readFile(path.join(root, relative))); }
       if (/^api\//.test(relative)) {
         const input = request.method === 'POST' ? await body(request) : null;
@@ -98,11 +105,11 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           throttle(request, 'student', number);
           if (number.length > 32 || password.length > 120) throw fail(401, '学号或密码不正确，或账号已停用');
           const student = store.studentLogin(number, password);
-          if (!student) throw fail(401, '学号或密码不正确，或账号已停用');
+          if (!student) throw fail(401, '学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');
           clearFailures('student', number);
           store.logout(cookie(request, 'student'));
           const setup = !!student.mustChangePassword;
-          setCookie(response, 'student', store.session(setup ? 'student-setup' : 'student', student.id, Date.now()), setup ? 900 : 2592000);
+          setCookie(response, 'student', setup ? student.setupToken : store.session('student', student.id, Date.now()), setup ? Math.max(0, Math.floor((student.setupExpiresAt - Date.now()) / 1000)) : 2592000);
           return json(response, { ok: true, mustChangePassword: setup });
         }
         if (relative === 'api/password' && input) {
@@ -144,7 +151,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           if (relative === 'api/admin/accounts' && input) {
             const selected = store.students().filter(s => input.studentId ? s.id === input.studentId : s.classId === input.classId);
             if (!selected.length) throw fail(404, '没有找到学生');
-            return json(response, { accounts: selected.map(s => ({ ...s, initialPassword: s.mustChangePassword ? s.loginPinyin : null, className: store.classes().find(c => c.id === s.classId)?.name, url: origin + BASE })) });
+            return json(response, { accounts: selected.map(s => ({ ...s, ...store.initialCredential(s.id), className: store.classes().find(c => c.id === s.classId)?.name, url: origin + BASE })) });
           }
           if (relative === 'api/admin/reset-password' && input) {
             if (!validPinyin(input.pinyin)) throw fail(400, '请核对姓名拼音，用小写字母，不加空格和声调；ü 用 v');
@@ -173,7 +180,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           const who = identity(request, input.preview), course = entering[1];
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
-          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, progress: who.preview ? { generation: 0, value: {} } : store.progress(who.student.id, course) });
+          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
         }
         if (relative === 'api/progress' && input) {
           const auth = session(request,'student'), course = input.course;
@@ -201,7 +208,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         const course = courseRoute[1]; if (!UNITS.includes(course)) throw fail(404, '课程不存在');
         let who; try { who = identity(request, url.searchParams.get('preview')); } catch (error) { if (error.status === 401 || error.message === '请先设置新密码') return publicFile(response, 'index.html', 'text/html; charset=utf-8'); throw error; }
         if (!who.courses.includes(course)) return notice(response, '这节课还没向你的班级开放', 403);
-        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="/lesson/access-client.js"></script>');
+        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'access-client.js"></script>');
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : entry); return;
       }
       const auth = session(request, 'student', false), admin = session(request, 'admin', false);

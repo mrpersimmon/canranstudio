@@ -3,7 +3,7 @@ const path=require('node:path'),fs=require('node:fs/promises');
 const {createCoursePackages}=require('./course-packages'),{UNITS}=require('../server/catalog');
 async function build(){
  const root=path.resolve(__dirname,'..'),out=path.join(root,'dist-login');
- const {generated,index}=await createCoursePackages({root,basePath:'/lesson/',courseIds:UNITS,isolatedDefinitions:true});
+ const {generated,index}=await createCoursePackages({root,basePath:process.env.LESSON_BASE_PATH||'/lesson/',courseIds:UNITS,isolatedDefinitions:true});
  await fs.mkdir(out,{recursive:true});
  // Review-only manifest, never a public static-site build. The access server
  // alone serves the package bytes after checking the authenticated identity.

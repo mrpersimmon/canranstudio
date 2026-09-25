@@ -10,14 +10,21 @@
     try{const response = await fetch('/lesson/api/' + endpoint, { signal:controller.signal,cache:'no-store', ...(value === undefined ? {} : { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(value) }) });
     const result = await response.json(); if (!response.ok) throw Object.assign(new Error(result.error), { status:response.status }); return result;}finally{clearTimeout(timeout);}
   }
-  async function worker() { try { const reg = await navigator.serviceWorker?.register('/lesson/core/subpath-worker.js', {scope:'/lesson/',updateViaCache:'none'}); await reg?.update(); } catch {} }
+  async function worker() { try {
+    const api = navigator.serviceWorker;
+    const reg = await api?.register('/lesson/core/subpath-worker.js', {scope:'/lesson/',updateViaCache:'none'}); await reg?.update();
+    // publicFile substitutes the deployment base; only the new root retires the old scope.
+    if (api && '/lesson/' === '/') for (const old of await api.getRegistrations()) {
+      if (/^\/lesson\/$/.test(new URL(old.scope).pathname)) await old.update();
+    }
+  } catch {} }
   worker();
   function changed() { channel?.postMessage('changed'); navigator.serviceWorker?.controller?.postMessage({type:'identity:changed'}); }
   function status(message) { const target=app.querySelector('[role=status]'); if(target)target.textContent=message; }
   async function attempt(action) { try { await action(); } catch(error) { status(error.message || '暂时无法连接，请重试'); } }
   const logo='<img class="hero-logo" src="/lesson/assets/brand/starflower.png" alt="">';
   function login(admin = false, message = '') {
-    app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号</label><input id="username" name="username" autocomplete="username" required><label for="password">管理员密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="120" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师确认的姓名拼音密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
+    app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号</label><input id="username" name="username" autocomplete="username" required><label for="password">管理员密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="120" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师发放的一次性初始密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
     document.getElementById('forgot')?.addEventListener('click',()=>status('请联系老师：学号可以查回，密码可以重置，学习成果会保留。'));
     document.getElementById('loginForm').onsubmit=event=>{event.preventDefault();attempt(async()=>{
       const form=new FormData(event.target);const button=event.target.querySelector('button');button.disabled=true;
@@ -25,7 +32,7 @@
     });};
   }
   function passwordForm(who, required) {
-    app.innerHTML=`<section class="login panel">${logo}<h1>${required?'设置你的新密码':'修改密码'}</h1><p>${e(who.student.name)} · <span class="student-number">${e(who.student.studentNumber)}</span></p><p class="muted">${required?'第一次登录或老师重置后，需要设置新密码。':''}使用 8–64 位字符，包含字母和数字。</p><form id="passwordForm" method="post">${required?'':'<label for="currentPassword">当前密码</label><input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" maxlength="120" required>'}<label for="newPassword">新密码</label><input id="newPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><label for="confirmPassword">再输一次新密码</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><button class="primary">${required?'保存新密码，开始学习':'保存新密码'}</button><p role="status" aria-live="polite"></p></form><button id="cancelPassword" class="compact">${required?'切换学生':'返回课程'}</button></section>`;
+    app.innerHTML=`<section class="login panel">${logo}<h1>${required?'设置你的新密码':'修改密码'}</h1><p>${e(who.student.name)} · <span class="student-number">${e(who.student.studentNumber)}</span></p><p class="muted">${required?'初始密码已使用，请在 15 分钟内设置新密码。关闭页面后可在原浏览器继续；超时或切换学生后，请联系老师重置。':''}使用 8–64 位字符，包含字母和数字。</p><form id="passwordForm" method="post">${required?'':'<label for="currentPassword">当前密码</label><input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" maxlength="120" required>'}<label for="newPassword">新密码</label><input id="newPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><label for="confirmPassword">再输一次新密码</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><button class="primary">${required?'保存新密码，开始学习':'保存新密码'}</button><p role="status" aria-live="polite"></p></form><button id="cancelPassword" class="compact">${required?'切换学生':'返回课程'}</button></section>`;
     document.getElementById('passwordForm').onsubmit=event=>{event.preventDefault();attempt(async()=>{
       const button=event.target.querySelector('button');button.disabled=true;
       try{await api('password',Object.fromEntries(new FormData(event.target)));changed();await home();}finally{button.disabled=false;}
@@ -41,7 +48,7 @@
   async function home() {
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
     if(who.mustChangePassword)return passwordForm(who,true);
-    if(/^\/lesson\/unit\d+-\d+\//.test(location.pathname)){location.reload();return;}
+    if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
     const waiting=who.preview?0:await syncPending(who.student.id);
     if(!who.preview)who=await api('me');
     app.innerHTML=`<section class="login panel">${logo}<h1>灿然英语工作室</h1><p role="status">正在准备画面…</p></section>`;
@@ -80,7 +87,7 @@
     bindStudents();
   }
   function enrolmentForm(students,classId) {
-    app.innerHTML=`<section class="panel"><h1>核对姓名拼音</h1><p>拼音用作初始密码。多音字请核对，ü 用 v。保存后分配唯一学号。</p><form id="enrolment">${students.map((s,i)=>`<div class="spelling-row"><strong>${i+1}. ${e(s.name)}</strong><label for="spelling${i}">第 ${i+1} 位学生的姓名拼音</label><input id="spelling${i}" name="pinyin${i}" value="${e(s.pinyin)}" pattern="[a-z][a-z0-9]{0,119}" maxlength="120" autocomplete="off" autocapitalize="none" spellcheck="false" required></div>`).join('')}<div class="actions"><button type="button" id="back">返回修改姓名</button><button class="primary">确认添加学生</button></div><p role="status" aria-live="polite"></p></form></section>`;
+    app.innerHTML=`<section class="panel"><h1>核对姓名拼音</h1><p>拼音用于确认姓名和学号首字母，ü 用 v。保存后分配唯一学号和随机初始密码。</p><form id="enrolment">${students.map((s,i)=>`<div class="spelling-row"><strong>${i+1}. ${e(s.name)}</strong><label for="spelling${i}">第 ${i+1} 位学生的姓名拼音</label><input id="spelling${i}" name="pinyin${i}" value="${e(s.pinyin)}" pattern="[a-z][a-z0-9]{0,119}" maxlength="120" autocomplete="off" autocapitalize="none" spellcheck="false" required></div>`).join('')}<div class="actions"><button type="button" id="back">返回修改姓名</button><button class="primary">确认添加学生</button></div><p role="status" aria-live="polite"></p></form></section>`;
     document.getElementById('back').onclick=()=>{renderAdmin();document.getElementById('names').value=students.map(s=>s.name).join('\n');};
     document.getElementById('enrolment').onsubmit=event=>{event.preventDefault();attempt(async()=>{const button=event.target.querySelector('.primary');button.disabled=true;try{const form=new FormData(event.target);await api('admin/students',{classId,students:students.map((s,i)=>({name:s.name,pinyin:form.get('pinyin'+i)}))});await loadAdmin(classId);status('学生已添加，可以查看或打印账号');}finally{button.disabled=false;}});};
   }
@@ -92,13 +99,13 @@
     document.getElementById('resetPassword').onclick=()=>resetPasswordForm(student);
   }
   function resetPasswordForm(student) {
-    app.innerHTML=`<section class="login panel"><h1>重置 ${e(student.name)}的密码</h1><p class="student-number">${e(student.studentNumber)}</p><p>原密码与已登录状态会失效；学习成果保留。下次登录后需要设置新密码。</p><form id="resetForm" method="post"><label for="resetPinyin">姓名拼音（重置后的初始密码）</label><input id="resetPinyin" name="pinyin" value="${e(student.loginPinyin)}" pattern="[a-z][a-z0-9]{0,119}" maxlength="120" autocapitalize="none" spellcheck="false" required><button class="primary">确认重置密码</button><p role="status"></p></form><button id="back" class="compact">取消</button></section>`;
+    app.innerHTML=`<section class="login panel"><h1>重置 ${e(student.name)}的密码</h1><p class="student-number">${e(student.studentNumber)}</p><p>将生成新的随机初始密码，7 天内可使用一次。原密码和旧登录失效，学号与学习成果保留。</p><form id="resetForm" method="post"><label for="resetPinyin">姓名拼音（核对学生）</label><input id="resetPinyin" name="pinyin" value="${e(student.loginPinyin)}" pattern="[a-z][a-z0-9]{0,119}" maxlength="120" autocapitalize="none" spellcheck="false" required><button class="primary">确认重置密码</button><p role="status"></p></form><button id="back" class="compact">取消</button></section>`;
     document.getElementById('back').onclick=()=>editStudent(student.id);
     document.getElementById('resetForm').onsubmit=event=>{event.preventDefault();attempt(async()=>{const button=event.target.querySelector('button');button.disabled=true;try{await api('admin/reset-password',{studentId:student.id,pinyin:new FormData(event.target).get('pinyin')});await accounts({studentId:student.id});status('密码已重置，学生下次登录需要设置新密码');}finally{button.disabled=false;}});};
   }
   async function accounts(selection){
     const result=await api('admin/accounts',selection);
-    app.innerHTML=`<div class="toolbar no-print"><h1>学生账号</h1><div class="actions"><button class="primary" id="printAccounts">打印账号</button><button id="back">返回班级</button></div></div><div class="cards">${result.accounts.map(c=>`<article class="learning-card"><strong>灿然英语工作室</strong><h2>${e(c.name)}</h2><p>${e(c.className)}</p><p>学号</p><div class="student-number account-number">${e(c.studentNumber)}</div>${c.initialPassword?`<p>初始密码</p><div class="initial-password">${e(c.initialPassword)}</div><p class="muted">首次登录后设置自己的新密码</p>`:`<p>${c.mustChangePassword?'请先核对拼音并重置密码':'已设置密码，请使用自己的密码'}</p>`}<p class="account-url">${e(c.url)}</p><p class="muted">忘记学号或密码，请联系老师。</p></article>`).join('')}</div><p role="status"></p>`;
+    app.innerHTML=`<div class="toolbar no-print"><h1>学生账号</h1><div class="actions"><button class="primary" id="printAccounts">打印账号</button><button id="back">返回班级</button></div></div><div class="cards">${result.accounts.map(c=>`<article class="learning-card"><strong>灿然英语工作室</strong><h2>${e(c.name)}</h2><p>${e(c.className)}</p><p>学号</p><div class="student-number account-number">${e(c.studentNumber)}</div>${c.initialPassword?`<p>初始密码</p><div class="initial-password">${e(c.initialPassword)}</div><p class="muted initial-expiry">有效至 ${e(new Date(c.initialPasswordExpiresAt).toLocaleString('zh-CN', {hour12:false}))}</p><p class="muted">仅可登录一次，请随后完成改密。</p>`:`<p>${c.initialPasswordState==='used'?'初始密码已使用；若未完成改密，请重置后重新领取':c.initialPasswordState==='expired'?'初始密码已过期，请重置后重新领取':c.mustChangePassword?'请先核对拼音并重置密码':'已设置密码，请使用自己的密码'}</p>`}<p class="account-url">${e(c.url)}</p><p class="muted">忘记学号或密码，请联系老师。</p></article>`).join('')}</div><p role="status"></p>`;
     document.getElementById('printAccounts').onclick=()=>print();document.getElementById('back').onclick=()=>attempt(()=>loadAdmin());
   }
   async function start(){

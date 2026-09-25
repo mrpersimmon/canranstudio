@@ -8,9 +8,11 @@ Group=canran-lesson
 WorkingDirectory=/opt/canran-lesson/current
 Environment=NODE_ENV=production
 Environment=LESSON_PORT=4182
+Environment=LESSON_BASE_PATH=/
 Environment=LESSON_ORIGIN=https://www.canranstudio.cn
+Environment=LESSON_TRUST_PROXY=loopback
 Environment=LESSON_DATA_DIR=/var/lib/canran-lesson
-ExecStart=/usr/bin/node server/run.js
+ExecStart=/opt/canran-node/bin/node server/run.js
 Restart=on-failure
 UMask=0077
 NoNewPrivileges=true

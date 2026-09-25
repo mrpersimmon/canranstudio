@@ -4,7 +4,7 @@ const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:pa
 const {execFileSync}=require('node:child_process');
 const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
 const {completeActivity}=require('../support/unit13-14-flow');
-const {addStudent,signIn,fillLogin,setPassword}=require('./helpers');
+const {adminLogin,addStudent,signIn,fillLogin,setPassword,readInitialPassword}=require('./helpers');
 test('停服务备份恢复后，原学号密码、班级和真实成果仍可使用',async({browser})=>{
  test.setTimeout(60000);const root=await fs.mkdtemp(path.join(os.tmpdir(),'canran-recovery-'));let server,context;
  const active=path.join(root,'active'),restored=path.join(root,'restored'),backup=path.join(root,'backup');
@@ -14,12 +14,18 @@ test('停服务备份恢复后，原学号密码、班级和真实成果仍可�
   await start(active);context=await browser.newContext({baseURL:'http://127.0.0.1:4194'});const page=await context.newPage();
   await page.goto('/lesson/admin/');await page.getByLabel('管理员账号').fill('teacher');await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');await page.getByRole('button',{name:'登录管理页'}).click();
   await page.getByLabel('新班级名称').fill('备份班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await page.getByRole('button',{name:'保存开放课程'}).click();await expect(page.getByRole('status')).toContainText('开放课程已保存');
-  const account=await addStudent(page,'豆豆');await signIn(page,account);await completeActivity(page,'colours','/lesson');await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  const account=await addStudent(page,'豆豆'),pending=await addStudent(page,'待领取同学');await signIn(page,account);await completeActivity(page,'colours','/lesson');await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
   await context.close();context=null;await new Promise(r=>server.close(r));server=null;
   execFileSync(process.execPath,['server/manage.js','backup',backup],{env:{...process.env,LESSON_DATA_DIR:active}});
   execFileSync(process.execPath,['server/manage.js','restore',backup],{env:{...process.env,LESSON_DATA_DIR:restored}});
   await start(restored);context=await browser.newContext({baseURL:'http://127.0.0.1:4194'});const recovered=await context.newPage();await recovered.goto('/lesson/');await fillLogin(recovered,account);await expect(recovered.getByRole('heading',{name:'豆豆的课程'})).toBeVisible();await expect(recovered.locator('.course')).toContainText('3 / 15');
   await recovered.locator('.course').click();await expect(recovered.locator('#starCount')).toHaveText('3');
+  await adminLogin(recovered);await recovered.getByRole('button',{name:'管理 备份班',exact:true}).click();
+  const pendingRow=recovered.locator('.student-row').filter({hasText:pending.number});
+  expect(await readInitialPassword(recovered,pendingRow)).toBe(pending.initialPassword);
+  await recovered.goto('/lesson/');await recovered.getByRole('button',{name:'切换学生',exact:true}).click();
+  await expect(recovered.getByLabel('学号',{exact:true})).toBeVisible();
+  await fillLogin(recovered,pending);await setPassword(recovered);await expect(recovered.getByRole('heading',{name:'待领取同学的课程'})).toBeVisible();
  }finally{await context?.close();if(server)await new Promise(r=>server.close(r));await fs.rm(root,{recursive:true,force:true});}
 });
 
@@ -40,8 +46,8 @@ test('学习卡数据库升级保留原学生成果，旧卡及旧会话失效�
   await page.goto('/lesson/#card='+oldCode);await expect(page.getByRole('status')).toContainText('旧学习码不再使用');expect(new URL(page.url()).hash).toBe('');
   expect(await page.evaluate(async code=>(await fetch('/lesson/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code})})).status,oldCode)).toBe(401);
   await page.goto('/lesson/admin/');await page.getByRole('button',{name:'管理 升级前班级'}).click();await expect(page.locator('.student-number')).toHaveText('d00000001');
-  await page.getByRole('button',{name:'查看账号'}).click();await expect(page.locator('.initial-password')).toHaveText('duanxiaodong');
-  await page.goto('/lesson/');await fillLogin(page,{number:'d00000001',password:'duanxiaodong'});await setPassword(page,'Upgrade-journey-2026');await expect(page.locator('.course')).toContainText('3 / 15');
+  await page.getByRole('button',{name:'查看账号'}).click();const initialPassword=await page.locator('.initial-password').textContent();expect(initialPassword).not.toBe('duanxiaodong');
+  await page.goto('/lesson/');await fillLogin(page,{number:'d00000001',password:initialPassword});await setPassword(page,'Upgrade-journey-2026');await expect(page.locator('.course')).toContainText('3 / 15');
   await stop();await start(createApp);await page.reload();await expect(page.locator('.course')).toContainText('3 / 15');
   await page.goto('/lesson/admin/');await page.getByRole('button',{name:'管理 升级前班级'}).click();const next=await addStudent(page,'李明');expect(next.number).toBe('l00000002');
  }finally{await context?.close();if(server)await stop();await fs.rm(directory,{recursive:true,force:true});}
