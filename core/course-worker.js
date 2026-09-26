@@ -26,8 +26,12 @@ self.addEventListener('install', event => {
   if (self.courseAccessRequired || !self.registration.active) event.waitUntil(self.skipWaiting());
 });
 self.addEventListener('activate', event => event.waitUntil((async()=>{
+  // Only an already controlled page needs the old public-cache access check.
+  // claim() also takes over fresh login pages; reloading those would erase a
+  // student's input while the first service worker finishes installing.
+  const previousClients = self.courseAccessRequired ? await self.clients.matchAll({type:'window'}) : [];
   await self.clients.claim();
-  if (self.courseAccessRequired) for (const client of await self.clients.matchAll({type:'window'})) {
+  for (const client of previousClients) {
     // Navigation may wait for this activation to finish; awaiting it here
     // would deadlock an existing cached classroom tab during migration.
     const pathname = new URL(client.url).pathname;

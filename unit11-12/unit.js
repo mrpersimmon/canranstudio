@@ -2,7 +2,10 @@
   'use strict';
   const core = root.CanranCore, unit = core.unit1112;
   const { stages, questions, learning: content } = unit;
-  const practice = core.lesson49Practice;
+  // Hash routes restore the activity; native scroll restoration can otherwise
+  // override that position after a reload and leave the current dialogue offscreen.
+  history.scrollRestoration = 'manual';
+  const practice = core.lesson49Practice, scene = core.unit1112Scene;
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -120,16 +123,17 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit1112-' + id + '-practice'; surfaces.get(id).append(element);
-    practice.mount({ element, questions: questions[id], sessionId: 'v' + unit.version, ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+    const predecessors = unit.activityPredecessors?.[id];
+    practice.mount({ element, questions: questions[id], sessionId: predecessors ? 'v2' : 'v' + unit.version,
+      previousGroups: predecessors?.map(old => ({ key: 'unit1112-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
+      onComplete: states => { complete(id); const summary=element.querySelector('.practice-finish > p'); if(summary)summary.textContent={roles:'衬衫的线索找到了！',owner:'物主说清楚了！',trans:'认领问答拼好了！',exam:'挑战完成！',listen:'寻宝完成！'}[id]; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }
 
-  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
-  function actor(person) { const element = node('div', '', 'dialogue-actor'); element.dataset.actor = person; element.append(art(person), node('span', content.PEOPLE[person].name)); return element; }
+  function mountClaimTask(id) { const view=scene.taskView(); surfaces.get(id).append(view.element); mountPractice(id,{sceneView:view,completionDetails:scene.result(id)}); }
+  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage'), cast=scene.cast();
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  const cast = node('div', '', 'dialogue-cast'); cast.append(actor('dave'), actor('tim'));
-  stage.append(actor('teacher'), log, cast);
+  stage.append(log, cast.element);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -140,21 +144,21 @@
   finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
-  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
+  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountClaimTask('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 句`;
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
-    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.person));
+    cast.showLine(dialogue.i);
   }
   function lead() { const lead = node('div', '', 'story-lead'); const shirt = node('img'); shirt.src = content.PHRASES[3].image; shirt.alt = ''; lead.append(shirt, node('p', '谁的衬衫是白色的？')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
-    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); if(!translation.hidden){const overflow=translation.getBoundingClientRect().bottom-log.getBoundingClientRect().bottom+12;if(overflow>0)log.scrollTop+=overflow;} }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
     bubble.append(node('div', content.PEOPLE[line.person].name, 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
@@ -233,14 +237,25 @@
   const perspective=node('details','','offline-task');perspective.append(node('summary','谁在对谁说话？'),node('p','my：说话人自己的；your：对方的。his／her 在这里接物品，分别表示“他的／她的”。主人是谁，要看人物信息，不能从物品猜。'));
   const phraseActions=node('div','','activity-actions');nextStation('phrases',phraseActions);surfaces.get('phrases').append(phraseGrid,shortForms,perspective,phraseActions);
   const modelExample=node('div','','model-example');modelExample.append(expressionCard(content.MODEL_EXAMPLE));
-  const modelGrid=node('div','','phrase-grid');content.MODELS.forEach(item=>modelGrid.append(expressionCard(item)));
+  const modelGrid=node('div','','claim-record');modelGrid.setAttribute('role','group');modelGrid.setAttribute('aria-label','当前认领档案');
+  const recordPicture=node('img'),recordCopy=node('div','','claim-record-copy'),recordLabel=node('p','','claim-record-owner');
+  const recordLines=['问主人','用名字回答','用 his / her 回答'].map(label=>{const row=node('div','','claim-record-line'),text=node('p');text.lang='en';row.append(node('small',label),text);recordCopy.append(row);return text;});
+  modelGrid.append(recordPicture,recordLabel,recordCopy);
+  const savedModel=practice.activity('unitModelPage');let modelPage=Number.isInteger(savedModel)?Math.min(11,Math.max(0,savedModel)):0;
+  const modelPager=node('div','','record-controls'),recordProgress=node('span');recordProgress.setAttribute('aria-live','polite');
+  const prevModel=button('上一份档案',()=>{modelPage--;renderModel();},'btn btn-yellow'),nextModel=button('下一份档案',()=>{modelPage++;renderModel();});
+  modelPager.append(prevModel,recordProgress,nextModel);
+  function renderModel(){const item=content.MODELS[modelPage];recordPicture.src=item.image;recordPicture.alt='';recordLabel.textContent=item.object+' · '+item.owner;
+    ["Whose is this "+item.object+"?","It's "+item.owner+"'s.","It's "+item.possessive+' '+item.object+'.'].forEach((line,i)=>recordLines[i].textContent=line);
+    prevModel.disabled=modelPage===0;nextModel.disabled=modelPage===11;recordProgress.textContent=(modelPage+1)+' / 12';practice.activity('unitModelPage',modelPage);
+  }renderModel();
   const reference=node('details','','offline-task');reference.append(node('summary','换个人，怎么说'));
   const referenceGrid=node('div','','phrase-grid');content.REFERENCE.forEach(item=>referenceGrid.append(expressionCard(item)));reference.append(referenceGrid);
-  const modelActions=node('div','','activity-actions');nextStation('models',modelActions);surfaces.get('models').append(modelExample,modelGrid,reference,modelActions);
-  for(const id of ['owner','trans'])mountPractice(id);
+  const modelActions=node('div','','activity-actions');nextStation('models',modelActions);surfaces.get('models').append(modelExample,modelGrid,modelPager,reference,modelActions);
+  for(const id of ['owner','trans'])mountClaimTask(id);
 
-  const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
+  const examResults = node('div', '', 'unit-results'), examScene=scene.taskView(); surfaces.get('exam').append(examScene.element);
+  mountPractice('exam', { sceneView:examScene, chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
     const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
     const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
     const corrected = states.filter(state => !state.firstCorrect).length;
@@ -254,6 +269,7 @@
     design: {
       copy: { title: '归还小能手', course: '失物招领小侦探 · Lesson 11–12', completion: '完成 Lesson 11–12 课堂配套练习', thanks: '细心找线索，问清楚，让物品回到主人身边！' },
       characters: ['dave', 'tim'], characterLabels: ['Dave', 'Tim'], icon: art, defaultName: '归还小能手', dialogTitle: '失物招领小侦探纪念', fileName: 'Lesson11-12-失物招领小侦探.png',
+      keepsakes: [{title:'先确认，再归还',text:'Perhaps → 请本人确认'},{title:'找到真正的主人',text:"It's Tim's. It's his shirt."}],
       badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
     }
   });
@@ -272,5 +288,9 @@
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
-  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); log.scrollTop = log.scrollHeight; }));
+  function restoreReadingPosition(){route();log.scrollTop=log.scrollHeight;}
+  document.fonts.ready.then(() => requestAnimationFrame(restoreReadingPosition));
+  // This is an event name, not a storage key; subpath packaging scopes storage.
+  const readyEvent=['canran','course-ready'].join(':');
+  document.addEventListener(readyEvent,()=>requestAnimationFrame(restoreReadingPosition),{once:true});
 })(globalThis);

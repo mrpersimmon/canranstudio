@@ -3,7 +3,7 @@ const { expect } = require('@playwright/test');
 // Independent expectations from textbook paper pages 14–17 and the unit manuscript.
 const DIALOGUE=['I am a new student.',"My name's Robert.",'Nice to meet you.',"My name's Sophie.",'Are you French?','Yes, I am.','Are you French, too?','No, I am not.','What nationality are you?',"I'm Italian.",'Are you a teacher?',"No, I'm not.","What's your job?","I'm a keyboard operator.","What's your job?","I'm an engineer."];
 const SPEAKERS=['Robert','Robert','Sophie','Sophie','Robert','Sophie','Sophie','Robert','Sophie','Robert','Robert','Sophie','Robert','Sophie','Sophie','Robert'];
-const ANSWERS={listen:['意大利（人）的','keyboard operator','工程师','policeman','policewoman','taxi driver','女空乘','postman','nurse','机械师；修理机器的人','hairdresser','家庭主妇','milkman'],roles:["I'm an engineer.","No, she isn't.",'不同，两人各问一次'],reply:["I'm Italian.","No, I'm not."],be:['is / am','is / is'],interview:["What's his job?",'she / an'],trans:[["What's",'your job?',"I'm",'an engineer.'],['Is','he','a taxi driver?','Yes,','he is.']],exam:['意大利人；护士','Are you a mechanic?',['My',"name's",'Ben.',"I'm",'an engineer.']]};
+const ANSWERS={listen:['意大利（人）的','keyboard operator','工程师','policeman','policewoman','taxi driver','女空乘','postman','nurse','机械师；修理机器的人','hairdresser','家庭主妇','milkman'],roles:["I'm an engineer.","No, she isn't."],reply:["I'm Italian.",'is / am','is / is'],interview:["What's his job?","What's her job?",["What's",'your job?',"I'm",'an engineer.'],['Is','he','a taxi driver?','Yes,','he is.']],exam:require('./unit7-8-exam').EXAM.map(item=>item.answer)};
 async function completeStory(page,base=''){
  await page.goto(base+'/unit7-8/#learn/text');const room=page.locator('.stage-text');
  for(let i=0;i<DIALOGUE.length;i++){
@@ -28,5 +28,5 @@ async function completeActivity(page,id,base=''){
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }
-async function completeUnit78(page,base=''){await completeActivity(page,'listen',base);await completeStory(page,base);for(const id of ['roles','reply','be','interview','trans','exam'])await completeActivity(page,id,base);await page.goto(base+'/unit7-8/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
+async function completeUnit78(page,base=''){await completeActivity(page,'listen',base);await completeStory(page,base);for(const id of ['roles','reply','interview','exam'])await completeActivity(page,id,base);await page.goto(base+'/unit7-8/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
 module.exports={DIALOGUE,SPEAKERS,ANSWERS,completeStory,completeActivity,completeUnit78};

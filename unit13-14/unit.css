@@ -104,3 +104,62 @@
  body.print-writing .reference-writing .writing-rule{height:23px}
  body.print-writing .reply-writing .writing-rule{height:25px}
 }
+
+/* v2: the upstairs wardrobe is the story, with persistent conversation above it. */
+.unit1314-workspace .unit-cover-art{min-height:330px;padding:40px 8px 20px;align-items:flex-end;background:var(--unit-scene) center/cover;border-radius:18px}
+.unit1314-workspace .unit-cover-art>img{width:29%;height:225px;object-fit:contain}
+.unit1314-workspace .unit-keepsakes{align-self:center}.unit1314-workspace .unit-keepsakes>.hero-handbag{height:85px;width:65%}
+.unit1314-workspace .stage-text :is(#stage,.dialogue-stage){display:flex;flex-direction:column;gap:0;height:490px;margin:0;padding:16px 18px 8px;align-items:stretch;background:var(--unit-scene) center/cover;border-radius:18px}
+.unit1314-workspace .stage-text :is(#stage,.dialogue-stage)[data-floor="stairs"]{background-image:url(../assets/unit13-14/stairs-background.svg)}
+.unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log){position:relative;display:block;flex:none;width:100%;height:242px;margin:0;padding:6px 8px 14px;background:transparent;border:0;border-radius:0;scrollbar-gutter:stable}
+.unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log) .bubble-row{display:flex;margin:0 0 12px;padding:0 4px}
+.unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log) .bubble{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;max-width:96%;width:fit-content;padding:8px 12px;background:#FFFDF6;border:2px solid #BCAD95;border-radius:16px 16px 16px 4px;box-shadow:0 3px 0 #D9CBB7}
+.unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log) .student .bubble{background:#FFF4EC;border-color:#C79E8C;border-radius:16px 16px 4px 16px;box-shadow:0 3px 0 #E4CABC}
+.unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log) .is-current .bubble{border-color:#8F6550}
+.unit1314-workspace .dialogue-log .bname{grid-row:1;grid-column:1}.unit1314-workspace .dialogue-log .btext{grid-row:2;grid-column:1;min-height:0;padding:0;margin:3px 0;font-size:23px;line-height:1.35;overflow-wrap:normal;word-break:normal}
+.unit1314-workspace .dialogue-log .bbtns{grid-column:2;grid-row:1/3;margin:0;align-self:center}
+.unit1314-workspace .dialogue-log .bbtns .btn{min-height:44px;min-width:62px;padding:5px 9px;font-size:14px;border-width:1.5px;box-shadow:0 2px 0 #C0AD95}
+.unit1314-workspace .dialogue-log .bcn{grid-column:1/-1;margin:8px 0 0;font-size:16px;line-height:1.4}
+.unit1314-workspace .story-lead{min-height:205px;padding:20px;margin:auto;max-width:420px;border:1px dashed #C79E8C;border-radius:16px;background:#FFFDF6EB}.unit1314-workspace .story-lead>img{width:72px;height:72px}.unit1314-workspace .story-lead>p{margin:0;font-size:22px}
+.unit1314-workspace .dress-cast{position:relative;flex:1;min-height:0;display:flex;align-items:end;justify-content:space-between;padding:0 5%}
+.unit1314-workspace .stage-text .dress-cast .dialogue-actor{align-self:end;position:relative;width:140px;text-align:center;z-index:2;font-size:15px}
+.unit1314-workspace .stage-text .dress-cast .dialogue-actor>img{display:block;width:140px;height:196px;object-fit:contain;margin:auto;object-position:center bottom}
+.unit1314-workspace .dialogue-actor span{display:block;width:max-content;margin:auto;padding:2px 10px;border-radius:8px;background:#FFFDF6}.unit1314-workspace .dialogue-actor.is-current>img{filter:none}.unit1314-workspace .dialogue-actor.is-current span{background:#F5D58A}
+.unit1314-workspace .story-wardrobe{position:absolute;left:50%;bottom:26px;width:176px;height:182px;transform:translateX(-50%);background:#E2C1A1;border:3px solid #95755B;border-radius:12px 12px 2px 2px;box-shadow:4px 5px 0 #9D7D6130}
+.unit1314-workspace .story-wardrobe::before{content:'';position:absolute;top:8px;bottom:5px;left:50%;border-left:2px solid #B18F6E}
+.unit1314-workspace .story-wardrobe::after{content:'';position:absolute;left:42%;top:50%;width:5px;height:5px;background:#856144;border-radius:50%;box-shadow:23px 0 0 #856144}
+.unit1314-workspace .story-wardrobe.is-open{background:#FDF4E3;border-left-width:16px;border-right-width:16px}.unit1314-workspace .story-wardrobe.is-open::before{inset:14px 0 auto;height:0;border:0;border-top:3px solid #95755B}.unit1314-workspace .story-wardrobe.is-open::after{display:block;left:50%;top:7px;transform:translateX(-50%);width:105px;height:55px;background:url(../assets/unit13-14/hanger.svg) center/contain no-repeat;box-shadow:none;border-radius:0}
+.unit1314-workspace .story-dress{position:absolute;left:50%;bottom:31px;width:133px;height:155px;object-fit:contain;transform:translateX(-50%);z-index:1}
+.unit1314-workspace .story-hatbox{position:absolute;left:68%;bottom:29px;width:94px;height:76px;object-fit:contain;transform:translateX(-50%);z-index:3}
+.unit1314-workspace .story-hat{position:absolute;left:68%;bottom:69px;width:100px;height:92px;object-fit:contain;transform:translateX(-50%);z-index:3}
+.unit1314-workspace .dress-cast[data-phase="admire"] .story-hat{left:auto;right:calc(5% + 18px);bottom:184px;width:104px;height:94px;transform:none}
+.unit1314-workspace .dress-task-heading{text-align:center;font-size:22px;line-height:1.5;white-space:pre-line;margin:14px 0}
+.unit1314-workspace .dress-evidence{display:flex;align-items:center;justify-content:center;gap:18px;height:125px;max-width:740px;margin:8px auto 0;background:#FCF5EB;border-radius:60% 60% 20% 20%}
+.unit1314-workspace .dress-evidence>img{width:110px;height:115px;object-fit:contain}
+.unit1314-workspace .dress-task-result{height:54px;margin:0;padding:10px 8px;text-align:center;font:700 19px/1.4 'Baloo 2','ZCOOL KuaiLe',sans-serif;color:#476435}
+.unit1314-workspace .role-runner{padding-top:0}.unit1314-workspace .role-runner .practice-content{padding-top:0;min-height:0}
+.unit1314-workspace .role-runner .practice-options{max-width:800px;margin:12px auto 20px;justify-content:center;min-height:0}
+.unit1314-workspace .role-runner .practice-options:not(.sentence-options){display:flex;flex-wrap:wrap;gap:12px}
+.unit1314-workspace .role-runner .practice-options:not(.sentence-options)>.opt-btn{flex:1 1 180px;max-width:360px;min-height:72px;text-align:center}
+.unit1314-workspace .dress-result{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:650px;margin:12px auto 22px;padding:16px;background:#FAEFE4;border:1px dashed #C79E8C;border-radius:16px}
+.unit1314-workspace .dress-result>img{width:70px;height:76px;object-fit:contain}.unit1314-workspace .dress-result>p{width:100%;margin:0;font-size:21px;text-align:center}
+.unit1314-workspace .stage-exam .practice-session-tools{display:flex;justify-content:flex-end;max-width:800px;margin:0 auto 12px}.unit1314-workspace .shop-stage:has(.practice-pause)>.dress-task{display:none}
+.unit1314-workspace .colour-gallery,.unit1314-workspace .reply-models{max-width:680px;margin:20px auto 0}
+.unit1314-workspace .stage-models .colour-gallery .phrase-card{min-height:238px}.unit1314-workspace .stage-models .colour-gallery .phrase-card>img{height:138px;width:180px}
+.unit1314-workspace .stage-models .reply-models .phrase-card{min-height:240px;padding:14px}.unit1314-workspace .stage-models .reply-models strong{font-size:23px;line-height:1.5}
+.unit1314-workspace .album-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin:20px auto;max-width:680px}.unit1314-workspace .album-controls>span{white-space:nowrap;min-width:55px;text-align:center}.unit1314-workspace .album-controls>.btn{font-size:17px;min-height:48px;padding:8px 16px}
+@media(max-width:700px){
+ .unit1314-workspace .stage-text :is(#stage,.dialogue-stage){height:446px;padding:10px 6px 8px}
+ .unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log){height:255px;padding:4px 2px 12px;scrollbar-gutter:auto}
+ .unit1314-workspace .stage-text :is(#bubbleArea,.dialogue-log) .bubble{padding:8px;column-gap:6px;max-width:98%}.unit1314-workspace .dialogue-log .btext{font-size:20px}.unit1314-workspace .dialogue-log .bbtns .btn{min-width:52px;font-size:12px;padding:4px 6px}
+ .unit1314-workspace .story-lead>p{font-size:19px}
+ .unit1314-workspace .dress-cast{padding:0 1%}.unit1314-workspace .stage-text .dress-cast .dialogue-actor{width:66px;font-size:12px}.unit1314-workspace .stage-text .dress-cast .dialogue-actor>img{width:77px;height:133px;max-width:none;margin-left:-5px}
+ .unit1314-workspace .dialogue-actor span{padding:2px 7px}
+ .unit1314-workspace .story-wardrobe{width:93px;height:118px;bottom:21px}.unit1314-workspace .story-wardrobe.is-open{border-left-width:8px;border-right-width:8px}.unit1314-workspace .story-wardrobe::after{box-shadow:14px 0 0 #856144}.unit1314-workspace .story-wardrobe.is-open::after{width:65px;height:40px;top:10px;box-shadow:none}
+ .unit1314-workspace .story-dress{height:93px;width:88px;bottom:25px}.unit1314-workspace .story-hatbox{left:68%;width:52px;height:46px;bottom:23px}.unit1314-workspace .story-hat{left:68%;width:55px;height:56px;bottom:53px}.unit1314-workspace .dress-cast[data-phase="admire"] .story-hat{right:calc(1% + 2px);bottom:115px;width:63px;height:56px}
+ .unit1314-workspace .dress-task-heading{font-size:20px}.unit1314-workspace .dress-evidence{height:112px}.unit1314-workspace .dress-evidence>img{width:100px;height:104px}.unit1314-workspace .dress-task-result{height:68px;font-size:17px}
+ .unit1314-workspace .role-runner .practice-options:not(.sentence-options)>.opt-btn{flex-basis:100%;max-width:none;min-height:58px}
+ .unit1314-workspace .stage-roles .role-runner .practice-options>.picture-option{flex-basis:28%;min-width:0;padding:10px 3px}.unit1314-workspace .stage-roles .picture-option img{width:100%;height:76px}.unit1314-workspace .stage-roles .picture-option{font-size:17px}
+ .unit1314-workspace .album-controls{gap:6px}.unit1314-workspace .album-controls>.btn{font-size:15px;padding:6px;flex:1}.unit1314-workspace .album-controls>span{font-size:14px;min-width:40px}
+ .unit1314-workspace .stage-models .reply-models .phrase-card{min-height:280px}.unit1314-workspace .stage-models .reply-models strong{font-size:21px}
+}

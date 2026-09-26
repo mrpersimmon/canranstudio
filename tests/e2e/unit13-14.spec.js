@@ -10,12 +10,13 @@ test('完整保留十幅配色图、A五组合句与B十二组问答，静态阅
   await page.getByRole('button',{name:'下一站：颜色说清楚',exact:true}).click();await expect(page).toHaveURL(/#learn\/colours$/);
   await page.goto('/unit13-14/#learn/models');
   const room=page.locator('.stage-models');
-  await expect(room.locator('.colour-gallery strong')).toHaveText(['umbrella · black','car · blue','shirt · white','coat · grey','case · brown','carpet · red','blouse · yellow','tie · orange','hat · grey and black','dog · brown and white']);
+  const labels=['umbrella · black','car · blue','shirt · white','coat · grey','case · brown','carpet · red','blouse · yellow','tie · orange','hat · grey and black','dog · brown and white'];
+  for(let i=0;i<labels.length;i++){await expect(room.locator('.colour-gallery strong')).toHaveText(labels[i]);if(i<9)await room.getByRole('button',{name:'下一幅配色图',exact:true}).click();}
   for(const img of await room.locator('img').all())expect(await img.evaluate(el=>el.complete&&el.naturalWidth>0)).toBe(true);
   await expect(room.locator('.reference-card button')).toHaveCount(0);
   await room.getByText('看看完整问答',{exact:true}).click();
   const pairs=[['Steven','car','blue','His'],['Tim','shirt','white','His'],['Sophie','coat','grey','Her'],['Mrs. White','carpet','red','Her'],['Dave','tie','orange','His'],['Steven','hat','grey and black','His'],['Helen','dog','brown and white','Her'],['Hans','pen','green','His'],['Luming','suit','grey','His'],['Stella','pencil','blue','Her'],['Xiaohui','handbag','brown','Her'],['Sophie','skirt','yellow','Her']];
-  await expect(room.locator('.reply-models strong')).toHaveText(pairs.map(([owner,object,colour,pronoun])=>"What colour's "+owner+"'s "+object+"? "+pronoun+' '+object+"'s "+colour+'.'));
+  for(let i=0;i<pairs.length;i++){const[owner,object,colour,pronoun]=pairs[i];await expect(room.locator('.reply-models strong')).toHaveText("What colour's "+owner+"'s "+object+"? "+pronoun+' '+object+"'s "+colour+'.');if(i<11)await room.getByRole('button',{name:'下一份问答',exact:true}).click();}
   await room.getByText('两句合一句',{exact:true}).click();
   await expect(room.locator('.merge-models strong')).toHaveText(["This is Paul's car.","This is Sophie's coat.","This is Helen's dog.","This is my father's suit.","This is my daughter's dress."]);
   await page.goto('/unit13-14/#learn/certificate');await page.getByText('和朋友再试试',{exact:true}).click();
@@ -28,7 +29,7 @@ test('完整保留十幅配色图、A五组合句与B十二组问答，静态阅
   expect(audio).toEqual([]);
 });
 
-test('配套练习无需任何配音，26题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
+test('配套练习无需任何配音，34题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
   test.setTimeout(45000);
   const audio=[],errors=[];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{audio.push(route.request().url());return route.abort();});

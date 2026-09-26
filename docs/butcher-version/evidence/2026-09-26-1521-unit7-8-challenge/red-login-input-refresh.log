@@ -1,0 +1,48 @@
+
+Running 4 tests using 1 worker
+
+(node:34058) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/login/portal-worker.spec.js:7:3 › / 首次缓存准备结束不能刷新正在输入的登录表单 (5.8s)
+Testing stopped early after 1 maximum allowed failures.
+
+
+  1) tests/login/portal-worker.spec.js:7:3 › / 首次缓存准备结束不能刷新正在输入的登录表单 ───────────────────────────────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('学号', { exact: true })
+    Expected: "d00000001"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('学号', { exact: true })
+        14 × locator resolved to <input required="" maxlength="32" id="studentNumber" spellcheck="false" name="studentNumber" autocapitalize="none" autocomplete="username" placeholder="例如 d00000001"/>
+           - unexpected value ""
+
+
+      32 |       await page.getByRole('button', { name: '忘记学号或密码', exact: true }).click();
+      33 |       await expect(page.getByRole('status')).toContainText('请联系老师');
+    > 34 |       await expect(page.getByLabel('学号', { exact: true })).toHaveValue('d00000001');
+         |                                                            ^
+      35 |       await expect(page.getByLabel('密码', { exact: true })).toHaveValue('Unsubmitted-test-draft!');
+      36 |       expect(navigations).toBe(0);
+      37 |     } finally {
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/login/portal-worker.spec.js:34:60
+
+    Error Context: ../../../../../../tmp/canran-login-worker-red/portal-worker--首次缓存准备结束不能刷新正在输入的登录表单/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../../tmp/canran-login-worker-red/portal-worker--首次缓存准备结束不能刷新正在输入的登录表单/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../../tmp/canran-login-worker-red/portal-worker--首次缓存准备结束不能刷新正在输入的登录表单/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/login/portal-worker.spec.js:7:3 › / 首次缓存准备结束不能刷新正在输入的登录表单 ────────────────────────────────
+  3 did not run
+  1 error was not a part of any test, see above for details

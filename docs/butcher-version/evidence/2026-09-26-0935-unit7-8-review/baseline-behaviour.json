@@ -1,0 +1,103 @@
+{
+  "date": "2026-09-26",
+  "branch": "codex/butcher-version",
+  "revision": "443421192ea7e1488fae952faf6c27f1097e7e50",
+  "page": "http://127.0.0.1:4191/unit7-8/",
+  "scope": "本地源码页面，通过真实按钮作答；独立于账号数据与发布包缓存验收",
+  "requiredQuestions": 27,
+  "dialogueLines": 16,
+  "wrongFeedback": "再看看，试一次。",
+  "lateVocabularyReload": "第12题刷新后未自动选择或开放检查",
+  "certificateReceived": true,
+  "starsAfterReload": "15",
+  "audio": {
+    "englishRequests": [],
+    "feedbackRequests": 36,
+    "blockedFeedbackRequests": 36,
+    "truncated": false,
+    "hasMore": false
+  },
+  "results": [
+    {
+      "activity": "roles",
+      "question": 1,
+      "correct": true
+    },
+    {
+      "activity": "roles",
+      "question": 2,
+      "correct": true
+    },
+    {
+      "activity": "roles",
+      "question": 3,
+      "correct": true
+    },
+    {
+      "activity": "reply",
+      "question": 1,
+      "correct": true
+    },
+    {
+      "activity": "reply",
+      "question": 2,
+      "correct": true
+    },
+    {
+      "activity": "be",
+      "question": 1,
+      "correct": true
+    },
+    {
+      "activity": "be",
+      "question": 2,
+      "correct": true
+    },
+    {
+      "activity": "interview",
+      "question": 1,
+      "correct": true
+    },
+    {
+      "activity": "interview",
+      "question": 2,
+      "correct": true
+    },
+    {
+      "activity": "trans",
+      "question": 1,
+      "correct": true
+    },
+    {
+      "activity": "trans",
+      "question": 2,
+      "correct": true
+    },
+    {
+      "activity": "exam",
+      "question": 1,
+      "correct": true
+    },
+    {
+      "activity": "exam",
+      "question": 2,
+      "correct": true
+    },
+    {
+      "activity": "exam",
+      "question": 3,
+      "correct": true
+    }
+  ],
+  "notCovered": [
+    "线上登录与成果同步",
+    "整包冷缓存下断音恢复",
+    "真实安卓微信",
+    "教师与儿童试用"
+  ],
+  "invalidExperiment": "对4190打包预览同时绕过Service Worker并屏蔽音频时加载未完成；已撤销设置恢复正常。不把该组合实验记作断音通过或确定产品故障。",
+  "afterModeDeclaration": {
+    "starsAfterReload": "15",
+    "certificateEnabled": true
+  }
+}

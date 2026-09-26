@@ -1,0 +1,10 @@
+
+Running 2 tests using 1 worker
+
+(node:62133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] tests/login/course-integration.spec.js:56:4 › 13–14 登录后无配音通关，证书与真实成果跨设备保留
+[2/2] tests/login/unit13-14-upgrade.spec.js:7:36 › 13–14 classroom 旧服务器升级换设备，保留有效两题，补完后恢复15星和原证书
+  2 passed (27.2s)

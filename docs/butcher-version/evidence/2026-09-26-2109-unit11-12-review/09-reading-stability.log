@@ -1,0 +1,29 @@
+
+Running 5 tests using 1 worker
+
+(node:58180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/5] tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句
+(node:58209) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/5] tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句
+(node:58233) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/5] tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句
+(node:58259) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/5] tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句
+(node:58297) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/5] tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句
+  5 passed (16.8s)

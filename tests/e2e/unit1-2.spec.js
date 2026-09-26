@@ -1,5 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+const { EXAMS, choose } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 const nounAnswers=['handbag','pen','pencil','book','watch','coat','dress','skirt','shirt','car','house'];
@@ -64,7 +65,7 @@ test('Lesson 1–2 可回看课文，先听完整七句再回答归属问题，�
   await expect(detective.getByRole('button',{name:'对面的女士',exact:true})).toBeEnabled();
 });
 
-test('22 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书',async({page})=>{
+test('28 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书',async({page})=>{
   test.setTimeout(120000);
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await audioBoundary(page);
@@ -105,15 +106,17 @@ test('22 题与七句原文构成完整单元，礼貌与指代不误教，末�
   await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await page.getByRole('button',{name:'继续：礼貌小挑战',exact:true}).click();
   const exam=page.locator('.stage-exam');
-  const values=['Yes?','Yes, it is. Thank you very much.'];
+  const values=EXAMS['1-2'];
   for(let i=0;i<values.length;i++){
-    await answer(exam,values[i],i===values.length-1?null:'下一题');
-    if(i===1)await page.reload();
+    await choose(exam,values[i]); await exam.getByRole('button',{name:'检查答案',exact:true}).click();
+    await expect(exam.getByRole('status')).toHaveText('答对了！');
+    if(i===values.length-1)await page.reload();
+    else await exam.getByRole('button',{name:'下一题',exact:true}).click();
   }
-  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuenow','2');
+  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuenow','8');
   await expect(page.locator('#starCount')).toHaveText('12');
   await exam.getByRole('button',{name:'查看本次记录',exact:true}).click();
-  await expect(exam).toContainText('首次独立答对 2 / 2');
+  await expect(exam).toContainText('首次独立答对 8 / 8');
   await expect(page.locator('#starCount')).toHaveText('15');
   await exam.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();
   await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('小小礼貌员');

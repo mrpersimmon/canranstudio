@@ -1,0 +1,10 @@
+
+Running 2 tests using 1 worker
+
+(node:62451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩
+[2/2] tests/login/access.spec.js:143:1 › 49–50 完整课程真实音频、作答和证书，成果换设备保留
+  2 passed (1.9m)

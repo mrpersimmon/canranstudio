@@ -33,6 +33,7 @@
     const characters = design.characters || ['butcher', 'bird'];
     const characterLabels = design.characterLabels || ['肉店老板', '伯德夫人'];
     const drawIcon = design.icon || icon;
+    const keepsakes = design.keepsakes || [];
     const defaultName = design.defaultName || '采购小学徒';
     let issuedAt = typeof initialIssuedAt === 'string' && Number.isFinite(Date.parse(initialIssuedAt)) ? initialIssuedAt : null;
     let exportTicket = 0, downloadUrl = null;
@@ -79,6 +80,11 @@
     recipient.append(node('span', '送给', 'certificate-to'), nameOut);
     heroes.append(drawIcon(characters[0], characterLabels[0]), recipient, drawIcon(characters[1], characterLabels[1]));
     paper.append(heroes, node('p', copy.completion, 'certificate-completion'), node('p', copy.thanks, 'certificate-thanks'));
+    if (keepsakes.length) {
+      const records = node('div', '', 'certificate-keepsakes'); records.setAttribute('aria-label', '我的采访成果');
+      keepsakes.forEach(item => { const record = node('div'); record.append(node('strong', item.title), node('span', item.text)); records.append(record); });
+      paper.append(records);
+    }
     const stamps = node('ol', '', 'certificate-badges'); stamps.setAttribute('aria-label', '我的五关徽章');
     badges.forEach(badge => {
       const stamp = node('li', '', 'certificate-badge'); stamp.style.setProperty('--badge-color', badge.color);
@@ -124,7 +130,7 @@
           accent: root.getComputedStyle(paper.querySelector('.certificate-award')).color,
           edge: paperStyle.getPropertyValue('--certificate-edge').trim() || '#DDBB87'
         };
-        const canvas = drawCertificate({ name: nameOut.textContent, date: dateOut.textContent, images, copy, badges, characters, theme });
+        const canvas = drawCertificate({ name: nameOut.textContent, date: dateOut.textContent, images, copy, badges, characters, theme, keepsakes });
         const blob = await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('No image')), 'image/png'));
         if (ticket !== exportTicket || !dialog.open || !canClaim()) return;
         discardDownload(); downloadUrl = URL.createObjectURL(blob);
@@ -153,8 +159,9 @@
     };
   }
 
-  function drawCertificate({ name, date, images, copy, badges, characters, theme }) {
-    const canvas = document.createElement('canvas'); canvas.width = 1440; canvas.height = 1100;
+  function drawCertificate({ name, date, images, copy, badges, characters, theme, keepsakes }) {
+    const extra = keepsakes.length ? 156 : 0;
+    const canvas = document.createElement('canvas'); canvas.width = 1440; canvas.height = 1100 + extra;
     const ctx = canvas.getContext('2d');
     const brown = '#4A3226', paper = theme.paper, gold = '#F4A72C';
     function box(x, y, width, height, radius, fill, stroke = '', lineWidth = 3) {
@@ -171,9 +178,9 @@
       const w = image.naturalWidth * scale, h = image.naturalHeight * scale;
       ctx.drawImage(image, x + (width - w) / 2, y + (height - h) / 2, w, h);
     }
-    ctx.fillStyle = theme.page; ctx.fillRect(0, 0, 1440, 1100);
-    box(24, 24, 1392, 1052, 34, paper, brown, 6);
-    box(44, 44, 1352, 1012, 22, paper, theme.edge, 2);
+    ctx.fillStyle = theme.page; ctx.fillRect(0, 0, 1440, 1100 + extra);
+    box(24, 24, 1392, 1052 + extra, 34, paper, brown, 6);
+    box(44, 44, 1352, 1012 + extra, 22, paper, theme.edge, 2);
     box(27, 27, 1386, 40, [30, 30, 0, 0], theme.band);
     text(copy.course, 720, 112, 30, '#795F4B');
     art('star', 615, 172, 48); art('star', 682, 150, 76); art('star', 777, 172, 48);
@@ -184,6 +191,13 @@
     box(453, 504, 534, 8, 4, gold);
     text(copy.completion, 720, 565, 34);
     text(copy.thanks, 720, 627, 38, '#4C753B', true);
+    keepsakes.forEach((item, index) => {
+      const width = 1220 / keepsakes.length, x = 110 + index * width;
+      box(x, 678, width - 16, 118, 16, '#FFF9EB', theme.edge, 2);
+      text(item.title, x + (width - 16) / 2, 709, 32);
+      text(item.text, x + (width - 16) / 2, 755, 30, brown, false, width - 48);
+    });
+    ctx.save(); ctx.translate(0, extra);
     badges.forEach((badge, index) => {
       const x = 100 + index * 250;
       box(x, 704, 240, 206, 24, badge.color, '#D3B697', 2);
@@ -192,6 +206,7 @@
     });
     box(471, 948, 498, 58, 29, '#E1EDD5'); text(copy.reward, 720, 978, 32, '#426B32');
     text(date, 720, 1030, 25, '#795F4B');
+    ctx.restore();
     return canvas;
   }
   core.unitCertificate = { mount };

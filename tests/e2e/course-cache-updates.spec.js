@@ -31,9 +31,9 @@ test('两个标签页同时准备同课，关掉一页后另一页仍能完整�
   let finished = 0;
   await context.route(/\/handbag\.svg$/, async route => { seen(); await held; try { await route.continue(); finished++; } catch {} });
   const first = await context.newPage(), second = await context.newPage();
-  await first.goto('http://127.0.0.1:4173/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
+  await first.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
   await requested;
-  await second.goto('http://127.0.0.1:4173/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
+  await second.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
   await expect(second.getByRole('status', { name: '课程准备状态', exact: true })).toBeVisible();
   await first.close(); release();
   await expect(second.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
@@ -128,7 +128,7 @@ test('普通更新后台准备，旧页不被改写，下一次进入使用完�
   });
   // Another visit opens the old complete package and discovers the normal update.
   const second = await context.newPage();
-  await second.goto('http://127.0.0.1:4173/lesson/unit29-30/#learn/words');
+  await second.goto('/lesson/unit29-30/#learn/words');
   await expect(second).toHaveTitle(oldTitle);
   await expect.poll(() => newFetched).toBe(true);
   // Use UI reloads until the prepared version is committed; never inspect its private index.
@@ -138,7 +138,7 @@ test('普通更新后台准备，旧页不被改写，下一次进入使用完�
   }).toPass({ timeout: 15000 });
   await expect(page).toHaveTitle(oldTitle);
   await expect(second.locator('.stage-words')).toContainText('2 / 5');
-  expect(fetched.filter(url => !url.endsWith('.mp3'))).toEqual(['http://127.0.0.1:4173' + revision.updated.url]);
+  expect(fetched.filter(url => !url.endsWith('.mp3'))).toEqual([new URL(revision.updated.url, page.url()).href]);
 });
 
 test('损坏一张已存图片，刷新只补齐该文件并保留词卡页', async ({ page, request }) => {
@@ -158,7 +158,7 @@ test('损坏一张已存图片，刷新只补齐该文件并保留词卡页', as
   page.on('request', request => { if (request.url().includes('/lesson/resources/') && !request.url().endsWith('.mp3')) fetched.push(request.url()); });
   await page.reload();
   await expect(page.locator('.stage-words')).toContainText('2 / 5');
-  expect(fetched).toEqual(['http://127.0.0.1:4173' + item.url]);
+  expect(fetched).toEqual([new URL(item.url, page.url()).href]);
 });
 
 test('已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网', async () => {

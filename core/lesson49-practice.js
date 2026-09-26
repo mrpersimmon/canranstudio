@@ -107,10 +107,39 @@
     solved.forEach(()=>{const step=document.createElement('span');step.className='practice-step';step.setAttribute('aria-hidden','true');meter.append(step);});
     label.append(copy,meter);updateProgress(label,solved,currentIndex);return label;
   }
-  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice' }) {
+  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice' }) {
     const key = sessionId ? element.id+'/'+sessionId : element.id;
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
     let group = notebook.groups[key];
+    // Explicit activity consolidation only. An existing destination (including
+    // a restarted round) always owns its draft. Never import notebook scores.
+    if (!group && previousGroups.length) {
+      const serialize = value => JSON.stringify(value, (field, item) => field === 'hint' ? undefined : item);
+      const sources = previousGroups.map(({ key, questions: prior }) => ({ old: notebook.groups[key], prior }))
+        .filter(({ old, prior }) => isRecord(old) && old.draftVersion === DRAFT_VERSION &&
+          typeof old.runId === 'string' && old.runId && Array.isArray(old.states) &&
+          Number.isInteger(old.index) && old.index >= 0 && old.index <= prior.length &&
+          old.contentSignature === serialize([context.version ?? null, prior]) &&
+          old.signature === prior.map(q => q.id).join('|'));
+      const runId = newRunId(), carriedStates = {};
+      questions.forEach((q, index) => {
+        for (const { old, prior } of sources) {
+          const i = prior.findIndex(item => serialize(item) === serialize(q)), state = old.states[i];
+          if (i >= 0 && i <= old.index && isRecord(state) && state.questionId === q.id && state.runId === old.runId) {
+            carriedStates[index] = { ...state, runId }; break;
+          }
+        }
+      });
+      group = { index: 0, states: [], carriedStates, runId, draftVersion: DRAFT_VERSION,
+        signature: questions.map(q => q.id).join('|'), contentSignature };
+      // Only a verified, contiguous correct prefix may set the starting point.
+      // Later unchanged answers remain separate until their question is shown.
+      while (group.index < questions.length && passed(carriedStates[group.index], questions[group.index])) {
+        group.states.push(carriedStates[group.index]); delete carriedStates[group.index++];
+      }
+      if (group.index === questions.length && !sources.every(({ old, prior }) => old.index === prior.length)) group.index--;
+      notebook.groups[key] = group;
+    }
     const existing = group;
     // Opt-in migration from an explicitly supplied, exact predecessor. Keep
     // only unchanged questions from this active round, never notebook history.
@@ -240,7 +269,7 @@
         summary.textContent = sceneView ? '破案完成！' : optionImages ? '寻宝完成！' : chunkSize ? '挑战完成！' : '这一组完成了！';
         sceneView?.finish();
         const finish=document.createElement('div');finish.className='practice-finish';
-        const again=button('再练一轮', () => { group.index = 0; group.states = []; group.runId = newRunId(); save(); render();revealQuestion(element,sceneView?.heading()); },'btn btn-mini btn-yellow');
+        const again=button('再练一轮', () => { group.index = 0; group.states = []; delete group.carriedStates; group.runId = newRunId(); save(); render();revealQuestion(element,sceneView?.heading()); },'btn btn-mini btn-yellow');
         const stamp=root.CanranCore.lesson49Icons.create(sceneView?'people':'check');stamp.classList.add('finish-icon');
         finish.append(stamp,summary);
         if(completionDetails)finish.append(completionDetails);
@@ -256,6 +285,9 @@
       const hintsEnabled = allowHints && !q.audioText && typeof q.hint === 'string' && q.hint.trim().length > 0;
       const content = document.createElement('div'); content.className = 'practice-content';
       const actions = document.createElement('div'); actions.className = 'practice-actions';
+      const carried = group.carriedStates?.[group.index];
+      if (!group.states[group.index] && usableState(carried, q)) group.states[group.index] = carried;
+      if (group.carriedStates) delete group.carriedStates[group.index];
       const previous = group.states[group.index];
       const state = usableState(previous,q) ? previous : emptyState(q);
       group.states[group.index] = state;

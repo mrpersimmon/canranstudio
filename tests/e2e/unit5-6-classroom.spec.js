@@ -2,6 +2,7 @@
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, PEOPLE, ANSWERS, completeActivity, completeUnit56 } = require('../support/unit5-6-flow');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
+const { finishExam } = require('../support/units1-6-exam');
 test.use({ actionTimeout: 5000 });
 test.beforeEach(async ({ page }) => { await page.emulateMedia({ reducedMotion: 'reduce' }); });
 
@@ -20,7 +21,7 @@ test('无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终
   await expect(story.locator('[data-person="hans"]')).toHaveClass(/is-speaking/);
 });
 
-test('全部声音失败仍可完成23题与20句，旧重复问答不再必做', async ({ page }) => {
+test('全部声音失败仍可完成30题与20句，旧重复问答不再必做', async ({ page }) => {
   test.setTimeout(120000); const voices = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(() => { window.speechCalls = 0; speechSynthesis.speak = () => { window.speechCalls++; }; });
@@ -83,8 +84,9 @@ test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听�
   for (const token of ANSWERS.exam[1]) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await room.getByRole('button', { name: ANSWERS.exam[2], exact: true }).click(); await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await room.getByRole('button', { name: '查看本次记录', exact: true }).click();
-  await expect(room).toContainText('首次独立答对 1 / 3'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
+  await room.getByRole('button', { name: '下一题', exact: true }).click();
+  await finishExam(page, '5-6', 3);
+  await expect(room).toContainText('首次独立答对 8 / 10'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
   await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
 });
 

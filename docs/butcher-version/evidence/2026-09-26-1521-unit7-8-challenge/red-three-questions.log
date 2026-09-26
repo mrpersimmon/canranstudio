@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:32115) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/unit7-8-exam.spec.js:6:1 › 十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录 (5.6s)
+
+
+  1) tests/e2e/unit7-8-exam.spec.js:6:1 › 十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录 ───────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-exam').getByRole('progressbar')
+    Expected: "10"
+    Received: "3"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-exam').getByRole('progressbar')
+        14 × locator resolved to <span aria-label="本轮进度" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" role="progressbar" class="practice-meter" aria-valuetext="已答对 0 / 3 题，当前第 1 题">…</span>
+           - unexpected value "3"
+
+
+       7 |   await page.goto('/unit7-8/#learn/exam');
+       8 |   const room = page.locator('.stage-exam');
+    >  9 |   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+         |                                               ^
+      10 |   for (let i = 0; i < EXAM.length; i++) {
+      11 |     await expect(room.locator('.practice-content h3')).toContainText(EXAM[i].prompt);
+      12 |     const check = room.getByRole('button', { name: '检查答案', exact: true });
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit7-8-exam.spec.js:9:47
+
+    Error Context: test-results/unit7-8-exam-十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit7-8-exam-十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit7-8-exam-十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/unit7-8-exam.spec.js:6:1 › 十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录 ────────────────────────

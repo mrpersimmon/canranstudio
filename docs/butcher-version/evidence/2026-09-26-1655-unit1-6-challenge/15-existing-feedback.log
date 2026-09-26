@@ -1,0 +1,13 @@
+
+Running 5 tests using 1 worker
+
+(node:45294) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/5] tests/e2e/l49-v18.spec.js:110:1 › 词块题用线索后仍需手动拼装，记录提示后完成，下一题和重练清空线索
+[2/5] tests/e2e/retry-feedback.spec.js:7:1 › 只改线索保留已完成活动，内容版本变化不能沿用完成记录
+[3/5] tests/e2e/retry-feedback.spec.js:39:3 › unit1-2 选择题错答只提示重试，改选后正常推进
+[4/5] tests/e2e/retry-feedback.spec.js:39:3 › unit3-4 选择题错答只提示重试，改选后正常推进
+[5/5] tests/e2e/retry-feedback.spec.js:39:3 › unit5-6 选择题错答只提示重试，改选后正常推进
+  5 passed (3.8s)

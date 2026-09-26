@@ -1,9 +1,10 @@
 'use strict';
 const {expect}=require('@playwright/test');
+const {EXAM}=require('./unit11-12-exam');
 // Answers and transcription come from PDF 55–58 and the lesson manuscript, never from runtime data.
 const DIALOGUE=['Whose shirt is that?','Is this your shirt, Dave?','No, sir.',"It's not my shirt.",'This is my shirt.',"My shirt's blue.","Is this shirt Tim's?",'Perhaps it is, sir.',"Tim's shirt's white.",'Tim!','Yes, sir?','Is this your shirt?','Yes, sir.','Here you are.','Catch!','Thank you, sir.'];
 const SPEAKERS=['老师','老师','Dave','Dave','Dave','Dave','老师','Dave','Dave','老师','Tim','老师','Tim','老师','老师','Tim'];
-const ANSWERS={listen:["谁的", "蓝色的", "也许；不确定", "white", "接住", "father", "母亲", "blouse", "姐姐；妹妹", "tie", "brother", "他的", "她的"],roles:['Tim','老师手里的白衬衫'],owner:['her','your',"shirt's"],trans:[['Whose','is','that','tie?'],["It's",'my',"sister's."]],exam:['my brother · pen','请 Tim 确认','her']};
+const ANSWERS={listen:["谁的", "蓝色的", "也许；不确定", "white", "接住", "father", "母亲", "blouse", "姐姐；妹妹", "tie", "brother", "他的", "她的"],roles:['Tim','老师手里的白衬衫'],owner:['her','your',"shirt's"],trans:[['Whose','is','that','tie?'],["It's",'my',"sister's."]],exam:EXAM.map(question=>question.answer)};
 async function completeStory(page,base=""){
  await page.goto(base+'/unit11-12/#learn/text');const room=page.locator('.stage-text');
  for(let i=0;i<DIALOGUE.length;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.getByRole('button',{name:i===15?'完成课文':'下一句',exact:true})).toBeEnabled({timeout:15000});}

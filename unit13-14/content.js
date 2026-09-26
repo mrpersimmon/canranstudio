@@ -117,6 +117,30 @@
       ],"Her carpet's red.",'Mrs. White 的人物卡用 she，所以用 Her。地毯是红色的；White 是姓氏，不能用它猜物品颜色。','分别核对物主卡和物品卡。','Lesson14 Written B4；补充明确人物卡','加入颜色姓氏干扰，整合物主与描述')
     ]
   };
+  const previousQuestions = { exam: questions.exam.slice() };
+  const activityPredecessors = { exam: ['exam'] };
+  questions.exam.push(
+    q('invite-upstairs','读懂邀请去哪里看新裙子',"Anna: Come upstairs and see it.\nLouise 要去哪里看新连衣裙？",[
+      ['到楼上看连衣裙',''],['到楼下看连衣裙','upstairs 是往楼上，不是往楼下。'],['留在原地等裙子送来','Anna 邀请 Louise 过去看，不是让她在原地等。']
+    ],'到楼上看连衣裙','Come upstairs and see it. 邀请对方到楼上看它；这里 it 指新连衣裙。','留意 upstairs 指向哪里。','Lesson13 D03','从英文邀请决定行动，与单词辨义隔开复习'),
+    q('new-too','根据 too 前面的特点判断相同处',"My dress is new. My hat's new, too.\n两件物品哪一点相同？",[
+      ['都是新的',''],['都是绿色的','这里只说明 new，没有说明颜色。'],['大小相同','句子没有提到大小。']
+    ],'都是新的','这两句说连衣裙是新的，帽子也是新的；too 在这里承接 new，不能推出颜色或大小。','看 too 前面说的是新旧、颜色，还是大小。','Lesson13 D01、D09；另设简短阅读','明确复习 too 的承接；不因两物同场就推断同色'),
+    q('ask-direct','组织直接向对方询问颜色的完整问句','直接问对方：你的连衣裙是什么颜色？\n用完整的 is。',undefined,'What colour is your dress?','What colour is 问颜色；当面问对方的连衣裙，用 your dress。','先问颜色，再说对方的什么物品。','Lesson13 D01、Notes1；Lesson14标题','从前置第三人物主缩写问句转为直接提问的完整形式；只检验组织',{type:'order',tokens:['What','colour','is','your','dress?']}),
+    q('two-colours','同时核对物主和一件物品的两种颜色','物主：Steven（he）\n看这顶帽子，选出完整的说明。',[
+      ["His hat's grey and black.",''],["Her hat's grey and black.",'Steven 的人物卡用 he，应当用 His。'],["His hat's grey.",'帽子有灰色和黑色；只写 grey 没有说全。']
+    ],"His hat's grey and black.",'一顶帽子有灰色和黑色；Steven 的人物卡用 he，所以用 His。','分别核对物主和帽子上的颜色。','Lesson14图9、Written B6；明确人物卡','看图选择双色描述，与阅读判断两只狗的干扰区别'),
+    q('expand-is','分清所有格和 is 的缩写',"Steven's umbrella's black.\n展开 is，哪句意思不变？",[
+      ["Steven's umbrella is black.",''],["Steven is umbrella's black.",'Steven’s 在这里表示 Steven 的，不能展开成 Steven is。'],["Steven's umbrella black.",'颜色前需要 is，不能把它漏掉。']
+    ],"Steven's umbrella is black.",'Steven’s 表示 Steven 的；umbrella’s 在这里是 umbrella is。','找“谁的”，再找“是什么颜色”。','Lesson14 Written B例句；Lesson13 Notes1','独立区分两个 ’s 的功能；示范出现不等于检验'),
+    q('family-merge','把亲属物主和物品合成一句','This is my father. This is his suit.\n把两句合成一句。',undefined,"This is my father's suit.","my father’s suit 表示我父亲的西服；my 要保留在 father’s 前面。",'说清是“我的父亲”的西服。','Lesson14 Written A4','从人名所有格迁移到含 my 的亲属短语；保留 A 独立作答',{type:'order',tokens:['This','is','my',"father's",'suit.']}),
+    q('ask-third','向第三人询问已知物主的物品颜色','外套是 Sophie 的。\n你向 Louise 打听这件外套的颜色，应该怎么问？',[
+      ["What colour's Sophie's coat?",''],["What colour's your coat?",'当面对 Louise 说 your coat，问成了 Louise 的外套。'],['Whose coat is that?','这句话问主人是谁；题目已给出主人是 Sophie，现在要问颜色。']
+    ],"What colour's Sophie's coat?",'用 Sophie’s coat 指明 Sophie 的外套，再用 What colour’s 问颜色。','现在和谁说话？外套又是谁的？','Lesson14 Written B3；另设明确听话人','听话人与物主分开，改变直接问对方时的判断条件'),
+    q('praise-hat','用合适的表达夸赞眼前的帽子','Anna 展示她的新帽子。\nLouise 想夸这顶帽子很漂亮，可以怎么说？',[
+      ['That is a lovely hat!',''],["That's a nice dress.",'这句话夸连衣裙，不是眼前的帽子。'],["What colour's your hat?",'这句话在问颜色，没有表达夸赞。']
+    ],'That is a lovely hat!','这里 lovely 夸帽子可爱、漂亮；hat 指帽子。','既要说到帽子，也要表达夸赞。','Lesson13 D13','读懂赞美的对象与用途，以本课实际赞美结束')
+  );
   const stages = [
     {id:'l1',title:'准备看新衣',activities:[['words','配色小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
     {id:'l2',title:'一件新连衣裙',activities:[['text','新衣小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
@@ -125,6 +149,7 @@
     {id:'l5',title:'配色小达人',activities:[['exam','配色小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
   ];
   const definition = { id:'unit13-14',version:1,title:'新衣配色屋',path:'/unit13-14/',start:'learn/words',
+    previousQuestions,activityPredecessors,
     progress:{learningKey:'canran:unit13-14:learning:v1'},objects:WORDS,stages,questions,
     learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}
   };

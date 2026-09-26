@@ -1,14 +1,6 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
-test('三人舞台保留完整人物，侧边学生不把固定对话区与按钮挤开',async({page})=>{
- for(const width of [320,1280]){
-  await page.setViewportSize({width,height:740});await page.goto('/unit11-12/#learn/text');const room=page.locator('.stage-text');await expect(room.locator('.dialogue-actor span')).toHaveText(['老师','Dave','Tim']);await expect(room.locator('.story-lead img')).toHaveAttribute('src','/assets/unit11-12/white-shirt.svg');
-  if(width===320){const teacher=await room.locator('[data-actor="teacher"]>img').boundingBox(),student=await room.locator('[data-actor="dave"]>img').boundingBox();expect(teacher.width).toBeCloseTo(student.width,0);}
-  const cast=await room.locator('.dialogue-cast').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(cast.height).toBeLessThanOrEqual(log.height);expect(cast.x).toBeGreaterThanOrEqual(log.x+log.width);
- }
-});
-
 test('单张示范卡在宽窄屏居中，打印填空至少留出 64 像素书写宽度',async({page})=>{
  for(const width of [320,1280]){await page.setViewportSize({width,height:740});await page.goto('/unit11-12/#learn/models');const card=await page.locator('.model-example .phrase-card').boundingBox(),room=await page.locator('.stage-models').boundingBox();expect(Math.abs(card.x+card.width/2-room.x-room.width/2)).toBeLessThan(2);}
  await page.goto('/unit11-12/#learn/certificate');await page.getByText('和朋友再试试',{exact:true}).click();await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('.reference-writing .writing-blank')).toHaveCount(4);for(const blank of await page.locator('.reference-writing .writing-blank').all())expect((await blank.boundingBox()).width).toBeGreaterThanOrEqual(64);
@@ -17,7 +9,7 @@ for(const width of [320,390,768,1280])test(`${width} 各站无横向溢出，图
  test.setTimeout(60000);await page.setViewportSize({width,height:740});const errors=[];page.on('pageerror',e=>errors.push(e.message));
  for(const id of ['words','listen','text','roles','phrases','owner','models','trans','exam','certificate']){
   await page.goto('/unit11-12/#learn/'+id);const room=page.locator('.stage-'+id);await expect(room.getByRole('heading').first()).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
-  if(id==='text')expect(await room.locator('.dialogue-stage').evaluate(el=>{const log=el.querySelector('.dialogue-log').getBoundingClientRect(),left=el.querySelector('[data-actor="teacher"] span').getBoundingClientRect(),right=el.querySelector('[data-actor="dave"] span').getBoundingClientRect();return left.right<=log.left&&right.left>=log.right;})).toBe(true);
+
   await room.getByRole('button',{name:'怎么玩',exact:true}).click();await page.keyboard.press('Escape');await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toBeFocused();
   if([390,1280].includes(width)&&['words','listen','text','owner','trans','models'].includes(id))await page.screenshot({path:`output/playwright/unit11-12/${id}-${width}.png`});
  }

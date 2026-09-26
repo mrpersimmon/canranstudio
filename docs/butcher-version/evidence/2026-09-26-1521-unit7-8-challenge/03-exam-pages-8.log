@@ -1,0 +1,15 @@
+
+Running 8 tests using 1 worker
+
+(node:34799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/unit7-8-exam.spec.js:8:1 › 十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录 (2.1s)
+  ✓  2 tests/e2e/unit7-8-exam.spec.js:55:1 › 三题旧挑战通关升级只保留真实三题，新增七题未答，补完才恢复证书 (5.5s)
+  ✓  3 tests/e2e/unit7-8-exam.spec.js:81:1 › 旧未提交选择升级仍是草稿，新增拼句刷新与暂停不代答 (956ms)
+  ✓  4 tests/e2e/unit7-8-exam.spec.js:101:44 › 320 十题长题干、词块和末题操作完整，灯泡与检查区稳定 (3.2s)
+  ✓  5 tests/e2e/unit7-8-exam.spec.js:101:44 › 390 十题长题干、词块和末题操作完整，灯泡与检查区稳定 (3.1s)
+  ✓  6 tests/e2e/unit7-8-exam.spec.js:101:44 › 768 十题长题干、词块和末题操作完整，灯泡与检查区稳定 (2.6s)
+  ✓  7 tests/e2e/unit7-8-exam.spec.js:101:44 › 1280 十题长题干、词块和末题操作完整，灯泡与检查区稳定 (2.5s)
+  ✓  8 tests/e2e/unit7-8-exam.spec.js:144:1 › 整课包离线刷新仍是十题，当前新题未提交不计分 (952ms)
+
+  8 passed (21.5s)

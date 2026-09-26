@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:57373) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/login/unit11-12-upgrade.spec.js:7:49 › 11–12 short-exam 旧服务器升级换设备，保留有效三题，补完后恢复15星和原证书
+  1) tests/login/unit11-12-upgrade.spec.js:7:49 › 11–12 short-exam 旧服务器升级换设备，保留有效三题，补完后恢复15星和原证书 ───
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.course')
+    Expected substring: "15 / 15"
+    Received string:    "Lesson 11–12失物招领小侦探★ 12 / 15 · 继续学习 →"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.course')
+        14 × locator resolved to <a class="panel course" href="/unit11-12/#learn/exam">…</a>
+           - unexpected value "Lesson 11–12失物招领小侦探★ 12 / 15 · 继续学习 →"
+
+
+      34 |   await finishExamFrom(current,3);await room.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();await expect(current.locator('#starCount')).toHaveText('15');await current.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(current.locator('#certificateDate')).toHaveText(date);await current.keyboard.press('Escape');
+      35 |   await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    > 36 |   third=await browser.newContext({baseURL:origin});const restored=await third.newPage();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');await restored.goto('/unit11-12/#learn/exam');await expect(restored.locator('.stage-exam')).toContainText('首次独立答对 10 / 10');await restored.goto('/unit11-12/#learn/certificate');await expect(restored.locator('#starCount')).toHaveText('15');await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认领小侦探');
+         |                                                                                                                                                                      ^
+      37 |  }finally{await first?.close();await second?.close();await third?.close();if(server)await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}
+      38 | });
+      39 |
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/login/unit11-12-upgrade.spec.js:36:166
+
+    Error Context: output/test-unit1112-sync/unit11-12-upgrade-11–12-sh-4a1ad-务器升级换设备，保留有效三题，补完后恢复15星和原证书/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output/test-unit1112-sync/unit11-12-upgrade-11–12-sh-4a1ad-务器升级换设备，保留有效三题，补完后恢复15星和原证书/trace.zip
+    Usage:
+
+        npx playwright show-trace output/test-unit1112-sync/unit11-12-upgrade-11–12-sh-4a1ad-务器升级换设备，保留有效三题，补完后恢复15星和原证书/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/login/unit11-12-upgrade.spec.js:7:49 › 11–12 short-exam 旧服务器升级换设备，保留有效三题，补完后恢复15星和原证书 ────

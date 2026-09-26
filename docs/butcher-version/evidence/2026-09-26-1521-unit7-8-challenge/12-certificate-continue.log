@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:35858) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/unit7-8-exam.spec.js:55:1 › 三题旧挑战通关升级只保留真实三题，新增七题未答，补完才恢复证书 (5.6s)
+
+  1 passed (6.3s)

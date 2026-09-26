@@ -76,9 +76,9 @@ test('手机平板和桌面均可点击课程，图标完整且无横向溢出',
   expect(oldArt).toEqual([]);expect(failed).toEqual([]);
 });
 
-test('关闭脚本仍能选择全部课程，键盘可以展开单课', async ({ browser }) => {
-  const context=await browser.newContext({javaScriptEnabled:false});
-  const page=await context.newPage();await page.goto('http://127.0.0.1:4173/');
+test('关闭脚本仍能选择全部课程，键盘可以展开单课', async ({ browser }, testInfo) => {
+  const context=await browser.newContext({javaScriptEnabled:false,baseURL:testInfo.project.use.baseURL});
+  const page=await context.newPage();await page.goto('/');
   await page.locator('summary').focus();await page.keyboard.press('Enter');
   for (const route of ['/unit49-50/#learn/words','/lesson49/','/lesson50/','/lesson51/','/lesson52/','/lesson53/','/lesson54/','/soundmark/']) {
     await expect(page.locator(`main a[href="${route}"]`)).toBeVisible();

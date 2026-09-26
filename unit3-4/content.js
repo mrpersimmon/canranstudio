@@ -150,6 +150,20 @@
     if (!q.distractorReasons && q.options) q.distractorReasons = Object.fromEntries(q.options.filter(value => value !== q.answer).map(value => [value, '与本题的英文、物品或已知人物关系不符。']));
   }
 
+  const priorExam = questions.exam;
+  const finalQuestion = (...args) => {
+    const item = { ...question(...args), id: 'u34-final-v2-' + args[0], source: source + '；综合复习，另设语境不增加原文事实' };
+    if (item.options) item.distractorReasons = Object.fromEntries(item.options.filter(value => value !== item.answer).map(value => [value, item.explanation]));
+    return item;
+  };
+  questions.exam = [...priorExam,
+    finalQuestion('request-record', '合并提取取物请求与寄存牌号', '客人：My coat and my umbrella please.\n工作人员：Number five.\n为这位客人选一张认领记录。', ['五号：外套和雨伞', '五号：外套和寄存牌', '三号：外套和雨伞'], '五号：外套和雨伞', 'coat 和 umbrella 是要取回的东西；Number five. 说明寄存牌是五号。ticket 是认领凭据，不是这句话里请求取回的东西。', '分别核对要取回什么，以及寄存牌号码。'),
+    finalQuestion('show-ticket', '组织出示自己物品的表达', '出示你自己的寄存牌。用词块说：这是我的寄存牌。', undefined, 'Here is my ticket.', 'Here is my ticket. 用来出示说话人自己的寄存牌。', '先想是谁在出示东西，再安排这句话。', { type: 'order', tokens: ['Here', 'is', 'my', 'ticket.'] }),
+    finalQuestion('known-owner', '否定后说明明确知道的归属', '书是对面同学的。他问你：Is this your book?\n用词块说：不是我的，是你的。', undefined, "No. It isn't my book. It's your book.", '已知书属于正在和你说话的同学，所以先否定 my book，再用 your book 说明是对方的；不是从“不属于我”猜出主人。', '先找书的主人，再想现在是谁在回答。', { type: 'order', tokens: ['No.', 'It', "isn't", 'my book.', "It's", 'your book.'] }),
+    finalQuestion('speaker', '说话人改变时选择 my 或 your', '你说：Here is my ticket.\n工作人员把寄存牌递回给你，说：Here is ___ ticket.', ['my', 'your'], 'your', '同一张牌仍是你的；换工作人员对你说话，就用 your 表示听话人的。', '物品主人没有变，但现在说话的人是谁？'),
+    finalQuestion('confirm', '联系上文理解 it 并按事实确认', "工作人员：Is this your umbrella?\n你：No, it isn't.\n他换了一把：Is this it?\n这次的伞确实是你的。最后一句在问什么？怎样回答？", ['问雨伞；Yes, it is.', '问寄存牌；Yes, it is.', "问雨伞；No, it isn't."], '问雨伞；Yes, it is.', '前文一直在确认雨伞，Is this it? 里的 it 代替 your umbrella。本题已说明新拿来的正是你的，所以回答 Yes, it is.。', '回看前面正在找什么，再核对新拿来的东西。'),
+    finalQuestion('shortforms', '理解认领表达中的缩写', "Here's your ticket. It isn't my umbrella. It's your umbrella.\n三个缩写依次展开成什么？", ['Here is / is not / It is', 'Here is / is / It is', 'Here is / is not / This is'], 'Here is / is not / It is', 'Here’s 是 Here is；isn’t 是 is not；It’s 是 It is。展开不能丢掉否定，也不能换掉原来的主语。', '展开后，主语和肯定、否定的意思都应保持不变。')
+  ];
   const stages = [
     { id: 'l1', title: '认领前准备', activities: [['words', '认领小图鉴', 'cards'], ['listen', '单词寻宝', 'cards']], required: ['listen'] },
     { id: 'l2', title: '找回我的伞', activities: [['text', '衣帽间小剧场', 'book'], ['roles', '故事小侦探', 'people']], required: ['text', 'roles'] },
@@ -160,7 +174,8 @@
   const definition = {
     id: 'unit3-4', version: 1, contentRevision: 'classroom-v2', mode: 'classroom', title: '雨伞认领小帮手', path: '/unit3-4/', start: 'learn/words',
     progress: { learningKey: 'canran:unit3-4:learning:v1' },
-    learning: { WORDS, PHRASES, SENTENCE_MODELS, REPLY_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions, previousQuestions
+    learning: { WORDS, PHRASES, SENTENCE_MODELS, REPLY_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions,
+    voicedQuestions: previousQuestions, previousQuestions: { ...previousQuestions, exam: priorExam }, activityPredecessors: { exam: ['exam'] }
   };
   root.CanranCore.unit34 = definition;
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;

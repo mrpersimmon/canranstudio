@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:34274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/unit7-8-exam.spec.js:101:44 › 390 十题长题干、词块和末题操作完整，灯泡与检查区稳定 (1.9s)
+
+
+  1) tests/e2e/unit7-8-exam.spec.js:101:44 › 390 十题长题干、词块和末题操作完整，灯泡与检查区稳定 ──────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      122 |     if (Array.isArray(EXAM[i].answer)) {
+      123 |       const chosen = room.getByRole('group', { name: '已选词块', exact: true });
+    > 124 |       expect(await chosen.evaluate(el => el.scrollHeight <= el.clientHeight + 1)).toBe(true);
+          |                                                                                   ^
+      125 |     }
+      126 |     if ([3, 5, 6, 8, 9].includes(i)) await room.screenshot({ path: `output/playwright/unit7-8-exam/q${i + 1}-${width}.png` });
+      127 |     await room.getByRole('button', { name: '检查答案', exact: true }).click(); expect(await position()).toBeCloseTo(before, 0);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit7-8-exam.spec.js:124:83
+
+    Error Context: test-results/unit7-8-exam-390-十题长题干、词块和末题操作完整，灯泡与检查区稳定/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit7-8-exam-390-十题长题干、词块和末题操作完整，灯泡与检查区稳定/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit7-8-exam-390-十题长题干、词块和末题操作完整，灯泡与检查区稳定/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/unit7-8-exam.spec.js:101:44 › 390 十题长题干、词块和末题操作完整，灯泡与检查区稳定 ───────────────────────────

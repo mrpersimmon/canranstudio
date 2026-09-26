@@ -1,0 +1,16 @@
+
+Running 8 tests using 1 worker
+
+(node:59500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] tests/login/access.spec.js:6:1 › 未登录先看到学号密码入口，不能直接进入教学单元
+[2/8] tests/login/access.spec.js:15:1 › 学号密码进入自己的班级，七项下架且旧直链不能越权
+[3/8] tests/login/access.spec.js:33:1 › 管理员可以创建班级并只开放 Lesson 1–2
+[4/8] tests/login/access.spec.js:49:1 › 已完成活动跨设备同步，未提交选项留在原设备
+[5/8] tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩
+[6/8] tests/login/student-accounts.spec.js:6:1 › 脚本不可用时禁用登录提交，不把密码写入地址
+[7/8] tests/login/student-accounts.spec.js:17:1 › 重名学生独立学号及随机初始密码，首次登录先改密才能学习
+[8/8] tests/login/student-accounts.spec.js:83:1 › 手机核对多音字和 ü，必填拼音阻止部分添加；主动改密撤销其他设备
+  8 passed (39.6s)

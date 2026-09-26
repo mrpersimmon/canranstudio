@@ -217,6 +217,31 @@
    q('exam-distractor','不把旁边的人当成物主','钢笔属于 Sophie（she）。Paul（he）站在旁边，主人没有变。\nThis is ___ pen.',[['her',''],['his','Paul 只是站在旁边，不是钢笔的主人。'],['my','说话人没有拥有这支钢笔。']],'her','选物主词要找真正的主人 Sophie，不能被旁边的 Paul 干扰。','把“站在旁边的人”和“主人”分清。','Written B11与新场景','增加另一个在场人物干扰，检查是否追踪主人而非最近人名')
   ]
  };
+ // Keep the exact three-question manuscript for verified old answers and drafts.
+ const previousQuestions={...questions};
+ const finalQuestion=(id,...args)=>({...q(id,...args),id:'u1112-final-v2-'+id});
+ questions.exam=[...previousQuestions.exam,
+  finalQuestion('ask-owner','用 Whose 询问近处物品的主人','手边有一个手提包，主人还不知道。\n哪一句是在问“这是谁的手提包”？',[
+   ['Whose is this handbag?',''],['Whose is that handbag?','that 指那一个；题面要问的是手边这一个。'],['Is this your handbag?','这是向某个人确认是不是他的，不是开放地问主人是谁。']
+  ],'Whose is this handbag?','Whose 问归属；this 指手边这一个。','留意问的是“谁的”，还是“是不是你的”。','L11首句、Notes1；L12标题','选择询问归属的功能并核对近处条件，不只排序给好的问句'),
+  finalQuestion('my-your','同一件物品随说话人改用 my 或 your','蓝衬衫属于 Dave。依次补好对话。\nDave: This is ___ shirt.\n老师当面对 Dave: Yes, it’s ___ shirt.',[
+   ['my / your',''],['your / my','Dave 是主人，应先说自己的；老师是在对他说“你的”。'],['my / his','第二句老师当面对 Dave 说话，称对方为 you。']
+  ],'my / your','衣服主人没有变；Dave 说 my，老师当面对他说 your。','同一件衣服，谁在对谁说话？','L12 Written A2/A3；L11 D05–D06','与前置伞题间隔复习，补全两个话轮的必要对比'),
+  finalQuestion('family-owner','关系称谓的所有格与 his 对应','西服属于我的父亲（he）。\nIt’s my ___. It’s ___ suit.\n依次补好两处。',[
+   ["father's / his",''],['father / his','第一句是在说“我父亲的”，需要 father’s。'],["father's / her",'给定物主用 he，第二句对应 his。']
+  ],"father's / his",'my father’s 可以省略已知的 suit；his suit 仍在说同一位父亲的西服。','两句都要说同一位主人的物品。','L12 Written B7、亲属词；Notes2','必要对比省略物品的所有格与物品前的物主词；不靠衣服猜 he/she'),
+  finalQuestion('expand-is','展开 is 缩写并保留所有格',"Tim's shirt's white.\n把表示 is 的缩写展开，哪句意思不变？",[
+   ["Tim's shirt is white.",''],["Tim is shirt's white.",'Tim’s 表示“Tim 的”，不能展开成 Tim is。'],["Tim's shirt white.",'完整句不能漏掉 is。']
+  ],"Tim's shirt is white.",'第一处 ’s 表示 Tim 的；第二处 shirt’s 是 shirt is。','找出“谁的衬衫”和“衬衫是什么颜色”。','L11 D09、Notes2；前课is缩写','由指出某一处变为判断整句展开；必要复习，不逐句机械换人名'),
+  finalQuestion('confirm-both','区分非物主否认与物主确认','白衬衫已确认属于 Tim。老师分别问 Dave 和 Tim：\nIs this your shirt?\n两人应该怎样回答？',[
+   ['Dave: No, sir. / Tim: Yes, sir.',''],['Dave: Yes, sir. / Tim: No, sir.','两个人的回答反了。'],['Dave: Yes, sir. / Tim: Yes, sir.','已知这件衣服属于 Tim，Dave 不能也确认是自己的。']
+  ],'Dave: No, sir. / Tim: Yes, sir.','同一件已确认属于 Tim 的衬衫，Dave 否认，Tim 确认。','只按已确认的归属回答，不靠衣服颜色猜。','L11 D02–D04、D12–D13','同一物品的肯定／否定必要对比，与Perhaps的未知状态区分'),
+  finalQuestion('build-question','组织 Whose 后紧接物品的问句','远处有一件衬衫，主人还不知道。\n用词块问它是谁的。',undefined,'Whose shirt is that?','Whose shirt 问“谁的衬衫”；is that 接着指远处那件。','这次把“谁的”和物品放在一起。','L11 D01；L12标题对照','前置是 Whose is that tie?，本题组织另一种已教语序；that 已给定，不算独立选择远近',{type:'order',tokens:['Whose','shirt','is','that?']}),
+  finalQuestion('return-thanks','按说话角色完成归还与道谢','Tim 已确认白衬衫是自己的。\n老师归还衬衫，Tim 道谢。哪组对白合适？',[
+   ['老师：Here you are. / Tim：Thank you, sir.',''],['老师：Thank you, sir. / Tim：Here you are.','交出物品的人和接收后道谢的人对调了。'],['老师：Whose shirt is that? / Tim：No, sir.','这组还在询问并否认，没有完成已确认后的归还与道谢。']
+  ],'老师：Here you are. / Tim：Thank you, sir.','老师交出衬衫时说 Here you are；Tim 收到后道谢。','谁交出物品，谁收到物品？','L11 D14–D16、Notes3','将教材最后一段用于交接话轮，区别人物用途；不要求现实中抛接物品')
+ ];
+ const activityPredecessors={exam:['exam']};
  const stages=[
   {id:'l1',title:'准备找主人',activities:[['words','认领小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
   {id:'l2',title:'一件白衬衫',activities:[['text','认领小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
@@ -224,6 +249,6 @@
   {id:'l4',title:'认领有办法',activities:[['models','认领小画册','cards'],['trans','词块拼装台','order']],required:['trans']},
   {id:'l5',title:'归还小能手',activities:[['exam','归还小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit11-12',version:1,title:'失物招领小侦探',path:'/unit11-12/',start:'learn/words',progress:{learningKey:'canran:unit11-12:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,MODELS,MODEL_EXAMPLE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
+ const definition={id:'unit11-12',version:1,title:'失物招领小侦探',path:'/unit11-12/',start:'learn/words',progress:{learningKey:'canran:unit11-12:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,MODELS,MODEL_EXAMPLE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions,activityPredecessors};
  root.CanranCore.unit1112=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

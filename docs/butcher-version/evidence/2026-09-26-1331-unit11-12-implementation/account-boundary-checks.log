@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:29252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/access.spec.js:6:1 › 未登录先看到学号密码入口，不能直接进入教学单元 (201ms)
+  ✓  2 tests/login/access.spec.js:15:1 › 学号密码进入自己的班级，七项下架且旧直链不能越权 (1.8s)
+  ✓  3 tests/login/access.spec.js:62:1 › A/B 范围、已缓存课程换人、清单与固定资源均受权限限制 (2.7s)
+
+  3 passed (6.0s)

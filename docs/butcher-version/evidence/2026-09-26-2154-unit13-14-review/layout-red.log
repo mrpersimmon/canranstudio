@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:61925) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/unit13-14-scene.spec.js:25:39 › 1280 对白在上方、人物和道具在同一地面，中文不裁切且操作稳定
+  1) tests/e2e/unit13-14-scene.spec.js:25:39 › 1280 对白在上方、人物和道具在同一地面，中文不裁切且操作稳定 ────────────────────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 795.6
+    Received:   616
+
+      25 | for(const width of [320,390,768,1280])test(`${width} 对白在上方、人物和道具在同一地面，中文不裁切且操作稳定`,async({page})=>{
+      26 |  await page.setViewportSize({width,height:844});await page.goto('/unit13-14/#learn/text');const room=page.locator('.stage-text'),stage=room.locator('.dialogue-stage'),log=room.getByRole('log');
+    > 27 |  const s=await stage.boundingBox(),l=await log.boundingBox();expect(l.width).toBeGreaterThan(s.width*.85);
+         |                                                                              ^
+      28 |  const actors=await room.locator('.dialogue-actor').all(),bounds=[];for(const actor of actors){const b=await actor.boundingBox();expect(b.y).toBeGreaterThanOrEqual(l.y+l.height);bounds.push(b);}expect(bounds[1].x).toBeGreaterThan(s.x+s.width*.6);expect(Math.abs(bounds[0].y+bounds[0].height-bounds[1].y-bounds[1].height)).toBeLessThan(3);
+      29 |  const ctrl=room.locator('.stage-ctrl'),top=()=>ctrl.evaluate(e=>e.getBoundingClientRect().top+scrollY),before=await top();
+      30 |  for(let i=0;i<13;i++){
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit13-14-scene.spec.js:27:78
+
+    Error Context: test-results/unit13-14-scene-1280-对白在上方、人物和道具在同一地面，中文不裁切且操作稳定/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit13-14-scene-1280-对白在上方、人物和道具在同一地面，中文不裁切且操作稳定/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit13-14-scene-1280-对白在上方、人物和道具在同一地面，中文不裁切且操作稳定/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/unit13-14-scene.spec.js:25:39 › 1280 对白在上方、人物和道具在同一地面，中文不裁切且操作稳定 ─────────────────────

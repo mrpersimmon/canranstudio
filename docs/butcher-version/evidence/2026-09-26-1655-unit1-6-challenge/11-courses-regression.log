@@ -1,0 +1,197 @@
+
+Running 118 tests using 1 worker
+
+(node:43078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/118] tests/e2e/unit-dedup.spec.js:19:1 › Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断
+[2/118] tests/e2e/unit-dedup.spec.js:46:1 › Lesson 3–4 合并重复工坊，27题覆盖不同语言判断
+[3/118] tests/e2e/unit-dedup.spec.js:57:1 › Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断
+[4/118] tests/e2e/unit-dedup.spec.js:158:1 › Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答
+  1) tests/e2e/unit-dedup.spec.js:158:1 › Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答 ──────────────────────────
+
+    TimeoutError: locator.click: Timeout 7000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-ask').locator('.practice-options').getByRole('button', { name: 'Is this your pen?', exact: true })
+
+
+       9 |   if (Array.isArray(answer)) {
+      10 |     for (const token of answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
+    > 11 |   } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
+         |                                                                                                     ^
+      12 |   const check = room.getByRole('button', { name: '检查答案', exact: true });
+      13 |   await expect(check).toBeEnabled({ timeout: 12000 });
+      14 |   await check.click();
+        at choose (/Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit-dedup.spec.js:11:101)
+        at priorGroup (/Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit-dedup.spec.js:139:11)
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit-dedup.spec.js:160:3
+
+    Error Context: test-results/unit-dedup-Lesson-1–2-升级使变化的找物、挑战与精简拼句重新作答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit-dedup-Lesson-1–2-升级使变化的找物、挑战与精简拼句重新作答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit-dedup-Lesson-1–2-升级使变化的找物、挑战与精简拼句重新作答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:43417) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/118] tests/e2e/unit-dedup.spec.js:172:1 › Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留
+[6/118] tests/e2e/unit-dedup.spec.js:191:1 › Lesson 49–50 旧理解、问句、分类与挑战不代答新版，交接活动保留
+[7/118] tests/e2e/unit1-2-audio.spec.js:21:1 › 偶数课十物问句都有可点读的完整示范，来自教材替换结构
+[8/118] tests/e2e/unit1-2-audio.spec.js:28:1 › 38 个录音均通过真实控件播放，词卡、两位角色与问句各自文字对应
+[9/118] tests/e2e/unit1-2-audio.spec.js:59:1 › 子目录真实听题与正误音效可播放，音频失败不会启用检查，恢复后可以重试
+[10/118] tests/e2e/unit1-2-certificate.spec.js:21:39 › 320 像素领奖、长名字、人物、首次日期与真实图片下载
+  2) tests/e2e/unit1-2-certificate.spec.js:21:39 › 320 像素领奖、长名字、人物、首次日期与真实图片下载 ─────────────────────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/unit1-2/#learn/text
+    Call log:
+      - navigating to "http://127.0.0.1:4173/unit1-2/#learn/text", waiting until "load"
+
+
+       at ../support/unit1-2-flow.js:9
+
+       7 |     window.Audio=class extends EventTarget{constructor(src){super();this.src=src;this.currentTime=0;}play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();}pause(){}};
+       8 |   });
+    >  9 |   await page.goto('/unit1-2/#learn/text');const text=page.locator('.stage-text');
+         |              ^
+      10 |   await text.getByRole('button',{name:'开始听课文',exact:true}).click();
+      11 |   for(let i=1;i<7;i++)await text.getByRole('button',{name:'下一句',exact:true}).click();
+      12 |   await text.getByRole('button',{name:'完成课文学习',exact:true}).click();
+        at completeUnit12 (/Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/support/unit1-2-flow.js:9:14)
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit1-2-certificate.spec.js:8:38
+
+    Error Context: test-results/unit1-2-certificate-320-像素领奖、长名字、人物、首次日期与真实图片下载/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit1-2-certificate-320-像素领奖、长名字、人物、首次日期与真实图片下载/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit1-2-certificate-320-像素领奖、长名字、人物、首次日期与真实图片下载/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[11/118] tests/e2e/unit1-2-certificate.spec.js:21:39 › 390 像素领奖、长名字、人物、首次日期与真实图片下载
+[12/118] tests/e2e/unit1-2-certificate.spec.js:21:39 › 768 像素领奖、长名字、人物、首次日期与真实图片下载
+[13/118] tests/e2e/unit1-2-certificate.spec.js:21:39 › 1280 像素领奖、长名字、人物、首次日期与真实图片下载
+[14/118] tests/e2e/unit1-2-certificate.spec.js:34:1 › 图片失败有重试、空名字有称呼，证书与七句练习纸分别为单页打印
+[15/118] tests/e2e/unit1-2-certificate.spec.js:53:1 › 内容升版撤回旧完成凭据，旧证书不能冒充新题已经答完
+(node:43550) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[16/118] tests/e2e/unit1-2-exam.spec.js:5:1 › 1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨
+[17/118] tests/e2e/unit1-2-layout.spec.js:16:3 › 320 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[18/118] tests/e2e/unit1-2-layout.spec.js:16:3 › 390 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[19/118] tests/e2e/unit1-2-layout.spec.js:16:3 › 768 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[20/118] tests/e2e/unit1-2-layout.spec.js:16:3 › 1280 像素：舞台、选项、灯泡、反馈与结束按钮不溢出或跳动
+[21/118] tests/e2e/unit1-2-layout.spec.js:88:1 › 词块撤回、错误、刷新、修正和末题都沿用同一行为，历史分数不能答未来题
+[22/118] tests/e2e/unit1-2-layout.spec.js:113:1 › 键盘可播放、查看帮助与关闭弹层，短屏换题能看到题干
+[23/118] tests/e2e/unit1-2-navigation.spec.js:5:3 › / 导航进入两个独立单元，分别继续，所有资源保留在正确路径
+[24/118] tests/e2e/unit1-2-navigation.spec.js:5:3 › /lesson/ 导航进入两个独立单元，分别继续，所有资源保留在正确路径
+[25/118] tests/e2e/unit1-2-navigation.spec.js:31:1 › 子目录重开清除两个单元，只影响该版本，取消不会清除任何记录
+[26/118] tests/e2e/unit1-2-navigation.spec.js:52:1 › 新学习从图鉴开始，图鉴末组前往听音；已有位置继续原活动
+[27/118] tests/e2e/unit1-2-navigation.spec.js:67:1 › 章节换序仍能从原有章节链接继续，不把故事和物品记录对调
+[28/118] tests/e2e/unit1-2-scene.spec.js:13:1 › 归还任务：错答不推进、选中不交包，刷新保持实际状态，末题结算与重练由孩子控制
+[29/118] tests/e2e/unit1-2-scene.spec.js:56:1 › 物品任务依据英文问句，选项不重复英文答案，声音不可用仍可完成场景
+[30/118] tests/e2e/unit1-2-scene.spec.js:69:39 › 320 像素场景、对白、人物目标、操作区与结束按钮
+[31/118] tests/e2e/unit1-2-scene.spec.js:69:39 › 390 像素场景、对白、人物目标、操作区与结束按钮
+[32/118] tests/e2e/unit1-2-scene.spec.js:69:39 › 768 像素场景、对白、人物目标、操作区与结束按钮
+[33/118] tests/e2e/unit1-2-scene.spec.js:69:39 › 1280 像素场景、对白、人物目标、操作区与结束按钮
+[34/118] tests/e2e/unit1-2-scene.spec.js:101:1 › 真实旧题稿升级：词汇听辨与原文保留，新场景不能继承旧完成或答案
+[35/118] tests/e2e/unit1-2-scene.spec.js:120:1 › 发布子路径的新场景与人物不逃逸到根路径
+[36/118] tests/e2e/unit1-2-vocabulary-standard.spec.js:15:34 › 320 像素：21 张词卡正面有美式音标，点读翻面、再翻回与刷新不丢失
+[37/118] tests/e2e/unit1-2-vocabulary-standard.spec.js:15:34 › 1280 像素：21 张词卡正面有美式音标，点读翻面、再翻回与刷新不丢失
+[38/118] tests/e2e/unit1-2.spec.js:33:1 › Lesson 1–2 可回看课文，先听完整七句再回答归属问题，历史重听不替当前句完成
+[39/118] tests/e2e/unit1-2.spec.js:68:1 › 28 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书
+[40/118] tests/e2e/unit1-2.spec.js:150:1 › 21 张词卡点读且功能词有语境，11 词听辨逐题提交、末题即时全绿、重练不代答
+[41/118] tests/e2e/unit3-4-classroom.spec.js:16:1 › 全部声音失败仍能完成27题与完整原文并领奖，零英语配音或系统朗读
+[42/118] tests/e2e/unit3-4-classroom.spec.js:39:1 › 反馈音真实结束，错答只重试且不泄题
+[43/118] tests/e2e/unit3-4-classroom.spec.js:60:1 › 12句原文可续读和翻译，末句主动完成，只有对话内部滚动
+[44/118] tests/e2e/unit3-4-classroom.spec.js:85:1 › 七个词义任务不以图配图，末三题刷新不代答，重练清空本轮
+[45/118] tests/e2e/unit3-4-classroom.spec.js:102:1 › 25张音标词卡可翻面，15问和10组否定回应仍供阅读
+[46/118] tests/e2e/unit3-4-classroom.spec.js:126:34 › 320柜台答对才交接，灯泡和按钮稳定，结束动作集中
+[47/118] tests/e2e/unit3-4-classroom.spec.js:126:34 › 1280柜台答对才交接，灯泡和按钮稳定，结束动作集中
+[48/118] tests/e2e/unit3-4-classroom.spec.js:158:44 › 320宽度可阅读操作，帮助关闭回到原按钮
+[49/118] tests/e2e/unit3-4-classroom.spec.js:158:44 › 390宽度可阅读操作，帮助关闭回到原按钮
+[50/118] tests/e2e/unit3-4-classroom.spec.js:158:44 › 768宽度可阅读操作，帮助关闭回到原按钮
+[51/118] tests/e2e/unit3-4-classroom.spec.js:158:44 › 1280宽度可阅读操作，帮助关闭回到原按钮
+[52/118] tests/e2e/unit3-4-classroom.spec.js:192:1 › 接力词块可撤回，未知归属不猜，末题刷新没有自动作答
+[53/118] tests/e2e/unit3-4-classroom.spec.js:212:1 › 实际证书PNG、单页A4和练习纸导出，两条路径成绩独立
+[54/118] tests/e2e/unit3-4-classroom.spec.js:237:1 › 首页进入图鉴，旧拼句和提问地址继续到现行活动
+[55/118] tests/e2e/unit3-4-classroom.spec.js:248:1 › 整课准备后断网仍能翻后组词卡、刷新续练，缓存不请求英语录音
+[56/118] tests/e2e/unit3-4-exam.spec.js:5:1 › 3–4 九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答
+[57/118] tests/e2e/unit3-4-scene.spec.js:12:34 › 390衣帽间人物站在前景，正确提交才把雨伞交到客人手边
+[58/118] tests/e2e/unit3-4-scene.spec.js:12:34 › 1280衣帽间人物站在前景，正确提交才把雨伞交到客人手边
+[59/118] tests/e2e/unit3-4-scene.spec.js:56:34 › 390课文的柜台与人物、短长对白和领回状态可见
+[60/118] tests/e2e/unit3-4-scene.spec.js:56:34 › 1280课文的柜台与人物、短长对白和领回状态可见
+[61/118] tests/e2e/unit3-4-scene.spec.js:90:1 › 缓存入口刷新后显示已读末句，场景和阅读位置保持一致
+[62/118] tests/e2e/unit3-4-umbrella.spec.js:16:34 › 390三次询问对应不同的雨伞，两次否认不交接，刷新和重演保留正确物品
+[63/118] tests/e2e/unit3-4-umbrella.spec.js:16:34 › 1280三次询问对应不同的雨伞，两次否认不交接，刷新和重演保留正确物品
+[64/118] tests/e2e/unit3-4-umbrella.spec.js:52:1 › 柜台否认和最后确认展示不同的伞，紫色圆点伞确认后保持身份
+[65/118] tests/e2e/unit3-4-umbrella.spec.js:79:1 › 换伞动作不阻挡连续前进，重新上演会取消过期的画面动作
+[66/118] tests/e2e/unit3-4-umbrella.spec.js:109:1 › 第二把伞未准备好时不进课，准备后断网换伞和刷新均不缺图
+[67/118] tests/e2e/unit3-4-upgrade.spec.js:15:1 › 真实旧录音中断后续读，不再卡住，也不伪称听完
+[68/118] tests/e2e/unit3-4-upgrade.spec.js:34:1 › 真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧听辨代答
+[69/118] tests/e2e/unit3-4-upgrade.spec.js:54:1 › 旧重练的空白状态优先于历史成绩，不复活旧回合答案
+[70/118] tests/e2e/unit5-6-classroom.spec.js:9:1 › 无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终在场
+[71/118] tests/e2e/unit5-6-classroom.spec.js:24:1 › 全部声音失败仍可完成30题与20句，旧重复问答不再必做
+[72/118] tests/e2e/unit5-6-classroom.spec.js:42:1 › 正误与完成反馈仍真实播放，词义题末三题没有预选或图配图泄题
+[73/118] tests/e2e/unit5-6-classroom.spec.js:73:1 › 挑战暂停与刷新保留选择及提示记录，综合题不冒认听力
+[74/118] tests/e2e/unit5-6-classroom.spec.js:93:34 › 390教室分镜、翻译、末句及合影完整，页面不随下一句跳动
+[75/118] tests/e2e/unit5-6-classroom.spec.js:93:34 › 1280教室分镜、翻译、末句及合影完整，页面不随下一句跳动
+[76/118] tests/e2e/unit5-6-classroom.spec.js:132:1 › 后段人物缺图时先等待，准备后离线可读20句并恢复最新句
+[77/118] tests/e2e/unit5-6-classroom.spec.js:163:34 › 390共用人物与汽车的后续课程仍清晰可见
+[78/118] tests/e2e/unit5-6-classroom.spec.js:163:34 › 1280共用人物与汽车的后续课程仍清晰可见
+[79/118] tests/e2e/unit5-6-classroom.spec.js:175:1 › 词卡仅翻面，新的词义题在无声音时仍可检查
+[80/118] tests/e2e/unit5-6-exam.spec.js:5:1 › 5–6 十题介绍综合练习，全声音失败仍可逐题完成，末三题刷新不代答
+[81/118] tests/e2e/unit5-6-layout.spec.js:4:39 › 320 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处
+[82/118] tests/e2e/unit5-6-layout.spec.js:4:39 › 390 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处
+[83/118] tests/e2e/unit5-6-layout.spec.js:4:39 › 768 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处
+[84/118] tests/e2e/unit5-6-layout.spec.js:4:39 › 1280 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处
+[85/118] tests/e2e/unit5-6-layout.spec.js:16:1 › 24 张词卡的配套音标在窄屏翻面和刷新后不丢失、不裁切
+[86/118] tests/e2e/unit5-6-layout.spec.js:30:31 › 320 提示位于检查左侧，错答不加绿，末题与结束按钮稳定
+[87/118] tests/e2e/unit5-6-layout.spec.js:30:31 › 1280 提示位于检查左侧，错答不加绿，末题与结束按钮稳定
+[88/118] tests/e2e/unit5-6-layout.spec.js:46:1 › 拼句可撤回与重试，刷新保留草稿，下一题无旧答案；键盘也能作答
+[89/118] tests/e2e/unit5-6-upgrade.spec.js:16:1 › 真实旧录音中断后按已显示的句子续读，词卡翻页保留
+[90/118] tests/e2e/unit5-6-upgrade.spec.js:33:1 › 配音旧15星升级为9星，未改题与姓名保留，新词义和综合题不代答
+[91/118] tests/e2e/unit5-6-upgrade.spec.js:51:1 › 旧版重练空白回合优先，删去前题不会复活品牌题的历史答案
+[92/118] tests/e2e/unit5-6.spec.js:6:1 › 纸笔练习保留四组指代与十组替换，实际打印一张 A4 并留足书写空间
+[93/118] tests/e2e/unit5-6.spec.js:32:1 › 真实完成 20 句与 23 题获得 15 星，领取、保存、打印与重练连续，单元记录独立
+[94/118] tests/e2e/unit5-6.spec.js:56:1 › 新单元从图鉴开始，24 个词的音标与翻面可见，末组主动进入八词辨义
+[95/118] tests/e2e/unit5-6.spec.js:76:1 › 首页与 lesson 子目录有新单元入口，独立继续并保留资源路径
+[96/118] tests/e2e/unit5-6.spec.js:95:1 › 题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动
+[97/118] tests/e2e/unit5-6.spec.js:106:1 › 首页重开包含四个单元，取消保留，确认只清除本路径的学习记录
+[98/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[99/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[100/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[101/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[102/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[103/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[104/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[105/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[106/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[107/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[108/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[109/118] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[110/118] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 1-2 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[111/118] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 3-4 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[112/118] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 5-6 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[113/118] tests/e2e/units1-6-exam-upgrade.spec.js:21:3 › 1-2 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案
+[114/118] tests/e2e/units1-6-exam-upgrade.spec.js:47:3 › 1-2 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确
+[115/118] tests/e2e/units1-6-exam-upgrade.spec.js:21:3 › 3-4 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案
+[116/118] tests/e2e/units1-6-exam-upgrade.spec.js:47:3 › 3-4 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确
+[117/118] tests/e2e/units1-6-exam-upgrade.spec.js:21:3 › 5-6 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案
+[118/118] tests/e2e/units1-6-exam-upgrade.spec.js:47:3 › 5-6 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确
+  2 failed
+    tests/e2e/unit-dedup.spec.js:158:1 › Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答 ───────────────────────────
+    tests/e2e/unit1-2-certificate.spec.js:21:39 › 320 像素领奖、长名字、人物、首次日期与真实图片下载 ──────────────────────
+  5 did not run
+  111 passed (6.3m)

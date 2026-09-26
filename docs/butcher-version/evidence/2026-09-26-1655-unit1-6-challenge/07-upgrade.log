@@ -1,0 +1,14 @@
+
+Running 6 tests using 1 worker
+
+(node:41553) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] tests/e2e/units1-6-exam-upgrade.spec.js:21:3 › 1-2 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案
+[2/6] tests/e2e/units1-6-exam-upgrade.spec.js:47:3 › 1-2 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确
+[3/6] tests/e2e/units1-6-exam-upgrade.spec.js:21:3 › 3-4 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案
+[4/6] tests/e2e/units1-6-exam-upgrade.spec.js:47:3 › 3-4 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确
+[5/6] tests/e2e/units1-6-exam-upgrade.spec.js:21:3 › 5-6 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案
+[6/6] tests/e2e/units1-6-exam-upgrade.spec.js:47:3 › 5-6 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确
+  6 passed (17.5s)

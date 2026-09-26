@@ -1,0 +1,228 @@
+
+Running 15 tests using 1 worker
+
+(node:41819) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[2/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[3/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[4/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[5/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[6/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+  1) tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 390 综合挑战的长选项和词块完整，选择与线索不推移操作区 ────────────────
+
+    Error: 已选词块不能被固定高度裁掉
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      27 |       if (Array.isArray(question.answer)) {
+      28 |         const selected = room.getByRole('group', { name: '已选词块', exact: true });
+    > 29 |         expect(await selected.evaluate(el => el.scrollHeight <= el.clientHeight + 1), '已选词块不能被固定高度裁掉').toBe(true);
+         |                                                                                                        ^
+      30 |       }
+      31 |       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
+      32 |       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units1-6-exam-layout.spec.js:29:104
+
+    Error Context: test-results/units1-6-exam-layout-3-4-390-综合挑战的长选项和词块完整，选择与线索不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units1-6-exam-layout-3-4-390-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units1-6-exam-layout-3-4-390-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:42040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[7/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+  2) tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 768 综合挑战的长选项和词块完整，选择与线索不推移操作区 ────────────────
+
+    Error: 已选词块不能被固定高度裁掉
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      27 |       if (Array.isArray(question.answer)) {
+      28 |         const selected = room.getByRole('group', { name: '已选词块', exact: true });
+    > 29 |         expect(await selected.evaluate(el => el.scrollHeight <= el.clientHeight + 1), '已选词块不能被固定高度裁掉').toBe(true);
+         |                                                                                                        ^
+      30 |       }
+      31 |       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
+      32 |       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units1-6-exam-layout.spec.js:29:104
+
+    Error Context: test-results/units1-6-exam-layout-3-4-768-综合挑战的长选项和词块完整，选择与线索不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units1-6-exam-layout-3-4-768-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units1-6-exam-layout-3-4-768-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:42046) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[8/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[9/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+  3) tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 320 综合挑战的长选项和词块完整，选择与线索不推移操作区 ────────────────
+
+    Error: 已选词块不能被固定高度裁掉
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      27 |       if (Array.isArray(question.answer)) {
+      28 |         const selected = room.getByRole('group', { name: '已选词块', exact: true });
+    > 29 |         expect(await selected.evaluate(el => el.scrollHeight <= el.clientHeight + 1), '已选词块不能被固定高度裁掉').toBe(true);
+         |                                                                                                        ^
+      30 |       }
+      31 |       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
+      32 |       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units1-6-exam-layout.spec.js:29:104
+
+    Error Context: test-results/units1-6-exam-layout-5-6-320-综合挑战的长选项和词块完整，选择与线索不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units1-6-exam-layout-5-6-320-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units1-6-exam-layout-5-6-320-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:42053) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[10/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+  4) tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 390 综合挑战的长选项和词块完整，选择与线索不推移操作区 ────────────────
+
+    Error: 已选词块不能被固定高度裁掉
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      27 |       if (Array.isArray(question.answer)) {
+      28 |         const selected = room.getByRole('group', { name: '已选词块', exact: true });
+    > 29 |         expect(await selected.evaluate(el => el.scrollHeight <= el.clientHeight + 1), '已选词块不能被固定高度裁掉').toBe(true);
+         |                                                                                                        ^
+      30 |       }
+      31 |       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
+      32 |       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units1-6-exam-layout.spec.js:29:104
+
+    Error Context: test-results/units1-6-exam-layout-5-6-390-综合挑战的长选项和词块完整，选择与线索不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units1-6-exam-layout-5-6-390-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units1-6-exam-layout-5-6-390-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:42059) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[11/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+  5) tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 768 综合挑战的长选项和词块完整，选择与线索不推移操作区 ────────────────
+
+    Error: 已选词块不能被固定高度裁掉
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      27 |       if (Array.isArray(question.answer)) {
+      28 |         const selected = room.getByRole('group', { name: '已选词块', exact: true });
+    > 29 |         expect(await selected.evaluate(el => el.scrollHeight <= el.clientHeight + 1), '已选词块不能被固定高度裁掉').toBe(true);
+         |                                                                                                        ^
+      30 |       }
+      31 |       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
+      32 |       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units1-6-exam-layout.spec.js:29:104
+
+    Error Context: test-results/units1-6-exam-layout-5-6-768-综合挑战的长选项和词块完整，选择与线索不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units1-6-exam-layout-5-6-768-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units1-6-exam-layout-5-6-768-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:42065) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[12/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+  6) tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区 ───────────────
+
+    Error: 已选词块不能被固定高度裁掉
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      27 |       if (Array.isArray(question.answer)) {
+      28 |         const selected = room.getByRole('group', { name: '已选词块', exact: true });
+    > 29 |         expect(await selected.evaluate(el => el.scrollHeight <= el.clientHeight + 1), '已选词块不能被固定高度裁掉').toBe(true);
+         |                                                                                                        ^
+      30 |       }
+      31 |       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
+      32 |       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units1-6-exam-layout.spec.js:29:104
+
+    Error Context: test-results/units1-6-exam-layout-5-6-1280-综合挑战的长选项和词块完整，选择与线索不推移操作区/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units1-6-exam-layout-5-6-1280-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units1-6-exam-layout-5-6-1280-综合挑战的长选项和词块完整，选择与线索不推移操作区/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:42071) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[13/15] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 1-2 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[14/15] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 3-4 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[15/15] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 5-6 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+  6 failed
+    tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 390 综合挑战的长选项和词块完整，选择与线索不推移操作区 ─────────────────
+    tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 768 综合挑战的长选项和词块完整，选择与线索不推移操作区 ─────────────────
+    tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 320 综合挑战的长选项和词块完整，选择与线索不推移操作区 ─────────────────
+    tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 390 综合挑战的长选项和词块完整，选择与线索不推移操作区 ─────────────────
+    tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 768 综合挑战的长选项和词块完整，选择与线索不推移操作区 ─────────────────
+    tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区 ────────────────
+  9 passed (32.8s)

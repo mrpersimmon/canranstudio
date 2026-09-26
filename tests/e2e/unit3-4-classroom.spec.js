@@ -13,7 +13,7 @@ async function choose(room, answer) {
   await expect(room.getByRole('status')).toHaveText('答对了！');
 }
 
-test('全部声音失败仍能完成21题与完整原文并领奖，零英语配音或系统朗读', async ({ page }) => {
+test('全部声音失败仍能完成27题与完整原文并领奖，零英语配音或系统朗读', async ({ page }) => {
   test.setTimeout(120000);
   const voices = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));

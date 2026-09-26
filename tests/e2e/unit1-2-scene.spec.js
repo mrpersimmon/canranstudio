@@ -117,9 +117,9 @@ test('真实旧题稿升级：词汇听辨与原文保留，新场景不能继�
   await expect(story.getByRole('button',{name:'再听一遍',exact:true})).toBeAttached();
 });
 
-test('发布子路径的新场景与人物不逃逸到根路径',async({page})=>{
+test('发布子路径的新场景与人物不逃逸到根路径',async({page,baseURL})=>{
   const outside=[],failed=[];
-  page.on('request',request=>{const url=new URL(request.url());if(url.protocol==='http:'&&url.origin==='http://127.0.0.1:4173'&&!url.pathname.startsWith('/lesson/'))outside.push(url.pathname);});
+  page.on('request',request=>{const url=new URL(request.url());if(/^https?:$/.test(url.protocol)&&url.origin===new URL(baseURL).origin&&!url.pathname.startsWith('/lesson/'))outside.push(url.pathname);});
   page.on('response',response=>{if(response.status()>=400)failed.push(response.url());});
   await page.goto('/lesson/unit1-2/#learn/manners');const room=page.locator('.stage-manners');await choose(room,'Excuse me!');await choose(room,'Is this your handbag?');await choose(room,'女士');
   await choose(room,['Thank','you','very','much.'],'完成这一站');

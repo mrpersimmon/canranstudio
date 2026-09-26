@@ -30,7 +30,7 @@ test('真实旧录音中断后按已显示的句子续读，词卡翻页保留',
   await page.goto('/unit5-6/#learn/words'); await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');
 });
 
-test('真实旧15星升级为12星，未改题与姓名保留，新词义题不由听辨代答', async ({ page }) => {
+test('配音旧15星升级为9星，未改题与姓名保留，新词义和综合题不代答', async ({ page }) => {
   test.setTimeout(200000); const upgrade = await voicedEdition(page);
   await legacy.completeUnit56(page);
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('小伙伴');
@@ -38,7 +38,7 @@ test('真实旧15星升级为12星，未改题与姓名保留，新词义题不�
   await page.keyboard.press('Escape'); upgrade(); await page.reload();
   await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('小伙伴');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
-  await expect(page.locator('#starCount')).toHaveText('12');
+  await expect(page.locator('#starCount')).toHaveText('9');
   await page.goto('/unit5-6/#learn/listen'); const room = page.locator('.stage-listen');
   await expect(room).toContainText('French 表示什么？');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');

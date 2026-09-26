@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:40226) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/unit3-4-exam.spec.js:5:1 › 3–4 九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答
+  1) tests/e2e/unit3-4-exam.spec.js:5:1 › 3–4 九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答 ────────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-exam').getByRole('progressbar')
+    Expected: "9"
+    Received: "3"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-exam').getByRole('progressbar')
+        14 × locator resolved to <span aria-label="本轮进度" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" role="progressbar" class="practice-meter" aria-valuetext="已答对 0 / 3 题，当前第 1 题">…</span>
+           - unexpected value "3"
+
+
+       9 |   await page.route(/\.mp3(?:\?|$)/, route => route.abort());
+      10 |   await page.goto('/unit3-4/#learn/exam'); const room = page.locator('.stage-exam');
+    > 11 |   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '9');
+         |                                               ^
+      12 |   for (const [i, question] of EXAMS['3-4'].entries()) {
+      13 |     await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+      14 |     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit3-4-exam.spec.js:11:47
+
+    Error Context: test-results/unit3-4-exam-3–4-九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit3-4-exam-3–4-九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit3-4-exam-3–4-九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/unit3-4-exam.spec.js:5:1 › 3–4 九题认领综合练习，全声音失败仍可逐题完成，末三题刷新不代答 ─────────────────────────

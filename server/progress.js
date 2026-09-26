@@ -40,7 +40,51 @@ function normalize(value, unit, course) {
     result.activity.unitCompleted[id]=signatures[id];
   }
   const complete=unit.stages.flatMap(s=>s.required).every(id=>result.activity.unitCompleted[id]===signatures[id]);
-  if(complete){for(const key of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt']) if(typeof value.activity[key]==='string'&&value.activity[key].length<=150)result.activity[key]=value.activity[key];}
+  // An explicitly merged course may need validated predecessor rounds on a
+  // second device. Keep them as migration sources, never as current completion.
+  // Unsubmitted drafts and arbitrary notebook history still stay on their device.
+  const predecessors=[...new Set(Object.values(unit.activityPredecessors||{}).flat())];
+  const retained={};
+  if(!complete)for(const id of predecessors){
+    const questions=unit.previousQuestions?.[id];if(!Array.isArray(questions))continue;
+    const signature=JSON.stringify([unit.version,questions]);
+    const proof=value.activity.unitPreviousCompleted?.[id]||value.activity.unitCompleted?.[id];
+    if(!sameSignature(proof,signature))continue;
+    const key=course.replace('-','')+'-'+id+'-practice/v1';
+    const group=value.groups?.[key],content=JSON.stringify([unit.version,questions],(field,item)=>field==='hint'?undefined:item);
+    if(!group||group.draftVersion!==2||typeof group.runId!=='string'||!group.runId||group.index!==questions.length||group.signature!==questions.map(q=>q.id).join('|')||!sameSignature(group.contentSignature,content))continue;
+    if(!questions.every((q,i)=>{const s=group.states?.[i];return s?.checked===true&&s.correct===true&&s.selection===q.answer&&Number.isInteger(s.attempts)&&s.attempts>0&&typeof s.firstCorrect==='boolean'&&s.questionId===q.id&&s.runId===group.runId;}))continue;
+    result.groups[key]={...group,contentSignature:content};retained[id]=signature;
+    for(const q of questions)if(record(value.records?.[q.id]))result.records[q.id]=value.records[q.id];
+  }
+  if(Object.keys(retained).length)result.activity.unitPreviousCompleted=retained;
+  for(const [id, priorIds] of Object.entries(unit.activityPredecessors||{})){
+    if(result.activity.unitCompleted[id])continue;
+    const questions=unit.questions[id];
+    const states=questions.map(q=>{
+      for(const priorId of priorIds){
+        if(!retained[priorId])continue;
+        const i=unit.previousQuestions[priorId].findIndex(old=>sameSignature(JSON.stringify(old),JSON.stringify(q)));
+        if(i>=0)return result.groups[course.replace('-','')+'-'+priorId+'-practice/v1'].states[i];
+      }
+      return null;
+    });
+    // Only unchanged, explicitly checked answers can complete a merged activity.
+    // A new question (such as her) keeps this entire activity pending.
+    if(!states.every(Boolean))continue;
+    const runId='merged:'+states.map(state=>state.runId).filter((value,index,all)=>all.indexOf(value)===index).join(':');
+    result.groups[course.replace('-','')+'-'+id+'-practice/v2']={index:questions.length,states:states.map(state=>({...state,runId})),runId,draftVersion:2,signature:questions.map(q=>q.id).join('|'),contentSignature:JSON.stringify([unit.version,questions],(key,item)=>key==='hint'?undefined:item)};
+    result.activity.unitCompleted[id]=signatures[id];
+  }
+  // Personal certificate text is metadata, never proof of completion. A new
+  // question or a partial sync must not erase it when scores are revalidated.
+  // Authentication still owns this record; only the validated groups above can
+  // award stars or unlock a certificate. An explicit course reset clears both.
+  if(typeof value.activity.unitName==='string')result.activity.unitName=value.activity.unitName.slice(0,20);
+  for(const key of ['unitCertificateIssuedAt','unitClassroomCertificateIssuedAt']) {
+    const date=value.activity[key];
+    if(typeof date==='string'&&date.length<=50&&Number.isFinite(Date.parse(date)))result.activity[key]=new Date(date).toISOString();
+  }
   return result;
 }
 function merge(left,right){return {version:1,groups:{...left.groups,...right.groups},records:{...left.records,...right.records},activity:{...left.activity,...right.activity,unitCompleted:{...left.activity?.unitCompleted,...right.activity?.unitCompleted}}};}

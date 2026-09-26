@@ -122,7 +122,9 @@
       settings.sceneView = core.unit34Scene.create({ element });
       settings.completionDetails = settings.sceneView.completion();
     }
-    practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.previousQuestions[id]], sessionId: 'v' + unit.version, ...settings,
+    const predecessors = unit.activityPredecessors[id];
+    practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: predecessors ? 'v2' : 'v' + unit.version,
+      previousGroups: predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit34-' + old + '-practice/v1', questions: prior }))), ...settings,
       onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions'));
         if (id === 'manners') element.querySelector('.practice-finish > p').textContent = '雨伞领回来了！';
         settings.onComplete?.(states); } });

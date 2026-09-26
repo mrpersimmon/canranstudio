@@ -121,7 +121,9 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit56-' + id + '-practice'; surfaces.get(id).append(element);
-    practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.previousQuestions[id]], sessionId: 'v' + unit.version, ...settings,
+    const predecessors = unit.activityPredecessors[id];
+    practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: predecessors ? 'v2' : 'v' + unit.version,
+      previousGroups: predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit56-' + old + '-practice/v1', questions: prior }))), ...settings,
       onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }

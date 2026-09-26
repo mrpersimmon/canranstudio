@@ -8,7 +8,7 @@
 
 - 学习已发布课程：打开[正式课程导航](https://www.canranstudio.cn/lesson/)，选择课程。
 - 在自己电脑上查看或修改：按下面的“本地预览”操作。
-- 设计或扩充教学单元：先读[统一设计标准与验收清单](docs/butcher-version/publish/2026-09-25-1136-v1.21-教学单元设计标准与验收清单.md)。
+- 设计或扩充教学单元：先读[统一设计标准与验收清单](docs/butcher-version/publish/2026-09-26-1521-v1.22-教学单元设计标准与验收清单.md)。
 - 设计加载与缓存：见[独立缓存方案](docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md)；已在本地实现，具体验收范围见文档，共用文档集中在 [publish](docs/butcher-version/publish/README.md)。
 - 找其他说明：看[文档导航](docs/README.md)。
 

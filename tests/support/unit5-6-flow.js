@@ -1,5 +1,6 @@
 'use strict';
 const { expect } = require('@playwright/test');
+const { EXAMS } = require('./units1-6-exam');
 // Independent expectations: textbook paper pages 10–13 and the unit manuscript.
 const DIALOGUE = ['Good morning.','Good morning, Mr. Blake.','This is Miss Sophie Dupont.','Sophie is a new student.','She is French.','Sophie, this is Hans.','He is German.','Nice to meet you.','And this is Naoko.',"She's Japanese.",'Nice to meet you.','And this is Chang-woo.',"He's South Korean.",'Nice to meet you.','And this is Luming.',"He's Chinese.",'Nice to meet you.','And this is Xiaohui.',"She's Chinese, too.",'Nice to meet you.'];
 const PEOPLE = ['Students','Students','Students','Students','Students','Hans','Hans','Hans','Naoko','Naoko','Naoko','Chang-woo','Chang-woo','Chang-woo','Luming','Luming','Luming','Xiaohui','Xiaohui','Xiaohui'];
@@ -9,7 +10,7 @@ const ANSWERS = {
   refer:['She','He','It'], articles:['a','an','不填'],
   choice:["It's a Volvo."],
   trans:[['Is','she','a Japanese student','or','a German student?'],['It',"isn't",'an American car.',"It's",'an English car.']],
-  exam:['Hans 是德国人；汽车是日本品牌',['Good morning.','This is','Hans.',"He's",'a German','student.'],'这是一位新同学']
+  exam:EXAMS['5-6'].map(question => question.answer)
 };
 async function completeStory(page, base = '') {
   await page.goto(base + '/unit5-6/#learn/text'); const room=page.locator('.stage-text');

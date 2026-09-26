@@ -111,10 +111,24 @@
       return [value, reason];
     }));
   }
+  const previousQuestions = { exam: questions.exam };
+  const finalQuestion = (...args) => {
+    const item = { ...question(...args), id: 'u12-final-v2-' + args[0], source: source + '；综合复习，另设语境不增加原文事实' };
+    if (item.options) item.distractorReasons = Object.fromEntries(item.options.filter(value => value !== item.answer).map(value => [value, item.explanation]));
+    return item;
+  };
+  questions.exam = [...previousQuestions.exam,
+    finalQuestion('reference', '同时分清听话人与所谈物品', '男士：Is this your handbag?\n女士：Yes, it is.\n这两句里的 your 和 it 分别指什么？', ['your 指女士的；it 指手提包', 'your 指男士的；it 指手提包', 'your 指女士的；it 指女士'], 'your 指女士的；it 指手提包', '男士向女士询问，所以 your 表示女士的；回答中的 it 指正在确认的手提包。', '分别找出男士在问谁，以及两人在说哪件东西。'),
+    finalQuestion('repeat', '选择请求重复的表达', '没听清同学刚说的话，想请他再说一遍。怎样说？', ['Pardon?', 'Excuse me!', 'Thank you very much.'], 'Pardon?', '本题需要请对方重复刚才的话，用 Pardon?。Excuse me! 在本课用于引起注意；Thank you very much. 表示感谢。', '对话已经开始；现在需要对方做什么？'),
+    finalQuestion('attention', '在新情境中礼貌引起注意', '同学正要走开，你想叫住他问一件事。先说什么？', ['Excuse me!', 'Pardon?', 'Yes, it is.'], 'Excuse me!', '这时尚未开始问答，先用 Excuse me! 引起注意。Pardon? 请人重复；Yes, it is. 是确认回答。', '两个人还没有开始对话。'),
+    finalQuestion('object', '从完整问句辨认易混物品', 'Is this your pencil?\n问的是哪件物品？', ['铅笔', '钢笔', '书'], '铅笔', 'pencil 是铅笔，pen 是钢笔；问句正在确认铅笔的归属。', '注意问句最后的物品名。', { optionImages: { '铅笔': image('pencil'), '钢笔': image('pen'), '书': image('book') } }),
+    finalQuestion('ask', '在新物品情境中组织归属问句', '用词块问同学：这是你的外套吗？', undefined, 'Is this your coat?', '用 Is this your…? 询问眼前物品是否是对方的；coat 表示外套。', '先区分提问和回答，再找出物品词。', { type: 'order', tokens: ['Is', 'this', 'your', 'coat?'] }),
+    finalQuestion('hear-question', '从整句录音找到询问对象', '听问句，选出正在询问的物品。', ['房子', '小汽车', '外套'], '房子', '录音是 Is this your house?，house 表示房子。本题只辨认问到什么，没有说明房子的主人。', '', { audioText: ask('house'), optionImages: { '房子': image('house'), '小汽车': image('car'), '外套': image('coat') } })
+  ];
   const definition = {
     id: 'unit1-2', version: 1, experienceVersion: 'scene-1', title: '礼貌小帮手', path: '/unit1-2/', start: 'learn/words',
     progress: { learningKey: 'canran:unit1-2:learning:v1' },
-    learning: { WORDS, PHRASES, SENTENCE_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions
+    learning: { WORDS, PHRASES, SENTENCE_MODELS, DIALOGUE, AUDIO, FEEDBACK: root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK }, objects, stages, questions, previousQuestions, activityPredecessors: { exam: ['exam'] }
   };
   root.CanranCore.unit12 = definition;
   // The navigation can read unit metadata without activating its storage context.

@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:53464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/unit11-12-exam.spec.js:7:1 › 11–12 十题完成认领表达链，所有声音失败、错答与末题刷新不代答
+  1) tests/e2e/unit11-12-exam.spec.js:7:1 › 11–12 十题完成认领表达链，所有声音失败、错答与末题刷新不代答 ──────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-exam').getByRole('progressbar')
+    Expected: "10"
+    Received: "3"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-exam').getByRole('progressbar')
+        14 × locator resolved to <span aria-label="本轮进度" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" role="progressbar" class="practice-meter" aria-valuetext="已答对 0 / 3 题，当前第 1 题">…</span>
+           - unexpected value "3"
+
+
+      10 |  await page.route(/\.(mp3|wav|ogg)(\?|$)/, route => { if (!isFeedbackAudio(route.request().url())) voices.push(route.request().url()); return route.abort(); });
+      11 |  await page.goto('/unit11-12/#learn/exam'); const room = page.locator('.stage-exam');
+    > 12 |  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+         |                                              ^
+      13 |  for (const [i, question] of EXAM.entries()) {
+      14 |   await expect(room.locator('.claim-task-heading')).toContainText(question.prompt);
+      15 |   const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit11-12-exam.spec.js:12:46
+
+    Error Context: test-results/unit11-12-exam-11–12-十题完成认领表达链，所有声音失败、错答与末题刷新不代答/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit11-12-exam-11–12-十题完成认领表达链，所有声音失败、错答与末题刷新不代答/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit11-12-exam-11–12-十题完成认领表达链，所有声音失败、错答与末题刷新不代答/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/unit11-12-exam.spec.js:7:1 › 11–12 十题完成认领表达链，所有声音失败、错答与末题刷新不代答 ───────────────────────

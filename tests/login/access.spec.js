@@ -105,7 +105,7 @@ test('完整无配音课程成果与证书同步，重开后旧设备不能恢�
  await a.page.getByLabel('证书上的名字').fill('小星');await a.page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
  const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/certificate');await expect(b.page.locator('#starCount')).toHaveText('15');await expect(b.page.getByLabel('证书上的名字')).toHaveValue('小星');
  await b.page.getByRole('button',{name:'小星 · 学习设置'}).click();await b.page.getByRole('button',{name:'重开本课',exact:true}).click();await b.page.getByRole('button',{name:'确认清空本课个人成果',exact:true}).click();await expect(b.page.locator('#starCount')).toHaveText('0');
- await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('0');await expect(a.page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await a.context.close();await b.context.close();
+ await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('0');await expect(a.page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(a.page.getByLabel('证书上的名字')).toHaveValue('');await expect(b.page.getByLabel('证书上的名字')).toHaveValue('');await a.context.close();await b.context.close();
 });
 
 test('转班、停用、恢复、重置密码和空班预览',async({page,browser})=>{

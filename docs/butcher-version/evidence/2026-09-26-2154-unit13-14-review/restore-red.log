@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:63180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/unit13-14-upgrade.spec.js:94:1 › 13–14 完成整课加载后，刷新对白仍展示已读的最后一句
+  1) tests/e2e/unit13-14-upgrade.spec.js:94:1 › 13–14 完成整课加载后，刷新对白仍展示已读的最后一句 ───────────────────────
+
+    Error: expect(locator).toBeInViewport() failed
+
+    Locator:  locator('.stage-text').getByRole('log').locator('.bubble-row').last()
+    Expected: in viewport
+    Received: viewport ratio 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeInViewport" with timeout 5000ms
+      - waiting for locator('.stage-text').getByRole('log').locator('.bubble-row').last()
+        14 × locator resolved to <div class="bubble-row teacher is-current">…</div>
+           - unexpected value "viewport ratio 0"
+
+
+      105 |   await context.setOffline(true); await page.reload(); await expect(page.locator('#courseLoader')).toHaveCount(0);
+      106 |   await expect(room.locator('.dialogue-status')).toHaveText('13 / 13 句');
+    > 107 |   await expect(log.locator('.bubble-row').last()).toBeInViewport({ ratio:1 });
+          |                                                   ^
+      108 | });
+      109 |
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit13-14-upgrade.spec.js:107:51
+
+    Error Context: test-results/unit13-14-upgrade-13–14-完成整课加载后，刷新对白仍展示已读的最后一句/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit13-14-upgrade-13–14-完成整课加载后，刷新对白仍展示已读的最后一句/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit13-14-upgrade-13–14-完成整课加载后，刷新对白仍展示已读的最后一句/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/unit13-14-upgrade.spec.js:94:1 › 13–14 完成整课加载后，刷新对白仍展示已读的最后一句 ────────────────────────

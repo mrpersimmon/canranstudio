@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const { submitSubject } = require('../support/l49-subject-flow');
+const { finishExam } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 7000 });
 
 // Literal expectations from the revised teaching manuscript. No runtime answer imports.
@@ -15,7 +16,7 @@ async function choose(room, answer, next = '下一题') {
   if (next) await room.getByRole('button', { name: next, exact: true }).click();
 }
 
-test('Lesson 1–2 用场景找物与两项综合判断取代换词长队列', async ({ page }) => {
+test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/unit1-2/#learn/ask');
   const ask = page.locator('.stage-ask');
@@ -26,7 +27,7 @@ test('Lesson 1–2 用场景找物与两项综合判断取代换词长队列', a
 
   await page.goto('/unit1-2/#learn/exam');
   const exam = page.locator('.stage-exam');
-  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '2');
+  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '8');
   await expect(exam).toContainText('Excuse me!');
   await exam.getByRole('button', { name: 'Yes, it is.', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
@@ -36,20 +37,21 @@ test('Lesson 1–2 用场景找物与两项综合判断取代换词长队列', a
   await expect(exam).toContainText('书确实是你的');
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit12-combined-320.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await choose(exam, 'Yes, it is. Thank you very much.', '查看本次记录');
-  await expect(exam).toContainText('首次独立答对 1 / 2');
+  await choose(exam, 'Yes, it is. Thank you very much.');
+  await finishExam(page, '1-2', 2);
+  await expect(exam).toContainText('首次独立答对 7 / 8');
   await expect(exam.getByRole('button', { name: '下一站：我的单元证书', exact: true })).toBeVisible();
 });
 
-test('Lesson 3–4 合并重复工坊，21题覆盖不同语言判断', async ({ page }) => {
+test('Lesson 3–4 合并重复工坊，27题覆盖不同语言判断', async ({ page }) => {
   const { completeActivity } = require('../support/unit3-4-flow');
   await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
   await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '7');
   await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
-  await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3');
+  await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '9');
   await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
-  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 3 / 3');
+  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 9 / 9');
 });
 
 test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断', async ({ page }) => {
@@ -112,6 +114,13 @@ async function priorEdition(page, unit) {
   await page.route('**/' + unit + '/content.js*', route => prior
     ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit-dedup-before', unit + '.js'), contentType: 'text/javascript', headers: { 'cache-control': 'no-store' } })
     : route.continue());
+  if (unit === 'unit1-2') {
+    // Keep the predecessor runner with the predecessor content. Mixing the
+    // current runner into a historical edition invents an unsupported release.
+    await page.route('**/unit1-2/unit.js*', route => prior
+      ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit1-2-short-exam-before/unit.js'), contentType: 'text/javascript' })
+      : route.continue());
+  }
   if (unit === 'unit3-4') {
     for (const name of ['index.html', 'unit.js']) {
       const pattern = name === 'index.html' ? /\/unit3-4\/(?:index\.html)?$/ : '**/unit3-4/unit.js*';
@@ -162,7 +171,7 @@ test('Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答'
   upgrade();
   await page.reload();
   await expectFresh(page, 'unit1-2', 'ask', 1);
-  await expectFresh(page, 'unit1-2', 'exam', 2);
+  await expectFresh(page, 'unit1-2', 'exam', 8);
   await expectFresh(page, 'unit1-2', 'trans', 2);
   await expect(page.locator('#starCount')).toHaveText('0');
 });

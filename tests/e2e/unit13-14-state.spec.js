@@ -3,6 +3,7 @@ const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
 const {completeActivity,completeStory,completeUnit1314}=require('../support/unit13-14-flow');
 const fs=require('node:fs/promises');
+const {finishExamFrom}=require('../support/unit13-14-exam');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 
 test('挑战错答与提示分别记账，暂停刷新保留选择，不提前发证',async({page})=>{
@@ -13,8 +14,8 @@ test('挑战错答与提示分别记账，暂停刷新保留选择，不提前�
   await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:"Her carpet's red.",exact:true}).click();
   await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();await room.getByRole('button',{name:'继续挑战',exact:true}).click();
   await expect(room.getByRole('button',{name:"Her carpet's red.",exact:true})).toHaveAttribute('aria-pressed','true');await check.click();
-  await room.getByRole('button',{name:'查看本次记录',exact:true}).click();
-  await expect(room).toContainText('首次独立答对 0 / 2');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
+  await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,2);
+  await expect(room).toContainText('首次独立答对 8 / 10');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
   await page.goto('/unit13-14/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
 });
 
@@ -35,7 +36,7 @@ test('正误和完成反馈音实际播放结束，任何英语声音请求和�
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'case · yellow / hat · yellow',exact:true}).click();await check.click();
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('correct')&&!x.src.includes('incorrect')&&x.ended))).toBe(true);
   await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:"Her carpet's white.",exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
-  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"Her carpet's red.",exact:true}).click();await check.click();await room.getByRole('button',{name:'查看本次记录',exact:true}).click();
+  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"Her carpet's red.",exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,2);
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('complete')&&x.ended))).toBe(true);
   expect(voices).toEqual([]);expect(speechCalls).toBe(0);
 });
@@ -83,7 +84,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await page.goto('/unit13-14/#learn/text');await expect(page.locator('.btext')).toHaveCount(13);await expect(page.getByText('故事看完了！',{exact:true})).toBeVisible();
 });
 
-test('关闭JavaScript首页仍提供新单元真实链接',async({browser})=>{
+test('关闭JavaScript首页仍提供新单元真实链接',async({browser},testInfo)=>{
   const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();
-  await page.goto('http://127.0.0.1:4173/lesson/');await expect(page.getByRole('link',{name:'开始学习：新衣配色屋',exact:true})).toHaveAttribute('href','/lesson/unit13-14/#learn/words');await context.close();
+  await page.goto(testInfo.project.use.baseURL+'/lesson/');await expect(page.getByRole('link',{name:'开始学习：新衣配色屋',exact:true})).toHaveAttribute('href','/lesson/unit13-14/#learn/words');await context.close();
 });

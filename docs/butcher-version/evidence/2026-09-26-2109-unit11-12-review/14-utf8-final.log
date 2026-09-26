@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+(node:60120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/login/unit11-12-upgrade.spec.js:28:49 › 11–12 short-exam 旧服务器升级换设备，保留有效三题，补完后恢复15星和原证书
+  1 passed (14.9s)

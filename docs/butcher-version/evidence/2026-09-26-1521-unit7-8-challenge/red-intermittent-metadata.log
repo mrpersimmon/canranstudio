@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:35955) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 (12.6s)
+
+
+  1) tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 ──────────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByRole('textbox', { name: '证书上的名字', exact: true })
+    Expected: "综合小记者"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: '证书上的名字', exact: true })
+        14 × locator resolved to <input class="" maxlength="20" placeholder="你的名字" id="unitCertificateInput" autocomplete="given-name"/>
+           - unexpected value ""
+
+
+      36 |     await expect(current.locator('.course')).toContainText('12 / 15');
+      37 |     await current.goto('/unit7-8/#learn/certificate'); await expect(current.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+    > 38 |     await expect(current.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小记者');
+         |                                                                                 ^
+      39 |     await current.getByRole('button', { name: '继续：采访小挑战', exact: true }).click();
+      40 |     await expect(current).toHaveURL(/#learn\/exam$/);
+      41 |     const room = current.locator('.stage-exam');
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/login/unit7-8-exam-upgrade.spec.js:38:81
+
+    Error Context: ../../../../../../tmp/canran-unit78-continue-account/unit7-8-exam-upgrade-7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../../tmp/canran-unit78-continue-account/unit7-8-exam-upgrade-7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../../tmp/canran-unit78-continue-account/unit7-8-exam-upgrade-7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 ───────────

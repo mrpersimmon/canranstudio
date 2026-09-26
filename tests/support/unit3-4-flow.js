@@ -1,5 +1,6 @@
 'use strict';
 const { expect } = require('@playwright/test');
+const { EXAMS } = require('./units1-6-exam');
 // Independent literal expectations from textbook pages 6–9 and the reviewed
 // question manuscript. Never import the application's questions/answer fields.
 const DIALOGUE = [
@@ -13,7 +14,7 @@ const ANSWERS = {
   roles: ['雨伞', '是不是客人的雨伞', '五号'],
   manners: ['My coat and my umbrella please.', 'Here is my ticket.', 'This is not my umbrella.', 'Yes, it is.'],
   reply: ['your', ['No.', "It isn't", 'my coat.', "It's", 'your coat.'], "No, it isn't.", '你的'],
-  exam: ['Sorry, sir. Is this your umbrella?', '外套是我的；雨伞主人还不知道', 'Is this your teacher?']
+  exam: EXAMS['3-4'].map(question => question.answer)
 };
 async function completeStory(page, prefix = '') {
   await page.goto(prefix + '/unit3-4/#learn/text');

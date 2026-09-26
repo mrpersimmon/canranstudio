@@ -121,13 +121,34 @@
    q('exam-intro','整合姓名、职业与缩写','你扮演 Ben，职业是工程师。用缩写介绍名字和职业。',undefined,"My name's Ben. I'm an engineer.",'My name’s 是 My name is；I’m 是 I am。工程师前用 an。','名字在 My name’s 后，职业在 I’m 后。','新角色Ben，不作为课文事实','间隔后仅抽样一次缩写与搭配，不重复整组填空',{type:'order',tokens:['My',"name's",'Ben.',"I'm",'an engineer.']})
   ]
  };
+ // Exact predecessors for a one-time, question-by-question draft migration.
+ // Keep these definitions immutable: historical answers cannot answer a new task.
+ const previousQuestions={...questions};
+ questions.roles=previousQuestions.roles.slice(0,2);
+ questions.reply=[previousQuestions.reply[0],...previousQuestions.be];
+ questions.interview=[previousQuestions.interview[0],
+  q('ask-her','向别人问她的职业','你和 Robert 聊天，想问他 Sophie 是做什么工作的。',[["What's her job?",''],["What's his job?",'这里想问的是 Sophie，用 her。'],["What's your job?",'your 会问到 Robert 本人。']],"What's her job?",'向 Robert 问 Sophie 的职业，用 What’s her job?。','想问的人是 Sophie，不是眼前的 Robert。','Lesson8 Written B keyboard operator示范；明确人物情境','更换打听的人物，区分 her、his 和 your',{id:'u78-v2-ask-her'}),
+  ...previousQuestions.trans];
+ // Retain the three reviewed tasks and their exact definitions. Only these
+ // proven answers may migrate; the seven added judgments always start blank.
+ questions.exam=[...previousQuestions.exam,
+  q('exam-nationality',"组织国籍与职业问句","先问对方国籍，再问职业。",undefined,"What nationality are you? What's your job?","先用 What nationality are you? 问国籍，再用 What's your job? 问职业。","先想各自在问哪类信息，再排好两个问题。","Lesson7 D09、D13","综合复习：由分别选择回应和拼问答，转为按采访目的组织两个问题",{id:'u78-v2-exam-nationality',type:'order',tokens:['What nationality','are','you?',"What's",'your','job?']}),
+  q('exam-negative','按资料作第一人称否定回答',"Sophie: I'm French. I'm not Italian.\n你扮演她，回答：Are you Italian?",[["No, I'm not.",''],['Yes, I am.','资料明确说不是意大利人，不能肯定回答。'],["No, she isn't.",'正在扮演 Sophie 回答自己，用 I，不是向别人谈论她。']],"No, I'm not.",'资料明确说明不是意大利人；回答自己的情况用 No, I’m not.。','先核对资料，再想一想现在是谁在回答。','Lesson7 肯定／否定回答；Lesson8 Written A Sophie is not Italian','综合复习：原文理解换为本人回应，国籍否定由材料明确给出',{id:'u78-v2-exam-negative'}),
+  q('exam-owners','向旁人分别询问他和她的职业',"向 Ben 询问两位不在场朋友的职业。\nRobert（他）的职业：What's ___ job?\nSophie（她）的职业：What's ___ job?",[['his / her',''],['her / his','Robert 明确用他，Sophie 明确用她，两处不能交换。'],['your / your','your 会变成询问眼前 Ben 自己的职业。']],'his / her','向 Ben 打听 Robert 用 his，打听 Sophie 用 her；your 会问到 Ben 本人。','先找想了解的人，别把正在交谈的人当成询问对象。','Lesson8 Written B his／her；明示新采访情境','综合复习：同一交谈对象下对比两个被询问的人，不重复整组职业替换',{id:'u78-v2-exam-owners'}),
+  q('exam-be','在介绍和问句中区分 am、is、are','把 Ben 的三句话补完整。\nI ___ an engineer.\nMy name ___ Ben.\n___ you Italian?',[['am / is / Are',''],['is / am / Are','I 用 am，My name 的主语是 name，用 is。'],['am / is / Is','问 you 用 Are。'],['am / are / Are','My name 的主语是 name，用 is。']],'am / is / Are','I am；My name is；问对方用 Are you…?。','分别找出每句真正的主语。','Lesson8 Written A 与 Lesson7 Are you…?','综合复习：并列比较 I、my name 和 you，不按相邻单词机械套用',{id:'u78-v2-exam-be'}),
+  q('exam-confirm','按资料作第三人称肯定回答',"Sophie: I'm a keyboard operator.\n老师问你：Is she a keyboard operator?",[['Yes, she is.',''],['Yes, I am.','老师问的是 Sophie，不是你的职业。'],["No, she isn't.",'资料已经说明她是电脑录入员。']],'Yes, she is.','资料明确职业，老师在问 Sophie，用 Yes, she is.。','先确认事实，再看老师是在问你自己还是另一位朋友。','Lesson8 Written B keyboard operator；Lesson7 D14','综合复习：将自述转为旁人确认，与第5题的本人否定形成必要对比',{id:'u78-v2-exam-confirm'}),
+  q('exam-articles','根据起始音选择 a 或 an',"两位朋友各自介绍职业：\nI'm ___ engineer.\nI'm ___ nurse.\n按顺序补完整。",[['an / a',''],['a / an','engineer 以元音音素开头用 an；nurse 以辅音音素开头用 a。'],['a / a','engineer 前用 an。'],['an / an','nurse 前用 a。']],'an / a','engineer 以元音音素开头，用 an；nurse 以辅音音素开头，用 a。','根据职业词开头的发音选择。','Lesson7 engineer 与 Lesson8 nurse 介绍句','必要对比：冠词由孩子选择，不能从完整正确词块中直接获得',{id:'u78-v2-exam-articles'}),
+  q('exam-shortforms','理解三组缩写的完整形式',"My name's Ben. I'm an engineer. What's your job?\n三个缩写展开后，依次是哪一组？",[['name is / I am / What is',''],['name am / I am / What is','name’s 在本句是 name is，name 不是 I。'],['name is / I are / What is','I’m 是 I am。'],['name is / I am / What are','What’s 在本句是 What is。']],'name is / I am / What is','本课这三处分别是 name is、I am、What is；展开不改变句意。','展开后，句子的意思和主语都不改变。','Lesson7 注释的 My name’s、I’m、What’s','综合复习：核对已用过的缩写含义，不把给定缩写的排序当作理解证据',{id:'u78-v2-exam-shortforms'})
+ ];
+ delete questions.be;delete questions.trans;
+ const activityPredecessors={roles:['roles'],reply:['reply','be'],interview:['interview','trans'],exam:['exam']};
  const stages=[
   {id:'l1',title:'采访前准备',activities:[['words','采访小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
-  {id:'l2',title:'和朋友聊一聊',activities:[['text','朋友小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
-  {id:'l3',title:'问答有办法',activities:[['phrases','采访小锦囊','speech'],['reply','问答接力','question'],['be','介绍填一填','cards']],required:['reply','be']},
-  {id:'l4',title:'职业采访台',activities:[['models','职业小图册','cards'],['interview','替朋友问一问','people'],['trans','词块拼装台','order']],required:['interview','trans']},
+  {id:'l2',title:'认识两位朋友',activities:[['text','会客角小剧场','book'],['roles','朋友资料卡','people']],required:['text','roles']},
+  {id:'l3',title:'采访登记本',activities:[['phrases','采访小锦囊','speech'],['reply','填好采访记录','cards']],required:['reply']},
+  {id:'l4',title:'职业采访台',activities:[['models','职业人物册','cards'],['interview','完成采访对话','people']],required:['interview']},
   {id:'l5',title:'采访小达人',activities:[['exam','采访小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit7-8',version:1,title:'新朋友采访站',path:'/unit7-8/',start:'learn/words',progress:{learningKey:'canran:unit7-8:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,JOBS,INTERVIEWS,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions};
+ const definition={id:'unit7-8',version:1,mode:'classroom',title:'新朋友采访站',path:'/unit7-8/',start:'learn/words',progress:{learningKey:'canran:unit7-8:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,JOBS,INTERVIEWS,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions,activityPredecessors};
  root.CanranCore.unit78=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

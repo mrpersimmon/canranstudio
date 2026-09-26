@@ -1,0 +1,12 @@
+
+Running 4 tests using 1 worker
+
+(node:55928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] tests/e2e/unit11-12-exam.spec.js:38:41 › 320 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[2/4] tests/e2e/unit11-12-exam.spec.js:38:41 › 390 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[3/4] tests/e2e/unit11-12-exam.spec.js:38:41 › 768 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[4/4] tests/e2e/unit11-12-exam.spec.js:38:41 › 1280 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+  4 passed (15.1s)

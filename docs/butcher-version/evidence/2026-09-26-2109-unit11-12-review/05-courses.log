@@ -1,0 +1,92 @@
+
+Running 42 tests using 1 worker
+
+(node:56410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/42] tests/e2e/unit11-12-audio.spec.js:5:35 › unit11-12 词卡翻面、示范阅读和刷新都不请求英语配音 /
+[2/42] tests/e2e/unit11-12-audio.spec.js:5:35 › unit11-12 词卡翻面、示范阅读和刷新都不请求英语配音 /lesson
+[3/42] tests/e2e/unit11-12-exam-upgrade.spec.js:17:1 › 11–12 三题旧挑战完成后保留有效题，新增题亲自补完才重新领证
+[4/42] tests/e2e/unit11-12-exam-upgrade.spec.js:36:1 › 11–12 旧草稿只是选择，升级、暂停与刷新都不代为判对
+[5/42] tests/e2e/unit11-12-exam-upgrade.spec.js:50:1 › 11–12 缓存版断网刷新保留新增题的未提交词块，下一题仍为空
+[6/42] tests/e2e/unit11-12-exam.spec.js:7:1 › 11–12 十题完成认领表达链，所有声音失败、错答与末题刷新不代答
+[7/42] tests/e2e/unit11-12-exam.spec.js:38:41 › 320 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[8/42] tests/e2e/unit11-12-exam.spec.js:38:41 › 390 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[9/42] tests/e2e/unit11-12-exam.spec.js:38:41 › 768 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[10/42] tests/e2e/unit11-12-exam.spec.js:38:41 › 1280 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+[11/42] tests/e2e/unit11-12-layout.spec.js:4:1 › 单张示范卡在宽窄屏居中，打印填空至少留出 64 像素书写宽度
+[12/42] tests/e2e/unit11-12-layout.spec.js:8:39 › 320 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[13/42] tests/e2e/unit11-12-layout.spec.js:8:39 › 390 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[14/42] tests/e2e/unit11-12-layout.spec.js:8:39 › 768 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[15/42] tests/e2e/unit11-12-layout.spec.js:8:39 › 1280 各站无横向溢出，图标和三人舞台完整，帮助关闭后返回焦点
+[16/42] tests/e2e/unit11-12-layout.spec.js:18:1 › 18 张词卡在窄屏可翻面、读音标，末组刷新后仍有下一站
+[17/42] tests/e2e/unit11-12-layout.spec.js:24:31 › 320 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算
+[18/42] tests/e2e/unit11-12-layout.spec.js:24:31 › 1280 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算
+[19/42] tests/e2e/unit11-12-layout.spec.js:33:1 › 词块支持撤回和键盘；错序刷新不获正确，换题不继承已选词块
+[20/42] tests/e2e/unit11-12-scene.spec.js:9:1 › 白衬衫等待本人确认再归还，蓝衬衫不提前出现，刷新和重演保持时序
+[21/42] tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句
+  1) tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句 ──────────────────────────
+
+    Error: expect(locator).toBeInViewport() failed
+
+    Locator:  locator('.stage-text').getByRole('log').locator('.bubble-row').last()
+    Expected: in viewport
+    Received: viewport ratio 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeInViewport" with timeout 5000ms
+      - waiting for locator('.stage-text').getByRole('log').locator('.bubble-row').last()
+        14 × locator resolved to <div class="bubble-row student is-current">…</div>
+           - unexpected value "viewport ratio 0"
+
+
+      33 |   await log.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();
+      34 |   const cn=await log.locator('.bubble-row').last().locator('.bcn').boundingBox(),b=await log.boundingBox();expect(cn.y+cn.height).toBeLessThanOrEqual(b.y+b.height-2);expect(await ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
+    > 35 |   await capture(page,`story-clues-${width}`);await page.reload();await expect(log.locator('.bubble-row').last()).toBeInViewport({ratio:1});
+         |                                                                                                                  ^
+      36 |  }
+      37 | });
+      38 | test('十二组认领档案一次展示一件，翻页完整并可直接下一站',async({page})=>{
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit11-12-scene.spec.js:35:114
+
+    Error Context: test-results/unit11-12-scene-手机对白占满一行，三人同地面，中文展开与刷新不丢当前句/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit11-12-scene-手机对白占满一行，三人同地面，中文展开与刷新不丢当前句/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit11-12-scene-手机对白占满一行，三人同地面，中文展开与刷新不丢当前句/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:56827) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[22/42] tests/e2e/unit11-12-scene.spec.js:38:1 › 十二组认领档案一次展示一件，翻页完整并可直接下一站
+[23/42] tests/e2e/unit11-12-scene.spec.js:45:1 › Perhaps 题只在正确提交后记录先确认，不把猜测画成归还
+[24/42] tests/e2e/unit11-12-upgrade.spec.js:17:1 › 23题旧课堂升级保留有效三题，补完新增题后恢复15星、姓名和证书日期
+[25/42] tests/e2e/unit11-12-upgrade.spec.js:25:1 › 旧课堂未提交的选择和词块保留，不能变成正确答案
+[26/42] tests/e2e/unit11-12-upgrade.spec.js:32:1 › 人物未齐不显示课件，整课加载后断网翻档案、翻词卡与刷新续读都完整
+[27/42] tests/e2e/unit11-12.spec.js:6:1 › 物主选项限定为教材已教的 my、your、his、her，不引入新结构
+[28/42] tests/e2e/unit11-12.spec.js:9:1 › 从音标图鉴开始，浏览16句并完成30题才取得15星课堂配套证书
+[29/42] tests/e2e/unit11-12.spec.js:20:1 › 首页和 lesson 子目录进入新单元，独立恢复草稿并定位同一地址
+[30/42] tests/e2e/unit11-12.spec.js:27:1 › 纸笔保留教材 A 四题与 B 十二题，真实打印一张 A4 且每组有三行书写区
+[31/42] tests/e2e/unit11-12.spec.js:34:1 › 挑战错答、提示、暂停刷新与独立作答分别记录，不提前发证
+[32/42] tests/e2e/unit11-12.spec.js:39:1 › 内容升版只让改过的活动失效，另一个活动的草稿保留
+[33/42] tests/e2e/unit11-12.spec.js:43:1 › 重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录
+[34/42] tests/e2e/unit11-12.spec.js:48:1 › 短屏单词练习末题与重练可操作，重练清本轮答案且保留已获星星
+[35/42] tests/e2e/units9-12-classroom.spec.js:37:27 › Lesson 11–12 无配音可逐句看完原文，刷新续读，中文独立展开
+[36/42] tests/e2e/units9-12-classroom.spec.js:65:27 › Lesson 11–12 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留
+[37/42] tests/e2e/units9-12-classroom.spec.js:88:27 › Lesson 11–12 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择
+[38/42] tests/e2e/units9-12-classroom.spec.js:116:27 › Lesson 11–12 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立
+[39/42] tests/e2e/units9-12-classroom.spec.js:137:27 › Lesson 11–12 旧录音中断可续读，保留词卡页、原练习与词块草稿
+[40/42] tests/e2e/units9-12-classroom.spec.js:169:27 › Lesson 11–12 旧15星升级保留9星，新题独立完成后再领课堂配套证书
+[41/42] tests/e2e/units9-12-classroom.spec.js:188:59 › Lesson 11–12 320 阅读控件不跳动，图片题和长词义选项完整
+[42/42] tests/e2e/units9-12-classroom.spec.js:188:59 › Lesson 11–12 1280 阅读控件不跳动，图片题和长词义选项完整
+  1 failed
+    tests/e2e/unit11-12-scene.spec.js:24:1 › 手机对白占满一行，三人同地面，中文展开与刷新不丢当前句 ───────────────────────────
+  41 passed (2.7m)

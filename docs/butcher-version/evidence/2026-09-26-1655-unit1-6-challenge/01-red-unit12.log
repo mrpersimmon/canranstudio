@@ -1,0 +1,46 @@
+
+Running 1 test using 1 worker
+
+(node:39853) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/unit1-2-exam.spec.js:5:1 › 1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨
+  1) tests/e2e/unit1-2-exam.spec.js:5:1 › 1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨 ─────────────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-exam').getByRole('progressbar')
+    Expected: "8"
+    Received: "2"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-exam').getByRole('progressbar')
+        14 × locator resolved to <span aria-label="本轮进度" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" role="progressbar" class="practice-meter" aria-valuetext="已答对 0 / 2 题，当前第 1 题">…</span>
+           - unexpected value "2"
+
+
+       6 |   test.setTimeout(60000);
+       7 |   await page.goto('/unit1-2/#learn/exam'); const room = page.locator('.stage-exam');
+    >  8 |   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '8');
+         |                                               ^
+       9 |   for (const [i, question] of EXAMS['1-2'].entries()) {
+      10 |     await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+      11 |     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit1-2-exam.spec.js:8:47
+
+    Error Context: test-results/unit1-2-exam-1–2-八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit1-2-exam-1–2-八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit1-2-exam-1–2-八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/unit1-2-exam.spec.js:5:1 › 1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨 ──────────────────────────────

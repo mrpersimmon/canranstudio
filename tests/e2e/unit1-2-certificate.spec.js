@@ -3,8 +3,8 @@ const {test,expect}=require('@playwright/test');
 const {completeUnit12}=require('../support/unit1-2-flow');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 let earnedSession;
-test.beforeAll(async({browser})=>{
-  test.setTimeout(90000);const context=await browser.newContext({baseURL:'http://127.0.0.1:4173',reducedMotion:'reduce'});
+test.beforeAll(async({browser,baseURL})=>{
+  test.setTimeout(90000);const context=await browser.newContext({baseURL,reducedMotion:'reduce'});
   const page=await context.newPage();await completeUnit12(page);earnedSession=await context.storageState();await context.close();
 });
 test.beforeEach(async({page})=>{

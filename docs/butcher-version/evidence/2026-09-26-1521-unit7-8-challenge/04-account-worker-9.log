@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:34119) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/portal-worker.spec.js:7:3 › / 首次缓存准备结束不能刷新正在输入的登录表单 (583ms)
+  ✓  2 tests/login/portal-worker.spec.js:7:3 › /unit7-8/#learn/exam 首次缓存准备结束不能刷新正在输入的登录表单 (475ms)
+  ✓  3 tests/login/portal-worker.spec.js:7:3 › /lesson/ 首次缓存准备结束不能刷新正在输入的登录表单 (486ms)
+  ✓  4 tests/login/portal-worker.spec.js:7:3 › /lesson/unit7-8/#learn/exam 首次缓存准备结束不能刷新正在输入的登录表单 (474ms)
+  ✓  5 tests/login/recovery.spec.js:56:1 › 旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领 (7.1s)
+  ✓  6 tests/login/root-mount.spec.js:19:1 › 根目录真实登录、整课与缓存复访可用；旧 lesson 内容下线且匿名资源仍受限 (6.0s)
+  ✓  7 tests/login/root-mount.spec.js:65:1 › 新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退被删除 (2.6s)
+  ✓  8 tests/login/root-mount.spec.js:85:39 › / 课程直链首次改密和再次登录后均回到原活动 (1.8s)
+  ✓  9 tests/login/root-mount.spec.js:85:39 › /lesson/ 课程直链首次改密和再次登录后均回到原活动 (1.8s)
+
+  9 passed (22.2s)

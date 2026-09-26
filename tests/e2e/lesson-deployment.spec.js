@@ -46,7 +46,7 @@ test('lesson 子目录直接显示导航，组合单元和返回导航都留在�
   const outside = [], failures = [];
   page.on('request', request => {
     const url = new URL(request.url());
-    if (url.protocol === 'http:' && url.origin === 'http://127.0.0.1:4173' && !url.pathname.startsWith('/lesson/')) outside.push(url.pathname);
+    if (url.protocol === 'http:' && url.origin === new URL(test.info().project.use.baseURL).origin && !url.pathname.startsWith('/lesson/')) outside.push(url.pathname);
   });
   page.on('pageerror', error => failures.push(error.message));
   await page.goto('/lesson/');
@@ -65,7 +65,7 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
   const outside = [], errors = [];
   page.on('request', request => {
     const url = new URL(request.url());
-    if (url.protocol === 'http:' && url.origin === 'http://127.0.0.1:4173' && !url.pathname.startsWith('/lesson/')) outside.push(url.pathname);
+    if (url.protocol === 'http:' && url.origin === new URL(test.info().project.use.baseURL).origin && !url.pathname.startsWith('/lesson/')) outside.push(url.pathname);
   });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/lesson/');

@@ -3,6 +3,7 @@
   const core = root.CanranCore, unit = core.unit78;
   const { stages, questions, learning: content } = unit;
   const practice = core.lesson49Practice;
+  const scene = core.unit78Scene;
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -20,6 +21,8 @@
   const surfaces = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
+  const aliases = { 'learn/be': 'learn/reply', 'learn/trans': 'learn/interview' };
+  const canonical = id => aliases[id] || id;
   let active = '', certificateView;
   for (const stage of stages) {
     const section = node('section', '', 'shop-chapter'); section.id = stage.id;
@@ -54,6 +57,7 @@
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
+    if (aliases[id]) { id = canonical(id); history.replaceState(null, '', '#' + id); }
     if (!routes.has(id)) id = 'cover'; markLocation(id);
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
   }
@@ -63,20 +67,20 @@
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
   }, true);
   $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
-  const resume = practice.activity('unitLocation');
+  const resume = canonical(practice.activity('unitLocation'));
   if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
   $('#startBtn').addEventListener('click', () => {
-    const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+    const saved = canonical(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   const help = {
     text: ['点“开始看课文”，用“下一句”展开对白。旧句可以向上查看，中文按句打开。'],
-    roles: ['先看完故事，再来找答案。需要回顾时可以回到朋友小剧场。'],
+    roles: ['先看完故事，再为朋友核对资料。需要回顾时可以回到会客角小剧场。'],
     words: ['点整张词卡看意思，再点收起。用上一组和下一组翻页。'],
     listen: ['看英文选词义，或根据图片、词义选英文。选好后点“检查答案”。'],
     phrases: ['看看不同表达怎样使用，再到下一站练一练。'],
     reply: ['看清问题问谁、问什么，再选择回应。'],
     be: ['分别看清空格前的主语，再选择一组词。'],
-    models: ['看图和职业介绍；展开后可以查看完整问答。'],
+    models: ['看图和职业介绍。完成采访对话后，可以查阅完整问答。'],
     interview: ['分清问谁、向谁问；人物信息由题目给出，不从职业猜性别。'],
     trans: ['点词块组成句子，点已选的词块可以撤回。全部用完再检查。'],
     certificate: ['完成五关后领取、保存或打印。证书记录练习完成，不评价自由口语或独立写作。']
@@ -93,13 +97,7 @@
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
-  // Only the optional hint changed here; the task, choices and answer are
-  // identical. Accept this exact predecessor, never arbitrary old signatures.
-  const previousInterviewSignature = JSON.stringify([unit.version, questions.interview.map(question =>
-    question.id === 'u78-v1-ask-her' ? { ...question, hint: '先看人物，再听 air 的开头。' } : question)]);
-  if (completed.interview === previousInterviewSignature) {
-    completed.interview = signatures.interview; practice.activity('unitCompleted', completed);
-  }
+  const answerReferences = new Map();
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
   const fullyComplete = () => stages.every(stage => stage.required.every(passed));
   function updateProgress() {
@@ -110,6 +108,7 @@
       const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
     }
     $('#starCount').textContent = String(total);
+    answerReferences.forEach((reference, id) => { reference.hidden = !passed(id); });
     const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
     certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
   }
@@ -121,12 +120,26 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit78-' + id + '-practice'; surfaces.get(id).append(element);
-    practice.mount({ element, questions: questions[id], sessionId: 'v' + unit.version, ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+    const predecessors = unit.activityPredecessors[id];
+    practice.mount({ element, questions: questions[id], sessionId: predecessors ? 'v2' : 'v' + unit.version,
+      previousGroups: predecessors?.map(old => ({ key: 'unit78-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
+      onComplete: states => {
+        complete(id);
+        const summary = element.querySelector('.practice-finish > p');
+        const completionCopy = { roles: '朋友资料核对好了！', reply: '采访记录填好了！', interview: '采访对话完成了！' }[id];
+        if (summary && completionCopy) summary.textContent = completionCopy;
+        nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
+      } });
     return element;
+  }
+  function mountInterviewTask(id) {
+    const view = scene.taskView(id); surfaces.get(id).append(view.element);
+    const result = scene.records({ portraits: true, label: '完成的采访档案' }); result.showLine(15);
+    mountPractice(id, { sceneView: view, completionDetails: result.element });
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
+  const storyRecords = scene.records({ label: '随课文填写的采访档案' });
   function actor(who, name) { const element = node('div', '', 'dialogue-actor'); element.dataset.actor = who; element.append(art(who === 'teacher' ? 'robert' : 'sophie'), node('span', name)); return element; }
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
   stage.append(actor('teacher', 'Robert'), log, actor('student', 'Sophie'));
@@ -137,19 +150,20 @@
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
-  finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
+  finish.append(node('p', '故事看完了！'), node('p', '两位新朋友的档案收集好了。', 'story-result'), finishActions); story.append(stage, storyRecords.element, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
-  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
+  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountInterviewTask('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 句`;
+    storyRecords.showLine(dialogue.i);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
     stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('robert'), node('p', 'Robert 做什么工作？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(icon('speech'), node('p', '两位新朋友见面了。'), node('small', 'Robert 做什么工作？')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
@@ -227,19 +241,23 @@
   content.PHRASES.forEach(item => phraseGrid.append(expressionCard(item)));
   const reference = node('details', '', 'offline-task'); reference.append(node('summary', 'am、is、are 怎么选'));
   reference.append(node('p', '本课 I 用 am；my name、人名、he、she 用 is；问 you 用 are。My name 的主语是 name，不是 my；are 也可以用于只问一个人。'));
-  const referenceGrid = node('div', '', 'phrase-grid');content.REFERENCE.forEach(item => referenceGrid.append(expressionCard(item)));reference.append(referenceGrid);
+  const referenceGrid = node('div', '', 'phrase-grid');referenceGrid.append(expressionCard(content.REFERENCE[0]));reference.append(referenceGrid);
+  const referenceAnswers = node('details', '', 'offline-task'); referenceAnswers.append(node('summary', '采访记录参考'));
+  const answerGrid = node('div', '', 'phrase-grid'); content.REFERENCE.slice(1).forEach(item => answerGrid.append(expressionCard(item))); referenceAnswers.append(answerGrid);
+  answerReferences.set('reply', referenceAnswers);
   const shortForms=node('details','','offline-task');shortForms.append(node('summary','一句话变短'));
   for(const [left,right] of [['I am',"I'm"],['My name is',"My name's"],['What is',"What's"]]){
     const row=node('p','','contraction-row');row.append(node('span',left),node('span','→'),node('span',right));shortForms.append(row);
   }
-  const phraseActions=node('div','','activity-actions');nextStation('phrases',phraseActions);surfaces.get('phrases').append(phraseGrid,reference,shortForms,phraseActions);
+  const phraseActions=node('div','','activity-actions');nextStation('phrases',phraseActions);surfaces.get('phrases').append(phraseGrid,reference,shortForms,referenceAnswers,phraseActions);
   const jobGrid=node('div','','phrase-grid');content.JOBS.forEach(item=>jobGrid.append(expressionCard(item)));
   const interviews=node('details','','offline-task');interviews.append(node('summary','替图中人物问一问'));
   interviews.append(node('p','这里谈论图中那位人物，用已标明的 he 或 she；职业本身不能决定用哪个。直接问本人用 your，向别人问他／她用 his／her。'));
   const interviewGrid=node('div','','phrase-grid reply-models');content.INTERVIEWS.forEach(item=>interviewGrid.append(expressionCard(item)));interviews.append(interviewGrid);
+  answerReferences.set('interview', interviews);
   const wording=node('details','','offline-task');wording.append(node('summary','这些职业词怎么用'),node('p','nurse、engineer、mechanic、taxi driver、hairdresser 不限定性别。policeman 指男警察，policewoman 指女警察；air hostess 是较旧的女空乘称呼，现在常用 flight attendant。housewife 是家庭主妇，milkman 指男送奶员。家庭照护也可以由其他家庭成员共同承担。'));
   const modelActions=node('div','','activity-actions');nextStation('models',modelActions);surfaces.get('models').append(jobGrid,interviews,wording,modelActions);
-  for(const id of ['reply','be','interview','trans'])mountPractice(id);
+  for(const id of ['reply','interview'])mountInterviewTask(id);
 
   const examResults = node('div', '', 'unit-results');
   mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
@@ -254,7 +272,8 @@
     element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitClassroomCertificateIssuedAt'), canClaim: fullyComplete,
     onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitClassroomCertificateIssuedAt', issuedAt); },
     design: {
-      copy: { title: '好奇的小记者', course: '新朋友采访站 · Lesson 7–8', completion: '完成 Lesson 7–8 课堂配套练习', thanks: '认真看，问清楚，认识更多朋友！' },
+      copy: { title: '好奇的小记者', course: '新朋友采访站 · Lesson 7–8', completion: '完成 Lesson 7–8 课堂配套练习', thanks: '问清楚，记下来，两位新朋友认识啦！' },
+      keepsakes: [{ title: 'Robert', text: 'Italian · engineer' }, { title: 'Sophie', text: 'French · keyboard operator' }],
       characters: ['robert', 'sophie'], characterLabels: ['Robert', 'Sophie'], icon: art, defaultName: '好奇的小记者', dialogTitle: '新朋友采访站纪念', fileName: 'Lesson7-8-新朋友采访站.png',
       badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
     }
@@ -274,5 +293,8 @@
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
-  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); log.scrollTop = log.scrollHeight; }));
+  const revealSavedLine = () => { if (dialogue.i >= 0) log.scrollTop = log.scrollHeight; };
+  const readyEvent = ['canran', 'course-ready'].join(':');
+  document.addEventListener(readyEvent, revealSavedLine, { once: true });
+  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

@@ -1,0 +1,37 @@
+
+Running 1 test using 1 worker
+
+(node:55481) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/e2e/unit11-12-exam.spec.js:38:41 › 1280 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定
+  1) tests/e2e/unit11-12-exam.spec.js:38:41 › 1280 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定 ─────────────────────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 531.34375
+    Received:   531.34375
+
+      43 |  for (const choice of choices) boxes.push(await choice.boundingBox());
+      44 |  expect(boxes).toHaveLength(4);
+    > 45 |  expect(boxes[1].y).toBeCloseTo(boxes[0].y,0); expect(boxes[2].y).toBeGreaterThan(boxes[0].y);
+         |                                                                   ^
+      46 |  expect(boxes[3].y).toBeCloseTo(boxes[2].y,0); expect(boxes[2].x).toBeCloseTo(boxes[0].x,0);
+      47 |  for(const box of boxes){expect(box.width).toBeCloseTo(boxes[0].width,0);expect(box.height).toBeGreaterThanOrEqual(44);}
+      48 |  await owner.screenshot({path:`output/playwright/unit11-12-exam/owner-${width}.png`});
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit11-12-exam.spec.js:45:67
+
+    Error Context: test-results/unit11-12-exam-1280-物主四选项两行两列，挑战长对白、词块和结束操作完整稳定/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit11-12-exam-1280-物主四选项两行两列，挑战长对白、词块和结束操作完整稳定/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit11-12-exam-1280-物主四选项两行两列，挑战长对白、词块和结束操作完整稳定/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/e2e/unit11-12-exam.spec.js:38:41 › 1280 物主四选项两行两列，挑战长对白、词块和结束操作完整稳定 ──────────────────────

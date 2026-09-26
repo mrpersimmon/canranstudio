@@ -1,11 +1,12 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const {completeUnit1112,completeActivity}=require('../support/unit11-12-flow');
+const {finishExamFrom}=require('../support/unit11-12-exam');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('物主选项限定为教材已教的 my、your、his、her，不引入新结构',async({page})=>{
  await page.goto('/unit11-12/#learn/owner');expect((await page.locator('.stage-owner .practice-options button').allTextContents()).sort()).toEqual(['her','his','my','your']);
 });
-test('从音标图鉴开始，浏览16句并完成23题才取得15星课堂配套证书',async({page})=>{
+test('从音标图鉴开始，浏览16句并完成30题才取得15星课堂配套证书',async({page})=>{
  test.setTimeout(210000);await page.goto('/unit11-12/');await expect(page).toHaveTitle('失物招领小侦探 · Lesson 11–12');
  await page.getByRole('button',{name:'开始冒险',exact:true}).click();await expect(page).toHaveURL(/#learn\/words$/);
  const room=page.locator('.stage-words'),word=room.getByRole('button',{name:'whose',exact:true});await expect(word).toContainText('/huːz/');await word.click();await expect(word.locator('.word-meaning')).toBeVisible();await expect(word).not.toContainText('录音暂时');
@@ -32,7 +33,7 @@ test('纸笔保留教材 A 四题与 B 十二题，真实打印一张 A4 且每�
 
 test('挑战错答、提示、暂停刷新与独立作答分别记录，不提前发证',async({page})=>{
  test.setTimeout(45000);await page.goto('/unit11-12/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});await room.getByRole('button',{name:'my sister · pen',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'my brother · pen',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
- await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:'请 Tim 确认',exact:true}).click();await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();await room.getByRole('button',{name:'继续挑战',exact:true}).click();await expect(room.getByRole('button',{name:'请 Tim 确认',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:'her',exact:true}).click();await check.click();await room.getByRole('button',{name:'查看本次记录',exact:true}).click();await expect(room).toContainText('首次独立答对 1 / 3');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');await page.goto('/unit11-12/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
+ await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:'请 Tim 确认',exact:true}).click();await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();await room.getByRole('button',{name:'继续挑战',exact:true}).click();await expect(room.getByRole('button',{name:'请 Tim 确认',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:'her',exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,3);await expect(room).toContainText('首次独立答对 8 / 10');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');await page.goto('/unit11-12/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
 });
 
 test('内容升版只让改过的活动失效，另一个活动的草稿保留',async({page})=>{
@@ -40,7 +41,7 @@ test('内容升版只让改过的活动失效，另一个活动的草稿保留',
 });
 
 test('重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录',async({page})=>{
- await page.goto('/unit11-12/#learn/owner');const room=page.locator('.stage-owner');await room.getByRole('button',{name:'her',exact:true}).click();for(const path of ['unit1-2/#learn/ask','unit3-4/#learn/reply','unit5-6/#learn/refer','unit7-8/#learn/be','unit9-10/#learn/describe','unit11-12/#learn/owner','unit49-50/#learn/give']){await page.goto('/lesson/'+path);await expect(page.locator('#courseLoader')).toHaveCount(0);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}await page.goto('/lesson/');await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();await expect(page.getByRole('link',{name:'继续学习：失物招领小侦探',exact:true})).toBeVisible();
+ await page.goto('/unit11-12/#learn/owner');const room=page.locator('.stage-owner');await room.getByRole('button',{name:'her',exact:true}).click();for(const path of ['unit1-2/#learn/ask','unit3-4/#learn/reply','unit5-6/#learn/refer','unit7-8/#learn/interview','unit9-10/#learn/describe','unit11-12/#learn/owner','unit49-50/#learn/give']){await page.goto('/lesson/'+path);await expect(page.locator('#courseLoader')).toHaveCount(0);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}await page.goto('/lesson/');await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();await expect(page.getByRole('link',{name:'继续学习：失物招领小侦探',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'确认重开',exact:true}).click();for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会','新朋友采访站','街角问候站','失物招领小侦探'])await expect(page.getByRole('link',{name:'开始学习：'+name,exact:true})).toBeVisible();await page.goto('/unit11-12/#learn/owner');await expect(room.getByRole('button',{name:'her',exact:true})).toHaveAttribute('aria-pressed','true');
 });
 

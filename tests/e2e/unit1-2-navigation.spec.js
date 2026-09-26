@@ -2,11 +2,11 @@
 const {test,expect}=require('@playwright/test');
 
 for(const base of ['/','/lesson/']) {
-  test(`${base} 导航进入两个独立单元，分别继续，所有资源保留在正确路径`,async({page})=>{
+  test(`${base} 导航进入两个独立单元，分别继续，所有资源保留在正确路径`,async({page,baseURL})=>{
     const failed=[],outside=[],errors=[];
     page.on('pageerror',error=>errors.push(error.message));
     page.on('response',response=>{if(response.status()>=400)failed.push(response.url());});
-    page.on('request',request=>{const url=new URL(request.url());if(base==='/lesson/'&&url.protocol==='http:'&&url.origin==='http://127.0.0.1:4173'&&!url.pathname.startsWith(base))outside.push(url.pathname);});
+    page.on('request',request=>{const url=new URL(request.url());if(base==='/lesson/'&&/^https?:$/.test(url.protocol)&&url.origin===new URL(baseURL).origin&&!url.pathname.startsWith(base))outside.push(url.pathname);});
     await page.goto(base);
     const beginner=page.getByRole('region',{name:'礼貌小帮手',exact:true});
     await beginner.getByRole('link',{name:'开始学习：礼貌小帮手',exact:true}).click();

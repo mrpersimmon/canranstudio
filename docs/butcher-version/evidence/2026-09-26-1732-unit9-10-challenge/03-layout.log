@@ -1,0 +1,12 @@
+
+Running 4 tests using 1 worker
+
+(node:47126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] tests/e2e/unit9-10-exam.spec.js:54:44 › 320 十题的题面、长选项与词块完整，作答操作和结束按钮稳定
+[2/4] tests/e2e/unit9-10-exam.spec.js:54:44 › 390 十题的题面、长选项与词块完整，作答操作和结束按钮稳定
+[3/4] tests/e2e/unit9-10-exam.spec.js:54:44 › 768 十题的题面、长选项与词块完整，作答操作和结束按钮稳定
+[4/4] tests/e2e/unit9-10-exam.spec.js:54:44 › 1280 十题的题面、长选项与词块完整，作答操作和结束按钮稳定
+  4 passed (11.1s)

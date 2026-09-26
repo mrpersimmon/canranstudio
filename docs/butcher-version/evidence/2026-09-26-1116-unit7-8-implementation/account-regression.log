@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:20078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/course-integration.spec.js:9:1 › 7–8 旧服务器真实完成记录换新设备后保留12星，新her题重答才恢复证书 (10.1s)
+  ✓  2 tests/login/course-integration.spec.js:49:4 › 3–4 登录后无配音通关，证书与真实成果跨设备保留 (7.4s)
+  ✓  3 tests/login/course-integration.spec.js:49:4 › 5–6 登录后无配音通关，证书与真实成果跨设备保留 (6.6s)
+  ✓  4 tests/login/course-integration.spec.js:49:4 › 7–8 登录后无配音通关，证书与真实成果跨设备保留 (6.5s)
+  ✓  5 tests/login/course-integration.spec.js:86:1 › 登录后的词卡首访与复访换组不闪屏，授权课程内断网仍能翻卡 (2.1s)
+
+  5 passed (34.1s)

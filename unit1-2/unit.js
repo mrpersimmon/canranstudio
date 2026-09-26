@@ -120,7 +120,9 @@
       settings.sceneView = core.unit12Scene.create({ element });
       if (id === 'manners') settings.completionDetails = settings.sceneView.completion();
     }
-    practice.mount({ element, questions: questions[id], playAudio: speak, sessionId: 'v' + unit.version, ...settings,
+    const predecessors = unit.activityPredecessors[id];
+    practice.mount({ element, questions: questions[id], playAudio: speak, sessionId: predecessors ? 'v2' : 'v' + unit.version,
+      previousGroups: predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
       onComplete: states => {
         complete(id);
         if (settings.sceneView) element.querySelector('.practice-finish > p').textContent = id === 'manners' ? '手提包送回去了！' : '找到啦！';
@@ -262,7 +264,7 @@
   mountPractice('manners'); mountPractice('ask'); mountPractice('trans');
 
   const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
+  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
     const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
     const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
     const corrected = states.filter(state => !state.firstCorrect).length;

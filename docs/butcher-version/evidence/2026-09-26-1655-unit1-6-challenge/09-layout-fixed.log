@@ -1,0 +1,23 @@
+
+Running 15 tests using 1 worker
+
+(node:42184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[2/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[3/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[4/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 1-2 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[5/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[6/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[7/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[8/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 3-4 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[9/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 320 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[10/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 390 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[11/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 768 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[12/15] tests/e2e/units1-6-exam-layout.spec.js:6:3 › 5-6 1280 综合挑战的长选项和词块完整，选择与线索不推移操作区
+[13/15] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 1-2 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[14/15] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 3-4 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+[15/15] tests/e2e/units1-6-exam-layout.spec.js:43:43 › 5-6 缓存课程断网刷新仍保留未提交答案，下一道新增题为空
+  15 passed (36.4s)

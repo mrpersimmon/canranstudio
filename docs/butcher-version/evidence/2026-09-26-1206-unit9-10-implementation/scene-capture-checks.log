@@ -1,0 +1,15 @@
+
+Running 7 tests using 1 worker
+
+(node:25667) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/7] tests/e2e/unit9-10-scene.spec.js:10:1 › 聊到的朋友按原文出现，不把 Tony 和 Emma 放进对话角色
+[2/7] tests/e2e/unit9-10-scene.spec.js:25:1 › 手机对白占整行，人物在下方；桌面人物落在同一地面
+[3/7] tests/e2e/unit9-10-scene.spec.js:52:1 › 问候接力包含选答和拼句，只有正确检查后才出现回应
+[4/7] tests/e2e/unit9-10-scene.spec.js:63:1 › 观察窗六个主题每次只展示一对，冷热另一个画面不改写故事
+[5/7] tests/e2e/unit9-10-scene.spec.js:75:35 › 320 问候正确回应出现后操作区不被推移，拼句与结束状态完整
+[6/7] tests/e2e/unit9-10-scene.spec.js:75:35 › 390 问候正确回应出现后操作区不被推移，拼句与结束状态完整
+[7/7] tests/e2e/unit9-10-scene.spec.js:75:35 › 1280 问候正确回应出现后操作区不被推移，拼句与结束状态完整
+  7 passed (9.1s)

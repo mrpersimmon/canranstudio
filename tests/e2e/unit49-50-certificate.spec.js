@@ -5,9 +5,9 @@ const { completeUnit } = require('../support/unit49-50-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 let earnedSession;
-test.beforeAll(async ({ browser }) => {
+test.beforeAll(async ({ browser }, testInfo) => {
   test.setTimeout(90000);
-  const context = await browser.newContext({ baseURL: 'http://127.0.0.1:4173', reducedMotion: 'reduce' });
+  const context = await browser.newContext({ baseURL: testInfo.project.use.baseURL, reducedMotion: 'reduce' });
   const page = await context.newPage();
   await completeUnit(page);
   earnedSession = await context.storageState();
@@ -114,8 +114,8 @@ test('图像加载失败时提示重试；恢复后可保存，空名字有友�
   await download;
 });
 
-test('没有完成任务时只有待集齐徽章，不能领证，继续按钮到真实下一站', async ({ browser }) => {
-  const context = await browser.newContext({ baseURL: 'http://127.0.0.1:4173' });
+test('没有完成任务时只有待集齐徽章，不能领证，继续按钮到真实下一站', async ({ browser }, testInfo) => {
+  const context = await browser.newContext({ baseURL: testInfo.project.use.baseURL });
   const page = await context.newPage();
   await page.goto('/unit49-50/#learn/certificate');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();

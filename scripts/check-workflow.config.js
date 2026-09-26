@@ -17,7 +17,10 @@ function tasks(root, files) {
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
     'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
+    'browser-unit12': browser(['tests/e2e/unit1-2']),
+    'browser-unit34': browser(['tests/e2e/unit3-4']),
     'browser-unit56': browser(['tests/e2e/unit5-6']),
+    'browser-units1-6-exam': browser(['tests/e2e/unit1-2-exam.spec.js', 'tests/e2e/unit3-4-exam.spec.js', 'tests/e2e/unit5-6-exam.spec.js', 'tests/e2e/units1-6-exam-layout.spec.js', 'tests/e2e/units1-6-exam-upgrade.spec.js', 'tests/e2e/unit-dedup.spec.js']),
     'browser-unit78': browser(['tests/e2e/unit7-8']),
     'browser-units9-12': browser(['tests/e2e/unit9-10', 'tests/e2e/unit11-12', 'tests/e2e/units9-12-classroom.spec.js']),
     'browser-unit1314': browser(['tests/e2e/unit13-14']),
@@ -49,10 +52,13 @@ function select(files) {
   if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-course-cache');
   if (runtime.some(file => /audio|feedback|\.mp3$/.test(file))) selected.push('browser-audio');
   if (code.some(file => /^(unit(?:1-2|5-6|7-8|11-12)\/|soundmark\/|core\/audio-player\.js|scripts\/media\/|tests\/fixtures\/pronunciation)/.test(file))) selected.push('browser-pronunciation');
-  if (code.some(file => /^(unit5-6\/|assets\/unit5-6\/|tests\/fixtures\/unit5-6-voiced-before\/|tests\/support\/unit5-6-flow\.js)/.test(file))) selected.push('browser-unit56');
-  if (code.some(file => /^(unit7-8\/|tests\/fixtures\/unit7-8-voiced-before\/|tests\/support\/unit7-8-flow\.js)/.test(file))) selected.push('browser-unit78');
-  if (code.some(file => /^(unit(?:9-10|11-12)\/|tests\/fixtures\/unit(?:9-10|11-12)-voiced-before\/|tests\/support\/unit(?:9-10|11-12)-flow\.js)/.test(file))) selected.push('browser-units9-12');
-  if (code.some(file => /^(unit13-14\/|assets\/unit13-14\/|tests\/support\/unit13-14-flow\.js)/.test(file))) selected.push('browser-unit1314');
+  if (code.some(file => /^(unit1-2\/|assets\/unit1-2\/|tests\/fixtures\/unit1-2-.*-before\/|tests\/support\/unit1-2-flow\.js)/.test(file))) selected.push('browser-unit12');
+  if (code.some(file => /^(unit3-4\/|assets\/unit3-4\/|tests\/fixtures\/unit3-4-.*-before\/|tests\/support\/unit3-4-flow\.js)/.test(file))) selected.push('browser-unit34');
+  if (code.some(file => /^(unit5-6\/|assets\/unit5-6\/|tests\/fixtures\/unit5-6-.*-before\/|tests\/support\/unit5-6-flow\.js)/.test(file))) selected.push('browser-unit56');
+  if (code.some(file => /^(unit(?:1-2|3-4|5-6)\/|tests\/fixtures\/unit(?:1-2|3-4|5-6)-short-exam-before\/|tests\/support\/unit(?:s1-6-exam|(?:1-2|3-4|5-6)-flow)\.js)/.test(file))) selected.push('browser-units1-6-exam');
+  if (code.some(file => /^(unit7-8\/|assets\/unit7-8\/|tests\/fixtures\/unit7-8-(?:voiced|classroom|exam3)-before\/|tests\/support\/unit7-8-(?:flow|exam)\.js)/.test(file))) selected.push('browser-unit78');
+  if (code.some(file => /^(unit(?:9-10|11-12)\/|assets\/unit(?:9-10|11-12)\/|tests\/fixtures\/unit(?:9-10|11-12)-(?:voiced|classroom|short-exam)-before\/|tests\/support\/unit(?:9-10|11-12)-(?:flow|exam)\.js)/.test(file))) selected.push('browser-units9-12');
+  if (code.some(file => /^(unit13-14\/|assets\/unit13-14\/|tests\/support\/unit13-14-(?:flow|exam)\.js|tests\/fixtures\/unit13-14-)/.test(file))) selected.push('browser-unit1314');
   if (code.some(file => /^(unit15-16\/|assets\/unit15-16\/|tests\/support\/unit15-16-flow\.js)/.test(file))) selected.push('browser-unit1516');
   if (code.some(file => /^(unit17-18\/|assets\/unit17-18\/|tests\/support\/unit17-18-flow\.js)/.test(file))) selected.push('browser-unit1718');
   if (code.some(file => /^(unit19-20\/|assets\/unit19-20\/|tests\/support\/unit19-20-flow\.js)/.test(file))) selected.push('browser-unit1920');

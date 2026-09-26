@@ -1,5 +1,6 @@
 'use strict';
 const {expect} = require('@playwright/test');
+const {EXAM}=require('./unit13-14-exam');
 // Independently transcribed from PDF 59–62 and the shared classroom contract.
 const DIALOGUE = ["What colour's your new dress?","It's green.",'Come upstairs and see it.','Thank you.','Look!','Here it is!',"That's a nice dress.","It's very smart.","My hat's new, too.",'What colour is it?', "It's the same colour.", "It's green, too.",'That is a lovely hat!'];
 const SPEAKERS = ['Louise','Anna','Anna','Louise','Anna','Anna','Louise','Louise','Anna','Louise','Anna','Anna','Louise'];
@@ -8,7 +9,7 @@ const ANSWERS = {
   roles:['green','都是新的'],
   colours:["What colour's your hat?",'一只棕白相间的狗'],
   trans:[['This','is',"Helen's",'dog.'],['What',"colour's","Steven's",'hat?'],['Her',"coat's",'grey.']],
-  exam:['case · yellow / hat · yellow',"Her carpet's red."]
+  exam:EXAM.map(item=>item.answer)
 };
 async function completeStory(page,base='') {
   await page.goto(base+'/unit13-14/#learn/text'); const room=page.locator('.stage-text');

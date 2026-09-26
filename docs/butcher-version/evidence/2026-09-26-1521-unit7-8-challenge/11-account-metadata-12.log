@@ -1,0 +1,19 @@
+
+Running 12 tests using 1 worker
+
+(node:37128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (7.2s)
+  ✓   2 tests/login/access.spec.js:143:1 › 49–50 完整课程真实音频、作答和证书，成果换设备保留 (1.6m)
+  ✓   3 tests/login/access.spec.js:158:1 › 学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效 (4.6s)
+  ✓   4 tests/login/course-integration.spec.js:11:1 › 7–8 旧服务器真实完成记录换新设备后保留9星，新her题和七道挑战重答才恢复证书 (11.1s)
+  ✓   5 tests/login/course-integration.spec.js:54:4 › 3–4 登录后无配音通关，证书与真实成果跨设备保留 (6.1s)
+  ✓   6 tests/login/course-integration.spec.js:54:4 › 5–6 登录后无配音通关，证书与真实成果跨设备保留 (7.0s)
+  ✓   7 tests/login/course-integration.spec.js:54:4 › 7–8 登录后无配音通关，证书与真实成果跨设备保留 (7.4s)
+  ✓   8 tests/login/course-integration.spec.js:54:4 › 9–10 登录后无配音通关，证书与真实成果跨设备保留 (7.1s)
+  ✓   9 tests/login/course-integration.spec.js:54:4 › 11–12 登录后无配音通关，证书与真实成果跨设备保留 (6.8s)
+  ✓  10 tests/login/unit11-12-upgrade.spec.js:7:1 › 11–12旧服务器完整作答升级后，新设备保留15星、姓名与证书 (7.8s)
+  ✓  11 tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 (9.7s)
+  ✓  12 tests/login/unit9-10-upgrade.spec.js:7:1 › 9–10旧服务器完整作答升级后，新设备保留15星、姓名与证书 (7.8s)
+
+  12 passed (3.0m)

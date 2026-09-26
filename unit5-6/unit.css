@@ -107,3 +107,6 @@
 }
 @media(max-width:360px){.unit56-workspace .classroom-person{font-size:11px}.unit56-workspace .classroom-person>span{padding:2px 3px}.unit56-workspace .car-showroom{grid-template-columns:1fr}}
 .unit56-workspace .stage-text .stage-tools>.btn:last-child{min-height:52px;padding:8px 18px;grid-row:auto}
+.unit56-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:144px}
+@media(max-width:580px){.unit56-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:202px}}
+@media(max-width:360px){.unit56-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:260px}}

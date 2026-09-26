@@ -165,6 +165,21 @@
     trans: previousQuestions.trans,
     exam: previousQuestions.exam.slice(1)
   };
+  const priorExam = questions.exam;
+  const finalQuestion = (...args) => {
+    const item = { ...question(...args), id: 'u56-final-v2-' + args[0], source: source + '；综合复习，另设语境不增加原文事实' };
+    if (item.options) item.distractorReasons = Object.fromEntries(item.options.filter(value => value !== item.answer).map(value => [value, item.explanation]));
+    return item;
+  };
+  questions.exam = [...priorExam,
+    finalQuestion('meet', '选择初次见面时表达高兴的话', '认识新朋友时，哪一句直接表达“很高兴见到你”？', ['Nice to meet you.', 'Good morning.', 'This is Hans.'], 'Nice to meet you.', 'Nice to meet you. 表达认识对方的高兴；Good morning. 是早晨问好，This is Hans. 是介绍 Hans。它们并非都不礼貌，而是表达的意思不同。', '比较三句话各自在表达什么。'),
+    finalQuestion('too', '根据前文判断 too 所连接的相同信息', '新情境：Hans is German. Ben is German, too.\ntoo 在这里说明什么？', ['Ben 和 Hans 都是德国人', 'Ben 和 Hans 都是新同学', 'Ben 和 Hans 都是法国人'], 'Ben 和 Hans 都是德国人', 'too 表示 Ben 也具有前面说到的情况：是德国人。两句没有说他们都是新同学。Ben 是本题另设的人物。', '向前找两句重复介绍的那项信息。'),
+    finalQuestion('refer', '分别指代两位人物与物品', '接着介绍 Hans、Sophie 和她的汽车：\nHans：___ is German.\nSophie：___ is French.\nher car：___ is a French car.', ['He / She / It', 'He / She / She', 'She / He / It'], 'He / She / It', '课文用 He 说 Hans，用 She 说 Sophie；her car 是她的汽车，继续介绍汽车用 It，不沿用主人的 She。', '每个空先找正在介绍的对象，是哪位人物，还是汽车？'),
+    finalQuestion('articles', '对比国籍形容词与带名词的 a、an', '依次补好三个空。\nShe is ___ French.\nShe is ___ French student.\nIt is ___ American car.', ['不填 / a / an', 'a / a / an', '不填 / an / a', '不填 / a / a'], '不填 / a / an', 'French 单独说明国籍时不加冠词；a French student 中 French 以辅音 /f/ 开头；an American car 中 American 以元音 /ə/ 开头。', '先看后面有没有名词；需要冠词时，再看紧接着的发音。'),
+    finalQuestion('make-or', '区分品牌提问与国别选择问句', '展牌：Volvo · Swedish\nWhat make is it?\nIs it a Swedish car or a French car?\n依次怎样回答？', ["It's a Volvo. / It's a Swedish car.", "It's Swedish. / Yes, it is.", "It's a Volvo. / It's a French car."], "It's a Volvo. / It's a Swedish car.", 'make 问品牌，先回答 Volvo；第二问用 or 给出两种国别，要说明选 Swedish，不能只回答 Yes。展牌采用教材的品牌国别，不说明车主的国籍。', '两个问题问的不是同一项；第二问需要说清两种中的哪一种。'),
+    finalQuestion('correction', '组织人物的否定与纠正回答', '资料：Sophie 是法国学生，不是瑞典学生。\nIs she a French student or a Swedish student?\n用词块先否定不符合的情况，再说明正确情况。', undefined, "She isn't a Swedish student. She's a French student.", '先否定资料明确排除的 Swedish，再肯定 French。Sophie 用 She；两句话的对象不变。', '先核对资料，再分清哪一部分需要否定。', { type: 'order', tokens: ['She', "isn't", 'a Swedish student.', "She's", 'a French student.'] }),
+    finalQuestion('shortforms', '理解人物介绍与否定中的缩写', "He's German. She's French. It isn't an English car.\n三个缩写依次展开成什么？", ['He is / She is / is not', 'He is / She is / is', 'He is / She / is not'], 'He is / She is / is not', 'He’s 是 He is；She’s 是 She is；isn’t 是 is not。展开后不能漏掉 is，也不能丢掉 not 改成肯定。', '展开以后，句子应完整，肯定与否定的意思也不能改变。')
+  ];
   const stages=[
     {id:'l1',title:'见面前准备',activities:[['words','新朋友小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
     {id:'l2',title:'新朋友来了',activities:[['text','教室小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
@@ -173,7 +188,8 @@
     {id:'l5',title:'见面小达人',activities:[['exam','见面小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
   ];
   const definition={id:'unit5-6',version:1,contentRevision:'classroom-v2',mode:'classroom',title:'新朋友见面会',path:'/unit5-6/',start:'learn/words',progress:{learningKey:'canran:unit5-6:learning:v1'},
-    learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,CARS,CHOICE_MODELS,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions};
+    learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,CARS,CHOICE_MODELS,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,
+    voicedQuestions:previousQuestions,previousQuestions:{...previousQuestions,exam:priorExam},activityPredecessors:{exam:['exam']}};
   root.CanranCore.unit56=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);

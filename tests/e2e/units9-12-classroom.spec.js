@@ -73,7 +73,7 @@ for (const unit of units) test(`${unit.title} 图鉴只展开释义、图册供�
   await page.goto('/' + unit.id + '/#learn/models'); await expect(page.locator('.stage-models article.phrase-card')).not.toHaveCount(0);
   await page.goto('/' + unit.id + '/#learn/exam'); const room = page.locator('.stage-exam');
   await expect(room.getByRole('button', { name: '听一遍', exact: true })).toHaveCount(0);
-  await expect(room.locator('.practice-content h3')).toContainText(unit.id === 'unit9-10' ? 'Tony is very well, thanks.' : "This is my brother's pen. It's his pen.");
+  await expect(room.locator(unit.id === 'unit11-12' ? '.claim-task-heading' : '.practice-content h3')).toContainText(unit.id === 'unit9-10' ? 'Tony is very well, thanks.' : "This is my brother's pen. It's his pen.");
   const check = room.getByRole('button', { name: '检查答案', exact: true });
   await room.getByRole('button', { name: unit.id === 'unit9-10' ? 'Emma · fine' : 'my sister · pen', exact: true }).click(); await check.click();
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
@@ -156,9 +156,11 @@ for (const unit of units) test(`${unit.title} 旧录音中断可续读，保留�
   await expect(story.locator('.dialogue-status')).toContainText('录音还没听完');
   upgrade(); const voices = await blockVoices(page); await page.reload();
   await expect(story.locator('.bubble-row')).toHaveCount(2); await expect(story.getByRole('button', { name: '下一句', exact: true })).toBeEnabled();
-  await expect(page.locator('#starCount')).toHaveText('3');
-  await page.goto('/' + unit.id + '/#learn/' + unchanged); await expect(page.locator('.stage-' + unchanged).getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
-  await page.goto('/' + unit.id + '/#learn/trans'); await expect(page.locator('.stage-trans').getByRole('group', { name: '已选词块', exact: true }).getByRole('button', { name: '撤回 ' + firstToken, exact: true })).toBeVisible();
+  await expect(page.locator('#starCount')).toHaveText(unit.id==='unit9-10'?'0':'3');
+  await page.goto('/' + unit.id + '/#learn/' + unchanged);
+  if(unit.id==='unit9-10')await expect(page.locator('.stage-reply')).toContainText('第 2 / 3 题');
+  else await expect(page.locator('.stage-' + unchanged).getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
+  await page.goto('/' + unit.id + '/#learn/trans'); await expect(page.locator(unit.id==='unit9-10'?'.stage-reply':'.stage-trans').getByRole('group', { name: '已选词块', exact: true }).getByRole('button', { name: '撤回 ' + firstToken, exact: true })).toBeVisible();
   await page.goto('/' + unit.id + '/#learn/words'); await expect(page.locator('#wordPageProgress')).toHaveText(unit.id === 'unit9-10' ? '2 / 4' : '2 / 3');
   await page.goto('/' + unit.id + '/#learn/listen'); await expect(listen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0'); await expect(listen.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   expect(voices).toEqual([]);

@@ -64,8 +64,11 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   function setCookie(response, role, token, maxAge) { response.setHeader('Set-Cookie', `canran_${role}=${token}; Path=${BASE}; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${origin.startsWith('https:') ? '; Secure' : ''}`); }
   async function body(request) {
     if (request.headers.origin !== origin || !request.headers['content-type']?.startsWith('application/json')) throw fail(403, '请求来源不正确');
-    let raw = ''; for await (const chunk of request) { raw += chunk; if (Buffer.byteLength(raw) > 1500000) throw fail(413, '提交内容过大'); }
-    try { return JSON.parse(raw); } catch { throw fail(400, '提交内容不完整'); }
+    // Network chunks can split a UTF-8 character. Decode once after collecting
+    // bytes so Chinese learning records retain their exact completion proof.
+    const chunks = []; let bytes = 0;
+    for await (const chunk of request) { bytes += chunk.length; if (bytes > 1500000) throw fail(413, '提交内容过大'); chunks.push(chunk); }
+    try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw fail(400, '提交内容不完整'); }
   }
   function identity(request, preview) {
     if (preview) {

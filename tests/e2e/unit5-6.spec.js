@@ -29,7 +29,7 @@ test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并�
   expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
 });
 
-test('真实完成 20 句与 23 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
+test('真实完成 20 句与 30 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
   test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/unit5-6/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await completeUnit56(page);

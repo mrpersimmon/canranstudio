@@ -1,0 +1,17 @@
+
+Running 6 tests using 1 worker
+
+(node:37724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (7.5s)
+  ✓  2 tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 (11.0s)
+(node:37969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (8.7s)
+  ✓  4 tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 (10.2s)
+(node:38255) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 tests/login/access.spec.js:103:1 › 完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩 (7.4s)
+  ✓  6 tests/login/unit7-8-exam-upgrade.spec.js:8:1 › 7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星 (10.0s)
+
+  6 passed (57.2s)
