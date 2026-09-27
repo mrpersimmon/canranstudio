@@ -10,7 +10,7 @@ test('1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句�
     await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
     if (i === 0) {
-      await room.getByRole('button', { name: question.wrong, exact: true }).click(); await check.click();
+      await choose(room,{answer:{fills:['Yes, it is.','Yes?']}}); await check.click();
       await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
       await expect(room.locator('.practice-options .correct')).toHaveCount(0);
       await room.getByRole('button', { name: '再试一次', exact: true }).click();

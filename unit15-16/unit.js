@@ -2,6 +2,7 @@
   'use strict';
   const core = root.CanranCore, unit = core.unit1516;
   const { stages, questions, learning: content } = unit;
+  const scene = core.unit1516Scene;
   const practice = core.lesson49Practice;
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
@@ -13,7 +14,7 @@
   }
   function art(name, label = '') {
     const word = unit.objects.find(word => word.en === name);
-    const path = content.PEOPLE[name]?.image || word?.image;
+    const path = content.PEOPLE[name]?.image || word?.image || ({'officer-passports':'/assets/unit15-16/officer-passports.svg','travelling-pair':'/assets/unit15-16/travelling-pair.svg',passports:'/assets/unit15-16/passports.svg','cases-brown':'/assets/unit15-16/cases-brown.svg'})[name];
     if (!path) return icon(name, label);
     const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
   }
@@ -113,15 +114,18 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit1516-' + id + '-practice'; surfaces.get(id).append(element);
-    practice.mount({ element, questions: questions[id], sessionId: 'v' + unit.version, ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+    const predecessors=unit.activityPredecessors?.[id];
+    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+      inputViews:core.lesson49TaskInputs,
+      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old=>({key:'unit1516-'+old+'-practice/v1',questions:unit.previousQuestions[old]})), ...settings,
+      onComplete: states => { complete(id); const summary=element.querySelector('.practice-finish > p'); if(summary)summary.textContent=id==='exam'?'挑战完成！':'这一站完成了！'; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }
 
-  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
-  function actor(who, name) { const element = node('div', '', 'dialogue-actor'); element.dataset.actor = who; element.append(art(who === 'teacher' ? 'officer' : 'girls'), node('span', name)); return element; }
+  function mountCustomsTask(id) { const view=scene.taskView(); surfaces.get(id).append(view.element); mountPractice(id,{sceneView:view,completionDetails:scene.result(id)}); }
+  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage'), cast=scene.cast();
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  stage.append(actor('teacher', '海关官员'), log, actor('student', '姑娘们'));
+  stage.append(log,cast.element);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -132,21 +136,22 @@
   finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
-  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
+  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountCustomsTask('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 句`;
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
-    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
+    cast.showLine(dialogue.i);
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('girls'), node('p', '最后，海关检查顺利吗？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('passport'), node('p', '最后，海关检查顺利吗？')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
-    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden));
+      if(!translation.hidden && row.offsetTop+row.offsetHeight>log.scrollTop+log.clientHeight) log.scrollTop=row.offsetTop+row.offsetHeight-log.clientHeight+12; }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
     bubble.append(node('div', content.PEOPLE[line.person].name, 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
@@ -221,11 +226,18 @@
   surfaces.get('phrases').append(phraseGrid,pronouns,phraseActions);
   const nationalities=node('details','','offline-task');nationalities.append(node('summary','看看四张国籍卡'));
   const nationalityGrid=node('div','','phrase-grid nationality-models');content.NATIONALITIES.forEach(item=>nationalityGrid.append(expressionCard(item)));nationalities.append(nationalityGrid);
-  const galleryDetails=node('details','','offline-task');galleryDetails.append(node('summary','看看成双的物品'));
-  const gallery=node('div','','phrase-grid colour-gallery');content.GALLERY.forEach(item=>gallery.append(expressionCard(item)));galleryDetails.append(gallery);
+  function referencePager(items,className,label,nouns,key) {
+    const group=node('div','',className),card=expressionCard(items[0]);group.setAttribute('role','group');group.setAttribute('aria-label',label);group.append(card);
+    const controls=node('div','','album-controls'),count=node('span');count.setAttribute('aria-live','polite');
+    const savedIndex=practice.activity(key);let index=Number.isInteger(savedIndex)?Math.max(0,Math.min(items.length-1,savedIndex)):0;
+    const previous=button('上一'+nouns,()=>{index--;render();},'btn btn-yellow'),next=button('下一'+nouns,()=>{index++;render();});controls.append(previous,count,next);
+    function render(){const item=items[index];card.querySelector('img').src=item.image;card.querySelector('strong').textContent=item.en;card.querySelector('span').textContent=item.cn;previous.disabled=index===0;next.disabled=index===items.length-1;count.textContent=(index+1)+' / '+items.length;practice.activity(key,index);}
+    render();return{group,controls};
+  }
+  const gallery=referencePager(content.GALLERY,'colour-gallery','当前出行图','幅出行图','unitGalleryPage');
   const modelExample=node('div','','model-example');modelExample.append(expressionCard(content.MODEL_EXAMPLE));
   const models=node('details','','offline-task');models.append(node('summary','看看完整问答'));
-  const modelGrid=node('div','','phrase-grid reply-models');content.MODELS.forEach(item=>modelGrid.append(expressionCard(item)));models.append(modelGrid);
+  const modelPages=referencePager(content.MODELS,'reply-models','当前物品问答','份问答','unitModelPage');models.append(modelPages.group,modelPages.controls);
   const reference=node('details','','offline-task');reference.append(node('summary','a 还是 an？'),
     node('p','例：It is a Swedish car. / She is an air hostess.'),
     node('p','按紧接在后面的词的发音选 a 或 an。以元音音素开头用 an，否则用 a；不是只看字母。'));
@@ -235,14 +247,15 @@
     node('p','这些普通规则名词通常加 s；以 s 结尾的 dress 加 es。case 已经有 e，只加 s。还有其他复数变化，以后再学。'),
     node('p','跟老师读：books /bʊks/、friends /frendz/、dresses /ˈdresɪz/。复数词尾的声音要听前面的音，不能只看末尾字母。'));
   const modelActions=node('div','','activity-actions');nextStation('models',modelActions);
-  surfaces.get('models').append(modelExample,nationalities,galleryDetails,models,reference,plurals,modelActions);
-  for (const id of ['reply','forms','trans']) mountPractice(id);
-  const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
+  surfaces.get('models').append(gallery.group,gallery.controls,nationalities,modelExample,models,reference,plurals,modelActions);
+  mountCustomsTask('reply');
+  for (const id of ['forms','trans']) mountPractice(id,{completionDetails:scene.result(id)});
+  const examResults = node('div', '', 'unit-results'),examScene=scene.taskView();surfaces.get('exam').append(examScene.element);
+  mountPractice('exam', { sceneView:examScene, chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
     const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
     const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
     const corrected = states.filter(state => !state.firstCorrect).length;
-    examResults.replaceChildren(node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
+    examResults.replaceChildren(scene.result('exam'),node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
@@ -251,7 +264,7 @@
     onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitClassroomCertificateIssuedAt', issuedAt); },
     design: {
       copy: { title: '细心的出行小伙伴', course: '护照小检查站 · Lesson 15–16', completion: '完成 Lesson 15–16 课堂配套练习', thanks: '把我们和朋友分清楚，带着行李一起出发！' },
-      characters: ['officer', 'girls'], characterLabels: ['海关官员', '姑娘们'], icon: art, defaultName: '细心的出行小伙伴', dialogTitle: '护照小检查站纪念', fileName: 'Lesson15-16-护照小检查站.png',
+      characters: ['officer-passports', 'travelling-pair'], characterLabels: ['海关官员', '姑娘们'], icon: art, defaultName: '细心的出行小伙伴', dialogTitle: '护照小检查站纪念', fileName: 'Lesson15-16-护照小检查站.png',
       badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'question', l4: 'order', l5: 'star' }[stage.id], color: ['#FFF0BC', '#DCEDE5', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
     }
   });
@@ -267,5 +280,10 @@
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
-  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); log.scrollTop = log.scrollHeight; }));
+  document.fonts.ready.then(() => {
+    const restore=()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;});
+    if(!document.documentElement.hasAttribute('data-course-preparing'))return restore();
+    const ready=new MutationObserver(()=>{if(!document.documentElement.hasAttribute('data-course-preparing')){ready.disconnect();restore();}});
+    ready.observe(document.documentElement,{attributes:true,attributeFilter:['data-course-preparing']});
+  });
 })(globalThis);

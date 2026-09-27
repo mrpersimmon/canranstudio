@@ -2,3 +2,7 @@
 docs/butcher-version/evidence/**/*.log -whitespace
 # CSV audit exports use CRLF line endings; retain the other whitespace checks.
 docs/butcher-version/evidence/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Imported research sources and captured browser logs retain their original bytes.
+docs/research/duolingo-language-exercises-2026-09-27/sources/*.html -whitespace
+docs/research/duolingo-language-exercises-2026-09-27/sources/*.log -whitespace
+docs/research/duolingo-language-exercises-2026-09-27/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

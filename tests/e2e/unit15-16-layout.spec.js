@@ -27,7 +27,7 @@ test('320 窄屏25张词卡展开后字义和音标不裁切，图册双色物�
     }
     if(p<4)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
   }
-  await page.goto('/unit15-16/#learn/models');await page.getByText('看看成双的物品',{exact:true}).click();const gallery=page.locator('.colour-gallery');
+  await page.goto('/unit15-16/#learn/models');for(let i=0;i<5;i++)await page.getByRole('button',{name:'下一幅出行图',exact:true}).click();const gallery=page.locator('.colour-gallery');
   await gallery.screenshot({path:'output/playwright/unit15-16/colour-gallery-320.png'});
 });
 
@@ -40,9 +40,9 @@ for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不�
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ANSWERS.reply.entries()){
-    await room.getByRole('button',{name:answer,exact:true}).click();await check.click();
+    await require('../support/units1-30-tasks').select(room,answer);await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===2?'完成这一站':'下一题',exact:true}).click();
+    await room.getByRole('button',{name:i===ANSWERS.reply.length-1?'完成这一站':'下一题',exact:true}).click();
   }
   const group=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(group.getByRole('button')).toHaveCount(2);
   for(const b of await group.getByRole('button').all()){const box=await b.boundingBox();expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);expect(box.height).toBeGreaterThanOrEqual(44);}

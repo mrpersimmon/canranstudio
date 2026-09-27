@@ -33,20 +33,21 @@ test('7–8三题旧服务器升级换设备，保留12星与姓名，新增七�
     await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await first.close(); first = null; await new Promise(resolve => server.close(resolve)); server = null; await start(root);
     second = await browser.newContext({ baseURL: origin }); const current = await second.newPage(); await signIn(current, account, '/');
-    await expect(current.locator('.course')).toContainText('12 / 15');
+    await expect(current.locator('.course')).toContainText('6 / 15');
     await current.goto('/unit7-8/#learn/certificate'); await expect(current.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
     await expect(current.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小记者');
+    for(const id of ['listen','reply'])await require('../support/units1-30-tasks').activity(current,'7-8',id);await current.goto('/unit7-8/#learn/certificate');
     await current.getByRole('button', { name: '继续：采访小挑战', exact: true }).click();
     await expect(current).toHaveURL(/#learn\/exam$/);
     const room = current.locator('.stage-exam');
-    await expect(room).toContainText('第 4 / 10 题'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-    await finishExamFrom(current, 3); await expect(room).toContainText('首次独立答对 10 / 10');
+    await expect(room).toContainText('第 4 / 11 题'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+    await finishExamFrom(current, 3); await expect(room).toContainText('首次独立答对 11 / 11');
     await room.getByRole('button', { name: '下一站：我的单元证书', exact: true }).click();
     await current.getByRole('button', { name: '领取单元证书', exact: true }).click(); await expect(current.locator('#certificateDate')).toHaveText(date); await current.keyboard.press('Escape');
     await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     third = await browser.newContext({ baseURL: origin }); const restored = await third.newPage(); await signIn(restored, account, '/');
     await expect(restored.locator('.course')).toContainText('15 / 15'); await restored.goto('/unit7-8/#learn/exam');
-    await expect(restored.locator('.stage-exam')).toContainText('首次独立答对 10 / 10');
+    await expect(restored.locator('.stage-exam')).toContainText('首次独立答对 11 / 11');
     await restored.goto('/unit7-8/#learn/certificate'); await expect(restored.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小记者');
   } finally {
     await first?.close(); await second?.close(); await third?.close();

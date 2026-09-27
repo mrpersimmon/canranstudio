@@ -1,0 +1,58 @@
+
+Running 20 tests using 1 worker
+
+(node:5447) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/units17-30-theatre.spec.js:8:2 › 19-20 连续舞台、对白与人物分层 320 (2.4s)
+  ✓   2 tests/e2e/units17-30-theatre.spec.js:8:2 › 19-20 连续舞台、对白与人物分层 390 (1.9s)
+  ✓   3 tests/e2e/units17-30-theatre.spec.js:8:2 › 19-20 连续舞台、对白与人物分层 768 (2.1s)
+  ✘   4 tests/e2e/units17-30-theatre.spec.js:8:2 › 19-20 连续舞台、对白与人物分层 1280 (618ms)
+(node:5464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 tests/e2e/units17-30-theatre.spec.js:8:2 › 21-22 连续舞台、对白与人物分层 320 (1.8s)
+  ✓   6 tests/e2e/units17-30-theatre.spec.js:8:2 › 21-22 连续舞台、对白与人物分层 390 (1.7s)
+  ✓   7 tests/e2e/units17-30-theatre.spec.js:8:2 › 21-22 连续舞台、对白与人物分层 768 (1.9s)
+  ✓   8 tests/e2e/units17-30-theatre.spec.js:8:2 › 21-22 连续舞台、对白与人物分层 1280 (1.7s)
+  ✓   9 tests/e2e/units17-30-theatre.spec.js:8:2 › 23-24 连续舞台、对白与人物分层 320 (1.6s)
+  ✓  10 tests/e2e/units17-30-theatre.spec.js:8:2 › 23-24 连续舞台、对白与人物分层 390 (1.6s)
+  ✓  11 tests/e2e/units17-30-theatre.spec.js:8:2 › 23-24 连续舞台、对白与人物分层 768 (1.6s)
+  ✓  12 tests/e2e/units17-30-theatre.spec.js:8:2 › 23-24 连续舞台、对白与人物分层 1280 (1.7s)
+  ✓  13 tests/e2e/units17-30-theatre.spec.js:8:2 › 25-26 连续舞台、对白与人物分层 320 (1.1s)
+  ✓  14 tests/e2e/units17-30-theatre.spec.js:8:2 › 25-26 连续舞台、对白与人物分层 390 (1.2s)
+  ✓  15 tests/e2e/units17-30-theatre.spec.js:8:2 › 25-26 连续舞台、对白与人物分层 768 (1.2s)
+  ✓  16 tests/e2e/units17-30-theatre.spec.js:8:2 › 25-26 连续舞台、对白与人物分层 1280 (1.2s)
+  ✓  17 tests/e2e/units17-30-theatre.spec.js:8:2 › 27-28 连续舞台、对白与人物分层 320 (1.2s)
+  ✓  18 tests/e2e/units17-30-theatre.spec.js:8:2 › 27-28 连续舞台、对白与人物分层 390 (1.2s)
+  ✓  19 tests/e2e/units17-30-theatre.spec.js:8:2 › 27-28 连续舞台、对白与人物分层 768 (1.3s)
+  ✓  20 tests/e2e/units17-30-theatre.spec.js:8:2 › 27-28 连续舞台、对白与人物分层 1280 (1.3s)
+
+
+  1) tests/e2e/units17-30-theatre.spec.js:8:2 › 19-20 连续舞台、对白与人物分层 1280 ────────────────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 474.578125
+    Received:    473.62432861328125
+
+      22 |     const bounds=await view.boundingBox(),stageBounds=await stage.boundingBox();expect(bounds.width).toBeGreaterThan(stageBounds.width*.95);
+      23 |     const actors=await view.locator('[data-actor]:not([data-actor=""])').evaluateAll(nodes=>nodes.filter(n=>getComputedStyle(n).display!=='none').map(n=>{const b=n.getBoundingClientRect();return {y:b.y,height:b.height};}));
+    > 24 |     const logBounds=await log.boundingBox();for(const a of actors){expect(a.height).toBeGreaterThan(width<=390?62:90);expect(a.y).toBeGreaterThanOrEqual(logBounds.y+logBounds.height-2);}
+         |                                                                                                                                   ^
+      25 |     await room.screenshot({path:`output/playwright/theatre-v21/${pair}-${width}-${i+1}.png`});
+      26 |    }
+      27 |   }
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units17-30-theatre.spec.js:24:131
+
+    Error Context: test-results/units17-30-theatre-19-20-连续舞台、对白与人物分层-1280/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units17-30-theatre-19-20-连续舞台、对白与人物分层-1280/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units17-30-theatre-19-20-连续舞台、对白与人物分层-1280/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/units17-30-theatre.spec.js:8:2 › 19-20 连续舞台、对白与人物分层 1280 ─────────────────────────────
+  19 passed (31.9s)

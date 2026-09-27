@@ -114,8 +114,9 @@
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit1314-' + id + '-practice'; surfaces.get(id).append(element);
     const predecessors = unit.activityPredecessors?.[id];
-    practice.mount({ element, questions: questions[id], sessionId: predecessors ? 'v2' : 'v' + unit.version,
-      previousGroups: predecessors?.map(old => ({ key: 'unit1314-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
+    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+      inputViews:core.lesson49TaskInputs,
+      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit1314-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
       onComplete: states => { complete(id); const summary=element.querySelector('.practice-finish > p'); if(summary) summary.textContent=id==='exam'?'挑战完成！':'这一站完成了！'; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }

@@ -1,0 +1,2103 @@
+{
+  "date": "2026-09-27",
+  "scope": "English as the target language; Free, Super, Max; exclude other target languages, Duolingo ABC and DET",
+  "records": [
+    {
+      "id": "E01",
+      "name": "双语词语配对",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "快速辨认两种语言的词义对应。",
+      "input": "两列书面词语。",
+      "output": "多组一一配对。",
+      "steps": [
+        "读两列词或短语。",
+        "点一个母语词，再点对应英语词；重复完成各组。",
+        "按界面反馈推进；本轮未验证错误配对的具体复位时序。"
+      ],
+      "ui": "两列五组葡语/英语词块，等高按钮与浅灰下沿提示可点；顶部进度和能量，底部无独立检查按钮。",
+      "design": "同一匹配机制可装入 Words 或 Match Madness；限时不是另一题型。",
+      "caution": "截图证明英葡语义配对，不能单凭最终配完推断用户会自由拼写或造句。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-practice-5.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/PT-5.png",
+          "source": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+          "label": "完整英语-葡语双语配对题",
+          "framing": "完整任务视口",
+          "note": "完整英语-葡语双语配对题，无独立提交，Home可见；当前图顶部为能量非HP。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2292,
+          "sha256": "f1f6a0d8e49628b8f5bedeb07794ccc5d5a17c202f67abcacaacbd75dca45655",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读两列词语并点选配对，作答不依赖声音。"
+    },
+    {
+      "id": "E02",
+      "name": "英语语境词义—英文定义选择",
+      "group": "词汇与翻译",
+      "kind": "语言任务",
+      "goal": "用英语上下文理解新词，再识别对应英文释义。",
+      "input": "包含突出词语的英语短段落；三个英文定义。",
+      "output": "一个英文定义选项。",
+      "steps": [
+        "阅读英语段落并定位突出词语。",
+        "比较英文释义并点选一个。",
+        "点底部验证。"
+      ],
+      "ui": "把待解释词语视觉突出，减少寻找成本。 释义与正文均用英语，操作指令可保留母语。",
+      "design": "从上下文到英文释义的匹配可把注意力放在意义，而不只依赖母语对译；单选本身不检验主动造句。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "官方 B1/B2 英语内容，图片具体为法语→英语；不是所有课程均有的保证。",
+      "plan": "基础英语课程任务；具体开放方向见第三节，不归入 Sounds 专项。",
+      "sources": [
+        "https://blog.duolingo.com/how-duolingo-teaches-english/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-14be41d354c0.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/FR-Definition-3-.PNG",
+          "source": "https://blog.duolingo.com/how-duolingo-teaches-english/",
+          "label": "英文段落中的新词对应三个英文释义；题目元指令法语。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "French→English",
+          "interface_language": "French",
+          "full_task_view": true,
+          "width": 1290,
+          "height": 2796,
+          "sha256": "01c39bc661a7394d2d46bc71e85e852bf31d828f5caed9859410f92b27fa0d10",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读英语语境与定义，点选符合词义的一项。"
+    },
+    {
+      "id": "E03",
+      "name": "Flashcards：主动说出英语词",
+      "group": "词汇与翻译",
+      "kind": "词汇提取任务；可切换键入",
+      "goal": "从母语词义提示主动提取英语词。",
+      "input": "一张母语词语卡及录音入口。",
+      "output": "口头英语词；官方也说明可改为键入。",
+      "steps": [
+        "阅读当前卡面的母语词；官方示例一组五张。",
+        "用英语说出对应词；不方便说话可切换键入。",
+        "根据官方说明：正确卡变绿并移开；错误卡展示并朗读答案，回到队尾再练。",
+        "结束查看词卡总结；该公告以至少三项正确作为通过条件，未实测当前账号阈值。"
+      ],
+      "ui": "中央单张卡占据视觉重心；录音按钮在下方，另有不能说话入口；结果页保留词卡，并用状态、词语和反馈提示完成情况。",
+      "design": "撤去答案候选以增加主动提取；把一次任务缩小到一个词，减少句法生成的额外难度。结果列表便于识别哪些词需要再提取。",
+      "caution": "图证包含口述状态和结果三屏；没有键入状态全图。官方说明容许部分拼写/发音近似，但判定阈值与算法未公开。",
+      "availability": "葡语官方明确葡语→英语词汇卡；不由此推出全部英语课程已开放。",
+      "plan": "普通课程词汇提取题；公告未给出完整套餐/逐平台矩阵，无 Super/Max 独占依据。",
+      "sources": [
+        "https://blog.duolingo.com/pt/flashcards-do-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/literacy-english-flashcards-question.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_EN_Flashcard_Exercise_still-4.png",
+          "source": "https://blog.duolingo.com/pt/flashcards-do-duolingo/",
+          "label": "葡语→英语口述词汇卡",
+          "framing": "完整任务视口",
+          "note": "卡面 menino；需产出英语 boy。截图为录音交互状态。",
+          "course_direction": "葡语→英语",
+          "interface_language": "pt",
+          "full_task_view": true,
+          "width": 375,
+          "height": 812,
+          "sha256": "537a767bc12e67f54f2eb1c9f9ee67276c977dd2f01cc6d5852f99215643338a",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/literacy-english-flashcards-results.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_EN_overview_screen.png",
+          "source": "https://blog.duolingo.com/pt/flashcards-do-duolingo/",
+          "label": "英语词汇卡总结的三个结果状态",
+          "framing": "官方三屏排版；各手机结果页完整",
+          "note": "官方拼图，不是单屏；英语词 boy/dog/apple/cat/book。不同状态显示绿色、灰色或红色结果卡。",
+          "course_direction": "葡语→英语",
+          "interface_language": "pt",
+          "full_task_view": true,
+          "width": 1157,
+          "height": 812,
+          "sha256": "b0014b757097d37b30adbdcc1b3eebf4e9c06a5af9010970d6bfb6cb68e0fdb9",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E04",
+      "name": "词块翻译：理解英语并译成母语",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "把英语词或短句与母语意义联系起来。",
+      "input": "英语原句及母语候选词块。",
+      "output": "母语译文。",
+      "steps": [
+        "读原句。",
+        "依次点选词块组成译文。",
+        "必要时调整，再提交。"
+      ],
+      "ui": "角色气泡呈现原句，横线区域承接答案，候选词块在下方；已使用词块留下位置占位，便于撤回和查找。",
+      "design": "翻译方向是训练参数；两个方向不是两个新控件。词库干扰词会改变难度。",
+      "caution": "此方向主要检查英语理解；母语词块正确不证明能主动组织英语。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/duolingo-dark-translation-word-bank.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户此前提供的真实深色界面",
+          "framing": "完整中文界面英语题目视口",
+          "note": "2026-09-06 前后保存；实际拍摄日期、设备和应用版本未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "1c12f211e042d48dbfe315ac1644a2fae3ce0e003f8017a38f8e7b1902f79bf8",
+          "course_direction": "中文→英语课程",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        },
+        {
+          "file": "assets/root-pt-intro-4.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/PT+images/Image+06.png",
+          "source": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+          "label": "完整题目视口",
+          "framing": "完整任务视口",
+          "note": "完整题目视口，英语Yes词块翻译成葡语，顶退出进度HP，底检查Home俱全。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 936,
+          "height": 2025,
+          "sha256": "64d847f264e99a8779184bb0ee9a73fb42adf73018cdc4d1ccb32bd13e274644",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读英语原句，用母语词块组成译文；朗读是可选辅助。"
+    },
+    {
+      "id": "E05",
+      "name": "词块翻译：把母语组织成英语",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "提取英语词义并在候选范围内组合英语词序。",
+      "input": "母语句子及英语词块。",
+      "output": "英语译文。",
+      "steps": [
+        "读原句。",
+        "依次点选词块组成译文。",
+        "必要时调整，再提交。"
+      ],
+      "ui": "原文气泡、答案行与词库分区；所选词保留在答案行；绿色结果区同时提供答案解释和继续。",
+      "design": "翻译方向是训练参数；两个方向不是两个新控件。词库干扰词会改变难度。",
+      "caution": "本图是正确反馈态。候选已给出拼写，不能等同不带词库的整句写作。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-explain-1.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_Reverse-Tap.png",
+          "source": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+          "label": "葡语→英语词块翻译：答对后的完整反馈",
+          "framing": "完整任务视口",
+          "note": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 379,
+          "height": 816,
+          "sha256": "afe65b39571ec3040cda1777ec62a345b9edf98c8d1b747c6bf9249f493cc94c",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读母语原句，用英语词块组成译文。"
+    },
+    {
+      "id": "E06",
+      "name": "整句自由翻译",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "独立组织译文并检索拼写。",
+      "input": "母语原句与空白英语输入框。",
+      "output": "学习者自行输入的完整英语译文。",
+      "steps": [
+        "读原句。",
+        "自行输入整句译文。",
+        "检查后提交。"
+      ],
+      "ui": "大文本框给整句生成留空间；键入与语音输入入口分开。自由输入要保留修改位置，避免反馈时丢失原答案。",
+      "design": "比词块方式少了识别支架；合理译法可不止一种，词块仅显示一种组合不代表唯一译法。",
+      "caution": "中文题图证明自由译成英语的编辑态；葡语图证明错误反馈态，两者不是同一题的连续截图。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/"
+      ],
+      "images": [
+        {
+          "file": "assets/duolingo-dark-translation-free-input.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户此前提供的真实深色界面",
+          "framing": "完整中文界面英语题目视口",
+          "note": "2026-09-06 前后保存；实际拍摄日期、设备和应用版本未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "4b57eefce998ee92c4b4376981c18f8dfdc2e8c4fd927363af329d3eea8da3be",
+          "course_direction": "中文→英语课程",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        },
+        {
+          "file": "assets/root-pt-explain-3.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_Reverse-Translate.png",
+          "source": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+          "label": "英语自由翻译：错误答案与修正同时保留",
+          "framing": "完整任务视口",
+          "note": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 379,
+          "height": 816,
+          "sha256": "e635d43009ad8de6ae7b92779c42c2a979c68d7cd07f56be4794a189826f3d76",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "本节采用键盘输入整句译文的分支；语音输入另见 E08。"
+    },
+    {
+      "id": "E07",
+      "name": "补全部分翻译",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "把注意力集中在特定词或句法成分。",
+      "input": "中文原句与已写好一部分的英语译文。",
+      "output": "补全缺失部分的英语单词或短语。",
+      "steps": [
+        "对照原句与译文。",
+        "在空白处补所缺成分。",
+        "提交。"
+      ],
+      "ui": "原文和部分译文同时可见；已给文本固定，待填位置明确，让用户只处理缺失部分。",
+      "design": "原文提供翻译约束，不能与只凭单语语境填空合并描述。",
+      "caution": "需区分语言错误、可接受译法和输入失误。",
+      "availability": "已有中文→英语历史完整题图，具体当前平台和版本未知。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [],
+      "images": [
+        {
+          "file": "assets/duolingo-dark-supported-translation.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户此前提供的真实深色界面",
+          "framing": "完整中文界面英语题目视口",
+          "note": "2026-09-06 前后保存；实际拍摄日期、设备和应用版本未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "07df6c4b9b89236fdf2ca4e6b445451d7b8d6e0b3fb602f252f8efc18c62900f",
+          "course_direction": "中文→英语课程",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读中文与已有英语译文，键入缺失部分。"
+    },
+    {
+      "id": "E08",
+      "name": "英语翻译的语音输入变体",
+      "group": "词汇与翻译",
+      "kind": "输入方式变体，复用 E06 翻译任务",
+      "goal": "在翻译任务中增加口头检索。",
+      "input": "原句、译文输入框和语音输入按钮。",
+      "output": "由语音转写的译文文本。",
+      "steps": [
+        "点语音输入。",
+        "口头说出译文。",
+        "查看转写，必要时编辑后提交。"
+      ],
+      "ui": "完整中文题图的文本框下方有独立录音横条，位于检查按钮上方，图示状态为灰色；官方葡语局部图展示独立的触摸说话入口及键盘。",
+      "design": "这是输入方式变体；与照给定答案朗读的评分任务不同。",
+      "caution": "已取得完整翻译题面及语音入口，但录音中、转写失败、确认转写等状态仍待实测；不是自由对话或专用音素评分。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/duolingo-dark-translation-free-input.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户此前提供的真实深色界面",
+          "framing": "完整中文界面英语题目视口",
+          "note": "2026-09-06 前后保存；实际拍摄日期、设备和应用版本未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "4b57eefce998ee92c4b4376981c18f8dfdc2e8c4fd927363af329d3eea8da3be",
+          "course_direction": "中文→英语课程",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        },
+        {
+          "file": "assets/root-pt-ways-4.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/03/speak_translate.png",
+          "source": "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/",
+          "label": "触摸说话与键盘替代输入",
+          "framing": "官方局部图；顶部题干与进度被裁去",
+          "note": "这是来源自带的局部图，本报告未补画或扩图。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 750,
+          "height": 1334,
+          "sha256": "0f69e2a172335e6cfdfafbda4844c83ce08959c6cbb48b921c7adc256ded1414",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E09",
+      "name": "英语语境选词填空",
+      "group": "句子与阅读",
+      "kind": "语言任务",
+      "goal": "根据一句英语的意义选出合适缺词。",
+      "input": "一个缺词的英语句子；三个英文词。",
+      "output": "一个填入句子的英文词。",
+      "steps": [
+        "读整句与缺口。",
+        "选择一个合适词。",
+        "提交检验。"
+      ],
+      "ui": "将缺口直接置于句子内。 少量并列词项便于比较；反馈应回到完整句义。",
+      "design": "固定句框把注意力集中到词的适用语境；选对不能单独证明学习者能自由拼写该词。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "图证为葡语→英语；这张展示词汇语义选择，不能拿来证明英语词尾、时态表格等独立语法交互。",
+      "plan": "基础英语课程任务；具体开放方向见第三节，不归入 Sounds 专项。",
+      "sources": [
+        "https://blog.duolingo.com/why-learn-english/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-097780145a4b.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/12/EN-PT_1.png",
+          "source": "https://blog.duolingo.com/why-learn-english/",
+          "label": "英语问句的一个空与三个英文词选项。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "Portuguese→English",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2400,
+          "sha256": "695bf23d8fe9c86920e1cde52392612d7b1d73b1b383a6f2210c524e0e3020ae",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/duolingo-dark-cloze-correct-feedback.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户此前提供的真实深色界面",
+          "framing": "完整中文界面英语题目视口",
+          "note": "2026-09-06 前后保存；实际拍摄日期、设备和应用版本未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "a178eaff82f29c0f9612d71ee19335b3f7b35af6220a14954d30c4238a41cf00",
+          "course_direction": "中文→英语课程",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读句子并选词补空，不需要根据音频判断。"
+    },
+    {
+      "id": "E10",
+      "name": "英语图境辅助选词填空",
+      "group": "句子与阅读",
+      "kind": "材料变体",
+      "goal": "整合人物情境、图片和英文短文，选择缺词。",
+      "input": "情境插图、含空缺的英语句子或短文、英语候选词。",
+      "output": "一个填入空位的英语词；需要时展开母语提示。",
+      "steps": [
+        "查看图和英文语境。",
+        "需要时点击词语查看母语提示。",
+        "选词补空并继续。"
+      ],
+      "ui": "图片需服务缺词所需意义。 提示弹层应可关闭，不能替代完整题干。",
+      "design": "图像与短文为词义提供多重线索；提示是支持状态，不应另算一道题型。",
+      "caution": "基础图境与中级图文使用相同填空机制；母语提示是可展开状态，不另算一道题。",
+      "availability": "法语→英语 B1/B2 与葡语→英语都有图证；葡语图提供无遮挡完整题干，可与提示展开图相互补充。此操作仍不等同词尾或语法范式表。",
+      "plan": "基础英语课程任务；具体开放方向见第三节，不归入 Sounds 专项。",
+      "sources": [
+        "https://blog.duolingo.com/pt/querido-duolingo-o-duolingo-ensina-gramatica/",
+        "https://blog.duolingo.com/how-duolingo-teaches-english/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-grammar-4.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/04/3pt.png",
+          "source": "https://blog.duolingo.com/pt/querido-duolingo-o-duolingo-ensina-gramatica/",
+          "label": "图境辅助英语填空：基础词汇例",
+          "framing": "完整应用题面；官方图未含系统栏",
+          "note": "完整应用题面含退出/进度/题干/图/选项/检查，源图无系统状态栏和Home，非本轮裁剪。目标英语Your dog is funny。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 750,
+          "height": 1334,
+          "sha256": "d6efca168a33b7634a2a9815b3e9f724bdd2304c84cde341a5385fe3f67a08c7",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/english-f5e751b0695a.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/FR-Tap-Complete-with-hints-1-.PNG",
+          "source": "https://blog.duolingo.com/how-duolingo-teaches-english/",
+          "label": "图片+英语语境+一个空+四个英语词块；法语词义提示已展开。",
+          "framing": "完整任务视口",
+          "note": "整页顶部与底部完整；展开的母语提示遮挡局部句子，属于提示展开状态，不能作为无遮挡题干版本。",
+          "course_direction": "French→English",
+          "interface_language": "French",
+          "full_task_view": true,
+          "width": 1290,
+          "height": 2796,
+          "sha256": "6fe2d70d50e5e7ef268cfbfbd6287ba72ebf8b940f770ec4ce0dacbe02275bdd",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "根据插图和英语文本选择缺词。"
+    },
+    {
+      "id": "E11",
+      "name": "英语段落阅读理解选择",
+      "group": "句子与阅读",
+      "kind": "语言任务",
+      "goal": "理解一段英语并据此判断人物或信息。",
+      "input": "英语段落、英语理解问题、三个英语答案。",
+      "output": "一个理解答案。",
+      "steps": [
+        "阅读段落。",
+        "把问题和选项与原文证据对照。",
+        "选择答案并提交。"
+      ],
+      "ui": "正文、提问、选项保持清楚层级。 人物判断可以由多句线索支持，避免图像直接泄露答案。",
+      "design": "需要整合句意和语境，区别于只对译某个单词；能否推理取决于具体题干。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "西语→英语官方完整题页；不能由这张图推断所有高级英语单元的难度。",
+      "plan": "基础英语课程任务；具体开放方向见第三节，不归入 Sounds 专项。",
+      "sources": [
+        "https://blog.duolingo.com/why-learn-english/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-f41406e1d811.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/12/EN-ES_3.png",
+          "source": "https://blog.duolingo.com/why-learn-english/",
+          "label": "英语短段落、英文理解问题与三个英文选项。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "Spanish→English",
+          "interface_language": "Spanish",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2400,
+          "sha256": "a3b31fc7e9d9f67c2e4badda076c4ad6cf5202aed0f43b714a3e93d77b364ba1",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "从英语段落中找到证据，再选择答案。"
+    },
+    {
+      "id": "E12",
+      "name": "英语对话下一句选择",
+      "group": "句子与阅读",
+      "kind": "语言任务",
+      "goal": "根据英语前一句，选择语义和交际目的合适的回应。",
+      "input": "英语对话开场、空回应气泡、两个英语候选回复。",
+      "output": "一个完整英语回应。",
+      "steps": [
+        "理解说话者前一句。",
+        "比较候选回应。",
+        "选择一项并验证。"
+      ],
+      "ui": "用左右气泡标明说话轮次。 误选应来自意义或语境差别，避免只靠长度判断。",
+      "design": "考察会话连贯与语用匹配；点选回复和自主说出回复属于不同输出要求。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "同时有法语→英语、葡语→英语证据；本项没有麦克风，不应写成口语生成题。",
+      "plan": "基础英语课程任务；具体开放方向见第三节，不归入 Sounds 专项。",
+      "sources": [
+        "https://blog.duolingo.com/how-duolingo-teaches-english/",
+        "https://blog.duolingo.com/why-learn-english/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-e311f444d8ac.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/FR-Dialogue-1-.PNG",
+          "source": "https://blog.duolingo.com/how-duolingo-teaches-english/",
+          "label": "根据英语对话开场，从两个英语候选句选回应。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "French→English",
+          "interface_language": "French",
+          "full_task_view": true,
+          "width": 1290,
+          "height": 2796,
+          "sha256": "c3488558993c9bfa3f94a2a8a0a90c392eebe7469eaa6d5b896befaf88e49b66",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/c1866eb0b7-EN-PT_2.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/12/EN-PT_2.png",
+          "source": "https://blog.duolingo.com/why-learn-english/",
+          "label": "英语对话开场与两个英语回应选项。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "Portuguese→English",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2400,
+          "sha256": "cc2739b3fea493faf8a1846aa92a140ff60669c918ef4c678ec85bcf26a97f39",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读已显示的英语对话，选择下一句；播放语音是可选辅助。"
+    },
+    {
+      "id": "E13",
+      "name": "词块听写/听后重组",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "识别语流中的词和顺序。",
+      "input": "英语句子音频、正常/慢速播放按钮与英语词块。",
+      "output": "按所听内容排列的英语词块序列。",
+      "steps": [
+        "听音频，可重播或慢放。",
+        "按听到顺序点选词块。",
+        "提交。"
+      ],
+      "ui": "正常和慢速播放在同一气泡内并列；答案横线在上、英语候选块在下；底部按钮处于未作答禁用态。",
+      "design": "要求还原原句；不是翻译，也不是听后概括意义。",
+      "caution": "单个题面只覆盖一种作答状态；需进一步核验迁移、错误与重试。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-intro-5.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/PT+images/Image+07.png",
+          "source": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+          "label": "完整题目视口",
+          "framing": "完整任务视口",
+          "note": "完整题目视口，英语音频词块听写，正常/慢速，底部CONTINUAR及Home。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "df376da1a5f85f48acae5b741c958e6cfd52a4d166f33d0e29e64d88f74ee365",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E14",
+      "name": "听后理解并选答",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "理解语段意义而非逐字复写。",
+      "input": "英语音频、英语理解问题与三个英语文字选项。",
+      "output": "一个理解答案。",
+      "steps": [
+        "播放英语材料，需要时重播或慢速播放。",
+        "阅读理解问题及三个文字选项，选择符合音频含义的答案。",
+        "提交查看反馈并继续。"
+      ],
+      "ui": "英语音频可正常/慢速播放；英语理解问题在材料下，三项英语答案纵排；另有现在不能听与检查。",
+      "design": "2026 官方完整图的选项也使用音频，不宜统一画成文字单选。",
+      "caution": "本图不是听写，也没有完整听力文本。无法从静态图确认实际音频或自动播放节奏。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-practice-7.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/PT-7.png",
+          "source": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+          "label": "完整英语听后选答 What time of day is it? 三选一、慢速、无法听音、检查、Home可见。",
+          "framing": "完整任务视口",
+          "note": "完整英语听后选答 What time of day is it? 三选一、慢速、无法听音、检查、Home可见。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2292,
+          "sha256": "954051879069243daddf112119ac1124f9a6a64a6a02191be6a5f509eb0f8c31",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E15",
+      "name": "英语整句跟读与朗读",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "练习发音、节奏与完整句表达。",
+      "input": "给定英语句子、可播放示范与录音入口。",
+      "output": "按给定文字朗读的英语语音；识别反馈由应用呈现。",
+      "steps": [
+        "听示范或读句子。",
+        "点击麦克风。",
+        "按给定内容说出句子。"
+      ],
+      "ui": "目标英语句置于说话气泡，音频可重播；大麦克风是主要动作，底部不能说话提供退出当前录音要求的入口。",
+      "design": "给定原句减少内容组织负担，把注意力集中于声音产出；同一交互可承载短语或较长句子。",
+      "caution": "Falstaff 或 Lily 出现不代表 Video Call；这些是普通跟读题。语音识别通过不能证明自由交流或音素逐项评分。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+        "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-practice-6.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/PT-6.png",
+          "source": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+          "label": "完整普通课英语跟读Coffee, please.",
+          "framing": "完整任务视口",
+          "note": "完整普通课英语跟读Coffee, please.，Falstaff造型；不是Max Video Call，麦克风、无法说话、Home可见。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2292,
+          "sha256": "ca2ebb82be739564231e1c3054099eb85e9ccd3d72ecd5105c81134e91251cab",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-ways-3.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/03/speak.png",
+          "source": "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/",
+          "label": "完整英语跟读句子",
+          "framing": "完整任务视口",
+          "note": "完整英语跟读句子，Lily造型；不是Video Call，麦克风/无法说话/Home可见。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2300,
+          "sha256": "5f77b92843d03d63e525dd055643ff9fa0bc0eb38f49dea479228c56a97f2171",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E16",
+      "name": "理解英语问题并说出正确回应",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "结合理解与受约束口语产出。",
+      "input": "可播放的英语问句、两个英语完整回应与各自麦克风。",
+      "output": "给定候选中符合语境的一句英语口头回应。",
+      "steps": [
+        "理解问题。",
+        "选定适合的回应。",
+        "对麦克风说出该回应。"
+      ],
+      "ui": "上方英语问句可重播；两条英语回复各自带麦克风。底部有现在不能说话和灰色 CONTINUAR，原图保留完整 Home 条。",
+      "design": "既要判断意义，也要说出来；仍是有答案范围的对话，不能称开放 AI 会话。",
+      "caution": "完整图确认了作答入口；录音与选项的具体点击时序、识别结果及失败恢复未实测。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-intro-6.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/PT+images/Image+08.png",
+          "source": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+          "label": "完整英语口说选答视口；顶部退出、进度与爱心",
+          "framing": "完整英语口说选答视口；包括 CONTINUAR 与 Home 条",
+          "note": "完整英语口说选答视口；顶部退出、进度与爱心，两麦克风答案，底部不能说话、CONTINUAR 与 Home 条均可见。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "3b1e8381a59c5891f76a68d102e50ae4b289b82e8ca637f74dad43b1b9481364",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E17",
+      "name": "英语近音词听辨二选一",
+      "group": "英语声音专项",
+      "kind": "语言任务",
+      "goal": "区分两种相近英语语音并辨认听到的词。",
+      "input": "一段单词音频与两个近音英文词。",
+      "output": "两个词中的一个。",
+      "steps": [
+        "播放或重听单词。",
+        "选听到的英文词。",
+        "点 CHECK。"
+      ],
+      "ui": "重听入口突出。 两个选项只需承担当前声音对比。",
+      "design": "让注意力集中在对立音的听觉差别；书面词参与，仍可能受拼写熟悉度影响。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "英语 Sounds 专项；源语言未公开，图中 UI 为英文。",
+      "plan": "英语 Sounds 专项；具体课程方向与平台开放范围见来源说明。",
+      "sources": [
+        "https://blog.duolingo.com/duolingo-english-sounds-tab/"
+      ],
+      "images": [
+        {
+          "file": "assets/f6eed61af4-IMG_3253.PNG",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3253.PNG",
+          "source": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+          "label": "听一个单词，从两个近音英文词中选一个。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "未公布源语言→English",
+          "interface_language": "English",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "2e9fd21d42d59411f1ad13fe2ec4634c4a83fa4faec0b68dfe4e62c4290351b8",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E18",
+      "name": "英语两段声音同异判断",
+      "group": "英语声音专项",
+      "kind": "语言任务",
+      "goal": "不先读单词，比较两段语音是否相同。",
+      "input": "两个可独立播放的声音；同词/不同词判断。",
+      "output": "同一词或不同词的二分判断。",
+      "steps": [
+        "分别播放两段声音。",
+        "比较并选择同或异。",
+        "继续下一题。"
+      ],
+      "ui": "两段音频位置和播放状态要可辨。 不要把这一操作混称为朗读或拼写题。",
+      "design": "比拼写选择更直接聚焦声音差异；答对仍不等于能准确发音。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "英语 Sounds 专项；独立原子操作，不与 E17 合并为同一界面。",
+      "plan": "英语 Sounds 专项；具体课程方向与平台开放范围见来源说明。",
+      "sources": [
+        "https://blog.duolingo.com/duolingo-english-sounds-tab/"
+      ],
+      "images": [
+        {
+          "file": "assets/6023c5837b-IMG_3254.PNG",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3254.PNG",
+          "source": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+          "label": "播放两段声音，判断同词还是不同词。",
+          "framing": "完整任务视口",
+          "note": "官方公开产品截图；不是本研究者登录后的现场截图。",
+          "course_direction": "未公布源语言→English",
+          "interface_language": "English",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "8e686e824cde8d18840787e557bf0901e7d5e7f7566d9af27a9b2f81cc8c5ce8",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "E19",
+      "name": "英语声音—书面词语配对",
+      "group": "英语声音专项",
+      "kind": "语言任务",
+      "goal": "把英语语音与对应拼写建立联系。",
+      "input": "一列音频按钮与一列英语词；本图为四对近音词。",
+      "output": "一组声音与英文词的对应关系。",
+      "steps": [
+        "播放一个声音。",
+        "点选对应英语词组成一对。",
+        "逐对配完并继续。"
+      ],
+      "ui": "四个声音按钮与四个英语词并排；选中颜色与描边反馈关系，底部继续按钮及 Home 边界完整。",
+      "design": "可重复比较音形关系；Sounds 中的近音限制是材料变体，不是第二种配对原子操作。",
+      "caution": "静态图只能证明此题与所示状态，不能代替全部判分和交互状态实测。",
+      "availability": "采用官方韩语版英语 Sounds 全图；英文旧配对图因页尾缺失没有计入完整覆盖。",
+      "plan": "英语 Sounds 专项；具体课程方向与平台开放范围见来源说明。",
+      "sources": [
+        "https://blog.duolingo.com/ko/practice-english-sounds/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-a5ab15e73d80.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/04/ko-img5.PNG",
+          "source": "https://blog.duolingo.com/ko/practice-english-sounds/",
+          "label": "韩语界面、英语音频词汇配对",
+          "framing": "完整英语配对题目视口",
+          "note": "指令是韩语；配对对象是英语，不应因界面语言排除。原图 URL 从官方文章 HTML 取出。",
+          "course_direction": "韩语界面→英语 Sounds",
+          "interface_language": "ko",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "0b76462ff4479d9ae661a82ac84fe67c31ae85b40ff54650c50ec65ee32d80f7",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "S01",
+      "name": "故事内容理解单选",
+      "group": "Stories 故事",
+      "kind": "情境交互",
+      "goal": "检验对话意图和事实理解，而非只认单词。",
+      "input": "英语故事上下文、葡语理解问题与三个葡语选项。",
+      "output": "一个与故事内容相符的选项。",
+      "steps": [
+        "阅读故事画面中已显示的英语上下文。",
+        "从三个理解选项中选择与文本相符的一项。",
+        "查看选择标记与反馈，继续故事；本节不要求通过听音取得答案。"
+      ],
+      "ui": "英语角色对话在上，葡语理解问题和三个选项在下；正确选项以绿色方形勾选标记保留，底部绿色反馈与继续。",
+      "design": "前文成为理解条件，答案需要与故事信息相符；选择题为叙事插入短检查。",
+      "caution": "故事内容视口完整，但不是整篇故事长截图；母语提问降低题干本身的英语阅读负担。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/",
+        "https://blog.duolingo.com/de/so-verbessert-duolingo-das-leseverstehen/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-fe43138dd7ec.jpg",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/05/Image-4.jpg",
+          "source": "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/",
+          "label": "英语Junior/Eddy对话；葡语内容理解单选，选中正确项。",
+          "framing": "完整任务/通话视口",
+          "note": "状态栏、退出X、进度、无限资源图标完整。 三个选项、绿色正确反馈、CONTINUAR、Home完整。 角色对话为英语，问题/选择/反馈为葡语。",
+          "course_direction": "Portuguese→英语",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "6300158d97fed22a744ce0237347988cc5b944e53f21fae4b73c94632b7db941",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "本节按阅读故事文本后回答理解问题的分支整理；故事本身可能伴随配音。"
+    },
+    {
+      "id": "S02",
+      "name": "故事里按释义找到英语词或词组",
+      "group": "Stories 故事",
+      "kind": "词义定位任务；含母语/英语释义变体",
+      "goal": "结合上下文，将释义对应到故事中的英语表达。",
+      "input": "已读的故事段落，母语或英语释义提示，可点击的英语句子词块。",
+      "output": "一个对应的英语词或词组。",
+      "steps": [
+        "读故事上下文与释义提示。",
+        "在新句子中点击带边框的对应词或词组。",
+        "继续。"
+      ],
+      "ui": "词块直接嵌在故事句子中；既保留位置和语境，也提供明确点击边界。英语同义提示与母语提示采用相近布局。",
+      "design": "将新词理解检查放在刚遇到它的语境中，减少在词典和正文间跳转；已有上下文帮助推断，词块选择限制产出负担。",
+      "caution": "按释义定位词与独立默写不同；两个语言方向的配图不代表一个账号同时拥有全部版本。",
+      "availability": "葡语→英语及韩语导航的英语故事官方示例。",
+      "plan": "英语 Stories 课程活动；具体内容依课程进度。",
+      "sources": [
+        "https://blog.duolingo.com/pt/nivel-certo-de-dificuldade/",
+        "https://blog.duolingo.com/ko/zone-of-proximal-development/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-9e1d9b986229.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/11/3.-Stories.PNG",
+          "source": "https://blog.duolingo.com/pt/nivel-certo-de-dificuldade/",
+          "label": "在英文句子里点击对应葡语cansada的词块tired。",
+          "framing": "完整应用题面；官方图未含系统栏",
+          "note": "退出X、进度/连续正确、能量完整；无系统状态栏。 整句词块和灰色CONTINUAR可见；无系统Home条，不能称完整设备截图。 葡语意思提示→英语词块。",
+          "course_direction": "Portuguese→英语",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 750,
+          "height": 1334,
+          "sha256": "31e0dc3fb36b205ff2f9d9937e2768cb426ed20c33657e351317a0921cb05454",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/english-2892ccef2096.jpg",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/08/Screenshot_20260721_160353_Duolingo.jpg",
+          "source": "https://blog.duolingo.com/ko/zone-of-proximal-development/",
+          "label": "英语任务Choose the option that means seat；句中选bench。",
+          "framing": "完整任务/通话视口",
+          "note": "Android状态栏、退出X、进度、无限能量齐全；故事上方滚出内容是正常滚动，不是文件裁切。 全部可选词块、韩语继续按钮和Android三键导航完整。 英语故事/任务/词块，韩语继续按钮；源文明确英语Stories。",
+          "course_direction": "Korean→英语",
+          "interface_language": "Korean_navigation; English_task_and_content",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2340,
+          "sha256": "6de904387fcc854c315971647ec0920c4b351c8dfd7c50f8399c9a14115e953f",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/english-7c8019ee58d2.jpg",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/08/Screenshot_20260721_155505_Duolingo.jpg",
+          "source": "https://blog.duolingo.com/ko/zone-of-proximal-development/",
+          "label": "英语任务以usual解释normal；在句中定位同义词。",
+          "framing": "完整任务/通话视口",
+          "note": "Android状态栏、退出X、进度、无限能量齐全；顶部故事内容自然滚出。 全部可选词块、韩语继续按钮和Android三键导航完整。 英语故事/任务/词块，韩语继续按钮；不是韩语翻译题。",
+          "course_direction": "Korean→英语",
+          "interface_language": "Korean_navigation; English_task_and_content",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2340,
+          "sha256": "f7f669844cb44c60fdbcef1600182ad6ce0c36b11030a8a83fc8e4d5d93f8640",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读故事语境及释义，在句子中点选对应英语词或词组。"
+    },
+    {
+      "id": "S03",
+      "name": "故事末尾开放写作",
+      "group": "Stories 故事",
+      "kind": "情境交互",
+      "goal": "由学习者自行选择表达长度和语法，练习生成内容。",
+      "input": "故事后的开放问题；具体英语题面待补。",
+      "output": "学习者自行组织的英语回答。",
+      "steps": [
+        "完成故事。",
+        "若该故事提供开放写作，在结尾用英语自由组织回应；本轮未获得英语题屏，具体字数/按钮/反馈不推断。"
+      ],
+      "ui": "本轮未取得英语开放写作题屏，输入框、字数要求、提交按钮与反馈布局不作视觉断言。",
+      "design": "撤去有限候选，让学习者用英语重新组织故事信息；与识别正确选项相比，增加了词汇提取、句法生成和内容组织的要求。具体长度约束未获英语题图确认。",
+      "caution": "原跨语种研究中的法语写作图已移出。不能将10–60词等非英语截图要求推广到英语。",
+      "availability": "葡语官方说明部分英语 Stories 有开放写作；韩语文章仍将该方向描述为未来扩展。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/nivel-certo-de-dificuldade/",
+        "https://blog.duolingo.com/ko/zone-of-proximal-development/"
+      ],
+      "images": [],
+      "status": "官方确认英语功能；完整题图待补",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "按阅读故事后键入英语回应归类；英语完整写作题图仍待补。"
+    },
+    {
+      "id": "R01",
+      "name": "Radio 听音选指定数量的词",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "把连续语流对应到词形。",
+      "input": "Radio 英语音频、五个英语词与选出三个的指令。",
+      "output": "三个被选中的英语词。",
+      "steps": [
+        "听音频，可按扬声器重听。",
+        "在5个英语词中选听到的3个。",
+        "查看即时选中/正误状态。"
+      ],
+      "ui": "主持人场景在上，播放按钮与五个英语词在下；题干明确选三个。两图分别为未选和三词已变绿，但不是同一题的连续状态。",
+      "design": "从连续音频检索指定词，重点是听觉分段与词形辨认。",
+      "caution": "没有独立提交按钮；达到数量后是否立即推进、误选怎样回退未实测。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-39ad2c784008.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Strengthen+your+listening+skills+with+DuoRadio!/PT+images/6_exercicio-duoradio-ouca-e-ache-as-palavras.png",
+          "source": "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/",
+          "label": "Junior电台；同类听音选3词，尚未选答。",
+          "framing": "完整任务/通话视口",
+          "note": "状态栏、退出X、进度、心完整。 五个英语词与Home完整，无独立提交键。 葡语指令、英语候选词，加英语课程正文。",
+          "course_direction": "Portuguese→英语",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 375,
+          "height": 812,
+          "sha256": "73d5ccfdf98f6dfc95cad1597c54ad9b84d6a5db86f47932a40b05a80843956d",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/english-7b0fb630c899.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Strengthen+your+listening+skills+with+DuoRadio!/PT+images/3_exercicio-licao-duoradio.png",
+          "source": "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/",
+          "label": "Lucy电台；从5个英语词选听到的3个，当前3词绿色。",
+          "framing": "完整任务/通话视口",
+          "note": "状态栏、退出X、进度、5颗心数值完整。 全部词选项与Home完整，无独立提交键。 葡语指令加英语候选词；原文明确葡语母语学英语。",
+          "course_direction": "Portuguese→英语",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 375,
+          "height": 812,
+          "sha256": "f5403efb914979eee6c0b340017dc5988778de5a2bd02339e0d9369a97ec0abb",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "R02",
+      "name": "Radio 音频与母语释义配对",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "直接从声音提取词义。",
+      "input": "四个音频按钮与四个葡语释义；英语音频方向由课程来源确认。",
+      "output": "四组英语声音与母语意义的配对。",
+      "steps": [
+        "点左列音频。",
+        "点右列对应葡语释义。",
+        "逐对完成四组。"
+      ],
+      "ui": "电台场景保持稳定，下面四行分别放声音按钮与葡语释义；底部Home边界完整。",
+      "design": "音频与释义建立直接联系，配对使短时理解能立即接受检验。",
+      "caution": "图上看不到声音内容；音频为英语的依据是官方英语课程上下文，本轮没有播放核验。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-8dec6cd5789a.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Strengthen+your+listening+skills+with+DuoRadio!/PT+images/4_exercicio-duoradio-ouca-e-anche-os-pares.png",
+          "source": "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/",
+          "label": "Lucy电台；4个音频按钮和4个葡语释义配对。",
+          "framing": "完整任务/通话视口",
+          "note": "状态栏、退出X、进度、心完整。 四行配对与Home完整，无独立提交键。 静态图仅显示葡语释义；英语音频方向由该英语课程官方文章上下文支持，本次未播放音频。",
+          "course_direction": "Portuguese→英语",
+          "interface_language": "Portuguese",
+          "full_task_view": true,
+          "width": 375,
+          "height": 812,
+          "sha256": "4d2f9b4ebe597525454506e4cee658c2ae75ac096b04e7772d7a6190f2246f7f",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "R03",
+      "name": "Radio 判断理解正误",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "检查叙事意义而非逐字转写。",
+      "input": "Radio 英语音频、一个英语陈述和真/假按钮。",
+      "output": "对陈述是否符合所听内容的判断。",
+      "steps": [
+        "听情节。",
+        "读英语陈述，选✓或×。",
+        "需要时用底部音频播放/跳转控件回顾。"
+      ],
+      "ui": "陈述实际为英语，下方是✓/×两大按钮；底部有后退5秒、暂停、前进5秒。",
+      "design": "将连续信息压缩为一个真假判断，操作轻，但猜测概率较高。",
+      "caution": "网页替代文字将该句写成葡语，已按原图纠正。二选判断有猜测空间，应结合多题表现解释结果。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-b84e85759823.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Strengthen+your+listening+skills+with+DuoRadio!/PT+images/5_exercicio-duoradio-verifique-a-compreensao.png",
+          "source": "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/",
+          "label": "Zari电台，英语陈述下方✓/×判断。",
+          "framing": "完整任务/通话视口",
+          "note": "状态栏、退出X、进度、心完整。 ✓/×、后退5秒/暂停/前进5秒与Home完整。 陈述“She doesn’t care about her date.”实际为英语；原文说明葡语→英语。网页alt误称此句葡语，已按图纠正。",
+          "course_direction": "Portuguese_from_article_context→英语",
+          "interface_language": "English_prompt_with_icon_controls",
+          "full_task_view": true,
+          "width": 375,
+          "height": 812,
+          "sha256": "d9c49d56987fceca06487af2503067e8c36c6fadddd7763ee61fcc42ab85b1ca",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "R04",
+      "name": "Radio 听音选择图片",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "建立音义与视觉指代的联系。",
+      "input": "英语 Radio 情节音频与两张对象图片。",
+      "output": "一张符合所听内容的图片。",
+      "steps": [
+        "听电台上下文。",
+        "从两张图片选择相符的一张。"
+      ],
+      "ui": "主持人、来电者与录音设备建立节目语境；底部播放波形和两张图卡承担作答，没有英语拼写输入负担。",
+      "design": "用图像作答减少拼写负担，让听到的意义映射到场景对象。",
+      "caution": "音频英语方向由课程文章确定，静态图不能验证具体音频；选图不等于普通词汇图片单选已补齐。",
+      "availability": "已确认英语课程示例；各母语方向和客户端的实际覆盖未实机遍历。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/root-pt-intro-9.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/PT+images/Image+11.png",
+          "source": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+          "label": "完整英语课程Radio听音选图",
+          "framing": "完整任务视口",
+          "note": "完整英语课程Radio听音选图，葡语题干，糖/肉图选，无独立检查，底部Home可见。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "f5754c84caea50937f3e88e0e1b2793aeaf77abab2e8eac682f7fe0e321744a0",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "A01",
+      "name": "Adventures 场景探索/点物/读标牌",
+      "group": "Adventures 场景任务",
+      "kind": "场景探索交互，非单独语言判分题",
+      "goal": "借环境线索推断意义，形成任务目的。",
+      "input": "场景目标、地图、角色及可交互对象。",
+      "output": "探索与触发情境的操作；这些动作本身不等同于英语能力判分。",
+      "steps": [
+        "观察场景和目标。",
+        "移动角色并点人物/物体，读取出现的信息。",
+        "用环境线索完成情境动作。"
+      ],
+      "ui": "官方三屏依次展示英语入口、完整城市地图和英语对话；退出入口在场景左上，人物与物件保留空间关系。",
+      "design": "语言信息分布在场景里，探索动作给阅读和理解一个需要完成的目的。",
+      "caution": "截图证明场景与控件布置；具体移动手势、碰撞和所有可交互物体未实测。",
+      "availability": "2024公告明确西语→英语、iOS/Android；未证实中文英语方向当前覆盖。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/es/aventuras-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-a59a1693ee21.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/09/ES_Adventures_UIscreens.png",
+          "source": "https://blog.duolingo.com/es/aventuras-duolingo/",
+          "label": "左：美国旗英语路径；中：Óscar城市场景；右：Zari英语提问与两个英语回应。",
+          "framing": "官方多屏排版；各手机视口完整",
+          "note": "左有课程旗/资源栏；中右有退出X；手机顶部边界齐全。 路径底部导航/Home；场景Home；对话两选项和Home均可见，无独立Check。 西语界面入口美国旗，右屏问答为英语；原文明确西语母语学英语。",
+          "course_direction": "Spanish→英语",
+          "interface_language": "Spanish",
+          "full_task_view": true,
+          "width": 1400,
+          "height": 800,
+          "sha256": "cb00ae03805e0e727974a9458aa91e0a3905c6c09749acfac1e9d1859bd3ee41",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "supporting-interaction",
+      "modality_label": "场景辅助交互",
+      "modality_note": "场景探索本身不是独立语言判分题。"
+    },
+    {
+      "id": "A02",
+      "name": "Adventures 英语回应选择",
+      "group": "Adventures 场景任务",
+      "kind": "情境交互",
+      "goal": "在交际目标中选择有用表达；错误可由人物反应进行引导。",
+      "input": "英语角色问题、任务情境与两个英语候选回应。",
+      "output": "一句符合交际目的的英语回应选项。",
+      "steps": [
+        "进入角色对话。",
+        "阅读画面中的英语问题与两个候选回应。",
+        "点击符合任务与语境的一句英语回应。"
+      ],
+      "ui": "英语角色提问叠在场景上，两条英语回应在底部；本图没有传统检查按钮。",
+      "design": "回应是否合适要联系人物和任务目标；界面用场景反馈维持行动的连续性。",
+      "caution": "复用同一官方多屏图，新增的是任务目标分析，不把同图重复计成新的独立截图。",
+      "availability": "西语→英语场景示例；点击回应后的正确/错误分支待实测。",
+      "plan": "基础英语课程任务；具体平台与方向按第三节说明，截图订阅图标不等于题型独占。",
+      "sources": [
+        "https://blog.duolingo.com/es/aventuras-duolingo/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-a59a1693ee21.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/09/ES_Adventures_UIscreens.png",
+          "source": "https://blog.duolingo.com/es/aventuras-duolingo/",
+          "label": "左：美国旗英语路径；中：Óscar城市场景；右：Zari英语提问与两个英语回应。",
+          "framing": "官方多屏排版；各手机视口完整",
+          "note": "左有课程旗/资源栏；中右有退出X；手机顶部边界齐全。 路径底部导航/Home；场景Home；对话两选项和Home均可见，无独立Check。 西语界面入口美国旗，右屏问答为英语；原文明确西语母语学英语。",
+          "course_direction": "Spanish→英语",
+          "interface_language": "Spanish",
+          "full_task_view": true,
+          "width": 1400,
+          "height": 800,
+          "sha256": "cb00ae03805e0e727974a9458aa91e0a3905c6c09749acfac1e9d1859bd3ee41",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "图中问题与两个回应均有英语文字，可通过阅读和点选完成；本轮未实测静音流程。"
+    },
+    {
+      "id": "M01",
+      "name": "Roleplay / Bate-Papo 英语多轮情境聊天",
+      "group": "Max 英语对话",
+      "kind": "开放对话体验",
+      "goal": "把课程语言用于有目的的开放交流。",
+      "input": "沟通情境、任务目标与角色发来的多轮消息；依据官方文字说明。",
+      "output": "学习者自行组织的英语文字回复及任务后的表达反馈。",
+      "steps": [
+        "从已开放此功能的 Max 英语课程进入情境任务。",
+        "按任务目标用英语回复角色，进行多轮交流。",
+        "完成后阅读关于表达的反馈；英语版具体输入控件与反馈版式待补图。"
+      ],
+      "ui": "官方说明采用多轮聊天与完成后反馈，但本轮没有可用的英语完整聊天原图。目录入口不计为题图。",
+      "design": "情境目标为开放回复设定边界；聊天与事后复盘承担不同职责。",
+      "caution": "已排除复用法语聊天截图。现有证据足以说明功能和大致流程，不足以逐控件评价英语版聊天画面。",
+      "availability": "葡语/日语 Max 官方页2026-01更新支持英语；iOS/Android说明不代表全账号同时上线。",
+      "plan": "Max；已确认葡语→英语与日语→英语。",
+      "sources": [
+        "https://blog.duolingo.com/pt/duolingo-max-gpt-4/",
+        "https://blog.duolingo.com/ja/max-subscription/",
+        "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/"
+      ],
+      "images": [],
+      "status": "官方确认英语功能；完整聊天题图待补",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "依据官方文字聊天说明归类，输入为英语文字回复；完整英语聊天题图仍待补。"
+    },
+    {
+      "id": "M02",
+      "name": "Video Call with Lily 英语自由对话",
+      "group": "Max 英语对话",
+      "kind": "开放对话体验",
+      "goal": "降低实时口语练习的门槛，练习即时组织语言。",
+      "input": "Lily 在通话中的英语话语与后续提问。",
+      "output": "学习者即时组织的英语口头回应。",
+      "steps": [
+        "从英语课程的视频节点拨打Lily。",
+        "听Lily并用英语自由回应，围绕提示或自选话题继续。",
+        "按挂断结束；当前Max公告说明可查看转录。"
+      ],
+      "ui": "官方旧三屏提供英语入口、呼叫、通话；较新屏以Lily和背景场景为中心，底部红色挂断突出。",
+      "design": "通话隐喻把重心转向轮流听说；缺少固定答案，要求在线组织内容。",
+      "caution": "通话画面本身无英语台词，目标英语由入口和官方上下文关联；未声称本轮进行了口语通话、转录或结果验收。",
+      "availability": "葡语→英语入口与 Max 文档；日语→英语也有官方可用性说明。",
+      "plan": "Max。",
+      "sources": [
+        "https://blog.duolingo.com/pt/videochamada/",
+        "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/",
+        "https://blog.duolingo.com/pt/duolingo-max-gpt-4/",
+        "https://blog.duolingo.com/ja/max-subscription/",
+        "https://blog.duolingo.com/video-call-research-report/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-816d9a18e787.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/09/PT_Duolingo-Video-Call-with-Lily_Hero--1-.png",
+          "source": "https://blog.duolingo.com/pt/videochamada/",
+          "label": "英语课程入口→呼叫Lily→中性Lily通话画面。",
+          "framing": "官方多屏排版；各手机视口完整",
+          "note": "左美国旗与葡语Seção 5 unidade 1；三屏完整机框顶部。 左拨打/跳过及导航，右红挂断，三屏Home均可见。 英语目标由左屏美国旗和文章/alt的English course说明关联；右侧通话本身无英语台词。",
+          "course_direction": "Portuguese→英语",
+          "interface_language": "Portuguese_in_first_two_panels; icon_only_in_call",
+          "full_task_view": true,
+          "width": 1400,
+          "height": 800,
+          "sha256": "d9dab23d36d31119ae25fbf324a989d65ccf3f44e816a61d69562e99ea72dbd6",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-ways-5.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/03/video.png",
+          "source": "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/",
+          "label": "完整Lily视频通话页面含场景、挂断、Home；画面语言中性",
+          "framing": "完整通话视口；英语方向由官方课程上下文确定",
+          "note": "完整Lily视频通话页面含场景、挂断、Home；画面语言中性，英语方向来自葡语官方文章说明。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": true,
+          "width": 1080,
+          "height": 2300,
+          "sha256": "3bcaf2d12af1bef4d8281815cfa225eb3feb81e97c2178766cbdf131a1fa386a",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    },
+    {
+      "id": "M03",
+      "name": "Video Call with Falstaff 英语引导对话",
+      "group": "Max 英语对话",
+      "kind": "开放对话体验",
+      "goal": "以提示、翻译、母语实时反馈支持不够自信的学习者。",
+      "input": "Falstaff 面向初学者的英语问题、引导与可选字幕。",
+      "output": "在引导下组织的英语口头回应。",
+      "steps": [
+        "在可用Max课程进入Falstaff引导通话。",
+        "听按水平设置的问题并口头回应。",
+        "需要时使用字幕及提示；按挂断结束。"
+      ],
+      "ui": "Falstaff正面对话，英语字幕位于下方，红色挂断与蓝色CC控件分开；原图保留完整通话边界。",
+      "design": "给初学者更明确的提示、翻译与反馈，使开放口语要求保持可完成。",
+      "caution": "截图无母语文字，不因来源文章为葡语就把界面写成葡语。普通Falstaff跟读归E15，与通话分开。",
+      "availability": "2026葡语官方公告包含英语目标、明确iOS；全面扩大到更多水平是目标，未当作既成事实。",
+      "plan": "Max 初学者引导通话。",
+      "sources": [
+        "https://blog.duolingo.com/pt/videochamada-com-falstaff-conversacao/"
+      ],
+      "images": [
+        {
+          "file": "assets/english-7ebc190c21be.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/FOR-LOC_guided-call-with-falstaff_english-lesson.png",
+          "source": "https://blog.duolingo.com/pt/videochamada-com-falstaff-conversacao/",
+          "label": "Falstaff正面对话，英文字幕What would you like?。",
+          "framing": "完整任务/通话视口",
+          "note": "完整时间/信号/WiFi/电池状态栏。 红色挂断、蓝色CC、屏幕下边缘完整；未显示系统Home横条。 英文字幕直接证明目标英语；截图没有母语文字，不能因文章葡语就称葡语UI。",
+          "course_direction": "not_visible→英语",
+          "interface_language": "icon_only_except_English_caption",
+          "full_task_view": true,
+          "width": 750,
+          "height": 1624,
+          "sha256": "8044d5ae162dcc2de43f4b531288c4138a3ae86a047cc3ef04932dd663c823f5",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "status": "有完整英语题图",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。"
+    }
+  ],
+  "modes": [
+    {
+      "id": "P01",
+      "name": "英语练习目录、词汇表与错题集",
+      "kind": "练习容器",
+      "goal": "按薄弱技能和历史错误组织复习；复用已列出的语言任务。",
+      "steps": [
+        "进入 Practice，选择听、说、词汇或错题。",
+        "在对应合集点击开始；词汇表可点扬声器听词。",
+        "完成选出的练习。"
+      ],
+      "ui": "技能入口采用图标+名称的大块条目；词汇与错题列表展示待复习内容；Max对话另有标识。",
+      "note": "目录和列表都是完整视口，但不算答题截图；2026英语课程基础练习已宣布免费。",
+      "images": [
+        {
+          "file": "assets/root-pt-practice-1.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/PT-1.png",
+          "source": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+          "label": "完整葡语练习目录视口",
+          "framing": "完整练习目录；不是题页",
+          "note": "完整葡语练习目录视口，视频/Bate-Papo列于MAX区域；非题页。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 1080,
+          "height": 2292,
+          "sha256": "cf6bc91df0d75a50d63962d8116b08aa9d819d331ecdc56c7350bef211f047d8",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-practice-4.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/PT-4.png",
+          "source": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+          "label": "完整英语词汇列表入口及音频词典",
+          "framing": "完整英语词汇列表视口；不是题页",
+          "note": "完整英语词汇列表入口及音频词典，明确em inglês；非题页。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 1080,
+          "height": 2292,
+          "sha256": "c5d7374f82d76054f0d55246fcb399c3b85fafc4bafdc95fc5d43763b43e9a85",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-practice-2.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/PT-2.png",
+          "source": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+          "label": "完整英语错题入口及列表视口",
+          "framing": "完整错题列表视口；不是题页",
+          "note": "完整英语错题入口及列表视口，列表可滚动；非题页。底部列表含Escreva o que escutar，提供英语键入听写存在的间接证据。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 1080,
+          "height": 2292,
+          "sha256": "6a85f9e417a7e9fd32a1cf3df05159ff4940b03a157936ac31584ca8a67cee05",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "sources": [
+        "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+        "https://blog.duolingo.com/guide-to-duolingo-practice-hub/"
+      ]
+    },
+    {
+      "id": "P02",
+      "name": "Sounds：英语音素目录",
+      "kind": "参考与练习入口",
+      "goal": "用音素格、例词与声音帮助用户定位发音差别，再进入E17–E19的任务。",
+      "steps": [
+        "选择元音或辅音区。",
+        "点格子听声音。",
+        "点开始进入成对声音练习。"
+      ],
+      "ui": "目录中音素符号、例词和播放入口相邻；辅音截图为滚动状态。",
+      "note": "目录格不是独立题型；本轮未找到学习App逐音素录音评分的完整证据。",
+      "images": [
+        {
+          "file": "assets/2da0aef654-IMG_3251.PNG",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3251.PNG",
+          "source": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+          "label": "英语元音目录",
+          "framing": "完整发音目录视口；不是题页",
+          "note": "三列音素、例词、进度；目录入口，不算一道题。",
+          "course_direction": "英语专项；母语方向按来源说明",
+          "interface_language": "en",
+          "full_task_view": false,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "b473a21426fbb97c8c81671de77bfa1f8e47228314a0fb2d15d9b9166876012f",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/88645bfa40-IMG_3252.PNG",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3252.PNG",
+          "source": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+          "label": "英语辅音目录（已滚动）",
+          "framing": "完整目录滚动视口；不是题页",
+          "note": "滚动状态不是图片裁切。",
+          "course_direction": "英语专项；母语方向按来源说明",
+          "interface_language": "en",
+          "full_task_view": false,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "118df1f6d2b0abea51dbde4e73ede553ea9a9f0aabba2d707998269d9c35f09e",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "sources": [
+        "https://blog.duolingo.com/duolingo-english-sounds-tab/"
+      ]
+    },
+    {
+      "id": "P03",
+      "name": "Stories：逐句读听与推进",
+      "kind": "叙事容器",
+      "goal": "在人物关系和连续事件中组织英语输入，穿插S系列任务。",
+      "steps": [
+        "阅读当前句子或角色对话。",
+        "需要时点击该句扬声器重听。",
+        "点继续进入下一段或理解问题。"
+      ],
+      "ui": "角色头像区分说话者；每句有声音入口；内容可滚动，底部继续保持明确。",
+      "note": "这是完整故事阅读视口，不是整个故事的长截图，也不代表答题状态。",
+      "images": [
+        {
+          "file": "assets/root-pt-intro-8.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/PT+images/Image+10.png",
+          "source": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+          "label": "完整英语Stories朗读推进页A Date",
+          "framing": "完整英语故事阅读视口",
+          "note": "完整英语Stories朗读推进页A Date，音频气泡和底部继续Home可见；非理解测验。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "1659c5f692b98ea185e9de62aa003926b0f44780bcc6343e9f0dc743dd531499",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+        "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/"
+      ]
+    },
+    {
+      "id": "P04",
+      "name": "正确、错误与英语答案解释",
+      "kind": "反馈层",
+      "goal": "让学习者在作答后看见结果、修正和原因。",
+      "steps": [
+        "完成一道英语翻译题并提交。",
+        "在正确或错误反馈中点击解释。",
+        "查看原答案、正确表达与母语说明，再继续课程。"
+      ],
+      "ui": "正确反馈使用绿色，错误使用红色，并都有图标/文字；解释页把当前语言片段用蓝色突出，底部继续课程。",
+      "note": "本轮有完整英语课程例图。葡语→英语免费已确认；并未推定所有母语方向均免费开放。",
+      "images": [
+        {
+          "file": "assets/root-pt-explain-1.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_Reverse-Tap.png",
+          "source": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+          "label": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "framing": "完整正确反馈视口",
+          "note": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 379,
+          "height": 816,
+          "sha256": "afe65b39571ec3040cda1777ec62a345b9edf98c8d1b747c6bf9249f493cc94c",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-explain-2.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_Reverse-Tap-EMA.png",
+          "source": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+          "label": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "framing": "完整正确答案解释页",
+          "note": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 379,
+          "height": 816,
+          "sha256": "6c46ac3056e13698b95d7bff533ceefca1f63cff70f732c3e242654f9556df7b",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-explain-3.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_Reverse-Translate.png",
+          "source": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+          "label": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "framing": "完整错误反馈视口",
+          "note": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 379,
+          "height": 816,
+          "sha256": "e635d43009ad8de6ae7b92779c42c2a979c68d7cd07f56be4794a189826f3d76",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        },
+        {
+          "file": "assets/root-pt-explain-4.png",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/PT_Reverse-Translate-EMA.png",
+          "source": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+          "label": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "framing": "完整错误原因解释页",
+          "note": "完整官方手机界面含状态栏、退出/返回、全部该状态主要控件和底部Home；葡语UI学习英语。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 379,
+          "height": 816,
+          "sha256": "e3423164e581d54096fa13b4c180a82d880098cef2ec04687dad90cf94eb60f4",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "sources": [
+        "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/"
+      ]
+    },
+    {
+      "id": "P05",
+      "name": "英语路径与课程编排",
+      "kind": "课程容器",
+      "goal": "把知识点练习、故事、电台、听说和对话按课程目标组织。",
+      "steps": [
+        "查看当前单元目标。",
+        "点路径上可用节点。",
+        "进入该节点承载的练习或情境。"
+      ],
+      "ui": "旗帜标识目标英语；单元目标在顶部，节点用耳机、书本、话筒等图标区分活动。",
+      "note": "所示为历史公开英语路径。节点数量、分数和XP不能当作当前每个课程固定配置。",
+      "images": [
+        {
+          "file": "assets/root-pt-intro-7.png",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/PT+images/Image+09.png",
+          "source": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+          "label": "完整英语路径入口页",
+          "framing": "完整英语路径入口；不是题页",
+          "note": "完整英语路径入口页，US旗，葡语界面，非题页。",
+          "course_direction": "葡语→英语",
+          "interface_language": "葡语",
+          "full_task_view": false,
+          "width": 1170,
+          "height": 2532,
+          "sha256": "d048e34afc08e2b2d0c25fbb93af3d38769f3239f5ffef30be9d6610fdfbe5eb",
+          "capture_date": "未公布；公开素材年代不等于拍摄或本账号上线日期",
+          "provenance": "官方公开原图"
+        }
+      ],
+      "sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ]
+    }
+  ],
+  "reading_sections": [
+    {
+      "id": "non-audio",
+      "title": "4.1 不含口语和听力的题目",
+      "record_ids": [
+        "E01",
+        "E02",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "S01",
+        "S02",
+        "S03",
+        "A02",
+        "M01"
+      ]
+    },
+    {
+      "id": "listening-speaking",
+      "title": "4.2 听力与口语相关题目",
+      "record_ids": [
+        "E03",
+        "E08",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E17",
+        "E18",
+        "E19",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "M02",
+        "M03"
+      ]
+    },
+    {
+      "id": "supporting-interaction",
+      "title": "4.3 场景探索：辅助交互",
+      "record_ids": [
+        "A01"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "falstaff",
+      "url": "https://blog.duolingo.com/beginner-video-call-with-falstaff/",
+      "title": "Our new Video Call with Falstaff is here to help you speak with confidence",
+      "published_at": "2026-01-14T13:00:03.000Z",
+      "modified_at": "2026-02-02T12:57:04.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "falstaff_screen"
+      ]
+    },
+    {
+      "id": "reading_de",
+      "url": "https://blog.duolingo.com/de/so-verbessert-duolingo-das-leseverstehen/",
+      "title": "Wie Duolingo dir Lesen in einer neuen Sprache beibringt",
+      "published_at": "2025-07-08T12:00:51.000Z",
+      "modified_at": "2025-08-01T08:22:25.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ES01",
+      "title": "Where to Find English Pronunciation Lessons on Duolingo",
+      "url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "published": "2024-11-20",
+      "modified_metadata": "2026-03-25",
+      "retrieved": "2026-09-27",
+      "source_type": "official_blog"
+    },
+    {
+      "id": "adventures_es",
+      "url": "https://blog.duolingo.com/es/aventuras-duolingo/",
+      "title": "Conoce Aventuras, una nueva experiencia para jugar y aprender Duolingo",
+      "published_at": "2024-09-26T12:00:46.000Z",
+      "modified_at": "2024-09-26T12:01:08.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "practice_en",
+      "url": "https://blog.duolingo.com/guide-to-duolingo-practice-hub/",
+      "title": "Practice any skill, any time in the Practice tab",
+      "published_at": "2026-02-18T13:00:00.000Z",
+      "modified_at": "2026-04-17T08:38:04.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ES04",
+      "title": "Duolingo’s New English Content Teaches Without Translations",
+      "url": "https://blog.duolingo.com/how-duolingo-teaches-english/",
+      "published": "2024-08-07",
+      "modified_metadata": "2025-03-17",
+      "retrieved": "2026-09-27",
+      "source_type": "official_blog"
+    },
+    {
+      "url": "https://blog.duolingo.com/intermediate-mini-units/",
+      "title": "intermediate-mini-units"
+    },
+    {
+      "id": "max_ja",
+      "url": "https://blog.duolingo.com/ja/max-subscription/",
+      "title": "OpenAI社のGPT-4を活用した「Duolingo Max」の全容を解説！",
+      "published_at": "2025-05-01T12:00:36.000Z",
+      "modified_at": "2026-01-14T17:32:24.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ES02",
+      "title": "듀오링고에서 영어 소리를 발음하는 법을 배워보세요!",
+      "url": "https://blog.duolingo.com/ko/practice-english-sounds/",
+      "published": "2025-05-13",
+      "modified_metadata": "2025-12-12",
+      "retrieved": "2026-09-27",
+      "source_type": "official_blog"
+    },
+    {
+      "id": "zpd_ko",
+      "url": "https://blog.duolingo.com/ko/zone-of-proximal-development/",
+      "title": "듀오링고에 물어보세요: 적절한 난이도란 무엇인가요?",
+      "published_at": "2026-09-08T12:00:00.000Z",
+      "modified_at": "2026-09-18T13:41:17.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "reading_pt",
+      "url": "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/",
+      "title": "Como o Duolingo ensina a ler em outros idiomas",
+      "published_at": "2025-06-12T12:00:55.000Z",
+      "modified_at": "2025-08-01T08:05:46.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "max_pt",
+      "url": "https://blog.duolingo.com/pt/duolingo-max-gpt-4/",
+      "title": "Duolingo Max: conheça o aprendizado com o GPT-4",
+      "published_at": "2023-03-14T18:16:43.000Z",
+      "modified_at": "2026-01-14T17:19:45.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "explain_pt",
+      "url": "https://blog.duolingo.com/pt/explique-minha-resposta-agora-e-gratis/",
+      "title": "Agora o Explique Minha Resposta é grátis para todo mundo!",
+      "published_at": "2026-01-01T17:30:11.000Z",
+      "modified_at": "2026-01-15T14:16:13.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "flashcards_pt",
+      "url": "https://blog.duolingo.com/pt/flashcards-do-duolingo/",
+      "title": "Treine a memória com os novos flashcards do Duolingo",
+      "published_at": "2026-02-03T13:00:32.000Z",
+      "modified_at": "2026-02-03T13:00:33.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ways_pt",
+      "url": "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/",
+      "title": "Qual é o melhor jeito de aprender com o Duolingo?",
+      "published_at": "2026-04-02T12:00:51.000Z",
+      "modified_at": "2026-04-02T15:00:19.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "radio_pt",
+      "url": "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/",
+      "title": "Listening: melhore a escuta com a DuoRádio!",
+      "published_at": "2025-04-22T12:00:17.000Z",
+      "modified_at": "2025-07-01T07:18:01.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "zpd_pt",
+      "url": "https://blog.duolingo.com/pt/nivel-certo-de-dificuldade/",
+      "title": "Querido Duolingo: Qual é o nível certo de dificuldade?",
+      "published_at": "2026-03-24T12:00:30.000Z",
+      "modified_at": "2026-08-13T07:18:42.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "intro_pt",
+      "url": "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/",
+      "title": "Primeiros passos: Como aprender um idioma no Duolingo",
+      "published_at": "2025-03-03T15:00:00.000Z",
+      "modified_at": "2025-05-01T12:58:49.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ECS11",
+      "url": "https://blog.duolingo.com/pt/querido-duolingo-o-duolingo-ensina-gramatica/",
+      "title": "Querido Duolingo: o Duolingo ensina gramática?",
+      "published_at": "2023-04-19T20:27:00.000Z",
+      "modified_at": "2026-05-06T08:49:11.000Z",
+      "publisher": "Duolingo",
+      "type": "official_blog",
+      "accessed_at": "2026-09-27",
+      "date_method": "官方 HTML datePublished/dateModified；修改日期不是功能推出日。",
+      "target_language_evidence": "图片明确是葡语→英语图境填空；这张题页不能证明词尾或范式表等其他语法交互。",
+      "concise_finding": "图片明确是葡语→英语图境填空；这张题页不能证明词尾或范式表等其他语法交互。"
+    },
+    {
+      "id": "practice_pt",
+      "url": "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/",
+      "title": "Pratique qualquer habilidade a qualquer hora na aba de Prática",
+      "published_at": "2026-04-29T12:00:00.000Z",
+      "modified_at": "2026-04-29T14:48:06.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "falstaff_pt",
+      "url": "https://blog.duolingo.com/pt/videochamada-com-falstaff-conversacao/",
+      "title": "A nova Videochamada com o Falstaff vai ajudar você a falar com confiança",
+      "published_at": "2026-03-05T13:00:16.000Z",
+      "modified_at": "2026-03-05T13:00:20.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "lily_pt",
+      "url": "https://blog.duolingo.com/pt/videochamada/",
+      "title": "Videochamada: tenha conversas realistas com a Lily",
+      "published_at": "2024-09-24T17:44:02.000Z",
+      "modified_at": "2025-02-03T14:26:12.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ES08",
+      "title": "Shape language: Duolingo’s art style",
+      "url": "https://blog.duolingo.com/shape-language-duolingos-art-style/",
+      "published": "2020-07-02",
+      "modified_metadata": "2026-05-19",
+      "retrieved": "2026-09-27",
+      "source_type": "official_blog"
+    },
+    {
+      "id": "lily_research",
+      "url": "https://blog.duolingo.com/video-call-research-report/",
+      "title": "Research report: Our Video Call feature boosts learners’ speaking skills",
+      "published_at": "2026-03-30T12:00:12.000Z",
+      "modified_at": "2026-07-30T08:32:06.000Z",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "ECS02",
+      "url": "https://blog.duolingo.com/why-learn-english/",
+      "title": "Why Do People Around the World Learn English?",
+      "published_at": "2023-01-02T13:00:00.000Z",
+      "modified_at": "2026-05-18T14:32:04.000Z",
+      "target_language_evidence": "正文为英语课程介绍；图内分别使用西语、葡语界面，而待学内容均为英语。",
+      "concise_finding": "官方英语课程文章配有阅读理解、填空和对话选择三张完整题页，分别来自西语和葡语界面。",
+      "publisher": "Duolingo",
+      "type": "official_blog",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML datePublished/dateModified；修改日期不等同于功能推出日期，媒体目录日期也不等同截图日期。"
+    }
+  ],
+  "counts": {
+    "catalogue_entries": 31,
+    "entries_with_full_English_task_view": 29,
+    "entries_with_only_partial_or_uncertain_view": 0,
+    "entries_without_English_task_image": 2,
+    "modes": 5,
+    "unique_image_files": 48,
+    "official_image_files": 44,
+    "historical_user_images": 4,
+    "source_pages": 25,
+    "not_official_total_exercise_types": true,
+    "entries_without_required_listening_or_speaking": 15,
+    "reading_writing_entries_with_full_English_task_view": 13,
+    "listening_speaking_entries": 15,
+    "supporting_interaction_entries": 1
+  },
+  "live_account_walkthrough": false,
+  "exhaustive_current_type_coverage": false,
+  "method": "Official sources, original published images and four existing user reference images; visual verification; no generated UI"
+}

@@ -5,10 +5,10 @@ const { finishExamFrom } = require('../support/unit7-8-exam');
 const fs = require('node:fs/promises');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
-test('十题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录', async ({ page }) => {
+test('十一题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录', async ({ page }) => {
   await page.goto('/unit7-8/#learn/exam');
   const room = page.locator('.stage-exam');
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '11');
   for (let i = 0; i < EXAM.length; i++) {
     await expect(room.locator('.practice-content h3')).toContainText(EXAM[i].prompt);
     const check = room.getByRole('button', { name: '检查答案', exact: true });
@@ -29,9 +29,9 @@ test('十题综合挑战逐项作答，冠词与缩写确实需要选择，错�
     await selectAnswer(room, EXAM[i].answer); await check.click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 10 ? '查看本次记录' : '下一题', exact: true }).click();
   }
-  await expect(room).toContainText('首次独立答对 8 / 10');
+  await expect(room).toContainText('首次独立答对 9 / 11');
   await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
   await room.getByText('下次再练', { exact: true }).click();
   await expect(room.locator('.unit-results li')).toHaveText(['从英文介绍提取国籍和职业', '按资料作第一人称否定回答']);
@@ -52,31 +52,32 @@ async function useThreeQuestionVersion(page) {
   return () => { old = false; };
 }
 
-test('三题旧挑战通关升级只保留真实三题，新增七题未答，补完才恢复证书', async ({ page }) => {
+test('三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书', async ({ page }) => {
   test.setTimeout(60000);
   const upgrade = await useThreeQuestionVersion(page);
   await require('../fixtures/unit7-8-exam3-before/flow').completeUnit78(page);
-  await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('十题小记者');
+  await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('十一题小记者');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   const date = await page.locator('#certificateDate').innerText(); await page.keyboard.press('Escape');
   upgrade(); await page.reload();
+  for(const id of ['listen','reply'])await require('../support/units1-30-tasks').activity(page,'7-8',id);await page.goto('/unit7-8/#learn/certificate');
   await expect(page.locator('#starCount')).toHaveText('12');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
-  await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('十题小记者');
+  await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('十一题小记者');
   await page.getByRole('button', { name: '继续：采访小挑战', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/exam$/);
   const room = page.locator('.stage-exam');
-  await expect(room).toContainText('第 4 / 10 题');
+  await expect(room).toContainText('第 4 / 11 题');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await finishExamFrom(page, 3);
-  await expect(room).toContainText('首次独立答对 10 / 10');
+  await expect(room).toContainText('首次独立答对 11 / 11');
   await room.getByRole('button', { name: '下一站：我的单元证书', exact: true }).click();
   await expect(page.locator('#starCount')).toHaveText('15');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   await expect(page.locator('#certificateDate')).toHaveText(date); await page.keyboard.press('Escape');
   await page.goto('/unit7-8/#learn/exam'); await room.getByRole('button', { name: '再练一轮', exact: true }).click();
-  await page.reload(); await expect(room).toContainText('第 1 / 10 题');
+  await page.reload(); await expect(room).toContainText('第 1 / 11 题');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
 });
 
@@ -100,7 +101,7 @@ test('旧未提交选择升级仍是草稿，新增拼句刷新与暂停不代�
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
 });
 
-for (const width of [320, 390, 768, 1280]) test(`${width} 十题长题干、词块和末题操作完整，灯泡与检查区稳定`, async ({ page }) => {
+for (const width of [320, 390, 768, 1280]) test(`${width} 十一题长题干、词块和末题操作完整，灯泡与检查区稳定`, async ({ page }) => {
   test.setTimeout(60000);
   await page.setViewportSize({ width, height: 844 });
   await page.goto('/lesson/unit7-8/#learn/exam'); await page.evaluate(() => document.fonts.ready);
@@ -127,14 +128,14 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十题长题干、词�
     }
     if ([3, 5, 6, 8, 9].includes(i)) await room.screenshot({ path: `output/playwright/unit7-8-exam/q${i + 1}-${width}.png` });
     await room.getByRole('button', { name: '检查答案', exact: true }).click(); expect(await position()).toBeCloseTo(before, 0);
-    if (i === 9) {
-      await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
-      await page.reload(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
+    if (i === 10) {
+      await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '11');
+      await page.reload(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '11');
       await expect(room.getByRole('button', { name: '查看本次记录', exact: true })).toBeVisible();
     }
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 10 ? '查看本次记录' : '下一题', exact: true }).click();
   }
-  await expect(room).toContainText('首次独立答对 9 / 10');
+  await expect(room).toContainText('首次独立答对 10 / 11');
   const finish = room.getByRole('group', { name: '完成后的操作', exact: true });
   await expect(finish.getByRole('button')).toHaveCount(2);
   for (const button of await finish.getByRole('button').all()) {
@@ -143,7 +144,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十题长题干、词�
   await room.screenshot({ path: `output/playwright/unit7-8-exam/finish-${width}.png` });
 });
 
-test('整课包离线刷新仍是十题，当前新题未提交不计分', async ({ page, context }) => {
+test('整课包离线刷新仍是十一题，当前新题未提交不计分', async ({ page, context }) => {
   await page.goto('/lesson/unit7-8/#learn/exam');
   await expect(page.locator('#courseLoader')).toHaveCount(0); const room = page.locator('.stage-exam');
   for (let i = 0; i < 3; i++) {
@@ -152,7 +153,7 @@ test('整课包离线刷新仍是十题，当前新题未提交不计分', async
   }
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'What nationality', exact: true }).click();
   await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
-  await expect(room).toContainText('第 4 / 10 题'); await expect(room.getByRole('button', { name: '撤回 What nationality', exact: true })).toBeVisible();
+  await expect(room).toContainText('第 4 / 11 题'); await expect(room.getByRole('button', { name: '撤回 What nationality', exact: true })).toBeVisible();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });

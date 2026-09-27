@@ -1,4 +1,5 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const {expect}=require('@playwright/test');
 // Independent manuscript: textbook pp.26–29 and the approved v2.0 coverage table.
 const EXAM=[
@@ -13,8 +14,11 @@ const EXAM=[
  {answer:"What colour's Sophie's coat?",wrong:"What colour's your coat?"},
  {answer:'That is a lovely hat!',wrong:"That's a nice dress."}
 ];
+const revisedPrompts={"3": "裙子是新的，帽子也是新的。补好承接。"};
+EXAM.splice(0,EXAM.length,...taskCases.answers('13-14','exam').map((q,i)=>({...EXAM[i],...q,prompt:revisedPrompts[i]||EXAM[i]?.prompt})));
 async function selectAnswer(room,answer){
- if(Array.isArray(answer))for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
+ if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+  else if(Array.isArray(answer))for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
  else await room.getByRole('button',{name:answer,exact:true}).click();
 }
 async function finishExamFrom(page,start=0){

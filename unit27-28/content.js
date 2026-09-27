@@ -71,6 +71,19 @@
    q('exam-boundary','理解否定存在句的范围',"There aren't any cups on the table.\n只根据这句话，能确定什么？",[['桌上没有杯子。',''],['房间里没有杯子。','只说桌上没有，不能扩大到整个房间。'],['桌上什么也没有。','只排除杯子，不排除别的物品。']],'桌上没有杯子。','否定的对象是杯子，范围是桌上。','分别找出被否定的物品和句子说明的位置。','Lesson28 Written B的否定句改编','从前单元肯定边界推进到否定的对象与范围')
   ]
  };
+ const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-room","从完整客厅找准三个承托物","根据课文：magazines、newspapers、books\n依次放在哪里？",[["television · table · stereo", ""], ["table · stereo · television", "三个地点与原文不符。"], ["television · stereo · table", "报纸与书的位置颠倒。"]],"television · table · stereo","本题核对：从完整客厅找准三个承托物。","把每一组物品分别与它所在的表面连起来。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查从完整客厅找准三个承托物",{}),
+  q("final-v2-plural","完整处理单数变复数","There is a knife near that tin.\n改成多把刀，哪句正确？",[["There are some knives near that tin.", ""], ["There is some knives near that tin.", "knives 复数用 are。"], ["There are some knifes near that tin.", "knife 的复数是 knives。"]],"There are some knives near that tin.","本题核对：完整处理单数变复数。","一起检查有、限定词和名词词形。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查完整处理单数变复数",{}),
+  q("final-v2-any","询问有无与否定回答","Are there ___ cups on the stereo?\nNo, there aren’t ___ cups on the stereo.",[["any · any", ""], ["some · any", "这里按本课普通有无问句用 any。"], ["any · some", "本课否定句用 any。"]],"any · any","本题核对：询问有无与否定回答。","本题是普通有无提问和否定回答。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查询问有无与否定回答",{}),
+  q("final-v2-they","复数代词与嵌套位置","There are some knives on the table.\nThey’re in that box.\nThey 指什么，盒子在哪？",[["knives · 桌上", ""], ["box · 桌上", "They 指多把刀，不是一个盒子。"], ["knives · 地板上", "句子说明刀所在的盒子在桌上。"]],"knives · 桌上","本题核对：复数代词与嵌套位置。","先找到被继续介绍的物品，再组合两层位置。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查复数代词与嵌套位置",{}),
+  q("final-v2-where","独立询问多个物品的位置","已经知道有几幅画，问它们在哪里。",undefined,"Where are they?","本题核对：独立询问多个物品的位置。","这次问地点，不是问有没有。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查独立询问多个物品的位置",{"type": "order", "tokens": ["Where", "are", "they?"]}),
+  q("final-v2-negative-reply","否定猜测后说明实际物品","另一间房没有书，有几本杂志。\n访客问：Are there any books in the room?\n哪项符合资料？",[["No, there aren't. There are some magazines.", ""], ["Yes, there are some books.", "资料明确没有书。"], ["No, there aren't any magazines.", "否定错了物品。"]],"No, there aren't. There are some magazines.","本题核对：否定猜测后说明实际物品。","先回答所问物品，再介绍实际有的。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查否定猜测后说明实际物品",{}),
+  q("final-v2-some","some不等于固定个数","There are some pictures on the wall.\n这句是否说明正好两幅？",[["没有说明确切数量。", ""], ["是，正好两幅。", "some 没有给出 two。"], ["没有图画。", "肯定存在句说明有图画。"]],"没有说明确切数量。","本题核对：some不等于固定个数。","区分有没有、多件和具体几件。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查some不等于固定个数",{}),
+  q("final-v2-two-locations","区分邻近与表面接触","A：television near the window\nB：magazines on the television\n哪项正确理解两种关系？",[["A 靠近窗户；B 放在电视机上。", ""], ["A 放在窗户上；B 靠近电视机。", "把 near 与 on 的关系交换了。"], ["A 在窗户里面；B 在电视机里面。", "两处都不是容器内部。"]],"A 靠近窗户；B 放在电视机上。","本题核对：区分邻近与表面接触。","看看是在旁边，还是由一个表面承托。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分邻近与表面接触",{}),
+ );
  const stages=[
   {id:'l1',title:'先认识客厅',activities:[['words','客厅小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
   {id:'l2',title:'走进史密斯家',activities:[['text','客厅小导览','book'],['roles','课文小侦探','people']],required:['text','roles']},
@@ -78,8 +91,133 @@
   {id:'l4',title:'问问在哪里',activities:[['models','客厅陈列册','cards'],['be','位置问答站','cards'],['trans','词块拼装台','order']],required:['be','trans']},
   {id:'l5',title:'我的客厅导览',activities:[['exam','客厅小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit27-28',version:1,title:'客厅发现之旅',path:'/unit27-28/',start:'learn/words',progress:{learningKey:'canran:unit27-28:learning:v1'},objects:WORDS,stages,questions,
+ const definition={id:'unit27-28',version:1,title:'客厅发现之旅',path:'/unit27-28/',start:'learn/words',progress:{learningKey:'canran:unit27-28:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
   learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit2728=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit2728;
+ const revised={"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+{
+  "id": "u2728-tasks-v4-exam-any",
+  "target": "一般存在问句和否定答句中的 any",
+  "prompt": "补好关于杯子的问答。",
+  "decision": "只说明本课普通存在问答的用法，不宣称所有问句只能用 any。",
+  "hint": "这里是询问有没有，再作否定回答；回想本课的普通存在问答。",
+  "source": "Lesson 28 普通 Are there any…? / No, there aren’t any… 存在问答",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "Are there ",
+      "after": " cups on the stereo?",
+      "options": [
+        "any",
+        "some"
+      ]
+    },
+    {
+      "before": "No, there aren’t ",
+      "after": " cups on the stereo.",
+      "options": [
+        "any",
+        "some"
+      ]
+    }
+  ],
+  "answer": "[\"any\",\"any\"]",
+  "distractorReasons": {
+    "any": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "some": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "两处在本课中均用 any；some 为肯定陈述常用形式。只考本题的普通询问和全面否定，不教成所有问句只能用 any。"
+},
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9]],
+"roles":[{
+  "id": "u2728-tasks-v4-story-find",
+  "target": "依据英文在房间中找到物品",
+  "prompt": "读介绍，在房间里点出对应的物品。",
+  "decision": "在原有房间中识别物体、属性与位置，移动端独立构图；固定房间位置不是正确答案高亮。",
+  "hint": "核对读物和它下面的家具，两条信息都要符合。",
+  "source": "Lesson 27 原文 There are some books on the stereo.",
+  "type": "scene-find",
+  "reference": "There are some books on the stereo.",
+  "sceneImage": "/assets/unit27-28/scene.svg",
+  "mobileScene": "/assets/unit27-28/task-room-mobile.svg",
+  "sceneDescription": "客厅里有音响、桌子和电视机，上面各有读物",
+  "spots": [
+    {
+      "id": "books",
+      "name": "音响上的书",
+      "bounds": [
+        15,
+        59,
+        18,
+        31
+      ],
+      "mobileBounds": [
+        2,
+        45,
+        25,
+        34
+      ]
+    },
+    {
+      "id": "papers",
+      "name": "桌上的报纸",
+      "bounds": [
+        42,
+        65,
+        19,
+        26
+      ],
+      "mobileBounds": [
+        38,
+        60,
+        25,
+        27
+      ]
+    },
+    {
+      "id": "magazines",
+      "name": "电视机上的杂志",
+      "bounds": [
+        78,
+        57,
+        15,
+        30
+      ],
+      "mobileBounds": [
+        76,
+        45,
+        23,
+        34
+      ]
+    }
+  ],
+  "options": [
+    "books",
+    "papers",
+    "magazines"
+  ],
+  "answer": "books",
+  "distractorRationale": "books 在音响上；报纸在桌上，杂志在电视机上。必须读懂名词和位置关系；热点不能框进旁边不相关的扶手椅。"
+},
+unit.questions["roles"][1]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit2728-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit2728-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

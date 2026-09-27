@@ -1,3 +1,4 @@
+const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -8,7 +9,7 @@ test('首页新单元从客厅小图鉴开始，音标可见',async({page})=>{
 });
 
 const {DIALOGUE,ANSWERS,completeUnit2728,completeActivity,completeStory}=require('../support/unit27-28-flow');
-test('全部声音失败仍完成19题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
+test('全部声音失败仍完成27题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
  test.setTimeout(60000);const audio=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.route(/\.(mp3|wav|ogg)(\?|$)/,r=>r.abort());
  await page.addInitScript(()=>{globalThis.voiceCalls=0;speechSynthesis.speak=()=>{globalThis.voiceCalls++;};});
  await page.goto('/unit27-28/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await completeUnit2728(page);
@@ -81,9 +82,9 @@ const WRITING=[['books','in the room','magazines','on the television'],['ties','
 const REFS=['There is a pencil on the desk.','There is a knife near that tin.','There is a policeman in the kitchen.','There is a newspaper in the living room.','There is a keyboard operator in the office.'];
 const REFANS=['There are some pencils on the desk.','There are some knives near that tin.','There are some policemen in the kitchen.','There are some newspapers in the living room.','There are some keyboard operators in the office.'];
 test('图句十组、A五题和B十组五句问答完整，打印一页且有完整句书写空间',async({page})=>{
- await page.goto('/unit27-28/#learn/models');const room=page.locator('.stage-models');await room.getByText('看看十幅位置图',{exact:true}).click();await expect(room.locator('.comparison-gallery strong')).toHaveText(PICTURES.map(([noun,place,rest])=>`There are some ${noun} ${place}.\n${rest}`));
+ await page.goto('/unit27-28/#learn/models');const room=page.locator('.stage-models');await room.getByText('看看十幅位置图',{exact:true}).click();await expectPagedTexts(room,'.comparison-gallery strong',PICTURES.map(([noun,place,rest])=>`There are some ${noun} ${place}.\n${rest}`),'图册');
  await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);await room.locator('.comparison-gallery').screenshot({path:'output/playwright/unit27-28/gallery-desktop.png'});await expect(room.locator('.reference-card button')).toHaveCount(0);
- await room.getByText('看看十组完整问答',{exact:true}).click();await expect(room).toContainText('不是课文客厅的物品清单');await expect(room).toContainText('本组的 chairs 指无扶手的普通椅子');await expect(room.locator('.reply-models strong')).toHaveText(WRITING.map(([asked,place,actual,loc])=>`Are there any ${asked} ${place}?\nNo, there aren't any ${asked} ${place}.\nThere are some ${actual}.\nWhere are they?\nThey're ${loc}.`));
+ await room.getByText('看看十组完整问答',{exact:true}).click();await expect(room).toContainText('不是课文客厅的物品清单');await expect(room).toContainText('本组的 chairs 指无扶手的普通椅子');await expectPagedTexts(room,'.reply-models strong',WRITING.map(([asked,place,actual,loc])=>`Are there any ${asked} ${place}?\nNo, there aren't any ${asked} ${place}.\nThere are some ${actual}.\nWhere are they?\nThey're ${loc}.`),'问答');
  await room.getByText('把一句变成复数',{exact:true}).click();await expect(room.locator('.be-models li')).toHaveText(REFS.map((s,i)=>s+' → '+REFANS[i]));
  await room.getByText('跟老师读数字',{exact:true}).click();await expect(room).toContainText('1,120 · 2,230 · 3,340 · 4,450 · 5,560 · 6,670 · 7,780 · 8,890 · 9,999 · 10,001');await room.getByRole('button',{name:'下一站：位置问答站',exact:true}).click();await expect(page).toHaveURL(/#learn\/be$/);
  await page.goto('/unit27-28/#learn/certificate');await page.getByText('和朋友再试试',{exact:true}).click();await expect(page.locator('.reference-writing li>span:first-child')).toHaveText(REFS);await expect(page.locator('.reply-writing li>span:first-child')).toHaveText(WRITING.map(([a,p,b,l])=>`(${a}) / ${p} / ${b} / ${l}`));await expect(page.locator('#unitWriting')).toContainText('任选一组');await expect(page.locator('#unitWriting')).toContainText('扶手椅也是椅子的一种');

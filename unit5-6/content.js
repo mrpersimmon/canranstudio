@@ -193,3 +193,130 @@
   root.CanranCore.unit56=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit56;
+ const revised={"listen":[{
+  "id": "u56-tasks-v4-nationalities-a",
+  "target": "识别三个国籍形容词",
+  "prompt": "给新朋友的国籍词配对。",
+  "decision": "替换前三道孤立词义选择；不能凭人名或肤色猜国籍。",
+  "hint": "",
+  "source": "Lesson 5–6 国籍词表 French、German、Japanese",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "French",
+      "cn": "法国（人）的"
+    },
+    {
+      "id": "2",
+      "en": "German",
+      "cn": "德国（人）的"
+    },
+    {
+      "id": "3",
+      "en": "Japanese",
+      "cn": "日本（人）的"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "各词义与对应国籍一致；不能把国籍形容词等同国家名。与下一小组共同覆盖六词，South Korean 等另有独立练习。"
+},
+unit.questions["listen"][3],
+{
+  "id": "u56-tasks-v4-nationalities-b",
+  "target": "识别另外三个国籍形容词",
+  "prompt": "认一认另外三张国籍卡。",
+  "decision": "保留 South Korean 与语境中的 English 独立题；不强制正反翻译整组重做。",
+  "hint": "",
+  "source": "Lesson 5–6 国籍词表 Chinese、Swedish、American",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "Chinese",
+      "cn": "中国（人）的"
+    },
+    {
+      "id": "2",
+      "en": "Swedish",
+      "cn": "瑞典（人）的"
+    },
+    {
+      "id": "3",
+      "en": "American",
+      "cn": "美国（人）的"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "与前组是不同新词的必要认词覆盖，不宣称新增语法能力。配对不等同三次独立回忆。"
+},
+unit.questions["listen"][6]],
+"refer":[unit.questions["refer"][0],
+unit.questions["refer"][1],
+{
+  "id": "u56-tasks-v4-refer-it",
+  "target": "物主和被指事物分开",
+  "prompt": "继续介绍汽车。",
+  "decision": "her 描述车主；后句指车而非女性车主。",
+  "hint": "第二句继续说的是汽车，还是汽车的主人？",
+  "source": "Lesson 6 汽车介绍；用已学 her car 构造回指情境",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "This is her car. ",
+      "after": " is a French car.",
+      "options": [
+        "It",
+        "She",
+        "He"
+      ]
+    }
+  ],
+  "answer": "[\"It\"]",
+  "distractorReasons": {
+    "It": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "She": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "He": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "It 回指 car；She/He 指人，不能因为物主是女士就把车说成 She。"
+}],
+"articles":[{
+  "id": "u56-tasks-v4-article-a",
+  "target": "带国籍形容词的单数职业名词短语",
+  "prompt": "补好完整介绍。",
+  "decision": "student 是单数名词；冠词由紧随的 French 的起始音决定；后两题保留 an 和不填的对比。",
+  "hint": "留意冠词后第一个词的开头发音。",
+  "source": "Lesson 5 She’s French. / She’s a new student. 的已学词组合",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "She's ",
+      "after": " French student.",
+      "options": [
+        "a",
+        "an"
+      ]
+    }
+  ],
+  "answer": "[\"a\"]",
+  "distractorReasons": {
+    "a": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "an": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "a 后是 French 的辅音音素开头；an 是针对看字母或跨过形容词判断的混淆。这里补单数名词短语，不在纯国籍表语前乱加冠词。"
+},
+unit.questions["articles"][1],
+unit.questions["articles"][2]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit56-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.voicedQuestions?.[id]?[{key:'unit56-'+id+'-practice/v1',questions:unit.voicedQuestions[id]}]:[]),...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit56-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

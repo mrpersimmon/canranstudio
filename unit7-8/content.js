@@ -152,3 +152,129 @@
  const definition={id:'unit7-8',version:1,mode:'classroom',title:'新朋友采访站',path:'/unit7-8/',start:'learn/words',progress:{learningKey:'canran:unit7-8:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,JOBS,INTERVIEWS,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions,activityPredecessors};
  root.CanranCore.unit78=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit78;
+ const revised={"listen":[unit.questions["listen"][0],
+unit.questions["listen"][1],
+{
+  "id": "u78-tasks-v4-jobs",
+  "target": "辨认三种职业",
+  "prompt": "给职业卡配对。",
+  "decision": "工程师与维修技工分开；其余有辨别意义的图片和职业词保留。",
+  "hint": "",
+  "source": "Lesson 7–8 职业词表 engineer、mechanic、hairdresser",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "engineer",
+      "cn": "工程师"
+    },
+    {
+      "id": "2",
+      "en": "mechanic",
+      "cn": "机械师；修理机器的人"
+    },
+    {
+      "id": "3",
+      "en": "hairdresser",
+      "cn": "理发师"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "三种职业分别匹配；其他职业释义为干扰，不依赖衣着或性别猜工作。"
+},
+unit.questions["listen"][3],
+unit.questions["listen"][4],
+unit.questions["listen"][5],
+unit.questions["listen"][6],
+unit.questions["listen"][7],
+unit.questions["listen"][8],
+unit.questions["listen"][11],
+unit.questions["listen"][12]],
+"reply":[unit.questions["reply"][0],
+{
+  "id": "u78-tasks-v4-be-name",
+  "target": "name 和 I 分别搭配 is 与 am",
+  "prompt": "帮 Robert 补好介绍。",
+  "decision": "两个相关空独立补全；不从一整组答案中排除。",
+  "hint": "分别看 name 和 I，不能两句都按同一个主语填。",
+  "source": "Lesson 7 Robert 的姓名与国籍自我介绍",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "My name ",
+      "after": " Robert.",
+      "options": [
+        "is",
+        "am",
+        "are"
+      ]
+    },
+    {
+      "before": "I ",
+      "after": " Italian.",
+      "options": [
+        "am",
+        "is",
+        "are"
+      ]
+    }
+  ],
+  "answer": "[\"is\",\"am\"]",
+  "distractorReasons": {
+    "is": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "am": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "are": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "My name 的中心词为单数 name，配 is；I 配 am。are 针对不区分主语的混用。两句不是同一个主语。"
+},
+unit.questions["reply"][2]],
+"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+unit.questions["exam"][4],
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9],
+{
+  "id": "u78-tasks-v4-exam-confirm-you",
+  "target": "被直接询问时用 I 肯定回答",
+  "prompt": "你扮演 Ben，回答面前的朋友。",
+  "decision": "与现有 Are you Italian 的否定回答对照；姓名职业是新情境，不改课文事实。",
+  "hint": "这次是朋友当面问 Ben，Ben 要从自己的角度回答。",
+  "source": "Lesson 7 Are you…? 肯否问答；使用已学 nurse 构造 Ben 自我介绍",
+  "type": "cloze",
+  "reference": "Ben: I'm a nurse.",
+  "blanks": [
+    {
+      "before": "朋友：Are you a nurse?\nBen：",
+      "after": "",
+      "options": [
+        "Yes, I am.",
+        "Yes, he is.",
+        "No, I'm not."
+      ]
+    }
+  ],
+  "answer": "[\"Yes, I am.\"]",
+  "distractorReasons": {
+    "Yes, I am.": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "Yes, he is.": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "No, I'm not.": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "资料已确认 Ben 是护士，所以答 Yes, I am.；he 把当面自答变成第三者转述，No 否定已给事实。补齐直接肯定回答，原否定题仍保留。"
+}]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit78-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit78-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

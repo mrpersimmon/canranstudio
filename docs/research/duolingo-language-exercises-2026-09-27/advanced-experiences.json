@@ -1,0 +1,2092 @@
+{
+  "report_date": "2026-09-27",
+  "scope": "Duolingo language courses only; advanced and special interactions; official sources",
+  "sources": [
+    {
+      "id": "radio",
+      "url": "https://blog.duolingo.com/duoradio-listening-practice/",
+      "title": "Strengthen your listening skills with DuoRadio!",
+      "published_at": "2023-11-02T12:00:17.000Z",
+      "modified_at": "2026-03-02T19:45:45.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "radio_select",
+        "radio_match",
+        "radio_true_false",
+        "radio_select_lucy"
+      ]
+    },
+    {
+      "id": "adventures",
+      "url": "https://blog.duolingo.com/adventures/",
+      "title": "Introducing Adventures, a brand-new gamified learning experience",
+      "published_at": "2024-09-24T17:43:15.000Z",
+      "modified_at": "2024-12-02T15:28:07.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [
+        {
+          "url": "https://www.youtube.com/embed/2IFzfELMSVw?si=G2hI0Tjv18q4dkZf",
+          "kind": "official_article_embedded_video",
+          "video_open_succeeded": false,
+          "watched": false
+        }
+      ],
+      "evidence_ids": [
+        "adventure_screens",
+        "adventure_demo"
+      ]
+    },
+    {
+      "id": "lily",
+      "url": "https://blog.duolingo.com/video-call/",
+      "title": "Video Call lets you have real life conversations with Lily",
+      "published_at": "2024-09-24T17:25:29.000Z",
+      "modified_at": "2025-01-15T22:20:23.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [
+        {
+          "url": "https://www.youtube.com/embed/vBjfn2Pb6DI?si=xGjOImKv4cSJHnIa",
+          "kind": "official_article_embedded_video",
+          "video_open_succeeded": false,
+          "watched": false
+        }
+      ],
+      "evidence_ids": []
+    },
+    {
+      "id": "falstaff",
+      "url": "https://blog.duolingo.com/beginner-video-call-with-falstaff/",
+      "title": "Our new Video Call with Falstaff is here to help you speak with confidence",
+      "published_at": "2026-01-14T13:00:03.000Z",
+      "modified_at": "2026-02-02T12:57:04.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "falstaff_screen"
+      ]
+    },
+    {
+      "id": "falstaff_research",
+      "url": "https://blog.duolingo.com/falstaff-calls-research/",
+      "title": "Research report: Video Call with Falstaff improves beginners’ conversation skills",
+      "published_at": "2026-03-10T12:00:10.000Z",
+      "modified_at": "2026-09-01T08:43:17.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    },
+    {
+      "id": "max",
+      "url": "https://blog.duolingo.com/duolingo-max/",
+      "title": "Introducing Duolingo Max, a learning experience powered by GPT-4",
+      "published_at": "2023-03-14T12:57:58.000Z",
+      "modified_at": "2026-03-25T17:21:04.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [
+        {
+          "url": "https://www.youtube.com/embed/F-oLLqILsAU",
+          "kind": "official_article_embedded_video",
+          "video_open_succeeded": false,
+          "watched": false
+        }
+      ],
+      "evidence_ids": [
+        "roleplay_screens"
+      ]
+    },
+    {
+      "id": "practice",
+      "url": "https://blog.duolingo.com/guide-to-duolingo-practice-hub/",
+      "title": "Practice any skill, any time in the Practice tab",
+      "published_at": "2026-02-18T13:00:00.000Z",
+      "modified_at": "2026-04-17T08:38:04.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "practice_screen"
+      ]
+    },
+    {
+      "id": "explain",
+      "url": "https://blog.duolingo.com/explain-my-answer-now-free/",
+      "title": "Explain My Answer is now free for all learners!",
+      "published_at": "2026-01-01T17:30:10.000Z",
+      "modified_at": "2026-05-08T07:40:32.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "explain_correct",
+        "explain_correct_detail",
+        "explain_error",
+        "explain_error_detail"
+      ]
+    },
+    {
+      "id": "sounds",
+      "url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "title": "How to practice English pronunciation on Duolingo",
+      "published_at": "2024-11-20T13:00:06.000Z",
+      "modified_at": "2026-03-25T18:20:49.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "sounds_identify",
+        "sounds_same_different",
+        "sounds_match"
+      ]
+    },
+    {
+      "id": "practice_ways",
+      "url": "https://blog.duolingo.com/ways-to-practice-in-duolingo/",
+      "title": "7 ways you can switch up your practice in the app right now",
+      "published_at": "2025-12-16T10:00:00.000Z",
+      "modified_at": "2026-09-23T17:11:09.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "legendary_entry",
+        "rapid_review_entry",
+        "match_madness_entry"
+      ]
+    },
+    {
+      "id": "writing",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-writing-skills/",
+      "title": "How Duolingo teaches writing skills",
+      "published_at": "2026-07-02T12:00:00.000Z",
+      "modified_at": "2026-07-02T15:38:35.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "story_listen",
+        "story_cloze",
+        "story_write",
+        "flashcards_screen"
+      ]
+    },
+    {
+      "id": "speaking",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-speaking-skills/",
+      "title": "How Duolingo teaches speaking skills",
+      "published_at": "2026-02-09T12:00:00.000Z",
+      "modified_at": "2026-09-09T16:26:53.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "speak_repeat",
+        "speak_choose",
+        "speak_response"
+      ]
+    },
+    {
+      "id": "reading",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-reading-skills/",
+      "title": "How Duolingo teaches reading skills",
+      "published_at": "2025-02-10T13:00:00.000Z",
+      "modified_at": "2026-07-03T15:28:19.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "story_read",
+        "story_comprehension"
+      ]
+    },
+    {
+      "id": "listening",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-listening-skills/",
+      "title": "Listening Practice in Another Language: Tips from Duolingo",
+      "published_at": "2026-05-05T12:00:00.000Z",
+      "modified_at": "2026-05-05T13:11:46.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    },
+    {
+      "id": "advanced_stories",
+      "url": "https://blog.duolingo.com/duolingo-advanced-stories/",
+      "title": "Coming soon: new Stories for advanced learners!",
+      "published_at": "2022-10-19T12:00:00.000Z",
+      "modified_at": "2026-03-26T08:58:04.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    },
+    {
+      "id": "stories_android",
+      "url": "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/",
+      "title": "Duolingo Stories: The journey to Android",
+      "published_at": "2020-02-21T21:00:00.000Z",
+      "modified_at": "2026-01-01T12:30:43.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "story_listen_old"
+      ]
+    },
+    {
+      "id": "flashcards",
+      "url": "https://blog.duolingo.com/duolingo-flashcards/",
+      "title": "Strengthen your memory with new Duolingo Flashcards",
+      "published_at": "2025-11-18T13:00:02.000Z",
+      "modified_at": "2026-01-21T11:13:29.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "flashcards_result"
+      ]
+    },
+    {
+      "id": "highlights",
+      "url": "https://blog.duolingo.com/product-highlights/",
+      "title": "2025 Duolingo Highlights: our biggest leaps in learning, play, and connection",
+      "published_at": "2025-12-10T13:00:47.000Z",
+      "modified_at": "2026-04-22T14:26:09.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "lily_screens"
+      ]
+    },
+    {
+      "id": "intro",
+      "url": "https://blog.duolingo.com/duolingo-101-how-to-learn-a-language-on-duolingo/",
+      "title": "Duolingo 101: How to learn a language on Duolingo",
+      "published_at": "2024-12-02T10:05:00.000Z",
+      "modified_at": "2026-02-11T10:16:59.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "radio_picture"
+      ]
+    },
+    {
+      "id": "roleplay_design",
+      "url": "https://blog.duolingo.com/chatbot-language-practice/",
+      "title": "Can I use ChatGPT to practice a new language?",
+      "published_at": "2024-03-20T13:43:45.000Z",
+      "modified_at": "2026-01-28T20:46:01.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    },
+    {
+      "id": "old_path",
+      "url": "https://blog.duolingo.com/new-duolingo-home-screen-design/",
+      "title": "Introducing the new Duolingo learning path",
+      "published_at": "2022-05-06T11:00:00.000Z",
+      "modified_at": "2025-06-13T18:44:25.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [
+        {
+          "url": "https://www.youtube.com/embed/aX8fgrqOIrI",
+          "kind": "official_article_embedded_video",
+          "video_open_succeeded": false,
+          "watched": false
+        }
+      ],
+      "evidence_ids": []
+    },
+    {
+      "id": "writing_old",
+      "url": "https://blog.duolingo.com/tips-to-improve-writing-skills/",
+      "title": "Dear Duolingo: How do I get comfortable writing in a new language?",
+      "published_at": "2022-03-08T13:00:00.000Z",
+      "modified_at": "2026-05-06T09:23:43.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": [
+        "story_write_old"
+      ]
+    },
+    {
+      "id": "tslw",
+      "url": "https://blog.duolingo.com/time-spent-learning-well/",
+      "title": "Behind the metric: how we developed “Time Spent Learning Well”",
+      "published_at": "2024-06-13T11:00:00.000Z",
+      "modified_at": "2024-12-02T16:29:41.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    },
+    {
+      "id": "family",
+      "url": "https://blog.duolingo.com/plus-family-plan/",
+      "title": "Learn together with the new Duolingo Family Plan",
+      "published_at": "2021-08-30T12:30:00.000Z",
+      "modified_at": "2026-08-10T09:46:14.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    },
+    {
+      "id": "free",
+      "url": "https://blog.duolingo.com/can-duolingo-make-me-fluent/",
+      "title": "\"Can Duolingo make me fluent?\" and other common questions from learners",
+      "published_at": "2024-11-18T13:00:00.000Z",
+      "modified_at": "2025-09-01T11:28:21.000Z",
+      "retrieved_on": "2026-09-27",
+      "videos": [],
+      "evidence_ids": []
+    }
+  ],
+  "features": [
+    {
+      "id": "stories",
+      "name_zh": "Stories故事",
+      "kind": "container",
+      "container": null,
+      "steps_zh": [
+        "从故事节点进入，逐段读/听，对途中小题作答。"
+      ],
+      "design_goal_zh": "用连续语境练习理解。",
+      "source_ids": [
+        "reading",
+        "stories_android",
+        "highlights"
+      ],
+      "image_ids": [
+        "story_read"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "上方退出、进度和心；每句播放；底部继续。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/IMG_3466.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "story_read",
+          "kind": "full_app_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "story_mc",
+      "name_zh": "故事理解单选",
+      "kind": "interaction",
+      "container": "Stories",
+      "steps_zh": [
+        "读/听前文，选择符合意思的一项，查看反馈后继续。"
+      ],
+      "design_goal_zh": "核验信息理解。",
+      "source_ids": [
+        "reading"
+      ],
+      "image_ids": [
+        "story_comprehension"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "退出、进度、心；三项答案；底部绿色反馈和继续。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/IMG_3465.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "story_comprehension",
+          "kind": "full_app_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "story_audio_tiles",
+      "name_zh": "故事听音词块补句/组句",
+      "kind": "interaction",
+      "container": "Stories",
+      "steps_zh": [
+        "播放缺失话语，依次点选词块，继续故事。"
+      ],
+      "design_goal_zh": "连接连续语流与词序。",
+      "source_ids": [
+        "writing",
+        "stories_android"
+      ],
+      "image_ids": [
+        "story_listen",
+        "story_listen_old"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "退出、进度、能量；音频；三个词块；底部继续。",
+        "退出、进度、心；故事音频；四个词块；底部继续。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_Story-1.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/02/stories-android-maria-2-2.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "story_listen",
+          "kind": "full_app_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "story_listen_old",
+          "kind": "full_app_screen_historical",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "story_cloze",
+      "name_zh": "故事语境选词填空",
+      "kind": "interaction",
+      "container": "Stories",
+      "steps_zh": [
+        "读前文，将候选词填入相邻句子的空缺，继续。"
+      ],
+      "design_goal_zh": "用上下文选择合理表达。",
+      "source_ids": [
+        "writing"
+      ],
+      "image_ids": [
+        "story_cloze"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "退出、进度、能量；六个词块；底部继续。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_Story-2.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "story_cloze",
+          "kind": "full_app_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "story_free_write",
+      "name_zh": "故事开放写作",
+      "kind": "interaction",
+      "container": "Stories",
+      "steps_zh": [
+        "读故事后的问题，用目标语自行输入，检查后继续；示例可跳过。"
+      ],
+      "design_goal_zh": "从理解过渡到自由生成。",
+      "source_ids": [
+        "writing",
+        "writing_old"
+      ],
+      "image_ids": [
+        "story_write",
+        "story_write_old"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "退出、进度、能量；输入框；10–60词提示；底部跳过和检查。",
+        "只有题目、输入框和建议列表；缺全局顶部与底部提交区。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_Story-3.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/03/Screen-Shot-2022-02-23-at-6.13.18-PM.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "story_write",
+          "kind": "full_app_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "story_write_old",
+          "kind": "partial_ui_historical",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "story_formats",
+      "name_zh": "新闻/邮件/评论/日记等故事文本",
+      "kind": "content_variant",
+      "container": "Stories",
+      "steps_zh": [
+        "阅读变换文体的文本并完成相关理解活动。"
+      ],
+      "design_goal_zh": "练习不同文体、语用与较长阅读。",
+      "source_ids": [
+        "advanced_stories"
+      ],
+      "image_ids": [],
+      "evidence_status": "official_announcement_not_current_matrix",
+      "ui_keypoints_zh": [],
+      "image_urls": [],
+      "image_completeness": [],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "story_conversation_old",
+      "name_zh": "Stories旧Conversation mode",
+      "kind": "historical_mode",
+      "container": "Stories",
+      "steps_zh": [],
+      "design_goal_zh": "历史口语模式；2022新路径FAQ明确称当时移除。",
+      "source_ids": [
+        "old_path"
+      ],
+      "image_ids": [],
+      "evidence_status": "historical_removed_as_of_source_no_relaunch_proof",
+      "ui_keypoints_zh": [],
+      "image_urls": [],
+      "image_completeness": [],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "radio",
+      "name_zh": "Radio/DuoRadio",
+      "kind": "container",
+      "container": null,
+      "steps_zh": [
+        "从耳机节点收听角色节目，在音频间完成小题。"
+      ],
+      "design_goal_zh": "由双语支架逐渐到全目标语听力。",
+      "source_ids": [
+        "radio",
+        "listening",
+        "highlights",
+        "free"
+      ],
+      "image_ids": [
+        "radio_select"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、心；音频；词块选中态；底部系统条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image3_Audio-segment.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "radio_select",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "radio_words",
+      "name_zh": "Radio听音选指定数量的词",
+      "kind": "interaction",
+      "container": "Radio",
+      "steps_zh": [
+        "播放音频，从词块中选出题目指定数量。"
+      ],
+      "design_goal_zh": "辨认连续音频里的词。",
+      "source_ids": [
+        "radio",
+        "listening"
+      ],
+      "image_ids": [
+        "radio_select",
+        "radio_select_lucy"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、心；音频；词块选中态；底部系统条。",
+        "状态栏、退出、进度、心；五个选词；底部系统条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image3_Audio-segment.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image6_IMG_1508.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "radio_select",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "radio_select_lucy",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "radio_match",
+      "name_zh": "Radio音频—释义配对",
+      "kind": "interaction",
+      "container": "Radio",
+      "steps_zh": [
+        "点音频，再点对应文字，配完各组。"
+      ],
+      "design_goal_zh": "建立语音与意义联系。",
+      "source_ids": [
+        "radio"
+      ],
+      "image_ids": [
+        "radio_match"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、心；完整四行两列；底部系统条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image4_Screen-Shot-2023-10-27-at-4.25.15-PM.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "radio_match",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "radio_tf",
+      "name_zh": "Radio听力判断正误",
+      "kind": "interaction",
+      "container": "Radio",
+      "steps_zh": [
+        "听节目，判断给定陈述，点勾或叉。"
+      ],
+      "design_goal_zh": "核验听力语义理解。",
+      "source_ids": [
+        "radio"
+      ],
+      "image_ids": [
+        "radio_true_false"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、心；勾/叉；重播/暂停控件；底部系统条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image5_IMG_1503.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "radio_true_false",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "radio_picture",
+      "name_zh": "Radio听音选择相关图片",
+      "kind": "interaction",
+      "container": "Radio",
+      "steps_zh": [
+        "听节目，再选符合内容的图片。"
+      ],
+      "design_goal_zh": "用非文字选项检查理解。",
+      "source_ids": [
+        "intro"
+      ],
+      "image_ids": [
+        "radio_picture"
+      ],
+      "evidence_status": "official_documented_parent_visual_check",
+      "ui_keypoints_zh": [
+        "父任务已核验全高截图；本文件作者仅核对官方来源。"
+      ],
+      "image_urls": [
+        "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/11-pathRadio.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "radio_picture",
+          "kind": "official_source_screen_unreviewed",
+          "visually_verified": false
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "adventures",
+      "name_zh": "Adventures场景任务",
+      "kind": "container",
+      "container": null,
+      "steps_zh": [
+        "读任务，在场景移动并与人或物互动，完成目标。"
+      ],
+      "design_goal_zh": "把语言用在可感知的真实生活情境。",
+      "source_ids": [
+        "adventures"
+      ],
+      "image_ids": [
+        "adventure_screens",
+        "adventure_demo"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "三部手机画面边界完整；探索页有退出；对话页完整显示两项回应和底部系统条。",
+        "不是完整竖屏，不计作完整UI。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures_UIscreens.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures-gif.gif"
+      ],
+      "image_completeness": [
+        {
+          "id": "adventure_screens",
+          "kind": "official_three_phone_montage",
+          "visually_verified": true
+        },
+        {
+          "id": "adventure_demo",
+          "kind": "official_animation_unreviewed",
+          "visually_verified": false
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "adventure_explore",
+      "name_zh": "场景点物/读标牌/探索",
+      "kind": "exploration_interaction",
+      "container": "Adventures",
+      "steps_zh": [
+        "点环境中的对象或角色，结合场景理解词义并执行任务。"
+      ],
+      "design_goal_zh": "借环境线索理解未知词。",
+      "source_ids": [
+        "adventures"
+      ],
+      "image_ids": [
+        "adventure_screens",
+        "adventure_demo"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "三部手机画面边界完整；探索页有退出；对话页完整显示两项回应和底部系统条。",
+        "不是完整竖屏，不计作完整UI。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures_UIscreens.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures-gif.gif"
+      ],
+      "image_completeness": [
+        {
+          "id": "adventure_screens",
+          "kind": "official_three_phone_montage",
+          "visually_verified": true
+        },
+        {
+          "id": "adventure_demo",
+          "kind": "official_animation_unreviewed",
+          "visually_verified": false
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "adventure_dialogue",
+      "name_zh": "任务情境选择回应",
+      "kind": "interaction",
+      "container": "Adventures",
+      "steps_zh": [
+        "与角色对话，选择适合任务的回应；遇错由角色反应引导。"
+      ],
+      "design_goal_zh": "练习沟通目的与语境，而非孤立翻译。",
+      "source_ids": [
+        "adventures"
+      ],
+      "image_ids": [
+        "adventure_screens"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "三部手机画面边界完整；探索页有退出；对话页完整显示两项回应和底部系统条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures_UIscreens.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "adventure_screens",
+          "kind": "official_three_phone_montage",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "roleplay",
+      "name_zh": "Roleplay多轮情景聊天",
+      "kind": "ai_interaction",
+      "container": "Roleplay",
+      "steps_zh": [
+        "读情景与目标，与角色交替回复，结束后复盘表达。"
+      ],
+      "design_goal_zh": "按水平练习有目的的沟通。",
+      "source_ids": [
+        "max",
+        "roleplay_design",
+        "speaking"
+      ],
+      "image_ids": [
+        "roleplay_screens"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "三个手机边界完整；聊天有输入/麦克风/键盘；后两屏有继续；不是本次现场操作。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/04/Roleplay.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "roleplay_screens",
+          "kind": "official_three_phone_montage",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "lily_call",
+      "name_zh": "Video Call with Lily自由口语对话",
+      "kind": "ai_interaction",
+      "container": "Video Call",
+      "steps_zh": [
+        "从视频节点发起，听Lily并口头回应，可要求重复/放慢，结束后复盘。"
+      ],
+      "design_goal_zh": "低压力练习即时自发表达。",
+      "source_ids": [
+        "lily",
+        "max",
+        "highlights"
+      ],
+      "image_ids": [
+        "lily_screens"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "入口操作完整；呼叫屏有挂断；通话屏有退出、目标进度、麦克风、字幕和系统底条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN-DuolingoProductYIR-Video-Call-1.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "lily_screens",
+          "kind": "official_three_phone_montage",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "falstaff_call",
+      "name_zh": "Video Call with Falstaff引导口语",
+      "kind": "ai_interaction",
+      "container": "Video Call",
+      "steps_zh": [
+        "围绕提问说话，利用短语/翻译提示和母语反馈继续对话。"
+      ],
+      "design_goal_zh": "为初学者提供可完成的口语支架。",
+      "source_ids": [
+        "falstaff",
+        "falstaff_research"
+      ],
+      "image_ids": [
+        "falstaff_screen"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏；字幕；完整底部挂断/字幕控制栏。分辨率较低。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/guided-call-with-falstaff_german-lesson-4.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "falstaff_screen",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "explain_answer",
+      "name_zh": "Explain My Answer/Explain My Mistake",
+      "kind": "feedback_layer",
+      "container": null,
+      "steps_zh": [
+        "先提交普通题，再主动打开解释，读提示后返回课程。"
+      ],
+      "design_goal_zh": "及时理解具体答案中的规则。",
+      "source_ids": [
+        "explain"
+      ],
+      "image_ids": [
+        "explain_correct",
+        "explain_correct_detail",
+        "explain_error",
+        "explain_error_detail"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "顶部状态/退出/进度/能量；题目及词块；绿色解释/继续；系统底条。",
+        "状态栏、返回、解释、赞/踩、返回课程按钮、系统底条。",
+        "顶部控件；答案框；红色结果、正确答案、解释错误/继续；系统底条。",
+        "状态栏、返回、解释、赞/踩、分页、返回课程按钮、系统底条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Tap.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Tap-EMA.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Translate.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Translate-EMA.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "explain_correct",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "explain_correct_detail",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "explain_error",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "explain_error_detail",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "sound_identify",
+      "name_zh": "最小音对听音二选一",
+      "kind": "interaction",
+      "container": "English pronunciation tab",
+      "steps_zh": [
+        "听音，选择两个近音词中的一个，检查。"
+      ],
+      "design_goal_zh": "区分易混音，不增加新语法负担。",
+      "source_ids": [
+        "sounds"
+      ],
+      "image_ids": [
+        "sounds_identify"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度；音频；选项选中态；底部检查和系统条。"
+      ],
+      "image_urls": [
+        "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3253.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "sounds_identify",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "sound_same",
+      "name_zh": "两个音频同词/异词判断",
+      "kind": "interaction",
+      "container": "English pronunciation tab",
+      "steps_zh": [
+        "播放两个音，判断相同或不同，继续。"
+      ],
+      "design_goal_zh": "集中训练音位对比。",
+      "source_ids": [
+        "sounds"
+      ],
+      "image_ids": [
+        "sounds_same_different"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度；两个播放；二选一；底部继续和系统条。"
+      ],
+      "image_urls": [
+        "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3254.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "sounds_same_different",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "sound_match",
+      "name_zh": "发音专项音频—单词配对",
+      "kind": "interaction_variant",
+      "container": "English pronunciation tab",
+      "steps_zh": [
+        "依次试听音频并匹配词形。"
+      ],
+      "design_goal_zh": "区分近音词；操作机制仍是配对。",
+      "source_ids": [
+        "sounds"
+      ],
+      "image_ids": [
+        "sounds_match"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度；完整四行两列；底部继续和系统条。"
+      ],
+      "image_urls": [
+        "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3256.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "sounds_match",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "speak_repeat",
+      "name_zh": "照句朗读",
+      "kind": "interaction",
+      "container": null,
+      "steps_zh": [
+        "听/读例句，点麦克风并说出，检查。"
+      ],
+      "design_goal_zh": "建立发音和句子输出基础。",
+      "source_ids": [
+        "speaking"
+      ],
+      "image_ids": [
+        "speak_repeat"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、能量；播放、麦克风；无法说话/检查；系统底条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image1.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "speak_repeat",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "speak_choose",
+      "name_zh": "选择并说出合适回应",
+      "kind": "interaction",
+      "container": null,
+      "steps_zh": [
+        "理解问题，从候选中确定合理回应并说出来。"
+      ],
+      "design_goal_zh": "结合语义决策与口语输出。",
+      "source_ids": [
+        "speaking"
+      ],
+      "image_ids": [
+        "speak_choose"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、能量；问题播放；三项回应含麦克风；无法说话/检查；系统底条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image2.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "speak_choose",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "speak_response",
+      "name_zh": "复述问答中的给定回应",
+      "kind": "interaction",
+      "container": null,
+      "steps_zh": [
+        "听/读一组问答，点麦克风复述下句。"
+      ],
+      "design_goal_zh": "在对话中练完整回应。",
+      "source_ids": [
+        "speaking"
+      ],
+      "image_ids": [
+        "speak_response"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、退出、进度、能量；问答两侧播放；麦克风；检查；系统底条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image3.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "speak_response",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "flashcards",
+      "name_zh": "Flashcards主动回忆译词",
+      "kind": "interaction",
+      "container": null,
+      "steps_zh": [
+        "看母语词卡，说出目标语译词；不能说时可输入。答对移走，答错翻面播放答案并回到卡堆后方。"
+      ],
+      "design_goal_zh": "主动提取记忆；官方示例五张卡、三次答对即可过关。",
+      "source_ids": [
+        "flashcards",
+        "writing",
+        "highlights"
+      ],
+      "image_ids": [
+        "flashcards_screen",
+        "flashcards_result"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "退出、进度、能量；卡堆；麦克风、跳过；无法说话。",
+        "每屏有顶部状态/退出/进度/能量；结果；继续或确认；系统底条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_flashcards.png",
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/11/summary-screen.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "flashcards_screen",
+          "kind": "full_app_screen",
+          "visually_verified": true
+        },
+        {
+          "id": "flashcards_result",
+          "kind": "official_three_phone_montage",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "practice_tab",
+      "name_zh": "Practice tab/旧Practice Hub",
+      "kind": "container",
+      "container": null,
+      "steps_zh": [
+        "点哑铃，若未显示先打开更多菜单；选说、听、词汇或错题等。"
+      ],
+      "design_goal_zh": "按需集中复习特定技能。",
+      "source_ids": [
+        "practice"
+      ],
+      "image_ids": [
+        "practice_screen"
+      ],
+      "evidence_status": "official_documented_and_visual_verified",
+      "ui_keypoints_zh": [
+        "状态栏、标题；完整可见入口列表；底部导航与系统条。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/practice-tab.png"
+      ],
+      "image_completeness": [
+        {
+          "id": "practice_screen",
+          "kind": "full_phone_screen",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "match_madness",
+      "name_zh": "Match Madness限时配对",
+      "kind": "timed_container",
+      "container": null,
+      "steps_zh": [
+        "在排行榜可见时进入，在倒计时内快速匹配母语词与目标语词。"
+      ],
+      "design_goal_zh": "在熟悉词汇上练快速提取；机制属于配对。",
+      "source_ids": [
+        "practice_ways"
+      ],
+      "image_ids": [
+        "match_madness_entry"
+      ],
+      "evidence_status": "official_text_with_entry_only_image",
+      "ui_keypoints_zh": [
+        "状态栏、退出、标题、活动余时、阶段、连击记录、开始、系统条；无配对过程。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/6-screenshot_match-madness-lesson.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "match_madness_entry",
+          "kind": "full_phone_screen_entry_only",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "rapid_review",
+      "name_zh": "Rapid Review/路径Side Quest限时复习",
+      "kind": "timed_container",
+      "container": null,
+      "steps_zh": [
+        "点路径角色的星级入口，开始限时复习，争取一颗星。"
+      ],
+      "design_goal_zh": "复习并增加挑战感；不是独立题型。",
+      "source_ids": [
+        "practice_ways"
+      ],
+      "image_ids": [
+        "rapid_review_entry"
+      ],
+      "evidence_status": "official_text_with_entry_only_image",
+      "ui_keypoints_zh": [
+        "状态栏、退出、标题、等级、奖励、底部开始和系统条；无答题过程。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/5-screenshot_side-quest-lesson_preview.jpeg"
+      ],
+      "image_completeness": [
+        {
+          "id": "rapid_review_entry",
+          "kind": "full_phone_screen_entry_only",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "legendary",
+      "name_zh": "Legendary难度挑战",
+      "kind": "difficulty_container",
+      "container": null,
+      "steps_zh": [
+        "点完成的节点，再选Legendary，完成更难且无提示的练习。"
+      ],
+      "design_goal_zh": "更少支架下检验掌握。",
+      "source_ids": [
+        "practice_ways",
+        "family"
+      ],
+      "image_ids": [
+        "legendary_entry"
+      ],
+      "evidence_status": "official_text_with_entry_only_image",
+      "ui_keypoints_zh": [
+        "完整主页与节点菜单；只证实入口，不是挑战答题屏。"
+      ],
+      "image_urls": [
+        "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/2-screenshot_complete-review-lesson.PNG"
+      ],
+      "image_completeness": [
+        {
+          "id": "legendary_entry",
+          "kind": "full_phone_screen_entry_only",
+          "visually_verified": true
+        }
+      ],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "ramp_up",
+      "name_zh": "Ramp Up",
+      "kind": "timed_container",
+      "container": null,
+      "steps_zh": [],
+      "design_goal_zh": "官方学习指标文章确认其为路径外活动，未提供可核对的细则。",
+      "source_ids": [
+        "tslw"
+      ],
+      "image_ids": [],
+      "evidence_status": "official_name_only",
+      "ui_keypoints_zh": [],
+      "image_urls": [],
+      "image_completeness": [],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    },
+    {
+      "id": "lightning_round",
+      "name_zh": "Lightning Round",
+      "kind": "unverified_named_mode",
+      "container": null,
+      "steps_zh": [],
+      "design_goal_zh": "本次一手资料检索未找到可确认操作、图片和当前状态的来源。",
+      "source_ids": [],
+      "image_ids": [],
+      "evidence_status": "evidence_gap",
+      "ui_keypoints_zh": [],
+      "image_urls": [],
+      "image_completeness": [],
+      "design_goal_basis": "官方活动定位＋从已核验操作所作的教学目的归纳；不代表独立效果试验证明。"
+    }
+  ],
+  "gaps": [
+    "未现场登录并逐版本/逐课程遍历；官方声明与官方图不等于用户当前账户可见。",
+    "没有权威公开的全部Stories子题型穷尽表；同义选词、片段定位、剧情预测、旧听力/角色扮演模式等尚无本组完整一手证据，不凭民间列表补全。",
+    "Ramp Up仅有官方名称证据；Lightning Round未获得合格一手操作或UI证据。",
+    "Match Madness、Rapid Review、Legendary只有完整入口截图，缺本组官方完整答题过程图；不冒充具体题型图。",
+    "Adventures及Max存在平台、语言方向、进度及分批推出差异；当前全量矩阵不公开。",
+    "三个官方嵌入YouTube视频在web工具打开失败；可供人工观看的链接保留，但未观看、无时间戳。",
+    "Falstaff研究博客描述初学法/西语实验，但没有给出效应量、样本量等细节，不据此量化效果。"
+  ],
+  "image_evidence": [
+    {
+      "id": "story_read",
+      "source_id": "reading",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-reading-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/IMG_3466.PNG",
+      "kind": "full_app_screen",
+      "original_dimensions": [
+        1242,
+        2208
+      ],
+      "visually_verified": true,
+      "description_zh": "故事逐句阅读和听音。",
+      "visible_controls_zh": "上方退出、进度和心；每句播放；底部继续。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "story_comprehension",
+      "source_id": "reading",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-reading-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/IMG_3465.PNG",
+      "kind": "full_app_screen",
+      "original_dimensions": [
+        1242,
+        2208
+      ],
+      "visually_verified": true,
+      "description_zh": "根据故事三选一理解，已显示正确结果。",
+      "visible_controls_zh": "退出、进度、心；三项答案；底部绿色反馈和继续。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "story_listen_old",
+      "source_id": "stories_android",
+      "source_url": "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/02/stories-android-maria-2-2.png",
+      "kind": "full_app_screen_historical",
+      "original_dimensions": [
+        1440,
+        2616
+      ],
+      "visually_verified": true,
+      "description_zh": "旧版故事听音词块组句。",
+      "visible_controls_zh": "退出、进度、心；故事音频；四个词块；底部继续。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "story_listen",
+      "source_id": "writing",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-writing-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_Story-1.png",
+      "kind": "full_app_screen",
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "visually_verified": true,
+      "description_zh": "听故事中缺失的话，再依次选词补全。",
+      "visible_controls_zh": "退出、进度、能量；音频；三个词块；底部继续。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "story_cloze",
+      "source_id": "writing",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-writing-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_Story-2.png",
+      "kind": "full_app_screen",
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "visually_verified": true,
+      "description_zh": "结合上句语境为相邻两句各补一个词。",
+      "visible_controls_zh": "退出、进度、能量；六个词块；底部继续。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "story_write",
+      "source_id": "writing",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-writing-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_Story-3.png",
+      "kind": "full_app_screen",
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "visually_verified": true,
+      "description_zh": "回答故事问题的开放写作，示例含起始词、字数提示和奖励。",
+      "visible_controls_zh": "退出、进度、能量；输入框；10–60词提示；底部跳过和检查。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "story_write_old",
+      "source_id": "writing_old",
+      "source_url": "https://blog.duolingo.com/tips-to-improve-writing-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/03/Screen-Shot-2022-02-23-at-6.13.18-PM.png",
+      "kind": "partial_ui_historical",
+      "original_dimensions": [
+        1150,
+        704
+      ],
+      "visually_verified": true,
+      "description_zh": "网页故事写作中的补全建议。",
+      "visible_controls_zh": "只有题目、输入框和建议列表；缺全局顶部与底部提交区。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "radio_select",
+      "source_id": "radio",
+      "source_url": "https://blog.duolingo.com/duoradio-listening-practice/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image3_Audio-segment.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        1125,
+        2436
+      ],
+      "visually_verified": true,
+      "description_zh": "Radio听音多选，五个词中选三个。",
+      "visible_controls_zh": "状态栏、退出、进度、心；音频；词块选中态；底部系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "radio_match",
+      "source_id": "radio",
+      "source_url": "https://blog.duolingo.com/duoradio-listening-practice/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image4_Screen-Shot-2023-10-27-at-4.25.15-PM.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        570,
+        1258
+      ],
+      "visually_verified": true,
+      "description_zh": "Radio四组音频和释义配对。",
+      "visible_controls_zh": "状态栏、退出、进度、心；完整四行两列；底部系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "radio_true_false",
+      "source_id": "radio",
+      "source_url": "https://blog.duolingo.com/duoradio-listening-practice/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image5_IMG_1503.PNG",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "Radio根据听力判断陈述是否正确。",
+      "visible_controls_zh": "状态栏、退出、进度、心；勾/叉；重播/暂停控件；底部系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "radio_select_lucy",
+      "source_id": "radio",
+      "source_url": "https://blog.duolingo.com/duoradio-listening-practice/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/10/image6_IMG_1508.PNG",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "Lucy节目中的听音多选。",
+      "visible_controls_zh": "状态栏、退出、进度、心；五个选词；底部系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "radio_picture",
+      "source_id": "intro",
+      "source_url": "https://blog.duolingo.com/duolingo-101-how-to-learn-a-language-on-duolingo/",
+      "original_image_url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/11-pathRadio.PNG",
+      "kind": "official_source_screen_unreviewed",
+      "original_dimensions": null,
+      "visually_verified": false,
+      "description_zh": "Radio听音选择相关图片。",
+      "visible_controls_zh": "父任务已核验全高截图；本文件作者仅核对官方来源。",
+      "not_live_account_capture": true,
+      "inspection_note": "已确认出自官方文章，尚未视觉核验，不计作完整界面。"
+    },
+    {
+      "id": "adventure_screens",
+      "source_id": "adventures",
+      "source_url": "https://blog.duolingo.com/adventures/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures_UIscreens.png",
+      "kind": "official_three_phone_montage",
+      "original_dimensions": [
+        1400,
+        800
+      ],
+      "visually_verified": true,
+      "description_zh": "官方排版的入口、场景探索、双项对话回应。",
+      "visible_controls_zh": "三部手机画面边界完整；探索页有退出；对话页完整显示两项回应和底部系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "adventure_demo",
+      "source_id": "adventures",
+      "source_url": "https://blog.duolingo.com/adventures/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/EN_Adventures-gif.gif",
+      "kind": "official_animation_unreviewed",
+      "original_dimensions": [
+        800,
+        456
+      ],
+      "visually_verified": false,
+      "description_zh": "超市场景移动与点物互动的官方GIF演示。",
+      "visible_controls_zh": "不是完整竖屏，不计作完整UI。",
+      "not_live_account_capture": true,
+      "inspection_note": "已确认出自官方文章，尚未视觉核验，不计作完整界面。"
+    },
+    {
+      "id": "roleplay_screens",
+      "source_id": "max",
+      "source_url": "https://blog.duolingo.com/duolingo-max/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/04/Roleplay.png",
+      "kind": "official_three_phone_montage",
+      "original_dimensions": [
+        2000,
+        1076
+      ],
+      "visually_verified": true,
+      "description_zh": "官方排版展示文本聊天、逐条复盘和结算。",
+      "visible_controls_zh": "三个手机边界完整；聊天有输入/麦克风/键盘；后两屏有继续；不是本次现场操作。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "lily_screens",
+      "source_id": "highlights",
+      "source_url": "https://blog.duolingo.com/product-highlights/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN-DuolingoProductYIR-Video-Call-1.png",
+      "kind": "official_three_phone_montage",
+      "original_dimensions": [
+        1400,
+        800
+      ],
+      "visually_verified": true,
+      "description_zh": "官方排版展示入口、呼叫、带按键发言的通话。",
+      "visible_controls_zh": "入口操作完整；呼叫屏有挂断；通话屏有退出、目标进度、麦克风、字幕和系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "falstaff_screen",
+      "source_id": "falstaff",
+      "source_url": "https://blog.duolingo.com/beginner-video-call-with-falstaff/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/guided-call-with-falstaff_german-lesson-4.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        286,
+        619
+      ],
+      "visually_verified": true,
+      "description_zh": "Falstaff辅导通话与德语字幕。",
+      "visible_controls_zh": "状态栏；字幕；完整底部挂断/字幕控制栏。分辨率较低。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "explain_correct",
+      "source_id": "explain",
+      "source_url": "https://blog.duolingo.com/explain-my-answer-now-free/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Tap.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        379,
+        816
+      ],
+      "visually_verified": true,
+      "description_zh": "正确答题结果上的主动解释入口。",
+      "visible_controls_zh": "顶部状态/退出/进度/能量；题目及词块；绿色解释/继续；系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "explain_correct_detail",
+      "source_id": "explain",
+      "source_url": "https://blog.duolingo.com/explain-my-answer-now-free/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Tap-EMA.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        379,
+        816
+      ],
+      "visually_verified": true,
+      "description_zh": "正确答案的语法解释页。",
+      "visible_controls_zh": "状态栏、返回、解释、赞/踩、返回课程按钮、系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "explain_error",
+      "source_id": "explain",
+      "source_url": "https://blog.duolingo.com/explain-my-answer-now-free/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Translate.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        379,
+        816
+      ],
+      "visually_verified": true,
+      "description_zh": "错误答案页上的解释错误入口。",
+      "visible_controls_zh": "顶部控件；答案框；红色结果、正确答案、解释错误/继续；系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "explain_error_detail",
+      "source_id": "explain",
+      "source_url": "https://blog.duolingo.com/explain-my-answer-now-free/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/EN_Reverse-Translate-EMA.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        379,
+        816
+      ],
+      "visually_verified": true,
+      "description_zh": "对照错误与正确表达的反馈页。",
+      "visible_controls_zh": "状态栏、返回、解释、赞/踩、分页、返回课程按钮、系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "sounds_identify",
+      "source_id": "sounds",
+      "source_url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "original_image_url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3253.PNG",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "dock/deck最小音对听音二选一。",
+      "visible_controls_zh": "状态栏、退出、进度；音频；选项选中态；底部检查和系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "sounds_same_different",
+      "source_id": "sounds",
+      "source_url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "original_image_url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3254.PNG",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "先听两个音，判断同词还是不同词。",
+      "visible_controls_zh": "状态栏、退出、进度；两个播放；二选一；底部继续和系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "sounds_match",
+      "source_id": "sounds",
+      "source_url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "original_image_url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3256.PNG",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "四个音频和四个易混英语词配对。",
+      "visible_controls_zh": "状态栏、退出、进度；完整四行两列；底部继续和系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "speak_repeat",
+      "source_id": "speaking",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-speaking-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image1.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        752,
+        1624
+      ],
+      "visually_verified": true,
+      "description_zh": "照示例句说话。",
+      "visible_controls_zh": "状态栏、退出、进度、能量；播放、麦克风；无法说话/检查；系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "speak_choose",
+      "source_id": "speaking",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-speaking-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image2.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "visually_verified": true,
+      "description_zh": "听/读问题后说出三个候选中合适的回应。",
+      "visible_controls_zh": "状态栏、退出、进度、能量；问题播放；三项回应含麦克风；无法说话/检查；系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "speak_response",
+      "source_id": "speaking",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-speaking-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image3.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "visually_verified": true,
+      "description_zh": "完整问答中复述已经给定的回应。",
+      "visible_controls_zh": "状态栏、退出、进度、能量；问答两侧播放；麦克风；检查；系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "flashcards_screen",
+      "source_id": "writing",
+      "source_url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-writing-skills/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_flashcards.png",
+      "kind": "full_app_screen",
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "visually_verified": true,
+      "description_zh": "看母语词卡并说出译词。",
+      "visible_controls_zh": "退出、进度、能量；卡堆；麦克风、跳过；无法说话。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "flashcards_result",
+      "source_id": "flashcards",
+      "source_url": "https://blog.duolingo.com/duolingo-flashcards/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/11/summary-screen.png",
+      "kind": "official_three_phone_montage",
+      "original_dimensions": [
+        1157,
+        812
+      ],
+      "visually_verified": true,
+      "description_zh": "三种正确数量下的卡片复盘状态。",
+      "visible_controls_zh": "每屏有顶部状态/退出/进度/能量；结果；继续或确认；系统底条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "practice_screen",
+      "source_id": "practice",
+      "source_url": "https://blog.duolingo.com/guide-to-duolingo-practice-hub/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/practice-tab.png",
+      "kind": "full_phone_screen",
+      "original_dimensions": [
+        758,
+        1632
+      ],
+      "visually_verified": true,
+      "description_zh": "专项练习与Stories、Radio等入口。",
+      "visible_controls_zh": "状态栏、标题；完整可见入口列表；底部导航与系统条。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "legendary_entry",
+      "source_id": "practice_ways",
+      "source_url": "https://blog.duolingo.com/ways-to-practice-in-duolingo/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/2-screenshot_complete-review-lesson.PNG",
+      "kind": "full_phone_screen_entry_only",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "已完成节点可选择复习或Legendary。",
+      "visible_controls_zh": "完整主页与节点菜单；只证实入口，不是挑战答题屏。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "rapid_review_entry",
+      "source_id": "practice_ways",
+      "source_url": "https://blog.duolingo.com/ways-to-practice-in-duolingo/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/5-screenshot_side-quest-lesson_preview.jpeg",
+      "kind": "full_phone_screen_entry_only",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "Rapid Review进入页，显示三星与第1/3级。",
+      "visible_controls_zh": "状态栏、退出、标题、等级、奖励、底部开始和系统条；无答题过程。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    },
+    {
+      "id": "match_madness_entry",
+      "source_id": "practice_ways",
+      "source_url": "https://blog.duolingo.com/ways-to-practice-in-duolingo/",
+      "original_image_url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2025/12/6-screenshot_match-madness-lesson.PNG",
+      "kind": "full_phone_screen_entry_only",
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "visually_verified": true,
+      "description_zh": "Match Madness进入页及限时活动信息。",
+      "visible_controls_zh": "状态栏、退出、标题、活动余时、阶段、连击记录、开始、系统条；无配对过程。",
+      "not_live_account_capture": true,
+      "inspection_note": "以原图的等比缩小预览核验；未修改或保存原图，交付链接仍为官方原始图。"
+    }
+  ],
+  "definitions": {
+    "interaction": "学习者需要完成的一种作答或探索动作。",
+    "container": "组织多种交互的活动、入口或难度模式，不能与基础题型相加。",
+    "full_screen": "视觉核对原图，相关应用顶部和下方操作区完整；不要求一定含系统状态栏。",
+    "official_montage": "Duolingo自己发布的多个手机画面宣传排版；不是研究者合成，也不是现场截图。",
+    "report_date_not_rollout_guarantee": "2026-09-27为资料检索基准，非全账户/全平台实测。"
+  },
+  "availability": [
+    {
+      "feature_ids": [
+        "stories",
+        "story_mc",
+        "story_audio_tiles",
+        "story_cloze",
+        "story_free_write",
+        "radio",
+        "radio_words",
+        "radio_match",
+        "radio_tf",
+        "radio_picture"
+      ],
+      "tier": "免费课程内容；具体故事和Radio受课程与进度限制。",
+      "platforms": "历史资料确认Stories覆盖Web/iOS/Android；没有截至检索日逐课程×平台矩阵。",
+      "course_limits": "2025年总结称Stories增至100+课程的Score30–59；Radio新增内容覆盖top9学习语种，220+课程首次加入初级Radio。2026听力综述另列西/法/德/意/日/中/韩/葡，未完整枚举语言方向。",
+      "source_ids": [
+        "free",
+        "stories_android",
+        "highlights",
+        "listening"
+      ]
+    },
+    {
+      "feature_ids": [
+        "adventures",
+        "adventure_explore",
+        "adventure_dialogue"
+      ],
+      "tier": "在路径中的课程活动；专项公告未给付费门槛，不能据此宣布全账户免费。",
+      "platforms": "iOS和Android。",
+      "course_limits": "2024-09公告（12-02更新）只明确英语母语学法语、西语母语学英语；未找到更晚的完整清单。",
+      "source_ids": [
+        "adventures"
+      ]
+    },
+    {
+      "feature_ids": [
+        "practice_tab"
+      ],
+      "tier": "2026-02-18明确宣布专项练习免费，包含Super/Max用户；不能继续统一标Super专属。",
+      "platforms": "iOS和Android。",
+      "course_limits": "官方明确全部语言课程；Stories/Radio/Adventures仍须课程已有内容。",
+      "source_ids": [
+        "practice"
+      ]
+    },
+    {
+      "feature_ids": [
+        "explain_answer"
+      ],
+      "tier": "原Max功能；2026-01-01公告免费。",
+      "platforms": "专项公告未完整逐平台说明。",
+      "course_limits": "大多数学习西/法/德/日/葡/意/韩语的用户；不是所有课程/所有账号。",
+      "source_ids": [
+        "explain"
+      ]
+    },
+    {
+      "feature_ids": [
+        "roleplay",
+        "lily_call"
+      ],
+      "tier": "Duolingo Max；Max包含Super权益。",
+      "platforms": "Max页面称iOS/Android、188国；未证实Web。",
+      "course_limits": "页面2026-03更新明确英语母语学西/法/德/意/葡可用两项，学日/韩/中可用Video Call；2025总结确认Lily Android含英语、西法德意葡日韩。两文范围不完全一致，不能合并成完整语言方向矩阵。",
+      "source_ids": [
+        "max",
+        "highlights"
+      ]
+    },
+    {
+      "feature_ids": [
+        "falstaff_call"
+      ],
+      "tier": "Duolingo Max。",
+      "platforms": "2026-01公告明确iOS；未据愿景推断Android已上。",
+      "course_limits": "英语、西语、葡语、法语、日语、德语、意语、韩语、中文；公告说向所有Score分阶段扩展，年底目标不能当完成证明。",
+      "source_ids": [
+        "falstaff"
+      ]
+    },
+    {
+      "feature_ids": [
+        "sound_identify",
+        "sound_same",
+        "sound_match"
+      ],
+      "tier": "英语课程专项；公告没有单独付费说明。",
+      "platforms": "文章示例手机；未提供完整系统矩阵。",
+      "course_limits": "英语语音专项。",
+      "source_ids": [
+        "sounds"
+      ]
+    },
+    {
+      "feature_ids": [
+        "speak_repeat",
+        "speak_choose",
+        "speak_response",
+        "flashcards"
+      ],
+      "tier": "普通路径中的口语/词汇练习；不是Max实时对话。",
+      "platforms": "本次已确认官方手机截图；无法据此推断Web和全课程。",
+      "course_limits": "Flashcards官方2025总结说top8学习语言，未逐方向列出；三种口语题的完整课程支持表未公开。",
+      "source_ids": [
+        "speaking",
+        "flashcards",
+        "highlights"
+      ]
+    },
+    {
+      "feature_ids": [
+        "match_madness",
+        "rapid_review",
+        "ramp_up",
+        "lightning_round",
+        "legendary"
+      ],
+      "tier": "限时活动当前免费参与次数/宝石收费未核实；Family Plan文章仍称Super可无限Legendary。",
+      "platforms": "仅已有手机入口图；无全平台矩阵。",
+      "course_limits": "需活动、路径、账号有入口；不凭旧经验给出每周排期、价格或固定时长。",
+      "source_ids": [
+        "practice_ways",
+        "family",
+        "tslw"
+      ]
+    }
+  ],
+  "source_conflicts": [
+    {
+      "id": "practice_old_text",
+      "source_ids": [
+        "practice",
+        "practice_ways",
+        "max",
+        "intro",
+        "family"
+      ],
+      "resolution": "专项免费公告是明确权益变更证据。其他总览仍有Super练习旧表述，不能仅按modified时间排序后采信。"
+    },
+    {
+      "id": "old_max_image",
+      "source_ids": [
+        "max",
+        "explain"
+      ],
+      "resolution": "Max页仍保留旧Explain My Answer宣传图，但现正文已换成Video Call；旧图片不得证明当前EMA仍付费。"
+    },
+    {
+      "id": "lily_android",
+      "source_ids": [
+        "lily",
+        "highlights"
+      ],
+      "resolution": "2024 Lily页说日/韩Android即将推出；2025年总结已确认推出，采用后者。"
+    },
+    {
+      "id": "ema_button",
+      "source_ids": [
+        "explain"
+      ],
+      "resolution": "文章alt把错题入口统称Explain My Answer；原图实际为Explain My Mistake，截图描述以原图为准。"
+    },
+    {
+      "id": "dates",
+      "source_ids": [
+        "max",
+        "advanced_stories",
+        "stories_android"
+      ],
+      "resolution": "HTML published与modified是页面元数据，不一定对应某一功能上线日期；2022未来计划文案即便2026修改也不视作2026现状。"
+    }
+  ],
+  "verification": {
+    "checked_on": "2026-09-27",
+    "source_count": 25,
+    "feature_count": 32,
+    "image_evidence_count": 33,
+    "visually_verified_image_count": 31,
+    "business_code_changed": false,
+    "git_actions": false,
+    "files_written": [
+      "advanced-experiences.md",
+      "advanced-experiences.json"
+    ],
+    "downloaded_image_artifacts": false,
+    "method": "官方网页检索，HTML发布/修改日期与原始资源链接提取，针对选中资源以内存中的等比显示预览逐图核验。"
+  }
+}

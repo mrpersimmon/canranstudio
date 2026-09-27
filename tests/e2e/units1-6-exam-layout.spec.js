@@ -48,7 +48,10 @@ for (const unit of ['1-2', '3-4', '5-6']) test(`${unit} 缓存课程断网刷新
   const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.getByRole('status')).toBeEmpty();
-  await expect(room.getByRole('button', { name: EXAMS[unit][0].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
+  const answer = EXAMS[unit][0].answer;
+  if (answer.fills) {
+    for (const [i, text] of answer.fills.entries()) await expect(room.getByRole('group', { name: `第${i + 1}处填空`, exact: true }).getByRole('button', { name: text, exact: true })).toHaveAttribute('aria-pressed', 'true');
+  } else await expect(room.getByRole('button', { name: answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await context.setOffline(false);

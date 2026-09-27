@@ -1,4 +1,5 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 // Independent manuscript: textbook paper pages 2–13 and the reviewed coverage
 // matrix. No application answer table is consulted by these page walkthroughs.
@@ -37,12 +38,15 @@ const EXAMS = {
     { prompt: "He's German. She's French. It isn't an English car.", answer: 'He is / She is / is not' }
   ]
 };
+const revisedPrompts={"0": "接好女士的两次回应。"};
+EXAMS['1-2'].splice(0,EXAMS['1-2'].length,...taskCases.answers('1-2','exam').map((q,i)=>({...EXAMS['1-2'][i],...q,prompt:revisedPrompts[i]||EXAMS['1-2'][i]?.prompt})));
 async function choose(room, question) {
   if (question.audio) {
     await room.getByRole('button', { name: '听一遍', exact: true }).click();
     await expect(room.getByRole('button', { name: '再听一遍', exact: true })).toBeVisible({ timeout: 15000 });
   }
-  if (Array.isArray(question.answer)) {
+  if(question.answer&&typeof question.answer==='object'&&!Array.isArray(question.answer))await taskCases.select(room,question.answer);
+  else if (Array.isArray(question.answer)) {
     for (const token of question.answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
   } else await room.locator('.practice-options').getByRole('button', { name: question.answer, exact: true }).click();
 }

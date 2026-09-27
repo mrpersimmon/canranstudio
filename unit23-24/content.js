@@ -87,6 +87,19 @@
    ],'桌子上的那些杯子','最后的更正指定了 table。','按先后顺序读，两次要求是否一样？','Lesson23否定与位置结构；更正情境','新增时间顺序条件，不照抄故事或上一单元澄清题')
   ]
  };
+ const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-some","some不规定确切数量","Give me some glasses.\n男士说明了什么？",[["要多个玻璃杯，没说具体几只。", ""], ["一定要两只玻璃杯。", "some 不等于 two。"], ["要一副眼镜。", "本课的 glasses 是玻璃杯。"]],"要多个玻璃杯，没说具体几只。","本题核对：some不规定确切数量。","数量词没有给出具体数字。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查some不规定确切数量",{}),
+  q("final-v2-ones","ones替代复数名词","Give me some newspapers.\nThe ones on the stereo.\nones 指什么？",[["newspapers", ""], ["stereo", "音响说明位置，不是要拿的物品。"], ["一个物品", "这里 ones 代替的是复数。"]],"newspapers","本题核对：ones替代复数名词。","先找请求里的物品名。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查ones替代复数名词",{}),
+  q("final-v2-perspective","同时判断近远和单复数","你站在门边，指着远处架上的三本书确认：",[["Those books?", ""], ["This book?", "数量和距离都不符。"], ["These books?", "These 通常表示说话者近处这些。"]],"Those books?","本题核对：同时判断近远和单复数。","从你所站的位置判断远近，再看数量。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查同时判断近远和单复数",{}),
+  q("final-v2-on","on表示表面承托","The books on the desk.\n哪组符合这句？",[["甲组", ""], ["乙组", "书在抽屉里，不在桌面。"], ["丙组", "独立搁板在桌子上方，不等于桌面。"]],"甲组","本题核对：on表示表面承托。","看书由哪个表面承托。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查on表示表面承托",{"optionImages": {"甲组": "/assets/unit23-24/books-on-desk.svg", "乙组": "/assets/unit23-24/books-in-desk.svg", "丙组": "/assets/unit23-24/books-above-desk.svg"}, "optionImageAlts": {"甲组": "三本书在桌面上", "乙组": "三本书在抽屉里", "丙组": "三本书在独立墙上搁板上"}}),
+  q("final-v2-recipient","接收者不必等于物主","这是 Tom 的书，但 Tom 请你交给 Jane（女士）。\nGive ___ Tom’s books, please.",[["her", ""], ["him", "这次指定接收者是 Jane，不是物主 Tom。"], ["his", "his 表示所属，不能放在此处作接收者。"]],"her","本题核对：接收者不必等于物主。","分别确认东西是谁的、现在要交给谁。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查接收者不必等于物主",{}),
+  q("final-v2-our-us","our与us不同位置","两位同学请你把他们的盒子递回，一起说：\nThose are ___ boxes. Give ___ those boxes, please.",[["our · us", ""], ["us · our", "所属和接收者的词形反了。"], ["their · them", "两位同学在说自己，不是转述其他人。"]],"our · us","本题核对：our与us不同位置。","先看谁的盒子，再看给谁。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查our与us不同位置",{}),
+  q("final-v2-build","独立组织多件请求","请给他一些盘子。",undefined,"Give him some plates, please.","本题核对：独立组织多件请求。","接收者在动作后，some 后面检查物品数量。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查独立组织多件请求",{"type": "order", "tokens": ["Give", "him", "some", "plates,", "please."]}),
+  q("final-v2-location-clue","位置比物品种类更具体","A：pens on the desk\nB：pens on the table\n客人说：The ones on the desk.\n拿哪一组？",[["A", ""], ["B", "table 不是本题指定的 desk。"], ["A 和 B 都拿", "只指定一处的物品。"]],"A","本题核对：位置比物品种类更具体。","两组物品一样，要核对后面的地点。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查位置比物品种类更具体",{}),
+ );
  const stages=[
   {id:'l1',title:'先认识房间',activities:[['words','房间小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
   {id:'l2',title:'帮简找杯子',activities:[['text','找杯子小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
@@ -94,8 +107,153 @@
   {id:'l4',title:'说清在何处',activities:[['models','房间位置册','cards'],['be','位置小帮手','cards'],['trans','词块拼装台','order']],required:['be','trans']},
   {id:'l5',title:'完成寻物任务',activities:[['exam','寻物小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit23-24',version:1,title:'房间寻物队',path:'/unit23-24/',start:'learn/words',progress:{learningKey:'canran:unit23-24:learning:v1'},objects:WORDS,stages,questions,
+ const definition={id:'unit23-24',version:1,title:'房间寻物队',path:'/unit23-24/',start:'learn/words',progress:{learningKey:'canran:unit23-24:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
   learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit2324=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit2324;
+ const revised={"listen":[unit.questions["listen"][0],
+unit.questions["listen"][1],
+unit.questions["listen"][2],
+unit.questions["listen"][3],
+{
+  "id": "u2324-tasks-v4-objects",
+  "target": "区分餐具与两类读物",
+  "prompt": "给物品词配对。",
+  "decision": "其余位置、some 的数量边界与易混家具仍保留独立题。",
+  "hint": "",
+  "source": "Lesson 23–24 plate、magazine、newspaper 词表",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "plate",
+      "cn": "盘子"
+    },
+    {
+      "id": "2",
+      "en": "magazine",
+      "cn": "杂志"
+    },
+    {
+      "id": "3",
+      "en": "newspaper",
+      "cn": "报纸"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "盘子与两类读物分别识别，其他位置、家具和数量词练习保留。"
+},
+unit.questions["listen"][5],
+unit.questions["listen"][6],
+unit.questions["listen"][7],
+unit.questions["listen"][8],
+unit.questions["listen"][9],
+unit.questions["listen"][11],
+unit.questions["listen"][13],
+unit.questions["listen"][14]],
+"roles":[{
+  "id": "u2324-tasks-v4-story-place",
+  "target": "原文中找到位置限制",
+  "prompt": "点出说明杯子位置的词组。",
+  "decision": "问位置词组，不能只选择玻璃杯名称或 ones。",
+  "hint": "物品后面的短语在缩小寻找范围。",
+  "source": "Lesson 23 原文 The ones on the shelf.",
+  "type": "locate",
+  "fragments": [
+    {
+      "value": "The ones"
+    },
+    " ",
+    {
+      "value": "on the shelf"
+    },
+    "."
+  ],
+  "options": [
+    "The ones",
+    "on the shelf"
+  ],
+  "answer": "on the shelf",
+  "distractorReasons": {
+    "The ones": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "on the shelf 给出地点；The ones 只指所选的一组，不包含摆放位置。"
+},
+unit.questions["roles"][1]],
+"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+unit.questions["exam"][4],
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+{
+  "id": "u2324-tasks-v4-exam-our-us",
+  "target": "区分物主 our 与接收者 us",
+  "prompt": "两位同学一起把盒子认回来。",
+  "decision": "同一群体、两个句法位置；不能整组选一个包办答案。",
+  "hint": "一个空在名词前说明归属，另一个空在 Give 后说明给谁。",
+  "source": "Lesson 24 our 与 us 替换；用已学 boxes 构造认领交接",
+  "type": "cloze",
+  "reference": "盒子属于说话的这两位同学。",
+  "blanks": [
+    {
+      "before": "Those are ",
+      "after": " boxes.",
+      "options": [
+        "our",
+        "us",
+        "their"
+      ]
+    },
+    {
+      "before": "Give ",
+      "after": " those boxes, please.",
+      "options": [
+        "us",
+        "our",
+        "them"
+      ]
+    }
+  ],
+  "answer": "[\"our\",\"us\"]",
+  "distractorReasons": {
+    "our": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "us": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "their": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "them": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "our 作名词前的物主限定，us 作 Give 的接收者；互换会错用形式。their/them 指向说话人以外的群体，与给定归属不符。"
+},
+unit.questions["exam"][8],
+{
+  "id": "u2324-tasks-v4-exam-which-number",
+  "target": "复数选择问句与归属问句区别",
+  "prompt": "桌上有两组盘子。Jane 只说：Give me some plates.\n下一句怎样确认她要哪一组？",
+  "decision": "替换重复 on the desk 抽查，补齐最终挑战中复数 Which ones 的独立判断。",
+  "hint": "问要哪一组，既要看问什么，也要看物品是一件还是多件。",
+  "source": "Lesson 23 Which ones?；复用 Lesson 24 plates 构造澄清需求",
+  "options": [
+    "Which ones?",
+    "Which one?",
+    "Whose plates?"
+  ],
+  "answer": "Which ones?",
+  "distractorReasons": {
+    "Which one?": "只问单数的一件，与 plates 不一致。",
+    "Whose plates?": "问主人，没有确认选择哪组。"
+  },
+  "distractorRationale": "Which ones? 确认复数选择；Which one? 数量不符；Whose plates? 问主人。替换重复桌面位置题，新增实际澄清判断。"
+}]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit2324-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit2324-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

@@ -1,4 +1,5 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 // Independent answers: textbook PDF 55–58 and the v2.1 coverage manuscript.
 const EXAM = [
@@ -13,8 +14,11 @@ const EXAM = [
  { prompt: '远处', answer: ['Whose', 'shirt', 'is', 'that?'] },
  { prompt: '归还', answer: '老师：Here you are. / Tim：Thank you, sir.' }
 ];
+const revisedPrompts={"4": "接好 Dave 和老师的认领对话。"};
+EXAM.splice(0,EXAM.length,...taskCases.answers('11-12','exam').map((q,i)=>({...EXAM[i],...q,prompt:revisedPrompts[i]||EXAM[i]?.prompt})));
 async function selectAnswer(room, answer) {
- if (Array.isArray(answer)) for (const token of answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
+ if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+  else if (Array.isArray(answer)) for (const token of answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
  else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
 }
 async function finishExamFrom(page, start = 0) {

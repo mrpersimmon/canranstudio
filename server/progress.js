@@ -76,6 +76,26 @@ function normalize(value, unit, course) {
     result.groups[course.replace('-','')+'-'+id+'-practice/v2']={index:questions.length,states:states.map(state=>({...state,runId})),runId,draftVersion:2,signature:questions.map(q=>q.id).join('|'),contentSignature:JSON.stringify([unit.version,questions],(key,item)=>key==='hint'?undefined:item)};
     result.activity.unitCompleted[id]=signatures[id];
   }
+  // Versioned question replacements can have several exact predecessors.
+  // Keep their completed evidence for the client to carry unchanged answers;
+  // it must never count as completion of the replacement activity.
+  const taskProofs={};
+  if(!complete)for(const[id,sources]of Object.entries(unit.taskPredecessors||{})){
+    if(result.activity.unitCompleted[id])continue;
+    for(const{key,questions}of sources){
+      if(['__proto__','constructor','prototype'].includes(key)||!Array.isArray(questions))continue;
+      const signature=JSON.stringify([unit.version,questions]);
+      const proof=value.activity.unitPreviousTaskCompleted?.[key]||value.activity.unitCompleted?.[id];
+      const group=value.groups?.[key],content=JSON.stringify([unit.version,questions],(field,item)=>field==='hint'?undefined:item);
+      if(!sameSignature(proof,signature)||!group||group.draftVersion!==2||typeof group.runId!=='string'||!group.runId||
+        group.index!==questions.length||group.signature!==questions.map(q=>q.id).join('|')||!sameSignature(group.contentSignature,content))continue;
+      if(!questions.every((q,i)=>{const s=group.states?.[i];return s?.checked===true&&s.correct===true&&s.selection===q.answer&&
+        Number.isInteger(s.attempts)&&s.attempts>0&&typeof s.firstCorrect==='boolean'&&s.questionId===q.id&&s.runId===group.runId;}))continue;
+      result.groups[key]={...group,contentSignature:content};taskProofs[key]=signature;
+      for(const q of questions)if(record(value.records?.[q.id]))result.records[q.id]=value.records[q.id];
+    }
+  }
+  if(Object.keys(taskProofs).length)result.activity.unitPreviousTaskCompleted=taskProofs;
   // Personal certificate text is metadata, never proof of completion. A new
   // question or a partial sync must not erase it when scores are revalidated.
   // Authentication still owns this record; only the validated groups above can

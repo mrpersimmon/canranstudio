@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-09-27",
+  "scope": "只收中文界面且目标语言为英语的公开官方素材。Apple 官方编辑文章与 Duolingo 开发者商店素材分开标注。",
+  "status": "confirmed_sources_saved",
+  "scopeExclusions": [
+    "其他母语学习英语的题页",
+    "英文界面学习中文",
+    "中文界面学习其他目标语言",
+    "Duolingo English Test",
+    "用户实机截图（由主报告另行收录）"
+  ],
+  "counts": {
+    "savedOriginalFiles": 10,
+    "fullExerciseImages": 2,
+    "fullExerciseTypes": 2,
+    "fullStandaloneExerciseImages": 1,
+    "fullForegroundExerciseImagesInOfficialComposite": 1,
+    "partialTranslationPromotionalImages": 3,
+    "courseSelectionContextImages": 1,
+    "duolingoOwnedBlogFullExerciseImages": 0,
+    "partialPromotionalImages": 7,
+    "partialPromotionalImagesWithAllTaskControlsVisible": 3,
+    "observedExerciseTypesIncludingPartial": 6
+  },
+  "definitionOfFull": "必须完整展示应用题目顶部导航/进度、题干、作答区、底部提交或继续区。系统时间栏不是必要条件。官方合成图仅在某一题目屏幕上下边界都可见且无控件遮挡时，单独标记该前景屏完整；不得将被遮挡背景屏计为完整。",
+  "assets": [
+    {
+      "id": "CNM01",
+      "file": "assets/cn-apple-word-matching.webp",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/Features112/v4/d8/e5/c7/d8e5c76d-0932-1406-6be7-d4436256007e/be387636-1330-4d38-a3ae-72c79fa0614f.png/1380x2878bb.webp",
+      "sourcePage": "https://apps.apple.com/cn/iphone/story/id1605587215",
+      "sourceTitle": "闯关升级学外语",
+      "publisher": "Apple App Store 编辑部（官方平台编辑文章，非 Duolingo 自有博客）",
+      "sourceDate": "2026-07-26T20:58:36Z",
+      "sourceDateMeaning": "页面结构化数据 datePublished/dateModified；可能为编辑更新，不能当作截图拍摄或功能上线时间。",
+      "exerciseType": "中英文字词义配对",
+      "framing": "full_item_ui",
+      "fullItemUi": true,
+      "courseDirection": "中文 → 英语",
+      "courseDirectionEvidence": "中文题干“选择配对”、中英词语配对；同文课程选择图 CNM03 明示“通过中文学习”并列出英语。",
+      "courseDirectionConfidence": "有同文课程入口与题页联合支持",
+      "notes": "完整应用题目区域：顶部关闭、进度、连对数字与心形；五组词语；正确反馈“不错哦!”；底部完整“继续”和 Home 条。未含系统时间栏不影响题目区域完整性。画面为全部配对完成后的正确反馈状态，不证明未作答或错误状态。",
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "心形计数",
+        "五组中英词语",
+        "正确反馈",
+        "继续",
+        "Home 条"
+      ],
+      "visibleExamples": [
+        "你 / you",
+        "喜欢 / like",
+        "英文 / English",
+        "我 / I",
+        "中文 / Chinese"
+      ],
+      "screenState": "全部配对完成后的正确反馈",
+      "uiLanguage": "简体中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "currentAvailability": "仅证明公开素材展示过该中文英语界面；未据此推断2026-09-27所有账号、平台、订阅的当前可用性。",
+      "width": 1380,
+      "height": 2877,
+      "bytes": 30152,
+      "sha256": "983a519c2620d27445d34af6a2f5b382cf4de1f0682d168fb607a40cbc359e62",
+      "preservation": "按所列公开 CDN URL 保存返回的原文件字节；未裁剪、重绘、拼接或改写界面。"
+    },
+    {
+      "id": "CNM02",
+      "file": "assets/cn-apple-audio-matching-composite.webp",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/Features122/v4/4a/d8/4f/4ad84f83-ffa9-a587-35b1-c30c1db2c70d/1d880045-084b-4af4-b57b-20dd9068e64a.png/1380x2612bb.webp",
+      "sourcePage": "https://apps.apple.com/cn/iphone/story/id1399754989",
+      "sourceTitle": "玩着游戏，就能学外语？",
+      "publisher": "Apple App Store 编辑部（官方平台编辑文章，非 Duolingo 自有博客）",
+      "sourceDate": "2026-05-03T22:56:59Z",
+      "sourceDateMeaning": "页面结构化数据 datePublished/dateModified；可能为编辑更新，不能当作截图拍摄或功能上线时间。",
+      "exerciseType": "英语听音 → 中文词义配对",
+      "framing": "full_foreground_item_in_official_composite",
+      "fullItemUi": true,
+      "courseDirection": "中文 → 英语",
+      "courseDirectionEvidence": "官方配图说明明确建议添加英语课程；前景屏中文题干，phone 对应“手机”；背景屏中文句子组英语译文。",
+      "courseDirectionConfidence": "官方文章说明及图中内容明确",
+      "notes": "官方双手机合成原图。前景题页从顶部关闭、进度和无限心到四组音频/中文词义、底部“现在不做听力题”、完整“检查”和 Home 条均可见。背景的中文→英语词块翻译被前景手机遮挡，不能计作完整翻译题。此题是普通听力词义配对，不是 Sounds 音素辨别或 Radio。",
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "无限心",
+        "四个音频选项",
+        "四个中文词义",
+        "现在不做听力题",
+        "检查",
+        "Home 条"
+      ],
+      "visibleExamples": [
+        "phone / 手机",
+        "电脑",
+        "猫",
+        "书"
+      ],
+      "screenState": "配对进行中，phone 与手机一组已匹配",
+      "panels": [
+        {
+          "position": "前景",
+          "exerciseType": "英语听音 → 中文词义配对",
+          "fullItemUi": true,
+          "framing": "full_item_ui"
+        },
+        {
+          "position": "背景",
+          "exerciseType": "中文 → 英语词块翻译",
+          "fullItemUi": false,
+          "framing": "partially_occluded",
+          "notes": "下部词库及提交区被前景手机遮挡。"
+        }
+      ],
+      "uiLanguage": "简体中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "currentAvailability": "仅证明公开素材展示过该中文英语界面；未据此推断2026-09-27所有账号、平台、订阅的当前可用性。",
+      "width": 1380,
+      "height": 2612,
+      "bytes": 51288,
+      "sha256": "adeced4314a4deabb46900ab5b1cd9cf6805b83336381f63016c29163a1faafa",
+      "preservation": "按所列公开 CDN URL 保存返回的原文件字节；未裁剪、重绘、拼接或改写界面。"
+    },
+    {
+      "id": "CNM03",
+      "file": "assets/cn-apple-course-selection.webp",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/Features122/v4/3b/ea/f0/3beaf0f5-6044-73de-bfe5-37791b049b56/02db4bfc-5cc4-4d6c-aadb-8baa715c8934.png/1380x2878bb.webp",
+      "sourcePage": "https://apps.apple.com/cn/iphone/story/id1605587215",
+      "sourceTitle": "闯关升级学外语",
+      "publisher": "Apple App Store 编辑部（官方平台编辑文章，非 Duolingo 自有博客）",
+      "sourceDate": "2026-07-26T20:58:36Z",
+      "sourceDateMeaning": "页面结构化数据日期，不代表截图拍摄日期。",
+      "exerciseType": null,
+      "framing": "full_course_selection_ui_not_exercise",
+      "fullItemUi": false,
+      "courseDirection": "通过中文学习 → 英语（入口示例）",
+      "courseDirectionEvidence": "中文课程选择页明示“通过中文学习”，英语位于该分组首项。",
+      "courseDirectionConfidence": "图中文字明确",
+      "notes": "上下完整的课程选择入口，可辅助说明中文学习英语的课程方向；不是题型，不计入完整题页数量。该页同时包含粤语、日语等课程及“通过英文学习”分组，不将这些条目混入英语题型。",
+      "uiLanguage": "简体中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "currentAvailability": "仅证明公开素材展示过该中文英语界面；未据此推断2026-09-27所有账号、平台、订阅的当前可用性。",
+      "width": 1380,
+      "height": 2877,
+      "bytes": 39994,
+      "sha256": "b1fe66b5ce48ec0e0d1e5660ea68e2f0e68d363b95d8987c66686efe44aaf819",
+      "preservation": "按所列公开 CDN URL 保存返回的原文件字节；未裁剪、重绘、拼接或改写界面。"
+    },
+    {
+      "id": "CNM04",
+      "file": "assets/cn-appstore-wordbank-iphone.jpg",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/c3/54/9f/c3549f4c-cc13-b7a1-8f0e-21d2688ecd8f/a71e7d50-9bc6-45f2-a82f-658dcbb1fd70_iOS_1242x2688_-_01.png/320x480bb.jpg",
+      "sourcePage": "https://apps.apple.com/cn/app/id570060128",
+      "discoveryApi": "https://itunes.apple.com/lookup?id=570060128&country=cn",
+      "sourceTitle": "多邻国 Duolingo（中国 App Store 开发者展示图）",
+      "publisher": "Duolingo, Inc（Apple 托管的开发者商店素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；当前 app 版本发布日期不作为截图日期。",
+      "exerciseType": "中文 → 英语词块翻译",
+      "framing": "promotional_device_bottom_cropped",
+      "fullItemUi": false,
+      "courseDirection": "中文 → 英语",
+      "courseDirectionEvidence": "中文题干“翻译这句话”，提示“我喜欢我的英语老师”，英语答案“I like my English teacher”。",
+      "courseDirectionConfidence": "图中翻译方向明确",
+      "notes": "iPhone 宣传合成图，题干、答案、词块与绿色检查按钮可见；设备与应用底部在画面边界处截断，严格完整题页不通过。仅取得官方 Apple API 公开返回的 222×480 缩略图文件，不放大、不补画。",
+      "screenState": "已组好英语答案、等待检查",
+      "uiLanguage": "简体中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "currentAvailability": "仅证明公开素材展示过该中文英语界面；未据此推断2026-09-27所有账号、平台、订阅的当前可用性。",
+      "width": 222,
+      "height": 480,
+      "bytes": 24849,
+      "sha256": "b4133ea4218244468e1ddd835f59dae6bf7efc7be317acc060e3a2b45f58687c",
+      "preservation": "按所列公开 CDN URL 保存返回的原文件字节；未裁剪、重绘、拼接或改写界面。"
+    },
+    {
+      "id": "CNM05",
+      "file": "assets/cn-appstore-wordbank-ipad.png",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/7f/fa/71/7ffa7108-02d4-b799-91f5-ef2bd8443829/df2f590c-4b1d-487f-8f2f-7073d4b572c2_2048-2732__U00288_U0029.png/576x768bb.png",
+      "sourcePage": "https://apps.apple.com/cn/app/id570060128?platform=ipad",
+      "discoveryApi": "https://itunes.apple.com/lookup?id=570060128&country=cn",
+      "sourceTitle": "多邻国 Duolingo（中国 App Store 开发者展示图）",
+      "publisher": "Duolingo, Inc（Apple 托管的开发者商店素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；当前 app 版本发布日期不作为截图日期。",
+      "exerciseType": "中文 → 英语词块翻译",
+      "framing": "promotional_device_bottom_cropped",
+      "fullItemUi": false,
+      "courseDirection": "中文 → 英语",
+      "courseDirectionEvidence": "中文题干和中文源句，用户以英语词块组译文。与 CNM04 为同一内容的平板构图。",
+      "courseDirectionConfidence": "图中翻译方向明确",
+      "notes": "iPad 宣传合成图，题干、英语答案、词库与检查按钮可见；设备/应用底部未完整呈现，不能冒充完整独立题页。保存官方 API 公开返回的 576×768 PNG 原文件字节。",
+      "screenState": "已组好英语答案、等待检查",
+      "uiLanguage": "简体中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "currentAvailability": "仅证明公开素材展示过该中文英语界面；未据此推断2026-09-27所有账号、平台、订阅的当前可用性。",
+      "width": 576,
+      "height": 768,
+      "bytes": 60621,
+      "sha256": "539d47f08468fce3b29b35ecebfbb12cfbeca594cf8fed033b2d1db694330ab9",
+      "preservation": "按所列公开 CDN URL 保存返回的原文件字节；未裁剪、重绘、拼接或改写界面。"
+    },
+    {
+      "id": "CNM06",
+      "file": "assets/cn-googleplay-picture-choice.png",
+      "url": "https://play-lh.googleusercontent.com/muinU63AIT_FZkK8OA9urtIl9JoaBaFIM7fvolInrg60KXzPrIl8nqCKw4fWbXaYYBnL96EIzYtaKPHx4Pv5Kg=w1052-h592",
+      "sourcePage": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+      "sourceTitle": "Duolingo Google Play 中文商店页",
+      "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；商店应用更新时间不作为截图日期。",
+      "uiLanguage": "中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "courseDirection": "中文 → 英语",
+      "courseDirectionConfidence": "画面中的中文指令/提示与英语作答内容直接支持",
+      "framing": "promotional_app_bottom_cropped",
+      "fullItemUi": false,
+      "exerciseType": "看图选择英语词",
+      "allTaskControlsVisible": false,
+      "notes": "中文题干“哪一个是‘玻璃杯’呢？”，四宫格图卡已选 glass；下排两张图的词标签被绿色反馈条覆盖，因此不能标为全部作答内容与控件可见。顶部关闭、进度、心形与底部正确反馈、完整继续按钮可见；宣传构图的应用底边裁断，不计完整界面。",
+      "courseDirectionEvidence": "中文语义提示与英语候选词 mug、glass；glass 被选中并显示正确反馈。",
+      "visibleExamples": [
+        "玻璃杯",
+        "mug",
+        "glass"
+      ],
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "心形计数",
+        "四个图卡候选",
+        "正确反馈",
+        "继续"
+      ],
+      "screenState": "选择 glass 后的正确反馈",
+      "width": 333,
+      "height": 592,
+      "bytes": 34569,
+      "sha256": "6eac6550749485499a46cbbcdc79405a6da9412c9d5d831acbde3f9c3bb15690",
+      "currentAvailability": "公开宣传素材可确认界面示例，不能据此推断研究日所有平台/账号可用性。",
+      "preservation": "保存公开商店页面 srcset 提供的图片原文件字节；未裁剪、补画或改字。"
+    },
+    {
+      "id": "CNM07",
+      "file": "assets/cn-googleplay-wordbank-translation.png",
+      "url": "https://play-lh.googleusercontent.com/qeekCpZ8fGZJjEKOryYMHdT_i9L1u6_yd5dtgbMYDQgJ8K4XILG4TruRRo71-U93N4OxGEPlucEKFqx2u2K5Vw=w1052-h592",
+      "sourcePage": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+      "sourceTitle": "Duolingo Google Play 中文商店页",
+      "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；商店应用更新时间不作为截图日期。",
+      "uiLanguage": "中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "courseDirection": "中文 → 英语",
+      "courseDirectionConfidence": "画面中的中文指令/提示与英语作答内容直接支持",
+      "framing": "promotional_app_bottom_cropped",
+      "fullItemUi": false,
+      "exerciseType": "中文 → 英语词块翻译",
+      "allTaskControlsVisible": false,
+      "notes": "中文句子“我想要一份沙拉。”，英语答案 I want a salad 与备选词块可见；底部提交/继续区缺失，Duo 宣传角色占据下部。明确是局部宣传素材。",
+      "courseDirectionEvidence": "中文源句与英语词块译文直接展示翻译方向。",
+      "visibleExamples": [
+        "我想要一份沙拉。",
+        "I want a salad"
+      ],
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "心形计数",
+        "中文句子",
+        "英语答案词块",
+        "候选词块"
+      ],
+      "screenState": "已拼出答案，提交状态未完整显示",
+      "width": 333,
+      "height": 592,
+      "bytes": 40017,
+      "sha256": "8d0457262a00b142046b803e0247d6f9ab8a160a31e7f59c731883ab4e0e7d13",
+      "currentAvailability": "公开宣传素材可确认界面示例，不能据此推断研究日所有平台/账号可用性。",
+      "preservation": "保存公开商店页面 srcset 提供的图片原文件字节；未裁剪、补画或改字。"
+    },
+    {
+      "id": "CNM08",
+      "file": "assets/cn-googleplay-read-aloud-hello.png",
+      "url": "https://play-lh.googleusercontent.com/Vv6vlem--PSJd-GNEOkZyvAPZ5Ek7CRC5zSfVGhrZkL2R-J_GAsf3tNDAch3b1SlubI6ngK6nVqEnwqN6s-01Q=w1052-h592",
+      "sourcePage": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+      "sourceTitle": "Duolingo Google Play 中文商店页",
+      "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；商店应用更新时间不作为截图日期。",
+      "uiLanguage": "中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "courseDirection": "中文 → 英语",
+      "courseDirectionConfidence": "画面中的中文指令/提示与英语作答内容直接支持",
+      "framing": "promotional_app_bottom_cropped",
+      "fullItemUi": false,
+      "exerciseType": "朗读英语句子",
+      "allTaskControlsVisible": true,
+      "notes": "中文朗读指令，英语 Hello!，带音频与录音按钮；顶部关闭、进度、心形及底部正确反馈、中文释义、完整继续按钮均可见。宣传卡片下边界截断，不能算整幅完整界面。",
+      "courseDirectionEvidence": "中文操作指令和反馈释义“你好”，待朗读内容为英语 Hello!。",
+      "visibleExamples": [
+        "Hello!",
+        "你好！"
+      ],
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "心形计数",
+        "播放示范音频",
+        "录音",
+        "正确反馈与中文释义",
+        "继续"
+      ],
+      "screenState": "朗读成功反馈",
+      "width": 333,
+      "height": 592,
+      "bytes": 31251,
+      "sha256": "ff0105b9f43edaa93abc9105ba05cbc3c4fb8bc1aa283b02db73f50d48dfe194",
+      "currentAvailability": "公开宣传素材可确认界面示例，不能据此推断研究日所有平台/账号可用性。",
+      "preservation": "保存公开商店页面 srcset 提供的图片原文件字节；未裁剪、补画或改字。"
+    },
+    {
+      "id": "CNM09",
+      "file": "assets/cn-googleplay-typed-dictation.png",
+      "url": "https://play-lh.googleusercontent.com/RjYvLo1uoCYlLNAug8VEP0KMNm9mLBczK4Vb1YtBVK-k7ghXxGCQ8QoCCoh18zGjbYzgX_oWro7HKL1RTEYmzOs=w1052-h592",
+      "sourcePage": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+      "sourceTitle": "Duolingo Google Play 中文商店页",
+      "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；商店应用更新时间不作为截图日期。",
+      "uiLanguage": "中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "courseDirection": "中文 → 英语",
+      "courseDirectionConfidence": "画面中的中文指令/提示与英语作答内容直接支持",
+      "framing": "promotional_app_bottom_cropped",
+      "fullItemUi": false,
+      "exerciseType": "英语整句键入听写",
+      "allTaskControlsVisible": true,
+      "notes": "中文键入听到内容的指令；常速、慢速两个音频入口，大文本框内 I need to pay.；底部正确反馈含中文释义，完整继续按钮可见。宣传卡片下边界截断，不能算整幅完整界面。",
+      "courseDirectionEvidence": "中文指令与中文反馈释义，听写结果为英语 I need to pay.。",
+      "visibleExamples": [
+        "I need to pay.",
+        "我需要付钱。"
+      ],
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "心形计数",
+        "常速音频",
+        "慢速音频",
+        "大文本框",
+        "正确反馈与中文释义",
+        "继续"
+      ],
+      "screenState": "听写正确反馈",
+      "width": 333,
+      "height": 592,
+      "bytes": 35400,
+      "sha256": "9d55534fe23d429c98fb6b3a010a7cc67c867c91fc194657621a91a0fb3efafe",
+      "currentAvailability": "公开宣传素材可确认界面示例，不能据此推断研究日所有平台/账号可用性。",
+      "preservation": "保存公开商店页面 srcset 提供的图片原文件字节；未裁剪、补画或改字。"
+    },
+    {
+      "id": "CNM10",
+      "file": "assets/cn-googleplay-read-aloud-yes.png",
+      "url": "https://play-lh.googleusercontent.com/e5tn3iyi3Zu1bVdc-6TitucvOvDbLZ9cJX7i30SsP9QB5i7Kcao1GlhXpJLgON3Huyt16pLenku73SacouWKBQ=w1052-h592",
+      "sourcePage": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+      "sourceTitle": "Duolingo Google Play 中文商店页",
+      "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+      "sourceDate": null,
+      "sourceDateMeaning": "截图发布日期未公开；商店应用更新时间不作为截图日期。",
+      "uiLanguage": "中文",
+      "targetLanguage": "英语",
+      "learnerPerspective": "中文母语学习英语",
+      "retrievedOn": "2026-09-27",
+      "courseDirection": "中文 → 英语",
+      "courseDirectionConfidence": "画面中的中文指令/提示与英语作答内容直接支持",
+      "framing": "promotional_app_bottom_cropped",
+      "fullItemUi": false,
+      "exerciseType": "朗读英语句子",
+      "allTaskControlsVisible": true,
+      "notes": "中文朗读指令，英语 Yes, please.，音频及录音按钮与底部正确反馈、中文释义、完整继续按钮可见。宣传卡片下边界截断，不能算整幅完整界面；与 CNM08 为同一题型的内容变体。",
+      "courseDirectionEvidence": "中文操作指令与中文释义，待朗读内容为英语 Yes, please.。",
+      "visibleExamples": [
+        "Yes, please.",
+        "好的，谢谢。"
+      ],
+      "visibleControls": [
+        "顶部关闭",
+        "进度条",
+        "心形计数",
+        "播放示范音频",
+        "录音",
+        "正确反馈与中文释义",
+        "继续"
+      ],
+      "screenState": "朗读成功反馈",
+      "width": 333,
+      "height": 592,
+      "bytes": 38212,
+      "sha256": "3fde49484eb76b262abe6fd5c0f7b2f5a486b1cf83d2a08d30d8587c3a3360dc",
+      "currentAvailability": "公开宣传素材可确认界面示例，不能据此推断研究日所有平台/账号可用性。",
+      "preservation": "保存公开商店页面 srcset 提供的图片原文件字节；未裁剪、补画或改字。"
+    }
+  ],
+  "confirmedExercises": [
+    {
+      "id": "CNC01",
+      "name": "中英文字词义配对",
+      "mediaIds": [
+        "CNM01"
+      ],
+      "input": "中文词与英语词的两列可见文字",
+      "userAction": "点选一侧词语，再点另一侧对应词；逐对消除/标记至完成。",
+      "output": "匹配对与即时视觉反馈，全部完成后继续。",
+      "learningGoal": "建立英语词形与中文词义之间的对应。",
+      "designObservation": "一次呈现五对；完成项淡化；当前图只展示完成态。",
+      "rationaleStatus": "学习目标为研究解释；配对数量与可见控件为图中直接观察。"
+    },
+    {
+      "id": "CNC02",
+      "name": "英语听音 → 中文词义配对",
+      "mediaIds": [
+        "CNM02"
+      ],
+      "input": "四个可播放的英语音频入口与四个中文词义",
+      "userAction": "播放英语音频，选择相应中文词义，继续完成其他配对。",
+      "output": "正确配对变色；已匹配词可显现英语文字（图中 phone）；题页底部提供“检查”。",
+      "learningGoal": "将英语声音与中文意义连接，不要求先看到英语拼写。",
+      "designObservation": "可重复点击音频；有“现在不做听力题”入口。这不是音素最小对立辨别。",
+      "rationaleStatus": "学习目标为研究解释；音频按钮、已匹配词显示与底部控件为图中直接观察。"
+    }
+  ],
+  "gaps": [
+    "本轮尚未取得公开官方来源中中文界面→英语的完整独立词块翻译题页；现有开发者宣传图裁底，官方合成图的背景译题被遮挡。",
+    "本轮尚未取得中文界面→英语的完整键入翻译、补全翻译、语境/语法填空、阅读理解题页。",
+    "不能从这些宣传/编辑素材推断当前所有平台、课程阶段或免费/Super/Max账号都有该题型。",
+    "已确认的两张完整题页来自 Apple 官方编辑文章；若将“官方”进一步限定为 Duolingo 自有站点发表，本轮该子集完整图仍为零。",
+    "Google Play 公开中文宣传图补充了看图选词、整句键入听写与朗读的直接证据；核心控件可见仍不等于完整应用界面。"
+  ],
+  "rejectedSources": [
+    {
+      "url": "https://apps.apple.com/cn/iphone/story/id1545042659",
+      "reason": "其中 Duolingo 中文界面看图选词目标为西班牙语，不能用于中文母语学英语。"
+    },
+    {
+      "url": "https://apps.apple.com/cn/iphone/story/id1333875850",
+      "reason": "文章讲学习西班牙语，不属于目标英语。"
+    },
+    {
+      "url": "https://apps.apple.com/cn/iphone/story/id1748181882",
+      "reason": "已见画面为好友任务与练习入口，不是完整核心题页。"
+    },
+    {
+      "url": "https://zh-cn.duolingo.com/",
+      "reason": "公开网页所见为中文介绍，未找到可验证完整题页图片。"
+    },
+    {
+      "url": "https://blog.duolingo.com/copy-testing-experiments/",
+      "reason": "中文素材为订阅展示；题型示意另属其他课程/界面语言。"
+    },
+    {
+      "url": "https://blog.duolingo.com/improving-how-duolingo-teaches-chinese-and-other-languages/",
+      "reason": "目标中文课程，不是中文母语学习英语。"
+    }
+  ],
+  "partialExerciseEvidence": [
+    {
+      "id": "CNP01",
+      "name": "中文 → 英语词块翻译",
+      "mediaIds": [
+        "CNM04",
+        "CNM05",
+        "CNM07"
+      ],
+      "fullItemUi": false,
+      "learningGoal": "用英语表达中文句意并安排词序。",
+      "userAction": "按顺序点选英语词块构成译文。",
+      "evidenceBoundary": "有中文→英语直接题图，但严格完整界面仍缺；CNM02 背景另有遮挡示例。"
+    },
+    {
+      "id": "CNP02",
+      "name": "看图选择英语词",
+      "mediaIds": [
+        "CNM06"
+      ],
+      "fullItemUi": false,
+      "learningGoal": "将中文意义、物体图像与英语词汇对应。",
+      "userAction": "根据中文提示从英文标签的图卡中选一张。",
+      "evidenceBoundary": "已选答案与反馈可见；宣传图应用底边裁断。"
+    },
+    {
+      "id": "CNP03",
+      "name": "英语整句键入听写",
+      "mediaIds": [
+        "CNM09"
+      ],
+      "fullItemUi": false,
+      "learningGoal": "从英语声音提取词语与拼写。",
+      "userAction": "播放常速或慢速音频，在文本框键入英语句子。",
+      "evidenceBoundary": "输入与反馈完整可见；宣传图应用底边裁断。"
+    },
+    {
+      "id": "CNP04",
+      "name": "朗读英语句子",
+      "mediaIds": [
+        "CNM08",
+        "CNM10"
+      ],
+      "fullItemUi": false,
+      "learningGoal": "将英语文字转为语音输出。",
+      "userAction": "可先听示范，点录音入口后朗读屏幕上的英语。",
+      "evidenceBoundary": "核心控件、中文释义和成功反馈可见；宣传图应用底边裁断。"
+    }
+  ]
+}

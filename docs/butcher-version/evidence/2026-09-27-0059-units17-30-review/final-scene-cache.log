@@ -1,0 +1,36 @@
+
+Running 28 tests using 1 worker
+
+(node:85298) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/28] tests/e2e/units17-30-scene.spec.js:6:48 › 17-18 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[2/28] tests/e2e/units17-30-scene.spec.js:6:48 › 19-20 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[3/28] tests/e2e/units17-30-scene.spec.js:6:48 › 21-22 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[4/28] tests/e2e/units17-30-scene.spec.js:6:48 › 23-24 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[5/28] tests/e2e/units17-30-scene.spec.js:6:48 › 25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[6/28] tests/e2e/units17-30-scene.spec.js:6:48 › 27-28 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[7/28] tests/e2e/units17-30-scene.spec.js:6:48 › 29-30 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[8/28] tests/e2e/units17-30-scene.spec.js:41:62 › 17-18 图册翻页按钮不随内容高度跳动，刷新保留末页
+[9/28] tests/e2e/units17-30-scene.spec.js:41:62 › 19-20 图册翻页按钮不随内容高度跳动，刷新保留末页
+[10/28] tests/e2e/units17-30-scene.spec.js:41:62 › 21-22 图册翻页按钮不随内容高度跳动，刷新保留末页
+[11/28] tests/e2e/units17-30-scene.spec.js:41:62 › 23-24 图册翻页按钮不随内容高度跳动，刷新保留末页
+[12/28] tests/e2e/units17-30-scene.spec.js:41:62 › 25-26 图册翻页按钮不随内容高度跳动，刷新保留末页
+[13/28] tests/e2e/units17-30-scene.spec.js:41:62 › 27-28 图册翻页按钮不随内容高度跳动，刷新保留末页
+[14/28] tests/e2e/units17-30-scene.spec.js:41:62 › 29-30 图册翻页按钮不随内容高度跳动，刷新保留末页
+[15/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 17-18 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[16/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 17-18 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[17/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 19-20 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[18/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 19-20 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[19/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 21-22 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[20/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 21-22 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[21/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 23-24 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[22/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 23-24 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[23/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 25-26 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[24/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 25-26 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[25/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 27-28 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[26/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 27-28 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[27/28] tests/e2e/units17-30-upgrade.spec.js:12:2 › 29-30 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[28/28] tests/e2e/units17-30-upgrade.spec.js:23:2 › 29-30 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+  28 passed (1.8m)

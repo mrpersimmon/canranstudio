@@ -13,8 +13,9 @@ test('挑战错答与提示分别记账，暂停刷新保留选择，不提前�
   await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:"桌子上的那些杯子",exact:true}).click();
   await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();await room.getByRole('button',{name:'继续挑战',exact:true}).click();
   await expect(room.getByRole('button',{name:"桌子上的那些杯子",exact:true})).toHaveAttribute('aria-pressed','true');await check.click();
-  await room.getByRole('button',{name:'查看本次记录',exact:true}).click();
-  await expect(room).toContainText('首次独立答对 0 / 2');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
+  await room.getByRole('button',{name:'下一题',exact:true}).click();
+  await require('../support/units17-30-exam').finishExamFrom(page,'23-24',2);
+  await expect(room).toContainText('首次独立答对 8 / 10');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
   await page.goto('/unit23-24/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
 });
 
@@ -35,7 +36,7 @@ test('正误和完成反馈音实际播放结束，任何英语声音请求和�
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'把床上的几本杂志递给简。',exact:true}).click();await check.click();
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('correct')&&!x.src.includes('incorrect')&&x.ended))).toBe(true);
   await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:"架子上的那些杯子",exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
-  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"桌子上的那些杯子",exact:true}).click();await check.click();await room.getByRole('button',{name:'查看本次记录',exact:true}).click();
+  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"桌子上的那些杯子",exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await require('../support/units17-30-exam').finishExamFrom(page,'23-24',2);
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('complete')&&x.ended))).toBe(true);
   expect(voices).toEqual([]);expect(speechCalls).toBe(0);
 });
@@ -74,7 +75,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'observe');
   await page.goto('/unit23-24/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit23-24/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'Give',exact:true}).click();
-  await page.route('**/unit23-24/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit23-24/content.js','utf8')).replace("q('story-place',","q('story-place-v2',")}));
+  await page.route('**/unit23-24/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit23-24/content.js','utf8')).replace( '"id": "u2324-tasks-v4-story-place"','"id": "u2324-tasks-v4-story-place-v2"' )}));
   await page.goto('/unit23-24/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit23-24/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');
@@ -83,9 +84,9 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await page.goto('/unit23-24/#learn/text');await expect(page.locator('.btext')).toHaveCount(8);await expect(page.getByText('故事看完了！',{exact:true})).toBeVisible();
 });
 
-test('关闭JavaScript首页仍提供新单元真实链接',async({browser})=>{
+test('关闭JavaScript首页仍提供新单元真实链接',async({browser},testInfo)=>{
   const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();
-  await page.goto('http://127.0.0.1:4173/lesson/');await expect(page.getByRole('link',{name:'开始学习：房间寻物队',exact:true})).toHaveAttribute('href','/lesson/unit23-24/#learn/words');await context.close();
+  await page.goto(new URL('/lesson/',testInfo.project.use.baseURL).href);await expect(page.getByRole('link',{name:'开始学习：房间寻物队',exact:true})).toHaveAttribute('href','/lesson/unit23-24/#learn/words');await context.close();
 });
 
 test('保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答',async({page})=>{

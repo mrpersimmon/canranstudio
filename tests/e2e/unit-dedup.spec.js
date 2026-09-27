@@ -6,7 +6,8 @@ test.use({ reducedMotion: 'reduce', actionTimeout: 7000 });
 
 // Literal expectations from the revised teaching manuscript. No runtime answer imports.
 async function choose(room, answer, next = '下一题') {
-  if (Array.isArray(answer)) {
+  if(answer&&typeof answer==='object'&&!Array.isArray(answer)){await require('../support/units1-30-tasks').select(room,answer);}
+  else if (Array.isArray(answer)) {
     for (const token of answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
   } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
   const check = room.getByRole('button', { name: '检查答案', exact: true });
@@ -29,11 +30,11 @@ test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持�
   const exam = page.locator('.stage-exam');
   await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '8');
   await expect(exam).toContainText('Excuse me!');
-  await exam.getByRole('button', { name: 'Yes, it is.', exact: true }).click();
+  await require('../support/units1-30-tasks').select(exam,{fills:['Yes, it is.','Yes?']});
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
   await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
-  await choose(exam, 'Yes?');
+  await choose(exam, {fills:['Yes?','Yes, it is.']});
   await expect(exam).toContainText('书确实是你的');
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit12-combined-320.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -43,11 +44,11 @@ test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持�
   await expect(exam.getByRole('button', { name: '下一站：我的单元证书', exact: true })).toBeVisible();
 });
 
-test('Lesson 3–4 合并重复工坊，27题覆盖不同语言判断', async ({ page }) => {
+test('Lesson 3–4 合并重复工坊，25题覆盖不同语言判断', async ({ page }) => {
   const { completeActivity } = require('../support/unit3-4-flow');
   await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
-  await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '7');
+  await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '5');
   await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
   await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '9');
   await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
@@ -186,7 +187,7 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   await expect(page.locator('#starCount')).toHaveText('6');
   upgrade();
   await page.reload();
-  for (const [activity, count] of [['listen', 7], ['reply', 4]]) await expectFresh(page, 'unit3-4', activity, count);
+  for (const [activity, count] of [['listen', 5], ['reply', 4]]) await expectFresh(page, 'unit3-4', activity, count);
   await page.goto('/unit3-4/#learn/roles');
   // This edition changed reply, but its six story questions exactly match the
   // reviewed predecessor. Keep only the two still-identical story questions.

@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:6181) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/unit21-22.spec.js:18:1 › 所有声音不可用仍完成34题与8段原文，领取并导出课堂证书 (6.5s)
+  ✓  2 tests/e2e/unit21-22.spec.js:52:1 › 36张完整音标词卡可翻义，图片加载，末组有下一站且刷新保留页码 (2.7s)
+  ✓  3 tests/e2e/unit21-22.spec.js:82:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致 (6.2s)
+  ✓  4 tests/e2e/unit21-22.spec.js:97:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试 (4.8s)
+  ✓  5 tests/e2e/unit21-22.spec.js:103:1 › 证书长名字在资源较慢时仍生成实际图片 (10.5s)
+  ✓  6 tests/e2e/unit23-24.spec.js:13:1 › 全部声音失败仍完成34题和完整原文，15星后保存真实证书，刷新保留日期 (4.8s)
+  ✓  7 tests/e2e/unit23-24.spec.js:48:1 › 30张完整音标词卡可翻义，图片加载，末组有下一站且刷新保留页码 (2.3s)
+  ✓  8 tests/e2e/unit23-24.spec.js:83:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致 (6.1s)
+  ✓  9 tests/e2e/unit23-24.spec.js:98:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试 (5.2s)
+
+  9 passed (50.0s)

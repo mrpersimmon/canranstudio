@@ -1,0 +1,506 @@
+
+Running 241 tests using 1 worker
+
+(node:83336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/241] tests/e2e/unit17-18-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[2/241] tests/e2e/unit17-18-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[3/241] tests/e2e/unit17-18-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[4/241] tests/e2e/unit17-18-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[5/241] tests/e2e/unit17-18-layout.spec.js:20:1 › 320 窄屏30张词卡展开后字义和音标不裁切，图册成双人物完整可辨
+[6/241] tests/e2e/unit17-18-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[7/241] tests/e2e/unit17-18-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[8/241] tests/e2e/unit17-18-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[9/241] tests/e2e/unit17-18-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[10/241] tests/e2e/unit17-18-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[11/241] tests/e2e/unit17-18-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[12/241] tests/e2e/unit17-18-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[13/241] tests/e2e/unit17-18-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[14/241] tests/e2e/unit17-18-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[15/241] tests/e2e/unit17-18-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[16/241] tests/e2e/unit17-18-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[17/241] tests/e2e/unit17-18.spec.js:5:1 › 导航进入办公室探访记，先看音标词卡，整卡翻义无需配音
+[18/241] tests/e2e/unit17-18.spec.js:18:1 › 配套练习无需任何配音，22题与完整原文通关，领取并导出准确的课堂证书
+[19/241] tests/e2e/unit17-18.spec.js:46:1 › 8个词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星
+[20/241] tests/e2e/unit17-18.spec.js:75:1 › 无音频时逐句读完16句原文，历史中文可展开，刷新续读且看完才解锁理解题
+[21/241] tests/e2e/unit17-18.spec.js:105:1 › 30张词卡默认有准确音标，所有图片完整加载，末组有下一站且刷新续页
+[22/241] tests/e2e/unit17-18.spec.js:120:1 › 15组职业、A六题、B十组与数字材料完整，纸笔练习打印为一页A4
+[23/241] tests/e2e/unit17-18.spec.js:143:1 › 用完整语境区别不很忙与懒惰，保留教师带读而不冒记听力成绩
+[24/241] tests/e2e/unit19-20-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[25/241] tests/e2e/unit19-20-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[26/241] tests/e2e/unit19-20-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[27/241] tests/e2e/unit19-20-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[28/241] tests/e2e/unit19-20-layout.spec.js:20:1 › 320 窄屏34张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[29/241] tests/e2e/unit19-20-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[30/241] tests/e2e/unit19-20-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[31/241] tests/e2e/unit19-20-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[32/241] tests/e2e/unit19-20-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[33/241] tests/e2e/unit19-20-layout.spec.js:78:1 › 两个相同的 They're 词块独立选取撤回，刷新不丢失也不替孩子补选
+[34/241] tests/e2e/unit19-20-layout.spec.js:87:1 › 320 窄屏最长亲属选项完整可读，保持四按钮网格与可点击高度
+[35/241] tests/e2e/unit19-20-layout.spec.js:95:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位
+  1) tests/e2e/unit19-20-layout.spec.js:95:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位 ─────────────────────────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 120
+    Received:   105
+
+       99 |   while(await prev.isEnabled())await prev.click();let seen=0;
+      100 |   do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(2);
+    > 101 |    const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThan(120);expect(a.height).toBeGreaterThan(90);
+          |                                                                 ^
+      102 |    const b=await pictures.last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);
+      103 |    seen+=await pictures.count();if(!await next.isEnabled())break;await next.click();
+      104 |   }while(seen<=20);expect(seen).toBe(20);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit19-20-layout.spec.js:101:65
+
+    Error Context: test-results/unit19-20-layout-成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit19-20-layout-成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit19-20-layout-成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:83680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[36/241] tests/e2e/unit19-20-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[37/241] tests/e2e/unit19-20-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[38/241] tests/e2e/unit19-20-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[39/241] tests/e2e/unit19-20-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[40/241] tests/e2e/unit19-20-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[41/241] tests/e2e/unit19-20-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[42/241] tests/e2e/unit19-20-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[43/241] tests/e2e/unit19-20.spec.js:5:1 › 导航进入冰淇淋休息站，先看音标词卡，整卡翻义无需配音
+[44/241] tests/e2e/unit19-20.spec.js:18:1 › 配套练习无需任何配音，28题与完整原文通关，领取并导出准确的课堂证书
+[45/241] tests/e2e/unit19-20.spec.js:47:1 › 15题覆盖两课新词，错答不泄题，最后三题刷新不代答，重练不重复计星
+[46/241] tests/e2e/unit19-20.spec.js:61:1 › 原文13段完整保留，分角色接话与合说准确，最后一段后显式完成才解锁
+[47/241] tests/e2e/unit19-20.spec.js:75:1 › 34张卡片默认音标、翻面词义可访问，图片完整加载，末组有下一站
+[48/241] tests/e2e/unit19-20.spec.js:85:1 › 教材20幅对比图、A六题、B十组与数字完整，练习纸实际导出单页A4
+[49/241] tests/e2e/unit19-20.spec.js:100:1 › 同词依语境判断，体形无好坏暗示，否定不能补出未说的信息
+[50/241] tests/e2e/unit21-22-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[51/241] tests/e2e/unit21-22-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[52/241] tests/e2e/unit21-22-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[53/241] tests/e2e/unit21-22-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[54/241] tests/e2e/unit21-22-layout.spec.js:20:1 › 320 窄屏36张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[55/241] tests/e2e/unit21-22-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[56/241] tests/e2e/unit21-22-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[57/241] tests/e2e/unit21-22-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[58/241] tests/e2e/unit21-22-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[59/241] tests/e2e/unit21-22-layout.spec.js:78:1 › 两个 one? 词块独立选取撤回，刷新不会替孩子补选
+[60/241] tests/e2e/unit21-22-layout.spec.js:86:1 › 320 最后一道长拼句和挑战选项完整可读，不因完成上一题而预选
+[61/241] tests/e2e/unit21-22-layout.spec.js:97:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位
+  2) tests/e2e/unit21-22-layout.spec.js:97:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位 ─────────────────────────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 120
+    Received:   105
+
+      101 |   while(await prev.isEnabled())await prev.click();let seen=0;
+      102 |   do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(2);
+    > 103 |    const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThan(120);expect(a.height).toBeGreaterThan(90);
+          |                                                                 ^
+      104 |    const b=await pictures.last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);
+      105 |    seen+=await pictures.count();if(!await next.isEnabled())break;await next.click();
+      106 |   }while(seen<=16);expect(seen).toBe(16);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit21-22-layout.spec.js:103:65
+
+    Error Context: test-results/unit21-22-layout-成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit21-22-layout-成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit21-22-layout-成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:83752) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[62/241] tests/e2e/unit21-22-layout.spec.js:110:1 › 四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[63/241] tests/e2e/unit21-22-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[64/241] tests/e2e/unit21-22-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[65/241] tests/e2e/unit21-22-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[66/241] tests/e2e/unit21-22-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[67/241] tests/e2e/unit21-22-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[68/241] tests/e2e/unit21-22-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[69/241] tests/e2e/unit21-22-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[70/241] tests/e2e/unit21-22.spec.js:5:1 › 导航进入寻物交接站，先看音标词卡，整卡翻义无需配音
+[71/241] tests/e2e/unit21-22.spec.js:18:1 › 所有声音不可用仍完成26题与8段原文，领取并导出课堂证书
+[72/241] tests/e2e/unit21-22.spec.js:31:1 › 14题各有依据，连续错答不泄题，最后三题刷新不代答，重练不重复计星
+[73/241] tests/e2e/unit21-22.spec.js:41:1 › 原文8段与两次确认完整保留，人物准确，主动完成末段才解锁
+[74/241] tests/e2e/unit21-22.spec.js:52:1 › 36张完整音标词卡可翻义，图片加载，末组有下一站且刷新保留页码
+[75/241] tests/e2e/unit21-22.spec.js:62:1 › 16幅图、五种接收者、A六题与B八组完整，实际打印为一张A4
+[76/241] tests/e2e/unit21-22.spec.js:77:1 › one随先行词理解，her区分接收者与所属，近义大小词不互斥
+[77/241] tests/e2e/unit21-22.spec.js:82:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[78/241] tests/e2e/unit21-22.spec.js:97:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[79/241] tests/e2e/unit21-22.spec.js:103:1 › 证书长名字在资源较慢时仍生成实际图片
+[80/241] tests/e2e/unit23-24-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[81/241] tests/e2e/unit23-24-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[82/241] tests/e2e/unit23-24-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[83/241] tests/e2e/unit23-24-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[84/241] tests/e2e/unit23-24-layout.spec.js:20:1 › 320 窄屏30张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[85/241] tests/e2e/unit23-24-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[86/241] tests/e2e/unit23-24-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[87/241] tests/e2e/unit23-24-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[88/241] tests/e2e/unit23-24-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[89/241] tests/e2e/unit23-24-layout.spec.js:78:1 › 320 最后一道长拼句和挑战选项完整可读，不因完成上一题而预选
+[90/241] tests/e2e/unit23-24-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位
+  3) tests/e2e/unit23-24-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位 ────────────────────────────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 120
+    Received:   112
+
+      93 |   while(await prev.isEnabled())await prev.click();let seen=0;
+      94 |   do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(1);
+    > 95 |    const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThan(120);expect(a.height).toBeGreaterThan(90);
+         |                                                                 ^
+      96 |    
+      97 |    seen+=await pictures.count();if(!await next.isEnabled())break;await next.click();
+      98 |   }while(seen<=10);expect(seen).toBe(10);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit23-24-layout.spec.js:95:65
+
+    Error Context: test-results/unit23-24-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit23-24-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit23-24-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:83852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[91/241] tests/e2e/unit23-24-layout.spec.js:102:40 › 正常字体：四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[92/241] tests/e2e/unit23-24-layout.spec.js:102:40 › 字体不可用：四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[93/241] tests/e2e/unit23-24-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[94/241] tests/e2e/unit23-24-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[95/241] tests/e2e/unit23-24-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[96/241] tests/e2e/unit23-24-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[97/241] tests/e2e/unit23-24-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[98/241] tests/e2e/unit23-24-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[99/241] tests/e2e/unit23-24-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[100/241] tests/e2e/unit23-24.spec.js:7:1 › 首页新单元从房间小图鉴开始，显示本课音标
+[101/241] tests/e2e/unit23-24.spec.js:13:1 › 全部声音失败仍完成26题和完整原文，15星后保存真实证书，刷新保留日期
+[102/241] tests/e2e/unit23-24.spec.js:26:1 › 15道词义题连续错答不泄题，末三题刷新不代答，重练不重复计星
+[103/241] tests/e2e/unit23-24.spec.js:36:1 › 原文8段完整、历史句可回看、中文按句展开，主动完成末段才解锁理解
+[104/241] tests/e2e/unit23-24.spec.js:48:1 › 30张完整音标词卡可翻义，图片加载，末组有下一站且刷新保留页码
+[105/241] tests/e2e/unit23-24.spec.js:60:1 › 十幅位置图、五种接收者、A六题与B十组完整，实际打印为一张A4
+[106/241] tests/e2e/unit23-24.spec.js:72:1 › 学习材料正确区分some数量、ones回指、位置关系，图片选项有同等可读描述
+[107/241] tests/e2e/unit23-24.spec.js:83:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[108/241] tests/e2e/unit23-24.spec.js:98:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[109/241] tests/e2e/unit25-26-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[110/241] tests/e2e/unit25-26-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[111/241] tests/e2e/unit25-26-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[112/241] tests/e2e/unit25-26-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[113/241] tests/e2e/unit25-26-layout.spec.js:20:1 › 320 窄屏36张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[114/241] tests/e2e/unit25-26-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[115/241] tests/e2e/unit25-26-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[116/241] tests/e2e/unit25-26-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与从头看同行，展开中文不移动推进按钮
+[117/241] tests/e2e/unit25-26-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[118/241] tests/e2e/unit25-26-layout.spec.js:78:1 › 320 最后一道长拼句和挑战选项完整可读，不因完成上一题而预选
+[119/241] tests/e2e/unit25-26-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位
+  4) tests/e2e/unit25-26-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位 ────────────────────────────
+
+    TimeoutError: locator.isEnabled: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-models').getByRole('button', { name: '上一页图册', exact: true })
+
+
+      91 |   await page.setViewportSize({width,height:740});await page.goto('/unit25-26/#learn/models');await page.getByText('看看八幅厨房图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
+      92 |   const room=page.locator('.stage-models'),prev=room.getByRole('button',{name:'上一页图册',exact:true}),next=room.getByRole('button',{name:'下一页图册',exact:true});
+    > 93 |   while(await prev.isEnabled())await prev.click();let seen=0;
+         |                    ^
+      94 |   do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(1);
+      95 |    const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThan(120);expect(a.height).toBeGreaterThan(90);
+      96 |    
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit25-26-layout.spec.js:93:20
+
+    Error Context: test-results/unit25-26-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit25-26-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit25-26-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:83910) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[120/241] tests/e2e/unit25-26-layout.spec.js:102:1 › 四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[121/241] tests/e2e/unit25-26-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[122/241] tests/e2e/unit25-26-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[123/241] tests/e2e/unit25-26-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[124/241] tests/e2e/unit25-26-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[125/241] tests/e2e/unit25-26-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[126/241] tests/e2e/unit25-26-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[127/241] tests/e2e/unit25-26-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[128/241] tests/e2e/unit25-26.spec.js:5:1 › 首页新单元从厨房小图鉴开始，音标可见
+[129/241] tests/e2e/unit25-26.spec.js:12:1 › 全部声音失败仍完成23题和完整原文，15星后保存真实证书，刷新保留日期
+[130/241] tests/e2e/unit25-26.spec.js:26:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[131/241] tests/e2e/unit25-26.spec.js:41:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[132/241] tests/e2e/unit25-26.spec.js:47:1 › 12道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[133/241] tests/e2e/unit25-26.spec.js:57:1 › 原文12句逐句保留，不虚构对话，主动完成后才解锁理解
+[134/241] tests/e2e/unit25-26.spec.js:68:1 › 36张词卡完整音标、翻义、加载、六组翻页与末组续学
+[135/241] tests/e2e/unit25-26.spec.js:80:1 › 原图八组、A四题八空、B七组两句完整，实际打印一张A4
+[136/241] tests/e2e/unit25-26.spec.js:90:1 › 语法支架不误教，图选同等可读，连续错误不泄露正确的双条件
+[137/241] tests/e2e/unit27-28-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[138/241] tests/e2e/unit27-28-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[139/241] tests/e2e/unit27-28-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[140/241] tests/e2e/unit27-28-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[141/241] tests/e2e/unit27-28-layout.spec.js:20:1 › 320 窄屏30张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[142/241] tests/e2e/unit27-28-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[143/241] tests/e2e/unit27-28-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[144/241] tests/e2e/unit27-28-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与从头看同行，展开中文不移动推进按钮
+[145/241] tests/e2e/unit27-28-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[146/241] tests/e2e/unit27-28-layout.spec.js:78:1 › 320 最后一道长拼句和挑战选项完整可读，不因完成上一题而预选
+[147/241] tests/e2e/unit27-28-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位
+  5) tests/e2e/unit27-28-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位 ────────────────────────────
+
+    TimeoutError: locator.isEnabled: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-models').getByRole('button', { name: '上一页图册', exact: true })
+
+
+      91 |   await page.setViewportSize({width,height:740});await page.goto('/unit27-28/#learn/models');await page.getByText('看看十幅位置图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
+      92 |   const room=page.locator('.stage-models'),prev=room.getByRole('button',{name:'上一页图册',exact:true}),next=room.getByRole('button',{name:'下一页图册',exact:true});
+    > 93 |   while(await prev.isEnabled())await prev.click();let seen=0;
+         |                    ^
+      94 |   do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(1);
+      95 |    const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThan(120);expect(a.height).toBeGreaterThan(90);
+      96 |    
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit27-28-layout.spec.js:93:20
+
+    Error Context: test-results/unit27-28-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit27-28-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit27-28-layout-位置图画布上沿和尺寸一致，不因说明换行而上下错位/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:84017) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[148/241] tests/e2e/unit27-28-layout.spec.js:102:1 › 四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[149/241] tests/e2e/unit27-28-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[150/241] tests/e2e/unit27-28-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[151/241] tests/e2e/unit27-28-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[152/241] tests/e2e/unit27-28-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[153/241] tests/e2e/unit27-28-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[154/241] tests/e2e/unit27-28-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[155/241] tests/e2e/unit27-28-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[156/241] tests/e2e/unit27-28.spec.js:5:1 › 首页新单元从客厅小图鉴开始，音标可见
+[157/241] tests/e2e/unit27-28.spec.js:12:1 › 全部声音失败仍完成19题和完整原文，15星后保存真实证书，刷新保留日期
+[158/241] tests/e2e/unit27-28.spec.js:26:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[159/241] tests/e2e/unit27-28.spec.js:41:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[160/241] tests/e2e/unit27-28.spec.js:47:1 › 8道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[161/241] tests/e2e/unit27-28.spec.js:57:1 › 原文13句逐句保留，不虚构对话，主动完成后才解锁理解
+[162/241] tests/e2e/unit27-28.spec.js:68:1 › 30张词卡完整音标、翻义、加载、五组翻页与末组续学
+[163/241] tests/e2e/unit27-28.spec.js:84:1 › 图句十组、A五题和B十组五句问答完整，打印一页且有完整句书写空间
+[164/241] tests/e2e/unit27-28.spec.js:95:1 › 语法支架不误教，图选同等可读，连续错误不泄露正确的双条件
+[165/241] tests/e2e/unit29-30-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[166/241] tests/e2e/unit29-30-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[167/241] tests/e2e/unit29-30-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[168/241] tests/e2e/unit29-30-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[169/241] tests/e2e/unit29-30-layout.spec.js:20:1 › 320 窄屏30张词卡展开后字义和音标不裁切，图册成对对比完整可辨
+[170/241] tests/e2e/unit29-30-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[171/241] tests/e2e/unit29-30-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[172/241] tests/e2e/unit29-30-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与从头看同行，展开中文不移动推进按钮
+[173/241] tests/e2e/unit29-30-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[174/241] tests/e2e/unit29-30-layout.spec.js:78:1 › 320 最后一道长拼句和挑战选项完整可读，不因完成上一题而预选
+[175/241] tests/e2e/unit29-30-layout.spec.js:89:1 › 四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮
+[176/241] tests/e2e/unit29-30-state.spec.js:8:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[177/241] tests/e2e/unit29-30-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[178/241] tests/e2e/unit29-30-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[179/241] tests/e2e/unit29-30-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[180/241] tests/e2e/unit29-30-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[181/241] tests/e2e/unit29-30-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[182/241] tests/e2e/unit29-30-state.spec.js:92:1 › 保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答
+[183/241] tests/e2e/unit29-30.spec.js:5:1 › 首页新单元从整理小图鉴开始，音标可见
+[184/241] tests/e2e/unit29-30.spec.js:12:1 › 全部声音失败仍完成23题和完整原文，15星后保存真实证书，刷新保留日期
+[185/241] tests/e2e/unit29-30.spec.js:26:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[186/241] tests/e2e/unit29-30.spec.js:41:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[187/241] tests/e2e/unit29-30.spec.js:47:1 › 10道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[188/241] tests/e2e/unit29-30.spec.js:57:1 › 原文9句逐句保留，按原角色呈现，主动完成后才解锁理解
+[189/241] tests/e2e/unit29-30.spec.js:69:1 › 30张词卡完整音标、翻义、加载、五组翻页与末组续学
+[190/241] tests/e2e/unit29-30.spec.js:94:1 › 35图项、A三题和B完整搭配库保留，十一句不设唯一答案，打印有足够书写空间
+[191/241] tests/e2e/unit29-30.spec.js:110:1 › 支架按语境释义，图选同等可读，错答不泄露正确状态
+[192/241] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[193/241] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[194/241] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[195/241] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[196/241] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[197/241] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[198/241] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[199/241] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[200/241] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[201/241] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[202/241] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[203/241] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[204/241] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[205/241] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[206/241] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[207/241] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[208/241] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[209/241] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[210/241] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[211/241] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[212/241] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[213/241] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[214/241] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[215/241] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[216/241] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[217/241] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[218/241] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[219/241] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[220/241] tests/e2e/units17-30-exam.spec.js:27:1 › 29–30 整理题的选择、灯泡和错答不执行动作，检查正确后才呈现结果
+[221/241] tests/e2e/units17-30-scene.spec.js:6:48 › 17-18 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[222/241] tests/e2e/units17-30-scene.spec.js:6:48 › 19-20 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[223/241] tests/e2e/units17-30-scene.spec.js:6:48 › 21-22 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[224/241] tests/e2e/units17-30-scene.spec.js:6:48 › 23-24 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[225/241] tests/e2e/units17-30-scene.spec.js:6:48 › 25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+  6) tests/e2e/units17-30-scene.spec.js:6:48 › 25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 ───────────────────
+
+    TimeoutError: locator.click: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-text').getByRole('button', { name: '重新上演', exact: true })
+
+
+       7 |  test.setTimeout(90000);
+       8 |  for(const width of [320,390,768,1280]){
+    >  9 |   await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');await room.getByRole('button',{name:width===320?/^(重新上演|从头看)$/: '再看一遍',exact:true}).click();
+         |                                                                                                                                                                                                                                                                                                                               ^
+      10 |   await expect(log.locator('.btext')).toHaveCount(0);const top=()=>ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
+      11 |   for(let i=0;i<total;i++){
+      12 |    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units17-30-scene.spec.js:9:319
+
+    Error Context: test-results/units17-30-scene-25-26-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units17-30-scene-25-26-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units17-30-scene-25-26-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:84362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[226/241] tests/e2e/units17-30-scene.spec.js:6:48 › 27-28 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+  7) tests/e2e/units17-30-scene.spec.js:6:48 › 27-28 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 ───────────────────
+
+    TimeoutError: locator.click: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-text').getByRole('button', { name: '重新上演', exact: true })
+
+
+       7 |  test.setTimeout(90000);
+       8 |  for(const width of [320,390,768,1280]){
+    >  9 |   await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');await room.getByRole('button',{name:width===320?/^(重新上演|从头看)$/: '再看一遍',exact:true}).click();
+         |                                                                                                                                                                                                                                                                                                                               ^
+      10 |   await expect(log.locator('.btext')).toHaveCount(0);const top=()=>ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
+      11 |   for(let i=0;i<total;i++){
+      12 |    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units17-30-scene.spec.js:9:319
+
+    Error Context: test-results/units17-30-scene-27-28-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units17-30-scene-27-28-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units17-30-scene-27-28-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:84367) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[227/241] tests/e2e/units17-30-scene.spec.js:6:48 › 29-30 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+  8) tests/e2e/units17-30-scene.spec.js:6:48 › 29-30 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 ───────────────────
+
+    TimeoutError: locator.click: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-text').getByRole('button', { name: '重新上演', exact: true })
+
+
+       7 |  test.setTimeout(90000);
+       8 |  for(const width of [320,390,768,1280]){
+    >  9 |   await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');await room.getByRole('button',{name:width===320?/^(重新上演|从头看)$/: '再看一遍',exact:true}).click();
+         |                                                                                                                                                                                                                                                                                                                               ^
+      10 |   await expect(log.locator('.btext')).toHaveCount(0);const top=()=>ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
+      11 |   for(let i=0;i<total;i++){
+      12 |    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/units17-30-scene.spec.js:9:319
+
+    Error Context: test-results/units17-30-scene-29-30-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/units17-30-scene-29-30-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/units17-30-scene-29-30-分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:84374) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[228/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 17-18 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[229/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 17-18 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[230/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 19-20 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[231/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 19-20 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[232/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 21-22 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[233/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 21-22 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[234/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 23-24 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[235/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 23-24 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[236/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 25-26 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[237/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 25-26 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[238/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 27-28 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[239/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 27-28 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[240/241] tests/e2e/units17-30-upgrade.spec.js:12:2 › 29-30 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[241/241] tests/e2e/units17-30-upgrade.spec.js:23:2 › 29-30 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+  8 failed
+    tests/e2e/unit19-20-layout.spec.js:95:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位 ──────────────────────────
+    tests/e2e/unit21-22-layout.spec.js:97:1 › 成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位 ──────────────────────────
+    tests/e2e/unit23-24-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位 ─────────────────────────────
+    tests/e2e/unit25-26-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位 ─────────────────────────────
+    tests/e2e/unit27-28-layout.spec.js:89:1 › 位置图画布上沿和尺寸一致，不因说明换行而上下错位 ─────────────────────────────
+    tests/e2e/units17-30-scene.spec.js:6:48 › 25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 ────────────────────
+    tests/e2e/units17-30-scene.spec.js:6:48 › 27-28 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 ────────────────────
+    tests/e2e/units17-30-scene.spec.js:6:48 › 29-30 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 ────────────────────
+  233 passed (9.8m)

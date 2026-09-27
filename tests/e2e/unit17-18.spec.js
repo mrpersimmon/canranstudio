@@ -1,3 +1,4 @@
+const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -14,7 +15,7 @@ test('导航进入办公室探访记，先看音标词卡，整卡翻义无需�
 });
 
 const {DIALOGUE,SPEAKERS,ANSWERS,completeStory,completeActivity,completeUnit1718}=require('../support/unit17-18-flow');
-test('配套练习无需任何配音，22题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
+test('配套练习无需任何配音，29题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
   test.setTimeout(45000);
   const audio=[],errors=[];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{audio.push(route.request().url());return route.abort();});
@@ -82,7 +83,7 @@ test('无音频时逐句读完16句原文，历史中文可展开，刷新续读
     await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
-    await expect(room.locator('.dialogue-actor.is-current')).toHaveText(SPEAKERS[i]);
+    await expect(room.locator('.scene-speaker')).toHaveCount(SPEAKERS[i]==='孩子们'?2:1);
     await expect(room.getByRole('status')).toHaveText((i+1)+' / 16 句');
     if(i===4) {
       await room.getByRole('button',{name:'看中文',exact:true}).first().click();
@@ -120,13 +121,13 @@ test('15组职业、A六题、B十组与数字材料完整，纸笔练习打印�
   const audio=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});
   await page.goto('/unit17-18/#learn/models');const room=page.locator('.stage-models');
   await room.getByText('看看成双的职业',{exact:true}).click();
-  await expect(room.locator('.job-gallery strong')).toHaveText(['sales reps','keyboard operators','mechanics','engineers','hairdressers','teachers','customs officers','taxi drivers','nurses','air hostesses','housewives','milkmen','postmen','policemen','policewomen']);
+  await expectPagedTexts(room,'.job-gallery strong',['sales reps','keyboard operators','mechanics','engineers','hairdressers','teachers','customs officers','taxi drivers','nurses','air hostesses','housewives','milkmen','postmen','policemen','policewomen'],'图册');
   await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
   await room.locator('.job-gallery').screenshot({path:'output/playwright/unit17-18/plural-gallery-desktop.png'});
   await expect(room.locator('.reference-card button')).toHaveCount(0);
   const pairs=[['keyboard operators','air hostesses'],['postmen','policemen'],['policewomen','nurses'],['customs officers','hairdressers'],['hairdressers','teachers'],['engineers','taxi drivers'],['policewomen','keyboard operators'],['milkmen','engineers'],['policemen','milkmen'],['nurses','housewives']];
   await room.getByText('看看完整问答',{exact:true}).click();
-  await expect(room.locator('.reply-models strong')).toHaveText(pairs.map(([a,b])=>`What are their jobs? Are they ${a} or ${b}? They aren't ${a}. They're ${b}.`));
+  await expectPagedTexts(room,'.reply-models strong',pairs.map(([a,b])=>`What are their jobs? Are they ${a} or ${b}? They aren't ${a}. They're ${b}.`),'问答');
   const refs=['That man is tall. ___ is a policeman.','Those girls are busy. ___ are keyboard operators.','Our names are Britt and Inge. ___ are Swedish.','Look at our office assistant. ___ is very hard-working.','Look at Nicola. ___ is very pretty.','Michael Baker and Jeremy Short are employees. ___ are sales reps.'];
   await room.getByText('He、She、We 还是 They？',{exact:true}).click();await expect(room.locator('.pronoun-models li')).toHaveText(refs.map((x,i)=>x.replace('___',['He','They','We','He','She','They'][i])));
   await expect(room).toContainText('不按职业或姓名猜性别');
@@ -144,7 +145,7 @@ test('用完整语境区别不很忙与懒惰，保留教师带读而不冒记�
   await room.getByText('把话放回故事里',{exact:true}).click();await expect(room).toContainText('只表示他们不很忙，不能据此判断他们懒惰');await expect(room).toContainText('不是对某一种职业或性别的评价');
   await completeStory(page);await page.goto('/unit17-18/#learn/roles');const roles=page.locator('.stage-roles');
   for(const answer of ANSWERS.roles.slice(0,2)){await roles.getByRole('button',{name:answer,exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await roles.getByRole('button',{name:'下一题',exact:true}).click();}
-  await roles.getByRole('button',{name:'他们很懒',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toHaveText('再看看，试一次。');
+  await roles.getByRole('button',{name:'They',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toHaveText('再看看，试一次。');
   await expect(roles.locator('.practice-options .is-correct')).toHaveCount(0);
-  await roles.getByRole('button',{name:'再试一次',exact:true}).click();await roles.getByRole('button',{name:'他们不很忙',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toContainText('答对了！');
+  await roles.getByRole('button',{name:'再试一次',exact:true}).click();await roles.getByRole('button',{name:"aren't very busy",exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toContainText('答对了！');
 });

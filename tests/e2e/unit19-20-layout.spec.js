@@ -34,15 +34,22 @@ test('320 窄屏34张词卡展开后字义和音标不裁切，图册成对对�
 for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮',async({page})=>{
   await page.setViewportSize({width,height:740});await page.goto('/unit19-20/#learn/observe');await page.evaluate(()=>document.fonts.ready);
   const room=page.locator('.stage-observe'),actions=room.getByRole('group',{name:'作答操作',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true}),hint=room.getByRole('button',{name:'给点线索',exact:true});
-  const top=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top(),h=await hint.boundingBox(),c=await check.boundingBox();
-  expect(h.x+h.width).toBeLessThan(c.x);await hint.click();expect(await top()).toBeCloseTo(before,0);
-  await room.getByRole('button',{name:"年老的",exact:true}).click();await check.click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
+  const select=require('../support/units1-30-tasks').select;
+  const top=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
+  // The new context-matching question intentionally has no redundant hint.
+  await expect(hint).toHaveCount(0);
+  await select(room,{pairs:[['old hats','年老的男士'],['old men','旧帽子'],['short trousers','矮个男士'],['short men','短的裤子']],rightLabel:'这里的意思'});
+  await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
+  await expect(room.locator('.is-correct')).toHaveCount(0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ANSWERS.observe.entries()){
-    await room.getByRole('button',{name:answer,exact:true}).click();await check.click();
+    if(i===1){
+      const questionTop=await top(),h=await hint.boundingBox(),c=await check.boundingBox();
+      expect(h.x+h.width).toBeLessThan(c.x);await hint.click();expect(await top()).toBeCloseTo(questionTop,0);
+    }
+    await select(room,answer);await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===2?'完成这一站':'下一题',exact:true}).click();
+    await room.getByRole('button',{name:i===ANSWERS.observe.length-1?'完成这一站':'下一题',exact:true}).click();
   }
   const group=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(group.getByRole('button')).toHaveCount(2);
   for(const b of await group.getByRole('button').all()){const box=await b.boundingBox();expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);expect(box.height).toBeGreaterThanOrEqual(44);}
@@ -94,8 +101,13 @@ test('320 窄屏最长亲属选项完整可读，保持四按钮网格与可点�
 
 test('成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位',async({page})=>{
  for(const width of [320,390,1280]){
-  await page.setViewportSize({width,height:740});await page.goto('/unit19-20/#learn/models');await page.getByText('看看二十幅对比图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
-  const pictures=page.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(20);
-  for(let i=0;i<20;i+=2){const a=await pictures.nth(i).boundingBox(),b=await pictures.nth(i+1).boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);}
+  await page.setViewportSize({width,height:740});await page.goto('/unit19-20/#learn/models');if(await page.locator('.visual-gallery').getAttribute('open')===null)await page.getByText('看看二十幅对比图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
+  const room=page.locator('.stage-models'),prev=room.getByRole('button',{name:'上一页图册',exact:true}),next=room.getByRole('button',{name:'下一页图册',exact:true});
+  while(await prev.isEnabled())await prev.click();let seen=0;
+  do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(2);
+   const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThanOrEqual(100);expect(a.height).toBeGreaterThan(90);
+   const b=await pictures.last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);
+   seen+=await pictures.count();if(!await next.isEnabled())break;await next.click();
+  }while(seen<=20);expect(seen).toBe(20);
  }
 });

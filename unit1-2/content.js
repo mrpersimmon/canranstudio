@@ -134,3 +134,95 @@
   // The navigation can read unit metadata without activating its storage context.
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit12;
+ const revised={"roles":[unit.questions["roles"][0],
+unit.questions["roles"][1],
+{
+  "id": "u12-tasks-v4-thanks-degree",
+  "target": "识别感谢语的程度词组",
+  "prompt": "点出让“谢谢”更强烈的词组。",
+  "decision": "此前只展示和拼装此句；现在区分感谢动作、对象与程度。",
+  "hint": "把整句话分成道谢的话和加强语气的话。",
+  "source": "Lesson 1 原文 Thank you very much.",
+  "type": "locate",
+  "fragments": [
+    {
+      "value": "Thank"
+    },
+    " ",
+    {
+      "value": "you"
+    },
+    " ",
+    {
+      "value": "very much"
+    },
+    "."
+  ],
+  "options": [
+    "Thank",
+    "you",
+    "very much"
+  ],
+  "answer": "very much",
+  "distractorReasons": {
+    "Thank": "这个片段不表达题目要求的信息；需结合完整句子判断。",
+    "you": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "Thank 表达道谢；you 是感谢的对象；very much 加强程度。区别所问的信息，而不是只认谢谢的翻译。"
+}],
+"exam":[{
+  "id": "u12-tasks-v4-exam-attention",
+  "target": "区别回应招呼与确认物品归属",
+  "prompt": "接好女士的两次回应。",
+  "decision": "女士已认出自己的手提包；两次回应各自选择，不按一组套话排除。",
+  "hint": "第一句是在叫住她，第二句是在确认物品。",
+  "source": "Lesson 1 招呼与确认手提包归属的原文对比",
+  "type": "cloze",
+  "reference": "手提包确实是这位女士的。",
+  "blanks": [
+    {
+      "before": "男士：Excuse me!\n女士：",
+      "after": "",
+      "options": [
+        "Yes?",
+        "Yes, it is.",
+        "Pardon?"
+      ]
+    },
+    {
+      "before": "男士：Is this your handbag?\n女士：",
+      "after": "",
+      "options": [
+        "Yes, it is.",
+        "Yes?",
+        "Excuse me!"
+      ]
+    }
+  ],
+  "answer": "[\"Yes?\",\"Yes, it is.\"]",
+  "distractorReasons": {
+    "Yes?": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "Yes, it is.": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "Pardon?": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "Excuse me!": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "Yes? 回应招呼；Yes, it is. 确认归属。Pardon? 需要没听清的语境；Excuse me! 用来引起注意。两空各自选择。"
+},
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+unit.questions["exam"][4],
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit12-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit12-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

@@ -64,6 +64,8 @@
 .unit910-workspace .greeting-task-stage .greeting-person figcaption{background:#FFFDF8;border-radius:8px;padding:3px}
 .unit910-workspace .greeting-task-stage[data-speaker="steven"] [data-person="steven"] figcaption,.unit910-workspace .greeting-task-stage[data-speaker="helen"] [data-person="helen"] figcaption{background:#FBE8AD}
 .unit910-workspace .greeting-task-bubbles{display:flex;flex-direction:column;align-self:center;min-height:154px;justify-content:center;gap:10px}
+.unit910-workspace .greeting-task[data-input="locate"] .greeting-task-stage{display:flex;justify-content:center;align-items:center;gap:56px;min-height:0;padding:14px}
+.unit910-workspace .greeting-task[data-input="locate"] .greeting-task-bubbles{display:none}
 .unit910-workspace :is(.greeting-speech,.greeting-response){align-self:flex-start;max-width:96%;font:700 23px/1.4 'Baloo 2',sans-serif;margin:0;padding:12px 16px;border:2px solid #C4AE97;border-radius:18px 18px 18px 4px;background:#FFFCF5}
 .unit910-workspace .greeting-task-stage[data-speaker="helen"] .greeting-speech,.unit910-workspace .greeting-response{align-self:flex-end;border-radius:18px 18px 4px 18px;border-color:#B7A6C5;background:#F9F3FD}
 .unit910-workspace .role-runner{padding-top:4px}.unit910-workspace .role-runner .practice-content{padding-top:0;min-height:0}

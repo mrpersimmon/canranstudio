@@ -129,15 +129,134 @@
       ],'women · nurses / men · engineers','women 对应 nurses，men 对应 engineers。','把记录中的两组人分别与原句核对。','Lesson18职业与复数；新资料','同时处理两组新信息')
     ]
   };
-  const stages=[
+  const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-greet","初次见面回应","第一次见面的访客说：How do you do?\n你怎样回应？",[["How do you do?", ""], ["I am tired.", "这是身体状态，不是此处的正式问候。"], ["They are nurses.", "这是职业介绍，没有回应问候。"]],"How do you do?","本题核对：初次见面回应。","先判断是在问候，还是询问状态。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查初次见面回应",{}),
+  q("final-v2-identity","区分身份与职业问题","主人回答：This is Jim.\n哪一个问题能接上这个回答？",[["Who is this young man?", ""], ["What are their jobs?", "问多人的职业，不问眼前人的身份。"], ["How do you do?", "这是问候，不询问身份。"]],"Who is this young man?","本题核对：区分身份与职业问题。","看看想补充的是姓名身份，还是职业。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分身份与职业问题",{}),
+  q("final-v2-pronouns","人物与物主词","Jim 是一位年轻男士。\n___ is an office assistant.\n___ job is in this office.",[["He · His", ""], ["His · He", "主语和物主词的位置反了。"], ["They · Their", "这里介绍一个明确的人。"]],"He · His","本题核对：人物与物主词。","第一空代替人，第二空说明谁的工作。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查人物与物主词",{}),
+  q("final-v2-plural-people","man和woman的不规则复数","两张名牌原来写 men 和 women。\n现在每组只介绍一人，名牌应改成哪组？",[["a man · a woman", ""], ["a men · a woman", "介绍一人不能保留复数 men。"], ["a man · a women", "介绍一人不能保留复数 women。"]],"a man · a woman","本题核对：man和woman的不规则复数。","每张名牌只表示一个人，要还原为单数。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查man和woman的不规则复数",{}),
+  q("final-v2-plural-job","复合职业名词和fe变化","两位女警察、两位家庭主妇：\n哪组英文标签都正确？",[["policewomen · housewives", ""], ["policewomans · housewives", "woman 的变化在这个复合词里仍保留。"], ["policewomen · housewifes", "housewife 的复数是 housewives。"]],"policewomen · housewives","本题核对：复合职业名词和fe变化。","分别回想复合词和 fe 结尾这个词的变化。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查复合职业名词和fe变化",{}),
+  q("final-v2-job-choice","选择问句与否定纠正","两位新同事的资料：engineers。\n访客问：Are they mechanics or engineers?\n怎样回答？",[["They aren't mechanics. They're engineers.", ""], ["They're mechanics.", "与资料的职业不符。"], ["Yes, they are.", "这句没有说明选择了哪种职业。"]],"They aren't mechanics. They're engineers.","本题核对：选择问句与否定纠正。","这次是在两种职业中选择，先排除猜错的。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查选择问句与否定纠正",{}),
+  q("final-v2-ask-jobs","组织复数否定介绍","整理访客笔记：那些男士不很忙。",undefined,"Those men aren't very busy.","本题核对：复数主语与否定介绍。","先说明是哪几个人，再描述他们的状态。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查复数主语与否定介绍",{"type": "order", "tokens": ["Those", "men", "aren't", "very", "busy."]}),
+  q("final-v2-evidence","区分不忙与懒惰","另一组同事的记录只有：They are hard-working.\n哪些信息能确定？",[["他们很勤奋，是否忙碌还不知道。", ""], ["他们一定很忙。", "勤奋不等于此刻一定忙碌。"], ["他们都是推销员。", "这句没有说明职业。"]],"他们很勤奋，是否忙碌还不知道。","本题核对：区分不忙与懒惰。","只保留这句话真的说出的信息。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分不忙与懒惰",{}),
+ );
+ const stages=[
     {id:'l1',title:'敲开办公室',activities:[['words','职业小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
     {id:'l2',title:'认识新同事',activities:[['text','办公室小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
     {id:'l3',title:'把同事介绍清楚',activities:[['phrases','介绍小锦囊','speech'],['refer','人物接力卡','question']],required:['refer']},
     {id:'l4',title:'职业成双',activities:[['models','职业小画册','cards'],['forms','单词变一变','cards'],['trans','词块拼装台','order']],required:['forms','trans']},
     {id:'l5',title:'小访客出发',activities:[['exam','访客小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
   ];
-  const definition={id:'unit17-18',version:1,title:'办公室探访记',path:'/unit17-18/',start:'learn/words',progress:{learningKey:'canran:unit17-18:learning:v1'},objects:WORDS,stages,questions,
+  const definition={id:'unit17-18',version:1,title:'办公室探访记',path:'/unit17-18/',start:'learn/words',progress:{learningKey:'canran:unit17-18:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
     learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
   root.CanranCore.unit1718=definition;
   if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit1718;
+ const revised={"forms":[{
+  "id": "u1718-tasks-v4-plural-labels",
+  "target": "辨认不规则人物复数",
+  "prompt": "给单数标签找到复数伙伴。",
+  "decision": "合并机械形式选择；最终挑战仍独立抽查，配对不算稳定掌握。",
+  "hint": "",
+  "source": "Lesson 17–18 人物与职业名词复数，含 Lesson 18 新词 housewives",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "man",
+      "cn": "men"
+    },
+    {
+      "id": "2",
+      "en": "woman",
+      "cn": "women"
+    },
+    {
+      "id": "3",
+      "en": "policewoman",
+      "cn": "policewomen"
+    },
+    {
+      "id": "4",
+      "en": "housewife",
+      "cn": "housewives"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\",\"4\"]",
+  "leftLabel": "单数",
+  "rightLabel": "复数",
+  "instruction": "点一个单数词，再点它的复数。",
+  "distractorRationale": "四对分别为 man/men、woman/women、policewoman/policewomen、housewife/housewives；配对侧重认形，综合挑战另保留独立形式选择，不能宣称学会所有不规则复数。"
+}],
+"roles":[unit.questions["roles"][0],
+unit.questions["roles"][1],
+{
+  "id": "u1718-tasks-v4-story-busy",
+  "target": "抓住否定范围",
+  "prompt": "点出表示“不很忙”的完整词组。",
+  "decision": "原文只否定很忙，不能推出很懒；语义边界在挑战另测。",
+  "hint": "要保留否定的部分，也要保留程度。",
+  "source": "Lesson 17 原文 They aren’t very busy!",
+  "type": "locate",
+  "fragments": [
+    {
+      "value": "They"
+    },
+    " ",
+    {
+      "value": "aren't very busy"
+    },
+    "!"
+  ],
+  "options": [
+    "They",
+    "aren't very busy"
+  ],
+  "answer": "aren't very busy",
+  "distractorReasons": {
+    "They": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "They 只指人物；aren’t very busy 才含否定和程度。不能从不很忙推出懒惰，也不把 aren’t 等同从不。"
+}],
+"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+unit.questions["exam"][4],
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9],
+{
+  "id": "u1718-tasks-v4-exam-names",
+  "target": "回答复数姓名询问",
+  "prompt": "两位同事的名牌：Britt / Inge\n访客：What are your names?\n两位同事一起怎样回答？",
+  "decision": "Lesson18已有姓名介绍；补名字与国籍、职业的信息类别区别。",
+  "hint": "访客要登记的是名字这一项资料。",
+  "source": "Lesson 18 Written A 的 Britt/Inge 与 Our names are…；新情境复数姓名询问",
+  "options": [
+    "Our names are Britt and Inge.",
+    "We're Swedish.",
+    "We're nurses."
+  ],
+  "answer": "Our names are Britt and Inge.",
+  "distractorReasons": {
+    "We're Swedish.": "这是国籍，没有回答名字。",
+    "We're nurses.": "这是职业，没有回答名字。"
+  },
+  "distractorRationale": "Our names are… 回答姓名；We’re Swedish. 回答国籍，We’re nurses. 回答职业。不同信息类别，不能只因整句语法通顺就选。"
+}]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit1718-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit1718-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

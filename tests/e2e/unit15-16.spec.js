@@ -20,7 +20,7 @@ test('从导航进入护照小检查站，先看有音标的词卡，翻义无�
   expect(audio).toEqual([]); expect(errors).toEqual([]);
 });
 
-test('配套练习无需任何配音，25题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
+test('配套练习无需任何配音，31题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
   test.setTimeout(45000);
   const audio=[],errors=[];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{audio.push(route.request().url());return route.abort();});
@@ -76,13 +76,13 @@ test('从首页进入护照小检查站，25张音标词卡可翻义翻页，全
   expect(audio).toEqual([]); expect(errors).toEqual([]);
 });
 
-test('11个新词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星', async ({ page }) => {
+test('8组练习覆盖11个新词，错答可改，最后三题刷新不代答，重练清本轮并保留星星', async ({ page }) => {
   await page.route(/\.(mp3|wav|ogg)(\?|$)/, route=>route.abort());
   await page.goto('/unit15-16/#learn/listen'); const room=page.locator('.stage-listen');
   await expect(room.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
   for(const [i,answer] of ANSWERS.listen.entries()) {
-    await expect(room).toContainText('第 '+(i+1)+' / 11 题');
-    if(i>=8) await page.reload();
+    await expect(room).toContainText('第 '+(i+1)+' / 8 题');
+    if(i>=5) await page.reload();
     const check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
     await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
@@ -92,10 +92,10 @@ test('11个新词各一次，错答可改，最后三题刷新不代答，重练
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await room.getByRole('button',{name:'再试一次',exact:true}).click();
     }
-    await room.getByRole('button',{name:answer,exact:true}).click(); await check.click();
+    await require('../support/units1-30-tasks').select(room,answer); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===10?'完成这一站':'下一题',exact:true}).click();
+    await room.getByRole('button',{name:i===7?'完成这一站':'下一题',exact:true}).click();
   }
   await expect(page.locator('#starCount')).toHaveText('3');
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
@@ -139,14 +139,13 @@ test('教材四张国籍卡、十五幅复数图、A六题和B十二组问答完
   await page.goto('/unit15-16/#learn/models');const room=page.locator('.stage-models');
   await room.getByText('看看四张国籍卡',{exact:true}).click();
   await expect(room.locator('.nationality-models strong')).toHaveText(['Russian','English','American','Dutch'].map(x=>'Are you '+x+'? → Yes, we are.'));
-  await room.getByText('看看成双的物品',{exact:true}).click();
   const pairs=[['books','red'],['shirts','white'],['coats','grey'],['tickets','yellow'],['suits','blue'],['hats','black and grey'],['passports','green'],['umbrellas','black'],['handbags','white'],['ties','orange'],['dogs','brown and white'],['pens','blue'],['cars','red'],['dresses','green'],['blouses','yellow']];
-  await expect(room.locator('.colour-gallery strong')).toHaveText(pairs.map(([o,c])=>o+' · '+c));
+  for(let i=0;i<pairs.length;i++){await expect(room.locator('.colour-gallery strong')).toHaveText(pairs[i][0]+' · '+pairs[i][1]);if(i<14)await room.getByRole('button',{name:'下一幅出行图',exact:true}).click();}
   await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
   await room.locator('.colour-gallery').screenshot({path:'output/playwright/unit15-16/plural-gallery-desktop.png'});
   await expect(room.locator('.reference-card button')).toHaveCount(0);
   await room.getByText('看看完整问答',{exact:true}).click();
-  await expect(room.locator('.reply-models strong')).toHaveText(pairs.slice(1,13).map(([o,c])=>'What colour are your '+o+'? Our '+o+' are '+c+'.'));
+  for(const [i,[o,c]] of pairs.slice(1,13).entries()){await expect(room.locator('.reply-models strong')).toHaveText('What colour are your '+o+'? Our '+o+' are '+c+'.');if(i<11)await room.getByRole('button',{name:'下一份问答',exact:true}).click();}
   await room.getByText('a 还是 an？',{exact:true}).click();
   await expect(room.locator('.article-models li')).toHaveText(['It is an English car.','It is a Japanese car.','It is an Italian car.','It is a French car.','It is an American car.','Robert is not a teacher.']);
   await room.getByRole('button',{name:'下一站：单词变一变',exact:true}).click();await expect(page).toHaveURL(/#learn\/forms$/);
@@ -161,8 +160,10 @@ test('教材四张国籍卡、十五幅复数图、A六题和B十二组问答完
 });
 
 test('教材图册蓝套装、白手提包、红汽车与可见文字相符',async({page})=>{
-  await page.goto('/unit15-16/#learn/models');await page.getByText('看看成双的物品',{exact:true}).click();
-  for(const [label,colour] of [['suits · blue','blue'],['handbags · white','white'],['cars · red','red']]){
+  await page.goto('/unit15-16/#learn/models');
+  let position=0;
+  for(const [target,label,colour] of [[4,'suits · blue','blue'],[8,'handbags · white','white'],[12,'cars · red','red']]){
+    while(position<target){await page.getByRole('button',{name:'下一幅出行图',exact:true}).click();position++;}
     const img=page.locator('.colour-gallery .reference-card').filter({hasText:label}).locator('img');
     await expect.poll(()=>img.evaluate(el=>el.complete&&el.naturalWidth>0)).toBe(true);
     // Read the actual picture shown in the page, not asset filenames or answer data.

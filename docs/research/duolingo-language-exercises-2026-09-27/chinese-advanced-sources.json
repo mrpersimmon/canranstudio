@@ -1,0 +1,762 @@
+{
+  "schema_version": 1,
+  "report_date": "2026-09-27",
+  "scope": {
+    "base_language": "Chinese",
+    "target_language": "English",
+    "primary_ui_language": "Simplified Chinese",
+    "regional_account": "not assumed equivalent to interface or course direction",
+    "included": "Stories, Radio, Adventures, Roleplay, Lily/Falstaff Video Call, Super, Max, Practice; traceable official and firsthand public sources",
+    "excluded": "Foreign-interface screenshots as proof of Chinese-course support; Duolingo English Test; invented or redrawn UI; pirated app content"
+  },
+  "methodology": {
+    "browser_used": false,
+    "verification_methods": [
+      "official/public web text",
+      "publisher HTML metadata",
+      "selected original images visually inspected",
+      "original media bytes downloaded without image edits"
+    ],
+    "no_synthetic_ui": true,
+    "source_hierarchy": [
+      "Duolingo explicit course-direction statement",
+      "Duolingo all-courses statement with labeled logical application",
+      "platform editorial screenshot with visible task language",
+      "dated firsthand product walkthrough",
+      "public video title metadata as unverified lead only"
+    ],
+    "date_rule": "Publication date and modification date remain separate. Historical first-launch content is not promoted to current evidence merely by dateModified.",
+    "coverage_rule": "No evidence is not evidence of absence."
+  },
+  "summary": {
+    "scope_note": "Counts refer only to this research subtask, not assets later verified by the parent or other agents.",
+    "historical_official_zh_en_stories": true,
+    "radio_zh_en_public_recording_lead": true,
+    "current_complete_chinese_advanced_task_screens_verified": 0,
+    "complete_chinese_english_ordinary_task_screens_verified": 1,
+    "archived_image_count": 4,
+    "complete_chinese_story_question_gap": true,
+    "practice_all_courses_free_official_global_claim": true,
+    "max_zh_en_current_coverage_established": false
+  },
+  "sources": [
+    {
+      "id": "official_stories_2020",
+      "url": "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/",
+      "title": "Duolingo Stories: The journey to Android",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "en",
+      "published_at": "2020-02-21T21:00:00.000Z",
+      "modified_at": "2026-01-01T12:30:43.000Z",
+      "evidence": "正文明确 English for Spanish, Portuguese, and Chinese speakers；内容叙述 2019 年 iOS/Android 上线。支持历史中文→英语 Stories，不因网页修改日期为 2026 年而变为当前覆盖证明。",
+      "supports_zh_en": true,
+      "temporal_scope": "historical",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "official_zh_home",
+      "url": "https://zh-cn.duolingo.com/",
+      "title": "多邻国 - 全球火爆的学习平台",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "zh-Hans",
+      "published_at": null,
+      "modified_at": null,
+      "evidence": "官方搜索索引正文列英语课程，并展示 Super Duolingo 免费体验 1 周。直接打开返回客户端页面壳，故此处记录为官方网页索引文本，未完成登录账号/订购检查。",
+      "access": "search_index_text; direct_open_client_shell",
+      "supports_zh_en": "course_and_chinese_super_promotion_only",
+      "temporal_scope": "retrieved_2026-09-27",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "app_store_cn",
+      "url": "https://apps.apple.com/cn/app/id570060128",
+      "api_url": "https://itunes.apple.com/lookup?id=570060128&country=cn",
+      "title": "多邻国Duolingo英语日语法语",
+      "publisher": "Duolingo, Inc.; hosted by Apple",
+      "kind": "official_developer_listing",
+      "language": "zh-Hans",
+      "published_at": null,
+      "current_version": "7.141.1",
+      "current_version_release_at": "2026-09-23T13:42:13Z",
+      "evidence": "开发者描述列英语等课程、可免费学习所有课程；官方宣传图片含中文指令与英文词块。它不提供中文母语→英语高级功能矩阵；宣传图也不是完整未裁切应用截屏。",
+      "supports_zh_en": true,
+      "temporal_scope": "current_listing_only",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "apple_cn_editorial_courses",
+      "url": "https://apps.apple.com/cn/iphone/story/id1605587215",
+      "title": "闯关升级学外语",
+      "publisher": "Apple App Store editorial",
+      "kind": "platform_editorial_not_duolingo_authored",
+      "language": "zh-Hans",
+      "published_at": null,
+      "modified_at": null,
+      "date_note": "页面未提供可核验的发布日期；不以页脚年份代替。",
+      "evidence": "课程选择图明确通过中文学习英语；配对题有中文指令和中英词汇。正文笼统说热门语言有小故事，未给当前中文→英语高级交互完整名单。",
+      "supports_zh_en": true,
+      "temporal_scope": "undated_screenshot",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "apple_cn_editorial_super",
+      "url": "https://apps.apple.com/cn/iphone/story/id1748181882",
+      "title": "在《多邻国》霸榜的人都做对了什么？",
+      "publisher": "Apple App Store editorial",
+      "kind": "platform_editorial_not_duolingo_authored",
+      "language": "zh-Hans",
+      "published_at": null,
+      "modified_at": null,
+      "date_note": "页面未提供可核验的发布日期。",
+      "evidence": "有中文练习中心截图。正文曾将无限红心、个性化错题等归于 Super；不能据此覆盖 2026 官方练习免费公告，亦不能由中文菜单推断图内目标语言。",
+      "supports_zh_en": "chinese_ui_only_target_unknown",
+      "temporal_scope": "undated_historical_entitlement_possible",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "stories_36kr_2019",
+      "url": "https://www.36kr.com/p/1724788310017",
+      "title": "美国教育科技行业再现一独角兽？「多邻国」获3000万美元F轮融资，估值15亿美元",
+      "publisher": "36氪",
+      "author": "Zhudy",
+      "kind": "third_party_firsthand_product_walkthrough",
+      "language": "zh-Hans",
+      "published_at": "2019-12-05 18:21",
+      "evidence": "作者带领读者走过产品学习流程；配图为中文小故事目录、美国旗。图是历史菜单拼图，未显示故事内问答。",
+      "supports_zh_en": true,
+      "temporal_scope": "historical",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "stories_bilibili_2024",
+      "url": "https://www.bilibili.com/video/BV1BK4y117aF/",
+      "title": "[多邻国]英语小故事合集<中-英>",
+      "publisher": "bilibili user recording",
+      "author": "LoveOrNone",
+      "kind": "third_party_claimed_recording_not_watched",
+      "language": "zh-Hans_title",
+      "published_at": "2024-01-29 01:46:38",
+      "evidence": "标题明确中-英；检索/页面文本显示 51 分集（Good Morning、A Date、Passport 等）。未观看视频帧，不能据此登记完整截图或实际题面。",
+      "video_watched": false,
+      "access_note": "普通网页/公开数据接口曾返回 HTTP 412；未绕过访问限制。",
+      "supports_zh_en": "title_claim_only",
+      "temporal_scope": "historical_public_claim",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "radio_bilibili_2025",
+      "url": "https://www.bilibili.com/video/BV1k9ezzEENL/",
+      "title": "（中→英）多邻国电台耳机听力合集-持续更新",
+      "publisher": "bilibili user recording",
+      "author": "Shelly的外语记忆贝壳",
+      "kind": "third_party_claimed_recording_not_watched",
+      "language": "zh-Hans_title",
+      "published_at": "2025-08-24 17:40:00",
+      "evidence": "标题明确中→英，检索文本列 150 分集并标阶段-部分号；包含莉莉、露西、奥斯卡及熊角色节目。未观看题目画面；电台主持熊不等于 Falstaff 视频通话。",
+      "video_watched": false,
+      "access_note": "普通网页/公开数据接口曾返回 HTTP 412；未绕过访问限制。",
+      "supports_zh_en": "title_claim_only",
+      "temporal_scope": "historical_public_claim",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "official_adventures",
+      "url": "https://blog.duolingo.com/adventures/",
+      "title": "Introducing Adventures, a brand-new gamified learning experience",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "en",
+      "published_at": "2024-09-24T17:43:15.000Z",
+      "modified_at": "2024-12-02T15:28:07.000Z",
+      "evidence": "官方上线范围为英语母语学法语、西班牙语母语学英语，iOS/Android；不包含中文母语方向的明确说明。",
+      "supports_zh_en": false,
+      "temporal_scope": "historical_launch_scope",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "adventures_bilibili_2025",
+      "url": "https://www.bilibili.com/video/BV1AvrmYSEEV/",
+      "title": "多邻国 英语课程的冒险单元（我真是长见识了）",
+      "publisher": "bilibili user recording",
+      "author": "APTX囧发发",
+      "kind": "third_party_claimed_recording_not_watched",
+      "language": "zh-Hans_title",
+      "published_at": "2025-01-07 12:38:42",
+      "duration": "05:33",
+      "evidence": "标题只确称英语课程；未观看画面，无法确认界面语言或母语方向。中文标题不等于中文课程。",
+      "video_watched": false,
+      "supports_zh_en": false,
+      "temporal_scope": "historical_lead_only",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "official_max",
+      "url": "https://blog.duolingo.com/duolingo-max/",
+      "title": "Introducing Duolingo Max, a learning experience powered by GPT-4",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "en",
+      "published_at": "2023-03-14T12:57:58.000Z",
+      "modified_at": "2026-03-25T17:21:04.000Z",
+      "evidence": "现正文说 Max 在 188 国 iOS/Android 提供，并列英语使用者学习西/法/德/意/葡语及英语使用者学日/韩/中文的不同权限。后者 Chinese 是目标中文，不是中文母语者学英语。",
+      "supports_zh_en": false,
+      "temporal_scope": "current_retrieved_scope_not_zh_en",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "official_lily",
+      "url": "https://blog.duolingo.com/video-call/",
+      "title": "Video Call lets you have real life conversations with Lily",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "en",
+      "published_at": "2024-09-24T17:25:29.000Z",
+      "modified_at": "2025-01-15T22:20:23.000Z",
+      "evidence": "官方说明目标语言含英语，但没有把中文母语→英语单列为支持方向；通话中 Lily 画面本身也不能证明课程方向。",
+      "supports_zh_en": false,
+      "temporal_scope": "global_target_english_only",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "lily_bilibili_2025",
+      "url": "https://www.bilibili.com/video/BV1QwQUY4EhP/",
+      "title": "和多邻国的拽姐通话是怎样的体验",
+      "publisher": "bilibili user recording",
+      "author": "Solid-Block",
+      "kind": "third_party_claimed_recording_not_watched",
+      "language": "zh-Hans_title",
+      "published_at": "2025-03-15 21:06:28",
+      "duration": "08:59",
+      "evidence": "描述称偶然发现一个能够视频通话的版本，版本/课程方向未知；未观看画面。不能作为中文课程官方可用性证明。",
+      "video_watched": false,
+      "supports_zh_en": false,
+      "temporal_scope": "unverified_lead",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "official_falstaff",
+      "url": "https://blog.duolingo.com/beginner-video-call-with-falstaff/",
+      "title": "Our new Video Call with Falstaff is here to help you speak with confidence",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "en",
+      "published_at": "2026-01-14T13:00:03.000Z",
+      "modified_at": "2026-02-02T12:57:04.000Z",
+      "evidence": "官方说 iOS Max 订阅者、目标语言含英语等九种；未明确中文母语方向。文章图为德语字幕，不可做中文→英语截图。",
+      "supports_zh_en": false,
+      "temporal_scope": "global_target_english_only",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "official_free_practice_2026",
+      "url": "https://blog.duolingo.com/guide-to-duolingo-practice-hub/",
+      "title": "Practice any skill, any time in the Practice tab",
+      "publisher": "Duolingo",
+      "kind": "official_first_party",
+      "language": "en",
+      "published_at": "2026-02-18T13:00:00.000Z",
+      "modified_at": "2026-04-17T08:38:04.000Z",
+      "evidence": "公告明确练习免费，技能练习在 iOS/Android 的所有语言课程提供；Stories/Radio/Adventures 复习仍以课程已有该内容为条件；Max 对话复习另列。",
+      "supports_zh_en": "logical_application_of_explicit_all_language_courses_scope",
+      "regional_build_verified": false,
+      "temporal_scope": "dated_official_global_claim",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "duozhi_interview_2024",
+      "url": "https://k.sina.com.cn/article_3203211782_beed2206020017lns.html",
+      "title": "多邻国重磅升级：推出AI视频通话、大冒险、便携电子钢琴",
+      "publisher": "多知官方账号 / 新浪转载",
+      "author": "王上",
+      "kind": "third_party_original_reporting_with_duolingo_interviews",
+      "language": "zh-Hans",
+      "published_at": "2024-09-25 01:42",
+      "evidence": "现场报道与产品人员采访称新功能在部分海外市场；Video Call 当时为 iOS 目标英/西/法语，Adventures 英语→法语及西语→英语。采访包含中国区负责人，但这不等于中国区或中文母语课程已开放。",
+      "supports_zh_en": false,
+      "temporal_scope": "historical_launch_and_interview",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "google_zh_editorial",
+      "url": "https://play.google.com/store/apps/editorial?hl=zh&id=mc_apps_editorial_duolingo_useredu_feature_deep_dive_fcp",
+      "title": "随心切换课程模式，玩转“多邻国”",
+      "publisher": "Google Play editorial",
+      "kind": "platform_editorial",
+      "language": "zh-Hans_article_english_ui_images",
+      "published_at": null,
+      "modified_at": null,
+      "evidence": "文章中文，截图实际为英文 UI 学西班牙语。页面脚注为美国(简体中文)。不得用于中文课程覆盖证明。",
+      "supports_zh_en": false,
+      "temporal_scope": "undated_localized_editorial",
+      "retrieved_on": "2026-09-27"
+    },
+    {
+      "id": "help_mirror_rejected",
+      "url": "https://www.microchainsoft.cn/cms/detail/13",
+      "title": "多邻国 - 好玩高效的英语学习途径",
+      "publisher": "非多邻国域名，来源不明",
+      "kind": "unverified_help_mirror_rejected",
+      "language": "zh-Hans",
+      "published_at": null,
+      "evidence": "复制式帮助文本含 Super/中国 Android 订购信息，但无可核发布日期、原文链接，且有 Sulier 拼写错误；不作为权益主证据。",
+      "supports_zh_en": false,
+      "temporal_scope": "unknown",
+      "retrieved_on": "2026-09-27"
+    }
+  ],
+  "features": [
+    {
+      "id": "zh_en_stories",
+      "name": "Stories / 小故事",
+      "kind": "lesson_container",
+      "status": "confirmed_historical_official_zh_en",
+      "status_zh": "官方历史确认中文母语→英语；当前具体交互覆盖待实测",
+      "source_ids": [
+        "official_stories_2020",
+        "stories_36kr_2019",
+        "stories_bilibili_2024"
+      ],
+      "asset_ids": [
+        "cn-adv-36kr-stories-menu-2019"
+      ],
+      "platform_scope": "2020 官方回顾网页、iOS、Android Stories 上线；不能据此承诺 2026 所有账号相同。",
+      "entitlement": "所取中文定向证据未给 2026 免费/Super/Max 明确矩阵。",
+      "steps_verified_for_zh_en": [
+        "中文小故事目录按组展示故事，部分灰色未解锁。"
+      ],
+      "global_mechanism_note": "官方通用说明为阅读/收听较长叙事并穿插理解检查；不是单一原子题型。",
+      "missing": [
+        "中文界面英语故事逐句阅读全屏",
+        "中文问题的理解选择/缺句/找词/配对等完整题面",
+        "2026 新 Stories 三种交互是否在该方向上线",
+        "登录账号的当前免费/会员状态"
+      ]
+    },
+    {
+      "id": "zh_en_radio",
+      "name": "Radio / 电台",
+      "kind": "lesson_container",
+      "status": "public_zh_en_recording_claim_not_visually_verified",
+      "status_zh": "有标题明确中→英的公开实录线索；本分支未观看题面",
+      "source_ids": [
+        "radio_bilibili_2025"
+      ],
+      "asset_ids": [],
+      "platform_scope": "实录标题/分集信息不含可核客户端平台与版本。",
+      "entitlement": "未证实中文→英语当前套餐归属。",
+      "steps_verified_for_zh_en": [],
+      "missing": [
+        "视频实际界面语言和目标语言核验",
+        "听音选图/判断/补句等操作全屏",
+        "当前平台和免费权益"
+      ]
+    },
+    {
+      "id": "zh_en_adventures",
+      "name": "Adventures / 大冒险",
+      "kind": "scenario_container",
+      "status": "zh_en_not_established",
+      "status_zh": "中文母语→英语未确证；有仅称英语课程的第三方视频线索",
+      "source_ids": [
+        "official_adventures",
+        "duozhi_interview_2024",
+        "adventures_bilibili_2025"
+      ],
+      "asset_ids": [],
+      "platform_scope": "官方 2024 首发 iOS/Android：英语→法语、西班牙语→英语。",
+      "entitlement": "其他方向的官方能力不能转写成中文课程 Max/免费权益。",
+      "steps_verified_for_zh_en": [],
+      "global_mechanism_note": "场景探索、与角色互动并完成任务；此处仅解释容器，不列作中文课程已存在题型。",
+      "missing": [
+        "中文指令+英语对话/选项的完整情景屏",
+        "中文→英语上线日期/课程段/平台声明"
+      ]
+    },
+    {
+      "id": "zh_en_roleplay",
+      "name": "Roleplay / 角色扮演",
+      "kind": "ai_conversation_container",
+      "status": "zh_en_not_established",
+      "status_zh": "未找到中文母语→英语的官方范围或完整题屏",
+      "source_ids": [
+        "official_max"
+      ],
+      "asset_ids": [],
+      "platform_scope": "现 Max 官方范围正文主要按英语母语学习其他语言列出。",
+      "entitlement": "全球属于 Max；中文→英语账号是否可订购并使用此功能未确认。",
+      "steps_verified_for_zh_en": [],
+      "global_mechanism_note": "官方通用流程为情景提示、多轮对话、对话后反馈；不据此推断中文输入界面。",
+      "missing": [
+        "中文情景提示/英语对话/反馈完整屏",
+        "课程方向与会员实际可用性"
+      ]
+    },
+    {
+      "id": "zh_en_lily",
+      "name": "Video Call with Lily / 莉莉视频通话",
+      "kind": "ai_spoken_conversation",
+      "status": "global_english_target_confirmed_base_chinese_not_established",
+      "status_zh": "目标英语官方存在；中文母语课程方向未确证",
+      "source_ids": [
+        "official_lily",
+        "official_max",
+        "duozhi_interview_2024",
+        "lily_bilibili_2025"
+      ],
+      "asset_ids": [],
+      "platform_scope": "全球产品含目标英语；中文母语、国区包和账号范围未核实。",
+      "entitlement": "全球 Max 功能；未知版本第三方实录不用于确认中文会员范围。",
+      "steps_verified_for_zh_en": [],
+      "missing": [
+        "中文路径英语课程入口与同一次通话的连续证据",
+        "可见中文通话控制/英语字幕的完整屏",
+        "当前平台/区域/等级范围"
+      ]
+    },
+    {
+      "id": "zh_en_falstaff",
+      "name": "Video Call with Falstaff / 熊教练引导通话",
+      "kind": "guided_ai_spoken_conversation",
+      "status": "global_english_target_confirmed_base_chinese_not_established",
+      "status_zh": "目标英语官方存在；中文母语方向及中文反馈未确证",
+      "source_ids": [
+        "official_falstaff"
+      ],
+      "asset_ids": [],
+      "platform_scope": "2026 官方文称 iOS Max，目标英语等九种语言；未分母语方向。",
+      "entitlement": "全球 Max；不是电台中出现熊角色就能证明此功能。",
+      "steps_verified_for_zh_en": [],
+      "missing": [
+        "中文母语→英语入口",
+        "英文问题+中文引导/反馈+通话控件的完整屏"
+      ]
+    },
+    {
+      "id": "zh_en_free_course",
+      "name": "免费课程",
+      "kind": "entitlement_not_exercise",
+      "status": "official_cn_listing_confirmed_general_course_claim",
+      "status_zh": "中国区官方开发者页确认课程可免费学习",
+      "source_ids": [
+        "app_store_cn"
+      ],
+      "asset_ids": [],
+      "entitlement": "可免费学习课程不等于每种附加练习、所有 AI 对话或所有复习权益免费。",
+      "steps_verified_for_zh_en": [],
+      "missing": [
+        "具体高级功能逐项免费范围"
+      ]
+    },
+    {
+      "id": "zh_en_super",
+      "name": "Super Duolingo",
+      "kind": "subscription_not_exercise",
+      "status": "official_chinese_promotion_confirmed_scope_partly_unknown",
+      "status_zh": "官方中文页面有 Super 推广；不是独立题型",
+      "source_ids": [
+        "official_zh_home",
+        "apple_cn_editorial_super",
+        "official_free_practice_2026"
+      ],
+      "asset_ids": [
+        "cn-adv-apple-practice-menu"
+      ],
+      "platform_scope": "中文官网展示 Super；具体中国地区包、账户和当前所有权益未逐项实测。",
+      "entitlement": "历史中文编辑页曾说明无限红心、错题练习等；2026 练习免费专项公告已改变后者的一般付费边界，不可把整个练习中心标为 Super 专享。",
+      "steps_verified_for_zh_en": [],
+      "missing": [
+        "当前中文账户订阅权益页及全屏截图"
+      ]
+    },
+    {
+      "id": "zh_en_practice",
+      "name": "Practice tab / 练习中心",
+      "kind": "review_container_not_atomic_exercise",
+      "status": "official_global_all_courses_claim_applies_logically_to_zh_en",
+      "status_zh": "官方 2026 公告称手机端所有语言课程技能练习免费；中文课程由全称范围涵盖",
+      "source_ids": [
+        "official_free_practice_2026",
+        "apple_cn_editorial_super"
+      ],
+      "asset_ids": [
+        "cn-adv-apple-practice-menu"
+      ],
+      "platform_scope": "iOS/Android；网页未在该全称句中承诺；本地中国版本/账号未实测。",
+      "entitlement": "技能练习免费；Stories/Radio/Adventures 需本课程本来有；Max 通话和角色扮演复习仍为 Max。",
+      "inference": "中文→英语属于所有语言课程中的一门，因此课程层面的技能练习适用是对官方全称声明的逻辑应用，不是中文账号现场验证。",
+      "steps_verified_for_zh_en": [
+        "中文菜单已看到口语、听力、错题本、单词、小故事入口；该图的目标语言不可识别。"
+      ],
+      "global_mechanism_note": "官方操作：点底部哑铃；未显示时先点 ••• 展开，再选技能练习。",
+      "missing": [
+        "2026 中文→英语免费练习目录及实际进入题目的完整连续证据"
+      ]
+    },
+    {
+      "id": "zh_en_max",
+      "name": "Duolingo Max",
+      "kind": "subscription_not_exercise",
+      "status": "zh_en_not_established",
+      "status_zh": "全球套餐确认；中文母语→英语具体范围未确证",
+      "source_ids": [
+        "official_max",
+        "official_lily",
+        "official_falstaff"
+      ],
+      "asset_ids": [],
+      "entitlement": "188 国家/地区和九种目标语言等全局数量，不构成任一母语方向和中国地区账号的全覆盖证明。",
+      "direction_guard": "English speakers learning Chinese = 英语母语学中文，绝不是中文母语学英语。",
+      "steps_verified_for_zh_en": [],
+      "missing": [
+        "中文→英语、区域/平台/课程进度共同匹配的官方或账号证据"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "cn-adv-apple-course-selection",
+      "file": "cn-adv-apple-course-selection.jpg",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/Features122/v4/3b/ea/f0/3beaf0f5-6044-73de-bfe5-37791b049b56/02db4bfc-5cc4-4d6c-aadb-8baa715c8934.png/1275x2659bb-60.jpg",
+      "path": "/Users/permission/Documents/ChatGPT/canranstudio.cn/docs/research/duolingo-language-exercises-2026-09-27/cn-adv-apple-course-selection.jpg",
+      "bytes": 165262,
+      "sha256": "7c811fa58d9052aec855e5672c1e3659e1f33a538fc3b960525ec8719bb58df4",
+      "dimensions": [
+        1275,
+        2659
+      ],
+      "downloaded": true,
+      "source_id": "apple_cn_editorial_courses",
+      "caption": "中文课程选择：通过中文学习 → 英语",
+      "ui_language": "zh-Hans",
+      "target_language": "en listed but not selected",
+      "base_language": "zh explicit",
+      "visual_verified": true,
+      "role": "course_direction_menu",
+      "full_single_task_screen": false,
+      "completeness": "完整应用视口的课程选择菜单；顶部返回/进度、底部继续/Home 可见；没有 iOS 状态栏；不是题目。",
+      "top_controls": [
+        "返回",
+        "进度"
+      ],
+      "bottom_controls": [
+        "继续",
+        "Home"
+      ],
+      "valid_for_zh_en_advanced_exercise": false
+    },
+    {
+      "id": "cn-adv-apple-en-pairs",
+      "file": "cn-adv-apple-en-pairs.jpg",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/Features112/v4/d8/e5/c7/d8e5c76d-0932-1406-6be7-d4436256007e/be387636-1330-4d38-a3ae-72c79fa0614f.png/1275x2659bb-60.jpg",
+      "path": "/Users/permission/Documents/ChatGPT/canranstudio.cn/docs/research/duolingo-language-exercises-2026-09-27/cn-adv-apple-en-pairs.jpg",
+      "bytes": 128245,
+      "sha256": "b8b6e9bb3ce24571f48ad96b3d9eeb8f1fb0471934ba544a97bf61b5beb621c2",
+      "dimensions": [
+        1275,
+        2659
+      ],
+      "downloaded": true,
+      "source_id": "apple_cn_editorial_courses",
+      "caption": "中文学英语：选择配对完成反馈",
+      "ui_language": "zh-Hans",
+      "target_language": "en",
+      "base_language": "zh",
+      "visual_verified": true,
+      "role": "ordinary_atomic_word_pairing",
+      "full_single_task_screen": true,
+      "completeness": "完整题目应用视口，顶部退出/进度/红心，中央五组中英配对，底部反馈/继续/Home 均可见；不含系统状态栏。",
+      "top_controls": [
+        "退出",
+        "连对12题进度",
+        "红心5"
+      ],
+      "bottom_controls": [
+        "不错哦反馈",
+        "举报旗",
+        "继续",
+        "Home"
+      ],
+      "visible_task_text": [
+        "选择配对",
+        "你/喜欢/英文/我/中文",
+        "like/I/Chinese/English/you"
+      ],
+      "valid_for_zh_en_advanced_exercise": false,
+      "exclusion_note": "普通配对题，不是 Stories 内配对，也不是 Match Madness（没有倒计时）。"
+    },
+    {
+      "id": "cn-adv-apple-practice-menu",
+      "file": "cn-adv-apple-practice-menu.jpg",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/Features211/v4/1d/c4/a1/1dc4a111-de35-b532-28d0-71a45d466318/e2e36711-aa74-4518-af1c-d74e7094358c.png/1275x2452bb-60.jpg",
+      "path": "/Users/permission/Documents/ChatGPT/canranstudio.cn/docs/research/duolingo-language-exercises-2026-09-27/cn-adv-apple-practice-menu.jpg",
+      "bytes": 188999,
+      "sha256": "677d00cebe2ef0c58c5b2e68a25e3fa59dd8c2e2b4850ac1c59e43f1fb03f473",
+      "dimensions": [
+        1275,
+        2452
+      ],
+      "downloaded": true,
+      "source_id": "apple_cn_editorial_super",
+      "caption": "中文练习中心菜单（目标语言未标明）",
+      "ui_language": "zh-Hans",
+      "target_language": "unknown",
+      "base_language": "unknown_chinese_interface_only",
+      "visual_verified": true,
+      "role": "practice_container_menu",
+      "full_single_task_screen": false,
+      "completeness": "完整应用菜单视口，无系统状态栏；顶部今天的复习内容、听力提升开始按钮；下方口语/听力/错题本11/单词30+；小故事区域被固定底部导航自然遮挡；Home可见。",
+      "top_controls": [
+        "今天的复习内容",
+        "听力提升",
+        "开始 +20经验"
+      ],
+      "bottom_controls": [
+        "底部导航",
+        "Home"
+      ],
+      "valid_for_zh_en_advanced_exercise": false,
+      "exclusion_note": "能证明中文菜单设计；图内没有国旗、英语题干或英文词汇，不能单独证明目标英语。"
+    },
+    {
+      "id": "cn-adv-36kr-stories-menu-2019",
+      "recommended_use": "Historical boundary appendix only; exclude from primary exercise screenshot gallery.",
+      "file": "cn-adv-36kr-stories-menu-2019.jpg",
+      "url": "https://img.36krcdn.com/20200408/v2_8e639f88231347d8999826bd29b4da8e_img_000?x-oss-process=image%2Fformat%2Cjpg%2Finterlace%2C1",
+      "path": "/Users/permission/Documents/ChatGPT/canranstudio.cn/docs/research/duolingo-language-exercises-2026-09-27/cn-adv-36kr-stories-menu-2019.jpg",
+      "bytes": 57427,
+      "sha256": "d36c57d8d2234c5842e15332b113331aabd7de29201c0a0b46296387d2744d53",
+      "dimensions": [
+        1051,
+        593
+      ],
+      "downloaded": true,
+      "source_id": "stories_36kr_2019",
+      "caption": "2019 年中文→英语小故事目录（原媒体三屏拼图）",
+      "ui_language": "zh-Hans",
+      "target_language": "en supported by US flag",
+      "base_language": "zh",
+      "visual_verified": true,
+      "role": "historical_stories_container_entry",
+      "full_single_task_screen": false,
+      "completeness": "媒体原始三屏横向拼图，各屏有美国旗/资源顶栏及底部导航；无系统状态栏/Home；没有故事内文本、题干、选项或检查按钮。不能标为单屏完整题目。",
+      "top_controls": [
+        "美国旗",
+        "皇冠6",
+        "连胜1",
+        "红心5"
+      ],
+      "bottom_controls": [
+        "应用底部导航",
+        "小故事书本选中"
+      ],
+      "visible_task_text": [
+        "多邻国小故事",
+        "早上好！",
+        "约会",
+        "一个东西",
+        "惊喜！",
+        "在博物馆",
+        "蜜月",
+        "红色夹克",
+        "考试"
+      ],
+      "valid_for_zh_en_advanced_exercise": false
+    }
+  ],
+  "rejected_media": [
+    {
+      "id": "google_story_wrong_direction",
+      "source_id": "google_zh_editorial",
+      "url": "https://play-lh.googleusercontent.com/RK8XJ5MWtnlVa0BVePv4Zqha2zmTasm29iP71Iuq3d1Og7cXGRqpOfMWrVh0RKTwxOqRb5KtMxE=w3840-h2160",
+      "visual_verified": true,
+      "ui_language": "en",
+      "target_language": "es",
+      "dimensions": [
+        972,
+        2160
+      ],
+      "reason": "中文文章配英文 UI / 西语故事；即使完整也不符合中文母语→英语范围。"
+    },
+    {
+      "id": "google_radio_wrong_ui",
+      "source_id": "google_zh_editorial",
+      "url": "https://play-lh.googleusercontent.com/y9E3aAFzBqgXUO5S6CiXeRoHhCUTglez5wmM6Jo471c9exmtXI0uiIApTUaAhr_dH4u8g_DHjkE=w3840-h2160",
+      "visual_verified": true,
+      "ui_language": "en",
+      "target_language": "not_readable_in_frame; Spanish article context",
+      "dimensions": [
+        972,
+        2160
+      ],
+      "reason": "指令为英文 Select the related image；不能用中文网页外壳替代中文题目证据。"
+    },
+    {
+      "id": "google_practice_wrong_direction",
+      "source_id": "google_zh_editorial",
+      "url": "https://play-lh.googleusercontent.com/GvoAVLG3Q87o3Lri6AKac0ozSfe39UuqgQg4M0lXNLWQD6TVnBU2pLVY4a0AyflZ6eByIV4kxA=w3840-h2160",
+      "visual_verified": true,
+      "ui_language": "en",
+      "target_language": "es",
+      "dimensions": [
+        972,
+        2160
+      ],
+      "reason": "英文菜单且有西班牙旗。"
+    },
+    {
+      "id": "appstore_translation_cropped",
+      "source_id": "app_store_cn",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/c3/54/9f/c3549f4c-cc13-b7a1-8f0e-21d2688ecd8f/a71e7d50-9bc6-45f2-a82f-658dcbb1fd70_iOS_1242x2688_-_01.png/1242x2688bb.jpg",
+      "visual_verified": true,
+      "ui_language": "zh-Hans",
+      "target_language": "en",
+      "dimensions": [
+        1242,
+        2688
+      ],
+      "reason": "官方中文→英语宣传合成版式；手机下缘在图片边界被裁切，无完整系统/应用底部。不作为原生完整截屏。可只作原始官方宣传图引用，未在本包下载。"
+    },
+    {
+      "id": "appstore_japanese",
+      "source_id": "app_store_cn",
+      "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/20/e5/38/20e538d5-5d62-2fe2-ac7f-1bc04985f872/70ae2ead-091a-47cb-935b-f0b8e2fcebd7_iOS_1242x2688_-_03.png/1242x2688bb.jpg",
+      "visual_verified": true,
+      "ui_language": "zh-Hans",
+      "target_language": "ja",
+      "dimensions": [
+        1242,
+        2688
+      ],
+      "reason": "中文界面，但目标日语假名；不符合英语范围。"
+    }
+  ],
+  "gaps": [
+    "未找到并目视核验中文→英语 Stories、Radio、Adventures、Roleplay、Lily、Falstaff 的完整题面。",
+    "中文小故事目录与中文练习目录不计入高级原子题型完整截图数量。",
+    "公开中文标题视频仍需实际逐帧查看课程方向、题目、控制区；未取得视频不能冒称已观看。",
+    "2020 中文 Stories 官方历史存在≠2026 每个账号所有 Stories 新题型均可用。",
+    "官方 all language courses 免费练习公告是全局声明；地区版本/账号实际落地未完成核验。",
+    "当前报告不判断中国大陆 Max 不存在或不可购买；只判断中文→英语覆盖尚缺证据。"
+  ],
+  "access_limitations": [
+    {
+      "url": "https://help.duolingo.com/hc/zh-cn",
+      "result": "本轮未获得可用帮助文章正文"
+    },
+    {
+      "url": "https://support.duolingo.com/hc/zh-cn",
+      "result": "返回客户端壳而非可核功能矩阵"
+    },
+    {
+      "url": "https://www.woshipm.com/evaluating/6323616.html",
+      "result": "检索候选；直接读取超时，未据此确认高级截图"
+    },
+    {
+      "url": "https://api.bilibili.com/x/web-interface/view",
+      "result": "候选普通公开数据请求返回 HTTP 412；未继续绕过"
+    }
+  ],
+  "repository_state": "只新增本报告及 cn-adv- 图片；未修改业务代码、既有报告底稿、Git 分支或提交。"
+}

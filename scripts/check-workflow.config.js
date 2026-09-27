@@ -25,6 +25,7 @@ function tasks(root, files) {
     'browser-units9-12': browser(['tests/e2e/unit9-10', 'tests/e2e/unit11-12', 'tests/e2e/units9-12-classroom.spec.js']),
     'browser-unit1314': browser(['tests/e2e/unit13-14']),
     'browser-unit1516': browser(['tests/e2e/unit15-16']),
+    'browser-units17-30-review': browser(['tests/e2e/units17-30']),
     'browser-unit1718': browser(['tests/e2e/unit17-18']),
     'browser-unit1920': browser(['tests/e2e/unit19-20']),
     'browser-unit2122': browser(['tests/e2e/unit21-22']),
@@ -32,6 +33,7 @@ function tasks(root, files) {
     'browser-unit2526': browser(['tests/e2e/unit25-26']),
     'browser-unit2728': browser(['tests/e2e/unit27-28']),
     'browser-unit2930': browser(['tests/e2e/unit29-30']),
+    'browser-units1-30-tasks': browser(['tests/e2e/units1-30-tasks.spec.js', 'tests/e2e/units1-30-revision.spec.js', 'tests/e2e/units1-30-scene-cues.spec.js', 'tests/e2e/units-room-tasks.spec.js', 'tests/e2e/units1-30-acceptance.spec.js']),
     'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js', 'tests/e2e/l49-focus.spec.js']),
     'browser-state': browser(['tests/e2e/home-progress.spec.js', 'tests/e2e/l49-progress.spec.js']),
     'browser-layout': browser(['tests/e2e/accessibility.spec.js', 'tests/e2e/mobile-release.spec.js']),
@@ -59,14 +61,16 @@ function select(files) {
   if (code.some(file => /^(unit7-8\/|assets\/unit7-8\/|tests\/fixtures\/unit7-8-(?:voiced|classroom|exam3)-before\/|tests\/support\/unit7-8-(?:flow|exam)\.js)/.test(file))) selected.push('browser-unit78');
   if (code.some(file => /^(unit(?:9-10|11-12)\/|assets\/unit(?:9-10|11-12)\/|tests\/fixtures\/unit(?:9-10|11-12)-(?:voiced|classroom|short-exam)-before\/|tests\/support\/unit(?:9-10|11-12)-(?:flow|exam)\.js)/.test(file))) selected.push('browser-units9-12');
   if (code.some(file => /^(unit13-14\/|assets\/unit13-14\/|tests\/support\/unit13-14-(?:flow|exam)\.js|tests\/fixtures\/unit13-14-)/.test(file))) selected.push('browser-unit1314');
-  if (code.some(file => /^(unit15-16\/|assets\/unit15-16\/|tests\/support\/unit15-16-flow\.js)/.test(file))) selected.push('browser-unit1516');
+  if (code.some(file => /^(unit15-16\/|assets\/unit15-16\/|tests\/support\/unit15-16-(?:flow|exam)\.js|tests\/fixtures\/unit15-16-classroom-before\/)/.test(file))) selected.push('browser-unit1516');
+  if (code.some(file => /^(core\/classroom-scene\.(?:js|css)|scripts\/art\/(?:build-units17-30-scenes|redraw-classroom-stages)\.py|unit(?:17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/|assets\/unit(?:17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/|tests\/(?:support\/units17-30-exam\.js|fixtures\/unit(?:17-18|19-20|21-22|23-24|25-26|27-28|29-30)-classroom-before\/|e2e\/units17-30))/.test(file))) selected.push('browser-units17-30-review');
   if (code.some(file => /^(unit17-18\/|assets\/unit17-18\/|tests\/support\/unit17-18-flow\.js)/.test(file))) selected.push('browser-unit1718');
   if (code.some(file => /^(unit19-20\/|assets\/unit19-20\/|tests\/support\/unit19-20-flow\.js)/.test(file))) selected.push('browser-unit1920');
-  if (code.some(file => /^(unit21-22\/|assets\/unit21-22\/|tests\/support\/unit21-22-flow\.js)/.test(file))) selected.push('browser-unit2122');
+  if (code.some(file => /^(unit21-22\/|assets\/unit21-22\/|core\/lesson49-task-inputs\.(?:js|css)$|tests\/fixtures\/unit21-22-tasks-before\/|tests\/support\/unit21-22-flow\.js)/.test(file))) selected.push('browser-unit2122');
   if (code.some(file => /^(unit23-24\/|assets\/unit23-24\/|tests\/support\/unit23-24-flow\.js)/.test(file))) selected.push('browser-unit2324');
   if (code.some(file => /^(unit25-26\/|assets\/unit25-26\/|tests\/support\/unit25-26-flow\.js)/.test(file))) selected.push('browser-unit2526');
   if (code.some(file => /^(unit27-28\/|assets\/unit27-28\/|tests\/support\/unit27-28-flow\.js)/.test(file))) selected.push('browser-unit2728');
   if (code.some(file => /^(unit29-30\/|assets\/unit29-30\/|tests\/support\/unit29-30-flow\.js)/.test(file))) selected.push('browser-unit2930');
+  if (code.some(file => /^(core\/lesson49-task-inputs\.(?:js|css)$|unit(?:1-2|3-4|5-6|7-8|9-10|11-12|13-14|15-16|17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/(?:content|unit|scene)\.(?:js|css)$|tests\/(?:e2e\/(?:units1-30-|units-room-tasks)|support\/units1-30-|fixtures\/units1-30-tasks-before\/))/.test(file))) selected.push('browser-units1-30-tasks');
   if (code.some(file => /^(unit[^/]*\/|lesson\d+\/|soundmark\/|core\/(?:lesson49-practice|lesson49-subjects|course-catalog)\.js|tests\/(?:e2e\/retry-feedback\.spec\.js|fixtures\/l49-subjects-before-retry\.js))/.test(file))) selected.push('browser-retry-feedback');
   if (runtime.some(file => /^(lesson49\/|core\/)|progress|storage/.test(file))) selected.push('browser-state');
   if (runtime.some(file => /^(lesson5[0-4]\/|soundmark\/)/.test(file))) selected.push('browser-lessons');

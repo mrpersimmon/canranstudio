@@ -88,6 +88,18 @@
    ],'桌上有杯子。','它说明桌上有杯子，没有说明其他东西或杯子的状态。','只保留这句话明确说出的信息，不额外猜测。','Lesson25–26存在句；信息边界','理解有不等于只有，避免过度推断')
   ]
  };
+ const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-room","提取厨房里三个位置","根据课文，电炉、冰箱、桌子分别在哪里？",[["左边 · 右边 · 中间", ""], ["右边 · 左边 · 中间", "电炉与冰箱的位置反了。"], ["左边 · 中间 · 右边", "冰箱与桌子的位置反了。"]],"左边 · 右边 · 中间","本题核对：提取厨房里三个位置。","按题目物品顺序回看原文，不按提及先后排。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查提取厨房里三个位置",{}),
+  q("final-v2-states","区分两个物品状态","课文的桌子上，什么是 empty，什么是 clean？",[["bottle · cup", ""], ["cup · bottle", "瓶子空，杯子干净，不能交换。"], ["table · bottle", "课文不是说桌子空。"]],"bottle · cup","本题核对：区分两个物品状态。","每个形容词前面正在介绍什么？","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分两个物品状态",{}),
+  q("final-v2-it","区分存在介绍和接续指代","There is an electric cooker in the room.\n___ is blue.\n继续介绍同一台电炉，应填：",[["It", ""], ["There", "There is blue 不能这样接着描述。"], ["They", "是一台电炉，不是多个。"]],"It","本题核对：区分存在介绍和接续指代。","这句是在引入新物品，还是说刚才那一台？","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分存在介绍和接续指代",{}),
+  q("final-v2-articles","首次引入与明确回指","There is ___ electric cooker.\n___ cooker is blue.",[["an · The", ""], ["a · The", "electric 开头是元音音素。"], ["an · A", "第二句明确说同一台，用 The。"]],"an · The","本题核对：首次引入与明确回指。","第一处看发音，第二处看是否同一个物品。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查首次引入与明确回指",{}),
+  q("final-v2-where","自主询问单件物品位置","想知道那个瓶子在哪儿，把问句拼出来。",undefined,"Where is the bottle?","本题核对：自主询问单件物品位置。","先放询问位置的词，瓶子只有一个。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查自主询问单件物品位置",{"type": "order", "tokens": ["Where", "is", "the", "bottle?"]}),
+  q("final-v2-inside","区分on与in完整位置描述","看图选择完整介绍。",[["There is a bottle in the refrigerator.", ""], ["There is a bottle on the refrigerator.", "瓶子在内部，不在顶面。"], ["There are some bottles in the refrigerator.", "图中只有一个瓶子。"]],"There is a bottle in the refrigerator.","本题核对：区分on与in完整位置描述。","同时看里面还是表面，以及数量。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分on与in完整位置描述",{"image": "/assets/unit25-26/bottle-refrigerator.svg", "imageAlt": "一个满瓶子在敞开的冰箱里"}),
+  q("final-v2-contraction","There is缩写并接续描述","只把 There is 缩写，其他内容保持不变：\nThere is a clean cup on the table.\n哪句正确？",[["There's a clean cup on the table.", ""], ["They're a clean cup on the table.", "They are 不是 There is。"], ["It's a clean cup on the table.", "没有保持原句介绍“有”的结构。"]],"There's a clean cup on the table.","本题核对：There is缩写并接续描述。","只缩写 There is，不换掉句子的作用。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查There is缩写并接续描述",{}),
+ );
  const stages=[
   {id:'l1',title:'先认识厨房',activities:[['words','厨房小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
   {id:'l2',title:'走进史密斯家',activities:[['text','厨房小导览','book'],['roles','课文小侦探','people']],required:['text','roles']},
@@ -95,8 +107,168 @@
   {id:'l4',title:'说清物品位置',activities:[['models','厨房陈列册','cards'],['be','位置小帮手','cards'],['trans','词块拼装台','order']],required:['be','trans']},
   {id:'l5',title:'我的厨房导览',activities:[['exam','厨房小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit25-26',version:1,title:'厨房探访记',path:'/unit25-26/',start:'learn/words',progress:{learningKey:'canran:unit25-26:learning:v1'},objects:WORDS,stages,questions,
+ const definition={id:'unit25-26',version:1,title:'厨房探访记',path:'/unit25-26/',start:'learn/words',progress:{learningKey:'canran:unit25-26:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
   learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit2526=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit2526;
+ const revised={"listen":[unit.questions["listen"][0],
+unit.questions["listen"][1],
+unit.questions["listen"][2],
+{
+  "id": "u2526-tasks-v4-positions",
+  "target": "识别三个完整位置短语",
+  "prompt": "给位置词组配对。",
+  "decision": "按房间正面观察，不把人物左右视角混用；保留 in/on 的关系辨别。",
+  "hint": "",
+  "source": "Lesson 25 on the left/right 与 in the middle 词组",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "on the left",
+      "cn": "在左边"
+    },
+    {
+      "id": "2",
+      "en": "on the right",
+      "cn": "在右边"
+    },
+    {
+      "id": "3",
+      "en": "in the middle",
+      "cn": "在中间"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "三个位置词组保持介词与冠词完整，判断以面对房间的观看方向为准，不混入人物的左右视角。"
+},
+unit.questions["listen"][4],
+unit.questions["listen"][6],
+unit.questions["listen"][8],
+unit.questions["listen"][9],
+unit.questions["listen"][10],
+unit.questions["listen"][11]],
+"observe":[unit.questions["observe"][0],
+{
+  "id": "u2526-tasks-v4-introduce-articles",
+  "target": "首提的 an 与再指的 The",
+  "prompt": "先介绍一台电炉，再说同一台。",
+  "decision": "第二句同一物品，保留不定冠词按紧随音素判断的实际选择。",
+  "hint": "先分清是不是第一次说到它，再看紧跟冠词的词。",
+  "source": "Lesson 25 电炉的首次介绍与再次指称",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "There is ",
+      "after": " electric cooker in the kitchen.",
+      "options": [
+        "an",
+        "a",
+        "the"
+      ]
+    },
+    {
+      "before": "",
+      "after": " cooker is blue.",
+      "options": [
+        "The",
+        "A",
+        "An"
+      ]
+    }
+  ],
+  "answer": "[\"an\",\"The\"]",
+  "distractorReasons": {
+    "an": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "a": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "the": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "The": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "A": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "An": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "初次介绍一个 electric cooker 用 an，electric 为元音音素开头；第二句同一台用 The。a 忽略发音，A/An 再引入不确定对象，the 不符合指定的首提情境。"
+}],
+"roles":[{
+  "id": "u2526-tasks-v4-story-find",
+  "target": "依据英文在房间中找到物品",
+  "prompt": "读介绍，在房间里点出对应的物品。",
+  "decision": "在原有房间中识别物体、属性与位置，移动端独立构图；固定房间位置不是正确答案高亮。",
+  "hint": "先按你面对房间的方向找位置，再核对颜色。",
+  "source": "Lesson 25 冰箱在右侧且为白色；把原文信息用于同一厨房",
+  "type": "scene-find",
+  "reference": "It is on the right. It is white.",
+  "sceneImage": "/assets/unit25-26/scene.svg",
+  "mobileScene": "/assets/unit25-26/task-room-mobile.svg",
+  "sceneDescription": "从画面正面看：电炉、桌子与冰箱",
+  "spots": [
+    {
+      "id": "cooker",
+      "name": "电炉",
+      "bounds": [
+        8,
+        57,
+        17,
+        31
+      ],
+      "mobileBounds": [
+        2,
+        44,
+        28,
+        39
+      ]
+    },
+    {
+      "id": "table",
+      "name": "桌子",
+      "bounds": [
+        36,
+        57,
+        29,
+        34
+      ],
+      "mobileBounds": [
+        33,
+        52,
+        40,
+        43
+      ]
+    },
+    {
+      "id": "fridge",
+      "name": "冰箱",
+      "bounds": [
+        78,
+        44,
+        15,
+        43
+      ],
+      "mobileBounds": [
+        75,
+        28,
+        24,
+        55
+      ]
+    }
+  ],
+  "options": [
+    "cooker",
+    "table",
+    "fridge"
+  ],
+  "answer": "fridge",
+  "distractorRationale": "电炉在左且蓝，桌子在中间，只有右侧白色冰箱满足两条线索。所有热点样式相同；不能先高亮冰箱。"
+},
+unit.questions["roles"][1]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit2526-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit2526-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

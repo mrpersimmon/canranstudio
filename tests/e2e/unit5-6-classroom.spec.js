@@ -48,21 +48,29 @@ test('正误与完成反馈仍真实播放，词义题末三题没有预选或�
     };
   });
   await page.goto('/unit5-6/#learn/listen'); const room = page.locator('.stage-listen');
-  await room.getByRole('button', { name: '德国（人）的', exact: true }).click(); await room.getByRole('button', { name: '检查答案', exact: true }).click();
+  await require('../support/units1-30-tasks').select(room, { pairs: [['French', '德国（人）的'], ['German', '日本（人）的'], ['Japanese', '法国（人）的']] }); await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await expect(room.locator('.practice-options .correct')).toHaveCount(0);
   await expect.poll(() => page.evaluate(() => window.soundEvents.some(x => x.ended && x.src.endsWith('duolingo-incorrect.mp3')))).toBe(true);
   await page.reload(); await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   for (let i = 0; i < ANSWERS.listen.length; i++) {
-    if (i >= 5) await page.reload();
+    if (i >= ANSWERS.listen.length - 3) await page.reload();
     const check = room.getByRole('button', { name: '检查答案', exact: true });
-    await expect(check).toBeDisabled(); await expect(room.locator('.practice-options img')).toHaveCount(0);
-    await expect(room.locator('.practice-options button[aria-pressed="true"]')).toHaveCount(0);
-    await room.getByRole('button', { name: ANSWERS.listen[i], exact: true }).click(); await check.click();
+    await expect(room.locator('.practice-options img')).toHaveCount(0);
+    if (i === 0) {
+      // Matching retries retain the child's draft for editing; only new tasks start blank.
+      await expect(check).toBeEnabled();
+      await expect(room.locator('.match-count')).toHaveText('已配 3 / 3 对');
+      await expect(room.getByRole('group', { name: '英文', exact: true }).getByRole('button', { name: 'French', exact: true })).toHaveAttribute('aria-description', '已与“德国（人）的”配对');
+    } else {
+      await expect(check).toBeDisabled();
+      await expect(room.locator('.practice-options button[aria-pressed="true"]')).toHaveCount(0);
+    }
+    await require('../support/units1-30-tasks').select(room, ANSWERS.listen[i]); await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     if (i === 0) await expect.poll(() => page.evaluate(() => window.soundEvents.some(x => x.ended && x.src.endsWith('duolingo-correct.mp3')))).toBe(true);
-    await room.getByRole('button', { name: i === 7 ? '完成这一站' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === ANSWERS.listen.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
   }
   await expect.poll(() => page.evaluate(() => window.soundEvents.some(x => x.ended && x.src.endsWith('duolingo-complete.mp3')))).toBe(true);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
@@ -184,7 +192,7 @@ test('词卡仅翻面，新的词义题在无声音时仍可检查', async ({ pa
   await page.goto('/unit5-6/#learn/listen');
   const room = page.locator('.stage-listen');
   await expect(room.getByRole('heading', { name: '单词寻宝', exact: true })).toBeVisible();
-  await room.getByRole('button', { name: '法国（人）的', exact: true }).click();
+  await require('../support/units1-30-tasks').select(room, ANSWERS.listen[0]);
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeEnabled();
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');

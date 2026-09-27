@@ -29,7 +29,7 @@ test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并�
   expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
 });
 
-test('真实完成 20 句与 30 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
+test('真实完成 20 句与 26 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
   test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/unit5-6/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await completeUnit56(page);
@@ -48,7 +48,7 @@ test('真实完成 20 句与 30 题获得 15 星，领取、保存、打印与�
   await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeFocused();
   await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(dialog.locator('#certificateDate')).toHaveText(date);await page.keyboard.press('Escape');
   await page.goto('/unit5-6/#learn/listen');const room=page.locator('.stage-listen');await room.getByRole('button',{name:'再练一轮',exact:true}).click();
-  await expect(room).toContainText('第 1 / 8 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
   for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();}
   expect(errors).toEqual([]);
 });
@@ -68,7 +68,7 @@ test('新单元从图鉴开始，24 个词的音标与翻面可见，末组主�
   await expect(words.locator('.unit-word')).toHaveCount(6);
   await expect(words.locator('.word-phonetic')).toHaveCount(6);
   await words.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
-  await expect(page.locator('.stage-listen')).toContainText('第 1 / 8 题');
+  await expect(page.locator('.stage-listen')).toContainText('第 1 / 4 题');
   await expect(page.locator('.stage-listen').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(page.locator('#starCount')).toHaveText('0');
 });

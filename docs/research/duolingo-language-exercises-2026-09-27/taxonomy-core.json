@@ -1,0 +1,2102 @@
+{
+  "schema_version": 1,
+  "research_date": "2026-09-27",
+  "language": "zh-CN",
+  "scope": "Duolingo语言学习：普通课、语法、基础读听说写；免费/Super/Max均纳入订阅边界，未扩展至其他学科或DET/ABC。",
+  "status": "research_only",
+  "methodology": [
+    "本文件是普通语言课、语法、基础读听说写的核心分册；书写系统、Stories、DuoRadio、Adventures、Max开放对话等需与其他研究分册合并。",
+    "基于一手可验证的教学任务清单，不是Duolingo私有后端challengeType字段的穷尽枚举；产品试验可能产生未公开变体。",
+    "22条atomic_task是本研究的教学任务划分，不是官方公布的数量；相同单选控件也可能对应不同学习任务。",
+    "31条条目明确区分22个任务、7个变体、1个Flashcards微练习、1个历史测验任务；不能简单宣称Duolingo有31种题型。",
+    "截图完整指顶部退出/进度、完整题干/响应区和该模式底部操作均在图内；不要求操作系统状态栏，也不把没有Check但有麦克风的题误判为裁切。",
+    "官方图片只证明该界面被官方展示过。没有逐课程、逐地区、逐账户登录验证，也没有把文档modified_at当成功能上线时间。",
+    "英文Sounds文章页头带DET推广，但本研究引用的是主App英语课程发音页签，不包含DET考题。",
+    "本次仅读取公开网页与官方媒体，图片在内存缩小用于视觉核验；除本文件和对应JSON外，本子任务未创建媒体或修改业务文件。"
+  ],
+  "summary_counts": {
+    "records": 31,
+    "atomic_tasks": 22,
+    "explicit_variants": 7,
+    "micro_sessions": 1,
+    "historical_assessment_tasks": 1,
+    "official_media_records": 31,
+    "records_with_full_ui": 30,
+    "records_without_full_ui": 1
+  },
+  "sources": [
+    {
+      "id": "CS01",
+      "url": "https://blog.duolingo.com/duolingo-101-how-to-learn-a-language-on-duolingo/",
+      "title": "Duolingo 101: How to learn a language on Duolingo",
+      "published_at": "2024-12-02T10:05:00.000Z",
+      "modified_at": "2026-02-11T10:16:59.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS02",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-writing-skills/",
+      "title": "How Duolingo teaches writing skills",
+      "published_at": "2026-07-02T12:00:00.000Z",
+      "modified_at": "2026-07-02T15:38:35.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS03",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-reading-skills/",
+      "title": "How Duolingo teaches reading skills",
+      "published_at": "2025-02-10T13:00:00.000Z",
+      "modified_at": "2026-07-03T15:28:19.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS04",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-listening-skills/",
+      "title": "Listening Practice in Another Language: Tips from Duolingo",
+      "published_at": "2026-05-05T12:00:00.000Z",
+      "modified_at": "2026-05-05T13:11:46.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS05",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-speaking-skills/",
+      "title": "How Duolingo teaches speaking skills",
+      "published_at": "2026-02-09T12:00:00.000Z",
+      "modified_at": "2026-09-09T16:26:53.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS06",
+      "url": "https://blog.duolingo.com/new-immersion-exercises-maximize-your-language-learning/",
+      "title": "New immersion exercises maximize your language learning",
+      "published_at": "2021-04-27T12:30:00.000Z",
+      "modified_at": "2026-03-26T08:50:16.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS07",
+      "url": "https://blog.duolingo.com/language-rules-learning-grammar-on-duolingo/",
+      "title": "Language rules: Learning grammar on Duolingo",
+      "published_at": "2020-10-02T12:30:00.000Z",
+      "modified_at": "2026-01-01T12:46:22.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS08",
+      "url": "https://blog.duolingo.com/how-duolingo-experts-work-with-ai/",
+      "title": "At Duolingo, humans and AI work together to create a high-quality learning experience",
+      "published_at": "2022-09-14T12:00:00.000Z",
+      "modified_at": "2024-12-04T21:15:45.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS09",
+      "url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "title": "How to practice English pronunciation on Duolingo",
+      "published_at": "2024-11-20T13:00:06.000Z",
+      "modified_at": "2026-03-25T18:20:49.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS10",
+      "url": "https://blog.duolingo.com/duolingo-flashcards/",
+      "title": "Strengthen your memory with new Duolingo Flashcards",
+      "published_at": "2025-11-18T13:00:02.000Z",
+      "modified_at": "2026-01-21T11:13:29.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS11",
+      "url": "https://blog.duolingo.com/guide-to-duolingo-practice-hub/",
+      "title": "Practice any skill, any time in the Practice tab",
+      "published_at": "2026-02-18T13:00:00.000Z",
+      "modified_at": "2026-04-17T08:38:04.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS12",
+      "url": "https://blog.duolingo.com/right-level-of-difficulty/",
+      "title": "Dear Duolingo: What’s the right level of difficulty?",
+      "published_at": "2024-04-02T12:00:20.000Z",
+      "modified_at": "2026-08-07T20:04:40.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS13",
+      "url": "https://blog.duolingo.com/improving-how-duolingo-teaches-chinese-and-other-languages/",
+      "title": "Improving how Duolingo teaches Chinese—and other languages!",
+      "published_at": "2020-02-03T15:00:00.000Z",
+      "modified_at": "2026-09-18T14:30:19.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS14",
+      "url": "https://blog.duolingo.com/sneaky-pronunciation-practice/",
+      "title": "The sneaky speaking practice you’re probably not doing",
+      "published_at": "2023-06-28T12:00:40.000Z",
+      "modified_at": "2026-05-04T09:12:58.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS15",
+      "url": "https://blog.duolingo.com/tips-for-learning-spanish-on-duolingo/",
+      "title": "How To Learn Spanish on Duolingo",
+      "published_at": "2021-01-29T14:12:05.000Z",
+      "modified_at": "2026-08-10T09:55:28.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS16",
+      "url": "https://blog.duolingo.com/why-learn-english/",
+      "title": "How to get started learning English",
+      "published_at": "2023-01-02T13:00:00.000Z",
+      "modified_at": "2026-05-18T14:32:04.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS17",
+      "url": "https://blog.duolingo.com/partial-credit-improvements-to-duolingos-placement-test/",
+      "title": "Partial credit: improvements to Duolingo’s placement test",
+      "published_at": "2018-09-14T20:00:00.000Z",
+      "modified_at": "2026-05-20T08:18:35.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS18",
+      "url": "https://blog.duolingo.com/product-highlights/",
+      "title": "2025 Duolingo Highlights: our biggest leaps in learning, play, and connection",
+      "published_at": "2025-12-10T13:00:47.000Z",
+      "modified_at": "2026-04-22T14:26:09.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS19",
+      "url": "https://blog.duolingo.com/duolingo-difficult-exercises/",
+      "title": "How lesson transparency helps learners reach their goals",
+      "published_at": "2021-09-24T12:30:00.000Z",
+      "modified_at": "2026-03-30T13:21:50.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS20",
+      "url": "https://blog.duolingo.com/is-google-translate-wrong/",
+      "title": "Is Google Translate Wrong? 8 Things You Need to Know",
+      "published_at": "2025-08-19T12:00:53.000Z",
+      "modified_at": "2025-08-24T09:57:45.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS21",
+      "url": "https://blog.duolingo.com/duolingo-grammar-skills-improvements-2021/",
+      "title": "All of the ways Duolingo improved its grammar skills this year",
+      "published_at": "2021-10-15T12:30:00.000Z",
+      "modified_at": "2026-09-22T18:20:02.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS22",
+      "url": "https://blog.duolingo.com/grammar-practice-tips/",
+      "title": "How do I practice all of the grammar rules in my new language?",
+      "published_at": "2022-05-17T13:30:00.000Z",
+      "modified_at": "2026-09-22T18:35:28.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS23",
+      "url": "https://blog.duolingo.com/new-duolingo-home-screen-design/",
+      "title": "Introducing the new Duolingo learning path",
+      "published_at": "2022-05-06T11:00:00.000Z",
+      "modified_at": "2025-06-13T18:44:25.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS24",
+      "url": "https://blog.duolingo.com/ways-to-practice-in-duolingo/",
+      "title": "7 ways you can switch up your practice in the app right now",
+      "published_at": "2025-12-16T10:00:00.000Z",
+      "modified_at": "2026-09-23T17:11:09.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS25",
+      "url": "https://blog.duolingo.com/how-weve-improved-the-duolingo-learning-experience-this-year-and-a-sneak-peek-toward-2020/",
+      "title": "How we’ve improved the Duolingo learning experience this year (and a sneak peek toward 2020!)",
+      "published_at": "2019-12-11T15:00:00.000Z",
+      "modified_at": "2024-12-20T02:31:51.000Z",
+      "accessed_at": "2026-09-27",
+      "date_method": "HTML article:published_time/datePublished; modified_at is not a feature-release date",
+      "publisher": "Duolingo",
+      "type": "official_blog"
+    },
+    {
+      "id": "CS26",
+      "url": "https://research.duolingo.com/papers/portnoff.edm21.pdf",
+      "title": "Methods for Language Learning Assessment at Scale: Duolingo Case Study",
+      "published_at": "2021",
+      "modified_at": null,
+      "accessed_at": "2026-09-27",
+      "date_method": "2021 EDM paper; day/month not established",
+      "publisher": "Duolingo authors: Lucy Portnoff, Erin Gustafson, Klinton Bicknell, Joseph Rollinson",
+      "type": "official_research_paper"
+    }
+  ],
+  "media": [
+    {
+      "id": "CM01",
+      "url": "https://research.duolingo.com/papers/portnoff.edm21.pdf#page=2",
+      "source_ids": [
+        "CS26"
+      ],
+      "original_dimensions": null,
+      "description": "论文第2页 Figure 2；左上图片单选、右上键入翻译、下方双向词块翻译。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui_inside_pdf_figure",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account",
+      "limitations": "论文拼图，题屏完整但显示尺寸小；不是独立原图下载地址。"
+    },
+    {
+      "id": "CM02",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/03/table1_image1.PNG",
+      "source_ids": [
+        "CS12"
+      ],
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "description": "语境中的词义三选一。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM03",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+Duolingo+teaches+reading+skills/image+2.png",
+      "source_ids": [
+        "CS03"
+      ],
+      "original_dimensions": [
+        752,
+        1624
+      ],
+      "description": "双语词语两列配对。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM04",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_type-vocabulary.png",
+      "source_ids": [
+        "CS02"
+      ],
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "description": "图片和母语词提示，键入目标语词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM05",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/6-exerciseTypes.png",
+      "source_ids": [
+        "CS01"
+      ],
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "description": "图片词汇翻译，同时选择冠词并填写名词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM06",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_word-bank.png",
+      "source_ids": [
+        "CS02"
+      ],
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "description": "整句翻译的词块输入模式。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM07",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_type-answer.png",
+      "source_ids": [
+        "CS02"
+      ],
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "description": "同句翻译的自由输入模式，兼有语音输入按钮。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM08",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_fill-in-the-blank.png",
+      "source_ids": [
+        "CS02"
+      ],
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "description": "母语整句加目标语部分译文，补缺词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM09",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+Duolingo+teaches+reading+skills/image+1.png",
+      "source_ids": [
+        "CS03"
+      ],
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "description": "全目标语句子语境选缺词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM10",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/04/Blog_Monolingual-Challenges_1.png",
+      "source_ids": [
+        "CS06"
+      ],
+      "original_dimensions": [
+        375,
+        667
+      ],
+      "description": "图像场景辅助单语句子填空；已选答案状态。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM11",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-5.png",
+      "source_ids": [
+        "CS07"
+      ],
+      "original_dimensions": [
+        375,
+        667
+      ],
+      "description": "两个相邻语境的对比双空。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM12",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-7.png",
+      "source_ids": [
+        "CS07"
+      ],
+      "original_dimensions": [
+        375,
+        667
+      ],
+      "description": "词干已给，点选正确词尾。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM13",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-8.png",
+      "source_ids": [
+        "CS07"
+      ],
+      "original_dimensions": [
+        375,
+        667
+      ],
+      "description": "词干已给，键入词尾。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM14",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-4.png",
+      "source_ids": [
+        "CS07"
+      ],
+      "original_dimensions": [
+        375,
+        667
+      ],
+      "description": "代词和动词词尾表格补全。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM15",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Practice-tab-3.jpg",
+      "source_ids": [
+        "CS04"
+      ],
+      "original_dimensions": [
+        1080,
+        2400
+      ],
+      "description": "听句子后按顺序点词块，含正常/慢速播放。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM17",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Listening-exercise-3.jpg",
+      "source_ids": [
+        "CS04"
+      ],
+      "original_dimensions": [
+        1080,
+        2400
+      ],
+      "description": "音频和部分句子提示，键入缺词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM18",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Listening-exercise-2.jpg",
+      "source_ids": [
+        "CS04"
+      ],
+      "original_dimensions": [
+        1080,
+        2400
+      ],
+      "description": "两个声音选项，选出句中缺词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM19",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Listening-exercise-1.jpg",
+      "source_ids": [
+        "CS04"
+      ],
+      "original_dimensions": [
+        1080,
+        2400
+      ],
+      "description": "声音按钮与书面词语配对。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM20",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+Duolingo+teaches+reading+skills/image+3.png",
+      "source_ids": [
+        "CS03"
+      ],
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "description": "阅读目标语段落并选择符合意义的答案。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM21",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/listening.png",
+      "source_ids": [
+        "CS11"
+      ],
+      "original_dimensions": [
+        758,
+        1632
+      ],
+      "description": "听后理解题；本图的两个答案选项也是音频。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM22",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/12/EN-PT_2.png",
+      "source_ids": [
+        "CS16"
+      ],
+      "original_dimensions": [
+        1080,
+        2400
+      ],
+      "description": "对话下一句二选一；葡语界面、英语内容。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM23",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image2.png",
+      "source_ids": [
+        "CS05"
+      ],
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "description": "理解问题后，说出三个候选回答中的正确一句。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM24",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image1.png",
+      "source_ids": [
+        "CS05"
+      ],
+      "original_dimensions": [
+        752,
+        1624
+      ],
+      "description": "照给定句子开口朗读。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM25",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image3.png",
+      "source_ids": [
+        "CS05"
+      ],
+      "original_dimensions": [
+        750,
+        1624
+      ],
+      "description": "两个角色的对话，复述已给定的回应。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM27",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_flashcards.png",
+      "source_ids": [
+        "CS02",
+        "CS10"
+      ],
+      "original_dimensions": [
+        2160,
+        4342
+      ],
+      "description": "单词卡片主动回忆；底部是麦克风、跳过和无法说话入口。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account",
+      "bottom_action_description": "该设计以麦克风/跳过替代固定 Check 按钮，并非底部裁切。"
+    },
+    {
+      "id": "CM28",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3253.PNG",
+      "source_ids": [
+        "CS09"
+      ],
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "description": "声音近似词二选一，已选答案状态。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM29",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3254.PNG",
+      "source_ids": [
+        "CS09"
+      ],
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "description": "两段声音判断同一词/不同词。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM30",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3256.PNG",
+      "source_ids": [
+        "CS09"
+      ],
+      "original_dimensions": [
+        1170,
+        2532
+      ],
+      "description": "四个音频与四个近音词配对。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account"
+    },
+    {
+      "id": "CM31",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking.png",
+      "source_ids": [
+        "CS11"
+      ],
+      "original_dimensions": [
+        758,
+        1632
+      ],
+      "description": "角色居中版本的跟读界面。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account",
+      "bottom_action_description": "底部麦克风与无法说话入口；无独立 Check 按钮。"
+    },
+    {
+      "id": "CM32",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/09/3-Exercises--1-.png",
+      "source_ids": [
+        "CS08"
+      ],
+      "original_dimensions": [
+        919,
+        544
+      ],
+      "description": "同一语句生成部分翻译、词块组句与缺词选音的三屏拼图。",
+      "visually_inspected": true,
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "three_full_item_screens_in_composite",
+      "authenticity": "official_published_product_screenshot; not a screenshot from this researcher's logged-in account",
+      "limitations": "三屏均含顶部和底部，单屏显示尺寸较小。"
+    },
+    {
+      "id": "CM16",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/Listening_2_No-text.png",
+      "source_ids": [
+        "CS04"
+      ],
+      "original_dimensions": null,
+      "description": "整句自由听写；大文本框、双速音频、无法听音入口、Check。",
+      "visually_inspected": true,
+      "inspection_by": "root agent, reported in collaboration message 2026-09-27",
+      "inspection_date": "2026-09-27",
+      "top_progress_visible": true,
+      "bottom_action_visible": true,
+      "coverage": "full_item_ui",
+      "authenticity": "official_published_product_screenshot",
+      "source_page_relation": "历史听力总览图片；主代理 assets-extra.json 记录来源关系。当前 CS04 正文已更新，旧图不是当前正文的直接图片。",
+      "limitations": "2020 历史界面；不要宣称为2026现行截图。",
+      "local_file_from_parent": "assets/official-2020-listening-free-type.png"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "C01",
+      "name": "图片词汇单选",
+      "record_kind": "atomic_task",
+      "interaction_family": "single_choice",
+      "learning_objective": "将词义和图像建立对应。",
+      "prompt_input": "母语词提示；若干带目标语标签的图片。",
+      "user_steps": [
+        "读提示。",
+        "点选符合词义的图片卡。",
+        "提交。"
+      ],
+      "response_output": "一个图片选项。",
+      "design_notes": "图与标签同时提供支持；应与看图自由命名分开。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2021 官方论文 Figure 2 为历史证据；未据此断言所有当前课程仍出现同版。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS26"
+      ],
+      "media_ids": [
+        "CM01"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM01",
+          "url": "https://research.duolingo.com/papers/portnoff.edm21.pdf#page=2",
+          "coverage": "full_item_ui_inside_pdf_figure",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "name": "语境词义辨认",
+      "record_kind": "atomic_task",
+      "interaction_family": "single_choice",
+      "learning_objective": "在句子中理解新词。",
+      "prompt_input": "目标语例句；突出标记的词；母语释义选项。",
+      "user_steps": [
+        "阅读例句，可播放音频。",
+        "选出指定词在该语境中的意思。",
+        "继续。"
+      ],
+      "response_output": "一个释义选项。",
+      "design_notes": "同样是单选，但主要测语义理解，不是拼写或自由产出。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2024 官方题屏，文章 2026 仍可读取；例图英语学习者学法语。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS12"
+      ],
+      "media_ids": [
+        "CM02"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM02",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/03/table1_image1.PNG",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "name": "双语词语配对",
+      "record_kind": "atomic_task",
+      "interaction_family": "matching",
+      "learning_objective": "快速辨认两种语言的词义对应。",
+      "prompt_input": "两列书面词语。",
+      "user_steps": [
+        "点一侧词语。",
+        "点另一侧对应词。",
+        "重复直到配完。"
+      ],
+      "response_output": "多组一一配对。",
+      "design_notes": "同一匹配机制可装入 Words 或 Match Madness；限时不是另一题型。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2025 阅读总览展示英文/西文；2026 免费 Practice 公告仍展示词汇配对。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS03",
+        "CS11"
+      ],
+      "media_ids": [
+        "CM03"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM03",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+Duolingo+teaches+reading+skills/image+2.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "name": "图片/词义提示的单词翻译",
+      "record_kind": "atomic_task",
+      "interaction_family": "short_free_production",
+      "learning_objective": "从意思主动提取词汇及拼写。",
+      "prompt_input": "物体图和母语词。",
+      "user_steps": [
+        "辨认提示含义。",
+        "键入目标语词。",
+        "提交。"
+      ],
+      "response_output": "一个词或短语。",
+      "design_notes": "这里不需要从图片选项辨认；图片与母语词共同提供语义提示。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2026 写作总览：英语提示、法语输出的完整例图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS02"
+      ],
+      "media_ids": [
+        "CM04"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM04",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_type-vocabulary.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "name": "带冠词选择的单词翻译",
+      "record_kind": "composite_variant",
+      "interaction_family": "short_free_production",
+      "learning_objective": "把名词与语法性别/冠词一起回忆。",
+      "prompt_input": "图片与母语名词；冠词按钮；词汇输入框。",
+      "user_steps": [
+        "选择目标语冠词。",
+        "键入名词。",
+        "提交组合答案。"
+      ],
+      "response_output": "离散冠词选择 + 名词文本。",
+      "design_notes": "属于 C04 的语法组合变体，不能据此将所有单词翻译都描述成带性别题。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2024 Duolingo 101 官方图：英文提示、西文输出；当前各课程覆盖未逐个验证。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS01"
+      ],
+      "media_ids": [
+        "CM05"
+      ],
+      "variant_of": "C04",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM05",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/6-exerciseTypes.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "name": "词块组句翻译",
+      "record_kind": "atomic_task",
+      "interaction_family": "ordered_token_construction",
+      "learning_objective": "结合词义、语序与句法完成受支持的产出。",
+      "prompt_input": "母语或目标语原句；乱序词块。",
+      "user_steps": [
+        "读原句。",
+        "依次点选词块组成译文。",
+        "必要时调整，再提交。"
+      ],
+      "response_output": "有序词块序列。",
+      "design_notes": "翻译方向是训练参数；两个方向不是两个新控件。词库干扰词会改变难度。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2021 论文与 2022/2026 官方例图均有；键盘切换因题目和版本而异。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS26",
+        "CS08",
+        "CS02"
+      ],
+      "media_ids": [
+        "CM06",
+        "CM01",
+        "CM32"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM06",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_word-bank.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        },
+        {
+          "media_id": "CM01",
+          "url": "https://research.duolingo.com/papers/portnoff.edm21.pdf#page=2",
+          "coverage": "full_item_ui_inside_pdf_figure",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        },
+        {
+          "media_id": "CM32",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/09/3-Exercises--1-.png",
+          "coverage": "three_full_item_screens_in_composite",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "name": "整句自由翻译",
+      "record_kind": "atomic_task",
+      "interaction_family": "free_text_translation",
+      "learning_objective": "独立组织译文并检索拼写。",
+      "prompt_input": "另一种语言的句子；空白输入框。",
+      "user_steps": [
+        "读原句。",
+        "自行输入整句译文。",
+        "检查后提交。"
+      ],
+      "response_output": "完整自由文本译文。",
+      "design_notes": "比词块方式少了识别支架；合理译法可不止一种，词块仅显示一种组合不代表唯一译法。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2020 输入切换说明、2021 论文、2026 题屏均确认；旧文中等级 2 以上不是当前全平台保证。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS13",
+        "CS20",
+        "CS26",
+        "CS02"
+      ],
+      "media_ids": [
+        "CM07"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM07",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_type-answer.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C08",
+      "name": "补全部分翻译",
+      "record_kind": "atomic_task",
+      "interaction_family": "translation_cloze",
+      "learning_objective": "把注意力集中在特定词或句法成分。",
+      "prompt_input": "母语原句；已填写一部分的目标语译文。",
+      "user_steps": [
+        "对照原句与译文。",
+        "在空白处补所缺成分。",
+        "提交。"
+      ],
+      "response_output": "单词或短语文本。",
+      "design_notes": "原文提供翻译约束，不能与只凭单语语境填空合并描述。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2022 官方三屏示例与 2026 葡语例图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS08",
+        "CS02"
+      ],
+      "media_ids": [
+        "CM08",
+        "CM32"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM08",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_fill-in-the-blank.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        },
+        {
+          "media_id": "CM32",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/09/3-Exercises--1-.png",
+          "coverage": "three_full_item_screens_in_composite",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "name": "单语语境选词填空",
+      "record_kind": "atomic_task",
+      "interaction_family": "selected_cloze",
+      "learning_objective": "依据句意及语法选出合适词。",
+      "prompt_input": "目标语有缺词句子；若干书面候选词。",
+      "user_steps": [
+        "读句子。",
+        "选择能使句子成立的词。",
+        "继续/提交。"
+      ],
+      "response_output": "一个选项填入空白。",
+      "design_notes": "排除项应围绕词义或语法目标；不能仅凭图片外观猜答案。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2025 阅读总览的法语完整例图；文章于 2026 更新。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS03"
+      ],
+      "media_ids": [
+        "CM09"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM09",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+Duolingo+teaches+reading+skills/image+1.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "name": "场景图片辅助的单语填空",
+      "record_kind": "context_variant",
+      "interaction_family": "selected_cloze",
+      "learning_objective": "把场景意义直接连接到目标语。",
+      "prompt_input": "人物/物品情境图；目标语缺词句；词块。",
+      "user_steps": [
+        "观察情境。",
+        "结合句子选择适当词块。",
+        "提交。"
+      ],
+      "response_output": "补完目标语句子。",
+      "design_notes": "图片是理解线索，不是装饰；交互沿用填空。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2021 沉浸式发布文说明当时覆盖英文学西/法，以及西/葡文学英语的 iOS、Android、web；该矩阵只适用于当时。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS06"
+      ],
+      "media_ids": [
+        "CM10"
+      ],
+      "variant_of": "C09",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM10",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/04/Blog_Monolingual-Challenges_1.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "name": "对比双空填词",
+      "record_kind": "structural_variant",
+      "interaction_family": "selected_cloze",
+      "learning_objective": "区分近义词用法或成对语法概念。",
+      "prompt_input": "相邻两句/两个空；候选词。",
+      "user_steps": [
+        "读两个语境。",
+        "把相应选项分别填入两处。",
+        "提交。"
+      ],
+      "response_output": "两个位置的选词结果。",
+      "design_notes": "多空让对比关系可见；不应把空的数量单独算作新题型。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2020 法语 Grammar Lessons 完整历史例图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS07"
+      ],
+      "media_ids": [
+        "CM11"
+      ],
+      "variant_of": "C09",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM11",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-5.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "name": "点选词尾",
+      "record_kind": "atomic_task",
+      "interaction_family": "morpheme_cloze",
+      "learning_objective": "辨别词干与正确变位结尾。",
+      "prompt_input": "句子中的固定词干；候选词尾。",
+      "user_steps": [
+        "识别人称/语境。",
+        "点选适用词尾接在词干后。",
+        "提交。"
+      ],
+      "response_output": "词尾选项。",
+      "design_notes": "把练习粒度缩至词素，区别于整词填空；拼接造型提示组合关系。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2020 法语语法专课，2022 西语 gustar 官方示例也确认同机制。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS07",
+        "CS08"
+      ],
+      "media_ids": [
+        "CM12"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM12",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-7.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C13",
+      "name": "键入词尾",
+      "record_kind": "response_mode_variant",
+      "interaction_family": "morpheme_cloze",
+      "learning_objective": "主动回忆变位词尾。",
+      "prompt_input": "固定词干与词尾空位，无候选列表。",
+      "user_steps": [
+        "读语境。",
+        "输入缺少的词尾。",
+        "提交。"
+      ],
+      "response_output": "词尾文本。",
+      "design_notes": "与 C12 的知识目标相同，但去掉候选支持。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2020 法语语法专课历史例图；现行课程分布未确认。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS07"
+      ],
+      "media_ids": [
+        "CM13"
+      ],
+      "variant_of": "C12",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM13",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-8.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "name": "语法范式表格补全",
+      "record_kind": "atomic_task",
+      "interaction_family": "table_completion",
+      "learning_objective": "对比同一语法规则的不同形式。",
+      "prompt_input": "带行列标题的代词/动词表、示例形式与空格。",
+      "user_steps": [
+        "读表中已有形式。",
+        "把对应词尾填入尚空的位置。",
+        "检查各行后提交。"
+      ],
+      "response_output": "多个表格单元的词形。",
+      "design_notes": "表格把形式间的规律并置；当前证据只确认图中点选补表，不能延伸为所有版本都可键入整表。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2020 法语语法专课历史图；2021 西语指南也展示表格练习。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS07",
+        "CS15"
+      ],
+      "media_ids": [
+        "CM14"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM14",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/GS-Blog-4.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "name": "词块听写/听后重组",
+      "record_kind": "atomic_task",
+      "interaction_family": "ordered_token_construction",
+      "learning_objective": "识别语流中的词和顺序。",
+      "prompt_input": "句子音频；正常/慢速播放；书面词块。",
+      "user_steps": [
+        "听音频，可重播或慢放。",
+        "按听到顺序点选词块。",
+        "提交。"
+      ],
+      "response_output": "与音频对应的词块序列。",
+      "design_notes": "要求还原原句；不是翻译，也不是听后概括意义。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2026 官方听力总览有 Android 完整界面。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS04",
+        "CS01"
+      ],
+      "media_ids": [
+        "CM15"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM15",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Practice-tab-3.jpg",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "name": "整句自由听写",
+      "record_kind": "atomic_task",
+      "interaction_family": "free_text_dictation",
+      "learning_objective": "把听到的语流转为完整书面形式。",
+      "prompt_input": "句子音频；文本输入。",
+      "user_steps": [
+        "听句子。",
+        "自由输入听到的全部句子。",
+        "提交。"
+      ],
+      "response_output": "整句转写文本。",
+      "design_notes": "没有词库提示；与只补一个缺词的 C17 不同。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2018 官方 placement 与 2026 写作总览文字确认；补充 2020 官方历史完整听写题图。该旧图不能证明2026所有课程仍用同一界面。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS17",
+        "CS02"
+      ],
+      "media_ids": [
+        "CM16"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM16",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/10/Listening_2_No-text.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C17",
+      "name": "局部听写：键入缺词",
+      "record_kind": "atomic_task",
+      "interaction_family": "audio_cloze",
+      "learning_objective": "聚焦音形对应及目标词拼写。",
+      "prompt_input": "音频 + 已给部分句子 + 一个空。",
+      "user_steps": [
+        "听句子。",
+        "在空格里输入听到的缺词。",
+        "提交。"
+      ],
+      "response_output": "一个词或指定片段。",
+      "design_notes": "保留上下文降低工作记忆负担；正常/慢速播放是支架参数。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2026 官方德语题屏，另有葡语例图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS04",
+        "CS02"
+      ],
+      "media_ids": [
+        "CM17"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM17",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Listening-exercise-3.jpg",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C18",
+      "name": "听句中缺词，选择声音答案",
+      "record_kind": "atomic_task",
+      "interaction_family": "audio_choice_cloze",
+      "learning_objective": "区分相近音并识别目标词。",
+      "prompt_input": "可播放句子、句中空位、两个声音选项。",
+      "user_steps": [
+        "听句子。",
+        "试听候选音频。",
+        "选出缺词对应的声音，再提交。"
+      ],
+      "response_output": "一个音频选项。",
+      "design_notes": "候选项不直接展示词形；与书面候选的听词辨认分开。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2022 内容制作说明及 2026 听力总览均确认。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS08",
+        "CS04"
+      ],
+      "media_ids": [
+        "CM18",
+        "CM32"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM18",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Listening-exercise-2.jpg",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        },
+        {
+          "media_id": "CM32",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/09/3-Exercises--1-.png",
+          "coverage": "three_full_item_screens_in_composite",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C19",
+      "name": "声音与词语配对",
+      "record_kind": "atomic_task",
+      "interaction_family": "audio_text_matching",
+      "learning_objective": "建立听觉形式与书面词/意义的联系。",
+      "prompt_input": "一列音频按钮，一列书面词语。",
+      "user_steps": [
+        "点音频试听。",
+        "选择对应词语。",
+        "完成其余配对。"
+      ],
+      "response_output": "多组声音—书面词对应。",
+      "design_notes": "界面相似并不表示所有课程都在做翻译；需按音频语言与书面列判断是音形匹配还是跨语言匹配。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2026 官方听力总览完整题屏；音频内容未在本次播放核听，故不推断其语言。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS04"
+      ],
+      "media_ids": [
+        "CM19"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM19",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/04/Listening-exercise-1.jpg",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C20",
+      "name": "段落阅读理解",
+      "record_kind": "atomic_task",
+      "interaction_family": "reading_comprehension_choice",
+      "learning_objective": "提取段落事实、关系或合理推断。",
+      "prompt_input": "目标语短文；问题/待补完的陈述；候选答案。",
+      "user_steps": [
+        "阅读段落。",
+        "判断哪项回答与文章一致。",
+        "选择并继续。"
+      ],
+      "response_output": "意义层面的答案选择。",
+      "design_notes": "不要求逐字翻译；问题可以通过句子补完表现。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2019 试点、2021 沉浸式课与 2025 阅读总览均记录；具体课程覆盖依时代不同。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS25",
+        "CS06",
+        "CS03"
+      ],
+      "media_ids": [
+        "CM20"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM20",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+Duolingo+teaches+reading+skills/image+3.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C21",
+      "name": "听后理解并选答",
+      "record_kind": "atomic_task",
+      "interaction_family": "listening_comprehension_choice",
+      "learning_objective": "理解语段意义而非逐字复写。",
+      "prompt_input": "音频问题/语段；提示短语；声音或文字候选。",
+      "user_steps": [
+        "听主要语段。",
+        "试听或阅读答案选项。",
+        "选出符合意义的一项。"
+      ],
+      "response_output": "一个理解答案。",
+      "design_notes": "2026 官方完整图的选项也使用音频，不宜统一画成文字单选。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2019/2022 官方已有听段落回答问题；2026 Practice 公告给出实际完整图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS25",
+        "CS08",
+        "CS11"
+      ],
+      "media_ids": [
+        "CM21"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM21",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/listening.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C22",
+      "name": "选择下一句对话",
+      "record_kind": "atomic_task",
+      "interaction_family": "dialogue_response_choice",
+      "learning_objective": "理解上下文并选择合适的交际回应。",
+      "prompt_input": "前一句对话；空白回应气泡；候选文本。",
+      "user_steps": [
+        "阅读/听前句。",
+        "判断合适的下一句。",
+        "点选并提交。"
+      ],
+      "response_output": "一个书面回应选项。",
+      "design_notes": "考语用和对话连贯性；不能只看关键词相同。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2023 官方英语学习文章给出葡语界面、英语内容的完整图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS16"
+      ],
+      "media_ids": [
+        "CM22"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM22",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/12/EN-PT_2.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C23",
+      "name": "选择合适回应并说出来",
+      "record_kind": "atomic_task",
+      "interaction_family": "spoken_dialogue_selection",
+      "learning_objective": "结合理解与受约束口语产出。",
+      "prompt_input": "问题气泡；若干完整回应及麦克风。",
+      "user_steps": [
+        "理解问题。",
+        "选定适合的回应。",
+        "对麦克风说出该回应。"
+      ],
+      "response_output": "给定候选中的口头句子。",
+      "design_notes": "既要判断意义，也要说出来；仍是有答案范围的对话，不能称开放 AI 会话。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2021 沉浸式例图、2026 speaking 总览法语例图均确认。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS06",
+        "CS05"
+      ],
+      "media_ids": [
+        "CM23"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM23",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image2.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C24",
+      "name": "给定句子朗读/跟读",
+      "record_kind": "atomic_task",
+      "interaction_family": "read_aloud_repeat",
+      "learning_objective": "练习发音、节奏与完整句表达。",
+      "prompt_input": "给定句子文字及可播放示范；麦克风。",
+      "user_steps": [
+        "听示范或读句子。",
+        "点击麦克风。",
+        "按给定内容说出句子。"
+      ],
+      "response_output": "录音/语音识别结果。",
+      "design_notes": "产出内容已给出；不应把答对等同于自发说话能力。角色居中版仍是此任务。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2026 speaking 总览及免费 Practice 专项公告展示两种版式。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS05",
+        "CS11"
+      ],
+      "media_ids": [
+        "CM24",
+        "CM31"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM24",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image1.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        },
+        {
+          "media_id": "CM31",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C25",
+      "name": "复述已给定的对话回应",
+      "record_kind": "context_variant",
+      "interaction_family": "read_aloud_repeat",
+      "learning_objective": "在对话脉络里练习一句回应的发音。",
+      "prompt_input": "角色问题 + 已提供的回答文本/音频。",
+      "user_steps": [
+        "理解问题和范例回答。",
+        "开启麦克风。",
+        "复述指定回答。"
+      ],
+      "response_output": "给定回应的口头复述。",
+      "design_notes": "与 C23 区别是不用在多个答案中选择；与 C24 相同的跟读核心操作。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2026 speaking 总览的法语完整例图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS05"
+      ],
+      "media_ids": [
+        "CM25"
+      ],
+      "variant_of": "C24",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM25",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/02/speaking_image3.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C26",
+      "name": "以语音输入完成翻译",
+      "record_kind": "response_mode_variant",
+      "interaction_family": "free_text_translation",
+      "learning_objective": "在翻译任务中增加口头检索。",
+      "prompt_input": "原句、译文输入框和语音输入按钮。",
+      "user_steps": [
+        "点语音输入。",
+        "口头说出译文。",
+        "查看转写，必要时编辑后提交。"
+      ],
+      "response_output": "由语音转写的译文文本。",
+      "design_notes": "这是输入方式变体；与照给定答案朗读的评分任务不同。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2023 专项文章说明可编辑转写；2026 翻译题屏仍展示语音输入入口。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS14",
+        "CS05",
+        "CS02"
+      ],
+      "media_ids": [
+        "CM07"
+      ],
+      "variant_of": "C07",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM07",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_type-answer.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C27",
+      "name": "Flashcards 主动回忆卡组",
+      "record_kind": "micro_session",
+      "interaction_family": "vocabulary_recall_loop",
+      "learning_objective": "不看候选项，从记忆中提取目标词。",
+      "prompt_input": "母语词卡；默认麦克风，允许文字替代。",
+      "user_steps": [
+        "看词卡后说出译词，或切换键入。",
+        "对词通过；错误时看/听答案。",
+        "错卡回到卡组后方再次练习。"
+      ],
+      "response_output": "逐卡的口头/文字译词与一组反馈。",
+      "design_notes": "原子任务是短词翻译；卡组、翻面纠正和重试构成独特练习循环。2025 公告为5张卡、答对3张可过。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2025-11 发布；2025 年度回顾说已覆盖前8种学习语言；未列出所有源语言/设备组合。",
+      "subscription_scope": "官方说明出现在普通 lessons 中；未声明 Super/Max 独占。",
+      "source_ids": [
+        "CS10",
+        "CS18"
+      ],
+      "media_ids": [
+        "CM27"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM27",
+          "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/06/Writing-practice_flashcards.png",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C28",
+      "name": "最小对立/近音词辨认",
+      "record_kind": "atomic_task",
+      "interaction_family": "sound_identification_choice",
+      "learning_objective": "听出具有辨义作用的细微语音差异。",
+      "prompt_input": "一个音频；两个相近拼写的词。",
+      "user_steps": [
+        "听词。",
+        "选出对应书面词。",
+        "提交。"
+      ],
+      "response_output": "一个词选项。",
+      "design_notes": "是纯辨音，不需要语篇理解；可与 C18 的句中缺词声音候选区别。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2024 英语 Sounds 专项官方图，iOS 题屏；不能由图推断当前 web/所有源语言覆盖。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS09"
+      ],
+      "media_ids": [
+        "CM28"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM28",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3253.PNG",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C29",
+      "name": "两段声音相同/不同判断",
+      "record_kind": "atomic_task",
+      "interaction_family": "same_different_discrimination",
+      "learning_objective": "脱离具体字形，判断两段音是否同一词。",
+      "prompt_input": "两个音频；相同/不同两个判断选项。",
+      "user_steps": [
+        "分别听两段声音。",
+        "判断同词还是不同词。",
+        "选择并继续。"
+      ],
+      "response_output": "二元声音关系判断。",
+      "design_notes": "比较两刺激的关系，和为一个刺激命名不是同一认知任务。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2024 英语 Sounds 专项官方完整图。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS09"
+      ],
+      "media_ids": [
+        "CM29"
+      ],
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM29",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3254.PNG",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C30",
+      "name": "近音词声音—文字配对",
+      "record_kind": "content_variant",
+      "interaction_family": "audio_text_matching",
+      "learning_objective": "把一组相近词的音形关系反复对照。",
+      "prompt_input": "多段音频与多条近音词。",
+      "user_steps": [
+        "试听音频。",
+        "匹配对应词形。",
+        "配完该组。"
+      ],
+      "response_output": "声音—词语配对组。",
+      "design_notes": "原子交互与 C19 相同；特殊之处是选词围绕近音对比。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2024 英语 Sounds 官方完整图展示四组。",
+      "subscription_scope": "常规语言学习课内容；本条无付费独占证据。订阅不保证每课程每平台都有该题。",
+      "source_ids": [
+        "CS09"
+      ],
+      "media_ids": [
+        "CM30"
+      ],
+      "variant_of": "C19",
+      "evidence_status": "official_text_and_full_ui",
+      "full_ui_evidence": [
+        {
+          "media_id": "CM30",
+          "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3256.PNG",
+          "coverage": "full_item_ui",
+          "top_progress_visible": true,
+          "bottom_action_visible": true
+        }
+      ]
+    },
+    {
+      "id": "C31",
+      "name": "历史 Checkpoint 自主写作",
+      "record_kind": "historical_assessment_task",
+      "interaction_family": "open_written_response",
+      "learning_objective": "在测验中自主写出目标语内容。",
+      "prompt_input": "写作题提示；具体 UI 未获得。",
+      "user_steps": [
+        "阅读写作提示。",
+        "自行组织并提交文字回答。"
+      ],
+      "response_output": "开放书面回答。",
+      "design_notes": "这是历史测验的一部分，不能据论文当成今天每单元固定题。",
+      "design_notes_status": "researcher's design interpretation of the cited interface, not a tested efficacy claim",
+      "availability_evidence": "2021 官方论文 §3.2 确认每份 Checkpoint 含1项自由写作；本轮未找到完整界面或当前保留证据。",
+      "subscription_scope": "历史课程内部测验；不属于 Duolingo English Test。",
+      "source_ids": [
+        "CS26"
+      ],
+      "media_ids": [],
+      "evidence_gap": "缺完整 UI；现行保留情况未验证。",
+      "evidence_status": "official_text_only",
+      "full_ui_evidence": []
+    }
+  ],
+  "containers": [
+    {
+      "id": "CC01",
+      "name": "普通 lesson / unit / 学习路径",
+      "classification": "curriculum_container",
+      "note": "按目标组合多个题型与复习内容；不能把一节课计成一种原子题。",
+      "source_ids": [
+        "CS01",
+        "CS23"
+      ]
+    },
+    {
+      "id": "CC02",
+      "name": "Grammar Lessons / Grammar Skills",
+      "classification": "targeted_lesson_container",
+      "note": "聚焦语法并减少新词负担；内部有选词、词尾、表格等任务。2020/2021的名称与入口是历史形态。",
+      "source_ids": [
+        "CS07",
+        "CS21"
+      ]
+    },
+    {
+      "id": "CC03",
+      "name": "Immersion exercises",
+      "classification": "pedagogical_group",
+      "note": "指以目标语和语境线索处理意义的一组题，包括单语填空、对话、理解题；并非一个控件。",
+      "source_ids": [
+        "CS06"
+      ]
+    },
+    {
+      "id": "CC04",
+      "name": "Practice tab / Words / Speak / Listen / Mistakes",
+      "classification": "practice_container_and_filters",
+      "note": "选择练习目标/题池。2026-02-18专项公告声明基础技能练习对全部语言课程的iOS/Android用户免费；旧总览中的Super归属已过时。",
+      "source_ids": [
+        "CS11",
+        "CS01"
+      ]
+    },
+    {
+      "id": "CC05",
+      "name": "Legendary / hard exercise / Eddy bonus",
+      "classification": "difficulty_and_reward_variants",
+      "note": "难度、提示支持或奖励改变不自动产生新原子题型；2025官方仍以更有挑战、无提示描述Legendary。",
+      "source_ids": [
+        "CS24",
+        "CS18",
+        "CS19"
+      ]
+    },
+    {
+      "id": "CC06",
+      "name": "Match Madness / Side Quest",
+      "classification": "timed_activity_containers",
+      "note": "在匹配或常规题上加计时与挑战规则；Match Madness原子操作仍为词语配对。",
+      "source_ids": [
+        "CS24"
+      ]
+    },
+    {
+      "id": "CC07",
+      "name": "Placement / test out / 历史 Checkpoint",
+      "classification": "assessment_container",
+      "note": "入门定位、跳级、单元测验的用途不同；历史Checkpoint还有开放写作。",
+      "source_ids": [
+        "CS17",
+        "CS26"
+      ]
+    },
+    {
+      "id": "CC08",
+      "name": "Guidebook / Smart Tips / Explain My Answer",
+      "classification": "instruction_and_feedback_support",
+      "note": "解释与提示不是独立答题形式；若解释后带练习，练习按实际输入/输出另归类。",
+      "source_ids": [
+        "CS15",
+        "CS21",
+        "CS11"
+      ]
+    },
+    {
+      "id": "CC09",
+      "name": "角色、心/能量、进度、XP、连胜、结算",
+      "classification": "presentation_progress_feedback",
+      "note": "外观、限制、奖励与反馈状态，不计为语言题型。",
+      "source_ids": [
+        "CS01",
+        "CS18"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "CG01",
+      "description": "C31历史Checkpoint开放写作没有完整官方UI，当前保留情况未确认。",
+      "severity": "historical_optional_coverage"
+    },
+    {
+      "id": "CG02",
+      "description": "本分册未验证未公开A/B测试、所有课程语对、地区和平台的实时可用矩阵。",
+      "severity": "availability_boundary"
+    },
+    {
+      "id": "CG03",
+      "description": "老式多选正确译文、独立同义词选择、纯纠错等社区称呼未找到足够一手证据，本分册不把它们冒充已确认当前题。",
+      "severity": "unconfirmed_candidates"
+    }
+  ]
+}

@@ -65,7 +65,7 @@ test('Lesson 1–2 可回看课文，先听完整七句再回答归属问题，�
   await expect(detective.getByRole('button',{name:'对面的女士',exact:true})).toBeEnabled();
 });
 
-test('28 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书',async({page})=>{
+test('29 题与七句原文构成完整单元，礼貌与指代不误教，末题结算后才能领取和保存证书',async({page})=>{
   test.setTimeout(120000);
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await audioBoundary(page);
@@ -86,7 +86,7 @@ test('28 题与七句原文构成完整单元，礼貌与指代不误教，末�
   await story.getByRole('button',{name:'完成课文学习',exact:true}).click();
   await story.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();
   await expect(page).toHaveURL(/#learn\/roles$/);
-  const detective=await finishGroup(page,'roles',['对面的女士','手提包']);
+  const detective=await finishGroup(page,'roles',['对面的女士','手提包','very much']);
   await expect(page.locator('#starCount')).toHaveText('6');
   await detective.getByRole('button',{name:'下一站：礼貌小锦囊',exact:true}).click();
   const phrases=page.locator('.stage-phrases');

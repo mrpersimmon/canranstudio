@@ -1,9 +1,10 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 // Independent expectations from textbook paper pages 14–17 and the unit manuscript.
 const DIALOGUE=['I am a new student.',"My name's Robert.",'Nice to meet you.',"My name's Sophie.",'Are you French?','Yes, I am.','Are you French, too?','No, I am not.','What nationality are you?',"I'm Italian.",'Are you a teacher?',"No, I'm not.","What's your job?","I'm a keyboard operator.","What's your job?","I'm an engineer."];
 const SPEAKERS=['Robert','Robert','Sophie','Sophie','Robert','Sophie','Sophie','Robert','Sophie','Robert','Robert','Sophie','Robert','Sophie','Sophie','Robert'];
-const ANSWERS={listen:['意大利（人）的','keyboard operator','工程师','policeman','policewoman','taxi driver','女空乘','postman','nurse','机械师；修理机器的人','hairdresser','家庭主妇','milkman'],roles:["I'm an engineer.","No, she isn't."],reply:["I'm Italian.",'is / am','is / is'],interview:["What's his job?","What's her job?",["What's",'your job?',"I'm",'an engineer.'],['Is','he','a taxi driver?','Yes,','he is.']],exam:require('./unit7-8-exam').EXAM.map(item=>item.answer)};
+const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['7-8'].old).map(id=>[id,taskCases.answers('7-8',id).map(q=>q.answer)]));
 async function completeStory(page,base=''){
  await page.goto(base+'/unit7-8/#learn/text');const room=page.locator('.stage-text');
  for(let i=0;i<DIALOGUE.length;i++){
@@ -19,7 +20,8 @@ async function completeActivity(page,id,base=''){
  for(let i=0;i<answers.length;i++){
   const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
   await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
-  if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}
+  if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+    else if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}
   else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
   await expect(check).toBeEnabled({timeout:15000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));

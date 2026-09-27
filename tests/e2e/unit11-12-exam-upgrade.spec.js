@@ -20,6 +20,11 @@ test('11–12 三题旧挑战完成后保留有效题，新增题亲自补完才
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   const date = await page.locator('#certificateDate').innerText(); await page.keyboard.press('Escape');
   upgrade(); await page.reload();
+  await expect(page.locator('#starCount')).toHaveText('6');
+  // The task edition also changed vocabulary matching and ownership filling.
+  // Completing the old short exam cannot complete those new activities.
+  for (const id of ['listen', 'owner']) await require('../support/units1-30-tasks').activity(page, '11-12', id);
+  await page.goto('/unit11-12/#learn/certificate');
   await expect(page.locator('#starCount')).toHaveText('12');
   await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('认领小侦探');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();

@@ -180,3 +180,120 @@
   root.CanranCore.unit34 = definition;
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit34;
+ const revised={"listen":[unit.questions["listen"][0],
+unit.questions["listen"][1],
+unit.questions["listen"][2],
+unit.questions["listen"][3],
+{
+  "id": "u34-tasks-v4-people-words",
+  "target": "识别职业与亲属词义",
+  "prompt": "给人物称谓配对。",
+  "decision": "保留 school 与 suit 单独辨认；亲属词依词义，不凭头像判断。",
+  "hint": "",
+  "source": "Lesson 4 新词 teacher、son、daughter",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "teacher",
+      "cn": "老师"
+    },
+    {
+      "id": "2",
+      "en": "son",
+      "cn": "儿子"
+    },
+    {
+      "id": "3",
+      "en": "daughter",
+      "cn": "女儿"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "职业称谓和亲属称谓各有独立词义；配对的其他词义是互相干扰项，不根据人物外貌猜关系。"
+}],
+"roles":[unit.questions["roles"][0],
+unit.questions["roles"][1],
+{
+  "id": "u34-tasks-v4-story-number",
+  "target": "在原文找到号码依据",
+  "prompt": "点出寄存牌的号码。",
+  "decision": "保留完整连续原句，用英语号码短语代替只凭记忆选中文号码。",
+  "hint": "回看服务员接过寄存牌后说的话。",
+  "source": "Lesson 3 原文 Here is my ticket. / Thank you, sir. Number five.",
+  "type": "locate",
+  "fragments": [
+    "客人：Here is ",
+    {
+      "value": "my ticket"
+    },
+    ".\n工作人员：Thank ",
+    {
+      "value": "you"
+    },
+    ", sir.\n",
+    {
+      "value": "Number five"
+    },
+    "."
+  ],
+  "options": [
+    "my ticket",
+    "you",
+    "Number five"
+  ],
+  "answer": "Number five",
+  "distractorReasons": {
+    "my ticket": "这个片段不表达题目要求的信息；需结合完整句子判断。",
+    "you": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "my ticket 表明物件，you 是代词，Number five 才给出所问的编号。"
+}],
+"reply":[{
+  "id": "u34-tasks-v4-reply-switch-speaker",
+  "target": "随说话者转换 my 和 your",
+  "prompt": "书的主人没变，换一个人说。",
+  "decision": "两个说话人指同一本书；每个空独立选择。",
+  "hint": "每个空先确认：谁在说话，书属于谁。",
+  "source": "Lesson 3 的 my/your；新情境沿用 Lesson 4 book",
+  "type": "cloze",
+  "reference": "书属于你。",
+  "blanks": [
+    {
+      "before": "你：It’s ",
+      "after": " book.",
+      "options": [
+        "my",
+        "your"
+      ]
+    },
+    {
+      "before": "同学对你：It’s ",
+      "after": " book.",
+      "options": [
+        "my",
+        "your"
+      ]
+    }
+  ],
+  "answer": "[\"my\",\"your\"]",
+  "distractorReasons": {
+    "my": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "your": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "同一主人，由本人说 my，由面对他的同学说 your；反向搭配会改变归属视角。"
+},
+unit.questions["reply"][1],
+unit.questions["reply"][2],
+unit.questions["reply"][3]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit34-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.voicedQuestions?.[id]?[{key:'unit34-'+id+'-practice/v1',questions:unit.voicedQuestions[id]}]:[]),...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit34-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

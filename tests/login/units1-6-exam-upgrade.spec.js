@@ -7,7 +7,7 @@ for (const [unit, title, oldCount, complete] of [
   ['1-2', '礼貌小挑战', 2, 'completeUnit12'],
   ['3-4', '认领小挑战', 3, 'completeUnit34'],
   ['5-6', '见面小挑战', 3, 'completeUnit56']
-]) test(`${unit} 旧短挑战服务器升级换设备，先保留12星与姓名，补完新增题才同步15星`, async ({ browser }) => {
+]) test(`${unit} 旧短挑战服务器升级换设备，保留有效旧进度与姓名，补完新增题才同步15星`, async ({ browser }) => {
   test.setTimeout(150000);
   const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-short-exam-upgrade-'));
@@ -39,13 +39,14 @@ for (const [unit, title, oldCount, complete] of [
     await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await first.close(); first = null; await new Promise(resolve => server.close(resolve)); server = null; await start(root);
     second = await browser.newContext({ baseURL: origin, reducedMotion: 'reduce' }); const current = await second.newPage(); await signIn(current, account, '/');
-    await expect(current.locator('.course')).toContainText('12 / 15');
+    await expect(current.locator('.course')).toContainText(({'1-2':10,'3-4':4,'5-6':6}[unit])+' / 15');
     await current.goto(`/${course}/#learn/certificate`); await expect(current.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
     await expect(current.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小达人');
+    for(const id of {'1-2':['roles'],'3-4':['listen','roles','reply'],'5-6':['listen','refer','articles']}[unit])await require('../support/units1-30-tasks').activity(current,unit,id);await current.goto('/unit'+unit+'/#learn/certificate');
     await current.getByRole('button', { name: '继续：' + title, exact: true }).click();
-    const room = current.locator('.stage-exam'); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(oldCount));
+    const room = current.locator('.stage-exam'); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(unit==='1-2'?0:oldCount));
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-    await finishExam(current, unit, oldCount); await room.getByRole('button', { name: '下一站：我的单元证书', exact: true }).click();
+    await require('../support/units1-30-tasks').activity(current,unit,'exam'); await room.getByRole('button', { name: '下一站：我的单元证书', exact: true }).click();
     await current.getByRole('button', { name: '领取单元证书', exact: true }).click(); await expect(current.locator('#certificateDate')).toHaveText(date); await current.keyboard.press('Escape');
     await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     third = await browser.newContext({ baseURL: origin, reducedMotion: 'reduce' }); const restored = await third.newPage(); await signIn(restored, account, '/');

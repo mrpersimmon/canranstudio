@@ -2,7 +2,7 @@
   'use strict';
   const core = root.CanranCore, unit = core.unit2728;
   const { stages, questions, learning: content } = unit;
-  const practice = core.lesson49Practice;
+  const practice = core.lesson49Practice, scene = core.unit2728Scene;
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -12,6 +12,7 @@
     const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action); return element;
   }
   function art(name, label = '') {
+    if(name==='keepsake')return scene.art();
     const word = unit.objects.find(word => word.en === name);
     const path = content.PEOPLE[name]?.image || word?.image;
     if (!path) return icon(name, label);
@@ -113,14 +114,18 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit2728-' + id + '-practice'; surfaces.get(id).append(element);
-    practice.mount({ element, questions: questions[id], sessionId: 'v' + unit.version, ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+    const predecessors=unit.activityPredecessors?.[id];
+    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+      inputViews:core.lesson49TaskInputs,
+      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old=>({key:'unit2728-'+old+'-practice/v1',questions:unit.previousQuestions[old]})),
+      completionDetails:id==='listen'?null:scene.result(id), ...settings,
+      onComplete: states => { complete(id); const label=element.querySelector('.practice-finish>p');if(label)label.textContent=id==='exam'?'挑战完成！':'这一站完成了！'; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文原文'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  stage.append(log);
+  const storyScene=scene.mount(stage,log);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -128,7 +133,7 @@
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
-  finish.append(node('p', '课文看完了！'), finishActions); story.append(stage, status, controls, finish);
+  finish.append(scene.result('text'),node('p', '课文看完了！'), finishActions); story.append(stage, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看课文', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
   function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
@@ -138,15 +143,14 @@
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 句原文`;
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
-    const speaker = content.DIALOGUE[dialogue.i]?.person;
-    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', speaker === person.dataset.actor));
+    storyScene.showLine(dialogue.i);
   }
   function lead() { const lead = node('div', '', 'story-lead'); lead.append(icon('book'), node('p', '书在哪里？')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
-    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); if(!translation.hidden)requestAnimationFrame(()=>{log.scrollTop=Math.max(0,row.offsetTop+row.offsetHeight-log.clientHeight);}); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
     bubble.append(node('div', String(index + 1).padStart(2, '0'), 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
@@ -227,10 +231,10 @@
     node('p','near 是靠近，不表示放在表面上，也不要求接触。on the wall 表示在墙上。词卡中的 some、there、are 显示强读音标，自然句子里也有弱读。'));
   surfaces.get('phrases').append(phraseGrid,usage,context,phraseActions);
   const galleryDetails=node('details','','offline-task visual-gallery');galleryDetails.append(node('summary','看看十幅位置图'));
-  const gallery=node('div','','phrase-grid comparison-gallery');content.GALLERY.forEach(item=>gallery.append(expressionCard(item)));galleryDetails.append(gallery);
+  const gallery=node('div','','phrase-grid comparison-gallery');galleryDetails.append(gallery);core.classroomScene.paginate(gallery,{items:content.GALLERY,render:expressionCard,size:1,key:'unitGalleryPage'});
   const modelExample=node('div','','model-example');modelExample.append(expressionCard(content.MODEL_EXAMPLE));
   const models=node('details','','offline-task');models.append(node('summary','看看十组完整问答'),node('p','下面是另设的练习场景，不是课文客厅的物品清单。先问有没有，再问实际物品在哪里。'));
-  const modelGrid=node('div','','phrase-grid reply-models');content.MODELS.forEach(item=>modelGrid.append(expressionCard(item)));models.append(modelGrid,node('p','第10组：本组的 chairs 指无扶手的普通椅子，armchairs 指扶手椅。扶手椅也是椅子的一种。'));
+  const modelGrid=node('div','','phrase-grid reply-models');models.append(modelGrid);core.classroomScene.paginate(modelGrid,{items:content.MODELS,render:expressionCard,key:'unitModelPage',label:'问答'});models.append(node('p','第10组：本组的 chairs 指无扶手的普通椅子，armchairs 指扶手椅。扶手椅也是椅子的一种。'));
   const reference=node('details','','offline-task');reference.append(node('summary','把一句变成复数'),
     node('p','例：There is a book on the desk. → There are some books on the desk.'));
   const referenceList=node('ol','','be-models');content.REFERENCE.forEach(item=>referenceList.append(node('li',item.prompt+' → '+item.en)));reference.append(referenceList);
@@ -241,12 +245,12 @@
   const modelActions=node('div','','activity-actions');nextStation('models',modelActions);
   surfaces.get('models').append(modelExample,galleryDetails,models,reference,forms,numbers,modelActions);
   for (const id of ['observe','be','trans']) mountPractice(id);
-  const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
+  const examResults = node('div', '', 'unit-results'), examScene=scene.taskView(); surfaces.get('exam').append(examScene.element);
+  mountPractice('exam', { sceneView:examScene, chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
     const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
     const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
     const corrected = states.filter(state => !state.firstCorrect).length;
-    examResults.replaceChildren(node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
+    examResults.replaceChildren(scene.result('exam'),node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
@@ -273,5 +277,10 @@
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
-  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); log.scrollTop = log.scrollHeight; }));
+  document.fonts.ready.then(() => {
+    const restore=()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;});
+    if(!document.documentElement.hasAttribute('data-course-preparing'))return restore();
+    const ready=new MutationObserver(()=>{if(!document.documentElement.hasAttribute('data-course-preparing')){ready.disconnect();restore();}});
+    ready.observe(document.documentElement,{attributes:true,attributeFilter:['data-course-preparing']});
+  });
 })(globalThis);

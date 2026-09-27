@@ -40,7 +40,7 @@ for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不�
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ANSWERS.observe.entries()){
-    await room.getByRole('button',{name:answer,exact:true}).click();await check.click();
+    await require('../support/units17-30-exam').selectAnswer(room,answer);await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
     await room.getByRole('button',{name:i===2?'完成这一站':'下一题',exact:true}).click();
   }
@@ -89,23 +89,28 @@ test('320 最后一道长拼句和挑战选项完整可读，不因完成上一�
  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await chooseTokens(room,ANSWERS.trans[2]);expect(await room.evaluate(el=>el.scrollWidth<=el.clientWidth+2)).toBe(true);
  const selected=room.getByRole('group',{name:'已选词块',exact:true});expect(await selected.evaluate(el=>el.scrollHeight<=el.clientHeight+2)).toBe(true);
  await room.screenshot({path:'output/playwright/unit21-22/long-order-320.png'});
- await page.goto('/unit21-22/#learn/exam');room=page.locator('.stage-exam');await room.getByRole('button',{name:ANSWERS.exam[0],exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+ await page.goto('/unit21-22/#learn/exam');room=page.locator('.stage-exam');await require('../support/units17-30-exam').selectAnswer(room,ANSWERS.exam[0]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  for(const button of await room.locator('.practice-options button').all()){expect(await button.evaluate(el=>el.scrollWidth<=el.clientWidth+2&&el.scrollHeight<=el.clientHeight+2)).toBe(true);const box=await button.boundingBox();expect(box.height).toBeGreaterThanOrEqual(44);expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(320);}
  await room.screenshot({path:'output/playwright/unit21-22/long-options-320.png'});
 });
 
 test('成对比较图的画布上沿和尺寸一致，不因说明换行而上下错位',async({page})=>{
  for(const width of [320,390,1280]){
-  await page.setViewportSize({width,height:740});await page.goto('/unit21-22/#learn/models');await page.getByText('看看十六幅物品图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
-  const pictures=page.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(16);
-  for(let i=0;i<16;i+=2){const a=await pictures.nth(i).boundingBox(),b=await pictures.nth(i+1).boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);}
+  await page.setViewportSize({width,height:740});await page.goto('/unit21-22/#learn/models');if(await page.locator('.visual-gallery').getAttribute('open')===null)await page.getByText('看看十六幅物品图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
+  const room=page.locator('.stage-models'),prev=room.getByRole('button',{name:'上一页图册',exact:true}),next=room.getByRole('button',{name:'下一页图册',exact:true});
+  while(await prev.isEnabled())await prev.click();let seen=0;
+  do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(2);
+   const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThanOrEqual(100);expect(a.height).toBeGreaterThan(90);
+   const b=await pictures.last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);
+   seen+=await pictures.count();if(!await next.isEnabled())break;await next.click();
+  }while(seen<=16);expect(seen).toBe(16);
  }
 });
 
-test('四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮',async({browser})=>{
+test('四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮',async({browser,baseURL})=>{
  test.setTimeout(45000);const {chooseTokens}=require('../support/unit21-22-flow');
  for(const width of [320,390,768,1280]){
-  const context=await browser.newContext({viewport:{width,height:740},reducedMotion:'reduce'});const page=await context.newPage();await page.goto('http://127.0.0.1:4173/unit21-22/#learn/trans');await page.evaluate(()=>document.fonts.ready);
+  const context=await browser.newContext({viewport:{width,height:740},reducedMotion:'reduce'});const page=await context.newPage();await page.goto(baseURL+'/unit21-22/#learn/trans');await page.evaluate(()=>document.fonts.ready);
   const room=page.locator('.stage-trans'),actions=room.getByRole('group',{name:'作答操作',exact:true}),selected=room.getByRole('group',{name:'已选词块',exact:true});
   for(const [i,answer] of ANSWERS.trans.entries()){
    const initialTop=await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY);await chooseTokens(room,answer);

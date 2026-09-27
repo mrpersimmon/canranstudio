@@ -1,3 +1,4 @@
+const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -8,7 +9,7 @@ test('首页新单元从整理小图鉴开始，音标可见',async({page})=>{
 });
 
 const {DIALOGUE,ANSWERS,completeUnit2930,completeActivity,completeStory}=require('../support/unit29-30-flow');
-test('全部声音失败仍完成23题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
+test('全部声音失败仍完成33题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
  test.setTimeout(60000);const audio=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.route(/\.(mp3|wav|ogg)(\?|$)/,r=>r.abort());
  await page.addInitScript(()=>{globalThis.voiceCalls=0;speechSynthesis.speak=()=>{globalThis.voiceCalls++;};});
  await page.goto('/unit29-30/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await completeUnit2930(page);
@@ -54,7 +55,8 @@ test('10道词义题连续错答只重试，最后三题刷新不会代答，重
 });
 
 test('原文9句逐句保留，按原角色呈现，主动完成后才解锁理解',async({page})=>{
- await page.goto('/unit29-30/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('艾米要怎样清理地板？');await expect(room.locator('.dialogue-actor')).toHaveCount(2);
+ await page.goto('/unit29-30/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('艾米要怎样清理地板？');
+ const actors=room.locator('[data-actor]:not([data-actor=""])');await expect(actors).toHaveCount(2);await expect(actors.nth(0)).toHaveAttribute('data-actor','Jones');await expect(actors.nth(1)).toHaveAttribute('data-actor','Amy');await expect(actors.nth(0)).toBeVisible();await expect(actors.nth(1)).toBeVisible();
  for(let i=0;i<9;i++){
   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 9 句原文');
   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).last().click();await expect(room.locator('.bcn').last()).toHaveText('打开窗户，给房间通通风。');await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
@@ -92,10 +94,10 @@ const STEMS=['Shut the','Open the','Put on your','Take off your','Turn on the','
 const NOUNS=['stereo','tap','blackboard','cup','window','cupboard','magazine','knives','shirt','door','floor','shoes'];
 test('35图项、A三题和B完整搭配库保留，十一句不设唯一答案，打印有足够书写空间',async({page})=>{
  await page.goto('/unit29-30/#learn/models');const room=page.locator('.stage-models');await room.getByText('看看35个动作搭配',{exact:true}).click();
- await expect(room.locator('.comparison-gallery strong')).toHaveText(GROUPS.flatMap(([verbs,nouns])=>nouns.map(noun=>verbs.map(v=>v+' '+noun+'.').join('\n'))));
- await expect(room).toContainText('带活动桌盖的课桌');await expect(room).toContainText('不是要同时做');
+ await expectPagedTexts(room,'.comparison-gallery strong',GROUPS.flatMap(([verbs,nouns])=>nouns.map(noun=>verbs.map(v=>v+' '+noun+'.').join('\n'))),'动作');
+ while(await room.getByRole('button',{name:'上一页动作',exact:true}).isEnabled())await room.getByRole('button',{name:'上一页动作',exact:true}).click();await expect(room).toContainText('带活动桌盖的课桌');await expect(room).toContainText('不是要同时做');
  await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);await expect(room.locator('.reference-card button')).toHaveCount(0);
- for(let i=0;i<9;i++)await room.locator('.action-family').nth(i).screenshot({path:'output/playwright/unit29-30/gallery-'+i+'.png'});
+ for(let i=0;i<9;i++){await room.locator('.action-family').screenshot({path:'output/playwright/unit29-30/gallery-'+i+'.png'});if(i<8)await room.getByRole('button',{name:'下一页动作',exact:true}).click();}
  await room.getByText('把问题变成行动',{exact:true}).click();await expect(room.locator('.be-models').first().locator('li')).toHaveText(REFS.map((s,i)=>s+' → '+REFANS[i]));
  await room.getByText('自由搭配任务卡',{exact:true}).click();await expect(room).toContainText('不按同一行配对');for(const noun of NOUNS)await expect(room.locator('.writing-bank')).toContainText(noun);
  await room.getByText('看看一种搭配',{exact:true}).click();await expect(room).toContainText('并非只有这些答案');await expect(room.locator('.be-models').last().locator('li')).toHaveCount(11);

@@ -22,6 +22,7 @@
  }
  // Presentation does not replace the question manuscript or its progress signature.
  const tasks={
+  'exam-too':{art:'hat-box',result:'too 承接 new：也是新的。'},
   'story-hat':{art:'hat-box',result:'绿色帽子和连衣裙相配。',success:['dress','hat']},
   'story-too':{art:'hat-box',result:'裙子是新的，帽子也是新的。',success:['dress','hat']},
   'ask-colour':{art:'hat-box',result:"What colour's your hat?"},
@@ -45,7 +46,7 @@
   const picture=image('colour'),extra=image('hat','','dress-success-prop'),result=node('p','','dress-task-result');extra.hidden=true;
   board.append(picture,extra);element.append(question,board,result);let detail;
   return{element,heading:()=>heading,
-   present(q,progress){detail=tasks[q.id.replace(/^u1314-(?:v1|final-v2)-/,'')]||{art:'colour',result:q.answer};element.hidden=false;question.replaceChildren(progress,heading);heading.textContent=q.prompt;heading.tabIndex=-1;picture.src=local(detail.art);picture.alt=detail.alt||'';extra.hidden=true;result.textContent='';},
+   present(q,progress){detail=tasks[q.id.replace(/^u1314-(?:v1|final-v2|tasks-v4)-/,'')]||{art:'colour',result:''};element.hidden=false;question.replaceChildren(progress,heading);heading.textContent=q.prompt;heading.tabIndex=-1;picture.src=local(detail.art);picture.alt=detail.alt||'';extra.hidden=true;result.textContent='';},
    answer(value){result.textContent=value?detail.result:'';if(value&&detail.success){picture.src=local(detail.success[0]);extra.src=local(detail.success[1]);extra.hidden=false;}},
    finish(){element.hidden=true;}
   };

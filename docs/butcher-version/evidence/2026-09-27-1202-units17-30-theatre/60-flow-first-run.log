@@ -1,0 +1,110 @@
+
+Running 60 tests using 1 worker
+
+(node:99173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/60] tests/e2e/unit17-18.spec.js:5:1 › 导航进入办公室探访记，先看音标词卡，整卡翻义无需配音
+[2/60] tests/e2e/unit17-18.spec.js:18:1 › 配套练习无需任何配音，30题与完整原文通关，领取并导出准确的课堂证书
+[3/60] tests/e2e/unit17-18.spec.js:46:1 › 8个词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星
+[4/60] tests/e2e/unit17-18.spec.js:75:1 › 无音频时逐句读完16句原文，历史中文可展开，刷新续读且看完才解锁理解题
+[5/60] tests/e2e/unit17-18.spec.js:105:1 › 30张词卡默认有准确音标，所有图片完整加载，末组有下一站且刷新续页
+[6/60] tests/e2e/unit17-18.spec.js:120:1 › 15组职业、A六题、B十组与数字材料完整，纸笔练习打印为一页A4
+[7/60] tests/e2e/unit17-18.spec.js:143:1 › 用完整语境区别不很忙与懒惰，保留教师带读而不冒记听力成绩
+[8/60] tests/e2e/unit19-20.spec.js:5:1 › 导航进入冰淇淋休息站，先看音标词卡，整卡翻义无需配音
+[9/60] tests/e2e/unit19-20.spec.js:18:1 › 配套练习无需任何配音，36题与完整原文通关，领取并导出准确的课堂证书
+[10/60] tests/e2e/unit19-20.spec.js:47:1 › 15题覆盖两课新词，错答不泄题，最后三题刷新不代答，重练不重复计星
+[11/60] tests/e2e/unit19-20.spec.js:61:1 › 原文13段完整保留，分角色接话与合说准确，最后一段后显式完成才解锁
+[12/60] tests/e2e/unit19-20.spec.js:75:1 › 34张卡片默认音标、翻面词义可访问，图片完整加载，末组有下一站
+[13/60] tests/e2e/unit19-20.spec.js:85:1 › 教材20幅对比图、A六题、B十组与数字完整，练习纸实际导出单页A4
+[14/60] tests/e2e/unit19-20.spec.js:100:1 › 同词依语境判断，体形无好坏暗示，否定不能补出未说的信息
+[15/60] tests/e2e/unit21-22.spec.js:5:1 › 导航进入寻物交接站，先看音标词卡，整卡翻义无需配音
+[16/60] tests/e2e/unit21-22.spec.js:18:1 › 所有声音不可用仍完成34题与8段原文，领取并导出课堂证书
+[17/60] tests/e2e/unit21-22.spec.js:31:1 › 14题各有依据，连续错答不泄题，最后三题刷新不代答，重练不重复计星
+[18/60] tests/e2e/unit21-22.spec.js:41:1 › 原文8段与两次确认完整保留，人物准确，主动完成末段才解锁
+[19/60] tests/e2e/unit21-22.spec.js:52:1 › 36张完整音标词卡可翻义，图片加载，末组有下一站且刷新保留页码
+[20/60] tests/e2e/unit21-22.spec.js:62:1 › 16幅图、五种接收者、A六题与B八组完整，实际打印为一张A4
+[21/60] tests/e2e/unit21-22.spec.js:77:1 › one随先行词理解，her区分接收者与所属，近义大小词不互斥
+[22/60] tests/e2e/unit21-22.spec.js:82:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[23/60] tests/e2e/unit21-22.spec.js:97:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[24/60] tests/e2e/unit21-22.spec.js:103:1 › 证书长名字在资源较慢时仍生成实际图片
+[25/60] tests/e2e/unit23-24.spec.js:7:1 › 首页新单元从房间小图鉴开始，显示本课音标
+[26/60] tests/e2e/unit23-24.spec.js:13:1 › 全部声音失败仍完成34题和完整原文，15星后保存真实证书，刷新保留日期
+[27/60] tests/e2e/unit23-24.spec.js:26:1 › 15道词义题连续错答不泄题，末三题刷新不代答，重练不重复计星
+[28/60] tests/e2e/unit23-24.spec.js:36:1 › 原文8段完整、历史句可回看、中文按句展开，主动完成末段才解锁理解
+[29/60] tests/e2e/unit23-24.spec.js:48:1 › 30张完整音标词卡可翻义，图片加载，末组有下一站且刷新保留页码
+[30/60] tests/e2e/unit23-24.spec.js:60:1 › 十幅位置图、五种接收者、A六题与B十组完整，实际打印为一张A4
+[31/60] tests/e2e/unit23-24.spec.js:72:1 › 学习材料正确区分some数量、ones回指、位置关系，图片选项有同等可读描述
+[32/60] tests/e2e/unit23-24.spec.js:83:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[33/60] tests/e2e/unit23-24.spec.js:98:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[34/60] tests/e2e/unit25-26.spec.js:5:1 › 首页新单元从厨房小图鉴开始，音标可见
+[35/60] tests/e2e/unit25-26.spec.js:12:1 › 全部声音失败仍完成30题和完整原文，15星后保存真实证书，刷新保留日期
+[36/60] tests/e2e/unit25-26.spec.js:26:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[37/60] tests/e2e/unit25-26.spec.js:41:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[38/60] tests/e2e/unit25-26.spec.js:47:1 › 12道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[39/60] tests/e2e/unit25-26.spec.js:57:1 › 原文12句逐句保留，不虚构对话，主动完成后才解锁理解
+[40/60] tests/e2e/unit25-26.spec.js:68:1 › 36张词卡完整音标、翻义、加载、六组翻页与末组续学
+[41/60] tests/e2e/unit25-26.spec.js:80:1 › 原图八组、A四题八空、B七组两句完整，实际打印一张A4
+[42/60] tests/e2e/unit25-26.spec.js:90:1 › 语法支架不误教，图选同等可读，连续错误不泄露正确的双条件
+[43/60] tests/e2e/unit27-28.spec.js:5:1 › 首页新单元从客厅小图鉴开始，音标可见
+[44/60] tests/e2e/unit27-28.spec.js:12:1 › 全部声音失败仍完成27题和完整原文，15星后保存真实证书，刷新保留日期
+[45/60] tests/e2e/unit27-28.spec.js:26:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[46/60] tests/e2e/unit27-28.spec.js:41:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[47/60] tests/e2e/unit27-28.spec.js:47:1 › 8道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[48/60] tests/e2e/unit27-28.spec.js:57:1 › 原文13句逐句保留，不虚构对话，主动完成后才解锁理解
+[49/60] tests/e2e/unit27-28.spec.js:68:1 › 30张词卡完整音标、翻义、加载、五组翻页与末组续学
+[50/60] tests/e2e/unit27-28.spec.js:84:1 › 图句十组、A五题和B十组五句问答完整，打印一页且有完整句书写空间
+[51/60] tests/e2e/unit27-28.spec.js:95:1 › 语法支架不误教，图选同等可读，连续错误不泄露正确的双条件
+[52/60] tests/e2e/unit29-30.spec.js:5:1 › 首页新单元从整理小图鉴开始，音标可见
+[53/60] tests/e2e/unit29-30.spec.js:12:1 › 全部声音失败仍完成33题和完整原文，15星后保存真实证书，刷新保留日期
+[54/60] tests/e2e/unit29-30.spec.js:26:1 › 证书长名字在三种窄屏中完整，实际保存图片与单元主题一致
+[55/60] tests/e2e/unit29-30.spec.js:41:1 › 证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试
+[56/60] tests/e2e/unit29-30.spec.js:47:1 › 10道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星
+[57/60] tests/e2e/unit29-30.spec.js:57:1 › 原文9句逐句保留，按原角色呈现，主动完成后才解锁理解
+  1) tests/e2e/unit29-30.spec.js:57:1 › 原文9句逐句保留，按原角色呈现，主动完成后才解锁理解 ─────────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.stage-text').locator('[data-actor]')
+    Expected: 2
+    Received: 10
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('.stage-text').locator('[data-actor]')
+        14 × locator resolved to 10 elements
+           - unexpected value "10"
+
+
+      56 |
+      57 | test('原文9句逐句保留，按原角色呈现，主动完成后才解锁理解',async({page})=>{
+    > 58 |  await page.goto('/unit29-30/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('艾米要怎样清理地板？');await expect(room.locator('[data-actor]')).toHaveCount(2);
+         |                                                                                                                                                                                                                                              ^
+      59 |  for(let i=0;i<9;i++){
+      60 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 9 句原文');
+      61 |   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).last().click();await expect(room.locator('.bcn').last()).toHaveText('打开窗户，给房间通通风。');await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
+        at /Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/tests/e2e/unit29-30.spec.js:58:238
+
+    Error Context: test-results/unit29-30-原文9句逐句保留，按原角色呈现，主动完成后才解锁理解/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit29-30-原文9句逐句保留，按原角色呈现，主动完成后才解锁理解/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit29-30-原文9句逐句保留，按原角色呈现，主动完成后才解锁理解/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:99616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[58/60] tests/e2e/unit29-30.spec.js:69:1 › 30张词卡完整音标、翻义、加载、五组翻页与末组续学
+[59/60] tests/e2e/unit29-30.spec.js:94:1 › 35图项、A三题和B完整搭配库保留，十一句不设唯一答案，打印有足够书写空间
+[60/60] tests/e2e/unit29-30.spec.js:110:1 › 支架按语境释义，图选同等可读，错答不泄露正确状态
+  1 failed
+    tests/e2e/unit29-30.spec.js:57:1 › 原文9句逐句保留，按原角色呈现，主动完成后才解锁理解 ──────────────────────────────────
+  59 passed (2.5m)

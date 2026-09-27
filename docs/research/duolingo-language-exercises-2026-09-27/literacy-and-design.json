@@ -1,0 +1,1152 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-27",
+  "scope": "Duolingo language learning; literacy/writing systems, English pronunciation, visual design; excludes ABC, Math, Music, Chess, English Test",
+  "method": "Official articles and assets only; live source metadata read; selected PNG/JPEG assets visually inspected; no user account walkthrough; no business-code or Git changes.",
+  "date_rule": "published为原始发表日期；modified_metadata为HTML元数据，不等同功能更新日期或图片拍摄日期。",
+  "framing_legend": {
+    "full_device_screen": "可见系统顶栏、应用内容与底部Home或导航区域",
+    "full_app_view_no_system_chrome": "应用顶部与底部操作/导航俱全，但无系统栏；是完整应用视图而非完整设备屏幕",
+    "unverified": "只有官方引用/alt或元数据；未逐像素确认边界"
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "A new tool for learning to read Japanese on Duolingo",
+      "url": "https://blog.duolingo.com/learning-to-read-japanese-characters/",
+      "published": "2023-09-06",
+      "modified_metadata": "2025-01-12",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S02",
+      "title": "Tools for learning to read other writing systems",
+      "url": "https://blog.duolingo.com/learning-other-writing-systems/",
+      "published": "2021-07-22",
+      "modified_metadata": "2026-04-14",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S03",
+      "title": "How to practice English pronunciation on Duolingo",
+      "url": "https://blog.duolingo.com/duolingo-english-sounds-tab/",
+      "published": "2024-11-20",
+      "modified_metadata": "2026-03-25",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S04",
+      "title": "Improving how Duolingo teaches Chinese—and other languages!",
+      "url": "https://blog.duolingo.com/improving-how-duolingo-teaches-chinese-and-other-languages/",
+      "published": "2020-02-03",
+      "modified_metadata": "2026-09-18",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S05",
+      "title": "Dear Duolingo: What kind of Chinese does Duolingo teach?",
+      "url": "https://blog.duolingo.com/chinese-languages/",
+      "published": "2024-08-06",
+      "modified_metadata": "2026-06-23",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S06",
+      "title": "How Duolingo teaches reading skills",
+      "url": "https://blog.duolingo.com/covering-all-the-bases-duolingos-approach-to-reading-skills/",
+      "published": "2025-02-10",
+      "modified_metadata": "2026-07-03",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S07",
+      "title": "Dear Duolingo: Why does Japanese have three writing systems?",
+      "url": "https://blog.duolingo.com/japanese-writing-systems/",
+      "published": "2026-07-21",
+      "modified_metadata": "2026-08-19",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S08",
+      "title": "Elevating craft: How we refreshed our core tabs",
+      "url": "https://blog.duolingo.com/core-tabs-redesign/",
+      "published": "2026-02-04",
+      "modified_metadata": "2026-02-04",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S09",
+      "title": "Shape language: Duolingo’s art style",
+      "url": "https://blog.duolingo.com/shape-language-duolingos-art-style/",
+      "published": "2020-07-02",
+      "modified_metadata": "2026-05-19",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S10",
+      "title": "Building character: How a cast of characters can help you learn a language",
+      "url": "https://blog.duolingo.com/building-character/",
+      "published": "2020-11-10",
+      "modified_metadata": "2026-05-19",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S11",
+      "title": "Dear Duolingo: How can I learn a language as a hearing aid user?",
+      "url": "https://blog.duolingo.com/learning-with-hearing-aids/",
+      "published": "2026-01-20",
+      "modified_metadata": "2026-01-20",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S12",
+      "title": "Introducing the new Duolingo learning path",
+      "url": "https://blog.duolingo.com/new-duolingo-home-screen-design/",
+      "published": "2022-05-06",
+      "modified_metadata": "2025-06-13",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S13",
+      "title": "The Duolingo Method: 5 key principles that make learning fun and effective",
+      "url": "https://blog.duolingo.com/duolingo-teaching-method/",
+      "published": "2023-02-02",
+      "modified_metadata": "2026-04-01",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S14",
+      "title": "Lip syncing lessons: the next step in bringing our characters to life",
+      "url": "https://blog.duolingo.com/world-character-visemes/",
+      "published": "2022-11-10",
+      "modified_metadata": "2025-01-16",
+      "retrieved": "2026-09-27",
+      "status": "live_official_article"
+    },
+    {
+      "id": "S15",
+      "title": "Typography — Duolingo Brand Guidelines",
+      "url": "https://design.duolingo.com/identity/typography",
+      "published": null,
+      "modified_metadata": null,
+      "retrieved": "2026-09-27",
+      "status": "historical_official_search_index_only",
+      "live_redirect": "https://blog.duolingo.com/hub/design/",
+      "note": "搜索索引保留旧官方内容；实时访问重定向，不能当作现行产品字体规范。"
+    },
+    {
+      "id": "S16",
+      "title": "Color — Duolingo Brand Guidelines",
+      "url": "https://design.duolingo.com/identity/color",
+      "published": null,
+      "modified_metadata": null,
+      "retrieved": "2026-09-27",
+      "status": "redirect_no_palette_verified",
+      "live_redirect": "https://blog.duolingo.com/hub/design/",
+      "note": "未取得可核验的现行官方色值表，不填猜测的 HEX。"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "L01",
+      "language": "日语",
+      "writing_system": "平假名",
+      "interaction": "描写",
+      "user_action": "按提示路径描写字形。",
+      "source_ids": [
+        "S01"
+      ],
+      "asset_ids": [
+        "A01"
+      ],
+      "evidence_status": "2023 官方实例；2026 文章继续说明可在屏幕书写。",
+      "platform_course_limit": "2023 明示英→日 iOS/Android；中文用户有假名页。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L02",
+      "language": "日语",
+      "writing_system": "片假名",
+      "interaction": "描写/字音训练",
+      "user_action": "进入片假名专页学习；官方确认描写、拼写与阅读。",
+      "source_ids": [
+        "S01",
+        "S07"
+      ],
+      "asset_ids": [
+        "A09"
+      ],
+      "evidence_status": "交互有文字证据；没有独立片假名题面。",
+      "platform_course_limit": "2023 明示英→日 iOS/Android；中文用户有假名页。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L03",
+      "language": "日语",
+      "writing_system": "平假名组合",
+      "interaction": "按罗马音选字符",
+      "user_action": "阅读 shisu，从四张组合卡中选择。",
+      "source_ids": [
+        "S01"
+      ],
+      "asset_ids": [
+        "A02"
+      ],
+      "evidence_status": "官方完整应用界面，2023。",
+      "platform_course_limit": "同 L01。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L04",
+      "language": "日语",
+      "writing_system": "平假名",
+      "interaction": "看字符选读音",
+      "user_action": "可点击字音卡，选择一个罗马音答案。",
+      "source_ids": [
+        "S06"
+      ],
+      "asset_ids": [
+        "A03"
+      ],
+      "evidence_status": "2025 文章，2026 修改；图像直接证实。",
+      "platform_course_limit": "截图呈 iOS；文章未完整列跨端覆盖。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L05",
+      "language": "日语",
+      "writing_system": "平假名",
+      "interaction": "补缺笔画",
+      "user_action": "在指定位置画出缺少的一笔。",
+      "source_ids": [
+        "S06"
+      ],
+      "asset_ids": [
+        "A05"
+      ],
+      "evidence_status": "官方完整设备界面；对象是あ。",
+      "platform_course_limit": "截图呈 iOS；其余端未确定。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L06",
+      "language": "日语",
+      "writing_system": "假名",
+      "interaction": "配对/拼写",
+      "user_action": "完成字音配对、拼写练习。",
+      "source_ids": [
+        "S01"
+      ],
+      "asset_ids": [],
+      "evidence_status": "官方文字确认；未找到对应完整题面，不推断输入控件。",
+      "platform_course_limit": "沿用来源的日语课程范围。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L07",
+      "language": "日语",
+      "writing_system": "汉字",
+      "interaction": "描写与无引导手写",
+      "user_action": "描写或徒手书写汉字；范字是否隐藏未核验。",
+      "source_ids": [
+        "S01"
+      ],
+      "asset_ids": [
+        "A06"
+      ],
+      "evidence_status": "官方文字确认 tracing/freehand；动图边界未核验。",
+      "platform_course_limit": "2023 英→日 iOS/Android；当时 Web 尚称未来。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L08",
+      "language": "日语",
+      "writing_system": "汉字部件",
+      "interaction": "构字拼合",
+      "user_action": "把部件放入目标布局，组成词中汉字。",
+      "source_ids": [
+        "S06",
+        "S01"
+      ],
+      "asset_ids": [
+        "A04",
+        "A07"
+      ],
+      "evidence_status": "画字完整设备图已核验；GIF 未核验。",
+      "platform_course_limit": "完整图呈 iOS；不据此推断所有平台。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L09",
+      "language": "日语",
+      "writing_system": "三种文字",
+      "interaction": "文字目录与进度（非题型）",
+      "user_action": "选择文字页、学习字符；汉字按课程单元组织。",
+      "source_ids": [
+        "S07"
+      ],
+      "asset_ids": [
+        "A08",
+        "A09",
+        "A10"
+      ],
+      "evidence_status": "2026 官方文章；章节位置只视为该图实例。",
+      "platform_course_limit": "本文未给完整端和母语课矩阵。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L10",
+      "language": "中文",
+      "writing_system": "汉字/拼音",
+      "interaction": "看字选择拼音",
+      "user_action": "点击字音，选择带声调的拼音。",
+      "source_ids": [
+        "S04"
+      ],
+      "asset_ids": [
+        "A11"
+      ],
+      "evidence_status": "2020 Android 工程文章的历史实例。",
+      "platform_course_limit": "Android 文脉；当前平台/账户未实测。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L11",
+      "language": "中文",
+      "writing_system": "汉字/拼音",
+      "interaction": "字音配对",
+      "user_action": "在混排小卡中配对汉字/词与拼音。",
+      "source_ids": [
+        "S04"
+      ],
+      "asset_ids": [
+        "A12"
+      ],
+      "evidence_status": "2020 历史界面，不等于 2026 固定布局。",
+      "platform_course_limit": "Android 文脉；当前平台/账户未实测。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L12",
+      "language": "中文",
+      "writing_system": "简体汉字",
+      "interaction": "拼音辅助阅读（支架）",
+      "user_action": "读取汉字上方拼音，再用词块作答。",
+      "source_ids": [
+        "S05",
+        "S04"
+      ],
+      "asset_ids": [
+        "A13",
+        "A14"
+      ],
+      "evidence_status": "2024 全屏图；判题区拼音另有2020证据。",
+      "platform_course_limit": "A13 为 iOS 风格；截图有无限心，非订阅专属证明。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L13",
+      "language": "韩语",
+      "writing_system": "韩文音节块",
+      "interaction": "拼合音节",
+      "user_action": "按 han 的声音，把字母放进音节块。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A15"
+      ],
+      "evidence_status": "2021 官方实例；现代文章仍引用文字学习工具。",
+      "platform_course_limit": "英语界面移动端；未给完整课程/端矩阵。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L14",
+      "language": "阿拉伯语",
+      "writing_system": "字母及位置字形",
+      "interaction": "描写",
+      "user_action": "从蓝色起点沿路径描写字形。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A16"
+      ],
+      "evidence_status": "2021 官方图；文本还确认不同位置字形教学。",
+      "platform_course_limit": "英语界面移动端；未给完整课程/端矩阵。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L15",
+      "language": "印地语",
+      "writing_system": "天城文",
+      "interaction": "按转写选字符",
+      "user_action": "按 ka 提示在四张字形卡中选择。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A17"
+      ],
+      "evidence_status": "文章2021，图片路径2022；实际图为2×2。",
+      "platform_course_limit": "英语界面移动端；未给完整课程/端矩阵。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L16",
+      "language": "俄语",
+      "writing_system": "西里尔字母",
+      "interaction": "字母/发音目录",
+      "user_action": "学习字母与读音。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A18"
+      ],
+      "evidence_status": "仅目录和文字证据；未证实具体题面。",
+      "platform_course_limit": "母语课程与平台未完整列出。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L17",
+      "language": "乌克兰语",
+      "writing_system": "西里尔字母",
+      "interaction": "字母/发音目录",
+      "user_action": "学习字母与读音。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A19"
+      ],
+      "evidence_status": "仅目录和文字证据。",
+      "platform_course_limit": "母语课程与平台未完整列出。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L18",
+      "language": "希腊语",
+      "writing_system": "希腊字母",
+      "interaction": "字母/发音目录",
+      "user_action": "学习字母与读音。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A20"
+      ],
+      "evidence_status": "仅目录和文字证据。",
+      "platform_course_limit": "母语课程与平台未完整列出。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L19",
+      "language": "希伯来语",
+      "writing_system": "希伯来文字",
+      "interaction": "字符学习目录",
+      "user_action": "进入字符学习。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A23"
+      ],
+      "evidence_status": "仅目录和文字证据，不自动推定描写。",
+      "platform_course_limit": "母语课程与平台未完整列出。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L20",
+      "language": "意第绪语",
+      "writing_system": "希伯来文字变体",
+      "interaction": "字符学习目录",
+      "user_action": "进入字符学习。",
+      "source_ids": [
+        "S02"
+      ],
+      "asset_ids": [
+        "A24"
+      ],
+      "evidence_status": "仅目录和文字证据，不自动推定描写。",
+      "platform_course_limit": "母语课程与平台未完整列出。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L21",
+      "language": "英语",
+      "writing_system": "音素",
+      "interaction": "发音图表（非题型）",
+      "user_action": "点音素卡试听，再进入成对音素练习。",
+      "source_ids": [
+        "S03"
+      ],
+      "asset_ids": [
+        "A25",
+        "A26"
+      ],
+      "evidence_status": "2024 文章，2026 修改。",
+      "platform_course_limit": "截图呈 iOS；未完整列出母语课程/Android/Web。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L22",
+      "language": "英语",
+      "writing_system": "音素对比",
+      "interaction": "听音辨词",
+      "user_action": "播放声音，在 dock/deck 两词中选择。",
+      "source_ids": [
+        "S03"
+      ],
+      "asset_ids": [
+        "A27"
+      ],
+      "evidence_status": "完整设备截图直接证实。",
+      "platform_course_limit": "同 L21。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L23",
+      "language": "英语",
+      "writing_system": "音素对比",
+      "interaction": "同音/异音判断",
+      "user_action": "听两段音频，判断是否同一个词。",
+      "source_ids": [
+        "S03"
+      ],
+      "asset_ids": [
+        "A28"
+      ],
+      "evidence_status": "题面完整；底部设备边界未确认。",
+      "platform_course_limit": "同 L21。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    },
+    {
+      "id": "L24",
+      "language": "英语",
+      "writing_system": "音素对比",
+      "interaction": "听音配词",
+      "user_action": "配对音频卡与文字卡。",
+      "source_ids": [
+        "S03"
+      ],
+      "asset_ids": [
+        "A29"
+      ],
+      "evidence_status": "四行双列；截图未显示底部操作区。",
+      "platform_course_limit": "同 L21。",
+      "plan_access": "来源未标为 Super/Max 专属；本次未验证免费/订阅账户实际覆盖。"
+    }
+  ],
+  "assets": [
+    {
+      "id": "A01",
+      "label": "平假名描写：す",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/09/hiragana_tracing.PNG",
+      "source_ids": [
+        "S01"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "继续按钮",
+      "note": "字形浅灰；蓝色起笔点、虚线与箭头；十字定位线。"
+    },
+    {
+      "id": "A02",
+      "label": "按 shisu 选择假名组合",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/09/hiragana_sound.PNG",
+      "source_ids": [
+        "S01"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "继续按钮",
+      "note": "文件名带 sound，但题面是罗马字提示、四张双假名卡，不能标成看字选读音。"
+    },
+    {
+      "id": "A03",
+      "label": "平假名あ：选择读音",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/12-characterBingo2.png",
+      "source_ids": [
+        "S06"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen",
+      "top_visible": "系统栏、退出、进度、心",
+      "bottom_visible": "暂时无法听音、继续、Home 条",
+      "note": "大蓝字音卡；三条纵排读音选项。"
+    },
+    {
+      "id": "A04",
+      "label": "日语汉字部件拼合：画",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/13-characterBingo.png",
+      "source_ids": [
+        "S06"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen",
+      "top_visible": "系统栏、退出、进度、心",
+      "bottom_visible": "继续、Home 条",
+      "note": "提示关联 painter；目标轮廓与两块部件。是日语汉字，不能因另一篇 alt 错写 Hangeul 而标成韩文。"
+    },
+    {
+      "id": "A05",
+      "label": "平假名あ：补缺笔画",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/Duolingo+101%3A+How+to+learn+a+language+on+Duolingo/14-characterBingo.png",
+      "source_ids": [
+        "S06"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen",
+      "top_visible": "系统栏、退出、进度、心",
+      "bottom_visible": "继续、Home 条",
+      "note": "图中对象是平假名あ；不能标汉字补笔画。"
+    },
+    {
+      "id": "A06",
+      "label": "日语汉字渐进描写动图",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/09/scaffolded_trace_small.gif",
+      "source_ids": [
+        "S01"
+      ],
+      "kind": "gif",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "官方文章直接嵌入；本次动图读取超时，不能算完整 UI 或已观看演示。"
+    },
+    {
+      "id": "A07",
+      "label": "日语汉字部件拼合动图",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2023/09/puzzle_output-1.gif",
+      "source_ids": [
+        "S01"
+      ],
+      "kind": "gif",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "官方文章直接嵌入；HEAD 200，约 991 KB；未完成帧检查。"
+    },
+    {
+      "id": "A08",
+      "label": "2026 平假名页",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/07/hiragana-practice-tab.png",
+      "source_ids": [
+        "S07"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "三文字页签",
+      "bottom_visible": "底部导航",
+      "note": "五列字符格，灰色进度槽局部黄色，蓝色学习按钮；内容可滚动。"
+    },
+    {
+      "id": "A09",
+      "label": "2026 片假名页",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/07/katakana-practice-tab.png",
+      "source_ids": [
+        "S07"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "官方 alt 描述页签",
+      "bottom_visible": "未核验",
+      "note": "已核验文章内原始 URL；尚未逐像素检查边界。"
+    },
+    {
+      "id": "A10",
+      "label": "2026 汉字页",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/07/kanji-practice-tab.png",
+      "source_ids": [
+        "S07"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "三文字页签",
+      "bottom_visible": "底部导航",
+      "note": "按 Section/Unit 分组，带字格进度；图示私/日/本在 Section 2 Unit 1。"
+    },
+    {
+      "id": "A11",
+      "label": "汉字选择拼音：功",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/02/char_intro.jpg",
+      "source_ids": [
+        "S04"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "检查按钮",
+      "note": "蓝色功字音频卡，底部三张带声调拼音选项。2020 年界面。"
+    },
+    {
+      "id": "A12",
+      "label": "汉字与拼音配对",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/02/character_match.jpg",
+      "source_ids": [
+        "S04"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "检查按钮",
+      "note": "汉字/词与拼音混排成两行小卡，不是左右双列布局。2020 年界面。"
+    },
+    {
+      "id": "A13",
+      "label": "中文句子带拼音支架",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2024/08/img1_ZH_EN-1.jpg",
+      "source_ids": [
+        "S05"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen",
+      "top_visible": "系统栏、设置、进度、无限心",
+      "bottom_visible": "检查、Home 条",
+      "note": "简体中文句子上方灰色拼音；下方英文词块翻译；截图显示订阅风格，不能用以证明此题型仅订阅可用。"
+    },
+    {
+      "id": "A14",
+      "label": "中文判题区中的拼音",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2020/02/pinyin_grading_ribbon.jpg",
+      "source_ids": [
+        "S04"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "官方 alt 指判题反馈条",
+      "note": "官方原始链接已提取；像素读取失败。"
+    },
+    {
+      "id": "A15",
+      "label": "韩文音节拼合：한",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Korean-3-1.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "检查按钮",
+      "note": "han 音频；ㅎ、ㅏ 已在上方，ㄴ 待放入底部蓝色目标；音节块布局。"
+    },
+    {
+      "id": "A16",
+      "label": "阿拉伯字母描写：ت",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Arabic-2-1.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "检查按钮",
+      "note": "字音按钮、灰色字形与十字线；蓝色路径由右向左弯行。"
+    },
+    {
+      "id": "A17",
+      "label": "印地语按 ka 选字符",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/04/image--2-.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_app_view_no_system_chrome",
+      "top_visible": "退出、进度",
+      "bottom_visible": "检查按钮",
+      "note": "2×2 四张大字形卡；官方 alt 把四选项误写成 4×4，按像素采用 2×2。"
+    },
+    {
+      "id": "A18",
+      "label": "俄语字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Russian--1-.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A19",
+      "label": "乌克兰语字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Ukrainian--1-.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A20",
+      "label": "希腊语字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Greek-1.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A21",
+      "label": "韩文字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Korean.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A22",
+      "label": "阿拉伯字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/07/Arabic.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A23",
+      "label": "希伯来文字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/10/image--13-.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A24",
+      "label": "意第绪文字母表",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2021/10/image--14-.png",
+      "source_ids": [
+        "S02"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "文章确有此图；未把目录图当作具体练习题截图。"
+    },
+    {
+      "id": "A25",
+      "label": "英文元音总览",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3251.PNG",
+      "source_ids": [
+        "S03"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen",
+      "top_visible": "系统栏、标题与开始按钮",
+      "bottom_visible": "底部导航、Home 条",
+      "note": "三列音素卡，每卡有音标、例词与进度槽；入口是嘴形图标。"
+    },
+    {
+      "id": "A26",
+      "label": "英文辅音总览（滚动后）",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3252.PNG",
+      "source_ids": [
+        "S03"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen_scrolled",
+      "top_visible": "系统栏与开始按钮，主标题已滚走",
+      "bottom_visible": "底部导航、Home 条",
+      "note": "延续三列音素卡；不能因滚动隐藏标题而称文件裁切。"
+    },
+    {
+      "id": "A27",
+      "label": "听音选词：dock/deck",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3253.PNG",
+      "source_ids": [
+        "S03"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "full_device_screen",
+      "top_visible": "系统栏、退出、进度",
+      "bottom_visible": "检查、Home 条",
+      "note": "已选 dock 为浅蓝底蓝边；检查按钮为绿色。"
+    },
+    {
+      "id": "A28",
+      "label": "判断两个词相同或不同",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3254.PNG",
+      "source_ids": [
+        "S03"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "portrait_capture_footer_boundary_uncertain",
+      "top_visible": "系统栏、退出、进度",
+      "bottom_visible": "继续按钮可见；未见 Home 条",
+      "note": "两个独立音频按钮，上下排列；二选一答案。保守不计入完整设备屏幕。"
+    },
+    {
+      "id": "A29",
+      "label": "音频与英语词配对",
+      "url": "https://s3.us-east-1.amazonaws.com/content.duolingo.com/How+to+practice+English+pronunciation+on+Duolingo/IMG_3256.PNG",
+      "source_ids": [
+        "S03"
+      ],
+      "kind": "image",
+      "visually_verified": true,
+      "framing": "portrait_capture_without_footer",
+      "top_visible": "系统栏、退出、进度",
+      "bottom_visible": "未见底部操作或 Home 条",
+      "note": "四行两列；左侧波形音频，右侧 dock/got/deck/get。不假定缺少按钮就是原产品规则。"
+    },
+    {
+      "id": "A30",
+      "label": "2026 核心页签刷新总览",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/01/1.-Caption.-Refreshed-bottom-tabs.png",
+      "source_ids": [
+        "S08"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "official_ui_montage_unverified_bounds",
+      "top_visible": "官方 alt 说明六个界面",
+      "bottom_visible": "官方 alt 说明底部导航",
+      "note": "原图 HEAD 200、2000×2673（HTML）；是官方组合图，非单张设备截图；像素读取失败。"
+    },
+    {
+      "id": "A31",
+      "label": "2026 设置中的反馈和听力开关",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2026/01/Screenshot-listening-exercises-toggle-on.png",
+      "source_ids": [
+        "S11"
+      ],
+      "kind": "image",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "官方 alt 可证声效、触觉、动画、激励文案、听力等开关；HTML 显示 275×275 尺寸不足以判断原图裁切。"
+    },
+    {
+      "id": "A32",
+      "label": "角色答对反馈演示",
+      "url": "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/2022/02/junior_correct_vidmock2.gif",
+      "source_ids": [
+        "S10"
+      ],
+      "kind": "gif",
+      "visually_verified": false,
+      "framing": "unverified",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "官方文章中的 Junior 答对庆祝 GIF；未逐帧检查。"
+    },
+    {
+      "id": "A33",
+      "label": "日语文字教学官方嵌入视频",
+      "url": "https://www.youtube.com/watch?v=jZQ2zK2aROo",
+      "source_ids": [
+        "S01"
+      ],
+      "kind": "video",
+      "visually_verified": false,
+      "framing": "video_not_watched",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "官方文章嵌入的 YouTube 链接；视频抓取受限，未核验上传日期或时间戳，不充当逐题截图。"
+    },
+    {
+      "id": "A34",
+      "label": "Duocon 角色动画演讲官方嵌入视频",
+      "url": "https://www.youtube.com/watch?v=fgOqvyPif3g",
+      "source_ids": [
+        "S14"
+      ],
+      "kind": "video",
+      "visually_verified": false,
+      "framing": "video_not_watched",
+      "top_visible": "未核验",
+      "bottom_visible": "未核验",
+      "note": "来源文章称为 2023 Duocon talk；未观看和定位时间戳。"
+    }
+  ],
+  "design_notes": [
+    {
+      "id": "D01",
+      "topic": "颜色与按钮",
+      "claim": "实图显示白底深灰文字、蓝色音频/选中态、绿色检查/进度、灰色未就绪按钮；圆角与下沿厚度使卡片可操作性清楚。",
+      "kind": "visual_observation_not_token_spec",
+      "sources": [
+        "S03",
+        "S06"
+      ],
+      "assets": [
+        "A01",
+        "A03",
+        "A27"
+      ]
+    },
+    {
+      "id": "D02",
+      "topic": "新版信息层级",
+      "claim": "2026 刷新采用按用途分级的页头、固定标题位置、较少字号样式、以留白分组；文章发布时 iOS 已上线、Android 尚待推出。",
+      "kind": "official_statement",
+      "sources": [
+        "S08"
+      ],
+      "assets": [
+        "A30"
+      ]
+    },
+    {
+      "id": "D03",
+      "topic": "字体边界",
+      "claim": "旧官方索引把 Feather Bold 用于短标题、DIN Next Rounded 用于正文，并提供 Nunito 替代；实时规范页已重定向，不能证明2026全端字体或中文字体。",
+      "kind": "historical_official_index",
+      "sources": [
+        "S15"
+      ],
+      "assets": []
+    },
+    {
+      "id": "D04",
+      "topic": "插图可读性",
+      "claim": "官方强调简化形状、清晰轮廓与留白，控制细节以免视觉误导答题；2020 文章描述2018形成的圆润明亮风格。",
+      "kind": "official_design_rationale_historical",
+      "sources": [
+        "S09"
+      ],
+      "assets": []
+    },
+    {
+      "id": "D05",
+      "topic": "角色与反馈",
+      "claim": "角色在练习中说句子、随答题结果反应；官方记录答对动画和连对激励。口型与音频同步，结束作答时停止说话。",
+      "kind": "official_implementation_description",
+      "sources": [
+        "S10",
+        "S14"
+      ],
+      "assets": [
+        "A32",
+        "A34"
+      ]
+    },
+    {
+      "id": "D06",
+      "topic": "可达性与控制",
+      "claim": "2026 官方支持重播、慢速、暂时跳过听力、显示听说题文本、关闭听力；设置图还列声效、触觉及动画开关。不能据此声称全面符合WCAG。",
+      "kind": "official_accessibility_features",
+      "sources": [
+        "S11"
+      ],
+      "assets": [
+        "A31"
+      ]
+    },
+    {
+      "id": "D07",
+      "topic": "学习科学",
+      "claim": "官方方法包含互动练习、难度个性化、重要内容、持续动机与趣味；路径把复习和新内容编入进程。识字/音素课隔离单一难点，是降低同时处理负担的设计启示。",
+      "kind": "official_rationale_plus_labeled_inference",
+      "sources": [
+        "S13",
+        "S12",
+        "S01",
+        "S03"
+      ],
+      "assets": []
+    },
+    {
+      "id": "D08",
+      "topic": "动效边界",
+      "claim": "蓝色选中态、灰色未就绪态是已见静态证据；按下位移、触觉时序、过渡时长和错误反馈不能由这些截图推定。",
+      "kind": "research_limit",
+      "sources": [
+        "S03"
+      ],
+      "assets": [
+        "A27"
+      ]
+    }
+  ],
+  "gaps": [
+    "未找到足以确认中文课程当前专用汉字描写、补笔画、笔顺排序或部件拼字的一手界面；不把日语汉字证据移植为中文事实。",
+    "日语2023文章把“对比形近汉字”称为将推出；本次没有找到后续明确落地证据。",
+    "日语2023文章称Web稍后上线；2026文章没有补齐Web/Android/iOS及各母语课完整矩阵。",
+    "片假名独立练习题面、假名拼写/配对具体控件、俄/乌/希/希伯来/意第绪的具体练习全屏仍缺。",
+    "带路径描写和补一笔不等于独立笔顺排序测试；未查证判分算法、容差、笔顺强制或错误重试。",
+    "主应用的英语Sounds是音素区分训练；本次没有主应用26字母逐笔描写或ABC式自然拼读全流程证据。",
+    "字体旧页与色板页实时重定向；未核验现行完整设计token、WCAG等级、键盘/读屏覆盖、暗色模式和减少动态效果的全端实现。",
+    "没有登录真实免费/Super/Max账户走题；官方图片可能早于文章修改时间，不能声称是2026-09-27全部用户界面。",
+    "GIF与视频提供原始官方引用，但未完成帧/时间戳核验。只有visually_verified=true的静态图经过本次像素检查。",
+    "中文/日语 article 中对语言结构的概括没有作为教学事实复述；本研究仅据它们证明产品交互。",
+    "英语发音文章提及大声说，但本次三个具体题面都是听辨操作；未证实专用音素录音打分界面，不能把听辨题标成口语发音评分。"
+  ],
+  "validation": {
+    "json_ids_and_references": "passed",
+    "image_and_gif_urls_found_in_owning_article_html": 32,
+    "video_links_from_official_embeds": 2,
+    "static_images_visually_checked": 18,
+    "live_account_walkthrough": false
+  }
+}

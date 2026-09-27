@@ -73,6 +73,21 @@
    q('exam-repair','从状态描述转成合适的动作指令','The window isn’t clean.\n要解决这个问题，选哪一句？',[['Clean it!',''],['Open it!','打开窗户不能表示把它清洁干净。'],['Shut it!','关上窗户不能表示清洁。']],'Clean it!','it指窗户，clean在指令中是清洁。','先看窗户存在什么问题，再找能解决它的动作。','Lesson30 Written A1','将不是干净的状态转成动作，并迁移it指代')
   ]
  };
+ const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-purpose","询问必须做的事","Amy 想知道自己应该做什么，应问：",[["What must I do?", ""], ["Where is it?", "这问物品位置。"], ["What is your job?", "这是问职业。"]],"What must I do?","本题核对：询问必须做的事。","本次需要知道行动任务。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查询问必须做的事",{}),
+  q("final-v2-sequence","根据原文确定衣物与床铺先后","原文中，Open the window and air the room. 后面，\n先做什么、再做什么？",[["收衣服进衣柜 · 整理床铺", ""], ["整理床铺 · 收衣服进衣柜", "与原文 Then 的顺序不符。"], ["掸梳妆台 · 关门", "这不是紧接的两个任务。"]],"收衣服进衣柜 · 整理床铺","本题核对：根据原文确定衣物与床铺先后。","从这句后面按顺序读，别跳到最后。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查根据原文确定衣物与床铺先后",{}),
+  q("final-v2-contraction","is缩写与所有格","This bedroom’s very untidy. / Mrs. Jones’s bedroom\n两处 ’s 的含义依次是什么？",[["is · 琼斯太太的", ""], ["琼斯太太的 · is", "缩写与所属顺序反了。"], ["两处都代表 is", "后面带 bedroom 的所有格不是 is。"]],"is · 琼斯太太的","本题核对：is缩写与所有格。","看后面是在说状态，还是在说谁的物品。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查is缩写与所有格",{}),
+  q("final-v2-window","and连接两项动作","卧室窗户关着。要开窗并通风，拼出指令。",undefined,"Open the window and air the room.","本题核对：and连接两项动作。","两个动作各带对象，中间用 and。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查and连接两项动作",{"type": "order", "tokens": ["Open", "the", "window", "and", "air", "the", "room."]}),
+  q("final-v2-clothes","put…in不同于put on","衣服散在床上，要收进衣柜。选择指令。",[["Put these clothes in the wardrobe.", ""], ["Put on these clothes.", "这是把衣服穿到身上。"], ["Take off these clothes.", "这是从身上脱下。"]],"Put these clothes in the wardrobe.","本题核对：put…in不同于put on。","注意动作最后把衣服放到哪里。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查put…in不同于put on",{}),
+  q("final-v2-bed","make the bed固定搭配","衣服收好了，下一步整理床铺。选择指令。",[["Then make the bed.", ""], ["Then make a bed.", "本课固定搭配是整理已有床铺，不是制造一张床。"], ["Then empty the bed.", "不是整理床铺的表达。"]],"Then make the bed.","本题核对：make the bed固定搭配。","本课整理床铺有固定的搭配。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查make the bed固定搭配",{}),
+  q("final-v2-dust","dust与sweep作用对象","床铺整理好了，要掸梳妆台上的灰尘。",[["Dust the dressing table.", ""], ["Sweep the floor.", "这是扫地，不是掸梳妆台。"], ["Open the dressing table.", "打开并不表示掸灰尘。"]],"Dust the dressing table.","本题核对：dust与sweep作用对象。","核对这次清理的表面和所做动作。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查dust与sweep作用对象",{}),
+  q("final-v2-empty","动作empty不等于clean","杯子里有水，目标是把水倒掉。选择指令。",[["Empty the cup.", ""], ["Clean the cup.", "清洁不是明确要求倒空。"], ["Open the cup.", "不是本课倒空容器的动作。"]],"Empty the cup.","本题核对：动作empty不等于clean。","目标是去掉内容物，还是清洁表面？","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查动作empty不等于clean",{}),
+  q("final-v2-wear","相反穿戴动作","先穿上衬衫，后来脱下衬衫。两步依次是：",[["Put on your shirt. → Take off your shirt.", ""], ["Take off your shirt. → Put on your shirt.", "动作顺序反了。"], ["Open your shirt. → Turn off your shirt.", "衣物穿戴不使用这些开关表达。"]],"Put on your shirt. → Take off your shirt.","本题核对：相反穿戴动作。","分清从外面到身上、从身上脱下两个方向。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查相反穿戴动作",{}),
+  q("final-v2-read-sharpen","动作与对象合理搭配","给图书角安排两件事：读杂志；削尖铅笔。\n哪组指令都合适？",[["Read this magazine. / Sharpen these pencils.", ""], ["Sharpen this magazine. / Read these pencils.", "动作与物品搭配反了。"], ["Read this magazine. / Empty these pencils.", "铅笔不是本题可倒空的容器。"]],"Read this magazine. / Sharpen these pencils.","本题核对：动作与对象合理搭配。","逐个检查动作适不适合那个物品。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查动作与对象合理搭配",{}),
+ );
  const stages=[
   {id:'l1',title:'认识整理动作',activities:[['words','整理小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
   {id:'l2',title:'艾米的整理任务',activities:[['text','房间小剧场','book'],['roles','课文小侦探','people']],required:['text','roles']},
@@ -80,8 +95,92 @@
   {id:'l4',title:'把动作说清楚',activities:[['models','动作百宝箱','cards'],['be','动作选择站','cards'],['trans','词块拼装台','order']],required:['be','trans']},
   {id:'l5',title:'我的整理行动',activities:[['exam','整理小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit29-30',version:1,title:'房间整理行动',path:'/unit29-30/',start:'learn/words',progress:{learningKey:'canran:unit29-30:learning:v1'},objects:WORDS,stages,questions,
+ const definition={id:'unit29-30',version:1,title:'房间整理行动',path:'/unit29-30/',start:'learn/words',progress:{learningKey:'canran:unit29-30:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
   learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,REFERENCE,WRITING_VERBS,WRITING_NOUNS,MODELS,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit2930=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit2930;
+ const revised={"roles":[{
+  "id": "u2930-tasks-v4-story-floor",
+  "target": "从原文区分掸灰与扫地",
+  "prompt": "点出让 Amy 清理地板的整条指令。",
+  "decision": "整条动作指令而非只点一个同义词；不让场景在选择时提前变干净。",
+  "hint": "区分要清理的对象：梳妆台还是地板。",
+  "source": "Lesson 29 最后两条指令 Dust the dressing table. Then sweep the floor.",
+  "type": "locate",
+  "fragments": [
+    {
+      "value": "Dust the dressing table."
+    },
+    "\n",
+    {
+      "value": "Then sweep the floor."
+    }
+  ],
+  "options": [
+    "Dust the dressing table.",
+    "Then sweep the floor."
+  ],
+  "answer": "Then sweep the floor.",
+  "distractorReasons": {
+    "Dust the dressing table.": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "dust 是掸去梳妆台的灰，sweep 才是清扫地板。选完整指令；未判对不让房间先整理好。"
+},
+{
+  "id": "u2930-tasks-v4-story-sequence",
+  "target": "按课文排列三个连续指令",
+  "prompt": "按照课文顺序排好。",
+  "decision": "课文阅读后的三步次序，而不是反复记同一个 next；最后一句 Then 保留。",
+  "hint": "从课文后半段按顺序找这三个动作。",
+  "source": "Lesson 29 后半段连续指令：整理床、掸梳妆台、扫地",
+  "type": "order",
+  "tokens": [
+    "Then make the bed.",
+    "Dust the dressing table.",
+    "Then sweep the floor."
+  ],
+  "answer": "Then make the bed. Dust the dressing table. Then sweep the floor.",
+  "distractorRationale": "三块都是完整的原文指令，以课文顺序为准；这里练阅读排序，不声称现实家务只有一种正确顺序。初始词块乱序，不能靠位置直接照点。"
+}],
+"be":[{
+  "id": "u2930-tasks-v4-switch-on",
+  "target": "电器开关动作的搭配",
+  "prompt": "让台灯亮起来。",
+  "decision": "保留窗口 open 与灯 turn on 的区别；随后仍有穿脱衣服的独立任务。",
+  "hint": "台灯是电器，窗户才用开合的动作词。",
+  "source": "Lesson 30 Turn on the light.；用已学 lamp 作有限替换",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "",
+      "after": " the lamp.",
+      "options": [
+        "Turn on",
+        "Open",
+        "Turn off"
+      ]
+    }
+  ],
+  "answer": "[\"Turn on\"]",
+  "distractorReasons": {
+    "Turn on": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "Open": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "Turn off": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "Turn on 使灯亮，Turn off 使灯灭；Open 是开合物件的动作，不能照中文“开”套到电器。"
+},
+unit.questions["be"][1],
+unit.questions["be"][2]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit2930-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit2930-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

@@ -6,9 +6,7 @@ test.use({ reducedMotion: 'reduce', actionTimeout: 6000 });
 const output = 'output/playwright/unit3-4-no-voice/';
 
 async function choose(room, answer) {
-  if (Array.isArray(answer)) {
-    for (const token of answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
-  } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
+  await require('../support/units1-30-tasks').select(room, answer);
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await expect(room.getByRole('status')).toHaveText('答对了！');
 }
@@ -88,10 +86,10 @@ test('七个词义任务不以图配图，末三题刷新不代答，重练清�
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(check).toBeDisabled(); await expect(room.locator('.practice-options img')).toHaveCount(0);
     await expect(room.getByRole('button', { name: /听一遍|给点线索/ })).toHaveCount(0);
-    if (i >= 4) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.getByRole('button', { name: ANSWERS.listen[i], exact: true })).toHaveAttribute('aria-pressed', 'false'); }
+    if (i >= ANSWERS.listen.length - 3) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0); }
     await choose(room, ANSWERS.listen[i]);
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 6 ? '完成这一站' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === ANSWERS.listen.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
   }
   await expect(room.getByRole('button', { name: '下一站：衣帽间小剧场', exact: true })).toBeVisible();
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
@@ -191,7 +189,7 @@ for (const width of [320, 390, 768, 1280]) test(width + '宽度可阅读操作�
 
 test('接力词块可撤回，未知归属不猜，末题刷新没有自动作答', async ({ page }) => {
   await page.goto('/unit3-4/#learn/reply'); const room = page.locator('.stage-reply');
-  await choose(room, 'your'); await room.getByRole('button', { name: '下一题', exact: true }).click();
+  await choose(room, ANSWERS.reply[0]); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'No.', exact: true }).click();
   await room.getByRole('button', { name: '撤回 No.', exact: true }).click();
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();

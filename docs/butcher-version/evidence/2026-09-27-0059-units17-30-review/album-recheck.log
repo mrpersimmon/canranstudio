@@ -1,0 +1,15 @@
+
+Running 7 tests using 1 worker
+
+(node:85001) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/7] tests/e2e/units17-30-scene.spec.js:38:62 › 17-18 图册翻页按钮不随内容高度跳动，刷新保留末页
+[2/7] tests/e2e/units17-30-scene.spec.js:38:62 › 19-20 图册翻页按钮不随内容高度跳动，刷新保留末页
+[3/7] tests/e2e/units17-30-scene.spec.js:38:62 › 21-22 图册翻页按钮不随内容高度跳动，刷新保留末页
+[4/7] tests/e2e/units17-30-scene.spec.js:38:62 › 23-24 图册翻页按钮不随内容高度跳动，刷新保留末页
+[5/7] tests/e2e/units17-30-scene.spec.js:38:62 › 25-26 图册翻页按钮不随内容高度跳动，刷新保留末页
+[6/7] tests/e2e/units17-30-scene.spec.js:38:62 › 27-28 图册翻页按钮不随内容高度跳动，刷新保留末页
+[7/7] tests/e2e/units17-30-scene.spec.js:38:62 › 29-30 图册翻页按钮不随内容高度跳动，刷新保留末页
+  7 passed (12.1s)

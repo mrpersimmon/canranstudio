@@ -40,7 +40,7 @@ for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不�
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ANSWERS.observe.entries()){
-    await room.getByRole('button',{name:answer,exact:true}).click();await check.click();
+    await require('../support/units1-30-tasks').select(room,answer);await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
     await room.getByRole('button',{name:i===1?'完成这一站':'下一题',exact:true}).click();
   }
@@ -88,9 +88,14 @@ test('320 最后一道长拼句和挑战选项完整可读，不因完成上一�
 
 test('位置图画布上沿和尺寸一致，不因说明换行而上下错位',async({page})=>{
  for(const width of [320,390,1280]){
-  await page.setViewportSize({width,height:740});await page.goto('/unit25-26/#learn/models');await page.getByText('看看八幅厨房图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
-  const pictures=page.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(8);
-  for(let i=0;i<8;i+=2){const a=await pictures.nth(i).boundingBox(),b=await pictures.nth(i+1).boundingBox();if(width>600)expect(Math.abs(a.y-b.y)).toBeLessThan(1);expect(a.height).toBe(b.height);expect(a.width).toBe(b.width);}
+  await page.setViewportSize({width,height:740});await page.goto('/unit25-26/#learn/models');if(await page.locator('.visual-gallery').getAttribute('open')===null)await page.getByText('看看八幅厨房图',{exact:true}).click();await page.evaluate(()=>document.fonts.ready);
+  const room=page.locator('.stage-models'),prev=room.getByRole('button',{name:'上一页图册',exact:true}),next=room.getByRole('button',{name:'下一页图册',exact:true});
+  while(await prev.isEnabled())await prev.click();let seen=0;
+  do{const pictures=room.locator('.comparison-gallery .phrase-card>img');await expect(pictures).toHaveCount(1);
+   const a=await pictures.first().boundingBox();expect(a.width).toBeGreaterThan(120);expect(a.height).toBeGreaterThan(90);
+
+   seen+=await pictures.count();if(!await next.isEnabled())break;await next.click();
+  }while(seen<=8);expect(seen).toBe(8);
  }
 });
 

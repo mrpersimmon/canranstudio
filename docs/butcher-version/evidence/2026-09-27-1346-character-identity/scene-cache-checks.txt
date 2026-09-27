@@ -1,0 +1,17 @@
+
+Running 10 tests using 1 worker
+
+(node:6309) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/units17-30-scene.spec.js:6:48 › 19-20 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 (7.0s)
+  ✓   2 tests/e2e/units17-30-scene.spec.js:6:48 › 21-22 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 (4.8s)
+  ✓   3 tests/e2e/units17-30-scene.spec.js:6:48 › 23-24 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 (4.7s)
+  ✓   4 tests/e2e/units17-30-scene.spec.js:6:48 › 25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 (6.2s)
+  ✓   5 tests/e2e/units17-30-scene.spec.js:6:48 › 27-28 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮 (6.4s)
+  ✓   6 tests/e2e/units17-30-scene.spec.js:41:62 › 19-20 图册翻页按钮不随内容高度跳动，刷新保留末页 (1.8s)
+  ✓   7 tests/e2e/units17-30-scene.spec.js:41:62 › 21-22 图册翻页按钮不随内容高度跳动，刷新保留末页 (1.4s)
+  ✓   8 tests/e2e/units17-30-scene.spec.js:41:62 › 23-24 图册翻页按钮不随内容高度跳动，刷新保留末页 (1.6s)
+  ✓   9 tests/e2e/units17-30-scene.spec.js:41:62 › 25-26 图册翻页按钮不随内容高度跳动，刷新保留末页 (1.3s)
+  ✓  10 tests/e2e/units17-30-scene.spec.js:41:62 › 27-28 图册翻页按钮不随内容高度跳动，刷新保留末页 (1.5s)
+
+  10 passed (37.7s)

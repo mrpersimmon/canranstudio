@@ -156,3 +156,129 @@
   root.CanranCore.unit1314 = definition;
   if (root.document?.documentElement.dataset.unit === definition.id) root.CanranCore.learningContext = definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit1314;
+ const revised={"listen":[unit.questions["listen"][0],
+unit.questions["listen"][1],
+unit.questions["listen"][2],
+unit.questions["listen"][3],
+unit.questions["listen"][4],
+unit.questions["listen"][5],
+unit.questions["listen"][6],
+unit.questions["listen"][7],
+unit.questions["listen"][8],
+unit.questions["listen"][9],
+unit.questions["listen"][10],
+unit.questions["listen"][11],
+{
+  "id": "u1314-tasks-v4-colours",
+  "target": "识别灰棕黄三个色词",
+  "prompt": "给色词配对。",
+  "decision": "保留 green、red、black 和语境中的 orange；不堆成第二轮全量翻译。",
+  "hint": "",
+  "source": "Lesson 14 色词 grey、brown、yellow",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "grey",
+      "cn": "灰色的"
+    },
+    {
+      "id": "2",
+      "en": "brown",
+      "cn": "棕色的"
+    },
+    {
+      "id": "3",
+      "en": "yellow",
+      "cn": "黄色的"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\"]",
+  "distractorRationale": "三项是不同色词识别；不让正确色块先高亮。其他已学色词保留原练习。"
+},
+unit.questions["listen"][14],
+unit.questions["listen"][16]],
+"roles":[{
+  "id": "u1314-tasks-v4-story-hat",
+  "target": "从完整原文取得颜色证据",
+  "prompt": "点出直接说明帽子颜色的词。",
+  "decision": "保留 same colour 的承接背景，具体颜色由 green 给出。",
+  "hint": "留意 It 后面直接说明颜色的部分。",
+  "source": "Lesson 13 原文 It’s the same colour. It’s green, too.",
+  "type": "locate",
+  "fragments": [
+    "Anna: It's the ",
+    {
+      "value": "same"
+    },
+    " ",
+    {
+      "value": "colour"
+    },
+    ".\nIt's ",
+    {
+      "value": "green"
+    },
+    ", too."
+  ],
+  "options": [
+    "same",
+    "colour",
+    "green"
+  ],
+  "answer": "green",
+  "distractorReasons": {
+    "same": "这个片段不表达题目要求的信息；需结合完整句子判断。",
+    "colour": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "green 给出具体颜色；same 只说明相同，colour 是颜色这个概念。作答前帽子在盒中，不靠绿帽图片猜词。"
+},
+unit.questions["roles"][1]],
+"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+{
+  "id": "u1314-tasks-v4-exam-too",
+  "target": "把 too 用在相同性质的承接中",
+  "prompt": "裙子是新的，帽子也是新的。补好承接。",
+  "decision": "前句只交代新旧，不附加颜色一样的结论。",
+  "hint": "两句话都在说同一种情况，注意句末怎样接上。",
+  "source": "Lesson 13 too；用已学 dress、hat、new 构造同性质承接",
+  "type": "cloze",
+  "reference": "My dress is new.",
+  "blanks": [
+    {
+      "before": "My hat's new, ",
+      "after": ".",
+      "options": [
+        "too",
+        "very",
+        "same"
+      ]
+    }
+  ],
+  "answer": "[\"too\"]",
+  "distractorReasons": {
+    "too": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "very": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "same": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "too 在句末承接“也是新的”；very 不能单独置于该句末；same 不能这样补入。没有从新旧关系推出颜色相同。"
+},
+unit.questions["exam"][4],
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit1314-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit1314-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

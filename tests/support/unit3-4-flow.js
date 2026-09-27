@@ -1,4 +1,5 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
 // Independent literal expectations from textbook pages 6–9 and the reviewed
@@ -9,13 +10,7 @@ const DIALOGUE = [
   'Sorry, sir.', 'Is this your umbrella?', "No, it isn't.", 'Is this it?',
   'Yes, it is.', 'Thank you very much.'
 ];
-const ANSWERS = {
-  listen: ['umbrella', '寄存牌', 'suit', '学校', 'teacher', '儿子', 'daughter'],
-  roles: ['雨伞', '是不是客人的雨伞', '五号'],
-  manners: ['My coat and my umbrella please.', 'Here is my ticket.', 'This is not my umbrella.', 'Yes, it is.'],
-  reply: ['your', ['No.', "It isn't", 'my coat.', "It's", 'your coat.'], "No, it isn't.", '你的'],
-  exam: EXAMS['3-4'].map(question => question.answer)
-};
+const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['3-4'].old).map(id=>[id,taskCases.answers('3-4',id).map(q=>q.answer)]));
 async function completeStory(page, prefix = '') {
   await page.goto(prefix + '/unit3-4/#learn/text');
   const room = page.getByRole('region', { name: '衣帽间小剧场', exact: true });
@@ -34,7 +29,8 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     const answer = answers[i], check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
     await expect(check).toBeDisabled();
-    if (Array.isArray(answer)) {
+    if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+    else if (Array.isArray(answer)) {
       const bank = room.getByRole('group', { name: '待选词块', exact: true });
       for (const word of answer) await bank.getByRole('button', { name: word, exact: true }).click();
     } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();

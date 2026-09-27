@@ -1,16 +1,11 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const {expect} = require('@playwright/test');
 const {EXAM}=require('./unit13-14-exam');
 // Independently transcribed from PDF 59–62 and the shared classroom contract.
 const DIALOGUE = ["What colour's your new dress?","It's green.",'Come upstairs and see it.','Thank you.','Look!','Here it is!',"That's a nice dress.","It's very smart.","My hat's new, too.",'What colour is it?', "It's the same colour.", "It's green, too.",'That is a lovely hat!'];
 const SPEAKERS = ['Louise','Anna','Anna','Louise','Anna','Anna','Louise','Louise','Anna','Louise','Anna','Anna','Louise'];
-const ANSWERS = {
-  listen:['颜色','green','来','upstairs','漂亮的；时髦的','hat','相同的','可爱的；漂亮的','case','carpet','dog','黑色的','grey','brown','红色的','yellow','橙色的'],
-  roles:['green','都是新的'],
-  colours:["What colour's your hat?",'一只棕白相间的狗'],
-  trans:[['This','is',"Helen's",'dog.'],['What',"colour's","Steven's",'hat?'],['Her',"coat's",'grey.']],
-  exam:EXAM.map(item=>item.answer)
-};
+const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['13-14'].old).map(id=>[id,taskCases.answers('13-14',id).map(q=>q.answer)]));
 async function completeStory(page,base='') {
   await page.goto(base+'/unit13-14/#learn/text'); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++) {
@@ -27,7 +22,8 @@ async function completeActivity(page,id,base='') {
   for(const [i,answer] of answers.entries()) {
     const check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
-    if(Array.isArray(answer)) for(const token of answer) await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
+    if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+    else if(Array.isArray(answer)) for(const token of answer) await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
     else await room.getByRole('button',{name:answer,exact:true}).click();
     await check.click(); await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));

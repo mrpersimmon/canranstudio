@@ -9,6 +9,7 @@
   return{element,showLine(index){cards.forEach(({card,figure,copy,unknown},i)=>{const mentioned=index>=6+i*2;figure.hidden=!mentioned;copy.hidden=!mentioned;unknown.hidden=mentioned;card.dataset.known=String(mentioned);copy.textContent=index>=7+i*2?(i?"She's very well.":"He's fine."):'…';});}};
  }
  const prompts={
+  'story-return-question':{person:'helen'},
   'story-emma':{person:'helen',speech:"How's Emma?",task:'课文中，Emma 身体怎么样？'},
   'story-and-you':{person:'helen',speech:'And you?',task:'Helen 正在问谁？'},
   'story-he':{person:'helen',speech:"He's fine, thanks.",task:'这句话里的 He 指谁？'},
@@ -22,7 +23,7 @@
   const steven=portrait('steven'),helen=portrait('helen'),bubbles=node('div','','greeting-task-bubbles');
   steven.dataset.person='steven';helen.dataset.person='helen';bubbles.append(speech,response);stage.append(steven,bubbles,helen);element.append(question,stage);
   return{element,heading:()=>heading,
-   present(q,progress){const detail=prompts[q.id.replace('u910-v1-','')];element.hidden=false;question.replaceChildren(progress,heading);heading.textContent=detail?.task||q.prompt;speech.textContent=detail?.speech||'';stage.dataset.speaker=detail?.person||'steven';response.hidden=true;response.textContent='';element.dataset.activity=id;},
+   present(q,progress){const detail=prompts[q.id.replace(/^u910-(?:v1|tasks-v4)-/,'')];element.hidden=false;question.replaceChildren(progress,heading);heading.textContent=detail?.task||q.prompt;speech.textContent=detail?.speech||'';speech.hidden=!detail?.speech;stage.dataset.speaker=detail?.person||'steven';response.hidden=true;response.textContent='';element.dataset.activity=id;element.dataset.input=q.type||'';},
    answer(value){response.hidden=!value||id!=='reply';response.textContent=id==='reply'?(value||''):'';},
    finish(){element.hidden=true;}
   };

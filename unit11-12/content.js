@@ -252,3 +252,138 @@
  const definition={id:'unit11-12',version:1,title:'失物招领小侦探',path:'/unit11-12/',start:'learn/words',progress:{learningKey:'canran:unit11-12:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,MODELS,MODEL_EXAMPLE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions,activityPredecessors};
  root.CanranCore.unit1112=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit1112;
+ const revised={"listen":[unit.questions["listen"][0],
+unit.questions["listen"][1],
+unit.questions["listen"][2],
+unit.questions["listen"][3],
+unit.questions["listen"][4],
+{
+  "id": "u1112-tasks-v4-family",
+  "target": "识别亲属称谓",
+  "prompt": "给亲属词配对。",
+  "decision": "每个中文对应唯一；不根据脸或年龄猜与说话人的关系。",
+  "hint": "",
+  "source": "Lesson 11–12 亲属词 father、mother、sister、brother",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "father",
+      "cn": "父亲"
+    },
+    {
+      "id": "2",
+      "en": "mother",
+      "cn": "母亲"
+    },
+    {
+      "id": "3",
+      "en": "sister",
+      "cn": "姐姐；妹妹"
+    },
+    {
+      "id": "4",
+      "en": "brother",
+      "cn": "哥哥；弟弟"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\",\"4\"]",
+  "distractorRationale": "sister 与 brother 不按长幼拆成唯一译词；四项分别识别，不用头像推断亲属身份。"
+},
+unit.questions["listen"][7],
+unit.questions["listen"][9],
+unit.questions["listen"][11],
+unit.questions["listen"][12]],
+"owner":[unit.questions["owner"][0],
+unit.questions["owner"][1],
+{
+  "id": "u1112-tasks-v4-owner-apostrophe",
+  "target": "区分所有格与 is 的缩写",
+  "prompt": "点出其中 ’s 表示 is 的那一块。",
+  "decision": "在同一句真实词块中找到缩写，不把姓名后的所有格展开成 is。",
+  "hint": "试着把两个 ’s 分别换成 is，哪一处还能说通？",
+  "source": "Lesson 11 原文 Tim’s shirt’s white.",
+  "type": "locate",
+  "fragments": [
+    {
+      "value": "Tim's"
+    },
+    " ",
+    {
+      "value": "shirt's"
+    },
+    " ",
+    {
+      "value": "white"
+    },
+    "."
+  ],
+  "options": [
+    "Tim's",
+    "shirt's",
+    "white"
+  ],
+  "answer": "shirt's",
+  "distractorReasons": {
+    "Tim's": "这个片段不表达题目要求的信息；需结合完整句子判断。",
+    "white": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "Tim’s 是所有格；shirt’s 中 ’s 是 is；white 没有缩写。要求定位整块，不能把两个 ’s 当同一种用法。"
+}],
+"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+{
+  "id": "u1112-tasks-v4-exam-my-your",
+  "target": "换说话人时保持同一归属",
+  "prompt": "接好 Dave 和老师的认领对话。",
+  "decision": "物品归属不随说话人改变；每处分别判断。",
+  "hint": "衬衫的主人没有变，变的是每句话是谁对谁说。",
+  "source": "Lesson 11–12 的归属对话；使用 Lesson 12 Dave 构造确认情境",
+  "type": "cloze",
+  "reference": "蓝衬衫已确认属于 Dave。",
+  "blanks": [
+    {
+      "before": "Dave: This is ",
+      "after": " shirt.",
+      "options": [
+        "my",
+        "your",
+        "his"
+      ]
+    },
+    {
+      "before": "老师当面对 Dave: Yes, it’s ",
+      "after": " shirt.",
+      "options": [
+        "my",
+        "your",
+        "his"
+      ]
+    }
+  ],
+  "answer": "[\"my\",\"your\"]",
+  "distractorReasons": {
+    "my": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "your": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "his": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "本人认领 my；老师面对主人说 your。his 指谈到的第三者；互换 my/your 会改变视角。蓝衬衫与题干一致，配图不代替判断。"
+},
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit1112-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit1112-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

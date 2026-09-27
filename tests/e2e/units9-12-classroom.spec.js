@@ -7,10 +7,8 @@ const units = [
     { id: 'unit11-12', title: 'Lesson 11–12', ...require('../support/unit11-12-flow') }
 ];
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
-const vocabularyAnswers = {
-  'unit9-10': ['成年女子','胖的','thin','高的','short','dirty','clean','hot','冷的；觉得冷的','年老的','young','busy','懒惰的；不愿付出努力'],
-  'unit11-12': ['谁的','蓝色的','也许；不确定','white','接住','father','母亲','blouse','姐姐；妹妹','tie','brother','他的','她的']
-};
+const taskCases = require('../support/units1-30-tasks');
+const vocabularyAnswers = Object.fromEntries(units.map(unit => [unit.id, unit.ANSWERS.listen]));
 async function blockVoices(page, all = false) {
   const voices = [];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/, route => {
@@ -93,8 +91,8 @@ for (const unit of units) test(`${unit.title} 单词寻宝覆盖13个新词，�
   for (const [i, answer] of vocabularyAnswers[unit.id].entries()) {
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(check).toBeDisabled(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
-    if (i >= 11) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.getByRole('button', { name: answer, exact: true })).toHaveAttribute('aria-pressed', 'false'); }
-    if (unit.id === 'unit9-10' && i === 5 || unit.id === 'unit11-12' && i === 7) {
+    if (i >= vocabularyAnswers[unit.id].length - 3) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0); }
+    if (unit.id === 'unit9-10' && i === 5 || unit.id === 'unit11-12' && i === 6) {
       await expect(room.locator('.practice-scene')).toBeVisible(); await expect(room.locator('.practice-options img')).toHaveCount(0);
     }
     if (i === 0) {
@@ -102,9 +100,9 @@ for (const unit of units) test(`${unit.title} 单词寻宝覆盖13个新词，�
       await expect(room.getByRole('status')).not.toContainText('答对了'); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
-    await room.getByRole('button', { name: answer, exact: true }).click(); await check.click();
+    await taskCases.select(room, answer); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
-    await room.getByRole('button', { name: i === 12 ? '完成这一站' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === vocabularyAnswers[unit.id].length - 1 ? '完成这一站' : '下一题', exact: true }).click();
   }
   await expect(page.locator('#starCount')).toHaveText('3');
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);
@@ -156,10 +154,13 @@ for (const unit of units) test(`${unit.title} 旧录音中断可续读，保留�
   await expect(story.locator('.dialogue-status')).toContainText('录音还没听完');
   upgrade(); const voices = await blockVoices(page); await page.reload();
   await expect(story.locator('.bubble-row')).toHaveCount(2); await expect(story.getByRole('button', { name: '下一句', exact: true })).toBeEnabled();
-  await expect(page.locator('#starCount')).toHaveText(unit.id==='unit9-10'?'0':'3');
+  await expect(page.locator('#starCount')).toHaveText('0');
   await page.goto('/' + unit.id + '/#learn/' + unchanged);
   if(unit.id==='unit9-10')await expect(page.locator('.stage-reply')).toContainText('第 2 / 3 题');
-  else await expect(page.locator('.stage-' + unchanged).getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
+  else {
+    await expect(page.locator('.stage-owner')).toContainText('第 3 / 3 题');
+    await expect(page.locator('.stage-owner').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+  }
   await page.goto('/' + unit.id + '/#learn/trans'); await expect(page.locator(unit.id==='unit9-10'?'.stage-reply':'.stage-trans').getByRole('group', { name: '已选词块', exact: true }).getByRole('button', { name: '撤回 ' + firstToken, exact: true })).toBeVisible();
   await page.goto('/' + unit.id + '/#learn/words'); await expect(page.locator('#wordPageProgress')).toHaveText(unit.id === 'unit9-10' ? '2 / 4' : '2 / 3');
   await page.goto('/' + unit.id + '/#learn/listen'); await expect(listen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0'); await expect(listen.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
@@ -173,12 +174,13 @@ for (const unit of units) test(`${unit.title} 旧15星升级保留9星，新题�
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('旧版学员');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click(); await expect(page.locator('#certificateName')).toHaveText('旧版学员'); await page.keyboard.press('Escape');
   upgrade(); const voices = await blockVoices(page); await page.reload();
-  await expect(page.locator('#starCount')).toHaveText('9'); await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('旧版学员'); await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+  await expect(page.locator('#starCount')).toHaveText(unit.id === 'unit9-10' ? '4' : '6'); await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('旧版学员'); await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
   for (const id of ['listen','exam']) {
     await page.goto('/' + unit.id + '/#learn/' + id); const room = page.locator('.stage-' + id);
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
     await unit.completeActivity(page, id);
   }
+  for (const id of unit.id === 'unit9-10' ? ['roles', 'describe'] : ['owner']) await taskCases.activity(page, unit.id.slice(4), id);
   await page.goto('/' + unit.id + '/#learn/certificate'); await expect(page.locator('#starCount')).toHaveText('15');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   await expect(page.locator('#certificateName')).toHaveText('旧版学员'); await expect(page.getByRole('dialog').filter({ hasText: unit.title + ' 课堂配套练习' })).toBeVisible();
@@ -202,7 +204,7 @@ for (const unit of units) for (const width of [320,1280]) test(`${unit.title} ${
   for (const [i,answer] of vocabularyAnswers[unit.id].entries()) {
     for (const option of await room.locator('.practice-options button').all()) expect(await option.evaluate(el=>el.scrollHeight<=el.clientHeight&&el.scrollWidth<=el.clientWidth)).toBe(true);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-    if (unit.id==='unit9-10' && [5,12].includes(i) || unit.id==='unit11-12' && [7,12].includes(i)) await page.screenshot({ path: `output/playwright/units9-12-classroom/${unit.id}-q${i+1}-${width}.png` });
-    await room.getByRole('button', { name: answer, exact: true }).click(); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: i===12?'完成这一站':'下一题', exact:true }).click();
+    if (unit.id==='unit9-10' && [5,12].includes(i) || unit.id==='unit11-12' && [5,6,9].includes(i)) await page.screenshot({ path: `output/playwright/units9-12-classroom/${unit.id}-q${i+1}-${width}.png` });
+    await taskCases.select(room, answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: i===vocabularyAnswers[unit.id].length-1?'完成这一站':'下一题', exact:true }).click();
   }
 });

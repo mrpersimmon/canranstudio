@@ -280,3 +280,82 @@
  const definition={id:'unit9-10',version:1,mode:'classroom',title:'街角问候站',path:'/unit9-10/',start:'learn/words',progress:{learningKey:'canran:unit9-10:learning:v1'},learning:{WORDS,PEOPLE,DIALOGUE,AUDIO,PHRASES,REFERENCE,MODELS,MODEL_EXAMPLE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK},objects:WORDS,stages,questions,previousQuestions,activityPredecessors};
  root.CanranCore.unit910=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit910;
+ const revised={"roles":[unit.questions["roles"][0],
+{
+  "id": "u910-tasks-v4-story-return-question",
+  "target": "辨认回问的交际用途",
+  "prompt": "Helen 用哪个词组把问题问回来？",
+  "decision": "提供原句，选择承担回问功能的词组；不是仅凭姓名识别对象。",
+  "hint": "回问发生在 Helen 说完自己的情况之后。",
+  "source": "Lesson 9 Helen 原文 I’m very well, thank you. And you?",
+  "type": "locate",
+  "fragments": [
+    "Steven: ",
+    {
+      "value": "How are you today"
+    },
+    "?\nHelen: ",
+    {
+      "value": "I'm very well"
+    },
+    ", thank you.\n",
+    {
+      "value": "And you"
+    },
+    "?"
+  ],
+  "options": [
+    "How are you today",
+    "I'm very well",
+    "And you"
+  ],
+  "answer": "And you",
+  "distractorReasons": {
+    "How are you today": "这个片段不表达题目要求的信息；需结合完整句子判断。",
+    "I'm very well": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "And you? 把问题问回来；How are you today? 是前一个人的首问，I’m very well 是回答自己的情况。"
+},
+unit.questions["roles"][2]],
+"describe":[{
+  "id": "u910-tasks-v4-describe-he",
+  "target": "完整主语与 be 缩写",
+  "prompt": "把第二句说完整。",
+  "decision": "题目第二句已说明热；不把“不冷”当作热的逻辑依据。",
+  "hint": "空格里需要包含说谁和 be 动词，两者不能少一个。",
+  "source": "Lesson 9 Steven 身份与 Lesson 10 He’s… 形容词结构；新情境",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "Steven isn’t cold. ",
+      "after": " hot.",
+      "options": [
+        "He's",
+        "He",
+        "She's"
+      ]
+    }
+  ],
+  "answer": "[\"He's\"]",
+  "distractorReasons": {
+    "He's": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "He": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "She's": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "He’s 同时提供正确主语和 is；He 缺 be；She’s 改变了指代的人。不是把“不是冷”概括成“一定热”，第二句本身给出 hot。"
+},
+unit.questions["describe"][1],
+unit.questions["describe"][2],
+unit.questions["describe"][3]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit910-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit910-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

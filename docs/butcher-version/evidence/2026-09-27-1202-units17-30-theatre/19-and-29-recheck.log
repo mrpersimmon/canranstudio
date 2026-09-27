@@ -1,0 +1,15 @@
+
+Running 7 tests using 1 worker
+
+(node:99686) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/7] tests/e2e/unit29-30.spec.js:57:1 › 原文9句逐句保留，按原角色呈现，主动完成后才解锁理解
+[2/7] tests/e2e/units17-30-scene.spec.js:6:48 › 19-20 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[3/7] tests/e2e/units17-30-scene.spec.js:41:62 › 19-20 图册翻页按钮不随内容高度跳动，刷新保留末页
+[4/7] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 320
+[5/7] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 390
+[6/7] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 768
+[7/7] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 1280
+  7 passed (15.1s)

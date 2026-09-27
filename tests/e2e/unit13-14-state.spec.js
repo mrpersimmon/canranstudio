@@ -75,7 +75,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'colours');
   await page.goto('/unit13-14/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit13-14/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'This',exact:true}).click();
-  await page.route('**/unit13-14/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit13-14/content.js','utf8')).replace("q('story-hat',","q('story-hat-v2',")}));
+  await page.route('**/unit13-14/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit13-14/content.js','utf8')).replace('\"id\": \"u1314-tasks-v4-story-hat\"','\"id\": \"u1314-tasks-v4-story-hat-revised\"')}));
   await page.goto('/unit13-14/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit13-14/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');

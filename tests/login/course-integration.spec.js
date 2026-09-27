@@ -8,8 +8,9 @@ const { completeUnit78 } = require('../support/unit7-8-flow');
 const { completeUnit910 } = require('../support/unit9-10-flow');
 const { completeUnit1112 } = require('../support/unit11-12-flow');
 const { completeUnit1314 } = require('../support/unit13-14-flow');
+const { completeUnit1516 } = require('../support/unit15-16-flow');
 
-test('7–8 旧服务器真实完成记录换新设备后保留9星，新her题和七道挑战重答才恢复证书',async({browser})=>{
+test('7–8 旧服务器真实完成记录换新设备后保留未改成绩，补完新任务与挑战才恢复证书',async({browser})=>{
   test.setTimeout(120000);
   const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
   const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
@@ -34,13 +35,14 @@ test('7–8 旧服务器真实完成记录换新设备后保留9星，新her题�
     const account=await createStudent(old,'采访升级验收','小记者',[/Lesson 7–8 /]);await signIn(old,account,'/');await legacy.completeUnit78(old);
     await old.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('档案小记者');await old.getByRole('button',{name:'领取单元证书',exact:true}).click();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await first.close();first=null;await new Promise(resolve=>server.close(resolve));server=null;await start(root);
-    second=await browser.newContext({baseURL:origin});const current=await second.newPage();await signIn(current,account,'/');await expect(current.locator('.course')).toContainText('9 / 15');
-    await current.goto('/unit7-8/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('9');await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('档案小记者');await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
+    second=await browser.newContext({baseURL:origin});const current=await second.newPage();await signIn(current,account,'/');await expect(current.locator('.course')).toContainText('3 / 15');
+    await current.goto('/unit7-8/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('3');await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('档案小记者');await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
     await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await current.reload();
     await current.goto('/unit7-8/#learn/interview');const room=current.locator('.stage-interview');await expect(room).toContainText('第 2 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
     await room.getByRole('button',{name:"What's her job?",exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
     for(let i=2;i<4;i++){await current.reload();await expect(room.getByRole('status')).toContainText('答对了！');await room.getByRole('button',{name:i===3?'完成这一站':'下一题',exact:true}).click();}
-    await current.goto('/unit7-8/#learn/exam');await expect(current.locator('.stage-exam')).toContainText('第 4 / 10 题');await require('../support/unit7-8-exam').finishExamFrom(current,3);
+    for(const id of ['listen','reply'])await require('../support/units1-30-tasks').activity(current,'7-8',id);
+    await current.goto('/unit7-8/#learn/exam');await expect(current.locator('.stage-exam')).toContainText('第 4 / 11 题');await require('../support/unit7-8-exam').finishExamFrom(current,3);
     await expect(current.locator('#starCount')).toHaveText('15');await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     third=await browser.newContext({baseURL:origin});const restored=await third.newPage();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');await restored.goto('/unit7-8/#learn/certificate');await expect(restored.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('档案小记者');
   }finally{await first?.close();await second?.close();await third?.close();if(server)await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}
@@ -52,7 +54,8 @@ for (const { id, lesson, complete } of [
   { id: 'unit7-8', lesson: '7–8', complete: completeUnit78 },
   { id: 'unit9-10', lesson: '9–10', complete: completeUnit910 },
   { id: 'unit11-12', lesson: '11–12', complete: completeUnit1112 },
-  { id: 'unit13-14', lesson: '13–14', complete: completeUnit1314 }
+  { id: 'unit13-14', lesson: '13–14', complete: completeUnit1314 },
+  { id: 'unit15-16', lesson: '15–16', complete: completeUnit1516 }
 ]) test(`${lesson} 登录后无配音通关，证书与真实成果跨设备保留`, async ({ page, browser }) => {
   test.setTimeout(150000);
   await adminLogin(page);

@@ -131,11 +131,14 @@ test('16 个教学单元冷启动、图片完整、词卡和一道真实作答�
   expect(await a.page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
   expect(await a.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await a.page.locator('.unit-word').first().click();
   await a.page.screenshot({path:'output/login/'+id+'-mobile.png'});
-  // A wrong submitted answer must remain an unfinished exercise in every unit.
+  // Every unit requires an explicit, complete answer before feedback appears.
   await a.page.goto('/lesson/'+id+'/#learn/'+(id==='unit49-50'?'give':id==='unit1-2'?'manners':'listen'));
   const room=a.page.locator('.stage-'+(id==='unit49-50'?'give':id==='unit1-2'?'manners':'listen'));await expect(room.locator('.practice-options button').first()).toBeVisible();
   if(['unit3-4','unit5-6'].includes(id))await expect(room.getByRole('button',{name:'听一遍',exact:true})).toHaveCount(0);
-  await room.locator('.practice-options button').first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toHaveText(/答对了|再看看/);
+  const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();
+  if(['unit1-2','unit49-50'].includes(id))await room.locator('.practice-options button').first().click();
+  else {const{answers,select}=require('../support/units1-30-tasks');await select(room,answers(id.slice(4),'listen')[0].answer);}
+  await expect(check).toBeEnabled();await check.click();await expect(room.getByRole('status')).toHaveText(/答对了|再看看/);
  }
  expect(errors).toEqual([]);await a.context.close();
 });

@@ -1,0 +1,5064 @@
+{
+  "1-2": {
+    "old": {
+      "roles": [
+        {
+          "id": "u12-v1-story-your",
+          "answer": "对面的女士",
+          "audio": false
+        },
+        {
+          "id": "u12-scene-v1-story-it",
+          "answer": "手提包",
+          "audio": false
+        }
+      ],
+      "listen": [
+        {
+          "id": "u12-v1-listen-handbag",
+          "answer": "handbag",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-pen",
+          "answer": "pen",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-pencil",
+          "answer": "pencil",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-book",
+          "answer": "book",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-watch",
+          "answer": "watch",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-coat",
+          "answer": "coat",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-dress",
+          "answer": "dress",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-skirt",
+          "answer": "skirt",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-shirt",
+          "answer": "shirt",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-car",
+          "answer": "car",
+          "audio": true
+        },
+        {
+          "id": "u12-v1-listen-house",
+          "answer": "house",
+          "audio": true
+        }
+      ],
+      "manners": [
+        {
+          "id": "u12-scene-v1-attention",
+          "answer": "Excuse me!",
+          "audio": false
+        },
+        {
+          "id": "u12-scene-v1-repeat",
+          "answer": "Is this your handbag?",
+          "audio": false
+        },
+        {
+          "id": "u12-scene-v1-return",
+          "answer": "女士",
+          "audio": false
+        },
+        {
+          "id": "u12-scene-v1-thanks",
+          "answer": [
+            "Thank",
+            "you",
+            "very",
+            "much."
+          ],
+          "audio": false
+        }
+      ],
+      "ask": [
+        {
+          "id": "u12-scene-v1-find-watch",
+          "answer": "手表",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u12-v1-build-pen",
+          "answer": [
+            "Is",
+            "this",
+            "your",
+            "pen?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u12-v1-build-yes",
+          "answer": [
+            "Yes,",
+            "it",
+            "is."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u12-v2-exam-attention",
+          "answer": "Yes?",
+          "audio": false
+        },
+        {
+          "id": "u12-v2-exam-confirm-thank",
+          "answer": "Yes, it is. Thank you very much.",
+          "audio": false
+        },
+        {
+          "id": "u12-final-v2-reference",
+          "answer": "your 指女士的；it 指手提包",
+          "audio": false
+        },
+        {
+          "id": "u12-final-v2-repeat",
+          "answer": "Pardon?",
+          "audio": false
+        },
+        {
+          "id": "u12-final-v2-attention",
+          "answer": "Excuse me!",
+          "audio": false
+        },
+        {
+          "id": "u12-final-v2-object",
+          "answer": "铅笔",
+          "audio": false
+        },
+        {
+          "id": "u12-final-v2-ask",
+          "answer": [
+            "Is",
+            "this",
+            "your",
+            "coat?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u12-final-v2-hear-question",
+          "answer": "房子",
+          "audio": true
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u12-v1-story-your",
+            "answer": "对面的女士",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-scene-v1-story-it",
+            "answer": "手提包",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-tasks-v4-thanks-degree",
+            "answer": "very much",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u12-tasks-v4-exam-attention",
+            "answer": {
+              "fills": [
+                "Yes?",
+                "Yes, it is."
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u12-v2-exam-confirm-thank",
+            "answer": "Yes, it is. Thank you very much.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-final-v2-reference",
+            "answer": "your 指女士的；it 指手提包",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-final-v2-repeat",
+            "answer": "Pardon?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-final-v2-attention",
+            "answer": "Excuse me!",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-final-v2-object",
+            "answer": "铅笔",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-final-v2-ask",
+            "answer": [
+              "Is",
+              "this",
+              "your",
+              "coat?"
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u12-final-v2-hear-question",
+            "answer": "房子",
+            "audio": true,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 28,
+    "totalAfter": 29,
+    "dialogue": [
+      "Excuse me!",
+      "Yes?",
+      "Is this your handbag?",
+      "Pardon?",
+      "Is this your handbag?",
+      "Yes, it is.",
+      "Thank you very much."
+    ],
+    "voice": true
+  },
+  "3-4": {
+    "old": {
+      "listen": [
+        {
+          "id": "u34-classroom-v2-word-umbrella",
+          "answer": "umbrella",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-word-ticket",
+          "answer": "寄存牌",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-word-suit",
+          "answer": "suit",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-word-school",
+          "answer": "学校",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-word-teacher",
+          "answer": "teacher",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-word-son",
+          "answer": "儿子",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-word-daughter",
+          "answer": "daughter",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u34-v1-story-wrong",
+          "answer": "雨伞",
+          "audio": false
+        },
+        {
+          "id": "u34-v1-story-it",
+          "answer": "是不是客人的雨伞",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-story-number",
+          "answer": "五号",
+          "audio": false
+        }
+      ],
+      "manners": [
+        {
+          "id": "u34-classroom-v2-counter-request",
+          "answer": "My coat and my umbrella please.",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-counter-ticket",
+          "answer": "Here is my ticket.",
+          "audio": false
+        },
+        {
+          "id": "u34-v1-polite-wrong",
+          "answer": "This is not my umbrella.",
+          "audio": false
+        },
+        {
+          "id": "u34-v1-polite-yes",
+          "answer": "Yes, it is.",
+          "audio": false
+        }
+      ],
+      "reply": [
+        {
+          "id": "u34-v2-reply-switch-speaker",
+          "answer": "your",
+          "audio": false
+        },
+        {
+          "id": "u34-v2-reply-build-denial",
+          "answer": [
+            "No.",
+            "It isn't",
+            "my coat.",
+            "It's",
+            "your coat."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u34-v2-reply-unknown-owner",
+          "answer": "No, it isn't.",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-read-owner",
+          "answer": "你的",
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u34-v3-exam-repair",
+          "answer": "Sorry, sir. Is this your umbrella?",
+          "audio": false
+        },
+        {
+          "id": "u34-v3-exam-evidence",
+          "answer": "外套是我的；雨伞主人还不知道",
+          "audio": false
+        },
+        {
+          "id": "u34-classroom-v2-exam-relationship",
+          "answer": "Is this your teacher?",
+          "audio": false
+        },
+        {
+          "id": "u34-final-v2-request-record",
+          "answer": "五号：外套和雨伞",
+          "audio": false
+        },
+        {
+          "id": "u34-final-v2-show-ticket",
+          "answer": [
+            "Here",
+            "is",
+            "my",
+            "ticket."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u34-final-v2-known-owner",
+          "answer": [
+            "No.",
+            "It",
+            "isn't",
+            "my book.",
+            "It's",
+            "your book."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u34-final-v2-speaker",
+          "answer": "your",
+          "audio": false
+        },
+        {
+          "id": "u34-final-v2-confirm",
+          "answer": "问雨伞；Yes, it is.",
+          "audio": false
+        },
+        {
+          "id": "u34-final-v2-shortforms",
+          "answer": "Here is / is not / It is",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u34-classroom-v2-word-umbrella",
+            "answer": "umbrella",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-classroom-v2-word-ticket",
+            "answer": "寄存牌",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-classroom-v2-word-suit",
+            "answer": "suit",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-classroom-v2-word-school",
+            "answer": "学校",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-tasks-v4-people-words",
+            "answer": {
+              "pairs": [
+                [
+                  "teacher",
+                  "老师"
+                ],
+                [
+                  "son",
+                  "儿子"
+                ],
+                [
+                  "daughter",
+                  "女儿"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u34-v1-story-wrong",
+            "answer": "雨伞",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-v1-story-it",
+            "answer": "是不是客人的雨伞",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-tasks-v4-story-number",
+            "answer": "Number five",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "reply",
+        "answers": [
+          {
+            "id": "u34-tasks-v4-reply-switch-speaker",
+            "answer": {
+              "fills": [
+                "my",
+                "your"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u34-v2-reply-build-denial",
+            "answer": [
+              "No.",
+              "It isn't",
+              "my coat.",
+              "It's",
+              "your coat."
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-v2-reply-unknown-owner",
+            "answer": "No, it isn't.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u34-classroom-v2-read-owner",
+            "answer": "你的",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 27,
+    "totalAfter": 25,
+    "dialogue": [
+      "My coat and my umbrella please.",
+      "Here is my ticket.",
+      "Thank you, sir.",
+      "Number five.",
+      "Here's your umbrella and your coat.",
+      "This is not my umbrella.",
+      "Sorry, sir.",
+      "Is this your umbrella?",
+      "No, it isn't.",
+      "Is this it?",
+      "Yes, it is.",
+      "Thank you very much."
+    ],
+    "voice": false
+  },
+  "5-6": {
+    "old": {
+      "listen": [
+        {
+          "id": "u56-classroom-v2-french",
+          "answer": "法国（人）的",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-german",
+          "answer": "German",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-japanese",
+          "answer": "日本（人）的",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-korean",
+          "answer": "South Korean",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-chinese",
+          "answer": "中国（人）的",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-swedish",
+          "answer": "Swedish",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-english",
+          "answer": "英格兰的",
+          "audio": false
+        },
+        {
+          "id": "u56-classroom-v2-american",
+          "answer": "American",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u56-v1-story-new",
+          "answer": "Sophie",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-story-chang",
+          "answer": "不是，他是韩国人",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-story-too",
+          "answer": "Luming",
+          "audio": false
+        }
+      ],
+      "refer": [
+        {
+          "id": "u56-v1-refer-she",
+          "answer": "She",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-refer-he",
+          "answer": "He",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-refer-it",
+          "answer": "It",
+          "audio": false
+        }
+      ],
+      "articles": [
+        {
+          "id": "u56-v1-article-a",
+          "answer": "a",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-article-an",
+          "answer": "an",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-article-none",
+          "answer": "不填",
+          "audio": false
+        }
+      ],
+      "choice": [
+        {
+          "id": "u56-v1-choice-make",
+          "answer": "It's a Volvo.",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u56-v1-build-question",
+          "answer": [
+            "Is",
+            "she",
+            "a Japanese student",
+            "or",
+            "a German student?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u56-v1-build-correction",
+          "answer": [
+            "It",
+            "isn't",
+            "an American car.",
+            "It's",
+            "an English car."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u56-v1-exam-two",
+          "answer": "Hans 是德国人；汽车是日本品牌",
+          "audio": false
+        },
+        {
+          "id": "u56-v1-exam-intro",
+          "answer": [
+            "Good morning.",
+            "This is",
+            "Hans.",
+            "He's",
+            "a German",
+            "student."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u56-v1-exam-known",
+          "answer": "这是一位新同学",
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-meet",
+          "answer": "Nice to meet you.",
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-too",
+          "answer": "Ben 和 Hans 都是德国人",
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-refer",
+          "answer": "He / She / It",
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-articles",
+          "answer": "不填 / a / an",
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-make-or",
+          "answer": "It's a Volvo. / It's a Swedish car.",
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-correction",
+          "answer": [
+            "She",
+            "isn't",
+            "a Swedish student.",
+            "She's",
+            "a French student."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u56-final-v2-shortforms",
+          "answer": "He is / She is / is not",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u56-tasks-v4-nationalities-a",
+            "answer": {
+              "pairs": [
+                [
+                  "French",
+                  "法国（人）的"
+                ],
+                [
+                  "German",
+                  "德国（人）的"
+                ],
+                [
+                  "Japanese",
+                  "日本（人）的"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u56-classroom-v2-korean",
+            "answer": "South Korean",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u56-tasks-v4-nationalities-b",
+            "answer": {
+              "pairs": [
+                [
+                  "Chinese",
+                  "中国（人）的"
+                ],
+                [
+                  "Swedish",
+                  "瑞典（人）的"
+                ],
+                [
+                  "American",
+                  "美国（人）的"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u56-classroom-v2-english",
+            "answer": "英格兰的",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "refer",
+        "answers": [
+          {
+            "id": "u56-v1-refer-she",
+            "answer": "She",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u56-v1-refer-he",
+            "answer": "He",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u56-tasks-v4-refer-it",
+            "answer": {
+              "fills": [
+                "It"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "articles",
+        "answers": [
+          {
+            "id": "u56-tasks-v4-article-a",
+            "answer": {
+              "fills": [
+                "a"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u56-v1-article-an",
+            "answer": "an",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u56-v1-article-none",
+            "answer": "不填",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 30,
+    "totalAfter": 26,
+    "dialogue": [
+      "Good morning.",
+      "Good morning, Mr. Blake.",
+      "This is Miss Sophie Dupont.",
+      "Sophie is a new student.",
+      "She is French.",
+      "Sophie, this is Hans.",
+      "He is German.",
+      "Nice to meet you.",
+      "And this is Naoko.",
+      "She's Japanese.",
+      "Nice to meet you.",
+      "And this is Chang-woo.",
+      "He's South Korean.",
+      "Nice to meet you.",
+      "And this is Luming.",
+      "He's Chinese.",
+      "Nice to meet you.",
+      "And this is Xiaohui.",
+      "She's Chinese, too.",
+      "Nice to meet you."
+    ],
+    "voice": false
+  },
+  "7-8": {
+    "old": {
+      "listen": [
+        {
+          "id": "u78-v1-vocab-Italian",
+          "answer": "意大利（人）的",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-keyboard-operator",
+          "answer": "keyboard operator",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-engineer",
+          "answer": "工程师",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-policeman",
+          "answer": "policeman",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-policewoman",
+          "answer": "policewoman",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-taxi-driver",
+          "answer": "taxi driver",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-air-hostess",
+          "answer": "女空乘",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-postman",
+          "answer": "postman",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-nurse",
+          "answer": "nurse",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-mechanic",
+          "answer": "机械师；修理机器的人",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-hairdresser",
+          "answer": "hairdresser",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-housewife",
+          "answer": "家庭主妇",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-vocab-milkman",
+          "answer": "milkman",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u78-v1-story-job",
+          "answer": "I'm an engineer.",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-story-teacher",
+          "answer": "No, she isn't.",
+          "audio": false
+        }
+      ],
+      "reply": [
+        {
+          "id": "u78-v1-reply-nationality",
+          "answer": "I'm Italian.",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-be-name",
+          "answer": "is / am",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-be-negative",
+          "answer": "is / is",
+          "audio": false
+        }
+      ],
+      "interview": [
+        {
+          "id": "u78-v1-ask-his",
+          "answer": "What's his job?",
+          "audio": false
+        },
+        {
+          "id": "u78-v2-ask-her",
+          "answer": "What's her job?",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-build-direct",
+          "answer": [
+            "What's",
+            "your job?",
+            "I'm",
+            "an engineer."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u78-v1-build-confirm",
+          "answer": [
+            "Is",
+            "he",
+            "a taxi driver?",
+            "Yes,",
+            "he is."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u78-v1-exam-read",
+          "answer": "意大利人；护士",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-exam-address",
+          "answer": "Are you a mechanic?",
+          "audio": false
+        },
+        {
+          "id": "u78-v1-exam-intro",
+          "answer": [
+            "My",
+            "name's",
+            "Ben.",
+            "I'm",
+            "an engineer."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-nationality",
+          "answer": [
+            "What nationality",
+            "are",
+            "you?",
+            "What's",
+            "your",
+            "job?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-negative",
+          "answer": "No, I'm not.",
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-owners",
+          "answer": "his / her",
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-be",
+          "answer": "am / is / Are",
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-confirm",
+          "answer": "Yes, she is.",
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-articles",
+          "answer": "an / a",
+          "audio": false
+        },
+        {
+          "id": "u78-v2-exam-shortforms",
+          "answer": "name is / I am / What is",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u78-v1-vocab-Italian",
+            "answer": "意大利（人）的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-keyboard-operator",
+            "answer": "keyboard operator",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-tasks-v4-jobs",
+            "answer": {
+              "pairs": [
+                [
+                  "engineer",
+                  "工程师"
+                ],
+                [
+                  "mechanic",
+                  "机械师；修理机器的人"
+                ],
+                [
+                  "hairdresser",
+                  "理发师"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u78-v1-vocab-policeman",
+            "answer": "policeman",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-policewoman",
+            "answer": "policewoman",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-taxi-driver",
+            "answer": "taxi driver",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-air-hostess",
+            "answer": "女空乘",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-postman",
+            "answer": "postman",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-nurse",
+            "answer": "nurse",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-housewife",
+            "answer": "家庭主妇",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-vocab-milkman",
+            "answer": "milkman",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "reply",
+        "answers": [
+          {
+            "id": "u78-v1-reply-nationality",
+            "answer": "I'm Italian.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-tasks-v4-be-name",
+            "answer": {
+              "fills": [
+                "is",
+                "am"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u78-v1-be-negative",
+            "answer": "is / is",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u78-v1-exam-read",
+            "answer": "意大利人；护士",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-exam-address",
+            "answer": "Are you a mechanic?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v1-exam-intro",
+            "answer": [
+              "My",
+              "name's",
+              "Ben.",
+              "I'm",
+              "an engineer."
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-nationality",
+            "answer": [
+              "What nationality",
+              "are",
+              "you?",
+              "What's",
+              "your",
+              "job?"
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-negative",
+            "answer": "No, I'm not.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-owners",
+            "answer": "his / her",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-be",
+            "answer": "am / is / Are",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-confirm",
+            "answer": "Yes, she is.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-articles",
+            "answer": "an / a",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-v2-exam-shortforms",
+            "answer": "name is / I am / What is",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u78-tasks-v4-exam-confirm-you",
+            "answer": {
+              "fills": [
+                "Yes, I am."
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      }
+    ],
+    "totalBefore": 32,
+    "totalAfter": 31,
+    "dialogue": [
+      "I am a new student.",
+      "My name's Robert.",
+      "Nice to meet you.",
+      "My name's Sophie.",
+      "Are you French?",
+      "Yes, I am.",
+      "Are you French, too?",
+      "No, I am not.",
+      "What nationality are you?",
+      "I'm Italian.",
+      "Are you a teacher?",
+      "No, I'm not.",
+      "What's your job?",
+      "I'm a keyboard operator.",
+      "What's your job?",
+      "I'm an engineer."
+    ],
+    "voice": false
+  },
+  "9-10": {
+    "old": {
+      "listen": [
+        {
+          "id": "u910-v1-vocab-woman",
+          "answer": "成年女子",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-fat",
+          "answer": "胖的",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-thin",
+          "answer": "thin",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-tall",
+          "answer": "高的",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-short",
+          "answer": "short",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-dirty",
+          "answer": "dirty",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-clean",
+          "answer": "clean",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-hot",
+          "answer": "hot",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-cold",
+          "answer": "冷的；觉得冷的",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-old",
+          "answer": "年老的",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-young",
+          "answer": "young",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-busy",
+          "answer": "busy",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-vocab-lazy",
+          "answer": "懒惰的；不愿付出努力",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u910-v1-story-emma",
+          "answer": "She's very well.",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-story-and-you",
+          "answer": "Steven",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-story-he",
+          "answer": "Tony",
+          "audio": false
+        }
+      ],
+      "reply": [
+        {
+          "id": "u910-v1-reply-well",
+          "answer": "I'm fine, thanks.",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-build-return",
+          "answer": [
+            "I'm",
+            "fine,",
+            "thanks.",
+            "And",
+            "you?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u910-v1-reply-see",
+          "answer": "Nice to see you, too.",
+          "audio": false
+        }
+      ],
+      "describe": [
+        {
+          "id": "u910-v1-describe-he",
+          "answer": "He's",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-describe-it",
+          "answer": "It's",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-describe-now",
+          "answer": "She's busy.",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-build-look",
+          "answer": [
+            "Look at",
+            "Emma.",
+            "She's",
+            "cold."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u910-v1-exam-read",
+          "answer": "Tony · fine",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-exam-evidence",
+          "answer": "他不觉得冷",
+          "audio": false
+        },
+        {
+          "id": "u910-v1-exam-object",
+          "answer": [
+            "Look at",
+            "that umbrella.",
+            "It's",
+            "dirty."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-ask-how",
+          "answer": "are / is",
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-return-greeting",
+          "answer": "I'm fine, thanks.",
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-warm-goodbye",
+          "answer": "Nice to see you, too. Goodbye.",
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-complete-subject",
+          "answer": "He's / She's / It's",
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-observe-work",
+          "answer": "He's busy.",
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-look-at-person",
+          "answer": [
+            "Look",
+            "at",
+            "Helen.",
+            "She's",
+            "very well."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u910-final-v2-expand-how",
+          "answer": "How is / She is",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u910-v1-story-emma",
+            "answer": "She's very well.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u910-tasks-v4-story-return-question",
+            "answer": "And you",
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u910-v1-story-he",
+            "answer": "Tony",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "describe",
+        "answers": [
+          {
+            "id": "u910-tasks-v4-describe-he",
+            "answer": {
+              "fills": [
+                "He's"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u910-v1-describe-it",
+            "answer": "It's",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u910-v1-describe-now",
+            "answer": "She's busy.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u910-v1-build-look",
+            "answer": [
+              "Look at",
+              "Emma.",
+              "She's",
+              "cold."
+            ],
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 33,
+    "totalAfter": 33,
+    "dialogue": [
+      "Hello, Helen.",
+      "Hi, Steven.",
+      "How are you today?",
+      "I'm very well, thank you.",
+      "And you?",
+      "I'm fine, thanks.",
+      "How is Tony?",
+      "He's fine, thanks.",
+      "How's Emma?",
+      "She's very well, too, Helen.",
+      "Goodbye, Helen.",
+      "Nice to see you.",
+      "Nice to see you, too, Steven.",
+      "Goodbye."
+    ],
+    "voice": false
+  },
+  "11-12": {
+    "old": {
+      "listen": [
+        {
+          "id": "u1112-v1-vocab-whose",
+          "answer": "谁的",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-blue",
+          "answer": "蓝色的",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-perhaps",
+          "answer": "也许；不确定",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-white",
+          "answer": "white",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-catch",
+          "answer": "接住",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-father",
+          "answer": "father",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-mother",
+          "answer": "母亲",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-blouse",
+          "answer": "blouse",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-sister",
+          "answer": "姐姐；妹妹",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-tie",
+          "answer": "tie",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-brother",
+          "answer": "brother",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-his",
+          "answer": "他的",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-vocab-her",
+          "answer": "她的",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u1112-v1-story-owner",
+          "answer": "Tim",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-story-it",
+          "answer": "老师手里的白衬衫",
+          "audio": false
+        }
+      ],
+      "owner": [
+        {
+          "id": "u1112-v1-owner-her",
+          "answer": "her",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-owner-your",
+          "answer": "your",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-owner-apostrophe",
+          "answer": "shirt's",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u1112-v1-build-whose",
+          "answer": [
+            "Whose",
+            "is",
+            "that",
+            "tie?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-build-sister",
+          "answer": [
+            "It's",
+            "my",
+            "sister's."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u1112-v1-exam-read",
+          "answer": "my brother · pen",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-exam-perhaps",
+          "answer": "请 Tim 确认",
+          "audio": false
+        },
+        {
+          "id": "u1112-v1-exam-distractor",
+          "answer": "her",
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-ask-owner",
+          "answer": "Whose is this handbag?",
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-my-your",
+          "answer": "my / your",
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-family-owner",
+          "answer": "father's / his",
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-expand-is",
+          "answer": "Tim's shirt is white.",
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-confirm-both",
+          "answer": "Dave: No, sir. / Tim: Yes, sir.",
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-build-question",
+          "answer": [
+            "Whose",
+            "shirt",
+            "is",
+            "that?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1112-final-v2-return-thanks",
+          "answer": "老师：Here you are. / Tim：Thank you, sir.",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u1112-v1-vocab-whose",
+            "answer": "谁的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-blue",
+            "answer": "蓝色的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-perhaps",
+            "answer": "也许；不确定",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-white",
+            "answer": "white",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-catch",
+            "answer": "接住",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-tasks-v4-family",
+            "answer": {
+              "pairs": [
+                [
+                  "father",
+                  "父亲"
+                ],
+                [
+                  "mother",
+                  "母亲"
+                ],
+                [
+                  "sister",
+                  "姐姐；妹妹"
+                ],
+                [
+                  "brother",
+                  "哥哥；弟弟"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1112-v1-vocab-blouse",
+            "answer": "blouse",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-tie",
+            "answer": "tie",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-his",
+            "answer": "他的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-vocab-her",
+            "answer": "她的",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "owner",
+        "answers": [
+          {
+            "id": "u1112-v1-owner-her",
+            "answer": "her",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-owner-your",
+            "answer": "your",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-tasks-v4-owner-apostrophe",
+            "answer": "shirt's",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u1112-v1-exam-read",
+            "answer": "my brother · pen",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-exam-perhaps",
+            "answer": "请 Tim 确认",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-v1-exam-distractor",
+            "answer": "her",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-final-v2-ask-owner",
+            "answer": "Whose is this handbag?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-tasks-v4-exam-my-your",
+            "answer": {
+              "fills": [
+                "my",
+                "your"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1112-final-v2-family-owner",
+            "answer": "father's / his",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-final-v2-expand-is",
+            "answer": "Tim's shirt is white.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-final-v2-confirm-both",
+            "answer": "Dave: No, sir. / Tim: Yes, sir.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-final-v2-build-question",
+            "answer": [
+              "Whose",
+              "shirt",
+              "is",
+              "that?"
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1112-final-v2-return-thanks",
+            "answer": "老师：Here you are. / Tim：Thank you, sir.",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 30,
+    "totalAfter": 27,
+    "dialogue": [
+      "Whose shirt is that?",
+      "Is this your shirt, Dave?",
+      "No, sir.",
+      "It's not my shirt.",
+      "This is my shirt.",
+      "My shirt's blue.",
+      "Is this shirt Tim's?",
+      "Perhaps it is, sir.",
+      "Tim's shirt's white.",
+      "Tim!",
+      "Yes, sir?",
+      "Is this your shirt?",
+      "Yes, sir.",
+      "Here you are.",
+      "Catch!",
+      "Thank you, sir."
+    ],
+    "voice": false
+  },
+  "13-14": {
+    "old": {
+      "listen": [
+        {
+          "id": "u1314-v1-vocab-colour",
+          "answer": "颜色",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-green",
+          "answer": "green",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-come",
+          "answer": "来",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-upstairs",
+          "answer": "upstairs",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-smart",
+          "answer": "漂亮的；时髦的",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-hat",
+          "answer": "hat",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-same",
+          "answer": "相同的",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-lovely",
+          "answer": "可爱的；漂亮的",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-case",
+          "answer": "case",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-carpet",
+          "answer": "carpet",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-dog",
+          "answer": "dog",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-black",
+          "answer": "黑色的",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-grey",
+          "answer": "grey",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-brown",
+          "answer": "brown",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-red",
+          "answer": "红色的",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-yellow",
+          "answer": "yellow",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-vocab-orange",
+          "answer": "橙色的",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u1314-v1-story-hat",
+          "answer": "green",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-story-too",
+          "answer": "都是新的",
+          "audio": false
+        }
+      ],
+      "colours": [
+        {
+          "id": "u1314-v1-ask-colour",
+          "answer": "What colour's your hat?",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-read-two",
+          "answer": "一只棕白相间的狗",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u1314-v1-build-merge",
+          "answer": [
+            "This",
+            "is",
+            "Helen's",
+            "dog."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-build-question",
+          "answer": [
+            "What",
+            "colour's",
+            "Steven's",
+            "hat?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-build-description",
+          "answer": [
+            "Her",
+            "coat's",
+            "grey."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u1314-v1-exam-same",
+          "answer": "case · yellow / hat · yellow",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-exam-owner",
+          "answer": "Her carpet's red.",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-invite-upstairs",
+          "answer": "到楼上看连衣裙",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-new-too",
+          "answer": "都是新的",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-ask-direct",
+          "answer": [
+            "What",
+            "colour",
+            "is",
+            "your",
+            "dress?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-two-colours",
+          "answer": "His hat's grey and black.",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-expand-is",
+          "answer": "Steven's umbrella is black.",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-family-merge",
+          "answer": [
+            "This",
+            "is",
+            "my",
+            "father's",
+            "suit."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-ask-third",
+          "answer": "What colour's Sophie's coat?",
+          "audio": false
+        },
+        {
+          "id": "u1314-v1-praise-hat",
+          "answer": "That is a lovely hat!",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u1314-v1-vocab-colour",
+            "answer": "颜色",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-green",
+            "answer": "green",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-come",
+            "answer": "来",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-upstairs",
+            "answer": "upstairs",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-smart",
+            "answer": "漂亮的；时髦的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-hat",
+            "answer": "hat",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-same",
+            "answer": "相同的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-lovely",
+            "answer": "可爱的；漂亮的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-case",
+            "answer": "case",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-carpet",
+            "answer": "carpet",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-dog",
+            "answer": "dog",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-black",
+            "answer": "黑色的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-tasks-v4-colours",
+            "answer": {
+              "pairs": [
+                [
+                  "grey",
+                  "灰色的"
+                ],
+                [
+                  "brown",
+                  "棕色的"
+                ],
+                [
+                  "yellow",
+                  "黄色的"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1314-v1-vocab-red",
+            "answer": "红色的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-vocab-orange",
+            "answer": "橙色的",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u1314-tasks-v4-story-hat",
+            "answer": "green",
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1314-v1-story-too",
+            "answer": "都是新的",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u1314-v1-exam-same",
+            "answer": "case · yellow / hat · yellow",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-exam-owner",
+            "answer": "Her carpet's red.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-invite-upstairs",
+            "answer": "到楼上看连衣裙",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-tasks-v4-exam-too",
+            "answer": {
+              "fills": [
+                "too"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1314-v1-ask-direct",
+            "answer": [
+              "What",
+              "colour",
+              "is",
+              "your",
+              "dress?"
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-two-colours",
+            "answer": "His hat's grey and black.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-expand-is",
+            "answer": "Steven's umbrella is black.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-family-merge",
+            "answer": [
+              "This",
+              "is",
+              "my",
+              "father's",
+              "suit."
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-ask-third",
+            "answer": "What colour's Sophie's coat?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1314-v1-praise-hat",
+            "answer": "That is a lovely hat!",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 34,
+    "totalAfter": 32,
+    "dialogue": [
+      "What colour's your new dress?",
+      "It's green.",
+      "Come upstairs and see it.",
+      "Thank you.",
+      "Look!",
+      "Here it is!",
+      "That's a nice dress.",
+      "It's very smart.",
+      "My hat's new, too.",
+      "What colour is it?",
+      "It's the same colour.",
+      "It's green, too.",
+      "That is a lovely hat!"
+    ],
+    "voice": false
+  },
+  "15-16": {
+    "old": {
+      "listen": [
+        {
+          "id": "u1516-v1-vocab-customs",
+          "answer": "海关",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-officer",
+          "answer": "官员",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-girl",
+          "answer": "女孩；姑娘",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-Danish",
+          "answer": "丹麦的；丹麦人的",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-friend",
+          "answer": "friend",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-Norwegian",
+          "answer": "挪威的；挪威人的",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-passport",
+          "answer": "passport",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-tourist",
+          "answer": "旅游者",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-Russian",
+          "answer": "俄罗斯的；俄罗斯人的",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-Dutch",
+          "answer": "荷兰的；荷兰人的",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-vocab-these",
+          "answer": "这些",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u1516-v1-story-friends",
+          "answer": "Norwegian",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-story-they",
+          "answer": "护照",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-story-finish",
+          "answer": "That's fine.",
+          "audio": false
+        }
+      ],
+      "reply": [
+        {
+          "id": "u1516-v1-reply-we",
+          "answer": "Yes, we are.",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-reply-negative",
+          "answer": "No, they aren't.",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-reply-our",
+          "answer": "Our",
+          "audio": false
+        }
+      ],
+      "forms": [
+        {
+          "id": "u1516-v1-plural-friends",
+          "answer": "friends",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-plural-dresses",
+          "answer": "dresses",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-article-english",
+          "answer": "an",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u1516-v1-build-cases",
+          "answer": [
+            "Are",
+            "these",
+            "your",
+            "cases?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-build-colour",
+          "answer": [
+            "What",
+            "colour",
+            "are",
+            "your",
+            "passports?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-build-hats",
+          "answer": [
+            "Our",
+            "hats",
+            "are",
+            "black",
+            "and",
+            "grey."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u1516-v1-exam-card",
+          "answer": "朋友：Russian；身份：tourists",
+          "audio": false
+        },
+        {
+          "id": "u1516-v1-exam-passports",
+          "answer": "Yes, they are.",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-deny-we",
+          "answer": "No, we aren't.",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-deny-friends",
+          "answer": "aren't",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-these-plural",
+          "answer": "Are these",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-ask-colour",
+          "answer": [
+            "What",
+            "colour",
+            "are",
+            "your",
+            "cases?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-our-hats",
+          "answer": "Our hats are black and grey.",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-plural-labels",
+          "answer": "friends / dresses",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-articles",
+          "answer": "an / a",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-they-cases",
+          "answer": "棕色箱子",
+          "audio": false
+        },
+        {
+          "id": "u1516-final-v2-thanks",
+          "answer": "Thank you very much.",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u1516-v1-vocab-customs",
+            "answer": "海关",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-vocab-officer",
+            "answer": "官员",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-vocab-girl",
+            "answer": "女孩；姑娘",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-tasks-v4-nationalities",
+            "answer": {
+              "pairs": [
+                [
+                  "Danish",
+                  "丹麦（人）的"
+                ],
+                [
+                  "Norwegian",
+                  "挪威（人）的"
+                ],
+                [
+                  "Russian",
+                  "俄罗斯（人）的"
+                ],
+                [
+                  "Dutch",
+                  "荷兰（人）的"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1516-v1-vocab-friend",
+            "answer": "friend",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-vocab-passport",
+            "answer": "passport",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-vocab-tourist",
+            "answer": "旅游者",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-vocab-these",
+            "answer": "这些",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u1516-v1-story-friends",
+            "answer": "Norwegian",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-story-they",
+            "answer": "护照",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-tasks-v4-story-finish",
+            "answer": "That's fine.",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "reply",
+        "answers": [
+          {
+            "id": "u1516-tasks-v4-reply-we",
+            "answer": {
+              "fills": [
+                "Yes, we are."
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1516-v1-reply-negative",
+            "answer": "No, they aren't.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1516-v1-reply-our",
+            "answer": "Our",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 34,
+    "totalAfter": 31,
+    "dialogue": [
+      "Are you Swedish?",
+      "No, we are not.",
+      "We are Danish.",
+      "Are your friends Danish, too?",
+      "No, they aren't.",
+      "They are Norwegian.",
+      "Your passports, please.",
+      "Here they are.",
+      "Are these your cases?",
+      "No, they aren't.",
+      "Our cases are brown.",
+      "Here they are.",
+      "Are you tourists?",
+      "Yes, we are.",
+      "Are your friends tourists, too?",
+      "Yes, they are.",
+      "That's fine.",
+      "Thank you very much."
+    ],
+    "voice": false
+  },
+  "17-18": {
+    "old": {
+      "listen": [
+        {
+          "id": "u1718-v1-vocab-employee",
+          "answer": "雇员；员工",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-hard-working",
+          "answer": "勤奋的",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-sales rep",
+          "answer": "销售代表；推销员",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-man",
+          "answer": "成年男子；男人",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-office",
+          "answer": "办公室",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-assistant",
+          "answer": "assistant",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-those",
+          "answer": "那些",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-vocab-their",
+          "answer": "她们的",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u1718-v1-story-jobs",
+          "answer": "sales reps",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-story-their",
+          "answer": "Nicola Grey 和 Claire Taylor",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-story-busy",
+          "answer": "他们不很忙",
+          "audio": false
+        }
+      ],
+      "refer": [
+        {
+          "id": "u1718-v1-refer-who",
+          "answer": "Who is this young man?",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-refer-jim",
+          "answer": "He",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-refer-we",
+          "answer": "We",
+          "audio": false
+        }
+      ],
+      "forms": [
+        {
+          "id": "u1718-v1-plural-people",
+          "answer": "men / women",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-plural-police",
+          "answer": "policewomen",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-plural-housewives",
+          "answer": "housewives",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u1718-v1-build-jobs",
+          "answer": [
+            "What",
+            "are",
+            "their",
+            "jobs?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-build-choice",
+          "answer": [
+            "Are",
+            "they",
+            "engineers",
+            "or",
+            "taxi drivers?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-build-correct",
+          "answer": [
+            "They",
+            "aren't",
+            "nurses.",
+            "They're",
+            "housewives."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u1718-v1-exam-introduce",
+          "answer": "They are keyboard operators.",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-exam-record",
+          "answer": "women · nurses / men · engineers",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-greet",
+          "answer": "How do you do?",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-identity",
+          "answer": "Who is this young man?",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-pronouns",
+          "answer": "He · His",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-plural-people",
+          "answer": "a man · a woman",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-plural-job",
+          "answer": "policewomen · housewives",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-job-choice",
+          "answer": "They aren't mechanics. They're engineers.",
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-ask-jobs",
+          "answer": [
+            "Those",
+            "men",
+            "aren't",
+            "very",
+            "busy."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1718-v1-final-v2-evidence",
+          "answer": "他们很勤奋，是否忙碌还不知道。",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "forms",
+        "answers": [
+          {
+            "id": "u1718-tasks-v4-plural-labels",
+            "answer": {
+              "pairs": [
+                [
+                  "man",
+                  "men"
+                ],
+                [
+                  "woman",
+                  "women"
+                ],
+                [
+                  "policewoman",
+                  "policewomen"
+                ],
+                [
+                  "housewife",
+                  "housewives"
+                ]
+              ],
+              "leftLabel": "单数",
+              "rightLabel": "复数"
+            },
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u1718-v1-story-jobs",
+            "answer": "sales reps",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-story-their",
+            "answer": "Nicola Grey 和 Claire Taylor",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-tasks-v4-story-busy",
+            "answer": "aren't very busy",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u1718-v1-exam-introduce",
+            "answer": "They are keyboard operators.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-exam-record",
+            "answer": "women · nurses / men · engineers",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-greet",
+            "answer": "How do you do?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-identity",
+            "answer": "Who is this young man?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-pronouns",
+            "answer": "He · His",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-plural-people",
+            "answer": "a man · a woman",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-plural-job",
+            "answer": "policewomen · housewives",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-job-choice",
+            "answer": "They aren't mechanics. They're engineers.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-ask-jobs",
+            "answer": [
+              "Those",
+              "men",
+              "aren't",
+              "very",
+              "busy."
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-v1-final-v2-evidence",
+            "answer": "他们很勤奋，是否忙碌还不知道。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1718-tasks-v4-exam-names",
+            "answer": "Our names are Britt and Inge.",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      }
+    ],
+    "totalBefore": 30,
+    "totalAfter": 29,
+    "dialogue": [
+      "Come and meet our employees, Mr. Richards.",
+      "Thank you, Mr. Jackson.",
+      "This is Nicola Grey, and this is Claire Taylor.",
+      "How do you do?",
+      "Those women are very hard-working.",
+      "What are their jobs?",
+      "They're keyboard operators.",
+      "This is Michael Baker, and this is Jeremy Short.",
+      "How do you do?",
+      "They aren't very busy!",
+      "What are their jobs?",
+      "They're sales reps.",
+      "They're very lazy.",
+      "Who is this young man?",
+      "This is Jim.",
+      "He's our office assistant."
+    ],
+    "voice": false
+  },
+  "19-20": {
+    "old": {
+      "listen": [
+        {
+          "id": "u1920-v1-vocab-tired",
+          "answer": "累的；疲倦的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-thirsty",
+          "answer": "口渴的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-children",
+          "answer": "孩子们",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-boy",
+          "answer": "男孩",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-mum",
+          "answer": "妈妈",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-ice cream",
+          "answer": "ice cream",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-matter",
+          "answer": "怎么了？",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-sit down",
+          "answer": "坐下",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-right",
+          "answer": "你们现在好些了吗？",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-big / small",
+          "answer": "大的 / 小的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-open / shut",
+          "answer": "open / shut",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-light / heavy",
+          "answer": "轻的 / 重的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-long",
+          "answer": "long",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-shoe",
+          "answer": "鞋子",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-vocab-grandfather / grandmother",
+          "answer": "祖父或外祖父 / 祖母或外祖母",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u1920-v1-story-thanks",
+          "answer": "妈妈给了他们冰淇淋。",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-story-first",
+          "answer": "No, we aren't.",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-story-nice",
+          "answer": "好吃的",
+          "audio": false
+        }
+      ],
+      "observe": [
+        {
+          "id": "u1920-v1-old-context",
+          "answer": "旧的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-short-context",
+          "answer": "短的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-them-context",
+          "answer": "这些鞋子",
+          "audio": false
+        }
+      ],
+      "be": [
+        {
+          "id": "u1920-v1-be-subject",
+          "answer": "are / is",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-be-adjective",
+          "answer": "They're clean.",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u1920-v1-build-sit",
+          "answer": [
+            "Sit",
+            "down",
+            "here."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-build-care",
+          "answer": [
+            "Are",
+            "you",
+            "all right",
+            "now?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-build-clean",
+          "answer": [
+            "They're",
+            "not",
+            "dirty.",
+            "They're",
+            "clean."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u1920-v1-exam-children",
+          "answer": "累了；不渴",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-exam-shoes",
+          "answer": "大；不是新的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-care",
+          "answer": "Yes, we are, thank you!",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-be",
+          "answer": "am · are · is",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-adjectives",
+          "answer": "They're light.",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-old",
+          "answer": "旧的 · 年老的",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-short",
+          "answer": "tall · long",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-light",
+          "answer": "箱子小，但很重。",
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-or-question",
+          "answer": [
+            "Are",
+            "they",
+            "dirty",
+            "or",
+            "clean?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u1920-v1-final-v2-negative",
+          "answer": "孩子们不冷。",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "observe",
+        "answers": [
+          {
+            "id": "u1920-tasks-v4-context",
+            "answer": {
+              "pairs": [
+                [
+                  "old hats",
+                  "旧帽子"
+                ],
+                [
+                  "old men",
+                  "年老的男士"
+                ],
+                [
+                  "short trousers",
+                  "短的裤子"
+                ],
+                [
+                  "short men",
+                  "矮个男士"
+                ]
+              ],
+              "rightLabel": "这里的意思"
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1920-v1-them-context",
+            "answer": "这些鞋子",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "be",
+        "answers": [
+          {
+            "id": "u1920-tasks-v4-be-subject",
+            "answer": {
+              "fills": [
+                "are",
+                "is"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u1920-v1-be-adjective",
+            "answer": "They're clean.",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u1920-v1-exam-children",
+            "answer": "累了；不渴",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-exam-shoes",
+            "answer": "大；不是新的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-care",
+            "answer": "Yes, we are, thank you!",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-be",
+            "answer": "am · are · is",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-adjectives",
+            "answer": "They're light.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-old",
+            "answer": "旧的 · 年老的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-short",
+            "answer": "tall · long",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-light",
+            "answer": "箱子小，但很重。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-or-question",
+            "answer": [
+              "Are",
+              "they",
+              "dirty",
+              "or",
+              "clean?"
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-v1-final-v2-negative",
+            "answer": "孩子们不冷。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u1920-tasks-v4-exam-them",
+            "answer": "shoes",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      }
+    ],
+    "totalBefore": 36,
+    "totalAfter": 36,
+    "dialogue": [
+      "What's the matter, children?",
+      "We're tired ...",
+      "... and thirsty, Mum.",
+      "Sit down here.",
+      "Are you all right now?",
+      "No, we aren't.",
+      "Look! There's an ice cream man.",
+      "Two ice creams please.",
+      "Here you are, children.",
+      "Thanks, Mum.",
+      "These ice creams are nice.",
+      "Are you all right now?",
+      "Yes, we are, thank you!"
+    ],
+    "voice": false
+  },
+  "21-22": {
+    "old": {
+      "listen": [
+        {
+          "id": "u2122-v1-vocab-give",
+          "answer": "给；递给",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-one",
+          "answer": "这一本书",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-which",
+          "answer": "哪一本书？",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-empty / full",
+          "answer": "空的 / 满的",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-large / little",
+          "answer": "大的 / 小的",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-sharp / blunt",
+          "answer": "锋利的 / 钝的",
+          "audio": false
+        },
+        {
+          "id": "u2122-v3-containers",
+          "answer": {
+            "pairs": [
+              [
+                "box",
+                "盒子；箱子"
+              ],
+              [
+                "bottle",
+                "瓶子"
+              ],
+              [
+                "tin",
+                "罐头盒"
+              ]
+            ]
+          },
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-glass",
+          "answer": "glass",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-vocab-cup",
+          "answer": "杯子",
+          "audio": false
+        },
+        {
+          "id": "u2122-v3-utensils",
+          "answer": {
+            "pairs": [
+              [
+                "knife",
+                "刀子"
+              ],
+              [
+                "fork",
+                "叉子"
+              ],
+              [
+                "spoon",
+                "勺子"
+              ]
+            ]
+          },
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u2122-v3-story-book",
+          "answer": "The red one",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-story-twice",
+          "answer": "第一次没有选对，第二次选对了。",
+          "audio": false
+        }
+      ],
+      "observe": [
+        {
+          "id": "u2122-v1-receive-us",
+          "answer": "说话的人和他的同伴",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-receive-her",
+          "answer": "Give her a cup, please.",
+          "audio": false
+        },
+        {
+          "id": "u2122-v3-receive-them",
+          "answer": {
+            "object": "盒子",
+            "recipient": "简和男士"
+          },
+          "audio": false
+        }
+      ],
+      "be": [
+        {
+          "id": "u2122-v1-owner-our",
+          "answer": "Our",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-article-empty",
+          "answer": "an",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u2122-v1-build-give",
+          "answer": [
+            "Give",
+            "her",
+            "a",
+            "clean cup,",
+            "please."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-build-which",
+          "answer": [
+            "Which",
+            "one?",
+            "This",
+            "blue",
+            "one?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-build-correct",
+          "answer": [
+            "No,",
+            "not",
+            "this",
+            "empty",
+            "one.",
+            "That",
+            "full",
+            "one."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u2122-v3-delivery",
+          "answer": {
+            "object": "小瓶子",
+            "recipient": "简（Jane）"
+          },
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-exam-clarify",
+          "answer": "还要确认要空的还是满的。",
+          "audio": false
+        },
+        {
+          "id": "u2122-v3-one-reference",
+          "answer": "spoon",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-which",
+          "answer": "Which box?",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-him",
+          "answer": "him",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-her",
+          "answer": "接收者“她” · “她的”",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-owners",
+          "answer": "Their",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-article",
+          "answer": "an empty glass · a full glass",
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-give-us",
+          "answer": [
+            "Give",
+            "us",
+            "a",
+            "little box,",
+            "please."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2122-v1-final-v2-correction",
+          "answer": "No, not this large one. That small one.",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [],
+    "totalBefore": 30,
+    "totalAfter": 30,
+    "dialogue": [
+      "Give me a book please, Jane.",
+      "Which book?",
+      "This one?",
+      "No, not that one. The red one.",
+      "This one?",
+      "Yes, please.",
+      "Here you are.",
+      "Thank you."
+    ],
+    "voice": false
+  },
+  "23-24": {
+    "old": {
+      "listen": [
+        {
+          "id": "u2324-v1-vocab-on",
+          "answer": "在……上面",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-shelf",
+          "answer": "架子；搁板",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-desk",
+          "answer": "书桌；课桌",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-table",
+          "answer": "table",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-plate",
+          "answer": "plate",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-cupboard",
+          "answer": "橱柜",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-cigarette",
+          "answer": "香烟",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-television",
+          "answer": "television",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-floor",
+          "answer": "地板",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-dressing table",
+          "answer": "dressing table",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-magazine",
+          "answer": "杂志",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-bed",
+          "answer": "bed",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-newspaper",
+          "answer": "newspaper",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-stereo",
+          "answer": "立体声音响",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-vocab-some",
+          "answer": "一些玻璃杯，没说具体几只。",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u2324-v1-story-place",
+          "answer": "The ones on the shelf.",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-story-ones",
+          "answer": "前面说到的那些玻璃杯",
+          "audio": false
+        }
+      ],
+      "observe": [
+        {
+          "id": "u2324-v1-request-plural",
+          "answer": "Give me some books, please.",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-these-perspective",
+          "answer": "These?",
+          "audio": false
+        }
+      ],
+      "be": [
+        {
+          "id": "u2324-v1-on-contact",
+          "answer": "甲组",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-recipient-us",
+          "answer": "us",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u2324-v1-build-request",
+          "answer": [
+            "Give",
+            "us",
+            "some",
+            "boxes,",
+            "please."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-build-confirm",
+          "answer": [
+            "Which",
+            "ones?",
+            "These?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-build-location",
+          "answer": [
+            "No,",
+            "not",
+            "those.",
+            "The",
+            "ones",
+            "on",
+            "the",
+            "table."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u2324-v1-exam-request",
+          "answer": "把床上的几本杂志递给简。",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-exam-changed",
+          "answer": "桌子上的那些杯子",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-some",
+          "answer": "要多个玻璃杯，没说具体几只。",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-ones",
+          "answer": "newspapers",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-perspective",
+          "answer": "Those books?",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-on",
+          "answer": "甲组",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-recipient",
+          "answer": "her",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-our-us",
+          "answer": "our · us",
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-build",
+          "answer": [
+            "Give",
+            "him",
+            "some",
+            "plates,",
+            "please."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2324-v1-final-v2-location-clue",
+          "answer": "A",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u2324-v1-vocab-on",
+            "answer": "在……上面",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-shelf",
+            "answer": "架子；搁板",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-desk",
+            "answer": "书桌；课桌",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-table",
+            "answer": "table",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-tasks-v4-objects",
+            "answer": {
+              "pairs": [
+                [
+                  "plate",
+                  "盘子"
+                ],
+                [
+                  "magazine",
+                  "杂志"
+                ],
+                [
+                  "newspaper",
+                  "报纸"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2324-v1-vocab-cupboard",
+            "answer": "橱柜",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-cigarette",
+            "answer": "香烟",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-television",
+            "answer": "television",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-floor",
+            "answer": "地板",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-dressing table",
+            "answer": "dressing table",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-bed",
+            "answer": "bed",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-stereo",
+            "answer": "立体声音响",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-vocab-some",
+            "answer": "一些玻璃杯，没说具体几只。",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u2324-tasks-v4-story-place",
+            "answer": "on the shelf",
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2324-v1-story-ones",
+            "answer": "前面说到的那些玻璃杯",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u2324-v1-exam-request",
+            "answer": "把床上的几本杂志递给简。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-exam-changed",
+            "answer": "桌子上的那些杯子",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-final-v2-some",
+            "answer": "要多个玻璃杯，没说具体几只。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-final-v2-ones",
+            "answer": "newspapers",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-final-v2-perspective",
+            "answer": "Those books?",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-final-v2-on",
+            "answer": "甲组",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-v1-final-v2-recipient",
+            "answer": "her",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-tasks-v4-exam-our-us",
+            "answer": {
+              "fills": [
+                "our",
+                "us"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2324-v1-final-v2-build",
+            "answer": [
+              "Give",
+              "him",
+              "some",
+              "plates,",
+              "please."
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2324-tasks-v4-exam-which-number",
+            "answer": "Which ones?",
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      }
+    ],
+    "totalBefore": 34,
+    "totalAfter": 32,
+    "dialogue": [
+      "Give me some glasses please, Jane.",
+      "Which glasses?",
+      "These glasses?",
+      "No, not those. The ones on the shelf.",
+      "These?",
+      "Yes, please.",
+      "Here you are.",
+      "Thanks."
+    ],
+    "voice": false
+  },
+  "25-26": {
+    "old": {
+      "listen": [
+        {
+          "id": "u2526-v1-vocab-Mrs",
+          "answer": "太太",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-kitchen",
+          "answer": "厨房",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-refrigerator",
+          "answer": "refrigerator",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-right",
+          "answer": "右边",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-electric",
+          "answer": "用电的",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-left",
+          "answer": "左边",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-cooker",
+          "answer": "炉灶；炊具",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-middle",
+          "answer": "中间",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-of",
+          "answer": "……的",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-room",
+          "answer": "房间",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-where",
+          "answer": "它在哪里？",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-vocab-in",
+          "answer": "在……里面",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u2526-v1-story-colour",
+          "answer": "blue",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-story-it",
+          "answer": "refrigerator",
+          "audio": false
+        }
+      ],
+      "observe": [
+        {
+          "id": "u2526-v1-introduce",
+          "answer": "介绍厨房里有一台冰箱。",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-articles",
+          "answer": "an · The",
+          "audio": false
+        }
+      ],
+      "be": [
+        {
+          "id": "u2526-v1-location",
+          "answer": "It is in the cupboard.",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-refer-it",
+          "answer": "It",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u2526-v1-build-existence",
+          "answer": [
+            "There",
+            "is",
+            "a",
+            "cup",
+            "on",
+            "the",
+            "table."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-build-contraction",
+          "answer": [
+            "There's",
+            "a",
+            "bottle",
+            "in",
+            "the",
+            "refrigerator."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-build-where",
+          "answer": [
+            "Where",
+            "is",
+            "it?"
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u2526-v1-exam-picture",
+          "answer": "甲图",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-exam-boundary",
+          "answer": "桌上有杯子。",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-room",
+          "answer": "左边 · 右边 · 中间",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-states",
+          "answer": "bottle · cup",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-it",
+          "answer": "It",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-articles",
+          "answer": "an · The",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-where",
+          "answer": [
+            "Where",
+            "is",
+            "the",
+            "bottle?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-inside",
+          "answer": "There is a bottle in the refrigerator.",
+          "audio": false
+        },
+        {
+          "id": "u2526-v1-final-v2-contraction",
+          "answer": "There's a clean cup on the table.",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "listen",
+        "answers": [
+          {
+            "id": "u2526-v1-vocab-Mrs",
+            "answer": "太太",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-kitchen",
+            "answer": "厨房",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-refrigerator",
+            "answer": "refrigerator",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-tasks-v4-positions",
+            "answer": {
+              "pairs": [
+                [
+                  "on the left",
+                  "在左边"
+                ],
+                [
+                  "on the right",
+                  "在右边"
+                ],
+                [
+                  "in the middle",
+                  "在中间"
+                ]
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2526-v1-vocab-electric",
+            "answer": "用电的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-cooker",
+            "answer": "炉灶；炊具",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-of",
+            "answer": "……的",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-room",
+            "answer": "房间",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-where",
+            "answer": "它在哪里？",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-v1-vocab-in",
+            "answer": "在……里面",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "observe",
+        "answers": [
+          {
+            "id": "u2526-v1-introduce",
+            "answer": "介绍厨房里有一台冰箱。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2526-tasks-v4-introduce-articles",
+            "answer": {
+              "fills": [
+                "an",
+                "The"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u2526-tasks-v4-story-find",
+            "answer": {
+              "scene": "冰箱"
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2526-v1-story-it",
+            "answer": "refrigerator",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 30,
+    "totalAfter": 28,
+    "dialogue": [
+      "Mrs. Smith's kitchen is small.",
+      "There is a refrigerator in the kitchen.",
+      "The refrigerator is white.",
+      "It is on the right.",
+      "There is an electric cooker in the kitchen.",
+      "The cooker is blue.",
+      "It is on the left.",
+      "There is a table in the middle of the room.",
+      "There is a bottle on the table.",
+      "The bottle is empty.",
+      "There is a cup on the table, too.",
+      "The cup is clean."
+    ],
+    "voice": false
+  },
+  "27-28": {
+    "old": {
+      "listen": [
+        {
+          "id": "u2728-v1-vocab-living room",
+          "answer": "客厅",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-near",
+          "answer": "靠近",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-window",
+          "answer": "window",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-armchair",
+          "answer": "扶手椅",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-door",
+          "answer": "door",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-picture",
+          "answer": "图画",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-wall",
+          "answer": "墙",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-vocab-trousers",
+          "answer": "长裤",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u2728-v1-story-books",
+          "answer": "On the stereo.",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-story-near",
+          "answer": "the table",
+          "audio": false
+        }
+      ],
+      "observe": [
+        {
+          "id": "u2728-v1-plural-existence",
+          "answer": "are",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-irregular",
+          "answer": "knives · policemen",
+          "audio": false
+        }
+      ],
+      "be": [
+        {
+          "id": "u2728-v1-ask-existence",
+          "answer": "Are there any pictures in the room?",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-they-reference",
+          "answer": "tickets",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u2728-v1-build-existence",
+          "answer": [
+            "There",
+            "are",
+            "some",
+            "pictures",
+            "on",
+            "the",
+            "wall."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-build-question",
+          "answer": [
+            "Are",
+            "there",
+            "any",
+            "books",
+            "in",
+            "the",
+            "room?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-build-negative",
+          "answer": [
+            "No,",
+            "there",
+            "aren't",
+            "any",
+            "books",
+            "in",
+            "the",
+            "room."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u2728-v1-exam-picture",
+          "answer": "甲图",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-exam-boundary",
+          "answer": "桌上没有杯子。",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-room",
+          "answer": "television · table · stereo",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-plural",
+          "answer": "There are some knives near that tin.",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-any",
+          "answer": "any · any",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-they",
+          "answer": "knives · 桌上",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-where",
+          "answer": [
+            "Where",
+            "are",
+            "they?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-negative-reply",
+          "answer": "No, there aren't. There are some magazines.",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-some",
+          "answer": "没有说明确切数量。",
+          "audio": false
+        },
+        {
+          "id": "u2728-v1-final-v2-two-locations",
+          "answer": "A 靠近窗户；B 放在电视机上。",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "exam",
+        "answers": [
+          {
+            "id": "u2728-v1-exam-picture",
+            "answer": "甲图",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-exam-boundary",
+            "answer": "桌上没有杯子。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-final-v2-room",
+            "answer": "television · table · stereo",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-final-v2-plural",
+            "answer": "There are some knives near that tin.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-tasks-v4-exam-any",
+            "answer": {
+              "fills": [
+                "any",
+                "any"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2728-v1-final-v2-they",
+            "answer": "knives · 桌上",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-final-v2-where",
+            "answer": [
+              "Where",
+              "are",
+              "they?"
+            ],
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-final-v2-negative-reply",
+            "answer": "No, there aren't. There are some magazines.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-final-v2-some",
+            "answer": "没有说明确切数量。",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2728-v1-final-v2-two-locations",
+            "answer": "A 靠近窗户；B 放在电视机上。",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      },
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u2728-tasks-v4-story-find",
+            "answer": {
+              "scene": "音响上的书"
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2728-v1-story-near",
+            "answer": "the table",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 27,
+    "totalAfter": 27,
+    "dialogue": [
+      "Mrs. Smith's living room is large.",
+      "There is a television in the room.",
+      "The television is near the window.",
+      "There are some magazines on the television.",
+      "There is a table in the room.",
+      "There are some newspapers on the table.",
+      "There are some armchairs in the room.",
+      "The armchairs are near the table.",
+      "There is a stereo in the room.",
+      "The stereo is near the door.",
+      "There are some books on the stereo.",
+      "There are some pictures in the room.",
+      "The pictures are on the wall."
+    ],
+    "voice": false
+  },
+  "29-30": {
+    "old": {
+      "listen": [
+        {
+          "id": "u2930-v1-vocab-bedroom",
+          "answer": "卧室",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-untidy",
+          "answer": "不整齐的",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-clothes",
+          "answer": "clothes",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-wardrobe",
+          "answer": "衣柜",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-air",
+          "answer": "让房间通风",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-dust",
+          "answer": "掸去灰尘",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-sweep",
+          "answer": "sweep",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-empty",
+          "answer": "把杯子倒空",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-read",
+          "answer": "读这本书",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-vocab-sharpen",
+          "answer": "削尖这些铅笔",
+          "audio": false
+        }
+      ],
+      "roles": [
+        {
+          "id": "u2930-v1-story-floor",
+          "answer": "Sweep the floor.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-story-sequence",
+          "answer": "Dust the dressing table.",
+          "audio": false
+        }
+      ],
+      "observe": [
+        {
+          "id": "u2930-v1-must-purpose",
+          "answer": "我应该做什么？",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-base-verb",
+          "answer": "Open",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-bedroom-is",
+          "answer": "is",
+          "audio": false
+        }
+      ],
+      "be": [
+        {
+          "id": "u2930-v1-switch-on",
+          "answer": "Turn on the lamp.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-take-off",
+          "answer": "Take off your shirt.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-put-place",
+          "answer": "放进衣柜。",
+          "audio": false
+        }
+      ],
+      "trans": [
+        {
+          "id": "u2930-v1-build-task",
+          "answer": [
+            "What",
+            "must",
+            "I",
+            "do?"
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-build-bed",
+          "answer": [
+            "Then",
+            "make",
+            "the",
+            "bed."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-build-two-actions",
+          "answer": [
+            "Open",
+            "the",
+            "window",
+            "and",
+            "air",
+            "the",
+            "room."
+          ],
+          "audio": false
+        }
+      ],
+      "exam": [
+        {
+          "id": "u2930-v1-exam-picture",
+          "answer": "甲图",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-exam-repair",
+          "answer": "Clean it!",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-purpose",
+          "answer": "What must I do?",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-sequence",
+          "answer": "收衣服进衣柜 · 整理床铺",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-contraction",
+          "answer": "is · 琼斯太太的",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-window",
+          "answer": [
+            "Open",
+            "the",
+            "window",
+            "and",
+            "air",
+            "the",
+            "room."
+          ],
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-clothes",
+          "answer": "Put these clothes in the wardrobe.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-bed",
+          "answer": "Then make the bed.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-dust",
+          "answer": "Dust the dressing table.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-empty",
+          "answer": "Empty the cup.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-wear",
+          "answer": "Put on your shirt. → Take off your shirt.",
+          "audio": false
+        },
+        {
+          "id": "u2930-v1-final-v2-read-sharpen",
+          "answer": "Read this magazine. / Sharpen these pencils.",
+          "audio": false
+        }
+      ]
+    },
+    "changes": [
+      {
+        "group": "roles",
+        "answers": [
+          {
+            "id": "u2930-tasks-v4-story-floor",
+            "answer": "Then sweep the floor.",
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2930-tasks-v4-story-sequence",
+            "answer": [
+              "Then make the bed.",
+              "Dust the dressing table.",
+              "Then sweep the floor."
+            ],
+            "audio": false,
+            "fresh": true
+          }
+        ]
+      },
+      {
+        "group": "be",
+        "answers": [
+          {
+            "id": "u2930-tasks-v4-switch-on",
+            "answer": {
+              "fills": [
+                "Turn on"
+              ]
+            },
+            "audio": false,
+            "fresh": true
+          },
+          {
+            "id": "u2930-v1-take-off",
+            "answer": "Take off your shirt.",
+            "audio": false,
+            "fresh": false
+          },
+          {
+            "id": "u2930-v1-put-place",
+            "answer": "放进衣柜。",
+            "audio": false,
+            "fresh": false
+          }
+        ]
+      }
+    ],
+    "totalBefore": 33,
+    "totalAfter": 33,
+    "dialogue": [
+      "Come in, Amy.",
+      "Shut the door, please.",
+      "This bedroom's very untidy.",
+      "What must I do, Mrs. Jones?",
+      "Open the window and air the room.",
+      "Then put these clothes in the wardrobe.",
+      "Then make the bed.",
+      "Dust the dressing table.",
+      "Then sweep the floor."
+    ],
+    "voice": false
+  }
+}

@@ -29,7 +29,7 @@ test('完整保留十幅配色图、A五组合句与B十二组问答，静态阅
   expect(audio).toEqual([]);
 });
 
-test('配套练习无需任何配音，34题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
+test('配套练习无需任何配音，32题与完整原文通关，领取并导出准确的课堂证书', async ({ page }) => {
   test.setTimeout(45000);
   const audio=[],errors=[];
   await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{audio.push(route.request().url());return route.abort();});
@@ -84,13 +84,13 @@ test('从首页进入新衣配色屋，21张音标词卡可翻义翻页，全程
   expect(audio).toEqual([]); expect(errors).toEqual([]);
 });
 
-test('17个新词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星', async ({ page }) => {
+test('17个新词由15个评分任务覆盖，错答可改，最后三题刷新不代答，重练清本轮并保留星星', async ({ page }) => {
   await page.route(/\.(mp3|wav|ogg)(\?|$)/, route=>route.abort());
   await page.goto('/unit13-14/#learn/listen'); const room=page.locator('.stage-listen');
   await expect(room.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
   for(const [i,answer] of ANSWERS.listen.entries()) {
-    await expect(room).toContainText('第 '+(i+1)+' / 17 题');
-    if(i>=14) await page.reload();
+    await expect(room).toContainText('第 '+(i+1)+' / 15 题');
+    if(i>=12) await page.reload();
     const check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
     await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
@@ -100,10 +100,10 @@ test('17个新词各一次，错答可改，最后三题刷新不代答，重练
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await room.getByRole('button',{name:'再试一次',exact:true}).click();
     }
-    await room.getByRole('button',{name:answer,exact:true}).click(); await check.click();
+    await require('../support/units1-30-tasks').select(room,answer); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===16?'完成这一站':'下一题',exact:true}).click();
+    await room.getByRole('button',{name:i===14?'完成这一站':'下一题',exact:true}).click();
   }
   await expect(page.locator('#starCount')).toHaveText('3');
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);

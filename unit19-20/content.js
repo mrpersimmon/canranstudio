@@ -100,6 +100,19 @@
    ],'大；不是新的','两句话只说明鞋子大、不是新的。','分别核对大小和新旧，不添加没有说过的特点。','Lesson20结构；新资料','同一物品多属性，限制无根据推断')
   ]
  };
+ const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-care","关心状态与恰当回答","现在两位孩子都觉得好了。\n妈妈问：Are you all right now?\n他们一起回答：",[["Yes, we are, thank you!", ""], ["No, we aren't.", "与现在已经好些了不符。"], ["Yes, they are.", "两位孩子回答自己的状态应说 we。"]],"Yes, we are, thank you!","本题核对：关心状态与恰当回答。","注意当前状态，也注意是谁在回答。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查关心状态与恰当回答",{}),
+  q("final-v2-be","am/is/are随主语","Tim 说：I ___ tired.\n妈妈说：The children ___ thirsty.\nTheir mother ___ tired, too.",[["am · are · is", ""], ["is · are · are", "I 用 am；mother 是单数。"], ["am · is · are", "children 复数、mother 单数，不能跟 their 猜。"]],"am · are · is","本题核对：am/is/are随主语。","逐句找到主语中心，不把 their 当成主语。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查am/is/are随主语",{}),
+  q("final-v2-adjectives","复数主语后形容词不变","这些箱子很轻。哪句话写对了？",[["They're light.", ""], ["They're lights.", "形容重量的 light 不随复数加 s。"], ["It's light.", "这里说的是多个箱子。"]],"They're light.","本题核对：复数主语后形容词不变。","数量决定代词，但表示状态的形容词是否要变？","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查复数主语后形容词不变",{}),
+  q("final-v2-old","同一词在人与物语境中的含义","Their hats are old.\nTheir grandfather is old.\n两处 old 依次表示什么？",[["旧的 · 年老的", ""], ["年老的 · 旧的", "物品新旧和人的年龄反了。"], ["新的 · 年轻的", "与两处 old 都相反。"]],"旧的 · 年老的","本题核对：同一词在人与物语境中的含义。","每一句的对象是人，还是物品？","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查同一词在人与物语境中的含义",{}),
+  q("final-v2-short","身高与长度","给两张图配文字：\n高个警察们；长裤子。\n分别用哪组形容词？",[["tall · long", ""], ["long · tall", "人的身高与裤子长度搭配反了。"], ["big · heavy", "大小重量没有说明这两个特点。"]],"tall · long","本题核对：身高与长度。","分清竖直身高和物品长度。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查身高与长度",{}),
+  q("final-v2-light","重量和大小是不同信息","These cases are small, but they are heavy.\n哪张记录正确？",[["箱子小，但很重。", ""], ["箱子小，所以很轻。", "小不等于轻，英文明确说 heavy。"], ["箱子大，但很重。", "第一项 small 被读错了。"]],"箱子小，但很重。","本题核对：重量和大小是不同信息。","大小和重量分开核对。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查重量和大小是不同信息",{}),
+  q("final-v2-or-question","独立组织状态选择问句","问这些鞋子：“它们是脏的还是干净的？”",undefined,"Are they dirty or clean?","本题核对：独立组织状态选择问句。","先提问，再用连接词连接两种状态。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查独立组织状态选择问句",{"type": "order", "tokens": ["Are", "they", "dirty", "or", "clean?"]}),
+  q("final-v2-negative","不把否定推成相反状态","The children aren’t cold.\n仅凭这句话，能确定什么？",[["孩子们不冷。", ""], ["孩子们很热。", "不冷不一定就是很热。"], ["孩子们不渴。", "没有说口渴的情况。"]],"孩子们不冷。","本题核对：不把否定推成相反状态。","没有出现的状态不要自行补上。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查不把否定推成相反状态",{}),
+ );
  const stages=[
   {id:'l1',title:'公园歇一歇',activities:[['words','公园小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
   {id:'l2',title:'跟着故事走',activities:[['text','公园小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
@@ -107,8 +120,138 @@
   {id:'l4',title:'把状态说清楚',activities:[['models','对比小画册','cards'],['be','句子小帮手','cards'],['trans','词块拼装台','order']],required:['be','trans']},
   {id:'l5',title:'再出发',activities:[['exam','公园小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
  ];
- const definition={id:'unit19-20',version:1,title:'冰淇淋休息站',path:'/unit19-20/',start:'learn/words',progress:{learningKey:'canran:unit19-20:learning:v1'},objects:WORDS,stages,questions,
+ const definition={id:'unit19-20',version:1,title:'冰淇淋休息站',path:'/unit19-20/',start:'learn/words',progress:{learningKey:'canran:unit19-20:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
   learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
  root.CanranCore.unit1920=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit1920;
+ const revised={"observe":[{
+  "id": "u1920-tasks-v4-context",
+  "target": "按所描述对象解释 old 和 short",
+  "prompt": "把每个短语和这里的意思配好。",
+  "decision": "与先前词表不同：要结合名词判断词义，最终仍保留范围判断。",
+  "hint": "",
+  "source": "Lesson 20 old/short 与 hats、men、trousers 的替换练习",
+  "type": "match",
+  "pairs": [
+    {
+      "id": "1",
+      "en": "old hats",
+      "cn": "旧帽子"
+    },
+    {
+      "id": "2",
+      "en": "old men",
+      "cn": "年老的男士"
+    },
+    {
+      "id": "3",
+      "en": "short trousers",
+      "cn": "短的裤子"
+    },
+    {
+      "id": "4",
+      "en": "short men",
+      "cn": "矮个男士"
+    }
+  ],
+  "answer": "[\"1\",\"2\",\"3\",\"4\"]",
+  "rightLabel": "这里的意思",
+  "instruction": "点英文短语，再点它在这里的意思。",
+  "distractorRationale": "old 描述物品可为旧，描述人可为年老；short 描述裤子为短、描述人为矮。不把 short trousers 偷换成新名词 shorts。"
+},
+unit.questions["observe"][2]],
+"be":[{
+  "id": "u1920-tasks-v4-be-subject",
+  "target": "复数 children 与单数 mother 的 be 形式",
+  "prompt": "把孩子们和妈妈的情况补完整。",
+  "decision": "同一情境内的单复数对比，两个空各自作答。",
+  "hint": "第一句的主语是孩子们，第二句的主语是一个人。",
+  "source": "Lesson 19 tired 与复数 children；复用已学 mother 构造单复数对比",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "Those children ",
+      "after": " tired.",
+      "options": [
+        "are",
+        "is",
+        "am"
+      ]
+    },
+    {
+      "before": "Their mother ",
+      "after": " tired, too.",
+      "options": [
+        "is",
+        "are",
+        "am"
+      ]
+    }
+  ],
+  "answer": "[\"are\",\"is\"]",
+  "distractorReasons": {
+    "are": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "is": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "am": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "children 配 are；mother 配 is；am 只与 I 搭配。their 不会让后面的单数 mother 变成复数。"
+},
+unit.questions["be"][1]],
+"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+unit.questions["exam"][4],
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9],
+{
+  "id": "u1920-tasks-v4-exam-them",
+  "target": "跨句理解 them 的回指",
+  "prompt": "them 指哪一类物品？点出前面对应的词。",
+  "decision": "补齐最终挑战此前只展示而未检验的宾格指代；物品语境不靠默认孩子头像。",
+  "hint": "先往前找说到的东西，再读完整三句。",
+  "source": "Lesson 19 Look at them 与 Lesson 20 shoes/clean 构造回指情境",
+  "type": "locate",
+  "fragments": [
+    "Look at these ",
+    {
+      "value": "shoes"
+    },
+    ".\nLook at ",
+    {
+      "value": "them"
+    },
+    "!\nThey are ",
+    {
+      "value": "clean"
+    },
+    "."
+  ],
+  "options": [
+    "shoes",
+    "them",
+    "clean"
+  ],
+  "answer": "shoes",
+  "distractorReasons": {
+    "them": "这个片段不表达题目要求的信息；需结合完整句子判断。",
+    "clean": "这个片段不表达题目要求的信息；需结合完整句子判断。"
+  },
+  "distractorRationale": "shoes 是明确先行词；them 是待解释的指代词本身；clean 是性质。问物品对应词，不让孩子把词当作人名。"
+}]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit1920-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit1920-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);

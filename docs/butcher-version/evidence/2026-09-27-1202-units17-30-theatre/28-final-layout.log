@@ -1,0 +1,36 @@
+
+Running 28 tests using 1 worker
+
+(node:1000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 320
+[2/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 390
+[3/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 768
+[4/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 1280
+[5/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 320
+[6/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 390
+[7/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 768
+[8/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 1280
+[9/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 320
+[10/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 390
+[11/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 768
+[12/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 1280
+[13/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 320
+[14/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 390
+[15/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 768
+[16/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 1280
+[17/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 320
+[18/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 390
+[19/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 768
+[20/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 1280
+[21/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 320
+[22/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 390
+[23/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 768
+[24/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 1280
+[25/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 320
+[26/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 390
+[27/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 768
+[28/28] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 1280
+  28 passed (35.4s)

@@ -22,7 +22,7 @@ test('13–14 两题旧挑战完成后保留有效题，新增题亲自补完才
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   const date = await page.locator('#certificateDate').innerText(); await page.keyboard.press('Escape');
   upgrade(); await page.reload();
-  await expect(page.locator('#starCount')).toHaveText('12');
+  await expect(page.locator('#starCount')).toHaveText('7');for(const id of ['listen','roles'])await require('../support/units1-30-tasks').activity(page,'13-14',id);await page.goto('/unit13-14/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('12');
   await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('配色小达人');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
   await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4'); await expect(page.locator('.stage-text .btext')).toHaveCount(13);

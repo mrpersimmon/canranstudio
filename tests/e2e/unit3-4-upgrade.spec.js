@@ -40,7 +40,7 @@ test('真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧
   await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('小伞');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
   await expect(page.locator('#starCount')).toHaveText('1');
-  for (const [id, completed, question] of [['listen',0,'哪一个词对应图中的物品？'],['roles',2,'客人的寄存牌是几号？'],['reply',3,'同学对你说'],['exam',2,'这位是你的老师吗']]) {
+  for (const [id, completed, question] of [['listen',0,'哪一个词对应图中的物品？'],['roles',2,'点出寄存牌的号码。'],['reply',0,'书的主人没变'],['exam',2,'这位是你的老师吗']]) {
     await page.goto('/unit3-4/#learn/' + id); const room = page.locator('.stage-' + id);
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(completed));
     await expect(room).toContainText(question);
@@ -58,6 +58,6 @@ test('旧重练的空白状态优先于历史成绩，不复活旧回合答案',
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   upgrade(); await page.reload();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
-  await expect(room.getByRole('button', { name: 'your', exact: true })).toHaveAttribute('aria-pressed','false');
+  await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });

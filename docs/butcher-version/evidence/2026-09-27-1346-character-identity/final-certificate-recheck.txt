@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:6458) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e/unit21-22.spec.js:18:1 › 所有声音不可用仍完成34题与8段原文，领取并导出课堂证书 (6.5s)
+  ✓  2 tests/e2e/unit23-24.spec.js:13:1 › 全部声音失败仍完成34题和完整原文，15星后保存真实证书，刷新保留日期 (5.3s)
+
+  2 passed (12.6s)

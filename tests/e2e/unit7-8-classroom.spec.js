@@ -61,7 +61,7 @@ test('单词寻宝以13个新词的词义和图片作答，不需播放且末题
   const requests = await blockVoices(page);
   await page.goto('/unit7-8/#learn/listen');
   const room = page.locator('.stage-listen');
-  const answers = ['意大利（人）的', 'keyboard operator', '工程师', 'policeman', 'policewoman', 'taxi driver', '女空乘', 'postman', 'nurse', '机械师；修理机器的人', 'hairdresser', '家庭主妇', 'milkman'];
+  const answers = require('../support/units1-30-tasks').answers('7-8', 'listen').map(question => question.answer);
   for (let i = 0; i < answers.length; i++) {
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(check).toBeDisabled();
@@ -76,15 +76,15 @@ test('单词寻宝以13个新词的词义和图片作答，不需播放且末题
       await expect(room.locator('.practice-options img')).toHaveCount(0);
       await expect(room.locator('.practice-content h3')).not.toContainText('keyboard operator');
     }
-    if (i >= 11) {
+    if (i >= answers.length - 3) {
       await page.reload();
       await expect(check).toBeDisabled();
-      await expect(room.getByRole('button', { name: answers[i], exact: true })).toHaveAttribute('aria-pressed', 'false');
+      await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
     }
-    await room.getByRole('button', { name: answers[i], exact: true }).click();
+    await require('../support/units1-30-tasks').select(room, answers[i]);
     await expect(check).toBeEnabled(); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
-    await room.getByRole('button', { name: i === 12 ? '完成这一站' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === answers.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
   }
   await expect(room.getByRole('heading', { name: '单词寻宝', exact: true })).toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('3');
@@ -204,7 +204,9 @@ test('旧配音中断的位置可续读，未改练习与选择保留，旧听�
   await page.goto('/unit7-8/#learn/reply');
   await expect(page.locator('.stage-reply')).toContainText('第 2 / 3 题');
   await page.goto('/unit7-8/#learn/be');
-  await expect(page.locator('.stage-reply').getByRole('button', { name: 'is / am', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  // The former combined option is a different task; both new blanks stay empty.
+  for (const name of ['第1处填空', '第2处填空']) await expect(page.locator('.stage-reply').getByRole('group', { name, exact: true }).getByRole('button', { pressed: true })).toHaveCount(0);
+  await expect(page.locator('.stage-reply').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await page.goto('/unit7-8/#learn/listen');
   await expect(vocab.getByRole('heading', { name: '单词寻宝', exact: true })).toBeVisible();
   await expect(vocab.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
@@ -227,14 +229,14 @@ test('旧15星不填满新词汇和阅读挑战，其他活动保留，重做后
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('原来的小记者');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click(); await page.keyboard.press('Escape');
   upgrade(); await page.reload();
-  await expect(page.locator('#starCount')).toHaveText('6');
+  await expect(page.locator('#starCount')).toHaveText('3');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
   await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('原来的小记者');
   await page.goto('/unit7-8/#learn/text'); await expect(story.getByText('故事看完了！', { exact: true })).toBeVisible();
   await page.goto('/unit7-8/#learn/exam');
   await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(page.locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-  await completeActivity(page, 'listen'); await completeActivity(page, 'exam');
+  await completeActivity(page, 'listen'); await require('../support/units1-30-tasks').activity(page, '7-8', 'reply'); await completeActivity(page, 'exam');
   await finishChangedInterview(page);
   await page.goto('/unit7-8/#learn/certificate'); await expect(page.locator('#starCount')).toHaveText('15');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
@@ -262,8 +264,9 @@ test('27题旧课堂记录升级重答新her题和七道新增挑战，保留合
  }
  const legacy=require('../fixtures/unit7-8-classroom-before/flow');await legacy.completeUnit78(page);
  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('升级核验');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await page.keyboard.press('Escape');
- old=false;await page.reload();await expect(page.locator('#starCount')).toHaveText('9');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级核验');
- await finishChangedInterview(page);await page.goto('/unit7-8/#learn/exam');await expect(page.locator('.stage-exam')).toContainText('第 4 / 10 题');await require('../support/unit7-8-exam').finishExamFrom(page,3);await page.goto('/unit7-8/#learn/interview');await page.reload();await expect(page.locator('#starCount')).toHaveText('15');
+ old=false;await page.reload();await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级核验');
+ for(const id of ['listen','reply'])await require('../support/units1-30-tasks').activity(page,'7-8',id);
+ await finishChangedInterview(page);await page.goto('/unit7-8/#learn/exam');await expect(page.locator('.stage-exam')).toContainText('第 4 / 11 题');await require('../support/unit7-8-exam').finishExamFrom(page,3);await page.goto('/unit7-8/#learn/interview');await page.reload();await expect(page.locator('#starCount')).toHaveText('15');
  const room=page.locator('.stage-interview');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
 

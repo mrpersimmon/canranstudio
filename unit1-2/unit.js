@@ -121,8 +121,9 @@
       if (id === 'manners') settings.completionDetails = settings.sceneView.completion();
     }
     const predecessors = unit.activityPredecessors[id];
-    practice.mount({ element, questions: questions[id], playAudio: speak, sessionId: predecessors ? 'v2' : 'v' + unit.version,
-      previousGroups: predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
+    practice.mount({ element, questions: questions[id], playAudio: speak, sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+      inputViews:core.lesson49TaskInputs,
+      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
       onComplete: states => {
         complete(id);
         if (settings.sceneView) element.querySelector('.practice-finish > p').textContent = id === 'manners' ? '手提包送回去了！' : '找到啦！';

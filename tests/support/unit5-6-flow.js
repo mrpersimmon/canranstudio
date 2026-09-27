@@ -1,17 +1,11 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
 // Independent expectations: textbook paper pages 10–13 and the unit manuscript.
 const DIALOGUE = ['Good morning.','Good morning, Mr. Blake.','This is Miss Sophie Dupont.','Sophie is a new student.','She is French.','Sophie, this is Hans.','He is German.','Nice to meet you.','And this is Naoko.',"She's Japanese.",'Nice to meet you.','And this is Chang-woo.',"He's South Korean.",'Nice to meet you.','And this is Luming.',"He's Chinese.",'Nice to meet you.','And this is Xiaohui.',"She's Chinese, too.",'Nice to meet you.'];
 const PEOPLE = ['Students','Students','Students','Students','Students','Hans','Hans','Hans','Naoko','Naoko','Naoko','Chang-woo','Chang-woo','Chang-woo','Luming','Luming','Luming','Xiaohui','Xiaohui','Xiaohui'];
-const ANSWERS = {
-  listen:['法国（人）的','German','日本（人）的','South Korean','中国（人）的','Swedish','英格兰的','American'],
-  roles:['Sophie','不是，他是韩国人','Luming'],
-  refer:['She','He','It'], articles:['a','an','不填'],
-  choice:["It's a Volvo."],
-  trans:[['Is','she','a Japanese student','or','a German student?'],['It',"isn't",'an American car.',"It's",'an English car.']],
-  exam:EXAMS['5-6'].map(question => question.answer)
-};
+const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['5-6'].old).map(id=>[id,taskCases.answers('5-6',id).map(q=>q.answer)]));
 async function completeStory(page, base = '') {
   await page.goto(base + '/unit5-6/#learn/text'); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++){
@@ -28,7 +22,8 @@ async function completeActivity(page,id,{recovery=false,base=''}={}){
   for(let i=0;i<answers.length;i++){
     const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
-    if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}
+    if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+    else if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}
     else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
     await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));

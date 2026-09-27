@@ -107,7 +107,7 @@
     solved.forEach(()=>{const step=document.createElement('span');step.className='practice-step';step.setAttribute('aria-hidden','true');meter.append(step);});
     label.append(copy,meter);updateProgress(label,solved,currentIndex);return label;
   }
-  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice' }) {
+  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null }) {
     const key = sessionId ? element.id+'/'+sessionId : element.id;
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
     let group = notebook.groups[key];
@@ -221,7 +221,9 @@
     function usableState(state,q){
       if(!isRecord(state)||state.runId!==group.runId||state.questionId!==q.id||
         !Number.isInteger(state.attempts)||state.attempts<0||typeof state.checked!=='boolean')return false;
-      if(q.type==='order'){
+      if(inputViews?.supports(q)){
+        if(!inputViews.valid(q,state))return false;
+      }else if(q.type==='order'){
         const tokens=state.tokens||[];
         if(!Array.isArray(tokens)||new Set(tokens).size!==tokens.length||
           !tokens.every(i=>Number.isInteger(i)&&i>=0&&i<q.tokens.length)||
@@ -280,6 +282,8 @@
         onComplete(group.states); return;
       }
       const q = questions[group.index];
+      const input = inputViews?.supports(q) ? inputViews : null;
+      let inputController;
       element.dataset.kind = q.type === 'order' ? 'order' : q.delivery ? 'delivery' : q.audioText ? 'listening' : q.presentation || presentation;
       const images = q.optionImages || optionImages || (q.audioText ? wordImages : null);
       const hintsEnabled = allowHints && !q.audioText && typeof q.hint === 'string' && q.hint.trim().length > 0;
@@ -344,7 +348,7 @@
       const modelCopy=document.createElement('p');modelCopy.textContent=q.model||'';modelCopy.hidden=!state.revealed;
       const model=button('看原句',()=>{state.revealed=true;state.hintUsed=true;modelCopy.hidden=false;save();},'btn btn-mini btn-yellow');model.hidden=!q.model;
       const check = button('检查答案', submit);
-      const retry = button('再试一次', () => { state.selection = null; state.tokens = []; state.checked = false; save(); render(); });
+      const retry = button('再试一次', () => { if(!input){state.selection = null; state.tokens = [];} state.checked = false; save(); render(); });
       const questionIndex = group.index;
       const next = button(group.index===questions.length-1?finalLabel:'下一题', () => {
         if(group.index!==questionIndex||!passed(state,q))return;
@@ -382,7 +386,7 @@
         answerLine.querySelectorAll('button').forEach(b=>{b.disabled=state.checked;});
         check.disabled = !canCheck();
       }
-      const values = q.type === 'order' ? q.tokens.map((_,i)=>i) : q.options.slice();
+      const values = input ? [] : q.type === 'order' ? q.tokens.map((_,i)=>i) : q.options.slice();
       const stableOrder=q.type==='order'&&Array.isArray(state.tokenOrder)&&state.tokenOrder.length===values.length&&
         new Set(state.tokenOrder).size===values.length&&state.tokenOrder.every(i=>Number.isInteger(i)&&i>=0&&i<values.length);
       if(stableOrder)values.splice(0,values.length,...state.tokenOrder);
@@ -390,7 +394,9 @@
         for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]];}
         if(q.type==='order'){state.tokenOrder=values.slice();save();}
       }
-      if(q.type === 'order') {
+      if(input){
+        inputController=input.mount({element:options,question:q,state,changed:()=>{check.disabled=!canCheck();save();}});
+      } else if(q.type === 'order') {
         state.tokens = state.tokens || [];
         values.forEach(tokenIndex=>bank.append(wordToken(tokenIndex)));
         options.append(answerLine,bank);updateTokens();
@@ -434,6 +440,7 @@
         morphScene.append(before,arrow,after);morphScene.classList.remove('show');void morphScene.offsetWidth;morphScene.classList.add('show');
       },'btn btn-yellow');
       function showFeedback() {
+        inputController?.update();
         updateProgress(progress, solvedQuestions(), passed(state,q) ? -1 : group.index);
         sceneView?.answer(state.checked && state.correct ? state.selection : null);
         if(q.delivery){

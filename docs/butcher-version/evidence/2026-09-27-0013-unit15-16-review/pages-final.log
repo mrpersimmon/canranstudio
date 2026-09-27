@@ -1,0 +1,48 @@
+
+Running 40 tests using 1 worker
+
+(node:80071) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/40] tests/e2e/unit15-16-exam.spec.js:6:1 › 15–16 十一题综合覆盖，声音不可用、重试与提示不代答，末三题刷新仍需本人完成
+[2/40] tests/e2e/unit15-16-exam.spec.js:17:39 › 320 挑战十一题选项与五词块完整，灯泡及结果不移动操作
+[3/40] tests/e2e/unit15-16-exam.spec.js:17:39 › 390 挑战十一题选项与五词块完整，灯泡及结果不移动操作
+[4/40] tests/e2e/unit15-16-exam.spec.js:17:39 › 768 挑战十一题选项与五词块完整，灯泡及结果不移动操作
+[5/40] tests/e2e/unit15-16-exam.spec.js:17:39 › 1280 挑战十一题选项与五词块完整，灯泡及结果不移动操作
+[6/40] tests/e2e/unit15-16-layout.spec.js:6:39 › 320 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[7/40] tests/e2e/unit15-16-layout.spec.js:6:39 › 390 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[8/40] tests/e2e/unit15-16-layout.spec.js:6:39 › 768 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[9/40] tests/e2e/unit15-16-layout.spec.js:6:39 › 1280 各站完整、无横向溢出，帮助返回焦点，所有资源加载
+[10/40] tests/e2e/unit15-16-layout.spec.js:20:1 › 320 窄屏25张词卡展开后字义和音标不裁切，图册双色物品完整可辨
+[11/40] tests/e2e/unit15-16-layout.spec.js:34:31 › 320 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[12/40] tests/e2e/unit15-16-layout.spec.js:34:31 › 1280 灯泡位于检查左边，反馈不推移操作，结束按钮为居中的主次双按钮
+[13/40] tests/e2e/unit15-16-layout.spec.js:52:1 › 390短屏阅读内部滚动，下一句与重新上演同行，展开中文不移动推进按钮
+[14/40] tests/e2e/unit15-16-layout.spec.js:66:1 › 词块可撤回、键盘操作、刷新续填；错序不能过关，新题不继承答案
+[15/40] tests/e2e/unit15-16-scene.spec.js:4:1 › 15–16 护照先递交，箱子先否认再指出另一对，刷新与重演不串场
+[16/40] tests/e2e/unit15-16-scene.spec.js:19:1 › 15–16 画册每次一幅，共十五幅，翻页与刷新保留位置
+[17/40] tests/e2e/unit15-16-scene.spec.js:26:39 › 320 对白与所有角色分区，长句中文完整，箱子和操作不被遮挡
+[18/40] tests/e2e/unit15-16-scene.spec.js:26:39 › 390 对白与所有角色分区，长句中文完整，箱子和操作不被遮挡
+[19/40] tests/e2e/unit15-16-scene.spec.js:26:39 › 768 对白与所有角色分区，长句中文完整，箱子和操作不被遮挡
+[20/40] tests/e2e/unit15-16-scene.spec.js:26:39 › 1280 对白与所有角色分区，长句中文完整，箱子和操作不被遮挡
+[21/40] tests/e2e/unit15-16-scene.spec.js:41:1 › 720高桌面屏里当前对白、人物与下一句同时可见
+[22/40] tests/e2e/unit15-16-scene.spec.js:48:1 › 护照题选择、线索和错答不递交，检查正确才出现结果
+[23/40] tests/e2e/unit15-16-state.spec.js:9:1 › 挑战错答与提示分别记账，暂停刷新保留选择，不提前发证
+[24/40] tests/e2e/unit15-16-state.spec.js:22:1 › 正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生
+[25/40] tests/e2e/unit15-16-state.spec.js:44:1 › lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用
+[26/40] tests/e2e/unit15-16-state.spec.js:57:1 › 首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离
+[27/40] tests/e2e/unit15-16-state.spec.js:74:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿
+[28/40] tests/e2e/unit15-16-state.spec.js:87:1 › 关闭JavaScript首页仍提供新单元真实链接
+[29/40] tests/e2e/unit15-16-upgrade.spec.js:17:1 › 15–16 两题旧挑战完成后保留有效题，新增题亲自补完才重新领证
+[30/40] tests/e2e/unit15-16-upgrade.spec.js:40:1 › 15–16 整课准备后，首次与断网复访翻词卡和剧情换物都没有加载闪屏
+[31/40] tests/e2e/unit15-16-upgrade.spec.js:65:1 › 15–16 旧草稿只是选择，升级、暂停与刷新都不代为判对
+[32/40] tests/e2e/unit15-16-upgrade.spec.js:79:1 › 15–16 缓存版断网刷新保留新增题的未提交词块，下一题仍为空
+[33/40] tests/e2e/unit15-16-upgrade.spec.js:94:1 › 15–16 完成整课加载后，刷新对白仍展示已读的最后一句
+[34/40] tests/e2e/unit15-16.spec.js:6:1 › 从导航进入护照小检查站，先看有音标的词卡，翻义无需配音
+[35/40] tests/e2e/unit15-16.spec.js:23:1 › 配套练习无需任何配音，34题与完整原文通关，领取并导出准确的课堂证书
+[36/40] tests/e2e/unit15-16.spec.js:51:1 › 从首页进入护照小检查站，25张音标词卡可翻义翻页，全程不调用英语配音
+[37/40] tests/e2e/unit15-16.spec.js:79:1 › 11个新词各一次，错答可改，最后三题刷新不代答，重练清本轮并保留星星
+[38/40] tests/e2e/unit15-16.spec.js:108:1 › 无音频时逐句读完18句原文，历史中文可展开，刷新续读且看完才解锁理解题
+[39/40] tests/e2e/unit15-16.spec.js:137:1 › 教材四张国籍卡、十五幅复数图、A六题和B十二组问答完整，可打印真实A4练习纸
+[40/40] tests/e2e/unit15-16.spec.js:162:1 › 教材图册蓝套装、白手提包、红汽车与可见文字相符
+  40 passed (1.7m)

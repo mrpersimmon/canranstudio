@@ -1,0 +1,14 @@
+
+Running 6 tests using 1 worker
+
+(node:543) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] tests/e2e/units17-30-scene.spec.js:6:48 › 23-24 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[2/6] tests/e2e/units17-30-scene.spec.js:41:62 › 23-24 图册翻页按钮不随内容高度跳动，刷新保留末页
+[3/6] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 320
+[4/6] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 390
+[5/6] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 768
+[6/6] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 1280
+  6 passed (11.6s)

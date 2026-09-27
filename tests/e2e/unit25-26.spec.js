@@ -1,3 +1,4 @@
+const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -8,7 +9,7 @@ test('首页新单元从厨房小图鉴开始，音标可见',async({page})=>{
 });
 
 const {DIALOGUE,ANSWERS,completeUnit2526,completeActivity,completeStory}=require('../support/unit25-26-flow');
-test('全部声音失败仍完成23题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
+test('全部声音失败仍完成28题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
  test.setTimeout(60000);const audio=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.route(/\.(mp3|wav|ogg)(\?|$)/,r=>r.abort());
  await page.addInitScript(()=>{globalThis.voiceCalls=0;speechSynthesis.speak=()=>{globalThis.voiceCalls++;};});
  await page.goto('/unit25-26/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await completeUnit2526(page);
@@ -43,12 +44,12 @@ test('证书空名字有友好称呼，插图加载失败不假保存，恢复�
  await page.unroute('**/assets/unit25-26/Mrs.svg');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const pending=page.waitForEvent('download',{timeout:15000});await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await pending;await expect(dialog.getByRole('status')).toContainText('纪念图片已保存');expect(downloads).toHaveLength(1);
 });
 
-test('12道词义题连续错答只重试，最后三题刷新不会代答，重练不重复计星',async({page})=>{
+test('10组词义练习连续错答只重试，最后三题刷新不会代答，重练不重复计星',async({page})=>{
  await page.goto('/unit25-26/#learn/listen');const room=page.locator('.stage-listen');await expect(room.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
  for(const [i,answer] of ANSWERS.listen.entries()){
-  if(i>=9)await page.reload();await expect(room).toContainText('第 '+(i+1)+' / 12 题');const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
-  if(i===0||i===11)for(let j=0;j<2;j++){await room.getByRole('button',{name:i===0?'妈妈':'在……上面',exact:true}).click();await check.click();if(j===1)await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));await room.getByRole('button',{name:'再试一次',exact:true}).click();}
-  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await room.getByRole('button',{name:i===11?'完成这一站':'下一题',exact:true}).click();
+  if(i>=7)await page.reload();await expect(room).toContainText('第 '+(i+1)+' / 10 题');const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
+  if(i===0||i===9)for(let j=0;j<2;j++){await room.getByRole('button',{name:i===0?'妈妈':'在……上面',exact:true}).click();await check.click();if(j===1)await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+  await require('../support/units1-30-tasks').select(room,answer);await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await room.getByRole('button',{name:i===9?'完成这一站':'下一题',exact:true}).click();
  }
  await expect(page.locator('#starCount')).toHaveText('3');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(page.locator('#starCount')).toHaveText('3');
 });
@@ -77,9 +78,9 @@ test('36张词卡完整音标、翻义、加载、六组翻页与末组续学',a
 const PICTURES=[['cup','on','table','clean'],['box','on','floor','large'],['glass','in','cupboard','empty'],['knife','on','plate','sharp'],['fork','on','tin','dirty'],['bottle','in','refrigerator','full'],['pencil','on','desk','blunt'],['spoon','in','cup','small']];
 const REFS=['Give me ___ glass. Which glass? ___ empty one.','Give me some cups. Which cups? ___ cups on the table.','Is there ___ book on ___ table? Yes, there is. Is ___ book red?','Is there ___ knife in that box? Yes, there is. Is ___ knife sharp?'];
 test('原图八组、A四题八空、B七组两句完整，实际打印一张A4',async({page})=>{
- await page.goto('/unit25-26/#learn/models');const room=page.locator('.stage-models');await room.getByText('看看八幅厨房图',{exact:true}).click();await expect(room.locator('.comparison-gallery strong')).toHaveText(PICTURES.map(([a,p,b,c])=>`There is a ${a} ${p} the ${b}.\nThe ${a} is ${c}.`));
+ await page.goto('/unit25-26/#learn/models');const room=page.locator('.stage-models');await room.getByText('看看八幅厨房图',{exact:true}).click();await expectPagedTexts(room,'.comparison-gallery strong',PICTURES.map(([a,p,b,c])=>`There is a ${a} ${p} the ${b}.\nThe ${a} is ${c}.`),'图册');
  await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);await room.locator('.comparison-gallery').screenshot({path:'output/playwright/unit25-26/gallery-desktop.png'});await expect(room.locator('.reference-card button')).toHaveCount(0);
- await room.getByText('看看完整表达',{exact:true}).click();await expect(room.locator('.reply-models strong')).toHaveText(PICTURES.slice(0,7).map(([a,p,b,c])=>`There's a ${a} ${p} the ${b}.\nThe ${a} is ${c}.`));
+ await room.getByText('看看完整表达',{exact:true}).click();await expectPagedTexts(room,'.reply-models strong',PICTURES.slice(0,7).map(([a,p,b,c])=>`There's a ${a} ${p} the ${b}.\nThe ${a} is ${c}.`),'问答');
  await room.getByText('给小空格选冠词',{exact:true}).click();const answers=[['a','The'],['The'],['a','the','the'],['a','the']];await expect(room.locator('.be-models li')).toHaveText(REFS.map((s,i)=>{let j=0;return s.replace(/___/g,()=>answers[i][j++]);}));await expect(room).toContainText('桌子是双方都知道的那张');
  await room.getByText('跟老师读数字',{exact:true}).click();await expect(room).toContainText('3,000 · 4,000 · 5,000 · 6,000 · 7,000 · 8,000 · 9,000 · 10,000');await room.getByRole('button',{name:'下一站：位置小帮手',exact:true}).click();await expect(page).toHaveURL(/#learn\/be$/);
  await page.goto('/unit25-26/#learn/certificate');await page.getByText('和朋友再试试',{exact:true}).click();await expect(page.locator('.reference-writing li>span:first-child')).toHaveText(REFS);await expect(page.locator('.reply-writing li>span:first-child')).toHaveText(PICTURES.slice(0,7).map(([a,p,b,c])=>`${a} ${p} the ${b} / ${c}`));await expect(page.locator('.writing-blank')).toHaveCount(8);

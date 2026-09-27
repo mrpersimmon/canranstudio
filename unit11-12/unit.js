@@ -124,8 +124,9 @@
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit1112-' + id + '-practice'; surfaces.get(id).append(element);
     const predecessors = unit.activityPredecessors?.[id];
-    practice.mount({ element, questions: questions[id], sessionId: predecessors ? 'v2' : 'v' + unit.version,
-      previousGroups: predecessors?.map(old => ({ key: 'unit1112-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
+    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+      inputViews:core.lesson49TaskInputs,
+      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit1112-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
       onComplete: states => { complete(id); const summary=element.querySelector('.practice-finish > p'); if(summary)summary.textContent={roles:'衬衫的线索找到了！',owner:'物主说清楚了！',trans:'认领问答拼好了！',exam:'挑战完成！',listen:'寻宝完成！'}[id]; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }

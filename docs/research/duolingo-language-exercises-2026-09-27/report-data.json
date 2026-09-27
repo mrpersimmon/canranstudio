@@ -1,0 +1,2714 @@
+{
+  "date": "2026-09-27",
+  "scope": "Chinese-native speakers learning English; Chinese-interface screenshots only in main report; Free/Super/Max coverage separately qualified",
+  "records": [
+    {
+      "id": "E01",
+      "name": "中英词语配对",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "识别英语词形，把它与已知中文意义配对。",
+      "input": "中文茶、欢迎、咖啡、热与英语 hot、coffee、tea、welcome。",
+      "output": "逐对连接意义相同的词。",
+      "steps": [
+        "从左列或右列任选一个词；此时仅蓝色选中。",
+        "选择另一列的对应词；系统立即判定这一对，无需检查。",
+        "错配短暂变红后恢复可选；重新配对。正确项短暂变绿，再变浅并锁定。",
+        "完成全部配对，系统自动显示绿色反馈；点击继续进入下一道听写题。"
+      ],
+      "ui": "访客F07的四对实例：本轮桌面题有左右两列、每列四词。错配欢迎与 tea 的红色只短暂出现，底部没有整题错误栏；红心5变4。正确项随后变浅禁用，其余词仍可操作。 Super故事F22为五对词语/短语，并显示无限红心。",
+      "design": "两列候选把回忆变成识别；逐对即时反馈缩短了行为与结果的间隔。完成一对就锁定能减少剩余搜索量，也可能让最后一对通过排除得到。",
+      "caution": "F07 实测同题错误、原位恢复、正确与全部完成。重复点击同一卡是否取消、退出后恢复和移动端尚未测试。此前官方手机图只作另一版本参考。 新增F22：Super故事末尾有五对中英短语，错误原位恢复、正确后锁定，全部配完自动继续；本页无限红心，不沿用访客扣心结论。",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。 此次另有登录Super的会话C/D补充，详情见对应连续流程。",
+      "plan": "同时有A/B免费访客与C/D登录Super的实例，分别记录；均不推定Max或移动端规则。",
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson",
+        "https://apps.apple.com/cn/iphone/story/id1605587215",
+        "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured"
+      ],
+      "images": [
+        {
+          "id": "CN-LIVE-090",
+          "file": "assets/flows/090.png",
+          "action": "进入中英配对",
+          "result": "左列茶、欢迎、咖啡、热；右列 hot、coffee、tea、welcome；检查禁用。",
+          "label": "进入中英配对；左列茶、欢迎、咖啡、热；右列 hot、coffee、tea、welcome；检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:51:14+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "9365e0a476277e00b3c05bf680fd2e9c2d9a172fc8ca2c0afaf3b6715bf00461",
+          "original_capture_filename": "090-pairs-01-initial.png",
+          "visual_reviewed": true
+        },
+        {
+          "id": "CN-LIVE-346",
+          "file": "assets/flows/346.png",
+          "action": "点击继续",
+          "result": "出现五组中英词语配对；保留上文，继续禁用。",
+          "label": "点击继续；出现五组中英词语配对；保留上文，继续禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "url": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:56:42+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "dc5c38dc478a28a27d7452ac1126379a1602bba184014f7c83a54e7878dcc0f5",
+          "original_capture_filename": "346-story-pairs-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；乘坐出租车故事重读",
+          "lesson_run": "CN-WEB-20260927-C"
+        },
+        {
+          "file": "assets/cn-apple-word-matching.webp",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Features112/v4/d8/e5/c7/d8e5c76d-0932-1406-6be7-d4436256007e/be387636-1330-4d38-a3ae-72c79fa0614f.png/1380x2878bb.webp",
+          "source": "https://apps.apple.com/cn/iphone/story/id1605587215",
+          "label": "中英词语配对 · 全部配对后的反馈",
+          "framing": "完整中文题页 · 正确反馈状态",
+          "note": "完整应用题目区域：顶部关闭、进度、连对数字与心形；五组词语；正确反馈“不错哦!”；底部完整“继续”和 Home 条。未含系统时间栏不影响题目区域完整性。画面为全部配对完成后的正确反馈状态，不证明未作答或错误状态。",
+          "width": 1380,
+          "height": 2877,
+          "sha256": "983a519c2620d27445d34af6a2f5b382cf4de1f0682d168fb607a40cbc359e62",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Apple App Store 编辑部（官方平台编辑文章，非 Duolingo 自有博客）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM01"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读两列词语并点选配对，作答不依赖声音。",
+      "extra_load": "找位置和判断词义并行。若只截最终变浅的画面，会漏掉最关键的瞬时红色错误反馈。",
+      "feedback_recommendation": "课程设计可以保留已配对项，并在错误后提供可重复查看的词义提示；本轮错配主要靠颜色及红心反馈。",
+      "ability_limit": "F07 实测同题错误、原位恢复、正确与全部完成。重复点击同一卡是否取消、退出后恢复和移动端尚未测试。此前官方手机图只作另一版本参考。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 25,
+        "planned_checks": 10,
+        "anchor": "flow-E01",
+        "live_run_ids": [
+          "F07",
+          "F22"
+        ]
+      }
+    },
+    {
+      "id": "E02",
+      "name": "英语语境词义—英文定义选择",
+      "group": "词汇与翻译",
+      "kind": "语言任务",
+      "goal": "用已知英语解释新词，在英语语境中建立意义联系。",
+      "input": "一个可以在房屋外坐着休息的地方",
+      "output": "a place outside a house where people can sit",
+      "steps": [
+        "读目标词所在句，比较英文释义与上下文，再选一项。"
+      ],
+      "ui": "需要核对：中文课程是否有此进阶题；中文提示开合与反馈位置。",
+      "design": "用于检查理解、解释误选原因；逐步减少全文对译依赖。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 英文释义选择比中英词配对增加阅读负担，但仍是识别而非主动定义。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读英语语境与定义，点选符合词义的一项。",
+      "extra_load": "必须同时理解正文、问题和英文释义；选错可能来自释义措辞不懂，不一定是目标词完全不懂。",
+      "feedback_recommendation": "保留目标词高亮；答后用一句中文解释关键语义和原文线索，避免一开始用中文直接泄露答案。",
+      "ability_limit": "英文释义选择比中英词配对增加阅读负担，但仍是识别而非主动定义。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/how-duolingo-teaches-english/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E02",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E03",
+      "name": "Flashcards：主动说出英语词",
+      "group": "词汇与翻译",
+      "kind": "词汇提取任务；可切换键入",
+      "goal": "从中文意义主动提取英语词，而不是看到英语后认出中文。",
+      "input": "苹果",
+      "output": "apple",
+      "steps": [
+        "若有口述分支，读中文提示后说英语词；识别未成功时先核对录音状态，再重试。"
+      ],
+      "ui": "需要核对：中文→英语 Flashcards 是否开放；中文卡面、键入分支及评分反馈。",
+      "design": "确认中文提示具体指哪个义项；不把任何不同说法都当错。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 葡语版的五卡、三项通过和回队规则不能视为已证实的中文规则。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "口述同时要求词汇提取和发音；键入则增加字母顺序负担，例如看到‘苹果’需自己想出 apple。",
+      "feedback_recommendation": "分清‘未录到声音／识别有疑问’与‘词义回答不符’；答错可给中文义项、正确英语及重试机会。",
+      "ability_limit": "葡语版的五卡、三项通过和回队规则不能视为已证实的中文规则。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/flashcards-do-duolingo/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E03",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E04",
+      "name": "英译中：用中文词块表达英语意义",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "理解英语词句，按中文表达顺序组织给定词块。",
+      "input": "welcome；另一实例为 Tea, please. 与谢谢、牛奶、茶。",
+      "output": "欢迎；另一实例为茶 / 谢谢。",
+      "steps": [
+        "阅读英语题干，点词库中的中文词块；词块移入答案区，原位置变灰。",
+        "点击答案区词块可撤回；清空后检查禁用。移除前词会让后词前移，重新点选会追加在末尾。",
+        "需要时悬停英语词查看提示。本轮 please 的提示实际为谢谢、感谢、多谢。",
+        "点击检查提交。错误时词块锁定并显示正确答案；继续先进入下一题。",
+        "课末 welcome 与被跳过的 coffee 题以错题重练再次出现；重新作答后可继续。"
+      ],
+      "ui": "一个词块就可启用检查，并不保证句子完整；例如 Tea, please. 只选谢谢也能点检查。蓝色/白色词块草稿与底部红绿判分属于不同状态。",
+      "design": "给出中文候选降低了表达负担，主要检查英语理解。撤回与追加是修改词序的实际手段；判分后锁定则把编辑与结果阅读分成两个阶段。",
+      "caution": "F03 是 welcome 同题错答闭环；F04 是另一题 Tea, please. 的修改及正确分支；F11 是 coffee 的跳过及重练，三者不冒充同一道题。错误词序草稿未提交，未验证其判分。 新增F24为Super单元复习的两句较长英译中正确路径，明确分别记录，不与访客原题混接。",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。 此次另有登录Super的会话C/D补充，详情见对应连续流程。",
+      "plan": "同时有A/B免费访客与C/D登录Super的实例，分别记录；均不推定Max或移动端规则。",
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson",
+        "https://www.duolingo.com/practice-hub/unit-rewind",
+        ""
+      ],
+      "images": [
+        {
+          "id": "CN-LIVE-050",
+          "file": "assets/flows/050.png",
+          "action": "进入 Tea, please. 翻译题",
+          "result": "词库为谢谢、牛奶、茶；答案为空。",
+          "label": "进入 Tea, please. 翻译题；词库为谢谢、牛奶、茶；答案为空。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:45:11+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "f06ef2efed1761fe0a011c9d50389aff37b4424097bc2d2311d6d60ef71bff73",
+          "original_capture_filename": "050-wordbank-teaplease-01-initial.png",
+          "visual_reviewed": true
+        },
+        {
+          "id": "CN-LIVE-404",
+          "file": "assets/flows/404.png",
+          "action": "点击继续",
+          "result": "英译中 She has worked as a server for five years.，空答案及中文词库。",
+          "label": "点击继续；英译中 She has worked as a server for five years.，空答案及中文词库。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:59:37+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "058a311ffda0a2dac8fd4c1fdb9b24683cd16b5e690ea4ca418892e239fee354",
+          "original_capture_filename": "404-review-translation-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；第21部分单元复习",
+          "lesson_run": "CN-WEB-20260927-D"
+        },
+        {
+          "file": "assets/duolingo-dark-translation-word-bank.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户历史参考 · 中文界面学习英语",
+          "framing": "完整中文题页 · 原始历史截图",
+          "note": "用户此前提供的真实题页；实际拍摄日期、应用版本和当时套餐未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "1c12f211e042d48dbfe315ac1644a2fae3ce0e003f8017a38f8e7b1902f79bf8",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读英语原句，用中文词块作答；播放是可选辅助。",
+      "extra_load": "同时要读英语、找中文和组织中文顺序。please 在点单语境中的中文表达需要结合整句看，不能据这一个提示归纳它的所有译法。",
+      "feedback_recommendation": "保留错答顺序和正确句子；重练时改变候选排列，可减少只记点击位置的可能。此处 welcome 重练确实出现了词库顺序变化。",
+      "ability_limit": "F03 是 welcome 同题错答闭环；F04 是另一题 Tea, please. 的修改及正确分支；F11 是 coffee 的跳过及重练，三者不冒充同一道题。错误词序草稿未提交，未验证其判分。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 13,
+        "unique_flow_screenshots": 42,
+        "planned_checks": 14,
+        "anchor": "flow-E04",
+        "live_run_ids": [
+          "F03",
+          "F04",
+          "F11",
+          "F24"
+        ]
+      }
+    },
+    {
+      "id": "E05",
+      "name": "中译英：用英语词块组织译文",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "把中文意义转成英语语序，并选择必要的功能词。",
+      "input": "她跟她的男朋友一起去过巴黎。与英语词库。",
+      "output": "She has been to Paris with her boyfriend.",
+      "steps": [
+        "读中文，按需悬停去过查看英语提示；点击词块逐个构句。",
+        "已选词可撤回；移除中间的has后剩余词前移，清空后检查禁用。",
+        "切到键盘可独立编辑文字；切回词库保留原词块草稿，候选位置可能变化。",
+        "漏to的答案提交后被拒绝，纠错突出to，原草稿锁定；继续到下一题。",
+        "后段原题重现，词库清空并重新排列；逐词补全正确译文，提交通过后继续。"
+      ],
+      "ui": "中文在角色气泡中，英语答案与词库分区，底部切换输入和检查。部分答案就可提交；错误反馈把缺失的to突出，而不是重排学习者原答案。",
+      "design": "给出单词解决了拼写提取，把主要难点留给英语结构。在中文“去过巴黎”到英语been to Paris的转换中，功能词to是值得单独检验的知识，不只是点击完整度。",
+      "caution": "F26取得同题错误到正确闭环。不同模式的草稿保持、撤回中间词和清空都已拍到；键盘模式没有提交本题，不能混作键入正确证据。旧宣传图仅为其他版本参考。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；第21部分单元复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "sources": [
+        "https://www.duolingo.com/practice-hub/unit-rewind",
+        "https://apps.apple.com/cn/app/id570060128?platform=ipad"
+      ],
+      "images": [
+        {
+          "id": "CN-LIVE-417",
+          "file": "assets/flows/417.png",
+          "action": "点击继续",
+          "result": "中译英“她跟她的男朋友一起去过巴黎。”，英语词库，检查禁用。",
+          "label": "点击继续；中译英“她跟她的男朋友一起去过巴黎。”，英语词库，检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:01:33+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "8095403b3b188973f5e4a99b4a911ad704789c6313c84ff53a709f1090e531fd",
+          "original_capture_filename": "417-en-translation-wordbank-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；第21部分单元复习",
+          "lesson_run": "CN-WEB-20260927-D"
+        },
+        {
+          "file": "assets/cn-appstore-wordbank-ipad.png",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/7f/fa/71/7ffa7108-02d4-b799-91f5-ef2bd8443829/df2f590c-4b1d-487f-8f2f-7073d4b572c2_2048-2732__U00288_U0029.png/576x768bb.png",
+          "source": "https://apps.apple.com/cn/app/id570060128?platform=ipad",
+          "label": "中文原句 → 英语词块 · 宣传局部图",
+          "framing": "官方宣传局部图 · 不计为完整题页",
+          "note": "iPad 宣传合成图，题干、英语答案、词库与检查按钮可见；设备/应用底部未完整呈现，不能冒充完整独立题页。保存官方 API 公开返回的 576×768 PNG 原文件字节。",
+          "width": 576,
+          "height": 768,
+          "sha256": "539d47f08468fce3b29b35ecebfbb12cfbeca594cf8fed033b2d1db694330ab9",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": false,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Duolingo, Inc（Apple 托管的开发者商店素材）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM05"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读中文原句，用英语词块作答。",
+      "extra_load": "中文词汇顺序不能机械映射英语；撤回、切换输入与候选重新排列也带来操作负担。两份草稿独立保存，用户必须确认当前模式的内容。",
+      "feedback_recommendation": "保留原漏词答案，同时标清补在哪；如用于儿童课程，可增加短句中文解释been to与去过的对应，再用新地点检验迁移。",
+      "ability_limit": "F26取得同题错误到正确闭环。不同模式的草稿保持、撤回中间词和清空都已拍到；键盘模式没有提交本题，不能混作键入正确证据。旧宣传图仅为其他版本参考。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 14,
+        "unique_flow_screenshots": 34,
+        "planned_checks": 15,
+        "anchor": "flow-E05",
+        "live_run_ids": [
+          "F26"
+        ]
+      }
+    },
+    {
+      "id": "E06",
+      "name": "中译英：键入完整英语句子",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "从中文意义自主提取词汇、组织英语结构并写出句子。",
+      "input": "他们在英国待了三年了。；另例：他一直都想要做一个医生。",
+      "output": "They have stayed in the UK for three years.；另一题含doctor。",
+      "steps": [
+        "切换键盘后键入英语，部分文字即可启用检查。",
+        "可清空、改写草稿；取消退出后同一草稿仍能提交。",
+        "把三年误写为ten years会被判错；正确答案突出three，原答案仍可对照。",
+        "后段同题再次出现，输入three years的译文被接受，继续到下一题。",
+        "另一独立题提交docter拼写差异，界面绿色通过，同时提示有错别字并给出doctor。"
+      ],
+      "ui": "大输入框承担自由书写，中文原句始终位于上方。绿色结果不总等于完全无错误：拼写容错例同样绿色，但附纠错文字。",
+      "design": "正确性至少包含意义和书写形式两层：ten→three改变中文所表达的量，docter→doctor是本例被容忍的字形偏差。这两个真实实例支持分层解释，但不足以推断后台评分算法。",
+      "caution": "F27是英国三年题同题闭环，F29是独立的拼写容错例。未验证移动端键盘、中间选区、全部替代译文或拼写容错阈值。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；第21部分单元复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "sources": [
+        "https://www.duolingo.com/practice-hub/unit-rewind"
+      ],
+      "images": [
+        {
+          "id": "CN-LIVE-445",
+          "file": "assets/flows/445.png",
+          "action": "切换使用键盘",
+          "result": "空英语输入框，检查禁用。",
+          "label": "切换使用键盘；空英语输入框，检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:03:50+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "ac32af750d79cbe99917a5ab5ba1715f4346aa5d1943b86a2b01746a93a8a891",
+          "original_capture_filename": "445-uk-translation-keyboard-empty.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；第21部分单元复习",
+          "lesson_run": "CN-WEB-20260927-D"
+        },
+        {
+          "file": "assets/duolingo-dark-translation-free-input.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户历史参考 · 中文界面学习英语",
+          "framing": "完整中文题页 · 原始历史截图",
+          "note": "用户此前提供的真实题页；实际拍摄日期、应用版本和当时套餐未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "4b57eefce998ee92c4b4376981c18f8dfdc2e8c4fd927363af329d3eea8da3be",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "本节采用键盘输入整句译文的分支；语音输入另见 E08。",
+      "extra_load": "输入法、光标、拼写和句法共同影响结果。docter例同时含小写开头及无句号，不能分别证明所有大小写、标点规则。",
+      "feedback_recommendation": "把改变句意的错误与允许通过的轻微书写差异区别展示；保存原句、原答、修正片段。自然替代表达需要专门答案验证，不能只按唯一字符串匹配。",
+      "ability_limit": "F27是英国三年题同题闭环，F29是独立的拼写容错例。未验证移动端键盘、中间选区、全部替代译文或拼写容错阈值。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 12,
+        "unique_flow_screenshots": 17,
+        "planned_checks": 12,
+        "anchor": "flow-E06",
+        "live_run_ids": [
+          "F27",
+          "F29"
+        ]
+      }
+    },
+    {
+      "id": "E07",
+      "name": "完成翻译：缺词与整句难度切换",
+      "group": "词汇与翻译",
+      "kind": "原子任务",
+      "goal": "在给定句式中提取缺失英语成分，并允许主动撤去句式帮助。",
+      "input": "妈妈一直都这么漂亮。；Mom has always been ____ beautiful.",
+      "output": "空位填so；加大难度时可写整句。",
+      "steps": [
+        "点空位输入，s一个字母已能启用检查；可继续输入o或清空。",
+        "加大难度切为完整英语翻译，减少难度回到短空位。",
+        "整句模式的Mom has always与空位模式分别保留草稿，切换不会自动转换。",
+        "cold提交被拒绝，反馈给出含so的完整句子。",
+        "后段原题出现，填so被接受，继续进入结算。"
+      ],
+      "ui": "相同中文气泡下，局部可编辑空位与整框输入交替出现；底部加大难度/减少难度对应变化。判错后仍保留cold，使固定句式与错误填入内容可对照。",
+      "design": "难度调整直接改变学习者必须提取的信息量：补一个词与自行生成整句是不同任务。操作位置近似但能力要求增加，不能把两个完成率直接等同。",
+      "caution": "F28完成缺词同题闭环及两种难度的草稿切换。整句模式只写到部分草稿，没有提交，不算完整英语生成成功。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；第21部分单元复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "sources": [
+        "https://www.duolingo.com/practice-hub/unit-rewind"
+      ],
+      "images": [
+        {
+          "id": "CN-LIVE-451",
+          "file": "assets/flows/451.png",
+          "action": "点击继续",
+          "result": "输入所缺单词：“妈妈一直都这么漂亮。”，Mom has always been ____ beautiful.；加大难度与禁用检查。",
+          "label": "点击继续；输入所缺单词：“妈妈一直都这么漂亮。”，Mom has always been ____ beautiful.；加大难度与禁用检查。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:04:40+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "969883208dd5a70d0c2f3e4a3145b164e6a41c4209018ddb36d27a303e56b57e",
+          "original_capture_filename": "451-fill-missing-word-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；第21部分单元复习",
+          "lesson_run": "CN-WEB-20260927-D"
+        },
+        {
+          "file": "assets/duolingo-dark-supported-translation.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户历史参考 · 中文界面学习英语",
+          "framing": "完整中文题页 · 原始历史截图",
+          "note": "用户此前提供的真实题页；实际拍摄日期、应用版本和当时套餐未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "07df6c4b9b89236fdf2ca4e6b445451d7b8d6e0b3fb602f252f8efc18c62900f",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读中文与已有英语译文，键入缺失部分。",
+      "extra_load": "学习者要识别可编辑范围；切换到另一模式后见到旧草稿也可能误以为答案丢失或被替换。",
+      "feedback_recommendation": "明确说明整句模式撤去了哪些提示，继续保留原来的局部练习；学习记录同时保存难度模式和所用帮助。",
+      "ability_limit": "F28完成缺词同题闭环及两种难度的草稿切换。整句模式只写到部分草稿，没有提交，不算完整英语生成成功。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 11,
+        "unique_flow_screenshots": 16,
+        "planned_checks": 13,
+        "anchor": "flow-E07",
+        "live_run_ids": [
+          "F28"
+        ]
+      }
+    },
+    {
+      "id": "E08",
+      "name": "翻译题中的英语语音输入入口",
+      "group": "词汇与翻译",
+      "kind": "输入方式变体，复用 E06 翻译任务",
+      "goal": "如果该入口可用，通过口头组织英语完成翻译输入；具体判分方式尚未确认。",
+      "input": "中文原句与录音入口。",
+      "output": "预期为口述英语或转写结果，具体流程待核。",
+      "steps": [
+        "在中文翻译页找到输入框下方的录音入口。",
+        "录音权限、开始/停止、识别结果确认与提交步骤本轮均未验证。"
+      ],
+      "ui": "当前只见独立的麦克风/录音栏；复用 E06 原图标记这个入口，没有录音中、转写后或发音评分的截图。",
+      "design": "改变输入方式可以减少键盘负担，却可能增加语音识别和设备环境的影响；语音输入不自动等于独立的发音训练题。",
+      "caution": "仅有入口证据，不计为完整语音任务；与 E06 复用同一个图像文件，不重复计图。",
+      "availability": "已见中文界面与英语学习方向；证据仅适用于所示版本和状态，当前账号、地区与客户端未逐项实测。",
+      "plan": "普通课程任务。图片中的心形、能量或无限心不能单独证明此题是某套餐专属；本轮未核验账号权益。",
+      "sources": [],
+      "images": [
+        {
+          "file": "assets/duolingo-dark-translation-free-input.jpg",
+          "url": "",
+          "source": "",
+          "label": "E06 原图复用 · 这里只证明录音入口",
+          "framing": "完整翻译题页中的语音入口 · 不是完整语音流程",
+          "note": "用户此前提供的真实题页；实际拍摄日期、应用版本和当时套餐未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "4b57eefce998ee92c4b4376981c18f8dfdc2e8c4fd927363af329d3eea8da3be",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": false,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "仅见中文输入入口",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "英语表达、系统识别失败、环境噪声和授权失败应分开处理。",
+      "feedback_recommendation": "建议先让用户确认识别文本，并提供键入恢复入口；这只是设计建议，不是对当前功能的确认。",
+      "ability_limit": "仅有入口证据，不计为完整语音任务；与 E06 复用同一个图像文件，不重复计图。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "entry_only",
+      "ui_basis": "截图事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E08",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E09",
+      "name": "英语选词填空与中文意义反馈",
+      "group": "句子与阅读",
+      "kind": "语言任务",
+      "goal": "根据英语句子与词义，从候选词中选出合适的修饰语。",
+      "input": "He is my ___ friend. 与 long / red / good。",
+      "output": "选择 good。",
+      "steps": [
+        "阅读句子和三个候选词。",
+        "选择符合语义的 good，完成提交。",
+        "图示反馈给出中文意义“他是我的好朋友”，核对后点“继续”。"
+      ],
+      "ui": "题干、已选绿色词卡、勾选反馈与中文解释同时保留。“继续”位于反馈下方；这是作答后的正确状态。",
+      "design": "绿色标记告诉用户选中了哪项，中文意义帮助把整个英语句子连回熟悉的表达。候选中有容易按常识排除的词，不能由这一题的成功推断复杂搭配能力。",
+      "caution": "完整正确反馈图不包含错选时的提示与重试流程，也不证明无词库时能主动产出。",
+      "availability": "已见中文界面与英语学习方向；证据仅适用于所示版本和状态，当前账号、地区与客户端未逐项实测。",
+      "plan": "普通课程任务。图片中的心形、能量或无限心不能单独证明此题是某套餐专属；本轮未核验账号权益。",
+      "sources": [],
+      "images": [
+        {
+          "file": "assets/duolingo-dark-cloze-correct-feedback.jpg",
+          "url": "",
+          "source": "",
+          "label": "用户历史参考 · 中文界面学习英语",
+          "framing": "完整中文题页 · 原始历史截图",
+          "note": "用户此前提供的真实题页；实际拍摄日期、应用版本和当时套餐未确认。",
+          "width": 1260,
+          "height": 2720,
+          "historical_thirdparty": false,
+          "date_label": "拍摄日期未确认",
+          "sha256": "a178eaff82f29c0f9612d71ee19335b3f7b35af6220a14954d30c4238a41cf00",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "capture_date": "截图拍摄日期与应用版本未确认；来自已有用户参考",
+          "provenance": "用户历史参考截图"
+        }
+      ],
+      "status": "完整中文题页",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读句子并选词补空，不需要根据音频判断。",
+      "extra_load": "既要知道候选词意思，也要理解该词在句中能否成立；选项排除策略会影响结果。",
+      "feedback_recommendation": "干扰项应围绕当前教学目标设计；后续可换语境验证 good 的理解，而不只复现同一组候选。",
+      "ability_limit": "完整正确反馈图不包含错选时的提示与重试流程，也不证明无词库时能主动产出。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "截图事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E09",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E10",
+      "name": "英语图境辅助选词填空",
+      "group": "句子与阅读",
+      "kind": "材料变体",
+      "goal": "结合图片和英语语境选择缺词，而不是仅按图认物。",
+      "input": "她想念家人。",
+      "output": "She misses her family.",
+      "steps": [
+        "先读句子与情境，再用图片核对；需要时查看提示，最后选词补空。"
+      ],
+      "ui": "需要核对：中文方向是否开放；中文提示内容和遮挡情况。",
+      "design": "辅助解除关键理解障碍，不替代对英语上下文的判断。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 凭明显图片选中不能直接等同读懂英语段落。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "根据插图和英语文本选择缺词。",
+      "extra_load": "图中人物、英文文本和候选词要整合；例如 family 在思念家人的语境里应理解为‘家人’，不机械套成‘家庭’。",
+      "feedback_recommendation": "中文提示应解释本句中的意思；展开提示应不遮住缺口和主要语境。记录用了提示与独立作答的区别。",
+      "ability_limit": "凭明显图片选中不能直接等同读懂英语段落。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/querido-duolingo-o-duolingo-ensina-gramatica/",
+        "https://blog.duolingo.com/how-duolingo-teaches-english/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E10",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E11",
+      "name": "英语段落阅读理解选择",
+      "group": "句子与阅读",
+      "kind": "语言任务",
+      "goal": "从英语段落中找证据，理解因果、人物和事件关系。",
+      "input": "汤姆没赶上公交，所以走路去了。",
+      "output": "Tom missed the bus, so he walked.",
+      "steps": [
+        "读段落，再把问题和每个选项与原文证据对照后作答。"
+      ],
+      "ui": "需要核对：中文课程入口与级别；中文释义是否可选及反馈依据。",
+      "design": "说明推理链或关键连接词，帮助识别是单词没懂还是关系读反。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 单题不能覆盖全部阅读水平；中文解释只是学习支持。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "从英语段落中找到证据，再选择答案。",
+      "extra_load": "还要读懂英文问题与选项；例如看到 bus 便选‘坐公交’会忽略 missed 和 so walked 的含义。",
+      "feedback_recommendation": "答后定位决定答案的英文句，并用中文简释‘没赶上，所以步行’；避免只显示答案字母。",
+      "ability_limit": "单题不能覆盖全部阅读水平；中文解释只是学习支持。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/why-learn-english/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E11",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E12",
+      "name": "阅读英语对话，选择合适的下一句",
+      "group": "句子与阅读",
+      "kind": "语言任务",
+      "goal": "理解对方的英语意图，选出符合对话情境的回答。",
+      "input": "Coffee or tea?；选项 Coffee, please. / Welcome.。",
+      "output": "选择 Coffee, please.。",
+      "steps": [
+        "阅读问题和两项回答；不必播放声音。",
+        "点击一项会变蓝，检查启用；提交前可改选。",
+        "本轮提交 Welcome. 后出现红色正确答案 Coffee, please. 及中文咖啡，谢谢。",
+        "点击继续进入听力题；课末同题以错题重练出现。",
+        "选 Coffee, please. 并检查，显示绿色反馈与中文意思，再继续。"
+      ],
+      "ui": "角色提问气泡、空白回应气泡与两项文字回答分区摆放；点击选项后回应气泡没有立即填入文字。错误反馈同时保留正确英语及中文意义。",
+      "design": "语句形式都可能是已学表达，但只有一项回应当前的选择问句，要求识别言语意图。候选仍限制了输出，不能代表自主对话能力。",
+      "caution": "F05 记录同题错答、课末重练、答对和继续；未验证多选、退出恢复或移动端。此前跨语言对话图不再用作本条中文界面证据。",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "images": [
+        {
+          "id": "CN-LIVE-060",
+          "file": "assets/flows/060.png",
+          "action": "进入完成对话 Coffee or tea?",
+          "result": "两个选项 Coffee, please. 和 Welcome.；检查禁用。",
+          "label": "进入完成对话 Coffee or tea?；两个选项 Coffee, please. 和 Welcome.；检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:47:26+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "714acf9dfde5388f471e1beb6cf4c2bc27e7190af8e8f7158eebf610f8eea656",
+          "original_capture_filename": "060-dialog-coffee-01-initial.png",
+          "visual_reviewed": true
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读已显示的英语对话，选择下一句；播放语音是可选辅助。",
+      "extra_load": "需要理解提问要求，而非只认出熟悉词；两项明显不同的回答降低了自由表达负担。",
+      "feedback_recommendation": "可补一句为什么这个回答适合当前问题。当前截图证实答案与译义，未出现详细解释语用原因。",
+      "ability_limit": "F05 记录同题错答、课末重练、答对和继续；未验证多选、退出恢复或移动端。此前跨语言对话图不再用作本条中文界面证据。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/how-duolingo-teaches-english/",
+        "https://blog.duolingo.com/why-learn-english/"
+      ],
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 10,
+        "planned_checks": 10,
+        "anchor": "flow-E12",
+        "live_run_ids": [
+          "F05"
+        ]
+      }
+    },
+    {
+      "id": "E13",
+      "name": "听英语，用英语词块拼出内容",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "把听到的英语映射到给定书面词块。",
+      "input": "普通与慢速播放入口；词库 tea、please。",
+      "output": "从词库选择所听内容；后续键盘提交的反馈表明此题目标为 tea。",
+      "steps": [
+        "使用普通或乌龟慢速播放按钮。此次只验证控件可操作，未保存和听验音轨。",
+        "点击 please 形成草稿；检查启用。点击答案词块可撤回，清空后检查禁用。",
+        "切换使用键盘后，本轮首次文本草稿为空；切回使用词库，原 please 草稿恢复。",
+        "组成 tea / please 后再切键盘，原文字草稿仍保留。最终在键盘模式提交并判错，见 E22。",
+        "补充Super的F23：选择how are you并在词库模式检查，实际红色纠错为in the same place；继续进入英译中。"
+      ],
+      "ui": "大扬声器与乌龟图标区别两种播放入口；底部有使用键盘及现在不做听力题。两个输入方式各保留自己的草稿，切换并不把词块自动转换成相同文本。 Super复习F23另有词块实际提交错误，原词块锁定，底部给正确英语与中文意义。",
+      "design": "词库提供拼写和候选范围，降低听写产出的难度。独立草稿可保留切换前工作，也可能让用户误以为当前会提交另一种模式的内容。",
+      "caution": "F06 实测输入、撤回、模式切换与草稿保持；实际错误发生在 E22 键盘模式。没有把键盘判错当成词块提交实测，也未采到此题词块正确提交或课末重练。 新增F23：Super复习已实际提交词库错误，纠错目标为in the same place；没有同音同题正确重练。此前“未提交词库”只限F06访客题。",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。 此次另有登录Super的会话C/D补充，详情见对应连续流程。",
+      "plan": "同时有A/B免费访客与C/D登录Super的实例，分别记录；均不推定Max或移动端规则。",
+      "images": [
+        {
+          "id": "CN-LIVE-065",
+          "file": "assets/flows/065.png",
+          "action": "点击继续",
+          "result": "进入听力词块题；有普通播放、乌龟慢速、现在不做听力题、使用键盘。",
+          "label": "点击继续；进入听力词块题；有普通播放、乌龟慢速、现在不做听力题、使用键盘。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:47:57+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "6e4f9753b411212aa36c0b8283bb85558d87773f889ea767cc6a0cf9ac452cc0",
+          "original_capture_filename": "065-dialog-coffee-06-after-continue.png",
+          "visual_reviewed": true
+        },
+        {
+          "id": "CN-LIVE-401",
+          "file": "assets/flows/401.png",
+          "action": "开始复习",
+          "result": "选择听到的内容；普通/慢速播放、英语词块、使用键盘与现在不做听力题；检查禁用。",
+          "label": "开始复习；选择听到的内容；普通/慢速播放、英语词块、使用键盘与现在不做听力题；检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:59:02+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "28ee62ed01c05722cad326bf50fe58abcce6264034481742d9d7240af01f92b5",
+          "original_capture_filename": "401-super-listen-wordbank-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；第21部分单元复习",
+          "lesson_run": "CN-WEB-20260927-D"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "需注意音频识别、词库干扰项与输入模式三件事。词库有两个词并不表示答案必须包含两个词。",
+      "feedback_recommendation": "切换方式时应让当前待提交内容清楚可见；不要凭候选数量暗示答案长度。",
+      "ability_limit": "F06 实测输入、撤回、模式切换与草稿保持；实际错误发生在 E22 键盘模式。没有把键盘判错当成词块提交实测，也未采到此题词块正确提交或课末重练。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson",
+        "https://www.duolingo.com/practice-hub/unit-rewind"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 10,
+        "unique_flow_screenshots": 23,
+        "planned_checks": 15,
+        "anchor": "flow-E13",
+        "live_run_ids": [
+          "F06",
+          "F23"
+        ]
+      }
+    },
+    {
+      "id": "E14",
+      "name": "听英语内容，选择对应中文解释",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "理解英语声音所表达的情境，而不是逐字拼写。",
+      "input": "先听后答；他们在…；三项关于John的中文解释。",
+      "output": "本题看John的护照被判正确。",
+      "steps": [
+        "按题意听材料，普通/慢速按钮可见；本轮未听验音轨。",
+        "选帮John找工作形成草稿，再改选看John的护照。",
+        "点击检查，第二项显示绿色正确；继续进入另一道听写。"
+      ],
+      "ui": "声音入口与中文句干、竖排中文选项分区；选择为蓝色，判分为绿色，正确后的继续与提交前检查占据同一主操作位置。",
+      "design": "用中文候选降低英语输出负担，把测量重点放到声音理解。能够选出意义不等于能复述或写出所听英语。",
+      "caution": "F25有初始、选择、改选、正确及下一题；第一项未提交，不能称为错误分支已实测。原题重练、音质和慢速效果未验证。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；第21部分单元复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "images": [
+        {
+          "id": "CN-LIVE-411",
+          "file": "assets/flows/411.png",
+          "action": "点击继续",
+          "result": "先听后答：“他们在…”；三个中文解释，普通/慢速回放，检查禁用。",
+          "label": "点击继续；先听后答：“他们在…”；三个中文解释，普通/慢速回放，检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:00:02+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "f61ca87deeadfaa6617f91b228efabdf19ae731d0493be4c37d34111fc39cece",
+          "original_capture_filename": "411-listen-comprehension-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；第21部分单元复习",
+          "lesson_run": "CN-WEB-20260927-D"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "还需要中文阅读与对候选的比较。仅凭猜选后正确，不能当作已验证听力能力。",
+      "feedback_recommendation": "围绕具体误解设置干扰项；解释听到的证据，而不只给绿色勾。若允许课后回看，可将英语原句与中文解释联系起来。",
+      "ability_limit": "F25有初始、选择、改选、正确及下一题；第一项未提交，不能称为错误分支已实测。原题重练、音质和慢速效果未验证。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/recurso-incrivel-do-super-conheca-a-nova-central-da-pratica/"
+      ],
+      "sources": [
+        "https://www.duolingo.com/practice-hub/unit-rewind"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 5,
+        "unique_flow_screenshots": 5,
+        "planned_checks": 12,
+        "anchor": "flow-E14",
+        "live_run_ids": [
+          "F25"
+        ]
+      }
+    },
+    {
+      "id": "E15",
+      "name": "英语朗读：录音、未通过提示与跳过",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "把给定英语词句读出来；本轮实际材料为 got，尽管标题写句子。",
+      "input": "中文朗读指令、角色气泡中的 got 与示范播放入口。",
+      "output": "预期朗读 got；本轮没有可核对的口述音轨。",
+      "steps": [
+        "点击并开始录音，条形入口变成蓝色波形，示范播放禁用。",
+        "等待后再次点录音条停止；捕获黄色听起来不太对、再试一次提示，随后录音入口恢复。",
+        "点击现在不做口语题，出现黄色跳过反馈；点击继续进入声音配对。"
+      ],
+      "ui": "录音是横向大触控条，状态变化发生在同一个位置。停止后有瞬时黄色未通过提示；跳过后同样黄色，但文案显示发音好棒哦，不能按文案判断识别成功。",
+      "design": "给定文字降低组织内容的负担，主要要求读出声音。录音、识别和学习表现是三件事；波形只证明界面进入录音状态，鼓励文案也不等于评分证据。",
+      "caution": "F15 有启动、波形、停止后提示和跳过连续截图；没有成功朗读、重录成功、原生授权弹窗或发音精度证据，不计正确分支闭环。",
+      "availability": "2026-09-27 中文→英语桌面网页版发音专项，免费访客实际出现；与基础入门课分开编号。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "sources": [
+        "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+        "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo"
+      ],
+      "images": [
+        {
+          "id": "CN-LIVE-235",
+          "file": "assets/flows/235.png",
+          "action": "点击继续",
+          "result": "进入朗读下面的句子，实际材料只有 got；提供点击并开始录音与现在不做口语题。",
+          "label": "点击继续；进入朗读下面的句子，实际材料只有 got；提供点击并开始录音与现在不做口语题。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "url": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:22:39+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "da7a8dade2a6df1c7c1838e72a2e39a58feb4b27b01c39f8c2f78eba29eb57aa",
+          "original_capture_filename": "235-speech-got-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语，发音专项（同一免费访客，第二节采集课）",
+          "lesson_run": "CN-WEB-20260927-B"
+        },
+        {
+          "file": "assets/cn-googleplay-read-aloud-hello.png",
+          "url": "https://play-lh.googleusercontent.com/Vv6vlem--PSJd-GNEOkZyvAPZ5Ek7CRC5zSfVGhrZkL2R-J_GAsf3tNDAch3b1SlubI6ngK6nVqEnwqN6s-01Q=w1052-h592",
+          "source": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+          "label": "中文朗读指令 · 官方宣传局部图",
+          "framing": "官方宣传局部图 · 不计为完整题页",
+          "note": "中文朗读指令，英语 Hello!，带音频与录音按钮；顶部关闭、进度、心形及底部正确反馈、中文释义、完整继续按钮均可见。宣传卡片下边界截断，不能算整幅完整界面。",
+          "width": 333,
+          "height": 592,
+          "sha256": "ff0105b9f43edaa93abc9105ba05cbc3c4fb8bc1aa283b02db73f50d48dfe194",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": false,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM08"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "设备收音、识别服务、环境与英语发音都会影响体验。本轮没有足够声音证据定位未通过原因。",
+      "feedback_recommendation": "跳过时应清楚表达跳过，不用发音成功的文案；未收到有效输入与发音需改进也应分别说明。这是针对所见界面的分析建议。",
+      "ability_limit": "F15 有启动、波形、停止后提示和跳过连续截图；没有成功朗读、重录成功、原生授权弹窗或发音精度证据，不计正确分支闭环。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 5,
+        "unique_flow_screenshots": 5,
+        "planned_checks": 10,
+        "anchor": "flow-E15",
+        "live_run_ids": [
+          "F15"
+        ]
+      }
+    },
+    {
+      "id": "E16",
+      "name": "理解英语问题并说出正确回应",
+      "group": "听力与口语",
+      "kind": "原子任务",
+      "goal": "先判断英语问题需要什么回应，再说出符合语境的给定句。",
+      "input": "几点了？—五点。",
+      "output": "What time is it? — It's five.",
+      "steps": [
+        "理解问题并先确定合适的候选回应。",
+        "对相应录音入口说出所选回应；具体如何选择与提交须按中文实机核验。"
+      ],
+      "ui": "需要核对：中文课程是否开放；先选后说或直接对麦克风说的具体流程。",
+      "design": "说明问答关系及操作，避免把候选朗读当成自由对话。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 回应已经提供，不能与自行组织答案同等解释。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "同时有理解、候选比较和朗读要求；读对了不等于选得合适，选对了也不等于朗读已被可靠识别。",
+      "feedback_recommendation": "理解选择与语音结果分别给清楚反馈；中文提示应说明本次究竟要选、要说，还是两者都要。",
+      "ability_limit": "回应已经提供，不能与自行组织答案同等解释。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-E16",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E17",
+      "name": "英语近音词二选一听辨",
+      "group": "英语声音专项",
+      "kind": "语言任务",
+      "goal": "从两个近音英语词中辨认所听词的书面形式。",
+      "input": "一个音频入口；dock/deck 或 got/get。",
+      "output": "选择与声音对应的词。",
+      "steps": [
+        "按需播放，再选择一项；可改选，点击检查才判分。",
+        "正确时选项和底部变绿，点击继续到下一条音频题。",
+        "错误时选项锁定，底部红色提示再多听几次；可再点击播放，但没有直接列出正确词。",
+        "继续后先进入声音同异题；后段同组选项再现，这一轮选择 got 被判正确。"
+      ],
+      "ui": "两个文字选项横向并列，题干是中文；大播放按钮位于中心。底部另有太简单、太难和报错入口；本轮未向产品提交评价或报错。",
+      "design": "仅改变少量声音差异可让学习者集中注意听辨，书面词仍作为候选支架。相比基础词义题，错误反馈鼓励重听，没有直接给标准词。",
+      "caution": "F13 记录多个实例的正确、错误、改选和继续。没有保存音轨，后段同组选项是否原音轨重练未核，所以不计严格同题核心闭环，也未测声音质量。",
+      "availability": "2026-09-27 中文→英语桌面网页版发音专项，免费访客实际出现；与基础入门课分开编号。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "images": [
+        {
+          "id": "CN-LIVE-201",
+          "file": "assets/flows/201.png",
+          "action": "点击开始进入专项",
+          "result": "出现你听到了什么、dock/deck 两选项、大播放按钮；检查禁用，题页顶部没有红心显示。",
+          "label": "点击开始进入专项；出现你听到了什么、dock/deck 两选项、大播放按钮；检查禁用，题页顶部没有红心显示。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "url": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:17:08+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "7d4a78ad23e59a608ca20306560ac19dbedbf4f7ae27846dcec42a6c660c47ea",
+          "original_capture_filename": "201-sound-choice-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语，发音专项（同一免费访客，第二节采集课）",
+          "lesson_run": "CN-WEB-20260927-B"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "音频可能不同而文字选项完全相同：连续 got/get 曾分别接受 got、接受 get、拒绝 get；不能把多帧按文字拼成同一道题。",
+      "feedback_recommendation": "听辨训练应保留重听，并让学习者知道下一步怎么比较；不应把选项颜色误读为即时判分。",
+      "ability_limit": "F13 记录多个实例的正确、错误、改选和继续。没有保存音轨，后段同组选项是否原音轨重练未核，所以不计严格同题核心闭环，也未测声音质量。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/duolingo-english-sounds-tab/"
+      ],
+      "sources": [
+        "https://zh-cn.duolingo.com/alphabets/en/pronunciation"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 23,
+        "planned_checks": 12,
+        "anchor": "flow-E17",
+        "live_run_ids": [
+          "F13"
+        ]
+      }
+    },
+    {
+      "id": "E18",
+      "name": "听两个英语声音，判断词语相同或不同",
+      "group": "英语声音专项",
+      "kind": "语言任务",
+      "goal": "暂时去掉英语拼写提示，判断两个声音是否代表同一个词。",
+      "input": "两个独立音频入口；作答前隐藏英语词形。",
+      "output": "同一个词 / 两个不同的词。",
+      "steps": [
+        "分别点击两个音频入口，选择同一个词或两个不同的词，提交前可改选。",
+        "点击检查后揭晓英语词形与音标；正确为绿色，错误为红色。",
+        "错误后继续进入另一题；未作答直接跳过会出现黄色反馈。",
+        "课后段又出现 got/get 词对，选择不同被判正确；继续实际进入专项结算。"
+      ],
+      "ui": "两个音频位置上下叠放，下方是中文判断选项；单词与音标在判分后补出。错答没有把所选项改成正确选项，而是保留草稿供对照。",
+      "design": "先隐藏拼写，迫使任务材料来自声音；判分后揭晓，再连接到英语文字和音标。它检查辨别差异，不要求翻译、拼写或自己说英语。",
+      "caution": "F14 含明确分开的 deck/dock、get/get、deck/deck、got/get 实例；后段重现词对但未核对音轨身份。正确和错误截图齐备，不宣称所有实例是同一道题。",
+      "availability": "2026-09-27 中文→英语桌面网页版发音专项，免费访客实际出现；与基础入门课分开编号。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "images": [
+        {
+          "id": "CN-LIVE-218",
+          "file": "assets/flows/218.png",
+          "action": "点击继续",
+          "result": "进入先听后答：两个音频入口、同一个词/两个不同的词；英语词形暂时隐藏。",
+          "label": "点击继续；进入先听后答：两个音频入口、同一个词/两个不同的词；英语词形暂时隐藏。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "url": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:19:44+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "b862d38042bac75abffb7bc7c0306364e7c065b2f1b94d9ef781159c3ca17599",
+          "original_capture_filename": "218-sound-same-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语，发音专项（同一免费访客，第二节采集课）",
+          "lesson_run": "CN-WEB-20260927-B"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "需要短时保留第一个声音，再与第二个比较。是否听到声音、是否记住以及如何判断相同，是不同失败来源。",
+      "feedback_recommendation": "同异关系揭晓后保留清晰比较；跳过要采用准确文案。实测黄色跳过仍带鼓励语，不能据它判定答对。",
+      "ability_limit": "F14 含明确分开的 deck/dock、get/get、deck/deck、got/get 实例；后段重现词对但未核对音轨身份。正确和错误截图齐备，不宣称所有实例是同一道题。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/duolingo-english-sounds-tab/"
+      ],
+      "sources": [
+        "https://zh-cn.duolingo.com/alphabets/en/pronunciation"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 10,
+        "unique_flow_screenshots": 22,
+        "planned_checks": 12,
+        "anchor": "flow-E18",
+        "live_run_ids": [
+          "F14"
+        ]
+      }
+    },
+    {
+      "id": "E19",
+      "name": "听英语声音，配对英语书面词",
+      "group": "英语声音专项",
+      "kind": "语言任务",
+      "goal": "将英语声音与对应英语拼写联系起来，重点区分近音词。",
+      "input": "四个音频按钮，与 deck、got、dock、get 四个文字选项。",
+      "output": "逐对完成声音与书面词匹配。",
+      "steps": [
+        "点声音再点书面词；也可以先点右侧书面词，再点声音。",
+        "错配立即短暂变红，随后恢复可选；可留在同一道题中重新配对。",
+        "正确对变绿后变浅锁定，继续配其他项；已经正确的项不因后续错误而撤销。",
+        "全部配完自动显示绿色正确；点击继续进入 got/get 听辨题。"
+      ],
+      "ui": "音频与英语词分列，波形图标代替左侧可见拼写。瞬时红/绿反馈与之后禁用状态都有截图；此专项题页未显示红心。",
+      "design": "声音先于拼写出现，避免两列直接做文字匹配；即时逐对反馈降低错误恢复成本。逐步排除会降低后续配对难度，因此不能用最终全配对推定独立听写能力。",
+      "caution": "F16 记录同一道配对题的错误、恢复、正确、全部完成与继续，计入核心闭环；音质、全部排列、键盘和退出分支未测。它不是 E20 声音配中文意义。",
+      "availability": "2026-09-27 中文→英语桌面网页版发音专项，免费访客实际出现；与基础入门课分开编号。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "images": [
+        {
+          "id": "CN-LIVE-239",
+          "file": "assets/flows/239.png",
+          "action": "点击继续",
+          "result": "进入四组声音—英语书面词配对；左列四音频、右列 deck/got/dock/get，检查禁用。",
+          "label": "点击继续；进入四组声音—英语书面词配对；左列四音频、右列 deck/got/dock/get，检查禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "url": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:24:20+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "951831a55482f6206794ad74841625d4836700de476a3b38871e3fd5727337d6",
+          "original_capture_filename": "239-sound-pairs-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语，发音专项（同一免费访客，第二节采集课）",
+          "lesson_run": "CN-WEB-20260927-B"
+        }
+      ],
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "需要记忆刚听的声音并在近音词之间定位。本轮通过试错验证交互，不作为听觉准确率证据。",
+      "feedback_recommendation": "错配后的稳定页面应仍可重听；已完成状态要保留。对音近错误，可用声音和音标对比帮助学习者定位差异。",
+      "ability_limit": "F16 记录同一道配对题的错误、恢复、正确、全部完成与继续，计入核心闭环；音质、全部排列、键盘和退出分支未测。它不是 E20 声音配中文意义。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/ko/practice-english-sounds/"
+      ],
+      "sources": [
+        "https://zh-cn.duolingo.com/alphabets/en/pronunciation"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 13,
+        "planned_checks": 11,
+        "anchor": "flow-E19",
+        "live_run_ids": [
+          "F16"
+        ]
+      }
+    },
+    {
+      "id": "E20",
+      "kind": "原子任务",
+      "group": "听力与口语",
+      "sources": [
+        "https://apps.apple.com/cn/iphone/story/id1399754989"
+      ],
+      "name": "听英语，配对中文词义",
+      "images": [
+        {
+          "file": "assets/cn-apple-audio-matching-composite.webp",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Features122/v4/4a/d8/4f/4ad84f83-ffa9-a587-35b1-c30c1db2c70d/1d880045-084b-4af4-b57b-20dd9068e64a.png/1380x2612bb.webp",
+          "source": "https://apps.apple.com/cn/iphone/story/id1399754989",
+          "label": "英语听音 → 中文词义 · 前景完整题页",
+          "framing": "官方双屏合成原图 · 仅前景题页完整",
+          "note": "官方双手机合成原图。前景题页从顶部关闭、进度和无限心到四组音频/中文词义、底部“现在不做听力题”、完整“检查”和 Home 条均可见。背景的中文→英语词块翻译被前景手机遮挡，不能计作完整翻译题。此题是普通听力词义配对，不是 Sounds 音素辨别或 Radio。",
+          "width": 1380,
+          "height": 2612,
+          "sha256": "adeced4314a4deabb46900ab5b1cd9cf6805b83336381f63016c29163a1faafa",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": true,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Apple App Store 编辑部（官方平台编辑文章，非 Duolingo 自有博客）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM02"
+        }
+      ],
+      "goal": "把英语声音与中文意义联系起来，检查听觉词义识别。",
+      "input": "左侧音频按钮与右侧中文词义。",
+      "output": "例如将英语 phone 的声音与“手机”配对。",
+      "steps": [
+        "点击一个音频按钮听英语。",
+        "在中文选项中点对应词义，逐组完成配对。",
+        "图中 phone 与“手机”已匹配；底部仍有灰色“检查”和“现在不做听力题”。完成全部配对后的转换尚未实测。"
+      ],
+      "ui": "音频与中文词义分成两列，已配对项目用绿色强调。原图是官方双手机合成图，前景题页完整，背景翻译题被遮挡。",
+      "design": "中文选项把输出限制在意义选择，因此不用键入英语也能检验声音理解。与 E01 相比，输入由可见英语词形变成英语声音。",
+      "extra_load": "需要分辨英语声音并记住刚听的内容；不能依靠中文选项来判断是否会拼写英语。",
+      "feedback_recommendation": "建议让重听与已完成配对状态保持清楚；错误时重新连接声音和意义，而不只要求再点一次。",
+      "ability_limit": "这是普通课程的听力词义配对证据，不能把它当作 Sounds 专项、Radio 题页或无限心套餐的独占证据。",
+      "caution": "这是普通课程的听力词义配对证据，不能把它当作 Sounds 专项、Radio 题页或无限心套餐的独占证据。",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "截图事实",
+      "availability": "已见中文界面与英语学习方向；证据仅适用于所示版本和状态，当前账号、地区与客户端未逐项实测。",
+      "plan": "普通课程任务。图片中的心形、能量或无限心不能单独证明此题是某套餐专属；本轮未核验账号权益。",
+      "status": "完整中文题页",
+      "modality_section": "listening-speaking",
+      "modality_note": "必须听英语声音，通过点击中文词义作答。",
+      "modality_label": "听力与口语相关",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 11,
+        "anchor": "flow-E20",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "E21",
+      "kind": "原子任务",
+      "group": "词汇与翻译",
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson",
+        "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo"
+      ],
+      "name": "按中文意义，看图选择英语词",
+      "images": [
+        {
+          "id": "CN-LIVE-010",
+          "file": "assets/flows/010.png",
+          "action": "进入“哪个是茶”",
+          "result": "三张图卡尚未选中；检查为灰色，红心为5。",
+          "label": "进入“哪个是茶”；三张图卡尚未选中；检查为灰色，红心为5。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:39:26+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "20f013dac2a3ac6be61c1d08cb14129fdfdf3f8953a4d195de0a62106b41e195",
+          "original_capture_filename": "010-picture-tea-01-initial.png",
+          "visual_reviewed": true
+        },
+        {
+          "file": "assets/cn-googleplay-picture-choice.png",
+          "url": "https://play-lh.googleusercontent.com/muinU63AIT_FZkK8OA9urtIl9JoaBaFIM7fvolInrg60KXzPrIl8nqCKw4fWbXaYYBnL96EIzYtaKPHx4Pv5Kg=w1052-h592",
+          "source": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+          "label": "中文提示“玻璃杯” · 看图选词宣传局部图",
+          "framing": "官方宣传局部图 · 不计为完整题页",
+          "note": "中文题干“哪一个是‘玻璃杯’呢？”，四宫格图卡已选 glass；下排两张图的词标签被绿色反馈条覆盖，因此不能标为全部作答内容与控件可见。顶部关闭、进度、心形与底部正确反馈、完整继续按钮可见；宣传构图的应用底边裁断，不计完整界面。",
+          "width": 333,
+          "height": 592,
+          "sha256": "6eac6550749485499a46cbbcdc79405a6da9412c9d5d831acbde3f9c3bb15690",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": false,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM06"
+        }
+      ],
+      "goal": "根据中文意义，在插图和英语词标签中识别目标词。",
+      "input": "哪个是茶呢？；coffee、tea、sugar 三张图卡。",
+      "output": "选择 tea。",
+      "steps": [
+        "进入题目时没有选择，检查为灰色。",
+        "点选图卡变蓝；改点另一项转移选择；再次点已选 tea，本轮仍保持选中。",
+        "选 sugar 再点检查，首次错误触发红心说明；关闭后可见正确答案 tea。",
+        "错误后选项锁定，继续进入下一道文字题；课末同题以错题重练重现。",
+        "重练选择 tea、检查，获得绿色反馈，再点继续进入后继题。"
+      ],
+      "ui": "本轮是横向三张大图卡，英语标签在图片下，数字提示在角落；提交前的蓝色与提交后的红绿反馈不同。顶部进度与红心、底部检查/继续位置稳定。",
+      "design": "图片减少了初学者建立意义的成本，但用户也可能只靠中文与图片完成任务。紧随其后的无图文字选词降低了图像帮助；这是本次课序观察，不是所有课程的固定规则。",
+      "extra_load": "图形辨认与英语词形辨认同时参与。需通过去图任务判断词形是否被记住。",
+      "feedback_recommendation": "错误后应让正确词和中文意义可核对，并在后续撤去图片再检验；F01 记录了当前产品的答案反馈与课末重练。",
+      "ability_limit": "F01 是茶题的同题闭环；F08 是另一道咖啡题的直接正确路径。官方玻璃杯四宫格图属于另一版本，不能与本轮三卡图拼接为同题流程。未穷举所有快捷键、退出与异常。",
+      "caution": "F01 是茶题的同题闭环；F08 是另一道咖啡题的直接正确路径。官方玻璃杯四宫格图属于另一版本，不能与本轮三卡图拼接为同题流程。未穷举所有快捷键、退出与异常。",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "non-audio",
+      "modality_note": "阅读中文提示、图片与英语词，通过点选作答，不要求听音或开口。",
+      "modality_label": "不含口语和听力",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 17,
+        "planned_checks": 10,
+        "anchor": "flow-E21",
+        "live_run_ids": [
+          "F01",
+          "F08"
+        ]
+      }
+    },
+    {
+      "id": "E22",
+      "kind": "原子任务",
+      "group": "听力与口语",
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson",
+        "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo"
+      ],
+      "name": "听英语，键入英语词句",
+      "images": [
+        {
+          "id": "CN-LIVE-074",
+          "file": "assets/flows/074.png",
+          "action": "键入 coffee",
+          "result": "输入框出现草稿；检查启用。",
+          "label": "键入 coffee；输入框出现草稿；检查启用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:48:49+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "6f801b88a12d5f42a6a760b8024768d6a067be0ab83449bab2e6c00ba330db2f",
+          "original_capture_filename": "074-listen-tea-06-typed-draft.png",
+          "visual_reviewed": true
+        },
+        {
+          "file": "assets/cn-googleplay-typed-dictation.png",
+          "url": "https://play-lh.googleusercontent.com/RjYvLo1uoCYlLNAug8VEP0KMNm9mLBczK4Vb1YtBVK-k7ghXxGCQ8QoCCoh18zGjbYzgX_oWro7HKL1RTEYmzOs=w1052-h592",
+          "source": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+          "label": "中文听写指令 · 英语键入与中文反馈局部图",
+          "framing": "官方宣传局部图 · 不计为完整题页",
+          "note": "中文键入听到内容的指令；常速、慢速两个音频入口，大文本框内 I need to pay.；底部正确反馈含中文释义，完整继续按钮可见。宣传卡片下边界截断，不能算整幅完整界面。",
+          "width": 333,
+          "height": 592,
+          "sha256": "9d55534fe23d429c98fb6b3a010a7cc67c867c91fc194657621a91a0fb3efafe",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": false,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Duolingo（Google Play 托管的开发者展示素材）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM09"
+        }
+      ],
+      "goal": "在不提供可点击词库时，把听到的英语写出来。",
+      "input": "英语音频；本轮实际反馈目标为单词 tea，旧官方图为句子 I need to pay.。",
+      "output": "键入所听英语；本轮故意提交 Tea, please.，实际被判错。",
+      "steps": [
+        "在听力词块题点击使用键盘；文本框与键入指令出现。",
+        "输入 coffee，清空，再输入 Tea, please.；清空时检查重新禁用。",
+        "切换词库再回键盘，文本草稿 Tea, please. 保留。",
+        "提交后实际判错，正确答案 tea、中文茶；本次访客入门课在零红心时提供一次免费补心。",
+        "补心后仍在锁定的错误反馈页，点击继续进入下一道对话题。另一道听写的现在不做听力题会显示暂停15分钟的提示。"
+      ],
+      "ui": "输入框在播放控件下，主操作固定在底部。错误时输入文本仍保留，反馈给出正确英语与中文意义；补心弹层与作答反馈是两个状态。",
+      "design": "从词库切到键盘去掉候选帮助，增加提取与拼写要求。能查看正确英语及中文意义有助于区分表达形式和意义，但不能凭文本判断错在听辨还是手误。",
+      "extra_load": "所听内容、拼写和输入法一起影响结果；本例多写 please 被判错，不能据此推定大小写或标点是否容错。",
+      "feedback_recommendation": "将任务错误、听音环境和资源不足分开处理；跳过听力的时间说明应明确，恢复是否发生需要另外验证。",
+      "ability_limit": "F06 和 F10 分属两道听力题；未采到本轮正确听写、原题重练、声音质量、拼写容错或15分钟后恢复。免费补心只证实本次访客入门课，不代表所有账号权益。",
+      "caution": "F06 和 F10 分属两道听力题；未采到本轮正确听写、原题重练、声音质量、拼写容错或15分钟后恢复。免费补心只证实本次访客入门课，不代表所有账号权益。",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "status": "完整中文题页 · 本轮实测",
+      "modality_section": "listening-speaking",
+      "modality_note": "必须听音，使用键盘输入英语；不要求口说。",
+      "modality_label": "听力与口语相关",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 8,
+        "unique_flow_screenshots": 18,
+        "planned_checks": 13,
+        "anchor": "flow-E22",
+        "live_run_ids": [
+          "F06",
+          "F10"
+        ]
+      }
+    },
+    {
+      "id": "E23",
+      "kind": "原子任务",
+      "group": "词汇与翻译",
+      "images": [
+        {
+          "id": "CN-LIVE-017",
+          "file": "assets/flows/017.png",
+          "action": "点击错误反馈的继续",
+          "result": "进入下一道文字选词题“茶”；不是在原看图题内编辑。",
+          "label": "点击错误反馈的继续；进入下一道文字选词题“茶”；不是在原看图题内编辑。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://zh-cn.duolingo.com/lesson",
+          "url": "https://zh-cn.duolingo.com/lesson",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T16:40:50+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口；保留题干、作答区、进度与反馈；弹层状态单独标明",
+          "note": "2026-09-27 桌面 Chrome，中文→英语访客课程。未重绘或改写原图。具体产品构建版本未公布。",
+          "sha256": "6f807db1417dc9b8bd5c34ffc4c65d5d75790ed258698ee3dc8fef477a0f232a",
+          "original_capture_filename": "017-picture-tea-08-continue-to-text-question.png",
+          "visual_reviewed": true
+        }
+      ],
+      "sources": [
+        "https://zh-cn.duolingo.com/lesson"
+      ],
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "阅读中文与英语文字，点选即可；无需听音或开口。",
+      "name": "按中文词义，选择对应英语词",
+      "goal": "移去图片后，检查中文意义与英语词形的对应。",
+      "input": "茶；选项 coffee / hot / tea。另一个实例为咖啡。",
+      "output": "选择 tea；另一实例选择 coffee。",
+      "steps": [
+        "读中文词与三个纯文字选项，检查初始禁用。",
+        "点击 coffee、改点 tea，再改 hot；每次只有一项蓝色选中。",
+        "提交 hot 后显示正确答案 tea，红心4变3；点击继续进入新题。",
+        "课末茶题重现，选择 tea、检查得到绿色反馈，再继续。",
+        "另一道咖啡题测试了退出弹层和取消：选择 coffee 后取消退出，原选择保持；再提交正确。"
+      ],
+      "ui": "中文词出现在角色气泡里，英语选项竖向排列，取消退出后选择保留。与看图题相比，没有图片可供直接匹配。",
+      "design": "相同意义从图卡转为文字选项，减少视觉提示，更集中检查词义识别；仍属于有候选的识别，不等于能够独立拼写。",
+      "extra_load": "只需理解一个中文词，但要区分英语候选；选项数量、熟悉程度和词性差异影响猜测机会。",
+      "feedback_recommendation": "词义错误与退出取消属于不同分支；报告分别记录茶题的错误重练与咖啡题的取消退出，避免拼成虚假的同题全过程。",
+      "caution": "F02 是茶题核心闭环，F09 是咖啡题退出取消及正确路径。不是 E02 的英文定义选择。未确认真正退出后的进度恢复、键盘快捷键及更多干扰项。",
+      "evidence_level": "full_chinese_task",
+      "status": "完整中文题页 · 本轮实测",
+      "ui_basis": "本轮中文网页实测事实",
+      "ability_limit": "F02 是茶题核心闭环，F09 是咖啡题退出取消及正确路径。不是 E02 的英文定义选择。未确认真正退出后的进度恢复、键盘快捷键及更多干扰项。",
+      "availability": "2026-09-27 中文→英语桌面网页版访客入门课实际出现。当前结论限于所记录题干、平台和会话。",
+      "plan": "本轮为免费访客；没有登录、开通试用或购买 Super/Max。付费套餐、其他设备与账号不由此推定。",
+      "analysis_source": "live-flow-evidence.json；逐图真实操作记录",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 10,
+        "unique_flow_screenshots": 16,
+        "planned_checks": 10,
+        "anchor": "flow-E23",
+        "live_run_ids": [
+          "F02",
+          "F09"
+        ]
+      }
+    },
+    {
+      "id": "S01",
+      "name": "故事阅读理解：字面意义、意图与总结",
+      "group": "Stories 故事",
+      "kind": "情境交互",
+      "goal": "理解连续英语情节，用中文判断人物说了什么、想表达什么及发生了什么。",
+      "input": "Taxi Ride的英文叙述和对话；三道中文理解题。",
+      "output": "选择与上下文一致的中文解释。",
+      "steps": [
+        "逐段点继续阅读英语，可悬停词语查看中文意义。",
+        "题目插入当前故事页，点击中文候选即判定，无检查按钮。",
+        "错项短暂红色后变灰禁用，继续仍禁用，可直接选另一项。",
+        "正确项变绿后点继续，题目收起，新增后续台词。"
+      ],
+      "ui": "英语叙述与角色气泡沿纵向保留；中文问题紧接上下文，三项中文候选与底部继续分开。首题两次错误后原位正确；另两题分别检查付钱那句话的意图和手机导航结局。",
+      "design": "中文减少答题表达成本，英语理解仍承担学习目标。字面复述、话语意图和情节总结是不同层次，不能用“故事选择题”一个名称抹平。",
+      "caution": "F18首题为完整同题错答闭环，另两题分别列明。该阅读题可用可见文字完成，归无需听说；但整篇故事还穿插听音任务，不能把整节故事归无听力。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；乘坐出租车故事重读中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "images": [
+        {
+          "id": "CN-LIVE-307",
+          "file": "assets/flows/307.png",
+          "action": "点击继续",
+          "result": "出现“等等！司机刚说的是……”和三个中文选项；上下文可读，继续禁用。",
+          "label": "点击继续；出现“等等！司机刚说的是……”和三个中文选项；上下文可读，继续禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "url": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:50:08+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "ccc30c68f649169dc86e0c36333f03d3148eb7a50484b0e9a03f363284b7ddbf",
+          "original_capture_filename": "307-story-comprehension-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；乘坐出租车故事重读",
+          "lesson_run": "CN-WEB-20260927-C"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "本题英语上下文与中文问题均可见，通过阅读点选可完成；不代表整篇故事没有听力。",
+      "extra_load": "要跨句保持人物、指代和因果。重复排除到最后一项可以完成任务，因此最后答对不能证明第一次就理解。",
+      "feedback_recommendation": "保留相关上下文，为错项指出不一致的线索；按字面、推断、总结分别记录表现，避免只计故事完成。",
+      "ability_limit": "F18首题为完整同题错答闭环，另两题分别列明。该阅读题可用可见文字完成，归无需听说；但整篇故事还穿插听音任务，不能把整节故事归无听力。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/",
+        "https://blog.duolingo.com/de/so-verbessert-duolingo-das-leseverstehen/"
+      ],
+      "sources": [
+        "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+        "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 8,
+        "unique_flow_screenshots": 12,
+        "planned_checks": 9,
+        "anchor": "flow-S01",
+        "live_run_ids": [
+          "F18"
+        ]
+      }
+    },
+    {
+      "id": "S02",
+      "name": "故事词义定位：按中文意义点英语片段",
+      "group": "Stories 故事",
+      "kind": "词义定位任务；含母语/英语释义变体",
+      "goal": "把中文意义定位到当前英语句子的具体词组。",
+      "input": "导航指示；The directions on my phone say that road is faster…",
+      "output": "选择The directions。",
+      "steps": [
+        "读中文意义，比较原句中几个可点击的英语片段。",
+        "点road立即错误，稳定后该片段禁用；继续不可用。",
+        "改点The directions正确，所有片段锁定。",
+        "可打开退出再取消，原正确选择保留；继续后进入下一句。"
+      ],
+      "ui": "答案就在原句里，按钮化片段保留语境；不可点击的连接文字与候选分布在同一行。",
+      "design": "比脱离语境的双列表配对更强调在句中定位含义；词组粒度提醒中文意义未必对应单个英语词。",
+      "caution": "F19同题错误、正确、退出取消及继续都有原图；未验证确认退出后重进、重复点击或所有候选。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；乘坐出租车故事重读中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "images": [
+        {
+          "id": "CN-LIVE-313",
+          "file": "assets/flows/313.png",
+          "action": "点击继续",
+          "result": "出现“哪一个选项的意思是导航指示？”；原句被拆成可选英语片段，继续禁用。",
+          "label": "点击继续；出现“哪一个选项的意思是导航指示？”；原句被拆成可选英语片段，继续禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "url": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:51:04+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "0025a58adb2704b48f89bb7db111f510c651a1a0e1cfaad9f827881f253ef8f9",
+          "original_capture_filename": "313-story-select-phrase-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；乘坐出租车故事重读",
+          "lesson_run": "CN-WEB-20260927-C"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "本题英语上下文与中文问题均可见，通过阅读点选可完成；不代表整篇故事没有听力。",
+      "extra_load": "要同时辨认片段边界和词义；能选中词组不等于能主动写出或口说它。",
+      "feedback_recommendation": "让词组边界清楚，把错误词的实际意义作为可查看提示；退出取消应保留已完成状态。",
+      "ability_limit": "F19同题错误、正确、退出取消及继续都有原图；未验证确认退出后重进、重复点击或所有候选。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/nivel-certo-de-dificuldade/",
+        "https://blog.duolingo.com/ko/zone-of-proximal-development/"
+      ],
+      "sources": [
+        "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+        "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 7,
+        "planned_checks": 9,
+        "anchor": "flow-S02",
+        "live_run_ids": [
+          "F19"
+        ]
+      }
+    },
+    {
+      "id": "S03",
+      "name": "故事末尾开放写作",
+      "group": "Stories 故事",
+      "kind": "情境交互",
+      "goal": "用自己的英语组织故事回应，说明原因或复述要点。",
+      "input": "她为什么回去了？—她忘了钥匙。",
+      "output": "She forgot her keys.",
+      "steps": [
+        "理解开放问题，确定一两个要点，再用英语写出连贯回应并检查。"
+      ],
+      "ui": "需要核对：中文英语故事写作是否存在；题面、字数、输入和反馈规则。",
+      "design": "可用于说明评价依据和修改方向，不直接替用户写完整答案。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 现有目录尚无该英语完整题面，更未建立中文开放状态；字数和评分不可沿用其他课程。 本次Taxi Ride重读已走到结算，但没有出现开放写作；不能从这一篇推断所有故事或等级。",
+      "availability": "官方历史文章确认中文使用者学习英语的 Stories；当前具体交互、账号入口和完整中文题页仍待核实。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "按阅读故事后键入英语回应归类；英语完整写作题图仍待补。",
+      "extra_load": "同时检索内容、词汇、时态和句子结构；例如‘她忘了钥匙’需要自己写出 She forgot her keys，而非选择现成句。",
+      "feedback_recommendation": "中文说明回答目标，反馈先看是否表达清楚，再挑关键语言问题；不要强制与单一范文逐字一致。",
+      "ability_limit": "现有目录尚无该英语完整题面，更未建立中文开放状态；字数和评分不可沿用其他课程。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/nivel-certo-de-dificuldade/",
+        "https://blog.duolingo.com/ko/zone-of-proximal-development/"
+      ],
+      "sources": [
+        "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 8,
+        "anchor": "flow-S03",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "S04",
+      "kind": "情境中的任务变体",
+      "group": "故事阅读",
+      "images": [
+        {
+          "id": "CN-LIVE-328",
+          "file": "assets/flows/328.png",
+          "action": "点击继续",
+          "result": "“选择短语”：No, ____ . Why?，旁有回放，三个英语短语候选；作答前缺失片段不可见。",
+          "label": "点击继续；“选择短语”：No, ____ . Why?，旁有回放，三个英语短语候选；作答前缺失片段不可见。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "url": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:53:43+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "5ab112f1a4f8ce4f1d68a4428fe5882dd813c041ede56599d7f8c3ff1fff764e",
+          "original_capture_filename": "328-story-complete-phrase-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；乘坐出租车故事重读",
+          "lesson_run": "CN-WEB-20260927-C"
+        }
+      ],
+      "sources": [
+        "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured"
+      ],
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "有音频回放、作答前缺句隐藏；未验证脱离声音能否独立完成，暂不计严格无需听力。",
+      "name": "故事短语补全：带回放的缺句选择",
+      "goal": "在情境与声音线索下补全对话中的缺失片段；两种线索的贡献待核。",
+      "input": "No, ____ . Why?；三项英语短语，旁有回放。",
+      "output": "I'm going shopping。",
+      "steps": [
+        "读情境与不完整句子，按需回放。",
+        "点I'm good at stopping立即错误，随后候选变灰。",
+        "点I'm going shopping正确，缺口补成完整句子，继续启用。",
+        "点继续实际进入司机解释河边情节。"
+      ],
+      "ui": "隐藏片段与三个英语候选同屏；正确后完整台词才显示，候选依判定变红/灰/绿。",
+      "design": "给定短语减少自行生成要求；选项既含意义差异，也含发音相近的词组，可能同时考查声音和情境。这里只能从画面分析这两类可能，不把未听音的判断写成事实。",
+      "extra_load": "学习者需明确是找听到的内容还是仅找情境合理回答；中文指令“选择短语”本身未完全说明线索权重。",
+      "feedback_recommendation": "题意应明确声音与情境的使用要求，错误后给出可对照的目标片段与整句。",
+      "caution": "F20有同题错答核心闭环；没有音轨，严格的无听力独立完成能力未验证，因此本条置于听说相关，不混入无需听说组。",
+      "evidence_level": "full_chinese_task",
+      "status": "完整中文题页 · Super账号实测",
+      "ui_basis": "本轮中文网页实测事实",
+      "ability_limit": "F20有同题错答核心闭环；没有音轨，严格的无听力独立完成能力未验证，因此本条置于听说相关，不混入无需听说组。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；乘坐出租车故事重读中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 8,
+        "unique_flow_screenshots": 5,
+        "planned_checks": 9,
+        "anchor": "flow-S04",
+        "live_run_ids": [
+          "F20"
+        ]
+      }
+    },
+    {
+      "id": "S05",
+      "kind": "情境中的任务变体",
+      "group": "故事阅读",
+      "images": [
+        {
+          "id": "CN-LIVE-334",
+          "file": "assets/flows/334.png",
+          "action": "点击继续",
+          "result": "“重组听到的句子”：气泡文字隐藏，三个片段 are wrong / directions / I think my；继续禁用。",
+          "label": "点击继续；“重组听到的句子”：气泡文字隐藏，三个片段 are wrong / directions / I think my；继续禁用。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "url": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T17:55:02+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "a9708e605dc269f1a86953219da0861ef7c788950a79cdf43b2d02d8a72d3ce5",
+          "original_capture_filename": "334-story-listen-order-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；乘坐出租车故事重读",
+          "lesson_run": "CN-WEB-20260927-C"
+        }
+      ],
+      "sources": [
+        "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured"
+      ],
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "中文明确要求重组听到的句子；用点击作答，不要求口说。",
+      "name": "故事听音重组：逐片段接受正确前缀",
+      "goal": "把所听句子按正确顺序重组为英语片段序列。",
+      "input": "隐藏文字的对话气泡与are wrong / directions / I think my。",
+      "output": "I think my directions are wrong.",
+      "steps": [
+        "点击一个片段，它立即接受或拒绝，无检查按钮。",
+        "首位误点are wrong短暂红色，不插入答案，随后恢复可选。",
+        "选择I think my后气泡揭晓正确前缀；再错点are wrong时前缀仍保留。",
+        "继续选择directions和are wrong，整句完成自动绿色反馈，再点继续读后文。"
+      ],
+      "ui": "已接受前缀逐步出现，已用按钮禁用；错选不破坏已完成部分。错误片段恢复可选，因为它可能适合句子后面的正确位置。",
+      "design": "校验单位是当前位置的一块，形成逐步帮助；普通听写词库则先允许构句再判整句。这种帮助能减少挫败，但也降低了独立复述整个句子的要求。",
+      "extra_load": "要保留声音的顺序并定位片段。每步试错也能完成，不能用最终拼齐判断完整听辨能力。",
+      "feedback_recommendation": "学习记录应保留各位置错误和已接受前缀；若要测独立能力，后续应撤去逐片段即时反馈。",
+      "caution": "F21同题从两次错误到正确和继续已拍到；没有验证原音轨、播放质量或退出恢复。与E13不混用操作规则。",
+      "evidence_level": "full_chinese_task",
+      "status": "完整中文题页 · Super账号实测",
+      "ui_basis": "本轮中文网页实测事实",
+      "ability_limit": "F21同题从两次错误到正确和继续已拍到；没有验证原音轨、播放质量或退出恢复。与E13不混用操作规则。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；乘坐出租车故事重读中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 8,
+        "planned_checks": 11,
+        "anchor": "flow-S05",
+        "live_run_ids": [
+          "F21"
+        ]
+      }
+    },
+    {
+      "id": "R01",
+      "name": "Radio：找出听到的两个英语单词",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "在英语话语中识别目标词形，不要求拼写整句。",
+      "input": "选择你听到的2个单词；class / favorite / boring。",
+      "output": "逐次找出class与favorite。",
+      "steps": [
+        "点击一个词即判定；boring错误后变灰禁用。",
+        "点击class立即绿色正确，但一个词不足以完成任务。",
+        "点击favorite正确后，问题自动收起并继续节目。"
+      ],
+      "ui": "短语指令明确数量；三个英语词按钮横向排布。已对项保持绿色，错误项变灰；没有统一检查或继续按钮。",
+      "design": "把长话语里的局部词形提出来，降低整段理解和输出压力。这里不是先多选后提交，而是逐词获得反馈并累积满足数量。",
+      "caution": "F33同题错误、一个正确、两个正确及自动推进已拍到。未听验音轨；没有可提交第三项的稳定界面，不能编造多选上限提示。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；学习法国文化电台复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "images": [
+        {
+          "id": "CN-LIVE-523",
+          "file": "assets/flows/523.png",
+          "action": "下一道题已出现",
+          "result": "选择你听到的2个单词：class/favorite/boring。此前尝试暂停时题目已经覆盖控件，点击未成功；此图不是暂停成功证据。",
+          "label": "下一道题已出现；选择你听到的2个单词：class/favorite/boring。此前尝试暂停时题目已经覆盖控件，点击未成功；此图不是暂停成功证据。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "url": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:21:58+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "eb061467bea8c063fcecb8debf8c1aca56e7528ad91ef3a8ac3dc0011fd508a6",
+          "original_capture_filename": "523-radio-paused.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；学习法国文化电台复习",
+          "lesson_run": "CN-WEB-20260927-E"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "需要记住声音中的词，随后比较拼写；错误候选一旦排除，剩余答案容易推出。",
+      "feedback_recommendation": "把首次识别与试错完成分开；给后续整句上下文，防止只抓单词忽略意义。",
+      "ability_limit": "F33同题错误、一个正确、两个正确及自动推进已拍到。未听验音轨；没有可提交第三项的稳定界面，不能编造多选上限提示。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/"
+      ],
+      "sources": [
+        "https://www.duolingo.com/lesson/unit/55/level/3"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 8,
+        "unique_flow_screenshots": 7,
+        "planned_checks": 10,
+        "anchor": "flow-R01",
+        "live_run_ids": [
+          "F33"
+        ]
+      }
+    },
+    {
+      "id": "R02",
+      "name": "Radio：英语声音配中文释义",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "把英语声音连到中文意义，随后核对英语拼写。",
+      "input": "四个声音与年、学校、图片、法语。",
+      "output": "year / French / pictures / school分别配到中文。",
+      "steps": [
+        "可先点声音也可先点中文，再点另一侧。",
+        "错配短暂标红后恢复，已经配对的项目保留。",
+        "正确时变绿并揭晓英文拼写，然后变浅禁用。",
+        "四对完成后自动恢复节目播放，无需检查或继续。"
+      ],
+      "ui": "主画面是莉莉演播室；配对位于底部两列，每列四项。英语拼写作答前隐藏、正确后才出现。",
+      "design": "先声音、再意义、后拼写构成分阶段关联；若只看正确截图，会误以为作答前就给了英文词形。自动恢复播放把词汇任务嵌回节目时间线。",
+      "caution": "F31完成同题错误恢复到全部正确并自动播放。通过试错采集，不代表听力表现；无限红心仅属于本次Super会话。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；学习法国文化电台复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "images": [
+        {
+          "id": "CN-LIVE-502",
+          "file": "assets/flows/502.png",
+          "action": "进入并等待首个任务",
+          "result": "莉莉演播室上方为进度和无限红心；下方选择配对，四个声音与年、学校、图片、法语。",
+          "label": "进入并等待首个任务；莉莉演播室上方为进度和无限红心；下方选择配对，四个声音与年、学校、图片、法语。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "url": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:16:19+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "f2cbdecf1614c22dcd595e49ada102592a97f347a1e71ac9315e186d55806f59",
+          "original_capture_filename": "502-radio-playing.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；学习法国文化电台复习",
+          "lesson_run": "CN-WEB-20260927-E"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "声音与候选位置需要短时记忆；完成项逐渐减少也增加排除策略的帮助。",
+      "feedback_recommendation": "保留错误后重听入口；课后结合整段台词回看声音、意义与拼写之间的关系。",
+      "ability_limit": "F31完成同题错误恢复到全部正确并自动播放。通过试错采集，不代表听力表现；无限红心仅属于本次Super会话。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/"
+      ],
+      "sources": [
+        "https://www.duolingo.com/lesson/unit/55/level/3"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 9,
+        "unique_flow_screenshots": 18,
+        "planned_checks": 11,
+        "anchor": "flow-R02",
+        "live_run_ids": [
+          "F31"
+        ]
+      }
+    },
+    {
+      "id": "R03",
+      "name": "Radio：判断中文陈述与英语内容是否一致",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "比较听到的英语内容和中文陈述，判断语义一致性。",
+      "input": "她去年在学校学习了西班牙语。与一段英语声音。",
+      "output": "点叉，表示该陈述不符合声音内容。",
+      "steps": [
+        "看到中文陈述，英语句子暂时隐藏；勾/叉两项可选。",
+        "点勾立即判错，揭示I learned French at school last year.。",
+        "错误项禁用，点叉变绿，随后自动继续节目。"
+      ],
+      "ui": "勾和叉表示回答“对/不对”，红绿表示回答是否正确；绿色的叉是正确答案，不是系统错误。",
+      "design": "语义判断减少自由输出，中文陈述使错在French/西班牙语这一细节更容易核对。揭晓英语在答错之后发生，属于纠错帮助。",
+      "caution": "F32同题错误、揭晓、正确、自动推进已记录。原音轨未保存，不做声音质量或学习能力判断。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；学习法国文化电台复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "images": [
+        {
+          "id": "CN-LIVE-518",
+          "file": "assets/flows/518.png",
+          "action": "等待下一问题出现",
+          "result": "“她去年在学校学习了西班牙语。”；音频波形与勾/叉二选一，作答前英文句子隐藏。",
+          "label": "等待下一问题出现；“她去年在学校学习了西班牙语。”；音频波形与勾/叉二选一，作答前英文句子隐藏。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "url": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:21:00+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "871857a46f06882d71762215c5ac8e8ea912aa5410b5bbfc927e1e027e419a2f",
+          "original_capture_filename": "518-radio-true-false-initial.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；学习法国文化电台复习",
+          "lesson_run": "CN-WEB-20260927-E"
+        }
+      ],
+      "status": "完整中文题页 · Super账号实测",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "要区分题目真伪与回答正确性；二选一经过排除即可通过，最终完成不能证明首次理解。",
+      "feedback_recommendation": "图标配合明确文字说明，避免儿童把叉等同于自己答错；纠错应把冲突的信息对应展示。",
+      "ability_limit": "F32同题错误、揭晓、正确、自动推进已记录。原音轨未保存，不做声音质量或学习能力判断。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "evidence_level": "full_chinese_task",
+      "ui_basis": "本轮中文网页实测事实",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/melhorar-o-listening-com-a-duoradio/"
+      ],
+      "sources": [
+        "https://www.duolingo.com/lesson/unit/55/level/3"
+      ],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 8,
+        "unique_flow_screenshots": 6,
+        "planned_checks": 9,
+        "anchor": "flow-R03",
+        "live_run_ids": [
+          "F32"
+        ]
+      }
+    },
+    {
+      "id": "R04",
+      "name": "Radio 听音选择图片",
+      "group": "Radio 电台",
+      "kind": "情境交互",
+      "goal": "把英语声音理解为对象或事件，并用图像选择回应。",
+      "input": "糖",
+      "output": "sugar",
+      "steps": [
+        "听英语对象或情境，从图中选对应一项。"
+      ],
+      "ui": "需要核对：中文 Radio 选图题；实际音频与图像对应。",
+      "design": "答后澄清词义和图像指代，尤其在图片不熟悉时。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 听音选图不验证拼写，也不自动等同所有普通看图选词题。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "虽然无拼写输入，仍有图片辨识负担；若两图分别表示糖和盐但画得近似，错误可能是图像歧义。",
+      "feedback_recommendation": "图片需靠形状或情境清楚区分；答后可用英语词加中文意义核对，不在首次听前用标签直接揭示。",
+      "ability_limit": "听音选图不验证拼写，也不自动等同所有普通看图选词题。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/primeiros-passos-como-aprender-idiomas-no-duolingo/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 12,
+        "anchor": "flow-R04",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "R05",
+      "kind": "情境中的任务变体",
+      "group": "电台听力",
+      "images": [
+        {
+          "id": "CN-LIVE-529",
+          "file": "assets/flows/529.png",
+          "action": "等待下一问题",
+          "result": "“她喜欢学习”，候选“关于新地方/关于旧地方”；本屏不展示完整英语台词。",
+          "label": "等待下一问题；“她喜欢学习”，候选“关于新地方/关于旧地方”；本屏不展示完整英语台词。",
+          "width": 1200,
+          "height": 1189,
+          "source": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "url": "https://www.duolingo.com/lesson/unit/55/level/3",
+          "interface_language": "中文",
+          "course_direction": "中文母语 → 英语",
+          "provenance": "本轮独立浏览器实测原图",
+          "capture_date": "2026-09-27T18:24:01+08:00",
+          "full_task_view": true,
+          "framing": "完整桌面视口 · 实际操作状态",
+          "note": "本次独立浏览器中文→英语实测，Super 账号；完整未修改视口原图。步骤事实与推论、未采集条件分别记录。",
+          "sha256": "506a9a63aeeb027ac2b3f781bf177b60b20a2c3d49c5c0d2023e1e1604f09355",
+          "original_capture_filename": "529-radio-after-words.png",
+          "visual_reviewed": true,
+          "course": "中文→英语；已登录 Super 账号；学习法国文化电台复习",
+          "lesson_run": "CN-WEB-20260927-E"
+        }
+      ],
+      "sources": [
+        "https://www.duolingo.com/lesson/unit/55/level/3"
+      ],
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "根据此前节目声音选择中文含义；不是纯文字阅读题，不要求开口。",
+      "name": "Radio：中文选项核对节目内容",
+      "goal": "理解节目中的意思，再选与其一致的中文概括。",
+      "input": "她喜欢学习；关于新地方 / 关于旧地方。",
+      "output": "关于新地方。",
+      "steps": [
+        "回忆前文声音，点击中文候选即时判定。",
+        "关于旧地方变红后变灰禁用。",
+        "关于新地方绿色正确，自动进入节目收尾及结算。"
+      ],
+      "ui": "节目主画面保持；下方中文短题干和竖向两个候选。这个题屏没有全文英语，也没有检查按钮。",
+      "design": "相比R01抓词，本题要求理解new places所指的意义；中文输出减少英语产出负担，仍依赖此前声音材料。",
+      "extra_load": "要记住刚才的节目并理解中文概括，文字候选本身不能替代英语输入。",
+      "feedback_recommendation": "将课后文本作为回顾工具，标注答案对应哪句英语；不要因为答案用中文就把它记成纯阅读任务。",
+      "caution": "F34记录本题完整错误到正确并自动收尾。它是内容选择变体，不是仍未遇到的R04图像选择；单独编号仅用于研究检索。",
+      "evidence_level": "full_chinese_task",
+      "status": "完整中文题页 · Super账号实测",
+      "ui_basis": "本轮中文网页实测事实",
+      "ability_limit": "F34记录本题完整错误到正确并自动收尾。它是内容选择变体，不是仍未遇到的R04图像选择；单独编号仅用于研究检索。",
+      "availability": "2026-09-27 中文→英语桌面网页版；中文→英语；已登录 Super 账号；学习法国文化电台复习中实际出现。",
+      "plan": "本次用户自行登录Super账号后实测；只证明该账号可进入，不证明题型为Super独占。未购买、升级或核实Max权益。",
+      "analysis_source": "live-flow-evidence.json；会话C/D/E逐步原图；设计解读为研究分析",
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": true,
+        "captured_transition_count": 8,
+        "unique_flow_screenshots": 6,
+        "planned_checks": 9,
+        "anchor": "flow-R05",
+        "live_run_ids": [
+          "F34"
+        ]
+      }
+    },
+    {
+      "id": "A01",
+      "name": "Adventures 场景探索/点物/读标牌",
+      "group": "Adventures 场景任务",
+      "kind": "场景探索交互，非单独语言判分题",
+      "goal": "在场景中读英语标牌或任务线索，完成明确目标。",
+      "input": "找到出口",
+      "output": "EXIT",
+      "steps": [
+        "先理解中文任务说明，再读英语环境线索，完成相应探索动作。"
+      ],
+      "ui": "需要核对：中文→英语 Adventures 是否开放；操作提示和任务判定。",
+      "design": "降低无关导航成本，同时保留目标英语阅读。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 走到地点或点中物体不等于语言题答对。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "supporting-interaction",
+      "modality_label": "场景辅助交互",
+      "modality_note": "场景探索本身不是独立语言判分题。",
+      "extra_load": "导航、找热点和阅读英语叠加；找不到可点击区域不能直接解释为英语能力不足。",
+      "feedback_recommendation": "中文解释基本操作和当前目标，英语承担需要学习的标牌信息；可交互区域应可辨。",
+      "ability_limit": "走到地点或点中物体不等于语言题答对。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/es/aventuras-duolingo/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 5,
+        "anchor": "flow-A01",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "A02",
+      "name": "Adventures 英语回应选择",
+      "group": "Adventures 场景任务",
+      "kind": "情境交互",
+      "goal": "在明确场景目标下理解英语对话，选出能推进任务的回应。",
+      "input": "想买一张车票",
+      "output": "One ticket, please.",
+      "steps": [
+        "理解当前任务及英语角色提问，比较候选能否实现目的，再选择。"
+      ],
+      "ui": "需要核对：中文任务入口；候选回应及错误情节分支。",
+      "design": "说明交际目的及误选原因，避免每句先给完整翻译。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 给定回应选择不测试自主造句；中文开放状态未知。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "图中问题与两个回应均有英语文字，可通过阅读和点选完成；本轮未实测静音流程。",
+      "extra_load": "要结合角色问题、场景和目标，不能只选语法正确或重复词最多的句子。",
+      "feedback_recommendation": "必要时提供简短中文目标回顾；若回应无助于任务，用角色反应与中文解释指出原因。",
+      "ability_limit": "给定回应选择不测试自主造句；中文开放状态未知。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/es/aventuras-duolingo/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 10,
+        "anchor": "flow-A02",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "M01",
+      "name": "Roleplay 英语多轮文字情境聊天（中文覆盖待核）",
+      "group": "Max 英语对话",
+      "kind": "开放对话体验",
+      "goal": "围绕沟通目标连续组织英语文字，而不是每轮选择标准答案。",
+      "input": "我想要一些水。",
+      "output": "I'd like some water.",
+      "steps": [
+        "看清情境目标，阅读角色英语消息，自行回复并根据后续消息调整，结束后回看反馈。"
+      ],
+      "ui": "需要核对：中文英语 Max Roleplay 可用性；输入、任务结束、中文反馈和合理表达接受范围。",
+      "design": "解释意义、语气和改进方式，不能把所有与范文不同的说法都判错。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 尚无中文完整聊天题图；其他母语 Max 开放说明不证明中文账号可用。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "non-audio",
+      "modality_label": "不含口语和听力",
+      "modality_note": "依据官方文字聊天说明归类，输入为英语文字回复；完整英语聊天题图仍待补。",
+      "extra_load": "需跟踪聊天上下文、决定说什么并检索表达；‘想要水’可有多个自然说法，不能只套一个中文直译模板。",
+      "feedback_recommendation": "中文可讲清任务和反馈依据；先看沟通是否完成，再解释一个重要语言问题，并保留原回答供比较。",
+      "ability_limit": "尚无中文完整聊天题图；其他母语 Max 开放说明不证明中文账号可用。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/duolingo-max-gpt-4/",
+        "https://blog.duolingo.com/ja/max-subscription/",
+        "https://blog.duolingo.com/pt/como-o-duolingo-ensina-a-ler-em-outros-idiomas/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 8,
+        "anchor": "flow-M01",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "M02",
+      "name": "Video Call with Lily 英语自由对话",
+      "group": "Max 英语对话",
+      "kind": "开放对话体验",
+      "goal": "听懂英语问题并即时组织口头回应，在交流中澄清和续接话题。",
+      "input": "今天做了什么？／请再说一遍。",
+      "output": "What did you do today? / Could you repeat that?",
+      "steps": [
+        "在已开放的假设下，听问题并回应，不清楚时请求重复；结束后核对自己表达的意思。"
+      ],
+      "ui": "需要核对：中文英语 Max 视频通话可用性；中文引导、澄清、结束和转录。",
+      "design": "用于入口说明及事后反思，避免每轮自动代替英语听说。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 画面中的 Lily 不足以证明中文英语课程开放；未实测通话或转录。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "要同时听懂、检索内容和开口，不能像文字任务反复读；回应慢可能来自思考内容，不一定来自词汇不足。",
+      "feedback_recommendation": "中文说明通话状态和结束动作；反馈区分听不懂、表达待改与识别未成功，允许学习者有思考时间。",
+      "ability_limit": "画面中的 Lily 不足以证明中文英语课程开放；未实测通话或转录。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/videochamada/",
+        "https://blog.duolingo.com/pt/melhor-jeito-de-aprender-com-o-duolingo/",
+        "https://blog.duolingo.com/pt/duolingo-max-gpt-4/",
+        "https://blog.duolingo.com/ja/max-subscription/",
+        "https://blog.duolingo.com/video-call-research-report/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 6,
+        "anchor": "flow-M02",
+        "live_run_ids": []
+      }
+    },
+    {
+      "id": "M03",
+      "name": "Video Call with Falstaff 英语引导对话",
+      "group": "Max 英语对话",
+      "kind": "开放对话体验",
+      "goal": "在可选提示支撑下完成英语口头回应，逐步增加独立表达。",
+      "input": "对方问你想要什么。—请给我茶。",
+      "output": "What would you like? — Tea, please.",
+      "steps": [
+        "听问题，先尝试回应，卡住时再用提示，最后说出自己的完整意思。"
+      ],
+      "ui": "需要核对：中文英语 Falstaff 通话是否开放；字幕、提示和母语反馈内容。",
+      "design": "解除具体障碍，帮助理解下一步；不能据葡语文章推出中文实时反馈已经上线。",
+      "caution": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。 Falstaff 普通跟读与引导视频通话要分开；中文可用性和提示语言未证实。",
+      "availability": "中文→英语具体题型和当前入口待核实；以下操作是若该任务出现在中文课程时的分析路径，不是账号实测步骤。",
+      "plan": "中文课程套餐归属待核实。通用产品资料见跨语言参考附录；全球英语覆盖不等于中文母语方向已开放。",
+      "images": [],
+      "status": "中文课程 / 题图待核实",
+      "modality_section": "listening-speaking",
+      "modality_label": "听力与口语相关",
+      "modality_note": "按本报告展示的听音或口头作答形式归类；替代输入分支需分别确认。",
+      "extra_load": "需管理听问题、看字幕或提示及说话三种注意来源；照读提示成功与独立组织成功应分开理解。",
+      "feedback_recommendation": "中文提示宜逐层提供问题意思、关键词或句框；记录提示依赖程度，不把照读全部答案记作独立产出。",
+      "ability_limit": "Falstaff 普通跟读与引导视频通话要分开；中文可用性和提示语言未证实。",
+      "analysis_source": "chinese-learner-analysis.json；最终图证状态以当前记录 evidence_level 为准",
+      "evidence_level": "unverified_chinese_course",
+      "ui_basis": "中文适配分析，非已观察的中文界面",
+      "generic_sources": [
+        "https://blog.duolingo.com/pt/videochamada-com-falstaff-conversacao/"
+      ],
+      "sources": [],
+      "flow_evidence": {
+        "complete": false,
+        "core_loop_complete": false,
+        "captured_transition_count": 0,
+        "unique_flow_screenshots": 0,
+        "planned_checks": 6,
+        "anchor": "flow-M03",
+        "live_run_ids": []
+      }
+    }
+  ],
+  "modes": [
+    {
+      "id": "P05",
+      "name": "确认课程方向：通过中文学习英语",
+      "kind": "课程入口，非题型",
+      "goal": "先确认课程的学习基础语言与目标语言，再讨论中文指令和英语题目。",
+      "steps": [
+        "在“通过中文学习”分组找到“英语”。",
+        "确认选择的是中文母语学习英语；列表下方“通过英语学习”的课程属于不同方向。"
+      ],
+      "ui": "课程分组标题、国旗与语言名称明确显示学习方向；底部保留继续按钮。",
+      "note": "该图是官方历史公开入口，不是本轮账号操作记录，也不证明之后所有功能均可用。",
+      "images": [
+        {
+          "file": "assets/cn-apple-course-selection.webp",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Features122/v4/3b/ea/f0/3beaf0f5-6044-73de-bfe5-37791b049b56/02db4bfc-5cc4-4d6c-aadb-8baa715c8934.png/1380x2878bb.webp",
+          "source": "https://apps.apple.com/cn/iphone/story/id1605587215",
+          "label": "通过中文学习 → 英语 · 课程入口",
+          "framing": "完整课程选择入口 · 不计为题型",
+          "note": "上下完整的课程选择入口，可辅助说明中文学习英语的课程方向；不是题型，不计入完整题页数量。该页同时包含粤语、日语等课程及“通过英文学习”分组，不将这些条目混入英语题型。",
+          "width": 1380,
+          "height": 2877,
+          "sha256": "b1fe66b5ce48ec0e0d1e5660ea68e2f0e68d363b95d8987c66686efe44aaf819",
+          "course_direction": "中文母语 → 英语",
+          "interface_language": "中文",
+          "full_task_view": false,
+          "provenance": "官方渠道公开原图",
+          "publisher": "Apple App Store 编辑部（官方平台编辑文章，非 Duolingo 自有博客）",
+          "capture_date": "拍摄日期、应用版本未公布",
+          "evidence_id": "CNM03"
+        }
+      ],
+      "sources": [
+        "https://apps.apple.com/cn/iphone/story/id1605587215"
+      ]
+    }
+  ],
+  "reading_sections": [
+    {
+      "id": "non-audio",
+      "title": "4.1 不含口语和听力的题目",
+      "record_ids": [
+        "E01",
+        "E02",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E21",
+        "E23",
+        "S01",
+        "S02",
+        "S03",
+        "A02",
+        "M01"
+      ]
+    },
+    {
+      "id": "listening-speaking",
+      "title": "4.2 听力与口语相关题目",
+      "record_ids": [
+        "E03",
+        "E08",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E17",
+        "E18",
+        "E19",
+        "E20",
+        "E22",
+        "S04",
+        "S05",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "M02",
+        "M03"
+      ]
+    },
+    {
+      "id": "supporting-interaction",
+      "title": "4.3 场景辅助交互",
+      "record_ids": [
+        "A01"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "",
+      "title": ""
+    },
+    {
+      "url": "https://apps.apple.com/cn/app/id570060128?platform=ipad",
+      "title": "多邻国 Duolingo（中国 App Store 开发者展示图）"
+    },
+    {
+      "url": "https://apps.apple.com/cn/iphone/story/id1399754989",
+      "title": "玩着游戏，就能学外语？"
+    },
+    {
+      "url": "https://apps.apple.com/cn/iphone/story/id1605587215",
+      "title": "闯关升级学外语"
+    },
+    {
+      "url": "https://blog.duolingo.com/duolingo-max/",
+      "title": "Duolingo 官方：Max 功能与课程方向"
+    },
+    {
+      "url": "https://blog.duolingo.com/duolingo-stories-the-journey-to-android/",
+      "title": "Duolingo 官方历史说明：Stories 上线 Android 与课程范围"
+    },
+    {
+      "url": "https://blog.duolingo.com/guide-to-duolingo-practice-hub/",
+      "title": "Duolingo 官方：免费的 Practice 技能练习"
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?hl=zh_CN&id=com.duolingo",
+      "title": "Duolingo Google Play 中文商店页"
+    },
+    {
+      "url": "https://www.duolingo.com/lesson/unit/55/level/3",
+      "title": "3"
+    },
+    {
+      "url": "https://www.duolingo.com/practice-hub/unit-rewind",
+      "title": "unit-rewind"
+    },
+    {
+      "url": "https://www.duolingo.com/stories/en-zh-taxi-ride?mode=read&practiceHubStory=featured",
+      "title": "en-zh-taxi-ride?mode=read&practiceHubStory=featured"
+    },
+    {
+      "url": "https://zh-cn.duolingo.com/alphabets/en/pronunciation",
+      "title": "pronunciation"
+    },
+    {
+      "url": "https://zh-cn.duolingo.com/lesson",
+      "title": "lesson"
+    }
+  ],
+  "counts": {
+    "research_entries_including_unverified": 38,
+    "entries_with_chinese_image_evidence": 26,
+    "entries_with_full_chinese_task_view": 25,
+    "entries_with_partial_chinese_task_view": 0,
+    "entries_with_only_input_entry": 1,
+    "entries_with_chinese_course_or_image_unverified": 12,
+    "main_unique_image_files": 347,
+    "main_unique_task_image_files": 36,
+    "official_chinese_image_files": 7,
+    "historical_user_image_files": 4,
+    "non_audio_research_entries": 17,
+    "non_audio_entries_with_chinese_evidence": 11,
+    "non_audio_entries_with_full_chinese_task_view": 11,
+    "not_official_total_exercise_types": true,
+    "complete_operation_flows": 0,
+    "current_run_product_flow_screenshots": 336,
+    "live_type_entries": 23,
+    "core_wrong_recovery_correct_loop_types": 17,
+    "screenshot_flow_groups": 35,
+    "operation_checks_with_live_evidence": 210,
+    "reference_only_unique_image_files": 44
+  },
+  "live_account_walkthrough": true,
+  "live_super_walkthrough": true,
+  "live_max_walkthrough": false,
+  "live_guest_walkthrough": true,
+  "live_capture_manifest": "live-flow-evidence.json",
+  "exhaustive_current_type_coverage": false,
+  "all_types_have_full_chinese_screenshot": false,
+  "all_operation_flows_captured": false,
+  "flow_data_file": "flow-data.json",
+  "method": "Independent Chinese desktop guest and authenticated Super walkthroughs plus original Chinese images and source-specific claims; cross-language reference appendix is excluded from Chinese coverage; design recommendations are analytical inferences"
+}

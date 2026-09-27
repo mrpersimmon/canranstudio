@@ -1,4 +1,5 @@
 'use strict';
+const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 // Independent expectations from the reviewed Lesson 7–8 challenge manuscript.
 // Never read the course's answer fields to solve the learner page.
@@ -14,8 +15,11 @@ const EXAM = [
   { prompt: '两位朋友各自介绍职业：', answer: 'an / a', wrong: 'a / an' },
   { prompt: "My name's Ben. I'm an engineer. What's your job?", answer: 'name is / I am / What is', wrong: 'name am / I am / What is' }
 ];
+const revisedPrompts={"10": "你扮演 Ben，回答面前的朋友。"};
+EXAM.splice(0,EXAM.length,...taskCases.answers('7-8','exam').map((q,i)=>({...EXAM[i],...q,prompt:revisedPrompts[i]||EXAM[i]?.prompt})));
 async function selectAnswer(room, answer) {
-  if (Array.isArray(answer)) {
+  if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+  else if (Array.isArray(answer)) {
     for (const token of answer) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
   } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
 }
@@ -26,7 +30,7 @@ async function finishExamFrom(page, start = 0) {
     await selectAnswer(room, EXAM[i].answer);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === EXAM.length - 1 ? '查看本次记录' : '下一题', exact: true }).click();
   }
 }
 module.exports = { EXAM, selectAnswer, finishExamFrom };

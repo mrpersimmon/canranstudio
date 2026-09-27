@@ -1,0 +1,93 @@
+
+Running 85 tests using 1 worker
+
+(node:98670) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/85] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[2/85] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[3/85] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[4/85] tests/e2e/units17-30-exam.spec.js:6:87 › 17-18 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[5/85] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[6/85] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[7/85] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[8/85] tests/e2e/units17-30-exam.spec.js:6:87 › 19-20 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[9/85] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[10/85] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[11/85] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[12/85] tests/e2e/units17-30-exam.spec.js:6:87 › 21-22 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[13/85] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[14/85] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[15/85] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[16/85] tests/e2e/units17-30-exam.spec.js:6:87 › 23-24 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[17/85] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[18/85] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[19/85] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[20/85] tests/e2e/units17-30-exam.spec.js:6:87 › 25-26 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[21/85] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[22/85] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[23/85] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[24/85] tests/e2e/units17-30-exam.spec.js:6:87 › 27-28 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[25/85] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[26/85] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[27/85] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[28/85] tests/e2e/units17-30-exam.spec.js:6:87 › 29-30 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定
+[29/85] tests/e2e/units17-30-exam.spec.js:27:1 › 29–30 整理题的选择、灯泡和错答不执行动作，检查正确后才呈现结果
+[30/85] tests/e2e/units17-30-scene.spec.js:6:48 › 17-18 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[31/85] tests/e2e/units17-30-scene.spec.js:6:48 › 19-20 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[32/85] tests/e2e/units17-30-scene.spec.js:6:48 › 21-22 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[33/85] tests/e2e/units17-30-scene.spec.js:6:48 › 23-24 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[34/85] tests/e2e/units17-30-scene.spec.js:6:48 › 25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[35/85] tests/e2e/units17-30-scene.spec.js:6:48 › 27-28 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[36/85] tests/e2e/units17-30-scene.spec.js:6:48 › 29-30 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮
+[37/85] tests/e2e/units17-30-scene.spec.js:41:62 › 17-18 图册翻页按钮不随内容高度跳动，刷新保留末页
+[38/85] tests/e2e/units17-30-scene.spec.js:41:62 › 19-20 图册翻页按钮不随内容高度跳动，刷新保留末页
+[39/85] tests/e2e/units17-30-scene.spec.js:41:62 › 21-22 图册翻页按钮不随内容高度跳动，刷新保留末页
+[40/85] tests/e2e/units17-30-scene.spec.js:41:62 › 23-24 图册翻页按钮不随内容高度跳动，刷新保留末页
+[41/85] tests/e2e/units17-30-scene.spec.js:41:62 › 25-26 图册翻页按钮不随内容高度跳动，刷新保留末页
+[42/85] tests/e2e/units17-30-scene.spec.js:41:62 › 27-28 图册翻页按钮不随内容高度跳动，刷新保留末页
+[43/85] tests/e2e/units17-30-scene.spec.js:41:62 › 29-30 图册翻页按钮不随内容高度跳动，刷新保留末页
+[44/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 320
+[45/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 390
+[46/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 768
+[47/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 17-18 连续舞台、对白与人物分层 1280
+[48/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 320
+[49/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 390
+[50/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 768
+[51/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 19-20 连续舞台、对白与人物分层 1280
+[52/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 320
+[53/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 390
+[54/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 768
+[55/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 21-22 连续舞台、对白与人物分层 1280
+[56/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 320
+[57/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 390
+[58/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 768
+[59/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 23-24 连续舞台、对白与人物分层 1280
+[60/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 320
+[61/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 390
+[62/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 768
+[63/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 25-26 连续舞台、对白与人物分层 1280
+[64/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 320
+[65/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 390
+[66/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 768
+[67/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 27-28 连续舞台、对白与人物分层 1280
+[68/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 320
+[69/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 390
+[70/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 768
+[71/85] tests/e2e/units17-30-theatre.spec.js:6:2 › 29-30 连续舞台、对白与人物分层 1280
+[72/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 17-18 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[73/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 17-18 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[74/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 19-20 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[75/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 19-20 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[76/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 21-22 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[77/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 21-22 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[78/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 23-24 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[79/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 23-24 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[80/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 25-26 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[81/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 25-26 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[82/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 27-28 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[83/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 27-28 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+[84/85] tests/e2e/units17-30-upgrade.spec.js:12:2 › 29-30 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做
+[85/85] tests/e2e/units17-30-upgrade.spec.js:23:2 › 29-30 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答
+  85 passed (3.7m)

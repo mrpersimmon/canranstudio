@@ -21,6 +21,7 @@
  }
  // Presentation-only cues. The original questions/signatures remain authoritative.
  const tasks={
+  'exam-my-your':{image:local('blue-shirt'),result:'Dave 说 my；老师对他说 your。'},
   'story-owner':{image:local('white-shirt'),note:'Whose shirt is white?',result:'白衬衫 → Tim'},
   'story-it':{title:'Dave 说的 It 指哪件东西？',image:local('dave'),note:"老师：Is this your shirt, Dave?\nDave：It's not my shirt.",result:'It → 老师手里的白衬衫'},
   'owner-her':{title:'That is ___ car.',image:'/assets/unit1-2/car.svg',note:'车主 · Stella（she）',result:'Stella → her car'},
@@ -44,7 +45,7 @@
   const picture=image(local('white-shirt')),note=node('p','','claim-evidence-note'),result=node('p','','claim-task-result');
   board.append(picture,note);element.append(question,board,result);let detail;
   return{element,heading:()=>heading,
-   present(q,progress){detail=tasks[q.id.replace(/^u1112-(?:v1|final-v2)-/,'')]||{image:local('white-shirt'),result:q.answer};element.hidden=false;question.replaceChildren(progress,heading);heading.textContent=detail.title||q.prompt;heading.tabIndex=-1;picture.src=detail.image;note.textContent=detail.note||'';note.hidden=!detail.note;board.classList.toggle('object-only',!detail.note);result.textContent='';},
+   present(q,progress){detail=tasks[q.id.replace(/^u1112-(?:v1|final-v2|tasks-v4)-/,'')]||{image:local('white-shirt'),result:''};element.hidden=false;question.replaceChildren(progress,heading);heading.textContent=detail.title||q.prompt;heading.tabIndex=-1;picture.src=detail.image;note.textContent=detail.note||'';note.hidden=!detail.note;board.classList.toggle('object-only',!detail.note);result.textContent='';},
    answer(value){result.textContent=value?detail.result:'';},finish(){element.hidden=true;}
   };
  }

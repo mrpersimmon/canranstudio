@@ -1,0 +1,7 @@
+
+> canranstudio@0.0.0 check:plan
+> node scripts/check-workflow.js commit --plan
+
+Scope: commit against HEAD, 53 changed paths
+Checks: browser-login, workflow, unit, browser-changed, browser-smoke, browser-unit1516, browser-retry-feedback, browser-layout
+This is scoped verification; complete release acceptance is a separate step.

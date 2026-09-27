@@ -1,0 +1,1471 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-09-27",
+  "perspective": "中文母语用户学习英语",
+  "scope": {
+    "purpose": "按当前 31 条目录逐条分析；将已见中文证据与条件性设计分析分开。",
+    "method": "只读取已有 report-data.json 与四张用户历史中文截图；本轮未浏览网页、未下载新图、未调用真实应用。",
+    "forbidden_inference": "其他母语→英语的题图和功能公告，不证明中文→英语方向已开放，也不证明其中文界面布局。",
+    "linguistic_rule": "任务负担来自当前语言形式、输入方式和个人熟悉度；不按国籍或母语身份断言个人必然有什么困难。",
+    "recommendation_rule": "所有 UI 建议与中文解释建议均属分析，不当作已实现功能。",
+    "example_rule": "只把 E04/E06/E07/E09 的指定内容列为中文截图实证；其余例句均为标注的分析示例。"
+  },
+  "records": [
+    {
+      "id": "E01",
+      "ability_goal": "把具体中文词义与英语词形相连，形成可在本情境使用的词义对应。",
+      "extra_load": "同一英语词可能对应不同中文义项，例如 book 可以是‘书’，在订房情境也可指‘预订’；只给孤立词可能增加猜测。",
+      "example": {
+        "zh": "书／预订",
+        "en": "book",
+        "kind": "分析示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "先读本题词语及已有语境，再匹配中文与英语词。"
+        ],
+        "listening_speaking": [
+          "此处按文字配对分析，不把读词自动算成听力或口语。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文释义应选清楚、互不重叠的义项；配错时说明本题语境中的意思，不能只要求记住两格的位置。",
+      "chinese_explanation_role": "帮助区分义项；避免宣称英语与中文始终一词一义。",
+      "ability_limit": "配对正确只说明候选范围内辨认，不证明会拼写或自由用词。",
+      "pending": [
+        "由主代理关联本轮新增的官方中文证据，区分完整与局部",
+        "多义词及同义译法处理"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "本代理的条件性设计分析；主代理新报告中文证据，待合并其目视核验记录。当前版本与账号覆盖仍未知。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "parent_reported_chinese_evidence": {
+        "verified_by": "parent_report_not_independently_viewed",
+        "framing": "完整中英配对题图",
+        "note": "主代理新取得官方中文完整配对",
+        "merge_action": "由主代理补入文件路径和最终 evidence_level"
+      },
+      "name": "双语词语配对",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-practice-5.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "ability_goal": "用已知英语解释新词，在英语语境中建立意义联系。",
+      "extra_load": "必须同时理解正文、问题和英文释义；选错可能来自释义措辞不懂，不一定是目标词完全不懂。",
+      "example": {
+        "zh": "一个可以在房屋外坐着休息的地方",
+        "en": "a place outside a house where people can sit",
+        "kind": "分析示例，非截图原文"
+      },
+      "operations": {
+        "text": [
+          "读目标词所在句，比较英文释义与上下文，再选一项。"
+        ],
+        "listening_speaking": [
+          "按阅读任务处理；如有朗读入口，也不据此要求听音作答。"
+        ]
+      },
+      "ui_feedback_recommendation": "保留目标词高亮；答后用一句中文解释关键语义和原文线索，避免一开始用中文直接泄露答案。",
+      "chinese_explanation_role": "用于检查理解、解释误选原因；逐步减少全文对译依赖。",
+      "ability_limit": "英文释义选择比中英词配对增加阅读负担，但仍是识别而非主动定义。",
+      "pending": [
+        "中文课程是否有此进阶题",
+        "中文提示开合与反馈位置"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语语境词义—英文定义选择",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-14be41d354c0.png",
+          "interface_language": "French",
+          "course_direction": "French→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "ability_goal": "从中文意义主动提取英语词，而不是看到英语后认出中文。",
+      "extra_load": "口述同时要求词汇提取和发音；键入则增加字母顺序负担，例如看到‘苹果’需自己想出 apple。",
+      "example": {
+        "zh": "苹果",
+        "en": "apple",
+        "kind": "假设中文词卡示例，未见中文实图"
+      },
+      "operations": {
+        "text": [
+          "若有键入替代，先回忆英语词，再输入并核对拼写。"
+        ],
+        "listening_speaking": [
+          "若有口述分支，读中文提示后说英语词；识别未成功时先核对录音状态，再重试。"
+        ]
+      },
+      "ui_feedback_recommendation": "分清‘未录到声音／识别有疑问’与‘词义回答不符’；答错可给中文义项、正确英语及重试机会。",
+      "chinese_explanation_role": "确认中文提示具体指哪个义项；不把任何不同说法都当错。",
+      "ability_limit": "葡语版的五卡、三项通过和回队规则不能视为已证实的中文规则。",
+      "pending": [
+        "中文→英语 Flashcards 是否开放",
+        "中文卡面、键入分支及评分反馈"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Flashcards：主动说出英语词",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/literacy-english-flashcards-question.png",
+          "interface_language": "pt",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/literacy-english-flashcards-results.png",
+          "interface_language": "pt",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E04",
+      "evidence_level": "chinese_task_screenshot",
+      "chinese_evidence_files": [
+        "assets/duolingo-dark-translation-word-bank.jpg"
+      ],
+      "evidence_seen": "中文‘翻译这句话’；英语 my mother 带扬声器；答案行已选‘我／的／母亲’，剩余词块含‘书／中文’，底部‘检查’。这是提交前的已选状态。",
+      "ability_goal": "理解英语名词短语 my mother 的整体意义及所属关系，用中文重建意思。",
+      "extra_load": "my 在此对应‘我的’，由‘我’与‘的’两块实现；英语两个词与中文三个词块并非逐词一一对应。选择词块减少中文书写负担，却可能让学习者靠排除‘书／中文’完成。",
+      "example": {
+        "zh": "我／的／母亲 → 我的母亲",
+        "en": "my mother",
+        "kind": "已见中文截图"
+      },
+      "operations": {
+        "text": [
+          "读 my mother，确认它指‘我的母亲’。",
+          "按意义选择‘我→的→母亲’，核对答案行，再点‘检查’。"
+        ],
+        "listening_speaking": [
+          "图中有扬声器，可把它作为听读支持；截图未证明必须听音，也没有要求口头作答。"
+        ]
+      },
+      "ui_observed": [
+        "深色题面中原文气泡与中文答案行分开。",
+        "已用词块原位置留灰色占位；未选词块仍可见。",
+        "‘检查’为亮绿色；当前图没有答对或答错结果。"
+      ],
+      "ui_feedback_recommendation": "反馈可把 my 与‘我的’作为整块对齐，说明它表示‘属于我／与我相关’；不要把 my 单独教成‘我’，也不要把此短语包装成英语整句生成。",
+      "chinese_explanation_role": "中文是作答目标，用来验证英语理解。自然中文也常说‘我妈妈’，但本图的候选只证实‘我的母亲’，其他译法是否被接受待核验。",
+      "ability_limit": "能用中文词块译对，不证明能从中文主动写出 my mother，亦未测到英语问句词序。",
+      "pending": [
+        "检查后的中文正误反馈",
+        "撤回词块的实际操作",
+        "其他自然中文译法是否可接受"
+      ],
+      "evidence_scope": "已见中文题图；只证实图示任务和状态，当前账号/版本开放范围未核验",
+      "current_chinese_course_availability": "未核验",
+      "analysis_is_not_observed_feature": true,
+      "name": "词块翻译：理解英语并译成母语",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-intro-4.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "ability_goal": "由中文意思组织英语词序，同时利用词块给出的拼写支持。",
+      "extra_load": "例如‘你是我的数学老师吗？’不能逐个寻找‘吗’的英语词；常规一般疑问句需要把 Are 放在 you 前。",
+      "example": {
+        "zh": "你是我的数学老师吗？",
+        "en": "Are / you / my / math / teacher / ?",
+        "kind": "设计示例；E06 有同句中文实证，但本词块形式未核验"
+      },
+      "operations": {
+        "text": [
+          "读中文整句，再按英语表达顺序选择词块，读通全句后提交。"
+        ],
+        "listening_speaking": [
+          "此分支不要求听音或录音。"
+        ]
+      },
+      "ui_feedback_recommendation": "说明本句 Are you 的问句结构；不要用词块数、固定位置或大小写装饰代替意义判断。",
+      "chinese_explanation_role": "解释‘吗’所表达的疑问如何通过英语句型体现，而非强行逐字对照。",
+      "ability_limit": "现成词块已经提供单词拼写；成绩不能当成自由写作水平。",
+      "pending": [
+        "由主代理关联本轮新增的官方中文证据，区分完整与局部",
+        "中文→英语词块题面",
+        "可撤回、换序与可接受答案"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "本代理的条件性设计分析；主代理新报告中文证据，待合并其目视核验记录。当前版本与账号覆盖仍未知。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "parent_reported_chinese_evidence": {
+        "verified_by": "parent_report_not_independently_viewed",
+        "framing": "局部中文界面",
+        "note": "中文词块翻译局部，完整题面仍待核验",
+        "merge_action": "由主代理补入文件路径和最终 evidence_level"
+      },
+      "name": "词块翻译：把母语组织成英语",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-explain-1.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E06",
+      "evidence_level": "chinese_task_screenshot",
+      "chinese_evidence_files": [
+        "assets/duolingo-dark-translation-free-input.jpg"
+      ],
+      "evidence_seen": "中文原句‘你是我的数学老师吗？’，输入框已有 Are you my math teacher?，光标在句尾；下方灰色‘轻点后开始录音’横条和绿色‘检查’可见。尚未显示判题结果。",
+      "ability_goal": "从完整中文意义独立产出英语问句，兼顾句型、词语选择和拼写。",
+      "extra_load": "相比词块翻译，要自行检索 Are、you、my、math、teacher，并写出空格、词序和问号。中文‘吗’没有在此逐词对应的英文项目；‘数学老师’则由 math 修饰 teacher。",
+      "example": {
+        "zh": "你是我的数学老师吗？",
+        "en": "Are you my math teacher?",
+        "kind": "已见中文截图中的已输入答案，非已判对状态"
+      },
+      "operations": {
+        "text": [
+          "先确定这是询问对方身份的问句。",
+          "自行键入 Are you my math teacher?，检查 Are you 的顺序、my math teacher 的意义及词间空格。",
+          "确认内容后点‘检查’；当前图不能替代提交后的判定。"
+        ],
+        "listening_speaking": [
+          "仅观察到灰色录音入口；实际是否可用、是否生成转写、如何确认结果归 E08 待核验。"
+        ]
+      },
+      "ui_observed": [
+        "中文原句与大输入框同时可见，方便回看。",
+        "句尾光标表明处于可编辑答案状态。",
+        "录音入口与检查按钮分开，但灰色原因无法由图片确定。"
+      ],
+      "ui_feedback_recommendation": "保留原答案，分开指出词义、句型和输入问题；例如用中文说明‘这里按一般疑问句练习，将 be 动词放到主语前’。键入空格或大小写问题宜区别于没理解句意。",
+      "chinese_explanation_role": "用于解释本题中性一般疑问句的 Are you 结构；You are ...? 也可能用于口语确认，不能把这种形式在所有情境下一概判为不合英语。",
+      "ability_limit": "图证实自由输入和已写答案，不证明系统已接受；maths 等其他合理表达的接受范围也未验证。",
+      "pending": [
+        "本句提交结果",
+        "英语键盘和编辑状态",
+        "拼写/空格/大小写与语法错误怎样区分",
+        "合理变体的接受范围"
+      ],
+      "evidence_scope": "已见中文题图；只证实图示任务和状态，当前账号/版本开放范围未核验",
+      "current_chinese_course_availability": "未核验",
+      "analysis_is_not_observed_feature": true,
+      "name": "整句自由翻译",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-explain-3.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E07",
+      "evidence_level": "chinese_task_screenshot",
+      "chinese_evidence_files": [
+        "assets/duolingo-dark-supported-translation.jpg"
+      ],
+      "evidence_seen": "中文‘完成翻译’；原句‘他们喜欢你。’；英语只有句首带下划线的位置可补，已填 They，其后 like you. 已给出；底部‘检查’。",
+      "ability_goal": "根据中文意思，在既定英语句子中补出主语代词 They。",
+      "extra_load": "需结合句法位置选择 they；中文‘他们’在不同位置可对应 they 或 them，不能记成永远等于一个英文形式。此处句首大写与字母拼写是额外输入要求。",
+      "example": {
+        "zh": "他们喜欢你。",
+        "en": "They like you.",
+        "kind": "已见中文截图；仅 They 为待补部分"
+      },
+      "operations": {
+        "text": [
+          "对照‘他们喜欢你。’与 ___ like you.，定位缺失的是‘他们’。",
+          "在空位填 They，连同已给的 like you. 读通，再点‘检查’。"
+        ],
+        "listening_speaking": [
+          "本图未显示必须听音或说话的要求；按局部文字产出分析。"
+        ]
+      },
+      "ui_observed": [
+        "中文原句和部分英语同时在屏内。",
+        "下划线只标在 They 所在位置，后文为已给内容。",
+        "当前图仍是检查前，不是答对反馈。"
+      ],
+      "ui_feedback_recommendation": "把空位宽度、光标和固定文本分清，避免用户重复输入整句；若填 them，可用‘这里是句子的主语，用 they’说明，再给 I like them 作为对照。",
+      "chinese_explanation_role": "明确中文同一个代词意义在英语中随句中作用采用不同形式；对照仅解释当前错误，不扩展成长篇术语讲解。",
+      "ability_limit": "仅证明补主语，未要求自行写 like you.，不能据此认定已掌握完整翻译或动词变化。",
+      "pending": [
+        "单词大小写和多余空格处理",
+        "只编辑空位还是可改整句",
+        "提交后的中文反馈"
+      ],
+      "evidence_scope": "已见中文题图；只证实图示任务和状态，当前账号/版本开放范围未核验",
+      "current_chinese_course_availability": "未核验",
+      "analysis_is_not_observed_feature": true,
+      "name": "补全部分翻译",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": []
+    },
+    {
+      "id": "E08",
+      "evidence_level": "chinese_entry_only",
+      "chinese_evidence_files": [
+        "assets/duolingo-dark-translation-free-input.jpg"
+      ],
+      "evidence_seen": "E06 中文题面可见灰色麦克风及‘轻点后开始录音’。没有录音中、转写文本生成或语音判分结果。",
+      "ability_goal": "若该入口可用，把中文意思口头组织为英语，再核对转写是否符合本意。",
+      "extra_load": "除翻译本身，还需同时管理口头产出和语音识别结果；识别错字不一定意味着学习者不懂词义或语法。",
+      "example": {
+        "zh": "你是我的数学老师吗？",
+        "en": "Are you my math teacher?",
+        "kind": "中文源题已见；语音操作过程未见"
+      },
+      "operations": {
+        "text": [
+          "已证实可见的文字答案分支按 E06 处理。"
+        ],
+        "listening_speaking": [
+          "以下为条件分析：确认入口可用后录入英语，读回转写，必要时编辑再提交；录音开始/停止和转写确认控件尚未核验。"
+        ]
+      },
+      "ui_observed": [
+        "灰色录音横条位于输入区下方、绿色检查按钮上方。"
+      ],
+      "ui_feedback_recommendation": "明确未开始、录音中、识别失败及可编辑转写状态；对中文用户用简短中文解释故障，不把设备问题直接当学习错误。",
+      "chinese_explanation_role": "帮助用户区分‘没录到’‘识别有误’和‘翻译不符’，而非提供整句答案。",
+      "ability_limit": "只确认中文图中存在入口；不能称已完成中文课程语音流程验证，更不能称逐音素评分。",
+      "pending": [
+        "入口灰色原因",
+        "权限和录音开始/结束",
+        "转写、编辑、失败恢复与判分"
+      ],
+      "evidence_scope": "已见中文题图内的录音入口；完整流程未核验",
+      "current_chinese_course_availability": "未核验",
+      "analysis_is_not_observed_feature": true,
+      "name": "英语翻译的语音输入变体",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-ways-4.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E09",
+      "evidence_level": "chinese_task_screenshot",
+      "chinese_evidence_files": [
+        "assets/duolingo-dark-cloze-correct-feedback.jpg"
+      ],
+      "evidence_seen": "中文‘填空’；He is my ___ friend.；选项 long、red、good，good 为绿色；反馈‘非常好！意思是：他是我的好朋友。’，底部‘继续’。",
+      "ability_goal": "在英语短句中选出与‘好朋友’意义相符的 good，理解整个句子的意思。",
+      "extra_load": "要把 He/is/my/friend 与候选词联系起来；这三个选项减少了拼写负担，但可能通过排除不合常见语境的 long、red 得答，不能据此判定会主动写句子。",
+      "example": {
+        "zh": "他是我的好朋友。",
+        "en": "He is my good friend.",
+        "kind": "已见截图的题干与中文反馈组合；图中题干空位仍可见"
+      },
+      "operations": {
+        "text": [
+          "读完整英语框架，比较 long、red、good 的意义，选择 good 并检查。",
+          "在已见正确反馈状态中，把中文‘他是我的好朋友’与英语整句对照，再点‘继续’。"
+        ],
+        "listening_speaking": [
+          "当前中文图没有必需的音频或录音作答要求；不归作听力或口语题。"
+        ]
+      },
+      "ui_observed": [
+        "good 的绿色选中态与带勾的中文正确提示并存，不仅依靠颜色。",
+        "中文意义在反馈区展示；当前题干仍显示空缺，未见自动把 good 写入空白。",
+        "当前反馈状态的底部动作是‘继续’；前一屏按钮及其切换过程未见。"
+      ],
+      "ui_feedback_recommendation": "在结果区补呈 He is my good friend. 的完整英语，配现有中文意思，帮助学习者重组句义；解释 good friend 的本句用法，不把 long/red 说成在所有情境中语法上绝不可能修饰 friend。",
+      "chinese_explanation_role": "本图中文翻译是答后的意义核对，能防止只记绿色按钮；它并没有讲解为什么排除其他词，相关解释属于建议。",
+      "ability_limit": "已见正确反馈，但没有前一屏操作录像；也未证明用户能不看选项主动提取 good。此处英语 good friend 与中文‘好朋友’均为修饰语在前，不应泛称中英词序相反。",
+      "pending": [
+        "错误选项反馈",
+        "是否有点击词语提示",
+        "反馈后是否重现完整英语句"
+      ],
+      "evidence_scope": "已见中文题图；只证实图示任务和状态，当前账号/版本开放范围未核验",
+      "current_chinese_course_availability": "未核验",
+      "analysis_is_not_observed_feature": true,
+      "name": "英语语境选词填空",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-097780145a4b.png",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E10",
+      "ability_goal": "结合图片和英语语境选择缺词，而不是仅按图认物。",
+      "extra_load": "图中人物、英文文本和候选词要整合；例如 family 在思念家人的语境里应理解为‘家人’，不机械套成‘家庭’。",
+      "example": {
+        "zh": "她想念家人。",
+        "en": "She misses her family.",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "先读句子与情境，再用图片核对；需要时查看提示，最后选词补空。"
+        ],
+        "listening_speaking": [
+          "按图文阅读分析；声音是否存在、是否必需待核验。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文提示应解释本句中的意思；展开提示应不遮住缺口和主要语境。记录用了提示与独立作答的区别。",
+      "chinese_explanation_role": "辅助解除关键理解障碍，不替代对英语上下文的判断。",
+      "ability_limit": "凭明显图片选中不能直接等同读懂英语段落。",
+      "pending": [
+        "中文方向是否开放",
+        "中文提示内容和遮挡情况"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语图境辅助选词填空",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-grammar-4.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/english-f5e751b0695a.png",
+          "interface_language": "French",
+          "course_direction": "French→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E11",
+      "ability_goal": "从英语段落中找证据，理解因果、人物和事件关系。",
+      "extra_load": "还要读懂英文问题与选项；例如看到 bus 便选‘坐公交’会忽略 missed 和 so walked 的含义。",
+      "example": {
+        "zh": "汤姆没赶上公交，所以走路去了。",
+        "en": "Tom missed the bus, so he walked.",
+        "kind": "分析示例，非截图原文"
+      },
+      "operations": {
+        "text": [
+          "读段落，再把问题和每个选项与原文证据对照后作答。"
+        ],
+        "listening_speaking": [
+          "仅按阅读分支分析，不把音频当成获取答案的前提。"
+        ]
+      },
+      "ui_feedback_recommendation": "答后定位决定答案的英文句，并用中文简释‘没赶上，所以步行’；避免只显示答案字母。",
+      "chinese_explanation_role": "说明推理链或关键连接词，帮助识别是单词没懂还是关系读反。",
+      "ability_limit": "单题不能覆盖全部阅读水平；中文解释只是学习支持。",
+      "pending": [
+        "中文课程入口与级别",
+        "中文释义是否可选及反馈依据"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语段落阅读理解选择",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-f41406e1d811.png",
+          "interface_language": "Spanish",
+          "course_direction": "Spanish→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E12",
+      "ability_goal": "理解英语话语的交际意图，选择合适的下一句。",
+      "extra_load": "需判断对方在请求什么，不只是选重复词最多的句子；英语固定礼貌表达可能不能逐字译。",
+      "example": {
+        "zh": "你想喝什么？—请给我水。",
+        "en": "What would you like to drink? — Water, please.",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "读英语问题，比较两条回复能否回应它，再选一条。"
+        ],
+        "listening_speaking": [
+          "本项是文字选择；有播放入口也不能当作口头生成已测。"
+        ]
+      },
+      "ui_feedback_recommendation": "用中文解释‘对方问饮料，因此回应饮料’，保留英语问答，避免只翻译正确选项。",
+      "chinese_explanation_role": "解释回应与意图的关系，逐步减少逐句对译。",
+      "ability_limit": "选择给定回复不证明能在对话中自行说出它。",
+      "pending": [
+        "中文课程是否有此题",
+        "错误回应的中文解释"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语对话下一句选择",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-e311f444d8ac.png",
+          "interface_language": "French",
+          "course_direction": "French→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/c1866eb0b7-EN-PT_2.png",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E13",
+      "ability_goal": "把英语语流分成词，并按所听顺序重组句子。",
+      "extra_load": "英语词间书写有空格，但听觉中不总有同样边界；现成词块会帮忙辨认和拼写，不能等同无词库听写。",
+      "example": {
+        "zh": "他们喜欢你。",
+        "en": "They / like / you.",
+        "kind": "分析示例；非本题中文音频实证"
+      },
+      "operations": {
+        "text": [
+          "文字只用于选择词块和检查序列，不先显示整句译文代替听音。"
+        ],
+        "listening_speaking": [
+          "听英语，必要时重播或慢放，依听到顺序排词，再提交。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文指令明确‘按听到的顺序’；纠错时区别漏词、顺序和相似词混淆，并允许有目的地回听。",
+      "chinese_explanation_role": "答后核对句义；不在第一次听前展示完整中文意思作为捷径。",
+      "ability_limit": "候选已提供字母序列，不测试完整自由拼写。",
+      "pending": [
+        "中文听写题面",
+        "正常/慢速与无法听音分支"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "词块听写/听后重组",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-intro-5.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E14",
+      "ability_goal": "听出英语信息并用它回答问题，超越逐字复述。",
+      "extra_load": "同时承担听力和英文问题/选项阅读；未理解 When 可能造成错误，即使听清了 ten。",
+      "example": {
+        "zh": "十点见。—他们什么时候见面？",
+        "en": "Let's meet at ten. — When will they meet?",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "读清问题问时间还是地点，不凭选项词形猜。"
+        ],
+        "listening_speaking": [
+          "听材料，按需要重听，再选符合意义的答案。"
+        ]
+      },
+      "ui_feedback_recommendation": "用中文指出关键声音信息与问题的对应；把听不清和问题没看懂区分开。",
+      "chinese_explanation_role": "用于解释问句意图及证据，不替代首次英语听辨。",
+      "ability_limit": "书面选项带来的阅读能力影响应与听力表现一并说明。",
+      "pending": [
+        "中文题面与音频",
+        "字幕、慢放和回听规则"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "听后理解并选答",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-practice-7.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E15",
+      "ability_goal": "按给定英语文字朗读或跟读，练习可理解的整句发音。",
+      "extra_load": "已给文本减轻造句负担，但仍要把拼写转成声音、连接词语；某个声音是否需要额外练习应由个人表现判断。",
+      "example": {
+        "zh": "你是我的数学老师吗？",
+        "en": "Are you my math teacher?",
+        "kind": "可用训练示例；E06 中的同句不是口语题实证"
+      },
+      "operations": {
+        "text": [
+          "先确认句子意义，使用给定英语文本作朗读支撑。"
+        ],
+        "listening_speaking": [
+          "若中文课程提供该题，听示范后录制同一句，按实际反馈重试。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文界面分清录音未成功与表达可改进；不要把识别失败一律解释成发音差。",
+      "chinese_explanation_role": "帮助理解所说内容和反馈原因，避免只模仿不知句意。",
+      "ability_limit": "给定文本跟读不检验自主选词，也未证明有音素级分数。",
+      "pending": [
+        "由主代理关联本轮新增的官方中文证据，区分完整与局部",
+        "录音、识别和重试反馈"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "本代理的条件性设计分析；主代理新报告中文证据，待合并其目视核验记录。当前版本与账号覆盖仍未知。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "parent_reported_chinese_evidence": {
+        "verified_by": "parent_report_not_independently_viewed",
+        "framing": "局部中文界面",
+        "note": "官方朗读宣传局部，不等于完整答题或反馈流程",
+        "merge_action": "由主代理补入文件路径和最终 evidence_level"
+      },
+      "name": "英语整句跟读与朗读",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-practice-6.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/root-pt-ways-3.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E16",
+      "ability_goal": "先判断英语问题需要什么回应，再说出符合语境的给定句。",
+      "extra_load": "同时有理解、候选比较和朗读要求；读对了不等于选得合适，选对了也不等于朗读已被可靠识别。",
+      "example": {
+        "zh": "几点了？—五点。",
+        "en": "What time is it? — It's five.",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "理解问题并先确定合适的候选回应。"
+        ],
+        "listening_speaking": [
+          "对相应录音入口说出所选回应；具体如何选择与提交须按中文实机核验。"
+        ]
+      },
+      "ui_feedback_recommendation": "理解选择与语音结果分别给清楚反馈；中文提示应说明本次究竟要选、要说，还是两者都要。",
+      "chinese_explanation_role": "说明问答关系及操作，避免把候选朗读当成自由对话。",
+      "ability_limit": "回应已经提供，不能与自行组织答案同等解释。",
+      "pending": [
+        "中文课程是否开放",
+        "先选后说或直接对麦克风说的具体流程"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "理解英语问题并说出正确回应",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-intro-6.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E17",
+      "ability_goal": "在两个相近英语词之间根据声音作区分。",
+      "extra_load": "还要认出候选词形；若词形不熟，听出差别也未必能选对。不能从中文母语身份直接推定某个音一定听不清。",
+      "example": {
+        "zh": "根据声音选择，不先翻译成中文。",
+        "en": "dock / deck",
+        "kind": "现有非中文 Sounds 示例；未见中文版本"
+      },
+      "operations": {
+        "text": [
+          "确认两个英语候选词的书写形式，中文仅说明任务。"
+        ],
+        "listening_speaking": [
+          "播放单词，比较听到的关键差异后选词；必要时再次播放。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文指令可写‘你听到了哪个词’，避免写成‘这个词是什么意思’；答后可对比播放两词，避免用汉字谐音替代英语声音。",
+      "chinese_explanation_role": "解释如何比较和哪里需留意，不把音位听辨变成中文翻译题。",
+      "ability_limit": "听辨结果不证明能准确发出这两个音。",
+      "pending": [
+        "中文→英语 Sounds 是否开放",
+        "中文指令及正误对比音"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语近音词听辨二选一",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/f6eed61af4-IMG_3253.PNG",
+          "interface_language": "English",
+          "course_direction": "未公布源语言→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E18",
+      "ability_goal": "听两次判断是否同一个词，专注声音差异。",
+      "extra_load": "要短时记住第一段再比较第二段；应区分‘同一个词’与‘同一段录音／同一说话人’，不把音量或音高变化当词不同。",
+      "example": {
+        "zh": "两个声音是不是同一个词？",
+        "en": "same word / different words",
+        "kind": "设计指令示例，非中文实图"
+      },
+      "operations": {
+        "text": [
+          "读清判断对象是词是否相同，而非两段声音完全相同。"
+        ],
+        "listening_speaking": [
+          "依次听两段，必要时独立重播，再作同/异判断。"
+        ]
+      },
+      "ui_feedback_recommendation": "两个播放控件和中文‘同一个词／不同词’标签清楚对应；反馈提供两词对照，不只亮绿色。",
+      "chinese_explanation_role": "明确判断标准，减轻读英文任务词带来的额外负担。",
+      "ability_limit": "二分判断存在猜中可能，也不测试拼写或口头产出。",
+      "pending": [
+        "中文 Sounds 题面",
+        "播放顺序、重复次数及反馈"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语两段声音同异判断",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/6023c5837b-IMG_3254.PNG",
+          "interface_language": "English",
+          "course_direction": "未公布源语言→English",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "E19",
+      "ability_goal": "把英语词的声音与英文书面形式配起来。",
+      "extra_load": "比同异判断增加字形辨认和多项记忆；中文指令不意味着必须先知道所有词的中文意思。",
+      "example": {
+        "zh": "听声音，再选对应的英语词。",
+        "en": "dock / deck / got / get",
+        "kind": "非中文 Sounds 配对对象，非中文 UI 证据"
+      },
+      "operations": {
+        "text": [
+          "浏览英语词列，辨清候选拼写。"
+        ],
+        "listening_speaking": [
+          "听一个音频，再配对应词形；重复完成各组。"
+        ]
+      },
+      "ui_feedback_recommendation": "让播放和配对选中状态容易区分；按需重听应比记住按钮位置更重要，错误反馈说明具体哪组待重练。",
+      "chinese_explanation_role": "解释声音—词形关系及操作，不强加逐词中文释义。",
+      "ability_limit": "配对属于识别，不是拼写、翻译或发音录音。",
+      "pending": [
+        "中文课程入口",
+        "中文配对题面及错误复位"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "英语声音—书面词语配对",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-a5ab15e73d80.png",
+          "interface_language": "ko",
+          "course_direction": "韩语界面→英语 Sounds",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "S01",
+      "ability_goal": "读懂英语故事的人物和事件，并作内容判断。",
+      "extra_load": "若问题与选项用中文，可减少英文问题阅读负担，但仍要回到英语文本找依据；不能只凭故事插图猜。",
+      "example": {
+        "zh": "谁拿走了钥匙？",
+        "en": "Mia took the key.",
+        "kind": "故事设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "阅读已出现的英语故事，找出支持答案的句子，再选中文理解项。"
+        ],
+        "listening_speaking": [
+          "本分析采用阅读分支；不把听朗读作为必答前提。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文问题应简洁、选项不偷换指代；答后对应到英语证据句，避免只报选项序号。",
+      "chinese_explanation_role": "让学习者把注意力放在英语叙事意义上。",
+      "ability_limit": "中文回答检查理解，不证明能用英语复述。",
+      "pending": [
+        "中文课程 Stories 是否开放",
+        "理解题语言和反馈"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "故事内容理解单选",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-fe43138dd7ec.jpg",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "ability_goal": "从中文释义和故事语境定位对应英语词或词组。",
+      "extra_load": "跨语对应可能是多词短语，例如‘放弃’对应 give up，不能只凭 give 的单词义选中一部分。",
+      "example": {
+        "zh": "放弃",
+        "en": "give up",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "结合上下文理解中文提示，再点击对应完整英语词组。"
+        ],
+        "listening_speaking": [
+          "采用文字定位分支，不要求口述。"
+        ]
+      },
+      "ui_feedback_recommendation": "允许可见地选择完整短语；答后将中文意义与整个词组一起展示，避免按汉字拆映射。",
+      "chinese_explanation_role": "给出上下文中的释义，帮助识别短语整体意义。",
+      "ability_limit": "定位给定文本不等于会主动使用该短语。",
+      "pending": [
+        "中文释义版本",
+        "多词选择边界及错误提示"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "故事里按释义找到英语词或词组",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-9e1d9b986229.png",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/english-2892ccef2096.jpg",
+          "interface_language": "Korean_navigation; English_task_and_content",
+          "course_direction": "Korean→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/english-7c8019ee58d2.jpg",
+          "interface_language": "Korean_navigation; English_task_and_content",
+          "course_direction": "Korean→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "ability_goal": "用自己的英语组织故事回应，说明原因或复述要点。",
+      "extra_load": "同时检索内容、词汇、时态和句子结构；例如‘她忘了钥匙’需要自己写出 She forgot her keys，而非选择现成句。",
+      "example": {
+        "zh": "她为什么回去了？—她忘了钥匙。",
+        "en": "She forgot her keys.",
+        "kind": "写作设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "理解开放问题，确定一两个要点，再用英语写出连贯回应并检查。"
+        ],
+        "listening_speaking": [
+          "此处只分析文字写作，不假定支持录音。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文说明回答目标，反馈先看是否表达清楚，再挑关键语言问题；不要强制与单一范文逐字一致。",
+      "chinese_explanation_role": "可用于说明评价依据和修改方向，不直接替用户写完整答案。",
+      "ability_limit": "现有目录尚无该英语完整题面，更未建立中文开放状态；字数和评分不可沿用其他课程。",
+      "pending": [
+        "中文英语故事写作是否存在",
+        "题面、字数、输入和反馈规则"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "故事末尾开放写作",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": []
+    },
+    {
+      "id": "R01",
+      "ability_goal": "在英语节目语流中识别实际出现的词。",
+      "extra_load": "还要记住需选数量并核对候选；数量没满足不必然是英语听不懂。",
+      "example": {
+        "zh": "若本题规定，从五词中选出听到的三个。",
+        "en": "heard words",
+        "kind": "根据非中文目录机制的条件说明"
+      },
+      "operations": {
+        "text": [
+          "先读中文数量要求，浏览候选词。"
+        ],
+        "listening_speaking": [
+          "听节目片段，选择听到的词，并核对数量。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文标清‘选三个’，建议给出‘已选 2/3’等数量提示；误选与少选分开反馈。",
+      "chinese_explanation_role": "承担操作与数量说明，不提前解释整段英语内容。",
+      "ability_limit": "词出现识别不等同理解整段故事或会拼写。",
+      "pending": [
+        "中文 Radio 是否开放",
+        "选词数量、自动推进和重听"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Radio 听音选指定数量的词",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-39ad2c784008.png",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/english-7b0fb630c899.png",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "ability_goal": "从英语声音直接提取适合情境的中文意义。",
+      "extra_load": "中文释义也可能多义；例如 ticket 是哪种票需语境，train ticket 才明确对应‘火车票’。",
+      "example": {
+        "zh": "火车票",
+        "en": "train ticket",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "读中文释义，确认它们在此情境中的区别。"
+        ],
+        "listening_speaking": [
+          "听一条英语音频，配上相应中文意义，逐项完成。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文释义避免互相包含；反馈可把声音、英语词组和当前中文义项对应起来。",
+      "chinese_explanation_role": "本身是答案的一部分；应忠于所听语境，不能用生硬字面译法加难。",
+      "ability_limit": "该机制检查听音到意义的识别，不测英文拼写。",
+      "pending": [
+        "中文释义配对是否开放",
+        "实际英语音频及释义歧义"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Radio 音频与母语释义配对",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-8dec6cd5789a.png",
+          "interface_language": "Portuguese",
+          "course_direction": "Portuguese→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "ability_goal": "判断英语陈述是否符合所听情节。",
+      "extra_load": "要处理音频信息与书面陈述之间的对照，特别是否定；例如 didn't buy 与 bought 不能只按共同的 buy/book 判断一致。",
+      "example": {
+        "zh": "她没有买那本书。／她买了那本书。",
+        "en": "She didn't buy the book. / She bought the book.",
+        "kind": "分析示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "读陈述，确定其具体主张。"
+        ],
+        "listening_speaking": [
+          "听对应情节，再判断陈述是否相符；必要时回听证据。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文将✓/×解释为‘与内容相符／不符’，避免用户把×理解成操作失败；反馈指出否定词及证据。",
+      "chinese_explanation_role": "说明不一致的具体关系，不仅翻译整个节目。",
+      "ability_limit": "二选一可猜中，不能孤立据此评价听力。",
+      "pending": [
+        "中文 Radio 判断题",
+        "中文标签、字幕和回听控制"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Radio 判断理解正误",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-b84e85759823.png",
+          "interface_language": "English_prompt_with_icon_controls",
+          "course_direction": "Portuguese_from_article_context→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "ability_goal": "把英语声音理解为对象或事件，并用图像选择回应。",
+      "extra_load": "虽然无拼写输入，仍有图片辨识负担；若两图分别表示糖和盐但画得近似，错误可能是图像歧义。",
+      "example": {
+        "zh": "糖",
+        "en": "sugar",
+        "kind": "设计示例；不冒充当前音频内容"
+      },
+      "operations": {
+        "text": [
+          "中文仅用于说明选择动作，先确认图像是否可辨。"
+        ],
+        "listening_speaking": [
+          "听英语对象或情境，从图中选对应一项。"
+        ]
+      },
+      "ui_feedback_recommendation": "图片需靠形状或情境清楚区分；答后可用英语词加中文意义核对，不在首次听前用标签直接揭示。",
+      "chinese_explanation_role": "答后澄清词义和图像指代，尤其在图片不熟悉时。",
+      "ability_limit": "听音选图不验证拼写，也不自动等同所有普通看图选词题。",
+      "pending": [
+        "中文 Radio 选图题",
+        "实际音频与图像对应"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Radio 听音选择图片",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/root-pt-intro-9.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "A01",
+      "ability_goal": "在场景中读英语标牌或任务线索，完成明确目标。",
+      "extra_load": "导航、找热点和阅读英语叠加；找不到可点击区域不能直接解释为英语能力不足。",
+      "example": {
+        "zh": "找到出口",
+        "en": "EXIT",
+        "kind": "场景设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "先理解中文任务说明，再读英语环境线索，完成相应探索动作。"
+        ],
+        "listening_speaking": [
+          "不假定有必需音频；这是辅助探索，不是口语判分。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文解释基本操作和当前目标，英语承担需要学习的标牌信息；可交互区域应可辨。",
+      "chinese_explanation_role": "降低无关导航成本，同时保留目标英语阅读。",
+      "ability_limit": "走到地点或点中物体不等于语言题答对。",
+      "pending": [
+        "中文→英语 Adventures 是否开放",
+        "操作提示和任务判定"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Adventures 场景探索/点物/读标牌",
+      "catalog_modality": "supporting-interaction",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-a59a1693ee21.png",
+          "interface_language": "Spanish",
+          "course_direction": "Spanish→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "ability_goal": "在明确场景目标下理解英语对话，选出能推进任务的回应。",
+      "extra_load": "要结合角色问题、场景和目标，不能只选语法正确或重复词最多的句子。",
+      "example": {
+        "zh": "想买一张车票",
+        "en": "One ticket, please.",
+        "kind": "设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "理解当前任务及英语角色提问，比较候选能否实现目的，再选择。"
+        ],
+        "listening_speaking": [
+          "按文字选择分支分析，不把点选回应当作口头交流。"
+        ]
+      },
+      "ui_feedback_recommendation": "必要时提供简短中文目标回顾；若回应无助于任务，用角色反应与中文解释指出原因。",
+      "chinese_explanation_role": "说明交际目的及误选原因，避免每句先给完整翻译。",
+      "ability_limit": "给定回应选择不测试自主造句；中文开放状态未知。",
+      "pending": [
+        "中文任务入口",
+        "候选回应及错误情节分支"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Adventures 英语回应选择",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-a59a1693ee21.png",
+          "interface_language": "Spanish",
+          "course_direction": "Spanish→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "M01",
+      "ability_goal": "围绕沟通目标连续组织英语文字，而不是每轮选择标准答案。",
+      "extra_load": "需跟踪聊天上下文、决定说什么并检索表达；‘想要水’可有多个自然说法，不能只套一个中文直译模板。",
+      "example": {
+        "zh": "我想要一些水。",
+        "en": "I'd like some water.",
+        "kind": "角色聊天设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "看清情境目标，阅读角色英语消息，自行回复并根据后续消息调整，结束后回看反馈。"
+        ],
+        "listening_speaking": [
+          "此处只分析文字聊天分支；不根据其他语言资料宣称中文课程语音入口可用。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文可讲清任务和反馈依据；先看沟通是否完成，再解释一个重要语言问题，并保留原回答供比较。",
+      "chinese_explanation_role": "解释意义、语气和改进方式，不能把所有与范文不同的说法都判错。",
+      "ability_limit": "尚无中文完整聊天题图；其他母语 Max 开放说明不证明中文账号可用。",
+      "pending": [
+        "中文英语 Max Roleplay 可用性",
+        "输入、任务结束、中文反馈和合理表达接受范围"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Roleplay / Bate-Papo 英语多轮情境聊天",
+      "catalog_modality": "non-audio",
+      "other_catalog_images_not_used_as_chinese_evidence": []
+    },
+    {
+      "id": "M02",
+      "ability_goal": "听懂英语问题并即时组织口头回应，在交流中澄清和续接话题。",
+      "extra_load": "要同时听懂、检索内容和开口，不能像文字任务反复读；回应慢可能来自思考内容，不一定来自词汇不足。",
+      "example": {
+        "zh": "今天做了什么？／请再说一遍。",
+        "en": "What did you do today? / Could you repeat that?",
+        "kind": "自由对话设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "若有文字回顾，仅作事后核对；本轮未证实中文转录控件。"
+        ],
+        "listening_speaking": [
+          "在已开放的假设下，听问题并回应，不清楚时请求重复；结束后核对自己表达的意思。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文说明通话状态和结束动作；反馈区分听不懂、表达待改与识别未成功，允许学习者有思考时间。",
+      "chinese_explanation_role": "用于入口说明及事后反思，避免每轮自动代替英语听说。",
+      "ability_limit": "画面中的 Lily 不足以证明中文英语课程开放；未实测通话或转录。",
+      "pending": [
+        "中文英语 Max 视频通话可用性",
+        "中文引导、澄清、结束和转录"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Video Call with Lily 英语自由对话",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-816d9a18e787.png",
+          "interface_language": "Portuguese_in_first_two_panels; icon_only_in_call",
+          "course_direction": "Portuguese→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        },
+        {
+          "file": "assets/root-pt-ways-5.png",
+          "interface_language": "葡语",
+          "course_direction": "葡语→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    },
+    {
+      "id": "M03",
+      "ability_goal": "在可选提示支撑下完成英语口头回应，逐步增加独立表达。",
+      "extra_load": "需管理听问题、看字幕或提示及说话三种注意来源；照读提示成功与独立组织成功应分开理解。",
+      "example": {
+        "zh": "对方问你想要什么。—请给我茶。",
+        "en": "What would you like? — Tea, please.",
+        "kind": "引导通话设计示例，非中文产品截图"
+      },
+      "operations": {
+        "text": [
+          "若中文版本有提示，先只看理解所需的最少信息；字幕语言与开关待核验。"
+        ],
+        "listening_speaking": [
+          "听问题，先尝试回应，卡住时再用提示，最后说出自己的完整意思。"
+        ]
+      },
+      "ui_feedback_recommendation": "中文提示宜逐层提供问题意思、关键词或句框；记录提示依赖程度，不把照读全部答案记作独立产出。",
+      "chinese_explanation_role": "解除具体障碍，帮助理解下一步；不能据葡语文章推出中文实时反馈已经上线。",
+      "ability_limit": "Falstaff 普通跟读与引导视频通话要分开；中文可用性和提示语言未证实。",
+      "pending": [
+        "中文英语 Falstaff 通话是否开放",
+        "字幕、提示和母语反馈内容"
+      ],
+      "evidence_level": "conditional_design_analysis",
+      "evidence_scope": "若中文→英语课程提供此题型时的设计分析；本轮未见中文题图，未核验中文课程已开放。",
+      "chinese_evidence_files": [],
+      "current_chinese_course_availability": "未核验",
+      "ui_observed": [],
+      "analysis_is_not_observed_feature": true,
+      "name": "Video Call with Falstaff 英语引导对话",
+      "catalog_modality": "listening-speaking",
+      "other_catalog_images_not_used_as_chinese_evidence": [
+        {
+          "file": "assets/english-7ebc190c21be.png",
+          "interface_language": "icon_only_except_English_caption",
+          "course_direction": "not_visible→英语",
+          "note": "本代理未用这张图作中文界面核验；新取得的中文图由主代理另行确认。"
+        }
+      ]
+    }
+  ],
+  "shared_principles": [
+    "词义映射常跨多个词块：my→我的、give up→放弃。按句中意义对齐，避免逐字强配。",
+    "只有具体结构存在差异时才讲词序：E06 的一般疑问句 Are you 与中文句末‘吗’不同；E09 的 good friend 与‘好朋友’都把修饰语放在名词前。",
+    "区分看懂、选中、补一词、自由键入、照读、主动说出。给了候选或固定部分的题，不能解释成完全独立产出。",
+    "英语键入要管理字母、空格、大小写和标点；中文解释应把输入失误与意义/句型错误分开。是否宽容这些错误是待核验产品规则。",
+    "中文可以是答案、操作说明、词义提示或答后解释。每次说明它承担哪一层作用，避免默认所有题都要先翻译成中文。",
+    "提示帮助完成不等于独立完成；记录是否用了词块、母语解释、字幕或完整句框，逐步减少不必要依赖。",
+    "听力任务中的词形阅读负担、口语中的识别状态、场景任务中的导航负担应分别说明，不把所有错误归为英语差。",
+    "四张深色中文图没有提供拍摄版本、平台矩阵或连续流程录像；不从静态样式推断点击手势、动画、所有反馈或全量上线。"
+  ],
+  "verification": {
+    "input_record_count_expected": 31,
+    "unique_chinese_screens": 4,
+    "full_chinese_task_records": [
+      "E04",
+      "E06",
+      "E07",
+      "E09"
+    ],
+    "chinese_entry_only_records": [
+      "E08"
+    ],
+    "conditional_records": [
+      "E01",
+      "E02",
+      "E03",
+      "E05",
+      "E10",
+      "E11",
+      "E12",
+      "E13",
+      "E14",
+      "E15",
+      "E16",
+      "E17",
+      "E18",
+      "E19",
+      "S01",
+      "S02",
+      "S03",
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "A01",
+      "A02",
+      "M01",
+      "M02",
+      "M03"
+    ],
+    "browser_used": false,
+    "new_remote_media_downloaded": false,
+    "main_report_or_builder_modified": false,
+    "business_code_changed": false,
+    "git_actions": "none"
+  },
+  "parent_new_evidence_note": "主代理在写盘前补充：E01 有新官方完整中文配对图，E05 有中文词块翻译局部，E15 有中文朗读宣传局部。本代理未重看这些新图；相关证据状态与文件由主代理合并覆盖，语言分析仍可复用。新增 E20–E22 由主代理补充，不在本 31 条范围。",
+  "source_snapshot": {
+    "file": "report-data.json",
+    "sha256": "759fc02416daf055d369428f20335eac11583ffce64b6cf560e22595e57acd60",
+    "record_count_when_read": 31,
+    "requested_record_ids": [
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05",
+      "E06",
+      "E07",
+      "E08",
+      "E09",
+      "E10",
+      "E11",
+      "E12",
+      "E13",
+      "E14",
+      "E15",
+      "E16",
+      "E17",
+      "E18",
+      "E19",
+      "S01",
+      "S02",
+      "S03",
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "A01",
+      "A02",
+      "M01",
+      "M02",
+      "M03"
+    ]
+  }
+}
