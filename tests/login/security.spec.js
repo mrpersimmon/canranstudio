@@ -38,7 +38,7 @@ async function fixture({ seed, ...options } = {}) {
         headers: { Origin: address, 'Content-Type': 'application/json', ...(cookie ? { Cookie: cookie } : {}), ...(forwarded ? { 'X-Forwarded-For': forwarded } : {}), ...extra },
         body: data === undefined ? undefined : JSON.stringify(data)
       });
-      return { status: response.status, body: await response.json(), cookie: response.headers.get('set-cookie')?.split(';')[0], setCookie: response.headers.get('set-cookie') };
+      return { status: response.status, body: await response.json(), cookie: response.headers.get('set-cookie')?.split(';')[0], setCookie: response.headers.get('set-cookie'), retryAfter: response.headers.get('retry-after') };
     },
     address: () => address,
     async restart() { await stop(); await start(); },
@@ -252,4 +252,71 @@ test('真实来源分别限流：攻击来源被拒绝后，其他学生及管�
     expect((await f.call('login', { studentNumber: a.studentNumber, password: a.initialPassword }, null, '192.0.2.2')).status).toBe(200);
     expect((await f.call('admin/login', { username: 'teacher', password: adminPassword }, null, '192.0.2.3')).status).toBe(200);
   } finally { await f.close(); }
+});
+
+test('账号失败冷却跨来源和重启保留，老师重置可恢复该学生，其他账号不受影响', async () => {
+  const f = await fixture({ trustProxy: 'loopback' });
+  try {
+    const a = await learner(f, '李明', 'liming', '192.0.2.10');
+    const b = await learner(f, '小雨', 'xiaoyu', '192.0.2.10');
+    for (let i = 0; i < 10; i++) {
+      const number = i % 2 ? ' ' + a.studentNumber.toUpperCase() + ' ' : a.studentNumber;
+      expect((await f.call('login', { studentNumber: number, password: 'wrong' }, null, '192.0.2.' + (30 + i))).status).toBe(401);
+    }
+    const credentials = { studentNumber: a.studentNumber, password: a.initialPassword };
+    const blocked = await f.call('login', credentials, null, '198.51.100.1');
+    expect(blocked.status).toBe(429); expect(Number(blocked.retryAfter)).toBeGreaterThan(60); expect(Number(blocked.retryAfter)).toBeLessThanOrEqual(900);
+    await f.restart();
+    expect((await f.call('login', credentials, null, '198.51.100.2')).status).toBe(429);
+    expect((await f.call('login', { studentNumber: b.studentNumber, password: b.initialPassword }, null, '198.51.100.2')).status).toBe(200);
+    expect((await f.call('admin/reset-password', { studentId: a.id, pinyin: 'liming' }, a.admin)).status).toBe(200);
+    const card = (await f.call('admin/accounts', { studentId: a.id }, a.admin)).body.accounts[0];
+    expect((await f.call('login', { studentNumber: a.studentNumber, password: card.initialPassword }, null, '198.51.100.2')).status).toBe(200);
+  } finally { await f.close(); }
+});
+
+test('管理员失败也持续冷却，本地管理员恢复命令的存储操作可解除账号冷却', async () => {
+  const f = await fixture();
+  try {
+    for (let i = 0; i < 10; i++) expect((await f.call('admin/login', { username: 'teacher', password: 'wrong' })).status).toBe(401);
+    await f.restart();
+    const denied = await f.call('admin/login', { username: 'teacher', password: adminPassword });
+    expect(denied.status).toBe(429); expect(Number(denied.retryAfter)).toBeGreaterThan(60);
+    const store = openStore(f.directory); store.setAdmin('teacher', adminPassword); store.close();
+    expect((await f.call('admin/login', { username: 'teacher', password: adminPassword })).status).toBe(200);
+  } finally { await f.close(); }
+});
+
+test('重复进入只保留一个授权，课程撤回后不能续期，登录页脚本策略仍收紧', async ({ browser }) => {
+  const f = await fixture(); let context;
+  try {
+    const a = await learner(f);
+    const setup = await f.call('login', { studentNumber: a.studentNumber, password: a.initialPassword });
+    const password = 'Security-course-control-2026!';
+    const logged = await f.call('password', { password, confirmPassword: password }, setup.cookie);
+    let grant;
+    for (let i = 0; i < 25; i++) {
+      const entered = await f.call('courses/unit13-14/enter', {}, logged.cookie);
+      expect(entered.status).toBe(200); if (grant) expect(entered.body.grant).toBe(grant); grant = entered.body.grant;
+    }
+    const db = new DatabaseSync(path.join(f.directory, 'learning.sqlite'));
+    expect(db.prepare('SELECT count(*) AS n FROM grants WHERE student=?').get(a.id).n).toBe(1); db.close();
+    expect((await f.call('courses/unit15-16/enter', {}, logged.cookie)).status).toBe(403);
+    const portal = await fetch(f.address() + '/lesson/');
+    expect(portal.headers.get('content-security-policy')).toContain("script-src 'self';");
+    await portal.arrayBuffer();
+    const course = await fetch(f.address() + '/lesson/unit13-14/', { headers: { Cookie: logged.cookie } });
+    expect(course.status).toBe(200); expect(course.headers.get('content-security-policy')).toContain("script-src 'self' 'unsafe-inline'");
+    expect(course.headers.get('cache-control')).toBe('no-store'); await course.arrayBuffer();
+    context = await browser.newContext(); const page = await context.newPage();
+    await page.goto(f.address() + '/lesson/');
+    await expect(page.getByRole('button', { name: '进入我的课程' })).toBeVisible();
+    // Real browser CSP enforcement: DOM-inserted inline script must not execute.
+    await page.evaluate(() => { const script = document.createElement('script'); script.textContent = 'window.inlineProbeExecuted = true'; document.head.append(script); });
+    expect(await page.evaluate(() => window.inlineProbeExecuted)).toBeUndefined();
+    await f.call('admin/classes', { id: a.classId, name: '安全验证班', courses: [] }, a.admin);
+    expect((await f.call('courses/unit13-14/enter', {}, logged.cookie)).status).toBe(403);
+    const retained = new DatabaseSync(path.join(f.directory, 'learning.sqlite'));
+    expect(retained.prepare('SELECT count(*) AS n FROM grants WHERE id=?').get(grant).n).toBe(1); retained.close();
+  } finally { await context?.close(); await f.close(); }
 });

@@ -4,6 +4,8 @@
 
 账号安全回归：`npm run test:login -- tests/login/security.spec.js tests/login/student-accounts.spec.js tests/login/recovery.spec.js`。覆盖随机一次性密码、并发重放、到期／重启不续期、旧库迁移、待领取凭据的备份恢复、真实页面打印和找回流程，以及代理来源分桶、伪造头与等价地址防绕过。使用临时虚构账号，不读取或改动真实学生数据；实际 Nginx 和手机微信验收另列。
 
+security-version 另有 `node --test tests/unit/server-security.test.js tests/unit/preview-security.test.js`，验证授权记录有界、旧 token 保留、持久登录冷却、限流记录容量、私有文件权限和预览路径隔离。账号专项增加跨来源/重启冷却、老师恢复和真实浏览器 CSP；预览修改连同 `course-loading.spec.js`、`lesson-deployment.spec.js`、`landmark-review.spec.js` 检查正常路由。真实 Nginx 模板检查为 `NGINX_BIN=/实际路径/nginx OPENSSL_BIN=/实际路径/openssl node --test tests/deploy/login-nginx.test.js`，未配置二进制时明确跳过。详见[安全加固方案](../docs/security-version/2026-09-28-安全加固方案与验证.md)。
+
 `test:deploy` 中旧 `buildStatic` 的实际仓库构建用例要求公开输入与 HEAD 一致；未提交的实现会被明确拒绝。记录此先决条件，不能为了通过它绕过干净版本检查或擅自提交。
 
 多个工作目录同时验收时，已使用配置地址的课程检查可通过 `COURSE_TEST_PORT=4190 npx playwright test ...` 选择空闲端口。部分历史缓存、导航和跨窗口用例仍写死 4173，完整提交检查目前应先确认 4173 空闲，再使用默认配置。不要结束其他会话占用端口的进程。

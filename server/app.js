@@ -13,6 +13,10 @@ const { normalizeBasePath } = require('../scripts/public-base-path');
 const fail = (status, message) => Object.assign(new Error(message), { status });
 const cleanName = value => typeof value === 'string' && value.trim().length > 0 && value.trim().length <= 60 ? value.trim() : (() => { throw fail(400, '名称请填写 1–60 个字'); })();
 const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const PORTAL_CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
+// The course loader executes integrity-checked cached scripts inline. Keep that
+// compatibility only on authorized course documents, never the account portal.
+const COURSE_CSP = PORTAL_CSP.replace("script-src 'self'", "script-src 'self' 'unsafe-inline'");
 async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null, trustProxy = false, basePath = '/lesson/' } = {}) {
   const BASE = normalizeBasePath(basePath);
   if (trustProxy !== false && trustProxy !== 'loopback') throw Error('trustProxy must be false or loopback');
@@ -36,19 +40,12 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   }));
   const definitions = Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,id,BASE)]));
   const currentProgress = (studentId, course) => { const saved = store.progress(studentId, course); return { ...saved, value: progress.normalize(saved.value, definitions[course], course) }; };
-  const rate = new Map();
-  function clearFailures(kind, credential) {
-    rate.delete(kind + ':' + require('node:crypto').createHash('sha256').update(String(credential)).digest('hex'));
-  }
   function throttle(request, kind, credential) {
-    const now = Date.now();
-    for (const [k,v] of rate) if (v.until <= now) rate.delete(k);
-    const ipKey='ip:'+clientAddress(request, trustProxy);const ip=rate.get(ipKey)||{count:0,until:now+60000};
-    if(ip.until>now&&++ip.count>120)throw fail(429,'尝试有些频繁，请一分钟后再试');rate.set(ipKey,ip.until>now?ip:{count:1,until:now+60000});
-    const key = kind + ':' + require('node:crypto').createHash('sha256').update(String(credential)).digest('hex');
-    const entry = rate.get(key) || { count: 0, until: now + 60000 };
-    if (++entry.count > 12) throw fail(429, '尝试有些频繁，请一分钟后再试');
-    rate.set(key, entry);
+    store.authThrottle.check(clientAddress(request, trustProxy), kind, credential);
+  }
+  function credentialFailure(kind, credential, status, message) {
+    store.authThrottle.failed(kind, credential);
+    throw fail(status, message);
   }
   function cookie(request, role) { return request.headers.cookie?.split(';').map(v => v.trim()).find(v => v.startsWith('canran_' + role + '='))?.split('=')[1]; }
   function session(request, role, required = true) { const value = store.lookupSession(cookie(request, role), role, Date.now()); if (!value && required) throw fail(role==='admin'&&store.lookupSession(cookie(request,'student'),'student',Date.now())?403:401, '请先登录'); return value; }
@@ -83,7 +80,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   function notice(res, title, code) { res.writeHead(code, { 'Content-Type': 'text/html; charset=utf-8' }).end(`<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="${BASE}portal.css"><title>${escape(title)}</title><main><section class="login panel"><h1>${escape(title)}</h1><a class="button primary" href="${BASE}">返回课程</a></section></main></html>`); }
   const server = http.createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'no-store'); response.setHeader('X-Content-Type-Options', 'nosniff'); response.setHeader('Referrer-Policy', 'no-referrer'); response.setHeader('X-Frame-Options', 'DENY');
-    response.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'");
+    response.setHeader('Content-Security-Policy', PORTAL_CSP);
     try {
       const url = new URL(request.url, origin), pathname = decodeURIComponent(url.pathname), relative = pathname.slice(BASE.length);
       if (BASE === '/' && pathname === '/lesson/core/subpath-worker.js') { response.setHeader('Service-Worker-Allowed', '/lesson/'); return publicFile(response, 'retired-worker.js', 'text/javascript'); }
@@ -102,14 +99,23 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (/^api\//.test(relative)) {
         const input = request.method === 'POST' ? await body(request) : null;
         if (request.method !== 'GET' && request.method !== 'POST') throw fail(405, '不支持此操作');
-        if (relative === 'api/admin/login' && input) { throttle(request, 'admin',input.username); if (String(input.password || '').length > 256) throw fail(401, '账号或密码不正确'); const who = store.adminLogin(String(input.username || ''), String(input.password || '')); if (!who) throw fail(401, '账号或密码不正确'); clearFailures('admin', input.username); setCookie(response, 'admin', store.session('admin', who, Date.now()), 43200); return json(response, { ok: true }); }
+        if (relative === 'api/admin/login' && input) {
+          const username = String(input.username || ''), password = String(input.password || '');
+          throttle(request, 'admin', username);
+          if (username.length > 128 || password.length > 256) credentialFailure('admin', username, 401, '账号或密码不正确');
+          const who = store.adminLogin(username, password);
+          if (!who) credentialFailure('admin', username, 401, '账号或密码不正确');
+          store.authThrottle.clear('admin', username);
+          setCookie(response, 'admin', store.session('admin', who, Date.now()), 43200);
+          return json(response, { ok: true });
+        }
         if (relative === 'api/login' && input) {
           const number = String(input.studentNumber || '').trim().toLowerCase(), password = String(input.password || '');
           throttle(request, 'student', number);
-          if (number.length > 32 || password.length > 120) throw fail(401, '学号或密码不正确，或账号已停用');
+          if (number.length > 32 || password.length > 120) credentialFailure('student', number, 401, '学号或密码不正确，或账号已停用');
           const student = store.studentLogin(number, password);
-          if (!student) throw fail(401, '学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');
-          clearFailures('student', number);
+          if (!student) credentialFailure('student', number, 401, '学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');
+          store.authThrottle.clear('student', number);
           store.logout(cookie(request, 'student'));
           const setup = !!student.mustChangePassword;
           setCookie(response, 'student', setup ? student.setupToken : store.session('student', student.id, Date.now()), setup ? Math.max(0, Math.floor((student.setupExpiresAt - Date.now()) / 1000)) : 2592000);
@@ -121,10 +127,11 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           const credential = store.credentials(student.id), problem = passwordProblem(input.password, credential);
           if (problem) throw fail(400, problem);
           if (input.password !== input.confirmPassword) throw fail(400, '两次输入的新密码不一致');
-          if (auth.role !== 'student-setup' && !store.checkStudentPassword(student.id, String(input.currentPassword || '').slice(0, 120))) throw fail(400, '当前密码不正确');
+          const currentPassword = String(input.currentPassword || '');
+          if (auth.role !== 'student-setup' && (currentPassword.length > 120 || !store.checkStudentPassword(student.id, currentPassword))) credentialFailure('password', student.id, 400, '当前密码不正确');
           if (store.checkStudentPassword(student.id, input.password)) throw fail(400, '新密码不能与原密码相同');
           store.changePassword(student.id, input.password);
-          clearFailures('password', student.id);
+          store.authThrottle.clear('password', student.id);
           setCookie(response, 'student', store.session('student', student.id, Date.now()), 2592000);
           return json(response, { ok: true });
         }
@@ -212,6 +219,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         let who; try { who = identity(request, url.searchParams.get('preview')); } catch (error) { if (error.status === 401 || error.message === '请先设置新密码') return publicFile(response, 'index.html', 'text/html; charset=utf-8'); throw error; }
         if (!who.courses.includes(course)) return notice(response, '这节课还没向你的班级开放', 403);
         const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'access-client.js"></script>');
+        response.setHeader('Content-Security-Policy', COURSE_CSP);
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : entry); return;
       }
       const auth = session(request, 'student', false), admin = session(request, 'admin', false);
@@ -225,11 +233,13 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (relative === 'core/course-catalog.js') throw fail(403, '请使用本课程的教学定义');
       if (!infrastructure.includes(relative) && ![...(owners.get(pathname) || [])].some(id => allowed.includes(id))) throw fail(auth || admin ? 403 : 401, '请先进入有权限的课程');
       const item = packages.generated.get(relative) || logical.get(relative); if (!item) throw fail(404, '资源不存在');
+      if (item.type.startsWith('text/html')) response.setHeader('Content-Security-Policy', COURSE_CSP);
       response.setHeader('Content-Type', item.type);
       const range = request.headers.range?.match(/^bytes=(\d+)-(\d*)$/);
       if (range) { const start = Number(range[1]), end = range[2] ? Math.min(Number(range[2]), item.body.length - 1) : item.body.length - 1; if (start > end) return response.writeHead(416, { 'Content-Range': 'bytes */' + item.body.length }).end(); response.writeHead(206, { 'Content-Range': `bytes ${start}-${end}/${item.body.length}`, 'Accept-Ranges':'bytes' }).end(request.method === 'HEAD' ? undefined : item.body.subarray(start, end + 1)); return; }
       response.writeHead(200).end(request.method === 'HEAD' ? undefined : item.body);
     } catch (error) {
+      if (!response.headersSent && error.status === 429 && error.retryAfter) response.setHeader('Retry-After', String(error.retryAfter));
       if (!response.headersSent) json(response, { error: error.status ? error.message : '暂时无法完成，请重试' }, error.status || 500); else response.end();
       if (!error.status) console.error('Lesson request failed:', error.code || error.name);
     }

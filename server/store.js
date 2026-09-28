@@ -5,10 +5,12 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { UNITS } = require('./catalog');
 const { suggestPinyin, validPinyin } = require('./student-credentials');
+const { createAuthThrottle } = require('./auth-throttle');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const token = () => crypto.randomBytes(32).toString('base64url');
 const id = () => crypto.randomUUID();
 const INITIAL_PASSWORD_TTL = 7 * 86400000;
+const DUMMY_PASSWORD_HASH = '00112233445566778899aabbccddeeff00:' + '00'.repeat(64);
 const encodePassword = password => { const salt = crypto.randomBytes(16).toString('hex'); return salt + ':' + crypto.scryptSync(password, salt, 64).toString('hex'); };
 function passwordMatches(password, encoded) {
   const [salt, expected] = encoded.split(':');
@@ -17,6 +19,7 @@ function passwordMatches(password, encoded) {
 }
 function openStore(directory) {
   fs.mkdirSync(directory, { recursive: true, mode: 0o700 });
+  fs.chmodSync(directory, 0o700);
   const filename = path.join(directory, 'learning.sqlite');
   const db = new DatabaseSync(filename);
   fs.chmodSync(filename, 0o600);
@@ -26,11 +29,15 @@ function openStore(directory) {
     CREATE TABLE IF NOT EXISTS students (id TEXT PRIMARY KEY, name TEXT NOT NULL, classId TEXT NOT NULL REFERENCES classes(id), active INTEGER NOT NULL DEFAULT 1, codeHash TEXT NOT NULL UNIQUE, card TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS sessions (hash TEXT PRIMARY KEY, role TEXT NOT NULL, subject TEXT NOT NULL, expires INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS grants (id TEXT PRIMARY KEY, session TEXT NOT NULL, student TEXT NOT NULL, course TEXT NOT NULL, expires INTEGER NOT NULL);
+    CREATE INDEX IF NOT EXISTS grants_expires ON grants(expires);
+    CREATE INDEX IF NOT EXISTS grants_session_expires ON grants(session,expires);
+    CREATE INDEX IF NOT EXISTS grants_session_course_expires ON grants(session,course,expires DESC);
     CREATE TABLE IF NOT EXISTS progress (student TEXT NOT NULL, course TEXT NOT NULL, generation INTEGER NOT NULL DEFAULT 0, value TEXT NOT NULL DEFAULT '{}', PRIMARY KEY(student, course));
   `);
   const keyFile = path.join(directory, 'card-key');
   if (!fs.existsSync(keyFile) && db.prepare('SELECT 1 FROM students LIMIT 1').get()) { db.close(); throw Error('学习卡密钥缺失，请恢复与数据库配套的 card-key；不会生成新密钥覆盖旧卡。'); }
   if (!fs.existsSync(keyFile)) fs.writeFileSync(keyFile, crypto.randomBytes(32), { mode: 0o600, flag: 'wx' });
+  fs.chmodSync(keyFile, 0o600);
   const key = fs.readFileSync(keyFile);
   const seal = value => { const iv = crypto.randomBytes(12), cipher = crypto.createCipheriv('aes-256-gcm', key, iv); return Buffer.concat([iv, cipher.update(value), cipher.final(), cipher.getAuthTag()]).toString('base64'); };
   const unseal = value => { const bytes = Buffer.from(value, 'base64'), decipher = crypto.createDecipheriv('aes-256-gcm', key, bytes.subarray(0, 12)); decipher.setAuthTag(bytes.subarray(-16)); return Buffer.concat([decipher.update(bytes.subarray(12, -16)), decipher.final()]).toString(); };
@@ -77,6 +84,12 @@ function openStore(directory) {
   });
   const student = who => db.prepare('SELECT id,name,classId,active,studentNumber,mustChangePassword FROM students WHERE id=?').get(who);
   const credentials = who => db.prepare('SELECT studentNumber,loginPinyin,passwordHash,mustChangePassword FROM students WHERE id=?').get(who);
+  const authThrottle = createAuthThrottle(db);
+  const clearStudentFailures = who => {
+    const row = credentials(who);
+    if (row) authThrottle.clear('student', row.studentNumber);
+    authThrottle.clear('password', who);
+  };
   const revokeStudent = who => {
     db.prepare("DELETE FROM sessions WHERE subject=? AND role IN ('student','student-setup')").run(who);
     // Old grants can only upload this student's pending completed work after
@@ -97,6 +110,7 @@ function openStore(directory) {
   };
   return {
     directory,
+    authThrottle,
     close: () => db.close(),
     hasAdmin:()=>!!db.prepare('SELECT 1 FROM admin LIMIT 1').get(),
     checkIntegrity:()=>{if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok')throw Error('数据库完整性检查未通过');for(const row of db.prepare('SELECT card,initialPassword FROM students').all()){unseal(row.card);if(row.initialPassword)unseal(row.initialPassword);}},
@@ -104,9 +118,9 @@ function openStore(directory) {
     setAdmin(username, password) {
       if (!username || password.length < 14) throw new Error('账号不能为空，管理员密码至少 14 个字符');
       db.exec('BEGIN IMMEDIATE');
-      try { db.prepare('DELETE FROM admin').run(); db.prepare('INSERT INTO admin VALUES (?,?)').run(username, encodePassword(password)); db.prepare("DELETE FROM sessions WHERE role='admin'").run(); db.exec('COMMIT'); } catch (error) { db.exec('ROLLBACK'); throw error; }
+      try { db.prepare('DELETE FROM admin').run(); db.prepare('INSERT INTO admin VALUES (?,?)').run(username, encodePassword(password)); db.prepare("DELETE FROM sessions WHERE role='admin'").run(); authThrottle.clearAdmin(); db.exec('COMMIT'); } catch (error) { db.exec('ROLLBACK'); throw error; }
     },
-    adminLogin(username, password) { const row = db.prepare('SELECT * FROM admin WHERE username=?').get(username); return row && passwordMatches(password, row.password) ? row.username : null; },
+    adminLogin(username, password) { const row = db.prepare('SELECT * FROM admin WHERE username=?').get(username); const matches = passwordMatches(password, row?.password || DUMMY_PASSWORD_HASH); return matches && row ? row.username : null; },
     session: createSession,
     lookupSession(raw, role, now) {
       const auth = raw && db.prepare('SELECT * FROM sessions WHERE hash=? AND role=? AND expires>?').get(hash(raw), role, now);
@@ -131,7 +145,7 @@ function openStore(directory) {
     studentLogin(number, password, now = Date.now()) { return transaction(() => {
       const row = db.prepare('SELECT id,active,passwordHash,mustChangePassword,initialPassword,initialPasswordExpiresAt FROM students WHERE studentNumber=?').get(number.trim().toLowerCase());
       // A dummy hash keeps unknown-account and incorrect-password work comparable.
-      const encoded = row?.passwordHash || '00112233445566778899aabbccddeeff00:' + '00'.repeat(64);
+      const encoded = row?.passwordHash || DUMMY_PASSWORD_HASH;
       const matches = passwordMatches(password, encoded);
       if (!matches || !row?.active) return null;
       if (!row.mustChangePassword) return student(row.id);
@@ -146,17 +160,27 @@ function openStore(directory) {
     changePassword(who, password) { return transaction(() => {
       db.prepare('UPDATE students SET passwordHash=?,mustChangePassword=0,initialPassword=NULL,initialPasswordExpiresAt=NULL WHERE id=?').run(encodePassword(password), who);
       revokeStudent(who);
+      clearStudentFailures(who);
     }); },
     resetPassword(who, spelling) { return transaction(() => {
       if (!validPinyin(spelling)) throw Error('请核对姓名拼音');
       const initial = newInitialPassword();
       const result = db.prepare('UPDATE students SET loginPinyin=?,passwordHash=?,mustChangePassword=1,initialPassword=?,initialPasswordExpiresAt=? WHERE id=?')
         .run(spelling, initial.encoded, initial.sealed, initial.expires, who);
-      revokeStudent(who); return result.changes;
+      revokeStudent(who); clearStudentFailures(who); return result.changes;
     }); },
     updateStudent(who, name, classId, active) { return db.prepare('UPDATE students SET name=?,classId=?,active=? WHERE id=?').run(name, classId, active ? 1 : 0, who).changes; },
     allowed(who) { const row = db.prepare('SELECT courses FROM classes JOIN students ON students.classId=classes.id WHERE students.id=? AND students.active=1').get(who); return row ? JSON.parse(row.courses) : []; },
-    grant(session, course, now) { const row = { id: token(), session: session.hash, student: session.subject, course, expires: now + 2 * 3600000 }; db.prepare('INSERT INTO grants VALUES (?,?,?,?,?)').run(row.id, row.session, row.student, course, row.expires); db.prepare('DELETE FROM grants WHERE expires<?').run(now - 30 * 86400000); return row; },
+    grant(session, course, now) { return transaction(() => {
+      // Retain old IDs for queued completed-work uploads. Only new entries for
+      // this session/course reuse a row; other devices remain independent.
+      const prior = db.prepare('SELECT * FROM grants WHERE session=? AND student=? AND course=? ORDER BY expires DESC LIMIT 1').get(session.hash, session.subject, course);
+      const row = { id: prior?.id || token(), session: session.hash, student: session.subject, course, expires: now + 2 * 3600000 };
+      if (prior) db.prepare('UPDATE grants SET expires=? WHERE id=?').run(row.expires, row.id);
+      else db.prepare('INSERT INTO grants VALUES (?,?,?,?,?)').run(row.id, row.session, row.student, course, row.expires);
+      db.prepare('DELETE FROM grants WHERE expires<?').run(now - 30 * 86400000);
+      return row;
+    }); },
     activeCourses(session, now) { return db.prepare('SELECT DISTINCT course FROM grants WHERE session=? AND expires>?').all(session.hash, now).map(row => row.course); },
     activeGrant(session, course, now) { return db.prepare('SELECT * FROM grants WHERE session=? AND course=? AND expires>? ORDER BY expires DESC LIMIT 1').get(session.hash,course,now); },
     progress(who, course) { const row = db.prepare('SELECT generation,value FROM progress WHERE student=? AND course=?').get(who, course); return row ? { generation: row.generation, value: JSON.parse(row.value) } : { generation: 0, value: {} }; },

@@ -44,14 +44,14 @@ function entryHtml(source, basePath, course, brandImage) {
   return html.replace(/(<body\b[^>]*>)/i, '$1' + loaderMarkup(basePath, course, brandImage) + noScript);
 }
 
-async function createCoursePackages({ root, basePath = '/', courseIds = null, isolatedDefinitions = false }) {
+async function createCoursePackages({ root, basePath = '/', courseIds = null, isolatedDefinitions = false, readSource = relative => fs.readFile(path.join(root, relative)) }) {
   normalizeBasePath(basePath);
   const generated = new Map(), sourceFiles = new Map(), resourceEntries = new Map();
   let currentCourse;
   async function bytes(relative) {
     if (!sourceFiles.has(relative)) {
       if (relative.startsWith('/') || relative.split('/').includes('..')) throw new Error('Invalid course resource: ' + relative);
-      let value = await fs.readFile(path.join(root, relative));
+      let value = await readSource(relative);
       if (isolatedDefinitions && relative === 'core/course-catalog.js') {
         const learning = catalog.requireCourseDefinition('lesson49').learning;
         const definition = { learning: currentCourse === 'unit49-50' ? learning : { FEEDBACK: learning.FEEDBACK } };
@@ -91,7 +91,7 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
     if (courseIds.some(id => !courses.some(course => course.id === id))) throw new Error('Unknown course in publication list');
     for (let i = courses.length - 1; i >= 0; i--) if (!courseIds.includes(courses[i].id)) courses.splice(i, 1);
   }
-  const withdrawn = JSON.parse(await fs.readFile(path.join(root, 'core/course-withdrawals.json'), 'utf8'));
+  const withdrawn = JSON.parse((await readSource('core/course-withdrawals.json')).toString());
   if (!Array.isArray(withdrawn) || withdrawn.some(value => !/^(?:home|unit\d+-\d+|lesson\d+|soundmark)@[a-f0-9]{64}$/.test(value))) throw new Error('Invalid withdrawn course versions');
   const index = { schema: 1, basePath, protocol: 1, courses: {}, withdrawn };
   // Reuse the site's actual brand image without another request on the loading screen.

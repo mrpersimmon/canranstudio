@@ -35,6 +35,7 @@
 | 按班级开放课程、学生登录与七项下架 | [班级课程访问设计与验收 v1.2](butcher-version/publish/2026-09-26-0048-v1.2-班级课程访问设计与验收.md)：已在 butcher 分支整合并上线根目录，课程以 butcher 版本为准；[实际发布、初始化与验收](butcher-version/2026-09-26-0304-v1.0-根目录发布与账号初始化验收.md)；[访谈记录](butcher-version/2026-09-25-0021-v0.1-班级课程开放设计讨论.md)保留选择过程。 |
 | 编写或新增课程 | [课程编写指南](course-authoring.md) |
 | 检查修改有没有问题 | [测试说明](../tests/README.md) |
+| 查看安全审计与加固边界 | [security-version 安全加固方案与验证](security-version/2026-09-28-安全加固方案与验证.md)：原报告核验、两项已复现问题、账号/预览/部署防护与待线上事项。 |
 | 用真实手机、平板检查 | [真机检查表](mobile-release-smoke-checklist.md) |
 | 组织孩子试用 | [儿童试用说明](v1-map-usability-pilot-toolkit.md) |
 | 发布网站、出错后恢复 | [发布指南](../deploy/README.md) |

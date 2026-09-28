@@ -2,85 +2,65 @@
 
 const http = require('node:http');
 const path = require('node:path');
-const fs = require('node:fs/promises');
 const { relocateSource, subpathRuntime } = require('../../scripts/public-base-path');
 const { createCoursePackages } = require('../../scripts/course-packages');
 const { LESSON_HEADER_CONTRACT } = require('../../scripts/http-header-contract');
+const { TYPES, publicPath, readPreviewFile } = require('./preview-files');
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.COURSE_TEST_PORT || 4173);
 let lessonPackages;
-const TYPES = {
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.woff2': 'font/woff2',
-  '.json': 'application/json; charset=utf-8',
-  '.mp3': 'audio/mpeg',
-  '.avif': 'image/avif',
-  '.webp': 'image/webp',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml'
-};
-
-function resolveRequestPath(requestUrl) {
-  let pathname = decodeURIComponent(new URL(requestUrl, 'http://127.0.0.1').pathname);
-  if (pathname.startsWith('/lesson/')) pathname = pathname.slice('/lesson'.length);
-  const withIndex = pathname.endsWith('/') ? `${pathname}index.html` : pathname;
-  const absolute = path.resolve(ROOT, `.${withIndex}`);
-  if (absolute !== ROOT && !absolute.startsWith(`${ROOT}${path.sep}`)) {
-    return null;
-  }
-  return absolute;
-}
+const readSource = relative => readPreviewFile(ROOT, relative);
 
 const server = http.createServer(async (request, response) => {
-  const pathname = new URL(request.url, 'http://127.0.0.1').pathname;
+  const host = request.headers.host, port = server.address().port;
+  const hostCount = request.rawHeaders.filter((value, index) => index % 2 === 0 && value.toLowerCase() === 'host').length;
+  if (hostCount !== 1 || ![`127.0.0.1:${port}`, `localhost:${port}`].includes(host)
+      || (request.headers.origin && request.headers.origin !== `http://${host}`)) {
+    response.writeHead(403).end('Forbidden'); return;
+  }
+  if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405, { Allow: 'GET, HEAD' }).end(); return; }
+  let pathname;
+  try {
+    if (!request.url.startsWith('/') || request.url.startsWith('//')) throw Error('Invalid path');
+    pathname = decodeURIComponent(new URL(request.url, 'http://' + host).pathname);
+  } catch { response.writeHead(400).end('Bad Request'); return; }
   const scoped = pathname.startsWith('/lesson/');
+  const relative = (scoped ? pathname.slice('/lesson/'.length) : pathname.slice(1)) + (pathname.endsWith('/') ? 'index.html' : '');
+  const generatedPath = /^(?:course-index\.json|course-packages\/(?:home|unit\d+-\d+|lesson\d+|soundmark)\/[a-f0-9]{64}\.json|resources\/[a-f0-9]{64}\/[^/]+)$/.test(relative);
+  response.setHeader('X-Content-Type-Options', 'nosniff');
   if (scoped) for (const [key, value] of Object.entries(LESSON_HEADER_CONTRACT)) response.setHeader(key, value);
   if (pathname === '/lesson' || /^\/lesson\/home(?:\/|\/index\.html)?$/.test(pathname)) {
     response.writeHead(308, { Location: '/lesson/' }).end(); return;
   }
-  if (scoped && !pathname.startsWith('/lesson/tests/')) {
-    lessonPackages ||= createCoursePackages({ root: ROOT, basePath: '/lesson/' });
-    const packages = await lessonPackages;
-    const relative = pathname.slice('/lesson/'.length) + (pathname.endsWith('/') ? 'index.html' : '');
-    const item = packages.generated.get(relative);
-    if (item) {
-      response.writeHead(200, { 'Content-Type': item.type, 'Cache-Control': item.immutable ? 'public, max-age=31536000, immutable' : 'no-cache', ...(item.worker ? { 'Service-Worker-Allowed': '/lesson/' } : {}) }).end(request.method === 'HEAD' ? undefined : item.body);
-      return;
+  if (!publicPath(relative) && !(scoped && generatedPath)) { response.writeHead(403).end('Forbidden'); return; }
+  try {
+    if (scoped && !pathname.startsWith('/lesson/tests/')) {
+      lessonPackages ||= createCoursePackages({ root: ROOT, basePath: '/lesson/', readSource });
+      const packages = await lessonPackages;
+      const item = packages.generated.get(relative);
+      if (item) {
+        response.writeHead(200, { 'Content-Type': item.type, 'Cache-Control': item.immutable ? 'public, max-age=31536000, immutable' : 'no-cache', ...(item.worker ? { 'Service-Worker-Allowed': '/lesson/' } : {}) }).end(request.method === 'HEAD' ? undefined : item.body);
+        return;
+      }
+      if (generatedPath) { response.writeHead(404).end('Not Found'); return; }
     }
-  }
-  const generated = scoped && subpathRuntime('/lesson/')[pathname.slice('/lesson/'.length)];
-  if (generated) {
-    response.writeHead(200, { 'Content-Type': TYPES['.js'], 'Service-Worker-Allowed': '/lesson/' }).end(generated); return;
-  }
-  let file;
-  try {
-    file = resolveRequestPath(request.url);
-  } catch {
-    response.writeHead(400).end('Bad Request');
-    return;
-  }
-
-  if (!file) {
-    response.writeHead(403).end('Forbidden');
-    return;
-  }
-
-  try {
-    let body = await fs.readFile(file);
-    if (scoped && /\.(?:html|js|css|json|svg)$/.test(file)) body = relocateSource(body.toString(), path.relative(ROOT, file), '/lesson/');
+    const generated = scoped && subpathRuntime('/lesson/')[pathname.slice('/lesson/'.length)];
+    if (generated) {
+      response.writeHead(200, { 'Content-Type': TYPES['.js'], 'Service-Worker-Allowed': '/lesson/' }).end(request.method === 'HEAD' ? undefined : generated); return;
+    }
+    // Raw URLs and package aliases use the same public-source boundary.
+    let body = await readSource(relative);
+    if (scoped && /\.(?:html|js|css|json|svg)$/.test(relative)) body = relocateSource(body.toString(), relative, '/lesson/');
     response.writeHead(200, {
-      'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream',
+      'Content-Type': TYPES[path.extname(relative).toLowerCase()],
       ...(pathname === '/tests/fixtures/root-media-worker.js' ? { 'Service-Worker-Allowed': '/' } : {}),
       'Cache-Control': 'no-store'
     });
     response.end(request.method === 'HEAD' ? undefined : body);
   } catch (error) {
-    if (error.code === 'ENOENT' || error.code === 'EISDIR') {
+    if (error.status === 403) { response.writeHead(403).end('Forbidden'); return; }
+    if (['ENOENT', 'EISDIR', 'ENOTDIR', 'ELOOP'].includes(error.code)) {
       response.writeHead(404).end('Not Found');
       return;
     }
@@ -89,7 +69,7 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(PORT, '127.0.0.1', () => {
-  process.stdout.write(`static test server listening on http://127.0.0.1:${PORT}\n`);
+  process.stdout.write(`static test server listening on http://127.0.0.1:${server.address().port}\n`);
 });
 
 for (const signal of ['SIGINT', 'SIGTERM']) {
