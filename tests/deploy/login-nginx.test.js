@@ -28,7 +28,9 @@ test('login Nginx rejects unknown HTTP hosts/TLS SNI and preserves canonical pro
   await new Promise(resolve => backend.listen(0, '127.0.0.1', resolve));
   const openssl = process.env.OPENSSL_BIN || 'openssl';
   execFileSync(openssl, ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-days', '1', '-subj', '/CN=www.canranstudio.cn', '-keyout', path.join(dir, 'key.pem'), '-out', path.join(dir, 'cert.pem')], { stdio: 'pipe' });
-  execFileSync(openssl, ['genpkey', '-genparam', '-algorithm', 'DH', '-pkeyopt', 'group:ffdhe2048', '-out', path.join(dir, 'dh.pem')], { stdio: 'pipe' });
+  // Public RFC 7919 parameters also work with the server's OpenSSL 1.1.1,
+  // whose genpkey CLI does not support the newer group:ffdhe2048 option.
+  await fs.copyFile(path.join(__dirname, '../fixtures/nginx-ffdhe2048.pem'), path.join(dir, 'dh.pem'));
   await fs.writeFile(path.join(dir, 'ssl.conf'), 'ssl_protocols TLSv1.2 TLSv1.3;\n');
   const root = path.resolve(__dirname, '../..');
   let site = await fs.readFile(path.join(root, 'deploy/login/site.conf'), 'utf8');
