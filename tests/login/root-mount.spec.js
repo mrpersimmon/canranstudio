@@ -25,7 +25,7 @@ test('根目录真实登录、整课与缓存复访可用；旧 lesson 内容下
     await adminLogin(page, '/');
     const account = await createStudent(page, '根目录发布班', '小北', [/Lesson 13–14 /]);
     await signIn(page, account, '/');
-    await expect(page.locator('.course')).toHaveAttribute('href', /\/unit13-14\//);
+    await expect(page.locator('.course .primary-button')).toHaveAttribute('href', /\/unit13-14\//);
     await completeUnit1314(page);
     await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await page.reload(); await expect(page.locator('#starCount')).toHaveText('15');
@@ -53,7 +53,7 @@ test('已有学号密码和真实已完成活动从 lesson 迁至根目录，不
     await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     const stars = await page.locator('#starCount').textContent();
     await f.move('/');
-    await signIn(page, account, '/'); await page.locator('.course').click();
+    await signIn(page, account, '/'); await page.locator('.course .primary-button').click();
     await expect(page.locator('#starCount')).toHaveText(stars);
     await page.goto('/unit13-14/#learn/roles');
     await expect(page.locator('.stage-roles').getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();

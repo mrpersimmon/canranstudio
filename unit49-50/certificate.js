@@ -33,6 +33,11 @@
     const characters = design.characters || ['butcher', 'bird'];
     const characterLabels = design.characterLabels || ['肉店老板', '伯德夫人'];
     const drawIcon = design.icon || icon;
+    // A cache fallback may turn src into a blob URL. Keep the drawing identity
+    // with the visible image instead of recovering it from a transport URL.
+    const certificateIcon = (name, label = '', factory = icon) => {
+      const image = factory(name, label); image.dataset.certificateArt = name; return image;
+    };
     const keepsakes = design.keepsakes || [];
     const defaultName = design.defaultName || '采购小学徒';
     let issuedAt = typeof initialIssuedAt === 'string' && Number.isFinite(Date.parse(initialIssuedAt)) ? initialIssuedAt : null;
@@ -72,13 +77,13 @@
     header.append(title, button('关闭', () => dialog.close(), 'workspace-back'));
     const paper = node('article', '', 'certificate-paper'); paper.setAttribute('aria-label', '我的冒险纪念证书');
     const stars = node('div', '', 'certificate-crown'); stars.setAttribute('aria-hidden', 'true');
-    stars.append(icon('star'), icon('star'), icon('star'));
+    stars.append(certificateIcon('star'), certificateIcon('star'), certificateIcon('star'));
     paper.append(node('p', copy.course, 'certificate-course'), stars, node('h3', copy.title, 'certificate-award'));
     const heroes = node('div', '', 'certificate-heroes');
     const recipient = node('div', '', 'certificate-recipient');
     const nameOut = node('p', '', 'certificate-recipient-name'); nameOut.id = 'certificateName';
     recipient.append(node('span', '送给', 'certificate-to'), nameOut);
-    heroes.append(drawIcon(characters[0], characterLabels[0]), recipient, drawIcon(characters[1], characterLabels[1]));
+    heroes.append(certificateIcon(characters[0], characterLabels[0], drawIcon), recipient, certificateIcon(characters[1], characterLabels[1], drawIcon));
     paper.append(heroes, node('p', copy.completion, 'certificate-completion'), node('p', copy.thanks, 'certificate-thanks'));
     if (keepsakes.length) {
       const records = node('div', '', 'certificate-keepsakes'); records.setAttribute('aria-label', '我的采访成果');
@@ -88,7 +93,7 @@
     const stamps = node('ol', '', 'certificate-badges'); stamps.setAttribute('aria-label', '我的五关徽章');
     badges.forEach(badge => {
       const stamp = node('li', '', 'certificate-badge'); stamp.style.setProperty('--badge-color', badge.color);
-      const art = node('span', '', 'certificate-badge-art'); art.append(icon(badge.icon));
+      const art = node('span', '', 'certificate-badge-art'); art.append(certificateIcon(badge.icon));
       stamp.append(art, node('span', badge.title)); stamps.append(stamp);
     });
     const foot = node('footer', '', 'certificate-foot');
@@ -120,7 +125,7 @@
         // the visible certificate; never fall back to the old text-only export.
         const images = new Map();
         await Promise.all([...paper.querySelectorAll('img')].map(async image => {
-          await image.decode(); images.set(image.getAttribute('src').split('/').pop().replace('.svg', ''), image);
+          await image.decode(); images.set(image.dataset.certificateArt, image);
         }));
         const paperStyle = root.getComputedStyle(paper);
         const theme = {

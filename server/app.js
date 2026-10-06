@@ -33,10 +33,14 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     }
   }
   for(const pack of await retainPackages(packages,dataDir,BASE)){addOwner(BASE+'course-packages/'+pack.id+'/'+pack.revision+'.json',pack.id);for(const item of [...pack.required,...pack.audio])addOwner(item.url,pack.id);}
+  const navigation = await fs.readFile(path.join(root, 'index.html'), 'utf8');
   const descriptions = await Promise.all(UNITS.map(async id => {
     const source = await fs.readFile(path.join(root, id, 'index.html'), 'utf8');
     const image = source.match(/<section id="cover"[\s\S]*?<img[^>]+src="([^"]+)"/)?.[1];
-    return { id, title: packages.index.courses[id].title, label: 'Lesson ' + id.slice(4).replace('-', '–'), image: image?.startsWith('/') ? BASE.slice(0, -1) + image : null };
+    const section = navigation.match(new RegExp('<section[^>]+data-unit="' + id + '"[\\s\\S]*?</section>'))?.[0] || '';
+    const intro = section.match(/<p class="course-intro">([^<]*)<\/p>/)?.[1] || '';
+    const artwork = [...section.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => BASE.slice(0,-1) + match[1]);
+    return { id, intro, artwork, title: packages.index.courses[id].title, label: 'Lesson ' + id.slice(4).replace('-', '–'), image: image?.startsWith('/') ? BASE.slice(0, -1) + image : null };
   }));
   const definitions = Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,id,BASE)]));
   const currentProgress = (studentId, course) => { const saved = store.progress(studentId, course); return { ...saved, value: progress.normalize(saved.value, definitions[course], course) }; };
@@ -93,6 +97,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
+      if (relative === 'core/course-banners.css') { response.writeHead(200, {'Content-Type':'text/css', 'Cache-Control':'no-cache'}); return response.end(await fs.readFile(path.join(root,relative))); }
       if (relative === 'core/subpath-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
       if (BASE === '/' && relative === 'core/course-package-service-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
       if (['assets/brand/starflower.png','assets/brand/starflower-favicon.png','assets/brand/starflower-apple-touch.png'].includes(relative)) { response.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control':'public, max-age=86400' }); return response.end(await fs.readFile(path.join(root, relative))); }

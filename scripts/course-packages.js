@@ -13,7 +13,7 @@ const RESOURCE = /\.(?:js|css|woff2|svg|png|webp|avif|jpe?g|mp3)(?:[?#].*)?$/i;
 const IMAGE = /\.(?:svg|png|webp|avif|jpe?g)$/i;
 // Explicit teaching mode: adding a course requires a deliberate audio decision.
 const VOICED = new Set(['unit1-2', 'unit49-50', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark']);
-const CLASSROOM = new Set(['unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30']);
+const CLASSROOM = new Set(['unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40']);
 
 function scopeSource(source, relative, basePath) {
   return relocateSource(source, relative, basePath).replace(new RegExp('<script src="' + basePath + 'core/subpath-entry\\.js"></script>\\s*'), '');

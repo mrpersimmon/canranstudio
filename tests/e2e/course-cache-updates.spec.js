@@ -88,8 +88,11 @@ test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', asyn
   for (let i = 0; i < 20; i++) {
     const start = Date.now();
     await page.reload({ waitUntil: 'domcontentloaded' });
-    await expect(next).toBeVisible();
+    // Measure when the real control becomes visible. Assertion retries back
+    // off by up to a second, which measures polling delay as page-load time.
+    await next.waitFor({ state: 'visible' });
     samples.push(Date.now() - start);
+    await expect(next).toBeEnabled();
   }
   const p95 = [...samples].sort((a, b) => a - b)[18];
   await fs.writeFile(testInfo.outputPath('warm-visits.json'), JSON.stringify({ browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, samples, p95 }, null, 2));

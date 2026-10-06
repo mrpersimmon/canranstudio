@@ -169,6 +169,6 @@ test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留�
     await fillLogin(b.page, account, resetPassword);
     await setPassword(b.page, 'Recovered-journey-2026!');
     await expect(b.page.locator('.course')).toContainText('3 / 15');
-    await b.page.locator('.course').click(); await expect(b.page.locator('#starCount')).toHaveText('3');
+    await b.page.locator('.course .primary-button').click(); await expect(b.page.locator('#starCount')).toHaveText('3');
   } finally { await a.context.close(); await b.context.close(); }
 });

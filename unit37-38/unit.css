@@ -1,0 +1,124 @@
+/* Workshop composition; controls and feedback inherit the shared course system. */
+.unit3738-workspace{--unit-page:#FBF8F1;--unit-wash:#E8F0EE;--unit-line:#BFCFC4;--unit-accent:#577B72;--unit-scene:none}
+.unit3738-workspace .unit-word{height:254px;gap:6px}
+.unit3738-workspace .unit-word img{width:126px;height:110px;object-fit:contain}
+.unit3738-workspace .unit-word strong{font-size:24px;line-height:1.2;max-width:100%;overflow-wrap:normal}
+.unit3738-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795E4B;overflow-wrap:anywhere}
+.unit3738-workspace .word-meaning{font-size:16px;line-height:1.45;padding:0 7px}
+.unit3738-workspace .word-example{font-size:13px;line-height:1.4;padding:0 4px;color:#795E4B}
+.unit3738-workspace .unit-word[aria-expanded=true] img{height:65px}
+.unit3738-workspace .practice-scene{display:block;width:320px;height:auto;max-height:none;max-width:100%;object-fit:contain;margin:12px auto}
+.unit3738-workspace .practice-options:has(.picture-option){display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.unit3738-workspace .picture-option{flex-direction:column;min-height:182px;padding:10px;gap:8px}
+.unit3738-workspace .picture-option img{width:100%;height:130px;object-fit:contain}
+.unit3738-workspace .stage-listen .practice-options:not(:has(.picture-option)){max-width:680px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:20px auto}
+.unit3738-workspace .stage-listen .opt-btn{min-height:76px;line-height:1.4}
+.unit3738-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:4px auto 10px}
+.unit3738-workspace .dialogue-log{overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble-row{justify-content:flex-start}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{position:relative;max-width:100%;border-color:#B5CDCC;background:#FFFDF6}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .btext{font-size:23px;overflow-wrap:normal;word-break:normal}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bcn[hidden]{display:none}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .story-lead>p{font-size:23px;border-color:#B5CDCC}
+.unit3738-workspace .stage-text .stage-tools>.btn:only-child{grid-column:1;grid-row:1;justify-self:stretch;min-height:52px;font-size:18px;padding:8px 12px}
+.unit3738-workspace .phrase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px auto}
+.unit3738-workspace .phrase-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;padding:16px;text-align:center}
+.unit3738-workspace .reference-card{border:2px solid var(--shelf-line);border-radius:18px;background:var(--surface-paper,#FFFDF6)}
+.unit3738-workspace .phrase-card>img{width:180px;height:122px;max-width:100%;object-fit:contain}
+.unit3738-workspace .phrase-card>strong{font-size:22px;line-height:1.4;overflow-wrap:normal}
+.unit3738-workspace .phrase-card>span{font-size:16px;line-height:1.5}
+.unit3738-workspace .number-label{font:700 17px 'Baloo 2',sans-serif;color:#795E4B}
+.unit3738-workspace .activity-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:22px auto 0}
+.unit3738-workspace .offline-task{max-width:740px;margin:24px auto 0;padding:16px;border:2px solid var(--unit-line);border-radius:16px;background:#FFFDF6}
+.unit3738-workspace .offline-task summary{font-weight:700;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.unit3738-workspace .offline-task summary::after{content:'＋'}
+.unit3738-workspace .offline-task[open] summary::after{content:'−'}
+.unit3738-workspace .offline-task p{font-size:16px;line-height:1.6;margin:12px 0}
+.unit3738-workspace .sentence-options:has(.wordbank>.word-token:nth-child(6)) .word-answer{height:144px}
+.unit3738-workspace .reference-writing,.unit3738-workspace .reply-writing{font:17px/1.7 'Baloo 2',sans-serif;padding-left:25px}
+.unit3738-workspace .reference-writing li,.unit3738-workspace .reply-writing li{padding:8px 0;break-inside:avoid}
+.unit3738-workspace .writing-rule{display:block;height:26px;border-bottom:1px solid #BDA78A}
+@media(max-width:640px){
+ .unit3738-workspace .unit-word{height:286px}
+ .unit3738-workspace .unit-word img{width:110px;height:100px}
+ .unit3738-workspace .unit-word strong{font-size:20px}
+ .unit3738-workspace .word-phonetic{font-size:14px}
+ .unit3738-workspace .word-meaning{font-size:15px;padding:0 3px}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .classroom-illustration svg{height:100%;width:100%}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .btext{font-size:20px}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{grid-template-columns:minmax(0,1fr);width:100%}
+ .unit3738-workspace .phrase-grid{grid-template-columns:1fr}
+ .unit3738-workspace .practice-options:has(.picture-option){grid-template-columns:1fr}
+ .unit3738-workspace .picture-option{min-height:140px;flex-direction:row}
+ .unit3738-workspace .picture-option img{width:145px;height:115px;max-width:67%}
+ .unit3738-workspace .sentence-options:has(.wordbank>.word-token:nth-child(6)) .word-answer{height:202px}
+}
+@media(max-width:360px){.unit3738-workspace .unit-word strong{font-size:18px}.unit3738-workspace .word-phonetic{font-size:13px}.unit3738-workspace .sentence-options:has(.wordbank>.word-token:nth-child(6)) .word-answer{height:260px}}
+@media print{
+ body.print-writing #unitWriting,body.print-writing #unitWriting *{visibility:visible!important}
+ body.print-writing>*{display:none!important}
+ body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}
+ body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}
+ body.print-writing #unitWriting{max-width:none;font-size:14px;background:white;border-radius:0}
+ body.print-writing #unitWriting>summary,body.print-writing #unitWriting>p:first-of-type{display:none!important}
+ body.print-writing #unitWriting p{font-size:13px;line-height:1.5;margin:10px 0}
+ body.print-writing #unitWriting h4{margin:10px 0;font-size:18px}
+ body.print-writing .reference-writing{font-size:15px;line-height:1.5}
+ body.print-writing .reference-writing li{margin:10px 0;min-height:60px}
+ body.print-writing .writing-b{break-before:page}
+ body.print-writing .reply-writing{display:block;font-size:15px;line-height:1.5}
+ body.print-writing .reply-writing li{min-height:110px;break-inside:avoid}
+ body.print-writing .reply-writing li:nth-child(6){break-after:page}
+ body.print-writing .writing-rule{height:26px}
+}
+
+/* Workshop: uninterrupted wall, wooden work area and two dialogue positions. */
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{height:640px;background:#E8F0EE;outline:none;border-radius:20px;box-shadow:0 3px 0 #D6C6AC}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .dialogue-log{top:14px;left:10%;width:80%;height:232px}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{position:relative;max-width:93%}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .student{justify-content:flex-end}
+.unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bname{font-size:14px}
+.unit3738-workspace .dialogue-status{margin-top:14px}
+.unit3738-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(2,minmax(0,1fr));max-width:770px}
+.unit3738-workspace .picture-option{min-height:230px}
+.unit3738-workspace .picture-option img{height:185px}
+.unit3738-workspace #lessonWorkspace .action-pages{display:block;max-width:850px;min-height:448px}
+.unit3738-workspace .action-pair .number-label{display:block;text-align:center;margin:12px}
+.unit3738-workspace .action-pair-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.unit3738-workspace #lessonWorkspace .action-pair .reference-card{min-height:410px}
+.unit3738-workspace #lessonWorkspace .action-pair img{height:200px;width:100%}
+.unit3738-workspace .moment-label{font-size:15px;color:#61736B}
+.unit3738-workspace .handoff-cast img{object-fit:contain}
+.unit3738-workspace .handoff-person-art{height:220px}
+.unit3738-workspace .handoff-hand{left:calc(50% + 47px);top:48%;width:82px;height:100px;max-width:none}
+.unit3738-workspace .handoff-hand img{object-fit:contain;transform:none}
+.unit3738-workspace .handoff-objects{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:800px){
+ .unit3738-workspace #lessonWorkspace .action-pages{min-height:480px}
+ .unit3738-workspace #lessonWorkspace .action-pair .reference-card{min-height:430px}
+}
+@media(max-width:640px){
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{height:calc(272px + clamp(196px,71vw,330px))}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .dialogue-log{left:0;width:100%;height:255px;top:7px}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .classroom-illustration{height:clamp(196px,71vw,330px);bottom:0}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{max-width:98%;width:auto;grid-template-columns:minmax(0,1fr)}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .btext{grid-row:2}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bbtns{grid-column:1;grid-row:3;justify-self:start;margin-top:6px}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bcn{grid-row:4}
+ .unit3738-workspace .practice-options:has(.picture-option){grid-template-columns:1fr}
+ .unit3738-workspace .picture-option{flex-direction:column;min-height:206px}
+ .unit3738-workspace .picture-option img{height:165px;max-width:100%;width:250px}
+ .unit3738-workspace .action-pair-cards{grid-template-columns:1fr}
+ .unit3738-workspace #lessonWorkspace .action-pages{min-height:886px}
+ .unit3738-workspace #lessonWorkspace .action-pair .reference-card{min-height:410px}
+ .unit3738-workspace .handoff-person-art{height:180px}
+ .unit3738-workspace .handoff-hand{left:calc(50% + 39px);width:67px;height:82px}
+}
+@media print{body.print-writing .reply-writing li{min-height:148px}body.print-writing .reply-writing li:nth-child(3){break-after:page}body.print-writing .reply-writing li:nth-child(6){break-after:auto}}
+
+@media(min-width:641px) and (max-height:850px){
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{height:clamp(300px,calc(100dvh - var(--unit3738-nav-height,110px) - 282px),420px)}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .dialogue-log{height:140px;top:5px;left:5%;width:90%}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .btext{font-size:20px}
+ .unit3738-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{padding:10px 14px}
+}

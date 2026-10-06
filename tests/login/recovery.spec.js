@@ -19,7 +19,7 @@ test('停服务备份恢复后，原学号密码、班级和真实成果仍可�
   execFileSync(process.execPath,['server/manage.js','backup',backup],{env:{...process.env,LESSON_DATA_DIR:active}});
   execFileSync(process.execPath,['server/manage.js','restore',backup],{env:{...process.env,LESSON_DATA_DIR:restored}});
   await start(restored);context=await browser.newContext({baseURL:'http://127.0.0.1:4194'});const recovered=await context.newPage();await recovered.goto('/lesson/');await fillLogin(recovered,account);await expect(recovered.getByRole('heading',{name:'豆豆的课程'})).toBeVisible();await expect(recovered.locator('.course')).toContainText('3 / 15');
-  await recovered.locator('.course').click();await expect(recovered.locator('#starCount')).toHaveText('3');
+  await recovered.locator('.course .primary-button').click();await expect(recovered.locator('#starCount')).toHaveText('3');
   await adminLogin(recovered);await recovered.getByRole('button',{name:'管理 备份班',exact:true}).click();
   const pendingRow=recovered.locator('.student-row').filter({hasText:pending.number});
   expect(await readInitialPassword(recovered,pendingRow)).toBe(pending.initialPassword);
@@ -63,6 +63,6 @@ test('旧公开缓存在线迁移后要求登录，真实匿名成果保留而�
   await page.goto('/lesson/admin/');await page.getByLabel('管理员账号').fill('teacher');await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');await page.getByRole('button',{name:'登录管理页'}).click();
   await expect(old.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();
   await page.getByLabel('新班级名称').fill('迁移班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await page.getByRole('button',{name:'保存开放课程'}).click();await expect(page.getByRole('status')).toContainText('开放课程已保存');const account=await addStudent(page,'新同学');await signIn(page,account);await page.getByText('本机旧记录',{exact:true}).click();await expect(page.locator('#legacy')).toContainText('unit13-14 · 1 项活动完成');
-  await page.locator('.course').click();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/lesson/unit13-14/#learn/colours');await expect(page.locator('.stage-colours').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  await page.locator('.course .primary-button').click();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/lesson/unit13-14/#learn/colours');await expect(page.locator('.stage-colours').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  }finally{await context?.close();if(server)await new Promise(r=>server.close(r));await fs.rm(directory,{recursive:true,force:true});}
 });

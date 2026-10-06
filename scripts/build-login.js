@@ -8,6 +8,6 @@ async function build(){
  // Review-only manifest, never a public static-site build. The access server
  // alone serves the package bytes after checking the authenticated identity.
  await fs.writeFile(path.join(out,'publication.json'),JSON.stringify({access:'class-v1',courses:index.courses,resourceFiles:generated.size},null,2)+'\n');
- console.log('16 个受保护教学单元已校验；dist-login/publication.json 仅用于发布核对。运行 server/run.js 提供课程。');
+ console.log(Object.keys(index.courses).length + ' 个受保护教学单元已校验；dist-login/publication.json 仅用于发布核对。运行 server/run.js 提供课程。');
 }
 build().catch(error=>{console.error(error.message);process.exitCode=1;});

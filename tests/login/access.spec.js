@@ -19,7 +19,7 @@ test('学号密码进入自己的班级，七项下架且旧直链不能越权',
   await signIn(student,code);
   await expect(student.getByRole('heading',{name:'小明的课程'})).toBeVisible();
   await expect(student.locator('.course')).toHaveCount(1);
-  await student.locator('.course').click();
+  await student.locator('.course .primary-button').click();
   await expect(student.getByRole('heading',{name:'物品小图鉴',exact:true})).toBeVisible();
   await student.goto('/lesson/unit3-4/');
   await expect(student.getByRole('heading',{name:'这节课还没向你的班级开放'})).toBeVisible();
@@ -41,7 +41,7 @@ test('管理员可以创建班级并只开放 Lesson 1–2', async ({ page }) =>
   await page.getByRole('checkbox', { name: /Lesson 1–2 / }).check();
   await page.getByRole('button', { name: '保存开放课程' }).click();
   await expect(page.getByRole('status')).toContainText('已保存');
-  await expect(page.getByRole('checkbox')).toHaveCount(16);
+  await expect(page.getByRole('checkbox')).toHaveCount(21);
   await expect(page.getByRole('checkbox', { name: /Lesson 1–2 / })).toBeChecked();
 });
 

@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
-const runtimeInputs = ['core', 'assets', 'home', 'index.html', 'unit49-50', 'unit1-2', 'unit3-4', 'unit5-6', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
+const runtimeInputs = ['core', 'assets', 'home', 'index.html', 'unit49-50', 'unit1-2', 'unit3-4', 'unit5-6', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
 const isDoc = file => /\.md$/i.test(file) || file.startsWith('docs/') || file.startsWith('.superpowers/');
 const isWorkflow = file => /^(scripts\/check-workflow(?:\.config)?\.js|tests\/workflow\/|\.github\/|AGENTS\.md|\.gitignore)/.test(file);
 const unitFiles = root => fs.readdirSync(path.join(root, 'tests/unit')).filter(name => name.endsWith('.test.js')).sort().map(name => 'tests/unit/' + name);
@@ -33,6 +33,12 @@ function tasks(root, files) {
     'browser-unit2526': browser(['tests/e2e/unit25-26']),
     'browser-unit2728': browser(['tests/e2e/unit27-28']),
     'browser-unit2930': browser(['tests/e2e/unit29-30']),
+    'browser-unit3132': browser(['tests/e2e/unit31-32']),
+    'browser-unit3334': browser(['tests/e2e/unit33-34']),
+    'browser-unit3536': browser(['tests/e2e/unit35-36']),
+    'browser-unit3738': browser(['tests/e2e/unit37-38']),
+    'browser-unit3940': browser(['tests/e2e/unit39-40']),
+    'browser-certificates': browser(['tests/e2e/unit49-50-certificate.spec.js', 'tests/e2e/unit35-36.spec.js', '--grep', '证书|领奖|打印|图像加载']),
     'browser-units1-30-tasks': browser(['tests/e2e/units1-30-tasks.spec.js', 'tests/e2e/units1-30-revision.spec.js', 'tests/e2e/units1-30-scene-cues.spec.js', 'tests/e2e/units-room-tasks.spec.js', 'tests/e2e/units1-30-acceptance.spec.js']),
     'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js', 'tests/e2e/l49-focus.spec.js']),
     'browser-state': browser(['tests/e2e/home-progress.spec.js', 'tests/e2e/l49-progress.spec.js']),
@@ -69,6 +75,12 @@ function select(files) {
   if (code.some(file => /^(unit23-24\/|assets\/unit23-24\/|tests\/support\/unit23-24-flow\.js)/.test(file))) selected.push('browser-unit2324');
   if (code.some(file => /^(unit25-26\/|assets\/unit25-26\/|tests\/support\/unit25-26-flow\.js)/.test(file))) selected.push('browser-unit2526');
   if (code.some(file => /^(unit27-28\/|assets\/unit27-28\/|tests\/support\/unit27-28-flow\.js)/.test(file))) selected.push('browser-unit2728');
+  if (code.some(file => /^(unit31-32\/|assets\/unit31-32\/|tests\/support\/unit31-32-flow\.js)/.test(file))) selected.push('browser-unit3132');
+  if (code.some(file => /^(unit33-34\/|assets\/unit33-34\/|tests\/support\/unit33-34-flow\.js)/.test(file))) selected.push('browser-unit3334');
+  if (code.some(file => /^(unit35-36\/|assets\/unit35-36\/|tests\/support\/unit35-36-flow\.js)/.test(file))) selected.push('browser-unit3536');
+  if (code.some(file => /^(unit37-38\/|assets\/unit37-38\/|tests\/support\/unit37-38-flow\.js)/.test(file))) selected.push('browser-unit3738');
+  if (code.some(file => /^(unit39-40\/|assets\/unit39-40\/|tests\/support\/unit39-40-flow\.js)/.test(file))) selected.push('browser-unit3940');
+  if (code.some(file => /^unit49-50\/certificate\.(?:js|css)$/.test(file))) selected.push('browser-certificates');
   if (code.some(file => /^(unit29-30\/|assets\/unit29-30\/|tests\/support\/unit29-30-flow\.js)/.test(file))) selected.push('browser-unit2930');
   if (code.some(file => /^(core\/lesson49-task-inputs\.(?:js|css)$|unit(?:1-2|3-4|5-6|7-8|9-10|11-12|13-14|15-16|17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/(?:content|unit|scene)\.(?:js|css)$|tests\/(?:e2e\/(?:units1-30-|units-room-tasks)|support\/units1-30-|fixtures\/units1-30-tasks-before\/))/.test(file))) selected.push('browser-units1-30-tasks');
   if (code.some(file => /^(unit[^/]*\/|lesson\d+\/|soundmark\/|core\/(?:lesson49-practice|lesson49-subjects|course-catalog)\.js|tests\/(?:e2e\/retry-feedback\.spec\.js|fixtures\/l49-subjects-before-retry\.js))/.test(file))) selected.push('browser-retry-feedback');
