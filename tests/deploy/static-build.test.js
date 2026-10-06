@@ -135,6 +135,8 @@ async function writeSyntheticPublicRoot(root) {
     'lesson51/index.html',
     'lesson51/audio/clip.mp3',
     'core/audio-player.js',
+    'core/certificate-gate.js',
+    'core/certificate-gate.css',
     'core/growth-reveal.js',
     'core/growth-reveal.css',
     'poc/landmark-review/index.html',
@@ -199,27 +201,33 @@ async function writeSyntheticPublicRoot(root) {
     'commit', '--quiet', '-m', 'test root'], { cwd: root });
 }
 
-test('buildStatic emits only the public route tree plus a hash manifest', async t => {
+test('archived public builder emits only its fixture route tree plus a hash manifest', async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-public-archive-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  await writeSyntheticPublicRoot(root);
+  await fs.writeFile(path.join(root, 'README.md'), 'private author guidance');
+  await fs.mkdir(path.join(root, 'docs'));
+  await fs.writeFile(path.join(root, 'docs', 'private.md'), 'not a public asset');
   const out = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-dist-'));
   t.after(() => fs.rm(out, { recursive: true, force: true }));
 
-  await buildStatic({ root: ROOT, out });
+  await buildStatic({ root, out });
 
   for (const file of [
     'index.html',
     'home/index.html',
     'lesson49/index.html',
-    'lesson49/audio/beef.mp3',
+    'lesson49/audio/clip.mp3',
     'lesson50/index.html',
     'soundmark/index.html',
     'lesson51/index.html',
-    'lesson51/audio/climate.mp3',
+    'lesson51/audio/clip.mp3',
     'lesson52/index.html',
-    'lesson52/audio/american.mp3',
+    'lesson52/audio/clip.mp3',
     'lesson53/index.html',
-    'lesson53/audio/mild.mp3',
+    'lesson53/audio/clip.mp3',
     'lesson54/index.html',
-    'lesson54/audio/australia.mp3',
+    'lesson54/audio/clip.mp3',
     'core/audio-player.js',
     'core/certificate-gate.js',
     'core/certificate-gate.css',
@@ -250,11 +258,11 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
   assert.equal(manifest.schema, 1);
   assert.equal(
     manifest.commit,
-    execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim()
+    execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim()
   );
   assert.match(manifest.files['lesson49/index.html'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['lesson54/index.html'], /^[a-f0-9]{64}$/);
-  assert.match(manifest.files['lesson54/audio/australia.mp3'], /^[a-f0-9]{64}$/);
+  assert.match(manifest.files['lesson54/audio/clip.mp3'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['core/certificate-gate.js'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['core/certificate-gate.css'], /^[a-f0-9]{64}$/);
   assert.match(manifest.files['core/growth-reveal.js'], /^[a-f0-9]{64}$/);
@@ -264,12 +272,12 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
     /^[a-f0-9]{64}$/
   );
 
-  const expected = await expectedPublicFiles(ROOT);
+  const expected = await expectedPublicFiles(root);
   const actual = await listRegularFiles(out);
   assert.deepEqual(actual, [...expected, 'release-manifest.json'].sort(comparePaths));
   assert.deepEqual(Object.keys(manifest.files), expected);
   for (const relative of expected) {
-    const source = await fs.readFile(path.join(ROOT, relative));
+    const source = await fs.readFile(path.join(root, relative));
     const built = await fs.readFile(path.join(out, relative));
     assert.deepEqual(built, source, relative);
     assert.equal(manifest.files[relative], sha256(source), relative);
@@ -277,11 +285,19 @@ test('buildStatic emits only the public route tree plus a hash manifest', async 
 
   const secondOut = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-dist-repeat-'));
   t.after(() => fs.rm(secondOut, { recursive: true, force: true }));
-  await buildStatic({ root: ROOT, out: secondOut });
+  await buildStatic({ root, out: secondOut });
   assert.deepEqual(
     await fs.readFile(path.join(secondOut, 'release-manifest.json')),
     await fs.readFile(path.join(out, 'release-manifest.json'))
   );
+});
+
+test('current account-service checkout refuses the public static publishing command', () => {
+  const result = require('node:child_process').spawnSync(process.execPath,
+    ['scripts/build-static.js'], { cwd: ROOT, encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /班级访问版本必须使用 build:login 和访问服务，不能发布为公开静态目录/);
+  assert.equal(result.stdout, '');
 });
 
 test('buildStatic rejects an unregistered lesson entry before creating output', async t => {

@@ -6,7 +6,7 @@
 
 security-version 另有 `node --test tests/unit/server-security.test.js tests/unit/preview-security.test.js`，验证授权记录有界、旧 token 保留、持久登录冷却、限流记录容量、私有文件权限和预览路径隔离。账号专项增加跨来源/重启冷却、老师恢复和真实浏览器 CSP；预览修改连同 `course-loading.spec.js`、`lesson-deployment.spec.js`、`landmark-review.spec.js` 检查正常路由。真实 Nginx 模板检查为 `NGINX_BIN=/实际路径/nginx OPENSSL_BIN=/实际路径/openssl node --test tests/deploy/login-nginx.test.js`，未配置二进制时明确跳过。详见[安全加固方案](../docs/security-version/2026-09-28-安全加固方案与验证.md)。
 
-`test:deploy` 中旧 `buildStatic` 的实际仓库构建用例要求公开输入与 HEAD 一致；未提交的实现会被明确拒绝。记录此先决条件，不能为了通过它绕过干净版本检查或擅自提交。
+`test:deploy` 中旧 `buildStatic` 使用独立的公开课程测试目录，验证输出白名单、文件摘要和干净的 Git 版本；不能再把当前账号版仓库作为匿名公开站点来构建。另有真实命令检查，确认当前仓库拒绝 `build:static`；账号版发布清单使用 `build:login`，实际登录与资源权限由账号页面和正式服务验收。
 
 多个工作目录同时验收时，已使用配置地址的课程检查可通过 `COURSE_TEST_PORT=4190 npx playwright test ...` 选择空闲端口。部分历史缓存、导航和跨窗口用例仍写死 4173，完整提交检查目前应先确认 4173 空闲，再使用默认配置。不要结束其他会话占用端口的进程。
 
