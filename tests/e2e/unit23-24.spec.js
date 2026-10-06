@@ -36,7 +36,7 @@ test('13组词义练习连续错答不泄题，末三题刷新不代答，重练
 test('原文8段完整、历史句可回看、中文按句展开，主动完成末段才解锁理解',async({page})=>{
  await page.goto('/unit23-24/#learn/roles');await page.getByRole('button',{name:'先看故事',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('男士想要哪些杯子？');
  for(let i=0;i<DIALOGUE.length;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.locator('.scene-speaker')).toHaveCount(SPEAKERS[i]==='孩子们'?2:1);await expect(room.getByRole('status')).toHaveText((i+1)+' / 8 段对白');
+  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.locator('.scene-speaker')).toHaveCount(SPEAKERS[i]==='孩子们'?2:1);await expect(room.getByRole('status')).toHaveText((i+1)+' / 8');
   if(i===3){await room.getByRole('button',{name:'看中文',exact:true}).first().click();await expect(room.locator('.bcn').first()).toHaveText('请拿给我一些玻璃杯，简。');await page.reload();await expect(room.locator('.btext')).toHaveCount(4);}
  }
  await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();await expect(page.getByRole('button',{name:'先看故事',exact:true})).toHaveCount(0);

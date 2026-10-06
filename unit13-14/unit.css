@@ -86,7 +86,6 @@
 .unit1314-workspace .model-example>.phrase-card{width:100%;max-width:none}
 .unit1314-workspace .writing-blank{display:inline-block;min-width:64px;color:transparent;border-bottom:1px solid #795e4b;line-height:1.2;margin:0 4px}
 
-.unit1314-workspace .stage-text .stage-tools>.btn:only-child{grid-column:1;grid-row:1;justify-self:stretch;min-height:52px;font-size:18px;padding:8px 12px}
 
 .unit1314-workspace .stage-listen .practice-scene{width:148px;height:136px;max-height:none}
 .unit1314-workspace .stage-listen .practice-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:680px;margin:20px auto}
@@ -143,7 +142,6 @@
 .unit1314-workspace .role-runner .practice-options:not(.sentence-options)>.opt-btn{flex:1 1 180px;max-width:360px;min-height:72px;text-align:center}
 .unit1314-workspace .dress-result{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:650px;margin:12px auto 22px;padding:16px;background:#FAEFE4;border:1px dashed #C79E8C;border-radius:16px}
 .unit1314-workspace .dress-result>img{width:70px;height:76px;object-fit:contain}.unit1314-workspace .dress-result>p{width:100%;margin:0;font-size:21px;text-align:center}
-.unit1314-workspace .stage-exam .practice-session-tools{display:flex;justify-content:flex-end;max-width:800px;margin:0 auto 12px}.unit1314-workspace .shop-stage:has(.practice-pause)>.dress-task{display:none}
 .unit1314-workspace .colour-gallery,.unit1314-workspace .reply-models{max-width:680px;margin:20px auto 0}
 .unit1314-workspace .stage-models .colour-gallery .phrase-card{min-height:238px}.unit1314-workspace .stage-models .colour-gallery .phrase-card>img{height:138px;width:180px}
 .unit1314-workspace .stage-models .reply-models .phrase-card{min-height:240px;padding:14px}.unit1314-workspace .stage-models .reply-models strong{font-size:23px;line-height:1.5}

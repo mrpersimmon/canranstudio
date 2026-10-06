@@ -30,7 +30,7 @@
       const surface = node('section', '', 'shop-stage stage-' + id); surface.id = 'learn/' + id;
       surface.setAttribute('role', 'region'); surface.setAttribute('aria-label', title);
       const header = node('header', '', 'stage-heading');
-      header.append(icon(illustration), node('h3', title), button('怎么玩', () => showHelp(id, title), 'workspace-back'));
+      header.append(icon(illustration), node('h3', title));
       surface.append(header); surfaces.set(id, surface); section.append(surface);
     }
     $('#lessonWorkspace').append(section);
@@ -75,21 +75,6 @@
   $('#startBtn').addEventListener('click', () => {
     const saved = normalizeRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
-  const help = {
-    text: ['点“开始看课文”，用“下一句”展开故事。旧句可以向上查看，中文按句打开。'],
-    roles: ['从刚才的故事中找线索。需要回顾时，可以回到衣帽间小剧场。'],
-    words: ['点整张词卡看意思，再点收起。用上一组和下一组翻页。'],
-    listen: ['看图片、英文或词义，选好后点“检查答案”。'],
-    phrases: ['查看认领时用到的表达。更多替换问答可以展开阅读，也可以和老师练习。'],
-    manners: ['你来扮演客人。选一句合适的话，检查正确后，柜台上的物品才会推进。'],
-    reply: ['先看谁在说话、对谁说。根据已知归属作答，不猜未知的主人。词块可以点选，也可以点已选词块撤回。'],
-    certificate: ['完成五关后领取、保存或打印。证书记录课堂配套练习完成，不评价听力、自由口语或独立写作。']
-  };
-  function showHelp(id, title) {
-    $('#helpTitle').textContent = title;
-    $('#helpBody').replaceChildren(...(help[id] || ['选择后点“检查答案”。灯泡可以提供线索；用过线索会记在学习手记里。']).map(text => node('p', text)));
-    $('#unitHelp').showModal();
-  }
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
 
@@ -139,7 +124,7 @@
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
-  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(advance, tools);
+  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
@@ -151,8 +136,10 @@
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
     props.update(dialogue.i);
+    controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
-    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 句`;
+    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
+    status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
     stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
   }

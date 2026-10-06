@@ -272,3 +272,50 @@ unit.questions["roles"][1]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Thirteen text-supported exercise families, using the reviewed lesson draft.
+(function(core){
+ 'use strict';
+ const unit=core.unit2526,old=unit.questions,all=Object.values(old).flat(),find=id=>all.find(q=>q.id===id),image=name=>'/assets/unit25-26/'+name+'.svg';
+ const make=(code,type,target,prompt,extra)=>({id:'u2526-types-v1-'+code,type,target,prompt,hint:'',source:'Lesson 25–26；2026-10-06 十三项题型试排 '+code,...extra});
+ const choice=(code,target,prompt,options,answer,extra={})=>make(code,'choice',target,prompt,{options,answer,...extra});
+ const articles=code=>make(code,'cloze','区别首次介绍与明确回指','先介绍一台电炉，再说同一台。',{blanks:[{before:'There is ',after:' electric cooker.',options:['an','a']},{before:'',after:' cooker is blue.',options:['The','A']}],answer:'["an","The"]'});
+ const revised={
+  listen:[find('u2526-tasks-v4-positions'),choice('t02','识别冰箱','看看图，选出英文。',['refrigerator','cooker','cupboard'],'refrigerator',{image:image('refrigerator'),imageAlt:'有上下隔层和冷藏标志的冰箱'}),choice('t03','理解 kitchen','“厨房”是哪一个词？',['kitchen','room','cupboard'],'kitchen'),...['Mrs','electric','cooker','room'].map(id=>find('u2526-v1-vocab-'+id))],
+  roles:[
+   make('t05','locate','理解 of the room 的修饰关系','点出表示“房间的”的部分。',{fragments:['There is ',{value:'a table'},' ',{value:'in the middle'},' ',{value:'of the room'},'.'],options:['a table','in the middle','of the room'],answer:'of the room'}),
+   choice('t06','整合跨句颜色和位置','电炉是什么颜色？在厨房哪一边？',['蓝色 · 左边','蓝色 · 右边','白色 · 左边'],'蓝色 · 左边',{reading:'There is an electric cooker in the kitchen.\nThe cooker is blue.\nIt is on the left.'}),find('u2526-v1-story-it')
+  ],
+  observe:[
+   make('t04','wordbank','读懂存在与位置','用中文词块说出这句话的意思。',{reading:'There is a bottle on the table.',language:'zh-CN',tokens:['一个瓶子','有','桌子上','桌子里','没有','一个杯子'],slots:3,suffix:'。',answer:'桌子上 有 一个瓶子'}),find('u2526-tasks-v4-introduce-articles')
+  ],
+  be:[
+   make('t08','cloze','结合图片判断内部位置','看看图，补上位置词。',{image:image('spoon-fork-position'),imageAlt:'左图：勺子在杯子里面；右图：叉子放在罐子上面。',blanks:[{before:'There is a spoon ',after:' the cup.',options:['in','on']}],answer:'["in"]'}),
+   make('t09','write','在句式支持下拼写 clean','这个杯子是干净的。补上缺少的英文单词。',{before:'The cup is ',after:'.',answer:'clean'}),
+   choice('t10','选择回答位置的句子','Where is the glass?',['It is in the cupboard.','It is empty.','It is a glass.'],'It is in the cupboard.',{reading:'The glass is empty.\nIt is in the cupboard.'})
+  ],
+  trans:[make('t12','wordbank','用缩写介绍表面位置',"用 There's 开头说：罐子上有一把叉子。",{tokens:["There's",'a','fork','on','the','tin'],slots:6,suffix:'.',answer:"There's a fork on the tin"})],
+  errands:[
+   choice('t11','整合六轮故事中的物品条件与位置','接下来怎么做，才符合甲的要求？',['继续递原来的杯子。','换成橱柜里干净的杯子。','换成橱柜顶上干净的杯子。'],'换成橱柜里干净的杯子。',{readingLabel:'找杯子的小故事',reading:[['甲','Give me a cup, please.'],['乙','This one?'],['甲','No, not that one. The clean one.'],['乙','Where is it?'],['甲','It is in the cupboard.'],['乙','Here you are.']]}),
+   choice('t13','通过提问取得缺少的位置信息','朋友想要勺子，你还不知道它在哪儿。先问什么？',['Where is it?','What colour is it?','Is it clean?'],'Where is it?',{scene:{kind:'inquiry',before:'Give me a spoon, please.',after:'It is in the cup.',image:image('spoon-cup')}})
+  ],
+  exam:old.exam.map((q,i)=>i===5?articles('c06'):i===7?choice('c08','区分内部与表面位置','看图选择完整介绍。',['There is a bottle in the refrigerator.','There is a bottle on the refrigerator.','There is a bottle in the cupboard.'],'There is a bottle in the refrigerator.',{image:image('bottle-refrigerator'),imageAlt:'一个满瓶子在敞开的冰箱里'}):q)
+ };
+ const predecessors=Object.entries(old).flatMap(([id,items])=>[{key:'unit2526-'+id+'-practice/'+(unit.taskSessions?.[id]||(unit.activityPredecessors?.[id]?'v2':'v'+unit.version)),questions:items},...(unit.taskPredecessors?.[id]||[])]);
+ for(const[id,items]of Object.entries(revised)){unit.taskPredecessors[id]=predecessors;unit.taskSessions[id]='types-v1';unit.questions[id]=items;}
+ unit.stages[3].activities.push(['errands','厨房小任务','people']);unit.stages[3].required.push('errands');
+ unit.typeCoverage={adopted:['E01','E04','E05','E07','E09','E10','E11','E12','E21','E23','S01','S02','A02'],actual:['E01','E04','E05','E07','E09','E10','E11','E12','E21','E23','S01','S02','A02']};
+ unit.experienceVersion='classroom-types-1';
+})(globalThis.CanranCore);
+
+// Click-only edition: changed input must be answered again; other answers carry over.
+(function(core){
+ 'use strict';
+ const unit=core.unit2526,old=unit.questions.be;
+ unit.taskPredecessors.be=[{key:'unit2526-be-practice/'+unit.taskSessions.be,questions:old},...unit.taskPredecessors.be];
+ unit.taskSessions.be='clicks-v1';
+ unit.questions.be=old.map((q,i)=>i!==1?q:{id:'u2526-clicks-v1-clean',type:'cloze',target:'在句子中选择 clean',prompt:'补全句子',reference:'这个杯子是干净的',hint:'',source:'Lesson 25–26；2026-10-06 共性交互修订',blanks:[{before:'The cup is ',after:'.',options:['clean','empty','dirty']}],answer:'["clean"]'});
+ for(const key of ['adopted','actual'])unit.typeCoverage[key]=unit.typeCoverage[key].filter(id=>id!=='E07');
+ unit.typeCoverage.adaptations={E07:'键盘拼写已移除；点击补全归入 E09，不计为 E07。'};
+ unit.experienceVersion='classroom-clicks-1';
+})(globalThis.CanranCore);

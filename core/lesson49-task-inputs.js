@@ -4,7 +4,13 @@
  const button=(text,action)=>{const el=node('button',text,'opt-btn');el.type='button';el.addEventListener('click',action);return el;};
  const group=(label,className)=>{const el=node('div','',className);el.setAttribute('role','group');el.setAttribute('aria-label',label);return el;};
  const encoded=pairs=>pairs.length&&pairs.every(Boolean)?JSON.stringify(pairs):null;
+ const normalizedWord=value=>value.trim().toLowerCase();
  function valid(q,state){
+  if(q.type==='write')return typeof (state.draftValue??'')==='string'&&state.selection===(normalizedWord(state.draftValue||'')||null);
+  if(q.type==='wordbank'){
+   const tokens=state.tokens||[];
+   return Array.isArray(tokens)&&tokens.length<=q.slots&&new Set(tokens).size===tokens.length&&tokens.every(i=>Number.isInteger(i)&&i>=0&&i<q.tokens.length)&&state.selection===(tokens.length===q.slots?tokens.map(i=>q.tokens[i]).join(' '):null);
+  }
   if(q.type==='cloze'){
    const fills=state.fills||q.blanks.map(()=>null);
    return Array.isArray(fills)&&fills.length===q.blanks.length&&fills.every((v,i)=>v===null||q.blanks[i].options.includes(v))&&state.selection===encoded(fills);
@@ -22,9 +28,8 @@
  }
  function matching({element,question:q,state,changed}){
   element.classList.add('task-input','matching-input');
-  const help=node('p',q.instruction||'点英文，再点意思；再点同一对可撤销。','task-instruction');
   const grid=node('div','','match-grid'),left=group(q.leftLabel||'英文','match-column'),right=group(q.rightLabel||'词义','match-column match-meanings');
-  const tally=node('p','','match-count');tally.setAttribute('aria-live','polite');grid.append(left,right);element.append(help,grid,tally);
+  const tally=node('p','','match-count');tally.setAttribute('aria-live','polite');grid.append(left,right);element.append(grid,tally);
   state.pairs ||= Array(q.pairs.length).fill(null);
   const ids=q.pairs.map(p=>p.id),order=state.matchOrder;
   if(!Array.isArray(order)||order.length!==ids.length||new Set(order).size!==ids.length||!order.every(id=>ids.includes(id))){
@@ -110,7 +115,7 @@
  }
  function cloze({element,question:q,state,changed}){
   element.classList.add('task-input','cloze-input');
-  if(q.reference){const reference=node('p',q.reference,'task-reference');reference.lang='en';element.append(reference);}
+  if(q.reference){const reference=node('p',q.reference,'task-reference');reference.lang=/[\u3400-\u9fff]/u.test(q.reference)?'zh-CN':'en';element.append(reference);}
   state.fills ||= q.blanks.map(()=>null);
   const rows=[];
   q.blanks.forEach((blank,i)=>{
@@ -143,6 +148,47 @@
   function update(){buttons.forEach(({spot,b})=>{b.disabled=state.checked;b.setAttribute('aria-pressed',String(state.selection===spot.id));});}
   update();return{update};
  }
- const views={match:matching,locate:locating,handoff,cloze,'scene-find':sceneFind};
+ function writing({element,question:q,state,changed}){
+  element.classList.add('task-input','writing-input');
+  const sentence=node('label','','write-sentence'),field=node('input');
+  sentence.lang='en';field.type='text';field.className='write-word';field.setAttribute('aria-label','缺少的英文单词');
+  field.autocomplete='off';field.autocapitalize='none';field.spellcheck=false;field.maxLength=32;field.enterKeyHint='done';
+  field.value=state.draftValue||'';
+  sentence.append(document.createTextNode(q.before),field,document.createTextNode(q.after));element.append(sentence);
+  let composing=false;
+  function change(){state.draftValue=field.value;state.selection=normalizedWord(field.value)||null;changed();}
+  field.addEventListener('compositionstart',()=>{composing=true;});
+  field.addEventListener('compositionend',()=>{composing=false;change();});
+  field.addEventListener('input',()=>{if(!composing)change();});
+  const update=()=>{field.disabled=state.checked;};update();return{update};
+ }
+ function wordbank({element,question:q,state,changed}){
+  element.classList.add('task-input','translation-input');
+  const answer=group('已选词块','translation-answer'),bank=group('待选词块','wordbank translation-bank');
+  answer.lang=bank.lang=q.language||'en';answer.style.setProperty('--word-slots',q.slots>4?3:q.slots);state.tokens ||= [];
+  const order=state.tokenOrder;
+  if(!Array.isArray(order)||order.length!==q.tokens.length||new Set(order).size!==q.tokens.length||!order.every(i=>Number.isInteger(i)&&i>=0&&i<q.tokens.length)){
+   state.tokenOrder=q.tokens.map((_,i)=>i);
+   for(let i=state.tokenOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[state.tokenOrder[i],state.tokenOrder[j]]=[state.tokenOrder[j],state.tokenOrder[i]];}
+  }
+  element.append(answer,bank);
+  function change(){state.selection=state.tokens.length===q.slots?state.tokens.map(i=>q.tokens[i]).join(' '):null;update();changed();}
+  const choices=state.tokenOrder.map(i=>{
+   const b=button(q.tokens[i],()=>{if(state.checked||state.tokens.length>=q.slots)return;state.tokens.push(i);change();});
+   b.dataset.token=i;bank.append(b);return b;
+  });
+  function update(){
+   answer.replaceChildren();
+   for(let i=0;i<q.slots;i++){
+    const token=state.tokens[i];
+    if(token===undefined){const slot=node('span','…','translation-slot');slot.setAttribute('aria-label','第'+(i+1)+'个词块空位');answer.append(slot);}
+    else{const b=button(q.tokens[token],()=>{if(state.checked)return;state.tokens.splice(i,1);change();choices.find(item=>Number(item.dataset.token)===token)?.focus({preventScroll:true});});b.setAttribute('aria-label','撤回 '+q.tokens[token]);b.disabled=state.checked;answer.append(b);}
+   }
+   if(q.suffix)answer.append(node('span',q.suffix,'translation-punctuation'));
+   choices.forEach(b=>{const placed=state.tokens.includes(Number(b.dataset.token));b.disabled=state.checked||placed;b.classList.toggle('is-placed',placed);b.setAttribute('aria-pressed',String(placed));});
+  }
+  update();changed();return{update};
+ }
+ const views={match:matching,locate:locating,handoff,cloze,'scene-find':sceneFind,write:writing,wordbank};
  root.CanranCore.lesson49TaskInputs={supports:q=>Boolean(views[q.type]),valid,mount:args=>views[args.question.type](args)};
 })(globalThis);

@@ -36,9 +36,9 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
     await expect(check).toBeEnabled({ timeout: 10000 });
     if (exerciseRecovery && i === 0 && id === 'exam') {
-      await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click();
+      await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0);
       await page.reload();
-      await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+      await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
       await expect(room.getByRole('button', { name: answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
 
     }

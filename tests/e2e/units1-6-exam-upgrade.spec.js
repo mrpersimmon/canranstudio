@@ -45,7 +45,7 @@ for (const unit of units) {
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   });
 
-  test(`${unit.id} 旧未提交选择升级仍为草稿，暂停刷新保持选择但不计正确`, async ({ page }) => {
+  test(`${unit.id} 旧未提交选择升级仍为草稿，刷新续做保持选择但不计正确`, async ({ page }) => {
     const upgrade = await oldEdition(page, unit.id);
     await page.goto(`/unit${unit.id}/#learn/exam`); const room = page.locator('.stage-exam'), questions = EXAMS[unit.id];
     await choose(room, unit.id==='1-2'?{answer:'Yes?'}:questions[0]); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
@@ -53,8 +53,8 @@ for (const unit of units) {
     if(unit.id==='1-2'){await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);return;}
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
     await expect(room.getByRole('status')).toBeEmpty();
-    await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click(); await page.reload();
-    await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+    await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload();
+    await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
     if (Array.isArray(questions[1].answer)) await expect(room.getByRole('group', { name: '已选词块', exact: true }).getByRole('button')).toHaveCount(6);
     else await expect(room.getByRole('button', { name: questions[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeEnabled();

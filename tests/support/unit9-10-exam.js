@@ -21,7 +21,7 @@ async function selectAnswer(room, answer) {
 async function finishExamFrom(page, start = 0) {
   const room = page.locator('.stage-exam');
   for (let i = start; i < EXAM.length; i++) {
-    await expect(room.locator('.practice-content h3')).toContainText(EXAM[i].prompt);
+    await expect(room.locator('.practice-content')).toContainText(EXAM[i].prompt.replace(/。$/u,''));
     await selectAnswer(room, EXAM[i].answer);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');

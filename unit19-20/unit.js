@@ -31,7 +31,7 @@
       const surface = node('section', '', 'shop-stage stage-' + id); surface.id = 'learn/' + id;
       surface.setAttribute('role', 'region'); surface.setAttribute('aria-label', title);
       const header = node('header', '', 'stage-heading');
-      header.append(icon(illustration), node('h3', title), button('怎么玩', () => showHelp(id, title), 'workspace-back'));
+      header.append(icon(illustration), node('h3', title));
       surface.append(header); surfaces.set(id, surface); section.append(surface);
     }
     $('#lessonWorkspace').append(section);
@@ -69,23 +69,6 @@
   $('#startBtn').addEventListener('click', () => {
     const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
-  const help = {
-    text: ['点“开始看课文”，用“下一句”展开对白。旧句可以向上查看，中文按句打开。'],
-    roles: ['先看完故事，再来找答案。需要回顾时可以回到公园小剧场。'],
-    words: ['点整张词卡看意思，再点收起。用上一组和下一组翻页。'],
-    listen: ['看英文选词义，或根据图片、词义选英文。选好后点“检查答案”。'],
-    phrases: ['看看不同表达怎样使用，再到下一站练一练。'],
-    observe: ['结合句子里的对象，判断词义或指代。'],
-    be: ['找出句子说的是谁，再选合适的表达。'],
-    models: ['展开对比图和完整问答，跟老师读一读，和朋友观察、提问。'],
-    trans: ['点词块组成句子，点已选的词块可以撤回。全部用完再检查。'],
-    certificate: ['完成五关后领取、保存或打印。证书记录练习完成，不评价自由口语或独立写作。']
-  };
-  function showHelp(id, title) {
-    $('#helpTitle').textContent = title;
-    $('#helpBody').replaceChildren(...(help[id] || ['选择后点“检查答案”。灯泡可以提供线索；用过线索会记在学习手记里。']).map(text => node('p', text)));
-    $('#unitHelp').showModal();
-  }
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
 
@@ -129,7 +112,7 @@
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
-  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(advance, tools);
+  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
@@ -140,8 +123,10 @@
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
+    controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
-    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 段对白`;
+    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
+    status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
     storyScene.showLine(dialogue.i);
   }

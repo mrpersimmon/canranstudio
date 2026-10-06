@@ -137,6 +137,7 @@ test('16 个教学单元冷启动、图片完整、词卡和一道真实作答�
   if(['unit3-4','unit5-6'].includes(id))await expect(room.getByRole('button',{name:'听一遍',exact:true})).toHaveCount(0);
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();
   if(['unit1-2','unit49-50'].includes(id))await room.locator('.practice-options button').first().click();
+  else if(id==='unit25-26')await require('../support/thirteen-types-flow').select(room,require('../support/thirteen-types-flow').ANSWERS['25-26'].listen[0]);
   else {const{answers,select}=require('../support/units1-30-tasks');await select(room,answers(id.slice(4),'listen')[0].answer);}
   await expect(check).toBeEnabled();await check.click();await expect(room.getByRole('status')).toHaveText(/答对了|再看看/);
  }

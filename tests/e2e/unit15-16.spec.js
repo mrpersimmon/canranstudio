@@ -117,7 +117,7 @@ test('无音频时逐句读完18句原文，历史中文可展开，刷新续读
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
     await expect(room.locator('.dialogue-actor.is-current')).toHaveText(SPEAKERS[i]);
-    await expect(room.getByRole('status')).toHaveText((i+1)+' / 18 句');
+    await expect(room.getByRole('status')).toHaveText((i+1)+' / 18');
     if(i===4) {
       await room.getByRole('button',{name:'看中文',exact:true}).first().click();
       await expect(room.locator('.bcn').first()).toHaveText('你们是瑞典人吗？');

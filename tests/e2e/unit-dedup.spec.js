@@ -21,10 +21,11 @@ test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持�
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/unit1-2/#learn/ask');
   const ask = page.locator('.stage-ask');
-  await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '1');
-  await expect(ask.getByRole('heading', { name: '男士问的是哪件物品？', exact: true })).toBeVisible();
-  await choose(ask, '手表', '完成这一站');
-  await expect(ask.getByRole('button', { name: '下一站：词块拼装台', exact: true })).toBeVisible();
+  await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '2');
+  await expect(ask.getByRole('heading', { name: '补全问句', exact: true })).toBeVisible();
+  await choose(ask, 'watch');
+  await choose(ask, '衬衫', '完成这一站');
+  await expect(ask.getByRole('button', { name: '下一站：句子小工坊', exact: true })).toBeVisible();
 
   await page.goto('/unit1-2/#learn/exam');
   const exam = page.locator('.stage-exam');
@@ -35,7 +36,9 @@ test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持�
   await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, {fills:['Yes?','Yes, it is.']});
-  await expect(exam).toContainText('书确实是你的');
+  await expect(exam.locator('.practice-content > h3')).toHaveText('先确认，再道谢');
+  await expect(exam.locator('.practice-context')).toHaveText('同学把你的书递给你');
+  await expect(exam.locator('.task-reading')).toContainText('Is this your book?');
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit12-combined-320.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await choose(exam, 'Yes, it is. Thank you very much.');
@@ -116,6 +119,7 @@ async function priorEdition(page, unit) {
     ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit-dedup-before', unit + '.js'), contentType: 'text/javascript', headers: { 'cache-control': 'no-store' } })
     : route.continue());
   if (unit === 'unit1-2') {
+    await page.route(/\/unit1-2\/(?:index\.html)?$/,async route=>{if(!prior)return route.continue();const response=await route.fetch();return route.fulfill({response,body:(await response.text()).replace('<script src="/core/lesson49-icons.js">','<script src="/core/audio-player.js"></script><script src="/core/lesson49-icons.js">')});});
     // Keep the predecessor runner with the predecessor content. Mixing the
     // current runner into a historical edition invents an unsupported release.
     await page.route('**/unit1-2/unit.js*', route => prior
@@ -171,7 +175,7 @@ test('Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答'
   await expect(page.locator('#starCount')).toHaveText('6');
   upgrade();
   await page.reload();
-  await expectFresh(page, 'unit1-2', 'ask', 1);
+  await expectFresh(page, 'unit1-2', 'ask', 2);
   await expectFresh(page, 'unit1-2', 'exam', 8);
   await expectFresh(page, 'unit1-2', 'trans', 2);
   await expect(page.locator('#starCount')).toHaveText('0');

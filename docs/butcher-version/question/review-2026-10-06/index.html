@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>课件问题审查与修改方案</title>
+<link rel="stylesheet" href="../../../../assets/fonts/fonts.css">
+<style>
+:root{--ink:#4d3527;--muted:#765f4e;--line:#bdd8e6;--wash:#eaf3f8;--paper:#fffdf7;--green:#537e3d;--orange:#faa820}*{box-sizing:border-box}body{margin:0;background:#f5f9fc;color:var(--ink);font:16px/1.75 system-ui,-apple-system,sans-serif}a{color:#326b81;text-underline-offset:3px}main{max-width:1140px;margin:auto;padding:40px 24px 72px}h1{font-size:34px;line-height:1.3;margin:12px 0 18px}h2{font-size:24px;line-height:1.4;margin:36px 0 16px}h3{margin:0 0 10px;font-size:19px}p{margin:10px 0}small,.muted{color:var(--muted)}.eyebrow{font-size:13px;letter-spacing:.06em;font-weight:700}.lead{font-size:19px;max-width:920px}.scope{padding:14px 18px;border-left:4px solid var(--green);background:#edf3e6;margin:22px 0}.nav{display:flex;gap:22px;flex-wrap:wrap;padding:12px 0;border-block:1px solid #d9e4e8}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;background:white}th,td{text-align:left;vertical-align:top;border:1px solid #d9e2e5;padding:14px}th{background:var(--wash);font-weight:650}td:first-child{width:170px}td:last-child{width:120px}code{background:#f1ede5;border-radius:4px;padding:2px 5px;font-size:14px}.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.mock{border:2px solid var(--line);border-radius:22px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'Baloo 2','ZCOOL KuaiLe',sans-serif}.mock-head{background:var(--wash);padding:18px 22px;font-size:24px;display:flex;align-items:center;gap:12px}.mock-head img{width:34px;height:34px}.mock-body{padding:22px}.mock h3{font:700 25px/1.45 'Baloo 2','ZCOOL KuaiLe',sans-serif;text-align:center;margin:16px 0}.mock .note{font:16px/1.6 system-ui,sans-serif;text-align:center}.state-chooser{display:flex;gap:8px;margin:10px 0 12px;flex-wrap:wrap}.state-chooser button{font:14px system-ui;min-height:44px;border:1px solid #b7c9d1;background:white;border-radius:9px;padding:8px 12px;color:#314a57;cursor:pointer}.state-chooser button[aria-pressed=true]{background:#285c72;color:white}.scene{background:url('../../../../assets/unit1-2/street.svg') center bottom/cover no-repeat;position:relative;height:252px;border-radius:16px;overflow:hidden}.actor{position:absolute;height:110px;bottom:8px;left:12px}.actor.woman{left:auto;right:12px}.bag{position:absolute;width:64px;height:64px;bottom:4px;left:calc(50% - 32px)}.scene-copy{position:absolute;top:18px;left:18%;right:18%;border:2px solid #ab9984;background:#fffdf7;border-radius:14px;text-align:center;font-size:19px;line-height:1.4;padding:13px 10px}.read-counter{height:32px;margin:8px 0 0;text-align:center;font:16px/32px system-ui,sans-serif}.actions{display:flex;justify-content:center;gap:12px;align-items:stretch;margin:12px auto 0;border-top:2px solid #d6e4e9;padding-top:18px;max-width:480px}.btn{appearance:none;border:3px solid var(--ink);border-radius:24px;min-height:52px;padding:10px 16px;box-shadow:0 4px var(--ink);font:700 19px/1.25 'Baloo 2','ZCOOL KuaiLe',sans-serif;cursor:pointer;color:white;background:var(--green)}.actions .btn{flex:1}.actions .btn:only-child{flex:0 1 240px}.btn.secondary{background:var(--paper);color:var(--ink)}.btn:disabled{background:#e6e0d5;border-color:#ada597;color:#827b70;box-shadow:0 3px #ada597;cursor:default}.btn:focus-visible,.choice:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #277b95;outline-offset:4px}.progress{display:flex;gap:12px;align-items:center;font:14px system-ui;color:#705846}.track{height:9px;flex:1;background:#eae0cb;border-radius:6px}.track i{display:block;width:25%;height:100%;background:#80ac6a;border-radius:6px}.dialog{display:flex;gap:14px;align-items:center;margin:22px 0}.dialog img{width:48px;height:74px;object-fit:contain}.bubble{border:2px solid #c8b8a2;background:white;padding:15px 18px;border-radius:18px;flex:1;font-size:24px;line-height:1.5}.empty-turn{width:65%;margin:0 0 22px auto;padding:12px;text-align:center;border:2px dashed #cbdce4;border-radius:16px;background:var(--wash);font-size:20px}.options{display:grid;gap:12px}.choice{width:100%;border:3px solid var(--ink);box-shadow:0 4px var(--ink);border-radius:18px;min-height:58px;padding:11px;background:white;color:var(--ink);font:700 19px/1.35 'Baloo 2',sans-serif;cursor:pointer}.choice[aria-pressed=true]{border-color:#b8432d;background:#fff1b8;box-shadow:0 4px #b8432d}.feedback{min-height:38px;text-align:center;color:#447230;margin:18px 0 4px;font-family:system-ui,sans-serif}.full{width:100%}.proposal-note{font-size:14px;color:#596d75;margin:10px 0 22px}.evidence{border:1px solid #d8e3e7;border-radius:16px;overflow:hidden;background:white;margin:16px 0}.evidence summary{padding:15px 18px;min-height:48px;cursor:pointer;font-weight:650}.evidence p{padding:0 18px 14px}.evidence img{display:block;max-width:100%;height:auto;margin:auto;border-top:1px solid #edf0f2}.evidence .screens{display:grid;grid-template-columns:1fr 1fr;align-items:start}.steps{padding-left:24px}.steps li{padding-left:4px;margin:12px 0}.source{font-size:14px}.end{margin-top:28px;border-top:1px solid #d4e1e7;padding-top:18px}ul{padding-left:23px}li{margin:5px 0}.mini-prompt{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}.mini-prompt>div{padding:18px;background:white;border:1px solid #d5e2e8;border-radius:14px}.mini-prompt strong{display:block;margin-bottom:8px}blockquote{margin:14px 0;padding:12px 18px;border-left:3px solid #82aebb;background:#edf4f7} @media(max-width:760px){main{padding:24px 16px 48px}h1{font-size:29px}.review-grid,.mini-prompt{grid-template-columns:1fr}.mock-body{padding:16px}.evidence .screens{grid-template-columns:1fr}th,td{padding:10px;min-width:120px}td:nth-child(2){min-width:280px}.btn{font-size:17px}.scene{height:240px}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Lesson 1–2 与 Lesson 25–26 · 2026 年 10 月 6 日 · 修改方案</div>
+<h1>减少操作说明，让任务更直接</h1>
+<p class="lead">清单中的问题成立：可见说明偏多、阅读按钮层级有误、输入题超出期望、暂停增加了一个中间页面。建议统一为<strong>无配音、全点选、短指令、自动续学</strong>，保留必要语境和作答反馈。</p>
+<p class="muted">依据 <a href="../question.md">问题原稿</a>、原稿两张截图、当前 Lesson 1–2 的五段实际操作，以及统一标准 v1.26。下方为审查证据和改后示意；正式课件尚未应用这些修改。</p>
+<nav class="nav"><a href="#decisions">逐项结论</a><a href="#preview">改后示意</a><a href="#duolingo">Duolingo 依据</a><a href="#evidence">当前页面证据</a><a href="#plan">实施与验收</a></nav>
+
+<h2 id="decisions">逐项结论</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>问题</th><th>建议改法与理由</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>1 · 单词寻宝<br>操作明确，文案冗余</td><td>删除配对操作的常驻说明。建议题干用<strong>选择配对</strong>；若保留本课语境，可用<strong>给衣服配对</strong>。不建议“给衣服选择配对”，它更长且把两个动作叠在一起。仍保留选中、配对标记与可撤回的操作状态。</td><td>随后统一</td></tr>
+<tr><td>2 · 课文阅读<br>布局缺陷</td><td>未开始只显示居中的“开始看课文”；阅读中“从头看”在左、“下一句”在右，同行且位置固定；完成后“再看一遍”在左、“下一站”在右。进度显示 <strong>2 / 7</strong>，读屏名称保留“课文进度，第 2 句，共 7 句”。</td><td>优先修复</td></tr>
+<tr><td>3 · 故事小侦探<br>指令重复</td><td>改为<strong>翻译这句话</strong>，删除“点词块拼句……”说明。英文原句、中文词块、空位本身已表达任务；继续保留点击撤回和键盘焦点。</td><td>随后统一</td></tr>
+<tr><td>4 · 句子小工坊<br>交互范围不符</td><td>移除作答中的单词输入。Lesson 1–2 的 book、Lesson 25–26 的 clean 改为点选补空；题目数量可保持 25／27，但不再记为 E07。证书姓名等必要表单输入不属于练习题，不一并删除。</td><td>优先调整</td></tr>
+<tr><td>5a · 挑战暂停<br>多余的中间状态</td><td>移除“暂停”和暂停页，继续自动保存。现在点击暂停只是把题面替换成“已暂停／继续挑战”，未见需要暂停的计时机制；本轮还验证了不点击暂停，刷新仍恢复未提交选择。</td><td>随后统一</td></tr>
+<tr><td>5b · 怎么玩<br>各站重复入口</td><td>移除两套课件各站的“怎么玩”按钮与对应玩法弹层。保留教学内容中的“看中文”、表达示范，以及有实际帮助的“给点线索”；三者不是同一种功能。不另加默认弹出的教程。</td><td>随后统一</td></tr>
+<tr><td>5c · 综合对话长题干<br>中文阅读负担偏高</td><td>拆为<strong>短指令、必要情境、英文对白、选项</strong>。本题用“先确认，再道谢”，另用一行说明“同学递回你的书”，再单独呈现 <span lang="en">Is this your book?</span>。保留“书是你的”和“确认＋感谢”两个判断条件。</td><td>优先调整</td></tr>
+<tr><td>全单元的小标题标点</td><td>活动名、按钮、短指令去掉末尾句号；英文教材原句、问号和必要的语义标点保留。不要对所有题干和英文原文做全局标点删除。</td><td>随后统一</td></tr>
+</tbody></table></div>
+
+<div class="scope"><strong>题型口径需要一起改。</strong>原先 13 项中 E07 是键入缺词／整句输入。取消输入后，默认点选版清单为 12 项，E07 可留在研究目录作为扩展；两课实际覆盖相应为 <strong>10／12 类</strong>。替换后的点选补空归入现有类型，不能更换标签后继续称 13 类。若坚持 13 类，应另选真正不同的点选任务并验证教材适配，不能用换名凑齐。</div>
+
+<h2 id="preview">改后关键画面</h2>
+<p>复用当前人物、场景、色板和按钮。这里的状态演示不计入课程进度。</p>
+<div class="review-grid">
+<article><h3>阅读按钮按状态出现</h3>
+<div class="state-chooser" aria-label="查看阅读方案的状态"><button data-state="start" aria-pressed="true">未开始</button><button data-state="reading" aria-pressed="false">阅读中</button><button data-state="done" aria-pressed="false">已完成</button></div>
+<div class="mock"><div class="mock-head"><img src="../../../../assets/lesson49/icons/book.svg" alt="">相遇小剧场</div><div class="mock-body">
+<div class="scene"><img class="actor" src="../../../../assets/unit1-2/scene/man.svg" alt="男士"><div class="scene-copy" id="readCopy">这是谁的手提包？</div><img class="actor woman" src="../../../../assets/unit1-2/scene/woman.svg" alt="女士"><img class="bag" src="../../../../assets/unit1-2/handbag.svg" alt="手提包"></div>
+<div class="read-counter" id="readCounter" role="status"></div><div class="actions" id="readActions"></div>
+</div></div><p class="proposal-note">未开始没有“从头看”。阅读时左次右主；改变文本或展开中文不改变操作区位置。示意只演示首句、第二句和完成三种状态。</p>
+</article>
+<article><h3>让中文指令与英文对白分开</h3><p class="proposal-note">下方可以选择、检查和重试，演示短题干如何保持原考点。</p>
+<div class="mock"><div class="mock-head"><img src="../../../../assets/lesson49/icons/star.svg" alt="">礼貌小挑战</div><div class="mock-body">
+<div class="progress"><span>2 / 8</span><span class="track"><i></i></span></div><h3>先确认，再道谢</h3><p class="note">同学递回你的书</p>
+<div class="dialog"><img src="../../../../assets/unit1-2/scene/man.svg" alt="对话人物示意"><div class="bubble" lang="en">Is this your book?</div></div><div class="empty-turn" aria-label="等待你选择回应">…</div>
+<div class="options" role="group" aria-label="选择回应"><button class="choice" data-answer="0" aria-pressed="false">Yes, it is. Excuse me!</button><button class="choice" data-answer="1" aria-pressed="false">Yes, it is. Thank you very much.</button><button class="choice" data-answer="2" aria-pressed="false">Pardon? Thank you very much.</button></div>
+<div class="feedback" id="demoFeedback" role="status"></div><button class="btn full" id="demoCheck" disabled>检查答案</button>
+</div></div><p class="proposal-note">两个干扰项分别缺少“感谢”和“确认”。已知归属与双重目标仍在题面；答错只重试，不提前填入正确回应。人物沿用现有素材，仅示意布局，正式题面需匹配同学身份。</p>
+</article></div>
+
+<div class="mini-prompt"><div><strong>中文翻译题</strong>标题：翻译这句话<br><span lang="en">Is this your handbag?</span><br><small>下方只保留空位与中文词块，不再重复解释点击方法。</small></div><div><strong>取消输入后的补空题</strong>标题：补全句子<br>这是你的书吗？<br><span lang="en">Is this your ___?</span><br><small>选项 book／pen／watch；原拼写能力不再由这道题评价。</small></div></div>
+
+<h2 id="duolingo">Duolingo 的相关做法</h2>
+<p>仓库中文实测 E12 的具体题面是“完成对话”，接着呈现 <span lang="en">Coffee or tea?</span>、待回答的气泡以及 <span lang="en">Coffee, please.</span>／<span lang="en">Welcome.</span> 两项。操作指令、英语话轮、答案各占一层，没有把整段情境说明塞进标题。<a href="../../../research/duolingo-language-exercises-2026-09-27/REPORT.md#E12">查看已有研究</a>。</p>
+<p>Duolingo 的<a href="https://blog.duolingo.com/new-immersion-exercises-maximize-your-language-learning/">官方沉浸式练习说明</a>也以补句、补对话、阅读理解为例，并说明可由图片和周边文字提供情境线索。这里借鉴的是呈现方式，不声称当前所有 Duolingo 课程都使用同一套布局；本轮没有重新登录 Duolingo 实测。</p>
+<details class="evidence"><summary>查看仓库已采集的中文 E12 题面</summary><img loading="lazy" src="../../../research/duolingo-language-exercises-2026-09-27/assets/flows/060.png" alt="已有 Duolingo 研究中的完成对话题，Coffee or tea 与两个选项"></details>
+<p>本课是中文儿童的入门单元，必要的中文归属条件仍应保留。题干缩短不等于省略答题依据；也不跟随该实测样例采用错后展示答案的机制。</p>
+
+<h2 id="evidence">本轮实际页面证据</h2>
+<p>在独立的本地审查入口操作，没有重置用户体验页的学习记录。以下截图均由本轮实际页面保存；原稿的两张截图也已核对。</p>
+<details class="evidence"><summary>01 单词寻宝 · 可操作，但有重复说明</summary><p>三组点选和配对计数清楚。主要问题是题干下方又解释同一操作，右上角还重复提供“怎么玩”。建议删文案，保留编号／选中状态，不仅靠颜色区分配对。</p><img src="screenshots/01-matching.jpg" loading="lazy" alt="当前配对题，包含长操作说明和怎么玩按钮"></details>
+<details class="evidence"><summary>02 手提包的故事 · 已确认按钮错位</summary><p>阅读中两按钮实测纵坐标为 391／455 像素，并非同行。根因在 <code>core/unit-theme.css:79–82</code>：主按钮固定在右列，唯一的次按钮同时命中 first-child 与 last-child，后者把它排到第二行。Lesson 25–26 已有 only-child 修正规则，Lesson 1–2 尚无对应处理。初始状态还同时提供“开始”和无实际需要的“从头看”。</p><div class="screens"><img src="screenshots/02-reading-start.jpg" loading="lazy" alt="阅读初始状态，开始按钮偏右且从头看落在下面"><img src="screenshots/02-reading-progress.jpg" loading="lazy" alt="阅读第二句，下一句和从头看仍错行，进度带有句原文文字"></div></details>
+<details class="evidence"><summary>03 故事小侦探 · 同一操作被解释两次</summary><p>标题与下方说明都在解释中文词块的操作。空位、词块和检查按钮足以承载常规流程；删可见说明时，词块的可访问名称与撤回焦点仍要保留。</p><img src="screenshots/03-translation.jpg" loading="lazy" alt="当前英译中词块题的长标题和常驻操作说明"></details>
+<details class="evidence"><summary>04 句子小工坊 · 确有必须键入的单词</summary><p>这是 E07 的单词输入实现，不是点选题；手机会进入系统输入法流程。本轮未检验实体手机键盘遮挡，因此不把遮挡当作已证实故障。应依据用户的交互范围调整题型。</p><img src="screenshots/04-typing.jpg" loading="lazy" alt="当前 book 单词输入题"></details>
+<details class="evidence"><summary>05 礼貌小挑战 · 题干负担与暂停页冗余</summary><p>对话题把人物、归属、操作目标和英文问句合并为一个长标题。暂停则把题面替换为继续按钮。已通过真实操作确认：选择一项后直接刷新，不经过暂停，选择仍保留。因此删除暂停入口可以保留续学能力。</p><div class="screens"><img src="screenshots/05-challenge.jpg" loading="lazy" alt="当前长对话题与暂停按钮，已选择但尚未提交"><img src="screenshots/05-pause.jpg" loading="lazy" alt="暂停后只显示已暂停第二题和继续挑战"></div></details>
+
+<h2 id="plan">建议实施顺序</h2>
+<ol class="steps">
+<li><strong>先处理阅读布局和键盘输入。</strong>两课按未开始／阅读中／完成三个状态建立明确操作行，DOM 顺序与视觉顺序一致；两道输入题改为点选补空，调整题型覆盖记录，核对是否与已有任务重复。</li>
+<li><strong>再统一指令与辅助入口。</strong>逐题整理“选择配对／翻译这句话／补全句子／完成对话／读一读，选答案”等短指令；保留必要条件，移除两个单元的“怎么玩”、常驻操作说明和暂停入口。共享组件新增明确配置，先让这两课采用，不用全局 CSS 隐藏所有课程控件。</li>
+<li><strong>同步旧记录与统一标准。</strong>纯布局和进度文案调整保留成绩；输入转点选、选项或判断条件改变的题使用新题号与内容版本，保留姓名和证书日期。只去标题句号也会触发当前完整内容签名变化，应逐题核对等价映射，不能全局忽略题干差异。旧记录含 paused 状态时自动回到当前题，不能删了继续按钮后留下空白页。</li>
+<li><strong>验收两课后再推广。</strong>核对 320／390／768／1280 和短屏；按钮不跳动、中文展开不推移操作、词块可撤回、空答案不可检查、错题可修正；验证刷新、退出重进、旧暂停记录、离线、登录换设备、末题结算与证书。真实手机再验证操作和焦点。统一标准 v1.26 的帮助、暂停和 E07 条款须随采用决定更新。</li>
+</ol>
+<p><strong>验收边界：</strong>这次完成问题审查和方案示意，没有实施课程修改，也未重跑整套产品回归。截图与操作支持上述局部结论，不代表全站可访问性合规或儿童教学效果已验证。</p>
+<p class="end">新增：本审查、当前页面证据和可交互方案示意。待完成：正式实现与修改后的验收。提交、推送、发布均未执行。</p>
+</main>
+<script>
+const readCopy=document.getElementById('readCopy'),counter=document.getElementById('readCounter'),actions=document.getElementById('readActions');
+let readStep=0;
+function setReading(state){
+ document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.state===state)));
+ actions.replaceChildren();
+ const add=(label,secondary,act)=>{const b=document.createElement('button');b.className='btn'+(secondary?' secondary':'');b.textContent=label;b.addEventListener('click',act);actions.append(b);};
+ if(state==='start'){readStep=0;readCopy.textContent='这是谁的手提包？';counter.textContent='';counter.removeAttribute('aria-label');add('开始看课文',false,()=>{readStep=1;setReading('reading');});}
+ else if(state==='reading'){readStep=readStep||2;readCopy.textContent=readStep===1?'Excuse me!':'Yes?';counter.textContent=readStep+' / 7';counter.setAttribute('aria-label','课文进度，第 '+readStep+' 句，共 7 句');add('从头看',true,()=>setReading('start'));add('下一句',false,()=>{if(readStep===1){readStep=2;setReading('reading');}else setReading('done');});}
+ else{readCopy.textContent='故事看完了';counter.textContent='7 / 7';counter.setAttribute('aria-label','课文进度，第 7 句，共 7 句');add('再看一遍',true,()=>setReading('start'));add('下一站',false,()=>{document.getElementById('demoCheck').scrollIntoView({block:'center',behavior:'smooth'});});}
+}
+document.querySelectorAll('[data-state]').forEach(b=>b.addEventListener('click',()=>{readStep=b.dataset.state==='reading'?2:0;setReading(b.dataset.state);}));setReading('start');
+let selected=null,phase='answer';const check=document.getElementById('demoCheck'),feedback=document.getElementById('demoFeedback'),choices=[...document.querySelectorAll('[data-answer]')];
+choices.forEach(b=>b.addEventListener('click',()=>{if(phase!=='answer')return;selected=b.dataset.answer;choices.forEach(c=>c.setAttribute('aria-pressed',String(c===b)));check.disabled=false;}));
+check.addEventListener('click',()=>{
+ if(phase==='answer'){const correct=selected==='1';feedback.textContent=correct?'答对了！':'再看看，试一次。';phase=correct?'correct':'wrong';check.textContent=correct?'完成示意':'再试一次';choices.forEach(b=>b.disabled=true);}
+ else if(phase==='wrong'){phase='answer';feedback.textContent='';check.textContent='检查答案';choices.forEach(b=>b.disabled=false);}
+ else{phase='answer';selected=null;feedback.textContent='';check.textContent='检查答案';check.disabled=true;choices.forEach(b=>{b.disabled=false;b.setAttribute('aria-pressed','false');});}
+});
+</script>
+</body></html>

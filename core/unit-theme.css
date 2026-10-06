@@ -80,6 +80,9 @@
 .unit-workspace .stage-text .stage-tools{display:contents}
 .unit-workspace .stage-text .stage-tools>.btn:first-child{grid-column:1;grid-row:1;min-height:52px;font-size:18px;border-width:3px}
 .unit-workspace .stage-text .stage-tools>.btn:last-child{grid-column:1/-1;grid-row:2;justify-self:center;min-height:44px;padding:6px 18px}
+.unit-workspace .stage-text .stage-tools>.btn:only-child{grid-column:1;grid-row:1;justify-self:stretch;min-height:52px;font-size:18px;padding:8px 12px}
+.unit-workspace .stage-text .stage-tools[hidden]{display:none}
+.unit-workspace .stage-text .stage-ctrl[data-state="ready"]>.btn{grid-column:1/-1;justify-self:center;width:calc((100% - 12px)/2);min-width:136px}
 
 /* Celebration uses the unit colour, with one palette shared by HTML and export. */
 .unit-workspace .stage-certificate{background:#FFF6DC;border-color:#E2C58B;border-style:solid}

@@ -10,7 +10,7 @@ test('5–6 十题介绍综合练习，全声音失败仍可逐题完成，末�
   await page.goto('/unit5-6/#learn/exam'); const room = page.locator('.stage-exam');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
   for (const [i, question] of EXAMS['5-6'].entries()) {
-    await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+    await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
     if (i === 0) {
       await room.getByRole('button', { name: question.wrong, exact: true }).click(); await check.click();

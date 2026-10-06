@@ -10,7 +10,7 @@ test('十一题综合挑战逐项作答，冠词与缩写确实需要选择，�
   const room = page.locator('.stage-exam');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '11');
   for (let i = 0; i < EXAM.length; i++) {
-    await expect(room.locator('.practice-content h3')).toContainText(EXAM[i].prompt);
+    await expect(room.locator('.practice-content')).toContainText(EXAM[i].prompt.replace(/。$/u,''));
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(check).toBeDisabled();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
@@ -94,8 +94,8 @@ test('旧未提交选择升级仍是草稿，新增拼句刷新与暂停不代�
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await selectAnswer(room, EXAM[2].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'What nationality', exact: true }).click();
-  await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click(); await page.reload();
-  await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+  await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload();
+  await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: '撤回 What nationality', exact: true })).toBeVisible();
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
@@ -107,7 +107,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十一题长题干、�
   await page.goto('/lesson/unit7-8/#learn/exam'); await page.evaluate(() => document.fonts.ready);
   const room = page.locator('.stage-exam');
   for (let i = 0; i < EXAM.length; i++) {
-    await expect(room.locator('.practice-content h3')).toContainText(EXAM[i].prompt);
+    await expect(room.locator('.practice-content')).toContainText(EXAM[i].prompt.replace(/。$/u,''));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (const control of await room.locator('.practice-options button').all()) {
       expect(await control.evaluate(el => el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1)).toBe(true);

@@ -54,14 +54,14 @@ test('原文定位保留完整句子，错选只提示重试，点选不直接�
  await room.getByRole('button',{name:'下一题',exact:true}).click();
  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
-test('交接先选物再选人，错送不移动；暂停、刷新和改选后只交接一件物品',async({page})=>{
+test('交接先选物再选人，错送不移动；离开、刷新和改选后只交接一件物品',async({page})=>{
  await page.goto('/unit21-22/#learn/exam');const room=page.locator('.stage-exam');
  const objects=room.getByRole('group',{name:'待选物品',exact:true}),people=room.getByRole('group',{name:'接收者',exact:true});
  const check=room.getByRole('button',{name:'检查答案',exact:true});
  await expect(objects).toBeVisible();
  await objects.getByRole('button',{name:'小瓶子',exact:true}).click();await expect(check).toBeDisabled();
- await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();
- await room.getByRole('button',{name:'继续挑战',exact:true}).click();
+ await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();
+ await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
  await expect(objects.getByRole('button',{name:'小瓶子',exact:true})).toHaveAttribute('aria-pressed','true');
  await expect(check).toBeDisabled();
  await people.getByRole('button',{name:'男士',exact:true}).click();

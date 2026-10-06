@@ -10,7 +10,7 @@ for(const width of [320,390,768,1280])test(`${width} 各站无横向溢出，图
  for(const id of ['words','listen','text','roles','phrases','reply','models','describe','exam','certificate']){
   await page.goto('/unit9-10/#learn/'+id);const room=page.locator('.stage-'+id);await expect(room.getByRole('heading').first()).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
   if(id==='text')expect(await room.locator('.dialogue-stage').evaluate(el=>{const log=el.querySelector('.dialogue-log').getBoundingClientRect(),left=el.querySelector('[data-actor="teacher"] span').getBoundingClientRect(),right=el.querySelector('[data-actor="student"] span').getBoundingClientRect();return innerWidth<701?left.top>=log.bottom&&right.top>=log.bottom:left.right<=log.left&&right.left>=log.right;})).toBe(true);
-  await room.getByRole('button',{name:'怎么玩',exact:true}).click();await page.keyboard.press('Escape');await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toBeFocused();
+  await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);await page.locator('#notebookButton').click();await page.keyboard.press('Escape');await expect(page.locator('#notebookButton')).toBeFocused();
   if([390,1280].includes(width)&&['words','listen','text','describe','reply','models'].includes(id))await page.screenshot({path:`output/playwright/unit9-10/${id}-${width}.png`});
  }
  expect(errors).toEqual([]);

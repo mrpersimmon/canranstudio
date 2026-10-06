@@ -131,6 +131,7 @@ const EXAMS={
 };
 const taskCases=require('./units1-30-tasks');
 for(const pair of Object.keys(EXAMS))EXAMS[pair]=taskCases.answers(pair,'exam').map(q=>q.answer);
+EXAMS['25-26'][5]={fills:['an','The']};
 async function selectAnswer(room,answer){await taskCases.select(room,answer);}
 async function finishExamFrom(page,pair,start=0){const room=page.locator('.stage-exam'),answers=EXAMS[pair];
  for(let i=start;i<answers.length;i++){await selectAnswer(room,answers[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:i===answers.length-1?'查看本次记录':'下一题',exact:true}).click();}

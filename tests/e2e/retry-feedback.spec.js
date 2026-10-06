@@ -4,19 +4,20 @@ const fs=require('node:fs');
 const path=require('node:path');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 
+test.beforeEach(async({page})=>require('../support/types-predecessor').installPredecessor(page,'1-2'));
 test('只改线索保留已完成活动，内容版本变化不能沿用完成记录',async({page})=>{
-  const source=fs.readFileSync(path.join(__dirname,'../../unit1-2/content.js'),'utf8');
-  await page.route('**/unit1-2/content.js*',route=>route.fulfill({contentType:'application/javascript',body:source.replace('这句话是在提问，还是在说明一件事？','从 Is 开始，再说 this 和 your。')}));
-  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans');
+  const source=fs.readFileSync(path.join(__dirname,'../fixtures/unit1-2-types-before/content.js'),'utf8');
+  await page.route('**/tests/fixtures/unit1-2-types-before/content.js*',route=>route.fulfill({contentType:'application/javascript',body:source.replace('这句话是在提问，还是在说明一件事？','从 Is 开始，再说 this 和 your。')}));
+  await page.goto('/tests/fixtures/unit1-2-types-before/#learn/trans');const room=page.locator('.stage-trans');
   const responses=[['Is','this','your','pen?'],['Yes,','it','is.']];
   for(let i=0;i<responses.length;i++){
     for(const token of responses[i])await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
     await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:i===responses.length-1?'完成这一站':'下一题',exact:true}).click();
   }
-  await page.goto('/unit1-2/#cover');await expect(page.locator('#starCount')).toHaveText('1');
-  await page.unroute('**/unit1-2/content.js*');await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
+  await page.goto('/tests/fixtures/unit1-2-types-before/#cover');await expect(page.locator('#starCount')).toHaveText('1');
+  await page.unroute('**/tests/fixtures/unit1-2-types-before/content.js*');await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
   // A changed question, unlike a hint edit, invalidates the old completion.
-  await page.route('**/unit1-2/content.js*',route=>route.fulfill({contentType:'application/javascript',body:source.replace('用词块问：这是你的钢笔吗？','用词块问：这是你的书吗？')}));
+  await page.route('**/tests/fixtures/unit1-2-types-before/content.js*',route=>route.fulfill({contentType:'application/javascript',body:source.replace('用词块问：这是你的钢笔吗？','用词块问：这是你的书吗？')}));
   await page.reload();await expect(page.locator('#starCount')).toHaveText('0');
 });
 
@@ -35,7 +36,7 @@ for(const advance of [false,true])test('旧分拣真实错答记录升级，已�
   await page.getByRole('button',{name:'学徒手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('修正后完成');await expect(page.locator('#learningRecord')).toContainText('提交 2 次');
 });
 
-for(const [course,stage,right] of [['unit1-2','manners','Excuse me!'],['unit3-4','manners','My coat and my umbrella please.'],['unit5-6','refer','She'],['unit7-8','reply',"I'm Italian."],['unit9-10','describe',"He's"],['unit11-12','owner','her'],['unit13-14','colours',"What colour's your hat?"],['unit15-16','reply','Yes, we are.'],['unit17-18','refer','Who is this young man?'],['unit19-20','listen','累的；疲倦的'],['unit21-22','observe','说话的人和他的同伴'],['unit23-24','observe','Give me some books, please.'],['unit25-26','observe','介绍厨房里有一台冰箱。'],['unit27-28','observe','are'],['unit29-30','observe','我应该做什么？'],['unit49-50','needs',"She likes tomatoes, but she doesn't want any."],['lesson49','doare','Do you like meat?']]){
+for(const [course,stage,right] of [['unit1-2','ask','watch'],['unit3-4','manners','My coat and my umbrella please.'],['unit5-6','refer','She'],['unit7-8','reply',"I'm Italian."],['unit9-10','describe',"He's"],['unit11-12','owner','her'],['unit13-14','colours',"What colour's your hat?"],['unit15-16','reply','Yes, we are.'],['unit17-18','refer','Who is this young man?'],['unit19-20','listen','累的；疲倦的'],['unit21-22','observe','说话的人和他的同伴'],['unit23-24','observe','Give me some books, please.'],['unit25-26','errands','换成橱柜里干净的杯子。'],['unit27-28','observe','are'],['unit29-30','observe','我应该做什么？'],['unit49-50','needs',"She likes tomatoes, but she doesn't want any."],['lesson49','doare','Do you like meat?']]){
   test(course+' 选择题错答只提示重试，改选后正常推进',async({page})=>{
     await page.goto('/'+course+'/#learn/'+stage);const room=page.locator('.stage-'+stage);
     await room.locator('.practice-options button').filter({hasNotText:right}).first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
@@ -115,7 +116,7 @@ test('没有独立线索的题目不把解析放进灯泡',async({page})=>{
 });
 
 test('拼句线索只给思考方向，不提供完整词序',async({page})=>{
-  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans');
+  await page.goto('/tests/fixtures/unit1-2-types-before/#learn/trans');const room=page.locator('.stage-trans');
   await room.getByRole('button',{name:'给点线索',exact:true}).click();
   await expect(room.locator('.practice-hint')).toHaveText('这句话是在提问，还是在说明一件事？');
 });

@@ -3,7 +3,7 @@ const taskCases=require('./units1-30-tasks');
 const {expect}=require('@playwright/test');
 // Independently transcribed from PDF 83–86 and the reviewed draft, not product answers.
 const DIALOGUE=["Mrs. Smith's kitchen is small.",'There is a refrigerator in the kitchen.','The refrigerator is white.','It is on the right.','There is an electric cooker in the kitchen.','The cooker is blue.','It is on the left.','There is a table in the middle of the room.','There is a bottle on the table.','The bottle is empty.','There is a cup on the table, too.','The cup is clean.'];
-const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['25-26'].old).map(id=>[id,taskCases.answers('25-26',id).map(q=>q.answer)]));
+const ANSWERS=require('./thirteen-types-flow').ANSWERS['25-26'];
 async function chooseTokens(room,tokens){const bank=room.getByRole('group',{name:'待选词块',exact:true});for(const token of tokens)await bank.getByRole('button',{name:token,exact:true}).and(bank.locator('button:enabled')).first().click();}
 
 async function completeStory(page,base=''){
@@ -15,7 +15,7 @@ async function completeActivity(page,id,base=''){
  await page.goto(base+'/unit25-26/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
  for(const [i,answer] of answers.entries()){
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
-  if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+  if(answer&&typeof answer==='object'&&!Array.isArray(answer))await require('./thirteen-types-flow').select(room,answer);
     else if(Array.isArray(answer))await chooseTokens(room,answer);else await room.getByRole('button',{name:answer,exact:true}).click();
   await check.click();await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
   await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
@@ -24,7 +24,7 @@ async function completeActivity(page,id,base=''){
 }
 async function completeUnit2526(page,base=''){
  await completeActivity(page,'listen',base);await completeStory(page,base);
- for(const id of ['roles','observe','be','trans','exam'])await completeActivity(page,id,base);
+ for(const id of ['roles','observe','be','trans','errands','exam'])await completeActivity(page,id,base);
  await page.goto(base+'/unit25-26/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');
 }
 module.exports={DIALOGUE,ANSWERS,chooseTokens,completeStory,completeActivity,completeUnit2526};

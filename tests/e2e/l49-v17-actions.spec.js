@@ -60,9 +60,7 @@ async function inspectFinish(page, stage, width, id, issues) {
   const p=await primary.boundingBox(),s=await secondary.boundingBox(),a=await actions.boundingBox(),room=await stage.boundingBox();
   if(!p||!s){issues.push(id+': 完成操作不可见');return;}
   if(Math.abs(a.x+a.width/2-room.x-room.width/2)>2)issues.push(id+': 操作组偏离舞台中线');
-  if(width>580){
-    if(Math.abs(p.y-s.y)>2||p.x-s.x-s.width<10||p.x-s.x-s.width>16)issues.push(id+': 桌面主次按钮未在同一行，次左主右');
-  }else if(!(s.y>=p.y+p.height+10&&s.y<=p.y+p.height+20))issues.push(id+': 手机主按钮未在次按钮正上方');
+  if(Math.abs(p.y-s.y)>2||p.x-s.x-s.width<10||p.x-s.x-s.width>16)issues.push(id+': 主次按钮未在同一行，次左主右');
   for(const box of [p,s])if(box.height<48||box.x<room.x||box.x+box.width>room.x+room.width)issues.push(id+': 按钮过小或溢出');
   if(p.width<s.width)issues.push(id+': 主要按钮比次要按钮窄');
   if(await secondary.evaluate(node=>getComputedStyle(node).backgroundColor)===await primary.evaluate(node=>getComputedStyle(node).backgroundColor))issues.push(id+': 主次没有区分');
@@ -80,7 +78,7 @@ for(const width of [1280,390])test(`${width} 宽度逐站完成、重练与导�
       await answer(stage,values[i]);
       if(id==='exam'&&i===4){
         await shot(page,stage,'exam-break',width);
-        await stage.getByRole('button',{name:'继续第二段（5 题）',exact:true}).click();
+        await expect(stage.getByRole('button',{name:'继续第二段（5 题）',exact:true})).toHaveCount(0);
       }
     }
     await expect(stage.locator('.practice-finish')).toBeVisible();
@@ -153,9 +151,7 @@ test('320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次�
   });
   expect(activityNameLines).toBe(1);
   await shot(page,page.locator('.stage-words'),'words-last',320);
-  await page.locator('.stage-words').getByRole('button',{name:'怎么玩',exact:true}).click();
-  await expect(page.getByRole('dialog',{name:'肉店小图鉴 · 怎么玩',exact:true})).toBeVisible();
-  await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
+  await expect(page.locator('.stage-words').getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'学徒手记',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'学徒手记',exact:true})).toBeVisible();
   await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();

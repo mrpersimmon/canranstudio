@@ -6,7 +6,7 @@ const { expect } = require('@playwright/test');
 const EXAMS = {
   '1-2': [
     { prompt: '女士先怎样回应招呼？', answer: 'Yes?', wrong: 'Yes, it is.' },
-    { prompt: '你先确认，再感谢', answer: 'Yes, it is. Thank you very much.' },
+    { prompt: '先确认，再道谢', answer: 'Yes, it is. Thank you very much.' },
     { prompt: '这两句里的 your 和 it 分别指什么？', answer: 'your 指女士的；it 指手提包' },
     { prompt: '没听清同学刚说的话', answer: 'Pardon?' },
     { prompt: '同学正要走开', answer: 'Excuse me!' },
@@ -38,8 +38,9 @@ const EXAMS = {
     { prompt: "He's German. She's French. It isn't an English car.", answer: 'He is / She is / is not' }
   ]
 };
-const revisedPrompts={"0": "接好女士的两次回应。"};
+const revisedPrompts={"0": "接好女士的两次回应"};
 EXAMS['1-2'].splice(0,EXAMS['1-2'].length,...taskCases.answers('1-2','exam').map((q,i)=>({...EXAMS['1-2'][i],...q,prompt:revisedPrompts[i]||EXAMS['1-2'][i]?.prompt})));
+EXAMS['1-2'][7]={prompt:'问的是哪件物品？',answer:'房子'};
 async function choose(room, question) {
   if (question.audio) {
     await room.getByRole('button', { name: '听一遍', exact: true }).click();
@@ -53,7 +54,7 @@ async function choose(room, question) {
 async function finishExam(page, unit, start = 0) {
   const room = page.locator('.stage-exam'), questions = EXAMS[unit];
   for (let i = start; i < questions.length; i++) {
-    await expect(room.locator('.practice-content h3')).toContainText(questions[i].prompt);
+    await expect(room.locator('.practice-content')).toContainText(questions[i].prompt.replace(/。$/u,''));
     await choose(room, questions[i]);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');

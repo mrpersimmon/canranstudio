@@ -58,7 +58,7 @@ test('原文9句逐句保留，按原角色呈现，主动完成后才解锁理�
  await page.goto('/unit29-30/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('艾米要怎样清理地板？');
  const actors=room.locator('[data-actor]:not([data-actor=""])');await expect(actors).toHaveCount(2);await expect(actors.nth(0)).toHaveAttribute('data-actor','Jones');await expect(actors.nth(1)).toHaveAttribute('data-actor','Amy');await expect(actors.nth(0)).toBeVisible();await expect(actors.nth(1)).toBeVisible();
  for(let i=0;i<9;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 9 句原文');
+  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 9');
   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).last().click();await expect(room.locator('.bcn').last()).toHaveText('打开窗户，给房间通通风。');await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
  }
  await expect(room.locator('.dialogue-log .bname')).toHaveText(['琼斯太太','琼斯太太','琼斯太太','艾米','琼斯太太','琼斯太太','琼斯太太','琼斯太太','琼斯太太']);

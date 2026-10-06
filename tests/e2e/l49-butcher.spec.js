@@ -136,7 +136,7 @@ test('连续听辨重听不记提示，六题后仍显示待练单词', async ({
     await choose(room,word);
   }
   await record(page,'未用额外提示答对');
-  await page.getByRole('region',{name:'听音寻宝',exact:true}).getByRole('button',{name:'怎么玩',exact:true}).click();
+  await page.getByRole('button',{name:'学徒手记',exact:true}).click();
   await page.getByText('听辨记录',{exact:true}).click();
   await expect(page.locator('#vocabCoverage')).toContainText('已练 6 / 14');
   await expect(page.locator('#vocabCoverage')).toContainText('待练：chicken、husband、tell、truth、either、mutton、pork、fish');
@@ -276,7 +276,7 @@ async function assemble(room, tokens) {
   await room.getByRole('button',{name: /^(下一题|完成这一站)$/,exact:true}).click();
 }
 
-test('新订单分两段暂停恢复，最后一题反馈不会被结算跳过', async ({ page }) => {
+test('新订单连续作答并自动保存，最后一题反馈不会被结算跳过', async ({ page }) => {
   test.setTimeout(120000);
   await manualAudio(page);
   await page.setViewportSize({width:390,height:664});
@@ -291,10 +291,10 @@ test('新订单分两段暂停恢复，最后一题反馈不会被结算跳过',
   await choose(room,'Are you a student?');
   await choose(room,'Do you want chicken?');
   await assemble(room,['Give','the beef','to','Lily,','please.']);
-  await expect(room).toContainText('已完成 5 / 10 题');
+  await expect(room).toContainText('第 6 / 10 题');
   await page.reload();
-  await expect(room).toContainText('已完成 5 / 10 题');
-  await room.getByRole('button',{name:'继续第二段（5 题）',exact:true}).click();
+  await expect(room).toContainText('第 6 / 10 题');
+  await expect(room.getByRole('button',{name:'继续第二段（5 题）',exact:true})).toHaveCount(0);
   await choose(room,'Sam');
   await choose(room,'I like lamb, too.');
   await choose(room,'want');
@@ -473,7 +473,7 @@ test('从零完成五关可领学习证书，返回地图显示完成状态', as
   await page.locator('#quizStartBtn').click();const exam=page.locator('#examPractice');
   await exam.getByRole('button',{name:'听一遍',exact:true}).click();await finishAudio(page);await choose(exam,'mince');
   for(const answer of ['Mrs. Bird: lamb · husband: steak','Are you a student?','Do you want chicken?'])await choose(exam,answer);
-  await assemble(exam,['Give','the beef','to','Lily,','please.']);await exam.getByRole('button',{name:'继续第二段（5 题）',exact:true}).click();
+  await assemble(exam,['Give','the beef','to','Lily,','please.']);await expect(exam.getByRole('button',{name:'继续第二段（5 题）',exact:true})).toHaveCount(0);
   for(const answer of ['Sam','I like lamb, too.','want',"Tom doesn't like beef."])await choose(exam,answer);
   await choose(exam,"I don't like lamb either.",false);await exam.getByRole('button',{name:'查看本次记录',exact:true}).click();
   await dismissGrowth();

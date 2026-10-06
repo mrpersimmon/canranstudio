@@ -1,7 +1,8 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises');
-const {CASES,story,activity,select,answers}=require('../support/units1-30-tasks');
+const {CASES: allCases,story,activity,select,answers}=require('../support/units1-30-tasks');
+const CASES=Object.fromEntries(Object.entries(allCases).filter(([pair])=>!['1-2','25-26'].includes(pair))); // Current editions: unit-thirteen-types.spec.js.
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 async function mode(page,pair){
  if(pair==='1-2')await page.addInitScript(()=>{window.Audio=class extends EventTarget{play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();}pause(){}};});
@@ -33,7 +34,7 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
 });
 
 const representative={'1-2':'exam','3-4':'listen','5-6':'listen','7-8':'reply','9-10':'roles','11-12':'owner','13-14':'roles','15-16':'listen','17-18':'forms','19-20':'observe','21-22':'exam','23-24':'roles','25-26':'roles','27-28':'roles','29-30':'roles'};
-for(const[pair,group]of Object.entries(representative))for(const width of [320,390,768,1280])test(`${pair} ${width} 真实新题画面与按钮稳定`,async({page})=>{
+for(const[pair,group]of Object.entries(representative).filter(([pair])=>CASES[pair]))for(const width of [320,390,768,1280])test(`${pair} ${width} 真实新题画面与按钮稳定`,async({page})=>{
  test.setTimeout(120000);await mode(page,pair);await page.setViewportSize({width,height:900});
  const groups=CASES[pair].changes.length?CASES[pair].changes.map(x=>x.group):[group];
  if(groups.includes('roles'))await story(page,pair);
@@ -55,7 +56,7 @@ for(const[pair,group]of Object.entries(representative))for(const width of [320,3
  list.forEach((x,i)=>x.fresh=flags[i]);expect(taken).toBe(true);
 });
 
-for(const[pair,group]of Object.entries(representative).filter(([pair])=>pair!=='21-22'))for(const width of [390,1280])test(`${pair} ${width} 改前同环节画面对照`,async({page})=>{
+for(const[pair,group]of Object.entries(representative).filter(([pair])=>CASES[pair]).filter(([pair])=>pair!=='21-22'))for(const width of [390,1280])test(`${pair} ${width} 改前同环节画面对照`,async({page})=>{
  test.setTimeout(60000);await mode(page,pair);await page.setViewportSize({width,height:900});
  for(const name of ['content.js','unit.js']){const body=await fs.readFile(`tests/fixtures/units1-30-tasks-before/unit${pair}/${name}`);await page.route(`**/unit${pair}/${name}*`,r=>r.fulfill({body,contentType:'text/javascript'}));}
  if(group==='roles')await story(page,pair);await page.goto(`/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group);

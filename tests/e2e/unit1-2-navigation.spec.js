@@ -11,7 +11,7 @@ for(const base of ['/','/lesson/']) {
     const beginner=page.getByRole('region',{name:'礼貌小帮手',exact:true});
     await beginner.getByRole('link',{name:'开始学习：礼貌小帮手',exact:true}).click();
     await expect(page).toHaveURL(new RegExp(base+'unit1-2/#learn/words$'));
-    await expect(page.getByRole('navigation',{name:'学习关卡',exact:true}).getByRole('link')).toHaveText(['身边的小物品','手提包的故事','开口有礼貌','问句小工坊','小帮手出发']);
+    await expect(page.getByRole('navigation',{name:'学习关卡',exact:true}).getByRole('link')).toHaveText(['身边的小物品','手提包的故事','礼貌小帮手','问句小工坊','小帮手出发']);
     await page.getByRole('link',{name:'问句小工坊',exact:true}).click();
     await page.getByRole('link',{name:'我的课程',exact:true}).click();
     await expect(beginner).toContainText('上次学到 · 问句小工坊');
@@ -49,14 +49,14 @@ test('子目录重开清除两个单元，只影响该版本，取消不会清�
   expect(after['canran:lesson:unit49-50:learning:v1']).toBeUndefined();
 });
 
-test('新学习从图鉴开始，图鉴末组前往听音；已有位置继续原活动',async({page})=>{
+test('新学习从图鉴开始，图鉴末组前往寻宝；已有位置继续原活动',async({page})=>{
   await page.goto('/unit1-2/');
   await page.getByRole('button',{name:'开始冒险',exact:true}).click();
   await expect(page).toHaveURL(/\/unit1-2\/#learn\/words$/);
   const words=page.getByRole('region',{name:'物品小图鉴',exact:true});
   await expect(words.getByRole('button',{name:'上一组词卡',exact:true})).toBeDisabled();
   for(let i=0;i<3;i++)await words.getByRole('button',{name:'下一组词卡',exact:true}).click();
-  await words.getByRole('button',{name:'下一站：听音寻宝',exact:true}).click();
+  await words.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();
   await expect(page).toHaveURL(/#learn\/listen$/);
   await page.goto('/unit1-2/#learn/ask');
   await page.goto('/unit1-2/');

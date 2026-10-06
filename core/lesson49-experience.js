@@ -41,16 +41,6 @@
     help[id] = document.createElement('div');
     copies.forEach(copy => { const p = document.createElement('p'); p.textContent = copy; help[id].append(p); });
   }
-  const instructions = {
-    words:'点词卡，听发音、翻面看意思。看完三组，再去听音寻宝。',
-    text:'点句子可以重听，上滑对话区可以回看。每句听完，点“下一句”。',
-    roles:'听完课文，找出故事里的答案，再试试新的情境。点英文可重听，选好后检查，答对再继续。',
-    exam:'用学过的本领挑战 10 道题，两段各 5 题。可以暂停后回来。',
-    certificate:'五关各集齐三颗星，就能领取、保存或打印自己的学徒证书。'
-  };
-  for (const [id, copy] of Object.entries(instructions)) {
-    help[id] = document.createElement('p'); help[id].textContent = copy;
-  }
   Object.values(help).forEach(node => depot.append(node));
 
   const workspace = document.createElement('main'); workspace.id = 'lessonWorkspace';
@@ -79,7 +69,7 @@
       stage.dataset.activity = activity.id; stage.setAttribute('aria-labelledby','title-' + activity.id);
       const heading = document.createElement('header'); heading.className = 'stage-heading';
       const name = document.createElement('h3'); name.id = 'title-' + activity.id; name.tabIndex = -1; name.textContent = activity.title;
-      heading.append(icon(activity.icon),name,button('怎么玩', () => openHelp(activity.id)));
+      heading.append(icon(activity.icon),name);
       const surface = surfaces[activity.id]; surface.classList.add('activity-surface','on');
       surface.querySelectorAll(':scope > h3, :scope > .panel > h3').forEach(node => node.remove());
       stage.append(heading,surface); stages[activity.id] = stage;
@@ -141,17 +131,15 @@
   const notebook = $('#learningNotebook'); notebook.open = true; notebook.querySelector('summary').textContent = '本次记录';
   notes.append(button('关闭', () => notes.close(),'btn btn-mini btn-yellow'),notebook); document.body.append(notes);
   $('#topbar .wrap').append(button('学徒手记', () => notes.showModal()));
-  const helpDialog = document.createElement('dialog'); helpDialog.id = 'activityHelpDialog'; helpDialog.setAttribute('aria-labelledby','helpTitle');
-  const helpTitle = document.createElement('h2'); helpTitle.id = 'helpTitle';
-  const helpBody = document.createElement('div');
-  helpDialog.append(button('关闭', () => helpDialog.close(),'btn btn-mini btn-yellow'),helpTitle,helpBody); document.body.append(helpDialog);
-  function openHelp(id) {
-    if (id === 'subjects') root.CanranCore.lesson49Subjects.markRuleUsed();
-    while (helpBody.firstChild) depot.append(helpBody.firstChild);
-    helpTitle.textContent = activities.find(item => item.id === id).title + ' · 怎么玩';
-    helpBody.append(help[id]); helpDialog.showModal();
+  // Keep actual teaching references near the exercise, without an instruction modal.
+  notes.append(help.listen);
+  for(const [id,reference] of Object.entries(help)){
+    if(id==='listen')continue;
+    const example=document.createElement('details');example.className='practice-example';
+    const title=document.createElement('summary');title.textContent='看例子';example.append(title,reference);
+    if(id==='subjects')example.addEventListener('toggle',()=>{if(example.open)root.CanranCore.lesson49Subjects.markRuleUsed();});
+    surfaces[id].prepend(example);
   }
-  helpDialog.addEventListener('close', () => { while (helpBody.firstChild) depot.append(helpBody.firstChild); });
   for (const reference of Object.values(help)) {
     reference.querySelectorAll('h3').forEach(node => node.remove());
     reference.querySelectorAll('h4,.rulecard').forEach(node => {
@@ -160,14 +148,6 @@
   }
   function updateOnward() {
     const hide=(node,value)=>{if(node.hidden!==value)node.hidden=value;};
-    const sessionTools=surfaces.exam.querySelector('.practice-session-tools');
-    const examHeading=stages.exam.querySelector('.stage-heading');
-    if(sessionTools){
-      examHeading.querySelector('.practice-session-tools')?.remove();
-      examHeading.insertBefore(sessionTools,examHeading.lastElementChild);
-    }
-    const pauseTools=examHeading.querySelector('.practice-session-tools');
-    if(pauseTools)hide(pauseTools,!surfaces.exam.querySelector('.practice-content'));
     const textDone=learning.activity('dialogueDraft')?.done===true;
     hide(textFinish.finish,!textDone);hide(dialogueControls,textDone);
     const dialogueDestination=textDone?textFinish.actions:dialogueControls;

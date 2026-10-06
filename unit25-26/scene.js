@@ -29,3 +29,32 @@
  "mobileMoves": {}
 });
 })(globalThis.CanranCore);
+
+(function(core){
+ 'use strict';
+ const node=(tag,text='',className='')=>{const el=document.createElement(tag);el.textContent=text;el.className=className;return el;};
+ core.unit2526Scene.inquiry=({element})=>{
+  let question,heading,reply,reveal,answer;
+  return{
+   supports:q=>q.scene?.kind==='inquiry',
+   present(q,progress){
+    question=q;element.classList.remove('role-runner');
+    const content=element.querySelector('.practice-content');heading=node('h3',q.prompt);heading.tabIndex=-1;
+    const intro=node('div','','inquiry-intro');intro.append(progress,heading);
+    const scene=node('div','','inquiry-scene');scene.setAttribute('role','group');scene.setAttribute('aria-label','厨房里问位置');
+    const friend=node('div','','inquiry-friend'),portrait=node('img');portrait.src='/assets/unit25-26/Mrs.svg';portrait.alt='朋友';friend.append(portrait);
+    const dialogue=node('div','','inquiry-dialogue'),request=node('p',q.scene.before,'inquiry-bubble');request.lang='en';
+    answer=node('p','','inquiry-bubble is-you');answer.lang='en';reply=node('p','','inquiry-bubble');reply.lang='en';
+    dialogue.append(request,answer,reply);friend.append(dialogue);
+    reveal=node('div','','inquiry-discovery');scene.append(friend,reveal);content.prepend(intro,scene);
+   },
+   answer(value){
+    const solved=value!==null;answer.textContent=solved?value:'';reply.textContent=solved?question.scene.after:'';
+    answer.hidden=reply.hidden=!solved;reveal.replaceChildren();reveal.classList.toggle('is-discovered',solved);
+    if(solved){const pic=node('img');pic.src=question.scene.image;pic.alt='找到位置：勺子在杯子里面';reveal.append(pic,node('p','知道勺子在哪里了！'));}
+    else{reveal.append(node('span','?','inquiry-question'),node('p','勺子在哪里？'));}
+   },
+   heading:()=>heading?.isConnected?heading:element.querySelector('.practice-finish>p'),finish(){}
+  };
+ };
+})(globalThis.CanranCore);

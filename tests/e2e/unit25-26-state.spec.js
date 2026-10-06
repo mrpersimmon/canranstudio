@@ -5,13 +5,13 @@ const {completeActivity,completeStory,completeUnit2526}=require('../support/unit
 const fs=require('node:fs/promises');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 
-test('挑战错答与提示分别记账，暂停刷新保留选择，不提前发证',async({page})=>{
+test('挑战错答与提示分别记账，刷新续做保留选择，不提前发证',async({page})=>{
   await page.goto('/unit25-26/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});
   await room.getByRole('button',{name:'乙图',exact:true}).click();await check.click();
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'甲图',exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
   await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:"桌上有杯子。",exact:true}).click();
-  await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();await room.getByRole('button',{name:'继续挑战',exact:true}).click();
+  await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
   await expect(room.getByRole('button',{name:"桌上有杯子。",exact:true})).toHaveAttribute('aria-pressed','true');await check.click();
   await room.getByRole('button',{name:'下一题',exact:true}).click();
   await require('../support/units17-30-exam').finishExamFrom(page,'25-26',2);
@@ -55,10 +55,10 @@ test('lesson路径阻断全部声音仍可完整通关和领证，各单元与�
 });
 
 test('首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离',async({page})=>{
-  await page.goto('/unit25-26/#learn/observe');const room=page.locator('.stage-observe');await room.getByRole('button',{name:"介绍厨房里有一台冰箱。",exact:true}).click();
+  await page.goto('/unit25-26/#learn/observe');const room=page.locator('.stage-observe');await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'桌子上',exact:true}).click();
   await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(room.getByRole('heading').first()).toBeInViewport();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await page.getByRole('link',{name:'继续学习：厨房探访记',exact:true}).click();
-  await expect(page).toHaveURL(/#learn\/observe$/);await expect(room.getByRole('button',{name:"介绍厨房里有一台冰箱。",exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page).toHaveURL(/#learn\/observe$/);await expect(room.getByRole('group',{name:'已选词块',exact:true})).toContainText('桌子上');
   await page.goto('/lesson/unit25-26/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();
   for(const confirm of [false,true]){
@@ -68,18 +68,18 @@ test('首页续学、同一位置继续冒险、重开取消与确认均遵守�
   }
   await expect(page.getByRole('link',{name:'开始学习：厨房探访记',exact:true})).toHaveAttribute('href','/lesson/unit25-26/#learn/words');
   await page.getByRole('link',{name:'开始学习：厨房探访记',exact:true}).click();await expect(page.locator('#wordPageProgress')).toHaveText('1 / 6');
-  await page.goto('/unit25-26/#learn/observe');await expect(room.getByRole('button',{name:"介绍厨房里有一台冰箱。",exact:true})).toHaveAttribute('aria-pressed','true');
+  await page.goto('/unit25-26/#learn/observe');await expect(room.getByRole('group',{name:'已选词块',exact:true})).toContainText('桌子上');
 });
 
 test('更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿',async({page})=>{
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'observe');
   await page.goto('/unit25-26/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
-  await page.goto('/unit25-26/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'There',exact:true}).click();
-  await page.route('**/unit25-26/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit25-26/content.js','utf8')).replace( '"id": "u2526-tasks-v4-story-find"','"id": "u2526-tasks-v4-story-find-v2"' )}));
+  await page.goto('/unit25-26/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:"There's",exact:true}).click();
+  await page.route('**/unit25-26/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit25-26/content.js','utf8')).replace("make('t05','locate'","make('t05-revised','locate'")}));
   await page.goto('/unit25-26/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit25-26/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 6');
-  await page.goto('/unit25-26/#learn/trans');await expect(page.locator('.stage-trans').getByRole('button',{name:'撤回 There',exact:true})).toBeVisible();
+  await page.goto('/unit25-26/#learn/trans');await expect(page.locator('.stage-trans').getByRole('button',{name:"撤回 There's",exact:true})).toBeVisible();
   await page.goto('/unit25-26/#learn/observe');await expect(page.locator('.stage-observe').getByRole('group',{name:'完成后的操作',exact:true})).toBeVisible();
   await page.goto('/unit25-26/#learn/text');await expect(page.locator('.btext')).toHaveCount(12);await expect(page.getByText('课文看完了！',{exact:true})).toBeVisible();
 });
@@ -95,7 +95,7 @@ test('保存失败如实提示，恢复存储后可重试，刷新仍保留真�
     Storage.prototype.setItem=function(key,value){if(key==='canran:unit25-26:learning:v1'&&window.testStorageBlocked)throw new DOMException('blocked','QuotaExceededError');return Reflect.apply(set,this,[key,value]);};
   });
   await page.goto('/unit25-26/#learn/observe');const room=page.locator('.stage-observe');
-  await room.getByRole('button',{name:'介绍厨房里有一台冰箱。',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
+  await require('../support/thirteen-types-flow').select(room,['桌子上','有','一个瓶子']);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
   await expect(page.locator('#learningSaveWarning')).toBeVisible();await page.getByRole('button',{name:'学习手记',exact:true}).click();
   await expect(page.locator('#learningSaveRetry')).toBeVisible();await page.evaluate(()=>window.testStorageBlocked=false);await page.getByRole('button',{name:'重试保存',exact:true}).click();
   await expect(page.locator('#learningSaveRetry')).toBeHidden();await expect(page.locator('#learningSaveWarning')).toBeHidden();await page.keyboard.press('Escape');

@@ -67,14 +67,14 @@
       const correct = value !== null;
       paintSpeech(correct);
       scene.classList.toggle('is-solved', correct);
-      scene.classList.toggle('is-returned', question.scene.beat === 'thanks' || (question.scene.beat === 'return' && correct));
+      scene.classList.toggle('is-returned', question.scene.beat === 'thanks' || (['return','confirm'].includes(question.scene.beat) && correct));
       if (question.scene.beat !== 'find') {
-        const returned = question.scene.beat === 'thanks' || (question.scene.beat === 'return' && correct);
+        const returned = question.scene.beat === 'thanks' || (['return','confirm'].includes(question.scene.beat) && correct);
         (returned ? receivers.get('女士') : bench).append(bag);
         bag.alt = returned ? '已经交到女士手中的手提包' : '等待归还的手提包';
       }
       targets.forEach((target, label) => target.classList.toggle('is-found', correct && label === value));
-      found.textContent = correct ? ({ attention: '她停下来了。', repeat: '这次，她听清了。', return: '手提包回到主人手中了。', thanks: '一次有礼貌的帮助，完成了！', find: '找到问到的物品了。' }[question.scene.beat]) : '';
+      found.textContent = correct ? ({ attention: '她停下来了。', repeat: '这次，她听清了。', confirm: '手提包回到你手中了。', return: '手提包回到主人手中了。', thanks: '一次有礼貌的帮助，完成了！', find: '找到问到的物品了。' }[question.scene.beat]) : '';
     }
     function completion() {
       const result = node('div', 'handbag-keepsake');
@@ -84,7 +84,7 @@
       result.append(pair, node('p', 'keepsake-thanks', 'Thank you very much.'), node('p', 'keepsake-caption', '你帮他们完成了一次有礼貌的相遇。'));
       return result;
     }
-    return { present, answer, finish() {}, heading: () => heading?.isConnected ? heading : element.querySelector('.practice-finish > p'), completion };
+    return { supports: q => Boolean(q.scene), present, answer, finish() {}, heading: () => heading?.isConnected ? heading : element.querySelector('.practice-finish > p'), completion };
   }
   core.unit12Scene = { create };
 })(globalThis);

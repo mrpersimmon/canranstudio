@@ -30,7 +30,7 @@
       const surface = node('section', '', 'shop-stage stage-' + id); surface.id = 'learn/' + id;
       surface.setAttribute('role', 'region'); surface.setAttribute('aria-label', title);
       const header = node('header', '', 'stage-heading');
-      header.append(icon(illustration), node('h3', title), button('怎么玩', () => showHelp(id, title), 'workspace-back'));
+      header.append(icon(illustration), node('h3', title));
       surface.append(header); surfaces.set(id, surface); section.append(surface);
     }
     $('#lessonWorkspace').append(section);
@@ -68,22 +68,6 @@
   $('#startBtn').addEventListener('click', () => {
     const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
-  const help = {
-    text: ['点“开始看课文”，再用“下一句”展开故事。旧句向上回看，中文按句打开。'],
-    roles: ['回想刚才的课文，找出新同学和老师介绍的信息。'],
-    words: ['点整张词卡看意思，再点收起。用上一组和下一组翻页。'],
-    listen: ['看清英文或词义，选好后点“检查答案”。'],
-    phrases: ['阅读见面时的表达；展开可以看更多例子。跟读和真实交流与老师一起练。'],
-    models: ['看汽车的品牌与国别。需要更多问答时，展开下方的例子。'],
-    choice: ['读清问题，选择回答品牌的一句话。'],
-    trans: ['点词块组成句子，点已选的词块可以撤回。全部用完再检查。'],
-    certificate: ['完成五关后领取、保存或打印。证书记录课堂配套练习完成，不评价听力、自由口语或独立写作。']
-  };
-  function showHelp(id, title) {
-    $('#helpTitle').textContent = title;
-    $('#helpBody').replaceChildren(...(help[id] || ['选择后点“检查答案”。灯泡可以提供线索；用过线索会记在学习手记里。']).map(text => node('p', text)));
-    $('#unitHelp').showModal();
-  }
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
 
@@ -136,7 +120,7 @@
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
-  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(advance, tools);
+  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
@@ -148,8 +132,10 @@
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
     props.update(dialogue.i);
+    controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
-    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length} 句`;
+    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
+    status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
   }
   function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('chang'), node('p', 'Chang-woo 是中国人吗？')); log.replaceChildren(lead); }

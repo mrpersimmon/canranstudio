@@ -159,7 +159,7 @@ test('大喇叭配四张图文选项，真实听完才能提交，答后卡片�
 });
 
 for (const viewport of [{ width: 320, height: 568 }, { width: 768, height: 1024 }, { width: 1280, height: 900 }]) {
-  test(`${viewport.width} 完成页两个操作相邻居中，桌面次左主右、手机主上次下`, async ({ page }) => {
+  test(`${viewport.width} 完成页两个操作相邻居中，桌面手机均次左主右`, async ({ page }) => {
     await legacyProgress(page, {
       version: 1, records: {}, activity: { listenMode: 'extra', coreListeningComplete: true },
       groups: Object.fromEntries([['core', words.slice(0, 11)], ['extra', words.slice(11)]].map(([id, values]) => [
@@ -175,15 +175,9 @@ for (const viewport of [{ width: 320, height: 568 }, { width: 768, height: 1024 
     const again = stage.getByRole('button', { name: '再练一轮', exact: true });
     await expect(next).toBeInViewport({ratio:1}); await expect(again).toBeInViewport({ratio:1});
     const a = await next.boundingBox(), b = await again.boundingBox();
-    if(viewport.width<=580){
-      expect(b.y-a.y-a.height).toBeGreaterThanOrEqual(10);
-      expect(b.y-a.y-a.height).toBeLessThanOrEqual(20);
-      expect(Math.abs((a.x+a.width/2)-(b.x+b.width/2))).toBeLessThanOrEqual(1);
-    }else{
-      expect(a.y).toBe(b.y);
-      expect(a.x-b.x-b.width).toBeGreaterThanOrEqual(10);
-      expect(a.x-b.x-b.width).toBeLessThanOrEqual(16);
-    }
+    expect(a.y).toBe(b.y);
+    expect(a.x-b.x-b.width).toBeGreaterThanOrEqual(10);
+    expect(a.x-b.x-b.width).toBeLessThanOrEqual(16);
     const group=await stage.getByRole('group',{name:'完成后的操作',exact:true}).boundingBox(),box=await stage.boundingBox();
     expect(Math.abs(group.x+group.width/2-box.x-box.width/2)).toBeLessThanOrEqual(1);
     expect(box.height).toBeLessThan(440);
@@ -208,7 +202,7 @@ test('词卡、短语与相关帮助不暴露来源分类，图义和点读保�
   expect(await shelf.innerText()).not.toMatch(internalLabels);
   expect(await page.evaluate(() => window.playedAudio.at(-1).src)).toBe('/lesson49/audio/mutton_hotpot.mp3');
   const listening = page.getByRole('region', { name: '听音寻宝', exact: true });
-  await listening.getByRole('button', { name: '怎么玩', exact: true }).click();
+  await expect(listening.getByRole('button', { name: '怎么玩', exact: true })).toHaveCount(0);await page.getByRole('button',{name:'学徒手记',exact:true}).click();
   await page.getByText('听辨记录', { exact: true }).click();
   expect(await page.getByRole('dialog').innerText()).not.toMatch(internalLabels);
   await expect(page.locator('#vocabCoverage')).toContainText('0 / 14');

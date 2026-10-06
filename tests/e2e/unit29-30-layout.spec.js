@@ -3,15 +3,15 @@ const {test,expect}=require('@playwright/test');
 const {ANSWERS}=require('../support/unit29-30-flow');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 
-for(const width of [320,390,768,1280])test(width+' 各站完整、无横向溢出，帮助返回焦点，所有资源加载',async({page})=>{
+for(const width of [320,390,768,1280])test(width+' 各站完整、无横向溢出，手记返回焦点，所有资源加载',async({page})=>{
   test.setTimeout(45000);await page.setViewportSize({width,height:740});const errors=[];page.on('pageerror',error=>errors.push(error.message));
   for(const id of ['words','listen','text','roles','phrases','observe','be','models','trans','exam','certificate']){
     await page.goto('/unit29-30/#learn/'+id);const room=page.locator('.stage-'+id);
     await expect(room.getByRole('heading').first()).toBeInViewport();
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
-    await room.getByRole('button',{name:'怎么玩',exact:true}).click();await page.keyboard.press('Escape');
-    await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toBeFocused();
+    await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);
+    await page.locator('#notebookButton').click();await page.keyboard.press('Escape');await expect(page.locator('#notebookButton')).toBeFocused();
     if([390,1280].includes(width)&&['words','listen','text','observe','be','models','trans'].includes(id))await page.screenshot({path:'output/playwright/unit29-30/'+id+'-'+width+'.png'});
   }
   expect(errors).toEqual([]);
@@ -86,10 +86,10 @@ test('320 最后一道长拼句和挑战选项完整可读，不因完成上一�
  await room.screenshot({path:'output/playwright/unit29-30/long-options-320.png'});
 });
 
-test('四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮',async({browser})=>{
+test('四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮',async({browser,baseURL})=>{
  test.setTimeout(45000);const {chooseTokens}=require('../support/unit29-30-flow');
  for(const width of [320,390,768,1280]){
-  const context=await browser.newContext({viewport:{width,height:740},reducedMotion:'reduce'});const page=await context.newPage();await page.goto('http://127.0.0.1:4173/unit29-30/#learn/trans');await page.evaluate(()=>document.fonts.ready);
+  const context=await browser.newContext({baseURL,viewport:{width,height:740},reducedMotion:'reduce'});const page=await context.newPage();await page.goto('/unit29-30/#learn/trans');await page.evaluate(()=>document.fonts.ready);
   const room=page.locator('.stage-trans'),actions=room.getByRole('group',{name:'作答操作',exact:true}),selected=room.getByRole('group',{name:'已选词块',exact:true});
   for(const [i,answer] of ANSWERS.trans.entries()){
    const initialTop=await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY);await chooseTokens(room,answer);

@@ -7,7 +7,7 @@ for(const width of [320,390,768,1280])test(`${width} 宽度各站没有横向溢
     await page.goto('/unit5-6/#learn/'+activity);const room=page.locator('.stage-'+activity);
     await expect(room.getByRole('heading').first()).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     await expect.poll(()=>room.locator('img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
-    await room.getByRole('button',{name:'怎么玩',exact:true}).click();await page.keyboard.press('Escape');await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toBeFocused();
+    await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);await page.locator('#notebookButton').click();await page.keyboard.press('Escape');await expect(page.locator('#notebookButton')).toBeFocused();
     if([390,1280].includes(width)&&['words','text','listen','refer','trans'].includes(activity))await page.screenshot({path:`output/playwright/unit5-6/${activity}-${width}.png`});
   }
   expect(errors).toEqual([]);

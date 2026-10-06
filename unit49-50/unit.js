@@ -17,7 +17,7 @@
     for(const [id,title,art] of stage.activities){
       const surface=node('section','','shop-stage stage-'+id);surface.id='learn/'+id;surface.setAttribute('aria-label',title);surface.setAttribute('role','region');
       const heading=node('header','','stage-heading');heading.append(icon(art),node('h3',title));
-      const help=button('怎么玩',()=>showHelp(id,title),'workspace-back');heading.append(help);surface.append(heading);section.append(surface);surfaces.set(id,surface);
+      surface.append(heading);section.append(surface);surfaces.set(id,surface);
     }
     $('#lessonWorkspace').append(section);
   }
@@ -54,12 +54,11 @@
   const resumeLocation=()=>routeIds.has(practice.activity('unitLocation'))&&practice.activity('unitLocation')!=='cover'?practice.activity('unitLocation'):null;
   $('#startBtn').textContent=resumeLocation()?'继续采购':'开始采购';
   $('#startBtn').addEventListener('click',()=>navigate(resumeLocation()||'learn/words'));
-  function openHelp(title,lines){$('#helpTitle').textContent=title;$('#helpBody').replaceChildren(...lines.map(line=>node('p',line)));$('#unitHelp').showModal();}
-  function showHelp(id,title){
-    const copy={words:['点整张词卡，听发音、看中文。'],listen:['先点喇叭，选出听到的单词。听完才能检查，可以重复听。'],text:['点“开始听课文”。每句听完后点“下一句”；点旧句可以重听。'],roles:['先听完整故事，再选答案。题目说“如果”时，要按新情境回答。'],trans:['点下面的词块组成句子；点已选的词块可以撤回。'],certificate:['完成五关后领取。证书记录本单元的练习完成，不代表自由口语或独立写作的评定。']};
-    if(id==='subjects'){core.lesson49Subjects.markRuleUsed();openHelp(title,content.SUBJECTS.help);return;}
-    openHelp(title,copy[id]||['选好答案，再点“检查答案”。灯泡可以提供本题线索。可以随时离开，回来继续。']);
-  }
+  const subjectExample=node('details','','practice-example');
+  subjectExample.append(node('summary','看例子'));
+  for(const copy of content.SUBJECTS.help)subjectExample.append(node('p',copy));
+  subjectExample.addEventListener('toggle',()=>{if(subjectExample.open)core.lesson49Subjects.markRuleUsed();});
+  surfaces.get('subjects').append(subjectExample);
   document.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',()=>el.closest('dialog').close()));
   $('#notebookButton').addEventListener('click',()=>$('#unitNotebook').showModal());
   const words=[...content.WORDS,...content.PHRASES],pages=Math.ceil(words.length/6);
@@ -142,7 +141,7 @@
   const dialogueControls=node('div','','stage-ctrl'),tools=node('div','','stage-tools');
   const nextLineButton=button('开始听课文',advanceDialogue,'btn btn-green');nextLineButton.id='nextBtn';
   const replayLine=button('重听本句',()=>{if(dialogue.i<0)advanceDialogue();else playLine(dialogue.i);},'btn btn-yellow');
-  const restart=button('重新上演',resetDialogue,'btn btn-yellow');tools.append(replayLine,restart);dialogueControls.append(nextLineButton,tools);
+  const restart=button('重新上演',resetDialogue,'btn btn-yellow');tools.append(replayLine,restart);dialogueControls.append(tools,nextLineButton);
   const textFinish=node('div','','practice-finish');textFinish.hidden=true;
   const textFinishActions=node('div','','practice-finish-actions');textFinishActions.setAttribute('role','group');textFinishActions.setAttribute('aria-label','完成后的操作');
   textFinishActions.append(button('再听一遍',resetDialogue,'btn btn-yellow'));nextStation('text',textFinishActions);textFinish.append(node('p','故事听完了！'),textFinishActions);
@@ -153,6 +152,7 @@
   function refreshDialogue(){
     nextLineButton.disabled=dialogue.i>=0&&dialogue.heard[dialogue.i]!==true;
     nextLineButton.textContent=dialogue.i<0?'开始听课文':dialogue.i===content.DIALOGUE.length-1?'完成课文学习':'下一句';
+    dialogueControls.dataset.state=dialogue.i<0?'ready':'reading';tools.hidden=dialogue.i<0;
     dialogueControls.hidden=dialogue.done;textFinish.hidden=!dialogue.done;replayLine.disabled=dialogue.i<0;
   }
   function showLead(){const lead=node('div','','story-lead'),list=node('ol');content.STORY_LEAD.forEach(copy=>list.append(node('li',copy)));lead.append(node('h3','带着问题听'),list);log.replaceChildren(lead);}
@@ -214,18 +214,6 @@
     const review=questions.exam.filter((_,i)=>!states[i].firstCorrect||states[i].hintUsed||states[i].revealed);
     if(review.length){const details=node('details'),list=node('ul');details.append(node('summary','下次再练'));review.forEach(q=>list.append(node('li',q.target)));details.append(list);results.append(details);}
   }});
-  const examHost=hosts.get('exam'),examHeading=surfaces.get('exam').querySelector('.stage-heading');
-  function placePause(){
-    const tools=examHost.querySelector('.practice-session-tools');
-    if(tools){
-      examHeading.querySelector('.practice-session-tools')?.remove();
-      tools.querySelector('button').addEventListener('click',()=>audio.stop());
-      examHeading.insertBefore(tools,examHeading.lastElementChild);
-    }
-    const pause=examHeading.querySelector('.practice-session-tools');
-    if(pause)pause.hidden=!examHost.querySelector('.practice-content');
-  }
-  new MutationObserver(placePause).observe(examHost,{childList:true,subtree:true});placePause();
   certificateView=core.unitCertificate.mount({element:surfaces.get('certificate'),initialName:practice.activity('unitName'),initialIssuedAt:practice.activity('unitCertificateIssuedAt'),canClaim:fullyComplete,onClaim:({name,issuedAt})=>{
     practice.activity('unitName',name);practice.activity('unitCertificateIssuedAt',issuedAt);
   }});

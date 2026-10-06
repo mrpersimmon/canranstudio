@@ -163,13 +163,12 @@ test('退出正在播放的活动会停音，回来后可重听到结束',async(
   await expect(page.locator('#nextBtn')).toBeEnabled();
 });
 
-for(const viewport of [{width:320,height:568},{width:844,height:390}])test(`${viewport.width}×${viewport.height} 小屏仍能作答、打开帮助和返回`,async({page})=>{
+for(const viewport of [{width:320,height:568},{width:844,height:390}])test(`${viewport.width}×${viewport.height} 小屏仍能作答、查看例子和返回`,async({page})=>{
   await page.setViewportSize(viewport);await page.goto('/lesson49/#learn/doare');await page.evaluate(()=>document.fonts.ready);
   const room=page.locator('#doarePractice');await answer(room,'Do you like meat?');
   await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeVisible();
-  await page.getByRole('region',{name:'问话小帮手',exact:true}).getByRole('button',{name:'怎么玩',exact:true}).click();
-  await expect(page.locator('#activityHelpDialog')).toBeVisible();
-  await page.getByRole('button',{name:'关闭',exact:true}).click();
+  const example=page.getByRole('region',{name:'问话小帮手',exact:true}).locator('details.practice-example');await example.getByText('看例子',{exact:true}).click();await expect(example).toHaveAttribute('open','');await example.getByText('看例子',{exact:true}).click();
+  await expect(page.locator('#activityHelpDialog')).toHaveCount(0);
   await page.goto('/lesson49/#learn/words');
   await expect(page.getByRole('heading',{name:'肉店小图鉴',exact:true})).toBeVisible();
   await page.goBack();await expect(room).toContainText('第 2 / 8 题');

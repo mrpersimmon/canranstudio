@@ -96,7 +96,6 @@
 
 @media(max-width:600px){.unit1112-workspace .stage-text .dialogue-stage>.dialogue-actor>img{width:54px;height:90px}}
 
-.unit1112-workspace .stage-text .stage-tools>.btn:only-child{grid-column:1;grid-row:1;justify-self:stretch;min-height:52px;font-size:18px;padding:8px 12px}
 
 .unit1112-workspace .stage-listen .practice-scene{width:148px;height:136px;max-height:none}
 .unit1112-workspace .stage-listen .practice-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:680px;margin:20px auto}
@@ -167,8 +166,6 @@
  .unit1112-workspace .record-controls{gap:8px}.unit1112-workspace .record-controls>.btn{font-size:15px;padding:8px;flex:1}.unit1112-workspace .record-controls>span{min-width:48px;font-size:14px}.unit1112-workspace .certificate-keepsakes{grid-template-columns:1fr}
 }
 
-.unit1112-workspace .stage-exam .practice-session-tools{display:flex;justify-content:flex-end;max-width:800px;margin:0 auto 12px}
-.unit1112-workspace .shop-stage:has(.practice-pause)>.claim-task{display:none}
 
 /* Four short alternatives have equal weight, including on narrow screens. */
 .unit1112-workspace .role-runner .practice-options:not(.sentence-options):has(>.opt-btn:nth-child(4):last-child){display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}

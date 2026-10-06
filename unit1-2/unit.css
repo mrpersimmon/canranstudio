@@ -47,3 +47,6 @@
  body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}
  body.print-writing #unitWriting{max-width:none;font-size:14px}
 }
+.unit12-workspace .dialogue-log p.btext{cursor:default;margin:0}
+.unit12-workspace .reference-card{border:2px solid var(--unit-line,#BDD2D9);border-radius:20px;padding:16px;background:#FFFDF6}
+.unit12-workspace .reference-card strong{font:600 22px/1.5 'Baloo 2',sans-serif}

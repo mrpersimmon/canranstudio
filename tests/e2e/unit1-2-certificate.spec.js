@@ -58,6 +58,6 @@ test('内容升版撤回旧完成凭据，旧证书不能冒充新题已经答�
   await page.goto('/unit1-2/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');
   await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
   await page.goto('/unit1-2/#learn/listen');const room=page.locator('.stage-listen');
-  await expect(room).toContainText('第 1 / 11 题');await expect(room.getByRole('button',{pressed:true})).toHaveCount(0);
+  await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('button',{pressed:true})).toHaveCount(0);
   await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });

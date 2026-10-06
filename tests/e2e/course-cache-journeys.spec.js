@@ -1,7 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
-for (let first = 7; first <= 29; first += 2) {
+for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
   const id = 'unit' + first + '-' + (first + 1);
   const run = require('../support/' + id + '-flow')['completeUnit' + first + (first + 1)];
   test(id + ' 缓存后断网完成真实题型和证书', async ({ page, context }) => {

@@ -41,7 +41,7 @@ test('升级加载避开未标版本及 v1.11、v1.12 旧组件，刷新保留�
   await expect(exam.locator('.practice-progress')).toContainText('第 2 / 10 题');
   await expect(exam.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(page.locator('#starCount')).toHaveText('9');
-  await expect(exam.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveText('暂停');
+  await expect(exam.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0);
   expect(staleRequests).toEqual([]);
   expect(errors).toEqual([]);
 });
@@ -98,7 +98,7 @@ test('下一题题干已在视口内时，保持滚动位置', async ({ page }) 
   expect(await page.evaluate(() => scrollY)).toBe(before);
 });
 
-test('两处听辨均为大喇叭和两列图文选项，挑战暂停在标题旁', async ({ page }) => {
+test('两处听辨均为大喇叭和两列图文选项，挑战自动保存', async ({ page }) => {
   await fastAudio(page);
   await page.setViewportSize({ width: 390, height: 844 });
   const sizes = [];
@@ -121,9 +121,7 @@ test('两处听辨均为大喇叭和两列图文选项，挑战暂停在标题�
     expect(action.width).toBe(210);
     expect(Math.abs(action.x + action.width / 2 - area.x - area.width / 2)).toBeLessThan(2);
     if (id === 'exam') {
-      const pause = await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).boundingBox();
-      const title = await room.getByRole('heading', { name, exact: true }).boundingBox();
-      expect(Math.abs(pause.y + pause.height / 2 - title.y - title.height / 2)).toBeLessThan(12);
+      await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);
     }
   }
   expect(sizes[0].width).toBe(sizes[1].width);
@@ -190,7 +188,7 @@ test('普通练习和挑战的问句、回应与填空使用同一表现，结�
     if (i === 6) expect(await promptStyle(room)).toEqual(styles.either);
     if (i === 7) expect(await promptStyle(room)).toEqual(styles.fill);
     await answerQuestion(room, examAnswers[i]);
-    if (i === 4) await room.getByRole('button', { name: '继续第二段（5 题）', exact: true }).click();
+    if (i === 4) await expect(room.getByRole('button', { name: '继续第二段（5 题）', exact: true })).toHaveCount(0);
   }
   const reward = page.getByRole('dialog', { name: '红白遮阳棚', exact: true });
   await expect(reward).toBeVisible();
@@ -202,6 +200,6 @@ test('普通练习和挑战的问句、回应与填空使用同一表现，结�
   await expect(room.locator('.challenge-highlights > div')).toHaveText(['8 / 10首次无提示答对', '1提示后完成', '1修正后完成']);
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
-  await questionVisible(page, room.getByRole('heading', { name: '听订单，选出录音里出现的单词。', exact: true }));
+  await questionVisible(page, room.getByRole('heading', { name: '听订单，选出录音里出现的单词', exact: true }));
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });

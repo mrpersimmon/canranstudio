@@ -42,7 +42,7 @@ for(const width of [320,390,768,1280])test(`宽度${width}场景、找人、动�
 test('缓存前缀首次准备、重访离线词卡与后续画册全部就绪',async({page,context})=>{
  test.setTimeout(120000);await page.goto('/lesson/unit31-32/#learn/words');await expect(page.locator('#courseLoader')).toBeHidden({timeout:60000});await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await context.setOffline(true);await page.reload();await expect(page.locator('#courseLoader')).toBeHidden({timeout:30000});await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');for(let i=0;i<2;i++)await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await page.goto('/lesson/unit31-32/#learn/models');for(let i=0;i<5;i++)await page.locator('.stage-models').getByRole('button',{name:'下一页动作',exact:true}).click();await expect.poll(()=>page.locator('.stage-models .reference-card img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);await context.setOffline(false);
 });
-test('未答完可暂停续做，键盘能改选；正常反馈音播放，课堂练习纸保留A5与B10',async({page})=>{
+test('未答完刷新直接续做，键盘能改选；正常反馈音播放，课堂练习纸保留A5与B10',async({page})=>{
  await page.addInitScript(()=>{
   globalThis.completedSounds=[];const play=HTMLMediaElement.prototype.play;
   HTMLMediaElement.prototype.play=function(){this.addEventListener('ended',()=>globalThis.completedSounds.push(this.currentSrc),{once:true});return play.call(this);};
@@ -55,9 +55,9 @@ test('未答完可暂停续做，键盘能改选；正常反馈音播放，课�
  await expect.poll(()=>page.evaluate(()=>completedSounds.length)).toBe(1);
  await room.getByRole('button',{name:'再试一次',exact:true}).press('Enter');
  await room.getByRole('button',{name:'Where is',exact:true}).press('Enter');
- await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();
- await expect(room).toContainText('已暂停 · 第 1 / 12 题');
- await room.getByRole('button',{name:'继续挑战',exact:true}).click();
+ await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();
+ await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');
+ await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
  await expect(room.getByRole('button',{name:'Where is',exact:true})).toHaveAttribute('aria-pressed','true');
  await room.getByRole('button',{name:'检查答案',exact:true}).press('Enter');await expect(room.getByRole('status')).toHaveText('答对了！');
  await expect.poll(()=>page.evaluate(()=>completedSounds.length)).toBe(1);

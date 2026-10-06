@@ -64,13 +64,13 @@ test('15–16 整课准备后，首次与断网复访翻词卡和剧情换物都
   }
 });
 
-test('15–16 旧草稿只是选择，升级、暂停与刷新都不代为判对', async ({ page }) => {
+test('15–16 旧草稿只是选择，升级、返回与刷新都不代为判对', async ({ page }) => {
   const upgrade = await oldEdition(page); await page.goto('/unit15-16/#learn/exam'); const room = page.locator('.stage-exam');
   await selectAnswer(room, EXAM[0].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await selectAnswer(room, EXAM[1].answer); upgrade(); await page.reload();
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
-  await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click(); await page.reload(); await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+  await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload(); await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
@@ -105,6 +105,6 @@ test('15–16 完成整课加载后，刷新对白仍展示已读的最后一句
   const room = page.locator('.stage-text'), log = room.getByRole('log');
   for (let i=0; i<18; i++) await room.getByRole('button', { name:i?'下一句':'开始看课文', exact:true }).click();
   await context.setOffline(true); await page.reload(); await expect(page.locator('#courseLoader')).toHaveCount(0);
-  await expect(room.locator('.dialogue-status')).toHaveText('18 / 18 句');
+  await expect(room.locator('.dialogue-status')).toHaveText('18 / 18');
   await expect(log.locator('.bubble-row').last()).toBeInViewport({ ratio:1 });
 });

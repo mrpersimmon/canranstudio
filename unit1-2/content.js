@@ -226,3 +226,67 @@ unit.questions["exam"][7]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Text-only task edition. Keep exact predecessors for current-round migration.
+(function(core){
+ 'use strict';
+ const unit=core.unit12,old=unit.questions,all=Object.values(old).flat(),find=id=>all.find(q=>q.id===id);
+ const image=name=>'/assets/unit1-2/'+name+'.svg';
+ const make=(code,type,target,prompt,extra)=>({id:'u12-types-v1-'+code,type,target,prompt,hint:'',source:'Lesson 1–2；2026-10-06 十三项题型试排 '+code,...extra});
+ const choice=(code,target,prompt,options,answer,extra={})=>make(code,'choice',target,prompt,{options,answer,...extra});
+ const revised={
+  listen:[
+   make('t01','match','区分三种衣物','给衣服配对。',{pairs:[{id:'coat',en:'coat',cn:'外套'},{id:'dress',en:'dress',cn:'连衣裙'},{id:'skirt',en:'skirt',cn:'半身裙'}],answer:'["coat","dress","skirt"]'}),
+   choice('t02','识别钢笔','看看图，选出英文。',['pen','pencil','book'],'pen',{image:image('pen'),imageAlt:'有金属笔尖的钢笔'}),
+   choice('t03','理解 house','“房子”是哪一个词？',['house','car','shirt'],'house'),
+   choice('b01','区分铅笔和钢笔','“铅笔”是哪一个词？',['pencil','pen','book'],'pencil')
+  ],
+  roles:[
+   make('t05','wordbank','读懂归属问句','用中文词块说出这句话的意思。',{reading:'Is this your handbag?',language:'zh-CN',tokens:['你的','这是','吗？','手提包','我的','铅笔'],slots:4,answer:'这是 你的 手提包 吗？'}),
+   choice('t06','理解重复问话的原因','男士为什么又问了一次？',['女士请他重复。','又发现了另一个手提包。','女士说手提包不是自己的。'],'女士请他重复。',{reading:unit.learning.DIALOGUE.map(line=>[line.who==='man'?'男士':'女士',line.text]),readingLabel:'手提包的故事'}),
+   find('u12-tasks-v4-thanks-degree'),find('u12-v1-story-your')
+  ],
+  manners:[
+   make('t04','cloze','补全礼貌招呼','男士想礼貌地引起女士注意。',{blanks:[{before:'Excuse ',after:'!',options:['me','it','your']}],answer:'["me"]'}),
+   choice('t10','回应招呼','朋友叫住你，该怎样回应？',['Yes?','Yes, it is.','Thank you very much.'],'Yes?',{reading:'Excuse me!'}),
+   choice('t13','作为女士确认归属','你是女士，手提包确实是你的。怎样回答？',['Yes, it is.','Yes?','Pardon?'],'Yes, it is.',{scene:{beat:'confirm',step:'认回手提包',before:[['man','Is this your handbag?']],after:[['woman','Yes, it is.']]}}),
+   find('u12-scene-v1-return'),
+   make('b04','wordbank','组织完整感谢','包回来了，帮女士说声谢谢。',{language:'en',tokens:['Thank','you','very much'],slots:3,suffix:'.',answer:'Thank you very much',scene:{beat:'thanks',step:'说声谢谢',before:[],after:[['woman','Thank you very much.']]}})
+  ],
+  ask:[
+   choice('t09','根据手表图片补词','看看图，补全问句。',['watch','book','handbag'],'watch',{reading:'Is this your ___?',image:image('watch'),imageAlt:'一块手表'}),
+   choice('t11','理解对话中的 it','这里的 it 指什么？',['衬衫','男士','女士'],'衬衫',{reading:[['男士','Is this your shirt?'],['女士','Yes, it is.']]})
+  ],
+  trans:[
+   make('t08','write','在句式支持下拼写 book','这是你的书吗？补上缺少的英文单词。',{before:'Is this your ',after:'?',answer:'book'}),
+   make('t12','wordbank','组织小汽车归属问句','这是你的小汽车吗？',{tokens:['car','your','Is','this'],slots:4,suffix:'?',answer:'Is this your car'})
+  ],
+  exam:[...old.exam.slice(0,7),choice('c08','读懂不同物品的归属问句','读一读，问的是哪件物品？',['房子','小汽车','外套'],'房子',{reading:'Is this your house?',optionImages:{'房子':image('house'),'小汽车':image('car'),'外套':image('coat')}})]
+ };
+ const predecessors=Object.entries(old).flatMap(([id,items])=>[{key:'unit12-'+id+'-practice/'+(unit.taskSessions?.[id]||(unit.activityPredecessors?.[id]?'v2':'v'+unit.version)),questions:items},...(unit.taskPredecessors?.[id]||[])]);
+ for(const[id,items]of Object.entries(revised)){unit.taskPredecessors[id]=predecessors;unit.taskSessions[id]='types-v1';unit.questions[id]=items;}
+ unit.experienceVersion='classroom-types-1';unit.teachingMode='classroom';
+ unit.typeCoverage={adopted:['E01','E04','E05','E07','E09','E10','E11','E12','E21','E23','S01','S02','A02'],actual:['E01','E04','E05','E07','E09','E12','E21','E23','S01','S02','A02'],adaptations:{E10:'T09 只识别图片中的物品，归为 E21。',E11:'T11 是短对话指代理解，归为 S01。'}};
+ unit.stages[0].activities[1]=['listen','单词寻宝','cards'];unit.stages[2].title='礼貌小帮手';unit.stages[3].activities[1][1]='句子小工坊';
+ // Original dialogue metadata remains identical for verified cross-device progress.
+ // Classroom mode never loads its historical recording references.
+ unit.learning.AUDIO={};
+ for(const list of [unit.learning.WORDS,unit.learning.PHRASES,unit.learning.SENTENCE_MODELS])for(const item of list)delete item.audio;
+})(globalThis.CanranCore);
+
+// Current click-only edition. Preserve exact v1 questions as migration sources.
+(function(core){
+ 'use strict';
+ const unit=core.unit12;
+  const old=unit.questions,revised={
+   trans:old.trans.map((q,i)=>i?q:{id:'u12-clicks-v1-book',type:'cloze',target:'在问句中选择 book',prompt:'补全句子',reference:'这是你的书吗？',hint:'',source:'Lesson 1–2；2026-10-06 共性交互修订',blanks:[{before:'Is this your ',after:'?',options:['book','car','watch']}],answer:'["book"]'}),
+   exam:old.exam.map((q,i)=>i!==1?q:{id:'u12-clicks-v1-confirm-thank',type:'choice',target:'确认物品归属并感谢',prompt:'先确认，再道谢',display:{title:'先确认，再道谢',material:'同学把你的书递给你'},reading:[['同学','Is this your book?']],hint:'',source:'Lesson 1–2；2026-10-06 共性交互修订',options:['Yes, it is. Thank you very much.','Yes, it is. Excuse me!','Pardon? Thank you very much.'],answer:'Yes, it is. Thank you very much.'})
+  };
+  for(const[id,items]of Object.entries(revised)){
+   unit.taskPredecessors[id]=[{key:'unit12-'+id+'-practice/'+unit.taskSessions[id],questions:old[id]},...unit.taskPredecessors[id]];
+   unit.taskSessions[id]='clicks-v1';unit.questions[id]=items;
+  }
+  for(const key of ['adopted','actual'])unit.typeCoverage[key]=unit.typeCoverage[key].filter(id=>id!=='E07');
+  unit.typeCoverage.adaptations.E07='键盘拼写已移除；点击补全归入 E09，不计为 E07。';
+  unit.experienceVersion='classroom-clicks-1';
+})(globalThis.CanranCore);

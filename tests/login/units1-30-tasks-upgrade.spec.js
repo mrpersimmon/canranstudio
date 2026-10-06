@@ -36,7 +36,9 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(root);
   const current=await device();await signIn(current,account,'/');await current.goto('/'+unit+'/#learn/certificate');
   await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');
-  for(const group of Object.keys(CASES[pair].old)){
+  if(['1-2','25-26'].includes(pair)){
+   await require('../support/thirteen-types-flow').complete(current,pair);
+  }else for(const group of Object.keys(CASES[pair].old)){
    const change=CASES[pair].changes.find(x=>x.group===group);
    await current.goto('/'+unit+'/#learn/'+group);const room=current.locator('.stage-'+group);
    if(change){

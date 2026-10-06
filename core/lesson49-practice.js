@@ -8,6 +8,42 @@
   let loadMessage = '';
   const isRecord = value => value && typeof value === 'object' && !Array.isArray(value);
   const newRunId = () => root.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+  // Presentation only: keep the source question intact for exact draft migration.
+  // Chinese instruction punctuation is distinct from punctuation in language material.
+  function questionCopy(q, presentation) {
+    const clean=text=>text.trim().replace(/。$/u,'');
+    if(q.display)return {title:clean(q.display.title),material:q.display.material||''};
+    const situations={
+      'u34-v1-polite-yes':['确认这把伞是你的','别人问你：Is this your umbrella?\n这把伞是你的'],
+      'u34-v2-reply-build-denial':['说明外套是谁的','外套是同学的\n同学问你：Is this your coat?\n用词块回答：不是我的，是你的'],
+      'u34-v2-reply-unknown-owner':['选择合适的回答','这把雨伞不是你的，主人还不清楚\n同学问你：Is this your umbrella?'],
+      'u56-v1-build-correction':['更正汽车介绍','Mini 的介绍写着 English\n用词块说明：不是美国品牌汽车，是英格兰品牌汽车'],
+      'u4950-sam-cabbage':['替 Sam 回答','Sam 喜欢卷心菜\n别人问：Does Sam like cabbage?'],
+      'u4950-want-grapes':['回答店主','你这次不想要葡萄\n店主问：Do you want any grapes?']
+    };
+    if(situations[q.id])return {title:situations[q.id][0],material:situations[q.id][1]};
+    if(q.type==='match')return {title:clean(q.prompt).replace(/^给(.+)配对$/u,'给$1选择配对')};
+    if(q.type==='wordbank'&&q.language==='zh-CN')return {title:'翻译这句话'};
+    if(q.type==='wordbank'&&!q.scene){
+      const prefix=q.prompt.match(/^用 (.+) 开头说：(.+)$/u);
+      return {title:prefix?'用 '+prefix[1]+' 开头':'翻译这句话',material:prefix?prefix[2]:q.prompt};
+    }
+    const shorter={
+      '看看图，选出英文。':'看图选词',
+      '看看图，补全问句。':'补全问句',
+      '看看图，补上位置词。':'选择位置词',
+      '读一读，问的是哪件物品？':'问的是哪件物品？'
+    };
+    if(shorter[q.prompt])return {title:shorter[q.prompt]};
+    // Existing multi-line questions already delimit the evidence. Move a final
+    // Chinese instruction above it; retain every premise and all English text.
+    const lines=q.prompt.split('\n'),last=lines.at(-1);
+    if(!q.scene&&(q.presentation||presentation)!=='reply'&&lines.length>1&&/[\u3400-\u9fff]/u.test(last)&&!last.includes('___')&&
+       /(?:[？?：:]$|(?:填|选|补|说|回答|介绍|写|合成|展开|说明).+。$)/u.test(last)){
+      return {title:clean(last),material:lines.slice(0,-1).join('\n')};
+    }
+    return {title:clean(q.prompt)};
+  }
   try {
     const raw = localStorage.getItem(KEY);
     if (raw) {
@@ -28,7 +64,7 @@
     box.replaceChildren();
     const records = Object.values(notebook.records).filter(record=>isRecord(record)&&typeof record.attempts==='number'&&typeof record.firstCorrect==='boolean');
     const intro = document.createElement('p');
-    intro.textContent = records.length ? '记录的是有选项或词块支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。' : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
+    intro.textContent = records.length ? '记录的是有选项、词块或句式支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。' : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
     box.append(intro);
     const list = document.createElement('ul');
     records.forEach(record => {
@@ -234,6 +270,9 @@
     }
     function passed(state,q){return usableState(state,q)&&state.checked&&state.correct;}
     function normalizeDraft(){
+      // Resume old manual and between-round pauses at the validated question.
+      // Selection and checked state still pass the same ownership checks.
+      group.paused=false;
       for(let i=0;i<Math.min(group.states.length,group.index+1,questions.length);i++){
         if(!usableState(group.states[i],questions[i]))group.states[i]=emptyState(questions[i]);
       }
@@ -259,12 +298,6 @@
       element.classList.add('practice-runner');
       element.classList.toggle('role-runner', Boolean(sceneView));
       if(group.index<questions.length)onProgress();
-      if (group.paused) {
-        const pauseCopy=document.createElement('h3');pauseCopy.textContent=group.paused==='break'?`已完成 ${group.index} / ${questions.length} 题`:`已暂停 · 第 ${group.index+1} / ${questions.length} 题`;
-        const pause=document.createElement('div');pause.className='practice-pause';
-        pause.append(root.CanranCore.lesson49Icons.create('order'),pauseCopy,button(group.paused==='break'?'继续第二段（5 题）':'继续挑战',()=>{group.paused=false;save();render();revealQuestion(element);}));
-        element.append(pause);return;
-      }
       if (group.index === questions.length) {
         if(!questions.every((q,i)=>passed(group.states[i],q))){normalizeDraft();save();render();return;}
         const summary = document.createElement('p');
@@ -282,6 +315,9 @@
         onComplete(group.states); return;
       }
       const q = questions[group.index];
+      const activeScene = sceneView && (!sceneView.supports || sceneView.supports(q)) ? sceneView : null;
+      element.classList.toggle('role-runner', Boolean(activeScene));
+      if(sceneView?.supports){element.classList.remove('handbag-runner');delete element.dataset.sceneBeat;}
       const input = inputViews?.supports(q) ? inputViews : null;
       let inputController;
       element.dataset.kind = q.type === 'order' ? 'order' : q.delivery ? 'delivery' : q.audioText ? 'listening' : q.presentation || presentation;
@@ -297,7 +333,8 @@
       group.states[group.index] = state;
       const solvedQuestions = () => questions.map((question, index) => passed(group.states[index], question));
       const progress = progressLabel(`第 ${group.index + 1} / ${questions.length} 题`, solvedQuestions(), group.index);
-      const prompt = document.createElement('h3'); prompt.textContent = q.prompt; prompt.tabIndex = -1;
+      const copy = questionCopy(q, presentation);
+      const prompt = document.createElement('h3'); prompt.textContent = copy.title; prompt.tabIndex = -1;
       if(element.dataset.kind === 'reply') {
         prompt.replaceChildren();
         q.prompt.split('\n').forEach((line,index) => {
@@ -309,7 +346,7 @@
       }
       const options = document.createElement('div'); options.className = 'practice-options'+(q.delivery?' delivery-options':'');
       if(q.type==='order'){options.classList.add('sentence-options');options.classList.toggle('sentence-long',q.tokens.length>3);}
-      if (sceneView) { options.setAttribute('role','group'); options.setAttribute('aria-label','选择回应'); }
+      if (activeScene) { options.setAttribute('role','group'); options.setAttribute('aria-label','选择回应'); }
       const deliverySlots=new Map();
       const deliverySource=document.createElement('div');deliverySource.className='delivery-source';
       const parcel=document.createElement(q.image?'img':'span');parcel.className='delivery-parcel';
@@ -354,7 +391,6 @@
         if(group.index!==questionIndex||!passed(state,q))return;
         group.states.length=group.index+1;
         group.index++;
-        if(chunkSize&&group.index<questions.length&&group.index%chunkSize===0)group.paused='break';
         save(); render();
         if(group.index===questions.length)root.CanranCore.lesson49Feedback.play('complete');
         revealQuestion(element,sceneView?.heading());
@@ -387,12 +423,12 @@
         check.disabled = !canCheck();
       }
       const values = input ? [] : q.type === 'order' ? q.tokens.map((_,i)=>i) : q.options.slice();
-      const stableOrder=q.type==='order'&&Array.isArray(state.tokenOrder)&&state.tokenOrder.length===values.length&&
-        new Set(state.tokenOrder).size===values.length&&state.tokenOrder.every(i=>Number.isInteger(i)&&i>=0&&i<values.length);
-      if(stableOrder)values.splice(0,values.length,...state.tokenOrder);
+      const orderKey=q.type==='order'?'tokenOrder':'optionOrder',savedOrder=state[orderKey];
+      const stableOrder=Array.isArray(savedOrder)&&savedOrder.length===values.length&&new Set(savedOrder).size===values.length&&savedOrder.every(value=>values.includes(value));
+      if(stableOrder)values.splice(0,values.length,...savedOrder);
       else{
         for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]];}
-        if(q.type==='order'){state.tokenOrder=values.slice();save();}
+        if(!input){state[orderKey]=values.slice();save();}
       }
       if(input){
         inputController=input.mount({element:options,question:q,state,changed:()=>{check.disabled=!canCheck();save();}});
@@ -442,7 +478,7 @@
       function showFeedback() {
         inputController?.update();
         updateProgress(progress, solvedQuestions(), passed(state,q) ? -1 : group.index);
-        sceneView?.answer(state.checked && state.correct ? state.selection : null);
+        activeScene?.answer(state.checked && state.correct ? state.selection : null);
         if(q.delivery){
           const delivered=state.checked&&state.correct;
           (delivered?deliverySlots.get(q.delivery):deliverySource).append(parcel);
@@ -475,14 +511,20 @@
         onAnswer(q, state);
       }
       content.append(progress,prompt);
+      if(copy.material){
+        const context=document.createElement('div');context.className='practice-context';context.setAttribute('role','region');context.setAttribute('aria-label','题目材料');
+        copy.material.split('\n').forEach(line=>{const paragraph=document.createElement('p');paragraph.textContent=line;if(!/[\u3400-\u9fff]/u.test(line))paragraph.lang='en';context.append(paragraph);});
+        content.append(context);
+      }
+      if(q.reading){
+        const material=document.createElement('div');material.className='task-reading';material.setAttribute('role','region');material.setAttribute('aria-label',q.readingLabel||'阅读材料');
+        if(Array.isArray(q.reading))q.reading.forEach(([who,text],i)=>{const row=document.createElement('p');row.className='task-reading-turn turn-'+(i%2);const speaker=document.createElement('small');speaker.textContent=who;const words=document.createElement('span');words.lang='en';words.textContent=text;row.append(speaker,words);material.append(row);});
+        else{const passage=document.createElement('p');passage.lang=q.readingLanguage||'en';passage.textContent=q.reading;material.append(passage);}
+        content.append(material);
+      }
       if(q.lesson){const example=document.createElement('details');example.className='practice-example';const title=document.createElement('summary');title.textContent='看例子';const copy=document.createElement('p');copy.textContent=q.lesson;example.append(title,copy);content.append(example);}
       const helpers=document.createElement('div');helpers.className='practice-helpers';
       if(q.model)helpers.append(model);
-      if(chunkSize){
-        const tools=document.createElement('div');tools.className='practice-session-tools';
-        const pause=button('暂停',()=>{group.paused='manual';save();render();revealQuestion(element);},'workspace-back');
-        pause.setAttribute('aria-label','暂停，稍后继续');tools.append(pause);element.append(tools);
-      }
       if(q.audioText){
         const audioControls=document.createElement('div');audioControls.className='practice-audio-controls';
         audioControls.append(replay);
@@ -506,9 +548,9 @@
       if(hintsEnabled)row.append(hint);else row.classList.add('without-hint');
       row.append(check,retry,next);actions.append(note,row);
       element.append(content,actions);
-      if (sceneView) {
+      if (activeScene) {
         progress.classList.add('role-progress'); prompt.remove();
-        sceneView.present(q, progress);
+        sceneView.present({...q,prompt:copy.title}, progress);
       }
       showFeedback();
     }

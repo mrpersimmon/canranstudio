@@ -25,6 +25,7 @@ async function bulbLayout(stage) {
   return {hint,check};
 }
 
+test.beforeEach(async({page})=>require('../support/types-predecessor').installPredecessor(page,'1-2'));
 test('交接线索统一为左侧灯泡，展开、检查、重试与刷新保持稳定',async({page})=>{
   await page.setViewportSize({width:320,height:664});await page.goto('/lesson49/#learn/give');await page.evaluate(()=>document.fonts.ready);
   const stage=page.locator('.stage-give');
@@ -108,7 +109,7 @@ for(const width of [320,768,1280])test(`${width} 宽度八个非听辨活动仅�
 });
 
 test('词块题用线索后仍需手动拼装，记录提示后完成，下一题和重练清空线索',async({page})=>{
-  await prepare(page);await page.goto('/unit1-2/#learn/trans');
+  await prepare(page);await page.goto('/tests/fixtures/unit1-2-types-before/#learn/trans');
   const stage=page.locator('.stage-trans'),{hint,check}=await bulbLayout(stage);
   await expect(stage.getByRole('progressbar')).toHaveAttribute('aria-valuemax','2');
   await hint.click();await page.reload();await expect(hint).toHaveAttribute('aria-expanded','true');
@@ -141,8 +142,8 @@ test('挑战听辨保留听完门槛；阅读题灯泡、暂停和刷新不自�
   await expect(stage.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
   await stage.locator('.practice-options').getByRole('button',{name:'mince',exact:true}).click();
   await expect(check).toBeDisabled();
-  await stage.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();
-  await page.reload();await stage.getByRole('button',{name:'继续挑战',exact:true}).click();
+  await expect(stage.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);
+  await page.reload();await expect(stage.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
   await expect(check).toBeDisabled();
   expect(await page.evaluate(()=>window.playedAudio.length)).toBe(0);
   await stage.getByRole('button',{name:'听一遍',exact:true}).click();await expect(check).toBeDisabled();
@@ -158,8 +159,8 @@ test('挑战听辨保留听完门槛；阅读题灯泡、暂停和刷新不自�
   const {hint}=await bulbLayout(stage);
   await expect(hint).toHaveAttribute('aria-expanded','false');await expect(check).toBeDisabled();
   await hint.click();
-  await stage.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();
-  await page.reload();await stage.getByRole('button',{name:'继续挑战',exact:true}).click();
+  await expect(stage.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);
+  await page.reload();await expect(stage.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
   await bulbLayout(stage);
   await expect(hint).toHaveAttribute('aria-expanded','true');await expect(check).toBeDisabled();
   await expect(stage.locator('.practice-hint')).toBeVisible();

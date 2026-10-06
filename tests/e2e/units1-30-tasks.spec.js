@@ -13,17 +13,17 @@ test('7–8 逐空补完介绍，未填完不能检查，错答后可改且恢�
 test('1–2 在完整感谢语中找程度词，错选不代答，刷新后原题可重试',async({page})=>{
  await page.addInitScript(()=>{window.Audio=class extends EventTarget{play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();}pause(){}};});
  await page.goto('/unit1-2/#learn/text');const story=page.locator('.stage-text');
- await story.getByRole('button',{name:'开始听课文',exact:true}).click();
+ await story.getByRole('button',{name:'开始看课文',exact:true}).click();
  for(let i=1;i<7;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
- await story.getByRole('button',{name:'完成课文学习',exact:true}).click();
+ await story.getByRole('button',{name:'完成课文',exact:true}).click();
  await page.goto('/unit1-2/#learn/roles');const room=page.locator('.stage-roles');
- for(const answer of ['对面的女士','手提包']){await room.getByRole('button',{name:answer,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
+ for(const answer of [['这是','你的','手提包','吗？'],'女士请他重复。']){await require('../support/thirteen-types-flow').select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
  const source=room.getByRole('group',{name:'原文选词',exact:true});
  await expect(source).toContainText('Thank you very much.');
  await source.getByRole('button',{name:'you',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await page.reload();
  await room.getByRole('button',{name:'再试一次',exact:true}).click();
  await source.getByRole('button',{name:'very much',exact:true}).press('Enter');await room.getByRole('button',{name:'检查答案',exact:true}).press('Enter');
- await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:'完成这一站',exact:true}).click();
+ await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:'对面的女士',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'完成这一站',exact:true}).click();
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 });

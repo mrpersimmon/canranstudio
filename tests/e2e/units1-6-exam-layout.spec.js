@@ -9,7 +9,7 @@ for (const unit of ['1-2', '3-4', '5-6']) for (const width of [320, 390, 768, 12
     await page.evaluate(() => document.fonts.ready);
     const room = page.locator('.stage-exam'), questions = EXAMS[unit];
     for (const [i, question] of questions.entries()) {
-      await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+      await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       for (const control of await room.locator('.practice-options button').all()) {
         expect(await control.evaluate(el => el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1)).toBe(true);

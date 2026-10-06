@@ -1,6 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
-const {CASES,story,activity}=require('../support/units1-30-tasks');
+const {CASES: allCases,story,activity}=require('../support/units1-30-tasks');
+const CASES=Object.fromEntries(Object.entries(allCases).filter(([pair])=>!['1-2','25-26'].includes(pair))); // Current editions: unit-thirteen-types.spec.js.
 test.use({reducedMotion:'reduce',actionTimeout:3500});
 for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${pair} 新题逐项可作答，错误、线索与刷新不代答`,async({page})=>{
  test.setTimeout(90000);

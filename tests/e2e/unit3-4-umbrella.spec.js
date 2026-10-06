@@ -37,7 +37,7 @@ for (const width of [390, 1280]) test(width + '三次询问对应不同的雨伞
     if ([7, 9, 10].includes(i)) {
       await page.reload();
       await expectUmbrella(room, design, i >= 10);
-      await expect(room.locator('.dialogue-status')).toHaveText(`${i + 1} / 12 句`);
+      await expect(room.locator('.dialogue-status')).toHaveText(`${i + 1} / 12`);
       await expect(page.locator('#starCount')).toHaveText('0');
     }
   }
@@ -89,7 +89,7 @@ test('换伞动作不阻挡连续前进，重新上演会取消过期的画面�
   expect(await prop.evaluate(el => el.getAnimations({ subtree: true }).some(animation => animation.playState === 'running'))).toBe(true);
   await expect(next).toBeEnabled();
   await next.click(); await next.click();
-  await expect(room.locator('.dialogue-status')).toHaveText('10 / 12 句');
+  await expect(room.locator('.dialogue-status')).toHaveText('10 / 12');
   await expectUmbrella(room, '紫色圆点');
   await expect.poll(() => prop.evaluate(el => el.getAnimations({ subtree: true }).filter(animation => animation.playState === 'running').length)).toBe(0);
   expect((await next.boundingBox()).y).toBeCloseTo(controls.y, 0);
@@ -128,7 +128,7 @@ test('第二把伞未准备好时不进课，准备后断网换伞和刷新均�
       await page.reload();
       await expect(page.locator('#courseLoader')).toHaveCount(0);
       await expectUmbrella(room, design, i >= 10);
-      await expect(room.locator('.dialogue-status')).toHaveText(`${i + 1} / 12 句`);
+      await expect(room.locator('.dialogue-status')).toHaveText(`${i + 1} / 12`);
       await expect(page.locator('#starCount')).toHaveText('0');
     }
   }

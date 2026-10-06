@@ -91,15 +91,16 @@ test('刷新书签仍定位原活动；手机紧凑导航能定位五关', async
   await expect(menu).toHaveValue('l4');
 });
 
-test('五个锦囊按需展开，浏览不算作答；怎么玩和学徒手记可关闭', async ({page}) => {
+test('五个锦囊按需展开，浏览不算作答；教学例句与学徒手记可开关', async ({page}) => {
   await page.goto('/lesson49/#learn/pouch');
   const stage = page.getByRole('region',{name:'店员小锦囊',exact:true});
   await expect(stage.locator('.expression-card')).toHaveCount(5);
   await stage.locator('.expression-card summary').filter({hasText:'To tell you the truth'}).click();
   await expect(stage.locator('.expression-card[open]')).toContainText('坦白自己的真实想法');
-  await stage.getByRole('button',{name:'怎么玩',exact:true}).click();
-  await expect(page.getByRole('dialog')).toContainText('打开锦囊只算浏览');
-  await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
+  await expect(stage.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
+  await expect(stage.locator('details.practice-example')).toContainText('To tell you the truth');
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
   await page.getByRole('button',{name:'学徒手记',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'学徒手记'})).toContainText('还没有新的作答记录');
   await page.getByRole('dialog',{name:'学徒手记'}).getByRole('button',{name:'关闭',exact:true}).click();

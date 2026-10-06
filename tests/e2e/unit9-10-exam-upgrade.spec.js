@@ -36,7 +36,7 @@ test('9–10 三题旧挑战完成后保留有效题，新增题亲自补完才�
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });
 
-test('9–10 旧草稿只是选择，升级、暂停与刷新都不代为判对', async ({ page }) => {
+test('9–10 旧草稿只是选择，升级、返回与刷新都不代为判对', async ({ page }) => {
   const upgrade = await oldEdition(page); await page.goto('/unit9-10/#learn/exam'); const room = page.locator('.stage-exam');
   await selectAnswer(room, EXAM[0].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await selectAnswer(room, EXAM[1].answer); upgrade(); await page.reload();
@@ -44,7 +44,7 @@ test('9–10 旧草稿只是选择，升级、暂停与刷新都不代为判对'
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'Look at', exact: true }).click();
-  await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click(); await page.reload(); await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+  await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload(); await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: '撤回 Look at', exact: true })).toBeVisible();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });

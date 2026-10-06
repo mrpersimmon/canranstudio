@@ -6,13 +6,13 @@ const fs=require('node:fs/promises');
 const {finishExamFrom}=require('../support/unit13-14-exam');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 
-test('挑战错答与提示分别记账，暂停刷新保留选择，不提前发证',async({page})=>{
+test('挑战错答与提示分别记账，刷新续做保留选择，不提前发证',async({page})=>{
   await page.goto('/unit13-14/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});
   await room.getByRole('button',{name:'case · yellow / hat · orange',exact:true}).click();await check.click();
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'case · yellow / hat · yellow',exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
   await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:"Her carpet's red.",exact:true}).click();
-  await room.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();await page.reload();await room.getByRole('button',{name:'继续挑战',exact:true}).click();
+  await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
   await expect(room.getByRole('button',{name:"Her carpet's red.",exact:true})).toHaveAttribute('aria-pressed','true');await check.click();
   await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,2);
   await expect(room).toContainText('首次独立答对 8 / 10');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');

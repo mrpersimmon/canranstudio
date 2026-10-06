@@ -57,7 +57,7 @@ test('8道词义题连续错答只重试，最后三题刷新不会代答，重�
 test('原文13句逐句保留，不虚构对话，主动完成后才解锁理解',async({page})=>{
  await page.goto('/unit27-28/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('书在哪里？');await expect(room.locator('.dialogue-actor')).toHaveCount(0);
  for(let i=0;i<13;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 13 句原文');
+  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 13');
   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).last().click();await expect(room.locator('.bcn').last()).toHaveText('客厅里有张桌子。');await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
  }
  await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：课文小侦探',exact:true}).click();await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();

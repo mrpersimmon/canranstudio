@@ -20,7 +20,7 @@ test('9–10 十题覆盖问候、回问、告别、缩写和观察，全部声�
   await page.goto('/unit9-10/#learn/exam'); const room = page.locator('.stage-exam');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
   for (const [i, question] of EXAM.entries()) {
-    await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+    await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(check).toBeDisabled();
     if (i === 0) {
@@ -56,7 +56,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十题的题面、长�
   await page.goto('/lesson/unit9-10/#learn/exam'); await page.evaluate(() => document.fonts.ready);
   const room = page.locator('.stage-exam');
   for (const [i, question] of EXAM.entries()) {
-    await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+    await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (const control of await room.locator('.practice-options button').all()) {
       expect(await control.evaluate(el => el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1)).toBe(true);

@@ -21,7 +21,6 @@
 .unit78-workspace .phrase-card{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;min-height:152px;padding:16px;text-align:center}
 .unit78-workspace .phrase-card>img{width:44px;height:44px}.unit78-workspace .phrase-card>strong{font-size:23px}.unit78-workspace .phrase-card>span{font-size:16px;line-height:1.4}
 .unit78-workspace .reference-card{border:2px solid var(--shelf-line);border-radius:18px;background:var(--paper);color:var(--brown);line-height:1.4}
-.unit78-workspace .stage-text .stage-tools>.btn:only-child{grid-column:1;grid-row:1;justify-self:stretch;min-height:52px;font-size:18px;padding:8px 12px}
 .unit78-workspace .activity-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:22px auto 0}
 .unit78-workspace .offline-task{max-width:680px;margin:24px auto 0;padding:16px;border:2px solid #d8bfa1;border-radius:16px;background:#fffdf6}
 .unit78-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}.unit78-workspace .offline-task summary::after{content:'＋'}.unit78-workspace .offline-task[open] summary::after{content:'−'}

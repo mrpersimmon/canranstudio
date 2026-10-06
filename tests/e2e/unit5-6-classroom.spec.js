@@ -84,8 +84,8 @@ test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听�
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await room.getByRole('button', { name: ANSWERS.exam[0], exact: true }).click();
-  await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click(); await page.reload();
-  await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+  await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload();
+  await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: ANSWERS.exam[0], exact: true })).toHaveAttribute('aria-pressed', 'true');
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await room.getByRole('button', { name: '给点线索', exact: true }).click();

@@ -88,8 +88,9 @@ test('12 张关系图均可见；390 窄屏中提示、反馈、长题目和完�
   await expect(stage).toContainText('基础题首次答对 12 / 12');
   const primary=await stage.getByRole('button',{name:'下一站：动词换装间',exact:true}).boundingBox();
   const secondary=await stage.getByRole('button',{name:'再练一轮',exact:true}).boundingBox();
-  expect(primary.width).toBe(secondary.width);
-  expect(primary.y+primary.height).toBeLessThan(secondary.y);
+  expect(primary.width).toBeGreaterThan(secondary.width);
+  expect(Math.abs(primary.y-secondary.y)).toBeLessThan(2);
+  expect(secondary.x+secondary.width).toBeLessThan(primary.x);
 });
 async function answerSubject(stage,answer) {
   await stage.getByRole('group',{name:'选择主语类别',exact:true}).getByRole('button',{name:answer,exact:true}).click();
@@ -114,10 +115,10 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   });
   await page.goto('/lesson49/#learn/doare');
   let stage=page.locator('.stage-doare');
-  await stage.getByRole('button',{name:'怎么玩',exact:true}).click();
-  await expect(page.getByRole('dialog')).toContainText('Do you live here?');
-  await expect(page.getByRole('dialog')).not.toContainText('地点用 Are');
-  await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
+  await expect(stage.locator('details.practice-example')).toContainText('Do you live here?');
+  await expect(stage.locator('details.practice-example')).not.toContainText('地点用 Are');
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
   const pairs=[
     ['Do you like meat?','本句用动词 like 表达喜好'],['Are you a teacher?','本句用 be 连接 you 和 a teacher'],
     ['Are you busy?','本句用 be 连接 you 和 busy'],['Are you at home?','本句用 be 表达“在家”'],
@@ -132,10 +133,10 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
     await choosePractice(stage,answer);
   }
   await page.goto('/lesson49/#learn/fill');stage=page.locator('.stage-fill');
-  await stage.getByRole('button',{name:'怎么玩',exact:true}).click();
-  await expect(page.getByRole('dialog')).toContainText('一般现在时');
-  await expect(page.getByRole('dialog')).toContainText('I am');
-  await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
+  await expect(stage.locator('details.practice-example')).toContainText('一般现在时');
+  await expect(stage.locator('details.practice-example')).toContainText('I am');
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
   for(const answer of ['likes','like','watches','goes','loves','walk'])await choosePractice(stage,answer);
   await choosePractice(stage,'drinks',false);
   await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
@@ -159,7 +160,7 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   await expect(stage.getByRole('img',{name:'已送给 Tom 的肉品'})).toBeVisible();
   await expect(stage.locator('.delivery-success')).toHaveText('牛排交给 Tom 了。');
   await page.goto('/lesson49/#learn/exam');await page.locator('#quizStartBtn').click();stage=page.locator('.stage-exam');
-  await expect(stage).toContainText('听订单，选出录音里出现的单词。');
+  await expect(stage).toContainText('听订单，选出录音里出现的单词');
   await stage.getByRole('button',{name:'听一遍',exact:true}).click();await choosePractice(stage,'mince',false);
   await expect(stage.getByRole('status')).toHaveText('答对了！');
   await expect(stage.getByText('看看原因',{exact:true})).toHaveCount(0);
@@ -172,7 +173,7 @@ test('同批文案：按原文、句子结构和真实交接状态解释，不�
   await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
   await stage.getByRole('button',{name:'再试一次',exact:true}).click();await choosePractice(stage,'Are you a student?');
   await choosePractice(stage,'Do you want chicken?');await choosePractice(stage,['Give','the beef','to','Lily,','please.']);
-  await stage.getByRole('button',{name:'继续第二段（5 题）',exact:true}).click();
+  await expect(stage.getByRole('button',{name:'继续第二段（5 题）',exact:true})).toHaveCount(0);
   await stage.getByRole('button',{name:'给点线索',exact:true}).click();await expect(stage.locator('.practice-hint')).toHaveText('找 to 后面的人名。');
   await choosePractice(stage,'Tom',false);
   await expect(stage.getByRole('status')).toHaveText('再看看，试一次。');
@@ -196,9 +197,9 @@ test('刷新保留本题选择、反馈和分开的辅助记录；旧题草稿�
   await expect(stage.getByRole('status')).toBeEmpty();
   await stage.getByRole('button',{name:'给点线索',exact:true}).click();
   await expect(stage.locator('.practice-hint')).toHaveText('伯德夫人。');
-  await stage.getByRole('button',{name:'怎么玩',exact:true}).click();
-  await expect(page.getByRole('dialog')).toContainText('分别为单数／复数');
-  await page.getByRole('dialog').getByRole('button',{name:'关闭',exact:true}).click();
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
+  await expect(stage.locator('details.practice-example')).toContainText('分别为单数／复数');
+  await stage.locator('details.practice-example').getByText('看例子',{exact:true}).click();
   await stage.getByRole('button',{name:'第三人称单数',exact:true}).click();
   await stage.getByRole('button',{name:'检查答案',exact:true}).click();
   await page.reload();

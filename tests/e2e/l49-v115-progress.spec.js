@@ -185,7 +185,7 @@ for (const scenario of [
       ['Give', 'the beef', 'to', 'Lily,', 'please.'], 'Sam', 'I like lamb, too.', 'want', "Tom doesn't like beef.", "I don't like lamb either."],
     score: '首次且未用额外提示答对：10 / 10'
   }
-]) test(`${scenario.label}：暂停、刷新、末题满格和重练保持真实进度`, async ({ page }) => {
+]) test(`${scenario.label}：离开、刷新、末题满格和重练保持真实进度`, async ({ page }) => {
   await fastAudio(page);
   await page.goto(`/${scenario.course}/#learn/exam`);
   const room = page.locator('.stage-exam');
@@ -198,16 +198,16 @@ for (const scenario of [
     await choose(room, answers[i]);
     await expectProgress(room, i + 1, total, null);
     if (i === 0) {
-      await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click();
+      await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0);
       await page.reload();
-      await room.getByRole('button', { name: '继续挑战', exact: true }).click();
+      await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
       await expectProgress(room, 1, total, null);
     }
     if (i < total - 1) await room.getByRole('button', { name: '下一题', exact: true }).click();
     if (i === 4 && scenario.segmented) {
-      await expect(room).toContainText('已完成 5 / 10 题');
+      await expect(room).toContainText('第 6 / 10 题');
       await page.reload();
-      await room.getByRole('button', { name: '继续第二段（5 题）', exact: true }).click();
+      await expect(room.getByRole('button', { name: '继续第二段（5 题）', exact: true })).toHaveCount(0);
       await expectProgress(room, 5, 10, 6);
     }
   }

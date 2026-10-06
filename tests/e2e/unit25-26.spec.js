@@ -9,7 +9,7 @@ test('首页新单元从厨房小图鉴开始，音标可见',async({page})=>{
 });
 
 const {DIALOGUE,ANSWERS,completeUnit2526,completeActivity,completeStory}=require('../support/unit25-26-flow');
-test('全部声音失败仍完成28题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
+test('全部声音失败仍完成27题和完整原文，15星后保存真实证书，刷新保留日期',async({page})=>{
  test.setTimeout(60000);const audio=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.route(/\.(mp3|wav|ogg)(\?|$)/,r=>r.abort());
  await page.addInitScript(()=>{globalThis.voiceCalls=0;speechSynthesis.speak=()=>{globalThis.voiceCalls++;};});
  await page.goto('/unit25-26/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await completeUnit2526(page);
@@ -44,12 +44,12 @@ test('证书空名字有友好称呼，插图加载失败不假保存，恢复�
  await page.unroute('**/assets/unit25-26/Mrs.svg');await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const pending=page.waitForEvent('download',{timeout:15000});await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await pending;await expect(dialog.getByRole('status')).toContainText('纪念图片已保存');expect(downloads).toHaveLength(1);
 });
 
-test('10组词义练习连续错答只重试，最后三题刷新不会代答，重练不重复计星',async({page})=>{
+test('7组词义练习连续错答只重试，最后三题刷新不会代答，重练不重复计星',async({page})=>{
  await page.goto('/unit25-26/#learn/listen');const room=page.locator('.stage-listen');await expect(room.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
  for(const [i,answer] of ANSWERS.listen.entries()){
-  if(i>=7)await page.reload();await expect(room).toContainText('第 '+(i+1)+' / 10 题');const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
-  if(i===0||i===9)for(let j=0;j<2;j++){await room.getByRole('button',{name:i===0?'妈妈':'在……上面',exact:true}).click();await check.click();if(j===1)await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));await room.getByRole('button',{name:'再试一次',exact:true}).click();}
-  await require('../support/units1-30-tasks').select(room,answer);await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await room.getByRole('button',{name:i===9?'完成这一站':'下一题',exact:true}).click();
+  if(i>=4)await page.reload();await expect(room).toContainText('第 '+(i+1)+' / 7 题');const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
+  if(i===3||i===6)for(let j=0;j<2;j++){await room.getByRole('button',{name:i===3?'妈妈':'橱柜',exact:true}).click();await check.click();if(j===1)await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+  await require('../support/units1-30-tasks').select(room,answer);await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await room.getByRole('button',{name:i===6?'完成这一站':'下一题',exact:true}).click();
  }
  await expect(page.locator('#starCount')).toHaveText('3');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(page.locator('#starCount')).toHaveText('3');
 });
@@ -57,7 +57,7 @@ test('10组词义练习连续错答只重试，最后三题刷新不会代答，
 test('原文12句逐句保留，不虚构对话，主动完成后才解锁理解',async({page})=>{
  await page.goto('/unit25-26/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('电炉是什么颜色？');await expect(room.locator('.dialogue-actor')).toHaveCount(0);
  for(let i=0;i<12;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 12 句原文');
+  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 12');
   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).last().click();await expect(room.locator('.bcn').last()).toHaveText('厨房里有一台电炉。');await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
  }
  await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：课文小侦探',exact:true}).click();await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();

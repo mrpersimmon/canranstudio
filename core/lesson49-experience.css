@@ -41,8 +41,6 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 .stage-heading h3{margin-right:auto}
 .lesson-workspace h3[tabindex="-1"]:focus,.practice-finish>p[tabindex="-1"]:focus{outline:none}
 .stage-heading>.workspace-back{white-space:nowrap}
-.practice-session-tools{display:flex;flex:none}
-.practice-session-tools .workspace-back{white-space:nowrap}
 .activity-surface{display:block;width:100%;margin:0!important;animation:none!important;transform:none!important}
 .activity-surface.panel,.activity-surface>.panel{border:0;box-shadow:none;border-radius:0;background:transparent;padding:0;margin:0}
 .station-actions{display:flex;justify-content:center;margin:0;padding:0;opacity:1}
@@ -106,11 +104,9 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 .morph-arrow{font-size:24px;font-weight:800;line-height:1}
 .morph-scene mark{background:var(--yellow);border:2px solid var(--brown);border-radius:8px;padding:0 5px;display:inline-block;line-height:1.3}
 .practice-audio-status{min-height:26px;font-size:15px}
-.practice-finish,.practice-pause{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 0 12px;text-align:center}
+.practice-finish{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 0 12px;text-align:center}
 .practice-finish>p{font-size:24px;font-weight:800;line-height:1.45;margin:0}
-.practice-finish>.finish-icon,.practice-pause>.shop-icon{width:64px;height:64px}
-.practice-pause h3{font-size:21px;line-height:1.5;max-width:380px;margin:0}
-.practice-pause>.btn{margin-top:10px;width:min(280px,100%);min-height:52px;font-size:18px}
+.practice-finish>.finish-icon{width:64px;height:64px}
 [data-kind="preferences"] .practice-options{grid-template-columns:repeat(3,minmax(0,1fr))}
 .practice-options .preference-option{display:flex;flex-direction:column;align-items:center;gap:12px;padding:14px 8px;font-size:18px}
 .preference-line{display:flex;align-items:center;gap:8px;text-align:left;white-space:normal}
@@ -269,7 +265,7 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 /* Sentence tiles share one layout across practice and the final challenge. */
 .practice-options.sentence-options{display:grid;gap:14px;margin:14px 0}
 .sentence-options .word-answer{height:100px;min-height:0;display:flex;flex-wrap:wrap;align-content:flex-start;align-items:flex-start;justify-content:flex-start;gap:10px;margin:0;padding:14px 6px;border:0;border-top:2px solid #dcc7ae;border-bottom:2px solid #dcc7ae;border-radius:0;background:transparent;overflow:auto;overscroll-behavior:contain}
-.sentence-options .word-answer:empty::before{content:'点词块，拼成句子';margin:auto;align-self:center;font-size:16px;color:#846951}
+.sentence-options .word-answer:empty::before{content:'…';margin:auto;align-self:center;font-size:16px;color:#846951}
 .sentence-options .wordbank{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:10px;min-height:58px;margin:0;padding:4px 0;background:transparent;border:0}
 .practice-options.sentence-options .word-token{flex:0 0 auto;width:auto;max-width:100%;min-height:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:7px 12px;border:3px solid var(--brown);border-radius:14px;background:var(--paper);box-shadow:0 3px 0 var(--brown);font-size:20px;line-height:1.2;white-space:nowrap}
 .word-token-mark{font-family:Arial,sans-serif;font-size:18px;font-weight:500;line-height:1;width:12px;flex:none;text-align:center}
@@ -303,11 +299,9 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 #certModal #certSave{grid-column:1/-1;background:var(--green)}
 #certModal #certPrint,#certModal #certClose{background:var(--paper);color:var(--brown);box-shadow:0 3px 0 var(--brown)}
 
-/* Help and the notebook stay secondary. */
-#notesDialog,#activityHelpDialog{width:min(720px,calc(100% - 24px));max-height:85dvh;overflow:auto;border:3px solid var(--brown);border-radius:22px;background:var(--paper);padding:22px;margin:auto;color:var(--brown)}
-#notesDialog::backdrop,#activityHelpDialog::backdrop{background:#4a322677}
-#helpTitle{font-size:24px;margin:20px 0}
-#activityHelpDialog .panel{border:0;box-shadow:none;padding:12px 0;margin:0}
+/* The notebook stays secondary. */
+#notesDialog{width:min(720px,calc(100% - 24px));max-height:85dvh;overflow:auto;border:3px solid var(--brown);border-radius:22px;background:var(--paper);padding:22px;margin:auto;color:var(--brown)}
+#notesDialog::backdrop{background:#4a322677}
 #notesDialog #learningNotebook{border:0;box-shadow:none;font-size:15px;margin:8px 0;padding:8px}
 .lesson-workspace #speechNotice{font-size:14px;padding:4px 14px;margin:0}
 @media(max-width:760px){
@@ -381,9 +375,9 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
  .practice-actions .btn{width:100%;min-width:0}
  .practice-finish{gap:14px;padding:12px 0}
  .practice-finish>p{font-size:22px}
- .practice-finish-actions{grid-template-columns:1fr;width:min(280px,100%);gap:14px}
- .practice-finish-actions .station-actions{grid-column:1;grid-row:1}
- .lesson-workspace .practice-finish-actions>.btn{grid-column:1;grid-row:2;width:100%;max-width:100%;justify-self:center}
+ .practice-finish-actions{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);width:100%;gap:10px}
+ .practice-finish-actions .station-actions{grid-column:2;grid-row:1}
+ .lesson-workspace .practice-finish-actions>.btn{grid-column:1;grid-row:1;width:100%;max-width:100%;justify-self:center}
  .station-actions .btn{width:100%;font-size:17px;padding:8px 12px}
  .lesson-workspace #stage{grid-template-columns:1fr 1fr;gap:10px;padding:0}
  .lesson-workspace .char{grid-row:1;justify-self:center}
@@ -423,11 +417,10 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 }
 @media(prefers-reduced-motion:reduce){.lesson-workspace .fcard-in{transition:none}}
 @media(max-width:360px){
- .stage-exam .stage-heading:has(.practice-session-tools:not([hidden])){display:grid;grid-template-columns:36px 1fr auto}
- .stage-exam .stage-heading:has(.practice-session-tools:not([hidden])) h3{grid-column:2/-1}
- .stage-exam .stage-heading:has(.practice-session-tools:not([hidden])) .practice-session-tools{grid-row:2;grid-column:2;justify-self:end}
- .stage-exam .stage-heading:has(.practice-session-tools:not([hidden]))>.workspace-back{grid-row:2;grid-column:3}
  .sentence-options .word-answer{height:144px}
  .sentence-options.sentence-long .word-answer{height:202px}
 }
 @media print{#certModal .cert-btns{display:none}}
+.lesson-workspace .practice-context{max-width:680px;margin:12px auto 18px;padding:12px 16px;border-left:3px solid var(--unit-line,#cbbba5);background:var(--unit-wash,#fff8ec);border-radius:8px;font-size:18px;line-height:1.6;text-align:left;white-space:pre-wrap}
+.lesson-workspace .practice-context p{margin:0 0 6px}
+.lesson-workspace .practice-context p:last-child{margin-bottom:0}

@@ -104,7 +104,7 @@ test('缓存入口刷新后显示已读末句，场景和阅读位置保持一�
   await expect(room.locator('.bubble-row').last()).toContainText('Is this your umbrella?');
   await page.reload();
   await expect(page.locator('#courseLoader')).toHaveCount(0);
-  await expect(room.locator('.dialogue-status')).toHaveText('8 / 12 句');
+  await expect(room.locator('.dialogue-status')).toHaveText('8 / 12');
   await expect(room.locator('.bubble-row').last()).toBeInViewport({ ratio: 1 });
   await expect(page.locator('#starCount')).toHaveText('0');
 });

@@ -64,16 +64,16 @@ test('缓存录音支持真实点播和断网分段读取，下载不增加听�
     const play = HTMLMediaElement.prototype.play;
     HTMLMediaElement.prototype.play = function (...args) { this.addEventListener('ended', () => { window.observedAudioEnded = true; }, { once: true }); return play.apply(this, args); };
   });
-  await page.goto('/lesson/unit1-2/#learn/words');
-  await page.locator('.stage-words').getByRole('button', { name: 'handbag', exact: true }).click();
+  await page.goto('/lesson/unit49-50/#learn/words');
+  await page.locator('.stage-words').getByRole('button', { name: 'butcher', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.observedAudioEnded)).toBe(true);
   await context.setOffline(true);
   const range = await page.evaluate(async () => {
-    const response = await fetch('/lesson/unit1-2/audio/l01-w03.mp3', { headers: { Range: 'bytes=0-31' } });
+    const response = await fetch('/lesson/lesson49/audio/butcher.mp3', { headers: { Range: 'bytes=0-31' } });
     return { status: response.status, bytes: (await response.arrayBuffer()).byteLength, contentRange: response.headers.get('content-range') };
   });
   expect(range.status).toBe(206); expect(range.bytes).toBe(32); expect(range.contentRange).toMatch(/^bytes 0-31\/\d+$/);
-  await page.goto('/lesson/unit1-2/#learn/listen');
+  await page.goto('/lesson/unit49-50/#learn/listen');
   await expect(page.locator('.stage-listen').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(page.locator('#starCount')).toHaveText('0');
 });

@@ -94,10 +94,6 @@
 .unit34-workspace #lessonWorkspace .stage-text .btext{display:block;margin:3px 0;min-height:0;cursor:default;font-size:22px;overflow-wrap:break-word}
 .unit34-workspace #lessonWorkspace .stage-text .bbtns{margin-top:5px}
 .unit34-workspace #lessonWorkspace .stage-text .bbtns .btn{min-height:44px;padding:4px 12px}
-.unit34-workspace #lessonWorkspace .stage-text .stage-ctrl{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:12px;max-width:500px}
-.unit34-workspace #lessonWorkspace .stage-text .stage-ctrl>.btn{order:2;flex:1}
-.unit34-workspace #lessonWorkspace .stage-text .stage-tools{display:block;flex:1}
-.unit34-workspace #lessonWorkspace .stage-text .stage-tools>.btn{width:100%;margin:0;min-height:52px;padding:8px 12px;font-size:18px}
 /* The cover uses the same room, actors and foreground objects. */
 .unit34-workspace .unit-cover{grid-template-columns:1.12fr 1fr;gap:0;padding:0;overflow:hidden}
 .unit34-workspace .unit-cover>div:last-child{padding:30px}
@@ -146,7 +142,6 @@
  .unit34-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:2/1;width:100%;height:310px;margin:0;padding:12px 12px;background:#F8F3FA;border:1px solid var(--unit-line)}
  .unit34-workspace #lessonWorkspace .stage-text .btext{font-size:20px}
  .unit34-workspace #lessonWorkspace .stage-text .bubble{max-width:94%;padding:8px 10px}
- .unit34-workspace #lessonWorkspace .stage-text .stage-tools>.btn{font-size:16px}
  .unit34-workspace .claim-receipt{height:234px;--actor-width:104px;--hand-reach:37px}
  .unit34-workspace .claim-receipt .cloakroom-desk{height:65px}
  .unit34-workspace .claim-receipt[data-beat=returned] .umbrella-prop{bottom:82px}
@@ -170,7 +165,6 @@
  body.print-writing #unitWriting p{font-size:12px;line-height:1.35;margin:8px 0}
 }
 
-.unit34-workspace #lessonWorkspace .stage-text .stage-ctrl[hidden]{display:none}
 .unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:144px}
 @media(max-width:580px){.unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:202px}}
 @media(max-width:360px){.unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:260px}}

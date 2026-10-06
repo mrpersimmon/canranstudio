@@ -2,12 +2,12 @@
 const { test, expect } = require('@playwright/test');
 const { EXAMS, choose } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
-test('1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句听辨', async ({ page }) => {
+test('1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句阅读', async ({ page }) => {
   test.setTimeout(60000);
   await page.goto('/unit1-2/#learn/exam'); const room = page.locator('.stage-exam');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '8');
   for (const [i, question] of EXAMS['1-2'].entries()) {
-    await expect(room.locator('.practice-content h3')).toContainText(question.prompt);
+    await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
     if (i === 0) {
       await choose(room,{answer:{fills:['Yes, it is.','Yes?']}}); await check.click();

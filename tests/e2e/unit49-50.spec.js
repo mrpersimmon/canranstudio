@@ -305,18 +305,18 @@ test('新增九词使用可播放的本地录音与完整图卡，听辨录音�
   await expect(room.getByRole('status').filter({hasText:'答对了！'})).toBeVisible();
 });
 
-test('采购挑战延续原课的标题旁暂停，暂停和继续保留本题选择', async ({page})=>{
+test('采购挑战移除暂停，刷新保留未提交选择', async ({page})=>{
   await page.goto('/unit49-50/#learn/exam');
   const room=page.locator('.stage-exam'),heading=room.locator('.stage-heading');
   await room.getByRole('button',{name:'mince',exact:true}).click();
-  await heading.getByRole('button',{name:'暂停，稍后继续',exact:true}).click();
-  await expect(room).toContainText('已暂停 · 第 1 / 5 题');
-  await expect(heading.getByRole('button',{name:'暂停，稍后继续',exact:true})).toBeHidden();
+  await expect(heading.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);
+  await expect(room).toContainText('第 1 / 5 题');
+  await expect(heading.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);
   await page.reload();
-  await room.getByRole('button',{name:'继续挑战',exact:true}).click();
+  await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
   await expect(room.getByRole('button',{name:'mince',exact:true})).toHaveAttribute('aria-pressed','true');
   await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
-  await expect(heading.getByRole('button',{name:'暂停，稍后继续',exact:true})).toBeVisible();
+  await expect(heading.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);
 });
 
 test('从长页直接切到另一活动时停止旧录音，迟到的结束事件不推进课文',async ({page})=>{

@@ -17,7 +17,7 @@ function tasks(root, files) {
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
     'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
-    'browser-unit12': browser(['tests/e2e/unit1-2']),
+    'browser-unit12': browser(['tests/e2e/unit1-2','tests/e2e/unit-thirteen-types.spec.js']),
     'browser-unit34': browser(['tests/e2e/unit3-4']),
     'browser-unit56': browser(['tests/e2e/unit5-6']),
     'browser-units1-6-exam': browser(['tests/e2e/unit1-2-exam.spec.js', 'tests/e2e/unit3-4-exam.spec.js', 'tests/e2e/unit5-6-exam.spec.js', 'tests/e2e/units1-6-exam-layout.spec.js', 'tests/e2e/units1-6-exam-upgrade.spec.js', 'tests/e2e/unit-dedup.spec.js']),
@@ -30,7 +30,7 @@ function tasks(root, files) {
     'browser-unit1920': browser(['tests/e2e/unit19-20']),
     'browser-unit2122': browser(['tests/e2e/unit21-22']),
     'browser-unit2324': browser(['tests/e2e/unit23-24']),
-    'browser-unit2526': browser(['tests/e2e/unit25-26']),
+    'browser-unit2526': browser(['tests/e2e/unit25-26','tests/e2e/unit-thirteen-types.spec.js']),
     'browser-unit2728': browser(['tests/e2e/unit27-28']),
     'browser-unit2930': browser(['tests/e2e/unit29-30']),
     'browser-unit3132': browser(['tests/e2e/unit31-32']),
@@ -41,6 +41,7 @@ function tasks(root, files) {
     'browser-certificates': browser(['tests/e2e/unit49-50-certificate.spec.js', 'tests/e2e/unit35-36.spec.js', '--grep', '证书|领奖|打印|图像加载']),
     'browser-units1-30-tasks': browser(['tests/e2e/units1-30-tasks.spec.js', 'tests/e2e/units1-30-revision.spec.js', 'tests/e2e/units1-30-scene-cues.spec.js', 'tests/e2e/units-room-tasks.spec.js', 'tests/e2e/units1-30-acceptance.spec.js']),
     'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js', 'tests/e2e/l49-focus.spec.js']),
+    'browser-common-interactions': browser(['tests/e2e/common-interactions.spec.js', 'tests/e2e/unit-thirteen-types.spec.js']),
     'browser-state': browser(['tests/e2e/home-progress.spec.js', 'tests/e2e/l49-progress.spec.js']),
     'browser-layout': browser(['tests/e2e/accessibility.spec.js', 'tests/e2e/mobile-release.spec.js']),
     'browser-changed': browser(changedTests.length ? changedTests : ['tests/e2e/smoke.spec.js']),
@@ -56,6 +57,7 @@ function select(files) {
   selected.push('unit');
   if (code.some(file => /^tests\/e2e\/.*\.spec\.js$/.test(file))) selected.push('browser-changed');
   const runtime = code.filter(file => !file.startsWith('tests/'));
+  if (runtime.some(file => /^(core\/(?:lesson49-(?:practice|task-inputs|experience)|unit-theme)\.(?:js|css)|unit[^/]*\/(?:unit|content)\.js)$/.test(file))) selected.push('browser-common-interactions');
   if (runtime.length) selected.push('browser-smoke');
   if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-course-cache');
   if (runtime.some(file => /audio|feedback|\.mp3$/.test(file))) selected.push('browser-audio');

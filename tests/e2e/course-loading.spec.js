@@ -49,14 +49,14 @@ for (const fault of ['404', 'html', 'corrupt', 'font']) test(fault + ' 失败留
   for (const [url, count] of before) if (!/\/handbag\.svg$|\.woff2$/.test(url)) expect(requests.get(url)).toBe(count);
 });
 
-test('浏览器禁止保存资源仍能在本次会话断网换词卡，不假称永久保存', async ({ browser }) => {
+test('浏览器禁止保存资源仍能在本次会话断网换词卡，不假称永久保存', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ serviceWorkers: 'block' });
   await context.addInitScript(() => {
     Object.defineProperty(window, 'indexedDB', { get() { throw new DOMException('Blocked', 'SecurityError'); } });
     Object.defineProperty(window, 'caches', { get() { throw new DOMException('Blocked', 'SecurityError'); } });
   });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4173/lesson/unit29-30/#learn/words', { waitUntil: 'domcontentloaded' });
+  await page.goto(new URL('/lesson/unit29-30/#learn/words', baseURL).href, { waitUntil: 'domcontentloaded' });
   await expect(page.getByText('这次可正常学习，下次可能需要重新准备。', { exact: true })).toBeVisible();
   await context.setOffline(true);
   const words = page.locator('.stage-words');
@@ -78,7 +78,7 @@ for (const id of entries) test(`${id} 完整准备后显示原有课程，必需
   await expect.poll(() => page.locator('img:visible').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   expect(errors).toEqual([]);
   expect(failures).toEqual([]);
-  if (/^unit/.test(id) && !['unit1-2', 'unit49-50'].includes(id)) expect(voices).toEqual([]);
+  if (/^unit/.test(id) && id !== 'unit49-50') expect(voices).toEqual([]);
 });
 
 test('整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节', async ({ page }) => {

@@ -33,7 +33,6 @@
 .classroom-review #lessonWorkspace .paged-reference:has(>.reference-card:only-child){grid-template-columns:1fr}
 .classroom-review #lessonWorkspace .sentence-options .word-answer{min-height:130px}
 .classroom-review #lessonWorkspace .practice-finish-actions{justify-content:center}
-.classroom-review #lessonWorkspace .practice-session-tools{display:flex;justify-content:flex-end;margin:0 0 12px;}
 @media(max-width:800px){
  .classroom-review #lessonWorkspace .stage-text .dialogue-stage.classroom-stage{display:flex;flex-direction:column;height:auto;gap:12px}
  .classroom-review #lessonWorkspace .stage-text .classroom-illustration{width:100%;height:242px;flex:none;display:flex;flex-direction:column;align-items:center}
