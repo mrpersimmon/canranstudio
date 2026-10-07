@@ -56,12 +56,12 @@ async function learner(f, name = '李明', pinyin = 'liming', forwarded) {
   return { ...student, ...card.body.accounts[0], admin: admin.cookie };
 }
 
-test('初始密码随机且独立：拼音不能抢先激活，同名学生不能共用初始密码', async () => {
+test('初始密码为拼音加三位随机数字：单独拼音不能激活，同名学生不能共用初始密码', async () => {
   const f = await fixture();
   try {
     const a = await learner(f), b = await learner(f);
     expect(a.initialPassword).not.toBe('liming');
-    expect(a.initialPassword).toMatch(/^[A-Za-z0-9_-]{16}$/);
+    expect(a.initialPassword).toMatch(/^liming\d{3}$/);
     expect(b.initialPassword).not.toBe(a.initialPassword);
     expect(a.initialPasswordExpiresAt).toBeGreaterThan(Date.now());
     expect((await f.call('login', { studentNumber: a.studentNumber, password: 'liming' })).status).toBe(401);
@@ -164,7 +164,7 @@ test('旧拼音账号安全升级：只轮换待激活账号，保留正式密�
     const admin = await f.call('admin/login', { username: 'teacher', password: adminPassword });
     const pendingCard = (await f.call('admin/accounts', { studentId: pending.id }, admin.cookie)).body.accounts[0];
     expect(pendingCard.studentNumber).toBe(pending.studentNumber); expect(pendingCard.initialPassword).not.toBe('liming');
-    expect(pendingCard.initialPassword).toMatch(/^[A-Za-z0-9_-]{16}$/);
+    expect(pendingCard.initialPassword).toMatch(/^liming\d{3}$/);
     expect((await f.call('login', { studentNumber: pending.studentNumber, password: 'liming' })).status).toBe(401);
     expect((await f.call('me', undefined, oldSetup)).status).toBe(401);
     expect((await f.call('me', undefined, oldNormal)).body.student.id).toBe(formal.id);

@@ -97,6 +97,10 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
+      if (relative === 'fonts/maple-mono-nl-semibold.woff2') {
+        response.writeHead(200, { 'Content-Type': 'font/woff2', 'Cache-Control': 'public, max-age=86400' });
+        return response.end(await fs.readFile(path.join(root, 'server/public', relative)));
+      }
       if (relative === 'core/course-banners.css') { response.writeHead(200, {'Content-Type':'text/css', 'Cache-Control':'no-cache'}); return response.end(await fs.readFile(path.join(root,relative))); }
       if (relative === 'core/subpath-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
       if (BASE === '/' && relative === 'core/course-package-service-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
@@ -117,7 +121,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (relative === 'api/login' && input) {
           const number = String(input.studentNumber || '').trim().toLowerCase(), password = String(input.password || '');
           throttle(request, 'student', number);
-          if (number.length > 32 || password.length > 120) credentialFailure('student', number, 401, '学号或密码不正确，或账号已停用');
+          if (number.length > 32 || password.length > 128) credentialFailure('student', number, 401, '学号或密码不正确，或账号已停用');
           const student = store.studentLogin(number, password);
           if (!student) credentialFailure('student', number, 401, '学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');
           store.authThrottle.clear('student', number);
@@ -164,7 +168,9 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             return json(response, { students: store.createStudents(rows, input.classId) });
           }
           if (relative === 'api/admin/accounts' && input) {
-            const selected = store.students().filter(s => input.studentId ? s.id === input.studentId : s.classId === input.classId);
+            if (input.studentIds !== undefined && (!Array.isArray(input.studentIds) || !input.studentIds.length || input.studentIds.length > 1000 || input.studentIds.some(id => typeof id !== 'string') || new Set(input.studentIds).size !== input.studentIds.length)) throw fail(400, '请选择 1–1000 位不同的学生');
+            const selected = store.students().filter(s => input.studentIds ? input.studentIds.includes(s.id) : input.studentId ? s.id === input.studentId : s.classId === input.classId);
+            if (input.studentIds && selected.length !== input.studentIds.length) throw fail(404, '学生名单已变化，请刷新后重试');
             if (!selected.length) throw fail(404, '没有找到学生');
             return json(response, { accounts: selected.map(s => ({ ...s, ...store.initialCredential(s.id), className: store.classes().find(c => c.id === s.classId)?.name, url: origin + BASE })) });
           }
@@ -172,6 +178,10 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             if (!validPinyin(input.pinyin)) throw fail(400, '请核对姓名拼音，用小写字母，不加空格和声调；ü 用 v');
             if (!store.resetPassword(input.studentId, input.pinyin)) throw fail(404, '学生不存在');
             return json(response, { ok: true });
+          }
+          if (relative === 'api/admin/reset-passwords' && input) {
+            const count = await store.resetPasswords(input.studentIds, () => session(request, 'admin'));
+            return json(response, { ok: true, count });
           }
           throw fail(404, '管理操作不存在');
         }

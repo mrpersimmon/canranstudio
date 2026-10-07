@@ -14,7 +14,7 @@ test('脚本不可用时禁用登录提交，不把密码写入地址', async ({
   } finally { await context.close(); }
 });
 
-test('重名学生独立学号及随机初始密码，首次登录先改密才能学习', async ({ page, browser }) => {
+test('重名学生独立学号及拼音加三位随机数字初始密码，首次登录先改密才能学习', async ({ page, browser }) => {
   await page.goto('/lesson/admin/');
   await page.getByLabel('管理员账号').fill('teacher');
   await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');
@@ -40,7 +40,31 @@ test('重名学生独立学号及随机初始密码，首次登录先改密才�
   await expect(page.locator('.initial-password')).toHaveCount(3);
   const initialPasswords = await page.locator('.initial-password').allTextContents();
   expect(new Set(initialPasswords).size).toBe(3);
-  expect(initialPasswords.every(value => /^[A-Za-z0-9_-]{16}$/.test(value))).toBe(true);
+  expect(initialPasswords[0]).toMatch(/^duanxiaodong\d{3}$/);
+  expect(initialPasswords[1]).toMatch(/^duanxiaodong\d{3}$/);
+  expect(initialPasswords[2]).toMatch(/^liming\d{3}$/);
+  expect(await page.evaluate(async () => {
+    const faces = await document.fonts.load('600 22px "Maple Mono NL"');
+    return faces.length > 0 && faces.every(face => face.status === 'loaded');
+  })).toBe(true);
+  for (const selector of ['.account-number', '.initial-password']) {
+    expect(await page.locator(selector).first().evaluate(el => getComputedStyle(el).fontFamily)).toContain('Maple Mono NL');
+  }
+  // Embedded browsers can expose print() but silently return without a dialog.
+  await page.evaluate(() => { window.originalAccountPrint = window.print; window.accountPrintCalls = 0; window.print = () => { window.accountPrintCalls++; }; });
+  const accountViewport = page.viewportSize();
+  try {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole('button', { name: '打印账号', exact: true }).click();
+    await expect(page.getByRole('status')).toContainText('如未出现打印窗口');
+    await expect(page.getByRole('status')).toContainText('Chrome 或 Safari');
+    await expect(page.getByRole('status')).toBeInViewport();
+    expect(await page.evaluate(() => window.accountPrintCalls)).toBe(1);
+    await expect(page.getByRole('button', { name: '打印账号', exact: true })).toBeEnabled();
+  } finally {
+    await page.evaluate(() => { window.print = window.originalAccountPrint; delete window.originalAccountPrint; delete window.accountPrintCalls; });
+    await page.setViewportSize(accountViewport);
+  }
   await expect(page.locator('.initial-expiry')).toHaveCount(3);
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('.learning-card').first()).toContainText('仅可登录一次');

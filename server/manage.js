@@ -7,7 +7,15 @@ async function main(){
   const store=openStore(directory);
   try{
    if(command==='bootstrap'&&store.hasAdmin())throw Error('管理员已存在。明确恢复账号时使用 reset-admin。');
-   const username='admin',password=crypto.randomBytes(24).toString('base64url');store.setAdmin(username,password);
+   if(argument && argument !== '--password-stdin')throw Error('指定密码请使用 --password-stdin，从标准输入读取；不要把密码写入命令参数。');
+   let password=crypto.randomBytes(24).toString('base64url');
+   if(argument==='--password-stdin'){
+    if(process.stdin.isTTY)throw Error('请通过标准输入提供密码，不要直接在终端回显。');
+    const chunks=[];let bytes=0;for await(const chunk of process.stdin){bytes+=chunk.length;if(bytes>1024)throw Error('输入的密码过长');chunks.push(chunk);}
+    password=Buffer.concat(chunks).toString('utf8').replace(/\r?\n$/,'');
+    if(/[\r\n]/.test(password))throw Error('密码必须为一行');
+   }
+   const username=store.adminUsername()||'admin';store.setAdmin(username,password);
    const file=path.join(directory,'admin-first-login.txt');await fs.writeFile(file,'管理员账号：'+username+'\n管理员密码：'+password+'\n',{mode:0o600});await fs.chmod(file,0o600);console.log('登录信息已写入受保护的本地文件：'+file);
   }finally{store.close();}return;
  }

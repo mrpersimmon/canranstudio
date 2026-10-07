@@ -11,7 +11,11 @@
 
 班级访问分支另运行 `npm run test:login`（4181 端口，备份恢复 4194、公开缓存迁移 4195、学习卡升级 4196）。现行测试覆盖真实学号登录、首次强制改密、老师查找/重置、主动改密、多音字校正、同名不同号、旧码停用与成绩迁移，以及原管理、权限、缓存与成果同步。此前 21 个不同页面行为用例的两轮结果见[账号验收](../docs/butcher-version/2026-09-25-1151-v1.1-学号密码实施与验收.md)。本次新增 3 个设置弹窗用例：`npm run test:login -- tests/login/settings.spec.js` 覆盖全部十六个单元的桌面／手机居中、文字对比度、窄屏确认、关闭保留操作及切换／退出，详情见[弹窗修复记录](../docs/butcher-version/2026-09-25-1643-v1.0-学习设置弹窗修复与验收.md)。`npm run build:login` 核对当前二十一个受保护单元；本分支的 `build:static` 拒绝发布。以下无身份旧课件测试只用于内部教学／缓存回归，不能当作生产权限验收。完整发布还需真实手机与线上检查。
 
-账号安全回归：`npm run test:login -- tests/login/security.spec.js tests/login/student-accounts.spec.js tests/login/recovery.spec.js`。覆盖随机一次性密码、并发重放、到期／重启不续期、旧库迁移、待领取凭据的备份恢复、真实页面打印和找回流程，以及代理来源分桶、伪造头与等价地址防绕过。使用临时虚构账号，不读取或改动真实学生数据；实际 Nginx 和手机微信验收另列。
+账号安全回归：`npm run test:login -- tests/login/security.spec.js tests/login/student-accounts.spec.js tests/login/recovery.spec.js`。覆盖拼音加三位随机数字的初始／重置密码（含前导零、同拼音新账号不重复）、并发重放、到期／重启不续期、旧库迁移、待领取凭据的备份恢复、真实页面打印和找回流程，以及代理来源分桶、伪造头与等价地址防绕过。使用临时虚构账号，不读取或改动真实学生数据；实际 Nginx 和手机微信验收另列。
+
+打印窗口另外验证：在普通 Chrome 中点“打印账号”，确认实际打印预览打开，随后取消；A4 PDF 导出不能替代这个检查。`student-accounts.spec.js` 还模拟内置浏览器的 `window.print()` 静默返回，确保页面显示改用 Chrome／Safari 的提示，按钮可重试。
+
+账号批量操作：`node --test tests/unit/admin-accounts.test.js tests/unit/server-security.test.js`，核对新建／重置密码为拼音加三位数字（含前导零）、同拼音新账号不重复、单人／批量重置的会话撤销、未选学生与成果保留、失败整批回滚、并发改密和管理员指定密码的标准输入路径。页面另检查“所有学生”／班级／搜索的全选、半选、取消、确认、手机宽度，以及重置后的旧密码拒绝和首次改密。A4 导出实际 PDF：普通账号每页 10 张，长字段每页 6／4 张，不缺人、不重复、不跨页裁切；账号页验证本地 Maple Mono NL 字体成功加载，目视检查大小写及 `I/l/L/1`、`O/0` 字形。相关课程选项数量只统计 `#courses`，不把学生选择框计入开放课程。
 
 security-version 另有 `node --test tests/unit/server-security.test.js tests/unit/preview-security.test.js`，验证授权记录有界、旧 token 保留、持久登录冷却、限流记录容量、私有文件权限和预览路径隔离。账号专项增加跨来源/重启冷却、老师恢复和真实浏览器 CSP；预览修改连同 `course-loading.spec.js`、`lesson-deployment.spec.js`、`landmark-review.spec.js` 检查正常路由。真实 Nginx 模板检查为 `NGINX_BIN=/实际路径/nginx OPENSSL_BIN=/实际路径/openssl node --test tests/deploy/login-nginx.test.js`，未配置二进制时明确跳过。详见[安全加固方案](../docs/security-version/2026-09-28-安全加固方案与验证.md)。
 
