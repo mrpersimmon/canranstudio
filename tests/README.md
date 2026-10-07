@@ -9,6 +9,8 @@
 
 # 怎样检查修改
 
+2026-10-07 上线前验收范围：用户确认当前尚无正式学生，五项历史课程升级用例不纳入当前验收：`units1-6-exam-upgrade.spec.js` 的 Lesson 1–2、3–4，`unit11-12-upgrade.spec.js` 的 classroom、short-exam 两项，以及 `units17-30-upgrade.spec.js` 的 Lesson 25–26。它们明确标为跳过（skipped），不计为通过；测试内容和运行时迁移逻辑保留。新学生创建、首次改密、正常学习、刷新与跨设备同步、密码重置及备份恢复仍照常验收。
+
 班级访问分支另运行 `npm run test:login`（4181 端口，备份恢复 4194、公开缓存迁移 4195、学习卡升级 4196）。现行测试覆盖真实学号登录、首次强制改密、老师查找/重置、主动改密、多音字校正、同名不同号、旧码停用与成绩迁移，以及原管理、权限、缓存与成果同步。此前 21 个不同页面行为用例的两轮结果见[账号验收](../docs/butcher-version/2026-09-25-1151-v1.1-学号密码实施与验收.md)。本次新增 3 个设置弹窗用例：`npm run test:login -- tests/login/settings.spec.js` 覆盖全部十六个单元的桌面／手机居中、文字对比度、窄屏确认、关闭保留操作及切换／退出，详情见[弹窗修复记录](../docs/butcher-version/2026-09-25-1643-v1.0-学习设置弹窗修复与验收.md)。`npm run build:login` 核对当前二十一个受保护单元；本分支的 `build:static` 拒绝发布。以下无身份旧课件测试只用于内部教学／缓存回归，不能当作生产权限验收。完整发布还需真实手机与线上检查。
 
 账号安全回归：`npm run test:login -- tests/login/security.spec.js tests/login/student-accounts.spec.js tests/login/recovery.spec.js`。覆盖拼音加三位随机数字的初始／重置密码（含前导零、同拼音新账号不重复）、并发重放、到期／重启不续期、旧库迁移、待领取凭据的备份恢复、真实页面打印和找回流程，以及代理来源分桶、伪造头与等价地址防绕过。使用临时虚构账号，不读取或改动真实学生数据；实际 Nginx 和手机微信验收另列。

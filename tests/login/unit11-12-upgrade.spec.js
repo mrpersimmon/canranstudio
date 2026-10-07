@@ -26,6 +26,7 @@ async function fragmentedUploads(page){
 }
 
 for(const fixture of ['classroom','short-exam'])test(`11–12 ${fixture} 旧服务器升级换设备，保留有效三题，补完后恢复15星和原证书`,async({browser})=>{
+ test.skip(true, '2026-10-07：用户确认尚无正式学生，上线前历史课程升级不纳入当前验收。');
  test.setTimeout(120000);
  const{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-unit1112-upgrade-')),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data');

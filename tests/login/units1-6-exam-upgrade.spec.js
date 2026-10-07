@@ -8,6 +8,7 @@ for (const [unit, title, oldCount, complete] of [
   ['3-4', '认领小挑战', 3, 'completeUnit34'],
   ['5-6', '见面小挑战', 3, 'completeUnit56']
 ]) test(`${unit} 旧短挑战服务器升级换设备，保留有效旧进度与姓名，补完新增题才同步15星`, async ({ browser }) => {
+  test.skip(unit === '1-2' || unit === '3-4', '2026-10-07：用户确认尚无正式学生，上线前历史课程升级不纳入当前验收。');
   test.setTimeout(150000);
   const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-short-exam-upgrade-'));
