@@ -21,7 +21,7 @@ function completedSnapshot(book){
  for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt'])if(book.activity?.[id])activity[id]=book.activity[id];
  return {version:1,groups,records,activity};
 }
-function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
+function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const completed=completedSnapshot(JSON.parse(value)),snapshot=JSON.stringify(completed);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
 async function flush(){if(!pending||flushing||access?.preview)return;flushing=true;const sent=pending;try{const result=await api('progress',sent);if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock('学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}if(pending===sent){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}notifyPending();}catch{syncStatus('已保存到本机 · 联网后同步');}finally{flushing=false;if(pending&&pending!==sent)setTimeout(flush,400);}}
 function lock(message,retry=()=>location.reload()){
  locked=true;document.documentElement.setAttribute('data-access-locked','');
@@ -46,7 +46,7 @@ window.CanranAccessReady=(async()=>{
   if(oldGeneration!==access.progress.generation){local=null;pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}
   write(prefix+key,JSON.stringify(mergeRemote(local,access.progress.value)));write(generationKey,String(access.progress.generation));
  }
- const initial=JSON.parse(read(prefix+key)||'{}');lastSnapshot=JSON.stringify([completedSnapshot(initial),CanranLearningObserver.snapshot(initial)]);installStorage();return access;
+ lastSnapshot=JSON.stringify(completedSnapshot(JSON.parse(read(prefix+key)||'{}')));installStorage();return access;
 })();
 window.CanranAccessReady.catch(error=>{const show=()=>lock(error.status===403?error.message:'请联网后重新进入课程。');if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',show,{once:true});else show();});
 channel?.addEventListener('message',()=>lock('学习身份已改变，请重新进入课程。'));

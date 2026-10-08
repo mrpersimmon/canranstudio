@@ -61,7 +61,7 @@ async function createApp({ root = path.resolve(__dirname, '../../..'), dataDir =
     return { student, className: store.classes().find(c => c.id === student.classId)?.name || '', courses: store.allowed(student.id), preview: false, auth };
   }
   const json = (res, value, status = 200) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(JSON.stringify(value)); };
-  async function publicFile(res, file, type, status = 200) { res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' }).end(await fs.readFile((['access-worker.js','access-client.js'].includes(file) ? path.join(root,'server/public',file) : path.join(__dirname,'public',file)))); }
+  async function publicFile(res, file, type, status = 200) { res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' }).end(await fs.readFile((file==='access-worker.js' ? path.join(root,'server/public',file) : path.join(__dirname,'public',file)))); }
   function notice(res, title, code) { res.writeHead(code, { 'Content-Type': 'text/html; charset=utf-8' }).end(`<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/lesson/portal.css"><title>${escape(title)}</title><main><section class="login panel"><h1>${escape(title)}</h1><a class="button primary" href="/lesson/">返回课程</a></section></main></html>`); }
   const server = http.createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'no-store'); response.setHeader('X-Content-Type-Options', 'nosniff'); response.setHeader('Referrer-Policy', 'no-referrer'); response.setHeader('X-Frame-Options', 'DENY');

@@ -6,6 +6,7 @@ const crypto = require('node:crypto');
 const { UNITS } = require('./catalog');
 const { suggestPinyin, validPinyin } = require('./student-credentials');
 const { createAuthThrottle } = require('./auth-throttle');
+const { learningStore } = require('./learning-store');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const token = () => crypto.randomBytes(32).toString('base64url');
 const id = () => crypto.randomUUID();
@@ -92,6 +93,7 @@ function openStore(directory) {
         .run(initial.encoded, initial.sealed, initial.expires, row.id);
     }
   });
+  const learning = learningStore(db);
   const student = who => db.prepare('SELECT id,name,classId,active,studentNumber,mustChangePassword FROM students WHERE id=?').get(who);
   const credentials = who => db.prepare('SELECT studentNumber,loginPinyin,passwordHash,mustChangePassword FROM students WHERE id=?').get(who);
   const authThrottle = createAuthThrottle(db);
@@ -116,11 +118,13 @@ function openStore(directory) {
     const code = crypto.randomBytes(12).toString('hex').toUpperCase(), who = id(), initial = newInitialPassword(newStudentSecret(spelling));
     db.prepare('INSERT INTO students(id,name,classId,codeHash,card,studentNumber,loginPinyin,passwordHash,initialPassword,initialPasswordExpiresAt) VALUES(?,?,?,?,?,?,?,?,?,?)')
       .run(who, name, classId, hash(code), seal(code), nextNumber(spelling[0]), spelling, initial.encoded, initial.sealed, initial.expires);
+    learning.student(who);
     return student(who);
   };
   return {
     directory,
     authThrottle,
+    learning,
     close: () => db.close(),
     hasAdmin:()=>!!db.prepare('SELECT 1 FROM admin LIMIT 1').get(),
     adminUsername:()=>db.prepare('SELECT username FROM admin LIMIT 1').get()?.username,
@@ -144,7 +148,7 @@ function openStore(directory) {
     logout(raw) { if (raw) db.prepare('DELETE FROM sessions WHERE hash=?').run(hash(raw)); },
     classes: allClasses,
     createClass(name) { const row = { id: id(), name, courses: [] }; db.prepare('INSERT INTO classes VALUES (?,?,?)').run(row.id, row.name, '[]'); return row; },
-    updateClass(classId, name, courses) { if (!Array.isArray(courses) || courses.some(course => !UNITS.includes(course))) throw new Error('只能开放现行教学单元'); return db.prepare('UPDATE classes SET name=?,courses=? WHERE id=?').run(name, JSON.stringify([...new Set(courses)]), classId).changes; },
+    updateClass(classId, name, courses) { if (!Array.isArray(courses) || courses.some(course => !UNITS.includes(course))) throw new Error('只能开放现行教学单元'); return transaction(() => { const changed=db.prepare('UPDATE classes SET name=?,courses=? WHERE id=?').run(name, JSON.stringify([...new Set(courses)]), classId).changes; if(changed)learning.courses(classId,courses); return changed; }); },
     student,
     students: () => db.prepare('SELECT id,name,classId,active,studentNumber,loginPinyin,mustChangePassword FROM students ORDER BY rowid').all(),
     createStudents(rows, classId) { return transaction(() => rows.map(row => insertStudent(row.name, classId, row.pinyin))); },
@@ -214,7 +218,7 @@ function openStore(directory) {
         return rows.length;
       });
     },
-    updateStudent(who, name, classId, active) { return db.prepare('UPDATE students SET name=?,classId=?,active=? WHERE id=?').run(name, classId, active ? 1 : 0, who).changes; },
+    updateStudent(who, name, classId, active) { return transaction(() => { const prior=student(who); const changed=db.prepare('UPDATE students SET name=?,classId=?,active=? WHERE id=?').run(name, classId, active ? 1 : 0, who).changes; if(changed&&(prior.classId!==classId||(!prior.active&&active)))learning.reassigned(who);return changed; }); },
     allowed(who) { const row = db.prepare('SELECT courses FROM classes JOIN students ON students.classId=classes.id WHERE students.id=? AND students.active=1').get(who); return row ? JSON.parse(row.courses) : []; },
     grant(session, course, now) { return transaction(() => {
       // Retain old IDs for queued completed-work uploads. Only new entries for
@@ -230,6 +234,8 @@ function openStore(directory) {
     activeGrant(session, course, now) { return db.prepare('SELECT * FROM grants WHERE session=? AND course=? AND expires>? ORDER BY expires DESC LIMIT 1').get(session.hash,course,now); },
     progress(who, course) { const row = db.prepare('SELECT generation,value FROM progress WHERE student=? AND course=?').get(who, course); return row ? { generation: row.generation, value: JSON.parse(row.value) } : { generation: 0, value: {} }; },
     saveProgress(who, course, generation, value) { db.prepare('INSERT INTO progress VALUES (?,?,?,?) ON CONFLICT(student,course) DO UPDATE SET generation=excluded.generation,value=excluded.value').run(who, course, generation, JSON.stringify(value)); },
+    saveLearning(who, course, generation, value, records, advanced) { return transaction(() => { this.saveProgress(who,course,generation,value);return learning.sync(who,course,generation,records,advanced); }); },
+    resetLearning(who, course, generation) { return transaction(() => { this.saveProgress(who,course,generation,{});learning.reset(who,course,generation); }); },
     validGrant(grantId, who, course) { return !!db.prepare('SELECT id FROM grants WHERE id=? AND student=? AND course=?').get(grantId, who, course); }
   };
 }

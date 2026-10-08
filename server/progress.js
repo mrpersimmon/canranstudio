@@ -108,5 +108,16 @@ function normalize(value, unit, course) {
   return result;
 }
 function merge(left,right){return {version:1,groups:{...left.groups,...right.groups},records:{...left.records,...right.records},activity:{...left.activity,...right.activity,unitCompleted:{...left.activity?.unitCompleted,...right.activity?.unitCompleted}}};}
-function summary(value,unit,course){const saved=normalize(value,unit,course).activity.unitCompleted;let stars=0,next='certificate';for(const stage of unit.stages){stars+=Math.floor(stage.required.filter(id=>saved[id]).length/stage.required.length*3);}for(const stage of unit.stages){const unfinished=stage.required.find(id=>!saved[id]);if(unfinished){next=unfinished;break;}}return {stars,next:stars===0?'words':next};}
+function summary(value,unit,course,award=null){
+  const saved=normalize(value,unit,course).activity.unitCompleted;
+  let stars=0,next='certificate';
+  for(const stage of unit.stages)stars+=Math.floor(stage.required.filter(id=>saved[id]).length/stage.required.length*3);
+  for(const stage of unit.stages){const unfinished=stage.required.find(id=>!saved[id]);if(unfinished){next=unfinished;break;}}
+  const versioned=Array.isArray(unit.reward?.zones);
+  if(versioned)stars=unit.reward.zones.filter(zone=>award?.zones?.[zone.id]).length;
+  return {stars,maxStars:versioned?unit.reward.zones.length:unit.stages.length*3,
+    rewardRule:versioned?'first-correct-v1':'completion-v1',rewardEdition:versioned?unit.reward.edition:null,
+    firstFullStarAt:versioned?(award?.firstFullStarAt||null):null,
+    next:Object.keys(saved).length?next:'words'};
+}
 module.exports={definition,normalize,merge,summary};

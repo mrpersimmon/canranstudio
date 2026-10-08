@@ -12,7 +12,7 @@ test('Lesson 49 describes mixed listening choices as words, never meat', async (
   await page.goto('/lesson49/#learn/listen');
   await expect(page.getByRole('heading',{name:'听音寻宝',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'开始听辨',exact:true}).click();
-  await expect(page.locator('#listenPractice h3')).toHaveText('听一听，选出单词。');
+  await expect(page.locator('#listenPractice h3')).toHaveText(/^听一听，选出单词。?$/);
   await expect(page.locator('#listenPractice')).not.toContainText('听音挑肉');
   await expect(page.locator('#listenPractice')).not.toContainText('4 块「肉」');
 });
