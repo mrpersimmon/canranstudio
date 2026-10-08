@@ -7,12 +7,12 @@ const { UNITS, RETIRED } = require('./catalog');
 const { createCoursePackages } = require('../scripts/course-packages');
 const progress = require('./progress');
 const learning = require('./learning');
+const { createManagement } = require('./management');
 const {retainPackages}=require('./bundles');
-const { suggestPinyin, validPinyin, passwordProblem } = require('./student-credentials');
+const { passwordProblem } = require('./student-credentials');
 const { clientAddress } = require('./client-address');
 const { normalizeBasePath } = require('../scripts/public-base-path');
 const fail = (status, message) => Object.assign(new Error(message), { status });
-const cleanName = value => typeof value === 'string' && value.trim().length > 0 && value.trim().length <= 60 ? value.trim() : (() => { throw fail(400, '名称请填写 1–60 个字'); })();
 const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const PORTAL_CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 // The course loader executes integrity-checked cached scripts inline. Keep that
@@ -54,6 +54,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   }
   function cookie(request, role) { return request.headers.cookie?.split(';').map(v => v.trim()).find(v => v.startsWith('canran_' + role + '='))?.split('=')[1]; }
   function session(request, role, required = true) { const value = store.lookupSession(cookie(request, role), role, Date.now()); if (!value && required) throw fail(role==='admin'&&store.lookupSession(cookie(request,'student'),'student',Date.now())?403:401, '请先登录'); return value; }
+  const management = createManagement({ store, cookie, definitions, descriptions, origin, basePath: BASE });
   function studentSession(request, allowSetup = false) {
     const raw = cookie(request, 'student');
     const auth = store.lookupSession(raw, 'student', Date.now()) || store.lookupSession(raw, 'student-setup', Date.now());
@@ -74,7 +75,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   }
   function identity(request, preview) {
     if (preview) {
-      session(request, 'admin'); const group = store.classes().find(c => c.id === preview); if (!group) throw fail(404, '班级不存在');
+      const group = management.group(management.authenticate(request), preview);
       return { student: { id: 'preview-' + group.id, name: '班级预览', classId: group.id }, className: group.name, courses: group.courses, preview: true };
     }
     const { auth, student } = studentSession(request);
@@ -94,7 +95,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (!pathname.startsWith(BASE) || relative.split('/').some(part => part === '..' || part.startsWith('.'))) throw fail(404, '页面不存在');
       if (relative === 'health') return json(response, { ok: true, access: 'class-v1' });
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
-      if (['portal.css','portal.js','admin-learning.js','admin-learning.css','access-client.js','learning-observer.js','access-worker.js'].includes(relative)) {
+      if (['portal.css','portal.js','admin-learning.js','admin-learning.css','admin-teachers.js','admin-teachers.css','access-client.js','learning-observer.js','access-worker.js'].includes(relative)) {
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
@@ -110,13 +111,31 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         const input = request.method === 'POST' ? await body(request) : null;
         if (request.method !== 'GET' && request.method !== 'POST') throw fail(405, '不支持此操作');
         if (relative === 'api/admin/login' && input) {
-          const username = String(input.username || ''), password = String(input.password || '');
-          throttle(request, 'admin', username);
-          if (username.length > 128 || password.length > 256) credentialFailure('admin', username, 401, '账号或密码不正确');
-          const who = store.adminLogin(username, password);
-          if (!who) credentialFailure('admin', username, 401, '账号或密码不正确');
-          store.authThrottle.clear('admin', username);
-          setCookie(response, 'admin', store.session('admin', who, Date.now()), 43200);
+          const supplied = String(input.username || ''), password = String(input.password || '');
+          const isTeacher = supplied !== store.adminUsername() && /^[a-z]1\d{7}$/i.test(supplied.trim());
+          const username = isTeacher ? supplied.trim().toLowerCase() : supplied, kind = isTeacher ? 'teacher' : 'admin';
+          throttle(request, kind, username);
+          if (username.length > 128 || password.length > 256) credentialFailure(kind, username, 401, '账号或密码不正确');
+          const who = isTeacher ? store.teachers.login(username, password) : store.adminLogin(username, password);
+          if (!who) credentialFailure(kind, username, 401, '账号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系管理员重置。');
+          store.authThrottle.clear(kind, username); store.logout(cookie(request, 'admin'));
+          const setup = isTeacher && who.mustChangePassword;
+          setCookie(response, 'admin', setup ? who.setupToken : store.session(isTeacher ? 'teacher' : 'admin', isTeacher ? who.id : who, Date.now()), setup ? Math.max(0, Math.floor((who.setupExpiresAt - Date.now()) / 1000)) : 43200);
+          return json(response, { ok: true, mustChangePassword: !!setup });
+        }
+        if (relative === 'api/admin/password' && input) {
+          const who = management.authenticate(request, true);
+          if (who.role !== 'teacher') throw fail(403, '此入口用于老师修改自己的密码');
+          const id = who.teacher.id;
+          throttle(request, 'teacher-password', id);
+          const problem = passwordProblem(input.password, { loginPinyin: who.teacher.loginPinyin, teacherNumber: who.teacher.teacherNumber });
+          if (problem) throw fail(400, problem);
+          if (input.password !== input.confirmPassword) throw fail(400, '两次输入的新密码不一致');
+          const old = String(input.currentPassword || '');
+          if (who.auth.role !== 'teacher-setup' && (old.length > 128 || !store.teachers.checkPassword(id, old))) credentialFailure('teacher-password', id, 400, '当前密码不正确');
+          if (store.teachers.checkPassword(id, input.password)) throw fail(400, '新密码不能与原密码相同');
+          store.teachers.changePassword(id, input.password, who.auth);
+          setCookie(response, 'admin', store.session('teacher', id, Date.now()), 43200);
           return json(response, { ok: true });
         }
         if (relative === 'api/login' && input) {
@@ -146,65 +165,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           return json(response, { ok: true });
         }
         if (relative === 'api/logout' && input) { const role = input.admin ? 'admin' : 'student'; store.logout(cookie(request, role)); setCookie(response, role, '', 0); return json(response, { ok: true }); }
-        if (relative.startsWith('api/admin/')) {
-          session(request, 'admin');
-          if (relative === 'api/admin/learning' && !input) {
-            const filters=Object.fromEntries(url.searchParams);
-            if(filters.q?.length>100 || (filters.course&&!UNITS.includes(filters.course)) || (filters.status&&!learning.statuses.includes(filters.status)))throw fail(400,'查询条件不正确');
-            return json(response,learning.dashboard(store.learning.read(filters),definitions,descriptions,filters));
-          }
-          const learningRoute=relative.match(/^api\/admin\/students\/([^/]+)\/learning(?:\/(unit\d+-\d+))?$/);
-          if(learningRoute&&!input){
-            const who=store.student(learningRoute[1]);if(!who)throw fail(404,'学生不存在');
-            const dataset=store.learning.read({studentId:who.id}),view=learning.studentView(dataset.students[0],dataset,definitions,descriptions);
-            if(learningRoute[2]){const course=view.courses.find(c=>c.id===learningRoute[2]);if(!course)throw fail(404,'没有这门课程的学习记录或开放权限');return json(response,{student:view.student,course:learning.courseRecord(course)});}
-            return json(response,learning.studentReport(view));
-          }
-          if (relative === 'api/admin/state' && !input) return json(response, { classes: store.classes(), students: store.students(), courses: descriptions });
-          if (relative === 'api/admin/student-preview' && input) {
-            const names = String(input.names || '').split('\n').filter(name => name.trim()).map(cleanName);
-            if (!names.length || names.length > 100) throw fail(400, '每次填写 1–100 位学生');
-            return json(response, { students: names.map(name => ({ name, pinyin: suggestPinyin(name) })) });
-          }
-          if (relative === 'api/admin/classes' && input) {
-            if (input.id) {
-              const group = store.classes().find(c => c.id === input.id);
-              if (!group) throw fail(404, '班级不存在');
-              if (input.name === undefined && input.courses === undefined) throw fail(400, '请填写班级名称或选择开放课程');
-              const name = input.name === undefined ? group.name : cleanName(input.name);
-              const courses = input.courses === undefined ? group.courses : input.courses;
-              if (!Array.isArray(courses) || courses.some(id => !UNITS.includes(id))) throw fail(400, '只能开放现行教学单元');
-              if (!store.updateClass(group.id, name, courses)) throw fail(404, '班级不存在');
-              return json(response, { ok: true, class: { id: group.id, name, courses: [...new Set(courses)] } });
-            }
-            return json(response, store.createClass(cleanName(input.name)));
-          }
-          if (relative === 'api/admin/students' && input) {
-            if (!store.classes().some(c => c.id === input.classId)) throw fail(400, '请选择班级');
-            if (input.id) { if (!store.updateStudent(input.id, cleanName(input.name), input.classId, input.active === true)) throw fail(404, '学生不存在'); return json(response, { ok: true }); }
-            if (!Array.isArray(input.students) || !input.students.length || input.students.length > 100) throw fail(400, '每次填写 1–100 位学生，并核对姓名拼音');
-            const rows = input.students.map(row => ({ name: cleanName(row.name), pinyin: row.pinyin }));
-            if (rows.some(row => !validPinyin(row.pinyin))) throw fail(400, '姓名拼音请用小写字母，不加空格和声调；ü 用 v');
-            return json(response, { students: store.createStudents(rows, input.classId) });
-          }
-          if (relative === 'api/admin/accounts' && input) {
-            if (input.studentIds !== undefined && (!Array.isArray(input.studentIds) || !input.studentIds.length || input.studentIds.length > 1000 || input.studentIds.some(id => typeof id !== 'string') || new Set(input.studentIds).size !== input.studentIds.length)) throw fail(400, '请选择 1–1000 位不同的学生');
-            const selected = store.students().filter(s => input.studentIds ? input.studentIds.includes(s.id) : input.studentId ? s.id === input.studentId : s.classId === input.classId);
-            if (input.studentIds && selected.length !== input.studentIds.length) throw fail(404, '学生名单已变化，请刷新后重试');
-            if (!selected.length) throw fail(404, '没有找到学生');
-            return json(response, { accounts: selected.map(s => ({ ...s, ...store.initialCredential(s.id), className: store.classes().find(c => c.id === s.classId)?.name, url: origin + BASE })) });
-          }
-          if (relative === 'api/admin/reset-password' && input) {
-            if (!validPinyin(input.pinyin)) throw fail(400, '请核对姓名拼音，用小写字母，不加空格和声调；ü 用 v');
-            if (!store.resetPassword(input.studentId, input.pinyin)) throw fail(404, '学生不存在');
-            return json(response, { ok: true });
-          }
-          if (relative === 'api/admin/reset-passwords' && input) {
-            const count = await store.resetPasswords(input.studentIds, () => session(request, 'admin'));
-            return json(response, { ok: true, count });
-          }
-          throw fail(404, '管理操作不存在');
-        }
+        if (relative.startsWith('api/admin/')) return json(response, await management.handle(request, url, relative, input));
         if (relative === 'api/me' && !input) {
           if (!url.searchParams.get('preview')) {
             const { student, auth } = studentSession(request, true);
@@ -260,9 +221,9 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         response.setHeader('Content-Security-Policy', COURSE_CSP);
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : entry); return;
       }
-      const auth = session(request, 'student', false), admin = session(request, 'admin', false);
+      const auth = session(request, 'student', false), admin = management.authenticate(request, false, false);
       if (!admin && store.lookupSession(cookie(request, 'student'), 'student-setup', Date.now())) throw fail(403, '请先设置新密码');
-      const allowed = admin ? UNITS : auth ? [...store.allowed(auth.subject), ...store.activeCourses(auth, Date.now())] : [];
+      const allowed = [...new Set([...(admin ? management.courses(admin) : []), ...(auth ? [...store.allowed(auth.subject), ...store.activeCourses(auth, Date.now())] : [])])];
       if (relative === 'course-index.json') {
         if (!auth && !admin) throw fail(401, '请先登录');
         return json(response, { ...packages.index, courses: Object.fromEntries(Object.entries(packages.index.courses).filter(([id]) => allowed.includes(id))) });

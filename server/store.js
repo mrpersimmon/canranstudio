@@ -7,6 +7,7 @@ const { UNITS } = require('./catalog');
 const { suggestPinyin, validPinyin } = require('./student-credentials');
 const { createAuthThrottle } = require('./auth-throttle');
 const { learningStore } = require('./learning-store');
+const { teacherStore } = require('./teacher-store');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const token = () => crypto.randomBytes(32).toString('base64url');
 const id = () => crypto.randomUUID();
@@ -36,7 +37,7 @@ function openStore(directory) {
     CREATE TABLE IF NOT EXISTS progress (student TEXT NOT NULL, course TEXT NOT NULL, generation INTEGER NOT NULL DEFAULT 0, value TEXT NOT NULL DEFAULT '{}', PRIMARY KEY(student, course));
   `);
   const keyFile = path.join(directory, 'card-key');
-  if (!fs.existsSync(keyFile) && db.prepare('SELECT 1 FROM students LIMIT 1').get()) { db.close(); throw Error('学习卡密钥缺失，请恢复与数据库配套的 card-key；不会生成新密钥覆盖旧卡。'); }
+  if (!fs.existsSync(keyFile) && (db.prepare('SELECT 1 FROM students LIMIT 1').get() || (db.prepare("SELECT 1 FROM sqlite_master WHERE name='teachers'").get() && db.prepare('SELECT 1 FROM teachers LIMIT 1').get()))) { db.close(); throw Error('学习卡密钥缺失，请恢复与数据库配套的 card-key；不会生成新密钥覆盖旧卡。'); }
   if (!fs.existsSync(keyFile)) fs.writeFileSync(keyFile, crypto.randomBytes(32), { mode: 0o600, flag: 'wx' });
   fs.chmodSync(keyFile, 0o600);
   const key = fs.readFileSync(keyFile);
@@ -51,8 +52,8 @@ function openStore(directory) {
   };
   const nextNumber = prefix => {
     const sequence = Number(db.prepare('INSERT INTO student_numbers DEFAULT VALUES').run().lastInsertRowid);
-    if (sequence > 99999999) throw Error('学号已达到当前位数上限');
-    return prefix + String(sequence).padStart(8, '0');
+    if (sequence > 9999999) throw Error('学生学号已达到 0 开头的编号上限');
+    return prefix + '0' + String(sequence).padStart(7, '0');
   };
   const newInitialPassword = password => {
     return { encoded: encodePassword(password), sealed: seal(password), expires: Date.now() + INITIAL_PASSWORD_TTL };
@@ -109,10 +110,12 @@ function openStore(directory) {
   };
   const createSession = (role, subject, now, deadline = Infinity) => {
     db.prepare('DELETE FROM sessions WHERE expires<=?').run(now);
-    const raw = token(), duration = role === 'admin' ? 12 * 3600000 : role === 'student-setup' ? 15 * 60000 : 30 * 86400000;
+    const raw = token(), duration = ['admin','teacher'].includes(role) ? 12 * 3600000 : ['student-setup','teacher-setup'].includes(role) ? 15 * 60000 : 30 * 86400000;
     db.prepare('INSERT INTO sessions VALUES (?,?,?,?)').run(hash(raw), role, subject, Math.min(now + duration, deadline));
     return raw;
   };
+  const teachers = teacherStore({ db, transaction, seal, unseal, encodePassword, passwordMatches, createSession, authThrottle });
+  try { teachers.checkIntegrity(); } catch { db.close(); throw Error('老师密码密钥与数据库不匹配，请恢复配套备份。'); }
   const insertStudent = (name, classId, spelling) => {
     if (!validPinyin(spelling)) throw Error('请核对姓名拼音');
     const code = crypto.randomBytes(12).toString('hex').toUpperCase(), who = id(), initial = newInitialPassword(newStudentSecret(spelling));
@@ -125,13 +128,15 @@ function openStore(directory) {
     directory,
     authThrottle,
     learning,
+    teachers,
     close: () => db.close(),
     hasAdmin:()=>!!db.prepare('SELECT 1 FROM admin LIMIT 1').get(),
     adminUsername:()=>db.prepare('SELECT username FROM admin LIMIT 1').get()?.username,
-    checkIntegrity:()=>{if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok')throw Error('数据库完整性检查未通过');for(const row of db.prepare('SELECT card,initialPassword FROM students').all()){unseal(row.card);if(row.initialPassword)unseal(row.initialPassword);}},
+    checkIntegrity:()=>{teachers.checkIntegrity();if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok')throw Error('数据库完整性检查未通过');for(const row of db.prepare('SELECT card,initialPassword FROM students').all()){unseal(row.card);if(row.initialPassword)unseal(row.initialPassword);}},
     async backup(destination) { await backup(db, destination); fs.chmodSync(destination, 0o600); },
     setAdmin(username, password) {
       if (!username || typeof password !== 'string' || password.length < 12 || password.length > 256) throw new Error('账号不能为空，管理员密码请使用 12–256 个字符');
+      if (teachers.list().some(t=>t.teacherNumber===username.trim().toLowerCase())) throw Error('管理员账号不能与老师工号重复');
       db.exec('BEGIN IMMEDIATE');
       try { db.prepare('DELETE FROM admin').run(); db.prepare('INSERT INTO admin VALUES (?,?)').run(username, encodePassword(password)); db.prepare("DELETE FROM sessions WHERE role='admin'").run(); authThrottle.clearAdmin(); db.exec('COMMIT'); } catch (error) { db.exec('ROLLBACK'); throw error; }
     },
@@ -139,6 +144,7 @@ function openStore(directory) {
     session: createSession,
     lookupSession(raw, role, now) {
       const auth = raw && db.prepare('SELECT * FROM sessions WHERE hash=? AND role=? AND expires>?').get(hash(raw), role, now);
+      if (auth && ['teacher','teacher-setup'].includes(role) && !teachers.validSession(auth.subject, role === 'teacher-setup', now)) return null;
       if (auth && role === 'student-setup') {
         const row = db.prepare('SELECT active,mustChangePassword,initialPassword,initialPasswordExpiresAt FROM students WHERE id=?').get(auth.subject);
         if (!row?.active || !row.mustChangePassword || row.initialPassword || !(row.initialPasswordExpiresAt > now)) return null;

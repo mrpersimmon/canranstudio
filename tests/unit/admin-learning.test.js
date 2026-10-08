@@ -105,13 +105,25 @@ test('HTTP endpoints enforce admin/owner/generation boundaries and retire follow
   const payload={studentId:student.id,course:'unit13-14',generation:0,grant:enter.grant,value:partial,observations:observer.snapshot(partial)};
   assert.equal((await call('progress',another,payload)).status,403);assert.equal((await call('progress',learner,payload,'https://other.invalid')).status,403);
   assert.equal((await call('progress',learner,payload)).status,200);
-  const details=await(await call('admin/students/'+student.id+'/learning/unit13-14',admin)).json();assert.equal(details.course.status,'in-progress');assert.equal(details.course.stars,0);assert.ok(!/"(?:selection|password|groups|contentSignature|submitted|correct|completedActivities|totalActivities|activities|lastRecordAt|enteredAt|resetAt|percent)"\s*:/.test(JSON.stringify(details)));
+  const details=await(await call('admin/students/'+student.id+'/learning/unit13-14',admin)).json();assert.equal(details.course.status,'in-progress');assert.equal(details.course.stars,0);assert.ok(Number.isFinite(details.course.lastLearnedAt));assert.ok(!/"(?:selection|password|groups|contentSignature|submitted|correct|completedActivities|totalActivities|activities|lastRecordAt|enteredAt|resetAt|percent)"\s*:/.test(JSON.stringify(details)));
+  store.saveProgress(other.id,'unit13-14',0,completeBook());
+  for(const [query,ids] of [
+   ['status=in-progress,completed&sort=stars-desc',[other.id,student.id]],
+   ['status=in-progress&status=completed&sort=stars-asc',[student.id,other.id]],
+   ['status=in-progress,in-progress',[student.id]],
+   ['status=completed',[other.id]],
+   ['status=&sort=stars-desc',[other.id,student.id]]
+  ]){
+   const response=await call('admin/learning?'+query,admin);assert.equal(response.status,200);
+   assert.deepEqual((await response.json()).rows.map(row=>row.student.id),ids,query);
+  }
+  for(const query of ['status=completed,unknown','status=completed&status=unknown','status=in-progress,,completed','sort=unsupported'])assert.equal((await call('admin/learning?'+query,admin)).status,400,query);
   const notes={id:'http-followup-001',course:'unit13-14',status:'waiting',nextDate:'2026-11-10',note:'Private teacher note'};
   assert.equal((await call('admin/students/'+student.id+'/followup',learner,notes)).status,403);
   assert.equal((await call('admin/students/'+student.id+'/followup',admin,notes)).status,404);
   assert.ok(!/followup|Private teacher note/.test(JSON.stringify(await(await call('admin/students/'+student.id+'/learning',admin)).json())));
   await call('progress/reset',learner,{course:'unit13-14'});assert.deepEqual(await(await call('progress',learner,payload)).json(),{stale:true,generation:1});
-  const current=await(await call('admin/students/'+student.id+'/learning/unit13-14',admin)).json();assert.equal(current.course.status,'not-started');assert.equal(current.course.stars,0);assert.equal(view(store,student).courses[0].previousGenerations,1);
+  const current=await(await call('admin/students/'+student.id+'/learning/unit13-14',admin)).json();assert.equal(current.course.status,'not-started');assert.equal(current.course.stars,0);assert.equal(current.course.lastLearnedAt,null);assert.equal(view(store,student).courses[0].previousGenerations,1);
   store.updateStudent(student.id,student.name,group.id,false);assert.equal((await call('progress',learner,{...payload,generation:1})).status,403);
   assert.equal((await call('admin/students/not-found/learning',admin)).status,404);assert.equal((await call('admin/learning?course=bad',admin)).status,400);assert.equal((await call('admin/learning?status=unknown',admin)).status,400);
  }finally{await new Promise(resolve=>server.close(resolve));}
@@ -159,8 +171,13 @@ test('class/course status filters distinguish zero-star work, completion, empty 
  const rows=(filters={})=>learning.dashboard(store.learning.read({active:'all'}),definitions,descriptions,filters).rows;
  for(const [status,id]of [['not-started',student.id],['in-progress',started.id],['completed',finished.id]]){
   const filtered=rows({status});assert.equal(filtered.length,1);assert.equal(filtered[0].student.id,id);
-  assert.deepEqual(Object.keys(filtered[0].summary).sort(),['rewards','status']);
+  assert.deepEqual(Object.keys(filtered[0].summary).sort(),['lastLearnedAt','rewards','status']);
  }
+ for(const selected of [['not-started','in-progress'],['in-progress','completed'],['not-started','completed'],['not-started','in-progress','completed']]){
+  const filtered=rows({status:selected.join(',')});assert.equal(filtered.length,selected.length);
+  assert.deepEqual(new Set(filtered.map(row=>row.summary.status)),new Set(selected));
+ }
+ assert.equal(rows({status:''}).length,4);
  assert.equal(rows({status:'in-progress'})[0].summary.rewards[0].stars,0);
  assert.equal(rows().find(row=>row.student.classId===other.id).summary.status,null);
  store.updateClass(group.id,group.name,[course,'unit1-2']);
@@ -168,4 +185,61 @@ test('class/course status filters distinguish zero-star work, completion, empty 
  assert.equal(rows({course,status:'completed'})[0].student.id,finished.id);
  store.updateStudent(started.id,started.name,group.id,false);
  assert.equal(rows({course,status:'in-progress'})[0].student.active,0);
+});
+
+
+test('star ordering covers the full query before pagination, keeps ties stable and follows the course scope',t=>{
+ const {store,student,group}=fixture(t),course='unit13-14';
+ const students=[student,...store.createStudents(Array.from({length:29},()=>({name:'同名学生',pinyin:'tongmingxuesheng'})),group.id)];
+ store.saveProgress(students[1].id,course,0,book());
+ store.saveProgress(students[27].id,course,0,book());
+ store.saveProgress(students[29].id,course,0,completeBook());
+ const zero=students.filter((_,index)=>![1,27,29].includes(index));
+ const dashboard=filters=>learning.dashboard(store.learning.read({active:'all'}),definitions,descriptions,filters);
+ for(const [sort,expected]of [
+  ['stars-asc',[...zero,students[1],students[27],students[29]]],
+  ['stars-desc',[students[29],students[1],students[27],...zero]]
+ ]){
+  const first=dashboard({course,sort}),second=dashboard({course,sort,page:2});
+  assert.equal(first.rows.length,25);assert.equal(second.rows.length,5);
+  assert.deepEqual([...first.rows,...second.rows].map(row=>row.student.id),expected.map(row=>row.id),sort);
+ }
+ assert.equal(dashboard({}).rows[0].student.id,student.id);
+ assert.deepEqual(dashboard({course,status:'in-progress,completed',sort:'stars-desc'}).rows.map(row=>row.student.id),[students[29].id,students[1].id,students[27].id]);
+ store.updateClass(group.id,group.name,[course,'unit1-2']);
+ store.saveProgress(students[1].id,'unit1-2',0,completeBook('unit1-2'));
+ assert.equal(dashboard({sort:'stars-desc'}).rows[0].student.id,students[1].id);
+ assert.equal(dashboard({course,sort:'stars-desc'}).rows[0].student.id,students[29].id);
+ store.updateClass(group.id,group.name,[course]);
+ assert.equal(dashboard({sort:'stars-desc'}).rows[0].student.id,students[29].id);
+});
+
+
+test('last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports',t=>{
+ const {store,student,group}=fixture(t),course='unit13-14';
+ const record=learning.submissions(observer.snapshot(book()),definitions[course],course)[0];
+ const report=()=>learning.studentReport(view(store,student));
+ const summary=filters=>learning.dashboard(store.learning.read(),definitions,descriptions,filters).rows[0].summary;
+ store.learning.enter(student.id,course,0,1000);
+ assert.equal(summary({}).lastLearnedAt,null);
+ store.learning.sync(student.id,course,0,[{...record,correct:0,firstCorrect:0}],false,2000);
+ assert.equal(summary({}).lastLearnedAt,2000);assert.equal(summary({}).status,'in-progress');
+ store.learning.enter(student.id,course,0,3000);
+ store.learning.sync(student.id,course,0,[{...record,correct:0,firstCorrect:0}],false,4000);
+ assert.equal(report().courses[0].lastLearnedAt,2000);
+ store.learning.sync(student.id,course,0,[{...record,correct:0,firstCorrect:0,attempts:2}],false,5000);
+ assert.equal(summary({}).lastLearnedAt,5000); // Trying again counts even when no stars are earned.
+ store.updateClass(group.id,group.name,[course,'unit1-2']);
+ const full=completeBook('unit1-2'),reading={activity:{unitCompleted:{text:full.activity.unitCompleted.text},unitDialogue:full.activity.unitDialogue}};
+ store.saveProgress(student.id,'unit1-2',0,reading);store.learning.sync(student.id,'unit1-2',0,[],true,7000);
+ assert.equal(summary({}).lastLearnedAt,7000);assert.equal(summary({course}).lastLearnedAt,5000);
+ store.updateClass(group.id,group.name,[course]);
+ assert.equal(summary({}).lastLearnedAt,5000);assert.equal(summary({course:'unit1-2'}).lastLearnedAt,7000);
+ store.resetLearning(student.id,course,1);
+ assert.equal(summary({}).lastLearnedAt,null);assert.equal(summary({}).status,'not-started');
+ store.saveProgress(student.id,course,1,book());
+ assert.equal(summary({}).lastLearnedAt,null);assert.equal(summary({}).status,'in-progress');
+ store.updateClass(group.id,group.name,[]);assert.equal(summary({}).lastLearnedAt,null);
+ const retired=learning.courseSummary({unit:definitions[course],course,meta:{lastRecordAt:9000},observations:[{...record,revision:'retired-content',receivedAt:9000}]});
+ assert.equal(retired.status,'not-started');assert.equal(retired.lastLearnedAt,null);
 });

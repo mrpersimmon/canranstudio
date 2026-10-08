@@ -42,8 +42,9 @@ function learningStore(db) {
       db.prepare('INSERT INTO learning_courses VALUES (?,?,?,?,NULL,NULL,?) ON CONFLICT(student,course) DO UPDATE SET generation=excluded.generation,enteredAt=excluded.enteredAt,lastRecordAt=NULL,lastProgressAt=NULL,resetAt=excluded.resetAt').run(who,course,generation,null,now);
     },
     award(who,course,edition){return hasAwards?JSON.parse(db.prepare('SELECT value FROM unit_awards WHERE student=? AND course=? AND edition=?').get(who,course,edition)?.value||'null'):null;},
-    read({studentId='',classId='',q='',active='active'}={}){
+    read({studentId='',classId='',q='',active='active',classIds=null}={}){
       const where=[],args=[];
+      if(classIds){where.push(classIds.length?'s.classId IN ('+classIds.map(()=>'?').join(',')+')':'0');args.push(...classIds);}
       if(studentId){where.push('s.id=?');args.push(studentId);}else{
         if(classId){where.push('s.classId=?');args.push(classId);}
         if(q){where.push('(instr(lower(s.name),lower(?))>0 OR instr(s.studentNumber,lower(?))>0)');args.push(q,q);}
@@ -53,8 +54,8 @@ function learningStore(db) {
       const rows=(select,join='')=>db.prepare(select+' FROM students s '+join+filter).all(...args);
       return {
         students:rows('SELECT s.id,s.name,s.studentNumber,s.classId,s.active,l.observedFrom','JOIN learning_students l ON l.student=s.id'),
-        classes:db.prepare('SELECT * FROM classes ORDER BY rowid').all().map(r=>({...r,courses:JSON.parse(r.courses)})),
-        availability:db.prepare('SELECT * FROM learning_availability').all(),
+        classes:db.prepare('SELECT * FROM classes ORDER BY rowid').all().filter(r=>!classIds||classIds.includes(r.id)).map(r=>({...r,courses:JSON.parse(r.courses)})),
+        availability:db.prepare('SELECT * FROM learning_availability').all().filter(r=>!classIds||classIds.includes(r.classId)),
         progress:rows('SELECT p.*','JOIN progress p ON p.student=s.id').map(r=>({...r,value:JSON.parse(r.value)})),
         meta:rows('SELECT p.*','JOIN learning_courses p ON p.student=s.id'),
         observations:db.prepare('SELECT p.student,p.course,p.generation,p.revision,p.activity,p.question,MAX(p.correct) AS correct,MAX(p.receivedAt) AS receivedAt FROM students s JOIN learning_submissions p ON p.student=s.id'+filter+' GROUP BY p.student,p.course,p.generation,p.revision,p.activity,p.question').all(...args),
