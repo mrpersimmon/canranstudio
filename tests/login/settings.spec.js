@@ -1,6 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, studentLogin, signIn } = require('./helpers');
+const { saveCourses, adminLogin, createStudent, studentLogin, signIn } = require('./helpers');
 
 async function appearance(dialog) {
   return dialog.evaluate(element => {
@@ -78,7 +78,7 @@ test('16 个单元的学习设置在桌面和手机均清晰居中，Escape 返�
   const account=await createStudent(page,'设置全课班','界面体验',[/Lesson 1–2 /]);
   await page.getByRole('button',{name:'管理 设置全课班'}).click();
   for(const box of await page.locator('#courses').getByRole('checkbox').all())await box.check();
-  await page.getByRole('button',{name:'保存开放课程'}).click();
+  await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('开放课程已保存');
   const student=await studentLogin(browser,account);
   try{

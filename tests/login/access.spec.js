@@ -1,7 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 
-const {adminLogin,createStudent,fillLogin,setPassword,signIn,studentLogin}=require('./helpers');
+const { saveCourses, adminLogin,createStudent,fillLogin,setPassword,signIn,studentLogin}=require('./helpers');
 
 test('未登录先看到学号密码入口，不能直接进入教学单元', async ({ page }) => {
   await page.goto('/lesson/');
@@ -39,7 +39,7 @@ test('管理员可以创建班级并只开放 Lesson 1–2', async ({ page }) =>
   await page.getByRole('button', { name: '创建班级', exact: true }).click();
   await page.getByRole('button', { name: '管理 A 班', exact: true }).click();
   await page.getByRole('checkbox', { name: /Lesson 1–2 / }).check();
-  await page.getByRole('button', { name: '保存开放课程' }).click();
+  await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('已保存');
   await expect(page.locator('#courses').getByRole('checkbox')).toHaveCount(21);
   await expect(page.getByRole('checkbox', { name: /Lesson 1–2 / })).toBeChecked();
@@ -84,9 +84,9 @@ test('两小时静默续期、三十分钟后台回归核验，收回权限不�
  await a.page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});await a.page.clock.fastForward(1801000);
  await a.page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});await expect.poll(()=>checks).toBe(2);
  await expect(choice).toHaveAttribute('aria-pressed','true');
- await page.getByRole('checkbox',{name:/Lesson 13–14 /}).uncheck();await page.getByRole('button',{name:'保存开放课程'}).click();await expect(page.getByRole('status')).toContainText('开放课程已保存');
+ await page.getByRole('checkbox',{name:/Lesson 13–14 /}).uncheck();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');
  await a.page.clock.fastForward(7201000);await expect(a.page.locator('#accessGate')).toContainText('这节课还没向你的班级开放');
- await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await page.getByRole('button',{name:'保存开放课程'}).click();await expect(page.getByRole('status')).toContainText('开放课程已保存');
+ await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');
  await a.page.locator('#accessGate').getByRole('button',{name:'再试一次'}).click();await expect(a.page.locator('#accessGate')).toHaveCount(0);await expect(choice).toHaveAttribute('aria-pressed','true');await a.context.close();
 });
 
@@ -110,11 +110,11 @@ test('完整无配音课程成果与证书同步，重开后旧设备不能恢�
 
 test('转班、停用、恢复、重置密码和空班预览',async({page,browser})=>{
  await adminLogin(page);const code=await createStudent(page,'调班前','可可',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);await completeActivity(a.page,'colours','/lesson');await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
- await page.getByLabel('新班级名称').fill('调班后');await page.getByRole('button',{name:'创建班级',exact:true}).click();await expect(page.getByRole('heading',{name:'调班后 · 开放课程'})).toBeVisible();
+ await page.getByLabel('新班级名称').fill('调班后');await page.getByRole('button',{name:'创建班级',exact:true}).click();await expect(page.getByRole('heading',{name:'调班后 · 班级设置'})).toBeVisible();
  await page.getByRole('link',{name:'预览这个班'}).click();await expect(page.getByRole('heading',{name:'老师还没开放课程'})).toBeVisible();await expect(page.locator('.course')).toHaveCount(0);await page.getByRole('link',{name:'返回班级管理'}).click();
  await page.getByRole('button',{name:'管理 调班前',exact:true}).click();await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('当前班级').selectOption({label:'调班后'});await page.getByRole('button',{name:'保存学生信息'}).click();
  await a.page.goto('/lesson/');await expect(a.page.getByRole('heading',{name:'老师还没开放课程'})).toBeVisible();
- await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await page.getByRole('button',{name:'保存开放课程'}).click();await a.page.getByRole('button',{name:'刷新课程'}).click();await expect(a.page.locator('.course')).toContainText('3 / 15');
+ await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await a.page.getByRole('button',{name:'刷新课程'}).click();await expect(a.page.locator('.course')).toContainText('3 / 15');
  await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('false');await page.getByRole('button',{name:'保存学生信息'}).click();await a.page.reload();await expect(a.page.getByRole('status')).toContainText('学生账号已停用');
  await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('true');await page.getByRole('button',{name:'保存学生信息'}).click();await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByRole('button',{name:'重置密码',exact:true}).click();await page.getByRole('button',{name:'确认重置密码'}).click();const resetPassword=await page.locator('.initial-password').textContent();expect(resetPassword).not.toBe(code.initialPassword);
  await a.page.reload();await fillLogin(a.page,code);await expect(a.page.getByRole('status')).toContainText('学号或密码不正确');await fillLogin(a.page,code,resetPassword);await setPassword(a.page,'Reset-class-journey-2026');await expect(a.page.locator('.course')).toContainText('3 / 15');await a.context.close();
@@ -123,7 +123,7 @@ test('转班、停用、恢复、重置密码和空班预览',async({page,browse
 test('16 个教学单元冷启动、图片完整、词卡和一道真实作答，手机界面',async({page,browser})=>{
  test.setTimeout(120000);await adminLogin(page);const code=await createStudent(page,'课程回归班','小童',[/Lesson 1–2 /]);
  // The helper checks matching labels one by one, so select all in the management UI.
- await page.getByRole('button',{name:'管理 课程回归班'}).click();for(const box of await page.locator('#courses').getByRole('checkbox').all())await box.check();await page.getByRole('button',{name:'保存开放课程'}).click();await expect(page.getByRole('status')).toContainText('开放课程已保存');
+ await page.getByRole('button',{name:'管理 课程回归班'}).click();for(const box of await page.locator('#courses').getByRole('checkbox').all())await box.check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');
  const a=await studentLogin(browser,code);await a.page.setViewportSize({width:390,height:844});const errors=[];a.page.on('pageerror',e=>errors.push(e.message));
  const answers={'unit1-2':'Excuse me!','unit3-4':'My umbrella, please.', 'unit5-6':'Sophie','unit7-8':'工程师','unit9-10':'成年女子','unit11-12':'Whose','unit13-14':'颜色','unit15-16':'雇员；受雇的人','unit17-18':'man','unit19-20':'累的；疲倦的','unit21-22':'给','unit23-24':'哪些','unit25-26':'厨房','unit27-28':'客厅','unit29-30':'关上；关闭','unit49-50':'Mrs. Bird'};
  for(const id of Object.keys(answers)){
