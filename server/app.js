@@ -6,6 +6,7 @@ const { openStore } = require('./store');
 const { UNITS, RETIRED } = require('./catalog');
 const { createCoursePackages } = require('../scripts/course-packages');
 const progress = require('./progress');
+const learning = require('./learning');
 const {retainPackages}=require('./bundles');
 const { suggestPinyin, validPinyin, passwordProblem } = require('./student-credentials');
 const { clientAddress } = require('./client-address');
@@ -93,7 +94,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (!pathname.startsWith(BASE) || relative.split('/').some(part => part === '..' || part.startsWith('.'))) throw fail(404, '页面不存在');
       if (relative === 'health') return json(response, { ok: true, access: 'class-v1' });
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
-      if (['portal.css','portal.js','access-client.js','access-worker.js'].includes(relative)) {
+      if (['portal.css','portal.js','admin-learning.js','admin-learning.css','access-client.js','learning-observer.js','access-worker.js'].includes(relative)) {
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
@@ -147,6 +148,18 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (relative === 'api/logout' && input) { const role = input.admin ? 'admin' : 'student'; store.logout(cookie(request, role)); setCookie(response, role, '', 0); return json(response, { ok: true }); }
         if (relative.startsWith('api/admin/')) {
           session(request, 'admin');
+          if (relative === 'api/admin/learning' && !input) {
+            const filters=Object.fromEntries(url.searchParams);
+            if(filters.q?.length>100 || (filters.course&&!UNITS.includes(filters.course)) || (filters.status&&!learning.statuses.includes(filters.status)))throw fail(400,'查询条件不正确');
+            return json(response,learning.dashboard(store.learning.read(filters),definitions,descriptions,filters));
+          }
+          const learningRoute=relative.match(/^api\/admin\/students\/([^/]+)\/learning(?:\/(unit\d+-\d+))?$/);
+          if(learningRoute&&!input){
+            const who=store.student(learningRoute[1]);if(!who)throw fail(404,'学生不存在');
+            const dataset=store.learning.read({studentId:who.id}),view=learning.studentView(dataset.students[0],dataset,definitions,descriptions);
+            if(learningRoute[2]){const course=view.courses.find(c=>c.id===learningRoute[2]);if(!course)throw fail(404,'没有这门课程的学习记录或开放权限');return json(response,{student:view.student,course:learning.courseRecord(course)});}
+            return json(response,learning.studentReport(view));
+          }
           if (relative === 'api/admin/state' && !input) return json(response, { classes: store.classes(), students: store.students(), courses: descriptions });
           if (relative === 'api/admin/student-preview' && input) {
             const names = String(input.names || '').split('\n').filter(name => name.trim()).map(cleanName);
@@ -198,7 +211,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             if (student.mustChangePassword || auth.role === 'student-setup') return json(response, { student, mustChangePassword: true, courses: [] });
           }
           const who = identity(request, url.searchParams.get('preview'));
-          return json(response, { ...who, auth: undefined, courses: descriptions.filter(c => who.courses.includes(c.id)).map(c=>({...c,...progress.summary(who.preview?{}:store.progress(who.student.id,c.id).value,definitions[c.id],c.id)})) });
+          return json(response, { ...who, auth: undefined, courses: descriptions.filter(c => who.courses.includes(c.id)).map(c=>({...c,...progress.summary(who.preview?{}:store.progress(who.student.id,c.id).value,definitions[c.id],c.id,who.preview?null:store.learning.award(who.student.id,c.id,definitions[c.id].reward?.edition||''))})) });
         }
         const entering = relative.match(/^api\/courses\/(unit\d+-\d+)\/enter$/);
         const permitting = relative.match(/^api\/courses\/(unit\d+-\d+)\/permit$/);
@@ -212,22 +225,25 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           const who = identity(request, input.preview), course = entering[1];
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
+          if(!who.preview)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
           return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
         }
         if (relative === 'api/progress' && input) {
-          const auth = session(request,'student'), course = input.course;
+          const {auth} = studentSession(request), course = input.course;
           if (input.studentId !== auth.subject || !UNITS.includes(course) || !store.validGrant(input.grant,auth.subject,course)) throw fail(403,'学习记录不属于当前身份或课程');
           const current = store.progress(auth.subject,course);
           if (input.generation !== current.generation) return json(response,{stale:true,generation:current.generation});
-          const value = progress.merge(progress.normalize(current.value,definitions[course],course),progress.normalize(input.value,definitions[course],course));
-          store.saveProgress(auth.subject,course,current.generation,value);
+          const before=progress.normalize(current.value,definitions[course],course);
+          const value = progress.merge(before,progress.normalize(input.value,definitions[course],course));
+          const advanced=Object.keys(value.activity.unitCompleted).some(id=>!before.activity.unitCompleted[id]);
+          store.saveLearning(auth.subject,course,current.generation,value,learning.submissions(input.observations,definitions[course],course,before),advanced);
           return json(response,{ok:true});
         }
         if (relative === 'api/progress/reset' && input) {
           const who=identity(request),course=input.course;
           if (!who.courses.includes(course)) throw fail(403,'这节课还没向你的班级开放');
           const generation=store.progress(who.student.id,course).generation+1;
-          store.saveProgress(who.student.id,course,generation,{});
+          store.resetLearning(who.student.id,course,generation);
           return json(response,{generation});
         }
         throw fail(404, '操作不存在');
@@ -240,7 +256,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         const course = courseRoute[1]; if (!UNITS.includes(course)) throw fail(404, '课程不存在');
         let who; try { who = identity(request, url.searchParams.get('preview')); } catch (error) { if (error.status === 401 || error.message === '请先设置新密码') return publicFile(response, 'index.html', 'text/html; charset=utf-8'); throw error; }
         if (!who.courses.includes(course)) return notice(response, '这节课还没向你的班级开放', 403);
-        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'access-client.js"></script>');
+        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'learning-observer.js"></script><script src="' + BASE + 'access-client.js"></script>');
         response.setHeader('Content-Security-Policy', COURSE_CSP);
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : entry); return;
       }
