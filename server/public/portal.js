@@ -8,7 +8,7 @@
   async function api(endpoint, value, timeoutMs = 15000) {
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
     try{const response = await fetch('/lesson/api/' + endpoint, { signal:controller.signal,cache:'no-store', ...(value === undefined ? {} : { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(value) }) });
-    const result = await response.json(); if (!response.ok) throw Object.assign(new Error(result.error), { status:response.status }); return result;}finally{clearTimeout(timeout);}
+    const result = await response.json(); if (!response.ok) { if(adminMode && state && response.status===401 && endpoint!=='admin/login'){state=null;document.querySelectorAll('.teacher-dialog,.admin-save-dialog').forEach(d=>d.close());login(true,'登录已失效，请重新登录；若账号被禁用，请联系管理员。');} throw Object.assign(new Error(result.error), { status:response.status }); } return result;}finally{clearTimeout(timeout);}
   }
   async function worker() { try {
     const api = navigator.serviceWorker;
@@ -24,7 +24,7 @@
   async function attempt(action) { try { await action(); } catch(error) { status(error.message || '暂时无法连接，请重试'); } }
   const logo='<img class="hero-logo" src="/lesson/assets/brand/starflower.png" alt="">';
   function login(admin = false, message = '') {
-    app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号</label><input id="username" name="username" autocomplete="username" required><label for="password">管理员密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师发放的一次性初始密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
+    app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号或老师工号</label><input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required><label for="password">管理员密码 / 老师密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师发放的一次性初始密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
     document.getElementById('forgot')?.addEventListener('click',()=>status('请联系老师：学号可以查回，密码可以重置，学习成果会保留。'));
     document.getElementById('loginForm').onsubmit=event=>{event.preventDefault();attempt(async()=>{
       const form=new FormData(event.target);const button=event.target.querySelector('button');button.disabled=true;
@@ -74,9 +74,14 @@
     for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!/^canran:(?:lesson:)?(?:unit\d+-\d+:learning|l\d+:progress|soundmark:progress)/.test(key))continue;try{const value=JSON.parse(localStorage.getItem(key));const item=document.createElement('li');const unit=key.match(/unit\d+-\d+|l\d+/)?.[0];item.textContent=unit+' · '+(value.activity?.unitCompleted?Object.keys(value.activity.unitCompleted).length+' 项活动完成':Object.values(value.ratings||{}).reduce((sum,n)=>sum+(Number(n)||0),0)+' 颗星');list.append(item);found=true;}catch{}}
     if(!found)list.textContent='这台设备没有旧记录。';
   }
-  async function loadAdmin(selected=currentClass) { state=await api('admin/state');currentClass=selected;if(location.hash.startsWith('#learning'))await openLearning();else renderAdmin(); }
+  async function loadAdmin(selected=currentClass) {
+    state=await api('admin/state');currentClass=selected==='all'||state.classes.some(c=>c.id===selected)?selected:undefined;
+    if(state.identity?.mustChangePassword){window.CanranAdminTeachers.password(teacherConfig(),state.identity,true);return;}
+    if(location.hash.startsWith('#learning'))await openLearning();else renderAdmin();
+  }
+  const teacherConfig=()=>({app,api,back:async selected=>{history.replaceState(null,'',location.pathname+location.search);await loadAdmin(selected);},saved:showSavedDialog,logout:async()=>{await api('logout',{admin:true});state=null;changed();login(true);}});
   async function openLearning(studentId) {
-    return window.CanranAdminLearning.open({app,api,classes:state.classes,courses:state.courses,classId:currentClass==='all'?'':currentClass||'',studentId,back:()=>{history.replaceState(null,'',location.pathname+location.search);renderAdmin();}});
+    return window.CanranAdminLearning.open({app,api,classes:state.classes,courses:state.courses,role:state.identity?.role,classId:currentClass==='all'?'':currentClass||'',studentId,back:()=>{history.replaceState(null,'',location.pathname+location.search);renderAdmin();}});
   }
   function studentRows(students) {
     return students.map(s=>`<div class="student-row" data-student="${e(s.id)}"><label class="student-select"><input type="checkbox" data-select="${e(s.id)}" aria-label="选择 ${e(s.name)} ${e(s.studentNumber)}"><span><strong>${e(s.name)}</strong><span class="student-number">${e(s.studentNumber)}</span><span class="muted"><span data-class-name="${e(s.classId)}">${e(state.classes.find(c=>c.id===s.classId)?.name)}</span> · ${s.active?'可学习':'已停用'} · ${s.mustChangePassword?'待设置密码':'已设置密码'}</span></span></label><div class="actions"><button class="compact" data-learning="${e(s.id)}">查看学习进度</button><button class="compact" data-account="${e(s.id)}">查看账号</button><button class="compact" data-edit="${e(s.id)}">管理学生</button></div></div>`).join('');
@@ -105,8 +110,8 @@
   }
   function renderAdmin(){
     selectedStudents.clear();
-    const group=state.classes.find(c=>c.id===currentClass);
-    app.innerHTML=`<div class="toolbar"><div><p class="muted">灿然英语工作室</p><h1>班级管理</h1></div><div class="actions"><button id="openLearning" class="primary">学习进度</button><button id="adminLogout" class="compact">退出管理</button></div></div><div class="stack"><section class="panel"><h2>我的班级</h2><div class="tabs">${state.classes.map(c=>`<button class="compact" data-class="${e(c.id)}" aria-label="管理 ${e(c.name)}" aria-current="${c.id===currentClass}">${e(c.name)}</button>`).join('')}</div><form id="newClass"><label for="className">新班级名称</label><input id="className" name="name" maxlength="60" required><button>创建班级</button></form></section><section class="panel"><label for="studentSearch">查找学生（姓名或学号）</label><input id="studentSearch" type="search" placeholder="在所有班级中查找" autocomplete="off"><div id="searchResults"></div></section>${group?`<section class="panel"><div class="toolbar"><h2><span data-class-name="${e(group.id)}">${e(group.name)}</span> · 班级设置</h2><a class="button compact" href="/lesson/?preview=${e(group.id)}">预览这个班</a></div><form id="renameClass"><label for="editClassName">班级名称</label><div class="class-name-fields"><input id="editClassName" name="name" value="${e(group.name)}" maxlength="60" required><button type="submit" class="compact">保存班级名称</button></div><p role="alert" hidden></p></form><form id="courses"><h3 class="class-courses-title">开放课程</h3><div class="course-selection-toolbar"><button type="button" id="toggleAllCourses" class="compact">全选课程</button><span id="courseSelectionCount" aria-live="polite"></span></div><div class="check-grid">${state.courses.map(c=>`<label><input type="checkbox" name="course" value="${e(c.id)}" ${group.courses.includes(c.id)?'checked':''}>${e(c.label)} ${e(c.title)}</label>`).join('')}</div><button type="submit" class="primary">保存开放课程</button><p role="alert" hidden></p></form></section><section class="panel" id="classStudents"><div class="toolbar"><h2>班级学生</h2><button id="allAccounts" class="compact">打印全班账号</button></div><form id="newStudents"><label for="names">学生姓名或课堂称呼，每行一位</label><textarea id="names" name="names" rows="3" required></textarea><button>核对姓名拼音</button></form><div>${studentRows(state.students.filter(s=>s.classId===group.id))}</div></section>`:''}<p role="status" aria-live="polite"></p></div>`;
+    const group=state.classes.find(c=>c.id===currentClass),isAdmin=state.identity?.role==='admin';
+    app.innerHTML=`<div class="toolbar"><div><p class="muted">灿然英语工作室</p><h1>班级管理</h1>${!isAdmin?`<p class="staff-identity">${e(state.identity.name)} · <span class="student-number">${e(state.identity.teacherNumber)}</span></p>`:''}</div><div class="actions">${isAdmin?'<button id="openTeachers" class="compact">老师管理</button>':'<button id="teacherChangePassword" class="compact">修改密码</button>'}<button id="openLearning" class="primary">学习进度</button><button id="adminLogout" class="compact">退出管理</button></div></div><div class="stack"><section class="panel"><h2>我的班级</h2><div class="tabs">${state.classes.map(c=>`<button class="compact" data-class="${e(c.id)}" aria-label="管理 ${e(c.name)}" aria-current="${c.id===currentClass}">${e(c.name)}</button>`).join('')}</div>${isAdmin?'<form id="newClass"><label for="className">新班级名称</label><input id="className" name="name" maxlength="60" required><button>创建班级</button></form>':state.classes.length?'':'<p>尚未分配班级，请联系管理员。</p><button id="refreshClasses" class="compact">刷新班级</button>'}</section><section class="panel"><label for="studentSearch">查找学生（姓名或学号）</label><input id="studentSearch" type="search" placeholder="${isAdmin?'在所有班级中查找':'在负责的班级中查找'}" autocomplete="off"><div id="searchResults"></div></section>${group?`<section class="panel"><div class="toolbar"><h2><span data-class-name="${e(group.id)}">${e(group.name)}</span> · 班级设置</h2><a class="button compact" href="/lesson/?preview=${e(group.id)}">预览这个班</a></div><div class="class-teachers"><p>负责老师：${(state.classTeachers?.[group.id]||[]).map(t=>e(t.name)+(t.active?'':'（已禁用）')).join('、')||'尚未分配'}</p>${isAdmin?'<button class="compact" id="assignTeachers">分配老师</button>':''}</div><form id="renameClass"><label for="editClassName">班级名称</label><div class="class-name-fields"><input id="editClassName" name="name" value="${e(group.name)}" maxlength="60" required><button type="submit" class="compact">保存班级名称</button></div><p role="alert" hidden></p></form><form id="courses"><h3 class="class-courses-title">开放课程</h3><div class="course-selection-toolbar"><button type="button" id="toggleAllCourses" class="compact">全选课程</button><span id="courseSelectionCount" aria-live="polite"></span></div><div class="check-grid">${state.courses.map(c=>`<label><input type="checkbox" name="course" value="${e(c.id)}" ${group.courses.includes(c.id)?'checked':''}>${e(c.label)} ${e(c.title)}</label>`).join('')}</div><button type="submit" class="primary">保存开放课程</button><p role="alert" hidden></p></form></section><section class="panel" id="classStudents"><div class="toolbar"><h2>班级学生</h2><button id="allAccounts" class="compact">打印全班账号</button></div><form id="newStudents"><label for="names">学生姓名或课堂称呼，每行一位</label><textarea id="names" name="names" rows="3" required></textarea><button>核对姓名拼音</button></form><div>${studentRows(state.students.filter(s=>s.classId===group.id))}</div></section>`:''}<p role="status" aria-live="polite"></p></div>`;
     app.querySelectorAll('[data-class]').forEach(button=>button.onclick=()=>{currentClass=button.dataset.class;renderAdmin();});
     const allStudentsButton=document.createElement('button');allStudentsButton.className='compact';allStudentsButton.textContent='所有学生';allStudentsButton.setAttribute('aria-current',String(currentClass==='all'));allStudentsButton.onclick=()=>{currentClass='all';renderAdmin();};app.querySelector('.tabs').prepend(allStudentsButton);
     if(currentClass==='all'){
@@ -121,15 +126,21 @@
       target.innerHTML=query?studentList(state.students.filter(s=>s.name.toLowerCase().includes(query)||s.studentNumber.includes(query))):'';bindStudents();
     };
     document.getElementById('openLearning').onclick=()=>attempt(()=>openLearning());
-    document.getElementById('adminLogout').onclick=()=>attempt(async()=>{await api('logout',{admin:true});login(true);});
-    document.getElementById('newClass').onsubmit=event=>{event.preventDefault();attempt(async()=>{const button=event.target.querySelector('button');button.disabled=true;try{const created=await api('admin/classes',{name:new FormData(event.target).get('name')});await loadAdmin(created.id);status('班级已创建');}finally{button.disabled=false;}});};
+    document.getElementById('adminLogout').onclick=()=>attempt(teacherConfig().logout);
+    document.getElementById('openTeachers')?.addEventListener('click',()=>attempt(()=>window.CanranAdminTeachers.open(teacherConfig())));
+    document.getElementById('teacherChangePassword')?.addEventListener('click',()=>window.CanranAdminTeachers.password(teacherConfig(),state.identity,false));
+    document.getElementById('assignTeachers')?.addEventListener('click',event=>attempt(()=>window.CanranAdminTeachers.assign(teacherConfig(),group,event.currentTarget)));
+    document.getElementById('refreshClasses')?.addEventListener('click',()=>attempt(()=>loadAdmin()));
+    document.getElementById('newClass')?.addEventListener('submit',event=>{event.preventDefault();attempt(async()=>{const button=event.target.querySelector('button');button.disabled=true;try{const created=await api('admin/classes',{name:new FormData(event.target).get('name')});await loadAdmin(created.id);status('班级已创建');}finally{button.disabled=false;}});});
     document.getElementById('renameClass')?.addEventListener('submit',event=>{
       event.preventDefault();
       if(event.currentTarget.querySelector('[type=submit]').disabled)return;
       saveClassChanges(event.currentTarget,group,{name:new FormData(event.currentTarget).get('name').trim()});
     });
+    const renameForm=document.getElementById('renameClass');if(renameForm)renameForm.dataset.expectedName=group.name;
     const courseForm=document.getElementById('courses');
     if(courseForm){
+      courseForm.dataset.expectedCourses=JSON.stringify(group.courses);
       const boxes=[...courseForm.querySelectorAll('input[name=course]')],toggle=document.getElementById('toggleAllCourses');
       const updateCourses=()=>{
         const count=boxes.filter(box=>box.checked).length;
@@ -153,7 +164,7 @@
     dialog.setAttribute('aria-labelledby','adminSaveTitle');dialog.setAttribute('aria-describedby','adminSaveMessage');
     dialog.innerHTML='<span class="saved-mark" aria-hidden="true">✓</span><h2 id="adminSaveTitle">保存成功</h2><p id="adminSaveMessage"></p><form method="dialog"><button class="primary" autofocus>知道了</button></form>';
     dialog.querySelector('p').textContent=message;
-    dialog.addEventListener('close',()=>{dialog.remove();if(trigger.isConnected)trigger.focus();},{once:true});
+    dialog.addEventListener('close',()=>{dialog.remove();if(trigger?.isConnected)trigger.focus();},{once:true});
     document.body.append(dialog);dialog.showModal();
   }
   async function saveClassChanges(form,group,changes) {
@@ -164,13 +175,13 @@
     controls.forEach(({element})=>{element.disabled=true;});button.textContent='正在保存…';
     let message;
     try{
-      const result=await api('admin/classes',{id:group.id,...changes}),saved=result.class;
+      const result=await api('admin/classes',{id:group.id,...changes,...(changes.name!==undefined?{expectedName:form.dataset.expectedName}:{expectedCourses:JSON.parse(form.dataset.expectedCourses)})}),saved=result.class;
       Object.assign(state.classes.find(c=>c.id===group.id)||group,saved);
       app.querySelectorAll('[data-class]').forEach(tab=>{if(tab.dataset.class===saved.id){tab.textContent=saved.name;tab.setAttribute('aria-label','管理 '+saved.name);}});
       app.querySelectorAll('[data-class-name]').forEach(label=>{if(label.dataset.className===saved.id)label.textContent=saved.name;});
       if(changes.name!==undefined){
-        form.querySelector('[name=name]').value=saved.name;message=`班级名称已保存：${saved.name}。`;
-      }else message=`「${saved.name}」的开放课程已保存，已开放 ${saved.courses.length} 门课程。`;
+        form.dataset.expectedName=saved.name;form.querySelector('[name=name]').value=saved.name;message=`班级名称已保存：${saved.name}。`;
+      }else {form.dataset.expectedCourses=JSON.stringify(saved.courses);message=`「${saved.name}」的开放课程已保存，已开放 ${saved.courses.length} 门课程。`;}
       if(form.isConnected)status(message);
     }catch(error){
       if(form.isConnected){errorMessage.textContent=error.message||'保存未成功，请重试。';errorMessage.hidden=false;}

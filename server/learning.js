@@ -3,6 +3,13 @@
 const crypto = require('node:crypto');
 const progress = require('./progress');
 const statuses = Object.freeze(['not-started','in-progress','completed']);
+const sorts = Object.freeze(['stars-asc','stars-desc']);
+function selectedStatuses(value='') {
+  if (typeof value !== 'string') return null;
+  const selected=value ? value.split(',') : [];
+  return selected.every(status=>statuses.includes(status)) ? [...new Set(selected)] : null;
+}
+const earnedStars = summary => summary.rewards.reduce((sum,reward)=>sum+reward.stars,0);
 const canonical = value => JSON.stringify(value, (key, item) => key === 'hint' ? undefined : typeof item === 'string' ? item.replace(/^\/lesson\/(?=assets\/)/, '/') : item);
 const digest = value => crypto.createHash('sha256').update(canonical(value)).digest('hex');
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
@@ -84,7 +91,9 @@ function courseSummary({unit,course,value={},observations=[],meta={},award=null}
   const completedActivities=parts.filter(a=>a.completed).length,totalActivities=parts.length;
   const complete=totalActivities>0&&completedActivities===totalActivities;
   const status=complete?'completed':parts.some(a=>a.completed||a.submitted>0)?'in-progress':'not-started';
-  return {...reward,status,completedActivities,totalActivities,percent:totalActivities?Math.floor(completedActivities/totalActivities*100):0,
+  // Use accepted work, never page visits or a replayed upload. Older imports can have no timestamp.
+  const lastLearnedAt=status==='not-started'?null:newest([meta.lastRecordAt,...parts.map(a=>a.lastRecordAt)]);
+  return {...reward,status,lastLearnedAt,completedActivities,totalActivities,percent:totalActivities?Math.floor(completedActivities/totalActivities*100):0,
     completed:complete,
     submitted:parts.reduce((sum,a)=>sum+a.submitted,0),correct:parts.reduce((sum,a)=>sum+a.correct,0),questionTotal:parts.reduce((sum,a)=>sum+a.questionTotal,0),
     nextActivity:parts.find(a=>!a.completed)?.title || null,activities:parts,
@@ -97,7 +106,7 @@ function totals(courses) {
   for(const c of courses){const key=c.rewardRule+':'+c.maxStars;if(!rewards.has(key))rewards.set(key,{rule:c.rewardRule,maxStarsPerCourse:c.maxStars,stars:0,maxStars:0,courses:0});const row=rewards.get(key);row.stars+=c.stars;row.maxStars+=c.maxStars;row.courses++;}
   const totalActivities=courses.reduce((n,c)=>n+c.totalActivities,0),completedActivities=courses.reduce((n,c)=>n+c.completedActivities,0);
   const status=!courses.length?null:courses.every(c=>c.status==='completed')?'completed':courses.some(c=>c.status==='in-progress'||c.status==='completed')?'in-progress':'not-started';
-  return {status,totalCourses:courses.length,completedCourses:courses.filter(c=>c.completed).length,totalActivities,completedActivities,
+  return {status,lastLearnedAt:newest(courses.map(c=>c.lastLearnedAt)),totalCourses:courses.length,completedCourses:courses.filter(c=>c.completed).length,totalActivities,completedActivities,
     percent:totalActivities?Math.floor(completedActivities/totalActivities*100):0,rewards:[...rewards.values()],
     lastRecordAt:newest(courses.map(c=>c.lastRecordAt)),lastProgressAt:newest(courses.map(c=>c.lastProgressAt))};
 }
@@ -115,10 +124,10 @@ function studentView(student, dataset, definitions, descriptions) {
   return {student:{id:student.id,name:student.name,studentNumber:student.studentNumber,active:student.active,classId:student.classId,className:group?.name||''},
     courses,summary:totals(courses.filter(c=>c.open)),historySummary:totals(courses.filter(c=>!c.open)),observedFrom:student.observedFrom};
 }
-// Only the teaching-facing status and stars leave the read model.
-function summaryRecord({status,rewards}) { return {status,rewards}; }
-function courseRecord({id,label,title,open,status,stars,maxStars,rewardRule}) {
-  return {id,label,title,open,status,stars,maxStars,rewardRule};
+// Expose only the teacher-facing status, stars and latest accepted learning time.
+function summaryRecord({status,rewards,lastLearnedAt}) { return {status,rewards,lastLearnedAt}; }
+function courseRecord({id,label,title,open,status,stars,maxStars,rewardRule,lastLearnedAt}) {
+  return {id,label,title,open,status,stars,maxStars,rewardRule,lastLearnedAt};
 }
 function studentReport(view) {
   return {student:view.student,summary:summaryRecord(view.summary),courses:view.courses.map(courseRecord)};
@@ -131,10 +140,12 @@ function dashboard(dataset,definitions,descriptions,filters={}) {
   });
   if(filters.course)rows=rows.filter(r=>r.scope.length);
   const before=rows.length;
-  if(statuses.includes(filters.status))rows=rows.filter(r=>r.summary.status===filters.status);
-  rows.sort((a,b)=>a.student.studentNumber.localeCompare(b.student.studentNumber));
+  const selected=selectedStatuses(filters.status);
+  if(selected?.length)rows=rows.filter(r=>selected.includes(r.summary.status));
+  const direction=filters.sort==='stars-asc'?1:filters.sort==='stars-desc'?-1:0;
+  rows.sort((a,b)=>direction*(earnedStars(a.summary)-earnedStars(b.summary)) || a.student.studentNumber.localeCompare(b.student.studentNumber));
   const pageSize=25,page=Math.min(Math.max(1,Number.parseInt(filters.page,10)||1),Math.max(1,Math.ceil(rows.length/pageSize)));
   return {classes:dataset.classes.map(({id,name})=>({id,name})),courses:descriptions.map(({id,title,label})=>({id,title,label})),total:rows.length,scopeTotal:before,page,pageSize,
     rows:rows.slice((page-1)*pageSize,page*pageSize).map(({student,summary})=>({student,summary:summaryRecord(summary)}))};
 }
-module.exports={statuses,activities,submissions,courseSummary,totals,studentView,studentReport,courseRecord,dashboard};
+module.exports={statuses,sorts,selectedStatuses,activities,submissions,courseSummary,totals,studentView,studentReport,courseRecord,dashboard};
