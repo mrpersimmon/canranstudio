@@ -1,6 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword } = require('./helpers');
+const { saveCourses, adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword } = require('./helpers');
 const { completeActivity } = require('../support/unit13-14-flow');
 
 test('脚本不可用时禁用登录提交，不把密码写入地址', async ({ browser }) => {
@@ -22,7 +22,7 @@ test('重名学生独立学号及拼音加三位随机数字初始密码，首�
   await page.getByLabel('新班级名称').fill('学号体验班');
   await page.getByRole('button', { name: '创建班级', exact: true }).click();
   await page.getByRole('checkbox', { name: /Lesson 13–14 / }).check();
-  await page.getByRole('button', { name: '保存开放课程' }).click();
+  await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('开放课程已保存');
   await page.getByLabel('学生姓名或课堂称呼，每行一位').fill('段晓东\n段晓东\n李明');
   await page.getByRole('button', { name: '核对姓名拼音' }).click();
@@ -110,7 +110,7 @@ test('手机核对多音字和 ü，必填拼音阻止部分添加；主动改�
   await page.getByLabel('新班级名称').fill('拼音核对班');
   await page.getByRole('button', { name: '创建班级', exact: true }).click();
   await page.getByRole('checkbox', { name: /Lesson 13–14 / }).check();
-  await page.getByRole('button', { name: '保存开放课程' }).click();
+  await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('开放课程已保存');
   await page.getByLabel('学生姓名或课堂称呼，每行一位').fill('曾乐\n吕明');
   await page.getByRole('button', { name: '核对姓名拼音' }).click();

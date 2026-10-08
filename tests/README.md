@@ -15,6 +15,8 @@
 
 账号安全回归：`npm run test:login -- tests/login/security.spec.js tests/login/student-accounts.spec.js tests/login/recovery.spec.js`。覆盖拼音加三位随机数字的初始／重置密码（含前导零、同拼音新账号不重复）、并发重放、到期／重启不续期、旧库迁移、待领取凭据的备份恢复、真实页面打印和找回流程，以及代理来源分桶、伪造头与等价地址防绕过。使用临时虚构账号，不读取或改动真实学生数据；实际 Nginx 和手机微信验收另列。
 
+班级设置专项：`npm run test:login -- tests/login/class-settings.spec.js`，验证班级独立改名及即时刷新、课程全选／取消全选与计数、保存成功弹窗、键盘关闭和焦点返回、320／390／1280 宽度、保存期间防重复提交、失败保留输入与重试，以及部分更新不覆盖另一项设置。后台接口和课程权限同时回归 `access.spec.js`、`security.spec.js`；原有页面用例明确关闭成功弹窗后继续操作。
+
 打印窗口另外验证：在普通 Chrome 中点“打印账号”，确认实际打印预览打开，随后取消；A4 PDF 导出不能替代这个检查。`student-accounts.spec.js` 还模拟内置浏览器的 `window.print()` 静默返回，确保页面显示改用 Chrome／Safari 的提示，按钮可重试。
 
 账号批量操作：`node --test tests/unit/admin-accounts.test.js tests/unit/server-security.test.js`，核对新建／重置密码为拼音加三位数字（含前导零）、同拼音新账号不重复、单人／批量重置的会话撤销、未选学生与成果保留、失败整批回滚、并发改密和管理员指定密码的标准输入路径。页面另检查“所有学生”／班级／搜索的全选、半选、取消、确认、手机宽度，以及重置后的旧密码拒绝和首次改密。A4 导出实际 PDF：普通账号每页 10 张，长字段每页 6／4 张，不缺人、不重复、不跨页裁切；账号页验证本地 Maple Mono NL 字体成功加载，目视检查大小写及 `I/l/L/1`、`O/0` 字形。相关课程选项数量只统计 `#courses`，不把学生选择框计入开放课程。

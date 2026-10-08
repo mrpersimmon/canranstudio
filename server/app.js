@@ -154,10 +154,17 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             return json(response, { students: names.map(name => ({ name, pinyin: suggestPinyin(name) })) });
           }
           if (relative === 'api/admin/classes' && input) {
-            const name = cleanName(input.name);
-            if(input.id&&(!Array.isArray(input.courses)||input.courses.some(id=>!UNITS.includes(id))))throw fail(400,'只能开放现行教学单元');
-            if (input.id) { if (!store.updateClass(input.id, name, input.courses)) throw fail(404, '班级不存在'); return json(response, { ok: true }); }
-            return json(response, store.createClass(name));
+            if (input.id) {
+              const group = store.classes().find(c => c.id === input.id);
+              if (!group) throw fail(404, '班级不存在');
+              if (input.name === undefined && input.courses === undefined) throw fail(400, '请填写班级名称或选择开放课程');
+              const name = input.name === undefined ? group.name : cleanName(input.name);
+              const courses = input.courses === undefined ? group.courses : input.courses;
+              if (!Array.isArray(courses) || courses.some(id => !UNITS.includes(id))) throw fail(400, '只能开放现行教学单元');
+              if (!store.updateClass(group.id, name, courses)) throw fail(404, '班级不存在');
+              return json(response, { ok: true, class: { id: group.id, name, courses: [...new Set(courses)] } });
+            }
+            return json(response, store.createClass(cleanName(input.name)));
           }
           if (relative === 'api/admin/students' && input) {
             if (!store.classes().some(c => c.id === input.classId)) throw fail(400, '请选择班级');

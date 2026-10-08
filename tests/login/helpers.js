@@ -24,12 +24,19 @@ async function readInitialPassword(page, row = page.locator('.student-row').firs
   await page.getByRole('button', { name: '返回班级', exact: true }).click();
   return password;
 }
+async function saveCourses(page) {
+  await page.getByRole('button', { name: '保存开放课程', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: '保存成功', exact: true });
+  await expect(dialog).toContainText('开放课程已保存');
+  await dialog.getByRole('button', { name: '知道了', exact: true }).click();
+  await expect(dialog).toHaveCount(0);
+}
 async function createStudent(page, className, name, lessons) {
   await page.getByLabel('新班级名称').fill(className);
   await page.getByRole('button', { name: '创建班级', exact: true }).click();
-  await expect(page.getByRole('heading', { name: className + ' · 开放课程', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: className + ' · 班级设置', exact: true })).toBeVisible();
   for (const label of lessons) await page.getByRole('checkbox', { name: label }).check();
-  await page.getByRole('button', { name: '保存开放课程' }).click();
+  await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('开放课程已保存');
   return addStudent(page, name);
 }
@@ -55,4 +62,4 @@ async function studentLogin(browser, account) {
   const context = await browser.newContext(); const page = await context.newPage();
   await signIn(page, account); return { context, page };
 }
-module.exports = { adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, readInitialPassword };
+module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, readInitialPassword };

@@ -18,3 +18,14 @@
   .account-heading{padding-bottom:1.5mm;margin-bottom:1.5mm}.account-heading>strong{float:right;font-size:8pt;margin-left:2mm}.account-heading h2{font-size:12pt;line-height:1.2;margin:0 0 .5mm}.account-heading p{font-size:8pt;line-height:1.3}
   .account-field{display:grid;grid-template-columns:16mm minmax(0,1fr);align-items:baseline;gap:1mm;margin:1mm 0}.account-field>span{font-size:8pt;line-height:1.2;color:#333}.account-number,.initial-password{font-size:13pt;line-height:1.2;color:#000}.account-cards .initial-expiry,.account-instruction,.account-help{font-size:7.5pt;line-height:1.3;margin:.7mm 0}.account-cards .account-url{font-size:8pt;line-height:1.2;margin:1.5mm 0 .5mm}.account-help{color:#333}
 }
+
+/* Class settings keep renaming and course access as separate saves. */
+.class-name-fields{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+.class-courses-title{font-size:20px;margin:24px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.course-selection-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:14px}
+#courseSelectionCount{color:var(--ink);font-size:15px}
+.admin-save-dialog{width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);margin:auto;padding:28px;border:3px solid var(--ink);border-radius:26px;background:var(--paper);color:var(--ink);text-align:center;box-shadow:0 12px 48px #4b34282b;overflow:auto;overflow-wrap:anywhere}
+.admin-save-dialog::backdrop{background:#2c221c80}
+.admin-save-dialog .saved-mark{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:#e6efd9;color:#365626;font-size:30px;font-weight:700}
+.admin-save-dialog h2{margin:0 0 12px}.admin-save-dialog p{margin:0 0 24px}
+@media(max-width:600px){.class-name-fields{grid-template-columns:1fr}.admin-save-dialog{padding:24px}}
