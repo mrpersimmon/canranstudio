@@ -16,19 +16,22 @@
   }).format(new Date(date)).replaceAll('/', '.') : '';
 
   function mount({ element, unit, go, returnUrl }) {
+    const artwork = {...assets,scene:unit.reward.scene || assets.scene};
+    const lesson = unit.reward.lesson || 'Lesson 1–2';
     let state = { stars: 0, zones: {}, firstFullStarAt: null }, exportUrl, exporting = false;
     let recipient = '', identityLabel = '登录后显示姓名';
     const panel = make('div', '', 'story-award-panel');
     const paper = make('article', '', 'story-award-paper'); paper.setAttribute('aria-label', '我的单元纪念卡');
     const brand = make('p', '灿然英语工作室', 'story-award-brand');
     const title = make('h3', unit.reward.title, 'story-award-title');
+    title.style.color = unit.reward.color || '#0b7399';
     const name = make('p', '', 'story-award-name'); name.id = 'certificateName';
     const stars = make('div', '', 'story-award-stars'); stars.setAttribute('role', 'group');
     const starImages = Array.from({ length: 5 }, () => { const img = picture(assets.empty); stars.append(img); return img; });
-    const illustration = picture(assets.scene, '男士把手提包交还给女士'); illustration.className = 'story-award-illustration';
+    const illustration = picture(artwork.scene, unit.reward.alt || '男士把手提包交还给女士'); illustration.className = 'story-award-illustration';
     const foot = make('p', '', 'story-award-foot');
     const date = make('time'); date.id = 'certificateDate';
-    foot.append(make('span', 'Lesson 1–2'), date);
+    foot.append(make('span', lesson), date);
     paper.append(brand, title, name, stars, illustration, foot);
     const controls = make('div', '', 'story-award-actions');
     const save = make('button', '保存纪念卡', 'btn btn-green'); save.type = 'button';
@@ -55,6 +58,7 @@
     root.CanranAccessReady?.then(access => {
       recipient = access.preview ? '' : String(access.student.name || '').trim();
       identityLabel = access.preview ? '班级预览' : '登录后显示姓名';
+      if (!access.preview) { back.replaceChildren(backIcon,document.createTextNode('我的纪念册')); back.href=new URL('awards/',returnUrl).href; }
       showName();
     }).catch(() => { recipient = ''; showName(); });
 
@@ -76,14 +80,14 @@
       const snapshot = { recipient, stars: state.stars, date: state.firstFullStarAt };
       try {
         await document.fonts.ready;
-        const images = await Promise.all(Object.values(assets).map(async src => {
+        const images = await Promise.all(Object.values(artwork).map(async src => {
           const img = picture(src); await img.decode(); return img;
         }));
-        const canvas = draw(snapshot, images, unit.reward.title);
+        const canvas = draw(snapshot, images, unit.reward.title,lesson,unit.reward.color);
         const blob = await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(Error('export')), 'image/png'));
         if (exportUrl) URL.revokeObjectURL(exportUrl);
         exportUrl = URL.createObjectURL(blob);
-        const link = document.createElement('a'); link.href = exportUrl; link.download = 'Lesson1-2-礼貌小帮手.png'; link.click();
+        const link = document.createElement('a'); link.href = exportUrl; link.download = lesson.replace(' ','').replace('–','-')+'-'+unit.reward.title+'.png'; link.click();
         status.textContent = '纪念卡已保存。';
       } catch { status.textContent = '暂时没能保存，请再试一次。'; }
       finally { exporting = false; showName(); }
@@ -93,7 +97,7 @@
     update(state); return { update };
   }
 
-  function draw(snapshot, [scene, texture, earned, empty], title) {
+  function draw(snapshot, [scene, texture, earned, empty], title,lesson,color) {
     const canvas = document.createElement('canvas'); canvas.width = 1640; canvas.height = 880;
     const ctx = canvas.getContext('2d');
     ctx.beginPath(); ctx.roundRect(8, 8, 1624, 864, 34); ctx.fillStyle = '#fffdf6'; ctx.fill();
@@ -113,10 +117,10 @@
       ctx.fillText(value, x, y);
     }
     text('灿然英语工作室', 91, 116, 36, '#4a3226');
-    text(title, 91, 286, 127, '#0b7399', '"Award Round"', 680, .03);
+    text(title, 91, 286, 127, color || '#0b7399', '"Award Round"', 680, .03);
     text(snapshot.recipient, 91, 478, 162, '#4a3226', '"Award Round"', 595, .036);
     for (let i = 0; i < 5; i++) ctx.drawImage(i < snapshot.stars ? earned : empty, 85 + i * 126, 593, 101, 101);
-    text('Lesson 1–2' + (snapshot.stars === 5 && snapshot.date ? ' · ' + dateLabel(snapshot.date) : ''), 91, 798, 35, '#795a46', '"Baloo 2"');
+    text(lesson + (snapshot.stars === 5 && snapshot.date ? ' · ' + dateLabel(snapshot.date) : ''), 91, 798, 35, '#795a46', '"Baloo 2"');
     return canvas;
   }
   core.storyCertificate = { mount };

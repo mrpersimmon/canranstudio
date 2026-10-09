@@ -8,9 +8,9 @@ const { completeActivity, completeStory, completeUnit1314 } = require('../suppor
 async function fixture(browser, basePath) {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-root-mount-'));
   const store = openStore(directory); store.setAdmin('teacher', 'Test-only-classroom-2026!'); store.close();
-  const origin = 'http://127.0.0.1:4197';
+  const origin = require('../support/login-test-ports').origin(4197);
   let server;
-  const start = async base => { server = await createApp({ dataDir: directory, origin, basePath: base }); await new Promise(resolve => server.listen(4197, '127.0.0.1', resolve)); };
+  const start = async base => { server = await createApp({ dataDir: directory, origin, basePath: base }); await new Promise(resolve => server.listen(require('../support/login-test-ports').port(4197), '127.0.0.1', resolve)); };
   await start(basePath);
   const context = await browser.newContext({ baseURL: origin });
   return { context, origin, async move(base) { await new Promise(resolve => server.close(resolve)); await start(base); }, async close() { await context.close(); await new Promise(resolve => server.close(resolve)); await fs.rm(directory, { recursive: true, force: true }); } };
@@ -67,16 +67,16 @@ test('新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-root-retire-'));
   let server, context;
   try {
-    server = await require('../../scripts/preview-courses').serveCourses({ port: 4197 });
-    context = await browser.newContext({ baseURL: 'http://127.0.0.1:4197' });
+    server = await require('../../scripts/preview-courses').serveCourses({ port: require('../support/login-test-ports').port(4197) });
+    context = await browser.newContext({ baseURL: require('../support/login-test-ports').origin(4197) });
     const old = await context.newPage(); await completeActivity(old, 'colours', '/lesson');
     await expect(old.locator('#starCount')).toHaveText('3');
     await new Promise(resolve => server.close(resolve));
-    server = await createApp({ dataDir: directory, origin: 'http://127.0.0.1:4197', basePath: '/' });
-    await new Promise(resolve => server.listen(4197, '127.0.0.1', resolve));
+    server = await createApp({ dataDir: directory, origin: require('../support/login-test-ports').origin(4197), basePath: '/' });
+    await new Promise(resolve => server.listen(require('../support/login-test-ports').port(4197), '127.0.0.1', resolve));
     const home = await context.newPage(); await home.goto('/');
     await expect(home.getByLabel('学号', { exact: true })).toBeVisible();
-    await expect(old).toHaveURL('http://127.0.0.1:4197/', { timeout: 15000 });
+    await expect(old).toHaveURL(require('../support/login-test-ports').origin(4197)+'/', { timeout: 15000 });
     await expect(old.getByLabel('学号', { exact: true })).toBeVisible();
     expect(await old.evaluate(() => JSON.parse(localStorage.getItem('canran:lesson:unit13-14:learning:v1')).activity.unitCompleted.colours)).toBeTruthy();
   } finally { await context?.close(); if (server) await new Promise(resolve => server.close(resolve)); await fs.rm(directory, { recursive: true, force: true }); }

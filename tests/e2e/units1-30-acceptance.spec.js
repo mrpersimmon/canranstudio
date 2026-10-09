@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises');
-const {CASES: allCases,story,activity,select,answers}=require('../support/units1-30-tasks');
+const {CASES: allCases,story,activity,select,answers,currentGroup}=require('../support/units1-30-tasks');
 const CASES=Object.fromEntries(Object.entries(allCases).filter(([pair])=>!['1-2','25-26'].includes(pair))); // Current editions: unit-thirteen-types.spec.js.
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 async function mode(page,pair){
@@ -11,10 +11,12 @@ async function mode(page,pair){
 for(const pair of Object.keys(CASES))test(`${pair} 全课独立完成、完整原文与证书门槛`,async({page})=>{
  test.setTimeout(120000);await mode(page,pair);const requests=[],errors=[];
  page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))requests.push(r.url());});page.on('pageerror',e=>errors.push(e.message));
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
+ await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('button',{name:['3-4','5-6'].includes(pair)?'保存纪念卡':'领取单元证书',exact:true})).toBeDisabled();
  await story(page,pair);await expect(page.locator('.stage-text .btext')).toHaveCount(CASES[pair].dialogue.length);
  for(const group of Object.keys(CASES[pair].old))await activity(page,pair,group);
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');
+ await page.goto(`/unit${pair}/#learn/certificate`);
+ if(['3-4','5-6'].includes(pair)){await expect(page.locator('#starCount')).toHaveText('5');await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();await page.reload();await expect(page.locator('#starCount')).toHaveText('5');expect(errors).toEqual([]);expect(requests.filter(x=>!x.includes('/assets/feedback/'))).toEqual([]);return;}
+ await expect(page.locator('#starCount')).toHaveText('15');
  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('认真小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateName')).toHaveText('认真小伙伴');await page.keyboard.press('Escape');await page.reload();await expect(page.locator('#starCount')).toHaveText('15');
  if(pair!=='1-2'){expect(requests.filter(x=>!x.includes('/assets/feedback/'))).toEqual([]);expect(await page.evaluate(()=>window.englishSpeakCalls)).toBe(0);}
  expect(errors).toEqual([]);
@@ -24,7 +26,17 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
  for(const name of ['content.js','unit.js']){const body=await fs.readFile(`tests/fixtures/units1-30-tasks-before/unit${pair}/${name}`);await page.route(`**/unit${pair}/${name}*`,r=>old?r.fulfill({body,contentType:'text/javascript'}):r.continue());}
  await story(page,pair);for(const group of Object.keys(CASES[pair].old))await activity(page,pair,group,{old:true});
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('升级小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
- old=false;await page.reload();await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');
+ old=false;await page.reload();
+ if(['3-4','5-6'].includes(pair)){
+  await expect(page.locator('#starCount')).toHaveText('0');await expect(page.locator('#certificateDate')).toBeHidden();await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
+  expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).activity.unitName,'canran:unit'+pair+':learning:v1')).toBe('升级小伙伴');
+  const seen=new Set();
+  for(const change of CASES[pair].changes){const id=currentGroup(pair,change.group);if(seen.has(id))continue;seen.add(id);await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id);const first=answers(pair,id).findIndex(x=>x.fresh);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(first));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await activity(page,pair,id);}
+  // Carrying old answers forward is not a new zero-error round.
+  await expect(page.locator('#starCount')).toHaveText('0');
+  const id=currentGroup(pair,CASES[pair].changes[0].group);await page.goto(`/unit${pair}/#learn/${id}`);await page.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,pair,id);await expect(page.locator('#starCount')).toHaveText('1');return;
+ }
+ await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');
  for(const change of CASES[pair].changes){
   await page.goto(`/unit${pair}/#learn/${change.group}`);const room=page.locator('.stage-'+change.group);const first=change.answers.findIndex(x=>x.fresh);
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(first));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();

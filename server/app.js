@@ -9,6 +9,7 @@ const progress = require('./progress');
 const learning = require('./learning');
 const { createManagement } = require('./management');
 const { validClaim } = require('../core/award-rules');
+const { createAwardBook } = require('../scripts/award-book-bundle');
 const {retainPackages}=require('./bundles');
 const { passwordProblem } = require('./student-credentials');
 const { clientAddress } = require('./client-address');
@@ -23,6 +24,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   const BASE = normalizeBasePath(basePath);
   if (trustProxy !== false && trustProxy !== 'loopback') throw Error('trustProxy must be false or loopback');
   const store = openStore(dataDir);
+  const awardBook = await createAwardBook(root, BASE);
   const packages = bundle || await createCoursePackages({ root, basePath: BASE, courseIds: UNITS, isolatedDefinitions: true });
   const logical = new Map(), owners = new Map();
   const addOwner = (address, course) => { if (!owners.has(address)) owners.set(address, new Set()); owners.get(address).add(course); };
@@ -96,6 +98,11 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (BASE !== '/' && pathname === BASE.slice(0, -1)) return response.writeHead(308, { Location: BASE }).end();
       if (!pathname.startsWith(BASE) || relative.split('/').some(part => part === '..' || part.startsWith('.'))) throw fail(404, '页面不存在');
       if (relative === 'health') return json(response, { ok: true, access: 'class-v1' });
+      if (['GET','HEAD'].includes(request.method) && awardBook.files.has(relative)) {
+        const file = awardBook.files.get(relative);
+        response.writeHead(200, {'Content-Type':file.type, 'Cache-Control':'public, max-age=31536000, immutable'});
+        return response.end(request.method === 'HEAD' ? undefined : file.body);
+      }
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
       if (['portal.css','portal.js','admin-learning.js','admin-learning.css','admin-teachers.js','admin-teachers.css','access-client.js','learning-observer.js','access-worker.js'].includes(relative)) {
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
@@ -168,6 +175,18 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         }
         if (relative === 'api/logout' && input) { const role = input.admin ? 'admin' : 'student'; store.logout(cookie(request, role)); setCookie(response, role, '', 0); return json(response, { ok: true }); }
         if (relative.startsWith('api/admin/')) return json(response, await management.handle(request, url, relative, input));
+        if (relative === 'api/awards' && !input) {
+          const {student} = studentSession(request);
+          // Earned keepsakes belong to the student even after a class closes a
+          // course. No course entry or answers are granted by this read endpoint.
+          const cards = store.awards(student.id).flatMap(saved => {
+            const meta = awardBook.editions[saved.course]?.[saved.edition];
+            const stars = Math.min(5, Object.values(saved.zones || {}).filter(zone=>zone?.earnedAt).length);
+            return meta && stars ? [{...meta,id:saved.course+':'+saved.edition,course:saved.course,edition:saved.edition,
+              stars,firstFullStarAt:stars===5?saved.firstFullStarAt:null}] : [];
+          }).sort((a,b)=>Number(a.course.match(/\d+/)[0])-Number(b.course.match(/\d+/)[0]) || a.edition.localeCompare(b.edition));
+          return json(response, {student:{id:student.id,name:student.name},cards});
+        }
         if (relative === 'api/me' && !input) {
           if (!url.searchParams.get('preview')) {
             const { student, auth } = studentSession(request, true);
@@ -217,6 +236,14 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (!['GET','HEAD'].includes(request.method)) throw fail(405, '不支持此操作');
       if (RETIRED.includes(relative.split('/')[0]) && /^(?:lesson\d+|soundmark)\/?(?:index\.html)?$/.test(relative)) return notice(response, '这节课已下架', 410);
       if (['','index.html','admin/','admin','home/','home/index.html'].includes(relative)) return publicFile(response, 'index.html', 'text/html; charset=utf-8');
+      if (['awards','awards/'].includes(relative)) {
+        try { studentSession(request); } catch(error) {
+          if (error.status===401 || error.message==='请先设置新密码') return publicFile(response,'index.html','text/html; charset=utf-8');
+          throw error;
+        }
+        response.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
+        return response.end(request.method==='HEAD'?undefined:awardBook.html);
+      }
       const courseRoute = relative.match(/^(unit\d+-\d+)(?:\/(?:index\.html)?)?$/);
       if (courseRoute) {
         const course = courseRoute[1]; if (!UNITS.includes(course)) throw fail(404, '课程不存在');

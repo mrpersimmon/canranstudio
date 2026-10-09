@@ -9,16 +9,16 @@ test('停服务备份恢复后，原学号密码、班级和真实成果仍可�
  test.setTimeout(60000);const root=await fs.mkdtemp(path.join(os.tmpdir(),'canran-recovery-'));let server,context;
  const active=path.join(root,'active'),restored=path.join(root,'restored'),backup=path.join(root,'backup');
  const store=openStore(active);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();
- async function start(dataDir){server=await createApp({dataDir,origin:'http://127.0.0.1:4194'});await new Promise(r=>server.listen(4194,'127.0.0.1',r));}
+ async function start(dataDir){server=await createApp({dataDir,origin:require('../support/login-test-ports').origin(4194)});await new Promise(r=>server.listen(require('../support/login-test-ports').port(4194),'127.0.0.1',r));}
  try{
-  await start(active);context=await browser.newContext({baseURL:'http://127.0.0.1:4194'});const page=await context.newPage();
+  await start(active);context=await browser.newContext({baseURL:require('../support/login-test-ports').origin(4194)});const page=await context.newPage();
   await page.goto('/lesson/admin/');await page.getByLabel('管理员账号').fill('teacher');await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');await page.getByRole('button',{name:'登录管理页'}).click();
   await page.getByLabel('新班级名称').fill('备份班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');
   const account=await addStudent(page,'豆豆'),pending=await addStudent(page,'待领取同学');await signIn(page,account);await completeActivity(page,'colours','/lesson');await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
   await context.close();context=null;await new Promise(r=>server.close(r));server=null;
   execFileSync(process.execPath,['server/manage.js','backup',backup],{env:{...process.env,LESSON_DATA_DIR:active}});
   execFileSync(process.execPath,['server/manage.js','restore',backup],{env:{...process.env,LESSON_DATA_DIR:restored}});
-  await start(restored);context=await browser.newContext({baseURL:'http://127.0.0.1:4194'});const recovered=await context.newPage();await recovered.goto('/lesson/');await fillLogin(recovered,account);await expect(recovered.getByRole('heading',{name:'豆豆的课程'})).toBeVisible();await expect(recovered.locator('.course')).toContainText('3 / 15');
+  await start(restored);context=await browser.newContext({baseURL:require('../support/login-test-ports').origin(4194)});const recovered=await context.newPage();await recovered.goto('/lesson/');await fillLogin(recovered,account);await expect(recovered.getByRole('heading',{name:'豆豆的课程'})).toBeVisible();await expect(recovered.locator('.course')).toContainText('3 / 15');
   await recovered.locator('.course .primary-button').click();await expect(recovered.locator('#starCount')).toHaveText('3');
   await adminLogin(recovered);await recovered.getByRole('button',{name:'管理 备份班',exact:true}).click();
   const pendingRow=recovered.locator('.student-row').filter({hasText:pending.number});
@@ -31,9 +31,9 @@ test('停服务备份恢复后，原学号密码、班级和真实成果仍可�
 
 test('学习卡数据库升级保留原学生成果，旧卡及旧会话失效，重启不重复分配学号',async({browser})=>{
  test.setTimeout(90000);const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-card-upgrade-'));let server,context;
- const origin='http://127.0.0.1:4196';
+ const origin=require('../support/login-test-ports').origin(4196);
  async function stop(){await new Promise(r=>server.close(r));server=null;}
- async function start(factory){server=await factory({dataDir:directory,origin});await new Promise(r=>server.listen(4196,'127.0.0.1',r));}
+ async function start(factory){server=await factory({dataDir:directory,origin});await new Promise(r=>server.listen(require('../support/login-test-ports').port(4196),'127.0.0.1',r));}
  try{
   const oldStore=require('../fixtures/learning-card-before/store').openStore(directory);oldStore.setAdmin('teacher','Test-only-classroom-2026!');oldStore.close();
   await start(require('../fixtures/learning-card-before/app').createApp);context=await browser.newContext({baseURL:origin});const page=await context.newPage();
@@ -56,10 +56,10 @@ test('学习卡数据库升级保留原学生成果，旧卡及旧会话失效�
 test('旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领',async({browser})=>{
  test.setTimeout(60000);const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-migrate-'));let server,context;
  try{
-  server=await require('../../scripts/preview-courses').serveCourses({port:4195});context=await browser.newContext({baseURL:'http://127.0.0.1:4195'});const page=await context.newPage();
+  server=await require('../../scripts/preview-courses').serveCourses({port:require('../support/login-test-ports').port(4195)});context=await browser.newContext({baseURL:require('../support/login-test-ports').origin(4195)});const page=await context.newPage();
   await completeActivity(page,'colours','/lesson');await expect(page.locator('#starCount')).toHaveText('3');
   const old=await context.newPage();await old.goto('/lesson/lesson49/');await expect(old.locator('#courseLoader')).toHaveCount(0);
-  await new Promise(r=>server.close(r));server=null;const store=openStore(directory);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();server=await createApp({dataDir:directory,origin:'http://127.0.0.1:4195'});await new Promise(r=>server.listen(4195,'127.0.0.1',r));
+  await new Promise(r=>server.close(r));server=null;const store=openStore(directory);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();server=await createApp({dataDir:directory,origin:require('../support/login-test-ports').origin(4195)});await new Promise(r=>server.listen(require('../support/login-test-ports').port(4195),'127.0.0.1',r));
   await page.goto('/lesson/admin/');await page.getByLabel('管理员账号').fill('teacher');await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');await page.getByRole('button',{name:'登录管理页'}).click();
   await expect(old.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();
   await page.getByLabel('新班级名称').fill('迁移班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');const account=await addStudent(page,'新同学');await signIn(page,account);await page.getByText('本机旧记录',{exact:true}).click();await expect(page.locator('#legacy')).toContainText('unit13-14 · 1 项活动完成');

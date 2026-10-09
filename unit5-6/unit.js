@@ -19,6 +19,7 @@
   }
   const surfaces = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
+  const canonicalRoute = id=>unit.routeAliases?.[id]||id;
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
   let active = '', certificateView;
   for (const stage of stages) {
@@ -36,6 +37,7 @@
     $('#lessonWorkspace').append(section);
   }
   const navigate = id => {
+    id=canonicalRoute(id);
     // Scrolling back to the cover keeps the hash; resume must still reposition.
     if (location.hash === '#' + id) route();
     else location.hash = id;
@@ -54,7 +56,7 @@
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
-    if (!routes.has(id)) id = 'cover'; markLocation(id);
+    id=canonicalRoute(id);if (!routes.has(id)) id = 'cover';if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);markLocation(id);
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
   }
   $('#lessonWorkspace').addEventListener('click', event => {
@@ -63,10 +65,10 @@
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
   }, true);
   $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
-  const resume = practice.activity('unitLocation');
+  const resume = canonicalRoute(practice.activity('unitLocation'));
   if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
   $('#startBtn').addEventListener('click', () => {
-    const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+    const saved = canonicalRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
@@ -85,19 +87,22 @@
     completed.text = signatures.text; practice.activity('unitCompleted', completed);
   }
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
-      const count = stage.required.filter(passed).length, stars = Math.floor(count / stage.required.length * 3);
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '整轮零错，这颗星点亮了！';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const awards = core.unitAwards.create({ unit, practice, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
@@ -107,9 +112,15 @@
     const element = node('div'); element.id = 'unit56-' + id + '-practice'; surfaces.get(id).append(element);
     const predecessors = unit.activityPredecessors[id];
     practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs,
+      inputViews:core.lesson49TaskInputs, roundPolicy:unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit56-' + old + '-practice/v1', questions: prior }))), ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+      onComplete: (states,round) => {
+        const perfect = awards.record(id, states, round);
+        const result = node('p', perfect ? '整轮零错，这颗星点亮了！' : round.roundPolicy !== unit.reward.edition ? '再练一轮，整轮零错就能点亮星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。', 'award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        element.querySelector('.practice-finish-actions').before(result);
+        complete(id);
+        nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
     return element;
   }
 
@@ -243,7 +254,7 @@
   }
   const modelActions=node('div','','activity-actions');nextStation('models',modelActions);
   surfaces.get('models').append(makeGuide,carGrid,choices,modelActions);
-  for(const id of ['refer','articles','choice','trans'])mountPractice(id);
+  for(const id of ['introduce','cars'])mountPractice(id);
 
   const examResults = node('div', '', 'unit-results');
   mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
@@ -254,15 +265,7 @@
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '新朋友小使者', course: '新朋友见面会 · Lesson 5–6', completion: '完成 Lesson 5–6 课堂配套练习', thanks: '认识新朋友，大方说你好！' },
-      characters: ['blake', 'sophie'], characterLabels: ['Mr. Blake', 'Sophie'], icon: art, defaultName: '新朋友小使者', dialogTitle: '新朋友见面会纪念', fileName: 'Lesson5-6-新朋友见面会.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
-  });
+  certificateView = core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href});
 
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
   writing.append(node('summary', '和朋友再试试'), node('p', '各选一张课文人物卡，轮流问好、介绍对方，再交换角色。用卡片上明确写出的信息，不猜真实朋友的国籍。'));

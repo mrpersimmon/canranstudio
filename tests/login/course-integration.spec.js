@@ -16,9 +16,9 @@ test('7–8 旧服务器真实完成记录换新设备后保留未改成绩，�
   const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
   const {signIn}=require('./helpers'),legacy=require('../fixtures/unit7-8-classroom-before/flow');
   const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-unit78-upgrade-')),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data');
-  const root=path.resolve(__dirname,'../..'),origin='http://127.0.0.1:4199';
+  const root=path.resolve(__dirname,'../..'),origin=require('../support/login-test-ports').origin(4199);
   let server,first,second,third;
-  const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(4199,'127.0.0.1',resolve));};
+  const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(require('../support/login-test-ports').port(4199),'127.0.0.1',resolve));};
   try{
     await fs.mkdir(oldRoot);
     for(const entry of await fs.readdir(root,{withFileTypes:true})){
@@ -75,20 +75,31 @@ for (const { id, lesson, complete } of [
       HTMLMediaElement.prototype.play = () => Promise.reject(new DOMException('Audio unavailable', 'NotSupportedError'));
     });
     await student.page.goto(`/lesson/${id}/#learn/certificate`);
-    await expect(student.page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+    const keepsake=['unit3-4','unit5-6'].includes(id);
+    await expect(student.page.getByRole('button', { name: keepsake?'保存纪念卡':'领取单元证书', exact: true })).toBeDisabled();
     await complete(student.page, '/lesson');
+    if(keepsake){
+      await expect(student.page.locator('#certificateName')).toHaveText('合并体验');
+      await expect(student.page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);
+    }else{
     await student.page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('合并体验');
     await student.page.getByRole('button', { name: '领取单元证书', exact: true }).click();
     await expect(student.page.getByRole('dialog')).toContainText(`完成 Lesson ${lesson} 课堂配套练习`);
     await student.page.keyboard.press('Escape');
+    }
     await expect(student.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
 
     second = await studentLogin(browser, account);
-    await expect(second.page.locator('.course')).toContainText('15 / 15');
+    await expect(second.page.locator('.course')).toContainText(keepsake?'5 / 5':'15 / 15');
     await second.page.goto(`/lesson/${id}/#learn/certificate`);
-    await expect(second.page.locator('#starCount')).toHaveText('15');
+    await expect(second.page.locator('#starCount')).toHaveText(keepsake?'5':'15');
+    if(keepsake){
+      await expect(second.page.locator('#certificateName')).toHaveText('合并体验');
+      await expect(second.page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeEnabled();
+    }else{
     await expect(second.page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('合并体验');
     await expect(second.page.getByRole('button', { name: '领取单元证书', exact: true })).toBeEnabled();
+    }
     expect(voices).toEqual([]); expect(spoken).toEqual([]); expect(errors).toEqual([]);
   } finally { await student.context.close(); await second?.context.close(); }
 });

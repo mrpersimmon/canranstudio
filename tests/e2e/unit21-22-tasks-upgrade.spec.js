@@ -23,7 +23,7 @@ test('旧词义题未提交选择不迁成新配对；修改前后同尺寸留�
  await page.goto('/unit21-22/#learn/listen');const room=page.locator('.stage-listen');
  for(const answer of ['给；递给','这一本书','哪一本书？','空的 / 满的','大的 / 小的','锋利的 / 钝的']){await room.getByRole('button',{name:answer,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
  await room.getByRole('button',{name:'盒子；箱子',exact:true}).click();old=false;await page.reload();
- await expect(room.getByRole('heading',{name:'给容器配对',exact:true})).toBeVisible();await expect(room.locator('.match-count')).toHaveText('已配 0 / 3 对');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','6');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+ await expect(room.getByRole('heading',{name:'给容器选择配对',exact:true})).toBeVisible();await expect(room.locator('.match-count')).toHaveText('已配 0 / 3 对');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','6');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  for(const width of [390,1280])for(const edition of ['before','after']){
   old=edition==='before';await page.setViewportSize({width,height:820});await page.goto('/unit21-22/#learn/exam');await page.reload();
   const exam=page.locator('.stage-exam');await page.evaluate(()=>document.fonts.ready);await expect.poll(()=>exam.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);

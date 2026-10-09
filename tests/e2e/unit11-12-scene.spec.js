@@ -27,7 +27,7 @@ test('手机对白占满一行，三人同地面，中文展开与刷新不丢�
   await page.setViewportSize({width,height:844});await page.goto('/unit11-12/#learn/text');const room=page.locator('.stage-text'),log=room.getByRole('log'),stage=room.locator('.dialogue-stage');
   const s=await stage.boundingBox(),l=await log.boundingBox(),actors=await room.locator('.dialogue-actor').all();expect(l.width).toBeGreaterThan(s.width*.85);
   const bottoms=[];for(const actor of actors){const b=await actor.boundingBox();expect(b.y).toBeGreaterThanOrEqual(l.y+l.height);bottoms.push(b.y+b.height);}expect(Math.max(...bottoms)-Math.min(...bottoms)).toBeLessThan(3);
-  await room.getByRole('button',{name:'重新上演',exact:true}).click();
+  if(await room.getByRole('button',{name:'重新上演',exact:true}).isVisible())await room.getByRole('button',{name:'重新上演',exact:true}).click();else await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();
   for(let i=0;i<9;i++)await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
   const ctrl=room.locator('.stage-ctrl'),before=await ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY);
   await log.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();

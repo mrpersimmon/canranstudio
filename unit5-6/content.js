@@ -320,3 +320,17 @@ unit.questions["articles"][2]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Five answer zones; preserve all current questions and their order.
+(function(core){
+ 'use strict';const unit=core.unit56;
+ for(const [id,oldIds,title,chapter] of [['introduce',['refer','articles'],'介绍小工坊','l3'],['cars',['choice','trans'],'汽车小问答','l4']]){
+  unit.taskPredecessors[id]=oldIds.flatMap(old=>[{key:'unit56-'+old+'-practice/'+(unit.taskSessions[old]||'v'+unit.version),questions:unit.questions[old]},...(unit.taskPredecessors[old]||[])]);
+  unit.questions[id]=oldIds.flatMap(old=>unit.questions[old]);unit.taskSessions[id]='award-'+id+'-v1';
+  const stage=unit.stages.find(stage=>stage.id===chapter);stage.activities=stage.activities.filter(item=>!oldIds.includes(item[0]));stage.activities.push([id,title,'order']);stage.required=[id];
+  for(const old of oldIds){delete unit.questions[old];delete unit.taskSessions[old];delete unit.taskPredecessors[old];}
+ }
+ unit.routeAliases={'learn/refer':'learn/introduce','learn/articles':'learn/introduce','learn/choice':'learn/cars','learn/trans':'learn/cars'};
+ unit.stages[4].activities.find(item=>item[0]==='certificate')[1]='我的单元纪念卡';
+ unit.reward={edition:'story-card-v1',title:'新朋友小使者',lesson:'Lesson 5–6',scene:'/assets/awards/unit5-6-friends.webp',alt:'布莱克先生和苏菲、汉斯在教室见面',color:'#49785c',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['introduce','介绍小工坊'],['cars','汽车小问答'],['exam','见面小挑战']].map(([id,title])=>({id,title}))};
+})(globalThis.CanranCore);

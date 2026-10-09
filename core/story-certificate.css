@@ -1,6 +1,6 @@
 @font-face{font-family:'Award Round';src:url('/assets/awards/award-round.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-.unit12-workspace .stage-certificate{max-width:720px;margin-inline:auto;background:transparent;border:0;box-shadow:none;padding:16px 0}
-.unit12-workspace .stage-certificate>.stage-heading{background:transparent;border:0;margin:0 0 18px;padding:0 8px}
+:is(.unit12-workspace,.unit34-workspace,.unit56-workspace) .stage-certificate{max-width:720px;margin-inline:auto;background:transparent;border:0;box-shadow:none;padding:16px 0}
+:is(.unit12-workspace,.unit34-workspace,.unit56-workspace) .stage-certificate>.stage-heading{background:transparent;border:0;margin:0 0 18px;padding:0 8px}
 .story-award-panel{width:100%;color:#4a3226}
 .story-award-paper{position:relative;container-type:inline-size;aspect-ratio:1.88;border:3px solid #4a3226;border-radius:28px;overflow:hidden;background:#fffcf5 url('/assets/awards/paper.webp') center/512px;box-shadow:0 4px 0 #4a32261c}
 .story-award-paper[data-stars="5"]{box-shadow:inset 0 0 0 7px #f4bd55,inset 0 0 0 9px #b17c29,0 4px 0 #4a32261c}
@@ -27,7 +27,7 @@
 .story-award-tasks p{text-align:center;font-size:15px}.story-award-tasks button{white-space:nowrap}
 .award-round-result{margin:0 0 20px;text-align:center;color:#527b3d;font-size:18px}
 @media(max-width:540px){
- .unit12-workspace .stage-certificate{max-width:340px;padding:12px 0}
+ :is(.unit12-workspace,.unit34-workspace,.unit56-workspace) .stage-certificate{max-width:340px;padding:12px 0}
  .story-award-paper{aspect-ratio:.86;border-radius:20px}
  .story-award-brand{top:7%;font-size:14px}
  .story-award-paper .story-award-title{top:17%;font-size:10cqw}

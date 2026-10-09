@@ -4,6 +4,7 @@ const { createHash } = require('node:crypto');
 const fs = require('node:fs/promises');
 const { relocateSource } = require('../../scripts/public-base-path');
 const repairs = require('../fixtures/pronunciation-repairs.json');
+const voicedFixtures = { 'unit1-2': 'unit1-2-short-exam-before', 'unit5-6': 'unit5-6-voiced-before', 'unit11-12': 'unit11-12-voiced-before' };
 
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 async function observe(page) {
@@ -25,7 +26,7 @@ async function heard(page, control, path) {
 }
 async function historicalPage(page, course, base) {
   async function previousSource(name) {
-    const source = await fs.readFile('tests/fixtures/' + course + '-voiced-before/' + name, 'utf8');
+    const source = await fs.readFile('tests/fixtures/' + voicedFixtures[course] + '/' + name, 'utf8');
     return base ? relocateSource(source, course + '/' + name, base + '/') : source;
   }
   await page.route(new RegExp('/' + course + '/(?:index\\.html)?(?:\\?.*)?$'), async route => route.fulfill({ contentType: 'text/html', body: await previousSource('index.html') }));
@@ -35,7 +36,7 @@ async function historicalPage(page, course, base) {
 async function prepare(page, item, base) {
   // Retained audio is checked through the frozen voiced UI, never by adding
   // audio controls back to a current classroom unit. Its no-voice flow has its own checks.
-  if (['unit5-6', 'unit11-12'].includes(item.course)) await historicalPage(page, item.course, base);
+  if (voicedFixtures[item.course]) await historicalPage(page, item.course, base);
   const stage = item.kind === 'word' ? 'words' : item.kind === 'model' ? 'models' : 'text';
   await page.goto(`${base}/${item.course}/#learn/${stage}`);
   if (item.kind === 'word') {
@@ -69,7 +70,7 @@ async function verifiedPlayback(page, item, button, base, testInfo) {
   await fs.writeFile(testInfo.outputPath(item.key + '.mp3'), bytes);
 }
 for (const base of ['', '/lesson']) {
-  for (const item of repairs) test(`${['unit5-6', 'unit11-12'].includes(item.course) ? '历史' : ''}修订录音 ${item.issue}：实际文件、重听和刷新 ${base || '/'}`, async ({ page }, testInfo) => {
+  for (const item of repairs) test(`${voicedFixtures[item.course] ? '历史' : ''}修订录音 ${item.issue}：实际文件、重听和刷新 ${base || '/'}`, async ({ page }, testInfo) => {
     test.setTimeout(90000); await observe(page);
     const first = await prepare(page, item, base);
     if (item.ipa) await expect(first).toContainText(item.ipa);
@@ -94,7 +95,7 @@ test.describe(() => {
 // Network-failure fallback is exercised without an already cached worker file.
 // Normal cached playback is covered above and by the course-cache tests.
 test.use({ serviceWorkers: 'block' });
-for (const item of repairs.filter(item => item.kind !== 'dialogue')) test(`${['unit5-6', 'unit11-12'].includes(item.course) ? '历史' : ''}修订录音失败后仍可重试 ${item.issue}`, async ({ page }, testInfo) => {
+for (const item of repairs.filter(item => item.kind !== 'dialogue')) test(`${voicedFixtures[item.course] ? '历史' : ''}修订录音失败后仍可重试 ${item.issue}`, async ({ page }, testInfo) => {
   await observe(page); const base = '/lesson';
   const button = await prepare(page, item, base);
   let fail = true;

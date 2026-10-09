@@ -119,6 +119,8 @@ test('a documentation-only plan avoids runtime tests; source changes retain rele
   assert.ok(planChecks(config, ['core/audio-player.js']).some(id => id.startsWith('browser')));
   assert.ok(planChecks(config, ['scripts/check-workflow.js']).includes('workflow'));
   assert.ok(planChecks(config, ['some-new-runtime.js']).includes('unit'));
+  assert.ok(planChecks(config, ['award-book/App.jsx']).includes('browser-login'));
+  assert.ok(config.tasks(process.cwd(), [])['browser-login']?.inputs?.includes('award-book'));
 });
 
 test('expired evidence reruns, while clearing browser reports does not erase unrelated successful checks', async t => {

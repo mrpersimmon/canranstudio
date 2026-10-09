@@ -21,8 +21,10 @@ async function story(page,pair,base=''){
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
  await room.getByRole('button',{name:finish,exact:true}).click();
 }
-function answers(pair,group,old=false){const c=CASES[pair];return (!old&&c.changes.find(x=>x.group===group)?.answers)||c.old[group];}
+function currentGroup(pair,id){return pair==='5-6'?({refer:'introduce',articles:'introduce',choice:'cars',trans:'cars'}[id]||id):id;}
+function answers(pair,group,old=false){if(!old&&pair==='5-6'&&['introduce','cars'].includes(group))return (group==='introduce'?['refer','articles']:['choice','trans']).flatMap(id=>answers(pair,id));const c=CASES[pair];return (!old&&c.changes.find(x=>x.group===group)?.answers)||c.old[group];}
 async function activity(page,pair,group,{base='',old=false,capture,wrongNew=false,hintNew=false}={}){
+ if(!old)group=currentGroup(pair,group);
  await page.goto(`${base}/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group),items=answers(pair,group,old);
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');
  await expect(room).toBeVisible();
@@ -68,4 +70,4 @@ async function activity(page,pair,group,{base='',old=false,capture,wrongNew=fals
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }
-module.exports={CASES,select,story,answers,activity};
+module.exports={CASES,select,story,answers,activity,currentGroup};

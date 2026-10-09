@@ -248,6 +248,10 @@ function openStore(directory) {
     saveLearning(who, course, generation, value, records, advanced) { return transaction(() => { this.saveProgress(who,course,generation,value);return learning.sync(who,course,generation,records,advanced); }); },
     resetLearning(who, course, generation) { return transaction(() => { this.saveProgress(who,course,generation,{});learning.reset(who,course,generation); }); },
     award,
+    awards(who) {
+      return db.prepare('SELECT course, edition, value FROM unit_awards WHERE student=?').all(who)
+        .map(row => ({course:row.course, edition:row.edition, ...JSON.parse(row.value)}));
+    },
     grantAwards(who, course, reward, claims) { return transaction(() => {
       const saved = award(who, course, reward.edition), now = new Date().toISOString();
       for (const [zone, claim] of claims) if (!saved.zones[zone]) saved.zones[zone] = { runId: claim.runId, earnedAt: now };

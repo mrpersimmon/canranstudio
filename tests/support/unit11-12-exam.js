@@ -14,7 +14,8 @@ const EXAM = [
  { prompt: '远处', answer: ['Whose', 'shirt', 'is', 'that?'] },
  { prompt: '归还', answer: '老师：Here you are. / Tim：Thank you, sir.' }
 ];
-const revisedPrompts={"4": "接好 Dave 和老师的认领对话。"};
+// Current question titles are separate from their reading material.
+const revisedPrompts={0:'选出对应的认领记录',4:'接好 Dave 和老师的认领对话'};
 EXAM.splice(0,EXAM.length,...taskCases.answers('11-12','exam').map((q,i)=>({...EXAM[i],...q,prompt:revisedPrompts[i]||EXAM[i]?.prompt})));
 async function selectAnswer(room, answer) {
  if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);

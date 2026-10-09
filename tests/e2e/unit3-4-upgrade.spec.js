@@ -37,10 +37,11 @@ test('真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('小伞');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   await page.keyboard.press('Escape'); upgrade(); await page.reload();
-  await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('小伞');
-  await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
-  await expect(page.locator('#starCount')).toHaveText('1');
-  for (const [id, completed, question] of [['listen',0,'哪一个词对应图中的物品？'],['roles',2,'点出寄存牌的号码。'],['reply',0,'书的主人没变'],['exam',2,'这位是你的老师吗']]) {
+  await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit3-4:learning:v1')).activity.unitName)).toBe('小伞');
+  await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+  await expect(page.locator('#starCount')).toHaveText('0');
+  for (const [id, completed, question] of [['listen',0,'哪一个词对应图中的物品？'],['roles',2,'点出寄存牌的号码'],['reply',0,'书的主人没变'],['exam',2,'这位是你的老师吗']]) {
     await page.goto('/unit3-4/#learn/' + id); const room = page.locator('.stage-' + id);
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(completed));
     await expect(room).toContainText(question);

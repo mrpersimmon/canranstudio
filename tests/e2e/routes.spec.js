@@ -23,14 +23,14 @@ for (const route of routes) {
 test('/home/ remains a compatibility entry for plain static hosting', async ({ page }) => {
   const response = await page.goto('/home/');
   expect(response.status()).toBe(200);
-  await expect(page).toHaveURL('http://127.0.0.1:4173/');
+  await expect(page).toHaveURL('http://127.0.0.1:' + (process.env.COURSE_TEST_PORT || 4173) + '/');
   await expect(page).toHaveTitle(/我的课程/);
 });
 
 test('/home/ preserves query and hash through the compatibility redirect', async ({ page }) => {
   const response = await page.goto('/home/?course=49#progress');
   expect(response.status()).toBe(200);
-  await expect(page).toHaveURL('http://127.0.0.1:4173/?course=49#progress');
+  await expect(page).toHaveURL('http://127.0.0.1:' + (process.env.COURSE_TEST_PORT || 4173) + '/?course=49#progress');
   await expect(page).toHaveTitle(/我的课程/);
 });
 

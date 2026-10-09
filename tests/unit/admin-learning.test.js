@@ -25,7 +25,7 @@ function fixture(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'canran-learn
 function view(store,student,now=Date.now()){const data=store.learning.read({studentId:student.id});return learning.studentView(data.students[0],data,definitions,descriptions,now);}
 
 test('published courses keep their independent reward totals and validate submitted question families',()=>{
- for(const course of UNITS){const unit=definitions[course],ids=learning.activities(unit,course).filter(a=>a.questions.length&&!a.subjects).map(a=>a.id),value=book(course,ids);const wanted=ids.reduce((n,id)=>n+unit.questions[id].length,0);assert.equal(learning.submissions(observer.snapshot(value),unit,course).length,wanted,course);assert.equal(progress.summary({},unit,course).maxStars,course==='unit1-2'?5:15,course);assert.equal(learning.courseSummary({unit,course,value:{}}).completed,false);}
+ for(const course of UNITS){const unit=definitions[course],ids=learning.activities(unit,course).filter(a=>a.questions.length&&!a.subjects).map(a=>a.id),value=book(course,ids);const wanted=ids.reduce((n,id)=>n+unit.questions[id].length,0);assert.equal(learning.submissions(observer.snapshot(value),unit,course).length,wanted,course);assert.equal(progress.summary({},unit,course).maxStars,['unit1-2','unit3-4','unit5-6'].includes(course)?5:15,course);assert.equal(learning.courseSummary({unit,course,value:{}}).completed,false);}
 });
 test('unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge',()=>{
  const value=book(),group=value.groups.colours;group.index=0;group.states[0].checked=false;group.states[0].selection='an unsubmitted draft';group.states[1].attempts=0;group.states[1].checked=false;delete value.records[group.states[1].questionId];
@@ -208,8 +208,8 @@ test('star ordering covers the full query before pagination, keeps ties stable a
  assert.deepEqual(dashboard({course,status:'in-progress,completed',sort:'stars-desc'}).rows.map(row=>row.student.id),[students[29].id,students[1].id,students[27].id]);
  // Keep this cross-course sorting fixture on two completion-based 15-star courses.
  // Lesson 1–2 awards now require a separate zero-error round, not completion alone.
- store.updateClass(group.id,group.name,[course,'unit3-4']);
- store.saveProgress(students[1].id,'unit3-4',0,completeBook('unit3-4'));
+ store.updateClass(group.id,group.name,[course,'unit7-8']);
+ store.saveProgress(students[1].id,'unit7-8',0,completeBook('unit7-8'));
  assert.equal(dashboard({sort:'stars-desc'}).rows[0].student.id,students[1].id);
  assert.equal(dashboard({course,sort:'stars-desc'}).rows[0].student.id,students[29].id);
  store.updateClass(group.id,group.name,[course]);
