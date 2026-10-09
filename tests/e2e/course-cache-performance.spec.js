@@ -9,10 +9,24 @@ const os = require('node:os');
 test.use({ trace: 'off' });
 test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', async ({ page, browser }, testInfo) => {
   test.setTimeout(90000);
-  const samples = [], fetched = [], errors = [];
+  const samples = [], driverSamples = [], fetched = [], errors = [];
   let phase = 'first visit', attempt = 0;
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'warning' || message.type() === 'error') errors.push(message.text()); });
+  // Record the first fully rendered, usable frame in the browser clock.
+  // Locator.waitFor itself polls with up to 500 ms of backoff; timing
+  // its return includes up to 500 ms of test-driver delay after the page is ready.
+  await page.addInitScript(() => {
+    const sample = () => {
+      const next = [...document.querySelectorAll('.stage-words button')].find(button => button.textContent === '下一组词卡');
+      if (next && !next.disabled && next.checkVisibility({ visibilityProperty: true, opacityProperty: true })
+          && !document.querySelector('#courseLoader') && document.fonts.status === 'loaded'
+          && [...document.images].every(image => !image.getAttribute('src') || image.complete && image.naturalWidth > 0)) {
+        requestAnimationFrame(() => { window.courseUsableAt = performance.now(); });
+      } else requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
   try {
     await page.goto('/lesson/unit29-30/#learn/words');
     const next = page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true });
@@ -22,11 +36,11 @@ test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', asyn
       attempt = i + 1; phase = 'reload';
       const start = Date.now();
       await page.reload({ waitUntil: 'domcontentloaded', timeout: 10000 });
-      // Measure when the real control becomes visible. Assertion retries back
-      // off by up to a second, which measures polling delay as page-load time.
       phase = 'ready control';
-      await next.waitFor({ state: 'visible', timeout: 5000 });
-      samples.push(Date.now() - start);
+      await page.waitForFunction(() => typeof window.courseUsableAt === 'number', null, { timeout: 5000 });
+      samples.push(await page.evaluate(() => window.courseUsableAt));
+      driverSamples.push(Date.now() - start);
+      await expect(next).toBeVisible();
       await expect(next).toBeEnabled();
     }
     phase = 'performance budget';
@@ -36,7 +50,7 @@ test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', asyn
   } finally {
     // Report partial samples too, so an interrupted run identifies the failing
     // visit instead of losing all evidence to the outer test timeout.
-    const report = { browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, trace: false, attempt, phase, samples, p95: samples.length === 20 ? [...samples].sort((a, b) => a - b)[18] : null, errors, fetched };
+    const report = { browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, trace: false, attempt, phase, timing: 'navigation start to fully usable rendered frame', samples, driverSamples, p95: samples.length === 20 ? [...samples].sort((a, b) => a - b)[18] : null, errors, fetched };
     const body = JSON.stringify(report, null, 2);
     await fs.writeFile(testInfo.outputPath('warm-visits.json'), body);
     await testInfo.attach('warm-visits.json', { contentType: 'application/json', body: Buffer.from(body) });

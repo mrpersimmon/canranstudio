@@ -168,3 +168,4 @@
 .unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:144px}
 @media(max-width:580px){.unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:202px}}
 @media(max-width:360px){.unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:260px}}
+.unit34-workspace{--unit-scene:url('../assets/unit3-4/story-background.svg')}
