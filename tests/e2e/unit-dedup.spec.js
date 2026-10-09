@@ -45,7 +45,7 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   await choose(exam, "No, it isn't.");
   await finishExam(page, '1-2', 2);
   await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['9', '9', '1']);
-  await expect(exam.getByRole('button', { name: '下一站：我的单元证书', exact: true })).toBeVisible();
+  await expect(exam.getByRole('button', { name: '下一站：我的单元纪念卡', exact: true })).toBeVisible();
 });
 
 test('Lesson 3–4 合并重复工坊，25题覆盖不同语言判断', async ({ page }) => {
@@ -200,7 +200,9 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   // reviewed predecessor. Keep only the two still-identical story questions.
   await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
   await expect(page.locator('.stage-text')).toContainText('故事看完了！');
-  await expect(page.locator('#starCount')).toHaveText('1');
+  // Reading and compatible answers survive, but neither establishes a zero-error
+  // round in the new five-zone award edition.
+  await expect(page.locator('#starCount')).toHaveText('0');
 });
 
 test('Lesson 49–50 旧理解、问句、分类与挑战不代答新版，交接活动保留', async ({ page }) => {

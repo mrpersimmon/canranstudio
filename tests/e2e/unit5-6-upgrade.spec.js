@@ -30,17 +30,18 @@ test('真实旧录音中断后按已显示的句子续读，词卡翻页保留',
   await page.goto('/unit5-6/#learn/words'); await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');
 });
 
-test('配音旧15星升级为6星，未改题与姓名保留，新词义和综合题不代答', async ({ page }) => {
+test('配音旧15星不自动获得新版星星，未改题与姓名保留，新词义和综合题不代答', async ({ page }) => {
   test.setTimeout(200000); const upgrade = await voicedEdition(page);
   await legacy.completeUnit56(page);
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('小伙伴');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   await page.keyboard.press('Escape'); upgrade(); await page.reload();
-  await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('小伙伴');
-  await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
-  await expect(page.locator('#starCount')).toHaveText('6');
+  await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit5-6:learning:v1')).activity.unitName)).toBe('小伙伴');
+  await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+  await expect(page.locator('#starCount')).toHaveText('0');
   await page.goto('/unit5-6/#learn/listen'); const room = page.locator('.stage-listen');
-  await expect(room).toContainText('给新朋友的国籍词配对。');
+  await expect(room).toContainText('给新朋友的国籍词');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.locator('.practice-options button[aria-pressed="true"]')).toHaveCount(0);
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
@@ -51,9 +52,9 @@ test('配音旧15星升级为6星，未改题与姓名保留，新词义和综�
 test('旧版重练空白回合优先，删去前题不会复活品牌题的历史答案', async ({ page }) => {
   const upgrade = await voicedEdition(page);
   await legacy.completeActivity(page, 'choice');
-  const room = page.locator('.stage-choice'); await room.getByRole('button', { name: '再练一轮', exact: true }).click();
+  const previousRoom = page.locator('.stage-choice'); await previousRoom.getByRole('button', { name: '再练一轮', exact: true }).click();
   upgrade(); await page.reload();
-  await expect(room).toContainText('第 1 / 1 题');
+  const room=page.locator('.stage-cars');await expect(room).toContainText('第 1 / 3 题');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.getByRole('button', { name: "It's a Volvo.", exact: true })).toHaveAttribute('aria-pressed', 'false');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();

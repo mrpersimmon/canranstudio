@@ -29,28 +29,17 @@ test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并�
   expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
 });
 
-test('真实完成 20 句与 26 题获得 15 星，领取、保存、打印与重练连续，单元记录独立',async({page})=>{
-  test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('/unit5-6/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
-  await completeUnit56(page);
-  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('乐于交朋友的小雨');
-  await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
-  const dialog=page.getByRole('dialog',{name:'新朋友见面会纪念',exact:true});
-  await expect(dialog.locator('#certificateName')).toHaveText('乐于交朋友的小雨');
-  for(const name of ['Mr. Blake','Sophie'])await expect(dialog.getByRole('img',{name,exact:true})).toBeVisible();
-  const date=await dialog.locator('#certificateDate').innerText();
-  await dialog.screenshot({path:'output/playwright/unit5-6/certificate-desktop.png'});
-  const download=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();
-  await(await download).saveAs('output/playwright/unit5-6/certificate-saved.png');
-  const pdf=await page.pdf({path:'output/playwright/unit5-6/certificate-print.pdf',preferCSSPageSize:true,printBackground:true});
-  expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
-  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:844});expect(await dialog.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);}
-  await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeFocused();
-  await page.reload();await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(dialog.locator('#certificateDate')).toHaveText(date);await page.keyboard.press('Escape');
-  await page.goto('/unit5-6/#learn/listen');const room=page.locator('.stage-listen');await room.getByRole('button',{name:'再练一轮',exact:true}).click();
-  await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
-  for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();}
-  expect(errors).toEqual([]);
+test('真实完成20句和26题获得五星，日期固定、重练连续，各单元记录独立',async({page})=>{
+ test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));await completeUnit56(page);
+ const card=page.getByRole('article',{name:'我的单元纪念卡'});await expect(card.getByRole('img',{name:'布莱克先生和苏菲、汉斯在教室见面'})).toBeVisible();
+ await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+ const date=await page.locator('#certificateDate').innerText();
+ for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:844});expect(await card.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);}
+ await page.reload();await expect(page.locator('#certificateDate')).toHaveText(date);
+ await page.goto('/unit5-6/#learn/listen');const room=page.locator('.stage-listen');await room.getByRole('button',{name:'再练一轮',exact:true}).click();
+ await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('5');
+ for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:other==='unit49-50'?'领取单元证书':'保存纪念卡',exact:true})).toBeDisabled();}
+ expect(errors).toEqual([]);
 });
 
 test('新单元从图鉴开始，24 个词的音标与翻面可见，末组主动进入八词辨义', async ({ page }) => {
@@ -81,31 +70,32 @@ test('首页与 lesson 子目录有新单元入口，独立继续并保留资源
   await expect(page.locator('#starCount')).toHaveText('0');
   await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.getByRole('link',{name:'介绍有办法',exact:true}).click();
-  await page.locator('.stage-refer').getByRole('button',{name:'She',exact:true}).click();
+  await page.locator('.stage-introduce').getByRole('button',{name:'She',exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();
-  await expect(page.getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toHaveAttribute('href','/lesson/unit5-6/#learn/refer');
+  await expect(page.getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toHaveAttribute('href','/lesson/unit5-6/#learn/introduce');
   await expect(page.getByRole('link',{name:'开始学习：雨伞认领小帮手',exact:true})).toBeVisible();
   await page.getByRole('link',{name:'继续学习：新朋友见面会',exact:true}).click();
-  await expect(page.locator('.stage-refer').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('.stage-introduce').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.goto('/unit5-6/#learn/refer');
-  await expect(page.locator('.stage-refer').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','false');
+  await expect(page).toHaveURL(/#learn\/introduce$/);
+  await expect(page.locator('.stage-introduce').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','false');
   expect(bad).toEqual([]);
 });
 
 test('题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动',async({page})=>{
-  await page.goto('/unit5-6/#learn/refer');const refer=page.locator('.stage-refer');
+  await page.goto('/unit5-6/#learn/refer');const refer=page.locator('.stage-introduce');
   await refer.getByRole('button',{name:'She',exact:true}).click();await refer.getByRole('button',{name:'检查答案',exact:true}).click();
-  await page.goto('/unit5-6/#learn/articles');const articles=page.locator('.stage-articles');await articles.getByRole('button',{name:'a',exact:true}).click();
+  await page.goto('/unit5-6/#learn/choice');const articles=page.locator('.stage-cars');await articles.getByRole('button',{name:"It's a Volvo.",exact:true}).click();
   await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(articles.getByRole('heading').first()).toBeInViewport();
-  await expect(articles.getByRole('button',{name:'a',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(articles.getByRole('button',{name:"It's a Volvo.",exact:true})).toHaveAttribute('aria-pressed','true');
   await page.route('**/unit5-6/content.js*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace("question('refer-she'","question('refer-she-revised'")});});
-  await page.reload();await expect(articles.getByRole('button',{name:'a',exact:true})).toHaveAttribute('aria-pressed','true');
+  await page.reload();await expect(articles.getByRole('button',{name:"It's a Volvo.",exact:true})).toHaveAttribute('aria-pressed','true');
   await page.goto('/unit5-6/#learn/refer');await expect(refer.getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','false');await expect(refer.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(refer.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
 });
 
 test('首页重开包含四个单元，取消保留，确认只清除本路径的学习记录',async({page})=>{
-  await page.goto('/unit5-6/#learn/refer');const root=page.locator('.stage-refer');await root.getByRole('button',{name:'She',exact:true}).click();
-  for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/refer','unit49-50/#learn/give']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}
+  await page.goto('/unit5-6/#learn/refer');const root=page.locator('.stage-introduce');await root.getByRole('button',{name:'She',exact:true}).click();
+  for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit49-50/#learn/give']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}
   await page.goto('/lesson/');
   await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();
   for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会'])await expect(page.getByRole('link',{name:'继续学习：'+name,exact:true})).toBeVisible();

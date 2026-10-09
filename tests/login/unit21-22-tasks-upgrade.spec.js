@@ -9,8 +9,8 @@ for(const[pair,answers]of [['21-22',EXAMS['21-22']]])test(`${pair} 新题型跨�
  test.setTimeout(120000);
  const{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-units1730-upgrade-')),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data');
- const root=path.resolve(__dirname,'../..'),origin='http://127.0.0.1:4213';let server,first,second,third;
- const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(4213,'127.0.0.1',resolve));};
+ const root=path.resolve(__dirname,'../..'),origin=require('../support/login-test-ports').origin(4213);let server,first,second,third;
+ const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(require('../support/login-test-ports').port(4213),'127.0.0.1',resolve));};
  try{
   await fs.mkdir(oldRoot);
   for(const entry of await fs.readdir(root,{withFileTypes:true})){

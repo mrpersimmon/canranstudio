@@ -46,8 +46,8 @@ test('听音删除无效线索，重试和刷新不恢复它，其他活动有�
   await page.screenshot({ path: 'output/playwright/l49-v15-listen.png' });
   await page.goto('/lesson49/#learn/doare');
   await expect(page.locator('#doarePractice').getByRole('button', { name: '给点线索', exact: true })).toHaveCount(0);
-  await page.goto('/unit1-2/#learn/trans');
-  const grammar = page.locator('.stage-trans');
+  await page.goto('/lesson49/#learn/subjects');
+  const grammar = page.locator('.stage-subjects');
   await grammar.getByRole('button', { name: '给点线索', exact: true }).click();
   await expect(grammar.locator('.practice-hint')).toBeVisible();
 });

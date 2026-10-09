@@ -12,6 +12,7 @@ test('11–12 十题完成认领表达链，所有声音失败、错答与末题
  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
  for (const [i, question] of EXAM.entries()) {
   await expect(room.locator('.claim-task-heading')).toContainText(question.prompt);
+  if(i===0)await expect(room.getByRole('region',{name:'题目材料',exact:true})).toHaveText("This is my brother's pen. It's his pen.");
   const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
   await expect(room.locator('.claim-task-result')).toBeEmpty();
   if (i === 0) {
@@ -49,6 +50,7 @@ for (const width of [320,390,768,1280]) test(`${width} 物主四选项两行两�
  await page.goto('/lesson/unit11-12/#learn/exam'); const room=page.locator('.stage-exam');
  for(const [i,question] of EXAM.entries()){
   await expect(room.locator('.claim-task-heading')).toContainText(question.prompt);
+  if(i===0)await expect(room.getByRole('region',{name:'题目材料',exact:true})).toHaveText("This is my brother's pen. It's his pen.");
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   for(const control of await room.locator('.practice-options button').all()){
    expect(await control.evaluate(el=>el.scrollWidth<=el.clientWidth+1&&el.scrollHeight<=el.clientHeight+1)).toBe(true);

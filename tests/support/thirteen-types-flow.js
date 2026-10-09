@@ -53,7 +53,8 @@ async function activity(page,pair,id,{base='',capture}={}){
 async function complete(page,pair,base=''){
  await story(page,pair,base);for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id,{base});
  await page.goto(`${base}/unit${pair}/#learn/certificate`);
- await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();
+ if(pair==='1-2')await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
+ else await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();
  // Completion and zero-error stars are separate in the five-zone edition.
  if(pair!=='1-2')await expect(page.locator('#starCount')).toHaveText('15');
 }

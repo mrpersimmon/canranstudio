@@ -59,10 +59,11 @@ test('六区旧记录迁入：未改题保留，改写题未答，历史结果�
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('五区体验');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   const date = await page.locator('#certificateDate').innerText(); await page.keyboard.press('Escape');
+  const metadata = await page.evaluate(() => { const a=JSON.parse(localStorage.getItem('canran:unit1-2:learning:v1')).activity; return [a.unitName,a.unitCertificateIssuedAt]; });
   await restore(); await page.reload();
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('五区体验');
-  await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+  await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
+  await expect(page.locator('#certificateDate')).toBeHidden();
   for (const [id, progress] of [['roles', '第 5 / 5 题'], ['trans', '第 9 / 12 题']]) {
     await page.goto('/unit1-2/#learn/' + id); const room = page.locator('.stage-' + id);
     await expect(room.locator('.progress-copy')).toHaveText(progress);
@@ -79,8 +80,8 @@ test('六区旧记录迁入：未改题保留，改写题未答，历史结果�
   await flow.activity(page, '1-2', 'listen');
   await expect(page.locator('#starCount')).toHaveText('1');
   await page.goto('/unit1-2/#learn/certificate');
-  await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
-  await expect(page.locator('#certificateDate')).toHaveText(date);
+  await expect(page.locator('#certificateDate')).toBeHidden();
+  expect(await page.evaluate(() => { const a=JSON.parse(localStorage.getItem('canran:unit1-2:learning:v1')).activity; return [a.unitName,a.unitCertificateIssuedAt]; })).toEqual(metadata);
 });
 
 test('学习内容不发星；每区整轮首次零错得一星，改正后完成和重练不会多发或扣回', async ({ page }) => {

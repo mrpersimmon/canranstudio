@@ -1,14 +1,12 @@
 /* v1.17: unit identity and activity surfaces. Shared controls keep one meaning. */
 .unit-workspace{
  --unit-page:#FFF9F4;--unit-wash:#FCEBDD;--unit-line:#E6C4AC;--unit-accent:#98513E;
- --unit-scene:url('../assets/unit49-50/story-background.webp');
  --shelf-paper:#FFF5E5;--shelf-line:#E8CDA5;--paper:#FFFDF8;--cream:#FFF8EE;
  --action-green:#527B3D;--green-d:#466D35;
  background:var(--unit-page);
 }
 .unit12-workspace{
  --unit-page:#F7FAFC;--unit-wash:#EAF3F8;--unit-line:#BDD7E6;--unit-accent:#3F6F84;
- --unit-scene:url('../assets/unit1-2/story-background.webp');
 }
 .unit-workspace #topbar{border-bottom:2px solid var(--unit-line);box-shadow:0 2px 0 #4a322609}
 .unit-workspace #logo,.unit-workspace .chapter-number,.unit-workspace .unit-cover h1{color:var(--unit-accent)}
@@ -117,6 +115,6 @@
  .unit-workspace .certificate-paper{box-shadow:none}
 }
 
-.unit34-workspace{--unit-page:#FAF8FC;--unit-wash:#F1EDF8;--unit-line:#D1C1E3;--unit-accent:#705584;--unit-scene:url('../assets/unit3-4/story-background.svg')}
+.unit34-workspace{--unit-page:#FAF8FC;--unit-wash:#F1EDF8;--unit-line:#D1C1E3;--unit-accent:#705584}
 .unit34-workspace .stage-text .visitor .bubble{border-color:#B4A0CD;background:#F2EDF9}
 .unit34-workspace .stage-text .attendant .bubble{border-color:#A8C3A0;background:#EFF7EB}

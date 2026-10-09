@@ -81,7 +81,16 @@ for(const pair of ['1-2','25-26'])test(`${pair} 原输入版满星升级保留�
   }
  }
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('旧版小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
- upgrade();await page.reload();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('旧版小伙伴');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
+ upgrade();await page.reload();
+ if(pair==='1-2'){
+  await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.locator('#certificateDate')).toBeHidden();
+  await page.goto('/unit1-2/#learn/trans');const workshop=page.locator('.stage-trans');
+  await expect(workshop.getByRole('textbox')).toHaveCount(0);await expect(workshop.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(workshop.locator('.progress-copy')).toHaveText('第 1 / 12 题');
+  const {activity}=require('../support/thirteen-types-flow');for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id);
+  // All 12 grammar tasks are new; their first complete zero-error round earns one star.
+  await page.goto('/unit1-2/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('1');await expect(page.locator('#certificateDate')).toBeHidden();await expect(page.locator('.lvl-stars')).toHaveText(['☆','☆','★','☆','☆']);return;
+ }
+ await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('旧版小伙伴');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
  await page.goto(`/unit${pair}/#learn/${pair==='1-2'?'trans':'be'}`);const room=page.locator(pair==='1-2'?'.stage-trans':'.stage-be');
  await expect(room.getByRole('textbox')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.progress-copy')).toHaveText(pair==='1-2'?'第 1 / 12 题':'第 2 / 3 题');
  await complete(page,pair);await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);

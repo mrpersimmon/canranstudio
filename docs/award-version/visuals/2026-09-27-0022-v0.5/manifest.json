@@ -1,0 +1,47 @@
+{
+  "createdAt": "2026-09-27T00:22:00+08:00",
+  "tool": "built-in imagegen",
+  "status": "unselected visual proposals, no feature implementation",
+  "references": [
+    {
+      "file": "reference-current-certificate.jpg",
+      "source": "/Users/permission/.codex/worktrees/award-version/canranstudio.cn/tmp/award-design/current-certificate.jpg"
+    },
+    {
+      "file": "reference-course-cover.png",
+      "source": "/Users/permission/.codex/worktrees/award-version/canranstudio.cn/docs/butcher-version/evidence/2026-09-24-0121-unit1-2-scene/cover-1280.png"
+    }
+  ],
+  "images": [
+    {
+      "displayedOption": 1,
+      "name": "故事横版证书",
+      "file": "story-certificate.png",
+      "promptFile": "story-certificate.prompt.txt",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-7c3dd302-ea90-44f4-b63b-186de92c7231.png",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "c3a2dfd846190540576a49aee887a3ba9901143f5838e26a6ec09b6b41883b82"
+    },
+    {
+      "displayedOption": 2,
+      "name": "竖版故事纪念卡",
+      "file": "keepsake-certificate.png",
+      "promptFile": "keepsake-certificate.prompt.txt",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-4e7c0dd8-9f24-443f-ba2f-672543e9a6fc.png",
+      "width": 1122,
+      "height": 1402,
+      "sha256": "7f8b140af4c59df3803452c7c5fbcb4b0a0930b98321725107d426be5912b6fb"
+    },
+    {
+      "displayedOption": 3,
+      "name": "单枚故事奖章",
+      "file": "story-medal.png",
+      "promptFile": "story-medal.prompt.txt",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-15c4ff30-e8d8-4f8c-8b5f-a3ca366c948d.png",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "96e71a7c9dffb5c918f13f6073d16f5a85d7eeddeece87de54270faf1cc7add2"
+    }
+  ]
+}

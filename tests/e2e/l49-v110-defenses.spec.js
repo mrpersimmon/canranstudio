@@ -44,7 +44,7 @@ test('键盘检查不跳动，Enter 换题后新主语与进度可见',async({pa
   }).toBe(true);
 });
 
-for(const width of [320,768,1280])test(`${width} 宽度分拣四格与结束操作不溢出，手机主次按钮同宽`,async({page})=>{
+for(const width of [320,768,1280])test(`${width} 宽度分拣四格与结束操作不溢出，主次按钮同排且完整可点`,async({page})=>{
   await page.setViewportSize({width,height:900});
   await page.goto('/lesson49/#learn/subjects');await page.evaluate(()=>document.fonts.ready);
   const stage=page.locator('.stage-subjects');
@@ -62,8 +62,9 @@ for(const width of [320,768,1280])test(`${width} 宽度分拣四格与结束操�
   }
   const main=await stage.getByRole('button',{name:'下一站：动词换装间',exact:true}).boundingBox();
   const secondary=await stage.getByRole('button',{name:'再练一轮',exact:true}).boundingBox();
-  if(width===320){expect(main.width).toBe(secondary.width);expect(main.y+main.height).toBeLessThan(secondary.y);}
-  else{expect(main.y).toBe(secondary.y);expect(secondary.x+secondary.width).toBeLessThan(main.x);}
+  // Current shared finish layout keeps replay left and next right at every width.
+  expect(main.y).toBe(secondary.y);expect(secondary.x+secondary.width).toBeLessThan(main.x);
+  for(const box of [main,secondary]){expect(box.height).toBeGreaterThanOrEqual(44);expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);}
   await stage.screenshot({path:`output/playwright/l49-v110-finish-${width}.png`,style:'#topbar{visibility:hidden!important}'});
 });
 

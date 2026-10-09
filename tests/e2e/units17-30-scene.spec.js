@@ -6,7 +6,7 @@ async function capture(page,room,path){await room.screenshot({path,animations:'d
 for(const[pair,total]of Object.entries(FRAMES))test(`${pair} 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮`,async({page})=>{
  test.setTimeout(90000);
  for(const width of [320,390,768,1280]){
-  await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');await room.getByRole('button',{name:width===320?/^(重新上演|从头看)$/: '再看一遍',exact:true}).click();
+  await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');if(width===320)await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();else await room.getByRole('button',{name:'再看一遍',exact:true}).click();
   await expect(log.locator('.btext')).toHaveCount(0);const top=()=>ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
   for(let i=0;i<total;i++){
    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);

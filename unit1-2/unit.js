@@ -57,6 +57,7 @@
     const current = id; id = routeAlias(id);
     if (id !== current) history.replaceState(null, '', '#' + id);
     if (!routes.has(id)) id = 'cover'; markLocation(id);
+    document.documentElement.style.scrollPaddingTop = Math.ceil($('#topbar').getBoundingClientRect().height) + 12 + 'px';
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
   }
   $('#lessonWorkspace').addEventListener('click', event => {
@@ -77,23 +78,23 @@
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
-  const awardClaims = Object.fromEntries(Object.entries(practice.activity('unitAwardClaims') || {})
-    .filter(([id, claim]) => core.awardRules.validClaim(unit, id, claim)));
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
       const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
-      const stars = awardClaims[zone.id] ? 1 : 0;
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = stars ? '★' : '☆'; label.setAttribute('aria-label', zone.title + ' ' + stars + ' / 1 颗星');
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '整轮零错，这颗星点亮了！';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const awards = core.unitAwards.create({ unit, practice, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
@@ -112,9 +113,7 @@
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
       onProgress: () => { practicedHere = true; settings.onProgress?.(); },
       onComplete: (states, round) => {
-        const claim = { edition: unit.reward.edition, ...round, states: structuredClone(states) };
-        const perfect = core.awardRules.validClaim(unit, id, claim);
-        if (perfect && !awardClaims[id]) { awardClaims[id] = claim; practice.activity('unitAwardClaims', awardClaims); }
+        const perfect = awards.record(id, states, round);
         const awardStatus = perfect ? '整轮零错，这颗星点亮了！'
           : states.some(state => state.firstCorrect === false) ? '本轮有过错答。再练一轮，整轮零错就能点亮星星。'
           : '学习记录已保留。再练一轮，整轮零错就能点亮星星。';
@@ -122,6 +121,10 @@
         nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
         core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
           details: settings.completionDetails, celebrate: practicedHere, awardStatus });
+        const result = element.querySelector('.completion-award');
+        result.classList.add('award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        updateProgress();
         practicedHere = false;
       } });
     return element;
@@ -234,14 +237,8 @@
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '礼貌小达人', course: '礼貌小帮手 · Lesson 1–2', completion: '完成 Lesson 1–2 课堂配套练习', thanks: '会问一问，也会说谢谢！', reward: '五个答题环节 · 全部完成' },
-      characters: ['man', 'woman'], characterLabels: ['男士', '女士'], icon: art, defaultName: '礼貌小帮手', dialogTitle: '礼貌小帮手纪念', fileName: 'Lesson1-2-礼貌小帮手.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'book', l2: 'cards', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
+  certificateView = core.storyCertificate.mount({
+    element: surfaces.get('certificate'), unit, go: navigate, returnUrl: $('#logo').href
   });
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
   writing.append(node('summary', '和家人再试试'), node('p', '拿一件确实属于你的物品，请家人用 Is this your…? 问你。你来回答 Yes, it is.，再交换角色。没听清可以说 Pardon?。'), node('p', '纸笔小练习：这些是教材的七句原文。可以选一两句慢慢抄写，留意大写和标点。'));
@@ -253,6 +250,7 @@
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
+  document.addEventListener('canran:course-ready', route, { once: true });
   document.fonts.ready.then(() => {
     const restore=()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;});
     if(!document.documentElement.hasAttribute('data-course-preparing'))return restore();

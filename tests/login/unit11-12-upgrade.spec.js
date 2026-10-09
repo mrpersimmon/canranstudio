@@ -30,8 +30,8 @@ for(const fixture of ['classroom','short-exam'])test(`11–12 ${fixture} 旧服�
  test.setTimeout(120000);
  const{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-unit1112-upgrade-')),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data');
- const root=path.resolve(__dirname,'../..'),origin='http://127.0.0.1:4199';let server,first,second,third;
- const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(4199,'127.0.0.1',resolve));};
+ const root=path.resolve(__dirname,'../..'),origin=require('../support/login-test-ports').origin(4199);let server,first,second,third;
+ const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(require('../support/login-test-ports').port(4199),'127.0.0.1',resolve));};
  try{
   await fs.mkdir(oldRoot);
   for(const entry of await fs.readdir(root,{withFileTypes:true})){

@@ -4,6 +4,12 @@ const fs = require('node:fs/promises');
 async function install(page, version) {
   const folder = version === 1 ? 'unit1-2-grammar-before' : `unit1-2-grammar-v${version}-before`;
   const patterns = [];
+  // Keep the old certificate module in the historical shell. Using today's
+  // index would load the new keepsake renderer with an incompatible old controller.
+  const shell = '**/unit1-2/';
+  const html = await fs.readFile('tests/fixtures/unit1-2-six-zones-before/index.html');
+  await page.route(shell, route => route.fulfill({ body: html, contentType: 'text/html' }));
+  patterns.push(shell);
   for (const name of ['content.js', 'unit.js', 'grammar.js', 'grammar.css']) {
     const source = name === 'content.js' ? folder : name === 'grammar.js' && version === 2 ? folder : 'unit1-2-grammar-v3-before';
     const pattern = `**/unit1-2/${name}*`; patterns.push(pattern);

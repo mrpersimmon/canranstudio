@@ -10,9 +10,9 @@ test('7–8三题旧服务器升级换设备，保留12星与姓名，新增七�
   const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-unit78-exam-upgrade-'));
   const oldRoot = path.join(directory, 'old'), dataDir = path.join(directory, 'data');
-  const root = path.resolve(__dirname, '../..'), origin = 'http://127.0.0.1:4199';
+  const root = path.resolve(__dirname, '../..'), origin = require('../support/login-test-ports').origin(4199);
   let server, first, second, third;
-  const start = async source => { server = await createApp({ root: source, dataDir, origin, basePath: '/' }); await new Promise(resolve => server.listen(4199, '127.0.0.1', resolve)); };
+  const start = async source => { server = await createApp({ root: source, dataDir, origin, basePath: '/' }); await new Promise(resolve => server.listen(require('../support/login-test-ports').port(4199), '127.0.0.1', resolve)); };
   try {
     await fs.mkdir(oldRoot);
     for (const entry of await fs.readdir(root, { withFileTypes: true })) {

@@ -7,15 +7,15 @@ for (const [unit, title, oldCount, complete] of [
   ['1-2', '礼貌小挑战', 2, 'completeUnit12'],
   ['3-4', '认领小挑战', 3, 'completeUnit34'],
   ['5-6', '见面小挑战', 3, 'completeUnit56']
-]) test(`${unit} 旧短挑战服务器升级换设备，保留有效旧进度与姓名，补完新增题才同步15星`, async ({ browser }) => {
+]) test(`${unit} 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星`, async ({ browser }) => {
   test.skip(unit === '1-2' || unit === '3-4', '2026-10-07：用户确认尚无正式学生，上线前历史课程升级不纳入当前验收。');
   test.setTimeout(150000);
   const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-short-exam-upgrade-'));
   const oldRoot = path.join(directory, 'old'), dataDir = path.join(directory, 'data');
-  const root = path.resolve(__dirname, '../..'), origin = 'http://127.0.0.1:4199', course = 'unit' + unit;
+  const root = path.resolve(__dirname, '../..'), origin = require('../support/login-test-ports').origin(4199), course = 'unit' + unit;
   let server, first, second, third;
-  const start = async source => { server = await createApp({ root: source, dataDir, origin, basePath: '/' }); await new Promise(resolve => server.listen(4199, '127.0.0.1', resolve)); };
+  const start = async source => { server = await createApp({ root: source, dataDir, origin, basePath: '/' }); await new Promise(resolve => server.listen(require('../support/login-test-ports').port(4199), '127.0.0.1', resolve)); };
   try {
     await fs.mkdir(oldRoot);
     for (const entry of await fs.readdir(root, { withFileTypes: true })) {
@@ -40,6 +40,19 @@ for (const [unit, title, oldCount, complete] of [
     await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await first.close(); first = null; await new Promise(resolve => server.close(resolve)); server = null; await start(root);
     second = await browser.newContext({ baseURL: origin, reducedMotion: 'reduce' }); const current = await second.newPage(); await signIn(current, account, '/');
+    if(unit==='5-6'){
+      await expect(current.getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toBeVisible();
+      await current.goto('/unit5-6/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('0');await expect(current.locator('#certificateName')).toHaveText('课程升级班');await expect(current.locator('#certificateDate')).toBeHidden();
+      await current.goto('/unit5-6/#learn/exam');const room=current.locator('.stage-exam');
+      await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(oldCount));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+      const flow=require('../support/units1-30-tasks'),ids=['listen','roles','introduce','cars','exam'];
+      for(const id of ids)await flow.activity(current,unit,id);
+      for(const id of ids){await current.goto('/unit5-6/#learn/'+id);await current.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await flow.activity(current,unit,id);}
+      await current.goto('/unit5-6/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('5');const fullDate=await current.locator('#certificateDate').innerText();
+      await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+      third=await browser.newContext({baseURL:origin,reducedMotion:'reduce'});const restored=await third.newPage();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('5 / 5');await restored.goto('/unit5-6/#learn/certificate');await expect(restored.locator('#certificateDate')).toHaveText(fullDate);await expect(restored.locator('#certificateName')).toHaveText('课程升级班');
+      return;
+    }
     await expect(current.locator('.course')).toContainText(({'1-2':10,'3-4':4,'5-6':6}[unit])+' / 15');
     await current.goto(`/${course}/#learn/certificate`); await expect(current.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
     await expect(current.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小达人');

@@ -6,6 +6,12 @@ for(const pair of ['1-2','25-26'])for(const base of ['','/lesson'])test(`${pair}
  test.setTimeout(90000);const audio=[],errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.route(/\.(mp3|wav|ogg)(\?|$)/,r=>r.abort());
  await page.addInitScript(()=>{window.voiceCalls=0;speechSynthesis.speak=()=>voiceCalls++;});
  await complete(page,pair,base);expect(audio.every(url=>url.includes('/assets/feedback/')||/\/resources\//.test(url))).toBe(true);expect(await page.evaluate(()=>voiceCalls)).toBe(0);expect(errors).toEqual([]);
+ if(pair==='1-2'){
+  const card=page.getByRole('article',{name:'我的单元纪念卡'});await expect(card).toHaveAttribute('data-stars','5');
+  await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+  await expect(card.locator('#certificateName')).toHaveText('登录后显示姓名');
+  const date=await card.locator('time').innerText();await page.reload();await expect(card.locator('time')).toHaveText(date);return;
+ }
  const claim=page.getByRole('button',{name:'领取单元证书',exact:true});await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('体验小朋友');await claim.click();
  const dialog=page.locator('dialog[open]');const date=await dialog.locator('#certificateDate').innerText();
  const download=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await(await download).saveAs(`output/test-thirteen-types/${pair}-${base?'lesson':'root'}-certificate.png`);
@@ -40,7 +46,7 @@ for(const width of [320,390,768,1280])test(`${width} 两套题作答前后可读
    for(const control of await room.locator('.practice-options button:visible,.practice-options input:visible').all()){
     const box=await control.boundingBox();expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width+1);expect(box.height).toBeGreaterThanOrEqual(44);
    }
-   if((id==='roles'&&i===0)||(id==='trans'&&i===0)||(id==='errands')||(id==='manners'&&i===2)){await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:`output/test-thirteen-types/${pair}-${width}-${id}-${i}-${state}.png`,fullPage:true,clip:await room.boundingBox()});}
+   if((id==='roles'&&i===0)||(id==='trans'&&i===2)||(id==='errands')||(id==='manners'&&i===2)){await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:`output/test-thirteen-types/${pair}-${width}-${id}-${i}-${state}.png`,fullPage:true,clip:await room.boundingBox()});}
   }});
  }
 });
@@ -59,7 +65,15 @@ for(const pair of ['1-2','25-26'])test(`${pair} 真实旧轮次升级保留相�
   }
  }
  await page.goto(before+'#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('升级小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');
+ await page.goto(`/unit${pair}/#learn/certificate`);
+ if(pair==='1-2'){await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.locator('#certificateDate')).toBeHidden();}
+ else{await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');}
  await page.goto(`/unit${pair}/#learn/exam`);await expect(page.locator('.stage-exam .progress-copy')).toHaveText(pair==='1-2'?'第 2 / 10 题':'第 6 / 9 题');await expect(page.locator('.stage-exam').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
- await complete(page,pair);await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);
+ if(pair==='1-2'){
+  for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id);
+  // Vocabulary and Grammar are wholly new; the other zones carry old submissions.
+  await page.goto('/unit1-2/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('2');await expect(page.locator('#certificateDate')).toBeHidden();await expect(page.locator('.lvl-stars')).toHaveText(['★','☆','★','☆','☆']);
+  for(const id of Object.keys(ANSWERS[pair])){await page.goto('/unit1-2/#learn/'+id);await page.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,pair,id);}
+  await page.goto('/unit1-2/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('5');await expect(page.locator('#certificateDate')).toBeVisible();
+ }else{await complete(page,pair);await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);}
 });

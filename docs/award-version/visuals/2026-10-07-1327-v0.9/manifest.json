@@ -1,0 +1,65 @@
+{
+  "version": "0.9",
+  "createdAtLocal": "2026-10-07-1327",
+  "timezone": "Asia/Shanghai",
+  "branch": "codex/award-version",
+  "status": "visual_selected_not_implemented",
+  "selectedDisplayedOption": 2,
+  "selectedFile": "counter.png",
+  "selectedAtLocal": "2026-10-07T13:29:00+08:00",
+  "generator": "built-in image_gen",
+  "unit": "unit3-4",
+  "sharedRules": "../../2026-10-07-1309-v0.8-五答题区计星与首次满星日期规则.md",
+  "references": [
+    {
+      "role": "approved_certificate_template",
+      "source": "/Users/permission/.codex/worktrees/award-version/canranstudio.cn/docs/award-version/visuals/2026-10-07-1128-v0.7/card-five-stars.png",
+      "stored": "../2026-10-07-1128-v0.7/card-five-stars.png",
+      "sha256": "c9732cca44577424a4e39333e076681efd240fded048b9efb9e18077ded213b8"
+    },
+    {
+      "role": "actual_unit3_4_story_reference",
+      "source": "/Users/permission/.codex/worktrees/butcher-version/canranstudio.cn/output/playwright/unit3-4-umbrella/story-11-1280.png",
+      "stored": "reference-course-scene.png",
+      "sha256": "e558cd11b941d175747fa81cdf805ec1a54fad19fcd67cd807c2ebc570d70cf4"
+    }
+  ],
+  "options": [
+    {
+      "displayedOption": 1,
+      "file": "handoff.png",
+      "prompt": "handoff.prompt.txt",
+      "original": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-5f384689-e733-40e6-a123-02dac474edff.png",
+      "width": 1486,
+      "height": 1058,
+      "sha256": "8f953d378ed84d272dc3550a438d8ca9fc68efc0be83797f3514c333907b78cf",
+      "state": "five_stars",
+      "mockName": "小雨",
+      "mockFirstFullStarDate": "2026-10-07"
+    },
+    {
+      "displayedOption": 2,
+      "file": "counter.png",
+      "prompt": "counter.prompt.txt",
+      "original": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-665d6e58-1e68-4f4c-8d2e-484a5dee9f71.png",
+      "width": 1486,
+      "height": 1058,
+      "sha256": "fa8c57b892cb91d0da9052ef63b3f6a22f4431c5ae831d876b7204b20f94a848",
+      "state": "five_stars",
+      "mockName": "小雨",
+      "mockFirstFullStarDate": "2026-10-07"
+    },
+    {
+      "displayedOption": 3,
+      "file": "portrait.png",
+      "prompt": "portrait.prompt.txt",
+      "original": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-05b15a77-e4eb-4d6d-b475-9944f58fae78.png",
+      "width": 1486,
+      "height": 1058,
+      "sha256": "c9badc0293e7adbdc802f4868a3c43b4931e4d51c7ce2f7bfbdf572192fb5a15",
+      "state": "five_stars",
+      "mockName": "小雨",
+      "mockFirstFullStarDate": "2026-10-07"
+    }
+  ]
+}

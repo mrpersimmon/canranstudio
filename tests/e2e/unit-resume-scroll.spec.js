@@ -24,7 +24,8 @@ for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续�
     else await navigation.getByRole('link').first().click();
     await page.goBack();
     await expect(page).toHaveURL(address);
-    await expect(page.getByRole('heading', { name: previousTitle, exact: true })).toBeInViewport();
+    await expect(heading).toHaveText(previousTitle);
+    await expect(heading).toBeInViewport();
   });
 }
 
@@ -34,11 +35,11 @@ test('不同地址时可以继续到已保存章节，排除按钮失效或保�
   await page.goto('/unit1-2/#cover');
   await page.getByRole('button', { name: '继续冒险', exact: true }).click();
   await expect(page).toHaveURL(/#l3$/);
-  await expect(page.getByRole('heading', { name: '开口有礼貌', exact: true })).toBeInViewport();
+  await expect(page.locator('#l3').getByRole('heading', { name: '语法小工坊', level: 2, exact: true })).toBeInViewport();
 });
 
 for (const [unit, label, activity, answer] of [
-  ['unit1-2', '继续冒险', 'manners', 'Pardon?'],
+  ['unit1-2', '继续冒险', 'trans', 'Is this your book?'],
   ['unit49-50', '继续采购', 'needs', "She likes tomatoes, but she doesn't want any."]
 ]) test(`${unit} 继续到当前答题区：键盘操作、未提交选择和刷新恢复不变`, async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 700 });

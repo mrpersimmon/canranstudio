@@ -96,7 +96,7 @@ self.addEventListener('fetch', event => {
     return;
   }
   // Immutable downloads are verified by the foreground preparer, never recursively intercepted.
-  if (/^(?:resources\/|course-packages\/|course-index\.json|core\/subpath-worker\.js)/.test(relative)) return;
+  if (/^(?:resources\/|awards\/static\/|course-packages\/|course-index\.json|core\/subpath-worker\.js)/.test(relative)) return;
   if (event.request.mode === 'navigate' && /^(?:(?:unit\d+-\d+|lesson\d+|soundmark)\/)?(?:index\.html)?$/.test(relative)) {
     event.respondWith((async () => {
       const id = relative.split('/')[0] || 'home';

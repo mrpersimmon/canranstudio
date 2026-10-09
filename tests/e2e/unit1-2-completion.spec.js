@@ -51,7 +51,7 @@ for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节�
   const cases = [
     ['listen', 5, '相遇小剧场', 'text'], ['roles', 5, '语法小工坊', 'trans'],
     ['trans', 12, '帮忙还手提包', 'manners'],
-    ['manners', 5, '礼貌小挑战', 'exam'], ['exam', 10, '我的单元证书', 'certificate']
+    ['manners', 5, '礼貌小挑战', 'exam'], ['exam', 10, '我的单元纪念卡', 'certificate']
   ];
   for (const [id, total, nextName, nextId] of cases) {
     await flow.activity(page, '1-2', id, { base });

@@ -291,6 +291,16 @@ unit.questions["exam"][7]]};
   unit.experienceVersion='classroom-clicks-1';
 })(globalThis.CanranCore);
 
+// The released keepsake edition combined ask/trans into workshop. Its exact
+// completed round may carry the unchanged vocabulary task, never a new award.
+(function (core) {
+  const unit = core.unit12;
+  unit.taskPredecessors.listen.unshift({
+    key: 'unit12-workshop-practice/award-workshop-v1', activity: 'workshop',
+    questions: [...unit.questions.ask, ...unit.questions.trans]
+  });
+})(globalThis.CanranCore);
+
 // Grammar edition: demonstrate, distinguish, build, then transfer to a new item.
 // New question identities never inherit the answers of the questions they replace.
 (function (core) {
@@ -531,8 +541,9 @@ unit.questions["exam"][7]]};
   delete unit.questions.ask; delete unit.taskSessions.ask; delete unit.taskPredecessors.ask;
   const application = unit.stages.find(stage => stage.id === 'l4');
   application.activities = [['manners', '帮忙还手提包', 'give']]; application.required = ['manners'];
-  unit.routeAliases = { 'learn/phrases': 'learn/trans', 'learn/ask': 'learn/listen' };
-  unit.reward = { edition: 'grammar-five-zones-v1', zones: [
+  unit.stages.find(stage => stage.id === 'l5').activities.find(item => item[0] === 'certificate')[1] = '我的单元纪念卡';
+  unit.routeAliases = { 'learn/phrases': 'learn/trans', 'learn/ask': 'learn/listen', 'learn/workshop': 'learn/trans' };
+  unit.reward = { edition: 'grammar-five-zones-v1', title: '礼貌小帮手', zones: [
     ['listen', '单词寻宝'], ['roles', '故事小侦探'], ['trans', '语法小工坊'],
     ['manners', '帮忙还手提包'], ['exam', '礼貌小挑战']
   ].map(([id, title]) => ({ id, title })) };

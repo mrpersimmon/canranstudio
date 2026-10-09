@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  foundation:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -29,11 +29,73 @@ jobs:
       - run: git diff --exit-code -- assets/fonts
       - run: npx playwright install --with-deps chromium
       - run: npm run test:unit
-      - run: npm run test:e2e
       - run: npm run test:deploy
-      - run: npm run test:login
       - run: npm run build:login
       - run: |
           docker run --rm \
             -v "$PWD/deploy/nginx/canranstudio-http.conf:/etc/nginx/conf.d/default.conf:ro" \
             nginx:1.28.0-alpine@sha256:30f1c0d78e0ad60901648be663a710bdadf19e4c10ac6782c235200619158284 nginx -t
+
+  courses:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # Each runner owns its server ports; each test file keeps its existing
+      # serial behavior. Sharding changes scheduling, never the test inventory.
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/4 --grep-invert @cache-performance --reporter=line
+
+  cache-performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test tests/e2e/course-cache-performance.spec.js --grep @cache-performance --reporter=line
+
+  accounts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:login -- --reporter=line
+
+  test:
+    # Keep one stable required check. A failed, cancelled, or skipped upstream
+    # job must never turn the PR green.
+    if: always()
+    needs: [foundation, courses, accounts, cache-performance]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every check to pass
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          node -e 'const results = Object.values(JSON.parse(process.env.RESULTS)); if (!results.length || results.some(job => job.result !== "success")) process.exit(1)'

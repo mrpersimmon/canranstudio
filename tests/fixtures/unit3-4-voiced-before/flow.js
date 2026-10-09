@@ -45,9 +45,9 @@ async function completeActivity(page, id, { exerciseRecovery = false } = {}) {
     } else await room.locator('.practice-options').getByRole('button', { name: answer, exact: true }).click();
     await expect(check).toBeEnabled({ timeout: 10000 });
     if (exerciseRecovery && i === 0 && id === 'exam') {
-      await room.getByRole('button', { name: '暂停，稍后继续', exact: true }).click();
+      // The frozen course uses the shared runner. Refresh tests its real
+      // unsubmitted draft without relying on the retired pause control.
       await page.reload();
-      await room.getByRole('button', { name: '继续挑战', exact: true }).click();
       await expect(room.getByRole('button', { name: answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
       // Refresh must require the recorded listening evidence again.
       const replay = room.getByRole('button', { name: /^(听一遍|再听一遍)$/ });

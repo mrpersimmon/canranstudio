@@ -2,6 +2,26 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
+test('课程只准备自己的场景，独立样式仍在完整加载后显示各课背景', async ({ page }) => {
+  const unrelated = [];
+  page.on('request', request => {
+    if (/\/assets\/unit(?:1-2|3-4|49-50)\/story-background\./.test(request.url())) unrelated.push(request.url());
+  });
+  await page.goto('/lesson/unit29-30/#learn/words');
+  await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
+  expect(unrelated).toEqual([]);
+  for (const [unit, selector, art] of [
+    ['unit1-2', '#unit12-dialogue', 'unit1-2/street.svg'],
+    ['unit3-4', '.stage-text .cloakroom-world', 'unit3-4/story-background.svg'],
+    ['unit49-50', '.stage-text #stage', 'unit49-50/story-background.webp']
+  ]) {
+    await page.goto('/lesson/' + unit + '/#learn/text');
+    await expect(page.locator('#courseLoader')).toHaveCount(0);
+    await expect(page.locator(selector)).toBeVisible();
+    expect(await page.locator(selector).evaluate(element => getComputedStyle(element).backgroundImage)).toContain(art);
+    await page.locator('.stage-text').screenshot({ path: 'output/playwright/course-scenes/' + unit + '.png' });
+  }
+});
 test('服务器实际使用的 JavaScript 类型仍能完成准备', async ({ page }) => {
   await page.route(/\/resources\/.*\.js$/, async route => {
     const response = await route.fetch();

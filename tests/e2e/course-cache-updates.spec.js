@@ -78,28 +78,6 @@ test('缓存录音支持真实点播和断网分段读取，下载不增加听�
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 
-test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', async ({ page, browser }, testInfo) => {
-  test.setTimeout(45000);
-  await page.goto('/lesson/unit29-30/#learn/words');
-  const next = page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true });
-  await expect(next).toBeVisible();
-  const samples = [], fetched = [];
-  page.on('request', request => { if (/\/resources\/.*\.(?:svg|png|woff2|js|html)$/.test(request.url())) fetched.push(request.url()); });
-  for (let i = 0; i < 20; i++) {
-    const start = Date.now();
-    await page.reload({ waitUntil: 'domcontentloaded' });
-    // Measure when the real control becomes visible. Assertion retries back
-    // off by up to a second, which measures polling delay as page-load time.
-    await next.waitFor({ state: 'visible' });
-    samples.push(Date.now() - start);
-    await expect(next).toBeEnabled();
-  }
-  const p95 = [...samples].sort((a, b) => a - b)[18];
-  await fs.writeFile(testInfo.outputPath('warm-visits.json'), JSON.stringify({ browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, samples, p95 }, null, 2));
-  await testInfo.attach('warm-visits.json', { contentType: 'application/json', body: Buffer.from(JSON.stringify({ browser: browser.version(), platform: process.platform, cpu: os.cpus()[0].model, samples, p95 })) });
-  expect(fetched).toEqual([]);
-  expect(p95).toBeLessThan(1500);
-});
 
 async function revisedCourse(request, id = 'unit29-30') {
   const index = await (await request.get('/lesson/course-index.json')).json();

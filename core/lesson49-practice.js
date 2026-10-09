@@ -64,8 +64,7 @@
     box.replaceChildren();
     const records = Object.values(notebook.records).filter(record=>isRecord(record)&&typeof record.attempts==='number'&&typeof record.firstCorrect==='boolean');
     const intro = document.createElement('p');
-    intro.textContent = context.reward ? '每个答题区整轮首次答对，点亮一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。'
-      : records.length ? '记录的是有选项、词块或句式支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。' : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
+    intro.textContent = records.length ? (context.reward ? '每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。' : '记录的是有选项、词块或句式支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。') : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
     box.append(intro);
     const list = document.createElement('ul');
     records.forEach(record => {

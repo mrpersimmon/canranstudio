@@ -297,7 +297,17 @@
       console.warn('Course preparation failed:', error);
     } finally { clearTimeout(slow); clearTimeout(retryTimer); running = false; }
   }
-  window.addEventListener('pagehide', event => { if (!event.persisted) cancellation.abort(); });
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) return;
+    cancellation.abort();
+    observer?.disconnect();
+    updates?.close();
+    for (const image of heldImages.values()) image.then(value => value.removeAttribute('src'), () => {});
+    heldImages.clear();
+    store.memory.clear();
+    for (const url of memoryUrls.values()) if (url.startsWith('blob:')) URL.revokeObjectURL(url);
+    memoryUrls.clear();
+  });
   if (updates) updates.onmessage = event => { if (activePack && event.data?.withdrawn?.includes(activePack.id + '@' + activePack.revision)) withdrawn = true; };
   window.addEventListener('error', event => { if (executionStarted && !initialized && event instanceof ErrorEvent) visualFailure = true; });
   ready.then(() => {

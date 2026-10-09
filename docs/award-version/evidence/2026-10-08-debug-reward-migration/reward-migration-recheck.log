@@ -1,0 +1,52 @@
+
+Running 4 tests using 1 worker
+
+(node:31772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] tests/e2e/common-interactions.spec.js:68:35 › 1-2 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成
+[2/4] tests/e2e/unit-dedup.spec.js:20:1 › Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断
+  1) tests/e2e/unit-dedup.spec.js:20:1 › Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断 ───────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('.stage-ask').getByRole('progressbar')
+    Expected: "2"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-ask').getByRole('progressbar')
+
+
+      22 |   await page.goto('/unit1-2/#learn/ask');
+      23 |   const ask = page.locator('.stage-ask');
+    > 24 |   await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '2');
+         |                                              ^
+      25 |   await expect(ask.getByRole('heading', { name: '补全问句', exact: true })).toBeVisible();
+      26 |   await choose(ask, 'watch');
+      27 |   await choose(ask, '衬衫', '完成这一站');
+        at /Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/tests/e2e/unit-dedup.spec.js:24:46
+
+    Error Context: test-results/unit-dedup-Lesson-1–2-场景找物不重做物品替换队列，八题挑战保持各自判断/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit-dedup-Lesson-1–2-场景找物不重做物品替换队列，八题挑战保持各自判断/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit-dedup-Lesson-1–2-场景找物不重做物品替换队列，八题挑战保持各自判断/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:31807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/4] tests/e2e/unit-dedup.spec.js:170:1 › Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答
+[4/4] tests/e2e/unit1-2-award-migration.spec.js:7:1 › 当前25题旧记录合并五区，不自动发星；新挑战全对后得星
+  1 failed
+    tests/e2e/unit-dedup.spec.js:20:1 › Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断 ────────────────────────
+  3 passed (17.4s)

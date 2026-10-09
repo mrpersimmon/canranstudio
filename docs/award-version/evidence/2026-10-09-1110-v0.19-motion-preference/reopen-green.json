@@ -1,0 +1,5802 @@
+{
+  "on": {
+    "passed": true,
+    "expected": true,
+    "reopenedMotion": "full",
+    "turn": {
+      "passed": true,
+      "failures": [],
+      "before": {
+        "animated": true,
+        "busy": false,
+        "buttons": [
+          {
+            "background": "rgb(239, 235, 226)",
+            "bookMaterial": false,
+            "disabled": true,
+            "opacity": 1,
+            "text": "上一页",
+            "transform": "none"
+          },
+          {
+            "background": "rgb(70, 125, 78)",
+            "bookMaterial": false,
+            "disabled": false,
+            "opacity": 1,
+            "text": "下一页",
+            "transform": "none"
+          }
+        ],
+        "faces": [],
+        "mobile": false,
+        "page": "1–2 / 3",
+        "sheets": []
+      },
+      "samples": [
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.999976, 0, 0.00695127, 0, 0, 1, 0, 0, -0.00695127, 0, 0.999976, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.999795, 0, 0.0202371, 0, 0, 1, 0, 0, -0.0202371, 0, 0.999795, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.999795, 0, 0.0202371, 0, 0, 1, 0, 0, -0.0202371, 0, 0.999795, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.998641, 0, 0.0521145, 0, 0, 1, 0, 0, -0.0521145, 0, 0.998641, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.996042, 0, 0.0888821, 0, 0, 1, 0, 0, -0.0888821, 0, 0.996042, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.988584, 0, 0.150668, 0, 0, 1, 0, 0, -0.150668, 0, 0.988584, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.976851, 0, 0.213923, 0, 0, 1, 0, 0, -0.213923, 0, 0.976851, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.976851, 0, 0.213923, 0, 0, 1, 0, 0, -0.213923, 0, 0.976851, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.950374, 0, 0.31111, 0, 0, 1, 0, 0, -0.31111, 0, 0.950374, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.943416, 0, 0.33161, 0, 0, 1, 0, 0, -0.33161, 0, 0.943416, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.892373, 0, 0.451298, 0, 0, 1, 0, 0, -0.451298, 0, 0.892373, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.878846, 0, 0.477106, 0, 0, 1, 0, 0, -0.477106, 0, 0.878846, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.878846, 0, 0.477106, 0, 0, 1, 0, 0, -0.477106, 0, 0.878846, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.791085, 0, 0.611706, 0, 0, 1, 0, 0, -0.611706, 0, 0.791085, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.791085, 0, 0.611706, 0, 0, 1, 0, 0, -0.611706, 0, 0.791085, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.612634, 0, 0.790367, 0, 0, 1, 0, 0, -0.790367, 0, 0.612634, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.612634, 0, 0.790367, 0, 0, 1, 0, 0, -0.790367, 0, 0.612634, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.438704, 0, 0.898632, 0, 0, 1, 0, 0, -0.898632, 0, 0.438704, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.397128, 0, 0.917763, 0, 0, 1, 0, 0, -0.917763, 0, 0.397128, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.397128, 0, 0.917763, 0, 0, 1, 0, 0, -0.917763, 0, 0.397128, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.196847, 0, 0.980434, 0, 0, 1, 0, 0, -0.980434, 0, 0.196847, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.0252624, 0, 0.999681, 0, 0, 1, 0, 0, -0.999681, 0, 0.0252624, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.0252624, 0, 0.999681, 0, 0, 1, 0, 0, -0.999681, 0, 0.0252624, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.093026, 0, 0.995664, 0, 0, 1, 0, 0, -0.995664, 0, -0.093026, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.275272, 0, 0.961366, 0, 0, 1, 0, 0, -0.961366, 0, -0.275272, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.30096, 0, 0.953637, 0, 0, 1, 0, 0, -0.953637, 0, -0.30096, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.30096, 0, 0.953637, 0, 0, 1, 0, 0, -0.953637, 0, -0.30096, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.455009, 0, 0.890487, 0, 0, 1, 0, 0, -0.890487, 0, -0.455009, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.565742, 0, 0.824583, 0, 0, 1, 0, 0, -0.824583, 0, -0.565742, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.565742, 0, 0.824583, 0, 0, 1, 0, 0, -0.824583, 0, -0.565742, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.672228, 0, 0.740345, 0, 0, 1, 0, 0, -0.740345, 0, -0.672228, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.672228, 0, 0.740345, 0, 0, 1, 0, 0, -0.740345, 0, -0.672228, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.740784, 0, 0.671743, 0, 0, 1, 0, 0, -0.671743, 0, -0.740784, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.809817, 0, 0.586682, 0, 0, 1, 0, 0, -0.586682, 0, -0.809817, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.850354, 0, 0.52621, 0, 0, 1, 0, 0, -0.52621, 0, -0.850354, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.850354, 0, 0.52621, 0, 0, 1, 0, 0, -0.52621, 0, -0.850354, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.893404, 0, 0.449254, 0, 0, 1, 0, 0, -0.449254, 0, -0.893404, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.893404, 0, 0.449254, 0, 0, 1, 0, 0, -0.449254, 0, -0.893404, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.921602, 0, 0.388135, 0, 0, 1, 0, 0, -0.388135, 0, -0.921602, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.921602, 0, 0.388135, 0, 0, 1, 0, 0, -0.388135, 0, -0.921602, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.946265, 0, 0.323394, 0, 0, 1, 0, 0, -0.323394, 0, -0.946265, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.960511, 0, 0.278241, 0, 0, 1, 0, 0, -0.278241, 0, -0.960511, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.974215, 0, 0.225623, 0, 0, 1, 0, 0, -0.225623, 0, -0.974215, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.976733, 0, 0.214457, 0, 0, 1, 0, 0, -0.214457, 0, -0.976733, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.985468, 0, 0.169859, 0, 0, 1, 0, 0, -0.169859, 0, -0.985468, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.985468, 0, 0.169859, 0, 0, 1, 0, 0, -0.169859, 0, -0.985468, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.990347, 0, 0.13861, 0, 0, 1, 0, 0, -0.13861, 0, -0.990347, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.994497, 0, 0.104769, 0, 0, 1, 0, 0, -0.104769, 0, -0.994497, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.995121, 0, 0.098663, 0, 0, 1, 0, 0, -0.098663, 0, -0.995121, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.997455, 0, 0.0712932, 0, 0, 1, 0, 0, -0.0712932, 0, -0.997455, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.997791, 0, 0.0664269, 0, 0, 1, 0, 0, -0.0664269, 0, -0.997791, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.998988, 0, 0.0449848, 0, 0, 1, 0, 0, -0.0449848, 0, -0.998988, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999516, 0, 0.0311233, 0, 0, 1, 0, 0, -0.0311233, 0, -0.999516, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999516, 0, 0.0311233, 0, 0, 1, 0, 0, -0.0311233, 0, -0.999516, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999844, 0, 0.0176406, 0, 0, 1, 0, 0, -0.0176406, 0, -0.999844, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999881, 0, 0.0154315, 0, 0, 1, 0, 0, -0.0154315, 0, -0.999881, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999881, 0, 0.0154315, 0, 0, 1, 0, 0, -0.0154315, 0, -0.999881, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999984, 0, 0.00566563, 0, 0, 1, 0, 0, -0.00566563, 0, -0.999984, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999997, 0, 0.00237116, 0, 0, 1, 0, 0, -0.00237116, 0, -0.999997, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999997, 0, 0.00237116, 0, 0, 1, 0, 0, -0.00237116, 0, -0.999997, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0.000585829, 0, 0, 1, 0, 0, -0.000585829, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": false,
+          "buttons": [
+            {
+              "background": "rgb(255, 253, 247)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [],
+          "mobile": false,
+          "page": "3 / 3",
+          "sheets": []
+        }
+      ],
+      "after": {
+        "animated": true,
+        "busy": false,
+        "buttons": [
+          {
+            "background": "rgb(255, 253, 247)",
+            "bookMaterial": false,
+            "disabled": false,
+            "opacity": 1,
+            "text": "上一页",
+            "transform": "none"
+          },
+          {
+            "background": "rgb(239, 235, 226)",
+            "bookMaterial": false,
+            "disabled": true,
+            "opacity": 1,
+            "text": "下一页",
+            "transform": "none"
+          }
+        ],
+        "faces": [],
+        "mobile": false,
+        "page": "3 / 3",
+        "sheets": []
+      }
+    }
+  },
+  "off": {
+    "passed": true,
+    "expected": false,
+    "reopenedMotion": "reduced",
+    "turn": null
+  },
+  "restored": {
+    "passed": true,
+    "expected": true,
+    "reopenedMotion": "full",
+    "turn": {
+      "passed": true,
+      "failures": [],
+      "before": {
+        "animated": true,
+        "busy": false,
+        "buttons": [
+          {
+            "background": "rgb(239, 235, 226)",
+            "bookMaterial": false,
+            "disabled": true,
+            "opacity": 1,
+            "text": "上一页",
+            "transform": "none"
+          },
+          {
+            "background": "rgb(70, 125, 78)",
+            "bookMaterial": false,
+            "disabled": false,
+            "opacity": 1,
+            "text": "下一页",
+            "transform": "none"
+          }
+        ],
+        "faces": [],
+        "mobile": false,
+        "page": "1–2 / 3",
+        "sheets": []
+      },
+      "samples": [
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.999965, 0, 0.00842413, 0, 0, 1, 0, 0, -0.00842413, 0, 0.999965, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.999774, 0, 0.0212477, 0, 0, 1, 0, 0, -0.0212477, 0, 0.999774, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.999774, 0, 0.0212477, 0, 0, 1, 0, 0, -0.0212477, 0, 0.999774, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.998556, 0, 0.053724, 0, 0, 1, 0, 0, -0.053724, 0, 0.998556, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.998556, 0, 0.053724, 0, 0, 1, 0, 0, -0.053724, 0, 0.998556, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.995877, 0, 0.0907113, 0, 0, 1, 0, 0, -0.0907113, 0, 0.995877, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.988205, 0, 0.153135, 0, 0, 1, 0, 0, -0.153135, 0, 0.988205, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.948936, 0, 0.315468, 0, 0, 1, 0, 0, -0.315468, 0, 0.948936, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.913063, 0, 0.407818, 0, 0, 1, 0, 0, -0.407818, 0, 0.913063, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.843487, 0, 0.537149, 0, 0, 1, 0, 0, -0.537149, 0, 0.843487, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.769991, 0, 0.638054, 0, 0, 1, 0, 0, -0.638054, 0, 0.769991, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.769991, 0, 0.638054, 0, 0, 1, 0, 0, -0.638054, 0, 0.769991, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.606219, 0, 0.795297, 0, 0, 1, 0, 0, -0.795297, 0, 0.606219, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.431062, 0, 0.902322, 0, 0, 1, 0, 0, -0.902322, 0, 0.431062, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.264002, 0, 0.964522, 0, 0, 1, 0, 0, -0.964522, 0, 0.264002, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.264002, 0, 0.964522, 0, 0, 1, 0, 0, -0.964522, 0, 0.264002, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.0598991, 0, 0.998204, 0, 0, 1, 0, 0, -0.998204, 0, 0.0598991, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(0.0598991, 0, 0.998204, 0, 0, 1, 0, 0, -0.998204, 0, 0.0598991, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.100808, 0, 0.994906, 0, 0, 1, 0, 0, -0.994906, 0, -0.100808, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.211226, 0, 0.977437, 0, 0, 1, 0, 0, -0.977437, 0, -0.211226, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.378565, 0, 0.925575, 0, 0, 1, 0, 0, -0.925575, 0, -0.378565, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.409852, 0, 0.912152, 0, 0, 1, 0, 0, -0.912152, 0, -0.409852, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.545753, 0, 0.837946, 0, 0, 1, 0, 0, -0.837946, 0, -0.545753, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.636059, 0, 0.771641, 0, 0, 1, 0, 0, -0.771641, 0, -0.636059, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.636059, 0, 0.771641, 0, 0, 1, 0, 0, -0.771641, 0, -0.636059, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.728055, 0, 0.685519, 0, 0, 1, 0, 0, -0.685519, 0, -0.728055, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.743936, 0, 0.668251, 0, 0, 1, 0, 0, -0.668251, 0, -0.743936, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.812251, 0, 0.583308, 0, 0, 1, 0, 0, -0.583308, 0, -0.812251, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.823555, 0, 0.567236, 0, 0, 1, 0, 0, -0.567236, 0, -0.823555, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.873173, 0, 0.48741, 0, 0, 1, 0, 0, -0.48741, 0, -0.873173, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.880064, 0, 0.474854, 0, 0, 1, 0, 0, -0.474854, 0, -0.880064, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.915633, 0, 0.402014, 0, 0, 1, 0, 0, -0.402014, 0, -0.915633, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.922588, 0, 0.385787, 0, 0, 1, 0, 0, -0.385787, 0, -0.922588, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.922588, 0, 0.385787, 0, 0, 1, 0, 0, -0.385787, 0, -0.922588, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.946983, 0, 0.321283, 0, 0, 1, 0, 0, -0.321283, 0, -0.946983, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.961641, 0, 0.274311, 0, 0, 1, 0, 0, -0.274311, 0, -0.961641, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.961641, 0, 0.274311, 0, 0, 1, 0, 0, -0.274311, 0, -0.961641, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.975009, 0, 0.222164, 0, 0, 1, 0, 0, -0.222164, 0, -0.975009, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.976906, 0, 0.21367, 0, 0, 1, 0, 0, -0.21367, 0, -0.976906, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.976906, 0, 0.21367, 0, 0, 1, 0, 0, -0.21367, 0, -0.976906, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.985586, 0, 0.169175, 0, 0, 1, 0, 0, -0.169175, 0, -0.985586, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.990432, 0, 0.138005, 0, 0, 1, 0, 0, -0.138005, 0, -0.990432, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.990432, 0, 0.138005, 0, 0, 1, 0, 0, -0.138005, 0, -0.990432, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.99455, 0, 0.104257, 0, 0, 1, 0, 0, -0.104257, 0, -0.99455, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.99524, 0, 0.0974531, 0, 0, 1, 0, 0, -0.0974531, 0, -0.99524, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999506, 0, 0.0314278, 0, 0, 1, 0, 0, -0.0314278, 0, -0.999506, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": true,
+          "buttons": [
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(70, 125, 78)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2",
+              "transform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.1, 1)"
+            },
+            {
+              "background": "rgb(253, 251, 245)",
+              "bookMaterial": true,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)"
+            }
+          ],
+          "mobile": false,
+          "page": "1–2 / 3",
+          "sheets": [
+            {
+              "background": "rgba(0, 0, 0, 0)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "灿然英语工作室认领小达人小雨Lesson 3–42026.10.08放大查看2灿然英语工作室新朋友小使者小雨Lesson 5–6放大查看3",
+              "transform": "matrix3d(-0.999506, 0, 0.0314278, 0, 0, 1, 0, 0, -0.0314278, 0, -0.999506, 0, 0, 0, 0, 1)"
+            }
+          ]
+        },
+        {
+          "animated": true,
+          "busy": false,
+          "buttons": [
+            {
+              "background": "rgb(255, 253, 247)",
+              "bookMaterial": false,
+              "disabled": false,
+              "opacity": 1,
+              "text": "上一页",
+              "transform": "none"
+            },
+            {
+              "background": "rgb(239, 235, 226)",
+              "bookMaterial": false,
+              "disabled": true,
+              "opacity": 1,
+              "text": "下一页",
+              "transform": "none"
+            }
+          ],
+          "faces": [],
+          "mobile": false,
+          "page": "3 / 3",
+          "sheets": []
+        }
+      ],
+      "after": {
+        "animated": true,
+        "busy": false,
+        "buttons": [
+          {
+            "background": "rgb(255, 253, 247)",
+            "bookMaterial": false,
+            "disabled": false,
+            "opacity": 1,
+            "text": "上一页",
+            "transform": "none"
+          },
+          {
+            "background": "rgb(239, 235, 226)",
+            "bookMaterial": false,
+            "disabled": true,
+            "opacity": 1,
+            "text": "下一页",
+            "transform": "none"
+          }
+        ],
+        "faces": [],
+        "mobile": false,
+        "page": "3 / 3",
+        "sheets": []
+      }
+    }
+  }
+}

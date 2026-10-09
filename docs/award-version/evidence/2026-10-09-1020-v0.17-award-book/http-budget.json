@@ -1,0 +1,94 @@
+{
+  "measuredAt": "2026-10-09T02:17:44.649Z",
+  "scope": "Local preview static HTTP resource transfer budget. Not browser cold-start timing or production load testing.",
+  "resources": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "responseBodyBytes": 384,
+      "encoding": "gzip",
+      "cacheControl": "no-cache"
+    },
+    {
+      "file": "assets/award-book-subset-BV9NRz8S.woff2",
+      "status": 200,
+      "responseBodyBytes": 37784,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/baloo-2-CmLZ27r7.woff2",
+      "status": 200,
+      "responseBodyBytes": 19556,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/book-open-BLxDabuX.webp",
+      "status": 200,
+      "responseBodyBytes": 103988,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/index-BIpXAHKg.js",
+      "status": 200,
+      "responseBodyBytes": 74669,
+      "encoding": "gzip",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/index-Dz2d-_a0.css",
+      "status": 200,
+      "responseBodyBytes": 4157,
+      "encoding": "gzip",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/star-earned-CuMSrNgC.webp",
+      "status": 200,
+      "responseBodyBytes": 11876,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/star-empty-CTa_ZJJa.webp",
+      "status": 200,
+      "responseBodyBytes": 13200,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/starflower-BuB5SYSB.png",
+      "status": 200,
+      "responseBodyBytes": 29003,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/unit1-2-Cz_Niv-N.webp",
+      "status": 200,
+      "responseBodyBytes": 133728,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/unit3-4-CtOg6tdB.webp",
+      "status": 200,
+      "responseBodyBytes": 129144,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "file": "assets/unit5-6-HeVtVLiP.webp",
+      "status": 200,
+      "responseBodyBytes": 153108,
+      "encoding": "identity",
+      "cacheControl": "public, max-age=31536000, immutable"
+    }
+  ],
+  "totalResponseBodyBytes": 710597,
+  "fullNameFontBytes": 1296316,
+  "demoSubsetFontBytes": 37784,
+  "withFullNameFontBytes": 1969129
+}

@@ -1,0 +1,22 @@
+{
+  "before": {
+    "explicitlyEnabledInOriginalTab": true,
+    "newTabMotion": "reduced",
+    "passed": false
+  },
+  "after": {
+    "legacyChoiceMigrated": "full",
+    "newTabOn": true,
+    "newTabOff": true,
+    "restoredNewTabOn": true,
+    "reload": "full",
+    "crossTabSync": [
+      "reduced",
+      "full"
+    ],
+    "sampledDistinctRotations": 25,
+    "renderedColorCheck": "passed",
+    "consoleWarningsAndErrors": 0
+  },
+  "scope": "Local browser preview. No commit, push or deployment."
+}

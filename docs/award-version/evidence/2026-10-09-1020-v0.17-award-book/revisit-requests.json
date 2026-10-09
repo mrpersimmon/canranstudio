@@ -1,0 +1,48 @@
+{
+  "scenario": "5 complete browser revisits, correct last card restored; then one PNG download",
+  "requests": 5,
+  "responseBodyBytes": 1930,
+  "assetRequests": 0,
+  "rows": [
+    {
+      "time": "2026-10-09T02:12:53.626Z",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "bodyBytes": 386,
+      "encoding": "gzip"
+    },
+    {
+      "time": "2026-10-09T02:12:53.800Z",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "bodyBytes": 386,
+      "encoding": "gzip"
+    },
+    {
+      "time": "2026-10-09T02:12:53.976Z",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "bodyBytes": 386,
+      "encoding": "gzip"
+    },
+    {
+      "time": "2026-10-09T02:12:54.129Z",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "bodyBytes": 386,
+      "encoding": "gzip"
+    },
+    {
+      "time": "2026-10-09T02:12:54.290Z",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "bodyBytes": 386,
+      "encoding": "gzip"
+    }
+  ]
+}
