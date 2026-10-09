@@ -31,7 +31,7 @@ test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', asyn
     await page.goto('/lesson/unit29-30/#learn/words');
     const next = page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true });
     await expect(next).toBeVisible();
-    page.on('request', request => { if (/\/resources\/.*\.(?:svg|png|woff2|js|html)$/.test(request.url())) fetched.push(request.url()); });
+    page.on('request', request => { if (/\/resources\/.*\.(?:svg|png|webp|avif|jpe?g|woff2|css|js|html)(?:[?#]|$)/.test(request.url())) fetched.push(request.url()); });
     for (let i = 0; i < 20; i++) {
       attempt = i + 1; phase = 'reload';
       const start = Date.now();
@@ -45,6 +45,7 @@ test('完整缓存 20 次复访恢复可操作位置并记录实际耗时', asyn
     }
     phase = 'performance budget';
     const p95 = [...samples].sort((a, b) => a - b)[18];
+    expect(errors).toEqual([]);
     expect(fetched).toEqual([]);
     expect(p95).toBeLessThan(1500);
   } finally {
