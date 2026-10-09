@@ -48,6 +48,7 @@
   async function home() {
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
     if(who.mustChangePassword)return passwordForm(who,true);
+    if(['/lesson/awards','/lesson/awards/'].includes(location.pathname)){location.reload();return;}
     if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
     const waiting=who.preview?0:await syncPending(who.student.id);
     if(!who.preview)who=await api('me');
@@ -62,10 +63,10 @@
       const pictures=c.artwork?.length?c.artwork:[c.image];
       const img=(src,cls='')=>`<img class="${cls}" src="${e(src)}" alt="">`;
       const art=pictures.length===5?img(pictures[0],'actor')+`<div class="food-cards">${pictures.slice(1,4).map(src=>img(src)).join('')}</div>`+img(pictures[4],'actor'):pictures.map(src=>img(src,'featured-scene')).join('');
-      const action=c.stars?'继续学习':'开始学习';
+      const action=c.stars||(c.next&&c.next!=='words')?'继续学习':'开始学习';
       return `<section class="featured-course course" data-unit="${e(c.id)}" aria-labelledby="${e(c.id)}-title"><div class="featured-copy"><p class="lesson-label">${e(c.label)}</p><h2 id="${e(c.id)}-title">${e(c.title)}</h2><p class="course-intro">${e(c.intro)}</p>${c.stars?`<p class="resume-location">★ ${c.stars} / ${c.maxStars}</p>`:''}<a class="primary-button" aria-label="${action}：${e(c.title)}" href="/lesson/${e(c.id)}/${preview?'?preview='+encodeURIComponent(preview):''}#learn/${e(c.next||'words')}">${action}</a></div><div class="featured-art" aria-hidden="true">${art}</div></section>`;
     }).join('');
-    app.innerHTML=`<div class="toolbar"><div><p class="muted">${e(who.className)}${who.preview?' · 预览不记录成绩':' · <span class="student-number">'+e(who.student.studentNumber)+'</span>'}</p><h1>${e(who.student.name)}的课程</h1></div>${who.preview?'<a class="button compact" href="/lesson/admin/">返回班级管理</a>':'<div class="actions"><button class="compact" id="changePassword">修改密码</button><button class="compact" id="logout">切换学生</button></div>'}</div><div class="course-directory">${banners}</div>${who.courses.length?'':'<section class="panel empty"><h2>老师还没开放课程</h2><p>开课后，再回来看看吧。</p><button id="refresh">刷新课程</button></section>'}<p role="status"></p><details class="panel" style="margin-top:28px"><summary>本机旧记录</summary><p class="muted">这些记录来自使用学生账号之前，不计入当前学生。</p><ul id="legacy"></ul></details>`;
+    app.innerHTML=`<div class="toolbar"><div><p class="muted">${e(who.className)}${who.preview?' · 预览不记录成绩':' · <span class="student-number">'+e(who.student.studentNumber)+'</span>'}</p><h1>${e(who.student.name)}的课程</h1></div>${who.preview?'<a class="button compact" href="/lesson/admin/">返回班级管理</a>':'<div class="actions"><a class="button compact" href="/lesson/awards/">我的纪念册</a><button class="compact" id="changePassword">修改密码</button><button class="compact" id="logout">切换学生</button></div>'}</div><div class="course-directory">${banners}</div>${who.courses.length?'':'<section class="panel empty"><h2>老师还没开放课程</h2><p>开课后，再回来看看吧。</p><button id="refresh">刷新课程</button></section>'}<p role="status"></p><details class="panel" style="margin-top:28px"><summary>本机旧记录</summary><p class="muted">这些记录来自使用学生账号之前，不计入当前学生。</p><ul id="legacy"></ul></details>`;
     document.getElementById('changePassword')?.addEventListener('click',()=>passwordForm(who,false));
     if(waiting)status('还有学习成果保存在本机，联网后将继续同步。');
     document.getElementById('logout')?.addEventListener('click',()=>attempt(async()=>{await api('logout',{});changed();location.replace('/lesson/');}));

@@ -5,7 +5,7 @@ const { EXAMS } = require('./units1-6-exam');
 // Independent expectations: textbook paper pages 10–13 and the unit manuscript.
 const DIALOGUE = ['Good morning.','Good morning, Mr. Blake.','This is Miss Sophie Dupont.','Sophie is a new student.','She is French.','Sophie, this is Hans.','He is German.','Nice to meet you.','And this is Naoko.',"She's Japanese.",'Nice to meet you.','And this is Chang-woo.',"He's South Korean.",'Nice to meet you.','And this is Luming.',"He's Chinese.",'Nice to meet you.','And this is Xiaohui.',"She's Chinese, too.",'Nice to meet you.'];
 const PEOPLE = ['Students','Students','Students','Students','Students','Hans','Hans','Hans','Naoko','Naoko','Naoko','Chang-woo','Chang-woo','Chang-woo','Luming','Luming','Luming','Xiaohui','Xiaohui','Xiaohui'];
-const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['5-6'].old).map(id=>[id,taskCases.answers('5-6',id).map(q=>q.answer)]));
+const ANSWERS=Object.fromEntries(['listen','roles','introduce','cars','exam'].map(id=>[id,taskCases.answers('5-6',id).map(q=>q.answer)]));
 async function completeStory(page, base = '') {
   await page.goto(base + '/unit5-6/#learn/text'); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++){
@@ -32,5 +32,5 @@ async function completeActivity(page,id,{recovery=false,base=''}={}){
   }
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }
-async function completeUnit56(page, base=''){await completeActivity(page,'listen',{recovery:true,base});await completeStory(page,base);for(const id of ['roles','refer','articles','choice','trans','exam'])await completeActivity(page,id,{base});await page.goto(base+'/unit5-6/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
+async function completeUnit56(page, base=''){await completeActivity(page,'listen',{recovery:true,base});await completeStory(page,base);for(const id of ['roles','introduce','cars','exam'])await completeActivity(page,id,{base});await page.goto(base+'/unit5-6/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('5');}
 module.exports={DIALOGUE,PEOPLE,ANSWERS,completeStory,completeActivity,completeUnit56};

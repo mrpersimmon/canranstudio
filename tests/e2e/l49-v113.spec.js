@@ -12,7 +12,8 @@ async function submit(room, value, advance = true) {
 test('接收者题直接问是谁，只能选择人物，并按说话者理解 me', async ({ page }) => {
   await page.goto('/lesson49/#learn/give');
   const room = page.getByRole('region', { name: '交接小帮手', exact: true });
-  await expect(room.getByRole('heading', { name: 'Mrs. Bird 说：Give me that piece, please. 接收者是谁？', exact: true })).toBeVisible();
+  await expect(room.getByRole('heading', { name: '接收者是谁？', exact: true })).toBeVisible();
+  await expect(room.getByRole('region', { name: '题目材料', exact: true })).toHaveText('Mrs. Bird 说：Give me that piece, please.');
   const options = room.locator('.practice-options');
   await expect(options.getByRole('button')).toHaveCount(2);
   await expect(options.getByRole('button', { name: 'me', exact: true })).toHaveCount(0);

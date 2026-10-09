@@ -43,7 +43,9 @@
       const destinations = new Map(unit.stages.flatMap(stage => [[stage.id, stage.title], ...stage.activities.map(([id, title]) => ['learn/' + id, title])]));
       const saved = read(unit.progress.learningKey);
       const valid = saved?.version === 1 && isRecord(saved.groups) && isRecord(saved.records) && isRecord(saved.activity);
-      const route = valid && destinations.has(saved.activity.unitLocation) ? saved.activity.unitLocation : null;
+      const previous = valid ? saved.activity.unitLocation : null;
+      const current = unit.routeAliases?.[previous] || previous;
+      const route = destinations.has(current) ? current : null;
       const entry = document.getElementById(unit.entry);
       entry.textContent = route ? '继续学习' : '开始学习';
       if (entry.hasAttribute('aria-label')) entry.setAttribute('aria-label', entry.textContent + '：' + unit.title);

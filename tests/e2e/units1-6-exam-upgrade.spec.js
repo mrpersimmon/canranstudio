@@ -18,7 +18,7 @@ async function oldEdition(page, unit) {
   return () => { old = false; };
 }
 for (const unit of units) {
-  test(`${unit.id} 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案`, async ({ page }) => {
+  test(`${unit.id} ${unit.id==='1-2'?'旧课通关保留历史，新版挑战整轮零错获星':'旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案'}`, async ({ page }) => {
     test.setTimeout(90000);
     const upgrade = await oldEdition(page, unit.id);
     await require(`../fixtures/unit${unit.id}-short-exam-before/flow`)[unit.complete](page);
@@ -26,20 +26,31 @@ for (const unit of units) {
     await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
     const date = await page.locator('#certificateDate').innerText(); await page.keyboard.press('Escape');
     upgrade(); await page.reload();
-    await expect(page.locator('#starCount')).toHaveText(String({'1-2':10,'3-4':4,'5-6':6}[unit.id]));
-    await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小达人');
-    await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
-    for(const id of {'1-2':['roles'],'3-4':['listen','roles','reply'],'5-6':['listen','refer','articles']}[unit.id])await require('../support/units1-30-tasks').activity(page,unit.id,id);await page.goto('/unit'+unit.id+'/#learn/certificate');
-    await page.getByRole('button', { name: '继续：' + unit.title, exact: true }).click();
-    const room = page.locator('.stage-exam');
-    await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(unit.id==='1-2'?0:unit.oldCount));
-    await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-    await require('../support/units1-30-tasks').activity(page,unit.id,'exam');
-    await expect(room).toContainText(`首次独立答对 ${EXAMS[unit.id].length} / ${EXAMS[unit.id].length}`);
-    await room.getByRole('button', { name: '下一站：我的单元证书', exact: true }).click();
-    await expect(page.locator('#starCount')).toHaveText('15');
-    await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
-    await expect(page.locator('#certificateDate')).toHaveText(date); await page.keyboard.press('Escape');
+    if(unit.id==='1-2'){
+      // Completion-only history cannot claim a zero-error award or a new card date.
+      await expect(page.locator('#starCount')).toHaveText('0');
+      await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
+      await expect(page.locator('#certificateDate')).toBeHidden();
+      await page.goto('/unit1-2/#learn/exam');const room=page.locator('.stage-exam');
+      await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+      await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+      const {activity}=require('../support/thirteen-types-flow');
+      await activity(page,'1-2','exam');
+      await expect(room).toContainText('首次独立答对 8 / 8');
+      await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();
+      await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+      await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+      await activity(page,'1-2','exam');await expect(page.locator('#starCount')).toHaveText('1');
+      await room.getByRole('button',{name:'下一站：我的单元纪念卡',exact:true}).click();
+      await expect(page.locator('#certificateDate')).toBeHidden();
+      return;
+    }
+    await expect(page.locator('#starCount')).toHaveText('0');await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.locator('#certificateDate')).toBeHidden();
+    expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).activity.unitName,'canran:unit'+unit.id+':learning:v1')).toBe('综合小达人');
+    await page.goto(`/unit${unit.id}/#learn/exam`);const room=page.locator('.stage-exam');
+    await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(unit.oldCount));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+    await require('../support/units1-30-tasks').activity(page,unit.id,'exam');await expect(page.locator('#starCount')).toHaveText('0');
+    await room.getByRole('button',{name:'再练一轮',exact:true}).click();await require('../support/units1-30-tasks').activity(page,unit.id,'exam');await expect(page.locator('#starCount')).toHaveText('1');
     await page.goto(`/unit${unit.id}/#learn/exam`); await room.getByRole('button', { name: '再练一轮', exact: true }).click();
     await page.reload(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();

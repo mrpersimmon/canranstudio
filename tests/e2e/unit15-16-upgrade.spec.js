@@ -57,7 +57,7 @@ test('15–16 整课准备后，首次与断网复访翻词卡和剧情换物都
     for(const name of ['下一组词卡','下一组词卡','下一组词卡','上一组词卡','上一组词卡','上一组词卡']){
       await page.locator('.stage-words').getByRole('button',{name,exact:true}).click();await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
     }
-    await page.getByRole('link',{name:'护照小故事',exact:true}).click();const room=page.locator('.stage-text');await room.getByRole('button',{name:'重新上演',exact:true}).click();
+    await page.getByRole('link',{name:'护照小故事',exact:true}).click();const room=page.locator('.stage-text');if(await room.getByRole('button',{name:'重新上演',exact:true}).isVisible())await room.getByRole('button',{name:'重新上演',exact:true}).click();else await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();
     for(let i=0;i<18;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
     const failures=await page.evaluate(()=>{window.watchCourse=false;window.paintObserver.disconnect();return window.paintFailures;});expect(failures).toEqual([]);
     await context.setOffline(false);

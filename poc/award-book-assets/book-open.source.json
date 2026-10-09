@@ -1,0 +1,40 @@
+{
+  "generatedWith": "Built-in image_gen imagegen",
+  "operation": "Edit and background extraction",
+  "transparencyRequested": true,
+  "primaryReference": {
+    "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/docs/award-version/visuals/2026-10-09-0101-v0.16/open-book.png",
+    "width": 1487,
+    "height": 1058
+  },
+  "rawGeneratedSource": "/Users/permission/.codex/generated_images/01a11c80-178e-7922-bea0-dc8c5dbe2588/exec-225d96f9-72b3-409c-8679-7a060659faec.png",
+  "selectedVariant": "First generation, closest framing and material match",
+  "png": {
+    "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/book-open.png",
+    "width": 1821,
+    "height": 864,
+    "hasAlpha": true,
+    "bytes": 2239263,
+    "sha256": "f5c613874cd94eb3f8f2c5aac4f28c219ba82923ceba57aaf0f3c503f9b7f948"
+  },
+  "webp": {
+    "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/book-open.webp",
+    "width": 1600,
+    "height": 759,
+    "hasAlpha": true,
+    "bytes": 147380,
+    "sha256": "1d4fbaa573c36868620a83fb32378bbbb15974994fcdc353cfbb76bc272ec01a",
+    "optimization": "Sharp proportional resize to width 1600 and WebP quality 90; no crop or composition edits"
+  },
+  "promptPath": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/book-open.prompt.txt",
+  "visualInspection": {
+    "passed": [
+      "Blank warm ivory left and right pages",
+      "Centered stitched spine",
+      "Green cloth hardcover",
+      "Layered page edges",
+      "No page text, numbers, certificates, icons, buttons, or corner mounts"
+    ],
+    "limitation": "A few small white remnants remain above the top outer edge in the alpha margin. Two imagegen cleanup variants were tried but produced worse edge color artifacts, so the first variant was retained. Inspect the top outer edge in the final rendered page."
+  }
+}

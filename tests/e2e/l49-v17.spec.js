@@ -233,10 +233,10 @@ test('旧角色草稿和历史成绩不预填新题，旧星星保留，新草�
   await expect(feedback).toBeEmpty();
 });
 
-test('辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记', async ({ page }) => {
+test('现行辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容有展开标记', async ({ page }) => {
   await audioBoundary(page);
   await page.goto('/lesson49/#learn/text');
-  for (const button of [page.getByRole('button', { name: '学徒手记', exact: true }), page.locator('.stage-text').getByRole('button', { name: '怎么玩', exact: true }), page.locator('#autoBtn'), page.locator('#replayBtn')]) {
+  for (const button of [page.getByRole('button', { name: '学徒手记', exact: true }), page.locator('#autoBtn'), page.locator('#replayBtn')]) {
     await expect(button).toHaveCSS('border-top-style', 'solid');
     expect(await button.evaluate(node => parseFloat(getComputedStyle(node).borderTopWidth))).toBeGreaterThanOrEqual(2);
     expect((await button.boundingBox()).height).toBeGreaterThanOrEqual(44);
@@ -246,8 +246,8 @@ test('辅助操作有按钮轮廓，课文点读气泡有喇叭，折叠内容�
   await expect(line.locator('img')).toBeVisible();
   await line.press('Space');
   await expect.poll(() => page.evaluate(() => window.playedAudio.length)).toBe(2);
-  const summary = page.locator('.stage-choice').getByText('看例子', { exact: true });
+  const summary = page.locator('.stage-choice .practice-content .practice-example>summary');
   expect(await summary.evaluate(node => getComputedStyle(node, '::after').content)).not.toBe('none');
   await summary.click();
-  await expect(page.locator('.stage-choice .practice-example')).toHaveAttribute('open', '');
+  await expect(page.locator('.stage-choice .practice-content .practice-example')).toHaveAttribute('open', '');
 });

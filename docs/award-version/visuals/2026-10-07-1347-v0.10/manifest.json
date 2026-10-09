@@ -1,0 +1,30 @@
+{
+  "version": "0.10",
+  "createdAtLocal": "2026-10-07-1347",
+  "timezone": "Asia/Shanghai",
+  "branch": "codex/award-version",
+  "unit": "unit1-2",
+  "status": "selected_implemented_locally",
+  "generator": "built-in image_gen",
+  "file": "handbag-closeup.png",
+  "prompt": "handbag-closeup.prompt.txt",
+  "original": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-8fda5df3-d8ae-49e6-9623-136dc940adee.png",
+  "width": 1486,
+  "height": 1059,
+  "sha256": "8e880ab32c3efdfc166e254df9e249fbc389425f2111783577942899e25babbb",
+  "mockName": "小雨",
+  "mockFirstFullStarDate": "2026-10-07",
+  "references": [
+    {
+      "file": "../2026-10-07-1128-v0.7/card-five-stars.png",
+      "role": "edit_target",
+      "sha256": "c9732cca44577424a4e39333e076681efd240fded048b9efb9e18077ded213b8"
+    },
+    {
+      "file": "../2026-10-07-1327-v0.9/counter.png",
+      "role": "closeup_composition_only",
+      "sha256": "fa8c57b892cb91d0da9052ef63b3f6a22f4431c5ae831d876b7204b20f94a848"
+    }
+  ],
+  "implementationRecord": "../../2026-10-07-1554-v0.11-Lesson1-2近景纪念卡实现与验收.md"
+}

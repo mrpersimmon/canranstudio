@@ -1,0 +1,48 @@
+{
+  "asset": "unit3-4-closeup",
+  "generator": "built-in image_gen",
+  "useCase": "compositing",
+  "originalGeneratedPath": "/Users/permission/.codex/generated_images/01a11c80-d807-7573-9c66-b0902c2ee204/exec-2356c1fb-17d7-4440-afd2-bac269500ab2.png",
+  "approvedReference": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/docs/award-version/visuals/2026-10-07-1327-v0.9/counter.png",
+  "previousScene": "unit3-4-scene.png",
+  "sizeReference": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/assets/awards/unit1-2-handbag-closeup.png",
+  "renderCompared": "/private/tmp/award-book-desktop-v1.jpg",
+  "requestedApproximateSize": {
+    "width": 1024,
+    "height": 1024
+  },
+  "actualSize": {
+    "width": 1254,
+    "height": 1254
+  },
+  "pngBytes": 1968151,
+  "hasAlpha": true,
+  "alphaCounts": {
+    "transparent": 402606,
+    "partial": 1169521,
+    "opaque": 389,
+    "atLeast99PercentOpaque": 996732
+  },
+  "cornerAlpha": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "sampleAlpha": {
+    "guestFace": 253,
+    "clerkFace": 253
+  },
+  "sha256": "cef06789fd16d82a7cba5779f0bbeb7929e64cf0488d86776d01b602ed136f37",
+  "transformations": "Original PNG copied byte for byte. WebP uses lossless encoding only. No resizing, cropping, stretching, repainting, or alpha modification.",
+  "visualInspection": [
+    "Near-square compact upper-body two-person close-up; faces substantially larger relative to image width than unit3-4-scene.png.",
+    "Full guest cap, umbrella top, both faces and number 5 prop sign retained.",
+    "Counter reduced to a thin strip at the bottom; no large cabinet facade.",
+    "Original wardrobe, character designs, colors, umbrella and coat preserved.",
+    "No certificate frame, stars, brand, name, lesson labels or buttons.",
+    "Pale lavender scene fades to transparent; main characters appear opaque."
+  ],
+  "promptFile": "unit3-4-closeup.prompt.txt",
+  "webpBytes": 1298672
+}

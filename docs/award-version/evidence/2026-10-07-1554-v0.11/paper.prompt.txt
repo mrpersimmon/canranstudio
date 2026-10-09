@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: production UI background texture tile, exactly 512 x 512 pixels, square.
+Primary request: a seamless nearly solid warm-white cotton-paper texture for a children's story certificate web page.
+Input image 1 is only a material reference: match the quiet ivory paper surface INSIDE the certificate, ignoring all people, outlines, artwork, text, stars, borders, shadows, and the blue area.
+Composition: straight-on flat uniform surface filling the entire square; no perspective, no edge, no object.
+Color palette: nearly solid #FFFCF5 warm white, never yellow, tan, gray, dirty, or strongly cream.
+Materials: extremely fine, very faint cotton fibers, restrained delicate pressed-paper tactile impression. Very low contrast. No large fibers, creases, stains, speckles, obvious grain, hatch patterns, ripples, or noise.
+Constraints: opaque. As seamlessly tileable as possible, even brightness edge to edge, no gradients, no vignette, no light direction. The texture must never interfere with overlaid live text.
+Absolutely no text, symbols, shadows, frames, characters, stars, logos, illustration, buttons, or watermark. Only the paper surface.

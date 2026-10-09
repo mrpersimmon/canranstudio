@@ -59,6 +59,6 @@ async function completeUnit34(page, prefix = '') {
   await completeStory(page, prefix);
   for (const id of ['roles', 'manners', 'reply', 'exam']) await completeActivity(page, id, { exerciseRecovery: true, prefix });
   await page.goto(prefix + '/unit3-4/#learn/certificate');
-  await expect(page.locator('#starCount')).toHaveText('15');
+  await expect(page.locator('#starCount')).toHaveText('5');
 }
 module.exports = { DIALOGUE, ANSWERS, completeStory, completeActivity, completeUnit34 };

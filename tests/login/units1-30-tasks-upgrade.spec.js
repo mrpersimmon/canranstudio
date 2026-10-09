@@ -1,14 +1,14 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
 const{adminLogin,createStudent,signIn}=require('./helpers');
-const{CASES,story,activity,answers}=require('../support/units1-30-tasks');
+const{CASES,story,activity,answers,currentGroup}=require('../support/units1-30-tasks');
 const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${pair} 账号在三台设备间升级题目，保留历史并独立完成新任务`,async({browser})=>{
  test.setTimeout(150000);
  const{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-tasks-v4-account-'));
  const root=path.resolve(__dirname,'../..'),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data'),unit='unit'+pair;
- const port=Number(process.env.TASKS_UPGRADE_PORT||4223),origin='http://127.0.0.1:'+port;let server;const contexts=[];
+ const port=Number(process.env.TASKS_UPGRADE_PORT||require('../support/login-test-ports').port(4223)),origin='http://127.0.0.1:'+port;let server;const contexts=[];
  const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(port,'127.0.0.1',resolve));};
  const device=async()=>{const c=await browser.newContext({baseURL:origin});contexts.push(c);const page=await c.newPage();
   if(pair==='1-2')await page.addInitScript(()=>{window.Audio=class extends EventTarget{play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();}pause(){}};});
@@ -35,6 +35,33 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   const date=await old.locator('#certificateDate').innerText();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
   await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(root);
   const current=await device();await signIn(current,account,'/');await current.goto('/'+unit+'/#learn/certificate');
+  if(['1-2','3-4','5-6'].includes(pair)){
+   await expect(current.locator('#starCount')).toHaveText('0');
+   await expect(current.locator('#certificateName')).toHaveText('测试小伙伴');
+   await expect(current.locator('#certificateDate')).toBeHidden();
+   const flow=pair==='1-2'?require('../support/thirteen-types-flow'):{story,activity};
+   const ids=pair==='1-2'?Object.keys(flow.ANSWERS[pair]):[...new Set(Object.keys(CASES[pair].old).map(id=>currentGroup(pair,id)))];
+   await flow.story(current,pair);
+   for(const id of ids)await flow.activity(current,pair,id);
+   // Start a new complete round after carrying forward compatible historical work.
+   for(const id of ids){
+    await current.goto('/'+unit+'/#learn/'+id);
+    await current.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();
+    await flow.activity(current,pair,id);
+   }
+   await current.goto('/'+unit+'/#learn/certificate');
+   await expect(current.locator('#starCount')).toHaveText('5');
+   await expect(current.locator('#certificateDate')).toBeVisible();
+   const fullDate=await current.locator('#certificateDate').innerText();
+   await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+   const restored=await device();await signIn(restored,account,'/');
+   await expect(restored.locator('.course')).toContainText('5 / 5');
+   await restored.goto('/'+unit+'/#learn/certificate');
+   await expect(restored.locator('#certificateName')).toHaveText('测试小伙伴');
+   await expect(restored.locator('#starCount')).toHaveText('5');
+   await expect(restored.locator('#certificateDate')).toHaveText(fullDate);
+   return;
+  }
   await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');
   if(['1-2','25-26'].includes(pair)){
    await require('../support/thirteen-types-flow').complete(current,pair);

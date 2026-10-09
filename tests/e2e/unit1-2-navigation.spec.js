@@ -61,7 +61,7 @@ test('新学习从图鉴开始，图鉴末组前往寻宝；已有位置继续�
   await page.goto('/unit1-2/#learn/ask');
   await page.goto('/unit1-2/');
   await page.getByRole('button',{name:'继续冒险',exact:true}).click();
-  await expect(page).toHaveURL(/#learn\/ask$/);
+  await expect(page).toHaveURL(/#learn\/workshop$/);
 });
 
 test('章节换序仍能从原有章节链接继续，不把故事和物品记录对调',async({page})=>{

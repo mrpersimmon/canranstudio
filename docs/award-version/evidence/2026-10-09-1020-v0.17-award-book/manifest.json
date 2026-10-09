@@ -1,0 +1,88 @@
+{
+  "scope": "Browser-verified local example album, not production or account-backed collection",
+  "branch": "codex/debug-reward-version",
+  "prototype": "poc/award-book",
+  "preview": "http://127.0.0.1:4264/",
+  "files": [
+    {
+      "name": "action-requests.json",
+      "bytes": 146,
+      "sha256": "d83d100524b67d54763f1abf10f96dea70bbb3f273d00af0d359a4340861ee50"
+    },
+    {
+      "name": "desktop.jpg",
+      "bytes": 151466,
+      "sha256": "e35e72075d4764a1aa45327afc11e05bc2f06ef95f73f1a84d75b3f74ef9701e"
+    },
+    {
+      "name": "directory.jpg",
+      "bytes": 68534,
+      "sha256": "ac7abd33b3993a99e9799f17d0f17abb97d6cce3cb07bf30ba2de83ac2375f89"
+    },
+    {
+      "name": "http-budget.json",
+      "bytes": 2735,
+      "sha256": "73e8757f40b0964686a06ab6d2d1becd1f6804a6bf224462a7650642964bfcb0"
+    },
+    {
+      "name": "laptop.jpg",
+      "bytes": 90175,
+      "sha256": "2a30570b5504f22c6aeefd374c7fe29d4d8cbaa764d2049311c0b2c3bbacac01"
+    },
+    {
+      "name": "last-spread.jpg",
+      "bytes": 119046,
+      "sha256": "977d1dd49e616674bf7b421c0dac568770905086c5c5064dd276142002d5c9c4"
+    },
+    {
+      "name": "missing-image.jpg",
+      "bytes": 29800,
+      "sha256": "6375f4d1018825552194a3f08de209229353a40f4456bdeb980e678a9f058089"
+    },
+    {
+      "name": "mobile-320.jpg",
+      "bytes": 31091,
+      "sha256": "fbf9ff9a7cdb0513b35ca4ed4da75cacbc6fa90355c19e0c8b589557fa1d6cfd"
+    },
+    {
+      "name": "mobile-390.jpg",
+      "bytes": 40439,
+      "sha256": "ad0f9c2c79a201d4eee3610cffdcbd4eaf3ce7a69e74a85fe18bc9c315ba3efd"
+    },
+    {
+      "name": "modal.jpg",
+      "bytes": 84104,
+      "sha256": "4c5d945d232519fe34a7f1d625a19d182b0ca259c599fdaf425e73778c73209d"
+    },
+    {
+      "name": "preview-requests.ndjson",
+      "bytes": 6778,
+      "sha256": "7fb11ec7113ce33b9c32a60369531dcdee3a552e0d4a15e044d84e997e3e3994"
+    },
+    {
+      "name": "revisit-requests.json",
+      "bytes": 1017,
+      "sha256": "1ead7c24e784dc7bab06423451494b30e9f0f466d7321bf417c96927ad437ad2"
+    },
+    {
+      "name": "turning.jpg",
+      "bytes": 112354,
+      "sha256": "ed953e38032a6ed77fac72687f0bde8714ec5b982ce2a13e028e89538908b914"
+    },
+    {
+      "name": "unit1-2-download.png",
+      "bytes": 875341,
+      "sha256": "832cb75128673ed536bd5290575bfd3352cb853ffce5b9a261b6921beb465704"
+    },
+    {
+      "name": "unit3-4-download.png",
+      "bytes": 938381,
+      "sha256": "1c57be69420523fcaa0f18a4d9cdc5e126a391534b46eeeb5646000a6004b818"
+    },
+    {
+      "name": "unit5-6-download.png",
+      "bytes": 1015126,
+      "sha256": "60d3bd8764e89ca66b8e17fe93a433e9ae607de423f6efee17751283fa6b088d"
+    }
+  ]
+}

@@ -83,19 +83,22 @@
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
-      const count = stage.required.filter(passed).length, stars = Math.floor(count / stage.required.length * 3);
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '整轮零错，这颗星点亮了！';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const awards = core.unitAwards.create({ unit, practice, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
@@ -109,9 +112,15 @@
     }
     const predecessors = unit.activityPredecessors[id];
     practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs,
+      inputViews:core.lesson49TaskInputs, roundPolicy:unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit34-' + old + '-practice/v1', questions: prior }))), ...settings,
-      onComplete: states => { complete(id); nextStation(id, element.querySelector('.practice-finish-actions'));
+      onComplete: (states,round) => {
+        const perfect = awards.record(id, states, round);
+        const result = node('p', perfect ? '整轮零错，这颗星点亮了！' : round.roundPolicy !== unit.reward.edition ? '再练一轮，整轮零错就能点亮星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。', 'award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        element.querySelector('.practice-finish-actions').before(result);
+        complete(id);
+        nextStation(id, element.querySelector('.practice-finish-actions'));
         if (id === 'manners') element.querySelector('.practice-finish > p').textContent = '雨伞领回来了！';
         settings.onComplete?.(states); } });
     return element;
@@ -255,15 +264,8 @@
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '认领小达人', course: '雨伞认领小帮手 · Lesson 3–4', completion: '完成 Lesson 3–4 课堂配套练习', thanks: '仔细确认，礼貌认领！' },
-      characters: ['visitor', 'attendant'], characterLabels: ['客人', '工作人员'], icon: art, defaultName: '雨伞认领小帮手', dialogTitle: '雨伞认领小帮手纪念', fileName: 'Lesson3-4-雨伞认领小帮手.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
-  });
+  certificateView = core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href});
+
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
   writing.append(node('summary', '和家人再试试'), node('p', '各拿一件自己和家人的物品。先确定主人，再用 Is this your…? 问答，交换角色后留意 my 和 your 跟着说话人变化。只有明确知道是对方的，才能说 It’s your…。'), node('p', '纸笔小练习：抄写下列四句；再按“不是我的，是你的”的已知条件完成问答。'));
   const writingLines = node('ol', '', 'writing-lines'); ['This is not my umbrella.', 'Sorry, sir.', 'Is this your umbrella?', "No, it isn’t!"].forEach(text => writingLines.append(node('li', text))); writing.append(writingLines);

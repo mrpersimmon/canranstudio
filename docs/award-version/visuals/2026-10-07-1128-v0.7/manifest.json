@@ -1,0 +1,27 @@
+{
+  "createdAt": "2026-10-07T11:28:00+08:00",
+  "tool": "built-in imagegen",
+  "status": "One chosen design in two star states; earning rules pending; static images only",
+  "images": [
+    {
+      "stars": 1,
+      "file": "card-one-star.png",
+      "promptFile": "card-one-star.prompt.txt",
+      "reference": "docs/award-version/visuals/2026-09-27-0034-v0.6/warm-letterpress.png",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-b25e4f74-8bce-4582-b545-522135158464.png",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "2a1dbe4ac8ec4d3d82b5ea58bc376bff84f44a27898ac7421fea9755fe63f1f6"
+    },
+    {
+      "stars": 5,
+      "file": "card-five-stars.png",
+      "promptFile": "card-five-stars.prompt.txt",
+      "reference": "docs/award-version/visuals/2026-10-07-1128-v0.7/card-one-star.png",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-3d483ee8-e9dc-4e4a-9579-b003a24aa36c.png",
+      "width": 1486,
+      "height": 1058,
+      "sha256": "c9732cca44577424a4e39333e076681efd240fded048b9efb9e18077ded213b8"
+    }
+  ]
+}

@@ -23,12 +23,21 @@ for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
     await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
     await context.setOffline(true);
     await run(page, '/lesson');
+    if(first===1){
+      // Anonymous previews can practise offline, but cannot impersonate a student
+      // by typing a name. Real-name offline PNG export is covered in login/award-book.
+      await expect(page.locator('#starCount')).toHaveText('5');
+      await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveCount(0);
+      await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+      await expect(page.locator('.story-award-paper')).toBeVisible();
+    }else{
     await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('课程小伙伴');
     await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
     const download = page.waitForEvent('download', { timeout: 15000 });
     await page.getByRole('button', { name: '保存图片', exact: true }).click();
     const saved = await download;
     expect((await fs.stat(await saved.path())).size).toBeGreaterThan(10000);
+    }
     expect(errors).toEqual([]);
     expect(await page.evaluate(() => window.incompleteFrames)).toEqual([]);
   });
@@ -51,7 +60,7 @@ test('关闭脚本时可看课程导航，课程入口给出明确恢复方式',
   const context = await browser.newContext({ javaScriptEnabled: false });
   try {
     const page = await context.newPage();
-    await page.goto('http://127.0.0.1:4173/lesson/unit1-2/');
+    await page.goto('http://127.0.0.1:' + (process.env.COURSE_TEST_PORT || 4173) + '/lesson/unit1-2/');
     await expect(page.getByText('请开启浏览器的 JavaScript 后再进入课程。', { exact: true })).toBeVisible();
     await expect(page.locator('#courseLoader')).not.toBeVisible();
     await page.getByRole('link', { name: '返回课程', exact: true }).click();

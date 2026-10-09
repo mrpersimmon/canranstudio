@@ -4,7 +4,7 @@ const { test, expect } = require('@playwright/test');
 const { PUBLISHED_COURSES } = require('../../core/course-catalog');
 const { PROFILE_KEY } = require('../../core/device-profile');
 
-const BASE_ORIGIN = 'http://127.0.0.1:4173';
+const BASE_ORIGIN = 'http://127.0.0.1:' + (process.env.COURSE_TEST_PORT || 4173);
 const PUBLIC_ROUTES = [
   { id: 'home', route: '/' },
   { id: 'unit49-50', route: '/unit49-50/' },
@@ -14,7 +14,6 @@ const PUBLIC_ROUTES = [
 const AUDIO_PROBES = [
   { id: 'lesson49', route: '/lesson49/#learn/words', buttonName: 'butcher' },
   { id: 'unit49-50', route: '/unit49-50/#learn/words', selector: 'button[aria-label="butcher"]', audioDirectory: 'lesson49' },
-  { id: 'unit1-2', route: '/unit1-2/#learn/words', selector: 'button[aria-label="handbag"]', audioDirectory: 'unit1-2' },
   { id: 'lesson50', route: '/lesson50/', selector: '.spk:visible' },
   { id: 'lesson51', route: '/lesson51/', selector: '.spk:visible' },
   { id: 'lesson52', route: '/lesson52/', selector: '.spk:visible' },
@@ -23,6 +22,7 @@ const AUDIO_PROBES = [
 ];
 const ALLOWED_STORAGE_KEYS = new Set([
   PROFILE_KEY,
+  ...['unit1-2','unit3-4','unit5-6'].map(id=>'canran:'+id+':learning:v1:awards:story-card-v1'),
   'canran:unit49-50:learning:v1',
   'canran:unit1-2:learning:v1',
   ...PUBLISHED_COURSES.flatMap(course => [
@@ -282,3 +282,11 @@ for (const probe of AUDIO_PROBES) {
     expect(await page.evaluate(() => window.__speechAttempts)).toEqual([]);
   });
 }
+
+// These cards have deliberately moved to the approved teacher-led, no-voice mode.
+for(const [id,word] of [['unit1-2','handbag'],['unit3-4','umbrella'],['unit5-6','French']])test(`${id} word cards reveal meaning without narration or speech fallback`,async({page})=>{
+  await installAudioProbe(page);await page.goto('/'+id+'/#learn/words');
+  const card=page.locator('.stage-words').getByRole('button',{name:word,exact:true});await expect(card).toHaveAttribute('aria-expanded','false');
+  await card.click();await expect(card).toHaveAttribute('aria-expanded','true');
+  expect(await page.evaluate(()=>window.__audioAttempts)).toEqual([]);expect(await page.evaluate(()=>window.__speechAttempts)).toEqual([]);
+});

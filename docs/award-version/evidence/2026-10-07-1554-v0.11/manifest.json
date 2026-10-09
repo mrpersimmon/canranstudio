@@ -1,0 +1,88 @@
+{
+  "version": "0.11",
+  "createdAtLocal": "2026-10-07-1554",
+  "branch": "codex/award-version",
+  "edition": "story-card-v1",
+  "sourceVisual": "../../visuals/2026-10-07-1347-v0.10/handbag-closeup.png",
+  "imageGeneration": "built-in imagegen; prompts stored beside this manifest",
+  "assets": [
+    {
+      "file": "assets/awards/LICENSE-ChillRound.txt",
+      "bytes": 4375,
+      "sha256": "d45891f8adfd21368c98e803603df1f575ff3fc4a6ec713ba7ccf0e3cba15b28"
+    },
+    {
+      "file": "assets/awards/LICENSE-Phosphor.txt",
+      "bytes": 1092,
+      "sha256": "ddbe6082ec3cf979db47e5af549d2849c5d6182b3e005ef91ce1dbb9eb122f11"
+    },
+    {
+      "file": "assets/awards/award-round.woff2",
+      "bytes": 1296316,
+      "sha256": "9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28"
+    },
+    {
+      "file": "assets/awards/download.svg",
+      "bytes": 316,
+      "sha256": "3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3"
+    },
+    {
+      "file": "assets/awards/paper.png",
+      "bytes": 1789663,
+      "sha256": "fa1312488752dc990c67f9522d010a33733e2e0bfaa41917cb88ba0ac80c3324"
+    },
+    {
+      "file": "assets/awards/paper.webp",
+      "bytes": 1254,
+      "sha256": "2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce"
+    },
+    {
+      "file": "assets/awards/return.svg",
+      "bytes": 290,
+      "sha256": "1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306"
+    },
+    {
+      "file": "assets/awards/star-earned.png",
+      "bytes": 1130576,
+      "sha256": "39358fe04295963d6b2bac22adcc0c9db208d54a0b675db2a074efc8fe803b47"
+    },
+    {
+      "file": "assets/awards/star-earned.webp",
+      "bytes": 11876,
+      "sha256": "7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107"
+    },
+    {
+      "file": "assets/awards/star-empty.png",
+      "bytes": 330779,
+      "sha256": "c9170c1226d8b37829f32eb04248bf2768e9ba7df0177ae2b8df2f71ace0f6dd"
+    },
+    {
+      "file": "assets/awards/star-empty.webp",
+      "bytes": 13200,
+      "sha256": "269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c"
+    },
+    {
+      "file": "assets/awards/unit1-2-handbag-closeup.png",
+      "bytes": 1599332,
+      "sha256": "7dadc8adb1901fdcf1418e521347b76a087e2332e0a3def7ef4c74c2552c7914"
+    },
+    {
+      "file": "assets/awards/unit1-2-handbag-closeup.webp",
+      "bytes": 177460,
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826"
+    }
+  ],
+  "font": {
+    "authorSource": "https://github.com/Warren2060/ChillRound",
+    "download": "https://cdn.jsdelivr.net/gh/Warren2060/ChillRound@main/ChillRoundF%20v3.0.ttf",
+    "sourceSha256": "7dae804b344f7bc1a1c8426b9515e9b54d7baac3e123263d0bae94d0a305a732",
+    "license": "SIL OFL 1.1; assets/awards/LICENSE-ChillRound.txt",
+    "derivedName": "Canran Award Round",
+    "subset": "GB2312 characters plus U+0020–00FF and U+2000–206F; 7621 glyphs; name IDs 1/2/4/6/16/17 renamed; fontTools WOFF2. Rare glyphs fall back to existing course/system fonts."
+  },
+  "controls": {
+    "library": "Phosphor Icons 2.1.1, bold/download-simple and bold/arrow-u-up-left",
+    "source": "https://github.com/phosphor-icons/core",
+    "license": "MIT; assets/awards/LICENSE-Phosphor.txt"
+  }
+}

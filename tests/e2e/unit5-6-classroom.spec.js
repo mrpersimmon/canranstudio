@@ -21,19 +21,17 @@ test('无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终
   await expect(story.locator('[data-person="hans"]')).toHaveClass(/is-speaking/);
 });
 
-test('全部声音失败仍可完成30题与20句，旧重复问答不再必做', async ({ page }) => {
+test('全部声音失败仍可完成26题与20句，旧重复问答不再必做', async ({ page }) => {
   test.setTimeout(120000); const voices = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.addInitScript(() => { window.speechCalls = 0; speechSynthesis.speak = () => { window.speechCalls++; }; });
   await page.route(/\.(mp3|ogg|wav)(\?|$)/, route => { if (!isFeedbackAudio(route.request().url())) voices.push(route.request().url()); return route.abort(); });
   await page.goto('/lesson/unit5-6/#learn/certificate');
-  await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: '保存纪念卡', exact: true })).toBeDisabled();
   await completeUnit56(page, '/lesson');
-  await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('新朋友小雨');
-  await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
-  await expect(page.getByRole('dialog', { name: '新朋友见面会纪念', exact: true })).toContainText('完成 Lesson 5–6 课堂配套练习');
-  await page.keyboard.press('Escape'); await page.reload();
-  await expect(page.locator('#starCount')).toHaveText('15');
+  await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
+  await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
+  await page.reload();await expect(page.locator('#starCount')).toHaveText('5');
   await expect(page.getByRole('button', { name: /听一遍|重听|播放|开始听/ })).toHaveCount(0);
   expect(await page.evaluate(() => window.speechCalls)).toBe(0);
   expect(voices).toEqual([]); expect(errors).toEqual([]);
@@ -95,7 +93,7 @@ test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听�
   await room.getByRole('button', { name: '下一题', exact: true }).click();
   await finishExam(page, '5-6', 3);
   await expect(room).toContainText('首次独立答对 8 / 10'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
-  await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+  await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '保存纪念卡', exact: true })).toBeDisabled();
 });
 
 for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及合影完整，页面不随下一句跳动', async ({ page }) => {
@@ -124,12 +122,14 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
   await expect(page.locator('#starCount')).toHaveText('0');
   await room.getByRole('button', { name: '完成课文', exact: true }).click();
   await expect(room.locator('.classroom-photo')).toBeVisible();
-  await expect(page.locator('#starCount')).toHaveText('1');
+  await expect(page.locator('#starCount')).toHaveText('0'); // Reading is teaching, not a zero-error answer zone.
   await room.screenshot({ path: `output/playwright/unit5-6-classroom/story-finish-${width}.png` });
   await completeActivity(page, 'roles'); await page.locator('.stage-roles').screenshot({ path: `output/playwright/unit5-6-classroom/friends-finish-${width}.png` });
   await page.goto('/unit5-6/#learn/text'); await room.getByRole('button', { name: '再看一遍', exact: true }).click();
   await expect(room.locator('.classroom-classmate span')).toHaveText('Students'); await expect(room.locator('.bubble-row')).toHaveCount(0);
-  const restart = await room.getByRole('button', { name: '重新上演', exact: true }).boundingBox(), start = await room.getByRole('button', { name: '开始看课文', exact: true }).boundingBox();
+  await expect(room.getByRole('button', { name: '重新上演', exact: true })).toBeHidden();
+  await room.getByRole('button', { name: '开始看课文', exact: true }).click();
+  const restart = await room.getByRole('button', { name: '重新上演', exact: true }).boundingBox(), start = await room.getByRole('button', { name: '下一句', exact: true }).boundingBox();
   expect(restart.x + restart.width).toBeLessThan(start.x); expect(restart.y).toBeCloseTo(start.y, 0);
   await page.goto('/unit5-6/#learn/models');
   await expect(page.locator('.car-showroom article')).toHaveCount(6);

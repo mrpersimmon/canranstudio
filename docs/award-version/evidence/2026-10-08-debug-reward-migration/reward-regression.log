@@ -1,0 +1,138 @@
+
+Running 58 tests using 1 worker
+
+(node:30525) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/58] tests/e2e/common-interactions.spec.js:5:31 › 320 所有无配音单元共用简洁操作，阅读三态布局一致
+[2/58] tests/e2e/common-interactions.spec.js:5:31 › 1280 所有无配音单元共用简洁操作，阅读三态布局一致
+[3/58] tests/e2e/common-interactions.spec.js:43:1 › 旧版暂停中的未提交选择，升级直接续做且不自动判对
+[4/58] tests/e2e/common-interactions.spec.js:52:1 › 旧版分段暂停升级后进入第六题，前五题保留且不替答
+[5/58] tests/e2e/common-interactions.spec.js:64:35 › 1-2 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成
+  1) tests/e2e/common-interactions.spec.js:64:35 › 1-2 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成 ────────────────
+
+    TimeoutError: locator.fill: Timeout 4000ms exceeded.
+    Call log:
+      - waiting for getByRole('textbox', { name: '证书上的名字', exact: true })
+
+
+      75 |   }
+      76 |  }
+    > 77 |  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('旧版小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
+         |                                                                                                                                                                          ^
+      78 |  upgrade();await page.reload();
+      79 |  if(pair==='1-2'){
+      80 |   await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.locator('#certificateDate')).toBeHidden();
+        at /Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/tests/e2e/common-interactions.spec.js:77:170
+
+    Error Context: test-results/common-interactions-1-2-原输入版满星升级保留相同题和证书纪念，新补词题须重新完成/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/common-interactions-1-2-原输入版满星升级保留相同题和证书纪念，新补词题须重新完成/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/common-interactions-1-2-原输入版满星升级保留相同题和证书纪念，新补词题须重新完成/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:30768) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[6/58] tests/e2e/common-interactions.spec.js:64:35 › 25-26 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成
+[7/58] tests/e2e/retry-feedback.spec.js:8:1 › 只改线索保留已完成活动，内容版本变化不能沿用完成记录
+[8/58] tests/e2e/retry-feedback.spec.js:24:35 › 旧分拣真实错答记录升级，已继续=false
+[9/58] tests/e2e/retry-feedback.spec.js:24:35 › 旧分拣真实错答记录升级，已继续=true
+[10/58] tests/e2e/retry-feedback.spec.js:40:3 › unit1-2 选择题错答只提示重试，改选后正常推进
+[11/58] tests/e2e/retry-feedback.spec.js:40:3 › unit3-4 选择题错答只提示重试，改选后正常推进
+[12/58] tests/e2e/retry-feedback.spec.js:40:3 › unit5-6 选择题错答只提示重试，改选后正常推进
+[13/58] tests/e2e/retry-feedback.spec.js:40:3 › unit7-8 选择题错答只提示重试，改选后正常推进
+[14/58] tests/e2e/retry-feedback.spec.js:40:3 › unit9-10 选择题错答只提示重试，改选后正常推进
+[15/58] tests/e2e/retry-feedback.spec.js:40:3 › unit11-12 选择题错答只提示重试，改选后正常推进
+[16/58] tests/e2e/retry-feedback.spec.js:40:3 › unit13-14 选择题错答只提示重试，改选后正常推进
+[17/58] tests/e2e/retry-feedback.spec.js:40:3 › unit15-16 选择题错答只提示重试，改选后正常推进
+[18/58] tests/e2e/retry-feedback.spec.js:40:3 › unit17-18 选择题错答只提示重试，改选后正常推进
+[19/58] tests/e2e/retry-feedback.spec.js:40:3 › unit19-20 选择题错答只提示重试，改选后正常推进
+[20/58] tests/e2e/retry-feedback.spec.js:40:3 › unit21-22 选择题错答只提示重试，改选后正常推进
+[21/58] tests/e2e/retry-feedback.spec.js:40:3 › unit23-24 选择题错答只提示重试，改选后正常推进
+[22/58] tests/e2e/retry-feedback.spec.js:40:3 › unit25-26 选择题错答只提示重试，改选后正常推进
+[23/58] tests/e2e/retry-feedback.spec.js:40:3 › unit27-28 选择题错答只提示重试，改选后正常推进
+[24/58] tests/e2e/retry-feedback.spec.js:40:3 › unit29-30 选择题错答只提示重试，改选后正常推进
+[25/58] tests/e2e/retry-feedback.spec.js:40:3 › unit49-50 选择题错答只提示重试，改选后正常推进
+[26/58] tests/e2e/retry-feedback.spec.js:40:3 › lesson49 选择题错答只提示重试，改选后正常推进
+[27/58] tests/e2e/retry-feedback.spec.js:51:1 › 音标课答错只提示重试，原题改选可继续
+[28/58] tests/e2e/retry-feedback.spec.js:61:3 › lesson52 填空初始及错答均不把答案放在空格中，可连续重试
+[29/58] tests/e2e/retry-feedback.spec.js:61:3 › lesson53 填空初始及错答均不把答案放在空格中，可连续重试
+[30/58] tests/e2e/retry-feedback.spec.js:61:3 › lesson54 填空初始及错答均不把答案放在空格中，可连续重试
+[31/58] tests/e2e/retry-feedback.spec.js:72:1 › Lesson50 考核答错不标亮答案，不自动翻题，原题可以改选
+[32/58] tests/e2e/retry-feedback.spec.js:88:1 › Lesson50 快问快答不朗读正确答案或自动跳过错题
+[33/58] tests/e2e/retry-feedback.spec.js:104:1 › Lesson51 频率分拣答错不告知应该选哪个台阶
+[34/58] tests/e2e/retry-feedback.spec.js:113:1 › 没有独立线索的题目不把解析放进灯泡
+[35/58] tests/e2e/retry-feedback.spec.js:118:1 › 拼句线索只给思考方向，不提供完整词序
+[36/58] tests/e2e/retry-feedback.spec.js:124:44 › lesson49 分拣答错原题重试，刷新保留首次错误记录
+[37/58] tests/e2e/retry-feedback.spec.js:124:44 › unit49-50 分拣答错原题重试，刷新保留首次错误记录
+[38/58] tests/e2e/retry-feedback.spec.js:137:1 › Lesson13–14首次和连续答错只提示重试，刷新不泄题，改对后记录修正完成
+[39/58] tests/e2e/unit-thirteen-types.spec.js:5:68 › 1-2 root 无配音完整通关与真实证书
+[40/58] tests/e2e/unit-thirteen-types.spec.js:5:68 › 1-2 /lesson 无配音完整通关与真实证书
+[41/58] tests/e2e/unit-thirteen-types.spec.js:5:68 › 25-26 root 无配音完整通关与真实证书
+[42/58] tests/e2e/unit-thirteen-types.spec.js:5:68 › 25-26 /lesson 无配音完整通关与真实证书
+[43/58] tests/e2e/unit-thirteen-types.spec.js:20:1 › 点击补词保存选择，错误只重试，新题保持未答
+[44/58] tests/e2e/unit-thirteen-types.spec.js:29:1 › 中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正
+[45/58] tests/e2e/unit-thirteen-types.spec.js:35:1 › 情境在确认正确答案之前不交包、不显示新位置；刷新还原真实状态
+[46/58] tests/e2e/unit-thirteen-types.spec.js:42:39 › 320 两套题作答前后可读、可操作且无横向溢出
+[47/58] tests/e2e/unit-thirteen-types.spec.js:42:39 › 390 两套题作答前后可读、可操作且无横向溢出
+[48/58] tests/e2e/unit-thirteen-types.spec.js:42:39 › 768 两套题作答前后可读、可操作且无横向溢出
+[49/58] tests/e2e/unit-thirteen-types.spec.js:42:39 › 1280 两套题作答前后可读、可操作且无横向溢出
+[50/58] tests/e2e/unit-thirteen-types.spec.js:55:35 › 1-2 真实旧轮次升级保留相同题和纪念信息，新题必须亲自作答
+[51/58] tests/e2e/unit-thirteen-types.spec.js:55:35 › 25-26 真实旧轮次升级保留相同题和纪念信息，新题必须亲自作答
+[52/58] tests/e2e/unit1-2-award-migration.spec.js:7:1 › 当前25题旧记录合并五区，不自动发星；新挑战全对后得星
+  2) tests/e2e/unit1-2-award-migration.spec.js:7:1 › 当前25题旧记录合并五区，不自动发星；新挑战全对后得星 ───────────────────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByRole('textbox', { name: '证书上的名字', exact: true })
+    Expected: "旧卡姓名"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: '证书上的名字', exact: true })
+
+
+      25 |  await page.locator('.stage-workshop').getByRole('button',{name:'再练一轮',exact:true}).click();
+      26 |  await activity(page,'1-2','workshop');await expect(page.locator('#starCount')).toHaveText('1');
+    > 27 |  before=true;await page.goto('/unit1-2/#learn/certificate');await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('旧卡姓名');
+         |                                                                                                                                ^
+      28 |  await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(oldDate);
+      29 | });
+      30 |
+        at /Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/tests/e2e/unit1-2-award-migration.spec.js:27:128
+
+    Error Context: test-results/unit1-2-award-migration-当前25题旧记录合并五区，不自动发星；新挑战全对后得星/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit1-2-award-migration-当前25题旧记录合并五区，不自动发星；新挑战全对后得星/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit1-2-award-migration-当前25题旧记录合并五区，不自动发星；新挑战全对后得星/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:31636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[53/58] tests/e2e/unit1-2-exam.spec.js:5:1 › 1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句阅读
+[54/58] tests/e2e/unit1-2-navigation.spec.js:5:3 › / 导航进入两个独立单元，分别继续，所有资源保留在正确路径
+[55/58] tests/e2e/unit1-2-navigation.spec.js:5:3 › /lesson/ 导航进入两个独立单元，分别继续，所有资源保留在正确路径
+[56/58] tests/e2e/unit1-2-navigation.spec.js:31:1 › 子目录重开清除两个单元，只影响该版本，取消不会清除任何记录
+[57/58] tests/e2e/unit1-2-navigation.spec.js:52:1 › 新学习从图鉴开始，图鉴末组前往寻宝；已有位置继续原活动
+[58/58] tests/e2e/unit1-2-navigation.spec.js:67:1 › 章节换序仍能从原有章节链接继续，不把故事和物品记录对调
+  2 failed
+    tests/e2e/common-interactions.spec.js:64:35 › 1-2 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成 ─────────────────
+    tests/e2e/unit1-2-award-migration.spec.js:7:1 › 当前25题旧记录合并五区，不自动发星；新挑战全对后得星 ────────────────────
+  56 passed (3.7m)

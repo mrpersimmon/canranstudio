@@ -40,7 +40,11 @@
     "sharp": "^0.35.5"
   },
   "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "esbuild": "0.25.12",
     "pinyin-pro": "3.29.4",
-    "qrcode": "1.5.4"
+    "qrcode": "1.5.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   }
 }

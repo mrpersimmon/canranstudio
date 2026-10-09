@@ -17,7 +17,7 @@ async function pair(room,left,right){
 }
 test('配对先完整选择再检查，错配和刷新保留原位，修改后才计进度',async({page})=>{
  const room=await reachContainers(page),check=room.getByRole('button',{name:'检查答案',exact:true});
- await expect(room.getByRole('heading',{name:'给容器配对',exact:true})).toBeVisible();
+ await expect(room.getByRole('heading',{name:'给容器选择配对',exact:true})).toBeVisible();
  await expect(room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:'瓶子',exact:true})).toBeDisabled();
  const labels=await room.getByRole('group',{name:'词义',exact:true}).getByRole('button').evaluateAll(xs=>xs.map(x=>x.getAttribute('aria-label')));
  await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'box',exact:true}).press('Enter');

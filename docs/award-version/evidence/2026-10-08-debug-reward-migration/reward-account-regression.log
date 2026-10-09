@@ -1,0 +1,12 @@
+
+Running 4 tests using 1 worker
+
+(node:32182) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] tests/login/access.spec.js:162:1 › 学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效
+[2/4] tests/login/settings.spec.js:101:1 › 窄屏与横屏的重开确认可读，取消不丢已选答案，账号按钮仍可使用
+[3/4] tests/login/unit1-2-award.spec.js:6:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离
+[4/4] tests/login/unit1-2-award.spec.js:124:1 › 订正完成但零星，课程首页仍可继续学习
+  4 passed (26.4s)

@@ -18,6 +18,7 @@
   const surfaces = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
+  const canonicalRoute = id => unit.routeAliases?.[id] || id;
   let active = '', certificateView;
   for (const stage of stages) {
     const section = node('section', '', 'shop-chapter'); section.id = stage.id;
@@ -52,7 +53,9 @@
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
+    if (canonicalRoute(id) !== id) { id = canonicalRoute(id); history.replaceState(null, '', '#' + id); }
     if (!routes.has(id)) id = 'cover'; markLocation(id);
+    document.documentElement.style.scrollPaddingTop = Math.ceil($('#topbar').getBoundingClientRect().height) + 12 + 'px';
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
   }
   $('#lessonWorkspace').addEventListener('click', event => {
@@ -61,10 +64,10 @@
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
   }, true);
   $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
-  const resume = practice.activity('unitLocation');
+  const resume = canonicalRoute(practice.activity('unitLocation'));
   if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
   $('#startBtn').addEventListener('click', () => {
-    const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+    const saved = canonicalRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
@@ -74,19 +77,22 @@
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
-      const count = stage.required.filter(passed).length, stars = Math.floor(count / stage.required.length * 3);
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '整轮零错，这颗星点亮了！';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const awards = core.unitAwards.create({ unit, practice, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
@@ -100,9 +106,13 @@
     }
     const predecessors = unit.activityPredecessors[id];
     practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs,
+      inputViews:core.lesson49TaskInputs, roundPolicy: unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
-      onComplete: states => {
+      onComplete: (states, round) => {
+        const perfect = awards.record(id, states, round);
+        const result = node('p', perfect ? '整轮零错，这颗星点亮了！' : round.roundPolicy !== unit.reward.edition ? '再练一轮，整轮零错就能点亮星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。', 'award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        element.querySelector('.practice-finish-actions').before(result);
         complete(id);
         if (settings.sceneView) element.querySelector('.practice-finish > p').textContent = '手提包送回去了！';
         nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
@@ -221,7 +231,7 @@
   content.SENTENCE_MODELS.forEach(expression => modelGrid.append(expressionCard(expression))); sentenceModels.append(modelGrid);
   const phraseActions = node('div', '', 'activity-actions'); nextStation('phrases', phraseActions);
   surfaces.get('phrases').append(phraseGrid, sentenceModels, phraseActions);
-  mountPractice('manners'); mountPractice('ask'); mountPractice('trans');
+  mountPractice('manners'); mountPractice('workshop');
 
   const examResults = node('div', '', 'unit-results');
   mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
@@ -232,14 +242,8 @@
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '礼貌小达人', course: '礼貌小帮手 · Lesson 1–2', completion: '完成 Lesson 1–2 课堂配套练习', thanks: '会问一问，也会说谢谢！' },
-      characters: ['man', 'woman'], characterLabels: ['男士', '女士'], icon: art, defaultName: '礼貌小帮手', dialogTitle: '礼貌小帮手纪念', fileName: 'Lesson1-2-礼貌小帮手.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'book', l2: 'cards', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
+  certificateView = core.storyCertificate.mount({
+    element: surfaces.get('certificate'), unit, go: navigate, returnUrl: $('#logo').href
   });
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
   writing.append(node('summary', '和家人再试试'), node('p', '拿一件确实属于你的物品，请家人用 Is this your…? 问你。你来回答 Yes, it is.，再交换角色。没听清可以说 Pardon?。'), node('p', '纸笔小练习：这些是教材的七句原文。可以选一两句慢慢抄写，留意大写和标点。'));
@@ -251,6 +255,7 @@
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
+  document.addEventListener('canran:course-ready', route, { once: true });
   document.fonts.ready.then(() => {
     const restore=()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;});
     if(!document.documentElement.hasAttribute('data-course-preparing'))return restore();

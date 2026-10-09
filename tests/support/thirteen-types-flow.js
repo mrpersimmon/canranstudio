@@ -7,7 +7,7 @@ const ANSWERS={
   listen:[{pairs:[['coat','外套'],['dress','连衣裙'],['skirt','半身裙']]},'pen','house','pencil'],
   roles:[['这是','你的','手提包','吗？'],'女士请他重复。','very much','对面的女士'],
   manners:[{fills:['me']},'Yes?','Yes, it is.','女士',['Thank','you','very much']],
-  ask:['watch','衬衫'],trans:[{fills:['book']},['Is','this','your','car']],
+  workshop:['watch','衬衫',{fills:['book']},['Is','this','your','car']],
   exam:[{fills:['Yes?','Yes, it is.']},'Yes, it is. Thank you very much.','your 指女士的；it 指手提包','Pardon?','Excuse me!','铅笔',['Is','this','your','coat?'],'房子']
  },
  '25-26':{
@@ -52,6 +52,6 @@ async function activity(page,pair,id,{base='',capture}={}){
 }
 async function complete(page,pair,base=''){
  await story(page,pair,base);for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id,{base});
- await page.goto(`${base}/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');
+ await page.goto(`${base}/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText(pair==='1-2'?'5':'15');
 }
 module.exports={ANSWERS,select,story,activity,complete};

@@ -1,7 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, saveCourses } = require('./helpers');
-const ORIGIN = 'http://127.0.0.1:4181';
+const ORIGIN = 'http://127.0.0.1:' + (process.env.LOGIN_TEST_PORT || 4181);
 
 async function createClass(page, name) {
   await adminLogin(page);

@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-09-27T00:34:00+08:00",
+  "tool": "built-in imagegen",
+  "selectedSource": "docs/award-version/visuals/2026-09-27-0022-v0.5/story-certificate.png",
+  "status": "selected composition, copy and material refinements pending choice; static mockups only",
+  "images": [
+    {
+      "displayedOption": 1,
+      "name": "暖纸压印",
+      "file": "warm-letterpress.png",
+      "promptFile": "warm-letterpress.prompt.txt",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "2bdfea7901dee7abac3c2aa6c4d7716292f343cc654b6fc32555022ffcc49a3d",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-04d07dcb-c1d3-4c9a-aef1-369dee3a1e0f.png"
+    },
+    {
+      "displayedOption": 2,
+      "name": "金边微光",
+      "file": "gilded-story-light.png",
+      "promptFile": "gilded-story-light.prompt.txt",
+      "width": 1486,
+      "height": 1058,
+      "sha256": "518f7c051607d6214fc47783793c922051e439bf040fa3f042711e82e05f8071",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-b8c31ff1-dbdb-4e5e-ac06-1fff5a8e831c.png"
+    },
+    {
+      "displayedOption": 3,
+      "name": "珍珠柔光",
+      "file": "pearl-keepsake.png",
+      "promptFile": "pearl-keepsake.prompt.txt",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "28358050221d5c9b37cb645211c0b2c1c57122d0409a5a3a40d6cd901b30dfad",
+      "source": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-834d170d-0531-4573-ae68-664fc98b55cb.png"
+    }
+  ]
+}

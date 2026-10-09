@@ -1,0 +1,14 @@
+Use case: precise-object-edit / background-extraction.
+Asset type: one production-ready earned-star icon for a children's English lesson certificate.
+Input image 1 is the approved certificate mockup. Faithfully recreate ONLY ONE of the five small golden five-pointed stars below the learner name. This is a single isolated icon, not a certificate, not a row of stars, not a scene.
+
+Visual design:
+- One upright five-pointed star, symmetric, rounded friendly tips and smooth concave joins.
+- Solid warm golden-yellow fill.
+- Warm amber outline with a subtle darker ochre outer edge; keep the outline restrained and soft, matching the reference.
+- A shallow inset / pressed-paper interior contour following the same star shape, a pale golden inner highlight along the upper-left edge and a restrained darker amber lower-right edge. Suggest warm printed embossing, NOT polished metal, glass or deep 3D.
+- Very light warm paper-print texture, clean and readable when displayed at 36 to 54 CSS pixels. No elaborate detail.
+Composition: square canvas, ideally 512 by 512 pixels. A single centered star fills about 88% of the canvas width and height, leaving approximately 6% transparent breathing room on each side. Entire star visible, no clipping.
+Background: genuinely transparent PNG with alpha. No opaque paper, coloured background, checkerboard drawing, vignette or scene.
+Constraints: exactly ONE star, exactly FIVE points. No additional star, sparkles, rays, halo, text, letters, names, numbers, logos, badge, circle, ribbon, border, card, buttons or watermark. No photorealistic metal or bulky 3D.
+Match the golden stars from the reference closely, isolated and enlarged for the real UI.

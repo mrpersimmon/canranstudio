@@ -297,3 +297,9 @@ unit.questions["reply"][3]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+(function(core){
+ 'use strict';const unit=core.unit34;
+ unit.stages[4].activities.find(item=>item[0]==='certificate')[1]='我的单元纪念卡';
+ unit.reward={edition:'story-card-v1',title:'认领小达人',lesson:'Lesson 3–4',scene:'/assets/awards/unit3-4-umbrella.webp',alt:'客人从柜台领回紫色雨伞',color:'#74376f',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['manners','认领柜台'],['reply','你我的接力'],['exam','认领小挑战']].map(([id,title])=>({id,title}))};
+})(globalThis.CanranCore);

@@ -5,7 +5,7 @@ const { test, expect } = require('@playwright/test');
 test.beforeEach(async ({ page }) => {
   await page.route('**/*', route => {
     const url = new URL(route.request().url());
-    if (url.origin === 'http://127.0.0.1:4173') return route.continue();
+    if (url.origin === 'http://127.0.0.1:' + (process.env.COURSE_TEST_PORT || 4173)) return route.continue();
     return route.abort();
   });
   await page.addInitScript(() => {

@@ -6,7 +6,7 @@ const { createApp } = require('../../server/app');
 for (const base of ['/', '/lesson/']) for (const route of ['', 'unit7-8/#learn/exam']) {
   test(`${base}${route} 首次缓存准备结束不能刷新正在输入的登录表单`, async ({ browser }) => {
     const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-login-worker-'));
-    const origin = 'http://127.0.0.1:4198';
+    const origin = require('../support/login-test-ports').origin(4198);
     let server, context, release;
     const gate = new Promise(resolve => { release = resolve; });
     let arrived;
@@ -20,7 +20,7 @@ for (const base of ['/', '/lesson/']) for (const route of ['', 'unit7-8/#learn/e
         if (request.url === base + 'core/course-worker.js') { arrived(); await gate; }
         handle(request, response);
       });
-      await new Promise(resolve => server.listen(4198, '127.0.0.1', resolve));
+      await new Promise(resolve => server.listen(require('../support/login-test-ports').port(4198), '127.0.0.1', resolve));
       context = await browser.newContext({ baseURL: origin }); const page = await context.newPage();
       await page.goto(base + route); await requested;
       await page.getByLabel('学号', { exact: true }).fill('d00000001');
