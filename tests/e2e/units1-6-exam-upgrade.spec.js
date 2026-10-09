@@ -15,6 +15,12 @@ async function oldEdition(page, unit) {
     const url = name === 'index.html' ? new RegExp(`/unit${unit}/(?:index\\.html)?(?:\\?.*)?$`) : `**/unit${unit}/${name}*`;
     await page.route(url, route => old ? route.fulfill({ body, contentType: name.endsWith('html') ? 'text/html' : name.endsWith('css') ? 'text/css' : 'text/javascript' }) : route.continue());
   }
+  if (unit === '3-4') {
+    // This frozen walkthrough exercises the former pause controls. Do not pair
+    // its old page with the current runner that intentionally removed them.
+    const body = await fs.readFile('tests/fixtures/common-interaction-before/lesson49-practice.js');
+    await page.route('**/core/lesson49-practice.js*', route => old ? route.fulfill({ body, contentType: 'text/javascript' }) : route.continue());
+  }
   return () => { old = false; };
 }
 for (const unit of units) {
@@ -26,6 +32,30 @@ for (const unit of units) {
     await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
     const date = await page.locator('#certificateDate').innerText(); await page.keyboard.press('Escape');
     upgrade(); await page.reload();
+    if (unit.id === '1-2') {
+      const flow = require('../support/thirteen-types-flow');
+      await expect(page.locator('#starCount')).toHaveText('0');
+      await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小达人');
+      await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
+      for (const id of ['listen', 'roles', 'trans', 'manners', 'exam']) await flow.activity(page, '1-2', id);
+      await expect(page.locator('.stage-exam').getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['10', '10', '0']);
+      await page.goto('/unit1-2/#learn/certificate');
+      await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
+      await expect(page.locator('#certificateDate')).toHaveText(date); await page.keyboard.press('Escape');
+      // A fresh complete round, rather than carried historical results, proves
+      // eligibility under the five-zone award rule.
+      for (const id of ['listen', 'roles', 'trans', 'manners', 'exam']) {
+        await page.goto('/unit1-2/#learn/' + id);
+        const activity = page.locator('.stage-' + id);
+        await activity.getByRole('button', { name: '再练一轮', exact: true }).click();
+        await page.reload();
+        await expect(activity.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
+        await expect(activity.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+        await flow.activity(page, '1-2', id);
+      }
+      await expect(page.locator('#starCountWrap')).toContainText('5/5');
+      return;
+    }
     await expect(page.locator('#starCount')).toHaveText(String({'1-2':10,'3-4':4,'5-6':6}[unit.id]));
     await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小达人');
     await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
@@ -49,7 +79,7 @@ for (const unit of units) {
     const upgrade = await oldEdition(page, unit.id);
     await page.goto(`/unit${unit.id}/#learn/exam`); const room = page.locator('.stage-exam'), questions = EXAMS[unit.id];
     await choose(room, unit.id==='1-2'?{answer:'Yes?'}:questions[0]); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
-    await choose(room, questions[1]); upgrade(); await page.reload();
+    await choose(room, unit.id === '1-2' ? { answer: 'Yes, it is. Thank you very much.' } : questions[1]); upgrade(); await page.reload();
     if(unit.id==='1-2'){await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);return;}
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
     await expect(room.getByRole('status')).toBeEmpty();

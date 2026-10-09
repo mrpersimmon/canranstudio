@@ -1,0 +1,840 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/unit1-2-grammar-guide.spec.js",
+      "tests/e2e/unit1-2-grammar-v2.spec.js",
+      "tests/e2e/unit1-2-grammar-v3.spec.js",
+      "tests/e2e/unit1-2-exam.spec.js",
+      "tests/e2e/unit-thirteen-types.spec.js",
+      "--grep",
+      "三页示范|语法示范|陈述句|示范之后|已完成的旧课|同步导学|语法四题|综合挑战把|前版语法|手机末页|1–2 八题|1-2 (root|/lesson|真实旧轮次)|辨认问句|两套题作答",
+      "--reporter=line,json"
+    ],
+    "configFile": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/playwright.config.js",
+    "rootDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4268",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit-thirteen-types.spec.js",
+      "file": "unit-thirteen-types.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "1-2 root 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5092,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:54:32.415Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-78c97ce936cd7db453ef",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 5,
+          "column": 68
+        },
+        {
+          "title": "1-2 /lesson 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4295,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:54:37.763Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-8888a526d0302956e138",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 5,
+          "column": 68
+        },
+        {
+          "title": "辨认问句保存选择，错误只重试，新题保持未答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 752,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:54:42.066Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-90b796a8ff7eff1d036c",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "320 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10054,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:54:42.825Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-6af3c1719861c5d9dfa7",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "390 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10286,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:54:52.886Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-b2ed261b1c5f010b582c",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "768 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12552,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:03.179Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-c1c01dc1c54bc3855529",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "1280 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10645,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:15.738Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-9cf8f50008f823e5e915",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "1-2 真实旧轮次升级保留相同题和纪念信息，新题必须亲自作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6250,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:26.392Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-3823e9a92158bbd49590",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 47,
+          "column": 35
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-exam.spec.js",
+      "file": "unit1-2-exam.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "1–2 八题覆盖礼貌话轮、指代、词义、问句组织和整句阅读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1528,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:32.655Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8ff32fbb3fae61c564c-1f8738cf5167f1216acf",
+          "file": "unit1-2-exam.spec.js",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-guide.spec.js",
+      "file": "unit1-2-grammar-guide.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "root 三页示范在四种宽度不跳动，完整替换材料仍可展开",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6424,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:34.194Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-911e75b7dd32f30011de",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 9,
+          "column": 37
+        },
+        {
+          "title": "/lesson 三页示范在四种宽度不跳动，完整替换材料仍可展开",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6976,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:40.625Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-19e5e07fb7183abc010d",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 9,
+          "column": 37
+        },
+        {
+          "title": "桌面和窄屏的三页示范保留实际页面截图",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4977,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:47.608Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-dd3fafaa57d286b23d94",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 85,
+          "column": 1
+        },
+        {
+          "title": "回看语法示范保留原题草稿，键盘可以切换示范且不自动检查",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 296,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:52.591Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-5b1e2db9135f033cd3e7",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 113,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-v2.spec.js",
+      "file": "unit1-2-grammar-v2.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "孩子能把陈述句变成问句，快速切换和刷新保留最后状态且不计成绩",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:52.898Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f36f1142b2709c66e60-e7827d3906f43a93f2c0",
+          "file": "unit1-2-grammar-v2.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "示范之后先辨认问句再拼装，错答只能重试，新的指代题分清含义和对象",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:54.312Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f36f1142b2709c66e60-005190ec796a765286e9",
+          "file": "unit1-2-grammar-v2.spec.js",
+          "line": 41,
+          "column": 1
+        },
+        {
+          "title": "已完成的旧课升级后只重做改写题，原证书名字与日期保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4159,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:55.723Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f36f1142b2709c66e60-f90cba3a4cd5146adc33",
+          "file": "unit1-2-grammar-v2.spec.js",
+          "line": 83,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-v3.spec.js",
+      "file": "unit1-2-grammar-v3.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "同步导学三步：辨认询问、变问句、根据真实条件作肯定或否定回答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 582,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:55:59.893Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a82acaa0af4a3734698a-21de47e478e7d70ba623",
+          "file": "unit1-2-grammar-v3.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "语法四题各有目标，否定答错可重试，刷新不能跳过新增题",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 700,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:56:00.481Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a82acaa0af4a3734698a-06f976a316a95455ef55",
+          "file": "unit1-2-grammar-v3.spec.js",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "综合挑战把否定回答用在新物品上，错误提示不揭晓答案",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 408,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:56:01.188Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a82acaa0af4a3734698a-aff1fe83114ed332ec71",
+          "file": "unit1-2-grammar-v3.spec.js",
+          "line": 75,
+          "column": 1
+        },
+        {
+          "title": "前版语法已通关时保留相同题，只补新回答题，旧示范从新首页开始",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3732,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:56:01.601Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a82acaa0af4a3734698a-62916e10e3379dcdeb57",
+          "file": "unit1-2-grammar-v3.spec.js",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "手机末页继续按钮的动作和目的地各占完整一行",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 300,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T13:56:05.339Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a82acaa0af4a3734698a-0d421302d6e87f0c1baa",
+          "file": "unit1-2-grammar-v3.spec.js",
+          "line": 135,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T13:54:31.961Z",
+    "duration": 93955.96800000001,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

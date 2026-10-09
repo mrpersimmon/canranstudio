@@ -1,0 +1,1019 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/unit1-2-grammar-workshop.spec.js",
+      "tests/e2e/unit1-2-grammar-guide.spec.js",
+      "tests/e2e/unit1-2-grammar-v2.spec.js",
+      "tests/e2e/unit1-2-grammar-v3.spec.js",
+      "tests/e2e/unit1-2-exam.spec.js",
+      "tests/e2e/unit-thirteen-types.spec.js",
+      "--reporter=line,json"
+    ],
+    "configFile": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/playwright.config.js",
+    "rootDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4268",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit-thirteen-types.spec.js",
+      "file": "unit-thirteen-types.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "1-2 root 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11996,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:21:21.714Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-78c97ce936cd7db453ef",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 5,
+          "column": 68
+        },
+        {
+          "title": "1-2 /lesson 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18296,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:21:34.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-8888a526d0302956e138",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 5,
+          "column": 68
+        },
+        {
+          "title": "25-26 root 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8522,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:21:52.396Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-e412bf57ef3a83df9668",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 5,
+          "column": 68
+        },
+        {
+          "title": "25-26 /lesson 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7847,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:22:00.933Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-c802dc1660658c3ae30c",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 5,
+          "column": 68
+        },
+        {
+          "title": "辨认问句保存选择，错误只重试，新题保持未答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1136,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:22:08.792Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-90b796a8ff7eff1d036c",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 939,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:22:09.939Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-6e36bab3017d851dc10a",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "情境在确认正确答案之前不交包、不显示新位置；刷新还原真实状态",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1470,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:22:10.886Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-42d0df2c8d13abbac1d6",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "320 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:22:12.364Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-6af3c1719861c5d9dfa7",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "390 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 32590,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:22:34.120Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-b2ed261b1c5f010b582c",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "768 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36177,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:23:06.733Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-c1c01dc1c54bc3855529",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "1280 两套题作答前后可读、可操作且无横向溢出",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27354,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:23:42.929Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-9cf8f50008f823e5e915",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 34,
+          "column": 39
+        },
+        {
+          "title": "1-2 真实旧轮次升级保留相同题和纪念信息，新题必须亲自作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:24:10.303Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-3823e9a92158bbd49590",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 47,
+          "column": 35
+        },
+        {
+          "title": "25-26 真实旧轮次升级保留相同题和纪念信息，新题必须亲自作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9507,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:24:24.721Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-03110fed87fe1a2b6b48",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 47,
+          "column": 35
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-exam.spec.js",
+      "file": "unit1-2-exam.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "1–2 十题覆盖礼貌话轮、指代、词义以及 is are am 的独立运用",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5009,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:24:34.257Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8ff32fbb3fae61c564c-41b92e68dba3fb7407ce",
+          "file": "unit1-2-exam.spec.js",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-guide.spec.js",
+      "file": "unit1-2-grammar-guide.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320 工坊十二题与结束卡可读，选择提示和反馈不移动操作区",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5702,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:24:39.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-dc41fe1bef37405d7a3b",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 6,
+          "column": 44
+        },
+        {
+          "title": "390 工坊十二题与结束卡可读，选择提示和反馈不移动操作区",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5162,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:24:45.006Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-97274747d2cb24c6c395",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 6,
+          "column": 44
+        },
+        {
+          "title": "768 工坊十二题与结束卡可读，选择提示和反馈不移动操作区",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9335,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-24\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-24\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js:15:202",
+                    "location": {
+                      "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js",
+                      "column": 202,
+                      "line": 15
+                    },
+                    "snippet": "  13 |     const actions = room.getByRole('group', { name: '作答操作', exact: true });\n  14 |     await expect(check).toBeDisabled();\n> 15 |     if (i > 0) await expect.poll(() => room.locator('.practice-progress').evaluate(el => Math.round(el.getBoundingClientRect().top - document.getElementById('topbar').getBoundingClientRect().bottom))).toBeGreaterThanOrEqual(0);\n     |                                                                                                                                                                                                          ^\n  16 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);\n  17 |     for (const button of await room.locator('button:visible').all()) {\n  18 |       const box = await button.boundingBox();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js",
+                        "column": 202,
+                        "line": 15
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-24\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  13 |     const actions = room.getByRole('group', { name: '作答操作', exact: true });\n  14 |     await expect(check).toBeDisabled();\n> 15 |     if (i > 0) await expect.poll(() => room.locator('.practice-progress').evaluate(el => Math.round(el.getBoundingClientRect().top - document.getElementById('topbar').getBoundingClientRect().bottom))).toBeGreaterThanOrEqual(0);\n     |                                                                                                                                                                                                          ^\n  16 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);\n  17 |     for (const button of await room.locator('button:visible').all()) {\n  18 |       const box = await button.boundingBox();\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js:15:202"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:24:50.204Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-grammar-guide-768-工坊十二题与结束卡可读，选择提示和反馈不移动操作区/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-grammar-guide-768-工坊十二题与结束卡可读，选择提示和反馈不移动操作区/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js",
+                    "column": 202,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-47ccc706481f6cae2427",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 6,
+          "column": 44
+        },
+        {
+          "title": "1280 工坊十二题与结束卡可读，选择提示和反馈不移动操作区",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12699,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-24\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-24\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js:15:202",
+                    "location": {
+                      "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js",
+                      "column": 202,
+                      "line": 15
+                    },
+                    "snippet": "  13 |     const actions = room.getByRole('group', { name: '作答操作', exact: true });\n  14 |     await expect(check).toBeDisabled();\n> 15 |     if (i > 0) await expect.poll(() => room.locator('.practice-progress').evaluate(el => Math.round(el.getBoundingClientRect().top - document.getElementById('topbar').getBoundingClientRect().bottom))).toBeGreaterThanOrEqual(0);\n     |                                                                                                                                                                                                          ^\n  16 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);\n  17 |     for (const button of await room.locator('button:visible').all()) {\n  18 |       const box = await button.boundingBox();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js",
+                        "column": 202,
+                        "line": 15
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-24\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  13 |     const actions = room.getByRole('group', { name: '作答操作', exact: true });\n  14 |     await expect(check).toBeDisabled();\n> 15 |     if (i > 0) await expect.poll(() => room.locator('.practice-progress').evaluate(el => Math.round(el.getBoundingClientRect().top - document.getElementById('topbar').getBoundingClientRect().bottom))).toBeGreaterThanOrEqual(0);\n     |                                                                                                                                                                                                          ^\n  16 |     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);\n  17 |     for (const button of await room.locator('button:visible').all()) {\n  18 |       const box = await button.boundingBox();\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js:15:202"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:01.210Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-grammar-guide-1280-工坊十二题与结束卡可读，选择提示和反馈不移动操作区/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-grammar-guide-1280-工坊十二题与结束卡可读，选择提示和反馈不移动操作区/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-grammar-guide.spec.js",
+                    "column": 202,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-e905c6122a926f5be477",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 6,
+          "column": 44
+        },
+        {
+          "title": "原有礼貌表达和十个替换物品保留；跨章节和键盘操作不提交草稿",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 880,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:15.440Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac68d12764e48d2136fc-dfa0852d9e3f36b02f0b",
+          "file": "unit1-2-grammar-guide.spec.js",
+          "line": 45,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-v2.spec.js",
+      "file": "unit1-2-grammar-v2.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "更早 v1 的真实旧轮次升级：改写题未答，未改记录和证书姓名日期保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10921,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:16.864Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f36f1142b2709c66e60-88e136bcb399dbc541f2",
+          "file": "unit1-2-grammar-v2.spec.js",
+          "line": 6,
+          "column": 31
+        },
+        {
+          "title": "更早 v2 的真实旧轮次升级：改写题未答，未改记录和证书姓名日期保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8108,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:27.798Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f36f1142b2709c66e60-f89ebdf6b536e3a1012c",
+          "file": "unit1-2-grammar-v2.spec.js",
+          "line": 6,
+          "column": 31
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-v3.spec.js",
+      "file": "unit1-2-grammar-v3.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "前版27题已完成：语法新题从空白开始，八道未改综合题和原证书信息保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7810,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:35.935Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a82acaa0af4a3734698a-7333b9f879fb39930d7f",
+          "file": "unit1-2-grammar-v3.spec.js",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-grammar-workshop.spec.js",
+      "file": "unit1-2-grammar-workshop.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "旧锦囊入口进入连续十二题，短示范与答对小结嵌入题目",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 685,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:43.760Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5b889dba39752d1f8742-247a84892f71158c563f",
+          "file": "unit1-2-grammar-workshop.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "十二题循序学习，are 与 am 不混教，提示和错答保留，结束固定三张卡",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3844,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T16:25:44.458Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5b889dba39752d1f8742-58c9942c37b8edc99a0d",
+          "file": "unit1-2-grammar-workshop.spec.js",
+          "line": 29,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T16:21:21.014Z",
+    "duration": 267498.77400000003,
+    "expected": 22,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

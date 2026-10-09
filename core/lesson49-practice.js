@@ -64,7 +64,8 @@
     box.replaceChildren();
     const records = Object.values(notebook.records).filter(record=>isRecord(record)&&typeof record.attempts==='number'&&typeof record.firstCorrect==='boolean');
     const intro = document.createElement('p');
-    intro.textContent = records.length ? '记录的是有选项、词块或句式支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。' : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
+    intro.textContent = context.reward ? '每个答题区整轮首次答对，点亮一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。'
+      : records.length ? '记录的是有选项、词块或句式支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。' : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
     box.append(intro);
     const list = document.createElement('ul');
     records.forEach(record => {
@@ -113,7 +114,7 @@
       target.tabIndex = -1;
       // A completion reward may open before this frame; keep its keyboard focus.
       if (!document.querySelector('[role="dialog"][aria-modal="true"]:not([hidden])')) target.focus({ preventScroll: true });
-      const rect = target.getBoundingClientRect();
+      const rect = (target.closest('.completion-card') || target).getBoundingClientRect();
       const top = (document.getElementById('topbar')?.getBoundingClientRect().bottom || 0) + 16;
       if (rect.top < top || rect.bottom > root.innerHeight - 16) {
         const progress = target.closest('.practice-content, .role-question')?.querySelector('.practice-progress');
@@ -143,7 +144,7 @@
     solved.forEach(()=>{const step=document.createElement('span');step.className='practice-step';step.setAttribute('aria-hidden','true');meter.append(step);});
     label.append(copy,meter);updateProgress(label,solved,currentIndex);return label;
   }
-  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null }) {
+  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null, roundPolicy = null }) {
     const key = sessionId ? element.id+'/'+sessionId : element.id;
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
     let group = notebook.groups[key];
@@ -166,7 +167,7 @@
           }
         }
       });
-      group = { index: 0, states: [], carriedStates, runId, draftVersion: DRAFT_VERSION,
+      group = { index: 0, states: [], carriedStates, runId, roundPolicy: sources.length ? null : roundPolicy, draftVersion: DRAFT_VERSION,
         signature: questions.map(q => q.id).join('|'), contentSignature };
       // Only a verified, contiguous correct prefix may set the starting point.
       // Later unchanged answers remain separate until their question is shown.
@@ -214,7 +215,7 @@
       group=null;
     }
     if (!group || group.signature !== questions.map(q => q.id).join('|') || !Number.isInteger(group.index) || group.index < 0 || group.index > questions.length || !Array.isArray(group.states)) {
-      group = { index: 0, states: [], signature: questions.map(q => q.id).join('|') };
+      group = { index: 0, states: [], signature: questions.map(q => q.id).join('|'), roundPolicy: sources.length ? null : roundPolicy };
       if(sessionId && !notebook.groups[key]){
         group.states=questions.map(q=>{
           const old=sources.find(source=>source.ids.includes(q.id));
@@ -249,7 +250,7 @@
       group.states=group.states.map((state,i)=>isRecord(state)?{...state,runId:group.runId,questionId:questions[i]?.id}:null);
     }
     if(typeof group.runId!=='string'||!group.runId){
-      group.runId=newRunId();group.index=0;group.states=[];group.paused=false;
+      group.runId=newRunId();group.index=0;group.states=[];group.paused=false;group.roundPolicy=roundPolicy;
     }
     function emptyState(q){
       return {selection:null,attempts:0,hintUsed:false,checked:false,runId:group.runId,questionId:q.id};
@@ -283,6 +284,10 @@
       group.states.length=Math.min(group.states.length,group.index+1,questions.length);
     }
     normalizeDraft();
+    // Merely opening an older page or choosing without submitting is not an
+    // older scored round. Its first real attempt may use today's star policy.
+    if (roundPolicy && [...group.states, ...Object.values(group.carriedStates || {})]
+      .every(state => !state || state.attempts === 0)) group.roundPolicy = roundPolicy;
     // Older drafts still pass the ownership/answer validation above; from this
     // revision onward a changed prompt cannot silently re-award completion.
     group.contentSignature=contentSignature;
@@ -304,7 +309,7 @@
         summary.textContent = sceneView ? '破案完成！' : optionImages ? '寻宝完成！' : chunkSize ? '挑战完成！' : '这一组完成了！';
         sceneView?.finish();
         const finish=document.createElement('div');finish.className='practice-finish';
-        const again=button('再练一轮', () => { group.index = 0; group.states = []; delete group.carriedStates; group.runId = newRunId(); save(); render();revealQuestion(element,sceneView?.heading()); },'btn btn-mini btn-yellow');
+        const again=button('再练一轮', () => { group.index = 0; group.states = []; delete group.carriedStates; group.runId = newRunId(); group.roundPolicy = roundPolicy; save(); render();revealQuestion(element,sceneView?.heading()); },'btn btn-mini btn-yellow');
         const stamp=root.CanranCore.lesson49Icons.create(sceneView?'people':'check');stamp.classList.add('finish-icon');
         finish.append(stamp,summary);
         if(completionDetails)finish.append(completionDetails);
@@ -312,7 +317,7 @@
         finishActions.setAttribute('role','group');finishActions.setAttribute('aria-label','完成后的操作');
         finishActions.append(again);finish.append(finishActions);
         element.append(finish);
-        onComplete(group.states); return;
+        onComplete(group.states, { runId: group.runId, roundPolicy: group.roundPolicy, index: group.index, contentSignature }); return;
       }
       const q = questions[group.index];
       const activeScene = sceneView && (!sceneView.supports || sceneView.supports(q)) ? sceneView : null;

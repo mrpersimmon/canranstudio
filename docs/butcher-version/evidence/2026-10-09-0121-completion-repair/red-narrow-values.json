@@ -1,0 +1,159 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/unit1-2-completion.spec.js",
+      "--grep",
+      "root 六个",
+      "--reporter=line,json"
+    ],
+    "configFile": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/playwright.config.js",
+    "rootDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4268",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-completion.spec.js",
+      "file": "unit1-2-completion.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "root 六个答题环节统一新版结算，三卡和按钮在四种宽度保持完整",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4260,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m2\u001b[39m\nReceived:   \u001b[31m3\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m2\u001b[39m\nReceived:   \u001b[31m3\u001b[39m\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js:60:55",
+                    "location": {
+                      "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js",
+                      "column": 55,
+                      "line": 60
+                    },
+                    "snippet": "  58 |       for (const prop of ['y', 'width', 'height']) expect(Math.max(...boxes.map(b => b[prop])) - Math.min(...boxes.map(b => b[prop]))).toBeLessThan(2);\n  59 |       const units = await cards.getByText('题', { exact: true }).evaluateAll(items => items.map(el => el.getBoundingClientRect().y));\n> 60 |       expect(Math.max(...units) - Math.min(...units)).toBeLessThan(2);\n     |                                                       ^\n  61 |       const actions = room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button');\n  62 |       await expect(actions).toHaveCount(2);\n  63 |       const [again, next] = await actions.evaluateAll(items => items.map(el => { const b = el.getBoundingClientRect(); return { x:b.x, y:b.y, right:b.right, height:b.height }; }));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js",
+                        "column": 55,
+                        "line": 60
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m2\u001b[39m\nReceived:   \u001b[31m3\u001b[39m\n\n  58 |       for (const prop of ['y', 'width', 'height']) expect(Math.max(...boxes.map(b => b[prop])) - Math.min(...boxes.map(b => b[prop]))).toBeLessThan(2);\n  59 |       const units = await cards.getByText('题', { exact: true }).evaluateAll(items => items.map(el => el.getBoundingClientRect().y));\n> 60 |       expect(Math.max(...units) - Math.min(...units)).toBeLessThan(2);\n     |                                                       ^\n  61 |       const actions = room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button');\n  62 |       await expect(actions).toHaveCount(2);\n  63 |       const [again, next] = await actions.evaluateAll(items => items.map(el => { const b = el.getBoundingClientRect(); return { x:b.x, y:b.y, right:b.right, height:b.height }; }));\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js:60:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T17:19:16.247Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-completion-root-六个答题环节统一新版结算，三卡和按钮在四种宽度保持完整/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-completion-root-六个答题环节统一新版结算，三卡和按钮在四种宽度保持完整/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js",
+                    "column": 55,
+                    "line": 60
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2b0503838b5a3f085678-a32aa44251aa5f82b433",
+          "file": "unit1-2-completion.spec.js",
+          "line": 31,
+          "column": 37
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T17:19:15.818Z",
+    "duration": 5100.755,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

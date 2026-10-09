@@ -11,10 +11,10 @@ for(const base of ['/','/lesson/']) {
     const beginner=page.getByRole('region',{name:'礼貌小帮手',exact:true});
     await beginner.getByRole('link',{name:'开始学习：礼貌小帮手',exact:true}).click();
     await expect(page).toHaveURL(new RegExp(base+'unit1-2/#learn/words$'));
-    await expect(page.getByRole('navigation',{name:'学习关卡',exact:true}).getByRole('link')).toHaveText(['身边的小物品','手提包的故事','礼貌小帮手','问句小工坊','小帮手出发']);
-    await page.getByRole('link',{name:'问句小工坊',exact:true}).click();
+    await expect(page.getByRole('navigation',{name:'学习关卡',exact:true}).getByRole('link')).toHaveText(['身边的小物品','手提包的故事','语法小工坊','街角小帮手','小帮手出发']);
+    await page.getByRole('link',{name:'街角小帮手',exact:true}).click();
     await page.getByRole('link',{name:'我的课程',exact:true}).click();
-    await expect(beginner).toContainText('上次学到 · 问句小工坊');
+    await expect(beginner).toContainText('上次学到 · 街角小帮手');
     await expect(beginner.getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toHaveAttribute('href',base+'unit1-2/#l4');
     const older=page.getByRole('region',{name:'晚餐采购大冒险',exact:true});
     await expect(older.getByRole('link',{name:'开始学习',exact:true})).toHaveAttribute('href',base+'unit49-50/#learn/words');
@@ -22,7 +22,7 @@ for(const base of ['/','/lesson/']) {
     await page.getByRole('link',{name:'表达训练场',exact:true}).click();
     await page.getByRole('link',{name:'我的课程',exact:true}).click();
     await expect(older).toContainText('上次学到 · 表达训练场');
-    await expect(beginner).toContainText('上次学到 · 问句小工坊');
+    await expect(beginner).toContainText('上次学到 · 街角小帮手');
     await expect.poll(()=>page.locator('main img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     expect(errors).toEqual([]);expect(failed).toEqual([]);expect(outside).toEqual([]);
   });
@@ -61,7 +61,7 @@ test('新学习从图鉴开始，图鉴末组前往寻宝；已有位置继续�
   await page.goto('/unit1-2/#learn/ask');
   await page.goto('/unit1-2/');
   await page.getByRole('button',{name:'继续冒险',exact:true}).click();
-  await expect(page).toHaveURL(/#learn\/ask$/);
+  await expect(page).toHaveURL(/#learn\/listen$/);
 });
 
 test('章节换序仍能从原有章节链接继续，不把故事和物品记录对调',async({page})=>{

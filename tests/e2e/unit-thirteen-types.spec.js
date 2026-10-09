@@ -11,11 +11,11 @@ for(const pair of ['1-2','25-26'])for(const base of ['','/lesson'])test(`${pair}
  const download=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await(await download).saveAs(`output/test-thirteen-types/${pair}-${base?'lesson':'root'}-certificate.png`);
  await page.keyboard.press('Escape');await page.reload();await claim.click();await expect(dialog.locator('#certificateDate')).toHaveText(date);
 });
-test('点击补词保存选择，错误只重试，新题保持未答',async({page})=>{
+test('辨认问句保存选择，错误只重试，新题保持未答',async({page})=>{
  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans'),check=room.getByRole('button',{name:'检查答案',exact:true});
- await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,{fills:['car']});await page.reload();await expect(room.getByRole('button',{name:'car',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
- await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,{fills:['book']});await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
- await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 2 题');await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(check).toBeDisabled();
+ await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'Is this your book?');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
+ await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(check).toBeDisabled();
  await page.getByRole('button',{name:'学习手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('修正后完成');
 });
 test('中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正',async({page})=>{
@@ -60,6 +60,6 @@ for(const pair of ['1-2','25-26'])test(`${pair} 真实旧轮次升级保留相�
  }
  await page.goto(before+'#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('升级小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');
- await page.goto(`/unit${pair}/#learn/exam`);await expect(page.locator('.stage-exam .progress-copy')).toHaveText(pair==='1-2'?'第 2 / 8 题':'第 6 / 9 题');await expect(page.locator('.stage-exam').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+ await page.goto(`/unit${pair}/#learn/exam`);await expect(page.locator('.stage-exam .progress-copy')).toHaveText(pair==='1-2'?'第 2 / 10 题':'第 6 / 9 题');await expect(page.locator('.stage-exam').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  await complete(page,pair);await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);
 });

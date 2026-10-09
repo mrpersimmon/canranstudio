@@ -86,7 +86,7 @@ function courseSummary({unit,course,value={},observations=[],meta={},award=null}
       submitted:done?spec.questions.length:answered.size,correct:done?spec.questions.length:correct.size,
       status:done?'completed':answered.size?'in-progress':'not-started',
       lastRecordAt:newest(records.map(row=>row.receivedAt)),
-      stars:unit.reward?Number(Boolean(award?.zones?.[spec.id])):null};
+      stars:unit.reward?Number(progress.zoneAwarded(normalized,spec.id,award)):null};
   });
   const completedActivities=parts.filter(a=>a.completed).length,totalActivities=parts.length;
   const complete=totalActivities>0&&completedActivities===totalActivities;

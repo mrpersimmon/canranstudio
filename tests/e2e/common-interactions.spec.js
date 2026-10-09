@@ -36,6 +36,13 @@ async function predecessor(page,pair){
   [`/unit${pair}/content.js`]:await fs.readFile(`tests/fixtures/common-interaction-before/unit${pair}-content.js`),
   '/core/lesson49-practice.js':await fs.readFile('tests/fixtures/common-interaction-before/lesson49-practice.js')
  };
+ // Freeze the predecessor runner and page as well as its content. The current
+ // five-zone runner cannot be mixed into the old six-zone, 15-star edition.
+ if(pair==='1-2'){
+  files['/unit1-2/unit.js']=await fs.readFile('tests/fixtures/common-interaction-before/unit1-2-unit.js');
+  const body=await fs.readFile('tests/fixtures/common-interaction-before/unit1-2-index.html');
+  await page.route(/\/unit1-2\/(?:index\.html)?(?:\?.*)?$/,r=>old?r.fulfill({body,contentType:'text/html'}):r.continue());
+ }
  for(const [path,body] of Object.entries(files))await page.route('**'+path+'*',r=>old?r.fulfill({body,contentType:'text/javascript'}):r.continue());
  return ()=>{old=false;};
 }
@@ -63,7 +70,8 @@ test('旧版分段暂停升级后进入第六题，前五题保留且不替答',
 for(const pair of ['1-2','25-26'])test(`${pair} 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成`,async({page})=>{
  test.setTimeout(90000);const {ANSWERS,story,select,complete}=require('../support/thirteen-types-flow');
  const upgrade=await predecessor(page,pair);await story(page,pair);
- for(const[id,items]of Object.entries(ANSWERS[pair])){
+ const priorAnswers=pair==='1-2'?require('../support/unit12-grammar-predecessor').answers(1):ANSWERS[pair];
+ for(const[id,items]of Object.entries(priorAnswers)){
   await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id);
   for(let i=0;i<items.length;i++){
    if((pair==='1-2'&&id==='trans'&&i===0)||(pair==='25-26'&&id==='be'&&i===1))await room.getByRole('textbox',{name:'缺少的英文单词',exact:true}).fill(pair==='1-2'?'book':'clean');
@@ -75,6 +83,6 @@ for(const pair of ['1-2','25-26'])test(`${pair} 原输入版满星升级保留�
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('旧版小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
  upgrade();await page.reload();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('旧版小伙伴');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
  await page.goto(`/unit${pair}/#learn/${pair==='1-2'?'trans':'be'}`);const room=page.locator(pair==='1-2'?'.stage-trans':'.stage-be');
- await expect(room.getByRole('textbox')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.progress-copy')).toHaveText(pair==='1-2'?'第 1 / 2 题':'第 2 / 3 题');
+ await expect(room.getByRole('textbox')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.progress-copy')).toHaveText(pair==='1-2'?'第 1 / 12 题':'第 2 / 3 题');
  await complete(page,pair);await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);
 });

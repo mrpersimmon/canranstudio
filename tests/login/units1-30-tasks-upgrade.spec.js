@@ -36,6 +36,7 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(root);
   const current=await device();await signIn(current,account,'/');await current.goto('/'+unit+'/#learn/certificate');
   await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');
+  if(pair==='1-2')await expect(current.locator('#starCount')).toHaveText('0');
   if(['1-2','25-26'].includes(pair)){
    await require('../support/thirteen-types-flow').complete(current,pair);
   }else for(const group of Object.keys(CASES[pair].old)){
@@ -47,11 +48,17 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
     await activity(current,pair,group);
    }else await expect(room.locator('.practice-finish')).toBeVisible();
   }
-  await current.goto('/'+unit+'/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('15');
+  // Lesson 1–2: vocabulary, reading and Grammar are wholly new rounds. The
+  // manners/exam groups carry unchanged old submissions, so completion there
+  // cannot substitute for a new perfect five-zone round.
+  const migratedStars=pair==='1-2'?'3':'15',maximumStars=pair==='1-2'?'5':'15';
+  await current.goto('/'+unit+'/#learn/certificate');await expect(current.locator('#starCount')).toHaveText(migratedStars);
   await current.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(current.locator('#certificateDate')).toHaveText(date);await current.keyboard.press('Escape');
   await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-  const restored=await device();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');
-  await restored.goto('/'+unit+'/#learn/exam');const count=answers(pair,'exam').length;await expect(restored.locator('.stage-exam')).toContainText(`首次独立答对 ${count} / ${count}`);
-  await restored.goto('/'+unit+'/#learn/certificate');await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');await expect(restored.locator('#starCount')).toHaveText('15');
+  const restored=await device();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText(`${migratedStars} / ${maximumStars}`);
+  await restored.goto('/'+unit+'/#learn/exam');
+  if(pair==='1-2')await expect(restored.locator('.stage-exam').getByRole('list',{name:'本轮成果'}).locator('strong')).toHaveText(['10','10','0']);
+  else {const count=answers(pair,'exam').length;await expect(restored.locator('.stage-exam')).toContainText(`首次独立答对 ${count} / ${count}`);}
+  await restored.goto('/'+unit+'/#learn/certificate');await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');await expect(restored.locator('#starCount')).toHaveText(migratedStars);
  }finally{for(const c of contexts)await c.close();if(server)await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}
 });

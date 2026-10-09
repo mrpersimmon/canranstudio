@@ -1,0 +1,81 @@
+{
+  "recordedAt": "2026-10-08T16:35:14.460177+00:00",
+  "branch": "codex/debug-grammar-version",
+  "baseHead": "da4273e533c8fac1a5a880503a3e52938e620f14",
+  "status": "local-uncommitted",
+  "firstRun": {
+    "startTime": "2026-10-08T16:21:21.014Z",
+    "duration": 267498.77400000003,
+    "expected": 22,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "finalFocusedRun": {
+    "startTime": "2026-10-08T16:32:40.854Z",
+    "duration": 49228.015,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "scope": "24 distinct page behavior cases. First run: 22 passed, 2 layout failures. Fixed question-start focus, simplified result text, and reran all 8 affected grammar/exam/layout cases: all passed. The 16 unchanged full-course/sibling/migration cases retain their earlier successful evidence.",
+  "failuresResolved": [
+    "768/1280: sticky navigation covered 24px of question progress after advancing; focus now starts at progress, including the demonstration above the prompt.",
+    "Completion was missing three metrics, then retained duplicate old counters; both exercised red before implementation. Final exam and grammar each show exactly three metric cards; hint/retry provenance remains in notebook."
+  ],
+  "viewports": [
+    320,
+    390,
+    768,
+    1280
+  ],
+  "questionCounts": {
+    "listen": 4,
+    "roles": 4,
+    "trans": 12,
+    "ask": 2,
+    "manners": 5,
+    "exam": 10,
+    "total": 37
+  },
+  "visualReview": [
+    "1280-q1.png",
+    "1280-q5.png",
+    "390-q6.png",
+    "320-q7.png",
+    "390-q11.png",
+    "390-finish.png"
+  ],
+  "notVerified": [
+    "real phone WeChat",
+    "live account synchronization",
+    "classroom learning outcomes"
+  ],
+  "gitActions": {
+    "commit": false,
+    "push": false,
+    "deploy": false
+  },
+  "files": {
+    "unit1-2/content.js": "74583330f0be04a6914dc761d3a137d7539126d7396327a40c8002a9c23c6898",
+    "unit1-2/unit.js": "c5bd79ea3edabca4be8375395d9b53a7cd8596ac721c63fa2f57e438ef0b62b9",
+    "unit1-2/grammar.js": "d441a3d3c66ade3d8a4695474510a752907a6843ba435906c10558757a86efe7",
+    "unit1-2/grammar.css": "cae2955308ced62be0fec228998d91104ef5a88c9c252b5dbfbb03d382c3e9db",
+    "unit1-2/index.html": "6bea9cc4938483339a9a1e3d566a7366b4ffad9bb2af668bf21cc4078781a167",
+    "core/lesson49-practice.js": "cee1297877884fd0328096e68657fb32a4b8606271bd67385b666d1ca18c9bcb",
+    "core/lesson49-task-inputs.js": "acd8d82b87ae3a6c4ce64e4a5edbfdc0b99d884ff9fa4fdd890a434b5b227d85",
+    "core/lesson49-task-inputs.css": "a87aff2e34894ed95b46f621de466686003d90480b6454e81f2b56018f5f14fa",
+    "core/lesson49-experience.css": "d01a655dc514fae7ae8638e50b0dbdedfaa8571b0b21e733173d140bf4818e01",
+    "core/unit-theme.css": "72e8ccae16639f0575bf61ac85514de39a064d95c1a1476d2adec1d6784b5326",
+    "tests/support/thirteen-types-flow.js": "8b518faa1c47e2f1fe3e460527040b98358f31379af2a7db57c4191544d53ed5",
+    "tests/support/units1-6-exam.js": "0a1937f8b4782b60ce750a78764b7571a16fbb76663088771b7f31d1e8254cf9",
+    "tests/support/unit12-grammar-predecessor.js": "e1738d8babf6643948b9db8fbabe1f9d6b86b986724313fa3688941fcb857b8b",
+    "tests/e2e/unit1-2-grammar-workshop.spec.js": "c6c8be79eae0013eb4875eec2d215bc3ad115163cc75e4184bdeaa096c494381",
+    "tests/e2e/unit1-2-grammar-guide.spec.js": "476c5520ec0a50693252ee8a6afcae9e15b58ffb7e4c6f3847b40f7430c8eeb7",
+    "tests/e2e/unit1-2-grammar-v2.spec.js": "3a62cb6fa4ffb50b8733500bf0f2c76cbd8a41c9b2ed3ee17a3e32119cfc282d",
+    "tests/e2e/unit1-2-grammar-v3.spec.js": "252f7412ec3a4123301f13bbefdb3cdda7bac92ffabdcb4e4d9eb9c7e9d41c54",
+    "tests/e2e/unit1-2-exam.spec.js": "ff1689ce0168e650533edf5e54392ffab76efaadd304abf5c5c83852232416ee",
+    "tests/e2e/unit-thirteen-types.spec.js": "b2487a1f3d787e4c8867ed63ca195fc26548b7e211f0a8f3f9ec724d8289a79e"
+  }
+}

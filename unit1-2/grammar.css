@@ -1,0 +1,24 @@
+/* Grammar uses the unit's cream, ink and pale blue, with no new visual theme. */
+.unit12-workspace .grammar-runner{max-width:740px}
+.grammar-phase{font-size:14px;font-weight:700;color:#496878;text-align:center;margin:8px 0 14px}
+.grammar-model{padding:16px 22px;margin:0 auto 24px;border:2px solid #bbd5df;border-radius:20px;background:#edf5f7;max-width:620px;text-align:left}
+.grammar-model-title{margin:0 0 10px;font-size:14px;font-weight:700;color:#496878}
+.grammar-model-line{padding:8px 0}.grammar-model-line+.grammar-model-line{border-top:1px solid #c5dce3}
+.grammar-model-line>p{margin:0;font:600 23px/1.45 'Baloo 2',sans-serif;color:#503729;overflow-wrap:anywhere}
+.grammar-model-line small{display:block;margin-top:3px;font-size:14px;line-height:1.5;color:#5c625f}
+.grammar-runner .practice-answer-note{height:108px!important}
+.grammar-rule{margin:4px auto 0;max-width:610px;text-align:center;font-size:16px;line-height:1.5;color:#503729}
+.grammar-rule[hidden]{display:none}
+.grammar-cast{display:flex;justify-content:center;gap:42px;margin:12px auto}
+.grammar-cast figure{margin:0;text-align:center;font-size:14px;line-height:1.6}
+.grammar-cast img{display:block;width:62px;height:82px;margin:0 auto 5px}
+.grammar-runner .practice-options:has(.picture-option){display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.grammar-runner .picture-option{display:flex;flex-direction:column;align-items:center}
+.grammar-expression-list{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 18px;margin:14px 0}
+.grammar-expression-list dt{font:600 20px/1.5 'Baloo 2',sans-serif}.grammar-expression-list dd{margin:0;font-size:16px;line-height:1.6}
+@media(max-width:600px){
+ .grammar-model{padding:12px 14px;margin-bottom:18px;border-radius:16px}.grammar-model-line>p{font-size:19px}.grammar-model-line small{font-size:13px}
+ .grammar-runner .practice-content h3{font-size:20px}.grammar-runner .practice-answer-note{height:122px!important}.grammar-rule{font-size:14px}
+ .grammar-cast{gap:16px}.grammar-cast figure{font-size:13px}
+ .grammar-expression-list{grid-template-columns:1fr;gap:4px}.grammar-expression-list dd{margin-bottom:14px}
+}
