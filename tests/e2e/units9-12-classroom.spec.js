@@ -71,7 +71,8 @@ for (const unit of units) test(`${unit.title} 图鉴只展开释义、图册供�
   await page.goto('/' + unit.id + '/#learn/models'); await expect(page.locator('.stage-models article.phrase-card')).not.toHaveCount(0);
   await page.goto('/' + unit.id + '/#learn/exam'); const room = page.locator('.stage-exam');
   await expect(room.getByRole('button', { name: '听一遍', exact: true })).toHaveCount(0);
-  await expect(room.locator(unit.id === 'unit11-12' ? '.claim-task-heading' : '.practice-content h3')).toContainText(unit.id === 'unit9-10' ? 'Tony is very well, thanks.' : "This is my brother's pen. It's his pen.");
+  await expect(room.locator(unit.id === 'unit11-12' ? '.claim-task-heading' : '.practice-content h3')).toHaveText(unit.id === 'unit9-10' ? '选出对应的记录' : '选出对应的认领记录');
+  await expect(room.getByRole('region', {name:'题目材料',exact:true})).toHaveText(unit.id === 'unit9-10' ? 'Tony is very well, thanks.' : "This is my brother's pen. It's his pen.");
   const check = room.getByRole('button', { name: '检查答案', exact: true });
   await room.getByRole('button', { name: unit.id === 'unit9-10' ? 'Emma · fine' : 'my sister · pen', exact: true }).click(); await check.click();
   await expect(room.getByRole('status')).toHaveText('再看看，试一次。');

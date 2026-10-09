@@ -68,7 +68,8 @@ test('单词寻宝以13个新词的词义和图片作答，不需播放且末题
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
     await expect(room.getByRole('button', { name: /听一遍|给点线索/ })).toHaveCount(0);
     if (i === 0) {
-      await expect(room.locator('.practice-content h3')).toContainText('Italian');
+      await expect(room.locator('.practice-content h3')).toHaveText('选出这个词的意思');
+      await expect(room.getByRole('region', {name:'题目材料',exact:true})).toHaveText('Italian');
       expect(await room.locator('.practice-options').getByRole('button').allTextContents()).toEqual(expect.arrayContaining(['意大利（人）的', '法国（人）的', '德国（人）的']));
     }
     if (i === 1) {
@@ -119,7 +120,8 @@ test('图鉴和示范供阅读，挑战读英文作答，正误反馈音仍正�
   await expect(models.getByText('替图中人物问一问', { exact: true })).toBeHidden();
   await page.goto('/lesson/unit7-8/#learn/exam');
   const exam = page.locator('.stage-exam'), check = exam.getByRole('button', { name: '检查答案', exact: true });
-  await expect(exam.locator('.practice-content h3')).toContainText("I'm Italian. I'm a nurse.");
+  await expect(exam.locator('.practice-content h3')).toHaveText('为这位新朋友选一份记录');
+  await expect(exam.getByRole('region', {name:'题目材料',exact:true})).toHaveText("I'm Italian. I'm a nurse.");
   await expect(exam.getByRole('button', { name: /听一遍|再听/ })).toHaveCount(0);
   await exam.getByRole('button', { name: '法国人；护士', exact: true }).click();
   await check.click(); await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');

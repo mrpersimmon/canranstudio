@@ -8,7 +8,7 @@ async function oldEdition(page,pair){
   await page.route(url,route=>old?route.fulfill({body,contentType:name.endsWith('html')?'text/html':name.endsWith('css')?'text/css':'text/javascript'}):route.continue());
  }return()=>{old=false;};
 }
-const TASK_UPGRADES={"17-18": [8, ["forms", "roles"]], "19-20": [7, ["observe", "be"]], "21-22": [4, ["listen", "roles", "observe"]], "23-24": [7, ["listen", "roles"]], "25-26": [4, ["listen", "observe", "roles"]], "27-28": [10, ["roles"]], "29-30": [8, ["roles", "be"]]};
+const TASK_UPGRADES={"17-18": [8, ["forms", "roles"]], "19-20": [7, ["observe", "be"]], "21-22": [4, ["listen", "roles", "observe"]], "23-24": [7, ["listen", "roles"]], "25-26": [1, ["listen", "observe", "roles", "be", "trans", "errands"]], "27-28": [10, ["roles"]], "29-30": [8, ["roles", "be"]]};
 for(const[pair,answers]of Object.entries(EXAMS)){
  test(`${pair} 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做`,async({page})=>{
   test.setTimeout(90000);const flow=require(`../fixtures/unit${pair}-classroom-before/flow`),upgrade=await oldEdition(page,pair);await flow[`completeUnit${pair.replace('-','')}`](page);
@@ -17,10 +17,19 @@ for(const[pair,answers]of Object.entries(EXAMS)){
   await expect(page.locator('#starCount')).toHaveText(String(TASK_UPGRADES[pair][0]));await expect(page.locator('#wordPageProgress')).toHaveText(/^2 \/ /);await expect(page.locator('.stage-text .btext')).toHaveCount(flow.DIALOGUE.length);
   for(const id of Object.keys(flow.ANSWERS).filter(x=>!['exam',...TASK_UPGRADES[pair][1]].includes(x)))await expect(page.locator('.stage-'+id).getByRole('group',{name:'完成后的操作',exact:true})).toBeAttached();
   await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
-  await page.goto(`/unit${pair}/#learn/exam`);const room=page.locator('.stage-exam');await expect(room).toContainText(`第 ${pair==='21-22'?1:3} / ${answers.length} 题`);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',pair==='21-22'?'0':'2');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
-  if(pair!=='21-22')for(const id of TASK_UPGRADES[pair][1])await require('../support/units1-30-tasks').activity(page,pair,id);
+  await page.goto(`/unit${pair}/#learn/exam`);const room=page.locator('.stage-exam');await expect(room).toContainText(`第 ${['21-22','25-26'].includes(pair)?1:3} / ${answers.length} 题`);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',['21-22','25-26'].includes(pair)?'0':'2');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  if(pair!=='21-22')for(const id of TASK_UPGRADES[pair][1]){
+   if(pair==='25-26'){
+    // The current classroom also replaced grammar tasks and added errands.
+    // Historical work cannot answer any of these new questions automatically.
+    await page.goto('/unit25-26/#learn/'+id);const task=page.locator('.stage-'+id);
+    await expect(task.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+    await expect(task.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+    await require('../support/thirteen-types-flow').activity(page,pair,id);
+   }else await require('../support/units1-30-tasks').activity(page,pair,id);
+  }
   await page.goto('/unit'+pair+'/#learn/exam');
-  if(pair==='21-22'){for(const id of ['listen','roles','observe','exam'])await require('../support/unit21-22-flow').finishRemainingActivity(page,id);}else await finishExamFrom(page,pair,2);await room.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);await page.keyboard.press('Escape');
+  if(pair==='21-22'){for(const id of ['listen','roles','observe','exam'])await require('../support/unit21-22-flow').finishRemainingActivity(page,id);}else await finishExamFrom(page,pair,pair==='25-26'?0:2);await room.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);await page.keyboard.press('Escape');
   await page.goto(`/unit${pair}/#learn/exam`);await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  });
  test(`${pair} 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答`,async({page,context})=>{

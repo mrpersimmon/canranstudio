@@ -32,7 +32,7 @@ test('手机对白占整行，人物在下方；桌面人物落在同一地面',
   if(width<701){expect(l.width).toBeGreaterThan(s.width*.85);expect(a.y).toBeGreaterThanOrEqual(l.y+l.height-2);}
   expect(await log.evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  const room=page.locator('.stage-text');await room.getByRole('button',{name:'重新上演',exact:true}).click();
+  const room=page.locator('.stage-text');if(width===320)await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();else await room.getByRole('button',{name:'重新上演',exact:true}).click();
   for(let i=0;i<10;i++){
    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
    if(i===2)await capture(page,`story-3-${width}`);
