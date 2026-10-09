@@ -4,11 +4,11 @@ const legacy=require('./units1-30-tasks');
 // Independent transcription of the reviewed teaching draft; no runtime answers.
 const ANSWERS={
  '1-2':{
-  listen:[{pairs:[['coat','外套'],['dress','连衣裙'],['skirt','半身裙']]},'pen','house','pencil'],
-  roles:[['这是','你的','手提包','吗？'],'女士请他重复。','very much','对面的女士'],
+  listen:[{pairs:[['coat','外套'],['dress','连衣裙'],['skirt','半身裙']]},'pen','house','pencil','watch'],
+  roles:[['这是','你的','手提包','吗？'],'女士请他重复。','very much','这是不是女士的手提包。','手提包'],
   manners:[{fills:['me']},'Yes?','Yes, it is.','女士',['Thank','you','very much']],
-  workshop:['watch','衬衫',{fills:['book']},['Is','this','your','car']],
-  exam:[{fills:['Yes?','Yes, it is.']},'Yes, it is. Thank you very much.','your 指女士的；it 指手提包','Pardon?','Excuse me!','铅笔',['Is','this','your','coat?'],'房子']
+  trans:['Is this your book?','这是不是你的铅笔。',['Is','this','your car'],{fills:['Are']},['Am','I','a student'],'Are you a student?',{fills:['it is']},"No, it isn't.",{pairs:[['Is this your watch?','Yes, it is.'],['Are you ready?','Yes, I am.']],leftLabel:'问句',rightLabel:'肯定回答'},{fills:['is not']},['Are','you','ready'],{fills:['am']}],
+  exam:[{fills:['Yes?','Yes, it is.']},"No, it isn't.",{fills:['你的','手提包']},'Pardon?','Excuse me!','铅笔',['Is','this','your coat'],'房子',['Am','I','ready'],{fills:['Are','am']}]
  },
  '25-26':{
   listen:[{pairs:[['on the left','在左边'],['on the right','在右边'],['in the middle','在中间']]},'refrigerator','kitchen','太太','用电的','炉灶；炊具','房间'],
@@ -52,6 +52,10 @@ async function activity(page,pair,id,{base='',capture}={}){
 }
 async function complete(page,pair,base=''){
  await story(page,pair,base);for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id,{base});
- await page.goto(`${base}/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText(pair==='1-2'?'5':'15');
+ await page.goto(`${base}/unit${pair}/#learn/certificate`);
+ if(pair==='1-2')await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
+ else await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();
+ // Completion and zero-error stars are separate in the five-zone edition.
+ if(pair!=='1-2')await expect(page.locator('#starCount')).toHaveText('15');
 }
 module.exports={ANSWERS,select,story,activity,complete};

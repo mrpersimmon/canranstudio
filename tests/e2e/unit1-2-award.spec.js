@@ -17,22 +17,22 @@ test('新纪念卡显示五个答题区，未获星时没有满星日期', async
 });
 
 test('错答订正、刷新不获星；重练整区零错才获星，已获星不会被新错答撤回', async ({ page }) => {
-  await page.goto('/unit1-2/#learn/workshop'); const room = page.locator('.stage-workshop');
-  await room.getByRole('button', { name:'book', exact:true }).click();
+  await page.goto('/unit1-2/#learn/trans'); const room = page.locator('.stage-trans');
+  await room.getByRole('button', { name:'This is your book.', exact:true }).click();
   await room.getByRole('button', { name:'检查答案', exact:true }).click();
   await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
   await page.reload();
   await expect(room.getByRole('button', { name:'再试一次', exact:true })).toBeVisible();
   await room.getByRole('button', { name:'再试一次', exact:true }).click();
-  await finishZone(page, 'workshop');
+  await finishZone(page, 'trans');
   await expect(page.locator('#starCount')).toHaveText('0');
   await expect(room.locator('.award-round-result')).toContainText('本轮有过错答');
   await room.getByRole('button', { name:'再练一轮', exact:true }).click();
-  await finishZone(page, 'workshop');
+  await finishZone(page, 'trans');
   await expect(page.locator('#starCount')).toHaveText('1');
   await page.reload(); await expect(page.locator('#starCount')).toHaveText('1');
   await room.getByRole('button', { name:'再练一轮', exact:true }).click();
-  await room.getByRole('button', { name:'book', exact:true }).click();
+  await room.getByRole('button', { name:'This is your book.', exact:true }).click();
   await room.getByRole('button', { name:'检查答案', exact:true }).click();
   await page.goto('/unit1-2/#learn/certificate');
   await expect(page.getByRole('group', { name:'已获得 1 / 5 颗星' })).toBeVisible();
@@ -44,7 +44,7 @@ test('线索单独记录，整轮首次提交全对仍可获星', async ({page})
   const {story,activity}=require('../support/thirteen-types-flow');
   await story(page,'1-2');
   await activity(page,'1-2','roles',{capture:async(room,i,state)=>{
-    if(i===3&&state==='blank')await room.getByRole('button',{name:'给点线索',exact:true}).click();
+    if(i===4&&state==='blank')await room.getByRole('button',{name:'给点线索',exact:true}).click();
   }});
   await expect(page.locator('#starCount')).toHaveText('1');
   await page.getByRole('button',{name:'学习手记',exact:true}).click();

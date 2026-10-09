@@ -1,0 +1,56 @@
+{
+  "branch": "codex/debug-grammar-version",
+  "baseCommit": "da4273e533c8fac1a5a880503a3e52938e620f14",
+  "status": "uncommitted local implementation",
+  "passed": 18,
+  "failed": 0,
+  "reportedDuration": "1.8m",
+  "command": "COURSE_TEST_PORT=4268 ./node_modules/.bin/playwright test tests/e2e/unit1-2-grammar-guide.spec.js tests/e2e/unit1-2-grammar-v2.spec.js tests/e2e/unit1-2-exam.spec.js tests/e2e/unit-thirteen-types.spec.js --grep '小锦囊|三页示范|实际页面截图|语法示范|陈述句|否定回答|示范之后|已完成的旧课|1–2 八题|1-2 (root|/lesson|真实旧轮次)|辨认问句|两套题作答' --reporter=line",
+  "coverage": [
+    "five grammar-guide tests",
+    "four grammar-v2 tests",
+    "one eight-question exam flow",
+    "two complete unit1-2 paths",
+    "one statement-question retry and draft flow",
+    "four viewport flows (unit1-2 and unchanged unit25-26)",
+    "one historical unit1-2 migration"
+  ],
+  "redBeforeGreen": [
+    "new grammar region and transformation absent",
+    "optional negative disclosure absent",
+    "statement-question distinction absent"
+  ],
+  "visualReview": "All three demonstration pages and five revised questions reviewed in actual browser screenshots; automatic snapshots are taken after word motion settles.",
+  "preview": "http://127.0.0.1:4269/unit1-2/#learn/phrases",
+  "notVerified": [
+    "real mobile WeChat",
+    "classroom learning outcomes",
+    "production account synchronization",
+    "existing /lesson/ tab cache upgrade"
+  ],
+  "sha256": {
+    "unit1-2/content.js": "4e2648ebc6d892edcd3dbf97ff6cd8505111c00d5b0c840bca800553988fe8f0",
+    "unit1-2/grammar.js": "c984f62073abbfc13702e4dd9937108d0918de29decf863b11356a0c5eb8e8c2",
+    "unit1-2/grammar.css": "e9181f5d6c95701eb0f2e37c7593999ff0143b7db94c57d041fe4e58171078a0",
+    "unit1-2/index.html": "4432aad105273a2eefde67c2dd38d972920773948a03db82fa9e8bb741c33397",
+    "unit1-2/unit.js": "962ec2589c1655badb37f31670b022a79f3dce2de6c687f36c26cfceb72057dc"
+  },
+  "screenshots": [
+    "step-1-1280.png",
+    "step-1-question-1280.png",
+    "step-2-1280.png",
+    "step-3-1280.png",
+    "step-1-question-390.png",
+    "step-3-390.png",
+    "roles-4-390.png",
+    "trans-1-390.png",
+    "trans-2-390.png",
+    "exam-3-390.png",
+    "exam-7-390.png",
+    "roles-4-1280.png",
+    "trans-1-1280.png",
+    "trans-2-1280.png",
+    "exam-3-1280.png",
+    "exam-7-1280.png"
+  ]
+}

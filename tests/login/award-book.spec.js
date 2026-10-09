@@ -12,7 +12,7 @@ test('三单元真实获星入册、跨设备、翻页与PNG不重复请求、�
  await adminLogin(page,base);const account=await createStudent(page,'纪念册班','小雨',[/Lesson 1–2/,/Lesson 3–4/,/Lesson 5–6/]);const other=await addStudent(page,'小明');
  const first=await studentLogin(browser,account,base),learner=first.page,errors=[];learner.on('pageerror',e=>errors.push(e.message));
  await learner.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect(learner.getByRole('heading',{name:'小雨的纪念册'})).toBeVisible();await expect(learner.getByText('第一张纪念卡，等你来点亮。')).toBeVisible();
- await finishZone(learner,'workshop',{base:base+'unit1-2/'});
+ await finishZone(learner,'trans',{base:base+'unit1-2/'});
  await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
  await unit34.completeUnit34(learner,base.slice(0,-1));await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
  await unit56.completeUnit56(learner,base.slice(0,-1));await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
@@ -53,7 +53,7 @@ test('三单元真实获星入册、跨设备、翻页与PNG不重复请求、�
 
 test('素材失败只显示可重试加载页，网络恢复后整册显示',async({page,browser})=>{
  test.setTimeout(90000);const base=process.env.AWARD_TEST_BASE||'/lesson/';await adminLogin(page,base);const account=await createStudent(page,'纪念册加载班','小雨',[/Lesson 1–2/]);const learner=await studentLogin(browser,account,base);
- await finishZone(learner.page,'workshop',{base:base+'unit1-2/'});await expect(learner.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+ await finishZone(learner.page,'trans',{base:base+'unit1-2/'});await expect(learner.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
  let failed=true;await learner.page.route('**/awards/static/unit1-2-*.webp',route=>failed?route.abort():route.continue());
  await learner.page.goto(base+'awards/');await expect(learner.page.getByRole('heading',{name:'纪念册还没准备好'})).toBeVisible();await expect(learner.page.locator('.book')).toHaveCount(0);
  failed=false;await learner.page.getByRole('button',{name:'再试一次',exact:true}).click();await expect(learner.page.locator('.book')).toBeVisible();await learner.context.close();
@@ -63,7 +63,7 @@ test('离开课程的待同步成果由纪念册恢复上传，长姓名不裁�
  test.setTimeout(90000);const base=process.env.AWARD_TEST_BASE||'/lesson/',name='热爱探险和英语学习的小朋友李明小明';
  await adminLogin(page,base);const account=await createStudent(page,'离线纪念册班',name,[/Lesson 1–2/]);const learner=await studentLogin(browser,account,base);
  let blocked=true;await learner.page.route('**/api/progress',route=>blocked?route.abort():route.continue());
- await finishZone(learner.page,'workshop',{base:base+'unit1-2/'});await expect(learner.page.locator('#starCount')).toHaveText('0');
+ await finishZone(learner.page,'trans',{base:base+'unit1-2/'});await expect(learner.page.locator('#starCount')).toHaveText('0');
  await learner.page.goto(base+'awards/');await expect(learner.page.getByText('第一张纪念卡，等你来点亮。')).toBeVisible();await expect(learner.page.getByRole('status')).toContainText('等待同步');
  blocked=false;await learner.page.reload();await expect(learner.page.locator('.certificate')).toHaveAttribute('data-stars','1');
  for(const width of [320,390,1280]){

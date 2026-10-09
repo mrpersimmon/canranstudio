@@ -40,7 +40,11 @@ const EXAMS = {
 };
 const revisedPrompts={"0": "接好女士的两次回应"};
 EXAMS['1-2'].splice(0,EXAMS['1-2'].length,...taskCases.answers('1-2','exam').map((q,i)=>({...EXAMS['1-2'][i],...q,prompt:revisedPrompts[i]||EXAMS['1-2'][i]?.prompt})));
+EXAMS['1-2'][1]={prompt:'告诉同学，这不是你的手表',answer:"No, it isn't."};
+EXAMS['1-2'][2]={prompt:'选出词义和它指的物品',answer:{fills:['你的','手提包']}};
+EXAMS['1-2'][6]={prompt:'把这句话变成问句',answer:['Is','this','your coat']};
 EXAMS['1-2'][7]={prompt:'问的是哪件物品？',answer:'房子'};
+EXAMS['1-2'].push({prompt:'问自己：我准备好了吗？',answer:['Am','I','ready']},{prompt:'完成角色猜谜的一问一答',answer:{fills:['Are','am']}});
 async function choose(room, question) {
   if (question.audio) {
     await room.getByRole('button', { name: '听一遍', exact: true }).click();

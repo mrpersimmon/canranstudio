@@ -14,6 +14,10 @@ for(const pair of ['1-2','25-26'])test(`${pair} 新题型登录后无声通关�
   if(pair==='1-2'){
    await expect(first.page.locator('#certificateName')).toHaveText('练习小伙伴');
    await expect(first.page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveCount(0);
+   await expect(first.page.locator('#starCount')).toHaveText('5');
+   await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+   await expect(first.page.locator('#certificateDate')).toBeVisible();
+   await expect(first.page.locator('#certificateDate')).toHaveText(/\d{4}\.\d{2}\.\d{2}/);
   }else{
    await first.page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('练习小伙伴');
    await first.page.getByRole('button',{name:'领取单元证书',exact:true}).click();

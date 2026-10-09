@@ -23,6 +23,7 @@ const AUDIO_PROBES = [
 const ALLOWED_STORAGE_KEYS = new Set([
   PROFILE_KEY,
   ...['unit1-2','unit3-4','unit5-6'].map(id=>'canran:'+id+':learning:v1:awards:story-card-v1'),
+  'canran:unit1-2:learning:v1:awards:grammar-five-zones-v1',
   'canran:unit49-50:learning:v1',
   'canran:unit1-2:learning:v1',
   ...PUBLISHED_COURSES.flatMap(course => [

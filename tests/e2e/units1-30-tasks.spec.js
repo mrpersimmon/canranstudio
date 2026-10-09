@@ -24,6 +24,9 @@ test('1–2 在完整感谢语中找程度词，错选不代答，刷新后原�
  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await page.reload();
  await room.getByRole('button',{name:'再试一次',exact:true}).click();
  await source.getByRole('button',{name:'very much',exact:true}).press('Enter');await room.getByRole('button',{name:'检查答案',exact:true}).press('Enter');
- await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:'对面的女士',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'完成这一站',exact:true}).click();
+  await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:'这是不是女士的手提包。',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
+  await expect(room.locator('.progress-copy')).toHaveText('第 5 / 5 题');
+  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  await room.getByRole('button',{name:'手提包',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:'完成这一站',exact:true}).click();
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 });

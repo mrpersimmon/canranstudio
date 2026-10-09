@@ -1,0 +1,157 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/unit1-2-completion.spec.js",
+      "--reporter=line,json"
+    ],
+    "configFile": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/playwright.config.js",
+    "rootDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4268",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-completion.spec.js",
+      "file": "unit1-2-completion.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "语法小工坊结束使用已认可的人物成果画面与三枚 imagegen 图标",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7074,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')\nTimeout: 5000ms\n\u001b[32m- Expected  - 5\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   \"最高连对12题\",\u001b[39m\n\u001b[32m-   \"本次答对12题\",\u001b[39m\n\u001b[32m-   \"本次答错0题\",\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')\nTimeout: 5000ms\n\u001b[32m- Expected  - 5\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   \"最高连对12题\",\u001b[39m\n\u001b[32m-   \"本次答对12题\",\u001b[39m\n\u001b[32m-   \"本次答错0题\",\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\n    at expectResults (/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js:10:23)\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js:22:9",
+                    "location": {
+                      "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js",
+                      "column": 23,
+                      "line": 10
+                    },
+                    "snippet": "   8 | async function expectResults(room, counts) {\n   9 |   const cards = room.getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem');\n> 10 |   await expect(cards).toHaveText([`最高连对${counts[0]}题`, `本次答对${counts[1]}题`, `本次答错${counts[2]}题`]);\n     |                       ^\n  11 |   for (const [index, kind] of ['streak', 'correct', 'incorrect'].entries()) {\n  12 |     await expect(cards.nth(index).locator('img')).toHaveAttribute('src', new RegExp('/' + kind + '-v1\\\\.png(?:[?]|$)'));\n  13 |     await expect.poll(() => cards.nth(index).locator('img').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js",
+                        "column": 23,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')\nTimeout: 5000ms\n\u001b[32m- Expected  - 5\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[32m- Array [\u001b[39m\n\u001b[32m-   \"最高连对12题\",\u001b[39m\n\u001b[32m-   \"本次答对12题\",\u001b[39m\n\u001b[32m-   \"本次答错0题\",\u001b[39m\n\u001b[32m- ]\u001b[39m\n\u001b[31m+ Array []\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\n\n   8 | async function expectResults(room, counts) {\n   9 |   const cards = room.getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem');\n> 10 |   await expect(cards).toHaveText([`最高连对${counts[0]}题`, `本次答对${counts[1]}题`, `本次答错${counts[2]}题`]);\n     |                       ^\n  11 |   for (const [index, kind] of ['streak', 'correct', 'incorrect'].entries()) {\n  12 |     await expect(cards.nth(index).locator('img')).toHaveAttribute('src', new RegExp('/' + kind + '-v1\\\\.png(?:[?]|$)'));\n  13 |     await expect.poll(() => cards.nth(index).locator('img').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);\n    at expectResults (/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js:10:23)\n    at /Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js:22:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T17:13:12.280Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-completion-语法小工坊结束使用已认可的人物成果画面与三枚-imagegen-图标/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/test-results/unit1-2-completion-语法小工坊结束使用已认可的人物成果画面与三枚-imagegen-图标/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/permission/.codex/worktrees/debug-grammar-version/canranstudio.cn/tests/e2e/unit1-2-completion.spec.js",
+                    "column": 23,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2b0503838b5a3f085678-2bbf77c0d7ffcf32a933",
+          "file": "unit1-2-completion.spec.js",
+          "line": 17,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T17:13:11.763Z",
+    "duration": 8271.024000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

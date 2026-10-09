@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const catalog = require('../core/course-catalog');
+const awardRules = require('../core/award-rules');
 const {relocateSource}=require('../scripts/public-base-path');
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
 function definition(root, course, basePath = '/lesson/') {
@@ -15,6 +16,11 @@ function sameSignature(saved,current){if(saved===current)return true;if(typeof s
 function normalize(value, unit, course) {
   const result={version:1,groups:{},records:{},activity:{unitCompleted:{}}};
   if (!record(value) || !record(value.activity)) return result;
+  if (unit.reward) {
+    result.activity.unitAwardClaims = Object.fromEntries(unit.reward.zones
+      .filter(zone => awardRules.validClaim(unit, zone.id, value.activity.unitAwardClaims?.[zone.id]))
+      .map(zone => [zone.id, value.activity.unitAwardClaims[zone.id]]));
+  }
   const signatures = Object.fromEntries(Object.entries(unit.questions).map(([id,items])=>[id,course==='unit49-50'?'v1:'+items.map(q=>q.id).join('|'):JSON.stringify([unit.version,items])]));
   signatures.text=course==='unit49-50'?'v1:'+unit.learning.DIALOGUE.map(line=>line.text).join('|'):JSON.stringify([unit.version,unit.learning.DIALOGUE]);
   if(course==='unit49-50')signatures.subjects='v1:'+unit.learning.SUBJECTS.version;
@@ -82,10 +88,10 @@ function normalize(value, unit, course) {
   const taskProofs={};
   if(!complete)for(const[id,sources]of Object.entries(unit.taskPredecessors||{})){
     if(result.activity.unitCompleted[id])continue;
-    for(const{key,questions}of sources){
+    for(const{key,questions,activity}of sources){
       if(['__proto__','constructor','prototype'].includes(key)||!Array.isArray(questions))continue;
       const signature=JSON.stringify([unit.version,questions]);
-      const proof=value.activity.unitPreviousTaskCompleted?.[key]||value.activity.unitCompleted?.[id]||
+      const proof=value.activity.unitPreviousTaskCompleted?.[key]||value.activity.unitCompleted?.[activity||id]||
         Object.values(value.activity.unitCompleted||{}).find(saved=>sameSignature(saved,signature));
       const group=value.groups?.[key],content=JSON.stringify([unit.version,questions],(field,item)=>field==='hint'?undefined:item);
       if(!sameSignature(proof,signature)||!group||group.draftVersion!==2||typeof group.runId!=='string'||!group.runId||
@@ -108,17 +114,21 @@ function normalize(value, unit, course) {
   }
   return result;
 }
-function merge(left,right){return {version:1,groups:{...left.groups,...right.groups},records:{...left.records,...right.records},activity:{...left.activity,...right.activity,unitCompleted:{...left.activity?.unitCompleted,...right.activity?.unitCompleted}}};}
+function merge(left,right){return {version:1,groups:{...left.groups,...right.groups},records:{...left.records,...right.records},activity:{...left.activity,...right.activity,unitCompleted:{...left.activity?.unitCompleted,...right.activity?.unitCompleted},...(left.activity?.unitAwardClaims||right.activity?.unitAwardClaims?{unitAwardClaims:{...right.activity?.unitAwardClaims,...left.activity?.unitAwardClaims}}:{})}};}
+// The reward ledger remains authoritative where installed. Grammar-only units
+// use the complete-round claims already validated by normalize().
+function zoneAwarded(normalized,zone,award=null){return Boolean(award?award.zones?.[zone]:normalized.activity.unitAwardClaims?.[zone]);}
 function summary(value,unit,course,award=null){
-  const saved=normalize(value,unit,course).activity.unitCompleted;
+  const normalized=normalize(value,unit,course),saved=normalized.activity.unitCompleted;
   let stars=0,next='certificate';
   for(const stage of unit.stages)stars+=Math.floor(stage.required.filter(id=>saved[id]).length/stage.required.length*3);
   for(const stage of unit.stages){const unfinished=stage.required.find(id=>!saved[id]);if(unfinished){next=unfinished;break;}}
   const versioned=Array.isArray(unit.reward?.zones);
-  if(versioned)stars=unit.reward.zones.filter(zone=>award?.zones?.[zone.id]).length;
+  if(versioned)stars=unit.reward.zones.filter(zone=>zoneAwarded(normalized,zone.id,award)).length;
+  const started=Boolean(stars||Object.keys(saved).length);
   return {stars,maxStars:versioned?unit.reward.zones.length:unit.stages.length*3,
     rewardRule:versioned?'first-correct-v1':'completion-v1',rewardEdition:versioned?unit.reward.edition:null,
     firstFullStarAt:versioned?(award?.firstFullStarAt||null):null,
-    next:Object.keys(saved).length?next:'words'};
+    started,next:started?next:'words'};
 }
-module.exports={definition,normalize,merge,summary};
+module.exports={definition,normalize,merge,summary,zoneAwarded};

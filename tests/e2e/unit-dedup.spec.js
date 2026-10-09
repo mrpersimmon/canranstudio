@@ -17,35 +17,34 @@ async function choose(room, answer, next = '下一题') {
   if (next) await room.getByRole('button', { name: next, exact: true }).click();
 }
 
-test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断', async ({ page }) => {
+test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/unit1-2/#learn/ask');
-  const ask = page.locator('.stage-workshop');
-  await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
-  await expect(ask.getByRole('heading', { name: '补全问句', exact: true })).toBeVisible();
-  await choose(ask, 'watch');
-  await choose(ask, '衬衫');
-  await choose(ask, {fills:['book']});
-  await choose(ask, ['Is','this','your','car'], '完成这一站');
-  await expect(ask.getByRole('button', { name: '下一站：礼貌小挑战', exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/#learn\/listen$/);
+  await expect(page.locator('.stage-ask')).toHaveCount(0);
+  const listen = page.locator('.stage-listen');
+  await expect(listen.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '5');
+  const { activity } = require('../support/thirteen-types-flow');
+  await activity(page, '1-2', 'listen');
+  await expect(listen.getByRole('button', { name: '下一站：相遇小剧场', exact: true })).toBeVisible();
 
   await page.goto('/unit1-2/#learn/exam');
   const exam = page.locator('.stage-exam');
-  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '8');
+  await expect(exam.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
   await expect(exam).toContainText('Excuse me!');
   await require('../support/units1-30-tasks').select(exam,{fills:['Yes, it is.','Yes?']});
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
   await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, {fills:['Yes?','Yes, it is.']});
-  await expect(exam.locator('.practice-content > h3')).toHaveText('先确认，再道谢');
-  await expect(exam.locator('.practice-context')).toHaveText('同学把你的书递给你');
-  await expect(exam.locator('.task-reading')).toContainText('Is this your book?');
+  await expect(exam.locator('.practice-content > h3')).toHaveText('告诉同学，这不是你的手表');
+  await expect(exam.locator('.practice-context')).toContainText('同学捡到一块手表，手表不是你的');
+  await expect(exam.locator('.task-reading')).toContainText('Is this your watch?');
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit12-combined-320.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await choose(exam, 'Yes, it is. Thank you very much.');
+  await choose(exam, "No, it isn't.");
   await finishExam(page, '1-2', 2);
-  await expect(exam).toContainText('首次独立答对 7 / 8');
+  await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['9', '9', '1']);
   await expect(exam.getByRole('button', { name: '下一站：我的单元纪念卡', exact: true })).toBeVisible();
 });
 
@@ -177,8 +176,11 @@ test('Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答'
   await expect(page.locator('#starCount')).toHaveText('6');
   upgrade();
   await page.reload();
-  await expectFresh(page, 'unit1-2', 'workshop', 4);
-  await expectFresh(page, 'unit1-2', 'exam', 8);
+  await page.goto('/unit1-2/#learn/ask');
+  await expect(page).toHaveURL(/#learn\/listen$/);
+  await expectFresh(page, 'unit1-2', 'listen', 5);
+  await expectFresh(page, 'unit1-2', 'exam', 10);
+  await expectFresh(page, 'unit1-2', 'trans', 12);
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 

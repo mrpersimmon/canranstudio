@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-10-08 21:55 Asia/Shanghai",
+  "branch": "codex/debug-grammar-version",
+  "baseCommit": "da4273e533c8fac1a5a880503a3e52938e620f14",
+  "status": "local uncommitted; not pushed or deployed",
+  "stats": {
+    "startTime": "2026-10-08T13:54:31.961Z",
+    "duration": 93955.96800000001,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "scope": [
+    "Lesson 1–2 three-step Grammar guide and four practice questions",
+    "Eight-question final challenge with new negative reply",
+    "Real-page previous edition completion and upgrade, certificate name/date retained",
+    "Normal/reduced motion, keyboard, refresh, draft preservation",
+    "320/390/768/1280 responsive behavior and full root/subpath completion",
+    "Existing paired 25–26 responsive controls checked by the shared walkthrough; content unchanged"
+  ],
+  "unverified": [
+    "Physical mobile WeChat",
+    "Production account synchronization",
+    "Classroom learning effectiveness",
+    "Existing persistent /lesson/ tab cache issue from the previous turn"
+  ],
+  "sha256": {
+    "unit1-2/grammar.js": "359ec9202b35302459339fa97cc5642048ba7a6b4a6d6c26c5096bbd14e8e888",
+    "unit1-2/grammar.css": "4bf6a1736ae098a8508da97ad58fba08a12c6318cc27cdf2267e7f6a3b116d80",
+    "unit1-2/content.js": "b1676381cb11d85702fab054fd7bc7bb0be6ba543597a860db90ceb95e445b8b",
+    "unit1-2/index.html": "1868f41d2e51fc17f33d956563ea78099d2cecdba4f0128d0d12d3f0efd2c335",
+    "tests/e2e/unit1-2-grammar-guide.spec.js": "3d2558373431f4690e03483c0c78a158196152e79b291b6252fd0b2f82624c4d",
+    "tests/e2e/unit1-2-grammar-v2.spec.js": "8e071526f6f608fce3423a923b3f0c4c8fc5287c621364f797205d380581fec3",
+    "tests/e2e/unit1-2-grammar-v3.spec.js": "9659346000132b3ce179e45ec2ad333e94c749c261b0dd0a0b30a1ca5a79d1f5",
+    "tests/support/thirteen-types-flow.js": "780379be9a0e2eceac906d4226e653cb9cd3a4c59a635f7d895ca173f0ab401d",
+    "tests/support/units1-6-exam.js": "a8d1d1b370793c92248d7433c42019f840af163b378e0ba9080f75b6bdab6e5a"
+  }
+}

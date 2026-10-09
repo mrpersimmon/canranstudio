@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-09 01:21 +08:00",
+  "branch": "codex/debug-grammar-version",
+  "scope": "Lesson 1–2 six answer activities; no changes to question data or shared runner in this repair",
+  "pageTests": {
+    "startTime": "2026-10-08T17:20:33.195Z",
+    "duration": 38724.54,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "assets": [
+    {
+      "path": "assets/unit1-2/completion/streak-v1.png",
+      "sha256": "191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9",
+      "bytes": 7317,
+      "matchesApprovedOriginal": true
+    },
+    {
+      "path": "assets/unit1-2/completion/correct-v1.png",
+      "sha256": "c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b",
+      "bytes": 5381,
+      "matchesApprovedOriginal": true
+    },
+    {
+      "path": "assets/unit1-2/completion/incorrect-v1.png",
+      "sha256": "c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415",
+      "bytes": 7692,
+      "matchesApprovedOriginal": true
+    }
+  ],
+  "files": {
+    "unit1-2/completion.js": "ccc45f503a736f2ce534542050b2a97bc7162e60edac073bd89e06374dfb0792",
+    "unit1-2/completion.css": "3c36b854d37932b149b1d420fc5ef72cd6494559d60b0b616a573a88e3712847",
+    "unit1-2/unit.js": "81169ddb81f9cb8f103744bcf7889417c31c049ad11e1d9355bb32a5069da827",
+    "unit1-2/index.html": "82018cdc156e448afbddcefb69df907b8f979340cc473fd4e1801680cab1915c",
+    "unit1-2/grammar.js": "79d0d54ea8aa08471ccb131c63af8f34913d1242b76a7cae3cabeff3105daa91",
+    "unit1-2/grammar.css": "de534b317300dc502bfd0d968cd2df435ade7b4ac7795f994ab507f3ca9e84e3",
+    "tests/e2e/unit1-2-completion.spec.js": "513242643fb4a6da973860b98864771adad5fd63d2c992281c263956b4ec1032",
+    "tests/e2e/unit1-2-grammar-workshop.spec.js": "45ef579bb170108670cf82b51fd0ecdde28f6b8029b5f76645a6fa420579d40b",
+    "tests/e2e/unit1-2-grammar-guide.spec.js": "a278fcbf9e23d7e500f98a0105594eaa7a5bfdcd91e2c417b900ad66112fb422",
+    "tests/e2e/unit1-2-exam.spec.js": "20ed89031a69d3bb0b0440a870497ad397b124eace1508b066c9573f2308ecb5"
+  },
+  "manualVisualReview": [
+    "root-trans-320.png",
+    "lesson-listen-390.png",
+    "root-manners-1280.png",
+    "root-exam-1280.png"
+  ],
+  "notVerified": [
+    "Physical mobile/WeChat",
+    "Production deployment"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  }
+}

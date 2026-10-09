@@ -18,7 +18,8 @@ function completedSnapshot(book){
  const groups={},records={},activity={unitCompleted:book.activity?.unitCompleted||{}};
  for(const [id,group] of Object.entries(book.groups||{}))if(group.index===group.signature?.split('|').length&&group.states?.every(s=>s?.checked&&s.correct)){groups[id]=group;for(const state of group.states)if(book.records?.[state.questionId])records[state.questionId]=book.records[state.questionId];}
  for(const id of ['unitDialogue','subjectRound'])if(book.activity?.[id]?.done)activity[id]=book.activity[id];
- for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt','unitAwardClaims'])if(book.activity?.[id])activity[id]=book.activity[id];
+ for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt'])if(book.activity?.[id])activity[id]=book.activity[id];
+ if(book.activity?.unitAwardClaims)activity.unitAwardClaims=book.activity.unitAwardClaims;
  return {version:1,groups,records,activity};
 }
 function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
@@ -32,7 +33,20 @@ function lock(message,retry=()=>location.reload()){
 function unlock(){document.querySelectorAll('[data-access-inert]').forEach(el=>{el.inert=false;delete el.dataset.accessInert;});locked=false;document.documentElement.removeAttribute('data-access-locked');document.getElementById('accessGate')?.remove();}
 async function renew(){if(renewing)return;renewing=true;for(const child of document.body.children)if(!child.inert){child.inert=true;child.dataset.accessInert='';}try{const next=await api('courses/'+course+'/enter',{preview});if(next.student.id!==owner){lock('学习身份已改变，请重新进入课程。');return;}access.grant=next.grant;access.expires=next.expires;if(next.awards){access.awards=next.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:next.awards}));}renewAt=Date.now()+7200000;unlock();await pinAgain();flush();}catch(error){lock(error.status===403?error.message:'暂时无法核验，请联网后再试。',renew);}finally{renewing=false;}}
 async function pinAgain(){const controller=navigator.serviceWorker?.controller;if(!controller||!window.CanranCourseCache)return;const pack=await window.CanranCourseCache.open('/lesson/').current(course);if(pack)controller.postMessage({type:'course:pin',id:course,revision:pack.revision});}
-function mergeRemote(local,remote){const v=local&&typeof local==='object'?local:{version:1,groups:{},records:{},activity:{}};const drafts=Object.fromEntries(Object.entries(v.groups||{}).filter(([,g])=>g?.roundPolicy&&Number.isInteger(g.index)&&g.index<g.signature?.split('|').length));v.groups={...v.groups,...remote.groups,...drafts};v.records={...v.records,...remote.records};v.activity={...v.activity,...remote.activity,unitCompleted:{...v.activity?.unitCompleted,...remote.activity?.unitCompleted}};return v;}
+function mergeRemote(local,remote){
+ const v=local&&typeof local==='object'?local:{version:1,groups:{},records:{},activity:{}};
+ const groups={...v.groups,...remote.groups};
+ // A restarted round is a local draft. An older completed round from the
+ // server must not replace it on reload; the earned star is kept separately.
+ for(const [id,draft] of Object.entries(v.groups||{})){
+  const saved=remote.groups?.[id];
+  if(saved&&typeof draft?.runId==='string'&&typeof draft.signature==='string'&&typeof draft.contentSignature==='string'&&draft.runId!==saved.runId&&
+    draft.contentSignature===saved.contentSignature&&draft.signature===saved.signature&&
+    Number.isInteger(draft.index)&&draft.index>=0&&draft.index<draft.signature.split('|').length)groups[id]=draft;
+ }
+ v.groups=groups;v.records={...v.records,...remote.records};
+ v.activity={...v.activity,...remote.activity,unitCompleted:{...v.activity?.unitCompleted,...remote.activity?.unitCompleted},...(v.activity?.unitAwardClaims||remote.activity?.unitAwardClaims?{unitAwardClaims:{...v.activity?.unitAwardClaims,...remote.activity?.unitAwardClaims}}:{})};return v;
+}
 function installStorage(){
  Storage.prototype.getItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.get.call(this,k);return access.preview?(memory.get(k)??null):native.get.call(this,prefix+k);};
  Storage.prototype.setItem=function(k,v){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.set.call(this,k,v);if(access.preview){memory.set(k,String(v));return;}native.set.call(this,prefix+k,v);if(k===key)saveQueue();};

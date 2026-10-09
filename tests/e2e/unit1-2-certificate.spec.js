@@ -50,7 +50,7 @@ test('新版纪念卡独立计星，切回原版仍保留已获五星和日期',
   await page.goto('/unit1-2/#learn/certificate');const firstDate=await page.locator('#certificateDate').textContent();
   let newEdition=true;
   await page.route('**/unit1-2/content.js*',async route=>{
-    const response=await route.fetch();const body=(await response.text()).replace("edition: 'story-card-v1'",newEdition?"edition: 'story-card-v2'":"edition: 'story-card-v1'");
+    const response=await route.fetch();const body=(await response.text()).replace("edition: 'grammar-five-zones-v1'",newEdition?"edition: 'grammar-five-zones-v2'":"edition: 'grammar-five-zones-v1'");
     await route.fulfill({response,body});
   });
   await page.reload();await expect(page.locator('#starCount')).toHaveText('0');

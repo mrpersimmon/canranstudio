@@ -1,0 +1,48 @@
+{
+  "tool": "Built-in image_gen__imagegen",
+  "date": "2026-10-07",
+  "background": "transparent",
+  "prompts": [
+    {
+      "name": "streak",
+      "prompt": "Use case: logo-brand.\nAsset type: one production-ready transparent UI icon for a children's English learning result card.\nCreate ONE golden five-point star icon. This is the first of a matched family of star, correct tick, and incorrect cross. The visual language is warm children's storybook clip art: flat 2D shapes, a strong continuous dark cocoa-brown outline (#4A3226), rounded corners and gently imperfect hand-drawn edges. Fill the star with warm golden yellow (#F2B84B). Outline thickness about 5 percent of the symbol's width. No separate inner contour; no stroke double-up. Friendly, confident and very simple, instantly legible at 24-32 pixels.\nSquare composition. Upright five-point star, centered, occupies about 82 percent of canvas width and height with clean equal transparent margins. Smooth alpha edges.\nReal transparent background, no background color, no plate or circle behind the symbol. No text, no numbers, no face, no eyes, no extra stars, no sparkles, no rays, no drop shadow, no gradients, no 3D, no photo texture, no white sticker border, no watermark. Deliver only the isolated star."
+    },
+    {
+      "name": "correct",
+      "prompt": "Use case: style-transfer. Asset type: transparent children's learning UI result icon.\nThe supplied star image is the EXACT style reference. Create a matching companion icon, preserving the same warm cocoa-brown outline color, heavy outline weight, rounded hand-drawn silhouette, minimal flat 2D finish, optical weight, and soft warm character. Replace the star with the requested symbol, not an extra symbol inside a star.\nSquare transparent canvas, symbol centered, approximately 82-88 percent of the width and height, equal clean transparent margins. Design for 24-32 pixel display. One unmistakable bold solid symbol only. Real alpha transparency. No background or container, no badge or circle, no white sticker rim, no text/numbers, no face, no stars or sparkles, no shadow, no 3D, no glossy highlights, no paper background. Keep color as flat as possible.\nRequested symbol: ONE chunky green correct checkmark (✓), with a short lower-left arm and a longer upper-right arm. The filled arms are broad and smoothly rounded; the continuous exterior outline is cocoa-brown #4A3226, the interior sage green #83B68E. It must read as a checkmark rather than a letter V or an arrow.",
+      "reference": "streak original"
+    },
+    {
+      "name": "incorrect",
+      "prompt": "Use case: style-transfer. Asset type: transparent children's learning UI result icon.\nThe supplied star image is the EXACT style reference. Create a matching companion icon, preserving the same warm cocoa-brown outline color, heavy outline weight, rounded hand-drawn silhouette, minimal flat 2D finish, optical weight, and soft warm character. Replace the star with the requested symbol, not an extra symbol inside a star.\nSquare transparent canvas, symbol centered, approximately 82-88 percent of the width and height, equal clean transparent margins. Design for 24-32 pixel display. One unmistakable bold solid symbol only. Real alpha transparency. No background or container, no badge or circle, no white sticker rim, no text/numbers, no face, no stars or sparkles, no shadow, no 3D, no glossy highlights, no paper background. Keep color as flat as possible.\nRequested symbol: ONE chunky coral-red incorrect cross (×), two equally long broad diagonal bars forming a balanced X, four gently rounded ends. The silhouette has a continuous cocoa-brown #4A3226 exterior outline, coral-red interior #DE9379. It must read as a bold incorrect cross, not a thin close control, not a plus, not a retry arrow.",
+      "reference": "streak original"
+    }
+  ],
+  "export": "Each original copied unchanged under output/imagegen/completion-20261007/originals; 128 px PNG runtime exports preserve alpha, colors and generated shapes; no redrawing or recoloring.",
+  "assets": [
+    {
+      "name": "streak",
+      "original": "output/imagegen/completion-20261007/originals/streak.png",
+      "originalSha256": "42a0d0b5e03bea02fae256ea889007bcf68928e77129756aee8a7598f321c480",
+      "runtime": "assets/unit1-2/completion/streak-v1.png",
+      "runtimeSha256": "191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9",
+      "bytes": 7317
+    },
+    {
+      "name": "correct",
+      "original": "output/imagegen/completion-20261007/originals/correct.png",
+      "originalSha256": "6ac4246c56031ed10e1ea6cda12d024289d37a4c61306bdbbfd34e5694b7d306",
+      "runtime": "assets/unit1-2/completion/correct-v1.png",
+      "runtimeSha256": "c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b",
+      "bytes": 5381
+    },
+    {
+      "name": "incorrect",
+      "original": "output/imagegen/completion-20261007/originals/incorrect.png",
+      "originalSha256": "11a7885a8796feabfdaa8ecbd765b293dddaa7ac2c47fae2ee01cd875ed27fe5",
+      "runtime": "assets/unit1-2/completion/incorrect-v1.png",
+      "runtimeSha256": "c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415",
+      "bytes": 7692
+    }
+  ]
+}

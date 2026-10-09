@@ -113,7 +113,7 @@
       target.tabIndex = -1;
       // A completion reward may open before this frame; keep its keyboard focus.
       if (!document.querySelector('[role="dialog"][aria-modal="true"]:not([hidden])')) target.focus({ preventScroll: true });
-      const rect = target.getBoundingClientRect();
+      const rect = (target.closest('.completion-card') || target).getBoundingClientRect();
       const top = (document.getElementById('topbar')?.getBoundingClientRect().bottom || 0) + 16;
       if (rect.top < top || rect.bottom > root.innerHeight - 16) {
         const progress = target.closest('.practice-content, .role-question')?.querySelector('.practice-progress');
@@ -283,6 +283,10 @@
       group.states.length=Math.min(group.states.length,group.index+1,questions.length);
     }
     normalizeDraft();
+    // Merely opening an older page or choosing without submitting is not an
+    // older scored round. Its first real attempt may use today's star policy.
+    if (roundPolicy && [...group.states, ...Object.values(group.carriedStates || {})]
+      .every(state => !state || state.attempts === 0)) group.roundPolicy = roundPolicy;
     // Older drafts still pass the ownership/answer validation above; from this
     // revision onward a changed prompt cannot silently re-award completion.
     group.contentSignature=contentSignature;

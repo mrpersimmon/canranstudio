@@ -36,7 +36,7 @@ for (const unit of units) {
       await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
       const {activity}=require('../support/thirteen-types-flow');
       await activity(page,'1-2','exam');
-      await expect(room).toContainText('首次独立答对 8 / 8');
+      await expect(room.getByRole('list',{name:'本轮成果'}).locator('strong')).toHaveText(['10','10','0']);
       await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
@@ -60,7 +60,7 @@ for (const unit of units) {
     const upgrade = await oldEdition(page, unit.id);
     await page.goto(`/unit${unit.id}/#learn/exam`); const room = page.locator('.stage-exam'), questions = EXAMS[unit.id];
     await choose(room, unit.id==='1-2'?{answer:'Yes?'}:questions[0]); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
-    await choose(room, questions[1]); upgrade(); await page.reload();
+    await choose(room, unit.id === '1-2' ? { answer: 'Yes, it is. Thank you very much.' } : questions[1]); upgrade(); await page.reload();
     if(unit.id==='1-2'){await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);return;}
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
     await expect(room.getByRole('status')).toBeEmpty();
