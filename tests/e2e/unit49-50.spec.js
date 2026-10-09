@@ -67,7 +67,7 @@ test('23 词连续听辨，新加入的词必须逐题作答，末题主动完�
     await expect(room.getByRole('button', { pressed: true })).toHaveCount(0);
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
     const option = room.getByRole('button', { name: listeningAnswers[i], exact: true });
-    expect(await option.locator('img').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+    await expect.poll(() => option.locator('img').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
     await option.click();
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
     await room.getByRole('button', { name: '听一遍', exact: true }).click();
@@ -284,7 +284,9 @@ test('新增九词使用可播放的本地录音与完整图卡，听辨录音�
   for(let group=0;group<2;group++){
     for(const word of newWords[group]){
       const card=words.getByRole('button',{name:word,exact:true});
-      expect(await card.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
+      // This raw preview has no course loading gate. Verify the requested image
+      // actually loads; cached production transitions have separate frame checks.
+      await expect.poll(()=>card.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
       await card.click();
       await expect.poll(()=>page.evaluate(()=>window.nativeEnds)).toContain('/lesson50/audio/'+word+'.mp3');
     }
