@@ -29,18 +29,23 @@ test('旧找物位置可从课程首页继续，不退回开始学习', async ({
   await expect(page.locator('.stage-listen .progress-copy')).toHaveText('第 1 / 5 题');
 });
 
-test('旧版只浏览或选中但未提交，升级后的首次完整作答仍可获星', async ({ page }) => {
+for (const selected of [false, true]) test(`六区旧版${selected ? '选中未提交' : '只打开'}，升级后五题首次全对仍可获星`, async ({ page }) => {
   const restore = await previous.install(page);
   await page.goto('/unit1-2/#learn/manners');
-  await flow.select(page.locator('.stage-manners'), { fills: ['me'] });
+  await expect(page.locator('.stage-manners').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+  if (selected) await flow.select(page.locator('.stage-manners'), { fills: ['me'] });
   await restore(); await page.reload();
   const room = page.locator('.stage-manners');
   await expect(room.locator('.fb')).toBeEmpty();
-  await expect(room.getByRole('button', { name: 'me', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await room.getByRole('button', { name: '下一题', exact: true }).click();
+  if (selected) {
+    await expect(room.getByRole('button', { name: 'me', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await room.getByRole('button', { name: '检查答案', exact: true }).click();
+    await room.getByRole('button', { name: '下一题', exact: true }).click();
+  } else await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await flow.activity(page, '1-2', 'manners');
+  await expect(room.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['5', '5', '0']);
   await expect(page.locator('#starCount')).toHaveText('1');
+  await page.reload(); await expect(page.locator('#starCount')).toHaveText('1');
 });
 
 test('六区旧记录迁入：未改题保留，改写题未答，历史结果不能拼成零错星星', async ({ page }) => {
