@@ -198,7 +198,9 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   // reviewed predecessor. Keep only the two still-identical story questions.
   await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
   await expect(page.locator('.stage-text')).toContainText('故事看完了！');
-  await expect(page.locator('#starCount')).toHaveText('1');
+  // Reading and compatible answers survive, but neither establishes a zero-error
+  // round in the new five-zone award edition.
+  await expect(page.locator('#starCount')).toHaveText('0');
 });
 
 test('Lesson 49–50 旧理解、问句、分类与挑战不代答新版，交接活动保留', async ({ page }) => {
