@@ -55,7 +55,22 @@ jobs:
       - run: npx playwright install --with-deps chromium
       # Each runner owns its server ports; each test file keeps its existing
       # serial behavior. Sharding changes scheduling, never the test inventory.
-      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/4 --reporter=line
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/4 --grep-invert @cache-performance --reporter=line
+
+  cache-performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test tests/e2e/course-cache-performance.spec.js --grep @cache-performance --reporter=line
 
   accounts:
     runs-on: ubuntu-latest
@@ -76,7 +91,7 @@ jobs:
     # Keep one stable required check. A failed, cancelled, or skipped upstream
     # job must never turn the PR green.
     if: always()
-    needs: [foundation, courses, accounts]
+    needs: [foundation, courses, accounts, cache-performance]
     runs-on: ubuntu-latest
     steps:
       - name: Require every check to pass
