@@ -85,7 +85,8 @@ function normalize(value, unit, course) {
     for(const{key,questions}of sources){
       if(['__proto__','constructor','prototype'].includes(key)||!Array.isArray(questions))continue;
       const signature=JSON.stringify([unit.version,questions]);
-      const proof=value.activity.unitPreviousTaskCompleted?.[key]||value.activity.unitCompleted?.[id];
+      const proof=value.activity.unitPreviousTaskCompleted?.[key]||value.activity.unitCompleted?.[id]||
+        Object.values(value.activity.unitCompleted||{}).find(saved=>sameSignature(saved,signature));
       const group=value.groups?.[key],content=JSON.stringify([unit.version,questions],(field,item)=>field==='hint'?undefined:item);
       if(!sameSignature(proof,signature)||!group||group.draftVersion!==2||typeof group.runId!=='string'||!group.runId||
         group.index!==questions.length||group.signature!==questions.map(q=>q.id).join('|')||!sameSignature(group.contentSignature,content))continue;

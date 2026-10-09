@@ -25,8 +25,8 @@ test('两单元有清晰的冷暖场景，图鉴与答题区有层次，选项�
     await page.goto(`/${unit}/#learn/words`);
     const shelf = await appearance(page.locator('.stage-words'));
     const card = await appearance(page.locator('.unit-word').first());
-    await page.goto(`/${unit}/#learn/${unit==='unit1-2'?'ask':'listen'}`);
-    const listen = page.locator(unit==='unit1-2'?'.stage-ask':'.stage-listen');
+    await page.goto(`/${unit}/#learn/${unit==='unit1-2'?'workshop':'listen'}`);
+    const listen = page.locator(unit==='unit1-2'?'.stage-workshop':'.stage-listen');
     const options = await Promise.all((await listen.locator('.practice-options button').all()).map(appearance));
     expect(options).toHaveLength(unit==='unit1-2'?3:4);
     expect(options.every(option => JSON.stringify(option) === JSON.stringify(options[0]))).toBe(true);
@@ -58,8 +58,8 @@ for (const [unit, answer] of [['unit1-2', 'watch'], ['unit49-50', 'butcher']]) {
     });
     // Earn the state through the old appearance, then load the new theme.
     await page.route('**/core/unit-theme.css*', route => route.fulfill({ contentType: 'text/css', body: '' }));
-    await page.goto(`/${unit}/#learn/${unit==='unit1-2'?'ask':'listen'}`);
-    const room = page.locator(unit==='unit1-2'?'.stage-ask':'.stage-listen');
+    await page.goto(`/${unit}/#learn/${unit==='unit1-2'?'workshop':'listen'}`);
+    const room = page.locator(unit==='unit1-2'?'.stage-workshop':'.stage-listen');
     if(unit==='unit49-50')await room.getByRole('button', { name: '听一遍', exact: true }).click();
     await room.getByRole('button', { name: answer, exact: true }).click();
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
@@ -128,7 +128,7 @@ for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
     expect.soft(lastPrev.y, '末组长按钮也应与上一组对齐').toBeCloseTo(lastNext.y, 0);
     expect.soft(lastPrev.height, '末组翻页按钮等高').toBeCloseTo(lastNext.height, 0);
     await words.screenshot({ path: `output/playwright/unit-theme/${unit}-words-last-${width}.png` });
-    await page.goto(`/${unit}/#learn/${unit==='unit1-2'?'ask':'listen'}`);
+    await page.goto(`/${unit}/#learn/${unit==='unit1-2'?'workshop':'listen'}`);
     await page.locator('.stage-listen').screenshot({ path: `output/playwright/unit-theme/${unit}-listen-${width}.png` });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
   });

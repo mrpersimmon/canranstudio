@@ -1,0 +1,8 @@
+Use case: style-transfer
+Asset type: one production PNG icon for the unearned-star state of an illustrated certificate.
+Input image role: the attached certificate is a STYLE and SHAPE REFERENCE ONLY. Closely match the rounded five-point OUTLINE stars in the row below the child's name (ignore the filled gold star and everything else).
+Primary request: output exactly ONE centered, upright, symmetric five-point hollow star icon on a genuinely transparent background. Keep the mildly rounded outer tips and rounded inner corners, harmonious short broad points, smooth single continuous outline, matching the hollow stars in the reference.
+Composition: square 512 by 512 pixels, the star takes up about 88% of the canvas width and height, approximately 6% transparent padding on each side. Entire star visible, no cropping.
+Colour: one fine light warm brown outline, approximately #BC9875; consistent weight around 4% of star width. No dark brown double edge.
+Transparency: real alpha transparency outside AND INSIDE the star. The central pentagonal region and all interior points MUST be fully transparent (alpha zero), not white, cream, gray, paper-coloured, translucent fill, or a fake checkerboard. The only nontransparent pixels are the light brown stroke and its anti-aliased edges.
+Avoid: no fill, no gold, no yellow, no glow, no highlights, no shadow, no paper, no background, no border/card, no extra stars, no text, no letters, no numbers, no characters, no objects, no gradient, no 3D or metallic styling.

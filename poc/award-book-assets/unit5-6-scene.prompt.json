@@ -1,0 +1,58 @@
+{
+  "asset": "unit5-6-scene",
+  "tool": "built-in image_gen",
+  "use_case": "background-extraction",
+  "transparent_background": true,
+  "prompt": "Use case: background-extraction.\nAsset type: a transparent PNG illustration scene to be placed on the right 61% of a children's English-learning award card.\nInput images: Image 1 is the EDIT TARGET and the only authority for character identity, clothing, expressions, poses and classroom scene. Image 2 is a supporting reference ONLY for the soft transparent outer-edge treatment; do not copy its people, objects, colors, or setting.\nPrimary request: faithfully extract and retain only the three-person close-up scene on the RIGHT side of Image 1. Preserve the original illustration, identities, smiling expressions, poses, brown ink outlines, warm paper texture, shapes, and colors. Do not redesign or reinterpret them.\nSubjects, exactly three: slightly behind at left is Mr. Blake, brown side-parted hair, rectangular dark-brown glasses, green jacket, ochre waistcoat, tie, holding his rust-red book against his torso. At center/front is Sophie, wavy brown hair with a golden hairclip, coral dress with white rounded collar, golden crossbody bag and strap, both hands clasping the strap at chest level. At right is Hans, short light-blond hair, yellow jacket, white shirt, green bow tie, one hand holding his shoulder strap and the other raised in a friendly wave. Preserve their exact source left-to-right arrangement, relative height and overlap. Keep every head, hair outline, hand and waving fingertip complete with modest clear margins. Preserve the source torso close-up composition; no full-body redesign, no stretching.\nScene/backdrop: retain a very light hint of the source pale-green classroom chalkboard, window and bookcase behind them. These secondary background details should softly and naturally dissolve into TRUE TRANSPARENCY at the outer perimeter, with the people remaining crisp and opaque. The lower torso edge may have a small soft paper-texture fade as in the transparency example.\nComposition/framing: approximately 1024 by 1000 pixels, near-square, natural character proportions, the three people fill the useful area without cutting hair or hands. Plain transparent surroundings, no flat rectangular white or colored background, no fake checkerboard.\nText: none.\nAvoid entirely: certificate edges, border, golden frame, every word or number, studio logo, award title, student name, stars, dates, lesson label, footer, webpage controls, buttons, watermarks, extra people, replacement characters. Only the three-person classroom scene with subtle fading classroom hints.",
+  "sources": [
+    {
+      "role": "edit target; character and classroom authority",
+      "path": "docs/award-version/visuals/2026-10-09-0010-v0.14/new-friends-closeup.png",
+      "width": 1486,
+      "height": 1059,
+      "bytes": 1687590
+    },
+    {
+      "role": "soft transparency edge format reference only",
+      "path": "assets/awards/unit1-2-handbag-closeup.png",
+      "width": 1410,
+      "height": 1116,
+      "bytes": 1599332
+    }
+  ],
+  "requested_dimensions": "approximately 1024 x 1000, natural near-square proportion",
+  "generated_original": "/Users/permission/.codex/generated_images/01a11c81-828f-7c31-bca6-619dbb177b5e/exec-5540b450-2737-4338-8635-0a0233a8f938.png",
+  "visual_check": {
+    "characters": "Mr. Blake, Sophie and Hans; source clothing, identities and poses preserved",
+    "framing": "all heads and hands complete; no stretching observed",
+    "excluded_elements": "no certificate frame, title, name, stars, date, footer, buttons or watermark",
+    "backdrop": "pale green chalkboard, window and bookcase retained with textured transparency transition",
+    "issues": "No blocking issue observed. A pale paper-texture fringe surrounds the scene; review in the final warm-paper card context."
+  },
+  "outputs": [
+    {
+      "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/unit5-6-scene.png",
+      "width": 1269,
+      "height": 1239,
+      "bytes": 2103526,
+      "hasAlpha": true,
+      "sha256": "65e8d578319e58d940de85ea04ae7760b21e6e63e1961c5d01a019c422167964",
+      "conversion": "unmodified copy of generated PNG"
+    },
+    {
+      "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/unit5-6-scene.webp",
+      "width": 1269,
+      "height": 1239,
+      "bytes": 333082,
+      "conversion": "format only: sharp WebP quality 88, effort 6; no resize or content edit"
+    }
+  ],
+  "alpha": {
+    "min": 0,
+    "max": 255,
+    "transparent_pixels": 337618,
+    "partial_pixels": 1234672,
+    "opaque_pixels": 1,
+    "total_pixels": 1572291
+  }
+}

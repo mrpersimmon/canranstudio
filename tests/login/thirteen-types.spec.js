@@ -10,7 +10,25 @@ for(const pair of ['1-2','25-26'])test(`${pair} 新题型登录后无声通关�
  try{
   first.context.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url())&&!isFeedbackAudio(r.url()))voices.push(r.url());});
   await first.page.addInitScript(()=>{HTMLMediaElement.prototype.play=()=>Promise.reject(new DOMException('Test unavailable','NotSupportedError'));});
-  await complete(first.page,pair,'/lesson');await first.page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('练习小伙伴');await first.page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await first.page.locator('#certificateDate').innerText();await first.page.keyboard.press('Escape');await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-  second=await studentLogin(browser,account);await second.page.goto(`/lesson/unit${pair}/#learn/certificate`);await expect(second.page.locator('#starCount')).toHaveText('15');await expect(second.page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('练习小伙伴');await second.page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(second.page.locator('#certificateDate')).toHaveText(date);expect(voices).toEqual([]);
+  await complete(first.page,pair,'/lesson');
+  if(pair==='1-2'){
+   await expect(first.page.locator('#certificateName')).toHaveText('练习小伙伴');
+   await expect(first.page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveCount(0);
+  }else{
+   await first.page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('练习小伙伴');
+   await first.page.getByRole('button',{name:'领取单元证书',exact:true}).click();
+  }
+  const date=await first.page.locator('#certificateDate').innerText();await first.page.keyboard.press('Escape');
+  await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  second=await studentLogin(browser,account);await second.page.goto(`/lesson/unit${pair}/#learn/certificate`);
+  await expect(second.page.locator('#starCount')).toHaveText(pair==='1-2'?'5':'15');
+  if(pair==='1-2'){
+   await expect(second.page.locator('#certificateName')).toHaveText('练习小伙伴');
+   await expect(second.page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeEnabled();
+  }else{
+   await expect(second.page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('练习小伙伴');
+   await second.page.getByRole('button',{name:'领取单元证书',exact:true}).click();
+  }
+  await expect(second.page.locator('#certificateDate')).toHaveText(date);expect(voices).toEqual([]);
  }finally{await first.context.close();await second?.context.close();}
 });

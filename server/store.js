@@ -35,6 +35,7 @@ function openStore(directory) {
     CREATE INDEX IF NOT EXISTS grants_session_expires ON grants(session,expires);
     CREATE INDEX IF NOT EXISTS grants_session_course_expires ON grants(session,course,expires DESC);
     CREATE TABLE IF NOT EXISTS progress (student TEXT NOT NULL, course TEXT NOT NULL, generation INTEGER NOT NULL DEFAULT 0, value TEXT NOT NULL DEFAULT '{}', PRIMARY KEY(student, course));
+    CREATE TABLE IF NOT EXISTS unit_awards (student TEXT NOT NULL REFERENCES students(id), course TEXT NOT NULL, edition TEXT NOT NULL, value TEXT NOT NULL, PRIMARY KEY(student, course, edition));
   `);
   const keyFile = path.join(directory, 'card-key');
   if (!fs.existsSync(keyFile) && (db.prepare('SELECT 1 FROM students LIMIT 1').get() || (db.prepare("SELECT 1 FROM sqlite_master WHERE name='teachers'").get() && db.prepare('SELECT 1 FROM teachers LIMIT 1').get()))) { db.close(); throw Error('学习卡密钥缺失，请恢复与数据库配套的 card-key；不会生成新密钥覆盖旧卡。'); }
@@ -96,6 +97,10 @@ function openStore(directory) {
   });
   const learning = learningStore(db);
   const student = who => db.prepare('SELECT id,name,classId,active,studentNumber,mustChangePassword FROM students WHERE id=?').get(who);
+  const award = (who, course, edition) => {
+    const row = db.prepare('SELECT value FROM unit_awards WHERE student=? AND course=? AND edition=?').get(who, course, edition);
+    return row ? JSON.parse(row.value) : { edition, zones: {}, firstFullStarAt: null };
+  };
   const credentials = who => db.prepare('SELECT studentNumber,loginPinyin,passwordHash,mustChangePassword FROM students WHERE id=?').get(who);
   const authThrottle = createAuthThrottle(db);
   const clearStudentFailures = who => {
@@ -242,6 +247,16 @@ function openStore(directory) {
     saveProgress(who, course, generation, value) { db.prepare('INSERT INTO progress VALUES (?,?,?,?) ON CONFLICT(student,course) DO UPDATE SET generation=excluded.generation,value=excluded.value').run(who, course, generation, JSON.stringify(value)); },
     saveLearning(who, course, generation, value, records, advanced) { return transaction(() => { this.saveProgress(who,course,generation,value);return learning.sync(who,course,generation,records,advanced); }); },
     resetLearning(who, course, generation) { return transaction(() => { this.saveProgress(who,course,generation,{});learning.reset(who,course,generation); }); },
+    award,
+    grantAwards(who, course, reward, claims) { return transaction(() => {
+      const saved = award(who, course, reward.edition), now = new Date().toISOString();
+      for (const [zone, claim] of claims) if (!saved.zones[zone]) saved.zones[zone] = { runId: claim.runId, earnedAt: now };
+      if (!saved.firstFullStarAt && reward.zones.length === 5 && reward.zones.every(zone => saved.zones[zone.id])) saved.firstFullStarAt = now;
+      // Replay, progress reset, and newer card editions cannot rewrite this row's first full-star date.
+      db.prepare('INSERT INTO unit_awards VALUES (?,?,?,?) ON CONFLICT(student,course,edition) DO UPDATE SET value=excluded.value')
+        .run(who, course, reward.edition, JSON.stringify(saved));
+      return saved;
+    }); },
     validGrant(grantId, who, course) { return !!db.prepare('SELECT id FROM grants WHERE id=? AND student=? AND course=?').get(grantId, who, course); }
   };
 }

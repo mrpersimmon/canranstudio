@@ -1,0 +1,37 @@
+{
+  "version": "v0.14",
+  "created_at": "2026-10-09T00:10:00+08:00",
+  "branch": "codex/debug-reward-version",
+  "status": "static_design_only",
+  "tool": "built-in image_gen.imagegen",
+  "use_case": "ui-mockup",
+  "references": [
+    {
+      "path": "docs/award-version/visuals/2026-10-07-1347-v0.10/handbag-closeup.png",
+      "role": "approved layout and story illustration style"
+    },
+    {
+      "path": "docs/butcher-version/evidence/2026-09-25-1643-unit5-6-classroom/story-8-1280.png",
+      "role": "Lesson 5-6 character and classroom identities"
+    }
+  ],
+  "output": {
+    "path": "new-friends-closeup.png",
+    "original_path": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-cd50d3ac-f894-4bb5-9d03-edbeec03a596.png",
+    "width": 1486,
+    "height": 1059,
+    "sha256": "75be454bd705953725eb425e747cae14f32a8698c093a033dfa2b239c5db0e3b"
+  },
+  "sample_data": {
+    "name": "小雨",
+    "stars": 5,
+    "first_full_stars_date": "2026.10.09",
+    "real_student_record": false
+  },
+  "prompt": "Edit the first reference, an approved Lesson 1–2 story certificate design, into a new Lesson 5–6 certificate design. Produce ONE polished, finished design preview. Preserve its horizontal ivory card, visual hierarchy, friendly brown outlined illustrated storybook style, tasteful paper texture, rounded shape, restrained warm gold rim, five-star row, generous whitespace, and two buttons below the card. Do not reproduce the original Lesson 1–2 title, blue palette, characters or handbag scene.\n\nUse the SECOND reference only as authoritative identity reference for the Lesson 5–6 cast and classroom. Do not reproduce its screenshot interface, speech bubbles, progress counter, labels or any lesson UI. Reinterpret the characters as an elegant, expressive close-up in the same illustration quality as the first reference.\nLesson 5–6 theme: meeting new classmates. The memorable scene on the RIGHT HALF of the card is Mr. Blake introducing Sophie to Hans, who raises a friendly hand in greeting, while Sophie turns toward Hans and smiles. Three people only. Mr. Blake stands slightly behind and to the left of the two students, making a natural open-handed introduction gesture. Medium close-up waist/chest-up composition; the students are the focus. Clear, anatomically natural hands, no tangled arms. Make the picture feel like one specific warm social moment, not a lineup or a generic group portrait.\n\nCharacter identities must match reference 2:\n- Mr. Blake: friendly adult man, short side-parted brown hair, rounded RECTANGULAR brown eyeglasses, sage green coat over mustard vest and ivory collar; can hold a small terracotta book.\n- Sophie: young woman/student, shoulder-length wavy chestnut hair with a small gold hairclip, terracotta/coral dress with ivory collar, small ochre crossbody school bag if visible; NO hat and no glasses.\n- Hans: young man/student, short sandy blond slightly tousled hair, mustard yellow jacket, ivory shirt and small sage bow tie, raised greeting hand, NO glasses.\nDo not use the blue-suited round-glasses man or straw-hat woman from reference 1. No red handbag exchange.\nBackground inside the illustration: a very faint sage classroom chalkboard, daylight window and simple bookshelf, softly disappearing into the warm ivory paper. No national flags, cars, floating badge icons, speech bubbles or extra decorative stars. Do not crowd the scene with all seven classmates.\n\nOn the LEFT HALF of the card, reproduce this precise text hierarchy in very legible, beautiful friendly rounded Chinese lettering with a restrained printed feel:\nsmall studio label at top: \"灿然英语工作室\"\nlarge achievement title in deep sage/forest green: \"新朋友小使者\"\nlarge student name in dark warm brown: \"小雨\"\nEXACTLY FIVE golden five-point stars on one clean, evenly spaced row beneath the name. No sixth star anywhere.\nsmall footer: \"Lesson 5–6 · 2026.10.09\"\nNo completion sentence, no slogan, no subtitle and no other words on the card.\n\nThis preview shows the five-star state: a complete slim warm-gold double border around the entire card, a dark brown fine external edge, subtle metallic highlight only at two corners, refined warm ivory paper. Elegant and tactile yet consistent with the flat friendly course art, not luxury heraldic metal, not photoreal, not childish plastic, not 3D mascot rendering. Preserve generous clear space around text and between the text and people.\nPage background outside the card is very pale mint/sage, instead of reference 1's blue. Two clear centered buttons below the card, same size and shape as reference 1: green primary with a small download icon and exact text \"保存纪念卡\"; warm ivory secondary with a return arrow and exact text \"返回课程\". Buttons stay outside the card.\nEntire card and both buttons fully visible, balanced margins, similar overall landscape canvas ratio and layout as reference 1. No mockup device, no collage, no alternative variants in the image, no explanatory annotations.",
+  "validation": {
+    "visual_review": "passed",
+    "runtime_integration": "not_performed",
+    "browser_tests": "not_run_static_design_only"
+  }
+}

@@ -20,12 +20,14 @@ async function choose(room, answer, next = '下一题') {
 test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('/unit1-2/#learn/ask');
-  const ask = page.locator('.stage-ask');
-  await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '2');
+  const ask = page.locator('.stage-workshop');
+  await expect(ask.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
   await expect(ask.getByRole('heading', { name: '补全问句', exact: true })).toBeVisible();
   await choose(ask, 'watch');
-  await choose(ask, '衬衫', '完成这一站');
-  await expect(ask.getByRole('button', { name: '下一站：句子小工坊', exact: true })).toBeVisible();
+  await choose(ask, '衬衫');
+  await choose(ask, {fills:['book']});
+  await choose(ask, ['Is','this','your','car'], '完成这一站');
+  await expect(ask.getByRole('button', { name: '下一站：礼貌小挑战', exact: true })).toBeVisible();
 
   await page.goto('/unit1-2/#learn/exam');
   const exam = page.locator('.stage-exam');
@@ -44,7 +46,7 @@ test('Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持�
   await choose(exam, 'Yes, it is. Thank you very much.');
   await finishExam(page, '1-2', 2);
   await expect(exam).toContainText('首次独立答对 7 / 8');
-  await expect(exam.getByRole('button', { name: '下一站：我的单元证书', exact: true })).toBeVisible();
+  await expect(exam.getByRole('button', { name: '下一站：我的单元纪念卡', exact: true })).toBeVisible();
 });
 
 test('Lesson 3–4 合并重复工坊，25题覆盖不同语言判断', async ({ page }) => {
@@ -175,9 +177,8 @@ test('Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答'
   await expect(page.locator('#starCount')).toHaveText('6');
   upgrade();
   await page.reload();
-  await expectFresh(page, 'unit1-2', 'ask', 2);
+  await expectFresh(page, 'unit1-2', 'workshop', 4);
   await expectFresh(page, 'unit1-2', 'exam', 8);
-  await expectFresh(page, 'unit1-2', 'trans', 2);
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 

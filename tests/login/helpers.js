@@ -58,8 +58,8 @@ async function signIn(page, account, base = '/lesson/') {
   }
   await expect(page.locator('.course').first()).toBeVisible();
 }
-async function studentLogin(browser, account) {
+async function studentLogin(browser, account, base = '/lesson/') {
   const context = await browser.newContext(); const page = await context.newPage();
-  await signIn(page, account); return { context, page };
+  await signIn(page, account, base); return { context, page };
 }
 module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, readInitialPassword };

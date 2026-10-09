@@ -35,6 +35,32 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   const date=await old.locator('#certificateDate').innerText();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
   await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(root);
   const current=await device();await signIn(current,account,'/');await current.goto('/'+unit+'/#learn/certificate');
+  if(pair==='1-2'){
+   await expect(current.locator('#starCount')).toHaveText('0');
+   await expect(current.locator('#certificateName')).toHaveText('测试小伙伴');
+   await expect(current.locator('#certificateDate')).toBeHidden();
+   const flow=require('../support/thirteen-types-flow');
+   await flow.story(current,pair);
+   for(const id of Object.keys(flow.ANSWERS[pair]))await flow.activity(current,pair,id);
+   // Start a new complete round after carrying forward compatible historical work.
+   for(const id of Object.keys(flow.ANSWERS[pair])){
+    await current.goto('/'+unit+'/#learn/'+id);
+    await current.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();
+    await flow.activity(current,pair,id);
+   }
+   await current.goto('/'+unit+'/#learn/certificate');
+   await expect(current.locator('#starCount')).toHaveText('5');
+   await expect(current.locator('#certificateDate')).toBeVisible();
+   const fullDate=await current.locator('#certificateDate').innerText();
+   await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+   const restored=await device();await signIn(restored,account,'/');
+   await expect(restored.locator('.course')).toContainText('5 / 5');
+   await restored.goto('/'+unit+'/#learn/certificate');
+   await expect(restored.locator('#certificateName')).toHaveText('测试小伙伴');
+   await expect(restored.locator('#starCount')).toHaveText('5');
+   await expect(restored.locator('#certificateDate')).toHaveText(fullDate);
+   return;
+  }
   await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');
   if(['1-2','25-26'].includes(pair)){
    await require('../support/thirteen-types-flow').complete(current,pair);

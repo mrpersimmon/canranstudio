@@ -1,0 +1,69 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "status": "concepts-awaiting-user-selection",
+  "display_order_source": "actual generated-image order in this conversation",
+  "reference": "existing Lesson 1–2 certificate screenshot; collection images additionally reference the enamel medal",
+  "sample_name": "小雨 (fictional)",
+  "images": [
+    {
+      "display_number": 1,
+      "concept": "暖金珐琅",
+      "file": "medal-enamel.png",
+      "prompt": "enamel.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-8c6bbb10-4461-46a6-8476-1335d8a4e91b.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "9357c5dd259f6faf28815948af57ef254c38b8fefbb6a2b08b61f76192426b10"
+    },
+    {
+      "display_number": 2,
+      "concept": "软陶故事章",
+      "file": "medal-clay.png",
+      "prompt": "clay.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-112e671f-731a-49fb-98e6-c33175da8c7f.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "7ab53aa9124f7dea16e36fa77361bf3fb6949b03a5a007f3a312638afe0d8636"
+    },
+    {
+      "display_number": 3,
+      "concept": "复古绶带章",
+      "file": "medal-ribbon.png",
+      "prompt": "ribbon.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-59e7f930-896a-4ff0-bd85-1347ba7dfab7.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "03b8964722f29a77bb4f62660db27422d418202ab531d5283fc97e1c51ad9d5d"
+    },
+    {
+      "display_number": 4,
+      "concept": "暖木陈列柜",
+      "file": "room-cabinet.png",
+      "prompt": "cabinet.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-01941aa5-60b1-4f90-91bd-21af225b5ada.png",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "dd8b5c15d696c672e3d520d3b64196538c93114eb1d1704de3a6dc8b35f21d7e"
+    },
+    {
+      "display_number": 5,
+      "concept": "绘本收藏册",
+      "file": "room-album.png",
+      "prompt": "album.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-6a0a5107-aacc-4c02-96da-7b7b189729d6.png",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "344fa5196813bc5811479294a6cadd0d26d791732659b662bd1b9adf8dd3fba2"
+    },
+    {
+      "display_number": 6,
+      "concept": "故事收藏角",
+      "file": "room-corner.png",
+      "prompt": "corner.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-5575a39f-92db-43ab-af67-46ed3968239f.png",
+      "width": 1487,
+      "height": 1058,
+      "sha256": "5cc71158bce5c8356133eaad33813786e4cab0af91b9f5661717886856f013b1"
+    }
+  ]
+}

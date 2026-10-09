@@ -1,0 +1,33 @@
+{
+  "generatedWith": "Built-in image_gen imagegen",
+  "operation": "Extract the upper-left cream paper photograph corner from the approved book design",
+  "primaryReference": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/docs/award-version/visuals/2026-10-09-0101-v0.16/open-book.png",
+  "rawGeneratedSource": {
+    "path": "/Users/permission/.codex/generated_images/01a11c80-178e-7922-bea0-dc8c5dbe2588/exec-01c9d62b-e69f-4d53-9937-79712d5d624d.png",
+    "width": 1254,
+    "height": 1254,
+    "hasAlpha": true,
+    "bytes": 1088910,
+    "sha256": "bd81f064f328dbad8e7901b44a6daf6564af08a5b27e6ba23e9b5ec8af6135e0"
+  },
+  "png": {
+    "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/photo-corner.png",
+    "width": 128,
+    "height": 128,
+    "hasAlpha": true,
+    "bytes": 11882,
+    "sha256": "6bdba0edaf3da1b28d20dee20ab5f0c72949cbc9b8e6dcaf66078442951e996f"
+  },
+  "webp": {
+    "path": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/photo-corner.webp",
+    "width": 128,
+    "height": 128,
+    "hasAlpha": true,
+    "bytes": 3768,
+    "sha256": "9317305a1667f70c2c6ab4299d383064cde6dff9ac27fbb65fd35448671650ce"
+  },
+  "optimization": "Sharp proportional resize to 128 by 128 pixels, then PNG and WebP encoding only. No crop, masking, drawing, or composition change.",
+  "orientation": "Right angle at upper-left; empty transparent lower-right half",
+  "promptPath": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/poc/award-book-assets/photo-corner.prompt.txt",
+  "visualInspection": "Single cream paper triangle with warm brown outline and subtle diagonal fold. No book, card, text, number or ornament. Real page placement and overlap validation belongs to the integrator."
+}

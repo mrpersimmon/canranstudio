@@ -1,0 +1,38 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "status": "unselected visual concepts, not implemented",
+  "display_order_source": "the three generated-image results actually displayed in the v0.3 conversation round",
+  "reference_usage": "v0.2 enamel medal attached as a rejected visual direction; only lesson motif and sample name retained",
+  "images": [
+    {
+      "display_number": 1,
+      "name": "瓷白金边",
+      "file": "porcelain.png",
+      "prompt": "porcelain.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-af241b76-5bac-46c9-8fc3-780b026f48a0.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "d988315323c31baa285da100030409ccd398ac8ec114eef4f4d0a77fba29cfca"
+    },
+    {
+      "display_number": 2,
+      "name": "深翡珐琅",
+      "file": "jade.png",
+      "prompt": "jade.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-250d2422-5169-4367-9b4b-47948dee5f6a.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "f1dee145f31e5fcaba97f44f9871572c72894284bf3f3283ec06641f3a494840"
+    },
+    {
+      "display_number": 3,
+      "name": "礼遇浮雕",
+      "file": "relief.png",
+      "prompt": "relief.prompt.txt",
+      "source_file": "/Users/permission/.codex/generated_images/01a0de3a-a9ba-7a63-b169-f49f80715322/exec-205ae45e-ba44-4b72-8a69-356344a92782.png",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "b2db8cee69bc0663a13a569f487606d4e5617c9b9edbe452c6dfb8e0ba4db9f3"
+    }
+  ]
+}

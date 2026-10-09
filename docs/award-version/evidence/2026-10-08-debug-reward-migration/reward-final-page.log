@@ -1,0 +1,22 @@
+
+Running 14 tests using 1 worker
+
+(node:32265) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/14] tests/e2e/unit-dedup.spec.js:20:1 › Lesson 1–2 场景找物不重做物品替换队列，八题挑战保持各自判断
+[2/14] tests/e2e/unit-dedup.spec.js:172:1 › Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答
+[3/14] tests/e2e/unit1-2-award-migration.spec.js:7:1 › 当前25题旧记录合并五区，不自动发星；新挑战全对后得星
+[4/14] tests/e2e/unit1-2-award.spec.js:5:1 › 新纪念卡显示五个答题区，未获星时没有满星日期
+[5/14] tests/e2e/unit1-2-award.spec.js:19:1 › 错答订正、刷新不获星；重练整区零错才获星，已获星不会被新错答撤回
+[6/14] tests/e2e/unit1-2-award.spec.js:43:1 › 线索单独记录，整轮首次提交全对仍可获星
+[7/14] tests/e2e/unit1-2-certificate.spec.js:17:39 › 320 像素纪念卡居中适度展示，匿名预览不填名也不导出
+[8/14] tests/e2e/unit1-2-certificate.spec.js:17:39 › 390 像素纪念卡居中适度展示，匿名预览不填名也不导出
+[9/14] tests/e2e/unit1-2-certificate.spec.js:17:39 › 768 像素纪念卡居中适度展示，匿名预览不填名也不导出
+[10/14] tests/e2e/unit1-2-certificate.spec.js:17:39 › 1280 像素纪念卡居中适度展示，匿名预览不填名也不导出
+[11/14] tests/e2e/unit1-2-certificate.spec.js:38:1 › 练习纸仍独立打印，不包含纪念卡姓名输入
+[12/14] tests/e2e/unit1-2-certificate.spec.js:49:1 › 新版纪念卡独立计星，切回原版仍保留已获五星和日期
+[13/14] tests/e2e/unit1-2-vocabulary-standard.spec.js:15:34 › 320 像素：21 张词卡正面有美式音标，点读翻面、再翻回与刷新不丢失
+[14/14] tests/e2e/unit1-2-vocabulary-standard.spec.js:15:34 › 1280 像素：21 张词卡正面有美式音标，点读翻面、再翻回与刷新不丢失
+  14 passed (21.2s)

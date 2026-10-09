@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "check": "desktop-red/single",
+      "passed": false,
+      "failures": [
+        "The turning page replaces the original book paper.",
+        "A navigation button changes color while the page is turning."
+      ],
+      "activeFrames": 83,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "mobile-red/single",
+      "passed": false,
+      "failures": [
+        "The mobile sheet fades and changes the card colors.",
+        "A navigation button changes color while the page is turning."
+      ],
+      "activeFrames": 68,
+      "minimumOpacity": 0
+    },
+    {
+      "check": "desktop-green/back",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 73,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "desktop-green/next",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 75,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "mobile-green/back",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 5,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "mobile-green/next",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 79,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "mobile320-green/back",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 82,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "mobile320-green/next",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 72,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "desktop-large-green/next",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 35,
+      "minimumOpacity": 1
+    },
+    {
+      "check": "desktop-large-green/back",
+      "passed": true,
+      "failures": [],
+      "activeFrames": 85,
+      "minimumOpacity": 1
+    }
+  ],
+  "additionalBehavior": {
+    "rapidDoubleClick": "mobile page 1 -> 2, did not skip to 3",
+    "reducedMotion": "page 2 -> 3, no transient sheet, final boundary disabled",
+    "dialog": "Lesson 5–6 opens after turn and returns",
+    "narrowWidth": {
+      "viewport": 320,
+      "scrollWidth": 320
+    },
+    "consoleWarningsAndErrors": 0
+  },
+  "scope": "Local IAB rendering only; no physical Android/WeChat verification; no account integration, commit, push, or deployment."
+}

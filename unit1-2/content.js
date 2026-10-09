@@ -290,3 +290,25 @@ unit.questions["exam"][7]]};
   unit.typeCoverage.adaptations.E07='键盘拼写已移除；点击补全归入 E09，不计为 E07。';
   unit.experienceVersion='classroom-clicks-1';
 })(globalThis.CanranCore);
+
+// Five-zone keepsake edition. Preserve all 25 current classroom questions.
+(function(core){
+  'use strict';
+  const unit=core.unit12, oldIds=['ask','trans'];
+  const sources=oldIds.flatMap(id=>[
+    {key:'unit12-'+id+'-practice/'+unit.taskSessions[id],questions:unit.questions[id]},
+    ...(unit.taskPredecessors[id]||[])
+  ]);
+  unit.questions.workshop=oldIds.flatMap(id=>unit.questions[id]);
+  unit.taskPredecessors.workshop=sources;unit.taskSessions.workshop='award-workshop-v1';
+  for(const id of oldIds){delete unit.questions[id];delete unit.taskSessions[id];delete unit.taskPredecessors[id];}
+  Object.assign(unit.stages.find(stage=>stage.id==='l4'),{
+    activities:[['workshop','问句小工坊','order']],required:['workshop']
+  });
+  unit.stages.find(stage=>stage.id==='l5').activities.find(item=>item[0]==='certificate')[1]='我的单元纪念卡';
+  unit.routeAliases={'learn/ask':'learn/workshop','learn/trans':'learn/workshop'};
+  unit.reward={edition: 'story-card-v1',title:'礼貌小帮手',zones:[
+    ['listen','单词寻宝'],['roles','故事小侦探'],['manners','帮忙还手提包'],
+    ['workshop','问句小工坊'],['exam','礼貌小挑战']
+  ].map(([id,title])=>({id,title}))};
+})(globalThis.CanranCore);

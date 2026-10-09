@@ -8,6 +8,7 @@ const { createCoursePackages } = require('../scripts/course-packages');
 const progress = require('./progress');
 const learning = require('./learning');
 const { createManagement } = require('./management');
+const { validClaim } = require('../core/award-rules');
 const {retainPackages}=require('./bundles');
 const { passwordProblem } = require('./student-credentials');
 const { clientAddress } = require('./client-address');
@@ -45,6 +46,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   }));
   const definitions = Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,id,BASE)]));
   const currentProgress = (studentId, course) => { const saved = store.progress(studentId, course); return { ...saved, value: progress.normalize(saved.value, definitions[course], course) }; };
+  const currentAwards = (studentId, course) => definitions[course].reward ? store.award(studentId, course, definitions[course].reward.edition) : null;
   function throttle(request, kind, credential) {
     store.authThrottle.check(clientAddress(request, trustProxy), kind, credential);
   }
@@ -172,7 +174,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             if (student.mustChangePassword || auth.role === 'student-setup') return json(response, { student, mustChangePassword: true, courses: [] });
           }
           const who = identity(request, url.searchParams.get('preview'));
-          return json(response, { ...who, auth: undefined, courses: descriptions.filter(c => who.courses.includes(c.id)).map(c=>({...c,...progress.summary(who.preview?{}:store.progress(who.student.id,c.id).value,definitions[c.id],c.id,who.preview?null:store.learning.award(who.student.id,c.id,definitions[c.id].reward?.edition||''))})) });
+          return json(response, { ...who, auth: undefined, courses: descriptions.filter(c => who.courses.includes(c.id)).map(c=>({...c,...progress.summary(who.preview?{}:store.progress(who.student.id,c.id).value,definitions[c.id],c.id,who.preview?null:currentAwards(who.student.id,c.id))})) });
         }
         const entering = relative.match(/^api\/courses\/(unit\d+-\d+)\/enter$/);
         const permitting = relative.match(/^api\/courses\/(unit\d+-\d+)\/permit$/);
@@ -187,7 +189,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
           if(!who.preview)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
-          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
+          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
         }
         if (relative === 'api/progress' && input) {
           const {auth} = studentSession(request), course = input.course;
@@ -197,8 +199,11 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           const before=progress.normalize(current.value,definitions[course],course);
           const value = progress.merge(before,progress.normalize(input.value,definitions[course],course));
           const advanced=Object.keys(value.activity.unitCompleted).some(id=>!before.activity.unitCompleted[id]);
+          const unit = definitions[course];
+          const claims = Object.entries(input.value?.activity?.unitAwardClaims || {}).filter(([zone, claim]) => validClaim(unit, zone, claim));
+          const awards = unit.reward ? store.grantAwards(auth.subject, course, unit.reward, claims) : null;
           store.saveLearning(auth.subject,course,current.generation,value,learning.submissions(input.observations,definitions[course],course,before),advanced);
-          return json(response,{ok:true});
+          return json(response,{ok:true,awards});
         }
         if (relative === 'api/progress/reset' && input) {
           const who=identity(request),course=input.course;

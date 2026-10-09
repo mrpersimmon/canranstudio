@@ -1,0 +1,29 @@
+{
+  "asset": "unit3-4-scene",
+  "generator": "built-in image_gen",
+  "useCase": "background-extraction",
+  "originalGeneratedPath": "/Users/permission/.codex/generated_images/01a11c80-d807-7573-9c66-b0902c2ee204/exec-4f9f8d6e-55a6-4c0f-8ec6-6a7fde5a0f6e.png",
+  "editTarget": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/docs/award-version/visuals/2026-10-07-1327-v0.9/counter.png",
+  "transparencyReference": "/Users/permission/.codex/worktrees/debug-reward-version/canranstudio.cn/assets/awards/unit1-2-handbag-closeup.png",
+  "requestedApproximateSize": {
+    "width": 1024,
+    "height": 1000
+  },
+  "actualSize": {
+    "width": 1444,
+    "height": 1089
+  },
+  "pngBytes": 2038674,
+  "hasAlpha": true,
+  "alphaNotes": "All four corners are fully transparent. Sampled face, clothing, umbrella and counter alpha is 253/255 (99.2% opacity); retained exactly as produced by image_gen. Background edges fade through partial alpha.",
+  "transformations": "Original PNG copied byte for byte. WebP is a format-compressed derivative only; no crop, resize, stretch, retouch, or alpha adjustment.",
+  "visualInspection": [
+    "Guest cap and umbrella top are fully visible with margin.",
+    "Original guest/clerks identities, actions, green/plum wardrobe, purple dotted umbrella, brown coat and warm wooden counter retained.",
+    "Single digit 5 remains on the cloakroom prop sign; no certificate frame, brand, name, stars, lesson labels or buttons.",
+    "Pale lavender backdrop and clothing rails fade to transparent around the silhouette.",
+    "Generated natural aspect ratio is wider than the approximate requested canvas. Retained without distortion; use contain or natural sizing."
+  ],
+  "promptFile": "unit3-4-scene.prompt.txt",
+  "webpBytes": 415500
+}
