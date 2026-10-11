@@ -20,7 +20,7 @@ test('学号密码进入自己的班级，七项下架且旧直链不能越权',
   await expect(student.getByRole('heading',{name:'小明的课程'})).toBeVisible();
   await expect(student.locator('.course')).toHaveCount(1);
   await student.locator('.course .primary-button').click();
-  await expect(student.getByRole('heading',{name:'物品小图鉴',exact:true})).toBeVisible();
+  await expect(student.getByRole('heading',{name:'单词小图鉴',exact:true})).toBeVisible();
   await student.goto('/lesson/unit3-4/');
   await expect(student.getByRole('heading',{name:'这节课还没向你的班级开放'})).toBeVisible();
   for (const id of ['lesson49','lesson50','lesson51','lesson52','lesson53','lesson54','soundmark']) {

@@ -1,0 +1,15 @@
+/* The collected card keeps the settlement's quiet star light. These effects
+   are independent of the user's separate page-turn animation preference. */
+@property --book-gold-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+.certificate .award-star{position:relative;display:inline-flex;flex:none;isolation:isolate}
+.certificate .award-star img{display:block;position:relative;z-index:1}
+.certificate .award-star[data-earned='true'] img{filter:brightness(1.13) saturate(1.18) drop-shadow(0 0 3px #ffd561b3)}
+.certificate .award-star[data-earned='true']::before{content:'';position:absolute;inset:-20%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#ffd8655c,transparent 69%)}
+.certificate .award-star[data-earned='true']::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(112deg,transparent 35%,#fff7c680 43%,#fffdf5ed 48%,#ffeaa580 53%,transparent 63%) 180% 0/260% 100%;mask:var(--earned-star) center/contain no-repeat;-webkit-mask:var(--earned-star) center/contain no-repeat;animation:book-star-sheen 4.8s ease-in-out infinite;animation-delay:calc(var(--star-order) * -.32s)}
+.certificate .star-glint{position:absolute;inset:0;z-index:3;pointer-events:none;animation:book-star-twinkle 4.8s ease-in-out infinite;animation-delay:calc(var(--star-order) * -.32s)}
+.certificate .star-glint::before,.certificate .star-glint::after{content:'';position:absolute;background:#fffce8;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 3px #ffda75)}
+.certificate .star-glint::before{width:32%;height:42%;top:3%;right:10%}.certificate .star-glint::after{width:20%;height:27%;bottom:7%;left:11%}
+@keyframes book-star-sheen{0%,8%{opacity:0;background-position:180% 0}20%{opacity:.85}42%{opacity:0;background-position:-80% 0}100%{opacity:0;background-position:-80% 0}}
+@keyframes book-star-twinkle{0%,5%,50%,100%{opacity:.22;transform:scale(.8)}23%{opacity:1;transform:scale(1.14)}36%{opacity:.6;transform:scale(1)}}
+.certificate .gold-light-ring{position:absolute;inset:0;z-index:3;padding:clamp(3px,1cqw,6px);border-radius:inherit;pointer-events:none;background:conic-gradient(from var(--book-gold-angle),#d7962e 0deg,#edba52 40deg,#ffe7a1 58deg,#fffde5 70deg,#ffe098 81deg,#dca33b 105deg,#b97922 170deg,#eeb94c 220deg,#fff5cf 247deg,#e3a33d 275deg,#b97922 325deg,#d7962e 360deg);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;animation:book-gold-orbit 5.8s linear infinite}
+@keyframes book-gold-orbit{from{--book-gold-angle:0deg}to{--book-gold-angle:360deg}}

@@ -1,4 +1,4 @@
-/* One story result, three fixed cards, one clear onward action. */
+/* One story result, three compact metrics, one onward action. */
 .unit12-workspace .practice-finish.completion-card{
  width:min(620px,100%);margin:0 auto;gap:0;padding:8px 0 14px;
 }
@@ -20,6 +20,8 @@
 .unit12-workspace .completion-card>p.completion-award{font-size:15px;line-height:1.5;font-weight:500;max-width:540px;margin:18px 0 0;color:var(--brown);text-wrap:balance}
 .unit12-workspace .completion-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:min(540px,100%);margin:27px 0 0;padding:0;list-style:none}
 .unit12-workspace .completion-stat{--stat-color:#E6BA61;min-width:0;overflow:hidden;border:3px solid var(--stat-color);border-radius:20px;background:#FFFDF8;box-shadow:0 3px 0 var(--stat-color)}
+.unit12-workspace .completion-stat:first-child{transform-origin:left center}
+.unit12-workspace .completion-stat:last-child{transform-origin:right center}
 .unit12-workspace .stat-correct{--stat-color:#98BEA0}.unit12-workspace .stat-incorrect{--stat-color:#E2AD94}
 .unit12-workspace .completion-stat-label{display:block;padding:6px 3px 7px;background:var(--stat-color);font-size:16px;line-height:1.5;white-space:nowrap;color:#4A3226}
 .unit12-workspace .completion-stat-value{display:flex;align-items:center;justify-content:center;gap:7px;min-height:84px;padding:12px 6px 10px}
@@ -52,9 +54,7 @@
  .unit12-workspace .completion-next-prefix{font-size:12px}
  .unit12-workspace .completion-next-name{white-space:nowrap}
 }
-@media(prefers-reduced-motion:no-preference){
  .unit12-workspace .completion-card.is-celebrating .completion-art{animation:completion-pop .65s ease-out both}
  .unit12-workspace .completion-card.is-celebrating .completion-spark{animation:completion-spark .8s ease-out both}
  @keyframes completion-pop{0%{transform:scale(.93) translateY(8px)}55%{transform:scale(1.035) translateY(-3px)}100%{transform:none}}
  @keyframes completion-spark{0%{opacity:0}40%,100%{opacity:1}}
-}

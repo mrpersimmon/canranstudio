@@ -7,8 +7,8 @@ for(const pair of ['1-2','25-26'])for(const base of ['','/lesson'])test(`${pair}
  await page.addInitScript(()=>{window.voiceCalls=0;speechSynthesis.speak=()=>voiceCalls++;});
  await complete(page,pair,base);expect(audio.every(url=>url.includes('/assets/feedback/')||/\/resources\//.test(url))).toBe(true);expect(await page.evaluate(()=>voiceCalls)).toBe(0);expect(errors).toEqual([]);
  if(pair==='1-2'){
-  const card=page.getByRole('article',{name:'我的单元纪念卡'});await expect(card).toHaveAttribute('data-stars','5');
-  await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+  const card=page.getByRole('article',{name:'我的纪念卡'});await expect(card).toHaveAttribute('data-stars','5');
+  await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
   await expect(card.locator('#certificateName')).toHaveText('登录后显示姓名');
   const date=await card.locator('time').innerText();await page.reload();await expect(card.locator('time')).toHaveText(date);return;
  }
@@ -19,10 +19,10 @@ for(const pair of ['1-2','25-26'])for(const base of ['','/lesson'])test(`${pair}
 });
 test('辨认问句保存选择，错误只重试，新题保持未答',async({page})=>{
  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans'),check=room.getByRole('button',{name:'检查答案',exact:true});
- await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('再看看。');
  await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'Is this your book?');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
  await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(check).toBeDisabled();
- await page.getByRole('button',{name:'学习手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('修正后完成');
+ await page.getByRole('button',{name:'学习记录',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('订正完成');
 });
 test('中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正',async({page})=>{
  await page.goto('/unit25-26/#learn/observe');const room=page.locator('.stage-observe'),bank=room.getByRole('group',{name:'待选词块',exact:true}),chosen=room.getByRole('group',{name:'已选词块',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});

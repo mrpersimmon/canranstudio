@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/node_modules/.bin/playwright",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/award-book.spec.js",
+      "-g",
+      "素材失败|离开课程的待同步成果",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/playwright.login.config.js",
+    "rootDir": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/output/test-login",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4298/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "award-book.spec.js",
+      "file": "award-book.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "素材失败只显示可重试加载页，网络恢复后整册显示",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T02:23:47.058Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e617c637b999dab18fec-79efcf800d41c578da86",
+          "file": "award-book.spec.js",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "离开课程的待同步成果由纪念册恢复上传，长姓名不裁切",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6076,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T02:23:52.874Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e617c637b999dab18fec-67ace40eb9d42a3a0d36",
+          "file": "award-book.spec.js",
+          "line": 97,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T02:23:44.556Z",
+    "duration": 14506.071,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

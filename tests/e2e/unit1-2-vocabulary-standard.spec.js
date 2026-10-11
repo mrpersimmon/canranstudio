@@ -24,9 +24,9 @@ for (const width of [320, 1280]) test(`${width} 像素：21 张词卡正面有�
   });
   await page.goto('/unit1-2/#learn/words');
   await page.evaluate(() => document.fonts.ready);
-  const words = page.getByRole('region', { name: '物品小图鉴', exact: true });
+  const words = page.getByRole('region', { name: '单词小图鉴', exact: true });
   for (let i = 0; i < vocabulary.length; i++) {
-    if (i && i % 6 === 0) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+    if (i && i % 6 === 0) await words.getByRole('button', { name: '下一组', exact: true }).click();
     const [en, ph] = vocabulary[i], card = words.getByRole('button', { name: en, exact: true });
     const pronunciation = card.getByText(ph, { exact: true });
     await expect(pronunciation).toBeVisible();
@@ -45,7 +45,7 @@ for (const width of [320, 1280]) test(`${width} 像素：21 张词卡正面有�
   }
   await page.reload();
   await expect(words.getByRole('button', { name: 'very much', exact: true }).getByText('/ˈveri mʌtʃ/', { exact: true })).toBeVisible();
-  for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '上一组词卡', exact: true }).click();
+  for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '上一组', exact: true }).click();
   await expect(words.getByRole('button', { name: 'handbag', exact: true }).getByText('/ˈhændbæɡ/', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
   await words.screenshot({ path: `output/playwright/unit12-standard/words-${width}.png` });

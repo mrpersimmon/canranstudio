@@ -35,7 +35,7 @@ test('清理课程资源保留学习位置、活动课程和官网缓存', async
   await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
   const other = await context.newPage();
   await other.goto('/lesson/unit1-2/#learn/words');
-  await expect(other.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
+  await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
   await page.goto('/lesson/');
   await page.evaluate(async () => {
     const cache = await caches.open('root-site-cache');
@@ -47,7 +47,7 @@ test('清理课程资源保留学习位置、活动课程和官网缓存', async
   expect(await page.evaluate(async () => (await (await caches.open('root-site-cache')).match('/root-site-file')).text())).toBe('official-site');
   await context.setOffline(true);
   await other.reload();
-  await expect(other.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
+  await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
   await context.setOffline(false);
   await page.goto('/lesson/unit29-30/#learn/words');
   await expect(page.locator('.stage-words')).toContainText('2 / 5');
@@ -61,11 +61,11 @@ for (const fault of ['404', 'html', 'corrupt', 'font']) test(fault + ' 失败留
     : route.continue());
   await page.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
   await expect(page.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).not.toBeVisible();
+  await expect(page.getByRole('heading', { name: '单词小图鉴', exact: true })).not.toBeVisible();
   const before = new Map(requests);
   broken = false;
   await page.getByRole('button', { name: '再试一次', exact: true }).click();
-  await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
   for (const [url, count] of before) if (!/\/handbag\.svg$|\.woff2$/.test(url)) expect(requests.get(url)).toBe(count);
 });
 
@@ -107,12 +107,12 @@ test('整课的手提包尚未准备好时留在加载页，准备好后完整�
   await page.route(/handbag\.svg(?:\?|$)/, async route => { await held; await route.continue(); });
   try {
     await page.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
-    await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).not.toBeVisible();
+    await expect(page.getByRole('heading', { name: '单词小图鉴', exact: true })).not.toBeVisible();
     await expect(page.getByRole('status', { name: '课程准备状态', exact: true })).toContainText('准备');
   } finally {
     release();
   }
-  await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
   await expect(page.getByRole('status', { name: '课程准备状态', exact: true })).toHaveCount(0);
   await expect.poll(() => page.locator('.stage-words img').evaluateAll(images =>
     images.every(image => image.complete && image.naturalWidth > 0)

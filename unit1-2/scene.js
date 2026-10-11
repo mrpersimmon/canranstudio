@@ -74,14 +74,14 @@
         bag.alt = returned ? '已经交到女士手中的手提包' : '等待归还的手提包';
       }
       targets.forEach((target, label) => target.classList.toggle('is-found', correct && label === value));
-      found.textContent = correct ? ({ attention: '她停下来了。', repeat: '这次，她听清了。', confirm: '手提包回到你手中了。', return: '手提包回到主人手中了。', thanks: '一次有礼貌的帮助，完成了！', find: '找到问到的物品了。' }[question.scene.beat]) : '';
+      found.textContent = correct ? ({ attention: '她停下来了。', repeat: '这次，她听清了。', confirm: '手提包回到你手中了。', return: '手提包回到主人手中了。', thanks: '', find: '找到问到的物品了。' }[question.scene.beat]) : '';
     }
     function completion() {
       const result = node('div', 'handbag-keepsake');
       const pair = node('div', 'keepsake-pair');
       const recipient = node('div', 'keepsake-recipient'); recipient.append(image('woman'), image('handbag', '女士拿回了手提包'));
       pair.append(image('man'), recipient);
-      result.append(pair, node('p', 'keepsake-thanks', 'Thank you very much.'), node('p', 'keepsake-caption', '你帮他们完成了一次有礼貌的相遇。'));
+      result.append(pair, node('p', 'keepsake-thanks', 'Thank you very much.'));
       return result;
     }
     return { supports: q => Boolean(q.scene), present, answer, finish() {}, heading: () => heading?.isConnected ? heading : element.querySelector('.practice-finish > p'), completion };

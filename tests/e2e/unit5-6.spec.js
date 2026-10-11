@@ -32,13 +32,13 @@ test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并�
 test('真实完成20句和26题获得五星，日期固定、重练连续，各单元记录独立',async({page})=>{
  test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));await completeUnit56(page);
  const card=page.getByRole('article',{name:'我的单元纪念卡'});await expect(card.getByRole('img',{name:'布莱克先生和苏菲、汉斯在教室见面'})).toBeVisible();
- await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+ await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
  const date=await page.locator('#certificateDate').innerText();
  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:844});expect(await card.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);}
  await page.reload();await expect(page.locator('#certificateDate')).toHaveText(date);
  await page.goto('/unit5-6/#learn/listen');const room=page.locator('.stage-listen');await room.getByRole('button',{name:'再练一轮',exact:true}).click();
  await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('5');
- for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:other==='unit49-50'?'领取单元证书':'保存纪念卡',exact:true})).toBeDisabled();}
+ for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:other==='unit49-50'?'领取单元证书':'保存动图',exact:true})).toBeDisabled();}
  expect(errors).toEqual([]);
 });
 

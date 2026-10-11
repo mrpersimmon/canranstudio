@@ -45,6 +45,7 @@ EXAMS['1-2'][2]={prompt:'选出词义和它指的物品',answer:{fills:['你的'
 EXAMS['1-2'][6]={prompt:'把这句话变成问句',answer:['Is','this','your coat']};
 EXAMS['1-2'][7]={prompt:'问的是哪件物品？',answer:'房子'};
 EXAMS['1-2'].push({prompt:'问自己：我准备好了吗？',answer:['Am','I','ready']},{prompt:'完成角色猜谜的一问一答',answer:{fills:['Are','am']}});
+EXAMS['1-2'].forEach((q, i) => { q.prompt = ['帮女士完成对话', '手表不是你的，你怎么回答？', '读对话，选一选', '没听清，请同学再说一遍', '想叫住同学，先说什么？', 'Is this your pencil?', '把这句话变成问句', '问的是哪件物品？', '问自己：我准备好了吗？', '你扮演学生，完成对话'][i]; });
 async function choose(room, question) {
   if (question.audio) {
     await room.getByRole('button', { name: '听一遍', exact: true }).click();
@@ -62,7 +63,7 @@ async function finishExam(page, unit, start = 0) {
     await choose(room, questions[i]);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
-    await room.getByRole('button', { name: i === questions.length - 1 ? '查看本次记录' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === questions.length - 1 ? unit === '1-2' ? '完成挑战' : '查看本次记录' : '下一题', exact: true }).click();
   }
 }
 module.exports = { EXAMS, choose, finishExam };

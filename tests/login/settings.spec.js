@@ -21,7 +21,7 @@ async function appearance(dialog) {
 }
 
 async function openSettings(page) {
-  const trigger=page.getByRole('button',{name:'界面体验 · 学习设置'});
+  const trigger=page.getByRole('button',{name:/(^学习设置$|^界面体验 · 学习设置$)/});
   await expect(trigger).toBeVisible();
   const rect=await trigger.boundingBox();
   // A real tap on the visible sticky header; locator.click's automatic scrolling
@@ -29,7 +29,7 @@ async function openSettings(page) {
   expect(rect.y).toBeGreaterThanOrEqual(0);
   expect(rect.y+rect.height).toBeLessThanOrEqual(page.viewportSize().height);
   await page.mouse.click(rect.x+rect.width/2,rect.y+rect.height/2);
-  const dialog=page.getByRole('dialog',{name:/^界面体验的\s*学习设置$/});
+  const dialog=page.getByRole('dialog',{name:/^(界面体验的\s*)?学习设置$/});
   await expect(dialog).toBeVisible();
   return dialog;
 }
@@ -68,7 +68,7 @@ test('学习设置在屏幕中间，按钮文字清晰且关闭不改变学习',
     await expect(dialog).toHaveCount(0);
     expect(student.page.url()).toBe(before.url);await expect(student.page.locator('#starCount')).toHaveText(before.stars);
     expect(await student.page.evaluate(()=>scrollY)).toBe(before.scroll);
-    await expect(student.page.getByRole('button',{name:'界面体验 · 学习设置'})).toBeFocused();
+    await expect(student.page.getByRole('button',{name:/(^学习设置$|^界面体验 · 学习设置$)/})).toBeFocused();
   } finally { await student.context.close(); }
 });
 
@@ -93,7 +93,7 @@ test('16 个单元的学习设置在桌面和手机均清晰居中，Escape 返�
       await student.page.keyboard.press('Escape');
       await expect(dialog).toHaveCount(0);
       await expect(student.page).toHaveURL(new RegExp(`/${course}/#learn/words$`));
-      await expect(student.page.getByRole('button',{name:'界面体验 · 学习设置'})).toBeFocused();
+      await expect(student.page.getByRole('button',{name:/(^学习设置$|^界面体验 · 学习设置$)/})).toBeFocused();
     });
   }finally{await student.context.close();}
 });

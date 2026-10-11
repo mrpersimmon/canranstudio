@@ -15,13 +15,13 @@ for(const width of [320,1280])test(`${width} 所有无配音单元共用简洁�
   await expect(controls.locator('button:visible')).toHaveCount(1);
   const initial=await controls.getByRole('button').boundingBox(),container=await controls.boundingBox();
   expect(Math.abs(initial.x+initial.width/2-container.x-container.width/2)).toBeLessThan(2);
-  await controls.getByRole('button',{name:'开始看课文',exact:true}).click();
+  await controls.getByRole('button',{name:pair==='1-2'?'开始故事':'开始看课文',exact:true}).click();
   await expect(room.getByRole('status')).toHaveText(/^1 \/ \d+$/);
   const next=controls.locator(':scope > button'),reset=controls.locator('.stage-tools button');
   const n=await next.boundingBox(),r=await reset.boundingBox();expect(Math.abs(n.y-r.y)).toBeLessThan(2);expect(r.x+r.width).toBeLessThan(n.x);
   await page.reload();await expect(room.getByRole('status')).toHaveText(/^1 \/ \d+$/);
   while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();
+  await room.getByRole('button',{name:pair==='1-2'?'读完了':'完成课文',exact:true}).click();
   const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish.getByRole('button')).toHaveCount(2);
   const a=await finish.getByRole('button').first().boundingBox(),b=await finish.getByRole('button').last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(2);expect(a.x+a.width).toBeLessThan(b.x);
   await expect(page.locator('.practice-options input,.practice-options textarea')).toHaveCount(0);

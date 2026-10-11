@@ -32,7 +32,7 @@ function entryHtml(source, basePath, course, brandImage) {
     .replace(/(<link\b[^>]*?)\bhref=/gi, '$1data-course-href=');
   html = html.replace(/<style\b/gi, '<style type="application/x-course"');
   html = html.replace(/<html\b/i, '<html data-course-preparing');
-  const failed = "document.getElementById('courseLoadingStatus').textContent='还没准备好，请刷新后再试。';document.getElementById('courseLoadingRetry').hidden=false;document.getElementById('courseLoadingRetry').onclick=function(){location.reload()}";
+  const failed = "document.getElementById('courseLoadingStatus').textContent='课程未能打开，再试一次。';document.getElementById('courseLoadingDetail').textContent='学习记录会保留。错误编号：L06';document.getElementById('courseLoadingRetry').hidden=false;document.getElementById('courseLoadingRetry').onclick=function(){location.reload()}";
   html = html.replace(/<head>/i, `<head><style id="courseLoaderStyle">${LOADER_CSS}</style><script defer src="${basePath}core/course-cache.js" onerror="${failed}"></script><script defer src="${basePath}core/course-loader.js" data-course="${course.id}" data-base="${basePath}" onerror="${failed}"></script>`);
   // Keep real text navigation available when scripting is disabled. The normal
   // page stays gated, so this fallback cannot expose a partly loaded picture.

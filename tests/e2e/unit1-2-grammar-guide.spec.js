@@ -32,10 +32,9 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 工坊十二题与结�
       await page.evaluate(() => scrollTo({top:0,behavior:'instant'}));
       await page.screenshot({ path: `output/playwright/unit1-2-grammar-v4/${width}-q${i + 1}.png`, fullPage:true, clip:await room.boundingBox() });
     }
-    await room.getByRole('button', { name: i === 11 ? '完成这一站' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 11 ? '完成这一组' : '下一题', exact: true }).click();
   }
-  await expect(room.getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem')).toHaveCount(3);
-  await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('strong')).toHaveText(['12','12','0']);
+  await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('.completion-number')).toHaveText(['12', '12', '0']);
   await expect.poll(() => room.locator('img:visible').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   await page.evaluate(() => scrollTo({top:0,behavior:'instant'}));

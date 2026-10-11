@@ -23,6 +23,7 @@ async function completeStory(page, prefix = '') {
   await expect(room).toContainText('故事看完了！');
 }
 async function completeActivity(page, id, { exerciseRecovery = false, prefix = '' } = {}) {
+  await require('./reward-dialog').handleRewardDialog(page);
   await page.goto(prefix + '/unit3-4/#learn/' + id);
   const room = page.locator('.stage-' + id), answers = ANSWERS[id];
   for (let i = 0; i < answers.length; i++) {
@@ -53,6 +54,10 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
   }
   await expect(room.getByRole('button', { name: '再练一轮', exact: true })).toBeVisible();
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);
+  // The online whole-course journey acknowledges server-confirmed settlements
+  // before continuing. Offline anonymous journeys have no sync status bar.
+  if(await page.locator('#studentSyncStatus').count())await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  if(await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
 }
 async function completeUnit34(page, prefix = '') {
   await completeActivity(page, 'listen', { exerciseRecovery: true, prefix });

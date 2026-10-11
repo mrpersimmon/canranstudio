@@ -11,11 +11,11 @@ async function mode(page,pair){
 for(const pair of Object.keys(CASES))test(`${pair} 全课独立完成、完整原文与证书门槛`,async({page})=>{
  test.setTimeout(120000);await mode(page,pair);const requests=[],errors=[];
  page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))requests.push(r.url());});page.on('pageerror',e=>errors.push(e.message));
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('button',{name:['3-4','5-6'].includes(pair)?'保存纪念卡':'领取单元证书',exact:true})).toBeDisabled();
+ await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('button',{name:['3-4','5-6'].includes(pair)?'保存动图':'领取单元证书',exact:true})).toBeDisabled();
  await story(page,pair);await expect(page.locator('.stage-text .btext')).toHaveCount(CASES[pair].dialogue.length);
  for(const group of Object.keys(CASES[pair].old))await activity(page,pair,group);
  await page.goto(`/unit${pair}/#learn/certificate`);
- if(['3-4','5-6'].includes(pair)){await expect(page.locator('#starCount')).toHaveText('5');await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();await page.reload();await expect(page.locator('#starCount')).toHaveText('5');expect(errors).toEqual([]);expect(requests.filter(x=>!x.includes('/assets/feedback/'))).toEqual([]);return;}
+ if(['3-4','5-6'].includes(pair)){await expect(page.locator('#starCount')).toHaveText('5');await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();await page.reload();await expect(page.locator('#starCount')).toHaveText('5');expect(errors).toEqual([]);expect(requests.filter(x=>!x.includes('/assets/feedback/'))).toEqual([]);return;}
  await expect(page.locator('#starCount')).toHaveText('15');
  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('认真小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateName')).toHaveText('认真小伙伴');await page.keyboard.press('Escape');await page.reload();await expect(page.locator('#starCount')).toHaveText('15');
  if(pair!=='1-2'){expect(requests.filter(x=>!x.includes('/assets/feedback/'))).toEqual([]);expect(await page.evaluate(()=>window.englishSpeakCalls)).toBe(0);}

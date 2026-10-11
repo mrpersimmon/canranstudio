@@ -32,7 +32,7 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   await signIn(old,account,'/');await story(old,pair);for(const group of Object.keys(CASES[pair].old))await activity(old,pair,group,{old:true});
   await old.goto('/'+unit+'/#learn/certificate');await expect(old.locator('#starCount')).toHaveText('15');
   await old.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('认真小伙伴');await old.getByRole('button',{name:'领取单元证书',exact:true}).click();
-  const date=await old.locator('#certificateDate').innerText();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  const date=await old.locator('#certificateDate').innerText();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText(pair==='1-2'?'已同步':'学习成果已同步');
   await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(root);
   const current=await device();await signIn(current,account,'/');await current.goto('/'+unit+'/#learn/certificate');
   if(['1-2','3-4','5-6'].includes(pair)){
@@ -53,7 +53,7 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
    await expect(current.locator('#starCount')).toHaveText('5');
    await expect(current.locator('#certificateDate')).toBeVisible();
    const fullDate=await current.locator('#certificateDate').innerText();
-   await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+   await expect(current.locator('#studentSyncStatus')).toHaveText(pair==='1-2'?'已同步':'学习成果已同步');
    const restored=await device();await signIn(restored,account,'/');
    await expect(restored.locator('.course')).toContainText('5 / 5');
    await restored.goto('/'+unit+'/#learn/certificate');
@@ -76,7 +76,7 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   }
   await current.goto('/'+unit+'/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('15');
   await current.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(current.locator('#certificateDate')).toHaveText(date);await current.keyboard.press('Escape');
-  await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  await expect(current.locator('#studentSyncStatus')).toHaveText(pair==='1-2'?'已同步':'学习成果已同步');
   const restored=await device();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');
   await restored.goto('/'+unit+'/#learn/exam');const count=answers(pair,'exam').length;await expect(restored.locator('.stage-exam')).toContainText(`首次独立答对 ${count} / ${count}`);
   await restored.goto('/'+unit+'/#learn/certificate');await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');await expect(restored.locator('#starCount')).toHaveText('15');

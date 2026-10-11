@@ -16,6 +16,7 @@
     const picture = node('img', '', 'shop-icon'); picture.src = '/assets/unit1-2/' + (['man', 'woman'].includes(name) ? 'scene/' : '') + name + '.svg' + (name === 'handbag' ? '?v=scene-2' : ''); picture.alt = label; return picture;
   }
   const surfaces = new Map();
+  const runners = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
   let active = '', certificateView;
@@ -30,6 +31,7 @@
       const header = node('header', '', 'stage-heading');
       header.append(icon(illustration), node('h3', title));
       surface.append(header); surfaces.set(id, surface); section.append(surface);
+      if (title === stage.title) { header.append(heading.querySelector('.lvl-stars')); heading.remove(); }
     }
     $('#lessonWorkspace').append(section);
   }
@@ -51,6 +53,7 @@
     });
     if (chapter) $('.chapter-select select').value = chapter.id;
     $('#startBtn').textContent = '继续冒险';
+    updateProgress();
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
@@ -89,16 +92,17 @@
     }
     $('#starCount').textContent = String(awardState.stars);
     document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
-      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '整轮零错，这颗星点亮了！';
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? settlement.pendingMessage() : '已获星';
     });
     certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
-  const awards = core.unitAwards.create({ unit, practice, onChange: state => { awardState = state; updateProgress(); } });
+  const settlement = core.awardReveal.create({ unit });
+  const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
-    const group = node('div', '', 'station-actions'); group.append(button('下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
+    const group = node('div', '', 'station-actions'); group.append(button(next.id === 'certificate' ? '查看纪念卡' : '下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit12-' + id + '-practice'; surfaces.get(id).append(element);
@@ -107,26 +111,23 @@
     }
     if (id === 'trans') settings.sceneView = core.unit12Grammar.create({ element, art });
     const predecessors = unit.activityPredecessors[id];
-    let practicedHere = false;
-    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs, roundPolicy: unit.reward.edition,
+    const runner = practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+      inputViews:core.lesson49TaskInputs, roundPolicy: unit.reward.edition, finalLabel: '完成这一组',
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
-      onProgress: () => { practicedHere = true; settings.onProgress?.(); },
       onComplete: (states, round) => {
-        const perfect = awards.record(id, states, round);
-        const awardStatus = perfect ? '整轮零错，这颗星点亮了！'
-          : states.some(state => state.firstCorrect === false) ? '本轮有过错答。再练一轮，整轮零错就能点亮星星。'
-          : '学习记录已保留。再练一轮，整轮零错就能点亮星星。';
+        const { perfect, message: awardStatus } = settlement.complete({ id, states, round, awards, element });
         complete(id);
         nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
         core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
-          details: settings.completionDetails, celebrate: practicedHere, awardStatus });
+          details: settings.completionDetails, celebrate: round.userCompleted, awardStatus,
+          waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) &&
+            navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
         const result = element.querySelector('.completion-award');
         result.classList.add('award-round-result');
         result.dataset.perfect = String(perfect); result.dataset.zone = id;
         updateProgress();
-        practicedHere = false;
       } });
+    runners.set(id, runner);
     return element;
   }
 
@@ -138,18 +139,18 @@
   stage.append(actor('man', '男士'), log, actor('woman', '女士'), storyBag);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
-  const advance = button('开始看课文', advanceDialogue);
-  tools.append(button('从头看', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
+  const advance = button('开始故事', advanceDialogue);
+  tools.append(button('重看故事', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
-  finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
+  finishActions.append(button('重看故事', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
   finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
-  const gate = node('div', '', 'activity-actions'); gate.append(button('先看课文', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
+  const gate = node('div', '', 'activity-actions'); gate.append(button('先读故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
   function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
-    advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
+    advance.textContent = dialogue.i < 0 ? '开始故事' : dialogue.i === content.DIALOGUE.length - 1 ? '读完了' : '下一句';
     controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
@@ -165,7 +166,7 @@
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
-    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); if(!translation.hidden)requestAnimationFrame(()=>{log.scrollTop=Math.max(0,row.offsetTop+row.offsetHeight-log.clientHeight);}); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const translate = button('中文', () => { translation.hidden = !translation.hidden; translate.setAttribute('aria-label', translation.hidden ? '看中文' : '收起中文'); translate.setAttribute('aria-expanded', String(!translation.hidden)); if(!translation.hidden)requestAnimationFrame(()=>{log.scrollTop=Math.max(0,row.offsetTop+row.offsetHeight-log.clientHeight);}); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false'); translate.setAttribute('aria-label', '看中文');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
     bubble.append(node('div', line.who === 'man' ? '男士' : '女士', 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
@@ -197,8 +198,8 @@
   const wordControls = node('div', '', 'word-controls'), wordProgress = node('span');
   const pageCount = Math.ceil(content.WORDS.length / 6), savedPage = practice.activity('unitWordPage');
   let wordPage = Number.isInteger(savedPage) ? Math.max(0, Math.min(pageCount - 1, savedPage)) : 0;
-  const previousWords = button('上一组词卡', () => changeWordPage(-1), 'btn btn-yellow');
-  const nextWords = button('下一组词卡', () => wordPage === pageCount - 1 ? navigate('learn/listen') : changeWordPage(1));
+  const previousWords = button('上一组', () => changeWordPage(-1), 'btn btn-yellow');
+  const nextWords = button('下一组', () => wordPage === pageCount - 1 ? navigate('learn/listen') : changeWordPage(1));
   wordProgress.id = 'wordPageProgress'; wordControls.append(previousWords, wordProgress, nextWords); wordHost.append(wordGrid, wordControls);
   function changeWordPage(delta) { wordPage += delta; renderWords(); practice.revealQuestion(wordHost, wordHost.querySelector('h3')); }
   function renderWords() {
@@ -209,7 +210,10 @@
       const meaning = node('span', word.cn, 'word-meaning'); meaning.hidden = true;
       pronunciation.id = 'u12-' + word.en.replaceAll(' ', '-') + '-phonetic';
       meaning.id = 'u12-' + word.en.replaceAll(' ', '-') + '-meaning';
-      const example = node('small', word.example || '', 'word-example'); example.hidden = !word.example;
+      const example = node('small', '', 'word-example'); example.hidden = !word.example;
+      if (word.example) { const index = word.example.toLowerCase().indexOf(word.en.toLowerCase());
+        if (index < 0) example.textContent = word.example;
+        else example.append(document.createTextNode(word.example.slice(0,index)), node('mark',word.example.slice(index,index+word.en.length)), document.createTextNode(word.example.slice(index+word.en.length))); }
       const card = button('', () => {
         const expanded = card.getAttribute('aria-expanded') !== 'true';
         card.setAttribute('aria-expanded', String(expanded)); meaning.hidden = !expanded;
@@ -220,9 +224,9 @@
       card.append(picture, node('strong', word.en), pronunciation, meaning, example); wordGrid.append(card);
     }
     previousWords.disabled = wordPage === 0; wordProgress.textContent = `${wordPage + 1} / ${pageCount}`;
-    nextWords.setAttribute('aria-label', wordPage === pageCount - 1 ? '下一站：单词寻宝' : '下一组词卡');
+    nextWords.setAttribute('aria-label', wordPage === pageCount - 1 ? '下一站：单词寻宝' : '下一组');
     if (wordPage === pageCount - 1) nextWords.replaceChildren(node('span', '下一站：'), node('span', '单词寻宝'));
-    else nextWords.textContent = '下一组词卡';
+    else nextWords.textContent = '下一组';
   }
   renderWords();
   mountPractice('listen', { allowHints: false });
@@ -232,16 +236,18 @@
   core.unit12Grammar.references({ element: surfaces.get('manners'), content });
 
   const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
+  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '完成挑战', completionDetails: examResults, onComplete: states => {
     examResults.replaceChildren();
-    const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
+    const targets = states.flatMap((state, index) => !state.firstCorrect || state.hintUsed || state.ruleUsed || state.revealed ? [unit.copy.recordNames.exam[index]] : []);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
   certificateView = core.storyCertificate.mount({
-    element: surfaces.get('certificate'), unit, go: navigate, returnUrl: $('#logo').href
+    element: surfaces.get('certificate'), unit, go: navigate, returnUrl: $('#logo').href,
+    progress: id => runners.get(id)?.progress() || { started: false, completed: false },
+    restart: id => runners.get(id)?.restart()
   });
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
-  writing.append(node('summary', '和家人再试试'), node('p', '拿一件确实属于你的物品，请家人用 Is this your…? 问你。你来回答 Yes, it is.，再交换角色。没听清可以说 Pardon?。'), node('p', '纸笔小练习：这些是教材的七句原文。可以选一两句慢慢抄写，留意大写和标点。'));
+  writing.append(node('summary', '和家人再试试'), node('p', '拿一件自己的物品，和家人轮流问答：Is this your…? / Yes, it is. 没听清时，可以说 Pardon?'), node('p', '选 1–2 句抄写，注意大小写和标点。'));
   const writingLines = node('ol', '', 'writing-lines'); content.DIALOGUE.forEach(line => writingLines.append(node('li', line.text))); writing.append(writingLines);
   const printActions = node('div', '', 'activity-actions'); printActions.append(button('打印练习纸', () => {
     document.body.classList.add('print-writing'); root.print();
@@ -250,6 +256,7 @@
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
+  root.addEventListener('lesson-sync:status', updateProgress);
   document.addEventListener('canran:course-ready', route, { once: true });
   document.fonts.ready.then(() => {
     const restore=()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;});

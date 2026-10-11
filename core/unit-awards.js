@@ -1,7 +1,7 @@
 (function (root) {
   'use strict';
   const core = root.CanranCore;
-  function create({ unit, practice, onChange }) {
+  function create({ unit, practice, onChange, onAward = () => {} }) {
     const { edition, zones } = unit.reward;
     const key = unit.progress.learningKey + ':awards:' + edition;
     const access = root.CanranStudentAccess;
@@ -32,17 +32,24 @@
       if (!core.awardRules.validClaim(unit, id, claim)) return false;
       // Preserve the first qualifying round independently from later replays.
       if (!claims[id] && !ledger.zones[id]) {
+        const before = state();
         claims[id] = claim; ledger.zones[id] = { runId: round.runId, pending: Boolean(access && !access.preview) };
         save(); practice.activity('unitAwardClaims', claims);
+        if (!ledger.zones[id].pending) onAward({ before, state: state(), zoneIds: [id] });
       }
       return true;
     }
     root.addEventListener('lesson-awards:synced', event => {
       const canonical = event.detail;
       if (canonical?.edition !== edition) return;
+      const before = state();
       ledger.zones = { ...ledger.zones, ...canonical.zones };
       if (canonical.firstFullStarAt) ledger.firstFullStarAt = canonical.firstFullStarAt;
       save();
+      // Only acknowledge our validated pending claims. Existing server awards
+      // and repeats of the same sync must not replay a celebration.
+      const zoneIds = before.pendingZones.filter(id => claims[id] && state().zones[id]);
+      if (zoneIds.length) onAward({ before, state: state(), zoneIds });
     });
     save(); return { record, state };
   }

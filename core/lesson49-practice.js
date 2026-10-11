@@ -6,12 +6,16 @@
   const wordImages = Object.fromEntries(context.learning.WORDS.map(word => [word.en, word.image]));
   let notebook = { version: 1, groups: {}, records: {}, activity: {} };
   let loadMessage = '';
+  const activeDraftKeys = new Set();
+  let lastSaveFailed = false;
   const isRecord = value => value && typeof value === 'object' && !Array.isArray(value);
   const newRunId = () => root.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
   // Presentation only: keep the source question intact for exact draft migration.
   // Chinese instruction punctuation is distinct from punctuation in language material.
   function questionCopy(q, presentation) {
     const clean=text=>text.trim().replace(/。$/u,'');
+    const copy = context.copy?.questions?.[q.id];
+    if (copy?.title) return { title: clean(copy.title), material: copy.material ?? q.display?.material ?? '' };
     if(q.display)return {title:clean(q.display.title),material:q.display.material||''};
     const situations={
       'u34-v1-polite-yes':['确认这把伞是你的','别人问你：Is this your umbrella?\n这把伞是你的'],
@@ -62,6 +66,7 @@
     const box = document.getElementById('learningRecord');
     if (!box) return;
     box.replaceChildren();
+    if (context.copy?.compact) { renderCompactRecord(box); return; }
     const records = Object.values(notebook.records).filter(record=>isRecord(record)&&typeof record.attempts==='number'&&typeof record.firstCorrect==='boolean');
     const intro = document.createElement('p');
     intro.textContent = records.length ? (context.reward ? '每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。' : '记录的是有选项、词块或句式支持的表现。星星奖励完成活动；这份小记不评价自由口语或独立写作。') : '还没有新的作答记录。原有星星保留，新的任务从本次作答开始记录。';
@@ -75,16 +80,84 @@
     });
     box.append(list);
   }
+  function renderCompactRecord(box) {
+    const valid = record => isRecord(record) && typeof record.attempts === 'number' && typeof record.firstCorrect === 'boolean';
+    const row = (id, record, label) => {
+      const item = document.createElement('li'), details = document.createElement('details'), summary = document.createElement('summary');
+      const name = document.createElement('span'); name.textContent = label;
+      const state = document.createElement('strong');
+      state.textContent = !record.correct ? '待完成' : record.firstCorrect ? '首次答对' : '订正完成';
+      summary.append(name, state);
+      if (record.hintUsed || record.ruleUsed || record.revealed) {
+        const hint = document.createElement('small'); hint.textContent = record.revealed ? '看过示范' : record.ruleUsed ? '看过规则' : '用过线索'; summary.append(hint);
+      }
+      details.append(summary);
+      const question = Object.values(context.questions).flat().find(question => question.id === id);
+      const title = document.createElement('p'); title.textContent = question ? questionCopy(question).title : record.prompt;
+      const attempts = document.createElement('p'); attempts.textContent = `提交 ${record.attempts} 次`;
+      details.append(title, attempts); item.append(details); return item;
+    };
+    const seen = new Set(); let count = 0;
+    for (const { id: activity } of context.reward.zones) {
+      const questions = context.questions[activity];
+      const records = questions.map((q, index) => ({ q, index, record: notebook.records[q.id] })).filter(({ record }) => valid(record));
+      if (!records.length) continue;
+      const section = document.createElement('section'), heading = document.createElement('h3'), list = document.createElement('ul');
+      heading.textContent = context.reward.zones.find(zone => zone.id === activity)?.title || activity;
+      records.forEach(({ q, index, record }) => {
+        seen.add(q.id); count++;
+        const shortName = context.copy.recordNames[activity]?.[index];
+        list.append(row(q.id, record, `第 ${index + 1} 题${shortName ? ' · ' + shortName : ''}`));
+      });
+      section.append(heading, list);
+      const round = [...activeDraftKeys].map(key => notebook.groups[key]).find(group => group?.signature === questions.map(q => q.id).join('|'));
+      if (round?.states.some(state => state?.attempts > 0)) {
+        let streak = 0, best = 0;
+        for (const state of round.states) { streak = state?.firstCorrect ? streak + 1 : 0; best = Math.max(best, streak); }
+        const details = document.createElement('details'), summary = document.createElement('summary'), metric = document.createElement('p');
+        details.className = 'record-round-details'; summary.textContent = '本轮详情'; metric.textContent = `最高连续首次答对 ${best} 题`;
+        details.append(summary, metric); section.append(details);
+      }
+      box.append(section);
+    }
+    const older = Object.entries(notebook.records).filter(([id, record]) => !seen.has(id) && valid(record));
+    if (older.length) {
+      const archive = document.createElement('details'), title = document.createElement('summary'), list = document.createElement('ul');
+      title.textContent = '之前的练习'; older.forEach(([id, record], i) => list.append(row(id, record, `记录 ${i + 1}`)));
+      archive.append(title, list); box.append(archive);
+    }
+    if (!count && !older.length) { const empty = document.createElement('p'); empty.textContent = '还没有作答记录。'; box.append(empty); }
+    const parents = document.createElement('details'), label = document.createElement('summary'), note = document.createElement('p');
+    parents.className = 'record-parent-note'; label.textContent = '家长说明';
+    note.textContent = '记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。';
+    parents.append(label, note); box.append(parents);
+  }
+  function refreshSaveStatus() {
+    if (!context.copy?.compact || lastSaveFailed || loadMessage) return;
+    const status = document.getElementById('learningSaveStatus');
+    if (!status) return;
+    const sync = document.getElementById('studentSyncStatus');
+    const unfinished = [...activeDraftKeys].some(key => {
+      const group = notebook.groups[key];
+      return group?.index < group?.signature?.split('|').length && group.states?.some(state => state?.attempts > 0);
+    });
+    status.textContent = sync?.dataset.syncState === 'preview' ? '班级预览 · 不记录成绩'
+      : unfinished ? '本轮草稿已保存到本机。'
+      : sync?.textContent || '已保存到本机。';
+  }
+  root.addEventListener('lesson-sync:status', refreshSaveStatus);
   function save() {
     const status = document.getElementById('learningSaveStatus');
     let saved = false;
     try { localStorage.setItem(KEY, JSON.stringify(notebook)); saved = true; } catch {}
-    if (status) status.textContent = saved ? '学徒手记已保存在这台设备。' : '这次暂未保存，先别关闭页面。可以继续练习，再点“重试保存”。';
+    lastSaveFailed = !saved;
+    if (status) status.textContent = saved ? (context.copy?.compact ? '已保存到本机。' : '学徒手记已保存在这台设备。') : '这次暂未保存，先别关闭页面。可以继续练习，再点“重试保存”。';
     const retry = document.getElementById('learningSaveRetry');
     if (retry) retry.hidden = saved;
     const warning = document.getElementById('learningSaveWarning');
     if (warning) warning.hidden = saved;
     renderRecord();
+    if (saved) refreshSaveStatus();
     return saved;
   }
   function record(q, state) {
@@ -145,6 +218,7 @@
   }
   function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null, roundPolicy = null }) {
     const key = sessionId ? element.id+'/'+sessionId : element.id;
+    activeDraftKeys.add(key);
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
     let group = notebook.groups[key];
     // Explicit activity consolidation only. An existing destination (including
@@ -297,7 +371,12 @@
       item.addEventListener('click', action);
       return item;
     }
-    function render() {
+    function restart() {
+      group.index = 0; group.states = []; delete group.carriedStates;
+      group.runId = newRunId(); group.roundPolicy = roundPolicy;
+      save(); render(); revealQuestion(element, sceneView?.heading());
+    }
+    function render(userCompleted = false) {
       element.replaceChildren();
       element.classList.add('practice-runner');
       element.classList.toggle('role-runner', Boolean(sceneView));
@@ -308,7 +387,7 @@
         summary.textContent = sceneView ? '破案完成！' : optionImages ? '寻宝完成！' : chunkSize ? '挑战完成！' : '这一组完成了！';
         sceneView?.finish();
         const finish=document.createElement('div');finish.className='practice-finish';
-        const again=button('再练一轮', () => { group.index = 0; group.states = []; delete group.carriedStates; group.runId = newRunId(); group.roundPolicy = roundPolicy; save(); render();revealQuestion(element,sceneView?.heading()); },'btn btn-mini btn-yellow');
+        const again=button('再练一轮', restart,'btn btn-mini btn-yellow');
         const stamp=root.CanranCore.lesson49Icons.create(sceneView?'people':'check');stamp.classList.add('finish-icon');
         finish.append(stamp,summary);
         if(completionDetails)finish.append(completionDetails);
@@ -316,7 +395,7 @@
         finishActions.setAttribute('role','group');finishActions.setAttribute('aria-label','完成后的操作');
         finishActions.append(again);finish.append(finishActions);
         element.append(finish);
-        onComplete(group.states, { runId: group.runId, roundPolicy: group.roundPolicy, index: group.index, contentSignature }); return;
+        onComplete(group.states, { runId: group.runId, roundPolicy: group.roundPolicy, index: group.index, contentSignature, userCompleted }); return;
       }
       const q = questions[group.index];
       const activeScene = sceneView && (!sceneView.supports || sceneView.supports(q)) ? sceneView : null;
@@ -326,7 +405,8 @@
       let inputController;
       element.dataset.kind = q.type === 'order' ? 'order' : q.delivery ? 'delivery' : q.audioText ? 'listening' : q.presentation || presentation;
       const images = q.optionImages || optionImages || (q.audioText ? wordImages : null);
-      const hintsEnabled = allowHints && !q.audioText && typeof q.hint === 'string' && q.hint.trim().length > 0;
+      const copyOptions = context.copy?.questions?.[q.id] || {};
+      const hintsEnabled = allowHints && copyOptions.hint !== false && !q.audioText && typeof q.hint === 'string' && q.hint.trim().length > 0;
       const content = document.createElement('div'); content.className = 'practice-content';
       const actions = document.createElement('div'); actions.className = 'practice-actions';
       const carried = group.carriedStates?.[group.index];
@@ -395,7 +475,7 @@
         if(group.index!==questionIndex||!passed(state,q))return;
         group.states.length=group.index+1;
         group.index++;
-        save(); render();
+        save(); render(true);
         if(group.index===questions.length)root.CanranCore.lesson49Feedback.play('complete');
         revealQuestion(element,sceneView?.heading());
       });
@@ -435,7 +515,8 @@
         if(!input){state[orderKey]=values.slice();save();}
       }
       if(input){
-        inputController=input.mount({element:options,question:q,state,changed:()=>{check.disabled=!canCheck();save();}});
+        const displayedQuestion = copyOptions.reference === undefined ? q : {...q, reference:copyOptions.reference};
+        inputController=input.mount({element:options,question:displayedQuestion,state,changed:()=>{check.disabled=!canCheck();save();}});
       } else if(q.type === 'order') {
         state.tokens = state.tokens || [];
         values.forEach(tokenIndex=>bank.append(wordToken(tokenIndex)));
@@ -498,7 +579,7 @@
         hint.disabled=state.checked;hintCopy.hidden=state.checked||!state.hintUsed;
         hint.setAttribute('aria-expanded',String(!hintCopy.hidden));
         morph.hidden = !q.morph || !state.checked || !state.correct;
-        feedback.textContent = state.checked ? (state.correct ? '答对了！' : '再看看，试一次。') : '';
+        feedback.textContent = state.checked ? (state.correct ? '答对了！' : context.copy?.compact ? '再看看。' : '再看看，试一次。') : '';
         // Feedback never supplies the answer, including after repeated errors
         // or a restored draft. Only the child can solve the current question.
         feedback.className = 'fb ' + (state.checked ? (state.correct ? 'good' : 'bad') : '');
@@ -522,7 +603,19 @@
       }
       if(q.reading){
         const material=document.createElement('div');material.className='task-reading';material.setAttribute('role','region');material.setAttribute('aria-label',q.readingLabel||'阅读材料');
-        if(Array.isArray(q.reading))q.reading.forEach(([who,text],i)=>{const row=document.createElement('p');row.className='task-reading-turn turn-'+(i%2);const speaker=document.createElement('small');speaker.textContent=who;const words=document.createElement('span');words.lang='en';words.textContent=text;row.append(speaker,words);material.append(row);});
+        if(Array.isArray(q.reading)) {
+          const appendLines = (host, indexes) => indexes.forEach(i => {
+            const [who, text] = q.reading[i], row = document.createElement('p'); row.className='task-reading-turn turn-'+(i%2);
+            const speaker=document.createElement('small'); speaker.textContent=who;
+            const words=document.createElement('span');words.lang='en';words.textContent=text;row.append(speaker,words);host.append(row);
+          });
+          if(copyOptions.readingExcerpt) {
+            const excerpt=document.createElement('div'), full=document.createElement('details'), label=document.createElement('summary');
+            full.className='reading-full';label.textContent='完整故事';full.append(label);
+            appendLines(excerpt,copyOptions.readingExcerpt);appendLines(full,q.reading.map((_,i)=>i));
+            full.addEventListener('toggle',()=>{excerpt.hidden=full.open;});material.append(excerpt,full);
+          } else appendLines(material,q.reading.map((_,i)=>i));
+        }
         else{const passage=document.createElement('p');passage.lang=q.readingLanguage||'en';passage.textContent=q.reading;material.append(passage);}
         content.append(material);
       }
@@ -559,12 +652,20 @@
       showFeedback();
     }
     render();
+    return {
+      restart,
+      progress: () => ({
+        completed: group.index === questions.length && questions.every((q,i) => passed(group.states[i],q)),
+        started: group.index > 0 || group.states.some(state => state && (state.attempts > 0 || state.selection !== null))
+      })
+    };
   }
   function initializeNotebook() {
     const status = document.getElementById('learningSaveStatus');
     if (status) status.textContent = loadMessage;
     document.getElementById('learningSaveRetry')?.addEventListener('click', save);
     renderRecord();
+    refreshSaveStatus();
   }
   root.CanranCore = root.CanranCore || {};
   root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel, sameContentSignature };

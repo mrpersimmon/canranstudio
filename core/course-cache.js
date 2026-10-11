@@ -3,6 +3,7 @@
   const stores = new Map();
   const digest = async buffer => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buffer)), value => value.toString(16).padStart(2, '0')).join('');
   const delay = time => new Promise(resolve => setTimeout(resolve, time));
+  const failure = (code, message) => Object.assign(new Error(message), { courseCode: code });
   function open(base) {
     if (stores.has(base)) return stores.get(base);
     const prefix = 'canran:' + (base === '/' ? 'preview-root' : base.slice(1, -1).replaceAll('/', ':')) + ':course-cache:v1';
@@ -52,7 +53,7 @@
     }
     function validateItem(item) {
       const url = new URL(item.url, root.location.origin);
-      if (url.origin !== root.location.origin || !url.pathname.startsWith(base + 'resources/' + item.sha256 + '/') || !/^[a-f0-9]{64}$/.test(item.sha256) || !Number.isSafeInteger(item.bytes) || item.bytes < 1) throw new Error('无效课程资源');
+      if (url.origin !== root.location.origin || !url.pathname.startsWith(base + 'resources/' + item.sha256 + '/') || !/^[a-f0-9]{64}$/.test(item.sha256) || !Number.isSafeInteger(item.bytes) || item.bytes < 1) throw failure('L02', '无效课程资源');
     }
     async function validBuffer(response, item) {
       if (!response?.ok || response.status !== 200) return null;
@@ -85,16 +86,16 @@
           const receivedType = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
           const expectedType = item.type.split(';')[0];
           const compatible = receivedType === expectedType || expectedType === 'text/javascript' && receivedType === 'application/javascript';
-          if (response.status !== 200 || !compatible) throw new Error('资源未正确返回');
+          if (response.status !== 200 || !compatible) throw failure('L03', '资源未正确返回');
           const reader = response.body.getReader(), chunks = []; let size = 0;
           for (;;) {
             const value = await reader.read(); if (value.done) break;
             reset(); chunks.push(value.value); size += value.value.byteLength;
-            if (size > item.bytes) { await reader.cancel(); throw new Error('资源大小不正确'); }
+            if (size > item.bytes) { await reader.cancel(); throw failure('L04', '资源大小不正确'); }
           }
           const bytes = new Uint8Array(size); let offset = 0;
           for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-          if (size !== item.bytes || await digest(bytes.buffer) !== item.sha256) throw new Error('资源校验失败');
+          if (size !== item.bytes || await digest(bytes.buffer) !== item.sha256) throw failure('L04', '资源校验失败');
           memory.set(item.sha256, bytes.buffer);
           const disk = await cache;
           if (disk) {
@@ -110,6 +111,7 @@
         finally { clearTimeout(timer); signal?.removeEventListener('abort', cancel); }
         if (attempt < 2) await delay(350 * (attempt + 1));
       }
+      if (!lastError.courseCode) lastError.courseCode = 'L03';
       throw lastError;
     }
     async function obtain(item, { signal, network = true } = {}) {

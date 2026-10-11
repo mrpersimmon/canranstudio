@@ -34,18 +34,18 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   await expect(exam).toContainText('Excuse me!');
   await require('../support/units1-30-tasks').select(exam,{fills:['Yes, it is.','Yes?']});
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(exam.getByRole('status')).toHaveText('再看看。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, {fills:['Yes?','Yes, it is.']});
-  await expect(exam.locator('.practice-content > h3')).toHaveText('告诉同学，这不是你的手表');
-  await expect(exam.locator('.practice-context')).toContainText('同学捡到一块手表，手表不是你的');
+  await expect(exam.locator('.practice-content > h3')).toHaveText('手表不是你的，你怎么回答？');
+  await expect(exam.locator('.practice-context')).toHaveCount(0);
   await expect(exam.locator('.task-reading')).toContainText('Is this your watch?');
   await exam.screenshot({ path: 'output/playwright/unit-dedup/unit12-combined-320.png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await choose(exam, "No, it isn't.");
   await finishExam(page, '1-2', 2);
   await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['9', '9', '1']);
-  await expect(exam.getByRole('button', { name: '下一站：我的单元纪念卡', exact: true })).toBeVisible();
+  await expect(exam.getByRole('button', { name: '查看纪念卡', exact: true })).toBeVisible();
 });
 
 test('Lesson 3–4 合并重复工坊，25题覆盖不同语言判断', async ({ page }) => {

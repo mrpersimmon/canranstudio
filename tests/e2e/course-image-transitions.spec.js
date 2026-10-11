@@ -36,8 +36,8 @@ for (const width of course === 'unit5-6' ? [390, 1280] : [390]) test(`${course} 
   await page.setViewportSize({ width, height: 900 });
   await page.goto('/lesson/' + course + '/#learn/words');
   await expect(page.locator('#courseLoader')).toHaveCount(0);
-  const next = page.getByRole('button', { name: '下一组词卡', exact: true });
-  const previous = page.getByRole('button', { name: '上一组词卡', exact: true });
+  const next = page.getByRole('button', { name: course === 'unit1-2' ? '下一组' : '下一组词卡', exact: true });
+  const previous = page.getByRole('button', { name: course === 'unit1-2' ? '上一组' : '上一组词卡', exact: true });
   // Cold and revisited pages, then offline: all movement comes from real buttons.
   for (let visit = 0; visit < 2; visit++) {
     if (visit) { await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1'); }

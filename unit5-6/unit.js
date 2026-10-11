@@ -97,12 +97,13 @@
     }
     $('#starCount').textContent = String(awardState.stars);
     document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
-      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '整轮零错，这颗星点亮了！';
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '这颗星已经点亮。';
     });
     certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
-  const awards = core.unitAwards.create({ unit, practice, onChange: state => { awardState = state; updateProgress(); } });
+  const settlement = core.awardReveal.create({ unit });
+  const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
@@ -115,8 +116,8 @@
       inputViews:core.lesson49TaskInputs, roundPolicy:unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit56-' + old + '-practice/v1', questions: prior }))), ...settings,
       onComplete: (states,round) => {
-        const perfect = awards.record(id, states, round);
-        const result = node('p', perfect ? '整轮零错，这颗星点亮了！' : round.roundPolicy !== unit.reward.edition ? '再练一轮，整轮零错就能点亮星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。', 'award-round-result');
+        const { perfect, message } = settlement.complete({ id, states, round, awards, element });
+        const result = node('p', message, 'award-round-result');
         result.dataset.perfect = String(perfect); result.dataset.zone = id;
         element.querySelector('.practice-finish-actions').before(result);
         complete(id);

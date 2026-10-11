@@ -1,0 +1,53 @@
+{
+  "branch": "codex/debug-reward-version",
+  "base": "74c280e78279350e02b4b3280999c77dae0daeae",
+  "scope": [
+    "unit1-2",
+    "unit3-4",
+    "unit5-6"
+  ],
+  "completedBrowserChecks": 45,
+  "runs": [
+    {
+      "command": "COURSE_TEST_PORT=4382 playwright test tests/e2e/award-reveal.spec.js tests/e2e/three-unit-awards.spec.js tests/e2e/unit1-2-award-migration.spec.js tests/e2e/unit1-2-award-grammar-upgrade.spec.js tests/e2e/unit1-2-completion.spec.js tests/e2e/unit1-2-award.spec.js",
+      "passed": 26
+    },
+    {
+      "command": "LOGIN_TEST_PORT=4384 playwright test -c playwright.login.config.js tests/login/award-reveal.spec.js",
+      "passed": 3
+    },
+    {
+      "command": "AWARD_TEST_BASE=/ LOGIN_TEST_PORT=4386 playwright test -c playwright.login.config.js tests/login/award-reveal.spec.js tests/login/unit1-2-award.spec.js tests/login/award-book.spec.js",
+      "passed": 7,
+      "failedInitially": 1,
+      "repair": "Whole-course test helpers wait for confirmed results and dismiss the new overlay before the next activity.",
+      "rerun": "award-book.spec.js --grep 三单元真实",
+      "rerunPassed": 1
+    },
+    {
+      "command": "COURSE_TEST_PORT=4382 playwright test tests/e2e/course-cache-journeys.spec.js --grep \"unit1-2 缓存\"",
+      "passed": 1
+    },
+    {
+      "command": "COURSE_TEST_PORT=4382 playwright test tests/e2e/unit-thirteen-types.spec.js tests/e2e/retry-feedback.spec.js --grep \"Lesson25|25-26|unit25|只改线索|辨认问句|情境在\"",
+      "passed": 7
+    }
+  ],
+  "redBeforeGreen": [
+    "First real completion test failed before an overlay existed, then passed.",
+    "Full-star rim opacity stayed zero because of a CSS selector; corrected and all three full-star flows passed."
+  ],
+  "build": "npm run build:login passed; 21 protected units",
+  "manual": "Actual first-star flow observed in Codex in-app browser at 127.0.0.1:4272/lesson/unit1-2/",
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "notVerified": [
+    "Production deployment",
+    "Physical Android/iOS WeChat",
+    "Child acceptance",
+    "Production concurrency"
+  ]
+}

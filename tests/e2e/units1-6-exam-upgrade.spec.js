@@ -41,7 +41,7 @@ for (const unit of units) {
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
       await activity(page,'1-2','exam');await expect(page.locator('#starCount')).toHaveText('1');
-      await room.getByRole('button',{name:'下一站：我的单元纪念卡',exact:true}).click();
+      await room.getByRole('button',{name:'查看纪念卡',exact:true}).click();
       await expect(page.locator('#certificateDate')).toBeHidden();
       return;
     }

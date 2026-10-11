@@ -1,0 +1,32 @@
+[
+  {
+    "case": "first",
+    "stars": 1,
+    "visibleState": "\"第一颗星，点亮了！\":\n  - button \"关闭奖励弹窗\": ×\n  - heading \"第一颗星，点亮了！\" [level=2]\n  - paragraph: 单词寻宝 · 整轮零错\n  - article \"演示纪念卡：小小同学，礼貌小帮手\":\n    - paragraph: 灿然英语工作室\n    - heading \"礼貌小帮手\" [level=3]\n    - paragraph: 小小同学\n    - group \"已获得 1 / 5 颗星\"\n    - img \"男士将手提包交还女士\"\n    - paragraph:\n      - generic: Lesson 1–2\n  - paragraph:\n    - strong: 第 1 颗星，点亮啦！\n  - button \"留在这一页\"\n  - button \"继续冒险\"\n  - paragraph: 这张纪念卡，开始收藏啦。\n  - complementary \"仅供设计比较的演示控件\":\n    - generic: 交互演示\n    - group \"布局方案\":\n      - button \"上一个方案\": ←\n      - strong: A 纪念卡登场 · 推荐\n      - button \"下一个方案\": →\n    - generic: 情境\n    - combobox \"情境\":\n      - option \"第一颗星 · 0 → 1\" [selected]\n      - option \"新获一星 · 2 → 3\"\n      - option \"集齐五星 · 4 → 5\"\n      - option \"升级后续做 · 不新增\"\n      - option \"错答后完成 · 不新增\"\n      - option \"本区已有星 · 不新增\"\n      - option \"离线待同步 · 尚未点亮\"\n    - button \"重播\"\n    - checkbox \"减少动态\"\n    - text: 减少动态\n    - status: 第一颗星 · 已确认 0 → 1 星 · 已点亮 · 演示姓名与日期，不保存"
+  },
+  {
+    "case": "full",
+    "stars": 5,
+    "visibleState": "\"五颗星，集齐啦！\":\n  - button \"关闭奖励弹窗\": ×\n  - heading \"五颗星，集齐啦！\" [level=2]\n  - paragraph: 五个挑战，都做到了整轮零错。\n  - article \"演示纪念卡：小小同学，礼貌小帮手\":\n    - paragraph: 灿然英语工作室\n    - heading \"礼貌小帮手\" [level=3]\n    - paragraph: 小小同学\n    - group \"已获得 5 / 5 颗星\"\n    - img \"男士将手提包交还女士\"\n    - paragraph:\n      - generic: Lesson 1–2\n      - time: ·2026.10.10\n  - paragraph:\n    - strong: 五颗星，全部点亮！\n  - button \"留在这一页\"\n  - button \"看看我的纪念卡\"\n  - paragraph: 金边和第一次集齐的日子，会一直保留。\n  - complementary \"仅供设计比较的演示控件\":\n    - generic: 交互演示\n    - group \"布局方案\":\n      - button \"上一个方案\": ←\n      - strong: A 纪念卡登场 · 推荐\n      - button \"下一个方案\": →\n    - generic: 情境\n    - combobox \"情境\":\n      - option \"第一颗星 · 0 → 1\"\n      - option \"新获一星 · 2 → 3\"\n      - option \"集齐五星 · 4 → 5\" [selected]\n      - option \"升级后续做 · 不新增\"\n      - option \"错答后完成 · 不新增\"\n      - option \"本区已有星 · 不新增\"\n      - option \"离线待同步 · 尚未点亮\"\n    - button \"重播\"\n    - checkbox \"减少动态\"\n    - text: 减少动态\n    - status: 首次五星 · 已确认 4 → 5 星 · 已点亮 · 演示姓名与日期，不保存"
+  },
+  {
+    "case": "upgrade",
+    "stars": 0,
+    "visibleState": "\"这一组已完成！\":\n  - button \"关闭奖励弹窗\": ×\n  - heading \"这一组已完成！\" [level=2]\n  - paragraph: 课程已升级，再挑战完整一轮，整轮零错即可点亮新版星星。\n  - article \"演示纪念卡：小小同学，礼貌小帮手\":\n    - paragraph: 灿然英语工作室\n    - heading \"礼貌小帮手\" [level=3]\n    - paragraph: 小小同学\n    - group \"已获得 0 / 5 颗星\"\n    - img \"男士将手提包交还女士\"\n    - paragraph:\n      - generic: Lesson 1–2\n  - paragraph: 新版纪念卡，等你来点亮\n  - button \"先去下一站\"\n  - button \"挑战新版\"\n  - paragraph: 旧版纪念卡和学习记录都保留。\n  - complementary \"仅供设计比较的演示控件\":\n    - generic: 交互演示\n    - group \"布局方案\":\n      - button \"上一个方案\": ←\n      - strong: A 纪念卡登场 · 推荐\n      - button \"下一个方案\": →\n    - generic: 情境\n    - combobox \"情境\":\n      - option \"第一颗星 · 0 → 1\"\n      - option \"新获一星 · 2 → 3\"\n      - option \"集齐五星 · 4 → 5\"\n      - option \"升级后续做 · 不新增\" [selected]\n      - option \"错答后完成 · 不新增\"\n      - option \"本区已有星 · 不新增\"\n      - option \"离线待同步 · 尚未点亮\"\n    - button \"重播\"\n    - checkbox \"减少动态\"\n    - text: 减少动态\n    - status: 升级后续做 · 已确认 0 → 0 星 · 无新增星 · 演示姓名与日期，不保存"
+  },
+  {
+    "case": "retry",
+    "stars": 2,
+    "visibleState": "\"这一组已完成！\":\n  - button \"关闭奖励弹窗\": ×\n  - heading \"这一组已完成！\" [level=2]\n  - paragraph: 再挑战一轮，整轮零错就能点亮星星。\n  - article \"演示纪念卡：小小同学，礼貌小帮手\":\n    - paragraph: 灿然英语工作室\n    - heading \"礼貌小帮手\" [level=3]\n    - paragraph: 小小同学\n    - group \"已获得 2 / 5 颗星\"\n    - img \"男士将手提包交还女士\"\n    - paragraph:\n      - generic: Lesson 1–2\n  - paragraph: 纪念卡上，已有 2 颗星\n  - button \"先去下一站\"\n  - button \"再挑战一轮\"\n  - paragraph: 这次学会的，已经记下了。\n  - complementary \"仅供设计比较的演示控件\":\n    - generic: 交互演示\n    - group \"布局方案\":\n      - button \"上一个方案\": ←\n      - strong: A 纪念卡登场 · 推荐\n      - button \"下一个方案\": →\n    - generic: 情境\n    - combobox \"情境\":\n      - option \"第一颗星 · 0 → 1\"\n      - option \"新获一星 · 2 → 3\"\n      - option \"集齐五星 · 4 → 5\"\n      - option \"升级后续做 · 不新增\"\n      - option \"错答后完成 · 不新增\" [selected]\n      - option \"本区已有星 · 不新增\"\n      - option \"离线待同步 · 尚未点亮\"\n    - button \"重播\"\n    - checkbox \"减少动态\"\n    - text: 减少动态\n    - status: 错答后订正 · 已确认 2 → 2 星 · 无新增星 · 演示姓名与日期，不保存"
+  },
+  {
+    "case": "already",
+    "stars": 3,
+    "visibleState": "\"这一组已完成！\":\n  - button \"关闭奖励弹窗\": ×\n  - heading \"这一组已完成！\" [level=2]\n  - paragraph: 这颗星已经点亮，继续下一站吧。\n  - article \"演示纪念卡：小小同学，礼貌小帮手\":\n    - paragraph: 灿然英语工作室\n    - heading \"礼貌小帮手\" [level=3]\n    - paragraph: 小小同学\n    - group \"已获得 3 / 5 颗星\"\n    - img \"男士将手提包交还女士\"\n    - paragraph:\n      - generic: Lesson 1–2\n  - paragraph: 纪念卡上，已有 3 颗星\n  - button \"留在这一页\"\n  - button \"继续冒险\"\n  - complementary \"仅供设计比较的演示控件\":\n    - generic: 交互演示\n    - group \"布局方案\":\n      - button \"上一个方案\": ←\n      - strong: A 纪念卡登场 · 推荐\n      - button \"下一个方案\": →\n    - generic: 情境\n    - combobox \"情境\":\n      - option \"第一颗星 · 0 → 1\"\n      - option \"新获一星 · 2 → 3\"\n      - option \"集齐五星 · 4 → 5\"\n      - option \"升级后续做 · 不新增\"\n      - option \"错答后完成 · 不新增\"\n      - option \"本区已有星 · 不新增\" [selected]\n      - option \"离线待同步 · 尚未点亮\"\n    - button \"重播\"\n    - checkbox \"减少动态\"\n    - text: 减少动态\n    - status: 本区已有星 · 已确认 3 → 3 星 · 无新增星 · 演示姓名与日期，不保存"
+  },
+  {
+    "case": "pending",
+    "stars": 2,
+    "visibleState": "\"整轮零错！\":\n  - button \"关闭奖励弹窗\": ×\n  - heading \"整轮零错！\" [level=2]\n  - paragraph: 学习记录已保留，联网同步后点亮星星。\n  - article \"演示纪念卡：小小同学，礼貌小帮手\":\n    - paragraph: 灿然英语工作室\n    - heading \"礼貌小帮手\" [level=3]\n    - paragraph: 小小同学\n    - group \"已获得 2 / 5 颗星\"\n    - img \"男士将手提包交还女士\"\n    - paragraph:\n      - generic: Lesson 1–2\n  - paragraph: 纪念卡上，已有 2 颗星\n  - button \"留在这一页\"\n  - button \"继续冒险\"\n  - paragraph: 现在也可以继续学习。\n  - complementary \"仅供设计比较的演示控件\":\n    - generic: 交互演示\n    - group \"布局方案\":\n      - button \"上一个方案\": ←\n      - strong: A 纪念卡登场 · 推荐\n      - button \"下一个方案\": →\n    - generic: 情境\n    - combobox \"情境\":\n      - option \"第一颗星 · 0 → 1\"\n      - option \"新获一星 · 2 → 3\"\n      - option \"集齐五星 · 4 → 5\"\n      - option \"升级后续做 · 不新增\"\n      - option \"错答后完成 · 不新增\"\n      - option \"本区已有星 · 不新增\"\n      - option \"离线待同步 · 尚未点亮\" [selected]\n    - button \"重播\"\n    - checkbox \"减少动态\"\n    - text: 减少动态\n    - status: 等待同步 · 已确认 2 → 2 星 · 无新增星 · 演示姓名与日期，不保存"
+  }
+]

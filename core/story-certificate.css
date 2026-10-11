@@ -40,6 +40,24 @@
  .story-award-actions .shop-icon{width:22px;height:22px}
 }
 .story-award-name.is-placeholder{font-size:clamp(14px,3cqw,20px);color:#795a46;text-shadow:none}
+/* The course keepsake retains the same ambient light as the album and reveal.
+   Motion stays enabled by product choice, independently of OS reduced motion. */
+@property --card-gold-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+.story-award-panel .award-star{position:relative;display:inline-flex;flex:none;isolation:isolate}
+.story-award-panel .award-star img{display:block;position:relative;z-index:1}
+.story-award-panel .award-star[data-earned='true'] img{filter:brightness(1.13) saturate(1.18) drop-shadow(0 0 3px #ffd561b3)}
+.story-award-panel .award-star[data-earned='true']::before{content:'';position:absolute;inset:-20%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#ffd8655c,transparent 69%)}
+.story-award-panel .award-star[data-earned='true']::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(112deg,transparent 35%,#fff7c680 43%,#fffdf5ed 48%,#ffeaa580 53%,transparent 63%) 180% 0/260% 100%;mask:url('/assets/awards/star-earned.webp') center/contain no-repeat;-webkit-mask:url('/assets/awards/star-earned.webp') center/contain no-repeat;animation:card-star-sheen 4.8s ease-in-out infinite!important;animation-delay:calc(var(--star-order) * -.32s)!important}
+.story-award-panel .star-glint{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0}
+.story-award-panel .award-star[data-earned='true'] .star-glint{animation:card-star-twinkle 4.8s ease-in-out infinite!important;animation-delay:calc(var(--star-order) * -.32s)!important}
+.story-award-panel .star-glint::before,.story-award-panel .star-glint::after{content:'';position:absolute;background:#fffce8;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 3px #ffda75)}
+.story-award-panel .star-glint::before{width:32%;height:42%;top:3%;right:10%}.story-award-panel .star-glint::after{width:20%;height:27%;bottom:7%;left:11%}
+@keyframes card-star-sheen{0%,8%{opacity:0;background-position:180% 0}20%{opacity:.85}42%{opacity:0;background-position:-80% 0}100%{opacity:0;background-position:-80% 0}}
+@keyframes card-star-twinkle{0%,5%,50%,100%{opacity:.22;transform:scale(.8)}23%{opacity:1;transform:scale(1.14)}36%{opacity:.6;transform:scale(1)}}
+.story-award-panel .gold-light-ring{position:absolute;inset:0;z-index:3;padding:clamp(3px,1cqw,6px);border-radius:inherit;pointer-events:none;opacity:0;background:conic-gradient(from var(--card-gold-angle),#d7962e 0deg,#edba52 40deg,#ffe7a1 58deg,#fffde5 70deg,#ffe098 81deg,#dca33b 105deg,#b97922 170deg,#eeb94c 220deg,#fff5cf 247deg,#e3a33d 275deg,#b97922 325deg,#d7962e 360deg);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor}
+.story-award-panel .story-award-paper[data-stars='5'] .gold-light-ring{opacity:1;animation:card-gold-orbit 5.8s linear infinite!important}
+.story-award-panel .story-award-paper[data-motion='paused'] :is(.star-glint,.gold-light-ring),.story-award-panel .story-award-paper[data-motion='paused'] .award-star::after{animation-play-state:paused!important}
+@keyframes card-gold-orbit{from{--card-gold-angle:0deg}to{--card-gold-angle:360deg}}
 @media print{
  body:not(.print-writing)>*{display:none!important}
  body:not(.print-writing) #lessonWorkspace,body:not(.print-writing) #l5,body:not(.print-writing) .stage-certificate{display:block!important;padding:0!important;margin:0!important;border:0!important}

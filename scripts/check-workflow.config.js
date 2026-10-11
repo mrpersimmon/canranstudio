@@ -17,7 +17,7 @@ function tasks(root, files) {
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
     'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
-    'browser-unit12': browser(['tests/e2e/unit1-2','tests/e2e/unit-thirteen-types.spec.js']),
+    'browser-unit12': browser(['tests/e2e/unit1-2','tests/e2e/unit-thirteen-types.spec.js','tests/e2e/award-reveal.spec.js','tests/e2e/three-unit-awards.spec.js']),
     'browser-unit34': browser(['tests/e2e/unit3-4']),
     'browser-unit56': browser(['tests/e2e/unit5-6']),
     'browser-units1-6-exam': browser(['tests/e2e/unit1-2-exam.spec.js', 'tests/e2e/unit3-4-exam.spec.js', 'tests/e2e/unit5-6-exam.spec.js', 'tests/e2e/units1-6-exam-layout.spec.js', 'tests/e2e/units1-6-exam-upgrade.spec.js', 'tests/e2e/unit-dedup.spec.js']),
@@ -83,7 +83,7 @@ function select(files) {
   if (code.some(file => /^(unit37-38\/|assets\/unit37-38\/|tests\/support\/unit37-38-flow\.js)/.test(file))) selected.push('browser-unit3738');
   if (code.some(file => /^(unit39-40\/|assets\/unit39-40\/|tests\/support\/unit39-40-flow\.js)/.test(file))) selected.push('browser-unit3940');
   if (code.some(file => /^unit49-50\/certificate\.(?:js|css)$/.test(file))) selected.push('browser-certificates');
-  if (code.some(file => /^(award-book\/|scripts\/award-book-bundle\.js$|core\/(?:award-rules|unit-awards|story-certificate)\.|assets\/awards\/|tests\/support\/unit1-2-award-flow\.js)/.test(file))) selected.push('browser-unit12', 'browser-login');
+  if (code.some(file => /^(award-book\/|scripts\/award-book-bundle\.js$|core\/(?:award-rules|unit-awards|story-certificate|award-reveal|award-gif)\.|core\/vendor\/gifenc|assets\/awards\/|tests\/support\/unit1-2-award-flow\.js)/.test(file))) selected.push('browser-unit12', 'browser-login');
   if (code.some(file => /^(unit29-30\/|assets\/unit29-30\/|tests\/support\/unit29-30-flow\.js)/.test(file))) selected.push('browser-unit2930');
   if (code.some(file => /^(core\/lesson49-task-inputs\.(?:js|css)$|unit(?:1-2|3-4|5-6|7-8|9-10|11-12|13-14|15-16|17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/(?:content|unit|scene)\.(?:js|css)$|tests\/(?:e2e\/(?:units1-30-|units-room-tasks)|support\/units1-30-|fixtures\/units1-30-tasks-before\/))/.test(file))) selected.push('browser-units1-30-tasks');
   if (code.some(file => /^(unit[^/]*\/|lesson\d+\/|soundmark\/|core\/(?:lesson49-practice|lesson49-subjects|course-catalog)\.js|tests\/(?:e2e\/retry-feedback\.spec\.js|fixtures\/l49-subjects-before-retry\.js))/.test(file))) selected.push('browser-retry-feedback');

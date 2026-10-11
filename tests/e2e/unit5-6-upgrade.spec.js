@@ -38,7 +38,7 @@ test('配音旧15星不自动获得新版星星，未改题与姓名保留，新
   await page.keyboard.press('Escape'); upgrade(); await page.reload();
   await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
   expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit5-6:learning:v1')).activity.unitName)).toBe('小伙伴');
-  await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+  await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
   await expect(page.locator('#starCount')).toHaveText('0');
   await page.goto('/unit5-6/#learn/listen'); const room = page.locator('.stage-listen');
   await expect(room).toContainText('给新朋友的国籍词');

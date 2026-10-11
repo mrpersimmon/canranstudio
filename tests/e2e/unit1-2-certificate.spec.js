@@ -16,7 +16,7 @@ test.beforeEach(async({page})=>{
 });
 for(const width of [320,390,768,1280])test(`${width} 像素纪念卡居中适度展示，匿名预览不填名也不导出`,async({page})=>{
   await page.setViewportSize({width,height:900});await page.goto('/unit1-2/#learn/certificate');
-  const card=page.getByRole('article',{name:'我的单元纪念卡'});
+  const card=page.getByRole('article',{name:'我的纪念卡'});
   await expect(page.getByLabel('纪念卡上的名字')).toHaveCount(0);
   await expect(card.locator('#certificateName')).toHaveText('登录后显示姓名');
   await expect(card).toHaveAttribute('data-stars','5');
@@ -27,7 +27,7 @@ for(const width of [320,390,768,1280])test(`${width} 像素纪念卡居中适度
   const bounds=await card.boundingBox();
   expect(bounds.width).toBeLessThanOrEqual(width<=540?340:720);
   expect(Math.abs(bounds.x+bounds.width/2-width/2)).toBeLessThan(2);
-  await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
+  await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
   await expect.poll(()=>card.locator('img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0))).toBe(true);
   await page.evaluate(()=>document.fonts.ready);
   await page.screenshot({path:`output/playwright/award-unit1-2-anonymous-${width}.png`});
