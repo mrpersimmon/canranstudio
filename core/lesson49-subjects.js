@@ -116,7 +116,7 @@
         actions.append(button('再练一轮', () => {
           archive(run, 'completed-run'); run = freshRun(); save(); render(); learning.revealQuestion(element);
         }, 'btn btn-yellow'));
-        finish.append(stamp, node('p', '分拣完成！'), node('p', `基础题首次答对 ${score} / ${questions.length}`), actions);
+        finish.append(stamp, node('p', '分拣完成！'), learning.renderStatistics({ submissions: run.submissions }), node('p', `基础题首次答对 ${score} / ${questions.length}`), actions);
         element.append(finish); onComplete(); return;
       }
       const current = run.current;

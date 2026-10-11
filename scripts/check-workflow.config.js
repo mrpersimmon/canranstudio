@@ -11,6 +11,7 @@ function tasks(root, files) {
   return {
     'browser-login': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
     'browser-recovery-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.recovery.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js','playwright.recovery.config.js'],browser:'webkit'},
+    'browser-statistics-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.statistics.config.js','--project=webkit-phone'],inputs:[...runtimeInputs,'server','playwright.login.config.js','playwright.statistics.config.js'],browser:'webkit'},
     workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: [...runtimeInputs, 'server'] },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
@@ -53,6 +54,7 @@ function tasks(root, files) {
 }
 function select(files) {
   const selected = [];
+  if (files.some(file => /^(core\/lesson49-(?:practice|subjects|experience)\.(?:js|css)|unit1-2\/completion\.(?:js|css)|tests\/(?:e2e|login)\/submission-statistics\.spec\.js|tests\/fixtures\/submission-statistics-before\/|playwright\.statistics\.config\.js)/.test(file))) selected.push('browser-statistics-webkit');
   if (files.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/course-packages\.js|server\/public\/access-(?:client|worker)\.js|tests\/login\/(?:server\.js|helpers\.js|course-loading-recovery\.spec\.js)|tests\/support\/course-response-faults\.js|playwright\.(?:recovery|login)\.config\.js)$/.test(file))) selected.push('browser-recovery-webkit');
   if(files.some(file=>/^(server\/|tests\/login\/|playwright.login.config.js|deploy\/login\/|core\/(?:course-(?:cache|loader|worker)|lesson49-practice)\.js|scripts\/(?:course-packages|public-base-path|build-login)\.js|unit[^/]+\/(?:content|unit)\.js)/.test(file)))selected.push('browser-login');
   if (files.some(isWorkflow)) selected.push('workflow');

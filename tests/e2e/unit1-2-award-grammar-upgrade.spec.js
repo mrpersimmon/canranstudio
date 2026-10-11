@@ -29,7 +29,9 @@ test('已发布纪念卡升级语法版：旧五星日期保留，旧问句入�
   await page.goto('/unit1-2/#learn/listen');
   const words = page.locator('.stage-listen');
   // The old workshop's unchanged watch task joins the four completed words.
-  await expect(words.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['5', '5', '0']);
+  // These answers came from separate activities: preserve them without inventing
+  // a single chronological round (or a five-answer streak) for the new activity.
+  await expect(words.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['—', '—', '—']);
   await expect(page.locator('#starCount')).toHaveText('0');
   await words.getByRole('button', { name: '再练一轮', exact: true }).click();
   await flow.activity(page, '1-2', 'listen');

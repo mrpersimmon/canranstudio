@@ -10,6 +10,53 @@
   let lastSaveFailed = false;
   const isRecord = value => value && typeof value === 'object' && !Array.isArray(value);
   const newRunId = () => root.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+  function submissionStatistics(submissions) {
+    let streak = 0, best = 0, correct = 0, incorrect = 0;
+    for (const answer of submissions) {
+      if (answer.correct) { correct++; streak++; best = Math.max(best, streak); }
+      else { incorrect++; streak = 0; }
+    }
+    return { best, correct, incorrect };
+  }
+  function roundStatistics(states) {
+    let streak = 0, best = 0, correct = 0, incorrect = 0;
+    // This runner advances only after a correct answer and cannot resubmit it.
+    // Each validated question therefore represents zero or more errors followed
+    // by at most one correct submission. Read that evidence; never rewrite it.
+    for (const state of states) {
+      if (!state || state.attempts === 0) continue;
+      if (!Number.isSafeInteger(state.attempts) || state.attempts < 1 ||
+          typeof state.firstCorrect !== 'boolean' || typeof state.correct !== 'boolean' ||
+          (state.firstCorrect && (state.attempts !== 1 || !state.correct)) ||
+          (state.attempts === 1 && state.firstCorrect !== state.correct)) return null;
+      const errors = state.attempts - Number(state.correct);
+      incorrect += errors;
+      if (errors) streak = 0;
+      if (state.correct) { correct++; streak++; best = Math.max(best, streak); }
+    }
+    return { best, correct, incorrect };
+  }
+  function renderStatistics({ states, submissions, incomplete = false }) {
+    const counts = incomplete ? null : submissions ? submissionStatistics(submissions) : roundStatistics(states);
+    const list = document.createElement('ul'); list.className = 'completion-stats';
+    list.setAttribute('aria-label', '本轮成果'); list.dataset.statisticsVersion = counts ? 'submissions-v1' : 'legacy-partial';
+    const metrics = [
+      ['连续答对', 'best', '本轮最高连续答对', '/assets/unit1-2/completion/streak-v1.png'],
+      ['本次答对', 'correct', '本轮实际提交答对，包含订正', '/assets/unit1-2/completion/correct-v1.png'],
+      ['本次答错', 'incorrect', '本轮实际提交答错，重复错答分别计数', '/assets/unit1-2/completion/incorrect-v1.png']
+    ];
+    for (const [label, key, meaning, src] of metrics) {
+      const card = document.createElement('li'), heading = document.createElement('span'), body = document.createElement('div');
+      const icon = document.createElement('img'), number = document.createElement('strong'), unit = document.createElement('span');
+      card.className = 'completion-stat stat-' + (key === 'best' ? 'streak' : key); heading.className = 'completion-stat-label'; heading.textContent = label;
+      card.setAttribute('aria-label', counts ? meaning + ' ' + counts[key] + ' 次' : label + '：旧记录次数不完整');
+      body.className = 'completion-stat-value'; icon.className = 'shop-icon'; icon.src = src; icon.alt = ''; icon.width = icon.height = 128;
+      icon.setAttribute('aria-hidden', 'true'); number.className = 'completion-number'; number.textContent = counts ? String(counts[key]) : '—';
+      unit.className = 'completion-unit'; unit.textContent = '次';
+      body.append(icon, number, unit); card.append(heading, body); list.append(card);
+    }
+    return list;
+  }
   // Presentation only: keep the source question intact for exact draft migration.
   // Chinese instruction punctuation is distinct from punctuation in language material.
   function questionCopy(q, presentation) {
@@ -112,10 +159,10 @@
       section.append(heading, list);
       const round = [...activeDraftKeys].map(key => notebook.groups[key]).find(group => group?.signature === questions.map(q => q.id).join('|'));
       if (round?.states.some(state => state?.attempts > 0)) {
-        let streak = 0, best = 0;
-        for (const state of round.states) { streak = state?.firstCorrect ? streak + 1 : 0; best = Math.max(best, streak); }
+        const counts = round.statisticsIncomplete || round.runId?.startsWith('merged:') ? null : roundStatistics(round.states);
         const details = document.createElement('details'), summary = document.createElement('summary'), metric = document.createElement('p');
-        details.className = 'record-round-details'; summary.textContent = '本轮详情'; metric.textContent = `最高连续首次答对 ${best} 题`;
+        details.className = 'record-round-details'; summary.textContent = '本轮详情';
+        metric.textContent = counts ? `连续答对 ${counts.best} 次 · 本次答对 ${counts.correct} 次 · 本次答错 ${counts.incorrect} 次` : '旧记录次数不完整';
         details.append(summary, metric); section.append(details);
       }
       box.append(section);
@@ -240,7 +287,7 @@
           }
         }
       });
-      group = { index: 0, states: [], carriedStates, runId, roundPolicy: sources.length ? null : roundPolicy, draftVersion: DRAFT_VERSION,
+      group = { index: 0, states: [], carriedStates, runId, statisticsIncomplete: Object.values(carriedStates).some(state => state.attempts > 0), roundPolicy: sources.length ? null : roundPolicy, draftVersion: DRAFT_VERSION,
         signature: questions.map(q => q.id).join('|'), contentSignature };
       // Only a verified, contiguous correct prefix may set the starting point.
       // Later unchanged answers remain separate until their question is shown.
@@ -268,7 +315,7 @@
         const unfinished = states.findIndex(state => !state?.checked || !state.correct);
         // A checked final answer still needs the learner's Finish action.
         const index = unfinished < 0 ? (group.index === prior.length ? questions.length : questions.length - 1) : unfinished;
-        group = { ...group, index, states, signature: questions.map(q => q.id).join('|'), contentSignature };
+        group = { ...group, index, states, statisticsIncomplete: states.some(state => state?.attempts > 0), signature: questions.map(q => q.id).join('|'), contentSignature };
         notebook.groups[key] = group;
       }
     }
@@ -373,6 +420,7 @@
     }
     function restart() {
       group.index = 0; group.states = []; delete group.carriedStates;
+      delete group.statisticsIncomplete;
       group.runId = newRunId(); group.roundPolicy = roundPolicy;
       save(); render(); revealQuestion(element, sceneView?.heading());
     }
@@ -389,7 +437,7 @@
         const finish=document.createElement('div');finish.className='practice-finish';
         const again=button('再练一轮', restart,'btn btn-mini btn-yellow');
         const stamp=root.CanranCore.lesson49Icons.create(sceneView?'people':'check');stamp.classList.add('finish-icon');
-        finish.append(stamp,summary);
+        finish.append(stamp,summary,renderStatistics({ states: group.states, incomplete: group.statisticsIncomplete || group.runId.startsWith('merged:') }));
         if(completionDetails)finish.append(completionDetails);
         const finishActions=document.createElement('div');finishActions.className='practice-finish-actions';
         finishActions.setAttribute('role','group');finishActions.setAttribute('aria-label','完成后的操作');
@@ -668,5 +716,5 @@
     refreshSaveStatus();
   }
   root.CanranCore = root.CanranCore || {};
-  root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel, sameContentSignature };
+  root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel, sameContentSignature, renderStatistics };
 })(globalThis);

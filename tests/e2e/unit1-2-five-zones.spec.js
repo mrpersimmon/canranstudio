@@ -77,7 +77,8 @@ test('六区旧记录迁入：未改题保留，改写题未答，历史结果�
     await flow.activity(page, '1-2', id);
   }
   await page.goto('/unit1-2/#learn/listen'); const listen = page.locator('.stage-listen');
-  await expect(listen.getByRole('list', { name: '本轮成果' }).locator('.completion-number')).toHaveText(['5', '5', '0']);
+  // A merger of completed old activities is not a provable current-round sequence.
+  await expect(listen.getByRole('list', { name: '本轮成果' }).locator('.completion-number')).toHaveText(['—', '—', '—']);
   await expect(page.locator('#starCount')).toHaveText('0');
   await listen.getByRole('button', { name: '再练一轮', exact: true }).click(); await page.reload();
   await expect(listen.locator('.progress-copy')).toHaveText('第 1 / 5 题');
@@ -98,7 +99,7 @@ test('学习内容不发星；每区整轮首次零错得一星，改正后完�
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(room.getByRole('list', { name: '本轮成果' }).locator('.completion-number')).toHaveText(['4', '4', '1']);
+  await expect(room.getByRole('list', { name: '本轮成果' }).locator('.completion-number')).toHaveText(['5', '5', '1']);
   await expect(room.locator('.completion-award')).toContainText('这轮有过答错');
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');
