@@ -72,7 +72,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       # Cold-load and warm-revisit budgets use separate browser processes; do
       # not mix them with the repeated reload and fault-injection stress tests.
-      - run: npx playwright test tests/e2e/course-cache-updates.spec.js --grep @cache-performance --trace=off --reporter=line
+      - run: npx playwright test tests/e2e/course-cache-cold.spec.js --grep @cache-performance --trace=off --reporter=line
       - run: npx playwright test tests/e2e/course-cache-performance.spec.js --grep @cache-performance --reporter=line
 
   accounts:

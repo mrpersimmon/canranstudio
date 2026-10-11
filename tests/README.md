@@ -55,6 +55,8 @@ Lesson 1–2、3–4、5–6 现行规则为每单元五个答题区、整轮首
 
 缓存复访计时独立在 `tests/e2e/course-cache-performance.spec.js`：完成一次正常准备后，保持同一浏览器与持久缓存，20 次重新打开导航页、真实点课，恢复交替保存的第 2／3 页词卡；P95 仍小于 1500 ms，图片、字体和脚本不重新下载。以浏览器内的实际点击时刻到图片、字体与真实按钮全部就绪的画面计时，不把测试工具轮询算入加载时间，工具侧耗时另列。不录制追踪、不强制垃圾回收、不额外预热其他课程。成功或失败都保留部分样本、失败步骤和浏览器错误。
 
+`course-cache-cold.spec.js` 中的 10 Mbps／150 ms 冷加载采用相同边界：从导航中的真实点击事件计时，直至加载层消失、字体和图片就绪、词卡可操作且进入已渲染画面；仍须小于 5 秒。不把点击前的自动滚动、按钮等待或断言轮询计为用户等待。报告同时保留 `elapsedMs`（页面实际耗时）与 `driverElapsedMs`（原工具耗时），无论通过或失败均输出到 CI 日志及附件；计时场景不启用追踪，其余故障行为检查保留追踪。
+
 同一标签连续刷新 20 次另验位置、完整素材、可操作按钮和零重下载，保留压力场景的实际耗时，不把它替代缓存标准 C03 的“从点课到恢复位置”。CI 使用 `@cache-performance` 标签把冷加载与复访计时放到独立任务，并以两个命令分别启动浏览器；四组课程检查运行其余全部用例，汇总 `test` 同时要求性能任务成功，不能静默跳过。本地计划相应使用 `browser-cache-cold`、`browser-cache-revisit` 和不含这两项计时的 `browser-course-cache`；5 秒冷加载与 P95 1.5 秒复访门槛保持不变。PR #15 合入时合计 1385 项页面检查（1384 项课程行为＋1 项复访计时）。共享缓存代码变化仍同时验证冷加载、复访和连续刷新。`course-loading.spec.js` 还验证课程不预载其他单元场景，以及 Lesson 1–2、3–4、49–50 各自背景实际显示。
 
 # 老师体系（2026-10-09）
@@ -141,7 +143,7 @@ Lesson 1–2 当前场景样板见[设计与验收](../docs/butcher-version/2026
 
 统一标准 v1.30 将功能与视觉验收分开：除题目去重，还要对照相邻单元的场景与任务，复看角色、道具、短／长对白、作答前后和每个结束页。新单元依据自己的教学内容建立页面预期；样板用例通过不代表其他单元已通过。
 
-网页加载与缓存的行为清单单独见[缓存方案 C01–C15](../docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md#7-页面行为验收清单)。实现覆盖首访完整图片、重启复访、弱网失败、缓存缺失、更新与旧页并存、子目录隔离及实际证书。缓存专项运行 `npx playwright test tests/e2e/course-loading.spec.js tests/e2e/course-cache-updates.spec.js tests/e2e/course-cache-performance.spec.js tests/e2e/course-cache-journeys.spec.js tests/e2e/lesson-deployment.spec.js`；最后一次真实结果见缓存文档，不把单元旧测试当作缓存证明。
+网页加载与缓存的行为清单单独见[缓存方案 C01–C15](../docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md#7-页面行为验收清单)。实现覆盖首访完整图片、重启复访、弱网失败、缓存缺失、更新与旧页并存、子目录隔离及实际证书。缓存专项运行 `npx playwright test tests/e2e/course-loading.spec.js tests/e2e/course-cache-cold.spec.js tests/e2e/course-cache-updates.spec.js tests/e2e/course-cache-performance.spec.js tests/e2e/course-cache-journeys.spec.js tests/e2e/lesson-deployment.spec.js`；最后一次真实结果见缓存文档，不把单元旧测试当作缓存证明。
 
 先按[统一标准的模式对照](../docs/butcher-version/publish/2026-10-10-1315-v1.30-教学单元设计标准与验收清单.md#先确定本单元采用哪种模式)确定本次范围：两种模式都验证第 8.1 节；配音版追加第 8.2 节，无配音课堂配套版追加第 8.3 节；切换模式或升级内容再加第 8.4 节。无配音版须验证全部声音失败仍可完成、零英语配音请求与零系统朗读，反馈音另在正常环境验证。停用录音的播放项记不适用，历史待听审状态保留，不算通过。
 

@@ -14,7 +14,7 @@ function tasks(root, files) {
     workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: [...runtimeInputs, 'server'] },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
-    'browser-cache-cold': browser(['tests/e2e/course-cache-updates.spec.js', '--grep', '@cache-performance', '--trace=off']),
+    'browser-cache-cold': browser(['tests/e2e/course-cache-cold.spec.js', '--grep', '@cache-performance', '--trace=off']),
     'browser-cache-revisit': browser(['tests/e2e/course-cache-performance.spec.js', '--grep', '@cache-performance']),
     'browser-course-cache': browser(['tests/e2e/course-loading.spec.js', 'tests/e2e/course-image-transitions.spec.js', 'tests/e2e/course-cache-updates.spec.js', 'tests/e2e/course-cache-performance.spec.js', 'tests/e2e/course-cache-journeys.spec.js', 'tests/e2e/lesson-deployment.spec.js', '--grep-invert', '@cache-performance']),
     'browser-full': browser([]),
