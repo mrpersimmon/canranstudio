@@ -76,7 +76,7 @@ for (const { id, lesson, complete } of [
     });
     await student.page.goto(`/lesson/${id}/#learn/certificate`);
     const keepsake=['unit3-4','unit5-6'].includes(id);
-    await expect(student.page.getByRole('button', { name: keepsake?'保存纪念卡':'领取单元证书', exact: true })).toBeDisabled();
+    await expect(student.page.getByRole('button', { name: keepsake?'保存动图':'领取单元证书', exact: true })).toBeDisabled();
     await complete(student.page, '/lesson');
     if(keepsake){
       await expect(student.page.locator('#certificateName')).toHaveText('合并体验');
@@ -95,7 +95,7 @@ for (const { id, lesson, complete } of [
     await expect(second.page.locator('#starCount')).toHaveText(keepsake?'5':'15');
     if(keepsake){
       await expect(second.page.locator('#certificateName')).toHaveText('合并体验');
-      await expect(second.page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeEnabled();
+      await expect(second.page.getByRole('button',{name:'保存动图',exact:true})).toBeEnabled();
     }else{
     await expect(second.page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('合并体验');
     await expect(second.page.getByRole('button', { name: '领取单元证书', exact: true })).toBeEnabled();

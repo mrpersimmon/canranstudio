@@ -1,0 +1,84 @@
+[
+  {
+    "check": "点击卡片关闭",
+    "closed": true,
+    "focus": "showReward",
+    "scrollY": 0
+  },
+  {
+    "check": "点击背景关闭",
+    "closed": true,
+    "focus": "showReward",
+    "scrollY": 0
+  },
+  {
+    "check": "动画中 Esc 关闭",
+    "closed": true,
+    "focus": "showReward",
+    "leftover": 0,
+    "scrollY": 0,
+    "stars": "1"
+  },
+  {
+    "check": "回车关闭",
+    "closed": true,
+    "focus": "showReward",
+    "scrollY": 0
+  },
+  {
+    "check": "首次五星",
+    "dateHidden": false,
+    "dockHidden": true,
+    "stars": "5",
+    "visibleButtons": 0,
+    "visibleText": "灿然英语工作室\n\n礼貌小帮手\n\n小小同学\n\nLesson 1–2\n2026.10.10"
+  },
+  {
+    "card": {
+      "height": 333.328125,
+      "width": 320,
+      "x": 35,
+      "y": 255.328125
+    },
+    "cardFits": true,
+    "check": "手机390",
+    "overflow": false,
+    "viewport": {
+      "h": 844,
+      "w": 390
+    },
+    "visibleButtons": 0
+  },
+  {
+    "check": "空格关闭",
+    "closed": true,
+    "focus": "showReward",
+    "scrollY": 0
+  },
+  {
+    "card": {
+      "height": 291.65625,
+      "width": 280,
+      "x": 20,
+      "y": 174.171875
+    },
+    "cardFits": true,
+    "check": "手机320",
+    "overflow": false,
+    "viewport": {
+      "h": 640,
+      "w": 320
+    },
+    "visibleButtons": 0
+  },
+  {
+    "check": "手机点击卡片关闭",
+    "closed": true,
+    "focus": "showReward",
+    "scrollY": 0
+  },
+  {
+    "check": "浏览器错误",
+    "logs": []
+  }
+]

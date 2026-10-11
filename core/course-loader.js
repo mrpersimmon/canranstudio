@@ -7,13 +7,49 @@
   const memoryUrls = new Map(), heldImages = new Map();
   const cancellation = new AbortController();
   const taskKey = 'preparing:' + crypto.randomUUID();
+  // A partly executed course must restart in a clean document. Carry only the
+  // recovery intent through that reload; never clear account or learning data.
+  const entryUrl = new URL(location.href);
+  const retryAfterReload = entryUrl.searchParams.get('course-retry') === '1';
+  if (retryAfterReload) {
+    entryUrl.searchParams.delete('course-retry');
+    history.replaceState(history.state, '', entryUrl.href);
+  }
+  function reloadForRetry() {
+    const url = new URL(location.href); url.searchParams.set('course-retry', '1');
+    location.replace(url.href);
+  }
   let observer, painting = false, withdrawn = false, replacement;
   const leaseKey = pack => taskKey + ':' + pack.revision;
   let running = false, initialized = false, controlled = false, activePack = null;
-  let executionStarted = false, visualFailure = false;
+  let startAttempted = false, executionStarted = false, visualFailure = false;
   const ready = document.readyState === 'loading' ? new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve, { once: true })) : Promise.resolve();
   const hash = CanranCourseCache.digest;
   const status = text => { const node = document.getElementById('courseLoadingStatus'); if (node && node.textContent !== text) node.textContent = text; };
+  const failure = (code, message) => Object.assign(new Error(message), { courseCode: code });
+  const failureMessages = {
+    L00: '还没准备好，再试一次。',
+    L01: '课程连接失败，请再试一次。',
+    L02: '课程需要更新，请再试一次。',
+    L03: '有个文件没准备好，再试一次。',
+    L04: '文件不完整，再试一次。',
+    L05: '画面还没准备好，再试一次。',
+    L06: '课程未能打开，再试一次。',
+    L07: '请返回课程，确认登录状态。'
+  };
+  function showFailure(error, fallback = 'L00', message) {
+    const code = failureMessages[error?.courseCode] ? error.courseCode : fallback;
+    status(message || failureMessages[code]);
+    const retry = document.getElementById('courseLoadingRetry'); if (retry) retry.hidden = false;
+    const detail = document.getElementById('courseLoadingDetail');
+    if (detail) detail.textContent = '学习记录会保留。错误编号：' + code;
+    console.warn('Course preparation failed [' + code + ']:', error);
+  }
+  function preparing(text) {
+    status(text);
+    const detail = document.getElementById('courseLoadingDetail'); if (detail) detail.textContent = '';
+    const retry = document.getElementById('courseLoadingRetry'); if (retry) retry.hidden = true;
+  }
   const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
   function rpc(worker, message, timeout = 1200) {
     return new Promise((resolve, reject) => {
@@ -53,25 +89,44 @@
   }
   async function read(url) {
     const target = new URL(url, location.origin);
-    if (target.origin !== location.origin || !target.pathname.startsWith(base)) throw new Error('课程地址不正确');
-    const response = await fetch(target.href, { cache: 'no-cache', signal: AbortSignal.any([cancellation.signal, AbortSignal.timeout(15000)]) });
-    if (!response.ok) throw new Error('资源暂未准备好');
-    return response;
+    if (target.origin !== location.origin || !target.pathname.startsWith(base)) throw failure('L02', '课程地址不正确');
+    // Older WebViews have AbortController but not AbortSignal.any/timeout.
+    // Keep the deadline active until the response body has also arrived.
+    const controller = new AbortController(), cancel = () => controller.abort();
+    cancellation.signal.addEventListener('abort', cancel, { once: true });
+    if (cancellation.signal.aborted) cancel();
+    const timer = setTimeout(cancel, 15000);
+    try {
+      const response = await fetch(target.href, { cache: 'no-cache', signal: controller.signal });
+      if (!response.ok) throw failure('L01', '资源暂未准备好');
+      return await response.arrayBuffer();
+    } catch (error) {
+      if (!error.courseCode) error.courseCode = 'L01';
+      throw error;
+    } finally {
+      clearTimeout(timer);
+      cancellation.signal.removeEventListener('abort', cancel);
+    }
   }
   async function latest() {
-    const index = await (await read(base + 'course-index.json')).json();
-    if (index.schema !== 1 || index.basePath !== base || index.protocol !== 1) throw new Error('课程清单不兼容');
-    await store.put('meta', 'withdrawn', Array.isArray(index.withdrawn) ? index.withdrawn : []).catch(() => {});
-    updates?.postMessage({ withdrawn: index.withdrawn || [] });
-    if (activePack && index.withdrawn?.includes(activePack.id + '@' + activePack.revision)) withdrawn = true;
-    const descriptor = index.courses[courseId];
-    if (!descriptor) throw new Error('课程暂未准备好');
-    const buffer = await (await read(descriptor.manifest)).arrayBuffer();
-    if (await hash(buffer) !== descriptor.sha256) throw new Error('课程清单需要重新准备');
-    const pack = JSON.parse(new TextDecoder().decode(buffer));
-    if (pack.id !== courseId || pack.revision !== descriptor.revision || pack.protocol !== 1 || pack.basePath !== base || !Array.isArray(pack.required) || !Array.isArray(pack.audio)) throw new Error('课程内容不兼容');
-    if (index.withdrawn?.includes(pack.id + '@' + pack.revision)) throw new Error('课程正在更新');
-    return pack;
+    try {
+      const index = JSON.parse(new TextDecoder().decode(await read(base + 'course-index.json')));
+      if (index.schema !== 1 || index.basePath !== base || index.protocol !== 1) throw new Error('课程清单不兼容');
+      await store.put('meta', 'withdrawn', Array.isArray(index.withdrawn) ? index.withdrawn : []).catch(() => {});
+      updates?.postMessage({ withdrawn: index.withdrawn || [] });
+      if (activePack && index.withdrawn?.includes(activePack.id + '@' + activePack.revision)) withdrawn = true;
+      const descriptor = index.courses[courseId];
+      if (!descriptor) throw new Error('课程暂未准备好');
+      const buffer = await read(descriptor.manifest);
+      if (await hash(buffer) !== descriptor.sha256) throw new Error('课程清单需要重新准备');
+      const pack = JSON.parse(new TextDecoder().decode(buffer));
+      if (pack.id !== courseId || pack.revision !== descriptor.revision || pack.protocol !== 1 || pack.basePath !== base || !Array.isArray(pack.required) || !Array.isArray(pack.audio)) throw new Error('课程内容不兼容');
+      if (index.withdrawn?.includes(pack.id + '@' + pack.revision)) throw new Error('课程正在更新');
+      return pack;
+    } catch (error) {
+      if (!error.courseCode) error.courseCode = 'L02';
+      throw error;
+    }
   }
   function blobUrl(item, buffer) {
     if (!memoryUrls.has(item.key)) memoryUrls.set(item.key, URL.createObjectURL(new Blob([buffer], { type: item.type })));
@@ -79,8 +134,9 @@
   }
   async function imageReady(src) {
     const image = new Image(); image.src = src;
-    await image.decode();
-    if (!image.naturalWidth) throw new Error('图片暂未准备好');
+    try { await image.decode(); }
+    catch { throw failure('L05', '图片暂未准备好'); }
+    if (!image.naturalWidth) throw failure('L05', '图片暂未准备好');
     return image;
   }
   async function holdImage(src) {
@@ -125,6 +181,7 @@
     Element.prototype.setAttribute = function (name, value) { return original.call(this, name, this instanceof HTMLImageElement && name === 'src' ? resourceAddress(value) : value); };
   }
   async function start(pack, resources) {
+    startAttempted = true;
     status('正在准备画面…');
     const persistent = await store.commit(pack, !pack.lastUsed);
     controlled = controlled && persistent && (await rpc(navigator.serviceWorker.controller, { type: 'course:pin', id: pack.id, revision: pack.revision })).ok;
@@ -153,7 +210,7 @@
     for (const link of parsed.querySelectorAll('link[rel="stylesheet"]')) {
       const key = new URL(link.getAttribute('href'), new URL(pack.entry, location.origin)).pathname;
       const value = resources.get(key);
-      if (!value) throw new Error('课程样式未列入清单');
+      if (!value) throw failure('L02', '课程样式未列入清单');
       const style = parsed.createElement('style');
       style.textContent = cssUrls(new TextDecoder().decode(value.buffer), new URL(key, location.origin).href);
       link.replaceWith(style);
@@ -174,11 +231,11 @@
       if (original.type) script.type = original.type;
       if (original.src) {
         const key = new URL(original.src, new URL(pack.entry, location.origin)).pathname;
-        if (!resources.has(key)) throw new Error('课程脚本未列入清单');
+        if (!resources.has(key)) throw failure('L02', '课程脚本未列入清单');
         script.textContent = new TextDecoder().decode(resources.get(key).buffer) + '\n//# sourceURL=' + key;
       } else script.textContent = original.text;
       document.body.append(script);
-      if (visualFailure) throw new Error('课程未能完整启动');
+      if (visualFailure) throw failure('L06', '课程未能完整启动');
     }
     await document.fonts.ready;
     await Promise.all([...document.images].filter(image => image.getAttribute('src')).map(image => { image.loading = 'eager'; return image.decode(); }));
@@ -242,7 +299,7 @@
       if (images.every(image => image.complete && image.naturalWidth > 0)) return;
       painting = true; const current = ++generation;
       document.documentElement.setAttribute('data-course-painting', '');
-      document.body.append(overlay); status('正在准备画面…');
+      document.body.append(overlay); preparing('正在准备画面…');
       try {
         for (const image of images) {
           image.loading = 'eager';
@@ -251,9 +308,9 @@
         await Promise.all(images.map(image => image.decode()));
         if (generation !== current) return;
         overlay.remove(); document.documentElement.removeAttribute('data-course-painting');
-      } catch {
+      } catch (error) {
         paintFailed = true;
-        status('还没准备好，再试一次。'); document.getElementById('courseLoadingRetry').hidden = false;
+        showFailure(error, 'L05');
       } finally { painting = false; if (!paintFailed) queueMicrotask(inspect); }
     };
     observer = new MutationObserver(inspect);
@@ -264,37 +321,62 @@
       // Recheck actual persistent bytes, not merely a previous readiness flag.
       store.memory.clear();
       try { await prepare(activePack, false); await store.remove('meta', leaseKey(activePack)); await inspect(); }
-      catch { document.documentElement.setAttribute('data-course-painting', ''); document.body.append(overlay); status('还没准备好，再试一次。'); document.getElementById('courseLoadingRetry').hidden = false; }
+      catch (error) { document.documentElement.setAttribute('data-course-painting', ''); document.body.append(overlay); showFailure(error, 'L05'); }
     });
     document.addEventListener('click', async event => {
       if (!withdrawn || !event.target.closest('button') || event.target.closest('#courseLoader')) return;
       event.preventDefault(); event.stopImmediatePropagation();
-      document.documentElement.setAttribute('data-course-painting', ''); document.body.append(overlay); status('课程正在更新，请稍候…');
+      document.documentElement.setAttribute('data-course-painting', ''); document.body.append(overlay); preparing('课程正在更新，请稍候…');
       await replacement;
       if (await store.current(courseId)) location.reload();
-      else { status('课程需要更新，请联网后再试。'); document.getElementById('courseLoadingRetry').hidden = false; }
+      else showFailure(failure('L02', '当前课包已撤回'), 'L02', '课程需要更新，请联网后再试。');
     }, true);
   }
-  async function boot() {
+  async function boot(refresh = retryAfterReload) {
     if (running) return;
     running = true; visualFailure = false;
     const slow = setTimeout(() => status('网络有点慢，正在准备…'), 8000);
     const retryTimer = setTimeout(() => { const button = document.getElementById('courseLoadingRetry'); if (button) button.hidden = false; }, 30000);
-    document.getElementById('courseLoadingRetry').hidden = true;
-    status('正在准备课程…');
+    preparing('正在准备课程…');
+    document.getElementById('courseLoadingProgress').value = 0;
+    let phase = 'L07';
     try {
       if (window.CanranAccessReady) await window.CanranAccessReady;
+      phase = 'L00';
       controlled = await connectWorker();
       store.onQuota = controlled ? () => rpc(navigator.serviceWorker.controller, { type: 'course:clean' }, 15000) : null;
       const cachedPack = await store.current(courseId);
-      const pack = (cachedPack && (!window.CanranAccessReady || cachedPack.accessPolicy === 'class-v1') ? cachedPack : null) || await latest();
-      const resources = await prepare(pack);
+      const allowed = pack => pack && (!window.CanranAccessReady || pack.accessPolicy === 'class-v1');
+      let pack = allowed(cachedPack) ? cachedPack : null;
+      if (refresh || !pack) {
+        try { pack = await latest(); }
+        catch (error) {
+          // A failed update must not destroy a usable offline package. Recheck
+          // withdrawal/access metadata after latest(), then verify every byte.
+          const fallback = await store.current(courseId);
+          if (!allowed(fallback)) throw error;
+          pack = fallback;
+        }
+      }
+      phase = 'L03';
+      let resources;
+      try { resources = await prepare(pack); }
+      catch (error) {
+        // A session-only recovery may not have been able to save its new pack.
+        // If the cached pack is now broken, try the current server version once
+        // rather than trapping every revisit behind the same expired URL.
+        // Keep a usable offline pack and never clear a child's learning data.
+        if (refresh || pack !== cachedPack || cancellation.signal.aborted || !['L03', 'L04', 'L05'].includes(error.courseCode)) throw error;
+        let next;
+        try { next = await latest(); } catch { throw error; }
+        if (next.revision === pack.revision) throw error;
+        pack = next;
+        resources = await prepare(pack);
+      }
+      phase = 'L05';
       await start(pack, resources);
     } catch (error) {
-      status('还没准备好，再试一次。');
-      const retry = document.getElementById('courseLoadingRetry'); if (retry) retry.hidden = false;
-      const detail = document.getElementById('courseLoadingDetail'); if (detail) detail.textContent = '学习记录会保留。';
-      console.warn('Course preparation failed:', error);
+      showFailure(error, phase);
     } finally { clearTimeout(slow); clearTimeout(retryTimer); running = false; }
   }
   window.addEventListener('pagehide', event => {
@@ -311,7 +393,7 @@
   if (updates) updates.onmessage = event => { if (activePack && event.data?.withdrawn?.includes(activePack.id + '@' + activePack.revision)) withdrawn = true; };
   window.addEventListener('error', event => { if (executionStarted && !initialized && event instanceof ErrorEvent) visualFailure = true; });
   ready.then(() => {
-    document.getElementById('courseLoadingRetry').addEventListener('click', () => executionStarted || running ? location.reload() : boot());
+    document.getElementById('courseLoadingRetry').addEventListener('click', () => startAttempted || running ? reloadForRetry() : boot(true));
     boot();
   });
 })();

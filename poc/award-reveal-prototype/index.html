@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>获星时刻 · 交互演示</title>
+  <link rel="icon" href="/assets/brand/starflower.png">
+  <link rel="stylesheet" href="/core/story-certificate.css">
+  <link rel="stylesheet" href="/unit1-2/completion.css">
+  <link rel="stylesheet" href="./prototype.css">
+  <script>window.CanranCore = {};</script>
+  <script defer src="/unit1-2/completion.js"></script>
+  <script defer src="./prototype.js"></script>
+</head>
+<body>
+  <!-- Three throwaway reward layouts, on the real Lesson 1–2 completion UI.
+       ?variant=A|B|C switches structure; all reward data is in memory only. -->
+  <header class="course-header">
+    <span class="course-brand"><img src="/assets/brand/starflower.png" alt="">灿然英语工作室</span>
+    <span class="course-stars" aria-label="演示星星数"><img src="/assets/awards/star-earned.webp" alt=""><span id="headerCount">2 / 5</span></span>
+  </header>
+  <nav class="chapter-bar" aria-label="课程场景示意">
+    <span class="current">身边的小物品</span><span>手提包的故事</span><span>语法小工坊</span><span>街角小帮手</span><span>小帮手出发</span>
+  </nav>
+  <main class="unit12-workspace" id="lessonScene">
+    <section class="lesson-surface">
+      <header class="surface-heading"><img src="/assets/unit1-2/book.svg" alt=""><h1>单词寻宝</h1><span>Lesson 1–2</span></header>
+      <div id="completionHost" class="practice-finish"></div>
+      <p class="preview-notice" id="previewNotice" role="status">正在准备演示画面…</p>
+      <button class="btn btn-outline show-reward" id="showReward" disabled>查看获星时刻</button>
+    </section>
+  </main>
+  <dialog id="rewardDialog" aria-labelledby="rewardTitle" aria-describedby="rewardCopy">
+    <div id="rewardStage" class="reward-stage"></div>
+  </dialog>
+  <aside class="prototype-dock" id="prototypeDock" aria-label="仅供设计比较的演示控件">
+    <div class="dock-main">
+      <span class="demo-tag">交互演示</span>
+      <div class="variant-control" role="group" aria-label="布局方案">
+        <button id="previousVariant" aria-label="上一个方案">←</button>
+        <strong id="variantLabel">C 悬浮纪念卡</strong>
+        <button id="nextVariant" aria-label="下一个方案">→</button>
+      </div>
+      <label class="case-control"><span>情境</span><select id="scenario">
+        <option value="first">第一颗星 · 0 → 1</option>
+        <option value="earned" selected>新获一星 · 2 → 3</option>
+        <option value="full">集齐五星 · 4 → 5</option>
+        <option value="upgrade">升级后续做 · 不新增</option>
+        <option value="retry">错答后完成 · 不新增</option>
+        <option value="already">本区已有星 · 不新增</option>
+        <option value="pending">离线待同步 · 尚未点亮</option>
+      </select></label>
+      <button class="replay-control" id="replay">重播</button>
+      <label class="motion-control"><input type="checkbox" id="reduceMotion">减少动态</label>
+    </div>
+    <output id="demoState" class="demo-state" aria-live="polite">仅演示，不保存学习记录</output>
+  </aside>
+</body>
+</html>

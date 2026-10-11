@@ -11,7 +11,7 @@ test('1–2 十题覆盖礼貌话轮、指代、词义以及 is are am 的独立
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
     if (i === 0) {
       await choose(room,{answer:{fills:['Yes, it is.','Yes?']}}); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText('再看看。');
       await expect(room.locator('.practice-options .correct')).toHaveCount(0);
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
@@ -19,14 +19,13 @@ test('1–2 十题覆盖礼貌话轮、指代、词义以及 is are am 的独立
     if (i >= 5) { await page.reload(); await expect(check).toBeDisabled(); }
     await choose(room, question); await check.click(); await expect(room.getByRole('status')).toHaveText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 9 ? '完成挑战' : '下一题', exact: true }).click();
   }
-  await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('.completion-stat-label')).toHaveText(['最高连对','本次答对','本次答错']);
-  await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('strong')).toHaveText(['9','9','1']);
+  await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('.completion-number')).toHaveText(['9', '9', '1']);
   await expect(room.getByText(/首次独立答对/)).toHaveCount(0);
-  await page.getByRole('button', { name: '学习手记', exact: true }).click();
-  await expect(page.locator('#learningRecord')).toContainText('提示后完成');
-  await expect(page.locator('#learningRecord')).toContainText('修正后完成');
+  await page.getByRole('button', { name: '学习记录', exact: true }).click();
+  await expect(page.locator('#learningRecord')).toContainText('用过线索');
+  await expect(page.locator('#learningRecord')).toContainText('订正完成');
   await page.locator('#unitNotebook').getByRole('button', { name: '关闭', exact: true }).click();
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click(); await page.reload();

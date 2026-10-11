@@ -15,44 +15,96 @@
     timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit'
   }).format(new Date(date)).replaceAll('/', '.') : '';
 
-  function mount({ element, unit, go, returnUrl }) {
-    const artwork = {...assets,scene:unit.reward.scene || assets.scene};
+  // One card renderer for the course, its settlement and the saved artwork.
+  // The caller supplies the account identity; never collect another name.
+  function card({ unit, label = unit.copy?.compact ? '我的纪念卡' : '我的单元纪念卡' }) {
     const lesson = unit.reward.lesson || 'Lesson 1–2';
-    let state = { stars: 0, zones: {}, firstFullStarAt: null }, exportUrl, exporting = false;
-    let recipient = '', identityLabel = '登录后显示姓名';
-    const panel = make('div', '', 'story-award-panel');
-    const paper = make('article', '', 'story-award-paper'); paper.setAttribute('aria-label', '我的单元纪念卡');
+    const paper = make('article', '', 'story-award-paper'); paper.setAttribute('aria-label', label);
     const brand = make('p', '灿然英语工作室', 'story-award-brand');
     const title = make('h3', unit.reward.title, 'story-award-title');
     title.style.color = unit.reward.color || '#0b7399';
-    const name = make('p', '', 'story-award-name'); name.id = 'certificateName';
+    const name = make('p', '', 'story-award-name');
     const stars = make('div', '', 'story-award-stars'); stars.setAttribute('role', 'group');
-    const starImages = Array.from({ length: 5 }, () => { const img = picture(assets.empty); stars.append(img); return img; });
-    const illustration = picture(artwork.scene, unit.reward.alt || '男士把手提包交还给女士'); illustration.className = 'story-award-illustration';
+    // Retain both decoded states of each star. Changing a mounted image's src
+    // briefly makes it unready again, even when its URL has been preloaded.
+    const starVariants = Array.from({ length: 5 }, () => [picture(assets.empty), picture(assets.earned)]);
+    const starImages = starVariants.map(([empty]) => { stars.append(empty); return empty; });
+    let starsReady = false, pendingStars = 0;
+    function showStars(count) {
+      pendingStars = count;
+      if (!starsReady) return;
+      starVariants.forEach(([empty, earned], i) => {
+        const next = i < count ? earned : empty;
+        if (starImages[i] === next) return;
+        starImages[i].replaceWith(next); starImages[i] = next;
+      });
+    }
+    const ready = Promise.all(starVariants.flat().map(image => image.decode())).then(() => {
+      starsReady = true; showStars(pendingStars); return true;
+    }).catch(() => false);
+    const illustration = picture(unit.reward.scene || assets.scene, unit.reward.alt || '男士把手提包交还给女士'); illustration.className = 'story-award-illustration';
     const foot = make('p', '', 'story-award-foot');
-    const date = make('time'); date.id = 'certificateDate';
+    const date = make('time');
     foot.append(make('span', lesson), date);
     paper.append(brand, title, name, stars, illustration, foot);
+    function identity(recipient, identityLabel = '登录后显示姓名') {
+      name.textContent = recipient || identityLabel;
+      name.classList.toggle('is-placeholder', !recipient);
+      name.style.setProperty('--name-size', Math.min(10, 36 / Math.max(3.6, Array.from(name.textContent).length)) + 'cqw');
+    }
+    function update(state) {
+      paper.dataset.stars = String(state.stars);
+      stars.setAttribute('aria-label', '已获得 ' + state.stars + ' / 5 颗星');
+      showStars(state.stars);
+      date.hidden = state.stars !== 5 || !state.firstFullStarAt;
+      date.textContent = date.hidden ? '' : dateLabel(state.firstFullStarAt);
+      if (date.hidden) date.removeAttribute('datetime'); else date.dateTime = state.firstFullStarAt;
+    }
+    return { element: paper, name, date, starImages, ready, update, identity };
+  }
+
+  function mount({ element, unit, go, returnUrl, progress, restart }) {
+    const artwork = {...assets,scene:unit.reward.scene || assets.scene};
+    const lesson = unit.reward.lesson || 'Lesson 1–2';
+    let state = { stars: 0, zones: {}, firstFullStarAt: null }, exportUrl, exportJob, exporting = false;
+    let recipient = '', identityLabel = '登录后显示姓名';
+    const panel = make('div', '', 'story-award-panel');
+    const view = card({ unit }), paper = view.element;
+    const slots = view.starImages.map((image, i) => {
+      const slot = make('span', '', 'award-star'); slot.style.setProperty('--star-order', i);
+      const light = make('span', '', 'star-glint'); light.setAttribute('aria-hidden', 'true');
+      image.replaceWith(slot); slot.append(image, light); return slot;
+    });
+    const rim = make('span', '', 'gold-light-ring'); rim.setAttribute('aria-hidden', 'true'); paper.append(rim);
+    // Keep the ambient light on whenever the card is visible. Off-screen cards
+    // do not need to spend frames while the child is answering other sections.
+    let inView = false;
+    const updateMotion = () => { paper.dataset.motion = inView && !document.hidden ? 'full' : 'paused'; };
+    const visibility = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; updateMotion(); });
+    visibility.observe(paper); document.addEventListener('visibilitychange', updateMotion); updateMotion();
+    view.name.id = 'certificateName'; view.date.id = 'certificateDate';
     const controls = make('div', '', 'story-award-actions');
-    const save = make('button', '保存纪念卡', 'btn btn-green'); save.type = 'button';
+    const save = make('button', '保存动图', 'btn btn-green'); save.type = 'button';
     const downloadIcon = picture('/assets/awards/download.svg'); downloadIcon.className = 'shop-icon'; save.prepend(downloadIcon);
     const back = make('a', '返回课程', 'btn btn-yellow'); back.href = returnUrl;
     const backIcon = picture('/assets/awards/return.svg'); backIcon.className = 'shop-icon'; back.prepend(backIcon); controls.append(save, back);
     const status = make('p', '', 'story-award-status'); status.setAttribute('role', 'status');
-    const tasks = make('details', '', 'story-award-tasks'); tasks.append(make('summary', '查看五星任务'));
-    const explanation = make('p', '每个答题区整轮零错，点亮一颗星。');
+    const tasks = make('details', '', 'story-award-tasks'); tasks.append(make('summary', '星星进度'));
+    const explanation = make('p', '每组练习一颗星：同一轮中，每题第一次都答对。');
     const list = make('ul'); list.setAttribute('aria-label', '五星任务');
     const items = unit.reward.zones.map(zone => {
       const item = make('li'), text = make('span'), link = make('button', '去挑战', 'btn btn-mini btn-yellow');
-      link.type = 'button'; link.addEventListener('click', () => go('learn/' + zone.id));
-      item.append(text, link); list.append(item); return { zone, text };
+      link.type = 'button'; link.addEventListener('click', () => {
+        const current = progress?.(zone.id);
+        if (current?.completed && !state.zones[zone.id] && !state.pendingZones?.includes(zone.id)) restart?.(zone.id);
+        go('learn/' + zone.id);
+      });
+      item.append(text, link); list.append(item); return { zone, text, link };
     });
     tasks.append(explanation, list); panel.append(paper, controls, status, tasks); element.append(panel);
 
     function showName() {
-      name.textContent = recipient || identityLabel;
-      name.classList.toggle('is-placeholder', !recipient);
-      name.style.setProperty('--name-size', Math.min(10, 36 / Math.max(3.6, Array.from(name.textContent).length)) + 'cqw');
+      view.identity(recipient, identityLabel);
       save.disabled = exporting || state.stars === 0 || !recipient;
     }
     root.CanranAccessReady?.then(access => {
@@ -63,19 +115,23 @@
     }).catch(() => { recipient = ''; showName(); });
 
     function update(next) {
-      state = next; paper.dataset.stars = String(state.stars);
-      stars.setAttribute('aria-label', '已获得 ' + state.stars + ' / 5 颗星');
-      starImages.forEach((img, i) => { img.src = i < state.stars ? assets.earned : assets.empty; });
-      date.hidden = state.stars !== 5 || !state.firstFullStarAt;
-      date.textContent = date.hidden ? '' : dateLabel(state.firstFullStarAt);
-      if (date.hidden) date.removeAttribute('datetime'); else date.dateTime = state.firstFullStarAt;
-      items.forEach(({ zone, text }) => { text.textContent = zone.title + (state.zones[zone.id] ? ' · 已获星' : state.pendingZones?.includes(zone.id) ? ' · 等待同步' : ' · 待挑战'); });
+      state = next; view.update(state);
+      slots.forEach((slot, i) => { slot.dataset.earned = String(i < state.stars); });
+      items.forEach(({ zone, text, link }) => {
+        const current = progress?.(zone.id);
+        const [status, action] = state.zones[zone.id] ? ['已获星', '查看']
+          : state.pendingZones?.includes(zone.id) ? ['待同步', '查看']
+          : current?.completed ? ['已完成 · 未获星', '再练一轮']
+          : current?.started ? ['进行中', '继续']
+          : current ? ['未开始', '开始'] : ['待挑战', '去挑战'];
+        text.textContent = zone.title + ' · ' + status; link.textContent = action;
+      });
       showName();
     }
 
     async function exportCard() {
       if (save.disabled) return;
-      exporting = true; showName(); status.textContent = '正在保存…';
+      exporting = true; exportJob = new AbortController(); showName(); status.textContent = '正在保存…';
       // Capture one immutable snapshot so a sync during export cannot mix dates.
       const snapshot = { recipient, stars: state.stars, date: state.firstFullStarAt };
       try {
@@ -84,16 +140,17 @@
           const img = picture(src); await img.decode(); return img;
         }));
         const canvas = draw(snapshot, images, unit.reward.title,lesson,unit.reward.color);
-        const blob = await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(Error('export')), 'image/png'));
+        const blob = await root.CanranAwardGif.encode(canvas, { stars: snapshot.stars, earnedImage: images[2], signal: exportJob.signal });
+        exportJob.signal.throwIfAborted();
         if (exportUrl) URL.revokeObjectURL(exportUrl);
         exportUrl = URL.createObjectURL(blob);
-        const link = document.createElement('a'); link.href = exportUrl; link.download = lesson.replace(' ','').replace('–','-')+'-'+unit.reward.title+'.png'; link.click();
-        status.textContent = '纪念卡已保存。';
-      } catch { status.textContent = '暂时没能保存，请再试一次。'; }
+        const link = document.createElement('a'); link.href = exportUrl; link.download = lesson.replace(' ','').replace('–','-')+'-'+unit.reward.title+'.gif'; link.click();
+        status.textContent = '动图已生成';
+      } catch (error) { status.textContent = error.name === 'AbortError' ? '' : '暂时没能保存，请再试一次。'; }
       finally { exporting = false; showName(); }
     }
     save.addEventListener('click', exportCard);
-    root.addEventListener('pagehide', () => { if (exportUrl) URL.revokeObjectURL(exportUrl); });
+    root.addEventListener('pagehide', () => { exportJob?.abort(); if (exportUrl) URL.revokeObjectURL(exportUrl); });
     update(state); return { update };
   }
 
@@ -123,5 +180,5 @@
     text(lesson + (snapshot.stars === 5 && snapshot.date ? ' · ' + dateLabel(snapshot.date) : ''), 91, 798, 35, '#795a46', '"Baloo 2"');
     return canvas;
   }
-  core.storyCertificate = { mount };
+  core.storyCertificate = { mount, card };
 })(globalThis);

@@ -23,7 +23,8 @@ async function story(page,pair,base=''){
 }
 function currentGroup(pair,id){return pair==='5-6'?({refer:'introduce',articles:'introduce',choice:'cars',trans:'cars'}[id]||id):id;}
 function answers(pair,group,old=false){if(!old&&pair==='5-6'&&['introduce','cars'].includes(group))return (group==='introduce'?['refer','articles']:['choice','trans']).flatMap(id=>answers(pair,id));const c=CASES[pair];return (!old&&c.changes.find(x=>x.group===group)?.answers)||c.old[group];}
-async function activity(page,pair,group,{base='',old=false,capture,wrongNew=false,hintNew=false}={}){
+async function activity(page,pair,group,{base='',old=false,capture,wrongNew=false,hintNew=false,keepAward=false}={}){
+ await require('./reward-dialog').handleRewardDialog(page,keepAward);
  if(!old)group=currentGroup(pair,group);
  await page.goto(`${base}/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group),items=answers(pair,group,old);
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');
@@ -69,5 +70,6 @@ async function activity(page,pair,group,{base='',old=false,capture,wrongNew=fals
   await room.getByRole('button',{name:i===items.length-1?(group==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
+ if(!keepAward&&await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
 }
 module.exports={CASES,select,story,answers,activity,currentGroup};

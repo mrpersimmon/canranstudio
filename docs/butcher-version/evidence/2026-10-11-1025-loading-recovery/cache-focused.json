@@ -1,0 +1,253 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/course-cache-performance.spec.js",
+      "tests/e2e/course-cache-updates.spec.js",
+      "-g",
+      "完整缓存 20 次|同一标签连续刷新 20 次|固定 10 Mbps|缓存录音",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/playwright.config.js",
+    "rootDir": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/permission/.codex/worktrees/debug-reward-current/canranstudio.cn/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4299",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "course-cache-performance.spec.js",
+      "file": "course-cache-performance.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "完整缓存 20 次重新打开导航并点课恢复学习位置",
+          "ok": true,
+          "tags": [
+            "cache-performance"
+          ],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16521,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Cache revisit measurement: {\"browser\":\"151.0.7922.34\",\"platform\":\"darwin\",\"cpu\":\"Apple M1\",\"trace\":false,\"attempt\":20,\"phase\":\"performance budget\",\"scenario\":\"reopen navigation, click course, restore alternating word-card pages 2 and 3\",\"timing\":\"actual click to fully usable rendered frame\",\"samples\":[275.500244140625,304.300048828125,576.60009765625,276.400146484375,296.300048828125,297.099853515625,315.5,266.60009765625,306.800048828125,347.099853515625,266.300048828125,315.000244140625,307,295.2001953125,336.599853515625,306.39990234375,287.89990234375,295.69970703125,347,286.699951171875],\"navigationSamples\":[275.10000002384186,304,576.2000000476837,276,296.10000002384186,296.80000001192093,315,266.10000002384186,306.2999999523163,346.39999997615814,266,314.5999999642372,306.69999998807907,294.69999998807907,336.39999997615814,306.19999998807907,287.60000002384186,295.4000000357628,346.69999998807907,286.19999998807907],\"driverSamples\":[298,335,657,302,323,325,344,295,335,375,292,344,328,321,363,326,312,320,371,313],\"p95\":347.099853515625,\"errors\":[],\"fetched\":[]}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T02:18:36.946Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "warm-visits.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJwbGF0Zm9ybSI6ICJkYXJ3aW4iLAogICJjcHUiOiAiQXBwbGUgTTEiLAogICJ0cmFjZSI6IGZhbHNlLAogICJhdHRlbXB0IjogMjAsCiAgInBoYXNlIjogInBlcmZvcm1hbmNlIGJ1ZGdldCIsCiAgInNjZW5hcmlvIjogInJlb3BlbiBuYXZpZ2F0aW9uLCBjbGljayBjb3Vyc2UsIHJlc3RvcmUgYWx0ZXJuYXRpbmcgd29yZC1jYXJkIHBhZ2VzIDIgYW5kIDMiLAogICJ0aW1pbmciOiAiYWN0dWFsIGNsaWNrIHRvIGZ1bGx5IHVzYWJsZSByZW5kZXJlZCBmcmFtZSIsCiAgInNhbXBsZXMiOiBbCiAgICAyNzUuNTAwMjQ0MTQwNjI1LAogICAgMzA0LjMwMDA0ODgyODEyNSwKICAgIDU3Ni42MDAwOTc2NTYyNSwKICAgIDI3Ni40MDAxNDY0ODQzNzUsCiAgICAyOTYuMzAwMDQ4ODI4MTI1LAogICAgMjk3LjA5OTg1MzUxNTYyNSwKICAgIDMxNS41LAogICAgMjY2LjYwMDA5NzY1NjI1LAogICAgMzA2LjgwMDA0ODgyODEyNSwKICAgIDM0Ny4wOTk4NTM1MTU2MjUsCiAgICAyNjYuMzAwMDQ4ODI4MTI1LAogICAgMzE1LjAwMDI0NDE0MDYyNSwKICAgIDMwNywKICAgIDI5NS4yMDAxOTUzMTI1LAogICAgMzM2LjU5OTg1MzUxNTYyNSwKICAgIDMwNi4zOTk5MDIzNDM3NSwKICAgIDI4Ny44OTk5MDIzNDM3NSwKICAgIDI5NS42OTk3MDcwMzEyNSwKICAgIDM0NywKICAgIDI4Ni42OTk5NTExNzE4NzUKICBdLAogICJuYXZpZ2F0aW9uU2FtcGxlcyI6IFsKICAgIDI3NS4xMDAwMDAwMjM4NDE4NiwKICAgIDMwNCwKICAgIDU3Ni4yMDAwMDAwNDc2ODM3LAogICAgMjc2LAogICAgMjk2LjEwMDAwMDAyMzg0MTg2LAogICAgMjk2LjgwMDAwMDAxMTkyMDkzLAogICAgMzE1LAogICAgMjY2LjEwMDAwMDAyMzg0MTg2LAogICAgMzA2LjI5OTk5OTk1MjMxNjMsCiAgICAzNDYuMzk5OTk5OTc2MTU4MTQsCiAgICAyNjYsCiAgICAzMTQuNTk5OTk5OTY0MjM3MiwKICAgIDMwNi42OTk5OTk5ODgwNzkwNywKICAgIDI5NC42OTk5OTk5ODgwNzkwNywKICAgIDMzNi4zOTk5OTk5NzYxNTgxNCwKICAgIDMwNi4xOTk5OTk5ODgwNzkwNywKICAgIDI4Ny42MDAwMDAwMjM4NDE4NiwKICAgIDI5NS40MDAwMDAwMzU3NjI4LAogICAgMzQ2LjY5OTk5OTk4ODA3OTA3LAogICAgMjg2LjE5OTk5OTk4ODA3OTA3CiAgXSwKICAiZHJpdmVyU2FtcGxlcyI6IFsKICAgIDI5OCwKICAgIDMzNSwKICAgIDY1NywKICAgIDMwMiwKICAgIDMyMywKICAgIDMyNSwKICAgIDM0NCwKICAgIDI5NSwKICAgIDMzNSwKICAgIDM3NSwKICAgIDI5MiwKICAgIDM0NCwKICAgIDMyOCwKICAgIDMyMSwKICAgIDM2MywKICAgIDMyNiwKICAgIDMxMiwKICAgIDMyMCwKICAgIDM3MSwKICAgIDMxMwogIF0sCiAgInA5NSI6IDM0Ny4wOTk4NTM1MTU2MjUsCiAgImVycm9ycyI6IFtdLAogICJmZXRjaGVkIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "abc3dc94060d6f65377d-d88d03ff48d7d166ec7f",
+          "file": "course-cache-performance.spec.js",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "同一标签连续刷新 20 次仍保留位置、完整图片与可操作按钮",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16837,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T02:18:53.992Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "rapid-reloads.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2VuYXJpbyI6ICJzYW1lLXRhYiByYXBpZCByZWxvYWQgc3RyZXNzLCBkcml2ZXIgdGltaW5ncyIsCiAgInNhbXBsZXMiOiBbCiAgICA0MTgsCiAgICAzNzgsCiAgICA0MDMsCiAgICA0MTYsCiAgICA0NTcsCiAgICA1NDAsCiAgICA2NzksCiAgICA2MjksCiAgICA2OTcsCiAgICA4MDIsCiAgICAxMDgwLAogICAgMTQ5NSwKICAgIDE1NjgsCiAgICAxMjU0LAogICAgMTM1NSwKICAgIDEzNjIsCiAgICA0NTgsCiAgICA1NTgsCiAgICA2NzMsCiAgICA1OTUKICBdLAogICJlcnJvcnMiOiBbXSwKICAiZmV0Y2hlZCI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "abc3dc94060d6f65377d-c222ec61ebde22e7dd1c",
+          "file": "course-cache-performance.spec.js",
+          "line": 85,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "course-cache-updates.spec.js",
+      "file": "course-cache-updates.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11936,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T02:19:11.318Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e9fbad1bc47e55fb032-69127f05141d81a751aa",
+          "file": "course-cache-updates.spec.js",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "缓存录音支持真实点播和断网分段读取，下载不增加听辨进度",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6098,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T02:19:23.541Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e9fbad1bc47e55fb032-1fbeddea1327e61d46bf",
+          "file": "course-cache-updates.spec.js",
+          "line": 61,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T02:18:36.439Z",
+    "duration": 53428.975,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -549,3 +549,44 @@ unit.questions["exam"][7]]};
   ].map(([id, title]) => ({ id, title })) };
   unit.experienceVersion = 'classroom-five-zones-1';
 })(globalThis.CanranCore);
+
+// Copy is presentation-only: keep question manuscripts, signatures and award
+// edition intact so a wording change does not invalidate a child's current round.
+(function (core) {
+  const unit = core.unit12;
+  unit.copy = { compact: true, recordNames: {
+    listen: ['衣服配对', '钢笔', '房子', '铅笔', '手表'],
+    roles: ['翻译问句', '请求重复', '表达感谢', '物品归属', 'it 指代'],
+    trans: ['陈述与询问', '理解问句', 'is 问句', 'are 问句', '问自己', '问对方', '肯定回答', '否定回答', '问答配对', '否定缩写', '问准备情况', '回答准备情况'],
+    manners: ['礼貌招呼', '回应招呼', '确认归属', '还包', '感谢'],
+    exam: ['完成对话', '否定回答', 'your 与 it', '请求重复', '礼貌招呼', '铅笔', '询问外套', '房子', '问自己', '角色问答']
+  } };
+})(globalThis.CanranCore);
+(function (core) {
+  const unit = core.unit12;
+  unit.stages[0].activities[0][1] = '单词小图鉴';
+  const final = unit.stages.find(stage => stage.id === 'l5');
+  final.title = '综合挑战';
+  final.activities.find(item => item[0] === 'exam')[1] = '综合挑战';
+  final.activities.find(item => item[0] === 'certificate')[1] = '我的纪念卡';
+  unit.reward.zones.find(zone => zone.id === 'exam').title = '综合挑战';
+  unit.copy.questions = {
+    'u12-types-v1-t01': { title: '把单词和中文配对' },
+    'u12-types-v1-t06': { readingExcerpt: [2, 3, 4] },
+    'u12-tasks-v4-thanks-degree': { title: '哪一组词表示“非常”？', hint: false },
+    'u12-types-v1-t04': { title: '帮男士礼貌地叫住女士' },
+    'u12-scene-v1-return': { title: '手提包该还给谁？' },
+    'u12-grammar-v4-ask-about-self': { title: '猜猜自己的身份：我是学生吗？', material: 'student：学生' },
+    'u12-grammar-v4-change-addressee': { title: '男士直接问女士，选哪一句？', material: 'student：学生' },
+    'u12-grammar-v4-expand-isnt': { title: '把 isn’t 写成两个词' },
+    'u12-grammar-v4-independent-ask-ready': { title: '问同学：你准备好了吗？', material: 'ready：准备好的' },
+    'u12-grammar-v4-independent-answer-self': { title: '你准备好了，回答同学', material: '' },
+    'u12-tasks-v4-exam-attention': { title: '帮女士完成对话', reference: '手提包是女士的。' },
+    'u12-grammar-v3-new-owner-no': { title: '手表不是你的，你怎么回答？', material: '' },
+    'u12-grammar-v2-meaning-reference': { title: '读对话，选一选' },
+    'u12-final-v2-repeat': { title: '没听清，请同学再说一遍' },
+    'u12-final-v2-attention': { title: '想叫住同学，先说什么？' },
+    'u12-grammar-v4-exam-self-guess': { title: '问自己：我准备好了吗？', material: 'ready：准备好的' },
+    'u12-grammar-v4-exam-person-exchange': { title: '你扮演学生，完成对话', material: 'student：学生' }
+  };
+})(globalThis.CanranCore);

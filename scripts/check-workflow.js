@@ -43,7 +43,7 @@ function environment(root, browser = false) {
   if (browser) {
     try {
       const playwright = require(require.resolve('playwright-core', { paths: [root] }));
-      const file = playwright.chromium.executablePath(), stat = fs.statSync(file);
+      const file = playwright[browser === true ? 'chromium' : browser].executablePath(), stat = fs.statSync(file);
       executable = { file, bytes: stat.size, modified: stat.mtimeMs,
         revision: digest(fs.readFileSync(path.join(path.dirname(require.resolve('playwright-core/package.json', { paths: [root] })), 'browsers.json'))) };
     } catch { executable = 'missing'; }

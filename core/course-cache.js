@@ -3,11 +3,13 @@
   const stores = new Map();
   const digest = async buffer => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buffer)), value => value.toString(16).padStart(2, '0')).join('');
   const delay = time => new Promise(resolve => setTimeout(resolve, time));
+  const failure = (code, message) => Object.assign(new Error(message), { courseCode: code });
   function open(base) {
     if (stores.has(base)) return stores.get(base);
     const prefix = 'canran:' + (base === '/' ? 'preview-root' : base.slice(1, -1).replaceAll('/', ':')) + ':course-cache:v1';
     const memory = new Map(), tasks = new Map();
     const cacheKey = item => base + 'resources/' + item.sha256;
+    const resourceResponse = (item, bytes) => new Response(bytes, { headers: { 'Content-Type': item.type, 'Content-Length': String(item.bytes), 'X-Course-Hash': item.sha256 } });
     const maintain = work => root.navigator?.locks ? root.navigator.locks.request(prefix + ':maintenance', work) : work();
     let persistent = true;
     const database = new Promise((resolve, reject) => {
@@ -52,7 +54,7 @@
     }
     function validateItem(item) {
       const url = new URL(item.url, root.location.origin);
-      if (url.origin !== root.location.origin || !url.pathname.startsWith(base + 'resources/' + item.sha256 + '/') || !/^[a-f0-9]{64}$/.test(item.sha256) || !Number.isSafeInteger(item.bytes) || item.bytes < 1) throw new Error('无效课程资源');
+      if (url.origin !== root.location.origin || !url.pathname.startsWith(base + 'resources/' + item.sha256 + '/') || !/^[a-f0-9]{64}$/.test(item.sha256) || !Number.isSafeInteger(item.bytes) || item.bytes < 1) throw failure('L02', '无效课程资源');
     }
     async function validBuffer(response, item) {
       if (!response?.ok || response.status !== 200) return null;
@@ -85,20 +87,20 @@
           const receivedType = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
           const expectedType = item.type.split(';')[0];
           const compatible = receivedType === expectedType || expectedType === 'text/javascript' && receivedType === 'application/javascript';
-          if (response.status !== 200 || !compatible) throw new Error('资源未正确返回');
+          if (response.status !== 200 || !compatible) throw failure('L03', '资源未正确返回');
           const reader = response.body.getReader(), chunks = []; let size = 0;
           for (;;) {
             const value = await reader.read(); if (value.done) break;
             reset(); chunks.push(value.value); size += value.value.byteLength;
-            if (size > item.bytes) { await reader.cancel(); throw new Error('资源大小不正确'); }
+            if (size > item.bytes) { await reader.cancel(); throw failure('L04', '资源大小不正确'); }
           }
           const bytes = new Uint8Array(size); let offset = 0;
           for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-          if (size !== item.bytes || await digest(bytes.buffer) !== item.sha256) throw new Error('资源校验失败');
+          if (size !== item.bytes || await digest(bytes.buffer) !== item.sha256) throw failure('L04', '资源校验失败');
           memory.set(item.sha256, bytes.buffer);
           const disk = await cache;
           if (disk) {
-            const save = () => disk.put(cacheKey(item), new Response(bytes, { headers: { 'Content-Type': item.type, 'Content-Length': String(item.bytes), 'X-Course-Hash': item.sha256 } }));
+            const save = () => disk.put(cacheKey(item), resourceResponse(item, bytes));
             try { await save(); }
             catch {
               try { if (!api.onQuota) throw new Error('No cleanup available'); await api.onQuota(); await save(); }
@@ -110,6 +112,7 @@
         finally { clearTimeout(timer); signal?.removeEventListener('abort', cancel); }
         if (attempt < 2) await delay(350 * (attempt + 1));
       }
+      if (!lastError.courseCode) lastError.courseCode = 'L03';
       throw lastError;
     }
     async function obtain(item, { signal, network = true } = {}) {
@@ -134,8 +137,18 @@
     async function commit(pack, activate = true) {
       const db = await database, disk = await cache;
       if (!db || !disk || !persistent) return false;
-      for (const item of pack.required) if (!await disk.match(cacheKey(item))) return false;
       try {
+        for (const item of pack.required) {
+          if (await disk.match(cacheKey(item))) continue;
+          // WebKit/session storage can lose disk entries after prepare() read
+          // them. A retry then reuses memory: rendering succeeds, but refusing
+          // this commit leaves the old broken package active on the next visit.
+          // Restore only verified resource bytes before activating the package;
+          // account, progress and award stores are never cleared or rewritten.
+          const buffer = memory.get(item.sha256);
+          if (!buffer || buffer.byteLength !== item.bytes || await digest(buffer) !== item.sha256) return false;
+          await disk.put(cacheKey(item), resourceResponse(item, buffer));
+        }
         await new Promise((resolve, reject) => {
           const transaction = db.transaction(['packages', 'meta'], 'readwrite');
           transaction.objectStore('packages').put({ ...pack, lastUsed: Date.now() }, key(pack));

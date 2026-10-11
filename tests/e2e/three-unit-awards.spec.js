@@ -28,7 +28,7 @@ for(const pair of ['3-4','5-6'])test(`${pair} 五答题区整轮零错才获星�
  await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.award-round-result')).toContainText('本轮有过错答');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await tasks.activity(page,pair,id);await expect(page.locator('#starCount')).toHaveText('1');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await room.getByRole('button',{name:wrong,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#certificateDate')).toBeHidden();await page.getByText('查看五星任务',{exact:true}).click();await expect(page.getByRole('list',{name:'五星任务'}).getByRole('listitem')).toHaveCount(5);
+ await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#certificateDate')).toBeHidden();await page.getByText('星星进度',{exact:true}).click();await expect(page.getByRole('list',{name:'五星任务'}).getByRole('listitem')).toHaveCount(5);
 });
 
 for(const pair of ['3-4','5-6'])test(`${pair} 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练`,async({page})=>{

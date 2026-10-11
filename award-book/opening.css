@@ -1,0 +1,28 @@
+/* Selected A: the cover carries the real left page to its final position. */
+.book.is-opening>.book-art,.book.is-opening>.book-leaf,.book.is-opening>.mobile-sheet{visibility:hidden}
+.book-opening{position:absolute;z-index:8;inset:0;perspective:5000px;container-type:inline-size;visibility:hidden}
+.book-opening[data-ready='true']{visibility:visible}
+.opening-spread{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.opening-right-page{position:absolute;z-index:0;left:50%;top:0;width:50%;height:100%;background:var(--book-art) right center/200% 100% no-repeat}
+.book-cover{position:absolute;z-index:2;left:50%;top:0;width:50%;height:100%;padding:0;border:0;background:transparent;transform-origin:left center;transform-style:preserve-3d;will-change:transform}
+.cover-front,.cover-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.cover-front{inset:6% 4% 8% 0;display:flex;align-items:center;justify-content:center;border-radius:10px 20px 20px 10px;background:linear-gradient(110deg,#344d3de8,#648066eb 48%,#46614ded),var(--paper) center/380px;border:2px solid #354b37;box-shadow:inset 7px 0 10px #223d4266,inset -3px 0 4px #bdc49d66,0 3px 8px #28342540;transform:translateZ(.2px)}
+.cover-front::before{content:'';position:absolute;inset:7%;border:1px solid #cfbe8499;border-radius:5px 13px 13px 5px;box-shadow:0 0 0 4px #b3bd961a}
+.cover-emblem{width:30%;max-width:180px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fcf6e6;box-shadow:0 0 0 1px #cfbe84,0 0 0 5px #d4c99926,0 5px 10px #28352522}
+.cover-emblem img{width:64%;height:76%;object-fit:contain}
+.cover-back{transform:rotateY(180deg);background:var(--book-art) left center/200% 100% no-repeat}
+.opening-right-page>.book-leaf{left:0;top:6%;width:94%;height:84%;padding:2cqw 3cqw}
+.cover-back>.book-leaf{left:6%;top:6%;width:94%;height:84%;padding:2cqw 3cqw}
+.opening-left-leaf .leaf-number{left:2.3cqw}.opening-right-leaf .leaf-number{right:2.3cqw}
+.book.is-opening .card-holder{pointer-events:none}
+@media(max-width:700px){
+ .album-heading h1{font-size:clamp(20px,6vw,27px)}
+ .book.is-opening{background:none}
+ .book-opening{perspective:2400px;overflow:hidden}
+ .opening-right-page{left:0;width:100%;background-position:98% center;background-size:200% 100%}
+ .book-cover{left:4%;top:5%;width:92%;height:88%}
+ .cover-front{inset:0;border-radius:8px 15px 15px 8px}
+ .cover-back{background:#fdfbf5 var(--paper) center/380px;border-radius:8px}
+ .opening-right-page>.book-leaf{left:4%;top:5%;width:92%;height:88%;padding:4cqw 7cqw}
+ .opening-right-leaf .leaf-number{font-size:17px;bottom:4cqw;right:7cqw}
+}

@@ -14,20 +14,19 @@
         const q = question.workshop; questionStart = progress;
         const content = element.querySelector('.practice-content');
         const intro = node('div', '', 'grammar-intro');
-        const phase = node('p', q.phase, 'grammar-phase');
         heading = node('h3', question.prompt); heading.tabIndex = -1;
-        intro.append(progress, phase, heading); content.prepend(intro);
+        intro.append(progress, heading); content.prepend(intro);
         if (q.speakers) {
           const cast = node('div', '', 'grammar-cast'); cast.setAttribute('aria-label', '说话的人');
           for (const [who, label] of [['woman', '女士：I（我）'], ['man', '男士问她：you（你）']]) {
-            const person = node('figure'); person.append(art(who), node('figcaption', label)); cast.append(person);
+            const person = node('figure'); person.append(art(who), node('figcaption', who === 'woman' ? '女士' : '男士')); cast.append(person);
           }
           intro.append(cast);
         }
         if (q.model) {
           const demo = node('aside', '', 'grammar-model'); demo.setAttribute('role', 'region'); demo.setAttribute('aria-label', '短示范');
-          demo.append(node('p', q.model.title, 'grammar-model-title'));
-          for (const [en, cn] of q.model.lines) {
+          const lines = q.speakers ? [['I · you', 'I 指说话人；you 指听话人。']] : q.model.lines;
+          for (const [en, cn] of lines) {
             const row = node('div', '', 'grammar-model-line');
             const english = node('p', en); english.lang = 'en'; row.append(english, node('small', cn)); demo.append(row);
           }

@@ -27,7 +27,7 @@ test('全部声音失败仍可完成26题与20句，旧重复问答不再必做'
   await page.addInitScript(() => { window.speechCalls = 0; speechSynthesis.speak = () => { window.speechCalls++; }; });
   await page.route(/\.(mp3|ogg|wav)(\?|$)/, route => { if (!isFeedbackAudio(route.request().url())) voices.push(route.request().url()); return route.abort(); });
   await page.goto('/lesson/unit5-6/#learn/certificate');
-  await expect(page.getByRole('button', { name: '保存纪念卡', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
   await completeUnit56(page, '/lesson');
   await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
   await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
@@ -93,7 +93,7 @@ test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听�
   await room.getByRole('button', { name: '下一题', exact: true }).click();
   await finishExam(page, '5-6', 3);
   await expect(room).toContainText('首次独立答对 8 / 10'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
-  await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '保存纪念卡', exact: true })).toBeDisabled();
+  await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
 });
 
 for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及合影完整，页面不随下一句跳动', async ({ page }) => {

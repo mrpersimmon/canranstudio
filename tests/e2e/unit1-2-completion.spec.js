@@ -5,6 +5,45 @@ const fs = require('node:fs/promises');
 const OUT = 'output/playwright/unit1-2-completion';
 test.use({ actionTimeout: 5000, reducedMotion: 'reduce' });
 
+test('三张统计卡按本轮首次提交计数，真实完成后默认依次入场和跳数', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.completionMotionFrames = [];
+    window.completionOverflowFrames = [];
+    const sample = () => {
+      const cards = [...document.querySelectorAll('.stage-manners .completion-stat')];
+      if (cards.length && window.completionMotionFrames.length < 180) {
+        window.completionMotionFrames.push(cards.map(card => ({
+          transform: getComputedStyle(card).transform,
+          number: card.querySelector('.completion-number')?.textContent
+        })));
+        const stats = cards[0].parentElement;
+        window.completionOverflowFrames.push(stats.scrollWidth - stats.clientWidth);
+      }
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
+  await page.goto('/unit1-2/#learn/manners');
+  const room = page.locator('.stage-manners');
+  await flow.activity(page, '1-2', 'manners', { capture: async (activity, i, state) => {
+    if (i !== 2 || state !== 'blank') return;
+    await flow.select(activity, 'Pardon?');
+    await activity.getByRole('button', { name: '检查答案', exact: true }).click();
+    await activity.getByRole('button', { name: '再试一次', exact: true }).click();
+  } });
+  await expect(room.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
+  await expect(room.locator('.completion-number')).toHaveText(['2', '4', '1']);
+  await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion', 'finished');
+  await expect.poll(() => page.evaluate(() => window.completionMotionFrames.length)).toBeGreaterThan(30);
+  const frames = await page.evaluate(() => window.completionMotionFrames);
+  for (let index = 0; index < 3; index++) {
+    expect(new Set(frames.map(frame => frame[index].transform)).size, `统计卡 ${index + 1} 应有真实位移`).toBeGreaterThan(3);
+  }
+  expect(new Set(frames.map(frame => frame[1].number)).size, '答对数字应从 0 递增到最终值').toBeGreaterThan(2);
+  expect(await page.evaluate(() => Math.max(...window.completionOverflowFrames)), '统计卡入场全过程不能横向溢出').toBeLessThanOrEqual(1);
+  await expect(page.locator('#starCount')).toHaveText('0');
+});
+
 test('390×500 短屏结束后从插画顶部露出，不被固定导航遮挡', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 500 });
   for (const id of ['listen', 'trans']) {
@@ -17,15 +56,11 @@ test('390×500 短屏结束后从插画顶部露出，不被固定导航遮挡',
 });
 
 async function expectResults(room, counts) {
-  const cards = room.getByRole('list', { name: '本轮成果', exact: true }).getByRole('listitem');
-  await expect(cards).toHaveText([`最高连对${counts[0]}题`, `本次答对${counts[1]}题`, `本次答错${counts[2]}题`]);
-  for (const [index, kind] of ['streak', 'correct', 'incorrect'].entries()) {
-    await expect(cards.nth(index).locator('img')).toHaveAttribute('src', new RegExp('/' + kind + '-v1\\.png(?:[?]|$)'));
-    await expect.poll(() => cards.nth(index).locator('img').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
-  }
+  const result = room.getByRole('list', { name: '本轮成果', exact: true });
+  await expect(result.locator('.completion-number')).toHaveText(counts.map(String));
 }
 
-test('语法小工坊结束使用已认可的人物成果画面与三枚 imagegen 图标', async ({ page }) => {
+test('语法小工坊保留人物成果画面，恢复三张统计卡', async ({ page }) => {
   await flow.activity(page, '1-2', 'trans');
   const room = page.locator('.stage-trans');
   await fs.mkdir(OUT, { recursive: true });
@@ -34,12 +69,12 @@ test('语法小工坊结束使用已认可的人物成果画面与三枚 imagege
     text: el.innerText, images: Array.from(el.querySelectorAll('img')).map(img => ({ src: img.getAttribute('src'), loaded: img.complete && img.naturalWidth > 0 }))
   })), null, 2));
   await expectResults(room, [12, 12, 0]);
-  await expect(room.getByRole('heading', { name: '会问，也会答！', exact: true })).toBeVisible();
+  await expect(room.getByRole('heading', { name: '问答练习完成！', exact: true })).toBeVisible();
   await expect(room.locator('.completion-art .completion-man')).toBeVisible();
   await expect(room.locator('.completion-art .completion-woman')).toBeVisible();
 });
 
-for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节统一新版结算，三卡和按钮在四种宽度保持完整`, async ({ page }) => {
+for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整`, async ({ page }) => {
   test.setTimeout(120000);
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await fs.mkdir(OUT, { recursive: true });
@@ -51,24 +86,20 @@ for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节�
   const cases = [
     ['listen', 5, '相遇小剧场', 'text'], ['roles', 5, '语法小工坊', 'trans'],
     ['trans', 12, '帮忙还手提包', 'manners'],
-    ['manners', 5, '礼貌小挑战', 'exam'], ['exam', 10, '我的单元纪念卡', 'certificate']
+    ['manners', 5, '综合挑战', 'exam'], ['exam', 10, '我的纪念卡', 'certificate']
   ];
   for (const [id, total, nextName, nextId] of cases) {
     await flow.activity(page, '1-2', id, { base });
     const room = page.locator('.stage-' + id);
     await expectResults(room, [total, total, 0]);
     await expect(room.getByText('这一组完成了！', { exact: true })).toHaveCount(0);
-    const cards = room.getByRole('list', { name: '本轮成果' }).getByRole('listitem');
+    const result = room.getByRole('list', { name: '本轮成果' });
     for (const width of [320, 390, 768, 1280]) {
       await page.setViewportSize({ width, height: 900 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-      const boxes = await cards.evaluateAll(items => items.map(el => {
-        const box = el.getBoundingClientRect(); return { x: box.x, right: box.right, y: box.y, width: box.width, height: box.height, fits: el.scrollWidth <= el.clientWidth + 1 };
-      }));
-      expect(boxes.every(b => b.fits && b.x >= 0 && b.right <= width)).toBe(true);
-      for (const prop of ['y', 'width', 'height']) expect(Math.max(...boxes.map(b => b[prop])) - Math.min(...boxes.map(b => b[prop]))).toBeLessThan(2);
-      const units = await cards.getByText('题', { exact: true }).evaluateAll(items => items.map(el => el.getBoundingClientRect().y));
-      expect(Math.max(...units) - Math.min(...units)).toBeLessThan(2);
+      const box = await result.boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0); expect(box.x + box.width).toBeLessThanOrEqual(width);
+      expect(await result.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
       const actions = room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button');
       await expect(actions).toHaveCount(2);
       const [again, next] = await actions.evaluateAll(items => items.map(el => { const b = el.getBoundingClientRect(); return { x:b.x, y:b.y, right:b.right, height:b.height }; }));
@@ -78,7 +109,7 @@ for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节�
       await room.screenshot({ path: `${OUT}/${base ? 'lesson' : 'root'}-${id}-${width}.png` });
     }
     await page.reload(); await expectResults(room, [total, total, 0]);
-    await room.getByRole('button', { name: '下一站：' + nextName, exact: true }).click();
+    await room.getByRole('button', { name: nextId === 'certificate' ? '查看纪念卡' : '下一站：' + nextName, exact: true }).click();
     await expect(page).toHaveURL(new RegExp('#learn/' + nextId + '$'));
   }
   expect(errors).toEqual([]);
@@ -94,13 +125,13 @@ test('全错后改正仍记五题错误，刷新不重播庆祝，再练重新�
       // Choice questions clear their selection; token selection is rebuilt.
       if (repeat === 0 || !wrong?.fills) await flow.select(room, wrong);
       await expect(check).toBeEnabled(); await check.click();
-      await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+      await expect(room.locator('.fb')).toHaveText('再看看。');
       await page.reload(); await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
     await flow.select(room, flow.ANSWERS['1-2'].manners[i]); await check.click();
-    await room.getByRole('button', { name: i === 4 ? '完成这一站' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 4 ? '完成这一组' : '下一题', exact: true }).click();
   }
-  await expect(room.locator('.completion-card')).toHaveClass(/is-celebrating/);
+  await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion', 'playing');
   await expectResults(room, [0, 0, 5]);
   await page.reload(); await expectResults(room, [0, 0, 5]);
   await expect(room.locator('.completion-card')).not.toHaveClass(/is-celebrating/);

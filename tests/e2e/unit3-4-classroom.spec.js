@@ -21,7 +21,7 @@ test('全部声音失败仍能完成25题与完整原文并领奖，零英语配
     return route.abort();
   });
   await page.goto('/lesson/unit3-4/#learn/certificate');
-  await expect(page.getByRole('button', { name: '保存纪念卡', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
   await completeUnit34(page, '/lesson');
   await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
   await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
@@ -89,6 +89,9 @@ test('七个词义任务不以图配图，末三题刷新不代答，重练清�
     await room.getByRole('button', { name: i === ANSWERS.listen.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
   }
   await expect(room.getByRole('button', { name: '下一站：衣帽间小剧场', exact: true })).toBeVisible();
+  const reward = page.locator('dialog.award-reveal[open]');
+  await expect(reward).toBeVisible();
+  await reward.press('Escape');
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
@@ -206,7 +209,7 @@ test('接力词块可撤回，未知归属不猜，末题刷新没有自动作�
 
 test('五星卡日期保留、匿名不能代填姓名或导出，练习纸与路径记录独立',async({page})=>{
  test.setTimeout(120000);await completeUnit34(page);
- const date=await page.locator('#certificateDate').textContent();await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await page.reload();await expect(page.locator('#certificateDate')).toHaveText(date);
+ const date=await page.locator('#certificateDate').textContent();await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await page.reload();await expect(page.locator('#certificateDate')).toHaveText(date);
   await page.getByText('和家人再试试', { exact: true }).click();
   await expect(page.locator('.writing-lines li')).toHaveCount(4); await expect(page.locator('.reply-writing li')).toHaveCount(10);
   await page.evaluate(() => { window.print = () => {}; }); await page.getByRole('button', { name: '打印练习纸', exact: true }).click();

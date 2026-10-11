@@ -40,7 +40,7 @@ for(const [course,stage,right] of [['unit1-2','trans','Is this your book?'],['un
   test(course+' 选择题错答只提示重试，改选后正常推进',async({page})=>{
     await page.goto('/'+course+'/#learn/'+stage);const room=page.locator('.stage-'+stage);
     await room.locator('.practice-options button').filter({hasNotText:right}).first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
-    await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+    await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '再看看。' : '再看看，试一次。');
     await expect(room.locator('.practice-options .good,.practice-options .correct')).toHaveCount(0);
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
     await room.getByRole('button',{name:right,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();

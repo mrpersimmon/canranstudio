@@ -1,5 +1,5 @@
 'use strict';
-const fs = require('node:fs');
+const sharp = require('sharp');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, addStudent, studentLogin } = require('./helpers');
 const { finishZone, readStory } = require('../support/unit1-2-award-flow');
@@ -26,12 +26,14 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   await learner.goto(base + '#learn/trans');
   await expect(learner.locator('.stage-trans').getByRole('button', { name:'Is this your book?', exact:true })).toBeVisible();
   await first.context.setOffline(true);
-  await finishZone(learner, 'trans', { base });
-  await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网同步后');
+  await finishZone(learner, 'trans', { base, keepAward: true });
+  await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网后同步星星');
   await expect(learner.locator('#starCount')).toHaveText('0');
   await first.context.setOffline(false);
   await expect(learner.locator('#starCount')).toHaveText('1');
-  await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  const reveal = learner.getByRole('dialog', { name: /纪念卡结算/ });
+  await expect(reveal).toBeVisible(); await reveal.press('Escape');
+  await expect(learner.locator('#studentSyncStatus')).toHaveText('已同步');
   await expectManagedLearning(page, account, mount, '学习中', 1);
   const second = await studentLogin(browser, account, mount);
   await expect(second.page.locator('.course').filter({ hasText:'Lesson 1–2' })).toContainText('1 / 5');
@@ -49,15 +51,19 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   await expect(workshop.getByRole('button', { name:'再试一次', exact:true })).toBeVisible();
   await expect(learner.locator('#starCount')).toHaveText('1');
   await readStory(learner, base);
-  for (const id of ['roles','listen','manners','exam']) await finishZone(learner, id, { base });
+  for (const [index, id] of ['roles','listen','manners','exam'].entries()) {
+    await finishZone(learner, id, { base, keepAward:true });
+    await expect(reveal.getByRole('group', { name:`已获得 ${index + 2} / 5 颗星`, exact:true })).toBeVisible();
+    await reveal.press('Escape');
+  }
   await expect(learner.locator('#starCount')).toHaveText('5');
-  await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  await expect(learner.locator('#studentSyncStatus')).toHaveText('已同步');
   await expectManagedLearning(page, account, mount, '已完成', 5);
   // The fifth star was earned without opening or downloading the card.
   await learner.goto(base + '#learn/certificate');
   await expect(learner.locator('#certificateDate')).toBeVisible();
   const firstDate = await learner.locator('#certificateDate').textContent();
-  const card=learner.getByRole('article',{name:'我的单元纪念卡'});
+  const card=learner.getByRole('article',{name:'我的纪念卡'});
   await expect.poll(()=>card.locator('img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0))).toBe(true);
   await learner.evaluate(()=>document.fonts.ready);
   for (const width of [320,390,768,1280]) {
@@ -78,25 +84,25 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
     expect(await learner.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
     await learner.screenshot({path:`output/login/award-compact-${width}.png`});
     const download=learner.waitForEvent('download');
-    await learner.getByRole('button',{name:'保存纪念卡',exact:true}).click();
-    const file=await download;expect(file.suggestedFilename()).toBe('Lesson1-2-礼貌小帮手.png');
-    const filePath=`output/login/award-compact-export-${width}.png`;await file.saveAs(filePath);
-    const bytes=fs.readFileSync(filePath);
-    expect(bytes.readUInt32BE(16)).toBe(1640);expect(bytes.readUInt32BE(20)).toBe(880);
+    await learner.getByRole('button',{name:'保存动图',exact:true}).click();
+    const file=await download;expect(file.suggestedFilename()).toBe('Lesson1-2-礼貌小帮手.gif');
+    const filePath=`output/login/award-compact-export-${width}.gif`;await file.saveAs(filePath);
+    const info=await sharp(filePath,{animated:true}).metadata();
+    expect(info.format).toBe('gif');expect(info.width).toBe(984);expect(info.pageHeight).toBe(528);expect(info.pages).toBe(60);expect(info.loop).toBe(0);
   }
-  const save=learner.getByRole('button',{name:'保存纪念卡',exact:true});
+  const save=learner.getByRole('button',{name:'保存动图',exact:true});
   // Exercise a browser export failure, even when all images are cached by the worker.
   await learner.evaluate(()=>{
-    const original=HTMLCanvasElement.prototype.toBlob;
-    HTMLCanvasElement.prototype.toBlob=function(callback){
-      HTMLCanvasElement.prototype.toBlob=original;callback(null);
+    const original=CanvasRenderingContext2D.prototype.getImageData;
+    CanvasRenderingContext2D.prototype.getImageData=function(){
+      CanvasRenderingContext2D.prototype.getImageData=original;throw new Error('Canvas export unavailable');
     };
   });
   await save.click();await expect(learner.locator('.story-award-status')).toContainText('请再试一次');
   const retryDownload=learner.waitForEvent('download');await save.click();await retryDownload;
   await learner.clock.setFixedTime(new Date(Date.now() + 3 * 86400000));
   await learner.reload(); await expect(learner.locator('#certificateDate')).toHaveText(firstDate);
-  await learner.getByRole('button', { name:'小雨 · 学习设置' }).click();
+  await learner.getByRole('button', { name:'学习设置' }).click();
   await learner.getByRole('button', { name:'重开本课', exact:true }).click();
   await Promise.all([
     learner.waitForEvent('load'),
@@ -140,10 +146,10 @@ test('订正完成但零星，课程首页仍可继续学习',async({browser,pag
  try{
   const p=student.page,base=mount+'unit1-2/';await p.goto(base+'#learn/trans');const room=p.locator('.stage-trans');
   await room.getByRole('button',{name:'This is your book.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
-  await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
   await expectManagedLearning(page, account, mount, '学习中', 0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await finishZone(p,'trans',{base});
-  await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
   await p.getByRole('link',{name:'我的课程',exact:true}).click();
   await expect(p.getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toBeVisible();
  }finally{await student.context.close();}

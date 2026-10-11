@@ -10,14 +10,17 @@ function tasks(root, files) {
   const changedTests = files.filter(file => /^tests\/e2e\/.*\.spec\.js$/.test(file) && fs.existsSync(path.join(root, file)));
   return {
     'browser-login': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
+    'browser-recovery-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.recovery.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js','playwright.recovery.config.js'],browser:'webkit'},
     workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: [...runtimeInputs, 'server'] },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
-    'browser-course-cache': browser(['tests/e2e/course-loading.spec.js', 'tests/e2e/course-image-transitions.spec.js', 'tests/e2e/course-cache-updates.spec.js', 'tests/e2e/course-cache-performance.spec.js', 'tests/e2e/course-cache-journeys.spec.js', 'tests/e2e/lesson-deployment.spec.js']),
+    'browser-cache-cold': browser(['tests/e2e/course-cache-cold.spec.js', '--grep', '@cache-performance', '--trace=off']),
+    'browser-cache-revisit': browser(['tests/e2e/course-cache-performance.spec.js', '--grep', '@cache-performance']),
+    'browser-course-cache': browser(['tests/e2e/course-loading.spec.js', 'tests/e2e/course-image-transitions.spec.js', 'tests/e2e/course-cache-updates.spec.js', 'tests/e2e/course-cache-performance.spec.js', 'tests/e2e/course-cache-journeys.spec.js', 'tests/e2e/lesson-deployment.spec.js', '--grep-invert', '@cache-performance']),
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
     'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
-    'browser-unit12': browser(['tests/e2e/unit1-2','tests/e2e/unit-thirteen-types.spec.js']),
+    'browser-unit12': browser(['tests/e2e/unit1-2','tests/e2e/unit-thirteen-types.spec.js','tests/e2e/award-reveal.spec.js','tests/e2e/three-unit-awards.spec.js']),
     'browser-unit34': browser(['tests/e2e/unit3-4']),
     'browser-unit56': browser(['tests/e2e/unit5-6']),
     'browser-units1-6-exam': browser(['tests/e2e/unit1-2-exam.spec.js', 'tests/e2e/unit3-4-exam.spec.js', 'tests/e2e/unit5-6-exam.spec.js', 'tests/e2e/units1-6-exam-layout.spec.js', 'tests/e2e/units1-6-exam-upgrade.spec.js', 'tests/e2e/unit-dedup.spec.js']),
@@ -50,6 +53,7 @@ function tasks(root, files) {
 }
 function select(files) {
   const selected = [];
+  if (files.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/course-packages\.js|server\/public\/access-(?:client|worker)\.js|tests\/login\/(?:server\.js|helpers\.js|course-loading-recovery\.spec\.js)|tests\/support\/course-response-faults\.js|playwright\.(?:recovery|login)\.config\.js)$/.test(file))) selected.push('browser-recovery-webkit');
   if(files.some(file=>/^(server\/|tests\/login\/|playwright.login.config.js|deploy\/login\/|core\/(?:course-(?:cache|loader|worker)|lesson49-practice)\.js|scripts\/(?:course-packages|public-base-path|build-login)\.js|unit[^/]+\/(?:content|unit)\.js)/.test(file)))selected.push('browser-login');
   if (files.some(isWorkflow)) selected.push('workflow');
   const code = files.filter(file => !isDoc(file) && !isWorkflow(file));
@@ -59,7 +63,7 @@ function select(files) {
   const runtime = code.filter(file => !file.startsWith('tests/'));
   if (runtime.some(file => /^(core\/(?:lesson49-(?:practice|task-inputs|experience)|unit-theme)\.(?:js|css)|unit[^/]*\/(?:unit|content)\.js)$/.test(file))) selected.push('browser-common-interactions');
   if (runtime.length) selected.push('browser-smoke');
-  if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-course-cache');
+  if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-cache-cold', 'browser-cache-revisit', 'browser-course-cache');
   if (runtime.some(file => /audio|feedback|\.mp3$/.test(file))) selected.push('browser-audio');
   if (code.some(file => /^(unit(?:1-2|5-6|7-8|11-12)\/|soundmark\/|core\/audio-player\.js|scripts\/media\/|tests\/fixtures\/pronunciation)/.test(file))) selected.push('browser-pronunciation');
   if (code.some(file => /^(unit1-2\/|assets\/unit1-2\/|tests\/fixtures\/unit1-2-.*-before\/|tests\/support\/unit1-2-flow\.js)/.test(file))) selected.push('browser-unit12');
@@ -83,7 +87,7 @@ function select(files) {
   if (code.some(file => /^(unit37-38\/|assets\/unit37-38\/|tests\/support\/unit37-38-flow\.js)/.test(file))) selected.push('browser-unit3738');
   if (code.some(file => /^(unit39-40\/|assets\/unit39-40\/|tests\/support\/unit39-40-flow\.js)/.test(file))) selected.push('browser-unit3940');
   if (code.some(file => /^unit49-50\/certificate\.(?:js|css)$/.test(file))) selected.push('browser-certificates');
-  if (code.some(file => /^(award-book\/|scripts\/award-book-bundle\.js$|core\/(?:award-rules|unit-awards|story-certificate)\.|assets\/awards\/|tests\/support\/unit1-2-award-flow\.js)/.test(file))) selected.push('browser-unit12', 'browser-login');
+  if (code.some(file => /^(award-book\/|scripts\/award-book-bundle\.js$|core\/(?:award-rules|unit-awards|story-certificate|award-reveal|award-gif)\.|core\/vendor\/gifenc|assets\/awards\/|tests\/support\/unit1-2-award-flow\.js)/.test(file))) selected.push('browser-unit12', 'browser-login');
   if (code.some(file => /^(unit29-30\/|assets\/unit29-30\/|tests\/support\/unit29-30-flow\.js)/.test(file))) selected.push('browser-unit2930');
   if (code.some(file => /^(core\/lesson49-task-inputs\.(?:js|css)$|unit(?:1-2|3-4|5-6|7-8|9-10|11-12|13-14|15-16|17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/(?:content|unit|scene)\.(?:js|css)$|tests\/(?:e2e\/(?:units1-30-|units-room-tasks)|support\/units1-30-|fixtures\/units1-30-tasks-before\/))/.test(file))) selected.push('browser-units1-30-tasks');
   if (code.some(file => /^(unit[^/]*\/|lesson\d+\/|soundmark\/|core\/(?:lesson49-practice|lesson49-subjects|course-catalog)\.js|tests\/(?:e2e\/retry-feedback\.spec\.js|fixtures\/l49-subjects-before-retry\.js))/.test(file))) selected.push('browser-retry-feedback');

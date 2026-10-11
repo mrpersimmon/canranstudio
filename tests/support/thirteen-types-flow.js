@@ -28,12 +28,13 @@ async function select(room,answer){
 async function story(page,pair,base=''){
  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();
- if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
- if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ if(await room.getByRole('button',{name:pair==='1-2'?/^(重看故事|再看一遍)$/: '再看一遍',exact:true}).isVisible())return;
+ if(await room.getByRole('button',{name:pair==='1-2'?/^(开始故事|开始看课文)$/: '开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:pair==='1-2'?/^(开始故事|开始看课文)$/: '开始看课文',exact:true}).click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- await room.getByRole('button',{name:'完成课文',exact:true}).click();
+ await room.getByRole('button',{name:pair==='1-2'?/^(读完了|完成课文)$/: '完成课文',exact:true}).click();
 }
-async function activity(page,pair,id,{base='',capture}={}){
+async function activity(page,pair,id,{base='',capture,keepAward=false}={}){
+ await require('./reward-dialog').handleRewardDialog(page,keepAward);
  await page.goto(`${base}/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),items=ANSWERS[pair][id];
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();
  if(await room.locator('.practice-finish').isVisible())return;
@@ -46,14 +47,15 @@ async function activity(page,pair,id,{base='',capture}={}){
   }
   await expect(room.locator('.fb')).toHaveText('答对了！');
   if(capture)await capture(room,i,'correct');
-  await room.getByRole('button',{name:i===items.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+  await room.getByRole('button',{name:i===items.length-1?(pair==='1-2'?(id==='exam'?'完成挑战':'完成这一组'):(id==='exam'?'查看本次记录':'完成这一站')):'下一题',exact:true}).click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
+ if(!keepAward&&await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
 }
 async function complete(page,pair,base=''){
  await story(page,pair,base);for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id,{base});
  await page.goto(`${base}/unit${pair}/#learn/certificate`);
- if(pair==='1-2')await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
+ if(pair==='1-2')await expect(page.getByRole('article',{name:'我的纪念卡'})).toBeVisible();
  else await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();
  // Completion and zero-error stars are separate in the five-zone edition.
  if(pair!=='1-2')await expect(page.locator('#starCount')).toHaveText('15');

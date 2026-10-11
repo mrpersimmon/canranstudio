@@ -1,0 +1,63 @@
+/* Floating settlement: the keepsake is the only panel. */
+body:has(dialog.award-reveal[open]){overflow:hidden}
+dialog.award-reveal{position:fixed;inset:0;border:0;padding:0;margin:0;background:transparent;color:#4a3226;width:100%;height:100%;max-width:none;max-height:none;overflow:hidden;outline:none;cursor:pointer;touch-action:manipulation}
+dialog.award-reveal::backdrop{background:rgba(33,43,41,.78);backdrop-filter:blur(3px)}
+.award-reveal-stage{height:100%;overflow:auto;padding:32px 24px;display:flex;justify-content:center;align-items:center;overscroll-behavior:contain;box-sizing:border-box}
+.award-reveal-panel{position:relative;width:min(620px,100%);flex-shrink:0;text-align:center}
+.award-reveal-card{position:relative;width:100%;margin:0 auto;filter:drop-shadow(0 16px 24px #1e1b1850)}
+.award-reveal .story-award-paper{width:100%;text-align:left;box-sizing:border-box}
+.award-reveal .story-award-stars{gap:1.2cqw}
+.award-reveal .story-award-stars img{width:6.2cqw;height:6.2cqw}
+.award-reveal .star-source{position:absolute;width:78px;height:78px;top:-43px;right:30px;pointer-events:none}
+.award-reveal .travelling-star,.award-reveal .sparkle{position:fixed;pointer-events:none;z-index:21}
+.award-upgrade-reminder{margin:24px auto 0;max-width:100%;color:#fff9eb;font:500 18px/1.75 'Award Round',system-ui,sans-serif;text-align:center;text-shadow:0 1px 3px #15211c55}
+.award-upgrade-reminder span{display:inline-block}
+@media(max-width:600px){
+ .award-reveal-stage{padding:28px 20px}
+ .award-reveal-card{max-width:min(320px,calc((100dvh - 160px) * .96))}
+ .award-reveal .story-award-paper{aspect-ratio:.96;border-radius:20px;border-width:2px}
+ .award-reveal .story-award-brand{font-size:4.2cqw;top:6.5%}
+ .award-reveal .story-award-title{font-size:10cqw;top:16%}
+ .award-reveal .story-award-name{font-size:min(11cqw,calc(var(--name-size) * 2));top:27%;height:13%;width:85%}
+ .award-reveal .story-award-name.is-placeholder{font-size:5cqw}
+ .award-reveal .story-award-stars{top:41%;width:80%;gap:3cqw}
+ .award-reveal .story-award-stars img{width:9cqw;height:9cqw}
+ .award-reveal .story-award-illustration{width:92%;height:46%;bottom:6%}
+ .award-reveal .story-award-foot{font-size:3.4cqw;bottom:2.2%}
+ .award-reveal .star-source{width:62px;height:62px;top:-36px;right:6px}
+ .award-upgrade-reminder{margin-top:20px;font-size:16px;line-height:1.8}
+ .award-upgrade-reminder span{display:block}
+}
+@media(max-height:520px) and (min-width:601px){.award-reveal-panel{max-width:calc((100dvh - 140px) * 1.88)}}
+/* Light lives on the awarded stars and the full-star rim, never across the text. */
+@property --gold-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+.award-reveal .award-star{position:relative;display:inline-flex;flex:none;isolation:isolate}
+.award-reveal .award-star img{display:block;position:relative;z-index:1}
+.award-reveal .award-star[data-earned='true'] img{filter:brightness(1.13) saturate(1.18) drop-shadow(0 0 3px #ffd561b3)}
+.award-reveal .award-star::before{content:'';position:absolute;inset:-20%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#ffd8655c,transparent 69%);opacity:0}
+.award-reveal .award-star[data-earned='true']::before{opacity:1}
+.award-reveal .award-star::after{content:'';position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none;background:linear-gradient(112deg,transparent 35%,#fff7c680 43%,#fffdf5ed 48%,#ffeaa580 53%,transparent 63%) 180% 0/260% 100%;mask:url('/assets/awards/star-earned.webp') center/contain no-repeat;-webkit-mask:url('/assets/awards/star-earned.webp') center/contain no-repeat}
+.award-reveal .star-glint{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0}
+.award-reveal .star-glint::before,.award-reveal .star-glint::after{content:'';position:absolute;background:#fffce8;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 3px #ffda75)}
+.award-reveal .star-glint::before{width:32%;height:42%;top:3%;right:10%}
+.award-reveal .star-glint::after{width:20%;height:27%;bottom:7%;left:11%}
+.award-reveal .award-star[data-earned='true'] .star-glint{opacity:.75}
+/* Product default: reward motion stays on. Scope these overrides to the open
+   reveal; the course's broad reduced-motion rules still apply elsewhere. */
+dialog.award-reveal[open][data-motion='full'] .award-star[data-earned='true']::after{animation:star-sheen 4.8s ease-in-out infinite!important;animation-delay:calc(var(--star-order) * .32s)!important}
+dialog.award-reveal[open][data-motion='full'] .award-star[data-earned='true'] .star-glint{animation:star-twinkle 4.8s ease-in-out infinite!important;animation-delay:calc(var(--star-order) * .32s)!important}
+@keyframes star-sheen{0%,8%{opacity:0;background-position:180% 0}20%{opacity:.85}42%{opacity:0;background-position:-80% 0}100%{opacity:0;background-position:-80% 0}}
+@keyframes star-twinkle{0%,5%,50%,100%{opacity:.22;transform:scale(.8)}23%{opacity:1;transform:scale(1.14)}36%{opacity:.6;transform:scale(1)}}
+.award-reveal .travelling-star{isolation:isolate;filter:none}
+.award-reveal .travelling-star>img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;filter:brightness(1.18) saturate(1.15) drop-shadow(0 0 7px #fff0a8) drop-shadow(0 0 19px #ffc845a6)}
+.award-reveal .travelling-star::before{content:'';position:absolute;inset:-45%;z-index:-1;background:radial-gradient(circle,#ffe1a373 0%,#ffc8492b 40%,transparent 68%)}
+.award-reveal .travelling-star .star-glint{opacity:1}
+.award-reveal .star-trail{position:fixed;z-index:19;pointer-events:none;width:8px;height:8px;border-radius:50%;background:#fff8cd;box-shadow:0 0 7px 2px #ffc655a6}
+.award-reveal .sparkle{width:10px;height:10px;border-radius:0;background:#fff4c2;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 3px #ffce63)}
+.award-reveal .star-bloom{position:fixed;z-index:18;width:90px;height:90px;pointer-events:none;border-radius:50%;background:radial-gradient(circle,#fffce485 0%,#ffe49a55 25%,#e9b63800 68%)}
+.award-reveal .story-award-paper[data-stars='5']{box-shadow:inset 0 0 0 6px #f4bd55,inset 0 0 0 8px #b17c29,0 0 12px #fbc96366,0 0 38px #e4a52c33}
+.award-reveal .gold-light-ring{position:absolute;inset:0;z-index:4;padding:6px;border-radius:inherit;pointer-events:none;opacity:0;background:conic-gradient(from var(--gold-angle),#d7962e 0deg,#edba52 40deg,#ffe7a1 58deg,#fffde5 70deg,#ffe098 81deg,#dca33b 105deg,#b97922 170deg,#eeb94c 220deg,#fff5cf 247deg,#e3a33d 275deg,#b97922 325deg,#d7962e 360deg);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor}
+.award-reveal .story-award-paper[data-stars='5'] .gold-light-ring{opacity:1}
+dialog.award-reveal[open][data-motion='full'] .story-award-paper[data-stars='5'] .gold-light-ring{animation:gold-orbit 5.8s linear infinite,gold-arrive .75s ease-out both!important}
+@keyframes gold-orbit{from{--gold-angle:0deg}to{--gold-angle:360deg}}
+@keyframes gold-arrive{from{opacity:0}to{opacity:1}}

@@ -12,7 +12,7 @@ test('五区成绩登录后同步，课程首页和另一设备都显示一颗�
     await first.page.emulateMedia({ reducedMotion: 'reduce' });
     await flow.activity(first.page, '1-2', 'listen', { base: '/lesson' });
     await expect(first.page.locator('#starCountWrap')).toContainText('1/5');
-    await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    await expect(first.page.locator('#studentSyncStatus')).toHaveText('已同步');
     await page.getByRole('button', { name: '查看学习进度', exact: true }).click();
     const report = page.locator('[data-learning-course="unit1-2"]');
     await expect(report).toContainText('学习中');
@@ -42,7 +42,7 @@ test('错答后完成可继续学习，首页与另一设备均不把完成换�
     await flow.select(room, { fills: ['it'] }); await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await room.getByRole('button', { name: '再试一次', exact: true }).click();
     await flow.activity(first.page, '1-2', 'manners', { base: '/lesson' });
-    await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    await expect(first.page.locator('#studentSyncStatus')).toHaveText('已同步');
     await page.getByRole('button', { name: '查看学习进度', exact: true }).click();
     const report = page.locator('[data-learning-course="unit1-2"]');
     await expect(report).toContainText('学习中');

@@ -31,8 +31,10 @@ for (const unit of ['1-2', '3-4', '5-6']) for (const width of [320, 390, 768, 12
       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
       expect(await position()).toBeCloseTo(before, 0);
-      await room.getByRole('button', { name: i === questions.length - 1 ? '查看本次记录' : '下一题', exact: true }).click();
+      await room.getByRole('button', { name: i === questions.length - 1 ? (unit === '1-2' ? '完成挑战' : '查看本次记录') : '下一题', exact: true }).click();
     }
+    const reward = page.locator('dialog.award-reveal[open]');
+    await expect(reward).toBeVisible(); await reward.press('Escape');
     const finish = room.getByRole('group', { name: '完成后的操作', exact: true }); await expect(finish.getByRole('button')).toHaveCount(2);
     for (const control of await finish.getByRole('button').all()) {
       const b = await control.boundingBox(); expect(b.x).toBeGreaterThanOrEqual(0); expect(b.x + b.width).toBeLessThanOrEqual(width); expect(b.height).toBeGreaterThanOrEqual(44);

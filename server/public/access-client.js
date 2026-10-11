@@ -12,8 +12,15 @@ const privacyStyle=document.createElement('style');privacyStyle.textContent='htm
 const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('canran-lesson-identity'):null;
 const isCourseKey=k=>/^canran:lesson:/.test(k)||/^lesson:(?:l\d+|phonics-magic)-stars/.test(k);
 async function api(route,data){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);try{const response=await fetch('/lesson/api/'+route,{cache:'no-store',signal:controller.signal,...(data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})});const value=await response.json();if(!response.ok)throw Object.assign(new Error(value.error),{status:response.status});return value;}finally{clearTimeout(timeout);}}
-function syncStatus(text){let tag=document.getElementById('studentSyncStatus');if(tag)tag.textContent=access?.preview?'班级预览 · 不记录成绩':text;}
-function notifyPending(){syncStatus(pending?'已保存到本机 · 等待同步':'学习成果已同步');}
+function syncStatus(text,state='failed'){
+ const tag=document.getElementById('studentSyncStatus');
+ if(!tag)return;
+ tag.textContent=access?.preview?'班级预览 · 不记录成绩':text;
+ tag.dataset.syncState=access?.preview?'preview':state;
+ // Course storage is namespaced on subpaths; this cross-script event must stay stable.
+ window.dispatchEvent(new CustomEvent('lesson-sync:status',{detail:{state:tag.dataset.syncState,text:tag.textContent}}));
+}
+function notifyPending(){syncStatus(pending?'已保存到本机 · 等待同步':course==='unit1-2'?'已同步':'学习成果已同步',pending?'pending':'synced');}
 function completedSnapshot(book){
  const groups={},records={},activity={unitCompleted:book.activity?.unitCompleted||{}};
  for(const [id,group] of Object.entries(book.groups||{}))if(group.index===group.signature?.split('|').length&&group.states?.every(s=>s?.checked&&s.correct)){groups[id]=group;for(const state of group.states)if(book.records?.[state.questionId])records[state.questionId]=book.records[state.questionId];}
@@ -23,7 +30,7 @@ function completedSnapshot(book){
  return {version:1,groups,records,activity};
 }
 function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
-async function flush(){if(!pending||flushing||access?.preview)return;flushing=true;const sent=pending;try{const result=await api('progress',sent);if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock('学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}if(result.awards){access.awards=result.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:result.awards}));}if(pending===sent){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}notifyPending();}catch{syncStatus('已保存到本机 · 联网后同步');}finally{flushing=false;if(pending&&pending!==sent)setTimeout(flush,400);}}
+async function flush(){if(!pending||flushing||access?.preview)return;flushing=true;const sent=pending;try{const result=await api('progress',sent);if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock('学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}if(result.awards){access.awards=result.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:result.awards}));}if(pending===sent){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}notifyPending();}catch{syncStatus('已保存到本机 · 联网后同步','retry');}finally{flushing=false;if(pending&&pending!==sent)setTimeout(flush,400);}}
 function lock(message,retry=()=>location.reload()){
  locked=true;document.documentElement.setAttribute('data-access-locked','');
  let gate=document.getElementById('accessGate');if(!gate){gate=document.createElement('div');gate.id='accessGate';gate.setAttribute('role','alertdialog');gate.setAttribute('aria-label','课程访问');gate.style='position:fixed;inset:0;z-index:2147483646;background:#fcf8ef;display:grid;place-items:center;padding:24px;color:#4b3428;font:18px/1.7 system-ui';document.body.append(gate);}
@@ -84,6 +91,7 @@ document.addEventListener('canran:course-ready',()=>{
  .student-settings-dialog h2{min-width:0;font-size:22px;line-height:1.5;overflow-wrap:anywhere}
  .student-settings-dialog h2 span{display:inline-block;white-space:nowrap}
  .student-settings-dialog .student-settings-close{flex-shrink:0}
+ .student-settings-name{margin:0 0 18px;color:#6f655b}
  .student-settings-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
  .student-settings-dialog .student-settings-actions button,.student-settings-dialog .student-settings-reset button{width:100%;min-height:48px;padding:10px 12px;font-size:16px;white-space:normal;overflow-wrap:anywhere}
  .student-settings-reset{margin-top:24px;padding-top:20px;border-top:1px solid #dac8b4}
@@ -94,12 +102,12 @@ document.addEventListener('canran:course-ready',()=>{
  @media(max-width:400px){.student-settings-dialog{padding:20px}.student-settings-dialog h2{font-size:20px}}
  `;document.head.append(style);
  const label=document.createElement('span');label.id='studentSyncStatus';label.setAttribute('role','status');strip.append(label);
- const identity=document.createElement('button');identity.className='workspace-back';identity.textContent=access.preview?'返回班级管理':access.student.name+' · 学习设置';
+ const identity=document.createElement('button');identity.className='workspace-back';identity.textContent=access.preview?'返回班级管理':course==='unit1-2'?'学习设置':access.student.name+' · 学习设置';
  identity.onclick=()=>{
   if(access.preview){location.href='/lesson/admin/';return;}
   const dialog=document.createElement('dialog');dialog.className='unit-dialog student-settings-dialog';dialog.setAttribute('aria-labelledby','studentSettingsTitle');
   const heading=document.createElement('div');heading.className='unit-dialog-heading';
-  const title=document.createElement('h2');title.id='studentSettingsTitle';title.append(document.createTextNode(access.student.name+'的'));
+  const title=document.createElement('h2');title.id='studentSettingsTitle';if(course!=='unit1-2')title.append(document.createTextNode(access.student.name+'的'));
   const titleLabel=document.createElement('span');titleLabel.textContent='学习设置';title.append(titleLabel);
   const close=document.createElement('button');close.className='workspace-back student-settings-close';close.textContent='关闭';close.autofocus=true;close.onclick=()=>dialog.close();heading.append(title,close);
   const status=document.createElement('p');status.className='student-settings-status';status.setAttribute('role','status');status.hidden=true;
@@ -110,12 +118,14 @@ document.addEventListener('canran:course-ready',()=>{
   const exit=document.createElement('button');exit.className='workspace-back';exit.textContent='退出登录';exit.onclick=switcher.onclick;accountActions.append(switcher,exit);
   const resetArea=document.createElement('div');resetArea.className='student-settings-reset';
   const reset=document.createElement('button');reset.className='workspace-back';reset.textContent='重开本课';
-  const resetNote=document.createElement('p');resetNote.textContent=access.awards?'重开练习；已获星和首次满星日期保留。':'只清空本课的个人学习成果。';
+  const resetNote=document.createElement('p');resetNote.textContent=access.awards?'重开练习，保留星星和首次满星日期。':'只清空本课的个人学习成果。';
   reset.onclick=()=>{
    reset.textContent=access.awards?'确认重开练习':'确认清空本课个人成果';
    reset.onclick=async()=>{try{await flush();if(pending){showError('还有成果等待同步，请联网后再重开练习。');return;}const result=await api('progress/reset',{course});native.remove.call(localStorage,prefix+key);native.remove.call(localStorage,prefix+'pending:'+course);write(prefix+'generation:'+course,String(result.generation));location.reload();}catch(error){showError(error.message);}};
   };
-  resetArea.append(reset,resetNote);dialog.append(heading,accountActions,resetArea,status);document.body.append(dialog);
+  resetArea.append(reset,resetNote);dialog.append(heading);
+  if(course==='unit1-2'){const name=document.createElement('p');name.className='student-settings-name';name.textContent=access.student.name;dialog.append(name);}
+  dialog.append(accountActions,resetArea,status);document.body.append(dialog);
   dialog.addEventListener('close',()=>{dialog.remove();identity.focus({preventScroll:true});});dialog.showModal();
  };strip.append(identity);
  if(preview)document.getElementById('logo')?.setAttribute('href','/lesson/?preview='+encodeURIComponent(preview));notifyPending();flush();

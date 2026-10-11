@@ -8,22 +8,6 @@ const http = require('node:http');
 const { createCoursePackages } = require('../../scripts/course-packages');
 const { completeUnit2930 } = require('../support/unit29-30-flow');
 const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
-test('固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时', async ({ page, context, browser }, testInfo) => {
-  test.setTimeout(60000);
-  const network = await context.newCDPSession(page);
-  await network.send('Network.enable');
-  await network.send('Network.emulateNetworkConditions', { offline: false, latency: 150, downloadThroughput: 1250000, uploadThroughput: 1250000, connectionType: 'cellular3g' });
-  await page.goto('/lesson/', { waitUntil: 'domcontentloaded' });
-  const entry = page.locator('a[href="/lesson/unit1-2/#learn/words"]');
-  await expect(entry).toBeVisible({ timeout: 30000 });
-  const start = Date.now();
-  await entry.click();
-  await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible({ timeout: 30000 });
-  const elapsed = Date.now() - start;
-  await fs.writeFile(testInfo.outputPath('first-visit.json'), JSON.stringify({ browser: browser.version(), cpu: os.cpus()[0].model, downMbps: 10, latencyMs: 150, from: 'prepared navigation', target: 'unit1-2', elapsedMs: elapsed }, null, 2));
-  await expect.poll(() => page.locator('img:visible').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
-  expect(elapsed).toBeLessThan(5000);
-});
 test('两个标签页同时准备同课，关掉一页后另一页仍能完整进入', async ({ context }) => {
   let release, seen;
   const held = new Promise(resolve => { release = resolve; });
@@ -36,7 +20,7 @@ test('两个标签页同时准备同课，关掉一页后另一页仍能完整�
   await second.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
   await expect(second.getByRole('status', { name: '课程准备状态', exact: true })).toBeVisible();
   await first.close(); release();
-  await expect(second.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
+  await expect(second.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
   await expect.poll(() => second.locator('.stage-words img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
 });
 

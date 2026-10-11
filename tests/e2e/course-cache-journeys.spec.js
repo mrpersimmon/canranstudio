@@ -20,16 +20,16 @@ for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
       requestAnimationFrame(inspect);
     });
     await page.goto('/lesson/' + id + '/#learn/words');
-    await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
+    await expect(page.locator('.stage-words').getByRole('button', { name: first === 1 ? '下一组' : '下一组词卡', exact: true })).toBeVisible();
     await context.setOffline(true);
     await run(page, '/lesson');
     if(first===1){
       // Anonymous previews can practise offline, but cannot impersonate a student
-      // by typing a name. Real-name offline PNG export is covered in login/award-book.
+      // by typing a name. Real-name offline GIF export is covered in login/award-book.
       await expect(page.locator('#starCount')).toHaveText('5');
       await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveCount(0);
-      await expect(page.getByRole('button',{name:'保存纪念卡',exact:true})).toBeDisabled();
-      await expect(page.locator('.story-award-paper')).toBeVisible();
+      await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
+      await expect(page.locator('.stage-certificate .story-award-paper')).toBeVisible();
     }else{
     await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('课程小伙伴');
     await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
@@ -53,7 +53,7 @@ for (const width of [320, 390, 768, 1280]) test('加载失败界面在 ' + width
   await page.screenshot({ path: testInfo.outputPath('loader-' + width + '.png') });
   broken = false;
   await retry.focus(); await page.keyboard.press('Enter');
-  await expect(page.getByRole('heading', { name: '物品小图鉴', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
 });
 
 test('关闭脚本时可看课程导航，课程入口给出明确恢复方式', async ({ browser }) => {

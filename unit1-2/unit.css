@@ -50,3 +50,23 @@
 .unit12-workspace .dialogue-log p.btext{cursor:default;margin:0}
 .unit12-workspace .reference-card{border:2px solid var(--unit-line,#BDD2D9);border-radius:20px;padding:16px;background:#FFFDF6}
 .unit12-workspace .reference-card strong{font:600 22px/1.5 'Baloo 2',sans-serif}
+
+/* Compact records retain details without exposing teaching metadata. */
+.unit12-workspace #learningRecord section{margin:20px 0}
+.unit12-workspace #learningRecord h3{font-size:18px;margin:0 0 8px}
+.unit12-workspace #learningRecord ul{list-style:none;margin:0;padding:0}
+.unit12-workspace #learningRecord li{border-bottom:1px solid #dbe1df;padding:3px 0}
+.unit12-workspace #learningRecord li summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;min-height:48px;padding:8px 0;cursor:pointer;font-size:15px}
+.unit12-workspace #learningRecord li summary>span{flex:1;min-width:130px}
+.unit12-workspace #learningRecord li summary>strong{font-size:14px;font-weight:600;color:#4f7046}
+.unit12-workspace #learningRecord li summary::after{content:'＋';font-size:16px}
+.unit12-workspace #learningRecord li details[open]>summary::after{content:'−'}
+.unit12-workspace #learningRecord li p{font-size:14px;line-height:1.6;margin:6px 0 10px;color:#665e53}
+.unit12-workspace #learningRecord .record-parent-note{margin-top:24px;font-size:14px}
+.unit12-workspace #learningRecord .record-parent-note summary{min-height:44px;cursor:pointer}
+.unit12-workspace #learningSaveStatus{font-size:13px;color:#6f655b}
+
+.unit12-workspace .stage-heading>.lvl-stars{margin-left:auto;font-size:22px}
+.unit12-workspace .word-example mark{color:inherit;background:#f6e5b1;border-radius:3px;padding:0 2px}
+.unit12-workspace .reading-full>summary{width:fit-content;margin:12px auto 0;padding:7px 14px;min-height:44px;border:1.5px solid #91acb6;border-radius:12px;cursor:pointer;font-size:14px;background:#fffdf8}
+.unit12-workspace .reading-full[open]>summary{margin-bottom:12px}

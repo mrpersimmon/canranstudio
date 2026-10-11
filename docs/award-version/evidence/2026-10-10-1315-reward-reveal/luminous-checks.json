@@ -1,0 +1,69 @@
+[
+  {
+    "check": "减少动态",
+    "mode": "reduced",
+    "rimAnimation": "none",
+    "rimOpacity": "1",
+    "starAnimation": "none",
+    "stars": "5"
+  },
+  {
+    "check": "金边流转A",
+    "litStars": 5,
+    "mode": "full",
+    "rimAngle": "11.1694deg",
+    "rimAnimation": "gold-orbit, gold-arrive",
+    "rimOpacity": "1",
+    "visibleButtons": 0
+  },
+  {
+    "check": "金边流转B",
+    "rimAngle": "19.8591deg"
+  },
+  {
+    "check": "关闭停止动效",
+    "focus": "showReward",
+    "mode": "stopped",
+    "open": false,
+    "particles": 0,
+    "rimAnimation": "none"
+  },
+  {
+    "check": "首星没有提前满星",
+    "dateHidden": true,
+    "emptyStars": 4,
+    "litStars": 1,
+    "rimAnimation": "none",
+    "rimOpacity": "0",
+    "stars": "1"
+  },
+  {
+    "check": "落星中途关闭",
+    "focus": "showReward",
+    "open": false,
+    "particles": 0,
+    "stars": "1"
+  },
+  {
+    "cardFits": true,
+    "check": "390手机满星",
+    "overflow": false,
+    "particles": 0,
+    "rimAnimation": "gold-orbit, gold-arrive",
+    "viewport": {
+      "h": 844,
+      "w": 390
+    },
+    "visibleButtons": 0
+  },
+  {
+    "check": "手机点卡片退出",
+    "closed": true,
+    "focus": "showReward",
+    "mode": "stopped"
+  },
+  {
+    "check": "浏览器错误",
+    "logs": []
+  }
+]

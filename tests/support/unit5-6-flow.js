@@ -18,6 +18,7 @@ async function completeStory(page, base = '') {
   await expect(room).toContainText('新朋友都认识了！');
 }
 async function completeActivity(page,id,{recovery=false,base=''}={}){
+  await require('./reward-dialog').handleRewardDialog(page);
   await page.goto(base + '/unit5-6/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
   for(let i=0;i<answers.length;i++){
     const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
@@ -31,6 +32,8 @@ async function completeActivity(page,id,{recovery=false,base=''}={}){
     await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
   }
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
+  if(await page.locator('#studentSyncStatus').count())await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  if(await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
 }
 async function completeUnit56(page, base=''){await completeActivity(page,'listen',{recovery:true,base});await completeStory(page,base);for(const id of ['roles','introduce','cars','exam'])await completeActivity(page,id,{base});await page.goto(base+'/unit5-6/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('5');}
 module.exports={DIALOGUE,PEOPLE,ANSWERS,completeStory,completeActivity,completeUnit56};
