@@ -359,7 +359,20 @@
         }
       }
       phase = 'L03';
-      const resources = await prepare(pack);
+      let resources;
+      try { resources = await prepare(pack); }
+      catch (error) {
+        // A session-only recovery may not have been able to save its new pack.
+        // If the cached pack is now broken, try the current server version once
+        // rather than trapping every revisit behind the same expired URL.
+        // Keep a usable offline pack and never clear a child's learning data.
+        if (refresh || pack !== cachedPack || cancellation.signal.aborted || !['L03', 'L04', 'L05'].includes(error.courseCode)) throw error;
+        let next;
+        try { next = await latest(); } catch { throw error; }
+        if (next.revision === pack.revision) throw error;
+        pack = next;
+        resources = await prepare(pack);
+      }
       phase = 'L05';
       await start(pack, resources);
     } catch (error) {

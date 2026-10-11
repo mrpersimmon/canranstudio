@@ -9,6 +9,7 @@
     const prefix = 'canran:' + (base === '/' ? 'preview-root' : base.slice(1, -1).replaceAll('/', ':')) + ':course-cache:v1';
     const memory = new Map(), tasks = new Map();
     const cacheKey = item => base + 'resources/' + item.sha256;
+    const resourceResponse = (item, bytes) => new Response(bytes, { headers: { 'Content-Type': item.type, 'Content-Length': String(item.bytes), 'X-Course-Hash': item.sha256 } });
     const maintain = work => root.navigator?.locks ? root.navigator.locks.request(prefix + ':maintenance', work) : work();
     let persistent = true;
     const database = new Promise((resolve, reject) => {
@@ -99,7 +100,7 @@
           memory.set(item.sha256, bytes.buffer);
           const disk = await cache;
           if (disk) {
-            const save = () => disk.put(cacheKey(item), new Response(bytes, { headers: { 'Content-Type': item.type, 'Content-Length': String(item.bytes), 'X-Course-Hash': item.sha256 } }));
+            const save = () => disk.put(cacheKey(item), resourceResponse(item, bytes));
             try { await save(); }
             catch {
               try { if (!api.onQuota) throw new Error('No cleanup available'); await api.onQuota(); await save(); }
@@ -136,8 +137,18 @@
     async function commit(pack, activate = true) {
       const db = await database, disk = await cache;
       if (!db || !disk || !persistent) return false;
-      for (const item of pack.required) if (!await disk.match(cacheKey(item))) return false;
       try {
+        for (const item of pack.required) {
+          if (await disk.match(cacheKey(item))) continue;
+          // WebKit/session storage can lose disk entries after prepare() read
+          // them. A retry then reuses memory: rendering succeeds, but refusing
+          // this commit leaves the old broken package active on the next visit.
+          // Restore only verified resource bytes before activating the package;
+          // account, progress and award stores are never cleared or rewritten.
+          const buffer = memory.get(item.sha256);
+          if (!buffer || buffer.byteLength !== item.bytes || await digest(buffer) !== item.sha256) return false;
+          await disk.put(cacheKey(item), resourceResponse(item, buffer));
+        }
         await new Promise((resolve, reject) => {
           const transaction = db.transaction(['packages', 'meta'], 'readwrite');
           transaction.objectStore('packages').put({ ...pack, lastUsed: Date.now() }, key(pack));

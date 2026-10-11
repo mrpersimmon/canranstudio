@@ -8,7 +8,7 @@ const http = require('node:http');
 const { createCoursePackages } = require('../../scripts/course-packages');
 const { completeUnit2930 } = require('../support/unit29-30-flow');
 const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
-test('固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时', async ({ page, context, browser }, testInfo) => {
+test('固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时', { tag: '@cache-performance' }, async ({ page, context, browser }, testInfo) => {
   test.setTimeout(60000);
   const network = await context.newCDPSession(page);
   await network.send('Network.enable');

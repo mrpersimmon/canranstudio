@@ -1,0 +1,1611 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-11T07:17:22.333Z",
+  "baseline": "0a9646ea1282e8d44e4ab9d33fc707a5d46ad74d",
+  "branch": "codex/debug-reward-version",
+  "node": "v26.5.0",
+  "playwright": "1.62.0",
+  "webkit": "26.5 build 2336",
+  "chromium": "151.0.7922.34",
+  "sourceSha256": {
+    "core/course-cache.js": "1816a5c77d0df5817a4819cbad15cecf4dabc03bf05cf2bcbef427dcbe8e8048",
+    "core/course-loader.js": "2f9e1bdc7df3703dab0d426d01104f08be6def9e360fd8f27879c1911217949e",
+    "tests/login/course-loading-recovery.spec.js": "962c6b3c46c7fa989da578ccfde78d7d8bd59e5f31c61eea0d05c96234121955",
+    "tests/support/course-response-faults.js": "603ea920539b997cff90db5e3c0e5015f3563c55f4d3889b4d6c344064d7d418",
+    "playwright.recovery.config.js": "893170db0eb3bed72e83e7a1dcdaa3a96299551940b7cd3d6a14c0b44871fae6"
+  },
+  "productionDataAccessed": false,
+  "physicalIphoneVerified": false,
+  "runs": [
+    {
+      "name": "webkit-root-final",
+      "stats": {
+        "startTime": "2026-10-11T07:02:10.629Z",
+        "duration": 308450.625,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 12151
+            }
+          ]
+        },
+        {
+          "title": "旧浏览器的连接超时也会结束等待，重试后可继续进入",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 10239
+            }
+          ]
+        },
+        {
+          "title": "不支持较新取消接口时仍可查看自己的已获纪念卡",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 32239
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker allow）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 30926
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker block）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 37332
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（缓存拒绝写入）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 26719
+            }
+          ]
+        },
+        {
+          "title": "缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6045
+            }
+          ]
+        },
+        {
+          "title": "连接失败显示 L01，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 5938
+            }
+          ]
+        },
+        {
+          "title": "课程清单无效显示 L02，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4287
+            }
+          ]
+        },
+        {
+          "title": "图片误返回网页显示 L03，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6013
+            }
+          ]
+        },
+        {
+          "title": "文件校验失败显示 L04，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6341
+            }
+          ]
+        },
+        {
+          "title": "引导脚本未下载显示 L06，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 5175
+            }
+          ]
+        },
+        {
+          "title": "图片无法解码仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8593
+            }
+          ]
+        },
+        {
+          "title": "课程脚本中断仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 15400
+            }
+          ]
+        },
+        {
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "durationMs": 90497,
+              "error": "Test timeout of 90000ms exceeded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "webkit-root-full-final",
+      "stats": {
+        "startTime": "2026-10-11T07:08:34.323Z",
+        "duration": 93418.765,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 88848
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "webkit-lesson-final",
+      "stats": {
+        "startTime": "2026-10-11T07:11:26.341Z",
+        "duration": 277268.978,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 25954
+            }
+          ]
+        },
+        {
+          "title": "旧浏览器的连接超时也会结束等待，重试后可继续进入",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 16788
+            }
+          ]
+        },
+        {
+          "title": "不支持较新取消接口时仍可查看自己的已获纪念卡",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 27960
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker allow）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 36022
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker block）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 31401
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（缓存拒绝写入）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 25592
+            }
+          ]
+        },
+        {
+          "title": "缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6206
+            }
+          ]
+        },
+        {
+          "title": "连接失败显示 L01，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4500
+            }
+          ]
+        },
+        {
+          "title": "课程清单无效显示 L02，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4115
+            }
+          ]
+        },
+        {
+          "title": "图片误返回网页显示 L03，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6495
+            }
+          ]
+        },
+        {
+          "title": "文件校验失败显示 L04，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8463
+            }
+          ]
+        },
+        {
+          "title": "引导脚本未下载显示 L06，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6408
+            }
+          ]
+        },
+        {
+          "title": "图片无法解码仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6617
+            }
+          ]
+        },
+        {
+          "title": "课程脚本中断仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 11513
+            }
+          ]
+        },
+        {
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 52727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "chromium-root-final",
+      "stats": {
+        "startTime": "2026-10-11T07:11:26.343Z",
+        "duration": 131035.30999999998,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6908
+            }
+          ]
+        },
+        {
+          "title": "旧浏览器的连接超时也会结束等待，重试后可继续进入",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8702
+            }
+          ]
+        },
+        {
+          "title": "不支持较新取消接口时仍可查看自己的已获纪念卡",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 11905
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker allow）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 16116
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker block）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 14361
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（缓存拒绝写入）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 17239
+            }
+          ]
+        },
+        {
+          "title": "缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 5151
+            }
+          ]
+        },
+        {
+          "title": "连接失败显示 L01，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3287
+            }
+          ]
+        },
+        {
+          "title": "课程清单无效显示 L02，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3250
+            }
+          ]
+        },
+        {
+          "title": "图片误返回网页显示 L03，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4140
+            }
+          ]
+        },
+        {
+          "title": "文件校验失败显示 L04，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3590
+            }
+          ]
+        },
+        {
+          "title": "引导脚本未下载显示 L06，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3195
+            }
+          ]
+        },
+        {
+          "title": "图片无法解码仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3126
+            }
+          ]
+        },
+        {
+          "title": "课程脚本中断仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3580
+            }
+          ]
+        },
+        {
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 21113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "chromium-lesson-final",
+      "stats": {
+        "startTime": "2026-10-11T07:02:10.629Z",
+        "duration": 126349.656,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 7537
+            }
+          ]
+        },
+        {
+          "title": "旧浏览器的连接超时也会结束等待，重试后可继续进入",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3696
+            }
+          ]
+        },
+        {
+          "title": "不支持较新取消接口时仍可查看自己的已获纪念卡",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8931
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker allow）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 20408
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker block）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 14823
+            }
+          ]
+        },
+        {
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（缓存拒绝写入）",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 16351
+            }
+          ]
+        },
+        {
+          "title": "缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4544
+            }
+          ]
+        },
+        {
+          "title": "连接失败显示 L01，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2861
+            }
+          ]
+        },
+        {
+          "title": "课程清单无效显示 L02，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2619
+            }
+          ]
+        },
+        {
+          "title": "图片误返回网页显示 L03，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3696
+            }
+          ]
+        },
+        {
+          "title": "文件校验失败显示 L04，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3765
+            }
+          ]
+        },
+        {
+          "title": "引导脚本未下载显示 L06，重试恢复原章节且错误提示消失",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4600
+            }
+          ]
+        },
+        {
+          "title": "图片无法解码仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3305
+            }
+          ]
+        },
+        {
+          "title": "课程脚本中断仍可重试进入完整课程，重新加载不丢失目标位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3349
+            }
+          ]
+        },
+        {
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 20696
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shared-cache-final",
+      "stats": {
+        "startTime": "2026-10-11T07:05:20.076Z",
+        "duration": 254502.42200000002,
+        "expected": 72,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "unit1-2 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 17970
+            }
+          ]
+        },
+        {
+          "title": "unit7-8 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 13952
+            }
+          ]
+        },
+        {
+          "title": "unit9-10 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 10774
+            }
+          ]
+        },
+        {
+          "title": "unit11-12 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8682
+            }
+          ]
+        },
+        {
+          "title": "unit13-14 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8432
+            }
+          ]
+        },
+        {
+          "title": "unit15-16 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 9784
+            }
+          ]
+        },
+        {
+          "title": "unit17-18 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8969
+            }
+          ]
+        },
+        {
+          "title": "unit19-20 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 10113
+            }
+          ]
+        },
+        {
+          "title": "unit21-22 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 10300
+            }
+          ]
+        },
+        {
+          "title": "unit23-24 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8134
+            }
+          ]
+        },
+        {
+          "title": "unit25-26 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 8534
+            }
+          ]
+        },
+        {
+          "title": "unit27-28 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6162
+            }
+          ]
+        },
+        {
+          "title": "unit29-30 缓存后断网完成真实题型和证书",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6100
+            }
+          ]
+        },
+        {
+          "title": "加载失败界面在 320 宽度可以看清并用键盘重试",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1784
+            }
+          ]
+        },
+        {
+          "title": "加载失败界面在 390 宽度可以看清并用键盘重试",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1714
+            }
+          ]
+        },
+        {
+          "title": "加载失败界面在 768 宽度可以看清并用键盘重试",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1729
+            }
+          ]
+        },
+        {
+          "title": "加载失败界面在 1280 宽度可以看清并用键盘重试",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1815
+            }
+          ]
+        },
+        {
+          "title": "关闭脚本时可看课程导航，课程入口给出明确恢复方式",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 305
+            }
+          ]
+        },
+        {
+          "title": "两个标签页同时准备同课，关掉一页后另一页仍能完整进入",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 742
+            }
+          ]
+        },
+        {
+          "title": "已知撤回版本不会继续推进作答，新版失败时保留位置等待更新",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1533
+            }
+          ]
+        },
+        {
+          "title": "缓存录音支持真实点播和断网分段读取，下载不增加听辨进度",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4250
+            }
+          ]
+        },
+        {
+          "title": "普通更新后台准备，旧页不被改写，下一次进入使用完整新版且不重下未变文件",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1830
+            }
+          ]
+        },
+        {
+          "title": "损坏一张已存图片，刷新只补齐该文件并保留词卡页",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1460
+            }
+          ]
+        },
+        {
+          "title": "已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3270
+            }
+          ]
+        },
+        {
+          "title": "无配音课断网走完所有题型并保存证书，不请求英语配音",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 6129
+            }
+          ]
+        },
+        {
+          "title": "unit1-2 390 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3547
+            }
+          ]
+        },
+        {
+          "title": "unit3-4 390 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4193
+            }
+          ]
+        },
+        {
+          "title": "unit5-6 390 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3752
+            }
+          ]
+        },
+        {
+          "title": "unit5-6 1280 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3521
+            }
+          ]
+        },
+        {
+          "title": "unit7-8 390 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2911
+            }
+          ]
+        },
+        {
+          "title": "unit29-30 390 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4254
+            }
+          ]
+        },
+        {
+          "title": "unit49-50 390 词卡往返不隐藏课程、不展示加载层或半张图",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4092
+            }
+          ]
+        },
+        {
+          "title": "存储被禁用时，已准备的词卡仍能离线切换且不闪加载层",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1503
+            }
+          ]
+        },
+        {
+          "title": "课程只准备自己的场景，独立样式仍在完整加载后显示各课背景",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 4048
+            }
+          ]
+        },
+        {
+          "title": "服务器实际使用的 JavaScript 类型仍能完成准备",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 961
+            }
+          ]
+        },
+        {
+          "title": "清理课程资源保留学习位置、活动课程和官网缓存",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3916
+            }
+          ]
+        },
+        {
+          "title": "404 失败留在准备页，重试复用好文件后进入原章节",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2097
+            }
+          ]
+        },
+        {
+          "title": "html 失败留在准备页，重试复用好文件后进入原章节",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2102
+            }
+          ]
+        },
+        {
+          "title": "corrupt 失败留在准备页，重试复用好文件后进入原章节",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2098
+            }
+          ]
+        },
+        {
+          "title": "font 失败留在准备页，重试复用好文件后进入原章节",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2686
+            }
+          ]
+        },
+        {
+          "title": "浏览器禁止保存资源仍能在本次会话断网换词卡，不假称永久保存",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1709
+            }
+          ]
+        },
+        {
+          "title": "home 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1016
+            }
+          ]
+        },
+        {
+          "title": "unit1-2 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1035
+            }
+          ]
+        },
+        {
+          "title": "unit11-12 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 983
+            }
+          ]
+        },
+        {
+          "title": "unit13-14 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1015
+            }
+          ]
+        },
+        {
+          "title": "unit15-16 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1027
+            }
+          ]
+        },
+        {
+          "title": "unit17-18 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1246
+            }
+          ]
+        },
+        {
+          "title": "unit19-20 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1104
+            }
+          ]
+        },
+        {
+          "title": "unit21-22 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1201
+            }
+          ]
+        },
+        {
+          "title": "unit23-24 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1133
+            }
+          ]
+        },
+        {
+          "title": "unit25-26 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1082
+            }
+          ]
+        },
+        {
+          "title": "unit27-28 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 952
+            }
+          ]
+        },
+        {
+          "title": "unit29-30 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1029
+            }
+          ]
+        },
+        {
+          "title": "unit3-4 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1042
+            }
+          ]
+        },
+        {
+          "title": "unit31-32 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1076
+            }
+          ]
+        },
+        {
+          "title": "unit33-34 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1086
+            }
+          ]
+        },
+        {
+          "title": "unit35-36 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 975
+            }
+          ]
+        },
+        {
+          "title": "unit37-38 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 966
+            }
+          ]
+        },
+        {
+          "title": "unit39-40 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1015
+            }
+          ]
+        },
+        {
+          "title": "unit49-50 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1071
+            }
+          ]
+        },
+        {
+          "title": "unit5-6 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1019
+            }
+          ]
+        },
+        {
+          "title": "unit7-8 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 982
+            }
+          ]
+        },
+        {
+          "title": "unit9-10 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1000
+            }
+          ]
+        },
+        {
+          "title": "lesson49 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3473
+            }
+          ]
+        },
+        {
+          "title": "lesson50 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2905
+            }
+          ]
+        },
+        {
+          "title": "lesson51 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 2812
+            }
+          ]
+        },
+        {
+          "title": "lesson52 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3478
+            }
+          ]
+        },
+        {
+          "title": "lesson53 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3276
+            }
+          ]
+        },
+        {
+          "title": "lesson54 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3437
+            }
+          ]
+        },
+        {
+          "title": "soundmark 完整准备后显示原有课程，必需资源无缺项",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 3775
+            }
+          ]
+        },
+        {
+          "title": "整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1007
+            }
+          ]
+        },
+        {
+          "title": "准备过的无配音课断网刷新后恢复词卡位置，后续图片仍完整",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 1800
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "performance-final",
+      "stats": {
+        "startTime": "2026-10-11T07:16:34.758Z",
+        "duration": 45986.613,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "完整缓存 20 次重新打开导航并点课恢复学习位置",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 14222
+            }
+          ]
+        },
+        {
+          "title": "同一标签连续刷新 20 次仍保留位置、完整图片与可操作按钮",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 16158
+            }
+          ]
+        },
+        {
+          "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "failed",
+              "durationMs": 13853,
+              "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 5000\nReceived:   5662"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cold-isolated-final",
+      "stats": {
+        "startTime": "2026-10-11T07:18:49.317Z",
+        "duration": 13867.719000000001,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "durationMs": 12916
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "WebKit root full-star test exceeded its old 90-second whole-flow deadline at the final book step. Assertions remained intact; whole-flow budget is now 120 seconds; isolated retest passed.",
+    "Root WebKit has 14 passing scenarios plus the passing full-star retest. All 15 scenarios pass on /lesson/.",
+    "All records were created by real UI actions on isolated temporary accounts. Resource-cache fault injection never rewrites learning or award records.",
+    "Cold loading measured 5662 ms after the rapid-reload stress suite; an isolated run measured 4455 ms and passed the unchanged 5000 ms threshold. Warm cache P95 247.7 ms, zero image/script/font resource downloads across 20 return visits."
+  ],
+  "performance": {
+    "warm": {
+      "browser": "151.0.7922.34",
+      "platform": "darwin",
+      "cpu": "Apple M1",
+      "trace": false,
+      "attempt": 20,
+      "phase": "performance budget",
+      "scenario": "reopen navigation, click course, restore alternating word-card pages 2 and 3",
+      "timing": "actual click to fully usable rendered frame",
+      "samples": [
+        377.699951171875,
+        237.300048828125,
+        227.099853515625,
+        237.300048828125,
+        227.300048828125,
+        227.399658203125,
+        227.39990234375,
+        236.699951171875,
+        217.5,
+        237,
+        217.60009765625,
+        227.10009765625,
+        227.39990234375,
+        227.400146484375,
+        217.30029296875,
+        226.699951171875,
+        247.699951171875,
+        237.39990234375,
+        236.199951171875,
+        227.400146484375
+      ],
+      "navigationSamples": [
+        377.30000001192093,
+        237,
+        226.89999997615814,
+        237.20000004768372,
+        227.0999999642372,
+        227.19999998807907,
+        227,
+        236.39999997615814,
+        217.29999995231628,
+        236.69999998807907,
+        217.19999998807907,
+        226.89999997615814,
+        227.19999998807907,
+        227.10000002384186,
+        217,
+        226.4000000357628,
+        247.29999995231628,
+        237.19999998807907,
+        235.89999997615814,
+        227.0999999642372
+      ],
+      "driverSamples": [
+        405,
+        262,
+        252,
+        267,
+        251,
+        253,
+        248,
+        271,
+        236,
+        255,
+        244,
+        256,
+        254,
+        251,
+        244,
+        248,
+        268,
+        261,
+        277,
+        253
+      ],
+      "p95": 247.699951171875,
+      "errors": [],
+      "fetched": []
+    },
+    "cold": {
+      "browser": "151.0.7922.34",
+      "cpu": "Apple M1",
+      "downMbps": 10,
+      "latencyMs": 150,
+      "from": "prepared navigation",
+      "target": "unit1-2",
+      "elapsedMs": 4455
+    },
+    "coldInitialAfterRapidReloadStress": {
+      "browser": "151.0.7922.34",
+      "cpu": "Apple M1",
+      "downMbps": 10,
+      "latencyMs": 150,
+      "from": "prepared navigation",
+      "target": "unit1-2",
+      "elapsedMs": 5662
+    }
+  },
+  "finalOutcomes": {
+    "webkitRoot": 15,
+    "webkitLesson": 15,
+    "chromiumRoot": 15,
+    "chromiumLesson": 15,
+    "sharedCache": 72,
+    "performanceAndStability": 3,
+    "workflow": 10
+  }
+}

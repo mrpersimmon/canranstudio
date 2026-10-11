@@ -1,9 +1,11 @@
 # 新版纪念卡持续动效与 GIF（2026-10-11）
 # 课程加载失败恢复（2026-10-11）
 
-规则见[网页加载缓存设计第 11 节](../docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md#11-加载失败后的恢复2026-10-11)。`tests/login/course-loading-recovery.spec.js` 的 13 项检查使用隔离的临时账号：禁用较新取消接口后正常进入与超时恢复，以及查看／放大已获纪念卡；旧包缺图后发布新地址再重试；区分 L01–L06；手机返回课程；启动中断后重新进入；真实答题获得的星星、半途题目、本轮错答和首次满星日期保持不变，纪念册仍可打开。不得通过重写学习记录制造测试状态。
+规则见[网页加载缓存设计第 11 节](../docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md#11-加载失败后的恢复2026-10-11)。`tests/login/course-loading-recovery.spec.js` 的 15 项检查使用隔离的临时账号：禁用较新取消接口后正常进入与超时恢复，以及查看／放大已获纪念卡；旧包缺图后发布新地址再重试；区分 L01–L06；手机返回课程；启动中断后重新进入。旧包恢复分别覆盖正常 Worker、Worker 不可用且资源被回收、浏览器拒绝写入缓存；重试成功后还必须刷新、从课程列表再次进入并继续真实答题。已有星星、半途题目、本轮错答、姓名和首次满星日期保持不变，纪念册仍可打开。不得通过重写学习记录制造测试状态。
 
-运行 `LOGIN_TEST_PORT=空闲端口 npm run test:login -- tests/login/course-loading-recovery.spec.js`；另加 `AWARD_TEST_BASE=/` 验证根目录。同文件会被既有 `browser-login` 提交检查自动收录。引导脚本故障场景单独禁用 Worker，防止缓存响应掩盖网络故障；其余场景保留正式 Worker。
+Chromium：`LOGIN_TEST_PORT=空闲端口 npm run test:login -- tests/login/course-loading-recovery.spec.js`。WebKit：先运行 `npx playwright install webkit`，再运行 `LOGIN_TEST_PORT=空闲端口 npm run test:recovery:webkit`；两者另加 `AWARD_TEST_BASE=/` 验证根目录。WebKit 使用 iPhone 13 的视口和触摸设置，不等同于真机或旧 iOS 内核。`browser-login` 与 `browser-recovery-webkit` 会进入相关提交检查；CI 对两个入口分别执行 WebKit 恢复测试，并纳入最终必需检查。
+
+文件失效、错误清单和新课包由 `tests/support/course-response-faults.js` 在临时测试服务器的 HTTP 边界提供，保证正式 Worker 的请求也遇到实际故障；不能依赖 `page.route()` 拦截 Worker 请求。引导脚本故障单独禁用 Worker，防止已有引导脚本缓存掩盖故障。资源回收只删除测试浏览器的课件资源字节；拒绝写入通过浏览器 Cache API 边界模拟，不触碰学习数据。生产服务器不加载测试故障入口。
 
 共用加载器变动还须验证 `course-loading`、`course-cache-updates`、`course-image-transitions`、加载失败的多尺寸／键盘操作，以及带账号的获星防闪页面。性能计时单独运行，避免并行浏览器影响结果。测试覆盖不等同于用户的手机真机验收或已经发布。
 
@@ -53,7 +55,7 @@ Lesson 1–2、3–4、5–6 现行规则为每单元五个答题区、整轮首
 
 缓存复访计时独立在 `tests/e2e/course-cache-performance.spec.js`：完成一次正常准备后，保持同一浏览器与持久缓存，20 次重新打开导航页、真实点课，恢复交替保存的第 2／3 页词卡；P95 仍小于 1500 ms，图片、字体和脚本不重新下载。以浏览器内的实际点击时刻到图片、字体与真实按钮全部就绪的画面计时，不把测试工具轮询算入加载时间，工具侧耗时另列。不录制追踪、不强制垃圾回收、不额外预热其他课程。成功或失败都保留部分样本、失败步骤和浏览器错误。
 
-同一标签连续刷新 20 次另验位置、完整素材、可操作按钮和零重下载，保留压力场景的实际耗时，不把它替代缓存标准 C03 的“从点课到恢复位置”。CI 使用 `@cache-performance` 标签把复访计时放到独立任务；四组课程检查运行其余全部用例，汇总 `test` 同时要求性能任务成功，不能静默跳过。PR #15 合入时合计 1385 项页面检查（1384 项课程行为＋1 项复访计时）。共享缓存代码变化仍同时运行上述两项。`course-loading.spec.js` 还验证课程不预载其他单元场景，以及 Lesson 1–2、3–4、49–50 各自背景实际显示。
+同一标签连续刷新 20 次另验位置、完整素材、可操作按钮和零重下载，保留压力场景的实际耗时，不把它替代缓存标准 C03 的“从点课到恢复位置”。CI 使用 `@cache-performance` 标签把冷加载与复访计时放到独立任务，并以两个命令分别启动浏览器；四组课程检查运行其余全部用例，汇总 `test` 同时要求性能任务成功，不能静默跳过。本地计划相应使用 `browser-cache-cold`、`browser-cache-revisit` 和不含这两项计时的 `browser-course-cache`；5 秒冷加载与 P95 1.5 秒复访门槛保持不变。PR #15 合入时合计 1385 项页面检查（1384 项课程行为＋1 项复访计时）。共享缓存代码变化仍同时验证冷加载、复访和连续刷新。`course-loading.spec.js` 还验证课程不预载其他单元场景，以及 Lesson 1–2、3–4、49–50 各自背景实际显示。
 
 # 老师体系（2026-10-09）
 

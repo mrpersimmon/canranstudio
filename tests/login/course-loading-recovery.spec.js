@@ -1,11 +1,15 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const crypto = require('node:crypto');
+const { courseResponse } = require('../support/course-response-faults');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
 const flow = require('../support/thirteen-types-flow');
 const base = process.env.AWARD_TEST_BASE || '/lesson/';
 const course = base + 'unit1-2/';
 test.use({ actionTimeout: 10000 });
+test.afterEach(async ({ request }) => {
+  await request.post('/__test__/course-responses', { data: { reset: true } });
+});
 
 async function learner(page, browser, label, contextOptions) {
   await adminLogin(page, base);
@@ -31,20 +35,18 @@ test('不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢
 
 test('旧浏览器的连接超时也会结束等待，重试后可继续进入', async ({ page, browser }) => {
   const student = await learner(page, browser, '旧浏览器超时验收');
-  const p = student.page, pattern = '**' + base + 'course-index.json';
-  let held;
+  const p = student.page, pattern = base + 'course-index.json';
   try {
     await p.addInitScript(() => { AbortSignal.any = undefined; AbortSignal.timeout = undefined; });
     await p.clock.install();
-    await p.route(pattern, route => { held = route; });
-    const requested = p.waitForRequest(pattern);
+    await courseResponse(p, pattern, { hold: true });
+    const requested = p.waitForRequest('**' + pattern);
     await p.goto(course + '#learn/words');
     await requested;
     await p.clock.fastForward(16000);
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
     await expect(loader).toContainText('错误编号：L01');
-    await p.unroute(pattern);
-    await held.abort().catch(() => {});
+    await courseResponse(p, pattern);
     await p.clock.resume();
     await loader.getByRole('button', { name: '再试一次', exact: true }).click();
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).toBeVisible();
@@ -84,7 +86,7 @@ async function releaseAfterMissingAsset(p) {
   const body = Buffer.from(JSON.stringify(pack));
   index.courses['unit1-2'] = { ...index.courses['unit1-2'], revision: pack.revision,
     manifest: base + 'course-packages/unit1-2/' + pack.revision + '.json', sha256: sha(body) };
-  await p.route('**' + old.url, route => route.fulfill({ status: 404, body: 'expired course resource' }));
+  await courseResponse(p, old.url, { status: 404, body: 'expired course resource' });
   // Simulate browser resource eviction, not a fabricated learning record.
   await p.evaluate(async ({ base, old }) => {
     for (const name of await caches.keys()) if (name.endsWith(':course-cache:v1')) {
@@ -92,14 +94,19 @@ async function releaseAfterMissingAsset(p) {
     }
   }, { base, old });
   return async () => {
-    await p.route('**' + base + 'course-index.json', route => route.fulfill({ json: index }));
-    await p.route('**' + index.courses['unit1-2'].manifest, route => route.fulfill({ body, contentType: 'application/json' }));
-    await p.route('**' + replacement.url, route => route.fulfill({ body: bytes, contentType: old.type }));
+    await courseResponse(p, base + 'course-index.json', { json: index });
+    await courseResponse(p, index.courses['unit1-2'].manifest, { body, contentType: 'application/json' });
+    await courseResponse(p, replacement.url, { body: bytes, contentType: old.type });
   };
 }
 
-test('旧课包缺图后重试可进入完整新版，保留已获星、半途题目和本轮错答', async ({ page, browser }) => {
-  const student = await learner(page, browser, '旧课包恢复验收');
+for (const { name, serviceWorkers, unwritable } of [
+  { name: 'Worker allow', serviceWorkers: 'allow' },
+  { name: 'Worker block', serviceWorkers: 'block' },
+  { name: '缓存拒绝写入', serviceWorkers: 'block', unwritable: true }
+]) test(`旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（${name}）`, async ({ page, browser }, testInfo) => {
+  test.setTimeout(90000);
+  const student = await learner(page, browser, '旧课包恢复验收', { serviceWorkers });
   const p = student.page;
   try {
     await flow.activity(p, '1-2', 'listen', { base: base.replace(/\/$/, '') });
@@ -114,17 +121,39 @@ test('旧课包缺图后重试可进入完整新版，保留已获星、半途�
     await flow.select(room, { fills: ['me'] }); await check.click();
     await room.getByRole('button', { name: '下一题', exact: true }).click();
     await expect(room).toContainText('第 2 / 5 题');
+    if (unwritable) await p.addInitScript(() => {
+      // Public browser-storage boundary; the server and learning stores stay real.
+      Cache.prototype.put = async function () { throw new DOMException('Storage full', 'QuotaExceededError'); };
+    });
     const publish = await releaseAfterMissingAsset(p);
     await p.reload();
     await expect(p.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
+    if (serviceWorkers === 'block') {
+      // Low-storage/private-browser fallback: evict resource bytes after they
+      // were read for the failed attempt. Do not alter learning storage.
+      await p.evaluate(async () => {
+        for (const name of await caches.keys()) if (name.endsWith(':course-cache:v1')) {
+          const disk = await caches.open(name);
+          for (const request of await disk.keys()) await disk.delete(request);
+        }
+      });
+    }
     await publish();
     await p.getByRole('button', { name: '再试一次', exact: true }).click();
     await expect(room).toBeVisible({ timeout: 15000 });
     await expect(room).toContainText('第 2 / 5 题');
     await expect(p.locator('#starCount')).toHaveText('1');
+    await p.reload();
+    await expect(room).toBeVisible({ timeout: 15000 });
+    await expect(room).toContainText('第 2 / 5 题');
+    await p.goto(base);
+    await p.locator('.course[data-unit="unit1-2"]').getByRole('link').click();
+    await expect(p.locator('#courseLoader')).toHaveCount(0, { timeout: 15000 });
+    await expect(p.locator('#starCount')).toHaveText('1');
     await flow.activity(p, '1-2', 'manners', { base: base.replace(/\/$/, '') });
     await expect(p.locator('#starCount')).toHaveText('1');
     await expect(room.getByText('本次答错', { exact: true }).locator('..')).toContainText('1');
+    await p.screenshot({ path: testInfo.outputPath('recovered-course.png') });
   } finally { await student.context.close(); }
 });
 
@@ -133,8 +162,8 @@ test('缺图失败显示原因编号，手机页面可以返回课程并在恢�
   const p = student.page;
   try {
     await p.setViewportSize({ width: 390, height: 844 });
-    const missing = '**/resources/*/handbag.svg';
-    await p.route(missing, route => route.fulfill({ status: 404, body: 'missing image' }));
+    const missing = base + 'resources/*/handbag.svg';
+    await courseResponse(p, missing, { status: 404, body: 'missing image' });
     await p.goto(course + '#learn/words');
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
     await expect(loader).toContainText('错误编号：L03');
@@ -145,7 +174,7 @@ test('缺图失败显示原因编号，手机页面可以返回课程并在恢�
     await loader.getByRole('link', { name: '返回课程', exact: true }).click();
     await expect(p).toHaveURL(new RegExp(base + '$'));
     await expect(p.getByRole('link', { name: '我的纪念册', exact: true })).toBeVisible();
-    await p.unroute(missing);
+    await courseResponse(p, missing);
     await p.goto(course + '#learn/words');
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).toBeVisible();
   } finally { await student.context.close(); }
@@ -161,13 +190,13 @@ for (const fault of [
   // A bootstrap network failure must not be hidden by a previously cached
   // worker response. Other cases retain the production service worker.
   const student = await learner(page, browser, '分类错误恢复验收', fault.path.startsWith('core/') ? { serviceWorkers: 'block' } : {});
-  const p = student.page, pattern = '**' + base + fault.path;
+  const p = student.page, pattern = base + fault.path;
   try {
-    await p.route(pattern, route => route.fulfill(fault.response));
+    await courseResponse(p, pattern, fault.response);
     await p.goto(course + '#learn/words');
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
     await expect(loader).toContainText('错误编号：' + fault.code);
-    await p.unroute(pattern);
+    await courseResponse(p, pattern);
     await loader.getByRole('button', { name: '再试一次', exact: true }).click();
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).toBeVisible();
     await expect(p.locator('#courseLoader')).toHaveCount(0);
@@ -190,12 +219,12 @@ async function brokenRelease(p, suffix, replacement) {
   index.courses['unit1-2'] = { ...index.courses['unit1-2'], revision: pack.revision,
     manifest: base + 'course-packages/unit1-2/' + pack.revision + '.json', sha256: sha(body) };
   const routes = [
-    ['**' + base + 'course-index.json', { json: index }],
-    ['**' + index.courses['unit1-2'].manifest, { body, contentType: 'application/json' }],
-    ['**' + item.url, { body: bytes, contentType: item.type }]
+    [base + 'course-index.json', { json: index }],
+    [index.courses['unit1-2'].manifest, { body, contentType: 'application/json' }],
+    [item.url, { body: bytes, contentType: item.type }]
   ];
-  for (const [pattern, response] of routes) await p.route(pattern, route => route.fulfill(response));
-  return async () => { for (const [pattern] of routes) await p.unroute(pattern); };
+  for (const [pattern, response] of routes) await courseResponse(p, pattern, response);
+  return async () => { for (const [pattern] of routes) await courseResponse(p, pattern); };
 }
 
 for (const fault of [
@@ -221,7 +250,9 @@ for (const fault of [
 });
 
 test('满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看', async ({ page, browser }) => {
-  test.setTimeout(90000);
+  // Real signup + all five answer zones + recovery + two return visits + book.
+  // Mobile WebKit needs a larger total budget; individual UI deadlines remain.
+  test.setTimeout(120000);
   const student = await learner(page, browser, '满星缓存恢复验收');
   const p = student.page, mount = base.replace(/\/$/, '');
   try {
@@ -238,6 +269,14 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
     await expect(p.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
     await publish();
     await p.getByRole('button', { name: '再试一次', exact: true }).click();
+    await expect(p.locator('#starCount')).toHaveText('5');
+    await expect(p.locator('#certificateName')).toHaveText('小禾');
+    await expect(p.locator('#certificateDate')).toHaveText(date);
+    await p.reload();
+    await expect(p.locator('#certificateDate')).toHaveText(date);
+    await p.getByRole('link', { name: '我的课程', exact: true }).click();
+    await p.locator('.course[data-unit="unit1-2"]').getByRole('link').click();
+    await p.goto(course + '#learn/certificate');
     await expect(p.locator('#starCount')).toHaveText('5');
     await expect(p.locator('#certificateName')).toHaveText('小禾');
     await expect(p.locator('#certificateDate')).toHaveText(date);

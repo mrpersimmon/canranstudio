@@ -6,7 +6,11 @@ for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续�
   for (const base of ['/', '/lesson/']) for (const width of [390, 1280]) test(`${unit} ${base} ${width} 像素：手动滚回封面后，继续按钮重新定位当前章节`, async ({ page }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto(`${base}${unit}/#l3`);
-    const heading = page.locator('#l3 > .chapter-heading h2');
+    // The chapter and activity share one visible title after copy cleanup.
+    // Verify the learner's destination, not the removed duplicate wrapper.
+    const heading = unit === 'unit1-2'
+      ? page.locator('#l3').getByRole('heading', { name: '语法小工坊', exact: true })
+      : page.locator('#l3 > .chapter-heading h2');
     await expect(heading).toBeInViewport();
     const resume = page.getByRole('button', { name: label, exact: true });
     const address = page.url();
@@ -31,11 +35,12 @@ for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续�
 
 test('不同地址时可以继续到已保存章节，排除按钮失效或保存位置错误', async ({ page }) => {
   await page.goto('/unit1-2/#l3');
-  await expect(page.locator('#l3 > .chapter-heading h2')).toBeInViewport();
+  const heading = page.locator('#l3').getByRole('heading', { name: '语法小工坊', exact: true });
+  await expect(heading).toBeInViewport();
   await page.goto('/unit1-2/#cover');
   await page.getByRole('button', { name: '继续冒险', exact: true }).click();
   await expect(page).toHaveURL(/#l3$/);
-  await expect(page.locator('#l3').getByRole('heading', { name: '语法小工坊', level: 2, exact: true })).toBeInViewport();
+  await expect(heading).toBeInViewport();
 });
 
 for (const [unit, label, activity, answer] of [

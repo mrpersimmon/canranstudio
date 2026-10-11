@@ -10,10 +10,13 @@ function tasks(root, files) {
   const changedTests = files.filter(file => /^tests\/e2e\/.*\.spec\.js$/.test(file) && fs.existsSync(path.join(root, file)));
   return {
     'browser-login': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
+    'browser-recovery-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.recovery.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js','playwright.recovery.config.js'],browser:'webkit'},
     workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: [...runtimeInputs, 'server'] },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
-    'browser-course-cache': browser(['tests/e2e/course-loading.spec.js', 'tests/e2e/course-image-transitions.spec.js', 'tests/e2e/course-cache-updates.spec.js', 'tests/e2e/course-cache-performance.spec.js', 'tests/e2e/course-cache-journeys.spec.js', 'tests/e2e/lesson-deployment.spec.js']),
+    'browser-cache-cold': browser(['tests/e2e/course-cache-updates.spec.js', '--grep', '@cache-performance', '--trace=off']),
+    'browser-cache-revisit': browser(['tests/e2e/course-cache-performance.spec.js', '--grep', '@cache-performance']),
+    'browser-course-cache': browser(['tests/e2e/course-loading.spec.js', 'tests/e2e/course-image-transitions.spec.js', 'tests/e2e/course-cache-updates.spec.js', 'tests/e2e/course-cache-performance.spec.js', 'tests/e2e/course-cache-journeys.spec.js', 'tests/e2e/lesson-deployment.spec.js', '--grep-invert', '@cache-performance']),
     'browser-full': browser([]),
     'browser-audio': browser(['tests/e2e/audio-lifecycle.spec.js']),
     'browser-pronunciation': browser(['tests/e2e/pronunciation-repairs.spec.js', 'tests/e2e/unit7-8-audio.spec.js', '--grep', '修订录音|loose|新录音|只更换录音|I 词卡']),
@@ -50,6 +53,7 @@ function tasks(root, files) {
 }
 function select(files) {
   const selected = [];
+  if (files.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/course-packages\.js|server\/public\/access-(?:client|worker)\.js|tests\/login\/(?:server\.js|helpers\.js|course-loading-recovery\.spec\.js)|tests\/support\/course-response-faults\.js|playwright\.(?:recovery|login)\.config\.js)$/.test(file))) selected.push('browser-recovery-webkit');
   if(files.some(file=>/^(server\/|tests\/login\/|playwright.login.config.js|deploy\/login\/|core\/(?:course-(?:cache|loader|worker)|lesson49-practice)\.js|scripts\/(?:course-packages|public-base-path|build-login)\.js|unit[^/]+\/(?:content|unit)\.js)/.test(file)))selected.push('browser-login');
   if (files.some(isWorkflow)) selected.push('workflow');
   const code = files.filter(file => !isDoc(file) && !isWorkflow(file));
@@ -59,7 +63,7 @@ function select(files) {
   const runtime = code.filter(file => !file.startsWith('tests/'));
   if (runtime.some(file => /^(core\/(?:lesson49-(?:practice|task-inputs|experience)|unit-theme)\.(?:js|css)|unit[^/]*\/(?:unit|content)\.js)$/.test(file))) selected.push('browser-common-interactions');
   if (runtime.length) selected.push('browser-smoke');
-  if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-course-cache');
+  if (runtime.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/(?:course-packages|public-base-path|http-header-contract|build-static)\.js|deploy\/nginx\/canranstudio-lesson-location\.conf)$/.test(file))) selected.push('browser-cache-cold', 'browser-cache-revisit', 'browser-course-cache');
   if (runtime.some(file => /audio|feedback|\.mp3$/.test(file))) selected.push('browser-audio');
   if (code.some(file => /^(unit(?:1-2|5-6|7-8|11-12)\/|soundmark\/|core\/audio-player\.js|scripts\/media\/|tests\/fixtures\/pronunciation)/.test(file))) selected.push('browser-pronunciation');
   if (code.some(file => /^(unit1-2\/|assets\/unit1-2\/|tests\/fixtures\/unit1-2-.*-before\/|tests\/support\/unit1-2-flow\.js)/.test(file))) selected.push('browser-unit12');
