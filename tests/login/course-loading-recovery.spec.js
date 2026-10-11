@@ -257,7 +257,16 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
   const p = student.page, mount = base.replace(/\/$/, '');
   try {
     await flow.story(p, '1-2', mount);
-    for (const id of ['listen', 'roles', 'trans', 'manners', 'exam']) await flow.activity(p, '1-2', id, { base: mount });
+    for (const id of ['listen', 'roles', 'trans', 'manners', 'exam']) {
+      // Account confirmation can arrive after the completion controls render.
+      // Finish that reward before starting another answer zone: an automatic
+      // Escape handler during the next answer can swallow its in-flight click.
+      await flow.activity(p, '1-2', id, { base: mount, keepAward: true });
+      const reward = p.locator('dialog.award-reveal[open]');
+      await expect(reward).toBeVisible();
+      await p.keyboard.press('Escape');
+      await expect(reward).toHaveCount(0);
+    }
     await p.goto(course + '#learn/certificate');
     await expect(p.locator('#starCount')).toHaveText('5');
     await expect(p.locator('#certificateName')).toHaveText('小禾');
