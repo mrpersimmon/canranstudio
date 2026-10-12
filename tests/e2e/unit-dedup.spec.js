@@ -44,7 +44,7 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await choose(exam, "No, it isn't.");
   await finishExam(page, '1-2', 2);
-  await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['9', '9', '1']);
+  await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['10', '10', '1']);
   await expect(exam.getByRole('button', { name: '查看纪念卡', exact: true })).toBeVisible();
 });
 

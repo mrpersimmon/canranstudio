@@ -123,6 +123,25 @@ test('a documentation-only plan avoids runtime tests; source changes retain rele
   assert.ok(config.tasks(process.cwd(), [])['browser-login']?.inputs?.includes('award-book'));
 });
 
+test('shared completion changes always include legacy, paired-unit and authenticated record checks', () => {
+  const config = require('../../scripts/check-workflow.config');
+  for (const file of [
+    'core/lesson49-practice.js', 'core/lesson49-subjects.js',
+    'core/lesson49-experience.js', 'core/lesson49-experience.css',
+    'unit1-2/completion.js', 'unit1-2/completion.css',
+    'tests/support/completion-layout.js'
+  ]) {
+    const plan = planChecks(config, [file]);
+    const definitions = config.tasks(process.cwd(), [file]);
+    const commands = plan.flatMap(id => definitions[id].args);
+    for (const required of [
+      'tests/e2e/l49-v14.spec.js', 'tests/e2e/submission-statistics.spec.js',
+      'tests/e2e/unit1-2-completion.spec.js', 'playwright.statistics.config.js'
+    ]) assert.ok(commands.includes(required), `${file} must check ${required}`);
+    assert.ok(plan.includes('browser-statistics-webkit'), `${file} must preserve records in WebKit`);
+  }
+});
+
 test('expired evidence reruns, while clearing browser reports does not erase unrelated successful checks', async t => {
   const root = fixture(t);
   await run(root);

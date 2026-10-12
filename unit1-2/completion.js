@@ -67,11 +67,11 @@
       function count(now) {
         numbers.forEach((number, i) => {
           const progress = Math.max(0, Math.min(1, (now - start - i * 110) / 600));
-          number.textContent = String(Math.round(values[i] * (1 - Math.pow(1 - progress, 2))));
+          if (values[i] !== null) number.textContent = String(Math.round(values[i] * (1 - Math.pow(1 - progress, 2))));
         });
         if (now - start < 850 && finish.isConnected) root.requestAnimationFrame(count);
         else {
-          numbers.forEach((number, i) => { number.textContent = String(values[i]); });
+          numbers.forEach((number, i) => { if (values[i] !== null) number.textContent = String(values[i]); });
           finish.classList.remove('is-celebrating'); finish.dataset.resultMotion = 'finished';
         }
       }
@@ -82,27 +82,10 @@
     document.addEventListener('visibilitychange', tryStart);
     retry = root.setTimeout(tryStart, 0);
   }
-  function render({ finish, activity, states, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false }) {
+  function render({ finish, activity, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false }) {
     const theme = themes[activity];
-    let streak = 0, best = 0, correct = 0;
-    // The runner supplies validated states in question order for this round.
-    // Retries and hints do not rewrite a question's first submitted outcome.
-    for (const state of states) {
-      if (state.firstCorrect) { correct++; streak++; best = Math.max(best, streak); }
-      else streak = 0;
-    }
-    const stats = node('ul', 'completion-stats'); stats.setAttribute('aria-label', '本轮成果');
-    const values = [
-      ['连续答对', best, 'streak', '本轮最高连续首次答对'],
-      ['本次答对', correct, 'correct', '本轮首次提交答对'],
-      ['本次答错', states.length - correct, 'incorrect', '本轮首次提交答错，已订正']
-    ];
-    for (const [label, value, kind, meaning] of values) {
-      const card = node('li', 'completion-stat stat-' + kind), body = node('div', 'completion-stat-value');
-      card.setAttribute('aria-label', meaning + ' ' + value + ' 题');
-      body.append(resultIcon(kind), node('strong', 'completion-number', String(value)), node('span', 'completion-unit', '题'));
-      card.append(node('span', 'completion-stat-label', label), body); stats.append(card);
-    }
+    const stats = finish.querySelector('.completion-stats');
+    const values = [...stats.querySelectorAll('.completion-number')].map(number => number.textContent === '—' ? null : Number(number.textContent));
     const title = node('p', 'completion-title', theme.title); title.setAttribute('role', 'heading'); title.setAttribute('aria-level', '4'); title.tabIndex = -1;
     const caption = theme.caption ? node('p', 'completion-caption', theme.caption) : null;
     if (caption) caption.lang = 'en';
@@ -116,7 +99,7 @@
     finish.replaceChildren(illustration(theme), title, ...(caption ? [caption] : []), stats, actions);
     if (awardStatus) actions.before(node('p', 'completion-award', awardStatus));
     if (details?.childElementCount) finish.append(details);
-    if (celebrate) celebrateResult(finish, stats, values.map(item => item[1]), waitForCelebration);
+    if (celebrate) celebrateResult(finish, stats, values, waitForCelebration);
   }
   core.unit12Completion = { render };
 })(globalThis);

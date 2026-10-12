@@ -31,6 +31,7 @@
     "build:login": "node scripts/build-login.js",
     "test:login": "playwright test -c playwright.login.config.js",
     "test:recovery:webkit": "playwright test -c playwright.recovery.config.js",
+    "test:statistics": "playwright test -c playwright.statistics.config.js",
     "admin:login": "node server/manage.js"
   },
   "devDependencies": {

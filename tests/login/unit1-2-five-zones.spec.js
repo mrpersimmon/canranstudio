@@ -52,6 +52,6 @@ test('错答后完成可继续学习，首页与另一设备均不把完成换�
     await expect(second.page.getByRole('link', { name: '继续学习：礼貌小帮手', exact: true })).toBeVisible();
     await second.page.goto('/lesson/unit1-2/#learn/manners');
     await expect(second.page.locator('#starCount')).toHaveText('0');
-    await expect(second.page.locator('.stage-manners').getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['4', '4', '1']);
+    await expect(second.page.locator('.stage-manners').getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['5', '5', '1']);
   } finally { await first.context.close(); await second?.context.close(); }
 });

@@ -110,6 +110,9 @@ jobs:
       - run: npm run test:recovery:webkit -- --reporter=line
         env:
           AWARD_TEST_BASE: ${{ matrix.base }}
+      - run: npm run test:statistics -- --project=webkit-phone --reporter=line
+        env:
+          AWARD_TEST_BASE: ${{ matrix.base }}
 
   test:
     # Keep one stable required check. A failed, cancelled, or skipped upstream

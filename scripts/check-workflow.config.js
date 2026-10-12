@@ -11,6 +11,7 @@ function tasks(root, files) {
   return {
     'browser-login': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
     'browser-recovery-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.recovery.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js','playwright.recovery.config.js'],browser:'webkit'},
+    'browser-statistics-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.statistics.config.js','--project=webkit-phone'],inputs:[...runtimeInputs,'server','playwright.login.config.js','playwright.statistics.config.js'],browser:'webkit'},
     workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: [...runtimeInputs, 'server'] },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
@@ -45,6 +46,7 @@ function tasks(root, files) {
     'browser-units1-30-tasks': browser(['tests/e2e/units1-30-tasks.spec.js', 'tests/e2e/units1-30-revision.spec.js', 'tests/e2e/units1-30-scene-cues.spec.js', 'tests/e2e/units-room-tasks.spec.js', 'tests/e2e/units1-30-acceptance.spec.js']),
     'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js', 'tests/e2e/l49-focus.spec.js']),
     'browser-common-interactions': browser(['tests/e2e/common-interactions.spec.js', 'tests/e2e/unit-thirteen-types.spec.js']),
+    'browser-completion': browser(['tests/e2e/l49-v14.spec.js', 'tests/e2e/submission-statistics.spec.js', 'tests/e2e/unit1-2-completion.spec.js']),
     'browser-state': browser(['tests/e2e/home-progress.spec.js', 'tests/e2e/l49-progress.spec.js']),
     'browser-layout': browser(['tests/e2e/accessibility.spec.js', 'tests/e2e/mobile-release.spec.js']),
     'browser-changed': browser(changedTests.length ? changedTests : ['tests/e2e/smoke.spec.js']),
@@ -53,6 +55,8 @@ function tasks(root, files) {
 }
 function select(files) {
   const selected = [];
+  if (files.some(file => /^(core\/lesson49-(?:practice|subjects|experience)\.(?:js|css)$|unit1-2\/completion\.(?:js|css)$|tests\/support\/completion-layout\.js$|tests\/e2e\/(?:l49-v14|submission-statistics|unit1-2-completion)\.spec\.js$)/.test(file))) selected.push('browser-completion', 'browser-statistics-webkit');
+  if (files.some(file => /^(core\/lesson49-(?:practice|subjects|experience)\.(?:js|css)|unit1-2\/completion\.(?:js|css)|tests\/(?:e2e|login)\/submission-statistics\.spec\.js|tests\/fixtures\/submission-statistics-before\/|playwright\.statistics\.config\.js)/.test(file))) selected.push('browser-statistics-webkit');
   if (files.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/course-packages\.js|server\/public\/access-(?:client|worker)\.js|tests\/login\/(?:server\.js|helpers\.js|course-loading-recovery\.spec\.js)|tests\/support\/course-response-faults\.js|playwright\.(?:recovery|login)\.config\.js)$/.test(file))) selected.push('browser-recovery-webkit');
   if(files.some(file=>/^(server\/|tests\/login\/|playwright.login.config.js|deploy\/login\/|core\/(?:course-(?:cache|loader|worker)|lesson49-practice)\.js|scripts\/(?:course-packages|public-base-path|build-login)\.js|unit[^/]+\/(?:content|unit)\.js)/.test(file)))selected.push('browser-login');
   if (files.some(isWorkflow)) selected.push('workflow');

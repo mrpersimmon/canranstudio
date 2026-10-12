@@ -424,3 +424,34 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 .lesson-workspace .practice-context{max-width:680px;margin:12px auto 18px;padding:12px 16px;border-left:3px solid var(--unit-line,#cbbba5);background:var(--unit-wash,#fff8ec);border-radius:8px;font-size:18px;line-height:1.6;text-align:left;white-space:pre-wrap}
 .lesson-workspace .practice-context p{margin:0 0 6px}
 .lesson-workspace .practice-context p:last-child{margin-bottom:0}
+
+/* Submission statistics share the approved three-card presentation. */
+.lesson-workspace .completion-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:min(540px,100%);margin:27px 0 0;padding:0;list-style:none}
+.lesson-workspace .completion-stat{--stat-color:#E6BA61;min-width:0;overflow:hidden;border:3px solid var(--stat-color);border-radius:20px;background:#FFFDF8;box-shadow:0 3px 0 var(--stat-color)}
+.lesson-workspace .completion-stat:first-child{transform-origin:left center}
+.lesson-workspace .completion-stat:last-child{transform-origin:right center}
+.lesson-workspace .stat-correct{--stat-color:#98BEA0}.lesson-workspace .stat-incorrect{--stat-color:#E2AD94}
+.lesson-workspace .completion-stat-label{display:block;padding:6px 3px 7px;background:var(--stat-color);font-size:16px;line-height:1.5;white-space:nowrap;color:#4A3226}
+.lesson-workspace .completion-stat-value{display:flex;align-items:center;justify-content:center;gap:7px;min-height:84px;padding:12px 6px 10px}
+.lesson-workspace .completion-stat-value>.shop-icon{width:32px;height:32px;object-fit:contain;flex:none}
+.lesson-workspace .completion-number{font:700 43px/1 'Baloo 2',sans-serif;font-variant-numeric:tabular-nums;color:#4A3226}
+.lesson-workspace .completion-unit{align-self:flex-end;margin-bottom:9px;font-size:13px;line-height:1}
+/* The shared finish already spaces its children with gap. Do not add the
+   illustrated card's extra margin and push the onward action off a short screen. */
+.lesson-workspace .practice-finish:not(.completion-card)>.completion-stats{margin-top:0}
+@media(max-width:600px){
+ .lesson-workspace .completion-stats{gap:8px;margin-top:22px}
+ .lesson-workspace .completion-stat{border-radius:15px;border-width:2px}
+ .lesson-workspace .completion-stat-label{font-size:13px;padding:6px 1px}
+ .lesson-workspace .completion-stat-value{display:grid;grid-template-columns:24px max-content;align-items:center;gap:3px;min-height:80px;padding:10px 2px 8px}
+ .lesson-workspace .completion-stat-value>.shop-icon{width:24px;height:24px}
+ .lesson-workspace .completion-number{font-size:34px}
+ .lesson-workspace .completion-unit{grid-column:1/-1;align-self:auto;font-size:11px;margin:0;text-align:center}
+}
+@media(max-width:600px) and (max-height:700px){
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats){display:grid;grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);gap:10px 8px;justify-items:center;padding:6px 0}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>*{grid-column:1/-1;min-width:0}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>.finish-icon{grid-column:2;grid-row:1;width:36px;height:36px}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>p:first-of-type{grid-column:3;grid-row:1}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>.practice-finish-actions{margin-top:6px}
+}
