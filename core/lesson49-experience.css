@@ -436,6 +436,9 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 .lesson-workspace .completion-stat-value>.shop-icon{width:32px;height:32px;object-fit:contain;flex:none}
 .lesson-workspace .completion-number{font:700 43px/1 'Baloo 2',sans-serif;font-variant-numeric:tabular-nums;color:#4A3226}
 .lesson-workspace .completion-unit{align-self:flex-end;margin-bottom:9px;font-size:13px;line-height:1}
+/* The shared finish already spaces its children with gap. Do not add the
+   illustrated card's extra margin and push the onward action off a short screen. */
+.lesson-workspace .practice-finish:not(.completion-card)>.completion-stats{margin-top:0}
 @media(max-width:600px){
  .lesson-workspace .completion-stats{gap:8px;margin-top:22px}
  .lesson-workspace .completion-stat{border-radius:15px;border-width:2px}
@@ -444,4 +447,11 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
  .lesson-workspace .completion-stat-value>.shop-icon{width:24px;height:24px}
  .lesson-workspace .completion-number{font-size:34px}
  .lesson-workspace .completion-unit{grid-column:1/-1;align-self:auto;font-size:11px;margin:0;text-align:center}
+}
+@media(max-width:600px) and (max-height:700px){
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats){display:grid;grid-template-columns:minmax(0,1fr) auto auto minmax(0,1fr);gap:10px 8px;justify-items:center;padding:6px 0}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>*{grid-column:1/-1;min-width:0}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>.finish-icon{grid-column:2;grid-row:1;width:36px;height:36px}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>p:first-of-type{grid-column:3;grid-row:1}
+ .lesson-workspace .practice-finish:not(.completion-card):has(>.completion-stats)>.practice-finish-actions{margin-top:6px}
 }

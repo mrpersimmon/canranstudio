@@ -1,5 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+const { expectCompactCompletion } = require('../support/completion-layout');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 const words = ['butcher','meat','beef','lamb','steak','mince','chicken','husband','tell','truth','either','mutton','pork','fish'];
@@ -180,11 +181,19 @@ for (const viewport of [{ width: 320, height: 568 }, { width: 768, height: 1024 
     expect(a.x-b.x-b.width).toBeLessThanOrEqual(16);
     const group=await stage.getByRole('group',{name:'完成后的操作',exact:true}).boundingBox(),box=await stage.boundingBox();
     expect(Math.abs(group.x+group.width/2-box.x-box.width/2)).toBeLessThanOrEqual(1);
-    expect(box.height).toBeLessThan(440);
+    await expectCompactCompletion(page, stage);
+    const statistics = await stage.locator('.completion-number').allTextContents();
+    await expect(page.locator('#starCount')).toHaveText('5');
     await page.screenshot({ path: `output/playwright/l49-v14-finish-${viewport.width}.png` });
+    await next.click();
+    await expect(page).toHaveURL(/#learn\/text$/);
+    await page.goBack(); await page.reload();
+    await expect(stage.locator('.completion-number')).toHaveText(statistics);
+    await expectCompactCompletion(page, stage);
     await again.click();
     await expect(stage).toContainText('第 1 / 14 题');
     await expect(next).toBeHidden();
+    await expect(page.locator('#starCount')).toHaveText('5');
   });
 }
 

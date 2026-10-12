@@ -4,6 +4,7 @@ const flow = require('../support/thirteen-types-flow');
 const tasks = require('../support/units1-30-tasks');
 const { submitSubject } = require('../support/l49-subject-flow');
 const { unitSubjectAnswers } = require('../support/unit49-50-flow');
+const { expectCompactCompletion } = require('../support/completion-layout');
 test.use({ actionTimeout: 5000 });
 
 // Counts and language come from the reviewed teaching flows, never page state.
@@ -14,7 +15,7 @@ for (const [pair, count] of [
   ['31-32', 8], ['33-34', 7], ['35-36', 5], ['37-38', 4], ['39-40', 4]
 ]) test(`${pair} 共用结算按提交计次，手机三卡完整，刷新保留`, async ({ page }) => {
   test.setTimeout(60000);
-  await page.setViewportSize({ width: 320, height: 844 });
+  await page.setViewportSize({ width: 320, height: 568 });
   if (Number(pair.split('-')[0]) >= 31) await require('../support/unit' + pair + '-flow').activity(page, 'listen', '/lesson');
   else await (pair === '25-26' ? flow : tasks).activity(page, pair, 'listen', { base: '/lesson' });
   const room = page.locator('.stage-listen'), results = room.getByRole('list', { name: '本轮成果', exact: true });
@@ -24,9 +25,11 @@ for (const [pair, count] of [
   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await expectCompactCompletion(page, room);
   if (['3-4', '5-6', '25-26', '39-40'].includes(pair)) await room.screenshot({ path: `output/playwright/submission-statistics/${pair}-320.png` });
   await page.reload();
   await expect(results.locator('.completion-number')).toHaveText([String(count), String(count), '0']);
+  await expectCompactCompletion(page, room);
   await expect(page.locator('.stage-words, .stage-text').getByRole('list', { name: '本轮成果' })).toHaveCount(0);
 });
 

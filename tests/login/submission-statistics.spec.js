@@ -3,6 +3,8 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises'), os = require('node:os'), path = require('node:path');
 const { adminLogin, createStudent, studentLogin, signIn } = require('./helpers');
 const flow = require('../support/thirteen-types-flow');
+const tasks = require('../support/units1-30-tasks');
+const { expectCompactCompletion } = require('../support/completion-layout');
 const base = process.env.AWARD_TEST_BASE || '/lesson/';
 
 // Explicit contexts do not inherit the page fixture's device settings.
@@ -20,6 +22,37 @@ async function twoErrors(room) {
     if (!repeat) await room.getByRole('button', { name: '再试一次', exact: true }).click();
   }
 }
+
+test('登录手机短屏完成后统计与操作完整，再进和重练保留已获星', async ({ page, browser }) => {
+  await adminLogin(page, base);
+  const account = await createStudent(page, '短屏结算验收', '小岚', [/Lesson 3–4/]);
+  const student = await studentLogin(browser, account, base, deviceSettings());
+  try {
+    const p = student.page;
+    await p.setViewportSize({ width: 320, height: 568 });
+    await tasks.activity(p, '3-4', 'listen', { base: base.slice(0, -1), keepAward: true });
+    const reward = p.getByRole('dialog', { name: /纪念卡结算/ });
+    await expect(reward.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
+    await reward.press('Escape'); await expect(reward).not.toBeVisible();
+    const room = p.locator('.stage-listen');
+    await expectCompactCompletion(p, room);
+    await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
+    await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    await room.getByRole('button', { name: '下一站：衣帽间小剧场', exact: true }).click();
+    await expect(p).toHaveURL(/#learn\/text$/);
+    await p.goBack(); await p.reload();
+    await expectCompactCompletion(p, room);
+    await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
+    await expect(p.locator('#starCount')).toHaveText('1');
+    await p.screenshot({ path: `output/playwright/submission-statistics/login-${test.info().project.name || 'chromium'}-${base === '/' ? 'root' : 'lesson'}-320x568.png` });
+    await room.getByRole('button', { name: '再练一轮', exact: true }).click();
+    await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
+    await p.reload();
+    await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
+    await expect(p.locator('#starCount')).toHaveText('1');
+    await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+  } finally { await student.context.close(); }
+});
 
 test('旧课包升级保留中途错答、既有五星和首次满星日期，另一设备统计一致', async ({ browser }) => {
   test.setTimeout(150000);
