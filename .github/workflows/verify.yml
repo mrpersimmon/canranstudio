@@ -2,7 +2,9 @@ name: verify
 
 on:
   push:
+    branches: [main, codex/release-canranstudio]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -25,6 +27,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:workflow
+      - run: node scripts/ci/browser-suite.js verify
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: test-inventories
+          path: output/ci/inventory-*/
+          retention-days: 7
       - run: npm run vendor:fonts
       - run: git diff --exit-code -- assets/fonts
       - run: npx playwright install --with-deps chromium
@@ -53,9 +62,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      # Each runner owns its server ports; each test file keeps its existing
-      # serial behavior. Sharding changes scheduling, never the test inventory.
-      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/8 --grep-invert @cache-performance --reporter=line
+      # Keep serial files together; live discovery covers new files as well.
+      - run: node scripts/ci/browser-suite.js run courses ${{ matrix.shard }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: courses-${{ matrix.shard }}
+          path: output/ci/courses-${{ matrix.shard }}/
+          retention-days: 7
 
   cache-performance:
     runs-on: ubuntu-latest
@@ -72,8 +86,18 @@ jobs:
       - run: npx playwright install --with-deps chromium
       # Cold-load and warm-revisit budgets use separate browser processes; do
       # not mix them with the repeated reload and fault-injection stress tests.
-      - run: npx playwright test tests/e2e/course-cache-cold.spec.js --grep @cache-performance --trace=off --reporter=line
-      - run: npx playwright test tests/e2e/course-cache-performance.spec.js --grep @cache-performance --reporter=line
+      - run: npx playwright test tests/e2e/course-cache-cold.spec.js --grep @cache-performance --trace=off --reporter=line,json --output=output/ci/cache-cold/results
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: output/ci/cache-cold/report.json
+      - run: npx playwright test tests/e2e/course-cache-performance.spec.js --grep @cache-performance --reporter=line,json --output=output/ci/cache-revisit/results
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: output/ci/cache-revisit/report.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cache-performance
+          path: output/ci/cache-*/
+          retention-days: 7
 
   accounts:
     runs-on: ubuntu-latest
@@ -81,7 +105,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2]
+        shard: [1, 2, 3]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -92,9 +116,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      # The expanded account suite exceeds one runner's hour. Each shard
-      # retains serial tests and an isolated server; all must pass the gate.
-      - run: npm run test:login -- --shard=${{ matrix.shard }}/2 --reporter=line
+      - run: node scripts/ci/browser-suite.js run accounts ${{ matrix.shard }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: accounts-${{ matrix.shard }}
+          path: output/ci/accounts-${{ matrix.shard }}/
+          retention-days: 7
 
   recovery-webkit:
     runs-on: ubuntu-latest
@@ -113,12 +141,23 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps webkit
-      - run: npm run test:recovery:webkit -- --reporter=line
+      - run: npm run test:recovery:webkit -- --reporter=line,json
         env:
           AWARD_TEST_BASE: ${{ matrix.base }}
-      - run: npm run test:statistics -- --project=webkit-phone --reporter=line
+          PLAYWRIGHT_JSON_OUTPUT_FILE: output/ci/webkit-recovery.json
+      - run: npm run test:statistics -- --project=webkit-phone --reporter=line,json
         env:
           AWARD_TEST_BASE: ${{ matrix.base }}
+          PLAYWRIGHT_JSON_OUTPUT_FILE: output/ci/webkit-statistics.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: recovery-webkit-${{ strategy.job-index }}
+          path: |
+            output/ci/webkit-*.json
+            output/test-recovery-webkit/
+            output/test-statistics/
+          retention-days: 7
 
   test:
     # Keep one stable required check. A failed, cancelled, or skipped upstream
@@ -127,8 +166,10 @@ jobs:
     needs: [foundation, courses, accounts, cache-performance, recovery-webkit]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
       - name: Require every check to pass
         env:
           RESULTS: ${{ toJSON(needs) }}
-        run: |
-          node -e 'const results = Object.values(JSON.parse(process.env.RESULTS)); if (!results.length || results.some(job => job.result !== "success")) process.exit(1)'
+        run: node scripts/ci/browser-suite.js gate
