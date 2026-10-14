@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const runtimeInputs = ['award-book', 'core', 'assets', 'home', 'index.html', 'unit49-50', 'unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90', 'unit1-2', 'unit3-4', 'unit5-6', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'unit41-42', 'unit43-44', 'unit45-46', 'unit47-48', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
 const isDoc = file => /\.md$/i.test(file) || file.startsWith('docs/') || file.startsWith('.superpowers/');
-const isWorkflow = file => /^(scripts\/check-workflow(?:\.config)?\.js|tests\/workflow\/|\.github\/|AGENTS\.md|\.gitignore)/.test(file);
+const isWorkflow = file => /^(scripts\/check-workflow(?:\.config)?\.js|scripts\/ci\/|tests\/workflow\/|tests\/deploy\/workflow-contract\.test\.js$|\.github\/|AGENTS\.md|\.gitignore)/.test(file);
 const unitFiles = root => fs.readdirSync(path.join(root, 'tests/unit')).filter(name => name.endsWith('.test.js')).sort().map(name => 'tests/unit/' + name);
 function tasks(root, files) {
   const browser = names => ({ args: ['node_modules/@playwright/test/cli.js', 'test', '--reporter=line', ...names], inputs: runtimeInputs, browser: true });
@@ -12,7 +12,7 @@ function tasks(root, files) {
     'browser-login': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
     'browser-recovery-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.recovery.config.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js','playwright.recovery.config.js'],browser:'webkit'},
     'browser-statistics-webkit': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.statistics.config.js','--project=webkit-phone'],inputs:[...runtimeInputs,'server','playwright.login.config.js','playwright.statistics.config.js'],browser:'webkit'},
-    workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'tests/workflow', '.github/workflows', 'package.json', 'package-lock.json'] },
+    workflow: { args: ['--test', 'tests/workflow/check-workflow.test.js', 'tests/workflow/ci.test.js', 'tests/deploy/workflow-contract.test.js'], inputs: ['scripts/check-workflow.js', 'scripts/check-workflow.config.js', 'scripts/ci', 'tests/workflow', 'tests/deploy/workflow-contract.test.js', '.github/workflows', 'package.json', 'package-lock.json'] },
     unit: { args: ['--test', ...unitFiles(root)], inputs: [...runtimeInputs, 'server'] },
     'browser-smoke': browser(['tests/e2e/smoke.spec.js', 'tests/e2e/routes.spec.js']),
     'browser-cache-cold': browser(['tests/e2e/course-cache-cold.spec.js', '--grep', '@cache-performance', '--trace=off']),
