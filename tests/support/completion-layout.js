@@ -5,6 +5,10 @@ const { expect } = require('@playwright/test');
 // viewport. Its total height is allowed to change with the approved content.
 async function expectCompactCompletion(page, room, { illustrated = false } = {}) {
   const results = room.getByRole('list', { name: '本轮成果', exact: true });
+  await expect(results).toBeVisible();
+  // Boxes can be visible behind the loader while startup still restores the
+  // chapter scroll. Exercise the ready page, as a learner would, before moving it.
+  await expect(page.locator('#courseLoader')).toHaveCount(0);
   if (illustrated) {
     // The approved story result includes its illustration and may scroll on a
     // short screen. Keep the image and scroll to the actual visible action row.

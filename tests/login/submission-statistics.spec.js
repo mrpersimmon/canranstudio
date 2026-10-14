@@ -54,6 +54,41 @@ test('登录手机短屏完成后统计与操作完整，再进和重练保留�
   } finally { await student.context.close(); }
 });
 
+test('加载层移除后再检查结算布局，延后的呈现帧不覆盖操作区定位', async ({ page, browser }) => {
+  await adminLogin(page, base);
+  const account = await createStudent(page, '结算加载边界验收', '小岚', [/Lesson 3–4/]);
+  const student = await studentLogin(browser, account, base, deviceSettings()), p = student.page;
+  try {
+    await p.setViewportSize({ width: 320, height: 568 });
+    await tasks.activity(p, '3-4', 'listen', { base: base.slice(0, -1), keepAward: true });
+    const reward = p.getByRole('dialog', { name: /纪念卡结算/ });
+    await expect(reward.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
+    await reward.press('Escape');
+    // Slow the browser's presentation boundary, without changing course state.
+    // Elements already have boxes behind the loading overlay; they are not yet
+    // the user's interactive page, and startup still restores the chapter.
+    await p.addInitScript(() => {
+      const frame = requestAnimationFrame.bind(window), scroll = Element.prototype.scrollIntoView;
+      window.completionScrollDuringLoad = [];
+      window.requestAnimationFrame = callback => frame(time => {
+        if (document.getElementById('courseLoader')) setTimeout(() => callback(performance.now()), 300);
+        else callback(time);
+      });
+      Element.prototype.scrollIntoView = function (options) {
+        if (this.getAttribute('aria-label') === '完成后的操作' && document.getElementById('courseLoader')) {
+          window.completionScrollDuringLoad.push(performance.now());
+        }
+        return scroll.call(this, options);
+      };
+    });
+    await p.reload();
+    await expectCompactCompletion(p, p.locator('.stage-listen'), { illustrated: true });
+    expect(await p.evaluate(() => window.completionScrollDuringLoad)).toEqual([]);
+    await expect(p.locator('#starCount')).toHaveText('1');
+    await expect(p.locator('.stage-listen .completion-number')).toHaveText(['5', '5', '0']);
+  } finally { await student.context.close(); }
+});
+
 test('旧课包升级保留中途错答、既有五星和首次满星日期，另一设备统计一致', async ({ browser }) => {
   test.setTimeout(150000);
   const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
