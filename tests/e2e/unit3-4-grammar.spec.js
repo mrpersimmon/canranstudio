@@ -93,7 +93,10 @@ for (const selected of [false, true]) test(`旧${selected ? '选过但未提交'
 test('旧综合挑战全对升级：保留九题学习记录，新两题不代答，重练才取得新版星星', async ({ page }) => {
   test.setTimeout(90000); const upgrade = await predecessor(page);
   await page.goto('/unit3-4/#learn/exam'); const room = page.locator('.stage-exam');
-  for (const [i, q] of EXAMS['3-4'].entries()) {
+  // The frozen predecessor contains nine questions; the current manuscript
+  // also includes two transfer questions that must only be answered after upgrade.
+  for (const [i, q] of EXAMS['3-4'].slice(0, 9).entries()) {
+    await expect(room.locator('.progress-copy')).toHaveText(`第 ${i + 1} / 9 题`);
     await choose(room, q); await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await room.getByRole('button', { name: i === 8 ? '查看本次记录' : '下一题', exact: true }).click();
   }
