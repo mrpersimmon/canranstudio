@@ -13,6 +13,15 @@ function definition(root, course, basePath = '/lesson/') {
   return unit;
 }
 function sameSignature(saved,current){if(saved===current)return true;if(typeof saved!=='string'||typeof current!=='string')return false;try{const clean=s=>JSON.stringify(JSON.parse(s),(key,value)=>key==='hint'?undefined:typeof value==='string'?value.replace(/^\/lesson\/(?=assets\/)/,'/'):value);return clean(saved)===clean(current);}catch{return false;}}
+let legacyButcher;
+function butcherLegacyDefinition(){
+  if(!legacyButcher){
+    const sandbox={CanranCore:{courseCatalog:catalog}};
+    vm.runInNewContext(fs.readFileSync(path.join(__dirname,'legacy/unit49-50-content.js'),'utf8'),sandbox);
+    legacyButcher=sandbox.CanranCore.unit4950;
+  }
+  return legacyButcher;
+}
 function normalize(value, unit, course) {
   const result={version:1,groups:{},records:{},activity:{unitCompleted:{}}};
   if (!record(value) || !record(value.activity)) return result;
@@ -21,16 +30,19 @@ function normalize(value, unit, course) {
       .filter(zone => awardRules.validClaim(unit, zone.id, value.activity.unitAwardClaims?.[zone.id]))
       .map(zone => [zone.id, value.activity.unitAwardClaims[zone.id]]));
   }
-  const signatures = Object.fromEntries(Object.entries(unit.questions).map(([id,items])=>[id,course==='unit49-50'?'v1:'+items.map(q=>q.id).join('|'):JSON.stringify([unit.version,items])]));
-  signatures.text=course==='unit49-50'?'v1:'+unit.learning.DIALOGUE.map(line=>line.text).join('|'):JSON.stringify([unit.version,unit.learning.DIALOGUE]);
-  if(course==='unit49-50')signatures.subjects='v1:'+unit.learning.SUBJECTS.version;
+  // The course id stays the same when the old 15-completion-star edition is
+  // replaced. Its wire format must not be applied to the new five-zone unit.
+  const legacyFormat=course==='unit49-50'&&!unit.reward;
+  const signatures = Object.fromEntries(Object.entries(unit.questions).map(([id,items])=>[id,legacyFormat?'v1:'+items.map(q=>q.id).join('|'):JSON.stringify([unit.version,items])]));
+  signatures.text=legacyFormat?'v1:'+unit.learning.DIALOGUE.map(line=>line.text).join('|'):JSON.stringify([unit.version,unit.learning.DIALOGUE]);
+  if(legacyFormat)signatures.subjects='v1:'+unit.learning.SUBJECTS.version;
   for(const [id,signature] of Object.entries(value.activity.unitCompleted||{})) {
     if(!sameSignature(signature,signatures[id]))continue;
     if(id==='text') {
       const dialogue=value.activity.unitDialogue;
       if(!dialogue?.done || !(dialogue.heard||dialogue.viewed)?.length || !unit.learning.DIALOGUE.every((_,i)=>(dialogue.heard||dialogue.viewed)[i]===true))continue;
       result.activity.unitDialogue=dialogue;
-    } else if(id==='subjects'&&course==='unit49-50') {
+    } else if(id==='subjects'&&legacyFormat) {
       const run=value.activity.subjectRound;
       if(!run?.done||run.version!==unit.learning.SUBJECTS.version||!unit.learning.SUBJECTS.questions.every(q=>{const last=run.submissions?.filter(s=>s.questionId===q.id).at(-1);return last?.checked&&last.correct&&last.selection===q.answer&&last.runId===run.runId;}))continue;
       result.activity.subjectRound=value.activity.subjectRound;
@@ -103,6 +115,12 @@ function normalize(value, unit, course) {
     }
   }
   if(Object.keys(taskProofs).length)result.activity.unitPreviousTaskCompleted=taskProofs;
+  if(course==='unit49-50'&&unit.legacyEdition==='unit49-50-completion-v1'){
+    // Validate the frozen previous questions before retaining history. This
+    // evidence is deliberately outside current completion and award claims.
+    const legacy=normalize(value.activity.unitLegacyProgress||value,butcherLegacyDefinition(),course);
+    if(Object.keys(legacy.activity.unitCompleted).length)result.activity.unitLegacyProgress=legacy;
+  }
   // Personal certificate text is metadata, never proof of completion. A new
   // question or a partial sync must not erase it when scores are revalidated.
   // Authentication still owns this record; only the validated groups above can
@@ -114,7 +132,13 @@ function normalize(value, unit, course) {
   }
   return result;
 }
-function merge(left,right){return {version:1,groups:{...left.groups,...right.groups},records:{...left.records,...right.records},activity:{...left.activity,...right.activity,unitCompleted:{...left.activity?.unitCompleted,...right.activity?.unitCompleted},...(left.activity?.unitAwardClaims||right.activity?.unitAwardClaims?{unitAwardClaims:{...right.activity?.unitAwardClaims,...left.activity?.unitAwardClaims}}:{})}};}
+function merge(left,right){
+ const activity={...left.activity,...right.activity,unitCompleted:{...left.activity?.unitCompleted,...right.activity?.unitCompleted},...(left.activity?.unitAwardClaims||right.activity?.unitAwardClaims?{unitAwardClaims:{...right.activity?.unitAwardClaims,...left.activity?.unitAwardClaims}}:{})};
+ // Both inputs have already been normalized against the frozen predecessor.
+ // A partial old-client upload must not replace a complete history archive.
+ if(left.activity?.unitLegacyProgress&&right.activity?.unitLegacyProgress)activity.unitLegacyProgress=merge(left.activity.unitLegacyProgress,right.activity.unitLegacyProgress);
+ return {version:1,groups:{...left.groups,...right.groups},records:{...left.records,...right.records},activity};
+}
 // The reward ledger remains authoritative where installed. Grammar-only units
 // use the complete-round claims already validated by normalize().
 function zoneAwarded(normalized,zone,award=null){return Boolean(award?award.zones?.[zone]:normalized.activity.unitAwardClaims?.[zone]);}

@@ -1,0 +1,5 @@
+/* Approved Lesson 45–46 typography, also used by Lesson 47–48.
+   Local files and OFL provenance live in ./fonts/. */
+@font-face{font-family:'Award Gothic';src:url('./fonts/award-gothic-brand-400.woff2') format('woff2');font-style:normal;font-weight:400;font-display:block}
+@font-face{font-family:'Award Gothic';src:url('./fonts/award-gothic-500.woff2') format('woff2');font-style:normal;font-weight:500;font-display:block}
+@font-face{font-family:'Award Nunito';src:url('./fonts/award-nunito.woff2') format('woff2');font-style:normal;font-weight:200 1000;font-display:block}

@@ -6,7 +6,27 @@
   try { storage = window.localStorage; } catch { storage = null; }
   const profileState = core.deviceProfile.initializeDeviceProfile({ storage, courses });
   const units = [
-    { ...core.unit4950, ...core.learningContext, path: '/unit49-50/', start: 'learn/words', entry: 'unitEntry', label: 'resumeLocation' },
+    { ...core.unit5960, entry: 'unit5960Entry', label: 'unit5960Resume' },
+    { ...core.unit6162, entry: 'unit6162Entry', label: 'unit6162Resume' },
+    { ...core.unit6364, entry: 'unit6364Entry', label: 'unit6364Resume' },
+    { ...core.unit6566, entry: 'unit6566Entry', label: 'unit6566Resume' },
+    { ...core.unit7172, entry: 'unit7172Entry', label: 'unit7172Resume' },
+    { ...core.unit7576, entry: 'unit7576Entry', label: 'unit7576Resume' },
+    { ...core.unit7980, entry: 'unit7980Entry', label: 'unit7980Resume' },
+    { ...core.unit8182, entry: 'unit8182Entry', label: 'unit8182Resume' },
+    { ...core.unit8788, entry: 'unit8788Entry', label: 'unit8788Resume' },
+    { ...core.unit8990, entry: 'unit8990Entry', label: 'unit8990Resume' },
+    { ...core.unit8586, entry: 'unit8586Entry', label: 'unit8586Resume' },
+    { ...core.unit8384, entry: 'unit8384Entry', label: 'unit8384Resume' },
+    { ...core.unit7778, entry: 'unit7778Entry', label: 'unit7778Resume' },
+    { ...core.unit7374, entry: 'unit7374Entry', label: 'unit7374Resume' },
+    { ...core.unit6970, entry: 'unit6970Entry', label: 'unit6970Resume' },
+    { ...core.unit6768, entry: 'unit6768Entry', label: 'unit6768Resume' },
+    { ...core.unit5758, entry: 'unit5758Entry', label: 'unit5758Resume' },
+    { ...core.unit5556, entry: 'unit5556Entry', label: 'unit5556Resume' },
+    { ...core.unit5354, entry: 'unit5354Entry', label: 'unit5354Resume' },
+    { ...core.unit5152, entry: 'unit5152Entry', label: 'unit5152Resume' },
+    { ...core.unit4950, entry: 'unitEntry', label: 'resumeLocation' },
     { ...core.unit12, entry: 'unit12Entry', label: 'unit12Resume' },
     { ...core.unit34, entry: 'unit34Entry', label: 'unit34Resume' },
     { ...core.unit56, entry: 'unit56Entry', label: 'unit56Resume' },
@@ -26,7 +46,11 @@
     { ...core.unit3334, entry: 'unit3334Entry', label: 'unit3334Resume' },
     { ...core.unit3536, entry: 'unit3536Entry', label: 'unit3536Resume' },
     { ...core.unit3738, entry: 'unit3738Entry', label: 'unit3738Resume' },
-    { ...core.unit3940, entry: 'unit3940Entry', label: 'unit3940Resume' }
+    { ...core.unit3940, entry: 'unit3940Entry', label: 'unit3940Resume' },
+    { ...core.unit4142, entry: 'unit4142Entry', label: 'unit4142Resume' },
+    { ...core.unit4344, entry: 'unit4344Entry', label: 'unit4344Resume' },
+    { ...core.unit4748, entry: 'unit4748Entry', label: 'unit4748Resume' },
+    { ...core.unit4546, entry: 'unit4546Entry', label: 'unit4546Resume' }
   ];
   function read(key) {
     try { return JSON.parse(storage?.getItem(key) || 'null'); } catch { return null; }

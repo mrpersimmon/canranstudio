@@ -13,7 +13,7 @@ test('课程只准备自己的场景，独立样式仍在完整加载后显示�
   for (const [unit, selector, art] of [
     ['unit1-2', '#unit12-dialogue', 'unit1-2/street.svg'],
     ['unit3-4', '.stage-text .cloakroom-world', 'unit3-4/story-background.svg'],
-    ['unit49-50', '.stage-text #stage', 'unit49-50/story-background.webp']
+    ['unit49-50', '.stage-text .market-world', 'unit49-50/room.svg']
   ]) {
     await page.goto('/lesson/' + unit + '/#learn/text');
     await expect(page.locator('#courseLoader')).toHaveCount(0);
@@ -98,7 +98,7 @@ for (const id of entries) test(`${id} 完整准备后显示原有课程，必需
   await expect.poll(() => page.locator('img:visible').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   expect(errors).toEqual([]);
   expect(failures).toEqual([]);
-  if (/^unit/.test(id) && id !== 'unit49-50') expect(voices).toEqual([]);
+  if (/^unit/.test(id)) expect(voices).toEqual([]);
 });
 
 test('整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节', async ({ page }) => {

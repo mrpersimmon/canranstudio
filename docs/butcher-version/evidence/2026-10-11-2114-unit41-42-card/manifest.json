@@ -1,0 +1,38 @@
+{
+  "version": "1.2",
+  "createdAtLocal": "2026-10-11-2114",
+  "unit": "unit41-42",
+  "generator": "built-in image_gen",
+  "prompt": "keepsake.prompt.txt",
+  "original": "/Users/permission/.codex/generated_images/01a0899f-0489-71c3-b2fa-d22e3b2f1bda/exec-ca82e687-8e8c-4fdd-8fb6-458e1ad178f9.png",
+  "source": {
+    "file": "keepsake-source.png",
+    "sha256": "6a81da5acc33e8891e5f0ea4beb86af5dd809adeeb33278273ddef0fb2a68704"
+  },
+  "runtime": {
+    "file": "assets/unit41-42/keepsake-story-v3.webp",
+    "width": 1100,
+    "height": 825,
+    "alpha": true,
+    "bytes": 173260,
+    "sha256": "f5df21ce12f20ba67b45aee941391e6ada505c1dabbf0f27eef489ec37483773"
+  },
+  "references": [
+    {
+      "file": "assets/awards/unit1-2-handbag-closeup.webp",
+      "role": "approved art style and composition",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826"
+    },
+    {
+      "file": "assets/awards/unit3-4-umbrella.webp",
+      "role": "approved art style and composition",
+      "sha256": "c36f3c84e55f3b97db64e2fc8b9d2735a5587fb2734ab314f61afa1102eebc3f"
+    },
+    {
+      "file": "assets/unit41-42/keepsake-closeup.webp",
+      "role": "previous revision; identity and prop only",
+      "sha256": "276e0caeb81b85e50854a067b111aa63221f71ae420054de050036457712be85"
+    }
+  ],
+  "status": "local revision; human acceptance pending"
+}

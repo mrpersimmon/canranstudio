@@ -58,7 +58,7 @@ test('restart requires two confirmations, cancellation is safe, and old progress
   await page.getByRole('button', { name: '确认重开', exact: true }).click();
 
   await expect(page.locator('#courses')).toBeVisible();
-  await expect(page.getByRole('link', { name: '开始学习', exact: true })).toBeVisible();
+  await expect(page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true })).toBeVisible();
   const after = await page.evaluate(() => ({
     profile: JSON.parse(localStorage.getItem('canran:adventure-profile:v1')),
     progress: JSON.parse(localStorage.getItem('canran:l49:progress:v2')),

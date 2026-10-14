@@ -1,0 +1,33 @@
+{
+  "scope": "Lesson45-46 人物素材替换，本地页面行为验收",
+  "course": {
+    "command": "COURSE_TEST_PORT=4354 npx playwright test tests/e2e/unit45-46.spec.js",
+    "passed": 12,
+    "output": "output/test4546-characters"
+  },
+  "authenticatedChromium": {
+    "command": "AWARD_TEST_BASE=/ LOGIN_TEST_PORT=4356 npx playwright test --config=playwright.login.config.js tests/login/unit45-46.spec.js --grep 真实账号全流程|缺图先拦截",
+    "passed": 2,
+    "output": "output/test4546-characters-login"
+  },
+  "finalCompositionRecheck": {
+    "scope": "最终封面与结算站姿调整后，49题完整流程与320宽短屏",
+    "passed": 2,
+    "output": "output/test4546-characters-final"
+  },
+  "authenticatedWebKit": {
+    "scope": "最终资源，真实账号全流程及缺图／缓存复访",
+    "passed": 2,
+    "output": "output/test4546-characters-webkit"
+  },
+  "build": "LESSON_BASE_PATH=/ npm run build:login：24个受保护单元通过",
+  "diffCheck": "git diff --check passed",
+  "manual": "已核对桌面封面／词卡／老板与Pamela场景，390×844课文场景，恢复默认窗口并打开最终封面",
+  "studentPreservation": "小禾0/5星、14/14已读对白；41-42已有1星仍保留。没有清理学习记录。",
+  "notPerformed": [
+    "commit",
+    "push",
+    "deploy",
+    "physical device acceptance"
+  ]
+}

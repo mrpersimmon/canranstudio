@@ -1,0 +1,11 @@
+
+Running 3 tests using 1 worker
+
+(node:89804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/3] tests/e2e/submission-statistics.spec.js:16:4 › 3-4 共用结算按提交计次，手机三卡完整，刷新保留
+[2/3] tests/e2e/unit-dedup.spec.js:51:1 › Lesson 3–4 五区33题，语法与综合挑战保留各自判断
+[3/3] tests/e2e/unit-dedup.spec.js:187:1 › Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留
+  3 passed (36.4s)

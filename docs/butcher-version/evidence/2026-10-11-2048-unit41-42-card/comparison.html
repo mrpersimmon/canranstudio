@@ -1,0 +1,15 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 41–42 纪念卡对照</title>
+<link rel="stylesheet" href="../../../../core/story-certificate.css">
+<style>*{box-sizing:border-box}body{margin:0;padding:24px;background:#f7f4ec;color:#4a3226;font:16px/1.6 system-ui,sans-serif}header{max-width:1460px;margin:auto}h1{font-size:25px;margin:0}header p{margin:6px 0 24px;color:#796657}.cards{max-width:1460px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}h2{font-size:17px;margin:0 0 10px}.candidate h2{color:#527b3d}.story-award-paper{width:100%}.notes{max-width:1460px;margin:24px auto 0}@media(max-width:700px){.cards{grid-template-columns:1fr}.story-award-paper{aspect-ratio:1.88}.story-award-brand{top:10%;font-size:2.3cqw}.story-award-paper .story-award-title{top:26%;font-size:7.8cqw}.story-award-name{top:48%;width:38%;height:21%;font-size:10cqw}.story-award-stars{top:71%;width:40%;gap:1.5cqw}.story-award-stars img{width:5.9cqw;height:5.9cqw}.story-award-illustration{right:0;bottom:4%;width:61%;height:96%}.story-award-foot{bottom:6%;font-size:2.2cqw}}</style>
+<header><h1>同一版式，比较插画</h1><p>使用当前共用卡面组件；姓名与五星为画面示例，不修改学习记录。Lesson 1–2、3–4 为已认可参考；41–42 为本次改稿。</p></header><main class="cards"></main>
+<p class="notes">改稿：全身静态站位 → 半身互动；方形色块 → 透明纸面融合；小购物袋 → 面包、牛奶和乳酪清晰可辨。奖励、姓名、日期和星光规则沿用。</p>
+<script>window.CanranCore={};</script><script src="../../../../core/story-certificate.js"></script>
+<script>
+const cases=[
+ ['Lesson 1–2 · 已认可参考','礼貌小帮手','Lesson 1–2','#08779c','/assets/awards/unit1-2-handbag-closeup.webp'],
+ ['Lesson 3–4 · 已认可参考','认领小达人','Lesson 3–4','#74376f','/assets/awards/unit3-4-umbrella.webp'],
+ ['Lesson 41–42 · 旧稿','购物袋小管家','Lesson 41–42','#617652','/assets/unit41-42/keepsake.webp'],
+ ['Lesson 41–42 · 本次改稿','购物袋小管家','Lesson 41–42','#617652','/assets/unit41-42/keepsake-closeup.webp']
+];
+for(const [label,title,lesson,color,scene] of cases){const section=document.createElement('section');if(label.includes('本次'))section.className='candidate';const heading=document.createElement('h2');heading.textContent=label;const card=CanranCore.storyCertificate.card({unit:{reward:{title,lesson,color,scene}},label});card.identity('小禾');card.update({stars:5,firstFullStarAt:'2026-10-11T08:00:00.000Z'});section.append(heading,card.element);document.querySelector('main').append(section);}
+</script></html>

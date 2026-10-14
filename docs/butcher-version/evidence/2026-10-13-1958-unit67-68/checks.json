@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-13",
+  "branch": "codex/debug-grammar-v2",
+  "mode": "no-voice",
+  "scope": "local-page-behavior-only",
+  "passed_distinct_scoped_cases": 54,
+  "groups": [
+    {
+      "cases": 19,
+      "scope": "unit page + four-width story, Chromium",
+      "files": [
+        "tests/e2e/unit67-68.spec.js",
+        "tests/e2e/unit67-68-story-layout.spec.js"
+      ],
+      "evidence": [
+        "output/unit6768-e2e",
+        "output/unit6768-recheck"
+      ]
+    },
+    {
+      "cases": 4,
+      "scope": "four-width story, WebKit",
+      "evidence": [
+        "output/unit6768-story-webkit"
+      ]
+    },
+    {
+      "cases": 24,
+      "scope": "6 account scenarios times root/prefix times Chromium/WebKit",
+      "file": "tests/login/unit67-68.spec.js",
+      "evidence": [
+        "output/unit6768-auth-root",
+        "output/unit6768-auth-prefix",
+        "output/unit6768-auth-prefix-webkit",
+        "output/unit6768-auth-root-webkit"
+      ]
+    },
+    {
+      "cases": 4,
+      "scope": "homepage banners and class access",
+      "file": "tests/login/course-banners.spec.js",
+      "evidence": [
+        "output/unit6768-auth-prefix"
+      ]
+    },
+    {
+      "cases": 3,
+      "scope": "adjacent65-66 selected page regression",
+      "file": "tests/e2e/unit65-66.spec.js",
+      "evidence": [
+        "output/unit6768-adjacent-regression"
+      ]
+    }
+  ],
+  "after_fixes": {
+    "font_checks": [
+      "output/unit6768-font-root",
+      "output/unit6768-font-prefix",
+      "output/unit6768-font-prefix-webkit",
+      "output/unit6768-auth-root-webkit"
+    ],
+    "reference_check": "12 clock faces + 10 diary entries + A7/B6 passed again; not added to count"
+  },
+  "build": {
+    "command": "LESSON_BASE_PATH=/ npm run build:login",
+    "status": "passed",
+    "protected_units": 34
+  },
+  "fixed_this_turn": [
+    "desktop story timeline clearance",
+    "unit67-68 registration in course/book/export font paths",
+    "source clock ordinal labels retained"
+  ],
+  "boundaries": [
+    "No production deployment or remote CI",
+    "No physical Android WeChat acceptance",
+    "Teacher/child acceptance pending",
+    "Some WebKit offline navigation can reject; online recovery separately checked",
+    "No previous unit67-68 records exist to migrate",
+    "Repository-wide and capacity/worker-write-failure release suite not claimed"
+  ],
+  "git": {
+    "commit": "not requested, not done",
+    "push": "not requested, not done",
+    "deploy": "not requested, not done"
+  }
+}

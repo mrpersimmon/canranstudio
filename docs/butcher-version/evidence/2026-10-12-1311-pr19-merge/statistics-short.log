@@ -1,0 +1,14 @@
+
+Running 2 tests using 1 worker
+
+(node:91083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] [chromium] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星
+(node:91130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/2] [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星
+  2 passed (26.7s)

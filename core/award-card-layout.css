@@ -1,0 +1,26 @@
+/* One safe layout for the course, reveal, album and enlarged keepsake.
+   Horizontal: text ends at 43.5%, artwork starts at 45%. */
+.award-card{--award-round:'Award Round','ZCOOL KuaiLe',sans-serif;--award-latin:'Baloo 2',sans-serif;font-synthesis:none}
+.award-card :is(.story-award-brand,.card-brand,.story-award-title,.card-title,.story-award-name,.card-name,.story-award-stars,.card-stars,.story-award-foot,.card-caption){position:absolute;left:5.5%;z-index:1;margin:0;width:38%;box-sizing:border-box}
+.award-card :is(.story-award-brand,.card-brand){top:10%;font:400 2.2cqw/1.4 var(--award-round);white-space:nowrap;text-shadow:none}
+.award-card :is(.story-award-title,.card-title){top:26%;font:var(--award-title-weight,400) var(--title-size,6.8cqw)/1.15 var(--award-round);color:var(--accent,#0b7399);white-space:nowrap;text-shadow:none}
+/* Keep a full name inside its reserved area when browser font preferences or
+   fallback glyph widths prevent the normal single-line size from fitting. */
+.award-card :is(.story-award-name,.card-name){top:48%;height:21%;display:flex;align-items:center;font:var(--award-name-weight,400) var(--name-size,9.4cqw)/1.1 var(--award-round);white-space:normal;overflow-wrap:anywhere;text-shadow:none}
+.award-card :is(.story-award-stars,.card-stars){top:71%;display:flex;gap:1.4cqw;align-items:center}
+.award-card :is(.story-award-stars,.card-stars) img{width:6.1cqw;height:6.1cqw;object-fit:contain;flex:none}
+.award-card :is(.story-award-illustration,.card-scene){position:absolute;right:1%;bottom:4%;width:54%;height:88%;object-fit:contain;object-position:right bottom;z-index:0;pointer-events:none}
+.award-card :is(.story-award-foot,.card-caption){bottom:6%;display:flex;gap:.6em;font:var(--award-foot-weight,500) 2.2cqw/1.65 var(--award-latin);color:#795a46;white-space:nowrap}
+.award-card :is(.story-award-foot,.card-caption) time:not([hidden])::before{content:'·';margin-right:.6em}
+/* Album leaves retain their horizontal artwork; the modal and course use a
+   vertical composition on a narrow screen, with a gap below the star row. */
+@media(max-width:600px){
+ .story-award-paper.award-card,.card-modal .award-card{aspect-ratio:.86}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-brand,.card-brand){top:7%;width:86%;font-size:4.2cqw}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-title,.card-title){top:17%;width:86%;font-size:var(--title-size-portrait,10cqw)}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-name,.card-name){top:28%;height:12%;width:85%;font-size:var(--name-size-portrait,12cqw)}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-stars,.card-stars){top:41%;width:85%;gap:3cqw}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-stars,.card-stars) img{width:8.5cqw;height:8.5cqw}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-illustration,.card-scene){right:5.5%;bottom:9%;width:89%;height:41%;object-position:center bottom}
+ :is(.story-award-paper,.card-modal .certificate).award-card :is(.story-award-foot,.card-caption){bottom:2.5%;width:86%;font-size:3.5cqw}
+}

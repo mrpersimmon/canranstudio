@@ -1,6 +1,9 @@
 import React, {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {BookOpening} from './BookOpening';
 import awardGif from '../core/award-gif.js';
+import cardLayout from '../core/award-card-layout.js';
+import '../core/award-card-layout.css';
+import '../assets/awards/typography-45-46.css';
 import {ArrowLeft, ArrowRight, List, DownloadSimple, X, Check} from '@phosphor-icons/react';
 import book from '../assets/awards/book-open.webp';
 import paper from '../assets/awards/paper.webp';
@@ -34,9 +37,9 @@ function readPosition(cards,owner){try{return Math.max(0,cards.findIndex(c=>c.id
 function useMedia(query){const [value,setValue]=useState(()=>matchMedia(query).matches);useEffect(()=>{const m=matchMedia(query),change=()=>setValue(m.matches);m.addEventListener('change',change);return()=>m.removeEventListener('change',change);},[query]);return value;}
 const iconProps={size:24,weight:'bold','aria-hidden':true};
 function Certificate({card}){
-  return <article className="certificate" data-stars={card.stars} data-unit={card.course} style={{'--accent':card.color,'--paper':`url(${paper})`,'--earned-star':`url(${star})`}} aria-label={`${card.lesson} ${card.title}，${card.name}，${card.stars} 颗星`}>
+  return <article className="certificate award-card" data-stars={card.stars} data-unit={card.course} style={{...cardLayout.typography(card.title,card.name,card.course),'--accent':card.color,'--paper':`url(${paper})`,'--earned-star':`url(${star})`}} aria-label={`${card.lesson} ${card.title}，${card.name}，${card.stars} 颗星`}>
     <img className="card-scene" src={card.scene} alt={card.alt} draggable="false"/>
-    <p className="card-brand">灿然英语工作室</p><h2 className="card-title">{card.title}</h2><p className="card-name" style={{fontSize:Math.min(10.3,36/Math.max(3.5,Array.from(card.name).length))+'cqw'}}>{card.name}</p>
+    <p className="card-brand">灿然英语工作室</p><h2 className="card-title">{card.title}</h2><p className="card-name">{card.name}</p>
     <div className="card-stars" aria-label={`${card.stars} / 5 颗星`}>{Array.from({length:5},(_,i)=><span className="award-star" data-earned={i<card.stars} style={{'--star-order':i}} key={i}><img src={i<card.stars?star:emptyStar} alt="" draggable="false"/>{i<card.stars&&<span className="star-glint" aria-hidden="true"/>}</span>)}</div>
     <p className="card-caption"><span>{card.lesson}</span>{card.stars===5&&card.date&&<time dateTime={card.date.replaceAll('.','-')}>{card.date}</time>}</p>
     {card.stars===5&&<span className="gold-light-ring" aria-hidden="true"/>}
@@ -61,20 +64,14 @@ function loadPicture(src){if(decoded.has(src))return Promise.resolve();return ne
 async function prepare(cards,indexes,onProgress=()=>{}){
   let done=0,timer;
   const resources=[...[...new Set([...pictures,...indexes.map(i=>cards[i]?.scene).filter(Boolean)])].map(src=>()=>loadPicture(src)),()=>document.fonts.load('400 24px "Award Book"',cards[0]?.name||'我的纪念册'),()=>document.fonts.load('500 24px "Baloo Book"','Lesson 1–2')];
+  if (indexes.some(i=>['unit45-46','unit47-48','unit49-50','unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62'].includes(cards[i]?.course))) resources.push(()=>cardLayout.prepareFonts('unit45-46',cards[0]?.name||''));
   try {await Promise.race([Promise.all(resources.map(async run=>{await run();onProgress(++done/resources.length);})),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('timeout')),20000);})]);}finally{clearTimeout(timer);}
 }
-function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);}
 async function saveCard(card,signal){
-  const canvas=document.createElement('canvas');canvas.width=1640;canvas.height=880;const ctx=canvas.getContext('2d');
-  roundRect(ctx,8,8,1624,864,30);ctx.fillStyle='#fffcf5';ctx.fill();ctx.save();ctx.clip();ctx.fillStyle=ctx.createPattern(decoded.get(paper),'repeat');ctx.fillRect(0,0,1640,880);
-  const scene=decoded.get(card.scene),scale=Math.min(965/scene.naturalWidth,815/scene.naturalHeight);ctx.drawImage(scene,1624-scene.naturalWidth*scale,841-scene.naturalHeight*scale,scene.naturalWidth*scale,scene.naturalHeight*scale);ctx.restore();
-  ctx.strokeStyle='#503829';ctx.lineWidth=4;ctx.stroke();
-  if(card.stars===5){roundRect(ctx,16,16,1608,848,26);ctx.strokeStyle='#f6c85c';ctx.lineWidth=10;ctx.stroke();roundRect(ctx,24,24,1592,832,20);ctx.strokeStyle='#97672a';ctx.lineWidth=2;ctx.stroke();}
-  function text(value,x,y,size,color,max=685,family='Award Book',stroke=0){ctx.textBaseline='middle';do{ctx.font=`400 ${size--}px "${family}", sans-serif`;}while(ctx.measureText(value).width>max&&size>14);ctx.fillStyle=color;if(stroke){ctx.strokeStyle=color;ctx.lineWidth=stroke;ctx.lineJoin='round';ctx.strokeText(value,x,y);}ctx.fillText(value,x,y);}
-  text('灿然英语工作室',94,126,35,'#4d3325');text(card.title,94,288,122,card.color,715,'Award Book',2.6);text(card.name,94,464,162,'#4d3325',560,'Award Book',3);
-  for(let i=0;i<5;i++)ctx.drawImage(decoded.get(i<card.stars?star:emptyStar),85+i*123,582,104,104);
-  text(card.lesson+(card.stars===5&&card.date?'  ·  '+card.date:''),94,798,34,'#735841',800,'Baloo Book');
-  const blob=await awardGif.encode(canvas,{stars:card.stars,earnedImage:decoded.get(star),starY:582,starSize:104,starStep:123,signal});
+  await cardLayout.prepareFonts(card.course,card.name,'Award Book','Baloo Book');
+  signal.throwIfAborted();
+  const canvas=cardLayout.draw({unitId:card.course,title:card.title,name:card.name,lesson:card.lesson,color:card.color,stars:card.stars,date:card.date,images:{scene:decoded.get(card.scene),paper:decoded.get(paper),earned:decoded.get(star),empty:decoded.get(emptyStar)},roundFont:'Award Book',latinFont:'Baloo Book'});
+  const blob=await awardGif.encode(canvas,{...cardLayout.starLayout,stars:card.stars,earnedImage:decoded.get(star),signal});
   signal.throwIfAborted();
   const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`${card.lesson.replace(' ','')}-${card.title}-${card.name}.gif`;link.click();setTimeout(()=>URL.revokeObjectURL(url),60000);
   return {width:canvas.width,height:canvas.height,bytes:blob.size};

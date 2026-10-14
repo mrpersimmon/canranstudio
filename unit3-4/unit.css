@@ -169,3 +169,13 @@
 @media(max-width:580px){.unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:202px}}
 @media(max-width:360px){.unit34-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:260px}}
 .unit34-workspace{--unit-scene:url('../assets/unit3-4/story-background.svg')}
+/* The shared practice controls keep their meanings; the model uses this unit's palette. */
+.unit34-workspace .grammar-runner {max-width:740px;margin-inline:auto}
+.unit34-workspace .grammar-model {background:#f4eff8;border-color:#d8c6e2}
+.unit34-workspace .grammar-model-line+.grammar-model-line {border-color:#dfd1e7}
+.unit34-workspace .grammar-rule {color:var(--brown)}
+
+.unit34-workspace .completion-attendant{width:138px;height:187px;bottom:4px;right:7%;transform:rotate(4deg)}
+.unit34-workspace .completion-card .completion-halo{background:#eee5f4}
+.unit34-workspace .completion-card .completion-ground{background:#dfd2e6}
+@media(max-width:600px){.unit34-workspace .completion-attendant{width:109px;height:150px;right:4%;bottom:1px}}

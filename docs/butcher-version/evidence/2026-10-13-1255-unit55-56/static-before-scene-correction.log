@@ -1,0 +1,57 @@
+
+Running 19 tests using 1 worker
+
+(node:16952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/unit55-56-story-layout.spec.js:5:39 › 320：8段完整旁白、场景内滚动、人物完整、日程推进 (4.8s)
+  ✓   2 tests/e2e/unit55-56-story-layout.spec.js:5:39 › 390：8段完整旁白、场景内滚动、人物完整、日程推进 (4.2s)
+  ✘   3 tests/e2e/unit55-56-story-layout.spec.js:5:39 › 768：8段完整旁白、场景内滚动、人物完整、日程推进 (1.5s)
+(node:17024) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/e2e/unit55-56-story-layout.spec.js:5:39 › 1280：8段完整旁白、场景内滚动、人物完整、日程推进 (6.3s)
+  ✓   5 tests/e2e/unit55-56.spec.js:4:1 › 62题、五区五星、统一三卡、示范记录与零英语配音 (12.7s)
+  ✓   6 tests/e2e/unit55-56.spec.js:19:1 › 24张日常图鉴完整、IPA、末组推进与刷新 (1.2s)
+  ✓   7 tests/e2e/unit55-56.spec.js:26:1 › 语法错两次、部分填空、撤回、提示及刷新；订正不发星 (7.8s)
+  ✓   8 tests/e2e/unit55-56.spec.js:38:1 › 配对可撤销、错项不消除、刷新不代答 (2.0s)
+  ✓   9 tests/e2e/unit55-56.spec.js:45:1 › 日程记录只在检查正确后完成，订正统计为4／8／2 (4.6s)
+  ✓  10 tests/e2e/unit55-56.spec.js:55:1 › 全部声音失效也能完成五区 (13.6s)
+  ✓  11 tests/e2e/unit55-56.spec.js:56:1 › Lesson56十二幅活动与序数词、五加十一组书写材料 (497ms)
+  ✓  12 tests/e2e/unit55-56.spec.js:60:39 › 320宽与短屏：题型、三卡、字体及操作 (16.3s)
+  ✓  13 tests/e2e/unit55-56.spec.js:60:39 › 390宽与短屏：题型、三卡、字体及操作 (27.6s)
+  ✓  14 tests/e2e/unit55-56.spec.js:60:39 › 768宽与短屏：题型、三卡、字体及操作 (17.2s)
+  ✓  15 tests/e2e/unit55-56.spec.js:60:39 › 1280宽与短屏：题型、三卡、字体及操作 (19.5s)
+  ✓  16 tests/e2e/unit55-56.spec.js:75:39 › 320宽：长词组与音标不截断 (1.1s)
+  ✓  17 tests/e2e/unit55-56.spec.js:75:39 › 390宽：长词组与音标不截断 (1.9s)
+  ✓  18 tests/e2e/unit55-56.spec.js:75:39 › 768宽：长词组与音标不截断 (3.5s)
+  ✓  19 tests/e2e/unit55-56.spec.js:75:39 › 1280宽：长词组与音标不截断 (993ms)
+
+
+  1) tests/e2e/unit55-56-story-layout.spec.js:5:39 › 768：8段完整旁白、场景内滚动、人物完整、日程推进 ────────────────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 716
+    Received:    719.359375
+
+      11 |   await log.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));const next=room.getByRole('button',{name:i===7?'完成课文':'下一段',exact:true}),before=await next.boundingBox();await latest.getByRole('button',{name:'看中文',exact:true}).click();const after=await next.boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(2);
+      12 |   const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(b.y+b.height).toBeLessThanOrEqual(w.y+w.height);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+    > 13 |   for(const img of await world.locator('.family-actor:not([hidden])>img,.family-evening:not([hidden])').all()){await uncut(img);const a=await img.boundingBox();expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(b.y+b.height).toBeLessThanOrEqual(a.y);}
+         |                                                                                                                                                                                                                             ^
+      14 |   if([0,1,3,4,7].includes(i)){await room.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));await room.screenshot({path:info.outputPath(`part-${i+1}.png`)});}
+      15 |   if(i===6){await page.reload();await expect(world).toHaveAttribute('data-beat','late');await expect(room.locator('.bubble-row')).toHaveCount(7);}
+      16 |   if(i<7)await next.click();
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/e2e/unit55-56-story-layout.spec.js:13:221
+
+    Error Context: output/unit5556-static-final/unit55-56-story-layout-768：8段完整旁白、场景内滚动、人物完整、日程推进/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output/unit5556-static-final/unit55-56-story-layout-768：8段完整旁白、场景内滚动、人物完整、日程推进/trace.zip
+    Usage:
+
+        npx playwright show-trace output/unit5556-static-final/unit55-56-story-layout-768：8段完整旁白、场景内滚动、人物完整、日程推进/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/unit55-56-story-layout.spec.js:5:39 › 768：8段完整旁白、场景内滚动、人物完整、日程推进 ─────────────────────
+  18 passed (2.5m)

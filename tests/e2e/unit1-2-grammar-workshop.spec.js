@@ -26,7 +26,7 @@ test('旧锦囊入口进入连续十二题，短示范与答对小结嵌入题�
   await expect(check).toBeDisabled();
 });
 
-test('十二题循序学习，are 与 am 不混教，提示和错答保留，结束简明区分首次与订正结果', async ({ page }) => {
+test('十二题循序学习，are 与 am 不混教，提示和错答保留，结算统计实际提交次数', async ({ page }) => {
   test.setTimeout(60000);
   const errors = [], voice = [];
   page.on('pageerror', e => errors.push(e.message));

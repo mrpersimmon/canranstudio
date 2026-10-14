@@ -11,6 +11,8 @@ const { buildStatic } = require('../../scripts/build-static');
 const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
 const ROOT = path.resolve(__dirname, '../..');
+// New course fixtures are independent of the builder's required-directory list.
+const NEW_UNITS = Array.from({ length: 25 }, (_, i) => `unit${41 + i * 2}-${42 + i * 2}`).filter(id => id !== 'unit49-50');
 const PUBLIC_INPUTS = [
   'index.html',
   'home/index.html',
@@ -20,6 +22,7 @@ const PUBLIC_INPUTS = [
   ]),
   'core',
   'unit49-50',
+  ...NEW_UNITS,
   'unit1-2',
   'unit3-4',
   'unit5-6',
@@ -103,6 +106,7 @@ async function writeSyntheticPublicRoot(root) {
     'index.html',
     'home/index.html',
     'unit49-50/index.html',
+    ...NEW_UNITS.map(id => id + '/index.html'),
     'unit1-2/index.html',
     'unit3-4/index.html',
     'unit5-6/index.html',

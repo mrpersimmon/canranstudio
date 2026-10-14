@@ -1,0 +1,14 @@
+# Lesson 45–46 素材依据
+
+独立三人办公室：老板深发宽领马甲；Bob金色侧分发、细领带和绿色马甲；Pamela外翘短发、发箍和紫色圆领上衣。深棕描边和暖纸延续站内画风；衣服结构与角色轮廓区别于邻课。
+
+- 人物以本课已获认可的纪念卡为画风依据，内置 imagegen 生成 Bob、Pamela、老板三套透明动作图；图鉴、舞台、选项、封面与结算画面共享。原有 SVG 地址保留，用视口摆放内嵌 PNG，兼顾浏览器与图片导出；场景、物品仍为原生 SVG。
+- 信件为单独道具，老板→Bob→Pamela始终只有一份。人物自身已画双手，旧叠加手层留空，避免重复手；封面及结算的信在桌上，Pamela使用自然站姿。
+- 语法示范的鸟、三本书和水杯分别对应可见英文，不用相近图代替目标。
+- `keepsake-story-v1.webp`由内置imagegen生成；以认可1–2／3–4／5–6近景卡为画风依据，表现两人一起辨认字迹。初稿多余的手经imagegen编辑移除；之后仅缩小、转换WebP，保留透明度。
+- 姓名、星位和日期由账号渲染，插画无文字、星星或完成结果。课程底卡、悬浮卡、书页和GIF共用这一图稿。
+- 结算三图标继续使用`assets/unit1-2/completion/`的认可星／勾／叉。
+
+[纪念卡提示词、原图位置与指纹](../../docs/butcher-version/evidence/2026-10-12-1627-unit45-46/manifest.json)；[原课程验收](../../docs/butcher-version/2026-10-12-1627-v1.0-Lesson45-46设计与验收.md)。
+
+用户已认可本课纪念卡，并要求课内及封面人物采用它的风格。本次限 Lesson 45–46：[人物设计与验收](../../docs/butcher-version/2026-10-12-1748-v1.1-Lesson45-46人物风格统一.md)、[生成提示词](../../docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/prompts.md)、[素材来源及不变项核对](../../docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/manifest.json)。三套 PNG／WebP 原稿保存于该证据目录，避免作为重复课程资源下载。

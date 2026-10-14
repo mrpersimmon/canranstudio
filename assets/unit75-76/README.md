@@ -1,0 +1,30 @@
+# Lesson 75–76 图像来源
+
+2026-10-14 · 鞋店里的时间线索。人物和卡面由 imagegen 生成，参照已认可的 Lesson 1–2、3–4 纪念卡；保留透明背景，转为 WebP 供网页加载。
+
+| 文件 | 用途 |
+| --- | --- |
+| keepsake-story-v1.webp | 封面／纪念卡：女士持黑色样鞋，店员展示紫色鞋；没有成交或付款 |
+| lady.webp | 完整全身女士，面向右侧店员，黑鞋始终归她持有 |
+| assistant.webp | 面向左侧女士，空手的店员 |
+| assistant-shoes.webp | 原文第13轮起：店员持另一双紫色鞋 |
+| shop.svg | 杏色店面、青灰窗框、紫灰货架，文字与人物由页面叠加 |
+| 其余 SVG | 延续既有圆角棕描边的词义／时间／课本动作图示；脚本为 scripts/art/build-unit7576-assets.js |
+
+图中不生成标题、学生姓名、星星或日期。尺寸、字体、获星和可访问名称由页面处理。
+
+## u7576CardPrompt
+
+Use case: illustration-story. Asset: transparent illustration for a children's English lesson keepsake card, a warm friendly shoe-shop story. Use the two provided illustrations ONLY as the linework, proportions and gentle paper-texture reference; create different new people. Horizontal medium-close composition, two adult characters interacting, faces and hands large and clearly readable. LEFT: a woman with neat chin-length dark black bob, mustard cropped jacket over ivory blouse, plum skirt suggested, tiny turquoise scarf, curious skeptical yet kind expression. She holds together ONE PAIR of black rounded low-heel shoes, her own sample, at her side, not accepting another object. RIGHT: middle-aged male shoe-shop assistant with short side-parted silver hair, small thin square glasses, white rolled-sleeve shirt, indigo work apron, burnt orange tie. He faces the woman, politely presenting a DIFFERENT ONE PAIR of berry-purple narrow high-heel shoes on one cream tray. They look toward one another and the presented shoes. A low counter edge and faint shoe shelves behind them, pale apricot and blue-grey, background subordinate. Capture comparison, NOT a completed purchase: no bags exchanged, money, congratulations or handshake. Warm cream paper texture within the illustration, round dark brown outlines, soft flat muted color, simplified expressive faces, human anatomy correct, all hands and shoes complete, no artificial blank white patches on clothes. Silhouettes natural and balanced, full heads and all held objects inside generous safe margin. Transparent outside the vignette, no rectangle or frame. No letters, numbers, names, stars, logos, decorative text or watermark. No labels in the art; website adds dynamic text. Match the approved reference illustration quality closely.
+
+## u7576LadyPrompt
+
+Use case: identity-preserve. Asset: one full-body character cutout for a children's English lesson. Use the provided illustration as exact character identity and drawing-style reference. Warm muted flat color, rounded deep-brown outline, subtle paper grain, generous transparent margin on all sides. Entire hair, fingers, elbows, held props and both feet visible. No text, signs, background, ground shape, shadow rectangle, stars, watermark or additional person. Authentic alpha transparency, not a white background. Character occupies about 82% of height. Natural anatomy. Match the original person's face, hairstyle and wardrobe exactly. Extract and extend the WOMAN at left into a full-body figure only. Three-quarter view facing RIGHT, eyes turned right toward the shop assistant. Same short dark bob, white small round earring, turquoise scarf, mustard jacket, ivory blouse and plum knee-length skirt. Brown low walking shoes on feet. Left hand holds both black low-heel sample shoes together by the heel backs at her outer left side; her right hand gently lifted at chest level, an interested politely questioning expression. Exactly TWO black sample shoes, distinct left and right, one pair. No purple shoes, no bags.
+
+## u7576AssistantPrompt
+
+Use case: identity-preserve. Asset: one full-body character cutout for a children's English lesson. Use the provided illustration as exact character identity and drawing-style reference. Warm muted flat color, rounded deep-brown outline, subtle paper grain, generous transparent margin on all sides. Entire hair, fingers, elbows, held props and both feet visible. No text, signs, background, ground shape, shadow rectangle, stars, watermark or additional person. Authentic alpha transparency, not a white background. Character occupies about 82% of height. Natural anatomy. Match the original person's face, hairstyle and wardrobe exactly. Extract and extend the MAN at right into a full-body figure only. Three-quarter view facing LEFT, eyes turned left to the customer. Same silver side-part hair, thin square brown glasses, white rolled sleeves, orange tie, navy indigo full-length apron over dark trousers, brown sensible shoes. Friendly attentive neutral expression, leftward gesture with one EMPTY palm and other hand resting at his apron. BOTH HANDS EMPTY. No tray, shoes held, luggage or props. Keep complete feet and hand.
+
+## u7576AssistantShoesPrompt
+
+Use case: identity-preserve. Asset: one full-body character cutout for a children's English lesson. Use the provided illustration as exact character identity and drawing-style reference. Warm muted flat color, rounded deep-brown outline, subtle paper grain, generous transparent margin on all sides. Entire hair, fingers, elbows, held props and both feet visible. No text, signs, background, ground shape, shadow rectangle, stars, watermark or additional person. Authentic alpha transparency, not a white background. Character occupies about 82% of height. Natural anatomy. Match the original person's face, hairstyle and wardrobe exactly. Extract and extend the MAN at right into a full-body figure only. Three-quarter view facing LEFT toward the customer. Same silver side-part hair, thin square brown glasses, white rolled sleeves, orange tie, navy indigo full-length apron over dark trousers, brown sensible shoes. Presenting exactly ONE PAIR of berry purple narrow high-heeled shoes on one small ivory tray at waist height toward the LEFT. Same shoes as original image, exactly two, no duplicate. Both hands support or gesture toward tray naturally, full hands tray and shoes visible. His feet and all body intact. Friendly expression, no sales-success celebration.

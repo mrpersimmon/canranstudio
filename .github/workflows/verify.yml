@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -55,7 +55,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       # Each runner owns its server ports; each test file keeps its existing
       # serial behavior. Sharding changes scheduling, never the test inventory.
-      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/4 --grep-invert @cache-performance --reporter=line
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/8 --grep-invert @cache-performance --reporter=line
 
   cache-performance:
     runs-on: ubuntu-latest
@@ -78,6 +78,10 @@ jobs:
   accounts:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -88,7 +92,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:login -- --reporter=line
+      # The expanded account suite exceeds one runner's hour. Each shard
+      # retains serial tests and an isolated server; all must pass the gate.
+      - run: npm run test:login -- --shard=${{ matrix.shard }}/2 --reporter=line
 
   recovery-webkit:
     runs-on: ubuntu-latest

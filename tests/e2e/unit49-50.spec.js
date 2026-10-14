@@ -1,5 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+// Historical 15-star/audio edition; current unit is checked in unit49-50-current/upgrade.
+test.beforeEach(async ({page})=>{await require('../support/unit4950-legacy').legacy(page);});
 const { submitSubject } = require('../support/l49-subject-flow');
 const { unitSubjectAnswers: subjectAnswers } = require('../support/unit49-50-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });

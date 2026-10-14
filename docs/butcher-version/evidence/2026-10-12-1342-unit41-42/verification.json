@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-12",
+  "branch": "codex/debug-grammar-v2",
+  "baseCommit": "5596cb5",
+  "state": "uncommitted working-tree changes",
+  "engine": "Chromium",
+  "pageChecks": {
+    "course": {
+      "command": "COURSE_TEST_PORT=4322 playwright test tests/e2e/unit41-42.spec.js",
+      "passed": 17,
+      "seconds": 72
+    },
+    "authenticatedRoot": {
+      "command": "LOGIN_TEST_PORT=4323 AWARD_TEST_BASE=/ playwright test -c playwright.login.config.js tests/login/unit41-42.spec.js",
+      "passed": 5,
+      "seconds": 54.5
+    },
+    "authenticatedSubpath": {
+      "command": "LOGIN_TEST_PORT=4323 playwright test -c playwright.login.config.js tests/login/unit41-42.spec.js",
+      "passed": 5,
+      "seconds": 59.2
+    },
+    "shortScreenRecheck": {
+      "passed": 2,
+      "seconds": 22.4,
+      "viewports": [
+        "320x568",
+        "390x500"
+      ]
+    },
+    "storyReflowRecheck": {
+      "passed": 2,
+      "seconds": 2.5,
+      "scope": "current dialogue remains visible; dialogue does not cover actor heads"
+    }
+  },
+  "assets": "manifest.json",
+  "unchangedRewardEdition": "bag-quantities-v1",
+  "limitations": [
+    "No new commit, push or deployment",
+    "No physical phone/WeChat, teacher or child acceptance",
+    "Current card is a local candidate pending user visual review",
+    "check:plan included pre-existing changes; full commit/release suite was not run"
+  ],
+  "fileSHA256": {
+    "unit41-42/index.html": "b8fdec101dc77022e0593950f943fe1105f0e783fa494449a18389b011c0d76f",
+    "unit41-42/grammar.js": "fc8c335db70a0ae15f333373b95b217db6b7544b2fcf581a5e43ae107216645f",
+    "unit41-42/scene.js": "d525abc89aae5dba6929534cc8a98be679edd20ef0e0f06341beb2a2473ef641",
+    "unit41-42/unit.css": "0b99bbed2aa3ccadbe7e5facb5e53bff7d05a0ce6017f9f053c0fbd6bccf0a33",
+    "unit41-42/previous-questions.js": "a95a64d7295bdc1c2afc2a8954ea4c58c3e94be5a7f0bb9cd1a86b03fa3a39ed",
+    "unit41-42/README.md": "ea9ace26e884a69911fd5266dfa12ea37d12f999fd4a6c2ce3d2c28aa0609f47",
+    "unit41-42/content.js": "3a399a1b3e1a62f6295ee524e67084bf4f6b707b8c5fa9293d827819f063c6ae",
+    "unit41-42/unit.js": "dce8517c0b5b7394c6633442fdcbedfa800b7107ec632b1795ddfbb12aa543d2",
+    "assets/unit41-42/tobacco.svg": "cdde7244a17c44bac5f4e8ceec63af8ab62b997b8095e0d419d2d430fe32818c",
+    "assets/unit41-42/bottle.svg": "1ec261aa37a035ff7dad4b65eee1961a00551770d7a4f1da828045b5ecb171f8",
+    "assets/unit41-42/milk.svg": "fa9737f5f129c37d48e5f669496408158d5f3afa6e1b1f9a0d6dcad96e4685df",
+    "assets/unit41-42/keepsake.svg": "5a0c23b0973e9085342703978d3546e3a66e1e33cae4d7bb74be1f142354f88a",
+    "assets/unit41-42/room.svg": "bfbf962f9d430b9fe3ee22b5ba785af468f78a85488b45fcadd6fa4a8971a260",
+    "assets/unit41-42/bird.svg": "bc69e95db5fa6306027149069c5c58183dc187fd64f7027bb87b0dc3233837a9",
+    "assets/unit41-42/keepsake-story-v4.webp": "876a072f9bd80fd7dbe63ac51000daf586db41debaeacae5c4e693d91e7d1b99",
+    "assets/unit41-42/penny-place.svg": "66db6b56e0d81e72353e05dd8f77909eeb8f8ce59e206e876ab0e29466706d4c",
+    "assets/unit41-42/keepsake-story-v3.webp": "f5df21ce12f20ba67b45aee941391e6ada505c1dabbf0f27eef489ec37483773",
+    "assets/unit41-42/sugar.svg": "5d92bcd4af61b8278004b73cca645bb3d8c74800ce0a177479a9532d3326ddca",
+    "assets/unit41-42/bread.svg": "bf5c59625188a884fc4494bf61671d44ab3277d665a585e91b16594645e73db1",
+    "assets/unit41-42/pound.svg": "8daad8ff1d7b6069636e773df266748562c187661e61f806b1543cc1223a777c",
+    "assets/unit41-42/keepsake.webp": "7e3d927539997a63f91d677ebd883d885e5e174aa2b41383803f36ba32f73c3f",
+    "assets/unit41-42/cover-scene.svg": "dc5d1ee9d9d8f96caf937dab984a07f63b7c44886cf6fb8854685d224d1331a8",
+    "assets/unit41-42/tin.svg": "9135b87f1fff570d554f386c7a15990c617cf8a51427c28d6afc84ea79e35bb1",
+    "assets/unit41-42/coffee.svg": "02f533d3e05104e4187fd12fc8800107b0833bb3d82a9bed265a410f67045e20",
+    "assets/unit41-42/loaf.svg": "626d81c43e13c5abfaa1f948368327e1f44fef31db093e2c1083ffcdff982bc4",
+    "assets/unit41-42/two-bottles.svg": "7566a861cf22f35e6d41f86db79b5dae5b2d581495d0a7c0b38052b1911ac75d",
+    "assets/unit41-42/sam-look.svg": "f2a2ffe5b481d6da9c5e5e07813ed4f1f3f964143087daab589fad66e26f4d8e",
+    "assets/unit41-42/README.md": "79bde9d75d2dcd405988eb7d0b15c05be99e3eb50ec70aba41927e09e4ec6be9",
+    "assets/unit41-42/bag.svg": "10258ce099c958b836345c4ce72bdfc6bf0f0b9553db040b4f7b73ffb2592ccb",
+    "assets/unit41-42/completion-scene.svg": "091eba2353032e56afcc1a6c80e5c40d7b295ccece06d454d589f5f33b76c591",
+    "assets/unit41-42/sam.svg": "6d2740fc7d06361ec12be5e1eb8a51b7be3728b63efd1f7789f629f40a459322",
+    "assets/unit41-42/chocolate.svg": "8cab6a11ff51d4246668beb5123365868e54b25084e8ea1c43e0a4151462375c",
+    "assets/unit41-42/tea.svg": "eb5691a635c2cfbe609c6de13dbf2b8bd28988c68533a551aa0dae14aed7f292",
+    "assets/unit41-42/table.svg": "e651f7ca7c746846215c68802f28e2f55f15b6c0b43b2b32ebd021ec21046ee0",
+    "assets/unit41-42/bar.svg": "870eef599e0d3b34789dffa63179c12cb6b65277db85dc51acb233d14a9b1315",
+    "assets/unit41-42/two-loaves.svg": "97e5bc8f7a237b03526c79e54dd4ecb727fbd864d9cce73144e73f55d0f7c4fd",
+    "assets/unit41-42/piece.svg": "0166877e784675675440c99f79d4940f31f0f2fc4398c3737f74e010ba0f426c",
+    "assets/unit41-42/three-bars.svg": "3dab47050f1e490826e5ed28f07e346f415d61fde7931592c680621c6e82fa57",
+    "assets/unit41-42/soap.svg": "152a510d35277ce07cf7cef5b4309729e591eda8142825b2f8af8d1bd2ae7080",
+    "assets/unit41-42/keepsake-closeup.webp": "276e0caeb81b85e50854a067b111aa63221f71ae420054de050036457712be85",
+    "assets/unit41-42/some.svg": "08a902a7138ddeac260eb84713c7987cc3923457a078b0194eb0bdd81c7e102a",
+    "assets/unit41-42/sam-point.svg": "9d3e6f40ba590eba26727de3cbb55232f0d0c76b12c851edcbe413d3485c9ab6",
+    "assets/unit41-42/penny.svg": "03e9fe1a9ce5091eba4495095da6aac9661a003e5e5e78c8a3b4b12c770420ff",
+    "assets/unit41-42/half.svg": "c6c0ccd7b7ea011189cd1783d4b24de2c553cccedd9577f35c347efabee3c277",
+    "assets/unit41-42/penny-show.svg": "731050a9b36cdaf739f123e325dbb03b77d48e6c67303c3b4dede1bd5fd68050",
+    "assets/unit41-42/cup.svg": "9883bc033786b00a75d939952cb550c8c2aaa2a515a63dc33e5008af9f990c94",
+    "assets/unit41-42/cheese.svg": "07af69afa6be855aeeed68108e3ae74eaf9fdd390ada4e9ab834de776cdf3edf",
+    "assets/unit41-42/chair.svg": "d5a84a585c9dc4a2b0ff4dc5817794fce249c435681330cb167ee97abe8cd8c9",
+    "assets/unit41-42/any.svg": "6994202b84cfa53953cd2c079c1753e63db1ad91c3e4446668a9e74720c5d5d4",
+    "assets/unit41-42/quarter.svg": "84e888dbb31f1b6aea35f5e11eb083eee8606b41f9a88eee307f0e099df37a96",
+    "server/award-catalog.js": "1af3a425d6b70a618cca745ae2b89880312ae746b598bc36e963061a88eb3312",
+    "core/story-certificate.js": "20add81bd9d54d948ae7e06fa668a6f12232bc77c8481a07b0b6df3feeed5f41",
+    "core/story-certificate.css": "cc8e8aba7ead172cc346f878a7fa8eff118e0cd277bd176b8ca0577c6bed01a9",
+    "award-book/styles.css": "e6da6a4d8afe6210488eda92f18cb4a1a8ebd959c77323fecd98efafc6d45ed0"
+  }
+}

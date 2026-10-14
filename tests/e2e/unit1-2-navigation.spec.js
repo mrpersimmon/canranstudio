@@ -19,9 +19,9 @@ for(const base of ['/','/lesson/']) {
     const older=page.getByRole('region',{name:'晚餐采购大冒险',exact:true});
     await expect(older.getByRole('link',{name:'开始学习',exact:true})).toHaveAttribute('href',base+'unit49-50/#learn/words');
     await older.getByRole('link',{name:'开始学习',exact:true}).click();
-    await page.getByRole('link',{name:'表达训练场',exact:true}).click();
+    await page.getByRole('link',{name:'帮忙买晚餐',exact:true}).click();
     await page.getByRole('link',{name:'我的课程',exact:true}).click();
-    await expect(older).toContainText('上次学到 · 表达训练场');
+    await expect(older).toContainText('上次学到 · 帮忙买晚餐');
     await expect(beginner).toContainText('上次学到 · 街角小帮手');
     await expect.poll(()=>page.locator('main img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     expect(errors).toEqual([]);expect(failed).toEqual([]);expect(outside).toEqual([]);

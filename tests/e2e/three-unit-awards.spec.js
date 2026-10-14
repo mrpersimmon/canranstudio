@@ -39,7 +39,8 @@ for(const pair of ['3-4','5-6'])test(`${pair} 发卡前真实当前题目保留�
  });
  await tasks.story(page,pair);
  for(const id of Object.keys(tasks.CASES[pair].old)){
-  await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),questions=tasks.answers(pair,id);
+  const frozen=tasks.CASES[pair];
+  await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),questions=frozen.changes.find(change=>change.group===id)?.answers||frozen.old[id];
   for(const [index,q] of questions.entries()){
    await tasks.select(room,q.answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
    await room.getByRole('button',{name:index===questions.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
@@ -48,7 +49,14 @@ for(const pair of ['3-4','5-6'])test(`${pair} 发卡前真实当前题目保留�
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('旧卡姓名');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
  before=false;await page.reload();await expect(page.locator('#starCount')).toHaveText('0');await expect(page.locator('#certificateDate')).toBeHidden();
  const ids=pair==='3-4'?['listen','roles','manners','reply','exam']:['listen','roles','introduce','cars','exam'];
- for(const id of ids){await page.goto(`/unit${pair}/#learn/${id}`);await expect(page.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true})).toBeVisible();}
+ for(const id of ids){
+  await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id);
+  if(pair==='3-4'&&['reply','exam'].includes(id)){
+   await expect(room.locator('.progress-copy')).toHaveText(id==='reply'?'第 1 / 10 题':'第 10 / 11 题');
+   await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+   if(id==='exam')await tasks.activity(page,pair,id);
+  }else await expect(room.getByRole('button',{name:'再练一轮',exact:true})).toBeVisible();
+ }
  await page.locator('.stage-exam').getByRole('button',{name:'再练一轮',exact:true}).click();await tasks.activity(page,pair,'exam');await expect(page.locator('#starCount')).toHaveText('1');
  before=true;await page.goto(`/unit${pair}/#learn/certificate`);await page.reload();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('旧卡姓名');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(page.locator('#certificateDate')).toHaveText(date);
 });

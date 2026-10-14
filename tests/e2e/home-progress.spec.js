@@ -12,7 +12,7 @@ test('课程卡片显示各自星星，不把已完成单课冒充组合单元�
   await expect(page.locator('[data-course="lesson49"]')).toContainText('15 / 15 颗星');
   await expect(page.locator('[data-course="lesson50"]')).toContainText('5 / 15 颗星');
   await expect(page.locator('[data-course="soundmark"]')).toContainText('12 / 12 颗星');
-  await page.getByRole('link',{name:'开始学习',exact:true}).click();
+  await page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'开始学习',exact:true}).click();
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 

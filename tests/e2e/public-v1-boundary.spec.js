@@ -13,7 +13,6 @@ const PUBLIC_ROUTES = [
 ];
 const AUDIO_PROBES = [
   { id: 'lesson49', route: '/lesson49/#learn/words', buttonName: 'butcher' },
-  { id: 'unit49-50', route: '/unit49-50/#learn/words', selector: 'button[aria-label="butcher"]', audioDirectory: 'lesson49' },
   { id: 'lesson50', route: '/lesson50/', selector: '.spk:visible' },
   { id: 'lesson51', route: '/lesson51/', selector: '.spk:visible' },
   { id: 'lesson52', route: '/lesson52/', selector: '.spk:visible' },
@@ -25,6 +24,7 @@ const ALLOWED_STORAGE_KEYS = new Set([
   ...['unit1-2','unit3-4','unit5-6'].map(id=>'canran:'+id+':learning:v1:awards:story-card-v1'),
   'canran:unit1-2:learning:v1:awards:grammar-five-zones-v1',
   'canran:unit49-50:learning:v1',
+  'canran:unit49-50:learning:v1:awards:butcher-choices-v2',
   'canran:unit1-2:learning:v1',
   ...PUBLISHED_COURSES.flatMap(course => [
     course.progress?.key,

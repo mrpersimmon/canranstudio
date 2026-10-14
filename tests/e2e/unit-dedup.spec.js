@@ -1,5 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+// Historical 15-star/audio edition; current unit is checked in unit49-50-current/upgrade.
+test.beforeEach(async ({page})=>{await require('../support/unit4950-legacy').legacy(page);});
 const { submitSubject } = require('../support/l49-subject-flow');
 const { finishExam } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 7000 });
@@ -48,15 +50,15 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   await expect(exam.getByRole('button', { name: '查看纪念卡', exact: true })).toBeVisible();
 });
 
-test('Lesson 3–4 合并重复工坊，25题覆盖不同语言判断', async ({ page }) => {
+test('Lesson 3–4 五区33题，语法与综合挑战保留各自判断', async ({ page }) => {
   const { completeActivity } = require('../support/unit3-4-flow');
   await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
   await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '5');
-  await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
-  await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '9');
+  await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+  await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '11');
   await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
-  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 9 / 9');
+  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 11 / 11');
 });
 
 test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断', async ({ page }) => {
@@ -118,7 +120,7 @@ async function priorEdition(page, unit) {
   // is earned through learner controls, never injected into local storage.
   await page.route('**/' + unit + '/content.js*', route => prior
     ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit-dedup-before', unit + '.js'), contentType: 'text/javascript', headers: { 'cache-control': 'no-store' } })
-    : route.continue());
+    : unit==='unit49-50'?route.fallback():route.continue());
   if (unit === 'unit1-2') {
     await page.route(/\/unit1-2\/(?:index\.html)?$/,async route=>{if(!prior)return route.continue();const response=await route.fetch();return route.fulfill({response,body:(await response.text()).replace('<script src="/core/lesson49-icons.js">','<script src="/core/audio-player.js"></script><script src="/core/lesson49-icons.js">')});});
     // Keep the predecessor runner with the predecessor content. Mixing the
@@ -194,7 +196,7 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   await expect(page.locator('#starCount')).toHaveText('6');
   upgrade();
   await page.reload();
-  for (const [activity, count] of [['listen', 5], ['reply', 4]]) await expectFresh(page, 'unit3-4', activity, count);
+  for (const [activity, count] of [['listen', 5], ['reply', 10]]) await expectFresh(page, 'unit3-4', activity, count);
   await page.goto('/unit3-4/#learn/roles');
   // This edition changed reply, but its six story questions exactly match the
   // reviewed predecessor. Keep only the two still-identical story questions.

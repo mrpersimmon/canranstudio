@@ -1,6 +1,5 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { completeUnit } = require('../support/unit49-50-flow');
 
 async function observeNativeAudio(page) {
   await page.addInitScript(() => {
@@ -15,7 +14,7 @@ async function observeNativeAudio(page) {
   });
 }
 
-for (const course of ['lesson49', 'unit49-50']) {
+for (const course of ['lesson49']) {
   test(`${course} 点击词卡、听题与答对音效都在子目录真实播放`, async ({ page }) => {
     await observeNativeAudio(page);
     await page.goto(`/lesson/${course}/#learn/words`);
@@ -51,7 +50,7 @@ test('lesson 子目录直接显示导航，组合单元和返回导航都留在�
   page.on('pageerror', error => failures.push(error.message));
   await page.goto('/lesson/');
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
-  await page.getByRole('link', { name: '开始学习', exact: true }).click();
+  await page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true }).click();
   await expect(page).toHaveURL(/\/lesson\/unit49-50\/#learn\/words$/);
   await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
   await expect.poll(() => page.locator('.unit-word img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
@@ -73,8 +72,7 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
   await page.getByText('单课练习', { exact: true }).click();
   const entries = await page.locator('main a').evaluateAll(links => links.map(link => ({ href: link.href, text: link.textContent })));
   expect(entries.map(entry => new URL(entry.href).pathname)).toEqual([
-    '/lesson/unit1-2/', '/lesson/unit3-4/', '/lesson/unit5-6/', '/lesson/unit7-8/', '/lesson/unit9-10/', '/lesson/unit11-12/', '/lesson/unit13-14/', '/lesson/unit15-16/', '/lesson/unit17-18/', '/lesson/unit19-20/', '/lesson/unit21-22/', '/lesson/unit23-24/', '/lesson/unit25-26/', '/lesson/unit27-28/', '/lesson/unit29-30/',
-    '/lesson/unit31-32/', '/lesson/unit33-34/', '/lesson/unit35-36/', '/lesson/unit37-38/', '/lesson/unit39-40/', '/lesson/unit49-50/',
+    ...Array.from({ length: 45 }, (_, i) => `/lesson/unit${i * 2 + 1}-${i * 2 + 2}/`),
     '/lesson/lesson51/', '/lesson/lesson52/', '/lesson/lesson53/', '/lesson/lesson54/',
     '/lesson/soundmark/', '/lesson/lesson49/', '/lesson/lesson50/'
   ]);
@@ -94,19 +92,12 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
   expect(outside).toEqual([]); expect(errors).toEqual([]);
 });
 
-test('lesson 中走完整单元并下载新版证书，返回导航能继续学习', async ({ page }) => {
+test('lesson 中走完整五区单元，显示五星卡并返回导航继续学习', async ({ page }) => {
   test.setTimeout(90000);
-  await completeUnit(page, { basePath: '/lesson/' });
-  await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('采购小伙伴');
-  await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
-  const dialog = page.getByRole('dialog', { name: '采购纪念', exact: true });
-  await expect(dialog.getByRole('heading', { name: '晚餐采购小达人', exact: true })).toBeVisible();
-  const download = page.waitForEvent('download', { timeout: 15000 });
-  await dialog.getByRole('button', { name: '保存图片', exact: true }).click();
-  expect((await download).suggestedFilename()).toBe('Lesson49-50-采购纪念.png');
-  await dialog.getByRole('button', { name: '关闭', exact: true }).click();
+  const flow=require('../support/unit4950');await flow.story(page,'/lesson');for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base:'/lesson'});
+  await page.goto('/lesson/unit49-50/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('5');await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
   await page.getByRole('link', { name: '我的课程', exact: true }).click();
-  await expect(page.getByRole('link', { name: '继续学习', exact: true })).toHaveAttribute('href', '/lesson/unit49-50/#learn/certificate');
+  await expect(page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '继续学习', exact: true })).toHaveAttribute('href', '/lesson/unit49-50/#learn/certificate');
 });
 
 test('旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以结束', async ({ page }) => {
@@ -117,9 +108,9 @@ test('旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以
     await navigator.serviceWorker.ready;
     if (!navigator.serviceWorker.controller) await new Promise(resolve => navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }));
   });
-  await page.goto('/lesson/unit49-50/#learn/words');
+  await page.goto('/lesson/lesson49/#learn/words');
   await expect.poll(() => page.evaluate(() => navigator.serviceWorker.controller?.scriptURL)).toContain('/lesson/core/subpath-worker.js');
-  await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '肉店小图鉴', exact: true })).toBeVisible();
   await page.locator('.stage-words').getByRole('button', { name: 'butcher', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__nativePlays.some(item =>
     new URL(item.src).pathname === '/lesson/lesson49/audio/butcher.mp3' && item.ended
@@ -132,7 +123,7 @@ test('手机 lesson 导航与单元没有横向溢出，旧首页入口返回新
   await expect(page).toHaveURL(/\/lesson\/$/);
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
-  await page.getByRole('link', { name: '开始学习', exact: true }).click();
+  await page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true }).click();
   await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
 });

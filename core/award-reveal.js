@@ -39,8 +39,9 @@
         '/assets/awards/star-empty.webp', '/assets/awards/paper.webp'].map(src => {
         const image = new Image(); image.src = src; return image.decode();
       })
-    ]).then(([access, preparedStars]) => {
+    ]).then(async ([access, preparedStars]) => {
       if (!preparedStars) return false;
+      await root.CanranAwardCardLayout.prepareFonts(unit.id, access?.student?.name || '');
       view.identity(access && !access.preview ? String(access.student.name || '').trim() : '', access?.preview ? '班级预览' : '登录后显示姓名');
       return true;
     }).catch(() => false); // A visual failure never changes or blocks learning.

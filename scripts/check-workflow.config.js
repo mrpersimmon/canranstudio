@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
-const runtimeInputs = ['award-book', 'core', 'assets', 'home', 'index.html', 'unit49-50', 'unit1-2', 'unit3-4', 'unit5-6', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
+const runtimeInputs = ['award-book', 'core', 'assets', 'home', 'index.html', 'unit49-50', 'unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90', 'unit1-2', 'unit3-4', 'unit5-6', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'unit41-42', 'unit43-44', 'unit45-46', 'unit47-48', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark', 'scripts', 'tests', 'docs', 'deploy', 'README.md', 'CONTEXT.md', 'outputs', 'package.json', 'package-lock.json', 'playwright.config.js'];
 const isDoc = file => /\.md$/i.test(file) || file.startsWith('docs/') || file.startsWith('.superpowers/');
 const isWorkflow = file => /^(scripts\/check-workflow(?:\.config)?\.js|tests\/workflow\/|\.github\/|AGENTS\.md|\.gitignore)/.test(file);
 const unitFiles = root => fs.readdirSync(path.join(root, 'tests/unit')).filter(name => name.endsWith('.test.js')).sort().map(name => 'tests/unit/' + name);
@@ -42,6 +42,31 @@ function tasks(root, files) {
     'browser-unit3536': browser(['tests/e2e/unit35-36']),
     'browser-unit3738': browser(['tests/e2e/unit37-38']),
     'browser-unit3940': browser(['tests/e2e/unit39-40']),
+    'browser-unit4142': browser(['tests/e2e/unit41-42']),
+    'browser-unit4344': browser(['tests/e2e/unit43-44']),
+    'browser-unit5758': browser(['tests/e2e/unit57-58.spec.js','tests/e2e/unit57-58-story-layout.spec.js']),
+    'browser-unit5960': browser(['tests/e2e/unit59-60.spec.js','tests/e2e/unit59-60-story-layout.spec.js']),
+    'browser-unit6162': browser(['tests/e2e/unit61-62.spec.js','tests/e2e/unit61-62-story-layout.spec.js','tests/e2e/unit61-62-keepsake-art.spec.js']),
+    'browser-unit6566': browser(['tests/e2e/unit65-66.spec.js','tests/e2e/unit65-66-story-layout.spec.js']),
+    'browser-unit7172': browser(['tests/e2e/unit71-72.spec.js','tests/e2e/unit71-72-story-layout.spec.js']),
+    'browser-unit7374': browser(['tests/e2e/unit73-74.spec.js','tests/e2e/unit73-74-story-layout.spec.js']),
+    'browser-unit7576': browser(['tests/e2e/unit75-76.spec.js','tests/e2e/unit75-76-story-layout.spec.js']),
+    'browser-unit8182': browser(['tests/e2e/unit81-82.spec.js','tests/e2e/unit81-82-story-layout.spec.js']),
+    'browser-unit8384': browser(['tests/e2e/unit83-84.spec.js','tests/e2e/unit83-84-story-layout.spec.js']),
+    'browser-unit8586': browser(['tests/e2e/unit85-86.spec.js','tests/e2e/unit85-86-story-layout.spec.js']),
+    'browser-unit8788': browser(['tests/e2e/unit87-88.spec.js','tests/e2e/unit87-88-story-layout.spec.js']),
+    'browser-unit8990': browser(['tests/e2e/unit89-90.spec.js','tests/e2e/unit89-90-story-layout.spec.js']),
+    'browser-unit7980': browser(['tests/e2e/unit79-80.spec.js','tests/e2e/unit79-80-story-layout.spec.js']),
+    'browser-unit7778': browser(['tests/e2e/unit77-78.spec.js','tests/e2e/unit77-78-story-layout.spec.js']),
+    'browser-unit6970': browser(['tests/e2e/unit69-70.spec.js','tests/e2e/unit69-70-story-layout.spec.js']),
+    'browser-unit6768': browser(['tests/e2e/unit67-68.spec.js','tests/e2e/unit67-68-story-layout.spec.js']),
+    'browser-unit6364': browser(['tests/e2e/unit63-64.spec.js','tests/e2e/unit63-64-story-layout.spec.js']),
+    'browser-unit5556': browser(['tests/e2e/unit55-56.spec.js','tests/e2e/unit55-56-story-layout.spec.js']),
+    'browser-unit5354': browser(['tests/e2e/unit53-54.spec.js','tests/e2e/unit53-54-story-layout.spec.js']),
+    'browser-unit5152': browser(['tests/e2e/unit51-52.spec.js','tests/e2e/unit51-52-story-layout.spec.js']),
+    'browser-unit4950': browser(['tests/e2e/unit49-50-current.spec.js','tests/e2e/unit49-50-story-layout.spec.js','tests/e2e/unit49-50-upgrade.spec.js']),
+    'browser-unit4748': browser(['tests/e2e/unit47-48']),
+    'browser-unit4546': browser(['tests/e2e/unit45-46']),
     'browser-certificates': browser(['tests/e2e/unit49-50-certificate.spec.js', 'tests/e2e/unit35-36.spec.js', '--grep', '证书|领奖|打印|图像加载']),
     'browser-units1-30-tasks': browser(['tests/e2e/units1-30-tasks.spec.js', 'tests/e2e/units1-30-revision.spec.js', 'tests/e2e/units1-30-scene-cues.spec.js', 'tests/e2e/units-room-tasks.spec.js', 'tests/e2e/units1-30-acceptance.spec.js']),
     'browser-retry-feedback': browser(['tests/e2e/retry-feedback.spec.js', 'tests/e2e/l49-focus.spec.js']),
@@ -90,8 +115,33 @@ function select(files) {
   if (code.some(file => /^(unit35-36\/|assets\/unit35-36\/|tests\/support\/unit35-36-flow\.js)/.test(file))) selected.push('browser-unit3536');
   if (code.some(file => /^(unit37-38\/|assets\/unit37-38\/|tests\/support\/unit37-38-flow\.js)/.test(file))) selected.push('browser-unit3738');
   if (code.some(file => /^(unit39-40\/|assets\/unit39-40\/|tests\/support\/unit39-40-flow\.js)/.test(file))) selected.push('browser-unit3940');
+  if (code.some(file => /^(unit43-44\/|assets\/unit43-44\/|tests\/support\/unit4344\.js)/.test(file))) selected.push('browser-unit4344');
+  if (code.some(file => /^(unit57-58\/|assets\/unit57-58\/|tests\/support\/unit5758\.js)/.test(file))) selected.push('browser-unit5758');
+  if (code.some(file => /^(unit59-60\/|assets\/unit59-60\/|tests\/support\/unit5960\.js)/.test(file))) selected.push('browser-unit5960');
+  if (code.some(file => /^(unit61-62\/|assets\/unit61-62\/|tests\/support\/unit6162\.js)/.test(file))) selected.push('browser-unit6162');
+  if (code.some(file => /^(unit65-66\/|assets\/unit65-66\/|tests\/support\/unit6566\.js)/.test(file))) selected.push('browser-unit6566');
+  if (code.some(file => /^(unit67-68\/|assets\/unit67-68\/|tests\/support\/unit6768\.js)/.test(file))) selected.push('browser-unit6768');
+  if (code.some(file => /^(unit71-72\/|assets\/unit71-72\/|tests\/support\/unit7172\.js)/.test(file))) selected.push('browser-unit7172');
+  if (code.some(file => /^(unit73-74\/|assets\/unit73-74\/|tests\/support\/unit7374\.js)/.test(file))) selected.push('browser-unit7374');
+  if (code.some(file => /^(unit75-76\/|assets\/unit75-76\/|tests\/support\/unit7576\.js)/.test(file))) selected.push('browser-unit7576');
+  if (code.some(file => /^(unit77-78\/|assets\/unit77-78\/|tests\/support\/unit7778\.js)/.test(file))) selected.push('browser-unit7778');
+  if (code.some(file => /^(unit79-80\/|assets\/unit79-80\/|tests\/support\/unit7980\.js)/.test(file))) selected.push('browser-unit7980');
+  if (code.some(file => /^(unit81-82\/|assets\/unit81-82\/|tests\/support\/unit8182\.js)/.test(file))) selected.push('browser-unit8182');
+  if (code.some(file => /^(unit83-84\/|assets\/unit83-84\/|tests\/support\/unit8384\.js)/.test(file))) selected.push('browser-unit8384');
+  if (code.some(file => /^(unit87-88\/|assets\/unit87-88\/|tests\/support\/unit8788\.js)/.test(file))) selected.push('browser-unit8788');
+  if (code.some(file => /^(unit89-90\/|assets\/unit89-90\/|tests\/support\/unit8990\.js)/.test(file))) selected.push('browser-unit8990');
+  if (code.some(file => /^(unit85-86\/|assets\/unit85-86\/|tests\/support\/unit8586\.js)/.test(file))) selected.push('browser-unit8586');
+  if (code.some(file => /^(unit69-70\/|assets\/unit69-70\/|tests\/support\/unit6970\.js)/.test(file))) selected.push('browser-unit6970');
+  if (code.some(file => /^(unit63-64\/|assets\/unit63-64\/|tests\/support\/unit6364\.js)/.test(file))) selected.push('browser-unit6364');
+  if (code.some(file => /^(unit55-56\/|assets\/unit55-56\/|tests\/support\/unit5556\.js)/.test(file))) selected.push('browser-unit5556');
+  if (code.some(file => /^(unit53-54\/|assets\/unit53-54\/|tests\/support\/unit5354\.js)/.test(file))) selected.push('browser-unit5354');
+  if (code.some(file => /^(unit51-52\/|assets\/unit51-52\/|tests\/support\/unit5152\.js)/.test(file))) selected.push('browser-unit5152');
+  if (code.some(file => /^(unit49-50\/|assets\/unit49-50\/|tests\/support\/unit4950\.js)/.test(file))) selected.push('browser-unit4950');
+  if (code.some(file => /^(unit47-48\/|assets\/unit47-48\/|tests\/support\/unit4748\.js)/.test(file))) selected.push('browser-unit4748');
+  if (code.some(file => /^(unit45-46\/|assets\/unit45-46\/|tests\/support\/unit4546\.js)/.test(file))) selected.push('browser-unit4546');
+  if (code.some(file => /^(unit41-42\/|assets\/unit41-42\/|tests\/support\/unit4142\.js)/.test(file))) selected.push('browser-unit4142');
   if (code.some(file => /^unit49-50\/certificate\.(?:js|css)$/.test(file))) selected.push('browser-certificates');
-  if (code.some(file => /^(award-book\/|scripts\/award-book-bundle\.js$|core\/(?:award-rules|unit-awards|story-certificate|award-reveal|award-gif)\.|core\/vendor\/gifenc|assets\/awards\/|tests\/support\/unit1-2-award-flow\.js)/.test(file))) selected.push('browser-unit12', 'browser-login');
+  if (code.some(file => /^(award-book\/|scripts\/award-book-bundle\.js$|core\/(?:award-rules|unit-awards|story-certificate|award-reveal|award-gif|award-card-layout)\.|core\/vendor\/gifenc|assets\/awards\/|tests\/support\/unit1-2-award-flow\.js)/.test(file))) selected.push('browser-unit12', 'browser-login');
   if (code.some(file => /^(unit29-30\/|assets\/unit29-30\/|tests\/support\/unit29-30-flow\.js)/.test(file))) selected.push('browser-unit2930');
   if (code.some(file => /^(core\/lesson49-task-inputs\.(?:js|css)$|unit(?:1-2|3-4|5-6|7-8|9-10|11-12|13-14|15-16|17-18|19-20|21-22|23-24|25-26|27-28|29-30)\/(?:content|unit|scene)\.(?:js|css)$|tests\/(?:e2e\/(?:units1-30-|units-room-tasks)|support\/units1-30-|fixtures\/units1-30-tasks-before\/))/.test(file))) selected.push('browser-units1-30-tasks');
   if (code.some(file => /^(unit[^/]*\/|lesson\d+\/|soundmark\/|core\/(?:lesson49-practice|lesson49-subjects|course-catalog)\.js|tests\/(?:e2e\/retry-feedback\.spec\.js|fixtures\/l49-subjects-before-retry\.js))/.test(file))) selected.push('browser-retry-feedback');

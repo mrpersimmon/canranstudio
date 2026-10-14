@@ -59,11 +59,14 @@
       finish.classList.add('is-celebrating');
       const start = performance.now();
       const numbers = [...stats.querySelectorAll('.completion-number')];
-      [...stats.children].forEach((card, i) => card.animate([
+      const entrances = [...stats.children].map((card, i) => card.animate([
         { transform: 'translateY(16px) scale(.94)', opacity: 0 },
         { transform: 'translateY(-3px) scale(1.025)', opacity: 1, offset: .72 },
         { transform: 'none', opacity: 1 }
       ], { duration: 520, delay: i * 110, easing: 'ease-out', fill: 'backwards' }));
+      // Numeric RAF timing and compositor animation timing can diverge.
+      // A result is settled only after all cards finish their actual entrance.
+      const entrancesFinished = Promise.allSettled(entrances.map(animation => animation.finished));
       function count(now) {
         numbers.forEach((number, i) => {
           const progress = Math.max(0, Math.min(1, (now - start - i * 110) / 600));
@@ -72,7 +75,9 @@
         if (now - start < 850 && finish.isConnected) root.requestAnimationFrame(count);
         else {
           numbers.forEach((number, i) => { if (values[i] !== null) number.textContent = String(values[i]); });
-          finish.classList.remove('is-celebrating'); finish.dataset.resultMotion = 'finished';
+          entrancesFinished.then(() => {
+            finish.classList.remove('is-celebrating'); finish.dataset.resultMotion = 'finished';
+          });
         }
       }
       root.requestAnimationFrame(count);
@@ -82,8 +87,7 @@
     document.addEventListener('visibilitychange', tryStart);
     retry = root.setTimeout(tryStart, 0);
   }
-  function render({ finish, activity, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false }) {
-    const theme = themes[activity];
+  function render({ finish, activity, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false, theme = themes[activity], artwork = null }) {
     const stats = finish.querySelector('.completion-stats');
     const values = [...stats.querySelectorAll('.completion-number')].map(number => number.textContent === '—' ? null : Number(number.textContent));
     const title = node('p', 'completion-title', theme.title); title.setAttribute('role', 'heading'); title.setAttribute('aria-level', '4'); title.tabIndex = -1;
@@ -96,7 +100,7 @@
       onward.replaceChildren(node('span', 'completion-next-prefix', '下一站'), node('span', 'completion-next-name', label.replace(/^下一站：/, '')));
     }
     finish.classList.add('completion-card'); finish.dataset.activity = activity;
-    finish.replaceChildren(illustration(theme), title, ...(caption ? [caption] : []), stats, actions);
+    finish.replaceChildren(artwork || illustration(theme), title, ...(caption ? [caption] : []), stats, actions);
     if (awardStatus) actions.before(node('p', 'completion-award', awardStatus));
     if (details?.childElementCount) finish.append(details);
     if (celebrate) celebrateResult(finish, stats, values, waitForCelebration);

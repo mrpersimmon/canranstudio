@@ -1,0 +1,108 @@
+/* Pantry palette; answer controls retain the shared meaning and shapes. */
+.unit4344-workspace{--unit-page:#f5f9f7;--unit-wash:#edf5f4;--unit-line:#bad2cd;--unit-accent:#4e797b;--shelf-paper:#fff8e9;--shelf-line:#e2cda7;--unit-scene:url('../assets/unit43-44/room.svg')}
+.unit4344-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit4344-workspace .unit-cover>div:last-child{padding:32px}
+.unit4344-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit4344-workspace .unit-cover-art>img{display:block;width:100%;height:auto}
+.unit4344-workspace .unit-word{height:242px;gap:7px}
+.unit4344-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit4344-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
+.unit4344-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+@media(max-width:760px){.unit4344-workspace .unit-cover{grid-template-columns:1fr}.unit4344-workspace .unit-cover>div:last-child{padding:24px}.unit4344-workspace .unit-word{height:234px}}
+.unit4344-workspace .practice-scene{display:block;width:132px;height:132px;object-fit:contain;margin:16px auto}
+.unit4344-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit4344-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.unit4344-workspace .offline-task summary::after{content:'＋'}.unit4344-workspace .offline-task[open] summary::after{content:'−'}
+.unit4344-workspace .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.unit4344-workspace .reference-card{padding:14px;border-radius:16px;background:#f5f5e9;text-align:center;font-size:16px}
+.unit4344-workspace .reference-card img{display:block;width:65px;height:65px;object-fit:contain;margin:8px auto}
+.unit4344-workspace .reference-card p{font:700 22px/1.4 'Baloo 2',sans-serif;margin:8px 0}
+.unit4344-workspace .offline-task li,.unit4344-workspace .offline-task p{overflow-wrap:anywhere;font:19px/1.7 'Baloo 2',sans-serif}
+.unit4344-workspace .activity-actions{display:flex;justify-content:center;margin:20px auto}
+.unit4344-workspace .grammar-runner{max-width:740px;margin-inline:auto}
+.unit4344-workspace .grammar-model{background:#edf5f4;border-color:#bad2cd}
+.unit4344-workspace .grammar-model-line+.grammar-model-line{border-color:#d4dcc5}
+.unit4344-workspace .grammar-rule{color:var(--brown)}
+
+@media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}
+/* The tea table has one real set of props; finding is different from moving. */
+.unit4344-workspace .tea-world{height:490px;position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--unit-line);border-radius:18px;background:var(--unit-scene) center bottom/cover no-repeat}
+.unit4344-workspace .tea-actor{position:absolute;bottom:16px;width:154px;transform:translateX(-50%);text-align:center;z-index:3;line-height:26px}
+.unit4344-workspace .tea-actor>img{display:block;width:100%;aspect-ratio:165/235;object-fit:contain}
+.unit4344-workspace .tea-actor>span{display:inline-block;padding:0 8px;background:#fffaf0;border-radius:8px;font:600 15px/26px 'Baloo 2',sans-serif}
+.unit4344-workspace .actor-sam{left:12%}.unit4344-workspace .actor-penny{left:87%}
+.unit4344-workspace .tea-counter{position:absolute;bottom:23px;left:50%;width:53%;height:157px;transform:translateX(-50%);z-index:1}
+.unit4344-workspace .tea-cabinet{position:absolute;bottom:162px;left:71%;width:100px;height:125px;transform:translateX(-50%)}
+.unit4344-workspace .tea-tin{position:absolute;bottom:161px;left:51%;width:76px;height:101px;transform:translateX(-50%);z-index:2}
+.unit4344-workspace .tea-pot{position:absolute;bottom:140px;left:47%;width:110px;height:96px;transform:translateX(-50%);z-index:4}
+.unit4344-workspace .tea-kettle{position:absolute;bottom:145px;left:33%;width:96px;height:100px;transform:translateX(-50%);z-index:3}
+.unit4344-workspace .tea-cups{position:absolute;bottom:197px;left:71%;width:82px;height:86px;transform:translateX(-50%);z-index:2}
+.unit4344-workspace [data-cups=counter] .tea-cups{left:33%;bottom:129px;width:116px;height:80px;z-index:5}
+.unit4344-workspace .tea-steam{position:absolute;bottom:224px;left:28%;width:54px;height:72px;z-index:3}
+.unit4344-workspace [data-found=true] .tea-tin,.unit4344-workspace [data-cups-found=true] .tea-cups{filter:drop-shadow(0 0 6px #e0bc6d)}
+.unit4344-workspace .dialogue-actor.is-current>span{outline:2px solid #719e98;outline-offset:2px}
+.unit4344-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:1fr;padding:0;gap:0;background:none;position:relative}
+.unit4344-workspace .stage-text .tea-world{grid-area:1/1}
+.unit4344-workspace #lessonWorkspace .stage-text .dialogue-actor{width:154px;grid-row:auto;align-self:auto}
+.unit4344-workspace #lessonWorkspace .stage-text .dialogue-actor>img{width:100%;height:auto}
+.unit4344-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;display:flex;flex-direction:column;gap:14px;width:59%;height:205px;margin:12px auto 0;padding:10px 14px;background:#fffdf63b;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#8ab4ae transparent}
+.unit4344-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}
+.unit4344-workspace .bubble-row.penny{justify-content:flex-end}
+.unit4344-workspace .bubble{position:relative;width:fit-content;max-width:96%;min-height:0;flex:none;margin:0;padding:10px 14px;border:2px solid #96b8b3;background:#fffaf0;border-radius:17px;box-shadow:0 3px 0 #c7d8cb}
+.unit4344-workspace .bubble-row.sam .bubble{border-bottom-left-radius:4px}.unit4344-workspace .bubble-row.penny .bubble{border-bottom-right-radius:4px;background:#fff0d0;border-color:#d7b677}
+.unit4344-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit4344-workspace .bubble .btext{font-size:22px;line-height:1.35;white-space:normal}
+.unit4344-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit4344-workspace .bubble .bbtns{margin-top:8px}
+.unit4344-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:12px auto}
+.unit4344-workspace .tea-runner{max-width:880px;margin:auto}.unit4344-workspace .tea-intro h3{text-align:center;margin:10px auto;font-size:21px;line-height:1.4;white-space:pre-line}
+.unit4344-workspace .tea-intro .practice-context{margin:8px auto 14px;white-space:pre-line}
+.unit4344-workspace .tea-application{height:300px;margin-bottom:18px}
+.unit4344-workspace .tea-application .tea-actor{width:121px;bottom:8px}
+.unit4344-workspace .tea-application .tea-counter{bottom:0;height:128px}
+.unit4344-workspace .tea-application .tea-kettle{bottom:103px;width:86px;height:91px}
+.unit4344-workspace .tea-application .tea-pot{bottom:98px;width:100px;height:90px}
+.unit4344-workspace .tea-application .tea-tin{bottom:124px;width:68px;height:90px}
+.unit4344-workspace .tea-application .tea-cabinet{bottom:101px;height:121px}
+.unit4344-workspace .tea-application .tea-cups{bottom:134px;height:82px}
+.unit4344-workspace .tea-application[data-cups=counter] .tea-cups{bottom:84px;height:76px}
+.unit4344-workspace .tea-inventory{position:absolute;top:8px;left:16%;right:16%;margin:0;text-align:center;padding:7px 9px;background:#fffaf0;border-radius:10px;font:16px/1.4 'Baloo 2',sans-serif;z-index:4}
+.unit4344-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(3,minmax(0,1fr));max-width:880px;margin:16px auto;gap:12px}
+.unit4344-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 8px;text-align:center;font-size:21px}
+.unit4344-workspace .practice-options .picture-option img{width:104px;height:104px;max-width:100%;object-fit:contain}
+.unit4344-workspace .tea-model{display:flex;justify-content:center;align-items:stretch;gap:14px;max-width:680px;padding:12px 16px;margin-bottom:14px;border-radius:16px}
+.unit4344-workspace .tea-model .grammar-model-line{flex:1;min-width:0;padding:0;border:0;text-align:center}
+.unit4344-workspace .tea-model .grammar-model-line>p{font-size:20px;line-height:1.35}
+.unit4344-workspace .tea-model .grammar-model-line>small{font-size:13px;line-height:1.4}
+.unit4344-workspace .grammar-example-art{display:block;width:56px;height:54px;object-fit:contain;margin:0 auto 5px}
+.unit4344-workspace .grammar-intro h3{font-size:21px;line-height:1.4;margin:12px auto 14px}
+.unit4344-workspace .grammar-runner .practice-answer-note{height:90px!important}
+.unit4344-workspace .grammar-runner .cloze-row{padding:10px 12px;margin-bottom:10px}
+.unit4344-workspace .plural-reference{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:400px;margin:12px auto;font:20px/1.5 'Baloo 2',sans-serif}
+.unit4344-workspace .plural-reference dd{margin:0}.unit4344-workspace .plural-reference dt::after{content:' →';color:#779b8b}
+.unit4344-workspace .tea-completion{width:min(440px,100%);height:208px;max-width:440px}
+.unit4344-workspace .tea-completion>img{position:static;display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:600px){
+ .unit4344-workspace .reference-grid{grid-template-columns:1fr}
+ .unit4344-workspace .stage-text .tea-world{height:262px;background-size:auto 100%}
+ .unit4344-workspace #lessonWorkspace .stage-text .dialogue-stage{gap:8px}
+ .unit4344-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:2/1;width:100%;height:304px;margin:0;padding:12px;background:#edf5f4;border:1px solid var(--unit-line)}
+ .unit4344-workspace #lessonWorkspace .stage-text .dialogue-actor,.unit4344-workspace .tea-application .tea-actor{width:75px;bottom:9px}
+ .unit4344-workspace .actor-sam{left:12%}.unit4344-workspace .actor-penny{left:88%}
+ .unit4344-workspace .tea-counter,.unit4344-workspace .tea-application .tea-counter{width:65%;height:92px;left:50%;bottom:15px}
+ .unit4344-workspace .tea-kettle,.unit4344-workspace .tea-application .tea-kettle{width:57px;height:65px;left:33%;bottom:91px}
+ .unit4344-workspace .tea-pot,.unit4344-workspace .tea-application .tea-pot{width:67px;height:60px;left:49%;bottom:86px}
+ .unit4344-workspace .tea-tin,.unit4344-workspace .tea-application .tea-tin{width:49px;height:61px;left:54%;bottom:110px}
+ .unit4344-workspace .tea-cabinet,.unit4344-workspace .tea-application .tea-cabinet{width:62px;height:87px;left:71%;bottom:123px}
+ .unit4344-workspace .tea-cups,.unit4344-workspace .tea-application .tea-cups{width:48px;height:56px;left:71%;bottom:146px}
+ .unit4344-workspace [data-cups=counter] .tea-cups,.unit4344-workspace .tea-application[data-cups=counter] .tea-cups{width:68px;height:52px;left:33%;bottom:80px}
+ .unit4344-workspace .tea-steam{width:32px;height:47px;left:28%;bottom:139px}
+ .unit4344-workspace .bubble .btext{font-size:20px}.unit4344-workspace .tea-application{height:260px}
+ .unit4344-workspace .tea-inventory{left:3%;right:3%;font-size:13px}
+ .unit4344-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .unit4344-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:150px;font-size:18px;padding:10px 5px}
+ .unit4344-workspace .practice-options .picture-option img{width:86px;height:86px}
+ .unit4344-workspace .practice-options:has(.picture-option)>.opt-btn:last-child:nth-child(odd){grid-column:1/-1;width:calc((100% - 10px)/2);justify-self:center}
+ .unit4344-workspace .tea-model{gap:10px;padding:10px}.unit4344-workspace .tea-model .grammar-model-line>p{font-size:18px}
+ .unit4344-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit4344-workspace .grammar-rule{font-size:13px}
+ .unit4344-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit4344-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}
+ .unit4344-workspace .tea-completion{height:162px}
+}

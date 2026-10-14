@@ -1,0 +1,257 @@
+{
+  "generator": "imagegen",
+  "sources": {
+    "card": "exec-b4509af8-a70b-4d8e-b27b-5e6367421d67.png",
+    "christine": "exec-5dc61c18-2516-4747-ab84-0e055d544e87.png",
+    "ann": "exec-b80dedaf-2e21-4b2a-ac9d-f7d19463cb72.png"
+  },
+  "styleReference": "assets/unit45-46/keepsake-story-v1.webp",
+  "derivatives": {
+    "christine": {
+      "source": "exec-5dc61c18-2516-4747-ab84-0e055d544e87.png",
+      "region": {
+        "left": 0,
+        "top": 0,
+        "width": 572,
+        "height": 916
+      },
+      "policy": "one original pose per third; retain full frame and alpha, no redrawing"
+    },
+    "christine-offer": {
+      "source": "exec-5dc61c18-2516-4747-ab84-0e055d544e87.png",
+      "region": {
+        "left": 572,
+        "top": 0,
+        "width": 573,
+        "height": 916
+      },
+      "policy": "one original pose per third; retain full frame and alpha, no redrawing"
+    },
+    "christine-sugar": {
+      "source": "exec-5dc61c18-2516-4747-ab84-0e055d544e87.png",
+      "region": {
+        "left": 1145,
+        "top": 0,
+        "width": 572,
+        "height": 916
+      },
+      "policy": "one original pose per third; retain full frame and alpha, no redrawing"
+    },
+    "ann": {
+      "source": "exec-b80dedaf-2e21-4b2a-ac9d-f7d19463cb72.png",
+      "region": {
+        "left": 0,
+        "top": 0,
+        "width": 591,
+        "height": 887
+      },
+      "policy": "one original pose per third; retain full frame and alpha, no redrawing"
+    },
+    "ann-cup": {
+      "source": "exec-b80dedaf-2e21-4b2a-ac9d-f7d19463cb72.png",
+      "region": {
+        "left": 591,
+        "top": 0,
+        "width": 592,
+        "height": 887
+      },
+      "policy": "one original pose per third; retain full frame and alpha, no redrawing"
+    },
+    "ann-biscuit": {
+      "source": "exec-b80dedaf-2e21-4b2a-ac9d-f7d19463cb72.png",
+      "region": {
+        "left": 1183,
+        "top": 0,
+        "width": 591,
+        "height": 887
+      },
+      "policy": "one original pose per third; retain full frame and alpha, no redrawing"
+    }
+  },
+  "files": {
+    "assets/unit47-48/ann-biscuit.svg": {
+      "bytes": 188757,
+      "sha256": "dc1a979649440dc8f6322dcf0251d6e7cd3f8cf7a2b19dd9255caa7962e6fe26"
+    },
+    "assets/unit47-48/ann-cup.svg": {
+      "bytes": 188986,
+      "sha256": "d88eec8265640ddda006e4e60ab5eb3f55f1b5afd89a5319d8700ed5ff630040"
+    },
+    "assets/unit47-48/ann.svg": {
+      "bytes": 188269,
+      "sha256": "6103bf9d74a7c148d0c0c7381f9a22265d62253b81303f644b2639c99957277c"
+    },
+    "assets/unit47-48/apple.svg": {
+      "bytes": 411,
+      "sha256": "ea323bae246847759289eb98fe7e9b5ff662c8fcd0946c0b33715474e764b91d"
+    },
+    "assets/unit47-48/banana.svg": {
+      "bytes": 357,
+      "sha256": "1a94ad0316a240df968a18b21e76b49f7cc0a100055b7f44bba52a32fe8934c2"
+    },
+    "assets/unit47-48/beer.svg": {
+      "bytes": 431,
+      "sha256": "10e566c761a96e73436d8cfd3abe7563b101f204e017e7d60be82ca0266f70d8"
+    },
+    "assets/unit47-48/biscuit.svg": {
+      "bytes": 490,
+      "sha256": "d69be5436ae5597b80e163a35b5529c1456ed7763c9c83cf59159455d8ee961a"
+    },
+    "assets/unit47-48/black-coffee.svg": {
+      "bytes": 429,
+      "sha256": "a355be4de44290c77e0dfb724a9f4a93a565654b165b0e6aa60ddf32e77a3755"
+    },
+    "assets/unit47-48/blackboard.svg": {
+      "bytes": 432,
+      "sha256": "d10fa6a1448e58882ce25fe286a31d63a25898b38b316b6e32e9eb52ea4de26b"
+    },
+    "assets/unit47-48/books.svg": {
+      "bytes": 508,
+      "sha256": "a4d77dd75d7f0c81cdd0f3a625578c92bf2b500847c670a54cc0af8477ad858c"
+    },
+    "assets/unit47-48/butter.svg": {
+      "bytes": 330,
+      "sha256": "1cf98465988c537aea070902e61bd37995534909b3e89698706dc99a5b121b1e"
+    },
+    "assets/unit47-48/choice.svg": {
+      "bytes": 521,
+      "sha256": "4b1e0efdf95c81ff093af86b7b735921287aae485ac4e5cbd78c46d8c6a81ffc"
+    },
+    "assets/unit47-48/christine-offer.svg": {
+      "bytes": 197609,
+      "sha256": "333ce789279ab730246b5d69cceb73b0e94191b1a593a0b98086db210e68a7b2"
+    },
+    "assets/unit47-48/christine-sugar.svg": {
+      "bytes": 192613,
+      "sha256": "99bcbe2bef987b531fc660a596fb26cc223c39da924b6d8dd7ad31b804f00b1c"
+    },
+    "assets/unit47-48/christine.svg": {
+      "bytes": 184953,
+      "sha256": "772e2473298efce1b4ffcb93a5426d6881af7388653f8feda301e0fd1eeb26ac"
+    },
+    "assets/unit47-48/coffee-biscuit.svg": {
+      "bytes": 847,
+      "sha256": "6ff6e73dff9979a0ec5683429314ae7c301442eecd1021646fc9d75700917c8b"
+    },
+    "assets/unit47-48/coffee.svg": {
+      "bytes": 429,
+      "sha256": "a355be4de44290c77e0dfb724a9f4a93a565654b165b0e6aa60ddf32e77a3755"
+    },
+    "assets/unit47-48/completion-scene.svg": {
+      "bytes": 1317809,
+      "sha256": "83d4e9474590d76bdad236dfae446764e5ad4d669c8c6dddc60148ca6e861b6e"
+    },
+    "assets/unit47-48/cover-scene.svg": {
+      "bytes": 1317809,
+      "sha256": "f916ec3f1e94078c735ce8c1ddf14b0431ad4ffd777c9818115e13b868a08ce9"
+    },
+    "assets/unit47-48/cup.svg": {
+      "bytes": 429,
+      "sha256": "c6302695a4c973ada10f59de02b76955133e503baf64444b64b6974c90990fa8"
+    },
+    "assets/unit47-48/egg.svg": {
+      "bytes": 299,
+      "sha256": "d38260ab9ee7aa4c29b7f00ef3ade5dd135fd0306d2e413c6f4cddf4fd55768e"
+    },
+    "assets/unit47-48/fresh.svg": {
+      "bytes": 426,
+      "sha256": "98332f7445043f9888df623c3f46dd699906d39562ff52c577c2b77897a39ba8"
+    },
+    "assets/unit47-48/honey.svg": {
+      "bytes": 492,
+      "sha256": "19925586f35b8c77a393c314ccb774b28206057c309b5c69d7e005712fdd24d7"
+    },
+    "assets/unit47-48/ice-cream.svg": {
+      "bytes": 462,
+      "sha256": "53b1a2f45eb41eca7093c0f0a22424406852eb7ca4a36af729ba1736cdf2acd0"
+    },
+    "assets/unit47-48/jam.svg": {
+      "bytes": 444,
+      "sha256": "d3369a4859d375310988b8adcf7a87e26aa5afcd40aee6f61eb93a108a2b0ff4"
+    },
+    "assets/unit47-48/like.svg": {
+      "bytes": 546,
+      "sha256": "c16111407cfef186715370a68a8b617b572298db81c057169ada340b180d65c6"
+    },
+    "assets/unit47-48/milk-biscuits.svg": {
+      "bytes": 1127,
+      "sha256": "5b69050acad72d60e477aa22e160316a4ee2cbbaf11bbd07fc3cda4112122505"
+    },
+    "assets/unit47-48/milk-jug.svg": {
+      "bytes": 368,
+      "sha256": "bf843ed521611be4297090354a1e6499d054fa4ebe0e8c39fd02155f1c5a3a6a"
+    },
+    "assets/unit47-48/milk.svg": {
+      "bytes": 334,
+      "sha256": "d703396e2c460a3f9f73907baa09e7f15567297a06540cf59b50c399c276c685"
+    },
+    "assets/unit47-48/orange.svg": {
+      "bytes": 373,
+      "sha256": "1e2a45657ce8744b31cfbedad26911b2a171dd03884bd5be7dfb4223c6d81b20"
+    },
+    "assets/unit47-48/plate.svg": {
+      "bytes": 279,
+      "sha256": "9fcc9cce38f434d6c6f8c99141055999161c6118b4374ca483f916a27f92a93b"
+    },
+    "assets/unit47-48/pure.svg": {
+      "bytes": 587,
+      "sha256": "099e8374d6dfd948072e227685189367546144d154ae8e2b9e4699a2e8a06ef1"
+    },
+    "assets/unit47-48/ripe.svg": {
+      "bytes": 357,
+      "sha256": "1a94ad0316a240df968a18b21e76b49f7cc0a100055b7f44bba52a32fe8934c2"
+    },
+    "assets/unit47-48/room.svg": {
+      "bytes": 625,
+      "sha256": "69dee6cd23240ad7491ef37e72ac00eb6a3a5c17dcee1016312fe5dcb61de66a"
+    },
+    "assets/unit47-48/sugar.svg": {
+      "bytes": 473,
+      "sha256": "2dcd732b1384c2d056580075d7ffa5a6f8e580c4bcf3ad5a589ab6e923374414"
+    },
+    "assets/unit47-48/sweet.svg": {
+      "bytes": 373,
+      "sha256": "1e2a45657ce8744b31cfbedad26911b2a171dd03884bd5be7dfb4223c6d81b20"
+    },
+    "assets/unit47-48/table.svg": {
+      "bytes": 466,
+      "sha256": "eb49f83b13a0b2a1eb22558d9b3ef804a9d7819edaf2cc68e4283b7e06465468"
+    },
+    "assets/unit47-48/tea-biscuit.svg": {
+      "bytes": 847,
+      "sha256": "59da2ac2a610a82af9b178ca2dd6d5226ed7d0a72298f909cab14078b8d30900"
+    },
+    "assets/unit47-48/tea.svg": {
+      "bytes": 429,
+      "sha256": "3fecb1a94523ed416e098b85a6a5006332327935292e138b18daf49554e5467d"
+    },
+    "assets/unit47-48/want.svg": {
+      "bytes": 555,
+      "sha256": "8adf4b523f6debd03ab56b505f3e2dcf47623bd800861ee7164f6f6ec2cb9cb5"
+    },
+    "assets/unit47-48/whisky.svg": {
+      "bytes": 410,
+      "sha256": "5f1ae136ad5360d7bfd679c6c00073af06bf4b63d20f6371348f6d65067e858e"
+    },
+    "assets/unit47-48/wine.svg": {
+      "bytes": 440,
+      "sha256": "e5c633dced39891770562e9ea8417c13d46ad8227745a0ce0786d28b809ad171"
+    },
+    "assets/unit47-48/keepsake-story-v1.webp": {
+      "bytes": 134244,
+      "sha256": "c5c5cc77e787620ad1b337203428eca3f4bac4114835fcd9ae370ea9ef5bcbb4"
+    },
+    "docs/butcher-version/evidence/2026-10-13-0048-unit47-48/ann-source.png": {
+      "bytes": 1232414,
+      "sha256": "9a0640da9a204379ae8bb7d26c96d300ce1286ffec162b73f6d881b765d58279"
+    },
+    "docs/butcher-version/evidence/2026-10-13-0048-unit47-48/card-source.png": {
+      "bytes": 1981647,
+      "sha256": "3e5cdef3810218a2a6a0dd84dbdf6b8764ef8d304edef60e37226338302c3a64"
+    },
+    "docs/butcher-version/evidence/2026-10-13-0048-unit47-48/christine-source.png": {
+      "bytes": 1225877,
+      "sha256": "9ce2a3ab5d6474c8151ca61100b05e5e20dda45701f135738f1a1f8bf41e4863"
+    }
+  }
+}

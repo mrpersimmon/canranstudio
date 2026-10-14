@@ -23,7 +23,9 @@ const EXAMS = {
     { prompt: '书是对面同学的', answer: ['No.', 'It', "isn't", 'my book.', "It's", 'your book.'] },
     { prompt: '工作人员把寄存牌递回给你', answer: 'your' },
     { prompt: '最后一句在问什么？怎样回答？', answer: '问雨伞；Yes, it is.' },
-    { prompt: "Here's your ticket. It isn't my umbrella. It's your umbrella.", answer: 'Here is / is not / It is' }
+    { prompt: "Here's your ticket. It isn't my umbrella. It's your umbrella.", answer: 'Here is / is not / It is' },
+    { prompt: '这不是你的学校。', answer: ['This', 'is', 'not', 'your school'] },
+    { prompt: '你不是老师。', answer: { fills: ['am not', 'are not'] } }
   ],
   '5-6': [
     { prompt: '哪份记录符合？', answer: 'Hans 是德国人；汽车是日本品牌', wrong: 'Hans 和汽车都是德国的' },

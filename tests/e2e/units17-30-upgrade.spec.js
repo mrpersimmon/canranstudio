@@ -49,6 +49,13 @@ for(const[pair,answers]of Object.entries(EXAMS)){
   await page.goto(`/lesson/unit${pair}/#learn/exam`);const room=page.locator('.stage-exam'),order=answers.findIndex(Array.isArray);
   for(const answer of answers.slice(0,order)){await selectAnswer(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
   await selectAnswer(room,[answers[order][0]]);await page.reload();await expect(room.getByRole('status')).toBeEmpty();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(order));await expect(room.getByRole('button',{name:'撤回 '+answers[order][0],exact:true})).toBeVisible();
-  await selectAnswer(room,answers[order].slice(1));await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed=true]')).toHaveCount(0);await context.setOffline(false);
+  // Resume the retained draft through the bank; the full-answer helper clears
+  // existing tokens for retries and would discard the first restored token.
+  const chosen=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button');
+  await expect(chosen).toHaveCount(1);
+  const bank=room.getByRole('group',{name:'待选词块',exact:true});
+  for(const token of answers[order].slice(1))await bank.getByRole('button',{name:token,exact:true}).and(bank.locator('button:enabled')).first().click();
+  await expect(chosen).toHaveCount(answers[order].length);
+  await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed=true]')).toHaveCount(0);await context.setOffline(false);
  });
 }

@@ -19,7 +19,7 @@ const REQUIRED_FILES = Object.freeze([
 const REQUIRED_DIRECTORIES = Object.freeze([
   ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),
   'core',
-  'unit49-50',
+  'unit49-50', 'unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90',
   'unit1-2',
   'unit3-4',
   'unit5-6',
@@ -35,6 +35,8 @@ const REQUIRED_DIRECTORIES = Object.freeze([
   'unit25-26',
   'unit27-28',
   'unit29-30',
+  'unit41-42',
+  'unit43-44', 'unit45-46', 'unit47-48',
   'poc'
 ]);
 const REQUIRED_RUNTIME_FILES = Object.freeze([

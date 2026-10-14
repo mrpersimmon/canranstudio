@@ -12,8 +12,8 @@ const digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const RESOURCE = /\.(?:js|css|woff2|svg|png|webp|avif|jpe?g|mp3)(?:[?#].*)?$/i;
 const IMAGE = /\.(?:svg|png|webp|avif|jpe?g)$/i;
 // Explicit teaching mode: adding a course requires a deliberate audio decision.
-const VOICED = new Set(['unit49-50', 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark']);
-const CLASSROOM = new Set(['unit1-2', 'unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40']);
+const VOICED = new Set([ 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark']);
+const CLASSROOM = new Set(['unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit49-50','unit1-2', 'unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'unit41-42', 'unit43-44', 'unit45-46', 'unit47-48']);
 
 function scopeSource(source, relative, basePath) {
   return relocateSource(source, relative, basePath).replace(new RegExp('<script src="' + basePath + 'core/subpath-entry\\.js"></script>\\s*'), '');
@@ -54,7 +54,7 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
       let value = await readSource(relative);
       if (isolatedDefinitions && relative === 'core/course-catalog.js') {
         const learning = catalog.requireCourseDefinition('lesson49').learning;
-        const definition = { learning: currentCourse === 'unit49-50' ? learning : { FEEDBACK: learning.FEEDBACK } };
+        const definition = { learning: { FEEDBACK: learning.FEEDBACK } };
         value = Buffer.from(`(function(root){root.CanranCore=root.CanranCore||{};const definition=${JSON.stringify(definition)};root.CanranCore.courseCatalog={publicAssetUrl:value=>${JSON.stringify(basePath)} + value.replace(/^\\//,''),requireCourseDefinition:id=>{if(id!=='lesson49')throw new Error('Unknown teaching definition');return definition;}};})(globalThis);`);
       }
       if (/\.(?:html|js|css|json|svg)$/.test(relative)) value = Buffer.from(scopeSource(value.toString(), relative, basePath));
@@ -119,7 +119,7 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
     if (course.id !== 'home') {
       await addDirectory('assets/lesson49/icons');
       await addDirectory('assets/' + course.id);
-      if (['lesson49', 'unit49-50'].includes(course.id)) await addDirectory('assets/lesson49/subjects');
+      if (course.id === 'lesson49') await addDirectory('assets/lesson49/subjects');
       if (!noVoice) {
         if (course.id === 'unit49-50') { await addDirectory('lesson49/audio'); await addDirectory('lesson50/audio'); }
         else await addDirectory(course.id + '/audio');

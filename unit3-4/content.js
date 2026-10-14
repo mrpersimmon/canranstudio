@@ -298,8 +298,93 @@ unit.questions["reply"][3]]};
  }
 })(globalThis.CanranCore);
 
+// Grammar edition: the guide's be-negative rule is taught through practice.
+// Keep exact predecessor contracts above for learning-record migration.
+(function (core) {
+  'use strict';
+  const unit = core.unit34;
+  const source = '《同步导学》Grammar 纸页7／PDF21：带be动词的否定句；教材纸页6–9；语法练习册纸页5–6';
+  const model = (...lines) => ({ lines });
+  const grammar = (id, target, prompt, input, support = {}) => ({
+    id: 'u34-grammar-v1-' + id, target, prompt, source,
+    hint: '先看谁在说、要表达什么，再检查 be 后面的部分。',
+    ...input, workshop: support
+  });
+  const fill = (before, after, options) => ({ before, after, options });
+  const oldReply = unit.questions.reply;
+  const oldExam = unit.questions.exam;
+  const workshop = [
+    grammar('meaning', '理解否定句表示不是', '这件外套不是你的，怎样说明？', {
+      options: ['This is my coat.', 'This is not my coat.', 'Is this my coat?'], answer: 'This is not my coat.'
+    }, { model: model(['This is my pen.', '这是我的钢笔。'], ['This is not my pen.', '这不是我的钢笔。']), rule: '加上 not，意思从“是”变成“不是”。' }),
+    grammar('position', 'not 放在 is 后面', '补全：这不是我的雨伞。', {
+      type: 'cloze', blanks: [fill('This ', ' my umbrella.', ['is not', 'not is', 'is'])], answer: '["is not"]'
+    }, { rule: 'This is not…：在 is 后面加 not。' }),
+    grammar('build', '独立组成 is 否定句', '用词块说：这不是我的寄存牌。', {
+      type: 'wordbank', display: { title: '用词块说', material: '这不是我的寄存牌。' },
+      tokens: ['This', 'is', 'not', 'my ticket', 'your ticket'], slots: 4, answer: 'This is not my ticket', suffix: '.'
+    }, { rule: '保留 This 和 my ticket，只在 is 后加 not。' }),
+    grammar('am-are', 'am 和 are 后也用 not', '补全：我不是老师；你也不是老师。', {
+      type: 'cloze', blanks: [fill('I ', ' a teacher.', ['am not', 'is not', 'am']), fill('You ', ' a teacher.', ['are not', 'am not', 'are'])], answer: '["am not","are not"]'
+    }, { model: model(['I am → I am not', '我是 → 我不是'], ['He is → He is not', '他是 → 他不是'], ['You are → You are not', '你是 → 你不是']), rule: 'am、is、are 后都能加 not，原来的 be 形式不换。' }),
+    grammar('shortforms', '缩写保留原意与否定', '把意思相同的形式配起来。', {
+      type: 'match', leftLabel: '完整形式', rightLabel: '缩写',
+      pairs: [{ id: 'not', en: 'is not', cn: "isn't" }, { id: 'it', en: 'It is', cn: "It's" }, { id: 'here', en: 'Here is', cn: "Here's" }],
+      answer: '["not","it","here"]'
+    }, { model: model(["is not = isn't", '不是'], ["It is = It's", '它是'], ["Here is = Here's", '这是……；用于出示东西']), rule: 'isn’t 里仍有 not 的意思；It’s 和 Here’s 本身不表示否定。' }),
+    grammar('speaker', '说话者变了，归属视角随之改变', '同一本书，换个人说。', {
+      type: 'cloze', reference: '书属于你。',
+      blanks: [fill('你：It’s ', ' book.', ['my', 'your']), fill('同学对你：It’s ', ' book.', ['my', 'your'])], answer: '["my","your"]'
+    }, { model: model(['my · your', 'my 指说话人的；your 指听话人的。']), rule: '书的主人没有变；本人说 my，别人对本人说 your。' }),
+    grammar('known-owner', '否定后说明已知归属', '回答：不是我的，是你的。', {
+      type: 'wordbank', display: { title: '用词块回答', material: '外套是同学的。他问你：Is this your coat?\n回答：不是我的，是你的。' },
+      tokens: ['No.', "It isn't", 'my coat.', "It's", 'your coat.'], slots: 5, answer: "No. It isn't my coat. It's your coat.", suffix: ''
+    }, { model: model(["It isn't my pen. It's your pen.", '钢笔属于对方：不是我的，是你的。']), rule: '知道外套属于对方，才能加上 It’s your coat.。' }),
+    grammar('unknown-owner', '只否定，不猜未知的主人', '怎样回答才准确？', {
+      display: { title: '怎样回答才准确？', material: '这把伞不是你的，主人还不知道。\n同学问：Is this your umbrella?' },
+      options: ["No, it isn't.", "No. It isn't my umbrella. It's your umbrella.", 'Yes, it is.'], answer: "No, it isn't."
+    }, { independent: true, rule: '“不是我的”不等于“就是你的”；不知道的事不加上去。' }),
+    grammar('relationship', '用否定句说明人物关系', '用词块说：这位不是我的老师。', {
+      type: 'wordbank', display: { title: '用词块说', material: '这位不是我的老师。' },
+      tokens: ['This', 'is', 'not', 'my teacher', 'your teacher'], slots: 4, answer: 'This is not my teacher', suffix: '.'
+    }, { independent: true, rule: 'my teacher 表示师生关系；is 后加 not 表示不是。' }),
+    grammar('independent', '独立使用 am not 和 are not', '补全：我不是学生，你不是我的老师。', {
+      type: 'cloze', reference: 'student：学生',
+      blanks: [fill('I ', ' a student.', ['am not', 'are not', 'am']), fill('You ', ' my teacher.', ['are not', 'is not', 'are'])], answer: '["am not","are not"]'
+    }, { independent: true, rule: 'I am not…，You are not…；主语和 be 保持对应。' })
+  ];
+  const hints = ['留意“是”和“不是”的差别。', '保留 is 的位置，再想 not 放哪里。', '先说 This，物品和主人不要换。',
+    '先把 I 和 You 各自的 be 形式找对。', '缩写不能少掉否定的意思。', '主人没变，留意这次是谁对谁说。',
+    '先否定，再说明题目告诉你的主人。', '只说已知的事实，不猜主人。', '说的是谁的老师？再表达“不是”。', '两句都是否定，但主语不一样。'];
+  workshop.forEach((question, i) => { question.hint = hints[i]; });
+  const transfer = [
+    { id: 'u34-grammar-v1-exam-negative', target: '独立组成否定句，不改变归属', prompt: '用词块说：这不是你的学校。',
+      display: { title: '用词块说', material: '这不是你的学校。' }, type: 'wordbank',
+      tokens: ['This', 'is', 'not', 'your school', 'my school'], slots: 4, answer: 'This is not your school', suffix: '.',
+      hint: '先确定说的是谁的学校，再表达否定。', source },
+    { id: 'u34-grammar-v1-exam-am-are', target: '独立按说话人使用 am not 和 are not', prompt: '你不是老师。对面的男士也不是你的老师。补全你对他说的话。',
+      display: { title: '补全你说的话', material: '你不是老师。对面的男士也不是你的老师。' }, type: 'cloze',
+      blanks: [fill('I ', ' a teacher.', ['am not', 'is not', 'am']), fill('You ', ' my teacher.', ['are not', 'am not', 'are'])], answer: '["am not","are not"]',
+      hint: '先看每句话的主语，再表达题目给出的事实。', source }
+  ];
+  for (const q of [...workshop, ...transfer]) {
+    q.explanation ||= q.workshop?.rule || '按题目给定的人物和事实组成含 be 的否定句。';
+    if (q.options) q.distractorReasons = Object.fromEntries(q.options.filter(value => value !== q.answer).map(value => [value, '改变了题目给定的肯否意思，或加入了未知的归属。']));
+  }
+  for (const [id, items, prior] of [['reply', workshop, oldReply], ['exam', [...oldExam, ...transfer], oldExam]]) {
+    const priorKey = 'unit34-' + id + '-practice/' + (unit.taskSessions[id] || (unit.activityPredecessors[id] ? 'v2' : 'v' + unit.version));
+    unit.taskPredecessors[id] = [{ key: priorKey, questions: prior }, ...(unit.taskPredecessors[id] || []),
+      ...(unit.voicedQuestions[id] ? [{ key: 'unit34-' + id + '-practice/v1', questions: unit.voicedQuestions[id] }] : []),
+      ...(unit.activityPredecessors[id] || []).map(old => ({ key: 'unit34-' + old + '-practice/v1', questions: unit.previousQuestions[old] }))];
+    unit.taskSessions[id] = 'grammar-v1'; unit.questions[id] = items;
+  }
+  unit.contentRevision = 'grammar-negatives-v1';
+  unit.stages[2] = { id: 'l3', title: '学会说不是', activities: [['reply', '语法小工坊', 'speech']], required: ['reply'] };
+  unit.stages[3] = { id: 'l4', title: '办一次认领', activities: [['manners', '认领柜台', 'give']], required: ['manners'] };
+})(globalThis.CanranCore);
+
 (function(core){
  'use strict';const unit=core.unit34;
  unit.stages[4].activities.find(item=>item[0]==='certificate')[1]='我的单元纪念卡';
- unit.reward={edition:'story-card-v1',title:'认领小达人',lesson:'Lesson 3–4',scene:'/assets/awards/unit3-4-umbrella.webp',alt:'客人从柜台领回紫色雨伞',color:'#74376f',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['manners','认领柜台'],['reply','你我的接力'],['exam','认领小挑战']].map(([id,title])=>({id,title}))};
+ unit.reward={edition:'grammar-negatives-v1',title:'认领小达人',lesson:'Lesson 3–4',scene:'/assets/awards/unit3-4-umbrella.webp',alt:'客人从柜台领回紫色雨伞',color:'#74376f',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['reply','语法小工坊'],['manners','认领柜台'],['exam','认领小挑战']].map(([id,title])=>({id,title}))};
 })(globalThis.CanranCore);

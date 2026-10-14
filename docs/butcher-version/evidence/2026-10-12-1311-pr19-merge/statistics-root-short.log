@@ -1,0 +1,55 @@
+
+Running 2 tests using 1 worker
+
+(node:91281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] [chromium] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星
+(node:91327) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/2] [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星
+  1) [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 ─
+
+    Error: expect(locator).not.toHaveAttribute(expected) failed
+
+    Locator:  locator('html')
+    Expected: not ""
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toHaveAttribute" with timeout 5000ms
+      - waiting for locator('html')
+        11 × locator resolved to <html lang="zh-CN" data-unit="unit3-4" data-course-preparing="">…</html>
+           - unexpected value ""
+
+
+       at ../support/units1-30-tasks.js:43
+
+      41 |  if(!old)group=currentGroup(pair,group);
+      42 |  await page.goto(`${base}/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group),items=answers(pair,group,old);
+    > 43 |  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');
+         |                                         ^
+      44 |  await expect(room).toBeVisible();
+      45 |  if(await room.locator('.practice-finish').isVisible())return;
+      46 |  const copy=await room.locator('.progress-copy').innerText();const first=Number(copy.match(/第 (\d+)/)[1])-1;
+        at Object.activity (/Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/support/units1-30-tasks.js:43:41)
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/login/submission-statistics.spec.js:33:5
+
+    Error Context: output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-webkit-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-webkit-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-webkit-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 ──
+  1 passed (41.2s)

@@ -1,0 +1,38 @@
+{
+  "design": "1.3",
+  "createdAtLocal": "2026-10-12-1342",
+  "unit": "unit41-42",
+  "generator": "built-in image_gen",
+  "prompt": "keepsake.prompt.txt",
+  "source": {
+    "file": "keepsake-source.png",
+    "sha256": "e52d230d5ee49c4a92654c5d8309bdc63cb26dd70e79e5085b6351854b2e71f0"
+  },
+  "runtime": {
+    "file": "assets/unit41-42/keepsake-story-v4.webp",
+    "width": 1100,
+    "height": 825,
+    "alpha": true,
+    "bytes": 141810,
+    "sha256": "876a072f9bd80fd7dbe63ac51000daf586db41debaeacae5c4e693d91e7d1b99"
+  },
+  "references": [
+    {
+      "file": "assets/unit41-42/keepsake-story-v3.webp",
+      "sha256": "f5df21ce12f20ba67b45aee941391e6ada505c1dabbf0f27eef489ec37483773",
+      "purpose": "previous identity"
+    },
+    {
+      "file": "assets/awards/unit1-2-handbag-closeup.webp",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826",
+      "purpose": "approved art style"
+    },
+    {
+      "file": "assets/awards/unit3-4-umbrella.webp",
+      "sha256": "c36f3c84e55f3b97db64e2fc8b9d2735a5587fb2734ab314f61afa1102eebc3f",
+      "purpose": "approved art style"
+    }
+  ],
+  "status": "implemented locally; visual acceptance by user pending",
+  "rewardEdition": "bag-quantities-v1"
+}
