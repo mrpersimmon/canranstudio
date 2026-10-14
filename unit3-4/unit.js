@@ -35,7 +35,7 @@
     }
     $('#lessonWorkspace').append(section);
   }
-  const aliases = { 'learn/ask': 'learn/exam', 'learn/trans': 'learn/reply' };
+  const aliases = { 'learn/ask': 'learn/exam', 'learn/trans': 'learn/reply', 'learn/phrases': 'learn/reply' };
   const normalizeRoute = id => aliases[id] || id;
   const navigate = id => {
     id = normalizeRoute(id);
@@ -105,25 +105,38 @@
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
     const group = node('div', '', 'station-actions'); group.append(button('下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
   }
+  function completionArt() {
+    const scene = node('div', '', 'completion-art'); scene.setAttribute('aria-hidden', 'true');
+    scene.append(node('span', '', 'completion-halo'), node('span', '', 'completion-ground'));
+    const visitor = art('visitor'), attendant = art('attendant'), umbrella = art('umbrella');
+    umbrella.src = '/assets/unit3-4/umbrella-held.svg';
+    visitor.className = 'completion-man'; attendant.className = 'completion-attendant'; umbrella.className = 'completion-object';
+    scene.append(visitor, attendant, umbrella); return scene;
+  }
+  const completionTitles = { listen: '单词寻宝完成！', roles: '故事读懂啦！', reply: '语法练习完成！', manners: '雨伞领回来了！', exam: '综合挑战完成！' };
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit34-' + id + '-practice'; surfaces.get(id).append(element);
     if (id === 'manners') {
       settings.sceneView = core.unit34Scene.create({ element });
       settings.completionDetails = settings.sceneView.completion();
     }
+    if (id === 'reply') settings.sceneView = core.unit12Grammar.create({ element, art });
     const predecessors = unit.activityPredecessors[id];
     practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
       inputViews:core.lesson49TaskInputs, roundPolicy:unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit34-' + old + '-practice/v1', questions: prior }))), ...settings,
       onComplete: (states,round) => {
         const { perfect, message } = settlement.complete({ id, states, round, awards, element });
-        const result = node('p', message, 'award-round-result');
-        result.dataset.perfect = String(perfect); result.dataset.zone = id;
-        element.querySelector('.practice-finish-actions').before(result);
         complete(id);
         nextStation(id, element.querySelector('.practice-finish-actions'));
-        if (id === 'manners') element.querySelector('.practice-finish > p').textContent = '雨伞领回来了！';
-        settings.onComplete?.(states); } });
+        settings.onComplete?.(states);
+        core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
+          theme: { title: completionTitles[id] }, artwork: completionArt(), details: id === 'exam' ? settings.completionDetails : null,
+          celebrate: round.userCompleted, awardStatus: message,
+          waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) && navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
+        const result = element.querySelector('.completion-award'); result.classList.add('award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        updateProgress(); } });
     return element;
   }
 
@@ -252,9 +265,10 @@
     const row = node('p', '', 'contraction-row'); row.append(node('span', left), node('span', '→'), node('span', right)); shortForms.append(row);
   }
   shortForms.append(node('p', 'my 指说话人的，your 指听话人的；换一个人说话，所指的人也可能变化。'));
-  const phraseActions = node('div', '', 'activity-actions'); nextStation('phrases', phraseActions);
-  surfaces.get('phrases').append(phraseGrid, sentenceModels, replyModels, shortForms, phraseActions);
   mountPractice('manners'); mountPractice('reply');
+  const references = node('details', '', 'offline-task grammar-reference');
+  references.append(node('summary', '认领表达参考'), phraseGrid, sentenceModels, replyModels, shortForms);
+  surfaces.get('reply').append(references);
 
   const examResults = node('div', '', 'unit-results');
   mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {

@@ -37,6 +37,9 @@ test('三张统计卡按实际提交计次，订正参与连续答对且默认�
   // 对、对、错、错、对、对、对：订正计正确，重复错答各计一次。
   await expect(room.locator('.completion-number')).toHaveText(['3', '5', '2']);
   await expect(room.locator('.completion-unit')).toHaveText(['次', '次', '次']);
+  await expect(room.locator('.stat-streak')).toHaveAccessibleName('本轮最高连续答对 3 次');
+  await expect(room.locator('.stat-correct')).toHaveAccessibleName('本轮实际提交答对，包含订正 5 次');
+  await expect(room.locator('.stat-incorrect')).toHaveAccessibleName('本轮实际提交答错，重复错答分别计数 2 次');
   await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion', 'finished');
   await expect.poll(() => page.evaluate(() => window.completionMotionFrames.length)).toBeGreaterThan(30);
   const frames = await page.evaluate(() => window.completionMotionFrames);

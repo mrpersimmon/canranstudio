@@ -27,6 +27,9 @@ function completedSnapshot(book){
  for(const id of ['unitDialogue','subjectRound'])if(book.activity?.[id]?.done)activity[id]=book.activity[id];
  for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt'])if(book.activity?.[id])activity[id]=book.activity[id];
  if(book.activity?.unitAwardClaims)activity.unitAwardClaims=book.activity.unitAwardClaims;
+ // The reading edition replaces unitDialogue. Carry the separately frozen
+ // predecessor proof too, so its completed story survives another device.
+ if(course==='unit49-50'&&book.activity?.unitLegacyProgress)activity.unitLegacyProgress=book.activity.unitLegacyProgress;
  return {version:1,groups,records,activity};
 }
 function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}

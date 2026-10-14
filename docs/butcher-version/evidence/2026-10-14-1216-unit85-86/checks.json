@@ -1,0 +1,170 @@
+{
+  "unit": "Lesson 85–86",
+  "title": "电影院外聊巴黎",
+  "checkedAt": "2026-10-14T04:35:44.007Z",
+  "branch": "codex/debug-grammar-v2",
+  "baselineHead": "5596cb5",
+  "scope": "Uncommitted local development; page behavior checks only",
+  "content": {
+    "mode": "classroom-no-voice",
+    "wordCards": 30,
+    "dialogueTurns": 13,
+    "zones": {
+      "listen": 8,
+      "roles": 7,
+      "grammar": 18,
+      "apply": 8,
+      "exam": 24
+    },
+    "questions": 65,
+    "stars": 5,
+    "lesson86Actions": 15,
+    "writingA": 7,
+    "writingB": 12
+  },
+  "checks": [
+    {
+      "scope": "Course and story page behavior",
+      "browser": "Chromium",
+      "passed": 20,
+      "failed": 0,
+      "output": "output/unit8586-chromium"
+    },
+    {
+      "scope": "Course and story page behavior",
+      "browser": "WebKit",
+      "passed": 20,
+      "failed": 0,
+      "output": "output/unit8586-webkit"
+    },
+    {
+      "scope": "Authenticated root",
+      "browser": "Chromium",
+      "passed": 6,
+      "failed": 0,
+      "output": "output/unit8586-login-root"
+    },
+    {
+      "scope": "Authenticated /lesson/",
+      "browser": "Chromium",
+      "passed": 6,
+      "failed": 0,
+      "output": "output/unit8586-login-subpath"
+    },
+    {
+      "scope": "Authenticated root, mobile profile",
+      "browser": "WebKit",
+      "passed": 6,
+      "failed": 0,
+      "output": "output/unit8586-login-webkit-root"
+    },
+    {
+      "scope": "Authenticated /lesson/, mobile profile",
+      "browser": "WebKit",
+      "initial": {
+        "passed": 2,
+        "failed": 4,
+        "output": "output/unit8586-login-webkit-subpath"
+      },
+      "unchangedCodeAndTimeoutRecheck": {
+        "passed": 4,
+        "failed": 0,
+        "output": "output/unit8586-login-webkit-subpath-recheck"
+      }
+    },
+    {
+      "scope": "Final application distractor, reference and icon refinements",
+      "browser": "Chromium",
+      "initial": {
+        "passed": 3,
+        "failed": 3,
+        "output": "output/unit8586-final-chromium"
+      },
+      "unchangedCodeAndTimeoutRecheck": {
+        "passed": 3,
+        "failed": 0,
+        "output": "output/unit8586-final-chromium-recheck"
+      }
+    },
+    {
+      "scope": "Final application distractor, reference and icon refinements",
+      "browser": "WebKit",
+      "passed": 6,
+      "failed": 0,
+      "output": "output/unit8586-final-webkit"
+    },
+    {
+      "scope": "All 43 horizontal banners, class permissions and default closure",
+      "browser": "Chromium",
+      "passed": 2,
+      "failed": 0,
+      "output": "output/unit8586-navigation"
+    },
+    {
+      "scope": "Authenticated course packages at / and /lesson/",
+      "result": "build passed"
+    },
+    {
+      "scope": "Font subsets and homepage fallback",
+      "result": "updated"
+    },
+    {
+      "scope": "Correct-worktree authenticated visible preview",
+      "result": "opened and visually checked",
+      "url": "http://127.0.0.1:4320/unit85-86/#learn/words"
+    }
+  ],
+  "visual": {
+    "widths": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "shortScreens": [
+      "320x568",
+      "390x500"
+    ],
+    "sameNameAndStarsCardBaselines": [
+      "unit1-2",
+      "unit3-4",
+      "unit5-6"
+    ],
+    "generatedArt": "assets/unit85-86/README.md",
+    "gif": {
+      "actualDownloads": [
+        "one-star.gif",
+        "five-star.gif"
+      ],
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "verified": "Star light changes between frames; name, title and characters stay fixed."
+    }
+  },
+  "limitations": [
+    "Initial timeouts occurred while host load was elevated; all affected checks passed unchanged on a focused rerun. Correlation does not prove the cause; first traces retained under output/.",
+    "WebKit offline navigation was rejected by the engine; reconnect and record recovery passed. App offline fallback was verified in Chromium only.",
+    "This lesson reuses shared reward/cache logic; full historic migration, Worker-unavailable, denied-write and every reward boundary regression were not rerun.",
+    "Teacher review, child usability and real-device WeChat save acceptance remain pending."
+  ],
+  "delivery": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "pendingStandards": {
+    "file": "docs/butcher-version/publish/2026-10-14-0124-v1.0-统一设计标准可优化清单.md",
+    "added": [
+      "O11"
+    ],
+    "duplicatesFoldedInto": [
+      "O02",
+      "O03",
+      "O04"
+    ],
+    "standardUnchanged": true
+  }
+}

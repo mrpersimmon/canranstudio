@@ -22,7 +22,7 @@ async function completeStory(page, prefix = '') {
   await room.getByRole('button', { name: '完成课文', exact: true }).click();
   await expect(room).toContainText('故事看完了！');
 }
-async function completeActivity(page, id, { exerciseRecovery = false, prefix = '' } = {}) {
+async function completeActivity(page, id, { exerciseRecovery = false, prefix = '', inspect } = {}) {
   await require('./reward-dialog').handleRewardDialog(page);
   await page.goto(prefix + '/unit3-4/#learn/' + id);
   const room = page.locator('.stage-' + id), answers = ANSWERS[id];
@@ -30,6 +30,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     const answer = answers[i], check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
     await expect(check).toBeDisabled();
+    if (inspect) await inspect(room, i);
     if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
     else if (Array.isArray(answer)) {
       const bank = room.getByRole('group', { name: '待选词块', exact: true });
@@ -62,7 +63,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
 async function completeUnit34(page, prefix = '') {
   await completeActivity(page, 'listen', { exerciseRecovery: true, prefix });
   await completeStory(page, prefix);
-  for (const id of ['roles', 'manners', 'reply', 'exam']) await completeActivity(page, id, { exerciseRecovery: true, prefix });
+  for (const id of ['roles', 'reply', 'manners', 'exam']) await completeActivity(page, id, { exerciseRecovery: true, prefix });
   await page.goto(prefix + '/unit3-4/#learn/certificate');
   await expect(page.locator('#starCount')).toHaveText('5');
 }

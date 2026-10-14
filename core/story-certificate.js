@@ -1,6 +1,7 @@
 (function (root) {
   'use strict';
   const core = root.CanranCore;
+  const layout = root.CanranAwardCardLayout;
   const assets = {
     scene: '/assets/awards/unit1-2-handbag-closeup.webp',
     paper: '/assets/awards/paper.webp',
@@ -19,7 +20,7 @@
   // The caller supplies the account identity; never collect another name.
   function card({ unit, label = unit.copy?.compact ? '我的纪念卡' : '我的单元纪念卡' }) {
     const lesson = unit.reward.lesson || 'Lesson 1–2';
-    const paper = make('article', '', 'story-award-paper'); paper.setAttribute('aria-label', label);
+    const paper = make('article', '', 'story-award-paper award-card'); paper.setAttribute('aria-label', label); paper.dataset.unit = unit.id;
     const brand = make('p', '灿然英语工作室', 'story-award-brand');
     const title = make('h3', unit.reward.title, 'story-award-title');
     title.style.color = unit.reward.color || '#0b7399';
@@ -50,7 +51,7 @@
     function identity(recipient, identityLabel = '登录后显示姓名') {
       name.textContent = recipient || identityLabel;
       name.classList.toggle('is-placeholder', !recipient);
-      name.style.setProperty('--name-size', Math.min(10, 36 / Math.max(3.6, Array.from(name.textContent).length)) + 'cqw');
+      Object.entries(layout.typography(unit.reward.title, name.textContent, unit.id)).forEach(([key, value]) => paper.style.setProperty(key, value));
     }
     function update(state) {
       paper.dataset.stars = String(state.stars);
@@ -135,12 +136,13 @@
       // Capture one immutable snapshot so a sync during export cannot mix dates.
       const snapshot = { recipient, stars: state.stars, date: state.firstFullStarAt };
       try {
+        await layout.prepareFonts(unit.id, snapshot.recipient);
         await document.fonts.ready;
         const images = await Promise.all(Object.values(artwork).map(async src => {
           const img = picture(src); await img.decode(); return img;
         }));
-        const canvas = draw(snapshot, images, unit.reward.title,lesson,unit.reward.color);
-        const blob = await root.CanranAwardGif.encode(canvas, { stars: snapshot.stars, earnedImage: images[2], signal: exportJob.signal });
+        const canvas = layout.draw({unitId:unit.id,title:unit.reward.title,name:snapshot.recipient,lesson,color:unit.reward.color,stars:snapshot.stars,date:dateLabel(snapshot.date),images:{scene:images[0],paper:images[1],earned:images[2],empty:images[3]},roundFont:'Award Round',latinFont:'Baloo 2'});
+        const blob = await root.CanranAwardGif.encode(canvas, { ...layout.starLayout, stars: snapshot.stars, earnedImage: images[2], signal: exportJob.signal });
         exportJob.signal.throwIfAborted();
         if (exportUrl) URL.revokeObjectURL(exportUrl);
         exportUrl = URL.createObjectURL(blob);
@@ -154,31 +156,5 @@
     update(state); return { update };
   }
 
-  function draw(snapshot, [scene, texture, earned, empty], title,lesson,color) {
-    const canvas = document.createElement('canvas'); canvas.width = 1640; canvas.height = 880;
-    const ctx = canvas.getContext('2d');
-    ctx.beginPath(); ctx.roundRect(8, 8, 1624, 864, 34); ctx.fillStyle = '#fffdf6'; ctx.fill();
-    ctx.save(); ctx.clip(); ctx.fillStyle = ctx.createPattern(texture, 'repeat'); ctx.fillRect(0, 0, 1640, 880);
-    const width = 985, height = 815, scale = Math.min(width / scene.naturalWidth, height / scene.naturalHeight);
-    ctx.drawImage(scene, 1630 - scene.naturalWidth * scale, 834 - scene.naturalHeight * scale, scene.naturalWidth * scale, scene.naturalHeight * scale);
-    ctx.restore(); ctx.strokeStyle = '#4a3226'; ctx.lineWidth = 4; ctx.stroke();
-    if (snapshot.stars === 5) {
-      ctx.beginPath(); ctx.roundRect(15, 15, 1610, 850, 29); ctx.strokeStyle = '#f4bd55'; ctx.lineWidth = 10; ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(23, 23, 1594, 834, 23); ctx.strokeStyle = '#ac741e'; ctx.lineWidth = 1.5; ctx.stroke();
-    }
-    function text(value, x, y, size, color, family = '"Award Round"', maxWidth = 675, stroke = 0) {
-      ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-      do { ctx.font = `700 ${size--}px ${family}, sans-serif`; } while (ctx.measureText(value).width > maxWidth && size > 12);
-      ctx.fillStyle = color;
-      if (stroke) { ctx.strokeStyle = color; ctx.lineJoin = 'round'; ctx.lineWidth = size * stroke; ctx.strokeText(value, x, y); }
-      ctx.fillText(value, x, y);
-    }
-    text('灿然英语工作室', 91, 116, 36, '#4a3226');
-    text(title, 91, 286, 127, color || '#0b7399', '"Award Round"', 680, .03);
-    text(snapshot.recipient, 91, 478, 162, '#4a3226', '"Award Round"', 595, .036);
-    for (let i = 0; i < 5; i++) ctx.drawImage(i < snapshot.stars ? earned : empty, 85 + i * 126, 593, 101, 101);
-    text(lesson + (snapshot.stars === 5 && snapshot.date ? ' · ' + dateLabel(snapshot.date) : ''), 91, 798, 35, '#795a46', '"Baloo 2"');
-    return canvas;
-  }
   core.storyCertificate = { mount, card };
 })(globalThis);

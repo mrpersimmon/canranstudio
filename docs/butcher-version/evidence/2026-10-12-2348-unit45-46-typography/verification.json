@@ -1,0 +1,37 @@
+{
+  "unit": "unit45-46",
+  "branch": "codex/debug-grammar-v2",
+  "scope": "Typography only; existing illustrations, curriculum, layout structure and reward rules retained",
+  "styles": [
+    "unit45-46/typography.css",
+    "unit45-46/index.html"
+  ],
+  "fonts": {
+    "chinese": "ChillRoundGothic Regular 400 / Medium 500",
+    "english": "Nunito 400 / 500 / 600",
+    "ipa": "Arial"
+  },
+  "verified": {
+    "chromium_course": 18,
+    "webkit_course": 9,
+    "ipa_chromium": 1,
+    "ipa_webkit": 1,
+    "authenticated_chromium_flows": "passed",
+    "existing_preview": "小禾, 2/5 stars",
+    "webkit_keepsake_readability": 2,
+    "webkit_full_6_unit_card_journey": "passed in 3.6m; per-action deadlines unchanged",
+    "rendered_ipa_family": "Arial, Helvetica Neue, sans-serif"
+  },
+  "pending": [
+    "Mobile device and child reading acceptance"
+  ],
+  "not_run": [
+    "Firefox: browser binary not installed"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "keepsake_art_sha256": "5624fec14d6740ee4670d4618946f5720bc29c05f774fe952cbc82ab7a39b3fd"
+}

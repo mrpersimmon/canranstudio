@@ -1,0 +1,14 @@
+
+Running 6 tests using 1 worker
+
+(node:89228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] tests/login/unit3-4-grammar.spec.js:8:1 › 实际提交统计跨设备保留：同题两次错答计两次，重练归零且零错才获星
+[2/6] tests/login/unit3-4-grammar.spec.js:57:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验
+[3/6] tests/login/unit41-42.spec.js:7:1 › 课程入口保持班级授权：新课可单独开放
+[4/6] tests/login/unit41-42.spec.js:21:1 › 未开放本课的班级看不到入口，直接链接也不能进入
+[5/6] tests/login/unit41-42.spec.js:34:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复
+[6/6] tests/login/unit41-42.spec.js:121:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页
+  6 passed (1.8m)

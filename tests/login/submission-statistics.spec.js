@@ -35,13 +35,13 @@ test('登录手机短屏完成后统计与操作完整，再进和重练保留�
     await expect(reward.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
     await reward.press('Escape'); await expect(reward).not.toBeVisible();
     const room = p.locator('.stage-listen');
-    await expectCompactCompletion(p, room);
+    await expectCompactCompletion(p, room, { illustrated: true });
     await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
     await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await room.getByRole('button', { name: '下一站：衣帽间小剧场', exact: true }).click();
     await expect(p).toHaveURL(/#learn\/text$/);
     await p.goBack(); await p.reload();
-    await expectCompactCompletion(p, room);
+    await expectCompactCompletion(p, room, { illustrated: true });
     await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
     await expect(p.locator('#starCount')).toHaveText('1');
     await p.screenshot({ path: `output/playwright/submission-statistics/login-${test.info().project.name || 'chromium'}-${base === '/' ? 'root' : 'lesson'}-320x568.png` });

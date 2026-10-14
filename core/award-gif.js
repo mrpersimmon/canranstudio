@@ -65,15 +65,24 @@
     for (const [, hex] of GOLD) palette.push([1,3,5].map(start => parseInt(hex.slice(start, start+2), 16)));
     palette.push([255,252,232], [255,253,245], [255,234,165]);
     const transparentIndex = palette.length, gifPalette = [...palette, [0,0,0]];
-    const gif = codec.GIFEncoder(); let previous;
+    const gif = codec.GIFEncoder(); let previous, previousSource;
     for (let index = 0; index < FRAMES; index++) {
       signal?.throwIfAborted();
-      const pixels = codec.applyPalette(index === 0 ? first : frame(index * DELAY), palette);
+      const rgba = index === 0 ? first : frame(index * DELAY);
+      const source = new Uint32Array(rgba.buffer, rgba.byteOffset, rgba.byteLength / 4);
+      const pixels = codec.applyPalette(rgba, palette);
+      // The encoder's RGB565 cache uses the first encountered color in each
+      // bucket. A moving rim can change that choice for otherwise static text.
+      // Keep the prior palette index wherever the actual source pixel is fixed.
+      if (previous) for (let i = 0; i < pixels.length; i++) {
+        if (source[i] === previousSource[i]) pixels[i] = previous[i];
+      }
       const delta = pixels.slice();
       if (previous) for (let i = 0; i < delta.length; i++) if (pixels[i] === previous[i]) delta[i] = transparentIndex;
       gif.writeFrame(delta, WIDTH, HEIGHT, { palette: index === 0 ? gifPalette : undefined, delay: DELAY,
         repeat: 0, dispose: 1, transparent: index > 0, transparentIndex });
       previous = pixels;
+      previousSource = source;
       // Encode one frame at a time; neither 60 RGBA frames nor a background
       // server job is retained. Yield so close/back controls remain responsive.
       await yieldToPage();

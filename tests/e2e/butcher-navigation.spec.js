@@ -47,14 +47,14 @@ test('旧返回地址展开对应单课，错误参数和损坏草稿仍可正�
 test('回到首页与浏览器返回都能继续刚才学习的关卡', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link',{name:'开始学习',exact:true}).click();
-  await page.getByRole('link',{name:'表达训练场',exact:true}).click();
+  await page.getByRole('link',{name:'帮忙买晚餐',exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();
   await expect(page.getByRole('link',{name:'继续学习',exact:true})).toHaveAttribute('href','/unit49-50/#l4');
-  await expect(page.getByText('上次学到 · 表达训练场')).toBeVisible();
+  await expect(page.getByText('上次学到 · 帮忙买晚餐')).toBeVisible();
   await page.goBack();
   await expect(page).toHaveURL(/\/unit49-50\/#l4$/);
   await page.goForward();
-  await expect(page.getByText('上次学到 · 表达训练场')).toBeVisible();
+  await expect(page.getByText('上次学到 · 帮忙买晚餐')).toBeVisible();
 });
 
 test('手机平板和桌面均可点击课程，图标完整且无横向溢出', async ({ page }) => {

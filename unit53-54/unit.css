@@ -1,0 +1,79 @@
+/* Garden weather-station palette; answer controls retain the shared meaning and shapes. */
+.unit5354-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit5354-workspace .unit-cover>div:last-child{padding:32px}
+.unit5354-workspace .unit-cover h1>span{display:inline-block}
+.unit5354-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit5354-workspace .unit-cover-art>img{display:block;width:100%;height:auto}
+.unit5354-workspace .unit-word{height:242px;gap:7px}
+.unit5354-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit5354-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
+.unit5354-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+@media(max-width:760px){.unit5354-workspace .unit-cover{grid-template-columns:1fr}.unit5354-workspace .unit-cover>div:last-child{padding:24px}.unit5354-workspace .unit-word{height:234px}}
+.unit5354-workspace .practice-scene{display:block;width:132px;height:132px;object-fit:contain;margin:16px auto}
+.unit5354-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit5354-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.unit5354-workspace .offline-task summary::after{content:'＋'}.unit5354-workspace .offline-task[open] summary::after{content:'−'}
+.unit5354-workspace .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.unit5354-workspace .reference-card{padding:14px;border-radius:16px;background:#f5f5e9;text-align:center;font-size:16px}
+.unit5354-workspace .reference-card img{display:block;width:65px;height:65px;object-fit:contain;margin:8px auto}
+.unit5354-workspace .reference-card p{font:700 22px/1.4 'Baloo 2',sans-serif;margin:8px 0}
+.unit5354-workspace .offline-task li,.unit5354-workspace .offline-task p{overflow-wrap:anywhere;font:19px/1.7 'Baloo 2',sans-serif}
+.unit5354-workspace .activity-actions{display:flex;justify-content:center;margin:20px auto}
+.unit5354-workspace .grammar-runner{max-width:740px;margin-inline:auto}
+.unit5354-workspace .grammar-model{background:#fff4e5;border-color:#ddc4a8}
+.unit5354-workspace .grammar-model-line+.grammar-model-line{border-color:#d4dcc5}
+.unit5354-workspace .grammar-rule{color:var(--brown)}
+
+@media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}
+/* Dialogue and weather board share one garden, with no cropping of either character. */
+.unit5354-workspace{--unit-page:#f8faf4;--unit-wash:#eef2e3;--unit-line:#c4cdb4;--unit-accent:#6f8059;--shelf-paper:#f5f1e7;--shelf-line:#d2c7ae;--unit-scene:url('../assets/unit53-54/garden.svg')}
+.unit5354-workspace .weather-world{height:310px;position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--unit-line);border-radius:20px;background:var(--unit-scene) center bottom/cover no-repeat}
+.unit5354-workspace .weather-actor{position:absolute;bottom:14px;width:160px;transform:translateX(-50%);text-align:center;z-index:3;line-height:26px}
+.unit5354-workspace .weather-actor>img{display:block;width:100%;height:240px;object-fit:contain}
+.unit5354-workspace .weather-actor>span{display:inline-block;padding:0 8px;background:#fffcf3;border-radius:8px;font-size:15px;line-height:26px}
+.unit5354-workspace .actor-hans{left:18%}.unit5354-workspace .actor-jim{left:82%}
+.unit5354-workspace .weather-location{position:absolute;left:12px;top:12px;max-width:calc(100% - 24px);font-size:15px;line-height:1.4;padding:6px 12px;margin:0;background:#fffcf3;border:1px solid var(--unit-line);border-radius:9px;z-index:5}
+.unit5354-workspace .dialogue-actor.is-current>span{outline:2px solid #7bacbb;outline-offset:2px}
+.unit5354-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:minmax(0,1fr);padding:0;gap:0;background:none;position:relative}
+.unit5354-workspace .stage-text .weather-world{grid-area:1/1;height:610px;background-size:100% 100%}
+.unit5354-workspace #lessonWorkspace .stage-text .dialogue-actor{width:165px;grid-row:auto;align-self:auto}
+.unit5354-workspace #lessonWorkspace .stage-text .dialogue-actor>img{width:100%;height:248px}
+.unit5354-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;display:flex;flex-direction:column;gap:14px;width:min(650px,calc(100% - 40px));height:264px;margin:56px auto 0;padding:12px 14px;background:transparent;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#94b8c2 transparent}
+.unit5354-workspace #lessonWorkspace .stage-text .dialogue-log:has(.story-lead){justify-content:center}
+.unit5354-workspace .story-lead{display:flex;align-items:center;justify-content:center;align-self:center;gap:12px;max-width:100%;padding:16px;text-align:center;background:#fffdf6;border:1px solid var(--unit-line);border-radius:16px}
+.unit5354-workspace .story-lead>img{width:54px;height:54px;object-fit:contain}.unit5354-workspace .story-lead>p{font-size:22px;line-height:1.45}
+.unit5354-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}.unit5354-workspace .speaker-right{justify-content:flex-end}
+.unit5354-workspace .bubble{position:relative;width:fit-content;max-width:96%;min-height:0;flex:none;margin:0;padding:10px 14px;border:2px solid #b1c9b1;background:#f3f8ef;border-radius:17px;box-shadow:0 3px 0 #d6dfd7}
+.unit5354-workspace .speaker-left .bubble{background:#f2f9fd;border-color:#9bbdce;border-bottom-left-radius:4px}.unit5354-workspace .speaker-right .bubble{border-bottom-right-radius:4px}
+.unit5354-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit5354-workspace .bubble .btext{font-size:22px;line-height:1.35;white-space:normal}.unit5354-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit5354-workspace .bubble .bbtns{margin-top:8px}
+.unit5354-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:12px auto}
+.unit5354-workspace .weather-runner{max-width:880px;margin:auto}.unit5354-workspace .weather-intro h3{text-align:center;margin:10px auto;font-size:21px;line-height:1.4;white-space:pre-line}
+.unit5354-workspace .weather-intro .practice-context{margin:8px auto 14px;white-space:pre-line}
+.unit5354-workspace .weather-application{height:275px;margin-bottom:18px}.unit5354-workspace .weather-application .weather-actor{width:123px;bottom:10px}.unit5354-workspace .weather-application .weather-actor>img{height:185px}
+.unit5354-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(3,minmax(0,1fr));max-width:880px;margin:16px auto;gap:12px}
+.unit5354-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:164px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 8px;text-align:center;font-size:21px}
+.unit5354-workspace .practice-options .picture-option img{width:100px;height:100px;max-width:100%;object-fit:contain}
+.unit5354-workspace .weather-model{display:flex;justify-content:center;align-items:stretch;gap:14px;max-width:680px;padding:12px 16px;margin:12px auto;border-radius:16px;background:#eef2e3;border:1px solid var(--unit-line)}
+.unit5354-workspace .weather-model .grammar-model-line{flex:1;min-width:0;padding:0;border:0;text-align:center}.unit5354-workspace .weather-model .grammar-model-line>p{font-size:20px;line-height:1.35}.unit5354-workspace .weather-model .grammar-model-line>small{font-size:13px;line-height:1.4}
+.unit5354-workspace .grammar-intro h3{font-size:21px;line-height:1.4;margin:12px auto 14px}.unit5354-workspace .grammar-runner .practice-answer-note{height:90px!important}.unit5354-workspace .grammar-runner .cloze-row{padding:10px 12px;margin-bottom:10px}
+.unit5354-workspace .weather-completion{width:min(440px,100%);height:208px;max-width:440px}.unit5354-workspace .weather-completion>img{position:static;display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:600px){
+ .unit5354-workspace .reference-grid{grid-template-columns:1fr}
+ .unit5354-workspace .stage-text .weather-world{height:596px;background-color:#f1f3e8;background-size:auto 250px}
+ .unit5354-workspace #lessonWorkspace .stage-text .dialogue-log{width:calc(100% - 16px);height:343px;margin-top:48px;padding:8px 10px}
+ .unit5354-workspace #lessonWorkspace .stage-text .dialogue-actor,.unit5354-workspace .weather-application .weather-actor{width:98px;bottom:14px}
+ .unit5354-workspace #lessonWorkspace .stage-text .dialogue-actor>img,.unit5354-workspace .weather-application .weather-actor>img{height:147px}
+ .unit5354-workspace .actor-hans{left:18%}.unit5354-workspace .actor-jim{left:82%}
+ .unit5354-workspace .weather-actor>span{font-size:13px;line-height:24px;padding:0 4px}
+ .unit5354-workspace .weather-location{top:8px;font-size:13px;padding:5px 7px}.unit5354-workspace .story-lead>p{font-size:20px}.unit5354-workspace .story-lead{flex-direction:column;padding:14px}
+ .unit5354-workspace .bubble .btext{font-size:20px}.unit5354-workspace .weather-application{height:225px}
+ .unit5354-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.unit5354-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:150px;font-size:18px;padding:10px 5px}.unit5354-workspace .practice-options .picture-option img{width:86px;height:86px}
+ .unit5354-workspace .practice-options:has(.picture-option)>.opt-btn:last-child:nth-child(odd){grid-column:1/-1;width:calc((100% - 10px)/2);justify-self:center}
+ .unit5354-workspace .weather-model{gap:10px;padding:10px}.unit5354-workspace .weather-model .grammar-model-line>p{font-size:18px}.unit5354-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit5354-workspace .grammar-rule{font-size:13px}
+ .unit5354-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit5354-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}.unit5354-workspace .weather-completion{height:162px}
+}
+/* One task prop, no floating foreground table or stock album. */
+.unit5354-workspace .weather-board{position:absolute;left:50%;bottom:55px;width:195px;height:195px;object-fit:contain;transform:translateX(-50%);z-index:2}
+.unit5354-workspace .weather-board-label{position:absolute;left:50%;bottom:23px;transform:translateX(-50%);margin:0;text-align:center;border-radius:8px;padding:3px 9px;background:#fff9e9;font-size:14px;z-index:4;white-space:nowrap}
+.unit5354-workspace .weather-application .weather-board{width:150px;height:150px;bottom:45px}
+@media(max-width:600px){.unit5354-workspace .weather-board,.unit5354-workspace .weather-application .weather-board{width:95px;height:112px;bottom:44px}.unit5354-workspace .weather-board-label{bottom:18px;font-size:12px;padding:2px 4px;max-width:39%;white-space:normal}}

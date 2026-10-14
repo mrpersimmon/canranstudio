@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-14",
+  "unit": "unit81-82",
+  "branch": "codex/debug-grammar-v2",
+  "status": "local-only",
+  "checks": [
+    {
+      "scope": "Chromium course",
+      "count": 20,
+      "path": "output/unit8182-chromium-final",
+      "result": "passed"
+    },
+    {
+      "scope": "WebKit course",
+      "count": 20,
+      "path": "output/unit8182-webkit",
+      "result": "passed"
+    },
+    {
+      "scope": "Chromium account root",
+      "count": 6,
+      "path": "output/unit8182-login-root",
+      "result": "passed"
+    },
+    {
+      "scope": "Chromium account prefix",
+      "count": 6,
+      "path": "output/unit8182-login-prefix",
+      "result": "passed"
+    },
+    {
+      "scope": "WebKit account root",
+      "count": 6,
+      "path": "output/unit8182-login-webkit-root",
+      "result": "passed"
+    },
+    {
+      "scope": "WebKit account prefix",
+      "count": 6,
+      "path": "output/unit8182-login-webkit-prefix",
+      "result": "passed"
+    },
+    {
+      "scope": "Navigation and authorization",
+      "count": 2,
+      "path": "output/unit8182-navigation",
+      "result": "passed"
+    },
+    {
+      "scope": "Final story repair regression",
+      "count": 4,
+      "path": "output/unit8182-story-final",
+      "result": "passed"
+    }
+  ],
+  "limits": [
+    "WebKit rejected offline navigation before application fallback; reconnect record recovery verified.",
+    "Mobile WeChat save, teacher and child acceptance pending.",
+    "Not committed, pushed, or deployed."
+  ]
+}

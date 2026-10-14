@@ -1,0 +1,204 @@
+
+Running 68 tests using 1 worker
+
+(node:88413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/68] tests/e2e/submission-statistics.spec.js:16:4 › 3-4 共用结算按提交计次，手机三卡完整，刷新保留
+  1) tests/e2e/submission-statistics.spec.js:16:4 › 3-4 共用结算按提交计次，手机三卡完整，刷新保留 ──────────────────────
+
+    Error: expect(locator).toBeInViewport() failed
+
+    Locator:  locator('.stage-listen').getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button').first()
+    Expected: in viewport
+    Received: viewport ratio 0.22550299763679504
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeInViewport" with timeout 5000ms
+      - waiting for locator('.stage-listen').getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button').first()
+        14 × locator resolved to <button type="button" class="btn btn-mini btn-yellow">再练一轮</button>
+           - unexpected value "viewport ratio 0.22550299763679504"
+
+
+       at ../support/completion-layout.js:26
+
+      24 |   await expect(buttons).toHaveCount(2);
+      25 |   for (const button of await buttons.all()) {
+    > 26 |     await expect(button).toBeInViewport({ ratio: 1 });
+         |                          ^
+      27 |     const box = await button.boundingBox();
+      28 |     expect(box.height).toBeGreaterThanOrEqual(44);
+      29 |     expect(box.y).toBeGreaterThanOrEqual(cards[0].bottom);
+        at expectCompactCompletion (/Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/support/completion-layout.js:26:26)
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/e2e/submission-statistics.spec.js:28:3
+
+    Error Context: test-results/submission-statistics-3-4-共用结算按提交计次，手机三卡完整，刷新保留/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/submission-statistics-3-4-共用结算按提交计次，手机三卡完整，刷新保留/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/submission-statistics-3-4-共用结算按提交计次，手机三卡完整，刷新保留/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:88458) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/68] tests/e2e/submission-statistics.spec.js:16:4 › 5-6 共用结算按提交计次，手机三卡完整，刷新保留
+[3/68] tests/e2e/submission-statistics.spec.js:16:4 › 7-8 共用结算按提交计次，手机三卡完整，刷新保留
+[4/68] tests/e2e/submission-statistics.spec.js:16:4 › 9-10 共用结算按提交计次，手机三卡完整，刷新保留
+[5/68] tests/e2e/submission-statistics.spec.js:16:4 › 11-12 共用结算按提交计次，手机三卡完整，刷新保留
+[6/68] tests/e2e/submission-statistics.spec.js:16:4 › 13-14 共用结算按提交计次，手机三卡完整，刷新保留
+[7/68] tests/e2e/submission-statistics.spec.js:16:4 › 15-16 共用结算按提交计次，手机三卡完整，刷新保留
+[8/68] tests/e2e/submission-statistics.spec.js:16:4 › 17-18 共用结算按提交计次，手机三卡完整，刷新保留
+[9/68] tests/e2e/submission-statistics.spec.js:16:4 › 19-20 共用结算按提交计次，手机三卡完整，刷新保留
+[10/68] tests/e2e/submission-statistics.spec.js:16:4 › 21-22 共用结算按提交计次，手机三卡完整，刷新保留
+[11/68] tests/e2e/submission-statistics.spec.js:16:4 › 23-24 共用结算按提交计次，手机三卡完整，刷新保留
+[12/68] tests/e2e/submission-statistics.spec.js:16:4 › 25-26 共用结算按提交计次，手机三卡完整，刷新保留
+[13/68] tests/e2e/submission-statistics.spec.js:16:4 › 27-28 共用结算按提交计次，手机三卡完整，刷新保留
+[14/68] tests/e2e/submission-statistics.spec.js:16:4 › 29-30 共用结算按提交计次，手机三卡完整，刷新保留
+[15/68] tests/e2e/submission-statistics.spec.js:16:4 › 31-32 共用结算按提交计次，手机三卡完整，刷新保留
+[16/68] tests/e2e/submission-statistics.spec.js:16:4 › 33-34 共用结算按提交计次，手机三卡完整，刷新保留
+[17/68] tests/e2e/submission-statistics.spec.js:16:4 › 35-36 共用结算按提交计次，手机三卡完整，刷新保留
+[18/68] tests/e2e/submission-statistics.spec.js:16:4 › 37-38 共用结算按提交计次，手机三卡完整，刷新保留
+[19/68] tests/e2e/submission-statistics.spec.js:16:4 › 39-40 共用结算按提交计次，手机三卡完整，刷新保留
+[20/68] tests/e2e/submission-statistics.spec.js:36:1 › 整组配对和多空只按一次检查计数，选改、提示和已判分按钮不增加次数
+[21/68] tests/e2e/submission-statistics.spec.js:57:1 › 49–50 分拣按真实回练顺序计算，订正后仍保留首次结果
+[22/68] tests/e2e/unit-dedup.spec.js:20:1 › Lesson 1–2 找物并入词汇，十题挑战保持各自判断
+[23/68] tests/e2e/unit-dedup.spec.js:51:1 › Lesson 3–4 合并重复工坊，25题覆盖不同语言判断
+  2) tests/e2e/unit-dedup.spec.js:51:1 › Lesson 3–4 合并重复工坊，25题覆盖不同语言判断 ─────────────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-reply').getByRole('progressbar')
+    Expected: "4"
+    Received: "10"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-reply').getByRole('progressbar')
+        14 × locator resolved to <span aria-label="本轮进度" aria-valuemin="0" aria-valuenow="0" role="progressbar" aria-valuemax="10" class="practice-meter" aria-valuetext="已答对 0 / 10 题，当前第 1 题">…</span>
+           - unexpected value "10"
+
+
+      54 |   await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
+      55 |   await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '5');
+    > 56 |   await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '4');
+         |                                                                       ^
+      57 |   await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '9');
+      58 |   await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
+      59 |   await expect(page.locator('.stage-exam')).toContainText('首次独立答对 9 / 9');
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/e2e/unit-dedup.spec.js:56:71
+
+    Error Context: test-results/unit-dedup-Lesson-3–4-合并重复工坊，25题覆盖不同语言判断/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit-dedup-Lesson-3–4-合并重复工坊，25题覆盖不同语言判断/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit-dedup-Lesson-3–4-合并重复工坊，25题覆盖不同语言判断/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:88671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[24/68] tests/e2e/unit-dedup.spec.js:62:1 › Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断
+[25/68] tests/e2e/unit-dedup.spec.js:171:1 › Lesson 1–2 升级使变化的找物、挑战与精简拼句重新作答
+[26/68] tests/e2e/unit-dedup.spec.js:187:1 › Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留
+  3) tests/e2e/unit-dedup.spec.js:187:1 › Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留 ──────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-reply').getByRole('progressbar')
+    Expected: "4"
+    Received: "10"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-reply').getByRole('progressbar')
+        14 × locator resolved to <span aria-label="本轮进度" aria-valuemin="0" aria-valuenow="0" role="progressbar" aria-valuemax="10" class="practice-meter" aria-valuetext="已答对 0 / 10 题，当前第 1 题">…</span>
+           - unexpected value "10"
+
+
+      163 |   await page.goto('/' + unit + '/#learn/' + activity);
+      164 |   const room = page.locator('.stage-' + activity);
+    > 165 |   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', String(count));
+          |                                               ^
+      166 |   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
+      167 |   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+      168 |   await expect(room.locator('button[aria-pressed="true"]')).toHaveCount(0);
+        at expectFresh (/Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/e2e/unit-dedup.spec.js:165:47)
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/e2e/unit-dedup.spec.js:197:66
+
+    Error Context: test-results/unit-dedup-Lesson-3–4-更早的五题接力不冒充已核对兼容版本，原文位置保留/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/unit-dedup-Lesson-3–4-更早的五题接力不冒充已核对兼容版本，原文位置保留/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/unit-dedup-Lesson-3–4-更早的五题接力不冒充已核对兼容版本，原文位置保留/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:88749) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[27/68] tests/e2e/unit-dedup.spec.js:208:1 › Lesson 49–50 旧理解、问句、分类与挑战不代答新版，交接活动保留
+[28/68] tests/e2e/unit1-2-completion.spec.js:8:1 › 三张统计卡按实际提交计次，订正参与连续答对且默认依次入场和跳数
+[29/68] tests/e2e/unit1-2-completion.spec.js:55:1 › 390×500 短屏结束后从插画顶部露出，不被固定导航遮挡
+[30/68] tests/e2e/unit1-2-completion.spec.js:71:1 › 语法小工坊保留人物成果画面，恢复三张统计卡
+[31/68] tests/e2e/unit1-2-completion.spec.js:85:37 › root 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整
+[32/68] tests/e2e/unit1-2-completion.spec.js:85:37 › /lesson 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整
+[33/68] tests/e2e/unit1-2-completion.spec.js:126:1 › 同题错两次各计一次，订正后刷新保留十次错误，再练重新统计
+[34/68] tests/e2e/unit1-2-copy.spec.js:9:1 › 星星进度区分开始、继续、订正后重练和已获星查看
+[35/68] tests/e2e/unit1-2-copy.spec.js:39:1 › 短题干、阅读摘录和语法示范保留必要条件，所有题仍可完成
+[36/68] tests/e2e/unit1-2-copy.spec.js:84:1 › 订正完成明确区分首次结果，学习记录收起详细信息
+[37/68] tests/e2e/unit1-2-copy.spec.js:113:1 › 仅更新文案保留中途作答，继续全对仍获星且不提示课程升级
+[38/68] tests/e2e/unit1-2-five-zones.spec.js:7:1 › 五个答题环节按 5／5／12／5／10 呈现，旧找物入口转到词汇环节
+[39/68] tests/e2e/unit1-2-five-zones.spec.js:22:1 › 旧找物位置可从课程首页继续，不退回开始学习
+[40/68] tests/e2e/unit1-2-five-zones.spec.js:32:39 › 六区旧版只打开，升级后五题首次全对仍可获星
+[41/68] tests/e2e/unit1-2-five-zones.spec.js:32:39 › 六区旧版选中未提交，升级后五题首次全对仍可获星
+[42/68] tests/e2e/unit1-2-five-zones.spec.js:51:1 › 六区旧记录迁入：未改题保留，改写题未答，历史结果不能拼成零错星星
+[43/68] tests/e2e/unit1-2-five-zones.spec.js:93:1 › 学习内容不发星；每区整轮首次零错得一星，改正后完成和重练不会多发或扣回
+[44/68] tests/e2e/unit1-2-five-zones.spec.js:120:1 › 迁入题各归其位，故事用原文手提包，工坊以问答配对练习 it 与 I
+[45/68] tests/e2e/unit1-2-grammar-workshop.spec.js:6:1 › 旧锦囊入口进入连续十二题，短示范与答对小结嵌入题目
+[46/68] tests/e2e/unit1-2-grammar-workshop.spec.js:29:1 › 十二题循序学习，are 与 am 不混教，提示和错答保留，结算统计实际提交次数
+[47/68] tests/e2e/unit3-4-grammar.spec.js:9:1 › 旧锦囊入口进入语法小工坊：先示范，错答不揭底，再撤去示范
+[48/68] tests/e2e/unit3-4-grammar.spec.js:30:1 › 十题完成：拼句撤回、逐空选择、配对、提示、错答和刷新均保留真实结果
+[49/68] tests/e2e/unit3-4-grammar.spec.js:83:39 › 旧空白草稿升级后，新语法首轮全对正常获星
+[50/68] tests/e2e/unit3-4-grammar.spec.js:83:39 › 旧选过但未提交升级后，新语法首轮全对正常获星
+[51/68] tests/e2e/unit3-4-grammar.spec.js:93:1 › 旧综合挑战全对升级：保留九题学习记录，新两题不代答，重练才取得新版星星
+[52/68] tests/e2e/unit3-4-grammar.spec.js:117:44 › 320 宽：示范、长选项、词块和结算完整可用
+[53/68] tests/e2e/unit3-4-grammar.spec.js:117:44 › 390 宽：示范、长选项、词块和结算完整可用
+[54/68] tests/e2e/unit3-4-grammar.spec.js:117:44 › 768 宽：示范、长选项、词块和结算完整可用
+[55/68] tests/e2e/unit3-4-grammar.spec.js:117:44 › 1280 宽：示范、长选项、词块和结算完整可用
+[56/68] tests/e2e/unit3-4-grammar.spec.js:142:1 › 真实五区完成后保留五星日期，阅读不额外计星
+[57/68] tests/e2e/unit41-42.spec.js:7:1 › 购物袋图鉴：先认物品、保留音标、点击翻义、翻页再进入练习
+[58/68] tests/e2e/unit41-42.spec.js:24:1 › 43 题完整流程：五区五星、无语音请求、所有结算三卡与图标一致
+[59/68] tests/e2e/unit41-42.spec.js:46:1 › 词块撤回、重复错答与提示：本次统计按提交，重练归零
+[60/68] tests/e2e/unit41-42.spec.js:82:39 › 320 宽：舞台、配对、长句、词块、结算和卡片可见
+[61/68] tests/e2e/unit41-42.spec.js:82:39 › 390 宽：舞台、配对、长句、词块、结算和卡片可见
+[62/68] tests/e2e/unit41-42.spec.js:82:39 › 768 宽：舞台、配对、长句、词块、结算和卡片可见
+[63/68] tests/e2e/unit41-42.spec.js:82:39 › 1280 宽：舞台、配对、长句、词块、结算和卡片可见
+[64/68] tests/e2e/unit41-42.spec.js:105:1 › 完整小剧场：袋子放上椅子，原文保留历史且阅读不发星
+[65/68] tests/e2e/unit41-42.spec.js:125:1 › 语法从 there be 和量词出发：错答不揭底，改正后才出现短规则
+[66/68] tests/e2e/unit41-42.spec.js:145:1 › 场景先选后检查：数量改变有依据，第三题两次错答结算为3／5／2
+[67/68] tests/e2e/unit41-42.spec.js:179:1 › 教材替换和书写保留为参考，不增加答题区
+[68/68] tests/e2e/unit41-42.spec.js:192:1 › 带图选项保持大图在上、文字在下，桌面并排且手机不溢出
+  3 failed
+    tests/e2e/submission-statistics.spec.js:16:4 › 3-4 共用结算按提交计次，手机三卡完整，刷新保留 ───────────────────────
+    tests/e2e/unit-dedup.spec.js:51:1 › Lesson 3–4 合并重复工坊，25题覆盖不同语言判断 ──────────────────────────────
+    tests/e2e/unit-dedup.spec.js:187:1 › Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留 ───────────────────────
+  65 passed (5.7m)

@@ -41,7 +41,7 @@ test('管理员可以创建班级并只开放 Lesson 1–2', async ({ page }) =>
   await page.getByRole('checkbox', { name: /Lesson 1–2 / }).check();
   await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('已保存');
-  await expect(page.locator('#courses').getByRole('checkbox')).toHaveCount(21);
+  await expect(page.locator('#courses').getByRole('checkbox')).toHaveCount(45);
   await expect(page.getByRole('checkbox', { name: /Lesson 1–2 / })).toBeChecked();
 });
 
@@ -125,15 +125,15 @@ test('16 个教学单元冷启动、图片完整、词卡和一道真实作答�
  // The helper checks matching labels one by one, so select all in the management UI.
  await page.getByRole('button',{name:'管理 课程回归班'}).click();for(const box of await page.locator('#courses').getByRole('checkbox').all())await box.check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');
  const a=await studentLogin(browser,code);await a.page.setViewportSize({width:390,height:844});const errors=[];a.page.on('pageerror',e=>errors.push(e.message));
- const answers={'unit1-2':'Excuse me!','unit3-4':'My umbrella, please.', 'unit5-6':'Sophie','unit7-8':'工程师','unit9-10':'成年女子','unit11-12':'Whose','unit13-14':'颜色','unit15-16':'雇员；受雇的人','unit17-18':'man','unit19-20':'累的；疲倦的','unit21-22':'给','unit23-24':'哪些','unit25-26':'厨房','unit27-28':'客厅','unit29-30':'关上；关闭','unit49-50':'Mrs. Bird'};
+ const answers={'unit1-2':'Excuse me!','unit3-4':'My umbrella, please.', 'unit5-6':'Sophie','unit7-8':'工程师','unit9-10':'成年女子','unit11-12':'Whose','unit13-14':'颜色','unit15-16':'雇员；受雇的人','unit17-18':'man','unit19-20':'累的；疲倦的','unit21-22':'给','unit23-24':'哪些','unit25-26':'厨房','unit27-28':'客厅','unit29-30':'关上；关闭','unit49-50':'要豌豆还是豆角'};
  for(const id of Object.keys(answers)){
   await a.page.goto('/lesson/'+id+'/#learn/words');await expect(a.page.locator('.unit-word').first()).toBeVisible();await expect(a.page.locator('#courseLoader')).toHaveCount(0);
   expect(await a.page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
   expect(await a.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await a.page.locator('.unit-word').first().click();
   await a.page.screenshot({path:'output/login/'+id+'-mobile.png'});
   // Every unit requires an explicit, complete answer before feedback appears.
-  await a.page.goto('/lesson/'+id+'/#learn/'+(id==='unit49-50'?'give':id==='unit1-2'?'manners':'listen'));
-  const room=a.page.locator('.stage-'+(id==='unit49-50'?'give':id==='unit1-2'?'manners':'listen'));await expect(room.locator('.practice-options button').first()).toBeVisible();
+  await a.page.goto('/lesson/'+id+'/#learn/'+(id==='unit49-50'?'grammar':id==='unit1-2'?'manners':'listen'));
+  const room=a.page.locator('.stage-'+(id==='unit49-50'?'grammar':id==='unit1-2'?'manners':'listen'));await expect(room.locator('.practice-options button').first()).toBeVisible();
   if(['unit3-4','unit5-6'].includes(id))await expect(room.getByRole('button',{name:'听一遍',exact:true})).toHaveCount(0);
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();
   if(['unit1-2','unit49-50'].includes(id))await room.locator('.practice-options button').first().click();
@@ -144,10 +144,10 @@ test('16 个教学单元冷启动、图片完整、词卡和一道真实作答�
  expect(errors).toEqual([]);await a.context.close();
 });
 
-test('49–50 完整课程真实音频、作答和证书，成果换设备保留',async({page,browser})=>{
+test('49–50 无配音完整课程与五区纪念卡，成果换设备保留',async({page,browser})=>{
  test.setTimeout(240000);await adminLogin(page);const code=await createStudent(page,'肉店班','小厨',[/Lesson 49–50 /]);const a=await studentLogin(browser,code);
- await require('../support/unit49-50-flow').completeUnit(a.page,{basePath:'/lesson/',realAudio:true});await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
- const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit49-50/#learn/certificate');await expect(b.page.locator('#starCount')).toHaveText('15');await expect(b.page.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();await a.context.close();await b.context.close();
+ const flow=require('../support/unit4950');await flow.story(a.page,'/lesson');for(const id of Object.keys(flow.ANSWERS))await flow.activity(a.page,id,{base:'/lesson'});await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+ const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit49-50/#learn/certificate');await expect(b.page.locator('#starCount')).toHaveText('5');await expect(b.page.getByRole('button',{name:'保存动图',exact:true})).toBeEnabled();await a.context.close();await b.context.close();
 });
 
 test('冷启动图片失败保持加载页，修复后重试；未登录的脚本关闭页面无课件',async({page,browser})=>{

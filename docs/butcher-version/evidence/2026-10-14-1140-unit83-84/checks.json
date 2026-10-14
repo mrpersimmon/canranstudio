@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-14",
+  "unit": "unit83-84",
+  "branch": "codex/debug-grammar-v2",
+  "status": "local-only",
+  "checks": [
+    {
+      "scope": "Chromium course and four-width story",
+      "count": 20,
+      "result": "passed across first run and focused rerun",
+      "paths": [
+        "output/unit8384-chromium",
+        "output/unit8384-reference"
+      ],
+      "note": "19 passed initially; 1 reference-copy expectation corrected in test, then passed."
+    },
+    {
+      "scope": "WebKit course and four-width story",
+      "count": 20,
+      "result": "passed",
+      "path": "output/unit8384-webkit"
+    },
+    {
+      "scope": "Chromium authenticated root",
+      "count": 6,
+      "result": "passed",
+      "path": "output/unit8384-login-root-chromium"
+    },
+    {
+      "scope": "Chromium authenticated prefix",
+      "count": 6,
+      "result": "passed",
+      "path": "output/unit8384-login-subpath-chromium"
+    },
+    {
+      "scope": "WebKit authenticated prefix with mobile student contexts",
+      "count": 6,
+      "result": "passed",
+      "path": "output/unit8384-login-subpath-webkit"
+    },
+    {
+      "scope": "Navigation and class access with /lesson/ mount",
+      "count": 2,
+      "result": "passed",
+      "path": "output/unit8384-navigation-final"
+    },
+    {
+      "scope": "Final scene Chromium four widths",
+      "count": 4,
+      "result": "passed",
+      "path": "output/unit8384-story-final-chromium"
+    },
+    {
+      "scope": "Final scene WebKit four widths",
+      "count": 4,
+      "result": "passed",
+      "path": "output/unit8384-story-final-webkit"
+    },
+    {
+      "scope": "WebKit authenticated root with mobile student contexts",
+      "count": 6,
+      "result": "passed across first run and failed-case rerun",
+      "paths": [
+        "output/unit8384-login-root-webkit-mobile",
+        "output/unit8384-login-root-webkit-mobile-recheck"
+      ],
+      "note": "2 initial passes and 4 timeouts coincided with high system load. The 4 failed cases passed unchanged on focused rerun. No confirmed stable product defect or root cause."
+    }
+  ],
+  "additional_checks": [
+    "Authenticated build succeeds at root and /lesson/, 42 protected paired units.",
+    "New lesson scripts parse; scoped whitespace checks passed.",
+    "Actual student preview reopened on port 4320 with zero stars; no production data used."
+  ],
+  "limits": [
+    "WebKit rejected offline navigation before app fallback; reconnect and record recovery verified separately.",
+    "Mobile WeChat saving, teacher and child acceptance pending.",
+    "No commit, push or deployment."
+  ],
+  "failed_attempt_history": [
+    "One initial Chromium reference-text expectation mismatch corrected in test only; targeted rerun passed.",
+    "Four root mobile WebKit timeouts retained with traces; unchanged focused rerun passed.",
+    "Navigation checks initially invoked with root mount but these existing tests target /lesson/; one failed and one interrupted. Correct /lesson/ invocation passed 2/2 without changing assertions."
+  ]
+}

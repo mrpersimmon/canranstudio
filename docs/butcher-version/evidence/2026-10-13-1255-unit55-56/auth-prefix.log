@@ -1,0 +1,17 @@
+
+Running 8 tests using 1 worker
+
+(node:17281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/login/award-card-readability.spec.js:46:1 › 45–46 原问题：标题和姓名清晰，桌面与手机图文不重叠 (9.8s)
+  ✓  2 tests/login/award-card-readability.spec.js:62:1 › 长姓名和六种卡面：课程、悬浮卡、纪念册放大与实际导出保持同一安全排版 (29.4s)
+(node:17349) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/login/unit55-56.spec.js:9:1 › 课程入口保持班级授权：新课可单独开放 (3.0s)
+  ✓  4 tests/login/unit55-56.spec.js:23:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (1.4s)
+  ✓  5 tests/login/unit55-56.spec.js:36:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (1.0m)
+  ✓  6 tests/login/unit55-56.spec.js:136:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (4.9s)
+  ✓  7 tests/login/unit55-56.spec.js:160:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (20.5s)
+  ✓  8 tests/login/unit55-56.spec.js:199:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (8.5s)
+
+  8 passed (2.4m)

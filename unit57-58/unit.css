@@ -1,0 +1,77 @@
+/* A field notebook for the same family on an unusual day. */
+.unit5758-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit5758-workspace .unit-cover>div:last-child{padding:32px}
+.unit5758-workspace .unit-cover h1>span{display:inline-block}
+.unit5758-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit5758-workspace .unit-cover-art>img{display:block;width:100%;height:auto}
+.unit5758-workspace .unit-word{height:242px;gap:7px}
+.unit5758-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit5758-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
+.unit5758-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+@media(max-width:760px){.unit5758-workspace .unit-cover{grid-template-columns:1fr}.unit5758-workspace .unit-cover>div:last-child{padding:24px}.unit5758-workspace .unit-word{height:234px}}
+.unit5758-workspace .practice-scene{display:block;width:132px;height:132px;object-fit:contain;margin:16px auto}
+.unit5758-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit5758-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.unit5758-workspace .offline-task summary::after{content:'＋'}.unit5758-workspace .offline-task[open] summary::after{content:'−'}
+.unit5758-workspace .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.unit5758-workspace .reference-card{padding:14px;border-radius:16px;background:#f5f5e9;text-align:center;font-size:16px}
+.unit5758-workspace .reference-card img{display:block;width:65px;height:65px;object-fit:contain;margin:8px auto}
+.unit5758-workspace .reference-card p{font-size:22px;line-height:1.4;margin:8px 0}
+.unit5758-workspace .offline-task li,.unit5758-workspace .offline-task p{overflow-wrap:anywhere;font-size:19px;line-height:1.7}
+.unit5758-workspace .activity-actions{display:flex;justify-content:center;margin:20px auto}
+.unit5758-workspace .grammar-runner{max-width:740px;margin-inline:auto}
+.unit5758-workspace .grammar-model{background:#fff4e5;border-color:#ddc4a8}
+.unit5758-workspace .grammar-model-line+.grammar-model-line{border-color:#d4dcc5}
+.unit5758-workspace .grammar-rule{color:var(--brown)}
+
+.unit5758-workspace{--unit-page:#fffaf1;--unit-wash:#eaf2e4;--unit-line:#c4cfba;--unit-accent:#708c6b;--shelf-paper:#f5edda;--shelf-line:#d8c7a4}
+.unit5758-workspace .clock-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+.unit5758-workspace .clock-grid img{width:96px;height:96px}
+.unit5758-workspace .clock-grid .reference-card p{font-size:18px}
+.unit5758-workspace .moment-world{position:relative;isolation:isolate;overflow:hidden;height:650px;border:1px solid var(--unit-line);border-radius:20px;background:#eaf2e4 url('../assets/unit57-58/street.svg') center bottom/100% 100% no-repeat}
+.unit5758-workspace .moment-world[data-beat="tea"],.unit5758-workspace .moment-world[data-beat="play"]{background-image:url('../assets/unit57-58/garden-bg.svg')}
+.unit5758-workspace .moment-world[data-beat="read"]{background-image:url('../assets/unit57-58/room-night.svg')}
+.unit5758-workspace .moment-clock{position:absolute;top:10px;left:14px;width:54px;height:54px;object-fit:contain;z-index:4}
+.unit5758-workspace .moment-location{position:absolute;top:18px;left:80px;max-width:calc(100% - 96px);font-size:16px;line-height:1.45;margin:0;padding:5px 10px;border:1px solid var(--unit-line);border-radius:9px;background:#fffdf5;z-index:4}
+.unit5758-workspace .moment-cast{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:min(78%,460px);height:270px;object-fit:contain;z-index:3}
+.unit5758-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:minmax(0,1fr);padding:0;gap:0;background:none;position:relative}
+.unit5758-workspace .stage-text .moment-world{grid-area:1/1}
+.unit5758-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;display:flex;flex-direction:column;gap:14px;width:min(680px,calc(100% - 40px));height:280px;margin:74px auto 0;padding:10px 14px;background:transparent;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#8da984 transparent}
+.unit5758-workspace #lessonWorkspace .stage-text .dialogue-log:has(.story-lead){justify-content:center}
+.unit5758-workspace .story-lead{display:flex;align-items:center;justify-content:center;align-self:center;gap:12px;max-width:100%;padding:16px;text-align:center;background:#fffdf6;border:1px solid var(--unit-line);border-radius:16px}
+.unit5758-workspace .story-lead>img{width:54px;height:54px;object-fit:contain}.unit5758-workspace .story-lead>p{font-size:22px;line-height:1.45}
+.unit5758-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}.unit5758-workspace .narrator-row{justify-content:center}
+.unit5758-workspace .bubble{position:relative;width:100%;max-width:100%;min-height:0;flex:none;margin:0;padding:10px 14px;border:1px solid #c4cfba;background:#fffdf4;border-radius:17px;box-shadow:0 3px 0 #dfe6d5}
+.unit5758-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit5758-workspace .bubble .btext{font-size:22px;line-height:1.4;white-space:normal}.unit5758-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit5758-workspace .bubble .bbtns{margin-top:8px}
+.unit5758-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:12px auto}
+.unit5758-workspace .moment-runner{max-width:880px;margin:auto}.unit5758-workspace .moment-intro h3{text-align:center;margin:10px auto;font-size:21px;line-height:1.4;white-space:pre-line}
+.unit5758-workspace .moment-intro .practice-context{margin:8px auto 14px;white-space:pre-line}
+.unit5758-workspace .moment-application{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:160px;margin:14px auto 18px;border:1px solid var(--unit-line);border-radius:18px;background:#f6f5e9;overflow:hidden}
+.unit5758-workspace .observation-notebook{width:110px;height:105px;object-fit:contain}.unit5758-workspace .observation-label{font-size:15px;margin:0}
+.unit5758-workspace .moment-application[data-task="time"]{height:196px}.unit5758-workspace .observation-clock{width:174px;height:174px;object-fit:contain}
+.unit5758-workspace .moment-application[data-task="caption"]{height:250px;background:#eaf2e4 url('../assets/unit57-58/garden-bg.svg') center bottom/cover no-repeat}
+.unit5758-workspace .observation-cast{width:min(75%,320px);height:198px;object-fit:contain;margin-top:30px}
+.unit5758-workspace .moment-application[data-sent="true"]{border:3px solid #708c6b}
+.unit5758-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(3,minmax(0,1fr));max-width:880px;margin:16px auto;gap:12px}
+.unit5758-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:164px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 8px;text-align:center;font-size:21px}
+.unit5758-workspace .practice-options .picture-option img{width:100px;height:100px;max-width:100%;object-fit:contain}
+.unit5758-workspace .moment-model{display:flex;justify-content:center;align-items:stretch;gap:14px;max-width:680px;padding:12px 16px;margin:12px auto;border-radius:16px;background:#f7efdc;border:1px solid #d8c7a4}
+.unit5758-workspace .moment-model .grammar-model-line{flex:1;min-width:0;padding:0;border:0;text-align:center}.unit5758-workspace .moment-model .grammar-model-line>p{font-size:20px;line-height:1.4}.unit5758-workspace .moment-model .grammar-model-line>small{font-size:13px;line-height:1.4}
+.unit5758-workspace .grammar-intro h3{font-size:21px;line-height:1.4;margin:12px auto 14px}.unit5758-workspace .grammar-runner .practice-answer-note{height:90px!important}.unit5758-workspace .grammar-runner .cloze-row{padding:10px 12px;margin-bottom:10px}
+.unit5758-workspace .moment-completion{width:min(440px,100%);height:208px;max-width:440px}.unit5758-workspace .moment-completion>img{position:static;display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:600px){
+ .unit5758-workspace .reference-grid{grid-template-columns:1fr}.unit5758-workspace .clock-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .unit5758-workspace .stage-text .moment-world{height:660px;background-size:auto 330px}
+ .unit5758-workspace .stage-text .moment-world:is([data-beat="school"],[data-beat="shops"]){background-image:url('../assets/unit57-58/street-mobile.svg');background-size:100% 100%}
+ .unit5758-workspace .stage-text .moment-world[data-beat="read"]{background-image:url('../assets/unit57-58/room-night-mobile.svg');background-size:100% 100%}
+ .unit5758-workspace #lessonWorkspace .stage-text .dialogue-log{width:calc(100% - 16px);height:360px;margin-top:70px;padding:8px 10px}
+ .unit5758-workspace .moment-cast{height:200px;bottom:16px;width:calc(100% - 24px);max-width:310px}
+ .unit5758-workspace .moment-clock{left:9px;width:50px;height:50px}.unit5758-workspace .moment-location{left:65px;top:16px;max-width:calc(100% - 74px);font-size:13px;padding:5px 7px}
+ .unit5758-workspace .story-lead>p{font-size:20px}.unit5758-workspace .story-lead{flex-direction:column;padding:14px}.unit5758-workspace .bubble .btext{font-size:20px}
+ .unit5758-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.unit5758-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:150px;font-size:18px;padding:10px 5px}.unit5758-workspace .practice-options .picture-option img{width:86px;height:86px}
+ .unit5758-workspace .practice-options:has(.picture-option)>.opt-btn:last-child:nth-child(odd){grid-column:1/-1;width:calc((100% - 10px)/2);justify-self:center}
+ .unit5758-workspace .moment-model{gap:10px;padding:10px}.unit5758-workspace .moment-model .grammar-model-line>p{font-size:18px}.unit5758-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit5758-workspace .grammar-rule{font-size:13px}
+ .unit5758-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit5758-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}.unit5758-workspace .moment-completion{height:162px}
+}
+
+@media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}

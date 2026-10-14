@@ -25,11 +25,11 @@ for (const [pair, count] of [
   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-  await expectCompactCompletion(page, room);
+  await expectCompactCompletion(page, room, { illustrated: pair === '3-4' });
   if (['3-4', '5-6', '25-26', '39-40'].includes(pair)) await room.screenshot({ path: `output/playwright/submission-statistics/${pair}-320.png` });
   await page.reload();
   await expect(results.locator('.completion-number')).toHaveText([String(count), String(count), '0']);
-  await expectCompactCompletion(page, room);
+  await expectCompactCompletion(page, room, { illustrated: pair === '3-4' });
   await expect(page.locator('.stage-words, .stage-text').getByRole('list', { name: '本轮成果' })).toHaveCount(0);
 });
 
@@ -54,7 +54,8 @@ test('整组配对和多空只按一次检查计数，选改、提示和已判�
   await expect(page.locator('.stage-listen .completion-number')).toHaveText(['5', '5', '0']);
 });
 
-test('49–50 分拣按真实回练顺序计算，订正后仍保留首次结果', async ({ page }) => {
+test('旧版49–50 分拣按真实回练顺序计算，订正后仍保留首次结果', async ({ page }) => {
+  await require('../support/unit4950-legacy').legacy(page);
   await page.goto('/lesson/unit49-50/#learn/subjects');
   const room = page.locator('.stage-subjects');
   for (const [index, answer] of unitSubjectAnswers.entries()) {

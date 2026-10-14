@@ -38,7 +38,7 @@ test('真实完成20句和26题获得五星，日期固定、重练连续，各�
  await page.reload();await expect(page.locator('#certificateDate')).toHaveText(date);
  await page.goto('/unit5-6/#learn/listen');const room=page.locator('.stage-listen');await room.getByRole('button',{name:'再练一轮',exact:true}).click();
  await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('5');
- for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:other==='unit49-50'?'领取单元证书':'保存动图',exact:true})).toBeDisabled();}
+ for(const other of ['unit1-2','unit3-4','unit49-50']){await page.goto('/'+other+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();}
  expect(errors).toEqual([]);
 });
 
@@ -95,7 +95,7 @@ test('题目升版不承接旧选择，未改活动保留；同地址继续仍�
 
 test('首页重开包含四个单元，取消保留，确认只清除本路径的学习记录',async({page})=>{
   await page.goto('/unit5-6/#learn/refer');const root=page.locator('.stage-introduce');await root.getByRole('button',{name:'She',exact:true}).click();
-  for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit49-50/#learn/give']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}
+  for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit49-50/#learn/apply']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}
   await page.goto('/lesson/');
   await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();
   for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会'])await expect(page.getByRole('link',{name:'继续学习：'+name,exact:true})).toBeVisible();

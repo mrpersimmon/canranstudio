@@ -98,7 +98,8 @@ for(const item of [
   await visibleQuestion(page, room.locator('.practice-content h3'));await expect(check).toBeVisible();
 });
 
-for(const route of ['/lesson49/','/unit49-50/'])test(`${route} 人称分拣答错原题重试不跳动，答对继续后新主语可见`,async({page})=>{
+for(const route of ['/lesson49/','/unit49-50/'])test(`${route} 旧版人称分拣答错原题重试不跳动，答对继续后新主语可见`,async({page})=>{
+  if(route==='/unit49-50/')await require('../support/unit4950-legacy').legacy(page);
   await page.setViewportSize({width:390,height:664});await page.goto(route+'#learn/subjects');await page.evaluate(()=>document.fonts.ready);
   const stage=page.locator('.stage-subjects');
   const subject=stage.locator('#tpItemText');

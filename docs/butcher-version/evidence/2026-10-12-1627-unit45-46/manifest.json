@@ -1,0 +1,17 @@
+{
+  "lesson": "45-46",
+  "date": "2026-10-12",
+  "tool": "built-in imagegen",
+  "prompt": "keepsake.prompt.txt",
+  "repairPrompt": "keepsake-repair.prompt.txt",
+  "generatedSource": "/Users/permission/.codex/generated_images/01a0899f-0489-71c3-b2fa-d22e3b2f1bda/exec-cc8878b6-4e89-47b0-b579-9f4e60a30d18.png",
+  "asset": "assets/unit45-46/keepsake-story-v1.webp",
+  "sha256": "5624fec14d6740ee4670d4618946f5720bc29c05f774fe952cbc82ab7a39b3fd",
+  "processing": "imagegen removed the extra chin hand; then sharp resize to 1100x825 and WebP encode, transparency preserved",
+  "references": [
+    "assets/awards/unit1-2-handbag-closeup.webp",
+    "assets/awards/unit3-4-umbrella.webp",
+    "assets/awards/unit5-6-friends.webp"
+  ],
+  "approval": "本地候选，待用户目视确认；不是新的共用样板"
+}

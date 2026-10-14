@@ -1,222 +1,274 @@
-(function(root){
+(function (root) {
   'use strict';
-  const core=root.CanranCore,{learning:content,stages,questions}=core.unit4950,practice=core.lesson49Practice;
-  const $=selector=>document.querySelector(selector),icon=core.lesson49Icons.create;
-  const audio=core.audio.createAudioPlayer();
-  function node(tag,copy='',className=''){const el=document.createElement(tag);el.className=className;el.textContent=copy;return el;}
-  function button(copy,action,className='btn btn-green'){const el=node('button',copy,className);el.type='button';el.addEventListener('click',action);return el;}
-  function speak(text,onFinish){return audio.play({text,src:content.AUDIO[text]?core.courseCatalog.publicAssetUrl(content.AUDIO[text]):'',retrySource:true,onFinish:result=>onFinish?.(result.sourceFailed?{...result,reason:'failed'}:result)});}
-  const surfaces=new Map(),activities=stages.flatMap(stage=>stage.activities.map(([id,title,art])=>({id,title,art,stage:stage.id})));
-  const routeIds=new Set(['cover',...stages.map(stage=>stage.id),...activities.map(activity=>'learn/'+activity.id)]);
-  let activeActivity=null;
-  for(const stage of stages){
-    const section=node('section','','shop-chapter');section.id=stage.id;
-    const header=node('header','','chapter-heading');header.append(node('h2',stage.title),node('span','☆☆☆','lvl-stars'));section.append(header);
-    const link=node('a',stage.title);link.href='#'+stage.id;$('.chapter-links').append(link);
-    const option=node('option',stage.title);option.value=stage.id;$('.chapter-select select').append(option);
-    for(const [id,title,art] of stage.activities){
-      const surface=node('section','','shop-stage stage-'+id);surface.id='learn/'+id;surface.setAttribute('aria-label',title);surface.setAttribute('role','region');
-      const heading=node('header','','stage-heading');heading.append(icon(art),node('h3',title));
-      surface.append(heading);section.append(surface);surfaces.set(id,surface);
+  const core = root.CanranCore, unit = core.unit4950;
+  const { stages, questions, learning: content } = unit;
+  const practice = core.lesson49Practice;
+  const $ = selector => document.querySelector(selector);
+  const icon = core.lesson49Icons.create;
+  const node = (tag, text = '', className = '') => {
+    const element = document.createElement(tag); element.textContent = text; element.className = className; return element;
+  };
+  function button(text, action, className = 'btn btn-green') {
+    const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action); return element;
+  }
+  function art(name, label = '') {
+    const word = unit.objects.find(word => word.en === name);
+    const path = ['butcher', 'bird'].includes(name) ? '/assets/unit49-50/' + name + '.svg' : word?.image;
+    if (!path) return icon(name, label);
+    const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
+  }
+  const surfaces = new Map(), runners = new Map();
+  const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
+  const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
+  let active = '', certificateView;
+  for (const stage of stages) {
+    const section = node('section', '', 'shop-chapter'); section.id = stage.id;
+    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆', 'lvl-stars')); section.append(heading);
+    const link = node('a', stage.title); link.href = '#' + stage.id; $('.chapter-links').append(link);
+    const option = node('option', stage.title); option.value = stage.id; $('.chapter-select select').append(option);
+    for (const [id, title, illustration] of stage.activities) {
+      const surface = node('section', '', 'shop-stage stage-' + id); surface.id = 'learn/' + id;
+      surface.setAttribute('role', 'region'); surface.setAttribute('aria-label', title);
+      const header = node('header', '', 'stage-heading');
+      header.append(icon(illustration), node('h3', title));
+      surface.append(header); surfaces.set(id, surface); section.append(surface);
     }
     $('#lessonWorkspace').append(section);
   }
-  function navigate(id){
+  const aliases = unit.routeAliases;
+  const normalizeRoute = id => aliases[id] || id;
+  const navigate = id => {
+    id = normalizeRoute(id);
     // Scrolling back to the cover keeps the hash; resume must still reposition.
-    if(location.hash==='#'+id)route();
-    else location.hash=id;
-  }
-  function markLocation(id){
-    if(!routeIds.has(id))return;
-    if(activeActivity!==id){audio.stop();root.dispatchEvent(new Event('lesson49:leave-activity'));activeActivity=id;}
-    if(id==='cover')return;
-    if(practice.activity('unitLocation')!==id)practice.activity('unitLocation',id);
-    $('#startBtn').textContent='继续采购';
-    const section=document.getElementById(id).closest('.shop-chapter');
-    document.querySelectorAll('.chapter-links a').forEach(link=>{if(link.hash==='#'+section?.id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});
-    if(section)$('.chapter-select select').value=section.id;
-  }
-  function route(){
-    let id;try{id=decodeURIComponent(location.hash.slice(1)||'cover');}catch{id='cover';}
-    const target=document.getElementById(routeIds.has(id)?id:'cover');
-    if(!target)return;
-    markLocation(target.id);
-    target.scrollIntoView({block:'start',behavior:'instant'});
-  }
-  $('#lessonWorkspace').addEventListener('click',event=>{
-    const activity=event.target.closest('.shop-stage');if(!activity)return;
-    markLocation(activity.id);
-    // Long-page interactions update the return location without scrolling or
-    // cancelling playback. Capture runs before a next-station button navigates.
-    if(location.hash!=='#'+activity.id)history.replaceState(null,'','#'+activity.id);
-  },true);
-  $('.chapter-select select').addEventListener('change',event=>navigate(event.target.value));
-  const resumeLocation=()=>routeIds.has(practice.activity('unitLocation'))&&practice.activity('unitLocation')!=='cover'?practice.activity('unitLocation'):null;
-  $('#startBtn').textContent=resumeLocation()?'继续采购':'开始采购';
-  $('#startBtn').addEventListener('click',()=>navigate(resumeLocation()||'learn/words'));
-  const subjectExample=node('details','','practice-example');
-  subjectExample.append(node('summary','看例子'));
-  for(const copy of content.SUBJECTS.help)subjectExample.append(node('p',copy));
-  subjectExample.addEventListener('toggle',()=>{if(subjectExample.open)core.lesson49Subjects.markRuleUsed();});
-  surfaces.get('subjects').append(subjectExample);
-  document.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',()=>el.closest('dialog').close()));
-  $('#notebookButton').addEventListener('click',()=>$('#unitNotebook').showModal());
-  const words=[...content.WORDS,...content.PHRASES],pages=Math.ceil(words.length/6);
-  const storedWordPage=practice.activity('unitWordPage');
-  let wordPage=Number.isInteger(storedWordPage)?Math.max(0,Math.min(pages-1,storedWordPage)):0;
-  const wordHost=surfaces.get('words'),grid=node('div','','unit-words'),controls=node('div','','word-controls');
-  const previous=button('上一组词卡',()=>changeWordPage(-1),'btn btn-yellow');
-  const next=button('下一组词卡',()=>{if(wordPage===pages-1)navigate('learn/listen');else changeWordPage(1);},'btn btn-green');
-  const pageLabel=node('span');pageLabel.id='wordPageProgress';controls.append(previous,pageLabel,next);wordHost.append(grid,controls);
-  function changeWordPage(delta){wordPage+=delta;audio.stop();renderWords();practice.revealQuestion(wordHost,wordHost.querySelector('h3'));}
-  function renderWords(){
-    practice.activity('unitWordPage',wordPage);grid.replaceChildren();
-    words.slice(wordPage*6,wordPage*6+6).forEach(word=>{
-      const card=button(' ',()=>{const expanded=card.getAttribute('aria-expanded')!=='true';card.setAttribute('aria-expanded',String(expanded));meaning.hidden=!expanded;speak(word.en);},'opt-btn unit-word');
-      card.setAttribute('aria-label',word.en);card.setAttribute('aria-expanded','false');
-      const img=node('img');img.src=word.image;img.alt='';
-      const meaning=node('span',word.cn,'word-meaning');meaning.hidden=true;card.replaceChildren(img,node('strong',word.en),node('small',word.ph||''),meaning);grid.append(card);
+    if (location.hash === '#' + id) route();
+    else location.hash = id;
+  };
+  function markLocation(id) {
+    if (!routes.has(id)) return;
+    if (active !== id) { root.dispatchEvent(new Event('lesson49:leave-activity')); active = id; }
+    if (id === 'cover') return;
+    practice.activity('unitLocation', id);
+    const chapter = document.getElementById(id).closest('.shop-chapter');
+    document.querySelectorAll('.chapter-links a').forEach(link => {
+      if (link.hash === '#' + chapter?.id) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
     });
-    previous.disabled=wordPage===0;pageLabel.textContent=(wordPage+1)+' / '+pages;
-    next.setAttribute('aria-label',wordPage===pages-1?'下一站：听音寻宝':'下一组词卡');
-    if(wordPage===pages-1)next.replaceChildren(node('span','下一站：'),node('span','听音寻宝'));else next.textContent='下一组词卡';
+    if (chapter) $('.chapter-select select').value = chapter.id;
+    $('#startBtn').textContent = '继续冒险';
+  }
+  function route() {
+    let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
+    id = normalizeRoute(id);
+    if (!routes.has(id)) id = 'cover';
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    markLocation(id);
+    document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    if(id==='learn/text'||id==='l2') log.scrollTop=log.scrollHeight;
+  }
+  $('#lessonWorkspace').addEventListener('click', event => {
+    const surface = event.target.closest('.shop-stage'); if (!surface) return;
+    markLocation(surface.id);
+    if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
+  }, true);
+  $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
+  const resume = normalizeRoute(practice.activity('unitLocation'));
+  if (resume) practice.activity('unitLocation', resume);
+  if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
+  $('#startBtn').addEventListener('click', () => {
+    const saved = normalizeRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+  });
+  document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
+  $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
+
+  core.unit4950Legacy.preserve(practice, unit);
+  const signatures = Object.fromEntries(Object.entries(questions).map(([id, items]) => [id, JSON.stringify([unit.version, items])]));
+  signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
+  const saved = practice.activity('unitCompleted');
+  const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
+  const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
+  function updateProgress() {
+    for (const stage of stages) {
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
+    }
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '这颗星已经点亮。';
+    });
+    certificateView?.update(awardState);
+  }
+  function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const settlement = core.awardReveal.create({ unit });
+  const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
+  function nextStation(id, actions) {
+    if (!actions || actions.querySelector('.station-actions')) return;
+    const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
+    const group = node('div', '', 'station-actions'); group.append(button('下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
+  }
+  function completionArt() {
+    const scene = node('div', '', 'completion-art market-completion'); scene.setAttribute('aria-hidden', 'true');
+    const picture=node('img'); picture.src='/assets/unit49-50/completion-scene.svg'; picture.alt=''; scene.append(picture);return scene;
+  }
+  const completionTitles = {listen:'单词寻宝完成！',roles:'故事读懂啦！',grammar:'会问也会选啦！',apply:'采购完成啦！',exam:'综合挑战完成！'};
+  function mountPractice(id, settings = {}) {
+    const element = node('div'); element.id = 'unit4950-' + id + '-practice'; surfaces.get(id).append(element);
+    if (id === 'apply') {
+      settings.sceneView = core.unit4950Scene.create({ element });
+      settings.completionDetails = settings.sceneView.completion();
+    }
+    if (id === 'grammar') settings.sceneView = core.unit4950Grammar.create({ element, art });
+    const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:core.lesson49TaskInputs,roundPolicy:unit.reward.edition,...settings,
+      onAnswer: (question, state) => {
+        // The short model was visible before submission. Preserve that support
+        // in the shared notebook; it is not an error or an extra submission.
+        if (question.workshop?.model) { state.revealed = true; practice.record(question, state); }
+        settings.onAnswer?.(question, state);
+      },
+      onComplete: (states,round) => {
+        const { perfect, message } = settlement.complete({ id, states, round, awards, element });
+        complete(id);
+        nextStation(id, element.querySelector('.practice-finish-actions'));
+        settings.onComplete?.(states);
+        core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
+          theme: { title: completionTitles[id] }, artwork: completionArt(), details: id === 'exam' ? settings.completionDetails : null,
+          celebrate: round.userCompleted, awardStatus: message,
+          waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) && navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
+        const result = element.querySelector('.completion-award'); result.classList.add('award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        updateProgress(); } });
+    runners.set(id, runner);
+    return element;
+  }
+
+  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
+  const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
+  const props = core.unit4950Scene.storyProps();
+  stage.append(props.element, log);
+  const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
+  const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
+  const advance = button('开始看课文', advanceDialogue);
+  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
+  const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
+  finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
+  finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
+  finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
+  const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
+  let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
+  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
+  function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
+  function refreshDialogue() {
+    advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
+    props.update(dialogue.i);
+    controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
+    controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
+    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
+    status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
+    log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
+    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
+  }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('steak'), node('p', 'Mrs. Bird的丈夫喜欢什么肉？')); log.replaceChildren(lead); }
+  function appendLine(index) {
+    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
+    // Keep each historic line on the side occupied by its speaker in that scene.
+    row.classList.add(line.who === 'butcher' ? 'speaker-left' : 'speaker-right');
+    const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
+    const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
+    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden));
+      // Expanding the current translation must reveal its button as well; only
+      // the transcript scrolls, never the page or the controls below it.
+      if (!translation.hidden) {
+        const overflow = row.getBoundingClientRect().bottom - log.getBoundingClientRect().bottom + 12;
+        if (overflow > 0) log.scrollTop += overflow;
+      }
+    }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const actions = node('div', '', 'bbtns'); actions.append(translate);
+    bubble.append(node('div', ({butcher:'The butcher',bird:'Mrs. Bird'})[line.who], 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
+  }
+  function advanceDialogue() {
+    if (dialogue.done) return;
+    if (dialogue.i === content.DIALOGUE.length - 1) {
+      if (!content.DIALOGUE.every((_, index) => dialogue.viewed[index] === true)) return;
+      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete'); return;
+    }
+    if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;
+  }
+  function resetDialogue() { dialogue = { i: -1, viewed: [], done: false }; saveDialogue(); lead(); refreshDialogue(); }
+  const draft = core.unit4950Legacy.reading(practice, unit, signatures.text);
+  if (draft?.signature === signatures.text && Number.isInteger(draft.i) && draft.i >= 0 && draft.i < content.DIALOGUE.length) {
+    const viewed=Array.isArray(draft.viewed)?draft.viewed.slice(0,draft.i+1):[];
+    const gap=content.DIALOGUE.findIndex((_,index)=>index<=draft.i&&viewed[index]!==true);
+    const i=gap<0?draft.i:gap-1;
+    dialogue={i,viewed:viewed.slice(0,i+1),done:draft.done===true&&i===content.DIALOGUE.length-1};
+    for(let index=0;index<=i;index++)appendLine(index);
+    if(dialogue.done)complete('text');
+  }
+  if (dialogue.i < 0) lead();
+  refreshDialogue(); unlockStory();
+
+  const wordHost = surfaces.get('words'), wordGrid = node('div', '', 'unit-words');
+  const wordControls = node('div', '', 'word-controls'), wordProgress = node('span');
+  const pageCount = Math.ceil(content.WORDS.length / 6), savedPage = practice.activity('unitWordPage');
+  let wordPage = Number.isInteger(savedPage) ? Math.max(0, Math.min(pageCount - 1, savedPage)) : 0;
+  const previousWords = button('上一组词卡', () => changeWordPage(-1), 'btn btn-yellow');
+  const nextWords = button('下一组词卡', () => wordPage === pageCount - 1 ? navigate('learn/listen') : changeWordPage(1));
+  wordProgress.id = 'wordPageProgress'; wordControls.append(previousWords, wordProgress, nextWords); wordHost.append(wordGrid, wordControls);
+  function changeWordPage(delta) { wordPage += delta; renderWords(); practice.revealQuestion(wordHost, wordHost.querySelector('h3')); }
+  function renderWords() {
+    wordGrid.replaceChildren(); practice.activity('unitWordPage', wordPage);
+    for (const word of content.WORDS.slice(wordPage * 6, wordPage * 6 + 6)) {
+      const picture = node('img'); picture.src = word.image; picture.alt = '';
+      const pronunciation = node('small', word.ph, 'word-phonetic'); pronunciation.lang = 'en-US';
+      const meaning = node('span', word.cn, 'word-meaning'); meaning.hidden = true;
+      const example = node('small', word.example || '', 'word-example'); example.hidden = !word.example;
+      const card = button('', () => {
+        const expanded = card.getAttribute('aria-expanded') !== 'true';
+        card.setAttribute('aria-expanded', String(expanded)); meaning.hidden = !expanded;
+      }, 'opt-btn unit-word');
+      card.setAttribute('aria-label', word.en); card.setAttribute('aria-expanded', 'false');
+      card.append(picture, node('strong', word.en), pronunciation, meaning, example); wordGrid.append(card);
+    }
+    previousWords.disabled = wordPage === 0; wordProgress.textContent = `${wordPage + 1} / ${pageCount}`;
+    nextWords.setAttribute('aria-label', wordPage === pageCount - 1 ? '下一站：单词寻宝' : '下一组词卡');
+    if (wordPage === pageCount - 1) nextWords.replaceChildren(node('span', '下一站：'), node('span', '单词寻宝'));
+    else nextWords.textContent = '下一组词卡';
   }
   renderWords();
+  mountPractice('listen', { allowHints: false });
 
-  // A completion belongs to this unit and this activity's content version.
-  // Replaying creates a fresh draft without turning earned completion into answers.
-  const required={l1:['listen'],l2:['text','roles'],l3:['doare','give','needs','pouch','either'],l4:['subjects','fill','choice','trans'],l5:['exam']};
-  const signatures=Object.fromEntries(Object.entries(questions).map(([id,items])=>[id,'v1:'+items.map(q=>q.id).join('|')]));
-  signatures.text='v1:'+content.DIALOGUE.map(line=>line.text).join('|');signatures.subjects='v1:'+content.SUBJECTS.version;
-  const saved=practice.activity('unitCompleted');
-  const completed=saved&&typeof saved==='object'&&!Array.isArray(saved)?{...saved}:{};
-  let certificateView;
-  const passed=id=>completed[id]===signatures[id];
-  const fullyComplete=()=>Object.values(required).flat().every(passed);
-  function updateProgress(){
-    let total=0;
-    for(const [chapter,ids] of Object.entries(required)){
-      const count=ids.filter(passed).length;
-      const stars=count===ids.length?3:Math.floor(count/ids.length*3);
-      total+=stars;const label=document.querySelector('#'+chapter+' .lvl-stars');
-      label.textContent='★'.repeat(stars)+'☆'.repeat(3-stars);label.setAttribute('aria-label','本关 '+stars+' / 3 颗星');
-    }
-    $('#starCount').textContent=String(total);
-    if(!certificateView)return;
-    const next=activities.find(activity=>Object.values(required).flat().includes(activity.id)&&!passed(activity.id));
-    certificateView.update({complete:fullyComplete(),completedChapters:Object.values(required).map(ids=>ids.every(passed)),next:next?{title:next.title,go:()=>navigate('learn/'+next.id)}:null});
-  }
-  function complete(id){completed[id]=signatures[id];practice.activity('unitCompleted',completed);updateProgress();}
-  function nextStation(id,actions){
-    const next=activities[activities.findIndex(activity=>activity.id===id)+1];
-    if(!next||actions.querySelector('.station-actions'))return;
-    const group=node('div','','station-actions');group.append(button('下一站：'+next.title,()=>navigate('learn/'+next.id)));actions.append(group);
-  }
-  const hosts=new Map();
-  function host(id){const element=node('div');element.id='unit-'+id+'-practice';surfaces.get(id).append(element);hosts.set(id,element);return element;}
-  function mountPractice(id,options={}){
-    const element=hosts.get(id)||host(id);
-    practice.mount({element,questions:questions[id],playAudio:speak,...options,onComplete:states=>{
-      complete(id);nextStation(id,element.querySelector('.practice-finish-actions'));options.onComplete?.(states);
-    }});
-  }
-  mountPractice('listen',{allowHints:false,optionImages:Object.fromEntries(content.WORDS.map(word=>[word.en,word.image]))});
+  mountPractice('grammar'); mountPractice('apply');
+  mountPractice('exam');
+  certificateView=core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,
+    progress:id=>runners.get(id)?.progress() || {started:false,completed:false},
+    restart:id=>runners.get(id)?.restart()});
 
-  const roleBar=node('div');roleBar.id='roleBar';
-  const roleInfo=node('p','听完故事，来找答案。');roleInfo.id='roleInfo';
-  const roleListen=button('先听故事',()=>navigate('learn/text'));roleListen.id='roleListenBtn';roleBar.append(roleInfo,roleListen);surfaces.get('roles').append(roleBar);
-  const roleStage=core.lesson49RoleStage.create({bar:roleBar,playAudio:speak});
-  const roleHost=host('roles');roleHost.hidden=true;let storyStarted=false;
-  function unlockStory(){
-    if(!passed('text')||storyStarted)return;
-    storyStarted=true;roleHost.hidden=false;roleStage.setReady(true);mountPractice('roles',{sceneView:roleStage});
-  }
+  const models=node('details','','offline-task');models.append(node('summary','蔬果摊与序数词'));
+  models.append(node('p','依次说说蔬果名称和排第几。用Does…like…?／Do you like…?轮流问喜好，再说这次要不要。'));
+  const modelGrid=node('div','','reference-grid');
+  for(const item of content.MODELS){const card=node('article','','reference-card'),picture=node('img');picture.src=item.image;picture.alt='';const en=node('p',item.en);en.lang='en';card.append(node('small',item.number),picture,en,node('span',item.cn));modelGrid.append(card);}
+  models.append(modelGrid);surfaces.get('grammar').append(models);
+  const reference=node('details','','offline-task');reference.append(node('summary','问答小参考'));
+  for(const text of ['Do you want beef or lamb? — Beef, please.','Is this a tomato or a potato? — It is a tomato.','Which do you want, apples or pears? — Pears, please.','两项：Both两个都；Either任一个；Neither两个都不。三项或以上：All全部；None一个也不。','I don’t like chicken either. 句末的either表示“也不”，不是“任意一个”。','选择问句读法由老师带领：前面的选项上扬↗，最后一个选项下降↘。','He likes beans, but he doesn’t want any.','Does she like pears? Yes, she does. / No, she doesn’t.','Do you like grapes? Yes, I do. / No, I don’t.','Give me that piece. → Give that piece to me.','What about some steak? 来点牛排怎么样？','To tell you the truth… 说实话……'])reference.append(node('p',text));
+  surfaces.get('grammar').append(reference);
+  const writing=node('details','','offline-task');writing.id='unitWriting';writing.append(node('summary','课后练习纸'));
+  writing.append(node('h4','A · 补全否定'),node('p','am not · aren’t · isn’t · can’t · don’t · doesn’t'));
+  const a=node('ol');content.WRITING_A.forEach(text=>a.append(node('li',text)));writing.append(a);
+  writing.append(node('h4','B · 喜欢，但现在不要'),node('p','按书中示例作肯定短答，再表达“喜欢，但现在不想要”。使用I、he或she。'),node('p','Does Penny like tomatoes? → Yes, she does. She likes tomatoes, but she doesn’t want any.'),node('p','Do you like potatoes? → Yes, I do. I like potatoes, but I don’t want any.'));
+  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'),node('div','________________________________________________'));b.append(li);});writing.append(b);
+  const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
+  root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
+  core.unit4950Legacy.show(practice, surfaces.get('certificate'));
 
-  const textHost=surfaces.get('text'),theatre=node('div');theatre.id='stage';
-  for(const [id,art,title] of [['charButcher','butcher','老板'],['charBird','bird','伯德夫人']]){
-    const character=node('div','','char');character.id=id;character.append(icon(art),node('div',title,'name-tag'));theatre.append(character);
-  }
-  const log=node('div');log.id='bubbleArea';log.setAttribute('role','log');log.setAttribute('aria-label','课文对话');log.setAttribute('aria-live','off');log.tabIndex=0;
-  const dialogueStatus=node('p','','fb');dialogueStatus.id='dialogueStatus';dialogueStatus.setAttribute('role','status');theatre.append(log);
-  const dialogueControls=node('div','','stage-ctrl'),tools=node('div','','stage-tools');
-  const nextLineButton=button('开始听课文',advanceDialogue,'btn btn-green');nextLineButton.id='nextBtn';
-  const replayLine=button('重听本句',()=>{if(dialogue.i<0)advanceDialogue();else playLine(dialogue.i);},'btn btn-yellow');
-  const restart=button('重新上演',resetDialogue,'btn btn-yellow');tools.append(replayLine,restart);dialogueControls.append(tools,nextLineButton);
-  const textFinish=node('div','','practice-finish');textFinish.hidden=true;
-  const textFinishActions=node('div','','practice-finish-actions');textFinishActions.setAttribute('role','group');textFinishActions.setAttribute('aria-label','完成后的操作');
-  textFinishActions.append(button('再听一遍',resetDialogue,'btn btn-yellow'));nextStation('text',textFinishActions);textFinish.append(node('p','故事听完了！'),textFinishActions);
-  textHost.append(theatre,dialogueStatus,dialogueControls,textFinish);
-  let dialogue={i:-1,heard:[],done:false},dialogueGeneration=0;
-  function saveDialogue(){practice.activity('unitDialogue',{...dialogue,signature:signatures.text});}
-  function clearPlaying(){log.querySelectorAll('.bubble-row').forEach(row=>{row.classList.remove('is-playing');row.querySelector('.btext').setAttribute('aria-busy','false');});theatre.querySelectorAll('.char').forEach(character=>character.classList.remove('speaking'));}
-  function refreshDialogue(){
-    nextLineButton.disabled=dialogue.i>=0&&dialogue.heard[dialogue.i]!==true;
-    nextLineButton.textContent=dialogue.i<0?'开始听课文':dialogue.i===content.DIALOGUE.length-1?'完成课文学习':'下一句';
-    dialogueControls.dataset.state=dialogue.i<0?'ready':'reading';tools.hidden=dialogue.i<0;
-    dialogueControls.hidden=dialogue.done;textFinish.hidden=!dialogue.done;replayLine.disabled=dialogue.i<0;
-  }
-  function showLead(){const lead=node('div','','story-lead'),list=node('ol');content.STORY_LEAD.forEach(copy=>list.append(node('li',copy)));lead.append(node('h3','带着问题听'),list);log.replaceChildren(lead);}
-  function appendLine(index){
-    const line=content.DIALOGUE[index],row=node('div','','bubble-row '+line.who),bubble=node('div','','bubble');
-    const speech=button('',()=>playLine(index),'btext');speech.setAttribute('aria-busy','false');speech.append(node('span',line.text),icon('audio'));
-    const meaning=node('p',line.cn,'bcn');meaning.hidden=true;
-    const translation=button('看中文',()=>{meaning.hidden=!meaning.hidden;translation.textContent=meaning.hidden?'看中文':'收起中文';translation.setAttribute('aria-expanded',String(!meaning.hidden));},'btn btn-mini btn-yellow');translation.setAttribute('aria-expanded','false');
-    const actions=node('div','','bbtns');actions.append(translation);
-    bubble.append(node('div',line.who==='butcher'?'BUTCHER 老板':'MRS. BIRD 伯德夫人','bname'),speech,meaning,actions);row.append(bubble);log.append(row);
-  }
-  function playLine(index){
-    const generation=++dialogueGeneration;clearPlaying();dialogueStatus.textContent='';
-    const row=log.children[index];row.classList.add('is-playing');row.querySelector('.btext').setAttribute('aria-busy','true');
-    $(content.DIALOGUE[index].who==='butcher'?'#charButcher':'#charBird').classList.add('speaking');
-    if(index===dialogue.i)nextLineButton.disabled=true;
-    speak(content.DIALOGUE[index].text,result=>{
-      if(generation!==dialogueGeneration)return;
-      clearPlaying();
-      if(index===dialogue.i&&result.reason==='ended'){dialogue.heard[index]=true;saveDialogue();}
-      refreshDialogue();
-      if(result.reason!=='ended'&&result.reason!=='cancelled')dialogueStatus.textContent='录音还没有播放完，点这句再听一次。';
-    });
-  }
-  function advanceDialogue(){
-    if(dialogue.done||(dialogue.i>=0&&dialogue.heard[dialogue.i]!==true))return;
-    if(dialogue.i===content.DIALOGUE.length-1){
-      if(!content.DIALOGUE.every((_,i)=>dialogue.heard[i]===true))return;
-      dialogue.done=true;saveDialogue();complete('text');unlockStory();refreshDialogue();core.lesson49Feedback.play('complete');return;
-    }
-    if(dialogue.i<0)log.replaceChildren();dialogue.i++;saveDialogue();appendLine(dialogue.i);refreshDialogue();log.scrollTop=log.scrollHeight;playLine(dialogue.i);
-  }
-  function resetDialogue(){++dialogueGeneration;audio.stop();clearPlaying();dialogue={i:-1,heard:[],done:false};saveDialogue();showLead();dialogueStatus.textContent='';refreshDialogue();}
-  const draft=practice.activity('unitDialogue');
-  if(draft?.signature===signatures.text&&Number.isInteger(draft.i)&&draft.i>=0&&draft.i<content.DIALOGUE.length&&Array.isArray(draft.heard)){
-    const earliestGap=content.DIALOGUE.findIndex((_,i)=>i<draft.i&&draft.heard[i]!==true);
-    const index=earliestGap<0?draft.i:earliestGap;
-    dialogue={i:index,heard:draft.heard.slice(0,index+1).map(value=>value===true),done:draft.done===true&&index===content.DIALOGUE.length-1&&content.DIALOGUE.every((_,i)=>draft.heard[i]===true)};
-    for(let i=0;i<=dialogue.i;i++)appendLine(i);
-    if(dialogue.done)complete('text');
-  }else showLead();
-  refreshDialogue();unlockStory();
-  root.addEventListener('lesson49:leave-activity',()=>{++dialogueGeneration;clearPlaying();refreshDialogue();});
-
-  mountPractice('doare',{presentation:'question'});mountPractice('give');mountPractice('needs');
-  const pouchGrid=node('div');pouchGrid.id='pouchGrid';
-  content.POUCH.forEach(expression=>{
-    const card=node('details','','expression-card'),title=node('summary',expression.en);
-    card.append(title,node('p',expression.cn),node('p',expression.example),button('听表达',()=>speak(expression.en),'btn btn-mini btn-yellow'));pouchGrid.append(card);
-  });surfaces.get('pouch').append(pouchGrid);mountPractice('pouch');mountPractice('either',{presentation:'reply'});
-  const subjects=host('subjects');core.lesson49Subjects.mount({element:subjects,onComplete:()=>{complete('subjects');nextStation('subjects',subjects.querySelector('.practice-finish-actions'));}});
-  mountPractice('fill',{presentation:'cloze'});mountPractice('choice',{presentation:'cloze'});mountPractice('trans');
-  const results=node('div','','unit-results');
-  mountPractice('exam',{chunkSize:questions.exam.length,finalLabel:'查看本次记录',completionDetails:results,onComplete:states=>{
-    const independent=states.filter(state=>state.firstCorrect&&!state.hintUsed&&!state.revealed).length;
-    const assisted=states.filter(state=>state.firstCorrect&&(state.hintUsed||state.revealed)).length;
-    const corrected=states.filter(state=>!state.firstCorrect).length;
-    results.replaceChildren(node('p',`首次独立答对 ${independent} / ${questions.exam.length}`),node('p',`提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
-    const review=questions.exam.filter((_,i)=>!states[i].firstCorrect||states[i].hintUsed||states[i].revealed);
-    if(review.length){const details=node('details'),list=node('ul');details.append(node('summary','下次再练'));review.forEach(q=>list.append(node('li',q.target)));details.append(list);results.append(details);}
-  }});
-  certificateView=core.unitCertificate.mount({element:surfaces.get('certificate'),initialName:practice.activity('unitName'),initialIssuedAt:practice.activity('unitCertificateIssuedAt'),canClaim:fullyComplete,onClaim:({name,issuedAt})=>{
-    practice.activity('unitName',name);practice.activity('unitCertificateIssuedAt',issuedAt);
-  }});
-  updateProgress();practice.initializeNotebook();root.addEventListener('hashchange',route);root.addEventListener('pagehide',()=>audio.stop());
-  document.fonts.ready.then(()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;}));
+  updateProgress(); practice.initializeNotebook();
+  root.addEventListener('hashchange', route);
+  const revealSavedLine = () => { if (dialogue.i >= 0) log.scrollTop = log.scrollHeight; };
+  // Cached entry keeps the body hidden until images decode. Font readiness alone
+  // can occur while the transcript has no layout and cannot restore scroll.
+  // This is the loader's document event, not a canran storage key. Keep its
+  // name intact when the /lesson/ publisher prefixes persistent storage keys.
+  const readyEvent = ['canran', 'course-ready'].join(':');
+  document.addEventListener(readyEvent, revealSavedLine, { once: true });
+  root.addEventListener('resize',()=>{if(active==='learn/text'||active==='l2')requestAnimationFrame(revealSavedLine);});
+  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

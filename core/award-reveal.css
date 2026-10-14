@@ -6,24 +6,15 @@ dialog.award-reveal::backdrop{background:rgba(33,43,41,.78);backdrop-filter:blur
 .award-reveal-panel{position:relative;width:min(620px,100%);flex-shrink:0;text-align:center}
 .award-reveal-card{position:relative;width:100%;margin:0 auto;filter:drop-shadow(0 16px 24px #1e1b1850)}
 .award-reveal .story-award-paper{width:100%;text-align:left;box-sizing:border-box}
-.award-reveal .story-award-stars{gap:1.2cqw}
-.award-reveal .story-award-stars img{width:6.2cqw;height:6.2cqw}
 .award-reveal .star-source{position:absolute;width:78px;height:78px;top:-43px;right:30px;pointer-events:none}
 .award-reveal .travelling-star,.award-reveal .sparkle{position:fixed;pointer-events:none;z-index:21}
 .award-upgrade-reminder{margin:24px auto 0;max-width:100%;color:#fff9eb;font:500 18px/1.75 'Award Round',system-ui,sans-serif;text-align:center;text-shadow:0 1px 3px #15211c55}
 .award-upgrade-reminder span{display:inline-block}
 @media(max-width:600px){
  .award-reveal-stage{padding:28px 20px}
- .award-reveal-card{max-width:min(320px,calc((100dvh - 160px) * .96))}
- .award-reveal .story-award-paper{aspect-ratio:.96;border-radius:20px;border-width:2px}
- .award-reveal .story-award-brand{font-size:4.2cqw;top:6.5%}
- .award-reveal .story-award-title{font-size:10cqw;top:16%}
- .award-reveal .story-award-name{font-size:min(11cqw,calc(var(--name-size) * 2));top:27%;height:13%;width:85%}
+ .award-reveal-card{max-width:min(320px,calc((100dvh - 160px) * .86))}
+ .award-reveal .story-award-paper{aspect-ratio:.86;border-radius:20px;border-width:2px}
  .award-reveal .story-award-name.is-placeholder{font-size:5cqw}
- .award-reveal .story-award-stars{top:41%;width:80%;gap:3cqw}
- .award-reveal .story-award-stars img{width:9cqw;height:9cqw}
- .award-reveal .story-award-illustration{width:92%;height:46%;bottom:6%}
- .award-reveal .story-award-foot{font-size:3.4cqw;bottom:2.2%}
  .award-reveal .star-source{width:62px;height:62px;top:-36px;right:6px}
  .award-upgrade-reminder{margin-top:20px;font-size:16px;line-height:1.8}
  .award-upgrade-reminder span{display:block}

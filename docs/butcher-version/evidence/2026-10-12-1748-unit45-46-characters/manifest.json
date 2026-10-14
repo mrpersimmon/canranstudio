@@ -1,0 +1,252 @@
+{
+  "unchangedCodeAndKeepsake": {
+    "unit45-46/content.js": true,
+    "unit45-46/unit.js": true,
+    "unit45-46/scene.js": true,
+    "unit45-46/unit.css": true,
+    "unit45-46/grammar.js": true,
+    "unit45-46/index.html": true,
+    "core/unit-awards.js": true,
+    "core/award-rules.js": true,
+    "assets/unit45-46/keepsake-story-v1.webp": true
+  },
+  "changedAssets": [
+    "ask.svg",
+    "bob-point.svg",
+    "bob-read.svg",
+    "bob.svg",
+    "boss-point.svg",
+    "boss-read.svg",
+    "boss.svg",
+    "can.svg",
+    "completion-scene.svg",
+    "cover-scene.svg",
+    "holding-hands.svg",
+    "pamela-hold.svg",
+    "pamela-point.svg",
+    "pamela-read.svg",
+    "pamela.svg",
+    "who.svg"
+  ],
+  "unchangedCompositionBackgroundAndProps": {
+    "cover-scene.svg": true,
+    "completion-scene.svg": true,
+    "can.svg": true,
+    "who.svg": true,
+    "ask.svg": true
+  },
+  "unchangedOtherSVGCount": 30,
+  "sprites": {
+    "bob": {
+      "source": "/Users/permission/.codex/generated_images/01a0899f-0489-71c3-b2fa-d22e3b2f1bda/exec-68b3f62e-3a32-46d2-bc98-9e1a842b336a.png",
+      "output": "docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/bob-poses-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "ranges": [
+        [
+          56,
+          455
+        ],
+        [
+          565,
+          1037
+        ],
+        [
+          1066,
+          1480
+        ]
+      ],
+      "poses": [
+        {
+          "name": "bob",
+          "bounds": [
+            52,
+            15,
+            408,
+            994
+          ],
+          "anchor": 280,
+          "x": 31.578470824949697,
+          "y": 7,
+          "scale": 0.22334004024144868
+        },
+        {
+          "name": "bob-point",
+          "bounds": [
+            561,
+            18,
+            481,
+            991
+          ],
+          "anchor": 758,
+          "x": 38.36881937436932,
+          "y": 7,
+          "scale": 0.22401614530776992
+        },
+        {
+          "name": "bob-read",
+          "bounds": [
+            1062,
+            16,
+            423,
+            986
+          ],
+          "anchor": 1280,
+          "x": 33.41683569979716,
+          "y": 7,
+          "scale": 0.22515212981744423
+        }
+      ],
+      "embedded": "docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/bob-poses-v1.png"
+    },
+    "pamela": {
+      "source": "/Users/permission/.codex/generated_images/01a0899f-0489-71c3-b2fa-d22e3b2f1bda/exec-754bc223-c3ec-43b4-81aa-6fd3c3605059.png",
+      "output": "docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/pamela-poses-v1.webp",
+      "width": 1774,
+      "height": 887,
+      "ranges": [
+        [
+          116,
+          514
+        ],
+        [
+          689,
+          1071
+        ],
+        [
+          1261,
+          1641
+        ]
+      ],
+      "poses": [
+        {
+          "name": "pamela",
+          "bounds": [
+            112,
+            13,
+            407,
+            862
+          ],
+          "anchor": 319,
+          "x": 29.189095127610216,
+          "y": 7,
+          "scale": 0.25754060324825984
+        },
+        {
+          "name": "pamela-hold",
+          "bounds": [
+            685,
+            15,
+            391,
+            860
+          ],
+          "anchor": 883,
+          "x": 31.388372093023257,
+          "y": 7,
+          "scale": 0.25813953488372093
+        },
+        {
+          "name": "pamela-read",
+          "bounds": [
+            1257,
+            14,
+            389,
+            861
+          ],
+          "anchor": 1454,
+          "x": 31.70557491289199,
+          "y": 7,
+          "scale": 0.2578397212543554
+        }
+      ],
+      "embedded": "docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/pamela-poses-v1.png"
+    },
+    "boss": {
+      "source": "/Users/permission/.codex/generated_images/01a0899f-0489-71c3-b2fa-d22e3b2f1bda/exec-5817e035-3b04-484f-90fa-fe32d4e86e1e.png",
+      "output": "docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/boss-poses-v1.webp",
+      "width": 1995,
+      "height": 788,
+      "ranges": [
+        [
+          155,
+          527
+        ],
+        [
+          783,
+          1275
+        ],
+        [
+          1435,
+          1818
+        ]
+      ],
+      "poses": [
+        {
+          "name": "boss",
+          "bounds": [
+            151,
+            7,
+            381,
+            774
+          ],
+          "anchor": 347,
+          "x": 26.282945736434108,
+          "y": 7,
+          "scale": 0.2868217054263566
+        },
+        {
+          "name": "boss-point",
+          "bounds": [
+            779,
+            7,
+            501,
+            774
+          ],
+          "anchor": 958,
+          "x": 31.15891472868217,
+          "y": 7,
+          "scale": 0.2868217054263566
+        },
+        {
+          "name": "boss-read",
+          "bounds": [
+            1431,
+            12,
+            392,
+            769
+          ],
+          "anchor": 1625,
+          "x": 26.494798439531863,
+          "y": 7,
+          "scale": 0.2886866059817945
+        }
+      ],
+      "embedded": "docs/butcher-version/evidence/2026-10-12-1748-unit45-46-characters/boss-poses-v1.png"
+    }
+  },
+  "outputSha256": {
+    "ask.svg": "008b9cda679d42819b26ff36603d49b468154b0d7bc1f3b99f0ae42585775cd9",
+    "bob-point.svg": "e7f206cb1192ba95fc29fc3b6e3076a4a253ef5e85a5b920382a07eda3cef0b4",
+    "bob-read.svg": "d82070e0ae20ed7c4c2eee3bcceaba523b863dc9f46e79419414266b71c2f123",
+    "bob.svg": "4a0669f0f6b26423155a11e2ff25eb9976b9ba576a93a12dd64a82bc088cf3f6",
+    "boss-point.svg": "46afcd60195df04b9db1faa0f3352b5f548d092ce2574642649f92db779435e8",
+    "boss-read.svg": "fcbbb1b777adf6c673131ebc4db592ce95fcfefa07aeb6fd69e54a591ac57411",
+    "boss.svg": "f7ee061baa8157265b9e8ec8edf852e288b44da43c02288c2f0b02d0623a300a",
+    "can.svg": "de9dfe8f0c37e901b2af1fb840724cbdda211bdbf7c8f6ba930b32b0744a99e1",
+    "completion-scene.svg": "d573dfcf84af63f64212b43274ab0c78005db95ca4fb6523612fade9e3abd06a",
+    "cover-scene.svg": "6793a16e7d4badc8d772ee4b9dc20901a4b5162b545712653e61ce02dcc58b8f",
+    "holding-hands.svg": "685f205bcb09dac0b3ae5ab6144ba623464a2ec292270f232e4a60991f54b8d2",
+    "pamela-hold.svg": "18e83fe447adc5288e25eb74f460228f448708afde4e07ba5006756a240ff5dc",
+    "pamela-point.svg": "18e83fe447adc5288e25eb74f460228f448708afde4e07ba5006756a240ff5dc",
+    "pamela-read.svg": "e909b53d7d619f4d4558922546643f81baf6cb618bc0a465edb8bef66a0aa136",
+    "pamela.svg": "37e6235c238365bc0e65c4cd5673f2699e994ed809758ccaa45d7c8cb101d739",
+    "who.svg": "cf2c212e38c4297dee3586af310a3d6a7af5fcbc1f367e73e2f4e2e85b18faa6"
+  },
+  "actualScreens": [
+    "cover-desktop.png",
+    "words-desktop.png",
+    "boss-desktop.png",
+    "story-desktop.png",
+    "story-mobile.png"
+  ]
+}

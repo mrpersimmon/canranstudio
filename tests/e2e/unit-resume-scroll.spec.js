@@ -2,7 +2,7 @@
 const { test, expect } = require('@playwright/test');
 test.use({ reducedMotion: 'reduce' });
 
-for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续采购']]) {
+for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续冒险']]) {
   for (const base of ['/', '/lesson/']) for (const width of [390, 1280]) test(`${unit} ${base} ${width} 像素：手动滚回封面后，继续按钮重新定位当前章节`, async ({ page }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto(`${base}${unit}/#l3`);
@@ -45,7 +45,7 @@ test('不同地址时可以继续到已保存章节，排除按钮失效或保�
 
 for (const [unit, label, activity, answer] of [
   ['unit1-2', '继续冒险', 'trans', 'Is this your book?'],
-  ['unit49-50', '继续采购', 'needs', "She likes tomatoes, but she doesn't want any."]
+  ['unit49-50', '继续冒险', 'grammar', '要豌豆还是豆角']
 ]) test(`${unit} 继续到当前答题区：键盘操作、未提交选择和刷新恢复不变`, async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 700 });
   await page.goto(`/${unit}/#learn/${activity}`);

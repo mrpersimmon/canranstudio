@@ -11,7 +11,7 @@ async function choose(room, answer) {
   await expect(room.getByRole('status')).toHaveText('答对了！');
 }
 
-test('全部声音失败仍能完成25题与完整原文并领奖，零英语配音或系统朗读', async ({ page }) => {
+test('全部声音失败仍能完成33题与完整原文并领奖，零英语配音或系统朗读', async ({ page }) => {
   test.setTimeout(120000);
   const voices = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -113,7 +113,8 @@ test('25张音标词卡可翻面，15问和10组否定回应仍供阅读', async
   }
   await page.reload(); await expect(room).toContainText('5 / 5');
   await room.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click(); await expect(page).toHaveURL(/#learn\/listen$/);
-  await page.goto('/unit3-4/#learn/phrases'); const phrases = page.locator('.stage-phrases');
+  await page.goto('/unit3-4/#learn/phrases'); const phrases = page.locator('.stage-reply');
+  await phrases.getByText('认领表达参考', { exact: true }).click();
   await expect(phrases.locator('button.phrase-card')).toHaveCount(0);
   await phrases.getByText('换个人或物问一问', { exact: true }).click();
   await expect(phrases.locator('.sentence-models').first().locator('.reference-card')).toHaveCount(15);
@@ -187,24 +188,27 @@ for (const width of [320, 390, 768, 1280]) test(width + '宽度可阅读操作�
   expect(errors).toEqual([]);
 });
 
-test('接力词块可撤回，未知归属不猜，末题刷新没有自动作答', async ({ page }) => {
+test('工坊词块可撤回，未知归属不猜，末题刷新没有自动作答', async ({ page }) => {
   await page.goto('/unit3-4/#learn/reply'); const room = page.locator('.stage-reply');
-  await choose(room, ANSWERS.reply[0]); await room.getByRole('button', { name: '下一题', exact: true }).click();
-  await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'No.', exact: true }).click();
-  await room.getByRole('button', { name: '撤回 No.', exact: true }).click();
-  await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-  await choose(room, ANSWERS.reply[1]); await page.reload();
-  await expect(room.getByRole('status')).toHaveText('答对了！');
-  await room.getByRole('button', { name: '下一题', exact: true }).click();
-  await room.getByRole('button', { name: "No. It isn't my umbrella. It's your umbrella.", exact: true }).click();
-  await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
-  await room.getByRole('button', { name: '再试一次', exact: true }).click(); await choose(room, "No, it isn't.");
-  await room.getByRole('button', { name: '下一题', exact: true }).click(); await page.reload();
-  await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-  await expect(room).toContainText('It’s your pen.'); await choose(room, '你的');
-  await room.getByRole('button', { name: '完成这一站', exact: true }).click();
-  await expect(room.getByRole('button', { name: '下一站：认领小挑战', exact: true })).toBeVisible();
+  for (let i = 0; i < ANSWERS.reply.length; i++) {
+    if (i === 6) {
+      await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'No.', exact: true }).click();
+      await room.getByRole('button', { name: '撤回 No.', exact: true }).click();
+      await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+    }
+    if (i === 7) {
+      await room.getByRole('button', { name: "No. It isn't my umbrella. It's your umbrella.", exact: true }).click();
+      await room.getByRole('button', { name: '检查答案', exact: true }).click();
+      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await room.getByRole('button', { name: '再试一次', exact: true }).click();
+    }
+    if (i === 9) {
+      await page.reload(); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+    }
+    await choose(room, ANSWERS.reply[i]);
+    await room.getByRole('button', { name: i === 9 ? '完成这一站' : '下一题', exact: true }).click();
+  }
+  await expect(room.getByRole('button', { name: '下一站：认领柜台', exact: true })).toBeVisible();
 });
 
 test('五星卡日期保留、匿名不能代填姓名或导出，练习纸与路径记录独立',async({page})=>{

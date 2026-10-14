@@ -8,13 +8,13 @@ const definitions=Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,
 const descriptions=UNITS.map(id=>({id,title:definitions[id].title,label:id}));
 function book(course='unit13-14',ids=['colours'],runId='round-1'){
  const unit=definitions[course],groups={},records={},activity={unitCompleted:{}};
- for(const id of ids){const questions=unit.questions[id];const states=questions.map(q=>({questionId:q.id,runId,checked:true,selection:q.answer,attempts:1,firstCorrect:true,correct:true}));groups[id]={signature:questions.map(q=>q.id).join('|'),contentSignature:JSON.stringify([unit.version??null,questions],(k,v)=>k==='hint'?undefined:v),runId,states,index:questions.length,draftVersion:2};states.forEach(s=>records[s.questionId]={...s});activity.unitCompleted[id]=course==='unit49-50'?'v1:'+questions.map(q=>q.id).join('|'):JSON.stringify([unit.version,questions]);}
+ for(const id of ids){const questions=unit.questions[id];const states=questions.map(q=>({questionId:q.id,runId,checked:true,selection:q.answer,attempts:1,firstCorrect:true,correct:true}));groups[id]={signature:questions.map(q=>q.id).join('|'),contentSignature:JSON.stringify([unit.version??null,questions],(k,v)=>k==='hint'?undefined:v),runId,states,index:questions.length,draftVersion:2};states.forEach(s=>records[s.questionId]={...s});activity.unitCompleted[id]=course==='unit49-50'&&!unit.reward?'v1:'+questions.map(q=>q.id).join('|'):JSON.stringify([unit.version,questions]);}
  return {version:1,groups,records,activity};
 }
 function completeBook(course='unit13-14'){
  const unit=definitions[course],parts=learning.activities(unit,course),value=book(course,parts.filter(a=>a.questions.length&&!a.subjects).map(a=>a.id));
  value.activity.unitDialogue={done:true,viewed:unit.learning.DIALOGUE.map(()=>true)};
- value.activity.unitCompleted.text=course==='unit49-50'?'v1:'+unit.learning.DIALOGUE.map(line=>line.text).join('|'):JSON.stringify([unit.version,unit.learning.DIALOGUE]);
+ value.activity.unitCompleted.text=course==='unit49-50'&&!unit.reward?'v1:'+unit.learning.DIALOGUE.map(line=>line.text).join('|'):JSON.stringify([unit.version,unit.learning.DIALOGUE]);
  if(parts.some(a=>a.subjects)){
   const runId='complete-subjects';value.activity.subjectRound={done:true,version:unit.learning.SUBJECTS.version,runId,submissions:unit.learning.SUBJECTS.questions.map(q=>({questionId:q.id,runId,checked:true,correct:true,selection:q.answer}))};
   value.activity.unitCompleted.subjects='v1:'+unit.learning.SUBJECTS.version;
@@ -25,7 +25,7 @@ function fixture(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'canran-learn
 function view(store,student,now=Date.now()){const data=store.learning.read({studentId:student.id});return learning.studentView(data.students[0],data,definitions,descriptions,now);}
 
 test('published courses keep their independent reward totals and validate submitted question families',()=>{
- for(const course of UNITS){const unit=definitions[course],ids=learning.activities(unit,course).filter(a=>a.questions.length&&!a.subjects).map(a=>a.id),value=book(course,ids);const wanted=ids.reduce((n,id)=>n+unit.questions[id].length,0);assert.equal(learning.submissions(observer.snapshot(value),unit,course).length,wanted,course);assert.equal(progress.summary({},unit,course).maxStars,['unit1-2','unit3-4','unit5-6'].includes(course)?5:15,course);assert.equal(learning.courseSummary({unit,course,value:{}}).completed,false);}
+ for(const course of UNITS){const unit=definitions[course],ids=learning.activities(unit,course).filter(a=>a.questions.length&&!a.subjects).map(a=>a.id),value=book(course,ids);const wanted=ids.reduce((n,id)=>n+unit.questions[id].length,0);assert.equal(learning.submissions(observer.snapshot(value),unit,course).length,wanted,course);assert.equal(progress.summary({},unit,course).maxStars,(['unit1-2','unit3-4','unit5-6'].includes(course)||Number(course.match(/^unit(\d+)-/)[1])>=41)?5:15,course);assert.equal(learning.courseSummary({unit,course,value:{}}).completed,false);}
 });
 test('unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge',()=>{
  const value=book(),group=value.groups.colours;group.index=0;group.states[0].checked=false;group.states[0].selection='an unsubmitted draft';group.states[1].attempts=0;group.states[1].checked=false;delete value.records[group.states[1].questionId];
@@ -130,7 +130,8 @@ test('HTTP endpoints enforce admin/owner/generation boundaries and retire follow
 });
 
 test('Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence',()=>{
- const unit=definitions['unit49-50'],first=unit.learning.SUBJECTS.questions[0],runId='subject-round';
+ const sandbox={CanranCore:{courseCatalog:require('../../core/course-catalog')}};require('node:vm').runInNewContext(fs.readFileSync(path.join(root,'server/legacy/unit49-50-content.js'),'utf8'),sandbox);
+ const unit=sandbox.CanranCore.unit4950,first=unit.learning.SUBJECTS.questions[0],runId='subject-round';
  const wrong={runId,questionId:first.id,checked:true,selection:'第一人称',correct:false};
  const right={...wrong,selection:'第三人称单数',correct:true};
  const wire=observer.snapshot({activity:{subjectRound:{version:unit.learning.SUBJECTS.version,runId,submissions:[wrong,right],current:{questionId:'S02',selection:'draft-only',checked:false}}}});
@@ -152,7 +153,7 @@ test('three learning statuses require current work, not visits, stars or old con
  const drafts=book();drafts.activity.unitCompleted={};
  assert.equal(learning.courseSummary({unit,course,value:drafts}).status,'not-started');
 });
-test('all 21 courses reach completed only with every required activity including reading',()=>{
+test('all published courses reach completed only with every required activity including reading',()=>{
  for(const course of UNITS){
   const value=completeBook(course),unit=definitions[course];
   assert.equal(learning.courseSummary({unit,course,value}).status,'completed',course);

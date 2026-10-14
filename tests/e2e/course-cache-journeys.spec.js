@@ -66,8 +66,8 @@ test('关闭脚本时可看课程导航，课程入口给出明确恢复方式',
     await page.getByRole('link', { name: '返回课程', exact: true }).click();
     await expect(page.getByRole('link', { name: '开始学习：礼貌小帮手', exact: true })).toHaveAttribute('href', '/lesson/unit1-2/#learn/words');
     await page.locator('noscript').getByText('单课练习', { exact: true }).click();
-    await expect(page.locator('noscript main a')).toHaveCount(28);
-    for (const unit of ['unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40']) {
+    await expect(page.locator('noscript main a')).toHaveCount(52);
+    for (const unit of ['unit31-32', 'unit39-40', 'unit41-42', 'unit49-50', 'unit89-90']) {
       await expect(page.locator(`noscript main a[href="/lesson/${unit}/#learn/words"]`)).toBeVisible();
     }
     await expect(page.locator('img:visible')).toHaveCount(0);

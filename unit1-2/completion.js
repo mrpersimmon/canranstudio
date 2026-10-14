@@ -82,8 +82,7 @@
     document.addEventListener('visibilitychange', tryStart);
     retry = root.setTimeout(tryStart, 0);
   }
-  function render({ finish, activity, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false }) {
-    const theme = themes[activity];
+  function render({ finish, activity, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false, theme = themes[activity], artwork = null }) {
     const stats = finish.querySelector('.completion-stats');
     const values = [...stats.querySelectorAll('.completion-number')].map(number => number.textContent === '—' ? null : Number(number.textContent));
     const title = node('p', 'completion-title', theme.title); title.setAttribute('role', 'heading'); title.setAttribute('aria-level', '4'); title.tabIndex = -1;
@@ -96,7 +95,7 @@
       onward.replaceChildren(node('span', 'completion-next-prefix', '下一站'), node('span', 'completion-next-name', label.replace(/^下一站：/, '')));
     }
     finish.classList.add('completion-card'); finish.dataset.activity = activity;
-    finish.replaceChildren(illustration(theme), title, ...(caption ? [caption] : []), stats, actions);
+    finish.replaceChildren(artwork || illustration(theme), title, ...(caption ? [caption] : []), stats, actions);
     if (awardStatus) actions.before(node('p', 'completion-award', awardStatus));
     if (details?.childElementCount) finish.append(details);
     if (celebrate) celebrateResult(finish, stats, values, waitForCelebration);

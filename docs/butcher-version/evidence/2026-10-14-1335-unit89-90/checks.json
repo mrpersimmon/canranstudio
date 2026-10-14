@@ -1,0 +1,169 @@
+{
+  "unit": "unit89-90",
+  "branch": "codex/debug-grammar-v2",
+  "status": "local-verified-not-committed",
+  "timestamp": "2026-10-14T13:39",
+  "runs": [
+    {
+      "name": "chromium",
+      "log": "output/unit8990-chromium.log",
+      "stats": {
+        "startTime": "2026-10-14T05:26:05.412Z",
+        "duration": 114906.463,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "chromium-retry",
+      "log": "output/unit8990-chromium-retry.log",
+      "stats": {
+        "startTime": "2026-10-14T05:28:17.010Z",
+        "duration": 10924.492,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "webkit",
+      "log": "output/unit8990-webkit.log",
+      "stats": {
+        "startTime": "2026-10-14T05:28:28.536Z",
+        "duration": 166186.26200000002,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "reference",
+      "log": "output/unit8990-reference.log",
+      "stats": {
+        "startTime": "2026-10-14T05:31:41.791Z",
+        "duration": 1602.656,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "reference-webkit",
+      "log": "output/unit8990-reference-webkit.log",
+      "stats": {
+        "startTime": "2026-10-14T05:31:43.882Z",
+        "duration": 2531.306,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "login-root",
+      "log": "output/unit8990-login-root.log",
+      "stats": {
+        "startTime": "2026-10-14T05:31:46.914Z",
+        "duration": 70857.89,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "login-subpath",
+      "log": "output/unit8990-login-subpath.log",
+      "stats": {
+        "startTime": "2026-10-14T05:33:24.275Z",
+        "duration": 69219.16500000001,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    },
+    {
+      "name": "login-webkit-root",
+      "log": "output/unit8990-login-webkit-root.log",
+      "stats": {
+        "startTime": "2026-10-14T05:34:34.174Z",
+        "duration": 84984.87299999999,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": [
+        {
+          "test": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "type": "engine-boundary",
+          "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+        }
+      ]
+    },
+    {
+      "name": "login-webkit-subpath",
+      "log": "output/unit8990-login-webkit-subpath.log",
+      "stats": {
+        "startTime": "2026-10-14T05:35:59.908Z",
+        "duration": 85869.518,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": [
+        {
+          "test": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "type": "engine-boundary",
+          "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+        }
+      ]
+    },
+    {
+      "name": "navigation",
+      "log": "output/unit8990-navigation.log",
+      "stats": {
+        "startTime": "2026-10-14T05:37:26.625Z",
+        "duration": 5565.576,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "annotations": []
+    }
+  ],
+  "initial_failures": "首次Chromium的两条复测脚本重复点击刷新后保留的填空，触发正常撤销导致无法提交。脚本改为保留已选值后，两项复测通过；未更改课程交互。",
+  "course_scenarios": {
+    "chromium": 20,
+    "webkit": 20
+  },
+  "passed_executions_including_targeted_rechecks": 68,
+  "gif": {
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "durationMs": 4800,
+    "loop": 0
+  },
+  "limits": [
+    "WebKit离线导航在进入应用前被引擎拒绝；重连后记录恢复通过，不能据此宣称离线回退已通过。",
+    "未重跑全部历史课程、旧记录迁移或全系统缓存回归。",
+    "真实手机微信、教师内容审阅、儿童体验待人工验收。",
+    "本次未提交、未推送、未部署。"
+  ]
+}

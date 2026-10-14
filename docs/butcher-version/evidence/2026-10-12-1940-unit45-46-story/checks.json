@@ -1,0 +1,42 @@
+{
+  "before": {
+    "font": "missing ZCOOL KuaiLe",
+    "bossEdgeOpaquePixels": 29,
+    "dialogueOverlap": true,
+    "redCases": 3
+  },
+  "after": {
+    "courseBrowser": {
+      "passed": 18,
+      "includesNewStoryCases": 6
+    },
+    "lastLayoutAdjustment": {
+      "passed": 7,
+      "scope": "6 story cases and 1 letter handoff case"
+    },
+    "authenticatedBrowser": {
+      "passed": 2,
+      "scope": "full learning, awards, book, GIF, cross-device, offline, missing images and cache revisit"
+    },
+    "webkitStory": {
+      "passed": 6,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "lines": 14,
+      "notes": "Explicit canvas destination sizes avoid differing SVG intrinsic-size rasterization."
+    }
+  },
+  "scope": {
+    "questionsChanged": false,
+    "awardRulesChanged": false,
+    "keepsakeChanged": false,
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "physicalDeviceTested": false
+  }
+}

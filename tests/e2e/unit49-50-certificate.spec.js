@@ -9,11 +9,13 @@ test.beforeAll(async ({ browser }, testInfo) => {
   test.setTimeout(90000);
   const context = await browser.newContext({ baseURL: testInfo.project.use.baseURL, reducedMotion: 'reduce' });
   const page = await context.newPage();
+  await require('../support/unit4950-legacy').legacy(page);
   await completeUnit(page);
   earnedSession = await context.storageState();
   await context.close();
 });
 test.beforeEach(async ({ page }) => {
+  await require('../support/unit4950-legacy').legacy(page);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.addInitScript(state => {
     if (localStorage.getItem('canran:unit49-50:learning:v1')) return;

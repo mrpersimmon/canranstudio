@@ -1,0 +1,87 @@
+/* A stationery shop with its own counter and character silhouettes. */
+.unit5960-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit5960-workspace .unit-cover>div:last-child{padding:32px}
+.unit5960-workspace .unit-cover h1>span{display:inline-block}
+.unit5960-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit5960-workspace .unit-cover-art>img{display:block;width:100%;height:auto}
+.unit5960-workspace .unit-word{height:242px;gap:7px}
+.unit5960-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit5960-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
+.unit5960-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+@media(max-width:760px){.unit5960-workspace .unit-cover{grid-template-columns:1fr}.unit5960-workspace .unit-cover>div:last-child{padding:24px}.unit5960-workspace .unit-word{height:234px}}
+.unit5960-workspace .practice-scene{display:block;width:132px;height:132px;object-fit:contain;margin:16px auto}
+.unit5960-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit5960-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.unit5960-workspace .offline-task summary::after{content:'＋'}.unit5960-workspace .offline-task[open] summary::after{content:'−'}
+.unit5960-workspace .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.unit5960-workspace .reference-card{padding:14px;border-radius:16px;background:#f5f5e9;text-align:center;font-size:16px}
+.unit5960-workspace .reference-card img{display:block;width:65px;height:65px;object-fit:contain;margin:8px auto}
+.unit5960-workspace .reference-card p{font-size:22px;line-height:1.4;margin:8px 0}
+.unit5960-workspace .offline-task li,.unit5960-workspace .offline-task p{overflow-wrap:anywhere;font-size:19px;line-height:1.7}
+.unit5960-workspace .activity-actions{display:flex;justify-content:center;margin:20px auto}
+.unit5960-workspace .grammar-runner{max-width:740px;margin-inline:auto}
+.unit5960-workspace .grammar-model{background:#fff4e5;border-color:#ddc4a8}
+.unit5960-workspace .grammar-model-line+.grammar-model-line{border-color:#d4dcc5}
+.unit5960-workspace .grammar-rule{color:var(--brown)}
+
+.unit5960-workspace{--unit-page:#faf9f0;--unit-wash:#e7f1ed;--unit-line:#b9cec6;--unit-accent:#527f7d}
+.unit5960-workspace .unit-word>strong{font-size:22px;line-height:1.25;overflow-wrap:anywhere}
+.unit5960-workspace .word-phonetic{font-size:14px;overflow-wrap:anywhere;max-width:100%}
+.unit5960-workspace .clock-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+.unit5960-workspace .clock-grid img{width:96px;height:96px}.unit5960-workspace .clock-grid .reference-card p{font-size:18px}
+.unit5960-workspace .stationery-world{position:relative;isolation:isolate;overflow:hidden;height:650px;border:1px solid var(--unit-line);border-radius:20px;background:#edf4ee url('../assets/unit59-60/shop-room.svg') center/100% 100% no-repeat}
+.unit5960-workspace .stationery-location{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:max-content;max-width:90%;font-size:15px;line-height:1.4;margin:0;padding:5px 12px;border:1px solid var(--unit-line);border-radius:9px;background:#fffdf5}
+.unit5960-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:minmax(0,1fr);padding:0;gap:0;background:none;position:relative}
+.unit5960-workspace .stage-text .stationery-world{grid-area:1/1}
+.unit5960-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;display:flex;flex-direction:column;gap:12px;width:min(660px,calc(100% - 54px));height:275px;margin:65px auto 0;padding:8px 12px;background:transparent;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#8ba9a0 transparent}
+.unit5960-workspace #lessonWorkspace .stage-text .dialogue-log:has(.story-lead){justify-content:center}
+.unit5960-workspace .story-lead{display:flex;align-items:center;justify-content:center;align-self:center;gap:12px;padding:16px;text-align:center;background:#fffdf6;border:1px solid var(--unit-line);border-radius:16px}
+.unit5960-workspace .story-lead>img{width:54px;height:54px;object-fit:contain}.unit5960-workspace .story-lead>p{font-size:22px;line-height:1.45}
+.unit5960-workspace #lessonWorkspace .stage-text .stationery-actor{position:absolute;bottom:20px;width:24%;max-width:210px;height:280px;grid-row:auto;align-self:auto;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:end}
+.unit5960-workspace .actor-lady{left:5%}.unit5960-workspace .actor-assistant{right:5%}
+.unit5960-workspace #lessonWorkspace .stage-text .stationery-cast{display:block;width:100%;height:250px;object-fit:contain}
+.unit5960-workspace .actor-label{display:block;font-size:15px;line-height:1.3;padding:4px 8px;border:1px solid transparent;border-radius:8px;background:#fffaf0;white-space:nowrap}
+.unit5960-workspace .dialogue-actor.is-current .actor-label{border-color:#739e9c;background:#fff5d7}
+.unit5960-workspace .stationery-desk{position:absolute;bottom:72px;left:34%;width:32%;height:92px;border:3px solid #9b8360;border-radius:4px;background:#dfc49a;box-shadow:inset 0 12px #eddbbd;z-index:2;display:flex;align-items:start;justify-content:center}
+.unit5960-workspace .counter-prop{position:relative;top:-55px;width:27%;height:65px;object-fit:contain}
+.unit5960-workspace .counter-note{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);max-width:43%;text-align:center;font-size:14px;margin:0;border-radius:8px;background:#fffaf0;padding:4px 9px}
+.unit5960-workspace .counter-note:empty{display:none}
+.unit5960-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}.unit5960-workspace .speaker-left{justify-content:flex-start}.unit5960-workspace .speaker-right{justify-content:flex-end}
+.unit5960-workspace .bubble{position:relative;width:fit-content;max-width:88%;min-height:0;flex:none;margin:0;padding:10px 14px;border:1px solid #b4cfc5;background:#f7fcf8;border-radius:17px;box-shadow:0 3px 0 #dfe7db}
+.unit5960-workspace .speaker-right .bubble{background:#fff6e0;border-color:#d3b783;box-shadow:0 3px 0 #eee0c4}
+.unit5960-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit5960-workspace .bubble .btext{font-size:22px;line-height:1.4;white-space:normal}.unit5960-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit5960-workspace .bubble .bbtns{margin-top:8px}
+.unit5960-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:12px auto}
+.unit5960-workspace .stationery-runner{max-width:880px;margin:auto}.unit5960-workspace .stationery-intro h3{text-align:center;margin:10px auto;font-size:21px;line-height:1.4;white-space:pre-line}
+.unit5960-workspace .stationery-intro .practice-context{margin:8px auto 14px;white-space:pre-line}
+.unit5960-workspace .stationery-application{position:relative;display:flex;align-items:center;justify-content:center;gap:20px;height:180px;margin:14px auto 18px;border:1px solid var(--unit-line);border-radius:18px;background:linear-gradient(#edf4ee 75%,#f0dfbf 75%);overflow:hidden}
+.unit5960-workspace .mini-lady,.unit5960-workspace .mini-assistant{position:absolute;bottom:8px;width:100px;height:158px;object-fit:contain}.unit5960-workspace .mini-lady{left:18%}.unit5960-workspace .mini-assistant{right:18%}
+.unit5960-workspace .counter-task-prop{width:75px;height:75px;object-fit:contain;margin-top:50px}
+.unit5960-workspace .packing-item{width:80px;height:90px;object-fit:contain;z-index:2;transform:translateX(-65px)}
+.unit5960-workspace .packing-bag{position:absolute;width:130px;height:130px;object-fit:contain;left:calc(50% + 12px);top:25px}
+.unit5960-workspace .stationery-application[data-sent="true"] .packing-item{transform:translate(47px,-22px) scale(.65)}
+.unit5960-workspace .stationery-application[data-sent="true"]{border:3px solid #739e9c}
+.unit5960-workspace .stock-pad{height:118px;width:100px;object-fit:contain}.unit5960-workspace .stock-label{white-space:pre-line;font-size:20px;line-height:1.6}
+.unit5960-workspace .counter-clock{width:156px;height:156px;object-fit:contain}
+.unit5960-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(3,minmax(0,1fr));max-width:880px;margin:16px auto;gap:12px}
+.unit5960-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:164px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 8px;text-align:center;font-size:21px}
+.unit5960-workspace .practice-options .picture-option img{width:100px;height:100px;max-width:100%;object-fit:contain}
+.unit5960-workspace .stationery-model{display:flex;justify-content:center;align-items:stretch;gap:14px;max-width:680px;padding:12px 16px;margin:12px auto;border-radius:16px;background:#fff4df;border:1px solid #dcc6a3}
+.unit5960-workspace .stationery-model .grammar-model-line{flex:1;min-width:0;padding:0;border:0;text-align:center}.unit5960-workspace .stationery-model .grammar-model-line>p{font-size:20px;line-height:1.4}.unit5960-workspace .stationery-model .grammar-model-line>small{font-size:13px;line-height:1.4}
+.unit5960-workspace .grammar-intro h3{font-size:21px;line-height:1.4;margin:12px auto 14px}.unit5960-workspace .grammar-runner .practice-answer-note{height:90px!important}.unit5960-workspace .grammar-runner .cloze-row{padding:10px 12px;margin-bottom:10px}
+.unit5960-workspace .stationery-completion{width:min(440px,100%);height:208px;max-width:440px}.unit5960-workspace .stationery-completion>img{position:static;display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:600px){
+ .unit5960-workspace .reference-grid{grid-template-columns:1fr}.unit5960-workspace .clock-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .unit5960-workspace .stage-text .stationery-world{height:690px}
+ .unit5960-workspace #lessonWorkspace .stage-text .dialogue-log{width:calc(100% - 16px);height:330px;margin-top:55px;padding:8px}
+ .unit5960-workspace #lessonWorkspace .stage-text .stationery-actor{height:240px;width:42%;bottom:40px;max-width:210px}.unit5960-workspace #lessonWorkspace .stage-text .stationery-cast{height:216px}
+ .unit5960-workspace .actor-lady{left:2%}.unit5960-workspace .actor-assistant{right:2%}.unit5960-workspace .actor-label{font-size:13px;padding:4px}
+ .unit5960-workspace .stationery-desk{left:36%;width:28%;bottom:90px;height:65px}.unit5960-workspace .counter-prop{top:-45px;height:52px;width:36%;min-width:25px}.unit5960-workspace .counter-note{bottom:8px;max-width:92%;font-size:12px}
+ .unit5960-workspace .story-lead{flex-direction:column;padding:14px}.unit5960-workspace .story-lead>p{font-size:20px}.unit5960-workspace .bubble{max-width:96%;padding:10px}.unit5960-workspace .bubble .btext{font-size:20px}
+ .unit5960-workspace .practice-options:has(.picture-option){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.unit5960-workspace .practice-options:has(.picture-option)>.opt-btn{min-height:150px;font-size:18px;padding:10px 5px}.unit5960-workspace .practice-options .picture-option img{width:86px;height:86px}
+ .unit5960-workspace .practice-options:has(.picture-option)>.opt-btn:last-child:nth-child(odd){grid-column:1/-1;width:calc((100% - 10px)/2);justify-self:center}
+ .unit5960-workspace .stationery-model{gap:10px;padding:10px}.unit5960-workspace .stationery-model .grammar-model-line>p{font-size:18px}.unit5960-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit5960-workspace .grammar-rule{font-size:13px}
+ .unit5960-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit5960-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}.unit5960-workspace .stationery-completion{height:162px}
+ .unit5960-workspace .mini-lady{left:4%}.unit5960-workspace .mini-assistant{right:4%}.unit5960-workspace .counter-task-prop{width:60px;height:60px}.unit5960-workspace .stock-label{font-size:17px}
+ .unit5960-workspace .unit-word>strong{font-size:19px}
+}
+@media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}

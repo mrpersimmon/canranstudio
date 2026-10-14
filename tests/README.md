@@ -1,6 +1,63 @@
+## Lesson 77–78 专项
+
+[设计与验收](../docs/butcher-version/2026-10-14-0130-v1.0-Lesson77-78设计与验收.md)。独立题稿答案`tests/support/unit7778.js`；66题、24词卡、12轮完整原文与五区五星。`tests/e2e/unit77-78*.spec.js`检查材料可见、事实回应、错答与部分填空、四宽短屏、相向人物及完整参考；`tests/login/unit77-78.spec.js`检查权限、卡册／实际GIF、动画、字体、跨设备与缓存。`UNIT77_BROWSER=webkit`切换引擎；账号`AWARD_TEST_BASE=/`验根路径，默认测试`/lesson/`。实际结果与边界只记在单元文档，用例存在不代表已通过。
+
+## Lesson 75–76 专项
+
+[设计与验收](../docs/butcher-version/2026-10-14-0047-v1.0-Lesson75-76设计与验收.md)。独立答案`tests/support/unit7576.js`；60题、30词卡、15轮原文、固定参照的时间任务、五区五星。`tests/e2e/unit75-76*.spec.js`检查真实页面与四宽，含题目资料真实可见；`tests/login/unit75-76.spec.js`检查权限、卡册／GIF、字体、动画、隔离、缓存和跨设备。`UNIT75_BROWSER=webkit`切换引擎；账号`AWARD_TEST_BASE=/`验根路径，默认测试`/lesson/`。实际通过项在单元记录，不以用例存在代替通过。
+
+# Lesson 73–74（2026-10-14）
+
+[设计与验收](../docs/butcher-version/2026-10-13-2345-v1.0-Lesson73-74设计与验收.md)。独立题稿 `tests/support/unit7374.js`；72题、42词卡、五区五星、14段完整原文、旁白／思想／原话分层、手册三姿态、固定三卡与四宽短屏。`unit73-74.spec.js` 和 `unit73-74-story-layout.spec.js` 检查真实页面；`tests/login/unit73-74.spec.js` 验证权限、真实获星、卡册／GIF、隔离、跨设备、缺图重试与复访。账号根路径用 `AWARD_TEST_BASE=/`，`UNIT73_BROWSER=webkit` 验WebKit；实际通过范围写在单元文档，不能以用例存在代替通过。
+
+# Lesson 61–62（2026-10-13）
+
+纪念卡白大褂修补：`unit61-62-keepsake-art.spec.js`读取页面实际显示图片的左上臂轮廓，旧图为0、新图须有连续棕色描边，并检查320／1280卡面不裁图；透明外边距不能替代内部人物完整性。卡册与GIF仍走真实账号页面用例。
+
+[设计与验收](../docs/butcher-version/2026-10-13-1558-v1.0-Lesson61-62设计与验收.md)。页面检查63题、26张音标词卡、五区五星、疾病冠词变体、错答与草稿、场景检查后变化、四宽／短屏。`unit61-62-story-layout.spec.js`逐句检查15轮原文、四个人物切换和相向、完整床与手脚、中文内部滚动。独立答案：`tests/support/unit6162.js`。账号用例：`tests/login/unit61-62.spec.js`；`AWARD_TEST_BASE=/`验根路径，`UNIT61_BROWSER=webkit`验WebKit。含真实奖励、卡册、GIF、跨设备／账号、权限、缺图与复访。实际结果以单元记录为准。
+
+# Lesson 59–60（2026-10-13）
+
+[设计与验收](../docs/butcher-version/2026-10-13-1413-v1.0-Lesson59-60设计与验收.md)。`unit59-60.spec.js`核对60题、34张音标词卡、五区五星、错答订正、部分填空、撤回／刷新、完整参考和四宽短屏；`unit59-60-story-layout.spec.js`逐句检查16轮对白、道具归属、人物实际大小、姓名与提示不重叠、中文内部滚动。独立答案在`tests/support/unit5960.js`。账号用例为`tests/login/unit59-60.spec.js`，`AWARD_TEST_BASE=/`验根目录，`UNIT59_BROWSER=webkit`验WebKit手机模拟；覆盖权限、五次获星、卡册／真实GIF、跨设备、隔离、缺图恢复及复访。实际通过范围记录在单元文档，手机微信另验。
+
+# Lesson 57–58（2026-10-13）
+
+[设计与验收](../docs/butcher-version/2026-10-13-1334-v1.0-Lesson57-58设计与验收.md)。`unit57-58.spec.js`检查58题、18张音标词卡、五区五星、订正计次、撤回／刷新／重练、完整参考材料及四宽短屏；`unit57-58-story-layout.spec.js`逐段核对5段原文、时钟与场景、中文内部滚动及完整人物。独立答案在`tests/support/unit5758.js`。账号运行`npx playwright test -c playwright.login.config.js tests/login/unit57-58.spec.js`；`AWARD_TEST_BASE=/`验根路径，`UNIT57_BROWSER=webkit`验WebKit手机模拟，覆盖授权、卡册、真实GIF、获星动画、跨设备、缺图与复访。实际结果写在单元记录，不以用例存在代替通过。
+
+# Lesson 55–56（2026-10-13）
+
+[设计与验收](../docs/butcher-version/2026-10-13-1255-v1.0-Lesson55-56设计与验收.md)。`unit55-56.spec.js`检查62题、24张音标词卡、五区五星、订正计次、刷新重练、完整参考材料及四宽短屏；`unit55-56-story-layout.spec.js`检查8段旁白、中文内部滚动、全身人物及日程切换。独立答案在`tests/support/unit5556.js`。账号运行`npx playwright test -c playwright.login.config.js tests/login/unit55-56.spec.js`，`AWARD_TEST_BASE=/`切换根目录，`UNIT55_BROWSER=webkit`启用WebKit手机模拟；覆盖授权、卡册、真实GIF、五次奖励动画、跨设备、资源缺失与复访。手机微信和教学效果由人工另验。
+
+# 新单元验收（2026-10-13）
+
+Lesson53–54：[设计与验收](../docs/butcher-version/2026-10-13-1208-v1.0-Lesson53-54设计与验收.md)。`unit53-54.spec.js`核对69题、42词卡、五区五星、错误订正与续做；`unit53-54-story-layout.spec.js`核对8轮原文、四宽、长句中文和人物。`tests/login/unit53-54.spec.js`检查真实授权、缓存、五星／动图／纪念册、换设备和隔离。`AWARD_TEST_BASE=/`验根路径，`UNIT53_BROWSER=webkit`验WebKit。独立题稿答案见`tests/support/unit5354.js`。
+
+Lesson51–52：[设计与验收](../docs/butcher-version/2026-10-13-1127-v1.0-Lesson51-52设计与验收.md)。`tests/e2e/unit51-52.spec.js`核对56题、42词卡、五区五星、错误订正、续做、四宽短屏；`unit51-52-story-layout.spec.js`逐句核对12轮原文与中文、场景内滚动、相向人物及相册变化。`tests/login/unit51-52.spec.js`检查授权、缺图重试、五星／动图／纪念册、跨设备与隔离账号；根路径用`AWARD_TEST_BASE=/`，WebKit用`UNIT51_BROWSER=webkit`。独立答案见`tests/support/unit5152.js`。真实微信、教师和儿童验收另列。
+
+Lesson 49–50：[设计与验收](../docs/butcher-version/2026-10-13-0130-v2.0-Lesson49-50设计与验收.md)。`tests/e2e/unit49-50-current.spec.js`检查60题、30张IPA词卡、五区五星、订正与续做、四宽短屏及无配音；`unit49-50-story-layout.spec.js`逐句检查11段对白、中文、相向完整人物和肉块交接；`unit49-50-upgrade.spec.js`通过冻结旧页面实际操作空白／仅选择／中途／15星完成后升级。独立答案见`tests/support/unit4950.js`。
+
+账号运行`npx playwright test -c playwright.login.config.js tests/login/unit49-50.spec.js tests/login/unit49-50-upgrade.spec.js`；根路径另加`AWARD_TEST_BASE=/`，WebKit加`UNIT49_BROWSER=webkit`。覆盖五颗新星、三卡统计与奖励先后、卡册／真实GIF、跨设备、缺图与复访；旧账号专项启动真实旧站与数据库完成15星，再升级同一数据，检查旧姓名／日期与15星历史独立保留、新题空白、新星可同步。历史音频及15星回归通过`tests/support/unit4950-legacy.js`显式加载冻结版本，不把旧版通过当作新版验收。自动化浏览器与手机尺寸模拟不代替微信真机验收。
+
+Lesson 47–48：[设计与验收](../docs/butcher-version/2026-10-13-0048-v1.0-Lesson47-48设计与验收.md)。`tests/e2e/unit47-48.spec.js`检查53题、26张IPA词卡、五区五星、错答重试／续做、四宽短屏与无配音；`tests/e2e/unit47-48-story-layout.spec.js`逐句检查12段对白、中文和完整相向的人物；`tests/login/unit47-48.spec.js`验证班级授权、卡册／GIF、跨设备、姓名隔离和缺图恢复。账号根路径及`/lesson/`测试路径分别验证，追加`--browser=webkit`运行WebKit；`UNIT47_BROWSER=webkit`另启用iPhone尺寸模拟。独立答案见`tests/support/unit4748.js`，真实手机验收另列。
+
+Lesson 45–46：[设计与验收](../docs/butcher-version/2026-10-12-1627-v1.0-Lesson45-46设计与验收.md)。`tests/e2e/unit45-46.spec.js` 检查49题、14段故事、24张音标词卡、五区五星、本轮计次、错答不泄题、撤回续做、信件归属和四宽短屏；`tests/login/unit45-46.spec.js` 覆盖授权、跨设备、纪念册、GIF、隔离与缺图恢复。账号分别运行根目录和测试子路径；`UNIT45_BROWSER=webkit` 运行 WebKit。独立答案见 `tests/support/unit4546.js`。具体已验范围与未验边界写在单元记录，不以测试存在代替通过。
+
+小剧场字体／人物裁切专项：`npx playwright test tests/e2e/unit45-46-story-layout.spec.js`，追加 `--browser=webkit` 复查 WebKit。从真实第6句检查老板手部边缘，并遍历14句的全部可见姿态，检查四宽下对白在场景内且不遮人／打字机、中文展开稳定和刷新续读；Bob 在两间办公室都面向对方，姓名不镜像。现行布局见[场景内对白设计](../docs/butcher-version/2026-10-12-2058-v1.3-Lesson45-46场景内对白布局.md)，字体与断手定位见[历史修复记录](../docs/butcher-version/2026-10-12-1940-v1.2-Lesson45-46小剧场修复.md)。
+
+# Lesson 41–42（2026-10-12）
+
+Lesson 43–44：[设计与验收](../docs/butcher-version/2026-10-12-1542-v1.0-Lesson43-44设计与验收.md)。`tests/e2e/unit43-44.spec.js` 检查44题、15段故事、五区五星、3／5／2统计、重试续做、物品守恒和四宽短屏；`tests/login/unit43-44.spec.js` 验证真实账号、班级权限、纪念册、跨设备、GIF与缓存失败恢复，根路径和 `/lesson/` 测试子路径分别运行。答案来自独立题稿，不读程序答案字段。
+
+
+[现行教学与纪念卡设计](../docs/butcher-version/2026-10-12-1342-v1.3-Lesson41-42教学与纪念卡优化.md)。`tests/e2e/unit41-42.spec.js` 从真实页面检查43题、16句课文、五区五星、本轮三卡、错答重试、撤回与提示、刷新、场景交接、参考材料和四种宽度；新增物品守恒、指令先于场景、旧空白／中途／已获星升级与对白切换尺寸恢复。`tests/login/unit41-42.spec.js` 用隔离班级学生检查授权、五区奖励动画顺序、跨设备、纪念册、60帧 GIF、离线恢复、缺图重试和复访，并与 Lesson 1–2／3–4 同姓名同星数对照。账号用例分别运行根目录（`AWARD_TEST_BASE=/`）和默认测试子路径。答案为独立审定文字，不读程序答案字段，不注入获星状态。
+
+# Lesson 3–4 语法小工坊（2026-10-11）
+
+现行五区共 33 题：5／3／10／4／11。依据、对应题号和本轮证据见[语法小工坊 v3.0](../docs/butcher-version/2026-10-11-1321-v3.0-Lesson3-4语法小工坊与验收.md)。`unit3-4-grammar.spec.js` 验证短示范与撤除、错答不泄题、提示／刷新、词块与配对、固定三卡、四种宽度、旧空草稿获星和旧题不代答新题。`tests/login/unit3-4-grammar.spec.js` 用隔离学生验证五区同步、另一设备、纪念册、课内断网续练与重新进入时的联网核验。原衣帽间分镜与交接、完整课文、无配音、词卡和迁移检查继续适用。
+
 # 现行验收入口
 
-按[统一设计标准 v1.33](../docs/butcher-version/publish/2026-10-12-0023-v1.33-教学单元设计标准与验收清单.md)选择本次范围；第 8 节奖励 R01–R12 覆盖视觉基准、真实账号、持续动效、GIF 和恢复复访。规则生效不代表已有脚本全部符合新口径；只改文档执行文档与引用检查，不冒记重新通过页面测试。
+按[统一设计标准 v1.49](../docs/butcher-version/publish/2026-10-14-0013-v1.49-教学单元设计标准与验收清单.md)选择本次范围；第 4、6、8 节覆盖统一字体、交谈朝向、人物画风、场景内对白、逐姿态防裁切、真实账号、持续动效、GIF 和恢复复访。规则生效不代表已有脚本全部符合新口径；只改文档执行文档与引用检查，不冒记重新通过页面测试。
 
 # 课程加载失败恢复（2026-10-11）
 
@@ -14,6 +71,8 @@ Chromium：`LOGIN_TEST_PORT=空闲端口 npm run test:login -- tests/login/cours
 
 # 新版纪念卡持续动效与 GIF（2026-10-11）
 
+- `tests/login/award-card-readability.spec.js`：真实账号验证标题／长姓名与插画留白、常规字体、六种新版卡面、320–1280 宽度、悬浮卡／书页／放大卡及两端真实 GIF 一致。原问题先失败，修复后通过；`AWARD_CARD_BROWSER=webkit` 可检查另一浏览器，不能替代手机真机验收。对应[字体与排版修复记录](../docs/butcher-version/2026-10-12-2140-v1.4-Lesson45-46纪念卡字体与排版修复.md)。历史题稿的 HTML 同步声明当前共用卡片的依赖，旧题目、控制器和学习记录规则不变。
+
 以[持续星光与动图保存 v0.29](../docs/award-version/2026-10-11-0925-v0.29-纪念卡持续星光与动图保存.md)为准，Lesson 1–2、3–4、5–6 及其账号纪念册的保存方式改为 GIF。其他课程和下方历史记录的 PNG 不受影响。
 
 - `tests/login/award-card-motion.spec.js`：真实获星后检查课程底部、书页与放大卡片的持续星光，五星金边随时间变化；关闭翻页动画不关闭卡片动效。实际下载并解码 60 帧 GIF，检查循环、尺寸、体积、星光／满星边框变化、文字静止、离线保存、取消生成、刷新后星数与首次日期不变，以及 320／390／1280 宽度。
@@ -22,7 +81,7 @@ Chromium：`LOGIN_TEST_PORT=空闲端口 npm run test:login -- tests/login/cours
 
 # 本轮提交统计与结算动画（2026-10-12）
 
-现行结算要求见[统一标准第 5 节](../docs/butcher-version/publish/2026-10-12-0023-v1.33-教学单元设计标准与验收清单.md#本轮统计与获星分别计算)：固定「连续答对／本次答对／本次答错」，单位「次」，按本轮实际提交计数。订正计答对、重复错答逐次计；每题首次证据仍用于独立获星判断。已先复现旧口径偏差再修复，实际范围与结果见[统计对齐验收 v0.30](../docs/award-version/2026-10-12-0111-v0.30-本轮提交统计对齐与记录保留验收.md)，不沿用旧首次分类断言宣称新统计通过。
+现行结算要求见[统一标准第 5 节](../docs/butcher-version/publish/2026-10-14-0013-v1.49-教学单元设计标准与验收清单.md#5-怎样结算固定三卡只统计本轮实际提交)：固定「连续答对／本次答对／本次答错」，单位「次」，按本轮实际提交计数。订正计答对、重复错答逐次计；每题首次证据仍用于独立获星判断。已先复现旧口径偏差再修复，实际范围与结果见[统计对齐验收 v0.30](../docs/award-version/2026-10-12-0111-v0.30-本轮提交统计对齐与记录保留验收.md)，不沿用旧首次分类断言宣称新统计通过。
 
 - `tests/e2e/unit1-2-completion.spec.js`：五题第三题错两次后改对为 3／5／2，每题错两次再订正为 1／5／10；刷新不丢次数，重练回到本轮零计数。保留五区、四种宽度及短屏、三卡中间帧与跳数检查。相关文案、五区、语法、挑战与历史升级测试同步更正统计预期，首次结果和既有获星断言保留。
 - `tests/e2e/submission-statistics.spec.js`：逐一完成其他 19 个无配音配对单元词汇区，另验 Lesson 49–50 分拣的真实错答顺序；手机三卡和图片完整、刷新一致。配对／多空整组只算一次，选改、提示和重复按已禁用按钮不计次数。教学区没有作答统计。
@@ -126,7 +185,7 @@ Lesson 1–2 在本段所述历史版本为25题无配音课堂版，原找物�
 
 # 共性交互修复（2026-10-06）
 
-现行规则见 [统一标准 v1.33](../docs/butcher-version/publish/2026-10-12-0023-v1.33-教学单元设计标准与验收清单.md)。Lesson 1–40 的 20 个单元均为无配音版，Lesson 49–50 及 Lesson 49 保留原配音模式。
+现行规则见 [统一标准 v1.49](../docs/butcher-version/publish/2026-10-14-0013-v1.49-教学单元设计标准与验收清单.md)。当前声音模式以现行标准第7节及各单元记录为准，以下旧测试范围不代表今天的课程模式。
 
 - `common-interactions.spec.js` 验证 20 个无配音单元的手机／桌面课文三态按钮、精简进度、全页无玩法／暂停／键入题；从真实旧暂停和原输入版通关记录验证直接续做、改题重答与证书纪念保留。
 - `unit-thirteen-types.spec.js` 文件名沿用最初试排；当前验证点击版；Lesson 1–2为37题，Lesson 25–26为27题。E07 已撤下，测试不再要求英文输入框。
@@ -137,7 +196,7 @@ Lesson 1–2 在本段所述历史版本为25题无配音课堂版，原找物�
 
 历史范围（2026-10-07，不作为当前豁免）：当时按上线前无正式学生的前提，五项历史课程升级用例不纳入当前验收：`units1-6-exam-upgrade.spec.js` 的 Lesson 1–2、3–4，`unit11-12-upgrade.spec.js` 的 classroom、short-exam 两项，以及 `units17-30-upgrade.spec.js` 的 Lesson 25–26。这些现存历史跳过项明确标为 skipped，不计为通过；测试内容和运行时迁移逻辑保留。现已存在学生记录，后续涉及其格式或行为的修改必须重新评估范围，不能沿用当时前提跳过保留记录与升级验证；不能仅改文档或删断言把它们记为通过。新学生创建、首次改密、正常学习、刷新与跨设备同步、密码重置及备份恢复仍照常验收。
 
-班级访问分支另运行 `npm run test:login`（4181 端口，备份恢复 4194、公开缓存迁移 4195、学习卡升级 4196）。现行测试覆盖真实学号登录、首次强制改密、老师查找/重置、主动改密、多音字校正、同名不同号、旧码停用与成绩迁移，以及原管理、权限、缓存与成果同步。此前 21 个不同页面行为用例的两轮结果见[账号验收](../docs/butcher-version/2026-09-25-1151-v1.1-学号密码实施与验收.md)。本次新增 3 个设置弹窗用例：`npm run test:login -- tests/login/settings.spec.js` 覆盖全部十六个单元的桌面／手机居中、文字对比度、窄屏确认、关闭保留操作及切换／退出，详情见[弹窗修复记录](../docs/butcher-version/2026-09-25-1643-v1.0-学习设置弹窗修复与验收.md)。`npm run build:login` 核对当前二十一个受保护单元；本分支的 `build:static` 拒绝发布。以下无身份旧课件测试只用于内部教学／缓存回归，不能当作生产权限验收。完整发布还需真实手机与线上检查。
+班级访问分支另运行 `npm run test:login`（4181 端口，备份恢复 4194、公开缓存迁移 4195、学习卡升级 4196）。现行测试覆盖真实学号登录、首次强制改密、老师查找/重置、主动改密、多音字校正、同名不同号、旧码停用与成绩迁移，以及原管理、权限、缓存与成果同步。此前 21 个不同页面行为用例的两轮结果见[账号验收](../docs/butcher-version/2026-09-25-1151-v1.1-学号密码实施与验收.md)。本次新增 3 个设置弹窗用例：`npm run test:login -- tests/login/settings.spec.js` 覆盖全部十六个单元的桌面／手机居中、文字对比度、窄屏确认、关闭保留操作及切换／退出，详情见[弹窗修复记录](../docs/butcher-version/2026-09-25-1643-v1.0-学习设置弹窗修复与验收.md)。`npm run build:login` 核对当前三十个受保护单元（新增课程仍须逐班授权）；本分支的 `build:static` 拒绝发布。以下无身份旧课件测试只用于内部教学／缓存回归，不能当作生产权限验收。完整发布还需真实手机与线上检查。
 
 账号安全回归：`npm run test:login -- tests/login/security.spec.js tests/login/student-accounts.spec.js tests/login/recovery.spec.js`。覆盖拼音加三位随机数字的初始／重置密码（含前导零、同拼音新账号不重复）、并发重放、到期／重启不续期、旧库迁移、待领取凭据的备份恢复、真实页面打印和找回流程，以及代理来源分桶、伪造头与等价地址防绕过。使用临时虚构账号，不读取或改动真实学生数据；实际 Nginx 和手机微信验收另列。
 
@@ -161,13 +220,13 @@ Lesson 1–2 当前场景样板见[设计与验收](../docs/butcher-version/2026
 
 [人物与场景优化 v2.1](../docs/butcher-version/2026-09-25-1136-v2.1-Lesson3-4人物与场景优化.md)增加 `unit3-4-scene.spec.js`：检查人物不再过小／悬空、雨伞实际交到客人手边、错答及未提交不交接、刷新与重练、中文展开不裁掉当前句；带加载页的入口还会模拟较慢图片解码，确认刷新后当前句与保留进度一致。截图在 `output/playwright/unit3-4-scene/`；仍须实际目视复核，不能只凭尺寸断言判定美观。
 
-统一标准 v1.33 将功能与视觉验收分开：除题目去重，还要对照相邻单元的场景与任务，复看角色、道具、短／长对白、作答前后和每个结束页。新单元依据自己的教学内容建立页面预期；样板用例通过不代表其他单元已通过。
+统一标准 v1.49 将功能与视觉验收分开：除题目去重，还要对照相邻单元的场景与任务，复看角色、道具、短／长对白、作答前后和每个结束页。新单元依据自己的教学内容建立页面预期；样板用例通过不代表其他单元已通过。
 
 网页加载与缓存的行为清单单独见[缓存方案 C01–C15](../docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md#7-页面行为验收清单)。实现覆盖首访完整图片、重启复访、弱网失败、缓存缺失、更新与旧页并存、子目录隔离及实际证书。缓存专项运行 `npx playwright test tests/e2e/course-loading.spec.js tests/e2e/course-cache-cold.spec.js tests/e2e/course-cache-updates.spec.js tests/e2e/course-cache-performance.spec.js tests/e2e/course-cache-journeys.spec.js tests/e2e/lesson-deployment.spec.js`；最后一次真实结果见缓存文档，不把单元旧测试当作缓存证明。
 
-先按[统一标准的模式对照](../docs/butcher-version/publish/2026-10-12-0023-v1.33-教学单元设计标准与验收清单.md#先确定本单元采用哪种模式)确定本次范围：两种模式都验证第 8.1 节；配音版追加第 8.2 节，无配音课堂配套版追加第 8.3 节；切换模式或升级内容再加第 8.4 节。无配音版须验证全部声音失败仍可完成、零英语配音请求与零系统朗读，反馈音另在正常环境验证。停用录音的播放项记不适用，历史待听审状态保留，不算通过。
+先按[统一标准的模式对照](../docs/butcher-version/publish/2026-10-14-0013-v1.49-教学单元设计标准与验收清单.md#7-声音加载与访问)确定本次范围：两种模式都验证第8节共用清单；依据第7节追加配音听审与播放门槛、或无配音全流程检查；切换模式或内容升级另验记录迁移。无配音版须验证全部声音失败仍可完成、零英语配音请求与零系统朗读，反馈音另在正常环境验证。停用录音的播放项记不适用，历史待听审状态保留，不算通过。
 
-错答反馈统一按[现行设计标准](../docs/butcher-version/publish/2026-10-12-0023-v1.33-教学单元设计标准与验收清单.md)验收。运行 `npx playwright test tests/e2e/retry-feedback.spec.js tests/e2e/l49-focus.spec.js`，覆盖 23 个现行课程入口的短反馈、原题重试、不高亮／朗读答案、灯泡不以解析兜底、真实空格及旧记录衔接，也覆盖 Lesson 49 和 49–50 分拣题从错答到原题重试的手机滚动位置。课程和共享练习改动会自动加入包含两份测试的 `browser-retry-feedback` 检查计划。历史测试中“答错显示正确答案”或“答错直接继续”的预期已经失效；不能为了保留旧断言恢复泄题或跳题。
+错答反馈统一按[现行设计标准](../docs/butcher-version/publish/2026-10-14-0013-v1.49-教学单元设计标准与验收清单.md)验收。运行 `npx playwright test tests/e2e/retry-feedback.spec.js tests/e2e/l49-focus.spec.js`，覆盖 23 个现行课程入口的短反馈、原题重试、不高亮／朗读答案、灯泡不以解析兜底、真实空格及旧记录衔接，也覆盖 Lesson 49 和 49–50 分拣题从错答到原题重试的手机滚动位置。课程和共享练习改动会自动加入包含两份测试的 `browser-retry-feedback` 检查计划。历史测试中“答错显示正确答案”或“答错直接继续”的预期已经失效；不能为了保留旧断言恢复泄题或跳题。
 
 需要 Node.js 24 或更新版本。首次检查前，在项目根目录运行：
 
@@ -303,7 +362,7 @@ Lesson 29–30 使用 `npx playwright test tests/e2e/unit29-30`：独立教材�
 
 ### 发音素材排查
 
-发音要求统一看[设计标准第 6 节](../docs/butcher-version/publish/2026-10-12-0023-v1.33-教学单元设计标准与验收清单.md#6-声音插图与资源)。素材排查是只读诊断，不替代课程的页面行为测试或人工听审，也不自动改录音、提交或发布。
+发音要求统一看[设计标准第 7 节](../docs/butcher-version/publish/2026-10-14-0013-v1.49-教学单元设计标准与验收清单.md#7-声音加载与访问)。素材排查是只读诊断，不替代课程的页面行为测试或人工听审，也不自动改录音、提交或发布。
 
 在项目根目录清点当前课程文件：
 
@@ -409,3 +468,67 @@ Lesson 21–22 新题型专项：`npx playwright test tests/e2e/unit21-22-tasks.
 依据[设计与验收](../docs/butcher-version/2026-10-01-0036-v1.0-Lesson39-40设计与验收.md)。`COURSE_TEST_PORT=4246 npx playwright test tests/e2e/unit39-40.spec.js` 覆盖33题、13句、9张音标词卡、12幅画册，花瓶每句只有一份且按交接／安放时机显示；包括全声音失败通关、真实正误与完成音、16题错答修正、词块撤回、两空未齐、四宽与短屏、逐帧词卡无闪、缓存离线与缺图重试、PNG与单页A4实物、相邻课记录隔离。期望由教材和独立题稿转录，截图需目视复核。
 
 账号：`npx playwright test -c playwright.login.config.js tests/login/unit39-40.spec.js tests/login/course-banners.spec.js tests/login/access.spec.js`。仅临时虚构账号；验证新增课默认关闭、管理员预览、实际学生完整通关同步与另一设备恢复、跨班直链、根目录和内部前缀，生产旧 `/lesson/` 不恢复。根目录专项占用4248，先确认空闲。完整线上发布、真机微信、教师和儿童验收另列。
+
+## Lesson 63–64：禁令与时长
+
+独立题稿在 `tests/support/unit6364.js`，不读取运行时答案：`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit63-64.spec.js tests/e2e/unit63-64-story-layout.spec.js` 覆盖57题、22张音标词卡、12轮完整对白、四宽与短屏、连续错答／刷新／撤回／线索、场景检查后挂牌、三卡及无英语音频。场景另用 `--browser=webkit` 复查。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit63-64.spec.js`；用 `/lesson/` 复查子路径、`UNIT63_BROWSER=webkit` 复查移动WebKit。真实作答发五颗星，检查身份／班级隔离、悬浮卡与普通结算不抢播、纪念册、同名同星基准、60帧GIF、跨设备日期与离线重进、独立场景缺图拦截及复访缓存。详见[设计与实际结果](../docs/butcher-version/2026-10-13-1709-v1.0-Lesson63-64设计与验收.md)。
+
+## Lesson 65–66：反身词与时间约定
+
+`tests/support/unit6566.js`保存独立答案，不读取课程答案字段。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit65-66.spec.js tests/e2e/unit65-66-story-layout.spec.js` 检查69题、30词卡、13轮完整课文、连续错答与刷新、配对撤回、两空及词块门槛、检查后交钥匙、五区三卡、四宽和短屏。小剧场另加`--browser=webkit`。
+
+`LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit65-66.spec.js`检查完整账号、跨设备五星日期、真实纪念册／60帧GIF、同姓名同星数样板对照、班级隔离、独立资源故障和复访；`AWARD_TEST_BASE=/lesson/`与`UNIT65_BROWSER=webkit`分别覆盖子路径和移动WebKit。生产旧/lesson/仍下线。实际证据及未完成边界见[本单元记录](../docs/butcher-version/2026-10-13-1822-v1.0-Lesson65-66设计与验收.md)。
+
+## Lesson 67–68：过去的地点、状态与日记
+
+`tests/support/unit6768.js`保存独立答案，依据教材纸页134–137、同步导学Grammar纸页122。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit67-68.spec.js tests/e2e/unit67-68-story-layout.spec.js`覆盖62题、30词卡、8轮原文、连续错答／续做／撤回、正确检查后盖章、四宽短屏、五区五星与三卡。小剧场另用`--browser=webkit`。
+
+`LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit67-68.spec.js`检查完整账号、实际五星同步、纪念册和60帧GIF、认可卡对照、权限隔离、独立街景丢失的拦截恢复与素材复访。`AWARD_TEST_BASE=/lesson/`和`UNIT67_BROWSER=webkit`覆盖子路径及移动WebKit。真实结果与待验边界见[单元记录](../docs/butcher-version/2026-10-13-1927-v1.0-Lesson67-68设计与验收.md)。
+
+## Lesson 69–70：赛车相册、时间介词与日期
+
+`tests/support/unit6970.js`保存依据教材138–141、导学Grammar125独立编写的答案；`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit69-70.spec.js tests/e2e/unit69-70-story-layout.spec.js`覆盖72题、42词卡、5段全文、连续错答与订正、撤回与刷新、正确检查后盖章、四宽短屏、五区五星。小剧场另用`--browser=webkit`。
+
+`LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit69-70.spec.js`覆盖账号授权、五颗星同步、卡册与GIF、认可卡对照、独立赛场缺图拦截恢复与快速复访；另以`AWARD_TEST_BASE=/lesson/`、`UNIT69_BROWSER=webkit`核对子路径与移动WebKit。实测结果及未验边界只维护在[单元记录](../docs/butcher-version/2026-10-13-2003-v1.0-Lesson69-70设计与验收.md)。
+
+### Lesson 71–72 新单元页面验收
+
+独立答案与原文分别位于 `tests/support/unit7172.js`、`tests/e2e/unit71-72-story-layout.spec.js`。`unit71-72.spec.js` 覆盖68题、34张词卡、过去式对比、配对／两空／词块、重复错答与统计、参考材料及四宽短屏；故事用例逐句核对12句原文、真正说话人与完整人物。登录用例覆盖新课授权、五区同步、纪念册、真实GIF、长姓名与账号隔离、独立缺图恢复与缓存复访。`UNIT71_BROWSER=webkit` 可切换本课页面／账号用例的引擎；根目录和 `/lesson/` 测试子路径分别运行，不代表线上仍有该旧路径。执行结果与证据仅记入单元验收文档。
+
+### Lesson 79–80：购物清单与must／need
+
+独立题稿位于 `tests/support/unit7980.js`；真实页面用 `COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit79-80.spec.js tests/e2e/unit79-80-story-layout.spec.js` 检查62题、36张词卡、13轮原文、六类商店26种物品及A5/B7参考。覆盖mustn’t／needn’t区别、需要物品／需要做事、零库存与数量不足、连续错答与刷新、未提交不更新清单、四宽和短屏、三卡与五区五星。`UNIT79_BROWSER=webkit`复查另一引擎。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit79-80.spec.js`；`AWARD_TEST_BASE=/lesson/`为内部子路径验收，生产旧入口不恢复。真实作答验证跨设备同步、权限、纪念册、同名同星样板对照、60帧GIF、长姓名、缺图拦截与缓存复访；移动WebKit使用同一`UNIT79_BROWSER`开关。实际结果与未验边界记入[本单元设计与验收](../docs/butcher-version/2026-10-14-0954-v1.0-Lesson79-80设计与验收.md)。
+
+### Lesson 81–82：晚餐故事与have表示活动
+
+独立答案与18轮原文位于 `tests/support/unit8182.js`、`tests/e2e/unit81-82-story-layout.spec.js`。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit81-82.spec.js tests/e2e/unit81-82-story-layout.spec.js` 覆盖66题、30张词卡、82课12项活动和A6/B12参考，包含have活动义、各时态问答、未发生的安排、错误重试与续做、两空／配对／词块、五区三卡及四宽短屏。逐场核对Tom从楼上回应时不提前出现在楼下、真实说话人及人物完整；`UNIT81_BROWSER=webkit`复查另一引擎。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit81-82.spec.js`，并分别以`AWARD_TEST_BASE=/lesson/`和`UNIT81_BROWSER=webkit`核对内部子路径、移动WebKit。包括班级授权、真实66题获星与同步、纪念册、同名同星样板对照、实际1／5星GIF解码、长姓名、缺图拦截恢复、复访素材复用及离线重连保留作答。引擎限制与实际结果仅记入[单元验收](../docs/butcher-version/2026-10-14-1035-v1.0-Lesson81-82设计与验收.md)；本地测试不代表生产部署或手机微信验收。
+
+### Lesson 83–84：行李箱故事与现在完成时
+
+独立答案与12轮原文位于 `tests/support/unit8384.js`、`tests/e2e/unit83-84-story-layout.spec.js`。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit83-84.spec.js tests/e2e/unit83-84-story-layout.spec.js` 覆盖73题、36张词卡、84课20项数字材料和A7/B10参考；检查两种完成时含义、助动词与过去分词、肯否问答、副词与some／one、错误重试／续做、未提交不更新行前记录、四宽短屏和五区三卡。`UNIT83_BROWSER=webkit`复查另一引擎。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit83-84.spec.js`，分别以内部`AWARD_TEST_BASE=/lesson/`和`UNIT83_BROWSER=webkit`检查子路径及移动WebKit，包括授权、真实获星同步、纪念册、同名同星认可卡对照、1／5星60帧GIF、长姓名、缺图拦截／恢复、快速复访和离线重连续做。实际结果与未验边界记入[单元验收](../docs/butcher-version/2026-10-14-1111-v1.0-Lesson83-84设计与验收.md)，不代表部署或微信真机验收。
+
+### Lesson 85–86：电影院外的旅行经历
+
+独立答案与13轮原文位于 `tests/support/unit8586.js`、`tests/e2e/unit85-86-story-layout.spec.js`。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit85-86.spec.js tests/e2e/unit85-86-story-layout.spec.js` 覆盖65题、30词卡、86课15动作／序数和A7/B12；检查三种去向、过去时间与不规则分词、错答续做、场景检查正确后更新、四宽短屏和五区三卡。`UNIT85_BROWSER=webkit`复查另一引擎。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit85-86.spec.js`，再用 `AWARD_TEST_BASE=/lesson/` 和 `UNIT85_BROWSER=webkit` 验两种挂载及移动WebKit。覆盖权限、真实获星、纪念册、1／5星实际GIF、同名同星认可卡对照、长姓名、缺图恢复和复访续做；结果及真机边界记入[单元验收](../docs/butcher-version/2026-10-14-1159-v1.0-Lesson85-86设计与验收.md)。
+
+### Lesson 87–88：修理厂里的进度单
+
+独立答案与13轮原文位于 `tests/support/unit8788.js`、`tests/e2e/unit87-88-story-layout.spec.js`。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit87-88.spec.js tests/e2e/unit87-88-story-layout.spec.js` 检查66题、26词卡、4组问答／12组动词与A6／B10原题；完成与过去时间、持续／已结束对比、开始不等于完成、错答续做、四宽短屏与车库转场。`UNIT87_BROWSER=webkit`复查另一引擎。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit87-88.spec.js`，再用`AWARD_TEST_BASE=/lesson/`及`UNIT87_BROWSER=webkit`验两种挂载与移动WebKit。包含五区获星、卡册、真实1／5星GIF、长姓名、隔离与缺图复访；实际结果和未验边界写入[单元验收](../docs/butcher-version/2026-10-14-1241-v1.0-Lesson87-88设计与验收.md)，用例存在不代表通过。
+
+### Lesson 89–90：看房时的时间线索
+
+独立答案与16轮原文位于 `tests/support/unit8990.js`、`tests/e2e/unit89-90-story-layout.spec.js`。`COURSE_TEST_PORT=空闲端口 npx playwright test tests/e2e/unit89-90.spec.js tests/e2e/unit89-90-story-layout.spec.js` 检查65题、24词卡、4组问答／15组动词与A6／B6原题；for／since、持续证据、同形异音、错答续做、四宽短屏与门前／客厅转场。`UNIT89_BROWSER=webkit`复查另一引擎。
+
+账号用 `LOGIN_TEST_PORT=空闲端口 AWARD_TEST_BASE=/ npx playwright test -c playwright.login.config.js tests/login/unit89-90.spec.js`，再用`AWARD_TEST_BASE=/lesson/`及`UNIT89_BROWSER=webkit`验两种挂载与移动WebKit。包含五区获星、卡册、真实1／5星GIF、长姓名、身份隔离与缺图复访；实际结果和未验边界写入[单元验收](../docs/butcher-version/2026-10-14-1310-v1.0-Lesson89-90设计与验收.md)，用例存在不代表通过。

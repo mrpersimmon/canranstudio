@@ -1,0 +1,18 @@
+{
+  "branch": "codex/debug-grammar-v2",
+  "before": "74c280e78279350e02b4b3280999c77dae0daeae",
+  "mergedRelease": "5596cb534a4212f5f46660d52a99f52549cb56d9",
+  "pr": 19,
+  "prMergedAt": "2026-10-12T04:50:47Z",
+  "method": "fast-forward then restore and reconcile existing local drafts",
+  "backup": "/Users/permission/.codex/merge-backups/debug-grammar-v2-before-pr19-20261012-125516",
+  "recoveryStash": "ae187d6654224a0d248da8434fe27eb00b896c95",
+  "premergeFiles": 294,
+  "unchangedFiles": 267,
+  "missingFiles": [],
+  "uniqueBehaviorChecks": 82,
+  "newCommit": false,
+  "pushed": false,
+  "deployed": false,
+  "rootWebkitColdEntry": "one 5-second entry-wait timeout; isolated retry passed without changing code or timeout; no performance repair claimed"
+}

@@ -8,7 +8,12 @@ async function select(room,answer){
  else if(answer?.fills){for(let i=0;i<answer.fills.length;i++)await room.getByRole('group',{name:'第'+(i+1)+'处填空',exact:true}).getByRole('button',{name:answer.fills[i],exact:true}).click();}
  else if(answer?.pairs){for(const[en,cn]of answer.pairs){await room.getByRole('group',{name:answer.leftLabel||'英文',exact:true}).getByRole('button',{name:en,exact:true}).click();await room.getByRole('group',{name:answer.rightLabel||'词义',exact:true}).getByRole('button',{name:cn,exact:true}).click();}}
  else if(answer?.object){await room.getByRole('group',{name:'待选物品',exact:true}).getByRole('button',{name:answer.object,exact:true}).click();await room.getByRole('group',{name:'接收者',exact:true}).getByRole('button',{name:answer.recipient,exact:true}).click();}
- else if(Array.isArray(answer)){const bank=room.getByRole('group',{name:'待选词块',exact:true});for(const token of answer)await bank.getByRole('button',{name:token,exact:true}).and(bank.locator('button:enabled')).first().click();}
+ else if(Array.isArray(answer)){
+  // Word-bank retries retain the learner's assembly; undo it through the UI.
+  const chosen=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button');
+  for(let remaining=await chosen.count();remaining>0;remaining--)await chosen.first().click();
+  const bank=room.getByRole('group',{name:'待选词块',exact:true});for(const token of answer)await bank.getByRole('button',{name:token,exact:true}).and(bank.locator('button:enabled')).first().click();
+ }
  else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
 }
 async function story(page,pair,base=''){
@@ -22,7 +27,15 @@ async function story(page,pair,base=''){
  await room.getByRole('button',{name:finish,exact:true}).click();
 }
 function currentGroup(pair,id){return pair==='5-6'?({refer:'introduce',articles:'introduce',choice:'cars',trans:'cars'}[id]||id):id;}
-function answers(pair,group,old=false){if(!old&&pair==='5-6'&&['introduce','cars'].includes(group))return (group==='introduce'?['refer','articles']:['choice','trans']).flatMap(id=>answers(pair,id));const c=CASES[pair];return (!old&&c.changes.find(x=>x.group===group)?.answers)||c.old[group];}
+function answers(pair,group,old=false){
+ if(!old&&pair==='3-4'){
+  const {GRAMMAR,TRANSFER}=require('./unit34-grammar');
+  if(group==='reply')return GRAMMAR.map((answer,i)=>({id:'grammar-'+i,answer,fresh:true}));
+  if(group==='exam')return [...CASES[pair].old.exam,...TRANSFER.map((answer,i)=>({id:'transfer-'+i,answer,fresh:true}))];
+ }
+ if(!old&&pair==='5-6'&&['introduce','cars'].includes(group))return (group==='introduce'?['refer','articles']:['choice','trans']).flatMap(id=>answers(pair,id));
+ const c=CASES[pair];return (!old&&c.changes.find(x=>x.group===group)?.answers)||c.old[group];
+}
 async function activity(page,pair,group,{base='',old=false,capture,wrongNew=false,hintNew=false,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
  if(!old)group=currentGroup(pair,group);

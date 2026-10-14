@@ -3,8 +3,22 @@ const { expect } = require('@playwright/test');
 
 // A completion is usable when its metrics and both actions fit the actual
 // viewport. Its total height is allowed to change with the approved content.
-async function expectCompactCompletion(page, room) {
+async function expectCompactCompletion(page, room, { illustrated = false } = {}) {
   const results = room.getByRole('list', { name: '本轮成果', exact: true });
+  if (illustrated) {
+    // The approved story result includes its illustration and may scroll on a
+    // short screen. Keep the image and scroll to the actual visible action row.
+    await expect(room.locator('.completion-art')).toBeVisible();
+    const actions = room.getByRole('group', { name: '完成后的操作', exact: true });
+    // Element scrolling works in mobile WebKit as well as desktop Chromium.
+    // This changes only the viewport, never a lesson answer or learning record.
+    await actions.evaluate(el => el.scrollIntoView({ block: 'end', behavior: 'instant' }));
+    await expect(actions).toBeInViewport({ ratio: 1 });
+    const finish = room.locator('.completion-card');
+    if (await finish.getAttribute('data-result-motion')) {
+      await expect(finish).toHaveAttribute('data-result-motion', 'finished');
+    }
+  }
   await expect(results).toBeInViewport({ ratio: 1 });
   await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
   const cards = await results.locator('.completion-stat').evaluateAll(items => items.map(el => {

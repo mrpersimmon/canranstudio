@@ -32,9 +32,10 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${
   expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).activity.unitName,'canran:unit'+pair+':learning:v1')).toBe('升级小伙伴');
   const seen=new Set();
   for(const change of CASES[pair].changes){const id=currentGroup(pair,change.group);if(seen.has(id))continue;seen.add(id);await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id);const first=answers(pair,id).findIndex(x=>x.fresh);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(first));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await activity(page,pair,id);}
-  // Carrying old answers forward is not a new zero-error round.
-  await expect(page.locator('#starCount')).toHaveText('0');
-  const id=currentGroup(pair,CASES[pair].changes[0].group);await page.goto(`/unit${pair}/#learn/${id}`);await page.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,pair,id);await expect(page.locator('#starCount')).toHaveText('1');return;
+  // Carried answers do not earn a new star. The entirely new 3–4 workshop is a fresh round.
+  const freshStars=pair==='3-4'?1:0;
+  await expect(page.locator('#starCount')).toHaveText(String(freshStars));
+  const id=currentGroup(pair,CASES[pair].changes[0].group);await page.goto(`/unit${pair}/#learn/${id}`);await page.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,pair,id);await expect(page.locator('#starCount')).toHaveText(String(freshStars+1));return;
  }
  await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');
  for(const change of CASES[pair].changes){

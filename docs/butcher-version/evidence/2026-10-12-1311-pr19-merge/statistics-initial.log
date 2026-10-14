@@ -1,0 +1,86 @@
+
+Running 6 tests using 1 worker
+
+(node:90262) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] [chromium] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星
+  1) [chromium] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 ─────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 1
+    Received:    9.668792724609375
+
+       at ../support/completion-layout.js:29
+
+      27 |   for (const [index, card] of cards.entries()) {
+      28 |     expect(card.readable, '统计文字和数字不能被裁切').toBe(true);
+    > 29 |     expect(Math.abs(card.y - cards[0].y)).toBeLessThanOrEqual(1);
+         |                                           ^
+      30 |     if (index) expect(card.x).toBeGreaterThan(cards[index - 1].right);
+      31 |   }
+      32 |   const actions = room.getByRole('group', { name: '完成后的操作', exact: true });
+        at expectCompactCompletion (/Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/support/completion-layout.js:29:43)
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/login/submission-statistics.spec.js:38:5
+
+    Error Context: output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:90283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/6] [chromium] › tests/login/submission-statistics.spec.js:57:1 › 旧课包升级保留中途错答、既有五星和首次满星日期，另一设备统计一致
+[3/6] [chromium] › tests/login/submission-statistics.spec.js:138:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始
+(node:90407) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/6] [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星
+  2) [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 ─
+
+    Error: mouse.wheel: Mouse wheel is not supported in mobile WebKit
+
+       at ../support/completion-layout.js:15
+
+      13 |     const box = await actions.boundingBox();
+      14 |     const distance = Math.max(0, box.y + box.height - page.viewportSize().height + 16);
+    > 15 |     if (distance) await page.mouse.wheel(0, distance);
+         |                                    ^
+      16 |     await expect(actions).toBeInViewport({ ratio: 1 });
+      17 |   }
+      18 |   await expect(results).toBeInViewport({ ratio: 1 });
+        at expectCompactCompletion (/Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/support/completion-layout.js:15:36)
+        at /Users/permission/.codex/worktrees/debug-grammar-v2/canranstudio.cn/tests/login/submission-statistics.spec.js:38:5
+
+    Error Context: output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-webkit-phone/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-webkit-phone/trace.zip
+    Usage:
+
+        npx playwright show-trace output/test-statistics/submission-statistics-登录手机短屏完成后统计与操作完整，再进和重练保留已获星-webkit-phone/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:90431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/6] [webkit-phone] › tests/login/submission-statistics.spec.js:57:1 › 旧课包升级保留中途错答、既有五星和首次满星日期，另一设备统计一致
+[6/6] [webkit-phone] › tests/login/submission-statistics.spec.js:138:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始
+  2 failed
+    [chromium] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 ──────
+    [webkit-phone] › tests/login/submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 ──
+  4 passed (2.4m)
