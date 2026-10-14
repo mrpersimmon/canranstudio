@@ -59,11 +59,14 @@
       finish.classList.add('is-celebrating');
       const start = performance.now();
       const numbers = [...stats.querySelectorAll('.completion-number')];
-      [...stats.children].forEach((card, i) => card.animate([
+      const entrances = [...stats.children].map((card, i) => card.animate([
         { transform: 'translateY(16px) scale(.94)', opacity: 0 },
         { transform: 'translateY(-3px) scale(1.025)', opacity: 1, offset: .72 },
         { transform: 'none', opacity: 1 }
       ], { duration: 520, delay: i * 110, easing: 'ease-out', fill: 'backwards' }));
+      // Numeric RAF timing and compositor animation timing can diverge.
+      // A result is settled only after all cards finish their actual entrance.
+      const entrancesFinished = Promise.allSettled(entrances.map(animation => animation.finished));
       function count(now) {
         numbers.forEach((number, i) => {
           const progress = Math.max(0, Math.min(1, (now - start - i * 110) / 600));
@@ -72,7 +75,9 @@
         if (now - start < 850 && finish.isConnected) root.requestAnimationFrame(count);
         else {
           numbers.forEach((number, i) => { if (values[i] !== null) number.textContent = String(values[i]); });
-          finish.classList.remove('is-celebrating'); finish.dataset.resultMotion = 'finished';
+          entrancesFinished.then(() => {
+            finish.classList.remove('is-celebrating'); finish.dataset.resultMotion = 'finished';
+          });
         }
       }
       root.requestAnimationFrame(count);

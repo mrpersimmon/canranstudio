@@ -5,6 +5,30 @@ const fs = require('node:fs/promises');
 const OUT = 'output/playwright/unit1-2-completion';
 test.use({ actionTimeout: 5000, reducedMotion: 'reduce' });
 
+test('结算完成信号等待三张卡实际入场结束，较慢动画不提前对齐验收', async ({ page }) => {
+  // WebKit's compositor can finish later than the numeric counter. Slow only
+  // this public animation API to reproduce that ordering deterministically.
+  await page.addInitScript(() => {
+    const animate = Element.prototype.animate;
+    Element.prototype.animate = function (...args) {
+      const animation = animate.apply(this, args);
+      if (this.classList.contains('completion-stat')) animation.playbackRate = .3;
+      return animation;
+    };
+  });
+  await flow.activity(page, '1-2', 'listen');
+  const room = page.locator('.stage-listen');
+  await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion', 'finished');
+  const cards = await room.locator('.completion-stat').evaluateAll(items => items.map(el => ({
+    y: el.getBoundingClientRect().y,
+    moving: el.getAnimations().some(animation => animation.playState === 'running' || animation.pending)
+  })));
+  expect(cards).toHaveLength(3);
+  expect(cards.map(card => card.moving)).toEqual([false, false, false]);
+  for (const card of cards) expect(Math.abs(card.y - cards[0].y)).toBeLessThanOrEqual(1);
+  await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
+});
+
 test('三张统计卡按实际提交计次，订正参与连续答对且默认依次入场和跳数', async ({ page }) => {
   await page.addInitScript(() => {
     window.completionMotionFrames = [];

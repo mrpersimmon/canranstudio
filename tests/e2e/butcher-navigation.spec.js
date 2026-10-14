@@ -4,7 +4,7 @@ const { test, expect } = require('@playwright/test');
 test('首页直接进入组合单元，单课入口不需要经过城区地图', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
-  await page.getByRole('link', { name: '开始学习', exact: true }).click();
+  await page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true }).click();
   await expect(page).toHaveURL(/\/unit49-50\/#learn\/words$/);
   await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
   await page.getByRole('link', { name: '我的课程', exact: true }).click();
@@ -28,7 +28,7 @@ test('继续学习回到实际活动，组合单元不冒用单课星星且打�
   await expect(page.getByText('上次学到 · 故事小侦探')).toBeVisible();
   await expect(page.getByRole('link',{name:/Lesson 51 希腊四季之旅/})).toContainText('5 / 15 颗星');
   expect(await page.evaluate(()=>localStorage.getItem('canran:unit49-50:learning:v1'))).toBe(saved);
-  await page.getByRole('link',{name:'继续学习',exact:true}).click();
+  await page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'继续学习',exact:true}).click();
   await expect(page).toHaveURL(/\/unit49-50\/#learn\/roles$/);
   await expect(page.locator('#starCount')).toHaveText('0');
 });
@@ -39,17 +39,17 @@ test('旧返回地址展开对应单课，错误参数和损坏草稿仍可正�
   for (const raw of ['{broken',JSON.stringify({version:1,groups:{},records:{},activity:{unitLocation:'//outside.example'}})]) {
     await page.evaluate(value=>localStorage.setItem('canran:unit49-50:learning:v1',value),raw);
     await page.goto('/?district=unknown&focus=unknown');
-    await expect(page.getByRole('link',{name:'开始学习',exact:true})).toHaveAttribute('href','/unit49-50/#learn/words');
+    await expect(page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'开始学习',exact:true})).toHaveAttribute('href','/unit49-50/#learn/words');
     expect(await page.evaluate(()=>localStorage.getItem('canran:unit49-50:learning:v1'))).toBe(raw);
   }
 });
 
 test('回到首页与浏览器返回都能继续刚才学习的关卡', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('link',{name:'开始学习',exact:true}).click();
+  await page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'开始学习',exact:true}).click();
   await page.getByRole('link',{name:'帮忙买晚餐',exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();
-  await expect(page.getByRole('link',{name:'继续学习',exact:true})).toHaveAttribute('href','/unit49-50/#l4');
+  await expect(page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'继续学习',exact:true})).toHaveAttribute('href','/unit49-50/#l4');
   await expect(page.getByText('上次学到 · 帮忙买晚餐')).toBeVisible();
   await page.goBack();
   await expect(page).toHaveURL(/\/unit49-50\/#l4$/);
@@ -98,7 +98,7 @@ test('重开必须两次确认，取消保留单元记录，确认后不会恢�
   await page.keyboard.press('Escape');await expect(settings).toBeFocused();
   await settings.click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();
   await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'确认重开',exact:true}).click();
-  await expect(page.getByRole('link',{name:'开始学习',exact:true})).toBeVisible();
+  await expect(page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'开始学习',exact:true})).toBeVisible();
   expect(await record()).toBeNull();
-  await page.getByRole('link',{name:'开始学习',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('0');
+  await page.locator('[data-unit="unit49-50"]').getByRole('link',{name:'开始学习',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('0');
 });
