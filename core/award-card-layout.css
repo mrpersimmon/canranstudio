@@ -4,7 +4,9 @@
 .award-card :is(.story-award-brand,.card-brand,.story-award-title,.card-title,.story-award-name,.card-name,.story-award-stars,.card-stars,.story-award-foot,.card-caption){position:absolute;left:5.5%;z-index:1;margin:0;width:38%;box-sizing:border-box}
 .award-card :is(.story-award-brand,.card-brand){top:10%;font:400 2.2cqw/1.4 var(--award-round);white-space:nowrap;text-shadow:none}
 .award-card :is(.story-award-title,.card-title){top:26%;font:var(--award-title-weight,400) var(--title-size,6.8cqw)/1.15 var(--award-round);color:var(--accent,#0b7399);white-space:nowrap;text-shadow:none}
-.award-card :is(.story-award-name,.card-name){top:48%;height:21%;display:flex;align-items:center;font:var(--award-name-weight,400) var(--name-size,9.4cqw)/1.1 var(--award-round);white-space:nowrap;text-shadow:none}
+/* Keep a full name inside its reserved area when browser font preferences or
+   fallback glyph widths prevent the normal single-line size from fitting. */
+.award-card :is(.story-award-name,.card-name){top:48%;height:21%;display:flex;align-items:center;font:var(--award-name-weight,400) var(--name-size,9.4cqw)/1.1 var(--award-round);white-space:normal;overflow-wrap:anywhere;text-shadow:none}
 .award-card :is(.story-award-stars,.card-stars){top:71%;display:flex;gap:1.4cqw;align-items:center}
 .award-card :is(.story-award-stars,.card-stars) img{width:6.1cqw;height:6.1cqw;object-fit:contain;flex:none}
 .award-card :is(.story-award-illustration,.card-scene){position:absolute;right:1%;bottom:4%;width:54%;height:88%;object-fit:contain;object-position:right bottom;z-index:0;pointer-events:none}

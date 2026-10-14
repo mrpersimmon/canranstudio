@@ -17,6 +17,7 @@ async function story(page,base=''){
  await room.getByRole('button',{name:'完成课文',exact:true}).click();
 }
 async function activity(page,id,{base='',inspect,keepAward=false}={}){
+ await require('./reward-dialog').handleRewardDialog(page,keepAward);
  await page.goto(base+'/unit49-50/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
  if(await room.locator('.practice-finish').isVisible())return room;
  const index=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
