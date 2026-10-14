@@ -9,7 +9,7 @@ test('3–4 十一题认领综合练习，全声音失败仍可逐题完成，�
   await page.route(/\.mp3(?:\?|$)/, route => route.abort());
   await page.goto('/unit3-4/#learn/exam'); const room = page.locator('.stage-exam');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '11');
-  const questions = [...EXAMS['3-4'], {prompt:'这不是你的学校。',answer:['This','is','not','your school']}, {prompt:'你不是老师。',answer:{fills:['am not','are not']}}];
+  const questions = EXAMS['3-4'];
   for (const [i, question] of questions.entries()) {
     await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();

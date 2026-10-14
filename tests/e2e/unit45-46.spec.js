@@ -16,7 +16,7 @@ test('49题完整流程、三卡五区五星及无配音',async({page},info)=>{
  }
  await page.goto('/unit45-46/#learn/certificate');await expect(page.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','5');
  await page.locator('.stage-certificate').screenshot({path:info.outputPath('card.png')});
- expect(await page.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
+ await expect.poll(()=>page.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
  expect(errors).toEqual([]);expect(voices).toEqual([]);
 });
 
@@ -29,7 +29,7 @@ test('24张词卡、音标、翻义与末组推进；不依赖配音',async({pag
   // Keep each IPA transcription in one complete phonetic face; the new Latin
   // course face lacks several symbols and must not override this exception.
   expect(await room.locator('.word-phonetic').evaluateAll(nodes=>nodes.every(el=>getComputedStyle(el).fontFamily.startsWith('Arial')))).toBe(true);
-  expect(await room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
+  await expect.poll(()=>room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
   if(i<3)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
  }
  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('4 / 4');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);await expect(page.locator('#starCount')).toHaveText('0');
@@ -59,7 +59,8 @@ test('语法反复错答、部分填空、撤回、提示与刷新；订正不�
   if(i===2){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Can',exact:true}).press('Enter');await page.reload();await expect(room.getByRole('group',{name:'已选词块'})).toContainText('Can');await room.getByRole('button',{name:'撤回 Can',exact:true}).click();await expect(check).toBeDisabled();}
   if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   if(i===13)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
-  expect(await room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
+  // Static-page DOM swaps load images asynchronously; broken assets still fail this bounded wait.
+  await expect.poll(()=>room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
   await select(room,answer);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===13?'完成这一站':'下一题',exact:true}).click();
  }
  await expect(room.locator('.completion-number')).toHaveText(['14','14','2']);await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['14','14','2']);
@@ -110,7 +111,7 @@ for(const width of [320,390,768,1280])test(`${width}宽及短屏：场景、题�
   const room=await activity(page,id,{inspect:async(surface,i,phase)=>{
    if(phase==='before'){
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-    expect(await surface.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
+    await expect.poll(()=>surface.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     for(const button of await surface.locator('button:visible').all()){const box=await button.boundingBox();expect(box.height).toBeGreaterThanOrEqual(43);}
     if((id==='grammar'&&[0,1,4,7,11].includes(i))||(id==='apply'&&[1,3,4].includes(i))||(id==='exam'&&[9,14].includes(i)))await surface.screenshot({path:info.outputPath(`${id}-${i+1}.png`)});
    }

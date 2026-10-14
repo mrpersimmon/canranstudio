@@ -119,6 +119,7 @@ test('图像加载失败时提示重试；恢复后可保存，空名字有友�
 test('没有完成任务时只有待集齐徽章，不能领证，继续按钮到真实下一站', async ({ browser }, testInfo) => {
   const context = await browser.newContext({ baseURL: testInfo.project.use.baseURL });
   const page = await context.newPage();
+  await require('../support/unit4950-legacy').legacy(page);
   await page.goto('/unit49-50/#learn/certificate');
   await expect(page.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
   const track = page.getByRole('list', { name: '五关进度', exact: true });
