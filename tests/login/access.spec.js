@@ -92,10 +92,22 @@ test('两小时静默续期、三十分钟后台回归核验，收回权限不�
 
 test('离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待',async({page,browser})=>{
  await adminLogin(page);const code=await createStudent(page,'离线班','小森',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);
- // Warm the three optional feedback clips through the page's own requests
- // before going offline; a failed initial preload is not a repeat download.
- const sounds=Promise.all(['correct','incorrect','complete'].map(kind=>a.page.waitForResponse(r=>r.url().endsWith('/duolingo-'+kind+'.mp3')&&r.status()===200).then(r=>r.finished())));
- await a.page.goto('/lesson/unit13-14/#learn/grammar');const room=a.page.locator('.stage-grammar');await expect(room.getByRole('heading').first()).toBeVisible();await sounds;await a.context.setOffline(true);
+ await a.page.goto('/lesson/unit13-14/#learn/grammar');const room=a.page.locator('.stage-grammar');await expect(room.getByRole('heading').first()).toBeVisible();
+ // Media preload streams need not finish when the application's full bytes are
+ // already cached. Observe the actual cache; cached() never downloads misses.
+ const index=await(await a.page.request.get('/lesson/course-index.json')).json();
+ const pack=await(await a.page.request.get(index.courses['unit13-14'].manifest)).json();
+ const clips=pack.audio.filter(item=>/duolingo-(correct|incorrect|complete)\.mp3$/.test(item.key));
+ expect(clips.map(item=>item.key.split('/').pop()).sort()).toEqual(['duolingo-complete.mp3','duolingo-correct.mp3','duolingo-incorrect.mp3']);
+ await expect.poll(()=>a.page.evaluate(async clips=>{
+  const store=CanranCourseCache.open('/lesson/');
+  return Promise.all(clips.map(async item=>{
+   const bytes=await store.cached(item);if(!bytes||bytes.byteLength!==item.bytes)return false;
+   const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+   return digest===item.sha256;
+  }));
+ },clips),{timeout:15000}).toEqual([true,true,true]);
+ await a.context.setOffline(true);
  const flow=require('../support/unit1314-fivezones');
  for(const [i,answer] of flow.ANSWERS.grammar.entries()){
   await flow.select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
