@@ -1,0 +1,282 @@
+{
+  "firstRepairCommit": "9e57bd42e4453e5c9d87396a95b9c7a188d3c2b4",
+  "scope": "Supplemental account checks around the previous interrupted job, followed by the genuine 3-question to 11-question to current five-zone upgrade.",
+  "before": {
+    "sourceReport": "unreached-accounts",
+    "startTime": "2026-10-20T06:35:09.934Z",
+    "cases": [
+      {
+        "file": "unit57-58.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit57-58.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit57-58.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit57-58.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit57-58.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit57-58.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "unit61-62.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit61-62.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit61-62.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit61-62.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit61-62.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit61-62.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "unit7-8-exam-upgrade.spec.js",
+        "title": "7–8三题旧服务器升级换设备，保留12星与姓名，新增七题完成后才同步15星",
+        "status": "unexpected"
+      },
+      {
+        "file": "unit71-72.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit71-72.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit71-72.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit71-72.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit71-72.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit71-72.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "unit79-80.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit79-80.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit79-80.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit79-80.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit79-80.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit79-80.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "unit85-86.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit85-86.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit85-86.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit85-86.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit85-86.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit85-86.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "unit9-10-fivezones-upgrade.spec.js",
+        "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+        "status": "expected"
+      },
+      {
+        "file": "unit91-92.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit91-92.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit91-92.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit91-92.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit91-92.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit91-92.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "unit97-98.spec.js",
+        "title": "课程入口保持班级授权：新课可单独开放",
+        "status": "expected"
+      },
+      {
+        "file": "unit97-98.spec.js",
+        "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+        "status": "expected"
+      },
+      {
+        "file": "unit97-98.spec.js",
+        "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+        "status": "expected"
+      },
+      {
+        "file": "unit97-98.spec.js",
+        "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+        "status": "expected"
+      },
+      {
+        "file": "unit97-98.spec.js",
+        "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+        "status": "expected"
+      },
+      {
+        "file": "unit97-98.spec.js",
+        "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+        "status": "expected"
+      },
+      {
+        "file": "units1-6-exam-upgrade.spec.js",
+        "title": "1-2 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星",
+        "status": "skipped"
+      },
+      {
+        "file": "units1-6-exam-upgrade.spec.js",
+        "title": "3-4 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星",
+        "status": "skipped"
+      },
+      {
+        "file": "units1-6-exam-upgrade.spec.js",
+        "title": "5-6 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星",
+        "status": "expected"
+      }
+    ]
+  },
+  "failure": "Windows file symlinks required privileges; the historical 15-star assertions also targeted the current five-zone edition. Historical source versions are now explicit and regular files are copied.",
+  "originalSkips": "Two pre-existing skips in units1-6-exam-upgrade were retained and were not counted as passes.",
+  "validationBoundary": "The historical certificate fills its date only when opened. The test opens it through the real UI and compares the stored original ISO timestamp before and after, then checks the current version and a fresh device.",
+  "windows": {
+    "sourceReport": "unit78-exam-chain-verified",
+    "startTime": "2026-10-20T06:54:55.721Z",
+    "cases": [
+      {
+        "file": "unit7-8-exam-upgrade.spec.js",
+        "title": "7–8三题旧挑战先升十一题再升五星版，跨设备保留原证与日期，新题不代答",
+        "status": "expected"
+      }
+    ]
+  },
+  "linux": {
+    "sourceReport": "unit78-exam-chain-linux",
+    "startTime": "2026-10-20T06:59:01.390Z",
+    "cases": [
+      {
+        "file": "unit7-8-exam-upgrade.spec.js",
+        "title": "7–8三题旧挑战先升十一题再升五星版，跨设备保留原证与日期，新题不代答",
+        "status": "expected"
+      }
+    ]
+  },
+  "current": {
+    "sourceReport": "unit78-exam-chain-fixed",
+    "startTime": "2026-10-20T06:49:44.078Z",
+    "cases": [
+      {
+        "file": "unit7-8-fivezones-upgrade.spec.js",
+        "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+        "status": "expected"
+      }
+    ]
+  },
+  "productionCodeChangedInFollowup": false
+}
