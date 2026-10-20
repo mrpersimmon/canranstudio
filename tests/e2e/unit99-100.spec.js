@@ -22,9 +22,19 @@ test('重复错答、两空门槛、撤回、提示、刷新与重练',async({pa
  test.setTimeout(180000);await page.goto('/unit99-100/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
  for(let k=0;k<2;k++){if(k===0)await select(room,{fills:['to']});await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const[i,a]of ANSWERS.grammar.entries()){
+  await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / 20 题`);
   if(i===0)await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'to',exact:true}).click();
   if(i===1){await select(room,{fills:['she']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'she',exact:true}).click();}
-  if(i===6){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'They say',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 They say',exact:true}).click();await expect(check).toBeDisabled();}
+  if(i===6){
+   // The grammar scene deliberately focuses its progress row in the next
+   // animation frame. Wait for that focus before sending Enter to the token,
+   // then observe the real selection before testing reload persistence.
+   await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+   const token=room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'They say',exact:true});
+   const undo=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 They say',exact:true});
+   await token.press('Enter');await expect(undo).toBeVisible();await expect(check).toBeDisabled();
+   await page.reload();await expect(undo).toBeVisible();await undo.click();await expect(undo).toHaveCount(0);await expect(check).toBeDisabled();
+  }
   if(i===3){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   await select(room,a);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===19?'完成这一站':'下一题',exact:true}).click();
  }await expect(room.locator('.completion-number')).toHaveText(['20','20','2']);await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['20','20','2']);await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');

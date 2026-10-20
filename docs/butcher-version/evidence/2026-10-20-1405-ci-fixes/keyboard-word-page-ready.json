@@ -1,0 +1,450 @@
+{
+  "previous": {
+    "runId": 39402646518,
+    "head": "a0972a113ea8267c78d153cb20a65412f677b248",
+    "url": "https://github.com/mrpersimmon/canranstudio/actions/runs/39402646518",
+    "successfulWorkJobs": 14,
+    "failedWorkJobs": [
+      {
+        "jobId": 118560879018,
+        "name": "courses (6)",
+        "test": "tests/e2e/unit99-100.spec.js: 重复错答、两空门槛、撤回、提示、刷新与重练",
+        "failure": "Reload immediately after Enter; saved selected token was not observed before reload; undo token absent afterward."
+      },
+      {
+        "jobId": 118560879291,
+        "name": "courses (7)",
+        "test": "tests/e2e/unit91-92.spec.js: 320宽／短屏：所有题型、材料、三卡、字体与按钮",
+        "failure": "Next word-card page action timed out; last visible frame shows expanded cards. Original case passed locally; trace alone does not prove data loss."
+      }
+    ],
+    "gate": "failure"
+  },
+  "changes": [
+    "Await the independently expected question number and actual grammar progress-row focus after Next. Press Enter, observe selected token and disabled incomplete answer, reload, observe the same token, undo, and verify removal.",
+    "Verify each word-card page number, collapsed-to-expanded transition and meaning visibility. After Next, verify the new page and focused heading fully in viewport before selecting cards.",
+    "Keep action and whole-test budgets, keyboard interaction, error counts, hints, refresh persistence, card capacity, font, button sizes and no-overflow assertions."
+  ],
+  "firstRepairFailure": "The first local repair awaited the task h3, but this grammar scene intentionally focuses the progress row above the model; all three runs failed. The final test follows that existing scene behavior without changing application focus.",
+  "batches": [
+    {
+      "name": "unit99-keyboard-before",
+      "stats": {
+        "startTime": "2026-10-20T10:26:33.765Z",
+        "duration": 31800.462,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 10162
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 9952
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 9306
+        }
+      ]
+    },
+    {
+      "name": "unit91-short-before",
+      "stats": {
+        "startTime": "2026-10-20T10:26:33.760Z",
+        "duration": 21130.749,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit91-92.spec.js",
+          "title": "320宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 19970
+        }
+      ]
+    },
+    {
+      "name": "unit99-keyboard-after",
+      "stats": {
+        "startTime": "2026-10-20T10:48:12.465Z",
+        "duration": 29196.671000000002,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "failed",
+          "durationMs": 8626
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "failed",
+          "durationMs": 8453
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "failed",
+          "durationMs": 8643
+        }
+      ]
+    },
+    {
+      "name": "unit99-keyboard-final",
+      "stats": {
+        "startTime": "2026-10-20T10:50:12.390Z",
+        "duration": 33553.509,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 10299
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 10413
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 10507
+        }
+      ]
+    },
+    {
+      "name": "unit99-keyboard-linux-after",
+      "stats": {
+        "startTime": "2026-10-20T10:48:41.279Z",
+        "duration": 177635.563,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 11245
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 11800
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 12124
+        }
+      ]
+    },
+    {
+      "name": "unit91-layout-after",
+      "stats": {
+        "startTime": "2026-10-20T10:48:12.461Z",
+        "duration": 79460.901,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit91-92.spec.js",
+          "title": "320宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 19775
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "390宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 20453
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "768宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 19063
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "1280宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 18859
+        }
+      ]
+    },
+    {
+      "name": "unit91-layout-linux-after",
+      "stats": {
+        "startTime": "2026-10-20T10:48:41.278Z",
+        "duration": 240756.639,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit91-92.spec.js",
+          "title": "320宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 21388
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "390宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 22327
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "768宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 26215
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "1280宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 25572
+        }
+      ]
+    },
+    {
+      "name": "unit91-99-full-final",
+      "stats": {
+        "startTime": "2026-10-20T10:51:33.864Z",
+        "duration": 260966.33599999998,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "unit91-92.spec.js",
+          "title": "66题完整通关：五区、三卡、独立题与零英语录音",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 22314
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "30张音标词卡、完整时间表、16动作与书写A4／B8",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 3690
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "错两次、刷新、撤销、线索与重练：错误不会被洗掉",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 14256
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "应用第二题错两次：未检查不登记、刷新保持、结算7／8／2",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 4932
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "声音全部失败仍能完成五区",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 19153
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "打印练习纸保留12题且可见，结束打印恢复学习页面",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 965
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "320宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 23749
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "390宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 20586
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "768宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 18111
+        },
+        {
+          "file": "unit91-92.spec.js",
+          "title": "1280宽／短屏：所有题型、材料、三卡、字体与按钮",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 18389
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "65题：未答材料、独立迁移、帮助记录、三卡与零英语配音",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 13687
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "35词卡、完整句型框架、16组替换和A5／B10",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 3147
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 10277
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "错答不更新传话记录，三卡7／8／2，刷新不丢指代",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 3145
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "全部声音失败仍能完成五区",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 11517
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "15道书写题打印与恢复",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 712
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "320及短屏：转述材料、长句、全部题型和三卡",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 18369
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "390及短屏：转述材料、长句、全部题型和三卡",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 17726
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "768及短屏：转述材料、长句、全部题型和三卡",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 16682
+        },
+        {
+          "file": "unit99-100.spec.js",
+          "title": "1280及短屏：转述材料、长句、全部题型和三卡",
+          "repeatEachIndex": 0,
+          "status": "passed",
+          "durationMs": 17494
+        }
+      ]
+    }
+  ],
+  "scopedCheck": {
+    "plan": [
+      "unit",
+      "browser-changed"
+    ],
+    "windowsCommitCommand": "Stopped at unit: 131 passed, 6 failed (existing Windows POSIX/symlink/SQLite cleanup limitations). Not an overall pass.",
+    "linuxUnitAndWorkflow": {
+      "passed": 157,
+      "failed": 0,
+      "skipped": 0
+    },
+    "affectedBrowserFiles": "20 cases, full files, see unit91-99-full-final"
+  },
+  "preservation": {
+    "definitions": 72,
+    "presentationMetadata": 44,
+    "progress": 14,
+    "awards": 14,
+    "fontFiles": 16,
+    "artworkFiles": 3461,
+    "historicalRenderers": 69,
+    "unchanged": true
+  },
+  "boundaries": [
+    "Only two E2E test files and documentation changed in this follow-up.",
+    "Original logs and traces remain in ignored local output; no raw requests or user database are included.",
+    "Final full CI must be judged from the final pushed commit. No deployment."
+  ]
+}

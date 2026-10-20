@@ -61,6 +61,22 @@ for(const width of [320,390,768,1280])test(`${width}宽／短屏：所有题型�
   await room.locator('.completion-stats').scrollIntoViewIfNeeded();await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','finished');await room.screenshot({path:info.outputPath(id+'-completed.png')});const ys=await room.locator('.completion-stat').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().y));expect(Math.max(...ys)-Math.min(...ys)).toBeLessThan(2);
   for(const btn of await room.getByRole('group',{name:'完成后的操作'}).getByRole('button').all())await btn.scrollIntoViewIfNeeded();expect(await room.locator('.completion-stat,.practice-finish-actions button').evaluateAll(els=>els.every(e=>{const b=e.getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight;}))).toBe(true);
  }
- await page.goto('/unit91-92/#learn/words');const room=page.locator('.stage-words');for(let i=0;i<5;i++){for(const card of await room.locator('.unit-word').all()){await card.click();expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);}if(i===1)await room.screenshot({path:info.outputPath('long-word.png')});if(i<4)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();}
+ await page.goto('/unit91-92/#learn/words');const room=page.locator('.stage-words'),heading=room.getByRole('heading').first();
+ await expect(heading).toBeInViewport({ratio:1});
+ for(let i=0;i<5;i++){
+  await expect(room.locator('#wordPageProgress')).toHaveText(`${i+1} / 5`);
+  for(const card of await room.locator('.unit-word').all()){
+   await expect(card).toHaveAttribute('aria-expanded','false');await card.click();await expect(card).toHaveAttribute('aria-expanded','true');await expect(card.locator('.word-meaning')).toBeVisible();
+   expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);
+  }
+  if(i===1)await room.screenshot({path:info.outputPath('long-word.png')});
+  if(i<4){
+   await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+   await expect(room.locator('#wordPageProgress')).toHaveText(`${i+2} / 5`);
+   // Page changes deliberately focus/reveal the word heading. Do not race
+   // that scroll by immediately clicking the next page's first card.
+   await expect(heading).toBeFocused();await expect(heading).toBeInViewport({ratio:1});
+  }
+ }
  expect(await room.locator('.word-phonetic').evaluateAll(els=>els.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);
 });
