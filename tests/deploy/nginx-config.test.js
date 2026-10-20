@@ -223,9 +223,10 @@ test('Nginx contract does not accept active directive text hidden in set strings
 
 test('Nginx contract rejects legal directives that alter redirect semantics', () => {
   const altered = config.replace(
-    '    server_tokens off;\n',
+    /    server_tokens off;\r?\n/,
     '    server_tokens off;\n    add_header X-Debug forged;\n'
   );
 
+  assert.notEqual(altered, config, 'The invalid directive must actually be inserted on LF and CRLF checkouts');
   assert.throws(() => assertHttpContract(altered), /exact whitelist/);
 });

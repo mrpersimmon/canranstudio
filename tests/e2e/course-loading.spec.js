@@ -3,6 +3,14 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 test('课程只准备自己的场景，独立样式仍在完整加载后显示各课背景', async ({ page }) => {
+  // Inspect the package as well: a no-Worker browser uses blob URLs and would
+  // otherwise hide an unrelated image from the original network-only assertion.
+  const index = await (await page.request.get('/lesson/course-index.json')).json();
+  const pack = await (await page.request.get(index.courses['unit29-30'].manifest)).json();
+  expect(pack.required.filter(item => /\/assets\/unit(?:1-2|3-4|49-50)\/story-background\./.test(item.key))).toEqual([]);
+  for (const icon of ['streak','correct','incorrect']) {
+    expect(pack.required.some(item => item.key.endsWith('/assets/unit1-2/completion/' + icon + '-v1.png'))).toBe(true);
+  }
   const unrelated = [];
   page.on('request', request => {
     if (/\/assets\/unit(?:1-2|3-4|49-50)\/story-background\./.test(request.url())) unrelated.push(request.url());

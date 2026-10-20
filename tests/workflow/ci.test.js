@@ -72,8 +72,13 @@ test('full CI runs on PRs and protected pushes; feature push has only a distinct
   assert.match(full, /node scripts\/ci\/browser-suite.js verify/);
   assert.match(full, /node scripts\/ci\/browser-suite.js run courses/);
   assert.match(full, /node scripts\/ci\/browser-suite.js run accounts/);
-  assert.match(full, /shard: \[1, 2, 3\]/);
-  assert.match(full, /shard: \[1, 2, 3, 4, 5, 6, 7, 8\]/);
+  for(const suite of ['courses','accounts']){
+    const matrix=full.match(new RegExp('\\n  '+suite+':[\\s\\S]*?shard: \\[([^\\]]+)\\]'));
+    assert.ok(matrix,suite+' has a workflow matrix');
+    const scheduled=matrix[1].split(',').map(n=>Number(n.trim()));
+    const count=require('../../scripts/ci/browser-suite').definition(suite).shards;
+    assert.deepEqual(scheduled,Array.from({length:count},(_,i)=>i+1),suite+' schedules every discovered shard exactly once');
+  }
 });
 
 test('CI preserves isolated performance checks and uploads failure evidence with pinned actions', () => {

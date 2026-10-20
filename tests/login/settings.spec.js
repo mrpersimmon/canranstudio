@@ -105,12 +105,15 @@ test('窄屏与横屏的重开确认可读，取消不丢已选答案，账号�
   try{
     for(const [index,viewport] of [{width:320,height:568},{width:740,height:360}].entries()){
       await student.page.setViewportSize(viewport);
-      await student.page.goto('/lesson/unit13-14/#learn/colours');
-      const choice=student.page.locator('.stage-colours').getByRole('button',{name:"What colour's your hat?",exact:true});
-      await choice.click();
+      await student.page.goto('/lesson/unit13-14/#learn/grammar');
+      const choice=student.page.locator('.stage-grammar').getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'is',exact:true});
+      if(index===0)await choice.click();
+      // The second viewport follows a fresh login on the same device. Its
+      // restored fill must stay selected; clicking it again would deselect it.
+      await expect(choice).toHaveAttribute('aria-pressed','true');
       const dialog=await openSettings(student.page);
       await dialog.getByRole('button',{name:'重开本课',exact:true}).click();
-      await expect(dialog.getByRole('button',{name:'确认清空本课个人成果',exact:true})).toBeVisible();
+      await expect(dialog.getByRole('button',{name:'确认重开练习',exact:true})).toBeVisible();
       await expectUsable(dialog);
       await student.page.screenshot({path:`output/login/settings-confirm-${viewport.width}.png`});
       await dialog.getByRole('button',{name:'关闭',exact:true}).click();

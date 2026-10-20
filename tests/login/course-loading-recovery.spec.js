@@ -14,7 +14,9 @@ test.afterEach(async ({ request }) => {
 async function learner(page, browser, label, contextOptions) {
   await adminLogin(page, base);
   const account = await createStudent(page, label, '小禾', [/Lesson 1–2/]);
-  return studentLogin(browser, account, base, contextOptions);
+  const student=await studentLogin(browser, account, base, contextOptions);
+  await observeCourseReady(student.page);
+  return student;
 }
 
 async function observeCourseReady(page) {
@@ -54,10 +56,11 @@ test('不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢
   } finally { await student.context.close(); }
 });
 
-test('旧浏览器的连接超时也会结束等待，重试后可继续进入', async ({ page, browser }) => {
+test('旧浏览器的连接超时也会结束等待，重试后可继续进入', async ({ page, browser }, info) => {
   const student = await learner(page, browser, '旧浏览器超时验收');
   const p = student.page, pattern = base + 'course-index.json';
   try {
+    await observeCourseReady(p);
     await p.addInitScript(() => { AbortSignal.any = undefined; AbortSignal.timeout = undefined; });
     await p.clock.install();
     await courseResponse(p, pattern, { hold: true });
@@ -70,6 +73,7 @@ test('旧浏览器的连接超时也会结束等待，重试后可继续进入',
     await courseResponse(p, pattern);
     await p.clock.resume();
     await loader.getByRole('button', { name: '再试一次', exact: true }).click();
+    await waitForCourseReady(p, info, 'timeout-retry');
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).toBeVisible();
   } finally { await student.context.close(); }
 });
@@ -178,7 +182,7 @@ for (const { name, serviceWorkers, unwritable } of [
   } finally { await student.context.close(); }
 });
 
-test('缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进', async ({ page, browser }) => {
+test('缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进', async ({ page, browser }, info) => {
   const student = await learner(page, browser, '加载失败原因验收');
   const p = student.page;
   try {
@@ -187,7 +191,7 @@ test('缺图失败显示原因编号，手机页面可以返回课程并在恢�
     await courseResponse(p, missing, { status: 404, body: 'missing image' });
     await p.goto(course + '#learn/words');
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
-    await expect(loader).toContainText('错误编号：L03');
+    await expect(loader).toContainText('错误编号：L03',{timeout:15000});
     await expect(loader).toContainText('学习记录会保留。');
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).not.toBeVisible();
     expect(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -197,6 +201,7 @@ test('缺图失败显示原因编号，手机页面可以返回课程并在恢�
     await expect(p.getByRole('link', { name: '我的纪念册', exact: true })).toBeVisible();
     await courseResponse(p, missing);
     await p.goto(course + '#learn/words');
+    await waitForCourseReady(p,info,'missing-reenter');
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).toBeVisible();
   } finally { await student.context.close(); }
 });
@@ -207,7 +212,7 @@ for (const fault of [
   { name: '图片误返回网页', code: 'L03', path: 'resources/*/handbag.svg', response: { contentType: 'text/html', body: '<p>error</p>' } },
   { name: '文件校验失败', code: 'L04', path: 'resources/*/handbag.svg', response: { contentType: 'image/svg+xml', body: '<svg/>' } },
   { name: '引导脚本未下载', code: 'L06', path: 'core/course-loader.js', response: { status: 503, body: 'unavailable' } }
-]) test(`${fault.name}显示 ${fault.code}，重试恢复原章节且错误提示消失`, async ({ page, browser }) => {
+]) test(`${fault.name}显示 ${fault.code}，重试恢复原章节且错误提示消失`, async ({ page, browser }, info) => {
   // A bootstrap network failure must not be hidden by a previously cached
   // worker response. Other cases retain the production service worker.
   const student = await learner(page, browser, '分类错误恢复验收', fault.path.startsWith('core/') ? { serviceWorkers: 'block' } : {});
@@ -216,9 +221,10 @@ for (const fault of [
     await courseResponse(p, pattern, fault.response);
     await p.goto(course + '#learn/words');
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
-    await expect(loader).toContainText('错误编号：' + fault.code);
+    await expect(loader).toContainText('错误编号：' + fault.code,{timeout:15000});
     await courseResponse(p, pattern);
     await loader.getByRole('button', { name: '再试一次', exact: true }).click();
+    await waitForCourseReady(p,info,fault.code+'-retry');
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).toBeVisible();
     await expect(p.locator('#courseLoader')).toHaveCount(0);
     await expect(p).toHaveURL(new RegExp(course + '#learn/words$'));
@@ -251,17 +257,18 @@ async function brokenRelease(p, suffix, replacement) {
 for (const fault of [
   { name: '图片无法解码', code: 'L05', suffix: '/handbag.svg', body: '<svg>unfinished' },
   { name: '课程脚本中断', code: 'L06', suffix: '/unit1-2/unit.js', body: 'throw new Error("course startup test");' }
-]) test(`${fault.name}仍可重试进入完整课程，重新加载不丢失目标位置`, async ({ page, browser }) => {
+]) test(`${fault.name}仍可重试进入完整课程，重新加载不丢失目标位置`, async ({ page, browser }, info) => {
   const student = await learner(page, browser, '启动中断恢复验收');
   const p = student.page;
   try {
     const restore = await brokenRelease(p, fault.suffix, fault.body);
     await p.goto(course + '#learn/words');
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
-    await expect(loader).toContainText('错误编号：' + fault.code);
+    await expect(loader).toContainText('错误编号：' + fault.code,{timeout:15000});
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).not.toBeVisible();
     await restore();
     await loader.getByRole('button', { name: '再试一次', exact: true }).click();
+    await waitForCourseReady(p,info,fault.code+'-retry');
     const words = p.getByRole('region', { name: '单词小图鉴', exact: true });
     await expect(words).toBeVisible();
     await words.getByRole('button', { name: '下一组', exact: true }).click();

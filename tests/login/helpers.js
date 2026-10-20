@@ -56,6 +56,10 @@ async function signIn(page, account, base = '/lesson/') {
   if (account.fresh) {
     await setPassword(page); account.password = 'Learning-journey-2026!'; account.fresh = false;
   }
+  // The real directory now prepares shared fonts before exposing course cards.
+  // Wait for that boundary, then keep the original visible-card assertion.
+  // Cold-load performance budgets are tested independently, without this wait.
+  await expect(page.locator('html')).toHaveAttribute('data-shared-fonts-ready', /^\d+$/, { timeout: 30000 });
   await expect(page.locator('.course').first()).toBeVisible();
 }
 async function studentLogin(browser, account, base = '/lesson/', contextOptions = {}) {

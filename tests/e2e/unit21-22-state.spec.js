@@ -1,4 +1,5 @@
 'use strict';
+const {directoryReady}=require('../support/directory-ready');
 require('../support/unit2122-legacy').historicalSuite(require('@playwright/test').test);
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
@@ -47,7 +48,7 @@ test('lesson路径阻断全部声音仍可完整通关和领证，各单元与�
   await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{if(!isFeedbackAudio(route.request().url()))voices.push(route.request().url());return route.abort();});
   await completeUnit2122(page,'/lesson');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();
   await expect(page.getByRole('dialog',{name:'寻物交接站纪念',exact:true})).toBeVisible();await page.keyboard.press('Escape');await page.reload();await expect(page.locator('#starCount')).toHaveText('15');
-  await page.getByRole('link',{name:'我的课程',exact:true}).click();await expect(page).toHaveURL(/\/lesson\/$/);
+  await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);await expect(page).toHaveURL(/\/lesson\/$/);
   await expect(page.getByRole('link',{name:'继续学习：寻物交接站',exact:true})).toHaveAttribute('href','/lesson/unit21-22/#learn/certificate');
   for(const unit of ['unit1-2','unit3-4','unit5-6','unit7-8','unit9-10','unit11-12','unit13-14','unit15-16','unit17-18','unit19-20','unit49-50']){
     await page.goto('/lesson/'+unit+'/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('0');
@@ -58,10 +59,10 @@ test('lesson路径阻断全部声音仍可完整通关和领证，各单元与�
 test('首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离',async({page})=>{
   await page.goto('/unit21-22/#learn/observe');const room=page.locator('.stage-observe');await room.getByRole('button',{name:"说话的人和他的同伴",exact:true}).click();
   await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(room.getByRole('heading').first()).toBeInViewport();
-  await page.getByRole('link',{name:'我的课程',exact:true}).click();await page.getByRole('link',{name:'继续学习：寻物交接站',exact:true}).click();
+  await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);await page.getByRole('link',{name:'继续学习：寻物交接站',exact:true}).click();
   await expect(page).toHaveURL(/#learn\/observe$/);await expect(room.getByRole('button',{name:"说话的人和他的同伴",exact:true})).toHaveAttribute('aria-pressed','true');
   await page.goto('/lesson/unit21-22/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
-  await page.getByRole('link',{name:'我的课程',exact:true}).click();
+  await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
   for(const confirm of [false,true]){
     await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();
     await page.getByRole('button',{name:confirm?'确认重开':'取消重开',exact:true}).click();

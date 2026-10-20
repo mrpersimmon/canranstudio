@@ -1,0 +1,3518 @@
+{
+  "baselineCommit": "081cf0657147b5ac614162dd9bfd0672ca60cfc8",
+  "originalRun": "https://github.com/mrpersimmon/canranstudio/actions/runs/39356201901",
+  "note": "Selected passing cases from the stated runs; initial failed runs remain local. This is scoped local validation, not a claim about the next remote run.",
+  "originalBrowserFailuresCovered": [
+    {
+      "file": "tests/login/settings.spec.js",
+      "originalTitle": "窄屏与横屏的重开确认可读，取消不丢已选答案，账号按钮仍可使用",
+      "validatedTitle": "窄屏与横屏的重开确认可读，取消不丢已选答案，账号按钮仍可使用"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "3-4 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "3-4 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "5-6 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "5-6 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "7-8 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "7-8 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "9-10 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "9-10 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "11-12 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "11-12 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "13-14 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "13-14 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "15-16 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "15-16 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "17-18 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "17-18 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/login/units1-30-tasks-upgrade.spec.js",
+      "originalTitle": "19-20 账号在三台设备间升级题目，保留历史并独立完成新任务",
+      "validatedTitle": "19-20 账号在三台设备间升级题目，保留历史并独立完成新任务"
+    },
+    {
+      "file": "tests/e2e/course-cache-updates.spec.js",
+      "originalTitle": "无配音课断网走完所有题型并保存证书，不请求英语配音",
+      "validatedTitle": "无配音课断网走完所有题型并保存证书，不请求英语配音"
+    },
+    {
+      "file": "tests/e2e/unit3-4-classroom.spec.js",
+      "originalTitle": "320宽度可阅读操作，帮助关闭回到原按钮",
+      "validatedTitle": "320宽度可阅读操作，帮助关闭回到原按钮"
+    },
+    {
+      "file": "tests/e2e/unit3-4-classroom.spec.js",
+      "originalTitle": "390宽度可阅读操作，帮助关闭回到原按钮",
+      "validatedTitle": "390宽度可阅读操作，帮助关闭回到原按钮"
+    },
+    {
+      "file": "tests/e2e/unit3-4-classroom.spec.js",
+      "originalTitle": "五星卡日期保留、匿名不能代填姓名或导出，练习纸与路径记录独立",
+      "validatedTitle": "五星卡日期保留、匿名不能代填姓名或导出，练习纸与路径记录独立"
+    },
+    {
+      "file": "tests/e2e/unit7-8.spec.js",
+      "originalTitle": "首页继续定位与旧 be、trans 书签衔接到合并活动",
+      "validatedTitle": "首页继续定位与旧 be、trans 书签衔接到合并活动"
+    },
+    {
+      "file": "tests/e2e/unit7-8.spec.js",
+      "originalTitle": "首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录",
+      "validatedTitle": "首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "7-8 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "7-8 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "9-10 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "9-10 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "11-12 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "11-12 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "13-14 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "13-14 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "15-16 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "15-16 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "17-18 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "17-18 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "19-20 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "19-20 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "23-24 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "23-24 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "27-28 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "27-28 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/e2e/units1-30-revision.spec.js",
+      "originalTitle": "29-30 新题逐项可作答，错误、线索与刷新不代答",
+      "validatedTitle": "29-30 新题逐项可作答，错误、线索与刷新不代答"
+    },
+    {
+      "file": "tests/login/course-integration.spec.js",
+      "originalTitle": "7–8 旧服务器真实完成记录换新设备后保留未改成绩，补完新任务与挑战才恢复证书",
+      "validatedTitle": "7–8 旧服务器真实完成记录换新设备后保留未改成绩，补完新任务与挑战才恢复证书"
+    },
+    {
+      "file": "tests/login/course-integration.spec.js",
+      "originalTitle": "7–8 登录后无配音通关，证书与真实成果跨设备保留",
+      "validatedTitle": "7–8 登录后无配音通关，证书与真实成果跨设备保留"
+    },
+    {
+      "file": "tests/login/recovery.spec.js",
+      "originalTitle": "停服务备份恢复后，原学号密码、班级和真实成果仍可使用",
+      "validatedTitle": "停服务备份恢复后，原学号密码、班级和真实成果仍可使用"
+    },
+    {
+      "file": "tests/login/recovery.spec.js",
+      "originalTitle": "学习卡数据库升级保留原学生成果，旧卡及旧会话失效，重启不重复分配学号",
+      "validatedTitle": "学习卡数据库升级保留原学生成果，旧卡及旧会话失效，重启不重复分配学号"
+    },
+    {
+      "file": "tests/login/recovery.spec.js",
+      "originalTitle": "旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领",
+      "validatedTitle": "旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领"
+    },
+    {
+      "file": "tests/login/student-accounts.spec.js",
+      "originalTitle": "丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果",
+      "validatedTitle": "丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果"
+    },
+    {
+      "file": "tests/e2e/unit-dedup.spec.js",
+      "originalTitle": "Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留",
+      "validatedTitle": "Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留"
+    },
+    {
+      "file": "tests/login/access.spec.js",
+      "originalTitle": "已完成活动跨设备同步，未提交选项留在原设备",
+      "validatedTitle": "已完成活动跨设备同步，未提交选项留在原设备"
+    },
+    {
+      "file": "tests/login/access.spec.js",
+      "originalTitle": "两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作",
+      "validatedTitle": "两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作"
+    },
+    {
+      "file": "tests/login/access.spec.js",
+      "originalTitle": "离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待",
+      "validatedTitle": "离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待"
+    },
+    {
+      "file": "tests/login/access.spec.js",
+      "originalTitle": "完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩",
+      "validatedTitle": "完整无配音课程跨设备同步；重开保留纪念卡与日期，旧设备不能恢复旧练习"
+    },
+    {
+      "file": "tests/login/access.spec.js",
+      "originalTitle": "转班、停用、恢复、重置密码和空班预览",
+      "validatedTitle": "转班、停用、恢复、重置密码和空班预览"
+    },
+    {
+      "file": "tests/login/access.spec.js",
+      "originalTitle": "学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效",
+      "validatedTitle": "学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效"
+    },
+    {
+      "file": "tests/login/root-mount.spec.js",
+      "originalTitle": "根目录真实登录、整课与缓存复访可用；旧 lesson 内容下线且匿名资源仍受限",
+      "validatedTitle": "根目录真实登录、整课与缓存复访可用；旧 lesson 内容下线且匿名资源仍受限"
+    },
+    {
+      "file": "tests/login/root-mount.spec.js",
+      "originalTitle": "已有学号密码和真实已完成活动从 lesson 迁至根目录，不因图片路径变化丢成果",
+      "validatedTitle": "已有学号密码和真实已完成活动从 lesson 迁至根目录，不因图片路径变化丢成果"
+    },
+    {
+      "file": "tests/login/root-mount.spec.js",
+      "originalTitle": "新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退被删除",
+      "validatedTitle": "新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退被删除"
+    },
+    {
+      "file": "tests/e2e/course-loading.spec.js",
+      "originalTitle": "课程只准备自己的场景，独立样式仍在完整加载后显示各课背景",
+      "validatedTitle": "课程只准备自己的场景，独立样式仍在完整加载后显示各课背景"
+    },
+    {
+      "file": "tests/e2e/three-unit-awards.spec.js",
+      "originalTitle": "5-6 五答题区整轮零错才获星，订正和刷新不补星，重练获星后不撤回",
+      "validatedTitle": "5-6 五答题区整轮零错才获星，订正和刷新不补星，重练获星后不撤回"
+    },
+    {
+      "file": "tests/e2e/three-unit-awards.spec.js",
+      "originalTitle": "3-4 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练",
+      "validatedTitle": "3-4 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练"
+    },
+    {
+      "file": "tests/e2e/three-unit-awards.spec.js",
+      "originalTitle": "5-6 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练",
+      "validatedTitle": "5-6 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练"
+    },
+    {
+      "file": "tests/e2e/unit119-120-word-layout.spec.js",
+      "originalTitle": "四宽词卡正面：完整英文词形与实际可用宽度",
+      "validatedTitle": "四宽词卡正面：完整英文词形与实际可用宽度"
+    },
+    {
+      "file": "tests/e2e/unit5-6-classroom.spec.js",
+      "originalTitle": "390共用人物与汽车的后续课程仍清晰可见",
+      "validatedTitle": "390共用人物与汽车的后续课程仍清晰可见"
+    },
+    {
+      "file": "tests/e2e/unit5-6-classroom.spec.js",
+      "originalTitle": "1280共用人物与汽车的后续课程仍清晰可见",
+      "validatedTitle": "1280共用人物与汽车的后续课程仍清晰可见"
+    },
+    {
+      "file": "tests/e2e/unit11-12.spec.js",
+      "originalTitle": "首页和 lesson 子目录进入新单元，独立恢复草稿并定位同一地址",
+      "validatedTitle": "首页和 lesson 子目录进入新单元，独立恢复草稿并定位同一地址"
+    },
+    {
+      "file": "tests/e2e/unit11-12.spec.js",
+      "originalTitle": "重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录",
+      "validatedTitle": "重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录"
+    },
+    {
+      "file": "tests/e2e/unit119-120.spec.js",
+      "originalTitle": "320及短屏：时序材料、长句、全部题型和三卡",
+      "validatedTitle": "320及短屏：时序材料、长句、全部题型和三卡"
+    },
+    {
+      "file": "tests/e2e/unit17-18-state.spec.js",
+      "originalTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "validatedTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+    },
+    {
+      "file": "tests/e2e/unit17-18-state.spec.js",
+      "originalTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "validatedTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+    },
+    {
+      "file": "tests/e2e/unit5-6.spec.js",
+      "originalTitle": "首页与 lesson 子目录有新单元入口，独立继续并保留资源路径",
+      "validatedTitle": "首页与 lesson 子目录有新单元入口，独立继续并保留资源路径"
+    },
+    {
+      "file": "tests/e2e/unit5-6.spec.js",
+      "originalTitle": "首页重开包含四个单元，取消保留，确认只清除本路径的学习记录",
+      "validatedTitle": "首页重开包含四个单元，取消保留，确认只清除本路径的学习记录"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "7-8 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "9-10 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "11-12 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "13-14 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "15-16 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "17-18 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "17-18 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "19-20 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "19-20 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "21-22 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "21-22 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "23-24 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "27-28 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 全课独立完成、完整原文与证书门槛",
+      "validatedTitle": "29-30 全课独立完成、完整原文与证书门槛"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "3-4 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "3-4 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "7-8 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "9-10 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "11-12 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "13-14 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "15-16 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "17-18 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "17-18 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "19-20 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "19-20 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "23-24 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "27-28 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+      "validatedTitle": "29-30 真实旧轮次升级后新题未答，未改成绩与纪念信息保留"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "5-6 320 真实新题画面与按钮稳定",
+      "validatedTitle": "5-6 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 320 真实新题画面与按钮稳定",
+      "validatedTitle": "7-8 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 390 真实新题画面与按钮稳定",
+      "validatedTitle": "7-8 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 768 真实新题画面与按钮稳定",
+      "validatedTitle": "7-8 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "7-8 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 320 真实新题画面与按钮稳定",
+      "validatedTitle": "9-10 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 390 真实新题画面与按钮稳定",
+      "validatedTitle": "9-10 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 768 真实新题画面与按钮稳定",
+      "validatedTitle": "9-10 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "9-10 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 320 真实新题画面与按钮稳定",
+      "validatedTitle": "11-12 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 390 真实新题画面与按钮稳定",
+      "validatedTitle": "11-12 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 768 真实新题画面与按钮稳定",
+      "validatedTitle": "11-12 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "11-12 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 320 真实新题画面与按钮稳定",
+      "validatedTitle": "13-14 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 390 真实新题画面与按钮稳定",
+      "validatedTitle": "13-14 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 768 真实新题画面与按钮稳定",
+      "validatedTitle": "13-14 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "13-14 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 320 真实新题画面与按钮稳定",
+      "validatedTitle": "15-16 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 390 真实新题画面与按钮稳定",
+      "validatedTitle": "15-16 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 768 真实新题画面与按钮稳定",
+      "validatedTitle": "15-16 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "15-16 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "17-18 320 真实新题画面与按钮稳定",
+      "validatedTitle": "17-18 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "17-18 390 真实新题画面与按钮稳定",
+      "validatedTitle": "17-18 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "17-18 768 真实新题画面与按钮稳定",
+      "validatedTitle": "17-18 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "17-18 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "17-18 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "19-20 320 真实新题画面与按钮稳定",
+      "validatedTitle": "19-20 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "19-20 390 真实新题画面与按钮稳定",
+      "validatedTitle": "19-20 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "19-20 768 真实新题画面与按钮稳定",
+      "validatedTitle": "19-20 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "19-20 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "19-20 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "21-22 320 真实新题画面与按钮稳定",
+      "validatedTitle": "21-22 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "21-22 390 真实新题画面与按钮稳定",
+      "validatedTitle": "21-22 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "21-22 768 真实新题画面与按钮稳定",
+      "validatedTitle": "21-22 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "21-22 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "21-22 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 320 真实新题画面与按钮稳定",
+      "validatedTitle": "23-24 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 390 真实新题画面与按钮稳定",
+      "validatedTitle": "23-24 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 768 真实新题画面与按钮稳定",
+      "validatedTitle": "23-24 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "23-24 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 320 真实新题画面与按钮稳定",
+      "validatedTitle": "27-28 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 390 真实新题画面与按钮稳定",
+      "validatedTitle": "27-28 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 768 真实新题画面与按钮稳定",
+      "validatedTitle": "27-28 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "27-28 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 320 真实新题画面与按钮稳定",
+      "validatedTitle": "29-30 320 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 390 真实新题画面与按钮稳定",
+      "validatedTitle": "29-30 390 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 768 真实新题画面与按钮稳定",
+      "validatedTitle": "29-30 768 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 1280 真实新题画面与按钮稳定",
+      "validatedTitle": "29-30 1280 真实新题画面与按钮稳定"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 390 改前同环节画面对照",
+      "validatedTitle": "7-8 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "7-8 1280 改前同环节画面对照",
+      "validatedTitle": "7-8 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 390 改前同环节画面对照",
+      "validatedTitle": "9-10 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "9-10 1280 改前同环节画面对照",
+      "validatedTitle": "9-10 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 390 改前同环节画面对照",
+      "validatedTitle": "11-12 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "11-12 1280 改前同环节画面对照",
+      "validatedTitle": "11-12 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 390 改前同环节画面对照",
+      "validatedTitle": "13-14 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "13-14 1280 改前同环节画面对照",
+      "validatedTitle": "13-14 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 390 改前同环节画面对照",
+      "validatedTitle": "15-16 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "15-16 1280 改前同环节画面对照",
+      "validatedTitle": "15-16 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 390 改前同环节画面对照",
+      "validatedTitle": "23-24 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "23-24 1280 改前同环节画面对照",
+      "validatedTitle": "23-24 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 390 改前同环节画面对照",
+      "validatedTitle": "27-28 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "27-28 1280 改前同环节画面对照",
+      "validatedTitle": "27-28 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 390 改前同环节画面对照",
+      "validatedTitle": "29-30 390 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/units1-30-acceptance.spec.js",
+      "originalTitle": "29-30 1280 改前同环节画面对照",
+      "validatedTitle": "29-30 1280 改前同环节画面对照"
+    },
+    {
+      "file": "tests/e2e/unit15-16-state.spec.js",
+      "originalTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "validatedTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+    },
+    {
+      "file": "tests/e2e/unit15-16-state.spec.js",
+      "originalTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "validatedTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+    },
+    {
+      "file": "tests/e2e/unit19-20-state.spec.js",
+      "originalTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "validatedTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+    },
+    {
+      "file": "tests/e2e/unit19-20-state.spec.js",
+      "originalTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "validatedTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+    },
+    {
+      "file": "tests/e2e/unit21-22-state.spec.js",
+      "originalTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "validatedTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+    },
+    {
+      "file": "tests/e2e/unit21-22-state.spec.js",
+      "originalTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "validatedTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+    },
+    {
+      "file": "tests/e2e/unit25-26-state.spec.js",
+      "originalTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "validatedTitle": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+    },
+    {
+      "file": "tests/e2e/unit25-26-state.spec.js",
+      "originalTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "validatedTitle": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit5-6 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit5-6 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit7-8 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit7-8 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit9-10 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit9-10 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit11-12 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit11-12 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit13-14 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit13-14 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit15-16 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit15-16 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit17-18 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit17-18 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit21-22 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit21-22 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/retry-feedback.spec.js",
+      "originalTitle": "unit23-24 选择题错答只提示重试，改选后正常推进",
+      "validatedTitle": "unit23-24 选择题错答只提示重试，改选后正常推进"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit7-8 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit7-8 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit9-10 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit9-10 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit11-12 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit11-12 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit13-14 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit13-14 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit15-16 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit15-16 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit17-18 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit17-18 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit19-20 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit19-20 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit21-22 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit21-22 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit23-24 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit23-24 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit25-26 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit25-26 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit27-28 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit27-28 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "unit29-30 缓存后断网完成真实题型和证书",
+      "validatedTitle": "unit29-30 缓存后断网完成真实题型和证书"
+    },
+    {
+      "file": "tests/e2e/course-cache-journeys.spec.js",
+      "originalTitle": "关闭脚本时可看课程导航，课程入口给出明确恢复方式",
+      "validatedTitle": "关闭脚本时可看课程导航，课程入口给出明确恢复方式"
+    },
+    {
+      "file": "tests/e2e/unit9-10.spec.js",
+      "originalTitle": "首页与 lesson 子目录进入问候站，独立恢复草稿并定位同一地址",
+      "validatedTitle": "首页与 lesson 子目录进入问候站，独立恢复草稿并定位同一地址"
+    },
+    {
+      "file": "tests/e2e/unit9-10.spec.js",
+      "originalTitle": "重开冒险包含新单元；取消保留，确认仅清理本网站路径记录",
+      "validatedTitle": "重开冒险包含新单元；取消保留，确认仅清理本网站路径记录"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "11-12 owner-apostrophe 新题沿用对应道具和语义反馈",
+      "validatedTitle": "11-12 owner-apostrophe 新题沿用对应道具和语义反馈"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "11-12 exam-my-your 新题沿用对应道具和语义反馈",
+      "validatedTitle": "11-12 exam-my-your 新题沿用对应道具和语义反馈"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "13-14 story-hat 新题沿用对应道具和语义反馈",
+      "validatedTitle": "13-14 story-hat 新题沿用对应道具和语义反馈"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "13-14 exam-too 新题沿用对应道具和语义反馈",
+      "validatedTitle": "13-14 exam-too 新题沿用对应道具和语义反馈"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "15-16 story-finish 新题沿用对应道具和语义反馈",
+      "validatedTitle": "15-16 story-finish 新题沿用对应道具和语义反馈"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "15-16 reply-we 新题沿用对应道具和语义反馈",
+      "validatedTitle": "15-16 reply-we 新题沿用对应道具和语义反馈"
+    },
+    {
+      "file": "tests/e2e/units1-30-scene-cues.spec.js",
+      "originalTitle": "9–10 定位回问时突出 Helen，没有空白对白框",
+      "validatedTitle": "9–10 定位回问时突出 Helen，没有空白对白框"
+    },
+    {
+      "file": "tests/e2e/units1-30-tasks.spec.js",
+      "originalTitle": "7–8 逐空补完介绍，未填完不能检查，错答后可改且恢复草稿",
+      "validatedTitle": "7–8 逐空补完介绍，未填完不能检查，错答后可改且恢复草稿"
+    }
+  ],
+  "runs": [
+    {
+      "report": "task-history-after",
+      "startTime": "2026-10-20T05:17:15.066Z",
+      "selected": [
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "3-4 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "5-6 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "7-8 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "9-10 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "11-12 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "13-14 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "15-16 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "17-18 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "19-20 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "23-24 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "27-28 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-revision.spec.js",
+          "title": "29-30 新题逐项可作答，错误、线索与刷新不代答",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "11-12 owner-apostrophe 新题沿用对应道具和语义反馈",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "11-12 exam-my-your 新题沿用对应道具和语义反馈",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "13-14 story-hat 新题沿用对应道具和语义反馈",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "13-14 exam-too 新题沿用对应道具和语义反馈",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "15-16 story-finish 新题沿用对应道具和语义反馈",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "15-16 reply-we 新题沿用对应道具和语义反馈",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-scene-cues.spec.js",
+          "title": "9–10 定位回问时突出 Helen，没有空白对白框",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks.spec.js",
+          "title": "7–8 逐空补完介绍，未填完不能检查，错答后可改且恢复草稿",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks.spec.js",
+          "title": "1–2 在完整感谢语中找程度词，错选不代答，刷新后原题可重试",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "task-acceptance-after",
+      "startTime": "2026-10-20T05:19:57.412Z",
+      "selected": [
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "21-22 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 全课独立完成、完整原文与证书门槛",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 真实旧轮次升级后新题未答，未改成绩与纪念信息保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "21-22 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "21-22 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "21-22 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "21-22 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 320 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 390 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 768 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 1280 真实新题画面与按钮稳定",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "3-4 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "5-6 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "7-8 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "9-10 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "11-12 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "13-14 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "15-16 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "17-18 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "19-20 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "23-24 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "27-28 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 390 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-acceptance.spec.js",
+          "title": "29-30 1280 改前同环节画面对照",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "retry-current-after",
+      "startTime": "2026-10-20T05:51:54.764Z",
+      "selected": [
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "只改线索保留已完成活动，内容版本变化不能沿用完成记录",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "旧分拣真实错答记录升级，已继续=false",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "旧分拣真实错答记录升级，已继续=true",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit1-2 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit3-4 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit5-6 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit7-8 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit9-10 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit11-12 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit13-14 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit15-16 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit17-18 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit19-20 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit21-22 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit23-24 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit25-26 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit27-28 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit29-30 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit31-32 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit33-34 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit35-36 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit37-38 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit39-40 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit41-42 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit49-50 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "lesson49 选择题错答只提示重试，改选后正常推进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "音标课答错只提示重试，原题改选可继续",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "lesson52 填空初始及错答均不把答案放在空格中，可连续重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "lesson53 填空初始及错答均不把答案放在空格中，可连续重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "lesson54 填空初始及错答均不把答案放在空格中，可连续重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "Lesson50 考核答错不标亮答案，不自动翻题，原题可以改选",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "Lesson50 快问快答不朗读正确答案或自动跳过错题",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "Lesson51 频率分拣答错不告知应该选哪个台阶",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "没有独立线索的题目不把解析放进灯泡",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "拼句线索只给思考方向，不提供完整词序",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "lesson49 旧版分拣答错原题重试，刷新保留作答证据",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "unit49-50 旧版分拣答错原题重试，刷新保留作答证据",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "retry-feedback.spec.js",
+          "title": "Lesson13–14首次和连续答错只提示重试，刷新不泄题，改对后记录修正完成",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "shared-art-history-after",
+      "startTime": "2026-10-20T05:21:45.875Z",
+      "selected": [
+        {
+          "file": "unit5-6-classroom.spec.js",
+          "title": "390共用人物与汽车的后续课程仍清晰可见",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit5-6-classroom.spec.js",
+          "title": "1280共用人物与汽车的后续课程仍清晰可见",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "unit34-layout-after",
+      "startTime": "2026-10-20T05:19:57.421Z",
+      "selected": [
+        {
+          "file": "unit3-4-classroom.spec.js",
+          "title": "320宽度可阅读操作，帮助关闭回到原按钮",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit3-4-classroom.spec.js",
+          "title": "390宽度可阅读操作，帮助关闭回到原按钮",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit3-4-classroom.spec.js",
+          "title": "768宽度可阅读操作，帮助关闭回到原按钮",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit3-4-classroom.spec.js",
+          "title": "1280宽度可阅读操作，帮助关闭回到原按钮",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "unit34-paper-history-verified",
+      "startTime": "2026-10-20T06:28:45.479Z",
+      "selected": [
+        {
+          "file": "unit3-4-classroom.spec.js",
+          "title": "五星卡日期保留、匿名不能代填姓名或导出，练习纸与路径记录独立",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit3-4-v154-history.spec.js",
+          "title": "classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit3-4-v154-history.spec.js",
+          "title": "voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit3-4-v154-history.spec.js",
+          "title": "Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "dedup-history-verified",
+      "startTime": "2026-10-20T05:46:16.489Z",
+      "selected": [
+        {
+          "file": "unit-dedup.spec.js",
+          "title": "Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文位置保留",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "linux-product-final",
+      "startTime": "2026-10-20T06:00:38.954Z",
+      "selected": [
+        {
+          "file": "course-loading.spec.js",
+          "title": "课程只准备自己的场景，独立样式仍在完整加载后显示各课背景",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "服务器实际使用的 JavaScript 类型仍能完成准备",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "清理课程资源保留学习位置、活动课程和官网缓存",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "404 失败留在准备页，重试复用好文件后进入原章节",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "html 失败留在准备页，重试复用好文件后进入原章节",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "corrupt 失败留在准备页，重试复用好文件后进入原章节",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "font 失败留在准备页，重试复用好文件后进入原章节",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "浏览器禁止保存资源仍能在本次会话断网换词卡，不假称永久保存",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "home 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit1-2 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit101-102 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit103-104 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit105-106 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit107-108 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit109-110 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit11-12 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit111-112 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit113-114 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit115-116 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit117-118 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit119-120 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit121-122 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit123-124 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit125-126 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit127-128 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit129-130 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit13-14 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit131-132 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit133-134 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit135-136 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit137-138 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit139-140 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit141-142 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit143-144 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit15-16 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit17-18 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit19-20 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit21-22 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit23-24 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit25-26 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit27-28 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit29-30 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit3-4 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit31-32 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit33-34 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit35-36 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit37-38 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit39-40 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit41-42 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit43-44 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit45-46 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit47-48 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit49-50 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit5-6 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit51-52 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit53-54 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit55-56 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit57-58 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit59-60 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit61-62 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit63-64 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit65-66 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit67-68 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit69-70 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit7-8 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit71-72 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit73-74 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit75-76 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit77-78 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit79-80 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit81-82 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit83-84 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit85-86 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit87-88 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit89-90 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit9-10 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit91-92 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit93-94 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit95-96 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit97-98 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "unit99-100 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "lesson49 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "lesson50 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "lesson51 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "lesson52 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "lesson53 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "lesson54 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "soundmark 完整准备后显示原有课程，必需资源无缺项",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "整课的手提包尚未准备好时留在加载页，准备好后完整进入指定章节",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading.spec.js",
+          "title": "准备过的无配音课断网刷新后恢复词卡位置，后续图片仍完整",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120-story-layout.spec.js",
+          "title": "320：七段完整叙述、道具交接、Henry末段揭晓与按需中文续读",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120-story-layout.spec.js",
+          "title": "390：七段完整叙述、道具交接、Henry末段揭晓与按需中文续读",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120-story-layout.spec.js",
+          "title": "768：七段完整叙述、道具交接、Henry末段揭晓与按需中文续读",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120-story-layout.spec.js",
+          "title": "1280：七段完整叙述、道具交接、Henry末段揭晓与按需中文续读",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120-word-layout.spec.js",
+          "title": "四宽词卡正面：完整英文词形与实际可用宽度",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "71题：未答材料、两张时序图、独立迁移、帮助记录与三卡",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "23词卡、120课s–x、A6／B6／C6／D6完整",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "重复错答、两空门槛、撤回、提示、刷新与重练",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "错答不更新时序记录，三卡4／8／2，刷新保留原图",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "全部声音失败仍能完成五区",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "24道书写题48行打印与恢复",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "320及短屏：时序材料、长句、全部题型和三卡",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "390及短屏：时序材料、长句、全部题型和三卡",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "768及短屏：时序材料、长句、全部题型和三卡",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit119-120.spec.js",
+          "title": "1280及短屏：时序材料、长句、全部题型和三卡",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "task-account-history-verified",
+      "startTime": "2026-10-20T05:56:53.856Z",
+      "selected": [
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "1-2 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "3-4 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "5-6 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "7-8 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "9-10 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "11-12 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "13-14 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "15-16 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "17-18 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "units1-30-tasks-upgrade.spec.js",
+          "title": "19-20 账号在三台设备间升级题目，保留历史并独立完成新任务",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "settings-verified",
+      "startTime": "2026-10-20T06:13:41.418Z",
+      "selected": [
+        {
+          "file": "settings.spec.js",
+          "title": "学习设置在屏幕中间，按钮文字清晰且关闭不改变学习",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "settings.spec.js",
+          "title": "16 个单元的学习设置在桌面和手机均清晰居中，Escape 返回原课程",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "settings.spec.js",
+          "title": "窄屏与横屏的重开确认可读，取消不丢已选答案，账号按钮仍可使用",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "directory1112-verified",
+      "startTime": "2026-10-20T06:13:41.416Z",
+      "selected": [
+        {
+          "file": "unit11-12.spec.js",
+          "title": "首页和 lesson 子目录进入新单元，独立恢复草稿并定位同一地址",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit11-12.spec.js",
+          "title": "重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "cache-cold-final",
+      "startTime": "2026-10-20T06:24:08.579Z",
+      "selected": [
+        {
+          "file": "course-cache-cold.spec.js",
+          "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "cache-revisit-final",
+      "startTime": "2026-10-20T06:24:42.155Z",
+      "selected": [
+        {
+          "file": "course-cache-performance.spec.js",
+          "title": "完整缓存 20 次重新打开导航并点课恢复学习位置",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "webkit-awards-verified",
+      "startTime": "2026-10-20T06:26:15.891Z",
+      "selected": [
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "不支持较新取消接口时仍可查看自己的已获纪念卡",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "remaining-courses-before",
+      "startTime": "2026-10-20T05:57:51.238Z",
+      "selected": [
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "加载失败界面在 320 宽度可以看清并用键盘重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "加载失败界面在 390 宽度可以看清并用键盘重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "加载失败界面在 768 宽度可以看清并用键盘重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "加载失败界面在 1280 宽度可以看清并用键盘重试",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "关闭脚本时可看课程导航，课程入口给出明确恢复方式",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit1-2 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit7-8 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit9-10 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit11-12 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit13-14 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit15-16 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit17-18 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit19-20 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit21-22 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit23-24 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit25-26 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit27-28 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-journeys.spec.js",
+          "title": "unit29-30 缓存后断网完成真实题型和证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "两个标签页同时准备同课，关掉一页后另一页仍能完整进入",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "已知撤回版本不会继续推进作答，新版失败时保留位置等待更新",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "缓存录音支持真实点播和断网分段读取，下载不增加听辨进度",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "普通更新后台准备，旧页不被改写，下一次进入使用完整新版且不重下未变文件",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "损坏一张已存图片，刷新只补齐该文件并保留词卡页",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "无配音课断网走完所有题型并保存证书，不请求英语配音",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "three-unit-awards.spec.js",
+          "title": "3-4 只打开旧页面的空白草稿升级，首轮全对得星且刷新保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "three-unit-awards.spec.js",
+          "title": "5-6 只打开旧页面的空白草稿升级，首轮全对得星且刷新保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "three-unit-awards.spec.js",
+          "title": "3-4 五答题区整轮零错才获星，订正和刷新不补星，重练获星后不撤回",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "three-unit-awards.spec.js",
+          "title": "5-6 五答题区整轮零错才获星，订正和刷新不补星，重练获星后不撤回",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "three-unit-awards.spec.js",
+          "title": "3-4 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "three-unit-awards.spec.js",
+          "title": "5-6 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "current-account-after",
+      "startTime": "2026-10-20T05:57:51.167Z",
+      "selected": [
+        {
+          "file": "course-integration.spec.js",
+          "title": "7–8 旧服务器真实完成记录换新设备后保留未改成绩，补完新任务与挑战才恢复证书",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "3–4 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "5–6 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "7–8 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "9–10 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "11–12 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "13–14 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "15–16 登录后无配音通关，证书与真实成果跨设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-integration.spec.js",
+          "title": "登录后的词卡首访与复访换组不闪屏，授权课程内断网仍能翻卡",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "recovery.spec.js",
+          "title": "停服务备份恢复后，原学号密码、班级和真实成果仍可使用",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "recovery.spec.js",
+          "title": "学习卡数据库升级保留原学生成果，旧卡及旧会话失效，重启不重复分配学号",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "recovery.spec.js",
+          "title": "旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "root-mount.spec.js",
+          "title": "根目录真实登录、整课与缓存复访可用；旧 lesson 内容下线且匿名资源仍受限",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "root-mount.spec.js",
+          "title": "已有学号密码和真实已完成活动从 lesson 迁至根目录，不因图片路径变化丢成果",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "root-mount.spec.js",
+          "title": "新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退被删除",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "root-mount.spec.js",
+          "title": "/ 课程直链首次改密和再次登录后均回到原活动",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "root-mount.spec.js",
+          "title": "/lesson/ 课程直链首次改密和再次登录后均回到原活动",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "student-accounts.spec.js",
+          "title": "脚本不可用时禁用登录提交，不把密码写入地址",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "student-accounts.spec.js",
+          "title": "重名学生独立学号及拼音加三位随机数字初始密码，首次登录先改密才能学习",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "student-accounts.spec.js",
+          "title": "手机核对多音字和 ü，必填拼音阻止部分添加；主动改密撤销其他设备",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "student-accounts.spec.js",
+          "title": "丢失账号可按姓名找回，重置撤销旧密码与登录但保留已完成成果",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "access-final",
+      "startTime": "2026-10-20T06:05:06.203Z",
+      "selected": [
+        {
+          "file": "access.spec.js",
+          "title": "未登录先看到学号密码入口，不能直接进入教学单元",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "学号密码进入自己的班级，七项下架且旧直链不能越权",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "管理员可以创建班级并只开放 Lesson 1–2",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "已完成活动跨设备同步，未提交选项留在原设备",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "A/B 范围、已缓存课程换人、清单与固定资源均受权限限制",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "完整无配音课程跨设备同步；重开保留纪念卡与日期，旧设备不能恢复旧练习",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "转班、停用、恢复、重置密码和空班预览",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "16 个教学单元冷启动、图片完整、词卡和一道真实作答，手机界面",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "49–50 无配音完整课程与五区纪念卡，成果换设备保留",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "冷启动图片失败保持加载页，修复后重试；未登录的脚本关闭页面无课件",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "access.spec.js",
+          "title": "进入核验失败时可见重试界面，不被资源加载层遮住",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "directory-final",
+      "startTime": "2026-10-20T06:07:20.418Z",
+      "selected": [
+        {
+          "file": "unit15-16-state.spec.js",
+          "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit15-16-state.spec.js",
+          "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit15-16-state.spec.js",
+          "title": "关闭JavaScript首页仍提供新单元真实链接",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit17-18-state.spec.js",
+          "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit17-18-state.spec.js",
+          "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit17-18-state.spec.js",
+          "title": "关闭JavaScript首页仍提供新单元真实链接",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit19-20-state.spec.js",
+          "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit19-20-state.spec.js",
+          "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit19-20-state.spec.js",
+          "title": "关闭JavaScript首页仍提供新单元真实链接",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit21-22-state.spec.js",
+          "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit21-22-state.spec.js",
+          "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit21-22-state.spec.js",
+          "title": "关闭JavaScript首页仍提供新单元真实链接",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit25-26-state.spec.js",
+          "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit25-26-state.spec.js",
+          "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit25-26-state.spec.js",
+          "title": "关闭JavaScript首页仍提供新单元真实链接",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit5-6.spec.js",
+          "title": "首页与 lesson 子目录有新单元入口，独立继续并保留资源路径",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit5-6.spec.js",
+          "title": "首页重开包含四个单元，取消保留，确认只清除本路径的学习记录",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit7-8.spec.js",
+          "title": "首页继续定位与旧 be、trans 书签衔接到合并活动",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit7-8.spec.js",
+          "title": "首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit9-10.spec.js",
+          "title": "首页与 lesson 子目录进入问候站，独立恢复草稿并定位同一地址",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "unit9-10.spec.js",
+          "title": "重开冒险包含新单元；取消保留，确认仅清理本网站路径记录",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "report": "webkit-recovery-final",
+      "startTime": "2026-10-20T06:17:07.081Z",
+      "selected": [
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "旧浏览器的连接超时也会结束等待，重试后可继续进入",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker allow）",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker block）",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（缓存拒绝写入）",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "缺图失败显示原因编号，手机页面可以返回课程并在恢复后重进",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "连接失败显示 L01，重试恢复原章节且错误提示消失",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "课程清单无效显示 L02，重试恢复原章节且错误提示消失",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "图片误返回网页显示 L03，重试恢复原章节且错误提示消失",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "文件校验失败显示 L04，重试恢复原章节且错误提示消失",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "引导脚本未下载显示 L06，重试恢复原章节且错误提示消失",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "图片无法解码仍可重试进入完整课程，重新加载不丢失目标位置",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "课程脚本中断仍可重试进入完整课程，重新加载不丢失目标位置",
+          "project": "",
+          "status": "expected"
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "project": "",
+          "status": "expected"
+        }
+      ]
+    }
+  ],
+  "preservation": {
+    "definitions": 72,
+    "presentationMetadata": 44,
+    "progress": 14,
+    "awards": 14,
+    "fontFiles": 16,
+    "artworkFiles": 3461,
+    "historicalRenderers": 69,
+    "unchanged": true
+  },
+  "performance": {
+    "cold": {
+      "browser": "151.0.7922.34",
+      "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+      "downMbps": 10,
+      "latencyMs": 150,
+      "from": "prepared navigation",
+      "target": "unit1-2",
+      "trace": false,
+      "timing": "actual click to fully usable rendered frame",
+      "elapsedMs": 4329.30029296875,
+      "driverElapsedMs": 4443
+    },
+    "revisit": {
+      "browser": "151.0.7922.34",
+      "platform": "win32",
+      "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+      "trace": false,
+      "attempt": 20,
+      "phase": "performance budget",
+      "scenario": "reopen navigation, click course, restore alternating word-card pages 2 and 3",
+      "timing": "actual click to fully usable rendered frame",
+      "samples": [
+        762.800048828125,
+        745.19970703125,
+        747.699951171875,
+        761.10009765625,
+        745.500244140625,
+        746.10009765625,
+        742.60009765625,
+        744.89990234375,
+        763.10009765625,
+        745.39990234375,
+        763.2001953125,
+        745.60009765625,
+        744.699951171875,
+        729.400146484375,
+        747.10009765625,
+        744.2998046875,
+        746.699951171875,
+        747.10009765625,
+        730.099853515625,
+        744.300048828125
+      ],
+      "navigationSamples": [
+        762.6000000238419,
+        744.8999999761581,
+        747.3999999761581,
+        760.8000000119209,
+        745.0999999642372,
+        745.6999999880791,
+        742.1999999880791,
+        744.6000000238419,
+        763,
+        745.1000000238419,
+        762.9000000357628,
+        745.3000000119209,
+        744.3000000119209,
+        729.1000000238419,
+        746.6999999880791,
+        744,
+        746.5,
+        746.6999999880791,
+        729.8999999761581,
+        743.8999999761581
+      ],
+      "driverSamples": [
+        800,
+        793,
+        784,
+        794,
+        783,
+        776,
+        791,
+        784,
+        799,
+        785,
+        796,
+        784,
+        790,
+        768,
+        789,
+        785,
+        781,
+        779,
+        758,
+        791
+      ],
+      "p95": 763.10009765625,
+      "errors": [],
+      "fetched": []
+    }
+  },
+  "nonBrowser": {
+    "linuxUnitAndWorkflow": {
+      "passed": 156,
+      "failed": 0
+    },
+    "linuxDeployAndFixture": {
+      "passed": 74,
+      "failed": 0,
+      "skipped": 1
+    },
+    "updatedWorkflow": {
+      "passed": 20,
+      "failed": 0
+    }
+  },
+  "inventories": {
+    "courses": 2985,
+    "courseShards": 8,
+    "accounts": 654,
+    "accountShards": 4
+  },
+  "fixtureProvenance": {
+    "originalCommit": "d0a4382f963e36c1abd0f5a5ba9ef79b17794093",
+    "identicalStagedSnapshots": 84,
+    "stagedFiles": 129,
+    "unrelatedManagementDocumentsExcluded": true
+  }
+}

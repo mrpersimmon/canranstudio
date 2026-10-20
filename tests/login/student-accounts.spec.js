@@ -1,7 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const { saveCourses, adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword } = require('./helpers');
-const { completeActivity } = require('../support/unit13-14-flow');
+const { completeActivity } = require('../support/account-course13');
 
 test('脚本不可用时禁用登录提交，不把密码写入地址', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -165,7 +165,7 @@ test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留�
   expect(account.initialPassword).not.toBe('shanle');
   const a = await studentLogin(browser, account), b = await studentLogin(browser, account);
   try {
-    await completeActivity(a.page, 'colours', '/lesson');
+    await completeActivity(a.page, 'grammar', '/lesson');
     await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await page.getByLabel('查找学生（姓名或学号）').fill('单乐');
     const row = page.locator('#searchResults .student-row');
@@ -192,7 +192,7 @@ test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留�
     await expect(b.page.getByRole('status')).toContainText('学号或密码不正确');
     await fillLogin(b.page, account, resetPassword);
     await setPassword(b.page, 'Recovered-journey-2026!');
-    await expect(b.page.locator('.course')).toContainText('3 / 15');
-    await b.page.locator('.course .primary-button').click(); await expect(b.page.locator('#starCount')).toHaveText('3');
+    await expect(b.page.locator('.course')).toContainText('1 / 5');
+    await b.page.locator('.course .primary-button').click(); await expect(b.page.locator('#starCount')).toHaveText('1');
   } finally { await a.context.close(); await b.context.close(); }
 });

@@ -53,7 +53,7 @@ test('README describes the course home and preserves the internal growth artwork
   const readme = await fs.readFile(path.join(ROOT, 'README.md'), 'utf8');
 
   assert.match(readme, /`\/` — 我的课程：继续学习与课程卡片/);
-  assert.match(readme, /原 Lesson 49、50 在“单课练习”中/);
+  assert.match(readme, /旧版15星收藏与编号单课、音标课的历史成果单独保留/);
   assert.match(readme, /同一高清母版逐步编辑的完整累计状态图/);
   assert.match(readme, /运行时只加载当前状态的一张图/);
   assert.match(readme, /完成阶段时切换成长前后\s*两张完整图/);

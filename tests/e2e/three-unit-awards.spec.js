@@ -1,6 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
-const tasks=require('../support/units1-30-tasks');
+require('../support/classroom-history').historicalSuite(test);
+const tasks=require('../fixtures/classroom-before-fivezones/tests/support/units1-30-tasks');
 const fs=require('node:fs/promises');
 test.use({reducedMotion:'reduce',actionTimeout:6000});
 for(const pair of ['3-4','5-6'])test(`${pair} 只打开旧页面的空白草稿升级，首轮全对得星且刷新保留`,async({page})=>{

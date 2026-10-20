@@ -45,17 +45,17 @@ test('管理员可以创建班级并只开放 Lesson 1–2', async ({ page }) =>
   await expect(page.getByRole('checkbox', { name: /Lesson 1–2 / })).toBeChecked();
 });
 
-const {completeStory,completeActivity,completeUnit1314}=require('../support/unit13-14-flow');
+const {completeStory,completeActivity,completeUnit1314,expectFreshPractice}=require('../support/account-course13');
 test('已完成活动跨设备同步，未提交选项留在原设备',async({page,browser})=>{
  await adminLogin(page);const code=await createStudent(page,'同步班','小月',[/Lesson 13–14 /]);
  const a=await studentLogin(browser,code);await completeStory(a.page,'/lesson');
  await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
- await a.page.goto('/lesson/unit13-14/#learn/colours');await a.page.getByRole('button',{name:"What colour's your hat?",exact:true}).click();
+ await a.page.goto('/lesson/unit13-14/#learn/grammar');await a.page.locator('.stage-grammar').getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'is',exact:true}).click();
  const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/text');
  await expect(b.page.locator('.stage-text')).toContainText('故事看完了！');
- await b.page.goto('/lesson/unit13-14/#learn/colours');await expect(b.page.locator('.stage-colours').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
- await completeActivity(b.page,'colours','/lesson');await expect(b.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
- await a.page.goto('/lesson/unit13-14/#learn/words');await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('4');
+ await b.page.goto('/lesson/unit13-14/#learn/grammar');await expect(b.page.locator('.stage-grammar').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+ await completeActivity(b.page,'grammar','/lesson');await expect(b.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+ await a.page.goto('/lesson/unit13-14/#learn/words');await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('1');
  await a.context.close();await b.context.close();
 });
 
@@ -77,7 +77,7 @@ test('A/B 范围、已缓存课程换人、清单与固定资源均受权限限�
 
 test('两小时静默续期、三十分钟后台回归核验，收回权限不清空当前操作',async({page,browser})=>{
  await adminLogin(page);const code=await createStudent(page,'续期班','小雨',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);
- await a.page.clock.install();await a.page.goto('/lesson/unit13-14/#learn/colours');const choice=a.page.locator('.stage-colours').getByRole('button',{name:"What colour's your hat?",exact:true});await choice.click();
+ await a.page.clock.install();await a.page.goto('/lesson/unit13-14/#learn/grammar');const choice=a.page.locator('.stage-grammar').getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'is',exact:true});await choice.click();
  let checks=0;a.page.on('request',r=>{if(r.url().endsWith('/unit13-14/enter'))checks++;});
  await a.page.clock.fastForward(7201000);await expect.poll(()=>checks).toBe(1);await expect(a.page.locator('#accessGate')).toHaveCount(0);await expect(choice).toHaveAttribute('aria-pressed','true');
  // The browser's visibility event is a host signal, never a submitted answer or grant.
@@ -92,32 +92,39 @@ test('两小时静默续期、三十分钟后台回归核验，收回权限不�
 
 test('离线完成归原学生、联网同步；缓存复访不重复下载，离线新进必须等待',async({page,browser})=>{
  await adminLogin(page);const code=await createStudent(page,'离线班','小森',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);
- await a.page.goto('/lesson/unit13-14/#learn/colours');const room=a.page.locator('.stage-colours');await expect(room.getByRole('heading').first()).toBeVisible();await a.context.setOffline(true);
- for(const [i,answer] of ["What colour's your hat?",'一只棕白相间的狗'].entries()){await room.getByRole('button',{name:answer,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:i?'完成这一站':'下一题',exact:true}).click();}
+ // Warm the three optional feedback clips through the page's own requests
+ // before going offline; a failed initial preload is not a repeat download.
+ const sounds=Promise.all(['correct','incorrect','complete'].map(kind=>a.page.waitForResponse(r=>r.url().endsWith('/duolingo-'+kind+'.mp3')&&r.status()===200).then(r=>r.finished())));
+ await a.page.goto('/lesson/unit13-14/#learn/grammar');const room=a.page.locator('.stage-grammar');await expect(room.getByRole('heading').first()).toBeVisible();await sounds;await a.context.setOffline(true);
+ const flow=require('../support/unit1314-fivezones');
+ for(const [i,answer] of flow.ANSWERS.grammar.entries()){
+  await flow.select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
+  await room.getByRole('button',{name:i===flow.ANSWERS.grammar.length-1?'完成这一站':'下一题',exact:true}).click();
+ }
  await expect(a.page.locator('#studentSyncStatus')).toContainText('本机');await a.context.setOffline(false);await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
- const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/colours');await expect(b.page.locator('#starCount')).toHaveText('3');
- let downloads=0;a.page.on('request',r=>{if(r.url().includes('/resources/'))downloads++;});await a.page.reload();await expect(a.page.locator('.stage-colours .practice-finish')).toBeVisible();expect(downloads).toBe(0);
- await a.context.setOffline(true);await a.page.reload();await expect(a.page.getByRole('heading',{name:'联网后再进入'})).toBeVisible();await expect(a.page.locator('.stage-colours')).toHaveCount(0);await a.context.close();await b.context.close();
+ const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/grammar');await expect(b.page.locator('#starCount')).toHaveText('1');
+ let downloads=0;a.page.on('request',r=>{if(r.url().includes('/resources/'))downloads++;});await a.page.reload();await expect(a.page.locator('.stage-grammar .practice-finish')).toBeVisible();expect(downloads).toBe(0);
+ await a.context.setOffline(true);await a.page.reload();await expect(a.page.getByRole('heading',{name:'联网后再进入'})).toBeVisible();await expect(a.page.locator('.stage-grammar')).toHaveCount(0);await a.context.close();await b.context.close();
 });
 
-test('完整无配音课程成果与证书同步，重开后旧设备不能恢复旧成绩',async({page,browser})=>{
+test('完整无配音课程跨设备同步；重开保留纪念卡与日期，旧设备不能恢复旧练习',async({page,browser})=>{
  test.setTimeout(120000);await adminLogin(page);const code=await createStudent(page,'证书班','小星',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);await completeUnit1314(a.page,'/lesson');
- await a.page.getByLabel('证书上的名字').fill('小星');await a.page.getByRole('button',{name:'领取单元证书',exact:true}).click();await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
- const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/certificate');await expect(b.page.locator('#starCount')).toHaveText('15');await expect(b.page.getByLabel('证书上的名字')).toHaveValue('小星');
- await b.page.getByRole('button',{name:'小星 · 学习设置'}).click();await b.page.getByRole('button',{name:'重开本课',exact:true}).click();await b.page.getByRole('button',{name:'确认清空本课个人成果',exact:true}).click();await expect(b.page.locator('#starCount')).toHaveText('0');
- await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('0');await expect(a.page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await expect(a.page.getByLabel('证书上的名字')).toHaveValue('');await expect(b.page.getByLabel('证书上的名字')).toHaveValue('');await a.context.close();await b.context.close();
+ await expect(a.page.locator('#certificateName')).toHaveText('小星');await expect(a.page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);const firstDate=await a.page.locator('#certificateDate').innerText();await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+ const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/certificate');await expect(b.page.locator('#starCount')).toHaveText('5');await expect(b.page.locator('#certificateName')).toHaveText('小星');await expect(b.page.locator('#certificateDate')).toHaveText(firstDate);
+ await b.page.getByRole('button',{name:'小星 · 学习设置'}).click();await b.page.getByRole('button',{name:'重开本课',exact:true}).click();await Promise.all([b.page.waitForEvent('load'),b.page.getByRole('button',{name:'确认重开练习',exact:true}).click()]);
+ await a.page.reload();for(const learner of [a.page,b.page]){await expect(learner.locator('#starCount')).toHaveText('5');await expectFreshPractice(learner);await expect(learner.getByRole('button',{name:'保存动图',exact:true})).toBeEnabled();await expect(learner.locator('#certificateName')).toHaveText('小星');await expect(learner.locator('#certificateDate')).toHaveText(firstDate);}await a.context.close();await b.context.close();
 });
 
 test('转班、停用、恢复、重置密码和空班预览',async({page,browser})=>{
- await adminLogin(page);const code=await createStudent(page,'调班前','可可',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);await completeActivity(a.page,'colours','/lesson');await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+ await adminLogin(page);const code=await createStudent(page,'调班前','可可',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);await completeActivity(a.page,'grammar','/lesson');await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
  await page.getByLabel('新班级名称').fill('调班后');await page.getByRole('button',{name:'创建班级',exact:true}).click();await expect(page.getByRole('heading',{name:'调班后 · 班级设置'})).toBeVisible();
  await page.getByRole('link',{name:'预览这个班'}).click();await expect(page.getByRole('heading',{name:'老师还没开放课程'})).toBeVisible();await expect(page.locator('.course')).toHaveCount(0);await page.getByRole('link',{name:'返回班级管理'}).click();
  await page.getByRole('button',{name:'管理 调班前',exact:true}).click();await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('当前班级').selectOption({label:'调班后'});await page.getByRole('button',{name:'保存学生信息'}).click();
  await a.page.goto('/lesson/');await expect(a.page.getByRole('heading',{name:'老师还没开放课程'})).toBeVisible();
- await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await a.page.getByRole('button',{name:'刷新课程'}).click();await expect(a.page.locator('.course')).toContainText('3 / 15');
+ await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await a.page.getByRole('button',{name:'刷新课程'}).click();await expect(a.page.locator('.course')).toContainText('1 / 5');
  await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('false');await page.getByRole('button',{name:'保存学生信息'}).click();await a.page.reload();await expect(a.page.getByRole('status')).toContainText('学生账号已停用');
  await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByLabel('学习状态').selectOption('true');await page.getByRole('button',{name:'保存学生信息'}).click();await page.getByRole('button',{name:'管理学生',exact:true}).click();await page.getByRole('button',{name:'重置密码',exact:true}).click();await page.getByRole('button',{name:'确认重置密码'}).click();const resetPassword=await page.locator('.initial-password').textContent();expect(resetPassword).not.toBe(code.initialPassword);
- await a.page.reload();await fillLogin(a.page,code);await expect(a.page.getByRole('status')).toContainText('学号或密码不正确');await fillLogin(a.page,code,resetPassword);await setPassword(a.page,'Reset-class-journey-2026');await expect(a.page.locator('.course')).toContainText('3 / 15');await a.context.close();
+ await a.page.reload();await fillLogin(a.page,code);await expect(a.page.getByRole('status')).toContainText('学号或密码不正确');await fillLogin(a.page,code,resetPassword);await setPassword(a.page,'Reset-class-journey-2026');await expect(a.page.locator('.course')).toContainText('1 / 5');await a.context.close();
 });
 
 test('16 个教学单元冷启动、图片完整、词卡和一道真实作答，手机界面',async({page,browser})=>{
@@ -161,12 +168,12 @@ test('冷启动图片失败保持加载页，修复后重试；未登录的脚�
 
 test('学生不能提交别人的成果，旧上传不能覆盖重开，来源校验与登录限速有效',async({page,browser})=>{
  await adminLogin(page);const code=await createStudent(page,'接口边界班','果果',[/Lesson 13–14 /]);const a=await studentLogin(browser,code);let completed;
- a.page.on('request',r=>{if(r.url().endsWith('/api/progress')){const body=r.postDataJSON();if(body?.value.activity.unitCompleted.colours)completed=body;}});
- await completeActivity(a.page,'colours','/lesson');await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');expect(completed).toBeTruthy();
+ a.page.on('request',r=>{if(r.url().endsWith('/api/progress')){const body=r.postDataJSON();if(body?.value.activity.unitCompleted.grammar)completed=body;}});
+ await completeActivity(a.page,'grammar','/lesson');await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');expect(completed).toBeTruthy();
  const bCode=await createStudent(page,'接口另一班','木木',[/Lesson 13–14 /]);const b=await studentLogin(browser,bCode);
  const denied=await b.page.evaluate(async body=>{const r=await fetch('/lesson/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return r.status;},completed);expect(denied).toBe(403);
- await a.page.getByRole('button',{name:'果果 · 学习设置'}).click();await a.page.getByRole('button',{name:'重开本课',exact:true}).click();await a.page.getByRole('button',{name:'确认清空本课个人成果',exact:true}).click();await expect(a.page.locator('#starCount')).toHaveText('0');
- const stale=await a.page.evaluate(async body=>(await fetch('/lesson/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json(),completed);expect(stale.stale).toBe(true);await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('0');
+ await a.page.getByRole('button',{name:'果果 · 学习设置'}).click();await a.page.getByRole('button',{name:'重开本课',exact:true}).click();await Promise.all([a.page.waitForEvent('load'),a.page.getByRole('button',{name:'确认重开练习',exact:true}).click()]);await expect(a.page.locator('#starCount')).toHaveText('1');await expectFreshPractice(a.page);
+ const stale=await a.page.evaluate(async body=>(await fetch('/lesson/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json(),completed);expect(stale.stale).toBe(true);await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('1');await expectFreshPractice(a.page);
  const cross=await page.request.post('/lesson/api/admin/classes',{headers:{Origin:'https://another-origin.invalid'},data:{name:'不应该创建的班级'}});expect(cross.status()).toBe(403);await page.reload();await expect(page.getByRole('button',{name:'管理 不应该创建的班级',exact:true})).toHaveCount(0);
  await b.page.getByRole('button',{name:'切换学生',exact:true}).click();await b.page.getByLabel('学号',{exact:true}).fill('x99999999');await b.page.getByLabel('密码',{exact:true}).fill('Invalid-password-123');
  for(let i=0;i<11;i++){await b.page.getByRole('button',{name:'进入我的课程'}).click();await expect(b.page.getByRole('status')).toHaveText(i===10?'尝试有些频繁，请十五分钟后再试':'学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');}

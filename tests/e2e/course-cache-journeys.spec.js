@@ -1,6 +1,8 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
+test.describe('历史课包的离线作答与原证书', () => {
+require('../support/classroom-history').historicalSuite(test);
 for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
   const id = 'unit' + first + '-' + (first + 1);
   const run = require('../support/' + id + '-flow')['completeUnit' + first + (first + 1)];
@@ -42,6 +44,7 @@ for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
     expect(await page.evaluate(() => window.incompleteFrames)).toEqual([]);
   });
 }
+});
 for (const width of [320, 390, 768, 1280]) test('加载失败界面在 ' + width + ' 宽度可以看清并用键盘重试', async ({ page }, testInfo) => {
   await page.setViewportSize({ width, height: 568 });
   let broken = true;
@@ -66,8 +69,9 @@ test('关闭脚本时可看课程导航，课程入口给出明确恢复方式',
     await page.getByRole('link', { name: '返回课程', exact: true }).click();
     await expect(page.getByRole('link', { name: '开始学习：礼貌小帮手', exact: true })).toHaveAttribute('href', '/lesson/unit1-2/#learn/words');
     await page.locator('noscript').getByText('单课练习', { exact: true }).click();
-    await expect(page.locator('noscript main a')).toHaveCount(52);
-    for (const unit of ['unit31-32', 'unit39-40', 'unit41-42', 'unit49-50', 'unit89-90']) {
+    // 72 paired lessons plus six numbered legacy entries and the phonics page.
+    await expect(page.locator('noscript main a')).toHaveCount(79);
+    for (const unit of ['unit31-32', 'unit39-40', 'unit41-42', 'unit49-50', 'unit89-90', 'unit91-92', 'unit143-144']) {
       await expect(page.locator(`noscript main a[href="/lesson/${unit}/#learn/words"]`)).toBeVisible();
     }
     await expect(page.locator('img:visible')).toHaveCount(0);

@@ -1,5 +1,6 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+require('../support/classroom-history').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('7–8 逐空补完介绍，未填完不能检查，错答后可改且恢复草稿',async({page})=>{
  await page.goto('/unit7-8/#learn/reply');const room=page.locator('.stage-reply');

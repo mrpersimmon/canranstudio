@@ -1,0 +1,144 @@
+/* Lesson 1–2: one street encounter. Shared buttons keep their existing meaning. */
+.unit12-workspace{--unit-scene:url('../assets/unit1-2/street.svg?v=scene-2')}
+.unit12-workspace .unit-cover{display:grid;grid-template-columns:1.12fr 1fr;padding:0;overflow:hidden;gap:0;background:#EAF3F8;min-height:360px}
+.unit12-workspace .cover-copy{padding:34px 32px}
+.unit12-workspace .cover-story-title{font:26px/1.45 'ZCOOL KuaiLe',sans-serif;margin:8px 0 12px;color:var(--brown)}
+.unit12-workspace .cover-journey{font-size:14px;color:#58717A;margin:18px 0 0}
+.unit12-workspace .street-cover{position:relative;width:100%;height:360px;background:url('../assets/unit1-2/street.svg?v=scene-2') 55% bottom/auto 100% no-repeat;display:block;border-radius:0}
+.unit12-workspace .street-cover>img{position:absolute;width:33%;height:235px;bottom:15px;object-fit:contain}
+.unit12-workspace .street-cover .cover-man{left:3%}.unit12-workspace .street-cover .cover-woman{right:2%;height:219px}
+.unit12-workspace .cover-bench{position:absolute;left:37%;bottom:71px;width:26%;text-align:center}
+.unit12-workspace .cover-bench img{width:118px;height:118px;object-fit:contain;transform:rotate(-5deg)}
+.unit12-workspace .cover-question{position:absolute;left:47%;bottom:185px;font:44px 'Baloo 2',sans-serif;color:#487786;transform:rotate(10deg)}
+.unit12-workspace .stage-manners{background:#FFFEFA}
+.unit12-workspace .stage-manners>.stage-heading{background:#E3EEEB}
+.unit12-workspace .stage-ask>.stage-heading{background:#EAF0F5}
+.unit12-workspace .handbag-runner{max-width:880px;margin:0 auto}
+.unit12-workspace .handbag-runner .practice-content{padding:0;min-height:0}
+.unit12-workspace .quest-introduction{text-align:center;margin:0 0 16px}
+.unit12-workspace .quest-prompt{font-size:23px;line-height:1.45;margin:12px 0 0;white-space:normal}
+.unit12-workspace .street-stage{position:relative;display:grid;grid-template-columns:150px minmax(0,1fr) 150px;align-items:end;gap:12px;height:300px;padding:16px 20px 13px;border:1px solid #CBDDDE;border-radius:18px;background:url('../assets/unit1-2/street.svg?v=scene-2') center/cover no-repeat;isolation:isolate}
+.unit12-workspace .quest-actor{position:relative;display:flex;align-items:center;flex-direction:column;z-index:2}
+.unit12-workspace .quest-actor>img{width:128px;height:178px;object-fit:contain}
+.unit12-workspace .quest-name{font-size:14px;background:#FFFDF8;padding:1px 10px;border-radius:10px}
+.unit12-workspace .quest-actor-man{grid-column:1;grid-row:1}.unit12-workspace .quest-actor-woman{grid-column:3;grid-row:1}
+.unit12-workspace .quest-conversation{grid-column:2;grid-row:1;align-self:start;display:flex;flex-direction:column;gap:10px;height:152px;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#A4B8B7 transparent;padding:2px 12px 5px;z-index:3}
+.unit12-workspace .quest-speech{--speech-paper:#FFFDF7;--speech-border:#795F4B;position:relative;max-width:96%;flex:none;padding:7px 12px;border:2px solid var(--speech-border);border-radius:17px;background:var(--speech-paper);box-shadow:0 2px 0 #4A322619}
+.unit12-workspace .quest-speech::before{content:'';position:absolute;left:-7px;bottom:14px;width:10px;height:10px;background:var(--speech-paper);border-left:2px solid var(--speech-border);border-bottom:2px solid var(--speech-border);transform:rotate(45deg)}
+.unit12-workspace .quest-speech small{display:block;font-size:11px;line-height:1.2;color:#75614D}
+.unit12-workspace .quest-speech span{display:block;font:700 22px/1.2 'Baloo 2',sans-serif}
+.unit12-workspace .quest-speech-woman{align-self:flex-end;--speech-paper:#FFF6E9}
+.unit12-workspace .quest-speech-woman::before{left:auto;right:-7px;transform:rotate(225deg)}
+.unit12-workspace .quest-speech.is-response{--speech-paper:#F2F7E9;--speech-border:#587D48}
+.unit12-workspace .quest-bench{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;width:108px;height:108px;z-index:1}
+.unit12-workspace .quest-handbag{width:108px;height:108px;object-fit:contain}
+.unit12-workspace .quest-bag-slot{position:absolute;right:15px;bottom:24px;width:52px;height:62px;pointer-events:none}
+.unit12-workspace .quest-bag-slot .quest-handbag{width:100%;height:100%;filter:drop-shadow(0 3px 0 #4a322625)}
+.unit12-workspace .handbag-runner .practice-options:not(.sentence-options):not(.quest-recipients):not(.quest-object-targets){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%;margin:18px auto 0;min-height:82px}
+.unit12-workspace .handbag-runner .practice-options>.opt-btn{font-size:20px;text-align:center;justify-content:center;line-height:1.25;min-height:76px;padding:12px}
+.unit12-workspace .handbag-runner .practice-options.quest-recipients{position:absolute;inset:12px 18px;display:grid;grid-template-columns:150px minmax(0,1fr) 150px;gap:12px;max-width:none;width:auto;min-height:0;margin:0;pointer-events:none;z-index:2}
+.unit12-workspace .quest-person-target{position:relative;align-self:end;pointer-events:auto;grid-row:1;height:214px;display:flex;flex-direction:column;padding:8px!important;border-width:2px;background:#FFFDF8E8}
+.unit12-workspace .quest-person-target[data-person=man]{grid-column:1}.unit12-workspace .quest-person-target[data-person=woman]{grid-column:3}
+.unit12-workspace .quest-person-target>img{height:157px;width:122px;object-fit:contain;margin:0}.unit12-workspace .quest-person-target>span{font-size:16px}
+.unit12-workspace .quest-person-target .quest-bag-slot{right:22px;bottom:30px;width:48px;height:58px}
+.unit12-workspace .street-stage[data-beat=find]{height:340px;grid-template-columns:130px minmax(0,1fr) 130px;align-items:start}
+.unit12-workspace .street-stage[data-beat=find] .quest-actor>img{height:118px;width:94px}
+.unit12-workspace .street-stage[data-beat=find] .quest-conversation{height:95px}
+.unit12-workspace .handbag-runner .practice-options.quest-object-targets{position:absolute;left:12%;right:12%;bottom:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:auto;max-width:none;min-height:0;margin:0;z-index:4}
+.unit12-workspace .quest-object-targets>.opt-btn{height:153px;display:flex;flex-direction:column;border-width:3px;gap:4px;background:#FFFDF8}
+.unit12-workspace .quest-object-targets>.opt-btn>img{width:82px;height:82px;object-fit:contain}
+.unit12-workspace .quest-object-targets>.opt-btn>span{font-size:16px}
+.unit12-workspace .quest-object-targets>.is-found{background:#EFF7E7;border-color:#527B3D;box-shadow:0 4px 0 #527B3D}
+.unit12-workspace .quest-outcome{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.unit12-workspace .handbag-runner .practice-actions{margin-top:8px}
+.unit12-workspace .handbag-runner .practice-answer-note{height:48px;min-height:48px}
+.unit12-workspace .handbag-runner .fb:empty{display:none}
+.unit12-workspace .quest-conversation{align-items:flex-start}
+.unit12-workspace .handbag-runner .practice-options.sentence-options{margin-top:18px;min-height:0}
+.unit12-workspace .handbag-runner .practice-finish>.finish-icon{display:none}
+.unit12-workspace .handbag-runner .practice-finish>p{font-size:24px}
+.unit12-workspace .handbag-keepsake{width:min(520px,100%);padding:14px 20px 20px;border-radius:18px;background:#E7F0EC;text-align:center;margin:0 auto 18px}
+.unit12-workspace .keepsake-pair{display:flex;gap:35px;justify-content:center;align-items:end}
+.unit12-workspace .keepsake-pair>img,.unit12-workspace .keepsake-recipient>img:first-child{width:120px;height:160px;object-fit:contain}
+.unit12-workspace .keepsake-recipient{position:relative}.unit12-workspace .keepsake-recipient>img:last-child{position:absolute;width:82px;height:82px;right:-19px;bottom:8px}
+.unit12-workspace .keepsake-thanks{font:700 26px/1.3 'Baloo 2',sans-serif;margin:10px 0}
+.unit12-workspace .keepsake-caption{font-size:16px;margin:0}
+.unit12-workspace .handbag-runner .opt-btn:focus-visible{outline:3px solid #376579;outline-offset:4px}
+@media(min-width:601px){
+ .unit12-workspace :is(.stage-manners,.stage-ask)>.stage-heading{padding-top:12px;padding-bottom:12px;margin-bottom:14px}
+ .unit12-workspace .quest-introduction{margin-bottom:10px}
+ .unit12-workspace .street-stage{height:300px}
+ .unit12-workspace .quest-actor>img{height:145px;width:112px}
+ .unit12-workspace .quest-conversation{height:152px}
+ .unit12-workspace .handbag-runner .practice-options:not(.sentence-options):not(.quest-recipients):not(.quest-object-targets){min-height:62px;margin-top:14px}
+ .unit12-workspace .handbag-runner .practice-options>.opt-btn{min-height:62px;padding:8px 12px}
+ .unit12-workspace .quest-person-target{height:170px}.unit12-workspace .quest-person-target>img{height:125px;width:108px}
+ .unit12-workspace .street-stage[data-beat=find]{height:290px}
+ .unit12-workspace .quest-object-targets>.opt-btn{height:133px}
+}
+@media(prefers-reduced-motion:no-preference){.unit12-workspace .quest-bag-slot .quest-handbag{animation:bag-arrives .3s ease-out}.unit12-workspace .street-stage[data-beat=attention] .quest-actor-woman>img{transform:rotate(5deg);transition:transform .25s}.unit12-workspace .street-stage[data-beat=attention].is-solved .quest-actor-woman>img{transform:rotate(0)}@keyframes bag-arrives{from{transform:translateX(-18px) rotate(-8deg);opacity:.4}to{transform:none;opacity:1}}}
+@media(max-width:760px){.unit12-workspace .unit-cover{grid-template-columns:1fr}.unit12-workspace .street-cover{height:270px}.unit12-workspace .street-cover>img{height:190px;bottom:10px}.unit12-workspace .street-cover .cover-woman{height:179px}.unit12-workspace .cover-bench{bottom:55px}.unit12-workspace .cover-bench img{width:94px;height:94px}.unit12-workspace .cover-question{bottom:165px}.unit12-workspace .cover-copy{padding:24px;text-align:center}.unit12-workspace .cover-journey{margin-top:14px}}
+@media(max-width:600px){
+ .unit12-workspace .quest-prompt{font-size:20px}.unit12-workspace .quest-introduction{margin-bottom:12px}
+ .unit12-workspace .street-stage{grid-template-columns:64px minmax(0,1fr) 64px;gap:2px;height:320px;padding:10px 3px 12px}
+ .unit12-workspace .quest-actor>img{width:70px;height:113px}.unit12-workspace .quest-name{font-size:12px;padding:1px 6px}
+ .unit12-workspace .quest-conversation{grid-column:1/-1;grid-row:1;margin:0 7px;height:154px;align-self:start;padding:2px 10px 5px;gap:8px}
+ .unit12-workspace .quest-speech{padding:5px 9px;max-width:96%}.unit12-workspace .quest-speech span{font-size:18px}.unit12-workspace .quest-speech small{font-size:10px}
+ .unit12-workspace .quest-bench{bottom:22px;width:84px;height:94px}.unit12-workspace .quest-handbag{width:84px;height:94px}.unit12-workspace .quest-bag-slot{width:34px;height:42px;right:-1px;bottom:23px}
+ .unit12-workspace .handbag-runner .practice-options:not(.sentence-options):not(.quest-recipients):not(.quest-object-targets){grid-template-columns:1fr;gap:10px;margin-top:14px}
+ .unit12-workspace .handbag-runner .practice-options>.opt-btn{font-size:19px;min-height:52px;padding:10px}
+ .unit12-workspace .handbag-runner .practice-options.quest-recipients{inset:10px 6px;grid-template-columns:74px minmax(0,1fr) 74px;gap:3px}
+ .unit12-workspace .quest-person-target{height:126px;padding:4px!important}.unit12-workspace .quest-person-target>img{height:86px;width:67px}.unit12-workspace .quest-person-target>span{font-size:13px}
+ .unit12-workspace .quest-person-target .quest-bag-slot{width:30px;height:38px;right:1px;bottom:25px}
+ .unit12-workspace .street-stage[data-beat=find]{height:299px;grid-template-columns:60px minmax(0,1fr) 60px}
+ .unit12-workspace .street-stage[data-beat=find] .quest-conversation{grid-column:2;margin:0 -10px;height:103px;z-index:3}
+ .unit12-workspace .street-stage[data-beat=find] .quest-actor{align-self:start;margin-top:90px}.unit12-workspace .street-stage[data-beat=find] .quest-actor>img{width:54px;height:69px}.unit12-workspace .street-stage[data-beat=find] .quest-name{display:none}
+ .unit12-workspace .handbag-runner .practice-options.quest-object-targets{left:7px;right:7px;bottom:12px;gap:8px}
+ .unit12-workspace .quest-object-targets>.opt-btn{height:107px;padding:6px!important}.unit12-workspace .quest-object-targets>.opt-btn>img{width:54px;height:54px}.unit12-workspace .quest-object-targets>.opt-btn>span{font-size:14px}
+ .unit12-workspace .quest-outcome{font-size:13px}
+ .unit12-workspace .handbag-runner .practice-answer-note{height:82px;min-height:82px}
+ .unit12-workspace .keepsake-pair{gap:12px}.unit12-workspace .keepsake-pair>img,.unit12-workspace .keepsake-recipient>img:first-child{width:91px;height:128px}.unit12-workspace .keepsake-recipient>img:last-child{width:65px;height:65px;right:-9px}.unit12-workspace .keepsake-thanks{font-size:22px}.unit12-workspace .keepsake-caption{font-size:14px}
+}
+
+/* Dialogue stays in one scrollable lane; only the speech bubbles have a surface. */
+.unit12-workspace .stage-text #unit12-dialogue{position:relative;grid-template-columns:136px minmax(0,1fr) 136px;grid-template-rows:300px 88px;gap:8px 12px;padding:18px 14px 14px;isolation:isolate}
+.unit12-workspace #unit12-dialogue .dialogue-actor{grid-row:1/3;align-self:end;margin-bottom:9px;z-index:2}
+.unit12-workspace #unit12-dialogue .dialogue-actor[data-actor=man]{grid-column:1}.unit12-workspace #unit12-dialogue .dialogue-actor[data-actor=woman]{grid-column:3}
+.unit12-workspace #unit12-dialogue .dialogue-actor>img{width:128px;height:190px;display:block}
+.unit12-workspace #unit12-dialogue .dialogue-actor>span{display:inline-block;padding:2px 9px;border-radius:9px;background:#FFFDF7;color:var(--brown)}
+.unit12-workspace #unit12-dialogue .dialogue-log{grid-column:2;grid-row:1;height:300px;min-width:0;padding:8px 12px 12px;border:0;border-radius:0;background:transparent;gap:12px;scrollbar-width:thin;scrollbar-color:#91AAA9 transparent;z-index:3;scroll-padding-block:8px}
+.unit12-workspace #unit12-dialogue .dialogue-log:focus-visible{outline:3px solid #487786;outline-offset:2px;border-radius:12px}
+.unit12-workspace #unit12-dialogue .bubble{--speech-paper:#FFFDF7;--speech-border:#8A7560;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 9px;max-width:96%;padding:8px 12px;border:2px solid var(--speech-border);border-radius:18px;background:var(--speech-paper);box-shadow:0 2px 0 #4A322619}
+.unit12-workspace #unit12-dialogue .woman .bubble{--speech-paper:#FFF6E9}
+.unit12-workspace #unit12-dialogue .bubble::before{content:'';position:absolute;left:-7px;bottom:17px;width:10px;height:10px;background:var(--speech-paper);border-left:2px solid var(--speech-border);border-bottom:2px solid var(--speech-border);transform:rotate(45deg)}
+.unit12-workspace #unit12-dialogue .woman .bubble::before{left:auto;right:-7px;transform:rotate(225deg)}
+.unit12-workspace #unit12-dialogue .is-current .bubble{--speech-border:#604632;box-shadow:0 3px 0 #4A322625}
+.unit12-workspace #unit12-dialogue .is-playing .bubble{--speech-paper:#FFF1C7;--speech-border:#785C2F;background:var(--speech-paper);border-color:var(--speech-border);box-shadow:0 3px 0 #4A322625}
+.unit12-workspace #unit12-dialogue .bname{grid-column:1;grid-row:1;align-self:center;font-size:12px;line-height:16px;color:#6A5544}
+.unit12-workspace #unit12-dialogue .btext{grid-column:1;grid-row:2;min-width:0;gap:8px;min-height:44px;font-size:23px;line-height:1.3;padding:2px 0;overflow-wrap:normal;word-break:normal;border-radius:7px}
+.unit12-workspace #unit12-dialogue .btext>.shop-icon{width:20px;height:20px}
+.unit12-workspace #unit12-dialogue .btext:focus-visible{outline:3px solid #487786;outline-offset:3px}
+.unit12-workspace #unit12-dialogue .bbtns{grid-column:2;grid-row:1/3;align-self:center;margin:0;display:block}
+.unit12-workspace #unit12-dialogue .bbtns .btn{background:transparent;border:1.5px solid #A08B74;box-shadow:none;color:#604632;min-height:44px;min-width:64px;font:14px/1.2 'ZCOOL KuaiLe',sans-serif;padding:4px 8px;border-radius:12px;white-space:nowrap}
+.unit12-workspace #unit12-dialogue .bbtns .btn:hover{background:#F5EAD7;transform:none}
+.unit12-workspace #unit12-dialogue .bbtns .btn[aria-expanded=true]{background:#F5EAD7}
+.unit12-workspace #unit12-dialogue .bcn{grid-column:1/-1;grid-row:3;margin:8px 0 0;padding:8px 0 0;border-top:1px solid #D9CCB5;line-height:1.5;font-size:16px;color:#604632}
+.unit12-workspace #unit12-dialogue .story-lead{margin:32px auto 0;padding:15px 20px;width:fit-content;max-width:100%;border-radius:18px;background:#FFFDF7;border:2px solid #795F4B;font-size:22px}
+.unit12-workspace #unit12-dialogue .story-lead p{margin:0}
+.unit12-workspace .dialogue-handbag{position:absolute;bottom:16px;left:calc(50% - 56px);width:112px;height:112px;object-fit:contain;pointer-events:none;z-index:2}
+.unit12-workspace .has-returned-bag .dialogue-handbag{left:calc(100% - 78px);bottom:52px;width:64px;height:76px}
+@media(max-width:600px){
+ .unit12-workspace .stage-text #unit12-dialogue{grid-template-columns:1fr 1fr;grid-template-rows:310px 130px;padding:12px 7px 10px;gap:8px;margin:0}
+ .unit12-workspace #unit12-dialogue .dialogue-log{grid-column:1/-1;grid-row:1;height:310px;padding:5px 9px 9px;scrollbar-gutter:auto;gap:10px}
+ .unit12-workspace #unit12-dialogue .dialogue-actor{grid-row:2;width:82px;margin:0;align-self:end}
+ .unit12-workspace #unit12-dialogue .dialogue-actor[data-actor=man]{grid-column:1;justify-self:start}.unit12-workspace #unit12-dialogue .dialogue-actor[data-actor=woman]{grid-column:2;justify-self:end}
+ .unit12-workspace #unit12-dialogue .dialogue-actor>img{width:82px;height:108px}.unit12-workspace #unit12-dialogue .dialogue-actor>span{font-size:12px}
+ .unit12-workspace #unit12-dialogue .bubble{max-width:100%;padding:6px 10px;column-gap:8px}
+ .unit12-workspace #unit12-dialogue .btext{grid-column:1/-1;grid-row:2;font-size:20px;line-height:1.35;min-height:44px}
+ .unit12-workspace #unit12-dialogue .bname{grid-column:1;grid-row:1;font-size:11px}
+ .unit12-workspace #unit12-dialogue .bbtns{grid-column:2;grid-row:1;justify-self:end}.unit12-workspace #unit12-dialogue .bbtns .btn{font-size:12px;min-width:62px;padding-inline:7px}
+ .unit12-workspace #unit12-dialogue .bcn{font-size:15px}
+ .unit12-workspace #unit12-dialogue .story-lead{font-size:19px;padding:12px;margin-top:55px}
+ .unit12-workspace .dialogue-handbag{width:76px;height:90px;bottom:19px;left:calc(50% - 38px)}
+ .unit12-workspace .has-returned-bag .dialogue-handbag{left:calc(100% - 48px);bottom:27px;width:44px;height:54px}
+}

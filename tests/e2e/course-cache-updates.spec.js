@@ -157,6 +157,8 @@ test('已准备课程在浏览器重启后断网仍可进入，未知课程明�
   } finally { server.close(); await context?.close(); await fs.rm(profile, { recursive: true, force: true }); }
 });
 
+test.describe('历史课堂版的完整离线课包', () => {
+require('../support/classroom-history').historicalSuite(test);
 test('无配音课断网走完所有题型并保存证书，不请求英语配音', async ({ page, context }) => {
   const recordings = [], errors = [];
   page.on('request', request => { if (/\.mp3(?:[?#]|$)/.test(request.url()) && !/duolingo-/.test(request.url())) recordings.push(request.url()); });
@@ -171,4 +173,5 @@ test('无配音课断网走完所有题型并保存证书，不请求英语配�
   await page.getByRole('button', { name: '保存图片', exact: true }).click();
   expect((await download).suggestedFilename()).toMatch(/\.png$/);
   expect(recordings).toEqual([]); expect(errors).toEqual([]);
+});
 });

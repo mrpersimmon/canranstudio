@@ -113,8 +113,9 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
       key = path.posix.normalize(key);
       if (RESOURCE.test(key) && (!noVoice || !/\/audio\/.*\.mp3$/.test(key))) wanted.add(key);
     };
-    async function addDirectory(dir) {
-      for (const file of await walk(dir)) if (RESOURCE.test(file) && !/\.(?:js|css)$/.test(file)) add(basePath + file);
+    async function addDirectory(dir, extensions = null) {
+      for (const file of await walk(dir)) if (RESOURCE.test(file) && !/\.(?:js|css)$/.test(file)
+          && (!extensions || extensions.includes(path.posix.extname(file)))) add(basePath + file);
     }
     if (course.id !== 'home') {
       await addDirectory('assets/lesson49/icons');
@@ -139,7 +140,14 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
         if (file === 'core/course-catalog.js' || (course.id === 'home' && /\/content\.js$/.test(file))) continue;
         for (const match of text.matchAll(/["'`]((?:\/lesson)?\/assets\/[^"'`\s]+)["'`]/g)) {
           const value = match[1];
-          if (value.endsWith('/')) await addDirectory(value.replace(/^\/(?:lesson\/)?/, ''));
+          if (value.endsWith('/')) {
+            const directory = value.replace(/^\/(?:lesson\/)?/, '');
+            // picture(name) in this shared renderer only creates .svg URLs.
+            // Its PNG statistics icons have their own completion/ prefix;
+            // unrelated retired scene WebPs are not shared dependencies.
+            const svgPictures = file === 'unit1-2/completion.js' && directory === 'assets/unit1-2/';
+            await addDirectory(directory, svgPictures ? ['.svg'] : null);
+          }
           else if (!value.includes('${')) add(value);
         }
       }

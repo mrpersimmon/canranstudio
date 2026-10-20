@@ -12,7 +12,7 @@ const { PUBLISHED_COURSES } = require('../../scripts/course-registry');
 
 const ROOT = path.resolve(__dirname, '../..');
 // New course fixtures are independent of the builder's required-directory list.
-const NEW_UNITS = Array.from({ length: 25 }, (_, i) => `unit${41 + i * 2}-${42 + i * 2}`).filter(id => id !== 'unit49-50');
+const NEW_UNITS = Array.from({ length: 52 }, (_, i) => `unit${41 + i * 2}-${42 + i * 2}`).filter(id => id !== 'unit49-50');
 const PUBLIC_INPUTS = [
   'index.html',
   'home/index.html',

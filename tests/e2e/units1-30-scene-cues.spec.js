@@ -1,6 +1,7 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
-const{story,activity}=require('../support/units1-30-tasks');
+require('../support/classroom-history').historicalSuite(test);
+const{story,activity}=require('../fixtures/classroom-before-fivezones/tests/support/units1-30-tasks');
 test.use({reducedMotion:'reduce',actionTimeout:4000});
 for(const[pair,group,id,art,result]of [
  ['11-12','owner','owner-apostrophe','white-shirt.svg','Tim’s shirt is white.'],

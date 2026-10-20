@@ -1,7 +1,8 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises');
-const {CASES: allCases,story,activity,select,answers,currentGroup}=require('../support/units1-30-tasks');
+require('../support/classroom-history').historicalSuite(test);
+const {CASES: allCases,story,activity,select,answers,currentGroup}=require('../fixtures/classroom-before-fivezones/tests/support/units1-30-tasks');
 const CASES=Object.fromEntries(Object.entries(allCases).filter(([pair])=>!['1-2','25-26'].includes(pair))); // Current editions: unit-thirteen-types.spec.js.
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 async function mode(page,pair){

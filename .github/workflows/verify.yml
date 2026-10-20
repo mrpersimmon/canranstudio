@@ -105,7 +105,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3]
+        # The previous three groups reached 56–60 minutes, including one
+        # cancellation. Keep every file and the original job deadline.
+        shard: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:

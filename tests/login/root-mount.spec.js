@@ -3,7 +3,9 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises'), os = require('node:os'), path = require('node:path');
 const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
 const { adminLogin, createStudent, signIn, fillLogin, setPassword } = require('./helpers');
-const { completeActivity, completeStory, completeUnit1314 } = require('../support/unit13-14-flow');
+const { completeActivity, completeStory, completeUnit1314 } = require('../support/account-course13');
+const historicalCourse = require('../support/unit13-14-flow');
+const { createSite, removeTemporaryDirectory } = require('../support/historical-site');
 
 async function fixture(browser, basePath) {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-root-mount-'));
@@ -28,7 +30,7 @@ test('根目录真实登录、整课与缓存复访可用；旧 lesson 内容下
     await expect(page.locator('.course .primary-button')).toHaveAttribute('href', /\/unit13-14\//);
     await completeUnit1314(page);
     await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-    await page.reload(); await expect(page.locator('#starCount')).toHaveText('15');
+    await page.reload(); await expect(page.locator('#starCount')).toHaveText('5');
     expect(oldRequests).toEqual([]);
     expect((await f.context.cookies()).find(cookie => cookie.name === 'canran_student').path).toBe('/');
     expect(await page.evaluate(() => navigator.serviceWorker.controller.scriptURL)).toBe(f.origin + '/core/subpath-worker.js');
@@ -57,7 +59,7 @@ test('已有学号密码和真实已完成活动从 lesson 迁至根目录，不
     await expect(page.locator('#starCount')).toHaveText(stars);
     await page.goto('/unit13-14/#learn/roles');
     await expect(page.locator('.stage-roles').getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
-    await completeActivity(page, 'colours'); await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    await completeActivity(page, 'grammar'); await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await page.reload(); await expect(page.locator('#starCount')).not.toHaveText(stars);
   } finally { await f.close(); }
 });
@@ -67,9 +69,10 @@ test('新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-root-retire-'));
   let server, context;
   try {
-    server = await require('../../scripts/preview-courses').serveCourses({ port: require('../support/login-test-ports').port(4197) });
+    const oldRoot=await createSite(path.join(directory,'public-before'),{overlays:{'unit13-14':path.resolve(__dirname,'../fixtures/classroom-before-fivezones/unit13-14')}});
+    server = await require('../../scripts/preview-courses').serveCourses({ root:oldRoot,port: require('../support/login-test-ports').port(4197) });
     context = await browser.newContext({ baseURL: require('../support/login-test-ports').origin(4197) });
-    const old = await context.newPage(); await completeActivity(old, 'colours', '/lesson');
+    const old = await context.newPage(); await historicalCourse.completeActivity(old, 'colours', '/lesson');
     await expect(old.locator('#starCount')).toHaveText('3');
     await new Promise(resolve => server.close(resolve));
     server = await createApp({ dataDir: directory, origin: require('../support/login-test-ports').origin(4197), basePath: '/' });
@@ -79,7 +82,7 @@ test('新版首页更新旧 lesson 缓存标签页，旧匿名成果不因清退
     await expect(old).toHaveURL(require('../support/login-test-ports').origin(4197)+'/', { timeout: 15000 });
     await expect(old.getByLabel('学号', { exact: true })).toBeVisible();
     expect(await old.evaluate(() => JSON.parse(localStorage.getItem('canran:lesson:unit13-14:learning:v1')).activity.unitCompleted.colours)).toBeTruthy();
-  } finally { await context?.close(); if (server) await new Promise(resolve => server.close(resolve)); await fs.rm(directory, { recursive: true, force: true }); }
+  } finally { await context?.close(); if (server) await new Promise(resolve => server.close(resolve)); await removeTemporaryDirectory(directory); }
 });
 
 for (const base of ['/', '/lesson/']) test(`${base} 课程直链首次改密和再次登录后均回到原活动`, async ({ browser }) => {

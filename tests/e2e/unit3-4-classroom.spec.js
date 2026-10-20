@@ -169,9 +169,16 @@ for (const width of [320, 390, 768, 1280]) test(width + '宽度可阅读操作�
       const props = await room.locator('.cloakroom-props').boundingBox();
       if (width <= 600) {
         expect(log.width).toBeGreaterThan(width * .72);
-        expect(props.y + props.height).toBeLessThanOrEqual(log.y);
+        // The approved v1.54 scene places the dialogue above the actors inside
+        // the illustrated cloakroom. Keep full-width reading and non-overlap.
+        expect(log.y).toBeGreaterThanOrEqual(props.y);
+        expect(log.y + log.height).toBeLessThanOrEqual(props.y + props.height);
         for (const actor of await room.locator('.dialogue-actor').all()) {
-          const box = await actor.boundingBox(); expect(box.y + box.height).toBeLessThanOrEqual(log.y);
+          const box = await actor.boundingBox();
+          expect(box.y).toBeGreaterThanOrEqual(log.y + log.height);
+          expect(box.y + box.height).toBeLessThanOrEqual(props.y + props.height);
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.x + box.width).toBeLessThanOrEqual(width);
         }
       }
       const next = await room.getByRole('button', { name: '下一句', exact: true }).boundingBox();
@@ -218,8 +225,13 @@ test('五星卡日期保留、匿名不能代填姓名或导出，练习纸与�
   await expect(page.locator('.writing-lines li')).toHaveCount(4); await expect(page.locator('.reply-writing li')).toHaveCount(10);
   await page.evaluate(() => { window.print = () => {}; }); await page.getByRole('button', { name: '打印练习纸', exact: true }).click();
   await page.emulateMedia({ media: 'print' });
+  // The approved v3.1 worksheet uses two A4 pages for twenty 30px writing
+  // lines. Historical paper certificates remain one page in v154-history.
+  const lines=page.locator('#unitWriting .reply-writing .writing-rule');
+  await expect(lines).toHaveCount(20);
+  for(const line of await lines.all())expect((await line.boundingBox()).height).toBeGreaterThanOrEqual(30);
   const sheet = await page.pdf({ path: output + 'writing.pdf', preferCSSPageSize: true, printBackground: true });
-  expect(sheet.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
+  expect(sheet.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(2);
   await page.emulateMedia({ media: 'screen' }); await page.goto('/lesson/unit3-4/#learn/certificate');
   await expect(page.locator('#starCount')).toHaveText('0');
 });

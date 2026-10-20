@@ -9,6 +9,7 @@ const { completeUnit910 } = require('../support/unit9-10-flow');
 const { completeUnit1112 } = require('../support/unit11-12-flow');
 const { completeUnit1314 } = require('../support/unit13-14-flow');
 const { completeUnit1516 } = require('../support/unit15-16-flow');
+const { createSite, removeTemporaryDirectory } = require('../support/historical-site');
 
 test('7–8 旧服务器真实完成记录换新设备后保留未改成绩，补完新任务与挑战才恢复证书',async({browser})=>{
   test.setTimeout(120000);
@@ -17,24 +18,17 @@ test('7–8 旧服务器真实完成记录换新设备后保留未改成绩，�
   const {signIn}=require('./helpers'),legacy=require('../fixtures/unit7-8-classroom-before/flow');
   const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-unit78-upgrade-')),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data');
   const root=path.resolve(__dirname,'../..'),origin=require('../support/login-test-ports').origin(4199);
+  const updatedRoot=path.join(directory,'task-revision');
   let server,first,second,third;
   const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(require('../support/login-test-ports').port(4199),'127.0.0.1',resolve));};
   try{
-    await fs.mkdir(oldRoot);
-    for(const entry of await fs.readdir(root,{withFileTypes:true})){
-      if(entry.name.startsWith('.')||entry.name==='unit7-8')continue;
-      if(entry.isDirectory()&&/^unit\d+-\d+$/.test(entry.name)){
-        await fs.mkdir(path.join(oldRoot,entry.name));
-        for(const name of await fs.readdir(path.join(root,entry.name)))await fs.symlink(path.join(root,entry.name,name),path.join(oldRoot,entry.name,name));
-      }else await fs.symlink(path.join(root,entry.name),path.join(oldRoot,entry.name));
-    }
-    await fs.mkdir(path.join(oldRoot,'unit7-8'));
-    for(const name of ['index.html','content.js','unit.js','unit.css'])await fs.copyFile(path.join(root,'tests/fixtures/unit7-8-classroom-before',name),path.join(oldRoot,'unit7-8',name));
+    await createSite(updatedRoot,{classroom:true});
+    await createSite(oldRoot,{classroom:true,overlays:{'unit7-8':path.join(root,'tests/fixtures/unit7-8-classroom-before')}});
     const store=openStore(dataDir);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();await start(oldRoot);
     first=await browser.newContext({baseURL:origin});const old=await first.newPage();await adminLogin(old,'/');
     const account=await createStudent(old,'采访升级验收','小记者',[/Lesson 7–8 /]);await signIn(old,account,'/');await legacy.completeUnit78(old);
     await old.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('档案小记者');await old.getByRole('button',{name:'领取单元证书',exact:true}).click();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-    await first.close();first=null;await new Promise(resolve=>server.close(resolve));server=null;await start(root);
+    await first.close();first=null;await new Promise(resolve=>server.close(resolve));server=null;await start(updatedRoot);
     second=await browser.newContext({baseURL:origin});const current=await second.newPage();await signIn(current,account,'/');await expect(current.locator('.course')).toContainText('3 / 15');
     await current.goto('/unit7-8/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('3');await expect(current.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('档案小记者');await expect(current.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
     await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await current.reload();
@@ -45,13 +39,13 @@ test('7–8 旧服务器真实完成记录换新设备后保留未改成绩，�
     await current.goto('/unit7-8/#learn/exam');await expect(current.locator('.stage-exam')).toContainText('第 4 / 11 题');await require('../support/unit7-8-exam').finishExamFrom(current,3);
     await expect(current.locator('#starCount')).toHaveText('15');await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     third=await browser.newContext({baseURL:origin});const restored=await third.newPage();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');await restored.goto('/unit7-8/#learn/certificate');await expect(restored.getByRole('button',{name:'领取单元证书',exact:true})).toBeEnabled();await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('档案小记者');
-  }finally{await first?.close();await second?.close();await third?.close();if(server)await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}
+  }finally{await first?.close();await second?.close();await third?.close();if(server)await new Promise(resolve=>server.close(resolve));await removeTemporaryDirectory(directory);}
 });
 
 for (const { id, lesson, complete } of [
   { id: 'unit3-4', lesson: '3–4', complete: completeUnit34 },
   { id: 'unit5-6', lesson: '5–6', complete: completeUnit56 },
-  { id: 'unit7-8', lesson: '7–8', complete: completeUnit78 },
+  { id: 'unit7-8', lesson: '7–8', complete: async(page,base)=>{const flow=require('../support/unit78-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit7-8/#learn/certificate');} },
   { id: 'unit9-10', lesson: '9–10', complete: async(page,base)=>{const flow=require('../support/unit910-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit9-10/#learn/certificate');} },
   { id: 'unit11-12', lesson: '11–12', complete: async(page,base)=>{const flow=require('../support/unit1112-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit11-12/#learn/certificate');} },
   { id: 'unit13-14', lesson: '13–14', complete: async(page,base)=>{const flow=require('../support/unit1314-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit13-14/#learn/certificate');} },
@@ -75,8 +69,9 @@ for (const { id, lesson, complete } of [
       HTMLMediaElement.prototype.play = () => Promise.reject(new DOMException('Audio unavailable', 'NotSupportedError'));
     });
     await student.page.goto(`/lesson/${id}/#learn/certificate`);
-    const keepsake=['unit3-4','unit5-6','unit9-10','unit11-12','unit13-14','unit15-16'].includes(id);
+    const keepsake=['unit3-4','unit5-6','unit7-8','unit9-10','unit11-12','unit13-14','unit15-16'].includes(id);
     await expect(student.page.getByRole('button', { name: keepsake?'保存动图':'领取单元证书', exact: true })).toBeDisabled();
+    await require('../support/reward-dialog').handleRewardDialog(student.page);
     await complete(student.page, '/lesson');
     if(keepsake){
       await expect(student.page.locator('#certificateName')).toHaveText('合并体验');

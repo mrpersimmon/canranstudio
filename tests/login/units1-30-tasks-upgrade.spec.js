@@ -2,16 +2,19 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
 const{adminLogin,createStudent,signIn}=require('./helpers');
-const{CASES,story,activity,answers,currentGroup}=require('../support/units1-30-tasks');
+const{CASES,story,activity,answers,currentGroup}=require('../fixtures/classroom-before-fivezones/tests/support/units1-30-tasks');
+const{createSite,removeTemporaryDirectory}=require('../support/historical-site');
 const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 // Lesson27–28 is covered by unit27-28-tasks-upgrade.spec.js through its real predecessor.
 // Lesson25–26 now has four actual historical editions plus five zones; its
 // complete three-device chains live in unit25-26-older-editions.spec.js.
-for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length&&!['23-24','25-26','27-28','29-30'].includes(x)))test(`${pair} 账号在三台设备间升级题目，保留历史并独立完成新任务`,async({browser})=>{
+for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length&&!['23-24','25-26','27-28','29-30'].includes(x)))test(`${pair} 账号在三台设备间升级题目，保留历史并独立完成新任务`,async({browser},info)=>{
  test.setTimeout(150000);
  const{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-tasks-v4-account-'));
  const root=path.resolve(__dirname,'../..'),oldRoot=path.join(directory,'old'),dataDir=path.join(directory,'data'),unit='unit'+pair;
+ const updatedRoot=path.join(directory,'task-revision');
+ info.annotations.push({type:'historical-transition',description:'pre-tasks-v4 to d0a4382f; current five-zone upgrades have separate suites'});
  const port=Number(process.env.TASKS_UPGRADE_PORT||require('../support/login-test-ports').port(4223)),origin='http://127.0.0.1:'+port;let server;const contexts=[];
  const start=async source=>{server=await createApp({root:source,dataDir,origin,basePath:'/'});await new Promise(resolve=>server.listen(port,'127.0.0.1',resolve));};
  const device=async()=>{const c=await browser.newContext({baseURL:origin});contexts.push(c);const page=await c.newPage();
@@ -19,25 +22,15 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length&&!['23-24
   return page;
  };
  try{
-  await fs.mkdir(oldRoot);
-  for(const entry of await fs.readdir(root,{withFileTypes:true})){
-   if(entry.name.startsWith('.'))continue;
-   if(entry.isDirectory()&&/^unit\d+-\d+$/.test(entry.name)){
-    await fs.mkdir(path.join(oldRoot,entry.name));
-    for(const name of await fs.readdir(path.join(root,entry.name))){
-     if(entry.name===unit&&['index.html','content.js','unit.js','unit.css'].includes(name))
-      await fs.copyFile(path.join(root,'tests/fixtures/units1-30-tasks-before',unit,name),path.join(oldRoot,unit,name));
-     else await fs.symlink(path.join(root,entry.name,name),path.join(oldRoot,entry.name,name));
-    }
-   }else await fs.symlink(path.join(root,entry.name),path.join(oldRoot,entry.name));
-  }
+  await createSite(updatedRoot,{classroom:true});
+  await createSite(oldRoot,{classroom:true,overlays:{[unit]:path.join(root,'tests/fixtures/units1-30-tasks-before',unit)}});
   const store=openStore(dataDir);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();await start(oldRoot);
   const old=await device();await adminLogin(old,'/');const account=await createStudent(old,'题目升级验收','测试小伙伴',[new RegExp('Lesson '+pair.replace('-','–')+' ')]);
   await signIn(old,account,'/');await story(old,pair);for(const group of Object.keys(CASES[pair].old))await activity(old,pair,group,{old:true});
   await old.goto('/'+unit+'/#learn/certificate');await expect(old.locator('#starCount')).toHaveText('15');
   await old.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('认真小伙伴');await old.getByRole('button',{name:'领取单元证书',exact:true}).click();
   const date=await old.locator('#certificateDate').innerText();await old.keyboard.press('Escape');await expect(old.locator('#studentSyncStatus')).toHaveText(pair==='1-2'?'已同步':'学习成果已同步');
-  await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(root);
+  await contexts[0].close();await new Promise(resolve=>server.close(resolve));server=null;await start(updatedRoot);
   const current=await device();await signIn(current,account,'/');await current.goto('/'+unit+'/#learn/certificate');
   if(['1-2','3-4','5-6'].includes(pair)){
    await expect(current.locator('#starCount')).toHaveText('0');
@@ -84,5 +77,5 @@ for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length&&!['23-24
   const restored=await device();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');
   await restored.goto('/'+unit+'/#learn/exam');const count=answers(pair,'exam').length;await expect(restored.locator('.stage-exam')).toContainText(`首次独立答对 ${count} / ${count}`);
   await restored.goto('/'+unit+'/#learn/certificate');await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('认真小伙伴');await expect(restored.locator('#starCount')).toHaveText('15');
- }finally{for(const c of contexts)await c.close();if(server)await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}
+ }finally{for(const c of contexts)await c.close();if(server)await new Promise(resolve=>server.close(resolve));await removeTemporaryDirectory(directory);}
 });

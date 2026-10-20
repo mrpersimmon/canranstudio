@@ -156,4 +156,5 @@
  .unit119120-workspace .story-lead{padding:10px}
  .unit119120-workspace .story-lead>img{width:42px;height:42px}
 }
-@media(max-width:360px){.unit119120-workspace .unit-word{padding-inline:4px}}
+/* Keep the 20px word label intact on Linux Chromium as well as Windows. */
+@media(max-width:360px){.unit119120-workspace .unit-word{padding-inline:0}}

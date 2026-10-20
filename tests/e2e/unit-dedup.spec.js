@@ -194,13 +194,17 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   await priorGroup(page, 'unit3-4', 'trans', [['This', 'is', 'not', 'my', 'umbrella.'], ['No,', 'it', "isn't."], ['It', "isn't", 'my', 'book.'], ["It's", 'your', 'book.']]);
   await priorGroup(page, 'unit3-4', 'reply', ['你的', 'Yes, it is.', 'your', ['No.', "It isn't", 'my coat.', "It's", 'your coat.'], "No, it isn't."]);
   await expect(page.locator('#starCount')).toHaveText('6');
+  const originalRecords = await page.evaluate(() => JSON.parse(localStorage.getItem('canran:unit3-4:learning:v1')).records);
   upgrade();
   await page.reload();
   for (const [activity, count] of [['listen', 5], ['reply', 10]]) await expectFresh(page, 'unit3-4', activity, count);
   await page.goto('/unit3-4/#learn/roles');
-  // This edition changed reply, but its six story questions exactly match the
-  // reviewed predecessor. Keep only the two still-identical story questions.
-  await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
+  // v1.54 replaced the first two story IDs when their source material changed.
+  // Those current questions are unanswered; the original work remains intact
+  // in the historical snapshot instead of being counted as new answers.
+  await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
+  const retainedRecords = await page.evaluate(() => JSON.parse(localStorage.getItem('canran:unit3-4:learning:v1')).activity.unit34HistorySnapshot.records);
+  expect(retainedRecords).toEqual(originalRecords);
   await expect(page.locator('.stage-text')).toContainText('故事看完了！');
   // Reading and compatible answers survive, but neither establishes a zero-error
   // round in the new five-zone award edition.

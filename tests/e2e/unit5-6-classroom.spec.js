@@ -168,6 +168,8 @@ test('后段人物缺图时先等待，准备后离线可读20句并恢复最新
   await page.reload(); await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');
 });
 
+test.describe('历史课程的原共用人物和汽车', () => {
+require('../support/classroom-history').historicalSuite(test);
 for (const width of [390, 1280]) test(width + '共用人物与汽车的后续课程仍清晰可见', async ({ page }) => {
   await page.setViewportSize({ width, height: 1280 });
   for (const [course, stage, label] of [['unit7-8', 'phrases', 'am、is、are 怎么选'], ['unit9-10', 'models', '换个说法，说清楚']]) {
@@ -178,6 +180,7 @@ for (const width of [390, 1280]) test(width + '共用人物与汽车的后续课
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
     await reference.screenshot({ path: `output/playwright/unit5-6-classroom/shared-${course}-${width}.png` });
   }
+});
 });
 
 test('词卡仅翻面，新的词义题在无声音时仍可检查', async ({ page }) => {
